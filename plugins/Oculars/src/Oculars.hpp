@@ -128,18 +128,18 @@ private:
 	bool isBinocularDefined();
 
 	//! Reneders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
-	void paintCCDBounds();
+	void paintCCDBounds(class StelRenderer* renderer);
 	//! Renders crosshairs into the viewport.
-	void paintCrosshairs();
+	void paintCrosshairs(class StelRenderer* renderer);
 	//! Paint the mask into the viewport.
-	void paintOcularMask();
+	void paintOcularMask(class StelRenderer* renderer);
 	//! Renders the three Telrad circles, but only if not in ocular mode.
-	void paintTelrad();
+	void paintTelrad(class StelRenderer* renderer);
 
 
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
-	void paintText(const StelCore* core);
+	void paintText(const StelCore* core, StelRenderer* renderer);
 
 	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
 	void unzoomOcular();
