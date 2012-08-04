@@ -168,8 +168,6 @@ public:
 		// StelRenderer allows it to be cleared regardless of modes set by setDepthTest
 		// (which serves the same role as glDepthMask() in GL).
 		glDepthMask(GL_TRUE);
-		// Ensure we clear to zeroes.
-		glClearDepth(0);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		glDepthMask(GL_FALSE);
 	}
