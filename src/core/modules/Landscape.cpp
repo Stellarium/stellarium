@@ -309,6 +309,7 @@ void LandscapeOldStyle::draw(StelCore* core, StelRenderer* renderer)
 	drawDecor(core, renderer);
 	if (!drawGroundFirst) {drawGround(core, renderer);}
 	drawFog(core, renderer);
+	renderer->setCulledFaces(CullFace_None);
 }
 
 // Draw the horizon fog
