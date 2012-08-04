@@ -4,6 +4,19 @@
 #include "StelVertexAttribute.hpp"
 #include "VecMath.hpp"
 
+//! Vertex with only a 2D position.
+struct VertexP2
+{
+	Vec2f position;
+
+	//! Construct from a 2D position.
+	VertexP2(const Vec2f position) : position(position) {}
+
+	//! Construct from X and Y coordinates.
+	VertexP2(const float x, const float y) : position(x, y) {}
+	VERTEX_ATTRIBUTES(Vec2f Position);
+};
+
 //! Vertex with a 3D position and a 2D texture coordinate.
 struct VertexP3T2
 {
