@@ -45,7 +45,6 @@ Source: "@QT_BINARY_DIR@\QtXml4.dll"; DestDir: "{app}";
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
 Source: "@CMAKE_INSTALL_PREFIX@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
-@ISS_ARCH_SPECIFIC_MINGW_LIBS@
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
