@@ -46,6 +46,7 @@ public:
 		, gl(glContext)
 		, depthTest(DepthTest_Disabled)
 		, stencilTest(StencilTest_Disabled)
+		, blendMode(BlendMode_None)
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
@@ -76,7 +77,6 @@ public:
 		//TODO Remove after StelPainter is no longer used.
 		StelPainter::initSystemGLInfo(glContext);
 		viewport.init(gl.hasOpenGLFeature(QGLFunctions::NPOTTextures));
-		setBlendMode(BlendMode_None);
 		return true;
 	}
 	
@@ -138,22 +138,7 @@ public:
 
 	virtual void setBlendMode(const BlendMode blendMode)
 	{
-		switch(blendMode)
-		{
-			case BlendMode_None:
-				glDisable(GL_BLEND);
-				break;
-			case BlendMode_Add:
-				glBlendFunc(GL_ONE, GL_ONE);
-				glEnable(GL_BLEND);
-				break;
-			case BlendMode_Alpha:
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glEnable(GL_BLEND);
-				break;
-			default:
-				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown blend mode");
-		}
+		this->blendMode = blendMode;
 	}
 
 	virtual void setDepthTest(const DepthTest test)
@@ -324,6 +309,9 @@ protected:
 
 	//! Current stencil test mode.
 	StencilTest stencilTest;
+
+	//! Current blend mode.
+	BlendMode blendMode;
 };
 
 #endif // _STELQGLRENDERER_HPP_
