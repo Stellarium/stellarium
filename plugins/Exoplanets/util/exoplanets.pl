@@ -10,7 +10,7 @@ use DBI();
 $CSV	= "./exoplanet.eu_catalog.csv";
 $JSON	= "./exoplanets.json";
 
-$CATALOG_FORMAT_VERSION = 2;
+$CATALOG_FORMAT_VERSION = 1;
 
 $dbname	= "exoplanets";
 $dbhost	= "localhost";
