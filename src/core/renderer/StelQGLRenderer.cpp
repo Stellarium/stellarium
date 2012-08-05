@@ -245,6 +245,33 @@ void StelQGLRenderer::drawTextGravityHelper(const TextParams& params, QPainter& 
 void StelQGLRenderer::drawText(const TextParams& params)
 {
 	QPainter* painter = viewport.getPainter();
+
+	const QRect extents = painter->fontMetrics().boundingRect(params.string_);
+
+	// Width and height of the text. 
+	// Texture width/height is required to be at least equal to this.
+	//
+	// Both X and Y need to be at least 1 so we don't create an empty image 
+	// (doesn't work with textures)
+	const int requiredWidth  = std::max(1, extents.width() + 1 + static_cast<int>(0.02f * extents.width()));
+	const int requiredHeight = std::max(1, extents.height());
+	const int x              = params.x_;
+	const int y              = params.y_;
+
+	// Avoid drawing if outside viewport.
+	const int cullDistance = std::max(requiredWidth, requiredHeight);
+	const Vec4i viewXywh = params.projector_->getViewportXywh();
+	const int viewMinX = viewXywh[0];
+	const int viewMinY = viewXywh[1];
+	const int viewMaxX = viewMinX + viewXywh[2];
+	const int viewMaxY = viewMinY + viewXywh[3];
+
+	if(y + cullDistance < viewMinY || y - cullDistance > viewMaxY ||
+	   x + cullDistance < viewMinX || x - cullDistance > viewMaxX)
+	{
+		return;
+	}
+
 	Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, 
 	           "Trying to draw text but painting is disabled");
 
@@ -264,18 +291,14 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	if (NULL == textTexture) 
 	{
 		// Create temporary image and render text into it
-		const QRect extents = painter->fontMetrics().boundingRect(params.string_);
-
-		const int minWidth  = extents.width() + 1 + static_cast<int>(0.02f * extents.width());
-		const int minHeight = extents.height();
 
 		// QImage is used solely to reuse existing QGLTextureBackend constructor 
 		// function. QPixmap could be used as well (not sure which is faster, 
 		// needs profiling)
 		QImage image = areNonPowerOfTwoTexturesSupported() 
-		             ? QImage(minWidth, minHeight, QImage::Format_ARGB32) 
-		             : QImage(StelUtils::smallestPowerOfTwoGreaterOrEqualTo(minWidth), 
-		                      StelUtils::smallestPowerOfTwoGreaterOrEqualTo(minHeight),
+		             ? QImage(requiredWidth, requiredHeight, QImage::Format_ARGB32) 
+		             : QImage(StelUtils::smallestPowerOfTwoGreaterOrEqualTo(requiredWidth), 
+		                      StelUtils::smallestPowerOfTwoGreaterOrEqualTo(requiredHeight),
 		                      QImage::Format_ARGB32);
 		image.fill(Qt::transparent);
 
@@ -287,7 +310,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		// The second argument ensures the text is positioned correctly even if 
 		// the image is enlarged to power-of-two.
 		fontPainter.drawText(-extents.x(), 
-		                     image.height() - minHeight - extents.y(), 
+		                     image.height() - requiredHeight - extents.y(), 
 		                     params.string_);
 
 		textTexture = StelQGLTextureBackend::constructFromImage
@@ -308,8 +331,6 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	const QSize size   = textTexture->getDimensions();
 	const float w      = size.width();
 	const float h      = size.height();
-	const float x      = params.x_;
-	const float y      = params.y_;
 	const float xShift = params.xShift_;
 	const float yShift = params.yShift_;
 
@@ -345,7 +366,6 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		textBuffer->clear();
 	}
 
-	// Build the vertex buffer.
 	textBuffer->addVertex(TexturedVertex(ne, Vec2f(0.0f, 0.0f)));
 	textBuffer->addVertex(TexturedVertex(nw, Vec2f(1.0f, 0.0f)));
 	textBuffer->addVertex(TexturedVertex(se, Vec2f(0.0f, 1.0f)));
@@ -353,7 +373,9 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	textBuffer->lock();
 
 	// Draw.
+	const BlendMode oldBlendMode = blendMode;
 	setBlendMode(BlendMode_Alpha);
 	textTexture->bind(0);
 	drawVertexBuffer(textBuffer);
+	setBlendMode(oldBlendMode);
 }
