@@ -186,6 +186,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 			int texWidth, texHeight;
 			screenTexture->getDimensions(texWidth, texHeight);
 
+			glDisable(GL_BLEND);
 			setGlobalColor(Vec4f(1.0f, 1.0f, 1.0f, 1.0f));
 			screenTexture->bind();
 			drawTexturedRect(0, 0, texWidth, texHeight);
@@ -245,21 +246,20 @@ void StelQGLRenderer::drawTextGravityHelper(const TextParams& params, QPainter& 
 void StelQGLRenderer::drawText(const TextParams& params)
 {
 	QPainter* painter = viewport.getPainter();
+	Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, 
+	           "Trying to draw text but painting is disabled");
 
-	const QRect extents = painter->fontMetrics().boundingRect(params.string_);
+	QFontMetrics fontMetrics = painter->fontMetrics();
 
-	// Width and height of the text. 
-	// Texture width/height is required to be at least equal to this.
-	//
-	// Both X and Y need to be at least 1 so we don't create an empty image 
-	// (doesn't work with textures)
-	const int requiredWidth  = std::max(1, extents.width() + 1 + static_cast<int>(0.02f * extents.width()));
-	const int requiredHeight = std::max(1, extents.height());
 	const int x              = params.x_;
 	const int y              = params.y_;
 
 	// Avoid drawing if outside viewport.
-	const int cullDistance = std::max(requiredWidth, requiredHeight);
+	// We do a worst-case approximation as getting exact text dimensions is expensive.
+	// We also account for rotation by assuming the worst case in bot X and Y 
+	// (culling with a rotating rectangle would be expensive)
+	const int cullDistance = 
+		std::max(fontMetrics.height(), params.string_.size() * fontMetrics.maxWidth());
 	const Vec4i viewXywh = params.projector_->getViewportXywh();
 	const int viewMinX = viewXywh[0];
 	const int viewMinY = viewXywh[1];
@@ -271,9 +271,6 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	{
 		return;
 	}
-
-	Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, 
-	           "Trying to draw text but painting is disabled");
 
 	if(params.projector_->useGravityLabels() && !params.noGravity_)
 	{
@@ -290,6 +287,15 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	// No texture in cache for this string, need to draw it.
 	if (NULL == textTexture) 
 	{
+		const QRect extents = fontMetrics.boundingRect(params.string_);
+
+		// Width and height of the text. 
+		// Texture width/height is required to be at least equal to this.
+		//
+		// Both X and Y need to be at least 1 so we don't create an empty image 
+		// (doesn't work with textures)
+		const int requiredWidth  = std::max(1, extents.width() + 1 + static_cast<int>(0.02f * extents.width()));
+		const int requiredHeight = std::max(1, extents.height());
 		// Create temporary image and render text into it
 
 		// QImage is used solely to reuse existing QGLTextureBackend constructor 
