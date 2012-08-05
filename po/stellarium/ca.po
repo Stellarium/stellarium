@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-03 21:34+0700\n"
+"POT-Creation-Date: 2012-08-04 21:07+0700\n"
 "PO-Revision-Date: 2012-07-11 20:48+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 04:39+0000\n"
+"X-Launchpad-Export-Date: 2012-08-05 04:41+0000\n"
 "X-Generator: Launchpad (build 15742)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -691,107 +691,111 @@ msgstr "Dissenyadors gràfics/altres : %1"
 msgid "OSX Developer: %1"
 msgstr "Desenvolupador OSX: %1"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:162
 msgid "Display Options"
 msgstr "Opcions de visualització"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "Línies de les constel·lacions"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "Dibuix de les constel·lacions"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "Etiquetes de les constel·lacions"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:166
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "Límits de les constel·lacions"
 
-#: src/gui/StelGui.cpp:169 src/ui_viewDialog.h:1159
+#: src/gui/StelGui.cpp:168 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "Graella azimutal"
 
-#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1157
+#: src/gui/StelGui.cpp:169 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "Graella equatorial"
 
-#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1156
+#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "Graella equatorial J2000"
 
-#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1158
+#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Graella eclíptica J2000"
 
-#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1160
+#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "Graella galàctica"
 
-#: src/gui/StelGui.cpp:174 src/ui_viewDialog.h:1180
+#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Plà galàctic"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:174
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "Línia de l'eclíptica"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:175
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "Línia de l'equador"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "Línia del meridià"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "línia d'horitzó"
 
-#: src/gui/StelGui.cpp:179 src/ui_viewDialog.h:1181
+#: src/gui/StelGui.cpp:178 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "Punts cardinals"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:180
 msgid "Ground"
 msgstr "Terra"
 
-#: src/gui/StelGui.cpp:182 src/ui_viewDialog.h:1130
+#: src/gui/StelGui.cpp:181 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:182
 msgid "Fog"
 msgstr "Boira"
 
-#: src/gui/StelGui.cpp:185 src/ui_viewDialog.h:1139
+#: src/gui/StelGui.cpp:184 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "Nebuloses"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:185
 msgid "Nebulas background images"
 msgstr "Imatges de nebuloses de fons"
 
-#: src/gui/StelGui.cpp:187 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/gui/StelGui.cpp:186 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "Estels"
+
+#: src/gui/StelGui.cpp:187
+msgid "Stars labels"
+msgstr ""
 
 #: src/gui/StelGui.cpp:188
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
@@ -2791,35 +2795,39 @@ msgstr "Registre"
 msgid "Refresh"
 msgstr "Refresca"
 
-#: src/ui_locationDialogGui.h:384
+#: src/ui_locationDialogGui.h:389
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "Ubicació"
 
-#: src/ui_locationDialogGui.h:388
+#: src/ui_locationDialogGui.h:393
 msgid "Current location information"
 msgstr "Informació de la ubicació actual"
 
-#: src/ui_locationDialogGui.h:389
+#: src/ui_locationDialogGui.h:394
 msgid "Use as default"
 msgstr "Fes servir per ﻿omissió"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:880
+#: src/ui_locationDialogGui.h:395
+msgid "Return to default"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:397
 msgid "Add to list"
 msgstr "Afegeix a la llista"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "Latitud:"
 
-#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
+#: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -2827,33 +2835,33 @@ msgstr ""
 "Pots entrar valors en graus decimals, o fent servir el format gms, per "
 "exemple +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:396
+#: src/ui_locationDialogGui.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "Longitud:"
 
-#: src/ui_locationDialogGui.h:400
+#: src/ui_locationDialogGui.h:406
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "Altitud:"
 
-#: src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
 msgstr "Introdueix l'altitud en metres"
 
-#: src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:410
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:411
 msgid "Name/City:"
 msgstr "Nom/Ciutat:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:412
 msgid "Country:"
 msgstr "País:"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:413
 msgid "Planet:"
 msgstr "Planeta:"
 
