@@ -42,6 +42,7 @@ public:
 		, builtinShaders()
 		, customShader(NULL)
 		, culledFaces(CullFace_None)
+		, textureUnitCount(-1)
 	{
 	}
 	
@@ -472,14 +473,16 @@ protected:
 		invariant();
 	}
 
-	virtual int getTextureUnitCount() const
+	virtual int getTextureUnitCount() 
 	{
 		invariant();
-		GLint result;
-		// GL1 version should use GL_MAX_TEXTURE_UNITS instead.
-		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &result);
+		if(textureUnitCount < 0)
+		{
+			// GL1 version should use GL_MAX_TEXTURE_UNITS instead.
+			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &textureUnitCount);
+		}
 		invariant();
-		return result;
+		return textureUnitCount;
 	}
 
 	virtual void invariant() const
@@ -515,6 +518,9 @@ private:
 
 	//! Determines whether front or back faces are culled, if any are culled at all.
 	CullFace culledFaces;
+
+	//! Number of texture units. Lazily initialized by getTextureUnitCount().
+	GLint textureUnitCount;
 	
 	//Note:
 	//We don't keep handles to shader variable locations.
