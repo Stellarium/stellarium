@@ -84,6 +84,7 @@ void StelQGLTextureBackend::bind(const int textureUnit)
 	invariant();
 	Q_ASSERT_X(textureUnit >= 0, Q_FUNC_INFO,
 	           "Trying to bind to a texture unit with negative index");
+
 	renderer->makeGLContextCurrent();
 	glActiveTexture(GL_TEXTURE0 + textureUnit);
 	glBindTexture(GL_TEXTURE_2D, glTextureID);

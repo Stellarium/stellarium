@@ -438,6 +438,23 @@ protected:
 			default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown cull face type");
 		}
 
+		switch(blendMode)
+		{
+			case BlendMode_None:
+				glDisable(GL_BLEND);
+				break;
+			case BlendMode_Add:
+				glBlendFunc(GL_ONE, GL_ONE);
+				glEnable(GL_BLEND);
+				break;
+			case BlendMode_Alpha:
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glEnable(GL_BLEND);
+				break;
+			default:
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown blend mode");
+		}
+
 		if(NULL == projector)
 		{
 			projector = StelApp::getInstance().getCore()->getProjection2d();
@@ -469,6 +486,7 @@ protected:
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_STENCIL_TEST);
+		glDisable(GL_BLEND);
 
 		invariant();
 	}
