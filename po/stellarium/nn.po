@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-03 21:34+0700\n"
+"POT-Creation-Date: 2012-08-04 21:07+0700\n"
 "PO-Revision-Date: 2012-05-13 06:57+0000\n"
 "Last-Translator: Håkon Malmedal <hmalmedal@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-08-05 04:45+0000\n"
 "X-Generator: Launchpad (build 15742)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -683,107 +683,111 @@ msgstr "Designer av grafikk/anna: %1"
 msgid "OSX Developer: %1"
 msgstr "OSX-utviklar: %1"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:162
 msgid "Display Options"
 msgstr "Visningsval"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "Stjernebiletelinjer"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "Stjernebilete - grafikk"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "Namn på stjernebilete"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:166
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "Stjernebiletegrenser"
 
-#: src/gui/StelGui.cpp:169 src/ui_viewDialog.h:1159
+#: src/gui/StelGui.cpp:168 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "Asimutnett"
 
-#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1157
+#: src/gui/StelGui.cpp:169 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "Ekvatorialt nett"
 
-#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1156
+#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatorialt J2000-nett"
 
-#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1158
+#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1160
+#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
-#: src/gui/StelGui.cpp:174 src/ui_viewDialog.h:1180
+#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Galaktisk plan"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:174
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "Ekliptisk line"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:175
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "Ekvatorline"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "Meridianline"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "Horisontlinje"
 
-#: src/gui/StelGui.cpp:179 src/ui_viewDialog.h:1181
+#: src/gui/StelGui.cpp:178 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "Himmelretningar"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:180
 msgid "Ground"
 msgstr "Horisont"
 
-#: src/gui/StelGui.cpp:182 src/ui_viewDialog.h:1130
+#: src/gui/StelGui.cpp:181 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "Atmosfære"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:182
 msgid "Fog"
 msgstr "Tåke"
 
-#: src/gui/StelGui.cpp:185 src/ui_viewDialog.h:1139
+#: src/gui/StelGui.cpp:184 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "Stjernetåker"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:185
 msgid "Nebulas background images"
 msgstr "Bakgrunnsbilete for stjernetåker"
 
-#: src/gui/StelGui.cpp:187 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/gui/StelGui.cpp:186 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "Stjerner"
+
+#: src/gui/StelGui.cpp:187
+msgid "Stars labels"
+msgstr ""
 
 #: src/gui/StelGui.cpp:188
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
@@ -2779,67 +2783,71 @@ msgstr "Logg"
 msgid "Refresh"
 msgstr "Oppdater"
 
-#: src/ui_locationDialogGui.h:384
+#: src/ui_locationDialogGui.h:389
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "Sted"
 
-#: src/ui_locationDialogGui.h:388
+#: src/ui_locationDialogGui.h:393
 msgid "Current location information"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:389
+#: src/ui_locationDialogGui.h:394
 msgid "Use as default"
 msgstr "Nytt som standard"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:880
+#: src/ui_locationDialogGui.h:395
+msgid "Return to default"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Delete"
 msgstr "Slett"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:397
 msgid "Add to list"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "Breiddegrad:"
 
-#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
+#: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:396
+#: src/ui_locationDialogGui.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "Lengdegrad:"
 
-#: src/ui_locationDialogGui.h:400
+#: src/ui_locationDialogGui.h:406
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "Høgde:"
 
-#: src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
 msgstr "Skriv inn høgda i meter"
 
-#: src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:410
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:411
 msgid "Name/City:"
 msgstr "Namn/By:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:412
 msgid "Country:"
 msgstr "Land:"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:413
 msgid "Planet:"
 msgstr "Planet:"
 
