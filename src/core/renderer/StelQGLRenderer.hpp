@@ -38,7 +38,8 @@ public:
 		, pvrSupported(pvrSupported)
 		, textureCache()
 		// Maximum bytes of text textures to store in the cache.
-		, textTextureCache(10000000)
+		// Increased for the Pulsars plugin.
+		, textTextureCache(16777216)
 		, textBuffer(NULL)
 		, previousFrameEndTime(-1.0)
 		, globalColor(Qt::white)
@@ -187,7 +188,12 @@ public:
 	virtual void makeGLContextCurrent()
 	{
 		invariant();
-		glContext->makeCurrent();
+		if(QGLContext::currentContext() != glContext)
+		{
+			// makeCurrent does not check if the context is already current, 
+			// so it can really kill performance
+			glContext->makeCurrent();
+		}
 		invariant();
 	}
 
@@ -231,7 +237,7 @@ protected:
 	}
 	
 	//! Return the number of texture units (this is 1 if multitexturing is not supported).
-	virtual int getTextureUnitCount() const = 0;
+	virtual int getTextureUnitCount() = 0;
 
 	//! Asserts that we're in a valid state.
 	//!
