@@ -129,7 +129,7 @@ struct TextParams
 	//! @param y      = Vertical position of lower left corner of the text in pixels.
 	//! @param string = Text string to draw.
 	//!
-	//! Default values of other values are: rotation of 0.0 degrees,
+	//! Default values of other parameters are: rotation of 0.0 degrees,
 	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity,
 	//! 2D projection from StelCore.
 	TextParams(const float x, const float y, const QString& string)
@@ -142,6 +142,33 @@ struct TextParams
 		, noGravity_(true)
 		, projector_(StelApp::getInstance().getCore()->getProjection2d())
 	{}
+
+	//! Construct TextParams to draw text at a 3D position, using specified projector.
+	//!
+	//! This calculates 2D text position, so it does handle the required parameters 
+	//! (position and string). Other parameters are at default values.
+	//!
+	//! @param x      = 3D position of the text to draw.
+	//! @param y      = Projector to project the 3D position to 2D.
+	//! @param string = Text string to draw.
+	//!
+	//! Default values of other parameters are: rotation of 0.0 degrees,
+	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity,
+	//! 2D projection from StelCore.
+	template<class F>
+	TextParams(Vector3<F>& position3D, StelProjectorP projector, const QString& string)
+		: string_(string)
+		, angleDegrees_(0.0f)
+		, xShift_(0.0f)
+		, yShift_(0.0f)
+		, noGravity_(true)
+		, projector_(projector)
+	{
+		Vector3<F> win;
+		projector->project(position3D, win);
+		x_ = win[0];
+		y_ = win[1];
+	}
 
 	//! Angle of text rotation in degrees.
 	TextParams& angleDegrees(const float angle)
@@ -173,11 +200,11 @@ struct TextParams
 	}
 
 	//! X position of the text.
-	const float x_;
+	float x_;
 	//! Y position of the text.
-	const float y_;
+	float y_;
 	//! Text string to draw.
-	const QString& string_;
+	QString string_;
 	//! Rotation of the text in degrees.
 	float angleDegrees_;
 	//! X shift in rotated direction.
