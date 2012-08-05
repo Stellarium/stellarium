@@ -51,7 +51,7 @@
 #include <QStringList>
 #include <QPixmap>
 
-#define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
+#define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 
 /*
  This method is the one called automatically by the StelModuleMgr just 
