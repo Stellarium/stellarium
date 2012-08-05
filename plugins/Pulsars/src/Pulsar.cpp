@@ -19,7 +19,6 @@
 #include "Pulsar.hpp"
 #include "Pulsars.hpp"
 #include "StelObject.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTexture.hpp"
@@ -27,11 +26,11 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QTextStream>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
@@ -334,7 +333,7 @@ void Pulsar::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Pulsar::draw(StelCore* core, StelPainter& painter)
+void Pulsar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
@@ -342,27 +341,27 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 	double mag = getVMagnitude(core, true);
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	painter.setColor(color[0], color[1], color[2], 1);
+	renderer->setBlendMode(BlendMode_Add);
+	renderer->setGlobalColor(color[0], color[1], color[2]);
 
 	if (mag <= sd->getLimitMagnitude())
 	{
-
 		Pulsar::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-		float shift = 5.f + size/1.6f;
+		const float size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
+		const float shift = 5.f + size/1.6f;
 		if (labelsFader.getInterstate()<=0.f)
 		{
+			Vec3d win;
+			projector->project(XYZ, win);
 			if (GETSTELMODULE(Pulsars)->getDisplayMode())
 			{
-				painter.drawSprite2dMode(XYZ, 4);
-				painter.drawText(XYZ, "", 0, shift, shift, false);
+				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 10, 10);
+				renderer->drawText(TextParams(XYZ, projector, "").shift(shift, shift).useGravity());
 			}
 			else
 			{
-				painter.drawSprite2dMode(XYZ, 5);
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
+				renderer->drawTexturedRect(win[0] - 5, win[1] - 5, 10, 10);
+				renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
 			}
 		}
 	}

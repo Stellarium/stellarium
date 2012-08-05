@@ -28,10 +28,8 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
-class StelPainter;
 
 //! @class Pulsar
 //! A Pulsar object represents one pulsar on the sky.
@@ -91,7 +89,7 @@ private:
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
 
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector);
 
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
