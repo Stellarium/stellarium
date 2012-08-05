@@ -32,6 +32,7 @@ Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
 Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv*.dll"; DestDir: "{app}";
 Source: "@INTL_INCLUDE_DIR@/../bin/libintl*.dll"; DestDir: "{app}";
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
+Source: "@MINGW_BIN_DIRECTORY@/../bin/libstdc++*.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\phonon4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSql4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSvg4.dll"; DestDir: "{app}";
