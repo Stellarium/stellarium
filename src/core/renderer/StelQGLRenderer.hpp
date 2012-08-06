@@ -47,6 +47,7 @@ public:
 		, depthTest(DepthTest_Disabled)
 		, stencilTest(StencilTest_Disabled)
 		, blendMode(BlendMode_None)
+		, culledFaces(CullFace_None)
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
@@ -136,8 +137,14 @@ public:
 		globalColor = color;
 	}
 
+	virtual void setCulledFaces(const CullFace cullFace)
+	{
+		culledFaces = cullFace;
+	}
+
 	virtual void setBlendMode(const BlendMode blendMode)
 	{
+		// Moving this to drawVertexBufferBackend causes flicker issues
 		switch(blendMode)
 		{
 			case BlendMode_None:
@@ -329,6 +336,9 @@ protected:
 
 	//! Current blend mode.
 	BlendMode blendMode;
+
+	//! Determines whether front or back faces are culled, if any are culled at all.
+	CullFace culledFaces;
 };
 
 #endif // _STELQGLRENDERER_HPP_
