@@ -49,7 +49,6 @@
 #include <QVariant>
 
 class StelObject;
-class StelPainter;
 class StelProjector;
 class TelescopeClient;
 class TelescopeDialog;
@@ -79,7 +78,7 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore * core);
+	virtual void draw(StelCore * core, class StelRenderer* renderer);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -203,7 +202,7 @@ private slots:
 
 private:
 	//! Draw a nice animated pointer around the object if it's selected
-	void drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter);
+	void drawPointer(const StelProjectorP& prj, const StelCore* core, class StelRenderer* renderer);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);
