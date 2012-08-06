@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -37,6 +36,7 @@
 #include "SatellitesDialog.hpp"
 #include "LabelMgr.hpp"
 #include "StelTranslator.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -1109,32 +1109,33 @@ void Satellites::update(double deltaTime)
 	}
 }
 
-void Satellites::draw(StelCore* core)
+void Satellites::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (core->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	StelPainter painter(prj);
-	painter.setFont(labelFont);
+	renderer->setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
+	renderer->setBlendMode(BlendMode_Alpha);
 	Satellite::hintTexture->bind();
-	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
+	Satellite::viewportHalfspace = prj->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->visible)
-			sat->draw(core, painter, 1.0);
+		{
+			sat->draw(core, renderer, prj);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
+	{
+		drawPointer(core, renderer);
+	}
 }
 
-void Satellites::drawPointer(StelCore* core, StelPainter& painter)
+void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -1147,22 +1148,26 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
+		{
 			return;
-		glColor3f(0.4f,0.5f,0.8f);
+		}
+		renderer->setGlobalColor(0.4f, 0.5f, 0.8f);
 		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		renderer->setBlendMode(BlendMode_Alpha);
 
 		// Size on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+		const float halfSize = size * 0.5;
+		const float left   = screenpos[0] - halfSize - 20;
+		const float right  = screenpos[0] + halfSize - 20;
+		const float top    = screenpos[1] - halfSize - 20;
+		const float bottom = screenpos[1] + halfSize - 20;
+		renderer->drawTexturedRect(left,  top,    40, 40, 90);
+		renderer->drawTexturedRect(left,  bottom, 40, 40, 0);
+		renderer->drawTexturedRect(right, bottom, 40, 40, -90);
+		renderer->drawTexturedRect(right, top,    40, 40, -180);
 	}
 }
 
