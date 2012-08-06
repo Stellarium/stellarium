@@ -515,9 +515,7 @@ void SpecialZoneArray<Star>::draw
 			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
 
 			renderer->setGlobalColor(Vec4f(colorr[0], colorr[1], colorr[2], names_brightness));
-			Vec3d win;
-			projector->project(Vec3d(vf[0], vf[1], vf[2]), win);
-			renderer->drawText(TextParams(win[0], win[1], s->getNameI18n())
+			renderer->drawText(TextParams(vf, projector, s->getNameI18n())
 			                   .shift(offset, offset).useGravity());
 		}
 	}
