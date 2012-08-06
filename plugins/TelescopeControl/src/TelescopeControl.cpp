@@ -42,10 +42,11 @@
 #include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelProjector.hpp"
 #include "StelStyle.hpp"
 #include "StelTextureMgr.hpp"
+#include "renderer/StelGeometryBuilder.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -230,15 +231,10 @@ void TelescopeControl::update(double deltaTime)
 	communicate();
 }
 
-void TelescopeControl::draw(StelCore* core)
+void TelescopeControl::draw(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-	sPainter.setFont(labelFont);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	reticleTexture->bind();
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	renderer->setFont(labelFont);
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
@@ -249,35 +245,50 @@ void TelescopeControl::draw(StelCore* core)
 				//Telescope circles appear synchronously with markers
 				if (circleFader.getInterstate() >= 0)
 				{
-					glColor4f(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
-					glDisable(GL_TEXTURE_2D);
+					renderer->setGlobalColor(circleColor[0], circleColor[1], circleColor[2],
+					                         circleFader.getInterstate());
+					renderer->setBlendMode(BlendMode_None);
+					StelVertexBuffer<VertexP2>* circleBuffer =
+						renderer->createVertexBuffer<VertexP2>(PrimitiveType_LineStrip);
 					foreach (double circle, telescope->getOculars())
 					{
-						sPainter.drawCircle(XY[0], XY[1], 0.5 * prj->getPixelPerRadAtCenter() * (M_PI/180) * (circle));
+						StelGeometryBuilder()
+							.buildCircle(circleBuffer, XY[0], XY[1],
+							             0.5f * prj->getPixelPerRadAtCenter() * (M_PI / 180.0f) * circle);
+						renderer->drawVertexBuffer(circleBuffer);
+					
+						circleBuffer->unlock();
+						circleBuffer->clear();
 					}
-					glEnable(GL_TEXTURE_2D);
+					delete circleBuffer;
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
-					glColor4f(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
-					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
+					renderer->setBlendMode(BlendMode_Alpha);
+					reticleTexture->bind();
+					renderer->setGlobalColor(reticleColor[0], reticleColor[1], reticleColor[2],
+					                         reticleFader.getInterstate());
+					renderer->drawTexturedRect(XY[0] - 15.0f, XY[1] - 15.0f, 30.0f, 30.0f);
 				}
 				if (labelFader.getInterstate() >= 0)
 				{
-					glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+					renderer->setGlobalColor(labelColor[0], labelColor[1], labelColor[2],
+					                         labelFader.getInterstate());
 					//TODO: Different position of the label if circles are shown?
 					//TODO: Remove magic number (text spacing)
-					sPainter.drawText(XY[0], XY[1], telescope->getNameI18n(), 0, 6 + 10, -4, false);
+					renderer->drawText(TextParams(XY[0], XY[1], telescope->getNameI18n())
+					                   .shift(6 + 10, - 4).useGravity());
 					//Same position as the other objects: doesn't work, telescope label overlaps object label
 					//sPainter.drawText(XY[0], XY[1], scope->getNameI18n(), 0, 10, 10, false);
-					reticleTexture->bind();
 				}
 			}
 		}
 	}
 
 	if(GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(prj, core, sPainter);
+	{
+		drawPointer(prj, core, renderer);
+	}
 }
 
 void TelescopeControl::setStelStyle(const QString& section)
@@ -422,7 +433,7 @@ void TelescopeControl::slewTelescopeToViewDirection()
 	telescopeGoto(slotNumber, centerPosition);
 }
 
-void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
+void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelRenderer* renderer)
 {
 	#ifndef COMPATIBILITY_001002
 	//Leaves this whole routine empty if this is the backport version.
@@ -439,12 +450,11 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 			return;
 
 		const Vec3f& c(obj->getInfoColor());
-		sPainter.setColor(c[0], c[1], c[2]);
+		renderer->setGlobalColor(c[0], c[1], c[2]);
 		selectionTexture->bind();
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		renderer->drawTexturedRect(screenpos[0] - 25.0f, screenpos[1] - 25.0f, 50.0f, 50.0f,
+		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 	#endif //COMPATIBILITY_001002
 }
