@@ -28,10 +28,8 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
-class StelPainter;
 
 //! @class Quasar
 //! A Quasar object represents one Quasar on the sky.
@@ -85,7 +83,7 @@ private:
 
 	static StelTextureSP hintTexture;
 
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
 	//! Calculate a color of quasar
 	//! @param b_v value of B-V color index
 	unsigned char BvToColorIndex(float b_v);
