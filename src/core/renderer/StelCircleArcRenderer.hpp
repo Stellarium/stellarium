@@ -76,6 +76,50 @@ public:
 		drawSmallCircleArc(start, stop, viewportEdgeIntersectCallback, userData);
 	}
 
+	//! Draw a series of great circle arcs between specified points. 
+	//!
+	//! The primitiveType specifies how to interpret the points. 
+	//!
+	//! If primitiveType is PrimitiveType_Lines,
+	//! the arcs are drawn between the first and the second point, third and fourth, and so on.
+	//! In this case, the number of points must be divisible by 2.
+	//!
+	//! If primitiveType is PrimitiveType_LineStrip, the arcs are drawn between the  
+	//! first and the second point, second and third, third and fourth, and so on.
+	//!
+	//! The angle between two points of any arc must be < 180 deg.
+	//!
+	//! @param points        Points to use to draw the arcs.
+	//! @param primitiveType Determines how the points to draw arcs between are chosen
+	//!                      (see above). Must be PrimitiveType_Lines or PrimitiveType_LineStrip.
+	//! @param clippingCap   If not NULL, try to clip the parts of the arcs outside the cap.
+	void drawGreatCircleArcs(const QVector<Vec3d>& points, const PrimitiveType primitiveType,
+	                         const SphericalCap* clippingCap)
+	{
+		Q_ASSERT_X(points.size() != 1, Q_FUNC_INFO, 
+		           "Need zero or at least 2 points to draw circle arcs");
+		switch(primitiveType)
+		{
+			case PrimitiveType_Lines:
+				Q_ASSERT_X(points.size() % 2 == 0, Q_FUNC_INFO, 
+				           "Need an even number of points to draw great circle arcs from a "
+				           "lines primitive type.");
+				for (int p = 0; p < points.size(); p += 2 ) 
+				{
+					drawGreatCircleArc(points.at(p), points.at(p+1), clippingCap);
+				}
+				break;
+			case PrimitiveType_LineStrip:
+				for (int p = 0; p < points.size(); p++) 
+				{
+					drawGreatCircleArc(points.at(p), points.at(p + 1));
+				}
+				break;
+			default:
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unsupported primitive type to draw circle arcs from");
+		}
+	}
+
 	//! Set rotation point to draw a small circle around.
 	void setRotCenter(const Vec3d center)
 	{
