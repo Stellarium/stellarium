@@ -28,7 +28,6 @@
 #include "TuiNodeEnum.hpp"
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
@@ -52,8 +51,9 @@
 #endif
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
+#include "renderer/StelRenderer.hpp"
 
-#include <QtOpenGL>
+
 #include <QKeyEvent>
 #include <QDebug>
 #include <QLabel>
@@ -496,7 +496,7 @@ void TextUserInterface::loadConfiguration(void)
 /*************************************************************************
  Draw our module.
 *************************************************************************/
-void TextUserInterface::draw(StelCore* core, class StelRenderer* renderer)
+void TextUserInterface::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (tuiActive)
 	{
@@ -525,10 +525,9 @@ void TextUserInterface::draw(StelCore* core, class StelRenderer* renderer)
 		if (currentNode!=NULL)
 			tuiText = currentNode->getDisplayText();
 
-		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-		painter.setFont(font);
-		painter.setColor(0.3,1,0.3);
-		painter.drawText(x, y, tuiText, 0, 0, 0, false);
+		renderer->setFont(font);
+		renderer->setGlobalColor(0.3,1,0.3);
+		renderer->drawText(TextParams(x, y, tuiText).useGravity());
 	}
 }
 
