@@ -28,10 +28,8 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
-class StelPainter;
 
 //! @class Supernova
 //! A Supernova object represents one supernova on the sky.
@@ -85,7 +83,7 @@ private:
 
 	static StelTextureSP hintTexture;
 
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
 
 	// Supernova
 	QString designation;               //! The ID of the supernova
