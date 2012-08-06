@@ -56,6 +56,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	const QString fullPath = filename.startsWith("http://") 
 		? filename 
 		: glFileSystemTexturePath(filename, pvrSupported);
+
 	if(fullPath.isEmpty())
 	{
 		qWarning() << "createTextureBackend failed: file not found. Returning NULL.";

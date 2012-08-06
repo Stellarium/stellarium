@@ -247,6 +247,8 @@ void StelQGLTextureBackend::onImageLoaded(QImage image)
 
 void StelQGLTextureBackend::onLoadingError(const QString& errorMessage) 
 {
+	loader->deleteLater();
+	loader = NULL;
 	errorOccured(errorMessage);
 }
 

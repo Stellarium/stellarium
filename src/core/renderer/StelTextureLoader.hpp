@@ -2,6 +2,7 @@
 #define _STELTEXTURELOADER_HPP_
 
 #include <QApplication>
+#include <QDebug>
 #include <QImage>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -166,6 +167,7 @@ private slots:
 		if(image.isNull())
 		{
 			emit error("Image " + path + " failed to load");
+			return;
 		}
 		emit finished(image);
 	}
