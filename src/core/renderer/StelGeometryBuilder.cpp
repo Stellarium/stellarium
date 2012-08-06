@@ -67,6 +67,25 @@ static void computeCosSinRho(const float phi, const int segments)
 	}
 }
 
+//! Prepare a vertex buffer for generation.
+//!
+//! If the buffer is NULL, it is constructed with specified primitive type.
+//! Otherwise, it is unlocked and cleared.
+template<class V>
+static void prepareVertexBuffer
+	(StelRenderer* renderer, StelVertexBuffer<V>*& vertices, const PrimitiveType type)
+{
+	if(NULL == vertices)
+	{
+		vertices = renderer->createVertexBuffer<V>(type);
+	}
+	else
+	{
+		vertices->unlock();
+		vertices->clear();
+	}
+}
+
 void StelGeometrySphere::draw(StelRenderer* renderer, StelProjectorP projector)
 {
 	// Lit spheres must update at every projector as projector is used in lighting.
@@ -98,49 +117,22 @@ void StelGeometrySphere::draw(StelRenderer* renderer, StelProjectorP projector)
 
 void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP projector)
 {
-#ifndef NDEBUG
-	switch(type)
-	{
-		case SphereType_Fisheye:
-		case SphereType_Unlit:
-		case SphereType_Lit:
-			break;
-		default:
-			Q_ASSERT_X(false, Q_FUNC_INFO, 
-			           "New sphere type - need to update StelGeometrySphere::regenerate()");
-	}
-#endif
+	Q_ASSERT_X(type == SphereType_Fisheye || type == SphereType_Unlit || 
+	           type == SphereType_Lit, Q_FUNC_INFO, 
+	           "New sphere type - need to update StelGeometrySphere::regenerate()");
 
 	// Prepare the vertex buffer
 	if(type == SphereType_Fisheye || type == SphereType_Unlit)
 	{
 		Q_ASSERT_X(NULL == litVertices, Q_FUNC_INFO,
 		           "Lit vertex buffer is used for unlit sphere");
-		if(NULL == unlitVertices)
-		{
-			unlitVertices = 
-				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
-		}
-		else
-		{
-			unlitVertices->unlock();
-			unlitVertices->clear();
-		}
+		prepareVertexBuffer(renderer, unlitVertices, PrimitiveType_TriangleStrip);
 	}
 	else if(type == SphereType_Lit)
 	{
 		Q_ASSERT_X(NULL == unlitVertices, Q_FUNC_INFO,
 		           "Unlit vertex buffer is used for lit sphere");
-		if(NULL == litVertices)
-		{
-			litVertices = 
-				renderer->createVertexBuffer<VertexP3T2C4>(PrimitiveType_TriangleStrip);
-		}
-		else
-		{
-			litVertices->unlock();
-			litVertices->clear();
-		}
+		prepareVertexBuffer(renderer, litVertices, PrimitiveType_TriangleStrip);
 	}
 	else
 	{
@@ -359,48 +351,21 @@ void StelGeometryRing::draw(StelRenderer* renderer, StelProjectorP projector)
 
 void StelGeometryRing::regenerate(StelRenderer* renderer)
 {
-#ifndef NDEBUG
-	switch(type)
-	{
-		case RingType_Textured:
-		case RingType_Plain2D:
-			break;
-		default:
-			Q_ASSERT_X(false, Q_FUNC_INFO, 
-			           "New ring type - need to update StelGeometryRing::regenerate()");
-	}
-#endif
+	Q_ASSERT_X(type == RingType_Plain2D || type == RingType_Textured, Q_FUNC_INFO, 
+	           "New ring type - need to update StelGeometryRing::regenerate()");
 
 	// Prepare the vertex buffer
 	if(type == RingType_Textured)
 	{
 		Q_ASSERT_X(NULL == plain2DVertices, Q_FUNC_INFO,
 		           "Plain 2D vertex buffer is used for textured 3D ring");
-		if(NULL == texturedVertices)
-		{
-			texturedVertices = 
-				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
-		}
-		else
-		{
-			texturedVertices->unlock();
-			texturedVertices->clear();
-		}
+		prepareVertexBuffer(renderer, texturedVertices, PrimitiveType_TriangleStrip);
 	}
 	else if(type == RingType_Plain2D)
 	{
 		Q_ASSERT_X(NULL == texturedVertices, Q_FUNC_INFO,
 		           "Textured vertex buffer is used for a plain 2D ring");
-		if(NULL == plain2DVertices)
-		{
-			plain2DVertices = 
-				renderer->createVertexBuffer<VertexP2>(PrimitiveType_TriangleStrip);
-		}
-		else
-		{
-			plain2DVertices->unlock();
-			plain2DVertices->clear();
-		}
+		prepareVertexBuffer(renderer, plain2DVertices, PrimitiveType_TriangleStrip);
 	}
 	else
 	{
