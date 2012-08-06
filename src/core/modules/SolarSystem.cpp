@@ -950,10 +950,11 @@ bool SolarSystem::loadPlanetShader(StelRenderer* renderer)
 	  "{\n"
 	  "    gl_Position = projectionMatrix * vertex;\n"
 	  "    texc = texCoord;\n"
-	  "    unprojectedVertex /= radius;\n"
-	  "    float c = lightPos.x * unprojectedVertex.x * oneMinusOblateness +\n"
-	  "              lightPos.y * unprojectedVertex.y * oneMinusOblateness +\n"
-	  "              lightPos.z * unprojectedVertex.z / oneMinusOblateness;\n"
+	  "    // Must be a separate variable due to Intel drivers\n"
+	  "    vec4 normal = unprojectedVertex / radius;\n"
+	  "    float c = lightPos.x * normal.x * oneMinusOblateness +\n"
+	  "              lightPos.y * normal.y * oneMinusOblateness +\n"
+	  "              lightPos.z * normal.z / oneMinusOblateness;\n"
 	  "    litColor = clamp(c, 0.0f, 0.5) * diffuseLight + ambientLight;\n"
 	  "}\n"))
 	{
