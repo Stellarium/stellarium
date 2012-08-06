@@ -1,13 +1,15 @@
 #!/usr/bin/perl
 
 use DBI();
+use LWP::UserAgent();
 
 #
-# Stage 1: read exoplanetData.csv from 'The Extrasolar Planets Encyclopaedia' at exoplanet.eu and store to MySQL
+# Stage 1: connect to 'The Extrasolar Planets Encyclopaedia' at exoplanet.eu, fetch CSV data and store to MySQL
 # Stage 2: read MySQL catalog of exoplanets and store it to JSON
 #
 
-$CSV	= "./exoplanet.eu_catalog.csv";
+$URL	= "http://exoplanet.eu/catalog/csv/";
+$CSV	= "./exoplanets.csv";
 $JSON	= "./exoplanets.json";
 
 $CATALOG_FORMAT_VERSION = 1;
@@ -16,6 +18,22 @@ $dbname	= "exoplanets";
 $dbhost	= "localhost";
 $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
+
+$UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.1; http://stellarium.org/)");
+$request = HTTP::Request->new('GET', $URL);
+$responce = $UA->request($request);
+
+if ($responce->is_success) {
+	open(OUT, ">$CSV");
+	$data = $responce->content;
+	binmode OUT;
+	print OUT $data;
+	close OUT;
+} else {
+	print "Can't connect to URL: $URL\n";
+	exit;
+}
 
 $dsn = "DBI:mysql:database=$dbname;host=$dbhost";
 
@@ -54,6 +72,8 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	($aname,$pmass,$pradius,$pperiod,$psemiax,$pecc,$pincl,$angdist,$psl,$discovered,$updated,$pomega,$pt,$dtype,$mol,$starname,$sRA,$sDec,$sVmag,$sImag,$sHmag,$sJmag,$sKmag,$sdist,$smetal,$smass,$sradius,$sstype,$sage,$sefftemp) = split(",", $currdata);
 
 	($hour,$min,$sec) = split(":",$sRA);
+	# fixed bug in raw data
+	$sec =~ s/-//gi;
 	$outRA = $hour."h".$min."m".$sec."s";
 
 	($deg,$min,$sec) = split(":",$sDec);
