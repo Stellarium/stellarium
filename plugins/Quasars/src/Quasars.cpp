@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -31,6 +30,7 @@
 #include "StelTranslator.hpp"
 #include "Quasars.hpp"
 #include "Quasar.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QDebug>
 #include <QFileInfo>
@@ -142,45 +142,47 @@ void Quasars::init()
 /*
  Draw our module. This should print name of first QSO in the main window
 */
-void Quasars::draw(StelCore* core)
+void Quasars::draw(StelCore* core, class StelRenderer* renderer)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
-	painter.setFont(font);
+	renderer->setFont(font);
 	
 	foreach (const QuasarP& quasar, QSO)
 	{
 		if (quasar && quasar->initialized)
-			quasar->draw(core, painter);
+		{
+			quasar->draw(core, renderer, prj);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
+	{
+		drawPointer(core, renderer, prj);
+	}
 
 }
 
-void Quasars::drawPointer(StelCore* core, StelPainter& painter)
+void Quasars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Quasar");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3d screenPos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
+		if (!projector->project(pos, screenPos))
+		{
 			return;
+		}
 
 		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		renderer->setGlobalColor(c[0], c[1], c[2]);
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		renderer->drawTexturedRect(screenPos[0] - 13.0f, screenPos[2] - 13.0f, 26.0f, 26.0f, 
+		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 }
 
