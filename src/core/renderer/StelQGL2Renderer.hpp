@@ -41,7 +41,6 @@ public:
 		, initialized(false)
 		, builtinShaders()
 		, customShader(NULL)
-		, culledFaces(CullFace_None)
 		, textureUnitCount(-1)
 	{
 	}
@@ -248,11 +247,6 @@ public:
 	virtual StelGLSLShader* createGLSLShader()
 	{
 		return new StelQGLGLSLShader(this);
-	}
-
-	virtual void setCulledFaces(const CullFace cullFace)
-	{
-		culledFaces = cullFace;
 	}
 
 	virtual bool isGLSLSupported() const {return true;}
@@ -515,9 +509,6 @@ private:
 	//!
 	//! If not NULL, overrides builtin vertex format specific shader programs.
 	StelQGLGLSLShader* customShader;
-
-	//! Determines whether front or back faces are culled, if any are culled at all.
-	CullFace culledFaces;
 
 	//! Number of texture units. Lazily initialized by getTextureUnitCount().
 	GLint textureUnitCount;
