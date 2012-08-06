@@ -86,7 +86,9 @@ Planet::Planet(const QString& englishName,
 
 	const StelTextureParams textureParams = 
 		StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
-	texMap = StelApp::getInstance().getTextureManager()
+	texMap = texMapName == "" 
+          ? StelTextureSP() 
+	       : StelApp::getInstance().getTextureManager()
 	                               .createTextureThread("textures/"+texMapName, 
 	                                                    textureParams);
 
