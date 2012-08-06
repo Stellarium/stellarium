@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-04 21:07+0700\n"
-"PO-Revision-Date: 2012-08-04 13:20+0000\n"
-"Last-Translator: Allen Zhong <Unknown>\n"
+"POT-Creation-Date: 2012-08-05 19:34+0700\n"
+"PO-Revision-Date: 2012-08-05 09:01+0000\n"
+"Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-05 04:49+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-08-06 04:57+0000\n"
+"X-Generator: Launchpad (build 15745)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -62,14 +62,14 @@ msgstr "类型：<b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
-#: plugins/Exoplanets/src/Exoplanet.cpp:151
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等: <b>%1</b> (extincted to: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
-#: plugins/Exoplanets/src/Exoplanet.cpp:156
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "星等：<b>%1</b>"
@@ -188,14 +188,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "星等：<b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
-#: plugins/Exoplanets/src/Exoplanet.cpp:166
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "光谱类型: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
-#: plugins/Exoplanets/src/Exoplanet.cpp:171
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "距离: %1 光年"
@@ -1120,8 +1120,8 @@ msgstr "哈佛大学（美国）"
 msgid "This system does not support OpenGL."
 msgstr "您的系统不支持 OpenGL。"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:182
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Sun"
 msgstr "太阳"
 
@@ -1602,7 +1602,7 @@ msgstr "黄道"
 #. TRANSLATORS: Name of script
 #: src/translations.h:194
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "水星上的三次日出与日落"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:196
@@ -1617,7 +1617,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:200
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr ""
+msgstr "2068年 1月 10日从奥林匹斯山观测到的日蚀"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:202
@@ -6178,61 +6178,65 @@ msgstr "系外行星设置窗口"
 msgid "Show exoplanets"
 msgstr "显示系外行星"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:178
+#: plugins/Exoplanets/src/Exoplanet.cpp:204
 msgid "Metallicity"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:182
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Mass"
 msgstr "质量"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Radius"
 msgstr "半径"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "有效温度：%1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:196
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Exoplanet"
 msgstr "系外行星"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Period"
 msgstr "周期"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "days"
 msgstr "天"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Jup"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Semi-Major Axis"
 msgstr "长半轴"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "AU"
 msgstr "天文单位"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
+#: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Eccentricity"
 msgstr "离心率"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "Inclination"
 msgstr "倾角"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Angle Distance"
 msgstr "角距离"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
+msgid "Discovered year"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"

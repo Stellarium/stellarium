@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-04 21:07+0700\n"
-"PO-Revision-Date: 2012-08-04 21:16+0000\n"
+"POT-Creation-Date: 2012-08-05 19:34+0700\n"
+"PO-Revision-Date: 2012-08-05 17:50+0000\n"
 "Last-Translator: Gianfranco Frisani <gfrisani@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-05 04:44+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-08-06 04:51+0000\n"
+"X-Generator: Launchpad (build 15745)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -62,14 +62,14 @@ msgstr "Tipo: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
-#: plugins/Exoplanets/src/Exoplanet.cpp:151
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitudine: <b>%1</b> (estinta a: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
-#: plugins/Exoplanets/src/Exoplanet.cpp:156
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitudine: <b>%1</b>"
@@ -188,14 +188,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitudine: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
-#: plugins/Exoplanets/src/Exoplanet.cpp:166
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Classe spettrale: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
-#: plugins/Exoplanets/src/Exoplanet.cpp:171
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distanza: %1 anni luce"
@@ -1160,8 +1160,8 @@ msgstr "Università di Harvard (Stati Uniti d'America)"
 msgid "This system does not support OpenGL."
 msgstr "Questo sistema non supporta OpenGL"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:182
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Sun"
 msgstr "Sole"
 
@@ -6405,61 +6405,65 @@ msgstr "Finestra di configurazione degli esopianeti"
 msgid "Show exoplanets"
 msgstr "Mostra gli esopianeti"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:178
+#: plugins/Exoplanets/src/Exoplanet.cpp:204
 msgid "Metallicity"
 msgstr "Metallicità"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:182
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Mass"
 msgstr "Massa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Radius"
 msgstr "Raggio"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Temperatura effettiva: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:196
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Exoplanet"
 msgstr "Esopianeta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Period"
 msgstr "Periodo"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "days"
 msgstr "giorni"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Semi-Major Axis"
 msgstr "Semiasse Maggiore"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "AU"
 msgstr "U.A."
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
+#: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Eccentricity"
 msgstr "Eccentricità"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "Inclination"
 msgstr "Inclinazione"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Angle Distance"
 msgstr "Distanza angolare"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
+msgid "Discovered year"
+msgstr "Anno del rilevamento"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
@@ -6788,38 +6792,14 @@ msgstr "Aggiorna i dati degli esopianeti da Internet"
 #~ msgid "Custom Info Settings"
 #~ msgstr "Impostazioni delle informazioni personalizzate"
 
-#~ msgid "Display info about an object's name"
-#~ msgstr "Mostra le informazioni riguardo al nome di un oggetto"
-
-#~ msgid "Display info about an object's distance"
-#~ msgstr "Mostra info sulla distanza dell'oggetto"
-
-#~ msgid "Display the altitude and azimuth position"
-#~ msgstr "Mostra altitudine e azimuth"
-
 #~ msgid "The equatorial coordinates (of date)"
 #~ msgstr "Coordinate equatoriali (della data)"
-
-#~ msgid "Display the equatorial position (of date)"
-#~ msgstr "Mostra la posizione equatoriale (della data)"
 
 #~ msgid "The equatorial coordinates (J2000 ref)"
 #~ msgstr "Coordinate equatoriali (J2000 ref)"
 
 #~ msgid "The alt-azimuthal coordinates"
 #~ msgstr "Coordinate altazimutali"
-
-#~ msgid "Display the equatorial position (J2000 ref)"
-#~ msgstr "Mostra la posizione equatoriale (J2000 ref)"
-
-#~ msgid "Display  info about an absolute magnitude"
-#~ msgstr "Mostra info su una magnitudine assoluta"
-
-#~ msgid "Display info about an object's size"
-#~ msgstr "Mostra info sulle dimensioni di un oggetto"
-
-#~ msgid "Display  info about a visual magnitude"
-#~ msgstr "Mostra info su una magnitudine visuale"
 
 #~ msgid "Additional info (Extra 2)"
 #~ msgstr "Info aggiuntive (Extra 2)"
@@ -6829,3 +6809,65 @@ msgstr "Aggiorna i dati degli esopianeti da Internet"
 
 #~ msgid "Additional info (Extra 3)"
 #~ msgstr "Info aggiuntive (Extra 3)"
+
+#~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#~ msgstr "emissione pulsata ottica, di raggi X o raggi gamma (alta energia)"
+
+#~ msgid "millisecond pulsar"
+#~ msgstr "pulsar millisecondo"
+
+#~ msgid "radio interpulse"
+#~ msgstr "pulsazione radio"
+
+#~ msgid "globular cluster association"
+#~ msgstr "associazione di ammasso globulare"
+
+#~ msgid "glitches in period"
+#~ msgstr "cambiamento del periodo"
+
+#, qt-format
+#~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
+#~ msgstr "Ampiezza equivalente del profilo della pulsazione integrata_ %1 ms"
+
+#~ msgid "Display  info about a catalog numbers"
+#~ msgstr "Visualizza informazioni sui numeri di catalogo"
+
+#~ msgid ""
+#~ "This plugin plots the position of various pulsars, with object information "
+#~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
+#~ "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+#~ msgstr ""
+#~ "Questo plugin traccia la posizione di varie pulsar, con informazioni su "
+#~ "ciascuna. I dati delle pulsar sono derivati dal \"Catalog of Pulsars\" "
+#~ "(Taylor+ 1995). <br><br>Nota: gli identificativi dlele pulsar riportano il "
+#~ "prefisso \"PSR\""
+
+#~ msgid "Display the hour angle + DE (of date)"
+#~ msgstr "Visualizza l'angolo orario + DE (della data)"
+
+#~ msgid "Display info about an object's size"
+#~ msgstr "Visualizza informazioni sulle dimensioni di un oggetto"
+
+#~ msgid "Display a derived class-specific extra fields"
+#~ msgstr "Visualizza campi extra per una classe specifica derivata"
+
+#~ msgid "Display info about an object's distance"
+#~ msgstr "Visualizza informazioni sulla distanza dell'oggetto"
+
+#~ msgid "Display the equatorial position (J2000 ref)"
+#~ msgstr "Visualizza la posizione equatoriale (J2000 ref)"
+
+#~ msgid "Display the altitude and azimuth position"
+#~ msgstr "Visualizza altitudine e azimut"
+
+#~ msgid "Display the equatorial position (of date)"
+#~ msgstr "Visualizza la posizione equatoriale (della data)"
+
+#~ msgid "Display  info about an absolute magnitude"
+#~ msgstr "Visualizza informazioni su una magnitudine assoluta"
+
+#~ msgid "Display  info about a visual magnitude"
+#~ msgstr "Visualizza informazioni su una magnitudine visuale"
+
+#~ msgid "Display info about an object's name"
+#~ msgstr "Visualizza informazioni sul nome di un oggetto"
