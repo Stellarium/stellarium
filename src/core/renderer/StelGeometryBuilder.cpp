@@ -95,6 +95,7 @@ void StelGeometrySphere::draw(StelRenderer* renderer, StelProjectorP projector)
 	}
 } 
 
+
 void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP projector)
 {
 #ifndef NDEBUG
@@ -234,10 +235,26 @@ void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP proje
 			indices->lock();
 		}
 	}
-	else if(type == SphereType_Unlit)
-	{ 
-		StelVertexBuffer<VertexP3T2>* vertices = unlitVertices;
-		vertices->unlock();
+	else if(type == SphereType_Unlit || type == SphereType_Lit)
+	{
+		const bool lit = type == SphereType_Lit;
+		Vec3d lightPos;
+		Vec4f ambientLight, diffuseLight;
+		if(lit)
+		{
+			// Set up the light.
+			lightPos = Vec3d(light.position[0], light.position[1], light.position[2]);
+			projector->getModelViewTransform()
+			         ->getApproximateLinearTransfo()
+			         .transpose()
+			         .multiplyWithoutTranslation(Vec3d(lightPos[0], lightPos[1], lightPos[2]));
+			projector->getModelViewTransform()->backward(lightPos);
+			lightPos.normalize();
+			ambientLight = light.ambient;
+			diffuseLight = light.diffuse; 
+		}
+		// Set up vertex generation.
+		(lit ? litVertices->unlock() : unlitVertices->unlock());
 		const float drho   = M_PI / stacks;
 		computeCosSinRho(drho, stacks);
 
@@ -251,6 +268,7 @@ void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP proje
 		const float ds = (flipTexture ? -1.0f : 1.0f) / slices;
 		const float dt = nsign / stacks; // from inside texture is reversed
 
+		// Generate sphere vertices.
 		const float* cosSinRho = COS_SIN_RHO;
 		for (int i = 0; i <= stacks; ++i)
 		{
@@ -259,12 +277,26 @@ void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP proje
 			
 			float s = flipTexture ? 1.0f : 0.0f;
 			const float* cosSinTheta = COS_SIN_THETA;
+			// Used to bake light colors into lit spheres' vertices
+			Vec4f color;
 			for (int slice = 0; slice <= slices; ++slice)
 			{
 				const Vec3f v(-cosSinTheta[1] * cosSinRho1,
 				              cosSinTheta[0] * cosSinRho1, 
 				              nsign * cosSinRho0 * oneMinusOblateness);
-				vertices->addVertex(VertexP3T2(v * radius, Vec2f(s, t)));
+				if(lit)
+				{
+					const float c = 
+						std::max(0.0, nsign * (lightPos[0] * v[0] * oneMinusOblateness +
+						                       lightPos[1] * v[1] * oneMinusOblateness +
+						                       lightPos[2] * v[2] / oneMinusOblateness));
+					const Vec4f color = std::min(c, 0.5f) * diffuseLight + ambientLight;
+					litVertices->addVertex(VertexP3T2C4(v * radius, Vec2f(s, t), color));
+				}
+				else
+				{
+					unlitVertices->addVertex(VertexP3T2(v * radius, Vec2f(s, t)));
+				}
 				s += ds;
 				cosSinTheta += 2;
 			}
@@ -289,82 +321,7 @@ void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP proje
 			indices->lock();
 		}
 
-		vertices->lock(); 
-	}
-	else if(type == SphereType_Lit)
-	{
-		StelVertexBuffer<VertexP3T2C4>* vertices = litVertices;
-		// Set up the light.
-		Vec3d lightPos = Vec3d(light.position[0], light.position[1], light.position[2]);
-		projector->getModelViewTransform()
-		         ->getApproximateLinearTransfo()
-		         .transpose()
-		         .multiplyWithoutTranslation(Vec3d(lightPos[0], lightPos[1], lightPos[2]));
-		projector->getModelViewTransform()->backward(lightPos);
-		lightPos.normalize();
-		const Vec4f ambientLight = light.ambient;
-		const Vec4f diffuseLight = light.diffuse; 
-
-		// Set up vertex generation.
-		vertices->unlock();
-		const float drho   = M_PI / stacks;
-		computeCosSinRho(drho, stacks);
-
-		const float nsign = orientInside ? -1.0f : 1.0f;
-		// from inside texture is reversed 
-		float t           = orientInside ?  0.0f : 1.0f;
-
-		// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-		// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
-		// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-		const float ds = (flipTexture ? -1.0f : 1.0f) / slices;
-		const float dt = nsign / stacks; // from inside texture is reversed
-
-		// Generate sphere vertices with lighting baked in colors.
-		const float* cosSinRho = COS_SIN_RHO;
-		for (int i = 0; i <= stacks; ++i)
-		{
-			const float cosSinRho0 = cosSinRho[0];
-			const float cosSinRho1 = cosSinRho[1];
-			
-			float s = flipTexture ? 1.0f : 0.0f;
-			const float* cosSinTheta = COS_SIN_THETA;
-			for (int slice = 0; slice <= slices; ++slice)
-			{
-				const Vec3f v(-cosSinTheta[1] * cosSinRho1,
-								  cosSinTheta[0] * cosSinRho1, 
-								  nsign * cosSinRho0 * oneMinusOblateness);
-				const float c = 
-					std::max(0.0, nsign * (lightPos[0] * v[0] * oneMinusOblateness +
-												  lightPos[1] * v[1] * oneMinusOblateness +
-												  lightPos[2] * v[2] / oneMinusOblateness));
-				const Vec4f color = std::min(c, 0.5f) * diffuseLight + ambientLight;
-				vertices->addVertex(VertexP3T2C4(v * radius, Vec2f(s, t), color));
-				s += ds;
-				cosSinTheta += 2;
-			}
-
-			cosSinRho += 2;
-			t -= dt;
-		}
-		// Generate index buffers for strips (rows) forming the sphere.
-		uint index = 0;
-		for (int i = 0; i < stacks; ++i)
-		{
-			StelIndexBuffer* const indices = rowIndices[i];
-			indices->unlock();
-
-			for (int slice = 0; slice <= slices; ++slice)
-			{
-				indices->addIndex(index);
-				indices->addIndex(index + slices + 1);
-				index += 1;
-			}
-
-			indices->lock();
-		}
-
-		vertices->lock(); 
+		(lit ? litVertices->lock() : unlitVertices->lock());
 	}
 	else
 	{
