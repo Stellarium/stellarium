@@ -290,7 +290,8 @@ private:
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;
 	LinearFader hintFader;
-	StelTextureSP texPointer;
+	class StelTextureNew* hintTexture;
+	class StelTextureNew* texPointer;
 	QPixmap* pxmapGlow;
 	QPixmap* pxmapOnIcon;
 	QPixmap* pxmapOffIcon;

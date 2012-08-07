@@ -28,7 +28,6 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
 
 #include "gSatWrapper.hpp"
@@ -148,7 +147,6 @@ private:
 	QStringList groupIDs;
 	QDateTime lastUpdated;
 
-	static StelTextureSP hintTexture;
 	static SphericalCap  viewportHalfspace;
 	static float hintBrightness;
 	static float hintScale;
@@ -157,15 +155,16 @@ private:
 	static int   orbitLineSegmentDuration; //measured in seconds
 	static bool  orbitLinesFlag;
 
-	void draw(const StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	void draw(const StelCore* core, class StelRenderer* renderer, 
+	          StelProjectorP projector, class StelTextureNew* hintTexture);
 
-        //Satellite Orbit Position calculation
-        gSatWrapper *pSatWrapper;
-        Vec3d position;
-        Vec3d velocity;
-        Vec3d latLongSubPointPosition;
-        Vec3d elAzPosition;
-        int   visibility;
+	//Satellite Orbit Position calculation
+	gSatWrapper *pSatWrapper;
+	Vec3d position;
+	Vec3d velocity;
+	Vec3d latLongSubPointPosition;
+	Vec3d elAzPosition;
+	int   visibility;
 
 	//Satellite Orbit Draw
 	QFont     font;

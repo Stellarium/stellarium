@@ -22,12 +22,13 @@
 #include "StelApp.hpp"
 #include "StelLocation.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "renderer/StelCircleArcRenderer.hpp"
 #include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
+
 
 #include <QTextStream>
 #include <QRegExp>
@@ -42,7 +43,6 @@
 #include <cmath>
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
-StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.0;
 float Satellite::hintScale = 1.f;
@@ -454,7 +454,8 @@ QString Satellite::extractInternationalDesignator(const QString& tle1)
 }
 
 
-void Satellite::draw(const StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Satellite::draw(const StelCore* core, StelRenderer* renderer, 
+                     StelProjectorP projector, StelTextureNew* hintTexture)
 {
 	XYZ = getJ2000EquatorialPos(core);
 	Vec3f drawColor;
@@ -469,7 +470,6 @@ void Satellite::draw(const StelCore* core, StelRenderer* renderer, StelProjector
 		if (Satellite::showLabels)
 		{
 			renderer->drawText(TextParams(xy[0], xy[1], name).shift(10, 10).useGravity());
-			Satellite::hintTexture->bind();
 		}
 		renderer->drawTexturedRect(xy[0] - 11, xy[1] - 11, 22, 22);
 
