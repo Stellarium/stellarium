@@ -396,6 +396,10 @@ public:
 	//! Texture created must be destroyed by the user before the 
 	//! Renderer that created it is destroyed.
 	//!
+	//! This method never fails, but the texture returned might have the Error status.
+	//! Even in that case, the texture can be bound, but a placeholder 
+	//! texture will be used internally instead.
+	//!
 	//! @param  filename    File name or URL of the image to load the texture from.
 	//!                     If it's a file and it's not found, it's searched for in
 	//!                     the textures/ directory. Some renderer backends might also 
@@ -412,7 +416,7 @@ public:
 	//!                     thread and LazyAsynchronous starts loading it when it's
 	//!                     first needed.
 	//!
-	//! @return New texture on success, or NULL on failure.
+	//! @return New texture.
 	//!
 	//! @note Some renderer backends only support textures with power of two 
 	//!       dimensions (e.g. 512x512 or 2048x256). On these backends, loading 

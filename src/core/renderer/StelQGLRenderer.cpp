@@ -13,20 +13,24 @@ void StelQGLRenderer::bindTextureBackend
 				  "Trying to bind a texture created by a different renderer backend");
 
 	const TextureStatus status = qglTextureBackend->getStatus();
-	if(status == TextureStatus_Loaded)
-	{
-		// Ignore the texture if we don't have enough texture units
-		// or if texture unit is nonzero and we don't support multitexturing.
-		if(textureUnit >= getTextureUnitCount())
-		{
-			invariant();
-			return;
-		}
-		qglTextureBackend->bind(textureUnit);
-	}
 	if(status == TextureStatus_Uninitialized)
 	{
 		qglTextureBackend->startAsynchronousLoading();
+	}
+	// Ignore the texture if we don't have enough texture units
+	// or if texture unit is nonzero and we don't support multitexturing.
+	if(textureUnit >= getTextureUnitCount())
+	{
+		invariant();
+		return;
+	}
+	if(status == TextureStatus_Loaded)
+	{
+		qglTextureBackend->bind(textureUnit);
+	}
+	else
+	{
+		getPlaceholderTexture()->bind(textureUnit);
 	}
 	invariant();
 }
@@ -59,8 +63,11 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 
 	if(fullPath.isEmpty())
 	{
-		qWarning() << "createTextureBackend failed: file not found. Returning NULL.";
-		return NULL;
+		QImage image;
+		// Texture in error state will be returned (loaded from NULL image), and
+		// when bound, the placeholder texture will be used.
+		qWarning() << "createTextureBackend failed: file \"" << filename << "\" not found.";
+		return StelQGLTextureBackend::constructFromImage(this, filename, params, image);
 	}
 
 	StelQGLTextureBackend* cached = textureCache.get(fullPath, loadingMode);
@@ -80,11 +87,11 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 			QImage image = QImage(fullPath);
 			if(image.isNull())
 			{
-				qWarning() << "createTextureBackend failed: found image file " << fullPath
-				           << " but failed to load image data.";
-				return NULL;
+				// Texture in error state will be returned (loaded from NULL image), and
+				// when bound, the placeholder texture will be used.
+				qWarning() << "createTextureBackend failed: found image file \"" << fullPath
+				           << "\" but failed to load image data. ";
 			}
-
 			//Uploads to GL
 			result = StelQGLTextureBackend::constructFromImage(this, fullPath, params, image);
 		}
