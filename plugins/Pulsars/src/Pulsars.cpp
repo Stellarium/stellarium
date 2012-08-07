@@ -24,7 +24,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelIniParser.hpp"
 #include "StelFileMgr.hpp"
@@ -82,7 +81,9 @@ Q_EXPORT_PLUGIN2(Pulsars, PulsarsStelPluginInterface)
  Constructor
 */
 Pulsars::Pulsars()
-	: progressBar(NULL)
+	: texPointer(NULL)
+	, markerTexture(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
@@ -100,8 +101,14 @@ Pulsars::~Pulsars()
 void Pulsars::deinit()
 {
 	psr.clear();
-	Pulsar::markerTexture.clear();
-	texPointer.clear();
+	if(NULL != markerTexture)
+	{
+		delete markerTexture;
+	}
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 /*
@@ -137,9 +144,6 @@ void Pulsars::init()
 		readSettingsFromConfig();
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
-
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
-		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
 		// TRANSLATORS: Title of a group of key bindings in the Help window
@@ -206,7 +210,11 @@ void Pulsars::draw(StelCore* core, StelRenderer* renderer)
 	{
 		if (pulsar && pulsar->initialized)
 		{
-			pulsar->draw(core, renderer, prj);
+			if(NULL == markerTexture)
+			{
+				markerTexture = renderer->createTexture(":/Pulsars/pulsar.png");
+			}
+			pulsar->draw(core, renderer, prj, markerTexture);
 		}
 	}
 
@@ -233,6 +241,10 @@ void Pulsars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP
 
 		const Vec3f& c(obj->getInfoColor());
 		renderer->setGlobalColor(c[0], c[1], c[2]);
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur2.png");
+		}
 		texPointer->bind();
 		renderer->setBlendMode(BlendMode_Alpha);
 		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 26.0f,

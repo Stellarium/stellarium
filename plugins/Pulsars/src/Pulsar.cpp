@@ -21,7 +21,6 @@
 #include "StelObject.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
@@ -36,8 +35,6 @@
 #include <QList>
 
 #define PSR_INERTIA 1.0e45 /* Typical moment of inertia for a pulsar */
-
-StelTextureSP Pulsar::markerTexture;
 
 Pulsar::Pulsar(const QVariantMap& map)
 		: initialized(false)
@@ -333,7 +330,8 @@ void Pulsar::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Pulsar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Pulsar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector,
+                  StelTextureNew* markerTexture)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
@@ -346,7 +344,7 @@ void Pulsar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP project
 
 	if (mag <= sd->getLimitMagnitude())
 	{
-		Pulsar::markerTexture->bind();
+		markerTexture->bind();
 		const float size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 		const float shift = 5.f + size/1.6f;
 		if (labelsFader.getInterstate()<=0.f)

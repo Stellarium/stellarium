@@ -22,7 +22,6 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
-#include "StelTextureTypes.hpp"
 #include "Pulsar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -178,7 +177,8 @@ private:
 
 	QString jsonCatalogPath;
 
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
+	class StelTextureNew* markerTexture;
 	QList<PulsarP> psr;
 
 	// variables and functions for the updater
