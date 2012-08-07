@@ -21,7 +21,6 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "Supernova.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -101,7 +100,7 @@ private:
 
 	QString sneJsonPath;
 
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
 	QList<SupernovaP> snstar;
 
 };
