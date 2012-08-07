@@ -27,7 +27,6 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
 
 
