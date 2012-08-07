@@ -71,8 +71,8 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
 
 Satellites::Satellites()
-	: texPointer(NULL)
-	, hintTexture(NULL)
+	: hintTexture(NULL)
+	, texPointer(NULL)
 	, pxmapGlow(NULL)
 	, pxmapOnIcon(NULL)
 	, pxmapOffIcon(NULL)
