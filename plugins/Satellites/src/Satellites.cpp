@@ -26,7 +26,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Satellites.hpp"
 #include "Satellite.hpp"
@@ -72,9 +71,16 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
 
 Satellites::Satellites()
-	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
-	  earth(NULL), defaultHintColor(0.0, 0.4, 0.6), defaultOrbitColor(0.0, 0.3, 0.6),
-	  progressBar(NULL)
+	: texPointer(NULL)
+	, hintTexture(NULL)
+	, pxmapGlow(NULL)
+	, pxmapOnIcon(NULL)
+	, pxmapOffIcon(NULL)
+	, toolbarButton(NULL)
+	, earth(NULL)
+	, defaultHintColor(0.0, 0.4, 0.6)
+	, defaultOrbitColor(0.0, 0.3, 0.6)
+	, progressBar(NULL)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -82,8 +88,14 @@ Satellites::Satellites()
 
 void Satellites::deinit()
 {
-	Satellite::hintTexture.clear();
-	texPointer.clear();
+	if(NULL != hintTexture)
+	{
+		delete hintTexture;
+	}
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 Satellites::~Satellites()
@@ -120,8 +132,6 @@ void Satellites::init()
 		satellitesJsonPath = StelFileMgr::findFile("modules/Satellites", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/satellites.json";
 
 		// Load and find resources used in the plugin
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");
-		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
 		// key bindings and other actions
 		// TRANSLATORS: Title of a group of key bindings in the Help window
@@ -1119,13 +1129,18 @@ void Satellites::draw(StelCore* core, StelRenderer* renderer)
 	Satellite::hintBrightness = hintFader.getInterstate();
 
 	renderer->setBlendMode(BlendMode_Alpha);
-	Satellite::hintTexture->bind();
+
+	if(NULL == hintTexture)
+	{
+		hintTexture = renderer->createTexture(":/satellites/hint.png");
+	}
+	hintTexture->bind();
 	Satellite::viewportHalfspace = prj->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->visible)
 		{
-			sat->draw(core, renderer, prj);
+			sat->draw(core, renderer, prj, hintTexture);
 		}
 	}
 
@@ -1152,6 +1167,10 @@ void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
 			return;
 		}
 		renderer->setGlobalColor(0.4f, 0.5f, 0.8f);
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur5.png");
+		}
 		texPointer->bind();
 
 		renderer->setBlendMode(BlendMode_Alpha);
