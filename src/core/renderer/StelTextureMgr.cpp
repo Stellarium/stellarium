@@ -60,9 +60,9 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 {
 	if (afilename.isEmpty()) {return StelTextureSP();}
 	
-	// StelTexture is just a thin wrapper around StelTextureBackend now.
-	StelTextureBackend* backend = 
-		renderer->createTextureBackend(afilename, params, TextureLoadingMode_Normal);
+	// StelTexture is just a thin wrapper around StelTextureNew now.
+	StelTextureNew* backend = 
+		renderer->createTexture(afilename, params, TextureLoadingMode_Normal);
 	if(NULL == backend) {return StelTextureSP();}
 
 	return StelTextureSP(new StelTexture(backend, renderer));
@@ -74,8 +74,8 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 
 	const TextureLoadingMode mode = lazyLoading ? TextureLoadingMode_Asynchronous 
 		                                         : TextureLoadingMode_LazyAsynchronous;
-	// StelTexture is just a thin wrapper around StelTextureBackend now.
-	StelTextureBackend* backend = renderer->createTextureBackend(url, params, mode);
+	// StelTexture is just a thin wrapper around StelTextureNew now.
+	StelTextureNew* backend = renderer->createTexture(url, params, mode);
 	if(NULL == backend) {return StelTextureSP();}
 
 	return StelTextureSP(new StelTexture(backend, renderer));

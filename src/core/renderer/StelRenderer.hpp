@@ -13,7 +13,8 @@
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelTexture.hpp"
-#include "StelTextureBackend.hpp"
+#include "StelTextureNew.hpp"
+#include "StelTextureNew.hpp"
 #include "StelTextureParams.hpp"
 
 //! Pixel blending modes.
@@ -223,6 +224,8 @@ struct TextParams
 //!       as it might be used in multiple inheritance.
 class StelRenderer
 {
+// For destroyTextureBackend() and bindTextureBackend()
+friend class StelTextureNew;
 public:
 	//! Destructor.
 	virtual ~StelRenderer(){};
@@ -377,14 +380,6 @@ public:
 	//! Set font to use for drawing text.
 	virtual void setFont(const QFont& font) = 0;
 
-	//! Bind a texture (following draw calls will use this texture on specified texture unit).
-	//!
-	//! @param  textureBackend Texture to bind.
-	//! @param  textureUnit Texture unit to use. 
-	//!                     If multitexturing is not supported, 
-	//!                     binds to texture units other than 0 are ignored.
-	virtual void bindTexture(class StelTextureBackend* textureBackend, const int textureUnit) = 0;
-
 	//! Render a single frame.
 	//!
 	//! This might not render the entire frame - if rendering takes too long,
@@ -396,14 +391,10 @@ public:
 	//! @see StelRenderClient
 	virtual void renderFrame(StelRenderClient& renderClient) = 0;
 	
-	// GL-REFACTOR: Both of these will be hidden behind a createTexture() and 
-	// the new StelTexture's dtor
-
-	//! Create a StelTextureBackend from specified file or URL.
+	//! Create a texture from specified file or URL.
 	//!
-	//! StelTextureBackend created here must be destroyed 
-	//! by calling destroyTextureBackend of the same renderer.
-	//! This allows things like texture caching to work.
+	//! Texture created must be destroyed by the user before the 
+	//! Renderer that created it is destroyed.
 	//!
 	//! @param  filename    File name or URL of the image to load the texture from.
 	//!                     If it's a file and it's not found, it's searched for in
@@ -421,19 +412,19 @@ public:
 	//!                     thread and LazyAsynchronous starts loading it when it's
 	//!                     first needed.
 	//!
-	//! @return New texture backend on success, or NULL on failure.
+	//! @return New texture on success, or NULL on failure.
 	//!
 	//! @note Some renderer backends only support textures with power of two 
 	//!       dimensions (e.g. 512x512 or 2048x256). On these backends, loading 
 	//!       a texture with non-power-of-two dimensions will fail and result 
-	//!       in a StelTextureBackend with status of TextureStatus_Error.
-	StelTextureBackend* createTextureBackend
+	//!       in a StelTextureNew with status of TextureStatus_Error.
+	StelTextureNew* createTexture
 		(const QString& filename, const StelTextureParams& params, 
 		 const TextureLoadingMode loadingMode)
 	{
 		//This function tests preconditions and calls implementation.
 		Q_ASSERT_X(!filename.endsWith(".pvr"), Q_FUNC_INFO,
-		           "createTextureBackend() can't load a PVR texture directly, as PVR "
+		           "createTexture() can't load a PVR texture directly, as PVR "
 		           "support may not be implemented by all Renderer backends. Request "
 		           "a non-PVR texture, and if a PVR version exists and the backend "
 		           "supports it, it will be loaded.");
@@ -444,7 +435,7 @@ public:
 		           "When loading a texture from network, texture loading mode must be "
 		           "Asynchronous or LazyAsynchronous");
 
-		return createTextureBackend_(filename, params, loadingMode);
+		return new StelTextureNew(this, createTextureBackend_(filename, params, loadingMode));
 	}
 
 	//! Get a texture of the viewport, with everything drawn to the viewport so far.
@@ -455,13 +446,10 @@ public:
 	//! (returned by getViewportSize) will be used.
 	//!
 	//! @return Viewport texture.
-	StelTexture* getViewportTexture()
+	StelTextureNew* getViewportTexture()
 	{
-		return new StelTexture(getViewportTextureBackend(), this);
+		return new StelTextureNew(this, getViewportTextureBackend());
 	}
-
-	//! Destroy a StelTextureBackend.
-	virtual void destroyTextureBackend(StelTextureBackend* backend) = 0;
 
 	//! Create a GLSL shader.
 	//!
@@ -588,7 +576,21 @@ protected:
 	//! Implementation of getViewportTexture.
 	//!
 	//! @see getViewportTexture.
-	virtual StelTextureBackend* getViewportTextureBackend() = 0;
+	virtual class StelTextureBackend* getViewportTextureBackend() = 0;
+
+	//! Destroy a StelTextureBackend.
+	//!
+	//! The backend might be destroyed, but the implementation might 
+	//! also cache the texture, not destroying it if it has muliple users.
+	virtual void destroyTextureBackend(class StelTextureBackend* backend) = 0;
+
+	//! Bind a texture (following draw calls will use this texture on specified texture unit).
+	//!
+	//! @param  textureBackend Texture to bind.
+	//! @param  textureUnit Texture unit to use. 
+	//!                     If multitexturing is not supported, 
+	//!                     binds to texture units other than 0 are ignored.
+	virtual void bindTextureBackend(class StelTextureBackend* textureBackend, const int textureUnit) = 0;
 
 private:
 	//! A plain, position-only 2D vertex.

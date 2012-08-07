@@ -128,7 +128,7 @@ public:
 		viewport.setFont(font);
 	}
 
-	virtual void bindTexture(StelTextureBackend* const textureBackend, const int textureUnit);
+	virtual void bindTextureBackend(StelTextureBackend* const textureBackend, const int textureUnit);
 
 	virtual void destroyTextureBackend(StelTextureBackend* const textureBackend);
 

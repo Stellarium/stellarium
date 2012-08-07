@@ -24,12 +24,16 @@
 #include <QImage>
 #include <QtOpenGL>
 
-#include "StelTextureBackend.hpp"
+#include "StelTextureNew.hpp"
 #include "StelTextureParams.hpp"
 #include "StelTextureTypes.hpp"
 
 //! @class StelTexture
 //! Texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
+//!
+//! This class is obsolete. New code should use StelTextureNew instead.
+//!
+//! @sa StelTextureNew
 //! @sa StelTextureSP
 class StelTexture : public QObject
 {
@@ -71,7 +75,7 @@ public:
 
 private:
 	//! Texture backend at Renderer side.
-	StelTextureBackend* textureBackend;
+	StelTextureNew* textureBackend;
 
 	//! Renderer that constructed the texture backend.
 	class StelRenderer* renderer;
@@ -81,7 +85,7 @@ private:
 	friend class StelRenderer;
 
 	//! Private constructor (so only StelTextureMgr can construct this).
-	StelTexture(StelTextureBackend* backend, class StelRenderer* renderer);
+	StelTexture(StelTextureNew* backend, class StelRenderer* renderer);
 };
 
 

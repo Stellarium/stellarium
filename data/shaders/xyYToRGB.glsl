@@ -98,7 +98,7 @@ void main()
 
 		// Convert from xyY to XZY
 		// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-
+		mediump vec3 tmp = vec3(tempColor[0] * tempColor[2] / tempColor[1], tempColor[2], (1. - tempColor[0] - tempColor[1]) * tempColor[2] / tempColor[1]);
 		resultSkyColor = vec4(2.04148*tmp.x-0.564977*tmp.y-0.344713*tmp.z, -0.969258*tmp.x+1.87599*tmp.y+0.0415557*tmp.z, 0.0134455*tmp.x-0.118373*tmp.y+1.01527*tmp.z, 1.);
 		resultSkyColor*=brightnessScale;
 	}

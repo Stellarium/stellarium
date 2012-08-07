@@ -3,7 +3,7 @@
 #include "StelQGLRenderer.hpp"
 #include "StelLocaleMgr.hpp"
 
-void StelQGLRenderer::bindTexture
+void StelQGLRenderer::bindTextureBackend
 	(StelTextureBackend* const textureBackend, const int textureUnit)
 {
 	invariant();
@@ -183,14 +183,14 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 		// If using FBO, we still need to put it on the screen.
 		if(viewport.useFBO())
 		{
-			StelTexture* screenTexture = getViewportTexture();
-			int texWidth, texHeight;
-			screenTexture->getDimensions(texWidth, texHeight);
+			StelTextureNew* screenTexture = getViewportTexture();
+			const QSize size = screenTexture->getDimensions();
 
 			glDisable(GL_BLEND);
 			setGlobalColor(Vec4f(1.0f, 1.0f, 1.0f, 1.0f));
 			screenTexture->bind();
-			drawTexturedRect(0, 0, texWidth, texHeight);
+			drawTexturedRect(0, 0, size.width(), size.height());
+			delete screenTexture;
 		}
 		// If not using FBO, the result is already drawn to the screen.
 	}
