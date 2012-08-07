@@ -81,8 +81,6 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position
 
-	static StelTextureSP hintTexture;
-
 	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
 	//! Calculate a color of quasar
 	//! @param b_v value of B-V color index
