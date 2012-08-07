@@ -28,14 +28,13 @@
 #include "renderer/GenericVertexTypes.hpp"
 #include "renderer/StelGeometryBuilder.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTexture.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
 #include "sideral_time.h"
-#include "renderer/StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -44,10 +43,94 @@
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
-StelTextureSP Planet::hintCircleTex;
-StelTextureSP Planet::texEarthShadow;
+
+SharedPlanetGraphics::~SharedPlanetGraphics()
+{
+	if(!initialized){return;}
+	delete texEarthShadow;
+	delete texHintCircle;
+	if(NULL != planetShader) {delete planetShader;}
+	initialized = false;
+}
+
+static StelGLSLShader* loadPlanetShader(StelRenderer* renderer)
+{
+	StelGLSLShader* planetShader = renderer->createGLSLShader();
+	if(!planetShader->addVertexShader(
+	  "attribute mediump vec4 vertex;\n"
+	  "attribute mediump vec4 unprojectedVertex;\n"
+	  "attribute mediump vec2 texCoord;\n"
+	  "uniform mediump mat4 projectionMatrix;\n"
+	  "uniform highp vec3 lightPos;\n"
+	  "uniform highp float oneMinusOblateness;\n"
+	  "uniform highp float radius;\n"
+	  "uniform mediump vec4 ambientLight;\n"
+	  "uniform mediump vec4 diffuseLight;\n"
+	  "varying mediump vec2 texc;\n"
+	  "varying mediump vec4 litColor;\n"
+	  "void main(void)\n"
+	  "{\n"
+	  "    gl_Position = projectionMatrix * vertex;\n"
+	  "    texc = texCoord;\n"
+	  "    // Must be a separate variable due to Intel drivers\n"
+	  "    vec4 normal = unprojectedVertex / radius;\n"
+	  "    float c = lightPos.x * normal.x * oneMinusOblateness +\n"
+	  "              lightPos.y * normal.y * oneMinusOblateness +\n"
+	  "              lightPos.z * normal.z / oneMinusOblateness;\n"
+	  "    litColor = clamp(c, 0.0f, 0.5) * diffuseLight + ambientLight;\n"
+	  "}\n"))
+	{
+		qWarning() << "Error adding planet vertex shader: " << planetShader->log();
+		delete planetShader;
+		return NULL;
+	}
+	if(!planetShader->addFragmentShader(
+	  "varying mediump vec2 texc;\n"
+	  "varying mediump vec4 litColor;\n"
+	  "uniform sampler2D tex;\n"
+	  "uniform mediump vec4 globalColor;\n"
+	  "void main(void)\n"
+	  "{\n"
+	  "    gl_FragColor = texture2D(tex, texc) * litColor;\n"
+	  "}\n"))
+	{
+		qWarning() << "Error adding planet fragment shader: " << planetShader->log();
+		delete planetShader;
+		return NULL;
+	}
+	if(!planetShader->build())
+	{
+		qWarning() << "Error building shader: " << planetShader->log();
+		delete planetShader;
+		return NULL;
+	}
+	if(!planetShader->log().isEmpty())
+	{
+		qDebug() << "Planet shader build log: " << planetShader->log();
+	}
+	return planetShader;
+}
+
+void SharedPlanetGraphics::lazyInit(StelRenderer* renderer)
+{
+	if(initialized){return;}
+	texHintCircle  = renderer->createTexture("textures/planet-indicator.png");
+	texEarthShadow = renderer->createTexture("textures/earth-shadow.png");
+
+	if(renderer->isGLSLSupported())
+	{
+		planetShader = loadPlanetShader(renderer);
+		if(NULL == planetShader)
+		{
+			qWarning() << "Failed to load planet shader, falling back to CPU implementation";
+		}
+	}
+
+	initialized = true;
+}
+
 Planet::Planet(const QString& englishName,
-               int flagLighting,
+               int flagLighting,        
                double radius,
                double oblateness,
                Vec3f color,
@@ -62,7 +145,9 @@ Planet::Planet(const QString& englishName,
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
-	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
+	  color(color), albedo(albedo), axisRotation(0.),
+	  texture(NULL),
+	  rings(NULL),
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
@@ -83,14 +168,6 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-
-	const StelTextureParams textureParams = 
-		StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
-	texMap = texMapName == "" 
-          ? StelTextureSP() 
-	       : StelApp::getInstance().getTextureManager()
-	                               .createTextureThread("textures/"+texMapName, 
-	                                                    textureParams);
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -127,6 +204,11 @@ Planet::~Planet()
 		           "Both lit and unlit spheres have been generated");
 		delete unlitSphere;
 		unlitSphere = NULL;
+	}
+	if(NULL != texture)
+	{
+		delete texture;
+		texture = NULL;
 	}
 }
 
@@ -770,7 +852,8 @@ double Planet::getSpheroidAngularSize(const StelCore* core) const
 
 // Draw the Planet and all the related infos : name, circle etc..
 void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, 
-                  const QFont& planetNameFont, StelGLSLShader* planetShader)
+                  const QFont& planetNameFont,
+                  SharedPlanetGraphics& planetGraphics)
 {
 	if (hidden)
 		return;
@@ -822,14 +905,15 @@ void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels,
 		{
 			labelsFader=false;
 		}
-		drawHints(core, renderer, planetNameFont);
+		drawHints(core, renderer, planetNameFont, planetGraphics);
 
-		draw3dModel(core, renderer, planetShader, transfo, screenSz);
+		draw3dModel(core, renderer, planetGraphics, transfo, screenSz);
 	}
 	return;
 }
 
-void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader* planetShader, 
+void Planet::draw3dModel(StelCore* core, StelRenderer* renderer,
+                         SharedPlanetGraphics& planetGraphics,
                          StelProjector::ModelViewTranformP transfo, float screenSz)
 {
 	// This is the main method drawing a planet 3d model
@@ -865,7 +949,8 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader*
 
 			renderer->clearDepthBuffer();
 			renderer->setDepthTest(DepthTest_ReadWrite);
-			drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
+			drawSphere(renderer, projector, flagLighting ? &light : NULL, 
+			           planetGraphics.planetShader, screenSz);
 			renderer->setDepthTest(DepthTest_ReadOnly);
 			rings->draw(projector, renderer, transfo, screenSz);
 			renderer->setDepthTest(DepthTest_Disabled);
@@ -881,14 +966,16 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader*
 				// TODO: moon magnitude label during eclipse isn't accurate...
 				renderer->clearStencilBuffer();
 				renderer->setStencilTest(StencilTest_Write_1);
-				drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
+				drawSphere(renderer, projector, flagLighting ? &light : NULL, 
+				           planetGraphics.planetShader, screenSz);
 				renderer->setStencilTest(StencilTest_Disabled);
-				drawEarthShadow(core, renderer);
+				drawEarthShadow(core, renderer, planetGraphics);
 			}
 			else
 			{
 				// Normal planet
-				drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
+				drawSphere(renderer, projector, flagLighting ? &light : NULL, 
+				           planetGraphics.planetShader, screenSz);
 			}
 		}
 	}
@@ -921,14 +1008,16 @@ void Planet::drawUnlitSphere(StelRenderer* renderer, StelProjectorP projector)
 void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
                         const StelLight* light, StelGLSLShader* shader, float screenSz)
 {
-	if (texMap)
+	if(texMapName == "") {return;}
+	if(NULL == texture)
 	{
-		// For lazy loading, return if texture not yet loaded
-		if (!texMap->bind())
-		{
-			return;
-		}
+		const StelTextureParams textureParams = 
+			StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
+		texture = renderer->createTexture("textures/" + texMapName, textureParams,
+		                                  TextureLoadingMode_LazyAsynchronous);
 	}
+	texture->bind();
+	
 	renderer->setBlendMode(BlendMode_None);
 	renderer->setCulledFaces(CullFace_Back);
 
@@ -999,7 +1088,8 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
-void Planet::drawEarthShadow(StelCore* core, StelRenderer* renderer)
+void Planet::drawEarthShadow(StelCore* core, StelRenderer* renderer, 
+                             SharedPlanetGraphics& planetGraphics)
 {
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	Vec3d e = ssm->getEarth()->getEclipticPos();
@@ -1038,7 +1128,7 @@ void Planet::drawEarthShadow(StelCore* core, StelRenderer* renderer)
 	renderer->setStencilTest(StencilTest_DrawIf_1);
 
 	// shadow radial texture
-	texEarthShadow->bind();
+	planetGraphics.texEarthShadow->bind();
 
 	// Draw umbra first
 	StelVertexBuffer<VertexP3T2>* umbra =
@@ -1082,7 +1172,8 @@ void Planet::drawEarthShadow(StelCore* core, StelRenderer* renderer)
 	renderer->clearStencilBuffer();
 }
 
-void Planet::drawHints(const StelCore* core, StelRenderer* renderer, const QFont& planetNameFont)
+void Planet::drawHints(const StelCore* core, StelRenderer* renderer, 
+                       const QFont& planetNameFont, SharedPlanetGraphics& planetGraphics)
 {
 	if (labelsFader.getInterstate()<=0.f)
 		return;
@@ -1107,16 +1198,17 @@ void Planet::drawHints(const StelCore* core, StelRenderer* renderer, const QFont
 
 	// Draw the 2D small circle
 	renderer->setBlendMode(BlendMode_Alpha);
-	Planet::hintCircleTex->bind();
+	planetGraphics.texHintCircle->bind();
 	renderer->drawTexturedRect(screenPos[0] - 11, screenPos[1] - 11, 22, 22);
 }
 
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
 	 : radiusMin(radiusMin)
 	 , radiusMax(radiusMax)
+	 , texName(texname)
+	 , texture(NULL)
 	 , ring(NULL)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture("textures/"+texname);
 }
 
 Ring::~Ring(void)
@@ -1126,11 +1218,20 @@ Ring::~Ring(void)
 		delete ring;
 		ring = NULL;
 	}
+	if(NULL != texture)
+	{
+		delete texture;
+		texture = NULL;
+	}
 }
 
 void Ring::draw(StelProjectorP projector, StelRenderer* renderer, 
                 StelProjector::ModelViewTranformP transfo, double screenSz)
 {
+	if(NULL == texture)
+	{
+		texture = renderer->createTexture("textures/" + texName);
+	}
 	screenSz -= 50;
 	screenSz /= 250.0;
 	if (screenSz < 0.0) screenSz = 0.0;
@@ -1142,7 +1243,7 @@ void Ring::draw(StelProjectorP projector, StelRenderer* renderer,
 	renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
 	renderer->setCulledFaces(CullFace_Back);
 
-	if (tex) tex->bind();
+	texture->bind();
 
 	Mat4d mat = transfo->getApproximateLinearTransfo();
 	// solve the ring wraparound by culling:
