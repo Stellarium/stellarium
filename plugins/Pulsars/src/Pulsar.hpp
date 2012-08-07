@@ -86,10 +86,8 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	static StelTextureSP hintTexture;
-	static StelTextureSP markerTexture;
-
-	void draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector);
+	void draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector,
+	          class StelTextureNew* markerTexture);
 
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
