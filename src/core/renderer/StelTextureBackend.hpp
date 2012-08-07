@@ -52,51 +52,35 @@ enum TextureLoadingMode
 	TextureLoadingMode_LazyAsynchronous
 };
 
-//! Texture interface.
+//! Base class for texture implementations.
 //!
-//! Constructed by StelRenderer::createTextureBackend().
-//! To use the texture, it can be bound by StelRenderer::bindTexture().
-//! The texture should be destroyed before the StelRenderer that
-//! constructed it.
-//!
-//! A texture can be in one of 4 states, depending on how
-//! it is loaded. These are Uninitialized, Loading, Loaded, Error.
-//!
-//! Immediately after construction, a texture is in Uninitialized state.
-//! If load mode specified with createTextureBackend is Normal, it
-//! is immediately loaded (internally, it's in Loading state),
-//! and its state changes to Loaded on success or Error if loading failed. 
-//!
-//! The loading stage (and no other stage) might fail, resulting in Error 
-//! state. If in Error state, error message can be retrieved by getErrorMessage.
-//!
-//! If load mode is Asynchronous, the texture is loaded in background 
-//! thread, and during loading its state is Loading. Again, loading might
-//! fail.
-//!
-//! If load mode is LazyAsynchronous, loading only starts once the texture 
-//! is bound (used) for the first time.
+//! @see StelTextureNew
 class StelTextureBackend : public QObject
 {
 	Q_OBJECT
 
 public:
 	//! Destroy the texture. 
-	//!
-	//! It's user's, nor Renderer's, responsibility do destroy the texture.
-	//! Note that the texture must be destroyed before Renderer is destroyed.
 	virtual ~StelTextureBackend(){};
 
 	//! Get the current texture status.
 	//!
-	//! Used e.g. to determine if the texture hsa been loaded or if an error 
+	//! Used e.g. to determine if the texture has been loaded or if an error 
 	//! has occured.
 	//!
 	//! @return texture status.
 	TextureStatus getStatus() const
 	{
-		invariant();
 		return status;
+	}
+
+	//! Get the "name" of this texture.
+	//!
+	//! The name might be the full path if loaded from file, 
+	//! URL if loaded from network, or nothing at all when generated.
+	const QString& getName() const
+	{
+		return path;
 	}
 
 	//! Get texture dimensions in pixels.
@@ -123,15 +107,6 @@ public:
 	{
 		invariant();
 		return errorMessage;
-	}
-
-	//! Get the "name" of this texture.
-	//!
-	//! The name might be the full path if loaded from file, 
-	//! URL if loaded from network, or nothing at all when generated.
-	const QString& getName() const
-	{
-		return path;
 	}
 
 protected:

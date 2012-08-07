@@ -20,7 +20,7 @@
 #include "StelRenderer.hpp"
 #include "StelTexture.hpp"
 
-StelTexture::StelTexture(StelTextureBackend* backend, StelRenderer* renderer) 
+StelTexture::StelTexture(StelTextureNew* backend, StelRenderer* renderer) 
 	: textureBackend(backend)
 	, renderer(renderer)
 {
@@ -28,12 +28,12 @@ StelTexture::StelTexture(StelTextureBackend* backend, StelRenderer* renderer)
 
 StelTexture::~StelTexture()
 {
-	renderer->destroyTextureBackend(textureBackend);
+	delete textureBackend;
 }
 
 bool StelTexture::bind(int textureUnit)
 {
 	if(textureBackend->getStatus() != TextureStatus_Loaded){return false;}
-	renderer->bindTexture(textureBackend, textureUnit);
+	textureBackend->bind(textureUnit);
 	return true;
 }

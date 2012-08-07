@@ -481,13 +481,12 @@ void StelViewportDistorterFisheyeToSphericMirror::drawToViewport(StelRenderer* r
 	// if power-of-two textures are required.
 	// In such cases, we need to adjust texture coordinates
 	// and do that every time screen size is changed.
-	StelTexture* screenTexture = renderer->getViewportTexture();
+	StelTextureNew* screenTexture = renderer->getViewportTexture();
 
 	const QSize viewportSize = renderer->getViewportSize();
-	int texWidth, texHeight;
-	screenTexture->getDimensions(texWidth, texHeight);
-	const QSizeF newMaxTexCoords(viewportSize.width() / static_cast<float>(texWidth),
-	                             viewportSize.height() / static_cast<float>(texHeight));
+	const QSize texSize = screenTexture->getDimensions();
+	const QSizeF newMaxTexCoords(viewportSize.width() / static_cast<float>(texSize.width()),
+	                             viewportSize.height() / static_cast<float>(texSize.height()));
 	if(maxTexCoords != newMaxTexCoords)
 	{
 		recalculateTexCoords(newMaxTexCoords);

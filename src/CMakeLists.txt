@@ -149,6 +149,8 @@ SET(stellarium_lib_SRCS
 	core/renderer/GenericVertexTypes.hpp
 
 	core/renderer/StelTextureParams.hpp
+	core/renderer/StelTextureNew.cpp
+	core/renderer/StelTextureNew.hpp
 	core/renderer/StelTextureBackend.hpp
 	core/renderer/StelTextureCache.hpp
 	core/renderer/StelQGLTextureBackend.cpp
