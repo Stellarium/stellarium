@@ -929,6 +929,5 @@ void StelMainScriptAPI::setSkyLanguage(QString langCode)
 
 void StelMainScriptAPI::goHome()
 {
-	//StelApp::getInstance().getGui()->getGuiActions("actionGo_Home_Global")->activate(QAction::Trigger);
 	emit(requestSetHomePosition());
 }
