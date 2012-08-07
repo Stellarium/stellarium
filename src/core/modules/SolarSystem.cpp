@@ -63,8 +63,6 @@ SolarSystem::SolarSystem()
 	, flagOrbits(false)
 	, flagLightTravelTime(false)
 	, allTrails(NULL)
-	, planetShader(NULL)
-	, disablePlanetShader(false)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
@@ -87,14 +85,6 @@ SolarSystem::~SolarSystem()
 	sun.clear();
 	moon.clear();
 	earth.clear();
-	Planet::hintCircleTex.clear();
-	Planet::texEarthShadow.clear();
-
-	if(NULL != planetShader)
-	{
-		delete planetShader;
-		planetShader = NULL;
-	}
 
 	delete allTrails;
 	allTrails = NULL;
@@ -148,7 +138,6 @@ void SolarSystem::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
-	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("textures/planet-indicator.png");
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -866,9 +855,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		return false;
 	}
 
-	// special case: load earth shadow texture
-	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("textures/earth-shadow.png");
-
 	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits from" << filePath;
 	return true;
 }
@@ -929,67 +915,6 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 	}
 };
 
-bool SolarSystem::loadPlanetShader(StelRenderer* renderer)
-{
-	Q_ASSERT_X(renderer->isGLSLSupported(), Q_FUNC_INFO, 
-	           "Trying to load planet shader but GLSL is not supported");
-	planetShader = renderer->createGLSLShader();
-	if(!planetShader->addVertexShader(
-	  "attribute mediump vec4 vertex;\n"
-	  "attribute mediump vec4 unprojectedVertex;\n"
-	  "attribute mediump vec2 texCoord;\n"
-	  "uniform mediump mat4 projectionMatrix;\n"
-	  "uniform highp vec3 lightPos;\n"
-	  "uniform highp float oneMinusOblateness;\n"
-	  "uniform highp float radius;\n"
-	  "uniform mediump vec4 ambientLight;\n"
-	  "uniform mediump vec4 diffuseLight;\n"
-	  "varying mediump vec2 texc;\n"
-	  "varying mediump vec4 litColor;\n"
-	  "void main(void)\n"
-	  "{\n"
-	  "    gl_Position = projectionMatrix * vertex;\n"
-	  "    texc = texCoord;\n"
-	  "    // Must be a separate variable due to Intel drivers\n"
-	  "    vec4 normal = unprojectedVertex / radius;\n"
-	  "    float c = lightPos.x * normal.x * oneMinusOblateness +\n"
-	  "              lightPos.y * normal.y * oneMinusOblateness +\n"
-	  "              lightPos.z * normal.z / oneMinusOblateness;\n"
-	  "    litColor = clamp(c, 0.0f, 0.5) * diffuseLight + ambientLight;\n"
-	  "}\n"))
-	{
-		qWarning() << "Error adding planet vertex shader: " << planetShader->log();
-		delete planetShader;
-		return false;
-	}
-	if(!planetShader->addFragmentShader(
-	  "varying mediump vec2 texc;\n"
-	  "varying mediump vec4 litColor;\n"
-	  "uniform sampler2D tex;\n"
-	  "uniform mediump vec4 globalColor;\n"
-	  "void main(void)\n"
-	  "{\n"
-	  "    gl_FragColor = texture2D(tex, texc) * litColor;\n"
-	  "}\n"))
-	{
-		qWarning() << "Error adding planet fragment shader: " << planetShader->log();
-		delete planetShader;
-		return false;
-	}
-	if(!planetShader->build())
-	{
-		qWarning() << "Error building shader: " << planetShader->log();
-		delete planetShader;
-		return false;
-	}
-	if(!planetShader->log().isEmpty())
-	{
-		qDebug() << "Planet shader build log: " << planetShader->log();
-	}
-
-	return true;
-}
-
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
@@ -1019,20 +944,12 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 	float maxMagLabel = (core->getSkyDrawer()->getLimitMagnitude()<5.f ? core->getSkyDrawer()->getLimitMagnitude() :
 			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
 
-	if(renderer->isGLSLSupported() && NULL == planetShader && !disablePlanetShader)
-	{
-		if(!loadPlanetShader(renderer))
-		{
-			qWarning() << "Failed to load planet shader, falling back to CPU implementation";
-			disablePlanetShader = true;
-			planetShader = NULL;
-		}
-	}
+	sharedPlanetGraphics.lazyInit(renderer);
 
 	// Draw the elements
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		p->draw(core, renderer, maxMagLabel, planetNameFont, planetShader);
+		p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -1400,7 +1317,6 @@ void SolarSystem::reloadPlanets()
 	sun.clear();
 	moon.clear();
 	earth.clear();
-	Planet::texEarthShadow.clear(); //Loaded in loadPlanets()
 
 	delete allTrails;
 	allTrails = NULL;
