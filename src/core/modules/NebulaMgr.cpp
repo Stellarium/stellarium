@@ -31,12 +31,10 @@
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
-#include "renderer/StelTexture.hpp"
 #include "renderer/StelRenderer.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
-#include "renderer/StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -54,17 +52,18 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
 
-NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false)
+NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false), texPointer(NULL)
 {
 	setObjectName("NebulaMgr");
 }
 
 NebulaMgr::~NebulaMgr()
 {
-	Nebula::texCircle = StelTextureSP();
-	Nebula::texOpenCluster = StelTextureSP();
-	Nebula::texGlobularCluster = StelTextureSP();
-	Nebula::texPlanetNebula = StelTextureSP();
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+		texPointer = NULL;
+	}
 }
 
 /*************************************************************************
@@ -93,11 +92,6 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
-	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");   // Load circle texture
-	Nebula::texOpenCluster = StelApp::getInstance().getTextureManager().createTexture("textures/ocl.png");   // Load open clister marker texture
-	Nebula::texGlobularCluster = StelApp::getInstance().getTextureManager().createTexture("textures/gcl.png");   // Load globular clister marker texture
-	Nebula::texPlanetNebula = StelApp::getInstance().getTextureManager().createTexture("textures/pnb.png");   // Load planetary nebula marker texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
@@ -118,13 +112,15 @@ struct DrawNebulaFuncObject
 {
 	DrawNebulaFuncObject
 		(float amaxMagHints, float amaxMagLabels, StelProjectorP projector,
-		 StelRenderer* renderer, StelCore* aCore, bool acheckMaxMagHints) 
+		 StelRenderer* renderer, StelCore* aCore, bool acheckMaxMagHints,
+		 Nebula::NebulaHintTextures& nebulaHintTextures) 
 		: maxMagHints(amaxMagHints)
 		, maxMagLabels(amaxMagLabels)
 		, projector(projector)
 		, renderer(renderer)
 		, core(aCore)
 		, checkMaxMagHints(acheckMaxMagHints)
+		, nebulaHintTextures(nebulaHintTextures)
 	{
 		angularSizeLimit = 5.0f / projector->getPixelPerRadAtCenter() * 180.0f / M_PI;
 	}
@@ -136,7 +132,7 @@ struct DrawNebulaFuncObject
 			float refmag_add=0; // value to adjust hints visibility threshold.
 			projector->project(n->XYZ,n->XY);
 			n->drawLabel(renderer, projector, maxMagLabels-refmag_add);
-			n->drawHints(renderer, maxMagHints -refmag_add);
+			n->drawHints(renderer, maxMagHints -refmag_add, nebulaHintTextures);
 		}
 	}
 	float maxMagHints;
@@ -146,6 +142,7 @@ struct DrawNebulaFuncObject
 	StelCore* core;
 	float angularSizeLimit;
 	bool checkMaxMagHints;
+	Nebula::NebulaHintTextures& nebulaHintTextures;
 };
 
 // Draw all the Nebulae
@@ -166,7 +163,9 @@ void NebulaMgr::draw(StelCore* core, StelRenderer* renderer)
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
 	
 	renderer->setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, prj, renderer, core, hintsFader.getInterstate()>0.0001);
+	nebulaHintTextures.lazyInit(renderer);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, prj, renderer, core, 
+	                          hintsFader.getInterstate()>0.0001, nebulaHintTextures);
 	nebGrid.processIntersectingRegions(p, func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -189,6 +188,10 @@ void NebulaMgr::drawPointer(const StelCore* core, StelRenderer* renderer)
 		if (!prj->projectInPlace(pos)) return;
 
 		renderer->setGlobalColor(Vec4f(0.4f, 0.5f, 0.8f, 1.0f));
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur5.png");   // Load pointer texture
+		}
 		texPointer->bind();
 
 		renderer->setBlendMode(BlendMode_Alpha);

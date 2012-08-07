@@ -22,8 +22,7 @@
 #include "NebulaMgr.hpp"
 
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTexture.hpp"
-#include "renderer/StelTextureMgr.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
@@ -35,14 +34,35 @@
 #include <QString>
 #include <QTextStream>
 
-StelTextureSP Nebula::texCircle;
-StelTextureSP Nebula::texOpenCluster;
-StelTextureSP Nebula::texGlobularCluster;
-StelTextureSP Nebula::texPlanetNebula;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
+
+Nebula::NebulaHintTextures::~NebulaHintTextures()
+{
+	if(!initialized){return;}
+
+	delete texCircle; 
+	delete texOpenCluster;    
+	delete texGlobularCluster;
+	delete texPlanetaryNebula;   
+	
+	initialized = false;
+}
+
+void Nebula::NebulaHintTextures::lazyInit(StelRenderer* renderer)
+{
+	if(initialized){return;}
+
+	texCircle          = renderer->createTexture("textures/neb.png");   // Load circle texture
+	texOpenCluster     = renderer->createTexture("textures/ocl.png");   // Load open cluster marker texture
+	texGlobularCluster = renderer->createTexture("textures/gcl.png");   // Load globular cluster marker texture
+	texPlanetaryNebula = renderer->createTexture("textures/pnb.png");   // Load planetary nebula marker texture
+
+	initialized = true;
+}
+
 
 Nebula::Nebula() :
 		M_nb(0),
@@ -150,7 +170,7 @@ double Nebula::getCloseViewFov(const StelCore*) const
 	return angularSize>0 ? angularSize * 4 : 1;
 }
 
-void Nebula::drawHints(StelRenderer* renderer, float maxMagHints)
+void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintTextures& hintTextures)
 {
 	if (mag>maxMagHints)
 		return;
@@ -161,19 +181,19 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints)
 	                               circleColor[2] * lum * hintsBrightness, 1));
 	if (nType == 1)
 	{
-		Nebula::texOpenCluster->bind();
+		hintTextures.texOpenCluster->bind();
 	}
 	else if (nType == 2)
 	{
-		Nebula::texGlobularCluster->bind();
+		hintTextures.texGlobularCluster->bind();
 	}
 	else if (nType == 4)
 	{
-		Nebula::texPlanetNebula->bind();
+		hintTextures.texPlanetaryNebula->bind();
 	}
 	else
 	{
-		Nebula::texCircle->bind();
+		hintTextures.texCircle->bind();
 	}
 
 	renderer->drawTexturedRect(XY[0] - 6, XY[1] - 6, 12, 12);
