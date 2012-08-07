@@ -479,11 +479,11 @@ protected:
 		return textureUnitCount;
 	}
 
-	virtual void invariant() const
+	virtual void invariant(const char* const caller = Q_FUNC_INFO) const
 	{
 #ifndef NDEBUG
-		Q_ASSERT_X(initialized, Q_FUNC_INFO, "uninitialized StelQGL2Renderer");
-		StelQGLRenderer::invariant();
+		Q_ASSERT_X(initialized, caller, "uninitialized StelQGL2Renderer");
+		StelQGLRenderer::invariant(caller);
 #endif
 	}
 	
