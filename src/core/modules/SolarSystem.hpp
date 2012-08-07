@@ -306,18 +306,7 @@ private:
 	LinearFader trailFader;
 	Vec3f trailColor;
 
-	//! Load planetShader. 
-	//!
-	//! @param renderer Renderer used to create the shader.
-	//!
-	//! @return true if the shader loaded successfully, false otherwise.
-	bool loadPlanetShader(class StelRenderer* renderer);
-
-	//! Shader used to draw the planet (with lighting), if lighting is used and GLSL is supported.
-	class StelGLSLShader* planetShader;
-
-	//! Don't try to load the planet shader (true if it failed to load).
-	bool disablePlanetShader;
+	Planet::SharedPlanetGraphics sharedPlanetGraphics;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED

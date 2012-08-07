@@ -27,7 +27,6 @@
 #include "VecMath.hpp"
 #include "StelFader.hpp"
 #include "renderer/GenericVertexTypes.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "renderer/StelIndexBuffer.hpp"
 #include "renderer/StelVertexBuffer.hpp"
 #include "StelProjectorType.hpp"
@@ -89,12 +88,13 @@ public:
 private:
 	const double radiusMin;
 	const double radiusMax;
-	StelTextureSP tex;
+
+	const QString texName;
+	class StelTextureNew* texture;
 
 	//! Graphics representation of the ring.
 	class StelGeometryRing* ring;
 };
-
 
 class Planet : public StelObject
 {
@@ -157,10 +157,8 @@ public:
 	//! @param renderer       Renderer used for drawing.
 	//! @param maxMagLabels   Maximum visual magnitude to draw the label at.
 	//! @param planetNameFont Font used to draw the planet label.
-	//! @param planetShader   If not NULL and lighting is enable for the planet, this shader 
-	//!                       handles lighting.
 	void draw(StelCore* core, class StelRenderer* renderer, float maxMagLabels,
-	          const QFont& planetNameFont, class StelGLSLShader* planetShader);
+	          const QFont& planetNameFont, SharedPlanetGraphics& planetGraphics);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -267,24 +265,46 @@ public:
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
 protected:
-	static StelTextureSP texEarthShadow;     // for lunar eclipses
+	//! Stores graphics data that is shared between planets and must be initialized by
+	//! a StelRenderer.
+	struct SharedPlanetGraphics
+	{
+		//! Texture used to draw earth shadow.
+		class StelTextureNew* texEarthShadow;
+		//! Texture used to draw planet hint.
+		class StelTextureNew* texHintCircle;
+		//! Shader used to draw the planet (with lighting), if lighting is used and GLSL is supported.
+		class StelGLSLShader* planetShader;
+		//! Are we initialized yet?
+		bool initialized;
+
+		//! Default constructor - construct uninitialized SharedPlanetGraphics.
+		SharedPlanetGraphics(): initialized(false){}
+
+		//! Destructor - frees resources if initialized.
+		~SharedPlanetGraphics();
+
+		//! Lazily initialize the data, using given renderer to create textures/shader.
+		void lazyInit(class StelRenderer* renderer);
+	};
+
 
 	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(StelCore* core, class StelRenderer* renderer);
+	void drawEarthShadow(StelCore* core, class StelRenderer* renderer, 
+	                     SharedPlanetGraphics& planetGraphics);
 
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
 
 	//! Draw the 3d model. Call the proper functions if there are rings etc. .
 	//!
-	//! @param core         The StelCore object.
-	//! @param renderer     Renderer used for drawing.
-	//! @param planetShader If not NULL and lighting is enabled, this shader is used to handled
-	//!                     lighting.
-	//! @param transfo      Modelview transform.
-	//! @param screenSz     Screen size.
+	//! @param core           The StelCore object.
+	//! @param renderer       Renderer used for drawing.
+	//! @param planetGraphics Graphics resources shared between planets, e.g. planet lighting shader.
+	//! @param transfo        Modelview transform.
+	//! @param screenSz       Screen size.
 	void draw3dModel(StelCore* core, class StelRenderer* renderer, 
-	                 class StelGLSLShader* planetShader,
+	                 SharedPlanetGraphics& planetGraphics,
 	                 StelProjector::ModelViewTranformP transfo, float screenSz);
 
 	//! Draw the unlit sphere model.
@@ -311,7 +331,8 @@ protected:
                    const struct StelLight* light, class StelGLSLShader* shader, float screenSz);
 
 	// Draw the circle and name of the Planet
-	void drawHints(const StelCore* core, class StelRenderer* renderer, const QFont& planetNameFont);
+	void drawHints(const StelCore* core, class StelRenderer* renderer, 
+	               const QFont& planetNameFont, SharedPlanetGraphics& planetGraphics);
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
@@ -332,8 +353,9 @@ protected:
 
 	float albedo;                    // Planet albedo
 	Mat4d rotLocalToParent;
-	float axisRotation;              // Rotation angle of the Planet on it's axis
-	StelTextureSP texMap;            // Planet map texture
+	float axisRotation;              // Rotation angle of the Planet on it's axis 
+
+	class StelTextureNew* texture;   // Planet map texture
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
@@ -359,7 +381,6 @@ protected:
 	class StelGeometrySphere* litSphere;
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex;
 };
 
 #endif // _PLANET_HPP_
