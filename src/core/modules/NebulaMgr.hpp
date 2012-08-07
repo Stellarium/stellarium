@@ -24,11 +24,11 @@
 #include <QString>
 #include <QStringList>
 #include <QFont>
+#include "Nebula.hpp"
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
-#include "renderer/StelTextureTypes.hpp"
 
 class Nebula;
 class StelTranslator;
@@ -196,9 +196,12 @@ private:
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 
 	//! The selection pointer texture
-	StelTextureSP texPointer;
+	StelTextureNew* texPointer;
 	
 	QFont nebulaFont;      // Font used for names printing
+
+	//! Textures used to draw nebula hints.
+	Nebula::NebulaHintTextures nebulaHintTextures;
 };
 
 #endif // _NEBULAMGR_HPP_
