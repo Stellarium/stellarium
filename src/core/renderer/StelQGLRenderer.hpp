@@ -146,6 +146,24 @@ public:
 
 	virtual void bindTextureBackend(StelTextureBackend* const textureBackend, const int textureUnit);
 
+
+	//! Must be called by texture backend destructor to ensure we don't keep any pointers to it.
+	//!
+	//! Not called by destroyTextureBackend as texture backends are constructed and 
+	//! destroyed internally (e.g. by drawText).
+	void ensureTextureNotBound(StelTextureBackend* const textureBackend)
+	{
+		for(int t; t < STELQGLRENDERER_MAX_TEXTURE_UNITS; ++t)
+		{
+			if(currentlyBoundTextures[t] == textureBackend)
+			{
+				currentlyBoundTextures[t] = NULL;
+				glActiveTexture(GL_TEXTURE0 + t);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
+		}
+	}
+
 	virtual void destroyTextureBackend(StelTextureBackend* const textureBackend);
 
 	virtual void setGlobalColor(const Vec4f& color)
@@ -252,8 +270,11 @@ public:
 	virtual bool areNonPowerOfTwoTexturesSupported() const = 0;
 
 protected:
-	virtual StelTextureBackend* createTextureBackend_
+	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode);
+
+	virtual class StelTextureBackend* createTextureBackend
+		(QImage& image, const StelTextureParams& params);
 
 	virtual StelTextureBackend* getViewportTextureBackend()
 	{
