@@ -32,6 +32,9 @@ enum TextureStatus
 	TextureStatus_Error
 };
 
+//! Return string representation of a texture status.
+QString textureStatusName(const TextureStatus status);
+
 //! Enumerates ways to load a texture.
 enum TextureLoadingMode
 {
@@ -166,10 +169,7 @@ protected:
 		if(status != TextureStatus_Loading)
 		{
 			qWarning() << "Unexpected error - texture " << path;
-			qWarning() << (status == TextureStatus_Uninitialized ? "Uninitialized" :
-			               status == TextureStatus_Error         ? "Error" :
-			               status == TextureStatus_Loaded        ? "Loaded" :
-			                                                       "Unknown");
+			qWarning() << "Texture status: " << textureStatusName(status);
 			Q_ASSERT_X(false, Q_FUNC_INFO,
 			           "The only time an error can occur with a texture is during loading");
 		}
