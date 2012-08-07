@@ -33,7 +33,6 @@ StelTexture::~StelTexture()
 
 bool StelTexture::bind(int textureUnit)
 {
-	if(textureBackend->getStatus() != TextureStatus_Loaded){return false;}
 	textureBackend->bind(textureUnit);
-	return true;
+	return textureBackend->getStatus() == TextureStatus_Loaded;
 }

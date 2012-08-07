@@ -48,6 +48,7 @@ public:
 		, stencilTest(StencilTest_Disabled)
 		, blendMode(BlendMode_None)
 		, culledFaces(CullFace_None)
+		, placeholderTexture(NULL)
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
@@ -58,8 +59,17 @@ public:
 		invariant();
 		loaderThread->quit();
 
+		if(NULL != placeholderTexture)
+		{
+			delete placeholderTexture;
+			placeholderTexture = NULL;
+		}
 		textTextureCache.clear();
-		if(NULL != textBuffer) {delete textBuffer;}
+		if(NULL != textBuffer) 
+		{
+			delete textBuffer;
+			textBuffer = NULL;
+		}
 
 		// This causes crashes for some reason 
 		// (perhaps it is already destroyed by QT? - didn't find that in the docs).
@@ -251,12 +261,12 @@ protected:
 	//! Asserts that we're in a valid state.
 	//!
 	//! Overriding methods should also call StelGLRenderer::invariant().
-	virtual void invariant() const
+	virtual void invariant(const char* const caller = Q_FUNC_INFO) const
 	{
 #ifndef NDEBUG
-		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO,
+		Q_ASSERT_X(NULL != glContext, caller,
 		           "An attempt to use a destroyed StelQGLRenderer.");
-		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "The GL context is invalid");
+		Q_ASSERT_X(glContext->isValid(), caller, "The GL context is invalid");
 #endif
 	}
 	
@@ -322,6 +332,27 @@ private:
 	//! @param params  Text drawing parameters.
 	//! @param painter QPainter used for painting to the viewport.
 	void drawTextGravityHelper(const TextParams& params, QPainter& painter);
+
+	//! Get the placeholder texture, lazily loading if it's not loaded yet.
+	StelQGLTextureBackend* getPlaceholderTexture()
+	{
+		if(NULL != placeholderTexture) {return placeholderTexture;}
+
+		const int placeholderSize = 512;
+		const int cellSize = 16;
+		QImage image(placeholderSize, placeholderSize, QImage::Format_RGB888);
+		for(int y = 0; y < placeholderSize; ++y)
+		{
+			for (int x = 0; x < placeholderSize; x++) 
+			{
+				image.setPixel(x, y, (x / cellSize) % 2 == (y / cellSize) % 2 ? 0 : 0x00FFFF00);
+			}
+		}
+		placeholderTexture = 
+			StelQGLTextureBackend::constructFromImage(this, QString(), StelTextureParams(), image);
+
+		return placeholderTexture;
+	}
 	
 	// Must be down due to initializer list order.
 protected:
@@ -339,6 +370,9 @@ protected:
 
 	//! Determines whether front or back faces are culled, if any are culled at all.
 	CullFace culledFaces;
+
+	//! Texture used as a fallback when texture loading fails or a texture can't be bound.
+	StelQGLTextureBackend* placeholderTexture;
 };
 
 #endif // _STELQGLRENDERER_HPP_
