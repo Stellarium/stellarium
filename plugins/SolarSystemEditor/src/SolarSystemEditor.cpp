@@ -127,7 +127,7 @@ void SolarSystemEditor::update(double) //deltaTime
 	//
 }
 
-void SolarSystemEditor::draw(StelCore*, class StelRenderer* renderer) //core
+void SolarSystemEditor::draw(StelCore*, class StelRenderer*) //core
 {
 	//
 }
