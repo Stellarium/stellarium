@@ -1017,7 +1017,7 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 		                                  TextureLoadingMode_LazyAsynchronous);
 	}
 	texture->bind();
-	
+
 	renderer->setBlendMode(BlendMode_None);
 	renderer->setCulledFaces(CullFace_Back);
 
