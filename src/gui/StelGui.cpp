@@ -255,8 +255,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
-	connect(getGuiActions("actionGo_Home_Global"), SIGNAL(triggered()), this, SLOT(home()));
+	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));	
 
 	initConstellationMgr();
 	initGrindLineMgr();
@@ -303,6 +302,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
 	connect(getGuiActions("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
 	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
+	connect(getGuiActions("actionGo_Home_Global"), SIGNAL(triggered()), core, SLOT(returnToHome()));
 
 	// connect the actor after setting the nightmode.
 	// StelApp::init() already set flagNightMode for us, don't do it twice!
@@ -765,25 +765,6 @@ void StelGui::quit()
 	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
 	#endif
 	QCoreApplication::exit();
-}
-
-void StelGui::home()
-{
-	StelCore* core = StelApp::getInstance().getCore();
-	core->returnToDefaultLocation();
-	
-	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
-
-	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-	PlanetP p = ssm->searchByEnglishName(core->getCurrentLocation().planetName);
-	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
-	landscapeMgr->setFlagFog(p->hasAtmosphere());
-
-	GETSTELMODULE(StelObjectMgr)->unSelect();
-
-	StelMovementMgr* smmgr = core->getMovementMgr();
-	smmgr->setViewDirectionJ2000(core->altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
