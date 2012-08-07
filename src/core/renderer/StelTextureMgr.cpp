@@ -56,7 +56,7 @@ void StelTextureMgr::init()
 
 #include "renderer/StelQGLRenderer.hpp"
 
-StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTextureParams& params)
+StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const TextureParams& params)
 {
 	if (afilename.isEmpty()) {return StelTextureSP();}
 	
@@ -68,7 +68,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	return StelTextureSP(new StelTexture(backend, renderer));
 }
 
-StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTextureParams& params, bool lazyLoading)
+StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const TextureParams& params, bool lazyLoading)
 {
 	if (url.isEmpty()) {return StelTextureSP();}
 

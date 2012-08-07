@@ -184,7 +184,7 @@ void StelSkyImageTile::getTilesToDraw
 		{
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-			tex = texMgr.createTextureThread(absoluteImageURI, StelTextureParams().generateMipmaps());
+			tex = texMgr.createTextureThread(absoluteImageURI, TextureParams().generateMipmaps());
 			if (!tex)
 			{
 				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;

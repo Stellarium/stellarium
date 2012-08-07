@@ -10,14 +10,14 @@
 #include "StelUtils.hpp"
 
 
-//! Get QGL bind options corresponding to specified StelTextureParams.
+//! Get QGL bind options corresponding to specified TextureParams.
 //!
 //! These are options that are specified at the moment the texture
 //! is bound in QGLContext.
 //!
-//! @param params StelTextureParams to get bind options for.
+//! @param params TextureParams to get bind options for.
 //! @return QGL bind options.
-static QGLContext::BindOptions getTextureBindOptions(const StelTextureParams& params)
+static QGLContext::BindOptions getTextureBindOptions(const TextureParams& params)
 {
 	QGLContext::BindOptions result = QGLContext::InvertedYBindOption;
 	// Set GL texture filtering mode.
@@ -41,7 +41,7 @@ static QGLContext::BindOptions getTextureBindOptions(const StelTextureParams& pa
 }
 
 StelQGLTextureBackend::StelQGLTextureBackend
-	(StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params)
+	(StelQGLRenderer* renderer, const QString& path, const TextureParams& params)
 	: StelTextureBackend(path)
 	, textureParams(params)
 	, renderer(renderer)
@@ -135,7 +135,7 @@ void StelQGLTextureBackend::startAsynchronousLoading()
 
 StelQGLTextureBackend* StelQGLTextureBackend::constructFromImage
 	(StelQGLRenderer* renderer, const QString& path, 
-	 const StelTextureParams& params, QImage& image)
+	 const TextureParams& params, QImage& image)
 {
 	StelQGLTextureBackend* result = new StelQGLTextureBackend(renderer, path, params);
 	result->startedLoading();
@@ -144,7 +144,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::constructFromImage
 }
 
 StelQGLTextureBackend* StelQGLTextureBackend::constructFromPVR
-	(StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params)
+	(StelQGLRenderer* renderer, const QString& path, const TextureParams& params)
 {
 	StelQGLTextureBackend* result = new StelQGLTextureBackend(renderer, path, params);
 	result->startedLoading();
@@ -153,7 +153,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::constructFromPVR
 }
 
 StelQGLTextureBackend* StelQGLTextureBackend::constructAsynchronous
-	(StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params)
+	(StelQGLRenderer* renderer, const QString& path, const TextureParams& params)
 {
 	StelQGLTextureBackend* result = new StelQGLTextureBackend(renderer, path, params);
 	return result;
@@ -164,7 +164,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromFBO
 {
 	renderer->makeGLContextCurrent();
 
-	const StelTextureParams params = StelTextureParams();
+	const TextureParams params = TextureParams();
 	StelQGLTextureBackend* result = new StelQGLTextureBackend(renderer, QString(), params);
 
 	result->startedLoading();
@@ -206,7 +206,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 
 	// Creating a texture from a dummy image.
 	QImage dummyImage(64, 64, QImage::Format_Mono);
-	const StelTextureParams params = StelTextureParams();
+	const TextureParams params = TextureParams();
 
 	StelQGLTextureBackend* result = 
 		new StelQGLTextureBackend(renderer, QString(), params);
