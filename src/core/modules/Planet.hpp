@@ -98,6 +98,28 @@ private:
 
 class Planet : public StelObject
 {
+protected:
+	//! Stores graphics data that is shared between planets and must be initialized by
+	//! a StelRenderer.
+	struct SharedPlanetGraphics
+	{
+		//! Texture used to draw earth shadow.
+		class StelTextureNew* texEarthShadow;
+		//! Texture used to draw planet hint.
+		class StelTextureNew* texHintCircle;
+		//! Shader used to draw the planet (with lighting), if lighting is used and GLSL is supported.
+		class StelGLSLShader* planetShader;
+		//! Are we initialized yet?
+		bool initialized;
+
+		//! Default constructor - construct uninitialized SharedPlanetGraphics.
+		SharedPlanetGraphics(): initialized(false){}
+		//! Destructor - frees resources if initialized.
+		~SharedPlanetGraphics();
+		//! Lazily initialize the data, using given renderer to create textures/shader.
+		void lazyInit(class StelRenderer* renderer);
+	};
+
 public:
 	friend class SolarSystem;
 	Planet(const QString& englishName,
@@ -265,30 +287,6 @@ public:
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
 protected:
-	//! Stores graphics data that is shared between planets and must be initialized by
-	//! a StelRenderer.
-	struct SharedPlanetGraphics
-	{
-		//! Texture used to draw earth shadow.
-		class StelTextureNew* texEarthShadow;
-		//! Texture used to draw planet hint.
-		class StelTextureNew* texHintCircle;
-		//! Shader used to draw the planet (with lighting), if lighting is used and GLSL is supported.
-		class StelGLSLShader* planetShader;
-		//! Are we initialized yet?
-		bool initialized;
-
-		//! Default constructor - construct uninitialized SharedPlanetGraphics.
-		SharedPlanetGraphics(): initialized(false){}
-
-		//! Destructor - frees resources if initialized.
-		~SharedPlanetGraphics();
-
-		//! Lazily initialize the data, using given renderer to create textures/shader.
-		void lazyInit(class StelRenderer* renderer);
-	};
-
-
 	// draw earth shadow on moon for lunar eclipses
 	void drawEarthShadow(StelCore* core, class StelRenderer* renderer, 
 	                     SharedPlanetGraphics& planetGraphics);
