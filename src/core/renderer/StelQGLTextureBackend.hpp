@@ -45,7 +45,6 @@ public:
 	//! @return Pointer to the new StelQGLTextureBackend.
 	static StelQGLTextureBackend* constructFromPVR
 		(class StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params);
-	
 
 	//! Construct a StelQGLTextureBackend asynchronously (in a separate thread).
 	//!
@@ -142,8 +141,12 @@ private:
 	{
 #ifndef NDEBUG
 		const TextureStatus status = getStatus();
-		Q_ASSERT_X((glTextureID != 0) == (status == TextureStatus_Loaded),
-		           Q_FUNC_INFO, "Texture can only be specified once loaded.");
+		if((glTextureID != 0) != (status == TextureStatus_Loaded))
+		{                         
+			qDebug() << "Handle: " << glTextureID << " Status: " << textureStatusName(status);
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Texture can be specified if and only if loaded.");
+		}
+
 		Q_ASSERT_X(loader == NULL || status == TextureStatus_Loading,
 		           Q_FUNC_INFO, "Texture loader can only exist during loading");
 #endif
