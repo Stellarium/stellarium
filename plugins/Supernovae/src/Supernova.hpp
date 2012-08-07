@@ -27,7 +27,6 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
 
 
@@ -80,8 +79,6 @@ private:
 	bool initialized;
 
 	Vec3d XYZ;                         // holds J2000 position
-
-	static StelTextureSP hintTexture;
 
 	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
 
