@@ -260,7 +260,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	QString groundTexPath = getTexturePath(groundTexName, landscapeId);
 	groundTex = StelApp::getInstance()
 	                    .getTextureManager()
-	                    .createTexture(groundTexPath, StelTextureParams().generateMipmaps());
+	                    .createTexture(groundTexPath, TextureParams().generateMipmaps());
 	QString description = landscapeIni.value("landscape/ground").toString();
 	//sscanf(description.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	QStringList parameters = description.split(':');
@@ -274,7 +274,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	QString fogTexPath = getTexturePath(fogTexName, landscapeId);
 	fogTex = StelApp::getInstance()
 	                 .getTextureManager()
-	                 .createTexture(fogTexPath, StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat));
+	                 .createTexture(fogTexPath, TextureParams().generateMipmaps().wrap(TextureWrap_Repeat));
 	description = landscapeIni.value("landscape/fog").toString();
 	//sscanf(description.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	parameters = description.split(':');
@@ -576,7 +576,7 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTextureParams().generateMipmaps());
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, TextureParams().generateMipmaps());
 	texFov = atexturefov*M_PI/180.f;
 	angleRotateZ = aangleRotateZ*M_PI/180.f;
 
@@ -651,7 +651,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTextureParams().generateMipmaps());
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, TextureParams().generateMipmaps());
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
 
 	const SphereParams params 

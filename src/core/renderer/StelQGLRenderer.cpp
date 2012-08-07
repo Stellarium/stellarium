@@ -56,7 +56,7 @@ void StelQGLRenderer::destroyTextureBackend(StelTextureBackend* const textureBac
 }
 
 StelTextureBackend* StelQGLRenderer::createTextureBackend
-	(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode)
+	(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode)
 {
 	invariant();
 	const QString fullPath = filename.startsWith("http://") 
@@ -125,7 +125,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 }
 
 StelTextureBackend* StelQGLRenderer::createTextureBackend
-	(QImage& image, const StelTextureParams& params)
+	(QImage& image, const TextureParams& params)
 {
 	invariant();
 	return StelQGLTextureBackend::constructFromImage(this, QString(), params, image);
@@ -340,7 +340,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		                     params.string_);
 
 		textTexture = StelQGLTextureBackend::constructFromImage
-			(this, QString(), StelTextureParams().filtering(TextureFiltering_Linear), image);
+			(this, QString(), TextureParams().filtering(TextureFiltering_Linear), image);
 		const QSize size = textTexture->getDimensions();
 		if(!textTexture->getStatus() == TextureStatus_Loaded)
 		{
