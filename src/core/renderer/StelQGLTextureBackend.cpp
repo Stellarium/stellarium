@@ -257,7 +257,14 @@ void StelQGLTextureBackend::onLoadingError(const QString& errorMessage)
 void StelQGLTextureBackend::loadFromImage(QImage image)
 {
 	invariant();
-	Q_ASSERT_X(!image.isNull(), Q_FUNC_INFO, "Image data is NULL");
+
+	if(image.isNull())
+	{
+		errorOccured("loadFromImage(): Image data to load from is null. "
+		             "Maybe the image failed to load from file?");
+		invariant();
+		return;
+	}
 
 	// Shrink if needed.
 	glEnsureTextureSizeWithinLimits(image);
@@ -272,10 +279,14 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 		errorOccured("loadFromImage(): Failed to load because the image has "
 		             "non-power-of-two width and/or height while the renderer "
 		             "backend only supports power-of-two dimensions");
+		invariant();
+		return;
 	}
 	if(glTextureID == 0)
 	{
 		errorOccured("loadFromImage(): Failed to load an image to a GL texture");
+		invariant();
+		return;
 	}
 	setTextureWrapping();
 
@@ -299,6 +310,8 @@ void StelQGLTextureBackend::loadFromPVR()
 	{
 		errorOccured("loadFromPVR() failed to load a PVR file to a GL texture - "
 		             "Maybe the file \"" + path + "\" is missing?");
+		invariant();
+		return;
 	}
 	// For some reason only LINEAR seems to work.
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

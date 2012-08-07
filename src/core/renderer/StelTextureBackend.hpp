@@ -163,9 +163,16 @@ protected:
 	void errorOccured(const QString& error)
 	{
 		invariant();
-		Q_ASSERT_X(status == TextureStatus_Loading,
-		           Q_FUNC_INFO,
-		           "The only time an error can occur with a texture is during loading");
+		if(status != TextureStatus_Loading)
+		{
+			qWarning() << "Unexpected error - texture " << path;
+			qWarning() << (status == TextureStatus_Uninitialized ? "Uninitialized" :
+			               status == TextureStatus_Error         ? "Error" :
+			               status == TextureStatus_Loaded        ? "Loaded" :
+			                                                       "Unknown");
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			           "The only time an error can occur with a texture is during loading");
+		}
 		qWarning() << "Error occured during loading of texture " << path << 
 		              ": " << error;
 		errorMessage = error;

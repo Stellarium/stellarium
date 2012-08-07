@@ -390,7 +390,7 @@ public:
 	//!
 	//! @see StelRenderClient
 	virtual void renderFrame(StelRenderClient& renderClient) = 0;
-	
+
 	//! Create a texture from specified file or URL.
 	//!
 	//! Texture created must be destroyed by the user before the 
@@ -419,8 +419,8 @@ public:
 	//!       a texture with non-power-of-two dimensions will fail and result 
 	//!       in a StelTextureNew with status of TextureStatus_Error.
 	StelTextureNew* createTexture
-		(const QString& filename, const StelTextureParams& params, 
-		 const TextureLoadingMode loadingMode)
+		(const QString& filename, const StelTextureParams& params = StelTextureParams(), 
+		 const TextureLoadingMode loadingMode = TextureLoadingMode_Normal)
 	{
 		//This function tests preconditions and calls implementation.
 		Q_ASSERT_X(!filename.endsWith(".pvr"), Q_FUNC_INFO,

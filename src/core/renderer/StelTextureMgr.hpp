@@ -31,6 +31,10 @@ class QThread;
 
 //! @class StelTextureMgr
 //! Manage texture loading.
+//!
+//! Note that this class is OBSOLETE!
+//! StelRenderer and StelTextureNew should be used instead of StelTextureMgr and StelTexture.
+//!
 //! Provides a method for loading images in a separate thread.
 class StelTextureMgr : QObject
 {
