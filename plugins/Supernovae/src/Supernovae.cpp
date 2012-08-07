@@ -23,7 +23,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -31,6 +30,7 @@
 #include "Supernovae.hpp"
 #include "Supernova.hpp"
 #include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
 
 #include <QDebug>
 #include <QFileInfo>
@@ -70,6 +70,7 @@ Q_EXPORT_PLUGIN2(Supernovae, SupernovaeStelPluginInterface)
  Constructor
 */
 Supernovae::Supernovae()
+	: texPointer(NULL)
 {
 	setObjectName("Supernovae");
 	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
@@ -80,12 +81,14 @@ Supernovae::Supernovae()
 */
 Supernovae::~Supernovae()
 {
-	//
 }
 
 void Supernovae::deinit()
 {
-	texPointer.clear();
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 /*
@@ -109,8 +112,6 @@ void Supernovae::init()
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovae");
 
 		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
-
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 	}
 	catch (std::runtime_error &e)
 	{
@@ -178,6 +179,10 @@ void Supernovae::drawPointer(StelCore* core, StelRenderer* renderer, StelProject
 
 		const Vec3f& c(obj->getInfoColor());
 		renderer->setGlobalColor(c[0],c[1],c[2]);
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur2.png");
+		}
 		texPointer->bind();
 		renderer->setBlendMode(BlendMode_Alpha);
 		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 26.0f,
