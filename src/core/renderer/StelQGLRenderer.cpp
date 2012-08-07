@@ -27,10 +27,12 @@ void StelQGLRenderer::bindTextureBackend
 	if(status == TextureStatus_Loaded)
 	{
 		qglTextureBackend->bind(textureUnit);
+		currentlyBoundTextures[textureUnit] = qglTextureBackend;
 	}
 	else
 	{
 		getPlaceholderTexture()->bind(textureUnit);
+		currentlyBoundTextures[textureUnit] = getPlaceholderTexture();
 	}
 	invariant();
 }
@@ -253,6 +255,8 @@ void StelQGLRenderer::drawTextGravityHelper(const TextParams& params, QPainter& 
 
 void StelQGLRenderer::drawText(const TextParams& params)
 {
+	StelQGLTextureBackend* currentTexture = currentlyBoundTextures[0];
+
 	QPainter* painter = viewport.getPainter();
 	Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, 
 	           "Trying to draw text but painting is disabled");
@@ -392,4 +396,10 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	textTexture->bind(0);
 	drawVertexBuffer(textBuffer);
 	setBlendMode(oldBlendMode);
+
+	// Reset user-bound texture.
+	if(NULL != currentTexture)
+	{
+		currentTexture->bind(0);
+	}
 }
