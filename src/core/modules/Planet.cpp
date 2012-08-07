@@ -44,15 +44,6 @@
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 
-SharedPlanetGraphics::~SharedPlanetGraphics()
-{
-	if(!initialized){return;}
-	delete texEarthShadow;
-	delete texHintCircle;
-	if(NULL != planetShader) {delete planetShader;}
-	initialized = false;
-}
-
 static StelGLSLShader* loadPlanetShader(StelRenderer* renderer)
 {
 	StelGLSLShader* planetShader = renderer->createGLSLShader();
@@ -111,7 +102,16 @@ static StelGLSLShader* loadPlanetShader(StelRenderer* renderer)
 	return planetShader;
 }
 
-void SharedPlanetGraphics::lazyInit(StelRenderer* renderer)
+Planet::SharedPlanetGraphics::~SharedPlanetGraphics()
+{
+	if(!initialized){return;}
+	delete texEarthShadow;
+	delete texHintCircle;
+	if(NULL != planetShader) {delete planetShader;}
+	initialized = false;
+}
+
+void Planet::SharedPlanetGraphics::lazyInit(StelRenderer* renderer)
 {
 	if(initialized){return;}
 	texHintCircle  = renderer->createTexture("textures/planet-indicator.png");
