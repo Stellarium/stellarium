@@ -271,10 +271,10 @@ public:
 
 protected:
 	virtual StelTextureBackend* createTextureBackend
-		(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode);
+		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
 
 	virtual class StelTextureBackend* createTextureBackend
-		(QImage& image, const StelTextureParams& params);
+		(QImage& image, const TextureParams& params);
 
 	virtual StelTextureBackend* getViewportTextureBackend()
 	{
@@ -376,7 +376,7 @@ private:
 			}
 		}
 		placeholderTexture = 
-			StelQGLTextureBackend::constructFromImage(this, QString(), StelTextureParams(), image);
+			StelQGLTextureBackend::constructFromImage(this, QString(), TextureParams(), image);
 
 		return placeholderTexture;
 	}

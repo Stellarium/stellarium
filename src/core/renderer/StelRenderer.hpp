@@ -423,7 +423,7 @@ public:
 	//!       a texture with non-power-of-two dimensions will fail and result 
 	//!       in a StelTextureNew with status of TextureStatus_Error.
 	StelTextureNew* createTexture
-		(const QString& filename, const StelTextureParams& params = StelTextureParams(), 
+		(const QString& filename, const TextureParams& params = TextureParams(), 
 		 const TextureLoadingMode loadingMode = TextureLoadingMode_Normal)
 	{
 		//This function tests preconditions and calls implementation.
@@ -463,7 +463,7 @@ public:
 	//!       a texture with non-power-of-two dimensions will fail and result 
 	//!       in a StelTextureNew with status of TextureStatus_Error.
 	StelTextureNew* createTexture
-		(QImage& image, const StelTextureParams& params = StelTextureParams())
+		(QImage& image, const TextureParams& params = TextureParams())
 	{
 		Q_ASSERT_X(!image.isNull(), Q_FUNC_INFO, "Trying to create a texture from a null image");
 		return new StelTextureNew(this, createTextureBackend(image, params));
@@ -604,7 +604,7 @@ protected:
 	//!
 	//! @see createTexture
 	virtual class StelTextureBackend* createTextureBackend
-		(const QString& filename, const StelTextureParams& params, 
+		(const QString& filename, const TextureParams& params, 
 		 const TextureLoadingMode loadingMode) = 0;
 
 	//! Implementation of createTexture loading from image.
@@ -614,7 +614,7 @@ protected:
 	//!
 	//! @see createTexture
 	virtual class StelTextureBackend* createTextureBackend
-		(QImage& image, const StelTextureParams& params) = 0;
+		(QImage& image, const TextureParams& params) = 0;
 
 	//! Implementation of getViewportTexture.
 	//!

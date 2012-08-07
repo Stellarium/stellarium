@@ -51,7 +51,7 @@ public:
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param params the texture creation parameters.
 	//! @return NULL if filename is empty or on failure.
-	StelTextureSP createTexture(const QString& filename, const StelTextureParams& params=StelTextureParams());
+	StelTextureSP createTexture(const QString& filename, const TextureParams& params=TextureParams());
 
 	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
@@ -59,7 +59,7 @@ public:
 	//! @param params the texture creation parameters.
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
 	//! @return NULL if filename is empty or on failure.
-	StelTextureSP createTextureThread(const QString& url, const StelTextureParams& params=StelTextureParams(), bool lazyLoading=true);
+	StelTextureSP createTextureThread(const QString& url, const TextureParams& params=TextureParams(), bool lazyLoading=true);
 
 private:
 	//! A thread used by the TextureLoader object to avoid pausing the main thread too long.

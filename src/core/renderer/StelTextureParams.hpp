@@ -33,20 +33,20 @@ enum TextureWrap
 //!
 //! @code
 //! // Default parameters (no mipmaps, linear filtering, clamp to edge wrap mode).
-//! StelTextureParams a;
+//! TextureParams a;
 //! // Generate mipmaps and use repeat wrap mode.
-//! StelTextureParams b = StelTextureParams().generateMipmaps().wrap(Repeat);
+//! TextureParams b = TextureParams().generateMipmaps().wrap(Repeat);
 //! // Generate mipmaps, use nearest-neighbor filtering and use repeat wrap mode.
-//! StelTextureParams c = StelTextureParams().generateMipmaps().filtering(Nearest).wrap(Repeat);
+//! TextureParams c = TextureParams().generateMipmaps().filtering(Nearest).wrap(Repeat);
 //! @endcode
 //!
 //! @see StelTextureMgr, StelTexture, StelRenderer
-struct StelTextureParams 
+struct TextureParams 
 {
-	//! Construct StelTextureParams with default parameters.
+	//! Construct TextureParams with default parameters.
 	//!
 	//! Default parameters are no mipmap generation, linear filtering and clamp to edge wrap mode.
-	StelTextureParams()
+	TextureParams()
 		:autoGenerateMipmaps(false)
 		,filteringMode(TextureFiltering_Linear)
 		,wrapMode(TextureWrap_ClampToEdge)
@@ -54,21 +54,21 @@ struct StelTextureParams
 	}
 
 	//! If specified, mipmaps will be generated.
-	StelTextureParams& generateMipmaps()
+	TextureParams& generateMipmaps()
 	{
 		autoGenerateMipmaps = true;
 		return *this;
 	}
 
 	//! Set texture filtering mode.
-	StelTextureParams& filtering(const TextureFiltering filtering)
+	TextureParams& filtering(const TextureFiltering filtering)
 	{
 		this->filteringMode = filtering;
 		return *this;
 	}
 
 	//! Set texture wrapping mode.
-	StelTextureParams& wrap(const TextureWrap wrap)
+	TextureParams& wrap(const TextureWrap wrap)
 	{
 		this->wrapMode = wrap;
 		return *this;

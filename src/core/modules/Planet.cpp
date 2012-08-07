@@ -1011,8 +1011,8 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 	if(texMapName == "") {return;}
 	if(NULL == texture)
 	{
-		const StelTextureParams textureParams = 
-			StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
+		const TextureParams textureParams = 
+			TextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
 		texture = renderer->createTexture("textures/" + texMapName, textureParams,
 		                                  TextureLoadingMode_LazyAsynchronous);
 	}

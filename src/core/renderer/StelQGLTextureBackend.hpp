@@ -32,7 +32,7 @@ public:
 	//! @return Pointer to the new StelQGLTextureBackend.
 	static StelQGLTextureBackend* constructFromImage
 		(class StelQGLRenderer* renderer, const QString& path, 
-		 const StelTextureParams& params, QImage& image);
+		 const TextureParams& params, QImage& image);
 	
 	//! Construct a StelQGLTextureBackend from a PVR (compressed texture on mobile) file.
 	//!
@@ -44,7 +44,7 @@ public:
 	//! @param params   Texture parameters (e.g. filtering, wrapping, etc.).
 	//! @return Pointer to the new StelQGLTextureBackend.
 	static StelQGLTextureBackend* constructFromPVR
-		(class StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params);
+		(class StelQGLRenderer* renderer, const QString& path, const TextureParams& params);
 
 	//! Construct a StelQGLTextureBackend asynchronously (in a separate thread).
 	//!
@@ -56,7 +56,7 @@ public:
 	//! @param params   Texture parameters (e.g. filtering, wrapping, etc.).
 	//! @return Pointer to the new StelQGLTextureBackend.
 	static StelQGLTextureBackend* constructAsynchronous
-		(class StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params);
+		(class StelQGLRenderer* renderer, const QString& path, const TextureParams& params);
 	
 	//! Construct a StelQGLTextureBackend from a framebuffer object.
 	//!
@@ -93,7 +93,7 @@ private slots:
 	
 private:
 	//! Texture parameters (e.g. filtering, wrapping, etc.).
-	StelTextureParams textureParams;
+	TextureParams textureParams;
 
 	//! Renderer that created this texture.
 	class StelQGLRenderer* renderer;
@@ -119,7 +119,7 @@ private:
 	//! @param  path Full file system path or URL of the texture.
 	//! @param  params Texture parameters (e.g. filtering, wrapping, etc).
 	StelQGLTextureBackend(class StelQGLRenderer* renderer, const QString& path, 
-	                      const StelTextureParams& params);
+	                      const TextureParams& params);
 
 	//! Load the texture from a QImage.
 	void loadFromImage(QImage image);
