@@ -474,6 +474,7 @@ protected:
 		{
 			// GL1 version should use GL_MAX_TEXTURE_UNITS instead.
 			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &textureUnitCount);
+			textureUnitCount = std::max(textureUnitCount, STELQGLRENDERER_MAX_TEXTURE_UNITS);
 		}
 		invariant();
 		return textureUnitCount;
