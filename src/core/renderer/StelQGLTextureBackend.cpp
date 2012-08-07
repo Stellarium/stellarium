@@ -55,6 +55,7 @@ StelQGLTextureBackend::StelQGLTextureBackend
 StelQGLTextureBackend::~StelQGLTextureBackend()
 {
 	invariant();
+	renderer->ensureTextureNotBound(this);
 	if (getStatus() == TextureStatus_Loaded)
 	{
 		renderer->makeGLContextCurrent();
