@@ -34,6 +34,7 @@
 #include "StelObjectMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QtOpenGL>
 #include <QSettings>
@@ -664,6 +665,29 @@ void StelCore::returnToDefaultLocation()
 	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
 	if (ok)
 		moveObserverTo(loc, 0.);
+}
+
+void StelCore::returnToHome()
+{
+	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
+	// between planets using SpaceShip and second method give does not exist data
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+
+	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
+
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
+	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
+	landscapeMgr->setFlagFog(p->hasAtmosphere());
+
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	StelMovementMgr* smmgr = getMovementMgr();
+	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 void StelCore::setJDay(double JD)

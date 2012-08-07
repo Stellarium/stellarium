@@ -594,6 +594,7 @@ signals:
 	void requestSetSkyCulture(QString id);
 	void requestSetDiskViewport(bool b);
 	void requestExit();
+	void requestSetHomePosition();
 };
 
 #endif // _STELMAINSCRIPTAPI_HPP_
