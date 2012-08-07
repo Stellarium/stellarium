@@ -18,6 +18,8 @@
 #include "StelTextureCache.hpp"
 #include "StelVertexBuffer.hpp"
 
+//! Limit on texture unit count (size of currentlyBoundTextures). Can be increased if needed.
+#define STELQGLRENDERER_MAX_TEXTURE_UNITS 64
 
 //TODO get rid of all StelPainter calls (gradually)
 
@@ -52,6 +54,10 @@ public:
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
+		for(int t = 0; t < STELQGLRENDERER_MAX_TEXTURE_UNITS; ++t)
+		{
+			currentlyBoundTextures[t] = NULL;
+		}
 	}
 	
 	virtual ~StelQGLRenderer()
@@ -373,6 +379,11 @@ protected:
 
 	//! Texture used as a fallback when texture loading fails or a texture can't be bound.
 	StelQGLTextureBackend* placeholderTexture;
+
+	//! Currently bound texture of each texture unit (NULL if none bound).
+	//!
+	//! Used to reset bound texture is drawText.
+	StelQGLTextureBackend* currentlyBoundTextures[STELQGLRENDERER_MAX_TEXTURE_UNITS];
 };
 
 #endif // _STELQGLRENDERER_HPP_
