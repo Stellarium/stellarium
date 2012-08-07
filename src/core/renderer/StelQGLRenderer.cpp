@@ -55,7 +55,7 @@ void StelQGLRenderer::destroyTextureBackend(StelTextureBackend* const textureBac
 	invariant();
 }
 
-StelTextureBackend* StelQGLRenderer::createTextureBackend_
+StelTextureBackend* StelQGLRenderer::createTextureBackend
 	(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode)
 {
 	invariant();
@@ -69,7 +69,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 		// Texture in error state will be returned (loaded from NULL image), and
 		// when bound, the placeholder texture will be used.
 		qWarning() << "createTextureBackend failed: file \"" << filename << "\" not found.";
-		return StelQGLTextureBackend::constructFromImage(this, filename, params, image);
+		return StelQGLTextureBackend::constructFromImage(this, QString(), params, image);
 	}
 
 	StelQGLTextureBackend* cached = textureCache.get(fullPath, loadingMode);
@@ -123,6 +123,14 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	invariant();
 	return result;
 }
+
+StelTextureBackend* StelQGLRenderer::createTextureBackend
+	(QImage& image, const StelTextureParams& params)
+{
+	invariant();
+	return StelQGLTextureBackend::constructFromImage(this, QString(), params, image);
+}
+
 
 void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 {

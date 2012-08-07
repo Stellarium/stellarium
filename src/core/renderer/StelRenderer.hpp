@@ -400,21 +400,21 @@ public:
 	//! Even in that case, the texture can be bound, but a placeholder 
 	//! texture will be used internally instead.
 	//!
-	//! @param  filename    File name or URL of the image to load the texture from.
-	//!                     If it's a file and it's not found, it's searched for in
-	//!                     the textures/ directory. Some renderer backends might also 
-	//!                     support compressed textures with custom file formats.
-	//!                     These backend-specific files should
-	//!                     not be used as filename - instead, if a compressed
-	//!                     texture with the same file name but different extensions
-	//!                     exists, it will be used.
-	//!                     E.g. the GLES backend prefers a .pvr version of a texture
-	//!                     if it exists.
-	//! @param  params      Texture parameters, such as filtering, wrapping, etc.
-	//! @param  loadingMode Texture loading mode to use. Normal immediately loads
-	//!                     the texture, Asynchronous starts loading it in a background
-	//!                     thread and LazyAsynchronous starts loading it when it's
-	//!                     first needed.
+	//! @param filename    File name or URL of the image to load the texture from.
+	//!                    If it's a file and it's not found, it's searched for in
+	//!                    the textures/ directory. Some renderer backends might also 
+	//!                    support compressed textures with custom file formats.
+	//!                    These backend-specific files should
+	//!                    not be used as filename - instead, if a compressed
+	//!                    texture with the same file name but different extensions
+	//!                    exists, it will be used.
+	//!                    E.g. the GLES backend prefers a .pvr version of a texture
+	//!                    if it exists.
+	//! @param params      Texture parameters, such as filtering, wrapping, etc.
+	//! @param loadingMode Texture loading mode to use. Normal immediately loads
+	//!                    the texture, Asynchronous starts loading it in a background
+	//!                    thread and LazyAsynchronous starts loading it when it's
+	//!                    first needed.
 	//!
 	//! @return New texture.
 	//!
@@ -439,7 +439,34 @@ public:
 		           "When loading a texture from network, texture loading mode must be "
 		           "Asynchronous or LazyAsynchronous");
 
-		return new StelTextureNew(this, createTextureBackend_(filename, params, loadingMode));
+		return new StelTextureNew(this, createTextureBackend(filename, params, loadingMode));
+	}
+
+	//! Create a texture from an image.
+	//!
+	//! Texture created must be destroyed by the user before the 
+	//! Renderer that created it is destroyed.
+	//!
+	//! This method never fails, but the texture returned might have the Error status.
+	//! Even in that case, the texture can be bound, but a placeholder 
+	//! texture will be used internally instead.
+	//!
+	//! The texture is created immediately, as with TextureLoadingMode_Normal.
+	//!
+	//! @param image  Image to load the texture from.
+	//! @param params Texture parameters, such as filtering, wrapping, etc.
+	//!
+	//! @return New texture.
+	//!
+	//! @note Some renderer backends only support textures with power of two 
+	//!       dimensions (e.g. 512x512 or 2048x256). On these backends, loading 
+	//!       a texture with non-power-of-two dimensions will fail and result 
+	//!       in a StelTextureNew with status of TextureStatus_Error.
+	StelTextureNew* createTexture
+		(QImage& image, const StelTextureParams& params = StelTextureParams())
+	{
+		Q_ASSERT_X(!image.isNull(), Q_FUNC_INFO, "Trying to create a texture from a null image");
+		return new StelTextureNew(this, createTextureBackend(image, params));
 	}
 
 	//! Get a texture of the viewport, with everything drawn to the viewport so far.
@@ -570,12 +597,24 @@ protected:
 	                                     StelProjectorP projector,
 	                                     const bool dontProject) = 0;
 
-	//! Implementation of createTextureBackend.
+	//! Implementation of createTexture.
 	//!
-	//! @see createTextureBackend
-	virtual class StelTextureBackend* createTextureBackend_
+	//! Returns texture backend to be wrapped in a StelTextureNew.
+	//! Must not fail, but can return a backend in error state.
+	//!
+	//! @see createTexture
+	virtual class StelTextureBackend* createTextureBackend
 		(const QString& filename, const StelTextureParams& params, 
 		 const TextureLoadingMode loadingMode) = 0;
+
+	//! Implementation of createTexture loading from image.
+	//!
+	//! Returns texture backend to be wrapped in a StelTextureNew.
+	//! Must not fail, but can return a backend in error state.
+	//!
+	//! @see createTexture
+	virtual class StelTextureBackend* createTextureBackend
+		(QImage& image, const StelTextureParams& params) = 0;
 
 	//! Implementation of getViewportTexture.
 	//!
