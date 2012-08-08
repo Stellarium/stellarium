@@ -26,7 +26,6 @@
 
 #include <stdexcept>
 #include <QDebug>
-#include <QtOpenGL>
 
 void StelSkyPolygon::initCtor()
 {

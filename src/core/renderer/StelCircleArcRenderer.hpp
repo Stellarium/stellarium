@@ -1,6 +1,8 @@
 #ifndef _STELCIRCLEARCRENDERER_HPP_
 #define _STELCIRCLEARCRENDERER_HPP_
 
+#include <QLinkedList>
+
 #include "StelProjector.hpp"
 #include "StelRenderer.hpp"
 
