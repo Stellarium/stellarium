@@ -20,7 +20,6 @@
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
 
-class QPainter;
 class QGLContext;
 
 //! @class StelPainter
@@ -36,16 +35,10 @@ public:
 	//! This method needs to be called once at init.
 	static void initSystemGLInfo(QGLContext* ctx);
 
-	//! Set the QPainter to use for performing some drawing operations.
-	static void setQPainter(QPainter* qPainter);
-
 	//! Make sure that our GL context is current and valid.
 	static void makeMainGLContextCurrent();
 
 private:
-	//! The QPainter to use for some drawing operations.
-	static QPainter* qPainter;
-
 	//! The main GL Context used by Stellarium.
 	static QGLContext* glContext;
 };

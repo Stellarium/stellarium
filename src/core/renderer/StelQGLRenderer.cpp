@@ -139,7 +139,7 @@ void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 		previousFrameEndTime = StelApp::getTotalRunTime();
 	}
 
-	viewport.setDefaultPainter(renderClient.getPainter());
+	viewport.setDefaultPainter(renderClient.getPainter(), glContext);
 
 	makeGLContextCurrent();
 	viewport.startFrame();
@@ -171,7 +171,7 @@ void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 	}
 	
 	drawWindow(renderClient.getViewportEffect());
-	viewport.setDefaultPainter(NULL);
+	viewport.setDefaultPainter(NULL, glContext);
 
 	// Flushing GL commands helps FPS somewhat (not sure why, though)
 	glFlush();
