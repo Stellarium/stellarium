@@ -1214,7 +1214,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	else
 	{
 		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
-		qDebug() << "Light: " << light.isEnabled();
 		return;
 	}
 #endif
@@ -1289,71 +1288,4 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	ret.pointer = polygonVertexArray.constData();
 	ret.enabled = array.enabled;
 	return ret;
-}
-
-// Light methods
-
-void StelPainterLight::setPosition(const Vec4f& v)
-{
-	position = v;
-}
-
-void StelPainterLight::setDiffuse(const Vec4f& v)
-{
-	diffuse = v;
-}
-
-void StelPainterLight::setSpecular(const Vec4f& v)
-{
-	specular = v;
-}
-
-void StelPainterLight::setAmbient(const Vec4f& v)
-{
-	ambient = v;
-}
-
-void StelPainterLight::setEnable(bool v)
-{
-	if (v)
-		enable();
-	else
-		disable();
-}
-
-void StelPainterLight::enable()
-{
-	enabled = true;
-}
-
-void StelPainterLight::disable()
-{
-	enabled = false;
-}
-
-
-// material functions
-StelPainterMaterial::StelPainterMaterial()
-	: specular(0, 0, 0, 1), ambient(0.2, 0.2, 0.2, 1.0), emission(0, 0, 0, 1), shininess(0)
-{
-}
-
-void StelPainterMaterial::setSpecular(const Vec4f& v)
-{
-	specular = v;
-}
-
-void StelPainterMaterial::setAmbient(const Vec4f& v)
-{
-	ambient = v;
-}
-
-void StelPainterMaterial::setEmission(const Vec4f& v)
-{
-	emission = v;
-}
-
-void StelPainterMaterial::setShininess(float v)
-{
-	shininess = v;
 }

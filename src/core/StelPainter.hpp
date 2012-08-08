@@ -41,61 +41,6 @@ class QGLShaderProgram;
 class QPainter;
 class QGLContext;
 
-class StelPainterLight
-{
-public:
-	StelPainterLight(int alight=0) : light(alight), enabled(false) {}
-
-	void setPosition(const Vec4f& v);
-	Vec4f& getPosition() {return position;}
-
-	void setDiffuse(const Vec4f& v);
-	Vec4f& getDiffuse() {return diffuse;}
-
-	void setSpecular(const Vec4f& v);
-	Vec4f& getSpecular() {return specular;}
-
-	void setAmbient(const Vec4f& v);
-	Vec4f& getAmbient() {return ambient;}
-
-	void setEnable(bool v);
-	void enable();
-	void disable();
-	bool isEnabled() const {return enabled;}
-
-private:
-	int light;
-	Vec4f position;
-	Vec4f diffuse;
-	Vec4f specular;
-	Vec4f ambient;
-	bool enabled;
-};
-
-
-class StelPainterMaterial
-{
-public:
-	StelPainterMaterial();
-
-	void setSpecular(const Vec4f& v);
-	Vec4f& getSpecular() {return specular;}
-
-	void setAmbient(const Vec4f& v);
-	Vec4f& getAmbient() {return ambient;}
-
-	void setEmission(const Vec4f& v);
-	Vec4f& getEmission() {return emission;}
-
-	void setShininess(float v);
-	float getShininess() {return shininess;}
-private:
-	Vec4f specular;
-	Vec4f ambient;
-	Vec4f emission;
-	float shininess;
-};
-
 //GL-REFACTOR: Remove this once it's not used
 //! Define the drawing mode when drawing polygons
 enum SphericalPolygonDrawMode
@@ -217,12 +162,6 @@ public:
 
 	//! Get the color currently used for drawing.
 	Vec4f getColor() const;
-
-	//! Get the light
-	StelPainterLight& getLight() {return light;}
-
-	//! Get the material
-	StelPainterMaterial& getMaterial() {return material;}
 
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
@@ -389,12 +328,6 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
-
-	//! the single light used by the painter
-	StelPainterLight light;
-
-	//! The material used by the painter
-	StelPainterMaterial material;
 };
 
 #endif // _STELPAINTER_HPP_
