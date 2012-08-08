@@ -569,13 +569,6 @@ public:
 	//! Return whether the cap intersect with a convex contour defined by nbVertice.
 	bool intersectsConvexContour(const Vec3d* vertice, int nbVertice) const;
 
-	//GL-REFACTOR: Remove these two overloads after StelPainter is removed
-	//! Does the cap contain the passed triangle?
-	bool containsTriangle(const Vec3d* vertice) const;
-
-	//! Does the cap intersect with the passed triangle?
-	bool intersectsTriangle(const Vec3d* vertice) const;
-
 	//! Does the cap contain the passed triangle?
 	bool containsTriangle(const Triplet<Vec3d> triangle) const;
 
