@@ -176,6 +176,9 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
 	Vec3f dcolor = Vec3f(1.2f,0.5f,0.4f);
+	if (StelApp::getInstance().getVisionModeNight())
+		dcolor = StelUtils::getNightColor(dcolor);
+
 	float rcMag[2], size, shift;
 	double mag;
 
