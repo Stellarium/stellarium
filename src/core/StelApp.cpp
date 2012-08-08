@@ -46,7 +46,6 @@
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
 #include "StelGuiBase.hpp"
-#include "StelPainter.hpp"
 
 #include "renderer/StelRenderer.hpp"
 // GL-REFACTOR: Remove this once not needed
