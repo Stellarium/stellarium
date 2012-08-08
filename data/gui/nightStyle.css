@@ -223,11 +223,11 @@ QPushButton:flat {
 QPushButton#closeStelWindow {
 	border: 0px;
 	background: none;
-	background-image: url(:/graphicGui/closeButton.png);
+        background-image: url(:/graphicGui/nv_closeButton.png);
 }
 
 QPushButton:hover#closeStelWindow {
-	background-image: url(:/graphicGui/closeButton-hover.png);
+        background-image: url(:/graphicGui/nv_closeButton-hover.png);
 }
 
 /**********************************************LocationDialog*******************************************************/
@@ -236,7 +236,7 @@ QLineEdit#citySearchLineEdit {
 	margin: 0px 0px 4px 0px;
 	padding: 4px;
 	padding-left: 32px;
-	background-image: url(:/graphicGui/searchBoxBackground.png);
+        background-image: url(:/graphicGui/nv_searchBoxBackground.png);
 	background-repeat: none;
 	background-position: center left;
 	border: none;
