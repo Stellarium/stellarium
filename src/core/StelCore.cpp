@@ -304,16 +304,9 @@ void StelCore::update(double deltaTime)
 *************************************************************************/
 void StelCore::preDraw()
 {
-	// Init openGL viewing with fov, screen size and clip planes
 	currentProjectorParams.zNear = 0.000001;
 	currentProjectorParams.zFar = 50.;
-
 	skyDrawer->preDraw();
-
-	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
-	StelPainter sPainter(getProjection2d());
-	glClearColor(0,0,0,0);
-	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 
