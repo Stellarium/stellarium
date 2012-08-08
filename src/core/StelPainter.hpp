@@ -113,43 +113,6 @@ public:
 	                         bool doSubDivise=true,
 	                         double maxSqDistortion=5.);
 
-	//! Draw a square using the current texture at the given projected 2d position.
-	//! This method is not thread safe.
-	//! @param x x position in the viewport in pixel.
-	//! @param y y position in the viewport in pixel.
-	//! @param radius the half size of a square side in pixel.
-	void drawSprite2dMode(float x, float y, float radius);
-	void drawSprite2dMode(const Vec3d& v, float radius);
-
-	//! Draw a rotated square using the current texture at the given projected 2d position.
-	//! This method is not thread safe.
-	//! @param x x position in the viewport in pixel.
-	//! @param y y position in the viewport in pixel.
-	//! @param radius the half size of a square side in pixel.
-	//! @param rotation rotation angle in degree.
-	void drawSprite2dMode(float x, float y, float radius, float rotation);
-
-	//! Draw a GL_POINT at the given position.
-	//! @param x x position in the viewport in pixels.
-	//! @param y y position in the viewport in pixels.
-	void drawPoint2d(float x, float y);
-
-	//! Draw a line between the 2 points.
-	//! @param x1 x position of point 1 in the viewport in pixels.
-	//! @param y1 y position of point 1 in the viewport in pixels.
-	//! @param x2 x position of point 2 in the viewport in pixels.
-	//! @param y2 y position of point 2 in the viewport in pixels.
-	void drawLine2d(float x1, float y1, float x2, float y2);
-
-	//! Draw a rectangle using the current texture at the given projected 2d position.
-	//! This method is not thread safe.
-	//! @param x x position of the top left corner in the viewport in pixel.
-	//! @param y y position of the tope left corner in the viewport in pixel.
-	//! @param width width in pixel.
-	//! @param height height in pixel.
-	//! @param textured whether the current texture should be used for painting.
-	void drawRect2d(float x, float y, float width, float height, bool textured=true);
-
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
 
