@@ -444,107 +444,6 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 	}
 }
 
-// Used by the method below
-QVector<Vec2f> StelPainter::smallCircleVertexArray;
-
-void StelPainter::drawSmallCircleVertexArray()
-{
-	if (smallCircleVertexArray.isEmpty())
-		return;
-
-	Q_ASSERT(smallCircleVertexArray.size()>1);
-
-	enableClientStates(true);
-	setVertexPointer(2, GL_FLOAT, smallCircleVertexArray.constData());
-	drawFromArray(LineStrip, smallCircleVertexArray.size(), 0, false);
-	enableClientStates(false);
-	smallCircleVertexArray.resize(0);
-}
-
-static Vec3d pt1, pt2;
-void StelPainter::drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap,
-	void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData)
- {
-	 if (clippingCap)
-	 {
-		 pt1=start;
-		 pt2=stop;
-		 if (clippingCap->clipGreatCircle(pt1, pt2))
-		 {
-			drawSmallCircleArc(pt1, pt2, Vec3d(0), viewportEdgeIntersectCallback, userData);
-		 }
-		 return;
-	}
-	drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);
- }
-
-/*************************************************************************
- Draw a small circle arc in the current frame
-*************************************************************************/
-void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, 
-	const Vec3d& rotCenter, 
-	void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos,
-		const Vec3d& direction, void* userData), void* userData)
-{
-	Q_ASSERT(smallCircleVertexArray.empty());
-
-	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
-	Vec3d win1, win2;
-	win1[2] = prj->project(start, win1) ? 1.0 : -1.;
-	win2[2] = prj->project(stop, win2) ? 1.0 : -1.;
-	tessArc.append(win1);
-
-
-	if (rotCenter.lengthSquared()<0.00000001)
-	{
-		// Great circle
-		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
-		fIter(prj, start, stop, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), 1, rotCenter);
-	}
-	else
-	{
-		Vec3d tmp = (rotCenter^start)/rotCenter.length();
-		const double radius = fabs(tmp.length());
-		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
-		fIter(prj, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
-	}
-
-	// And draw.
-	QLinkedList<Vec3d>::ConstIterator i = tessArc.constBegin();
-	while (i+1 != tessArc.constEnd())
-	{
-		const Vec3d& p1 = *i;
-		const Vec3d& p2 = *(++i);
-		const bool p1InViewport = prj->checkInViewport(p1);
-		const bool p2InViewport = prj->checkInViewport(p2);
-		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
-		{
-			smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
-			if (i+1==tessArc.constEnd())
-			{
-				smallCircleVertexArray.append(Vec2f(p2[0], p2[1]));
-				drawSmallCircleVertexArray();
-			}
-			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
-			{
-				// We crossed the edge of the view port
-				if (p1InViewport)
-					viewportEdgeIntersectCallback(prj->viewPortIntersect(p1, p2), p2-p1, userData);
-				else
-					viewportEdgeIntersectCallback(prj->viewPortIntersect(p2, p1), p1-p2, userData);
-			}
-		}
-		else
-		{
-			// Break the line, draw the stored vertex and flush the list
-			if (!smallCircleVertexArray.isEmpty())
-				smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
-			drawSmallCircleVertexArray();
-		}
-	}
-	Q_ASSERT(smallCircleVertexArray.isEmpty());
-}
-
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
@@ -912,30 +811,6 @@ static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 static QVarLengthArray<unsigned int, 4096> indexArray;
 
-void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
-{
-	Q_ASSERT(va.vertex.size()!=1);
-	Q_ASSERT(!va.isIndexed());	// Indexed unsupported yet
-	switch (va.primitiveType)
-	{
-		case StelVertexArray::Lines:
-			Q_ASSERT(va.vertex.size()%2==0);
-			for (int i=0;i<va.vertex.size();i+=2)
-				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1), clippingCap);
-			return;
-		case StelVertexArray::LineStrip:
-			for (int i=0;i<va.vertex.size()-1;++i)
-				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1), clippingCap);
-			return;
-		case StelVertexArray::LineLoop:
-			for (int i=0;i<va.vertex.size()-1;++i)
-				drawGreatCircleArc(va.vertex.at(i), va.vertex.at(i+1), clippingCap);
-			drawGreatCircleArc(va.vertex.last(), va.vertex.first(), clippingCap);
-			return;
-		default:
-			Q_ASSERT(0); // Unsupported primitive yype
-	}
-}
 
 // The function object that we use as an interface between VertexArray::foreachTriangle and
 // StelPainter::projectSphericalTriangle.
@@ -1055,10 +930,8 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 	switch (drawMode)
 	{
 		case SphericalPolygonDrawModeBoundary:
-			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
-				drawGreatCircleArcs(poly->getOutlineVertexArray(), clippingCap);
-			else
-				drawStelVertexArray(poly->getOutlineVertexArray(), false);
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			           "GL-REFACTOR - TODO boundary draw mode based on StelCircleArcRenderer");
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
@@ -1068,42 +941,6 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			Q_ASSERT(0);
 	}
 }
-
-
-/*************************************************************************
- draw a simple circle, 2d viewport coordinates in pixel
-*************************************************************************/
-void StelPainter::drawCircle(float x, float y, float r)
-{
-	if (r <= 1.0)
-		return;
-	const Vec2f center(x,y);
-	const Vec2f v_center(0.5f*prj->viewportXywh[2],0.5f*prj->viewportXywh[3]);
-	const float R = v_center.length();
-	const float d = (v_center-center).length();
-	if (d > r+R || d < r-R)
-		return;
-	const int segments = 180;
-	const float phi = 2.0*M_PI/segments;
-	const float cp = std::cos(phi);
-	const float sp = std::sin(phi);
-	float dx = r;
-	float dy = 0;
-	static QVarLengthArray<Vec3f, 180> circleVertexArray(180);
-
-	for (int i=0;i<segments;i++)
-	{
-		circleVertexArray[i].set(x+dx,y+dy,0);
-		r = dx*cp-dy*sp;
-		dy = dx*sp+dy*cp;
-		dx = r;
-	}
-	enableClientStates(true);
-	setVertexPointer(3, GL_FLOAT, circleVertexArray.data());
-	drawFromArray(LineLoop, 180, 0, false);
-	enableClientStates(false);
-}
-
 
 void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
