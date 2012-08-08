@@ -90,15 +90,6 @@ public:
 	                         bool doSubDivise=true,
 	                         double maxSqDistortion=5.);
 
-	//! Set the font to use for subsequent text drawing.
-	void setFont(const QFont& font);
-
-	//! Set the color to use for subsequent drawing.
-	void setColor(float r, float g, float b, float a=1.f);
-
-	//! Get the color currently used for drawing.
-	Vec4f getColor() const;
-
 	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
 	//! This method needs to be called once at init.
 	static void initSystemGLInfo(QGLContext* ctx);
@@ -115,21 +106,8 @@ public:
 	//! Set the QPainter to use for performing some drawing operations.
 	static void setQPainter(QPainter* qPainter);
 
-	//! Swap the OpenGL buffers. You normally don't need to do that.
-	static void swapBuffer();
-
 	//! Make sure that our GL context is current and valid.
 	static void makeMainGLContextCurrent();
-
-	// The following methods try to reflect the API of the incoming QGLPainter class
-
-	//! Sets the point size to use with draw().
-	//! This function has no effect if a shader program is in use, or on OpenGL/ES 2.0. Shader programs must set the
-	//! point size in the vertex shader.
-	void setPointSize(qreal size);
-
-	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -168,10 +146,6 @@ public:
 	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
-
-	//! Draws the primitives defined in the StelVertexArray.
-	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
-	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
 
 private:
 
