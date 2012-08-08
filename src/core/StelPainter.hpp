@@ -142,9 +142,6 @@ public:
 	const StelProjectorP& getProjector() const {return prj;}
 	void setProjector(const StelProjectorP& p);
 
-	//! Fill with black around the viewport.
-	void drawViewportShape();
-
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.

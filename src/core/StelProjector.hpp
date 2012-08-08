@@ -284,6 +284,12 @@ public:
 		return viewportCenter;
 	}
 
+	//! Get diameter of the FOV disk in pixels.
+	float getViewportFovDiameter() 
+	{
+		return viewportFovDiameter;
+	}
+
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
 	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
