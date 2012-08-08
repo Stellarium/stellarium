@@ -10,7 +10,6 @@
 
 #include "StelApp.hpp"
 #include "StelGuiBase.hpp"
-#include "StelPainter.hpp"
 #include "StelRenderer.hpp"
 #include "StelQGLIndexBuffer.hpp"
 #include "StelQGLTextureBackend.hpp"
@@ -20,8 +19,6 @@
 
 //! Limit on texture unit count (size of currentlyBoundTextures). Can be increased if needed.
 #define STELQGLRENDERER_MAX_TEXTURE_UNITS 64
-
-//TODO get rid of all StelPainter calls (gradually)
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
 class StelQGLRenderer : public StelRenderer
@@ -91,8 +88,8 @@ public:
 	
 	virtual bool init()
 	{
-		//TODO Remove after StelPainter is no longer used.
-		StelPainter::initSystemGLInfo(glContext);
+		// Can't call makeGLContextCurrent() before initialization is complete.
+		glContext->makeCurrent();
 		viewport.init(gl.hasOpenGLFeature(QGLFunctions::NPOTTextures));
 		return true;
 	}
