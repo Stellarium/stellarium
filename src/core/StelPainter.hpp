@@ -59,15 +59,6 @@ enum SphericalPolygonDrawMode
 class StelPainter
 {
 public:
-	friend class VertexArrayProjector;
-
-	//! Define the shade model when interpolating polygons
-	enum ShadeModel
-	{
-		ShadeModelFlat=0x1D00,		//!< GL_FLAT
-		ShadeModelSmooth=0x1D01	//!< GL_SMOOTH
-	};
-
 	//! Define the drawing mode when drawing vertex
 	enum DrawingMode
 	{
@@ -86,20 +77,6 @@ public:
 	//! Return the instance of projector associated to this painter
 	const StelProjectorP& getProjector() const {return prj;}
 	void setProjector(const StelProjectorP& p);
-
-	//! Draw the string at the given position and angle with the given font.
-	//! If the gravity label flag is set, uses drawTextGravity180.
-	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param str the text to print.
-	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
-	//! @param xshift shift in pixel in the rotated x direction.
-	//! @param yshift shift in pixel in the rotated y direction.
-	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
-	void drawText(const Vec3d& v, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
 
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
@@ -121,9 +98,6 @@ public:
 
 	//! Get the color currently used for drawing.
 	Vec4f getColor() const;
-
-	//! Get the font metrics for the current font.
-	QFontMetrics getFontMetrics() const;
 
 	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
 	//! This method needs to be called once at init.
@@ -153,9 +127,6 @@ public:
 	//! This function has no effect if a shader program is in use, or on OpenGL/ES 2.0. Shader programs must set the
 	//! point size in the vertex shader.
 	void setPointSize(qreal size);
-
-	//! Define the current shade model used when interpolating between vertex.
-	void setShadeModel(ShadeModel m);
 
 	//! Set whether texturing is enabled.
 	void enableTexture2d(bool b);
