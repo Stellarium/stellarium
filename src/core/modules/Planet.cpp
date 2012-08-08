@@ -227,7 +227,10 @@ float Planet::getSelectPriority(const StelCore* core) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.4) : ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
+	Vec3f col = ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
+	if (StelApp::getInstance().getVisionModeNight())
+		col = StelUtils::getNightColor(col);
+	return col;
 }
 
 
@@ -814,9 +817,19 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 			// Set the light parameters taking sun as the light source
-			static const Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
-			static const Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
-			static const Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
+			static Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
+			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
+			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
+			if (StelApp::getInstance().getVisionModeNight())
+			{
+				diffuse[1] = 0.; diffuse[2] = 0.;
+				ambient[1] = 0.; ambient[2] = 0.;
+			}
+			else
+			{
+				diffuse[1] = 2.; diffuse[2] = 2.;
+				ambient[1] = 0.02; ambient[2] = 0.02;
+			}
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
@@ -904,6 +917,12 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 			return;
 		}
 	}
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	if (StelApp::getInstance().getVisionModeNight())
+		painter->setColor(1.f, 0.f, 0.f);
+	else
+		painter->setColor(1.f, 1.f, 1.f);
+
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -1066,7 +1085,11 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter->setColor(1.f, 1.f, 1.f);
+	if (StelApp::getInstance().getVisionModeNight())
+		sPainter->setColor(1.f, 0.f, 0.f);
+	else
+		sPainter->setColor(1.f, 1.f, 1.f);
+
 	sPainter->enableTexture2d(true);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);

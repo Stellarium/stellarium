@@ -178,8 +178,12 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		// Compute 2D pos and return if outside screen
-		if (!prj->projectInPlace(pos)) return;
-		sPainter.setColor(0.4f,0.5f,0.8f);
+		if (!prj->projectInPlace(pos)) return;		
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(0.8f,0.0f,0.0f);
+		else
+			sPainter.setColor(0.4f,0.5f,0.8f);
+
 		texPointer->bind();
 
 		sPainter.enableTexture2d(true);
