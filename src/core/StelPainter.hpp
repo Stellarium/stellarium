@@ -168,30 +168,9 @@ public:
 	                         bool doSubDivise=true,
 	                         double maxSqDistortion=5.);
 
-	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
-
 	void drawSphericalTriangles(const StelVertexArray& va, bool textured, 
 	                            const SphericalCap* clippingCap=NULL, 
 	                            bool doSubDivide=true, double maxSqDistortion=5.);
-
-	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
-	//! The angle between start and stop must be < 180 deg.
-	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
-	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
-	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
-	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
-	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
-
-	//! Draw a great circle arc between points start and stop.
-	//! The angle between start and stop must be < 180 deg.
-	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
-	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
-	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
-	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
-	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=NULL, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
-
-	//! Draw a simple circle, 2d viewport coordinates in pixel
-	void drawCircle(float x, float y, float r);
 
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
@@ -353,10 +332,6 @@ private:
 			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
-
-	// Used by the method below
-	static QVector<Vec2f> smallCircleVertexArray;
-	void drawSmallCircleVertexArray();
 
 	//! The associated instance of projector
 	StelProjectorP prj;
