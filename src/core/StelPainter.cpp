@@ -21,23 +21,13 @@
 #include <QtOpenGL>
 
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelProjector.hpp"
-#include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QString>
-#include <QSettings>
-#include <QLinkedList>
 #include <QPainter>
 #include <QMutex>
-#include <QVarLengthArray>
 #include <QPaintEngine>
-
-#ifndef GL_MULTISAMPLE
-#define GL_MULTISAMPLE  0x809D
-#endif
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
@@ -70,22 +60,6 @@ void StelPainter::makeMainGLContextCurrent()
 	Q_ASSERT(glContext!=NULL);
 	Q_ASSERT(glContext->isValid());
 	glContext->makeCurrent();
-}
-
-void StelPainter::setProjector(const StelProjectorP& p)
-{
-	prj=p;
-	// Init GL viewport to current projector values
-	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
-	glFrontFace(prj->flipFrontBackFace()?GL_CW:GL_CCW);
-#ifndef STELPAINTER_GL2
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	// Set the real openGL projection and modelview matrix to 2d orthographic projection
-	// thus we never need to change to 2dMode from now on before drawing
-	glMultMatrixf(prj->getProjectionMatrix());
-	glMatrixMode(GL_MODELVIEW);
-#endif
 }
 
 //GL-REFACTOR: This has been refactored into QGL2Renderer and will be removed after 
