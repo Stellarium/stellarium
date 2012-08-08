@@ -230,34 +230,6 @@ public:
 	//! @param textured whether the current texture should be used for painting.
 	void drawRect2d(float x, float y, float width, float height, bool textured=true);
 
-	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(float radius, float oneMinusOblateness, int slices,
-	             int stacks, int orientInside = 0, bool flipTexture = false);
-
-	//! Generate a StelVertexArray for a sphere.
-	static StelVertexArray computeSphereNoLight
-		(float radius, float oneMinusOblateness, int slices,
-		 int stacks, int orientInside = 0, bool flipTexture = false);
-
-	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(float radius, float height, int slices, int orientInside = 0);
-
-	//! Draw a disk with a special texturing mode having texture center at center of disk.
-	//! The disk is made up of concentric circles with increasing refinement.
-	//! The number of slices of the outmost circle is (innerFanSlices<<level).
-	//! @param radius the radius of the disk.
-	//! @param innerFanSlices the number of slices.
-	//! @param level the numbe of concentric circles.
-	//! @param vertexArr the vertex array in which the resulting vertices are returned.
-	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
-	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
-
-	//! Draw a ring with a radial texturing.
-	void sRing(float rMin, float rMax, int slices, int stacks, int orientInside);
-
-	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(float radius, int slices, int stacks, float textureFov = 2.f*M_PI, int orientInside = 0);
-
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
 
