@@ -49,6 +49,8 @@
 #include "StelPainter.hpp"
 
 #include "renderer/StelRenderer.hpp"
+// GL-REFACTOR: Remove this once not needed
+#include <QtOpenGL>
 
 #include <iostream>
 #include <QStringList>

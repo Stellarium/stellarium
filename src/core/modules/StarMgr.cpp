@@ -20,13 +20,14 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
+#include <QCryptographicHash>
+#include <QDebug>
 #include <QFile>
+#include <QFileInfo>
+#include <QRegExp>
 #include <QSettings>
 #include <QString>
-#include <QRegExp>
-#include <QDebug>
-#include <QFileInfo>
+#include <QTextStream>
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"

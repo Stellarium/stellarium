@@ -21,7 +21,6 @@
 #define _STELTEXTUREMGR_HPP_
 
 #include <QObject>
-#include <QtOpenGL>
 
 #include "StelTexture.hpp"
 
