@@ -43,11 +43,6 @@ public:
 	static void makeMainGLContextCurrent();
 
 private:
-#ifndef NDEBUG
-	//! Mutex allowing thread safety
-	static class QMutex* globalMutex;
-#endif
-
 	//! The QPainter to use for some drawing operations.
 	static QPainter* qPainter;
 
