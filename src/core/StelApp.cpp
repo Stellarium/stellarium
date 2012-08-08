@@ -48,8 +48,6 @@
 #include "StelGuiBase.hpp"
 
 #include "renderer/StelRenderer.hpp"
-// GL-REFACTOR: Remove this once not needed
-#include <QtOpenGL>
 
 #include <iostream>
 #include <QStringList>
@@ -214,26 +212,6 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
-
-#ifndef USE_OPENGL_ES2
-	// Avoid using GL Shaders by default since it causes so many problems with broken drivers.
-	useGLShaders = confSettings->value("main/use_glshaders", false).toBool();
-	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms() && !qApp->property("onetime_safe_mode").isValid();
-
-	// We use OpenGL 2.1 features in our shaders
-	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
-
-	//GL-REFACTOR: useGLShaders will be removed completely,
-	//and the decision to use shaders will be made by the Renderer implementation.
-	//In our case, GL2Renderer uses shaders, GL1Renderer does not.
-	//Even when Qt5 removes GL1 support,
-	//we can use GL1Renderer when shaders are not wanted, as GL2 
-	//is backward compatible with GL1.
-	useGLShaders = true;
-	
-#else
-	useGLShaders = true;
-#endif
 
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr(renderer);
