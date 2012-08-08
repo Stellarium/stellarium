@@ -20,18 +20,10 @@
 #include "StelPainter.hpp"
 #include <QtOpenGL>
 
-#include "StelApp.hpp"
-#include "StelUtils.hpp"
-
 #include <QDebug>
 #include <QString>
 #include <QPainter>
-#include <QMutex>
 #include <QPaintEngine>
-
-#ifndef NDEBUG
-QMutex* StelPainter::globalMutex = new QMutex();
-#endif
 
 QPainter* StelPainter::qPainter = NULL;
 QGLContext* StelPainter::glContext = NULL;
