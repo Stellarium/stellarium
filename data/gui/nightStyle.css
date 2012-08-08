@@ -501,6 +501,10 @@ QCheckBox {
 	background: none;
 }
 
+QCheckBox:disabled {
+        color: rgb(100, 0, 0);
+}
+
 QCheckBox::indicator {
 	width: 16px;
 	height: 16px;
@@ -788,6 +792,15 @@ QHeaderView::section {
 QFileDialog {
 	background: rgb(35, 0, 0);
 }
+
+#configurationDialogForm QPushButton#screenshotBrowseButton {
+        image: url(:/graphicGui/nv_folder.png);
+}
+
+#configurationDialogForm QPushButton#getStarsButton {
+        icon: url(:/graphicGui/nv_btTimeRealtime-off.png);
+}
+
 /**** The following are used for Satellites ****/
 QListWidget#satellitesList, QListWidget#sourceList {
 		font-size: 8pt;
