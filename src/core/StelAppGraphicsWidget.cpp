@@ -255,6 +255,6 @@ void StelAppGraphicsWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 	const float x = scenePos().x();
 	const float y = scene()->sceneRect().height() - (scenePos().y() + geometry().height());
 	
-	stelApp->glWindowHasBeenResized(x, y, w, h);
+	stelApp->windowHasBeenResized(x, y, w, h);
 	renderer->viewportHasBeenResized(scene()->sceneRect().size().toSize());
 }
