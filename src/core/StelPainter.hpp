@@ -19,36 +19,9 @@
 
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
-#include "VecMath.hpp"
-#include "StelSphereGeometry.hpp"
-#include "StelProjectorType.hpp"
-#include "StelProjector.hpp"
-#include <QString>
-#include <QVarLengthArray>
-#include <QFontMetrics>
-
-//GL-REFACTOR: This will be defined while we refactor the GL2 code.
-#define STELPAINTER_GL2 1
- 
-#ifdef USE_OPENGL_ES2
- #define STELPAINTER_GL2 1
-#endif
-
-#ifdef STELPAINTER_GL2
-class QGLShaderProgram;
-#endif
 
 class QPainter;
 class QGLContext;
-
-//GL-REFACTOR: Remove this once it's not used
-//! Define the drawing mode when drawing polygons
-enum SphericalPolygonDrawMode
-{
-	SphericalPolygonDrawModeFill=0,        //!< Draw the interior of the polygon
-	SphericalPolygonDrawModeBoundary=1,    //!< Draw the boundary of the polygon
-	SphericalPolygonDrawModeTextureFill=2  //!< Draw the interior of the polygon filled with the current texture
-};
 
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
@@ -59,10 +32,6 @@ enum SphericalPolygonDrawMode
 class StelPainter
 {
 public:
-	//! Return the instance of projector associated to this painter
-	const StelProjectorP& getProjector() const {return prj;}
-	void setProjector(const StelProjectorP& p);
-
 	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
 	//! This method needs to be called once at init.
 	static void initSystemGLInfo(QGLContext* ctx);
@@ -74,9 +43,6 @@ public:
 	static void makeMainGLContextCurrent();
 
 private:
-	//! The associated instance of projector
-	StelProjectorP prj;
-
 #ifndef NDEBUG
 	//! Mutex allowing thread safety
 	static class QMutex* globalMutex;
