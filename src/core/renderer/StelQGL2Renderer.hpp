@@ -66,6 +66,12 @@ public:
 		// as we're not in valid state (getGLContext() isn't public - it doesn't call invariant)
 		getGLContext()->makeCurrent();
 
+		if(!QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) &&
+		   !QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0))
+		{
+			qWarning() << "StelQGL2Renderer::init : StelQGL2Renderer needs OpenGL 2.1 or OpenGL ES 2.0";
+		}
+
 		// Check for features required for the GL2 backend.
 		if(!gl.hasOpenGLFeature(QGLFunctions::Shaders))
 		{
