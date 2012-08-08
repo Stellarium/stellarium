@@ -59,24 +59,9 @@ enum SphericalPolygonDrawMode
 class StelPainter
 {
 public:
-	explicit StelPainter(const StelProjectorP& prj);
-	~StelPainter();
-
 	//! Return the instance of projector associated to this painter
 	const StelProjectorP& getProjector() const {return prj;}
 	void setProjector(const StelProjectorP& p);
-
-	//! Draw the given SphericalRegion.
-	//! @param region The SphericalRegion to draw.
-	//! @param drawMode define whether to draw the outline or the fill or both.
-	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
-	//! @param doSubDivise if true tesselates the object to follow projection distortions.
-	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, 
-	                         SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill,
-	                         const SphericalCap* clippingCap=NULL, 
-	                         bool doSubDivise=true,
-	                         double maxSqDistortion=5.);
 
 	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
 	//! This method needs to be called once at init.
@@ -102,9 +87,6 @@ private:
 
 	//! The main GL Context used by Stellarium.
 	static QGLContext* glContext;
-
-	//! Whether ARB_texture_non_power_of_two is supported on this card
-	static bool isNoPowerOfTwoAllowed;
 };
 
 #endif // _STELPAINTER_HPP_
