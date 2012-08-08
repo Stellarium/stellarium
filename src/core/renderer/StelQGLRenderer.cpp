@@ -131,7 +131,6 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 	return StelQGLTextureBackend::constructFromImage(this, QString(), params, image);
 }
 
-
 void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 {
 	invariant();

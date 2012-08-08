@@ -227,6 +227,13 @@ public:
 		glClear(GL_STENCIL_BUFFER_BIT);
 	}
 
+	virtual void swapBuffers()
+	{
+		invariant();
+		glContext->swapBuffers();
+		invariant();
+	}
+
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
 	virtual void makeGLContextCurrent()
 	{
