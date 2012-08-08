@@ -101,7 +101,7 @@ public:
 	void preDraw();
 
 	//! Update core state after drawing modules.
-	void postDraw();
+	void postDraw(StelRenderer* renderer);
 
 	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
 	//! only for 2d painting

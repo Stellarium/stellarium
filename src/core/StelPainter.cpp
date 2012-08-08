@@ -225,68 +225,6 @@ QFontMetrics StelPainter::getFontMetrics() const
 ///////////////////////////////////////////////////////////////////////////
 // Standard methods for drawing primitives
 
-// Fill with black around the circle
-void StelPainter::drawViewportShape(void)
-{
-	if (prj->maskType != StelProjector::MaskDisk)
-		return;
-
-	glDisable(GL_BLEND);
-	setColor(0.f,0.f,0.f);
-
-	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
-	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
-	GLint slices = 256;
-	GLfloat sweepAngle = 360.;
-
-	GLfloat sinCache[240];
-	GLfloat cosCache[240];
-	GLfloat vertices[(240+1)*2][3];
-	GLfloat deltaRadius;
-	GLfloat radiusHigh;
-
-	if (slices>=240)
-	{
-		slices=240-1;
-	}
-
-	if (outerRadius<=0.0 || innerRadius<0.0 ||innerRadius > outerRadius)
-	{
-		Q_ASSERT(0);
-		return;
-	}
-
-	/* Compute length (needed for normal calculations) */
-	deltaRadius=outerRadius-innerRadius;
-
-	/* Cache is the vertex locations cache */
-	for (int i=0; i<=slices; i++)
-	{
-		GLfloat angle=((M_PI*sweepAngle)/180.0f)*i/slices;
-		sinCache[i]=(GLfloat)sin(angle);
-		cosCache[i]=(GLfloat)cos(angle);
-	}
-
-	sinCache[slices]=sinCache[0];
-	cosCache[slices]=cosCache[0];
-
-	/* Enable arrays */
-	enableClientStates(true);
-	setVertexPointer(3, GL_FLOAT, vertices);
-
-	radiusHigh=outerRadius-deltaRadius;
-	for (int i=0; i<=slices; i++)
-	{
-		vertices[i*2][0]= prj->viewportCenter[0] + outerRadius*sinCache[i];
-		vertices[i*2][1]= prj->viewportCenter[1] + outerRadius*cosCache[i];
-		vertices[i*2][2] = 0.0;
-		vertices[i*2+1][0]= prj->viewportCenter[0] + radiusHigh*sinCache[i];
-		vertices[i*2+1][1]= prj->viewportCenter[1] + radiusHigh*cosCache[i];
-		vertices[i*2+1][2] = 0.0;
-	}
-	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
-	enableClientStates(false);
-}
 
 #define MAX_STACKS 4096
 static float cos_sin_rho[2*(MAX_STACKS+1)];
