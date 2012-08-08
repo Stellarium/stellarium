@@ -26,7 +26,6 @@
 
 struct StelVertexArray
 {
-	// TODO maybe merge this with StelPainter DrawingMode
 	enum StelPrimitiveType
 	{
 		Points                      = 0x0000, // GL_POINTS
