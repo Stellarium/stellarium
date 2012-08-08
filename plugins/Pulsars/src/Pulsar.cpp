@@ -339,6 +339,9 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
 	Vec3f color = Vec3f(0.4f,0.5f,1.2f);
+	if (StelApp::getInstance().getVisionModeNight())
+		color = StelUtils::getNightColor(color);
+
 	double mag = getVMagnitude(core, true);
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
