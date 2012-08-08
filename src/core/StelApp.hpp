@@ -146,8 +146,8 @@ public:
 	//! @return true if we should continue drawing (by calling the method again)
 	bool drawPartial(class StelRenderer* renderer);
 
-	//! Call this when the size of the GL window has changed.
-	void glWindowHasBeenResized(float x, float y, float w, float h);
+	//! Call this when the size of the window has changed.
+	void windowHasBeenResized(float x, float y, float w, float h);
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}

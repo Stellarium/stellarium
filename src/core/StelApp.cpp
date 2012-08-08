@@ -405,9 +405,9 @@ void StelApp::draw(StelRenderer* renderer)
 }
 
 /*************************************************************************
- Call this when the size of the GL window has changed
+ Call this when the size of the window has changed
 *************************************************************************/
-void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
+void StelApp::windowHasBeenResized(float x, float y, float w, float h)
 {
 	if (core)
 		core->windowHasBeenResized(x, y, w, h);
