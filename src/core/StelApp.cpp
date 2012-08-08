@@ -412,7 +412,7 @@ bool StelApp::drawPartial(StelRenderer* renderer)
 		drawState++;
 		return true;
 	}
-	core->postDraw();
+	core->postDraw(renderer);
 	drawState = 0;
 	return false;
 }
