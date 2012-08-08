@@ -251,7 +251,7 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	StelLoadingBar loadingBar(splashFileName, PACKAGE_VERSION, 45, 320, 121);
  #endif
 #endif
-	loadingBar.draw();
+	loadingBar.draw(renderer);
 
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5

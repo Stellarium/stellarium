@@ -577,6 +577,12 @@ public:
 	//! might not necessarily be based on OpenGL.
 	virtual void setStencilTest(const StencilTest test) = 0;
 
+	//! Swap front and back buffers.
+	//!
+	//! This is only needed before the Renderer takes control of frame start/end,
+	//! e.g. during loading at startup.
+	virtual void swapBuffers() = 0;
+
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
 	//!
