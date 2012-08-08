@@ -46,8 +46,6 @@ QMutex* StelPainter::globalMutex = new QMutex();
 QPainter* StelPainter::qPainter = NULL;
 QGLContext* StelPainter::glContext = NULL;
 
-bool StelPainter::isNoPowerOfTwoAllowed;
-
 void StelPainter::setQPainter(QPainter* p)
 {
 	qPainter=p;
@@ -74,56 +72,6 @@ void StelPainter::makeMainGLContextCurrent()
 	glContext->makeCurrent();
 }
 
-StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
-{
-	Q_ASSERT(proj);
-
-#ifndef NDEBUG
-	Q_ASSERT(globalMutex);
-	GLenum er = glGetError();
-	if (er!=GL_NO_ERROR)
-	{
-		if (er==GL_INVALID_OPERATION)
-			qFatal("Invalid openGL operation. It is likely that you used openGL calls without having a valid instance of StelPainter");
-	}
-
-	// Lock the global mutex ensuring that no other instances of StelPainter are currently being used
-	if (globalMutex->tryLock()==false)
-	{
-		qFatal("There can be only 1 instance of StelPainter at a given time");
-	}
-#endif
-
-	Q_ASSERT(qPainter);
-	qPainter->beginNativePainting();
-
-#ifndef STELPAINTER_GL2
-	// Save openGL projection state
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-	
-
-	glDisable(GL_LIGHTING);
-	glDisable(GL_MULTISAMPLE);
-	glDisable(GL_DITHER);
-	glDisable(GL_ALPHA_TEST);
-	glEnable(GL_LINE_SMOOTH);
-#endif
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
-	// Fix some problem when using Qt OpenGL2 engine
-	glStencilMask(0x11111111);
-	// Deactivate drawing in depth buffer by default
-	glDepthMask(GL_FALSE);
-	glDisable(GL_TEXTURE_2D);
-	setProjector(proj);
-}
-
 void StelPainter::setProjector(const StelProjectorP& p)
 {
 	prj=p;
@@ -140,56 +88,6 @@ void StelPainter::setProjector(const StelProjectorP& p)
 #endif
 }
 
-StelPainter::~StelPainter()
-{
-	Q_ASSERT(qPainter);
-
-#ifndef STELPAINTER_GL2
-	// Restore openGL projection state for Qt drawings
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-#endif
-#ifndef NDEBUG
-	GLenum er = glGetError();
-	if (er!=GL_NO_ERROR)
-	{
-		if (er==GL_INVALID_OPERATION)
-			qFatal("Invalid openGL operation detected in ~StelPainter()");
-	}
-#endif
-	qPainter->endNativePainting();
-
-#ifndef NDEBUG
-	// We are done with this StelPainter
-	globalMutex->unlock();
-#endif
-}
-
-// Draw the given SphericalRegion.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise, double maxSqDistortion)
-{
-	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
-		return;
-
-	switch (drawMode)
-	{
-		case SphericalPolygonDrawModeBoundary:
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			           "GL-REFACTOR - TODO boundary draw mode based on StelCircleArcRenderer");
-			break;
-		case SphericalPolygonDrawModeFill:
-		case SphericalPolygonDrawModeTextureFill:
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			           "GL-REFACTOR - fill draw modes were refactored already");
-		default:
-			Q_ASSERT(0);
-	}
-}
-
 //GL-REFACTOR: This has been refactored into QGL2Renderer and will be removed after 
 //the rest of StelPainter is refactored.
 void StelPainter::initSystemGLInfo(QGLContext* ctx)
@@ -199,5 +97,4 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	glContext = ctx;
 
 	makeMainGLContextCurrent();
-	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
 }
