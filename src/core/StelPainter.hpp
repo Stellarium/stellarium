@@ -59,18 +59,6 @@ enum SphericalPolygonDrawMode
 class StelPainter
 {
 public:
-	//! Define the drawing mode when drawing vertex
-	enum DrawingMode
-	{
-		Points                      = 0x0000, //!< GL_POINTS
-		Lines                       = 0x0001, //!< GL_LINES
-		LineLoop                    = 0x0002, //!< GL_LINE_LOOP
-		LineStrip                   = 0x0003, //!< GL_LINE_STRIP
-		Triangles                   = 0x0004, //!< GL_TRIANGLES
-		TriangleStrip               = 0x0005, //!< GL_TRIANGLE_STRIP
-		TriangleFan                 = 0x0006  //!< GL_TRIANGLE_FAN
-	};
-
 	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
 
@@ -94,78 +82,13 @@ public:
 	//! This method needs to be called once at init.
 	static void initSystemGLInfo(QGLContext* ctx);
 
-	//GL-REFACTOR: Sets shader globals used by StelPainter. 
-	//Will be removed as StelPainter is refactored.
-#ifdef STELPAINTER_GL2
-	static void TEMPSpecifyShaders(QGLShaderProgram *plain,
-	                               QGLShaderProgram *color,
-	                               QGLShaderProgram *texture,
-	                               QGLShaderProgram *colorTexture);
-#endif
-	
 	//! Set the QPainter to use for performing some drawing operations.
 	static void setQPainter(QPainter* qPainter);
 
 	//! Make sure that our GL context is current and valid.
 	static void makeMainGLContextCurrent();
 
-	// Thoses methods should eventually be replaced by a single setVertexArray
-	//! use instead of glVertexPointer
-	void setVertexPointer(int size, int type, const void* pointer) {
-		vertexArray.size = size; vertexArray.type = type; vertexArray.pointer = pointer;
-	}
-
-	//! use instead of glTexCoordPointer
-	void setTexCoordPointer(int size, int type, const void* pointer)
-	{
-		texCoordArray.size = size; texCoordArray.type = type; texCoordArray.pointer = pointer;
-	}
-
-	//! use instead of glColorPointer
-	void setColorPointer(int size, int type, const void* pointer)
-	{
-		colorArray.size = size; colorArray.type = type; colorArray.pointer = pointer;
-	}
-
-	//! use instead of glNormalPointer
-	void setNormalPointer(int type, const void* pointer)
-	{
-		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
-	}
-
-	//! use instead of glEnableClient
-	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
-
-	//! convenience method that enable and set all the given arrays.
-	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
-	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
-
-	//! Draws primitives using vertices from the arrays specified by setVertexArray().
-	//! The type of primitive to draw is specified by mode.
-	//! If indices is NULL, this operation will consume count values from the enabled arrays, starting at offset.
-	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
-	//! enabled arrays.
-	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
-
 private:
-
-	friend class StelTextureMgr;
-	friend class StelTexture;
-	//! Struct describing one opengl array
-	typedef struct
-	{
-		int size;				// The number of coordinates per vertex.
-		int type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
-		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.
-		bool enabled;			// Define whether the array is enabled or not.
-	} ArrayDesc;
-
-	//! Project an array using the current projection.
-	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned int* indices=NULL);
-
-	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
-
 	//! The associated instance of projector
 	StelProjectorP prj;
 
@@ -182,46 +105,6 @@ private:
 
 	//! Whether ARB_texture_non_power_of_two is supported on this card
 	static bool isNoPowerOfTwoAllowed;
-
-#ifdef STELPAINTER_GL2
-	Vec4f currentColor;
-	bool texture2dEnabled;
-	static QGLShaderProgram* basicShaderProgram;
-	struct BasicShaderVars {
-		int projectionMatrix;
-		int globalColor;
-		int vertex;
-	};
-	static BasicShaderVars basicShaderVars;
-	static QGLShaderProgram* colorShaderProgram;
-	static QGLShaderProgram* texturesShaderProgram;
-	struct TexturesShaderVars {
-		int projectionMatrix;
-		int texCoord;
-		int vertex;
-		int globalColor;
-		int texture;
-	};
-	static TexturesShaderVars texturesShaderVars;
-	static QGLShaderProgram* texturesColorShaderProgram;
-	struct TexturesColorShaderVars {
-		int projectionMatrix;
-		int texCoord;
-		int vertex;
-		int color;
-		int texture;
-	};
-	static TexturesColorShaderVars texturesColorShaderVars;
-#endif
-
-	//! The descriptor for the current opengl vertex array
-	ArrayDesc vertexArray;
-	//! The descriptor for the current opengl texture coordinate array
-	ArrayDesc texCoordArray;
-	//! The descriptor for the current opengl normal array
-	ArrayDesc normalArray;
-	//! The descriptor for the current opengl color array
-	ArrayDesc colorArray;
 };
 
 #endif // _STELPAINTER_HPP_
