@@ -45,18 +45,19 @@
 #include "TrailGroup.hpp"
 #include "RefractionExtinction.hpp"
 
-#include <functional>
 #include <algorithm>
+#include <functional>
 
-#include <QTextStream>
+#include <QDebug>
+#include <QFile>
+#include <QMap>
+#include <QMapIterator>
+#include <QMultiMap>
 #include <QSettings>
-#include <QVariant>
 #include <QString>
 #include <QStringList>
-#include <QMap>
-#include <QMultiMap>
-#include <QMapIterator>
-#include <QDebug>
+#include <QTextStream>
+#include <QVariant>
 
 SolarSystem::SolarSystem() 
 	: moonScale(1.)

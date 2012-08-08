@@ -18,9 +18,9 @@
  */
 
 #include <QDebug>
-
 #include <QFile>
 #include <QTextStream>
+#include <QSettings>
 
 #include "Atmosphere.hpp"
 #include "renderer/StelRenderer.hpp"

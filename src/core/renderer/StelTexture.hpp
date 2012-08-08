@@ -22,7 +22,6 @@
 
 #include <QObject>
 #include <QImage>
-#include <QtOpenGL>
 
 #include "StelTextureNew.hpp"
 #include "StelTextureParams.hpp"

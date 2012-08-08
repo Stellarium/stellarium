@@ -1347,7 +1347,7 @@ void Oculars::paintCrosshairs(StelRenderer* renderer)
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 	                   projector->getViewportPosY()+projector->getViewportHeight()/2);
-	GLdouble length = 0.5 * params.viewportFovDiameter;
+	double length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
 	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
 		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
@@ -1444,7 +1444,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 
-	// set up the color and the GL state
+	// set up drawing
 	renderer->setGlobalColor(0.8f, 0.48f, 0.0f);
 	renderer->setBlendMode(BlendMode_Alpha);
 

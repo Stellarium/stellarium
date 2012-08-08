@@ -34,7 +34,6 @@
 #include <QRegExp>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QSettings>
 #include <QByteArray>
 

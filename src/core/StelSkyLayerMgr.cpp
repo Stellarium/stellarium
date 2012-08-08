@@ -29,7 +29,6 @@
 #include "StelSkyDrawer.hpp"
 #include "renderer/StelRenderer.hpp"
 
-#include <QtOpenGL>
 #include <QNetworkAccessManager>
 #include <stdexcept>
 #include <QDebug>

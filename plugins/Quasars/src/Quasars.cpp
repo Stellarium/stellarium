@@ -33,13 +33,14 @@
 #include "renderer/StelRenderer.hpp"
 
 #include <QDebug>
-#include <QFileInfo>
 #include <QFile>
-#include <QVariantMap>
-#include <QVariant>
+#include <QFileInfo>
 #include <QList>
+#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
+#include <QVariant>
+#include <QVariantMap>
 
 /*
  This method is the one called automatically by the StelModuleMgr just 
