@@ -85,13 +85,6 @@ void StelPainter::makeMainGLContextCurrent()
 	glContext->makeCurrent();
 }
 
-void StelPainter::swapBuffer()
-{
-	Q_ASSERT(glContext!=NULL);
-	Q_ASSERT(glContext->isValid());
-	glContext->swapBuffers();
-}
-
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
@@ -138,7 +131,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glStencilMask(0x11111111);
 	// Deactivate drawing in depth buffer by default
 	glDepthMask(GL_FALSE);
-	enableTexture2d(false);
+	glDisable(GL_TEXTURE_2D);
 	setProjector(proj);
 }
 
@@ -188,63 +181,10 @@ StelPainter::~StelPainter()
 }
 
 
-void StelPainter::setFont(const QFont& font)
-{
-	Q_ASSERT(qPainter);
-	qPainter->setFont(font);
-}
-
-void StelPainter::setColor(float r, float g, float b, float a)
-{
-#ifndef STELPAINTER_GL2
-	glColor4f(r,g,b,a);
-#else
-	currentColor.set(r,g,b,a);
-#endif
-}
-
-Vec4f StelPainter::getColor() const
-{
-#ifndef STELPAINTER_GL2
-	GLfloat tmpColor[4];
-	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
-	return Vec4f(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
-#else
-	return currentColor;
-#endif
-}
-
 static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
 static QVarLengthArray<unsigned int, 4096> indexArray;
 
-
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
-{
-	if (checkDiscontinuity && prj->hasDiscontinuity())
-	{
-		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
-		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
-		return;
-	}
-
-	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
-	if (arr.isTextured())
-	{
-		setTexCoordPointer(2, GL_FLOAT, arr.texCoords.constData());
-		enableClientStates(true, true);
-	}
-	else
-	{
-		enableClientStates(true, false);
-	}
-	if (arr.isIndexed())
-		drawFromArray((StelPainter::DrawingMode)arr.primitiveType, arr.indices.size(), 0, true, arr.indices.constData());
-	else
-		drawFromArray((StelPainter::DrawingMode)arr.primitiveType, arr.vertex.size());
-
-	enableClientStates(false);
-}
 
 // Draw the given SphericalRegion.
 void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise, double maxSqDistortion)
@@ -265,27 +205,6 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		default:
 			Q_ASSERT(0);
 	}
-}
-
-void StelPainter::setPointSize(qreal size)
-{
-#ifndef STELPAINTER_GL2
-	glPointSize(size);
-#else
-	Q_UNUSED(size);
-#endif
-}
-
-void StelPainter::enableTexture2d(bool b)
-{
-#ifndef STELPAINTER_GL2
-	if (b)
-		glEnable(GL_TEXTURE_2D);
-	else
-		glDisable(GL_TEXTURE_2D);
-#else
-	texture2dEnabled = b;
-#endif
 }
 
 //GL-REFACTOR: This has been refactored into QGL2Renderer and will be removed after 
