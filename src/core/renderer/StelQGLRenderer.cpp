@@ -149,6 +149,8 @@ void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 	// even if we need to lower the FPS.
 	const int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
 
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT);
 	while (true)
 	{
 		const bool keepDrawing = renderClient.drawPartial();
