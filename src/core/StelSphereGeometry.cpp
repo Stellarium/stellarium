@@ -1022,29 +1022,6 @@ bool SphericalCap::contains(const SphericalConvexPolygon& cvx) const
 	return true;
 }
 
-//GL-REFACTOR: Remove these two overloads after StelPainter is removed.
-bool SphericalCap::containsTriangle(const Vec3d* v) const
-{
-	return contains(*(v++)) && contains(*(v++)) && contains(*v);
-}
-
-bool SphericalCap::intersectsTriangle(const Vec3d* v) const
-{
-	if (contains(*v) || contains(*(v+1)) || contains(*(v+2)))
-		return true;
-	// No points of the triangle are inside the cap
-	if (d<=0)
-		return false;
-
-	if (!sideHalfSpaceIntersects(*v, *(v+1), *this) || !sideHalfSpaceIntersects(*(v+1), *(v+2), *this) || !sideHalfSpaceIntersects(*(v+2), *v, *this))
-		return false;
-
-	// Warning!!!! There is a last case which is not managed!
-	// When all the points of the polygon are outside the circle but the halfspace of the corner the closest to the
-	// circle intersects the circle halfspace..
-	return true;
-}
-
 bool SphericalCap::containsTriangle(const Triplet<Vec3d> triangle) const
 {
 	return contains(triangle.a) && contains(triangle.b) && contains(triangle.c);
