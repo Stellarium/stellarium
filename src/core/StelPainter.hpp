@@ -113,10 +113,6 @@ public:
 	                         bool doSubDivise=true,
 	                         double maxSqDistortion=5.);
 
-	void drawSphericalTriangles(const StelVertexArray& va, bool textured, 
-	                            const SphericalCap* clippingCap=NULL, 
-	                            bool doSubDivide=true, double maxSqDistortion=5.);
-
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
@@ -259,16 +255,6 @@ private:
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
 	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned int* indices=NULL);
-
-	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
-	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
-	//! The size of each edge must be < 180 deg.
-	//! @param vertices a pointer to an array of 3 vertices.
-	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
-	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
-	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
-			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL, double maxSqDistortion=5., int nbI=0,
-			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
 
