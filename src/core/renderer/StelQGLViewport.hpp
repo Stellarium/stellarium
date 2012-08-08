@@ -114,9 +114,28 @@ public:
 	}
 	
 	//! Set the default painter to use when not drawing to FBO.
-	void setDefaultPainter(QPainter* const painter)
+	//!
+	//! This is the only place where we might be getting a painter from outside world,
+	//! so we require that it's GL or GL2.
+	//!
+	//! @param painter Painter to set.
+	//! @param context GL context used by the renderer, for error checking.
+	void setDefaultPainter(QPainter* const painter, const QGLContext* const context)
 	{
 		invariant();
+		if(NULL != painter)
+		{
+			Q_ASSERT_X(painter->paintEngine()->type() == QPaintEngine::OpenGL ||
+			           painter->paintEngine()->type() == QPaintEngine::OpenGL2,
+			           Q_FUNC_INFO, 
+			           "QGL StelRenderer backends need a QGLWidget to be set as the "
+			           "viewport on the graphics view");
+			QGLWidget* widget = dynamic_cast<QGLWidget*>(painter->device());
+			Q_ASSERT_X(NULL != widget && widget->context() == context, Q_FUNC_INFO,
+			           "Painter used with QGL StelRenderer backends needs to paint on a QGLWidget "
+			           "with the same GL context as the one used by the renderer");
+		}
+
 		defaultPainter = painter;
 		invariant();
 	}
@@ -222,7 +241,6 @@ public:
 		invariant();
 		Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, "Painting is already disabled");
 		
-		StelPainter::setQPainter(NULL);
 		if(usingGLWidgetPainter)
 		{
 			delete painter;
@@ -316,11 +334,9 @@ private:
 		{
 			this->painter = new QPainter(glWidget);
 			usingGLWidgetPainter = true;
-			StelPainter::setQPainter(this->painter);
 			return;
 		}
 		this->painter = painter;
-		StelPainter::setQPainter(this->painter);
 		invariant();
 	}
 

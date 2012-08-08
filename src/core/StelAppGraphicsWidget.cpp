@@ -57,7 +57,10 @@ public:
 
 	virtual bool drawPartial() {return widget->paintPartial();}
 
-	virtual QPainter* getPainter() {return painter;}
+	virtual QPainter* getPainter() 
+	{
+		return painter;
+	}
 
 	virtual StelViewportEffect* getViewportEffect() {return widget->viewportEffect;}
 
