@@ -500,6 +500,10 @@ QCheckBox {
 	background: none;
 }
 
+QCheckBox:disabled {
+        color: rgb(50, 50, 50);
+}
+
 QCheckBox::indicator {
 	width: 16px;
 	height: 16px;
@@ -530,11 +534,6 @@ QListWidget::indicator:checked, QListView::indicator:checked {
 QListWidget::indicator:unchecked, QListView::indicator:unchecked {
 	image: url(:/graphicGui/checkbox-unchecked.png);
 }
-
-/*QCheckBox:disabled {
-	color: rgb(210, 0, 0);
-	font-weight: 500;
-}*/
 
 QRadioButton {
 	color: rgb(3, 3, 3);
@@ -891,6 +890,14 @@ QWidget#listManagerWidget {
 
 QGraphicsWidget#observationListView  QLabel {
 		font-size: 40px;
+}
+
+#configurationDialogForm QPushButton#screenshotBrowseButton {
+        image: url(:/graphicGui/folder.png);
+}
+
+#configurationDialogForm QPushButton#getStarsButton {
+        icon: url(:/graphicGui/btTimeRealtime-off.png);
 }
 
 /**** The following are used for Satellites ****/

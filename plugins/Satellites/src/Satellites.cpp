@@ -1199,7 +1199,10 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
-		glColor3f(0.4f,0.5f,0.8f);
+		if (StelApp::getInstance().getVisionModeNight())
+			glColor3f(0.8f,0.0f,0.0f);
+		else
+			glColor3f(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
 		glEnable(GL_TEXTURE_2D);
