@@ -232,11 +232,6 @@ public:
 			return false;
 		}
 		
-		// TODO remove this as we refactor StelPainter.
-		StelPainter::TEMPSpecifyShaders(&(plainShader->getProgram()),
-		                                &(colorShader->getProgram()),
-		                                &(textureShader->getProgram()),
-		                                &(colorTextureShader->getProgram()));
 		initialized = true;
 		invariant();
 		return true;
