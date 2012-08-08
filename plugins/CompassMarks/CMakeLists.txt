@@ -1,5 +1,5 @@
 # This is the cmake config file for the CompassMarks plugin
-SET(COMPASSMARKS_VERSION "0.1.0")
+SET(COMPASSMARKS_VERSION "0.2.1")
 
 ADD_SUBDIRECTORY( src )
 
