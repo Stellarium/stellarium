@@ -21,7 +21,7 @@ public:
 	//! Called by StelQGL2Renderer::drawVertexBufferBackend().
 	//!
 	//! @param renderer         Renderer that owns this buffer.
-	//! @param projectionMatrix Projection matrix (in GL format) used for drawing.
+	//! @param projectionMatrix Projection matrix (in Qt format) used for drawing.
 	//! @param indexBuffer      If NULL, all vertices in the buffer are drawn 
 	//!                         in the order they are stored.
 	//!                         If not NULL, specifies indices of vertices to draw.
