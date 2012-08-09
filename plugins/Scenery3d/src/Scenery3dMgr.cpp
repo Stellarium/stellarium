@@ -250,16 +250,22 @@ void Scenery3dMgr::init()
         univShader  = 0;
     }
 
-
+    qWarning() << "init scenery3d object...";
     scenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
+    qWarning() << "init scenery3d object...done.\n";
     scenery3d->setShaders(shadowShader, bumpShader, univShader);
     scenery3d->setShadowsEnabled(enableShadows);
     scenery3d->setBumpsEnabled(enableBumps);
 
     //Initialize Shadow Mapping
+    qWarning() << "init scenery3d object shadowmapping.";
     if(shadowmapSize){
         scenery3d->initShadowMapping();
     }
+    else
+        qWarning() << "Note: shadowmapping disabled by zero size.\n";
+
+    qWarning() << "init scenery3d object shadowmapping...done\n";
 }
 
 bool Scenery3dMgr::configureGui(bool show)
