@@ -39,6 +39,11 @@ public:
 	// search for file with shortcuts, load shortcuts from it
 	void loadShortcuts();
 
+	// save current shortcuts to file
+	void saveShortcuts();
+
+	void saveShortcuts(class QFile file);
+
 	// Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
 	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& primaryKey, const QString& altKey,
 												const QString& groupId, bool checkable=true, bool autoRepeat=false, bool global=false);
@@ -68,6 +73,10 @@ public slots:
 	void setAllActionsEnabled(bool enable);
 
 private:
+	// copy default shortcuts file (in usr dir) to shortcuts file.
+	// Return value - whether copy was successful
+	bool copyDefaultFile();
+
 	// init and add to map group with parsed from file properties
 	void addGroup(const QString& id, QString text, const QString& pluginId = "");
 

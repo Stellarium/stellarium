@@ -192,6 +192,23 @@ void StelShortcutMgr::addGroup(const QString &id, QString text, const QString &p
 	shGroups[id]->setEnabled(enabled);
 }
 
+bool StelShortcutMgr::copyDefaultFile()
+{
+	try
+	{
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/data/");
+		QString shortcutsFileFullPath = StelFileMgr::getUserDir() + "/data/shortcuts.json";
+		qDebug() << "Creating file " << shortcutsFileFullPath;
+		QFile::copy(StelFileMgr::findFile("data/default_shortcuts.json"), shortcutsFileFullPath);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "Could not create shortcuts file data/shortcuts.json. Error: " << e.what();
+		return false;
+	}
+	return true;
+}
+
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
 	QFile jsonFile(filePath);
@@ -294,33 +311,37 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 void StelShortcutMgr::loadShortcuts()
 {
 	qDebug() << "Loading shortcuts ...";
-	QStringList shortcutFiles;
-	try
+	QString shortcutsFilePath = StelFileMgr::getUserDir() + "/data/shortcuts.json";
+	if (!StelFileMgr::exists(shortcutsFilePath))
 	{
-		shortcutFiles = StelFileMgr::findFileInAllPaths("data/default_shortcuts.json");
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading default_shortcuts.json (unable to find data/default_shortcuts.json): " << e.what() << endl;
-		return;
-	}
-	foreach (QString shortcutFile, shortcutFiles)
-	{
-		if (loadShortcuts(shortcutFile))
-			break;
-		else
+		qWarning() << "data/shortcuts.json doesn't exist, copy default";
+		if (!copyDefaultFile())
 		{
-			if (shortcutFile.contains(StelFileMgr::getUserDir()))
-			{
-				QString newName = QString("%1/data/shortcuts-%2.json").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
-				if (QFile::rename(shortcutFile, newName))
-					qWarning() << "Invalid shortcuts file" << shortcutFile << "has been renamed to" << newName;
-				else
-				{
-					qWarning() << "Invalid shortcuts file" << shortcutFile << "cannot be removed!";
-					qWarning() << "Please either delete it, rename it or move it elsewhere.";
-				}
-			}
+			qWarning() << "Couldn't copy default shortcuts file, shortcuts aren't loaded";
+			return;
 		}
 	}
+	if (!loadShortcuts(shortcutsFilePath))
+	{
+		qWarning() << "Invalid shortcuts file, shortcuts aren't loaded.";
+	}
+}
+
+void StelShortcutMgr::saveShortcuts()
+{
+//	qDebug() << "Saving shortcuts ...";
+//	try
+//	{
+//		StelFileMgr::findFile()
+//	}
+//	catch(std::runtime_error& e)
+//	{
+//		qWarning() << "ERROR while saving shortcuts.json (unable to open data/shortcuts.json): " << e.what() << endl;
+//		return;
+//	}
+}
+
+void StelShortcutMgr::saveShortcuts(QFile file)
+{
+
 }
