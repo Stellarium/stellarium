@@ -317,15 +317,32 @@ public:
 	//! @param margin the minimum enlargement margin in radian.
 	virtual SphericalRegionP getEnlarged(double margin) const;
 
-	//! Return an openGL compatible array to be displayed using vertex arrays.
-	virtual StelVertexArray getFillVertexArray() const 
+	//! Get a vector of vertex positions forming the region.
+	virtual const QVector<Vec3d>& getFillVertexPositions() const
 	{
-		return getOctahedronPolygon().getFillVertexArray();
+		return getOctahedronPolygon().getFillVertexArray().vertex;
+	}
+
+	//! Get primitive type determining how vertices in vector returned by
+	//! getFillVertexPositions() form triangles.
+	virtual PrimitiveType getFillPrimitiveType() const 
+	{
+		return PrimitiveType_Triangles;
 	}
 
 	//! Get the outline of the contours defining the SphericalPolygon.
-	//! @return a list of vertex which taken 2 by 2 define the contours of the polygon.
-	virtual StelVertexArray getOutlineVertexArray() const {return getOctahedronPolygon().getOutlineVertexArray();}
+	//! @return a list of vertices which define the contours of the polygon.
+	virtual const QVector<Vec3d>& getOutlineVertexPositions() const 
+	{
+		return getOctahedronPolygon().getOutlineVertexArray().vertex;
+	}
+
+	//! Get primitive type determining how vertices in vector returned by
+	//! getOutlinePrimitiveType() form lines.
+	virtual PrimitiveType getOutlinePrimitiveType() const
+	{
+		return PrimitiveType_Lines;
+	}
 
 	//! Get the contours defining the SphericalPolygon when combined using a positive winding rule.
 	//! The default implementation return a list of tesselated triangles derived from the OctahedronPolygon.
@@ -885,12 +902,25 @@ public:
 		return OctahedronPolygon(contour);
 	}
 
-	virtual StelVertexArray getFillVertexArray() const 
+	virtual const QVector<Vec3d>& getFillVertexPositions() const
 	{
-		return StelVertexArray(contour, StelVertexArray::TriangleFan);
+		return contour;
 	}
 
-	virtual StelVertexArray getOutlineVertexArray() const {return StelVertexArray(contour, StelVertexArray::LineLoop);}
+	virtual PrimitiveType getFillPrimitiveType() const 
+	{
+		return PrimitiveType_TriangleFan;
+	}
+
+	virtual const QVector<Vec3d>& getOutlineVertexPositions() const 
+	{
+		return contour;
+	}
+
+	virtual PrimitiveType getOutlinePrimitiveType() const
+	{
+		return PrimitiveType_LineLoop;
+	}
 
 	virtual double getArea() const;
 	virtual bool isEmpty() const {return contour.isEmpty();}
@@ -1098,13 +1128,6 @@ public:
 		{
 			delete fillTexturedVertexBuffer;
 		}
-	}
-
-	//! Return an openGL compatible array to be displayed using vertex arrays.
-	//! This method is not optimized for SphericalConvexPolygon instances.
-	virtual StelVertexArray getFillVertexArray() const 
-	{
-		return StelVertexArray(contour, StelVertexArray::TriangleFan, textureCoords);
 	}
 
 	//! Set a single contour defining the SphericalPolygon.
