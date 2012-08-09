@@ -31,8 +31,6 @@ public:
 private:
 	//! Construct a StelTestQGL2VertexBufferBackend. Only StelQGL2Renderer can do this.
 	//!
-	//! Initializes vertex attribute buffers.
-	//!
 	//! @param type Graphics primitive type stored in the buffer.
 	//! @param attributes Specifications of vertex attributes that will be stored in the buffer.
 	StelTestQGL2VertexBufferBackend(const PrimitiveType type,
