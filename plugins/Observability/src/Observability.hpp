@@ -28,7 +28,7 @@
 
 class QPixmap;
 class StelButton;
-
+class ObservabilityDialog;
 
 class Observability : public StelModule
 {
@@ -42,11 +42,61 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 
+	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this plugin.
+	virtual bool configureGui(bool show=true);
+
+
+	//! Set up the plugin with default values.
+	void restoreDefaults(void);
+	void restoreDefaultConfigIni(void);
+
+	//! Read (or re-read) settings from the main config file.  This will be called from init and also
+	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
+	void readSettingsFromConfig(void);
+
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
+
+	//! Set whether today's ephemeris are shown.
+	void setTodayShow(bool);
+
+	//! Set whether Heliacal rise/set days are shown.
+	void setHeliacalShow(bool);
+
+	//! Set whether day of Sun's opposition is shown.
+	void setOppositionShow(bool);
+
+	//! Set whether range of good dates is shown.
+	void setGoodDatesShow(bool);
+
+	//! Set the font colors. Color is (0,1,2) for (R,G,B):
+	void setFontColor(int Color, int Value);
+
+	//! Set the font size:
+	void setFontSize(int);
+
+	//! get Show Flags from current configuration:
+	bool getShowFlags(int);
+
+	//! get the current font color:
+	Vec3f getFontColor(void);
+	
+	//! get current font size:
+	int getFontSize(void);
+
 public slots:
 //! Set whether observability will execute or not:
 	void enableObservability(bool b);
 
 private:
+
+
+//! Stuff for the configuration GUI:
+	ObservabilityDialog* configDialog;
+	QByteArray normalStyleSheet;
+	QByteArray nightStyleSheet;
+
+
 //! Computes the Hour Angle (culmination=0h) in absolute value (from 0h to 12h).
 //! @param latitude latitude of the observer (in radians).
 //! @param elevation elevation angle of the object (horizon=0) in radians.
@@ -99,8 +149,13 @@ private:
 //! Just convert the Vec3d named TempLoc into RA/Dec:
 	virtual void toRADec(Vec3d TempLoc, double &RA, double &Dec);
 
-//! The opposite of above (set TempLoc from RA and Dec):
-//	virtual void fromRADec(Vec3d* TempLoc, double RA, double Dec);
+//! Add a given (float) number of hours to a time. Update the time accordingly.
+//! @param Hour Hour of the time.
+//! @param Minute Minute of the time.
+//! @param H Hours to be added to the time.
+//! @param newHour Hour of the updated time.
+//! @param newMinute Minute of the updated time.
+//	virtual void addTime(int hour, int minute, double H, int &newHour, int &newMinute);
 
 
 //! Vector to store the Julian Dates for the current year:
@@ -111,7 +166,7 @@ private:
 	virtual bool CheckRise(int i);
 
 //! Some useful constants (self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
@@ -141,19 +196,22 @@ private:
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
 	QString selName, bestNight, ObsRange, objname, Heliacal;
 
+//! Strings to save ephemeris Times:
+	QString RiseTime, SetTime, CulmTime;
+
 //! Just the names of the months.
 	QString months[12];
 
 //! Equatorial and local coordinates of currently-selected source.
 	Vec3d EquPos, LocPos;
 
-//! Some booleans to check the kind of source selected.
-	bool isStar,isMoon,isSun,isScreen, LastSun, raised;
+//! Some booleans to check the kind of source selected and the kind of output to produce.
+	bool isStar,isMoon,isSun,isScreen, LastSun, raised, configChanged;
 
 //! Some booleans to select the kind of output.
 	bool show_Heliacal, show_Good_Nights, show_Best_Night, show_Today;
 
-//! Parameters for the graphics:
+//! Parameters for the graphics (i.e., font, icons, etc.):
 	QFont font;
 	Vec3f fontColor;
 	bool flagShowObservability;
