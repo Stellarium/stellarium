@@ -15,10 +15,31 @@
 //! (although we can still keep this implementation for GL1).
 class StelQGLIndexBuffer : public StelIndexBuffer
 {
-//! StelQGLRenderer constructs QGL index buffers.
+// StelQGLRenderer constructs QGL index buffers.
 friend class StelQGLRenderer;
-//! Vertex buffer accesses index buffer data when drawing.
-friend class StelTestQGL2VertexBufferBackend;
+// For optimized projection code.
+friend class StelQGLArrayVertexBufferBackend;
+public:
+
+	// Member functions used by the QGL backends
+
+	//! Get a raw pointer to index data for OpenGL.
+	const GLvoid* indices() const
+	{
+		Q_ASSERT_X(locked(), Q_FUNC_INFO,
+		           "Trying to access raw data of an unlocked index buffer");
+		if(indexType_ == IndexType_U16)      {return indices16.constData();}
+		else if(indexType_ == IndexType_U32) {return indices32.constData();}
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
+		// Prevents GCC from complaining about exiting a non-void function:
+		return NULL;
+	}
+
+	//! Get maximum index value.
+	uint maxIndex() const
+	{
+		return maxIndex_;
+	}
 protected:
 	// All bound checks are done in StelIndexBuffer.
 
@@ -84,24 +105,6 @@ private:
 
 	//! Maximum index value in the buffer.
 	uint maxIndex_;
-
-	//! Get a raw pointer to index data for OpenGL.
-	const GLvoid* indices() const
-	{
-		Q_ASSERT_X(locked(), Q_FUNC_INFO,
-		           "Trying to access raw data of an unlocked index buffer");
-		if(indexType_ == IndexType_U16)      {return indices16.constData();}
-		else if(indexType_ == IndexType_U32) {return indices32.constData();}
-		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
-		// Prevents GCC from complaining about exiting a non-void function:
-		return NULL;
-	}
-
-	//! Get maximum index value.
-	uint maxIndex() const
-	{
-		return maxIndex_;
-	}
 
 	//! Get number of indices we can hold without enlarging indices16/indices32.
 	int indexCapacity() const

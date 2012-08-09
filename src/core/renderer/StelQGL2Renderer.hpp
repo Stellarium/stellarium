@@ -28,7 +28,7 @@
 //
 // Also, note that on R300, NPOT don't work with mipmaps, and on GeForceFX, they are emulated.
 
-//! Renderer backend using OpenGL2 with Qt.
+//! Renderer backend using OpenGL 2.1 with Qt.
 class StelQGL2Renderer : public StelQGLRenderer
 {
 public:
