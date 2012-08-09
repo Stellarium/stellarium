@@ -26,6 +26,7 @@
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "TriangleIterator.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
 #include "renderer/StelRenderer.hpp"
 
 
@@ -1005,6 +1006,28 @@ void SphericalConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelPr
 void SphericalTexturedConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjectorP projector)
 {
 	renderer->drawVertexBuffer(fillTexturedVertexBuffer, NULL, projector);
+}
+
+void SphericalRegion::drawOutline(StelRenderer* renderer, const DrawParams& params)
+{
+	if(params.subdivide_ || params.projector_->intersectViewportDiscontinuity(getBoundingCap()))
+	{
+		StelCircleArcRenderer circleArcRenderer(renderer, params.projector_);
+		circleArcRenderer.drawGreatCircleArcs(getOutlineVertexPositions(), 
+		                                      getOutlinePrimitiveType(), params.clippingCap_);
+		return;
+	}
+	StelVertexBuffer<PlainVertex>* vertices = 
+		renderer->createVertexBuffer<PlainVertex>(getOutlinePrimitiveType());
+	const QVector<Vec3d>& positions = getOutlineVertexPositions();
+	for (int p = 0; p < positions.size(); p++) 
+	{
+		vertices->addVertex(PlainVertex(positions[p]));
+	}
+
+	vertices->lock();
+	renderer->drawVertexBuffer(vertices, NULL, params.projector_);
+	delete vertices;
 }
 
 
