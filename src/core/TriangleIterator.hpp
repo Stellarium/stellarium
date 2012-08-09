@@ -22,6 +22,8 @@ public:
 	//!
 	//! @param vertices      Vertices to iterate over.
 	//! @param primitiveType Primitive type to determine how the vertices form triangles.
+	//!                      Must be PrimitiveType_Triangles, PrimitiveType_TriangleStrip or 
+	//!                      PrimitiveType_TriangleFan.
 	//!
 	//! Vertex count can be 0, but can't be 1 or 2. If primitiveType is PrimitiveType_Triangles,
 	//! vertex count must be divisible by 3.
