@@ -91,6 +91,7 @@ SET(stellarium_lib_SRCS
 	core/StelFader.hpp
 	core/StelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
+	core/TriangleIterator.hpp
 	core/OctahedronPolygon.cpp
 	core/OctahedronPolygon.hpp
 	core/StelIniParser.cpp
