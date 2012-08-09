@@ -415,8 +415,6 @@ public:
 	SphericalRegionP getSubtraction(const AllSkySphericalRegion& r) const;
 	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion& r) const;
 
-	//GL-REFACTOR TODO drawOutline
-	
 	//! Draw the region as triangles (i.e. filling the region).
 	//!
 	//! @param renderer   Renderer to use for drawing.
@@ -424,6 +422,15 @@ public:
 	//!
 	//! @see DrawParams
 	virtual void drawFill(class StelRenderer* renderer, const DrawParams& params);
+
+	//! Draw the outline of the region.
+	//!
+	//! @param renderer   Renderer to use for drawing.
+	//! @param drawParams Drawing parameters (projector, clipping cap, if any, etc.).
+	//!                   Note that maxSqDistortion has no effect here.
+	//!
+	//! @see DrawParams
+	virtual void drawOutline(class StelRenderer* renderer, const DrawParams& params);
 
 protected:
 	//GL-REFACTOR note: If this causes bugs, some instances are
