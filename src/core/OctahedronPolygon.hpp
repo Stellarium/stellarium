@@ -156,7 +156,10 @@ private:
 
 	//! Update the content of both cached vertex arrays.
 	void updateVertexArray();
+
+	//! Vertex array storing triangles of the polygon (each 3 vertices being one triangle).
 	QVector<Vec3d> fillCachedVertexArray;
+	//! Vertex array storing lines of the polygon outline (each 2 vertices being one line).
 	QVector<Vec3d> outlineCachedVertexArray;
 
 	void computeBoundingCap();
