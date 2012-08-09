@@ -107,8 +107,6 @@ SET(stellarium_lib_SRCS
 	core/SimbadSearcher.cpp
 	core/StelSphericalIndex.hpp
 	core/StelSphericalIndex.cpp
-	core/StelVertexArray.hpp
-	core/StelVertexArray.cpp
 	core/StelGuiBase.hpp
 	core/StelGuiBase.cpp
 	core/StelViewportEffect.hpp
@@ -711,8 +709,6 @@ SET(tests_testStelSphereGeometry_SRCS
 	tests/testStelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
-	core/StelVertexArray.hpp
-	core/StelVertexArray.cpp
 	core/OctahedronPolygon.hpp
 	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
@@ -736,8 +732,6 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelSphericalIndex.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
-	core/StelVertexArray.hpp
-	core/StelVertexArray.cpp
 	core/OctahedronPolygon.hpp
 	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
@@ -763,16 +757,6 @@ QT4_WRAP_CPP(tests_testStelJsonParser_MOC_SRCS tests/testStelJsonParser.hpp)
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS} ${tests_testStelJsonParser_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
-
-SET(tests_testStelVertexArray_SRCS
-  tests/testStelVertexArray.hpp
-  tests/testStelVertexArray.cpp
-  core/StelVertexArray.hpp)
-QT4_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
-ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
-TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
-ADD_DEPENDENCIES(buildTests testStelVertexArray)
-
 
 SET(tests_testStelVertexBuffer_SRCS
   tests/testStelVertexBuffer.hpp
@@ -810,7 +794,6 @@ ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIR
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 # ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testRefractionExtinction WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
 

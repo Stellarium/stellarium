@@ -25,7 +25,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
-#include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
 #include "renderer/StelCircleArcRenderer.hpp"
 #include "renderer/StelRenderer.hpp"
