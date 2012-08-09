@@ -126,7 +126,7 @@ void StelTestQGL2VertexBufferBackend::
 		glDrawArrays(glPrimitiveType(primitiveType), 0, vertexCount);
 	}
 
-	for(int attribute = 0; attribute < attributes.count; attribute++) 
+	for(int attribute = 0; attribute < totalAttributes; attribute++) 
 	{
 		program.disableAttributeArray(enabledAttributes[attribute]);
 	}
