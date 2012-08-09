@@ -89,11 +89,15 @@ public:
 	//! If primitiveType is PrimitiveType_LineStrip, the arcs are drawn between the  
 	//! first and the second point, second and third, third and fourth, and so on.
 	//!
+	//! If primitiveType is PrimitiveType_LineLoop, the arcs are drawn like with 
+	//! PrimitiveType_LineStrip, but there is also an arc between the last and the first point.
+	//!
 	//! The angle between two points of any arc must be < 180 deg.
 	//!
 	//! @param points        Points to use to draw the arcs.
 	//! @param primitiveType Determines how the points to draw arcs between are chosen
-	//!                      (see above). Must be PrimitiveType_Lines or PrimitiveType_LineStrip.
+	//!                      (see above). Must be PrimitiveType_Lines, PrimitiveType_LineStrip
+	//!                      or PrimitiveType_LineLoop.
 	//! @param clippingCap   If not NULL, try to clip the parts of the arcs outside the cap.
 	void drawGreatCircleArcs(const QVector<Vec3d>& points, const PrimitiveType primitiveType,
 	                         const SphericalCap* clippingCap)
@@ -111,10 +115,15 @@ public:
 					drawGreatCircleArc(points.at(p), points.at(p+1), clippingCap);
 				}
 				break;
-			case PrimitiveType_LineStrip:
-				for (int p = 0; p < points.size(); p++) 
+			case PrimitiveType_LineLoop:
+				if(points.size() > 0)
 				{
-					drawGreatCircleArc(points.at(p), points.at(p + 1));
+					drawGreatCircleArc(points.at(points.size() - 1), points.at(0));
+				}
+			case PrimitiveType_LineStrip:
+				for (int p = 1; p < points.size(); p++) 
+				{
+					drawGreatCircleArc(points.at(p - 1), points.at(p));
 				}
 				break;
 			default:
