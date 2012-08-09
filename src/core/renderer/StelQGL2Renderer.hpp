@@ -14,21 +14,8 @@
 #include "StelProjectorClasses.hpp"
 #include "StelTestQGL2VertexBufferBackend.hpp"
 
-//TODO:
-// GL1/GL2 ifdefs (but is this really needed? 
-// Shouldn't GL2 always be available at compile time?)
 
-// About NPOT textures:
-//
-// GL2 can use non-power-of-two textures.
-// GL1 can not.
-// However even on modern hardware, npot textures are a bad idea as they might end
-// up in POT storage anyway. Consider virtualizing
-// textures instead, if we have enough time.
-//
-// Also, note that on R300, NPOT don't work with mipmaps, and on GeForceFX, they are emulated.
-
-//! Renderer backend using OpenGL 2.1 with Qt.
+//! Renderer backend using OpenGL 2.1 or GLSL 2.0 with Qt.
 class StelQGL2Renderer : public StelQGLRenderer
 {
 public:
