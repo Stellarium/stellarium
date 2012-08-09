@@ -239,7 +239,6 @@ public:
 	void disablePainting()
 	{
 		invariant();
-		Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, "Painting is already disabled");
 		
 		if(usingGLWidgetPainter)
 		{
@@ -327,7 +326,6 @@ private:
 	void enablePainting(QPainter* painter)
 	{
 		invariant();
-		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, "Painting is already enabled");
 		
 		// If no painter specified, create a default one painting to the glWidget.
 		if(painter == NULL)

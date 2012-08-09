@@ -194,7 +194,6 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 	//That might be changed for some GPUs, but it might not be worth the effort.
 	
 	viewport.prepareToDrawViewport();
-	viewport.enablePainting();
 
 	if(NULL == effect)
 	{
@@ -217,7 +216,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 		effect->drawToViewport(this);
 	}
 
-	disablePainting();
+	viewport.disablePainting();
 	invariant();
 }
 
@@ -266,6 +265,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 {
 	StelQGLTextureBackend* currentTexture = currentlyBoundTextures[0];
 
+	viewport.enablePainting();
 	QPainter* painter = viewport.getPainter();
 	Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, 
 	           "Trying to draw text but painting is disabled");
@@ -290,6 +290,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	if(y + cullDistance < viewMinY || y - cullDistance > viewMaxY ||
 	   x + cullDistance < viewMinX || x - cullDistance > viewMaxX)
 	{
+		viewport.disablePainting();
 		return;
 	}
 
@@ -411,4 +412,5 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	{
 		currentTexture->bind(0);
 	}
+	viewport.disablePainting();
 }
