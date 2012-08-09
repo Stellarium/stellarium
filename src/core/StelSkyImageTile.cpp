@@ -262,23 +262,16 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
-	// GL-REFACTOR note: This code refers to non-existent API in StelPainter
-	// (it was probably changed since then)
-	if (debugFont==NULL)
-	{
-		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
-	}
 	color.set(1.0,0.5,0.5,1.0);
+	renderer->setGlobalColor(color);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		Vec3d win;
 		Vec3d bary = poly->getPointInside();
-		sPainter.getProjector()->project(bary,win);
-		sPainter.drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
+		projector->project(bary, win);
+		renderer->drawText(TextParams(win[0], win[1], getAbsoluteImageURI()));
 
-		sPainter.enableTexture2d(false);
-		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeBoundary, &color);
-		sPainter.enableTexture2d(true);
+		poly->drawOutline(renderer, SphericalRegion::DrawParams(projector));
 	}
 #endif
 	if (!alphaBlend)
