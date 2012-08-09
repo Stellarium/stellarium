@@ -18,8 +18,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "Scenery3d.hpp"
+
 // GZ: Apparently Qt4.8 conflicts with GLee, but provides QGLFunctions.
-// Currently this compiles, but program crashes at launch. We stay at 4.7 for now.
+// This solution here works at least for Qt4.8.1/QCreator/Win32/NVidia.
 #if QT_VERSION >= 0x040800
 #include <GL/gl.h>
 #include <GL/glext.h>
@@ -28,7 +30,6 @@
 #include <GLee.h>
 #endif
 
-#include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -77,6 +78,10 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
     objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
 {
+#if QT_VERSION >= 0x040800
+     initializeGLFunctions();
+#endif
+
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
     this->torchBrightness=torchBrightness;
@@ -1585,33 +1590,42 @@ void Scenery3d::initShadowMapping()
 {
     //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
     //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
-    shadowFBO = (new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D))->handle();
-
+    QGLFramebufferObject *qglFBO=new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+    shadowFBO = qglFBO->handle();
     //if (shadowFBO->attachment() != QGLFramebufferObject::Depth){
     //    qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller shadowmap_size!";
     //}
 
+    if (qglFBO->isValid())
+        qWarning() << "[Scenery3D] initShadowMapping() qglFBO valid\n";
+    else
+        qWarning() << "[Scenery3D] initShadowMapping() qglFBO invalid\n";
+
+
     //Bind the FBO
     glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-
     for(int i=0; i<frustumSplits; i++)
     {
         //Generate the depth maps
         glGenTextures(1, &shadowMapsArray[i]);
-
         //Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 3
         glActiveTexture(GL_TEXTURE3+i);
 
         //Bind the depth map and setup parameters
         glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+
+#if QT_VERSION >= 0x040800
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+#else
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+#endif
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
         float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
         glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
-
         //Attach the depthmap to the Buffer
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
     }
@@ -1619,7 +1633,11 @@ void Scenery3d::initShadowMapping()
     glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
     glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
 
+#if QT_VERSION >= 0x040800
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+#else
     if(glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE)
+#endif
         qWarning() << "[Scenery3D] GL_FRAMEBUFFER_COMPLETE failed, can't use FBO";
 
     //Done. Unbind and switch to normal texture unit 0

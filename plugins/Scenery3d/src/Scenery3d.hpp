@@ -33,8 +33,7 @@
 #include <QString>
 //#include <vector>
 #include <QGLFramebufferObject>
-// This is a tentative preparation for some changes to come with Qt4.8+.
-// Currently this does not work after compilation!
+// Preparation for some changes to come with Qt4.8+.
 #if QT_VERSION >= 0x040800
 #include <QGLFunctions>
 #endif
@@ -262,5 +261,4 @@ private:
     float debugMaxZ, debugMinZ;
     Mat4f stelProj;
 };
-
 #endif
