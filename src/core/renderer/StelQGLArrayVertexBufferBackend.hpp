@@ -122,6 +122,12 @@ protected:
 	//! projectVertices() member function.
 	QVector<Vec3f> projectedPositions;
 
+	//! Construct a StelQGLArrayVertexBufferBackend.
+	//!
+	//! Initializes vertex attribute buffers.
+	//!
+	//! @param type Graphics primitive type stored in the buffer.
+	//! @param attributes Specifications of vertex attributes that will be stored in the buffer.
 	StelQGLArrayVertexBufferBackend(const PrimitiveType type,
 	                                const QVector<StelVertexAttribute>& attributes);
 
