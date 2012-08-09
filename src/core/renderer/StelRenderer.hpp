@@ -240,20 +240,6 @@ public:
 	//! Take a screenshot and return it.
 	virtual QImage screenshot() = 0;
 	
-	//! Enable painting.
-	//!
-	//! Painting must be disabled when calling this.
-	//!
-	//! This method is temporary and will be removed once painting is handled through Renderer.
-	virtual void enablePainting() = 0;
-	
-	//! Disable painting.
-	//!
-	//! Painting must be enabled when calling this.
-	//!
-	//! This method is temporary and will be removed once painting is handled through Renderer.
-	virtual void disablePainting() = 0;
-	
 	//! Must be called once at startup and on every GL viewport resize, specifying new size.
 	virtual void viewportHasBeenResized(const QSize size) = 0;
 
