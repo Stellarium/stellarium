@@ -28,7 +28,6 @@
 
 #include "OctahedronPolygon.hpp"
 #include "renderer/StelVertexBuffer.hpp"
-#include "StelVertexArray.hpp"
 #include "StelProjectorType.hpp"
 #include "Triplet.hpp"
 #include "VecMath.hpp"
@@ -320,7 +319,7 @@ public:
 	//! Get a vector of vertex positions forming the region.
 	virtual const QVector<Vec3d>& getFillVertexPositions() const
 	{
-		return getOctahedronPolygon().getFillVertexArray().vertex;
+		return getOctahedronPolygon().fillVertices();
 	}
 
 	//! Get primitive type determining how vertices in vector returned by
@@ -334,7 +333,7 @@ public:
 	//! @return a list of vertices which define the contours of the polygon.
 	virtual const QVector<Vec3d>& getOutlineVertexPositions() const 
 	{
-		return getOctahedronPolygon().getOutlineVertexArray().vertex;
+		return getOctahedronPolygon().outlineVertices();
 	}
 
 	//! Get primitive type determining how vertices in vector returned by

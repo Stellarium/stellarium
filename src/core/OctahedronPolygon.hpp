@@ -24,7 +24,6 @@
 #include <QDebug>
 #include <QVarLengthArray>
 #include "VecMath.hpp"
-#include "StelVertexArray.hpp"
 
 
 //! @struct EdgeVertex
@@ -64,9 +63,7 @@ class OctahedronPolygon
 {
 public:
 	OctahedronPolygon() 
-		: fillCachedVertexArray(StelVertexArray::Triangles)
-		, outlineCachedVertexArray(StelVertexArray::Lines)
-		, capN(1,0,0)
+		: capN(1,0,0)
 		, capD(-2.)
 	{
 		sides.resize(8);
@@ -81,12 +78,6 @@ public:
 	double getArea() const;
 
 	Vec3d getPointInside() const;
-
-	// GL-REFACTOR TODO remove these two once dependent code is removed.
-	// fillVertices/outlineVertices replaces the functionality.
-	//! Returns the list of triangles resulting from tesselating the contours.
-	StelVertexArray getFillVertexArray() const {return fillCachedVertexArray;}
-	StelVertexArray getOutlineVertexArray() const {return outlineCachedVertexArray;}
 
 	void getBoundingCap(Vec3d& v, double& d) const {v=capN; d=capD;}
 
@@ -122,13 +113,13 @@ public:
 	//! Get vertices forming triangles filling out the polygon.
 	const QVector<Vec3d>& fillVertices() const
 	{
-		return fillCachedVertexArray.vertex;
+		return fillCachedVertexArray;
 	}
 
 	//! Get vertices forming lines outlining the polygon.
 	const QVector<Vec3d>& outlineVertices() const
 	{
-		return outlineCachedVertexArray.vertex;
+		return outlineCachedVertexArray;
 	}
 
 private:
@@ -165,8 +156,8 @@ private:
 
 	//! Update the content of both cached vertex arrays.
 	void updateVertexArray();
-	StelVertexArray fillCachedVertexArray;
-	StelVertexArray outlineCachedVertexArray;
+	QVector<Vec3d> fillCachedVertexArray;
+	QVector<Vec3d> outlineCachedVertexArray;
 
 	void computeBoundingCap();
 	Vec3d capN;
