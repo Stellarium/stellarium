@@ -26,6 +26,17 @@ GLint glAttributeType(const AttributeType type);
 //! @return Name of the attribute as a C string.
 const char* glslAttributeName(const AttributeInterpretation interpretation);
 
+
+//! Get the enum value matching specified attribute interpreation used to enable GL1 client state.
+//!
+//! Used with glEnableClientState()/glDisableClientState(),
+//! so the value returned can be e.g. GL_VERTEX_ARRAY for positions,
+//! GL_COLOR_ARRAY for colors, etc.
+//!
+//! @param interpretation Vertex attribute interpretation.
+//! @return Enum value corresponding to the interpretation.
+GLenum gl1AttributeEnum(const AttributeInterpretation interpretation);
+
 //! Get OpenGL primitive type corresponding to specified PrimitiveType.
 GLint glPrimitiveType(const PrimitiveType type);
 
