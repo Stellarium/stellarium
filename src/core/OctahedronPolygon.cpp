@@ -95,8 +95,6 @@ QString SubContour::toJSON() const
 };
 
 OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) 
-	: fillCachedVertexArray(StelVertexArray::Triangles)
-	, outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
 	appendSubContour(SubContour(contour));
@@ -105,8 +103,6 @@ OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour)
 }
 
 OctahedronPolygon::OctahedronPolygon(const QVector<QVector<Vec3d> >& contours) 
-	: fillCachedVertexArray(StelVertexArray::Triangles)
-	, outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
 	foreach (const QVector<Vec3d>& contour, contours)
@@ -125,8 +121,6 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 
 
 OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) 
-	: fillCachedVertexArray(StelVertexArray::Triangles)
-	, outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
 	foreach (const OctahedronPolygon& oct, octs)
@@ -241,8 +235,7 @@ double OctahedronPolygon::getArea() const
 	// Use Girard's theorem for each subtriangles
 	double area = 0.;
 	Vec3d v1, v2, v3;
-	const QVector<Vec3d>& trianglesArray = getFillVertexArray().vertex;
-	Q_ASSERT(getFillVertexArray().primitiveType==StelVertexArray::Triangles);
+	const QVector<Vec3d>& trianglesArray = fillVertices();
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
 		area += OctahedronPolygon::sphericalTriangleArea(trianglesArray.at(i*3), trianglesArray.at(i*3+1), trianglesArray.at(i*3+2));
@@ -253,8 +246,7 @@ double OctahedronPolygon::getArea() const
 // Return a point located inside the polygon.
 Vec3d OctahedronPolygon::getPointInside() const
 {
-	const QVector<Vec3d>& trianglesArray = getFillVertexArray().vertex;
-	Q_ASSERT(getFillVertexArray().primitiveType==StelVertexArray::Triangles);
+	const QVector<Vec3d>& trianglesArray = fillVertices();
 	Q_ASSERT(!trianglesArray.isEmpty());
 	Vec3d res(trianglesArray[0]);
 	res+=trianglesArray[1];
@@ -384,8 +376,8 @@ inline void unprojectOctahedron(Vec3d& v, const Vec3d& sideDirection)
 void OctahedronPolygon::updateVertexArray()
 {
 	Q_ASSERT(sides.size()==8);
-	fillCachedVertexArray.vertex.clear();
-	outlineCachedVertexArray.vertex.clear();
+	fillCachedVertexArray.clear();
+	outlineCachedVertexArray.clear();
 
 	Q_ASSERT(sides.size()==8);
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
@@ -415,12 +407,12 @@ void OctahedronPolygon::updateVertexArray()
 			isTriangleConvexPositive2D(res.at(j+2), res.at(j+1), res.at(j)) :
 			isTriangleConvexPositive2D(res.at(j), res.at(j+1), res.at(j+2))))
 			{
-				fillCachedVertexArray.vertex+=res.at(j);
-				unprojectOctahedron(fillCachedVertexArray.vertex.last(), sideDirection);
-				fillCachedVertexArray.vertex+=res.at(j+1);
-				unprojectOctahedron(fillCachedVertexArray.vertex.last(), sideDirection);
-				fillCachedVertexArray.vertex+=res.at(j+2);
-				unprojectOctahedron(fillCachedVertexArray.vertex.last(), sideDirection);
+				fillCachedVertexArray += res.at(j);
+				unprojectOctahedron(fillCachedVertexArray.last(), sideDirection);
+				fillCachedVertexArray += res.at(j+1);
+				unprojectOctahedron(fillCachedVertexArray.last(), sideDirection);
+				fillCachedVertexArray += res.at(j+2);
+				unprojectOctahedron(fillCachedVertexArray.last(), sideDirection);
 			}
 			else
 			{
@@ -440,10 +432,10 @@ void OctahedronPolygon::updateVertexArray()
 			{
 				if (previous.edgeFlag || c.at(j+1).edgeFlag)
 				{
-					outlineCachedVertexArray.vertex.append(previous.vertex);
+					outlineCachedVertexArray.append(previous.vertex);
 					previous=c.at(j+1);
 					unprojectOctahedron(previous.vertex, sideDirection);
-					outlineCachedVertexArray.vertex.append(previous.vertex);
+					outlineCachedVertexArray.append(previous.vertex);
 				}
 				else
 				{
@@ -454,9 +446,9 @@ void OctahedronPolygon::updateVertexArray()
 			// Last point connects with first point
 			if (previous.edgeFlag || c.first().edgeFlag)
 			{
-				outlineCachedVertexArray.vertex.append(previous.vertex);
-				outlineCachedVertexArray.vertex.append(c.first().vertex);
-				unprojectOctahedron(outlineCachedVertexArray.vertex.last(), sideDirection);
+				outlineCachedVertexArray.append(previous.vertex);
+				outlineCachedVertexArray.append(c.first().vertex);
+				unprojectOctahedron(outlineCachedVertexArray.last(), sideDirection);
 			}
 		}
 	}
@@ -467,11 +459,11 @@ void OctahedronPolygon::updateVertexArray()
 	// Check that all triangles are properly oriented
 	QVector<Vec3d> c;
 	c.resize(3);
-	for (int j=0;j<fillCachedVertexArray.vertex.size()/3;++j)
+	for (int j=0;j<fillCachedVertexArray.size()/3;++j)
 	{
-		c[0]=fillCachedVertexArray.vertex.at(j*3);
-		c[1]=fillCachedVertexArray.vertex.at(j*3+1);
-		c[2]=fillCachedVertexArray.vertex.at(j*3+2);
+		c[0]=fillCachedVertexArray.at(j*3);
+		c[1]=fillCachedVertexArray.at(j*3+1);
+		c[2]=fillCachedVertexArray.at(j*3+2);
 		Q_ASSERT(SphericalConvexPolygon::checkValidContour(c));
 	}
 #else
@@ -648,11 +640,11 @@ bool OctahedronPolygon::contains(const Vec3d& p) const
 {
 	if (sides[getSideNumber(p)].isEmpty())
 		return false;
-	for (int i=0;i<fillCachedVertexArray.vertex.size()/3;++i)
+	for (int i=0;i<fillCachedVertexArray.size()/3;++i)
 	{
-		if (sideHalfSpaceContains(fillCachedVertexArray.vertex.at(i*3+1), fillCachedVertexArray.vertex.at(i*3), p) &&
-			sideHalfSpaceContains(fillCachedVertexArray.vertex.at(i*3+2), fillCachedVertexArray.vertex.at(i*3+1), p) &&
-			sideHalfSpaceContains(fillCachedVertexArray.vertex.at(i*3), fillCachedVertexArray.vertex.at(i*3+2), p))
+		if (sideHalfSpaceContains(fillCachedVertexArray.at(i*3+1), fillCachedVertexArray.at(i*3), p) &&
+			sideHalfSpaceContains(fillCachedVertexArray.at(i*3+2), fillCachedVertexArray.at(i*3+1), p) &&
+			sideHalfSpaceContains(fillCachedVertexArray.at(i*3), fillCachedVertexArray.at(i*3+2), p))
 			return true;
 	}
 	return false;
@@ -816,7 +808,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 
 void OctahedronPolygon::computeBoundingCap()
 {
-	const QVector<Vec3d>& trianglesArray = outlineCachedVertexArray.vertex;
+	const QVector<Vec3d>& trianglesArray = outlineCachedVertexArray;
 	if (trianglesArray.isEmpty())
 	{
 		capN.set(1,0,0);
