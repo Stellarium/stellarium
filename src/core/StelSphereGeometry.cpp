@@ -24,8 +24,9 @@
 #include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "StelProjector.hpp"
+#include "TriangleIterator.hpp"
+#include "renderer/StelRenderer.hpp"
 
 
 // Definition of static constants.
@@ -1082,8 +1083,8 @@ bool SphericalCap::intersects(const SphericalConvexPolygon& cvx) const
 
 bool SphericalCap::intersects(const SphericalPolygon& polyBase) const
 {
-	// Go through the full list of triangle
-	const QVector<Vec3d>& vArray = polyBase.getFillVertexArray().vertex;
+	// Go through the full list of triangles
+	const QVector<Vec3d>& vArray = polyBase.getFillVertexPositions();
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (intersectsConvexContour(vArray.constData()+i*3, 3))
@@ -1413,40 +1414,33 @@ SphericalCap SphericalPolygon::getBoundingCap() const
 	return res;
 }
 
-struct TriangleSerializer
+QVariantList SphericalPolygon::toQVariant() const
 {
-	TriangleSerializer(const TriangleSerializer& ts) : triangleList(ts.triangleList) {}
+	QVariantList triangleList;
+	TriangleIterator<Vec3d> triterator(getFillVertexPositions(), getFillPrimitiveType());
 
-	TriangleSerializer() {}
-	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
-						   unsigned int , unsigned int , unsigned int )
+	Vec3d a, b, c;
+	while(triterator.next(a, b, c))
 	{
 		QVariantList triangle;
 		double ra, dec;
 		QVariantList l;
-		StelUtils::rectToSphe(&ra, &dec, *v1);
-		l << ra*180./M_PI << dec*180./M_PI;
+		StelUtils::rectToSphe(&ra, &dec, a);
+		l << ra * 180. / M_PI << dec * 180. / M_PI;
 		triangle << QVariant(l);
 		l.clear();
-		StelUtils::rectToSphe(&ra, &dec, *v2);
-		l << ra*180./M_PI << dec*180./M_PI;
+		StelUtils::rectToSphe(&ra, &dec, b);
+		l << ra * 180. / M_PI << dec * 180. / M_PI;
 		triangle << QVariant(l);
 		l.clear();
-		StelUtils::rectToSphe(&ra, &dec, *v3);
-		l << ra*180./M_PI << dec*180./M_PI;
+		StelUtils::rectToSphe(&ra, &dec, c);
+		l << ra * 180. / M_PI << dec * 180. / M_PI;
 		triangle << QVariant(l);
 		Q_ASSERT(triangle.size()==3);
 		triangleList << QVariant(triangle);
 	}
 
-	QVariantList triangleList;
-};
-
-QVariantList SphericalPolygon::toQVariant() const
-{
-	TriangleSerializer result = getFillVertexArray().foreachTriangle(TriangleSerializer());
-	return result.triangleList;
+	return triangleList;
 }
 
 void SphericalPolygon::serialize(QDataStream& out) const
@@ -1640,7 +1634,7 @@ bool SphericalConvexPolygon::contains(const SphericalPolygon& poly) const
 	if (!cachedBoundingCap.contains(poly.getBoundingCap()))
 		return false;
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
+	const QVector<Vec3d>& vArray = poly.getFillVertexPositions();
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (!containsConvexContour(vArray.constData()+i*3, 3))
@@ -1687,7 +1681,7 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygon& poly) const
 	if (!cachedBoundingCap.intersects(poly.getBoundingCap()))
 		return false;
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
+	const QVector<Vec3d>& vArray = poly.getFillVertexPositions();
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (!areAllPointsOutsideOneSide(contour.constData(), contour.size(), vArray.constData()+i*3, 3) && !areAllPointsOutsideOneSide(vArray.constData()+i*3, 3, contour.constData(), contour.size()))
@@ -1838,27 +1832,20 @@ inline void parseRaDec(const QVariant& vRaDec, Vec3d& v)
 		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
 }
 
-struct TriangleDumper
+QVector<QVector<Vec3d > > SphericalRegion::getSimplifiedContours() const
 {
-	TriangleDumper(const TriangleDumper& ts) : triangleList(ts.triangleList) {}
+	QVector<QVector<Vec3d > > triangleList;
+	TriangleIterator<Vec3d> triterator(getFillVertexPositions(), getFillPrimitiveType());
 
-	TriangleDumper() {}
-	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
-						   unsigned int , unsigned int , unsigned int )
+	Vec3d a, b, c;
+	while(triterator.next(a, b, c))
 	{
 		QVector<Vec3d> triangle;
-		triangle << *v1 << *v2 << *v3;
+		triangle << a << b << c;
 		triangleList.append(triangle);
 	}
 
-	QVector<QVector<Vec3d > > triangleList;
-};
-
-QVector<QVector<Vec3d > > SphericalRegion::getSimplifiedContours() const
-{
-	TriangleDumper result = getFillVertexArray().foreachTriangle(TriangleDumper());
-	return result.triangleList;
+	return triangleList;
 }
 
 SphericalRegionP capFromQVariantList(const QVariantList& l)
