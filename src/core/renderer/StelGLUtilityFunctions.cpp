@@ -34,6 +34,22 @@ const char* glslAttributeName(const AttributeInterpretation interpretation)
 	return NULL;
 }
 
+GLenum gl1AttributeEnum(const AttributeInterpretation interpretation)
+{
+	switch(interpretation)
+	{
+		case AttributeInterpretation_Position: return GL_VERTEX_ARRAY;
+		case AttributeInterpretation_TexCoord: return GL_TEXTURE_COORD_ARRAY;
+		case AttributeInterpretation_Normal:   return GL_NORMAL_ARRAY;
+		case AttributeInterpretation_Color:    return GL_COLOR_ARRAY;
+	}
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
+	
+	// Prevents GCC from complaining about exiting a non-void function:
+	return GL_VERTEX_ARRAY;
+}
+
+
 GLint glPrimitiveType(const PrimitiveType type)
 {
 	switch(type)
