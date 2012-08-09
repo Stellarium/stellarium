@@ -100,20 +100,6 @@ public:
 		return viewport.screenshot();
 	}
 	
-	virtual void enablePainting()
-	{
-		invariant();
-		viewport.enablePainting();
-		invariant();
-	}
-	
-	virtual void disablePainting()
-	{
-		invariant();
-		viewport.disablePainting();
-		invariant();
-	}
-
 	virtual void renderFrame(StelRenderClient& renderClient);
 
 	virtual void viewportHasBeenResized(const QSize size)
@@ -138,7 +124,9 @@ public:
 	
 	virtual void setFont(const QFont& font)
 	{
+		viewport.enablePainting();
 		viewport.setFont(font);
+		viewport.disablePainting();
 	}
 
 	virtual void bindTextureBackend(StelTextureBackend* const textureBackend, const int textureUnit);
