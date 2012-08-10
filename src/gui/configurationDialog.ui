@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
-    <height>465</height>
+    <width>523</width>
+    <height>483</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1253,8 +1253,9 @@
           <string>Selected object information</string>
          </property>
          <property name="icon">
-          <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/tabicon-info.png</normaloff>:/graphicGui/tabicon-info.png</iconset>
+          <iconset>
+           <normalon>:/graphicGui/tabicon-info.png</normalon>
+          </iconset>
          </property>
         </item>
         <item>
@@ -1292,8 +1293,9 @@
           <string>Plugins</string>
          </property>
          <property name="icon">
-          <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/tabicon-plugins.png</normaloff>:/graphicGui/tabicon-plugins.png</iconset>
+          <iconset>
+           <normalon>:/graphicGui/tabicon-plugins.png</normalon>
+          </iconset>
          </property>
         </item>
        </widget>
