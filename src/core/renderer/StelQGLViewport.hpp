@@ -22,6 +22,12 @@ public:
 		setBackgroundRole(QPalette::Window);
 	}
 
+	//! Get the Qt paint engine type used.
+	QPaintEngine::Type getPaintEngineType() const
+	{
+		return paintEngineType;
+	}
+
 protected:
 	virtual void initializeGL()
 	{
@@ -37,7 +43,8 @@ protected:
 			qWarning("Could not get double buffer; results will be suboptimal");
 
 		QString paintEngineStr;
-		switch (paintEngine()->type())
+		paintEngineType = paintEngine()->type();
+		switch (paintEngineType)
 		{
 			case QPaintEngine::OpenGL:  paintEngineStr = "OpenGL"; break;
 			case QPaintEngine::OpenGL2: paintEngineStr = "OpenGL2"; break;
@@ -45,6 +52,9 @@ protected:
 		}
 		qDebug() << "Qt GL paint engine is: " << paintEngineStr;
 	}
+
+	//! Qt paint engine type used.
+	QPaintEngine::Type paintEngineType;
 };
 
 //! Manages OpenGL viewport.
@@ -73,6 +83,21 @@ public:
 	{
 		// Forces glWidget to initialize GL.
 		glWidget->updateGL();
+
+		// Qt GL2 paint engine does some FBO magic depending 
+		// on glBlendFunc having a particular value. I wasn't able 
+		// to figure out what value it was, so another workaround 
+		// was to not use FBOs ourselves.
+		// Not sure _why exactly_ this helps though.
+		//
+		// TODO
+		// If Qt is newer than 4.0, try removing this if - 
+		// FBOs are an important feature so we want to use it 
+		// if the Qt people cleaned up their mess.
+		if(qtPaintEngineType() == QPaintEngine::OpenGL2)
+		{
+			fboDisabled = true;
+		}
 		parent->setViewport(glWidget);
 		invariant();
 	}
@@ -98,6 +123,12 @@ public:
 		glWidget->setAutoFillBackground(false);
 		fboSupported = QGLFramebufferObject::hasOpenGLFramebufferObjects();
 		invariant();
+	}
+
+	//! Get paint engine type used for Qt drawing.
+	QPaintEngine::Type qtPaintEngineType() const
+	{
+		return glWidget->getPaintEngineType();
 	}
 
 	//! Called when viewport size changes so we can replace the FBOs.
