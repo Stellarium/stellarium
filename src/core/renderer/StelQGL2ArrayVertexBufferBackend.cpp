@@ -1,9 +1,9 @@
 #include "StelQGL2Renderer.hpp"
-#include "StelTestQGL2VertexBufferBackend.hpp"
+#include "StelQGL2ArrayVertexBufferBackend.hpp"
 
 
-StelTestQGL2VertexBufferBackend::
-StelTestQGL2VertexBufferBackend(const PrimitiveType type,
+StelQGL2ArrayVertexBufferBackend::
+StelQGL2ArrayVertexBufferBackend(const PrimitiveType type,
                                 const QVector<StelVertexAttribute>& attributes)
 	: StelQGLArrayVertexBufferBackend(type, attributes)
 {
@@ -34,7 +34,7 @@ void enableAttribute(QGLShaderProgram& program, int& handleOut,
 	handleOut = handle;
 }
 
-void StelTestQGL2VertexBufferBackend::
+void StelQGL2ArrayVertexBufferBackend::
 	draw(StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix,
 	     StelQGLIndexBuffer* indexBuffer)
 {
