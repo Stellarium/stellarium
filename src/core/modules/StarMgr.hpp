@@ -24,7 +24,6 @@
 #include <QVariantMap>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
 class StelObject;
@@ -245,7 +244,7 @@ private:
 	static bool flagSciNames;
 	Vec3f labelColor;
 
-	StelTextureSP texPointer;		// The selection pointer texture
+	class StelTextureNew* texPointer;		// The selection pointer texture
 
 	class StelObjectMgr* objectMgr;
 
