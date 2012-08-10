@@ -341,7 +341,7 @@ protected:
 
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
 	                                     StelIndexBuffer* indexBuffer = NULL,
-	                                     StelProjectorP projector = NULL,
+	                                     StelProjector* projector = NULL,
 	                                     bool dontProject = false)
 	{
 		invariant();
@@ -363,10 +363,10 @@ protected:
 
 		if(NULL == projector)
 		{
-			projector = StelApp::getInstance().getCore()->getProjection2d();
+			projector = &(*(StelApp::getInstance().getCore()->getProjection2d()));
 		}
 		// XXX: we should use a more generic way to test whether or not to do the projection.
-		else if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector.data())))
+		else if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector)))
 		{
 			backend->projectVertices(projector, glIndexBuffer);
 		}
@@ -406,11 +406,11 @@ protected:
 		return textureUnitCount;
 	}
 
-	virtual void invariant(const char* const caller = Q_FUNC_INFO) const
+	virtual void invariant() const
 	{
 #ifndef NDEBUG
-		Q_ASSERT_X(initialized, caller, "uninitialized StelQGL2Renderer");
-		StelQGLRenderer::invariant(caller);
+		Q_ASSERT_X(initialized, Q_FUNC_INFO, "uninitialized StelQGL2Renderer");
+		StelQGLRenderer::invariant();
 #endif
 	}
 	

@@ -139,7 +139,7 @@ public:
 	//! destroyed internally (e.g. by drawText).
 	void ensureTextureNotBound(StelTextureBackend* const textureBackend)
 	{
-		for(int t; t < STELQGLRENDERER_MAX_TEXTURE_UNITS; ++t)
+		for(int t = 0; t < STELQGLRENDERER_MAX_TEXTURE_UNITS; ++t)
 		{
 			if(currentlyBoundTextures[t] == textureBackend)
 			{
@@ -281,17 +281,17 @@ protected:
 	//! Asserts that we're in a valid state.
 	//!
 	//! Overriding methods should also call StelGLRenderer::invariant().
-	virtual void invariant(const char* const caller = Q_FUNC_INFO) const
+	virtual void invariant() const
 	{
 #ifndef NDEBUG
-		Q_ASSERT_X(NULL != glContext, caller,
+		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO,
 		           "An attempt to use a destroyed StelQGLRenderer.");
-		Q_ASSERT_X(glContext->isValid(), caller, "The GL context is invalid");
+		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "The GL context is invalid");
 #endif
 	}
 
 	//! Set up GL state common between the GL1 and GL2 backends before drawing.
-	void setupGLState(StelProjectorP projector)
+	void setupGLState(StelProjector* projector)
 	{
 		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
 		// are called, we only set it before drawing and reset after drawing to avoid 
@@ -357,7 +357,7 @@ protected:
 	}
 	
 	//! Reset GL state after drawing.
-	void restoreGLState(StelProjectorP projector)
+	void restoreGLState(StelProjector* projector)
 	{
 		// More stuff could be restored here if there are any Qt drawing problems.
 		glFrontFace(projector->flipFrontBackFace() ? GL_CCW : GL_CW);
