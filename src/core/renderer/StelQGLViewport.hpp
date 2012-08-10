@@ -123,6 +123,8 @@ public:
 	void setDefaultPainter(QPainter* const painter, const QGLContext* const context)
 	{
 		invariant();
+
+#ifndef NDEBUG
 		if(NULL != painter)
 		{
 			Q_ASSERT_X(painter->paintEngine()->type() == QPaintEngine::OpenGL ||
@@ -135,6 +137,9 @@ public:
 			           "Painter used with QGL StelRenderer backends needs to paint on a QGLWidget "
 			           "with the same GL context as the one used by the renderer");
 		}
+#else
+		Q_UNUSED(context);
+#endif
 
 		defaultPainter = painter;
 		invariant();
