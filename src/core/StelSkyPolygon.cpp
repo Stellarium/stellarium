@@ -166,7 +166,7 @@ bool StelSkyPolygon::drawTile(StelRenderer* renderer, StelProjectorP projector)
 
 	for(int poly = 0; poly < skyConvexPolygons.size(); ++poly)
 	{
-		skyConvexPolygons[poly].drawFill(renderer, SphericalRegion::DrawParams(projector));
+		skyConvexPolygons[poly].drawFill(renderer, SphericalRegion::DrawParams(&(*projector)));
 	}
 
 	return true;

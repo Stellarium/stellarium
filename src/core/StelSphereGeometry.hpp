@@ -28,7 +28,6 @@
 
 #include "OctahedronPolygon.hpp"
 #include "renderer/StelVertexBuffer.hpp"
-#include "StelProjectorType.hpp"
 #include "Triplet.hpp"
 #include "VecMath.hpp"
 
@@ -175,7 +174,7 @@ public:
 		//!
 		//! The default parameters are: no clipping cap, subdivide the region to
 		//! follow projection distortions, max distortion 5.0.
-		DrawParams(StelProjectorP projector)
+		DrawParams(class StelProjector* projector)
 			: projector_(projector)
 			, clippingCap_(NULL)
 			, subdivide_(true)
@@ -234,7 +233,7 @@ public:
 		}
 
 		//! Projector to use when drawing.
-		StelProjectorP projector_;
+		class StelProjector* projector_;
 
 		//! If specified, clips the part of the region outside of cap.
 		const SphericalCap* clippingCap_;
@@ -270,7 +269,7 @@ public:
 	//! Default constructor. Inializes with no vertex buffers.
 	SphericalRegion()
 		: fillPlainVertexBuffer(NULL)
-		, previousFillDrawParams(StelProjectorP(NULL))
+		, previousFillDrawParams(NULL)
 	{
 		// Make sure previousFillDrawParams is invalid at start, so it gets replaced 
 		// at first drawFill() call.
@@ -463,7 +462,7 @@ protected:
 	//! @param projector Projector to project the vertices 
 	//!                  (NULL if subdivision is enabled, as in that case
 	//!                  the projection is done during buffer generation)
-	virtual void drawFillVertexBuffer(class StelRenderer* renderer, StelProjectorP projector);
+	virtual void drawFillVertexBuffer(class StelRenderer* renderer, class StelProjector* projector);
 
 	//! Do we need to update vertex buffer/s used by drawFill()?
 	//!
@@ -1009,7 +1008,7 @@ protected:
 
 	virtual void updateFillVertexBuffer(class StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity);
 
-	virtual void drawFillVertexBuffer(class StelRenderer* renderer, StelProjectorP projector);
+	virtual void drawFillVertexBuffer(class StelRenderer* renderer, class StelProjector* projector);
 
 	virtual bool needToUpdateFillVertexBuffers() const
 	{
@@ -1166,7 +1165,7 @@ protected:
 
 	virtual void updateFillVertexBuffer(class StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity);
 
-	virtual void drawFillVertexBuffer(class StelRenderer* renderer, StelProjectorP projector);
+	virtual void drawFillVertexBuffer(class StelRenderer* renderer, class StelProjector* projector);
 };
 
 
