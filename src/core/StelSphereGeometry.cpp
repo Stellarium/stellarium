@@ -2034,7 +2034,6 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 	if (!texCoordList.isEmpty() && contoursList.size()!=texCoordList.size())
 		throw std::runtime_error(qPrintable(QString("the number of sky contours (%1) does not match the number of texture space contours (%2)").arg( contoursList.size()).arg(texCoordList.size())));
 
-	bool ok;
 	if (texCoordList.isEmpty())
 	{
 		// No texture coordinates
