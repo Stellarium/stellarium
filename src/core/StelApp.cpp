@@ -21,7 +21,6 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "renderer/StelTextureMgr.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -100,8 +99,6 @@ StelApp::StelApp(QObject* parent)
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
 	stelObjectMgr=NULL;
-	textureMgr=NULL;
-	moduleMgr=NULL;
 	networkAccessManager=NULL;
 
 	// Can't create 2 StelApp instances
@@ -130,7 +127,6 @@ StelApp::~StelApp()
 	delete localeMgr; localeMgr=NULL;
 	delete audioMgr; audioMgr=NULL;
 	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
-	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
 
@@ -212,10 +208,6 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
-
-	// Initialize AFTER creation of openGL context
-	textureMgr = new StelTextureMgr(renderer);
-	textureMgr->init();
 
 	QString splashFileName = "textures/logo24bits.png";
 
