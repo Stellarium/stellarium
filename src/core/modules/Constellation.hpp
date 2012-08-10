@@ -28,7 +28,6 @@
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "StelProjector.hpp"
 #include "StelSphereGeometry.hpp"
 
@@ -172,7 +171,9 @@ private:
 	//! List of stars forming the segments
 	StelObjectP* asterism;
 
-	StelTextureSP artTexture;
+	class StelTextureNew* artTexture;
+
+	QString artTexturePath;
 
 	//! Vertex with a 3D position and a texture coordinate.
 	struct Vertex

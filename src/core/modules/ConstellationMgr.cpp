@@ -21,6 +21,7 @@
 #include <vector>
 #include <QDebug>
 #include <QFile>
+#include <QImageReader>
 #include <QSettings>
 #include <QRegExp>
 #include <QString>
@@ -32,7 +33,6 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -448,17 +448,21 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				}
 			}
 
-			//We can only get dimensions once the texture is actually loaded now
-			//cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(texturePath);
-			Q_ASSERT_X(NULL != cons->artTexture, Q_FUNC_INFO, 
-			           "Error loading constellation texture");
+			cons->artTexturePath = texturePath;
 
-			int texSizeX, texSizeY;
-			if (!cons->artTexture->getDimensions(texSizeX, texSizeY))
+			// This is one part that is less convenient than before the GL refactor 
+			// (due to the StelRenderer not being globally (StelCore) available.
+			// We need to determine texture size manually here.
+
+			// Try to get the size from the file without loading data
+			QImageReader im(texturePath);
+			if (!im.canRead())
 			{
-				qWarning() << "Texture dimension not available";
+				qWarning() << "Texture dimensions not available";
 			}
+			const QSize size = im.canRead() ? im.size() : QSize(64, 64);
+			const int texSizeX = size.width();
+			const int texSizeY = size.height();
 
 			StelCore* core = StelApp::getInstance().getCore();
 			Vec3d s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(core);
@@ -470,8 +474,14 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			// We need 3 stars and the 4th point is deduced from the other to get an normal base
 			// X = B inv(A)
 			Vec3d s4 = s1 + ((s2 - s1) ^ (s3 - s1));
-			Mat4d B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
-			Mat4d A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
+			Mat4d B(s1[0], s1[1], s1[2], 1, 
+			        s2[0], s2[1], s2[2], 1,
+			        s3[0], s3[1], s3[2], 1,
+			        s4[0], s4[1], s4[2], 1);
+			Mat4d A(x1, texSizeY - y1, 0.f, 1.f,
+			        x2, texSizeY - y2, 0.f, 1.f, 
+			        x3, texSizeY - y3, 0.f, 1.f, 
+			        x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4d X = B * A.inverse();
 
 			cons->texCoordTo3D = Mat4f(X[0]  , X[1]  , X[2]  , X[3],
@@ -514,6 +524,10 @@ void ConstellationMgr::drawArt(StelRenderer* renderer, StelProjectorP projector)
 	{
 		Constellation* cons = *iter;
 
+		if(NULL == cons->artTexture && !cons->artTexturePath.isEmpty())
+		{
+			cons->artTexture = renderer->createTexture(cons->artTexturePath);
+		}
 		if(NULL == cons->artVertices)
 		{
 			// Tesselate on the plane assuming a tangential projection for the image
