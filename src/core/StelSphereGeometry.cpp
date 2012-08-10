@@ -80,6 +80,7 @@ QDataStream& operator>>(QDataStream& in, SphericalRegionP& region)
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Default implementations of methods for SphericalRegion
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
 QByteArray SphericalRegion::toJSON() const
 {
 	QByteArray res;
@@ -354,7 +355,7 @@ void appendTriangle(StelVertexBuffer<SphericalRegion::TexturedVertex>* buffer,
 //! @todo Needs more complete documentation (non-documented parameters).
 template<class V>
 void projectSphericalTriangle
-	(StelProjectorP projector,
+	(StelProjector* projector,
 	 const SphericalCap* clippingCap, 
 	 const Triplet<Vec3d>* vertices, 
 	 const Triplet<Vec2f>* texCoords,
@@ -745,7 +746,7 @@ void prepareVertexBufferUpdate(StelVertexBuffer<V>** buffer, StelRenderer* rende
 //!
 //! @param projector Projector to check against.
 //! @param triangle  Positions of vertices in the triangle.
-bool triangleIntersectsDiscontinuity(StelProjectorP projector, const Triplet<Vec3d>& triangle)
+bool triangleIntersectsDiscontinuity(StelProjector* projector, const Triplet<Vec3d>& triangle)
 {
 	return projector->intersectViewportDiscontinuity(triangle.a, triangle.b) ||
 	       projector->intersectViewportDiscontinuity(triangle.b, triangle.c) ||
@@ -755,7 +756,7 @@ bool triangleIntersectsDiscontinuity(StelProjectorP projector, const Triplet<Vec
 void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
 {
 	const QVector<Vec3d>& vertices = getOctahedronPolygon().fillVertices();
-	StelProjectorP projector = params.projector_;
+	StelProjector* projector = params.projector_;
 
 	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
 
@@ -815,7 +816,7 @@ void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawP
 void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
 {
 	const QVector<Vec3d>& vertices = contour;
-	StelProjectorP projector = params.projector_;
+	StelProjector* projector = params.projector_;
 
 	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
 
@@ -883,7 +884,7 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 {
 	const QVector<Vec3d>& vertices  = contour;
 	const QVector<Vec2f>& texCoords = textureCoords;
-	StelProjectorP projector = params.projector_;
+	StelProjector* projector = params.projector_;
 
 	Q_ASSERT_X(vertices.size() == texCoords.size(), Q_FUNC_INFO,
 	           "Numbers of vertices and texture coordinates do not match");
@@ -964,7 +965,7 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 
 void SphericalRegion::drawFill(StelRenderer* renderer, const DrawParams& params)
 {
-	StelProjectorP projector = params.projector_;
+	StelProjector* projector = params.projector_;
 	//! We don't need to draw stuff outside the view.
 	if (!projector->getBoundingCap().intersects(getBoundingCap()))
 	{
@@ -990,20 +991,20 @@ void SphericalRegion::drawFill(StelRenderer* renderer, const DrawParams& params)
 		fillVertexBuffersUpdated();
 	}
 
-	drawFillVertexBuffer(renderer, useProjector ? projector : StelProjectorP(NULL));
+	drawFillVertexBuffer(renderer, useProjector ? projector : NULL);
 }
 
-void SphericalRegion::drawFillVertexBuffer(StelRenderer* renderer, StelProjectorP projector)
+void SphericalRegion::drawFillVertexBuffer(StelRenderer* renderer, StelProjector* projector)
 {
 	renderer->drawVertexBuffer(fillPlainVertexBuffer, NULL, projector);
 }
 
-void SphericalConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjectorP projector)
+void SphericalConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjector* projector)
 {
 	renderer->drawVertexBuffer(fillPlainVertexBuffer, NULL, projector);
 }
 
-void SphericalTexturedConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjectorP projector)
+void SphericalTexturedConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjector* projector)
 {
 	renderer->drawVertexBuffer(fillTexturedVertexBuffer, NULL, projector);
 }

@@ -258,7 +258,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 	renderer->setGlobalColor(color);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
-		poly->drawFill(renderer, SphericalRegion::DrawParams(projector));
+		poly->drawFill(renderer, SphericalRegion::DrawParams(&(*projector)));
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
@@ -271,7 +271,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 		projector->project(bary, win);
 		renderer->drawText(TextParams(win[0], win[1], getAbsoluteImageURI()));
 
-		poly->drawOutline(renderer, SphericalRegion::DrawParams(projector));
+		poly->drawOutline(renderer, SphericalRegion::DrawParams(&(projector)));
 	}
 #endif
 	if (!alphaBlend)
