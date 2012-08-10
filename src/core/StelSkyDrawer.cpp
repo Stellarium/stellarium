@@ -21,7 +21,7 @@
 #include "StelProjector.hpp"
 
 #include "StelToneReproducer.hpp"
-#include "renderer/StelTextureMgr.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "renderer/StelRenderer.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -40,8 +40,14 @@
 StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	: core(acore)
 	, renderer(renderer)
+	, texHalo(NULL)
 	, starPointBuffer(NULL)
 	, starSpriteBuffer(NULL)
+	, starSpriteIndices(NULL)
+	, bigHaloIndices(NULL)
+	, sunHaloIndices(NULL)
+	, texBigHalo(NULL)
+	, texSunHalo(NULL)
 	, drawing(false)
 {
 	eye = core->getToneReproducer();
@@ -136,16 +142,18 @@ StelSkyDrawer::~StelSkyDrawer()
 	if(NULL != bigHaloIndices)   {delete bigHaloIndices;}
 	if(NULL != sunHaloIndices)   {delete sunHaloIndices;}
 	if(NULL != starSpriteIndices){delete starSpriteIndices;}
+	if(NULL != texBigHalo)       {delete texBigHalo;}
+	if(NULL != texSunHalo)       {delete texSunHalo;}
+	if(NULL != texHalo)          {delete texHalo;}
 }
 
 // Init parameters from config file
 void StelSkyDrawer::init()
 {
-	StelTextureMgr& textureManager = StelApp::getInstance().getTextureManager();
 	// Load star texture no mipmap:
-	texHalo = textureManager.createTexture("textures/star16x16.png");
-	texBigHalo = textureManager.createTexture("textures/haloLune.png");
-	texSunHalo = textureManager.createTexture("textures/halo.png");
+	texHalo    = renderer->createTexture("textures/star16x16.png");
+	texBigHalo = renderer->createTexture("textures/haloLune.png");
+	texSunHalo = renderer->createTexture("textures/halo.png");
 
 	update(0);
 }
@@ -331,7 +339,7 @@ void StelSkyDrawer::preDrawPointSource()
 //
 // The buffer is cleared since we re-add the stars on each frame.
 template<class VB>
-void drawStars(StelTextureSP texture, VB* vertices, StelIndexBuffer* indices, StelRenderer* renderer, StelProjectorP projector)
+void drawStars(StelTextureNew* texture, VB* vertices, StelIndexBuffer* indices, StelRenderer* renderer, StelProjectorP projector)
 {
 	if(NULL != texture){texture->bind();}
 	renderer->setBlendMode(BlendMode_Add);
@@ -362,7 +370,7 @@ void StelSkyDrawer::postDrawPointSource(StelProjectorP projector)
 	drawStars(texSunHalo, starSpriteBuffer, sunHaloIndices, renderer, projector);
 	if(drawStarsAsPoints)
 	{
-		drawStars(StelTextureSP(), starPointBuffer, NULL, renderer, projector);
+		drawStars(NULL, starPointBuffer, NULL, renderer, projector);
 	}
 	else                 
 	{

@@ -25,7 +25,6 @@
 #include "RefractionExtinction.hpp"
 
 #include "renderer/StelIndexBuffer.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "renderer/StelVertexBuffer.hpp"
 
 #include <QObject>
@@ -278,7 +277,7 @@ private:
 	float limitLuminance;
 
 	//! Little halo texture
-	StelTextureSP texHalo;
+	class StelTextureNew* texHalo;
 
 	//! Load B-V conversion parameters from config file
 	void initColorTableFromConfigFile(class QSettings* conf);
@@ -338,8 +337,8 @@ private:
 	float oldLum;
 
 	//! Big halo texture
-	StelTextureSP texBigHalo;
-	StelTextureSP texSunHalo;
+	class StelTextureNew* texBigHalo;
+	class StelTextureNew* texSunHalo;
 
 	bool flagLuminanceAdaptation;
 
