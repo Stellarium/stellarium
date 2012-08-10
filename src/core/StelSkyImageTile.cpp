@@ -16,14 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureParams.hpp"
-#include "renderer/StelTextureMgr.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTexture.hpp"
+#include "renderer/StelTextureParams.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
@@ -43,10 +42,12 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
+	tex = NULL;
 }
 
 // Constructor
-StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) 
+	: MultiLevelJsonBase(parent)
 {
 	initCtor();
 	if (parent!=NULL)
@@ -72,6 +73,11 @@ StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* par
 // Destructor
 StelSkyImageTile::~StelSkyImageTile()
 {
+	if(NULL != tex)
+	{
+		delete tex;
+		tex = NULL;
+	}
 }
 
 void StelSkyImageTile::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, float)
@@ -180,12 +186,12 @@ void StelSkyImageTile::getTilesToDraw
 
 	if (noTexture==false)
 	{
-		if (!tex)
+		if (NULL == tex)
 		{
 			// The tile has an associated texture, but it is not yet loaded: load it now
-			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-			tex = texMgr.createTextureThread(absoluteImageURI, TextureParams().generateMipmaps());
-			if (!tex)
+			tex = renderer->createTexture(absoluteImageURI, TextureParams().generateMipmaps(),
+			                              TextureLoadingMode_LazyAsynchronous);
+			if (tex->getStatus() == TextureStatus_Error)
 			{
 				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;
 				errorOccured = true;
@@ -233,7 +239,7 @@ void StelSkyImageTile::getTilesToDraw
 // Draw the image on the screen.
 bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	if (!tex->bind()) {return false;}
+	tex->bind();
 
 	if (!texFader)
 	{
@@ -285,7 +291,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 // Return true if the tile is fully loaded and can be displayed
 bool StelSkyImageTile::isReadyToDisplay() const
 {
-	return tex && tex->canBind();
+	return NULL != tex && tex->getStatus() == TextureStatus_Loaded;
 }
 
 // Load the tile from a valid QVariantMap

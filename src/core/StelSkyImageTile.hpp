@@ -23,7 +23,6 @@
 #include <QTimeLine>
 
 #include "MultiLevelJsonBase.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
 
 //#define DEBUG_STELSKYIMAGE_TILE 1
@@ -127,13 +126,10 @@ protected:
 	QList<SphericalRegionP> skyConvexPolygons;
 
 	//! The texture of the tile
-	StelTextureSP tex;
+	class StelTextureNew* tex;
 
 	//! Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
-
-	// //! Renderer used for drawing.
-	// StelRenderer* renderer;
 
 private:
 	//! init the StelSkyImageTile
