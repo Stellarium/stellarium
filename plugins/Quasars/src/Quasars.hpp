@@ -21,7 +21,6 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "Quasar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -101,7 +100,7 @@ private:
 
 	QString catalogJsonPath;
 
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
 	QList<QuasarP> QSO;
 
 };
