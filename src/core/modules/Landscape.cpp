@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "renderer/StelGeometryBuilder.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureMgr.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelLocation.hpp"
@@ -146,7 +146,10 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	: Landscape(_radius)
 	, sideTexs(NULL)
+	, texturesInitialized(false)
 	, sides(NULL)
+	, fogTex(NULL)
+	, groundTex(NULL)
 	, tanMode(false)
 	, calibrated(false)
 	, fogCylinderBuffer(NULL)
@@ -160,8 +163,27 @@ LandscapeOldStyle::~LandscapeOldStyle()
 {
 	if (NULL != sideTexs)
 	{
+		if(texturesInitialized)
+		{
+			for(int i = 0; i < nbSideTexs; ++i)
+			{
+				delete sideTexs[i].texture;
+			}
+		}
 		delete [] sideTexs;
 		sideTexs = NULL;
+	}
+
+	if(NULL != fogTex)
+	{
+		delete fogTex;
+		fogTex = NULL;
+	}
+
+	if(NULL != groundTex)
+	{
+		delete groundTex;
+		groundTex = NULL;
 	}
 
 	if (NULL != fogCylinderBuffer) 
@@ -217,19 +239,21 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	// Load sides textures
 	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
-	sideTexs = new StelTextureSP[nbSideTexs];
+	sideTexs = new SideTexture[nbSideTexs];
 	for (int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);
 		QString textureName = landscapeIni.value(textureKey).toString();
-		const QString texturePath = getTexturePath(textureName, landscapeId);
-		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
+		sideTexs[i].path = getTexturePath(textureName, landscapeId);
+		// Will be lazily initialized
+		sideTexs[i].texture = NULL;
 	}
 
 	// Init sides parameters
 	nbSide = landscapeIni.value("landscape/nbside", 0).toInt();
 	sides = new landscapeTexCoord[nbSide];
 	int texnum;
+
 	for (int i=0;i<nbSide;++i)
 	{
 		QString key = QString("landscape/side%1").arg(i);
@@ -239,7 +263,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);
 		texnum = textureName.right(textureName.length() - 3).toInt();
-		sides[i].tex = sideTexs[texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
 		sides[i].texCoords[1] = parameters.at(2).toFloat();
 		sides[i].texCoords[2] = parameters.at(3).toFloat();
@@ -257,28 +280,20 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	nbDecorRepeat = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
 
 	QString groundTexName = landscapeIni.value("landscape/groundtex").toString();
-	QString groundTexPath = getTexturePath(groundTexName, landscapeId);
-	groundTex = StelApp::getInstance()
-	                    .getTextureManager()
-	                    .createTexture(groundTexPath, TextureParams().generateMipmaps());
+	groundTexPath = getTexturePath(groundTexName, landscapeId);
 	QString description = landscapeIni.value("landscape/ground").toString();
 	//sscanf(description.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	QStringList parameters = description.split(':');
-	groundTexCoord.tex = groundTex;
 	groundTexCoord.texCoords[0] = parameters.at(1).toFloat();
 	groundTexCoord.texCoords[1] = parameters.at(2).toFloat();
 	groundTexCoord.texCoords[2] = parameters.at(3).toFloat();
 	groundTexCoord.texCoords[3] = parameters.at(4).toFloat();
 
 	QString fogTexName = landscapeIni.value("landscape/fogtex").toString();
-	QString fogTexPath = getTexturePath(fogTexName, landscapeId);
-	fogTex = StelApp::getInstance()
-	                 .getTextureManager()
-	                 .createTexture(fogTexPath, TextureParams().generateMipmaps().wrap(TextureWrap_Repeat));
+	fogTexPath = getTexturePath(fogTexName, landscapeId);
 	description = landscapeIni.value("landscape/fog").toString();
 	//sscanf(description.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	parameters = description.split(':');
-	fogTexCoord.tex = fogTex;
 	fogTexCoord.texCoords[0] = parameters.at(1).toFloat();
 	fogTexCoord.texCoords[1] = parameters.at(2).toFloat();
 	fogTexCoord.texCoords[2] = parameters.at(3).toFloat();
@@ -300,6 +315,7 @@ void LandscapeOldStyle::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (!validLandscape) {return;}
 
+	lazyInitTextures(renderer);
 	renderer->setBlendMode(BlendMode_Alpha);
 	StelProjectorP projector =
 		core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -358,6 +374,25 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelRenderer* renderer)
 	renderer->setBlendMode(BlendMode_Alpha);
 }
 
+void LandscapeOldStyle::lazyInitTextures(StelRenderer* renderer)
+{
+	if(texturesInitialized){return;}
+	for (int i = 0; i < nbSideTexs; ++i)
+	{
+		sideTexs[i].texture = renderer->createTexture(sideTexs[i].path);
+	}
+	for (int i=0;i<nbSide;++i)
+	{
+		sides[i].tex = sideTexs[i].texture;
+	}
+	fogTex = renderer->createTexture(fogTexPath, 
+		                              TextureParams().generateMipmaps().wrap(TextureWrap_Repeat));
+	fogTexCoord.tex = fogTex;
+	groundTex = renderer->createTexture(groundTexPath, TextureParams().generateMipmaps());
+	groundTexCoord.tex = groundTex;
+	texturesInitialized = true;
+}
+
 void LandscapeOldStyle::generatePrecomputedSides(StelRenderer* renderer)
 {
 	// Make slicesPerSide=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
@@ -394,7 +429,7 @@ void LandscapeOldStyle::generatePrecomputedSides(StelRenderer* renderer)
 			precompSide.vertices = 
 				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_Triangles);
 			precompSide.indices = renderer->createIndexBuffer(IndexType_U16);
-			precompSide.tex = sideTexs[ti];
+			precompSide.tex = sideTexs[ti].texture;
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx0 = (sides[ti].texCoords[2] - sides[ti].texCoords[0]) / slicesPerSide;
@@ -542,6 +577,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelRenderer* renderer)
 
 LandscapeFisheye::LandscapeFisheye(float _radius) 
 	: Landscape(_radius)
+	, mapTex(NULL)
 	, fisheyeSphere(NULL)
 {}
 
@@ -550,6 +586,10 @@ LandscapeFisheye::~LandscapeFisheye()
 	if(NULL != fisheyeSphere)
 	{
 		delete fisheyeSphere;
+	}
+	if(NULL != mapTex)
+	{
+		delete mapTex;
 	}
 }
 
@@ -576,7 +616,7 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, TextureParams().generateMipmaps());
+	mapTexPath = _maptex;
 	texFov = atexturefov*M_PI/180.f;
 	angleRotateZ = aangleRotateZ*M_PI/180.f;
 
@@ -588,6 +628,11 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
+
+	if(NULL == mapTex)
+	{
+		mapTex = renderer->createTexture(mapTexPath, TextureParams().generateMipmaps());
+	}
 
 	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
@@ -615,6 +660,7 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 
 LandscapeSpherical::LandscapeSpherical(float _radius) 
 	: Landscape(_radius)
+	, mapTex(NULL)
 {}
 
 LandscapeSpherical::~LandscapeSpherical()
@@ -623,6 +669,10 @@ LandscapeSpherical::~LandscapeSpherical()
 	{
 		delete landscapeSphere;
 		landscapeSphere = NULL;
+	}
+	if(NULL != mapTex)
+	{
+		delete mapTex;
 	}
 }
 
@@ -651,8 +701,8 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, TextureParams().generateMipmaps());
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
+	mapTexPath = _maptex;
 
 	const SphereParams params 
 		= SphereParams(radius).resolution(20, 40).orientInside().flipTexture();
@@ -664,6 +714,10 @@ void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
+	if(NULL == mapTex)
+	{
+		mapTex = renderer->createTexture(mapTexPath, TextureParams().generateMipmaps());
+	}
 
 	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
