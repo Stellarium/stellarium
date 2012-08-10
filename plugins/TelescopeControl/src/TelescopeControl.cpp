@@ -44,9 +44,9 @@
 #include "StelObjectMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelStyle.hpp"
-#include "StelTextureMgr.hpp"
 #include "renderer/StelGeometryBuilder.hpp"
 #include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -86,6 +86,8 @@ Q_EXPORT_PLUGIN2(TelescopeControl, TelescopeControlStelPluginInterface)
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
+	: reticleTexture(NULL)
+	, selectionTexture(NULL)
 {
 	setObjectName("TelescopeControl");
 
@@ -138,10 +140,6 @@ void TelescopeControl::init()
 		
 		//Load and start all telescope clients
 		loadTelescopes();
-		
-		//Load OpenGL textures
-		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
-		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		
@@ -217,6 +215,10 @@ void TelescopeControl::deinit()
 		++iterator;
 	}
 
+	if(NULL != reticleTexture)   {delete reticleTexture;}
+	if(NULL != selectionTexture) {delete selectionTexture;}
+	reticleTexture = selectionTexture = NULL;
+
 	//TODO: Decide if it should be saved on change
 	//Save the configuration on exit
 	saveConfiguration();
@@ -235,6 +237,13 @@ void TelescopeControl::draw(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	renderer->setFont(labelFont);
+	if(NULL == reticleTexture)
+	{
+		Q_ASSERT_X(NULL == selectionTexture, Q_FUNC_INFO, "Textures should be created simultaneously");
+		reticleTexture   = renderer->createTexture(":/telescopeControl/telescope_reticle.png");
+		selectionTexture = renderer->createTexture("textures/pointeur2.png");
+		
+	}
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
