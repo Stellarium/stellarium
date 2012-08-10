@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelQGL1Renderer.hpp"
 #include "StelQGL2Renderer.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
@@ -173,24 +174,19 @@ StelMainGraphicsView::~StelMainGraphicsView()
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
-	//GL-REFACTOR: This flag will be used to force GL1 backend.
-	//
-	//if(conf->value("main/use_glshaders", false).toBool())
-	//{
-	//}
-	//
-	//Also, if (!qApp->property("onetime_safe_mode").isValid()) (note the '!'),
-	//use GL1
-	
-	// GL-REFACTOR: Once we have GL2 and GL1 implementations, this code should
-	// try to init StelQGL2Renderer, and if that fails, init a StelQGL1Renderer.
-	//
 	// TODO: On hardware with .pvr texture support, the second argument should be true
-	
+	qDebug() << "Going to initialize the OpenGL 2 renderer";
 	renderer = new StelQGL2Renderer(this, false);
 	if(!renderer->init())
 	{
-		Q_ASSERT_X(false, Q_FUNC_INFO, "Fallback renderer not yet implemented");
+		qWarning() << "Failed to initialize the OpenGL 2 renderer, "
+		              "falling back to the OpenGL 1 renderer";
+		delete renderer;
+		renderer = new StelQGL1Renderer(this);
+		if(!renderer->init())
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to initialize fallback renderer");
+		}
 	}
 	
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.

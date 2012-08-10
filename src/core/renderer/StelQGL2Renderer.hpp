@@ -34,8 +34,9 @@ public:
 	
 	virtual ~StelQGL2Renderer()
 	{
-		invariant();
-		
+		// Can't check the invariant here, as the renderer will be destroyed even 
+		// if it's initialization has failed.
+
 		foreach(StelQGLGLSLShader *shader, builtinShaders)
 		{
 			delete shader;
@@ -549,7 +550,7 @@ private:
 		}
 		if(!result->log().isEmpty())
  		{
- 			qWarning() << "Warnings during creation of builtin shader \"" << name 
+ 			qWarning() << "Log of the compilation of builtin shader \"" << name 
 			           << "\" :" << result->log();
  		}
 		
