@@ -170,6 +170,8 @@ public:
 	}
 
 	//! Set font to use for drawing text.
+	//!
+	//! Can be only called when painting is enabled.
 	void setFont(const QFont& font)
 	{
 		Q_ASSERT_X(NULL != painter, Q_FUNC_INFO,

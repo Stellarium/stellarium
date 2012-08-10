@@ -266,14 +266,18 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	StelQGLTextureBackend* currentTexture = currentlyBoundTextures[0];
 
 	viewport.enablePainting();
+	if(currentFontSet)
+	{
+		viewport.setFont(currentFont);
+	}
 	QPainter* painter = viewport.getPainter();
 	Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, 
 	           "Trying to draw text but painting is disabled");
 
 	QFontMetrics fontMetrics = painter->fontMetrics();
 
-	const int x              = params.x_;
-	const int y              = params.y_;
+	const int x = params.x_;
+	const int y = params.y_;
 
 	// Avoid drawing if outside viewport.
 	// We do a worst-case approximation as getting exact text dimensions is expensive.
