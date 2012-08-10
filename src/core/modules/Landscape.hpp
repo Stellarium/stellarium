@@ -1,4 +1,4 @@
-/*
+/*                             class 
  * Stellarium
  * Copyright (C) 2003 Fabien Chereau
  *
@@ -29,7 +29,6 @@
 #include "StelUtils.hpp"
 #include "renderer/GenericVertexTypes.hpp"
 #include "renderer/StelIndexBuffer.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "renderer/StelVertexBuffer.hpp"
 #include "StelLocation.hpp"
 
@@ -128,7 +127,7 @@ protected:
 	
 	typedef struct
 	{
-		StelTextureSP tex;
+		class StelTextureNew* tex;
 		float texCoords[4];
 	} landscapeTexCoord;
 
@@ -173,6 +172,11 @@ private:
 	//! @param renderer Renderer used to create the vertex/index buffers.
 	void generateGroundFanDisk(class StelRenderer* renderer);
 
+	//! Used to lazily initialize textures at the first draw.
+	//!
+	//! @param renderer Renderer used to create the textures.
+	void lazyInitTextures(class StelRenderer* renderer);
+
 	//! Generate precomputedSides.
 	//!
 	//! Called lazily, once needed.
@@ -180,13 +184,22 @@ private:
 	//! @param renderer Renderer used to create the vertex/index buffers.
 	void generatePrecomputedSides(class StelRenderer* renderer);
 
-	StelTextureSP* sideTexs;
+	struct SideTexture
+	{
+		QString path;
+		class StelTextureNew* texture;
+	};
+
+	SideTexture* sideTexs;
+	bool texturesInitialized;
 	int nbSideTexs;
 	int nbSide;
 	landscapeTexCoord* sides;
-	StelTextureSP fogTex;
+	class StelTextureNew* fogTex;
+	QString fogTexPath;
 	landscapeTexCoord fogTexCoord;
-	StelTextureSP groundTex;
+	class StelTextureNew* groundTex;
+	QString groundTexPath;
 	landscapeTexCoord groundTexCoord;
 	int nbDecorRepeat;
 	float fogAltAngle;
@@ -207,7 +220,7 @@ private:
 		//! Index buffer specifying triangles to draw.
 		StelIndexBuffer* indices;
 		//! Texture of the decoration.
-		StelTextureSP tex;
+		class StelTextureNew* tex;
 	};
 
 	QList<LOSSide> precomputedSides;
@@ -240,7 +253,8 @@ public:
 	void create(const QString name, const QString& maptex, float texturefov, float angleRotateZ);
 private:
 
-	StelTextureSP mapTex;
+	class StelTextureNew* mapTex;
+	QString mapTexPath;
 	// Currently, this does not change after initialization.
 	// If, in future, this value can be modified, cached vertex/index buffers 
 	// will have to be regenerated after the change.
@@ -261,7 +275,8 @@ public:
 	void create(const QString name, const QString& maptex, float angleRotateZ);
 private:
 
-	StelTextureSP mapTex;
+	class StelTextureNew* mapTex;
+	QString mapTexPath;
 
 	//! Sphere used to draw the landscape.
 	class StelGeometrySphere* landscapeSphere;
