@@ -22,14 +22,13 @@
 #include "SolarSystem.hpp"
 #include "renderer/StelGLSLShader.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTexture.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "stellplanet.h"
 #include "Orbit.hpp"
 
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "renderer/StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -63,6 +62,7 @@ SolarSystem::SolarSystem()
 	: moonScale(1.)
 	, flagOrbits(false)
 	, flagLightTravelTime(false)
+	, texPointer(NULL)
 	, allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
@@ -89,6 +89,12 @@ SolarSystem::~SolarSystem()
 
 	delete allTrails;
 	allTrails = NULL;
+
+	if(NULL !=  texPointer)
+	{
+		delete texPointer;
+		texPointer = NULL;
+	}
 
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
 	foreach (PlanetP p, systemPlanets)
@@ -138,8 +144,6 @@ void SolarSystem::init()
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
-
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -176,6 +180,11 @@ void SolarSystem::drawPointer(const StelCore* core, StelRenderer* renderer)
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur4.png");
+		}
 
 		texPointer->bind();
 
