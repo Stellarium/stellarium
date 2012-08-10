@@ -39,6 +39,9 @@ public:
 	QString getText() const { return m_text; }
 	QKeySequence getPrimaryKey() const { return m_primaryKey; }
 	QKeySequence getAltKey() const { return m_altKey; }
+	bool isTemporary() const { return m_temporary; }
+
+	QVariant toQVariant();
 
 	void setText(const QString& text);
 	void setPrimaryKey(const QKeySequence& key);
@@ -48,6 +51,7 @@ public:
 	void setGlobal(bool g);
 	void setTemporary(bool temp);
 	void setScript(const QString& scriptText);
+	void setScriptPath(const QString& scriptPath);
 
 signals:
 
@@ -65,8 +69,9 @@ private:
 	bool m_autoRepeat;
 	bool m_global;
 	// defines whether shortcut exists only in current session
-	bool temporary;
-	QString script;
+	bool m_temporary;
+	QString m_script;
+	QString m_scriptFile;
 };
 
 
@@ -87,6 +92,8 @@ public:
 	QString getId() const { return m_id; }
 	QString getText() const { return m_text; }
 	bool isEnabled() const { return m_enabled; }
+
+	QVariant toQVariant();
 
 signals:
 

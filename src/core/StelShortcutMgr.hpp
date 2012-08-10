@@ -42,7 +42,7 @@ public:
 	// save current shortcuts to file
 	void saveShortcuts();
 
-	void saveShortcuts(class QFile file);
+	void saveShortcuts(QIODevice* output);
 
 	// Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
 	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& primaryKey, const QString& altKey,
@@ -60,7 +60,7 @@ public:
 	QAction* getGuiAction(const QString& groupId, const QString& actionId);
 
 	// bind script evaluation to given action
-	QAction* addScriptToAction(const QString& actionId, const QString& script);
+	QAction* addScriptToAction(const QString& actionId, const QString& script, const QString& scriptAction = QString());
 
 	// get list of all group of shortcuts
 	QList<StelShortcutGroup*> getGroupList() const;
