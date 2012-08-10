@@ -802,6 +802,16 @@ QFileDialog {
         image: url(:/graphicGui/nv_btTimeRealtime-off.png);
 }
 
+QLineEdit#lineEditSearch {
+	margin: 0px 0px 4px 0px;
+	padding: 4px;
+	padding-left: 32px;
+	background-image: url(:/graphicGui/nv_searchBoxBackground.png);
+	background-repeat: none;
+	background-position: center left;
+	border: none;
+}
+
 /**** The following are used for Satellites ****/
 QListWidget#satellitesList, QListWidget#sourceList {
 		font-size: 8pt;
