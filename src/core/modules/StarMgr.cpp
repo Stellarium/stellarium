@@ -33,7 +33,7 @@
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTexture.hpp"
+#include "renderer/StelTextureNew.hpp"
 
 #include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
@@ -41,7 +41,6 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
-#include "renderer/StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -121,7 +120,9 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 }
 
 
-StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
+StarMgr::StarMgr(void) 
+	: hipIndex(new HipIndexStruct[NR_OF_HIP+1])
+	, texPointer(NULL)
 {
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
@@ -158,6 +159,10 @@ StarMgr::~StarMgr(void)
 	zoneArrays.clear();
 	if (hipIndex)
 		delete[] hipIndex;
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 QString StarMgr::getCommonName(int hip)
@@ -232,7 +237,6 @@ void StarMgr::init()
 	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
 
 	objectMgr->registerStelObjectMgr(this);
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
@@ -259,6 +263,11 @@ void StarMgr::drawPointer(StelRenderer* renderer, StelProjectorP projector, cons
 		if (!projector->project(pos, win))
 		{
 			return;
+		}
+
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur2.png");   // Load pointer texture
 		}
 
 		const Vec3f& c(obj->getInfoColor());
