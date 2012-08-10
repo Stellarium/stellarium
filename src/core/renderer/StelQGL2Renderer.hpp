@@ -361,66 +361,6 @@ protected:
 			           "backend or uninitialized");
 		}
 
-		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
-		// are called, we only set it before drawing and reset after drawing to avoid 
-		// conflicts with e.g. Qt OpenGL backend, or any other GL code that might be running.
-
-		// GL setup before drawing.
-		// Fix some problem when using Qt OpenGL2 engine
-		glStencilMask(0x11111111);
-		
-		switch(depthTest)
-		{
-			case DepthTest_Disabled:
-				glDisable(GL_DEPTH_TEST);
-				break;
-			case DepthTest_ReadOnly:
-				glEnable(GL_DEPTH_TEST);
-				glDepthMask(GL_FALSE);
-				break;
-			case DepthTest_ReadWrite:
-				glEnable(GL_DEPTH_TEST);
-				glDepthMask(GL_TRUE);
-				break;
-			default:
-				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown depth test mode");
-		}
-
-		switch(stencilTest)
-		{
-			case StencilTest_Disabled:
-				glDisable(GL_STENCIL_TEST);
-				break;
-			case StencilTest_Write_1:
-				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
-				glEnable(GL_STENCIL_TEST);
-				break;
-			case StencilTest_DrawIf_1:
-				glEnable(GL_STENCIL_TEST);
-				glStencilFunc(GL_EQUAL, 0x1, 0x1);
-				glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-				break;
-			default:
-				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown stencil test mode");
-		}
-
-		switch(culledFaces)
-		{
-			case CullFace_None:
-				glDisable(GL_CULL_FACE);
-				break;
-			case CullFace_Front:
-				glEnable(GL_CULL_FACE);
-				glCullFace(GL_FRONT);
-				break;
-			case CullFace_Back:
-				glEnable(GL_CULL_FACE);
-				glCullFace(GL_BACK);
-				break;
-			default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown cull face type");
-		}
-
 		if(NULL == projector)
 		{
 			projector = StelApp::getInstance().getCore()->getProjection2d();
@@ -430,6 +370,10 @@ protected:
 		{
 			backend->projectVertices(projector, glIndexBuffer);
 		}
+		
+		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
+		// are called, we only set it before drawing and reset after drawing to avoid 
+		setupGLState(projector);
 
 		// Need to transpose the matrix for GL.
 		const Mat4f& m = projector->getProjectionMatrix();
@@ -438,20 +382,13 @@ protected:
 		                            m[2], m[6], m[10], m[14], 
 		                            m[3], m[7], m[11], m[15]);
 
-
-		glFrontFace(projector->flipFrontBackFace() ? GL_CW : GL_CCW);
-
 		// Set up viewport for the projector.
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
 		backend->draw(*this, transposed, glIndexBuffer);
 
 		// Restore default state to avoid interfering with Qt OpenGL drawing.
-		glFrontFace(projector->flipFrontBackFace() ? GL_CCW : GL_CW);
-		glCullFace(GL_BACK);
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_STENCIL_TEST);
+		restoreGLState(projector);
 
 		invariant();
 	}
