@@ -1036,6 +1036,13 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 	return false;
 }
 
+double calculateOrbitalPeriod(double SemiMajorAxis)
+{
+	double a = AU*1000*SemiMajorAxis;
+	double period = 2*M_PI*std::sqrt(a*a*a/1.32712440018e20);
+	return period/86400; // return period in days
+}
+
 
 } // end of the StelUtils namespace
 

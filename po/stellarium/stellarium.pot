@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 17:51+0700\n"
+"POT-Creation-Date: 2012-08-10 20:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4072,7 +4072,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 #: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Satellites/src/ui_satellitesDialog.h:697
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr ""
@@ -4143,7 +4143,7 @@ msgid "Vertical flip"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
-#: plugins/Satellites/src/ui_satellitesDialog.h:732
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
@@ -4156,7 +4156,7 @@ msgid "About"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Satellites"
 msgstr ""
 
@@ -4454,7 +4454,7 @@ msgid "Next update: %1 hours"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
-#: plugins/Satellites/src/ui_satellitesDialog.h:661
+#: plugins/Satellites/src/ui_satellitesDialog.h:655
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
@@ -4545,16 +4545,16 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:648
+#: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Satellites Configuration"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:651
 msgid "Update TLE lists from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:658
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
@@ -4562,7 +4562,7 @@ msgstr ""
 msgid "Update from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:653
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
@@ -4570,51 +4570,51 @@ msgstr ""
 msgid "Last update:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Labels"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:663
+#: plugins/Satellites/src/ui_satellitesDialog.h:657
 msgid "Label font size (pixels):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:658
 msgid "Orbit lines"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:666
-#: plugins/Satellites/src/ui_satellitesDialog.h:670
+#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:668
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of  segments:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:673
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:667
+#: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Duration of a single segment in seconds"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:675
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Segment length (s):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
-#: plugins/Satellites/src/ui_satellitesDialog.h:683
+#: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:685
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Fade length:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:680
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
@@ -4622,7 +4622,7 @@ msgstr ""
 msgid "Restore default settings"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:687
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
@@ -4630,7 +4630,7 @@ msgstr ""
 msgid "Save settings as default"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
@@ -4638,73 +4638,73 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Display the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Displayed"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:694
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:696
+#: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "Orbit"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "Catalog number:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:699
+#: plugins/Satellites/src/ui_satellitesDialog.h:693
 msgid "Description:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:694
 msgid "Groups:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:702
+#: plugins/Satellites/src/ui_satellitesDialog.h:696
 msgid "Comma separated list of groups"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:704
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "TLE data:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:706
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid "NORAD two line element orbit data"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Remove the selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:706
 msgid "Add more satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Save changes"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:721
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Add new source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:728
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Remove selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:725
 msgid "Sources"
 msgstr ""
 
