@@ -22,7 +22,6 @@
 
 
 #include "StelModule.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
 #include <QMap>

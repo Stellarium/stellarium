@@ -159,9 +159,6 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGLTextureBackend.cpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp
-	core/renderer/StelTexture.cpp
-	core/renderer/StelTexture.hpp
-	core/renderer/StelTextureTypes.hpp
 
 	core/renderer/StelLight.hpp
 
@@ -393,7 +390,6 @@ SET(stellarium_MOC_HDRS
 	core/renderer/StelTextureBackend.hpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp
-	core/renderer/StelTexture.hpp
 	core/modules/ConstellationMgr.hpp
 	core/modules/GridLinesMgr.hpp
 	core/modules/LabelMgr.hpp
