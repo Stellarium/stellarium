@@ -38,7 +38,9 @@ public:
 	
 	virtual ~StelQGL1Renderer()
 	{
-		invariant();
+		// Can't check the invariant here, as the renderer will be destroyed even 
+		// if it's initialization has failed.
+
 		initialized = false;
 	}
 	
