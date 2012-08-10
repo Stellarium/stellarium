@@ -71,6 +71,7 @@ Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
  Constructor
 */
 Quasars::Quasars()
+	: texPointer(NULL)
 {
 	setObjectName("Quasars");
 	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
@@ -86,7 +87,10 @@ Quasars::~Quasars()
 
 void Quasars::deinit()
 {
-	texPointer.clear();
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 /*
@@ -110,8 +114,6 @@ void Quasars::init()
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Quasars");
 
 		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/catalog.json";
-
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 	}
 	catch (std::runtime_error &e)
 	{
@@ -177,12 +179,16 @@ void Quasars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP
 		{
 			return;
 		}
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur2.png");
+		}
 
 		const Vec3f& c(obj->getInfoColor());
 		renderer->setGlobalColor(c[0], c[1], c[2]);
 		texPointer->bind();
 		renderer->setBlendMode(BlendMode_Alpha);
-		renderer->drawTexturedRect(screenPos[0] - 13.0f, screenPos[2] - 13.0f, 26.0f, 26.0f, 
+		renderer->drawTexturedRect(screenPos[0] - 13.0f, screenPos[1] - 13.0f, 26.0f, 26.0f, 
 		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 }
