@@ -125,6 +125,10 @@ void Planet::SharedPlanetGraphics::lazyInit(StelRenderer* renderer)
 			qWarning() << "Failed to load planet shader, falling back to CPU implementation";
 		}
 	}
+	else
+	{
+		planetShader = NULL;
+	}
 
 	initialized = true;
 }
