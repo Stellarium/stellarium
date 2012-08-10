@@ -33,7 +33,6 @@
 #include "StelJsonParser.hpp"
 #include "StelObjectModule.hpp"
 #include "StelProjectorType.hpp"
-#include "StelTextureTypes.hpp"
 #include "TelescopeControlGlobals.hpp"
 #include "VecMath.hpp"
 
@@ -239,9 +238,9 @@ private:
 	StelButton* toolbarButton;
 	
 	//! Telescope reticle texture
-	StelTextureSP reticleTexture;
+	class StelTextureNew* reticleTexture;
 	//! Telescope selection marker texture
-	StelTextureSP selectionTexture;
+	class StelTextureNew* selectionTexture;
 	
 	//! Contains the initialized telescope client objects representing the telescopes that Stellarium is connected to or attempting to connect to.
 	QMap<int, TelescopeClientP> telescopeClients;
