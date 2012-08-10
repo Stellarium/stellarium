@@ -68,7 +68,7 @@ static StelGLSLShader* loadPlanetShader(StelRenderer* renderer)
 	  "    float c = lightPos.x * normal.x * oneMinusOblateness +\n"
 	  "              lightPos.y * normal.y * oneMinusOblateness +\n"
 	  "              lightPos.z * normal.z / oneMinusOblateness;\n"
-	  "    litColor = clamp(c, 0.0f, 0.5) * diffuseLight + ambientLight;\n"
+	  "    litColor = clamp(c, 0.0, 0.5) * diffuseLight + ambientLight;\n"
 	  "}\n"))
 	{
 		qWarning() << "Error adding planet vertex shader: " << planetShader->log();
