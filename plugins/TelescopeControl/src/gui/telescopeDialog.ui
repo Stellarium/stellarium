@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>448</height>
+    <height>446</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -151,6 +151,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabTelescopes">
       <property name="sizePolicy">
@@ -563,10 +566,6 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <property name="icon">
-                <iconset resource="../../../../data/gui/guiRes.qrc">
-                 <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
-               </property>
               </widget>
              </item>
             </layout>
@@ -626,8 +625,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
