@@ -44,15 +44,20 @@ public slots:
 
 private slots:
 	void setTodayFlag(int);
-	void setHeliacalFlag(int);
+	void setAcroCosFlag(int);
 	void setOppositionFlag(int);
 	void setGoodDatesFlag(int);
+	void setFullMoonFlag(int);
+//	void setCrescentMoonFlag(int);
+//	void setSuperMoonFlag(int);
+
 	void restoreDefaults(void);
 	void saveSettings(void);
 	void setRed(int);
 	void setGreen(int);
 	void setBlue(int);
 	void setSize(int);
+	void setAltitude(int);
 
 private:
         Ui_ObservabilityDialog* ui;
