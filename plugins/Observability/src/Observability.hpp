@@ -57,23 +57,20 @@ public:
 	//! Save the settings to the main configuration file.
 	void saveSettingsToConfig(void);
 
-	//! Set whether today's ephemeris are shown.
-	void setTodayShow(bool);
-
-	//! Set whether Heliacal rise/set days are shown.
-	void setHeliacalShow(bool);
-
-	//! Set whether day of Sun's opposition is shown.
-	void setOppositionShow(bool);
-
-	//! Set whether range of good dates is shown.
-	void setGoodDatesShow(bool);
+	//! Set which output is shown.
+	//! @param output is the index of the output (e.g., 1 for today's ephemeris, 5 for Full Moon).
+	//! @param show is a boolean (true to show the output; false to hide it).
+	void setShow(int output, bool show);
 
 	//! Set the font colors. Color is (0,1,2) for (R,G,B):
 	void setFontColor(int Color, int Value);
 
 	//! Set the font size:
 	void setFontSize(int);
+
+	//! Set the Sun altitude at twilight:
+	void setSunAltitude(int);
+
 
 	//! get Show Flags from current configuration:
 	bool getShowFlags(int);
@@ -83,6 +80,9 @@ public:
 	
 	//! get current font size:
 	int getFontSize(void);
+
+	//! get current Sun altitude at twilight:
+	int getSunAltitude(void);
 
 public slots:
 //! Set whether observability will execute or not:
@@ -112,9 +112,30 @@ private:
 	virtual bool MoonSunSolve(StelCore* core);
 
 //! Finds the heliacal rise/set dates of the year for the currently-selected object.
-//! @param Rise day of year of the Heliacal rise.
-//! @param Set day of year of the Heliacal set.
-	virtual bool CheckHeli(int &Rise, int &Set);
+//! @param Rise day of year of the Acronycal rise.
+//! @param Set day of year of the Acronycal set.
+//! @param Rise2 day of year of the Cosmical rise.
+//! @param Set2 day of year of the Cosmical set.
+	virtual int CheckAcro(int &Rise, int &Set, int &Rise2, int &Set2);
+
+
+//! computes the Sun or Moon coordinates at a given Julian date.
+//! @param core the stellarium core.
+//! @param JD double for the Julian date.
+//! @param RASun right ascension of the Sun (in hours).
+//! @param DecSun declination of the Sun (in radians).
+//! @param RAMoon idem for the Moon.
+//! @param DecMoon idem for the Moon.
+//! @param getBack controls whether Earth and Moon must be returned to their original positions after computation.
+	virtual void getSunMoonCoords(StelCore* core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, bool getBack);
+
+
+//! Returns the angular separation (in radians) between two points.
+//! @param RA1 right ascension of point 1 (in hours)
+//! @param Dec1 declination of point 1 (in radians)
+//! @param RA2 idem for point 2
+//! @param Dec2 idem for point 2
+	virtual double Lambda(double RA1, double Dec1, double RA2, double Dec2);
 
 //! Converts a time span in hours (given as double) in hh:mm:ss (integers).
 //! @param t time span (double, in hours).
@@ -149,15 +170,6 @@ private:
 //! Just convert the Vec3d named TempLoc into RA/Dec:
 	virtual void toRADec(Vec3d TempLoc, double &RA, double &Dec);
 
-//! Add a given (float) number of hours to a time. Update the time accordingly.
-//! @param Hour Hour of the time.
-//! @param Minute Minute of the time.
-//! @param H Hours to be added to the time.
-//! @param newHour Hour of the updated time.
-//! @param newMinute Minute of the updated time.
-//	virtual void addTime(int hour, int minute, double H, int &newHour, int &newMinute);
-
-
 //! Vector to store the Julian Dates for the current year:
 	double yearJD[366];
 
@@ -165,8 +177,8 @@ private:
 //! @aparm i the day of the year.
 	virtual bool CheckRise(int i);
 
-//! Some useful constants (self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec;
+//! Some useful constants and variables(almost self-explanatory).
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
@@ -183,18 +195,21 @@ private:
 //! Vector of Earth position through the year.
 	Vec3d EarthPos[366];
 
-//! Position of the observer relative to the Earth Center:
-	Vec3d ObserverLoc;
+//! Position of the observer relative to the Earth Center or other coordinates:
+	Vec3d ObserverLoc, Pos0, Pos1, Pos2, RotObserver; //, Pos3;
+
+//! Matrix to transform coordinates for Sun/Moon ephemeris:
+	Mat4d LocTrans;
 
 //! Pointer to the Earth:
 	Planet* myEarth;
 	Planet* myMoon;
 
 //! Current simulation year and number of days in the year.;
-	int currYear, nDays;
+	int currYear, nDays, iAltitude;
 
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
-	QString selName, bestNight, ObsRange, objname, Heliacal;
+	QString selName, bestNight, ObsRange, objname, AcroCos;
 
 //! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
@@ -209,7 +224,7 @@ private:
 	bool isStar,isMoon,isSun,isScreen, LastSun, raised, configChanged;
 
 //! Some booleans to select the kind of output.
-	bool show_Heliacal, show_Good_Nights, show_Best_Night, show_Today;
+	bool show_AcroCos, show_Good_Nights, show_Best_Night, show_Today, show_FullMoon; //, show_Crescent, show_SuperMoon;
 
 //! Parameters for the graphics (i.e., font, icons, etc.):
 	QFont font;
