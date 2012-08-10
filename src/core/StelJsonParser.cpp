@@ -340,6 +340,7 @@ void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel
 		case QVariant::ByteArray:
 		{
 			QByteArray s(v.toByteArray());
+			s.replace('\\', "\\\\");
 			s.replace('\"', "\\\"");
 			s.replace('\b', "\\b");
 			s.replace('\n', "\\n");
@@ -352,6 +353,7 @@ void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel
 		case QVariant::String:
 		{
 			QString s(v.toString());
+			s.replace('\\', "\\\\");
 			s.replace('\"', "\\\"");
 			s.replace('\b', "\\b");
 			s.replace('\n', "\\n");
