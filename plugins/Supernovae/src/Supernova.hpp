@@ -28,6 +28,7 @@
 
 #include "StelObject.hpp"
 #include "StelFader.hpp"
+#include "StelProjectorType.hpp"
 
 
 //! @class Supernova
