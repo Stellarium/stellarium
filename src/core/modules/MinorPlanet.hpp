@@ -101,11 +101,14 @@ public:
 	//! designation.
 	static QString renderProvisionalDesignationinHtml(QString plainText);
 
+	void setSemiMajorAxis(double value);
+
 
 private:
 	int minorPlanetNumber;
 	double absoluteMagnitude;
 	double slopeParameter;
+	double semiMajorAxis;
 
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;
