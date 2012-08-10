@@ -604,7 +604,11 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		painter->getProjector()->project(v, win);
-		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		Vec3f c = color;
+		if (StelApp::getInstance().getVisionModeNight())
+			c = StelUtils::getNightColor(c);
+
+		painter->setColor(c[0]*cmag, c[1]*cmag, c[2]*cmag);
 		painter->drawSprite2dMode(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
