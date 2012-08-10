@@ -231,6 +231,31 @@ QPushButton:hover#closeStelWindow {
         background-image: url(:/graphicGui/nv_closeButton-hover.png);
 }
 
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {
+        image: url(:/graphicGui/nv_spinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown {
+        image: url(:/graphicGui/nv_spindown.png);
+}
+
+QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {
+        image: url(:/satellites/nv_bt_delete.png);
+}
+
+QPushButton#addSatellitesButton , QPushButton#addSourceButton {
+        image: url(:/satellites/nv_bt_add.png);
+}
+
+QPushButton#commsButton {
+        image: url(:/satellites/nv_bt_comms_off.png);
+}
+
+QPushButton#saveSatellitesButton {
+        image: url(:/graphicGui/nv_filesave.png);
+}
+
+
 /**********************************************LocationDialog*******************************************************/
 
 QLineEdit#citySearchLineEdit {
@@ -794,7 +819,7 @@ QFileDialog {
 	background: rgb(35, 0, 0);
 }
 
-#configurationDialogForm QPushButton#screenshotBrowseButton {
+#configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {
         image: url(:/graphicGui/nv_folder.png);
 }
 
