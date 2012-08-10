@@ -31,7 +31,7 @@ StelShortcut::StelShortcut(const QString &id, const QString &text,
 													 const QString &primaryKey, const QString &altKey,
 													 bool checkable, bool autoRepeat, bool global,
 													 QGraphicsWidget *parent) :
-	m_id(id), script()
+	m_id(id), m_script()
 {
 	if (parent == NULL)
 	{
@@ -53,6 +53,27 @@ StelShortcut::StelShortcut(const QString &id, const QString &text,
 StelShortcut::~StelShortcut()
 {
 	delete m_action; m_action = NULL;
+}
+
+QVariant StelShortcut::toQVariant()
+{
+	QVariantMap resMap;
+	resMap["text"] = QVariant(m_text);
+	resMap["primaryKey"] = QVariant(m_primaryKey.toString());
+	resMap["altKey"] = QVariant(m_altKey.toString());
+	resMap["checkable"] = QVariant(m_checkable);
+	resMap["autoRepeat"] = QVariant(m_autoRepeat);
+	resMap["global"] = QVariant(m_global);
+	if (!m_scriptFile.isEmpty())
+	{
+		resMap["scriptFile"] = QVariant(m_scriptFile);
+	}
+	// store script text only if no script filepath specified
+	else if (!m_script.isEmpty())
+	{
+		resMap["script"] = QVariant(m_script);
+	}
+	return QVariant(resMap);
 }
 
 void StelShortcut::setText(const QString &text)
@@ -101,7 +122,7 @@ void StelShortcut::setGlobal(bool g)
 
 void StelShortcut::setTemporary(bool temp)
 {
-	temporary = temp;
+	m_temporary = temp;
 }
 
 void StelShortcut::setScript(const QString &scriptText)
@@ -111,16 +132,21 @@ void StelShortcut::setScript(const QString &scriptText)
 	if (!StelMainGraphicsView::getInstance().getScriptMgr().preprocessScript(
 				scriptText, preprocessedScript, scriptsDir))
 	{
-		qWarning() << "Failed to preprocess script " << script;
+		qWarning() << "Failed to preprocess script " << m_script;
 		return;
 	}
-	script = preprocessedScript;
+	m_script = preprocessedScript;
 	connect(m_action, SIGNAL(triggered()), this, SLOT(runScript()));
+}
+
+void StelShortcut::setScriptPath(const QString &scriptPath)
+{
+	m_scriptFile = scriptPath;
 }
 
 void StelShortcut::runScript()
 {
-	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(script);
+	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(m_script);
 }
 
 void StelShortcut::updateShortcuts()
@@ -184,6 +210,24 @@ QList<StelShortcut *> StelShortcutGroup::getActionList() const
 		res << action;
 	}
 	return res;
+}
+
+QVariant StelShortcutGroup::toQVariant()
+{
+	QVariantMap resMap;
+	resMap["text"] = QVariant(m_text);
+	resMap["pluginId"] = QVariant(m_pluginId);
+	QVariantMap actionsMap;
+	for (QMap<QString, StelShortcut*>::iterator it = m_shortcuts.begin(); it != m_shortcuts.end(); ++it)
+	{
+		StelShortcut* sc = it.value();
+		if (!sc->isTemporary())
+		{
+			actionsMap[it.key()] = sc->toQVariant();
+		}
+	}
+	resMap["actions"] = QVariant(actionsMap);
+	return resMap;
 }
 
 void StelShortcutGroup::setEnabled(bool enable)
