@@ -351,7 +351,7 @@ public:
 	//! @param angle  Angle to rotate the rectangle in degrees.
 	virtual void drawRect(const float x, const float y, 
 	                      const float width, const float height, 
-	                      const float angle = 0.0f);
+	                      const float angle = 0.0f) = 0;
 	
 	//! Draw a textured rectangle to the screen.
 	//!
@@ -370,7 +370,7 @@ public:
 	//! @param angle  Angle to rotate the rectangle in degrees.
 	virtual void drawTexturedRect(const float x, const float y, 
 	                              const float width, const float height, 
-	                              const float angle = 0.0f);
+	                              const float angle = 0.0f) = 0;
 
 	//! Draw text with specified parameters.
 	//!
@@ -667,31 +667,6 @@ private:
 		VERTEX_ATTRIBUTES(Vec2f Position);
 	};
 
-	//! A simple 2D vertex with a position and texcoord, used for textured rectangles.
-	struct TexturedVertex
-	{
-		Vec2f position;
-		Vec2f texCoord;
-		TexturedVertex(Vec2f position, Vec2f texCoord):position(position),texCoord(texCoord){}
-		VERTEX_ATTRIBUTES(Vec2f Position, Vec2f TexCoord);
-	};
-
-	//! Implements drawRect() and drawTexturedRect(). 
-	//!
-	//! These are pretty much the same function, but with different names to improve
-	//! readability.
-	//!
-	//! @param renderer Renderer that's drawing the rectangle.
-	//! @param textured Should the rectangle be textured?
-	//! @param x        Horizontal position of the rectangle.
-	//! @param y        Vertical position of the rectangle.
-	//! @param width    Width of the rectangle.
-	//! @param height   Height of the rectangle.
-	//! @param angle    Rotation angle of the rectangle in degrees.
-	//!
-	//! @see drawRect, drawTexturedRect
-	void drawRectInternal(const bool textured, const float x, const float y, 
-	                      const float width, const float height, const float angle);
 };
 
 #endif // _STELRENDERER_HPP_
