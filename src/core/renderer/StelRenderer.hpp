@@ -290,6 +290,39 @@ public:
 	                      StelProjectorP projector = StelProjectorP(NULL),
 	                      bool dontProject = false)
 	{
+		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, &(*projector), dontProject);
+	}
+
+	//! Draw contents of a vertex buffer.
+	//!
+	//! This version takes a StelProjector* instead of StelProjectorP - this is not a 
+	//! problem, as the renderer subsystem doesn't store or delete the projector.
+	//!
+	//! @param vertexBuffer Vertex buffer to draw.
+	//! @param indexBuffer  Index buffer specifying which vertices from the buffer to draw.
+	//!                     If NULL, indexing will not be used and vertices will be drawn
+	//!                     directly in order they are in the buffer.
+	//! @param projector    Projector to project vertices' positions before drawing.
+	//!                     Also determines viewport to draw in.
+	//!                     If NULL, no projection will be done and the vertices will be drawn
+	//!                     directly.
+	//! @param dontProject  Disable vertex position projection.
+	//!                     (Projection matrix and viewport information of the 
+	//!                     projector are still used)
+	//!                     This is a hack to support StelSkyDrawer, which already 
+	//!                     projects the star positions before drawing them.
+	//!                     Avoid using this if possible. StelSkyDrawer might be 
+	//!                     refactored in future to remove the need for dontProject,
+	//!                     in which case it should be removed.
+	//!
+	//! @note When drawing with a custom StelProjector only 3D vertex positions are
+	//! supported.
+	template<class V>
+	void drawVertexBuffer(StelVertexBuffer<V>* vertexBuffer, 
+	                      class StelIndexBuffer* indexBuffer,
+	                      StelProjector* projector,
+	                      bool dontProject = false)
+	{
 		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, projector, dontProject);
 	}
 
@@ -586,7 +619,7 @@ protected:
 	//! @see drawVertexBuffer
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
 	                                     class StelIndexBuffer* indexBuffer,
-	                                     StelProjectorP projector,
+	                                     StelProjector* projector,
 	                                     const bool dontProject) = 0;
 
 	//! Implementation of createTexture.

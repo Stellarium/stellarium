@@ -4,6 +4,7 @@
 #include <QLinkedList>
 
 #include "StelProjector.hpp"
+#include "StelSphereGeometry.hpp"
 #include "StelRenderer.hpp"
 
 
@@ -28,6 +29,17 @@ public:
 	//! @param renderer  Renderer to create adn draw vertex buffers.
 	//! @param projector Projector to project 3D coordinates to the screen.
 	StelCircleArcRenderer(StelRenderer* renderer, StelProjectorP projector)
+		: renderer(renderer)
+		, projector(&(*projector))
+	{
+		smallCircleVertexBuffer = renderer->createVertexBuffer<Vertex>(PrimitiveType_LineStrip);
+	}
+
+	//! Construct a StelCircleArcRenderer on top of specified renderer.
+	//!
+	//! @param renderer  Renderer to create adn draw vertex buffers.
+	//! @param projector Projector to project 3D coordinates to the screen.
+	StelCircleArcRenderer(StelRenderer* renderer, StelProjector* projector)
 		: renderer(renderer)
 		, projector(projector)
 	{
@@ -246,7 +258,7 @@ private:
 	StelRenderer* renderer;
 
 	//! Projector to project vertices to viewport.
-	StelProjectorP projector;
+	StelProjector* projector;
 
 	//! Vertex buffer we're drawing the arc with.
 	StelVertexBuffer<Vertex>* smallCircleVertexBuffer;
