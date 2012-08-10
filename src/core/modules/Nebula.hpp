@@ -24,6 +24,7 @@
 #include <QString>
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
+#include "StelProjectorType.hpp"
 
 class QDataStream;
 

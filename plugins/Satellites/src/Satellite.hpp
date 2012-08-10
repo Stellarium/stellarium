@@ -29,6 +29,7 @@
 
 #include "StelObject.hpp"
 #include "StelSphereGeometry.hpp"
+#include "StelProjectorType.hpp"
 
 #include "gSatWrapper.hpp"
 

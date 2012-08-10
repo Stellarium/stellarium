@@ -22,6 +22,7 @@
 
 #include <limits>
 #include "StelProjector.hpp"
+#include "StelSphereGeometry.hpp"
 
 class StelProjectorPerspective : public StelProjector
 {
