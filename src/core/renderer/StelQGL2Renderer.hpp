@@ -54,6 +54,17 @@ public:
 		// as we're not in valid state (getGLContext() isn't public - it doesn't call invariant)
 		getGLContext()->makeCurrent();
 
+		// GL2 drawing doesn't work with GL1 paint engine .
+		//
+		// Not checking for GL2 as there could also be e.g. X11, or GL3 in future, etc; 
+		// where GL2 might work fine.
+		if(qtPaintEngineType() == QPaintEngine::OpenGL)
+		{
+			qWarning() << "StelQGL2Renderer::init : Failed because Qt paint engine is not OpenGL2 \n"
+			              "If paint engine is OpenGL3 or higher, this code needs to be updated";
+			return false;
+		}
+
 		if(!QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) &&
 		   !QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0))
 		{
