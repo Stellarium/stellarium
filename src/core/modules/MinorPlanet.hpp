@@ -101,8 +101,8 @@ public:
 	//! designation.
 	static QString renderProvisionalDesignationinHtml(QString plainText);
 
+	//! set value for semi-major axis in AU
 	void setSemiMajorAxis(double value);
-
 
 private:
 	int minorPlanetNumber;
