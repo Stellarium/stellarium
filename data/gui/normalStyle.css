@@ -230,6 +230,10 @@ QPushButton:hover#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton-hover.png);
 }
 
+QPushButton#pushButtonGotoSearchSkyObject {
+        image: url(:/graphicGui/searchButtonImage.png);
+}
+
 /**********************************************LocationDialog*******************************************************/
 
 QLineEdit#citySearchLineEdit {
