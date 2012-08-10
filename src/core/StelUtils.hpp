@@ -268,6 +268,8 @@ namespace StelUtils
 		}
 		return Vec3f(max, 0, 0);
 	}
+
+	double calculateOrbitalPeriod(double SemiMajorAxis);
 }
 
 #endif // _STELUTILS_HPP_
