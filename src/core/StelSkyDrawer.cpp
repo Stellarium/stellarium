@@ -46,9 +46,9 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	, starSpriteIndices(NULL)
 	, bigHaloIndices(NULL)
 	, sunHaloIndices(NULL)
+	, drawing(false)
 	, texBigHalo(NULL)
 	, texSunHalo(NULL)
-	, drawing(false)
 {
 	eye = core->getToneReproducer();
 
