@@ -94,7 +94,7 @@ public:
 				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture loading mode");
 		}
 
-		cache[name].refCount++;
+		(cache[name].refCount)++;
 
 		return result;
 	}
@@ -129,7 +129,7 @@ public:
 		           "Trying to remove unknown texture from cache");
 
 		TextureBackendRefCounted& cached = cache[name];
-		--cached.refCount;
+		--(cached.refCount);
 		Q_ASSERT_X(cached.refCount >= 0, Q_FUNC_INFO,
 		           "Negative reference count of a texture in texture cache");
 
