@@ -12,8 +12,6 @@
 #include "StelVertexAttribute.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
-#include "StelTexture.hpp"
-#include "StelTextureNew.hpp"
 #include "StelTextureNew.hpp"
 #include "StelTextureParams.hpp"
 
