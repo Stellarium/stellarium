@@ -26,6 +26,9 @@ enum IndexType
 class StelIndexBuffer
 {
 public:
+	//! Virtual destructor.
+	virtual ~StelIndexBuffer(){}
+	
 	//! Add a new index to the end of the buffer.
 	//!
 	//! The buffer must not be locked.
