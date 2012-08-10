@@ -30,7 +30,7 @@
 
 #include "renderer/StelCircleArcRenderer.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTexture.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "renderer/StelIndexBuffer.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -42,6 +42,7 @@ bool Constellation::singleSelected = false;
 
 Constellation::Constellation() 
 	: asterism(NULL)
+	, artTexture(NULL)
 	, artVertices(NULL)
 	, artIndices(NULL)
 {
@@ -50,23 +51,26 @@ Constellation::Constellation()
 Constellation::~Constellation()
 {
 	if (NULL != asterism)    {delete[] asterism;}
+	if (NULL != artTexture)  {delete artTexture;}
 	if (NULL != artVertices) {delete artVertices;}
 	if (NULL != artIndices)  {delete artIndices;}
 	asterism    = NULL;
+	artTexture  = NULL;
 	artVertices = NULL;
 	artIndices  = NULL;
 }
 
 void Constellation::generateArtVertices(StelRenderer* renderer, const int resolution)
 {
-	int texSizeX, texSizeY;
 	// Texture not yet loaded.
-	if (NULL == artTexture || !artTexture->getDimensions(texSizeX, texSizeY))
+	if (NULL == artTexture || !artTexture->getStatus() == TextureStatus_Loaded)
 	{
 		// artVertices will be still NULL, and it will be generated in a future 
 		// call once the texture is loaded
 		return;
 	}
+
+	const QSize texSize = artTexture->getDimensions();
 
 	artVertices = renderer->createVertexBuffer<Vertex>(PrimitiveType_Triangles);
 	artIndices  = renderer->createIndexBuffer(IndexType_U16);
@@ -81,7 +85,7 @@ void Constellation::generateArtVertices(StelRenderer* renderer, const int resolu
 			const float texX = x * mult;
 			const float texY = y * mult;
 			artVertices->addVertex
-				(Vertex(texCoordTo3D * Vec3f(texX * texSizeX, texY * texSizeY, 0.0f),
+				(Vertex(texCoordTo3D * Vec3f(texX * texSize.width(), texY * texSize.height(), 0.0f),
 				        Vec2f(texX, texY)));
 		}
 	}
@@ -207,12 +211,7 @@ void Constellation::drawArtOptim
 	// Don't draw if outside viewport.
 	if (intensity > 0.001f && region.intersects(boundingCap))
 	{
-		// The texture is not fully loaded
-		if (artTexture->bind() == false) 
-		{
-			renderer->setCulledFaces(CullFace_None);
-			return;
-		}
+		artTexture->bind();
 		renderer->setGlobalColor(Vec4f(intensity, intensity, intensity, 1.0f));
 		renderer->drawVertexBuffer(artVertices, artIndices, projector);
 	}
