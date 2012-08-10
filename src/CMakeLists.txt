@@ -159,8 +159,6 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGLTextureBackend.cpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp
-	core/renderer/StelTextureMgr.cpp
-	core/renderer/StelTextureMgr.hpp
 	core/renderer/StelTexture.cpp
 	core/renderer/StelTexture.hpp
 	core/renderer/StelTextureTypes.hpp
