@@ -26,7 +26,6 @@
 
 // Predeclaration of some classes
 class StelCore;
-class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
@@ -90,10 +89,6 @@ public:
 	//! Get the sky cultures manager.
 	//! @return the sky cultures manager
 	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
-
-	//! Get the texture manager to use for loading textures.
-	//! @return the texture manager to use for loading textures.
-	StelTextureMgr& getTextureManager() {return *textureMgr;}
 
 	//! Get the Location manager to use for managing stored locations
 	//! @return the Location manager to use for managing stored locations
@@ -208,9 +203,6 @@ private:
 
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
-
-	// Textures manager for the application
-	StelTextureMgr* textureMgr;
 
 	// Manager for all the StelObjects of the program
 	StelObjectMgr* stelObjectMgr;
