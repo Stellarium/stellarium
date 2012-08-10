@@ -49,6 +49,7 @@ public:
 		, blendMode(BlendMode_None)
 		, culledFaces(CullFace_None)
 		, placeholderTexture(NULL)
+		, currentFontSet(false)
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
@@ -125,9 +126,9 @@ public:
 	
 	virtual void setFont(const QFont& font)
 	{
-		viewport.enablePainting();
-		viewport.setFont(font);
-		viewport.disablePainting();
+		// The font is actually set only once drawing text.
+		currentFont = font;
+		currentFontSet = true;
 	}
 
 	virtual void bindTextureBackend(StelTextureBackend* const textureBackend, const int textureUnit);
@@ -475,6 +476,14 @@ protected:
 	//!
 	//! Used to reset bound texture is drawText.
 	StelQGLTextureBackend* currentlyBoundTextures[STELQGLRENDERER_MAX_TEXTURE_UNITS];
+
+private:
+	//! Font currently used for text drawing.
+	QFont currentFont;
+
+	//! Has currentFont been set since the intialization? (if not, the painter's default font will
+	//! be used when drawing text)
+	bool currentFontSet;
 };
 
 #endif // _STELQGLRENDERER_HPP_
