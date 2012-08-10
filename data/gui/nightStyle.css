@@ -183,7 +183,7 @@ QPushButton#pushButtonGotoSearchSkyObject {
 	border-radius: 0px;
 	border-left: none;
 	padding: 2px;
-        image: url(:/graphicGui/nv_searchButtonImage.png);
+	image: url(:/graphicGui/nv_searchButtonImage.png);
 }
 
 QFrame#completionLabel {
@@ -799,7 +799,7 @@ QFileDialog {
 }
 
 #configurationDialogForm QPushButton#getStarsButton {
-        icon: url(:/graphicGui/nv_btTimeRealtime-off.png);
+        image: url(:/graphicGui/nv_btTimeRealtime-off.png);
 }
 
 /**** The following are used for Satellites ****/
