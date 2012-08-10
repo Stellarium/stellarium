@@ -1210,7 +1210,8 @@ bool Observability::MoonSunSolve(StelCore* core)
 //		for (int i=-PrevMonths; i<13 ; i++)
 //		{
 //			jd1 = nextFullMoon + MoonT*((double) i);
-//			getSunMoonCoords(core,false,jd1,RA,Dec,Dist,false); 
+//			getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false); 
+//			COMPUTE THE DISTANCE VECTOR!
 //			if (Dist < BestDistance)
 //			{
 //				BestDistance = Dist;
