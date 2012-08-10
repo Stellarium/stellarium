@@ -27,7 +27,6 @@
 
 #include <QFont>
 #include "StelObjectModule.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "Planet.hpp"
 
 class Orbit;
@@ -298,7 +297,7 @@ private:
 	bool flagLightTravelTime;
 
 	//! The selection pointer texture.
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
 
 	bool flagShow;
 
