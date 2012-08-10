@@ -41,15 +41,17 @@ public:
 		// Increased for the Pulsars plugin.
 		, textTextureCache(16777216)
 		, textBuffer(NULL)
+		, plainRectBuffer(NULL)
+		, texturedRectBuffer(NULL)
 		, previousFrameEndTime(-1.0)
 		, globalColor(Qt::white)
-		, gl(glContext)
 		, depthTest(DepthTest_Disabled)
 		, stencilTest(StencilTest_Disabled)
 		, blendMode(BlendMode_None)
 		, culledFaces(CullFace_None)
 		, placeholderTexture(NULL)
 		, currentFontSet(false)
+		, gl(glContext)
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
@@ -74,6 +76,16 @@ public:
 		{
 			delete textBuffer;
 			textBuffer = NULL;
+		}
+		if(NULL != texturedRectBuffer)
+		{
+			delete texturedRectBuffer;
+			texturedRectBuffer = NULL;
+		}
+		if(NULL != plainRectBuffer)
+		{
+			delete plainRectBuffer;
+			plainRectBuffer = NULL;
 		}
 
 		// This causes crashes for some reason 
@@ -202,6 +214,14 @@ public:
 		glContext->swapBuffers();
 		invariant();
 	}
+
+	virtual void drawRect(const float x, const float y, 
+	                      const float width, const float height, 
+	                      const float angle = 0.0f);
+	
+	virtual void drawTexturedRect(const float x, const float y, 
+	                              const float width, const float height, 
+	                              const float angle = 0.0f);
 
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
 	virtual void makeGLContextCurrent()
@@ -404,6 +424,14 @@ private:
 	//! These are always loaded (drawn) synchronously, so QCache is enough.
 	QCache<QByteArray, StelQGLTextureBackend> textTextureCache;
 
+	//! A plain, position-only 2D vertex.
+	struct Vertex
+	{
+		Vec2f position;
+		Vertex(Vec2f position):position(position){}
+		VERTEX_ATTRIBUTES(Vec2f Position);
+	};
+
 	//! 2D vertex with a position and texture coordinates.
 	struct TexturedVertex
 	{
@@ -417,6 +445,12 @@ private:
 
 	//! This buffer is reused to draw text at every drawText() call.
 	StelVertexBuffer<TexturedVertex>* textBuffer;
+
+	//! Vertex buffer used to draw plain, non-textured rectangles.
+	StelVertexBuffer<Vertex>* plainRectBuffer;
+
+	//! Vertex buffer used to draw textured rectangles.
+	StelVertexBuffer<TexturedVertex>* texturedRectBuffer;
 	
 	//! Time the previous frame rendered by renderFrame ended.
 	//!
@@ -431,6 +465,33 @@ private:
 	//!
 	//! Note that channel values might be outside of the 0-1 range.
 	Vec4f globalColor;
+
+	//! Current depth test mode. 
+	DepthTest depthTest;
+
+	//! Current stencil test mode.
+	StencilTest stencilTest;
+
+	//! Current blend mode.
+	BlendMode blendMode;
+
+	//! Determines whether front or back faces are culled, if any are culled at all.
+	CullFace culledFaces;
+
+	//! Texture used as a fallback when texture loading fails or a texture can't be bound.
+	StelQGLTextureBackend* placeholderTexture;
+
+	//! Currently bound texture of each texture unit (NULL if none bound).
+	//!
+	//! Used to reset bound texture is drawText.
+	StelQGLTextureBackend* currentlyBoundTextures[STELQGLRENDERER_MAX_TEXTURE_UNITS];
+
+	//! Font currently used for text drawing.
+	QFont currentFont;
+
+	//! Has currentFont been set since the intialization? (if not, the painter's default font will
+	//! be used when drawing text)
+	bool currentFontSet;
 
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect);
@@ -463,39 +524,29 @@ private:
 
 		return placeholderTexture;
 	}
-	
+
+	//! Implements drawRect() and drawTexturedRect(). 
+	//!
+	//! These are pretty much the same function, but with different names to improve
+	//! readability.
+	//!
+	//! @param renderer Renderer that's drawing the rectangle.
+	//! @param textured Should the rectangle be textured?
+	//! @param x        Horizontal position of the rectangle.
+	//! @param y        Vertical position of the rectangle.
+	//! @param width    Width of the rectangle.
+	//! @param height   Height of the rectangle.
+	//! @param angle    Rotation angle of the rectangle in degrees.
+	//!
+	//! @see drawRect, drawTexturedRect
+	void drawRectInternal(const bool textured, const float x, const float y, 
+	                      const float width, const float height, const float angle);
+
 	// Must be down due to initializer list order.
 protected:
 	//! Wraps some GL functions for compatibility across GL and GLES.
 	QGLFunctions gl;
 
-	//! Current depth test mode.
-	DepthTest depthTest;
-
-	//! Current stencil test mode.
-	StencilTest stencilTest;
-
-	//! Current blend mode.
-	BlendMode blendMode;
-
-	//! Determines whether front or back faces are culled, if any are culled at all.
-	CullFace culledFaces;
-
-	//! Texture used as a fallback when texture loading fails or a texture can't be bound.
-	StelQGLTextureBackend* placeholderTexture;
-
-	//! Currently bound texture of each texture unit (NULL if none bound).
-	//!
-	//! Used to reset bound texture is drawText.
-	StelQGLTextureBackend* currentlyBoundTextures[STELQGLRENDERER_MAX_TEXTURE_UNITS];
-
-private:
-	//! Font currently used for text drawing.
-	QFont currentFont;
-
-	//! Has currentFont been set since the intialization? (if not, the painter's default font will
-	//! be used when drawing text)
-	bool currentFontSet;
 };
 
 #endif // _STELQGLRENDERER_HPP_
