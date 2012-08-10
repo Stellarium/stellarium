@@ -98,7 +98,7 @@ void StelQGLArrayVertexBufferBackend::getVertex
 }
 
 void StelQGLArrayVertexBufferBackend::
-	projectVertices(StelProjectorP projector, StelQGLIndexBuffer* indexBuffer)
+	projectVertices(StelProjector* projector, StelQGLIndexBuffer* indexBuffer)
 {
 	// This is a backend function called during (right before) drawing, so we need 
 	// to be locked.

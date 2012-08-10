@@ -87,7 +87,7 @@ public:
 	//! @param projector Projector to project the vertices with.
 	//! @param indexBuffer Index buffer specifying which vertices to project.
 	//!                    If NULL, all vertices are projected.
-	void projectVertices(StelProjectorP projector, 
+	void projectVertices(StelProjector* projector, 
 	                     class StelQGLIndexBuffer* indexBuffer);
 
 protected:
