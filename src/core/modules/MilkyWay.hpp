@@ -24,7 +24,6 @@
 #include "VecMath.hpp"
 #include "renderer/GenericVertexTypes.hpp"
 #include "renderer/StelIndexBuffer.hpp"
-#include "renderer/StelTextureTypes.hpp"
 #include "renderer/StelVertexBuffer.hpp"
 
 //! @class MilkyWay 
@@ -77,7 +76,7 @@ public slots:
 	
 private:
 	float radius;
-	StelTextureSP tex;
+	class StelTextureNew* tex;
 	Vec3f color;
 	float intensity;
 	class LinearFader* fader;

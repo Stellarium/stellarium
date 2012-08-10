@@ -21,8 +21,7 @@
 #include "StelFader.hpp"
 #include "renderer/StelGeometryBuilder.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "renderer/StelTexture.hpp"
-#include "renderer/StelTextureMgr.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "StelUtils.hpp"
 
 #include "StelProjector.hpp"
@@ -36,7 +35,8 @@
 
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() 
-	: color(1.f, 1.f, 1.f)
+	: tex(NULL)
+	, color(1.f, 1.f, 1.f)
 	, skySphere(NULL)
 {
 	setObjectName("MilkyWay");
@@ -48,7 +48,12 @@ MilkyWay::~MilkyWay()
 	delete fader;
 	fader = NULL;
 	
-	if(NULL == skySphere)
+	if(NULL != tex)
+	{
+		delete tex;
+		tex = NULL;
+	}
+	if(NULL != skySphere)
 	{
 		delete skySphere;
 		skySphere = NULL;
@@ -60,7 +65,6 @@ void MilkyWay::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	tex = StelApp::getInstance().getTextureManager().createTexture("textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
 
@@ -80,6 +84,11 @@ void MilkyWay::draw(StelCore* core, class StelRenderer* renderer)
 	transfo->combine(Mat4d::xrotation(M_PI/180.*23.)*
 	                 Mat4d::yrotation(M_PI/180.*120.)*
 	                 Mat4d::zrotation(M_PI/180.*7.));
+
+	if(NULL == tex)
+	{
+		tex = renderer->createTexture("textures/milkyway.png");
+	}
 
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelToneReproducer* eye = core->getToneReproducer();
