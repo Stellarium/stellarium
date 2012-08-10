@@ -165,24 +165,6 @@ public:
 
 	virtual void setBlendMode(const BlendMode blendMode)
 	{
-		// Moving this to drawVertexBufferBackend causes flicker issues
-		switch(blendMode)
-		{
-			case BlendMode_None:
-				glDisable(GL_BLEND);
-				break;
-			case BlendMode_Add:
-				glBlendFunc(GL_ONE, GL_ONE);
-				glEnable(GL_BLEND);
-				break;
-			case BlendMode_Alpha:
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glEnable(GL_BLEND);
-				break;
-			default:
-				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown blend mode");
-		}
-
 		this->blendMode = blendMode;
 	}
 
@@ -263,6 +245,12 @@ public:
 	//! Returns true if non-power-of-two textures are supported, false otherwise.
 	virtual bool areNonPowerOfTwoTexturesSupported() const = 0;
 
+	//! Get paint engine type used for Qt drawing.
+	QPaintEngine::Type qtPaintEngineType() const 
+	{
+		return viewport.qtPaintEngineType();
+	}
+
 protected:
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
@@ -302,6 +290,24 @@ protected:
 		// Fix some problem when using Qt OpenGL2 engine
 		glStencilMask(0x11111111);
 		
+		// Moving this to drawVertexBufferBackend causes flicker issues
+		switch(blendMode)
+		{
+			case BlendMode_None:
+				glDisable(GL_BLEND);
+				break;
+			case BlendMode_Add:
+				glBlendFunc(GL_ONE, GL_ONE);
+				glEnable(GL_BLEND);
+				break;
+			case BlendMode_Alpha:
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glEnable(GL_BLEND);
+				break;
+			default:
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown blend mode");
+		}
+
 		switch(depthTest)
 		{
 			case DepthTest_Disabled:
@@ -366,6 +372,12 @@ protected:
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_STENCIL_TEST);
+
+		// Qt GL1 paint engine expects alpha blending to be enabled.
+		//
+		// If Qt fixes that, this might be removed.
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glDisable(GL_BLEND);
 	}
 
 private:
