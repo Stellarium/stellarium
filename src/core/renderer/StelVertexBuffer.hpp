@@ -164,7 +164,7 @@ public:
 	{
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
 		           "Trying to add a vertex to a locked vertex buffer");
-		backend->addVertex(reinterpret_cast<const quint8*>(&vertex));
+		backend->addVertex(static_cast<const void*>(&vertex));
 		++vertexCount;
 	}
 	
@@ -179,12 +179,14 @@ public:
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
 		           "Trying to get a vertex in a locked vertex buffer");
 		Q_ASSERT_X(index < vertexCount, Q_FUNC_INFO, "Vertex index out of bounds");
-		// Using a quint array instead of a V directly avoids calling the 
+		// Using a char array instead of a V directly avoids calling the 
 		// default constructor of V (which might not be defined, and the 
 		// default-constructed data would be overwritten anyway)
-		quint8 result[sizeof(V)];
+		
+		unsigned char storage[sizeof(V)];
+		void* result = &storage[0];
 		backend->getVertex(index, result);
-		return *(reinterpret_cast<V*>(result));
+		return *static_cast<V*>(result);
 	}
 	
 	//! Set vertex at specified index in the buffer.
@@ -198,7 +200,7 @@ public:
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
 		           "Trying to set a vertex in a locked vertex buffer");
 		Q_ASSERT_X(index < vertexCount, Q_FUNC_INFO, "Vertex index out of bounds");
-		backend->setVertex(index, reinterpret_cast<const quint8*>(&vertex));
+		backend->setVertex(index, static_cast<const void*>(&vertex));
 	}
 	
 	//! Lock the buffer. Must be called before drawing.

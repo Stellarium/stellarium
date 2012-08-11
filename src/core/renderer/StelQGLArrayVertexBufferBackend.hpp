@@ -54,11 +54,11 @@ protected:
 public:
 	virtual ~StelQGLArrayVertexBufferBackend();
 
-	virtual void addVertex(const quint8* const vertexInPtr);
+	virtual void addVertex(const void* const vertexInPtr);
 
-	virtual void getVertex(const int index, quint8* const vertexOutPtr) const;
+	virtual void getVertex(const int index, void* const vertexOutPtr) const;
 
-	virtual void setVertex(const int index, const quint8* const vertexInPtr)
+	virtual void setVertex(const int index, const void* const vertexInPtr)
 	{
 		setVertexNonVirtual(index, vertexInPtr);
 	}
@@ -136,10 +136,10 @@ private:
 	//! SetVertex implementation, non-virtual so it can be inlined in addVertex.
 	//! 
 	//! @see setVertex
-	void setVertexNonVirtual(const int index, const quint8* const vertexInPtr)
+	void setVertexNonVirtual(const int index, const void* const vertexInPtr)
 	{
 		// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
-		const quint8* attribPtr = vertexInPtr;
+		const unsigned char* attribPtr = static_cast<const unsigned char*>(vertexInPtr);
 		for(int attrib = 0; attrib < attributes.count; ++attrib)
 		{
 			//Set each attribute in its buffer.
@@ -158,6 +158,10 @@ private:
 					Q_ASSERT(false);
 			}
 
+			// This always works, because the C standard requires that 
+			// sizeof(unsigned char) == 1  (that 1 might mean e.g. 16 bits instead of 8
+			// on some platforms, but both the size of attribute and of unsigned char is 
+			// measured in the same unit, so it's not a problem.
 			attribPtr += attributes.sizes[attrib];
 		}
 	}
@@ -169,7 +173,7 @@ private:
 	//! @param attributePtr   Raw pointer to attribute data. Data format must match
 	//!                       the attribute at specified index.
 	template<class A>
-	void addAttribute(const int attributeIndex, const quint8* attributePtr)
+	void addAttribute(const int attributeIndex, const void* attributePtr)
 	{
 		const A* attrib = reinterpret_cast<const A*>(attributePtr);
 		getBuffer<A>(attributeIndex).data.append(*attrib);
