@@ -71,6 +71,9 @@ QString glErrorToString(const GLenum error);
 //! Get OpenGL pixel format of an image.
 GLint glGetPixelFormat(const QImage& image);
 
+//! Determine if specified texture size is within maximum texture size limits.
+bool glTextureSizeWithinLimits(const QSize size);
+
 //! Ensure that an image is within maximum texture size limits, shrinking it if needed.
 //!
 //! The image will be replaced by a resized version if it doesn't fit 
