@@ -148,7 +148,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
 
     //Preset frustumSplits
     frustumSplits = 4;
-    splitWeight = 0.90f;
+    splitWeight = 0.50f;
     //Make sure we dont exceed MAXSPLITS or go below 1
     frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
     //Define shadow maps array - holds MAXSPLITS textures
@@ -1128,10 +1128,22 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     float scaleX = 2.0f/(maxX - minX);
     float scaleY = 2.0f/(maxY - minY);
     float scaleZ = 1.0f/(maxZ - minZ);
-    float offsetX = -0.5f*(maxX + minX)*scaleX;
-    float offsetY = -0.5f*(maxY + minY)*scaleY;
+
     float offsetZ = -minZ*scaleZ;
 
+    //Reducing swimming as specified in Practical cascaded shadow maps by Zhang et al.
+    float quantizer = 64.0f;
+    scaleX = 1.0f/std::ceil(1.0f/scaleX*quantizer) * quantizer;
+    scaleY = 1.0f/std::ceil(1.0f/scaleY*quantizer) * quantizer;
+
+    float offsetX = -0.5f*(maxX + minX)*scaleX;
+    float offsetY = -0.5f*(maxY + minY)*scaleY;
+
+    float halfTex = 0.5f*shadowmapSize;
+    offsetX = std::ceil(offsetX*halfTex)/halfTex;
+    offsetY = std::ceil(offsetY*halfTex)/halfTex;
+
+    //Making the crop matrix
     c = Mat4f(scaleX, 0.0f,   0.0f, offsetX,
               0.0f,   scaleY, 0.0f, offsetY,
               0.0f,   0.0f,   scaleZ, offsetZ,
