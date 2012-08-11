@@ -26,8 +26,10 @@
 #include <QFile>
 #include <QTime>
 #include <QTimer>
+#include <QScriptEngineAgent>
 
 class StelMainScriptAPI;
+class StelScriptEngineAgent;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
@@ -119,10 +121,15 @@ public slots:
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
 	void debug(const QString& msg);
 
+	//! Pause a running script.
+	void pauseScript();
+
+	//! Resume a paused script.
+	void resumeScript();
+
 private slots:
 	//! Called at the end of the running threa
 	void scriptEnded();
-
 signals:
 	//! Notification when a script starts running
 	void scriptRunning();
@@ -156,6 +163,25 @@ private:
 
 	QString scriptFileName;
 	
+	//Script engine agent
+	StelScriptEngineAgent *agent;
+	
+};
+
+class StelScriptEngineAgent : public QScriptEngineAgent
+{
+public:
+	explicit StelScriptEngineAgent(QScriptEngine *engine);
+	virtual ~StelScriptEngineAgent() {}
+
+	void setPauseScript(bool pause) { isPaused=pause; }
+	bool getPauseScript() { return isPaused; }
+
+	void positionChange(qint64 scriptId, int lineNumber, int columnNumber);
+	
+private:
+	bool isPaused;
+
 };
 
 #endif // _STELSCRIPTMGR_HPP_

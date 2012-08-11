@@ -36,6 +36,10 @@
 
 #include "StelPainter.hpp"
 
+#ifdef __OpenBSD__
+#include <unistd.h>
+#endif
+
 // Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
 #ifndef MAP_NORESERVE
 #  ifdef MAP_AUTORESRV
