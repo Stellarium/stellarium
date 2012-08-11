@@ -68,7 +68,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
         info.displayedName = N_("Observability analysis");
         info.authors = N_("Ivan Marti-Vidal (Onsala Space Observatory)");
         info.contact = N_("i.martividal@gmail.com");
-        info.description = N_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon before/after the astronomical rise/set twilight(i.e., when Sun's elevation falls below -12 degrees). The scripts also gives the day for Sun's opposition and the days of Acronychal and Cosmical rise/set.");
+        info.description = N_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon during a fraction of the night. The plugin also gives the day for Sun's opposition and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of the quantities shown by this script is given in the 'About' tab of the configuration window");
         return info;
 }
 
@@ -88,7 +88,10 @@ Observability::Observability()
 	TFrac = 0.9972677595628414;  // Convert sidereal time into Solar time
 	JDsec = 1./86400.;      // A second in days.
 	halfpi = 1.57079632675; // pi/2
-	MoonT = 29.5306; // Approximate Moon synodic period (used to estimate Supermoon).
+	MoonT = 29.530588; // Moon synodic period (used as first estimate of Full Moon).
+	RefFullMoon = 2451564.696; // Reference Julian date of a Full Moon.
+	nextFullMoon = 0.0;
+	prevFullMoon = 0.0;
 	selName = "";
 
 
@@ -1169,38 +1172,81 @@ bool Observability::MoonSunSolve(StelCore* core)
 	if (isMoon && show_FullMoon) // || show_SuperMoon))
 	{
 
-
 	// Only extimate date of Full Moon if we have changed Lunar month:
-		if (myJD > nextFullMoon || std::abs(nextFullMoon - myJD) > MoonT)
+		if (myJD > nextFullMoon || myJD < prevFullMoon)
 		{
-			double dT = 0.25; // We iterate in bins of 0.25 days
-			double Lambda0,Lambda1,Lambda2;  // Angular separations between Moon and Sun
-			Lambda0=1000.0; Lambda1=1000.0; Lambda2=1000.0;  // Initial dummy values.
 
-			for (int nT = 1; nT < 500; nT++)  // We analyze a whole Lunar month, beginning on myJD.
-			{
-				jd1 = myJD + ((double) nT)*dT;
-			// Get modified coordinates:
-				getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false);
-				Lambda2 = Lambda(RA,Dec,RAS,DecS);
-	
-				if (Lambda2 < Lambda1 && Lambda1 > Lambda0) // We reached a local maximum of Sun-Moon separation!
+
+	// Estimate the closest Full Moon:
+			double nT;
+			double dT = std::modf((myJD-RefFullMoon)/MoonT,&nT);
+			if (dT>0.5) {nT += 1.0;};
+			double TempFullMoon = RefFullMoon + nT*MoonT;
+
+	// Improve the estimate iteratively (Secant method over Lunar-phase vs. time):
+
+			dT = 1./1440.; // Our time span for the finite-difference derivative estimate.
+			double Phase1, Phase2; // Variables for temporal use.
+			double Deriv1, Deriv2; // Variables for temporal use.
+			double Sec1, Sec2, Temp1, Temp2; // Variables for temporal use.
+
+			for (int j=0; j<2; j++) 
+			{ // Two steps: one for the previos Full Moon and the other for the next one.
+
+				Sec1 = TempFullMoon - 0.01*MoonT; 
+				Sec2 = TempFullMoon + 0.01*MoonT; 
+
+				for (int i=0; i<100; i++) // A limit of 100 iterations.
 				{
-					nextFullMoon = jd1-dT;
-					break;  // Exit the loop (we found the epoch of the next closest Full Moon!)
-				} else 
-				{	// We didn't reach the maximum phase. Update variables and iterate:
-					Lambda0 = Lambda1;
-					Lambda1 = Lambda2;
-					Lambda2 = 0.0;
+					getSunMoonCoords(core,Sec1+dT/2.,RAS,DecS,RA,Dec,false);
+					Temp1 = Lambda(RA,Dec,RAS,DecS);
+					getSunMoonCoords(core,Sec1-dT/2.,RAS,DecS,RA,Dec,false);
+					Temp2 = Lambda(RA,Dec,RAS,DecS);
+
+					Deriv1 = (Temp1-Temp2)/dT;
+					Phase1 = (Temp1+Temp2)/2.;
+
+					getSunMoonCoords(core,Sec2+dT/2.,RAS,DecS,RA,Dec,false);
+					Temp1 = Lambda(RA,Dec,RAS,DecS);
+					getSunMoonCoords(core,Sec2-dT/2.,RAS,DecS,RA,Dec,false);
+					Temp2 = Lambda(RA,Dec,RAS,DecS);
+
+					Deriv2 = (Temp1-Temp2)/dT;
+					Phase2 = (Temp1+Temp2)/2.;
+
+					Temp1 = Sec2 - Deriv2*(Sec2-Sec1)/(Deriv2-Deriv1);
+					Sec1 = Sec2; Sec2 = Temp1;
+
+					if (std::abs(Sec2-Sec1) < dT) {break;}  // Convergence.
+
 				};
+
+				if (TempFullMoon > myJD) 
+				{
+					nextFullMoon = TempFullMoon;
+					TempFullMoon -= MoonT;
+				} else
+				{
+					prevFullMoon = TempFullMoon;
+					TempFullMoon += MoonT;
+				};
+
 			};
+
 		};	
 
 	// Update the string shown in the screen: 
-		int fullDay, fullMonth,fullYear;
+		int fullDay, fullMonth,fullYear, fullHour, fullMinute, fullSecond;
+		StelUtils::getDateFromJulianDay(prevFullMoon,&fullYear,&fullMonth,&fullDay);
+		double dT;
+		double nT = 24.*(std::modf(prevFullMoon,&dT));
+		double2hms(nT,fullHour,fullMinute,fullSecond);
+		bestNight = q_("Previous Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 		StelUtils::getDateFromJulianDay(nextFullMoon,&fullYear,&fullMonth,&fullDay);
-		bestNight = q_("Next Full Moon: %1 "+months[fullMonth-1]).arg(fullDay);
+		nT = 24.*(std::modf(nextFullMoon,&dT));
+		double2hms(nT,fullHour,fullMinute,fullSecond);
+		bestNight += q_("  Next Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+
 
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
 //		double monthFrac;
@@ -1327,7 +1373,7 @@ void Observability::setShow(int output, bool setVal)
 		case 2: {show_AcroCos = setVal; break;}
 		case 3: {show_Good_Nights = setVal; break;}
 		case 4: {show_Best_Night = setVal; break;}
-		case 5: {show_FullMoon = setVal; nextFullMoon=0.0; break;}
+		case 5: {show_FullMoon = setVal; nextFullMoon=0.0; prevFullMoon=0.0; break;}
 //		case 6: {show_Crescent = setVal; break;}
 //		case 7: {show_SuperMoon = setVal; break;}
 	};

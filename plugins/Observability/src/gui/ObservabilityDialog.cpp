@@ -95,7 +95,27 @@ void ObservabilityDialog::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td> 1.0.1 </td></tr>";
 	html += "<tr><td>" + q_("Author:") + "</td><td>Ivan Marti-Vidal &lt;i.martividal@gmail.com&gt;</td></tr></table>";
 
-	html += "<p>" + q_("Plugin that analyzes the observability of the selected source (or the screen center, if no source is selected). The plugin can show rise, transit, and set times, as well as the best epoch of the year (i.e., Sun's opposition), the date range when the source is above the horizon at astronomical night (i.e., with Sun elevation below -12 degrees), and the dates of Acronychal and Cosmical rise/set.<br>Ephemeris of the Solar-System objects and parallax effects are taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)") + "</p>";
+	html += "<p>" + q_("Plugin that analyzes the observability of the selected source (or the screen center, if no source is selected). The plugin can show rise, transit, and set times, as well as the best epoch of the year (i.e., Sun's opposition), the date range when the source is above the horizon at dark night, and the dates of Acronychal and Cosmical rise/set.<br>Ephemeris of the Solar-System objects and parallax effects are taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)") + "</p>";
+
+	html += "<br><h2>" + q_("Explanation of some parameters<br>") + "</h2><table width=\"90%\">";
+
+	html += "<tr><td>" + q_("Sun altitude at twilight:") + "</td><td>Any celestial object will be considered visible when the Sun is below this altitude. The altitude at astronomical twilight ranges usually between -12 and -18 degrees. This parameter is only used for the estimate of the range of observable epochs (see below).<br></td></tr>";
+
+	html += "<tr><td>" + q_("Today ephemeris:") + "</td><td>Self-explanatory. The program will show the rise, set, and culmination (transit) times. The exact times for these ephemeris are given in two ways: as time spans (referred to the current time) and as clock hours (in local time).<br></td></tr>";
+
+
+	html += "<tr><td>" + q_("Acronychal/Cosmical rise/set:") + "</td><td>The Acronychal rise (or set) of an object happens when the object rises (or sets) just when the Sun sets (or rises), respectively. The exact dates of these ephemeris depend on the Observer's location. The dates between the Acronychal set and rise are those when the altitude of the celestial object uses to be high when the Sun is well below the horizon (hence the object can be well observed). On the contrary, the Cosmical rise (or set) happens when both, the object and the Sun, rise (or set) simultaneously. It is obvious that the source is hardly observable (or not observable at all) in the dates between Cosmical set and rise.<br></td></tr>";
+
+	html += "<tr><td>" + q_("Sun opposition:") + "</td><td>Happens when the angular separation between the Sun and the celestial object are maximum. This is equivalent to say that the Equatorial longitudes of the Sun and the object differ by 180 degrees. When an object is at Sun opposition (no matter if it is a planet or a star), it culminates roughly at midnight, and on the darkest possible area of the Sky at that declination. Hence, the night of Sun opposition is the 'best' night to observe a particular object.<br></td></tr>";
+
+	html += "<tr><td>" + q_("Observable epochs:") + "</td><td><br>The program computes the range of dates when the celestial object is above the horizon at least during one moment of the night. By 'night', the program consideres the time span when the Sun altitude is below that of the twilight (which can be set by the user; see above). When the objects are fixed on the sky (or are exterior planets), the range of observable epochs for the current year can have two possible forms: either a range from one date to another (e.g., 20 Jan to 15 Sep) or in two steps (from 1 Jan to a given date and from another date to 31 Dec). In the first case, the first date (20 Jan in our example) shall be close to the so-called 'Heliacal rise of a star' and the second date (15 Sep in our example) shall be close to the 'Heliacal set'. In the second case (e.g., a range in the form 1 Jan to 20 May and 21 Sep to 31 Dec), the first date (20 May in our example) would be close to the Heliacal set and the second one (21 Sep in our example) to the Heliacal rise. More exact equations to estimate the Heliacal rise/set of stars and planets (which will not depend on the mere input of a twilight Sun elevation by the user) will be implemented in future versions of this plugin.</td></tr>";
+
+	html += "<tr><td>" + q_("Full Moon:") + "</td><td><br>When the Moon is selected, the program can compute the exact closest dates (up to 1 minute precision) of the Moon's opposition to the Sun.</td></tr>";
+
+
+	html += "</table>";
+
+
 	html += "</body></html>";
 
 	ui->aboutTextBrowser->setHtml(html);
