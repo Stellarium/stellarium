@@ -1,0 +1,19 @@
+// Name: Video Test
+// Author: Alexander Wolf
+// License: Public Domain
+// Description: This script plays several formats of video file.
+//              Note that video support is a build-time option and
+//              may not be supported for the version of Stellarium
+//              which you have.  Also, different playforms may
+//              support different video formats.
+//
+
+core.loadVideo("tests/videotest.flv", "flv", 100, 70, true, 0.5);
+
+lab = LabelMgr.labelScreen("Playing video file...", 100, 20, true, 20, "#ff0000");
+core.playVideo("flv");
+core.wait(182);
+LabelMgr.deleteLabel(lab);
+core.wait(0.4);
+
+core.dropVideo("flv");

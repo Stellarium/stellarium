@@ -256,6 +256,21 @@ namespace StelUtils
 			(1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f))))):
 				1.f / (1.f -x*(1.f -x/2.f*(1.f- x/3.f*(1.f-x/4.f*(1.f-x/5.f)))));
 	}
+
+	//! Get a night mode version of a color.  That is find the brightness of a color and set that in the
+	//! red channel only
+	inline Vec3f getNightColor(const Vec3f& dayColor)
+	{
+		float max = 0.0;
+		for(int i=0; i<3; i++)
+		{
+			max = dayColor[i] > max ? dayColor[i] : max;
+		}
+		return Vec3f(max, 0, 0);
+	}
+
+	//! Calculate and getting orbital period in days from semi-major axis (in AU)
+	double calculateOrbitalPeriod(double SemiMajorAxis);
 }
 
 #endif // _STELUTILS_HPP_

@@ -32,12 +32,30 @@
 
 class StelPainter;
 
+class QNetworkAccessManager;
+class QNetworkReply;
+class QProgressBar;
+class QSettings;
+class QTimer;
+class QuasarsDialog;
+
 typedef QSharedPointer<Quasar> QuasarP;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class Quasars : public StelObjectModule
 {
+	Q_OBJECT
 public:	
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,		//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,	//!< Update completed, there were updates
+		DownloadError,		//!< Error during download phase
+		OtherError		//!< Other error
+	};
+
 	Quasars();
 	virtual ~Quasars();
 
@@ -76,9 +94,67 @@ public:
 	//! get a Quasar object by identifier
 	QuasarP getByID(const QString& id);
 
+	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
+	//! plugin.
+	virtual bool configureGui(bool show=true);
+
+	//! Set up the plugin with default values.  This means clearing out the Quasars section in the
+	//! main config.ini (if one already exists), and populating it with default values.  It also
+	//! creates the default pulsars.json file from the resource embedded in the plugin lib/dll file.
+	void restoreDefaults(void);
+
+	//! Read (or re-read) settings from the main config file.  This will be called from init and also
+	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
+	void readSettingsFromConfig(void);
+
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
+
+	//! get whether or not the plugin will try to update catalog data from the internet
+	//! @return true if updates are set to be done, false otherwise
+	bool getUpdatesEnabled(void) {return updatesEnabled;}
+	//! set whether or not the plugin will try to update catalog data from the internet
+	//! @param b if true, updates will be enabled, else they will be disabled
+	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
+
+	bool getDisplayMode(void) {return distributionEnabled;}
+	void setDisplayMode(bool b) {distributionEnabled=b;}
+
+	//! get the date and time the TLE elements were updated
+	QDateTime getLastUpdate(void) {return lastUpdate;}
+
+	//! get the update frequency in days
+	int getUpdateFrequencyDays(void) {return updateFrequencyDays;}
+	void setUpdateFrequencyDays(int days) {updateFrequencyDays = days;}
+
+	//! get the number of seconds till the next update
+	int getSecondsToUpdate(void);
+
+	//! Get the current updateState
+	UpdateState getUpdateState(void) {return updateState;}
+
+signals:
+	//! @param state the new update state.
+	void updateStateChanged(Quasars::UpdateState state);
+
+	//! emitted after a JSON update has run.
+	void jsonUpdateComplete(void);
+
+public slots:
+	//! Download JSON from web recources described in the module section of the
+	//! module.ini file and update the local JSON file.
+	void updateJSON(void);
+
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
 private:
 	// Font used for displaying our text
 	QFont font;
+
+	// if existing, delete Satellites section in main config.ini, then create with default values
+	void restoreDefaultConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -93,7 +169,7 @@ private:
 
 	//! Get the version from the "version" value in the catalog.json file
 	//! @return version string, e.g. "0.2.1"
-	const QString getJsonFileVersion(void);
+	int getJsonFileVersion(void);
 
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());
@@ -105,6 +181,32 @@ private:
 
 	StelTextureSP texPointer;
 	QList<QuasarP> QSO;
+
+	// variables and functions for the updater
+	UpdateState updateState;
+	QNetworkAccessManager* downloadMgr;
+	QString updateUrl;
+	QString updateFile;
+	QProgressBar* progressBar;
+	QTimer* updateTimer;
+	QTimer* messageTimer;
+	QList<int> messageIDs;
+	bool updatesEnabled;
+	QDateTime lastUpdate;
+	int updateFrequencyDays;
+	bool distributionEnabled;
+
+	QSettings* conf;
+
+	// GUI
+	QuasarsDialog* configDialog;
+
+private slots:
+	//! check to see if an update is required.  This is called periodically by a timer
+	//! if the last update was longer than updateFrequencyHours ago then the update is
+	//! done.
+	void checkForUpdate(void);
+	void updateDownloadComplete(QNetworkReply* reply);
 
 };
 

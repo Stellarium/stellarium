@@ -508,7 +508,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 	{
 	    const float offset = *tmpRcmag*0.7f;
-	    const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
+	    const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
 	    sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
 	    sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
 	}

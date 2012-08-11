@@ -29,6 +29,10 @@
 #include "Skybright.hpp"
 #include "StelUtils.hpp"
 
+#ifdef __NetBSD__
+#undef FS
+#endif
+
 Skybright::Skybright() : SN(1.f)
 {
 	setDate(2003, 8, 0);

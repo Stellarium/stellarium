@@ -42,24 +42,6 @@ class Pulsar : public StelObject
 {
 	friend class Pulsars;
 public:
-	//! @enum pulsarTypeInfoGroup used as named bitfield flags as specifiers to
-	//! filter results of getPulsarTypeInfoString. The precise definition of these should
-	//! be documented in the getPulsarTypeInfoString documentation for the derived classes
-	//! for all specifiers which are defined in that derivative.
-	//! Description of types you can see here - http://cdsarc.u-strasbg.fr/viz-bin/Cat?VII/189
-	enum pulsarTypeInfoGroup
-	{
-		C	= 0x00000001, //!< Globular cluster association
-		S	= 0x00000002, //!< SNR association
-		G	= 0x00000004, //!< Glitches in period
-		B	= 0x00000010, //!< Binary or multiple pulsar
-		M	= 0x00000020, //!< Millisecond pulsar
-		R	= 0x00000040, //!< Recycled pulsar
-		I	= 0x00000100, //!< Radio interpulse
-		H	= 0x00000200, //!< Optical, X-ray or Gamma-ray pulsed emission (high energy)
-		E	= 0x00000400  //!< Extragalactic (in MC) pulsar
-	};
-
 	//! @param id The official designation for a pulsar, e.g. "PSR J1919+21"
 	Pulsar(const QVariantMap& map);
 	~Pulsar();
@@ -115,21 +97,36 @@ private:
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
 	float RA;		//! J2000 right ascension
 	float DE;		//! J2000 declination
-	float distance;		//! Adopted distance of pulsar in kpc
-	double period;		//! Barycentric period in seconds
-	int ntype;		//! Octal code for pulsar type
-	float We;		//! Equivalent width of the integrated pulse profile in ms
+	float parallax;		//! Annual parallax (mas)
+	double period;		//! Barycentric period of the pulsar (s)
+	double frequency;	//! Barycentric rotation frequency (Hz)
+	double pfrequency;      //! Time derivative of barycentric rotation frequency (s^-2)
+	double pderivative;	//! Time derivative of barcycentric period (dimensionless)
+	double dmeasure;	//! Dispersion measure (cm-3 pc)
+	double bperiod;		//! Binary period of pulsar (days)
+	double eccentricity;	//! Eccentricity	
 	float w50;		//! Profile width at 50% of peak in ms
 	float s400;		//! Time averaged flux density at 400MHz in mJy
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
+	float distance;		//! Distance based on electron density model in kpc
+	QString notes;		//! Notes to pulsar (Type of pulsar)
 
 	LinearFader labelsFader;
 
-protected:
-	//! Get type of pulsar from octal code
-	//! @flags a set of flags with information types of pulsar.
-	QString getPulsarTypeInfoString(const int flags) const;
+	//! Calculate and get spin down energy loss rate (ergs/s)
+	//! @param p0 - barycentric period of the pulsar (s)
+	//! @param p1 - time derivative of barcycentric period (dimensionless)
+	double getEdot(double p0, double p1) const;
+
+	//! Calculate and get barycentric period derivative
+	//! @param p0 - barycentric period of the pulsar (s)
+	//! @param f1 - time derivative of barcycentric period (s^-2)
+	double getP1(double p0, double f1) const;
+
+	//! Get type of pulsar
+	//! @param pcode - code of pulsar type
+	QString getPulsarTypeInfoString(QString pcode) const;
 
 };
 
