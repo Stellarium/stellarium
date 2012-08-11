@@ -134,14 +134,29 @@ GLint glGetPixelFormat(const QImage& image)
 	else     {return alpha ? GL_RGBA : GL_RGB;}
 }
 
+bool glTextureSizeWithinLimits(const QSize size)
+{
+	// TODO 
+	// GL_MAX_TEXTURE_SIZE is buggy on some implementations,
+	// and max texture size also depends on pixel format.
+	// Implement a better solution based on texture proxy.
+	// (determine if a texture with exactly this width, height, format fits.
+	// If not, divide width and height by 2, try again. Ad infinitum, until 0)
+
+	GLint maxSize;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxSize);
+
+	return size.width() < maxSize && size.height() < maxSize;
+}
+
 void glEnsureTextureSizeWithinLimits(QImage& image)
 {
-	//TODO 
-	//GL_MAX_TEXTURE_SIZE is buggy on some implementations,
-	//and max texture size also depends on pixel format.
-	//Implement a better solution based on texture proxy.
-	//(determine if a texture with exactly this width, height, format fits.
-	//If not, divide width and height by 2, try again. Ad infinitum, until 0)
+	// TODO 
+	// GL_MAX_TEXTURE_SIZE is buggy on some implementations,
+	// and max texture size also depends on pixel format.
+	// Implement a better solution based on texture proxy.
+	// (determine if a texture with exactly this width, height, format fits.
+	// If not, divide width and height by 2, try again. Ad infinitum, until 0)
 	GLint size;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
 
