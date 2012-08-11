@@ -16,6 +16,12 @@ public:
         CORNERCOUNT
     };
 
+    enum Plane
+    {
+        Front = 0, Back, Bottom, Top, Left, Right,
+        PLANECOUNT
+    };
+
     Vec3f min, max;
 
     AABB();
@@ -29,6 +35,11 @@ public:
     Vec3f negativeVertex(Vec3f& normal) const;
 
     void render(Mat4d* pMat = 0);
+
+    //! Return the plane equation for specified plane as Vec4f
+    Vec4f getEquation(AABB::Plane p) const;
+    //! Expand the BB to include the given vertex
+    void expand(const Vec3f &v);
 };
 
 #endif

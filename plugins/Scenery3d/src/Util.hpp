@@ -46,5 +46,9 @@ extern Vec3f vecdToFloat(Vec3d v);
 extern Vec3d vecfToDouble(Vec3f v);
 //! Parses a int to string
 extern std::string toString(int i);
+//! Compares two vertices to eachother
+extern bool CompareVerts(const Vec3f &v1, const Vec3f &v2);
+//! Compares two floats to eachother
+extern bool CompareFloats(float c1, float c2);
 #endif
 
