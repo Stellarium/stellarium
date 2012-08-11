@@ -29,11 +29,6 @@ uniform sampler2D smap_1;
 uniform sampler2D smap_2;
 uniform sampler2D smap_3;
 
-uniform bool smap_0_set;
-uniform bool smap_1_set;
-uniform bool smap_2_set;
-uniform bool smap_3_set;
-
 uniform mat4 texmat_0;
 uniform mat4 texmat_1;
 uniform mat4 texmat_2;
@@ -75,7 +70,7 @@ vec4 getShadow()
 	
     vec4 shadow_c = vec4(1.0, 1.0, 1.0, 1.0);
 
-    if(dist < vecSplits.x && smap_0_set)
+    if(dist < vecSplits.x)
     {
 		vec4 sm_coord_c = texmat_0*vecPos;
 		float shadow = texture2D(smap_0, sm_coord_c.xy).x;
@@ -83,7 +78,7 @@ vec4 getShadow()
 
 		shadow_c = debugColor(0) * s;
     }
-    else if(dist < vecSplits.y && smap_1_set)
+    else if(dist < vecSplits.y)
     {
 		vec4 sm_coord_c = texmat_1*vecPos;
 		float shadow = texture2D(smap_1, sm_coord_c.xy).x;
@@ -91,7 +86,7 @@ vec4 getShadow()
 
 		shadow_c = debugColor(1) * s;
     }
-    else if(dist < vecSplits.z && smap_2_set)
+    else if(dist < vecSplits.z)
     {
 		vec4 sm_coord_c = texmat_2*vecPos;
 		float shadow = texture2D(smap_2, sm_coord_c.xy).x;
@@ -99,17 +94,13 @@ vec4 getShadow()
 
 		shadow_c = debugColor(2) * s;
     }
-	else if(dist < vecSplits.w && smap_3_set)
+	else if(dist < vecSplits.w)
 	{
 		vec4 sm_coord_c = texmat_3*vecPos;
 		float shadow = texture2D(smap_3, sm_coord_c.xy).x;
 		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
 
 		shadow_c = debugColor(3) * s;	
-	}
-	else
-	{
-		shadow_c = vec4(1.0, 1.0, 1.0, 1.0);
 	}
 	
     return shadow_c;
