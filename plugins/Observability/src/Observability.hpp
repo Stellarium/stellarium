@@ -178,7 +178,7 @@ private:
 	virtual bool CheckRise(int i);
 
 //! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
