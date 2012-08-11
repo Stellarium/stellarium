@@ -148,7 +148,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
 
     //Preset frustumSplits
     frustumSplits = 4;
-    splitWeight = 0.50f;
+    //splitWeight = 0.50f;
     //Make sure we dont exceed MAXSPLITS or go below 1
     frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
     //Define shadow maps array - holds MAXSPLITS textures
@@ -465,6 +465,21 @@ void Scenery3d::loadModel()
         //Add matrix to get into grid space
         zRot2Grid = zRotateMatrix*obj2gridMatrix;
         cFrust.m = zRot2Grid;
+
+        //Find a good splitweight based on the scene's size
+        float maxSize = -std::numeric_limits<float>::max();
+        maxSize = std::max(sceneBoundingBox.max.v[0], maxSize);
+        maxSize = std::max(sceneBoundingBox.max.v[1], maxSize);
+
+        qDebug() << "MAXSIZE::::" << maxSize;
+        if(maxSize < 100.0f)
+            splitWeight = 0.5f;
+        else if(maxSize < 200.0f)
+            splitWeight = 0.70f;
+        else if(maxSize < 400.0f)
+            splitWeight = 0.80f;
+        else
+            splitWeight = 0.90f;
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -1664,6 +1679,8 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 
             screen_x -= 280;
         }
+
+        painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(splitWeight, 3, 'f', 2));
     }
 
     //front
