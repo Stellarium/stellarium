@@ -149,41 +149,48 @@
             </font>
            </property>
            <property name="text">
-            <string>Show options</string>
+            <string>Showing Options</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="Today">
            <property name="text">
-            <string>Show today's ephemeris (rise, set, and transit times)</string>
+            <string>Today's ephemeris (rise, set, and transit times)</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="AcroCos">
            <property name="text">
-            <string>Show days of Acronychal and Cosmical rise/set</string>
+            <string>Dates of Acronychal and Cosmical rise/set</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="Opposition">
            <property name="text">
-            <string>Show day of Sun's opposition</string>
+            <string>Date of Sun opposition</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="Goods">
            <property name="text">
-            <string>Show range of observable epochs</string>
+            <string>Range of observable epochs</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="FullMoon">
+           <property name="text">
+            <string>Dates of previous and next Full Moon</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="11" column="0">
+       <item row="10" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <widget class="QPushButton" name="restoreDefaultsButton">
@@ -208,32 +215,6 @@
            </property>
            <property name="text">
             <string>Save settings as default</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="10" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QLabel" name="label_8">
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>14</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Special options for the Moon</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="FullMoon">
-           <property name="text">
-            <string>Next Full Moon</string>
            </property>
           </widget>
          </item>
