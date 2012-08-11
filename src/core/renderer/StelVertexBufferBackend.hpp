@@ -78,7 +78,7 @@ public:
 	//!
 	//! @param vertexInPtr Pointer to the beginning of the vertex.
 	//!                    Data members of the vertex must match vertex attributes of the buffer.
-	virtual void addVertex(const quint8* const vertexInPtr) = 0;
+	virtual void addVertex(const void* const vertexInPtr) = 0;
 	
 	//! Read a vertex from the buffer.
 	//!
@@ -88,7 +88,7 @@ public:
 	//! @param index        Index of the vertex to read.
 	//! @param vertexOutPtr Pointer to the beginning of the output vertex.
 	//!                     Data members of the vertex must match vertex attributes of the buffer.
-	virtual void getVertex(const int index, quint8* const vertexOutPtr) const = 0;
+	virtual void getVertex(const int index, void* const vertexOutPtr) const = 0;
 	
 	//! Rewrite a vertex in the buffer.
 	//!
@@ -98,7 +98,7 @@ public:
 	//! @param index       Index of the vertex to set.
 	//! @param vertexInPtr Pointer to the beginning of the vertex we're rewriting with.
 	//!                    Data members of the vertex must match vertex attributes of the buffer.
-	virtual void setVertex(const int index, const quint8* const vertexInPtr) = 0;
+	virtual void setVertex(const int index, const void* const vertexInPtr) = 0;
 	
 	//! Lock the buffer. Must be called before drawing.
 	virtual void lock() = 0;

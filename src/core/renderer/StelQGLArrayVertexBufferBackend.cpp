@@ -44,7 +44,7 @@ StelQGLArrayVertexBufferBackend::~StelQGLArrayVertexBufferBackend()
 	}
 }
 
-void StelQGLArrayVertexBufferBackend::addVertex(const quint8* const vertexInPtr)
+void StelQGLArrayVertexBufferBackend::addVertex(const void* const vertexInPtr)
 {
 	//StelVertexBuffer enforces bounds, so we don't need to
 	++vertexCount;
@@ -55,7 +55,7 @@ void StelQGLArrayVertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 	}
 	++vertexCapacity;
 	// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
-	const quint8* attribPtr = vertexInPtr;
+	const unsigned char* attribPtr = static_cast<const unsigned char*>(vertexInPtr);
 	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
 		// Add each attribute to its buffer.
@@ -66,15 +66,20 @@ void StelQGLArrayVertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 			case AttributeType_Vec4f: addAttribute<Vec4f>(attrib, attribPtr); break;
 			default: Q_ASSERT(false);
 		}
+
+		// This always works, because the C standard requires that 
+		// sizeof(unsigned char) == 1  (that 1 might mean e.g. 16 bits instead of 8
+		// on some platforms, but both the size of attribute and of unsigned char is 
+		// measured in the same unit, so it's not a problem.
 		attribPtr += attributes.sizes[attrib];
 	}
 }
 
 void StelQGLArrayVertexBufferBackend::getVertex
-	(const int index, quint8* const vertexOutPtr) const
+	(const int index, void* const vertexOutPtr) const
 {
 	// Points to the current attribute (e.g. color, normal, vertex) within output.
-	quint8* attribPtr = vertexOutPtr;
+	unsigned char* attribPtr = static_cast<unsigned char*>(vertexOutPtr);
 	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
 		// Get each attribute from its buffer and set result's attribute to that.
@@ -93,6 +98,10 @@ void StelQGLArrayVertexBufferBackend::getVertex
 				Q_ASSERT(false);
 		}
 
+		// This always works, because the C standard requires that 
+		// sizeof(unsigned char) == 1  (that 1 might mean e.g. 16 bits instead of 8
+		// on some platforms, but both the size of attribute and of unsigned char is 
+		// measured in the same unit, so it's not a problem.
 		attribPtr += attributes.sizes[attrib];
 	}
 }
