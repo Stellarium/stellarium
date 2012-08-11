@@ -1,3 +1,23 @@
+/*
+ * Stellarium Scenery3d Plug-in
+ *
+ * Copyright (C) 2011 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
 #include <QDebug>
 #include <QSettings>
 #include <QString>
@@ -51,6 +71,7 @@ Scenery3dMgr::~Scenery3dMgr()
     delete shadowShader;
     delete bumpShader;
     delete univShader;
+    delete debugShader;
 }
 
 void Scenery3dMgr::enableScenery3d(bool enable)
@@ -217,6 +238,7 @@ void Scenery3dMgr::init()
     this->shadowShader = new StelShader();
     this->bumpShader = new StelShader();
     this->univShader = new StelShader();
+    this->debugShader = new StelShader();
 
 
     //Alex Wolf loading patch : ) Thanks!
@@ -250,10 +272,21 @@ void Scenery3dMgr::init()
         univShader  = 0;
     }
 
+    lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
+    vsshader = (QString(lst.first()) + "debug.v.glsl").toLocal8Bit();
+    fsshader = (QString(lst.first()) + "debug.f.glsl").toLocal8Bit();
+
+    if (!(debugShader->load(vsshader.data(), fsshader.data())))
+    {
+        qWarning() << "WARNING [Scenery3d]: unable to load bump mapping shader files.\n";
+        debugShader  = 0;
+    }
+
     qWarning() << "init scenery3d object...";
     scenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
+    scenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
+
     qWarning() << "init scenery3d object...done.\n";
-    scenery3d->setShaders(shadowShader, bumpShader, univShader);
     scenery3d->setShadowsEnabled(enableShadows);
     scenery3d->setBumpsEnabled(enableBumps);
 
@@ -415,7 +448,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
     Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
-    newScenery3d->setShaders(shadowShader, bumpShader, univShader);
+    newScenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
     newScenery3d->setShadowsEnabled(enableShadows);
     newScenery3d->setBumpsEnabled(enableBumps);
     if(shadowmapSize) newScenery3d->initShadowMapping();

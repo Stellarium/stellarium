@@ -1,8 +1,12 @@
 #include "AABB.hpp"
+#include <limits>
 
 AABB::AABB()
 {
-    AABB(Vec3f(0.0f), Vec3f(0.0f));
+    float minVal = std::numeric_limits<float>::max();
+    float maxVal = -std::numeric_limits<float>::max();
+
+    AABB(Vec3f(minVal), Vec3f(maxVal));
 }
 
 AABB::AABB(Vec3f min, Vec3f max)
@@ -58,6 +62,43 @@ Vec3f AABB::getCorner(Corner corner) const
     return out;
 }
 
+Vec4f AABB::getEquation(AABB::Plane p) const
+{
+    Vec4f out;
+
+    switch(p)
+    {
+    case Front:
+        out = Vec4f(0.0f, -1.0f, 0.0f, std::abs(min.v[1]));
+        break;
+
+    case Back:
+        out = Vec4f(0.0f, 1.0f, 0.0f, std::abs(max.v[1]));
+        break;
+
+    case Bottom:
+        out = Vec4f(0.0f, 0.0f, -1.0f, std::abs(min.v[2]));
+        break;
+
+    case Top:
+        out = Vec4f(0.0f, 0.0f, 1.0f, std::abs(max.v[2]));
+        break;
+
+    case Left:
+        out = Vec4f(-1.0f, 0.0f, 0.0f, std::abs(min.v[0]));
+        break;
+
+    case Right:
+        out = Vec4f(1.0f, 0.0f, 0.0f, std::abs(max.v[0]));
+        break;
+
+    default:
+        break;
+    }
+
+    return out;
+}
+
 Vec3f AABB::positiveVertex(Vec3f& normal) const
 {
     Vec3f out = min;
@@ -86,31 +127,28 @@ Vec3f AABB::negativeVertex(Vec3f& normal) const
     return out;
 }
 
+void AABB::expand(const Vec3f &v)
+{
+    if(v.v[0] > max.v[0]) max.v[0] = v.v[0];
+    else if(v.v[0] < min.v[0]) min.v[0] = v.v[0];
+
+    if(v.v[1] > max.v[1]) max.v[1] = v.v[1];
+    else if(v.v[1] < min.v[1]) min.v[1] = v.v[1];
+
+    if(v.v[2] > max.v[2]) max.v[2] = v.v[2];
+    else if(v.v[2] < min.v[2]) min.v[2] = v.v[2];
+}
+
 void AABB::render(Mat4d* pMat)
 {
-    Vec3d ntl = vecfToDouble(getCorner(MinMaxMin));
-    Vec3d ntr = vecfToDouble(getCorner(MaxMaxMin));
-    Vec3d nbr = vecfToDouble(getCorner(MaxMinMin));
-    Vec3d nbl = vecfToDouble(getCorner(MinMinMin));
-    Vec3d ftr = vecfToDouble(getCorner(MaxMaxMax));
-    Vec3d ftl = vecfToDouble(getCorner(MinMaxMax));
-    Vec3d fbl = vecfToDouble(getCorner(MinMinMax));
-    Vec3d fbr = vecfToDouble(getCorner(MaxMinMax));
-
-
-    //Transform to pMat-space if needed
-    if(pMat)
-    {
-        pMat->transfo(ntl);
-        pMat->transfo(ntr);
-        pMat->transfo(nbr);
-        pMat->transfo(nbl);
-        pMat->transfo(ftl);
-        pMat->transfo(ftr);
-        pMat->transfo(fbr);
-        pMat->transfo(fbl);
-    }
-
+    Vec3f nbl = getCorner(MinMinMin);
+    Vec3f nbr = getCorner(MaxMinMin);
+    Vec3f ntr = getCorner(MaxMinMax);
+    Vec3f ntl = getCorner(MinMinMax);
+    Vec3f fbl = getCorner(MinMaxMin);
+    Vec3f fbr = getCorner(MaxMaxMin);
+    Vec3f ftr = getCorner(MaxMaxMax);
+    Vec3f ftl = getCorner(MinMaxMax);
 
     glColor3f(1.0f, 1.0f, 1.0f);
     glLineWidth(5);

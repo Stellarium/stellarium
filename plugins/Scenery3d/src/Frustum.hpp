@@ -41,26 +41,29 @@ public:
     }
 
     void calcFrustum(Vec3d p, Vec3d l, Vec3d u);
-    const Vec3f& getCorner(Corner corner) const;
-    const Plane& getPlane(FrustumPlane plane) const;
+    const Vec3f &getCorner(Corner corner) const;
+    const Plane &getPlane(FrustumPlane plane) const;
     int pointInFrustum(Vec3f p);
     int boxInFrustum(const AABB* bbox);
 
     void drawFrustum();
     void saveCorners();
+    void resetCorners();
     float fov;
     float aspect;
     float zNear;
     float zFar;
     Mat4d m;
-    AABB* bbox;
+    AABB *bbox;
 
     std::vector<Vec3f> drawCorners;
-    AABB* drawBbox;
+    AABB *drawBbox;
+
+    std::vector<Vec3f> corners;
+    std::vector<Plane*> planes;
 
 private:
-    std::vector<Vec3f> corners;
-    std::vector<Plane> planes;
+
 
 };
 

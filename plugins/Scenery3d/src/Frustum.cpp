@@ -13,7 +13,7 @@ Frustum::Frustum()
 
     for(unsigned int i=0; i<PLANECOUNT; i++)
     {
-        planes.push_back(Plane());
+        planes.push_back(new Plane());
     }
 
     fov = 0.0f;
@@ -28,16 +28,23 @@ Frustum::~Frustum()
 {
     delete bbox;
     delete drawBbox;
+
+    for(unsigned int i=0; i<planes.size(); i++)
+    {
+        delete planes[i];
+    }
+
+    planes.clear();
 }
 
-const Vec3f& Frustum::getCorner(Corner corner) const
+const Vec3f &Frustum::getCorner(Corner corner) const
 {
     return corners[corner];
 }
 
-const Plane& Frustum::getPlane(FrustumPlane plane) const
+const Plane &Frustum::getPlane(FrustumPlane plane) const
 {
-    return planes[plane];
+    return *planes[plane];
 }
 
 void Frustum::calcFrustum(Vec3d p, Vec3d l, Vec3d u)
@@ -49,7 +56,7 @@ void Frustum::calcFrustum(Vec3d p, Vec3d l, Vec3d u)
     X.normalize();
 
     Vec3d Z = Y^X;
-    Y.normalize();
+    Z.normalize();
 
     float tang = tanf((static_cast<float>(M_PI)/360.0f)*fov);
     float nh = zNear * tang;
@@ -79,12 +86,12 @@ void Frustum::calcFrustum(Vec3d p, Vec3d l, Vec3d u)
     corners[FBL] = vecdToFloat(fbl);
     corners[FBR] = vecdToFloat(fbr);
 
-    planes[TOP].setPoints(corners[NTR], corners[NTL], corners[FTL]);
-    planes[BOTTOM].setPoints(corners[NBL], corners[NBR], corners[FBR]);
-    planes[LEFT].setPoints(corners[NTL], corners[NBL], corners[FBL]);
-    planes[RIGHT].setPoints(corners[NBR], corners[NTR], corners[FBR]);
-    planes[NEARP].setPoints(corners[NTL], corners[NTR], corners[NBR]);
-    planes[FARP].setPoints(corners[FTR], corners[FTL], corners[FBL]);
+    planes[TOP]->setPoints(corners[NTR], corners[NTL], corners[FTL], SPolygon::CCW);
+    planes[BOTTOM]->setPoints(corners[NBL], corners[NBR], corners[FBR], SPolygon::CCW);
+    planes[LEFT]->setPoints(corners[NTL], corners[NBL], corners[FBL], SPolygon::CCW);
+    planes[RIGHT]->setPoints(corners[NBR], corners[NTR], corners[FBR], SPolygon::CCW);
+    planes[NEARP]->setPoints(corners[NTL], corners[NTR], corners[NBR], SPolygon::CCW);
+    planes[FARP]->setPoints(corners[FTR], corners[FTL], corners[FBL], SPolygon::CCW);
 
 
     bbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
@@ -107,7 +114,7 @@ int Frustum::pointInFrustum(Vec3f p)
     int result = INSIDE;
     for(int i=0; i<PLANECOUNT; i++)
     {
-        if(planes[i].isBehind(p))
+        if(planes[i]->isBehind(p))
         {
             return OUTSIDE;
         }
@@ -121,7 +128,7 @@ int Frustum::boxInFrustum(const AABB* bbox)
     int result = INSIDE;
     for(unsigned int i=0; i<PLANECOUNT; i++)
     {
-        if(planes[i].isBehind(bbox->positiveVertex(planes[i].normal)))
+        if(planes[i]->isBehind(bbox->positiveVertex(planes[i]->normal)))
         {
             return OUTSIDE;
         }
@@ -136,7 +143,7 @@ void Frustum::saveCorners()
         drawCorners[i] = corners[i];
 
     for(unsigned int i=0; i<PLANECOUNT; i++)
-        planes[i].saveValues();
+        planes[i]->saveValues();
 
     drawBbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
 
@@ -153,6 +160,15 @@ void Frustum::saveCorners()
     }
 }
 
+void Frustum::resetCorners()
+{
+    for(unsigned int i=0; i<CORNERCOUNT; i++)
+        drawCorners[i] = Vec3f(0.0f, 0.0f, 0.0f);
+
+    for(unsigned int i=0; i<PLANECOUNT; i++)
+        planes[i]->resetValues();
+}
+
 void Frustum::drawFrustum()
 {
     Vec3f ntl = drawCorners[NTL];
@@ -164,8 +180,7 @@ void Frustum::drawFrustum()
     Vec3f fbl = drawCorners[FBL];
     Vec3f fbr = drawCorners[FBR];
 
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glLineWidth(5);
+    glColor3f(0.0f, 0.0f, 1.0f);
 
     glBegin(GL_LINE_LOOP);
         //near plane
@@ -219,37 +234,37 @@ void Frustum::drawFrustum()
     glBegin(GL_LINES);
         // near
         a = (ntr + ntl + nbr + nbl) * 0.25;
-        b = a + planes[NEARP].sNormal;
+        b = a + planes[NEARP]->sNormal;
         glVertex3f(a.v[0],a.v[1],a.v[2]);
         glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // far
         a = (ftr + ftl + fbr + fbl) * 0.25;
-        b = a + planes[FARP].sNormal;
+        b = a + planes[FARP]->sNormal;
         glVertex3f(a.v[0],a.v[1],a.v[2]);
         glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // left
         a = (ftl + fbl + nbl + ntl) * 0.25;
-        b = a + planes[LEFT].sNormal;
+        b = a + planes[LEFT]->sNormal;
         glVertex3f(a.v[0],a.v[1],a.v[2]);
         glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // right
         a = (ftr + nbr + fbr + ntr) * 0.25;
-        b = a + planes[RIGHT].sNormal;
+        b = a + planes[RIGHT]->sNormal;
         glVertex3f(a.v[0],a.v[1],a.v[2]);
         glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // top
         a = (ftr + ftl + ntr + ntl) * 0.25;
-        b = a + planes[TOP].sNormal;
+        b = a + planes[TOP]->sNormal;
         glVertex3f(a.v[0],a.v[1],a.v[2]);
         glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // bottom
         a = (fbr + fbl + nbr + nbl) * 0.25;
-        b = a + planes[BOTTOM].sNormal;
+        b = a + planes[BOTTOM]->sNormal;
         glVertex3f(a.v[0],a.v[1],a.v[2]);
         glVertex3f(b.v[0],b.v[1],b.v[2]);
     glEnd();

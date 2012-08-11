@@ -11,8 +11,14 @@ SET(Scenery3d_SRCS
 	AABB.cpp
 	Frustum.hpp
 	Frustum.cpp
+	Line.hpp
+	Line.cpp
 	Plane.hpp
 	Plane.cpp
+	SPolygon.hpp
+	SPolygon.cpp
+	Polyhedron.hpp
+	Polyhedron.cpp
     Scenery3d.hpp
     Scenery3d.cpp
     Scenery3dMgr.hpp
