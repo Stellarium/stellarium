@@ -58,7 +58,7 @@
 #define MEANINGLESS_INT -32767
 #define FROM_MODEL (MEANINGLESS_INT + 1)
 
-#define GROUND_MODEL 1
+#define GROUND_MODEL 0
 #define GET_GLERROR()                                   \
 {                                                       \
     GLenum err = glGetError();                          \
@@ -70,7 +70,8 @@
 }
 
 #define MAXSPLITS 4
-#define FARZ 50.0f
+#define NEARZ 1.0f;
+#define FARZ 1500.0f
 
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
@@ -142,10 +143,16 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     sceneryGenNormals = false;
     groundGenNormals = false;
     sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
+    frustEnabled = false;
+
+    smap_0_set = false;
+    smap_1_set = false;
+    smap_2_set = false;
+    smap_3_set = false;
 
     //Preset frustumSplits
     frustumSplits = 4;
-    splitWeight = 0.75f;
+    splitWeight = 0.5f;
     //Make sure we dont exceed MAXSPLITS or go below 1
     frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
     //Define shadow maps array - holds MAXSPLITS textures
@@ -153,23 +160,10 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     shadowCPM = new Mat4f[frustumSplits];
     frustumArray = new Frustum[frustumSplits];
 
-    //Setup the Projection matrix for the view frustum
-    //This one is only used as a virtual view frustum for the shadow optimization
-    //The real projection will be set further down
-    float fov = 90.0f;
-    float aspect = 1.0f;
-    float zNear = 1.0f;
-    float zFar = FARZ;
-    float f = 2.0 / tan(fov * M_PI / 360.0);
-    camProj = Mat4f(f / aspect, 0, 0, 0,
-                    0, f, 0, 0,
-                    0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
-                    0, 0, -1, 0);
-
-    for(int i=0; i<frustumSplits; i++)
-    {
-        frustumArray[i].setCamInternals(90.0f, 1.0f, 1.0f, FARZ);
-    }
+    camFOV = 90.0f;
+    camAspect = 1.0f;
+    camNear = 1.0f;
+    camFar = FARZ;
 
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
@@ -217,6 +211,13 @@ Scenery3d::~Scenery3d()
         delete objModel;
         objModel = NULL;
     }
+
+    for(int i=0; i<focusBodies.size(); i++)
+    {
+        delete focusBodies[i];
+    }
+
+    focusBodies.clear();
 }
 
 void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID)
@@ -489,8 +490,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             case Qt::Key_Down:      movement_y =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Right:     movement_x =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Left:      movement_x = -1.0f * speedup; e->accept(); break;
-            //case Qt::Key_P:         lightCamEnabled = !lightCamEnabled; e->accept(); break;
-            case Qt::Key_P: saveFrusts(); e->accept(); break;
+            case Qt::Key_P:         saveFrusts(); e->accept(); break;
             case Qt::Key_D:         debugEnabled = !debugEnabled; e->accept(); break;
         }
     }
@@ -508,9 +508,12 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 
 void Scenery3d::saveFrusts()
 {
+    frustEnabled = !frustEnabled;
+
     for(int i=0; i<frustumSplits; i++)
     {
-        frustumArray[i].saveCorners();
+        if(frustEnabled) frustumArray[i].saveCorners();
+        else frustumArray[i].resetCorners();
     }
 }
 
@@ -539,9 +542,152 @@ void Scenery3d::setSceneAABB(AABB* bbox)
     sceneBoundingBox = AABB(bbox->min, bbox->max);
 }
 
-void Scenery3d::renderSceneAABB()
+void Scenery3d::renderSceneAABB(StelPainter& painter)
 {
-    sceneBoundingBox.render(&zRot2Grid);
+    //sceneBoundingBox.render(&zRot2Grid);
+    //sceneBoundingBox.render();
+
+    Vec3d aabb[8];
+
+    aabb[0] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMinMin));
+    aabb[1] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMinMin));
+    aabb[2] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMinMax));
+    aabb[3] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMinMax));
+    aabb[4] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMaxMin));
+    aabb[5] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMaxMin));
+    aabb[6] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMaxMax));
+    aabb[7] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMaxMax));
+
+    unsigned int inds[36] = {
+        3, 2, 0,
+        2, 1, 0,
+        2, 7, 1,
+        7, 4, 1,
+        7, 6, 4,
+        6, 5, 4,
+        6, 3, 5,
+        3, 0, 5,
+        0, 1, 4,
+        4, 5, 0,
+        3, 2, 7,
+        7, 6, 3
+    };
+
+    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+    debugShader->use();
+    painter.setArrays(aabb, __null, __null, __null);
+    painter.drawFromArray(StelPainter::Triangles, 36, 0, false, inds);
+    //Done. Unbind shader
+    glUseProgram(0);
+    glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+}
+
+void Scenery3d::renderFrustum(StelPainter &painter)
+{
+    debugShader->use();
+
+    for(unsigned int i=0; i<frustumSplits; i++)
+    {
+        Vec3f ntl = frustumArray[i].drawCorners[Frustum::NTL];
+        Vec3f ntr = frustumArray[i].drawCorners[Frustum::NTR];
+        Vec3f nbr = frustumArray[i].drawCorners[Frustum::NBR];
+        Vec3f nbl = frustumArray[i].drawCorners[Frustum::NBL];
+        Vec3f ftr = frustumArray[i].drawCorners[Frustum::FTR];
+        Vec3f ftl = frustumArray[i].drawCorners[Frustum::FTL];
+        Vec3f fbl = frustumArray[i].drawCorners[Frustum::FBL];
+        Vec3f fbr = frustumArray[i].drawCorners[Frustum::FBR];
+
+        glColor3f(1.0f, 0.0f, 0.0f);
+
+        glBegin(GL_LINE_LOOP);
+            //near plane
+            glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
+            glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
+            glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
+            glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
+        glEnd();
+
+        glBegin(GL_LINE_LOOP);
+            //far plane
+            glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
+            glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
+            glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
+            glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
+        glEnd();
+
+        glBegin(GL_LINE_LOOP);
+            //bottom plane
+            glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
+            glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
+            glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
+            glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
+        glEnd();
+
+        glBegin(GL_LINE_LOOP);
+            //top plane
+            glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
+            glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
+            glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
+            glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
+        glEnd();
+
+        glBegin(GL_LINE_LOOP);
+            //left plane
+            glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
+            glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
+            glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
+            glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
+        glEnd();
+
+        glBegin(GL_LINE_LOOP);
+            // right plane
+            glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
+            glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
+            glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
+            glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
+        glEnd();
+
+        Vec3f a,b;
+        glBegin(GL_LINES);
+            // near
+            a = (ntr + ntl + nbr + nbl) * 0.25;
+            b = a + frustumArray[i].planes[Frustum::NEARP]->sNormal;
+            glVertex3f(a.v[0],a.v[1],a.v[2]);
+            glVertex3f(b.v[0],b.v[1],b.v[2]);
+
+            // far
+            a = (ftr + ftl + fbr + fbl) * 0.25;
+            b = a + frustumArray[i].planes[Frustum::FARP]->sNormal;
+            glVertex3f(a.v[0],a.v[1],a.v[2]);
+            glVertex3f(b.v[0],b.v[1],b.v[2]);
+
+            // left
+            a = (ftl + fbl + nbl + ntl) * 0.25;
+            b = a + frustumArray[i].planes[Frustum::LEFT]->sNormal;
+            glVertex3f(a.v[0],a.v[1],a.v[2]);
+            glVertex3f(b.v[0],b.v[1],b.v[2]);
+
+            // right
+            a = (ftr + nbr + fbr + ntr) * 0.25;
+            b = a + frustumArray[i].planes[Frustum::RIGHT]->sNormal;
+            glVertex3f(a.v[0],a.v[1],a.v[2]);
+            glVertex3f(b.v[0],b.v[1],b.v[2]);
+
+            // top
+            a = (ftr + ftl + ntr + ntl) * 0.25;
+            b = a + frustumArray[i].planes[Frustum::TOP]->sNormal;
+            glVertex3f(a.v[0],a.v[1],a.v[2]);
+            glVertex3f(b.v[0],b.v[1],b.v[2]);
+
+            // bottom
+            a = (fbr + fbl + nbr + nbl) * 0.25;
+            b = a + frustumArray[i].planes[Frustum::BOTTOM]->sNormal;
+            glVertex3f(a.v[0],a.v[1],a.v[2]);
+            glVertex3f(b.v[0],b.v[1],b.v[2]);
+        glEnd();
+        //Done. Unbind shader
+        glUseProgram(0);
+    }
 }
 
 void Scenery3d::update(double deltaTime)
@@ -682,10 +828,8 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
     }
 
     cFrust.drawFrustum();
-    for(int i=0; i<frustumSplits; i++)
-    {
-        frustumArray[i].drawFrustum();
-    }
+    renderFrustum(painter);
+    //renderSceneAABB(painter);
 }
 
 void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
@@ -824,6 +968,18 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter)
                             0.0f, 0.0f, 0.5f, 0.0f,
                             0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
 
+    location = curShader->uniformLocation("smap_0_set");
+    curShader->setUniform(location, smap_0_set);
+
+    location = curShader->uniformLocation("smap_1_set");
+    curShader->setUniform(location, smap_1_set);
+
+    location = curShader->uniformLocation("smap_2_set");
+    curShader->setUniform(location, smap_2_set);
+
+    location = curShader->uniformLocation("smap_3_set");
+    curShader->setUniform(location, smap_3_set);
+
 
     //Holds the squared frustum splits necessary for the lookup in the shader
     Vec4f squaredSplits = Vec4f(0.0f);
@@ -872,9 +1028,9 @@ void Scenery3d::computeZDist(float zNear, float zFar)
 
     for(int i=1; i<frustumSplits; i++)
     {
-        float s_i = i/(float)frustumSplits;
+        float s_i = i/static_cast<float>(frustumSplits);
 
-        frustumArray[i].zNear = splitWeight*(zNear*powf(ratio, s_i)) + (1-splitWeight)*(zNear + (zFar - zNear)*s_i);
+        frustumArray[i].zNear = splitWeight*(zNear*powf(ratio, s_i)) + (1.0f-splitWeight)*(zNear + (zFar - zNear)*s_i);
         //Set the previous zFar to the newly computed zNear
         frustumArray[i-1].zFar = frustumArray[i].zNear * 1.005f;
     }
@@ -883,32 +1039,49 @@ void Scenery3d::computeZDist(float zNear, float zFar)
     frustumArray[frustumSplits-1].zFar = zFar;
 }
 
-void Scenery3d::makeCropProjMatrix(int frustumIndex)
+void Scenery3d::computePolyhedron(int splitIndex)
+{
+    Polyhedron &body = *focusBodies[splitIndex];
+
+    //Add the Frustum to begin with
+    body.add(frustumArray[splitIndex]);
+    //Intersect with the scene AABB
+    body.intersect(sceneBoundingBox);
+    //Extrude towards negative light direction
+    body.extrude(lightDir, sceneBoundingBox);
+}
+
+void Scenery3d::computeCropMatrix(int frustumIndex)
 {
     //Calculating a fitting Projection Matrix for the light
-    Mat4f lightProj, lightMV, lightMVP, c;
-
-    float maxX = -std::numeric_limits<float>::max();
-    float maxY = -std::numeric_limits<float>::max();
-    float maxZ;
-    float minX = std::numeric_limits<float>::max();
-    float minY = std::numeric_limits<float>::max();
-    float minZ;
-
+    Mat4f lightMVP, lightMV, c;
     lightMV = lightViewMatrix;
 
-    //Find maxZ, minZ for current split
-    Vec3f tmp = frustumArray[frustumIndex].getCorner(Frustum::NBL);
-    Vec4f transf = lightMV * Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
-    minZ = transf.v[2];
-    maxZ = transf.v[2];
-    for(unsigned int i=0; i<Frustum::CORNERCOUNT; i++)
-    {
-        Vec3f tmp = frustumArray[frustumIndex].getCorner(static_cast<Frustum::Corner>(i));
-        Vec4f transf = lightMV*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+    Polyhedron &body = *focusBodies[frustumIndex];
+    const std::vector<Vec3f> &verts = body.getVerts();
 
-        if(transf.v[2] > maxZ) maxZ = transf.v[2];
-        if(transf.v[2] < minZ) minZ = transf.v[2];
+    float maxX = -std::numeric_limits<float>::max();
+    float minX = std::numeric_limits<float>::max();
+
+    float maxY = -std::numeric_limits<float>::max();
+    float minY = std::numeric_limits<float>::max();
+
+    float maxZ, minZ;
+
+
+    //Find maxZ, minZ for current split
+    Vec3f v = verts[0];
+    Vec4f tmp = lightMV * Vec4f(v[0], v[1], v[2], 1.0f);
+    minZ = tmp.v[2];
+    maxZ = tmp.v[2];
+
+    for(unsigned int i=1; i<body.getVertCount(); i++)
+    {
+        Vec3f v = verts[i];
+        Vec4f tmp = lightMV*Vec4f(v[0], v[1], v[2], 1.0f);
+
+        if(tmp.v[2] > maxZ) maxZ = tmp.v[2];
+        if(tmp.v[2] < minZ) minZ = tmp.v[2];
     }
 
     //Setup the Ortho Projection based on found z values
@@ -924,29 +1097,31 @@ void Scenery3d::makeCropProjMatrix(int frustumIndex)
     glPopMatrix();
 
     //Project the frustum into light space and find the boundaries
-    for(unsigned int i=0; i<Frustum::CORNERCOUNT; i++)
+    for(unsigned int i=0; i<body.getVertCount(); i++)
     {
-        Vec3f tmp = frustumArray[frustumIndex].getCorner(Frustum::Corner(i));
-        Vec4f transf = lightMVP*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+        Vec3f v = verts[i];
+        Vec4f tmp = lightMVP*Vec4f(v[0], v[1], v[2], 1.0f);
 
-        transf.v[0] /= transf.v[3];
-        transf.v[1] /= transf.v[3];
+        tmp.v[0] /= tmp.v[3];
+        tmp.v[1] /= tmp.v[3];
 
-        if(transf.v[0] > maxX) maxX = transf.v[0];
-        if(transf.v[0] < minX) minX = transf.v[0];
-        if(transf.v[1] > maxY) maxY = transf.v[1];
-        if(transf.v[1] < minY) minY = transf.v[1];
+        if(tmp.v[0] > maxX) maxX = tmp.v[0];
+        if(tmp.v[0] < minX) minX = tmp.v[0];
+        if(tmp.v[1] > maxY) maxY = tmp.v[1];
+        if(tmp.v[1] < minY) minY = tmp.v[1];
     }
 
     //Build the crop matrix and apply it to the light projection matrix
     float scaleX = 2.0f/(maxX - minX);
     float scaleY = 2.0f/(maxY - minY);
+    float scaleZ = 1.0f/(maxZ - minZ);
     float offsetX = -0.5f*(maxX + minX)*scaleX;
     float offsetY = -0.5f*(maxY + minY)*scaleY;
+    float offsetZ = -minZ*scaleZ;
 
     c = Mat4f(scaleX, 0.0f,   0.0f, offsetX,
               0.0f,   scaleY, 0.0f, offsetY,
-              0.0f,   0.0f,   1.0f, 0.0f,
+              0.0f,   0.0f,   scaleZ, offsetZ,
               0.0f,   0.0f,   0.0f, 1.0f);
 
     c = c.transpose();
@@ -956,8 +1131,63 @@ void Scenery3d::makeCropProjMatrix(int frustumIndex)
     glMultMatrixf(lightProj);
 }
 
+void Scenery3d::adjustFrustum()
+{
+    //Create the cam frustum because it might have changed from before
+    Frustum camFrust;
+    camFrust.setCamInternals(camFOV, camAspect, camNear, camFar);
+    camFrust.calcFrustum(viewPos, viewDir, viewUp);
+
+    //Compute H = V intersect S according to Zhang et al.
+    Polyhedron p;
+    p.add(camFrust);
+    p.intersect(sceneBoundingBox);
+    p.makeUniqueVerts();
+
+    //Find the boundaries
+    float maxZ = 0.0f;
+    float minZ = std::numeric_limits<float>::max();
+
+    Vec3f vDir = vecdToFloat(viewDir);
+    vDir.normalize();
+
+    Vec3f eye = vecdToFloat(viewPos);
+
+    const std::vector<Vec3f> &verts = p.getVerts();
+    for(unsigned int i=0; i<p.getVertCount(); i++)
+    {
+        //Find the distance to the camera
+        Vec3f v = verts[i];
+        Vec3f toCam = v - eye;
+        float dist = toCam.dot(vDir);
+
+        maxZ = std::max(dist, maxZ);
+        minZ = std::min(dist, minZ);
+    }
+
+    //Setup the newly found near and far planes but make sure they're not too small
+    camNear = std::max(minZ, 1.0f);
+    camFar = std::max(maxZ, camNear+1.0f);
+
+    //Clear the previous bodies
+    focusBodies.clear();
+
+    //Setup the subfrusta
+    for(int i=0; i<frustumSplits; i++)
+    {
+        frustumArray[i].setCamInternals(90.0f, 1.0f, camNear, camFar);
+        focusBodies.push_back(new Polyhedron());
+        focusBodies[i]->clear();
+    }
+}
+
 void Scenery3d::generateShadowMap(StelCore* core)
 {
+    //Needed so we can actually adjust the frustum upwards after it was already adjusted downwards.
+    //This resets it and they'll be recomputed in adjustFrustum();
+    camNear = NEARZ;
+    camFar = FARZ;
+
     //Nothing to draw
     if(!hasModels)
         return;
@@ -1000,9 +1230,24 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glLoadIdentity();
 
     //Select view position based on which planet is visible
-    if (sunPosition[2]>0) { gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1); }
-    else if (moonPosition[2]>0) { gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1); }
-    else { gluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1); }
+    if (sunPosition[2]>0)
+    {
+        gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
+        lightDir = Vec3f(sunPosition[0], sunPosition[1], sunPosition[2]);
+        lightDir.normalize();
+    }
+    else if (moonPosition[2]>0)
+    {
+        gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
+        lightDir = Vec3f(moonPosition[0], moonPosition[1], moonPosition[2]);
+        lightDir.normalize();
+    }
+    else
+    {
+        gluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
+        lightDir = Vec3f(venusPosition[0], venusPosition[1], venusPosition[2]);
+        lightDir.normalize();
+    }
 
     /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
     glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
@@ -1021,8 +1266,16 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, shadowmapSize, shadowmapSize);
 
+    //Adjust the frustum to the scene before splitting it
+    adjustFrustum();
+
     //Compute and set z-distances for each split
-    computeZDist(1.0f, FARZ);
+    computeZDist(camNear, camFar);
+
+    smap_0_set = false;
+    smap_1_set = false;
+    smap_2_set = false;
+    smap_3_set = false;
 
     //For each split
     for(int i=0; i<frustumSplits; i++)
@@ -1030,24 +1283,42 @@ void Scenery3d::generateShadowMap(StelCore* core)
         //Calculate the Frustum for this split
         frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
 
-        //Calculate the crop matrix so that the light's frustum is tightly fit to the current split's camera frustum
-        //This alters the ProjectionMatrix of the light
-        makeCropProjMatrix(i);
+        //Find the convex body that encompasses all shadow receivers and casters for this split
+        focusBodies[i]->clear();
+        computePolyhedron(i);
 
-        //Activate texture unit as usual
-        glActiveTexture(GL_TEXTURE3+i);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+        qDebug() << i << ".split vert count:" << focusBodies[i]->getVertCount();
 
-        //Clear everything
-        glClear(GL_DEPTH_BUFFER_BIT);
+        if(focusBodies[i]->getVertCount())
+        {
+            switch(i)
+            {
+                case 0: smap_0_set = true; break;
+                case 1: smap_1_set = true; break;
+                case 2: smap_2_set = true; break;
+                case 3: smap_3_set = true; break;
+                default: break;
+            }
 
-        //Draw the scene
-        drawArrays(painter, false);
+            //Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
+            //This alters the ProjectionMatrix of the light
+            computeCropMatrix(i);
 
-        //Store the new projection * lightView for later
-        glMatrixMode(GL_PROJECTION);
-        glMultMatrixf(lightViewMatrix);
-        glGetFloatv(GL_PROJECTION_MATRIX, shadowCPM[i]);
+            //Activate texture unit as usual
+            glActiveTexture(GL_TEXTURE3+i);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+
+            //Clear everything
+            glClear(GL_DEPTH_BUFFER_BIT);
+
+            //Draw the scene
+            drawArrays(painter, false);
+
+            //Store the new projection * lightView for later
+            glMatrixMode(GL_PROJECTION);
+            glMultMatrixf(lightViewMatrix);
+            glGetFloatv(GL_PROJECTION_MATRIX, shadowCPM[i]);
+        }
     }
 
     //Reset Viewportbit
@@ -1584,6 +1855,13 @@ void Scenery3d::drawDebugText(StelCore* core)
     screen_y -= 15.0f;
     str = QString("%1 %2 %3").arg(viewUp.v[0], 7, 'f', 2).arg(viewUp.v[1], 7, 'f', 2).arg(viewUp.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
+
+    screen_y -= 100.0f;
+    str = QString("%1 %2 %3 %4").arg("smap 0", 7).arg("smap 2", 7).arg("smap 3", 7).arg("smap 4");
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("%1 %2 %3 %4").arg(smap_0_set, 7).arg(smap_1_set, 7).arg(smap_2_set, 7).arg(smap_3_set, 7);
+    painter.drawText(screen_x, screen_y, str);
 }
 
 void Scenery3d::initShadowMapping()
@@ -1662,5 +1940,8 @@ void Scenery3d::draw(StelCore* core)
         drawFromCubeMap(core);
     }
     if (textEnabled) drawCoordinatesText(core);
-    if (debugEnabled) drawDebugText(core);
+    if (debugEnabled)
+    {
+        drawDebugText(core);
+    }
 }

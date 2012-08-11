@@ -1,6 +1,8 @@
 #include "Util.hpp"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <limits>
 
 using namespace std;
 
@@ -123,4 +125,20 @@ std::string toString(int i)
     std::stringstream out;
     out << i;
     return out.str();
+}
+
+bool CompareVerts(const Vec3f &v1, const Vec3f &v2)
+{
+    return CompareFloats(v1.v[0], v2.v[0]) && CompareFloats(v1.v[1], v2.v[1]) && CompareFloats(v1.v[2], v2.v[2]);
+}
+
+bool CompareFloats(float c1, float c2)
+{
+    if(c1 == c2) return true;
+
+    float eps = numeric_limits<float>::epsilon();
+
+    if(((c1+eps) < c2) || ((c1-eps) > c2)) return false;
+
+    return true;
 }

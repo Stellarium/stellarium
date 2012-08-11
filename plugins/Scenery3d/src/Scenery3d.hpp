@@ -29,6 +29,7 @@
 #include "OBJ.hpp"
 #include "Heightmap.hpp"
 #include "Frustum.hpp"
+#include "Polyhedron.hpp"
 
 #include <QString>
 //#include <vector>
@@ -55,11 +56,12 @@ public:
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
-    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0)
+    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0, StelShader* debugShader = 0)
     {
         this->shadowShader = shadowShader;
         this->bumpShader = bumpShader;
         this->univShader = univShader;
+        this->debugShader = debugShader;
     }
 
     //! Loads configuration values from a scenery3d.ini file.
@@ -153,6 +155,7 @@ private:
     bool lightCamEnabled;       // switchable value: switches camera to light camera
     bool sceneryGenNormals;     // Config flag, true generates normals for the given OBJ
     bool groundGenNormals;      // Config flag, true generates normals for the given ground Model
+    bool frustEnabled;
 
     int cubemapSize;            // configurable values, typically 512/1024/2048/4096
     int shadowmapSize;
@@ -215,6 +218,8 @@ private:
     StelShader* bumpShader;
     //Universal shader: shadow + bump mapping
     StelShader* univShader;
+    //Debug shader
+    StelShader* debugShader;
     //Depth texture id
     GLuint shadowMapTexture;
     //Shadow Map FBO handle
@@ -238,27 +243,44 @@ private:
     //Sets the scenes' AABB
     void setSceneAABB(AABB* bbox);
     //Renders the Scene's AABB
-    void renderSceneAABB();
+    void renderSceneAABB(StelPainter &painter);
+    void renderFrustum(StelPainter &painter);
     //Scene AABB
     AABB sceneBoundingBox;
     //Camera Frustum
     Frustum cFrust;
     void saveFrusts();
+    float debugMaxZ, debugMinZ;
+    Mat4f stelProj;
 
+    //Holds the shadow maps
+    GLuint* shadowMapsArray;
+    //Holds the shadow transformation matrix per split
+    Mat4f* shadowCPM;
+    Mat4f camProj;
+    Mat4f lightProj;
+    Mat4f cropMatrix;
     //Number of splits for CSM
     int frustumSplits;
     //Weight for splitting the frustums
     float splitWeight;
     //Array holding the split frustums
     Frustum* frustumArray;
-    //Holds the shadow maps
-    GLuint* shadowMapsArray;
-    //Holds the ...
-    Mat4f* shadowCPM;
+    //Vector holding the convex split bodies for focused shadow mapping
+    std::vector<Polyhedron*> focusBodies;
+    //Camera values
+    float camNear, camFar, camFOV, camAspect;
+    //Holds the light direction of the current light
+    Vec3f lightDir;
+    //Adjust the frustum to the loaded scene bounding box according to Zhang et al.
+    void adjustFrustum();
+    //Computes the frustum splits
     void computeZDist(float zNear, float zFar);
-    void makeCropProjMatrix(int frustumIndex);
-    Mat4f camProj;
-    float debugMaxZ, debugMinZ;
-    Mat4f stelProj;
+    //Computes the focus body for given split
+    void computePolyhedron(int splitIndex);
+    //Bools in case a split has no body
+    bool smap_0_set, smap_1_set, smap_2_set, smap_3_set;
+    //Computes the crop matrix to focus the light
+    void computeCropMatrix(int frustumIndex);
 };
 #endif
