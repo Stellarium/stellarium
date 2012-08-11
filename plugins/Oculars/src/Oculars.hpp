@@ -74,6 +74,9 @@ public:
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual void update(double) {;}
 
+	QString getDimensionsString(double fovX, double fovY) const;
+	QString getFOVString(double fov) const;
+
 public slots:
 	//! Update the ocular, telescope and sensor lists after the removal of a member.
 	//! Necessary because of the way model/view management in the OcularDialog
@@ -104,6 +107,9 @@ public slots:
 	//! Toggles the Telrad sight overlay (overloaded for blind switching).
 	void toggleTelrad();
 	void enableGuiPanel(bool enable = true);
+
+	void setFlagDecimalDegrees(const bool b);
+	bool getFlagDecimalDegrees(void) const;
 
 signals:
 	void selectedCCDChanged();
@@ -186,6 +192,7 @@ private:
 	bool flagEquatorJ2000Grid;	//!< Flag to track if EquatorJ2000Grid was displayed at activation.
 	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
+	bool flagEclipticJ2000Grid;	//!< Flag to track if EclipticJ2000Grid was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticPlaneLine;	//!< Flag to track if GalacticPlaneLine was displayed at activation.
@@ -196,6 +203,7 @@ private:
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
+	bool flagDecimalDegrees;
 
 	QSignalMapper* ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
 	QSignalMapper* ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */

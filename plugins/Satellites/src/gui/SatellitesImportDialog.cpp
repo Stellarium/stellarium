@@ -29,6 +29,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QNetworkReply>
+#include <QProgressBar>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <QTemporaryFile>
@@ -90,8 +91,12 @@ void SatellitesImportDialog::createDialogContent()
 	        this, SLOT(acceptNewSatellites()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()),
 	        this, SLOT(discardNewSatellites()));
+	connect(ui->pushButtonMarkAll, SIGNAL(clicked()),
+	        this, SLOT(markAll()));
+	connect(ui->pushButtonMarkNone, SIGNAL(clicked()),
+	        this, SLOT(markNone()));
 	
-	QSortFilterProxyModel * filterProxyModel = new QSortFilterProxyModel(this);
+	filterProxyModel = new QSortFilterProxyModel(this);
 	filterProxyModel->setSourceModel(newSatellitesModel);
 	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->listView->setModel(filterProxyModel);
@@ -266,6 +271,16 @@ void SatellitesImportDialog::discardNewSatellites()
 	close();
 }
 
+void SatellitesImportDialog::markAll()
+{
+	setCheckState(Qt::Checked);
+}
+
+void SatellitesImportDialog::markNone()
+{
+	setCheckState(Qt::Unchecked);
+}
+
 void SatellitesImportDialog::reset()
 {
 	// Assuming that everything that needs to be stopped is stopped
@@ -358,4 +373,24 @@ void SatellitesImportDialog::displayMessage(const QString& message)
 	
 	ui->labelMessage->setText(message);
 	ui->labelMessage->setVisible(true);
+}
+
+void SatellitesImportDialog::setCheckState(Qt::CheckState state)
+{
+	Q_ASSERT(filterProxyModel);
+	
+	int rowCount = filterProxyModel->rowCount();
+	if (rowCount < 1)
+		return;
+
+	for (int row = 0; row < rowCount; row++)
+	{
+		QModelIndex proxyIndex = filterProxyModel->index(row, 0);
+		QModelIndex index = filterProxyModel->mapToSource(proxyIndex);
+		QStandardItem * item = newSatellitesModel->itemFromIndex(index);
+		if (item)
+		{
+			item->setCheckState(state);
+		}
+	}
 }

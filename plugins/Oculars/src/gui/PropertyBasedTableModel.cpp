@@ -96,7 +96,7 @@ bool PropertyBasedTableModel::setData(const QModelIndex &index, const QVariant &
 	if (index.isValid() && role == Qt::EditRole && index.column() < mappings.size()) {
 		QObject* object = content->at(index.row());
 		object->setProperty(mappings[index.column()].toStdString().c_str(), value);
-		emit(dataChanged(index, index));
+		emit(QAbstractItemModel::dataChanged(index, index));
 
 		changeMade = true;
 	}

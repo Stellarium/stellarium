@@ -16,11 +16,11 @@ StelMovementMgr.zoomTo(2,1);
 core.wait(2);
 
 status("Loading images...");
-core.loadSkyImage("image1", "../textures/earthmap.png", 41, 11.5, 41.17, 11.5, 41.17, 11.75, 41, 11.75);
+core.loadSkyImage("image1", "../textures/earthmap.png", 11.5, 41, 11.5, 41.17, 11.75, 41.17, 11.75, 41);
 core.wait(1);
-core.loadSkyImage("image2", "../textures/earthmap.png", 41.2, 11.5, 41.37, 11.5, 41.37, 11.75, 41.2, 11.75);
+core.loadSkyImage("image2", "../textures/earthmap.png", 11.5, 41.2, 11.5, 41.37, 11.75, 41.37, 11.75, 41.2);
 core.wait(1);
-core.loadSkyImage("image3", "../textures/earthmap.png", 41.4, 11.5, 41.57, 11.5, 41.57, 11.75, 41.4, 11.75);
+core.loadSkyImage("image3", "../textures/earthmap.png", 11.5, 41.4, 11.5, 41.57, 11.75, 41.57, 11.75, 41.4);
 core.wait(1);
 
 status("playing with the on of buttons...");
@@ -28,28 +28,28 @@ for(i=0; i<15; i++)
 {
 	core.wait(0.1);
 	if (i%3==0) { 
-		ScreenImageMgr.showImage("image1", true); 
-		ScreenImageMgr.showImage("image2", false); 
-		ScreenImageMgr.showImage("image3", false); 
+		StelSkyLayerMgr.showLayer("image1", true); 
+		StelSkyLayerMgr.showLayer("image2", false); 
+		StelSkyLayerMgr.showLayer("image3", false); 
 	}
 	else if ((i+1)%3==0) {
-		ScreenImageMgr.showImage("image1", false); 
-		ScreenImageMgr.showImage("image2", true); 
-		ScreenImageMgr.showImage("image3", false); 
+		StelSkyLayerMgr.showLayer("image1", false); 
+		StelSkyLayerMgr.showLayer("image2", true); 
+		StelSkyLayerMgr.showLayer("image3", false); 
 	}
 	else if ((i+2)%3==0) {
-		ScreenImageMgr.showImage("image1", false); 
-		ScreenImageMgr.showImage("image2", false); 
-		ScreenImageMgr.showImage("image3", true); 
+		StelSkyLayerMgr.showLayer("image1", false); 
+		StelSkyLayerMgr.showLayer("image2", false); 
+		StelSkyLayerMgr.showLayer("image3", true); 
 	}
 }
 
 status("turn off the images (fade would be nice)...");
-ScreenImageMgr.showImage("image1", true); 
+StelSkyLayerMgr.showLayer("image1", true); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image2", true); 
+StelSkyLayerMgr.showLayer("image2", true); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image3", true); 
+StelSkyLayerMgr.showLayer("image3", true); 
 core.wait(1);
 status("unloading images...");
 core.removeSkyImage("image1");

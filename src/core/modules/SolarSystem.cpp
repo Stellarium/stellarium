@@ -171,7 +171,10 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		sPainter.setColor(1.0f,0.3f,0.3f);
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(1.0f,0.0f,0.0f);
+		else
+			sPainter.setColor(1.0f,0.3f,0.3f);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
@@ -743,6 +746,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 
+			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
+
 		}
 		else if (type == "comet")
 		{
@@ -1002,6 +1007,14 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
+}
+
+float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	float r = 0.f;
+	r = p->getVMagnitude(StelApp::getInstance().getCore(), withExtinction);
+	return r;
 }
 
 // Search if any Planet is close to position given in earth equatorial position and return the distance

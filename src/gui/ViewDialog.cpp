@@ -42,6 +42,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -90,13 +91,34 @@ void ViewDialog::styleChanged()
 	}
 }
 
+void ViewDialog::updateIconsColor()
+{
+	QPixmap pixmap(50, 50);
+	QStringList icons;
+	icons << "sky" << "markings" << "landscape" << "starlore";
+	bool redIcon = false;
+	if (StelApp::getInstance().getVisionModeNight())
+		redIcon = true;
+
+	foreach(const QString &iconName, icons)
+	{
+		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
+		if (redIcon)
+			pixmap = StelButton::makeRed(pixmap);
+
+		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
+	}
+}
+
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);
+	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 
 	//ui->viewTabWidget->removeTab(4);
@@ -266,6 +288,11 @@ void ViewDialog::createDialogContent()
 	a = gui->getGuiActions("actionShow_Equatorial_J2000_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+
+	ui->showEclipticGridJ2000CheckBox->setChecked(glmgr->getFlagEclipticJ2000Grid());
+	a = gui->getGuiActions("actionShow_Ecliptic_J2000_Grid");
+	connect(a, SIGNAL(toggled(bool)), ui->showEclipticGridJ2000CheckBox, SLOT(setChecked(bool)));
+	connect(ui->showEclipticGridJ2000CheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showCardinalPointsCheckBox->setChecked(lmgr->getFlagCardinalsPoints());
 	a = gui->getGuiActions("actionShow_Cardinal_Points");

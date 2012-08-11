@@ -91,6 +91,8 @@ public:
 	{
 		return name;
 	}
+	//! Returns the (NORAD) catalog number. (For now, the ID string.)
+	QString getCatalogNumberString() const {return id;}
 
 	//! Set new tleElements.  This assumes the designation is already set, populates
 	//! the tleElements values and configures internal orbit parameters.
