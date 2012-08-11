@@ -333,9 +333,9 @@ void spheToRect(double lng, double lat, Vec3d& v)
 }
 
 void spheToRect(float lng, float lat, Vec3f& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+{	
+	const double dlng = lng, dlat = lat, cosLat = cos(dlat);
+	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 }
 
 void rectToSphe(double *lng, double *lat, const Vec3d& v)
@@ -1034,6 +1034,17 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 			return true;
 	}
 	return false;
+}
+
+// Calculate and getting orbital period in days from semi-major axis
+double calculateOrbitalPeriod(double SemiMajorAxis)
+{
+	// Calculate semi-major axis in meters
+	double a = AU*1000*SemiMajorAxis;
+	// Calculate orbital period in seconds
+	// Here 1.32712440018e20 is heliocentric gravitational constant
+	double period = 2*M_PI*std::sqrt(a*a*a/1.32712440018e20);
+	return period/86400; // return period in days
 }
 
 

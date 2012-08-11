@@ -814,10 +814,9 @@ GLEE_EXTERN GLboolean _GLEE_SGIX_texture_range;
 
 	/* GLX */
 
-	typedef void (*__GLXextFuncPtr)(void);
-
 	#ifndef GLX_ARB_get_proc_address 
 	#define GLX_ARB_get_proc_address 1
+	    typedef void (*__GLXextFuncPtr)(void);
 	    extern __GLXextFuncPtr glXGetProcAddressARB (const GLubyte *);
 	    extern void ( * glXGetProcAddressARB (const GLubyte *procName))(void);
 	    typedef __GLXextFuncPtr ( * PFNGLXGETPROCADDRESSARBPROC) (const GLubyte *procName);
