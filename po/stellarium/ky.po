@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-08-05 19:34+0700\n"
+"POT-Creation-Date: 2012-08-10 20:41+0700\n"
 "PO-Revision-Date: 2012-08-10 03:35+0000\n"
 "Last-Translator: blacktext <translatorky@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-10 04:37+0000\n"
-"X-Generator: Launchpad (build 15761)\n"
+"X-Launchpad-Export-Date: 2012-08-11 05:20+0000\n"
+"X-Generator: Launchpad (build 15780)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -79,35 +79,35 @@ msgstr "Чоңдук: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Өлчөм: %1"
 
-#: src/core/modules/Nebula.cpp:307
+#: src/core/modules/Nebula.cpp:317
 msgid "Galaxy"
 msgstr "Галактика"
 
-#: src/core/modules/Nebula.cpp:310
+#: src/core/modules/Nebula.cpp:320
 msgid "Open cluster"
 msgstr "Чачынды чогулуш"
 
-#: src/core/modules/Nebula.cpp:313
+#: src/core/modules/Nebula.cpp:323
 msgid "Globular cluster"
 msgstr "Шардык чогулуш"
 
-#: src/core/modules/Nebula.cpp:316
+#: src/core/modules/Nebula.cpp:326
 msgid "Nebula"
 msgstr "Жыбыраган калың жылдыз"
 
-#: src/core/modules/Nebula.cpp:319
+#: src/core/modules/Nebula.cpp:329
 msgid "Planetary nebula"
 msgstr "Планетарийлик жыбыраган калың жылдыз"
 
-#: src/core/modules/Nebula.cpp:322
+#: src/core/modules/Nebula.cpp:332
 msgid "Cluster associated with nebulosity"
 msgstr "Жыбыраган калың жылдыз менен бириккен чогулуш"
 
-#: src/core/modules/Nebula.cpp:325
+#: src/core/modules/Nebula.cpp:335
 msgid "Unknown"
 msgstr "Белгисиз"
 
-#: src/core/modules/Nebula.cpp:328
+#: src/core/modules/Nebula.cpp:338
 msgid "Undocumented type"
 msgstr "Документтелбеген түр"
 
@@ -370,31 +370,31 @@ msgstr "Табылбады"
 msgid "Found"
 msgstr "Табылды"
 
-#: src/gui/ConfigurationDialog.cpp:375
+#: src/gui/ConfigurationDialog.cpp:396
 msgid "Select screenshot directory"
 msgstr "Экран сүрөтүнүн директориясын тандоо"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:607
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Алгачкы КТМ: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:594
+#: src/gui/ConfigurationDialog.cpp:615
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Алгачкы көрүнүш багыты азимут/бийиктик: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:636
+#: src/gui/ConfigurationDialog.cpp:657
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Авторлор"
 
-#: src/gui/ConfigurationDialog.cpp:637 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Байланыш"
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:741
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -402,19 +402,19 @@ msgstr "Байланыш"
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:724
+#: src/gui/ConfigurationDialog.cpp:745
 msgid "License"
 msgstr "Лицензия"
 
-#: src/gui/ConfigurationDialog.cpp:750
+#: src/gui/ConfigurationDialog.cpp:771
 msgid "Running script: "
 msgstr "Кезектеги сценарий: "
 
-#: src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:778
 msgid "Running script: [none]"
 msgstr "Кезектеги сценарий: [эч бир]"
 
-#: src/gui/ConfigurationDialog.cpp:820
+#: src/gui/ConfigurationDialog.cpp:841
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -422,16 +422,16 @@ msgstr ""
 "Жаңы жылдыз каталогторунун жүктөөсү бүтүрүлдү!\n"
 "Аларды көрсөтүш үчүн Stellarium'ду рестарт кылыңыз."
 
-#: src/gui/ConfigurationDialog.cpp:824
+#: src/gui/ConfigurationDialog.cpp:845
 msgid "All available star catalogs have been installed."
 msgstr "Баардык болгон жылдыз каталогтору орнотулду."
 
-#: src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:850
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 каталогтун %1 жүктөп алуу"
 
-#: src/gui/ConfigurationDialog.cpp:836
+#: src/gui/ConfigurationDialog.cpp:857
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -440,7 +440,7 @@ msgstr ""
 "Жүктөө %1...\n"
 "(Сиз бул терезени жапсаңыз болот.)"
 
-#: src/gui/ConfigurationDialog.cpp:843
+#: src/gui/ConfigurationDialog.cpp:864
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -451,7 +451,7 @@ msgstr ""
 "Жылдыз саны: %2 миллион\n"
 "Чоңдук диапазону: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:886 src/gui/ConfigurationDialog.cpp:922
+#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -460,11 +460,11 @@ msgstr ""
 "Жүктөө катасы %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:974
+#: src/gui/ConfigurationDialog.cpp:995
 msgid "Verifying file integrity..."
 msgstr "Файл бүтүндүгүн текшерүү..."
 
-#: src/gui/ConfigurationDialog.cpp:978
+#: src/gui/ConfigurationDialog.cpp:999
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -473,85 +473,85 @@ msgstr ""
 "Жүктөө катасы %1:\n"
 "Файл бузулган."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:328
-#: src/gui/StelGuiItems.cpp:709
+#: src/gui/HelpDialog.cpp:53 src/gui/StelGuiItems.cpp:329
+#: src/gui/StelGuiItems.cpp:710
 msgid "Space"
 msgstr "Space"
 
-#: src/gui/HelpDialog.cpp:53
+#: src/gui/HelpDialog.cpp:54
 msgid "Arrow keys & left mouse drag"
 msgstr "Көрсөткүч клавиштери жана чычкандын солу менен ташуу"
 
-#: src/gui/HelpDialog.cpp:54
+#: src/gui/HelpDialog.cpp:55
 msgid "Page Up/Down"
 msgstr "Page Up/Down"
 
-#: src/gui/HelpDialog.cpp:55
+#: src/gui/HelpDialog.cpp:56
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Up/Down"
 
-#: src/gui/HelpDialog.cpp:56
+#: src/gui/HelpDialog.cpp:57
 msgid "Left click"
 msgstr "Сол клик"
 
-#: src/gui/HelpDialog.cpp:57
+#: src/gui/HelpDialog.cpp:58
 msgid "Right click"
 msgstr "Оң клик"
 
-#: src/gui/HelpDialog.cpp:58
+#: src/gui/HelpDialog.cpp:59
 msgid "CTRL + Left click"
 msgstr "CTRL + Сол клик"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:237
+#: src/gui/HelpDialog.cpp:62 src/gui/StelGui.cpp:239
 msgid "Movement and Selection"
 msgstr "Которуу жана тандоо"
 
-#: src/gui/HelpDialog.cpp:62
+#: src/gui/HelpDialog.cpp:63
 msgid "Pan view around the sky"
 msgstr "Асмандын панорамалык кароосу"
 
-#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
+#: src/gui/HelpDialog.cpp:64 src/gui/HelpDialog.cpp:65
 msgid "Zoom in/out"
 msgstr "Жакындатуу/Алыстатуу"
 
-#: src/gui/HelpDialog.cpp:65
+#: src/gui/HelpDialog.cpp:66
 msgid "Select object"
 msgstr "Объектти тандоо"
 
-#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
+#: src/gui/HelpDialog.cpp:67 src/gui/HelpDialog.cpp:69
 msgid "Clear selection"
 msgstr "Тандоону тазалоо"
 
-#: src/gui/HelpDialog.cpp:71
+#: src/gui/HelpDialog.cpp:72
 msgid "When a Script is Running"
 msgstr "Сценарий аткарылып жатканда"
 
-#: src/gui/HelpDialog.cpp:73
+#: src/gui/HelpDialog.cpp:74
 msgid "Stop currently running script"
 msgstr "Азыр жүргүзүлүп турган сценарийди токтотуу"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:213
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:215
 msgid "Pause script execution"
 msgstr "Сценарий аткарылуусун пауза кылуу"
 
-#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:214
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:216
 msgid "Resume script execution"
 msgstr "Сценарий аткарылуусун улантуу"
 
-#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:209
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:211
 msgid "Slow down the script execution rate"
 msgstr "Сценарийдин аткарылуу темпин басаңдатуу"
 
-#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:210
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:212
 msgid "Speed up the script execution rate"
 msgstr "Сценарийдин аткарылуу темпин ылдамдатуу"
 
-#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:211
+#: src/gui/HelpDialog.cpp:79 src/gui/StelGui.cpp:213
 msgid "Set the normal script execution rate"
 msgstr "Сценарийдин аткарылуу темпин ченемдүү кылуу"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
-#: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: src/gui/HelpDialog.cpp:82 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
@@ -561,24 +561,24 @@ msgstr "Сценарийдин аткарылуу темпин ченемдүү 
 msgid "Plugin Key Bindings"
 msgstr "Плагиндин клавиштик айкалыштары"
 
-#: src/gui/HelpDialog.cpp:82
+#: src/gui/HelpDialog.cpp:83
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
 msgstr "Колдонуучунун текст интерфейси"
 
-#: src/gui/HelpDialog.cpp:171
+#: src/gui/HelpDialog.cpp:193
 msgid "Stellarium Help"
 msgstr "Stellarium жардамы"
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:194
 msgid "Keys"
 msgstr "Клавиштер"
 
-#: src/gui/HelpDialog.cpp:180
+#: src/gui/HelpDialog.cpp:202
 msgid "Further Reading"
 msgstr "Кошумча окуу"
 
-#: src/gui/HelpDialog.cpp:181
+#: src/gui/HelpDialog.cpp:203
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -586,17 +586,17 @@ msgstr ""
 "Төмөнкү шилтемелер тышкы веб шилтемелери болот, алар сиздин веб-"
 "браузериңизди ачат:\n"
 
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:204
 msgid "The Stellarium User Guide"
 msgstr "Stellarium кодонуучусунун колдонмосу"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
+#: src/gui/HelpDialog.cpp:208
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Көп Берилген Суроолор} Stellarium жөнүндө. Жооптору менен."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
+#: src/gui/HelpDialog.cpp:213
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -605,7 +605,7 @@ msgstr ""
 "ландшафттарын жана сценарийлерин таба аласыз."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
+#: src/gui/HelpDialog.cpp:218
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -615,7 +615,7 @@ msgstr ""
 "кылып көрөбүз."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:201
+#: src/gui/HelpDialog.cpp:223
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -626,48 +626,48 @@ msgstr ""
 "маалымдоолорун ача аласыз."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:206
+#: src/gui/HelpDialog.cpp:228
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Форумдар} - Stellarium'ду башка колдонуучулар менен талкуулоо."
 
-#: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
-#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:244
+#: src/gui/HelpDialog.cpp:264 src/gui/HelpDialog.cpp:367
+#: src/gui/HelpDialog.cpp:369 src/gui/StelGui.cpp:246
 msgid "Miscellaneous"
 msgstr "Ар башкалар"
 
-#: src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:324
 msgid "Developers"
 msgstr "Иштетүүчүлөр"
 
-#: src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Долбоор координатору жана жетекчи иштетүүчүсү: %1"
 
-#: src/gui/HelpDialog.cpp:304
+#: src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Документация автору/иштетүүчү: %1"
 
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
-#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
-#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:315
-#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:338 src/gui/HelpDialog.cpp:339
+#: src/gui/HelpDialog.cpp:340
 #, qt-format
 msgid "Developer: %1"
 msgstr "Иштетүүчү: %1"
 
-#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "Tester: %1"
 msgstr "Сыноочу: %1"
 
-#: src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:334
 msgid "Past Developers"
 msgstr "Мурунку иштетүүчүлөр"
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:335
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -675,356 +675,356 @@ msgstr ""
 "Бир нече кишилер олуттуу салымдарды жасашкан, бирок эми активдүү эмес. "
 "Алардын иши долбоорго чоң өзгөрүүлөрдү алып келген:"
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:336
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Графика/башка дизайнери: %1"
 
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:341 src/gui/HelpDialog.cpp:342
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX иштетүүчүсү: %1"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:164
 msgid "Display Options"
 msgstr "Көрсөтүү опциялары"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "Топ жылдыз сызыктары"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:166
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "Топ жылдыз көркөм өнөрү"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:167
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "Топ жылдыз атамалары"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:168
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "Топ жылдыз чек аралары"
 
-#: src/gui/StelGui.cpp:168 src/ui_viewDialog.h:1159
+#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "Азимуттук тор"
 
-#: src/gui/StelGui.cpp:169 src/ui_viewDialog.h:1157
+#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "Экватордук тор"
 
-#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1156
+#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "Экватордук J2000 тору"
 
-#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1158
+#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Эклиптика J2000 тору"
 
-#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1160
+#: src/gui/StelGui.cpp:174 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "Галактика тору"
 
-#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1180
+#: src/gui/StelGui.cpp:175 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Галактика тегиздиги"
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "Эклиптика сызыгы"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "Экватор сызыгы"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "Меридиан сызыгы"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:179
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "Горизонт сызыгы"
 
-#: src/gui/StelGui.cpp:178 src/ui_viewDialog.h:1181
+#: src/gui/StelGui.cpp:180 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "Дүйнө жактары"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:182
 msgid "Ground"
 msgstr "Кыртыш"
 
-#: src/gui/StelGui.cpp:181 src/ui_viewDialog.h:1130
+#: src/gui/StelGui.cpp:183 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:184
 msgid "Fog"
 msgstr "Чаң-түтүн"
 
-#: src/gui/StelGui.cpp:184 src/ui_viewDialog.h:1139
+#: src/gui/StelGui.cpp:186 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "Жыбыраган калың жылдыздар"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:187
 msgid "Nebulas background images"
 msgstr "Жыбыраган калың жылдыздардын фон сүрөттөрү"
 
-#: src/gui/StelGui.cpp:186 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/gui/StelGui.cpp:188 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "Жылдыздар"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:189
 msgid "Stars labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "Планета атамалары"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:191
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "Планета орбиталары"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:192
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "Планета чыйырлары"
 
-#: src/gui/StelGui.cpp:192
-msgid "Night mode"
-msgstr "Түнкү режим"
+#: src/gui/StelGui.cpp:194
+msgid "Night vision mode"
+msgstr ""
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:195
 msgid "Full-screen mode"
 msgstr "Толук-экран режими"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:196
 msgid "Flip scene horizontally"
 msgstr "Сахнаны горизонталынан оодаруу"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:197
 msgid "Flip scene vertically"
 msgstr "Сахнаны вертикалынан оодаруу"
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:199
 msgid "Windows"
 msgstr "Терезелер"
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:200
 msgid "Help window"
 msgstr "Жардам терезеси"
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:201
 msgid "Configuration window"
 msgstr "Ырастоо терезеси"
 
-#: src/gui/StelGui.cpp:200
+#: src/gui/StelGui.cpp:202
 msgid "Search window"
 msgstr "Издөө терезеси"
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:203
 msgid "Sky and viewing options window"
 msgstr "Асман жана көрүнүш опцияларынын терезеси"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:204
 msgid "Date/time window"
 msgstr "Дата/убакыт терезеси"
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:205
 msgid "Location window"
 msgstr "Турган жай терезеси"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:207
 msgid "Script console window"
 msgstr "Сценарий консолюнун терезеси"
 
-#: src/gui/StelGui.cpp:208 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:210 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "Дата жана убакыт"
 
-#: src/gui/StelGui.cpp:212
+#: src/gui/StelGui.cpp:214
 msgid "Stop script execution"
 msgstr ""
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:217
 msgid "Decrease time speed"
 msgstr "Убакыт ылдамдыгын басаңдатуу"
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:218
 msgid "Increase time speed"
 msgstr "Убакыт ылдамдыгын тездетүү"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:219
 msgid "Set normal time rate"
 msgstr "Ченемдүү убакыт жүрүшүнө коюу"
 
-#: src/gui/StelGui.cpp:218
+#: src/gui/StelGui.cpp:220
 msgid "Decrease time speed (a little)"
 msgstr "Убакыт ылдамдыгын басаңдатуу (кичине)"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:221
 msgid "Increase time speed (a little)"
 msgstr "Убакыт ылдамдыгын тездетүү (кичине)"
 
-#: src/gui/StelGui.cpp:220
+#: src/gui/StelGui.cpp:222
 msgid "Set time rate to zero"
 msgstr "Убакыт жүрүшүн нөлгө коюу"
 
-#: src/gui/StelGui.cpp:221
+#: src/gui/StelGui.cpp:223
 msgid "Set time to now"
 msgstr "Убакытты азырга коюу"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:224
 msgid "Add 1 solar hour"
 msgstr "1 ачык саатты кошуу"
 
-#: src/gui/StelGui.cpp:223
+#: src/gui/StelGui.cpp:225
 msgid "Subtract 1 solar hour"
 msgstr "1 ачык саатты кемитүү"
 
-#: src/gui/StelGui.cpp:224
+#: src/gui/StelGui.cpp:226
 msgid "Add 1 solar day"
 msgstr "1 ачык күндү кошуу"
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:227
 msgid "Subtract 1 solar day"
 msgstr "1 ачык күндү кемитүү"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:228
 msgid "Add 1 solar week"
 msgstr "1 ачык жуманы кошуу"
 
-#: src/gui/StelGui.cpp:227
+#: src/gui/StelGui.cpp:229
 msgid "Subtract 1 solar week"
 msgstr "1 ачык жуманы кемитүү"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:230
 msgid "Add 1 sidereal day"
 msgstr "1 жылдыздуу күндү кошуу"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:231
 msgid "Subtract 1 sidereal day"
 msgstr "1 жылдыздуу күндү кемитүү"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:232
 msgid "Add 1 sidereal week"
 msgstr "1 жылдыздуу жуманы кошуу"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:233
 msgid "Subtract 1 sidereal week"
 msgstr "1 жылдыздуу жуманы кемитүү"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:234
 msgid "Add 1 sidereal month"
 msgstr "1 жылдыздуу айды кошуу"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:235
 msgid "Subtract 1 sidereal month"
 msgstr "1 жылдыздуу айды кемитүү"
 
-#: src/gui/StelGui.cpp:234
+#: src/gui/StelGui.cpp:236
 msgid "Add 1 sidereal year"
 msgstr "1 жылдыздуу жылды кошуу"
 
-#: src/gui/StelGui.cpp:235
+#: src/gui/StelGui.cpp:237
 msgid "Subtract 1 sidereal year"
 msgstr "1 жылдыздуу жылды кемитүү"
 
-#: src/gui/StelGui.cpp:238
+#: src/gui/StelGui.cpp:240
 msgid "Center on selected object"
 msgstr "Тандалган объектке борборлотуу"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:241
 msgid "Track object"
 msgstr "Объектти байкоо"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:242
 msgid "Zoom in on selected object"
 msgstr "Тандалган объектке жакындатуу"
 
-#: src/gui/StelGui.cpp:241
+#: src/gui/StelGui.cpp:243
 msgid "Zoom out"
 msgstr "Алыстатуу"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:244
 msgid "Set home planet to selected planet"
 msgstr "Тандалган объектти үй планетасы кылып коюу"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:247
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Экватордук жана азимуттук чыгуунун арасынан которуу"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:248
 msgid "Quit"
 msgstr "Чыгуу"
 
-#: src/gui/StelGui.cpp:247
+#: src/gui/StelGui.cpp:249
 msgid "Save screenshot"
 msgstr "Экран сүрөтүн сактоо"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:250
 msgid "Copy selected object information to clipboard"
 msgstr "Тандалган объектинин информациясын алмашуу буферине көчүрүү"
 
-#: src/gui/StelGui.cpp:249
+#: src/gui/StelGui.cpp:251
 msgid "Go to home"
 msgstr ""
 
-#: src/gui/StelGui.cpp:251
+#: src/gui/StelGui.cpp:253
 msgid "Auto hide horizontal button bar"
 msgstr "Горизонталдуу панельди авто жашыруу"
 
-#: src/gui/StelGui.cpp:252
+#: src/gui/StelGui.cpp:254
 msgid "Auto hide vertical button bar"
 msgstr "Вертикалдуу панельди авто жашыруу"
 
-#: src/gui/StelGui.cpp:253
+#: src/gui/StelGui.cpp:255
 msgid "Toggle visibility of GUI"
 msgstr "КГИ көрүнүүсүнө которуу"
 
-#: src/gui/StelGuiItems.cpp:595
+#: src/gui/StelGuiItems.cpp:596
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1м"
 
-#: src/gui/ViewDialog.cpp:459
+#: src/gui/ViewDialog.cpp:481
 msgid "No description"
 msgstr "Баяндама жок"
 
-#: src/gui/ViewDialog.cpp:572
+#: src/gui/ViewDialog.cpp:594
 msgid "No shooting stars"
 msgstr "Учуучу жылдыздар жок"
 
-#: src/gui/ViewDialog.cpp:575
+#: src/gui/ViewDialog.cpp:597
 msgid "Normal rate"
 msgstr "Ченемдүү жүрүш"
 
-#: src/gui/ViewDialog.cpp:578
+#: src/gui/ViewDialog.cpp:600
 msgid "Standard Perseids rate"
 msgstr "Стандарттуу Персеидтер жүрүшү"
 
-#: src/gui/ViewDialog.cpp:581
+#: src/gui/ViewDialog.cpp:603
 msgid "Exceptional Leonid rate"
 msgstr "Бөтөнчө Леонид жүрүшү"
 
-#: src/gui/ViewDialog.cpp:584
+#: src/gui/ViewDialog.cpp:606
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Бир убакыттагы эң ири жүрүш (1966 Леонидтер)"
 
@@ -2856,141 +2856,141 @@ msgstr "Өлкө:"
 msgid "Planet:"
 msgstr "Планета:"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:501
 msgid "Find Object"
 msgstr "Объектти табуу"
 
-#: src/ui_searchDialogGui.h:505
+#: src/ui_searchDialogGui.h:502
 msgid "Find Object or Position"
 msgstr "Объект же орунду табуу"
 
-#: src/ui_searchDialogGui.h:511
+#: src/ui_searchDialogGui.h:508
 msgid "iota"
 msgstr "йота"
 
-#: src/ui_searchDialogGui.h:514
+#: src/ui_searchDialogGui.h:511
 msgid "alpha"
 msgstr "альфа"
 
-#: src/ui_searchDialogGui.h:517
+#: src/ui_searchDialogGui.h:514
 msgid "beta"
 msgstr "бета"
 
-#: src/ui_searchDialogGui.h:520
+#: src/ui_searchDialogGui.h:517
 msgid "gamma"
 msgstr "гамма"
 
-#: src/ui_searchDialogGui.h:523
+#: src/ui_searchDialogGui.h:520
 msgid "delta"
 msgstr "дельта"
 
-#: src/ui_searchDialogGui.h:526
+#: src/ui_searchDialogGui.h:523
 msgid "epsilon"
 msgstr "эпсилон"
 
-#: src/ui_searchDialogGui.h:529
+#: src/ui_searchDialogGui.h:526
 msgid "zeta"
 msgstr "дзета"
 
-#: src/ui_searchDialogGui.h:532
+#: src/ui_searchDialogGui.h:529
 msgid "eta"
 msgstr "эта"
 
-#: src/ui_searchDialogGui.h:535
+#: src/ui_searchDialogGui.h:532
 msgid "theta"
 msgstr "тета"
 
-#: src/ui_searchDialogGui.h:538
+#: src/ui_searchDialogGui.h:535
 msgid "kappa"
 msgstr "каппа"
 
-#: src/ui_searchDialogGui.h:541
+#: src/ui_searchDialogGui.h:538
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:541
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:547
+#: src/ui_searchDialogGui.h:544
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:550
+#: src/ui_searchDialogGui.h:547
 msgid "xi"
 msgstr "кси"
 
-#: src/ui_searchDialogGui.h:553
+#: src/ui_searchDialogGui.h:550
 msgid "omicron"
 msgstr "омикрон"
 
-#: src/ui_searchDialogGui.h:556
+#: src/ui_searchDialogGui.h:553
 msgid "pi"
 msgstr "пи"
 
-#: src/ui_searchDialogGui.h:559
+#: src/ui_searchDialogGui.h:556
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:562
+#: src/ui_searchDialogGui.h:559
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:565
+#: src/ui_searchDialogGui.h:562
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:565
 msgid "upsilon"
 msgstr "ипсилон"
 
-#: src/ui_searchDialogGui.h:571
+#: src/ui_searchDialogGui.h:568
 msgid "phi"
 msgstr "фи"
 
-#: src/ui_searchDialogGui.h:574
+#: src/ui_searchDialogGui.h:571
 msgid "chi"
 msgstr "хи"
 
-#: src/ui_searchDialogGui.h:577
+#: src/ui_searchDialogGui.h:574
 msgid "psi"
 msgstr "пси"
 
-#: src/ui_searchDialogGui.h:580
+#: src/ui_searchDialogGui.h:577
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:579
 msgid "Greek letters for Bayer designations"
 msgstr "Байер белгилөөлөрү үчүн грек тамгалар"
 
-#: src/ui_searchDialogGui.h:583
+#: src/ui_searchDialogGui.h:580
 msgid "Object"
 msgstr "Объект"
 
-#: src/ui_searchDialogGui.h:584
+#: src/ui_searchDialogGui.h:581
 msgid "RA/Dec (J2000):"
 msgstr "Тик чыгуу/Эңкейүү (J2000):"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:582
 msgid "Position"
 msgstr "Орун"
 
-#: src/ui_searchDialogGui.h:586
+#: src/ui_searchDialogGui.h:583
 msgid "On-line astronomical database SIMBAD"
 msgstr "SIMBAD онлайн астрономиялык маалымат базасы"
 
-#: src/ui_searchDialogGui.h:587
+#: src/ui_searchDialogGui.h:584
 msgid "Extend search with SIMBAD"
 msgstr "Издөөнү SIMBAD менен кеңейтүү"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:585
 msgid "Server:"
 msgstr "Сервер:"
 
-#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
+#: src/ui_searchDialogGui.h:586 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:1065 src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1062 src/ui_configurationDialog.h:1073
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Options"
 msgstr "Параметрлер"
@@ -3199,38 +3199,38 @@ msgstr "Ушу асман маданиятын жарыяланбасча кол
 msgid "Visible"
 msgstr "Көрүнүп турган"
 
-#: src/ui_configurationDialog.h:920
+#: src/ui_configurationDialog.h:917
 msgid "Configuration"
 msgstr "Ырастоо"
 
-#: src/ui_configurationDialog.h:922
+#: src/ui_configurationDialog.h:919
 msgid "Program language"
 msgstr "Программа тили"
 
-#: src/ui_configurationDialog.h:923
+#: src/ui_configurationDialog.h:920
 msgid "Default options"
 msgstr "Жарыяланбас опциялар"
 
-#: src/ui_configurationDialog.h:925
+#: src/ui_configurationDialog.h:922
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "Ушу сессияда өзгөртүлгөн ырастоолорду сактоо"
 
-#: src/ui_configurationDialog.h:927
+#: src/ui_configurationDialog.h:924
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "Ырастоолорду сактоо"
 
-#: src/ui_configurationDialog.h:929
+#: src/ui_configurationDialog.h:926
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Stellarium менен келген жарыяланбас ырастоолорду калыбына келтирүү"
 
-#: src/ui_configurationDialog.h:931
+#: src/ui_configurationDialog.h:928
 msgid "Restore defaults"
 msgstr "Жарыяланбастарды калыбына келтирүү"
 
-#: src/ui_configurationDialog.h:932
+#: src/ui_configurationDialog.h:929
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3240,347 +3240,347 @@ msgstr ""
 "жүргүзүшүн талап кылат. Эмки жүргүзүү үчүн азыркы КТМ жана көрүнүштүн "
 "багытын кошуп баардык азыркы опцияларды сактайт."
 
-#: src/ui_configurationDialog.h:934
+#: src/ui_configurationDialog.h:931
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium жүргүзүлүп жаткандагы сиздин көрүнүштүн туурасы"
 
-#: src/ui_configurationDialog.h:937
+#: src/ui_configurationDialog.h:934
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium жүргүзүлгөндө сиз көрүп жаткан багыт"
 
-#: src/ui_configurationDialog.h:939 src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:936 src/ui_configurationDialog.h:1084
 msgid "Selected object information"
 msgstr "Тандалган объекттин информациясы"
 
-#: src/ui_configurationDialog.h:941
+#: src/ui_configurationDialog.h:938
 msgid "Display all information available"
 msgstr "Болгон информациянын баарын көрсөтүү"
 
-#: src/ui_configurationDialog.h:943
+#: src/ui_configurationDialog.h:940
 msgid "All available"
 msgstr "Болгондун баары"
 
-#: src/ui_configurationDialog.h:945
+#: src/ui_configurationDialog.h:942
 msgid "Display less information"
 msgstr "Азыраак информация көрсөтүү"
 
-#: src/ui_configurationDialog.h:947
+#: src/ui_configurationDialog.h:944
 msgid "Short"
 msgstr "Кыска"
 
-#: src/ui_configurationDialog.h:949
+#: src/ui_configurationDialog.h:946
 msgid "Display no information"
 msgstr "Информацияны көрсөтпөө"
 
-#: src/ui_configurationDialog.h:951
+#: src/ui_configurationDialog.h:948
 msgid "None"
 msgstr "Эч бир"
 
-#: src/ui_configurationDialog.h:953
+#: src/ui_configurationDialog.h:950
 msgid "Display user settings information"
 msgstr "Колдонуучу ырастоолорунун информациясын көрсөтүү"
 
-#: src/ui_configurationDialog.h:955
+#: src/ui_configurationDialog.h:952
 msgid "Customized"
 msgstr "Өзгөчөлөнгөн"
 
-#: src/ui_configurationDialog.h:956
+#: src/ui_configurationDialog.h:953
 msgid "Displayed fields"
 msgstr ""
 
-#: src/ui_configurationDialog.h:957
+#: src/ui_configurationDialog.h:954
 msgid "Visual magnitude"
 msgstr "Көрүнөө чоңдук"
 
-#: src/ui_configurationDialog.h:959
+#: src/ui_configurationDialog.h:956
 msgid "Spectral class, nebula type, etc."
 msgstr ""
 
-#: src/ui_configurationDialog.h:961
+#: src/ui_configurationDialog.h:958
 msgid "Additional information 1"
 msgstr "Кошумча информация 1"
 
-#: src/ui_configurationDialog.h:962
+#: src/ui_configurationDialog.h:959
 msgid "Additional information 3"
 msgstr "Кошумча информация 3"
 
-#: src/ui_configurationDialog.h:963
+#: src/ui_configurationDialog.h:960
 msgid "Catalog number(s)"
 msgstr "Каталог номер(лер)и"
 
-#: src/ui_configurationDialog.h:964
+#: src/ui_configurationDialog.h:961
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Ат"
 
-#: src/ui_configurationDialog.h:968
+#: src/ui_configurationDialog.h:965
 msgid "Additional information 2"
 msgstr "Кошумча информация 2"
 
-#: src/ui_configurationDialog.h:969
+#: src/ui_configurationDialog.h:966
 msgid "Absolute magnitude"
 msgstr "Накта чоңдук"
 
-#: src/ui_configurationDialog.h:971
+#: src/ui_configurationDialog.h:968
 msgid "Horizontal coordinates"
 msgstr "Горизонталдык координаттар"
 
-#: src/ui_configurationDialog.h:973
+#: src/ui_configurationDialog.h:970
 msgid "Altitude/Azimuth"
 msgstr "Бийиктик/Азимут"
 
-#: src/ui_configurationDialog.h:975
+#: src/ui_configurationDialog.h:972
 msgid "Angular or physical size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:977
+#: src/ui_configurationDialog.h:974
 msgid "Size"
 msgstr "Өлчөм"
 
-#: src/ui_configurationDialog.h:979
+#: src/ui_configurationDialog.h:976
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:981
+#: src/ui_configurationDialog.h:978
 msgid "Right ascension/Declination (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:979
 msgid "Distance"
 msgstr "Аралык"
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:981
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:986
+#: src/ui_configurationDialog.h:983
 msgid "Right ascension/Declination (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:988
+#: src/ui_configurationDialog.h:985
 msgid "Topocentric equatorial coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:990
+#: src/ui_configurationDialog.h:987
 msgid "Hour angle/Declination"
 msgstr "Саат бурчу/Эңкейүү"
 
-#: src/ui_configurationDialog.h:991
+#: src/ui_configurationDialog.h:988
 msgid "Control"
 msgstr "Башкаруу"
 
-#: src/ui_configurationDialog.h:993
+#: src/ui_configurationDialog.h:990
 msgid "Allow keyboard to pan and zoom"
 msgstr "Панорама кылуу жана чоңойтуу үчүн клавиатурага уруксат берүү"
 
-#: src/ui_configurationDialog.h:995
+#: src/ui_configurationDialog.h:992
 msgid "Enable keyboard navigation"
 msgstr "Клавиатура навигациясын колдонуу"
 
-#: src/ui_configurationDialog.h:997
+#: src/ui_configurationDialog.h:994
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Панорама кылуу (ташуу) жана чоңойтуу (чычкан дөнгөлөгү) үчүн чычканга "
 "уруксат берүү"
 
-#: src/ui_configurationDialog.h:999
+#: src/ui_configurationDialog.h:996
 msgid "Enable mouse navigation"
 msgstr "Чычкан навигациясын колдонуу"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:997
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "Алгачкы дата жана убакыт"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:999
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Системалык саат датасы жана убактысында Stellarium'ду жүргүзүү"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1001
 msgid "System date and time"
 msgstr "Системалык дата жана убакыт"
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:1003
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1005
 msgid "System date at:"
 msgstr "Системалык дата:"
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1007
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Stellarium жүргүзүлгөндө белгиленген дата жана убакытты колдонуу"
 
-#: src/ui_configurationDialog.h:1012
+#: src/ui_configurationDialog.h:1009
 msgid "Other:"
 msgstr "Башка:"
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1010
 msgid "use current"
 msgstr "азыркыны колдонуу"
 
-#: src/ui_configurationDialog.h:1014
+#: src/ui_configurationDialog.h:1011
 msgid "Other"
 msgstr "Башка"
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1013
 msgid "Hides the mouse cursor when inactive"
 msgstr "Активдүү эместе чычкандын курсорун катат"
 
-#: src/ui_configurationDialog.h:1018
+#: src/ui_configurationDialog.h:1015
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Чычкан курсорунун күтүү убагы (секундалар):"
 
-#: src/ui_configurationDialog.h:1020
+#: src/ui_configurationDialog.h:1017
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Вертикалдуу жана горизонталдуу оодарууга которгон баскычтар."
 
-#: src/ui_configurationDialog.h:1022
+#: src/ui_configurationDialog.h:1019
 msgid "Show flip buttons"
 msgstr "Оодаруу баскычтарын көрсөтүү"
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1021
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Жыбыраган калың жылдыз фондорун көрсөтүүгө которуу."
 
-#: src/ui_configurationDialog.h:1026
+#: src/ui_configurationDialog.h:1023
 msgid "Show nebula background button"
 msgstr "Жыбыраган калың жылдыздын фон баскычын көрсөтүү"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1024
 msgid "Planetarium options"
 msgstr "Планетарийдин параметрлери"
 
-#: src/ui_configurationDialog.h:1029
+#: src/ui_configurationDialog.h:1026
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1028
 msgid "Spheric mirror distortion"
 msgstr "Сфералык күзгү бурмаланышы"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1030
 msgid "Align labels with the horizon"
 msgstr "Атамаларды горизонт менен түптүз кылып тегиздөө"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1032
 msgid "Gravity labels"
 msgstr "Тартыш атамалары"
 
-#: src/ui_configurationDialog.h:1037
+#: src/ui_configurationDialog.h:1034
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1036
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Автоматтык алыстатуу көрүнүштүн баштапкы багытына кайттырат"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1038
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1040
 msgid "Disc viewport"
 msgstr "Диск сыяктуу терезе"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1042
 msgid "Hide other constellations when you click one"
 msgstr "Бирөөнү клик кылганда башка топ жылдыздарды жашыруу"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1044
 msgid "Select single constellation"
 msgstr "Жеке топ жылдызды тандоо"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1045
 msgid "Screenshots"
 msgstr "Экран сүрөттөрү"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1046
 msgid "Screenshot Directory"
 msgstr "Экран сүрөтүнүн директориясы"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1048
 msgid "Invert colors"
 msgstr "Өңдөрдү тескерилетүү"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1049
 msgid "Star catalog updates"
 msgstr "Жылдыз каталогунун жаңыртуулары"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1051
 msgid "Click here to start downloading"
 msgstr "Жүктөөнү башташ үчүн бул жерди басыңыз"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1053
 msgid "Download this file to view even more stars"
 msgstr "Андан бетер көбүрөөк жылдыздарды көрүш үчүн ушу файлды жүктөп алыңыз"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1055
 msgid "Restart the download"
 msgstr "Жүктөөнү кайта баштоо"
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1057
 msgid "Retry"
 msgstr "Кайталоо"
 
-#: src/ui_configurationDialog.h:1062
+#: src/ui_configurationDialog.h:1059
 msgid "Stop the download. You can always restart it later"
 msgstr "Жүктөлүүнүн токтолушу. Сиз дайыма кечирээк кайта жүргүзө аласыз"
 
-#: src/ui_configurationDialog.h:1064
+#: src/ui_configurationDialog.h:1061
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "Жокко чыгаруу"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1064
 msgid "Close window when script runs"
 msgstr "Сценарий жүргүзүлгөндө терезени жабуу"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1066
 msgid "Run the selected script"
 msgstr "Тандалган сценарийди жүргүзүү"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1070
 msgid "Stop a running script"
 msgstr "Жүргүзүлгөн сценарийди токтотуу"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1074
 msgid "Load at startup"
 msgstr "Башында жүктөө"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1075
 msgid "configure"
 msgstr "ырастоо"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1080
 msgid "Main"
 msgstr "Башкы"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1082
 msgid "Information"
 msgstr "Информация"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1087
 msgid "Navigation"
 msgstr "Навигация"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1089
 msgid "Tools"
 msgstr "Аспаптар"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "Сценарийлер"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1093
 msgid "Plugins"
 msgstr "Плагиндер"
 
@@ -3720,17 +3720,17 @@ msgid "Angle measure"
 msgstr "Бурч ченөөч"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:308
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:319
 msgid "The Angle Measure is enabled:"
 msgstr "Бурч ченөөч күйгүзүлгөн:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:310
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:321
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:312
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:323
 msgid "Right-clicking changes the end point only."
 msgstr "Оң клик аяккы ордун гана өзгөртөт."
 
@@ -4128,7 +4128,7 @@ msgstr "Кошуу"
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 #: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Satellites/src/ui_satellitesDialog.h:697
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Ат:"
@@ -4199,7 +4199,7 @@ msgid "Vertical flip"
 msgstr "Вертикалдуу оодарыш"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
-#: plugins/Satellites/src/ui_satellitesDialog.h:732
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
@@ -4212,7 +4212,7 @@ msgid "About"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Satellites"
 msgstr "Жолдоштор"
 
@@ -4510,7 +4510,7 @@ msgid "Next update: %1 hours"
 msgstr "Кийинки жаңыртуу: %1 саат"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
-#: plugins/Satellites/src/ui_satellitesDialog.h:661
+#: plugins/Satellites/src/ui_satellitesDialog.h:655
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
@@ -4604,16 +4604,16 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr "Каталог номери: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:648
+#: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Satellites Configuration"
 msgstr "Жолдоштор ырастоосу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:651
 msgid "Update TLE lists from Internet sources"
 msgstr "TLE тизмесин интернет булактардан жаңыртуу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:658
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
@@ -4621,7 +4621,7 @@ msgstr "TLE тизмесин интернет булактардан жаңыр�
 msgid "Update from Internet sources"
 msgstr "Интернет булактардан жаңыртуу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:653
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
@@ -4629,51 +4629,51 @@ msgstr "Интернет булактардан жаңыртуу"
 msgid "Last update:"
 msgstr "Соңку жаңыртуу:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr "Жаңыртуу жыштыгы (саат):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Labels"
 msgstr "Атамалар"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:663
+#: plugins/Satellites/src/ui_satellitesDialog.h:657
 msgid "Label font size (pixels):"
 msgstr "Атама шрифтинин чени (пиксельдер):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:658
 msgid "Orbit lines"
 msgstr "Орбита сызыктары"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:666
-#: plugins/Satellites/src/ui_satellitesDialog.h:670
+#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:668
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of  segments:"
 msgstr "Сегменттер саны:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:673
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:667
+#: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Duration of a single segment in seconds"
 msgstr "Жеке сегменттин секундадагы созулгандыгы"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:675
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Segment length (s):"
 msgstr "Сегмент узундугу (с):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
-#: plugins/Satellites/src/ui_satellitesDialog.h:683
+#: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:685
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Fade length:"
 msgstr "Жоюлуш аралыгы:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:680
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
@@ -4681,7 +4681,7 @@ msgstr "Жоюлуш аралыгы:"
 msgid "Restore default settings"
 msgstr "Жарыяланбас ырастоолорду калыбына келтирүү"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:687
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
@@ -4689,7 +4689,7 @@ msgstr "Жарыяланбас ырастоолорду калыбына кел�
 msgid "Save settings as default"
 msgstr "Ырастоолорду жарыяланбасча сактоо"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
@@ -4697,73 +4697,73 @@ msgstr "Ырастоолорду жарыяланбасча сактоо"
 msgid "Settings"
 msgstr "Ырастоолор"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Display the selected satellite(s)"
 msgstr "Тандалган жолдош(тор)ду көрсөтүү"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Displayed"
 msgstr "Көрсөтүлүп турат"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:694
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Тандалган жолдош(тор) үчүн орбита сызык(тар)ын көрсөтүү"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:696
+#: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "Orbit"
 msgstr "Орбита"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "Catalog number:"
 msgstr "Каталог номери:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:699
+#: plugins/Satellites/src/ui_satellitesDialog.h:693
 msgid "Description:"
 msgstr "Баяндама:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:694
 msgid "Groups:"
 msgstr "Топтор:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:702
+#: plugins/Satellites/src/ui_satellitesDialog.h:696
 msgid "Comma separated list of groups"
 msgstr "Үтүр менен бөлүнгөн топтор тизмеси"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:704
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "TLE data:"
 msgstr "TLE маалыматы:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:706
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid "NORAD two line element orbit data"
 msgstr "NORAD орбита маалыматынын эки жолдуу элементи"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Remove the selected satellites"
 msgstr "Тандалган жолдошторду алуу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:706
 msgid "Add more satellites"
 msgstr "Көбүрөөк жолдоштордон кошуу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Save changes"
 msgstr "Өзгөрүүлөрдү сактоо"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:721
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Add new source"
 msgstr "Жаңы булак кошуу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:728
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Remove selected source"
 msgstr "Тандалган булакты алуу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:725
 msgid "Sources"
 msgstr "Булактар"
 
@@ -6298,6 +6298,9 @@ msgstr "Экзопланеталар плагининин ырастоосу"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
 msgstr "Экзопланеталар маалыматын интернеттен жаңыртуу"
+
+#~ msgid "Night mode"
+#~ msgstr "Түнкү режим"
 
 #~ msgid "An object's name"
 #~ msgstr "Объект аты"
