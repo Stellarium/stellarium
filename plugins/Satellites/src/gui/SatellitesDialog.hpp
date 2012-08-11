@@ -22,10 +22,14 @@
 #define _SATELLITESDIALOG_HPP_
 
 #include <QObject>
+#include <QModelIndex>
 #include "StelDialog.hpp"
 #include "Satellites.hpp"
 
 class Ui_satellitesDialog;
+class QListWidgetItem;
+class QSortFilterProxyModel;
+class QStandardItemModel;
 class QTimer;
 class SatellitesImportDialog;
 
@@ -46,10 +50,13 @@ public slots:
 	void refreshUpdateValues(void);
 
 private slots:
+	//! Populates the satellites list, filtering it according to group.
+	//! @param index selection index of the groups drop-down list.
+	//! @todo Rework to use a proper model and filtering via a proxy model?
 	void listSatelliteGroup(int index);
-	//! Reloads the satellites list with the currently selected group.
+	//! Populates the satellites list with the currently selected group.
 	void reloadSatellitesList();
-	void updateSelectedSatelliteInfo(QListWidgetItem* cur, QListWidgetItem* prev);
+	void updateSelectedInfo(const QModelIndex& cur, const QModelIndex& prev);
 	void saveSatellites(void);
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(int checkState);
@@ -65,7 +72,7 @@ private slots:
 	void removeSatellites();
 	void setDisplayFlag(bool display);
 	void setOrbitFlag(bool display);
-	void satelliteDoubleClick(QListWidgetItem* item);
+	void handleDoubleClick(const QModelIndex & index);
 	void setOrbitParams(void);
 	void updateTLEs(void);
 
@@ -81,6 +88,9 @@ private:
 	QTimer* updateTimer;
 	
 	SatellitesImportDialog* importWindow;
+	
+	QStandardItemModel* satellitesModel;
+	QSortFilterProxyModel* filterProxyModel;
 };
 
 #endif // _SATELLITESDIALOG_HPP_

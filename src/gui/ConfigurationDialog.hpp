@@ -32,7 +32,6 @@ class QDataStream;
 class QNetworkAccessManager;
 class QListWidgetItem;
 class StelGui;
-class CustomInfoDialog;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -45,6 +44,7 @@ public:
 
 public slots:
 	void retranslate();
+	void updateIconsColor();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -77,7 +77,11 @@ private slots:
 	void setNoSelectedInfo(void);
 	void setAllSelectedInfo(void);
 	void setBriefSelectedInfo(void);
-	void setCustomSelectedInfo(void);
+	//! Set the selected object info fields from the "Displayed Fields" boxes.
+	//! Called when any of the boxes has been clicked. Sets the
+	//! "selected info" mode to "Custom".
+	void setSelectedInfoFromCheckBoxes();
+	
 	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	void setDiskViewport(bool);
@@ -131,16 +135,16 @@ private slots:
 	#endif
 	void setFixedDateTimeToCurrent();
 
-	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
-
-	void showCustomInfoDialog();
-
 private:
 	StelGui* gui;
 
 	int savedProjectionType;
-
-	CustomInfoDialog* customInfoDialog;
+	
+	//! Set the displayed fields checkboxes from the current displayed fields.
+	void updateSelectedInfoCheckBoxes();
+	//! Make sure that no tabs icons are outside of the viewport.
+	//! @todo Limit the width to the width of the screen *available to the window*.
+	void updateTabBarListWidgetWidth();
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_

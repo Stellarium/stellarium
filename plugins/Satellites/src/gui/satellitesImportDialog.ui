@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>398</width>
+    <height>298</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayoutMain">
@@ -78,7 +78,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string notr="false" extracomment="The title of the window will be set during runtime">More Satellites</string>
+         <string extracomment="The title of the window will be set during runtime">More Satellites</string>
         </property>
        </widget>
       </item>
@@ -123,7 +123,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="pageStart">
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -186,40 +186,42 @@
            <number>0</number>
           </property>
           <item row="2" column="0">
-           <widget class="QPushButton" name="pushButtonAdd">
+           <widget class="QPushButton" name="pushButtonMarkAll">
             <property name="text">
-             <string>Add</string>
+             <string>Mark all</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
+           <widget class="QPushButton" name="pushButtonMarkNone">
+            <property name="text">
+             <string>Mark none</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
            <widget class="QPushButton" name="pushButtonDiscard">
             <property name="text">
              <string>Discard</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
+          <item row="3" column="0" colspan="3">
+           <widget class="QPushButton" name="pushButtonAdd">
+            <property name="text">
+             <string>Add</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
            <widget class="QListView" name="listView">
             <property name="uniformItemSizes">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="0" column="0" colspan="2">
-           <widget class="QLineEdit" name="lineEditSearch">
-            <property name="styleSheet">
-             <string notr="true">QLineEdit {
-	margin: 0px 0px 4px 0px;
-	padding: 4px;
-	padding-left: 32px;
-	background-image: url(:/graphicGui/searchBoxBackground.png);
-	background-repeat: none;
-	background-position: center left;
-	border: none;
-}/* Stolen from the #citySearchLineEdit widget. */</string>
-            </property>
-           </widget>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLineEdit" name="lineEditSearch"/>
           </item>
          </layout>
         </widget>
@@ -241,9 +243,12 @@
  <tabstops>
   <tabstop>pushButtonGetData</tabstop>
   <tabstop>pushButtonAbort</tabstop>
+  <tabstop>lineEditSearch</tabstop>
   <tabstop>listView</tabstop>
-  <tabstop>pushButtonAdd</tabstop>
+  <tabstop>pushButtonMarkAll</tabstop>
+  <tabstop>pushButtonMarkNone</tabstop>
   <tabstop>pushButtonDiscard</tabstop>
+  <tabstop>pushButtonAdd</tabstop>
  </tabstops>
  <resources/>
  <connections/>

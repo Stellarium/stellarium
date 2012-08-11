@@ -70,7 +70,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
 	absoluteMagnitude = 0;
-	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
+	slopeParameter = -1;//== uninitialized: used in getVMagnitude()	
 
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -130,6 +130,11 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 MinorPlanet::~MinorPlanet()
 {
 	//Do nothing for the moment
+}
+
+void MinorPlanet::setSemiMajorAxis(double value)
+{
+	semiMajorAxis = value;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -235,7 +240,11 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	}
 
 	if (flags&Size)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
+		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true)) << "<br>";
+
+	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
+	if ((flags&Extra1) && (semiMajorAxis>0))
+		oss << q_("Orbital period: %1 days").arg(QString::number(StelUtils::calculateOrbitalPeriod(semiMajorAxis), 'f', 0)) << "<br>";
 
 	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
 	/*
