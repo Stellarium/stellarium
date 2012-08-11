@@ -321,8 +321,12 @@ SphericalRegionP SphericalRegion::getSubtractionDefault(const SphericalRegion* r
 void appendTriangle(StelVertexBuffer<SphericalRegion::PlainVertex>* buffer, 
                     const Triplet<Vec3f>& vertices, const Triplet<Vec2f>* texCoords)
 {
+#ifndef NDEBUG
 	Q_ASSERT_X(texCoords == NULL, Q_FUNC_INFO,
 	           "Got texCoords even though building buffer without texture coords");
+#else
+	Q_UNUSED(texCoords);
+#endif
 	buffer->addVertex(SphericalRegion::PlainVertex(vertices.a));
 	buffer->addVertex(SphericalRegion::PlainVertex(vertices.b));
 	buffer->addVertex(SphericalRegion::PlainVertex(vertices.c));

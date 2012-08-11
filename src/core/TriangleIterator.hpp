@@ -30,6 +30,7 @@ public:
 	TriangleIterator(const QVector<V>& vertices, const PrimitiveType primitiveType)
 		: vertices(vertices)
 		, primitiveType(primitiveType)
+		, currentVertex(0)
 	{
 		Q_ASSERT_X(vertices.size() != 1 && vertices.size() != 2, Q_FUNC_INFO,
 		           "A vertex array containing triangles of any primitive type must not "
