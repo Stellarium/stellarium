@@ -38,6 +38,8 @@ ENDIF()
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
+	core/StelVideoMgr.hpp
+	core/StelVideoMgr.cpp
 	core/StelGeodesicGrid.cpp
 	core/StelGeodesicGrid.hpp
 	core/StelMovementMgr.cpp
@@ -335,6 +337,7 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
 	core/StelAudioMgr.hpp
+	core/StelVideoMgr.hpp
 	core/StelModuleMgr.hpp
 	core/StelObjectMgr.hpp
 	core/StelObserver.hpp
@@ -412,8 +415,6 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/AddRemoveLandscapesDialog.cpp
 		gui/AtmosphereDialog.hpp
 		gui/AtmosphereDialog.cpp
-                gui/CustomInfoDialog.hpp
-                gui/CustomInfoDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -433,7 +434,6 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ConfigurationDialog.hpp
 		gui/AddRemoveLandscapesDialog.hpp
 		gui/AtmosphereDialog.hpp
-                gui/CustomInfoDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -445,7 +445,6 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
 	gui/AtmosphereDialog.ui
-        gui/CustomInfoDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)
@@ -589,6 +588,11 @@ ENDIF()
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Pulsars/src/${CMAKE_CFG_INTDIR}/libPulsars.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_PULSARS)
   ENDIF()
+  
+  IF (USE_PLUGIN_EXOPLANETS)
+    SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/${CMAKE_CFG_INTDIR}/libExoplanets.a")
+    ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_EXOPLANETS)
+  ENDIF()
 
   IF (USE_PLUGIN_SVMT)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/svmt/src/${CMAKE_CFG_INTDIR}/libSVMT.a)
@@ -618,6 +622,15 @@ ENDIF()
 IF(WIN32)
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a)
 ENDIF()
+
+IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
+  IF(RC_COMPILER_PATH)
+    ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_BINARY_DIR}/stellarium-rc.o
+                       COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
+                       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
+    SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
+  ENDIF(RC_COMPILER_PATH)
+ENDIF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})

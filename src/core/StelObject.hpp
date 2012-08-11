@@ -20,6 +20,7 @@
 #ifndef _STELOBJECT_HPP_
 #define _STELOBJECT_HPP_
 
+#include <QFlags>
 #include <QString>
 #include "VecMath.hpp"
 #include "StelObjectType.hpp"
@@ -38,7 +39,8 @@ public:
 	//! filter results of getInfoString. The precise definition of these should
 	//! be documented in the getInfoString documentation for the derived classes
 	//! for all specifiers which are defined in that derivative.
-	enum InfoStringGroup
+	//! Use InfoStringGroup instead.
+	enum InfoStringGroupFlags
 	{
 		Name          = 0x00000001, //!< An object's name
 		CatalogNumber = 0x00000002, //!< Catalog numbers
@@ -55,11 +57,13 @@ public:
 		HourAngle     = 0x00001000,  //!< The hour angle + DE (of date)
 		AbsoluteMagnitude = 0x00002000  //!< The absolute magnitude
 	};
+	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
+	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup ShortInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000);
+	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() {}
 
@@ -147,5 +151,7 @@ protected:
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(StelObject::InfoStringGroup)
 
 #endif // _STELOBJECT_HPP_

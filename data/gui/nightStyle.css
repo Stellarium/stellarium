@@ -183,6 +183,7 @@ QPushButton#pushButtonGotoSearchSkyObject {
 	border-radius: 0px;
 	border-left: none;
 	padding: 2px;
+	image: url(:/graphicGui/nv_searchButtonImage.png);
 }
 
 QFrame#completionLabel {
@@ -223,12 +224,37 @@ QPushButton:flat {
 QPushButton#closeStelWindow {
 	border: 0px;
 	background: none;
-	background-image: url(:/graphicGui/closeButton.png);
+        background-image: url(:/graphicGui/nv_closeButton.png);
 }
 
 QPushButton:hover#closeStelWindow {
-	background-image: url(:/graphicGui/closeButton-hover.png);
+        background-image: url(:/graphicGui/nv_closeButton-hover.png);
 }
+
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {
+        image: url(:/graphicGui/nv_spinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown {
+        image: url(:/graphicGui/nv_spindown.png);
+}
+
+QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {
+        image: url(:/satellites/nv_bt_delete.png);
+}
+
+QPushButton#addSatellitesButton , QPushButton#addSourceButton {
+        image: url(:/satellites/nv_bt_add.png);
+}
+
+QPushButton#commsButton {
+        image: url(:/satellites/nv_bt_comms_off.png);
+}
+
+QPushButton#saveSatellitesButton {
+        image: url(:/graphicGui/nv_filesave.png);
+}
+
 
 /**********************************************LocationDialog*******************************************************/
 
@@ -236,7 +262,7 @@ QLineEdit#citySearchLineEdit {
 	margin: 0px 0px 4px 0px;
 	padding: 4px;
 	padding-left: 32px;
-	background-image: url(:/graphicGui/searchBoxBackground.png);
+        background-image: url(:/graphicGui/nv_searchBoxBackground.png);
 	background-repeat: none;
 	background-position: center left;
 	border: none;
@@ -499,6 +525,10 @@ QListView::item#stackListWidget {
 QCheckBox {
 	color: rgb(3, 3, 3);
 	background: none;
+}
+
+QCheckBox:disabled {
+        color: rgb(100, 0, 0);
 }
 
 QCheckBox::indicator {
@@ -788,6 +818,25 @@ QHeaderView::section {
 QFileDialog {
 	background: rgb(35, 0, 0);
 }
+
+#configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {
+        image: url(:/graphicGui/nv_folder.png);
+}
+
+#configurationDialogForm QPushButton#getStarsButton {
+        image: url(:/graphicGui/nv_btTimeRealtime-off.png);
+}
+
+QLineEdit#lineEditSearch {
+	margin: 0px 0px 4px 0px;
+	padding: 4px;
+	padding-left: 32px;
+	background-image: url(:/graphicGui/nv_searchBoxBackground.png);
+	background-repeat: none;
+	background-position: center left;
+	border: none;
+}
+
 /**** The following are used for Satellites ****/
 QListWidget#satellitesList, QListWidget#sourceList {
 		font-size: 8pt;

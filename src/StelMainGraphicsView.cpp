@@ -113,19 +113,14 @@ Q_IMPORT_PLUGIN(Quasars)
 Q_IMPORT_PLUGIN(Pulsars)
 #endif
 
-<<<<<<< TREE
 #ifdef USE_STATIC_PLUGIN_EXOPLANETS
 Q_IMPORT_PLUGIN(Exoplanets)
-=======
-#ifdef USE_STATIC_PLUGIN_OBSERVABILITY
-Q_IMPORT_PLUGIN(Observability)
->>>>>>> MERGE-SOURCE
 #endif
 
-<<<<<<< TREE
-=======
+#ifdef USE_STATIC_PLUGIN_OBSERVABILITY
+Q_IMPORT_PLUGIN(Observability)
+#endif
 
->>>>>>> MERGE-SOURCE
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
