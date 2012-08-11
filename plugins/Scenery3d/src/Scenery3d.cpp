@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "Scenery3d.hpp"
+
 
 // GZ: Apparently Qt4.8 conflicts with GLee, but provides QGLFunctions.
 // This solution here works at least for Qt4.8.1/QCreator/Win32/NVidia.
@@ -30,6 +30,7 @@
 #include <GLee.h>
 #endif
 
+#include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -1072,6 +1073,7 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     //Find maxZ, minZ for current split
     Vec3f v = verts[0];
     Vec4f tmp = lightMV * Vec4f(v[0], v[1], v[2], 1.0f);
+
     minZ = tmp.v[2];
     maxZ = tmp.v[2];
 
