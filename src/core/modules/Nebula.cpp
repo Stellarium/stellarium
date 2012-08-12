@@ -172,7 +172,9 @@ double Nebula::getCloseViewFov(const StelCore*) const
 
 void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintTextures& hintTextures)
 {
-	if (mag>maxMagHints)
+	float lim = mag;
+	if (lim > 50) lim = 15.f;
+	if (lim>maxMagHints)
 		return;
 	renderer->setBlendMode(BlendMode_Add);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
@@ -202,7 +204,9 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintText
 
 void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float maxMagLabel)
 {
-	if (mag>maxMagLabel)
+	float lim = mag;
+	if (lim > 50) lim = 15.f;
+	if (lim>maxMagLabel)
 		return;
 	renderer->setGlobalColor(Vec4f(labelColor[0], labelColor[1], labelColor[2], hintsBrightness));
 	float size = getAngularSize(NULL) * M_PI / 180.0 * projector->getPixelPerRadAtCenter();

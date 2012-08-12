@@ -108,7 +108,9 @@ void SupernovaeDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("A plugin that shows some historical supernovae brighter than visual magnitude 10: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).") + "</p>";
+	html += "<p>" + q_("A plugin that shows some historical supernovae brighter than visual magnitude 10: ");
+	html += GETSTELMODULE(Supernovae)->getSupernovaeList();
+	html += ".</p>";
 
 	html += "<h3>" + q_("Light curves") + "</h3>";
 	html += "<p>" + QString(q_("This plugin implements a simple model of light curves for different supernovae. Typical views of light curves for type I and type II supernova can be seen %1here%2 (right scale in days), and this model is used for this plugin.")).arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin#Light_curves\">").arg("</a>") + "</p>";

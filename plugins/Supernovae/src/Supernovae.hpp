@@ -28,6 +28,7 @@
 #include <QDateTime>
 #include <QList>
 #include <QSharedPointer>
+#include <QHash>
 
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -127,6 +128,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! get list of supernovae
+	QString getSupernovaeList();
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Supernovae::UpdateState state);
@@ -175,6 +179,7 @@ private:
 
 	class StelTextureNew* texPointer;
 	QList<SupernovaP> snstar;
+	QHash<QString, double> snlist;
 
 	// variables and functions for the updater
 	UpdateState updateState;
