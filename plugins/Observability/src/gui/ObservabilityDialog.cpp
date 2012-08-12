@@ -49,7 +49,6 @@ void ObservabilityDialog::retranslate()
 	if (dialog)
 		ui->retranslateUi(dialog);
 		setAboutHtml();
-
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -57,7 +56,7 @@ void ObservabilityDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Settings:
 	connect(ui->Today, SIGNAL(stateChanged(int)), this, SLOT(setTodayFlag(int)));
