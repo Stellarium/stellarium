@@ -272,6 +272,9 @@ namespace StelUtils
 		}
 		return Vec3f(max, 0, 0);
 	}
+
+	//! Calculate and getting orbital period in days from semi-major axis (in AU)
+	double calculateOrbitalPeriod(double SemiMajorAxis);
 }
 
 #endif // _STELUTILS_HPP_
