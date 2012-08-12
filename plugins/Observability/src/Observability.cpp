@@ -1345,7 +1345,7 @@ void Observability::readSettingsFromConfig(void)
 void Observability::saveSettingsToConfig(void)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString fontColorStr = q_("%1,%2,%3").arg(fontColor[0],0,'f',2).arg(fontColor[1],0,'f',2).arg(fontColor[2],0,'f',2);
+	QString fontColorStr = QString("%1,%2,%3").arg(fontColor[0],0,'f',2).arg(fontColor[1],0,'f',2).arg(fontColor[2],0,'f',2);
 	// Set updated values
 	conf->setValue("Observability/font_size", fontSize);
 	conf->setValue("Observability/Sun_Altitude", iAltitude);
