@@ -261,6 +261,19 @@ public:
 		return true;
 	}
 
+	virtual bool areFloatTexturesSupported() const 
+	{
+		// TODO:
+		// GL3 requires float texture support, but this still fails on open source 
+		// drivers that don't have float texture support due to patents.
+		//
+		// If possible, a better way of determining this should be used.
+		//
+		// Maybe we can get the GL vendor string and search for Mesa/Gallium3D specific 
+		// parts - but that would require someone with a lot of time to test various drivers.
+		return QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_3_0);
+	}
+
 	virtual bool areNonPowerOfTwoTexturesSupported() const {return true;}
 
 	virtual StelGLSLShader* createGLSLShader()
