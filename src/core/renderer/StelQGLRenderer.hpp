@@ -294,8 +294,12 @@ protected:
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
 
-	virtual class StelTextureBackend* createTextureBackend
+	virtual StelTextureBackend* createTextureBackend
 		(QImage& image, const TextureParams& params);
+
+	virtual StelTextureBackend* createTextureBackend
+		(const void* data, const QSize size, const TextureDataFormat format,
+		 const TextureParams& params);
 
 	virtual StelTextureBackend* getViewportTextureBackend()
 	{

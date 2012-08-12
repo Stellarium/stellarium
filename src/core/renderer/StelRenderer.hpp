@@ -89,6 +89,16 @@ enum StencilTest
 	StencilTest_DrawIf_1
 };
 
+//! Describes possible formats of texture data used with the raw data createTexture overload.
+//!
+//! Currently, this is only used for float textures, but 
+//! it can be expanded when needed.
+enum TextureDataFormat
+{
+	//! Every pixel is an RGBA color where each channel is a 32-bit float.
+	TextureDataFormat_RGBA_F32
+};
+
 //Notes:
 //
 //enable/disablePainting are temporary and will be removed
@@ -505,6 +515,58 @@ public:
 		return new StelTextureNew(this, createTextureBackend(image, params));
 	}
 
+	//! Create a texture from raw data.
+	//!
+	//! Used to load textures from image data unsupported by QImage,
+	//! e.g. floating point textures.
+	//!
+	//! @note If creating a floating point texture, use 
+	//! areFloatTexturesSupported() to determine if if floating 
+	//! point textures are supported.
+	//!
+	//! Texture created must be destroyed by the user before the 
+	//! Renderer that created it is destroyed.
+	//!
+	//! This method never fails, but the texture returned might have the Error status.
+	//! Even in that case, the texture can be bound, but a placeholder 
+	//! texture will be used internally instead.
+	//!
+	//! The texture is created immediately, as with TextureLoadingMode_Normal.
+	//!
+	//! @param data   Pointer to raw image data. Size of the data must be
+	//!               size.width() * size.height() * pixelSize, where 
+	//!               pixelSize is size of a pixel of specified format.
+	//! @param size   Size of the texture in pixels.
+	//! @param format Format of texture data.
+	//! @param params Texture parameters, such as filtering, wrapping, etc.
+	//!
+	//! @return New texture.
+	//!
+	//! @note Some renderer backends only support textures with power of two 
+	//!       dimensions (e.g. 512x512 or 2048x256). On these backends, loading 
+	//!       a texture with non-power-of-two dimensions will fail and result 
+	//!       in a StelTextureNew with status of TextureStatus_Error.
+	StelTextureNew* createTexture
+		(const void* const data, const QSize size, const TextureDataFormat format, 
+		 const TextureParams& params = TextureParams())
+	{
+		Q_ASSERT_X(NULL != data, Q_FUNC_INFO, "Trying to load a texture from a NULL pointer to data");
+		if(!areFloatTexturesSupported())
+		{
+			Q_ASSERT_X(format != TextureDataFormat_RGBA_F32, Q_FUNC_INFO,
+			           "Trying to load a floating-point texture even though "
+			           "float textures are not supported");
+		}
+		return new StelTextureNew(this, createTextureBackend(data, size, format, params));
+	}
+
+	//! Returns true if floating point textures are supported, false otherwise.
+	//!
+	//! @note With the OpenGL backend, floating point texture support 
+	//! currently can't always be determined correctly, in particular
+	//! on open source drivers. See StelQGL2Renderer::areFloatTexturesSupported.
+	virtual bool areFloatTexturesSupported() const = 0;
+
 	//! Get a texture of the viewport, with everything drawn to the viewport so far.
 	//!
 	//! @note Since some backends only support textures with power of two 
@@ -649,6 +711,7 @@ protected:
 		(const QString& filename, const TextureParams& params, 
 		 const TextureLoadingMode loadingMode) = 0;
 
+
 	//! Implementation of createTexture loading from image.
 	//!
 	//! Returns texture backend to be wrapped in a StelTextureNew.
@@ -657,6 +720,16 @@ protected:
 	//! @see createTexture
 	virtual class StelTextureBackend* createTextureBackend
 		(QImage& image, const TextureParams& params) = 0;
+
+	//! Implementation of createTexture loading from raw data.
+	//!
+	//! Returns texture backend to be wrapped in a StelTextureNew.
+	//! Must not fail, but can return a backend in error state.
+	//!
+	//! @see createTexture
+	virtual class StelTextureBackend* createTextureBackend
+		(const void* data, const QSize size, const TextureDataFormat format, 
+		 const TextureParams& params) = 0;
 
 	//! Implementation of getViewportTexture.
 	//!

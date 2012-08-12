@@ -21,6 +21,7 @@
 #define _STELQGLTEXTUREBACKEND_HPP_
 
 #include "StelGLUtilityFunctions.hpp"
+#include "StelRenderer.hpp"
 #include "StelTextureBackend.hpp"
 
 
@@ -103,6 +104,19 @@ public:
 	static StelQGLTextureBackend* fromViewport
 		(StelQGLRenderer* renderer, const QSize viewportSize, const QGLFormat& viewportFormat);
 
+	//! Construct a texture from raw data.
+	//!
+	//! Used to create textures from data Qt does not support, 
+	//! e.g. floating point textures.
+	//!
+	//! @param renderer Renderer this texture belongs to.
+	//! @param data     Pointer to the texture data.
+	//! @param size     Texture size in pixels.
+	//! @param format   Format of texture pixels stored in data.
+	//! @param params   Texture parameters (e.g. filtering, wrapping, etc.)
+	static StelQGLTextureBackend* fromRawData
+		(StelQGLRenderer* renderer, const void* data, const QSize size, 
+		 const TextureDataFormat format, const TextureParams& params);
 private slots:
 	//! Called by the loader when the image data has finished loading.
 	void onImageLoaded(QImage image);
@@ -125,6 +139,10 @@ private:
 	//! This is usually true, but false e.g. if the texture belongs to 
 	//! an FBO. If false, destructor won't delete the texture.
 	bool ownsTexture;
+	
+	//! If true, delete the texture directly through glDeleteTextures() instead of
+	//! QGLContext::deleteTexture().
+	bool deleteManually;
 
 	//! Used when asynchronously loading the texture, otherwise NULL.
 	class StelTextureLoader* loader;

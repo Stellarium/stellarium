@@ -83,6 +83,8 @@ public:
 		return true;
 	}
 
+	virtual bool areFloatTexturesSupported() const {return false;}
+
 	virtual bool areNonPowerOfTwoTexturesSupported() const {return false;}
 
 	virtual StelGLSLShader* createGLSLShader()
