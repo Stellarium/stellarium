@@ -500,6 +500,8 @@ void Oculars::init()
 		
 		guiPanelEnabled = settings->value("enable_control_panel", false).toBool();
 		enableGuiPanel(guiPanelEnabled);
+
+		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -615,7 +617,7 @@ void Oculars::enableGuiPanel(bool enable)
 		}
 	}
 	guiPanelEnabled = enable;
-	settings->setValue("enable_control_panel", enable);
+	settings->setValue("enable_control_panel", enable);	
 	settings->sync();
 }
 
@@ -1535,13 +1537,8 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	if (flagShowCCD) {
 		QString ccdSensorLabel, ccdInfoLabel;
 		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
-		QString stringFovX = QString::number(fovX);
-		stringFovX.append(QChar(0x00B0));//Degree sign
-		QString stringFovY = QString::number(fovY);
-		stringFovY.append(QChar(0x00B0));//Degree sign
-		QString fovDimensions = stringFovX + QChar(0x00D7) + stringFovY;
-		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(fovDimensions);
+		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;		
+		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
 		QString name = ccd->name();
 		if (name.isEmpty())
@@ -1784,4 +1781,54 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 	}
 
 	return submenu;
+}
+
+void Oculars::setFlagDecimalDegrees(const bool b)
+{
+	flagDecimalDegrees = b;
+	settings->setValue("use_decimal_degrees", b);	
+	settings->sync();
+}
+
+bool Oculars::getFlagDecimalDegrees() const
+{
+	return flagDecimalDegrees;
+}
+
+QString Oculars::getDimensionsString(double fovX, double fovY) const
+{
+	QString stringFovX, stringFovY;
+	if (getFlagDecimalDegrees())
+	{
+		if (fovX >= 1.0)
+		{
+			int degrees = (int)fovX;
+			int minutes = (int)((fovX - degrees) * 60);
+			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+		}
+		else
+		{
+			int minutes = (int)(fovX * 60);
+			stringFovX = QString::number(minutes) + QChar(0x2032);
+		}
+
+		if (fovY >= 1.0)
+		{
+			int degrees = (int)fovY;
+			int minutes = (int)((fovY - degrees) * 60);
+			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+		}
+		else
+		{
+			int minutes = (int)(fovY * 60);
+			stringFovY = QString::number(minutes) + QChar(0x2032);
+		}
+	}
+	else
+	{
+		stringFovX = QString::number(fovX) + QChar(0x00B0);
+		stringFovY = QString::number(fovY) + QChar(0x00B0);
+	}
+
+	return stringFovX + QChar(0x00D7) + stringFovY;
 }
