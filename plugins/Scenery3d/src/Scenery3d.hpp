@@ -244,22 +244,18 @@ private:
     void setSceneAABB(AABB* bbox);
     //Renders the Scene's AABB
     void renderSceneAABB(StelPainter &painter);
+    //Renders the Frustum
     void renderFrustum(StelPainter &painter);
     //Scene AABB
     AABB sceneBoundingBox;
     //Camera Frustum
     Frustum cFrust;
+    //Save the Frustum to be able to move away from it and analyze it
     void saveFrusts();
-    float debugMaxZ, debugMinZ;
-    Mat4f stelProj;
-
     //Holds the shadow maps
     GLuint* shadowMapsArray;
     //Holds the shadow transformation matrix per split
     Mat4f* shadowCPM;
-    Mat4f camProj;
-    Mat4f lightProj;
-    Mat4f cropMatrix;
     //Number of splits for CSM
     int frustumSplits;
     //Weight for splitting the frustums
@@ -278,8 +274,6 @@ private:
     void computeZDist(float zNear, float zFar);
     //Computes the focus body for given split
     void computePolyhedron(int splitIndex);
-    //Bools in case a split has no body
-    bool smap_0_set, smap_1_set, smap_2_set, smap_3_set;
     //Computes the crop matrix to focus the light
     void computeCropMatrix(int frustumIndex);
 };

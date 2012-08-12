@@ -27,6 +27,7 @@
 #include <GL/glext.h>
 #include <GL/glu.h>
 #else
+#include "Scenery3d.hpp"
 #include <GLee.h>
 #endif
 
