@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-10 20:41+0700\n"
-"PO-Revision-Date: 2012-08-09 14:46+0000\n"
+"PO-Revision-Date: 2012-08-12 00:09+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-11 05:18+0000\n"
+"X-Launchpad-Export-Date: 2012-08-12 04:44+0000\n"
 "X-Generator: Launchpad (build 15780)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -812,7 +812,7 @@ msgstr "Planetenbahnen"
 
 #: src/gui/StelGui.cpp:194
 msgid "Night vision mode"
-msgstr ""
+msgstr "Nachtsichtmodus"
 
 #: src/gui/StelGui.cpp:195
 msgid "Full-screen mode"
@@ -4079,6 +4079,13 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefore I "
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
+"Sie können das Bild am Bildschirm skalieren. Damit können Sie "
+"unterschiedliche Fernrohr-/Okularkombinationen ausprobieren. Dasselbe Okular "
+"in zwei verschiedenen Teleskopen mit unterschiedlichen Brennweiten erzeugt "
+"unterschiedliche Austrittspupillen, wodurch sich der Anblick ändert. Der "
+"Nachteil ist, dass bei skalierter Darstellung ein größerer Teil des "
+"Bildschirms verschwendet wird. Normalerweise empfehlen wir daher diese "
+"Option zu deaktivieren."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -4086,6 +4093,8 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"Sie können ein Fadenkreuz zuschalten. Es sollte eigentlich nord-orientiert "
+"sein, derzeit zeigt es aber nur am Bildschirm nach oben."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4095,6 +4104,10 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Sie können einen Telrad-Sucher zuschalten, aber nur wenn Okularansicht nicht "
+"aktiviert ist. Diese Funktion zeichnet konzentrische Kreise mit 0.5%1, 2.0%1 "
+"und 4.0%1 und zeigt damit, was man freisichtig mit einem Telrad-Sucher (oder "
+"ähnlichem) findet."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -4119,7 +4132,7 @@ msgstr "Schaltet den Okularüberzug ein/aus."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Öffnet das Popup-Navigationsmenü"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Enable only if an object is selected"
@@ -6148,7 +6161,7 @@ msgstr "Darstellungsweise für Quasare"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:256
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Aktiviert Anzeige der Quasar-Verteilung"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -6318,7 +6331,7 @@ msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Pushchino Radio Astronomy Observatory"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
@@ -6326,7 +6339,7 @@ msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Nancay Radioastronomical Observatory"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
@@ -6350,7 +6363,7 @@ msgstr "Darstellungsweise für Pulsare"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Aktiviert Anzeige der Pulsar-Verteilung"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
@@ -6452,22 +6465,24 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
+"Weitere Informationen zu diesem Plugin, Entwicklungsgeschichte und "
+"Katalogformat finden Sie %1hier%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Exoplaneten wurden aktualisiert"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:230
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Exoplaneten-Konfiguration"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:231
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguration für Exoplaneten-Plugin"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "Exoplaneten-Daten aus dem Internet aktualisieren"
 
 #~ msgid "Stars "
 #~ msgstr "Sterne "
