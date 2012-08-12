@@ -150,6 +150,15 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 	return StelQGLTextureBackend::constructFromImage(this, QString(), params, image);
 }
 
+StelTextureBackend* StelQGLRenderer::createTextureBackend
+	(const void* data, const QSize size, const TextureDataFormat format,
+	 const TextureParams& params)
+{
+	invariant();
+	return StelQGLTextureBackend::fromRawData(this, data, size, format, params);
+}
+
+
 void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 {
 	invariant();
@@ -437,8 +446,6 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	}
 	viewport.disablePainting();
 }
-
-
 
 
 void StelQGLRenderer::drawRectInternal

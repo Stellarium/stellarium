@@ -47,7 +47,7 @@ static QGLContext::BindOptions getTextureBindOptions(const TextureParams& params
 		default:
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture filtering mode");
 	}
-	//TODO investigate (maybe we're using deprecated stuff to generate mipmaps?)
+	// TODO investigate (maybe we're using deprecated stuff to generate mipmaps?)
 	// Mipmap seems to be pretty buggy on windows
 #ifndef Q_OS_WIN
 	if (params.autoGenerateMipmaps)
@@ -66,6 +66,7 @@ StelQGLTextureBackend::StelQGLTextureBackend
 	, renderer(renderer)
 	, glTextureID(0)
 	, ownsTexture(true)
+	, deleteManually(false)
 	, loader(NULL)
 {
 	invariant();
@@ -86,7 +87,15 @@ StelQGLTextureBackend::~StelQGLTextureBackend()
 		}
 		else if(ownsTexture)
 		{
-			renderer->getGLContext()->deleteTexture(glTextureID);
+			// Texture was uploaded manually, not through the QGL context object.
+			if(deleteManually)
+			{
+				glDeleteTextures(1, &glTextureID);
+			}
+			else
+			{
+				renderer->getGLContext()->deleteTexture(glTextureID);
+			}
 		}
 		glTextureID = 0;
 	}
@@ -253,6 +262,118 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 	return result;
 }
 
+StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
+	(StelQGLRenderer* renderer, const void* data, const QSize size, 
+	 const TextureDataFormat format, const TextureParams& params)
+{
+	StelQGLTextureBackend* result = 
+		new StelQGLTextureBackend(renderer, QString(), params);
+	result->startedLoading();
+
+	// Check if texture dimensions are acceptable for GL
+	if(!glTextureSizeWithinLimits(size))
+	{
+		result->errorOccured("fromRawData(): Texture size too large");
+		return result;
+	}
+	if(!renderer->areNonPowerOfTwoTexturesSupported() && 
+		(!StelUtils::isPowerOfTwo(size.width()) ||
+		 !StelUtils::isPowerOfTwo(size.height())))
+	{
+		result->errorOccured("fromRawData(): Failed to load because the image has "
+		                    "non-power-of-two width and/or height while the renderer "
+		                    "backend only supports power-of-two dimensions");
+		return result;
+	}
+
+	result->prepareContextForLoading();
+
+	// Create the GL texture object.
+	GLuint glTextureID;
+	// According to GL docs, this always succeeds.
+	glGenTextures(1, &glTextureID);
+	glBindTexture(GL_TEXTURE_2D, glTextureID);
+
+	// Set texture parameters.
+	switch(params.filteringMode)
+	{
+		case TextureFiltering_Nearest:
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		  	break;
+		case TextureFiltering_Linear:
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			break;
+		default:
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture filtering mode");
+	}
+	// TODO investigate if this is still buggy
+	// Mipmap seems to be pretty buggy on windows
+#ifndef Q_OS_WIN
+	if (params.autoGenerateMipmaps)
+	{
+		if(QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_1_4))
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+		}
+		else
+		{
+			qDebug() << "Ignoring automatic mipmap generation, requires OpenGL 1.4";
+		}
+	}
+#endif
+
+	// Determine GL texture format.
+	GLint internalFormat;
+	GLenum loadFormat, type;
+	switch(format)
+	{
+		case TextureDataFormat_RGBA_F32:
+			internalFormat = GL_RGBA32F;
+			loadFormat     = GL_RGBA;
+			type           = GL_FLOAT;
+			break;
+		default:
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
+			break;
+	}
+
+	// Flushes any previous errors.
+	checkGLErrors();
+	// Upload the texture
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.width(), size.height(), 0,
+	             loadFormat, type, data);
+
+	// Check for errors during upload.
+	const GLenum glError = glGetError();
+	if(glError == GL_INVALID_VALUE)
+	{
+		glDeleteTextures(1, &glTextureID);
+		result->errorOccured("fromRawData(): Failed with GL_INVALID_VALUE, "
+		                     "maybe the texture is too big?");
+		return result;
+	}
+	if(glError != GL_NO_ERROR)
+	{
+		glDeleteTextures(1, &glTextureID);
+		result->errorOccured("fromRawData(): Failed with an unknown error. "
+		                     "NOTE: THIS IS EITHER A BUG IN CODE (FORMAT MISMATCH?) "
+		                     "THAT NEEDS TO BE FIXED OR A NEW ERROR CONDITION THAT "
+		                     "NEEDS AN APPROPRIATE ERROR MESSAGE");
+		return result;
+	}
+
+	// Finish constructing the texture.
+	result->setTextureWrapping();
+	result->glTextureID = glTextureID;
+	result->deleteManually = true;
+	result->finishedLoading(size);
+
+	return result;
+}
+
+
 void StelQGLTextureBackend::onImageLoaded(QImage image)
 {
 	invariant();
@@ -289,9 +410,6 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 	// Shrink if needed.
 	glEnsureTextureSizeWithinLimits(image);
 
-	QGLContext* context = prepareContextForLoading();
-	glTextureID = context->bindTexture(image, GL_TEXTURE_2D, glGetPixelFormat(image),
-	                                   getTextureBindOptions(textureParams));
 	if(!renderer->areNonPowerOfTwoTexturesSupported() && 
 		(!StelUtils::isPowerOfTwo(image.width()) ||
 		 !StelUtils::isPowerOfTwo(image.height())))
@@ -302,6 +420,10 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 		invariant();
 		return;
 	}
+
+	QGLContext* context = prepareContextForLoading();
+	glTextureID = context->bindTexture(image, GL_TEXTURE_2D, glGetPixelFormat(image),
+	                                   getTextureBindOptions(textureParams));
 	if(glTextureID == 0)
 	{
 		errorOccured("loadFromImage(): Failed to load an image to a GL texture");
