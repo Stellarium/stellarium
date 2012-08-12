@@ -539,20 +539,11 @@ void Observability::draw(StelCore* core)
 					double tempPhs; //, tempSep;
 	
 					for (int i=0;i<nDays;i++) { // Maximize the Sun-object separation.
-//						tempSep = std::sin(ObjectDec[i])*std::sin(SunDec[i]);
-//						tempSep +=  std::cos(ObjectDec[i])*std::cos(SunDec[i])*std::cos((ObjectRA[i]-SunRA[i])/Rad2Hr);
-						tempPhs = Lambda(ObjectRA[i],ObjectDec[i],SunRA[i],SunDec[i]); //std::acos(tempSep);
+						tempPhs = Lambda(ObjectRA[i],ObjectDec[i],SunRA[i],SunDec[i]);
 						if (tempPhs>deltaPhs) {selday=i;deltaPhs=tempPhs;};
 					};
-					if (selName == "Mercury" or selName == "Venus") 
-					{
-						bestNight = q_("Largest separation to the Sun: ");
-					} else
-					{
-						bestNight = q_("Sun opposition: ");
-					}
-					bestNight = bestNight + CalenDate(selday); // Either opposition 
-					                  // or maximum distance to Sun (if Venus or Mercury).
+					bestNight = q_("Largest Sun separation: ");
+					bestNight = bestNight + CalenDate(selday) + q_("   (at %1 deg.)").arg(deltaPhs*Rad2Deg,0,'f',1);
 				};
 
 ///////////////////////////////
