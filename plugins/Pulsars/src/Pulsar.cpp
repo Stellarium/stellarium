@@ -354,7 +354,6 @@ void Pulsar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP project
 			if (GETSTELMODULE(Pulsars)->getDisplayMode())
 			{
 				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 10, 10);
-				renderer->drawText(TextParams(XYZ, projector, "").shift(shift, shift).useGravity());
 			}
 			else
 			{
