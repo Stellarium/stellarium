@@ -82,11 +82,7 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-        IF(APPLE)
-                SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
-        ELSE(APPLE)
-	        SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter -Wno-unused-but-set-parameter -Wno-unused-but-set-variable")
-        ENDIF(APPLE)
+        SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
 	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 ENDIF()
 

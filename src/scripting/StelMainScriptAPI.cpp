@@ -619,6 +619,11 @@ QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 	map.insert("altitude", alt*180./M_PI);
 	map.insert("azimuth", azi*180./M_PI);
 
+	pos = obj->getAltAzPosGeometric(StelApp::getInstance().getCore());
+	StelUtils::rectToSphe(&azi, &alt, pos);
+	map.insert("altitude-geometric", alt*180./M_PI);
+	map.insert("azimuth-geometric", azi*180./M_PI);
+
 	return map;
 }
 
