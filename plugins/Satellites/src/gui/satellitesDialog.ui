@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>528</width>
-    <height>496</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -654,10 +654,6 @@
              <property name="toolTip">
               <string>Remove the selected satellites</string>
              </property>
-             <property name="icon">
-              <iconset resource="../../resources/Satellites.qrc">
-               <normaloff>:/satellites/bt_delete.png</normaloff>:/satellites/bt_delete.png</iconset>
-             </property>
             </widget>
            </item>
            <item>
@@ -670,10 +666,6 @@
              </property>
              <property name="toolTip">
               <string>Add more satellites</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../../resources/Satellites.qrc">
-               <normaloff>:/satellites/bt_add.png</normaloff>:/satellites/bt_add.png</iconset>
              </property>
             </widget>
            </item>
@@ -690,11 +682,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../../resources/Satellites.qrc">
-               <normaloff>:/satellites/bt_comms_off.png</normaloff>
-               <normalon>:/satellites/bt_comms_on.png</normalon>:/satellites/bt_comms_off.png</iconset>
              </property>
              <property name="checkable">
               <bool>true</bool>
@@ -717,10 +704,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../../../../data/gui/guiRes.qrc">
-               <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
              </property>
             </widget>
            </item>
@@ -762,10 +745,6 @@
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-            <iconset resource="../../resources/Satellites.qrc">
-             <normaloff>:/satellites/bt_add.png</normaloff>:/satellites/bt_add.png</iconset>
-           </property>
           </widget>
          </item>
          <item>
@@ -775,10 +754,6 @@
            </property>
            <property name="text">
             <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../../resources/Satellites.qrc">
-             <normaloff>:/satellites/bt_delete.png</normaloff>:/satellites/bt_delete.png</iconset>
            </property>
           </widget>
          </item>
@@ -855,9 +830,6 @@
   <tabstop>deleteSourceButton</tabstop>
   <tabstop>aboutTextBrowser</tabstop>
  </tabstops>
- <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
-  <include location="../../resources/Satellites.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
