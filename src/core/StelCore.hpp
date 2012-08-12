@@ -265,6 +265,8 @@ public slots:
 	QString getDefaultLocationID() const;
 	//! Set the location to use by default at startup
 	void setDefaultLocationID(const QString& id);
+	//! Return to the default location.
+	void returnToDefaultLocation();
 
 	//! Set the current date in Julian Day
 	void setJDay(double JD);

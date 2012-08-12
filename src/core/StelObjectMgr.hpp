@@ -126,8 +126,6 @@ public:
 	//! Default to 1.
 	void setDistanceWeight(float newDistanceWeight) {distanceWeight=newDistanceWeight;}
 
-	int getCustomInfoString(void);
-
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
