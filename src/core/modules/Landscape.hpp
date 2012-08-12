@@ -107,6 +107,7 @@ protected:
 	const float radius;
 	QString name;
 	float skyBrightness;
+	float nightBrightness;
 	bool validLandscape;   // was a landscape loaded properly?
 	LinearFader landFader;
 	LinearFader fogFader;

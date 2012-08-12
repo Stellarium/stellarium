@@ -412,21 +412,21 @@ void addStar(StelVertexBuffer<V>* vertices, StelIndexBuffer* indices,
 // Draw a point source halo.
 bool StelSkyDrawer::drawPointSource
 	(StelProjectorP projector, const Vec3d& v, const float rcMag[2],
-	 const Vec3f& color, bool checkInScreen)
+	 const Vec3f& bcolor, bool checkInScreen)
 {
 	Q_ASSERT_X(drawing, Q_FUNC_INFO,
 	           "Attempting to draw a point source without calling preDrawPointSource first.");
-
 	const float radius    = rcMag[0];
 	const float luminance = rcMag[1];
 
 	if (radius <= 0.0f){return false;}
-
 	Vec3d win;
 	const bool validProjection = checkInScreen ? projector->projectCheck(v, win) 
 	                                           : projector->project(v, win);
 	if (!validProjection){return false;}
 
+	const Vec3f color = StelApp::getInstance().getVisionModeNight() 
+	                  ? Vec3f(bcolor[0], 0, 0) : bcolor;
 	// Random coef for star twinkling
 	const float tw = (flagStarTwinkle && flagHasAtmosphere) 
 	                 ? (1.0f - twinkleAmount * rand() / RAND_MAX) * luminance

@@ -349,7 +349,10 @@ float Planet::getSelectPriority(const StelCore* core) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.4) : ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
+	Vec3f col = ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
+	if (StelApp::getInstance().getVisionModeNight())
+		col = StelUtils::getNightColor(col);
+	return col;
 }
 
 
@@ -939,6 +942,11 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer,
 			light.position = Vec3f(sunPos[0], sunPos[1], sunPos[2]);
 			light.ambient  = Vec4f(0.02f, 0.02f, 0.02f, 0.02f);
 			light.diffuse  = Vec4f(2.0f, 2.0f, 2.0f, 1.0f);
+			if (StelApp::getInstance().getVisionModeNight())
+			{
+				light.diffuse[1] = 0.; light.diffuse[2] = 0.;
+				light.ambient[1] = 0.; light.ambient[2] = 0.;
+			}
 		}
 
 		if (rings)
@@ -1008,7 +1016,6 @@ void Planet::drawUnlitSphere(StelRenderer* renderer, StelProjectorP projector)
 	unlitSphere->draw(renderer, projector);
 }
 
-
 void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
                         const StelLight* light, StelGLSLShader* shader, float screenSz)
 {
@@ -1029,7 +1036,9 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 	// Lighting is disabled, so just draw the plain sphere.
 	if(NULL == light)
 	{
-		renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
+		const Vec4f color = StelApp::getInstance().getVisionModeNight()
+		                  ? Vec4f(1.f, 0.f, 0.f, 1.0f) : Vec4f(1.f, 1.f, 1.f, 1.0f);
+		renderer->setGlobalColor(color);
 		drawUnlitSphere(renderer, projector);
 	}
 	// Do the lighting on shader, avoiding the need to regenerate the sphere.
@@ -1050,7 +1059,7 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 			projector->getModelViewTransform()->backward(lightPos);
 			lightPos.normalize();
 
-			shader->setUniformValue("lightPos"           , Vec3f(lightPos[0]                          , lightPos[1] , lightPos[2]));
+			shader->setUniformValue("lightPos"           , Vec3f(lightPos[0], lightPos[1] , lightPos[2]));
 			shader->setUniformValue("diffuseLight"       , light->diffuse);
 			shader->setUniformValue("ambientLight"       , light->ambient);
 			shader->setUniformValue("radius"             , static_cast<float>(radius * sphereScale));
@@ -1244,8 +1253,10 @@ void Ring::draw(StelProjectorP projector, StelRenderer* renderer,
 	const int stacks = 8+(int)((32-8)*screenSz);
 
 	renderer->setBlendMode(BlendMode_Alpha);
-	renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
 	renderer->setCulledFaces(CullFace_Back);
+	const Vec4f color = StelApp::getInstance().getVisionModeNight()
+	                  ? Vec4f(1.f, 0.f, 0.f, 1.0f) : Vec4f(1.f, 1.f, 1.f, 1.0f);
+	renderer->setGlobalColor(color);
 
 	texture->bind();
 

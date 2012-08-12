@@ -72,7 +72,7 @@ public:
 		return drawPointSource(projector, v, rcMag, colorTable[bV], checkInScreen);
 	}
 
-	bool drawPointSource(StelProjectorP projector, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
+	bool drawPointSource(StelProjectorP projector, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen=false);
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param projector Projector to use for this drawing operation

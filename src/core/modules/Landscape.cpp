@@ -32,7 +32,7 @@
 #include <QSettings>
 #include <QVarLengthArray>
 
-Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), angleRotateZOffset(0.)
+Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), nightBrightness(0.8), angleRotateZOffset(0.)
 {
 	validLandscape = 0;
 }
@@ -491,15 +491,12 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelRenderer* renderer)
 	StelProjector::ModelViewTranformP transform =
 		core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
-
 	StelProjectorP projector = core->getProjection(transform);
 
-	const float nightModeFilter =
-	  	StelApp::getInstance().getVisionModeNight() ? 0.0f : 1.0f;
-	renderer->setGlobalColor(Vec4f(skyBrightness,
-	                               skyBrightness * nightModeFilter,
-	                               skyBrightness * nightModeFilter,
-	                               landFader.getInterstate()));
+	const Vec4f color = StelApp::getInstance().getVisionModeNight() 
+	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
+	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	renderer->setGlobalColor(color);
 
 	// Lazily generate decoration sides.
 	if(precomputedSides.empty())
@@ -555,11 +552,11 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelRenderer* renderer)
 		 Mat4d::translation(Vec3d(0.0, 0.0, vshift)));
 
 	StelProjectorP projector = core->getProjection(transform);
-	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.0f : 1.0f;
-	renderer->setGlobalColor(Vec4f(skyBrightness,
-	                               skyBrightness * nightModeFilter,
-	                               skyBrightness * nightModeFilter,
-	                               landFader.getInterstate()));
+
+	const Vec4f color = StelApp::getInstance().getVisionModeNight()
+	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
+	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	renderer->setGlobalColor(color);
 
 	groundTex->bind();
 
@@ -637,15 +634,10 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
 	const StelProjectorP projector = core->getProjection(transform);
-
-	renderer->setBlendMode(BlendMode_Alpha);
-	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
-
-	renderer->setGlobalColor(Vec4f(skyBrightness,
-	                               skyBrightness * nightModeFilter,
-	                               skyBrightness * nightModeFilter,
-	                               landFader.getInterstate()));
-
+	const Vec4f color = StelApp::getInstance().getVisionModeNight()
+	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
+	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	renderer->setGlobalColor(color);
 	renderer->setCulledFaces(CullFace_Back);
 	renderer->setBlendMode(BlendMode_Alpha);
 	mapTex->bind();
@@ -724,16 +716,13 @@ void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
 	const StelProjectorP projector = core->getProjection(transform);
 
 	renderer->setBlendMode(BlendMode_Alpha);
-	const float nightModeFilter =
-	  	StelApp::getInstance().getVisionModeNight() ? 0.0f : 1.0f;
-	renderer->setGlobalColor(Vec4f(skyBrightness,
-	                               skyBrightness * nightModeFilter,
-	                               skyBrightness * nightModeFilter,
-	                               landFader.getInterstate()));
 
+	const Vec4f color = StelApp::getInstance().getVisionModeNight()
+	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
+	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	renderer->setGlobalColor(color);
 	renderer->setCulledFaces(CullFace_Back);
 	mapTex->bind();
-
 
 	landscapeSphere->draw(renderer, projector);
 	// TODO: verify that this works correctly for custom projections

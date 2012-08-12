@@ -213,6 +213,10 @@ void Constellation::drawArtOptim
 	{
 		artTexture->bind();
 		renderer->setGlobalColor(Vec4f(intensity, intensity, intensity, 1.0f));
+		if (StelApp::getInstance().getVisionModeNight())
+			renderer->setGlobalColor(intensity, 0.0, 0.0);
+		else
+			renderer->setGlobalColor(intensity,intensity,intensity);
 		renderer->drawVertexBuffer(artVertices, artIndices, projector);
 	}
 	renderer->setCulledFaces(CullFace_None);

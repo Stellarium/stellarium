@@ -176,7 +176,9 @@ void SolarSystem::drawPointer(const StelCore* core, StelRenderer* renderer)
 		if (!prj->project(pos, screenpos))
 			return;
 
-		renderer->setGlobalColor(Vec4f(1.0f, 0.3f, 0.3f, 1.0f));
+		const Vec4f color = StelApp::getInstance().getVisionModeNight()
+		                  ? Vec4f(1.0f,0.0f,0.0f,1.0f) : Vec4f(1.0f,0.3f,0.3f,1.0f);
+		renderer->setGlobalColor(color);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
