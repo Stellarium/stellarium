@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>398</width>
+    <height>298</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayoutMain">
@@ -122,6 +122,9 @@
    </item>
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
      <widget class="QWidget" name="pageStart">
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="spacing">
@@ -218,19 +221,7 @@
            </widget>
           </item>
           <item row="0" column="0" colspan="3">
-           <widget class="QLineEdit" name="lineEditSearch">
-            <property name="styleSheet">
-             <string notr="true">QLineEdit {
-	margin: 0px 0px 4px 0px;
-	padding: 4px;
-	padding-left: 32px;
-	background-image: url(:/graphicGui/searchBoxBackground.png);
-	background-repeat: none;
-	background-position: center left;
-	border: none;
-}/* Stolen from the #citySearchLineEdit widget. */</string>
-            </property>
-           </widget>
+           <widget class="QLineEdit" name="lineEditSearch"/>
           </item>
          </layout>
         </widget>
