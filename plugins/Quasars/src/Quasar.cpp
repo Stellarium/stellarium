@@ -17,6 +17,7 @@
  */
 
 #include "Quasar.hpp"
+#include "Quasars.hpp"
 #include "StelObject.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -32,6 +33,7 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+
 
 Quasar::Quasar(const QVariantMap& map)
 		: initialized(false)
@@ -165,32 +167,51 @@ void Quasar::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Quasar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Quasar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, StelTextureNew* markerTexture)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
+	const Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
+	const Vec3f dcolor = Vec3f(1.2f,0.5f,0.4f);
 	float rcMag[2], size, shift;
 	double mag;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
 	mag = getVMagnitude(core, true);	
-	sd->preDrawPointSource();
-	
-	if (mag <= sd->getLimitMagnitude())
+
+	if (GETSTELMODULE(Quasars)->getDisplayMode())
 	{
-		sd->computeRCMag(mag, rcMag);
-		sd->drawPointSource(projector, XYZ, rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
-		renderer->setGlobalColor(color[0], color[1], color[2], 1.0f);
+		renderer->setBlendMode(BlendMode_Add);
+		renderer->setGlobalColor(dcolor[0], dcolor[1], dcolor[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
-		shift = 6.f + size/1.8f;
+		shift = 5.f + size/1.6f;
+		markerTexture->bind();
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+			Vec3d win;
+			projector->project(XYZ, win);
+			renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
 		}
 	}
+	else
+	{
+		sd->preDrawPointSource();
+	
+		if (mag <= sd->getLimitMagnitude())
+		{
+			sd->computeRCMag(mag, rcMag);
+			sd->drawPointSource(projector, XYZ, rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
+			renderer->setGlobalColor(color[0], color[1], color[2], 1.0f);
+			size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
+			shift = 6.f + size/1.8f;
+			if (labelsFader.getInterstate()<=0.f)
+			{
+				renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+			}
+		}
 
-	sd->postDrawPointSource(projector);
+		sd->postDrawPointSource(projector);
+	}
 }
 
 unsigned char Quasar::BvToColorIndex(float b_v)

@@ -353,7 +353,7 @@ void Pulsar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP project
 			projector->project(XYZ, win);
 			if (GETSTELMODULE(Pulsars)->getDisplayMode())
 			{
-				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 10, 10);
+				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
 			}
 			else
 			{
