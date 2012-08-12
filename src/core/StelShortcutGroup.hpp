@@ -24,16 +24,20 @@
 #include <QMap>
 #include <QAction>
 
+QT_FORWARD_DECLARE_CLASS(StelShortcutGroup)
+
 class StelShortcut : public QObject
 {
 	Q_OBJECT
 public:
-	StelShortcut(const QString& id, const QString& text, const QString& primaryKey, const QString& altKey,
+	StelShortcut(const QString& id, StelShortcutGroup* group, const QString& text,
+							 const QString& primaryKey, const QString& altKey,
 							 bool checkable, bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = NULL);
 
 	~StelShortcut();
 
 	QAction* getAction() const { return m_action; }
+	StelShortcutGroup* getGroup() const { return m_group; }
 
 	QString getId() const { return m_id; }
 	QString getText() const { return m_text; }
@@ -41,7 +45,7 @@ public:
 	QKeySequence getAltKey() const { return m_altKey; }
 	bool isTemporary() const { return m_temporary; }
 
-	QVariant toQVariant();
+	QVariant toQVariant() const;
 
 	void setText(const QString& text);
 	void setPrimaryKey(const QKeySequence& key);
@@ -54,13 +58,18 @@ public:
 	void setScriptPath(const QString& scriptPath);
 
 signals:
+	void shortcutChanged(StelShortcut* shortcut);
 
 public slots:
-	void runScript();
-	void updateShortcuts();
+	void runScript() const;
+
+protected slots:
+	void updateActionShortcuts();
 
 private:
 	QAction* m_action;
+	StelShortcutGroup* m_group;
+
 	QString m_id;
 	QString m_text;
 	QKeySequence m_primaryKey;
@@ -81,7 +90,10 @@ class StelShortcutGroup : public QObject
 	Q_OBJECT
 public:
 	StelShortcutGroup(QString id, QString text = "");
-	QAction* registerAction(const QString& actionId, const QString& text, const QString& primaryKey,
+
+	~StelShortcutGroup();
+
+	QAction* registerAction(const QString& actionId, bool temporary, const QString& text, const QString& primaryKey,
 													const QString& altKey, bool checkable, bool autoRepeat = true,
 													bool global = false, QGraphicsWidget *parent = false);
 
@@ -93,9 +105,10 @@ public:
 	QString getText() const { return m_text; }
 	bool isEnabled() const { return m_enabled; }
 
-	QVariant toQVariant();
+	QVariant toQVariant() const;
 
 signals:
+	void shortcutChanged(StelShortcut* shortcut);
 
 public slots:
 	// enable/disable all actions of the group

@@ -975,7 +975,7 @@ QAction *StelGui::addGuiAction(const QString &actionName, const QString &text,
 //	if (!shortcuts.isEmpty())
 //		helpDialog.setKey(helpGroup, "", shortcuts, text);
 	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
-	return shortcutMgr->addGuiAction(actionName, text, primaryKey, altKey, helpGroup, checkable, autoRepeat, global);
+	return shortcutMgr->addGuiAction(actionName, true, text, primaryKey, altKey, helpGroup, checkable, autoRepeat, global);
 }
 
 QAction *StelGui::getGuiAction(const QString &actionName)
