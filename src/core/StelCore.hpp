@@ -267,6 +267,8 @@ public slots:
 	void setDefaultLocationID(const QString& id);
 	//! Return to the default location.
 	void returnToDefaultLocation();
+	//! Return to the default location and set default landscape with atmosphere and fog effects
+	void returnToHome();
 
 	//! Set the current date in Julian Day
 	void setJDay(double JD);
