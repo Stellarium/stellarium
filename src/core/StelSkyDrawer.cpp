@@ -475,8 +475,11 @@ void StelSkyDrawer::postDrawSky3dModel
 		}
 		Vec3d win;
 		projector->project(v, win);
+		Vec3f c = color;
+		if (StelApp::getInstance().getVisionModeNight())
+			c = StelUtils::getNightColor(c);
 
-		addStar(starSpriteBuffer, sunHaloIndices, win[0], win[1], rmag, color * cmag);
+		addStar(starSpriteBuffer, sunHaloIndices, win[0], win[1], rmag, c * cmag);
 		noStarHalo = true;
 	}
 
