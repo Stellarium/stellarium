@@ -426,15 +426,15 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			double2hms(TFrac*Rise,d2,m2,s2);
 
 //		Strings with time spans for rise/set/transit:
-			RS1 = (d1==0)?"":q_("%1h ").arg(d1); RS1 += (m1==0)?"":q_("%1m ").arg(m1); RS1 += q_("%1s").arg(s1);
-			RS2 = (d2==0)?"":q_("%1h ").arg(d2); RS2 += (m2==0)?"":q_("%1m ").arg(m2); RS2 += q_("%1s").arg(s2);
+			RS1 = (d1==0)?"":QString("%1%2 ").arg(d1).arg(q_("h")); RS1 += (m1==0)?"":QString("%1%2 ").arg(m1).arg(q_("m")); RS1 += QString("%1%2").arg(s1).arg(q_("s"));
+			RS2 = (d2==0)?"":QString("%1%2 ").arg(d2).arg(q_("h")); RS2 += (m2==0)?"":QString("%1%2 ").arg(m2).arg(q_("m")); RS2 += QString("%1%2").arg(s2).arg(q_("s"));
 			if (raised) 
 			{
                                 double2hms(toUnsignedRA(currLocalT+TFrac*Set+12.),ephHour,ephMinute,ephSecond);
-				SetTime = q_("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0')); // Local time for set.
+				SetTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0')); // Local time for set.
 
                                 double2hms(toUnsignedRA(currLocalT-TFrac*Rise+12.),ephHour,ephMinute,ephSecond); // Local time for rise.
-				RiseTime = q_("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
+				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 
 				RS1 = q_("Sets at %1 (in %2)").arg(SetTime).arg(RS1);
 				RS2 = q_("Raised at %1 (%2 ago)").arg(RiseTime).arg(RS2);
@@ -442,10 +442,10 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			else 
 			{
                                 double2hms(toUnsignedRA(currLocalT-TFrac*Set+12.),ephHour,ephMinute,ephSecond);
-				SetTime = q_("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
+				SetTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 
                                 double2hms(toUnsignedRA(currLocalT+TFrac*Rise+12.),ephHour,ephMinute,ephSecond);
-				RiseTime = q_("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
+				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 
 				RS1 = q_("Has set at %1 (%2 ago)").arg(SetTime).arg(RS1);
 				RS2 = q_("Raises at %1 (in %2)").arg(RiseTime).arg(RS2);
@@ -470,15 +470,15 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		double2hms(TFrac*currH,dc,mc,sc);
 
 //		String with the time span for culmination:	
-		Cul = (dc==0)?"":q_("%1h ").arg(dc); Cul += (mc==0)?"":q_("%1m ").arg(mc); Cul += q_("%1s").arg(sc); 
+		Cul = (dc==0)?"":QString("%1%2 ").arg(dc).arg(q_("h")); Cul += (mc==0)?"":QString("%1%2 ").arg(mc).arg(q_("m")); Cul += QString("%1%2").arg(sc).arg(q_("s"));
 		if (transit==false) { 
 
                         double2hms(toUnsignedRA(currLocalT+TFrac*currH+12.),ephHour,ephMinute,ephSecond); // Local time at transit.
-			CulmTime = q_("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
+			CulmTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 			Cul = q_("Culminates at %1 (in %2) at %3 deg.").arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);}
 		else {
                         double2hms(toUnsignedRA(currLocalT-TFrac*currH+12.),ephHour,ephMinute,ephSecond);
-			CulmTime = q_("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
+			CulmTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 			Cul = q_("Culminated at %1 (%2 ago) at %3 deg.").arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);
 		};
 	};
@@ -1343,7 +1343,7 @@ void Observability::readSettingsFromConfig(void)
 void Observability::saveSettingsToConfig(void)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString fontColorStr = q_("%1,%2,%3").arg(fontColor[0],0,'f',2).arg(fontColor[1],0,'f',2).arg(fontColor[2],0,'f',2);
+	QString fontColorStr = QString("%1,%2,%3").arg(fontColor[0],0,'f',2).arg(fontColor[1],0,'f',2).arg(fontColor[2],0,'f',2);
 	// Set updated values
 	conf->setValue("Observability/font_size", fontSize);
 	conf->setValue("Observability/Sun_Altitude", iAltitude);

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-03 21:34+0700\n"
+"POT-Creation-Date: 2012-08-10 20:41+0700\n"
 "PO-Revision-Date: 2012-06-04 19:26+0000\n"
 "Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 04:44+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-08-11 05:22+0000\n"
+"X-Generator: Launchpad (build 15780)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -62,14 +62,14 @@ msgstr "Тип: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
-#: plugins/Exoplanets/src/Exoplanet.cpp:151
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (неактивно до: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
-#: plugins/Exoplanets/src/Exoplanet.cpp:156
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Ред величине: <b>%1</b>"
@@ -79,35 +79,35 @@ msgstr "Ред величине: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Величина: %1"
 
-#: src/core/modules/Nebula.cpp:307
+#: src/core/modules/Nebula.cpp:317
 msgid "Galaxy"
 msgstr "Галаксија"
 
-#: src/core/modules/Nebula.cpp:310
+#: src/core/modules/Nebula.cpp:320
 msgid "Open cluster"
 msgstr "Отворено јато"
 
-#: src/core/modules/Nebula.cpp:313
+#: src/core/modules/Nebula.cpp:323
 msgid "Globular cluster"
 msgstr "Лоптасто јато"
 
-#: src/core/modules/Nebula.cpp:316
+#: src/core/modules/Nebula.cpp:326
 msgid "Nebula"
 msgstr "Маглина"
 
-#: src/core/modules/Nebula.cpp:319
+#: src/core/modules/Nebula.cpp:329
 msgid "Planetary nebula"
 msgstr "Планетарна маглина"
 
-#: src/core/modules/Nebula.cpp:322
+#: src/core/modules/Nebula.cpp:332
 msgid "Cluster associated with nebulosity"
 msgstr "Јато повезано са измаглицом"
 
-#: src/core/modules/Nebula.cpp:325
+#: src/core/modules/Nebula.cpp:335
 msgid "Unknown"
 msgstr "Непознато"
 
-#: src/core/modules/Nebula.cpp:328
+#: src/core/modules/Nebula.cpp:338
 msgid "Undocumented type"
 msgstr "Недокументован тип"
 
@@ -188,14 +188,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
-#: plugins/Exoplanets/src/Exoplanet.cpp:166
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектрални тип: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
-#: plugins/Exoplanets/src/Exoplanet.cpp:171
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Даљина: %1 Светлосних година"
@@ -371,31 +371,31 @@ msgstr "Није пронађено"
 msgid "Found"
 msgstr "Пронађено"
 
-#: src/gui/ConfigurationDialog.cpp:375
+#: src/gui/ConfigurationDialog.cpp:396
 msgid "Select screenshot directory"
 msgstr "Изаберите директоријум за \"слике са екрана\""
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:607
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Почетно видно поље: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:594
+#: src/gui/ConfigurationDialog.cpp:615
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Почетни правац гледања азимуте/угаоне висине: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:636
+#: src/gui/ConfigurationDialog.cpp:657
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Аутори"
 
-#: src/gui/ConfigurationDialog.cpp:637 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Контакт"
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:741
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -403,19 +403,19 @@ msgstr "Контакт"
 msgid "Author"
 msgstr "Аутор"
 
-#: src/gui/ConfigurationDialog.cpp:724
+#: src/gui/ConfigurationDialog.cpp:745
 msgid "License"
 msgstr "Лиценца"
 
-#: src/gui/ConfigurationDialog.cpp:750
+#: src/gui/ConfigurationDialog.cpp:771
 msgid "Running script: "
 msgstr "Покренута скрипта: "
 
-#: src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:778
 msgid "Running script: [none]"
 msgstr "Покренута скрипта: [нема]"
 
-#: src/gui/ConfigurationDialog.cpp:820
+#: src/gui/ConfigurationDialog.cpp:841
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -423,16 +423,16 @@ msgstr ""
 "Завршено преузимање нових каталога звезда!\n"
 "Поново покренути Стеларијум како би се звезде приказале."
 
-#: src/gui/ConfigurationDialog.cpp:824
+#: src/gui/ConfigurationDialog.cpp:845
 msgid "All available star catalogs have been installed."
 msgstr "Сви доступни  каталози звезда су инсталирани."
 
-#: src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:850
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Преузми каталог %1 од %2"
 
-#: src/gui/ConfigurationDialog.cpp:836
+#: src/gui/ConfigurationDialog.cpp:857
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -441,7 +441,7 @@ msgstr ""
 "Преузимање %1...\n"
 "(Можете затворити овај прозор.)"
 
-#: src/gui/ConfigurationDialog.cpp:843
+#: src/gui/ConfigurationDialog.cpp:864
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -452,7 +452,7 @@ msgstr ""
 "Број звезда: %2 милиона\n"
 "Распон \"реда величине\": %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:886 src/gui/ConfigurationDialog.cpp:922
+#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -461,11 +461,11 @@ msgstr ""
 "Грешка при преузимању %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:974
+#: src/gui/ConfigurationDialog.cpp:995
 msgid "Verifying file integrity..."
 msgstr "Провера целости датотеке..."
 
-#: src/gui/ConfigurationDialog.cpp:978
+#: src/gui/ConfigurationDialog.cpp:999
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -474,85 +474,85 @@ msgstr ""
 "Грешка при преузимању %1:\n"
 "Датотека није исправна."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:328
-#: src/gui/StelGuiItems.cpp:709
+#: src/gui/HelpDialog.cpp:53 src/gui/StelGuiItems.cpp:329
+#: src/gui/StelGuiItems.cpp:710
 msgid "Space"
 msgstr "Простор (свемир/размак)"
 
-#: src/gui/HelpDialog.cpp:53
+#: src/gui/HelpDialog.cpp:54
 msgid "Arrow keys & left mouse drag"
 msgstr "Тастери са стрелицама и превлачење левим кликом миша"
 
-#: src/gui/HelpDialog.cpp:54
+#: src/gui/HelpDialog.cpp:55
 msgid "Page Up/Down"
 msgstr "Страна Горе/Доле"
 
-#: src/gui/HelpDialog.cpp:55
+#: src/gui/HelpDialog.cpp:56
 msgid "CTRL + Up/Down"
 msgstr "Контролни тастер (CTRL) + Горе/Доле"
 
-#: src/gui/HelpDialog.cpp:56
+#: src/gui/HelpDialog.cpp:57
 msgid "Left click"
 msgstr "Леви клик"
 
-#: src/gui/HelpDialog.cpp:57
+#: src/gui/HelpDialog.cpp:58
 msgid "Right click"
 msgstr "Десни клик"
 
-#: src/gui/HelpDialog.cpp:58
+#: src/gui/HelpDialog.cpp:59
 msgid "CTRL + Left click"
 msgstr "Контролни тастер (CTRL) + Леви клик на мишу"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:237
+#: src/gui/HelpDialog.cpp:62 src/gui/StelGui.cpp:239
 msgid "Movement and Selection"
 msgstr "Померање и Одабирање"
 
-#: src/gui/HelpDialog.cpp:62
+#: src/gui/HelpDialog.cpp:63
 msgid "Pan view around the sky"
 msgstr "Померање погледа по небу"
 
-#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
+#: src/gui/HelpDialog.cpp:64 src/gui/HelpDialog.cpp:65
 msgid "Zoom in/out"
 msgstr "Увеличање/умањење"
 
-#: src/gui/HelpDialog.cpp:65
+#: src/gui/HelpDialog.cpp:66
 msgid "Select object"
 msgstr "Изаберите објекат"
 
-#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
+#: src/gui/HelpDialog.cpp:67 src/gui/HelpDialog.cpp:69
 msgid "Clear selection"
 msgstr "Поништите избор"
 
-#: src/gui/HelpDialog.cpp:71
+#: src/gui/HelpDialog.cpp:72
 msgid "When a Script is Running"
 msgstr "Кад је скрипта покренута"
 
-#: src/gui/HelpDialog.cpp:73
+#: src/gui/HelpDialog.cpp:74
 msgid "Stop currently running script"
 msgstr "Заустави тренутно покренуту скрипту"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:213
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:215
 msgid "Pause script execution"
 msgstr "Прекид извршне скрипте"
 
-#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:214
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:216
 msgid "Resume script execution"
 msgstr "Настави извршење скрипте"
 
-#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:209
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:211
 msgid "Slow down the script execution rate"
 msgstr "Успорите извршење скрипте"
 
-#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:210
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:212
 msgid "Speed up the script execution rate"
 msgstr "Убрзајте извршење скрипте"
 
-#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:211
+#: src/gui/HelpDialog.cpp:79 src/gui/StelGui.cpp:213
 msgid "Set the normal script execution rate"
 msgstr "Подесите нормалну брзину извршења скрипте"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
-#: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: src/gui/HelpDialog.cpp:82 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
@@ -562,24 +562,24 @@ msgstr "Подесите нормалну брзину извршења скри
 msgid "Plugin Key Bindings"
 msgstr "Тастери за прикључке"
 
-#: src/gui/HelpDialog.cpp:82
+#: src/gui/HelpDialog.cpp:83
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
 msgstr "Текстуални кориснички интерфејс"
 
-#: src/gui/HelpDialog.cpp:171
+#: src/gui/HelpDialog.cpp:193
 msgid "Stellarium Help"
 msgstr "Стеларијумова Помоћ"
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:194
 msgid "Keys"
 msgstr "Тастери"
 
-#: src/gui/HelpDialog.cpp:180
+#: src/gui/HelpDialog.cpp:202
 msgid "Further Reading"
 msgstr "За даље читање"
 
-#: src/gui/HelpDialog.cpp:181
+#: src/gui/HelpDialog.cpp:203
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -587,17 +587,17 @@ msgstr ""
 "Следеће везе воде ка спољашњим интернет страницама, и покренуће Ваш интернет "
 "претраживач:\n"
 
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:204
 msgid "The Stellarium User Guide"
 msgstr "Стеларијумов Водич за кориснике"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:186
+#: src/gui/HelpDialog.cpp:208
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Често Постављана Питања} о Стеларијуму. Одговори такође."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:191
+#: src/gui/HelpDialog.cpp:213
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -606,7 +606,7 @@ msgstr ""
 "пејзаже и скрипте дониране од стране корисника."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:196
+#: src/gui/HelpDialog.cpp:218
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -615,7 +615,7 @@ msgstr ""
 "захтев за подршку и покушаћемо да Вам помогнемо."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:201
+#: src/gui/HelpDialog.cpp:223
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -626,48 +626,48 @@ msgstr ""
 "нови извештај о грешци."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:206
+#: src/gui/HelpDialog.cpp:228
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Форуми} - расправљајте о Стеларијуму са другим корисницима."
 
-#: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
-#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:244
+#: src/gui/HelpDialog.cpp:264 src/gui/HelpDialog.cpp:367
+#: src/gui/HelpDialog.cpp:369 src/gui/StelGui.cpp:246
 msgid "Miscellaneous"
 msgstr "Разно"
 
-#: src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:324
 msgid "Developers"
 msgstr "Програмери"
 
-#: src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор пројекта и главни програмер: %1"
 
-#: src/gui/HelpDialog.cpp:304
+#: src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Аутор/програмер документа: %1"
 
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
-#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
-#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:315
-#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:338 src/gui/HelpDialog.cpp:339
+#: src/gui/HelpDialog.cpp:340
 #, qt-format
 msgid "Developer: %1"
 msgstr "Програмер: %1"
 
-#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "Tester: %1"
 msgstr "Испитивач: %1"
 
-#: src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:334
 msgid "Past Developers"
 msgstr "Последњи програмери"
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:335
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -675,352 +675,356 @@ msgstr ""
 "Више људи су направили значајан допринос, али  више нису активни. Њихов рад "
 "је направио велики допринос пројекту :"
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:336
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Графички дизајнер/остало: %1"
 
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:341 src/gui/HelpDialog.cpp:342
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX програмер: %1"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Display Options"
 msgstr "Опције приказа"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "Линије сазвежђа"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "Уметнички приказ сазвежђа"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "Ознаке сазвежђа"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:168
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "Границе сазвежђа"
 
-#: src/gui/StelGui.cpp:169 src/ui_viewDialog.h:1159
+#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "Азимутна мрежа"
 
-#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1157
+#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "Екваторијална мрежа"
 
-#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1156
+#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "Екваторијална J2000 мрежа"
 
-#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1158
+#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Еклиптичка J2000 мрежа"
 
-#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1160
+#: src/gui/StelGui.cpp:174 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "Галактичка мрежа"
 
-#: src/gui/StelGui.cpp:174 src/ui_viewDialog.h:1180
+#: src/gui/StelGui.cpp:175 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Галактичка раван"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "Линија еклиптике"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "Линија екватора"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "Линија меридијана"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:179
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "Линија хоризонта"
 
-#: src/gui/StelGui.cpp:179 src/ui_viewDialog.h:1181
+#: src/gui/StelGui.cpp:180 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "Кључне тачке"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:182
 msgid "Ground"
 msgstr "Тло"
 
-#: src/gui/StelGui.cpp:182 src/ui_viewDialog.h:1130
+#: src/gui/StelGui.cpp:183 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:184
 msgid "Fog"
 msgstr "Магла"
 
-#: src/gui/StelGui.cpp:185 src/ui_viewDialog.h:1139
+#: src/gui/StelGui.cpp:186 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "Маглине"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:187
 msgid "Nebulas background images"
 msgstr "Позадинске слике маглина"
 
-#: src/gui/StelGui.cpp:187 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/gui/StelGui.cpp:188 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "Звезде"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:189
+msgid "Stars labels"
+msgstr ""
+
+#: src/gui/StelGui.cpp:190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "Ознаке планета"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:191
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "Орбите планета"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:192
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "Руте планета"
 
-#: src/gui/StelGui.cpp:192
-msgid "Night mode"
-msgstr "Ноћни режим"
+#: src/gui/StelGui.cpp:194
+msgid "Night vision mode"
+msgstr ""
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:195
 msgid "Full-screen mode"
 msgstr "Приказ преко целог екрана"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:196
 msgid "Flip scene horizontally"
 msgstr "Преокренути призор хоризонтално"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:197
 msgid "Flip scene vertically"
 msgstr "Преокренути призор вертикално"
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:199
 msgid "Windows"
 msgstr "Прозори"
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:200
 msgid "Help window"
 msgstr "Прозор за помоћ"
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:201
 msgid "Configuration window"
 msgstr "Прозор за подешавања"
 
-#: src/gui/StelGui.cpp:200
+#: src/gui/StelGui.cpp:202
 msgid "Search window"
 msgstr "Прозор за претрагу"
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:203
 msgid "Sky and viewing options window"
 msgstr "Прозор за подешавање неба и начина гледања"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:204
 msgid "Date/time window"
 msgstr "Прозор за датум и време"
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:205
 msgid "Location window"
 msgstr "Прозор за локацију"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:207
 msgid "Script console window"
 msgstr "Прозор за конзолу скрипти"
 
-#: src/gui/StelGui.cpp:208 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:210 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "датум и време"
 
-#: src/gui/StelGui.cpp:212
+#: src/gui/StelGui.cpp:214
 msgid "Stop script execution"
 msgstr ""
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:217
 msgid "Decrease time speed"
 msgstr "Смањи брзину времена"
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:218
 msgid "Increase time speed"
 msgstr "Повећај брзину времена"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:219
 msgid "Set normal time rate"
 msgstr "Подесите на нормалан проток времена"
 
-#: src/gui/StelGui.cpp:218
+#: src/gui/StelGui.cpp:220
 msgid "Decrease time speed (a little)"
 msgstr "Смањи брзину времена (мало)"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:221
 msgid "Increase time speed (a little)"
 msgstr "Повећај брзину времена (мало)"
 
-#: src/gui/StelGui.cpp:220
+#: src/gui/StelGui.cpp:222
 msgid "Set time rate to zero"
 msgstr "Зауставите проток времена"
 
-#: src/gui/StelGui.cpp:221
+#: src/gui/StelGui.cpp:223
 msgid "Set time to now"
 msgstr "Поставите време на тренутно"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:224
 msgid "Add 1 solar hour"
 msgstr "Додајте 1 соларни час"
 
-#: src/gui/StelGui.cpp:223
+#: src/gui/StelGui.cpp:225
 msgid "Subtract 1 solar hour"
 msgstr "Одузмите 1 соларни час"
 
-#: src/gui/StelGui.cpp:224
+#: src/gui/StelGui.cpp:226
 msgid "Add 1 solar day"
 msgstr "Додајте 1 соларни дан"
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:227
 msgid "Subtract 1 solar day"
 msgstr "Одузмите 1 соларни дан"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:228
 msgid "Add 1 solar week"
 msgstr "Додајте 1 соларну недељу"
 
-#: src/gui/StelGui.cpp:227
+#: src/gui/StelGui.cpp:229
 msgid "Subtract 1 solar week"
 msgstr "Одузмите 1 соларну недељу"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:230
 msgid "Add 1 sidereal day"
 msgstr "Додајте 1 звездани дан"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:231
 msgid "Subtract 1 sidereal day"
 msgstr "Одузмите 1 звездани дан"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:232
 msgid "Add 1 sidereal week"
 msgstr "Додајте 1 звездану недељу"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:233
 msgid "Subtract 1 sidereal week"
 msgstr "Одузмите 1 звездану недељу"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:234
 msgid "Add 1 sidereal month"
 msgstr "Додај 1 звездани месец"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:235
 msgid "Subtract 1 sidereal month"
 msgstr "Одузми 1 звездани месец"
 
-#: src/gui/StelGui.cpp:234
+#: src/gui/StelGui.cpp:236
 msgid "Add 1 sidereal year"
 msgstr "Додај 1 звездану годину"
 
-#: src/gui/StelGui.cpp:235
+#: src/gui/StelGui.cpp:237
 msgid "Subtract 1 sidereal year"
 msgstr "Одузми 1 звездану годину"
 
-#: src/gui/StelGui.cpp:238
+#: src/gui/StelGui.cpp:240
 msgid "Center on selected object"
 msgstr "Центрирајте изабрани објекат"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:241
 msgid "Track object"
 msgstr "Прати објекат"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:242
 msgid "Zoom in on selected object"
 msgstr "Увећајте изабрани објекат"
 
-#: src/gui/StelGui.cpp:241
+#: src/gui/StelGui.cpp:243
 msgid "Zoom out"
 msgstr "Умањивање"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:244
 msgid "Set home planet to selected planet"
 msgstr "Поставите изабрану планету као матичну"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:247
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Промените између екваторијалног и азимутног носача"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:248
 msgid "Quit"
 msgstr "Напусти"
 
-#: src/gui/StelGui.cpp:247
+#: src/gui/StelGui.cpp:249
 msgid "Save screenshot"
 msgstr "Сачувај снимак екрана"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:250
 msgid "Copy selected object information to clipboard"
 msgstr "Сачувај информације о изабраном објекту у меморији"
 
-#: src/gui/StelGui.cpp:249
+#: src/gui/StelGui.cpp:251
 msgid "Go to home"
 msgstr ""
 
-#: src/gui/StelGui.cpp:251
+#: src/gui/StelGui.cpp:253
 msgid "Auto hide horizontal button bar"
 msgstr "Аутоматско сакривање хоризонталне траке са дугмићима"
 
-#: src/gui/StelGui.cpp:252
+#: src/gui/StelGui.cpp:254
 msgid "Auto hide vertical button bar"
 msgstr "Аутоматско сакривање вертикалне траке са дугмићима"
 
-#: src/gui/StelGui.cpp:253
+#: src/gui/StelGui.cpp:255
 msgid "Toggle visibility of GUI"
 msgstr "Видљивост графичког интерфејса"
 
-#: src/gui/StelGuiItems.cpp:595
+#: src/gui/StelGuiItems.cpp:596
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:459
+#: src/gui/ViewDialog.cpp:481
 msgid "No description"
 msgstr "Нема описа"
 
-#: src/gui/ViewDialog.cpp:572
+#: src/gui/ViewDialog.cpp:594
 msgid "No shooting stars"
 msgstr "Без звезда падалица"
 
-#: src/gui/ViewDialog.cpp:575
+#: src/gui/ViewDialog.cpp:597
 msgid "Normal rate"
 msgstr "Нормалан темпо"
 
-#: src/gui/ViewDialog.cpp:578
+#: src/gui/ViewDialog.cpp:600
 msgid "Standard Perseids rate"
 msgstr "Стандардан Перзидски темпо"
 
-#: src/gui/ViewDialog.cpp:581
+#: src/gui/ViewDialog.cpp:603
 msgid "Exceptional Leonid rate"
 msgstr "Изузетан Лиенидски темпо"
 
-#: src/gui/ViewDialog.cpp:584
+#: src/gui/ViewDialog.cpp:606
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Највиши темпо икада (1966 Лиениди)"
 
@@ -1147,8 +1151,8 @@ msgstr "Универзитет Харвард (САД)"
 msgid "This system does not support OpenGL."
 msgstr "Овај систем не подржава ОпенГЛ."
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:182
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Sun"
 msgstr "Сунце"
 
@@ -2782,35 +2786,39 @@ msgstr "Дневник"
 msgid "Refresh"
 msgstr "Освежи"
 
-#: src/ui_locationDialogGui.h:384
+#: src/ui_locationDialogGui.h:389
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "Место"
 
-#: src/ui_locationDialogGui.h:388
+#: src/ui_locationDialogGui.h:393
 msgid "Current location information"
 msgstr "Информације о тренутном положају"
 
-#: src/ui_locationDialogGui.h:389
+#: src/ui_locationDialogGui.h:394
 msgid "Use as default"
 msgstr "Користите као стандардну вредност"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:880
+#: src/ui_locationDialogGui.h:395
+msgid "Return to default"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Delete"
 msgstr "Избриши"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:397
 msgid "Add to list"
 msgstr "Додај у листу"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "Географска ширина:"
 
-#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
+#: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -2818,171 +2826,171 @@ msgstr ""
 "Можете унети вредности као децимални степен, или користити dms формат. На "
 "пример: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:396
+#: src/ui_locationDialogGui.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "Географска дужина:"
 
-#: src/ui_locationDialogGui.h:400
+#: src/ui_locationDialogGui.h:406
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "Висина:"
 
-#: src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
 msgstr "Унесите надморску висину у метрима"
 
-#: src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:410
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:411
 msgid "Name/City:"
 msgstr "Име/Град:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:412
 msgid "Country:"
 msgstr "Држава:"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:413
 msgid "Planet:"
 msgstr "Планета:"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:501
 msgid "Find Object"
 msgstr "Нађи објекат"
 
-#: src/ui_searchDialogGui.h:505
+#: src/ui_searchDialogGui.h:502
 msgid "Find Object or Position"
 msgstr "Пронађи објекат или место"
 
-#: src/ui_searchDialogGui.h:511
+#: src/ui_searchDialogGui.h:508
 msgid "iota"
 msgstr "јота"
 
-#: src/ui_searchDialogGui.h:514
+#: src/ui_searchDialogGui.h:511
 msgid "alpha"
 msgstr "алфа"
 
-#: src/ui_searchDialogGui.h:517
+#: src/ui_searchDialogGui.h:514
 msgid "beta"
 msgstr "бета"
 
-#: src/ui_searchDialogGui.h:520
+#: src/ui_searchDialogGui.h:517
 msgid "gamma"
 msgstr "гама"
 
-#: src/ui_searchDialogGui.h:523
+#: src/ui_searchDialogGui.h:520
 msgid "delta"
 msgstr "делта"
 
-#: src/ui_searchDialogGui.h:526
+#: src/ui_searchDialogGui.h:523
 msgid "epsilon"
 msgstr "епсилон"
 
-#: src/ui_searchDialogGui.h:529
+#: src/ui_searchDialogGui.h:526
 msgid "zeta"
 msgstr "зета"
 
-#: src/ui_searchDialogGui.h:532
+#: src/ui_searchDialogGui.h:529
 msgid "eta"
 msgstr "ета"
 
-#: src/ui_searchDialogGui.h:535
+#: src/ui_searchDialogGui.h:532
 msgid "theta"
 msgstr "тета"
 
-#: src/ui_searchDialogGui.h:538
+#: src/ui_searchDialogGui.h:535
 msgid "kappa"
 msgstr "капа"
 
-#: src/ui_searchDialogGui.h:541
+#: src/ui_searchDialogGui.h:538
 msgid "lambda"
 msgstr "ламбда"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:541
 msgid "mu"
 msgstr "ми"
 
-#: src/ui_searchDialogGui.h:547
+#: src/ui_searchDialogGui.h:544
 msgid "nu"
 msgstr "ни"
 
-#: src/ui_searchDialogGui.h:550
+#: src/ui_searchDialogGui.h:547
 msgid "xi"
 msgstr "кси"
 
-#: src/ui_searchDialogGui.h:553
+#: src/ui_searchDialogGui.h:550
 msgid "omicron"
 msgstr "омикрон"
 
-#: src/ui_searchDialogGui.h:556
+#: src/ui_searchDialogGui.h:553
 msgid "pi"
 msgstr "пи"
 
-#: src/ui_searchDialogGui.h:559
+#: src/ui_searchDialogGui.h:556
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:562
+#: src/ui_searchDialogGui.h:559
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:565
+#: src/ui_searchDialogGui.h:562
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:565
 msgid "upsilon"
 msgstr "ипсилон"
 
-#: src/ui_searchDialogGui.h:571
+#: src/ui_searchDialogGui.h:568
 msgid "phi"
 msgstr "фи"
 
-#: src/ui_searchDialogGui.h:574
+#: src/ui_searchDialogGui.h:571
 msgid "chi"
 msgstr "хи"
 
-#: src/ui_searchDialogGui.h:577
+#: src/ui_searchDialogGui.h:574
 msgid "psi"
 msgstr "пси"
 
-#: src/ui_searchDialogGui.h:580
+#: src/ui_searchDialogGui.h:577
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:579
 msgid "Greek letters for Bayer designations"
 msgstr "Грчка слова за Бајеровим ознакама"
 
-#: src/ui_searchDialogGui.h:583
+#: src/ui_searchDialogGui.h:580
 msgid "Object"
 msgstr "Објекат"
 
-#: src/ui_searchDialogGui.h:584
+#: src/ui_searchDialogGui.h:581
 msgid "RA/Dec (J2000):"
 msgstr "Ректасцензија/Деклинација (J2000):"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:582
 msgid "Position"
 msgstr "Положај"
 
-#: src/ui_searchDialogGui.h:586
+#: src/ui_searchDialogGui.h:583
 msgid "On-line astronomical database SIMBAD"
 msgstr "Астрономска база података SIMBAD на мрежи"
 
-#: src/ui_searchDialogGui.h:587
+#: src/ui_searchDialogGui.h:584
 msgid "Extend search with SIMBAD"
 msgstr "Прошири претрагу помоћу SIMBAD-а"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:585
 msgid "Server:"
 msgstr "Сервер:"
 
-#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
+#: src/ui_searchDialogGui.h:586 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:1065 src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1062 src/ui_configurationDialog.h:1073
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Options"
 msgstr "Опције"
@@ -3191,19 +3199,19 @@ msgstr "Користите ову културу неба као подразу�
 msgid "Visible"
 msgstr "Видљиво"
 
-#: src/ui_configurationDialog.h:920
+#: src/ui_configurationDialog.h:917
 msgid "Configuration"
 msgstr "Конфигурација"
 
-#: src/ui_configurationDialog.h:922
+#: src/ui_configurationDialog.h:919
 msgid "Program language"
 msgstr "Језик програма"
 
-#: src/ui_configurationDialog.h:923
+#: src/ui_configurationDialog.h:920
 msgid "Default options"
 msgstr "Подразумеване опције"
 
-#: src/ui_configurationDialog.h:925
+#: src/ui_configurationDialog.h:922
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3211,20 +3219,20 @@ msgstr ""
 "Снимите подешавања која сте изменили приликом ове сесије да буду иста када "
 "следећи пут покренете Стеларијум"
 
-#: src/ui_configurationDialog.h:927
+#: src/ui_configurationDialog.h:924
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "Сачувај подешавања"
 
-#: src/ui_configurationDialog.h:929
+#: src/ui_configurationDialog.h:926
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Поврати почетна подешавања која су дошла са Стеларијумом"
 
-#: src/ui_configurationDialog.h:931
+#: src/ui_configurationDialog.h:928
 msgid "Restore defaults"
 msgstr "Поврати подразумевано"
 
-#: src/ui_configurationDialog.h:932
+#: src/ui_configurationDialog.h:929
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3234,166 +3242,166 @@ msgstr ""
 "Снимање свих тренутних опција укључује тренутно видно поље и правац "
 "посматрања за употребу приликом следећег покретања."
 
-#: src/ui_configurationDialog.h:934
+#: src/ui_configurationDialog.h:931
 msgid "The width of your view when Stellarium starts"
 msgstr "Ширина вашег погледа када покренете Стеларијум"
 
-#: src/ui_configurationDialog.h:937
+#: src/ui_configurationDialog.h:934
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Правац гледања када покренете Стеларијум"
 
-#: src/ui_configurationDialog.h:939 src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:936 src/ui_configurationDialog.h:1084
 msgid "Selected object information"
 msgstr "Информације о изабраном објекту"
 
-#: src/ui_configurationDialog.h:941
+#: src/ui_configurationDialog.h:938
 msgid "Display all information available"
 msgstr "Прикажи све доступне информације"
 
-#: src/ui_configurationDialog.h:943
+#: src/ui_configurationDialog.h:940
 msgid "All available"
 msgstr "Све доступно"
 
-#: src/ui_configurationDialog.h:945
+#: src/ui_configurationDialog.h:942
 msgid "Display less information"
 msgstr "Прикажи мање информација"
 
-#: src/ui_configurationDialog.h:947
+#: src/ui_configurationDialog.h:944
 msgid "Short"
 msgstr "Кратко"
 
-#: src/ui_configurationDialog.h:949
+#: src/ui_configurationDialog.h:946
 msgid "Display no information"
 msgstr "Немој приказати информације"
 
-#: src/ui_configurationDialog.h:951
+#: src/ui_configurationDialog.h:948
 msgid "None"
 msgstr "Ништа"
 
-#: src/ui_configurationDialog.h:953
+#: src/ui_configurationDialog.h:950
 msgid "Display user settings information"
 msgstr "Приказ информације о подешавањима за употребу"
 
-#: src/ui_configurationDialog.h:955
+#: src/ui_configurationDialog.h:952
 msgid "Customized"
 msgstr "Прилагођено"
 
-#: src/ui_configurationDialog.h:956
+#: src/ui_configurationDialog.h:953
 msgid "Displayed fields"
 msgstr ""
 
-#: src/ui_configurationDialog.h:957
+#: src/ui_configurationDialog.h:954
 msgid "Visual magnitude"
 msgstr "Визуелна величина"
 
-#: src/ui_configurationDialog.h:959
+#: src/ui_configurationDialog.h:956
 msgid "Spectral class, nebula type, etc."
 msgstr ""
 
-#: src/ui_configurationDialog.h:961
+#: src/ui_configurationDialog.h:958
 msgid "Additional information 1"
 msgstr ""
 
-#: src/ui_configurationDialog.h:962
+#: src/ui_configurationDialog.h:959
 msgid "Additional information 3"
 msgstr ""
 
-#: src/ui_configurationDialog.h:963
+#: src/ui_configurationDialog.h:960
 msgid "Catalog number(s)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:964
+#: src/ui_configurationDialog.h:961
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Назив"
 
-#: src/ui_configurationDialog.h:968
+#: src/ui_configurationDialog.h:965
 msgid "Additional information 2"
 msgstr ""
 
-#: src/ui_configurationDialog.h:969
+#: src/ui_configurationDialog.h:966
 msgid "Absolute magnitude"
 msgstr "Апсолутна величина"
 
-#: src/ui_configurationDialog.h:971
+#: src/ui_configurationDialog.h:968
 msgid "Horizontal coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:973
+#: src/ui_configurationDialog.h:970
 msgid "Altitude/Azimuth"
 msgstr ""
 
-#: src/ui_configurationDialog.h:975
+#: src/ui_configurationDialog.h:972
 msgid "Angular or physical size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:977
+#: src/ui_configurationDialog.h:974
 msgid "Size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:979
+#: src/ui_configurationDialog.h:976
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:981
+#: src/ui_configurationDialog.h:978
 msgid "Right ascension/Declination (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:979
 msgid "Distance"
 msgstr ""
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:981
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:986
+#: src/ui_configurationDialog.h:983
 msgid "Right ascension/Declination (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:988
+#: src/ui_configurationDialog.h:985
 msgid "Topocentric equatorial coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:990
+#: src/ui_configurationDialog.h:987
 msgid "Hour angle/Declination"
 msgstr ""
 
-#: src/ui_configurationDialog.h:991
+#: src/ui_configurationDialog.h:988
 msgid "Control"
 msgstr "Управљање"
 
-#: src/ui_configurationDialog.h:993
+#: src/ui_configurationDialog.h:990
 msgid "Allow keyboard to pan and zoom"
 msgstr "Дозвољено померање и увећање/смањење тастатуром"
 
-#: src/ui_configurationDialog.h:995
+#: src/ui_configurationDialog.h:992
 msgid "Enable keyboard navigation"
 msgstr "Омогућите навигацију преко тастатуре"
 
-#: src/ui_configurationDialog.h:997
+#: src/ui_configurationDialog.h:994
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Дозвољено померање мишем (вучењем) и увећање/смањење (точкић на мишу)"
 
-#: src/ui_configurationDialog.h:999
+#: src/ui_configurationDialog.h:996
 msgid "Enable mouse navigation"
 msgstr "Омогућите навигацију преко миша"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:997
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "Почетни датум и време"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:999
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Покреће Стеларијум са системским датумом и временом"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1001
 msgid "System date and time"
 msgstr "Системски датум и време"
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:1003
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -3401,55 +3409,55 @@ msgstr ""
 "Поставља опонашајуће време на следећу појаву тог доба дана када се покрене "
 "Стеларијум"
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1005
 msgid "System date at:"
 msgstr "Системски датум на:"
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1007
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Користите одређени датум и време када се Стеларијум покрене"
 
-#: src/ui_configurationDialog.h:1012
+#: src/ui_configurationDialog.h:1009
 msgid "Other:"
 msgstr "Друго:"
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1010
 msgid "use current"
 msgstr "користи тренутно"
 
-#: src/ui_configurationDialog.h:1014
+#: src/ui_configurationDialog.h:1011
 msgid "Other"
 msgstr "Остало"
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1013
 msgid "Hides the mouse cursor when inactive"
 msgstr "Сакривање курсора када је неактиван"
 
-#: src/ui_configurationDialog.h:1018
+#: src/ui_configurationDialog.h:1015
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Време до нестанка курсора (у секундама):"
 
-#: src/ui_configurationDialog.h:1020
+#: src/ui_configurationDialog.h:1017
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Приказ дугмади за хоризонтално и вертикално преокретање слике"
 
-#: src/ui_configurationDialog.h:1022
+#: src/ui_configurationDialog.h:1019
 msgid "Show flip buttons"
 msgstr "Прикажи дугмад за преокретање"
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1021
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1026
+#: src/ui_configurationDialog.h:1023
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1024
 msgid "Planetarium options"
 msgstr "Опције планетаријума"
 
-#: src/ui_configurationDialog.h:1029
+#: src/ui_configurationDialog.h:1026
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3457,128 +3465,128 @@ msgstr ""
 "Изобличење сферног огледала користи се при пројекцији Стеларијума на сферно "
 "огледало код јефтиних планетарних  система."
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1028
 msgid "Spheric mirror distortion"
 msgstr "Деформисање сферног огледала"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1030
 msgid "Align labels with the horizon"
 msgstr "Поравнајте ознаке са хоризонтом"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1032
 msgid "Gravity labels"
 msgstr "Гравитационе ознаке"
 
-#: src/ui_configurationDialog.h:1037
+#: src/ui_configurationDialog.h:1034
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 "Када је омогућено, \"самоумањивање\" биће постављено на почетни смер погледа"
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1036
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Самоумањивање враћа на почетни смер погледа"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1038
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Замаскирај све ван централног круга у главном видокругу"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1040
 msgid "Disc viewport"
 msgstr "Кружни поглед"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1042
 msgid "Hide other constellations when you click one"
 msgstr "Сакриј остала сазвежђа када је једно обележено"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1044
 msgid "Select single constellation"
 msgstr "Изаберите једно сазвежђе"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1045
 msgid "Screenshots"
 msgstr "Снимци екрана"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1046
 msgid "Screenshot Directory"
 msgstr "Директоријум снимака екрана"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1048
 msgid "Invert colors"
 msgstr "Изврни боје"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1049
 msgid "Star catalog updates"
 msgstr "Ажурирање каталога звезда"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1051
 msgid "Click here to start downloading"
 msgstr "Кликните овде да почнете преузимање"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1053
 msgid "Download this file to view even more stars"
 msgstr "Преузми ову датотеку како би видео још више звезда"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1055
 msgid "Restart the download"
 msgstr "Поново покрените преузимање"
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1057
 msgid "Retry"
 msgstr "Покушајте опет"
 
-#: src/ui_configurationDialog.h:1062
+#: src/ui_configurationDialog.h:1059
 msgid "Stop the download. You can always restart it later"
 msgstr "Зауставите преузимање. Можете касније да поново покренете преузимање"
 
-#: src/ui_configurationDialog.h:1064
+#: src/ui_configurationDialog.h:1061
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "Одустани"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1064
 msgid "Close window when script runs"
 msgstr "Затвори прозор док се скрипта извршава"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1066
 msgid "Run the selected script"
 msgstr "Покрени изабрану скрипту"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1070
 msgid "Stop a running script"
 msgstr "Заустави скрипту која се извршава"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1074
 msgid "Load at startup"
 msgstr "Учитај приликом покретања програма"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1075
 msgid "configure"
 msgstr "подеси"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1080
 msgid "Main"
 msgstr "Главно"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1082
 msgid "Information"
 msgstr "Informacije"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1087
 msgid "Navigation"
 msgstr "Навигација"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1089
 msgid "Tools"
 msgstr "Алатке"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "Скрипте"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1093
 msgid "Plugins"
 msgstr "Прикључци"
 
@@ -3723,18 +3731,18 @@ msgid "Angle measure"
 msgstr "Мера угла"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:308
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:319
 msgid "The Angle Measure is enabled:"
 msgstr "Мера угла је омогућена:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:310
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:321
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Померите са левим дугметом миша да измерите, лево дугме миша да обришете."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:312
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:323
 msgid "Right-clicking changes the end point only."
 msgstr "Десно дугме миша мења само крајњу тачку."
 
@@ -4134,7 +4142,7 @@ msgstr "Додај"
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 #: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Satellites/src/ui_satellitesDialog.h:697
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Назив:"
@@ -4205,7 +4213,7 @@ msgid "Vertical flip"
 msgstr "Усправно преокретање"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
-#: plugins/Satellites/src/ui_satellitesDialog.h:732
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
@@ -4218,7 +4226,7 @@ msgid "About"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Satellites"
 msgstr "Сателити"
 
@@ -4552,7 +4560,7 @@ msgid "Next update: %1 hours"
 msgstr "Следеће ажурирање: %1 сати"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
-#: plugins/Satellites/src/ui_satellitesDialog.h:661
+#: plugins/Satellites/src/ui_satellitesDialog.h:655
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
@@ -4645,16 +4653,16 @@ msgstr "Нема података за преузимање. Покушајте 
 msgid "Catalog Number: %1"
 msgstr "Каталошки број: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:648
+#: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Satellites Configuration"
 msgstr "Подешавања сателита"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:651
 msgid "Update TLE lists from Internet sources"
 msgstr "Ажурирајте TLE листе из Интернет извора"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:658
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
@@ -4662,7 +4670,7 @@ msgstr "Ажурирајте TLE листе из Интернет извора"
 msgid "Update from Internet sources"
 msgstr "Ажурирање из интернет извора"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:653
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
@@ -4670,51 +4678,51 @@ msgstr "Ажурирање из интернет извора"
 msgid "Last update:"
 msgstr "Последња допуна:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr "Учесталост ажурирања (сати):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Labels"
 msgstr "Ознаке"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:663
+#: plugins/Satellites/src/ui_satellitesDialog.h:657
 msgid "Label font size (pixels):"
 msgstr "Ознака величине словолика (тачкица) :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:658
 msgid "Orbit lines"
 msgstr "Орбиталне линије"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:666
-#: plugins/Satellites/src/ui_satellitesDialog.h:670
+#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Number of segments used to draw the line"
 msgstr "Број сегмената који ће се користити за исцртавање линије"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:668
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of  segments:"
 msgstr "Број сегмената:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:673
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:667
+#: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Duration of a single segment in seconds"
 msgstr "Трајање једног сегмента у секунди"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:675
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Segment length (s):"
 msgstr "Дужина сегмента (s):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
-#: plugins/Satellites/src/ui_satellitesDialog.h:683
+#: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Number of segments used to draw each end of the line"
 msgstr "Број сегмената коришћен за сваку ивицу цртања"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:685
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Fade length:"
 msgstr "Дужина изблеђивања:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:680
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
@@ -4722,7 +4730,7 @@ msgstr "Дужина изблеђивања:"
 msgid "Restore default settings"
 msgstr "Враћање подразумеване поставке"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:687
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
@@ -4730,7 +4738,7 @@ msgstr "Враћање подразумеване поставке"
 msgid "Save settings as default"
 msgstr "Сачувај подешавања као подразумевана"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
@@ -4738,59 +4746,59 @@ msgstr "Сачувај подешавања као подразумевана"
 msgid "Settings"
 msgstr "Поставке"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Display the selected satellite(s)"
 msgstr "Приказ изабраних сателита"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Displayed"
 msgstr "Приказан"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:694
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Приказ линије орбите за изабране сателите"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:696
+#: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "Orbit"
 msgstr "Орбита"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "Catalog number:"
 msgstr "Каталошки број:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:699
+#: plugins/Satellites/src/ui_satellitesDialog.h:693
 msgid "Description:"
 msgstr "Опис:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:694
 msgid "Groups:"
 msgstr "Групе:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:702
+#: plugins/Satellites/src/ui_satellitesDialog.h:696
 msgid "Comma separated list of groups"
 msgstr "Зарезом одвојена листа група"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:704
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "TLE data:"
 msgstr "TLE подаци:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:706
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid "NORAD two line element orbit data"
 msgstr "NORAD-ови дволинијски подаци о орбитама"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Remove the selected satellites"
 msgstr "Уклони изабране сателите"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:706
 msgid "Add more satellites"
 msgstr "Додај још сателита"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Save changes"
 msgstr "Сачувај измене"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:721
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -4798,15 +4806,15 @@ msgstr ""
 "Унесите или измените УРЛ изабраног извора. Промене ће бити сачуване тако што "
 "ћете притиснути Enter.."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Add new source"
 msgstr "Додај нови извор"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:728
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Remove selected source"
 msgstr "Уклони изабрани извор"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:725
 msgid "Sources"
 msgstr "Извори"
 
@@ -6303,60 +6311,64 @@ msgstr ""
 msgid "Show exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:178
+#: plugins/Exoplanets/src/Exoplanet.cpp:204
 msgid "Metallicity"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:182
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Mass"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Radius"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:196
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Exoplanet"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Period"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "days"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Jup"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Semi-Major Axis"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
+#: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "Inclination"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Angle Distance"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
+msgid "Discovered year"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
@@ -6552,6 +6564,9 @@ msgstr ""
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Завршено преузимање свих каталога звезда!"
+
+#~ msgid "Night mode"
+#~ msgstr "Ноћни режим"
 
 #~ msgid "Planets labels"
 #~ msgstr "Ознаке планета"
