@@ -44,6 +44,7 @@ public:
 
 public slots:
 	void retranslate();
+	void updateIconsColor();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

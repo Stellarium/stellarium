@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
-    <height>199</height>
+    <width>528</width>
+    <height>198</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -210,10 +210,6 @@
             </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="icon">
-             <iconset resource="../../data/gui/guiRes.qrc">
-              <normaloff>:/graphicGui/searchButtonImage.png</normaloff>:/graphicGui/searchButtonImage.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -691,7 +687,7 @@
        <item>
         <widget class="QGroupBox" name="simbadGroupBox">
          <property name="title">
-	  <string>On-line astronomical database SIMBAD</string>
+          <string>On-line astronomical database SIMBAD</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="margin">
@@ -700,7 +696,7 @@
           <item>
            <widget class="QCheckBox" name="checkBoxUseSimbad">
             <property name="text">
-	     <string>Extend search with SIMBAD</string>
+             <string>Extend search with SIMBAD</string>
             </property>
            </widget>
           </item>
@@ -773,8 +769,6 @@
   <tabstop>RAAngleSpinBox</tabstop>
   <tabstop>DEAngleSpinBox</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
