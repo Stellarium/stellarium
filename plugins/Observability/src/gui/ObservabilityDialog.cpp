@@ -141,7 +141,7 @@ void ObservabilityDialog::updateGuiFromSettings(void)
 	ui->fontSize->setValue(GETSTELMODULE(Observability)->getFontSize());
 	int SAlti = GETSTELMODULE(Observability)->getSunAltitude();
 	ui->SunAltitude->setValue(SAlti);
-	ui->AltiText->setText(q_("-%1 deg.").arg(SAlti));
+	ui->AltiText->setText(QString("-%1 %2").arg(SAlti).arg(q_("deg.")));
 }
 
 void ObservabilityDialog::saveSettings(void)
