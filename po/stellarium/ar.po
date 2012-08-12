@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-23 18:43+0700\n"
-"PO-Revision-Date: 2012-05-17 22:53+0000\n"
+"POT-Creation-Date: 2012-06-11 18:38+0700\n"
+"PO-Revision-Date: 2012-06-11 20:36+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-24 10:45+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-06-12 04:44+0000\n"
+"X-Generator: Launchpad (build 15389)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -55,19 +55,19 @@ msgid "Planet: "
 msgstr "كوكب: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:128
+#: plugins/Quasars/src/Quasar.cpp:95 plugins/Pulsars/src/Pulsar.cpp:129
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "‎النوع:‎ <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
-#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "‎القدر:‎ <b>%1</b>"
@@ -110,7 +110,7 @@ msgid "Undocumented type"
 msgstr "نوع غير موثَق"
 
 #: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:123
+#: plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "‎القدر المطلق:‎ %1"
@@ -175,12 +175,12 @@ msgstr "‎القدر‎: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "‎القدر الظاهري‎: <b>%1</b> (بسبب الانطفاء‎)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى‎: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "‎القدر‎: <b>%1</b> (B-V: <b>%2</b>)"
@@ -380,6 +380,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفاع: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:574
+#: plugins/Oculars/src/gui/OcularDialog.cpp:419
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "<P DIR=RTL>المؤلفون"
@@ -389,6 +390,9 @@ msgid "Contact"
 msgstr "<P DIR=RTL>للمراسلة"
 
 #: src/gui/ConfigurationDialog.cpp:658
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Author"
 msgstr "المؤلف"
 
@@ -518,15 +522,15 @@ msgstr "في حالة تنفيذ برنامج نصي (سكريبت)‏"
 
 #: src/gui/HelpDialog.cpp:73
 msgid "Stop currently running script"
-msgstr ""
+msgstr "أوقف تنفيذ السكريبت الحالي"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
 msgid "Pause script execution"
-msgstr ""
+msgstr "جمِّد تنفيذ السكريبت"
 
 #: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
 msgid "Resume script execution"
-msgstr ""
+msgstr "استأنِف تنفيذ السكريبت"
 
 #: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
@@ -545,6 +549,8 @@ msgstr "اجعل سرعة التنفيذ طبيعية"
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
+#: plugins/Supernovae/src/Supernovae.cpp:143
+#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Plugin Key Bindings"
 msgstr "المفاتيح المرتبطة بالبرامج المضافة"
 
@@ -2623,6 +2629,9 @@ msgstr "مساعدة"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
+#: plugins/Quasars/src/ui_quasarsDialog.h:266
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "About"
 msgstr "عن"
 
@@ -3768,15 +3777,15 @@ msgstr "المستشعر #%1"
 msgid "Sensor #%1: %2"
 msgstr "المستشعر #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1735
+#: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Telescope"
 msgstr "&التلسكوب"
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Previous telescope"
 msgstr "&التلسكوب السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:1737
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Next telescope"
 msgstr "&التلسكوب التالي"
 
@@ -3860,6 +3869,93 @@ msgstr "التكبير المتاح بهذا التلسكوب باستخدام �
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr "حقل الرؤية المتاح بهذا التلسكوب باستخدام هذه العدسة"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+msgid "Oculars Plug-in"
+msgstr "إضافة العدسة العينية"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+msgid "Version"
+msgstr "</P><P DIR=RTL>الإصدار"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:423
+msgid "Overview"
+msgstr "تعريف"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:425
+msgid ""
+"This plugin is intended to simulate what you would see through an eyepiece.  "
+"This configuration dialog can be used to add, modify, or delete eyepieces "
+"and telescopes, as well as CCD Sensors.  Your first time running the app "
+"will populate some samples to get your started."
+msgstr ""
+"الغرض من هذه الإضافة هو محاكاة ماتراه من خلال عدسة التلسكوب العينية، "
+"والمنظار الثنائي وإطار صورة الكاميرا الرقمية. يمكنك استخدام نافذة الحوار هذه "
+"لإضافة وتعديل أو حذف العدسات العينية بالإضافة لمستشعرات الكاميرات الرقمية. "
+"عند أول استخدام، سيضيف لك التطبيق نماذج من العدسات العينية والمستشعرات ليسهل "
+"لك البداية."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+msgid ""
+"You can choose to scale the image you see on the screen.  This is intended "
+"to show you a better comparison of what one eyepiece/telescope combination "
+"will be like as compared to another.  The same eyepiece in two different "
+"telescopes of differing focal length will produce two different exit "
+"circles, changing the view someone.  The trade-off of this is that, with the "
+"image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
+"that you leave it off, unless you feel you have a need of it."
+msgstr ""
+"تستطيع تعديل حجم الصورة على الشاشة. الغرض من ذلك هو تسهيل مقارنة المنظر من "
+"خلال أزواج مختلفة من العدسات والتلسكوبات. استخدام نفس العدسة مع تلسكوبين ذوي "
+"بعدين بؤريين مختلفين سيؤدي إلى دائرتي رؤية مختلفتين. إمكانية المقارنة هذه "
+"تأتي على حساب تضييع قدر من الشاشة يمكن استغلاله في علرض المنظر بصورة أفضل. "
+"لذلك من الأفضل عدم استخدام خيار \"تعديل حجم دائرة المشهد\" إلا إذا كنت تعتقد "
+"أنك في حاجة إليه."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+msgid ""
+"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
+"aligned to North.  I've been unable to do so.  So currently it aligns to the "
+"top of the screen."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#, qt-format
+msgid ""
+"You can toggle a Telrad finder; this can only be done when you have not "
+"turned on the Ocular view.  This feature draws three concentric circles of "
+"0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
+"the naked eye through the Telrad (or similar) finder."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+msgid "If you find any issues, please let me know.  Enjoy!"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+msgid "Hot Keys"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+msgid "The plug-in's key bindings can be edited in the General Tab."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+msgid "[no key defined]"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
+msgid "Switches on/off the ocular overlay."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
+msgid "Opens the pop-up navigation menu."
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
@@ -4016,11 +4112,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:230
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
-msgstr "الدليل رقم"
+msgstr "‎رقم الدليل‎"
 
 #: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
-msgstr "التصنيف العالمي"
+msgstr "‎التصنيف العالمي‎"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:248
@@ -4082,10 +4178,6 @@ msgstr "%1 ‎ميجا هرتز ‎(%2%3 ‎كيلوهرتز ‎)"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid "Stellarium Satellites Plugin"
 msgstr "<P DIR=RTL>ميزة الأقمار الصناعية الإضافية لبرنامج ستيللاريوم"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
-msgid "Version"
-msgstr "</P><P DIR=RTL>الإصدار"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
@@ -4221,31 +4313,45 @@ msgid "See %1this document%2 for details."
 msgstr "<P DIR=RTL>انظر %1هذه الوثيقة%2 للتفاصيل."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Links"
 msgstr "<P DIR=RTL>روابط"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#, qt-format
 msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"Satellites "
-"plugin\" in the subject when posting."
+"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
+"subject when posting."
 msgstr ""
-"<P DIR=RTL>الدعم يتم عن طريق موقع Launchpad. تأكد من كتابة \"Satellites "
-"plugin\" في عنوان الموضوع."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول على جواب هنا%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج %1هنا%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -4254,38 +4360,68 @@ msgstr ""
 "المستوى (severity) بكلمة \"wishlist\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "Internet updates disabled"
 msgstr "التحديث عبر الإنترنت غير مفعَّل"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:148
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
 msgid "Updating now..."
 msgstr "التحديث يتم حالياً..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "Next update: < 1 minute"
 msgstr "التحديث التالي: أقل من دقيقة"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "التحديث التالي: %1 دقيقة"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "التحديث التالي: %1 ساعة"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr "حدِّث البيانات الآن"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 msgid "Update from files"
 msgstr "حدِّث من الملفات"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
 msgid "Update error"
 msgstr "حصل خطأ في التحديث"
 
@@ -4362,10 +4498,16 @@ msgid "Update TLE lists from Internet sources"
 msgstr "من مصادر الإنترنت TLE حدث قوائم"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Update from Internet sources"
 msgstr "حدِّث من مصادر الإنترنت"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Last update:"
 msgstr "آخر تحديث"
 
@@ -4413,14 +4555,23 @@ msgid "Fade length:"
 msgstr "طول نهاية الخط"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Restore default settings"
 msgstr "استرجع الإعدادات الأصلية"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
+#: plugins/Quasars/src/ui_quasarsDialog.h:264
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Save settings as default"
 msgstr "احفظ الإعدادات الحالية كإفتراضية"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
+#: plugins/Quasars/src/ui_quasarsDialog.h:265
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 msgid "Settings"
 msgstr "الضبط"
 
@@ -4546,7 +4697,7 @@ msgstr "حرِّك التلسكوب إلى إحداثيات معيَّنة"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr "أضف تلسكوباً جديديداً"
+msgstr "أضف تلسكوباً جديداً"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
@@ -5570,11 +5721,34 @@ msgstr "MPC استورد العناصر المدارية حسب تنسيق"
 msgid "Solar System"
 msgstr "النظام الشمسي"
 
-#: plugins/Supernovae/src/Supernovae.cpp:59
+#: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
 msgstr "المستعرات الموثقة تاريخياً"
 
-#: plugins/Supernovae/src/Supernovae.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:74
+msgid ""
+"A plugin that shows some historical supernovae brighter than 10 visual "
+"magnitude."
+msgstr ""
+
+#: plugins/Supernovae/src/Supernovae.cpp:145
+msgid "Historical Supernovae configuration window"
+msgstr ""
+
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr "مستعر عظيم"
+
+#: plugins/Supernovae/src/Supernova.cpp:115
+#, qt-format
+msgid "Type of supernova: %1"
+msgstr "نوع المستعر: %1"
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
+msgid "Historical Supernovae Plug-in"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
@@ -5591,20 +5765,95 @@ msgstr ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 
-#: plugins/Supernovae/src/Supernova.cpp:99
-msgid "supernova"
-msgstr "مستعر عظيم"
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+msgid "Light curves"
+msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:115
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
-msgid "Type of supernova: %1"
-msgstr "نوع المستعر: %1"
+msgid ""
+"In this plugin implemented simple model of light curves for different "
+"supernovae. Typical view of light curves for supernova type I and type II "
+"you can see %1here%2 (right scale in days) and this model used for plugin."
+msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:59
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+msgid ""
+"We thank the following people for their contribution and of the valuable "
+"comments:"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
+msgid "Sergei Blinnikov"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+msgid "Institute for Theoretical and Experimental Physics"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+msgid "in Russia"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#, qt-format
+msgid "Next update: %1 days"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
+msgid "Historical supernovae is updated"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+msgid "Historical Supernovae Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+msgid "Historical Supernovae Plug-in Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Quasars/src/ui_quasarsDialog.h:255
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
+msgid "Update catalog from Internet"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+msgid "Update frequency (days):"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+msgid "[next update info]"
+msgstr ""
+
+#: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
 msgstr "الكوازارات"
 
-#: plugins/Quasars/src/Quasars.cpp:62
+#: plugins/Quasars/src/Quasars.cpp:74
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
@@ -5614,140 +5863,247 @@ msgstr ""
 "ويحوي مجموعة من الكوزرات مصدرها الطبعة الثالثة عشرة من كتاب 'Quasars and "
 "Active Galactic Nuclei'' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Quasars/src/Quasars.cpp:148
+msgid "Quasars configuration window"
+msgstr ""
+
+#: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
 msgstr "كوازار"
 
-#: plugins/Quasars/src/Quasar.cpp:134
+#: plugins/Quasars/src/Quasar.cpp:137
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "‎ Z (الإزاحة الحمراء‎): %1"
 
-#: plugins/Pulsars/src/Pulsars.cpp:59
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
+msgid "Quasars Plug-in"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
+msgid ""
+"The Quasars plugin provides visualization of some quasars brighter than 16 "
+"visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
+"Galactic Nuclei\" (13th Ed.)"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
+msgid "Veron+ 2010"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
+msgid "Quasars is updated"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+msgid "Quasars Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+msgid "Quasars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+msgid "Display mode for quasars"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+msgid "Enable display of distribution for quasars"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
 msgstr "النجوم النابضة"
 
-#: plugins/Pulsars/src/Pulsars.cpp:62
+#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
-"about each one. Pulsar data is derived from 'The ATNF Pulsar Catalogue'  "
-"(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
-"1993-2006 (2005) (astro-ph/0412641)).<br><br>Note: pulsar identifiers have "
-"the prefix 'PSR'"
+"about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:128
+#: plugins/Pulsars/src/Pulsars.cpp:148
+msgid "Pulsars configuration window"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
 msgstr "نجم نابض"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:139
+#: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr "‎دورة المركز الكتلي‎:%1 ثانية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:143
+#: plugins/Pulsars/src/Pulsar.cpp:144
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr ""
+msgstr "‎الوقت المشتق من دورة المركز الكتلي‎: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:149
 msgid "Dispersion measure:"
-msgstr ""
+msgstr "‎مقياس التشتت‎:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:151
+#: plugins/Pulsars/src/Pulsar.cpp:152
 msgid "cm"
-msgstr ""
+msgstr "سم"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
-msgstr ""
+msgstr "فرسخ نجمي"
 
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr ""
+msgstr "‎معدّل فقدان طاقة سرعة الدوران التنازلية‎: %1 ‎ إرج في الثانية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr ""
+msgstr "‎الدرة الثنائية للنجم النابض‎: %1‎ يوم"
 
-#: plugins/Pulsars/src/Pulsar.cpp:168
+#: plugins/Pulsars/src/Pulsar.cpp:169
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "‎اختلاف المركز‎: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:173
+#: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "‎اختلاف المنظر السنوي‎: %1‎ ميللي ثانية قوسية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:177
+#: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
+"‎المسافة بالاعتماد على نموذج كثافة الإلكترون‎: %1 ‎ كيلو فرسخ نجمي ‎ (%2‎ "
+"سنة ضوئية ‎)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:181
+#: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr "‎عرض قوة إشارة النبض عند 50% من أقصى حد‎: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
-#: plugins/Pulsars/src/Pulsar.cpp:211
+#: plugins/Pulsars/src/Pulsar.cpp:188 plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgid "Time averaged flux density at"
 msgstr "كثافة معدل التدفق الوقتي عند‎"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Pulsars/src/Pulsar.cpp:203
+#: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "MHz"
 msgstr "‎MHz‎"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:193 plugins/Pulsars/src/Pulsar.cpp:205
-#: plugins/Pulsars/src/Pulsar.cpp:217
+#: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Pulsars/src/Pulsar.cpp:206
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "mJy"
 msgstr "mJy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:221
+#: plugins/Pulsars/src/Pulsar.cpp:222
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "‎ملاحظات‎: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:283
+#: plugins/Pulsars/src/Pulsar.cpp:291
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
-msgstr ""
+msgstr "نجم نابض شاذ ذو أشعة سينية أو مردّد أشعة جاما ضعيفة مع نبضات مكتشفة"
 
-#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Pulsars/src/Pulsar.cpp:296
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "لديه مرافق ثنائي أو أكثر"
 
-#: plugins/Pulsars/src/Pulsar.cpp:293
+#: plugins/Pulsars/src/Pulsar.cpp:301
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
+"مع إشعاعات نابضة في نطاق الموجات الراديوية وماتحت الحمراء أو الترددات الأعلى"
 
-#: plugins/Pulsars/src/Pulsar.cpp:298
+#: plugins/Pulsars/src/Pulsar.cpp:306
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
+"مع إشعاعات نابضة في نطاق الموجات ماتحت الحمراء أو الترددات الأعلى فقط"
 
-#: plugins/Pulsars/src/Pulsar.cpp:303
+#: plugins/Pulsars/src/Pulsar.cpp:311
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "مع إشعاعات نابضة في نطاق الموجات الراديوية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:308
+#: plugins/Pulsars/src/Pulsar.cpp:316
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "مع إشعاعات نابضة متقطعة في نطاق الموجات الراديوية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:313
+#: plugins/Pulsars/src/Pulsar.cpp:321
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
+msgstr ""
+"نجم نيوتروني منعزل مع انبعاث أشعة سينية حرارية ولكن من دون انبعاث موجات "
+"راديوية محسوسة"
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
+msgid "Pulsars Plug-in"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
+#, qt-format
+msgid ""
+"Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
+"Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
+msgid "Note"
+msgstr "ملحوظة"
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
+msgid "pulsar identifiers have the prefix 'PSR'"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
+msgid "Vladimir Samodourov"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
+msgid "Pushchino Radio Astronomy Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+msgid "Maciej Serylak"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
+msgid "Nancay Radioastronomical Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+msgid "in France"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
+msgid "Pulsars is updated"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Pulsars Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+msgid "Pulsars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+msgid "Display mode for pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+msgid "Enable display of distribution for pulsars"
 msgstr ""
 
 #~ msgid "Equatorial Grid"
@@ -5977,6 +6333,13 @@ msgstr ""
 
 #~ msgid "Art brightness: "
 #~ msgstr "سطوع الرسومات "
+
+#~ msgid ""
+#~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
+#~ "plugin\" in the subject when posting."
+#~ msgstr ""
+#~ "<P DIR=RTL>الدعم يتم عن طريق موقع Launchpad. تأكد من كتابة \"Satellites "
+#~ "plugin\" في عنوان الموضوع."
 
 #~ msgid ""
 #~ "This plugin plots the position of various pulsars, with object information "
