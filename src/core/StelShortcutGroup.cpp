@@ -27,7 +27,7 @@
 #include <QDebug>
 
 
-StelShortcut::StelShortcut(const QString &id, const QString &text,
+StelShortcut::StelShortcut(const QString &id, StelShortcutGroup* group, const QString &text,
 													 const QString &primaryKey, const QString &altKey,
 													 bool checkable, bool autoRepeat, bool global,
 													 QGraphicsWidget *parent) :
@@ -39,6 +39,7 @@ StelShortcut::StelShortcut(const QString &id, const QString &text,
 	}
 	m_action = new QAction(parent);
 	m_action->setObjectName(id);
+	m_group = group;
 
 	setText(text);
 	setPrimaryKey(primaryKey);
@@ -55,7 +56,7 @@ StelShortcut::~StelShortcut()
 	delete m_action; m_action = NULL;
 }
 
-QVariant StelShortcut::toQVariant()
+QVariant StelShortcut::toQVariant() const
 {
 	QVariantMap resMap;
 	resMap["text"] = QVariant(m_text);
@@ -81,30 +82,35 @@ void StelShortcut::setText(const QString &text)
 	m_text = text;
 	m_action->setText(q_(text));
 	m_action->setProperty("englishText", QVariant(text));
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setPrimaryKey(const QKeySequence &key)
 {
 	m_primaryKey = key;
-	updateShortcuts();
+	updateActionShortcuts();
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setAltKey(const QKeySequence &key)
 {
 	m_altKey = key;
-	updateShortcuts();
+	updateActionShortcuts();
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setCheckable(bool c)
 {
 	m_checkable = c;
 	m_action->setCheckable(c);
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setAutoRepeat(bool ar)
 {
 	m_autoRepeat = ar;
 	m_action->setAutoRepeat(ar);
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setGlobal(bool g)
@@ -118,11 +124,13 @@ void StelShortcut::setGlobal(bool g)
 	{
 		m_action->setShortcutContext(Qt::WidgetShortcut);
 	}
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setTemporary(bool temp)
 {
 	m_temporary = temp;
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setScript(const QString &scriptText)
@@ -137,19 +145,21 @@ void StelShortcut::setScript(const QString &scriptText)
 	}
 	m_script = preprocessedScript;
 	connect(m_action, SIGNAL(triggered()), this, SLOT(runScript()));
+	emit shortcutChanged(this);
 }
 
 void StelShortcut::setScriptPath(const QString &scriptPath)
 {
 	m_scriptFile = scriptPath;
+	emit shortcutChanged(this);
 }
 
-void StelShortcut::runScript()
+void StelShortcut::runScript() const
 {
 	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(m_script);
 }
 
-void StelShortcut::updateShortcuts()
+void StelShortcut::updateActionShortcuts()
 {
 	QList<QKeySequence> list;
 	list << m_primaryKey << m_altKey;
@@ -162,13 +172,17 @@ StelShortcutGroup::StelShortcutGroup(QString id, QString text) :
 {
 }
 
-QAction* StelShortcutGroup::registerAction(const QString &actionId, const QString &text, const QString &primaryKey,
+StelShortcutGroup::~StelShortcutGroup()
+{
+}
+
+QAction* StelShortcutGroup::registerAction(const QString &actionId, bool temporary, const QString &text, const QString &primaryKey,
 																					 const QString &altKey, bool checkable, bool autoRepeat, bool global, QGraphicsWidget *parent)
 {
 	if (m_shortcuts.contains(actionId))
 	{
-		qWarning() << "Attempt to add an existing shortcut with id: " << actionId << ", rewrite properties";
 		StelShortcut *shortcut = getShortcut(actionId);
+		shortcut->setTemporary(temporary);
 		shortcut->setText(text);
 		shortcut->setPrimaryKey(primaryKey);
 		shortcut->setAltKey(altKey);
@@ -177,7 +191,8 @@ QAction* StelShortcutGroup::registerAction(const QString &actionId, const QStrin
 		shortcut->setGlobal(global);
 		return shortcut->getAction();
 	}
-	StelShortcut* newShortcut = new StelShortcut(actionId, text, primaryKey, altKey, checkable, autoRepeat, global, parent);
+	StelShortcut* newShortcut = new StelShortcut(actionId, this, text, primaryKey, altKey, checkable, autoRepeat, global, parent);
+	connect(newShortcut, SIGNAL(shortcutChanged(StelShortcut*)), this, SIGNAL(shortcutChanged(StelShortcut*)));
 	m_shortcuts[actionId] = newShortcut;
 	return newShortcut->getAction();
 }
@@ -212,13 +227,13 @@ QList<StelShortcut *> StelShortcutGroup::getActionList() const
 	return res;
 }
 
-QVariant StelShortcutGroup::toQVariant()
+QVariant StelShortcutGroup::toQVariant() const
 {
 	QVariantMap resMap;
 	resMap["text"] = QVariant(m_text);
 	resMap["pluginId"] = QVariant(m_pluginId);
 	QVariantMap actionsMap;
-	for (QMap<QString, StelShortcut*>::iterator it = m_shortcuts.begin(); it != m_shortcuts.end(); ++it)
+	for (QMap<QString, StelShortcut*>::const_iterator it = m_shortcuts.begin(); it != m_shortcuts.end(); ++it)
 	{
 		StelShortcut* sc = it.value();
 		if (!sc->isTemporary())

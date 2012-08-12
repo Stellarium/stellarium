@@ -273,9 +273,9 @@ void ShortcutsDialog::handleChanges()
 	{
 		ui->altBackspaceButton->setEnabled(true);
 	}
+	// updating apply button
 	QString primText = ui->primaryShortcutEdit->text();
 	QString altText = ui->altShortcutEdit->text();
-	// updating apply button
 	if (primText == ui->shortcutsTreeWidget->currentItem()->text(1) &&
 			altText == ui->shortcutsTreeWidget->currentItem()->text(2))
 	{
@@ -303,9 +303,7 @@ void ShortcutsDialog::applyChanges() const
 	// changing keys in shortcuts
 	shortcutMgr->changeActionPrimaryKey(actionId, groupId, ui->primaryShortcutEdit->getKeySequence());
 	shortcutMgr->changeActionAltKey(actionId, groupId, ui->altShortcutEdit->getKeySequence());
-	// changing displaying information in tree
-	ui->shortcutsTreeWidget->currentItem()->setText(1, ui->primaryShortcutEdit->text());
-	ui->shortcutsTreeWidget->currentItem()->setText(2, ui->altShortcutEdit->text());
+	// no need to change displaying information, as it changed in mgr, and will be updated in connected slot
 
 	// save shortcuts to file
 	shortcutMgr->saveShortcuts();
@@ -331,13 +329,17 @@ void ShortcutsDialog::createDialogContent()
 	connect(ui->shortcutsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(initEditors()));
 	connect(ui->shortcutsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(switchToEditors(QModelIndex)));
 	// apply button logic
-	connect(ui->applyButton, SIGNAL(released()), this, SLOT(applyChanges()));
+	connect(ui->applyButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
+	// restore defaults button logic
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), shortcutMgr, SLOT(restoreDefaultShortcuts()));
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
 	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), shortcutMgr, SLOT(setAllActionsEnabled(bool)));
 	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), shortcutMgr, SLOT(setAllActionsEnabled(bool)));
 	// handling changes in editors
 	connect(ui->primaryShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
 	connect(ui->altShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
+	// handle outer shortcuts changes
+	connect(shortcutMgr, SIGNAL(shortcutChanged(StelShortcut*)), this, SLOT(updateShortcutsItem(StelShortcut*)));
 
 	// Create shortcuts tree
 	QList<StelShortcutGroup*> groups = shortcutMgr->getGroupList();
@@ -345,28 +347,16 @@ void ShortcutsDialog::createDialogContent()
 	{
 		// don't show disabled groups
 		if (!group->isEnabled()) continue;
-		QTreeWidgetItem* groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
-		// group items aren't selectable
-		groupItem->setFlags(Qt::ItemIsEnabled);
-		QString text((group->getText().isEmpty() ? group->getId() : group->getText()));
-		groupItem->setText(0, text);
-		// store id
-		groupItem->setData(0, Qt::UserRole, group->getId());
-		groupItem->setExpanded(true);
-		// setup bold font for group lines
-		QFont rootFont = groupItem->font(0);
-		rootFont.setBold(true); rootFont.setPixelSize(14);
-		groupItem->setFont(0, rootFont);
-		// displaying group's shortcuts
+
+		QTreeWidgetItem* groupItem = addGroup(group);
+		// display group's shortcuts
 		QList<StelShortcut*> shortcuts = group->getActionList();
 		foreach (StelShortcut* shortcut, shortcuts)
 		{
 			QTreeWidgetItem* shortcutItem = new QTreeWidgetItem(groupItem);
-			shortcutItem->setText(0, shortcut->getText());
 			// store shortcut id, so we can find it when shortcut changed
 			shortcutItem->setData(0, Qt::UserRole, QVariant(shortcut->getId()));
-			shortcutItem->setData(1, Qt::DisplayRole, shortcut->getPrimaryKey());
-			shortcutItem->setData(2, Qt::DisplayRole, shortcut->getAltKey());
+			updateShortcutsItem(shortcut, shortcutItem);
 		}
 	}
 	updateText();
@@ -376,9 +366,71 @@ void ShortcutsDialog::updateText()
 {
 }
 
+QTreeWidgetItem *ShortcutsDialog::addGroup(StelShortcutGroup *group)
+{
+	QTreeWidgetItem* groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
+	// group items aren't selectable, so reset default flag
+	groupItem->setFlags(Qt::ItemIsEnabled);
+	// setup displayed text
+	QString text((group->getText().isEmpty() ? group->getId() : group->getText()));
+	groupItem->setText(0, text);
+	// store id
+	groupItem->setData(0, Qt::UserRole, group->getId());
+	// expand by default
+	groupItem->setExpanded(true);
+	// setup bold font for group lines
+	QFont rootFont = groupItem->font(0);
+	rootFont.setBold(true); rootFont.setPixelSize(14);
+	groupItem->setFont(0, rootFont);
+
+	return groupItem;
+}
+
+QTreeWidgetItem *ShortcutsDialog::findItemByData(QVariant value, int role, int column)
+{
+	QTreeWidgetItemIterator it(ui->shortcutsTreeWidget);
+	while (*it)
+	{
+		if ((*it)->data(column, role) == value)
+		{
+			return (*it);
+		}
+		++it;
+	}
+	return NULL;
+}
+
+void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut, QTreeWidgetItem *shortcutTreeItem)
+{
+	if (shortcutTreeItem == NULL)
+	{
+		// search for item
+		shortcutTreeItem = findItemByData(QVariant(shortcut->getId()), Qt::UserRole, 0);
+	}
+	// we didn't find item, create and add new
+	if (shortcutTreeItem == NULL)
+	{
+		// firstly search for group
+		QTreeWidgetItem* groupItem = findItemByData(QVariant(shortcut->getGroup()->getId()), Qt::UserRole, 0);
+		if (groupItem == NULL)
+		{
+			// create and add new group to treeWidget
+			groupItem = addGroup(shortcut->getGroup());
+		}
+		// create shortcut item
+		shortcutTreeItem = new QTreeWidgetItem(groupItem);
+		// store shortcut id, so we can find it when shortcut changed
+		shortcutTreeItem->setData(0, Qt::UserRole, QVariant(shortcut->getId()));
+	}
+	// setup properties of item
+	shortcutTreeItem->setText(0, shortcut->getText());
+	shortcutTreeItem->setData(1, Qt::DisplayRole, shortcut->getPrimaryKey());
+	shortcutTreeItem->setData(2, Qt::DisplayRole, shortcut->getAltKey());
+}
+
 bool ShortcutsDialog::itemIsEditable(QTreeWidgetItem *item)
 {
 	if (item == NULL) return false;
-	// non-editable items have no Qt::ItemIsSelectable flag
+	// non-editable items(not group items) have no Qt::ItemIsSelectable flag
 	return (Qt::ItemIsSelectable & item->flags());
 }
