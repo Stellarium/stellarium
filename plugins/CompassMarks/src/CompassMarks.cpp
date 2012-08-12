@@ -144,8 +144,10 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214
 
 	renderer->setFont(font);
-	renderer->setGlobalColor(markColor[0], markColor[1], markColor[2],
-	                         markFader.getInterstate());
+	const Vec3f mColor = StelApp::getInstance().getVisionModeNight() 
+	                   ? StelUtils::getNightColor(markColor) : markColor;
+
+	renderer->setGlobalColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
 	renderer->setBlendMode(BlendMode_Alpha);
 
 	StelCircleArcRenderer circleArcRenderer(renderer, prj);

@@ -71,6 +71,8 @@
 #include <QGraphicsWidget>
 #include <QGraphicsGridLayout>
 #include <QClipboard>
+#include <QPalette>
+#include <QColor>
 
 StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 {
@@ -189,7 +191,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
 	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
 
-	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false);
+	addGuiActions("actionShow_Night_Mode", N_("Night vision mode"), "Ctrl+N", group, true, false);
 	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false, true);
 	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
 	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
@@ -559,6 +561,16 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
+
+	// The disabled text for checkboxes is embossed with the QPalette::Light setting for the ColorGroup Disabled.
+	// It doesn't appear to be possible to set this from the stylesheet.  Instead we'll make it 100% transparent
+	// and set the text color for disabled in the stylesheets.
+	QPalette p = QApplication::palette();
+	p.setColor(QPalette::Disabled, QPalette::Light, QColor(0,0,0,0));
+
+	// And this is for the focus...  apparently the focus indicator is the inverted value for Active/Button.
+	p.setColor(QPalette::Active, QPalette::Button, QColor(255,255,255));
+	QApplication::setPalette(p);
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));

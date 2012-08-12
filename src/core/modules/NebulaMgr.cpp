@@ -186,7 +186,10 @@ void NebulaMgr::drawPointer(const StelCore* core, StelRenderer* renderer)
 		// Compute 2D pos and don't draw if outside screen
 		if (!prj->projectInPlace(pos)) return;
 
-		renderer->setGlobalColor(Vec4f(0.4f, 0.5f, 0.8f, 1.0f));
+		const Vec4f color = StelApp::getInstance().getVisionModeNight()
+		                  ? Vec4f(0.8f,0.0f,0.0f,1.0f) : Vec4f(0.4f,0.5f,0.8f,1.0f);
+		renderer->setGlobalColor(color);
+
 		if(NULL == texPointer)
 		{
 			texPointer = renderer->createTexture("textures/pointeur5.png");   // Load pointer texture

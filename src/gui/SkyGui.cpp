@@ -278,10 +278,10 @@ void SkyGui::setStelStyle(const QString& style)
 {
 	if (style == "night_color")
 	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
+		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.0,0.0,0.5));
+		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.0, 0.00, 0.2));
+		buttonBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
+		winBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
 		winBar->setRedMode(true);
 		buttonBar->setRedMode(true);
 		btHorizAutoHide->setRedMode(true);
