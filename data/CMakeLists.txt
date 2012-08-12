@@ -5,6 +5,7 @@ INSTALL(FILES stellarium.ico ssystem.ini base_locations.bin.gz DejaVuSans.ttf de
 INSTALL(FILES shaders/smap.v.glsl shaders/smap.f.glsl DESTINATION share/${PACKAGE}/data/shaders)
 INSTALL(FILES shaders/bmap.v.glsl shaders/bmap.f.glsl DESTINATION share/${PACKAGE}/data/shaders)
 INSTALL(FILES shaders/univ.v.glsl shaders/univ.f.glsl DESTINATION share/${PACKAGE}/data/shaders)
+INSTALL(FILES shaders/debug.v.glsl shaders/debug.f.glsl DESTINATION share/${PACKAGE}/data/shaders)
 
 IF (BUILD_FOR_MAEMO)
   INSTALL(FILES stellarium.desktop DESTINATION /usr/share/applications/hildon)
