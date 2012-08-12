@@ -104,6 +104,7 @@ void Quasars::deinit()
 	if(NULL != texPointer)    {delete texPointer;}
 	if(NULL != markerTexture) {delete markerTexture;}
 	texPointer = markerTexture = NULL;
+	QSO.clear();
 }
 
 /*

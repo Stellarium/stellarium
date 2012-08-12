@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>528</width>
-    <height>487</height>
+    <height>483</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
    <item>
     <widget class="BarFrame" name="TitleBar">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -36,7 +36,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>560</width>
+       <width>16777215</width>
        <height>25</height>
       </size>
      </property>
@@ -276,7 +276,7 @@
      </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
-       <string>About</string>
+       <string>About plugin</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <property name="spacing">

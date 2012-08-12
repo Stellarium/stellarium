@@ -54,7 +54,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	}
 	else
 	{
-		Vmag = -99;
+		Vmag = 99;
 	}
 	sradius = map.value("sradius").toFloat();
 	effectiveTemp = map.value("effectiveTemp").toInt();
@@ -119,8 +119,14 @@ QVariantMap Exoplanet::getMap(void)
 
 float Exoplanet::getSelectPriority(const StelCore* core) const
 {
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core, false);
+	if (getVMagnitude(core, false)>20.f)
+	{
+		return 20.f;
+	}
+	else
+	{
+		return getVMagnitude(core, false) - 1.f;
+	}
 }
 
 QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -135,14 +141,17 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Magnitude)
 	{
-		if (core->getSkyDrawer()->getFlagHasAtmosphere() && Vmag>-99)
+		if (Vmag<99)
 		{
-			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-											QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
-		}
-		else
-		{
-			oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core, false), 'f', 2)) << "<br>";
+			if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			{
+				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+												QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+			}
+			else
+			{
+				oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core, false), 'f', 2)) << "<br>";
+			}
 		}
 	}
 
@@ -163,7 +172,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	{
 		if (smetal!=0)
 		{
-			oss << QString("Fe/H: %1").arg(smetal) << "<br>";
+			oss << QString("%1 [Fe/H]: %2").arg(q_("Metallicity")).arg(smetal) << "<br>";
 		}
 		if (smass>0)
 		{
@@ -287,7 +296,7 @@ float Exoplanet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
-	if (Vmag>-99)
+	if (Vmag<99)
 	{
 		return Vmag + extinctionMag;
 	}
@@ -299,7 +308,7 @@ float Exoplanet::getVMagnitude(const StelCore* core, bool withExtinction) const
 
 double Exoplanet::getAngularSize(const StelCore*) const
 {
-	return 0.00001;
+	return 0.0001;
 }
 
 void Exoplanet::update(double deltaTime)

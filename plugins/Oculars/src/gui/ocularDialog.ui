@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>513</width>
+    <width>511</width>
     <height>400</height>
    </rect>
   </property>
@@ -147,7 +147,7 @@
       <item>
        <widget class="QTabWidget" name="Tabs">
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
@@ -1226,7 +1226,7 @@
         </widget>
         <widget class="QWidget" name="About">
          <attribute name="title">
-          <string>About</string>
+          <string>About plugin</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout">
           <property name="margin">
