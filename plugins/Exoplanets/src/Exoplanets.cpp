@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2012 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,12 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "LabelMgr.hpp"
-#include "Quasar.hpp"
-#include "Quasars.hpp"
 #include "renderer/StelRenderer.hpp"
-#include "QuasarsDialog.hpp"
+#include "renderer/StelTextureNew.hpp"
+#include "LabelMgr.hpp"
+#include "Exoplanets.hpp"
+#include "Exoplanet.hpp"
+#include "ExoplanetsDialog.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -40,15 +41,15 @@
 #include <QAction>
 #include <QProgressBar>
 #include <QDebug>
-#include <QFile>
 #include <QFileInfo>
+#include <QFile>
 #include <QTimer>
+#include <QVariantMap>
+#include <QVariant>
 #include <QList>
 #include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
-#include <QVariant>
-#include <QVariantMap>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -56,37 +57,37 @@
  This method is the one called automatically by the StelModuleMgr just 
  after loading the dynamic library
 */
-StelModule* QuasarsStelPluginInterface::getStelModule() const
+StelModule* ExoplanetsStelPluginInterface::getStelModule() const
 {
-	return new Quasars();
+	return new Exoplanets();
 }
 
-StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
+StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 {
-	Q_INIT_RESOURCE(Quasars);
+	Q_INIT_RESOURCE(Exoplanets);
 
 	StelPluginInfo info;
-	info.id = "Quasars";
-	info.displayedName = N_("Quasars");
+	info.id = "Exoplanets";
+	info.displayedName = N_("Exoplanets");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("A plugin that shows some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V");
+	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
+Q_EXPORT_PLUGIN2(Exoplanets, ExoplanetsStelPluginInterface)
 
 
 /*
  Constructor
 */
-Quasars::Quasars()
+Exoplanets::Exoplanets()
 	: texPointer(NULL)
 	, markerTexture(NULL)
 	, progressBar(NULL)
 {
-	setObjectName("Quasars");
-	configDialog = new QuasarsDialog();
+	setObjectName("Exoplanets");
+	exoplanetsConfigDialog = new ExoplanetsDialog();
 	conf = StelApp::getInstance().getSettings();
 	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
@@ -94,22 +95,28 @@ Quasars::Quasars()
 /*
  Destructor
 */
-Quasars::~Quasars()
+Exoplanets::~Exoplanets()
 {
-	delete configDialog;
+	delete exoplanetsConfigDialog;
 }
 
-void Quasars::deinit()
+void Exoplanets::deinit()
 {
+	ep.clear();
 	if(NULL != texPointer)    {delete texPointer;}
 	if(NULL != markerTexture) {delete markerTexture;}
 	texPointer = markerTexture = NULL;
 }
 
+void Exoplanets::update(double) //deltaTime
+{
+	//
+}
+
 /*
  Reimplementation of the getCallOrder method
 */
-double Quasars::getCallOrder(StelModuleActionName actionName) const
+double Exoplanets::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
@@ -120,36 +127,36 @@ double Quasars::getCallOrder(StelModuleActionName actionName) const
 /*
  Init our module
 */
-void Quasars::init()
+void Exoplanets::init()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Quasars");
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Exoplanets");
 
 		// If no settings in the main config file, create with defaults
-		if (!conf->childGroups().contains("Quasars"))
+		if (!conf->childGroups().contains("Exoplanets"))
 		{
-			qDebug() << "Quasars::init no Quasars section exists in main config file - creating with defaults";
+			qDebug() << "Exoplanets::init no Exoplanets section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
+		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
 
 		// key bindings and other actions
 		// TRANSLATORS: Title of a group of key bindings in the Help window
 		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Quasars_ConfigDialog", N_("Quasars configuration window"), "", groupName, true);
+		gui->addGuiActions("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets configuration window"), "", groupName, true);
 
-		connect(gui->getGuiActions("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
+		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Quasars::init error: " << e.what();
+		qWarning() << "Exoplanets::init error: " << e.what();
 		return;
 	}
 
@@ -161,7 +168,7 @@ void Quasars::init()
 	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(catalogJsonPath).exists())
+	if(QFileInfo(jsonCatalogPath).exists())
 	{
 		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
 		{
@@ -170,11 +177,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "Quasars::init catalog.json does not exist - copying default file to " << catalogJsonPath;
+		qDebug() << "Exoplanets::init catalog.json does not exist - copying default file to " << jsonCatalogPath;
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Quasars::init using catalog.json file: " << catalogJsonPath;
+	qDebug() << "Exoplanets::init using catalog.json file: " << jsonCatalogPath;
 
 	readJsonFile();
 
@@ -192,61 +199,56 @@ void Quasars::init()
 }
 
 /*
- Draw our module. This should print name of first QSO in the main window
+ Draw our module. This should print name of first PSR in the main window
 */
-void Quasars::draw(StelCore* core, class StelRenderer* renderer)
+void Exoplanets::draw(StelCore* core, StelRenderer* renderer)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	renderer->setFont(font);
 
-	if(NULL == markerTexture)
+	if(NULL == texPointer)
 	{
-		markerTexture = renderer->createTexture(":/Quasars/quasar.png");
+		Q_ASSERT_X(NULL == markerTexture, Q_FUNC_INFO, "Textures need to be created simultaneously");
+		texPointer    = renderer->createTexture("textures/pointeur2.png");
+		markerTexture = renderer->createTexture(":/Exoplanets/exoplanet.png");
 	}
 	
-	foreach (const QuasarP& quasar, QSO)
+	foreach (const ExoplanetP& eps, ep)
 	{
-		if (quasar && quasar->initialized)
-		{
-			quasar->draw(core, renderer, prj, markerTexture);
-		}
+		if (eps && eps->initialized)
+			eps->draw(core, renderer, prj, markerTexture);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-	{
 		drawPointer(core, renderer, prj);
-	}
+
 }
 
-void Quasars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Exoplanets::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Quasar");
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Exoplanet");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenPos;
+		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, screenPos))
-		{
+		if (!projector->project(pos, screenpos))
 			return;
-		}
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur2.png");
-		}
 
 		const Vec3f& c(obj->getInfoColor());
-		renderer->setGlobalColor(c[0], c[1], c[2]);
+		renderer->setGlobalColor(c[0],c[1],c[2]);
 		texPointer->bind();
 		renderer->setBlendMode(BlendMode_Alpha);
-		renderer->drawTexturedRect(screenPos[0] - 13.0f, screenPos[1] - 13.0f, 26.0f, 26.0f, 
-		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
+		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 
+		                           26.0f, StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 }
 
-QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> Exoplanets::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
 
@@ -255,15 +257,15 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const QuasarP& quasar, QSO)
+	foreach(const ExoplanetP& eps, ep)
 	{
-		if (quasar->initialized)
+		if (eps->initialized)
 		{
-			equPos = quasar->XYZ;
+			equPos = eps->XYZ;
 			equPos.normalize();
 			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 			{
-				result.append(qSharedPointerCast<StelObject>(quasar));
+				result.append(qSharedPointerCast<StelObject>(eps));
 			}
 		}
 	}
@@ -271,43 +273,43 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 	return result;
 }
 
-StelObjectP Quasars::searchByName(const QString& englishName) const
+StelObjectP Exoplanets::searchByName(const QString& englishName) const
 {
 	QString objw = englishName.toUpper();
-	foreach(const QuasarP& quasar, QSO)
+	foreach(const ExoplanetP& eps, ep)
 	{
-		if (quasar->getEnglishName().toUpper() == englishName)
-			return qSharedPointerCast<StelObject>(quasar);
+		if (eps->getEnglishName().toUpper() == englishName)
+			return qSharedPointerCast<StelObject>(eps);
 	}
 
 	return NULL;
 }
 
-StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
+StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	foreach(const QuasarP& quasar, QSO)
+	foreach(const ExoplanetP& eps, ep)
 	{
-		if (quasar->getNameI18n().toUpper() == nameI18n)
-			return qSharedPointerCast<StelObject>(quasar);
+		if (eps->getNameI18n().toUpper() == nameI18n)
+			return qSharedPointerCast<StelObject>(eps);
 	}
 
 	return NULL;
 }
 
-QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
 
-	foreach(const QuasarP& quasar, QSO)
+	foreach(const ExoplanetP& eps, ep)
 	{
-		if (quasar->getNameI18n().toUpper().left(objw.length()) == objw)
+		if (eps->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << quasar->getNameI18n().toUpper();
+				result << eps->getNameI18n().toUpper();
 		}
 	}
 
@@ -320,46 +322,45 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 /*
   Replace the JSON file with the default from the compiled-in resource
 */
-void Quasars::restoreDefaultJsonFile(void)
+void Exoplanets::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(catalogJsonPath).exists())
+	if (QFileInfo(jsonCatalogPath).exists())
 		backupJsonFile(true);
 
-	QFile src(":/Quasars/quasars.json");
-	if (!src.copy(catalogJsonPath))
+	QFile src(":/Exoplanets/exoplanets.json");
+	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "Quasars::restoreDefaultJsonFile cannot copy json resource to " + catalogJsonPath;
+		qWarning() << "Exoplanets::restoreDefaultJsonFile cannot copy json resource to " + jsonCatalogPath;
 	}
 	else
 	{
-		qDebug() << "Quasars::init copied default catalog.json to " << catalogJsonPath;
+		qDebug() << "Exoplanets::init copied default exoplanets.json to " << jsonCatalogPath;
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
-		QFile dest(catalogJsonPath);
+		QFile dest(jsonCatalogPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 
 		// Make sure that in the case where an online update has previously been done, but
 		// the json file has been manually removed, that an update is schreduled in a timely
 		// manner
-		conf->remove("Quasars/last_update");
+		conf->remove("Exoplanets/last_update");
 		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
-
 	}
 }
 
 /*
-  Creates a backup of the Quasars.json file called Quasars.json.old
+  Creates a backup of the exoplanets.json file called exoplanets.json.old
 */
-bool Quasars::backupJsonFile(bool deleteOriginal)
+bool Exoplanets::backupJsonFile(bool deleteOriginal)
 {
-	QFile old(catalogJsonPath);
+	QFile old(jsonCatalogPath);
 	if (!old.exists())
 	{
-		qWarning() << "Quasars::backupJsonFile no file to backup";
+		qWarning() << "Exoplanets::backupJsonFile no file to backup";
 		return false;
 	}
 
-	QString backupPath = catalogJsonPath + ".old";
+	QString backupPath = jsonCatalogPath + ".old";
 	if (QFileInfo(backupPath).exists())
 		QFile(backupPath).remove();
 
@@ -369,14 +370,14 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Quasars::backupJsonFile WARNING - could not remove old quasars.json file";
+				qWarning() << "Exoplanets::backupJsonFile WARNING - could not remove old exoplanets.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Quasars::backupJsonFile WARNING - failed to copy quasars.json to quasars.json.old";
+		qWarning() << "Exoplanets::backupJsonFile WARNING - failed to copy exoplanets.json to exoplanets.json.old";
 		return false;
 	}
 
@@ -384,25 +385,25 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 }
 
 /*
-  Read the JSON file and create list of quasars.
+  Read the JSON file and create list of exoplanets.
 */
-void Quasars::readJsonFile(void)
+void Exoplanets::readJsonFile(void)
 {
-	setQSOMap(loadQSOMap());
+	setEPMap(loadEPMap());
 }
 
 /*
-  Parse JSON file and load quasarss to map
+  Parse JSON file and load exoplanets to map
 */
-QVariantMap Quasars::loadQSOMap(QString path)
+QVariantMap Exoplanets::loadEPMap(QString path)
 {
 	if (path.isEmpty())
-	    path = catalogJsonPath;
+	    path = jsonCatalogPath;
 
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Quasars::loadQSOMap cannot open " << path;
+	    qWarning() << "Exoplanets::loadEPMap cannot open " << path;
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -413,66 +414,66 @@ QVariantMap Quasars::loadQSOMap(QString path)
 /*
   Set items for list of struct from data map
 */
-void Quasars::setQSOMap(const QVariantMap& map)
+void Exoplanets::setEPMap(const QVariantMap& map)
 {
-	QSO.clear();
-	QVariantMap qsoMap = map.value("quasars").toMap();
-	foreach(QString qsoKey, qsoMap.keys())
+	ep.clear();
+	QVariantMap epsMap = map.value("stars").toMap();
+	foreach(QString epsKey, epsMap.keys())
 	{
-		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
-		qsoData["designation"] = qsoKey;
+		QVariantMap epsData = epsMap.value(epsKey).toMap();
+		epsData["designation"] = epsKey;
 
-		QuasarP quasar(new Quasar(qsoData));
-		if (quasar->initialized)
-			QSO.append(quasar);
+		ExoplanetP eps(new Exoplanet(epsData));
+		if (eps->initialized)
+			ep.append(eps);
 
 	}
 }
 
-int Quasars::getJsonFileVersion(void)
+int Exoplanets::getJsonFileVersion(void)
 {
 	int jsonVersion = -1;
-	QFile catalogJsonFile(catalogJsonPath);
-	if (!catalogJsonFile.open(QIODevice::ReadOnly))
+	QFile jsonEPCatalogFile(jsonCatalogPath);
+	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars::init cannot open " << catalogJsonPath;
+		qWarning() << "Exoplanets::init cannot open " << jsonCatalogPath;
 		return jsonVersion;
 	}
 
 	QVariantMap map;
-	map = StelJsonParser::parse(&catalogJsonFile).toMap();
+	map = StelJsonParser::parse(&jsonEPCatalogFile).toMap();
 	if (map.contains("version"))
 	{
 		jsonVersion = map.value("version").toInt();
 	}
 
-	catalogJsonFile.close();
-	qDebug() << "Quasars::getJsonFileVersion() version from file:" << jsonVersion;
+	jsonEPCatalogFile.close();
+	qDebug() << "Exoplanets::getJsonFileVersion() version from file:" << jsonVersion;
 	return jsonVersion;
 }
 
-QuasarP Quasars::getByID(const QString& id)
+ExoplanetP Exoplanets::getByID(const QString& id)
 {
-	foreach(const QuasarP& quasar, QSO)
+	foreach(const ExoplanetP& eps, ep)
 	{
-		if (quasar->initialized && quasar->designation == id)
-			return quasar;
+		if (eps->initialized && eps->designation == id)
+			return eps;
 	}
-	return QuasarP();
+	return ExoplanetP();
 }
 
-bool Quasars::configureGui(bool show)
+bool Exoplanets::configureGui(bool show)
 {
 	if (show)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_Quasars_ConfigDialog")->setChecked(true);
+		gui->getGuiActions("actionShow_Exoplanets_ConfigDialog")->setChecked(true);
 	}
 
 	return true;
 }
 
-void Quasars::restoreDefaults(void)
+void Exoplanets::restoreDefaults(void)
 {
 	restoreDefaultConfigIni();
 	restoreDefaultJsonFile();
@@ -480,75 +481,72 @@ void Quasars::restoreDefaults(void)
 	readSettingsFromConfig();
 }
 
-void Quasars::restoreDefaultConfigIni(void)
+void Exoplanets::restoreDefaultConfigIni(void)
 {
-	conf->beginGroup("Quasars");
+	conf->beginGroup("Exoplanets");
 
-	// delete all existing Quasars settings...
+	// delete all existing Exoplanets settings...
 	conf->remove("");
 
-	conf->setValue("distribution_enabled", false);
 	conf->setValue("updates_enabled", true);
-	conf->setValue("url", "http://stellarium.org/json/quasars.json");
-	conf->setValue("update_frequency_days", 100);
+	conf->setValue("url", "http://stellarium.astro.uni-altai.ru/exoplanets.json");
+	conf->setValue("update_frequency_hours", 72);
 	conf->endGroup();
 }
 
-void Quasars::readSettingsFromConfig(void)
+void Exoplanets::readSettingsFromConfig(void)
 {
-	conf->beginGroup("Quasars");
+	conf->beginGroup("Exoplanets");
 
-	updateUrl = conf->value("url", "http://stellarium.org/json/quasars.json").toString();
-	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
+	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/exoplanets.json").toString();
+	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	distributionEnabled = conf->value("distribution_enabled", false).toBool();
 
 	conf->endGroup();
 }
 
-void Quasars::saveSettingsToConfig(void)
+void Exoplanets::saveSettingsToConfig(void)
 {
-	conf->beginGroup("Quasars");
+	conf->beginGroup("Exoplanets");
 
 	conf->setValue("url", updateUrl);
-	conf->setValue("update_frequency_days", updateFrequencyDays);
+	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("updates_enabled", updatesEnabled );
-	conf->setValue("distribution_enabled", distributionEnabled);
 
 	conf->endGroup();
 }
 
-int Quasars::getSecondsToUpdate(void)
+int Exoplanets::getSecondsToUpdate(void)
 {
-	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
+	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyHours * 3600);
 	return QDateTime::currentDateTime().secsTo(nextUpdate);
 }
 
-void Quasars::checkForUpdate(void)
+void Exoplanets::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
 		updateJSON();
 }
 
-void Quasars::updateJSON(void)
+void Exoplanets::updateJSON(void)
 {
-	if (updateState==Quasars::Updating)
+	if (updateState==Exoplanets::Updating)
 	{
-		qWarning() << "Quasars: already updating...  will not start again current update is complete.";
+		qWarning() << "Exoplanets: already updating...  will not start again current update is complete.";
 		return;
 	}
 	else
 	{
-		qDebug() << "Quasars: starting update...";
+		qDebug() << "Exoplanets: starting update...";
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
+	conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
 
 	emit(jsonUpdateComplete());
 
-	updateState = Quasars::Updating;
+	updateState = Exoplanets::Updating;
 
 	emit(updateStateChanged(updateState));
 	updateFile.clear();
@@ -559,11 +557,11 @@ void Quasars::updateJSON(void)
 	progressBar->setValue(0);
 	progressBar->setMaximum(updateUrl.size());
 	progressBar->setVisible(true);
-	progressBar->setFormat("Update quasars");
+	progressBar->setFormat("Update exoplanets");
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
-	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Quasars Plugin %1; http://stellarium.org/)").arg(QUASARS_PLUGIN_VERSION).toUtf8());
+	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Exoplanets Plugin %1; http://stellarium.org/)").arg(EXOPLANETS_PLUGIN_VERSION).toUtf8());
 	downloadMgr->get(request);
 
 	progressBar->setValue(100);
@@ -576,19 +574,19 @@ void Quasars::updateJSON(void)
 	emit(jsonUpdateComplete());
 }
 
-void Quasars::updateDownloadComplete(QNetworkReply* reply)
+void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Quasars::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "Exoplanets::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
 		// download completed successfully.
 		try
 		{
-			QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
+			QString jsonFilePath = StelFileMgr::findFile("modules/Exoplanets", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/exoplanets.json";
 			QFile jsonFile(jsonFilePath);
 			if (jsonFile.exists())
 				jsonFile.remove();
@@ -599,7 +597,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 		}
 		catch (std::runtime_error &e)
 		{
-			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file:" << e.what();
+			qWarning() << "Exoplanets::updateDownloadComplete: cannot write JSON data to file:" << e.what();
 		}
 
 	}
@@ -608,13 +606,13 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 		progressBar->setValue(100);
 }
 
-void Quasars::displayMessage(const QString& message, const QString hexColor)
+void Exoplanets::displayMessage(const QString& message, const QString hexColor)
 {
 	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
 	messageTimer->start();
 }
 
-void Quasars::messageTimeout(void)
+void Exoplanets::messageTimeout(void)
 {
 	foreach(int i, messageIDs)
 	{
