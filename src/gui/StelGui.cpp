@@ -184,6 +184,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
 	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
+	addGuiActions("actionShow_Stars_Labels", N_("Stars labels"), "Alt+S", group, true, false);
 	addGuiActions("actionShow_Planets_Labels", N_("Planet labels"), "P", group, true, false);
 	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
 	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
@@ -254,8 +255,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
-	connect(getGuiActions("actionGo_Home_Global"), SIGNAL(triggered()), this, SLOT(home()));
+	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));	
 
 	initConstellationMgr();
 	initGrindLineMgr();
@@ -302,6 +302,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
 	connect(getGuiActions("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
 	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
+	connect(getGuiActions("actionGo_Home_Global"), SIGNAL(triggered()), core, SLOT(returnToHome()));
 
 	// connect the actor after setting the nightmode.
 	// StelApp::init() already set flagNightMode for us, don't do it twice!
@@ -375,6 +376,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	connect(getGuiActions("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
 	getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
+
+	connect(getGuiActions("actionShow_Stars_Labels"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
+	getGuiActions("actionShow_Stars_Labels")->setChecked(smgr->getFlagLabels());
 
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	connect(getGuiActions("actionShow_Planets_Labels"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
@@ -761,25 +765,6 @@ void StelGui::quit()
 	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
 	#endif
 	QCoreApplication::exit();
-}
-
-void StelGui::home()
-{
-	StelCore* core = StelApp::getInstance().getCore();
-	core->returnToDefaultLocation();
-	
-	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
-
-	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-	PlanetP p = ssm->searchByEnglishName(core->getCurrentLocation().planetName);
-	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
-	landscapeMgr->setFlagFog(p->hasAtmosphere());
-
-	GETSTELMODULE(StelObjectMgr)->unSelect();
-
-	StelMovementMgr* smmgr = core->getMovementMgr();
-	smmgr->setViewDirectionJ2000(core->altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 //! Reload the current Qt Style Sheet (Debug only)

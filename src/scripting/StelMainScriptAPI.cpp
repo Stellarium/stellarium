@@ -95,6 +95,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelMainGraphicsView::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
+	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -928,5 +929,5 @@ void StelMainScriptAPI::setSkyLanguage(QString langCode)
 
 void StelMainScriptAPI::goHome()
 {
-	StelApp::getInstance().getGui()->getGuiActions("actionGo_Home_Global")->activate(QAction::Trigger);
+	emit(requestSetHomePosition());
 }

@@ -163,8 +163,7 @@ private slots:
 	#endif
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const QString& section);
-	void quit();
-	void home();
+	void quit();	
 	void updateI18n();
 	//! Process changes from the ConstellationMgr
 	void artDisplayedUpdated(const bool displayed);

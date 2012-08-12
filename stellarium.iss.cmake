@@ -10,7 +10,10 @@ WizardImageFile=data\splash.bmp
 WizardImageStretch=no
 WizardImageBackColor=clBlack
 AppName=Stellarium
+AppVersion=@PACKAGE_VERSION@
 AppVerName=Stellarium @PACKAGE_VERSION@
+AppPublisher=Stellarium team
+AppPublisherURL=http://www.stellarium.org/
 OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
 OutputDir=installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},
@@ -32,6 +35,7 @@ Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
 Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv*.dll"; DestDir: "{app}";
 Source: "@INTL_INCLUDE_DIR@/../bin/libintl*.dll"; DestDir: "{app}";
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
+@ISS_ARCH_SPECIFIC_MINGW_LIBS@
 Source: "@QT_BINARY_DIR@\phonon4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSql4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSvg4.dll"; DestDir: "{app}";
@@ -45,7 +49,6 @@ Source: "@QT_BINARY_DIR@\QtXml4.dll"; DestDir: "{app}";
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
 Source: "@CMAKE_INSTALL_PREFIX@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
-@ISS_ARCH_SPECIFIC_MINGW_LIBS@
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
