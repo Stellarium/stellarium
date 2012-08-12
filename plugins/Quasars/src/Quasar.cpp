@@ -172,7 +172,10 @@ void Quasar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP project
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
 	const Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
-	const Vec3f dcolor = Vec3f(1.2f,0.5f,0.4f);
+	Vec3f dcolor = Vec3f(1.2f,0.5f,0.4f);
+	if (StelApp::getInstance().getVisionModeNight())
+		dcolor = StelUtils::getNightColor(dcolor);
+
 	float rcMag[2], size, shift;
 	double mag;
 

@@ -357,12 +357,14 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
-	const Vec4f color = Vec4f(0.4f,1.2f,0.5f, 1.0f);
+	Vec3f color = Vec4f(0.4f,1.2f,0.5f);
+	if (StelApp::getInstance().getVisionModeNight())
+		color = StelUtils::getNightColor(color);
 	const double mag = getVMagnitude(core, true);
 
 	StelUtils::spheToRect(RA, DE, XYZ);
 	renderer->setBlendMode(BlendMode_Add);
-	renderer->setGlobalColor(color);
+	renderer->setGlobalColor(color[0], color[1], color[2]);
 
 	if (mag <= sd->getLimitMagnitude())
 	{
