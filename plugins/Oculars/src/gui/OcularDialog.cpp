@@ -293,8 +293,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
-	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableGuiPanel(bool)));
+	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
+	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -403,6 +403,10 @@ void OcularDialog::createDialogContent()
 	if (Oculars::appSettings()->value("enable_control_panel", false).toBool())
 	{
 		ui->checkBoxControlPanel->setChecked(true);
+	}
+	if (Oculars::appSettings()->value("use_decimal_degrees", false).toBool())
+	{
+		ui->checkBoxDecimalDegrees->setChecked(true);
 	}
 
 	//Initialize the style
