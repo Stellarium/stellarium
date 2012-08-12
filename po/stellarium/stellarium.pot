@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 20:41+0700\n"
+"POT-Creation-Date: 2012-08-12 13:46+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,7 @@ msgid "Type: <b>%1</b>"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
+#: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #: plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
@@ -68,6 +69,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
+#: src/core/modules/MinorPlanet.cpp:203 src/core/modules/Comet.cpp:123
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
@@ -111,8 +113,9 @@ msgstr ""
 msgid "Undocumented type"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:126
+#: src/core/modules/Planet.cpp:127 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:132
+#: src/core/modules/StarWrapper.cpp:124 plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr ""
@@ -127,12 +130,14 @@ msgstr ""
 msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:151
+#: src/core/modules/Planet.cpp:151 src/core/modules/MinorPlanet.cpp:230
+#: src/core/modules/Comet.cpp:144
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:158
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:237
+#: src/core/modules/Comet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr ""
@@ -142,7 +147,7 @@ msgstr ""
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:175
+#: src/core/modules/Planet.cpp:175 src/core/modules/MinorPlanet.cpp:243
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr ""
@@ -165,6 +170,16 @@ msgstr ""
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
+msgstr ""
+
+#: src/core/modules/MinorPlanet.cpp:192
+#, qt-format
+msgid "Provisional designation: %1"
+msgstr ""
+
+#: src/core/modules/MinorPlanet.cpp:247
+#, qt-format
+msgid "Orbital period: %1 days"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
@@ -2757,9 +2772,9 @@ msgstr ""
 msgid "Return to default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:880
-#: plugins/Oculars/src/ui_ocularDialog.h:889
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Delete"
 msgstr ""
 
@@ -3692,7 +3707,7 @@ msgid "Compass marks"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:865
+#: plugins/Oculars/src/ui_ocularDialog.h:858
 msgid "Oculars"
 msgstr ""
 
@@ -3756,7 +3771,7 @@ msgid "&Reset rotation"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1203
-#: plugins/Oculars/src/ui_ocularDialog.h:867
+#: plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr ""
 
@@ -4019,131 +4034,131 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:861
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:869
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:863
 msgid "Key mappings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Toggle ocular view:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Open pop-up navigation menu:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Interface"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Eyepieces"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
-#: plugins/Oculars/src/ui_ocularDialog.h:888
-#: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:226
+#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Add"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
-#: plugins/Oculars/src/ui_ocularDialog.h:890
-#: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Satellites/src/ui_satellitesDialog.h:691
+#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Sensors"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Telescopes"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Diameter:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Horizontal flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Vertical flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
@@ -4156,7 +4171,7 @@ msgid "About"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Satellites"
 msgstr ""
 
@@ -4454,7 +4469,7 @@ msgid "Next update: %1 hours"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
@@ -4545,16 +4560,16 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:648
-#: plugins/Satellites/src/ui_satellitesDialog.h:649
+#: plugins/Satellites/src/ui_satellitesDialog.h:633
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Satellites Configuration"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:651
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Update TLE lists from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:637
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
@@ -4562,7 +4577,7 @@ msgstr ""
 msgid "Update from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:653
+#: plugins/Satellites/src/ui_satellitesDialog.h:638
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
@@ -4570,51 +4585,51 @@ msgstr ""
 msgid "Last update:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
+#: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:656
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:658
+#: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Orbit lines"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Number of  segments:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:667
-#: plugins/Satellites/src/ui_satellitesDialog.h:671
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Duration of a single segment in seconds"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:669
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Segment length (s):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Fade length:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
+#: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
@@ -4622,7 +4637,7 @@ msgstr ""
 msgid "Restore default settings"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:681
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
@@ -4630,7 +4645,7 @@ msgstr ""
 msgid "Save settings as default"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:667
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
@@ -4638,105 +4653,105 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:684
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Display the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Displayed"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:693
+#: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:694
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Groups:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:696
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid "Comma separated list of groups"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "TLE data:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "NORAD two line element orbit data"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:703
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove the selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:706
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Add more satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Save changes"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Add new source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
+#: plugins/Satellites/src/ui_satellitesDialog.h:707
 msgid "Remove selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:725
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 msgid "More Satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 msgid "Get data from update sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:221
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:215
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Abort download"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:222
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 msgid "New satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:223
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:217
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Mark all"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:224
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Mark none"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:225
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Discard"
 msgstr ""
 
@@ -5607,68 +5622,68 @@ msgstr ""
 msgid "Solar System Editor plug-in"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:512
 msgid "Import data"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -5677,19 +5692,19 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add objects"
 msgstr ""
 
