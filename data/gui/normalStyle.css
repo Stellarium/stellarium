@@ -183,6 +183,7 @@ QPushButton#pushButtonGotoSearchSkyObject {
 	border-radius: 0px;
 	border-left: none;
 	padding: 2px;
+	image: url(:/graphicGui/searchButtonImage.png);
 }
 
 QFrame#completionLabel {
@@ -229,6 +230,7 @@ QPushButton#closeStelWindow {
 QPushButton:hover#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton-hover.png);
 }
+
 
 /**********************************************LocationDialog*******************************************************/
 
@@ -897,7 +899,17 @@ QGraphicsWidget#observationListView  QLabel {
 }
 
 #configurationDialogForm QPushButton#getStarsButton {
-        icon: url(:/graphicGui/btTimeRealtime-off.png);
+        image: url(:/graphicGui/btTimeRealtime-off.png);
+}
+
+QLineEdit#lineEditSearch {
+	margin: 0px 0px 4px 0px;
+	padding: 4px;
+	padding-left: 32px;
+	background-image: url(:/graphicGui/searchBoxBackground.png);
+	background-repeat: none;
+	background-position: center left;
+	border: none;
 }
 
 /**** The following are used for Satellites ****/

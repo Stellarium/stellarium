@@ -357,7 +357,7 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
-	Vec3f color = Vec4f(0.4f,1.2f,0.5f);
+	Vec3f color = Vec3f(0.4f,1.2f,0.5f);
 	if (StelApp::getInstance().getVisionModeNight())
 		color = StelUtils::getNightColor(color);
 	const double mag = getVMagnitude(core, true);
