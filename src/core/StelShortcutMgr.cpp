@@ -31,7 +31,6 @@
 #include <QAction>
 #include <QDebug>
 #include <QFileInfo>
-#include <QTextStream>
 
 StelShortcutMgr::StelShortcutMgr()
 {
@@ -45,7 +44,7 @@ void StelShortcutMgr::init()
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& text, const QString& primaryKey,
+QAction* StelShortcutMgr::addGuiAction(const QString& actionId, bool temporary, const QString& text, const QString& primaryKey,
 																			 const QString& altKey, const QString &groupId, bool checkable, bool autoRepeat, bool global)
 {
 	if (!shGroups.contains(groupId))
@@ -54,8 +53,8 @@ QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& t
 							 << "for action " << actionId << "; group text is empty";
 		shGroups[groupId] = new StelShortcutGroup(groupId);
 	}
-	return shGroups[groupId]->registerAction(actionId, text, primaryKey, altKey, checkable,
-																				 autoRepeat, global, stelAppGraphicsWidget);
+	return shGroups[groupId]->registerAction(actionId, temporary, text, primaryKey, altKey, checkable,
+																					 autoRepeat, global, stelAppGraphicsWidget);
 }
 
 void StelShortcutMgr::changeActionPrimaryKey(const QString &actionId, const QString &groupId, QKeySequence newKey)
@@ -116,7 +115,7 @@ QAction *StelShortcutMgr::addScriptToAction(const QString &actionId, const QStri
 	// if required action not found in "Scripts" group, iterate over map of all groups, searching
 	if (!sc)
 	{
-		for (QMap<QString, StelShortcutGroup*>::iterator it = shGroups.begin(); it != shGroups.end(); ++it)
+		for (QMap<QString, StelShortcutGroup*>::const_iterator it = shGroups.begin(); it != shGroups.end(); ++it)
 		{
 			sc = it.value()->getShortcut(actionId);
 		}
@@ -184,15 +183,15 @@ void StelShortcutMgr::addGroup(const QString &id, QString text, const QString &p
 			enabled = pluginDescriptor.loadAtStartup;
 		}
 	}
-	// creating group
-	if (shGroups.contains(id))
+
+	// create group
+	if (!shGroups.contains(id))
 	{
-		qWarning() << "Dubbing group id - " << id;
+		StelShortcutGroup* newGroup = new StelShortcutGroup(id, text);
+		shGroups[id] = newGroup;
+		connect(newGroup, SIGNAL(shortcutChanged(StelShortcut*)), this, SIGNAL(shortcutChanged(StelShortcut*)));
 	}
-	else
-	{
-		shGroups[id] = new StelShortcutGroup(id, text);
-	}
+
 	// applying group properties
 	shGroups[id]->setEnabled(enabled);
 }
@@ -216,23 +215,23 @@ bool StelShortcutMgr::copyDefaultFile()
 
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
-	QFile jsonFile(filePath);
-	jsonFile.open(QIODevice::ReadOnly);
-	QMap<QString, QVariant> groups;
+	QFile* jsonFile;
+	QVariantMap groups;
 	try
 	{
-		groups = StelJsonParser::parse(jsonFile.readAll()).toMap()["groups"].toMap();
+		jsonFile = new QFile(filePath);
+		jsonFile->open(QIODevice::ReadOnly);
+		groups = StelJsonParser::parse(jsonFile->readAll()).toMap()["groups"].toMap();
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "Error while parsing shortcuts file. Error: " << e.what();
 		return false;
 	}
-
 	// parsing shortcuts groups from file
-	for (QMap<QString, QVariant>::iterator group = groups.begin(); group != groups.end(); ++group)
+	for (QVariantMap::const_iterator group = groups.begin(); group != groups.end(); ++group)
 	{
-		QMap<QString, QVariant> groupMap = group.value().toMap();
+		QVariantMap groupMap = group.value().toMap();
 		// parsing shortcuts' group properties
 		QString groupId = group.key();
 		QString groupText;
@@ -248,11 +247,11 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 		// add group to map
 		addGroup(groupId, groupText, pluginId);
 		// parsing group's actions (shortcuts)
-		QMap<QString, QVariant> actions = groupMap["actions"].toMap();
-		for (QMap<QString, QVariant>::iterator action = actions.begin(); action != actions.end(); ++action)
+		QVariantMap actions = groupMap["actions"].toMap();
+		for (QVariantMap::const_iterator action = actions.begin(); action != actions.end(); ++action)
 		{
 			QString actionId = action.key();
-			QMap<QString, QVariant> actionMap = action.value().toMap();
+			QVariantMap actionMap = action.value().toMap();
 			// parsing action (shortcut) properties
 			QString text;
 			if (actionMap.contains("text"))
@@ -294,7 +293,7 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 				global = true;
 			}
 			// create & init shortcut
-			addGuiAction(actionId, text, primaryKey, altKey, groupId, checkable, autorepeat, global);
+			addGuiAction(actionId, false, text, primaryKey, altKey, groupId, checkable, autorepeat, global);
 			// set script if it exist
 			if (actionMap.contains("script"))
 			{
@@ -318,7 +317,8 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 			}
 		}
 	}
-	jsonFile.close();
+	jsonFile->close();
+	delete jsonFile;
 	return true;
 }
 
@@ -341,9 +341,21 @@ void StelShortcutMgr::loadShortcuts()
 	}
 }
 
+void StelShortcutMgr::restoreDefaultShortcuts()
+{
+	QString defaultPath = StelFileMgr::getInstallationDir() + "/data/default_shortcuts.json";
+	if (!QFileInfo(defaultPath).exists())
+	{
+		qWarning() << "Default shortcuts file(" << defaultPath << ") doesn't exist, restore defaults failed";
+		return;
+	}
+	loadShortcuts(defaultPath);
+	// save shortcuts to actual file
+	saveShortcuts();
+}
+
 void StelShortcutMgr::saveShortcuts()
 {
-	qDebug() << "Saving shortcuts ...";
 	QString shortcutsFilePath = StelFileMgr::getUserDir() + "/data/shortcuts.json";
 	try
 	{
@@ -353,9 +365,9 @@ void StelShortcutMgr::saveShortcuts()
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "Creating non-existent shortcuts.json file... ";
-		if (!StelFileMgr::exists(StelFileMgr::getUserDir()+"/data"))
+		if (!StelFileMgr::exists(StelFileMgr::getUserDir() + "/data"))
 		{
-			if (!StelFileMgr::mkDir(StelFileMgr::getUserDir()+"/data"))
+			if (!StelFileMgr::mkDir(StelFileMgr::getUserDir() + "/data"))
 			{
 				qWarning() << "ERROR - cannot create non-existent data directory" <<
 											StelFileMgr::getUserDir() + "/data";
@@ -378,10 +390,10 @@ void StelShortcutMgr::saveShortcuts()
 	shortcutsFile.close();
 }
 
-void StelShortcutMgr::saveShortcuts(QIODevice* output)
+void StelShortcutMgr::saveShortcuts(QIODevice* output) const
 {
 	QVariantMap resMap, groupsMap;
-	for(QMap<QString, StelShortcutGroup*>::iterator it = shGroups.begin(); it != shGroups.end(); ++it)
+	for(QMap<QString, StelShortcutGroup*>::const_iterator it = shGroups.begin(); it != shGroups.end(); ++it)
 	{
 		groupsMap[it.key()] = it.value()->toQVariant();
 	}

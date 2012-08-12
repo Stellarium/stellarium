@@ -34,6 +34,7 @@ public:
 	ShortcutLineEdit(QWidget* parent);
 
 	QKeySequence getKeySequence();
+	bool isEmpty() const { return (m_keyNum <= 0); }
 
 public slots:
 	// clear contents; also clear stored keys
@@ -41,7 +42,6 @@ public slots:
 	// remove last key from keysequence
 	void backspace();
 	void setContents(QKeySequence ks);
-	bool isEmpty() const { return (m_keyNum <= 0); }
 
 signals:
 	// need for enable/disable buttons in dialog
@@ -65,6 +65,8 @@ private:
 class Ui_shortcutsDialogForm;
 QT_FORWARD_DECLARE_CLASS(QTreeWidgetItem)
 QT_FORWARD_DECLARE_CLASS(StelShortcutMgr)
+QT_FORWARD_DECLARE_CLASS(StelShortcut)
+QT_FORWARD_DECLARE_CLASS(StelShortcutGroup)
 
 class ShortcutsDialog : public StelDialog
 {
@@ -90,6 +92,10 @@ public slots:
 	void applyChanges() const;
 	// called by doubleclick; if click is on editable item, switch to editors
 	void switchToEditors(QModelIndex index);
+	// update shortcut representation in tree correspondingly to its actual contents
+	// if no shortcutTreeItem specified, search for it in tree, if no items found, create new item
+	void updateShortcutsItem(StelShortcut* shortcut, QTreeWidgetItem* shortcutsTreeItem = NULL);
+
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -101,6 +107,11 @@ private:
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
+
+	QTreeWidgetItem* addGroup(StelShortcutGroup* group);
+
+	// search for first appearence of item with requested data
+	QTreeWidgetItem* findItemByData(QVariant value, int role, int column = 0);
 
 	// pointer to mgr, for not getting it from stelapp every time
 	StelShortcutMgr* shortcutMgr;
