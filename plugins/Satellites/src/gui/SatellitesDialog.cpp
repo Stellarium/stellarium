@@ -293,7 +293,7 @@ void SatellitesDialog::setAboutHtml(void)
 	html += QString(q_("See %1this document%2 for details.")).arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + q_("Support is provided via the Launchpad website.  Be sure to put \"Satellites plugin\" in the subject when posting.") + "</p>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Satellites plugin") + "</p>";
 	html += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
