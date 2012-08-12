@@ -270,8 +270,12 @@ void StarMgr::drawPointer(StelRenderer* renderer, StelProjectorP projector, cons
 			texPointer = renderer->createTexture("textures/pointeur2.png");   // Load pointer texture
 		}
 
-		const Vec3f& c(obj->getInfoColor());
-		renderer->setGlobalColor(Vec4f(c[0], c[1], c[2], 1.0f));
+		Vec3f c(obj->getInfoColor());
+		if (StelApp::getInstance().getVisionModeNight())
+			c = StelUtils::getNightColor(c);
+
+		renderer->setGlobalColor(c[0], c[1], c[2]);
+
 		texPointer->bind();
 		renderer->setBlendMode(BlendMode_Alpha);
 		const float angle = StelApp::getInstance().getTotalRunTime() * 40.0f;

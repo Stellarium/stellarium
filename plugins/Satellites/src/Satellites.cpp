@@ -1217,11 +1217,14 @@ void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
 		{
 			return;
 		}
-		renderer->setGlobalColor(0.4f, 0.5f, 0.8f);
 		if(NULL == texPointer)
 		{
 			texPointer = renderer->createTexture("textures/pointeur5.png");
 		}
+		if (StelApp::getInstance().getVisionModeNight())
+			renderer->setGlobalColor(0.8f,0.0f,0.0f);
+		else
+			renderer->setGlobalColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
 		renderer->setBlendMode(BlendMode_Alpha);
