@@ -117,6 +117,10 @@ Q_IMPORT_PLUGIN(Pulsars)
 Q_IMPORT_PLUGIN(Exoplanets)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_OBSERVABILITY
+Q_IMPORT_PLUGIN(Observability)
+#endif
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
