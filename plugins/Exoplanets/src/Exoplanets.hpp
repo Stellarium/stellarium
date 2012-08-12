@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2012 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,30 +16,30 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _QUASARS_HPP_
-#define _QUASARS_HPP_
+#ifndef _EXOPLANETS_HPP_
+#define _EXOPLANETS_HPP_
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
-#include "Quasar.hpp"
+#include "StelFader.hpp"
+#include "Exoplanet.hpp"
 #include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
 #include <QList>
 #include <QSharedPointer>
 
-
 class QNetworkAccessManager;
 class QNetworkReply;
 class QProgressBar;
 class QSettings;
 class QTimer;
-class QuasarsDialog;
+class ExoplanetsDialog;
 
-typedef QSharedPointer<Quasar> QuasarP;
+typedef QSharedPointer<Exoplanet> ExoplanetP;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
-class Quasars : public StelObjectModule
+class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
 public:	
@@ -52,26 +52,27 @@ public:
 		DownloadError,		//!< Error during download phase
 		OtherError		//!< Other error
 	};
-
-	Quasars();
-	virtual ~Quasars();
+	
+	Exoplanets();
+	virtual ~Exoplanets();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void deinit();
-	virtual void update(double) {;}
+	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void drawPointer(StelCore* core, class StelRenderer* renderer,
+	                         StelProjectorP projector);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Used to get a list of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for nebulae.
-	//! @param limitFov the field of view around the position v in which to search for satellites.
+	//! @param limitFov the field of view around the position v in which to search for exoplanets.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the satellites located inside the limitFov circle around position v.
+	//! @return an list containing the exoplanets located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching satellite object's pointer if exists or NULL.
@@ -88,16 +89,16 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
-	//! get a Quasar object by identifier
-	QuasarP getByID(const QString& id);
+	//! get a exoplanet object by identifier
+	ExoplanetP getByID(const QString& id);
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
 	virtual bool configureGui(bool show=true);
 
-	//! Set up the plugin with default values.  This means clearing out the Quasars section in the
+	//! Set up the plugin with default values.  This means clearing out the Exoplanets section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
-	//! creates the default pulsars.json file from the resource embedded in the plugin lib/dll file.
+	//! creates the default exoplanets.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
@@ -107,22 +108,19 @@ public:
 	//! Save the settings to the main configuration file.
 	void saveSettingsToConfig(void);
 
-	//! get whether or not the plugin will try to update catalog data from the internet
+	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
 	bool getUpdatesEnabled(void) {return updatesEnabled;}
-	//! set whether or not the plugin will try to update catalog data from the internet
+	//! set whether or not the plugin will try to update TLE data from the internet
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
-
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
-	//! get the update frequency in days
-	int getUpdateFrequencyDays(void) {return updateFrequencyDays;}
-	void setUpdateFrequencyDays(int days) {updateFrequencyDays = days;}
+	//! get the update frequency in hours
+	int getUpdateFrequencyHours(void) {return updateFrequencyHours;}
+	void setUpdateFrequencyHours(int hours) {updateFrequencyHours = hours;}
 
 	//! get the number of seconds till the next update
 	int getSecondsToUpdate(void);
@@ -132,7 +130,7 @@ public:
 
 signals:
 	//! @param state the new update state.
-	void updateStateChanged(Quasars::UpdateState state);
+	void updateStateChanged(Exoplanets::UpdateState state);
 
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
@@ -156,29 +154,29 @@ private:
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 
-	//! read the json file and create list of quasars.
+	//! read the json file and create list of exoplanets.
 	void readJsonFile(void);
 
-	//! Creates a backup of the catalog.json file called catalog.json.old
+	//! Creates a backup of the exoplanets.json file called exoplanets.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the catalog.json file
-	//! @return version string, e.g. "0.2.1"
+	//! Get the version of catalog format from the "version" value in the exoplanets.json file
+	//! @return version string, e.g. "1"
 	int getJsonFileVersion(void);
 
-	//! parse JSON file and load quasars to map
-	QVariantMap loadQSOMap(QString path=QString());
+	//! parse JSON file and load exoplanets to map
+	QVariantMap loadEPMap(QString path=QString());
 
 	//! set items for list of struct from data map
-	void setQSOMap(const QVariantMap& map);
+	void setEPMap(const QVariantMap& map);
 
-	QString catalogJsonPath;
+	QString jsonCatalogPath;
 
-	class StelTextureNew* texPointer;
-	class StelTextureNew* markerTexture;
-	QList<QuasarP> QSO;
+	StelTextureNew* texPointer;
+	StelTextureNew* markerTexture;
+	QList<ExoplanetP> ep;
 
 	// variables and functions for the updater
 	UpdateState updateState;
@@ -191,13 +189,12 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyDays;
-	bool distributionEnabled;
+	int updateFrequencyHours;
 
 	QSettings* conf;
 
 	// GUI
-	QuasarsDialog* configDialog;
+	ExoplanetsDialog* exoplanetsConfigDialog;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -214,7 +211,7 @@ private slots:
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
-class QuasarsStelPluginInterface : public QObject, public StelPluginInterface
+class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
 	Q_INTERFACES(StelPluginInterface)
@@ -223,4 +220,4 @@ public:
 	virtual StelPluginInfo getPluginInfo() const;
 };
 
-#endif /*_QUASARS_HPP_*/
+#endif /*_EXOPLANETS_HPP_*/
