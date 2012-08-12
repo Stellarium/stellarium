@@ -25,7 +25,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "StelIniParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
@@ -47,6 +46,7 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
 
@@ -87,7 +87,8 @@ Pulsars::Pulsars()
 {
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
-	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	conf = StelApp::getInstance().getSettings();
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -127,8 +128,6 @@ double Pulsars::getCallOrder(StelModuleActionName actionName) const
 */
 void Pulsars::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Pulsars");
@@ -343,6 +342,12 @@ void Pulsars::restoreDefaultJsonFile(void)
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+
+		// Make sure that in the case where an online update has previously been done, but
+		// the json file has been manually removed, that an update is schreduled in a timely
+		// manner
+		conf->remove("Pulsars/last_update");
+		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
 	}
 }
 
@@ -481,7 +486,6 @@ void Pulsars::restoreDefaults(void)
 
 void Pulsars::restoreDefaultConfigIni(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
 	// delete all existing Pulsars settings...
@@ -496,7 +500,6 @@ void Pulsars::restoreDefaultConfigIni(void)
 
 void Pulsars::readSettingsFromConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
 	updateUrl = conf->value("url", "http://stellarium.org/json/pulsars.json").toString();
@@ -510,7 +513,6 @@ void Pulsars::readSettingsFromConfig(void)
 
 void Pulsars::saveSettingsToConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
 	conf->setValue("url", updateUrl);
@@ -546,7 +548,6 @@ void Pulsars::updateJSON(void)
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("Pulsars/last_update", lastUpdate.toString(Qt::ISODate));
 
 	emit(jsonUpdateComplete());
