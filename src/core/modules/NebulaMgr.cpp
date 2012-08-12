@@ -52,7 +52,7 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
 
-NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false), texPointer(NULL)
+NebulaMgr::NebulaMgr(void) : nebGrid(200),  texPointer(NULL)
 {
 	setObjectName("NebulaMgr");
 }
@@ -97,8 +97,7 @@ void NebulaMgr::init()
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
-	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());
-	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
+	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 
 	updateI18n();
 	

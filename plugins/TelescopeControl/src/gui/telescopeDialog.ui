@@ -152,9 +152,6 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="currentIndex">
-      <number>3</number>
-     </property>
      <widget class="QWidget" name="tabTelescopes">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -609,7 +606,7 @@
      </widget>
      <widget class="QWidget" name="tabAbout">
       <attribute name="title">
-       <string>About plugin</string>
+       <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>

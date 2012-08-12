@@ -693,11 +693,23 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
+	bool ok = false;
+	StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	if (!ok)
+		return;
 	defaultLocationID = id;
-	StelApp::getInstance().getLocationMgr().locationForSmallString(id);
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("init_location/location", id);
+}
+
+void StelCore::returnToDefaultLocation()
+{
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
 }
 
 void StelCore::setJDay(double JD)
@@ -764,6 +776,7 @@ const StelLocation& StelCore::getCurrentLocation() const
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
+	emit(locationChanged(target));
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
 	{
@@ -783,7 +796,6 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 		delete position;
 		position = new StelObserver(target);
 	}
-	emit(locationChanged(target));
 }
 
 

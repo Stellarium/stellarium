@@ -27,6 +27,7 @@
 #include "StelLocation.hpp"
 
 #include <QDateTime>
+#include <QFile>
 #include <QSharedPointer>
 #include <QVariantMap>
 
@@ -112,6 +113,13 @@ public:
 	//! Return the matching satellite if exists or NULL.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+	
+	//! Return the satellite with the given catalog number.
+	//! Used as a helper function by searchByName() and
+	//! searchByNameI18n().
+	//! @param noradNumber search string in the format "NORAD XXXX".
+	//! @returns a null pointer if no such satellite is found.
+	StelObjectP searchByNoradNumber(const QString& noradNumber) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object

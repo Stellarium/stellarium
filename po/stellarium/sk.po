@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2012-06-10 19:03+0000\n"
+"POT-Creation-Date: 2012-07-10 01:06+0700\n"
+"PO-Revision-Date: 2012-06-23 16:15+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-12 04:52+0000\n"
-"X-Generator: Launchpad (build 15389)\n"
+"X-Launchpad-Export-Date: 2012-07-10 05:30+0000\n"
+"X-Generator: Launchpad (build 15558)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -62,12 +62,14 @@ msgstr "Druh: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
+#: plugins/Exoplanets/src/Exoplanet.cpp:151
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
+#: plugins/Exoplanets/src/Exoplanet.cpp:156
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Jasnosť: <b>%1 m</b>"
@@ -186,12 +188,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Jasnosť (mag): <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
+#: plugins/Exoplanets/src/Exoplanet.cpp:166
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektrálny typ: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
+#: plugins/Exoplanets/src/Exoplanet.cpp:171
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Vzdialenosť: %1 svetelných rokov"
@@ -368,50 +372,51 @@ msgstr "Nenájdené"
 msgid "Found"
 msgstr "Nájdené"
 
-#: src/gui/ConfigurationDialog.cpp:346
+#: src/gui/ConfigurationDialog.cpp:349
 msgid "Select screenshot directory"
 msgstr "Vybrať adresár pre snímky obrazu"
 
-#: src/gui/ConfigurationDialog.cpp:524
+#: src/gui/ConfigurationDialog.cpp:528
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Šírka zorného poľa pri spustení: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:532
+#: src/gui/ConfigurationDialog.cpp:536
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Smer pohľadu pri spustení (azimut/výška): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:574
-#: plugins/Oculars/src/gui/OcularDialog.cpp:419
+#: src/gui/ConfigurationDialog.cpp:578
+#: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:579 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:658
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "License"
 msgstr "Licencia"
 
-#: src/gui/ConfigurationDialog.cpp:688
+#: src/gui/ConfigurationDialog.cpp:692
 msgid "Running script: "
 msgstr "Spustený skript: "
 
-#: src/gui/ConfigurationDialog.cpp:695
+#: src/gui/ConfigurationDialog.cpp:699
 msgid "Running script: [none]"
 msgstr "Spustený skript: [žiadny]"
 
-#: src/gui/ConfigurationDialog.cpp:765
+#: src/gui/ConfigurationDialog.cpp:769
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -419,16 +424,16 @@ msgstr ""
 "Sťahovanie nových katalógov hviezd je dokončené!\n"
 "Reštartujte Stellarium pre ich zobrazenie."
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:773
 msgid "All available star catalogs have been installed."
 msgstr "Všetky dostupné hviezdne katalógy sú nainštalované."
 
-#: src/gui/ConfigurationDialog.cpp:774
+#: src/gui/ConfigurationDialog.cpp:778
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Získať katalóg %1 z %2"
 
-#: src/gui/ConfigurationDialog.cpp:781
+#: src/gui/ConfigurationDialog.cpp:785
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -437,7 +442,7 @@ msgstr ""
 "Sťahuje sa %1...\n"
 "(Toto okno môžete zatvoriť)"
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:792
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -448,7 +453,7 @@ msgstr ""
 "Počet hviezd: %2 miliónov\n"
 "Rozsah veľkostí: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
+#: src/gui/ConfigurationDialog.cpp:835 src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -457,11 +462,11 @@ msgstr ""
 "Chyba pri sťahovaní %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:919
+#: src/gui/ConfigurationDialog.cpp:923
 msgid "Verifying file integrity..."
 msgstr "Kontroluje sa celistvosť súboru..."
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:927
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -499,7 +504,7 @@ msgstr "Pravé tlačidlo myši"
 msgid "CTRL + Left click"
 msgstr "CTRL + ľavé tlačidlo myši"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:177
 msgid "Movement and Selection"
 msgstr "Pohyb a výber"
 
@@ -527,33 +532,34 @@ msgstr "Keď je script spustený"
 msgid "Stop currently running script"
 msgstr "Zastaviť aktuálne bežiaci skript"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:152 src/gui/StelGui.cpp:153
 msgid "Pause script execution"
 msgstr "Pozastaviť vykonávanie skriptu"
 
-#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:154
 msgid "Resume script execution"
 msgstr "Pokračovať vo vykonávaní skriptu"
 
-#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:149
 msgid "Slow down the script execution rate"
 msgstr "Znížiť rýchlosť behu skriptu"
 
-#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:150
 msgid "Speed up the script execution rate"
 msgstr "Zvýšiť rýchlosť behu skriptu"
 
-#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:150
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:151
 msgid "Set the normal script execution rate"
 msgstr "Nastaviť bežnú rýchlosť behu skriptu"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
-#: plugins/Oculars/src/Oculars.cpp:1188
+#: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
-#: plugins/Supernovae/src/Supernovae.cpp:143
-#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
+#: plugins/Supernovae/src/Supernovae.cpp:141
+#: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
+#: plugins/Exoplanets/src/Exoplanets.cpp:157
 msgid "Plugin Key Bindings"
 msgstr "Priradenie klávesov modulom"
 
@@ -626,7 +632,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Fóra} - diskutujte o programe Stellarium s ďalšími používateľmi."
 
 #: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
-#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:183
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:184
 msgid "Miscellaneous"
 msgstr "Rôzne"
 
@@ -680,305 +686,309 @@ msgstr "Grafický a iný dizajn: %1"
 msgid "OSX Developer: %1"
 msgstr "Vývoj pre OSX: %1"
 
-#: src/gui/StelGui.cpp:102
+#: src/gui/StelGui.cpp:103
 msgid "Display Options"
 msgstr "Možnosti zobrazenia"
 
-#: src/gui/StelGui.cpp:103
+#: src/gui/StelGui.cpp:104
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "Čiary súhvezdí"
 
-#: src/gui/StelGui.cpp:104
+#: src/gui/StelGui.cpp:105
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "Obrázky súhvezdí"
 
-#: src/gui/StelGui.cpp:105
+#: src/gui/StelGui.cpp:106
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "Názvy súhvezdí"
 
-#: src/gui/StelGui.cpp:106
+#: src/gui/StelGui.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "Hranice súhvezdí"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1159
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "Azimutálna mriežka"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1157
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "Ekvatoriálna sieť"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1156
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatoriálna sieť (epocha J2000)"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptická sieť J2000"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "Galaktická mriežka"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1180
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Galaktická rovina"
 
-#: src/gui/StelGui.cpp:114
+#: src/gui/StelGui.cpp:115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "Ekliptika"
 
-#: src/gui/StelGui.cpp:115
+#: src/gui/StelGui.cpp:116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "Rovník"
 
-#: src/gui/StelGui.cpp:116
+#: src/gui/StelGui.cpp:117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "MIestny poludník"
 
-#: src/gui/StelGui.cpp:117
+#: src/gui/StelGui.cpp:118
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "Obzorník"
 
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1181
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "Svetové strany"
 
-#: src/gui/StelGui.cpp:120
+#: src/gui/StelGui.cpp:121
 msgid "Ground"
 msgstr "Terén"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1130
+#: src/gui/StelGui.cpp:122 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "Atmosféra"
 
-#: src/gui/StelGui.cpp:122
+#: src/gui/StelGui.cpp:123
 msgid "Fog"
 msgstr "Hmla"
 
-#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1139
+#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "Deep-Sky objekty"
 
-#: src/gui/StelGui.cpp:125
+#: src/gui/StelGui.cpp:126
 msgid "Nebulas background images"
 msgstr "Obrázky Deep-Sky objektov"
 
-#: src/gui/StelGui.cpp:126 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/gui/StelGui.cpp:127 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "Hviezdy"
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "Obežné dráhy planét"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:130
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "Stopy planét"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Night mode"
 msgstr "Nočný režim"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Full-screen mode"
 msgstr "Celoobrazovkový režim"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Flip scene horizontally"
 msgstr "Zrkadliť horizontálne"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:135
 msgid "Flip scene vertically"
 msgstr "Zrkadliť vertikálne"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:137
 msgid "Windows"
 msgstr "Okná"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Help window"
 msgstr "Pomocník"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Configuration window"
 msgstr "Nastavenia"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Search window"
 msgstr "Vyhľadávanie"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:141
 msgid "Sky and viewing options window"
 msgstr "Zobrazovanie objektov, a vlastnosti zobrazovania"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:142
 msgid "Date/time window"
 msgstr "Dátum a čas"
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:143
 msgid "Location window"
 msgstr "Zemepisná poloha"
 
-#: src/gui/StelGui.cpp:144
+#: src/gui/StelGui.cpp:145
 msgid "Script console window"
 msgstr "Konzolové okno skriptu"
 
-#: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:148 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "Dátum a čas"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Decrease time speed"
 msgstr "Spomaliť plynutie času"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Increase time speed"
 msgstr "Zrýchliť plynutie času"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Set normal time rate"
 msgstr "Nastaviť skutočnú rýchlosť času"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Decrease time speed (a little)"
 msgstr "Mierne znížiť rýchlosť plynutia času"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Increase time speed (a little)"
 msgstr "Mierne zvýšiť rýchlosť plynutia času"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Set time rate to zero"
 msgstr "Nastaviť rýchlosť času na nulu"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Set time to now"
 msgstr "Nastaviť aktuálny čas"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:162
 msgid "Add 1 solar hour"
 msgstr "Pridať hodinu"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:163
 msgid "Subtract 1 solar hour"
 msgstr "Ubrať hodinu"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Add 1 solar day"
 msgstr "Pridať deň"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Subtract 1 solar day"
 msgstr "Ubrať deň"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Add 1 solar week"
 msgstr "Pridať týždeň"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 msgid "Subtract 1 solar week"
 msgstr "Ubrať týždeň"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal day"
 msgstr "Pridať hviezdny deň"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal day"
 msgstr "Ubrať hviezdny deň"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal week"
 msgstr "Pridať hviezdny týždeň"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal week"
 msgstr "Ubrať hviezdny týždeň"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:172
 msgid "Add 1 sidereal month"
 msgstr "Pridať hviezdny mesiac"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:173
 msgid "Subtract 1 sidereal month"
 msgstr "Ubrať hviezdny mesiac"
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:174
 msgid "Add 1 sidereal year"
 msgstr "Pridať hviezdny rok"
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:175
 msgid "Subtract 1 sidereal year"
 msgstr "Ubrať hviezdny rok"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:178
 msgid "Center on selected object"
 msgstr "Zacieliť na označený objekt"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:179
 msgid "Track object"
 msgstr "Sledovať objekt"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:180
 msgid "Zoom in on selected object"
 msgstr "Priblížiť označený objekt"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:181
 msgid "Zoom out"
 msgstr "Zmenšiť"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:182
 msgid "Set home planet to selected planet"
 msgstr "Presunúť sa na vybratú planétu"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:185
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Prepnúť medzi paralaktickou a azimutálnou montážou"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:186
 msgid "Quit"
 msgstr "Ukončiť"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:187
 msgid "Save screenshot"
 msgstr "Uložiť snímku obrazovky"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:188
 msgid "Copy selected object information to clipboard"
 msgstr "Skopírovať informácie o vybranom objekte do schránky"
 
 #: src/gui/StelGui.cpp:189
+msgid "Go to home"
+msgstr ""
+
+#: src/gui/StelGui.cpp:191
 msgid "Auto hide horizontal button bar"
 msgstr "Automaticky skrývať vodorovný panel tlačidiel"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:192
 msgid "Auto hide vertical button bar"
 msgstr "Automaticky skrývať zvislý panel tlačidiel"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:193
 msgid "Toggle visibility of GUI"
 msgstr "Zobraziť/skryť GUI"
 
@@ -1011,7 +1021,7 @@ msgstr "Mimoriadna aktivita Leoníd"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Najvyššia zaznamenaná aktivita (Leonidy 1966)"
 
-#: src/gui/LocationDialog.cpp:401
+#: src/gui/LocationDialog.cpp:408
 msgid "New Location"
 msgstr "Nové Umiestnenie"
 
@@ -1135,7 +1145,8 @@ msgstr "Harvardova univerzita (USA)"
 msgid "This system does not support OpenGL."
 msgstr "Tento systém nepodporuje OpenGL."
 
-#: src/translations.h:33
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:182
+#: plugins/Exoplanets/src/Exoplanet.cpp:186
 msgid "Sun"
 msgstr "Slnko"
 
@@ -1581,7 +1592,7 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Prehliadka terénov"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
@@ -1611,7 +1622,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Zvieratník"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
@@ -1647,6 +1658,9 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Tento skript zobrazuje súhvezdia zvieratníka. To znamená tie súhvezdia, "
+"ktoré ležia pozdĺž čiary, po ktorej sa pohybuje Slnko cez nebeskú sféru "
+"počas roka."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -1702,431 +1716,431 @@ msgstr "Rakúsko"
 
 #: src/translations.h:217
 msgid "Australia"
-msgstr ""
+msgstr "Austrália"
 
 #: src/translations.h:218
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: src/translations.h:219
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbajdžan"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "Bosna a Hercegovina"
 
 #: src/translations.h:221
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: src/translations.h:222
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladéš"
 
 #: src/translations.h:223
 msgid "Belgium"
-msgstr ""
+msgstr "Belgicko"
 
 #: src/translations.h:224
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #: src/translations.h:225
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulharsko"
 
 #: src/translations.h:226
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrajn"
 
 #: src/translations.h:227
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: src/translations.h:228
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #: src/translations.h:229
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermudy"
 
 #: src/translations.h:230
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Brunej"
 
 #: src/translations.h:231
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolívia"
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "Brazília"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamy"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhután"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Bouvetov ostrov"
 
 #: src/translations.h:236
 msgid "Botswana"
-msgstr ""
+msgstr "Botswana"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "Bielorusko"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #: src/translations.h:239
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Kokosové ostrovy"
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Konžská demokratická republika"
 
 #: src/translations.h:242
 msgid "Central African Republic"
-msgstr ""
+msgstr "Stredoafrická republika"
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Konžská republika"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "Švajčiarsko"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Pobrežie Slonoviny"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cookove ostrovy"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "Čile"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerun"
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "Čína"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "Kolumbia"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "Kostarika"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Srbsko a Čierna Hora"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "Kuba"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kapverdy"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "Vianočný ostrov"
 
 #: src/translations.h:256
 msgid "Cyprus"
-msgstr ""
+msgstr "Cyprus"
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "Česká republika"
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "Nemecko"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "Džibutsko"
 
 #: src/translations.h:260
 msgid "Denmark"
-msgstr ""
+msgstr "Dánsko"
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "Dominika"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Dominikánska republika"
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "Alžírsko"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "Ekvádor"
 
 #: src/translations.h:265
 msgid "Estonia"
-msgstr ""
+msgstr "Estónsko"
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "Egypt"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "Západná Sahara"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritrea"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "Španielsko"
 
 #: src/translations.h:270
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiópia"
 
 #: src/translations.h:271
 msgid "Finland"
-msgstr ""
+msgstr "Fínsko"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "Fidži"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Falklandské ostrovy"
 
 #: src/translations.h:274
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikronézia"
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Faerské ostrovy"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "Francúzsko"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "Gabun"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "Spojené kráľovstvo"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "Gruzínsko"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "Francúzska Guyana"
 
 #: src/translations.h:282
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #: src/translations.h:283
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltár"
 
 #: src/translations.h:284
 msgid "Greenland"
-msgstr ""
+msgstr "Grónsko"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: src/translations.h:286
 msgid "Guinea"
-msgstr ""
+msgstr "Guinea"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Rovníková Guinea"
 
 #: src/translations.h:289
 msgid "Greece"
-msgstr ""
+msgstr "Grécko"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Južná Georgia a Južné Sandwichove ostrovy"
 
 #: src/translations.h:291
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemala"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: src/translations.h:294
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hongkong"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Heardov ostrov"
 
 #: src/translations.h:297
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: src/translations.h:298
 msgid "Croatia"
-msgstr ""
+msgstr "Chorvátsko"
 
 #: src/translations.h:299
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: src/translations.h:300
 msgid "Hungary"
-msgstr ""
+msgstr "Maďarsko"
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonézia"
 
 #: src/translations.h:302
 msgid "Ireland"
-msgstr ""
+msgstr "Írsko"
 
 #: src/translations.h:303
 msgid "Israel"
-msgstr ""
+msgstr "Izrael"
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "India"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Britské indickooceánske územie"
 
 #: src/translations.h:306
 msgid "Iraq"
-msgstr ""
+msgstr "Irak"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "Irán"
 
 #: src/translations.h:308
 msgid "Iceland"
-msgstr ""
+msgstr "Island"
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "Taliansko"
 
 #: src/translations.h:310
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamajka"
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "Jordánsko"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "Japonsko"
 
 #: src/translations.h:313
 msgid "Kenya"
-msgstr ""
+msgstr "Keňa"
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirgizsko"
 
 #: src/translations.h:315
 msgid "Cambodia"
-msgstr ""
+msgstr "Kambodža"
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr ""
+msgstr "Komory"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Svätý Krištof a Nevis"
 
 #: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Kórejská ľudovodemokratická republika"
 
 #: src/translations.h:320
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Kórejská republika"
 
 #: src/translations.h:321
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuvajt"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Kajmanie ostrovy"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazachstan"
 
 #: src/translations.h:324
 msgid "Lao"
@@ -2134,39 +2148,39 @@ msgstr ""
 
 #: src/translations.h:325
 msgid "Lebanon"
-msgstr ""
+msgstr "Libanon"
 
 #: src/translations.h:326
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Svätá Lucia"
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Lichtenštajnsko"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Srí Lanka"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr ""
+msgstr "Libéria"
 
 #: src/translations.h:330
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #: src/translations.h:331
 msgid "Lithuania"
-msgstr ""
+msgstr "Litva"
 
 #: src/translations.h:332
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxembursko"
 
 #: src/translations.h:333
 msgid "Latvia"
-msgstr ""
+msgstr "Lotyšsko"
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
@@ -2174,443 +2188,443 @@ msgstr ""
 
 #: src/translations.h:335
 msgid "Morocco"
-msgstr ""
+msgstr "Maroko"
 
 #: src/translations.h:336
 msgid "Monaco"
-msgstr ""
+msgstr "Monako"
 
 #: src/translations.h:337
 msgid "Moldova"
-msgstr ""
+msgstr "Moldavsko"
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshallove ostrovy"
 
 #: src/translations.h:340
 msgid "Macedonia"
-msgstr ""
+msgstr "Macedónsko"
 
 #: src/translations.h:341
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: src/translations.h:342
 msgid "Myanmar"
-msgstr ""
+msgstr "Mjanmarsko"
 
 #: src/translations.h:343
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolsko"
 
 #: src/translations.h:344
 msgid "Macau"
-msgstr ""
+msgstr "Macao"
 
 #: src/translations.h:345
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Severné Mariány"
 
 #: src/translations.h:346
 msgid "Martinique"
-msgstr ""
+msgstr "Martinik"
 
 #: src/translations.h:347
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritánia"
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: src/translations.h:349
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: src/translations.h:350
 msgid "Mauritius"
-msgstr ""
+msgstr "Maurícius"
 
 #: src/translations.h:351
 msgid "Maldives"
-msgstr ""
+msgstr "Maldivy"
 
 #: src/translations.h:352
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: src/translations.h:353
 msgid "Mexico"
-msgstr ""
+msgstr "Mexiko"
 
 #: src/translations.h:354
 msgid "Malaysia"
-msgstr ""
+msgstr "Malajzia"
 
 #: src/translations.h:355
 msgid "Mozambique"
-msgstr ""
+msgstr "Mozambik"
 
 #: src/translations.h:356
 msgid "Namibia"
-msgstr ""
+msgstr "Namíbia"
 
 #: src/translations.h:357
 msgid "New Caledonia"
-msgstr ""
+msgstr "Nová Kaledónia"
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolk"
 
 #: src/translations.h:360
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigéria"
 
 #: src/translations.h:361
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nikaragua"
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "Holandsko"
 
 #: src/translations.h:363
 msgid "Norway"
-msgstr ""
+msgstr "Nórsko"
 
 #: src/translations.h:364
 msgid "Nepal"
-msgstr ""
+msgstr "Nepál"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "Nový Zéland"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "Omán"
 
 #: src/translations.h:369
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: src/translations.h:370
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "Francúzska Polynézia"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua-Nová Guinea"
 
 #: src/translations.h:373
 msgid "Philippines"
-msgstr ""
+msgstr "Filipíny"
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #: src/translations.h:375
 msgid "Poland"
-msgstr ""
+msgstr "Poľsko"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Saint Pierre a Miquelon"
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairnove ostrovy"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Portoriko"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Palestínske okupované územia"
 
 #: src/translations.h:380
 msgid "Portugal"
-msgstr ""
+msgstr "Portugalsko"
 
 #: src/translations.h:381
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguaj"
 
 #: src/translations.h:383
 msgid "Qatar"
-msgstr ""
+msgstr "Katar"
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr ""
+msgstr "Réunion"
 
 #: src/translations.h:385
 msgid "Romania"
-msgstr ""
+msgstr "Rumunsko"
 
 #: src/translations.h:386
 msgid "Serbia"
-msgstr ""
+msgstr "Srbsko"
 
 #: src/translations.h:387
 msgid "Russian Federation"
-msgstr ""
+msgstr "Ruská federácia"
 
 #: src/translations.h:388
 msgid "Rwanda"
-msgstr ""
+msgstr "Rwanda"
 
 #: src/translations.h:389
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Saudská Arábia"
 
 #: src/translations.h:390
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Šalamúnove ostrovy"
 
 #: src/translations.h:391
 msgid "Seychelles"
-msgstr ""
+msgstr "Seychely"
 
 #: src/translations.h:392
 msgid "Sudan"
-msgstr ""
+msgstr "Sudán"
 
 #: src/translations.h:393
 msgid "Sweden"
-msgstr ""
+msgstr "Švédsko"
 
 #: src/translations.h:394
 msgid "Singapore"
-msgstr ""
+msgstr "Singapur"
 
 #: src/translations.h:395
 msgid "Saint Helena"
-msgstr ""
+msgstr "Svätá Helena"
 
 #: src/translations.h:396
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovinsko"
 
 #: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Svalbard a Jan Mayen"
 
 #: src/translations.h:398
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovensko"
 
 #: src/translations.h:399
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leone"
 
 #: src/translations.h:400
 msgid "San Marino"
-msgstr ""
+msgstr "San Maríno"
 
 #: src/translations.h:401
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #: src/translations.h:402
 msgid "Somalia"
-msgstr ""
+msgstr "Somálsko"
 
 #: src/translations.h:403
 msgid "Suriname"
-msgstr ""
+msgstr "Surinam"
 
 #: src/translations.h:404
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Svätý Tomáš a Princov ostrov"
 
 #: src/translations.h:405
 msgid "El Salvador"
-msgstr ""
+msgstr "Salvádor"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Sýrska arabská republika"
 
 #: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "Svazijsko"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Ostrovy Turks a Caicos"
 
 #: src/translations.h:409
 msgid "Chad"
-msgstr ""
+msgstr "Čad"
 
 #: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Francúzske južné a antarktické územia"
 
 #: src/translations.h:411
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: src/translations.h:412
 msgid "Thailand"
-msgstr ""
+msgstr "Thajsko"
 
 #: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tadžikistan"
 
 #: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "Východný Timor"
 
 #: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkménsko"
 
 #: src/translations.h:417
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisko"
 
 #: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: src/translations.h:419
 msgid "Turkey"
-msgstr ""
+msgstr "Turecko"
 
 #: src/translations.h:420
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad a Tobago"
 
 #: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: src/translations.h:423
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzánia"
 
 #: src/translations.h:424
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukrajina"
 
 #: src/translations.h:425
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Menšie odľahlé ostrovy USA"
 
 #: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "Spojené štáty"
 
 #: src/translations.h:428
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguaj"
 
 #: src/translations.h:429
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
 #: src/translations.h:430
 msgid "Vatican City State"
-msgstr ""
+msgstr "Vatikánsky mestský štát"
 
 #: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Svätý Vincent a Grenadíny"
 
 #: src/translations.h:432
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #: src/translations.h:433
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Britské Panenské ostrovy"
 
 #: src/translations.h:434
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Americké Panenské ostrovy"
 
 #: src/translations.h:435
 msgid "Viet Nam"
-msgstr ""
+msgstr "Vietnam"
 
 #: src/translations.h:436
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis a Futuna"
 
 #: src/translations.h:438
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: src/translations.h:439
 msgid "Yemen"
-msgstr ""
+msgstr "Jemen"
 
 #: src/translations.h:440
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: src/translations.h:441
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Juhoslávia"
 
 #: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "Južná Afrika"
 
 #: src/translations.h:443
 msgid "Zambia"
-msgstr ""
+msgstr "Zambia"
 
 #: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2625,14 +2639,7 @@ msgstr ":"
 msgid "Help"
 msgstr "Pomoc"
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
-#: plugins/Quasars/src/ui_quasarsDialog.h:266
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
+#: src/ui_helpDialogGui.h:267
 msgid "About"
 msgstr "O aplikácii"
 
@@ -2657,9 +2664,9 @@ msgstr "Informácie o súčasnej zemepisnej polohe"
 msgid "Use as default"
 msgstr "Použiť ako predvolené"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
-#: plugins/Oculars/src/ui_ocularDialog.h:885
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:903
 msgid "Delete"
 msgstr "Vymazať"
 
@@ -2831,7 +2838,7 @@ msgstr "Poloha"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "On-line astronomická databáza SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
@@ -2843,7 +2850,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
+#: src/ui_configurationDialog.h:901 src/ui_configurationDialog.h:912
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "Možnosti"
@@ -2924,7 +2931,7 @@ msgstr "Zobraziť atmosféru"
 #: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
-msgstr ""
+msgstr "Svetelné znečistenie:"
 
 #: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
@@ -2994,7 +3001,7 @@ msgstr "Zobraziť kresby"
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
-msgstr ""
+msgstr "Jas kresieb:"
 
 #: src/ui_viewDialog.h:1155
 msgid "Celestial Sphere"
@@ -3006,7 +3013,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Zobraziť poludníkovú čiaru"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
@@ -3052,55 +3059,55 @@ msgstr "Použiť túto kultúru ako predvolenú"
 msgid "Visible"
 msgstr "Viditeľný"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:791
 msgid "Configuration"
 msgstr "Nastavenia"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:793
 msgid "Program language"
 msgstr "Jazyk programu"
 
-#: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
+#: src/ui_configurationDialog.h:794 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
 msgstr "Informácie o vybranom objekte"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:796
 msgid "Display all information available"
 msgstr "Zobraziť všetky dostupné informácie"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:798
 msgid "All available"
 msgstr "Všetky dostupné"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:800
 msgid "Display less information"
 msgstr "Zobraziť menej informácií"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:802
 msgid "Short"
 msgstr "Stručné"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:804
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:806
 msgid "Customized"
 msgstr ""
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:808
 msgid "Display no information"
 msgstr "Nezobrazovať informácie"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:810
 msgid "None"
 msgstr "Žiadne"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:811
 msgid "Default options"
 msgstr "Predvolené nastavenia"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:813
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3108,20 +3115,20 @@ msgstr ""
 "Uložiť nastavenia, ktoré ste zmenili v tejto relácii tak, aby boli rovnaké "
 "pri ďalšom spustení Stellaria"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:815
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "Uložiť nastavenia"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:817
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Obnoviť pôvodné nastavenia Stellaria"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:819
 msgid "Restore defaults"
 msgstr "Obnoviť pôvodné"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:820
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3130,48 +3137,48 @@ msgstr ""
 "Na obnovenie predvolených nastavení je potrebné reštartovať Stellarium. Pri "
 "ukladaní nastavení sa uloží aj smer pohľadu a šírka zorného poľa."
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:822
 msgid "The width of your view when Stellarium starts"
 msgstr "Šírka vášho pohľadu pri spustení Stellaria"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:825
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Smer, ktorým sa pozeráte pri spustení Stellaria"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:827
 msgid "Control"
 msgstr "Ovládanie"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:829
 msgid "Allow keyboard to pan and zoom"
 msgstr "Povoliť otáčanie a približovanie klávesnicou"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:831
 msgid "Enable keyboard navigation"
 msgstr "Povoliť navigáciu klávesnicou"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:833
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Povoliť otáčanie (ťahanie) a približovanie (kolieskom) myšou"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:835
 msgid "Enable mouse navigation"
 msgstr "Povoliť navigáciu myšou"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:836
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "Dátum a čas pri spustení"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:838
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Spustí Stellarium s aktuálnym systémovým časom"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:840
 msgid "System date and time"
 msgstr "Systémový čas"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:842
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -3179,47 +3186,55 @@ msgstr ""
 "Stellarium sa spustí s dátumom a časom najbližšieho nasledujúceho výskytu "
 "tohoto času."
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:844
 msgid "System date at:"
 msgstr "Systémový dátum o:"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:846
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Použije konkrétny dátum pri spustení Stellarium"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:848
 msgid "Other:"
 msgstr "Iný:"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:849
 msgid "use current"
 msgstr "použiť súčasný"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:850
 msgid "Other"
 msgstr "Ostatné"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:852
 msgid "Hides the mouse cursor when inactive"
 msgstr "Skrýva kurzor myši pri jeho nevyužití"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:854
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Čas do zmiznutia kurzoru (sekundy):"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:856
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Zobraziť tlačidlá horizontálneho a vertikálneho prevrátenia obrazu"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:858
 msgid "Show flip buttons"
 msgstr "Zobraziť tlačidlá prevrátenia"
 
-#: src/ui_configurationDialog.h:853
+#: src/ui_configurationDialog.h:860
+msgid "Toggle display backgrounds of the nebulae."
+msgstr ""
+
+#: src/ui_configurationDialog.h:862
+msgid "Show nebula background button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:863
 msgid "Planetarium options"
 msgstr "Nastavenia pre planetárium"
 
-#: src/ui_configurationDialog.h:855
+#: src/ui_configurationDialog.h:865
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3227,19 +3242,19 @@ msgstr ""
 "Tento režim sa využíva, keď sa Stellarium premieta prostredníctvom "
 "sférického (guľového) zrkadla v nízkonákladových planetáriách."
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:867
 msgid "Spheric mirror distortion"
 msgstr "Skreslenie sférického zrkadla"
 
-#: src/ui_configurationDialog.h:859
+#: src/ui_configurationDialog.h:869
 msgid "Align labels with the horizon"
 msgstr "Zarovná názvy s obzorom"
 
-#: src/ui_configurationDialog.h:861
+#: src/ui_configurationDialog.h:871
 msgid "Gravity labels"
 msgstr "Orientovať názvy"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:873
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3247,105 +3262,105 @@ msgstr ""
 "Keď je táto možnosť zapnutá, použitie klávesy na automatické oddialenie "
 "pohľadu zároveň nastaví počiatočný smer pohľadu."
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:875
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automatické oddialenie nastaví počiatočný smer pohľadu"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:877
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Schová všetko mimo stredného okrúhleho zorného poľa."
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:879
 msgid "Disc viewport"
 msgstr "Kruhové zorné pole"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:881
 msgid "Hide other constellations when you click one"
-msgstr "Skryť ostatné súhvezdia keď raz kliknete"
+msgstr "Skryť ostatné súhvezdia, keď kliknete na jedno z nich"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:883
 msgid "Select single constellation"
 msgstr "Vybrať jediné súhvezdie"
 
-#: src/ui_configurationDialog.h:874
+#: src/ui_configurationDialog.h:884
 msgid "Screenshots"
 msgstr "Zachytené obrazovky"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:885
 msgid "Screenshot Directory"
 msgstr "Adresár snímkov obrazovky"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:887
 msgid "Invert colors"
 msgstr "Invertovať farby"
 
-#: src/ui_configurationDialog.h:878
+#: src/ui_configurationDialog.h:888
 msgid "Star catalog updates"
 msgstr "Aktualizácia katalógu hviezd"
 
-#: src/ui_configurationDialog.h:880
+#: src/ui_configurationDialog.h:890
 msgid "Click here to start downloading"
 msgstr "Kliknite tu pre štart sťahovania"
 
-#: src/ui_configurationDialog.h:882
+#: src/ui_configurationDialog.h:892
 msgid "Download this file to view even more stars"
 msgstr "Stiahnite tento súbor a uvidíte viac hviezd"
 
-#: src/ui_configurationDialog.h:884
+#: src/ui_configurationDialog.h:894
 msgid "Restart the download"
 msgstr "Reštartovať sťahovanie"
 
-#: src/ui_configurationDialog.h:886
+#: src/ui_configurationDialog.h:896
 msgid "Retry"
 msgstr "Skúsiť znovu"
 
-#: src/ui_configurationDialog.h:888
+#: src/ui_configurationDialog.h:898
 msgid "Stop the download. You can always restart it later"
 msgstr "Zrušiť sťahovanie. Neskôr ho môžete kedykoľvek reštartovať"
 
-#: src/ui_configurationDialog.h:890
+#: src/ui_configurationDialog.h:900
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/ui_configurationDialog.h:893
+#: src/ui_configurationDialog.h:903
 msgid "Close window when script runs"
 msgstr "Zatvoriť okno keď je skript spustený"
 
-#: src/ui_configurationDialog.h:895
+#: src/ui_configurationDialog.h:905
 msgid "Run the selected script"
 msgstr "Spustiť vybratý skript"
 
-#: src/ui_configurationDialog.h:899
+#: src/ui_configurationDialog.h:909
 msgid "Stop a running script"
 msgstr "Zastaviť spustený skript"
 
-#: src/ui_configurationDialog.h:903
+#: src/ui_configurationDialog.h:913
 msgid "Load at startup"
 msgstr "Nahrať pri spustení"
 
-#: src/ui_configurationDialog.h:904
+#: src/ui_configurationDialog.h:914
 msgid "configure"
-msgstr "skonfigurovať"
+msgstr "nastaviť"
 
-#: src/ui_configurationDialog.h:909
+#: src/ui_configurationDialog.h:919
 msgid "Main"
 msgstr "Hlavné"
 
-#: src/ui_configurationDialog.h:911
+#: src/ui_configurationDialog.h:921
 msgid "Navigation"
 msgstr "Navigácia"
 
-#: src/ui_configurationDialog.h:913
+#: src/ui_configurationDialog.h:923
 msgid "Tools"
 msgstr "Ostatné"
 
-#: src/ui_configurationDialog.h:915
+#: src/ui_configurationDialog.h:925
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "Skripty"
 
-#: src/ui_configurationDialog.h:917
+#: src/ui_configurationDialog.h:927
 msgid "Plugins"
 msgstr "Moduly"
 
@@ -3427,11 +3442,11 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "Zobraziť informácie o názve objektu"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "Názov objektu"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
@@ -3443,19 +3458,19 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "Zobraziť informácie o vizuálnej magnitúde"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Vizuálna magnitúda"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "Zobraziť informácie o absolútnej magnitúde"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Absolútna magnitúda"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
@@ -3487,23 +3502,23 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "Hodinový uhol"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "Zobraziť informácie o vzdialenosti objektu"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "Vzdialenosť objektu"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "Zobraziť informácie o veľkosti objektu"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Veľkosť objektu"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
@@ -3618,7 +3633,7 @@ msgid "Compass marks"
 msgstr "Značky kompasu"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:862
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Oculars"
 msgstr "Okuláre"
 
@@ -3629,171 +3644,171 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:757
+#: plugins/Oculars/src/Oculars.cpp:759
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:836
+#: plugins/Oculars/src/Oculars.cpp:838
 msgid "&Previous ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:837
+#: plugins/Oculars/src/Oculars.cpp:839
 msgid "&Next ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:838
+#: plugins/Oculars/src/Oculars.cpp:840
 msgid "Select &ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:883
+#: plugins/Oculars/src/Oculars.cpp:885
 msgid "Toggle &crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:892
+#: plugins/Oculars/src/Oculars.cpp:894
 msgid "Configure &Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:901
+#: plugins/Oculars/src/Oculars.cpp:903
 msgid "Toggle &CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:909
+#: plugins/Oculars/src/Oculars.cpp:911
 msgid "Toggle &Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:919
+#: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Previous CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:920
+#: plugins/Oculars/src/Oculars.cpp:922
 msgid "&Next CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:921
+#: plugins/Oculars/src/Oculars.cpp:923
 msgid "&Select CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:943
+#: plugins/Oculars/src/Oculars.cpp:945
 msgid "&Rotate CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:975
+#: plugins/Oculars/src/Oculars.cpp:977
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1201
-#: plugins/Oculars/src/ui_ocularDialog.h:864
+#: plugins/Oculars/src/Oculars.cpp:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Ocular view"
 msgstr "Okulárové zobrazenie"
 
-#: plugins/Oculars/src/Oculars.cpp:1225
+#: plugins/Oculars/src/Oculars.cpp:1227
 msgid "Oculars popup menu"
 msgstr "Ponuka okulárov"
 
-#: plugins/Oculars/src/Oculars.cpp:1233
+#: plugins/Oculars/src/Oculars.cpp:1235
 msgid "Crosshairs"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1241
+#: plugins/Oculars/src/Oculars.cpp:1243
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Rám obrazového snímača"
 
-#: plugins/Oculars/src/Oculars.cpp:1249
+#: plugins/Oculars/src/Oculars.cpp:1251
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1257
+#: plugins/Oculars/src/Oculars.cpp:1259
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1445
+#: plugins/Oculars/src/Oculars.cpp:1447
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1450
+#: plugins/Oculars/src/Oculars.cpp:1452
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1464
+#: plugins/Oculars/src/Oculars.cpp:1466
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1471
+#: plugins/Oculars/src/Oculars.cpp:1473
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1481 plugins/Oculars/src/Oculars.cpp:1543
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
+#: plugins/Oculars/src/Oculars.cpp:1483 plugins/Oculars/src/Oculars.cpp:1540
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/Oculars.cpp:1488 plugins/Oculars/src/Oculars.cpp:1545
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
+#: plugins/Oculars/src/Oculars.cpp:1499
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/Oculars.cpp:1507
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1520
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/Oculars.cpp:1517
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1522
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Snímač #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
-msgstr ""
+msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1739
+#: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1740
+#: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "Predchádzajúci okulár"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Ďalší okulár"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
@@ -3805,39 +3820,39 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "Predchádzajúci teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "Ďalší teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 15 stupňov proti smeru hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 5 stupňov proti smeru hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 1 stupeň proti smeru hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Obnoviť pôvodné otočenie rámu snímača"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 1 stupeň v smere hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 5 stupňov v smere hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 15 stupňov v smere hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -3847,44 +3862,45 @@ msgstr ""
 msgid "Apparent field of view of the ocular"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
 #, qt-format
 msgid "Rotation: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 msgid "Magnification provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:715
 msgid "Actual field of view provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:724
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+#: plugins/Oculars/src/gui/OcularDialog.cpp:421
 msgid "Oculars Plug-in"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/gui/OcularDialog.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
 msgid "Version"
-msgstr ""
+msgstr "Verzia"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:423
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Overview"
 msgstr "Prehľad"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:425
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -3896,7 +3912,7 @@ msgstr ""
 "teleskopy, ako aj snímače CCD. Pri prvom spustení aplikácie bude k "
 "dispozícii niekoľko ukážok, ktoré vám pomôžu začať pracovať."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+#: plugins/Oculars/src/gui/OcularDialog.cpp:430
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -3907,14 +3923,14 @@ msgid ""
 "that you leave it off, unless you feel you have a need of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+#: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -3923,148 +3939,164 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+#: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+#: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
-#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+#: plugins/Oculars/src/gui/OcularDialog.cpp:449
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "[no key defined]"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:454
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:458
+#: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:865
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Enable only if an object is selected"
 msgstr "Povoliť, len ak je vybraný nejaký objekt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:866
+#: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "Scale image circle"
 msgstr "Zmeniť mierku obrazového kruhu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:867
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Key mappings"
-msgstr ""
+msgstr "Priradenie klávesov"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Toggle ocular view:"
 msgstr "Prepnúť zobrazenie okulára:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Open pop-up navigation menu:"
 msgstr "Otvoriť vyskakovacie navigačné menu:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Interface"
-msgstr ""
+msgstr "Rozhranie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "On-screen control panel"
+msgstr "Ovládací panel na obrazovke"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
-#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Eyepieces"
-msgstr ""
+msgstr "Okuláre"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
-#: plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "Pridať"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
-#: plugins/Oculars/src/ui_ocularDialog.h:886
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:904
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
-msgstr ""
+msgstr "Názov:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:905
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Sensors"
-msgstr ""
+msgstr "Snímače"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:909
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "Teleskopy"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Diameter:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Horizontal flip"
-msgstr ""
+msgstr "Horizontálne preklopenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Vertical flip"
+msgstr "Vertikálne preklopenie"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:910
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
+msgid "About plugin"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
@@ -4077,8 +4109,8 @@ msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
-"Predpoveď polohy satelitov na obežnej dráhe podľa dvojriadkových elementov "
-"NORAD"
+"Predpoveď polohy umelých satelitov na obežnej dráhe Zeme podľa údajov TLE "
+"veliteľstva NORAD"
 
 #: plugins/Satellites/src/Satellites.cpp:130
 msgid "Satellites configuration window"
@@ -4158,7 +4190,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Satelit nie je viditeľný"
 
 #: plugins/Satellites/src/Satellite.cpp:322
 #, qt-format
@@ -4174,15 +4206,19 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Zásuvný modul Satelity predpovedá pozície umelých satelitov na obežnej dráhe "
+"Zeme."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
-msgstr ""
+msgstr "Poznámky pre používateľov"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Satelity a ich obežné dráhy sa zobrazujú, len ak sa pozorovateľ nachádza na "
+"Zemi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid ""
@@ -4190,12 +4226,18 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"Predpovedané pozície sú správne len na pomerne krátky čas (ako dni, týždne, "
+"prípadne aj mesiac do minulosti a budúcnosti). Očakávajte zvláštne výsledky "
+"pri dátumoch mimo tohto rozsahu."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"Elementy dráhy zastarávajú dosť rýchlo (iba po týždňoch, niekedy dňoch). Ak "
+"chcete dostať užitočné dáta, musíte pravidelne aktualizovať dvojriadkové "
+"elementy (TLE)."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
@@ -4211,11 +4253,13 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Zásuvný modul Satelity je stále vo vývoji. Niektoré funkcie sú nedokončené, "
+"chýbajúce alebo chybné."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
-msgstr ""
+msgstr "Aktualizácie údajov TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
@@ -4223,6 +4267,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Zásuvný modul Satelity dokáže stiahnuť údaje TLE automaticky z internetových "
+"zdrojov a predvolene tak vykoná, ak sú existujúce údaje staršie ako 72 "
+"hodín. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
@@ -4231,16 +4278,21 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Keď vypnete aktualizácie cez internet, môžete vykonať aktualizáciu zo súboru "
+"na svojom počítači. Tento súbor musí byť v rovnakom formáte ako "
+"aktualizácie, ktoré poskytuje Celestrak (ako príklad si pozrite %1)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Poznámka:</b> Ak názov satelitu v aktualizačných údajoch obsahuje na "
+"konci čokoľvek v hranatých zátvorkách, pred použitím údajov sa to odstráni."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Pridanie nových satelitov"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
@@ -4249,6 +4301,11 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Uistite sa, že satelity (resp. satelit), ktoré chcete pridať, sú zahrnuté "
+"v jednej z adries URL uvedených v karte Zdroje v konfiguračnom dialógovom "
+"okne modulu Satelity. 2. Prejdite na kartu Satelity a kliknite na tlačidlo "
+"'+'. Vyberte satelity (resp. satelit), ktoré si prajete pridať, a zvoľte "
+"tlačidlo Pridať."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4259,6 +4316,8 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Pozície sa vypočítavajú pomocou metód SGP4 a SDP4 s použitím údajov TLE "
+"veliteľstva NORAD ako vstupu. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
@@ -4276,6 +4335,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 msgid "Links"
 msgstr ""
 
@@ -4283,35 +4343,41 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:113
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Pomoc sa poskytuje prostredníctvom webovej stránky Launchpad. Pri odosielaní "
+"sa uistite, že ste do predmetu vložili \"%1\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Ak máte otázku, odpoveď môžete %1získať tu%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "Chyby môžete ohlásiť %1tu%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -4321,6 +4387,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 msgid "Internet updates disabled"
 msgstr ""
 
@@ -4332,6 +4399,8 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Updating now..."
 msgstr ""
 
@@ -4339,33 +4408,38 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Ďalšia aktualizácia: < 1 minúta"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Ďalšia aktualizácia: %1 minút"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Ďalšia aktualizácia: %1 hodín"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
 msgid "Update now"
 msgstr ""
 
@@ -4373,6 +4447,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Update from files"
 msgstr ""
 
@@ -4380,6 +4455,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Update error"
 msgstr ""
 
@@ -4453,25 +4529,28 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "Aktualizácia zoznamov TLE z internetových zdrojov"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Quasars/src/ui_quasarsDialog.h:256
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Aktualizovať z internetových zdrojov"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:257
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
+#: plugins/Quasars/src/ui_quasarsDialog.h:254
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Last update:"
-msgstr ""
+msgstr "Posledná aktualizácia:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Frekvencia aktualizácií (v hodinách):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "Labels"
@@ -4513,23 +4592,26 @@ msgid "Fade length:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
 msgid "Restore default settings"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
-#: plugins/Quasars/src/ui_quasarsDialog.h:264
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:243
 msgid "Save settings as default"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
-#: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:244
 msgid "Settings"
 msgstr ""
 
@@ -4693,7 +4775,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Verzia %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
@@ -5140,7 +5222,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Definovanie časového pásma"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -5151,16 +5233,16 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Názov časového pásma:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Posun od UTC (v hodinách):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
-msgstr ""
+msgstr "Čas šetriaci denné svetlo (letný čas)"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
@@ -5172,30 +5254,30 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Začiatok letného času"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "Deň:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Čas zmeny:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Dátum:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Koniec letného času"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "Použiť túto definíciu"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -5204,41 +5286,47 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"V programe Stellarium sa predvolene zobrazovaný čas interpretuje ako miestny "
+"čas v časovom pásme systému, nie v časovom pásme zobrazovanej zemepisnej "
+"polohy. Toto správanie možno zmeniť zmenou nastavení globálneho časového "
+"pásma programu Stellarium."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "Použiť systémové nastavenia (predvolené)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Koordinovaný svetový čas (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(posun = miestny čas - čas UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
-msgstr ""
+msgstr "Definované používateľom:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
+"Akékoľvek zmeny nadobudnú platnosť až po ďalšom spustení programu Stellarium."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "Formáty zobrazenia"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Tieto nastavenia ovládajú spôsob zobrazenia času a dátumu v stavovom riadku."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Time display format"
-msgstr ""
+msgstr "Formát zobrazenia času"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
@@ -5256,7 +5344,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Date display format"
-msgstr ""
+msgstr "Formát zobrazenia dátumu"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
@@ -5647,17 +5735,17 @@ msgstr ""
 msgid "Solar System"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:70
 msgid "Historical Supernovae"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:74
+#: plugins/Supernovae/src/Supernovae.cpp:73
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:145
+#: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
@@ -5676,9 +5764,9 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
-"A plugin that shows some historical supernovae brighter than 10 visual "
-"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
-"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"A plugin that shows some historical supernovae brighter than visual "
+"magnitude 10: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), "
+"SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
 "October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
@@ -5691,21 +5779,20 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
 msgid ""
-"In this plugin implemented simple model of light curves for different "
-"supernovae. Typical view of light curves for supernova type I and type II "
-"you can see %1here%2 (right scale in days) and this model used for plugin."
+"This plugin implements a simple model of light curves for different "
+"supernovae. Typical views of light curves for type I and type II supernova "
+"can be seen %1here%2 (right scale in days), and this model is used for this "
+"plugin."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-msgid "Acknowledgment"
+msgid "Acknowledgments"
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
-"We thank the following people for their contribution and of the valuable "
-"comments:"
+"We thank the following people for their contribution and valuable comments:"
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
@@ -5727,8 +5814,8 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
 msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
+"If you want to read full information about this plugin, its history and "
+"format of catalog, you can %1get info here%2."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
@@ -5736,50 +5823,51 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Ďalšia aktualizácia: %1 dní"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 msgid "Historical supernovae is updated"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Update catalog from Internet"
 msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
-msgid "Update catalog from Internet"
-msgstr ""
-
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:258
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Frekvencia aktualizácií (v dňoch):"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:259
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "[next update info]"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:71
+#: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:74
+#: plugins/Quasars/src/Quasars.cpp:73
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:148
+#: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
 msgstr ""
 
@@ -5811,34 +5899,34 @@ msgstr ""
 msgid "Quasars is updated"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:71
+#: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:148
+#: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
 msgstr ""
 
@@ -5976,6 +6064,10 @@ msgstr ""
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr ""
 
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
 msgstr ""
@@ -6000,20 +6092,129 @@ msgstr ""
 msgid "Pulsars is updated"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:71
+msgid "Exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:74
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
+msgid "Exoplanets configuration window"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
+msgid "Show exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:178
+msgid "Metallicity"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+msgid "Mass"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
+msgid "Radius"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#, qt-format
+msgid "Effective temperature: %1 K"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:196
+msgid "Exoplanet"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
+msgid "Period"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
+msgid "days"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
+msgid "Jup"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
+msgid "Semi-Major Axis"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
+msgid "AU"
+msgstr "AU"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
+msgid "Eccentricity"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
+msgid "Inclination"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
+msgid "Angle Distance"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
+msgid "Exoplanets Plug-in"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
+#, qt-format
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+msgid "Exoplanets is updated"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
+msgid "Exoplanets Configuration"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
+msgid "Exoplanets Plug-in Configuration"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
+msgid "Update exoplanets data from Internet"
 msgstr ""
 
 #~ msgid "Cardinal Points"
