@@ -42,7 +42,8 @@
 #include "StelTranslator.hpp"
 #include "LandscapeMgr.hpp"
 
-const QString Scenery3dMgr::MODULE_PATH("modules/scenery3d/");
+//const QString Scenery3dMgr::MODULE_PATH("modules/scenery3d/");
+const QString Scenery3dMgr::MODULE_PATH("scenery3d/");
 
 Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
 {
