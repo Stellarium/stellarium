@@ -484,6 +484,34 @@
 					"checkable": "0",
 					"autorepeat": "1",
 					"global": "0"
+				},
+				"actionAdd_Sidereal_Month":
+				{
+					"text": "Add 1 sidereal month",
+					"primaryKey": "Alt+Shift+]",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Sidereal_Month":
+				{
+					"text": "Subtract 1 sidereal month",
+					"primaryKey": "Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Sidereal_Year":
+				{
+					"text": "Add 1 sidereal year",
+					"primaryKey": "Ctrl+Alt+Shift+]",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Sidereal_Year":
+				{
+					"text": "Subtract 1 sidereal year",
+					"primaryKey": "Ctrl+Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
 				}
 			}
 		},
@@ -594,6 +622,14 @@
 					"checkable": "1",
 					"autorepeat": "0",
 					"global": "1"
+				},
+				"actionGo_Home_Global":
+				{
+					"text": "Go to home",
+					"primaryKey": "Ctrl+H",
+					"checkable": false,
+					"autorepeat": false,
+					"global": true
 				}
 			}
 		},
