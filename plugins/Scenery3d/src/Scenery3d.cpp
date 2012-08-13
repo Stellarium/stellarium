@@ -22,6 +22,7 @@
 
 // GZ: Apparently Qt4.8 conflicts with GLee, but provides QGLFunctions.
 // This solution here works at least for Qt4.8.1/QCreator/Win32/NVidia.
+#include <QtGlobal>
 #if QT_VERSION >= 0x040800
 #include <GL/gl.h>
 #include <GL/glext.h>
@@ -208,7 +209,7 @@ Scenery3d::~Scenery3d()
         objModel = NULL;
     }
 
-    for(int i=0; i<focusBodies.size(); i++)
+    for(unsigned int i=0; i<focusBodies.size(); i++)
     {
         delete focusBodies[i];
     }
