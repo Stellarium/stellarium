@@ -27,7 +27,6 @@
 #include <GL/glext.h>
 #include <GL/glu.h>
 #else
-#include "Scenery3d.hpp"
 #include <GLee.h>
 #endif
 
@@ -73,7 +72,8 @@
 
 #define MAXSPLITS 4
 #define NEARZ 1.0f;
-#define FARZ 1500.0f
+//If FARZ is too small for your model change it up
+#define FARZ 15000.0f
 
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
@@ -149,7 +149,6 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
 
     //Preset frustumSplits
     frustumSplits = 4;
-    //splitWeight = 0.50f;
     //Make sure we dont exceed MAXSPLITS or go below 1
     frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
     //Define shadow maps array - holds MAXSPLITS textures
@@ -159,7 +158,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
 
     camFOV = 90.0f;
     camAspect = 1.0f;
-    camNear = 1.0f;
+    camNear = NEARZ;
     camFar = FARZ;
 
     Mat4d matrix;
@@ -472,15 +471,15 @@ void Scenery3d::loadModel()
         maxSize = std::max(sceneBoundingBox.max.v[0], maxSize);
         maxSize = std::max(sceneBoundingBox.max.v[1], maxSize);
 
-        qDebug() << "MAXSIZE::::" << maxSize;
+        //qDebug() << "MAXSIZE:" << maxSize;
         if(maxSize < 100.0f)
             splitWeight = 0.5f;
         else if(maxSize < 200.0f)
-            splitWeight = 0.70f;
+            splitWeight = 0.60f;
         else if(maxSize < 400.0f)
-            splitWeight = 0.80f;
+            splitWeight = 0.70f;
         else
-            splitWeight = 0.90f;
+            splitWeight = 0.80f;
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -540,13 +539,6 @@ void Scenery3d::setLights(float ambientBrightness, float diffuseBrightness)
     const GLfloat LightDiffuse[] = {diffuseBrightness, (red? 0 : diffuseBrightness), (red? 0 : diffuseBrightness), 1.0f};
     glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
-}
-
-void Scenery3d::switchToLightCam()
-{
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt (sunPosition[0]+30, sunPosition[1]+30, sunPosition[2]+30, 0, 0, 0, 0, 0, 1);
 }
 
 void Scenery3d::setSceneAABB(AABB* bbox)
@@ -888,6 +880,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
 
         if (pStelModel->pMaterial->texture)
         {
+            glActiveTexture(GL_TEXTURE0);
             pStelModel->pMaterial->texture.data()->bind();
 
             //Send texture to shader
@@ -934,7 +927,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
                     tangEnabled = true;
                 }
 
-                glActiveTexture(GL_TEXTURE0);
+
             }
             else
             {
@@ -945,8 +938,10 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
     }
     else // No-shader code, more classical OpenGL pipeline
     {
+        glActiveTexture(GL_TEXTURE0);
         if (pStelModel->pMaterial->texture)
         {
+            glActiveTexture(GL_TEXTURE0);
             pStelModel->pMaterial->texture.data()->bind();
         }
     }
@@ -1059,7 +1054,7 @@ void Scenery3d::computePolyhedron(int splitIndex)
     body.add(frustumArray[splitIndex]);
     //Intersect with the scene AABB
     body.intersect(sceneBoundingBox);
-    //Extrude towards negative light direction
+    //Extrude towards light direction
     body.extrude(lightDir, sceneBoundingBox);
 }
 
@@ -1094,7 +1089,7 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
         dim = std::max(std::abs(toCam.dot(down)), dim);
     }
 
-    //Make planes arent too small
+    //Make sure planes arent too small
     float zNear = std::max(minZ, 1.0f);
     float zFar = std::max(maxZ, zNear + 1.0f);
 
@@ -1138,6 +1133,7 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
         if(transf.v[2] < minZ) minZ = transf.v[2];
     }
 
+    //To avoid artifacts and far plane clipping
     maxZ = 1.0f;
 
     //Build the crop matrix and apply it to the light projection matrix
@@ -1222,6 +1218,15 @@ void Scenery3d::adjustFrustum()
     }
 }
 
+void Scenery3d::analyzeViewSamples()
+{
+    Frustum camFrust;
+    camFrust.setCamInternals(camFOV, camAspect, camNear, camFar);
+    camFrust.calcFrustum(viewPos, viewDir, viewUp);
+
+
+}
+
 void Scenery3d::generateShadowMap(StelCore* core)
 {
     //Needed so we can actually adjust the frustum upwards after it was already adjusted downwards.
@@ -1255,7 +1260,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
     //Backface culling for ESM!
-    glCullFace(GL_BACK);
+    glCullFace(GL_FRONT);
     glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
 
     glMatrixMode(GL_PROJECTION);
@@ -1300,8 +1305,10 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glUseProgram(0);
 
     //Fix selfshadowing
-    glEnable(GL_POLYGON_OFFSET_FILL);
-    glPolygonOffset(1.1f,4.0f);
+    //glEnable(GL_POLYGON_OFFSET_FILL);
+    //glPolygonOffset(1.1f,4.0f);
+    //! This is now done in shader via a bias. If that's ever a problem uncomment this part and the disabling farther down and change
+    //! glCullFace(GL_FRONT) to GL_BACK (farther up from here)
 
     //Set viewport
     glPushAttrib(GL_VIEWPORT_BIT);
@@ -1352,7 +1359,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glPopAttrib();
 
     //Move polygons back to normal position
-    glDisable(GL_POLYGON_OFFSET_FILL);
+    //glDisable(GL_POLYGON_OFFSET_FILL);
 
     //Unbind
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -1545,14 +1552,14 @@ void Scenery3d::generateCubeMap(StelCore* core)
     float fov = 90.0f;
     float aspect = 1.0f;
     float zNear = 1.0f;
-    float zFar = 1000.0f;
+    float zFar = 10000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
     Mat4f camProj = Mat4f(f / aspect, 0, 0, 0,
                     0, f, 0, 0,
                     0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
                     0, 0, -1, 0);
 
-    cFrust.setCamInternals(fov, aspect, 1.0, 1000.0);
+    cFrust.setCamInternals(fov, aspect, 1.0, 10000.0);
 
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1745,7 +1752,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     float fov = prj->getFov();
     float aspect = (float)prj->getViewportWidth() / (float)prj->getViewportHeight();
     float zNear = 1.0f;
-    float zFar = 1000.0f;
+    float zFar = 10000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
     Mat4d projMatd(f / aspect, 0, 0, 0,
                    0, f, 0, 0,
