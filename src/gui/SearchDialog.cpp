@@ -422,8 +422,8 @@ void SearchDialog::gotoObject()
 			close();
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().name)
+			// Can't point to home planet			
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 			{
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);
