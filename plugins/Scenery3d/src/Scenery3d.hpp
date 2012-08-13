@@ -238,8 +238,6 @@ private:
     Mat4f modelView;
     //Current sun position
     Vec3d sunPosition;
-    //Switches the camera to sun position camera for debug purposes
-    void switchToLightCam();
     //Sets the scenes' AABB
     void setSceneAABB(AABB* bbox);
     //Renders the Scene's AABB
@@ -276,5 +274,7 @@ private:
     void computePolyhedron(int splitIndex);
     //Computes the crop matrix to focus the light
     void computeCropMatrix(int frustumIndex);
+    //Analyzes the view samples to find even tighter fitting near and far planes
+    void analyzeViewSamples();
 };
 #endif

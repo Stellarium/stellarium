@@ -32,7 +32,7 @@ void main(void)
 	vecEyeView = gl_ModelViewMatrix * vecPos;
 	vecNormal = normalize(gl_NormalMatrix * gl_Normal);
 	vecLight = normalize(gl_LightSource[0].position.xyz);
-	vecEye = normalize(-vecPos.xyz);
+	vecEye = normalize(-vecEyeView.xyz);
 	
 	gl_TexCoord[0] = gl_MultiTexCoord0;
 	gl_Position = ftransform();
