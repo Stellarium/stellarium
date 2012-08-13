@@ -253,3 +253,8 @@ void StelShortcutGroup::setEnabled(bool enable)
 	}
 	m_enabled = enable;
 }
+
+void StelShortcutGroup::setPluginId(const QString &pluginId)
+{
+	m_pluginId = pluginId;
+}

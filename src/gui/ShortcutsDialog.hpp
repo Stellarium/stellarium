@@ -95,6 +95,7 @@ public slots:
 	// update shortcut representation in tree correspondingly to its actual contents
 	// if no shortcutTreeItem specified, search for it in tree, if no items found, create new item
 	void updateShortcutsItem(StelShortcut* shortcut, QTreeWidgetItem* shortcutsTreeItem = NULL);
+	void restoreDefaultShortcuts();
 
 
 protected:

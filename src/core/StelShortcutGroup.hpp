@@ -103,6 +103,7 @@ public:
 
 	QString getId() const { return m_id; }
 	QString getText() const { return m_text; }
+	QString getPluginId() const {return m_pluginId; }
 	bool isEnabled() const { return m_enabled; }
 
 	QVariant toQVariant() const;
@@ -114,6 +115,7 @@ public slots:
 	// enable/disable all actions of the group
 	// need for editing shortcuts without trigging any actions
 	void setEnabled(bool enable);
+	void setPluginId(const QString& pluginId);
 
 private:
 	QString m_id;

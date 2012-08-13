@@ -194,6 +194,7 @@ void StelShortcutMgr::addGroup(const QString &id, QString text, const QString &p
 
 	// applying group properties
 	shGroups[id]->setEnabled(enabled);
+	shGroups[id]->setPluginId(pluginId);
 }
 
 bool StelShortcutMgr::copyDefaultFile()
