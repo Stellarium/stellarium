@@ -274,6 +274,10 @@ private:
     void computePolyhedron(int splitIndex);
     //Computes the crop matrix to focus the light
     void computeCropMatrix(int frustumIndex);
+    //Computes the light projection values
+    void computeOrthoProjVals();
+    //Said values
+    float dim, dimNear, dimFar;
     //Analyzes the view samples to find even tighter fitting near and far planes
     void analyzeViewSamples();
 };

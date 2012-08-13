@@ -161,6 +161,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     camAspect = 1.0f;
     camNear = NEARZ;
     camFar = FARZ;
+    dim = 1.0f;
+    dimNear = 1.0f;
+    dimFar = dimNear+1.0f;
 
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
@@ -1059,12 +1062,12 @@ void Scenery3d::computePolyhedron(int splitIndex)
     body.extrude(lightDir, sceneBoundingBox);
 }
 
-void Scenery3d::computeCropMatrix(int frustumIndex)
+void Scenery3d::computeOrthoProjVals()
 {
     //Focus the light first on the entire scene
     float maxZ = 0.0f;
     float minZ = std::numeric_limits<float>::max();
-    float dim = 0.0f;
+    dim = 0.0f;
 
     Vec3f eye = lightDir;
     Vec3f vDir = -eye;
@@ -1091,8 +1094,17 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     }
 
     //Make sure planes arent too small
-    float zNear = std::max(minZ, 1.0f);
-    float zFar = std::max(maxZ, zNear + 1.0f);
+    dimNear = std::max(minZ, 1.0f);
+    dimFar = std::max(maxZ, dimNear + 1.0f);
+}
+
+void Scenery3d::computeCropMatrix(int frustumIndex)
+{
+    //Compute the light frustum, only need to do this once because we're just cropping it afterwards
+    if(frustumIndex == 0)
+    {
+        computeOrthoProjVals();
+    }
 
     //Calculating a fitting Projection Matrix for the light
     Mat4f lightProj, lightMVP, c;
@@ -1100,9 +1112,10 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     //Setup the Ortho Projection based on found z values
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-dim, dim, -dim, dim, zNear, zFar);
+    glOrtho(-dim, dim, -dim, dim, dimNear, dimFar);
     //Save it for later use
     glGetFloatv(GL_PROJECTION_MATRIX, lightProj);
+    lightProj.print();
     glPushMatrix();
     glMultMatrixf(lightViewMatrix);
     //Save the light's ModelViewProjection Matrix for later use
@@ -1110,16 +1123,24 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     glPopMatrix();
 
     float maxX = -std::numeric_limits<float>::max();
-    float maxY = -std::numeric_limits<float>::max();
+    float maxY = maxX;
+    float maxZ = maxX;
     float minX = std::numeric_limits<float>::max();
-    float minY = std::numeric_limits<float>::max();
-    maxZ = -std::numeric_limits<float>::max();
-    minZ = std::numeric_limits<float>::max();
+    float minY = minY;
+    float minZ = minY;
+
+    //! Uncomment this and the other marked lines to get no artifacts (but way worse shadow quality
+    //! making the second split pretty much useless
+    //!    AABB bb;
+    //!    for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
+    //!        bb.expand(focusBodies[frustumIndex]->getVerts()[i]);
 
     //Project the frustum into light space and find the boundaries
     for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
+    //! for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
     {
         Vec3f tmp = focusBodies[frustumIndex]->getVerts()[i];
+        //! Vec3f tmp = bb.getCorner(static_cast<AABB::Corner>(i));
         Vec4f transf = lightMVP*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
 
         transf.v[0] /= transf.v[3];
@@ -1183,13 +1204,13 @@ void Scenery3d::adjustFrustum()
     p.makeUniqueVerts();
 
     //Find the boundaries
-    float maxZ = 0.0f;
+    float maxZ = -std::numeric_limits<float>::max();
     float minZ = std::numeric_limits<float>::max();
+
+    Vec3f eye = vecdToFloat(viewPos);
 
     Vec3f vDir = vecdToFloat(viewDir);
     vDir.normalize();
-
-    Vec3f eye = vecdToFloat(viewPos);
 
     const std::vector<Vec3f> &verts = p.getVerts();
     for(unsigned int i=0; i<p.getVertCount(); i++)
@@ -1213,7 +1234,7 @@ void Scenery3d::adjustFrustum()
     //Setup the subfrusta
     for(int i=0; i<frustumSplits; i++)
     {
-        frustumArray[i].setCamInternals(90.0f, 1.0f, camNear, camFar);
+        frustumArray[i].setCamInternals(camFOV, camAspect, camNear, camFar);
         focusBodies.push_back(new Polyhedron());
         focusBodies[i]->clear();
     }

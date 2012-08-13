@@ -43,6 +43,8 @@ uniform float alpha;
 uniform int iIllum;
 uniform bool boolDebug;
 
+uniform int frustumSplits;
+
 varying vec3 vecLight;
 varying vec3 vecEye;
 varying vec3 vecNormal;
