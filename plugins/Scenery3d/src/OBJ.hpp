@@ -221,12 +221,12 @@ private:
     bool m_hasStelModels;
 
     //! Structure sizes
-    int m_numberOfVertexCoords;
-    int m_numberOfTextureCoords;
-    int m_numberOfNormals;
-    int m_numberOfTriangles;
-    int m_numberOfMaterials;
-    int m_numberOfStelModels;
+    unsigned int m_numberOfVertexCoords;
+    unsigned int m_numberOfTextureCoords;
+    unsigned int m_numberOfNormals;
+    unsigned int m_numberOfTriangles;
+    unsigned int m_numberOfMaterials;
+    unsigned int m_numberOfStelModels;
 
     //! Bounding box for the entire scene
     AABB* pBoundingBox;

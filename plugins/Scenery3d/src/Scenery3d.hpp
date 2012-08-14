@@ -157,8 +157,8 @@ private:
     bool groundGenNormals;      // Config flag, true generates normals for the given ground Model
     bool frustEnabled;
 
-    int cubemapSize;            // configurable values, typically 512/1024/2048/4096
-    int shadowmapSize;
+    unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
+    unsigned int shadowmapSize;
 
     Vec3d absolutePosition;     // current eyepoint in model
     float movement_x;           // speed values for moving around the scenery
