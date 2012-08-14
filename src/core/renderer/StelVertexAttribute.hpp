@@ -25,17 +25,21 @@
 #include <QStringList>
 #include <QVector>
 
+#include "VecMath.hpp"
+
 //! Vertex attribute types. 
 //!
 //! Used to specify data type of a vertex attribute in a vertex struct used with VertexBuffer.
 enum AttributeType
 {
 	//! Represents Vec4f (4D float vector).
-	AttributeType_Vec4f,
+	AttributeType_Vec4f = 0,
 	//! Represents Vec3f (3D float vector).
-	AttributeType_Vec3f,
+	AttributeType_Vec3f = 1,
 	//! Represents Vec2f (2D float vector).
-	AttributeType_Vec2f
+	AttributeType_Vec2f = 2,
+	//! Must be greater than all other AttributeType values.
+	AttributeType_Max   = 3
 };
 
 //! Return the number of dimensions of a vertex attribute type.
@@ -44,13 +48,23 @@ enum AttributeType
 //!
 //! @param type Attribute type to get number of dimensions of.
 //! @return Number of dimensions.
-int attributeDimensions(const AttributeType type);
+inline int attributeDimensions(const AttributeType type)
+{
+	static const int attributeDimensionsArray [AttributeType_Max] =
+		{4, 3, 2};
+	return attributeDimensionsArray[type];
+}
 
 //! Get size of a vertex attribute of specified type.
 //!
 //! @param type Attribute type to get size of (e.g. Vec2f).
 //! @return Size of the vertex attribute in bytes.
-int attributeSize(const AttributeType type);
+inline int attributeSize(const AttributeType type)
+{
+	static const int attributeSizeArray [AttributeType_Max] = 
+		{sizeof(Vec4f), sizeof(Vec3f), sizeof(Vec2f)};
+	return attributeSizeArray[type];
+}
 
 //! Vertex attribute interpretations. 
 //!
