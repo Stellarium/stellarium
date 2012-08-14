@@ -1179,7 +1179,7 @@ void OBJ::uploadTexturesGL()
 {
     StelTextureMgr textureMgr;
 
-    for(int i=0; i<m_numberOfMaterials; ++i)
+    for(unsigned int i=0; i<m_numberOfMaterials; ++i)
     {
         Material* pMaterial = &getMaterial(i);
 
@@ -1287,7 +1287,7 @@ void OBJ::bounds()
     }
 
     //Find AABB per Stel Model
-    for(int i=0; i<m_numberOfStelModels; ++i)
+    for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
         StelModel* pStelModel = &m_stelModels[i];
         pStelModel->bbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
@@ -1310,7 +1310,7 @@ void OBJ::bounds()
 
 void OBJ::renderAABBs()
 {
-    for(int i=0; i<m_numberOfStelModels; ++i)
+    for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
         StelModel* pStelModel = &m_stelModels[i];
         pStelModel->bbox->render(&m);

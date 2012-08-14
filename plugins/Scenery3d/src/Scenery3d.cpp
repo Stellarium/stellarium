@@ -594,7 +594,7 @@ void Scenery3d::renderFrustum(StelPainter &painter)
 {
     debugShader->use();
 
-    for(unsigned int i=0; i<frustumSplits; i++)
+    for(int i=0; i<frustumSplits; i++)
     {
         Vec3f ntl = frustumArray[i].drawCorners[Frustum::NTL];
         Vec3f ntr = frustumArray[i].drawCorners[Frustum::NTR];
@@ -1126,8 +1126,8 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     float maxY = maxX;
     float maxZ = maxX;
     float minX = std::numeric_limits<float>::max();
-    float minY = minY;
-    float minZ = minY;
+    float minY = minX;
+    float minZ = minX;
 
     //! Uncomment this and the other marked lines to get no artifacts (but way worse shadow quality
     //! making the second split pretty much useless
@@ -1463,7 +1463,7 @@ Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float 
     // Now find shadow caster, if any:
     if (sinSunAngle>0.0f)
     {
-        directionalBrightness=qMin(0.7, sinSunAngle+0.1); // limit to 0.7 in order to keep total below 1.
+        directionalBrightness=qMin(0.7, sqrt(sinSunAngle+0.1)); // limit to 0.7 in order to keep total below 1.
         lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
         if (shadowsEnabled) shadowcaster = Sun;
         directionalSourceString="Sun";
