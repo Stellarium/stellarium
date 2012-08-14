@@ -144,7 +144,6 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGL1ArrayVertexBufferBackend.hpp
 	core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
 	core/renderer/StelQGL2ArrayVertexBufferBackend.hpp
-	core/renderer/StelVertexAttribute.cpp
 	core/renderer/StelVertexAttribute.hpp
 	core/renderer/StelGeometryBuilder.hpp
 	core/renderer/StelGeometryBuilder.cpp
@@ -778,7 +777,6 @@ SET(tests_testStelVertexBuffer_SRCS
   core/StelFileMgr.cpp
   core/renderer/StelVertexBuffer.hpp
   core/renderer/StelVertexBufferBackend.hpp
-  core/renderer/StelVertexAttribute.cpp
   core/renderer/StelGLUtilityFunctions.cpp
   core/renderer/StelQGLArrayVertexBufferBackend.cpp
   core/renderer/StelQGLArrayVertexBufferBackend.hpp
