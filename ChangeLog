@@ -1,3 +1,32 @@
+0.11.4 [in development]
+Bug fix release with new features.
+
+Added:
+- New plugin: Exoplanets
+- New plugin: Observability analysis
+- Get geometric altitude and azimuth for script engine (LP: #1010617)
+- Sky image loading with altitude/azimuth coordinates (LP: #1023548)
+- New hotkey for star name labels (LP: #1032989)
+- Option to activate/deactivate the Nebula Background Images button via GUI (LP: #925247)
+- Return to user set location and landscape (LP: #981507)
+- Display degrees and minutes for FOV of CCD (LP: #998761)
+- Adding all possible satellites (LP: #1006495)
+- Building a Windows x64 packages (LP: #1003041, #1027607)
+- Apply atmosphere effect only on bodies with atmosphere (LP: #971875)
+
+Fixed:
+- Various Stellarium freezes and crashed (LP: #1005155, #1030913, #940638, #992267, #1033380, #951967)
+- Various plugins issues (LP: #751381, #892027, #1006134)
+- Various issues for nebulae (LP: #1026021, #744517)
+- Add/subtract one sidereal year jumps wrong amount (LP: #1006208)
+- Various small issues, typos and mistakes (LP: #1022506, #1032469, #1019247, #985204)
+- Various issues in Scripting Engine (LP: #1023934, #1017148, #1017154, #730180)
+
+Changed:
+- New tab in the configuration window to control the selected object information.
+- Improvement Night Vision mode
+- Extend list of default scripts
+
 0.11.3 [2012-05-18]
 Bug fix release.
 

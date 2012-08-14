@@ -400,11 +400,14 @@ QVariantMap Supernovae::loadSNeMap(QString path)
 void Supernovae::setSNeMap(const QVariantMap& map)
 {
 	snstar.clear();
+	snlist.clear();
 	QVariantMap sneMap = map.value("supernova").toMap();
 	foreach(QString sneKey, sneMap.keys())
 	{
 		QVariantMap sneData = sneMap.value(sneKey).toMap();
 		sneData["designation"] = QString("SN %1").arg(sneKey);
+
+		snlist.insert(sneData.value("designation").toString(), sneData.value("peakJD").toDouble());
 
 		SupernovaP sn(new Supernova(sneData));
 		if (sn->initialized)
@@ -468,7 +471,7 @@ void Supernovae::restoreDefaultConfigIni(void)
 {
 	conf->beginGroup("Supernovae");
 
-	// delete all existing Pulsars settings...
+	// delete all existing Supernovae settings...
 	conf->remove("");
 
 	conf->setValue("updates_enabled", true);
@@ -491,7 +494,7 @@ void Supernovae::readSettingsFromConfig(void)
 
 void Supernovae::saveSettingsToConfig(void)
 {
-	conf->beginGroup("Pulsars");
+	conf->beginGroup("Supernovae");
 
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_days", updateFrequencyDays);
@@ -601,4 +604,20 @@ void Supernovae::messageTimeout(void)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
+}
+
+QString Supernovae::getSupernovaeList()
+{
+	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
+	QStringList out;
+	int year, month, day;
+	QList<double> vals = snlist.values();
+	qSort(vals);
+	foreach(double val, vals)
+	{
+		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
+		out << QString("%1 (%2 %3)").arg(snlist.key(val)).arg(day).arg(smonth[month-1]);
+	}
+
+	return out.join(", ");
 }

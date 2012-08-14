@@ -174,6 +174,13 @@
 					"autorepeat": "0",
 					"global": "0"
 				},
+				"actionShow_Stars_Labels":
+				{
+					"text": "Stars labels",
+					"primaryKey": "Alt+S",
+					"checkable": true,
+					"autorepeat": false
+				},
 				"actionShow_Planets_Labels":
 				{
 					"text": "Planet labels",
@@ -757,6 +764,26 @@
 					"primaryKey" : "",
 					"checkable" : "1",
 					"autorepeat" : "0"
+				}
+			}
+		},
+		"PluginObservability":
+		{
+			"pluginId": "Observability",
+			"actions":
+			{
+				"actionShow_Observability":
+				{
+					"text": "Observability",
+					"primaryKey": "",
+					"checkable": true,
+					"autorepeat": false
+				},
+				"actionShow_Observability_ConfigDialog":
+				{
+					"text": "Observability configuration window",
+					"primaryKey": "",
+					"checkable": true
 				}
 			}
 		},

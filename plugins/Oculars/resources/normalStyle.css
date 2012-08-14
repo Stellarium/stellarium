@@ -17,8 +17,7 @@ QTabBar::tab {
 	border-bottom: none;
 	min-width: 10ex;
 	min-height: 56px;
-	padding: 1px 0px 1px -3px;
-	color: rgb(174, 174, 175);
+	padding: 1px 0px 1px -3px; 
 	font-size: 12px;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -29,7 +28,6 @@ QTabBar::tab:selected {
 	margin: 0px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	color: rgb(220, 223, 214);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(68, 69, 72, 50%), stop: 1 rgba(86, 87, 90, 100%));
 	padding: 1px 0px 1px 0px;
 }

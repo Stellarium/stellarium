@@ -19,10 +19,12 @@
 */
 
 #include <QDebug>
-#include <QTimer>
 #include <QDateTime>
-#include <QUrl>
 #include <QFileDialog>
+#include <QSortFilterProxyModel>
+#include <QStandardItemModel>
+#include <QTimer>
+#include <QUrl>
 
 #include "StelApp.hpp"
 #include "ui_satellitesDialog.h"
@@ -38,9 +40,15 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-SatellitesDialog::SatellitesDialog() : updateTimer(NULL), importWindow(0)
+SatellitesDialog::SatellitesDialog() :
+    updateTimer(0),
+    importWindow(0),
+    satellitesModel(0),
+    filterProxyModel(0)
 {
 	ui = new Ui_satellitesDialog;
+	
+	satellitesModel = new QStandardItemModel(this);
 }
 
 SatellitesDialog::~SatellitesDialog()
@@ -119,11 +127,18 @@ void SatellitesDialog::createDialogContent()
 
 
 	// Satellites tab
-	connect(ui->satellitesList,
-					SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
-					this,
-					SLOT(updateSelectedSatelliteInfo(QListWidgetItem*,QListWidgetItem*)));
-	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
+	filterProxyModel = new QSortFilterProxyModel(this);
+	filterProxyModel->setSourceModel(satellitesModel);
+	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->satellitesList->setModel(filterProxyModel);
+	connect(ui->lineEditSearch, SIGNAL(textEdited(QString)),
+	        filterProxyModel, SLOT(setFilterWildcard(QString)));
+	
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	connect(selectionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+	        this, SLOT(updateSelectedInfo(QModelIndex,QModelIndex)));
+	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
+	        this, SLOT(handleDoubleClick(QModelIndex)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(listSatelliteGroup(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
@@ -150,13 +165,16 @@ void SatellitesDialog::createDialogContent()
 
 void SatellitesDialog::listSatelliteGroup(int index)
 {
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	QModelIndexList selectedIndexes = selectionModel->selectedRows();
 	QVariantList prevMultiSelection;
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	foreach (const QModelIndex& index, selectedIndexes)
 	{
-		prevMultiSelection << i->data(Qt::UserRole);
+		prevMultiSelection << index.data(Qt::UserRole);
 	}
 
-	ui->satellitesList->clear();
+	satellitesModel->clear();
+	
 	QHash<QString,QString> satellites;
 	Satellites* plugin = GETSTELMODULE(Satellites);
 	QString selectedGroup = ui->groupsCombo->itemData(index).toString();
@@ -173,37 +191,47 @@ void SatellitesDialog::listSatelliteGroup(int index)
 	else
 		satellites = plugin->getSatellites(ui->groupsCombo->currentText());
 	
-	ui->satellitesList->setSortingEnabled(false);
+	//satellitesModel->->setSortingEnabled(false);
 	QHashIterator<QString,QString> i(satellites);
 	while (i.hasNext())
 	{
 		i.next();
-		QListWidgetItem* item = new QListWidgetItem(i.value());
-		item->setData(Qt::UserRole, i.key());
-		ui->satellitesList->addItem(item);
+		QStandardItem* item = new QStandardItem(i.value());
+		item->setData(i.key(), Qt::UserRole);
+		item->setEditable(false);
+		satellitesModel->appendRow(item);
+		
+		// If a previously selected item is still in the list after the update, select it
+		if (prevMultiSelection.contains(i.key()))
+		{
+			QModelIndex index = filterProxyModel->mapFromSource(item->index());
+			//QModelIndex index = item->index();
+			selectionModel->select(index, QItemSelectionModel::SelectCurrent);
+		}
 	}
-	ui->satellitesList->sortItems();
+	// Sort the main list (don't sort the filter model directly,
+	// or the displayed list will be scrambled on emptying the filter).
+	satellitesModel->sort(0);
 
-	// If any previously selected items are still in the list after the update, select them,
-	QListWidgetItem* item;
-	for (int i=0; (item = ui->satellitesList->item(i))!=NULL; i++)
+	if (selectionModel->hasSelection())
 	{
-		QVariant id = item->data(Qt::UserRole);
-		if (prevMultiSelection.contains(id))
-			item->setSelected(true);
+		//TODO: This is stupid...
+		for (int row = 0; row < ui->satellitesList->model()->rowCount(); row++)
+		{
+			QModelIndex index = ui->satellitesList->model()->index(row, 0);
+			if (selectionModel->isSelected(index))
+			{
+				ui->satellitesList->scrollTo(index, QAbstractItemView::PositionAtTop);
+				break;
+			}
+		}
 	}
-
-	QList<QListWidgetItem*> selectedItems = ui->satellitesList->selectedItems();
-	if (selectedItems.count() > 0)
+	else if (ui->satellitesList->model()->rowCount() > 0)
 	{
-		// make sure the first selected item is visible...
-		ui->satellitesList->scrollToItem(selectedItems.at(0));
-	}
-	else if (ui->satellitesList->count() > 0)
-	{
-		// otherwise if there are any items in the listbox, select the first and scroll to the top
-		ui->satellitesList->setCurrentRow(0);
-		ui->satellitesList->scrollToTop();
+		// If there are any items in the listbox, scroll to the top
+		QModelIndex index = ui->satellitesList->model()->index(0, 0);
+		selectionModel->setCurrentIndex(index, QItemSelectionModel::NoUpdate);
+		ui->satellitesList->scrollTo(index, QAbstractItemView::PositionAtTop);
 	}
 }
 
@@ -212,14 +240,14 @@ void SatellitesDialog::reloadSatellitesList()
 	listSatelliteGroup(ui->groupsCombo->currentIndex());
 }
 
-void SatellitesDialog::updateSelectedSatelliteInfo(QListWidgetItem* curItem,
-																									 QListWidgetItem* prevItem)
+void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
+                                          const QModelIndex& prevItem)
 {
 	Q_UNUSED(prevItem);
-	if (!curItem)
+	if (!curItem.isValid())
 		return;
 	
-	QString id = curItem->data(Qt::UserRole).toString();
+	QString id = curItem.data(Qt::UserRole).toString();
 	if (id.isEmpty())
 		return;
 
@@ -483,35 +511,37 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 		ui->groupsCombo->setCurrentIndex(index); //Triggers the same operation
 	
 	// Select the satellites that were added just now
-	QListWidget* list = ui->satellitesList;
-	list->clearSelection();
-	int firstAddedIndex = -1;
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	selectionModel->clearSelection();
+	QModelIndex firstSelectedIndex;
 	QSet<QString> newIds;
 	foreach (const TleData& sat, newSatellites)
 		newIds.insert(sat.id);
-	for (int i = 0; i < list->count(); i++)
+	for (int row = 0; row < ui->satellitesList->model()->rowCount(); row++)
 	{
-		QString id = list->item(i)->data(Qt::UserRole).toString();
+		QModelIndex index = ui->satellitesList->model()->index(row, 0);
+		QString id = index.data(Qt::UserRole).toString();
 		if (newIds.remove(id))
 		{
-			list->item(i)->setSelected(true);
-			if (firstAddedIndex < 0)
-				firstAddedIndex = i;
+			selectionModel->select(index, QItemSelectionModel::Select);
+			if (!firstSelectedIndex.isValid())
+				firstSelectedIndex = index;
 		}
 	}
-	if (firstAddedIndex >= 0)
-		list->scrollToItem(list->item(firstAddedIndex),
-											 QAbstractItemView::PositionAtTop);
+	if (firstSelectedIndex.isValid())
+		ui->satellitesList->scrollTo(firstSelectedIndex, QAbstractItemView::PositionAtTop);
 	else
-		list->setCurrentRow(0);
+		ui->satellitesList->scrollToTop();
 }
 
 void SatellitesDialog::removeSatellites()
 {
 	QStringList idList;
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	QModelIndexList selectedIndexes = selectionModel->selectedRows();
+	foreach (const QModelIndex& index, selectedIndexes)
 	{
-		QString id = i->data(Qt::UserRole).toString();
+		QString id = index.data(Qt::UserRole).toString();
 		idList.append(id);
 	}
 	if (!idList.isEmpty())
@@ -524,20 +554,25 @@ void SatellitesDialog::removeSatellites()
 
 void SatellitesDialog::setDisplayFlag(bool display)
 {
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	QModelIndexList selectedIndexes = selectionModel->selectedRows();
+	foreach (const QModelIndex& index, selectedIndexes)
 	{
-		QString id = i->data(Qt::UserRole).toString();
+		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
-		sat->visible = display;
+		if (sat)
+			sat->visible = display;
 	}
 	reloadSatellitesList();
 }
 
 void SatellitesDialog::setOrbitFlag(bool display)
 {
-	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	QModelIndexList selectedIndexes = selectionModel->selectedRows();
+	foreach (const QModelIndex& index, selectedIndexes)
 	{
-		QString id = i->data(Qt::UserRole).toString();
+		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
 		if (sat)
 			sat->orbitVisible = display;
@@ -545,11 +580,11 @@ void SatellitesDialog::setOrbitFlag(bool display)
 	reloadSatellitesList();
 }
 
-void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
+void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
 {
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
-	QString id = item->data(Qt::UserRole).toString();
+	QString id = index.data(Qt::UserRole).toString();
 	SatelliteP sat = SatellitesMgr->getByID(id);
 	if (sat.isNull())
 		return;
@@ -569,8 +604,9 @@ void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 		setHintsAction->setChecked(true);
 	}
 
-	//TODO: We need to find a way to deal with duplicates... --BM
-	if (StelApp::getInstance().getStelObjectMgr().findAndSelect(item->text()))
+	StelObjectP obj = qSharedPointerDynamicCast<StelObject>(sat);
+	StelObjectMgr& objectMgr = StelApp::getInstance().getStelObjectMgr();
+	if (objectMgr.setSelectedObject(obj))
 	{
 		GETSTELMODULE(StelMovementMgr)->autoZoomIn();
 		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);

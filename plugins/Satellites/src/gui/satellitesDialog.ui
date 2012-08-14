@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>528</width>
-    <height>498</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -120,7 +120,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -439,7 +439,10 @@
           <widget class="QComboBox" name="groupsCombo"/>
          </item>
          <item>
-          <widget class="QListWidget" name="satellitesList">
+          <widget class="QLineEdit" name="lineEditSearch"/>
+         </item>
+         <item>
+          <widget class="QListView" name="satellitesList">
            <property name="selectionMode">
             <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
@@ -651,10 +654,6 @@
              <property name="toolTip">
               <string>Remove the selected satellites</string>
              </property>
-             <property name="icon">
-              <iconset resource="../../resources/Satellites.qrc">
-               <normaloff>:/satellites/bt_delete.png</normaloff>:/satellites/bt_delete.png</iconset>
-             </property>
             </widget>
            </item>
            <item>
@@ -667,10 +666,6 @@
              </property>
              <property name="toolTip">
               <string>Add more satellites</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../../resources/Satellites.qrc">
-               <normaloff>:/satellites/bt_add.png</normaloff>:/satellites/bt_add.png</iconset>
              </property>
             </widget>
            </item>
@@ -687,11 +682,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../../resources/Satellites.qrc">
-               <normaloff>:/satellites/bt_comms_off.png</normaloff>
-               <normalon>:/satellites/bt_comms_on.png</normalon>:/satellites/bt_comms_off.png</iconset>
              </property>
              <property name="checkable">
               <bool>true</bool>
@@ -714,10 +704,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../../../../data/gui/guiRes.qrc">
-               <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
              </property>
             </widget>
            </item>
@@ -759,10 +745,6 @@
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-            <iconset resource="../../resources/Satellites.qrc">
-             <normaloff>:/satellites/bt_add.png</normaloff>:/satellites/bt_add.png</iconset>
-           </property>
           </widget>
          </item>
          <item>
@@ -773,10 +755,6 @@
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-            <iconset resource="../../resources/Satellites.qrc">
-             <normaloff>:/satellites/bt_delete.png</normaloff>:/satellites/bt_delete.png</iconset>
-           </property>
           </widget>
          </item>
         </layout>
@@ -785,7 +763,7 @@
      </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
-       <string>About plugin</string>
+       <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <property name="spacing">
@@ -833,6 +811,7 @@
   <tabstop>restoreDefaultsButton</tabstop>
   <tabstop>saveSettingsButton</tabstop>
   <tabstop>groupsCombo</tabstop>
+  <tabstop>lineEditSearch</tabstop>
   <tabstop>satellitesList</tabstop>
   <tabstop>visibleCheckbox</tabstop>
   <tabstop>orbitCheckbox</tabstop>
@@ -851,9 +830,6 @@
   <tabstop>deleteSourceButton</tabstop>
   <tabstop>aboutTextBrowser</tabstop>
  </tabstops>
- <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
-  <include location="../../resources/Satellites.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

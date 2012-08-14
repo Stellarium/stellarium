@@ -128,7 +128,10 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 	const float intensity = artFader.getInterstate();
 	if (artTexture && intensity && region.intersects(boundingCap))
 	{
-		sPainter.setColor(intensity,intensity,intensity);
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(intensity, 0.0, 0.0);
+		else
+			sPainter.setColor(intensity,intensity,intensity);
 
 		// The texture is not fully loaded
 		if (artTexture->bind()==false)

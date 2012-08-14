@@ -34,6 +34,7 @@
 #include "StelObjectMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QtOpenGL>
 #include <QSettings>
@@ -647,11 +648,46 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
+	bool ok = false;
+	StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	if (!ok)
+		return;
 	defaultLocationID = id;
-	StelApp::getInstance().getLocationMgr().locationForSmallString(id);
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("init_location/location", id);
+}
+
+void StelCore::returnToDefaultLocation()
+{
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+}
+
+void StelCore::returnToHome()
+{
+	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
+	// between planets using SpaceShip and second method give does not exist data
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+
+	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
+
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
+	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
+	landscapeMgr->setFlagFog(p->hasAtmosphere());
+
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	StelMovementMgr* smmgr = getMovementMgr();
+	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 void StelCore::setJDay(double JD)
@@ -718,6 +754,7 @@ const StelLocation& StelCore::getCurrentLocation() const
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
+	emit(locationChanged(target));
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
 	{
@@ -737,7 +774,6 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 		delete position;
 		position = new StelObserver(target);
 	}
-	emit(locationChanged(target));
 }
 
 
