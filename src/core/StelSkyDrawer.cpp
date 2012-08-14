@@ -486,9 +486,15 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 static Vec3d win;
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
+	Vec3f color(bcolor);
+	if (StelApp::getInstance().getVisionModeNight())
+	{
+		color[1] = 0;
+		color[2] = 0;
+	}
 
 	if (rcMag[0]<=0.f)
 		return false;
@@ -513,8 +519,12 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		texBigHalo->bind();
 		sPainter->enableTexture2d(true);
 		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
-		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		glEnable(GL_BLEND);				
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter->setColor(color[0]*cmag, 0.0, 0.0);
+		else
+			sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}
 
@@ -594,7 +604,11 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		painter->getProjector()->project(v, win);
-		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		Vec3f c = color;
+		if (StelApp::getInstance().getVisionModeNight())
+			c = StelUtils::getNightColor(c);
+
+		painter->setColor(c[0]*cmag, c[1]*cmag, c[2]*cmag);
 		painter->drawSprite2dMode(win[0], win[1], rmag);
 		noStarHalo = true;
 	}

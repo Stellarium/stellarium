@@ -1,0 +1,25 @@
+//
+// Author: Qam1
+// Name: Double eclipse from Deimos in 2017
+// Version 2.1
+// License: Public Domain
+// Description: Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Scorpio and Sagittarius on April 26, 2017.
+//
+
+
+core.setObserverLocation(76.61, -37.50, 17, 1, "", "Deimos");
+core.setDate("2017-04-26T18:47:00", "utc");
+
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagFog(false);
+LandscapeMgr.setCurrentLandscapeID("moon");
+
+core.selectObjectByName("Sun", pointer = true);
+
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(10, 1);
+
+core.setTimeRate(10);
+core.wait(25);
+core.selectObjectByName("Phobos", pointer = true);
+core.setTimeRate(10);

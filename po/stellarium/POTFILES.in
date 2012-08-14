@@ -7,6 +7,8 @@ src/core/modules/LandscapeMgr.cpp
 src/core/modules/Nebula.cpp
 src/core/modules/NebulaMgr.cpp
 src/core/modules/Planet.cpp
+src/core/modules/MinorPlanet.cpp
+src/core/modules/Comet.cpp
 src/core/modules/SolarSystem.cpp
 src/core/modules/StarWrapper.cpp
 src/core/StelObserver.cpp
@@ -38,7 +40,6 @@ src/ui_viewDialog.h
 src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
 src/ui_AtmosphereDialog.h
-src/ui_CustomInfoDialog.h
 src/ui_scriptConsole.h
 
 # Plug-in translations
@@ -92,3 +93,6 @@ plugins/Exoplanets/src/Exoplanets.cpp
 plugins/Exoplanets/src/Exoplanet.cpp
 plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp
 plugins/Exoplanets/src/ui_exoplanetsDialog.h
+plugins/Observability/src/Observability.cpp
+plugins/Observability/src/gui/ObservabilityDialog.cpp
+plugins/Observability/src/ui_ObservabilityDialog.h

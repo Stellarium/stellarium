@@ -305,8 +305,12 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return NULL;
-
+	
 	QString objw = nameI18n.toUpper();
+	
+	StelObjectP result = searchByNoradNumber(objw);
+	if (result)
+		return result;
 
 	foreach(const SatelliteP& sat, satellites)
 	{
@@ -326,6 +330,11 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 		return NULL;
 
 	QString objw = englishName.toUpper();
+	
+	StelObjectP result = searchByNoradNumber(objw);
+	if (result)
+		return result;
+	
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->visible)
@@ -338,6 +347,34 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	return NULL;
 }
 
+StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
+{
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+		return NULL;
+	
+	// If the search string is a catalog number...
+	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	if (regExp.exactMatch(noradNumber))
+	{
+		QString numberString = regExp.capturedTexts().at(2);
+		bool ok;
+		int number = numberString.toInt(&ok);
+		if (!ok)
+			return StelObjectP();
+		
+		foreach(const SatelliteP& sat, satellites)
+		{
+			if (sat->initialized && sat->visible)
+			{
+				if (sat->getCatalogNumberString() == numberString)
+					return qSharedPointerCast<StelObject>(sat);
+			}
+		}
+	}
+	
+	return StelObjectP();
+}
+
 QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
@@ -347,6 +384,16 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 
 	QString objw = objPrefix.toUpper();
 
+	QString numberPrefix;
+	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	if (regExp.exactMatch(objw))
+	{
+		QString numberString = regExp.capturedTexts().at(2);
+		bool ok;
+		int number = numberString.toInt(&ok);
+		if (ok)
+			numberPrefix = numberString;
+	}
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->visible)
@@ -354,6 +401,10 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 			if (sat->getNameI18n().toUpper().left(objw.length()) == objw)
 			{
 				result << sat->getNameI18n().toUpper();
+			}
+			else if (sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
+			{
+				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
 			}
 		}
 	}
@@ -1143,7 +1194,10 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
-		glColor3f(0.4f,0.5f,0.8f);
+		if (StelApp::getInstance().getVisionModeNight())
+			glColor3f(0.8f,0.0f,0.0f);
+		else
+			glColor3f(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
 		glEnable(GL_TEXTURE_2D);

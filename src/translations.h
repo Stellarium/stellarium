@@ -130,7 +130,7 @@ class Translations
 		// TRANSLATORS: Asteroid (624) Hektor
 		N_("Hektor");
 		
-		// TRANSLATORS: Name of supernova SN 1572A
+		// TRANSLATORS: Name of supernova SN 1572A and script name
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of supernova SN 1604A
 		N_("Kepler's Supernova");
@@ -190,15 +190,51 @@ class Translations
 		N_("Startup Script");
 		// TRANSLATORS: Name of script
 		N_("Zodiac");
+		// TRANSLATORS: Name of script
+		N_("Mercury Triple Sunrise and Sunset");
+		// TRANSLATORS: Name of script
+		N_("Double eclipse from Deimos in 2017");
+		// TRANSLATORS: Name of script
+		N_("Double eclipse from Deimos in 2031");
+		// TRANSLATORS: Name of script
+		N_("Eclipse from Olympus Mons Jan 10 2068");
+		// TRANSLATORS: Name of script
+		N_("Occultation of Earth and Jupiter 2048");
+		// TRANSLATORS: Name of script
+		N_("A Quintuple eclipse from Deimos 2027");
+		// TRANSLATORS: Name of script
+		N_("Solar System Screensaver");
+		// TRANSLATORS: Name of script
+		N_("Constellations Tour");
+		// TRANSLATORS: Name of script
+		N_("Sun from different planets");
+		// TRANSLATORS: Name of script
+		N_("Earth best views from other bodies");
+		// TRANSLATORS: Name of script
+		N_("Transit of Venus");
+		// TRANSLATORS: Name of script
+		N_("Analemma");
 
 		// Scripts description
 		N_("Look around each installed landscape.");
 		N_("Script to demonstrate a partial lunar eclipse.");
-                N_("Script to demonstrate a total lunar eclipse.");
-                N_("A slow, infinite tour of the sky, looking at random objects.");
+		N_("Script to demonstrate a total lunar eclipse.");
+		N_("A slow, infinite tour of the sky, looking at random objects.");
 		N_("Script to demonstrate a total solar eclipse which has happened in 2009 (location=Rangpur, Bangladesh).");
 		N_("Script which runs automatically at startup");
 		N_("This script displays the constellations of the Zodiac. That means the constellations which lie along the line which the Sun traces across the celestial sphere over the course of a year.");
+		N_("Due to the quirks in Mercury's orbit and rotation at certain spots the sun will rise & set 3 different times in one Mercury day.");
+		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Scorpio and Sagittarius on April 26, 2017.");
+		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Taurus and Gemini on July 23, 2031.");
+		N_("Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068.");
+		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But Occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");		N_("Phobos races ahead of Mars and eclipses the sun, passes thru it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.");
+		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
+		N_("A tour via western constellations.");
+		N_("Look at Sun from big planets of Solar system and Pluto.");
+		N_("Earth best views from other Solar system bodies in the 21st Century.");
+		N_("Transit of Venus as seen from Sydney Australia 6th June 2012.");
+		N_("This script shows the analemma - the path of the Sun across the sky during the year.");
+		N_("Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos need enable plugin for supernovae.");
 
 		// List of countries
 		N_("Andorra");

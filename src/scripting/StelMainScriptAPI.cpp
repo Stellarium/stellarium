@@ -69,6 +69,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 	{
 		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), smgr, SLOT(loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
+		connect(this, SIGNAL(requestLoadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), smgr, SLOT(loadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
 		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyLayer(const QString&)));
 	}
 
@@ -93,7 +94,8 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
-	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelMainGraphicsView::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));
+	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelMainGraphicsView::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
+	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -361,6 +363,8 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				 minRes, maxBright, visible);
 }
 
+
+
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 									 const QString& ra, const QString& dec, double angSize, double rotation,
 									 double minRes, double maxBright, bool visible)
@@ -368,6 +372,51 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 	loadSkyImage(id, filename, StelUtils::getDecAngle(ra)*180./M_PI,
 				 StelUtils::getDecAngle(dec)*180./M_PI, angSize,
 				 rotation, minRes, maxBright, visible);
+}
+
+void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
+						 double alt0, double azi0,
+						 double alt1, double azi1,
+						 double alt2, double azi2,
+						 double alt3, double azi3,
+								 double minRes, double maxBright, bool visible)
+{
+	QString path = "scripts/" + filename;
+	emit(requestLoadSkyImageAltAz(id, path, alt0, azi0, alt1, azi1, alt2, azi2, alt3, azi3, minRes, maxBright, visible));
+}
+
+void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
+									 double alt, double azi, double angSize, double rotation,
+									 double minRes, double maxBright, bool visible)
+{
+	Vec3f XYZ;
+	static const float RADIUS_NEB = 1.;
+
+	StelUtils::spheToRect((180-azi)*M_PI/180., alt*M_PI/180., XYZ);
+	XYZ*=RADIUS_NEB;
+	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
+	Mat4f matPrecomp = Mat4f::translation(XYZ) *
+					   Mat4f::zrotation((180-azi)*M_PI/180.) *
+					   Mat4f::yrotation(-alt*M_PI/180.) *
+					   Mat4f::xrotation((rotation+90)*M_PI/180.);
+
+	Vec3f corners[4];
+		corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
+		corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+		corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
+		corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
+
+	// convert back to alt/azi (radians)
+	Vec3f cornersAltAz[4];
+	for(int i=0; i<4; i++)
+		StelUtils::rectToSphe(&cornersAltAz[i][0], &cornersAltAz[i][1], corners[i]);
+
+	loadSkyImageAltAz(id, filename,
+				 cornersAltAz[0][0]*180./M_PI, cornersAltAz[0][1]*180./M_PI,
+				 cornersAltAz[1][0]*180./M_PI, cornersAltAz[1][1]*180./M_PI,
+				 cornersAltAz[3][0]*180./M_PI, cornersAltAz[3][1]*180./M_PI,
+				 cornersAltAz[2][0]*180./M_PI, cornersAltAz[2][1]*180./M_PI,
+				 minRes, maxBright, visible);
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
@@ -490,6 +539,11 @@ double StelMainScriptAPI::getScriptRate()
 void StelMainScriptAPI::setScriptRate(double r)
 {
         return StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(r);
+}
+
+void StelMainScriptAPI::pauseScript()
+{
+	return StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();
 }
 
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
@@ -873,3 +927,7 @@ void StelMainScriptAPI::setSkyLanguage(QString langCode)
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(langCode);
 }
 
+void StelMainScriptAPI::goHome()
+{
+	emit(requestSetHomePosition());
+}

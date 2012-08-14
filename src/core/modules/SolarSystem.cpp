@@ -171,7 +171,10 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		sPainter.setColor(1.0f,0.3f,0.3f);
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(1.0f,0.0f,0.0f);
+		else
+			sPainter.setColor(1.0f,0.3f,0.3f);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
@@ -742,6 +745,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, 0.15);
 				}
 			}
+
+			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
 
 		}
 		else if (type == "comet")

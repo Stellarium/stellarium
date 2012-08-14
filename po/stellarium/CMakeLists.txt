@@ -2,7 +2,7 @@ SET(stellarium_DOMAIN stellarium)
 SET(stellarium_POT ${stellarium_DOMAIN}.pot)
 
 GETTEXT_CREATE_TRANSLATIONS(${stellarium_DOMAIN} DEFAULT_TARGET
-    aa ab ae af ak am an ar as ast av az ba be bg bh bi bn bo br bs ca ce cs cv cy da de dv el en en_AU en_CA en_GB en_US eo es et eu fa fi fil fj fr fy ga gd gl gn gu gv haw he hi hr hrx ht hu hy ia id is it ja ka kg kk kn ko ky la lb lo lt lv mi mk ml mn mo mr ms mt nan nb nl nn oc os pa pl pt pt_BR ro ru sco se si sk sl sm sq sr su sv sw ta te tg th tl tr tt uk uz vi zh_CN zh_HK zh_TW zu
+    aa ab ae af ak am an ar as ast av az ba be bg bh bi bn bo br bs ca ce cs cv cy da de dv el en en_AU en_CA en_GB en_US eo es et eu fa fi fil fj fr fy ga gd gl gn gu gv haw he hi hr hrx ht hu hy ia id is it ja ka kg kk kn ko ky la lb lo lt lv mi mk ml mn mo mr ms mt nan nb nl nn oc os pa pl pt pt_BR ro ru sah sco se si sk sl sm sq sr su sv sw ta te tg th tl tr tt uk uz vi zh_CN zh_HK zh_TW zu
 )
 
 ADD_CUSTOM_TARGET(
@@ -15,6 +15,7 @@ ADD_CUSTOM_TARGET(
         --keyword=N_
         --keyword=q_
         --keyword=translate:2
+        --keyword=translate:2,3c
         --add-comments=TRANSLATORS:
         --directory=${CMAKE_BINARY_DIR}
         --directory=${CMAKE_SOURCE_DIR}

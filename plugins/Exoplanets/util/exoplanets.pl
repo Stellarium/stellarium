@@ -1,13 +1,15 @@
 #!/usr/bin/perl
 
 use DBI();
+use LWP::UserAgent();
 
 #
-# Stage 1: read exoplanetData.csv from 'The Extrasolar Planets Encyclopaedia' at exoplanet.eu and store to MySQL
+# Stage 1: connect to 'The Extrasolar Planets Encyclopaedia' at exoplanet.eu, fetch CSV data and store to MySQL
 # Stage 2: read MySQL catalog of exoplanets and store it to JSON
 #
 
-$CSV	= "./exoplanetData.csv";
+$URL	= "http://exoplanet.eu/catalog/csv/";
+$CSV	= "./exoplanets.csv";
 $JSON	= "./exoplanets.json";
 
 $CATALOG_FORMAT_VERSION = 1;
@@ -16,6 +18,22 @@ $dbname	= "exoplanets";
 $dbhost	= "localhost";
 $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
+
+$UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.1; http://stellarium.org/)");
+$request = HTTP::Request->new('GET', $URL);
+$responce = $UA->request($request);
+
+if ($responce->is_success) {
+	open(OUT, ">$CSV");
+	$data = $responce->content;
+	binmode OUT;
+	print OUT $data;
+	close OUT;
+} else {
+	print "Can't connect to URL: $URL\n";
+	exit;
+}
 
 $dsn = "DBI:mysql:database=$dbname;host=$dbhost";
 
@@ -30,10 +48,12 @@ $sth = $dbh->do(q{TRUNCATE planets});
 
 for ($i=1;$i<scalar(@catalog);$i++) {
 	$currdata = $catalog[$i];
-	$currdata =~ s/\"//gi;
+	$currdata =~ s/\".*?\"//gi;
+	$currdata =~ s/\r//gi;
+	$currdata =~ s/\n//gi;
 	
 	@cpname = ();
-	(@cpname) = split(";",$currdata);
+	(@cpname) = split(",",$currdata);
 	
 	@cfname = ();
 	@cfname = split(" ",$cpname[0]);
@@ -49,15 +69,17 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$pname = $cfname[1];
 	}
 	
-	($aname,$pmass,$pradius,$pperiod,$psemiax,$pecc,$pincl,$angdist,$ptrtime,$pstt,$pt,$pomega,$sdist,$sstype,$smass,$smetal,$sRA,$sDec,$sVmag,$sImag,$sHmag,$sJmag,$sKmag,$sradius,$sefftemp,$sage) = split(";", $currdata);
+	($aname,$pmass,$pradius,$pperiod,$psemiax,$pecc,$pincl,$angdist,$psl,$discovered,$updated,$pomega,$pt,$dtype,$mol,$starname,$sRA,$sDec,$sVmag,$sImag,$sHmag,$sJmag,$sKmag,$sdist,$smetal,$smass,$sradius,$sstype,$sage,$sefftemp) = split(",", $currdata);
 
-	($hour,$min,$sec) = split(" ",$sRA);
+	($hour,$min,$sec) = split(":",$sRA);
+	# fixed bug in raw data
+	$sec =~ s/-//gi;
 	$outRA = $hour."h".$min."m".$sec."s";
 
-	($deg,$min,$sec) = split(" ",$sDec);
+	($deg,$min,$sec) = split(":",$sDec);
 	$outDE = $deg."d".$min."m".$sec."s";
 	
-	$sname = $csname;
+	$sname = $starname;
 
 	$sname =~ s/^alpha/α/gi;
 	$sname =~ s/^alf/α/gi;
@@ -88,7 +110,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^psi/ψ/gi;
 	$sname =~ s/^omega/ω/gi;
 	
-	if (($sRA ne '') && ($sDec ne '')) {
+	if (($sRA ne '00:00:00.0') && ($sDec ne '+00:00:00.0')) {
 		# check star
 		$sth = $dbh->prepare(q{SELECT sid FROM stars WHERE ra_coord=? AND dec_coord=?});
 		$sth->execute($outRA, $outDE);
@@ -106,7 +128,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance) VALUES (?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered) VALUES (?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered);
 	}
 }
 
@@ -161,28 +183,32 @@ while (@stars = $sth->fetchrow_array()) {
 		$pecc		= $planets[7];
 		$pinc		= $planets[8];
 		$angdist	= $planets[9];
+		$discovered	= $planets[10];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
-			$out .= "\t\t\t\t\"mass\": \"".$pmass."\",\n";
+			$out .= "\t\t\t\t\"mass\": ".$pmass.",\n";
 		}
 		if ($pradius ne '') {
-			$out .= "\t\t\t\t\"radius\": \"".$pradius."\",\n";
+			$out .= "\t\t\t\t\"radius\": ".$pradius.",\n";
 		}
 		if ($pperiod ne '') {
-			$out .= "\t\t\t\t\"period\": \"".$pperiod."\",\n";
+			$out .= "\t\t\t\t\"period\": ".$pperiod.",\n";
 		}
 		if ($psemiax ne '') {
-			$out .= "\t\t\t\t\"semiAxis\": \"".$psemiax."\",\n";
+			$out .= "\t\t\t\t\"semiAxis\": ".$psemiax.",\n";
 		}
 		if ($pecc ne '') {
-			$out .= "\t\t\t\t\"eccentricity\": \"".$pecc."\",\n";
+			$out .= "\t\t\t\t\"eccentricity\": ".$pecc.",\n";
 		}
 		if ($pinc ne '') {
-			$out .= "\t\t\t\t\"inclination\": \"".$pinc."\",\n";
+			$out .= "\t\t\t\t\"inclination\": ".$pinc.",\n";
 		}
 		if ($angdist ne '') {
-			$out .= "\t\t\t\t\"angleDistance\": \"".$angdist."\",\n";
+			$out .= "\t\t\t\t\"angleDistance\": ".$angdist.",\n";
+		}
+		if ($discovered ne '') {
+			$out .= "\t\t\t\t\"discovered\": ".$discovered.",\n";
 		}
 		$out .= "\t\t\t\t\"planetName\": \"".$pname."\"\n";
 		$out .= "\t\t\t}";
