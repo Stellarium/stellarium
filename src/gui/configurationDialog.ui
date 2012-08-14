@@ -6,12 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>428</width>
-    <height>463</height>
+    <width>523</width>
+    <height>483</height>
    </rect>
-  </property>
-  <property name="styleSheet">
-   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout">
    <property name="spacing">
@@ -132,9 +129,6 @@
       </property>
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
           <property name="spacing">
@@ -145,18 +139,6 @@
           </property>
           <item>
            <widget class="QGroupBox" name="groupBox_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
             <property name="title">
              <string>Program language</string>
             </property>
@@ -190,106 +172,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_4">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-              <kerning>true</kerning>
-             </font>
-            </property>
-            <property name="title">
-             <string>Selected object information</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_13">
-               <item>
-                <widget class="QRadioButton" name="allSelectedInfoRadio">
-                 <property name="toolTip">
-                  <string>Display all information available</string>
-                 </property>
-                 <property name="text">
-                  <string>All available</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="briefSelectedInfoRadio">
-                 <property name="toolTip">
-                  <string>Display less information</string>
-                 </property>
-                 <property name="text">
-                  <string>Short</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_14">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_16">
-                 <item>
-                  <widget class="QRadioButton" name="customSelectedInfoRadio">
-                   <property name="toolTip">
-                    <string>Display user settings information</string>
-                   </property>
-                   <property name="text">
-                    <string>Customized</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButtonCustomInfoDialog">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="text">
-                    <string notr="true">...</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="noSelectedInfoRadio">
-                 <property name="toolTip">
-                  <string>Display no information</string>
-                 </property>
-                 <property name="text">
-                  <string>None</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
            <widget class="QGroupBox" name="groupBox_6">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Default options</string>
             </property>
@@ -398,6 +281,243 @@
                <property name="textInteractionFlags">
                 <set>Qt::TextSelectableByMouse</set>
                </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pageSelectedObjectInfo">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>Selected object information</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QRadioButton" name="allSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display all information available</string>
+               </property>
+               <property name="text">
+                <string>All available</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="briefSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display less information</string>
+               </property>
+               <property name="text">
+                <string>Short</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="noSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display no information</string>
+               </property>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="customSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display user settings information</string>
+               </property>
+               <property name="text">
+                <string>Customized</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBoxDisplayedFields">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>Displayed fields</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutDisplayedFields">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="checkBoxVisualMag">
+               <property name="text">
+                <string>Visual magnitude</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxExtra1">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string>Additional information 1</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBoxExtra3">
+               <property name="text">
+                <string>Additional information 3</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxCatalogNumbers">
+               <property name="text">
+                <string>Catalog number(s)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxName">
+               <property name="text">
+                <string>Name</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra2">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Additional information 2</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
+               <property name="text">
+                <string>Absolute magnitude</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxAltAz">
+               <property name="toolTip">
+                <string>Horizontal coordinates</string>
+               </property>
+               <property name="text">
+                <string>Altitude/Azimuth</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBoxSize">
+               <property name="toolTip">
+                <string>Angular or physical size</string>
+               </property>
+               <property name="text">
+                <string>Size</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBoxRaDecOfDate">
+               <property name="toolTip">
+                <string>Geocentric equatorial coordinates, equinox of date</string>
+               </property>
+               <property name="text">
+                <string>Right ascension/Declination (of date)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxDistance">
+               <property name="text">
+                <string>Distance</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBoxRaDecJ2000">
+               <property name="toolTip">
+                <string>Geocentric equatorial coordinates, equinox of J2000.0</string>
+               </property>
+               <property name="text">
+                <string>Right ascension/Declination (J2000)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxHourAngle">
+               <property name="toolTip">
+                <string>Topocentric equatorial coordinates</string>
+               </property>
+               <property name="text">
+                <string>Hour angle/Declination</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
             </layout>
@@ -790,10 +910,6 @@
                  <property name="text">
                   <string/>
                  </property>
-                 <property name="icon">
-                  <iconset resource="../../data/gui/guiRes.qrc">
-                   <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
-                 </property>
                 </widget>
                </item>
               </layout>
@@ -1131,6 +1247,19 @@
         </item>
         <item>
          <property name="text">
+          <string>Information</string>
+         </property>
+         <property name="toolTip">
+          <string>Selected object information</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-info.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Navigation</string>
          </property>
          <property name="icon">
@@ -1164,8 +1293,9 @@
           <string>Plugins</string>
          </property>
          <property name="icon">
-          <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/tabicon-plugins.png</normaloff>:/graphicGui/tabicon-plugins.png</iconset>
+          <iconset>
+           <normalon>:/graphicGui/tabicon-plugins.png</normalon>
+          </iconset>
          </property>
         </item>
        </widget>
@@ -1183,8 +1313,84 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>programLanguageComboBox</tabstop>
+  <tabstop>setViewingOptionAsDefaultPushButton</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>allSelectedInfoRadio</tabstop>
+  <tabstop>briefSelectedInfoRadio</tabstop>
+  <tabstop>noSelectedInfoRadio</tabstop>
+  <tabstop>customSelectedInfoRadio</tabstop>
+  <tabstop>checkBoxName</tabstop>
+  <tabstop>checkBoxCatalogNumbers</tabstop>
+  <tabstop>checkBoxVisualMag</tabstop>
+  <tabstop>checkBoxAbsoluteMag</tabstop>
+  <tabstop>checkBoxRaDecJ2000</tabstop>
+  <tabstop>checkBoxRaDecOfDate</tabstop>
+  <tabstop>checkBoxHourAngle</tabstop>
+  <tabstop>checkBoxAltAz</tabstop>
+  <tabstop>checkBoxDistance</tabstop>
+  <tabstop>checkBoxSize</tabstop>
+  <tabstop>checkBoxExtra1</tabstop>
+  <tabstop>checkBoxExtra2</tabstop>
+  <tabstop>checkBoxExtra3</tabstop>
+  <tabstop>enableKeysNavigationCheckBox</tabstop>
+  <tabstop>enableMouseNavigationCheckBox</tabstop>
+  <tabstop>systemTimeRadio</tabstop>
+  <tabstop>todayRadio</tabstop>
+  <tabstop>todayTimeSpinBox</tabstop>
+  <tabstop>fixedTimeRadio</tabstop>
+  <tabstop>fixedDateTimeEdit</tabstop>
+  <tabstop>fixedDateTimeCurrentButton</tabstop>
+  <tabstop>mouseTimeoutCheckbox</tabstop>
+  <tabstop>mouseTimeoutSpinBox</tabstop>
+  <tabstop>showFlipButtonsCheckbox</tabstop>
+  <tabstop>showNebulaBgButtonCheckbox</tabstop>
+  <tabstop>sphericMirrorCheckbox</tabstop>
+  <tabstop>diskViewportCheckbox</tabstop>
+  <tabstop>gravityLabelCheckbox</tabstop>
+  <tabstop>selectSingleConstellationButton</tabstop>
+  <tabstop>autoZoomResetsDirectionCheckbox</tabstop>
+  <tabstop>screenshotBrowseButton</tabstop>
+  <tabstop>screenshotDirEdit</tabstop>
+  <tabstop>invertScreenShotColorsCheckBox</tabstop>
+  <tabstop>getStarsButton</tabstop>
+  <tabstop>downloadRetryButton</tabstop>
+  <tabstop>downloadCancelButton</tabstop>
+  <tabstop>scriptInfoBrowser</tabstop>
+  <tabstop>runScriptButton</tabstop>
+  <tabstop>stopScriptButton</tabstop>
+  <tabstop>closeWindowAtScriptRunCheckbox</tabstop>
+  <tabstop>pluginsInfoBrowser</tabstop>
+  <tabstop>pluginLoadAtStartupCheckBox</tabstop>
+  <tabstop>pluginConfigureButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>stackListWidget</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>configurationStackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>62</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <buttongroups>
+  <buttongroup name="buttonGroupDisplayedFields">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

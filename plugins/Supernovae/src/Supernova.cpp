@@ -207,6 +207,9 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
+	if (StelApp::getInstance().getVisionModeNight())
+		color = StelUtils::getNightColor(color);
+
 	float rcMag[2], size, shift;
 	double mag;
 

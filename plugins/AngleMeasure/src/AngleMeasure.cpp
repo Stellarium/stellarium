@@ -156,6 +156,17 @@ void AngleMeasure::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 	StelPainter painter(prj);
 	painter.setFont(font);
+	Vec3f tColor, lColor;
+	if (StelApp::getInstance().getVisionModeNight())
+	{
+		tColor = StelUtils::getNightColor(textColor);
+		lColor = StelUtils::getNightColor(lineColor);
+	}
+	else
+	{
+		tColor = textColor;
+		lColor = lineColor;
+	}
 
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
@@ -166,7 +177,7 @@ void AngleMeasure::draw(StelCore* core)
 		Vec3d xy;
 		if (prj->project(perp1EndPoint,xy))
 		{
-			painter.setColor(textColor[0], textColor[1], textColor[2], lineVisible.getInterstate());
+			painter.setColor(tColor[0], tColor[1], tColor[2], lineVisible.getInterstate());
 			painter.drawText(xy[0], xy[1], angleText, 0, 15, 15);
 		}
 
@@ -174,8 +185,8 @@ void AngleMeasure::draw(StelCore* core)
 		glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_BLEND);
 		
-		// main line is a great circle
-		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
+		// main line is a great circle		
+		painter.setColor(lColor[0], lColor[1], lColor[2], lineVisible.getInterstate());
 		painter.drawGreatCircleArc(startPoint, endPoint, NULL);
 
 		// End lines
@@ -185,7 +196,7 @@ void AngleMeasure::draw(StelCore* core)
 
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		painter.setColor(tColor[0], tColor[1], tColor[2], messageFader.getInterstate());
 		int x = 83;
 		int y = 120;
 		int ls = painter.getFontMetrics().lineSpacing();

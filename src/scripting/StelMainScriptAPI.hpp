@@ -331,6 +331,7 @@ public slots:
 					  double ra3, double dec3,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
 
+
 	//! Convenience function which allows the user to provide RA and DEC angles
 	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by
 	//! StelUtils::getDecAngle()).
@@ -365,6 +366,49 @@ public slots:
 	//! ra and dec, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  const QString& ra, const QString& dec, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
+
+	//! Load an image which will have sky coordinates.
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting
+	//! it.
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param alt0 The altitude angle of the first corner of the image in degrees
+	//! @param azi0 The azimuth angle of the first corner of the image in degrees
+	//! @param alt1 The altitude angle of the second corner of the image in degrees
+	//! @param azi1 The azimuth angle of the second corner of the image in degrees
+	//! @param alt2 The altitude angle of the third corner of the image in degrees
+	//! @param azi2 The azimuth angle of the third corner of the image in degrees
+	//! @param alt3 The altitude angle of the fourth corner of the image in degrees
+	//! @param azi3 The azimuth angle of the fourth corner of the image in degrees
+	//! @param minRes The minimum resolution setting for the image
+	//! @param maxBright The maximum brightness setting for the image
+	//! @param visible The initial visibility of the image
+	void loadSkyImageAltAz(const QString& id, const QString& filename,
+					  double alt0, double azi0,
+					  double alt1, double azi1,
+					  double alt2, double azi2,
+					  double alt3, double azi3,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
+
+	//! Convenience function which allows loading of a sky image based on a
+	//! central coordinate, angular size and rotation.
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting it.
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param alt The altitude angle of the center of the image in degrees
+	//! @param azi The azimuth angle of the center of the image in degrees
+	//! @param angSize The angular size of the image in arc minutes
+	//! @param rotation The clockwise rotation angle of the image in degrees
+	//! @param minRes The minimum resolution setting for the image
+	//! @param maxBright The maximum brightness setting for the image
+	//! @param visible The initial visibility of the image
+	void loadSkyImageAltAz(const QString& id, const QString& filename,
+					  double alt, double azi, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Remove a SkyImage.
@@ -470,6 +514,10 @@ public slots:
 	//! if the script rate was 1.
 	void setScriptRate(double r);
 
+	//! Pause the currently running script. Note that you may need to use 
+	//! the key '6' or the GUI to resume script execution.
+	void pauseScript();
+
 	//! Set the amount of selected object information to display
 	//! @param level can be "AllInfo", "ShortInfo", "None"
 	void setSelectedObjectInfo(const QString& level);
@@ -500,6 +548,9 @@ public slots:
 	//! @param langCode two letter language code, e.g. "en", or "de".
 	void setSkyLanguage(QString langCode);
 
+	//! Go to defaults position and direction of view
+	void goHome();
+
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
@@ -512,6 +563,13 @@ signals:
 							 double c5, double c6,
 							 double c7, double c8,
 							 double minRes, double maxBright, bool visible);
+	void requestLoadSkyImageAltAz(const QString& id, const QString& filename,
+							 double c1, double c2,
+							 double c3, double c4,
+							 double c5, double c6,
+							 double c7, double c8,
+							 double minRes, double maxBright, bool visible);
+
 
 	void requestRemoveSkyImage(const QString& id);
 
@@ -536,6 +594,7 @@ signals:
 	void requestSetSkyCulture(QString id);
 	void requestSetDiskViewport(bool b);
 	void requestExit();
+	void requestSetHomePosition();
 };
 
 #endif // _STELMAINSCRIPTAPI_HPP_

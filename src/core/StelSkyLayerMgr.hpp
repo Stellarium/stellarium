@@ -102,6 +102,32 @@ public slots:
 					  double ra3, double dec3,
 					  double minRes, double maxBright, bool visible);
 
+	//! Load an image from a file. This should not be called directly from
+	//! scripts because it is not thread safe.  Instead use the similarly
+	//! named function in the core scripting object.
+	//! @param id a string identifier for the image
+	//! @param filename the name of the image file to load.  Will be
+	//! searched for using StelFileMgr, so partial names are fine.
+	//! @param alt0 altitude angle of corner 0 in degrees
+	//! @param azi0 azimuth angle of corner 0 in degrees
+	//! @param alt1 altitude angle of corner 1 in degrees
+	//! @param azi1 azimuth angle of corner 1 in degrees
+	//! @param alt2 altitude angle of corner 2 in degrees
+	//! @param azi2 azimuth angle of corner 2 in degrees
+	//! @param alt3 altitude angle of corner 3 in degrees
+	//! @param azi3 azimuth angle of corner 3 in degrees
+	//! @param minRes the minimum resolution setting for the image
+	//! @param maxBright the maximum brightness setting for the image
+	//! @param visible initial visibility setting
+	bool loadSkyImageAltAz(const QString& id, const QString& filename,
+					  double alt0, double azi0,
+					  double alt1, double azi1,
+					  double alt2, double azi2,
+					  double alt3, double azi3,
+					  double minRes, double maxBright, bool visible);
+
+
+
 	//! Decide to show or not to show a layer by it's ID.
 	//! @param id the id of the layer whose status is to be changed.
 	//! @param b the new shown value:

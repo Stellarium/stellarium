@@ -54,7 +54,14 @@
 #include "StelScriptMgr.hpp"
 #endif
 #include "StelAppGraphicsWidget.hpp"
-#include "StelLocationMgr.hpp"
+
+#include "ConfigurationDialog.hpp"
+#include "DateTimeDialog.hpp"
+#include "HelpDialog.hpp"
+#include "LocationDialog.hpp"
+#include "SearchDialog.hpp"
+#include "ViewDialog.hpp"
+#include "ShortcutsDialog.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -67,6 +74,8 @@
 #include <QGraphicsWidget>
 #include <QGraphicsGridLayout>
 #include <QClipboard>
+#include <QPalette>
+#include <QColor>
 
 StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 {
@@ -77,7 +86,19 @@ StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 }
 Q_EXPORT_PLUGIN2(StelGui, StelStandardGuiPluginInterface)
 
-StelGui::StelGui() : topLevelGraphicsWidget(NULL), configurationDialog(NULL), initDone(false)
+StelGui::StelGui() :
+	topLevelGraphicsWidget(NULL),
+	locationDialog(0),
+	helpDialog(0),
+	dateTimeDialog(0),
+	searchDialog(0),
+	viewDialog(0),
+	configurationDialog(0),
+	shortcutsDialog(0),
+#ifdef ENABLE_SCRIPT_CONSOLE
+    scriptConsole(0),
+#endif
+    initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 	flipHoriz = NULL;
@@ -89,6 +110,45 @@ StelGui::~StelGui()
 {
 	delete skyGui;
 	skyGui = NULL;
+	
+	if (locationDialog)
+	{
+		delete locationDialog;
+		locationDialog = 0;
+	}
+	if (helpDialog)
+	{
+		delete helpDialog;
+		helpDialog = 0;
+	}
+	if (dateTimeDialog)
+	{
+		delete dateTimeDialog;
+		dateTimeDialog = 0;
+	}
+	if (searchDialog)
+	{
+		delete searchDialog;
+		searchDialog = 0;
+	}
+	if (viewDialog)
+	{
+		delete viewDialog;
+		viewDialog = 0;
+	}
+	if (shortcutsDialog)
+	{
+		delete shortcutsDialog;
+		shortcutsDialog = NULL;
+	}
+	// configurationDialog is automatically deleted with its parent widget.
+#ifdef ENABLE_SCRIPT_CONSOLE
+	if (scriptConsole)
+	{
+		delete scriptConsole;
+		scriptConsole = 0;
+	}
+#endif
 }
 
 void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
@@ -98,18 +158,27 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	StelGuiBase::init(atopLevelGraphicsWidget, astelAppGraphicsWidget);
 
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
+	locationDialog = new LocationDialog();
+	helpDialog = new HelpDialog();
+	dateTimeDialog = new DateTimeDialog();
+	searchDialog = new SearchDialog();
+	viewDialog = new ViewDialog();
+	shortcutsDialog = new ShortcutsDialog();
 	configurationDialog = new ConfigurationDialog(this);
+#ifdef ENABLE_SCRIPT_CONSOLE
+	scriptConsole = new ScriptConsole();
+#endif
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 	StelApp::getInstance().getStelShortcutManager()->loadShortcuts();
+
 #ifdef ENABLE_SCRIPT_CONSOLE
 	addGuiAction("actionShow_ScriptConsole_Window_Global", N_("Script console window"), "F12", "", N_("Windows"), true, false, true);
 #endif
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiAction("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
-	connect(getGuiAction("actionGo_Home_Global"), SIGNAL(triggered()), this, SLOT(home()));
 
 	initConstellationMgr();
 	initGrindLineMgr();
@@ -156,6 +225,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiAction("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
 	connect(getGuiAction("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
 	connect(getGuiAction("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
+	connect(getGuiAction("actionGo_Home_Global"), SIGNAL(triggered()), core, SLOT(returnToHome()));
 
 	// connect the actor after setting the nightmode.
 	// StelApp::init() already set flagNightMode for us, don't do it twice!
@@ -171,31 +241,55 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainWindow::getInstance().isFullScreen());
 
-	connect(getGuiAction("actionShow_Location_Window_Global"), SIGNAL(toggled(bool)), &locationDialog, SLOT(setVisible(bool)));
-	connect(&locationDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_Location_Window_Global"), SLOT(setChecked(bool)));
+	QAction* tempAction = getGuiAction("actionShow_Location_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+	        locationDialog, SLOT(setVisible(bool)));
+	connect(locationDialog, SIGNAL(visibleChanged(bool)),
+	        tempAction, SLOT(setChecked(bool)));
 
 #ifdef ENABLE_SCRIPT_CONSOLE
-	connect(getGuiAction("actionShow_ScriptConsole_Window_Global"), SIGNAL(toggled(bool)), &scriptConsole, SLOT(setVisible(bool)));
-	connect(&scriptConsole, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_ScriptConsole_Window_Global"), SLOT(setChecked(bool)));
+	tempAction = getGuiAction("actionShow_ScriptConsole_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+	        scriptConsole, SLOT(setVisible(bool)));
+	connect(scriptConsole, SIGNAL(visibleChanged(bool)),
+					tempAction, SLOT(setChecked(bool)));
 #endif
 
-	connect(getGuiAction("actionShow_Configuration_Window_Global"), SIGNAL(toggled(bool)), configurationDialog, SLOT(setVisible(bool)));
-	connect(configurationDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_Configuration_Window_Global"), SLOT(setChecked(bool)));
+	tempAction = getGuiAction("actionShow_Configuration_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+	        configurationDialog, SLOT(setVisible(bool)));
+	connect(configurationDialog, SIGNAL(visibleChanged(bool)),
+	        tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionShow_SkyView_Window_Global"), SIGNAL(toggled(bool)), &viewDialog, SLOT(setVisible(bool)));
-	connect(&viewDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_SkyView_Window_Global"), SLOT(setChecked(bool)));
+	tempAction = getGuiAction("actionShow_SkyView_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+	        viewDialog, SLOT(setVisible(bool)));
+	connect(viewDialog, SIGNAL(visibleChanged(bool)),
+	        tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionShow_Help_Window_Global"), SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
-	connect(&helpDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_Help_Window_Global"), SLOT(setChecked(bool)));
+	tempAction = getGuiAction("actionShow_Help_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+	        helpDialog, SLOT(setVisible(bool)));
+	connect(helpDialog, SIGNAL(visibleChanged(bool)),
+	        tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionShow_Shortcuts_Window_Global"), SIGNAL(toggled(bool)), &shortcutsDialog, SLOT(setVisible(bool)));
-	connect(&shortcutsDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_Shortcuts_Window_Global"), SLOT(setChecked(bool)));
+	tempAction = getGuiAction("actionShow_DateTime_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+	        dateTimeDialog, SLOT(setVisible(bool)));
+	connect(dateTimeDialog, SIGNAL(visibleChanged(bool)),
+	        tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionShow_DateTime_Window_Global"), SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
-	connect(&dateTimeDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_DateTime_Window_Global"), SLOT(setChecked(bool)));
+	tempAction = getGuiAction("actionShow_Search_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+	        searchDialog, SLOT(setVisible(bool)));
+	connect(searchDialog, SIGNAL(visibleChanged(bool)),
+	        tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionShow_Search_Window_Global"), SIGNAL(toggled(bool)), &searchDialog, SLOT(setVisible(bool)));
-	connect(&searchDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_Search_Window_Global"), SLOT(setChecked(bool)));
+	tempAction = getGuiAction("actionShow_Shortcuts_Window_Global");
+	connect(tempAction, SIGNAL(toggled(bool)),
+					shortcutsDialog, SLOT(setVisible(bool)));
+	connect(shortcutsDialog, SIGNAL(visibleChanged(bool)),
+					tempAction, SLOT(setChecked(bool)));
 
 	connect(getGuiAction("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
 	connect(getGuiAction("actionSave_Copy_Object_Information_Global"), SIGNAL(triggered()), this, SLOT(copySelectedObjectInfo()));
@@ -211,6 +305,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	connect(getGuiAction("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
 	getGuiAction("actionShow_Stars")->setChecked(smgr->getFlagStars());
+
+	connect(getGuiAction("actionShow_Stars_Labels"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
+	getGuiAction("actionShow_Stars_Labels")->setChecked(smgr->getFlagLabels());
 
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	connect(getGuiAction("actionShow_Planets_Labels"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
@@ -391,6 +488,16 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
+
+	// The disabled text for checkboxes is embossed with the QPalette::Light setting for the ColorGroup Disabled.
+	// It doesn't appear to be possible to set this from the stylesheet.  Instead we'll make it 100% transparent
+	// and set the text color for disabled in the stylesheets.
+	QPalette p = QApplication::palette();
+	p.setColor(QPalette::Disabled, QPalette::Light, QColor(0,0,0,0));
+
+	// And this is for the focus...  apparently the focus indicator is the inverted value for Active/Button.
+	p.setColor(QPalette::Active, QPalette::Button, QColor(255,255,255));
+	QApplication::setPalette(p);
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -599,23 +706,6 @@ void StelGui::quit()
 	QCoreApplication::exit();
 }
 
-void StelGui::home()
-{
-	StelCore* core = StelApp::getInstance().getCore();
-	QString defaultLocationID = core->getDefaultLocationID();
-
-	StelLocation location = StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID);
-
-	core->moveObserverTo(location);
-	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
-
-	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-	PlanetP p = ssm->searchByEnglishName(location.planetName);
-	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
-	landscapeMgr->setFlagFog(p->hasAtmosphere());
-}
-
 //! Reload the current Qt Style Sheet (Debug only)
 void StelGui::reloadStyle()
 {
@@ -655,13 +745,13 @@ void StelGui::setStelStyle(const QString& section)
 	}
 	qApp->setStyleSheet(currentStelStyle.qtStyleSheet);
 
-	locationDialog.styleChanged();
-	dateTimeDialog.styleChanged();
+	locationDialog->styleChanged();
+	dateTimeDialog->styleChanged();
 	configurationDialog->styleChanged();
-	searchDialog.styleChanged();
-	viewDialog.styleChanged();
+	searchDialog->styleChanged();
+	viewDialog->styleChanged();
 #ifdef ENABLE_SCRIPT_CONSOLE
-	scriptConsole.styleChanged();
+	scriptConsole->styleChanged();
 #endif // ENABLE_SCRIPT_CONSOLE
 }
 
@@ -751,7 +841,7 @@ void StelGui::update()
 		skyGui->updateBarsPos();
 	}
 
-	dateTimeDialog.setDateTime(core->getJDay());
+	dateTimeDialog->setDateTime(core->getJDay());
 }
 
 // Add a new progress bar in the lower right corner of the screen.

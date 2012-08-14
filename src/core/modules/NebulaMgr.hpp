@@ -124,11 +124,6 @@ public slots:
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;
 
-	//! Set flag for displaying nebulae even without textures.
-	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
-	//! Get flag for displaying nebulae without textures.
-	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}
-
 	//! Set the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
@@ -193,8 +188,6 @@ private:
 	float hintsAmount;
 	//! The amount of labels (between 0 and 10)
 	float labelsAmount;
-
-	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 
 	//! The selection pointer texture
 	StelTextureSP texPointer;
