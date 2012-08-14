@@ -596,7 +596,7 @@ public:
 	}
 
 	//! Are GLSL shaders are supported by the backend?
-	virtual bool isGLSLSupported() const {return false;}
+	virtual bool isGLSLSupported() const = 0;
 
 	//! Get size of the viewport in pixels.
 	virtual QSize getViewportSize() const = 0;
