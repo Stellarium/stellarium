@@ -139,6 +139,8 @@ private:
 //! @param getBack controls whether the planet must be returned to its original positions after computation.
 	virtual void getPlanetCoords(StelCore* core, double JD, double &RA, double &Dec, bool getBack);
 
+//! Comptues the Earth-Moon distance (in AU) at a given Julian date. The parameters are similar to those of getSunMoonCoords or getPlanetCoords.
+	virtual void getMoonDistance(StelCore* core, double JD, double &Distance, bool getBack);
 
 //! Returns the angular separation (in radians) between two points.
 //! @param RA1 right ascension of point 1 (in hours)
@@ -187,7 +189,7 @@ private:
 	virtual bool CheckRise(int i);
 
 //! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
