@@ -133,7 +133,7 @@ void CompassMarks::init()
 		cardinalPointsState = false;
 
 		QSettings* conf = StelApp::getInstance().getSettings();
-		setCompassMarks(conf->value("CompassMarks/enable_at_startup", true).toBool());
+		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
