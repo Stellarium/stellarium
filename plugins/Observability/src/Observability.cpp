@@ -90,6 +90,7 @@ Observability::Observability()
 	halfpi = 1.57079632675; // pi/2
 	MoonT = 29.530588; // Moon synodic period (used as first estimate of Full Moon).
 	RefFullMoon = 2451564.696; // Reference Julian date of a Full Moon.
+	MoonPerilune = 0.0024236308; // Smallest Earth-Moon distance (in AU). 
 	nextFullMoon = 0.0;
 	prevFullMoon = 0.0;
 	selName = "";
@@ -1035,6 +1036,50 @@ void Observability::getSunMoonCoords(StelCore *core, double JD, double &RASun, d
 //////////////////////////////////////////////
 
 
+
+//////////////////////////
+// Get the Observer-to-Moon distance JD:
+// getBack controls whether Earth and Moon must be returned to their original positions after computation.
+void Observability::getMoonDistance(StelCore *core, double JD, double &Distance, bool getBack)
+{
+
+	if (getBack) // Return the Moon and Earth to their current position:
+	{
+		myEarth->computePosition(JD);
+		myEarth->computeTransMatrix(JD);
+		myMoon->computePosition(JD);
+		myMoon->computeTransMatrix(JD);
+	} 
+	else
+	{	// Compute coordinates:
+		myEarth->computePosition(JD);
+		myEarth->computeTransMatrix(JD);
+		Pos0 = myEarth->getHeliocentricEclipticPos();
+//		double currSidT;
+
+// Sun coordinates:
+//		Pos2 = core->j2000ToEquinoxEqu((core->matVsop87ToJ2000)*(-Pos0));
+//		toRADec(Pos2,RASun,DecSun);
+
+// Moon coordinates:
+//		currSidT = myEarth->getSiderealTime(JD)/Rad2Deg;
+//		RotObserver = (Mat4d::zrotation(currSidT))*ObserverLoc;
+		LocTrans = (core->matVsop87ToJ2000)*(Mat4d::translation(-Pos0));
+		myMoon->computePosition(JD);
+		myMoon->computeTransMatrix(JD);
+		Pos1 = myMoon->getHeliocentricEclipticPos();
+		Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1)); //-RotObserver;
+
+		Distance = std::sqrt(Pos2*Pos2);
+
+//		toRADec(Pos2,RAMoon,DecMoon);
+	};
+}
+//////////////////////////////////////////////
+
+
+
+
 //////////////////////////////////////////////
 // Get the Coords of a planet:
 void Observability::getPlanetCoords(StelCore *core, double JD, double &RA, double &Dec, bool getBack)
@@ -1259,10 +1304,12 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 		{
 
 
-	// Estimate the closest Full Moon:
+	// Estimate the nearest (in time) Full Moon:
 			double nT;
 			double dT = std::modf((myJD-RefFullMoon)/MoonT,&nT);
 			if (dT>0.5) {nT += 1.0;};
+			if (dT<-0.5) {nT -= 1.0;};
+
 			double TempFullMoon = RefFullMoon + nT*MoonT;
 
 	// Improve the estimate iteratively (Secant method over Lunar-phase vs. time):
@@ -1312,45 +1359,53 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
 			};
 
-		};	
+//		};	
 
 
 	// Update the string shown in the screen: 
-		int fullDay, fullMonth,fullYear, fullHour, fullMinute, fullSecond;
-		double LocalPrev = prevFullMoon+GMTShift+0.5;  // Shift to the local time. 
-		double LocalNext = nextFullMoon+GMTShift+0.5;
-		double intMoon;
-		double LocalTMoon = 24.*modf(LocalPrev,&intMoon);
-		StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
-		double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
-		bestNight = q_("Previous Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			int fullDay, fullMonth,fullYear, fullHour, fullMinute, fullSecond;
+			double LocalPrev = prevFullMoon+GMTShift+0.5;  // Shift to the local time. 
+			double LocalNext = nextFullMoon+GMTShift+0.5;
+			double intMoon;
+			double LocalTMoon = 24.*modf(LocalPrev,&intMoon);
+			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
+			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
+			bestNight = q_("Previous Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
-		LocalTMoon = 24.*modf(LocalNext,&intMoon);
-		StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
-		double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
-		bestNight += q_("  Next Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			LocalTMoon = 24.*modf(LocalNext,&intMoon);
+			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
+			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
+			bestNight += q_("  Next Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
-		ObsRange = ""; 
-		AcroCos = "";
+			ObsRange = ""; 
+			AcroCos = "";
 
 
 
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
-//		double monthFrac;
-//		int PrevMonths = (int) std::modf((nextFullMoon-Jan1stJD)/MoonT,&monthFrac); 
-//		double BestDistance = 1.0; // initial dummy value for Sun-Moon distance;
+//			double monthFrac, monthTemp, maxMoonDate;
+//			monthFrac = std::modf((nextFullMoon-Jan1stJD)/MoonT,&monthTemp);
+//			int PrevMonths = (int)(monthTemp+0.0*monthFrac); 
+//			double BestDistance = 1.0; // initial dummy value for Sun-Moon distance;
+//			double Distance; // temporal variable to save Earth-Moon distance at each month.
 
-//		for (int i=-PrevMonths; i<13 ; i++)
-//		{
-//			jd1 = nextFullMoon + MoonT*((double) i);
-//			getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false); 
-//			COMPUTE THE DISTANCE VECTOR!
-//			if (Dist < BestDistance)
+//			qDebug() << q_("%1 ").arg(PrevMonths);
+
+//			for (int i=-PrevMonths; i<13 ; i++)
 //			{
-//				BestDistance = Dist;
-//				nextSuperMoon = jd1;
+//				jd1 = nextFullMoon + MoonT*((double) i);
+//				getMoonDistance(core,jd1,Distance,false); 
+//				if (Distance < BestDistance)
+//				{  // Month with the largest Full Moon:
+//					BestDistance = Distance;
+//					maxMoonDate = jd1;
+//				};
 //			};
-//		};
+//			maxMoonDate += GMTShift+0.5;
+//			StelUtils::getDateFromJulianDay(maxMoonDate,&fullYear,&fullMonth,&fullDay);
+//			double MoonSize = MoonPerilune/BestDistance*100.;
+//			ObsRange = q_("Greatest Full Moon: %1 "+months[fullMonth-1]+" (%2% of Moon at Perilune)").arg(fullDay).arg(MoonSize,0,'f',2);
+		};
 	} 
 	else if (Kind <3)
 	{
