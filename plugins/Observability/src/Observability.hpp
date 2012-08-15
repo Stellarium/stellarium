@@ -108,8 +108,9 @@ private:
 //! @param ST sidereal time (degrees).
 	virtual double HourAngle2(double RA, double ST);
 
-//! Solves Moon/Sun Rise/Set/Transit times for the current Julian day. This function updates the variables MoonRise, MoonSet, MoonCulm. Returns success status.
-	virtual bool MoonSunSolve(StelCore* core);
+//! Solves Moon/Sun/Planet Rise/Set/Transit times for the current Julian day. This function updates the variables MoonRise, MoonSet, MoonCulm. Returns success status.
+//! @param Kind is 1 for Sun, 2 for Moon, 3 for Solar-System planet.
+	virtual bool SolarSystemSolve(StelCore* core, int Kind);
 
 //! Finds the heliacal rise/set dates of the year for the currently-selected object.
 //! @param Rise day of year of the Acronycal rise.
@@ -128,6 +129,15 @@ private:
 //! @param DecMoon idem for the Moon.
 //! @param getBack controls whether Earth and Moon must be returned to their original positions after computation.
 	virtual void getSunMoonCoords(StelCore* core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, bool getBack);
+
+
+//! computes the selected-planet coordinates at a given Julian date.
+//! @param core the stellarium core.
+//! @param JD double for the Julian date.
+//! @param RA right ascension of the planet (in hours).
+//! @param Dec declination of the planet (in radians).
+//! @param getBack controls whether the planet must be returned to its original positions after computation.
+	virtual void getPlanetCoords(StelCore* core, double JD, double &RA, double &Dec, bool getBack);
 
 
 //! Returns the angular separation (in radians) between two points.
@@ -157,8 +167,7 @@ private:
 
 //! Computes the RA, Dec and Rise/Set Sid. times of the selected planet for each day of the current year.
 //! @param core the current Stellarium core.
-//! @param Name name of the currently selected planet. 
-	virtual void PlanetRADec(StelCore *core, QString Name);
+	virtual void PlanetRADec(StelCore *core);
 
 //! Computes the Sun's RA and Dec for each day of a given year.
 //! @param core current Stellarium core.
@@ -178,7 +187,7 @@ private:
 	virtual bool CheckRise(int i);
 
 //! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
@@ -201,9 +210,11 @@ private:
 //! Matrix to transform coordinates for Sun/Moon ephemeris:
 	Mat4d LocTrans;
 
-//! Pointer to the Earth:
+//! Pointer to the Earth, Moon, and planet:
 	Planet* myEarth;
 	Planet* myMoon;
+	Planet* myPlanet;
+
 
 //! Current simulation year and number of days in the year.;
 	int currYear, nDays, iAltitude;
@@ -221,7 +232,8 @@ private:
 	Vec3d EquPos, LocPos;
 
 //! Some booleans to check the kind of source selected and the kind of output to produce.
-	bool isStar,isMoon,isSun,isScreen, LastSun, raised, configChanged;
+	bool isStar,isMoon,isSun,isScreen, raised, configChanged, souChanged;
+	int LastObject;
 
 //! Some booleans to select the kind of output.
 	bool show_AcroCos, show_Good_Nights, show_Best_Night, show_Today, show_FullMoon; //, show_Crescent, show_SuperMoon;
