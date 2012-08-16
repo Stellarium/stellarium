@@ -136,6 +136,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     }
     shadowsEnabled = false;
     bumpsEnabled = false;
+    parallaxEnabled = false;
     torchEnabled=false;
     textEnabled=false;
     debugEnabled=false;
@@ -164,6 +165,12 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     dim = 1.0f;
     dimNear = 1.0f;
     dimFar = dimNear+1.0f;
+
+    parallaxScale = 0.055f;
+
+    camDepthFBO = 0;
+    camDepthTex = 0;
+    analyzeDebug = false;
 
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
@@ -497,6 +504,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         {
             //case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
             //case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
+            case Qt::Key_I:         parallaxEnabled = !parallaxEnabled; e->accept(); break;
             case Qt::Key_L:         torchEnabled = !torchEnabled; e->accept(); break;
             case Qt::Key_K:         textEnabled  = !textEnabled;  e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
@@ -507,6 +515,9 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             case Qt::Key_Left:      movement_x = -1.0f * speedup; e->accept(); break;
             case Qt::Key_P:         saveFrusts(); e->accept(); break;
             case Qt::Key_D:         debugEnabled = !debugEnabled; e->accept(); break;
+            case Qt::Key_U:         parallaxScale += 0.01f; e->accept(); break;
+            case Qt::Key_J:         parallaxScale -= 0.01f; e->accept(); break;
+            case Qt::Key_H:         analyzeDebug = !analyzeDebug; e->accept(); break;
         }
     }
     else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
@@ -907,8 +918,28 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
 
 
         //Bump Mapping
-        if(cur == BumpMapping || cur == All)
+        if(cur == BumpMapping || cur == All || cur == ParallaxMapping)
         {
+            //Send tangents to shader
+            if(objModel->hasTangents())
+            {
+                tangLocation = curShader->attributeLocation("vecTangent");
+                glEnableVertexAttribArray(tangLocation);
+                glVertexAttribPointer(tangLocation, 4, GL_FLOAT, 0, objModel->getVertexSize(), objModel->getVertexArray()->tangent);
+                tangEnabled = true;
+            }
+
+            //Flag for bumped lighting
+            location = curShader->uniformLocation("boolBump");
+            curShader->setUniform(location, false);
+
+            //Flag for parallax mapping
+            location = curShader->uniformLocation("boolHeight");
+            curShader->setUniform(location, false);
+
+            location = curShader->uniformLocation("s");
+            curShader->setUniform(location, parallaxScale);
+
             if (pStelModel->pMaterial->bump_texture)
             {
                 glActiveTexture(GL_TEXTURE2);
@@ -921,22 +952,20 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
                 //Flag for bumped lighting
                 location = curShader->uniformLocation("boolBump");
                 curShader->setUniform(location, true);
-
-                //Send tangents to shader
-                if(objModel->hasTangents())
-                {
-                    tangLocation = curShader->attributeLocation("vecTangent");
-                    glEnableVertexAttribArray(tangLocation);
-                    glVertexAttribPointer(tangLocation, 4, GL_FLOAT, 0, objModel->getVertexSize(), objModel->getVertexArray()->tangent);
-                    tangEnabled = true;
-                }
-
-
             }
-            else
+
+            if (pStelModel->pMaterial->height_texture)
             {
-                location = curShader->uniformLocation("boolBump");
-                curShader->setUniform(location, false);
+                glActiveTexture(GL_TEXTURE7);
+                pStelModel->pMaterial->height_texture.data()-> bind();
+
+                //Send bump map to shader
+                location = curShader->uniformLocation("hmap");
+                curShader->setUniform(location, 7);
+
+                //Flag for parallax mapping
+                location = curShader->uniformLocation("boolHeight");
+                curShader->setUniform(location, true);
             }
         }
     }
@@ -968,9 +997,11 @@ void Scenery3d::bindShader()
     curEffect = No;
     curShader = 0;
 
-    if(shadowsEnabled && !bumpsEnabled) { curShader = shadowShader; curEffect = ShadowMapping; }
-    else if(!shadowsEnabled && bumpsEnabled) { curShader = bumpShader; curEffect = BumpMapping; }
-    else if(shadowsEnabled && bumpsEnabled) { curShader = univShader; curEffect = All; }
+    if(shadowsEnabled && !bumpsEnabled && !parallaxEnabled) { curShader = shadowShader; curEffect = ShadowMapping; }
+    else if(!shadowsEnabled && bumpsEnabled && !parallaxEnabled) { curShader = bumpShader; curEffect = BumpMapping; }
+    else if(shadowsEnabled && bumpsEnabled && !parallaxEnabled) { curShader = univShader; curEffect = All; }
+    else if(shadowsEnabled && bumpsEnabled && parallaxEnabled) { curShader = univShader; curEffect = All; }
+    else if(shadowsEnabled && !bumpsEnabled && parallaxEnabled) { curShader = parallaxShader; curEffect = ParallaxMapping; }
 
     //Bind the selected shader
     if(curShader != 0) curShader->use();
@@ -1115,7 +1146,6 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     glOrtho(-dim, dim, -dim, dim, dimNear, dimFar);
     //Save it for later use
     glGetFloatv(GL_PROJECTION_MATRIX, lightProj);
-    lightProj.print();
     glPushMatrix();
     glMultMatrixf(lightViewMatrix);
     //Save the light's ModelViewProjection Matrix for later use
@@ -1131,16 +1161,16 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
 
     //! Uncomment this and the other marked lines to get no artifacts (but way worse shadow quality
     //! making the second split pretty much useless
-    //!    AABB bb;
-    //!    for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
-    //!        bb.expand(focusBodies[frustumIndex]->getVerts()[i]);
+    AABB bb;
+    for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
+        bb.expand(focusBodies[frustumIndex]->getVerts()[i]);
 
     //Project the frustum into light space and find the boundaries
-    for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
-    //! for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
+    //! for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
+    for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
     {
-        Vec3f tmp = focusBodies[frustumIndex]->getVerts()[i];
-        //! Vec3f tmp = bb.getCorner(static_cast<AABB::Corner>(i));
+        //Vec3f tmp = focusBodies[frustumIndex]->getVerts()[i];
+        Vec3f tmp = bb.getCorner(static_cast<AABB::Corner>(i));
         Vec4f transf = lightMVP*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
 
         transf.v[0] /= transf.v[3];
@@ -1240,13 +1270,75 @@ void Scenery3d::adjustFrustum()
     }
 }
 
-void Scenery3d::analyzeViewSamples()
+void Scenery3d::analyzeViewSamples(StelPainter &painter)
 {
+    //Setup the frustum
     Frustum camFrust;
     camFrust.setCamInternals(camFOV, camAspect, camNear, camFar);
     camFrust.calcFrustum(viewPos, viewDir, viewUp);
 
+    float f = 2.0 / tan(camFOV * M_PI / 360.0);
+    Mat4f camProj = Mat4f(f / camAspect, 0, 0, 0,
+                    0, f, 0, 0,
+                    0, 0, (camFar + camNear) / (camNear - camFar), 2.0 * camFar * camNear / (camNear - camFar),
+                    0, 0, -1, 0);
 
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
+    glEnable(GL_CULL_FACE);
+    //Backface culling for ESM!
+    glCullFace(GL_FRONT);
+    glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMultMatrixf(camProj);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(viewPos.v[0], viewPos.v[1], viewPos.v[2], 0.0, 0.0, 0.0, viewUp.v[0], viewUp.v[1], viewUp.v[2]);
+
+    //Bind FBO
+    glBindFramebuffer(GL_FRAMEBUFFER, camDepthFBO);
+
+    //No shader needed for generating the depth map
+    glUseProgram(0);
+
+    //Set viewport
+    glPushAttrib(GL_VIEWPORT_BIT);
+    glViewport(0, 0, shadowmapSize, shadowmapSize);
+
+    //Activate texture unit as usual
+    glActiveTexture(GL_TEXTURE8);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, camDepthTex, 0);
+
+    //Clear everything
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    //Draw the scene
+    drawArrays(painter, false);
+
+    //Reset Viewportbit
+    glPopAttrib();
+
+    //Unbind
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+
+    //Switch back to normal texturing
+    glActiveTexture(GL_TEXTURE0);
+
+    //Reset
+    glDepthMask(GL_FALSE);
+    glDisable(GL_DEPTH_TEST);
+    glCullFace(GL_BACK);
+    glDisable(GL_CULL_FACE);
+    glColorMask(1, 1, 1, 1);
 }
 
 void Scenery3d::generateShadowMap(StelCore* core)
@@ -1262,6 +1354,8 @@ void Scenery3d::generateShadowMap(StelCore* core)
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
+
+    analyzeViewSamples(painter);
 
     //Determine sun position
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -1688,7 +1782,7 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     //Show some debug aids
     if(debugEnabled)
     {
-        float debugTextureSize = shadowmapSize/8;
+        float debugTextureSize = 128.0f;
         const QFont font("Courier", 12);
         painter.setFont(font);
 
@@ -1711,6 +1805,22 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
         }
 
         painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(splitWeight, 3, 'f', 2));
+    }
+
+    if(analyzeDebug)
+    {
+        float debugTextureSize = 128.0f;
+        const QFont font("Courier", 12);
+        painter.setFont(font);
+
+        float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
+        float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
+
+        std::string cap = "Camera depth";
+        painter.drawText(screen_x-150, screen_y+130, QString(cap.c_str()));
+
+        glBindTexture(GL_TEXTURE_2D, camDepthTex);
+        painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
     }
 
     //front
@@ -1913,6 +2023,10 @@ void Scenery3d::drawDebugText(StelCore* core)
     screen_y -= 15.0f;
     str = QString("%1 %2 %3").arg(viewUp.v[0], 7, 'f', 2).arg(viewUp.v[1], 7, 'f', 2).arg(viewUp.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
+
+    screen_y -= 30.0f;
+    str = QString("Current shader: %1").arg(static_cast<int>(curEffect));
+    painter.drawText(screen_x, screen_y, str);
 }
 
 void Scenery3d::initShadowMapping()
@@ -1958,6 +2072,59 @@ void Scenery3d::initShadowMapping()
         //Attach the depthmap to the Buffer
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
     }
+
+    glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
+    glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
+
+#if QT_VERSION >= 0x040800
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+#else
+    if(glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE)
+#endif
+        qWarning() << "[Scenery3D] GL_FRAMEBUFFER_COMPLETE failed, can't use FBO";
+
+    //Done. Unbind and switch to normal texture unit 0
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glActiveTexture(GL_TEXTURE0);
+
+
+
+    //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
+    //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
+    QGLFramebufferObject *qglCamFBO=new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+    camDepthFBO = qglCamFBO->handle();
+
+    if (qglFBO->isValid())
+        qWarning() << "[Scenery3D] initShadowMapping() qglCamFBO valid\n";
+    else
+        qWarning() << "[Scenery3D] initShadowMapping() qglCamFBO invalid\n";
+
+
+    //Bind the FBO
+    glBindFramebuffer(GL_FRAMEBUFFER, camDepthFBO);
+
+    //Generate the depth maps
+    glGenTextures(1, &camDepthTex);
+    //Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 3
+    glActiveTexture(GL_TEXTURE8);
+
+    //Bind the depth map and setup parameters
+    glBindTexture(GL_TEXTURE_2D, camDepthTex);
+
+#if QT_VERSION >= 0x040800
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+#else
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+#endif
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+    //Attach the depthmap to the Buffer
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, camDepthTex, 0);
 
     glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
     glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!

@@ -116,6 +116,7 @@ private:
     StelShader* bumpShader;
     StelShader* univShader;
     StelShader* debugShader;
+    StelShader* parallaxShader;
 
     //screen messages (taken largely from AngleMeasure as of 2012-01-21)
     LinearFader messageFader;
