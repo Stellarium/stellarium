@@ -73,6 +73,7 @@ Scenery3dMgr::~Scenery3dMgr()
     delete bumpShader;
     delete univShader;
     delete debugShader;
+    delete parallaxShader;
 }
 
 void Scenery3dMgr::enableScenery3d(bool enable)
@@ -177,8 +178,8 @@ void Scenery3dMgr::init()
 
     QSettings* conf = StelApp::getInstance().getSettings();
     Q_ASSERT(conf);
-    cubemapSize=conf->value("Scenery3d/cubemapSize", 1024).toInt();
-    shadowmapSize=conf->value("Scenery3d/shadowmapSize", 1024).toInt();
+    cubemapSize=conf->value("Scenery3d/cubemapSize", 2048).toInt();
+    shadowmapSize=conf->value("Scenery3d/shadowmapSize", 2048).toInt();
     torchBrightness=conf->value("Scenery3d/extralight_brightness", 0.5f).toFloat();
 
     // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
@@ -240,6 +241,7 @@ void Scenery3dMgr::init()
     this->bumpShader = new StelShader();
     this->univShader = new StelShader();
     this->debugShader = new StelShader();
+    this->parallaxShader = new StelShader();
 
 
     //Alex Wolf loading patch : ) Thanks!
@@ -283,9 +285,19 @@ void Scenery3dMgr::init()
         debugShader  = 0;
     }
 
+    lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
+    vsshader = (QString(lst.first()) + "parallax.v.glsl").toLocal8Bit();
+    fsshader = (QString(lst.first()) + "parallax.f.glsl").toLocal8Bit();
+
+    if (!(parallaxShader->load(vsshader.data(), fsshader.data())))
+    {
+        qWarning() << "WARNING [Scenery3d]: unable to load parallax mapping shader files.\n";
+        parallaxShader  = 0;
+    }
+
     qWarning() << "init scenery3d object...";
     scenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
-    scenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
+    scenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader, parallaxShader);
 
     qWarning() << "init scenery3d object...done.\n";
     scenery3d->setShadowsEnabled(enableShadows);
@@ -449,7 +461,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
     Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
-    newScenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
+    newScenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader, parallaxShader);
     newScenery3d->setShadowsEnabled(enableShadows);
     newScenery3d->setBumpsEnabled(enableBumps);
     if(shadowmapSize) newScenery3d->initShadowMapping();
