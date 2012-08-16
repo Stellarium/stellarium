@@ -1,2 +1,3 @@
 ADD_SUBDIRECTORY( Sterngarten )
+ADD_SUBDIRECTORY( Testscene )
 
