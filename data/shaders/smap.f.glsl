@@ -51,10 +51,10 @@ varying vec3 vecNormal;
 varying vec4 vecEyeView;
 varying vec4 vecPos;
 
-uniform vec4 colors[4] = vec4[4](vec4(0.8, 0.2, 0.2, 1.0),  //Red
-								 vec4(0.2, 0.8, 0.2, 1.0),  //Green
-								 vec4(0.2, 0.2, 0.8, 1.0),  //Blue
-								 vec4(0.7, 0.7, 0.7, 1.0));
+uniform vec4 colors[4] = vec4[4](vec4(1.0, 0.1, 0.0, 1.0),  //Red
+								 vec4(0.0, 1.0, 0.5, 1.0),  //Green
+								 vec4(0.25, 0.41, 0.88, 1.0),  //Blue
+								 vec4(0.29, 0.0, 0.51, 1.0)); //Orange
 								 
 vec2 poissonDisk[16] = vec2[]( 
    vec2( -0.94201624, -0.39906216 ), 
@@ -107,16 +107,7 @@ vec4 getShadow()
 		}
 		
 		shadow_c = debugColor(0) * visibility;
-	
-	/*
-		vec4 sm_coord_c = texmat_0*vecPos;
-		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
-		
-		float shadow = texture2D(smap_0, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
 
-		shadow_c = debugColor(0) * s;
-	*/
     }
     else if(dist < vecSplits.y)
     {
@@ -133,15 +124,6 @@ vec4 getShadow()
 		}
 		
 		shadow_c = debugColor(1) * visibility;
-	/*
-		vec4 sm_coord_c = texmat_1*vecPos;
-		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
-		
-		float shadow = texture2D(smap_1, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-		shadow_c = debugColor(1) * s;
-	*/	
     }
     else if(dist < vecSplits.z)
     {
@@ -158,15 +140,6 @@ vec4 getShadow()
 		}
 		
 		shadow_c = debugColor(2) * visibility;
-	/*
-		vec4 sm_coord_c = texmat_2*vecPos;
-		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
-		
-		float shadow = texture2D(smap_2, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-		shadow_c = debugColor(2) * s;
-	*/
     }
 	else if(dist < vecSplits.w)
 	{
@@ -183,15 +156,6 @@ vec4 getShadow()
 		}
 		
 		shadow_c = debugColor(3) * visibility;
-	/*
-		vec4 sm_coord_c = texmat_3*vecPos;
-		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
-		
-		float shadow = texture2D(smap_3, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-		shadow_c = debugColor(3) * s;	
-	*/
 	}
 	
     return shadow_c;

@@ -90,6 +90,8 @@ public:
             texture.clear();
             bumpMapName.clear();
             bump_texture.clear();
+            heightMapName.clear();
+            height_texture.clear();
         }
         //! Material name
         std::string name;
@@ -112,6 +114,10 @@ public:
         std::string bumpMapName;
         //!< Shared pointer to bump map texture of the model. This can be null.
         StelTextureSP bump_texture;
+        //! Height map name
+        std::string heightMapName;
+        //!< Shared pointer to height map texture of the model. This can be null.
+        StelTextureSP height_texture;
     };
 
     //! A vertex struct holds the vertex itself (position), corresponding texture coordinates, normals, tangents and bitangents

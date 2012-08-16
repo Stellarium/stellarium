@@ -56,12 +56,13 @@ public:
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
-    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0, StelShader* debugShader = 0)
+    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0, StelShader* debugShader = 0, StelShader* parallaxShader = 0)
     {
         this->shadowShader = shadowShader;
         this->bumpShader = bumpShader;
         this->univShader = univShader;
         this->debugShader = debugShader;
+        this->parallaxShader = parallaxShader;
     }
 
     //! Loads configuration values from a scenery3d.ini file.
@@ -118,7 +119,7 @@ public:
 
 
     enum ShadowCaster { None, Sun, Moon, Venus };
-    enum Effect { No, BumpMapping, ShadowMapping, All };
+    enum Effect { No, BumpMapping, ShadowMapping, All, ParallaxMapping};
     Mat4d mv;
     Mat4d mp;
     Mat4f mv2;
@@ -149,6 +150,7 @@ private:
     bool hasModels;             // flag to see if there's anything to draw
     bool shadowsEnabled;        // switchable value (^SPACE): Use shadow mapping
     bool bumpsEnabled;          // switchable value (^B): Use bump mapping
+    bool parallaxEnabled;
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
     bool torchEnabled;          // switchable value (^L): adds artificial ambient light
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
@@ -220,6 +222,8 @@ private:
     StelShader* univShader;
     //Debug shader
     StelShader* debugShader;
+    //Parallax shader
+    StelShader* parallaxShader;
     //Depth texture id
     GLuint shadowMapTexture;
     //Shadow Map FBO handle
@@ -279,6 +283,10 @@ private:
     //Said values
     float dim, dimNear, dimFar;
     //Analyzes the view samples to find even tighter fitting near and far planes
-    void analyzeViewSamples();
+    void analyzeViewSamples(StelPainter &painter);
+    GLuint camDepthFBO;
+    GLuint camDepthTex;
+    bool analyzeDebug;
+    float parallaxScale;
 };
 #endif

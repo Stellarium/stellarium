@@ -1128,6 +1128,15 @@ bool OBJ::importMaterials(const char *filename)
                 parseTextureString(buffer, bump);
                 pMaterial->bumpMapName = bump;
             }
+            else if (strstr(buffer, "map_height") != 0)
+            {
+                fgets(buffer, sizeof(buffer), pFile);
+                sscanf(buffer, "%[^\n]", buffer);
+
+                std::string height;
+                parseTextureString(buffer, height);
+                pMaterial->heightMapName = height;
+            }
             else
             {
                 fgets(buffer, sizeof(buffer), pFile);
@@ -1158,6 +1167,8 @@ bool OBJ::importMaterials(const char *filename)
             pMaterial->texture.clear();
             pMaterial->bumpMapName.clear();
             pMaterial->bump_texture.clear();
+            pMaterial->heightMapName.clear();
+            pMaterial->height_texture.clear();
 
 
             m_materialCache[pMaterial->name] = numMaterials;
@@ -1206,7 +1217,7 @@ void OBJ::uploadTexturesGL()
             }
         }
 
-        qDebug() << getTime() << "[Scenery3d] Normal Map:" << pMaterial->bumpMapName.c_str();
+        //qDebug() << getTime() << "[Scenery3d] Normal Map:" << pMaterial->bumpMapName.c_str();
         if(!pMaterial->bumpMapName.empty())
         {
             StelTextureSP bumpTex = textureMgr.createTexture(QString(absolutePath(pMaterial->bumpMapName).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
@@ -1217,6 +1228,20 @@ void OBJ::uploadTexturesGL()
             else
             {
                 qWarning() << getTime() << "[Scenery3d] Failed to load Normal Map:" << pMaterial->bumpMapName.c_str();
+            }
+        }
+
+        qDebug() << getTime() << "[Scenery3d] Height Map:" << pMaterial->heightMapName.c_str();
+        if(!pMaterial->heightMapName.empty())
+        {
+            StelTextureSP heightTex = textureMgr.createTexture(QString(absolutePath(pMaterial->heightMapName).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+            if(!heightTex.isNull())
+            {
+                pMaterial->height_texture = heightTex;
+            }
+            else
+            {
+                qWarning() << getTime() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName.c_str();
             }
         }
     }

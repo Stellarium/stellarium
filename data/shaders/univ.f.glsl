@@ -51,12 +51,30 @@ varying vec3 vecNormal;
 varying vec4 vecEyeView;
 varying vec4 vecPos;
 
-uniform vec4 colors[4] = vec4[4](vec4(0.8, 0.2, 0.2, 1.0),  //Red
-								 vec4(0.2, 0.8, 0.2, 1.0),  //Green
-								 vec4(0.2, 0.2, 0.8, 1.0),  //Blue
-								 vec4(0.7, 0.7, 0.7, 1.0));
+uniform vec4 colors[4] = vec4[4](vec4(1.0, 0.1, 0.0, 1.0),  //Red
+								 vec4(0.0, 1.0, 0.5, 1.0),  //Green
+								 vec4(0.25, 0.41, 0.88, 1.0),  //Blue
+								 vec4(0.29, 0.0, 0.51, 1.0)); //Orange
 								 
-
+vec2 poissonDisk[16] = vec2[]( 
+   vec2( -0.94201624, -0.39906216 ), 
+   vec2( 0.94558609, -0.76890725 ), 
+   vec2( -0.094184101, -0.92938870 ), 
+   vec2( 0.34495938, 0.29387760 ), 
+   vec2( -0.91588581, 0.45771432 ), 
+   vec2( -0.81544232, -0.87912464 ), 
+   vec2( -0.38277543, 0.27676845 ), 
+   vec2( 0.97484398, 0.75648379 ), 
+   vec2( 0.44323325, -0.97511554 ), 
+   vec2( 0.53742981, -0.47373420 ), 
+   vec2( -0.26496911, -0.41893023 ), 
+   vec2( 0.79197514, 0.19090188 ), 
+   vec2( -0.24188840, 0.99706507 ), 
+   vec2( -0.81409955, 0.91437590 ), 
+   vec2( 0.19984126, 0.78641367 ), 
+   vec2( 0.14383161, -0.14100790 ) 
+);
+					 
 								 
 vec4 debugColor(int i)
 {
@@ -70,6 +88,7 @@ vec4 debugColor(int i)
 
 vec4 getShadow()
 {
+	float bias = 0.00005;
 	float dist = dot(vecEyeView.xyz, vecEyeView.xyz);
 	
     vec4 shadow_c = vec4(1.0, 1.0, 1.0, 1.0);
@@ -78,93 +97,70 @@ vec4 getShadow()
     {
 		vec4 sm_coord_c = texmat_0*vecPos;
 		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
-		
-		float shadow = texture2D(smap_0, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
+		float visibility=1.0;
 
-		shadow_c = debugColor(0) * s;
+		for (int i=0;i<16;i++)
+		{
+		  if(texture2D(smap_0, sm_coord_c.xy + poissonDisk[i]/700.0).z  <  sm_coord_c.z-bias)
+		  {
+			visibility-=0.05;
+		  }
+		}
+		
+		shadow_c = debugColor(0) * visibility;
+
     }
     else if(dist < vecSplits.y)
     {
 		vec4 sm_coord_c = texmat_1*vecPos;
 		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
-		
-		float shadow = texture2D(smap_1, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
+		float visibility=1.0;
 
-		shadow_c = debugColor(1) * s;
+		for (int i=0;i<16;i++)
+		{
+		  if(texture2D(smap_1, sm_coord_c.xy + poissonDisk[i]/700.0).z  <  sm_coord_c.z-bias)
+		  {
+			visibility-=0.05;
+		  }
+		}
+		
+		shadow_c = debugColor(1) * visibility;
     }
     else if(dist < vecSplits.z)
     {
 		vec4 sm_coord_c = texmat_2*vecPos;
 		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
-		
-		float shadow = texture2D(smap_2, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
+		float visibility=1.0;
 
-		shadow_c = debugColor(2) * s;
+		for (int i=0;i<16;i++)
+		{
+		  if(texture2D(smap_2, sm_coord_c.xy + poissonDisk[i]/700.0).z  <  sm_coord_c.z-bias)
+		  {
+			visibility-=0.05;
+		  }
+		}
+		
+		shadow_c = debugColor(2) * visibility;
     }
 	else if(dist < vecSplits.w)
 	{
 		vec4 sm_coord_c = texmat_3*vecPos;
 		sm_coord_c.xyz = sm_coord_c.xyz/sm_coord_c.w;
+		float visibility=1.0;
+
+		for (int i=0;i<16;i++)
+		{
+		  if(texture2D(smap_3, sm_coord_c.xy + poissonDisk[i]/700.0).z  <  sm_coord_c.z-bias)
+		  {
+			visibility-=0.05;
+		  }
+		}
 		
-		float shadow = texture2D(smap_3, sm_coord_c.xy).x;
-		float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-		shadow_c = debugColor(3) * s;	
+		shadow_c = debugColor(3) * visibility;
 	}
 	
     return shadow_c;
 }
-
-/*
-vec4 getShadow()
-{
-	float dist = dot(vecEyeView.xyz, vecEyeView.xyz);
-	
-    vec4 sm_coord_c;
-    float shadow;
-    float s;
-
-    vec4 shadow_c = vec4(1.0, 1.0, 1.0, 1.0);
-
-    if(dist < vecSplits.x)
-    {
-      vec4 sm_coord_c = texmat_0*vecPos;
-      float shadow = texture2D(smap_0, sm_coord_c.xy).x;
-      float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-      shadow_c = debugColor(0) * s;
-    }
-    else if(dist < vecSplits.y)
-    {
-      vec4 sm_coord_c = texmat_1*vecPos;
-      float shadow = texture2D(smap_1, sm_coord_c.xy).x;
-      float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-      shadow_c = debugColor(1) * s;
-    }
-    else if(dist < vecSplits.z)
-    {
-      vec4 sm_coord_c = texmat_2*vecPos;
-      float shadow = texture2D(smap_2, sm_coord_c.xy).x;
-      float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-      shadow_c = debugColor(2) * s;
-    }
-	else if(dist < vecSplits.w)
-	{
-		sm_coord_c = texmat_3*vecPos;
-		shadow = texture2D(smap_3, sm_coord_c.xy).x;
-		s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
-
-		shadow_c = debugColor(3) * s;	
-	}
-
-    return shadow_c;
-}
-*/
   
 vec4 getLighting()
 {
