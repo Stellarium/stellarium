@@ -479,7 +479,7 @@ void Observability::draw(StelCore* core)
 				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 
 				RS1 = q_("Sets at %1 (in %2)").arg(SetTime).arg(RS1);
-				RS2 = q_("Raised at %1 (%2 ago)").arg(RiseTime).arg(RS2);
+				RS2 = q_("Rose at %1 (%2 ago)").arg(RiseTime).arg(RS2);
 			}
 			else 
 			{
@@ -489,8 +489,8 @@ void Observability::draw(StelCore* core)
                                 double2hms(toUnsignedRA(currLocalT+TFrac*Rise+12.),ephHour,ephMinute,ephSecond);
 				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 
-				RS1 = q_("Has set at %1 (%2 ago)").arg(SetTime).arg(RS1);
-				RS2 = q_("Raises at %1 (in %2)").arg(RiseTime).arg(RS2);
+				RS1 = q_("Set at %1 (%2 ago)").arg(SetTime).arg(RS1);
+				RS2 = q_("Rises at %1 (in %2)").arg(RiseTime).arg(RS2);
 			};				
 		}
 		else { // The source is either circumpolar or never rises:
@@ -1316,13 +1316,18 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
 			dT = 0.1/1440.; // 6 seconds. Our time span for the finite-difference derivative estimate.
 			double Deriv1, Deriv2; // Variables for temporal use.
-			double Sec1, Sec2, Temp1, Temp2; // Variables for temporal use.
+			double Sec1, Sec2, SecMed, Temp1, Temp2; // Variables for temporal use.
+			double iniEst1, iniEst2;  // JD values that MUST include the solution within them.
+			double Phase1, Phase2, PhaseMed;
 
 			for (int j=0; j<2; j++) 
 			{ // Two steps: one for the previos Full Moon and the other for the next one.
 
-				Sec1 = TempFullMoon - 0.01*MoonT; // Initial estimates of Full-Moon dates
-				Sec2 = TempFullMoon + 0.01*MoonT; 
+				iniEst1 =  TempFullMoon - 0.25*MoonT; 
+				iniEst2 =  TempFullMoon + 0.25*MoonT; 
+
+				Sec1 = iniEst1; // TempFullMoon - 0.05*MoonT; // Initial estimates of Full-Moon dates
+				Sec2 = iniEst2; // TempFullMoon + 0.05*MoonT; 
 
 				for (int i=0; i<100; i++) // A limit of 100 iterations.
 				{
@@ -1332,6 +1337,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 					Temp2 = Lambda(RA,Dec,RAS,DecS);
 
 					Deriv1 = (Temp1-Temp2)/dT;
+					Phase1 =  (Temp1+Temp2)/2.;
 
 					getSunMoonCoords(core,Sec2+dT/2.,RAS,DecS,RA,Dec,false);
 					Temp1 = Lambda(RA,Dec,RAS,DecS);
@@ -1339,9 +1345,34 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 					Temp2 = Lambda(RA,Dec,RAS,DecS);
 
 					Deriv2 = (Temp1-Temp2)/dT;
+					Phase2 =  (Temp1+Temp2)/2.;
+
+					SecMed = (Sec2+Sec1)/2.;
+					getSunMoonCoords(core,SecMed+dT/2.,RAS,DecS,RA,Dec,false);
+					Temp1 = Lambda(RA,Dec,RAS,DecS);
+					getSunMoonCoords(core,SecMed-dT/2.,RAS,DecS,RA,Dec,false);
+					Temp2 = Lambda(RA,Dec,RAS,DecS);
+
+				//	DerivMed = (Temp1-Temp2)/dT;
+					PhaseMed =  (Temp1+Temp2)/2.;
 
 					Temp1 = Sec2 - Deriv2*(Sec2-Sec1)/(Deriv2-Deriv1);
-					Sec1 = Sec2; Sec2 = Temp1;
+
+					// Force the solution to fall within the range of good possible solutions:
+					if (Temp1 < iniEst1 || Temp1 > iniEst2) 
+					{
+						if (Phase1>Phase2)
+						{
+							Sec2 = (Phase2 > PhaseMed)?Sec2:SecMed;
+						} else 
+						{
+							Sec1 = Sec2;
+							Sec2 = (Phase1>PhaseMed)?Sec1:SecMed;
+						};
+					} else
+					{
+						Sec1 = Sec2; Sec2 = Temp1;
+					};
 
 					if (std::abs(Sec2-Sec1) < 10.*dT) {TempFullMoon = Temp1; break;}  // 1 minute accuracy. Convergence.
 
@@ -1358,8 +1389,6 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 				};
 
 			};
-
-//		};	
 
 
 	// Update the string shown in the screen: 
@@ -1379,7 +1408,6 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
 			ObsRange = ""; 
 			AcroCos = "";
-
 
 
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
@@ -1426,6 +1454,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 	};
 
 	lastJDMoon = myJD;
+
 
 	return raises;
 }
