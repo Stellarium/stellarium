@@ -1297,7 +1297,8 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     glMultMatrixf(camProj);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(viewPos.v[0], viewPos.v[1], viewPos.v[2], 0.0, 0.0, 0.0, viewUp.v[0], viewUp.v[1], viewUp.v[2]);
+    Vec3d l = viewPos + viewDir;
+    gluLookAt(viewPos.v[0], viewPos.v[1], viewPos.v[2], l.v[0], l.v[1], l.v[2], viewUp.v[0], viewUp.v[1], viewUp.v[2]);
 
     //Bind FBO
     glBindFramebuffer(GL_FRAMEBUFFER, camDepthFBO);
