@@ -51,7 +51,6 @@ public:
 	StelQGL1Renderer(QGraphicsView* parent)
 		: StelQGLRenderer(parent, false)
 		, initialized(false)
-		, textureUnitCount(-1)
 	{
 	}
 	
@@ -177,39 +176,30 @@ protected:
 		invariant();
 	}
 
-	virtual int getTextureUnitCount() 
+	virtual int getTextureUnitCountBackend() 
 	{
-		invariant();
-		if(textureUnitCount < 0)
+		// Called at initialization, so can't call invariant
+		if(!gl.hasOpenGLFeature(QGLFunctions::Multitexture))
 		{
-			if(!gl.hasOpenGLFeature(QGLFunctions::Multitexture))
-			{
-				textureUnitCount = 1;
-			}
-			else
-			{
-				glGetIntegerv(GL_MAX_TEXTURE_UNITS, &textureUnitCount);
-				textureUnitCount = std::max(textureUnitCount, STELQGLRENDERER_MAX_TEXTURE_UNITS);
-			}
+			invariant();
+			return 1;
 		}
-		invariant();
-		return textureUnitCount;
+		int textureUnitCount;
+		glGetIntegerv(GL_MAX_TEXTURE_UNITS, &textureUnitCount);
+		return std::max(textureUnitCount, STELQGLRENDERER_MAX_TEXTURE_UNITS);
 	}
 
+#ifndef NDEBUG
 	virtual void invariant() const
 	{
-#ifndef NDEBUG
 		Q_ASSERT_X(initialized, Q_FUNC_INFO, "uninitialized StelQGL1Renderer");
 		StelQGLRenderer::invariant();
-#endif
 	}
+#endif
 	
 private:
 	//! Is the renderer initialized?
 	bool initialized;
-	
-	//! Number of texture units. Lazily initialized by getTextureUnitCount().
-	GLint textureUnitCount;
 };
 
 #endif // _STELQGL1RENDERER_HPP_

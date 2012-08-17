@@ -38,7 +38,7 @@ void StelQGLRenderer::bindTextureBackend
 	}
 	// Ignore the texture if we don't have enough texture units
 	// or if texture unit is nonzero and we don't support multitexturing.
-	if(textureUnit >= getTextureUnitCount())
+	if(textureUnit >= textureUnitCount)
 	{
 		invariant();
 		return;
@@ -216,7 +216,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 	invariant();
 
 	//Warn about any GL errors.
-	checkGLErrors();
+	checkGLErrors("drawWindow() start");
 	
 	//Effects are ignored when FBO is not supported.
 	//That might be changed for some GPUs, but it might not be worth the effort.
@@ -245,6 +245,8 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 	}
 
 	viewport.disablePainting();
+
+	checkGLErrors("drawWindow() end");
 	invariant();
 }
 

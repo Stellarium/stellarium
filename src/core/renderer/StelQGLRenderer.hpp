@@ -70,6 +70,7 @@ public:
 		, culledFaces(CullFace_None)
 		, placeholderTexture(NULL)
 		, currentFontSet(false)
+		, textureUnitCount(-1)
 		, gl(glContext)
 	{
 		loaderThread = new QThread();
@@ -124,6 +125,7 @@ public:
 		// Can't call makeGLContextCurrent() before initialization is complete.
 		glContext->makeCurrent();
 		viewport.init(gl.hasOpenGLFeature(QGLFunctions::NPOTTextures));
+		textureUnitCount = getTextureUnitCountBackend();
 		return true;
 	}
 	
@@ -246,7 +248,7 @@ public:
 	virtual void makeGLContextCurrent()
 	{
 		invariant();
-		if(QGLContext::currentContext() != glContext)
+		if(Q_UNLIKELY(QGLContext::currentContext() != glContext))
 		{
 			// makeCurrent does not check if the context is already current, 
 			// so it can really kill performance
@@ -307,20 +309,23 @@ protected:
 		return viewport.getViewportTextureBackend(this);
 	}
 	
-	//! Return the number of texture units (this is 1 if multitexturing is not supported).
-	virtual int getTextureUnitCount() = 0;
+	//! Return the number of texture units (implementation).
+	virtual int getTextureUnitCountBackend()  = 0;
 
 	//! Asserts that we're in a valid state.
 	//!
 	//! Overriding methods should also call StelGLRenderer::invariant().
+#ifndef NDEBUG
 	virtual void invariant() const
 	{
-#ifndef NDEBUG
 		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO,
 		           "An attempt to use a destroyed StelQGLRenderer.");
 		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "The GL context is invalid");
-#endif
 	}
+#else
+	// This should guarantee this gets optimized away in release builds.
+	void invariant() const{}
+#endif
 
 	//! Set up GL state common between the GL1 and GL2 backends before drawing.
 	void setupGLState(StelProjector* projector)
@@ -515,6 +520,9 @@ private:
 	//! Has currentFont been set since the intialization? (if not, the painter's default font will
 	//! be used when drawing text)
 	bool currentFontSet;
+
+	//! Number of texture units supported (1 if multitexturing is not supproted).
+	int textureUnitCount;
 
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect);

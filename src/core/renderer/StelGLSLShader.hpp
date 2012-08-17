@@ -27,12 +27,16 @@
 //! Can be used with Renderer backends that support GLSL, such 
 //! as the StelQGL2Renderer.
 //!
-//! A shader program can be created by adding a vertex and fragment shader 
-//! from source and then calling the build() member function.
+//! A shader program can be created by adding vertex and fragment shaders
+//! from source and then calling the build() member function. It can also 
+//! be modified by calling the unlock() member function and adding more 
+//! shaders, and even by disabling or reenabling them. Disabling/reenabling is 
+//! only supported for vertex shaders, but fragment shader functions can be 
+//! added when needed.
 //!
 //! There is currently no geometry shader support, but it can be added when needed.
 //!
-//! Uniform variables are set through the setUniformValue() member functions.
+//! Uniform variables are set through the setUniformValue() member function.
 //! Only most commonly used data types are supported, but it is easy to add 
 //! support for more types if needed. 
 //! Some uniform variables are specified internally and need to be declared 
@@ -42,8 +46,24 @@
 //! @li Global color (only specified if vertex has no color attribute): vec4 globalColor
 //!
 //!
-//! Attribute variables can't be set through the API - they are set internally 
+//! Vertex attributes can't be set through the API - they are set internally 
 //! from vertex buffer during drawing.
+//!
+//! Also, any shader that uses StelProjector projection (that is, any shader except 
+//! of those working with 2D data) must declare and call the "project()" function
+//! to project the vertex position. If vertex projection is done on the CPU, this is 
+//! a dummy function that simply returns its argument. If it's done on the GPU, it's
+//! done in this function.
+//!
+//! The project() function must be declared (but not defined), as follows:
+//! @code
+//! vec4 project(in vec4 v);
+//! @endcode
+//!
+//! Usage of the project() function:
+//! @code
+//! gl_Position = projectionMatrix * project(vertex);
+//! @endcode
 //!
 //! Attribute variable names match vertex attribute interpretations as follows:
 //!
@@ -68,11 +88,12 @@
 //! {
 //! 	StelGLSLShader* shader = renderer->createGLSLShader();
 //! 	if(!shader->addVertexShader(
+//! 	   "vec4 project(in vec4 v);\n"
 //! 	   "attribute mediump vec4 vertex;\n"
 //! 	   "uniform mediump mat4 projectionMatrix;\n"
 //! 	   "void main(void)\n"
 //! 	   "{\n"
-//! 	   "    gl_Position = projectionMatrix * vertex;\n"
+//! 	   "    gl_Position = projectionMatrix * project(vertex);\n"
 //! 	   "}\n"))
 //! 	{
 //! 		qWarning() << "Error adding vertex shader: " << shader->log();
@@ -131,8 +152,9 @@ public:
 	//!
 	//! This operation can fail. In case of failure, use log() to find out the cause.
 	//!
-	//! @param source GLSL source code of the fragment shader.
+	//! The shader must be unlocked when this is called.
 	//!
+	//! @param source GLSL source code of the fragment shader.
 	//! @return true if succesfully added and compiled, false otherwise.
 	virtual bool addVertexShader(const QString& source) = 0;
 	
@@ -140,17 +162,59 @@ public:
 	//!
 	//! This operation can fail. In case of failure, use log() to find out the cause.
 	//!
-	//! @param source GLSL source code of the fragment shader.
+	//! The shader must be unlocked when this is called.
 	//!
+	//! @param source GLSL source code of the fragment shader.
 	//! @return true if succesfully added and compiled, false otherwise.
 	virtual bool addFragmentShader(const QString& source) = 0;
 
+	//! Add a named (optional) vertex shader.
+	//!
+	//! Named vertex shaders can be disabled and reenabled.
+	//! (Unnamed shaders are always enabled.)
+	//! This allows to dynamically exchange implementations of functions, 
+	//! making shaders modular. GLSL projection is an example of this.
+	//!
+	//! The shader must be unlocked when this is called.
+	//!
+	//! @param name Name of the shader.
+	//! @param source Source code of the shader.
+	virtual bool addVertexShader(const QString& name, const QString& source) = 0;
+
+	//! Has a named vertex shader with specified name been added?
+	virtual bool hasVertexShader(const QString& name) const = 0;
+
+	//! Enable previously added named vertex shader.
+	//!
+	//! The shader must be unlocked when this is called.
+	//! 
+	//! @param name Name of the shader to enable.
+	virtual void enableVertexShader(const QString& name) = 0;
+
+	//! Disable previously added named vertex shader.
+	//!
+	//! The shader must be unlocked when this is called.
+	//! 
+	//! @param name Name of the shader to disable.
+	virtual void disableVertexShader(const QString& name) = 0;
+
 	//! Build the shader program.
+	//!
+	//! This must be called before the shader can be bound.
 	//!
 	//! This operation can fail. In case of failure, use log() to find out the cause.
 	//!
 	//! @return true if succesfully built, false otherwise.
 	virtual bool build() = 0;
+
+	//! Unlock the shader program.
+	//!
+	//! This allows to modify the shader, adding, enabling, disabling vertex/fragment shaders.
+	//!
+	//! This can be called even if the shader is bound (which is used 
+	//! for last-moment modifications, like GLSL projection in renderer backend),
+	//! but it must be rebuilt before drawing and releasing.
+	virtual void unlock() = 0;
 
 	//! Return a string containing the error log of the shader.
 	//!
@@ -160,7 +224,8 @@ public:
 
 	//! Bind the shader, using it for following draw calls.
 	//!
-	//! This must be called before setting any uniforms.
+	//! This must be called before setting uniforms.
+	//! The shader must be built when this is called.
 	//!
 	//! Note that the shader must be released after any draw calls using the shader
 	//! to allow any builtin default shaders to return to use.
@@ -187,7 +252,22 @@ public:
 	//!
 	//! float(float), Vec2f(vec2), Vec3f(vec3), Vec4f(vec4), Mat4f(mat4)
 	//!
+	//! The shader must be bound when this is called.
+	//!
+	//! @note Due to dynamic shader re-linking needed to support modular shaders,
+	//! the uniforms are cached internally and only uploaded at the draw call when 
+	//! the shader is used. Only a fixed amount of storage is used (currently 512 
+	//! bytes, which is enough for 8 4x4 matrices). Also only a fixed number of 
+	//! uniforms is supported (currently 32). Both of these limits can be increased 
+	//! if needed (see StelQGLGLSLShader). 
+	//! This storage is added to with each setUniformValue() call, and freed on a
+	//! call to release().
+	//!
 	//! @param name  Name of the uniform variable. Must match variable name in a shader source.
+	//!              For efficiency reasons, the name is not guaranteed to be copied 
+	//!              within the shader backend. Therefore, the name string must exist until a 
+	//!              call to release().
+	//!              (This is easiest to achieve by simply using string literals.)
 	//! @param value Value to set the variable to.
 	template<class T>
 	void setUniformValue(const char* const name, T value)
@@ -206,7 +286,6 @@ public:
 	virtual void useUnprojectedPositionAttribute() = 0;
 
 protected:
-
 	//! "Default" overload of setUniformValue() implementation.
 	//!
 	//! This is called for unsupported uniform types, and results in an error.

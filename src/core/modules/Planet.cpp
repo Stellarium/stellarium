@@ -48,6 +48,7 @@ static StelGLSLShader* loadPlanetShader(StelRenderer* renderer)
 {
 	StelGLSLShader* planetShader = renderer->createGLSLShader();
 	if(!planetShader->addVertexShader(
+	  "vec4 project(in vec4 v);\n"
 	  "attribute mediump vec4 vertex;\n"
 	  "attribute mediump vec4 unprojectedVertex;\n"
 	  "attribute mediump vec2 texCoord;\n"
@@ -61,7 +62,7 @@ static StelGLSLShader* loadPlanetShader(StelRenderer* renderer)
 	  "varying mediump vec4 litColor;\n"
 	  "void main(void)\n"
 	  "{\n"
-	  "    gl_Position = projectionMatrix * vertex;\n"
+	  "    gl_Position = projectionMatrix * project(vertex);\n"
 	  "    texc = texCoord;\n"
 	  "    // Must be a separate variable due to Intel drivers\n"
 	  "    vec4 normal = unprojectedVertex / radius;\n"
@@ -1045,33 +1046,27 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 	// Shader is NULL if it failed to load, in that case we need to do lighting on the CPU.
 	else if(renderer->isGLSLSupported() && NULL != shader)
 	{
-		if(renderer->isGLSLSupported())
-		{
-			shader->bind();
-			// provides the unprojectedVertex attribute to the shader.
-			shader->useUnprojectedPositionAttribute();
+		shader->bind();
+		// provides the unprojectedVertex attribute to the shader.
+		shader->useUnprojectedPositionAttribute();
 
-			Vec3d lightPos = Vec3d(light->position[0], light->position[1], light->position[2]);
-			projector->getModelViewTransform()
-			         ->getApproximateLinearTransfo()
-			         .transpose()
-			         .multiplyWithoutTranslation(Vec3d(lightPos[0], lightPos[1], lightPos[2]));
-			projector->getModelViewTransform()->backward(lightPos);
-			lightPos.normalize();
+		Vec3d lightPos = Vec3d(light->position[0], light->position[1], light->position[2]);
+		projector->getModelViewTransform()
+		         ->getApproximateLinearTransfo()
+		         .transpose()
+		         .multiplyWithoutTranslation(Vec3d(lightPos[0], lightPos[1], lightPos[2]));
+		projector->getModelViewTransform()->backward(lightPos);
+		lightPos.normalize();
 
-			shader->setUniformValue("lightPos"           , Vec3f(lightPos[0], lightPos[1] , lightPos[2]));
-			shader->setUniformValue("diffuseLight"       , light->diffuse);
-			shader->setUniformValue("ambientLight"       , light->ambient);
-			shader->setUniformValue("radius"             , static_cast<float>(radius * sphereScale));
-			shader->setUniformValue("oneMinusOblateness" , static_cast<float>(oneMinusOblateness));
-		}
+		shader->setUniformValue("lightPos"           , Vec3f(lightPos[0], lightPos[1] , lightPos[2]));
+		shader->setUniformValue("diffuseLight"       , light->diffuse);
+		shader->setUniformValue("ambientLight"       , light->ambient);
+		shader->setUniformValue("radius"             , static_cast<float>(radius * sphereScale));
+		shader->setUniformValue("oneMinusOblateness" , static_cast<float>(oneMinusOblateness));
 
 		drawUnlitSphere(renderer, projector);
 
-		if(renderer->isGLSLSupported())
-		{
-			shader->release();
-		}
+		shader->release();
 	}
 	// If shaders are not supported and we need lighting, we generate the sphere 
 	// with lighting baked into vertex colors.

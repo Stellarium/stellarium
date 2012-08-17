@@ -40,12 +40,14 @@ public:
 	//! Called by StelQGL2Renderer::drawVertexBufferBackend().
 	//!
 	//! @param renderer         Renderer that owns this buffer.
-	//! @param projectionMatrix Projection matrix (in Qt format) used for drawing.
+	//! @param projectionMatrix Projection matrix used for drawing.
 	//! @param indexBuffer      If NULL, all vertices in the buffer are drawn 
 	//!                         in the order they are stored.
 	//!                         If not NULL, specifies indices of vertices to draw.
-	void draw(class StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix,
-	          class StelQGLIndexBuffer* indexBuffer);
+	//! @param shader           Shader used for drawing, with any needed projection/transform 
+	//!                         shaders enabled.
+	void draw(class StelQGL2Renderer& renderer, const Mat4f& projectionMatrix,
+	          class StelQGLIndexBuffer* indexBuffer, StelQGLGLSLShader* shader);
 
 private:
 	//! Construct a StelQGL2ArrayVertexBufferBackend. Only StelQGL2Renderer can do this.
