@@ -48,8 +48,8 @@ public:
 	//! Must be called at least once after a call to draw(), as vertexGrid 
 	//! is lazily initialized at the first draw call.
 	void computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, StelCore* core,
-	                  float latitude = 45.f, float altitude = 200.f,
-	                  float temperature = 15.f, float relativeHumidity = 40.f);
+					  float eclipseFac, float latitude = 45.f, float altitude = 200.f,
+					  float temperature = 15.f, float relativeHumidity = 40.f);
 	void draw(StelCore* core, class StelRenderer* renderer);
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 

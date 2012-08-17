@@ -22,7 +22,8 @@
 
 
 int StelQGLGLSLShader::UNIFORM_SIZES[UniformType_max] =
-	{0, sizeof(float), sizeof(Vec2f), sizeof(Vec3f), sizeof(Vec4f), sizeof(Mat4f)};
+	{0, sizeof(float), sizeof(Vec2f), sizeof(Vec3f),
+	 sizeof(Vec4f), sizeof(Mat4f), sizeof(bool), sizeof(int)};
 
 StelQGLGLSLShader::StelQGLGLSLShader(StelQGL2Renderer* renderer, bool internal) 
 	: StelGLSLShader()

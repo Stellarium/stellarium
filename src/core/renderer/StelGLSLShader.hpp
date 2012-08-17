@@ -250,7 +250,7 @@ public:
 	//!
 	//! setUniformValue() supports these data types (GLSL type in parentheses):
 	//!
-	//! float(float), Vec2f(vec2), Vec3f(vec3), Vec4f(vec4), Mat4f(mat4)
+	//! bool(bool), int(int), float(float), Vec2f(vec2), Vec3f(vec3), Vec4f(vec4), Mat4f(mat4)
 	//!
 	//! The shader must be bound when this is called.
 	//!
@@ -297,8 +297,14 @@ protected:
 		//TODO C++11: use static assert here (for a compile-time error)
 		Q_ASSERT_X(false, Q_FUNC_INFO,
 		           "Unsupported uniform data type. "
-		           "Supported types: float, Vec2f, Vec3f, Vec4f, Mat4f");
+				   "Supported types: bool, int, float, Vec2f, Vec3f, Vec4f, Mat4f");
 	}
+
+	//! setUniformValue() implementation for type bool.
+	virtual void setUniformValue_(const char* const name, const bool value) = 0;
+
+	//! setUniformValue() implementation for type int.
+	virtual void setUniformValue_(const char* const name, const int value) = 0;
 
 	//! setUniformValue() implementation for type float.
 	virtual void setUniformValue_(const char* const name, const float value) = 0;

@@ -153,9 +153,15 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
+	//! Get whether solar shadows should be rendered.
+	bool getRenderSolarShadows() const;
+
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
+
+	//! Set flag for activating solar shadow rendering.
+	void setRenderSolarShadows(bool);
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
@@ -172,7 +178,7 @@ public slots:
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
-	
+
 signals:
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
@@ -232,6 +238,9 @@ private:
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
+
+	//! Define whether solar shadows should be rendered (using GLSL shaders)
+	bool renderSolarShadows;
 
 	QSettings* confSettings;
 

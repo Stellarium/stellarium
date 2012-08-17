@@ -71,7 +71,7 @@ private:
 		//! Avoids bugs that might be caused by interpreting zeroed data
 		//! valid values, detecting the error.
 		UniformType_none  = 0,
-		//! 32 bit float. Float in both C++ and GLSL.
+		//! 32 bit float. float in both C++ and GLSL.
 		UniformType_float = 1,
 		//! 2D float vector. Vec2f in Stellarium, vec2 in GLSL.
 		UniformType_vec2  = 2,
@@ -81,8 +81,12 @@ private:
 		UniformType_vec4  = 4,
 		//! 4x4 float matrix. Mat4f in Stellarium, mat4 in GLSL.
 		UniformType_mat4  = 5,
+		//! Boolean. bool in both C++ and GLSL.
+		UniformType_bool  = 6,
+		//! 32 bit integer. int in both C++ and GLSL.
+		UniformType_int   = 7,
 		//! Higher than all other values. Used for UNIFORM_SIZES array size.
-		UniformType_max   = 6
+		UniformType_max   = 8
 	};
 
 	//! Storage allocated for uniforms in bytes. Increase this if needed.
@@ -246,6 +250,18 @@ public:
 					program->setUniformValue(uniformNames[u], m);
 					break;
 				}
+				case UniformType_bool:
+				{
+					const bool& value(*reinterpret_cast<const bool* const>(data));
+					program->setUniformValue(uniformNames[u], value);
+					break;
+				}
+				case UniformType_int:
+				{
+					const int& value(*reinterpret_cast<const int* const>(data));
+					program->setUniformValue(uniformNames[u], value);
+					break;
+				}
 				default:
 					Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown or invalid uniform type");
 			}
@@ -393,7 +409,7 @@ protected:
 	//! Number of uniforms in uniformStorage at this moment.
 	int uniformCount;
 
-	//! Stack uf uniformStorageUsed values used with pushUniformStorage/popUniformStorage.
+	//! Stack of uniformStorageUsed values used with pushUniformStorage/popUniformStorage.
 	//!
 	//! @see pushUniformStorage, popUniformStorage
 	unsigned char uniformStorageUsedStack[MAX_UNIFORMS];
@@ -473,6 +489,34 @@ protected:
 		uniformTypes[uniformCount] = UniformType_mat4;
 		++uniformCount;
 		uniformStorageUsed += sizeof(Mat4f);
+	}
+
+	virtual void setUniformValue_(const char* const name, const bool value)
+	{
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(bool)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*reinterpret_cast<bool*>(uniformStorage + uniformStorageUsed) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_bool;
+		++uniformCount;
+		uniformStorageUsed += sizeof(bool);
+	}
+
+	virtual void setUniformValue_(const char* const name, const int value)
+	{
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(int)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*reinterpret_cast<int*>(uniformStorage + uniformStorageUsed) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_int;
+		++uniformCount;
+		uniformStorageUsed += sizeof(int);
 	}
 
 private:
