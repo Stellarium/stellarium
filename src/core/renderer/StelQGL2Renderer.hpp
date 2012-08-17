@@ -47,7 +47,6 @@ public:
 		, initialized(false)
 		, builtinShaders()
 		, customShader(NULL)
-		, textureUnitCount(-1)
 	{
 	}
 	
@@ -139,11 +138,12 @@ public:
 		(
 			"plainShader"
 			,
+			"vec4 project(in vec4 v);\n"
 			"attribute mediump vec4 vertex;\n"
 			"uniform mediump mat4 projectionMatrix;\n"
 			"void main(void)\n"
 			"{\n"
-			"    gl_Position = projectionMatrix * vertex;\n"
+			"    gl_Position = projectionMatrix * project(vertex);\n"
 			"}\n"
 			,
 			"uniform mediump vec4 globalColor;\n"
@@ -164,6 +164,7 @@ public:
 		(
 			"colorShader"
 			,
+			"vec4 project(in vec4 v);\n"
 			"attribute highp vec4 vertex;\n"
 			"attribute mediump vec4 color;\n"
 			"uniform mediump mat4 projectionMatrix;\n"
@@ -171,7 +172,7 @@ public:
 			"void main(void)\n"
 			"{\n"
 			"    outColor = color;\n"
-			"    gl_Position = projectionMatrix * vertex;\n"
+			"    gl_Position = projectionMatrix * project(vertex);\n"
 			"}\n"
 			,
 			"varying mediump vec4 outColor;\n"
@@ -192,13 +193,14 @@ public:
 		(
 			"textureShader"
 			,
+			"vec4 project(in vec4 v);\n"
 			"attribute highp vec4 vertex;\n"
 			"attribute mediump vec2 texCoord;\n"
 			"uniform mediump mat4 projectionMatrix;\n"
 			"varying mediump vec2 texc;\n"
 			"void main(void)\n"
 			"{\n"
-			"    gl_Position = projectionMatrix * vertex;\n"
+			"    gl_Position = projectionMatrix * project(vertex);\n"
 			"    texc = texCoord;\n"
 			"}\n"
 			,
@@ -222,6 +224,7 @@ public:
 		(
 			"colorTextureShader"
 			,
+			"vec4 project(in vec4 v);\n"
 			"attribute highp vec4 vertex;\n"
 			"attribute mediump vec2 texCoord;\n"
 			"attribute mediump vec4 color;\n"
@@ -230,7 +233,7 @@ public:
 			"varying mediump vec4 outColor;\n"
 			"void main(void)\n"
 			"{\n"
-			"    gl_Position = projectionMatrix * vertex;\n"
+			"    gl_Position = projectionMatrix * project(vertex);\n"
 			"    texc = texCoord;\n"
 			"    outColor = color;\n"
 			"}\n"
@@ -278,7 +281,7 @@ public:
 
 	virtual StelGLSLShader* createGLSLShader()
 	{
-		return new StelQGLGLSLShader(this);
+		return new StelQGLGLSLShader(this, false);
 	}
 
 	virtual bool isGLSLSupported() const {return true;}
@@ -404,6 +407,14 @@ protected:
 			           "backend or uninitialized");
 		}
 
+		// We don't own this - we just have a pointer to it.
+		StelProjector::GLSLProjector* glslProjector = NULL;
+		StelQGLGLSLShader* shader = 
+			getShader(backend->attributes.attributes, backend->attributes.count);
+
+		// Internal shader can't be bound by the user so we bind/release it here.
+		if(NULL == customShader) {shader->bind();}
+
 		if(NULL == projector)
 		{
 			projector = &(*(StelApp::getInstance().getCore()->getProjection2d()));
@@ -411,51 +422,72 @@ protected:
 		// XXX: we should use a more generic way to test whether or not to do the projection.
 		else if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector)))
 		{
-			backend->projectVertices(projector, glIndexBuffer);
+			// Try to do projection in GLSL, use projectVertices() as fallback.
+			glslProjector = projector->getGLSLProjector();
+			if(NULL == glslProjector || !glslProjector->init(shader))
+			{
+				backend->projectVertices(projector, glIndexBuffer);
+				glslProjector = NULL;
+			}
 		}
 		
+		if(!shader->getProgram().bind())
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to bind shader program");
+		}
+		if(NULL != glslProjector)
+		{
+			shader->pushUniformStorage();
+			glslProjector->preDraw(shader);
+		}
+
 		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
 		// are called, we only set it before drawing and reset after drawing to avoid 
 		setupGLState(projector);
 
-		// Need to transpose the matrix for GL.
-		const Mat4f& m = projector->getProjectionMatrix();
-		const QMatrix4x4 transposed(m[0], m[4], m[8], m[12],
-		                            m[1], m[5], m[9], m[13], 
-		                            m[2], m[6], m[10], m[14], 
-		                            m[3], m[7], m[11], m[15]);
+		// Need to transpose the matrix for QGL.
+		const Mat4f& projectionMatrix = projector->getProjectionMatrix();
+
+		// We might relink the shaders here, so we can only upload uniforms after the relinking.
+		shader->uploadUniforms();
 
 		// Set up viewport for the projector.
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
-		backend->draw(*this, transposed, glIndexBuffer);
+		backend->draw(*this, projectionMatrix, glIndexBuffer, shader);
 
 		// Restore default state to avoid interfering with Qt OpenGL drawing.
 		restoreGLState(projector);
 
-		invariant();
-	}
+		shader->getProgram().release();
 
-	virtual int getTextureUnitCount() 
-	{
-		invariant();
-		if(textureUnitCount < 0)
+		if(NULL != glslProjector)
 		{
-			// GL1 version should use GL_MAX_TEXTURE_UNITS instead.
-			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &textureUnitCount);
-			textureUnitCount = std::max(textureUnitCount, STELQGLRENDERER_MAX_TEXTURE_UNITS);
+			shader->popUniformStorage();
+			glslProjector->postDraw(shader);
 		}
+
+		if(NULL == customShader) {shader->release();}
+
 		invariant();
-		return textureUnitCount;
 	}
 
+	virtual int getTextureUnitCountBackend() 
+	{
+		// Called at initialization, so can't call invariant
+		int textureUnitCount;
+		// GL1 version should use GL_MAX_TEXTURE_UNITS instead.
+		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &textureUnitCount);
+		return std::max(textureUnitCount, STELQGLRENDERER_MAX_TEXTURE_UNITS);
+	}
+
+#ifndef NDEBUG
 	virtual void invariant() const
 	{
-#ifndef NDEBUG
 		Q_ASSERT_X(initialized, Q_FUNC_INFO, "uninitialized StelQGL2Renderer");
 		StelQGLRenderer::invariant();
-#endif
 	}
+#endif
 	
 private:
 	//! Is the renderer initialized?
@@ -479,9 +511,6 @@ private:
 	//!
 	//! If not NULL, overrides builtin vertex format specific shader programs.
 	StelQGLGLSLShader* customShader;
-
-	//! Number of texture units. Lazily initialized by getTextureUnitCount().
-	GLint textureUnitCount;
 	
 	//Note:
 	//We don't keep handles to shader variable locations.
@@ -502,7 +531,8 @@ private:
 	{
 		// No invariants, as this is called from init - before the Renderer is
 		// in fully valid state.
-		StelQGLGLSLShader* result = dynamic_cast<StelQGLGLSLShader*>(createGLSLShader());
+		StelQGLGLSLShader* result = 
+			dynamic_cast<StelQGLGLSLShader*>(new StelQGLGLSLShader(this, true));
 		
 		// Compile and add vertex shader.
 		if(!result->addVertexShader(QString(vSrc)))

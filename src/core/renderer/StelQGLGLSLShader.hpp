@@ -20,49 +20,159 @@
 #ifndef _STELQGLGLSLSHADER_HPP_
 #define _STELQGLGLSLSHADER_HPP_
 
+#include <QGLShader>
 #include <QGLShaderProgram>
+#include <QMap>
 #include <QtOpenGL>
 
 #include "StelGLSLShader.hpp"
+#include "StelGLUtilityFunctions.hpp"
 
+
+//! Used to allow pointer casts to/from 2D float array for matrix uniform storage/upload.
+typedef float RAW_GL_MATRIX [4][4];
 
 //! QGL based StelGLSLShader implementation, used by the QGL2 renderer backend.
 class StelQGLGLSLShader : public StelGLSLShader
 {
+private:
+	//! Simple struct that adds an "enabled" flag to a shader.
+	struct OptionalShader
+	{
+		//! Is the shader enabled?
+		bool enabled;
+		//! Optional shader.
+		QGLShader* shader;
+	};
+
+	//! Possible states the shader can be found in.
+	enum State
+	{
+		//! The shader program can be modified by adding/enabling/disabling vertex/fragment shaders.
+		//!
+		//! Adding/enabling/disabling a shader will result in the Modified state.
+		//! A successful call to build() will result in the Built state.
+		State_Unlocked,
+		//! The shader has been modified since the last call to build(), 
+		//! which means the next build() call might need to re-link or use a previously
+		//! linked shader program from cache.
+		//! A successful call to build() will result in the Built state.
+		State_Modified,
+		//! The shader has been succesfully built and can't be modified unless unlock() is
+		//! called, but can be bound. A call to unlock() results in Unlocked state.
+		State_Built,
+	};
+
+	//! Enumerates supported uniform data types.
+	enum UniformType
+	{
+		//! Never used.
+		//!
+		//! Avoids bugs that might be caused by interpreting zeroed data
+		//! valid values, detecting the error.
+		UniformType_none  = 0,
+		//! 32 bit float. Float in both C++ and GLSL.
+		UniformType_float = 1,
+		//! 2D float vector. Vec2f in Stellarium, vec2 in GLSL.
+		UniformType_vec2  = 2,
+		//! 3D float vector. Vec3f in Stellarium, vec3 in GLSL.
+		UniformType_vec3  = 3,
+		//! 4D float vector. Vec4f in Stellarium, vec4 in GLSL.
+		UniformType_vec4  = 4,
+		//! 4x4 float matrix. Mat4f in Stellarium, mat4 in GLSL.
+		UniformType_mat4  = 5,
+		//! Higher than all other values. Used for UNIFORM_SIZES array size.
+		UniformType_max   = 6
+	};
+
+	//! Storage allocated for uniforms in bytes. Increase this if needed.
+	//!
+	//! This is enough for 8 Mat4f, or 32 Vec4f.
+	static const int UNIFORM_STORAGE = 512;
+
+	//! Maximum uniform count. Increase this if needed.
+	static const int MAX_UNIFORMS = 32;
+
+	//! Sizes of uniform data types, indexed by UniformType.
+	//!
+	//! Used for iteration of uniforms stored in uniformStorage.
+	static int UNIFORM_SIZES[UniformType_max];
+
 public:
 	//! Construct a StelQGLGLSLShader owned by specified renderer.
 	//!
 	//! Used by QGL2 renderer backend.
-	StelQGLGLSLShader(class StelQGL2Renderer* renderer);
+	//!
+	//! @param renderer Renderer that created this shader.
+	//! @param internal Is this shader internal to the renderer backend?
+	//!                 (Not directly used by the user)
+	StelQGLGLSLShader(class StelQGL2Renderer* renderer, bool internal);
 
 	virtual ~StelQGLGLSLShader()
 	{
-		Q_ASSERT_X(!bound, Q_FUNC_INFO, "Forgot to release() a bound shader before destroying");
+		Q_ASSERT_X(!bound, Q_FUNC_INFO,
+		           "Forgot to release() a bound shader before destroying");
+		foreach(QGLShader* shader, defaultVertexShaders)  {delete shader;}
+		foreach(OptionalShader shader, namedVertexShaders){delete shader.shader;}
+		foreach(QGLShader* shader, defaultFragmentShaders){delete shader;}
+		foreach(QGLShaderProgram* program, programCache)  {delete program;}
 	}
 
-	virtual bool addVertexShader(const QString& source)
-	{
-		Q_ASSERT_X(!built, Q_FUNC_INFO, 
-		           "Can't add a vertex shader after the shader has been built");
-		return program.addShaderFromSourceCode(QGLShader::Vertex, source);
-	}
+	virtual bool addVertexShader(const QString& source);
 	
-	virtual bool addFragmentShader(const QString& source)
-	{
-		Q_ASSERT_X(!built, Q_FUNC_INFO, 
-		           "Can't add a fragment shader after the shader has been built");
-		return program.addShaderFromSourceCode(QGLShader::Fragment, source);
-	}
+	virtual bool addFragmentShader(const QString& source);
 
-	virtual bool build()
-	{
-		built = true;
-		return program.link();
-	}
+	virtual bool build();
 
 	virtual QString log() const
 	{
-		return program.log();
+		return aggregatedLog + ((NULL == program) ? QString() : program->log());
+	}
+
+	virtual void unlock()
+	{
+		switch(state)
+		{
+			case State_Unlocked:
+			case State_Modified:
+				return;
+			case State_Built:
+				state = State_Unlocked;
+				return;
+		}
+	}
+
+	virtual bool addVertexShader(const QString& name, const QString& source);
+
+	virtual bool hasVertexShader(const QString& name) const
+	{
+		return namedVertexShaders.contains(name);
+	}
+
+	virtual void enableVertexShader(const QString& name)
+	{
+		Q_ASSERT_X(namedVertexShaders.contains(name), Q_FUNC_INFO, 
+		           "Trying to enable a vertex shader with an unknown name");
+		Q_ASSERT_X(state == State_Unlocked || state == State_Modified, Q_FUNC_INFO, 
+		           "Can't enable a vertex shader after the shader has been built");
+
+		OptionalShader& shader(namedVertexShaders[name]);
+		if(shader.enabled) {return;}
+		shader.enabled = true;
+		state = State_Modified;
+	}
+
+	virtual void disableVertexShader(const QString& name)
+	{
+		Q_ASSERT_X(namedVertexShaders.contains(name), Q_FUNC_INFO, 
+		           "Trying to disable a vertex shader with an unknown name");
+		Q_ASSERT_X(state == State_Unlocked || state == State_Modified, Q_FUNC_INFO, 
+		           "Can't disable a vertex shader after the shader has been built");
+
+		OptionalShader& shader(namedVertexShaders[name]);
+		if(!shader.enabled) {return;}
+		shader.enabled = false;
+		state = State_Modified;
 	}
 
 	virtual void bind();
@@ -79,8 +189,9 @@ public:
 	//! Used by QGL2 renderer backend.
 	QGLShaderProgram& getProgram()
 	{
-		Q_ASSERT_X(built, Q_FUNC_INFO, "Trying to use a non-built shader for drawing");
-		return program;
+		Q_ASSERT_X(bound && state == State_Built,
+		           Q_FUNC_INFO, "Trying to use an unbound shader for drawing");
+		return *program;
 	}
 
 	//! Does this vertex need the unprojected vertex position attribute?
@@ -91,66 +202,293 @@ public:
 		return useUnprojectedPosition_;
 	}
 
+	//! Upload the stored uniform variables.
+	//!
+	//! Called when the internally used shader program has been bound, before drawing,
+	//! by the drawVertexBufferBackend() member function of the renderer backend.
+	void uploadUniforms()
+	{
+		Q_ASSERT_X(bound && state == State_Built, Q_FUNC_INFO, 
+		           "uploadUniforms called on a shader that is not bound");
+		const unsigned char* data = uniformStorage;
+		for (int u = 0; u < uniformCount; u++) 
+		{
+			const UniformType type = static_cast<UniformType>(uniformTypes[u]);
+			switch(type)
+			{
+				case UniformType_float:
+				{
+					const float& value(*reinterpret_cast<const float* const>(data));
+					program->setUniformValue(uniformNames[u], value);
+					break;
+				}
+				case UniformType_vec2:
+				{
+					const Vec2f& v(*reinterpret_cast<const Vec2f* const>(data));
+					program->setUniformValue(uniformNames[u], v[0], v[1]);
+					break;
+				}
+				case UniformType_vec3:
+				{
+					const Vec3f& v(*reinterpret_cast<const Vec3f* const>(data));
+					program->setUniformValue(uniformNames[u], v[0], v[1], v[2]);
+					break;
+				}
+				case UniformType_vec4:
+				{
+					const Vec4f& v(*reinterpret_cast<const Vec4f* const>(data));
+					program->setUniformValue(uniformNames[u], v[0], v[1], v[2], v[3]);
+					break;
+				}
+				case UniformType_mat4:
+				{
+					const RAW_GL_MATRIX& m(*reinterpret_cast<const RAW_GL_MATRIX* const>(data));
+					program->setUniformValue(uniformNames[u], m);
+					break;
+				}
+				default:
+					Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown or invalid uniform type");
+			}
+			data += UNIFORM_SIZES[type];
+		}
+	}
+
+	//! Push uniform storage state.
+	//!
+	//! This is an optimization used internally by the renderer backend.
+	//! This "saves" the state of uniform storage, allowing to "restore" it 
+	//! by calling popUniformStorage(). This prevents the internal uniform-setting 
+	//! in repeated draw calls from filling the entire uniform storage.
+	//!
+	//! How this works:
+	//!
+	//! Setting uniforms just appends new data to uniform storage; setting the 
+	//! same uniform multiple times just continues to use new data (determining 
+	//! if a uniform with this name was set already would be expensive).
+	//!
+	//! pushUniformStorage() simply poshes the number of uniforms and used storage to 
+	//! an internal stack.
+	//! popUniformStorage() restores this state, throwing away any uniforms set since 
+	//! the push.
+	void pushUniformStorage()
+	{
+		Q_ASSERT_X(bound && state == State_Built, Q_FUNC_INFO,
+		           "pushUniformStorage() called when the shader is not bound");
+		Q_ASSERT_X(uniformStorageStackSize < MAX_UNIFORMS - 1, Q_FUNC_INFO,
+		           "Too many uniform storage stack pushes");
+		uniformStorageUsedStack[uniformStorageStackSize] = uniformStorageUsed;
+		uniformCountStack[uniformStorageStackSize]       = uniformCount;
+		++uniformStorageStackSize;
+	}
+
+	//! Restores pushed uniform storage stage.
+	//!
+	//! @see pushUniformStorage
+	void popUniformStorage()
+	{
+		Q_ASSERT_X(bound && state == State_Built, Q_FUNC_INFO,
+		           "popUniformStorage() called when the shader is not bound");
+		Q_ASSERT_X(uniformStorageStackSize >= 1, Q_FUNC_INFO,
+		           "Too many uniform storage stack pops (nothing left to pop)");
+		--uniformStorageStackSize;
+		uniformStorageUsed = uniformStorageUsedStack[uniformStorageStackSize];
+		uniformCount       = uniformCountStack[uniformStorageStackSize];
+	}
+
+	//! Clear all stored uniforms.
+	//!
+	//! Called by release().
+	void clearUniforms()
+	{
+		Q_ASSERT_X(bound && state == State_Built, Q_FUNC_INFO,
+		           "clearUniforms() called when the shader is not bound");
+		// We don't zero out the storage - we'll overwrite it as we add new uniforms.
+		uniformStorageUsed = uniformCount = uniformStorageStackSize = 0;
+	}
+
 protected:
 	//! Renderer owning this shader.
 	class StelQGL2Renderer* renderer;
 
-	//! Shader program.
-	QGLShaderProgram program;
+	//! Vertex shaders that are always linked in (added by the nameless addVertexShader() overload).
+	QVector<QGLShader*> defaultVertexShaders;
 
-	//! Is the shader currently bound?
+	//! Optional vertex shaders that may be enabled or disabled.
+	QMap<QString, OptionalShader> namedVertexShaders;
+
+	// There are no namedFragmentShaders, but they can be added if/when needed.
+	//! Vertex shaders that are always linked in (added by the nameless addFragmentShader() overload).
+	QVector<QGLShader*> defaultFragmentShaders;
+
+	//! All shader programs linked so far.
 	//!
-	//! true between a bind() and release() call. 
-	bool bound;
+	//! When build() is called, the default and currently enabled optional shaders 
+	//! are linked to a shader program. As re-linking shaders on each frame would 
+	//! be too expensive, any shader combination is only linked once and then retrieved 
+	//! from this cache.
+	//!
+	//! build() is called for each draw call (due to modular shaders being used for vertex 
+	//! projection), so the lookup also has to be very fast.
+	//! The ID used for lookup - a 64 bit unsigned integer, is currently a sum of
+	//! pointers of all shaders linked in the program.
+	//!
+	//! It is not impossible for false positives to happen, but it's very unlikely. 
+	//! 64bit is not going to overflow any soon (you need 16EiB address space for that),
+	//! and as shaders are never deleted or moved in memory, one can't have the same 
+	//! poiner as another. Then only risk is that two sets of pointers will accidentally
+	//! add up to the same number, but this is very unlikely as well.
+	//!
+	//! In case this happens, some very simple hash algorithm (still on pointers) might 
+	//! be used instead.
+	QMap<ulong, QGLShaderProgram*> programCache;
 
-	//! Has the shader been built?
-	bool built;
+	//! Currently used shader program (linked from default and currently enabled shaders).
+	QGLShaderProgram* program;
+
+	//! Log aggregated during all addXXXShader() and build() calls.
+	//!
+	//! May be aggregated from multiple vertex programs if we were built with 
+	//! different shaders enabled.
+	QString aggregatedLog;
+
+	//! Current state of the shader.
+	State state;
+
+	//! Is the shader bound for drawing?
+	bool bound;
 
 	//! Does this shader need the "unprojectedVertex" attribute (position before StelProjector
 	//! projection) ?
 	bool useUnprojectedPosition_;
 
+	//! Is this an internal shader used by the renderer backend?
+	//!
+	//! Needed to avoing bind/release from calling renderer backend custom shader bind/release.
+	const bool internal;
+
+	//! Storage used for uniform data.
+	//!
+	//! As we're liking shaders dynamically and the final shader program is only
+	//! bound directly before drawing, we need to delay uniform setting until that 
+	//! point. Therefore, setUniformValue_ functions just add data to this storage.
+	//! The data is then uploaded by uploadUniforms().
+	//!
+	//! @see uploadUniforms, clearUniforms, pushUniformStorage
+	unsigned char uniformStorage [UNIFORM_STORAGE];
+
+	//! Types of consecutive uniforms in uniformStorage.
+	//!
+	//! Needed to interpret uniformStorage data when uploading.
+	unsigned char uniformTypes [MAX_UNIFORMS];   
+
+	//! Names of consecutive uniforms in uniformStorage.
+	//!
+	//! We don't own these strings, we just have pointers to them.
+	//! This means the user code needs to preserve the string until release() is called.
+	const char* uniformNames [MAX_UNIFORMS];
+
+	//! Bytes in uniformStorage used up at this moment.
+	int uniformStorageUsed;
+
+	//! Number of uniforms in uniformStorage at this moment.
+	int uniformCount;
+
+	//! Stack uf uniformStorageUsed values used with pushUniformStorage/popUniformStorage.
+	//!
+	//! @see pushUniformStorage, popUniformStorage
+	unsigned char uniformStorageUsedStack[MAX_UNIFORMS];
+
+	//! Stack uf uniformCount values used with pushUniformStorage/popUniformStorage.
+	//!
+	//! @see pushUniformStorage, popUniformStorage
+	unsigned char uniformCountStack[MAX_UNIFORMS];
+
+	//! Number of items in uniformStorageUsedStack and uniformCountStack.
+	int uniformStorageStackSize;
+
 	virtual void setUniformValue_(const char* const name, const float value)
 	{
-		Q_ASSERT_X(built, Q_FUNC_INFO, 
-		           "Trying to set a uniform value with a non-built shader");
-		program.setUniformValue(name, value);
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(float)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*reinterpret_cast<float*>(uniformStorage + uniformStorageUsed) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount++] = UniformType_float;
+		uniformStorageUsed += sizeof(float);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec2f value)
 	{
-		Q_ASSERT_X(built, Q_FUNC_INFO, 
-		           "Trying to set a uniform value with a non-built shader");
-		program.setUniformValue(name, value[0], value[1]);
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec2f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*reinterpret_cast<Vec2f*>(uniformStorage + uniformStorageUsed) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_vec2;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Vec2f);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec3f& value)
 	{
-		Q_ASSERT_X(built, Q_FUNC_INFO, 
-		           "Trying to set a uniform value with a non-built shader");
-		program.setUniformValue(name, value[0], value[1], value[2]);
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec3f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*reinterpret_cast<Vec3f*>(uniformStorage + uniformStorageUsed) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_vec3;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Vec3f);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec4f& value)
 	{
-		Q_ASSERT_X(built, Q_FUNC_INFO, 
-		           "Trying to set a uniform value with a non-built shader");
-		program.setUniformValue(name, value[0], value[1], value[2], value[3]);
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		*reinterpret_cast<Vec4f*>(uniformStorage + uniformStorageUsed) = value;
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_vec4;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Vec4f);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Mat4f& m)
 	{
-		Q_ASSERT_X(built, Q_FUNC_INFO, 
-		           "Trying to set a uniform value with a non-built shader");
-		const QMatrix4x4 transposed
-			(m[0], m[4], m[8],  m[12],
-			 m[1], m[5], m[9],  m[13],
-			 m[2], m[6], m[10], m[14],
-			 m[3], m[7], m[11], m[15]);
-		program.setUniformValue(name, transposed);
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Mat4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*reinterpret_cast<Mat4f*>(uniformStorage + uniformStorageUsed) = m;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_mat4;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Mat4f);
 	}
+
+private:
+	//! Get the vertex program matching currently enabled shaders from cache.
+	//!
+	//! If there is no matching program, return NULL.
+	//!
+	//! @see programCache
+	QGLShaderProgram* getProgramFromCache();
+
+	//! Code shared between addVertexShader overloads.
+	//!
+	//! Tries to create and compile a vertex shader from source.
+	//!
+	//! @return compiled shader on success, NULL on failure.
+	QGLShader* createVertexShader(const QString& source);
 };
-
-
 
 #endif // _STELQGLGLSLSHADER_HPP_

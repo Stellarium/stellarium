@@ -242,12 +242,6 @@ float StelProjector::getFov() const {
 	return 360.f/M_PI*viewScalingFactorToFov(0.5f*viewportFovDiameter/pixelPerRad);
 }
 
-//! Get whether front faces need to be oriented in the clockwise direction
-bool StelProjector::flipFrontBackFace() const
-{
-	return (flipHorz*flipVert < 0.f);
-}
-
 bool StelProjector::checkInViewport(const Vec3d& pos) const
 {
 	return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
@@ -455,12 +449,6 @@ bool StelProjector::projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& 
 StelProjector::ModelViewTranformP StelProjector::getModelViewTransform() const
 {
 	return modelViewTransform;
-}
-
-//! Get the current projection matrix.
-Mat4f StelProjector::getProjectionMatrix() const
-{
-	return Mat4f(2.f/viewportXywh[2], 0, 0, 0, 0, 2.f/viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);
 }
 
 StelProjector::StelProjectorMaskType StelProjector::getMaskType(void) const
