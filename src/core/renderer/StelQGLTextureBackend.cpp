@@ -340,7 +340,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	}
 
 	// Flushes any previous errors.
-	checkGLErrors();
+	checkGLErrors("fromRawData() before texture data upload");
 	// Upload the texture
 	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.width(), size.height(), 0,
 	             loadFormat, type, data);

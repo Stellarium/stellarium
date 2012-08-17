@@ -61,6 +61,11 @@ void enableAttribute(QGLShaderProgram& program, int& handleOut,
 	if(handle == -1)
 	{
 		qDebug() << "Missing vertex attribute: " << name;
+		foreach(QGLShader* shader, program.shaders())
+		{
+			qDebug() << "Source of a shader linked in the program: ";
+			qDebug() << shader->sourceCode();
+		}
 		Q_ASSERT_X(false, Q_FUNC_INFO,
 		           "Vertex attribute required for current vertex format is not in the GLSL shader");
 	}
@@ -73,20 +78,14 @@ void enableAttribute(QGLShaderProgram& program, int& handleOut,
 }
 
 void StelQGL2ArrayVertexBufferBackend::
-	draw(StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix,
-	     StelQGLIndexBuffer* indexBuffer)
+	draw(StelQGL2Renderer& renderer, const Mat4f& projectionMatrix,
+	     StelQGLIndexBuffer* indexBuffer, StelQGLGLSLShader* shader)
 {
 	Q_ASSERT_X(locked, Q_FUNC_INFO,
 	           "Trying to draw a vertex buffer that is not locked.");
 
-	StelQGLGLSLShader* shader = 
-		renderer.getShader(attributes.attributes, attributes.count);
 	// Get shader for our format from the renderer.
 	QGLShaderProgram& program = shader->getProgram();
-	if(!program.bind())
-	{
-		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to bind shader program");
-	}
 	
 	int enabledAttributes [MAX_VERTEX_ATTRIBUTES];
 
@@ -104,46 +103,51 @@ void StelQGL2ArrayVertexBufferBackend::
 		{
 			usingVertexColors = true;
 		}
-		else if(attribute.interpretation == AttributeInterpretation_Position &&
-		        usingProjectedPositions)
+
+		const bool position = (attribute.interpretation == AttributeInterpretation_Position);
+		const void* attributeData = buffers[attrib]->constData();
+	
+		// Some shaders (e.g. lighting) need unprojected vertex positions. Vertex 
+		// positions can be projected on the CPU or GPU. If they are projected on the
+		// GPU, the shader already has the unprojected vertex (the default position 
+		// attribute), but we'd need two versions of each shader: One for CPU 
+		// projection (need "unprojectedVertex"), and one for GPU ("vertex" is enough).
+		// So we just pass unprojectedVertex in both cases.
+		if(position && shader->useUnprojectedPosition())
 		{
-			// Using projected positions, use projectedPositions vertex array.
-			enableAttribute(program, enabledAttributes[totalAttributes], 
-			                attribute, projectedPositions.constData());
-
-			// Special case when using unprojected position.
-			if(shader->useUnprojectedPosition())
+			const int handle = program.attributeLocation("unprojectedVertex");
+			if(handle == -1)
 			{
-				++totalAttributes;
-				const char* const name = "unprojectedVertex";
-				const int handle = program.attributeLocation(name);
-				if(handle == -1)
-				{
-					qDebug() << "Missing vertex attribute: " << name;
-					Q_ASSERT_X(false, Q_FUNC_INFO,
-					           "Unprojected position vertex attribute is used, but not present in the GLSL shader");
-				}
-				program.setAttributeArray(handle, glAttributeType(attribute.type), 
-				                          buffers[attrib]->constData(), attributeDimensions(attribute.type));
-				program.enableAttributeArray(handle);
-				enabledAttributes[totalAttributes] = handle;
+				qDebug() << "Missing vertex attribute: unprojectedVertex";
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unprojected position vertex attribute is "
+				                               "enabled, but not present in the GLSL shader");
 			}
-
-			// Projected positions are used within a single renderer drawVertexBufferBackend
-			// call - we set this so any further calls with this buffer won't accidentally 
-			// use projected data from before (we don't destroy the buffer so we can 
-			// reuse it).
-			usingProjectedPositions = false;
-			continue;
+			program.setAttributeArray(handle, glAttributeType(attribute.type), 
+			                          attributeData, attributeDimensions(attribute.type));
+			program.enableAttributeArray(handle);
+			enabledAttributes[totalAttributes] = handle;
+			++totalAttributes;
 		}
 
-		// Not a position attribute, or not using projected positions, 
-		// so use the normal vertex array.
-		enableAttribute(program, enabledAttributes[totalAttributes], attribute, 
-		                buffers[attrib]->constData());
+		// If we're projecting vertices on the CPU, we pass them here.
+		// (CPU-projected vertices are stored in a separate array - projectedPositions)
+		if(position && usingProjectedPositions)
+		{
+			// Projected positions are valid for a single renderer drawVertexBufferBackend
+			// call - we set this so further draws won't accidentally use projected data 
+			// from before (we don't destroy the buffer so we can reuse it).
+			usingProjectedPositions = false;
+
+			// Using projected positions, use projectedPositions vertex array.
+			attributeData = projectedPositions.constData();
+		}
+
+		enableAttribute(program, enabledAttributes[totalAttributes], attribute, attributeData);
 	}
 
-	program.setUniformValue("projectionMatrix", projectionMatrix);
+	const RAW_GL_MATRIX& glProjectionMatrix
+		(*reinterpret_cast<const RAW_GL_MATRIX* const>(&projectionMatrix));
+	program.setUniformValue("projectionMatrix", glProjectionMatrix);
 
 	// If we don't have a color per vertex, we have a global color
 	// (to keep in line with Stellarium behavior before the GL refactor)
@@ -168,6 +172,4 @@ void StelQGL2ArrayVertexBufferBackend::
 	{
 		program.disableAttributeArray(enabledAttributes[attribute]);
 	}
-
-	program.release();
 }
