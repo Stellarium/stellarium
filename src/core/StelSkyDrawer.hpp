@@ -74,6 +74,9 @@ public:
 
 	bool drawPointSource(StelProjectorP projector, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen=false);
 
+	//! Draw's the sun's corona during a solar eclipse on earth.
+	void drawSunCorona(StelProjectorP projector, const Vec3d& v, float radius, float alpha);
+
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param projector Projector to use for this drawing operation
 	//! @param v the 3d position of the source in J2000 reference frame
@@ -325,8 +328,10 @@ private:
 	StelIndexBuffer* starSpriteIndices;
 	//! Index buffer pointing to starSpriteBuffer storing indices of big halos.
 	StelIndexBuffer* bigHaloIndices;
-	//! Indec buffer pointing to starSpriteBuffer storing indices of the sun halo.
+	//! Index buffer pointing to starSpriteBuffer storing indices of the sun halo.
 	StelIndexBuffer* sunHaloIndices;
+	//! Index buffer pointing to starSpriteBuffer storing indices of the sun's corona.
+	StelIndexBuffer* coronaIndices;
 
 	//! Are we drawing point sources at the moment?
 	bool drawing;
@@ -339,6 +344,7 @@ private:
 	//! Big halo texture
 	class StelTextureNew* texBigHalo;
 	class StelTextureNew* texSunHalo;
+	class StelTextureNew* texCorona;
 
 	bool flagLuminanceAdaptation;
 

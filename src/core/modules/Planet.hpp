@@ -51,6 +51,14 @@ struct TrailPoint
 };
 
 
+struct ShadowPlanetShaderInfo
+{
+	int info;
+	int current;
+	int infoCount;
+	float infoSize;
+};
+
 // Class used to store orbital elements
 class RotationElements
 {
@@ -68,6 +76,7 @@ public:
 // Class to manage rings for planets like saturn
 class Ring
 {
+	friend class Planet;
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
@@ -82,7 +91,7 @@ public:
 	//! @param renderer  Renderer to draw with.
 	//! @param transform Used to determine whether we're above or below the ring.
 	//! @param screenSz  Screen size.
-	void draw(StelProjectorP projector, class StelRenderer* renderer, StelProjector::ModelViewTranformP transform, double screenSz);
+	void draw(StelProjectorP projector, class StelRenderer* renderer, StelProjector::ModelViewTranformP transform, class StelGLSLShader *shader, double screenSz, ShadowPlanetShaderInfo *info);
 
 	double getSize(void) const {return radiusMax;}
 private:
@@ -108,9 +117,18 @@ protected:
 		//! Texture used to draw planet hint.
 		class StelTextureNew* texHintCircle;
 		//! Shader used to draw the planet (with lighting), if lighting is used and GLSL is supported.
+		class StelGLSLShader* simplePlanetShader;
+		//! Shader used to draw the planet (with lighting and shadowing).
+		class StelGLSLShader* shadowPlanetShader;
+
+		//! Currently used shader, one of the two above.
 		class StelGLSLShader* planetShader;
+
 		//! Are we initialized yet?
 		bool initialized;
+
+		//! Information for the shadow planet shader.
+		ShadowPlanetShaderInfo info;
 
 		//! Default constructor - construct uninitialized SharedPlanetGraphics.
 		SharedPlanetGraphics(): initialized(false){}
@@ -118,6 +136,8 @@ protected:
 		~SharedPlanetGraphics();
 		//! Lazily initialize the data, using given renderer to create textures/shader.
 		void lazyInit(class StelRenderer* renderer);
+		//! Loads the shaders.
+		bool loadPlanetShaders(StelRenderer *renderer);
 	};
 
 public:
@@ -204,6 +224,9 @@ public:
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
+
+	// Compute the transformation matrix from model to world coordinates
+	void computeModelMatrix(Mat4d& result) const;
 
 	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhase(const Vec3d& obsPos) const;
@@ -317,16 +340,16 @@ protected:
 
 	//! Draw the 3D sphere.
 	//!
-	//! @param renderer  Renderer to draw with.
-	//! @param projector Projector to project vertices.
-	//! @param light     If NULL, lighting is not used. Otherwise the sphere is 
-	//!                  either generated with lighting (no shaders), or lit in
-	//!                  shaders (if GLSL is supported).
-	//! @param shader    If not NULL and lighting is enabled, this shader is used 
-	//!                  to light the planet on the GPU.
-	//! @param screenSz  Screen size.
+	//! @param renderer       Renderer to draw with.
+	//! @param projector      Projector to project vertices.
+	//! @param light          If NULL, lighting is not used. Otherwise the sphere is
+	//!                       either generated with lighting (no shaders), or lit in
+	//!                       shaders (if GLSL is supported).
+	//! @param planetGraphics To render the planet using a shader on the GPU if
+	//!                       possible.
+	//! @param screenSz       Screen size.
 	void drawSphere(class StelRenderer* renderer, StelProjectorP projector,
-                   const struct StelLight* light, class StelGLSLShader* shader, float screenSz);
+				   const struct StelLight* light, SharedPlanetGraphics &planetGraphics, float screenSz);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, class StelRenderer* renderer, 

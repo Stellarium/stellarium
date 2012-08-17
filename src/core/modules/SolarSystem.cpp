@@ -113,6 +113,9 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
+//XXX Move to StelRenderer based code
+#include <QtOpenGL>
+
 // Init and load the solar system data
 void SolarSystem::init()
 {
@@ -147,6 +150,8 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	glGenTextures(1, &shadowInfo);
 }
 
 void SolarSystem::recreateTrails()
@@ -929,6 +934,62 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 	}
 };
 
+int SolarSystem::computeShadowInfo()
+{
+	// Acquire shadow information
+	int size = 1;
+	while(size < systemPlanets.size())
+		size <<= 1;
+	int i, j = 1;
+	Mat4d mSource, mTarget;
+	Vec4d position, sunPos;
+	float data[size * size * 4];
+
+	foreach (const PlanetP& target, systemPlanets)
+	{
+		if(target == sun)
+			continue;
+
+		target->computeModelMatrix(mTarget);
+		mTarget = mTarget.inverse();
+
+		// sun data
+		position = mTarget * Vec4d(0, 0, 0, 1);
+		data[(j * size) * 4 + 0] = position[0];
+		data[(j * size) * 4 + 1] = position[1];
+		data[(j * size) * 4 + 2] = position[2];
+		data[(j * size) * 4 + 3] = sun->getRadius();
+		sunPos = position;
+
+		i = 1;
+		foreach (const PlanetP& source, systemPlanets)
+		{
+			if(source == sun)
+				continue;
+
+			source->computeModelMatrix(mSource);
+			position = mTarget * mSource * Vec4d(0, 0, 0, 1);
+			data[(j * size + i) * 4 + 0] = position[0];
+			data[(j * size + i) * 4 + 1] = position[1];
+			data[(j * size + i) * 4 + 2] = position[2];
+			data[(j * size + i) * 4 + 3] = source->getRadius();
+			i++;
+		}
+
+		j++;
+	}
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, shadowInfo);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, size, size, 0, GL_RGBA, GL_FLOAT, data);
+
+	return size;
+}
+
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
@@ -960,10 +1021,41 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 
 	sharedPlanetGraphics.lazyInit(renderer);
 
-	// Draw the elements
-	foreach (const PlanetP& p, systemPlanets)
+	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader)
 	{
-		p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+		int size = computeShadowInfo();
+
+		sharedPlanetGraphics.planetShader = sharedPlanetGraphics.shadowPlanetShader;
+		sharedPlanetGraphics.info.info = 1;
+		sharedPlanetGraphics.info.infoCount = systemPlanets.size();
+		sharedPlanetGraphics.info.infoSize = size;
+
+		// Draw the elements
+		int i = 1;
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if(p == sun)
+			{
+				sharedPlanetGraphics.info.current = 0;
+				p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+				continue;
+			}
+
+			sharedPlanetGraphics.info.current = i;
+			p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+
+			i++;
+		}
+	}
+	else
+	{
+		sharedPlanetGraphics.planetShader = sharedPlanetGraphics.simplePlanetShader;
+
+		// Draw the elements
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -1362,4 +1454,88 @@ void SolarSystem::reloadPlanets()
 
 	// Restore translations
 	updateI18n();
+}
+
+double SolarSystem::getEclipseFactor(const StelCore* core) const
+{
+	Vec3d Lp = sun->getEclipticPos();
+	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
+	double RS = sun->getRadius();
+
+	double final_illumination = 1.0;
+
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		if(planet == sun)
+			continue;
+
+		Mat4d trans;
+		planet->computeModelMatrix(trans);
+
+		Vec3d C = trans * Vec3d(0, 0, 0);
+		double radius = planet->getRadius();
+
+		Vec3d v1 = Lp - P3;
+		Vec3d v2 = C - P3;
+
+		double L = v1.length();
+		double l = v2.length();
+
+		v1 = v1 / L;
+		v2 = v2 / l;
+
+		double R = RS / L;
+		double r = radius / l;
+		double d = ( v1 - v2 ).length();
+
+		/*double L = (Lp - P3).length();
+		double l = (C - P3).length();
+
+		double R = RS / L;
+		double r = radius / l;
+		double d = ( (Lp - P3) / L - (C - P3) / l ).length();*/
+
+		if(planet->englishName == "Moon")
+		{
+			v1 = planet->getHeliocentricEclipticPos();
+			//C = planet->getHeliocentricEclipticPos();
+		}
+
+		double illumination;
+
+		// distance too far
+		if(d >= R + r)
+		{
+			illumination = 1.0;
+		}
+		// umbra
+		else if(r >= R + d)
+		{
+			illumination = 0.0;
+		}
+		// penumbra completely inside
+		else if(d + r <= R)
+		{
+			illumination = 1.0 - r * r / (R * R);
+		}
+		// penumbra partially inside
+		else
+		{
+			double x = (R * R + d * d - r * r) / (2.0 * d);
+
+			double alpha = std::acos(x / R);
+			double beta = std::acos((d - x) / r);
+
+			double AR = R * R * (alpha - 0.5 * std::sin(2.0 * alpha));
+			double Ar = r * r * (beta - 0.5 * std::sin(2.0 * beta));
+			double AS = R * R * 2.0 * std::asin(1.0);
+
+			illumination = 1.0 - (AR + Ar) / AS;
+		}
+
+		if(illumination < final_illumination)
+			final_illumination = illumination;
+	}
+
+	return final_illumination;
 }

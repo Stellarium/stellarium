@@ -210,6 +210,9 @@ public:
 	//! Reload the planets
 	void reloadPlanets();
 
+	//! Determines relative amount of sun visible from the observer's position.
+	double getEclipseFactor(const StelCore *core) const;
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -266,6 +269,9 @@ private:
 
 	void recreateTrails();
 
+	//! Calculates the shadow information for the shadow planet shader.
+	int computeShadowInfo();
+
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
@@ -298,6 +304,9 @@ private:
 
 	//! The selection pointer texture.
 	class StelTextureNew* texPointer;
+
+	//! The shadow information texture
+	unsigned int shadowInfo;
 
 	bool flagShow;
 
