@@ -1340,6 +1340,9 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     glCullFace(GL_BACK);
     glDisable(GL_CULL_FACE);
     glColorMask(1, 1, 1, 1);
+
+
+    //Send to shader and see if we can work with it
 }
 
 void Scenery3d::generateShadowMap(StelCore* core)

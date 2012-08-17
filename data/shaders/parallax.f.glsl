@@ -39,26 +39,23 @@ uniform int iIllum;
 varying vec3 vecLight;
 varying vec3 vecEye;
 varying vec3 vecNormal;
-varying vec4 vecEyeView;
 varying vec4 vecPos;
+varying vec3 vecHalf;
 
 uniform float s;
   
 vec4 getLighting()
 {
 	vec2 hTexCoord = gl_TexCoord[0].st;
-	
-	vec3 tmpL = normalize(vecLight);
-	vec3 tmpE = normalize(vecEye);
-	vec3 hV = normalize(tmpE+tmpL);
-	
+	vec3 v = normalize(vecEye);
+		
 	if(boolHeight)
 	{
 		float height = texture2D(hmap, hTexCoord).r;
 		//*scale +bias
 		height = height * s - 0.5*s;
 		
-		hTexCoord = hTexCoord + (height * hV.xy);
+		hTexCoord = hTexCoord + (height * v.xy);
 	}
 
 	//For bump mapping, the normal comes from the bump map texture lookup
@@ -83,10 +80,15 @@ vec4 getLighting()
 		//Add reflect
 		if(iIllum == 2)
 		{
-			float nDotH = max(0.0, dot(n, hV));
-			float power = (NdotL == 0.0) ? 0.0 : pow(nDotH, gl_FrontMaterial.shininess);
-			vec4 spec = gl_FrontLightProduct[0].specular * power;
-			color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+			vec3 e = normalize(v);
+			vec3 r = normalize(-reflect(l,n)); 
+			float RdotE = max(0.0, dot(r, e));
+				
+			if (RdotE > 0.0)
+			{
+				float spec = pow(RdotE, gl_FrontMaterial.shininess);		
+				color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+			}
 		}
 	}
 	else
