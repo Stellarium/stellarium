@@ -80,12 +80,17 @@ void StelApp::deinitStatic()
 	StelApp::qtime = NULL;
 }
 
+bool StelApp::getRenderSolarShadows() const
+{
+	return renderSolarShadows;
+}
+
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
 	: QObject(parent), core(NULL), stelGui(NULL), fps(0),
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
+	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false), renderSolarShadows(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 {
 	// Stat variables
@@ -208,6 +213,8 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
+
+	renderSolarShadows = renderer->areFloatTexturesSupported();
 
 	QString splashFileName = "textures/logo24bits.png";
 
@@ -460,6 +467,10 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
+void StelApp::setRenderSolarShadows(bool b)
+{
+	renderSolarShadows = b;
+}
 
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(bool b)

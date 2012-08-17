@@ -46,9 +46,11 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	, starSpriteIndices(NULL)
 	, bigHaloIndices(NULL)
 	, sunHaloIndices(NULL)
+	, coronaIndices(NULL)
 	, drawing(false)
 	, texBigHalo(NULL)
 	, texSunHalo(NULL)
+	, texCorona(NULL)
 {
 	eye = core->getToneReproducer();
 
@@ -133,6 +135,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	bigHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
 	sunHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
 	starSpriteIndices = renderer->createIndexBuffer(IndexType_U16);
+	coronaIndices     = renderer->createIndexBuffer(IndexType_U16);
 }
 
 StelSkyDrawer::~StelSkyDrawer()
@@ -142,9 +145,11 @@ StelSkyDrawer::~StelSkyDrawer()
 	if(NULL != bigHaloIndices)   {delete bigHaloIndices;}
 	if(NULL != sunHaloIndices)   {delete sunHaloIndices;}
 	if(NULL != starSpriteIndices){delete starSpriteIndices;}
+	if(NULL != coronaIndices)    {delete coronaIndices;}
 	if(NULL != texBigHalo)       {delete texBigHalo;}
 	if(NULL != texSunHalo)       {delete texSunHalo;}
 	if(NULL != texHalo)          {delete texHalo;}
+	if(NULL != texCorona)        {delete texCorona;}
 }
 
 // Init parameters from config file
@@ -154,6 +159,7 @@ void StelSkyDrawer::init()
 	texHalo    = renderer->createTexture("textures/star16x16.png");
 	texBigHalo = renderer->createTexture("textures/haloLune.png");
 	texSunHalo = renderer->createTexture("textures/halo.png");
+	texCorona  = renderer->createTexture("textures/corona.png");
 
 	update(0);
 }
@@ -452,6 +458,15 @@ bool StelSkyDrawer::drawPointSource
 	}
 
 	return true;
+}
+
+// Draw's the sun's corona during a solar eclipse on earth.
+void StelSkyDrawer::drawSunCorona(StelProjectorP projector, const Vec3d &v, float radius, float alpha)
+{
+	Vec3d win;
+	projector->project(v, win);
+	addStar(starSpriteBuffer, coronaIndices, win[0], win[1], radius * 2, Vec3f(alpha, alpha, alpha));
+	drawStars(texCorona, starSpriteBuffer, coronaIndices, renderer, projector);
 }
 
 // Terminate drawing of a 3D model, draw the halo

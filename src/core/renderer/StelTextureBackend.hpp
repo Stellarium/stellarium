@@ -39,7 +39,7 @@ enum TextureStatus
 	//! Texture is currently being loaded.
 	//!
 	//! Depending on whether loading succeeds or fails, this will change to
-	//! Loading or Error.
+	//! Loaded or Error.
 	TextureStatus_Loading,
 	//! The texture was succesfully loaded and can be used.
 	//!

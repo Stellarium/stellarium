@@ -257,7 +257,7 @@ public:
 		invariant();
 	}
 
-	//! Used to access the GL context. 
+	//! Used to access the GL context.
 	//!
 	//! Safer than making glContext protected as derived classes can't overwrite it.
 	QGLContext* getGLContext()
