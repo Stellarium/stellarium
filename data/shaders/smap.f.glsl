@@ -164,6 +164,7 @@ vec4 getShadow()
 vec4 getLighting()
 {
 	vec4 shadow = getShadow();
+	vec3 v = normalize(vecEye);
 
 	//Lambert Illumination
 	vec3 n = normalize(vecNormal);
@@ -186,7 +187,7 @@ vec4 getLighting()
 			//Reflection term
 			if(NdotL > 0.0)
 			{		
-				vec3 e = normalize(vecEye);
+				vec3 e = normalize(v);
 				vec3 r = normalize(-reflect(l,n)); 
 				float RdotE = max(0.0, dot(r, e));
 					
