@@ -288,5 +288,6 @@ private:
     GLuint camDepthTex;
     bool analyzeDebug;
     float parallaxScale;
+    int vpWidth, vpHeight;
 };
 #endif

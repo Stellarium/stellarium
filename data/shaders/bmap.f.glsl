@@ -44,6 +44,8 @@ vec4 getLighting()
 {
 	//For bump mapping, the normal comes from the bump map texture lookup
 	vec3 n = normalize(vecNormal);
+	vec3 v = normalize(vecEye);
+	
 	if(boolBump)
 	{
 		n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
@@ -67,7 +69,7 @@ vec4 getLighting()
 			//Reflection term
 			if(NdotL > 0.0)
 			{		
-				vec3 e = normalize(vecEye);
+				vec3 e = normalize(v);
 				vec3 r = normalize(-reflect(l,n)); 
 				float RdotE = max(0.0, dot(r, e));
 					
