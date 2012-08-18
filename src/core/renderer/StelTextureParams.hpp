@@ -56,7 +56,8 @@ enum TextureWrap
 //! // Generate mipmaps and use repeat wrap mode.
 //! TextureParams b = TextureParams().generateMipmaps().wrap(Repeat);
 //! // Generate mipmaps, use nearest-neighbor filtering and use repeat wrap mode.
-//! TextureParams c = TextureParams().generateMipmaps().filtering(Nearest).wrap(Repeat);
+//! TextureParams c = TextureParams().generateMipmaps()
+//!                   .filtering(TextureFiltering_Nearest).wrap(TextureWrap_Repeat);
 //! @endcode
 //!
 //! @see StelTextureMgr, StelTexture, StelRenderer
