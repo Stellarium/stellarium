@@ -53,6 +53,7 @@ public:
 	//! Supported reference frame types
 	enum FrameType
 	{
+		FrameUninitialized,           //!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
 		FrameAltAz,                   //!< Altazimuthal reference frame centered on observer.
 		FrameHeliocentricEcliptic,    //!< Ecliptic reference frame centered on the Sun
 		FrameObservercentricEcliptic, //!< Ecliptic reference frame centered on the Observer

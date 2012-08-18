@@ -35,7 +35,7 @@ class StelSkyLayer : public QObject
 {
 	Q_OBJECT
 public:
-	StelSkyLayer(QObject* parent=NULL) : QObject(parent) {;}
+	StelSkyLayer(QObject* parent=NULL) : QObject(parent), frameType(StelCore::FrameUninitialized) {;}
 
 	//! Draws the content of the layer.
 	virtual void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, float opacity=1.)=0;
