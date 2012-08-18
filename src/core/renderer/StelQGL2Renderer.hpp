@@ -45,6 +45,7 @@ public:
 	StelQGL2Renderer(QGraphicsView* parent, bool pvrSupported)
 		: StelQGLRenderer(parent, pvrSupported)
 		, initialized(false)
+		, floatTexturesDisabled(true)
 		, builtinShaders()
 		, customShader(NULL)
 	{
@@ -258,6 +259,21 @@ public:
 			qWarning() << "StelQGL2Renderer::init : parent init failed";
 			return false;
 		}
+
+		// Float texture support blacklist 
+		// (mainly open source drivers, which don't support them due to patents on 
+		//  float textures)
+		floatTexturesDisabled =
+			glVendorString == "nouveau"                || // Open source NVidia drivers
+			glVendorString == "DRI R300 Project"       || // Open source ATI R300 (Radeon 9000, X000 and X1000)
+			glVendorString == "Intel"                  || // Intel drivers
+			glVendorString == "Mesa Project"           || // Mesa software rasterizer
+			glVendorString == "Microsoft Corporation"  || // Microsoft builtin GL (this doesn't even support GL2, though)
+			glVendorString == "Tungsten Graphics, Inc" || // Some Gallium3D drivers
+			glVendorString == "X.Org R300 Project"     || // More open source ATI R300
+			glVendorString == "X.Org"                  || // Gallium3D on AMD GPUs
+			glVendorString == "VMware, Inc."              // More Gallium3D, mainly llvmpipe, softpipe
+			;
 		
 		initialized = true;
 		invariant();
@@ -266,15 +282,8 @@ public:
 
 	virtual bool areFloatTexturesSupported() const 
 	{
-		// TODO:
-		// GL3 requires float texture support, but this still fails on open source 
-		// drivers that don't have float texture support due to patents.
-		//
-		// If possible, a better way of determining this should be used.
-		//
-		// Maybe we can get the GL vendor string and search for Mesa/Gallium3D specific 
-		// parts - but that would require someone with a lot of time to test various drivers.
-		return QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_3_0);
+		return QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_3_0) 
+		       && !floatTexturesDisabled;
 	}
 
 	virtual bool areNonPowerOfTwoTexturesSupported() const {return true;}
@@ -496,6 +505,9 @@ protected:
 private:
 	//! Is the renderer initialized?
 	bool initialized;
+
+	//! Are floating point textures disabled? (E.g. disabled for open source drivers).
+	bool floatTexturesDisabled;
 	
 	//! Contains all loaded shaders.
 	//!
