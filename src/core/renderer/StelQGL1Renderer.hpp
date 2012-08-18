@@ -142,12 +142,16 @@ protected:
 			           "backend or uninitialized");
 		}
 
-		if(NULL == projector)
-		{
-			projector = &(*(StelApp::getInstance().getCore()->getProjection2d()));
-		}
+		// We need a shared pointer when we're getting the projector ourselves (the 2D case), 
+		// to prevent destructor of returned shared pointer from destroying it 
+		// before we can use it.
+		StelProjectorP projector2DDummy = 
+			(NULL != projector ? StelProjectorP(NULL)
+			                   : StelApp::getInstance().getCore()->getProjection2d());
+		
+		projector = (NULL != projector ? projector : &(*(projector2DDummy)));
 		// XXX: we should use a more generic way to test whether or not to do the projection.
-		else if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector)))
+		if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector)))
 		{
 			backend->projectVertices(projector, glIndexBuffer);
 		}
