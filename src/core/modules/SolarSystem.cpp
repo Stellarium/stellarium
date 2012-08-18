@@ -35,6 +35,7 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
+#include "StelUtils.hpp"
 #include "Planet.hpp"
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
@@ -113,9 +114,6 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-//XXX Move to StelRenderer based code
-#include <QtOpenGL>
-
 // Init and load the solar system data
 void SolarSystem::init()
 {
@@ -150,8 +148,6 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-
-	glGenTextures(1, &shadowInfo);
 }
 
 void SolarSystem::recreateTrails()
@@ -934,60 +930,55 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 	}
 };
 
-int SolarSystem::computeShadowInfo()
+StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
 {
-	// Acquire shadow information
-	int size = 1;
-	while(size < systemPlanets.size())
-		size <<= 1;
-	int i, j = 1;
-	Mat4d mSource, mTarget;
-	Vec4d position, sunPos;
-	float data[size * size * 4];
+	// Acquire shadow informations
+	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(systemPlanets.size() + 1);
+	Vec4f data[size * size];
+	memset(data, '\0', size * size * sizeof(Vec4f));
 
+	Mat4d modelMatrices [systemPlanets.size()];
+	int p = 0;
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		planet->computeModelMatrix(modelMatrices[p++]);
+	}
+
+	int y = 1;
 	foreach (const PlanetP& target, systemPlanets)
 	{
 		if(target == sun)
 			continue;
 
-		target->computeModelMatrix(mTarget);
-		mTarget = mTarget.inverse();
+		const Mat4d mTarget = modelMatrices[y - 1].inverse();
+		const Vec4d sunPos = mTarget * Vec4d(0, 0, 0, 1);
+		data[y * size] = Vec4f(sunPos[0], sunPos[1], sunPos[2], sun->getRadius());
 
-		// sun data
-		position = mTarget * Vec4d(0, 0, 0, 1);
-		data[(j * size) * 4 + 0] = position[0];
-		data[(j * size) * 4 + 1] = position[1];
-		data[(j * size) * 4 + 2] = position[2];
-		data[(j * size) * 4 + 3] = sun->getRadius();
-		sunPos = position;
+		const Vec4d vTarget0(mTarget[0], mTarget[0 + 4], mTarget[0 + 8], mTarget[0 + 12]);
+		const Vec4d vTarget1(mTarget[1], mTarget[1 + 4], mTarget[1 + 8], mTarget[1 + 12]);
+		const Vec4d vTarget2(mTarget[2], mTarget[2 + 4], mTarget[2 + 8], mTarget[2 + 12]);
 
-		i = 1;
+		int x = 1;
 		foreach (const PlanetP& source, systemPlanets)
 		{
 			if(source == sun)
 				continue;
 
-			source->computeModelMatrix(mSource);
-			position = mTarget * mSource * Vec4d(0, 0, 0, 1);
-			data[(j * size + i) * 4 + 0] = position[0];
-			data[(j * size + i) * 4 + 1] = position[1];
-			data[(j * size + i) * 4 + 2] = position[2];
-			data[(j * size + i) * 4 + 3] = source->getRadius();
-			i++;
+			const Mat4d& mSource(modelMatrices[x - 1]);
+			const Vec4d vSource(mSource[12], mSource[13], mSource[14], mSource[15]);
+			const float X = vSource * vTarget0;
+			const float Y = vSource * vTarget1;
+			const float Z = vSource * vTarget2;
+
+			data[y * size + x] = Vec4f(X, Y, Z, source->getRadius());
+			x++;
 		}
 
-		j++;
+		y++;
 	}
 
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, shadowInfo);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, size, size, 0, GL_RGBA, GL_FLOAT, data);
-
-	return size;
+	return renderer->createTexture(data, QSize(size, size), TextureDataFormat_RGBA_F32,
+	                               TextureParams().filtering(TextureFiltering_Nearest));
 }
 
 // Draw all the elements of the solar system
@@ -1023,12 +1014,18 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 
 	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader)
 	{
-		int size = computeShadowInfo();
+		// int size = computeShadowInfo();
+		StelTextureNew* shadowInfo = computeShadowInfo(renderer);
 
 		sharedPlanetGraphics.planetShader = sharedPlanetGraphics.shadowPlanetShader;
 		sharedPlanetGraphics.info.info = 1;
 		sharedPlanetGraphics.info.infoCount = systemPlanets.size();
-		sharedPlanetGraphics.info.infoSize = size;
+		const QSize size = shadowInfo->getDimensions();
+		Q_ASSERT_X(size.width() == size.height(), Q_FUNC_INFO,
+		           "Shadow info texture is not square");
+		sharedPlanetGraphics.info.infoSize = size.width();
+
+		shadowInfo->bind(1);
 
 		// Draw the elements
 		int i = 1;
@@ -1046,6 +1043,8 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 
 			i++;
 		}
+
+		delete shadowInfo;
 	}
 	else
 	{

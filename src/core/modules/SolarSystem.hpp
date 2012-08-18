@@ -270,7 +270,7 @@ private:
 	void recreateTrails();
 
 	//! Calculates the shadow information for the shadow planet shader.
-	int computeShadowInfo();
+	class StelTextureNew* computeShadowInfo(StelRenderer* renderer);
 
 	PlanetP sun;
 	PlanetP moon;
