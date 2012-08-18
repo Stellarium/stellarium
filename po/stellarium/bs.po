@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-12 23:35+0700\n"
-"PO-Revision-Date: 2012-08-10 16:51+0000\n"
+"PO-Revision-Date: 2012-08-17 15:02+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-13 05:15+0000\n"
-"X-Generator: Launchpad (build 15791)\n"
+"X-Launchpad-Export-Date: 2012-08-18 04:38+0000\n"
+"X-Generator: Launchpad (build 15810)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -4037,7 +4037,7 @@ msgstr "Stvarno polje vidokruga pomoću kombinacije ovog okulara/telescopa"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:421
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "Plugin okulari"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
@@ -4051,7 +4051,7 @@ msgstr "Verzija"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Overview"
-msgstr ""
+msgstr "Pregled"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid ""
@@ -4094,7 +4094,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
-msgstr ""
+msgstr "Prečice"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
@@ -4103,7 +4103,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:449
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "[no key defined]"
-msgstr ""
+msgstr "[prečica nije definisana]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
@@ -5975,7 +5975,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Konfiguracijski prozor Historijskih supernovi"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5988,7 +5988,7 @@ msgstr "Vrsta supernove: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Plugin Historijske supernove"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
@@ -6021,16 +6021,16 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr ""
+msgstr "Institu za teorijsku i eksperimentalnu fiziku"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr ""
+msgstr "u Rusiji"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
@@ -6047,38 +6047,38 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Sljedeće ažuriranje za:  %1 dana"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:199
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Historijske supernove su ažurirane"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Konfiguracija historijskih supernovi"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:231
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracija plugina Historijske supernove"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Ažuriraj katalog sa interneta"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Učestanost ažuriranja (dani):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "[next update info]"
-msgstr ""
+msgstr "[sljedeće ažuriranje]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
@@ -6096,7 +6096,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Konfiguracijski prozor kvazara"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -6109,7 +6109,7 @@ msgstr "Z (redshift): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Plugin Kvazari"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -6120,27 +6120,27 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Kvazari su ažurirani"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:246
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Konfiguracija kvazara"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracija plugina Kvazari"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "Mod prikaza za kvazare"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:256
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Omogući prikaz distribucije za kvazare"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -6155,7 +6155,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Konfiguracijski prozor pulsara"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -6273,7 +6273,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Plugin Pulsari"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6285,7 +6285,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Napomena"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -6293,11 +6293,11 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "Zasluge"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
@@ -6305,7 +6305,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
@@ -6313,23 +6313,23 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "u Francuskoj"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Pulsari su ažurirani"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:246
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Konfiguracija pulsara"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracija plugina Pulsari"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "Mod za prikaz pulsara"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Enable display of distribution for pulsars"
@@ -6337,7 +6337,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
-msgstr ""
+msgstr "Egzoplanete"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 msgid ""
@@ -6347,11 +6347,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Konfiguracijski prozor Egzoplaneta"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Prikaži egzoplanete"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:204
 msgid "Metallicity"
@@ -6360,21 +6360,21 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Mass"
-msgstr ""
+msgstr "Težina"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:212
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Radius"
-msgstr ""
+msgstr "Prečnik"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:216
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Efektivna temperatura: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Exoplanet"
-msgstr ""
+msgstr "Egzoplaneta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Period"
@@ -6395,7 +6395,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "AU"
-msgstr ""
+msgstr "AU"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Eccentricity"
@@ -6411,11 +6411,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Discovered year"
-msgstr ""
+msgstr "Godina otkrića"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Plugin Egzoplanete"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 #, qt-format
@@ -6434,27 +6434,27 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Egzoplanete su ažurirane"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:230
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Konfiguracija egzoplaneta"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:231
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracija plugina Egzoplanete"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "Ažuriraj podatke o egzoplanetama sa interneta"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid "Observability analysis"
-msgstr ""
+msgstr "Analiza vidljivosti"
 
 #: plugins/Observability/src/Observability.cpp:69
 msgid "Ivan Marti-Vidal (Onsala Space Observatory)"
-msgstr ""
+msgstr "Ivan Marti-Vidal (Onsala svemirska opservatorija)"
 
 #: plugins/Observability/src/Observability.cpp:71
 msgid ""
@@ -6469,34 +6469,34 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:222
 msgid "Observability"
-msgstr ""
+msgstr "Vidljivost"
 
 #: plugins/Observability/src/Observability.cpp:228
 msgid "Observability configuration window"
-msgstr ""
+msgstr "Konfiguracijski prozor vidljivosti"
 
 #: plugins/Observability/src/Observability.cpp:431
 #: plugins/Observability/src/Observability.cpp:432
 #: plugins/Observability/src/Observability.cpp:475
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: plugins/Observability/src/Observability.cpp:431
 #: plugins/Observability/src/Observability.cpp:432
 #: plugins/Observability/src/Observability.cpp:475
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: plugins/Observability/src/Observability.cpp:431
 #: plugins/Observability/src/Observability.cpp:432
 #: plugins/Observability/src/Observability.cpp:475
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/Observability/src/Observability.cpp:441
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "Postavljeno %1 (u %2)"
 
 #: plugins/Observability/src/Observability.cpp:442
 #, qt-format
@@ -6567,41 +6567,41 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:597
 #, qt-format
 msgid "from %1 to %2"
-msgstr ""
+msgstr "od %1 do %2"
 
 #: plugins/Observability/src/Observability.cpp:604
 msgid " to 31 Dec"
-msgstr ""
+msgstr " do 31. dec"
 
 #: plugins/Observability/src/Observability.cpp:611
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "Vidljivo tokom cijele godine."
 
 #: plugins/Observability/src/Observability.cpp:615
 msgid "Not observable at dark night."
-msgstr ""
+msgstr "Nije vidljivo tokom tamnih noći."
 
 #: plugins/Observability/src/Observability.cpp:620
 msgid "Best observed"
-msgstr ""
+msgstr "Najbolja vidljivost"
 
 #: plugins/Observability/src/Observability.cpp:637
 msgid " TODAY:"
-msgstr ""
+msgstr " DANAS:"
 
 #: plugins/Observability/src/Observability.cpp:1240
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Prethodni puni Mjesec: %1 %2 u %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:1244
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Sljedeći puni Mjesec: %1 %2 u %3:%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "Plugin Vidljivost"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
 msgid ""
@@ -6702,7 +6702,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"
-msgstr ""
+msgstr "Pun Mjesec:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
@@ -6713,19 +6713,19 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
 msgid "deg."
-msgstr ""
+msgstr "step."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:333
 msgid "Observability Configuration"
-msgstr ""
+msgstr "Konfiguracija vidljivosti"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:334
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracija plugina Vidljivost"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:336
 msgid "Showing Options"
-msgstr ""
+msgstr "Prikaz opcija"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:337
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -6745,27 +6745,27 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:341
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "Datum prethodnog i sljedećeg punog Mjeseca"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:344
 msgid "Font color and size"
-msgstr ""
+msgstr "Boja i veličina fonta"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Red"
-msgstr ""
+msgstr "Crveno"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Green"
-msgstr ""
+msgstr "Zeleno"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Blue"
-msgstr ""
+msgstr "Plavo"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Font Size"
-msgstr ""
+msgstr "Veličina fonta"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Sun altitude at twilight"
@@ -6773,7 +6773,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "0 deg."
-msgstr ""
+msgstr "0 step."
 
 #~ msgid "General "
 #~ msgstr "Općenito "
