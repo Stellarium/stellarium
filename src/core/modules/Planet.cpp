@@ -49,6 +49,7 @@ Planet::SharedPlanetGraphics::~SharedPlanetGraphics()
 	if(!initialized){return;}
 	delete texEarthShadow;
 	delete texHintCircle;
+
 	if(NULL != simplePlanetShader)
 		delete simplePlanetShader;
 
@@ -63,18 +64,15 @@ void Planet::SharedPlanetGraphics::lazyInit(StelRenderer* renderer)
 	if(initialized){return;}
 	texHintCircle  = renderer->createTexture("textures/planet-indicator.png");
 	texEarthShadow = renderer->createTexture("textures/earth-shadow.png");
-	planetShader = NULL;
+	planetShader = simplePlanetShader = shadowPlanetShader = NULL;
 
 	if(renderer->isGLSLSupported())
 	{
 		if(!loadPlanetShaders(renderer))
 		{
 			qWarning() << "Failed to load planet shaders, falling back to CPU implementation";
+			simplePlanetShader = shadowPlanetShader = NULL;
 		}
-	}
-	else
-	{
-		planetShader = NULL;
 	}
 
 	initialized = true;
