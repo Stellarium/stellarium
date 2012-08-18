@@ -126,6 +126,8 @@ public:
 		glContext->makeCurrent();
 		viewport.init(gl.hasOpenGLFeature(QGLFunctions::NPOTTextures));
 		textureUnitCount = getTextureUnitCountBackend();
+		glVendorString = QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+		qDebug() << "GL vendor is " << glVendorString;
 		return true;
 	}
 	
@@ -293,6 +295,9 @@ public:
 	}
 
 protected:
+	//! OpenGL vendor string (used to enable/disable features based on drivers).
+	QString glVendorString;
+
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
 
