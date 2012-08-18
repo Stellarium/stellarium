@@ -308,6 +308,16 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
+QStringList Quasars::listAllObjects() const
+{
+	QStringList result;
+	foreach (const QuasarP& quasar, QSO)
+	{
+		result << quasar->getNameI18n();
+	}
+	return result;
+}
+
 /*
   Replace the JSON file with the default from the compiled-in resource
 */

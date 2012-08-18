@@ -1158,3 +1158,13 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 	}
 	return result;
 }
+
+QStringList ConstellationMgr::listAllObjects() const
+{
+	QStringList result;
+	foreach(Constellation* constellation, asterisms)
+	{
+		result << constellation->getNameI18n();
+	}
+	return result;
+}

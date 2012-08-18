@@ -741,6 +741,24 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabLists">
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+       </font>
+      </property>
+      <attribute name="title">
+       <string>Lists</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QComboBox" name="objectTypeComboBox"/>
+       </item>
+       <item>
+        <widget class="QListWidget" name="objectsListWidget"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

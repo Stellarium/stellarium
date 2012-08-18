@@ -305,6 +305,16 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
+QStringList Supernovae::listAllObjects() const
+{
+	QStringList result;
+	foreach (const SupernovaP& sn, snstar)
+	{
+		result << sn->getNameI18n();
+	}
+	return result;
+}
+
 /*
   Replace the JSON file with the default from the compiled-in resource
 */
