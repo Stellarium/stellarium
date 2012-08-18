@@ -204,7 +204,7 @@ bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
 	  "    vec4 diffuse = diffuseLight;\n"
 	  "    vec4 data = texture2D(info, vec2(0.0, current) / infoSize);\n"
 	  "    float RS = data.w;\n"
-	   "   vec3 Lp = data.xyz;\n"
+	  "    vec3 Lp = data.xyz;\n"
 	  "\n"
 	  "    vec3 P3;\n"
 	  "\n"
@@ -1285,21 +1285,12 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 
 			shader->setUniformValue("isRing", false);
 
-			if((rings != NULL) && (rings->texture))
-			{
-				rings->texture->bind(2);
-				shader->setUniformValue("ring", true);
-				shader->setUniformValue("outerRadius", float(rings->radiusMax));
-				shader->setUniformValue("innerRadius", float(rings->radiusMin));
-				shader->setUniformValue("ringS", 2);
-			}
-			else
-			{
-				shader->setUniformValue("ring", false);
-				shader->setUniformValue("outerRadius", 0.0f);
-				shader->setUniformValue("innerRadius", 0.0f);
-				shader->setUniformValue("ringS", 0);
-			}
+			const bool ring = (rings != NULL) && rings->texture;
+			if(ring){rings->texture->bind(2);}
+			shader->setUniformValue("ring", ring);
+			shader->setUniformValue("outerRadius", ring ? static_cast<float>(rings->radiusMax) : 0.0f);
+			shader->setUniformValue("innerRadius", ring ? static_cast<float>(rings->radiusMin) : 0.0f);
+			shader->setUniformValue("ringS",       ring ? 2 : 0);
 		}
 
 		drawUnlitSphere(renderer, projector);
@@ -1523,20 +1514,17 @@ void Ring::draw(StelProjectorP projector, StelRenderer* renderer,
 		shader->setUniformValue("radius"             , static_cast<float>(1));
 		shader->setUniformValue("oneMinusOblateness" , static_cast<float>(1));
 
-		if(info)
-		{
-			shader->setUniformValue("info", info->info);
-			shader->setUniformValue("infoCount", info->infoCount);
-			shader->setUniformValue("infoSize", info->infoSize);
-			shader->setUniformValue("current", info->current);
+		shader->setUniformValue("info",      info->info);
+		shader->setUniformValue("infoCount", info->infoCount);
+		shader->setUniformValue("infoSize",  info->infoSize);
+		shader->setUniformValue("current",   info->current);
 
-			shader->setUniformValue("isRing", true);
+		shader->setUniformValue("isRing", true);
 
-			shader->setUniformValue("ring", true);
-			shader->setUniformValue("outerRadius", float(radiusMax));
-			shader->setUniformValue("innerRadius", float(radiusMin));
-			shader->setUniformValue("ringS", 0);
-		}
+		shader->setUniformValue("ring",        true);
+		shader->setUniformValue("outerRadius", static_cast<float>(radiusMax));
+		shader->setUniformValue("innerRadius", static_cast<float>(radiusMin));
+		shader->setUniformValue("ringS",       0);
 	}
 
 	ring->draw(renderer, projector);

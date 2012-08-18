@@ -1014,7 +1014,6 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 
 	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader)
 	{
-		// int size = computeShadowInfo();
 		StelTextureNew* shadowInfo = computeShadowInfo(renderer);
 
 		sharedPlanetGraphics.planetShader = sharedPlanetGraphics.shadowPlanetShader;
@@ -1031,16 +1030,8 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 		int i = 1;
 		foreach (const PlanetP& p, systemPlanets)
 		{
-			if(p == sun)
-			{
-				sharedPlanetGraphics.info.current = 0;
-				p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
-				continue;
-			}
-
-			sharedPlanetGraphics.info.current = i;
+			sharedPlanetGraphics.info.current = p != sun ? i : 0;
 			p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
-
 			i++;
 		}
 
@@ -1459,7 +1450,7 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 {
 	Vec3d Lp = sun->getEclipticPos();
 	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
-	double RS = sun->getRadius();
+	const double RS = sun->getRadius();
 
 	double final_illumination = 1.0;
 
@@ -1471,21 +1462,21 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 		Mat4d trans;
 		planet->computeModelMatrix(trans);
 
-		Vec3d C = trans * Vec3d(0, 0, 0);
-		double radius = planet->getRadius();
+		const Vec3d C = trans * Vec3d(0, 0, 0);
+		const double radius = planet->getRadius();
 
 		Vec3d v1 = Lp - P3;
 		Vec3d v2 = C - P3;
 
-		double L = v1.length();
-		double l = v2.length();
+		const double L = v1.length();
+		const double l = v2.length();
 
 		v1 = v1 / L;
 		v2 = v2 / l;
 
-		double R = RS / L;
-		double r = radius / l;
-		double d = ( v1 - v2 ).length();
+		const double R = RS / L;
+		const double r = radius / l;
+		const double d = ( v1 - v2 ).length();
 
 		/*double L = (Lp - P3).length();
 		double l = (C - P3).length();
@@ -1520,14 +1511,14 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 		// penumbra partially inside
 		else
 		{
-			double x = (R * R + d * d - r * r) / (2.0 * d);
+			const double x = (R * R + d * d - r * r) / (2.0 * d);
 
-			double alpha = std::acos(x / R);
-			double beta = std::acos((d - x) / r);
+			const double alpha = std::acos(x / R);
+			const double beta = std::acos((d - x) / r);
 
-			double AR = R * R * (alpha - 0.5 * std::sin(2.0 * alpha));
-			double Ar = r * r * (beta - 0.5 * std::sin(2.0 * beta));
-			double AS = R * R * 2.0 * std::asin(1.0);
+			const double AR = R * R * (alpha - 0.5 * std::sin(2.0 * alpha));
+			const double Ar = r * r * (beta - 0.5 * std::sin(2.0 * beta));
+			const double AS = R * R * 2.0 * std::asin(1.0);
 
 			illumination = 1.0 - (AR + Ar) / AS;
 		}
