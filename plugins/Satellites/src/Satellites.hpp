@@ -129,6 +129,8 @@ public:
 
 	virtual QStringList listAllObjects() const;
 
+	virtual QString getName() const { return "Satellites"; }
+
 	//! Implment this to tell the main Stellarium GUi that there is a GUI element to configure this
 	//! plugin. 
 	virtual bool configureGui(bool show=true);

@@ -84,6 +84,7 @@ public:
 	QStringList listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem=5) const;
 
 	QStringList listAllModuleObjects(const QString& moduleId) const;
+	QMap<QString, QString> objectModulesMap() const;
 
 	//! Return whether an object was selected during last selection related event.
 	bool getWasSelected(void) const {return !lastSelectedObjects.empty();}

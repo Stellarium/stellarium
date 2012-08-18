@@ -253,7 +253,10 @@ void SearchDialog::createDialogContent()
 
 	// list views initialization
 	QStringList objectTypes;
-	objectTypes << "type 1" << "type 2" << "type 3";
+	foreach(QString name, objectMgr->objectModulesMap())
+	{
+		objectTypes << name;
+	}
 	ui->objectTypeComboBox->addItems(objectTypes);
 	QStringList psrs = objectMgr->listAllModuleObjects("Pulsars");
 	ui->objectsListWidget->addItems(psrs);

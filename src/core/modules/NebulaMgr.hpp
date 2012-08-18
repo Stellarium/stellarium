@@ -94,6 +94,7 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	// empty for now
 	virtual QStringList listAllObjects() const { return QStringList(); }
+	virtual QString getName() const { return "Nebulaes"; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
