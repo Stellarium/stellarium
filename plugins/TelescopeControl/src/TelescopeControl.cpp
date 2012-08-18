@@ -86,8 +86,13 @@ Q_EXPORT_PLUGIN2(TelescopeControl, TelescopeControlStelPluginInterface)
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: reticleTexture(NULL)
+	: pixmapHover(NULL)
+	, pixmapOnIcon(NULL)
+	, pixmapOffIcon(NULL)
+	, reticleTexture(NULL)
 	, selectionTexture(NULL)
+	, telescopeDialog(NULL)
+	, slewDialog(NULL)
 {
 	setObjectName("TelescopeControl");
 
@@ -164,7 +169,7 @@ void TelescopeControl::init()
 			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		}
 	
-		//Create and initialize dialog windows
+		//Create and initialize dialog windows 
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
 		
@@ -174,10 +179,10 @@ void TelescopeControl::init()
 		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
 		//Create toolbar button
-		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
-		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
-		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Slew_Window"));
+		pixmapHover   = new QPixmap(":/graphicGui/glow32x32.png");
+		pixmapOnIcon  = new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
+		pixmapOffIcon = new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
+		toolbarButton = new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Slew_Window"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error &e)
@@ -217,7 +222,15 @@ void TelescopeControl::deinit()
 
 	if(NULL != reticleTexture)   {delete reticleTexture;}
 	if(NULL != selectionTexture) {delete selectionTexture;}
+	if(NULL != telescopeDialog)  {delete telescopeDialog;}
+	if(NULL != slewDialog)       {delete slewDialog;}
+	if(NULL != pixmapHover)      {delete pixmapHover;}
+	if(NULL != pixmapOnIcon)     {delete pixmapOnIcon;}
+	if(NULL != pixmapOffIcon)    {delete pixmapOffIcon;}
 	reticleTexture = selectionTexture = NULL;
+	telescopeDialog = NULL;
+	slewDialog = NULL;
+	pixmapHover = pixmapOnIcon = pixmapOffIcon;
 
 	//TODO: Decide if it should be saved on change
 	//Save the configuration on exit
