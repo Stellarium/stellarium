@@ -1237,6 +1237,16 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	return result;
 }
 
+QStringList SolarSystem::listAllObjects() const
+{
+	QStringList result;
+	foreach(const PlanetP& p, systemPlanets)
+	{
+		result << p->getNameI18n();
+	}
+	return result;
+}
+
 void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");

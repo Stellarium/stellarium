@@ -109,6 +109,8 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	// empty, as there's too much stars for displaying at once
+	virtual QStringList listAllObjects() const { return QStringList(); }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

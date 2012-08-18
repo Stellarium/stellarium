@@ -88,6 +88,8 @@ public:
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	// empty as its not celestial objects
+	virtual QStringList listAllObjects() const { return QStringList(); }
 	virtual bool configureGui(bool show = true);
 	
 	///////////////////////////////////////////////////////////////////////////

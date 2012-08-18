@@ -250,6 +250,13 @@ void SearchDialog::createDialogContent()
 	ui->serverListComboBox->setCurrentIndex(idx);
 	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
 	        this, SLOT(selectSimbadServer(int)));
+
+	// list views initialization
+	QStringList objectTypes;
+	objectTypes << "type 1" << "type 2" << "type 3";
+	ui->objectTypeComboBox->addItems(objectTypes);
+	QStringList psrs = objectMgr->listAllModuleObjects("Pulsars");
+	ui->objectsListWidget->addItems(psrs);
 }
 
 void SearchDialog::setHasSelectedFlag()

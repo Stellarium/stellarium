@@ -91,6 +91,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listAllObjects() const;
 
 	//! get a Pulsar object by identifier
 	PulsarP getByID(const QString& id);

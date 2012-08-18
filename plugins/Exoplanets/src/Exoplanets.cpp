@@ -340,6 +340,16 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	result.sort();
 	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
 
+		return result;
+}
+
+QStringList Exoplanets::listAllObjects() const
+{
+	QStringList result;
+	foreach (const ExoplanetP& planet, ep)
+	{
+		result << planet->getNameI18n();
+	}
 	return result;
 }
 
