@@ -95,6 +95,8 @@ public:
 
 	virtual QStringList listAllObjects() const;
 
+	virtual QString getName() const { return "Exoplanets"; }
+
 	//! get a exoplanet object by identifier
 	ExoplanetP getByID(const QString& id);
 

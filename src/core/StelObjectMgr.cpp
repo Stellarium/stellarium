@@ -264,3 +264,13 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId) const
 	}
 	return module->listAllObjects();
 }
+
+QMap<QString, QString> StelObjectMgr::objectModulesMap() const
+{
+	QMap<QString, QString> result;
+	foreach(const StelObjectModule* m, objectsModule)
+	{
+		result[m->objectName()] = m->getName();
+	}
+	return result;
+}
