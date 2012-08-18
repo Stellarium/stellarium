@@ -58,6 +58,8 @@ private:
 	QStringList values;
 };
 
+QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
+
 //! @class SearchDialog
 //! The sky object search dialog.
 class SearchDialog : public StelDialog
@@ -91,6 +93,9 @@ private slots:
 	void onSearchTextChanged(const QString& text);
 	
 	void gotoObject();
+	void gotoObject(const QString& nameI18n);
+	// for going from list views
+	void gotoObject(QListWidgetItem* item);
 	
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
