@@ -130,6 +130,7 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	virtual QStringList listAllObjects() const;
+	virtual QString getName() const { return "Constellations"; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters

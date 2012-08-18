@@ -111,6 +111,7 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	// empty, as there's too much stars for displaying at once
 	virtual QStringList listAllObjects() const { return QStringList(); }
+	virtual QString getName() const { return "Stars"; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

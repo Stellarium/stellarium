@@ -62,6 +62,8 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const = 0;
 
 	virtual QStringList listAllObjects() const = 0;
+
+	virtual QString getName() const = 0;
 };
 
 #endif // _STELOBJECTMODULE_HPP_

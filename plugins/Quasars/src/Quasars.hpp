@@ -92,6 +92,7 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
 	virtual QStringList listAllObjects() const;
+	virtual QString getName() const { return "Quasars"; }
 
 	//! get a Quasar object by identifier
 	QuasarP getByID(const QString& id);
