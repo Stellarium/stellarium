@@ -413,21 +413,25 @@ void SearchDialog::greekLetterClicked()
 void SearchDialog::gotoObject()
 {
 	QString name = ui->completionLabel->getSelected();
+	gotoObject(name);
+}
 
-	if (name.isEmpty())
+void SearchDialog::gotoObject(const QString &nameI18n)
+{
+	if (nameI18n.isEmpty())
 		return;
 
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	if (simbadResults.contains(name))
+	if (simbadResults.contains(nameI18n))
 	{
 		close();
-		Vec3d pos = simbadResults[name];
+		Vec3d pos = simbadResults[nameI18n];
 		objectMgr->unSelect();
 		mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
-	else if (objectMgr->findAndSelectI18n(name))
+	else if (objectMgr->findAndSelectI18n(nameI18n))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -435,7 +439,7 @@ void SearchDialog::gotoObject()
 			close();
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
-			// Can't point to home planet			
+			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 			{
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
@@ -448,6 +452,12 @@ void SearchDialog::gotoObject()
 		}
 	}
 	simbadResults.clear();
+}
+
+void SearchDialog::gotoObject(QListWidgetItem *item)
+{
+	QString objName = item->text();
+	gotoObject(objName);
 }
 
 bool SearchDialog::eventFilter(QObject*, QEvent *event)
@@ -544,4 +554,5 @@ void SearchDialog::updateListWidget(int index)
 	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
 	ui->objectsListWidget->clear();
 	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId));
+	connect(ui->objectsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
 }
