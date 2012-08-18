@@ -252,14 +252,17 @@ void SearchDialog::createDialogContent()
 	        this, SLOT(selectSimbadServer(int)));
 
 	// list views initialization
-	QStringList objectTypes;
-	foreach(QString name, objectMgr->objectModulesMap())
+	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
+	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
 	{
-		objectTypes << name;
+		if (!objectMgr->listAllModuleObjects(it.key()).isEmpty())
+		{
+			ui->objectTypeComboBox->addItem(it.value(), QVariant(it.key()));
+		}
 	}
-	ui->objectTypeComboBox->addItems(objectTypes);
-	QStringList psrs = objectMgr->listAllModuleObjects("Pulsars");
-	ui->objectsListWidget->addItems(psrs);
+	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
+	// init listWidget
+	updateListWidget(ui->objectTypeComboBox->currentIndex());
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -534,4 +537,11 @@ void SearchDialog::selectSimbadServer(int index)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("search/simbad_server_url", simbadServerUrl);
+}
+
+void SearchDialog::updateListWidget(int index)
+{
+	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
+	ui->objectsListWidget->clear();
+	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId));
 }

@@ -104,6 +104,9 @@ private slots:
 	//! Called when a SIMBAD server is selected in the list.
 	void selectSimbadServer(int index);
 
+	//! Called when new type of objects selected in list view tab
+	void updateListWidget(int index);
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
