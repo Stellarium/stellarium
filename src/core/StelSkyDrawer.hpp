@@ -53,7 +53,6 @@ public:
 	void update(double deltaTime);
 
 	//! Set the proper openGL state before making calls to drawPointSource
-	//! @param p a pointer to a valid instance of a Painter. The instance must be valid until postDrawPointSource() is called
 	void preDrawPointSource();
 
 	//! Finalize the drawing of point sources
