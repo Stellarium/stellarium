@@ -52,10 +52,10 @@ public:
 	//! @param deltaTime the time increment in second since last call.
 	void update(double deltaTime);
 
-	//! Set the proper openGL state before making calls to drawPointSource
+	//! Prepare to draw point sources (must be called before drawing).
 	void preDrawPointSource();
 
-	//! Finalize the drawing of point sources
+	//! Finalize the drawing of point sources.
 	void postDrawPointSource(StelProjectorP projector);
 
 	//! Draw a point source halo.

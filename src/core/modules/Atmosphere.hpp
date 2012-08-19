@@ -34,7 +34,7 @@ class StelProjector;
 class StelToneReproducer;
 class StelCore;
 
-//! Compute and display the daylight sky color using openGL.
+//! Compute and display the daylight sky color.
 //! The sky brightness is computed with the SkyBright class, the color with the SkyLight.
 //! Don't use this class directly but use it through the LandscapeMgr.
 class Atmosphere

@@ -249,7 +249,7 @@ private:
 
 	static QTime* qtime;
 
-	// Temporary variables used to store the last gl window resize
+	// Temporary variables used to store the last window resize
 	// if the core was not yet initialized
 	int saveProjW;
 	int saveProjH;
