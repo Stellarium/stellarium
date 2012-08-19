@@ -167,8 +167,8 @@ void Constellation::drawOptim(StelRenderer* renderer, StelProjectorP projector, 
 		return;
 	}
 
-	renderer->setGlobalColor(Vec4f(lineColor[0], lineColor[1], 
-	                               lineColor[2], lineFader.getInterstate()));
+	renderer->setGlobalColor(lineColor[0], lineColor[1], 
+	                         lineColor[2], lineFader.getInterstate());
 
 	Vec3d star1;
 	Vec3d star2;
@@ -191,8 +191,8 @@ void Constellation::drawName(StelRenderer* renderer, QFont& font) const
 	}
 
 	renderer->setFont(font);
-	renderer->setGlobalColor(Vec4f(labelColor[0], labelColor[1], 
-	                               labelColor[2], nameFader.getInterstate()));
+	renderer->setGlobalColor(labelColor[0], labelColor[1], 
+	                         labelColor[2], nameFader.getInterstate());
 	renderer->drawText(TextParams(XYname[0], XYname[1], nameI18)
 	                   .shift(-QFontMetrics(font).width(nameI18) * 0.5, 0.0f)
 	                   .useGravity());
@@ -212,7 +212,6 @@ void Constellation::drawArtOptim
 	if (intensity > 0.001f && region.intersects(boundingCap))
 	{
 		artTexture->bind();
-		renderer->setGlobalColor(Vec4f(intensity, intensity, intensity, 1.0f));
 		if (StelApp::getInstance().getVisionModeNight())
 			renderer->setGlobalColor(intensity, 0.0, 0.0);
 		else
@@ -253,8 +252,8 @@ void Constellation::drawBoundaryOptim(StelRenderer* renderer, StelProjectorP pro
 	}
 
 	renderer->setBlendMode(BlendMode_Alpha);
-	renderer->setGlobalColor(Vec4f(boundaryColor[0], boundaryColor[1], 
-	                               boundaryColor[2], boundaryFader.getInterstate()));
+	renderer->setGlobalColor(boundaryColor[0], boundaryColor[1], 
+	                         boundaryColor[2], boundaryFader.getInterstate());
 
 	int size = singleSelected ? isolatedBoundarySegments.size() 
 	                          : sharedBoundarySegments.size();

@@ -104,7 +104,7 @@ void Cardinals::draw(const StelCore* core, StelRenderer* renderer, double latitu
 	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
 	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
-	renderer->setGlobalColor(Vec4f(color[0], color[1], color[2], fader.getInterstate()));
+	renderer->setGlobalColor(color[0], color[1], color[2], fader.getInterstate());
 	renderer->setBlendMode(BlendMode_Alpha);
 
 	Vec3f pos;
