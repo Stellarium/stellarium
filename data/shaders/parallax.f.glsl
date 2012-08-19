@@ -55,7 +55,7 @@ vec4 getLighting()
 		//*scale +bias
 		height = height * s - 0.5*s;
 		
-		hTexCoord = hTexCoord + (height * v.xy);
+		hTexCoord = hTexCoord + (height * v.xz);
 	}
 
 	//For bump mapping, the normal comes from the bump map texture lookup
