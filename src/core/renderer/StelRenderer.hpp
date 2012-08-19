@@ -176,9 +176,9 @@ struct TextParams
 	//! This calculates 2D text position, so it does handle the required parameters 
 	//! (position and string). Other parameters are at default values.
 	//!
-	//! @param x      = 3D position of the text to draw.
-	//! @param y      = Projector to project the 3D position to 2D.
-	//! @param string = Text string to draw.
+	//! @param position3D = 3D position of the text to draw.
+	//! @param projector  = Projector to project the 3D position to 2D.
+	//! @param string     = Text string to draw.
 	//!
 	//! Default values of other parameters are: rotation of 0.0 degrees,
 	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity,

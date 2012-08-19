@@ -90,7 +90,9 @@ public:
 	//! @param projector Projector to project the vertices.
 	//! @param renderer  Renderer to draw with.
 	//! @param transform Used to determine whether we're above or below the ring.
+	//! @param shader    Shader to use for drawing.
 	//! @param screenSz  Screen size.
+	//! @param info      Shader information.
 	void draw(StelProjectorP projector, class StelRenderer* renderer, StelProjector::ModelViewTranformP transform, class StelGLSLShader *shader, double screenSz, ShadowPlanetShaderInfo *info);
 
 	double getSize(void) const {return radiusMax;}
@@ -199,6 +201,7 @@ public:
 	//! @param renderer       Renderer used for drawing.
 	//! @param maxMagLabels   Maximum visual magnitude to draw the label at.
 	//! @param planetNameFont Font used to draw the planet label.
+	//! @param planetGraphics Graphics shared among planets.
 	void draw(StelCore* core, class StelRenderer* renderer, float maxMagLabels,
 	          const QFont& planetNameFont, SharedPlanetGraphics& planetGraphics);
 

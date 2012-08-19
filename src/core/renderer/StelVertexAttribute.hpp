@@ -90,14 +90,14 @@ struct StelVertexAttribute
 	//! Specifies how Renderer should interpret this attribute.
 	AttributeInterpretation interpretation;
 	
-	//! Default ctor so vectors can reallocate.
+	//! Default constructor so vectors can reallocate.
 	StelVertexAttribute(){}
 	
 	//! Construct a StelVertexAttribute from a string.
 	//!
-	//! The string must be in format "<Type> <Interpretation>" where <Type> matches
+	//! The string must be in format "|Type| |Interpretation:" where |Type| matches
 	//! a value of AttributeType enum without the "AttributeType_" prefix, and 
-	//! <Interpretation> matches a value of AttributeInterpretation enum without 
+	//! |Interpretation| matches a value of AttributeInterpretation enum without 
 	//! the "AttributeInterpretation_" prefix.
 	StelVertexAttribute(const QString& attributeString)
 	{

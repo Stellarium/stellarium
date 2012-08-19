@@ -415,26 +415,22 @@ public:
 
 	//! Draw the region as triangles (i.e. filling the region).
 	//!
-	//! @param renderer   Renderer to use for drawing.
-	//! @param drawParams Drawing parameters (projector, clipping cap, if any, etc.).
+	//! @param renderer Renderer to use for drawing.
+	//! @param params   Drawing parameters (projector, clipping cap, if any, etc.).
 	//!
 	//! @see DrawParams
 	virtual void drawFill(class StelRenderer* renderer, const DrawParams& params);
 
 	//! Draw the outline of the region.
 	//!
-	//! @param renderer   Renderer to use for drawing.
-	//! @param drawParams Drawing parameters (projector, clipping cap, if any, etc.).
-	//!                   Note that maxSqDistortion has no effect here.
+	//! @param renderer Renderer to use for drawing.
+	//! @param params   Drawing parameters (projector, clipping cap, if any, etc.).
+	//!                 Note that maxSqDistortion has no effect here.
 	//!
 	//! @see DrawParams
 	virtual void drawOutline(class StelRenderer* renderer, const DrawParams& params);
 
 protected:
-	//GL-REFACTOR note: If this causes bugs, some instances are
-	//static/global/not deleted and we need to use IDs to a vertex buffer cache
-	//that deletes buffers at Renderer destruction.
-	
 	//! Cached plain vertex buffer for drawing.
 	StelVertexBuffer<PlainVertex>* fillPlainVertexBuffer;
 
@@ -450,7 +446,7 @@ protected:
 	//! vertices (e.g. when subdividing and this projecting outside Renderer).
 	//!
 	//! @param renderer            Renderer to create vertex buffer.
-	//! @param drawParams          Parameters used for drawing 
+	//! @param params              Parameters used for drawing 
 	//!                            (which also affect vertex generation).
 	//! @param handleDiscontinuity Do we need to ensure that no triangles cross a 
 	//!                            projection discontinuity?
@@ -1170,11 +1166,18 @@ protected:
 
 
 //! Compute the intersection of 2 great circles segments.
+//! @param p1 Start of the first great circle segment.
+//! @param p2 End of the first great circle segment.
+//! @param p3 Start of the second great circle segment.
+//! @param p4 End of the second great circle segment.
 //! @param ok is set to false if no intersection was found.
 //! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3, const Vec3d& p4, bool& ok);
 
 //! Compute the intersection of a great circles segment with another great circle.
+//! @param p1 Start of the great circle segment.
+//! @param p2 End of the great circle segment.
+//! @param nHalfSpace Normal of the plane separating half space to intersect with.
 //! @param ok is set to false if no intersection was found.
 //! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& nHalfSpace, bool& ok);

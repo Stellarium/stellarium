@@ -238,8 +238,8 @@ private:
 //! Allow to load the GUI as a static plugin
 class StelStandardGuiPluginInterface : public QObject, public StelGuiPluginInterface
 {
-	Q_OBJECT
-	Q_INTERFACES(StelGuiPluginInterface)
+	Q_OBJECT;
+	Q_INTERFACES(StelGuiPluginInterface);
 public:
 	virtual class StelGuiBase* getStelGuiBase() const;
 };

@@ -59,7 +59,8 @@ public:
 	virtual void init();
 
 	//! Draw SolarSystem objects (planets).
-	//! @param core The StelCore object.
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to use for drawing.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
 	virtual void draw(StelCore *core, class StelRenderer* renderer);
