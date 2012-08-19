@@ -47,8 +47,8 @@ public:
 	//! Get the StelMainGraphicsView singleton instance.
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
-	//! Delete openGL textures (to call before the GLContext disappears)
-	void deinitGL();
+	//! Delete textures (to call before the renderer disappears)
+	void deinit();
 
 	//! Return the QGraphicsWidget encapsulating the Stellarium main sky view.
 	//! Use its layout if you want to add widget on the top of the main sky view.
