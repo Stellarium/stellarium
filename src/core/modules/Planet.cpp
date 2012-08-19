@@ -1191,7 +1191,6 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer,
 
 	// Draw the halo
 
-	// Prepare openGL lighting parameters according to luminance
 	float surfArcMin2 = getSpheroidAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 

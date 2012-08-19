@@ -371,8 +371,8 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 	QGraphicsView::keyReleaseEvent(event);
 }
 
-//! Delete openGL textures (to call before the GLContext disappears)
-void StelMainGraphicsView::deinitGL()
+//! Delete textures (to call before the renderer disappears)
+void StelMainGraphicsView::deinit()
 {
 	// Can be called only once
 	if (wasDeinit==true)

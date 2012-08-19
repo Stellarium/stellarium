@@ -68,10 +68,9 @@ private:
 	void setColorButtonColor(QColor newColor);
 
 	void selectTextureFile(QLineEdit * filePathLineEdit);
-	//! Check if a file is a valid graphics file with OpenGL texture dimensions.
-	//! OpenGL accepts only dimentions that are powers of 2 (512, 1024, etc.)
+	//! Check if a file is a valid graphics file with power-of-two texture dimensions.
+	//! StelRenderer only guarantees support for dimentions that are powers of 2 (512, 1024, etc.)
 	bool verifyTextureFile(QString filePath);
-	bool verifyPowerOfTwo(int value);
 
 protected:
 	virtual void createDialogContent();

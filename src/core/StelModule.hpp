@@ -60,8 +60,8 @@ public:
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
 	virtual void init() = 0;
 
-	//! Called before the module will be delete, and before the openGL context is suppressed.
-	//! Deinitialize all openGL texture in this method.
+	//! Called before the module will be deleted, and before the renderer is destroyed.
+	//! Deinitialize all textures in this method.
 	virtual void deinit() {;}
 
 	//! Execute all the drawing functions for this module.

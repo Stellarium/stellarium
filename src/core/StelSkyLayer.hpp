@@ -30,7 +30,7 @@ class StelCore;
 
 //! Abstract class defining the API to implement for all sky layer.
 //! A sky layer is a graphical layer containing image or polygons displayed in the sky.
-//! The StelSkyImageMgr allows to set the display order for layers, as well as opacity.
+//! The StelSkyLayerMgr allows to set the display order for layers, as well as opacity.
 class StelSkyLayer : public QObject
 {
 	Q_OBJECT

@@ -160,7 +160,7 @@ void Atmosphere::computeColor
 		           "Vertex buffer not initialized when setting colors");
 
 		// Now need to compute the xy part of the color component
-		// This is done in the openGL shader if possible
+		// This is done in a GLSL shader if possible
 		if(NULL != shader)
 		{
 			// Store the back projected position + luminance in the input color to the shader
