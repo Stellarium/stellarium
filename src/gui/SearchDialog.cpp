@@ -263,6 +263,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	// init listWidget
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
+	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -460,6 +461,17 @@ void SearchDialog::gotoObject(QListWidgetItem *item)
 	gotoObject(objName);
 }
 
+void SearchDialog::searchListChanged(const QString &newText)
+{
+	QList<QListWidgetItem*> items = ui->objectsListWidget->findItems(newText, Qt::MatchStartsWith);
+	ui->objectsListWidget->clearSelection();
+	if (!items.isEmpty())
+	{
+		items.at(0)->setSelected(true);
+		ui->objectsListWidget->scrollToItem(items.at(0));
+	}
+}
+
 bool SearchDialog::eventFilter(QObject*, QEvent *event)
 {
 	if (event->type() == QEvent::KeyRelease)
@@ -554,5 +566,6 @@ void SearchDialog::updateListWidget(int index)
 	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
 	ui->objectsListWidget->clear();
 	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId));
-	connect(ui->objectsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+	connect(ui->objectsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+	connect(ui->objectsListWidget, SIGNAL(), this, SLOT(gotoObject(QListWidgetItem*)));
 }
