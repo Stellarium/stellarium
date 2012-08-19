@@ -174,12 +174,13 @@ protected:
 	}
 
 	//! Draw stars and their names onto the viewport.
-	//! @param sPainter the painter to use 
-	//! @param index zone index to draw
-	//! @param is_inside whether the zone is inside the current viewport
-	//! @param rcmag_table table of magnitudes
-	//! @param core core to use for drawing
-	//! @param maxMagStarName magnitude limit of stars that display labels
+	//! @param projector        Projector to project 3D coords to the viewport.
+	//! @param renderer         Renderer to use for drawing.
+	//! @param index            zone index to draw
+	//! @param is_inside        whether the zone is inside the current viewport
+	//! @param rcmag_table      table of magnitudes
+	//! @param core             core to use for drawing
+	//! @param maxMagStarName   magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
 	void draw(StelProjectorP projector, class StelRenderer* renderer, int index,
 	          bool is_inside, const float *rcmag_table, StelCore* core,

@@ -65,7 +65,8 @@ public:
 	virtual void deinit() {;}
 
 	//! Execute all the drawing functions for this module.
-	//! @param core the core to use for the drawing
+	//! @param core     the core to use for the drawing
+	//! @param renderer Renderer to draw with.
 	virtual void draw(StelCore* core, class StelRenderer* renderer) 
 	{
 		Q_UNUSED(core);
