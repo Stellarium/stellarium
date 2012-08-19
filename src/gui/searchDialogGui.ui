@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>198</height>
+    <width>527</width>
+    <height>229</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -138,7 +138,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="objectTab">
       <attribute name="title">
@@ -753,6 +753,13 @@
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
         <widget class="QComboBox" name="objectTypeComboBox"/>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="searchInListLineEdit">
+         <property name="placeholderText">
+          <string>Search in list...</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QListWidget" name="objectsListWidget"/>
