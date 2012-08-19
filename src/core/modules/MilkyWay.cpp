@@ -117,7 +117,7 @@ void MilkyWay::draw(StelCore* core, class StelRenderer* renderer)
 	c[2] = std::max(c[2], 0.0f);
 	c[3] = 1.0f;
 
-	renderer->setGlobalColor(Vec4f(c[0], c[1], c[2], 1.0f));
+	renderer->setGlobalColor(c[0], c[1], c[2]);
 	renderer->setCulledFaces(CullFace_Back);
 	renderer->setBlendMode(BlendMode_None);
 	tex->bind();
