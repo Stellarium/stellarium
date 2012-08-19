@@ -349,7 +349,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelRenderer* renderer)
 
 	const float intensity = fogFader.getInterstate() * (0.1f + 0.1f * skyBrightness);
 	const float filteredIntensity = intensity * nightModeFilter;
-	renderer->setGlobalColor(Vec4f(intensity, filteredIntensity, filteredIntensity, 1.0f));
+	renderer->setGlobalColor(intensity, filteredIntensity, filteredIntensity);
 	fogTex->bind();
 	const float height = (tanMode || calibrated) 
 	                   ? radius * std::tan(fogAltAngle * M_PI / 180.f) 

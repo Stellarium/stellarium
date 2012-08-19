@@ -266,8 +266,8 @@ bool SkyLabel::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proje
 	                       vJustify == 'c' ? fontMetrics.height() * 0.5 :
 	                                         0.0;
 
-	renderer->setGlobalColor(Vec4f(labelColor[0], labelColor[1], 
-	                               labelColor[2], labelFader.getInterstate()));
+	renderer->setGlobalColor(labelColor[0], labelColor[1], 
+	                         labelColor[2], labelFader.getInterstate());
 	renderer->drawText(TextParams(labelXY[0] + xOffset - jxOffset, 
 	                              labelXY[1] + yOffset - jyOffset, 
 	                              labelText).useGravity());
@@ -295,8 +295,8 @@ bool SkyLabel::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proje
 		else if (hJustify == 'r')
 			lineEndX += 5;
 				
-		renderer->setGlobalColor(Vec4f(labelColor[0], labelColor[1], labelColor[2], 
-		                               labelFader.getInterstate()));
+		renderer->setGlobalColor(labelColor[0], labelColor[1], labelColor[2],
+		                         labelFader.getInterstate());
 
 		renderer->drawLine(lineEndX,lineEndY,objXY[0], objXY[1]);
 	}
@@ -329,8 +329,8 @@ bool ScreenLabel::draw(StelCore*, StelRenderer* renderer, StelProjectorP project
 		return false;
 	}
 
-	renderer->setGlobalColor(Vec4f(labelColor[0], labelColor[1], 
-	                               labelColor[2], labelFader.getInterstate()));
+	renderer->setGlobalColor(labelColor[0], labelColor[1],
+	                         labelColor[2], labelFader.getInterstate());
 	renderer->setFont(labelFont);
 	renderer->drawText(TextParams(screenX, screenY, labelText).useGravity());
 
