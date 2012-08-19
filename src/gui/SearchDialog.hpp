@@ -96,6 +96,8 @@ private slots:
 	void gotoObject(const QString& nameI18n);
 	// for going from list views
 	void gotoObject(QListWidgetItem* item);
+
+	void searchListChanged(const QString& newText);
 	
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
