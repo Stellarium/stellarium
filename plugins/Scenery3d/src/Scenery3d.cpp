@@ -166,7 +166,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     dimNear = 1.0f;
     dimFar = dimNear+1.0f;
 
-    parallaxScale = 0.055f;
+    parallaxScale = 0.015f;
 
     camDepthFBO = 0;
     camDepthTex = 0;
@@ -2035,6 +2035,14 @@ void Scenery3d::drawDebugText(StelCore* core)
 
 void Scenery3d::initShadowMapping()
 {
+    //Query how many texture units we have at disposal
+    GLint maxTex, maxComb;
+    glGetIntegerv(GL_MAX_TEXTURE_COORDS, &maxTex);
+    glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxComb);
+
+    qDebug() << "Available texture units:" << std::max(maxTex, maxComb);
+
+
     //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
     //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
     QGLFramebufferObject *qglFBO=new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
