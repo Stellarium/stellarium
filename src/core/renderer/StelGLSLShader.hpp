@@ -27,11 +27,12 @@
 //! Can be used with Renderer backends that support GLSL, such 
 //! as the StelQGL2Renderer.
 //!
-//! A shader program can be created by adding vertex and fragment shaders
-//! from source and then calling the build() member function. It can also 
-//! be modified by calling the unlock() member function and adding more 
-//! shaders, and even by disabling or reenabling them. Disabling/reenabling is 
-//! only supported for vertex shaders, but fragment shader functions can be 
+//! Shader programs are created by StelRenderer. After creation, sources of used 
+//! vertex and fragment shaders have to be added, and then the shader must be built 
+//! using the build() member function. After that, the shader can be bound to be used 
+//! for drawing. It can also be modified by calling the unlock() member function and
+//! adding more shaders, and even by disabling or reenabling them. Disabling/reenabling
+//! is only supported for vertex shaders, but fragment shader functions can be 
 //! added when needed.
 //!
 //! There is currently no geometry shader support, but it can be added when needed.
@@ -42,41 +43,41 @@
 //! Some uniform variables are specified internally and need to be declared 
 //! in the shader:
 //!
-//! @li StelProjector's projection matrix: mat4f projectionMatrix
-//! @li Global color (only specified if vertex has no color attribute): vec4 globalColor
+//! @li StelProjector's projection matrix: <em>mat4f projectionMatrix</em>
+//! @li Global color (only specified if vertex has no color attribute): <em>vec4 globalColor</em>
 //!
 //!
 //! Vertex attributes can't be set through the API - they are set internally 
 //! from vertex buffer during drawing.
 //!
-//! Also, any shader that uses StelProjector projection (that is, any shader except 
-//! of those working with 2D data) must declare and call the "project()" function
+//! Any shader that uses StelProjector projection (that is, any shader except 
+//! of those working with 2D data) must declare and call the <em>project()</em> function
 //! to project the vertex position. If vertex projection is done on the CPU, this is 
 //! a dummy function that simply returns its argument. If it's done on the GPU, it's
 //! done in this function.
 //!
-//! The project() function must be declared (but not defined), as follows:
+//! The <em>project()</em> function must be declared (but not defined), as follows:
 //! @code
 //! vec4 project(in vec4 v);
 //! @endcode
 //!
-//! Usage of the project() function:
+//! Usage of the <em>project()</em> function:
 //! @code
 //! gl_Position = projectionMatrix * project(vertex);
 //! @endcode
 //!
 //! Attribute variable names match vertex attribute interpretations as follows:
 //!
-//! @li Position: vertex
-//! @li TexCoord: texCoord
-//! @li Normal:   normal
-//! @li Color:    color 
+//! @li Position: <em>vertex</em>
+//! @li TexCoord: <em>texCoord</em>
+//! @li Normal:   <em>normal</em>
+//! @li Color:    <em>color</em> 
 //!
-//! Furthermore, is useUnprojectedPositionAttribute() is called, another attribute is added:
+//! If useUnprojectedPositionAttribute() is called, another attribute is added:
 //! 
-//! @li Position before StelProjector projection: unprojectedVertex
+//! @li Position before StelProjector projection: <em>unprojectedVertex</em>
 //!
-//! Note that adding a shader or building can fail. After a failure, the 
+//! Shader program building can fail. After a failure, the 
 //! shader is invalid and should not be used (should be destroyed).
 //!
 //!
@@ -140,6 +141,7 @@
 //! shader->release();
 //! @endcode
 //!
+//! @see StelRenderer
 class StelGLSLShader
 {
 public:
@@ -154,7 +156,7 @@ public:
 	//!
 	//! The shader must be unlocked when this is called.
 	//!
-	//! @param source GLSL source code of the fragment shader.
+	//! @param source Source code of the shader.
 	//! @return true if succesfully added and compiled, false otherwise.
 	virtual bool addVertexShader(const QString& source) = 0;
 	
@@ -164,7 +166,7 @@ public:
 	//!
 	//! The shader must be unlocked when this is called.
 	//!
-	//! @param source GLSL source code of the fragment shader.
+	//! @param source Source code of the shader.
 	//! @return true if succesfully added and compiled, false otherwise.
 	virtual bool addFragmentShader(const QString& source) = 0;
 
@@ -203,13 +205,15 @@ public:
 	//! This must be called before the shader can be bound.
 	//!
 	//! This operation can fail. In case of failure, use log() to find out the cause.
+	//! If build() fails, the shader should be assumed to no longer be usable 
+	//! and be destroyed.
 	//!
 	//! @return true if succesfully built, false otherwise.
 	virtual bool build() = 0;
 
-	//! Unlock the shader program.
+	//! Unlock the shader program for modifications.
 	//!
-	//! This allows to modify the shader, adding, enabling, disabling vertex/fragment shaders.
+	//! Allows to, add, enable, disable vertex/fragment shaders.
 	//!
 	//! This can be called even if the shader is bound (which is used 
 	//! for last-moment modifications, like GLSL projection in renderer backend),
@@ -228,18 +232,15 @@ public:
 	//! The shader must be built when this is called.
 	//!
 	//! Note that the shader must be released after any draw calls using the shader
-	//! to allow any builtin default shaders to return to use.
+	//! to allow default shaders to return to use.
 	virtual void bind() = 0;
 
-	//! Release a bound shader to stop using it.
+	//! Release a bound shader after use.
 	//!
-	//! This must be called when done using the shader 
-	//! so that a shader based Renderer backend can return to using default shaders.
+	//! This must be called after using the shader 
+	//! so that the StelRenderer backend can go back to using default shaders.
 	//!
 	//! It also must be called before bind()-ing another StelGLSLShader.
-	//! (This is forced so that code binding a StelGLSLShader will continue work 
-	//! correctly - not overriding default shaders - even after any following
-	//! StelGLSLShader bind is removed.)
 	virtual void release() = 0;
 
 	//! Set value of a uniform shader variable.
@@ -255,15 +256,16 @@ public:
 	//! The shader must be bound when this is called.
 	//!
 	//! @note Due to dynamic shader re-linking needed to support modular shaders,
-	//! the uniforms are cached internally and only uploaded at the draw call when 
-	//! the shader is used. Only a fixed amount of storage is used (currently 512 
+	//! uniforms are cached internally and only uploaded at the draw call when 
+	//! the shader is used. Fixed amount of storage is allocated (currently 512 
 	//! bytes, which is enough for 8 4x4 matrices). Also only a fixed number of 
 	//! uniforms is supported (currently 32). Both of these limits can be increased 
 	//! if needed (see StelQGLGLSLShader). 
-	//! This storage is added to with each setUniformValue() call, and freed on a
+	//! This storage is written to with each setUniformValue() call, and freed on a
 	//! call to release().
 	//!
-	//! @param name  Name of the uniform variable. Must match variable name in a shader source.
+	//! @param name  Name of the uniform variable. Must match variable name in at least one 
+	//!              of the used vertex/fragment shaders.
 	//!              For efficiency reasons, the name is not guaranteed to be copied 
 	//!              within the shader backend. Therefore, the name string must exist until a 
 	//!              call to release().
@@ -281,7 +283,7 @@ public:
 	//! Does this shader need the unprojected position attribute?
 	//!
 	//! If called, the shader will have to declare another vertex attribute, 
-	//! unprojectedVertex, for vertex position before StelProjector projection.
+	//! <em>unprojectedVertex</em>, for vertex position before StelProjector projection.
 	//! Useful e.g. for lighting.
 	virtual void useUnprojectedPositionAttribute() = 0;
 
@@ -297,7 +299,7 @@ protected:
 		//TODO C++11: use static assert here (for a compile-time error)
 		Q_ASSERT_X(false, Q_FUNC_INFO,
 		           "Unsupported uniform data type. "
-				   "Supported types: bool, int, float, Vec2f, Vec3f, Vec4f, Mat4f");
+		           "Supported types: bool, int, float, Vec2f, Vec3f, Vec4f, Mat4f");
 	}
 
 	//! setUniformValue() implementation for type bool.

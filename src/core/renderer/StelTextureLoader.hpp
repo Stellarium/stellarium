@@ -41,7 +41,7 @@ class StelTextureLoader : public QObject
 	Q_OBJECT
 
 public:
-	//! Abort texture loading (e.g. when destroying a texture that's still loading).
+	//! Abort texture loading (for example when destroying a texture that's still loading).
 	//!
 	//! Can only be called from the main thread.
 	virtual void abort(){};
@@ -147,7 +147,7 @@ private:
 	QNetworkReply* networkReply;
 };
 
-//! Texture loader that loads an image in the file system.
+//! Texture loader that loads an image from the file system.
 class StelFileTextureLoader : public StelTextureLoader
 {
 	Q_OBJECT

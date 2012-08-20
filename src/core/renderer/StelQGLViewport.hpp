@@ -28,7 +28,7 @@
 
 #include "StelUtils.hpp"
 
-//! GLWidget specialized for Stellarium, mostly to provide better debugging information.
+//! GLWidget specialized for Stellarium, mainly to provide better debugging information.
 class StelQGLWidget : public QGLWidget
 {
 public:
@@ -78,7 +78,7 @@ protected:
 
 //! Manages OpenGL viewport.
 //!
-//! This class handles things like framebuffers and Qt-style painting to the viewport.
+//! This class handles things like framebuffers and Qt painting to the viewport.
 class StelQGLViewport
 {
 public:
@@ -134,6 +134,8 @@ public:
 	}
 
 	//! Initialize the viewport.
+	//!
+	//! @param npot Are non-power-of-two textures supported?
 	void init(const bool npot)
 	{
 		invariant();
@@ -166,7 +168,7 @@ public:
 	//! Set the default painter to use when not drawing to FBO.
 	//!
 	//! This is the only place where we might be getting a painter from outside world,
-	//! so we require that it's GL or GL2.
+	//! so we require that it uses a GL or GL2 paint engine.
 	//!
 	//! @param painter Painter to set.
 	//! @param context GL context used by the renderer, for error checking.
@@ -221,7 +223,7 @@ public:
 
 	//! Set font to use for drawing text.
 	//!
-	//! Can be only called when painting is enabled.
+	//! Can be only called when Qt painting is enabled.
 	void setFont(const QFont& font)
 	{
 		Q_ASSERT_X(NULL != painter, Q_FUNC_INFO,
@@ -292,7 +294,7 @@ public:
 		}
 	}
 
-	//! Disable Qt-style painting.
+	//! Disable Qt painting.
 	void disablePainting()
 	{
 		invariant();
@@ -306,7 +308,7 @@ public:
 		invariant();
 	}
 
-	//! Enable Qt-style painting (with the current default painter, or constructing a fallback if no default).
+	//! Enable Qt painting (with the current default painter, or constructing a fallback if no default).
 	void enablePainting()
 	{
 		invariant();
@@ -379,7 +381,7 @@ private:
 #endif
 	}
 
-	//! Enable Qt-style painting with specified painter (or construct a fallback painter if NULL).
+	//! Enable Qt painting with specified painter (or construct a fallback painter if NULL).
 	void enablePainting(QPainter* painter)
 	{
 		invariant();

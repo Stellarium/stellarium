@@ -54,7 +54,7 @@ public:
 		return NULL;
 	}
 
-	//! Get maximum index value.
+	//! Get the greatest index value.
 	uint maxIndex() const
 	{
 		return maxIndex_;

@@ -36,8 +36,8 @@
 
 //! Pixel blending modes.
 //!
-//! Used for example for transparency, mixing colors in background 
-//! with colors drawn in front of it.
+//! Used for transparency, mixing colors in background 
+//! with colors drawn in front, etc.
 enum BlendMode
 {
 	//! No blending, new color overrides previous color.
@@ -45,8 +45,7 @@ enum BlendMode
 	//! Colors of each channel are added up, clamping at maximum value 
 	//! (255 for 8bit channels, 1.0 for floating-point colors)
 	BlendMode_Add,
-	//! Use alpha value of the front color for blending.
-	//! (0 is fully transparent, 255 or 1.0 fully opague)
+	//! Use alpha value of the front color for blending (0 is fully transparent, 255 or 1.0 fully opague).
 	BlendMode_Alpha
 };
 
@@ -55,7 +54,7 @@ enum BlendMode
 //! Used with StelRenderer::setCulledFaces()
 enum CullFace 
 {
-	//! Draw both mack and front faces.
+	//! Draw both back and front faces.
 	CullFace_None,
 	//! Don't draw front faces.
 	CullFace_Front,
@@ -68,11 +67,9 @@ enum DepthTest
 {
 	//! No depth test. Earlier draws are overdrawn by the later draws.
 	DepthTest_Disabled,
-	//! Do not write to the depth buffer. Draws are affected by the depth buffer
-	//! without modifying it.
+	//! Do not write to the depth buffer - draws are affected by the depth buffer without modifying it.
 	DepthTest_ReadOnly,
-	//! Read and write to the depth buffer. Draws are affected by the depth buffer 
-	//! and change its values.
+	//! Read and write to the depth buffer - draws are affected by the depth buffer and change its values.
 	DepthTest_ReadWrite
 };
 
@@ -89,7 +86,8 @@ enum StencilTest
 	StencilTest_DrawIf_1
 };
 
-//! Describes possible formats of texture data used with the raw data createTexture overload.
+//! Describes possible formats of texture data used with the raw data overload of
+//! StelRenderer::createTexture().
 //!
 //! Currently, this is only used for float textures, but 
 //! it can be expanded when needed.
@@ -99,12 +97,7 @@ enum TextureDataFormat
 	TextureDataFormat_RGBA_F32
 };
 
-//Notes:
-//
-//enable/disablePainting are temporary and will be removed
-//    once painting is done through StelRenderer.
-
-//! Provides access to scene rendering calls so the Renderer can control it.
+//! Provides access to scene rendering so StelRenderer can control it.
 //!
 //! Renderer implementations might decide to only draw parts of the scene 
 //! each frame to increase FPS. This allows them to do so.
@@ -117,22 +110,22 @@ public:
 	//!         (i.e. we're done drawing), true otherwise.
 	virtual bool drawPartial() = 0;
 
-	//! Get QPainter used for Qt-style painting to the viewport.
+	//! Get QPainter used for Qt painting to the viewport.
 	//!
-	//! (Note that this painter might not necessarily end up being used - 
+	//! (This painter might not necessarily end up being used - 
 	//! e.g. if a GL backend uses FBOs, it creates a painter to draw to the
 	//! FBOs.)
 	virtual QPainter* getPainter() = 0;
 
 	//! Get viewport effect to apply when drawing the viewport
 	//!
-	//! This can return NULL, in which case no viewport effect is used.
+	//! If this returns NULL, no viewport effect is used.
 	virtual StelViewportEffect* getViewportEffect() = 0;
 };
 
 //! Parameters specifying how to draw text.
 //!
-//! These are e.g. passed to StelRenderer::drawText() to draw text.
+//! These are passed to StelRenderer::drawText().
 //!
 //! This is a builder-style struct. Parameters can be specified like this:
 //!
@@ -159,7 +152,7 @@ struct TextParams
 	//!
 	//! Default values of other parameters are: rotation of 0.0 degrees,
 	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity,
-	//! 2D projection from StelCore.
+	//! 2D projection.
 	TextParams(const float x, const float y, const QString& string)
 		: x_(x)
 		, y_(y)
@@ -174,15 +167,14 @@ struct TextParams
 	//! Construct TextParams to draw text at a 3D position, using specified projector.
 	//!
 	//! This calculates 2D text position, so it does handle the required parameters 
-	//! (position and string). Other parameters are at default values.
+	//! (position and string), and also sets the projector. Other parameters are at default values.
 	//!
-	//! @param position3D = 3D position of the text to draw.
+	//! @param position3D = 3D position of the text.
 	//! @param projector  = Projector to project the 3D position to 2D.
 	//! @param string     = Text string to draw.
 	//!
 	//! Default values of other parameters are: rotation of 0.0 degrees,
-	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity,
-	//! 2D projection from StelCore.
+	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity.
 	template<class F>
 	TextParams(Vector3<F>& position3D, StelProjectorP projector, const QString& string)
 		: string_(string)
@@ -241,7 +233,7 @@ struct TextParams
 	float yShift_;
 	//! Don't draw with gravity.
 	bool  noGravity_;
-	//! Projector to use (for most(all?) cases, 2D projection).
+	//! Projector to use (for most cases, 2D projection).
 	StelProjectorP projector_;
 };
 
@@ -370,14 +362,11 @@ public:
 	//! The rectangle can be rotated around its center by an angle specified 
 	//! in degrees.
 	//!
-	//! Default implementation uses other Renderer functions to draw the rectangle,
-	//! but can be overridden if a more optimized implementation is needed.
-	//!
 	//! @param x      X position of the top left corner on the screen in pixels.
 	//! @param y      Y position of the top left corner on the screen in pixels. 
 	//! @param width  Width in pixels.
 	//! @param height Height in pixels.
-	//! @param angle  Angle to rotate the rectangle in degrees.
+	//! @param angle  Angle to rotate the rectangle around its center in degrees.
 	virtual void drawRect(const float x, const float y, 
 	                      const float width, const float height, 
 	                      const float angle = 0.0f) = 0;
@@ -389,14 +378,11 @@ public:
 	//! The rectangle can be rotated around its center by an angle specified 
 	//! in degrees.
 	//!
-	//! Default implementation uses other Renderer functions to draw the rectangle,
-	//! but can be overridden if a more optimized implementation is needed.
-	//!
 	//! @param x      X position of the top left corner on the screen in pixels.
 	//! @param y      Y position of the top left corner on the screen in pixels. 
 	//! @param width  Width in pixels.
 	//! @param height Height in pixels.
-	//! @param angle  Angle to rotate the rectangle in degrees.
+	//! @param angle  Angle to rotate the rectangle around its center in degrees.
 	virtual void drawTexturedRect(const float x, const float y, 
 	                              const float width, const float height, 
 	                              const float angle = 0.0f) = 0;
@@ -426,7 +412,7 @@ public:
 	//! Set font to use for drawing text.
 	virtual void setFont(const QFont& font) = 0;
 
-	//! Render a single frame.
+	//! Render a frame.
 	//!
 	//! This might not render the entire frame - if rendering takes too long,
 	//! the backend may (or may not) suspend the rendering to finish it next 
@@ -439,8 +425,7 @@ public:
 
 	//! Create a texture from specified file or URL.
 	//!
-	//! Texture created must be destroyed by the user before the 
-	//! Renderer that created it is destroyed.
+	//! The texture must be deleted before the StelRenderer is destroyed.
 	//!
 	//! This method never fails, but the texture returned might have the Error status.
 	//! Even in that case, the texture can be bound, but a placeholder 
@@ -448,14 +433,14 @@ public:
 	//!
 	//! @param filename    File name or URL of the image to load the texture from.
 	//!                    If it's a file and it's not found, it's searched for in
-	//!                    the textures/ directory. Some renderer backends might also 
+	//!                    the <em>textures/</em> directory. Some renderer backends might also 
 	//!                    support compressed textures with custom file formats.
 	//!                    These backend-specific files should
-	//!                    not be used as filename - instead, if a compressed
-	//!                    texture with the same file name but different extensions
+	//!                    not be specified by filename - instead, if a compressed
+	//!                    texture with the same file name but different extension
 	//!                    exists, it will be used.
 	//!                    E.g. the GLES backend prefers a .pvr version of a texture
-	//!                    if it exists.
+	//!                    if PVR is supported and it exists.
 	//! @param params      Texture parameters, such as filtering, wrapping, etc.
 	//! @param loadingMode Texture loading mode to use. Normal immediately loads
 	//!                    the texture, Asynchronous starts loading it in a background
@@ -490,8 +475,7 @@ public:
 
 	//! Create a texture from an image.
 	//!
-	//! Texture created must be destroyed by the user before the 
-	//! Renderer that created it is destroyed.
+	//! The texture must be deleted before the StelRenderer is destroyed.
 	//!
 	//! This method never fails, but the texture returned might have the Error status.
 	//! Even in that case, the texture can be bound, but a placeholder 
@@ -524,8 +508,7 @@ public:
 	//! areFloatTexturesSupported() to determine if if floating 
 	//! point textures are supported.
 	//!
-	//! Texture created must be destroyed by the user before the 
-	//! Renderer that created it is destroyed.
+	//! The texture must be deleted before the StelRenderer is destroyed.
 	//!
 	//! This method never fails, but the texture returned might have the Error status.
 	//! Even in that case, the texture can be bound, but a placeholder 
@@ -534,10 +517,10 @@ public:
 	//! The texture is created immediately, as with TextureLoadingMode_Normal.
 	//!
 	//! @param data   Pointer to raw image data. Size of the data must be
-	//!               size.width() * size.height() * pixelSize, where 
-	//!               pixelSize is size of a pixel of specified format.
+	//!               size.width() * size.height() * <em>pixelSize</em>, where 
+	//!               <em>pixelSize</em> is size of a pixel of specified format.
 	//! @param size   Size of the texture in pixels.
-	//! @param format Format of texture data.
+	//! @param format Format of pixels in data.
 	//! @param params Texture parameters, such as filtering, wrapping, etc.
 	//!
 	//! @return New texture.
@@ -561,10 +544,6 @@ public:
 	}
 
 	//! Returns true if floating point textures are supported, false otherwise.
-	//!
-	//! @note With the OpenGL backend, floating point texture support 
-	//! currently can't always be determined correctly, in particular
-	//! on open source drivers. See StelQGL2Renderer::areFloatTexturesSupported.
 	virtual bool areFloatTexturesSupported() const = 0;
 
 	//! Get a texture of the viewport, with everything drawn to the viewport so far.
@@ -572,7 +551,7 @@ public:
 	//! @note Since some backends only support textures with power of two 
 	//! dimensions, the returned texture might be larger than the viewport
 	//! in which case only the part of the texture matching viewport size 
-	//! (returned by getViewportSize) will be used.
+	//! (returned by getViewportSize) will be taken up by the viewport.
 	//!
 	//! @return Viewport texture.
 	StelTextureNew* getViewportTexture()
@@ -584,8 +563,7 @@ public:
 	//!
 	//! This can only be called if isGLSLSupported() is true.
 	//!
-	//! The constructed shader must be deleted by the user before the 
-	//! Renderer is destroyed.
+	//! The constructed shader must be deleted before the StelRenderer is destroyed.
 	virtual StelGLSLShader* createGLSLShader()
 	{
 		Q_ASSERT_X(false, Q_FUNC_INFO, 
@@ -595,7 +573,7 @@ public:
 		return NULL;
 	}
 
-	//! Are GLSL shaders are supported by the backend?
+	//! Are GLSL shaders supported?
 	virtual bool isGLSLSupported() const = 0;
 
 	//! Get size of the viewport in pixels.
@@ -605,7 +583,8 @@ public:
 	//!
 	//! Default color is white.
 	//!
-	//! This color is used when rendering vertex formats that have no vertex color attribute.
+	//! This color is used when rendering vertex formats that have no vertex color attribute,
+	//! lines, non-textured rectangles, etc. .
 	//!
 	//! Per-vertex color completely overrides this 
 	//! (this is to keep behavior from before the GL refactor unchanged).
@@ -613,7 +592,7 @@ public:
 	//! @note Color channel values can be outside of the 0-1 range.
 	virtual void setGlobalColor(const Vec4f& color) = 0;
 
-	//! setGlobalColor overload specifying the channels directly instead of through Vec4f.
+	//! setGlobalColor overload specifying color channels directly instead of through Vec4f.
 	//! 
 	//! @see setGlobalColor
 	void setGlobalColor(const float r, const float g, const float b, const float a = 1.0f)
@@ -643,12 +622,6 @@ public:
 	//!
 	//! Whether a StelProjector changes clockwise-counterclockwise winding can be
 	//! determined by StelProjector::flipFrontBackFace().
-	//!
-	//! @note Front face culling seems to be severely bugged (resulting in 
-	//! garbage viewport) at least on the following configuration/s:
-	//!
-	//! Ubuntu 12.04, AMD Catalyst 8.96.7, Radeon HD 6700 (using StelQGL2Renderer)
-	//!
 	virtual void setCulledFaces(const CullFace cullFace) = 0;
 
 	//! Clear the depth buffer to zeroes, removing any depth information.
@@ -749,16 +722,6 @@ protected:
 	//!                     If multitexturing is not supported, 
 	//!                     binds to texture units other than 0 are ignored.
 	virtual void bindTextureBackend(class StelTextureBackend* textureBackend, const int textureUnit) = 0;
-
-private:
-	//! A plain, position-only 2D vertex.
-	struct Vertex
-	{
-		Vec2f position;
-		Vertex(Vec2f position):position(position){}
-		VERTEX_ATTRIBUTES(Vec2f Position);
-	};
-
 };
 
 #endif // _STELRENDERER_HPP_

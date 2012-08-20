@@ -188,7 +188,7 @@ public:
 		useUnprojectedPosition_ = true;
 	}
 
-	//! Get a reference to underlying shader program.
+	//! Get a reference to the current underlying shader program.
 	//!
 	//! Used by QGL2 renderer backend.
 	QGLShaderProgram& getProgram()
@@ -198,7 +198,7 @@ public:
 		return *program;
 	}
 
-	//! Does this vertex need the unprojected vertex position attribute?
+	//! Does this shader need the unprojected vertex position attribute?
 	//!
 	//! Used by vertex buffer backend to determine if this attribute should be provided.
 	bool useUnprojectedPosition() const
@@ -279,10 +279,10 @@ public:
 	//! How this works:
 	//!
 	//! Setting uniforms just appends new data to uniform storage; setting the 
-	//! same uniform multiple times just continues to use new data (determining 
+	//! same uniform multiple times just uses more data (determining 
 	//! if a uniform with this name was set already would be expensive).
 	//!
-	//! pushUniformStorage() simply poshes the number of uniforms and used storage to 
+	//! pushUniformStorage() pushes the number of uniforms and used storage to 
 	//! an internal stack.
 	//! popUniformStorage() restores this state, throwing away any uniforms set since 
 	//! the push.
@@ -311,7 +311,7 @@ public:
 		uniformCount       = uniformCountStack[uniformStorageStackSize];
 	}
 
-	//! Clear all stored uniforms.
+	//! Clear all stored uniforms, freeing uniform storage.
 	//!
 	//! Called by release().
 	void clearUniforms()
@@ -323,7 +323,7 @@ public:
 	}
 
 protected:
-	//! Renderer owning this shader.
+	//! Renderer that created this shader.
 	class StelQGL2Renderer* renderer;
 
 	//! Vertex shaders that are always linked in (added by the nameless addVertexShader() overload).
@@ -333,7 +333,7 @@ protected:
 	QMap<QString, OptionalShader> namedVertexShaders;
 
 	// There are no namedFragmentShaders, but they can be added if/when needed.
-	//! Vertex shaders that are always linked in (added by the nameless addFragmentShader() overload).
+	//! Fragment shaders that are always linked in (added by the nameless addFragmentShader() overload).
 	QVector<QGLShader*> defaultFragmentShaders;
 
 	//! All shader programs linked so far.
@@ -344,14 +344,14 @@ protected:
 	//! from this cache.
 	//!
 	//! build() is called for each draw call (due to modular shaders being used for vertex 
-	//! projection), so the lookup also has to be very fast.
-	//! The ID used for lookup - a 64 bit unsigned integer, is currently a sum of
+	//! projection), so the lookup must be very fast.
+	//! The ID used for lookup - a 64 bit unsigned integer, is a sum of
 	//! pointers of all shaders linked in the program.
 	//!
 	//! It is not impossible for false positives to happen, but it's very unlikely. 
-	//! 64bit is not going to overflow any soon (you need 16EiB address space for that),
-	//! and as shaders are never deleted or moved in memory, one can't have the same 
-	//! poiner as another. Then only risk is that two sets of pointers will accidentally
+	//! 64bit is not going to overflow any soon (you need a 16EiB address space for that),
+	//! and as shaders are never deleted or moved in memory, two shaders can never have
+	//! identical pointers. Then only risk is that two sets of pointers will accidentally
 	//! add up to the same number, but this is very unlikely as well.
 	//!
 	//! In case this happens, some very simple hash algorithm (still on pointers) might 
@@ -363,7 +363,7 @@ protected:
 
 	//! Log aggregated during all addXXXShader() and build() calls.
 	//!
-	//! May be aggregated from multiple vertex programs if we were built with 
+	//! May be aggregated from multiple vertex programs if built multiple times with 
 	//! different shaders enabled.
 	QString aggregatedLog;
 
@@ -373,7 +373,7 @@ protected:
 	//! Is the shader bound for drawing?
 	bool bound;
 
-	//! Does this shader need the "unprojectedVertex" attribute (position before StelProjector
+	//! Does this shader need the <em>unprojectedVertex</em> attribute (position before StelProjector
 	//! projection) ?
 	bool useUnprojectedPosition_;
 
@@ -384,8 +384,8 @@ protected:
 
 	//! Storage used for uniform data.
 	//!
-	//! As we're liking shaders dynamically and the final shader program is only
-	//! bound directly before drawing, we need to delay uniform setting until that 
+	//! As we're linking shaders dynamically and the final shader program is only
+	//! bound directly before drawing, we need to delay uniform upload until that 
 	//! point. Therefore, setUniformValue_ functions just add data to this storage.
 	//! The data is then uploaded by uploadUniforms().
 	//!
@@ -414,7 +414,7 @@ protected:
 	//! @see pushUniformStorage, popUniformStorage
 	unsigned char uniformStorageUsedStack[MAX_UNIFORMS];
 
-	//! Stack uf uniformCount values used with pushUniformStorage/popUniformStorage.
+	//! Stack of uniformCount values used with pushUniformStorage/popUniformStorage.
 	//!
 	//! @see pushUniformStorage, popUniformStorage
 	unsigned char uniformCountStack[MAX_UNIFORMS];

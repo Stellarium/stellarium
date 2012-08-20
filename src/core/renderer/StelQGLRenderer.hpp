@@ -27,6 +27,7 @@
 #include <QGraphicsView>
 #include <QThread>
 
+#include "GenericVertexTypes.hpp"
 #include "StelApp.hpp"
 #include "StelGuiBase.hpp"
 #include "StelProjectorType.hpp"
@@ -48,6 +49,7 @@ public:
 	//!
 	//! @param parent       Parent widget for the renderer's GL widget.
 	//! @param pvrSupported Are .pvr (PVRTC - PowerVR hardware) textures supported on this platform?
+	//!                     This should be true for mobile platforms with PowerVR GPUs.
 	StelQGLRenderer(QGraphicsView* const parent, const bool pvrSupported)
 		: StelRenderer()
 		, glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
@@ -171,7 +173,7 @@ public:
 
 	//! Must be called by texture backend destructor to ensure we don't keep any pointers to it.
 	//!
-	//! Not called by destroyTextureBackend as texture backends are constructed and 
+	//! Not called by destroyTextureBackend as texture backends are sometimes constructed and 
 	//! destroyed internally (e.g. by drawText).
 	void ensureTextureNotBound(StelTextureBackend* const textureBackend)
 	{
@@ -198,9 +200,9 @@ public:
 		culledFaces = cullFace;
 	}
 
-	virtual void setBlendMode(const BlendMode blendMode)
+	virtual void setBlendMode(const BlendMode mode)
 	{
-		this->blendMode = blendMode;
+		blendMode = mode;
 	}
 
 	virtual void setDepthTest(const DepthTest test)
@@ -273,7 +275,7 @@ public:
 		return gl;
 	}
 
-	//! Get a pointer to thread used for loading graphics data (e.g. textures).
+	//! Get a pointer to the thread used for loading graphics data (e.g. textures).
 	QThread* getLoaderThread()
 	{
 		return loaderThread;
@@ -288,14 +290,14 @@ public:
 	//! Returns true if non-power-of-two textures are supported, false otherwise.
 	virtual bool areNonPowerOfTwoTexturesSupported() const = 0;
 
-	//! Get paint engine type used for Qt drawing.
+	//! Get the paint engine type used for Qt drawing.
 	QPaintEngine::Type qtPaintEngineType() const 
 	{
 		return viewport.qtPaintEngineType();
 	}
 
 protected:
-	//! OpenGL vendor string (used to enable/disable features based on drivers).
+	//! OpenGL vendor string (used to enable/disable features based on driver).
 	QString glVendorString;
 
 	virtual StelTextureBackend* createTextureBackend
@@ -319,7 +321,7 @@ protected:
 
 	//! Asserts that we're in a valid state.
 	//!
-	//! Overriding methods should also call StelGLRenderer::invariant().
+	//! Overriding methods should also call StelQGLRenderer::invariant().
 #ifndef NDEBUG
 	virtual void invariant() const
 	{
@@ -457,14 +459,6 @@ private:
 	//! These are always loaded (drawn) synchronously, so QCache is enough.
 	QCache<QByteArray, StelQGLTextureBackend> textTextureCache;
 
-	//! A plain, position-only 2D vertex.
-	struct Vertex
-	{
-		Vec2f position;
-		Vertex(Vec2f position):position(position){}
-		VERTEX_ATTRIBUTES(Vec2f Position);
-	};
-
 	//! 2D vertex with a position and texture coordinates.
 	struct TexturedVertex
 	{
@@ -480,7 +474,7 @@ private:
 	StelVertexBuffer<TexturedVertex>* textBuffer;
 
 	//! Vertex buffer used to draw plain, non-textured rectangles.
-	StelVertexBuffer<Vertex>* plainRectBuffer;
+	StelVertexBuffer<VertexP2>* plainRectBuffer;
 
 	//! Vertex buffer used to draw textured rectangles.
 	StelVertexBuffer<TexturedVertex>* texturedRectBuffer;

@@ -33,7 +33,7 @@
 class StelQGLArrayVertexBufferBackend : public StelVertexBufferBackend
 {
 protected:
-	//! Buffer containing a single attribute (e.g. color, normal, vertex).
+	//! Buffer containing values of a single vertex attribute.
 	//!
 	//! Must be downcasted to AttributeArray to access the stored data.
 	struct AnyAttributeArray
@@ -97,13 +97,13 @@ public:
 		vertexCount = 0;
 	}
 
-	//! Use a StelProjector to do custom projection of the vertices.
+	//! Use a StelProjector to project vertex positions.
 	//!
-	//! Can be called only immediately before draw(). The projected vertex 
-	//! positions are only used for one draw() call - another one might use a
-	//! changed projector or index buffer.
+	//! Can be called only immediately before drawing. The projected vertex 
+	//! positions are only used for one draw call - another one might use a
+	//! different/modified projector or index buffer.
 	//!
-	//! @param projector Projector to project the vertices with.
+	//! @param projector   Projector to project the vertices.
 	//! @param indexBuffer Index buffer specifying which vertices to project.
 	//!                    If NULL, all vertices are projected.
 	void projectVertices(StelProjector* projector, 
@@ -119,10 +119,10 @@ protected:
 	//! Number of used vertices in the buffer.
 	int vertexCount;
 
-	//! Actual number of vertices in the buffer.
+	//! Number of vertices we have allocated space for.
 	int vertexCapacity;
 
-	//! Buffers of each vertex attribute.
+	//! Buffers storing vertex attributes.
 	QVector<AnyAttributeArray*> buffers;
 
 	//! Are we using vertex positions projected by a StelProjector?
@@ -130,15 +130,14 @@ protected:
 	//! (Instead of just letting OpenGL handle the projection)
 	//!
 	//! This is set to true by projectVertices() and back to false by 
-	//! draw() immediately after. The projected positions can only be used 
-	//! for one draw call, as for another one the StelProjector might be changed.
+	//! the draw call immediately after. The projected positions can only be used 
+	//! for one draw call, as for another one the StelProjector might be different/modified.
 	bool usingProjectedPositions;
 
 	//! Projected vertex positions to draw when we're projecting vertices with a StelProjector.
 	//!
 	//! This replaces the buffer with Position interpretation during drawing when 
-	//! usingProjectedPositions is true. The positions are projected by the 
-	//! projectVertices() member function.
+	//! usingProjectedPositions is true. The positions are projected by projectVertices().
 	QVector<Vec3f> projectedPositions;
 
 	//! Construct a StelQGLArrayVertexBufferBackend.

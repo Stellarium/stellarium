@@ -17,9 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "GenericVertexTypes.hpp"
 #include "StelRenderer.hpp"
-#include "VecMath.hpp"
 #include "StelVertexBuffer.hpp"
+#include "VecMath.hpp"
 
 void StelRenderer::drawLine
 	(const float startX, const float startY, const float endX, const float endY)
@@ -29,9 +30,9 @@ void StelRenderer::drawLine
 	// at once at the end of the frame.
 	
 	// Create a vertex buffer for the line and draw it.
-	StelVertexBuffer<Vertex>* buffer = createVertexBuffer<Vertex>(PrimitiveType_Lines);
-	buffer->addVertex(Vertex(Vec2f(startX, startY)));
-	buffer->addVertex(Vertex(Vec2f(endX, endY)));
+	StelVertexBuffer<VertexP2>* buffer = createVertexBuffer<VertexP2>(PrimitiveType_Lines);
+	buffer->addVertex(VertexP2(startX, startY));
+	buffer->addVertex(VertexP2(endX, endY));
 	buffer->lock();
 	drawVertexBuffer(buffer);
 	delete buffer;

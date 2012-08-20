@@ -515,7 +515,7 @@ void StelQGLRenderer::drawRectInternal
 		if(NULL == plainRectBuffer)
 		{
 			plainRectBuffer = 
-				createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip);
+				createVertexBuffer<VertexP2>(PrimitiveType_TriangleStrip);
 		}
 		else
 		{
@@ -523,10 +523,10 @@ void StelQGLRenderer::drawRectInternal
 			plainRectBuffer->clear();
 		}
 
-		plainRectBuffer->addVertex(Vertex(ne));
-		plainRectBuffer->addVertex(Vertex(nw));
-		plainRectBuffer->addVertex(Vertex(se));
-		plainRectBuffer->addVertex(Vertex(sw));
+		plainRectBuffer->addVertex(VertexP2(ne));
+		plainRectBuffer->addVertex(VertexP2(nw));
+		plainRectBuffer->addVertex(VertexP2(se));
+		plainRectBuffer->addVertex(VertexP2(sw));
 
 		plainRectBuffer->lock();
 		drawVertexBuffer(plainRectBuffer);

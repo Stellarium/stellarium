@@ -27,13 +27,13 @@
 //! 
 //! StelTextureCache is templated by the textured backend used.
 //! This way e.g. StelQGLRenderer can have a texture cache storing
-//! StelQGLTextureBackend. Note that it is assumed that the 
-//! template argument class has a member function called 
-//! startAsynchronousLoading() which is called to start loading when 
+//! StelQGLTextureBackend. The
+//! template argument class must have a member function called 
+//! <em>startAsynchronousLoading()</em> which is called to start loading when 
 //! a texture created with lazy loading mode is requested again with 
 //! asynchronous or normal loading mode.
 //!
-//! Textures are identified by their "name", that is full filesystem path or URL.
+//! Textures are identified by their <em>name</em>, that is full filesystem path or URL.
 //! Generated textures without a name can't be cached.
 //! The cache keeps pointers to all textures with reference counts; 
 //! when a texture with the same name is requested more than once,
@@ -46,7 +46,7 @@
 //!
 //! Similarly, if the texture was created with lazy loading mode, is 
 //! requested with asynchronous mode and didn't start loading yet,
-//! loading is started and the texture is returned.
+//! loading is started and then the texture is returned.
 template<class TextureBackend>
 class StelTextureCache
 {
@@ -66,12 +66,12 @@ private:
 	};
 
 public:
-	//! Get a pointer to cached texture, or NULL if not yet in cache.
+	//! Get a pointer to a cached texture or NULL if not yet in cache.
 	//!
-	//! If the texture is already cached, its reference count is incremented
+	//! If the texture is already in cache, its reference count is incremented
 	//! when returing the pointer.
 	//!
-	//! @param name Name of the texture to get.
+	//! @param name        Name of the texture to get.
 	//! @param loadingMode Loading mode used when creating the texture.
 	//!                    If the texture is cached but loaded asynchronously,
 	//!                    it might not be fully loaded - so if loadingMode is Normal,
@@ -120,8 +120,8 @@ public:
 
 	//! Add a texture to the cache (setting its reference count to 1).
 	//!
-	//! This can only be used to add a texture that is not yet in cache, 
-	//! see get() to get a texture and increase its reference count.
+	//! Only a texture that is not yet in cache can be added,
+	//! use get() to get a texture and increase its reference count.
 	//!
 	//! @param backend Texture backend to add.
 	virtual void add(TextureBackend* backend)

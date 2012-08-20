@@ -24,7 +24,11 @@
 
 //! Basic light source.
 //!
-//! Used for lighting calculation when generating a lit sphere.
+//! Used for lighting calculation when generating a lit sphere, and to 
+//! pass light parameters to shaders.
+//!
+//! (There is no builtin light functionality in StelRenderer - lights are 
+//! done in shaders, or by manually setting vertex colors)
 struct StelLight
 {
 	//! Position of the light.
