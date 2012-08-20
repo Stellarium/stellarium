@@ -45,14 +45,15 @@
 //! SphereParams c = SphereParams(5.0f).oneMinusOblateness(0.5f).orientInside();
 //! @endcode
 //!
-//! @see StelGeometryBuilder, StelGeometrySphere
+//! @see StelGeometrySphere, StelGeometryBuilder::buildSphereUnlit,
+//!      StelGeometryBuilder::buildSphereLit, StelGeometryBuilder::buildSphereFisheye
 struct SphereParams
 {
 	//! Construct SphereParams specifying the required radius parameter with other parameters at
 	//! default values.
 	//!
-	//! Default values are no oblateness, 20 stacks, 20 slices, oriented inside and texture
-	//! not flipped.
+	//! Default values are no oblateness, 20 stacks, 20 slices, faces oriented outside
+	//! and texture not flipped.
 	//!
 	//! @param radius Radius of the sphere. Must be greater than zero.
 	SphereParams(const float radius)
@@ -67,7 +68,7 @@ struct SphereParams
 
 	//! Set the oblateness of the sphere.
 	//!
-	//! 1.0 is a perfect sphere, 0.0f a flat ring.
+	//! 1.0f is a sphere, 0.0f a flat ring.
 	//!
 	//! Must be at least zero and at most one.
 	SphereParams& oneMinusOblateness(const float rhs)
@@ -115,7 +116,7 @@ struct SphereParams
 	int stacks_;
 	//! Are the faces of the sphere oriented inside?
 	bool orientInside_;
-	//! Is the the texture coordinates flipped on the X axis?
+	//! Are the the texture coordinates flipped on the X axis?
 	bool flipTexture_;
 };
 
@@ -130,7 +131,8 @@ struct SphereParams
 //! Spheres are constructed by StelGeometryBuilder functions buildSphereFisheye(),
 //! buildSphereUnlit() and buildSphereLit().
 //!
-//! @see StelGeometryBuilder
+//! @see StelGeometryBuilder::buildSphereUnlit, StelGeometryBuilder::buildSphereLit,
+//!      StelGeometryBuilder::buildSphereFisheye
 class StelGeometrySphere
 {
 friend class StelGeometryBuilder;
@@ -329,7 +331,7 @@ private:
 //! RingParams c = RingParams(5.0f, 10.0f).flipFaces();
 //! @endcode
 //!
-//! @see StelGeometryBuilder, StelGeometryRing
+//! @see StelGeometryRing, StelGeometryBuilder::buildRingTextured, StelGeometryBuilder::buildRing2D
 struct RingParams
 {
 	//! Construct RingParams specifying the required inner and outer radius parameter 
@@ -385,15 +387,16 @@ struct RingParams
 
 //! Drawable 2D or 3D ring.
 //!
-//! Encapsulates vertex and index buffers needed to draw the ring.
+//! Encapsulates vertex and index buffers needed to draw a ring.
 //! These are generated as needed any time ring parameters change.
 //!
-//! The ring is a circular grid with multiple loops each composed of multiple slices.
+//! The ring is a flat circle with a hole in center formed by a 
+//! circular grid with multiple loops each composed of multiple slices.
 //!
 //! Rings are constructed by StelGeometryBuilder functions buildRingTextured(),
 //! and buildRing2D().
 //!
-//! @see StelGeometryBuilder
+//! @see StelGeometryBuilder::buildRingTextured, StelGeometryBuilder::buildRing2D
 class StelGeometryRing
 {
 friend class StelGeometryBuilder;
@@ -599,10 +602,9 @@ public:
 		vertexBuffer->lock();
 	}
 
-	//! Build a cylinder vertex buffer without top and bottom caps.
+	//! Build a cylinder without top and bottom caps.
 	//!
-	//! @param vertexBuffer Vertex buffer (of 3D-position/2D-texcoord vertices)
-	//!                     to store the cylinder. Must be empty, and have the
+	//! @param vertexBuffer Vertex buffer to store the cylinder. Must be empty, and have the
 	//!                     triangle strip primitive type.
 	//! @param radius       Radius of the cylinder.
 	//! @param height       Height of the cylinder.
@@ -649,14 +651,13 @@ public:
 	}
 
 	//! Build a disk having texture center at center of disk.
-	//! The disk is made up of concentric circles with increasing refinement.
+	//! The disk is composed from concentric circles with increasing refinement.
 	//! The number of slices of the outmost circle is (innerFanSlices << level).
 	//!
 	//! Index buffer is used to decrease vertex count.
 	//!
-	//! @param vertexBuffer   Vertex buffer (of 3D-position/2D-texcoord vertices)
-	//!                       to store the fan disk. Must be empty, and have the
-	//!                       triangles primitive type.
+	//! @param vertexBuffer   Vertex buffer to store the fan disk. 
+	//!                       Must be empty, and have the triangles primitive type.
 	//! @param indexBuffer    Index buffer to store indices specifying the triangles
 	//!                       to draw.
 	//! @param radius         Radius of the disk.
@@ -669,9 +670,9 @@ public:
 
 	//! Build a fisheye-textured sphere.
 	//!
-	//! Note that the sphere must be deleted to free graphics resources.
+	//! The sphere must be deleted to free graphics resources.
 	//!
-	//! @param params     Common sphere parameters.
+	//! @param params     Sphere parameters.
 	//! @param textureFov Field of view of the texture coordinates.
 	//!
 	//! @see SphereParams
@@ -693,9 +694,9 @@ public:
 	//! sides of the sphere, y goes from -1.0/+1.0 at z = -radius/+radius 
 	//! (linear along longitudes)
 	//!
-	//! Note that the sphere must be deleted to free graphics resources.
+	//! The sphere must be deleted to free graphics resources.
 	//!
-	//! @param params Common sphere parameters.
+	//! @param params Sphere parameters.
 	//!
 	//! @see SphereParams
 	StelGeometrySphere* buildSphereUnlit(const SphereParams& params)
@@ -716,9 +717,9 @@ public:
 	//! sides of the sphere, y goes from -1.0/+1.0 at z = -radius/+radius 
 	//! (linear along longitudes)
 	//!
-	//! Note that the sphere must be deleted to free graphics resources.
+	//! The sphere must be deleted to free graphics resources.
 	//!
-	//! @param params Common sphere parameters.
+	//! @param params Sphere parameters.
 	//! @param light  Light to use for lighting.
 	//!
 	//! @see SphereParams
@@ -734,7 +735,7 @@ public:
 		return result;
 	}
 
-	//! Build a flat texture mapped ring with 3D coordinates (e.g. for planet's rings)
+	//! Build a flat texture mapped ring with 3D coordinates (for example for planet's rings)
 	//!
 	//! (Note that the parameters refer to RingParams parameters)
 	//!
@@ -744,10 +745,11 @@ public:
 	//! and radially into multiple slices.
 	//!
 	//! Orientation of the ring's faces can be flipped by the flipFaces parameter.
-	//!
 	//! The offset parameter is an offset that is added to positions of all vertices 
 	//! in the ring.
 	//! 
+	//! The ring must be deleted to free graphics resources.
+	//!
 	//! @see RingParams
 	StelGeometryRing* buildRingTextured
 		(const RingParams& params, const Vec3f offset = Vec3f(0.0f, 0.0f, 0.0f))
@@ -770,9 +772,10 @@ public:
 	//! and radially into multiple slices.
 	//!
 	//! Orientation of the ring's faces can be flipped by the flipFaces parameter.
-	//!
 	//! The offset parameter is an offset that is added to positions of all vertices 
 	//! in the ring.
+	//!
+	//! The ring must be deleted to free graphics resources.
 	//! 
 	//! @see RingParams
 	StelGeometryRing* buildRing2D

@@ -27,7 +27,7 @@
 
 #include "VecMath.hpp"
 
-//! Vertex attribute types. 
+//! Vertex attribute data types. 
 //!
 //! Used to specify data type of a vertex attribute in a vertex struct used with VertexBuffer.
 enum AttributeType
@@ -95,9 +95,9 @@ struct StelVertexAttribute
 	
 	//! Construct a StelVertexAttribute from a string.
 	//!
-	//! The string must be in format "|Type| |Interpretation:" where |Type| matches
+	//! The string must be in format "Type Interpretation" where <em>Type</em> matches
 	//! a value of AttributeType enum without the "AttributeType_" prefix, and 
-	//! |Interpretation| matches a value of AttributeInterpretation enum without 
+	//! <em>Interpretation</em> matches a value of AttributeInterpretation enum without 
 	//! the "AttributeInterpretation_" prefix.
 	StelVertexAttribute(const QString& attributeString)
 	{
@@ -140,7 +140,7 @@ struct StelVertexAttribute
 		}
 	}
 
-	//! Parse a comma separated string of vertex attributes to a vector of StelVertexAttribute.
+	//! Parse a string of comma separated vertex attributes to a vector of StelVertexAttribute.
 	static QVector<StelVertexAttribute> parseAttributes(const char* const attribsCString)
 	{
 		QString attributes(attribsCString);
@@ -216,8 +216,9 @@ private:
 //! Also supported in MSVC (which is not C99 compliant) and C++11.
 //!
 //! This macro specifies data type and interpretation of each attribute.
-//! Data type can be Vec2f, Vec3f or Vec4f.
-//! Interpretation can be Position, TexCoord, Normal or Color.
+//! Data type can be <em>Vec2f</em>, <em>Vec3f</em> or <em>Vec4f</em>.
+//! Interpretation can be <em>Position</em>, <em>TexCoord</em>, <em>Normal</em> 
+//! or <em>Color</em>.
 //! Two attributes must never have the same interpretation
 //! (this is asserted by the vertex buffer backend at run time).
 //! 
