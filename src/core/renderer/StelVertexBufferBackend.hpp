@@ -32,20 +32,20 @@ static const int MAX_VERTEX_ATTRIBUTES = 8;
 
 //! Base class of all vertex buffer backends.
 //!
-//! This is where the actual vertex buffer logic is implemented.
+//! This is where the vertex buffer logic is implemented.
 //!
 //! The backend doesn't directly know the vertex type (since templating doesn't mix
-//! with virtual inheritance), so it works with raw (ubyte) pointers.
+//! with virtual inheritance), so it works with raw (void) pointers.
 //!
 //! Vertex format is described by the attributes data member.
 //! Each item in attributes specifies a vertex attribute (such as a position or normal),
-//! and these correspond to the data members of the Vertex struct which is
-//! a template parameter of the StelVertexBuffer class.
+//! and these correspond to the data members of the user-specified vertex struct which is
+//! the template parameter of the StelVertexBuffer class.
 //!
 //! StelVertexBufferBackend is always owned by a StelVertexBuffer and can't exist separately.
-//! Only the Renderer bacend might have direct access to StelVertexBufferBackend's implementation.
+//! Only the StelRenderer backend has direct access to StelVertexBufferBackend's implementation.
 //!
-//! When the user asks Renderer to create a vertex buffer, the renderer backend first creates
+//! When the user asks StelRenderer to create a vertex buffer, the renderer backend first creates
 //! its own implementation of the vertex buffer backend, and then wraps it up in a
 //! StelVertexBuffer.
 //!
@@ -54,8 +54,8 @@ class StelVertexBufferBackend
 {
 	//! Stores vertex attribute metadata of a buffer.
 	//!
-	//! (QVector<StelVertexAttribute> was used previously. This is an optimization
-	//! to speed up vertex manipulation).
+	//! QVector<StelVertexAttribute> was used previously. This is an optimization
+	//! to speed up vertex manipulation.
 	struct Attributes
 	{
 		//! Attribute definitions.
@@ -99,7 +99,7 @@ public:
 	//!                    Data members of the vertex must match vertex attributes of the buffer.
 	virtual void addVertex(const void* const vertexInPtr) = 0;
 	
-	//! Read a vertex from the buffer.
+	//! Get a vertex from the buffer.
 	//!
 	//! StelVertexBuffer guarantees that when this is called,
 	//! buffer is not locked and index is in range.
@@ -115,8 +115,9 @@ public:
 	//! buffer is not locked and index is in range.
 	//!
 	//! @param index       Index of the vertex to set.
-	//! @param vertexInPtr Pointer to the beginning of the vertex we're rewriting with.
-	//!                    Data members of the vertex must match vertex attributes of the buffer.
+	//! @param vertexInPtr Pointer to the beginning of the vertex that will rewrite the vertex in
+	//!                    the buffer. Data members of the vertex must match vertex attributes of
+	//!                    the buffer.
 	virtual void setVertex(const int index, const void* const vertexInPtr) = 0;
 	
 	//! Lock the buffer. Must be called before drawing.
@@ -153,7 +154,7 @@ public:
 	}
 	
 protected:
-	//! Specifies vertex attributes in the vertex type.
+	//! Specifies layout of vertex attributes in the vertex type.
 	const Attributes attributes;
 };
 

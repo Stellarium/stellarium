@@ -46,7 +46,7 @@ enum TextureWrap
 
 //! Parameters specifying how to construct a texture.
 //!
-//! These are e.g. passed to StelRenderer to create a texture.
+//! These are passed to StelRenderer to create a texture.
 //!
 //! This is a builder-style struct. Parameters can be specified like this:
 //!
@@ -60,7 +60,7 @@ enum TextureWrap
 //!                   .filtering(TextureFiltering_Nearest).wrap(TextureWrap_Repeat);
 //! @endcode
 //!
-//! @see StelTexture, StelRenderer
+//! @see StelTextureNew, StelRenderer
 struct TextureParams 
 {
 	//! Construct TextureParams with default parameters.

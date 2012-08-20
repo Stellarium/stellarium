@@ -29,9 +29,9 @@
 #include "StelVertexBuffer.hpp"
 
 
-//! Get OpenGL data type of an element of an attribute type.
+//! Get OpenGL data type of a component of an attribute with specified attribute type.
 //!
-//! E.g. Vec3f is a vector of 3 floats, so it's GL data type is GL_FLOAT.
+//! E.g. Vec3f is a vector of 3 floats, so GL data type of AttributeType_Vec3f is GL_FLOAT.
 //!
 //! @param type Vertex attribute data type.
 //! @return OpenGL attribute element data type.
@@ -75,14 +75,15 @@ inline const char* glslAttributeName(const AttributeInterpretation interpretatio
 }
 
 
-//! Get the enum value matching specified attribute interpreation used to enable GL1 client state.
+//! Get the enum value matching specified attribute interpreation used to enable 
+//! GL1 vertex array client state.
 //!
 //! Used with glEnableClientState()/glDisableClientState(),
 //! so the value returned can be e.g. GL_VERTEX_ARRAY for positions,
 //! GL_COLOR_ARRAY for colors, etc.
 //!
 //! @param interpretation Vertex attribute interpretation.
-//! @return Enum value corresponding to the interpretation.
+//! @return Client state corresponding to the interpretation.
 inline GLenum gl1AttributeEnum(const AttributeInterpretation interpretation)
 {
 	switch(interpretation)
@@ -98,7 +99,7 @@ inline GLenum gl1AttributeEnum(const AttributeInterpretation interpretation)
 	return GL_VERTEX_ARRAY;
 }
 
-//! Get OpenGL primitive type corresponding to specified PrimitiveType.
+//! Translate PrimitiveType to OpenGL primitive type.
 inline GLint glPrimitiveType(const PrimitiveType type)
 {
 	switch(type)
@@ -117,7 +118,7 @@ inline GLint glPrimitiveType(const PrimitiveType type)
 	return -1;
 }
 
-//! Get OpenGL index type corresponding to specified IndexType.
+//! Translate IndexType to OpenGL index type.
 inline GLenum glIndexType(const IndexType indexType)
 {
 	if(indexType == IndexType_U16)      {return GL_UNSIGNED_SHORT;}
@@ -127,7 +128,7 @@ inline GLenum glIndexType(const IndexType indexType)
 	return -1;
 }
 
-//! Get OpenGL texture wrap mode corresponding to specified TextureWrap.
+//! Translate TextureWrap to OpenGL texture wrap mode.
 inline GLint glTextureWrap(const TextureWrap wrap)
 {
 	switch(wrap)
@@ -213,7 +214,7 @@ inline void glEnsureTextureSizeWithinLimits(QImage& image)
 
 //! Get filesystem path of an OpenGL texture.
 //! 
-//! GL-specific to e.g. allow PVR (GLES compression format) support.
+//! This is GL-specific to e.g. allow PVR (compression format on some mobile GPUs) support.
 //!
 //! If PVR is supported, versions of textures with the .pvr extension are preferred. 
 //!
@@ -225,7 +226,7 @@ inline void glEnsureTextureSizeWithinLimits(QImage& image)
 //! @return Full path of the texture.
 QString glFileSystemTexturePath(const QString& filename, const bool pvrSupported);
 
-//! Check for any OpenGL errors and warn if needed. Useful for detecting incorrect GL code.
+//! Check for OpenGL errors and print warnings if an error is detected. 
 //!
 //! @param context Context in which checkGLErrors is called used for error messages.
 //!                (e.g. the function name).

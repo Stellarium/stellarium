@@ -24,7 +24,7 @@
 
 //! Texture interface.
 //!
-//! StelTextureNew replaces StelTexture and any new code should use it instead of StelTexture.
+//! StelTextureNew replaces StelTexture - it is named differently to avoid silently breaking code.
 //!
 //! Constructed by StelRenderer::createTexture().
 //! To use the texture, it can be bound by the bind() member function.
@@ -35,14 +35,17 @@
 //! it is loaded. These are Uninitialized, Loading, Loaded, Error.
 //!
 //! Immediately after construction, a texture is in Uninitialized state.
-//! If load mode specified with createTextureBackend is Normal, it
+//! If load mode specified with <em>createTextureBackend</em> is Normal, it
 //! is immediately loaded (internally, it's in Loading state),
-//! and its state changes to Loaded on success or Error if loading failed. 
+//! and one <em>createTextureBackend</em> is done, its state changes 
+//! to Loaded on success or Error if loading failed. 
 //!
 //! The loading stage (and no other stage) might fail, resulting in Error 
 //! state. If in Error state, error message can be retrieved by getErrorMessage.
+//! A texture with the Error state can still be bound, but a placeholder texture 
+//! will be used internally instead.
 //!
-//! If load mode is Asynchronous, the texture is loaded in background 
+//! If load mode is Asynchronous, the texture is loaded in a background 
 //! thread, and during loading its state is Loading. Again, loading might
 //! fail.
 //!

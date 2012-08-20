@@ -26,13 +26,13 @@
 #include <QString>
 
 
-//! Enumerates possible states of a texture.
+//! Possible states of a texture.
 enum TextureStatus
 {
 	//! Texture is not loaded yet. 
 	//!
-	//! At this point, the texture can't be bound (if it loads lazily,
-	//! a bind call will start loading without actually binding the texture).
+	//! Only lazily loaded textures are returned with this state. If bound, 
+	//! the texture starts loading (meanwhile, a placeholder texture will be used)
 	//!
 	//! This state can only change into Loading.
 	TextureStatus_Uninitialized,
@@ -51,17 +51,29 @@ enum TextureStatus
 	TextureStatus_Error
 };
 
-//! Return string representation of a texture status.
-QString textureStatusName(const TextureStatus status);
+//! Convert a texture status to string (used for debugging).
+inline QString textureStatusName(const TextureStatus status)
+{
+	switch(status)
+	{
+		case TextureStatus_Uninitialized: return "TextureStatus_Uninitialized"; break;
+		case TextureStatus_Loaded:        return "TextureStatus_Loaded"; break;
+		case TextureStatus_Loading:       return "TextureStatus_Loading"; break;
+		case TextureStatus_Error:         return "TextureStatus_Error"; break;
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture status");
+	}
+	// Avoid compiler warnings.
+	return QString();
+}
 
-//! Enumerates ways to load a texture.
+//! Ways to load a texture.
 enum TextureLoadingMode
 {
-	//! Texture is loaded as it is created during the createTextureBackend call.
+	//! Texture is loaded as it is created during the StelRenderer::createTextureBackend() call.
 	//!
 	//! The returned texture is in Loaded or Error status.
 	TextureLoadingMode_Normal,
-	//! Texture is loaded asynchronously (e.g. in a separate thread).
+	//! Texture is loaded asynchronously (in a separate thread).
 	//!
 	//! The returned texture is in Loading state,
 	//! which changes to Loaded or Error after loading is finished.
@@ -161,7 +173,7 @@ protected:
 		invariant();
 	}
 
-	//! Must be called after loading an image (whether normally or asynchronously).
+	//! Must be called after succesfully loading an image (whether normally or asynchronously).
 	//!
 	//! At this point, texture size is initialized and becomes valid.
 	//! Asserts that status is loading and changes it to loaded.

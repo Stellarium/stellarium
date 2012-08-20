@@ -423,7 +423,7 @@ SORT_BRIEF_DOCS        = NO
 
 # If the SORT_MEMBERS_CTORS_1ST tag is set to YES then doxygen will sort the (brief and detailed) documentation of class members so that constructors and destructors are listed first. If set to NO (the default) the constructors will appear in the respective orders defined by SORT_MEMBER_DOCS and SORT_BRIEF_DOCS. This tag will be ignored for brief docs if SORT_BRIEF_DOCS is set to NO and ignored for detailed docs if SORT_MEMBER_DOCS is set to NO.
 
-SORT_MEMBERS_CTORS_1ST = NO
+SORT_MEMBERS_CTORS_1ST = YES
 
 # If the SORT_GROUP_NAMES tag is set to YES then doxygen will sort the
 # hierarchy of group names into alphabetical order. If set to NO (the default)
@@ -484,13 +484,13 @@ MAX_INITIALIZER_LINES  = 30
 # at the bottom of the documentation of classes and structs. If set to YES the
 # list will mention the files that were used to generate the documentation.
 
-SHOW_USED_FILES        = NO
+SHOW_USED_FILES        = YES
 
 # If the sources in your project are distributed over multiple directories
 # then setting the SHOW_DIRECTORIES tag to YES will show the directory hierarchy
 # in the documentation. The default is NO.
 
-SHOW_DIRECTORIES       = NO
+SHOW_DIRECTORIES       = YES
 
 # Set the SHOW_FILES tag to NO to disable the generation of the Files page.
 # This will remove the Files entry from the Quick Index and from the
@@ -703,7 +703,7 @@ FILTER_SOURCE_FILES    = NO
 # Note: To get rid of all source code in the generated output, make sure also
 # VERBATIM_HEADERS is set to NO.
 
-SOURCE_BROWSER         = NO
+SOURCE_BROWSER         = YES
 
 # Setting the INLINE_SOURCES tag to YES will include the body
 # of functions and classes directly in the documentation.

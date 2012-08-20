@@ -22,12 +22,13 @@
 
 #include <QLinkedList>
 
+#include "GenericVertexTypes.hpp"
 #include "StelProjector.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelRenderer.hpp"
 
 
-//! Provides functions to draw circle arcs on top of StelRenderer.
+//! Provides functions to draw circle arcs using StelRenderer.
 //!
 //! Performance could be improved if drawXXXCircleArc returned a list 
 //! of vertex buffers to draw (perhaps generateXXXCircleArc), which could 
@@ -35,15 +36,22 @@
 //! would require a way to track the last update when StelProjector was 
 //! modified.
 //!
-//! Example use (just to draw a single arc):
+//! Example:
 //! @code
+//! // Drawing a single great circle arc
 //! StelCircleArcRenderer(renderer, projector)
 //! 	.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+//!
+//! // Create a circle arc renderer to draw multiple circle arcs
+//! StelCircleArcRenderer circleArcRenderer = StelCircleArcRenderer(renderer, projector);
+//!
+//! circleArcRenderer.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+//! circleArcRenderer.drawGreatCircleArc(star3, star4, &viewportHalfspace);
 //! @endcode
 class StelCircleArcRenderer
 {
 public:
-	//! Construct a StelCircleArcRenderer on top of specified renderer.
+	//! Construct a StelCircleArcRenderer using specified renderer.
 	//!
 	//! @param renderer  Renderer to create adn draw vertex buffers.
 	//! @param projector Projector to project 3D coordinates to the screen.
@@ -51,10 +59,10 @@ public:
 		: renderer(renderer)
 		, projector(&(*projector))
 	{
-		smallCircleVertexBuffer = renderer->createVertexBuffer<Vertex>(PrimitiveType_LineStrip);
+		smallCircleVertexBuffer = renderer->createVertexBuffer<VertexP2>(PrimitiveType_LineStrip);
 	}
 
-	//! Construct a StelCircleArcRenderer on top of specified renderer.
+	//! Construct a StelCircleArcRenderer using specified renderer.
 	//!
 	//! @param renderer  Renderer to create adn draw vertex buffers.
 	//! @param projector Projector to project 3D coordinates to the screen.
@@ -62,7 +70,7 @@ public:
 		: renderer(renderer)
 		, projector(projector)
 	{
-		smallCircleVertexBuffer = renderer->createVertexBuffer<Vertex>(PrimitiveType_LineStrip);
+		smallCircleVertexBuffer = renderer->createVertexBuffer<VertexP2>(PrimitiveType_LineStrip);
 	}
 
 	//! Destroy the StelCircleArcRenderer, freeing any vertex buffers.
@@ -77,7 +85,7 @@ public:
 	//!
 	//! The line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport,
-	//! the viewportEdgeIntersectCallback is called with the
+	//! viewportEdgeIntersectCallback is called with the
 	//! screen 2d position of the intersection, normalized direction of the 
 	//! currently drawn arc toward the inside of the viewport, and any extra
 	//! user specified data.
@@ -111,7 +119,7 @@ public:
 
 	//! Draw a series of great circle arcs between specified points. 
 	//!
-	//! The primitiveType specifies how to interpret the points. 
+	//! primitiveType specifies how to interpret the points. 
 	//!
 	//! If primitiveType is PrimitiveType_Lines,
 	//! the arcs are drawn between the first and the second point, third and fourth, and so on.
@@ -170,12 +178,12 @@ public:
 
 	//! Draw a small circle arc between points start and stop 
 	//!
-	//! The rotation point is rotCenter.
+	//! The rotation point is set by setRotCenter().
 	//!
 	//! The angle between start and stop must be < 180 deg.
 	//! The line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, 
-	//! the viewportEdgeIntersectCallback is called with the
+	//! viewportEdgeIntersectCallback is called with the
 	//! screen 2d position of the intersection, normalized direction of the 
 	//! currently drawn arc toward the inside of the viewport, and any extra
 	//! user specified data.
@@ -231,10 +239,10 @@ public:
 			
 			if ((p1[2] > 0.0 && p1InViewport) || (p2[2] > 0.0 && p2InViewport))
 			{
-				smallCircleVertexBuffer->addVertex(Vertex(Vec2f(p1[0], p1[1])));
+				smallCircleVertexBuffer->addVertex(VertexP2(p1[0], p1[1]));
 				if (i + 1 == vertexList.constEnd())
 				{
-					smallCircleVertexBuffer->addVertex(Vertex(Vec2f(p2[0], p2[1])));
+					smallCircleVertexBuffer->addVertex(VertexP2(p2[0], p2[1]));
 					drawSmallCircleVertexBuffer();
 				}
 				// We crossed the edge of the viewport
@@ -254,7 +262,7 @@ public:
 				// Break the line, draw the stored vertex and flush the list
 				if (smallCircleVertexBuffer->length() > 0)
 				{
-					smallCircleVertexBuffer->addVertex(Vertex(Vec2f(p1[0], p1[1])));
+					smallCircleVertexBuffer->addVertex(VertexP2(p1[0], p1[1]));
 				}
 				drawSmallCircleVertexBuffer();
 			}
@@ -265,14 +273,6 @@ public:
 	}
 
 private:
-	//! Vertex with only a 2D position.
-	struct Vertex
-	{
-		Vec2f position;
-		Vertex(const Vec2f position) : position(position) {}
-		VERTEX_ATTRIBUTES(Vec2f Position);
-	};
-
 	//! Renderer used to construct and draw vertex buffers.
 	StelRenderer* renderer;
 
@@ -280,7 +280,7 @@ private:
 	StelProjector* projector;
 
 	//! Vertex buffer we're drawing the arc with.
-	StelVertexBuffer<Vertex>* smallCircleVertexBuffer;
+	StelVertexBuffer<VertexP2>* smallCircleVertexBuffer;
 
 	//! List of projected points from the tesselated arc.
 	QLinkedList<Vec3d> vertexList;	

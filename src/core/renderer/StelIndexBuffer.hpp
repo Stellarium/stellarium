@@ -64,12 +64,12 @@ public:
 		++indexCount_;
 	}
 
-	//! Return index at specified position the buffer.
+	//! Return index at specified position in the buffer.
 	//!
 	//! The buffer must not be locked.
 	//!
 	//! @param which Position of the index to get.
-	//! @return Index at specified index.
+	//! @return Index at specified position.
 	uint getIndex(const int which) const 
 	{
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
@@ -98,9 +98,9 @@ public:
 
 	//! Clear the buffer, removing all indices.
 	//!
-	//! Can be only called when unlocked.
+	//! Can only be called when unlocked.
 	//!
-	//! The backend implementation might reuse previously allocated storage after 
+	//! The backend might reuse previously allocated storage after 
 	//! clearing, so calling clear() might be more efficient than destroying 
 	//! a buffer and then constructing a new one.
 	void clear()

@@ -54,7 +54,7 @@ public:
 		(class StelQGLRenderer* renderer, const QString& path, 
 		 const TextureParams& params, QImage& image);
 	
-	//! Construct a StelQGLTextureBackend from a PVR (compressed texture on mobile) file.
+	//! Construct a StelQGLTextureBackend from a PVR (compressed texture on some mobile platforms) file.
 	//!
 	//! This includes loading the texture from file, which might fail if the file
 	//! does not exist, creating a texture with Error status.
@@ -72,7 +72,7 @@ public:
 	//! if not lazy loading, caller must start loading themselves.
 	//!
 	//! @param renderer Renderer this texture belongs to.
-	//! @param path     Full path of the PVR image file in the filesystem.
+	//! @param path     Full path of image file in the file system (or a URL pointing to the image).
 	//! @param params   Texture parameters (e.g. filtering, wrapping, etc.).
 	//! @return Pointer to the new StelQGLTextureBackend.
 	static StelQGLTextureBackend* constructAsynchronous
@@ -81,7 +81,9 @@ public:
 	//! Construct a StelQGLTextureBackend from a framebuffer object.
 	//!
 	//! This will simply wrap a texture of a framebuffer object 
-	//! in a StelQGLTextureBackend and return it.
+	//! in a StelQGLTextureBackend and return it. The texture itself 
+	//! will still be owned by the framebuffer object, and destroyed 
+	//! with the framebuffer objects, not with the StelQGLTextureBackend.
 	//!
 	//! @param renderer Renderer this texture belongs to.
 	//! @param fbo      Framebuffer object to get the texture from.
@@ -94,7 +96,7 @@ public:
 	//! Used to get a texture of the viewport. The returned texture will be 
 	//! power-of-two containing the image data in area matching viewport size.
 	//!
-	//! @note This is only usable when FBOs are not used. When using FBOs,
+	//! @note This only works when FBOs are not used. When using FBOs,
 	//!       use fromFBO on the front buffer instead.
 	//!
 	//! @param renderer       Renderer this texture belongs to.
@@ -161,7 +163,7 @@ private:
 	//! Load the texture from a QImage.
 	void loadFromImage(QImage image);
 
-	//! Load the texture from a PVR (PVRTC compressed texture on mobile) file.
+	//! Load the texture from a PVR (PVRTC compressed texture on some mobile platforms) file.
 	void loadFromPVR();
 	
 	//! Prepare OpenGL context to load a texture and return it.

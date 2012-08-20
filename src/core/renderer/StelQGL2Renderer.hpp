@@ -42,6 +42,7 @@ public:
 	//!
 	//! @param parent       Parent widget for the renderer's GL widget.
 	//! @param pvrSupported Are .pvr (PVRTC - PowerVR hardware) textures supported on this platform?
+	//!                     This should be true for mobile platforms with PowerVR GPUs.
 	StelQGL2Renderer(QGraphicsView* parent, bool pvrSupported)
 		: StelQGLRenderer(parent, pvrSupported)
 		, initialized(false)
@@ -354,8 +355,8 @@ public:
 
 	//! Use a custom shader program, overriding builtin shader programs.
 	//!
-	//! No custom shader can be bound when this is called 
-	//! (previous custom shader must be released).
+	//! This can only be called when no custom shader is bound already
+	//! (any previously bound custom shader must be released).
 	//!
 	//! Used by StelQGLGLSLShader.
 	//!
