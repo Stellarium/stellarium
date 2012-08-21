@@ -1220,44 +1220,23 @@ void Oculars::initializeActivationActions()
 	connect(actionShowOcular, SIGNAL(toggled(bool)),
 					this, SLOT(enableOcular(bool)));
 
-	QString shortcutStr = settings->value("bindings/popup_navigator", "Alt+O").toString();
-	actionMenu = gui->addGuiAction("actionShow_Ocular_Menu",
-																 N_("Oculars popup menu"),
-																 shortcutStr, "",
-																 group,
-																 true);
+	actionMenu = shMgr->getGuiAction("actionShow_Ocular_Menu");
 	connect(actionMenu, SIGNAL(toggled(bool)),
 					this, SLOT(displayPopupMenu()));
 
-	actionShowCrosshairs = gui->addGuiAction("actionShow_Ocular_Crosshairs",
-																					 N_("Crosshairs"),
-																					 QString(), "",
-																					 group,
-																					 true);
+	actionShowCrosshairs = shMgr->getGuiAction("actionShow_Ocular_Crosshairs");
 	connect(actionShowCrosshairs, SIGNAL(toggled(bool)),
 					this, SLOT(toggleCrosshairs(bool)));
 
-	actionShowSensor = gui->addGuiAction("actionShow_Sensor",
-																			 N_("Image sensor frame"),
-																			 QString(), "",
-																			 group,
-																			 true);
+	actionShowSensor = shMgr->getGuiAction("actionShow_Sensor");
 	connect(actionShowSensor, SIGNAL(toggled(bool)),
 					this, SLOT(toggleCCD(bool)));
 
-	actionShowTelrad = gui->addGuiAction("actionShow_Telrad",
-																			 N_("Telrad sight"),
-																			 QString(), "",
-																			 group,
-																			 true);
+	actionShowTelrad = shMgr->getGuiAction("actionShow_Telrad");
 	connect(actionShowTelrad, SIGNAL(toggled(bool)),
 					this, SLOT(toggleTelrad(bool)));
 
-	actionConfiguration = gui->addGuiAction("actionOpen_Oculars_Configuration",
-																					N_("Oculars plugin configuration"),
-																					QString(), "",
-																					group,
-																					true);
+	actionConfiguration = shMgr->getGuiAction("actionOpen_Oculars_Configuration");
 	connect(actionConfiguration, SIGNAL(toggled(bool)),
 					ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)),
