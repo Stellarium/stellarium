@@ -89,7 +89,7 @@ public:
 	virtual StelObjectP searchByName(const QString& name) const;
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	// empty as its not celestial objects
-	virtual QStringList listAllObjects() const { return QStringList(); }
+	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Telescope Control"; }
 	virtual bool configureGui(bool show = true);
 	

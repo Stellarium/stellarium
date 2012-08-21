@@ -308,12 +308,22 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
-QStringList Pulsars::listAllObjects() const
+QStringList Pulsars::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	foreach(const PulsarP& pulsar, psr)
+	if (inEnglish)
 	{
-		result << pulsar->getNameI18n();
+		foreach(const PulsarP& pulsar, psr)
+		{
+			result << pulsar->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(const PulsarP& pulsar, psr)
+		{
+			result << pulsar->getNameI18n();
+		}
 	}
 	return result;
 }

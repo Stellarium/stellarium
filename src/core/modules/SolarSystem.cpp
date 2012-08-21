@@ -1237,12 +1237,22 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	return result;
 }
 
-QStringList SolarSystem::listAllObjects() const
+QStringList SolarSystem::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	foreach(const PlanetP& p, systemPlanets)
+	if (inEnglish)
 	{
-		result << p->getNameI18n();
+		foreach(const PlanetP& p, systemPlanets)
+		{
+			result << p->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(const PlanetP& p, systemPlanets)
+		{
+			result << p->getNameI18n();
+		}
 	}
 	return result;
 }
