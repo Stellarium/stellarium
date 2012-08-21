@@ -1187,11 +1187,6 @@ void Oculars::toggleTelrad()
 /* ********************************************************************* */
 void Oculars::initializeActivationActions()
 {
-	// TRANSLATORS: Title of a group of key bindings in the Help window
-	QString group = N_("Plugin Key Bindings");
-	//Bogdan: Temporary, for consistency and to avoid confusing the translators
-	//TODO: Fix this when the key bindings feature is implemented
-	//QString group = N_("Oculars Plugin");
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 

@@ -40,6 +40,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
@@ -143,42 +144,41 @@ void TelescopeControl::init()
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		
+		StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
+
 		//Create telescope key bindings
 		/* QAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
-		QString group = N_("Telescope Control");
+		QString group = "PluginTelescopeControl";
 		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 		{
 			// "Slew to object" commands
 			QString name = QString("actionMove_Telescope_To_Selection_%1").arg(i);
 			QString description = q_("Move telescope #%1 to selected object").arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			gui->addGuiAction(name, description, shortcut, "", group, false, false);
-			connect(gui->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+			shMgr->addGuiAction(name, true, description, "", "", group, false, false);
+			connect(shMgr->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 
 			// "Slew to the center of the screen" commands
 			name = QString("actionSlew_Telescope_To_Direction_%1").arg(i);
 			description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
 			shortcut = QString("Alt+%1").arg(i);
-			gui->addGuiAction(name, description, shortcut, "", group, false, false);
-			connect(gui->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+			shMgr->addGuiAction(name, true, description, shortcut, "", group, false, false);
+			connect(shMgr->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		}
 
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
 		
-		//TODO: Think of a better keyboard shortcut
-		gui->addGuiAction("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", "", group, true, false);
-		connect(gui->getGuiAction("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
-		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Slew_Window"), SLOT(setChecked(bool)));
+		connect(shMgr->getGuiAction("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
+		connect(slewDialog, SIGNAL(visibleChanged(bool)), shMgr->getGuiAction("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
 		//Create toolbar button
 		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
 		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
 		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiAction("actionShow_Slew_Window"));
+		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, shMgr->getGuiAction("actionShow_Slew_Window"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error &e)
