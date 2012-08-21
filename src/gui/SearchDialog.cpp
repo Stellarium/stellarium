@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 
 #include "StelObjectMgr.hpp"
@@ -182,6 +183,7 @@ void SearchDialog::retranslate()
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
 		populateSimbadServerList();
+		updateListTab();
 	}
 }
 
@@ -565,6 +567,15 @@ void SearchDialog::updateListWidget(int index)
 
 void SearchDialog::updateListTab()
 {
+	if (StelApp::getInstance().getLocaleMgr().getAppLanguage() == "en")
+	{
+		// hide "names in English" checkbox
+		ui->searchInEnglishCheckBox->hide();
+	}
+	else
+	{
+		ui->searchInEnglishCheckBox->show();
+	}
 	ui->objectTypeComboBox->clear();
 	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
 	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
