@@ -174,7 +174,8 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	StelApp::getInstance().getStelShortcutManager()->loadShortcuts();
 
 #ifdef ENABLE_SCRIPT_CONSOLE
-	addGuiAction("actionShow_ScriptConsole_Window_Global", N_("Script console window"), "F12", "", N_("Windows"), true, false, true);
+	StelApp::getInstance().getStelShortcutManager()->
+			addGuiAction("actionShow_ScriptConsole_Window_Global", true, N_("Script console window"), "F12", "", N_("Windows"), true, false, true);
 #endif
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
@@ -1056,14 +1057,6 @@ void StelGui::scriptStopped()
 void StelGui::setGuiVisible(bool b)
 {
 	setVisible(b);
-}
-
-QAction *StelGui::addGuiAction(const QString &actionName, const QString &text,
-															 const QString &primaryKey, const QString &altKey,
-															 const QString &helpGroup, bool checkable, bool autoRepeat, bool global)
-{
-	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
-	return shortcutMgr->addGuiAction(actionName, true, text, primaryKey, altKey, helpGroup, checkable, autoRepeat, global);
 }
 
 QAction *StelGui::getGuiAction(const QString &actionName)

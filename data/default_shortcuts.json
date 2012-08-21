@@ -860,6 +860,20 @@
 					"global" : "0"
 				}
 			}
+		},
+		"PluginTelescopeControl":
+		{
+			"pluginId" : "TelescopeControl",
+			"actions" :
+			{
+				"actionShow_Slew_Window":
+				{
+					"text": "Move a telescope to a given set of coordinates",
+					"primaryKey": "Ctrl+0",
+					"checkable": true,
+					"autorepeat": false
+				}
+			}
 		}
 	}
 }
