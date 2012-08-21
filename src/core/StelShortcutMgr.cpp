@@ -216,13 +216,14 @@ bool StelShortcutMgr::copyDefaultFile()
 
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
-	QFile* jsonFile;
 	QVariantMap groups;
 	try
 	{
-		jsonFile = new QFile(filePath);
+		QFile* jsonFile = new QFile(filePath);
 		jsonFile->open(QIODevice::ReadOnly);
 		groups = StelJsonParser::parse(jsonFile->readAll()).toMap()["groups"].toMap();
+		jsonFile->close();
+		delete jsonFile;
 	}
 	catch (std::runtime_error& e)
 	{
@@ -318,8 +319,6 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 			}
 		}
 	}
-	jsonFile->close();
-	delete jsonFile;
 	return true;
 }
 
@@ -339,6 +338,123 @@ void StelShortcutMgr::loadShortcuts()
 	if (!loadShortcuts(shortcutsFilePath))
 	{
 		qWarning() << "Invalid shortcuts file, shortcuts aren't loaded.";
+		return;
+	}
+	// merge with default for getting actual shortcuts info
+	mergeWithDefaults();
+}
+
+void StelShortcutMgr::mergeWithDefaults()
+{
+	QVariantMap groups;
+	try
+	{
+		QFile jsonFile(StelFileMgr::getInstallationDir() + "/data/default_shortcuts.json");
+		jsonFile.open(QIODevice::ReadOnly);
+		groups = StelJsonParser::parse(jsonFile.readAll()).toMap()["groups"].toMap();
+		jsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "Error while parsing shortcuts file. Error: " << e.what();
+		return;
+	}
+	// parsing shortcuts groups from file
+	for (QVariantMap::const_iterator group = groups.begin(); group != groups.end(); ++group)
+	{
+		QVariantMap groupMap = group.value().toMap();
+		// parsing shortcuts' group properties
+		QString groupId = group.key();
+		QString groupText;
+		if (groupMap.contains("text"))
+		{
+			groupText = groupMap["text"].toString();
+		}
+		QString pluginId;
+		if (groupMap.contains("pluginId"))
+		{
+			pluginId = groupMap["pluginId"].toString();
+		}
+		// add group to map, if it doesn't exist
+		if (!groupMap.contains(groupId))
+		{
+			addGroup(groupId, groupText, pluginId);
+		}
+		// parsing group's actions (shortcuts)
+		QVariantMap actions = groupMap["actions"].toMap();
+		for (QVariantMap::const_iterator action = actions.begin(); action != actions.end(); ++action)
+		{
+			QString actionId = action.key();
+			// if action exist, don't touch it
+			if (getGuiAction(groupId, actionId))
+			{
+				continue;
+			}
+			QVariantMap actionMap = action.value().toMap();
+			// parsing action (shortcut) properties
+			QString text;
+			if (actionMap.contains("text"))
+			{
+				text = actionMap["text"].toString();
+			}
+			// get primary and alternative keys of shortcut
+			QString primaryKey = actionMap["primaryKey"].toString();
+			QString altKey = actionMap["altKey"].toString();
+			// get behavior properties of shortcut
+			bool checkable;
+			if (actionMap.contains("checkable"))
+			{
+				checkable = actionMap["checkable"].toBool();
+			}
+			else
+			{
+				// default value
+				checkable = true;
+			}
+			bool autorepeat;
+			if (actionMap.contains("autorepeat"))
+			{
+				autorepeat = actionMap["autorepeat"].toBool();
+			}
+			else
+			{
+				// default value
+				autorepeat = false;
+			}
+			bool global;
+			if (actionMap.contains("global"))
+			{
+				global = actionMap["global"].toBool();
+			}
+			else
+			{
+				// default value
+				global = true;
+			}
+			// create & init shortcut
+			addGuiAction(actionId, false, text, primaryKey, altKey, groupId, checkable, autorepeat, global);
+			// set script if it exist
+			if (actionMap.contains("script"))
+			{
+				addScriptToAction(actionId, actionMap["script"].toString());
+			}
+			if (actionMap.contains("scriptFile"))
+			{
+				QString scriptFilePath = StelFileMgr::findFile(actionMap["scriptFile"].toString());
+				if (!QFileInfo(scriptFilePath).exists())
+				{
+					qWarning() << "Couldn't find file " << actionMap["scriptFile"] <<
+												"for shortcut " << actionId;
+				}
+				else
+				{
+					QFile scriptFile(scriptFilePath);
+					scriptFile.open(QIODevice::ReadOnly);
+					addScriptToAction(actionId, QString(scriptFile.readAll()), scriptFilePath);
+					scriptFile.close();
+				}
+			}
+		}
 	}
 }
 
@@ -350,6 +466,7 @@ void StelShortcutMgr::restoreDefaultShortcuts()
 		qWarning() << "Default shortcuts file(" << defaultPath << ") doesn't exist, restore defaults failed";
 		return;
 	}
+
 	loadShortcuts(defaultPath);
 	// save shortcuts to actual file
 	saveShortcuts();

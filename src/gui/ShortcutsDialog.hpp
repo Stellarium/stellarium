@@ -95,7 +95,7 @@ public slots:
 	// if no shortcutTreeItem specified, search for it in tree, if no items found, create new item
 	void updateShortcutsItem(StelShortcut* shortcut, QTreeWidgetItem* shortcutsTreeItem = NULL);
 	void restoreDefaultShortcuts();
-
+	void updateTreeData();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -108,7 +108,7 @@ private:
 	//! up the help text.
 	void updateText(void);
 
-	QTreeWidgetItem* addGroup(StelShortcutGroup* group);
+	QTreeWidgetItem* updateGroup(StelShortcutGroup* group);
 
 	// search for first appearence of item with requested data
 	QTreeWidgetItem* findItemByData(QVariant value, int role, int column = 0);
