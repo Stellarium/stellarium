@@ -116,6 +116,7 @@ public slots:
 	// need for editing shortcuts without trigging any actions
 	void setEnabled(bool enable);
 	void setPluginId(const QString& pluginId);
+	// clear and delete all shortuts
 
 private:
 	QString m_id;

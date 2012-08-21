@@ -341,31 +341,21 @@ void ShortcutsDialog::createDialogContent()
 	// handle outer shortcuts changes
 	connect(shortcutMgr, SIGNAL(shortcutChanged(StelShortcut*)), this, SLOT(updateShortcutsItem(StelShortcut*)));
 
-	// Create shortcuts tree
-	QList<StelShortcutGroup*> groups = shortcutMgr->getGroupList();
-	foreach (StelShortcutGroup* group, groups)
-	{
-		QTreeWidgetItem* groupItem = addGroup(group);
-		// display group's shortcuts
-		QList<StelShortcut*> shortcuts = group->getActionList();
-		foreach (StelShortcut* shortcut, shortcuts)
-		{
-			QTreeWidgetItem* shortcutItem = new QTreeWidgetItem(groupItem);
-			// store shortcut id, so we can find it when shortcut changed
-			shortcutItem->setData(0, Qt::UserRole, QVariant(shortcut->getId()));
-			updateShortcutsItem(shortcut, shortcutItem);
-		}
-	}
-	updateText();
+	updateTreeData();
 }
 
 void ShortcutsDialog::updateText()
 {
 }
 
-QTreeWidgetItem *ShortcutsDialog::addGroup(StelShortcutGroup *group)
+QTreeWidgetItem *ShortcutsDialog::updateGroup(StelShortcutGroup *group)
 {
-	QTreeWidgetItem* groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
+	QTreeWidgetItem* groupItem = findItemByData(QVariant(group->getId()), Qt::UserRole);
+	if (!groupItem)
+	{
+		// create new
+		groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
+	}
 	// group items aren't selectable, so reset default flag
 	groupItem->setFlags(Qt::ItemIsEnabled);
 	// setup displayed text
@@ -412,7 +402,7 @@ void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut, QTreeWidgetIte
 		if (groupItem == NULL)
 		{
 			// create and add new group to treeWidget
-			groupItem = addGroup(shortcut->getGroup());
+			groupItem = updateGroup(shortcut->getGroup());
 		}
 		// create shortcut item
 		shortcutTreeItem = new QTreeWidgetItem(groupItem);
@@ -427,8 +417,27 @@ void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut, QTreeWidgetIte
 
 void ShortcutsDialog::restoreDefaultShortcuts()
 {
+	ui->shortcutsTreeWidget->clear();
 	shortcutMgr->restoreDefaultShortcuts();
+	updateTreeData();
 	initEditors();
+}
+
+void ShortcutsDialog::updateTreeData()
+{
+	// Create shortcuts tree
+	QList<StelShortcutGroup*> groups = shortcutMgr->getGroupList();
+	foreach (StelShortcutGroup* group, groups)
+	{
+		updateGroup(group);
+		// display group's shortcuts
+		QList<StelShortcut*> shortcuts = group->getActionList();
+		foreach (StelShortcut* shortcut, shortcuts)
+		{
+			updateShortcutsItem(shortcut);
+		}
+	}
+	updateText();
 }
 
 bool ShortcutsDialog::itemIsEditable(QTreeWidgetItem *item)
