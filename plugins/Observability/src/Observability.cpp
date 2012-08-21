@@ -66,7 +66,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
         StelPluginInfo info;
 	info.id = "Observability";
         info.displayedName = N_("Observability analysis");
-	info.authors = N_("Ivan Marti-Vidal (Onsala Space Observatory)");
+	info.authors = "Ivan Marti-Vidal (Onsala Space Observatory)"; // non-translatable field
 	info.contact = "i.martividal@gmail.com";
         info.description = N_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon during a fraction of the night. The plugin also gives the day for largest separation from the Sun and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of the quantities shown by this script is given in the 'About' tab of the configuration window");
         return info;
@@ -184,11 +184,10 @@ Observability::Observability()
 
 
 	// Set names of the months:
-//	QString mons[12]={q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QString mons[12]={q_("Jan"), q_("Feb"), q_("Mar"), q_("Apr"), q_("May"), q_("Jun"), q_("Jul"), q_("Aug"), q_("Sep"), q_("Oct"), q_("Nov"), q_("Dec")};
 
 	for (int i=0;i<12;i++) {
-	 months[i]=mons[i];
+		months[i]=mons[i];
 	};
 
 }
@@ -677,7 +676,7 @@ void Observability::draw(StelCore* core)
 
 	if (show_Today) 
 	{
-		paintresult.drawText(xLine, yLine,q_(" TODAY:"));
+		paintresult.drawText(xLine, yLine,q_("TODAY:"));
 		paintresult.drawText(xLine+fontSize, yLine-spacing, RS2);
 		paintresult.drawText(xLine+fontSize, yLine-spacing*2, RS1);
 		paintresult.drawText(xLine+fontSize, yLine-spacing*3, Cul);
@@ -686,7 +685,7 @@ void Observability::draw(StelCore* core)
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{
-		paintresult.drawText(xLine,yLine," THIS YEAR:");
+		paintresult.drawText(xLine,yLine,q_("THIS YEAR:"));
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= spacing;
@@ -1399,12 +1398,12 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 			double LocalTMoon = 24.*modf(LocalPrev,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
-			bestNight = q_("Previous Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			bestNight = q_("Previous Full Moon: %1 %2 at %3:%4. ").arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			LocalTMoon = 24.*modf(LocalNext,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
-			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
-			bestNight += q_("  Next Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);			
+			bestNight += q_("Next Full Moon: %1 %2 at %3:%4. ").arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			ObsRange = ""; 
 			AcroCos = "";
