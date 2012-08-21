@@ -114,6 +114,9 @@ private slots:
 	//! Called when new type of objects selected in list view tab
 	void updateListWidget(int index);
 
+	// retranslate/recreate tab
+	void updateListTab();
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;

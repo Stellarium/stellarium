@@ -245,7 +245,7 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	return result;
 }
 
-QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId) const
+QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
 {
 	// search for module
 	StelObjectModule* module = NULL;
@@ -262,7 +262,7 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId) const
 		qWarning() << "Can't find module with id " << moduleId;
 		return QStringList();
 	}
-	return module->listAllObjects();
+	return module->listAllObjects(inEnglish);
 }
 
 QMap<QString, QString> StelObjectMgr::objectModulesMap() const

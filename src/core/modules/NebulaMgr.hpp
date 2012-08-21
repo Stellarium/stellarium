@@ -93,7 +93,7 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	// empty for now
-	virtual QStringList listAllObjects() const { return QStringList(); }
+	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Nebulaes"; }
 
 	///////////////////////////////////////////////////////////////////////////

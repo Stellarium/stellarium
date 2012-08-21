@@ -252,18 +252,10 @@ void SearchDialog::createDialogContent()
 	        this, SLOT(selectSimbadServer(int)));
 
 	// list views initialization
-	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
-	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
-	{
-		if (!objectMgr->listAllModuleObjects(it.key()).isEmpty())
-		{
-			ui->objectTypeComboBox->addItem(it.value(), QVariant(it.key()));
-		}
-	}
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
-	// init listWidget
-	updateListWidget(ui->objectTypeComboBox->currentIndex());
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
+	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	updateListTab();
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -563,9 +555,26 @@ void SearchDialog::selectSimbadServer(int index)
 
 void SearchDialog::updateListWidget(int index)
 {
+
 	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
 	ui->objectsListWidget->clear();
-	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId));
+	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
+	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
 	connect(ui->objectsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
-	connect(ui->objectsListWidget, SIGNAL(), this, SLOT(gotoObject(QListWidgetItem*)));
+}
+
+void SearchDialog::updateListTab()
+{
+	ui->objectTypeComboBox->clear();
+	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
+	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
+	{
+		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
+		{
+			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ?
+															it.value(): q_(it.value()));
+			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
+		}
+	}
+	updateListWidget(ui->objectTypeComboBox->currentIndex());
 }
