@@ -239,7 +239,17 @@
             </size>
            </property>
            <property name="text">
-            <string>&lt;</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/backspace.png</normaloff>:/graphicGui/backspace.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>20</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -261,7 +271,17 @@
             </size>
            </property>
            <property name="text">
-            <string>&lt;</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/backspace.png</normaloff>:/graphicGui/backspace.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>20</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -294,7 +314,7 @@
   <customwidget>
    <class>BarFrame</class>
    <extends>QFrame</extends>
-   <header location="global">Dialog.hpp</header>
+   <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -306,7 +326,9 @@
    </slots>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>closeStelWindow</sender>
