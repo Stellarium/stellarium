@@ -767,6 +767,49 @@
 				}
 			}
 		},
+		"PluginOculars":
+		{
+			"pluginId" : "Oculars",
+			"actions" :
+			{
+				"actionShow_Ocular":
+				{
+					"text" : "Ocular view",
+					"primaryKey" : "Ctrl+O",
+					"checkable" : "1"
+				},
+				"actionShow_Ocular_Menu":
+				{
+					"text": "Oculars popup menu",
+					"primaryKey" : "Alt+O",
+					"checkable" : "1"
+				},
+				"actionShow_Ocular_Crosshairs":
+				{
+					"text": "Show crosshairs",
+					"primaryKey": "Alt+C",
+					"checkable": true
+				},
+				"actionShow_Sensor":
+				{
+					"text": "Image sensor frame",
+					"primaryKey": "",
+					"checkable": true
+				},
+				"actionShow_Telrad":
+				{
+					"text": "Telrad sight",
+					"primaryKey": "Ctrl+B",
+					"checkable": true
+				},
+				"actionOpen_Oculars_Configuration":
+				{
+					"text": "Oculars plugin configuration",
+					"primaryKey": "",
+					"checkable": true
+				}
+			}
+		},
 		"PluginObservability":
 		{
 			"pluginId": "Observability",
