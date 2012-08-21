@@ -23,7 +23,6 @@
 #include "StelDialog.hpp"
 
 #include <QLineEdit>
-#include <QModelIndex>
 
 // auxilary class for convenient editing shortcuts
 class ShortcutLineEdit : public QLineEdit
@@ -91,7 +90,7 @@ public slots:
 	// called when apply button clicked
 	void applyChanges() const;
 	// called by doubleclick; if click is on editable item, switch to editors
-	void switchToEditors(QModelIndex index);
+	void switchToEditors(QTreeWidgetItem* item, int column);
 	// update shortcut representation in tree correspondingly to its actual contents
 	// if no shortcutTreeItem specified, search for it in tree, if no items found, create new item
 	void updateShortcutsItem(StelShortcut* shortcut, QTreeWidgetItem* shortcutsTreeItem = NULL);

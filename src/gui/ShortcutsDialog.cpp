@@ -313,11 +313,10 @@ void ShortcutsDialog::applyChanges() const
 	ui->applyButton->setEnabled(false);
 }
 
-void ShortcutsDialog::switchToEditors(QModelIndex index)
+void ShortcutsDialog::switchToEditors(QTreeWidgetItem *item, int column)
 {
-	Q_UNUSED(index);
-	QTreeWidgetItem* curItem = ui->shortcutsTreeWidget->currentItem();
-	if (itemIsEditable(curItem))
+	Q_UNUSED(column);
+	if (itemIsEditable(item))
 	{
 		ui->primaryShortcutEdit->setFocus();
 	}
@@ -328,7 +327,7 @@ void ShortcutsDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(initEditors()));
-	connect(ui->shortcutsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(switchToEditors(QModelIndex)));
+	connect(ui->shortcutsTreeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(switchToEditors(QTreeWidgetItem*, int)));
 	// apply button logic
 	connect(ui->applyButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
 	// restore defaults button logic
