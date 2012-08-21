@@ -29,6 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
 #include "StelGui.hpp"
@@ -1194,16 +1195,13 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
+	StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
+
 	//This action needs to be connected to the enableOcular() slot after
 	//the necessary button is created to prevent the button from being checked
 	//the first time this action is checked. See:
 	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
-	QString shortcutStr = settings->value("bindings/toggle_oculars", "Ctrl+O").toString();
-	actionShowOcular = gui->addGuiAction("actionShow_Ocular",
-																			 N_("Ocular view"),
-																			 shortcutStr, "",
-																			 group,
-																			 true);
+	actionShowOcular = shMgr->getGuiAction("actionShow_Ocular");
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
@@ -1222,7 +1220,7 @@ void Oculars::initializeActivationActions()
 	connect(actionShowOcular, SIGNAL(toggled(bool)),
 					this, SLOT(enableOcular(bool)));
 
-	shortcutStr = settings->value("bindings/popup_navigator", "Alt+O").toString();
+	QString shortcutStr = settings->value("bindings/popup_navigator", "Alt+O").toString();
 	actionMenu = gui->addGuiAction("actionShow_Ocular_Menu",
 																 N_("Oculars popup menu"),
 																 shortcutStr, "",

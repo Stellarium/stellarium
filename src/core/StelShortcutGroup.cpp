@@ -174,6 +174,11 @@ StelShortcutGroup::StelShortcutGroup(QString id, QString text) :
 
 StelShortcutGroup::~StelShortcutGroup()
 {
+	foreach (StelShortcut* sh, m_shortcuts)
+	{
+		delete sh; sh = NULL;
+	}
+	m_shortcuts.clear();
 }
 
 QAction* StelShortcutGroup::registerAction(const QString &actionId, bool temporary, const QString &text, const QString &primaryKey,
