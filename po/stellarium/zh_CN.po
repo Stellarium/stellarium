@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-12 23:35+0700\n"
-"PO-Revision-Date: 2012-08-15 13:30+0000\n"
-"Last-Translator: tylande_sw <Unknown>\n"
+"POT-Creation-Date: 2012-08-20 14:08+0700\n"
+"PO-Revision-Date: 2012-08-20 09:43+0000\n"
+"Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-16 04:38+0000\n"
+"X-Launchpad-Export-Date: 2012-08-21 04:54+0000\n"
 "X-Generator: Launchpad (build 15810)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -180,7 +180,7 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:247
 #, qt-format
 msgid "Orbital period: %1 days"
-msgstr ""
+msgstr "轨道周期：%1 天"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -549,14 +549,14 @@ msgstr "恢复正常脚本执行速度"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:82 plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 #: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
-#: plugins/Observability/src/Observability.cpp:222
-#: plugins/Observability/src/Observability.cpp:228
+#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:231
 msgid "Plugin Key Bindings"
 msgstr "插件快捷键设置"
 
@@ -1645,7 +1645,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:204
 msgid "A Quintuple eclipse from Deimos 2027"
-msgstr ""
+msgstr "2027年从火卫二看到的一次五重食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
@@ -3318,7 +3318,7 @@ msgstr "大小"
 
 #: src/ui_configurationDialog.h:976
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "地心赤道坐标系，春分点按日"
 
 #: src/ui_configurationDialog.h:978
 msgid "Right ascension/Declination (of date)"
@@ -3330,7 +3330,7 @@ msgstr "距离"
 
 #: src/ui_configurationDialog.h:981
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "地心赤道坐标系，春分点按J2000.0"
 
 #: src/ui_configurationDialog.h:983
 msgid "Right ascension/Declination (J2000)"
@@ -3338,7 +3338,7 @@ msgstr "赤经/赤纬 (J2000)"
 
 #: src/ui_configurationDialog.h:985
 msgid "Topocentric equatorial coordinates"
-msgstr ""
+msgstr "站心赤道坐标"
 
 #: src/ui_configurationDialog.h:987
 msgid "Hour angle/Declination"
@@ -3719,7 +3719,7 @@ msgstr "罗盘标记"
 msgid "Displays compass bearing marks along the horizon"
 msgstr "在地平线上显示罗盘上的刻度标记"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 msgid "Compass marks"
 msgstr "罗盘标记"
 
@@ -4816,10 +4816,10 @@ msgid "Configure Telescope"
 msgstr "配置望远镜"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
-#: plugins/Observability/src/Observability.cpp:558
-#: plugins/Observability/src/Observability.cpp:559
-#: plugins/Observability/src/Observability.cpp:561
-#: plugins/Observability/src/Observability.cpp:562
+#: plugins/Observability/src/Observability.cpp:600
+#: plugins/Observability/src/Observability.cpp:601
+#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:604
 msgid "N/A"
 msgstr "不可用"
 
@@ -5195,73 +5195,62 @@ msgstr "这是一个为一些 Stellarium 配置文件中的杂项设置提供便
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "January"
 msgstr "一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "February"
 msgstr "二月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "March"
 msgstr "三月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "April"
 msgstr "四月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
+#: plugins/Observability/src/Observability.cpp:188
 msgid "May"
 msgstr "五月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "June"
 msgstr "六月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "July"
 msgstr "七月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "August"
 msgstr "八月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "September"
 msgstr "九月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "October"
 msgstr "十月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "November"
 msgstr "十一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:186
 msgid "December"
 msgstr "十二月"
 
@@ -6314,11 +6303,11 @@ msgstr "从互联网更新系外新星数据"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid "Observability analysis"
-msgstr ""
+msgstr "观测分析"
 
 #: plugins/Observability/src/Observability.cpp:69
 msgid "Ivan Marti-Vidal (Onsala Space Observatory)"
-msgstr ""
+msgstr "Ivan Marti-Vidal (Onsala空间天文台)"
 
 #: plugins/Observability/src/Observability.cpp:71
 msgid ""
@@ -6330,142 +6319,192 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
+"本插件提供观测条件（升起、落下，和可见时间）的分析，以及目标在一年中的最佳观测时间。插件假定在夜间处于地平线上方的对象为可观测的。同时，插件还提供了目标与"
+"太阳的最大距离以及冲日日期和 Cosmical 升起/落下时间。<br><br>关于插件显示内容的具体说明可以在配置窗口的“关于”中找到。"
 
-#: plugins/Observability/src/Observability.cpp:222
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Jan"
+msgstr "一月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Feb"
+msgstr "二月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Mar"
+msgstr "三月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Apr"
+msgstr "四月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Jun"
+msgstr "六月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Jul"
+msgstr "七月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Aug"
+msgstr "八月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Sep"
+msgstr "九月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Oct"
+msgstr "十月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Nov"
+msgstr "十一月"
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Dec"
+msgstr "十二月"
+
+#: plugins/Observability/src/Observability.cpp:225
 msgid "Observability"
-msgstr ""
+msgstr "可观测性"
 
-#: plugins/Observability/src/Observability.cpp:228
+#: plugins/Observability/src/Observability.cpp:231
 msgid "Observability configuration window"
-msgstr ""
+msgstr "观测性配置窗口"
 
-#: plugins/Observability/src/Observability.cpp:431
-#: plugins/Observability/src/Observability.cpp:432
-#: plugins/Observability/src/Observability.cpp:475
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:472
+#: plugins/Observability/src/Observability.cpp:514
 msgid "h"
 msgstr "时"
 
-#: plugins/Observability/src/Observability.cpp:431
-#: plugins/Observability/src/Observability.cpp:432
-#: plugins/Observability/src/Observability.cpp:475
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:472
+#: plugins/Observability/src/Observability.cpp:514
 msgid "m"
 msgstr "米"
 
-#: plugins/Observability/src/Observability.cpp:431
-#: plugins/Observability/src/Observability.cpp:432
-#: plugins/Observability/src/Observability.cpp:475
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:472
+#: plugins/Observability/src/Observability.cpp:514
 msgid "s"
 msgstr "秒"
 
-#: plugins/Observability/src/Observability.cpp:441
+#: plugins/Observability/src/Observability.cpp:481
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "落于 %1 (在 %2 )"
 
-#: plugins/Observability/src/Observability.cpp:442
+#: plugins/Observability/src/Observability.cpp:482
 #, qt-format
-msgid "Raised at %1 (%2 ago)"
-msgstr "已升于 %1 ( %2 前)"
+msgid "Rose at %1 (%2 ago)"
+msgstr "升于 %1 (%2 之前)"
 
-#: plugins/Observability/src/Observability.cpp:452
+#: plugins/Observability/src/Observability.cpp:492
 #, qt-format
-msgid "Has set at %1 (%2 ago)"
-msgstr "已落于 %1 ( %2 前)"
+msgid "Set at %1 (%2 ago)"
+msgstr "落于 %1 (%2 之前)"
 
-#: plugins/Observability/src/Observability.cpp:453
+#: plugins/Observability/src/Observability.cpp:493
 #, qt-format
-msgid "Raises at %1 (in %2)"
-msgstr "升于 %1 (在 %2 )"
+msgid "Rises at %1 (in %2)"
+msgstr "升于 %1 (于 %2)"
 
-#: plugins/Observability/src/Observability.cpp:457
+#: plugins/Observability/src/Observability.cpp:497
 msgid "Circumpolar."
-msgstr ""
+msgstr "北极圈"
 
-#: plugins/Observability/src/Observability.cpp:457
+#: plugins/Observability/src/Observability.cpp:497
 msgid "No rise."
-msgstr ""
+msgstr "不会升起"
 
-#: plugins/Observability/src/Observability.cpp:480
+#: plugins/Observability/src/Observability.cpp:519
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:484
+#: plugins/Observability/src/Observability.cpp:523
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:529
+#: plugins/Observability/src/Observability.cpp:564
 msgid "Source is not observable."
-msgstr ""
+msgstr "对象不可见"
 
-#: plugins/Observability/src/Observability.cpp:530
+#: plugins/Observability/src/Observability.cpp:565
 msgid "No Acronychal nor Cosmical rise/set."
+msgstr "无冲日和 Cosmical 升/落"
+
+#: plugins/Observability/src/Observability.cpp:582
+msgid "Greatest elongation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:545
+#: plugins/Observability/src/Observability.cpp:585
 msgid "Largest Sun separation: "
-msgstr ""
+msgstr "最大太阳张角： "
 
-#: plugins/Observability/src/Observability.cpp:546
+#: plugins/Observability/src/Observability.cpp:588
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " (在 %1 度)"
 
-#: plugins/Observability/src/Observability.cpp:564
+#: plugins/Observability/src/Observability.cpp:606
 msgid "Acronychal rise/set"
-msgstr ""
+msgstr "冲日升/落"
 
-#: plugins/Observability/src/Observability.cpp:564
+#: plugins/Observability/src/Observability.cpp:606
 msgid "No Acronychal rise/set."
-msgstr ""
+msgstr "无冲日"
 
-#: plugins/Observability/src/Observability.cpp:565
+#: plugins/Observability/src/Observability.cpp:607
 msgid "Cosmical rise/set"
-msgstr ""
+msgstr "Cosmical 升/落"
 
-#: plugins/Observability/src/Observability.cpp:565
+#: plugins/Observability/src/Observability.cpp:607
 msgid "No Cosmical rise/set."
-msgstr ""
+msgstr "无 Cosmical 升/落"
 
-#: plugins/Observability/src/Observability.cpp:597
+#: plugins/Observability/src/Observability.cpp:639
 #, qt-format
 msgid "from %1 to %2"
 msgstr "从 %1 到 %2"
 
-#: plugins/Observability/src/Observability.cpp:604
+#: plugins/Observability/src/Observability.cpp:646
 msgid " to 31 Dec"
 msgstr " 到12月31日"
 
-#: plugins/Observability/src/Observability.cpp:611
+#: plugins/Observability/src/Observability.cpp:653
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "全年可观测"
 
-#: plugins/Observability/src/Observability.cpp:615
+#: plugins/Observability/src/Observability.cpp:657
 msgid "Not observable at dark night."
+msgstr "黑夜不可见"
+
+#: plugins/Observability/src/Observability.cpp:662
+msgid "Nights above horizon: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:620
-msgid "Best observed"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:637
+#: plugins/Observability/src/Observability.cpp:680
 msgid " TODAY:"
 msgstr " 今天:"
 
-#: plugins/Observability/src/Observability.cpp:1240
+#: plugins/Observability/src/Observability.cpp:1402
 #, qt-format
-msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "上次满月: %1 %2 , %3:%4. "
+msgid "Previous Full Moon: %1 "
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:1244
+#: plugins/Observability/src/Observability.cpp:1407
 #, qt-format
-msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "下次满月: %1 %2 , %3:%4. "
+msgid "  Next Full Moon: %1 "
+msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "观测分析插件"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
 msgid ""
@@ -6481,7 +6520,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "显示项说明"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Sun altitude at twilight:"
@@ -6526,7 +6565,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid "Largest Sun separation:"
-msgstr ""
+msgstr "最大太阳张角："
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
@@ -6541,14 +6580,14 @@ msgid ""
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
-msgid "Best observed from ... to ...:"
+msgid "Nights with source above horizon:"
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
-"consideres the time span when the Sun altitude is below that of the twilight "
+"considers the time span when the Sun altitude is below that of the twilight "
 "(which can be set by the user; see above). When the objects are fixed on the "
 "sky (or are exterior planets), the range of observable epochs for the "
 "current year can have two possible forms: either a range from one date to "
@@ -6571,7 +6610,7 @@ msgstr "满月"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
-"(up to 1 minute accuracy) of the Moon's opposition to the Sun."
+"of the Moon's opposition to the Sun."
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
@@ -6581,11 +6620,11 @@ msgstr "度"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:333
 msgid "Observability Configuration"
-msgstr ""
+msgstr "观测分析配置"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:334
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "观测性插件配置"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:336
 msgid "Showing Options"
@@ -6601,15 +6640,15 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:339
 msgid "Date of largest separation to the Sun"
-msgstr ""
+msgstr "最大太阳张角日期"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:340
-msgid "Range of observable epochs"
+msgid "Nights with the source above horizon"
 msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:341
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "前后两次满月时间"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:344
 msgid "Font color and size"
