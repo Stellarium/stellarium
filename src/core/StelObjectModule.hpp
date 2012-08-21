@@ -61,7 +61,7 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const = 0;
 
-	virtual QStringList listAllObjects() const = 0;
+	virtual QStringList listAllObjects(bool inEnglish) const = 0;
 
 	virtual QString getName() const = 0;
 };

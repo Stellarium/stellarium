@@ -83,7 +83,7 @@ public:
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
 	QStringList listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem=5) const;
 
-	QStringList listAllModuleObjects(const QString& moduleId) const;
+	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
 	QMap<QString, QString> objectModulesMap() const;
 
 	//! Return whether an object was selected during last selection related event.

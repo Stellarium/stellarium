@@ -420,12 +420,22 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
-QStringList Satellites::listAllObjects() const
+QStringList Satellites::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	foreach(const SatelliteP& sat, satellites)
+	if (inEnglish)
 	{
-		result << sat->getNameI18n();
+		foreach(const SatelliteP& sat, satellites)
+		{
+			result << sat->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(const SatelliteP& sat, satellites)
+		{
+			result << sat->getNameI18n();
+		}
 	}
 	return result;
 }

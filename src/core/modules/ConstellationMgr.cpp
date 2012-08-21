@@ -1159,12 +1159,22 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 	return result;
 }
 
-QStringList ConstellationMgr::listAllObjects() const
+QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	foreach(Constellation* constellation, asterisms)
+	if (inEnglish)
 	{
-		result << constellation->getNameI18n();
+		foreach(Constellation* constellation, asterisms)
+		{
+			result << constellation->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(Constellation* constellation, asterisms)
+		{
+			result << constellation->getNameI18n();
+		}
 	}
 	return result;
 }

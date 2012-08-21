@@ -343,12 +343,22 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 		return result;
 }
 
-QStringList Exoplanets::listAllObjects() const
+QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	foreach (const ExoplanetP& planet, ep)
+	if (inEnglish)
 	{
-		result << planet->getNameI18n();
+		foreach (const ExoplanetP& planet, ep)
+		{
+			result << planet->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach (const ExoplanetP& planet, ep)
+		{
+			result << planet->getNameI18n();
+		}
 	}
 	return result;
 }
