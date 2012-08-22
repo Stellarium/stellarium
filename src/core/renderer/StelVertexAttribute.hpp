@@ -46,6 +46,8 @@ enum AttributeType
 //!
 //! E.g. Vec3f is 3-dimensional.
 //!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+//!
 //! @param type Attribute type to get number of dimensions of.
 //! @return Number of dimensions.
 inline int attributeDimensions(const AttributeType type)
@@ -56,6 +58,8 @@ inline int attributeDimensions(const AttributeType type)
 }
 
 //! Get size of a vertex attribute of specified type.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 //!
 //! @param type Attribute type to get size of (e.g. Vec2f).
 //! @return Size of the vertex attribute in bytes.
@@ -83,6 +87,8 @@ enum AttributeInterpretation
 };
 
 //! Describes a single vertex attribute (e.g. 2D vertex, 3D normal and so on).
+//!
+//! @note This is an internal struct of the Renderer subsystem and should not be used elsewhere.
 struct StelVertexAttribute
 {
 	//! Data type of the attribute.

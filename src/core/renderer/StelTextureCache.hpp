@@ -47,6 +47,8 @@
 //! Similarly, if the texture was created with lazy loading mode, is 
 //! requested with asynchronous mode and didn't start loading yet,
 //! loading is started and then the texture is returned.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 template<class TextureBackend>
 class StelTextureCache
 {

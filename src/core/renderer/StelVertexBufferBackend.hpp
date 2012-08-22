@@ -50,6 +50,8 @@ static const int MAX_VERTEX_ATTRIBUTES = 8;
 //! StelVertexBuffer.
 //!
 //! @sa StelVertexBuffer, StelRenderer
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelVertexBufferBackend
 {
 	//! Stores vertex attribute metadata of a buffer.

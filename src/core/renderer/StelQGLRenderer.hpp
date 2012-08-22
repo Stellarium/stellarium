@@ -42,6 +42,8 @@
 #define STELQGLRENDERER_MAX_TEXTURE_UNITS 64
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLRenderer : public StelRenderer
 {
 public:
