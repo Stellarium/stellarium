@@ -33,6 +33,8 @@
 typedef float RAW_GL_MATRIX [4][4];
 
 //! QGL based StelGLSLShader implementation, used by the QGL2 renderer backend.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLGLSLShader : public StelGLSLShader
 {
 private:

@@ -30,6 +30,8 @@
 
 
 //! Base class for QGL-using vertex array based vertex buffer backends.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLArrayVertexBufferBackend : public StelVertexBufferBackend
 {
 protected:

@@ -33,6 +33,8 @@
 //!
 //! E.g. Vec3f is a vector of 3 floats, so GL data type of AttributeType_Vec3f is GL_FLOAT.
 //!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+//!
 //! @param type Vertex attribute data type.
 //! @return OpenGL attribute element data type.
 inline GLint glAttributeType(const AttributeType type)
@@ -56,6 +58,8 @@ inline GLint glAttributeType(const AttributeType type)
 //! Get GLSL vertex attribute name corresponding to specified attribute interpretation.
 //!
 //! Each vertex attribute interpretation uses a specific name in shaders it is used in.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 //!
 //! @param interpretation Vertex attribute interpretation.
 //! @return Name of the attribute as a C string.
@@ -82,6 +86,8 @@ inline const char* glslAttributeName(const AttributeInterpretation interpretatio
 //! so the value returned can be e.g. GL_VERTEX_ARRAY for positions,
 //! GL_COLOR_ARRAY for colors, etc.
 //!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+//!
 //! @param interpretation Vertex attribute interpretation.
 //! @return Client state corresponding to the interpretation.
 inline GLenum gl1AttributeEnum(const AttributeInterpretation interpretation)
@@ -100,6 +106,8 @@ inline GLenum gl1AttributeEnum(const AttributeInterpretation interpretation)
 }
 
 //! Translate PrimitiveType to OpenGL primitive type.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline GLint glPrimitiveType(const PrimitiveType type)
 {
 	switch(type)
@@ -119,6 +127,8 @@ inline GLint glPrimitiveType(const PrimitiveType type)
 }
 
 //! Translate IndexType to OpenGL index type.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline GLenum glIndexType(const IndexType indexType)
 {
 	if(indexType == IndexType_U16)      {return GL_UNSIGNED_SHORT;}
@@ -129,6 +139,8 @@ inline GLenum glIndexType(const IndexType indexType)
 }
 
 //! Translate TextureWrap to OpenGL texture wrap mode.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline GLint glTextureWrap(const TextureWrap wrap)
 {
 	switch(wrap)
@@ -143,6 +155,8 @@ inline GLint glTextureWrap(const TextureWrap wrap)
 }
 
 //! Convert an OpenGL error code returned by glGetError to string.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline QString glErrorToString(const GLenum error)
 {
 	switch(error)
@@ -161,6 +175,8 @@ inline QString glErrorToString(const GLenum error)
 }
 
 //! Get OpenGL pixel format of an image.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline GLint glGetPixelFormat(const QImage& image)
 {
 	const bool gray  = image.isGrayscale();
@@ -170,6 +186,8 @@ inline GLint glGetPixelFormat(const QImage& image)
 }
 
 //! Determine if specified texture size is within maximum texture size limits.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline bool glTextureSizeWithinLimits(const QSize size)
 {
 	// TODO 
@@ -189,6 +207,8 @@ inline bool glTextureSizeWithinLimits(const QSize size)
 //!
 //! The image will be replaced by a resized version if it doesn't fit 
 //! into maximum GL texture size on the platform.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 //!
 //! @param image Referernce to the image.
 inline void glEnsureTextureSizeWithinLimits(QImage& image)
@@ -220,6 +240,8 @@ inline void glEnsureTextureSizeWithinLimits(QImage& image)
 //!
 //! If the texture is not found, it is searched for in the textures/ directory.
 //!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+//!
 //! @param filename File name of the texture.
 //! @param pvrSupported Are PVR textures supported?
 //!
@@ -227,6 +249,8 @@ inline void glEnsureTextureSizeWithinLimits(QImage& image)
 QString glFileSystemTexturePath(const QString& filename, const bool pvrSupported);
 
 //! Check for OpenGL errors and print warnings if an error is detected. 
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 //!
 //! @param context Context in which checkGLErrors is called used for error messages.
 //!                (e.g. the function name).

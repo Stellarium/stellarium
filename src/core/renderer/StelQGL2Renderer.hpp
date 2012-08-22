@@ -35,6 +35,8 @@
 
 
 //! Renderer backend using OpenGL 2.1 or GLSL 2.0 with Qt.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGL2Renderer : public StelQGLRenderer
 {
 public:

@@ -36,6 +36,8 @@
 //! Texture Loader interface - used internally by texture implementations to load image data.
 //!
 //! Loads image data in a separate thread.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelTextureLoader : public QObject
 {
 	Q_OBJECT
@@ -71,6 +73,8 @@ private:
 
 
 //! Texture loader that loads an image from the web.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelHTTPTextureLoader : public StelTextureLoader
 {
 	Q_OBJECT
@@ -148,6 +152,8 @@ private:
 };
 
 //! Texture loader that loads an image from the file system.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelFileTextureLoader : public StelTextureLoader
 {
 	Q_OBJECT
