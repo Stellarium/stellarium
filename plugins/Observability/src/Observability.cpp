@@ -184,7 +184,7 @@ Observability::Observability()
 
 
 	// Set names of the months:
-	QString mons[12]={q_("Jan"), q_("Feb"), q_("Mar"), q_("Apr"), q_("May"), q_("Jun"), q_("Jul"), q_("Aug"), q_("Sep"), q_("Oct"), q_("Nov"), q_("Dec")};
+	QString mons[12]={qc_("Jan", "short month name"), qc_("Feb", "short month name"), qc_("Mar", "short month name"), qc_("Apr", "short month name"), qc_("May", "short month name"), qc_("Jun", "short month name"), qc_("Jul", "short month name"), qc_("Aug", "short month name"), qc_("Sep", "short month name"), qc_("Oct", "short month name"), qc_("Nov", "short month name"), qc_("Dec", "short month name")};
 
 	for (int i=0;i<12;i++) {
 		months[i]=mons[i];

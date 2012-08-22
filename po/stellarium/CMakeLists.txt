@@ -14,6 +14,7 @@ ADD_CUSTOM_TARGET(
         --keyword=_
         --keyword=N_
         --keyword=q_
+        --keyword=qc_:1,2c
         --keyword=translate:2
         --keyword=translate:2,3c
         --add-comments=TRANSLATORS:
