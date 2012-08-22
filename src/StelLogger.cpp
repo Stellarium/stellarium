@@ -154,7 +154,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
 
 	// write addressing mode
-#ifdef __LP64__
+#if defined(__LP64__) || defined(_WIN64)
 	writeLog("Addressing mode: 64-bit");
 #else
 	writeLog("Addressing mode: 32-bit");
