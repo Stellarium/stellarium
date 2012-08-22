@@ -26,6 +26,8 @@
 
 //! OpenGL 1 vertex array style VertexBuffer backend.
 //!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
+//!
 //! @sa StelVertexBuffer, StelRenderer
 class StelQGL1ArrayVertexBufferBackend : public StelQGLArrayVertexBufferBackend
 {

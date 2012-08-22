@@ -28,6 +28,8 @@
 //!
 //! Should be replaced by a StelQGL2VBOVertexBufferBackend based on QGL and/or using VBOs.
 //!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
+//!
 //! @sa StelVertexBuffer, StelRenderer
 class StelQGL2ArrayVertexBufferBackend : public StelQGLArrayVertexBufferBackend
 {

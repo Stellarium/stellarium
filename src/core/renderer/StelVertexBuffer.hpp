@@ -120,6 +120,13 @@ public:
 //! @note When drawing with a custom StelProjector (using StelRenderer::drawVertexBuffer), 
 //! only 3D vertex positions are supported.
 //!
+//! @note Currently, the GL2 backend only supports some combinations of attribute
+//!       interpretations (e.g. just position, position-color, etc.). This is because
+//!       every such combination needs a custom shader. If you get an assertion error 
+//!       about an unimplemented shader for vertex format, feel free to add it
+//!       (in StelQGL2Renderer). All vertex formats currently used in Stellarium 
+//!       are already covered.
+//!
 //! @see AttributeType, AttributeInterpretation, StelVertexAttribute, StelRenderer
 //!
 //! @section apinotes API design notes

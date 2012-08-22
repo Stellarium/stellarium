@@ -26,6 +26,8 @@
 
 
 //! Texture backend based on QGL, usable with both GL1 and GL2.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLTextureBackend : public StelTextureBackend
 {
 Q_OBJECT

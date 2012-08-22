@@ -88,6 +88,8 @@ enum TextureLoadingMode
 
 //! Base class for texture implementations.
 //!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
+//!
 //! @see StelTextureNew
 class StelTextureBackend : public QObject
 {

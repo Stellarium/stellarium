@@ -42,6 +42,8 @@
 //! (basic shaders, VBOs, etc.), these are not used - with the exception of 
 //! multitexturing, which is still not mandatory - so compatibility is as high as 
 //! possible.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGL1Renderer : public StelQGLRenderer
 {
 public:

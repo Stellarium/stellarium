@@ -29,6 +29,8 @@
 #include "StelUtils.hpp"
 
 //! GLWidget specialized for Stellarium, mainly to provide better debugging information.
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLWidget : public QGLWidget
 {
 public:

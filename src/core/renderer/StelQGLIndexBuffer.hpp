@@ -32,6 +32,8 @@
 //! In future, it should be replaced with a Qt3D implementation
 //! (based on QGLIndexBuffer), or with a direct VBO implementation
 //! (although we can still keep this implementation for GL1).
+//!
+//! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLIndexBuffer : public StelIndexBuffer
 {
 // StelQGLRenderer constructs QGL index buffers.

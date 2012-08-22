@@ -34,7 +34,7 @@ static QString withFileExtension(const QString& filename, const QString& newExt)
 	return result;
 }
 
-//! Utility wrapper function to get full path of a file.
+//! Utility wrapper function to get full path of a texture file.
 //!
 //! @param filename File name to get full path for.
 //! @param outFullPath Will store full path on success.
