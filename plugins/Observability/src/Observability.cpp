@@ -801,7 +801,12 @@ QString Observability::RangeCalenDates(int fDoY, int sDoY)
 	if (sDoY==0)
 	{
 		day2 = 31;
-		month2 = 13;
+		month2 = 12;
+	}
+	if (fDoY==0)
+	{
+		day1 = 1;
+		month1 = 1;
 	}
 	if (month1==month2)
 	{
