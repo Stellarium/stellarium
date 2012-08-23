@@ -80,7 +80,7 @@ QVariant StelShortcut::toQVariant() const
 void StelShortcut::setText(const QString &text)
 {
 	m_text = text;
-	m_action->setText(q_(text));
+	m_action->setText(text);
 	m_action->setProperty("englishText", QVariant(text));
 	emit shortcutChanged(this);
 }
