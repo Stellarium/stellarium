@@ -341,7 +341,7 @@ void Observability::draw(StelCore* core)
 //Update position:
 		EquPos = selectedObject->getEquinoxEquatorialPos(core);
 		EquPos.normalize();
-		LocPos = core->equinoxEquToAltAz(EquPos);
+		LocPos = core->equinoxEquToAltAz(EquPos,StelCore::RefractionOff);
 
 // Check if the user has changed the source (or if the source is Sun/Moon). 
 		if (tempName == selName) 
@@ -389,7 +389,7 @@ void Observability::draw(StelCore* core)
 		Vec3d currentPos = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 		currentPos.normalize();
 		EquPos = core->j2000ToEquinoxEqu(currentPos);
-		LocPos = core->j2000ToAltAz(currentPos);
+		LocPos = core->j2000ToAltAz(currentPos,StelCore::RefractionOff);
 	}
 
 
