@@ -163,6 +163,11 @@ private:
 //! @param DoY Day of the year.
 	virtual QString CalenDate(int DoY);
 
+//! Returns a string of range dates (e.g. "25 Apr - 10 May") from a two Days of Year (integer).
+//! @param fDoY first Day of the year.
+//! @param sDoY second Day of the year.
+	virtual QString RangeCalenDates(int fDoY, int sDoY);
+
 //! Just subtracts/adds 24h to a RA (or HA), to make it fall within 0-24h.
 //! @param RA right ascension (in hours).
 	virtual double toUnsignedRA(double RA);
