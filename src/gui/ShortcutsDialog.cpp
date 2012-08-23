@@ -22,6 +22,7 @@
 
 #include "StelApp.hpp"
 #include "StelShortcutMgr.hpp"
+#include "StelTranslator.hpp"
 #include "StelShortcutGroup.hpp"
 
 #include "ShortcutsDialog.hpp"
@@ -50,7 +51,7 @@ void ShortcutLineEdit::backspace()
 {
 	if (m_keyNum <= 0)
 	{
-		qWarning() << "Clear button works when it shouldn't ";
+		qWarning() << "Clear button works when it shouldn't: lineEdit is empty ";
 		return;
 	}
 	--m_keyNum;
@@ -359,7 +360,7 @@ QTreeWidgetItem *ShortcutsDialog::updateGroup(StelShortcutGroup *group)
 	// group items aren't selectable, so reset default flag
 	groupItem->setFlags(Qt::ItemIsEnabled);
 	// setup displayed text
-	QString text((group->getText().isEmpty() ? group->getId() : group->getText()));
+	QString text(q_(group->getText().isEmpty() ? group->getId() : group->getText()));
 	groupItem->setText(0, text);
 	// store id
 	groupItem->setData(0, Qt::UserRole, group->getId());
@@ -410,7 +411,7 @@ void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut, QTreeWidgetIte
 		shortcutTreeItem->setData(0, Qt::UserRole, QVariant(shortcut->getId()));
 	}
 	// setup properties of item
-	shortcutTreeItem->setText(0, shortcut->getText());
+	shortcutTreeItem->setText(0, q_(shortcut->getText()));
 	shortcutTreeItem->setData(1, Qt::DisplayRole, shortcut->getPrimaryKey());
 	shortcutTreeItem->setData(2, Qt::DisplayRole, shortcut->getAltKey());
 }
