@@ -94,7 +94,7 @@ private:
 	//! Storage allocated for uniforms in bytes. Increase this if needed.
 	//!
 	//! This is enough for 8 Mat4f, or 32 Vec4f.
-	static const int UNIFORM_STORAGE = 512;
+	static const unsigned int UNIFORM_STORAGE = 512;
 
 	//! Maximum uniform count. Increase this if needed.
 	static const int MAX_UNIFORMS = 32;
