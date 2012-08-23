@@ -635,14 +635,14 @@ void Observability::draw(StelCore* core)
 							bestBegun = false;
 							if (selday2 > selday) {
 								if (dateRange!="") { dateRange += ", ";};
-								dateRange += q_("from %1 to %2").arg(CalenDate(selday)).arg(CalenDate(selday2));
+								dateRange += QString("%1").arg(RangeCalenDates(selday, selday2));
 							};
 						};
 					};
 
 					if (bestBegun) { // There were good dates till the end of the year.
 						 if (dateRange!="") { dateRange += ", ";};
-						dateRange += CalenDate(selday)+q_(" to 31 Dec");
+						dateRange += RangeCalenDates(selday, 0);
 					};
 					
 					if (dateRange == "") 
@@ -787,6 +787,32 @@ QString Observability::CalenDate(int selday)
 	int day,month,year;
 	StelUtils::getDateFromJulianDay(yearJD[selday],&year,&month,&day);
 	return QString("%1 %2").arg(day).arg(months[month-1]);
+}
+//////////////////////////////////////////////
+
+///////////////////////////////////////////////
+// Returns the day and month of year (to put it in format '25 Apr')
+QString Observability::RangeCalenDates(int fDoY, int sDoY)
+{
+	int day1,month1,year1,day2,month2,year2;
+	QString range;
+	StelUtils::getDateFromJulianDay(yearJD[fDoY],&year1,&month1,&day1);
+	StelUtils::getDateFromJulianDay(yearJD[sDoY],&year2,&month2,&day2);
+	if (sDoY==0)
+	{
+		day2 = 31;
+		month2 = 13;
+	}
+	if (month1==month2)
+	{
+		range = QString("%1 - %2 %3").arg(day1).arg(day2).arg(months[month1-1]);
+	}
+	else
+	{
+		range = QString("%1 %2 - %3 %4").arg(day1).arg(months[month1-1]).arg(day2).arg(months[month2-1]);
+	}
+
+	return range;
 }
 //////////////////////////////////////////////
 
