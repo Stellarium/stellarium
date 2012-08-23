@@ -339,7 +339,7 @@ void StelViewportDistorterFisheyeToSphericMirror::constructVertexBuffer
 	// Each row is a triangle strip.
 	for (int row = 0; row < maxGridY; row++)
 	{
-		StelIndexBuffer* buffer = renderer->createIndexBuffer(IndexType_U16);
+		StelIndexBuffer* buffer = renderer->createIndexBuffer(IndexType_U32);
 		// Two rows of vertices make up one row of the grid.
 		uint i0 = row * cols;
 		uint i1 = i0;
