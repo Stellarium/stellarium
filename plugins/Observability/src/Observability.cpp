@@ -1159,7 +1159,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 		};
 
 		toRADec(Pos2,RA,Dec);
-		Vec3d MoonAltAz = core->equinoxEquToAltAz(Pos2);
+		Vec3d MoonAltAz = core->equinoxEquToAltAz(Pos2,StelCore::RefractionOff);
 		raised = MoonAltAz[2] > 0.0;
 
 // Initial guesses of rise/set/transit times.
