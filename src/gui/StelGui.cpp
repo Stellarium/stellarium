@@ -93,8 +93,8 @@ StelGui::StelGui() :
 	dateTimeDialog(0),
 	searchDialog(0),
 	viewDialog(0),
-	configurationDialog(0),
 	shortcutsDialog(0),
+	configurationDialog(0),
 #ifdef ENABLE_SCRIPT_CONSOLE
     scriptConsole(0),
 #endif
