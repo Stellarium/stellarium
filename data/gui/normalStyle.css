@@ -19,7 +19,7 @@ QDockWidget {
 }
 
 QWidget {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
+        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
 	selection-background-color: rgb(253, 216, 134);
 	selection-color: rgb(3, 3, 3);
 }
@@ -150,7 +150,7 @@ QTextEdit {
 
 QTextBrowser {
 	border: 0px solid rgb(0, 0, 0);
-	background: rgb(86, 87, 90);
+        background: rgb(86, 87, 90);
 	color: rgb(3, 3, 3);
 }
 
@@ -179,12 +179,6 @@ QLineEdit#lineEditSearchSkyObject {
 	color: rgb(255, 255, 255);
 }
 
-QPushButton#pushButtonGotoSearchSkyObject {
-	border-radius: 0px;
-	border-left: none;
-	padding: 2px;
-}
-
 QFrame#completionLabel {
 	font-size: 14px;
 	padding-left: 20px;
@@ -206,9 +200,13 @@ QPushButton {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 4px;
 	padding: 2px 8px;
-	color: rgb(31, 31, 31);
+        color: rgb(31, 31, 31);
 	font-size: 12px;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
+}
+
+QPushButton::Disabled {
+        color: #f0f0f0;
 }
 
 QPushButton:pressed {
@@ -226,8 +224,39 @@ QPushButton#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton.png);
 }
 
+QPushButton#pushButtonGotoSearchSkyObject {
+        border-radius: 0px;
+        border-left: none;
+        padding: 2px;
+        image: url(:/graphicGui/searchButtonImage.png);
+}
+
 QPushButton:hover#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton-hover.png);
+}
+
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown {
+        image: url(:/graphicGui/spindown.png);
+}
+
+QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {
+        image: url(:/satellites/bt_delete.png);
+}
+
+QPushButton#addSatellitesButton , QPushButton#addSourceButton {
+        image: url(:/satellites/bt_add.png);
+}
+
+QPushButton#commsButton {
+        image: url(:/satellites/bt_comms_off.png);
+}
+
+QPushButton#saveSatellitesButton {
+        image: url(:/graphicGui/filesave.png);
 }
 
 /**********************************************LocationDialog*******************************************************/
@@ -500,6 +529,10 @@ QCheckBox {
 	background: none;
 }
 
+QCheckBox:disabled {
+        color: rgb(50, 50, 50);
+}
+
 QCheckBox::indicator {
 	width: 16px;
 	height: 16px;
@@ -530,11 +563,6 @@ QListWidget::indicator:checked, QListView::indicator:checked {
 QListWidget::indicator:unchecked, QListView::indicator:unchecked {
 	image: url(:/graphicGui/checkbox-unchecked.png);
 }
-
-/*QCheckBox:disabled {
-	color: rgb(210, 0, 0);
-	font-weight: 500;
-}*/
 
 QRadioButton {
 	color: rgb(3, 3, 3);
@@ -891,6 +919,24 @@ QWidget#listManagerWidget {
 
 QGraphicsWidget#observationListView  QLabel {
 		font-size: 40px;
+}
+
+#configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {
+        image: url(:/graphicGui/folder.png);
+}
+
+#configurationDialogForm QPushButton#getStarsButton {
+        image: url(:/graphicGui/btTimeRealtime-off.png);
+}
+
+QLineEdit#lineEditSearch {
+	margin: 0px 0px 4px 0px;
+	padding: 4px;
+	padding-left: 32px;
+	background-image: url(:/graphicGui/searchBoxBackground.png);
+	background-repeat: none;
+	background-position: center left;
+	border: none;
 }
 
 /**** The following are used for Satellites ****/

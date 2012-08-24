@@ -53,7 +53,7 @@ void StelGuiBase::updateI18n()
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
+QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
 {
 	Q_UNUSED(helpGroup);
 	QAction* a;
@@ -70,7 +70,14 @@ QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& te
 	a->setCheckable(checkable);
 	a->setAutoRepeat(autoRepeat);
 	a->setProperty("englishText", QVariant(text));
-	a->setShortcutContext(Qt::WidgetShortcut);
+	if (global)
+	{
+		a->setShortcutContext(Qt::ApplicationShortcut);
+	}
+	else
+	{
+		a->setShortcutContext(Qt::WidgetShortcut);
+	}
 	stelAppGraphicsWidget->addAction(a);
 	return a;
 }

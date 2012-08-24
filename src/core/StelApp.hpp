@@ -38,6 +38,7 @@ class QTime;
 class StelLocationMgr;
 class StelSkyLayerMgr;
 class StelAudioMgr;
+class StelVideoMgr;
 class StelGuiBase;
 
 //! @class StelApp
@@ -108,6 +109,9 @@ public:
 
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
+
+	//! Get the video manager
+	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
 
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
@@ -225,6 +229,9 @@ private:
 
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
+
+	// The video manager.  Must execute in the main thread.
+	StelVideoMgr* videoMgr;
 
 	StelSkyLayerMgr* skyImageMgr;
 

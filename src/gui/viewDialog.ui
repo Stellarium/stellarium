@@ -6,8 +6,6 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
-    <height>550</height>
    </rect>
   </property>
   <property name="font">
@@ -328,7 +326,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1030,99 +1028,7 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QGroupBox" name="celestialSphereGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title">
-             <string>Celestial Sphere</string>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_10">
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QCheckBox" name="showEquatorialGridCheckBox">
-               <property name="text">
-                <string>Equatorial grid</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
-               <property name="text">
-                <string>Equatorial J2000 grid</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
-               <property name="text">
-                <string>Azimuthal grid</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showGalacticGridCheckBox">
-               <property name="text">
-                <string>Galactic grid</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showEquatorLineCheckBox">
-               <property name="text">
-                <string>Equator line</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showMeridianLineCheckBox">
-               <property name="text">
-                <string>Meridian line</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showHorizonLineCheckBox">
-               <property name="text">
-                <string>Horizon line</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showEclipticLineCheckBox">
-               <property name="text">
-                <string>Ecliptic line</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showGalacticPlaneLineCheckBox">
-               <property name="text">
-                <string>Galactic plane line</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showCardinalPointsCheckBox">
-               <property name="text">
-                <string>Cardinal points</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="0" column="1">
+          <item row="0" column="2">
            <widget class="QGroupBox" name="constellationGroupBox">
             <property name="font">
              <font>
@@ -1206,7 +1112,137 @@
             </layout>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
+          <item row="0" column="0" colspan="2">
+           <widget class="QGroupBox" name="celestialSphereGroupBox">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="title">
+             <string>Celestial Sphere</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_13">
+                 <item>
+                  <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
+                   <property name="text">
+                    <string>Equatorial J2000 grid</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showEquatorialGridCheckBox">
+                   <property name="text">
+                    <string>Equatorial grid</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showEclipticGridJ2000CheckBox">
+                   <property name="text">
+                    <string>Ecliptic J2000 grid</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
+                   <property name="text">
+                    <string>Azimuthal grid</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showGalacticGridCheckBox">
+                   <property name="text">
+                    <string>Galactic grid</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_15">
+                 <item>
+                  <widget class="QCheckBox" name="showEquatorLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show equator line</string>
+                   </property>
+                   <property name="text">
+                    <string>Equator</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showMeridianLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show meridian line</string>
+                   </property>
+                   <property name="text">
+                    <string>Meridian</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showHorizonLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show horizon line</string>
+                   </property>
+                   <property name="text">
+                    <string>Horizon</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showEclipticLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show ecliptic line</string>
+                   </property>
+                   <property name="text">
+                    <string>Ecliptic</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showGalacticPlaneLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show Galactic plane line</string>
+                   </property>
+                   <property name="text">
+                    <string>Galactic plane</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_16">
+               <item>
+                <widget class="QCheckBox" name="showCardinalPointsCheckBox">
+                 <property name="text">
+                  <string>Cardinal points</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
            <widget class="QGroupBox" name="setProjectionGroupBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -1663,16 +1699,17 @@
   <tabstop>zhr80</tabstop>
   <tabstop>zhr10000</tabstop>
   <tabstop>zhr144000</tabstop>
-  <tabstop>showEquatorialGridCheckBox</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
+  <tabstop>showEquatorialGridCheckBox</tabstop>
+  <tabstop>showEclipticGridJ2000CheckBox</tabstop>
   <tabstop>showAzimuthalGridCheckBox</tabstop>
   <tabstop>showGalacticGridCheckBox</tabstop>
+  <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
   <tabstop>showMeridianLineCheckBox</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
   <tabstop>showGalacticPlaneLineCheckBox</tabstop>
-  <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
   <tabstop>showConstellationBoundariesCheckBox</tabstop>
