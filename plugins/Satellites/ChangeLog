@@ -1,7 +1,16 @@
+0.7.2 [2012-07- in progress]
+Added "Mark all" and "Mark none" buttons to the satellites import window.
+Added a search/filter feature to the main satellites list.
+Fixed duplicate name confusion on double-clicking a satellite in the list.
+Implemented satellite NORAD number search in Stellarium's main search.
+Support night vision mode
+
 0.7.1 [2012-01-08]
 Added basic GUI for adding satellites from TLE lists.
 Added CelesTrak's tle-new.txt to the default sources list to make adding fresh
 satellites easier.
+UPDATE THIS! (There have been multiple changes between this date and the time
+Stellarium 0.10.3 was released with the same plug-in version number.)
 
 0.7.0 [2011-12-13]
 Use catalog number instead of satellite name as an identifier.
