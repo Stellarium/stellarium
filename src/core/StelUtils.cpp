@@ -85,7 +85,6 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 *************************************************************************/
 void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
 {
-	int n;
 	angle = std::fmod(angle,2.0*M_PI);
 	sign=true;
 	if (angle<0)
@@ -95,11 +94,26 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}
 	angle *= 180./M_PI;
 
-	n = (int)std::floor(std::fabs(3600 * angle) + 0.5);
-	s = n % 60;
-	n /= 60;
-	m = (unsigned int)(n % 60);
-	d = (unsigned int)(n / 60);
+	d = (unsigned int)angle;
+	m = (unsigned int)((angle - d)*60);
+	s = (angle-d)*3600-60*m;
+	// workaround for rounding numbers
+	if (s>59.9)
+	{
+		s = 0.;
+		if (sign)
+			m += 1;
+		else
+			m -= 1;
+	}
+	if (m==60)
+	{
+		m = 0.;
+		if (sign)
+			d += 1;
+		else
+			d -= 1;
+	}
 }
 
 /*************************************************************************
@@ -319,9 +333,9 @@ void spheToRect(double lng, double lat, Vec3d& v)
 }
 
 void spheToRect(float lng, float lat, Vec3f& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+{	
+	const double dlng = lng, dlat = lat, cosLat = cos(dlat);
+	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 }
 
 void rectToSphe(double *lng, double *lat, const Vec3d& v)
@@ -1020,6 +1034,17 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 			return true;
 	}
 	return false;
+}
+
+// Calculate and getting orbital period in days from semi-major axis
+double calculateOrbitalPeriod(double SemiMajorAxis)
+{
+	// Calculate semi-major axis in meters
+	double a = AU*1000*SemiMajorAxis;
+	// Calculate orbital period in seconds
+	// Here 1.32712440018e20 is heliocentric gravitational constant
+	double period = 2*M_PI*std::sqrt(a*a*a/1.32712440018e20);
+	return period/86400; // return period in days
 }
 
 

@@ -41,6 +41,7 @@
 #include "StelStyle.hpp"
 #include "StelLogger.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 
 HelpDialog::HelpDialog()
 {
@@ -69,6 +70,10 @@ HelpDialog::HelpDialog()
 #endif
 
 	group = N_("When a Script is Running");
+
+	setKey(group, "", "4", N_("Stop currently running script"));
+	setKey(group, "", "5", N_("Pause script execution"));
+	setKey(group, "", "6", N_("Resume script execution"));
 	setKey(group, "", "J", N_("Slow down the script execution rate"));
 	setKey(group, "", "L", N_("Speed up the script execution rate"));
 	setKey(group, "", "K", N_("Set the normal script execution rate"));
@@ -101,11 +106,32 @@ void HelpDialog::styleChanged()
 	}
 }
 
+void HelpDialog::updateIconsColor()
+{
+	QPixmap pixmap(50, 50);
+	QStringList icons;
+	icons << "help" << "info" << "logs";
+	bool redIcon = false;
+	if (StelApp::getInstance().getVisionModeNight())
+		redIcon = true;
+
+	foreach(const QString &iconName, icons)
+	{
+		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
+		if (redIcon)
+			pixmap = StelButton::makeRed(pixmap);
+
+		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
+	}
+}
+
 void HelpDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 	ui->stackedWidget->setCurrentIndex(0);
+	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -298,19 +324,23 @@ void HelpDialog::updateText(void)
 	newHtml += "<h3>" + Qt::escape(q_("Developers")) + "</h3><ul>";
 	newHtml += "<li>" + Qt::escape(q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Doc author/developer: %1").arg(QString("Matthew Gates"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: %1").arg(QString("Johan Meuris"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Johannes Gajdosik"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Rob Spearman"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Bogdan Marinov"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Timothy Reaves"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Nigel Kerr"))) + "</li>";	
-	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Diego Marcos"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Georg Zotti"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Alexander Wolf"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Barry Gerdes"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Khalid AlAjaji"))) + "</li></ul>";
+	newHtml += "<h3>" + Qt::escape(q_("Past Developers")) + "</h3>";
+	newHtml += "<p>"  + Qt::escape(q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:")) + "</p><ul>";
+	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: %1").arg(QString("Johan Meuris"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Johannes Gajdosik"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Rob Spearman"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1)))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Mike Storm"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Barry Gerdes"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Khalid AlAjaji"))) + "</li><ul><p>";
+	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Nigel Kerr"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Diego Marcos"))) + "</li></ul>";
+	newHtml += "<p>";
 	ui->aboutBrowser->clear();
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->aboutBrowser->insertHtml(newHtml);

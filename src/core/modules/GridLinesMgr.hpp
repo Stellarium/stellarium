@@ -52,6 +52,10 @@ class GridLinesMgr : public StelModule
 			   READ getFlagEquatorJ2000Grid
 			   WRITE setFlagEquatorJ2000Grid
 			   NOTIFY equatorJ2000GridDisplayedChanged)
+	Q_PROPERTY(bool eclipticJ2000GridDisplayed
+			   READ getFlagEclipticJ2000Grid
+			   WRITE setFlagEclipticJ2000Grid
+			   NOTIFY eclipticJ2000GridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorJ2000GridColor
 			   READ getColorEquatorJ2000Grid
 			   WRITE setColorEquatorJ2000Grid
@@ -163,6 +167,15 @@ public slots:
 	//! Set the color of the Equatorial J2000 Grid.
 	void setColorEquatorJ2000Grid(const Vec3f& newColor);
 
+	//! Setter for displaying Ecliptic Grid.
+	void setFlagEclipticJ2000Grid(const bool displayed);
+	//! Accessor for displaying Ecliptic Grid.
+	bool getFlagEclipticJ2000Grid(void) const;
+	//! Get the current color of the Ecliptic J2000 Grid.
+	Vec3f getColorEclipticJ2000Grid(void) const;
+	//! Set the color of the Ecliptic J2000 Grid.
+	void setColorEclipticJ2000Grid(const Vec3f& newColor);
+
 	//! Setter for displaying Galactic Grid.
 	void setFlagGalacticGrid(const bool displayed);
 	//! Accessor for displaying Galactic Grid.
@@ -223,6 +236,8 @@ signals:
 	void equatorGridColorChanged(const Vec3f & newColor) const;
 	void equatorJ2000GridDisplayedChanged(const bool displayed) const;
 	void equatorJ2000GridColorChanged(const Vec3f & newColor) const;
+	void eclipticJ2000GridDisplayedChanged(const bool displayed) const;
+	void eclipticJ2000GridColorChanged(const Vec3f & newColor) const;
 	void galacticGridDisplayedChanged(const bool displayed) const;
 	void galacticGridColorChanged(const Vec3f & newColor) const;
 	void equatorLineDisplayedChanged(const bool displayed) const;
@@ -249,6 +264,7 @@ private:
 	SkyGrid * equGrid;      	// Equatorial grid
 	SkyGrid * equJ2000Grid; 	// Equatorial J2000 grid
 	SkyGrid * galacticGrid; 	// Galactic grid
+	SkyGrid * eclJ2000Grid; 	// Ecliptic J2000 grid
 	SkyGrid * aziGrid;      	// Azimuthal grid
 	SkyLine * equatorLine;  	// Celestial Equator line
 	SkyLine * eclipticLine; 	// Ecliptic line

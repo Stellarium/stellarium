@@ -24,6 +24,7 @@
 // This solution here works at least for Qt4.8.1/QCreator/Win32/NVidia.
 #include <QtGlobal>
 #if QT_VERSION >= 0x040800
+#include <GLee.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
 #include <GL/glu.h>

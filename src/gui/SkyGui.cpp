@@ -18,9 +18,11 @@
  */
 
 #include "SkyGui.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelGuiItems.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "StelCore.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
@@ -34,11 +36,50 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	Q_ASSERT(conf);
 	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
 	if (objectInfo == "all")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	}
 	else if (objectInfo == "short")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
+	}
 	else if (objectInfo == "none")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(0);
+	}
+	else if (objectInfo == "custom")
+	{
+		infoTextFilters = StelObject::InfoStringGroup(0);
+		
+		conf->beginGroup("custom_selected_info");
+		if (conf->value("flag_show_name", false).toBool())
+			infoTextFilters |= StelObject::Name;
+		if (conf->value("flag_show_catalognumber", false).toBool())
+			infoTextFilters |= StelObject::CatalogNumber;
+		if (conf->value("flag_show_magnitude", false).toBool())
+			infoTextFilters |= StelObject::Magnitude;
+		if (conf->value("flag_show_absolutemagnitude", false).toBool())
+			infoTextFilters |= StelObject::AbsoluteMagnitude;
+		if (conf->value("flag_show_radecj2000", false).toBool())
+			infoTextFilters |= StelObject::RaDecJ2000;
+		if (conf->value("flag_show_radecofdate", false).toBool())
+			infoTextFilters |= StelObject::RaDecOfDate;
+		if (conf->value("flag_show_hourangle", false).toBool())
+			infoTextFilters |= StelObject::HourAngle;
+		if (conf->value("flag_show_altaz", false).toBool())
+			infoTextFilters |= StelObject::AltAzi;
+		if (conf->value("flag_show_distance", false).toBool())
+			infoTextFilters |= StelObject::Distance;
+		if (conf->value("flag_show_size", false).toBool())
+			infoTextFilters |= StelObject::Size;
+		if (conf->value("flag_show_extra1", false).toBool())
+			infoTextFilters |= StelObject::Extra1;
+		if (conf->value("flag_show_extra2", false).toBool())
+			infoTextFilters |= StelObject::Extra2;
+		if (conf->value("flag_show_extra3", false).toBool())
+			infoTextFilters |= StelObject::Extra3;
+		conf->endGroup();
+	}
 	else
 	{
 		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
@@ -237,10 +278,10 @@ void SkyGui::setStelStyle(const QString& style)
 {
 	if (style == "night_color")
 	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
+		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.0,0.0,0.5));
+		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.0, 0.00, 0.2));
+		buttonBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
+		winBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
 		winBar->setRedMode(true);
 		buttonBar->setRedMode(true);
 		btHorizAutoHide->setRedMode(true);
