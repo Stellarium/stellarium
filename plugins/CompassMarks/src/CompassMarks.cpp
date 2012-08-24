@@ -125,7 +125,7 @@ void CompassMarks::init()
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
 		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "", N_("Plugin Key Bindings"), true, false);
-		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
+        //gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		connect(gui->getGuiActions("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
@@ -134,6 +134,8 @@ void CompassMarks::init()
 
 		QSettings* conf = StelApp::getInstance().getSettings();
 		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
+        // GZ: This must go here, else button may show wrong state
+        gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 	}
 	catch (std::runtime_error& e)
 	{
