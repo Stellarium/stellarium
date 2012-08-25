@@ -16,17 +16,25 @@ IF (ICONV_INCLUDE_DIR AND ICONV_LIBRARIES)
   SET(ICONV_FIND_QUIETLY TRUE)
 ENDIF (ICONV_INCLUDE_DIR AND ICONV_LIBRARIES)
 
-FIND_PATH(ICONV_INCLUDE_DIR iconv.h 
-  HINTS
-  /opt/local/include
-  /sw/include
-)
- 
-FIND_LIBRARY(ICONV_LIBRARIES NAMES iconv
-  HINTS
-  /opt/local/lib
-  /sw/include
-) 
+IF(APPLE)
+    FIND_PATH(ICONV_INCLUDE_DIR iconv.h 
+        HINTS
+        /opt/local/include
+        /sw/include
+    )
+ELSE(NOT APPLE)
+    FIND_PATH(ICONV_INCLUDE_DIR iconv.h)
+ENDIF(APPLE)
+
+IF(APPLE)
+    FIND_LIBRARY(ICONV_LIBRARIES NAMES iconv
+        HINTS
+        /opt/local/lib
+        /sw/include
+    ) 
+ELSE(NOT APPLE)
+    FIND_LIBRARY(ICONV_LIBRARIES NAMES iconv c)
+ENDIF(APPLE
 
 IF(ICONV_INCLUDE_DIR AND ICONV_LIBRARIES) 
    SET(ICONV_FOUND TRUE) 
