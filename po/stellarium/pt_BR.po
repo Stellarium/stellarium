@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-20 14:08+0700\n"
-"PO-Revision-Date: 2012-08-20 11:52+0000\n"
-"Last-Translator: Adriano Steffler <Unknown>\n"
+"POT-Creation-Date: 2012-08-23 20:43+0700\n"
+"PO-Revision-Date: 2012-08-23 16:31+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-21 04:54+0000\n"
-"X-Generator: Launchpad (build 15810)\n"
+"X-Launchpad-Export-Date: 2012-08-25 12:45+0000\n"
+"X-Generator: Launchpad (build 15843)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -391,31 +391,31 @@ msgstr "Não encontrado"
 msgid "Found"
 msgstr "Encontrado"
 
-#: src/gui/ConfigurationDialog.cpp:396
+#: src/gui/ConfigurationDialog.cpp:398 src/gui/ConfigurationDialog.cpp:400
 msgid "Select screenshot directory"
 msgstr "Selecione o diretório em que serão armazenadas as capturas de tela"
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:612
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Campo de visão ao iniciar: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:620
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direção de visualização azimute/altura ao iniciar: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Autores"
 
-#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:663 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Contato"
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:746
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -424,19 +424,19 @@ msgstr "Contato"
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:750
 msgid "License"
 msgstr "Licença"
 
-#: src/gui/ConfigurationDialog.cpp:771
+#: src/gui/ConfigurationDialog.cpp:776
 msgid "Running script: "
 msgstr "Executando apresentação: "
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:783
 msgid "Running script: [none]"
 msgstr "Executando apresentação: [nenhuma]"
 
-#: src/gui/ConfigurationDialog.cpp:841
+#: src/gui/ConfigurationDialog.cpp:846
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -444,25 +444,25 @@ msgstr ""
 "A obtenção de novos catálogos estelares foi concluída!\n"
 "Reinicie o Stellarium para exibi-los."
 
-#: src/gui/ConfigurationDialog.cpp:845
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "All available star catalogs have been installed."
 msgstr "Todos os catálogos estelares disponíveis foram instalados."
 
-#: src/gui/ConfigurationDialog.cpp:850
+#: src/gui/ConfigurationDialog.cpp:855
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obter catálogo %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:857
+#: src/gui/ConfigurationDialog.cpp:862
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"Baixando %1...\n"
+"Baixando %1…\n"
 "(Você pode fechar esta janela.)"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:869
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -473,7 +473,7 @@ msgstr ""
 "Contagem de estrelas: %2 milhões\n"
 "Alcance da magnitude: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:912 src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -482,11 +482,11 @@ msgstr ""
 "Ocorreu um erro ao baixar %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:1000
 msgid "Verifying file integrity..."
-msgstr "Verificando a integridade do arquivo..."
+msgstr "Verificando a integridade do arquivo…"
 
-#: src/gui/ConfigurationDialog.cpp:999
+#: src/gui/ConfigurationDialog.cpp:1004
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -580,8 +580,8 @@ msgstr "Definir a taxa normal de execução de apresentações"
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
-#: plugins/Observability/src/Observability.cpp:225
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Plugin Key Bindings"
 msgstr "Teclas de atalho do complemento"
 
@@ -1065,55 +1065,55 @@ msgstr "Selecione um arquivo ZIP que contenha uma paisagem do Stellarium"
 msgid "ZIP archives"
 msgstr "Arquivos ZIP"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "A paisagem “%1” foi instalada com sucesso."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Sucesso"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "<p align=\"justify\">Nenhuma paisagem foi instalada."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Erro!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "A paisagem “%1” foi removida com sucesso."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "A paisagem selecionada não pôde ser removida (completamente)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Tamanho em disco: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "O Stellarium não pode abrir %1 para leitura ou gravação"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -1122,20 +1122,20 @@ msgstr ""
 "Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "Uma paisagem com o mesmo nome ou identificador (%1) já existe."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Você pode removê-la manualmente, excluindo o seguinte diretório: %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr "execução rápida..."
+msgstr "execução rápida…"
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
@@ -1765,30 +1765,32 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
-"Devido às peculiaridades na órbita e na rotação de Mercúrio, em certos "
-"pontos, o Sol nascerá e pôr-se-á em três diferentes horários em um dia "
-"mercuriano."
+"<p align=\"justify\">Devido às peculiaridades na órbita e na rotação de "
+"Mercúrio, em certos pontos, o Sol nascerá e pôr-se-á em três diferentes "
+"horários em um dia mercuriano."
 
 #: src/translations.h:227
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
-"Pouco antes de Marte eclipsar o Sol, Fobos sai de trás e o eclipsa primeiro. "
-"Ocorre entre Escorpião e Sagitário em 26 de abril de 2017."
+"<p align=\"justify\">Pouco antes de Marte eclipsar o Sol, Fobos sai de trás "
+"e o eclipsa primeiro. Ocorre entre Escorpião e Sagitário em 26 de abril de "
+"2017."
 
 #: src/translations.h:228
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
-"Pouco antes de Marte eclipsar o Sol, Fobos sai de trás e o eclipsa primeiro. "
-"Ocorre entre Touro e Gêmeos em 23 de julho de 2031."
+"<p align=\"justify\">Pouco antes de Marte eclipsar o Sol, Fobos sai de trás "
+"e o eclipsa primeiro. Ocorre entre Touro e Gêmeos em 23 de julho de 2031."
 
 #: src/translations.h:229
 msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
 msgstr ""
-"Fobos eclipsa o Sol, como visto do Monte Olimpo, em 10 de janeiro de 2068."
+"<p align=\"justify\">Fobos eclipsa o Sol, como visto do Monte Olimpo, em 10 "
+"de janeiro de 2068."
 
 #: src/translations.h:230
 msgid ""
@@ -1796,9 +1798,10 @@ msgid ""
 "Occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
-"As ocultações de Fobos pela Terra são comuns, assim como as ocultações de "
-"Júpiter. Entretanto, as ocultações de ambos os planetas no mesmo dia são "
-"muito raras. Eis uma que ocorre em 23 de janeiro de 2048, em velocidade real."
+"<p align=\"justify\">As ocultações de Fobos pela Terra são comuns, assim "
+"como as ocultações de Júpiter. Entretanto, as ocultações de ambos os "
+"planetas no mesmo dia são muito raras. Eis uma que ocorre em 23 de janeiro "
+"de 2048, em velocidade real."
 
 #: src/translations.h:230
 msgid ""
@@ -1807,55 +1810,57 @@ msgid ""
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
-"Fobos corre à frente de Marte e eclipsa o Sol, passa através dele e depois "
-"retrocede de volta para o Sol e novamente o ofusca de forma apenas parcial "
-"(visto somente no Hemisfério Sul). Então Marte eclipsa totalmente o Sol e "
-"Fobos, e depois, quando Fobos emerge do Sol, ele passa através da sombra de "
-"Marte e escurece."
+"<p align=\"justify\">Fobos corre à frente de Marte e eclipsa o Sol, passa "
+"através dele e depois retrocede de volta para o Sol e novamente o ofusca de "
+"forma apenas parcial (visto somente no Hemisfério Sul). Então Marte eclipsa "
+"totalmente o Sol e Fobos, e depois, quando Fobos emerge do Sol, ele passa "
+"através da sombra de Marte e escurece."
 
 #: src/translations.h:231
 msgid ""
 "Screensaver of various happenings in the Solar System. 171 events in all!"
 msgstr ""
-"Protetor de tela com vários acontecimentos no sistema solar. São 171 eventos "
-"no total!"
+"<p align=\"justify\">Protetor de tela com vários acontecimentos no sistema "
+"solar. São 171 eventos no total!"
 
 #: src/translations.h:232
 msgid "A tour via western constellations."
-msgstr "Uma excursão pelas constelações ocidentais."
+msgstr "<p align=\"justify\">Uma excursão pelas constelações ocidentais."
 
 #: src/translations.h:233
 msgid "Look at Sun from big planets of Solar system and Pluto."
 msgstr ""
-"Olhe para o Sol a partir de grandes planetas do sistema solar e de Plutão."
+"<p align=\"justify\">Olhe para o Sol a partir de grandes planetas do sistema "
+"solar e de Plutão."
 
 #: src/translations.h:234
 msgid "Earth best views from other Solar system bodies in the 21st Century."
 msgstr ""
-"As melhores vistas da Terra a partir de outros corpos do sistema solar no "
-"século XXI."
+"<p align=\"justify\">As melhores vistas da Terra a partir de outros corpos "
+"do sistema solar no século XXI."
 
 #: src/translations.h:235
 msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
 msgstr ""
-"O trânsito de Vênus, como visto de Sidnei, na Austrália, em 06 de junho de "
-"2012."
+"<p align=\"justify\">O trânsito de Vênus, como visto de Sidnei, na "
+"Austrália, em 06 de junho de 2012."
 
 #: src/translations.h:236
 msgid ""
 "This script shows the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
-"Esta apresentação mostra o analema – o caminho que o Sol percorre no céu no "
-"decorrer do ano."
+"<p align=\"justify\">Esta apresentação mostra o analema – o caminho que o "
+"Sol percorre no céu no decorrer do ano."
 
 #: src/translations.h:237
 msgid ""
 "Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
 "need enable plugin for supernovae."
 msgstr ""
-"Lampejo da supernova que foi observada por Tycho Brahe no ano de 1572. Para "
-"demonstrações, é necessário ativar o complemento de supernovas."
+"<p align=\"justify\">Lampejo da supernova que foi observada por Tycho Brahe "
+"no ano de 1572. Para demonstrações, é necessário ativar o complemento de "
+"supernovas."
 
 #: src/translations.h:240
 msgid "Andorra"
@@ -2835,7 +2840,6 @@ msgid "Help"
 msgstr "Ajuda"
 
 #: src/ui_helpDialogGui.h:267
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "About"
 msgstr "Sobre"
 
@@ -3141,7 +3145,7 @@ msgstr "Pressão, temperatura e coeficiente de extinção"
 
 #: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
-msgstr "Configurações de refração/extinção..."
+msgstr "Configurações de refração/extinção…"
 
 #: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
@@ -3235,7 +3239,7 @@ msgstr "Projeção"
 
 #: src/ui_viewDialog.h:1183
 msgid "Add/remove landscapes..."
-msgstr "Adicionar/remover paisagens..."
+msgstr "Adicionar/remover paisagens…"
 
 #: src/ui_viewDialog.h:1185
 msgid "Show ground"
@@ -3666,7 +3670,7 @@ msgstr "Adicionar uma nova paisagem"
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Install a new landscape from a ZIP archive..."
-msgstr "Instalar uma nova paisagem a partir de um arquivo ZIP..."
+msgstr "Instalar uma nova paisagem a partir de um arquivo ZIP…"
 
 #: src/ui_addRemoveLandscapesDialog.h:270
 msgid "Switch to the new landscape after installation"
@@ -3783,7 +3787,7 @@ msgstr "Incluir o diretório:"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -4108,11 +4112,11 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
-"Este complemento é destinado a simular o que você veria através de uma "
-"ocular. Esta caixa de diálogo de configuração pode ser utilizada para "
-"adicionar, modificar ou excluir oculares e telescópios, bem como sensores "
-"CCD. Na primeira vez que você for executar o aplicativo, ele preencherá "
-"alguns exemplos para que você possa começar a utilizá-lo."
+"<p align=\"justify\">Este complemento é destinado a simular o que você veria "
+"através de uma ocular. Esta caixa de diálogo de configuração pode ser "
+"utilizada para adicionar, modificar ou excluir oculares e telescópios, bem "
+"como sensores CCD. Na primeira vez que você for executar o aplicativo, ele "
+"preencherá alguns exemplos para que você possa começar a utilizá-lo."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:430
 msgid ""
@@ -4124,9 +4128,9 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefore I "
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
-"Você pode optar por dimensionar a imagem que você vê na tela. Com isso, "
-"pretende-se-lhe mostrar uma melhor comparação de como uma combinação "
-"ocular/telescópio será em relação a outra. A mesma ocular em dois "
+"<p align=\"justify\">Você pode optar por dimensionar a imagem que você vê na "
+"tela. Com isso, pretende-se-lhe mostrar uma melhor comparação de como uma "
+"combinação ocular/telescópio será em relação a outra. A mesma ocular em dois "
 "telescópios diferentes de distância focal distinta produzirá dois círculos "
 "de saída diversos, alterando a visualização. A desvantagem disso é que, com "
 "a imagem dimensionada, uma boa parte da tela pode ser desperdiçada. Por esse "
@@ -4139,9 +4143,10 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
-"Você pode alternar um retículo na visualização. Eu queria que ele estivesse, "
-"de preferência, alinhado com o norte. Eu fui incapaz de fazê-lo. Assim, por "
-"enquanto, ele se alinha com a parte superior da tela."
+"<p align=\"justify\">Você pode alternar um retículo na visualização. Eu "
+"queria que ele estivesse, de preferência, alinhado com o norte. Eu fui "
+"incapaz de fazê-lo. Assim, por enquanto, ele se alinha com a parte superior "
+"da tela."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4151,15 +4156,17 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"Você pode alternar um localizador Telrad; isso pode ser feito somente quando "
-"a visão ocular não estiver ativada. Este recurso mostra três círculos "
-"concêntricos de 0,5%1, 2,0%1 e 4,0%1, auxiliando você a ver o que "
-"supostamente enxergaria a olho nu através do localizador Telrad (ou similar)."
+"<p align=\"justify\">Você pode alternar um localizador Telrad; isso pode ser "
+"feito somente quando a visão ocular não estiver ativada. Este recurso mostra "
+"três círculos concêntricos de 0,5%1, 2,0%1 e 4,0%1, auxiliando você a ver o "
+"que supostamente enxergaria a olho nu através do localizador Telrad (ou "
+"similar)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
-"Se você encontrar quaisquer problemas, por favor, me avise. Divirta-se!"
+"<p align=\"justify\">Se você encontrar quaisquer problemas, por favor, me "
+"avise. Divirta-se!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
@@ -4168,7 +4175,8 @@ msgstr "Teclas de atalho"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
-"As combinações de teclas do complemento podem ser editadas na aba Geral."
+"<p align=\"justify\">As combinações de teclas do complemento podem ser "
+"editadas na aba Geral."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:449
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
@@ -4315,6 +4323,7 @@ msgstr "Inversão vertical"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Sobre"
@@ -4426,8 +4435,8 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"O complemento de satélites prevê as posições de satélites artificiais na "
-"órbita da Terra."
+"<p align=\"justify\">O complemento de satélites prevê as posições de "
+"satélites artificiais na órbita da Terra."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 msgid "Notes for users"
@@ -4437,8 +4446,8 @@ msgstr "Notas para os usuários"
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
-"Os satélites e as suas órbitas são exibidos somente se o observador estiver "
-"na Terra."
+"<p align=\"justify\">Os satélites e as suas órbitas são exibidos somente se "
+"o observador estiver na Terra."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid ""
@@ -4446,19 +4455,19 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"As posições previstas são boas apenas para um tempo relativamente curto (da "
-"ordem de dias, semanas ou talvez um mês para o passado e para o futuro). "
-"Espere uma grande estranheza quando estiver observando em datas fora dessa "
-"faixa."
+"<p align=\"justify\">As posições previstas são boas apenas para um tempo "
+"relativamente curto (da ordem de dias, semanas ou talvez um mês para o "
+"passado e para o futuro). Espere uma grande estranheza quando estiver "
+"observando em datas fora dessa faixa."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
-"Os elementos orbitais tornam-se desatualizados muito rapidamente (em poucas "
-"semanas, às vezes, em dias). Para obter dados úteis, você precisa atualizar "
-"os dados TLE regularmente."
+"<p align=\"justify\">Os elementos orbitais tornam-se desatualizados muito "
+"rapidamente (em poucas semanas, às vezes, em dias). Para obter dados úteis, "
+"você precisa atualizar os dados TLE regularmente."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
@@ -4468,19 +4477,19 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
-"Ao clicar no botão “%1” na aba “%2” desta janela, o arquivo “%3” modificado "
-"será revertido para o arquivo “%3” padrão. Será feita uma cópia de segurança "
-"do arquivo antigo, e este será renomeado para “%4”. Ele poderá ser "
-"encontrado no diretório que contém os dados do usuário, em "
-"“modules/Satellites/”."
+"<p align=\"justify\">Ao clicar no botão “%1” na aba “%2” desta janela, o "
+"arquivo “%3” modificado será revertido para o arquivo “%3” padrão. Será "
+"feita uma cópia de segurança do arquivo antigo, e este será renomeado para "
+"“%4”. Ele poderá ser encontrado no diretório que contém os dados do usuário, "
+"em “modules/Satellites/”."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"O complemento de satélites ainda está em desenvolvimento. Alguns recursos "
-"estão incompletos, ausentes ou com erros."
+"<p align=\"justify\">O complemento de satélites ainda está em "
+"desenvolvimento. Alguns recursos estão incompletos, ausentes ou com erros."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:308
@@ -4493,9 +4502,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"O complemento de satélites pode baixar automaticamente dados do TLE a partir "
-"de fontes na Internet, e, por padrão, ele fará isso se os dados existentes "
-"tiverem mais de 72 horas. "
+"<p align=\"justify\">O complemento de satélites pode baixar automaticamente "
+"dados do TLE a partir de fontes na Internet, e, por padrão, ele fará isso se "
+"os dados existentes tiverem mais de 72 horas. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
 #, qt-format
@@ -4504,18 +4513,19 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
-"Se você desativar as atualizações pela Internet, você pode atualizar a "
-"partir de um arquivo no seu computador. Ele deve estar no mesmo formato das "
-"atualizações do Celestrak (veja, a título de exemplo, o arquivo %1)."
+"<p align=\"justify\">Se você desativar as atualizações pela Internet, você "
+"pode atualizar a partir de um arquivo no seu computador. Ele deve estar no "
+"mesmo formato das atualizações do Celestrak (veja, a título de exemplo, o "
+"arquivo %1)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
-"<b>Observação</b>: se o nome de um satélite nos dados de atualização tiver "
-"qualquer coisa entre colchetes no final, ele será removido antes de os dados "
-"serem utilizados."
+"<p align=\"justify\"><b>Observação</b>: se o nome de um satélite nos dados "
+"de atualização tiver qualquer coisa entre colchetes no final, ele será "
+"removido antes de os dados serem utilizados."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
 msgid "Adding new satellites"
@@ -4528,10 +4538,11 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
-"1. Certifique-se de que o(s) satélite(s) que você deseja adicionar estão "
-"incluídos em uma das URLs listadas na aba ‘Fontes’ da janela de configuração "
-"de satélites. 2. Vá até a aba ‘Satélites’, e clique no botão ‘+’. Selecione "
-"o(s) satélite(s) que você deseja adicionar e clique no botão “Adicionar”."
+"<p align=\"justify\">1. Certifique-se de que o(s) satélite(s) que você "
+"deseja adicionar estão incluídos em uma das URLs listadas na aba ‘Fontes’ da "
+"janela de configuração de satélites. 2. Vá até a aba ‘Satélites’, e clique "
+"no botão ‘+’. Selecione o(s) satélite(s) que você deseja adicionar e clique "
+"no botão “Adicionar”."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "Technical notes"
@@ -4542,8 +4553,8 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
-"As posições são calculadas utilizando os métodos SGP4 e SDP4, utilizando "
-"dados do NORAD TLE como entrada. "
+"<p align=\"justify\">As posições são calculadas utilizando os métodos SGP4 e "
+"SDP4, utilizando dados do NORAD TLE como entrada. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
 msgid ""
@@ -4578,8 +4589,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
-"É fornecido auxílio no sítio do Launchpad. Assegure-se de colocar “%1” como "
-"assunto ao postar a sua pergunta."
+"<p align=\"justify\">É fornecido auxílio no sítio do Launchpad. Assegure-se "
+"de colocar “%1” como assunto ao postar a sua pergunta."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
@@ -4589,7 +4600,9 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr "Se você tiver uma pergunta, você pode %1obter uma resposta aqui%2."
+msgstr ""
+"<p align=\"justify\">Se você tiver uma pergunta, você pode %1obter uma "
+"resposta aqui%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
@@ -4611,8 +4624,9 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
-"Se você deseja fazer um pedido para adicionar um recurso, você pode criar um "
-"relatório de erro, e definir a sua gravidade para “wishlist”."
+"<p align=\"justify\">Se você deseja fazer um pedido para adicionar um "
+"recurso, você pode criar um relatório de erro, e definir a sua gravidade "
+"para “wishlist”."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
@@ -4633,7 +4647,7 @@ msgstr "Atualizações a partir da Internet desabilitadas"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Updating now..."
-msgstr "Atualizando agora..."
+msgstr "Atualizando agora…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
@@ -4725,26 +4739,26 @@ msgstr "Selecione o arquivo de atualização do TLE"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid "Downloading data..."
-msgstr "Baixando dados..."
+msgstr "Baixando dados…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"O Stellarium está baixando dados de satélites das fontes de atualização. Por "
-"favor, aguarde..."
+"<p align=\"justify\">O Stellarium está baixando dados de satélites das "
+"fontes de atualização. Por favor, aguarde…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
 msgid "Select TLE source file(s)..."
-msgstr "Selecione o(s) arquivo(s) fonte do TLE..."
+msgstr "Selecione o(s) arquivo(s) fonte do TLE…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:232
 msgid "Processing data..."
-msgstr "Processando dados..."
+msgstr "Processando dados…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 msgid "No data could be downloaded. Try again later."
@@ -4995,10 +5009,10 @@ msgid "Configure Telescope"
 msgstr "Configurar telescópio"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+#: plugins/Observability/src/Observability.cpp:599
 #: plugins/Observability/src/Observability.cpp:600
-#: plugins/Observability/src/Observability.cpp:601
+#: plugins/Observability/src/Observability.cpp:602
 #: plugins/Observability/src/Observability.cpp:603
-#: plugins/Observability/src/Observability.cpp:604
 msgid "N/A"
 msgstr "Não disponível"
 
@@ -5193,7 +5207,7 @@ msgstr "&Virar"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr "Configurar &telescópios..."
+msgstr "Configurar &telescópios…"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
@@ -5420,7 +5434,6 @@ msgstr "Abril"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:188
 msgid "May"
 msgstr "Maio"
 
@@ -6027,11 +6040,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Copy the Solar System file..."
-msgstr "Copiar o arquivo do sistema solar..."
+msgstr "Copiar o arquivo do sistema solar…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Replace the Solar System file..."
-msgstr "Substituir o arquivo do sistema solar..."
+msgstr "Substituir o arquivo do sistema solar…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Configuration file"
@@ -6043,7 +6056,7 @@ msgstr "Adicionar novos objetos do sistema solar"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import orbital elements in MPC format..."
-msgstr "Importar elementos orbitais no formato MPC..."
+msgstr "Importar elementos orbitais no formato MPC…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
@@ -6058,8 +6071,8 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
-"Um complemento que mostra algumas supernovas históricas com magnitude visual "
-"maior do que 10."
+"<p align=\"justify\">Um complemento que mostra algumas supernovas históricas "
+"com magnitude visual maior do que 10."
 
 #: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
@@ -6083,8 +6096,8 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than visual "
 "magnitude 10: "
 msgstr ""
-"Um complemento que mostra algumas supernovas históricas com magnitude visual "
-"maior do que 10: "
+"<p align=\"justify\">Um complemento que mostra algumas supernovas históricas "
+"com magnitude visual maior do que 10: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
@@ -6098,10 +6111,11 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
-"Este complemento implementa um modelo simples de curvas de luz para "
-"diferentes tipos de supernovas. As visualizações típicas de curvas de luz de "
-"supernovas do tipo I e do tipo II podem ser vistas %1aqui%2 (a escala da "
-"direita está em dias), tendo sido este modelo utilizado para o complemento."
+"<p align=\"justify\">Este complemento implementa um modelo simples de curvas "
+"de luz para diferentes tipos de supernovas. As visualizações típicas de "
+"curvas de luz de supernovas do tipo I e do tipo II podem ser vistas %1aqui%2 "
+"(a escala da direita está em dias), tendo sido este modelo utilizado para o "
+"complemento."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 msgid "Acknowledgments"
@@ -6112,8 +6126,8 @@ msgstr "Agradecimentos"
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
-"Agradecemos às seguintes pessoas pela sua contribuição e pelos valiosos "
-"comentários:"
+"<p align=\"justify\">Agradecemos às seguintes pessoas pela sua contribuição "
+"e pelos valiosos comentários:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Sergei Blinnikov"
@@ -6137,8 +6151,9 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
-"Se você quiser ler as informações completas sobre o complemento, sua "
-"história e o formato do catálogo, você pode %1obter informações aqui%2."
+"<p align=\"justify\">Se você quiser ler as informações completas sobre o "
+"complemento, sua história e o formato do catálogo, você pode %1obter "
+"informações aqui%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -6216,9 +6231,10 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
-"O complemento de quasares oferece visualização de alguns quasares com "
-"magnitude visual maior do que 16. O catálogo de quasares foi compilado a "
-"partir da obra “Quasars and Active Galactic Nuclei” (13th Ed.)"
+"<p align=\"justify\">O complemento de quasares oferece visualização de "
+"alguns quasares com magnitude visual maior do que 16. O catálogo de quasares "
+"foi compilado a partir da obra “Quasars and Active Galactic Nuclei” (13th "
+"Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -6394,9 +6410,9 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
-"Os dados sobre os pulsares provêm da obra “The ATNF Pulsar Catalogue” "
-"(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
-"1993-2006 (2005) (%1astro-ph/0412641%2))."
+"<p align=\"justify\">Os dados sobre os pulsares provêm da obra “The ATNF "
+"Pulsar Catalogue” (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., "
+"Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
@@ -6412,7 +6428,7 @@ msgstr "Agradecimentos"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr "Vladimir Samodourov"
+msgstr "<p align=\"justify\">Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
@@ -6420,7 +6436,7 @@ msgstr "Observatório radioastronômico Pushchino"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr "Maciej Serylak"
+msgstr "<p align=\"justify\">Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
@@ -6459,9 +6475,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
-"Este complemento mostra a posição de estrelas com exoplanetas. Os dados "
-"sobre os exoplanetas provêm da “Extrasolar Planets Encyclopaedia”, "
-"disponível no sítio exoplanet.eu."
+"<p align=\"justify\">Este complemento mostra a posição de estrelas com "
+"exoplanetas. Os dados sobre os exoplanetas provêm da “Extrasolar Planets "
+"Encyclopaedia”, disponível no sítio exoplanet.eu."
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
@@ -6541,8 +6557,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
-"Este complemento mostra a posição de estrelas com exoplanetas. Os dados "
-"sobre os exoplanetas provêm da “%1The Extrasolar Planets Encyclopaedia%2”"
+"<p align=\"justify\">Este complemento mostra a posição de estrelas com "
+"exoplanetas. Os dados sobre os exoplanetas provêm da “%1The Extrasolar "
+"Planets Encyclopaedia%2”"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
@@ -6551,8 +6568,9 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
-"Se você quiser ler as informações completas sobre o complemento, sua "
-"história e o formato do catálogo, você pode %1obter informações aqui%2."
+"<p align=\"justify\">Se você quiser ler as informações completas sobre o "
+"complemento, sua história e o formato do catálogo, você pode %1obter "
+"informações aqui%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
@@ -6574,10 +6592,6 @@ msgstr "Atualizar os dados sobre os exoplanetas a partir da Internet"
 msgid "Observability analysis"
 msgstr "Análise de observabilidade"
 
-#: plugins/Observability/src/Observability.cpp:69
-msgid "Ivan Marti-Vidal (Onsala Space Observatory)"
-msgstr "Ivan Marti-Vidal (Observatório Espacial de Onsala)"
-
 #: plugins/Observability/src/Observability.cpp:71
 msgid ""
 "Reports an analysis of source observability (rise, set, and transit times), "
@@ -6588,193 +6602,204 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
-"Relata uma análise de observabilidade de uma fonte (nascer, pôr e os "
-"horários de trânsito), bem como as épocas do ano em que a fonte é melhor "
-"observada. Assume-se que uma fonte é observável se estiver acima do "
-"horizonte durante uma fração da noite. O complemento também fornece o dia de "
-"maior separação do Sol e os dias de nascer e de pôr acrônico e "
+"<p align=\"justify\">Relata uma análise de observabilidade de uma fonte "
+"(nascer, pôr e os horários de trânsito), bem como as épocas do ano em que a "
+"fonte é melhor observada. Assume-se que uma fonte é observável se estiver "
+"acima do horizonte durante uma fração da noite. O complemento também fornece "
+"o dia de maior separação do Sol e os dias de nascer e de pôr acrônico e "
 "cósmico.<br><br> Uma explicação sobre as quantidades indicadas por este "
 "complemento é oferecida no aba “Sobre” da janela de configuração."
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jan"
 msgstr "de janeiro"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Feb"
 msgstr "de fevereiro"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Mar"
 msgstr "de março"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Apr"
 msgstr "de abril"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "May"
+msgstr "de maio"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jun"
 msgstr "de junho"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jul"
 msgstr "de julho"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Aug"
 msgstr "de agosto"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Sep"
 msgstr "de setembro"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Oct"
 msgstr "de outubro"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Nov"
 msgstr "de novembro"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Dec"
 msgstr "de dezembro"
 
-#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:224
 msgid "Observability"
 msgstr "Observabilidade"
 
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Observability configuration window"
 msgstr "Janela de configuração de observabilidade"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "h"
 msgstr "h"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "m"
 msgstr "m"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:481
+#: plugins/Observability/src/Observability.cpp:480
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Pôr-se-á às %1 (em %2)"
 
-#: plugins/Observability/src/Observability.cpp:482
+#: plugins/Observability/src/Observability.cpp:481
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "Nasceu às %1 (%2 atrás)"
 
-#: plugins/Observability/src/Observability.cpp:492
+#: plugins/Observability/src/Observability.cpp:491
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "Pôs-se às %1 (%2 atrás)"
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:492
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "Nascerá às %1 (em %2)"
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "Circumpolar."
 msgstr "Circumpolar."
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "No rise."
 msgstr "Sem nascer."
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:518
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Culminará às %1 (em %2) em %3 graus."
 
-#: plugins/Observability/src/Observability.cpp:523
+#: plugins/Observability/src/Observability.cpp:522
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "Culminou às %1 (%2 atrás) em %3 graus."
 
-#: plugins/Observability/src/Observability.cpp:564
+#: plugins/Observability/src/Observability.cpp:563
 msgid "Source is not observable."
 msgstr "Não é possível observar a fonte."
 
-#: plugins/Observability/src/Observability.cpp:565
+#: plugins/Observability/src/Observability.cpp:564
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "Sem nascer/pôr acrônico nem cósmico."
 
-#: plugins/Observability/src/Observability.cpp:582
+#: plugins/Observability/src/Observability.cpp:581
 msgid "Greatest elongation: "
 msgstr "Maior elongação: "
 
-#: plugins/Observability/src/Observability.cpp:585
+#: plugins/Observability/src/Observability.cpp:584
 msgid "Largest Sun separation: "
 msgstr "Maior separação do Sol: "
 
-#: plugins/Observability/src/Observability.cpp:588
+#: plugins/Observability/src/Observability.cpp:587
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " (em %1 graus)"
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "Acronychal rise/set"
 msgstr "Nascer/pôr acrônico"
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "No Acronychal rise/set."
 msgstr "Sem nascer/pôr acrônico."
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "Cosmical rise/set"
 msgstr "Nascer/pôr cósmico"
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "No Cosmical rise/set."
 msgstr "Sem nascer/pôr cósmico."
 
-#: plugins/Observability/src/Observability.cpp:639
-#, qt-format
-msgid "from %1 to %2"
-msgstr "de %1 a %2"
-
-#: plugins/Observability/src/Observability.cpp:646
-msgid " to 31 Dec"
-msgstr " a 31 de dezembro"
-
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:652
 msgid "Observable during the whole year."
 msgstr "Observável durante o ano inteiro."
 
-#: plugins/Observability/src/Observability.cpp:657
+#: plugins/Observability/src/Observability.cpp:656
 msgid "Not observable at dark night."
 msgstr "Não observável em noite escura."
 
-#: plugins/Observability/src/Observability.cpp:662
+#: plugins/Observability/src/Observability.cpp:661
 msgid "Nights above horizon: "
 msgstr "Noites em que está acima do horizonte: "
 
-#: plugins/Observability/src/Observability.cpp:680
-msgid " TODAY:"
-msgstr " HOJE:"
+#: plugins/Observability/src/Observability.cpp:679
+msgid "TODAY:"
+msgstr "HOJE:"
 
-#: plugins/Observability/src/Observability.cpp:1402
-#, qt-format
-msgid "Previous Full Moon: %1 "
-msgstr "Lua cheia anterior: %1 "
+#: plugins/Observability/src/Observability.cpp:688
+msgid "THIS YEAR:"
+msgstr "ESTE ANO:"
 
-#: plugins/Observability/src/Observability.cpp:1407
+#: plugins/Observability/src/Observability.cpp:1432
 #, qt-format
-msgid "  Next Full Moon: %1 "
-msgstr "  Lua cheia seguinte: %1 "
+msgid "Previous Full Moon: %1 %2 at %3:%4. "
+msgstr "Lua cheia anterior: %2 %1 às %3:%4. "
+
+#: plugins/Observability/src/Observability.cpp:1437
+#, qt-format
+msgid "Next Full Moon: %1 %2 at %3:%4. "
+msgstr "Lua cheia seguinte: %2 %1 às %3:%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
@@ -6791,15 +6816,15 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Um complemento que analisa a observabilidade da fonte selecionada (ou o "
-"centro da tela, se nenhuma fonte estiver selecionada). O complemento pode "
-"mostrar os horários de nascer, de trânsito e de pôr, bem como a melhor época "
-"do ano (isto é, a maior separação angular do Sol), o intervalo de datas em "
-"que a fonte está acima do horizonte na noite escura e as datas de nascer e "
-"de pôr acrônico e cósmico.<br> As efemérides dos objetos do sistema solar e "
-"os efeitos de paralaxe são levados em conta.<br><br> O autor agradece a "
-"Alexander Wolf e a Georg Zotti pelos seus conselhos.<br><br>Ivan Marti-Vidal "
-"(Observatório Espacial de Onsala)"
+"<p align=\"justify\">Um complemento que analisa a observabilidade da fonte "
+"selecionada (ou o centro da tela, se nenhuma fonte estiver selecionada). O "
+"complemento pode mostrar os horários de nascer, de trânsito e de pôr, bem "
+"como a melhor época do ano (isto é, a maior separação angular do Sol), o "
+"intervalo de datas em que a fonte está acima do horizonte na noite escura e "
+"as datas de nascer e de pôr acrônico e cósmico.<br> As efemérides dos "
+"objetos do sistema solar e os efeitos de paralaxe são levados em "
+"conta.<br><br> O autor agradece a Alexander Wolf e a Georg Zotti pelos seus "
+"conselhos.<br><br>Ivan Marti-Vidal (Observatório Espacial de Onsala)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
 msgid "Explanation of some parameters"
@@ -6816,10 +6841,10 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
-"Qualquer objeto celeste será considerado visível quando o Sol estiver abaixo "
-"dessa altura. A altura ao crepúsculo astronômico varia, geralmente, entre "
-"–12 e –18 graus. Esse parâmetro é utilizado apenas para a estimativa da "
-"faixa de épocas observáveis (veja abaixo)."
+"<p align=\"justify\">Qualquer objeto celeste será considerado visível quando "
+"o Sol estiver abaixo dessa altura. A altura ao crepúsculo astronômico varia, "
+"geralmente, entre –12 e –18 graus. Esse parâmetro é utilizado apenas para a "
+"estimativa da faixa de épocas observáveis (veja abaixo)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
@@ -6832,10 +6857,10 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
-"Autoexplicativo. O programa mostrará o nascer, o pôr e os horários "
-"culminantes (de trânsito). Os horários exatos para essas efemérides são "
-"apresentados de duas formas: como intervalos de tempo (que se referem ao "
-"horário atual) e como horas de relógio (no horário local)."
+"<p align=\"justify\">Autoexplicativo. O programa mostrará o nascer, o pôr e "
+"os horários culminantes (de trânsito). Os horários exatos para essas "
+"efemérides são apresentados de duas formas: como intervalos de tempo (que se "
+"referem ao horário atual) e como horas de relógio (no horário local)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid "Acronychal/Cosmical rise/set:"
@@ -6853,15 +6878,15 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
-"O nascer (ou pôr) acrônico de um objeto ocorre quando o objeto nasce (ou se "
-"põe) justamente quando o Sol se põe (ou nasce), respectivamente. As datas "
-"exatas dessas efemérides dependem da localização do observador. As datas "
-"entre o pôr e o nascer acrônico são aquelas em que a altura do objeto "
-"celeste costuma ser alta quando o Sol está bem abaixo do horizonte (por "
-"isso, o objeto pode ser bem observado). Pelo contrário, o nascer (ou o pôr) "
-"cósmico ocorre quando ambos, o objeto e o Sol, nascem (ou se põem) "
-"simultaneamente. É óbvio que a fonte é dificilmente observável (ou nem "
-"sequer observável) nas datas entre o pôr e o nascer cósmico."
+"<p align=\"justify\">O nascer (ou pôr) acrônico de um objeto ocorre quando o "
+"objeto nasce (ou se põe) justamente quando o Sol se põe (ou nasce), "
+"respectivamente. As datas exatas dessas efemérides dependem da localização "
+"do observador. As datas entre o pôr e o nascer acrônico são aquelas em que a "
+"altura do objeto celeste costuma ser alta quando o Sol está bem abaixo do "
+"horizonte (por isso, o objeto pode ser bem observado). Pelo contrário, o "
+"nascer (ou o pôr) cósmico ocorre quando ambos, o objeto e o Sol, nascem (ou "
+"se põem) simultaneamente. É óbvio que a fonte é dificilmente observável (ou "
+"nem sequer observável) nas datas entre o pôr e o nascer cósmico."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid "Largest Sun separation:"
@@ -6878,14 +6903,14 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
-"Ocorre quando a separação angular entre o Sol e o objeto celeste estão no "
-"máximo. Na maioria dos casos, isso equivale a dizer que as longitudes "
-"equatoriais do Sol e do objeto diferem em 180 graus, de modo que o Sol está "
-"em oposição ao objeto. Quando um objeto está em sua máxima separação angular "
-"possível do Sol (não importa se é um planeta ou uma estrela), culmina "
-"aproximadamente à meia-noite, e na área do céu mais escura possível nessa "
-"declinação. Por isso, essa é a “melhor” noite para observar um objeto "
-"particular."
+"<p align=\"justify\">Ocorre quando a separação angular entre o Sol e o "
+"objeto celeste estão no máximo. Na maioria dos casos, isso equivale a dizer "
+"que as longitudes equatoriais do Sol e do objeto diferem em 180 graus, de "
+"modo que o Sol está em oposição ao objeto. Quando um objeto está em sua "
+"máxima separação angular possível do Sol (não importa se é um planeta ou uma "
+"estrela), culmina aproximadamente à meia-noite, e na área do céu mais escura "
+"possível nessa declinação. Por isso, essa é a “melhor” noite para observar "
+"um objeto particular."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid "Nights with source above horizon:"
@@ -6910,24 +6935,25 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"O programa calcula o intervalo de datas em que o objecto celeste está acima "
-"do horizonte, pelo menos durante um momento da noite. O programa considera "
-"como “noite” o intervalo de tempo em que a altura do Sol é inferior à do "
-"crepúsculo (o qual pode ser definido pelo usuário; veja acima). Quando os "
-"objetos são fixos no céu (ou são planetas exteriores), a faixa de épocas "
-"observáveis do ano em curso pode ter duas formas possíveis: ou um intervalo "
-"de uma data para outra (por exemplo, de 20 de janeiro a 15 de setembro) ou "
-"em duas etapas (de 1º de janeiro a uma determinada data e de uma outra data "
-"até 31 de dezembro). No primeiro caso, a primeira data (20 de janeiro, no "
-"nosso exemplo) deve estar próxima do assim chamado “nascer helíaco de uma "
-"estrela”, e a segunda data (15 de setembro, no nosso exemplo) deve estar "
-"próxima do “pôr helíaco”. No segundo caso (por exemplo, um intervalo na "
-"forma 1º de janeiro a 20 de maio e 21 de setembro a 31 de dezembro), a "
-"primeira data (20 de maio, no nosso exemplo) estará próxima do pôr helíaco, "
-"e a segunda (21 de setembro, no nosso exemplo), do nascer helíaco. Equações "
-"mais exatas para estimar o nascer e o pôr helíaco de estrelas e de planetas "
-"(que não dependerão da simples inserção de uma elevação do Sol ao crepúsculo "
-"pelo usuário) serão implementadas em futuras versões deste complemento."
+"<p align=\"justify\">O programa calcula o intervalo de datas em que o "
+"objecto celeste está acima do horizonte, pelo menos durante um momento da "
+"noite. O programa considera como “noite” o intervalo de tempo em que a "
+"altura do Sol é inferior à do crepúsculo (o qual pode ser definido pelo "
+"usuário; veja acima). Quando os objetos são fixos no céu (ou são planetas "
+"exteriores), a faixa de épocas observáveis do ano em curso pode ter duas "
+"formas possíveis: ou um intervalo de uma data para outra (por exemplo, de 20 "
+"de janeiro a 15 de setembro) ou em duas etapas (de 1º de janeiro a uma "
+"determinada data e de uma outra data até 31 de dezembro). No primeiro caso, "
+"a primeira data (20 de janeiro, no nosso exemplo) deve estar próxima do "
+"assim chamado “nascer helíaco de uma estrela”, e a segunda data (15 de "
+"setembro, no nosso exemplo) deve estar próxima do “pôr helíaco”. No segundo "
+"caso (por exemplo, um intervalo na forma 1º de janeiro a 20 de maio e 21 de "
+"setembro a 31 de dezembro), a primeira data (20 de maio, no nosso exemplo) "
+"estará próxima do pôr helíaco, e a segunda (21 de setembro, no nosso "
+"exemplo), do nascer helíaco. Equações mais exatas para estimar o nascer e o "
+"pôr helíaco de estrelas e de planetas (que não dependerão da simples "
+"inserção de uma elevação do Sol ao crepúsculo pelo usuário) serão "
+"implementadas em futuras versões deste complemento."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"
@@ -6938,8 +6964,8 @@ msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
-"Quando a Lua estiver selecionada, o programa pode calcular as datas exatas "
-"mais próximas de oposição da Lua ao Sol."
+"<p align=\"justify\">Quando a Lua estiver selecionada, o programa pode "
+"calcular as datas exatas mais próximas de oposição da Lua ao Sol."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
@@ -7087,9 +7113,6 @@ msgstr "0 grau"
 #~ msgid "Milky Way intensity: "
 #~ msgstr "Intensidade da Via Láctea: "
 
-#~ msgid "Zoom Duration: "
-#~ msgstr "Duração do zoom: "
-
 #~ msgid "Shut Down: "
 #~ msgstr "Desligar: "
 
@@ -7209,6 +7232,9 @@ msgstr "0 grau"
 
 #~ msgid "Day keys: "
 #~ msgstr "Chaves de dias: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Duração do Zoom: "
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Campo de visão ao iniciar: XX"
