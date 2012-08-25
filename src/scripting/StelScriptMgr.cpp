@@ -115,14 +115,6 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	"	else {core.wait((core.getJDay()-JD)*timeSpeed);}}");
 	engine.evaluate("core['waitFor'] = mywaitFor__;");
 	
-	// Add all the StelModules into the script engine
-	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	foreach (StelModule* m, mmgr->getAllModules())
-	{
-		objectValue = engine.newQObject(m);
-		engine.globalObject().setProperty(m->objectName(), objectValue);
-	}
-
 	// Add other classes which we want to be directly accessible from scripts
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 		objectValue = engine.newQObject(smgr);
@@ -137,12 +129,23 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 
 	agent = new StelScriptEngineAgent(&engine);
 	engine.setAgent(agent);
- 
 }
 
 
 StelScriptMgr::~StelScriptMgr()
 {
+}
+
+void StelScriptMgr::addModules() 
+{
+	// Add all the StelModules into the script engine
+	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
+	foreach (StelModule* m, mmgr->getAllModules())
+	{
+		QScriptValue objectValue = engine.newQObject(m);
+		engine.globalObject().setProperty(m->objectName(), objectValue);
+	}
+
 }
 
 QStringList StelScriptMgr::getScriptList()
