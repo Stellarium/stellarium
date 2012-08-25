@@ -444,7 +444,7 @@ bool StelSkyDrawer::drawPointSource
 	// If the rmag is big, draw a big halo
 	if (radius > MAX_LINEAR_RADIUS + 5.0f)
 	{
-		const float cmag = qMin(1.0f, qMin(luminance, (radius - MAX_LINEAR_RADIUS + 50.f) / 30.f));
+		const float cmag = qMin(1.0f, qMin(luminance, (radius - MAX_LINEAR_RADIUS + 5.0f) / 30.f));
 		addStar(starSpriteBuffer, bigHaloIndices, x, y, 150.0f, color * cmag);
 	}
 
