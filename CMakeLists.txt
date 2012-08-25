@@ -402,7 +402,14 @@ ENDIF()
 
 ########### Macosx Bundling ###############
 IF(APPLE)
-ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+ADD_CUSTOM_TARGET(
+  macosx_bundle
+  bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR}
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+  COMMENT "making the macosx bundle."
+  VERBATIM
+)
 ENDIF()
 
 
