@@ -162,7 +162,7 @@ void CompassMarks::draw(StelCore* core)
 		mColor = markColor;
 
 	glColor4f(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH);
@@ -176,8 +176,29 @@ void CompassMarks::draw(StelCore* core)
 		{
 			h = -0.02;  // the size of the mark every 15 degrees
 
-			// draw a label every 15 degrees
-			QString s = QString("%1").arg((i+90)%360);
+			QString s("");
+			if ((core->getCurrentProjectionType()==StelCore::ProjectionPerspective) ||
+				(core->getCurrentProjectionType()==StelCore::ProjectionOrthographic))
+			{
+				// find screen center azimuth, we have to exclude azimuths behind observer.
+				Vec3d viewDir;
+				prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2,
+							   prj->getViewportPosY()+prj->getViewportHeight()/2, viewDir);
+				float hfov= prj->getFov()*prj->getViewportWidth()/prj->getViewportHeight();
+				if (core->getCurrentProjectionType()==StelCore::ProjectionOrthographic)
+					hfov=qMin(1.4f*hfov, 181.0f);
+				float az, alt; // screen center coords
+				StelUtils::rectToSphe(&az, &alt, viewDir);
+				az *= (180.0/M_PI);
+				float azDiff=fmod(900.0-az-(i+90), 360.0);
+				if (azDiff>180) azDiff-=360.0f;
+				if (fabs(azDiff)<hfov/2)
+					s= QString("%1").arg((i+90)%360);
+			} else // other projections work!
+			{
+				// draw a label every 15 degrees
+				s = QString("%1").arg((i+90)%360);
+			}
 			float shiftx = painter.getFontMetrics().width(s) / 2.;
 			float shifty = painter.getFontMetrics().height() / 2.;
 			painter.drawText(pos, s, 0, -shiftx, shifty);
@@ -189,8 +210,10 @@ void CompassMarks::draw(StelCore* core)
 
 		glDisable(GL_TEXTURE_2D);
 		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
+		glEnable(GL_TEXTURE_2D);
 	}
 	glDisable(GL_LINE_SMOOTH);
+	glDisable(GL_BLEND);
 }
 
 void CompassMarks::update(double deltaTime)
