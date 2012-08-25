@@ -296,6 +296,9 @@ void StelMainGraphicsView::init(QSettings* conf)
 	gui->forceRefreshGui();
 
 #ifndef DISABLE_SCRIPTING
+	// Defer adding the StelModules into the script engine until the plugins are loaded.
+	scriptMgr->addModules();
+
 	QString startupScript;
 	if (qApp->property("onetime_startup_script").isValid())
 		startupScript = qApp->property("onetime_startup_script").toString();
