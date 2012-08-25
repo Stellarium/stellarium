@@ -1162,7 +1162,9 @@ void Satellites::update(double deltaTime)
 
 void Satellites::draw(StelCore* core)
 {
-	if (core->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||
+			(core->getJDay()<2436116.3115)                               || // do not draw anything before Oct 4, 1957, 19:28:34GMT ;-)
+			(!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
