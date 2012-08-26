@@ -62,6 +62,8 @@ public:
 	bool preprocessScript(const QString& input, QString& output, const QString& scriptDir);
 	bool preprocessScript(QFile &input, QString& output, const QString& scriptDir);
 	
+	//! Add all the StelModules into the script engine
+	void addModules();
 public slots:
 	//! Gets a single line name of the script. 
 	//! @param s the file name of the script whose name is to be returned.

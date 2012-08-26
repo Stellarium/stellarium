@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
-    <height>467</height>
+    <width>537</width>
+    <height>465</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -237,6 +237,9 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QCheckBox" name="displayModeCheckBox">
+            <property name="toolTip">
+             <string>Plot all quasars without labels</string>
+            </property>
             <property name="text">
              <string>Enable display of distribution for quasars</string>
             </property>

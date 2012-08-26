@@ -77,6 +77,9 @@ CompassMarks::CompassMarks()
 	if (!conf->contains("CompassMarks/font_size"))
 		conf->setValue("CompassMarks/font_size", 10);
 
+	if (!conf->contains("CompassMarks/enable_at_startup"))
+		conf->setValue("CompassMarks/enable_at_startup", false);
+
 	// Load settings from main config file
 	markColor = StelUtils::strToVec3f(conf->value("CompassMarks/mark_color", "1,0,0").toString());
 	font.setPixelSize(conf->value("CompassMarks/font_size", 10).toInt());
@@ -122,17 +125,24 @@ void CompassMarks::init()
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
 		QAction *showCompassAction = gui->getGuiAction("actionShow_Compass_Marks");
-		showCompassAction->setChecked(markFader);
+		//showCompassAction->setChecked(markFader);
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, showCompassAction);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		connect(showCompassAction, SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
 		connect(gui->getGuiAction("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
+
+		QSettings* conf = StelApp::getInstance().getSettings();
+		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
+		// GZ: This must go here, else button may show wrong state
+		gui->getGuiAction("actionShow_Compass_Marks")->setChecked(markFader);
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: unable create toolbar button for CompassMarks plugin: " << e.what();
 	}
+
+
 }
 
 //! Draw any parts on the screen which are for our module
@@ -141,7 +151,7 @@ void CompassMarks::draw(StelCore* core)
 	if (markFader.getInterstate() <= 0.0) { return; }
 
 	Vec3d pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.
 	StelPainter painter(prj);
 	painter.setFont(font);
 
@@ -166,21 +176,25 @@ void CompassMarks::draw(StelCore* core)
 		{
 			h = -0.02;  // the size of the mark every 15 degrees
 
-			// draw a label every 15 degrees
 			QString s = QString("%1").arg((i+90)%360);
+
 			float shiftx = painter.getFontMetrics().width(s) / 2.;
 			float shifty = painter.getFontMetrics().height() / 2.;
 			painter.drawText(pos, s, 0, -shiftx, shifty);
 		}
 		else if (i % 5 == 0)
 		{
-			h = -0.01;  // the size of the marking every 5 degrees
+			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
 		glDisable(GL_TEXTURE_2D);
-		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
+		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
+		glEnable(GL_TEXTURE_2D);
 	}
 	glDisable(GL_LINE_SMOOTH);
+	glDisable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+
 }
 
 void CompassMarks::update(double deltaTime)
