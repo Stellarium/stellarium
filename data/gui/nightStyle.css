@@ -179,13 +179,6 @@ QLineEdit#lineEditSearchSkyObject {
 	color: rgb(179, 0, 0);
 }
 
-QPushButton#pushButtonGotoSearchSkyObject {
-	border-radius: 0px;
-	border-left: none;
-	padding: 2px;
-	image: url(:/graphicGui/nv_searchButtonImage.png);
-}
-
 QFrame#completionLabel {
 	font-size: 14px;
 	padding-left: 20px;
@@ -212,6 +205,10 @@ QPushButton {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(129, 0, 0), stop: 1 rgb(79, 0, 0));
 }
 
+QPushButton::Disabled {
+        color: #cc3030;
+}
+
 QPushButton:pressed {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(29, 0, 0), stop: 0.2 rgb(52, 0, 0), stop: 1 rgb(42, 0, 0));
 }
@@ -229,6 +226,13 @@ QPushButton#closeStelWindow {
 
 QPushButton:hover#closeStelWindow {
         background-image: url(:/graphicGui/nv_closeButton-hover.png);
+}
+
+QPushButton#pushButtonGotoSearchSkyObject {
+        border-radius: 0px;
+        border-left: none;
+        padding: 2px;
+        image: url(:/graphicGui/nv_searchButtonImage.png);
 }
 
 QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {

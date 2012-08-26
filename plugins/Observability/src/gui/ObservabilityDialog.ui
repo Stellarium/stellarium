@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>560</height>
+    <width>528</width>
+    <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -177,7 +177,7 @@
          <item>
           <widget class="QCheckBox" name="Goods">
            <property name="text">
-            <string>Range of observable epochs</string>
+            <string>Nights with the source above horizon</string>
            </property>
           </widget>
          </item>
@@ -239,10 +239,13 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
-           <item alignment="Qt::AlignRight">
+           <item>
             <widget class="QLabel" name="label">
              <property name="text">
               <string>Red</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -263,10 +266,13 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item alignment="Qt::AlignRight">
+           <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
               <string>Green</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -281,10 +287,13 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item alignment="Qt::AlignRight">
+           <item>
             <widget class="QLabel" name="label_3">
              <property name="text">
               <string>Blue</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -302,10 +311,13 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item alignment="Qt::AlignRight">
+           <item>
             <widget class="QLabel" name="label_4">
              <property name="text">
               <string>Font Size</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -345,10 +357,13 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item alignment="Qt::AlignRight">
+           <item>
             <widget class="QLabel" name="AltiText">
              <property name="text">
               <string>0 deg.</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -370,7 +385,7 @@
      </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
-       <string>About</string>
+       <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <property name="spacing">

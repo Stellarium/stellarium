@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 20:41+0700\n"
-"PO-Revision-Date: 2012-08-10 13:38+0000\n"
+"POT-Creation-Date: 2012-08-23 20:43+0700\n"
+"PO-Revision-Date: 2012-08-23 19:33+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-11 05:24+0000\n"
-"X-Generator: Launchpad (build 15780)\n"
+"X-Launchpad-Export-Date: 2012-08-25 12:46+0000\n"
+"X-Generator: Launchpad (build 15843)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -67,6 +67,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
+#: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #: plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
@@ -74,6 +75,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
+#: src/core/modules/MinorPlanet.cpp:203 src/core/modules/Comet.cpp:123
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
@@ -117,8 +119,9 @@ msgstr "Невідомо"
 msgid "Undocumented type"
 msgstr "Недокументований тип"
 
-#: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:126
+#: src/core/modules/Planet.cpp:127 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:132
+#: src/core/modules/StarWrapper.cpp:124 plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
@@ -133,12 +136,14 @@ msgstr "Екліптичні геоцентричні (для дати): %1/%2"
 msgid "Obliquity (of date): %1"
 msgstr "Нахил вісі обертання (для дати): %1"
 
-#: src/core/modules/Planet.cpp:151
+#: src/core/modules/Planet.cpp:151 src/core/modules/MinorPlanet.cpp:230
+#: src/core/modules/Comet.cpp:144
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Відстань: %1 а.о. (%2 км)"
 
-#: src/core/modules/Planet.cpp:158
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:237
+#: src/core/modules/Comet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Відстань: %1 а.о."
@@ -148,7 +153,7 @@ msgstr "Відстань: %1 а.о."
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Видимий діаметр: %1, з кільцями: %2"
 
-#: src/core/modules/Planet.cpp:175
+#: src/core/modules/Planet.cpp:175 src/core/modules/MinorPlanet.cpp:243
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Видимий діаметр: %1"
@@ -172,6 +177,16 @@ msgstr "Фаза: %1"
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Освітленість: %1%"
+
+#: src/core/modules/MinorPlanet.cpp:192
+#, qt-format
+msgid "Provisional designation: %1"
+msgstr "Ймовірне позначення: %1"
+
+#: src/core/modules/MinorPlanet.cpp:247
+#, qt-format
+msgid "Orbital period: %1 days"
+msgstr "Період обертання: %1 днів"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -376,51 +391,52 @@ msgstr "Не знайдено"
 msgid "Found"
 msgstr "Знайдено"
 
-#: src/gui/ConfigurationDialog.cpp:396
+#: src/gui/ConfigurationDialog.cpp:398 src/gui/ConfigurationDialog.cpp:400
 msgid "Select screenshot directory"
 msgstr "Оберіть каталог для знімків екрана"
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:612
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Початкове поле зору: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:620
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Початковий напрямок зору Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:663 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:746
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:750
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/gui/ConfigurationDialog.cpp:771
+#: src/gui/ConfigurationDialog.cpp:776
 msgid "Running script: "
 msgstr "Запуск скрипту: "
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:783
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/gui/ConfigurationDialog.cpp:841
+#: src/gui/ConfigurationDialog.cpp:846
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -428,16 +444,16 @@ msgstr ""
 "Завершено завантаження нових каталогів зірок!\n"
 "Перезапустіть Stellarium для їх відображення."
 
-#: src/gui/ConfigurationDialog.cpp:845
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "All available star catalogs have been installed."
 msgstr "Було встановлено всі доступні зоряні каталоги."
 
-#: src/gui/ConfigurationDialog.cpp:850
+#: src/gui/ConfigurationDialog.cpp:855
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Отримати каталог %1 із %2"
 
-#: src/gui/ConfigurationDialog.cpp:857
+#: src/gui/ConfigurationDialog.cpp:862
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -446,7 +462,7 @@ msgstr ""
 "Звантаження %1…\n"
 "(Ви можете закрити це вікно.)"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:869
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -457,7 +473,7 @@ msgstr ""
 "Кількість зірок: %2 мільйонів\n"
 "Діапазон зоряних величин: %3-%4"
 
-#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:912 src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -466,11 +482,11 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:1000
 msgid "Verifying file integrity..."
 msgstr "Перевірка цілісності файлів…"
 
-#: src/gui/ConfigurationDialog.cpp:999
+#: src/gui/ConfigurationDialog.cpp:1004
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -558,12 +574,14 @@ msgstr "Встановити звичайну швидкість виконан�
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:82 plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 #: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
+#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Plugin Key Bindings"
 msgstr "Прив’язка клавіш у додатках"
 
@@ -1046,55 +1064,55 @@ msgstr "Виберіть архів ZIP з ландшафтом для Stellariu
 msgid "ZIP archives"
 msgstr "архіви ZIP"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "Ландшафт «%1» було успішно встановлено."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Виконано"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "Ландшафт не встановлено."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Помилка!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Ландшафт «%1» успішно вилучено."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "Вказаний ландшафт не вдалося вилучити (повністю)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Розмір на диску: %1 МіБ"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium не вдалося відкрити для читання або запису %1"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -1102,13 +1120,13 @@ msgstr ""
 "Вказаний файл не є файлом архіву ZIP або не містить ландшафту Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "Ландшафт з такою назвою або ідентифікатором (%1) вже існує."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Щоб вилучити його, вилучіть такий каталог: %1"
@@ -2832,9 +2850,9 @@ msgstr "Використовувати як типове"
 msgid "Return to default"
 msgstr "Повернутися до типового"
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:880
-#: plugins/Oculars/src/ui_ocularDialog.h:889
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Delete"
 msgstr "Стерти"
 
@@ -3787,12 +3805,12 @@ msgstr "Позначки румбів"
 msgid "Displays compass bearing marks along the horizon"
 msgstr "Показ позначок румбів компаса над горизонтом"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 msgid "Compass marks"
 msgstr "Позначки румбів"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:865
+#: plugins/Oculars/src/ui_ocularDialog.h:858
 msgid "Oculars"
 msgstr "Окуляри"
 
@@ -3859,7 +3877,7 @@ msgid "&Reset rotation"
 msgstr "С&кинути обертання"
 
 #: plugins/Oculars/src/Oculars.cpp:1203
-#: plugins/Oculars/src/ui_ocularDialog.h:867
+#: plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "Перегляд крізь окуляр"
 
@@ -4056,6 +4074,7 @@ msgstr "Додаток окулярів"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Version"
 msgstr "Версія"
 
@@ -4143,131 +4162,131 @@ msgstr "Вмикає або вимикає накладку окуляра."
 msgid "Opens the pop-up navigation menu."
 msgstr "Відкриває контекстне меню навігації."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:861
 msgid "Enable only if an object is selected"
 msgstr "Увімкнути, лише якщо позначено об’єкт"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:869
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Scale image circle"
 msgstr "Масштабувати зображення за колом"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:863
 msgid "Key mappings"
 msgstr "Прив’язка клавіш"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Toggle ocular view:"
 msgstr "Увімкнути/Вимкнути перегляд окуляра:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Open pop-up navigation menu:"
 msgstr "Відкрити контекстне меню навігації:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Interface"
 msgstr "Інтерфейс"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "On-screen control panel"
 msgstr "Екранна панель керування"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Градуси і мінути для поля зору ПЗЗ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "Загальне"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Eyepieces"
 msgstr "Окуляри"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
-#: plugins/Oculars/src/ui_ocularDialog.h:888
-#: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:226
+#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Add"
 msgstr "Додати"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
-#: plugins/Oculars/src/ui_ocularDialog.h:890
-#: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Satellites/src/ui_satellitesDialog.h:691
+#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Назва:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "aFOV:"
 msgstr "Видиме ПЗ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Focal length:"
 msgstr "Фокусна відстань:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Field stop:"
 msgstr "Польова діафрагма:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Binoculars"
 msgstr "Бінокль"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Sensors"
 msgstr "Датчики"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Resolution x (pixels):"
 msgstr "Роздільність за x (у пікселях):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "Resolution y (pixels):"
 msgstr "Роздільність за y (у пікселях):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "Chip width (mm):"
 msgstr "Ширина мікропроцесора (у мм):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Chip height (mm):"
 msgstr "Висота мікропроцесора (у мм):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Pixel width (micron):"
 msgstr "Ширина пікселя (у мікронах):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Pixel height (micron):"
 msgstr "Висота пікселя (у мікронах):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Telescopes"
 msgstr "Телескопи"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Diameter:"
 msgstr "Діаметр:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Horizontal flip"
 msgstr "Віддзеркалити горизонтально"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Vertical flip"
 msgstr "Віддзеркалити вертикально"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
@@ -4275,12 +4294,13 @@ msgstr "Віддзеркалити вертикально"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Про програму"
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Satellites"
 msgstr "Супутники"
 
@@ -4619,7 +4639,7 @@ msgid "Next update: %1 hours"
 msgstr "Наступне оновлення за %1 год."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
@@ -4712,16 +4732,16 @@ msgstr "Не вдалося завантажити жодних даних. По
 msgid "Catalog Number: %1"
 msgstr "Номер у каталозі: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:648
-#: plugins/Satellites/src/ui_satellitesDialog.h:649
+#: plugins/Satellites/src/ui_satellitesDialog.h:633
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Satellites Configuration"
 msgstr "Налаштування додатка «Супутники»"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:651
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Update TLE lists from Internet sources"
 msgstr "Оновити списки TLE з джерел у інтернеті"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:637
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
@@ -4729,7 +4749,7 @@ msgstr "Оновити списки TLE з джерел у інтернеті"
 msgid "Update from Internet sources"
 msgstr "Оновити з джерел у інтернеті"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:653
+#: plugins/Satellites/src/ui_satellitesDialog.h:638
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
@@ -4737,127 +4757,130 @@ msgstr "Оновити з джерел у інтернеті"
 msgid "Last update:"
 msgstr "Попереднє оновлення:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
+#: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr "Частота оновлення (у годинах):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:656
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
 msgstr "Надписи"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
 msgstr "Розмір шрифту надписів (у пікселях):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:658
+#: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Orbit lines"
 msgstr "Лінії орбіт"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Number of segments used to draw the line"
 msgstr "Кількість сегменті для малювання лінії орбіти"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Number of  segments:"
 msgstr "Кількість сегментів:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:667
-#: plugins/Satellites/src/ui_satellitesDialog.h:671
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Duration of a single segment in seconds"
 msgstr "Тривалість видимості окремого сегмента у секундах"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:669
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Segment length (s):"
 msgstr "Довжина сегментів:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of segments used to draw each end of the line"
 msgstr "Кількість сегментів, потрібних для малювання кожного з кінців лінії"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Fade length:"
 msgstr "Довжина:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
+#: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
+#: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Restore default settings"
 msgstr "Відновити параметри"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:681
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
+#: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Save settings as default"
 msgstr "Зберегти параметри як типові"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:667
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
+#: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Settings"
 msgstr "Параметри"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:684
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Display the selected satellite(s)"
 msgstr "Показувати позначені штучні супутники"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Displayed"
 msgstr "Показано"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Показувати лінії орбіт для позначених супутників"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
 msgstr "Орбіта"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
 msgstr "Номер у каталозі:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:693
+#: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
 msgstr "Опис:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:694
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Groups:"
 msgstr "Групи:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:696
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid "Comma separated list of groups"
 msgstr "Список груп, відокремлених комами"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "TLE data:"
 msgstr "Дані TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "NORAD two line element orbit data"
 msgstr "Дворядкові дані параметрів орбіт NORAD"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:703
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove the selected satellites"
 msgstr "Вилучити позначені записи супутників"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:706
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Add more satellites"
 msgstr "Додати інші супутники"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Save changes"
 msgstr "Зберегти зміни"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -4865,47 +4888,47 @@ msgstr ""
 "Вкажіть або змініть адресу позначеного джерела. Зміни буде застосовано після "
 "натискання клавіші Enter."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Add new source"
 msgstr "Додати нове джерело"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
+#: plugins/Satellites/src/ui_satellitesDialog.h:707
 msgid "Remove selected source"
 msgstr "Вилучити позначене джерело"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:725
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Sources"
 msgstr "Джерела"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 msgid "More Satellites"
 msgstr "Інші супутники"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 msgid "Get data from update sources"
 msgstr "Отримати дані з джерел оновлення"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:221
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:215
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Abort download"
 msgstr "Перервати звантаження"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:222
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 msgid "New satellites"
 msgstr "Нові супутники"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:223
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:217
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Mark all"
 msgstr "Позначити всі"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:224
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Mark none"
 msgstr "Зняти позначення"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:225
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Discard"
 msgstr "Відкинути"
 
@@ -4945,6 +4968,10 @@ msgid "Configure Telescope"
 msgstr "Налаштування телескопа"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+#: plugins/Observability/src/Observability.cpp:599
+#: plugins/Observability/src/Observability.cpp:600
+#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:603
 msgid "N/A"
 msgstr "н/д"
 
@@ -5823,68 +5850,68 @@ msgstr ""
 msgid "Solar System Editor plug-in"
 msgstr "Додаток «Редагування Сонячної системи»"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:512
 msgid "Import data"
 msgstr "Імпортувати дані"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Select the type"
 msgstr "Виберіть тип"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Asteroids"
 msgstr "Астероїди"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Comets"
 msgstr "Комети"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
 msgstr "Вибір джерела"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
 msgstr "Звантажити список об’єктів з інтернету"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Select a source from the list:"
 msgstr "Виберіть джерело зі списку:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Or enter a URL:"
 msgstr "Або вкажіть адресу:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Add this URL to the bookmarks list"
 msgstr "Додати цю адресу до списку закладок"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Bookmark title:"
 msgstr "Назва закладки:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
 msgstr "Файл зі списком об’єктів"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Get orbital elements"
 msgstr "Отримати елементи орбіт"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr "Списки"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
 msgstr "Пошук у мережі"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
 msgstr "Знайдено об’єкти"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -5899,19 +5926,19 @@ msgstr ""
 "Stellarium.<br/>Зауважте, що додавання значної кількості об’єктів може "
 "уповільнити роботу Stellarium."
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Overwrite existing objects"
 msgstr "Перезаписати дані вже створених об’єктів"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update existing objects"
 msgstr "Оновити дані вже створених об’єктів"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Update only the orbital elements"
 msgstr "Оновити лише параметри орбіт"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add objects"
 msgstr "Додати об’єкти"
 
@@ -6500,6 +6527,448 @@ msgstr "Налаштовування додатка екзопланет"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
 msgstr "Оновити дані щодо екзопланет з інтернету"
+
+#: plugins/Observability/src/Observability.cpp:68
+msgid "Observability analysis"
+msgstr "Аналіз спостережності"
+
+#: plugins/Observability/src/Observability.cpp:71
+msgid ""
+"Reports an analysis of source observability (rise, set, and transit times), "
+"as well as the epochs of year when the source is best observed. It assumes "
+"that a source is observable if it is above the horizon during a fraction of "
+"the night. The plugin also gives the day for largest separation from the Sun "
+"and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
+"the quantities shown by this script is given in the 'About' tab of the "
+"configuration window"
+msgstr ""
+"Повідомляє аналітичні дані щодо спостережності джерела (схід, захід і "
+"кульмінація), а також епохи (пори) року, коли умови спостереження за "
+"джерелом є найкращими. Припускається, цщо джерело є спостережним, якщо "
+"перебуває над горизонтом частину нічного часу доби. Крім того, додаток "
+"визначає день, коли джерело найбільше відхиляється від Сонця, та дні "
+"акронічного та космічного сходу та заходу.<br><br>Пояснення щодо величин, "
+"які показує скрипт, наведено на вкладці «Про програму» діалогового вікна "
+"налаштувань."
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Jan"
+msgstr "січ"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Feb"
+msgstr "лют"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Mar"
+msgstr "бер"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Apr"
+msgstr "кві"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "May"
+msgstr "тра"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Jun"
+msgstr "чер"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Jul"
+msgstr "лип"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Aug"
+msgstr "сер"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Sep"
+msgstr "вер"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Oct"
+msgstr "жов"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Nov"
+msgstr "лис"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Dec"
+msgstr "гру"
+
+#: plugins/Observability/src/Observability.cpp:224
+msgid "Observability"
+msgstr "Спостережність"
+
+#: plugins/Observability/src/Observability.cpp:230
+msgid "Observability configuration window"
+msgstr "Вікно параметрів спостережності"
+
+#: plugins/Observability/src/Observability.cpp:470
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:513
+msgid "h"
+msgstr "г"
+
+#: plugins/Observability/src/Observability.cpp:470
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:513
+msgid "m"
+msgstr "м"
+
+#: plugins/Observability/src/Observability.cpp:470
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:513
+msgid "s"
+msgstr "с"
+
+#: plugins/Observability/src/Observability.cpp:480
+#, qt-format
+msgid "Sets at %1 (in %2)"
+msgstr "Заходить о %1 (за %2)"
+
+#: plugins/Observability/src/Observability.cpp:481
+#, qt-format
+msgid "Rose at %1 (%2 ago)"
+msgstr "Схід о %1 (%2 тому)"
+
+#: plugins/Observability/src/Observability.cpp:491
+#, qt-format
+msgid "Set at %1 (%2 ago)"
+msgstr "Захід о %1 (%2 тому)"
+
+#: plugins/Observability/src/Observability.cpp:492
+#, qt-format
+msgid "Rises at %1 (in %2)"
+msgstr "Сходить о %1 (за %2)"
+
+#: plugins/Observability/src/Observability.cpp:496
+msgid "Circumpolar."
+msgstr "Приполярна."
+
+#: plugins/Observability/src/Observability.cpp:496
+msgid "No rise."
+msgstr "Не сходить."
+
+#: plugins/Observability/src/Observability.cpp:518
+#, qt-format
+msgid "Culminates at %1 (in %2) at %3 deg."
+msgstr "Кульмінація о %1 (за %2) у %3°"
+
+#: plugins/Observability/src/Observability.cpp:522
+#, qt-format
+msgid "Culminated at %1 (%2 ago) at %3 deg."
+msgstr "Кульмінація о %1 (%2 тому) у %3°"
+
+#: plugins/Observability/src/Observability.cpp:563
+msgid "Source is not observable."
+msgstr "Джерело не є спостережним."
+
+#: plugins/Observability/src/Observability.cpp:564
+msgid "No Acronychal nor Cosmical rise/set."
+msgstr "Не має акронічного або космічного сходу/заходу."
+
+#: plugins/Observability/src/Observability.cpp:581
+msgid "Greatest elongation: "
+msgstr "Найбільше видовження: "
+
+#: plugins/Observability/src/Observability.cpp:584
+msgid "Largest Sun separation: "
+msgstr "Найбільша віддаль від Сонця: "
+
+#: plugins/Observability/src/Observability.cpp:587
+#, qt-format
+msgid " (at %1 deg.)"
+msgstr " (на %1°)"
+
+#: plugins/Observability/src/Observability.cpp:605
+msgid "Acronychal rise/set"
+msgstr "Акронічний схід/захід"
+
+#: plugins/Observability/src/Observability.cpp:605
+msgid "No Acronychal rise/set."
+msgstr "Не має акронічного сходу/заходу."
+
+#: plugins/Observability/src/Observability.cpp:606
+msgid "Cosmical rise/set"
+msgstr "Космічний схід/захід"
+
+#: plugins/Observability/src/Observability.cpp:606
+msgid "No Cosmical rise/set."
+msgstr "Не має космічного сходу/заходу."
+
+#: plugins/Observability/src/Observability.cpp:652
+msgid "Observable during the whole year."
+msgstr "Спостережна цілий рік."
+
+#: plugins/Observability/src/Observability.cpp:656
+msgid "Not observable at dark night."
+msgstr "Неспостережна темної частини доби."
+
+#: plugins/Observability/src/Observability.cpp:661
+msgid "Nights above horizon: "
+msgstr "Ночі над горизонтом: "
+
+#: plugins/Observability/src/Observability.cpp:679
+msgid "TODAY:"
+msgstr "СЬОГОДНІ:"
+
+#: plugins/Observability/src/Observability.cpp:688
+msgid "THIS YEAR:"
+msgstr "ЦЬОГО РОКУ:"
+
+#: plugins/Observability/src/Observability.cpp:1432
+#, qt-format
+msgid "Previous Full Moon: %1 %2 at %3:%4. "
+msgstr "Попередній повний місяць: %1 %2 о %3:%4. "
+
+#: plugins/Observability/src/Observability.cpp:1437
+#, qt-format
+msgid "Next Full Moon: %1 %2 at %3:%4. "
+msgstr "Наступний повний місяць: %1 %2 о %3:%4. "
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
+msgid "Observability Plug-in"
+msgstr "Додаток спостержності"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+msgid ""
+"Plugin that analyzes the observability of the selected source (or the screen "
+"center, if no source is selected). The plugin can show rise, transit, and "
+"set times, as well as the best epoch of the year (i.e., largest angular "
+"separation from the Sun), the date range when the source is above the "
+"horizon at dark night, and the dates of Acronychal and Cosmical "
+"rise/set.<br>Ephemeris of the Solar-System objects and parallax effects are "
+"taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
+"for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
+msgstr ""
+"Додаток, який аналізує спостережність вказаного джерела (або точки у центрі "
+"екрана, якщо нічого не позначено). Додаток може показувати дані щодо часу "
+"сходу, кульмінації та заходу, а також найкращу епоху року для спостереження "
+"(тобто час, коли об’єкт має найбільше кутове відхилення від Сонця), діапазон "
+"дат, коли джерело перебуває над горизонтом у темний час доби, а також дати "
+"акронічного та космічного сходу і заходу.<br>До уваги беруться ефемериди "
+"об’єктів Сонячної системи та ефекти паралаксу.<br><br> Автору хотілося б "
+"подякувати Алєксандру Вольфу та Георгу Цотті за поради.<br><br>Іван Марті-"
+"Відал (Космічна обсерваторія Онсали)"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
+msgid "Explanation of some parameters"
+msgstr "Пояснення деяких параметрів"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+msgid "Sun altitude at twilight:"
+msgstr "Висота Сонця у сутінках:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+msgid ""
+"Any celestial object will be considered visible when the Sun is below this "
+"altitude. The altitude at astronomical twilight ranges usually between -12 "
+"and -18 degrees. This parameter is only used for the estimate of the range "
+"of observable epochs (see below)."
+msgstr ""
+"Небесний об’єкт вважатиметься видимим, якщо висота Сонця буде нижчою за "
+"вказану. Висота для настання астрономічних сутінок зазвичай має перебувати у "
+"діапазоні від -12 до -18 градусів. Значення цього параметра використовується "
+"лише для оцінки епох спостережності (див. нижче)."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+msgid "Today ephemeris:"
+msgstr "Сьогоднішні ефемериди:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+msgid ""
+"Self-explanatory. The program will show the rise, set, and culmination "
+"(transit) times. The exact times for these ephemeris are given in two ways: "
+"as time spans (referred to the current time) and as clock hours (in local "
+"time)."
+msgstr ""
+"Очевидно: програма покаже часи сходу, заходу і кульмінації. Точні значення "
+"для цих ефемерид подаються у два способи: як проміжки часу (відносно "
+"поточного часу) і як значення часу за годинником (за місцевим часом)."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+msgid "Acronychal/Cosmical rise/set:"
+msgstr "Акронічний/Космічний схід/захід:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+msgid ""
+"The Acronychal rise (or set) of an object happens when the object rises (or "
+"sets) just when the Sun sets (or rises), respectively. The exact dates of "
+"these ephemeris depend on the Observer's location. The dates between the "
+"Acronychal set and rise are those when the altitude of the celestial object "
+"uses to be high when the Sun is well below the horizon (hence the object can "
+"be well observed). On the contrary, the Cosmical rise (or set) happens when "
+"both, the object and the Sun, rise (or set) simultaneously. It is obvious "
+"that the source is hardly observable (or not observable at all) in the dates "
+"between Cosmical set and rise."
+msgstr ""
+"Акронічний схід (або захід) об’єкта трапляється, коли об’єкт сходить (або "
+"заходить) одночасно з заходом (або сходом) Сонця. Точні дати цих ефемерид "
+"залежать від розташування спостерігача. Дати між акронічним заходом і сходом "
+"характеризуються тим, що висота небесного об’єкта є достатньою для "
+"спостереження, коли Сонце перебуває достатньо низько за горизонтом (отже "
+"умови спостереження за об’єктом є доволі добрими). Космічний же схід (або "
+"захід), навпаки, трапляється, коли і об’єкт і Сонце сходять (або заходять) "
+"одночасно. Очевидно, між космічним заходом і сходом об’єкт доволі важко (або "
+"і взагалі неможливо) спостерігати."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid "Largest Sun separation:"
+msgstr "Найбільше відхилення від Сонця:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid ""
+"Happens when the angular separation between the Sun and the celestial object "
+"are maximum. In most cases, this is equivalent to say that the Equatorial "
+"longitudes of the Sun and the object differ by 180 degrees, so the Sun is in "
+"opposition to the object. When an object is at its maximum possible angular "
+"separation from the Sun (no matter if it is a planet or a star), it "
+"culminates roughly at midnight, and on the darkest possible area of the Sky "
+"at that declination. Hence, that is the 'best' night to observe a particular "
+"object."
+msgstr ""
+"Трапляється, коли кутове відхилення небесного об’єкта від Сонця є "
+"максимальним. Здебільшого, можна сказати, що у такі моменти значення "
+"екваторіальної довготи Сонця і об’єкта відрізняються на 180 градусів, отже "
+"Сонце протистоїть об’єктові. Коли об’єкт перебуває на максимальній можливій "
+"кутовій відстані від Сонця (байдуже, планета це чи зірка), його кульмінація "
+"відбувається опівночі, тобто у найтемнішу можливу частину доби для "
+"відповідного схилення. Отже, це найкраща ніч для спостереження за певним "
+"об’єктом."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+msgid "Nights with source above horizon:"
+msgstr "Ночі, коли світило перебуває над горизонтом:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+msgid ""
+"The program computes the range of dates when the celestial object is above "
+"the horizon at least during one moment of the night. By 'night', the program "
+"considers the time span when the Sun altitude is below that of the twilight "
+"(which can be set by the user; see above). When the objects are fixed on the "
+"sky (or are exterior planets), the range of observable epochs for the "
+"current year can have two possible forms: either a range from one date to "
+"another (e.g., 20 Jan to 15 Sep) or in two steps (from 1 Jan to a given date "
+"and from another date to 31 Dec). In the first case, the first date (20 Jan "
+"in our example) shall be close to the so-called 'Heliacal rise of a star' "
+"and the second date (15 Sep in our example) shall be close to the 'Heliacal "
+"set'. In the second case (e.g., a range in the form 1 Jan to 20 May and 21 "
+"Sep to 31 Dec), the first date (20 May in our example) would be close to the "
+"Heliacal set and the second one (21 Sep in our example) to the Heliacal "
+"rise. More exact equations to estimate the Heliacal rise/set of stars and "
+"planets (which will not depend on the mere input of a twilight Sun elevation "
+"by the user) will be implemented in future versions of this plugin."
+msgstr ""
+"Програма обчислює діапазон дат, коли небесний об’єкт перебуває над "
+"горизонтом принаймні у певний момент ночі. «Ніччю» у програмі вважається "
+"частина доби, коли висота Сонця є нижчою, ніж його висота у сутінках (це "
+"значення може бути встановлене користувачем; див. вище). Якщо об’єкти мають "
+"фіксована розташування на небесній сфері (або є зовнішніми планетами), "
+"діапазон епох спостережності для поточного року може визначатися у двох "
+"формах: діапазон від однієї дати до іншої (наприклад, від 20 січня до 15 \r\n"
+"вересня) або у два кроки (від 1 січня до певної дати та від іншої дати до 31 "
+"грудня). У першому випадку перша дата (20 січня у нашому прикладі) має бути "
+"близькою до так званого геліакального сходу зірки, а друга (15 вересня у "
+"нашому прикладі) має бути близькою до геліакального заходу. У другому "
+"прикладі (нехай для визначеності маємо від 1 січня до 20 травня і від 21 "
+"вересня до 31 грудня) перша дата (20 травня у нашому прикладі) має бути "
+"близькою до геліакального заходу, а друга (21 вересня у нашому прикладі) — "
+"до геліакального сходу. Отримання точніших даних щодо геліакальних сходу і "
+"заходу (незалежних від вказаних користувачем значень висоти Сонця у "
+"сутінках) буде реалізовано у майбутніх версіях цього додатка."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+msgid "Full Moon:"
+msgstr "Повний місяць:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+msgid ""
+"When the Moon is selected, the program can compute the exact closest dates "
+"of the Moon's opposition to the Sun."
+msgstr ""
+"Якщо позначено Місяць, програма може обчислити точні найближчі дати "
+"протистоянь Місяця і Сонця."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
+msgid "deg."
+msgstr "°"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:333
+msgid "Observability Configuration"
+msgstr "Налаштування спостережності"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:334
+msgid "Observability Plug-in Configuration"
+msgstr "Налаштування додатка спостережності"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:336
+msgid "Showing Options"
+msgstr "Параметри показу"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:337
+msgid "Today's ephemeris (rise, set, and transit times)"
+msgstr "Сьогоднішні ефемериди (схід, захід і час кульмінації)"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:338
+msgid "Dates of Acronychal and Cosmical rise/set"
+msgstr "Дати акронічного і космічного сходу/заходу"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:339
+msgid "Date of largest separation to the Sun"
+msgstr "Дата найбільшого відхилення від Сонця"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:340
+msgid "Nights with the source above horizon"
+msgstr "Ночі, коли світило перебуває над горизонтом"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:341
+msgid "Dates of previous and next Full Moon"
+msgstr "Дати попереднього і наступного повного місяця"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:344
+msgid "Font color and size"
+msgstr "Колір і розмір шрифту"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+msgid "Red"
+msgstr "Червоний"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+msgid "Green"
+msgstr "Зелений"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+msgid "Blue"
+msgstr "Синій"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+msgid "Font Size"
+msgstr "Розмір символів"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+msgid "Sun altitude at twilight"
+msgstr "Висота Сонця у сутінках"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+msgid "0 deg."
+msgstr "0°"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Екваторіальна сітка"
