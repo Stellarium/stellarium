@@ -134,6 +134,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QString line2 = map.value("tle2").toString();
 	setNewTleElements(line1, line2);
 	internationalDesignator = extractInternationalDesignator(line1);
+	StelUtils::getJDFromDate(&jdLaunchYearJan1, extractLaunchYear(line1), 1, 1, 0, 0, 0);
 
 	if (map.contains("lastUpdated"))
 	{
@@ -452,9 +453,33 @@ QString Satellite::extractInternationalDesignator(const QString& tle1)
 	return result;
 }
 
+int Satellite::extractLaunchYear(const QString& tle1)
+{
+	if (tle1.isEmpty())
+		return 1957;
+
+	// The designator is encoded as the 3rd group on the first line
+	QString rawString = tle1.split(' ').at(2);
+	if (rawString.isEmpty())
+		return 1957;
+
+	//TODO: Use a regular expression?
+	bool ok;
+	int year = rawString.left(2).toInt(&ok);
+	if (!ok)
+		return 1957;
+
+	// Y2K bug :) I wonder what NORAD will do in 2057. :)
+	if (year < 57)
+		return year + 2000;
+	else
+		return year + 1900;
+}
 
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
+	if (core->getJDay() < jdLaunchYearJan1) return;
+
 	XYZ = getJ2000EquatorialPos(core);
 	Vec3f drawColor;
 	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;

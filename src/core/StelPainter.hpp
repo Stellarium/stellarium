@@ -150,6 +150,7 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
+	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
 	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
 			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
 	void drawText(const Vec3d& v, const QString& str, float angleDeg=0.f,
@@ -191,6 +192,7 @@ public:
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
+	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
 	void drawSprite2dMode(float x, float y, float radius);
 	void drawSprite2dMode(const Vec3d& v, float radius);
 

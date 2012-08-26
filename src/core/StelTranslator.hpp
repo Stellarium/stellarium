@@ -36,6 +36,11 @@
 //! The returned value is a localized QString.
 #define q_(str) StelTranslator::globalTranslator.qtranslate(str)
 
+//! @def qc_(str, ctxt)
+//! Return the gettext translated english text @a str in context @b ctxt using the current global translator.
+//! The returned value is a localized QString.
+#define qc_(str, ctxt) StelTranslator::globalTranslator.qtranslate(str, ctxt)
+
 //! @def N_(str)
 //! A pseudo function call that serves as a marker for the automated extraction of messages.
 //! A call to N_() doesn't translate.

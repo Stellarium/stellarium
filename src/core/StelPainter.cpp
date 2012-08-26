@@ -653,8 +653,8 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Vec3d win;
-	prj->project(v, win);
-	drawText(win[0], win[1], str, angleDeg, xshift, yshift, noGravity);
+	if (prj->project(v, win))
+		drawText(win[0], win[1], str, angleDeg, xshift, yshift, noGravity);
 }
 
 /*************************************************************************
@@ -1505,8 +1505,8 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 {
 	Vec3d win;
-	prj->project(v, win);
-	drawSprite2dMode(win[0], win[1], radius);
+	if (prj->project(v, win))
+		drawSprite2dMode(win[0], win[1], radius);
 }
 
 void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotation)

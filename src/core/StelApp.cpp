@@ -130,6 +130,7 @@ StelApp::~StelApp()
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
 	delete audioMgr; audioMgr=NULL;
+	delete videoMgr; videoMgr=NULL;
 	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;

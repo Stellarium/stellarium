@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 20:41+0700\n"
-"PO-Revision-Date: 2012-08-05 12:49+0000\n"
-"Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
+"POT-Creation-Date: 2012-08-23 20:43+0700\n"
+"PO-Revision-Date: 2012-08-23 12:29+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-11 05:22+0000\n"
-"X-Generator: Launchpad (build 15780)\n"
+"X-Launchpad-Export-Date: 2012-08-25 12:46+0000\n"
+"X-Generator: Launchpad (build 15843)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
-msgstr "Poludník"
+msgstr "Meridián"
 
 #: src/core/modules/GridLinesMgr.cpp:546 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
@@ -31,7 +31,7 @@ msgstr "Rovník"
 
 #: src/core/modules/GridLinesMgr.cpp:554 src/ui_viewDialog.h:1172
 msgid "Horizon"
-msgstr "Obzor"
+msgstr "Horizont"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
@@ -43,7 +43,7 @@ msgstr "Autor: "
 
 #: src/core/modules/LandscapeMgr.cpp:498
 msgid "Location: "
-msgstr "Miesto: "
+msgstr "Umiestnenie: "
 
 #: src/core/modules/LandscapeMgr.cpp:503
 #, qt-format
@@ -58,21 +58,23 @@ msgstr "Planéta: "
 #: plugins/Quasars/src/Quasar.cpp:95 plugins/Pulsars/src/Pulsar.cpp:129
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Druh: <b>%1</b>"
+msgstr "Typ: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
+#: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #: plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>)"
+msgstr "Magnitúda: <b>%1</b> (extinkcia <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
+#: src/core/modules/MinorPlanet.cpp:203 src/core/modules/Comet.cpp:123
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Jasnosť: <b>%1 m</b>"
+msgstr "Magnitúda: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109
 #, qt-format
@@ -101,18 +103,19 @@ msgstr "Planetárna hmlovina"
 
 #: src/core/modules/Nebula.cpp:332
 msgid "Cluster associated with nebulosity"
-msgstr "Hviezdokopa súvisiaca s hmlovinou"
+msgstr "Hviezdokopa s hmlovinou"
 
 #: src/core/modules/Nebula.cpp:335
 msgid "Unknown"
-msgstr "Neznámy"
+msgstr "Neznáme"
 
 #: src/core/modules/Nebula.cpp:338
 msgid "Undocumented type"
 msgstr "Nedokumentovaný typ"
 
-#: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:126
+#: src/core/modules/Planet.cpp:127 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:132
+#: src/core/modules/StarWrapper.cpp:124 plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolútna magnitúda: %1"
@@ -127,12 +130,14 @@ msgstr "Ekliptika geocentricky (pre dátum): %1/%2"
 msgid "Obliquity (of date): %1"
 msgstr "Sklon ekliptiky (pre dátum): %1"
 
-#: src/core/modules/Planet.cpp:151
+#: src/core/modules/Planet.cpp:151 src/core/modules/MinorPlanet.cpp:230
+#: src/core/modules/Comet.cpp:144
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Vzdialenosť: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:158
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:237
+#: src/core/modules/Comet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Vzdialenosť: %1 AU"
@@ -140,9 +145,9 @@ msgstr "Vzdialenosť: %1 AU"
 #: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr "Zdanlivý priemer: %1, s kruhmi: %2"
+msgstr "Uhlový priemer: %1, s prstencami: %2"
 
-#: src/core/modules/Planet.cpp:175
+#: src/core/modules/Planet.cpp:175 src/core/modules/MinorPlanet.cpp:243
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Uhlový priemer: %1"
@@ -167,25 +172,35 @@ msgstr "Fáza: %1"
 msgid "Illuminated: %1%"
 msgstr "Osvetlených: %1%"
 
+#: src/core/modules/MinorPlanet.cpp:192
+#, qt-format
+msgid "Provisional designation: %1"
+msgstr "Predbežné označenie: %1"
+
+#: src/core/modules/MinorPlanet.cpp:247
+#, qt-format
+msgid "Orbital period: %1 days"
+msgstr "Doba obehu: %1 dní"
+
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Jasnosť: <b>%1 m</b> (B-V index: %2)"
+msgstr "Magnitúda: <b>%1 m</b> (B-V index: %2)"
 
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr "Zdanlivá jasnosť (mag): <b>%1</b> (podľa extinkcie)"
+msgstr "Zdanlivá magnitúda: <b>%1</b> (s extinkciou)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>. B-V: <b>%3</b>)"
+msgstr "Magnitúda: <b>%1</b> (extinkcia: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr "Jasnosť (mag): <b>%1</b> (B-V: <b>%2</b>)"
+msgstr "Magnitúda: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #: plugins/Exoplanets/src/Exoplanet.cpp:192
@@ -282,7 +297,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "Valcová"
+msgstr "Cylindrická"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -290,12 +305,11 @@ msgid ""
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
 "Úplný názov tejto metódy premietania je <i>cylindrická ekvidištančná "
-"projekcia</i>. V tomto premietaní sú všetky rovnobežky s rovnakými "
-"rozostupmi."
+"projekcia</i>. V tomto premietaní majú všetky rovnobežky rovnaké rozostupy."
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr "Mercatorova"
+msgstr "Mercatorova projekcia"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -372,51 +386,52 @@ msgstr "Nenájdené"
 msgid "Found"
 msgstr "Nájdené"
 
-#: src/gui/ConfigurationDialog.cpp:396
+#: src/gui/ConfigurationDialog.cpp:398 src/gui/ConfigurationDialog.cpp:400
 msgid "Select screenshot directory"
-msgstr "Vybrať adresár pre snímky obrazu"
+msgstr "Vybrať adresár pre snímky obrazovky"
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:612
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Šírka zorného poľa pri spustení: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:620
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Smer pohľadu pri spustení (azimut/výška): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:663 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:746
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:750
 msgid "License"
 msgstr "Licencia"
 
-#: src/gui/ConfigurationDialog.cpp:771
+#: src/gui/ConfigurationDialog.cpp:776
 msgid "Running script: "
 msgstr "Spustený skript: "
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:783
 msgid "Running script: [none]"
-msgstr "Spustený skript: [žiadny]"
+msgstr "Spustený skript: [žiaden]"
 
-#: src/gui/ConfigurationDialog.cpp:841
+#: src/gui/ConfigurationDialog.cpp:846
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -424,16 +439,16 @@ msgstr ""
 "Sťahovanie nových katalógov hviezd je dokončené!\n"
 "Reštartujte Stellarium pre ich zobrazenie."
 
-#: src/gui/ConfigurationDialog.cpp:845
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "All available star catalogs have been installed."
 msgstr "Všetky dostupné hviezdne katalógy sú nainštalované."
 
-#: src/gui/ConfigurationDialog.cpp:850
+#: src/gui/ConfigurationDialog.cpp:855
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "Získať katalóg %1 z %2"
+msgstr "Stiahnuť katalóg %1 z %2"
 
-#: src/gui/ConfigurationDialog.cpp:857
+#: src/gui/ConfigurationDialog.cpp:862
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -442,18 +457,18 @@ msgstr ""
 "Sťahuje sa %1...\n"
 "(Toto okno môžete zatvoriť)"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:869
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"Veľkosť sťahovania: %1MB\n"
+"Veľkosť súborov na stiahnutie: %1MB\n"
 "Počet hviezd: %2 miliónov\n"
-"Rozsah veľkostí: %3 - %4"
+"Rozsah magnitúd: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:912 src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -462,18 +477,18 @@ msgstr ""
 "Chyba pri sťahovaní %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:1000
 msgid "Verifying file integrity..."
 msgstr "Kontroluje sa celistvosť súboru..."
 
-#: src/gui/ConfigurationDialog.cpp:999
+#: src/gui/ConfigurationDialog.cpp:1004
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
 "Chyba pri sťahovaní %1:\n"
-"Súbor je porušený."
+"Súbor je poškodený."
 
 #: src/gui/HelpDialog.cpp:53 src/gui/StelGuiItems.cpp:329
 #: src/gui/StelGuiItems.cpp:710
@@ -490,7 +505,7 @@ msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:56
 msgid "CTRL + Up/Down"
-msgstr "CTRL + Up/Down"
+msgstr "CTRL + Hore/Dolu"
 
 #: src/gui/HelpDialog.cpp:57
 msgid "Left click"
@@ -526,7 +541,7 @@ msgstr "Zrušiť výber"
 
 #: src/gui/HelpDialog.cpp:72
 msgid "When a Script is Running"
-msgstr "Keď je script spustený"
+msgstr "Keď je spustený skript"
 
 #: src/gui/HelpDialog.cpp:74
 msgid "Stop currently running script"
@@ -542,11 +557,11 @@ msgstr "Pokračovať vo vykonávaní skriptu"
 
 #: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:211
 msgid "Slow down the script execution rate"
-msgstr "Znížiť rýchlosť behu skriptu"
+msgstr "Znížiť rýchlosť skriptu"
 
 #: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:212
 msgid "Speed up the script execution rate"
-msgstr "Zvýšiť rýchlosť behu skriptu"
+msgstr "Zvýšiť rýchlosť  skriptu"
 
 #: src/gui/HelpDialog.cpp:79 src/gui/StelGui.cpp:213
 msgid "Set the normal script execution rate"
@@ -554,12 +569,14 @@ msgstr "Nastaviť bežnú rýchlosť behu skriptu"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:82 plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 #: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
+#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Plugin Key Bindings"
 msgstr "Priradenie klávesov modulom"
 
@@ -578,7 +595,7 @@ msgstr "Klávesy"
 
 #: src/gui/HelpDialog.cpp:202
 msgid "Further Reading"
-msgstr "Doplňujúce čítanie"
+msgstr "Súvisiace články"
 
 #: src/gui/HelpDialog.cpp:203
 msgid ""
@@ -595,7 +612,7 @@ msgstr "Užívateľská príručka Stellarium"
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:208
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Často kladené otázky (FAQ)} Nebojte, sú tam aj odpovede."
+msgstr "{Často kladené otázky } o Stellariu vrátane odpovedí."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:213
@@ -603,8 +620,8 @@ msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
-"{The Stellarium Wiki} - obecné informácie. Nájdete tu aj terény a skripty od "
-"ostatných používateľov."
+"{The Stellarium Wiki} - všeobecné informácie. Nájdete tu aj terény a skripty "
+"od ostatných používateľov."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:218
@@ -612,8 +629,8 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
-"{Žiadosť o pomoc} - ak potrebujete pomôcť pri používaní Stellarium, napíšte "
-"žiadosť o pomoc a my urobíme, čo bude v našich silách."
+"{Žiadosť o pomoc} - ak potrebujete pomôcť so Stellariom, napíšte žiadosť o "
+"pomoc a my urobíme, čo bude v našich silách."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:223
@@ -622,9 +639,9 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
-"{Oznamovanie chýb a systém požiadavok novej funkcionality} - ak niečo "
-"nefunguje správne alebo niečo chýba a nie je v zozname sledovača, tu môžete "
-"vytvoriť správu o chybe."
+"{Oznamovanie chýb a systém požiadavok na nové funkcie} - ak niečo nefunguje "
+"správne, alebo niečo chýba, a nie je to v zozname sledovača, tu o tom môžete "
+"podať správu."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:228
@@ -666,15 +683,15 @@ msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:334
 msgid "Past Developers"
-msgstr "Minulí vývojári"
+msgstr "Predchádzajúci vývojári"
 
 #: src/gui/HelpDialog.cpp:335
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
-"Mnoho ľudí významne prispelo, ale už nie sú aktívni. Ich prínos výrazne "
-"pomohol projektu:"
+"Mnoho ľudí k vývoju významne prispelo, ale už nie sú aktívni. Ich prínos "
+"výrazne pomohol projektu:"
 
 #: src/gui/HelpDialog.cpp:336
 #, qt-format
@@ -756,7 +773,7 @@ msgstr "MIestny poludník"
 #: src/gui/StelGui.cpp:179
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
-msgstr "Obzorník"
+msgstr "Hranica obzoru"
 
 #: src/gui/StelGui.cpp:180 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
@@ -809,7 +826,7 @@ msgstr "Stopy planét"
 
 #: src/gui/StelGui.cpp:194
 msgid "Night vision mode"
-msgstr ""
+msgstr "Nočný režim"
 
 #: src/gui/StelGui.cpp:195
 msgid "Full-screen mode"
@@ -1042,55 +1059,55 @@ msgstr "Vyberte archív ZIP, v ktorom sa nachádza terén"
 msgid "ZIP archives"
 msgstr "archívy ZIP"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "Terén \"%1\" bol úspešne nainštalovaný."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Úspešne"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "Nebol nainštalovaný žiaden terén."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Chyba!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Terén \"%1\" bol úspešne odstránený."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "Vybraný terén nie je možné (úplne) odstrániť."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Veľkosť na disku: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Nie je možné otvoriť na čítanie súbor %1"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -1098,20 +1115,20 @@ msgstr ""
 "Vybraný súbor nie je archív ZIP alebo neobsahuje terén pre Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "Terén s rovnakým názvom alebo identifikátorom už existuje (%1)."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Môžete ho odstrániť manuálne vymazaním adresára: %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "rýchly beh..."
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
@@ -1127,7 +1144,7 @@ msgstr "vymazať obrázky"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "prírodné"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
@@ -2827,9 +2844,9 @@ msgstr "Použiť ako predvolené"
 msgid "Return to default"
 msgstr "Východzie hodnoty"
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:880
-#: plugins/Oculars/src/ui_ocularDialog.h:889
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Delete"
 msgstr "Vymazať"
 
@@ -3347,7 +3364,7 @@ msgstr "Absolútna magnitúda"
 
 #: src/ui_configurationDialog.h:968
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Horizontálne súradnice"
 
 #: src/ui_configurationDialog.h:970
 msgid "Altitude/Azimuth"
@@ -3359,7 +3376,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:974
 msgid "Size"
-msgstr ""
+msgstr "Veľkosť"
 
 #: src/ui_configurationDialog.h:976
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -3371,7 +3388,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:979
 msgid "Distance"
-msgstr ""
+msgstr "Vzdialenosť"
 
 #: src/ui_configurationDialog.h:981
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -3722,15 +3739,15 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Skript"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Výstup"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Pozícia kurzora"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
@@ -3738,7 +3755,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3775,12 +3792,12 @@ msgstr "Značky kompasu"
 msgid "Displays compass bearing marks along the horizon"
 msgstr "Zobrazenie značiek azimutu pozdĺž horizontu"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 msgid "Compass marks"
 msgstr "Značky kompasu"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:865
+#: plugins/Oculars/src/ui_ocularDialog.h:858
 msgid "Oculars"
 msgstr "Okuláre"
 
@@ -3847,7 +3864,7 @@ msgid "&Reset rotation"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1203
-#: plugins/Oculars/src/ui_ocularDialog.h:867
+#: plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "Okulárové zobrazenie"
 
@@ -3857,7 +3874,7 @@ msgstr "Ponuka okulárov"
 
 #: plugins/Oculars/src/Oculars.cpp:1235
 msgid "Crosshairs"
-msgstr ""
+msgstr "Nitkový kríž"
 
 #: plugins/Oculars/src/Oculars.cpp:1243
 msgid "Image sensor frame"
@@ -4015,7 +4032,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
 #, qt-format
 msgid "Rotation: %1"
-msgstr ""
+msgstr "Otočenie: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 msgid "Magnification provided by these binoculars"
@@ -4043,6 +4060,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Version"
 msgstr "Verzia"
 
@@ -4095,7 +4113,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
-msgstr ""
+msgstr "Klávesové skratky"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
@@ -4114,131 +4132,131 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:861
 msgid "Enable only if an object is selected"
 msgstr "Povoliť, len ak je vybraný nejaký objekt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:869
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Scale image circle"
 msgstr "Zmeniť mierku obrazového kruhu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:863
 msgid "Key mappings"
 msgstr "Priradenie klávesov"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Toggle ocular view:"
 msgstr "Prepnúť zobrazenie okulára:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Open pop-up navigation menu:"
 msgstr "Otvoriť vyskakovacie navigačné menu:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Interface"
 msgstr "Rozhranie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "On-screen control panel"
 msgstr "Ovládací panel na obrazovke"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
-msgstr ""
+msgstr "Všeobecný"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Eyepieces"
 msgstr "Okuláre"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
-#: plugins/Oculars/src/ui_ocularDialog.h:888
-#: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:226
+#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Add"
 msgstr "Pridať"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
-#: plugins/Oculars/src/ui_ocularDialog.h:890
-#: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Satellites/src/ui_satellitesDialog.h:691
+#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Názov:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Focal length:"
-msgstr ""
+msgstr "Hĺbka zaostrenia:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Sensors"
 msgstr "Snímače"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Telescopes"
 msgstr "Teleskopy"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Diameter:"
-msgstr ""
+msgstr "Priemer:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Horizontal flip"
 msgstr "Horizontálne preklopenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Vertical flip"
 msgstr "Vertikálne preklopenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
@@ -4246,12 +4264,13 @@ msgstr "Vertikálne preklopenie"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "O module"
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Satellites"
 msgstr "Satelity"
 
@@ -4488,7 +4507,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 msgid "Links"
-msgstr ""
+msgstr "Linky"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
@@ -4582,7 +4601,7 @@ msgid "Next update: %1 hours"
 msgstr "Ďalšia aktualizácia: %1 hodín"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
@@ -4592,7 +4611,7 @@ msgstr "Ďalšia aktualizácia: %1 hodín"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Update now"
-msgstr ""
+msgstr "Aktualizovať teraz"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:374
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
@@ -4645,7 +4664,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid "Downloading data..."
-msgstr ""
+msgstr "Sťahujem dáta..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid ""
@@ -4673,16 +4692,16 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:648
-#: plugins/Satellites/src/ui_satellitesDialog.h:649
+#: plugins/Satellites/src/ui_satellitesDialog.h:633
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Satellites Configuration"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:651
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Update TLE lists from Internet sources"
 msgstr "Aktualizácia zoznamov TLE z internetových zdrojov"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:637
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
@@ -4690,7 +4709,7 @@ msgstr "Aktualizácia zoznamov TLE z internetových zdrojov"
 msgid "Update from Internet sources"
 msgstr "Aktualizovať z internetových zdrojov"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:653
+#: plugins/Satellites/src/ui_satellitesDialog.h:638
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
@@ -4698,175 +4717,178 @@ msgstr "Aktualizovať z internetových zdrojov"
 msgid "Last update:"
 msgstr "Posledná aktualizácia:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
+#: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr "Frekvencia aktualizácií (v hodinách):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:656
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
-msgstr ""
+msgstr "Štítky"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:658
+#: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Orbit lines"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Number of  segments:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:667
-#: plugins/Satellites/src/ui_satellitesDialog.h:671
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Duration of a single segment in seconds"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:669
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Segment length (s):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Fade length:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
+#: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
+#: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Restore default settings"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:681
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
+#: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Save settings as default"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:667
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
+#: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Settings"
-msgstr ""
+msgstr "Nastavenia"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:684
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Display the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Displayed"
-msgstr ""
+msgstr "Zobrazené"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:693
+#: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
-msgstr ""
+msgstr "Opis:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:694
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Groups:"
-msgstr ""
+msgstr "Skupiny:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:696
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid "Comma separated list of groups"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "TLE data:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "NORAD two line element orbit data"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:703
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove the selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:706
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Add more satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Save changes"
-msgstr ""
+msgstr "Uložiť zmeny"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Add new source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
+#: plugins/Satellites/src/ui_satellitesDialog.h:707
 msgid "Remove selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:725
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Sources"
-msgstr ""
+msgstr "Zdroje"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 msgid "More Satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 msgid "Get data from update sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:221
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:215
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Abort download"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:222
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 msgid "New satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:223
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:217
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Mark all"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:224
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Mark none"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:225
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Discard"
-msgstr ""
+msgstr "Odstrániť"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -4904,28 +4926,32 @@ msgid "Configure Telescope"
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+#: plugins/Observability/src/Observability.cpp:599
+#: plugins/Observability/src/Observability.cpp:600
+#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:603
 msgid "N/A"
-msgstr ""
+msgstr "Neznáme"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Spúšťanie"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Pripájanie"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "Pripojený"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "Odpojené"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Zastavené"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
@@ -4941,15 +4967,15 @@ msgstr "Verzia %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -4992,12 +5018,12 @@ msgstr ""
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
-msgstr ""
+msgstr "virtuálny"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 msgid "Start"
-msgstr ""
+msgstr "Štart"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
@@ -5005,7 +5031,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
-msgstr ""
+msgstr "Zastaviť"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
@@ -5013,7 +5039,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "Pripojený"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
@@ -5021,7 +5047,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "Odpojiť"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
@@ -5029,7 +5055,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr ""
+msgstr "Vyberte priečinok"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -5160,7 +5186,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
-msgstr ""
+msgstr "Nastavenie zariadenia"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
@@ -5168,15 +5194,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
-msgstr ""
+msgstr "Model zariadenia:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
-msgstr ""
+msgstr "Nastavenia pripojenia"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "Hostiteľ:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
@@ -5185,7 +5211,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "TCP port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
@@ -5221,7 +5247,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurovať"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Add a new telescope"
@@ -5233,7 +5259,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "GUI"
-msgstr ""
+msgstr "Grafické"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope labels"
@@ -5249,7 +5275,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Files"
-msgstr ""
+msgstr "Súbory"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Log telescope driver messages to files"
@@ -5280,62 +5306,62 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "January"
-msgstr ""
+msgstr "január"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "February"
-msgstr ""
+msgstr "február"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "March"
-msgstr ""
+msgstr "marec"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "April"
-msgstr ""
+msgstr "apríl"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "May"
-msgstr ""
+msgstr "máj"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "June"
-msgstr ""
+msgstr "jún"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "July"
-msgstr ""
+msgstr "júl"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "August"
-msgstr ""
+msgstr "august"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "September"
-msgstr ""
+msgstr "september"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "October"
-msgstr ""
+msgstr "október"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "November"
-msgstr ""
+msgstr "november"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "December"
-msgstr ""
+msgstr "december"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
@@ -5355,35 +5381,35 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "Posledný týždeň"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "Nedeľa"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "Pondelok"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "Utorok"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "Streda"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "Štvrtok"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "Piatok"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "Sobota"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
@@ -5398,7 +5424,7 @@ msgstr "Definovanie časového pásma"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "Time zone"
-msgstr ""
+msgstr "Časová zóna"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
@@ -5500,7 +5526,7 @@ msgstr "Formát zobrazenia času"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
-msgstr ""
+msgstr "Systémové predvolené"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
@@ -5525,7 +5551,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "mm-dd-rrrr"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:85
 msgid ""
@@ -5558,7 +5584,7 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "system"
-msgstr ""
+msgstr "systém"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:179
@@ -5567,15 +5593,15 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "mmddyyyy"
-msgstr ""
+msgstr "mmddrrrr"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ddmmrrrr"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "yyyymmdd"
-msgstr ""
+msgstr "rrrrmmdd"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:196
@@ -5597,7 +5623,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Colors"
-msgstr ""
+msgstr "Farby"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Nebula names"
@@ -5613,7 +5639,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
-msgstr ""
+msgstr "Efekty"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Manual zoom"
@@ -5658,7 +5684,7 @@ msgstr ""
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:465
 msgid "Administration"
-msgstr ""
+msgstr "Administrácia"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Load default configuration"
@@ -5670,7 +5696,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Shut down"
-msgstr ""
+msgstr "Vypnúť"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:524
 msgid "[no TUI node]"
@@ -5678,11 +5704,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr ""
+msgstr "Zapnúť"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
-msgstr ""
+msgstr "Vypnúť"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -5735,7 +5761,7 @@ msgstr ""
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
 msgid "website"
-msgstr ""
+msgstr "webová stránka"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
@@ -5751,68 +5777,68 @@ msgstr ""
 msgid "Solar System Editor plug-in"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:512
 msgid "Import data"
-msgstr ""
+msgstr "Importovať dáta"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroidy"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Comets"
-msgstr ""
+msgstr "Kométy"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
-msgstr ""
+msgstr "Zoznamy"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -5821,19 +5847,19 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add objects"
 msgstr ""
 
@@ -5844,7 +5870,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
-msgstr ""
+msgstr "Varovanie"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
@@ -5860,7 +5886,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Vrátiť štandardné hodnoty"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
@@ -5882,7 +5908,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Configuration file"
-msgstr ""
+msgstr "Konfiguračný súbor"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Add new Solar System objects"
@@ -5894,7 +5920,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
-msgstr ""
+msgstr "Slnečná sústava"
 
 #: plugins/Supernovae/src/Supernovae.cpp:70
 msgid "Historical Supernovae"
@@ -6030,7 +6056,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
-msgstr ""
+msgstr "kvazar"
 
 #: plugins/Quasars/src/Quasar.cpp:137
 #, qt-format
@@ -6109,12 +6135,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:152
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
@@ -6157,7 +6183,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Pulsars/src/Pulsar.cpp:203
 #: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Pulsars/src/Pulsar.cpp:206
@@ -6215,7 +6241,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Poznámka"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -6290,12 +6316,12 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Mass"
-msgstr ""
+msgstr "Hmotnosť"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:212
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Radius"
-msgstr ""
+msgstr "Polomer"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:216
 #, qt-format
@@ -6308,11 +6334,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Period"
-msgstr ""
+msgstr "Obdobie"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "days"
-msgstr ""
+msgstr "dní"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
@@ -6376,6 +6402,388 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:68
+msgid "Observability analysis"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:71
+msgid ""
+"Reports an analysis of source observability (rise, set, and transit times), "
+"as well as the epochs of year when the source is best observed. It assumes "
+"that a source is observable if it is above the horizon during a fraction of "
+"the night. The plugin also gives the day for largest separation from the Sun "
+"and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
+"the quantities shown by this script is given in the 'About' tab of the "
+"configuration window"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Jan"
+msgstr "jan"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Feb"
+msgstr "feb"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Mar"
+msgstr "mar"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Apr"
+msgstr "apr"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "May"
+msgstr "máj"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Jun"
+msgstr "jún"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Jul"
+msgstr "júl"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Aug"
+msgstr "aug"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Sep"
+msgstr "sep"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Oct"
+msgstr "okt"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Nov"
+msgstr "nov"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "Dec"
+msgstr "dec"
+
+#: plugins/Observability/src/Observability.cpp:224
+msgid "Observability"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:230
+msgid "Observability configuration window"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:470
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:513
+msgid "h"
+msgstr "h"
+
+#: plugins/Observability/src/Observability.cpp:470
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:513
+msgid "m"
+msgstr "m"
+
+#: plugins/Observability/src/Observability.cpp:470
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:513
+msgid "s"
+msgstr "s"
+
+#: plugins/Observability/src/Observability.cpp:480
+#, qt-format
+msgid "Sets at %1 (in %2)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:481
+#, qt-format
+msgid "Rose at %1 (%2 ago)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:491
+#, qt-format
+msgid "Set at %1 (%2 ago)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:492
+#, qt-format
+msgid "Rises at %1 (in %2)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:496
+msgid "Circumpolar."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:496
+msgid "No rise."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:518
+#, qt-format
+msgid "Culminates at %1 (in %2) at %3 deg."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:522
+#, qt-format
+msgid "Culminated at %1 (%2 ago) at %3 deg."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:563
+msgid "Source is not observable."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:564
+msgid "No Acronychal nor Cosmical rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:581
+msgid "Greatest elongation: "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:584
+msgid "Largest Sun separation: "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:587
+#, qt-format
+msgid " (at %1 deg.)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:605
+msgid "Acronychal rise/set"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:605
+msgid "No Acronychal rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:606
+msgid "Cosmical rise/set"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:606
+msgid "No Cosmical rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:652
+msgid "Observable during the whole year."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:656
+msgid "Not observable at dark night."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:661
+msgid "Nights above horizon: "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:679
+msgid "TODAY:"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:688
+msgid "THIS YEAR:"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:1432
+#, qt-format
+msgid "Previous Full Moon: %1 %2 at %3:%4. "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:1437
+#, qt-format
+msgid "Next Full Moon: %1 %2 at %3:%4. "
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
+msgid "Observability Plug-in"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+msgid ""
+"Plugin that analyzes the observability of the selected source (or the screen "
+"center, if no source is selected). The plugin can show rise, transit, and "
+"set times, as well as the best epoch of the year (i.e., largest angular "
+"separation from the Sun), the date range when the source is above the "
+"horizon at dark night, and the dates of Acronychal and Cosmical "
+"rise/set.<br>Ephemeris of the Solar-System objects and parallax effects are "
+"taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
+"for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
+msgid "Explanation of some parameters"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+msgid "Sun altitude at twilight:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+msgid ""
+"Any celestial object will be considered visible when the Sun is below this "
+"altitude. The altitude at astronomical twilight ranges usually between -12 "
+"and -18 degrees. This parameter is only used for the estimate of the range "
+"of observable epochs (see below)."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+msgid "Today ephemeris:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+msgid ""
+"Self-explanatory. The program will show the rise, set, and culmination "
+"(transit) times. The exact times for these ephemeris are given in two ways: "
+"as time spans (referred to the current time) and as clock hours (in local "
+"time)."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+msgid "Acronychal/Cosmical rise/set:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+msgid ""
+"The Acronychal rise (or set) of an object happens when the object rises (or "
+"sets) just when the Sun sets (or rises), respectively. The exact dates of "
+"these ephemeris depend on the Observer's location. The dates between the "
+"Acronychal set and rise are those when the altitude of the celestial object "
+"uses to be high when the Sun is well below the horizon (hence the object can "
+"be well observed). On the contrary, the Cosmical rise (or set) happens when "
+"both, the object and the Sun, rise (or set) simultaneously. It is obvious "
+"that the source is hardly observable (or not observable at all) in the dates "
+"between Cosmical set and rise."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid "Largest Sun separation:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid ""
+"Happens when the angular separation between the Sun and the celestial object "
+"are maximum. In most cases, this is equivalent to say that the Equatorial "
+"longitudes of the Sun and the object differ by 180 degrees, so the Sun is in "
+"opposition to the object. When an object is at its maximum possible angular "
+"separation from the Sun (no matter if it is a planet or a star), it "
+"culminates roughly at midnight, and on the darkest possible area of the Sky "
+"at that declination. Hence, that is the 'best' night to observe a particular "
+"object."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+msgid "Nights with source above horizon:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+msgid ""
+"The program computes the range of dates when the celestial object is above "
+"the horizon at least during one moment of the night. By 'night', the program "
+"considers the time span when the Sun altitude is below that of the twilight "
+"(which can be set by the user; see above). When the objects are fixed on the "
+"sky (or are exterior planets), the range of observable epochs for the "
+"current year can have two possible forms: either a range from one date to "
+"another (e.g., 20 Jan to 15 Sep) or in two steps (from 1 Jan to a given date "
+"and from another date to 31 Dec). In the first case, the first date (20 Jan "
+"in our example) shall be close to the so-called 'Heliacal rise of a star' "
+"and the second date (15 Sep in our example) shall be close to the 'Heliacal "
+"set'. In the second case (e.g., a range in the form 1 Jan to 20 May and 21 "
+"Sep to 31 Dec), the first date (20 May in our example) would be close to the "
+"Heliacal set and the second one (21 Sep in our example) to the Heliacal "
+"rise. More exact equations to estimate the Heliacal rise/set of stars and "
+"planets (which will not depend on the mere input of a twilight Sun elevation "
+"by the user) will be implemented in future versions of this plugin."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+msgid "Full Moon:"
+msgstr "Spln"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+msgid ""
+"When the Moon is selected, the program can compute the exact closest dates "
+"of the Moon's opposition to the Sun."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
+msgid "deg."
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:333
+msgid "Observability Configuration"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:334
+msgid "Observability Plug-in Configuration"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:336
+msgid "Showing Options"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:337
+msgid "Today's ephemeris (rise, set, and transit times)"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:338
+msgid "Dates of Acronychal and Cosmical rise/set"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:339
+msgid "Date of largest separation to the Sun"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:340
+msgid "Nights with the source above horizon"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:341
+msgid "Dates of previous and next Full Moon"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:344
+msgid "Font color and size"
+msgstr "Farba a veľkosť písma"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+msgid "Red"
+msgstr "Červená"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+msgid "Green"
+msgstr "Zelená"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+msgid "Blue"
+msgstr "Modrá"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+msgid "Font Size"
+msgstr "Veľkosť písma"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+msgid "Sun altitude at twilight"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+msgid "0 deg."
 msgstr ""
 
 #~ msgid "Cardinal Points"
