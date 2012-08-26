@@ -511,7 +511,7 @@ void TextUserInterface::draw(StelCore* core)
 	int x = 0, y = 0;
 	int xVc = 0, yVc = 0;
 	int pixOffset = 15;
-	int fovOffset = 0;
+	int fovOffsetX = 0, fovOffsetY=0;
 	bool fovMaskDisk = false;
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -530,7 +530,8 @@ void TextUserInterface::draw(StelCore* core)
 		StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
 		xVc = projParams.viewportCenter[0];
 		yVc = projParams.viewportCenter[1];
-		fovOffset = projParams.viewportFovDiameter/(2*std::sqrt(2));
+		fovOffsetX = projParams.viewportFovDiameter*std::sin(20)/2;
+		fovOffsetY = projParams.viewportFovDiameter*std::cos(20)/2;
 	}
 	else 
 	{
@@ -541,8 +542,8 @@ void TextUserInterface::draw(StelCore* core)
 	{
 		int text_x = x + pixOffset, text_y = y + pixOffset;
 		if (fovMaskDisk) {
-			text_x = xVc - fovOffset + pixOffset;
-			text_y = yVc - fovOffset + pixOffset;
+			text_x = xVc - fovOffsetX + pixOffset;
+			text_y = yVc - fovOffsetY + pixOffset;
 		}
 			
 		QString tuiText = q_("[no TUI node]");
@@ -565,8 +566,8 @@ void TextUserInterface::draw(StelCore* core)
                        +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd);
 		 
 		if (fovMaskDisk) {
-			text_x = xVc + fovOffset - pixOffset;
-			text_y = yVc - fovOffset + pixOffset;
+			text_x = xVc + fovOffsetY - pixOffset;
+			text_y = yVc - fovOffsetX + pixOffset;
 		}
 
 		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
@@ -578,18 +579,23 @@ void TextUserInterface::draw(StelCore* core)
 	if (tuiObjInfo) 
 	{
 		QString objInfo = ""; 
+		StelObject::InfoStringGroup tuiInfo(StelObject::Name|StelObject::CatalogNumber
+				|StelObject::Distance|StelObject::PlainText);
 		int text_x = x + xVc*4/3, text_y = y + pixOffset; 
 
 		QList<StelObjectP> selectedObj = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
 		if (selectedObj.isEmpty()) {
 			objInfo = "";	
 		} else {
-			objInfo = selectedObj[0]->getNameI18n();
+			objInfo = selectedObj[0]->getInfoString(core, tuiInfo);
+			objInfo.replace("\n"," ");
+			objInfo.replace("Distance:"," ");
+			objInfo.replace("Light Years","ly");
 		}
 
 		if (fovMaskDisk) {
-			text_x = xVc + fovOffset - pixOffset;
-			text_y = yVc + fovOffset - pixOffset;
+			text_x = xVc + fovOffsetX - pixOffset;
+			text_y = yVc + fovOffsetY - pixOffset;
 		}
 
 		StelPainter painter(core->getProjection(StelCore::FrameJ2000));
