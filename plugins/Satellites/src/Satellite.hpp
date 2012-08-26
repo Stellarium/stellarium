@@ -112,6 +112,7 @@ public:
 	bool isNew() const {return newlyAdded;}
 	
 	static QString extractInternationalDesignator(const QString& tle1);
+	static int extractLaunchYear(const QString& tle1);
 
 public:
 	void enableDrawOrbit(bool b);
@@ -143,6 +144,8 @@ private:
 	QString description;
 	//! International Designator / COSPAR designation / NSSDC ID
 	QString internationalDesignator;
+	//! JD for Jan 1st of launch year, extracted from TLE (will be for 1957-1-1 if extraction fails). Used to hide objects before launch year.
+	double jdLaunchYearJan1;
 	//! Contains the J2000 position 
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;

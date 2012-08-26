@@ -11,8 +11,8 @@ ENDIF()
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
-SET(STELLARIUM_MINOR "11")
-SET(STELLARIUM_PATCH "4")
+SET(STELLARIUM_MINOR "12")
+SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
@@ -402,7 +402,14 @@ ENDIF()
 
 ########### Macosx Bundling ###############
 IF(APPLE)
-ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+ADD_CUSTOM_TARGET(
+  macosx_bundle
+  bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR}
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+  COMMENT "making the macosx bundle."
+  VERBATIM
+)
 ENDIF()
 
 
