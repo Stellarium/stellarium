@@ -76,7 +76,8 @@ public:
 	~ShortcutsDialog();
 
 	// higlight items that have collisions with current lineEdits' state according to css
-	void paintCollisions(QList<QTreeWidgetItem*> items);
+	// Note: previous collisions aren't redrawn
+	void drawCollisions();
 
 public slots:
 	// restore colors of all items it TreeWidget to defaults
@@ -84,7 +85,10 @@ public slots:
 	void retranslate();
 	// ititialize editors state when current item changed
 	void initEditors();
-	void handleCollisions();
+	// checks whether one QKeySequence is prefix of another
+	bool prefixMatchKeySequence(QKeySequence ks1, QKeySequence ks2);
+	QList<QTreeWidgetItem*> findCollidingItems(QKeySequence ks);
+	void handleCollisions(ShortcutLineEdit* currentEdit);
 	// called when editors' state changed
 	void handleChanges();
 	// called when apply button clicked
@@ -107,6 +111,9 @@ private:
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
+
+	// apply style changes, see http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
+	void polish();
 
 	QTreeWidgetItem* updateGroup(StelShortcutGroup* group);
 
