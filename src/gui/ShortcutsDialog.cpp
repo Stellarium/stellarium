@@ -143,10 +143,9 @@ ShortcutsDialog::~ShortcutsDialog()
 	delete ui; ui = NULL;
 }
 
-void ShortcutsDialog::paintCollisions(QList<QTreeWidgetItem *> items)
+void ShortcutsDialog::drawCollisions()
 {
-	collisionItems.append(items);
-	foreach(QTreeWidgetItem* item, items)
+	foreach(QTreeWidgetItem* item, collisionItems)
 	{
 		// change colors of all columns for better visibility
 		item->setForeground(0, Qt::red);
@@ -189,7 +188,6 @@ void ShortcutsDialog::initEditors()
 		ui->altShortcutEdit->setContents(
 					ui->shortcutsTreeWidget->currentItem()->
 					data(2, Qt::DisplayRole).value<QKeySequence>());
-		handleChanges();
 	}
 	else {
 		// item is group, not shortcut
@@ -199,87 +197,84 @@ void ShortcutsDialog::initEditors()
 		ui->primaryShortcutEdit->clear();
 		ui->altShortcutEdit->clear();
 	}
+	polish();
 }
 
-void ShortcutsDialog::handleCollisions()
+bool ShortcutsDialog::prefixMatchKeySequence(QKeySequence ks1, QKeySequence ks2)
 {
-	QString primText = ui->primaryShortcutEdit->text();
-	QString altText = ui->altShortcutEdit->text();
+	if (ks1.isEmpty() || ks2.isEmpty())
+	{
+		return false;
+	}
+	for (uint i = 0; i < qMin(ks1.count(), ks2.count()); ++i)
+	{
+		if (ks1[i] != ks2[i])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+QList<QTreeWidgetItem *> ShortcutsDialog::findCollidingItems(QKeySequence ks)
+{
+	QList<QTreeWidgetItem *> res;
+	QTreeWidgetItemIterator it(ui->shortcutsTreeWidget);
+	while (*it)
+	{
+		if (prefixMatchKeySequence(ks, QKeySequence((*it)->data(1, Qt::DisplayRole).toString())) ||
+				prefixMatchKeySequence(ks, QKeySequence((*it)->data(2, Qt::DisplayRole).toString())))
+		{
+			res.push_back(*it);
+		}
+		++it;
+	}
+	return res;
+}
+
+void ShortcutsDialog::handleCollisions(ShortcutLineEdit *currentEdit)
+{
+	qDebug() << "handle collisions";
 	// clear previous collisions
 	resetCollisions();
-	QList<QTreeWidgetItem*> collisionList;
-	bool collisionInPrimeEdit = false;
-	bool collisionInAltEdit = false;
-	if (!primText.isEmpty())
+	// handle collisions
+	QString text = currentEdit->text();
+	collisionItems = findCollidingItems(QKeySequence(text));
+	qDebug() << collisionItems << text;
+	if (!collisionItems.isEmpty())
 	{
-		// check in primary shortcuts
-		collisionList.append(ui->shortcutsTreeWidget->findItems(primText, Qt::MatchFixedString | Qt::MatchRecursive, 1));
-		// check in alternative shortcuts
-		collisionList.append(ui->shortcutsTreeWidget->findItems(primText, Qt::MatchFixedString | Qt::MatchRecursive, 2));
-		// remove current item
-		collisionList.removeOne(ui->shortcutsTreeWidget->currentItem());
-	}
-	if (!collisionList.isEmpty())
-	{
-		collisionInPrimeEdit = true;
-		paintCollisions(collisionList);
-	}
-	// clear for proper handling for alternative edit
-	collisionList.clear();
-	if (!altText.isEmpty())
-	{
-		// check in primary shortcuts
-		collisionList.append(ui->shortcutsTreeWidget->findItems(altText, Qt::MatchFixedString | Qt::MatchRecursive, 1));
-		// check in alternative shortcuts
-		collisionList.append(ui->shortcutsTreeWidget->findItems(altText, Qt::MatchFixedString | Qt::MatchRecursive, 2));
-		// remove current item
-		collisionList.removeOne(ui->shortcutsTreeWidget->currentItem());
-	}
-	if (!collisionList.isEmpty())
-	{
-		collisionInAltEdit = true;
-		paintCollisions(collisionList);
-	}
-	if (collisionInPrimeEdit || collisionInAltEdit)
-	{
+		drawCollisions();
 		ui->applyButton->setEnabled(false);
 		// scrolling to first collision item
 		ui->shortcutsTreeWidget->scrollToItem(collisionItems.first());
+		currentEdit->setProperty("collision", true);
 	}
 	else
 	{
 		// scrolling back to current item
 		ui->shortcutsTreeWidget->scrollToItem(ui->shortcutsTreeWidget->currentItem());
+		currentEdit->setProperty("collision", false);
 	}
-	ui->primaryShortcutEdit->setProperty("collision", collisionInPrimeEdit);
-	ui->altShortcutEdit->setProperty("collision", collisionInAltEdit);
 }
 
 void ShortcutsDialog::handleChanges()
 {
+	// work only with changed editor
+	ShortcutLineEdit* currentEditor = static_cast<ShortcutLineEdit*>(sender());
+	bool isPrimary = (currentEditor == ui->primaryShortcutEdit);
 	// updating clear buttons
-	if (ui->primaryShortcutEdit->isEmpty())
+	if (isPrimary)
 	{
-		ui->primaryBackspaceButton->setEnabled(false);
+		ui->primaryBackspaceButton->setEnabled(!currentEditor->isEmpty());
 	}
 	else
 	{
-		ui->primaryBackspaceButton->setEnabled(true);
-	}
-	if (ui->altShortcutEdit->isEmpty())
-	{
-		ui->altBackspaceButton->setEnabled(false);
-	}
-	else
-	{
-		ui->altBackspaceButton->setEnabled(true);
+		ui->altBackspaceButton->setEnabled(!currentEditor->isEmpty());
 	}
 	// updating apply button
-	QString primText = ui->primaryShortcutEdit->text();
-	QString altText = ui->altShortcutEdit->text();
 	if (ui->shortcutsTreeWidget->currentItem() == NULL ||
-			(primText == ui->shortcutsTreeWidget->currentItem()->text(1) &&
-			 altText == ui->shortcutsTreeWidget->currentItem()->text(2)))
+			(isPrimary && currentEditor->text() == ui->shortcutsTreeWidget->currentItem()->text(1)) ||
+			(!isPrimary && currentEditor->text() == ui->shortcutsTreeWidget->currentItem()->text(2)))
 	{
 		// nothing to apply
 		ui->applyButton->setEnabled(false);
@@ -288,12 +283,8 @@ void ShortcutsDialog::handleChanges()
 	{
 		ui->applyButton->setEnabled(true);
 	}
-	handleCollisions();
-	// apply style changes, see http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
-	ui->primaryShortcutEdit->style()->unpolish(ui->primaryShortcutEdit);
-	ui->primaryShortcutEdit->style()->polish(ui->primaryShortcutEdit);
-	ui->altShortcutEdit->style()->unpolish(ui->altShortcutEdit);
-	ui->altShortcutEdit->style()->polish(ui->altShortcutEdit);
+	handleCollisions(currentEditor);
+	polish();
 }
 
 void ShortcutsDialog::applyChanges() const
@@ -347,6 +338,14 @@ void ShortcutsDialog::createDialogContent()
 
 void ShortcutsDialog::updateText()
 {
+}
+
+void ShortcutsDialog::polish()
+{
+	ui->primaryShortcutEdit->style()->unpolish(ui->primaryShortcutEdit);
+	ui->primaryShortcutEdit->style()->polish(ui->primaryShortcutEdit);
+	ui->altShortcutEdit->style()->unpolish(ui->altShortcutEdit);
+	ui->altShortcutEdit->style()->polish(ui->altShortcutEdit);
 }
 
 QTreeWidgetItem *ShortcutsDialog::updateGroup(StelShortcutGroup *group)
