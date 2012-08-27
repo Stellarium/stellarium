@@ -83,7 +83,7 @@
 //!
 //! Shader creation example:
 //!
-//! @code 
+//! @code
 //! // renderer is a StelRenderer*
 //! if(renderer->isGLSLSupported())
 //! {
