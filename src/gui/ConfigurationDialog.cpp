@@ -379,7 +379,9 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	if (ui->checkBoxExtra2->isChecked())
 		flags |= StelObject::Extra2;
 	if (ui->checkBoxExtra3->isChecked())
-		flags |= StelObject::Extra3;
+		flags |= StelObject::Extra3;	
+	if (ui->checkBoxGalacticCoordJ2000->isChecked())
+		flags |= StelObject::GalCoordJ2000;
 	
 	gui->setInfoTextFilters(flags);
 }
@@ -554,6 +556,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Extra2));
 		conf->setValue("flag_show_extra3",
 		               (bool) (flags & StelObject::Extra3));
+		conf->setValue("flag_show_galcoordj2000",
+			       (bool) (flags & StelObject::GalCoordJ2000));
 		conf->endGroup();
 	}
 
@@ -1029,6 +1033,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxExtra1->setChecked(flags & StelObject::Extra1);
 	ui->checkBoxExtra2->setChecked(flags & StelObject::Extra2);
 	ui->checkBoxExtra3->setChecked(flags & StelObject::Extra3);
+	ui->checkBoxGalacticCoordJ2000->setChecked(flags & StelObject::GalCoordJ2000);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
