@@ -237,7 +237,7 @@ struct TextParams
 	StelProjectorP projector_;
 };
 
-//! Handles all graphics related functionality.
+//! Main class of the @ref renderer "Renderer" subsystem. Handles all drawing functionality.
 //! 
 //! @note This is an interface. It should have only functions, no data members,
 //!       as it might be used in multiple inheritance.
@@ -389,8 +389,6 @@ public:
 
 	//! Draw text with specified parameters.
 	//!
-	//! @param params Parameters of the text to draw.
-	//!
 	//! Parameters are specified by a builder-style struct.
 	//!
 	//! Examples:
@@ -405,6 +403,8 @@ public:
 	//! // Rotate by 30 degrees and shift by (8, 4) in rotated direction.
 	//! renderer->drawText(TextParams(16, 16 "Hello World!").angleDegrees(30.0f).shift(8.0f, 4.0f));
 	//! @endcode
+	//!
+	//! @param params Parameters of the text to draw.
 	//!
 	//! @see TextParams
 	virtual void drawText(const TextParams& params) = 0;
