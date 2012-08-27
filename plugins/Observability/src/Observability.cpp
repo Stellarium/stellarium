@@ -668,11 +668,10 @@ void Observability::draw(StelCore* core)
 
 // Print all results:
 
-
 	int spacing = (int) (1.3* ( (double) fontSize));  // between lines
 	int spacing2 = 6*fontSize;  // between daily and yearly results
-	int yLine = 8*fontSize+80;
-	int xLine = 50;
+	int yLine = 8*fontSize+110;
+	int xLine = 80;
 
 	if (show_Today) 
 	{
