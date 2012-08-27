@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
 #include <QDialog>
 
 #include "StelApp.hpp"
@@ -234,13 +233,11 @@ QList<QTreeWidgetItem *> ShortcutsDialog::findCollidingItems(QKeySequence ks)
 
 void ShortcutsDialog::handleCollisions(ShortcutLineEdit *currentEdit)
 {
-	qDebug() << "handle collisions";
 	// clear previous collisions
 	resetCollisions();
 	// handle collisions
 	QString text = currentEdit->text();
 	collisionItems = findCollidingItems(QKeySequence(text));
-	qDebug() << collisionItems << text;
 	if (!collisionItems.isEmpty())
 	{
 		drawCollisions();
@@ -260,7 +257,7 @@ void ShortcutsDialog::handleCollisions(ShortcutLineEdit *currentEdit)
 void ShortcutsDialog::handleChanges()
 {
 	// work only with changed editor
-	ShortcutLineEdit* currentEditor = static_cast<ShortcutLineEdit*>(sender());
+	ShortcutLineEdit* currentEditor = qobject_cast<ShortcutLineEdit*>(sender());
 	bool isPrimary = (currentEditor == ui->primaryShortcutEdit);
 	// updating clear buttons
 	if (isPrimary)
