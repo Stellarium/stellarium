@@ -248,11 +248,20 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 	}
 
 	// Draw the real texture for this image
-	const float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
+	const float ad_lum =
+		(luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
 	Vec4f color;
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
-		renderer->setBlendMode(BlendMode_Alpha);
+		// This is a bit weird, but rewritten to mirror pre-refactor code
+		if(!alphaBlend)
+		{
+			renderer->setBlendMode(BlendMode_Alpha);
+		}
+		else
+		{
+			renderer->setBlendMode(BlendMode_Add);
+		}
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
@@ -261,6 +270,10 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 		color.set(ad_lum,ad_lum,ad_lum, 1.);
 	}
 
+	color[0] = std::min(color[0], 1.0f);
+	color[1] = std::min(color[1], 1.0f);
+	color[2] = std::min(color[2], 1.0f);
+	color[3] = std::min(color[3], 1.0f);
 	renderer->setGlobalColor(color);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
