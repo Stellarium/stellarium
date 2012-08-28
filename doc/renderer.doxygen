@@ -39,6 +39,7 @@ us used is decided at startup without affecting drawing code.
 
 @section outline API outline
 
+@image html renderer-api-overview.png
 
 @subsection stelrenderer StelRenderer
 
@@ -208,6 +209,7 @@ OpenGL features.
 
 @subsection impl_overview Overview
 
+@image html renderer-implementation-overview.png
 
 Currently there are two Renderer backends: QGL1 and QGL2, based on OpenGL 1.1
 and OpenGL 2.1 respectively. They use Qt's QGL classes for things like context
@@ -416,5 +418,4 @@ StelTextureNew already have, and the frontends would need to store all data
 needed to reconstruct the backends - probably duplicating a lot of data.  If
 a StelRenderer backend would be passed an object constructed by a different
 backend, it would delete the object's backend and replace it with its own.
-
 */
