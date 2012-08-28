@@ -361,6 +361,10 @@ protected:
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				glEnable(GL_BLEND);
 				break;
+			case BlendMode_Multiply:
+				glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+				glEnable(GL_BLEND);
+				break;
 			default:
 				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown blend mode");
 		}
