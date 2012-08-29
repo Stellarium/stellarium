@@ -536,9 +536,13 @@ private:
 	//!
 	//! Splits the string into characters and draws each separately with its own rotation.
 	//!
-	//! @param params  Text drawing parameters.
-	//! @param painter QPainter used for painting to the viewport.
-	void drawTextGravityHelper(const TextParams& params, QPainter& painter);
+	//! @param params    Text drawing parameters.
+	//! @param painter   QPainter used for painting to the viewport.
+	//! @param baseX     Base X coordinate of the text on the screen (before shifting, etc).
+	//! @param baseY     Base Y coordinate of the text on the screen (before shifting, etc).
+	//! @param projector Projector used to project the text to the screen.
+	void drawTextGravityHelper
+		(const TextParams& params, QPainter& painter, const int baseX, const int baseY, StelProjectorP projector);
 
 	//! Get the placeholder texture, lazily loading if it's not loaded yet.
 	StelQGLTextureBackend* getPlaceholderTexture()

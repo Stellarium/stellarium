@@ -154,22 +154,22 @@ struct TextParams
 	//!
 	//! Default values of other parameters are: rotation of 0.0 degrees,
 	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity,
-	//! 2D projection.
+	//! 2D (NULL) projection.
 	TextParams(const float x, const float y, const QString& string)
-		: x_(x)
-		, y_(y)
+		: position_(x, y, 0.0f)
 		, string_(string)
 		, angleDegrees_(0.0f)
 		, xShift_(0.0f)
 		, yShift_(0.0f)
 		, noGravity_(true)
-		, projector_(StelApp::getInstance().getCore()->getProjection2d())
+		, projector_(NULL)
 	{}
 
 	//! Construct TextParams to draw text at a 3D position, using specified projector.
 	//!
-	//! This calculates 2D text position, so it does handle the required parameters 
-	//! (position and string), and also sets the projector. Other parameters are at default values.
+	//! The renderer will project the position to 2D coordinates before drawing.
+	//! The required string parameter is also set, as is the projector.
+	//! Other parameters are at default values.
 	//!
 	//! @param position3D = 3D position of the text.
 	//! @param projector  = Projector to project the 3D position to 2D.
@@ -179,17 +179,14 @@ struct TextParams
 	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity.
 	template<class F>
 	TextParams(Vector3<F>& position3D, StelProjectorP projector, const QString& string)
-		: string_(string)
+		: position_(position3D[0], position3D[1], position3D[2])
+		, string_(string)
 		, angleDegrees_(0.0f)
 		, xShift_(0.0f)
 		, yShift_(0.0f)
 		, noGravity_(true)
 		, projector_(projector)
 	{
-		Vector3<F> win;
-		projector->project(position3D, win);
-		x_ = win[0];
-		y_ = win[1];
 	}
 
 	//! Angle of text rotation in degrees.
@@ -221,10 +218,8 @@ struct TextParams
 		return *this;
 	}
 
-	//! X position of the text.
-	float x_;
-	//! Y position of the text.
-	float y_;
+	//! Position of the text before projection. If projector is NULL, this is the 2D position that needs no more projection.
+	Vec3f position_;
 	//! Text string to draw.
 	QString string_;
 	//! Rotation of the text in degrees.
@@ -235,7 +230,7 @@ struct TextParams
 	float yShift_;
 	//! Don't draw with gravity.
 	bool  noGravity_;
-	//! Projector to use (for most cases, 2D projection).
+	//! Projector to use. If NULL, 2D projector is assumed.
 	StelProjectorP projector_;
 };
 
