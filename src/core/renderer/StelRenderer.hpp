@@ -657,6 +657,12 @@ public:
 	//! e.g. during loading at startup.
 	virtual void swapBuffers() = 0;
 
+	//! Get collected statistics data.
+	//!
+	//! Contents are backend specific - 
+	//! might include thing like vertices per frame, estimated texture memory, etc. .
+	virtual const QMap<QString, double>& getStatistics() const = 0;
+
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
 	//!
