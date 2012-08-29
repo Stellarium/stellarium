@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 20:41+0700\n"
+"POT-Creation-Date: 2012-08-20 14:08+0700\n"
 "PO-Revision-Date: 2012-07-23 00:38+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-11 05:23+0000\n"
-"X-Generator: Launchpad (build 15780)\n"
+"X-Launchpad-Export-Date: 2012-08-21 04:53+0000\n"
+"X-Generator: Launchpad (build 15810)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -63,6 +63,7 @@ msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
+#: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #: plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
@@ -70,6 +71,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
+#: src/core/modules/MinorPlanet.cpp:203 src/core/modules/Comet.cpp:123
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
@@ -113,8 +115,9 @@ msgstr "ไม่มีข้อมูล"
 msgid "Undocumented type"
 msgstr "ยังไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:126
+#: src/core/modules/Planet.cpp:127 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:132
+#: src/core/modules/StarWrapper.cpp:124 plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "โชติมาตรสัมบูรณ์: %1"
@@ -129,12 +132,14 @@ msgstr "พิกัดสุริยวิถีศูนย์โลก (ข�
 msgid "Obliquity (of date): %1"
 msgstr "ความเอียงของสุริยวิถี (ของวัน): %1"
 
-#: src/core/modules/Planet.cpp:151
+#: src/core/modules/Planet.cpp:151 src/core/modules/MinorPlanet.cpp:230
+#: src/core/modules/Comet.cpp:144
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร์ (%2 กม.)"
 
-#: src/core/modules/Planet.cpp:158
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:237
+#: src/core/modules/Comet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "ระยะทาง: %1 หน่วยดาราศาสตร์"
@@ -144,7 +149,7 @@ msgstr "ระยะทาง: %1 หน่วยดาราศาสตร์"
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1, วงแหวน: %2"
 
-#: src/core/modules/Planet.cpp:175
+#: src/core/modules/Planet.cpp:175 src/core/modules/MinorPlanet.cpp:243
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
@@ -168,6 +173,16 @@ msgstr "ดิถี: %1"
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "ส่วนสว่าง: %1%"
+
+#: src/core/modules/MinorPlanet.cpp:192
+#, qt-format
+msgid "Provisional designation: %1"
+msgstr ""
+
+#: src/core/modules/MinorPlanet.cpp:247
+#, qt-format
+msgid "Orbital period: %1 days"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -400,6 +415,7 @@ msgstr "ติดต่อ"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Author"
 msgstr "ผู้สร้าง"
 
@@ -553,12 +569,14 @@ msgstr "ตั้งอัตราการประมวลผลสคริ
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:82 plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 #: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
+#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:231
 msgid "Plugin Key Bindings"
 msgstr "ปุ่มลัดในโปรแกรมเสริม"
 
@@ -2773,6 +2791,7 @@ msgid "Help"
 msgstr "วิธีใช้"
 
 #: src/ui_helpDialogGui.h:267
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "About"
 msgstr "เกี่ยวกับ"
 
@@ -2801,9 +2820,9 @@ msgstr "ใช้เป็นค่าเริ่มต้น"
 msgid "Return to default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:880
-#: plugins/Oculars/src/ui_ocularDialog.h:889
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Delete"
 msgstr "ลบทิ้ง"
 
@@ -3750,12 +3769,12 @@ msgstr "เครื่องหมายแสดงทิศ"
 msgid "Displays compass bearing marks along the horizon"
 msgstr "แสดงแบริงเข็มทิศตามแนวขอบฟ้า"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/CompassMarks/src/CompassMarks.cpp:127
 msgid "Compass marks"
 msgstr "ขีดแสดงมุมทิศ"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:865
+#: plugins/Oculars/src/ui_ocularDialog.h:858
 msgid "Oculars"
 msgstr "เลนส์ใกล้ตา"
 
@@ -3822,7 +3841,7 @@ msgid "&Reset rotation"
 msgstr "&ยกเลิกการหมุน"
 
 #: plugins/Oculars/src/Oculars.cpp:1203
-#: plugins/Oculars/src/ui_ocularDialog.h:867
+#: plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "มุมมองเลนส์ใกล้ตา"
 
@@ -4018,6 +4037,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Version"
 msgstr "รุ่น"
 
@@ -4085,131 +4105,131 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:861
 msgid "Enable only if an object is selected"
 msgstr "เปิดใช้งานเฉพาะเมื่อเลือกวัตถุใดวัตถุหนึ่ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:869
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Scale image circle"
 msgstr "วงกลมมาตราส่วนภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:863
 msgid "Key mappings"
 msgstr "กำหนดแป้นพิมพ์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Toggle ocular view:"
 msgstr "สลับมุมมองเลนส์ใกล้ตา:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Open pop-up navigation menu:"
 msgstr "เปิดเมนูนำทางแบบผุดขึ้น:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Interface"
 msgstr "ส่วนติดต่อกับผู้ใช้"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "On-screen control panel"
 msgstr "แผงควบคุมบนหน้าจอ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "ทั่วไป"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Eyepieces"
 msgstr "เลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
-#: plugins/Oculars/src/ui_ocularDialog.h:888
-#: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:226
+#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Add"
 msgstr "เพิ่ม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
-#: plugins/Oculars/src/ui_ocularDialog.h:890
-#: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Satellites/src/ui_satellitesDialog.h:691
+#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "ชื่อ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "aFOV:"
 msgstr "ขอบเขตภาพปรากฏ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Focal length:"
 msgstr "ความยาวโฟกัส:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Field stop:"
 msgstr "ขั้นช่องจำกัดแสง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Binoculars"
 msgstr "กล้องสองตา"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Sensors"
 msgstr "เซนเซอร์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Resolution x (pixels):"
 msgstr "ความละเอียด x (จุดภาพ):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "Resolution y (pixels):"
 msgstr "ความละเอียด y (จุดภาพ):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "Chip width (mm):"
 msgstr "ความกว้างของชิป (มม.):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Chip height (mm):"
 msgstr "ความสูงของชิป (มม.):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Pixel width (micron):"
 msgstr "ความกว้างจุดภาพ (ไมครอน):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Pixel height (micron):"
 msgstr "ความสูงของจุดภาพ (ไมครอน):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Telescopes"
 msgstr "กล้องโทรทรรศน์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Diameter:"
 msgstr "เส้นผ่านศูนย์กลาง:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Horizontal flip"
 msgstr "พลิกในแนวนอน"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Vertical flip"
 msgstr "พลิกในแนวตั้ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
@@ -4222,7 +4242,7 @@ msgid "About"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Satellites"
 msgstr "ดาวเทียม"
 
@@ -4548,7 +4568,7 @@ msgid "Next update: %1 hours"
 msgstr "อัปเดตครั้งถัดไป: %1 ชั่วโมง"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
@@ -4639,16 +4659,16 @@ msgstr "ไม่สามารถดาวน์โหลดข้อมูล
 msgid "Catalog Number: %1"
 msgstr "หมายเลขในแค็ตตาล็อก: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:648
-#: plugins/Satellites/src/ui_satellitesDialog.h:649
+#: plugins/Satellites/src/ui_satellitesDialog.h:633
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Satellites Configuration"
 msgstr "การตั้งค่าดาวเทียม"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:651
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Update TLE lists from Internet sources"
 msgstr "อัปเดตรายชื่อ TLE จากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:637
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
@@ -4656,7 +4676,7 @@ msgstr "อัปเดตรายชื่อ TLE จากแหล่งข�
 msgid "Update from Internet sources"
 msgstr "อัปเดตจากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:653
+#: plugins/Satellites/src/ui_satellitesDialog.h:638
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
@@ -4664,127 +4684,130 @@ msgstr "อัปเดตจากแหล่งข้อมูลบนอิ
 msgid "Last update:"
 msgstr "อัปเดตครั้งล่าสุด:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
+#: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr "ความถี่ในการอัปเดต (ชั่วโมง):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:656
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
 msgstr "ป้ายชื่อ"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
 msgstr "ขนาดอักษรของชื่อ (จุดภาพ):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:658
+#: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Orbit lines"
 msgstr "เส้นวงโคจร"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Number of segments used to draw the line"
 msgstr "จำนวนของเซกเมนต์ที่จะใช้ในการวาดเส้น"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Number of  segments:"
 msgstr "จำนวนเซกเมนต์:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:667
-#: plugins/Satellites/src/ui_satellitesDialog.h:671
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Duration of a single segment in seconds"
 msgstr "ระยะเวลาของเซกเมนต์หนึ่งในหน่วยวินาที:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:669
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Segment length (s):"
 msgstr "ความยาวของเซกเมนต์ (วินาที):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of segments used to draw each end of the line"
 msgstr "จำนวนเซกเมนต์ที่ใช้วาดแต่ละเส้น"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Fade length:"
 msgstr "ความยาวของส่วนที่จางลง:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
+#: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
+#: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Restore default settings"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:681
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
+#: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Save settings as default"
 msgstr "บันทึกการตั้งค่าต่าง ๆ ให้เป็นค่าเริ่มต้น"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:667
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
+#: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Settings"
 msgstr "ตั้งค่า"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:684
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Display the selected satellite(s)"
 msgstr "แสดงดาวเทียมที่เลือก"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Displayed"
 msgstr "แสดงผล"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "แสดงเส้นวงโคจรสำหรับดาวเทียมที่เลือก"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
 msgstr "วงโคจร"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
 msgstr "หมายเลขในแค็ตตาล็อก:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:693
+#: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
 msgstr "รายละเอียด:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:694
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Groups:"
 msgstr "กลุ่ม:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:696
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid "Comma separated list of groups"
 msgstr "จุลภาคแยกรายชื่อของแต่ละกลุ่ม"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "TLE data:"
 msgstr "ข้อมูล TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "NORAD two line element orbit data"
 msgstr "ข้อมูลวงโคจรแบบ 2 บรรทัดจาก NORAD"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:703
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove the selected satellites"
 msgstr "ลบดาวเทียมที่เลือก"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:706
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Add more satellites"
 msgstr "เพิ่มดาวเทียม"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Save changes"
 msgstr "บันทึกการเปลี่ยนแปลง"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -4792,47 +4815,47 @@ msgstr ""
 "ป้อนหรือแก้ไข URL ของแหล่งข้อมูลที่เลือก การเปลี่ยนแปลงจะถูกบันทึกเมื่อกด "
 "Enter"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Add new source"
 msgstr "เพิ่มแหล่งข้อมูลใหม่"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
+#: plugins/Satellites/src/ui_satellitesDialog.h:707
 msgid "Remove selected source"
 msgstr "ลบแหล่งข้อมูลที่เลือก"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:725
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Sources"
 msgstr "แหล่งข้อมูล"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 msgid "More Satellites"
 msgstr "ดาวเทียมดวงอื่น ๆ"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 msgid "Get data from update sources"
 msgstr "รับข้อมูลที่ทันสมัยจากแหล่งข้อมูล"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:221
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:215
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Abort download"
 msgstr "ยกเลิกการดาวน์โหลด"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:222
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 msgid "New satellites"
 msgstr "ดาวเทียมดวงใหม่"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:223
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:217
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Mark all"
 msgstr "ทำเครื่องหมายทั้งหมด"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:224
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Mark none"
 msgstr "ไม่ทำเครื่องหมายเลย"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:225
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Discard"
 msgstr "ยกเลิก"
 
@@ -4872,6 +4895,10 @@ msgid "Configure Telescope"
 msgstr "ปรับแต่งกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+#: plugins/Observability/src/Observability.cpp:600
+#: plugins/Observability/src/Observability.cpp:601
+#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:604
 msgid "N/A"
 msgstr "ไม่มี"
 
@@ -5283,6 +5310,7 @@ msgstr "เมษายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:614
+#: plugins/Observability/src/Observability.cpp:188
 msgid "May"
 msgstr "พฤษภาคม"
 
@@ -5741,68 +5769,68 @@ msgstr ""
 msgid "Solar System Editor plug-in"
 msgstr "โปรแกรมเสริมสำหรับการปรับแต่งระบบสุริยะ"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:512
 msgid "Import data"
 msgstr "นำเข้าข้อมูล"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Select the type"
 msgstr "เลือกชนิด"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Asteroids"
 msgstr "ดาวเคราะห์น้อย"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Comets"
 msgstr "ดาวหาง"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
 msgstr "เลือกแหล่งข้อมูล"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
 msgstr "ดาวน์โหลดรายชื่อวัตถุจากอินเทอร์เน็ต"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Select a source from the list:"
 msgstr "เลือกแหล่งข้อมูลจากรายชื่อ:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Or enter a URL:"
 msgstr "หรือป้อน URL:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Add this URL to the bookmarks list"
 msgstr "เพิ่ม URL นี้ลงในรายการคั่นหน้า"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Bookmark title:"
 msgstr "ชื่อคั่นหน้า:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
 msgstr "แฟ้มบรรจุรายชื่อวัตถุต่าง ๆ"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Get orbital elements"
 msgstr "รับองค์ประกอบวงโคจร"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr "รายการ"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
 msgstr "ค้นหาออนไลน์"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
 msgstr "พบวัตถุที่ค้นหา"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -5816,19 +5844,19 @@ msgstr ""
 "Stellarium<br/>หมายเหตุ : การเพิ่มวัตถุจำนวนมาก อาจทำให้ Stellarium "
 "ทำงานช้าลง"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Overwrite existing objects"
 msgstr "เขียนทับวัตถุที่มีอยู่แล้ว"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update existing objects"
 msgstr "ปรับปรุงวัตถุที่มีอยู่แล้ว"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Update only the orbital elements"
 msgstr "ปรับปรุงเฉพาะองค์ประกอบวงโคจร"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add objects"
 msgstr "เพิ่มวัตถุ"
 
@@ -6380,6 +6408,381 @@ msgstr "การตั้งค่าโปรแกรมเสริมดา
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
 msgstr "อัปเดตข้อมูลดาวเคราะห์นอกระบบจากอินเทอร์เน็ต"
+
+#: plugins/Observability/src/Observability.cpp:68
+msgid "Observability analysis"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:69
+msgid "Ivan Marti-Vidal (Onsala Space Observatory)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:71
+msgid ""
+"Reports an analysis of source observability (rise, set, and transit times), "
+"as well as the epochs of year when the source is best observed. It assumes "
+"that a source is observable if it is above the horizon during a fraction of "
+"the night. The plugin also gives the day for largest separation from the Sun "
+"and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
+"the quantities shown by this script is given in the 'About' tab of the "
+"configuration window"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Jan"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Feb"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Mar"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Apr"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Jun"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Jul"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Aug"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Sep"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Oct"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Nov"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:188
+msgid "Dec"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:225
+msgid "Observability"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:231
+msgid "Observability configuration window"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:472
+#: plugins/Observability/src/Observability.cpp:514
+msgid "h"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:472
+#: plugins/Observability/src/Observability.cpp:514
+msgid "m"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:471
+#: plugins/Observability/src/Observability.cpp:472
+#: plugins/Observability/src/Observability.cpp:514
+msgid "s"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:481
+#, qt-format
+msgid "Sets at %1 (in %2)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:482
+#, qt-format
+msgid "Rose at %1 (%2 ago)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:492
+#, qt-format
+msgid "Set at %1 (%2 ago)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:493
+#, qt-format
+msgid "Rises at %1 (in %2)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:497
+msgid "Circumpolar."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:497
+msgid "No rise."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:519
+#, qt-format
+msgid "Culminates at %1 (in %2) at %3 deg."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:523
+#, qt-format
+msgid "Culminated at %1 (%2 ago) at %3 deg."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:564
+msgid "Source is not observable."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:565
+msgid "No Acronychal nor Cosmical rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:582
+msgid "Greatest elongation: "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:585
+msgid "Largest Sun separation: "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:588
+#, qt-format
+msgid " (at %1 deg.)"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:606
+msgid "Acronychal rise/set"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:606
+msgid "No Acronychal rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:607
+msgid "Cosmical rise/set"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:607
+msgid "No Cosmical rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:639
+#, qt-format
+msgid "from %1 to %2"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:646
+msgid " to 31 Dec"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:653
+msgid "Observable during the whole year."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:657
+msgid "Not observable at dark night."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:662
+msgid "Nights above horizon: "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:680
+msgid " TODAY:"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:1402
+#, qt-format
+msgid "Previous Full Moon: %1 "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:1407
+#, qt-format
+msgid "  Next Full Moon: %1 "
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
+msgid "Observability Plug-in"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+msgid ""
+"Plugin that analyzes the observability of the selected source (or the screen "
+"center, if no source is selected). The plugin can show rise, transit, and "
+"set times, as well as the best epoch of the year (i.e., largest angular "
+"separation from the Sun), the date range when the source is above the "
+"horizon at dark night, and the dates of Acronychal and Cosmical "
+"rise/set.<br>Ephemeris of the Solar-System objects and parallax effects are "
+"taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
+"for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
+msgid "Explanation of some parameters"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+msgid "Sun altitude at twilight:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+msgid ""
+"Any celestial object will be considered visible when the Sun is below this "
+"altitude. The altitude at astronomical twilight ranges usually between -12 "
+"and -18 degrees. This parameter is only used for the estimate of the range "
+"of observable epochs (see below)."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+msgid "Today ephemeris:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+msgid ""
+"Self-explanatory. The program will show the rise, set, and culmination "
+"(transit) times. The exact times for these ephemeris are given in two ways: "
+"as time spans (referred to the current time) and as clock hours (in local "
+"time)."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+msgid "Acronychal/Cosmical rise/set:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+msgid ""
+"The Acronychal rise (or set) of an object happens when the object rises (or "
+"sets) just when the Sun sets (or rises), respectively. The exact dates of "
+"these ephemeris depend on the Observer's location. The dates between the "
+"Acronychal set and rise are those when the altitude of the celestial object "
+"uses to be high when the Sun is well below the horizon (hence the object can "
+"be well observed). On the contrary, the Cosmical rise (or set) happens when "
+"both, the object and the Sun, rise (or set) simultaneously. It is obvious "
+"that the source is hardly observable (or not observable at all) in the dates "
+"between Cosmical set and rise."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid "Largest Sun separation:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid ""
+"Happens when the angular separation between the Sun and the celestial object "
+"are maximum. In most cases, this is equivalent to say that the Equatorial "
+"longitudes of the Sun and the object differ by 180 degrees, so the Sun is in "
+"opposition to the object. When an object is at its maximum possible angular "
+"separation from the Sun (no matter if it is a planet or a star), it "
+"culminates roughly at midnight, and on the darkest possible area of the Sky "
+"at that declination. Hence, that is the 'best' night to observe a particular "
+"object."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+msgid "Nights with source above horizon:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+msgid ""
+"The program computes the range of dates when the celestial object is above "
+"the horizon at least during one moment of the night. By 'night', the program "
+"considers the time span when the Sun altitude is below that of the twilight "
+"(which can be set by the user; see above). When the objects are fixed on the "
+"sky (or are exterior planets), the range of observable epochs for the "
+"current year can have two possible forms: either a range from one date to "
+"another (e.g., 20 Jan to 15 Sep) or in two steps (from 1 Jan to a given date "
+"and from another date to 31 Dec). In the first case, the first date (20 Jan "
+"in our example) shall be close to the so-called 'Heliacal rise of a star' "
+"and the second date (15 Sep in our example) shall be close to the 'Heliacal "
+"set'. In the second case (e.g., a range in the form 1 Jan to 20 May and 21 "
+"Sep to 31 Dec), the first date (20 May in our example) would be close to the "
+"Heliacal set and the second one (21 Sep in our example) to the Heliacal "
+"rise. More exact equations to estimate the Heliacal rise/set of stars and "
+"planets (which will not depend on the mere input of a twilight Sun elevation "
+"by the user) will be implemented in future versions of this plugin."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+msgid "Full Moon:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+msgid ""
+"When the Moon is selected, the program can compute the exact closest dates "
+"of the Moon's opposition to the Sun."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
+msgid "deg."
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:333
+msgid "Observability Configuration"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:334
+msgid "Observability Plug-in Configuration"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:336
+msgid "Showing Options"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:337
+msgid "Today's ephemeris (rise, set, and transit times)"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:338
+msgid "Dates of Acronychal and Cosmical rise/set"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:339
+msgid "Date of largest separation to the Sun"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:340
+msgid "Nights with the source above horizon"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:341
+msgid "Dates of previous and next Full Moon"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:344
+msgid "Font color and size"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+msgid "Red"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+msgid "Green"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+msgid "Blue"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+msgid "Font Size"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+msgid "Sun altitude at twilight"
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+msgid "0 deg."
+msgstr ""
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
