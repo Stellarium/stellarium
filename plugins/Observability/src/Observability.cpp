@@ -64,7 +64,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
         StelPluginInfo info;
 	info.id = "Observability";
         info.displayedName = N_("Observability analysis");
-	info.authors = N_("Ivan Marti-Vidal (Onsala Space Observatory)");
+	info.authors = "Ivan Marti-Vidal (Onsala Space Observatory)"; // non-translatable field
 	info.contact = "i.martividal@gmail.com";
         info.description = N_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon during a fraction of the night. The plugin also gives the day for largest separation from the Sun and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of the quantities shown by this script is given in the 'About' tab of the configuration window");
         return info;
@@ -182,11 +182,10 @@ Observability::Observability()
 
 
 	// Set names of the months:
-//	QString mons[12]={q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
-	QString mons[12]={q_("Jan"), q_("Feb"), q_("Mar"), q_("Apr"), q_("May"), q_("Jun"), q_("Jul"), q_("Aug"), q_("Sep"), q_("Oct"), q_("Nov"), q_("Dec")};
+	QString mons[12]={qc_("Jan", "short month name"), qc_("Feb", "short month name"), qc_("Mar", "short month name"), qc_("Apr", "short month name"), qc_("May", "short month name"), qc_("Jun", "short month name"), qc_("Jul", "short month name"), qc_("Aug", "short month name"), qc_("Sep", "short month name"), qc_("Oct", "short month name"), qc_("Nov", "short month name"), qc_("Dec", "short month name")};
 
 	for (int i=0;i<12;i++) {
-	 months[i]=mons[i];
+		months[i]=mons[i];
 	};
 
 }
@@ -340,7 +339,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 //Update position:
 		EquPos = selectedObject->getEquinoxEquatorialPos(core);
 		EquPos.normalize();
-		LocPos = core->equinoxEquToAltAz(EquPos);
+		LocPos = core->equinoxEquToAltAz(EquPos,StelCore::RefractionOff);
 
 // Check if the user has changed the source (or if the source is Sun/Moon). 
 		if (tempName == selName) 
@@ -388,7 +387,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		Vec3d currentPos = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 		currentPos.normalize();
 		EquPos = core->j2000ToEquinoxEqu(currentPos);
-		LocPos = core->j2000ToAltAz(currentPos);
+		LocPos = core->j2000ToAltAz(currentPos,StelCore::RefractionOff);
 	}
 
 
@@ -634,14 +633,14 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 							bestBegun = false;
 							if (selday2 > selday) {
 								if (dateRange!="") { dateRange += ", ";};
-								dateRange += q_("from %1 to %2").arg(CalenDate(selday)).arg(CalenDate(selday2));
+								dateRange += QString("%1").arg(RangeCalenDates(selday, selday2));
 							};
 						};
 					};
 
 					if (bestBegun) { // There were good dates till the end of the year.
 						 if (dateRange!="") { dateRange += ", ";};
-						dateRange += CalenDate(selday)+q_(" to 31 Dec");
+						dateRange += RangeCalenDates(selday, 0);
 					};
 					
 					if (dateRange == "") 
@@ -786,6 +785,37 @@ QString Observability::CalenDate(int selday)
 	int day,month,year;
 	StelUtils::getDateFromJulianDay(yearJD[selday],&year,&month,&day);
 	return QString("%1 %2").arg(day).arg(months[month-1]);
+}
+//////////////////////////////////////////////
+
+///////////////////////////////////////////////
+// Returns the day and month of year (to put it in format '25 Apr')
+QString Observability::RangeCalenDates(int fDoY, int sDoY)
+{
+	int day1,month1,year1,day2,month2,year2;
+	QString range;
+	StelUtils::getDateFromJulianDay(yearJD[fDoY],&year1,&month1,&day1);
+	StelUtils::getDateFromJulianDay(yearJD[sDoY],&year2,&month2,&day2);
+	if (sDoY==0)
+	{
+		day2 = 31;
+		month2 = 12;
+	}
+	if (fDoY==0)
+	{
+		day1 = 1;
+		month1 = 1;
+	}
+	if (month1==month2)
+	{
+		range = QString("%1 - %2 %3").arg(day1).arg(day2).arg(months[month1-1]);
+	}
+	else
+	{
+		range = QString("%1 %2 - %3 %4").arg(day1).arg(months[month1-1]).arg(day2).arg(months[month2-1]);
+	}
+
+	return range;
 }
 //////////////////////////////////////////////
 
@@ -1397,12 +1427,12 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 			double LocalTMoon = 24.*modf(LocalPrev,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
-			bestNight = q_("Previous Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			bestNight = q_("Previous Full Moon: %1 %2 at %3:%4. ").arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			LocalTMoon = 24.*modf(LocalNext,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
-			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
-			bestNight += q_("  Next Full Moon: %1 "+months[fullMonth-1]+" at %2:%3. ").arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);			
+			bestNight += q_("Next Full Moon: %1 %2 at %3:%4. ").arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			ObsRange = ""; 
 			AcroCos = "";
