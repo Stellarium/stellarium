@@ -67,6 +67,12 @@ Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
 }
 
+// Get observer-centered galactic position
+Vec3d StelObject::getJ2000GalacticPos(const StelCore *core) const
+{
+	return core->j2000ToGalactic(getJ2000EquatorialPos(core));
+}
+
 float StelObject::getVMagnitude(const StelCore* core, bool withExtinction) const 
 {
 	Q_UNUSED(core);
@@ -91,6 +97,13 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
+	}
+
+	if (flags&GalCoordJ2000)
+	{
+		double glong, glat;
+		StelUtils::rectToSphe(&glong, &glat, getJ2000GalacticPos(core));
+		res += q_("Galactic longitude/latitude (J2000): %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
 	}
 
 	if (flags&HourAngle)
