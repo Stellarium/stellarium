@@ -151,7 +151,7 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 	if (markFader.getInterstate() <= 0.0) { return; }
 
 	Vec3d pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.yy
 
 	renderer->setFont(font);
 	const Vec3f mColor = StelApp::getInstance().getVisionModeNight() 
@@ -179,7 +179,7 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 		}
 		else if (i % 5 == 0)
 		{
-			h = -0.01;  // the size of the marking every 5 degrees
+			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
 		circleArcRenderer.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h));
