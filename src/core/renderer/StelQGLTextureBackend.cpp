@@ -271,7 +271,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	result->startedLoading();
 
 	// Check if texture dimensions are acceptable for GL
-	if(!glTextureSizeWithinLimits(size))
+	if(!glTextureSizeWithinLimits(size, format))
 	{
 		result->errorOccured("fromRawData(): Texture size too large");
 		return result;
@@ -422,7 +422,7 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 	}
 
 	QGLContext* context = prepareContextForLoading();
-	glTextureID = context->bindTexture(image, GL_TEXTURE_2D, glGetPixelFormat(image),
+	glTextureID = context->bindTexture(image, GL_TEXTURE_2D, glGetTextureInternalFormat(image),
 	                                   getTextureBindOptions(textureParams));
 	if(glTextureID == 0)
 	{
