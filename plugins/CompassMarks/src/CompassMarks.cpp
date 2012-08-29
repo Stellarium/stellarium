@@ -125,7 +125,7 @@ void CompassMarks::init()
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
 		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "", N_("Plugin Key Bindings"), true, false);
-        //gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
+		//gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		connect(gui->getGuiActions("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
@@ -134,8 +134,8 @@ void CompassMarks::init()
 
 		QSettings* conf = StelApp::getInstance().getSettings();
 		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
-        // GZ: This must go here, else button may show wrong state
-        gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
+		// GZ: This must go here, else button may show wrong state
+		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -162,6 +162,7 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 
 	StelCircleArcRenderer circleArcRenderer(renderer, prj);
 	const QFontMetrics fontMetrics(font);
+	
 	for(int i=0; i<360; i++)
 	{
 		float a = i*M_PI/180;
@@ -171,35 +172,10 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 		{
 			h = -0.02;  // the size of the mark every 15 degrees
 
-			// draw a label every 15 degrees
-			QString s("");
-			if ((core->getCurrentProjectionType()==StelCore::ProjectionPerspective) ||
-				(core->getCurrentProjectionType()==StelCore::ProjectionOrthographic))
-			{
-				// find screen center azimuth, we have to exclude azimuths behind observer.
-				Vec3d viewDir;
-				prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2,
-							   prj->getViewportPosY()+prj->getViewportHeight()/2, viewDir);
-				float hfov= prj->getFov()*prj->getViewportWidth()/prj->getViewportHeight();
-				if (core->getCurrentProjectionType()==StelCore::ProjectionOrthographic)
-					hfov=qMin(1.4f*hfov, 181.0f);
-				float az, alt; // screen center coords
-				StelUtils::rectToSphe(&az, &alt, viewDir);
-				az *= (180.0/M_PI);
-				float azDiff=fmod(900.0-az-(i+90), 360.0);
-				if (azDiff>180) azDiff-=360.0f;
-				if (fabs(azDiff)<hfov/2)
-					s= QString("%1").arg((i+90)%360);
-			} else // other projections work!
-			{
-				// draw a label every 15 degrees
-				s = QString("%1").arg((i+90)%360);
-			}
+			QString s = QString("%1").arg((i+90)%360);
 			const float shiftx = fontMetrics.width(s) / 2.;
 			const float shifty = fontMetrics.height() / 2.;
-			Vec3d win;
-			prj->project(pos, win);
-			renderer->drawText(TextParams(win[0], win[1], s).shift(-shiftx, shifty));
+			renderer->drawText(TextParams(pos, prj, s).shift(-shiftx, shifty));
 		}
 		else if (i % 5 == 0)
 		{

@@ -250,13 +250,13 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 	invariant();
 }
 
-void StelQGLRenderer::drawTextGravityHelper(const TextParams& params, QPainter& painter)
+void StelQGLRenderer::drawTextGravityHelper
+	(const TextParams& params, QPainter& painter, const int baseX, const int baseY, StelProjectorP projector)
 {
-	StelProjectorP projector   = params.projector_;
 	const Vec2f viewportCenter = projector->getViewportCenterAbsolute();
 
-	const float dx = params.x_ - viewportCenter[0];
-	const float dy = params.y_ - viewportCenter[1];
+	const float dx = baseX - viewportCenter[0];
+	const float dy = baseY - viewportCenter[1];
 	const float d  = std::sqrt(dx * dx + dy * dy);
 	
 	// Cull the text if it's too far away to be visible in the screen.
@@ -306,8 +306,22 @@ void StelQGLRenderer::drawText(const TextParams& params)
 
 	QFontMetrics fontMetrics = painter->fontMetrics();
 
-	const int x = params.x_;
-	const int y = params.y_;
+	StelProjectorP projector = NULL == params.projector_
+	                         ? StelApp::getInstance().getCore()->getProjection2d() 
+	                         : params.projector_;
+	Vec3f win;
+	if(NULL == params.projector_) 
+	{
+		win = params.position_;
+	}
+	else if(!projector->project(params.position_, win))
+	{
+		viewport.disablePainting();
+		return;
+	}
+
+	const int x = win[0];
+	const int y = win[1];
 
 	// Avoid drawing if outside viewport.
 	// We do a worst-case approximation as getting exact text dimensions is expensive.
@@ -315,7 +329,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	// (culling with a rotating rectangle would be expensive)
 	const int cullDistance = 
 		std::max(fontMetrics.height(), params.string_.size() * fontMetrics.maxWidth());
-	const Vec4i viewXywh = params.projector_->getViewportXywh();
+	const Vec4i viewXywh = projector->getViewportXywh();
 	const int viewMinX = viewXywh[0];
 	const int viewMinY = viewXywh[1];
 	const int viewMaxX = viewMinX + viewXywh[2];
@@ -328,9 +342,9 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		return;
 	}
 
-	if(params.projector_->useGravityLabels() && !params.noGravity_)
+	if(projector->useGravityLabels() && !params.noGravity_)
 	{
-		drawTextGravityHelper(params, *painter);
+		drawTextGravityHelper(params, *painter, x, y, projector);
 		return;
 	}
 	
@@ -398,7 +412,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 
 	const float angleDegrees = 
 		params.angleDegrees_ + 
-		(params.noGravity_ ? 0.0f : params.projector_->getDefaultAngleForGravityText());
+		(params.noGravity_ ? 0.0f : projector->getDefaultAngleForGravityText());
 	// Zero out very small angles.
 	// 
 	// (this could also be used to optimize the case with zero angled
