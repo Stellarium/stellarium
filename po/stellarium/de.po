@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-20 14:08+0700\n"
-"PO-Revision-Date: 2012-08-19 07:21+0000\n"
-"Last-Translator: wschmidt <Unknown>\n"
+"POT-Creation-Date: 2012-08-23 20:43+0700\n"
+"PO-Revision-Date: 2012-08-23 14:44+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-21 04:47+0000\n"
-"X-Generator: Launchpad (build 15810)\n"
+"X-Launchpad-Export-Date: 2012-08-25 12:46+0000\n"
+"X-Generator: Launchpad (build 15843)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -390,31 +390,31 @@ msgstr "Nicht gefunden"
 msgid "Found"
 msgstr "Gefunden"
 
-#: src/gui/ConfigurationDialog.cpp:396
+#: src/gui/ConfigurationDialog.cpp:398 src/gui/ConfigurationDialog.cpp:400
 msgid "Select screenshot directory"
 msgstr "Screenshot-Verzeichnis auswählen"
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:612
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Anfängliches Gesichtsfeld: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:620
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Anfängliche Blickrichtung in Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Autoren"
 
-#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:663 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Ansprechpartner"
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:746
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -423,19 +423,19 @@ msgstr "Ansprechpartner"
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:750
 msgid "License"
 msgstr "Lizenz"
 
-#: src/gui/ConfigurationDialog.cpp:771
+#: src/gui/ConfigurationDialog.cpp:776
 msgid "Running script: "
 msgstr "Ausgeführtes Skript: "
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:783
 msgid "Running script: [none]"
 msgstr "Ausgeführtes Skript: [keines]"
 
-#: src/gui/ConfigurationDialog.cpp:841
+#: src/gui/ConfigurationDialog.cpp:846
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -443,16 +443,16 @@ msgstr ""
 "Herunterladen neuer Sternkataloge beendet!\n"
 "Starten Sie Stellarium neu, um sie anzuzeigen."
 
-#: src/gui/ConfigurationDialog.cpp:845
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "All available star catalogs have been installed."
 msgstr "Alle verfügbaren Sternkataloge wurden installiert."
 
-#: src/gui/ConfigurationDialog.cpp:850
+#: src/gui/ConfigurationDialog.cpp:855
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Empfange Katalog %1 von %2"
 
-#: src/gui/ConfigurationDialog.cpp:857
+#: src/gui/ConfigurationDialog.cpp:862
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -461,7 +461,7 @@ msgstr ""
 "Lade %1...\n"
 "(Sie können dieses Fenster schließen.)"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:869
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -472,7 +472,7 @@ msgstr ""
 "Anzahl der Sterne: %2 Millionen\n"
 "Magnitudenspanne: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:912 src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -481,11 +481,11 @@ msgstr ""
 "Fehler beim Herunterladen von %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:1000
 msgid "Verifying file integrity..."
 msgstr "Überprüfe Dateiintegrität..."
 
-#: src/gui/ConfigurationDialog.cpp:999
+#: src/gui/ConfigurationDialog.cpp:1004
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -579,8 +579,8 @@ msgstr "Setze die normale Skript-Ausführungsgeschwindigkeit"
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
-#: plugins/Observability/src/Observability.cpp:225
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Plugin Key Bindings"
 msgstr "Plugin-Tastenkürzel"
 
@@ -1064,56 +1064,56 @@ msgstr ""
 msgid "ZIP archives"
 msgstr "ZIP-Archive"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "Landschaft \"%1\" wurde erfolgreich installiert."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Erfolgreich"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "Keine Landschaft wurde installiert."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Fehler!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Landschaft \"%1\" wurde erfolgreich entfernt."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr ""
 "Die ausgewählte Landschaft konnte nicht (vollständig) entfernt werden."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Größe auf der Festplatte: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium kann %1 zum Lesen oder Schreiben nicht öffnen"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -1122,7 +1122,7 @@ msgstr ""
 "Stellariumlandschaft."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr ""
@@ -1130,7 +1130,7 @@ msgstr ""
 "bereits."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
@@ -2827,7 +2827,6 @@ msgid "Help"
 msgstr "Hilfe"
 
 #: src/ui_helpDialogGui.h:267
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "About"
 msgstr "Über"
 
@@ -4296,6 +4295,7 @@ msgstr "Vertkal spiegeln"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Impressum"
@@ -4971,10 +4971,10 @@ msgid "Configure Telescope"
 msgstr "Teleskop einrichten"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+#: plugins/Observability/src/Observability.cpp:599
 #: plugins/Observability/src/Observability.cpp:600
-#: plugins/Observability/src/Observability.cpp:601
+#: plugins/Observability/src/Observability.cpp:602
 #: plugins/Observability/src/Observability.cpp:603
-#: plugins/Observability/src/Observability.cpp:604
 msgid "N/A"
 msgstr "Nicht verfügbar"
 
@@ -5388,7 +5388,6 @@ msgstr "April"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:188
 msgid "May"
 msgstr "Mai"
 
@@ -6526,10 +6525,6 @@ msgstr "Exoplaneten-Daten aus dem Internet aktualisieren"
 msgid "Observability analysis"
 msgstr "Sichtbarkeitsanalyse"
 
-#: plugins/Observability/src/Observability.cpp:69
-msgid "Ivan Marti-Vidal (Onsala Space Observatory)"
-msgstr "Ivan Marti-Vidal (Onsala Space Observatory)"
-
 #: plugins/Observability/src/Observability.cpp:71
 msgid ""
 "Reports an analysis of source observability (rise, set, and transit times), "
@@ -6548,185 +6543,196 @@ msgstr ""
 "und Untergänge.<br><br>Eine Erklärung der Begriffe finden Sie im \"Über...\"-"
 "Tab im Konfigurationsfenster."
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "Mrz"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "May"
+msgstr "Mai"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "Aug"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "Dez"
 
-#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:224
 msgid "Observability"
 msgstr "Beobachtbarkeit"
 
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Observability configuration window"
 msgstr "Konfigurationsfenster für Beobachtbarkeit"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "h"
 msgstr "h"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "m"
 msgstr "m"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:481
+#: plugins/Observability/src/Observability.cpp:480
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Untergang um %1 (in %2)"
 
-#: plugins/Observability/src/Observability.cpp:482
+#: plugins/Observability/src/Observability.cpp:481
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "Ging um %1 auf (vor %2)"
+
+#: plugins/Observability/src/Observability.cpp:491
+#, qt-format
+msgid "Set at %1 (%2 ago)"
+msgstr "Ging um %1 unter (vor %2)"
 
 #: plugins/Observability/src/Observability.cpp:492
 #, qt-format
-msgid "Set at %1 (%2 ago)"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:493
-#, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "Aufgang um %1 (in %2)"
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "Circumpolar."
 msgstr "Zirkumpolar"
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "No rise."
 msgstr "Kein Aufgang."
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:518
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Kulmination um %1 (in %2) bei %3 Grad."
 
-#: plugins/Observability/src/Observability.cpp:523
+#: plugins/Observability/src/Observability.cpp:522
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "Kulmination war um %1 (in %2) bei %3 Grad."
 
-#: plugins/Observability/src/Observability.cpp:564
+#: plugins/Observability/src/Observability.cpp:563
 msgid "Source is not observable."
 msgstr "Objekt nicht beobachtbar."
 
-#: plugins/Observability/src/Observability.cpp:565
+#: plugins/Observability/src/Observability.cpp:564
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "Kein Akronychischer oder Kosmischer Auf- bzw. Untergang."
 
-#: plugins/Observability/src/Observability.cpp:582
+#: plugins/Observability/src/Observability.cpp:581
 msgid "Greatest elongation: "
-msgstr ""
+msgstr "Größte Elongation: "
 
-#: plugins/Observability/src/Observability.cpp:585
+#: plugins/Observability/src/Observability.cpp:584
 msgid "Largest Sun separation: "
 msgstr "Größte Elongation: "
 
-#: plugins/Observability/src/Observability.cpp:588
+#: plugins/Observability/src/Observability.cpp:587
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " (bei %1 Grad)"
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "Acronychal rise/set"
 msgstr "Akronychischer Auf-/Untergang"
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "No Acronychal rise/set."
 msgstr "Kein akronychischer Auf-/Untergang"
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "Cosmical rise/set"
 msgstr "Kosmischer Auf-/Untergang"
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "No Cosmical rise/set."
 msgstr "Kein kosmischer Auf-/Untergang"
 
-#: plugins/Observability/src/Observability.cpp:639
-#, qt-format
-msgid "from %1 to %2"
-msgstr "von %1 bis %2"
-
-#: plugins/Observability/src/Observability.cpp:646
-msgid " to 31 Dec"
-msgstr " bis 31. Dez"
-
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:652
 msgid "Observable during the whole year."
 msgstr "Das ganze Jahr beobachtbar."
 
-#: plugins/Observability/src/Observability.cpp:657
+#: plugins/Observability/src/Observability.cpp:656
 msgid "Not observable at dark night."
 msgstr "Nicht beobachtbar bei dunkler Nacht."
 
-#: plugins/Observability/src/Observability.cpp:662
+#: plugins/Observability/src/Observability.cpp:661
 msgid "Nights above horizon: "
-msgstr ""
+msgstr "Nächte über dem Horizont: "
 
-#: plugins/Observability/src/Observability.cpp:680
-msgid " TODAY:"
-msgstr " HEUTE:"
+#: plugins/Observability/src/Observability.cpp:679
+msgid "TODAY:"
+msgstr "HEUTE:"
 
-#: plugins/Observability/src/Observability.cpp:1402
+#: plugins/Observability/src/Observability.cpp:688
+msgid "THIS YEAR:"
+msgstr "HEUER:"
+
+#: plugins/Observability/src/Observability.cpp:1432
 #, qt-format
-msgid "Previous Full Moon: %1 "
-msgstr ""
+msgid "Previous Full Moon: %1 %2 at %3:%4. "
+msgstr "Letzter Vollmond: %1 %2 um %3:%4. "
 
-#: plugins/Observability/src/Observability.cpp:1407
+#: plugins/Observability/src/Observability.cpp:1437
 #, qt-format
-msgid "  Next Full Moon: %1 "
-msgstr ""
+msgid "Next Full Moon: %1 %2 at %3:%4. "
+msgstr "Nächster Vollmond: %1 %2 um %3:%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
@@ -6839,7 +6845,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "Nächte mit dem Objekt über dem Horizont:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid ""
@@ -6860,6 +6866,19 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
+"Das Programm berechnet den Zeitraum im Jahr, in dem sich das Himmelsobjekt "
+"zumindest in einem kurze Moment der Nacht über dem Horizont steht. 'Nacht' "
+"ist hierbei, wenn die Sonne unterhalb der Dämmerungsgrenze steht "
+"(einstellbar, siehe oben). Für Objekte der Fixsternsphäre (und die oberen "
+"Planeten) kann der Zeitraum der Beobachtung zwei mögliche Formen haben: "
+"entweder ein Intervall zwischen zwei Daten (etwa 20. Jan bis 15. Sep) oder "
+"zwei Intervalle (z.B. in der Form 1. Jan bis 20. Mai uns 21. Sep bis 31. "
+"Dez). Im ersten Fall ist das erste Datum (20. Jan in unserem Bespiel) nahe "
+"nahe beim Heliakischen Aufgang, das zweite Datum (hier 15. Sep) nahe beim "
+"Heliakischen Untergang. Im zweiten Fall ist wäre das zweite Datum (in diesem "
+"Beispiel 20. Mai) wäre nahe am Heliakischen Untergang, das dritte (21. Sep) "
+"nahe dem Heliakischen Aufgang. Eine bessere Abschätzung Heliakischer Auf- "
+"und Untergänge ist in einer zukünftigen Version des Plugins geplant."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"
@@ -6870,6 +6889,8 @@ msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
+"Wenn der Mond ausgewählt ist, kann das Programm das genaue Oppositionsdatum "
+"zur Sonne errechnen."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
@@ -6903,7 +6924,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:340
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "Nächte mit dem Objekt über dem Horizont"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:341
 msgid "Dates of previous and next Full Moon"

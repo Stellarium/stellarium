@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-20 14:08+0700\n"
-"PO-Revision-Date: 2012-08-02 13:00+0000\n"
+"POT-Creation-Date: 2012-08-23 20:43+0700\n"
+"PO-Revision-Date: 2012-08-23 13:08+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-21 04:44+0000\n"
-"X-Generator: Launchpad (build 15810)\n"
+"X-Launchpad-Export-Date: 2012-08-25 12:45+0000\n"
+"X-Generator: Launchpad (build 15843)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -175,12 +175,12 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:192
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Behin-behineko izendapena: %1"
 
 #: src/core/modules/MinorPlanet.cpp:247
 #, qt-format
 msgid "Orbital period: %1 days"
-msgstr ""
+msgstr "Orbita-periodoa: %1 egun"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -386,31 +386,31 @@ msgstr "Ez da aurkitu"
 msgid "Found"
 msgstr "Aurkitua"
 
-#: src/gui/ConfigurationDialog.cpp:396
+#: src/gui/ConfigurationDialog.cpp:398 src/gui/ConfigurationDialog.cpp:400
 msgid "Select screenshot directory"
 msgstr "Hautatu pantaila-argazkien karpeta"
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:612
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Hasierako ikuseremua: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:620
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hasierako ikuspuntua Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Egileak"
 
-#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:663 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Kontaktua"
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:746
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -419,19 +419,19 @@ msgstr "Kontaktua"
 msgid "Author"
 msgstr "Egilea"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:750
 msgid "License"
 msgstr "Lizentzia"
 
-#: src/gui/ConfigurationDialog.cpp:771
+#: src/gui/ConfigurationDialog.cpp:776
 msgid "Running script: "
 msgstr "Scripta exekutatzen: "
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:783
 msgid "Running script: [none]"
 msgstr "Scripta exekutatzen: [bat ere ez]"
 
-#: src/gui/ConfigurationDialog.cpp:841
+#: src/gui/ConfigurationDialog.cpp:846
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -439,16 +439,16 @@ msgstr ""
 "Izar-katalogo berrien deskarga bukatu da!\n"
 "Berrabiarazi Stellarium bistaratzeko."
 
-#: src/gui/ConfigurationDialog.cpp:845
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "All available star catalogs have been installed."
 msgstr "Eskuragarri zeuden izar-katalogo guztiak instalatu dira."
 
-#: src/gui/ConfigurationDialog.cpp:850
+#: src/gui/ConfigurationDialog.cpp:855
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Eskuratu katalogoa %2tik %1"
 
-#: src/gui/ConfigurationDialog.cpp:857
+#: src/gui/ConfigurationDialog.cpp:862
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -457,7 +457,7 @@ msgstr ""
 "%1 deskargatzen...\n"
 "(Leiho hau itxi dezakezu.)"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:869
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -468,7 +468,7 @@ msgstr ""
 "Izar kopurua: %2 Milioi\n"
 "Magnitude tartea: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:912 src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -477,11 +477,11 @@ msgstr ""
 "Errorea %1 deskargatzean:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:1000
 msgid "Verifying file integrity..."
 msgstr "Fitxategiaren osotasuna egiaztatzen..."
 
-#: src/gui/ConfigurationDialog.cpp:999
+#: src/gui/ConfigurationDialog.cpp:1004
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -575,8 +575,8 @@ msgstr "Ezarri  script exekuzio-abiadura normala"
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
-#: plugins/Observability/src/Observability.cpp:225
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Plugin Key Bindings"
 msgstr "Laster-teklen plugina"
 
@@ -809,7 +809,7 @@ msgstr "Izarrak"
 
 #: src/gui/StelGui.cpp:189
 msgid "Stars labels"
-msgstr ""
+msgstr "Izarren etiketak"
 
 #: src/gui/StelGui.cpp:190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
@@ -828,7 +828,7 @@ msgstr "Planeten arrastoak"
 
 #: src/gui/StelGui.cpp:194
 msgid "Night vision mode"
-msgstr ""
+msgstr "Gau-ikuskera modua"
 
 #: src/gui/StelGui.cpp:195
 msgid "Full-screen mode"
@@ -1061,55 +1061,55 @@ msgstr "Hautatu Stellarium-eko paisaia bat duen ZIP fitxategi bat"
 msgid "ZIP archives"
 msgstr "ZIP fitxategiak"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "\"%1\" paisaia behar bezala instalatu da"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Ongi burutu da"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "Ez da paisaiarik instalatu."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Errorea!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "\"%1\" paisaia ongi kendu da."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "Hautatutako paisaia behar bada ezingo da (guztiz) kendu."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Tamaina diskoan: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium-ek ezin izan du ireki irakurri edo idazteko %1"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -1118,14 +1118,14 @@ msgstr ""
 "paisaiarik."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr ""
 "Jadanik existitzen da izen edo identifikatzaile bera (%1) duen paisaia bat."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Eskuz ezabatu dezakezu ondorengo direktorioa ezabatuz: %1"
@@ -1711,7 +1711,7 @@ msgstr "Artizarraren iragatea"
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
 msgid "Analemma"
-msgstr ""
+msgstr "Analema"
 
 #: src/translations.h:219
 msgid "Look around each installed landscape."
@@ -1821,6 +1821,8 @@ msgid ""
 "This script shows the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"Script honek analema erakusten du - Eguzkiak urtean zehar zeruan egiten duen "
+"bidea."
 
 #: src/translations.h:237
 msgid ""
@@ -2806,7 +2808,6 @@ msgid "Help"
 msgstr "Laguntza"
 
 #: src/ui_helpDialogGui.h:267
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "About"
 msgstr "Honi buruz"
 
@@ -2833,7 +2834,7 @@ msgstr "Erabili lehenetsi bezala"
 
 #: src/ui_locationDialogGui.h:395
 msgid "Return to default"
-msgstr ""
+msgstr "Itzuli lehenetsira"
 
 #: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/Oculars/src/ui_ocularDialog.h:882
@@ -4122,7 +4123,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Nabigazio laster-menua irekitzen du."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:861
 msgid "Enable only if an object is selected"
@@ -4256,6 +4257,7 @@ msgstr "Irauli bertikalki"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Honi buruz"
@@ -4911,10 +4913,10 @@ msgid "Configure Telescope"
 msgstr "Konfiguratu teleskopioa"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+#: plugins/Observability/src/Observability.cpp:599
 #: plugins/Observability/src/Observability.cpp:600
-#: plugins/Observability/src/Observability.cpp:601
+#: plugins/Observability/src/Observability.cpp:602
 #: plugins/Observability/src/Observability.cpp:603
-#: plugins/Observability/src/Observability.cpp:604
 msgid "N/A"
 msgstr "Ez dago eskuragarri"
 
@@ -5318,7 +5320,6 @@ msgstr "Apirila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:188
 msgid "May"
 msgstr "Maiatza"
 
@@ -5742,6 +5743,8 @@ msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Kometak eta asteroideak beren zenbaki, ingelesezko izen edo behin-behineko "
+"izendapenaren bidez identifika daitezke."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -5958,7 +5961,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
-msgstr ""
+msgstr "Argi-kurbak"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 #, qt-format
@@ -6372,7 +6375,7 @@ msgstr "Angelu-distantzia"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Discovered year"
-msgstr ""
+msgstr "Aurkitutako urtea"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
@@ -6415,10 +6418,6 @@ msgstr "Eguneratu exoplaneten datuak internetetik"
 msgid "Observability analysis"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:69
-msgid "Ivan Marti-Vidal (Onsala Space Observatory)"
-msgstr ""
-
 #: plugins/Observability/src/Observability.cpp:71
 msgid ""
 "Reports an analysis of source observability (rise, set, and transit times), "
@@ -6430,184 +6429,195 @@ msgid ""
 "configuration window"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "Urt"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "Ots"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "Api"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "May"
+msgstr "Mai"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "Eka"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "Uzt"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "Abu"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "Ira"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "Urr"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "Aza"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "Abe"
 
-#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:224
 msgid "Observability"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Observability configuration window"
 msgstr ""
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "h"
-msgstr ""
+msgstr "h"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "m"
-msgstr ""
+msgstr "m"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "s"
-msgstr ""
+msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:481
+#: plugins/Observability/src/Observability.cpp:480
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:482
+#: plugins/Observability/src/Observability.cpp:481
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:492
+#: plugins/Observability/src/Observability.cpp:491
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:492
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "Circumpolar."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "No rise."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:518
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:523
+#: plugins/Observability/src/Observability.cpp:522
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:564
+#: plugins/Observability/src/Observability.cpp:563
 msgid "Source is not observable."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:565
+#: plugins/Observability/src/Observability.cpp:564
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:582
+#: plugins/Observability/src/Observability.cpp:581
 msgid "Greatest elongation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:585
+#: plugins/Observability/src/Observability.cpp:584
 msgid "Largest Sun separation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:588
+#: plugins/Observability/src/Observability.cpp:587
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "Acronychal rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "No Acronychal rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "Cosmical rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "No Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:639
-#, qt-format
-msgid "from %1 to %2"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:646
-msgid " to 31 Dec"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:652
 msgid "Observable during the whole year."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:657
+#: plugins/Observability/src/Observability.cpp:656
 msgid "Not observable at dark night."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:662
+#: plugins/Observability/src/Observability.cpp:661
 msgid "Nights above horizon: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:680
-msgid " TODAY:"
+#: plugins/Observability/src/Observability.cpp:679
+msgid "TODAY:"
+msgstr "GAUR:"
+
+#: plugins/Observability/src/Observability.cpp:688
+msgid "THIS YEAR:"
+msgstr "AURTEN:"
+
+#: plugins/Observability/src/Observability.cpp:1432
+#, qt-format
+msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:1402
+#: plugins/Observability/src/Observability.cpp:1437
 #, qt-format
-msgid "Previous Full Moon: %1 "
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:1407
-#, qt-format
-msgid "  Next Full Moon: %1 "
+msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
@@ -6628,7 +6638,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "Parametro batzuen azalpena"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Sun altitude at twilight:"
@@ -6644,7 +6654,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
-msgstr ""
+msgstr "Gaurko efemerideak:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -6713,7 +6723,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"
-msgstr ""
+msgstr "Ilbetea:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
@@ -6756,27 +6766,27 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:341
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "Aurreko eta hurrengo hilbeteen datak"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:344
 msgid "Font color and size"
-msgstr ""
+msgstr "Letra-kolorea eta tamaina"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Red"
-msgstr ""
+msgstr "Gorria"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Green"
-msgstr ""
+msgstr "Berdea"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Blue"
-msgstr ""
+msgstr "Urdina"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Font Size"
-msgstr ""
+msgstr "Letra-tamaina"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Sun altitude at twilight"
