@@ -68,6 +68,7 @@ StelQGLTextureBackend::StelQGLTextureBackend
 	, ownsTexture(true)
 	, deleteManually(false)
 	, loader(NULL)
+	, pixelBytes(0.0f)
 {
 	invariant();
 }
@@ -76,8 +77,12 @@ StelQGLTextureBackend::~StelQGLTextureBackend()
 {
 	invariant();
 	renderer->ensureTextureNotBound(this);
+	
 	if (getStatus() == TextureStatus_Loaded)
 	{
+		const QSize size = getDimensions();
+		renderer->getStatisticsWritable()["estimated_texture_memory"] -= 
+			size.width() * size.height() * pixelBytes;
 		renderer->makeGLContextCurrent();
 		if (glIsTexture(glTextureID) == GL_FALSE)
 		{
@@ -200,6 +205,12 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromFBO
 	// Prevent the StelQGLTextureBackend destructor from destroying the texture.
 	result->ownsTexture = false;
 
+	// To simplify code, we assume 4 bytes per fixel (32bit RGBA) - this 
+	// is most common, but might not always be the case.
+	result->pixelBytes = 4.0f;
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
+		+= fbo->size().width() * fbo->size().height() * result->pixelBytes;
+
 	result->finishedLoading(fbo->size());
 
 	return result;
@@ -210,17 +221,37 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 {
 	// This function should only be used as a fallback for when FBOs aren't supported.
 
-	// Get image and GL pixel format matching viewport format.
-	int glFormat;
 
 	const int r = viewportFormat.redBufferSize();
 	const int g = viewportFormat.greenBufferSize();
 	const int b = viewportFormat.blueBufferSize();
 	const int a = viewportFormat.alpha() ? viewportFormat.alphaBufferSize() : 0;
 
-	if(r == 8 && g == 8 && b == 8 && a == 8)     {glFormat = GL_RGBA8;}
-	else if(r == 8 && g == 8 && b == 8 && a == 0){glFormat = GL_RGB8;}
-	else if(r == 5 && g == 6 && b == 5 && a == 0){glFormat = GL_RGB5;}
+	// Creating a texture from a dummy image.
+	QImage dummyImage(64, 64, QImage::Format_Mono);
+	const TextureParams params = TextureParams();
+
+	StelQGLTextureBackend* result = 
+		new StelQGLTextureBackend(renderer, QString(), params);
+
+	// Get image and GL pixel format matching viewport format.
+	int glFormat;
+
+	if(r == 8 && g == 8 && b == 8 && a == 8)     
+	{
+		glFormat           = GL_RGBA8;
+		result->pixelBytes = 4.0f;
+	}
+	else if(r == 8 && g == 8 && b == 8 && a == 0)
+	{
+		glFormat           = GL_RGB8;
+		result->pixelBytes = 3.0f;
+	}
+	else if(r == 5 && g == 6 && b == 5 && a == 0)
+	{
+		glFormat           = GL_RGB5;
+		result->pixelBytes = 2.0f;
+	}
 	else
 	{
 		// This is extremely unlikely, but we can't rule it out.
@@ -231,13 +262,6 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 		// Invalid value to avoid warnings.
 		glFormat = -1;
 	}
-
-	// Creating a texture from a dummy image.
-	QImage dummyImage(64, 64, QImage::Format_Mono);
-	const TextureParams params = TextureParams();
-
-	StelQGLTextureBackend* result = 
-		new StelQGLTextureBackend(renderer, QString(), params);
 
 	QGLContext* context = result->prepareContextForLoading();
 	const GLuint glTextureID = 
@@ -254,6 +278,10 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 	glCopyTexImage2D(GL_TEXTURE_2D, 0, glFormat, 0, 0, size.width(), size.height(), 0);
 	// Restore viewport
 	glViewport(0, 0, viewportSize.width(), viewportSize.height());
+
+	// Will need change if different screen bit depths are ever supported
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
+		+= size.width() * size.height() * result->pixelBytes;
 
 	result->startedLoading();
 	result->glTextureID = glTextureID;
@@ -327,12 +355,14 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	// Determine GL texture format.
 	GLint internalFormat;
 	GLenum loadFormat, type;
+	// For statistics
 	switch(format)
 	{
 		case TextureDataFormat_RGBA_F32:
-			internalFormat = GL_RGBA32F;
-			loadFormat     = GL_RGBA;
-			type           = GL_FLOAT;
+			internalFormat     = GL_RGBA32F;
+			loadFormat         = GL_RGBA;
+			type               = GL_FLOAT;
+			result->pixelBytes = 16.0f;
 			break;
 		default:
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
@@ -364,6 +394,8 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 		return result;
 	}
 
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
+		+= size.width() * size.height() * result->pixelBytes;
 	// Finish constructing the texture.
 	result->setTextureWrapping();
 	result->glTextureID = glTextureID;
@@ -421,8 +453,18 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 		return;
 	}
 
+	GLint internalFormat = glGetTextureInternalFormat(image);
+	switch(internalFormat)
+	{
+		case GL_RGBA8:             pixelBytes = 4.0f; break;
+		case GL_RGB8:              pixelBytes = 3.0f; break;
+		case GL_LUMINANCE8_ALPHA8: pixelBytes = 2.0f; break;
+		case GL_LUMINANCE8:        pixelBytes = 1.0f; break;
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown GL internal format for QImage");
+	}
+
 	QGLContext* context = prepareContextForLoading();
-	glTextureID = context->bindTexture(image, GL_TEXTURE_2D, glGetTextureInternalFormat(image),
+	glTextureID = context->bindTexture(image, GL_TEXTURE_2D, internalFormat,
 	                                   getTextureBindOptions(textureParams));
 	if(glTextureID == 0)
 	{
@@ -460,6 +502,9 @@ void StelQGLTextureBackend::loadFromPVR()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	setTextureWrapping();
 
+	// This is an assumption; PVRTC can be either 4 or 2 bits per pixel - we assume the worse case.
+	pixelBytes = 0.5f;
+
 	completeLoading();
 	invariant();
 }
@@ -482,6 +527,8 @@ void StelQGLTextureBackend::completeLoading()
 	{
 		qWarning() << "Zero-area texture: " << width << "x" << height;
 	}
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
+		+= width * height * pixelBytes;
 	finishedLoading(QSize(width, height));
 }
 
