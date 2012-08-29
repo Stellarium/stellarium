@@ -144,6 +144,7 @@ public:
 //!
 struct TextParams
 {
+friend class StelQGLRenderer;
 	//! Construct TextParams with default parameters.
 	//!
 	//! Text position and string are required, so they are specified here.
@@ -163,6 +164,7 @@ struct TextParams
 		, yShift_(0.0f)
 		, noGravity_(true)
 		, projector_(NULL)
+		, doNotProject_(true)
 	{}
 
 	//! Construct TextParams to draw text at a 3D position, using specified projector.
@@ -186,6 +188,7 @@ struct TextParams
 		, yShift_(0.0f)
 		, noGravity_(true)
 		, projector_(projector)
+		, doNotProject_(false)
 	{
 	}
 
@@ -218,7 +221,8 @@ struct TextParams
 		return *this;
 	}
 
-	//! Position of the text before projection. If projector is NULL, this is the 2D position that needs no more projection.
+private:
+	//! Position of the text. If doNotProject is true, this is already projected to 2D coords.
 	Vec3f position_;
 	//! Text string to draw.
 	QString string_;
@@ -232,6 +236,8 @@ struct TextParams
 	bool  noGravity_;
 	//! Projector to use. If NULL, 2D projector is assumed.
 	StelProjectorP projector_;
+	//! Position is already in screen coordinates, so don't project again.
+	bool doNotProject_;
 };
 
 //! Main class of the @ref renderer "Renderer" subsystem. Handles all drawing functionality.

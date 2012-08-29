@@ -310,7 +310,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	                         ? StelApp::getInstance().getCore()->getProjection2d() 
 	                         : params.projector_;
 	Vec3f win;
-	if(NULL == params.projector_) 
+	if(params.doNotProject_) 
 	{
 		win = params.position_;
 	}
