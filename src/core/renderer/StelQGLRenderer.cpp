@@ -62,7 +62,7 @@ void StelQGLRenderer::destroyTextureBackend(StelTextureBackend* const textureBac
 	StelQGLTextureBackend* qglTextureBackend =
 		dynamic_cast<StelQGLTextureBackend*>(textureBackend);
 	Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
-				  "Trying to destroy a texture created by a different renderer backend");
+	           "Trying to destroy a texture created by a different renderer backend");
 
 	if(textureBackend->getName().isEmpty())
 	{
