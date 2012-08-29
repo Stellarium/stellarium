@@ -151,6 +151,12 @@ private:
 	//! Used when asynchronously loading the texture, otherwise NULL.
 	class StelTextureLoader* loader;
 
+	//! Estimated bytes per pixel.
+	//!
+	//! This is only used for statistics and is not always precise.
+	//! (e.g. with compressed or FBO textures)
+	float pixelBytes;
+
 	//! Construct a StelQGLTextureBackend, default-initializing but not yet loading.
 	//!
 	//! The actual construction is done by static member functions like 
