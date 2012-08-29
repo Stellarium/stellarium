@@ -21,6 +21,7 @@
 
 #include "StelModule.hpp"
 #include "DummyDialog.hpp"
+
 #include <QObject>
 #include <QString>
 #include <QFont>
@@ -48,6 +49,16 @@ public:
 	//! Loads the module's configuration from the config file.
 	void loadConfiguration(void);
 
+public slots:
+	//! Show/hide the TUI menu
+	void setTuiMenuActive(bool tActive) { tuiActive = tActive;}
+	//! Show/hide the TUI date time display
+	void setTuiDateTime(bool tDateTime) { tuiDateTime = tDateTime; }
+	//! Show/hide the selected object's short object information 
+	void setTuiObjInfo(bool tObjInfo) { tuiObjInfo = tObjInfo; }
+	//! Set Gravity text for the TUI text
+	void setTuiGravityUi(bool tGravityUi) { tuiGravityUi = tGravityUi; }
+
 private slots:
 	void setHomePlanet(QString planetName);
 	void setAltitude(int altitude);
@@ -59,11 +70,15 @@ private slots:
 	void setSkyCulture(QString i18);
 	void setAppLanguage(QString lang);
 	void saveDefaultSettings(void);
+	void shutDown(void);
 
 private:
 	DummyDialog dummyDialog;
 	QFont font;
 	bool tuiActive;
+	bool tuiDateTime;
+	bool tuiObjInfo;
+	bool tuiGravityUi;
 	TuiNode* currentNode;
 
 	double getLatitude(void);
