@@ -25,6 +25,7 @@
 #include <QColor>
 #include <QGLFunctions>
 #include <QGraphicsView>
+#include <QMap>
 #include <QThread>
 
 #include "GenericVertexTypes.hpp"
@@ -132,6 +133,7 @@ public:
 		textureUnitCount = getTextureUnitCountBackend();
 		glVendorString = QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 		qDebug() << "GL vendor is " << glVendorString;
+		initStatistics();
 		return true;
 	}
 	
@@ -250,6 +252,11 @@ public:
 	                              const float width, const float height, 
 	                              const float angle = 0.0f);
 
+	virtual const QMap<QString, double>& getStatistics() const
+	{
+		return statistics;
+	}
+
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
 	virtual void makeGLContextCurrent()
 	{
@@ -289,6 +296,14 @@ public:
 		return globalColor;
 	}
 
+	//! Get a non-const reference to statistics 
+	//!
+	//! Used e.g. by texture backend to collect statistics.
+	QMap<QString, double>& getStatisticsWritable()
+	{
+		return statistics;
+	}
+
 	//! Returns true if non-power-of-two textures are supported, false otherwise.
 	virtual bool areNonPowerOfTwoTexturesSupported() const = 0;
 
@@ -301,6 +316,9 @@ public:
 protected:
 	//! OpenGL vendor string (used to enable/disable features based on driver).
 	QString glVendorString;
+
+	//! Statistics collected during program run (such as estimated texture memory usage, etc.).
+	QMap<QString, double> statistics;
 
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
@@ -531,6 +549,12 @@ private:
 
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect);
+	
+	//! Initialize default values for statistics.
+	void initStatistics()
+	{
+		statistics["estimated_texture_memory"] = 0.0;
+	}
 
 	//! Handles gravity text logic. Called by draText().
 	//!
@@ -586,7 +610,6 @@ private:
 protected:
 	//! Wraps some GL functions for compatibility across GL and GLES.
 	QGLFunctions gl;
-
 };
 
 #endif // _STELQGLRENDERER_HPP_
