@@ -313,7 +313,7 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 #elif defined Q_OS_BSD4
-	QProcess dmesg
+	QProcess dmesg;
 	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();

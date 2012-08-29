@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-20 14:08+0700\n"
-"PO-Revision-Date: 2012-01-16 14:00+0000\n"
-"Last-Translator: Bogdan Marinov <daggerstab@gmail.com>\n"
+"POT-Creation-Date: 2012-08-23 20:43+0700\n"
+"PO-Revision-Date: 2012-08-23 11:38+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-21 04:45+0000\n"
-"X-Generator: Launchpad (build 15810)\n"
+"X-Launchpad-Export-Date: 2012-08-25 12:46+0000\n"
+"X-Generator: Launchpad (build 15843)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -365,7 +365,7 @@ msgstr "Азимут/Височина: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Мрежова грешка"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -373,45 +373,45 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Запитване"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Грешка"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Не са намерени съвпадения"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:396
+#: src/gui/ConfigurationDialog.cpp:398 src/gui/ConfigurationDialog.cpp:400
 msgid "Select screenshot directory"
 msgstr "Избиране на директория за снимки на екрана"
 
-#: src/gui/ConfigurationDialog.cpp:607
+#: src/gui/ConfigurationDialog.cpp:612
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Зрителен ъгъл (FOV) при стартиране: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:620
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Посока на наблюдение при стартиране (Аз/Вис): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:658 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:663 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "За контакт"
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:746
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -420,19 +420,19 @@ msgstr "За контакт"
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:750
 msgid "License"
 msgstr "Лиценз"
 
-#: src/gui/ConfigurationDialog.cpp:771
+#: src/gui/ConfigurationDialog.cpp:776
 msgid "Running script: "
 msgstr "Изпълняван скрипт: "
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:783
 msgid "Running script: [none]"
 msgstr "Изпълняван скрипт: [няма]"
 
-#: src/gui/ConfigurationDialog.cpp:841
+#: src/gui/ConfigurationDialog.cpp:846
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -440,16 +440,16 @@ msgstr ""
 "Изтеглянето на нови каталози приключи!\n"
 "Stellarium трябва да бъде рестартиран, за да се покажат."
 
-#: src/gui/ConfigurationDialog.cpp:845
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "All available star catalogs have been installed."
 msgstr "Всички налични звездни каталози са инсталирани."
 
-#: src/gui/ConfigurationDialog.cpp:850
+#: src/gui/ConfigurationDialog.cpp:855
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Сваляне на каталог %1 от %2"
 
-#: src/gui/ConfigurationDialog.cpp:857
+#: src/gui/ConfigurationDialog.cpp:862
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -458,7 +458,7 @@ msgstr ""
 "Изтегля се %1...\n"
 "(Този прозорец може да бъде затворен.)"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:869
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -469,7 +469,7 @@ msgstr ""
 "Брой звезди: %2 милиона\n"
 "Величини: между %3 и %4"
 
-#: src/gui/ConfigurationDialog.cpp:907 src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:912 src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -478,11 +478,11 @@ msgstr ""
 "Грешка при свалянето на %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:1000
 msgid "Verifying file integrity..."
 msgstr "Проверка на целостта на файла..."
 
-#: src/gui/ConfigurationDialog.cpp:999
+#: src/gui/ConfigurationDialog.cpp:1004
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -576,8 +576,8 @@ msgstr "Изпълняване на скрипта с нормална скор�
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
-#: plugins/Observability/src/Observability.cpp:225
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Plugin Key Bindings"
 msgstr "Клавиши на приставки"
 
@@ -684,7 +684,7 @@ msgstr "Тестер: %1"
 
 #: src/gui/HelpDialog.cpp:334
 msgid "Past Developers"
-msgstr ""
+msgstr "Програмисти от стари версии"
 
 #: src/gui/HelpDialog.cpp:335
 msgid ""
@@ -1058,68 +1058,68 @@ msgstr "Изберете ZIP архив който съдържа пейзаж �
 msgid "ZIP archives"
 msgstr "ZIP архиви"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "Пейзажът \"%1\" беше инсталиран успешно."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Успех"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "Не беше инсталиран пейзаж."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Грешка!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Пейзажът \"%1\" беше успешно премахнат."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "Избраният пейзаж не беше премахнат (напълно)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Размер върху диска: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium не може да отвори за четене или записване %1"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr "Избраният файл не е ZIP архив или не съдържа пейзаж за Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "Вече съществува пейзаж със същото име или идентификатор (%1)."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Можете да го премахнете ръчно като изтриете следната директория: %1"
@@ -1831,7 +1831,7 @@ msgstr "Антигуа и Барбуда"
 
 #: src/translations.h:244
 msgid "Anguilla"
-msgstr ""
+msgstr "Ангила"
 
 #: src/translations.h:245
 msgid "Albania"
@@ -1843,7 +1843,7 @@ msgstr "Армения"
 
 #: src/translations.h:247
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Холандски Антили"
 
 #: src/translations.h:248
 msgid "Angola"
@@ -1939,7 +1939,7 @@ msgstr "Бутан"
 
 #: src/translations.h:271
 msgid "Bouvet Island"
-msgstr ""
+msgstr "о-ви Буве"
 
 #: src/translations.h:272
 msgid "Botswana"
@@ -1983,7 +1983,7 @@ msgstr "Кот д'Ивоар"
 
 #: src/translations.h:282
 msgid "Cook Islands"
-msgstr ""
+msgstr "о-ви Кук"
 
 #: src/translations.h:283
 msgid "Chile"
@@ -2015,11 +2015,11 @@ msgstr "Куба"
 
 #: src/translations.h:290
 msgid "Cape Verde"
-msgstr ""
+msgstr "Кабо Верде"
 
 #: src/translations.h:291
 msgid "Christmas Island"
-msgstr ""
+msgstr "о-в Рождество"
 
 #: src/translations.h:292
 msgid "Cyprus"
@@ -2047,7 +2047,7 @@ msgstr "Доминика"
 
 #: src/translations.h:298
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Доминиканска република"
 
 #: src/translations.h:299
 msgid "Algeria"
@@ -2071,7 +2071,7 @@ msgstr "Западна Сахара"
 
 #: src/translations.h:304
 msgid "Eritrea"
-msgstr ""
+msgstr "Еритрея"
 
 #: src/translations.h:305
 msgid "Spain"
@@ -2091,15 +2091,15 @@ msgstr "Фиджи"
 
 #: src/translations.h:309
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Фолклендски о-ви"
 
 #: src/translations.h:310
 msgid "Micronesia"
-msgstr ""
+msgstr "Микронезия"
 
 #: src/translations.h:311
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Фаройски о-ви"
 
 #: src/translations.h:312
 msgid "France"
@@ -2107,7 +2107,7 @@ msgstr "Франция"
 
 #: src/translations.h:313
 msgid "Gabon"
-msgstr ""
+msgstr "Габон"
 
 #: src/translations.h:314
 msgid "United Kingdom"
@@ -2115,7 +2115,7 @@ msgstr "Обединеното кралство"
 
 #: src/translations.h:315
 msgid "Grenada"
-msgstr ""
+msgstr "Гренада"
 
 #: src/translations.h:316
 msgid "Georgia"
@@ -2123,35 +2123,35 @@ msgstr "Грузия"
 
 #: src/translations.h:317
 msgid "French Guiana"
-msgstr ""
+msgstr "Френска Гана"
 
 #: src/translations.h:318
 msgid "Ghana"
-msgstr ""
+msgstr "Гана"
 
 #: src/translations.h:319
 msgid "Gibraltar"
-msgstr ""
+msgstr "Гибралтар"
 
 #: src/translations.h:320
 msgid "Greenland"
-msgstr ""
+msgstr "Гренландия"
 
 #: src/translations.h:321
 msgid "Gambia"
-msgstr ""
+msgstr "Гамбия"
 
 #: src/translations.h:322
 msgid "Guinea"
-msgstr ""
+msgstr "Гвинея"
 
 #: src/translations.h:323
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Гваделупа"
 
 #: src/translations.h:324
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Екваториална Гвинея"
 
 #: src/translations.h:325
 msgid "Greece"
@@ -2159,7 +2159,7 @@ msgstr "Гърция"
 
 #: src/translations.h:326
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Южна Джорджия и Южни Сандвичеви о-ви"
 
 #: src/translations.h:327
 msgid "Guatemala"
@@ -2175,7 +2175,7 @@ msgstr "Гвинея-Бисау"
 
 #: src/translations.h:330
 msgid "Guyana"
-msgstr ""
+msgstr "Гвиана"
 
 #: src/translations.h:331
 msgid "Hong Kong"
@@ -2183,7 +2183,7 @@ msgstr "Хонконг"
 
 #: src/translations.h:332
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "О-ви Хърд и МакДоналд"
 
 #: src/translations.h:333
 msgid "Honduras"
@@ -2219,7 +2219,7 @@ msgstr "Индия"
 
 #: src/translations.h:341
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Британска индоокеанска територия"
 
 #: src/translations.h:342
 msgid "Iraq"
@@ -2267,11 +2267,11 @@ msgstr "Кирибати"
 
 #: src/translations.h:353
 msgid "Comoros"
-msgstr ""
+msgstr "Коморски о-ви"
 
 #: src/translations.h:354
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Св. Китс и Невис"
 
 #: src/translations.h:355
 msgid "Democratic People's Republic of Korea"
@@ -2287,7 +2287,7 @@ msgstr "Кувейт"
 
 #: src/translations.h:358
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Каймански о-ви"
 
 #: src/translations.h:359
 msgid "Kazakhstan"
@@ -2295,7 +2295,7 @@ msgstr "Казахстан"
 
 #: src/translations.h:360
 msgid "Lao"
-msgstr ""
+msgstr "Лаоски"
 
 #: src/translations.h:361
 msgid "Lebanon"
@@ -2303,7 +2303,7 @@ msgstr "Ливан"
 
 #: src/translations.h:362
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Св. Лучия"
 
 #: src/translations.h:363
 msgid "Liechtenstein"
@@ -2355,7 +2355,7 @@ msgstr "Мадагаскар"
 
 #: src/translations.h:375
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Маршалови о-ви"
 
 #: src/translations.h:376
 msgid "Macedonia"
@@ -2367,7 +2367,7 @@ msgstr "Мали"
 
 #: src/translations.h:378
 msgid "Myanmar"
-msgstr ""
+msgstr "Мианмар"
 
 #: src/translations.h:379
 msgid "Mongolia"
@@ -2375,23 +2375,23 @@ msgstr "Монголия"
 
 #: src/translations.h:380
 msgid "Macau"
-msgstr ""
+msgstr "Макао"
 
 #: src/translations.h:381
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Северни Мариански о-ви"
 
 #: src/translations.h:382
 msgid "Martinique"
-msgstr ""
+msgstr "Мартиника"
 
 #: src/translations.h:383
 msgid "Mauritania"
-msgstr ""
+msgstr "Мавритания"
 
 #: src/translations.h:384
 msgid "Montserrat"
-msgstr ""
+msgstr "Монсерат"
 
 #: src/translations.h:385
 msgid "Malta"
@@ -2399,15 +2399,15 @@ msgstr "Малта"
 
 #: src/translations.h:386
 msgid "Mauritius"
-msgstr ""
+msgstr "О-в Мавриций"
 
 #: src/translations.h:387
 msgid "Maldives"
-msgstr ""
+msgstr "Малдиви"
 
 #: src/translations.h:388
 msgid "Malawi"
-msgstr ""
+msgstr "Малави"
 
 #: src/translations.h:389
 msgid "Mexico"
@@ -2427,7 +2427,7 @@ msgstr "Намибия"
 
 #: src/translations.h:393
 msgid "New Caledonia"
-msgstr ""
+msgstr "Нова Каледония"
 
 #: src/translations.h:394
 msgid "Niger"
@@ -2435,7 +2435,7 @@ msgstr "Нигер"
 
 #: src/translations.h:395
 msgid "Norfolk Island"
-msgstr ""
+msgstr "о-в Норфолк"
 
 #: src/translations.h:396
 msgid "Nigeria"
@@ -2463,7 +2463,7 @@ msgstr "Науру"
 
 #: src/translations.h:402
 msgid "Niue"
-msgstr ""
+msgstr "Ниуе"
 
 #: src/translations.h:403
 msgid "New Zealand"
@@ -2471,7 +2471,7 @@ msgstr "Нова Зеландия"
 
 #: src/translations.h:404
 msgid "Oman"
-msgstr ""
+msgstr "Оман"
 
 #: src/translations.h:405
 msgid "Panama"
@@ -2483,15 +2483,15 @@ msgstr "Перу"
 
 #: src/translations.h:407
 msgid "French Polynesia"
-msgstr ""
+msgstr "Френска Полинезия"
 
 #: src/translations.h:408
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Папуа Нова Гвинея"
 
 #: src/translations.h:409
 msgid "Philippines"
-msgstr ""
+msgstr "Филипини"
 
 #: src/translations.h:410
 msgid "Pakistan"
@@ -2503,11 +2503,11 @@ msgstr "Полша"
 
 #: src/translations.h:412
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Сен Пиер и Микелон"
 
 #: src/translations.h:413
 msgid "Pitcairn"
-msgstr ""
+msgstr "Питкеърн"
 
 #: src/translations.h:414
 msgid "Puerto Rico"
@@ -2535,7 +2535,7 @@ msgstr "Катар"
 
 #: src/translations.h:420
 msgid "Réunion"
-msgstr ""
+msgstr "Остров Реюнион"
 
 #: src/translations.h:421
 msgid "Romania"
@@ -2559,11 +2559,11 @@ msgstr "Саудитска Арабия"
 
 #: src/translations.h:426
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Соломонови о-ви"
 
 #: src/translations.h:427
 msgid "Seychelles"
-msgstr ""
+msgstr "Сейшелски о-ви"
 
 #: src/translations.h:428
 msgid "Sudan"
@@ -2579,7 +2579,7 @@ msgstr "Сингапур"
 
 #: src/translations.h:431
 msgid "Saint Helena"
-msgstr ""
+msgstr "Св. Елена"
 
 #: src/translations.h:432
 msgid "Slovenia"
@@ -2587,7 +2587,7 @@ msgstr "Словения"
 
 #: src/translations.h:433
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Сволборд и Йан Майен"
 
 #: src/translations.h:434
 msgid "Slovakia"
@@ -2615,7 +2615,7 @@ msgstr "Суринам"
 
 #: src/translations.h:440
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Сао Томе и Принцип"
 
 #: src/translations.h:441
 msgid "El Salvador"
@@ -2627,11 +2627,11 @@ msgstr "Сирия"
 
 #: src/translations.h:443
 msgid "Swaziland"
-msgstr ""
+msgstr "Свазиленд"
 
 #: src/translations.h:444
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "о-ви Търкс и Кайкос"
 
 #: src/translations.h:445
 msgid "Chad"
@@ -2639,7 +2639,7 @@ msgstr "Чад"
 
 #: src/translations.h:446
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Френски южни територии"
 
 #: src/translations.h:447
 msgid "Togo"
@@ -2655,15 +2655,15 @@ msgstr "Таджикистан"
 
 #: src/translations.h:450
 msgid "Tokelau"
-msgstr ""
+msgstr "Токелау"
 
 #: src/translations.h:451
 msgid "East Timor"
-msgstr ""
+msgstr "Източен Тимор"
 
 #: src/translations.h:452
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Туркменистан"
 
 #: src/translations.h:453
 msgid "Tunisia"
@@ -2671,7 +2671,7 @@ msgstr "Тунис"
 
 #: src/translations.h:454
 msgid "Tonga"
-msgstr ""
+msgstr "Тонга"
 
 #: src/translations.h:455
 msgid "Turkey"
@@ -2679,11 +2679,11 @@ msgstr "Турция"
 
 #: src/translations.h:456
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Тринидад и Тобаго"
 
 #: src/translations.h:457
 msgid "Tuvalu"
-msgstr ""
+msgstr "Тувалу"
 
 #: src/translations.h:458
 msgid "Taiwan"
@@ -2703,7 +2703,7 @@ msgstr "Уганда"
 
 #: src/translations.h:462
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Малки далечни острови на САЩ"
 
 #: src/translations.h:463
 msgid "United States"
@@ -2723,7 +2723,7 @@ msgstr "Ватикана"
 
 #: src/translations.h:467
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Сейнт Винсент и Гренадини"
 
 #: src/translations.h:468
 msgid "Venezuela"
@@ -2731,11 +2731,11 @@ msgstr "Венецуела"
 
 #: src/translations.h:469
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Вирджиснки о-ви (Брит.)"
 
 #: src/translations.h:470
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Вирджински о-ви (САЩ)"
 
 #: src/translations.h:471
 msgid "Viet Nam"
@@ -2743,15 +2743,15 @@ msgstr "Виетнам"
 
 #: src/translations.h:472
 msgid "Vanuatu"
-msgstr ""
+msgstr "Вануату"
 
 #: src/translations.h:473
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "О-ви Уолис и Футуна"
 
 #: src/translations.h:474
 msgid "Samoa"
-msgstr ""
+msgstr "Самоа"
 
 #: src/translations.h:475
 msgid "Yemen"
@@ -2759,7 +2759,7 @@ msgstr "Йемен"
 
 #: src/translations.h:476
 msgid "Mayotte"
-msgstr ""
+msgstr "Майот"
 
 #: src/translations.h:477
 msgid "Yugoslavia"
@@ -2791,7 +2791,6 @@ msgid "Help"
 msgstr "Помощ"
 
 #: src/ui_helpDialogGui.h:267
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "About"
 msgstr "За програмата"
 
@@ -3003,7 +3002,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:585
 msgid "Server:"
-msgstr ""
+msgstr "Сървър:"
 
 #: src/ui_searchDialogGui.h:586 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
@@ -3343,7 +3342,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:968
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Хоризонтални координати"
 
 #: src/ui_configurationDialog.h:970
 msgid "Altitude/Azimuth"
@@ -3355,7 +3354,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:974
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 #: src/ui_configurationDialog.h:976
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -3367,7 +3366,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:979
 msgid "Distance"
-msgstr ""
+msgstr "Разстояние"
 
 #: src/ui_configurationDialog.h:981
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -3731,7 +3730,7 @@ msgstr "Изход"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Позиция на показалеца"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
@@ -3739,7 +3738,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -4050,7 +4049,7 @@ msgstr "Версия"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Overview"
-msgstr ""
+msgstr "Обобщено"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid ""
@@ -4093,7 +4092,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
-msgstr ""
+msgstr "Бързи клавиши"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
@@ -4177,7 +4176,7 @@ msgstr "aFOV:"
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Focal length:"
-msgstr ""
+msgstr "Фокусна дължина:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Field stop:"
@@ -4244,9 +4243,10 @@ msgstr "Вертикално обръщане"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "За"
 
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
@@ -4912,12 +4912,12 @@ msgid "Configure Telescope"
 msgstr "Настройване на телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+#: plugins/Observability/src/Observability.cpp:599
 #: plugins/Observability/src/Observability.cpp:600
-#: plugins/Observability/src/Observability.cpp:601
+#: plugins/Observability/src/Observability.cpp:602
 #: plugins/Observability/src/Observability.cpp:603
-#: plugins/Observability/src/Observability.cpp:604
 msgid "N/A"
-msgstr ""
+msgstr "Не е налична"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
@@ -5245,7 +5245,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "Configure"
-msgstr ""
+msgstr "Настройка"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Add a new telescope"
@@ -5323,7 +5323,6 @@ msgstr "април"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:614
-#: plugins/Observability/src/Observability.cpp:188
 msgid "May"
 msgstr "май"
 
@@ -5901,7 +5900,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Върни висящите опции"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
@@ -6153,12 +6152,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:152
 msgid "cm"
-msgstr ""
+msgstr "см"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
@@ -6259,7 +6258,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Записка"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -6334,12 +6333,12 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Mass"
-msgstr ""
+msgstr "Маса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:212
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Radius"
-msgstr ""
+msgstr "Радиус"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:216
 #, qt-format
@@ -6352,11 +6351,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Period"
-msgstr ""
+msgstr "Период"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "days"
-msgstr ""
+msgstr "дни"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
@@ -6426,10 +6425,6 @@ msgstr ""
 msgid "Observability analysis"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:69
-msgid "Ivan Marti-Vidal (Onsala Space Observatory)"
-msgstr ""
-
 #: plugins/Observability/src/Observability.cpp:71
 msgid ""
 "Reports an analysis of source observability (rise, set, and transit times), "
@@ -6441,184 +6436,195 @@ msgid ""
 "configuration window"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "яну"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "фев"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "мар"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "апр"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
+msgid "May"
+msgstr "май"
+
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "юни"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "юли"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "авг"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "сеп"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "окт"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "ное"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:187
+msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "дек"
 
-#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:224
 msgid "Observability"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Observability configuration window"
 msgstr ""
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "h"
-msgstr ""
+msgstr "ч"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "m"
-msgstr ""
+msgstr "м"
 
+#: plugins/Observability/src/Observability.cpp:470
 #: plugins/Observability/src/Observability.cpp:471
-#: plugins/Observability/src/Observability.cpp:472
-#: plugins/Observability/src/Observability.cpp:514
+#: plugins/Observability/src/Observability.cpp:513
 msgid "s"
-msgstr ""
+msgstr "с"
 
-#: plugins/Observability/src/Observability.cpp:481
+#: plugins/Observability/src/Observability.cpp:480
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:482
+#: plugins/Observability/src/Observability.cpp:481
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:492
+#: plugins/Observability/src/Observability.cpp:491
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:492
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "Circumpolar."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:497
+#: plugins/Observability/src/Observability.cpp:496
 msgid "No rise."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:518
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:523
+#: plugins/Observability/src/Observability.cpp:522
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:564
+#: plugins/Observability/src/Observability.cpp:563
 msgid "Source is not observable."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:565
+#: plugins/Observability/src/Observability.cpp:564
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:582
+#: plugins/Observability/src/Observability.cpp:581
 msgid "Greatest elongation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:585
+#: plugins/Observability/src/Observability.cpp:584
 msgid "Largest Sun separation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:588
+#: plugins/Observability/src/Observability.cpp:587
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "Acronychal rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:606
+#: plugins/Observability/src/Observability.cpp:605
 msgid "No Acronychal rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "Cosmical rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:607
+#: plugins/Observability/src/Observability.cpp:606
 msgid "No Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:639
-#, qt-format
-msgid "from %1 to %2"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:646
-msgid " to 31 Dec"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:652
 msgid "Observable during the whole year."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:657
+#: plugins/Observability/src/Observability.cpp:656
 msgid "Not observable at dark night."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:662
+#: plugins/Observability/src/Observability.cpp:661
 msgid "Nights above horizon: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:680
-msgid " TODAY:"
+#: plugins/Observability/src/Observability.cpp:679
+msgid "TODAY:"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:1402
-#, qt-format
-msgid "Previous Full Moon: %1 "
+#: plugins/Observability/src/Observability.cpp:688
+msgid "THIS YEAR:"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:1407
+#: plugins/Observability/src/Observability.cpp:1432
 #, qt-format
-msgid "  Next Full Moon: %1 "
+msgid "Previous Full Moon: %1 %2 at %3:%4. "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:1437
+#, qt-format
+msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
@@ -6775,19 +6781,19 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Red"
-msgstr ""
+msgstr "Червено"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Green"
-msgstr ""
+msgstr "Зелено"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Blue"
-msgstr ""
+msgstr "Синьо"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Font Size"
-msgstr ""
+msgstr "Размер на шрифта"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Sun altitude at twilight"
