@@ -374,9 +374,11 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 		if (labelsFader.getInterstate()<=0.f)
 		{
 			Vec3d win;
-			projector->project(XYZ, win);
-			renderer->drawTexturedRect(win[0] - 5, win[1] - 5, 10, 10);
-			renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+			if(projector->project(XYZ, win))
+			{
+				renderer->drawTexturedRect(win[0] - 5, win[1] - 5, 10, 10);
+				renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+			}
 		}
 	}
 }

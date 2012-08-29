@@ -192,8 +192,10 @@ void Quasar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP project
 		if (labelsFader.getInterstate()<=0.f)
 		{
 			Vec3d win;
-			projector->project(XYZ, win);
-			renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
+			if(projector->project(XYZ, win))
+			{
+				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
+			}
 		}
 	}
 	else
