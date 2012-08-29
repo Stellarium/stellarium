@@ -23,6 +23,7 @@
 #include <QGLContext>
 #include <QString>
 
+#include "StelRenderer.hpp"
 #include "StelIndexBuffer.hpp"
 #include "StelTextureParams.hpp"
 #include "StelVertexAttribute.hpp"
@@ -174,10 +175,28 @@ inline QString glErrorToString(const GLenum error)
 	return QString();
 }
 
-//! Get OpenGL pixel format of an image.
+//! Get OpenGL internal (on-GPU) pixel format (internalFormat passed to glTexImage2D()) of an image.
+//! 
+//! Qt handles image conversion to a compatible in-RAM format before uploading to the GPU.
+//! Changes might be needed if we replace Qt texture functions with our own.
 //!
 //! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
-inline GLint glGetPixelFormat(const QImage& image)
+inline GLint glGetTextureInternalFormat(const QImage& image)
+{
+	const bool gray  = image.isGrayscale();
+	const bool alpha = image.hasAlphaChannel();
+	if(gray) {return alpha ? GL_LUMINANCE8_ALPHA8 : GL_LUMINANCE8;}
+	else     {return alpha ? GL_RGBA8 : GL_RGB8;}
+}
+
+//! Return format of pixels to be uploaded to a GPU.
+//!
+//! This needs to match the value Qt will use when calling glTexImage2D()
+//! (Qt might internally convert the image). Changes might be needed if we 
+//! replace Qt texture functions with our own.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+inline GLenum glGetTextureLoadFormat(const QImage& image)
 {
 	const bool gray  = image.isGrayscale();
 	const bool alpha = image.hasAlphaChannel();
@@ -185,22 +204,69 @@ inline GLint glGetPixelFormat(const QImage& image)
 	else     {return alpha ? GL_RGBA : GL_RGB;}
 }
 
+//! Return data type of data in pixels of an image.
+//!
+//! This needs to match the value Qt will use when calling glTexImage2D()
+//! (Qt might internally convert the image). Changes might be needed if we 
+//! replace Qt texture functions with our own.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+inline GLenum glGetTextureType(const QImage& image)
+{
+	Q_UNUSED(image);
+	return GL_UNSIGNED_BYTE;
+}
+
 //! Determine if specified texture size is within maximum texture size limits.
 //!
 //! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
-inline bool glTextureSizeWithinLimits(const QSize size)
+inline bool glTextureSizeWithinLimits(const QSize size, const TextureDataFormat format)
 {
-	// TODO 
-	// GL_MAX_TEXTURE_SIZE is buggy on some implementations,
-	// and max texture size also depends on pixel format.
-	// Implement a better solution based on texture proxy.
-	// (determine if a texture with exactly this width, height, format fits.
-	// If not, divide width and height by 2, try again. Ad infinitum, until 0)
+	GLint internalFormat;
+	GLenum loadFormat, type;
+	switch(format)
+	{
+		case TextureDataFormat_RGBA_F32:
+			internalFormat = GL_RGBA32F;
+			loadFormat     = GL_RGBA;
+			type           = GL_FLOAT;
+			break;
+		default:
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
+			break;
+	}
 
-	GLint maxSize;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxSize);
+	glTexImage2D(GL_PROXY_TEXTURE_2D, 0, internalFormat, size.width(), size.height(), 0,
+	             loadFormat, type, NULL);
 
-	return size.width() < maxSize && size.height() < maxSize;
+	GLint width  = size.width();
+	GLint height = size.height();
+	glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
+	glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &height);
+
+	return width != 0 && height != 0;
+}
+
+//! Determine if an image is not too large for the GPU.
+//!
+//! Maximum texture size depends on image format; this function handles that.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+inline bool glTextureSizeWithinLimits(const QImage& image)
+{
+	const GLint  internalFormat = glGetTextureInternalFormat(image);
+	const GLenum loadFormat     = glGetTextureLoadFormat(image);
+	const GLenum type           = glGetTextureType(image);
+
+	glTexImage2D(GL_PROXY_TEXTURE_2D, 0, internalFormat, image.width(), image.height(), 0,
+	             loadFormat, type, NULL);
+
+	GLint width  = image.width();
+	GLint height = image.height();
+	glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
+	glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &height);
+
+	return width != 0 && height != 0;
 }
 
 //! Ensure that an image is within maximum texture size limits, shrinking it if needed.
@@ -213,22 +279,14 @@ inline bool glTextureSizeWithinLimits(const QSize size)
 //! @param image Referernce to the image.
 inline void glEnsureTextureSizeWithinLimits(QImage& image)
 {
-	// TODO 
-	// GL_MAX_TEXTURE_SIZE is buggy on some implementations,
-	// and max texture size also depends on pixel format.
-	// Implement a better solution based on texture proxy.
-	// (determine if a texture with exactly this width, height, format fits.
-	// If not, divide width and height by 2, try again. Ad infinitum, until 0)
-	GLint size;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-
-	if (size < image.width())
+	while(!glTextureSizeWithinLimits(image))
 	{
-		image = image.scaledToWidth(size, Qt::FastTransformation);
-	}
-	if (size < image.height())
-	{
-		image = image.scaledToHeight(size, Qt::FastTransformation);
+		if(image.width() <= 1)
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Even a texture with width <= 1 is \"too large\": "
+			           "maybe image format is invalid/not GL supported?");
+		}
+		image = image.scaledToWidth(image.width() / 2, Qt::FastTransformation);
 	}
 }
 
