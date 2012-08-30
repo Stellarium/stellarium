@@ -933,11 +933,21 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
 {
 	// Acquire shadow informations
-	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(systemPlanets.size() + 1);
-	Vec4f data[size * size];
+	const int planetCount = systemPlanets.size();
+	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(planetCount + 1);
+	if(shadowInfoBuffer.size() < size * size)
+	{
+		shadowInfoBuffer.resize(size * size);
+	}
+	// Shadow info texture data
+	Vec4f* data = shadowInfoBuffer.data();
 	memset(data, '\0', size * size * sizeof(Vec4f));
 
-	Mat4d modelMatrices [systemPlanets.size()];
+	if(shadowModelMatricesBuffer.size() < planetCount)
+	{
+		shadowModelMatricesBuffer.resize(planetCount);
+	}
+	Mat4d* modelMatrices = shadowModelMatricesBuffer.data();
 	int p = 0;
 	foreach (const PlanetP& planet, systemPlanets)
 	{
