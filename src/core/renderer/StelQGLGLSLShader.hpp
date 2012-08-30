@@ -309,7 +309,8 @@ public:
 		Q_ASSERT_X(uniformStorageStackSize >= 1, Q_FUNC_INFO,
 		           "Too many uniform storage stack pops (nothing left to pop)");
 		--uniformStorageStackSize;
-		uniformStorageUsed = uniformStorageUsedStack[uniformStorageStackSize];
+		uniformStorageUsed    = uniformStorageUsedStack[uniformStorageStackSize];
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 		uniformCount       = uniformCountStack[uniformStorageStackSize];
 	}
 
@@ -322,6 +323,7 @@ public:
 		           "clearUniforms() called when the shader is not bound");
 		// We don't zero out the storage - we'll overwrite it as we add new uniforms.
 		uniformStorageUsed = uniformCount = uniformStorageStackSize = 0;
+		uniformStoragePointer = uniformStorage;
 	}
 
 protected:
@@ -394,6 +396,9 @@ protected:
 	//! @see uploadUniforms, clearUniforms, pushUniformStorage
 	unsigned char uniformStorage [UNIFORM_STORAGE];
 
+	//! Pointer to uniformStorage[uniformStorageUsed]. Avoids breaking strict aliasing.
+	void* uniformStoragePointer;
+
 	//! Types of consecutive uniforms in uniformStorage.
 	//!
 	//! Needed to interpret uniformStorage data when uploading.
@@ -414,7 +419,7 @@ protected:
 	//! Stack of uniformStorageUsed values used with pushUniformStorage/popUniformStorage.
 	//!
 	//! @see pushUniformStorage, popUniformStorage
-	unsigned char uniformStorageUsedStack[MAX_UNIFORMS];
+	unsigned int uniformStorageUsedStack[MAX_UNIFORMS];
 
 	//! Stack of uniformCount values used with pushUniformStorage/popUniformStorage.
 	//!
@@ -431,10 +436,11 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(float)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*reinterpret_cast<float*>(uniformStorage + uniformStorageUsed) = value;
+		*static_cast<float*>(uniformStoragePointer) = value;
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount++] = UniformType_float;
 		uniformStorageUsed += sizeof(float);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec2f value)
@@ -444,11 +450,12 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec2f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*reinterpret_cast<Vec2f*>(uniformStorage + uniformStorageUsed) = value;
+		*static_cast<Vec2f*>(uniformStoragePointer) = value;
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_vec2;
 		++uniformCount;
 		uniformStorageUsed += sizeof(Vec2f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec3f& value)
@@ -458,11 +465,12 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec3f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*reinterpret_cast<Vec3f*>(uniformStorage + uniformStorageUsed) = value;
+		*static_cast<Vec3f*>(uniformStoragePointer) = value;
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_vec3;
 		++uniformCount;
 		uniformStorageUsed += sizeof(Vec3f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec4f& value)
@@ -470,13 +478,14 @@ protected:
 		Q_ASSERT_X(bound, Q_FUNC_INFO,
 		           "Trying to set a uniform value with an unbound shader");
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
-		*reinterpret_cast<Vec4f*>(uniformStorage + uniformStorageUsed) = value;
+		*static_cast<Vec4f*>(uniformStoragePointer) = value;
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_vec4;
 		++uniformCount;
 		uniformStorageUsed += sizeof(Vec4f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Mat4f& m)
@@ -486,11 +495,12 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Mat4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*reinterpret_cast<Mat4f*>(uniformStorage + uniformStorageUsed) = m;
+		*static_cast<Mat4f*>(uniformStoragePointer) = m;
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_mat4;
 		++uniformCount;
 		uniformStorageUsed += sizeof(Mat4f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const bool value)
@@ -500,11 +510,12 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(bool)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*reinterpret_cast<bool*>(uniformStorage + uniformStorageUsed) = value;
+		*static_cast<bool*>(uniformStoragePointer) = value;
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_bool;
 		++uniformCount;
 		uniformStorageUsed += sizeof(bool);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const int value)
@@ -514,11 +525,12 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(int)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*reinterpret_cast<int*>(uniformStorage + uniformStorageUsed) = value;
+		*static_cast<int*>(uniformStoragePointer) = value;
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_int;
 		++uniformCount;
 		uniformStorageUsed += sizeof(int);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 private:
