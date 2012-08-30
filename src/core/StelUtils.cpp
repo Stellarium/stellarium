@@ -420,9 +420,11 @@ bool isPowerOfTwo(int value)
 // Return the first power of two greater or equal to the given value
 int smallestPowerOfTwoGreaterOrEqualTo(int value)
 {
+#ifndef NDEBUG
 	const int twoTo30 = 1073741824;
 	Q_ASSERT_X(value <= twoTo30, Q_FUNC_INFO,
 	           "Value too large - smallest greater/equal power-of-2 is out of range");
+#endif
 
 	if(value == 0){return 0;}
 
