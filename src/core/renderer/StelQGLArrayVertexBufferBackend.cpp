@@ -38,17 +38,13 @@ StelQGLArrayVertexBufferBackend(const PrimitiveType type,
 		const AttributeInterpretation interpretation = 
 			this->attributes.attributes[attrib].interpretation;
 
-		AnyAttributeArray* buffer;
-
 		switch(this->attributes.attributes[attrib].type)
 		{
-			case AttributeType_Vec2f: buffer = new AttributeArray<Vec2f>(interpretation); break;
-			case AttributeType_Vec3f: buffer = new AttributeArray<Vec3f>(interpretation); break;
-			case AttributeType_Vec4f: buffer = new AttributeArray<Vec4f>(interpretation); break;
+			case AttributeType_Vec2f: buffers.append(new AttributeArray<Vec2f>(interpretation)); break;
+			case AttributeType_Vec3f: buffers.append(new AttributeArray<Vec3f>(interpretation)); break;
+			case AttributeType_Vec4f: buffers.append(new AttributeArray<Vec4f>(interpretation)); break;
 			default:  Q_ASSERT(false);
 		}
-
-		buffers.append(buffer);
 	}
 }
 
