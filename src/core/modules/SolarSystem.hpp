@@ -273,6 +273,13 @@ private:
 	//! Calculates the shadow information for the shadow planet shader.
 	class StelTextureNew* computeShadowInfo(StelRenderer* renderer);
 
+	//! Used by computeShadowInfo to generate shadow info texture before uploading it.
+	QVector<Vec4f> shadowInfoBuffer;
+
+	//! Used by computeShadowInfo to store computed planet model matrices used to generate the 
+	//! shadow info texture.
+	QVector<Mat4d> shadowModelMatricesBuffer;
+
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
@@ -305,9 +312,6 @@ private:
 
 	//! The selection pointer texture.
 	class StelTextureNew* texPointer;
-
-	//! The shadow information texture
-	unsigned int shadowInfo;
 
 	bool flagShow;
 
