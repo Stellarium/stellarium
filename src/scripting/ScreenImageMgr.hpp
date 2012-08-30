@@ -22,7 +22,6 @@
 
 
 #include "StelModule.hpp"
-#include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
 #include <QMap>
@@ -48,6 +47,7 @@ public:
 	//! @param y the screen x-position for the texture (in pixels), measured from the bottom of the screen.
 	//! @param show the initial displayed status of the image (false == hidden).
 	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
+	//! @param alpha Alpha (opaqueness) of the image.
 	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
 	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1., float alpha=1., float fadeDuration=1.);
 	virtual ~ScreenImage();
@@ -66,7 +66,6 @@ public:
 	virtual bool getFlagShow(void);
 	//! Set the image alpha for when it is in full "on" (after fade in).
 	//! @param a the new alpha (transparency) for the image.  1.0 = totally transparent, 0.0 = fully opaque.
-	//! @param duration the time for the change in alpha to take effect.
 	virtual void setAlpha(float a);
 	//! Set the x, y position of the image.
 	//! @param x new x position
@@ -113,7 +112,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	//! Update time-dependent parts of the module.
 	virtual void update(double deltaTime);
 	//! Defines the order in which the various modules are drawn.
@@ -126,11 +125,12 @@ public slots:
 	//! for using StelFileMgr, with "scripts/" prefixed to the filename.
 	//! @param x The x-coordinate for the image (0 = left of screen)
 	//! @param y The y-coordinate for the image (0 = bottom of screen)
+	//! @param scale Image scale multiplier.
 	//! @param visible The initial visible state of the image
 	//! @param alpha The initial alpha (transparancy) value for the image (range 0.0 to 1.0)
 	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
 	void createScreenImage(const QString& id,
-                               const QString& filename,
+	                       const QString& filename,
 	                       float x,
 	                       float y,
 	                       float scale=1.,
@@ -143,7 +143,6 @@ public slots:
 	bool getShowImage(const QString& id); 
 	//! Set an image's visible status.
 	//! @param id the ID for the desired image.
-	//! @param show the new visible state to set.
 	int getImageWidth(const QString& id);
 	int getImageHeight(const QString& id);
 	void showImage(const QString& id, bool show); 

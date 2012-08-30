@@ -20,16 +20,18 @@
 #ifndef _STELSKYDRAWER_HPP_
 #define _STELSKYDRAWER_HPP_
 
-#include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 #include "RefractionExtinction.hpp"
 
+#include "renderer/StelIndexBuffer.hpp"
+#include "renderer/StelVertexBuffer.hpp"
+
 #include <QObject>
+
 
 class StelToneReproducer;
 class StelCore;
-class StelPainter;
 
 //! @class StelSkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
@@ -39,7 +41,7 @@ class StelSkyDrawer : public QObject
 	Q_OBJECT
 public:
 	//! Constructor
-	StelSkyDrawer(StelCore* core);
+	StelSkyDrawer(StelCore* core, class StelRenderer* renderer);
 	//! Destructor
 	~StelSkyDrawer();
 
@@ -50,32 +52,37 @@ public:
 	//! @param deltaTime the time increment in second since last call.
 	void update(double deltaTime);
 
-	//! Set the proper openGL state before making calls to drawPointSource
-	//! @param p a pointer to a valid instance of a Painter. The instance must be valid until postDrawPointSource() is called
-	void preDrawPointSource(StelPainter* p);
+	//! Prepare to draw point sources (must be called before drawing).
+	void preDrawPointSource();
 
-	//! Finalize the drawing of point sources
-	void postDrawPointSource(StelPainter* sPainter);
+	//! Finalize the drawing of point sources.
+	void postDrawPointSource(StelProjectorP projector);
 
 	//! Draw a point source halo.
-	//! @param sPainter the StelPainter to use for drawing.
+	//! @param projector Projector to project the point source.
 	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
 	//! @param bV the source B-V index
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
-		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}
+	bool drawPointSource(StelProjectorP projector, const Vec3d& v, 
+	                     const float rcMag[2], unsigned int bV, bool checkInScreen=false)
+	{
+		return drawPointSource(projector, v, rcMag, colorTable[bV], checkInScreen);
+	}
 
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen=false);
+	bool drawPointSource(StelProjectorP projector, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen=false);
+
+	//! Draw's the sun's corona during a solar eclipse on earth.
+	void drawSunCorona(StelProjectorP projector, const Vec3d& v, float radius, float alpha);
 
 	//! Terminate drawing of a 3D model, draw the halo
-	//! @param p the StelPainter instance to use for this drawing operation
+	//! @param projector Projector to use for this drawing operation
 	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param illuminatedArea the illuminated area in arcmin^2
 	//! @param mag the source integrated magnitude
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(StelProjectorP projector, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -135,10 +142,10 @@ public slots:
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
-	//! Set flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	void setFlagPointStar(bool b) {flagPointStar=b;}
-	//! Get flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	bool getFlagPointStar() const {return flagPointStar;}
+	//! Set flag for displaying point sources as points (faster on some hardware but not so nice).
+	void setDrawStarsAsPoints(bool b) {drawStarsAsPoints=b;}
+	//! Get flag for displaying point sources as points (faster on some hardware but not so nice).
+	bool getDrawStarsAsPoints() const {return drawStarsAsPoints;}
 
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
@@ -242,13 +249,16 @@ private:
 	float findWorldLumForMag(float mag, float targetRadius);
 
 	StelCore* core;
+
+	//! Used to draw the sky.
+	class StelRenderer* renderer;
 	StelToneReproducer* eye;
 
 	Extinction extinction;
 	Refraction refraction;
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
-	bool flagPointStar;
+	bool drawStarsAsPoints;
 	bool flagStarTwinkle;
 	float twinkleAmount;
 
@@ -269,7 +279,7 @@ private:
 	float limitLuminance;
 
 	//! Little halo texture
-	StelTextureSP texHalo;
+	class StelTextureNew* texHalo;
 
 	//! Load B-V conversion parameters from config file
 	void initColorTableFromConfigFile(class QSettings* conf);
@@ -283,17 +293,47 @@ private:
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	float inScale;
 
-	// Variables used for GL optimization when displaying point sources
-	//! Buffer for storing the vertex array data
-	Vec2f* verticesGrid;
-	//! Buffer for storing the color array data
-	Vec3f* colorGrid;
-	//! Buffer for storing the texture coordinate array data
-	Vec2f* textureGrid;
-	//! Current number of sources stored in the buffers (still to display)
-	unsigned int nbPointSources;
-	//! Maximum number of sources which can be stored in the buffers
-	unsigned int maxPointSources;
+	//! 2D vertex with position and color.
+	struct ColoredVertex
+	{
+		Vec2f position;
+		Vec3f color;
+		ColoredVertex(Vec2f position, Vec3f color):position(position), color(color){}
+
+		VERTEX_ATTRIBUTES(Vec2f Position, Vec3f Color);
+	};
+
+	//! 2D vertex with position, color and texture coordinate.
+	struct ColoredTexturedVertex
+	{
+		Vec2f position;
+		Vec3f color;
+		Vec2f texCoord;
+		ColoredTexturedVertex(Vec2f position, Vec3f color, Vec2f texCoord)
+			:position(position), color(color), texCoord(texCoord){}
+
+		VERTEX_ATTRIBUTES(Vec2f Position, Vec3f Color, Vec2f TexCoord);
+	};
+
+	//! When stars are drawn as points, these are stored in this buffer.
+	StelVertexBuffer<ColoredVertex>* starPointBuffer;
+
+	//! When stars/point sources are drawn as triangle pairs ("sprites"), their vertices are stored here.
+	//!
+	//! Vertices for big halos are stored here as well.
+	StelVertexBuffer<ColoredTexturedVertex>* starSpriteBuffer;
+
+	//! Index buffer pointing to starSpriteBuffer storing indices of stars' sprites.
+	StelIndexBuffer* starSpriteIndices;
+	//! Index buffer pointing to starSpriteBuffer storing indices of big halos.
+	StelIndexBuffer* bigHaloIndices;
+	//! Index buffer pointing to starSpriteBuffer storing indices of the sun halo.
+	StelIndexBuffer* sunHaloIndices;
+	//! Index buffer pointing to starSpriteBuffer storing indices of the sun's corona.
+	StelIndexBuffer* coronaIndices;
+
+	//! Are we drawing point sources at the moment?
+	bool drawing;
 
 	//! The maximum transformed luminance to apply at the next update
 	float maxLum;
@@ -301,14 +341,12 @@ private:
 	float oldLum;
 
 	//! Big halo texture
-	StelTextureSP texBigHalo;
-	StelTextureSP texSunHalo;
+	class StelTextureNew* texBigHalo;
+	class StelTextureNew* texSunHalo;
+	class StelTextureNew* texCorona;
 
 	bool flagLuminanceAdaptation;
 
-	bool useShader;
-	class QGLShaderProgram* starsShaderProgram;
-	
 	float big3dModelHaloRadius;
 };
 

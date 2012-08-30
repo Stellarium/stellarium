@@ -33,7 +33,6 @@
 #include "StelJsonParser.hpp"
 #include "StelObjectModule.hpp"
 #include "StelProjectorType.hpp"
-#include "StelTextureTypes.hpp"
 #include "TelescopeControlGlobals.hpp"
 #include "VecMath.hpp"
 
@@ -49,7 +48,6 @@
 #include <QVariant>
 
 class StelObject;
-class StelPainter;
 class StelProjector;
 class TelescopeClient;
 class TelescopeDialog;
@@ -79,7 +77,7 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore * core);
+	virtual void draw(StelCore * core, class StelRenderer* renderer);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -203,7 +201,7 @@ private slots:
 
 private:
 	//! Draw a nice animated pointer around the object if it's selected
-	void drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter);
+	void drawPointer(const StelProjectorP& prj, const StelCore* core, class StelRenderer* renderer);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);
@@ -240,9 +238,9 @@ private:
 	StelButton* toolbarButton;
 	
 	//! Telescope reticle texture
-	StelTextureSP reticleTexture;
+	class StelTextureNew* reticleTexture;
 	//! Telescope selection marker texture
-	StelTextureSP selectionTexture;
+	class StelTextureNew* selectionTexture;
 	
 	//! Contains the initialized telescope client objects representing the telescopes that Stellarium is connected to or attempting to connect to.
 	QMap<int, TelescopeClientP> telescopeClients;

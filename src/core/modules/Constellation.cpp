@@ -28,8 +28,10 @@
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 
-#include "StelTexture.hpp"
-#include "StelPainter.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
+#include "renderer/StelIndexBuffer.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
@@ -38,14 +40,75 @@ Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
 
-Constellation::Constellation() : asterism(NULL)
+Constellation::Constellation() 
+	: asterism(NULL)
+	, artTexture(NULL)
+	, artVertices(NULL)
+	, artIndices(NULL)
 {
 }
 
 Constellation::~Constellation()
 {
-	if (asterism) delete[] asterism;
-	asterism = NULL;
+	if (NULL != asterism)    {delete[] asterism;}
+	if (NULL != artTexture)  {delete artTexture;}
+	if (NULL != artVertices) {delete artVertices;}
+	if (NULL != artIndices)  {delete artIndices;}
+	asterism    = NULL;
+	artTexture  = NULL;
+	artVertices = NULL;
+	artIndices  = NULL;
+}
+
+void Constellation::generateArtVertices(StelRenderer* renderer, const int resolution)
+{
+	// Texture not yet loaded.
+	if (NULL == artTexture || !artTexture->getStatus() == TextureStatus_Loaded)
+	{
+		// artVertices will be still NULL, and it will be generated in a future 
+		// call once the texture is loaded
+		return;
+	}
+
+	const QSize texSize = artTexture->getDimensions();
+
+	artVertices = renderer->createVertexBuffer<Vertex>(PrimitiveType_Triangles);
+	artIndices  = renderer->createIndexBuffer(IndexType_U16);
+
+	const float mult = 1.0f / resolution;
+
+	// Create the vertex grid.
+	for (int y = 0; y <= resolution; ++y)
+	{
+		for (int x = 0; x <= resolution; ++x)
+		{
+			const float texX = x * mult;
+			const float texY = y * mult;
+			artVertices->addVertex
+				(Vertex(texCoordTo3D * Vec3f(texX * texSize.width(), texY * texSize.height(), 0.0f),
+				        Vec2f(texX, texY)));
+		}
+	}
+	// Use indices to form a triangle pair for every cell of the grid.
+	for (int y = 0; y < resolution; ++y)
+	{
+		for (int x = 0; x < resolution; ++x)
+		{
+			const uint sw = x       * (resolution + 1) + y;
+			const uint se = (x + 1) * (resolution + 1) + y;
+			const uint nw = x       * (resolution + 1) + y + 1;
+			const uint ne = (x + 1) * (resolution + 1) + y + 1;
+			artIndices->addIndex(nw);
+			artIndices->addIndex(se);
+			artIndices->addIndex(sw);
+			artIndices->addIndex(nw);
+			artIndices->addIndex(ne);
+			artIndices->addIndex(se);
+		}
+	}
+
+	artVertices->lock();
+	artIndices->lock();
 }
 
 bool Constellation::read(const QString& record, StarMgr *starMgr)
@@ -96,62 +159,66 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	return true;
 }
 
-void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
+void Constellation::drawOptim(StelRenderer* renderer, StelProjectorP projector, const StelCore* core, const SphericalCap& viewportHalfspace) const
 {
-	if (lineFader.getInterstate()<=0.0001f)
+	// Avoid drawing when not visible
+	if (lineFader.getInterstate() <= 0.001f)
+	{
 		return;
+	}
 
-	sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+	renderer->setGlobalColor(lineColor[0], lineColor[1], 
+	                         lineColor[2], lineFader.getInterstate());
 
 	Vec3d star1;
 	Vec3d star2;
-	for (unsigned int i=0;i<numberOfSegments;++i)
+	for (unsigned int i = 0; i < numberOfSegments; ++i)
 	{
-		star1=asterism[2*i]->getJ2000EquatorialPos(core);
-		star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
+		star1 = asterism[2 * i]->getJ2000EquatorialPos(core);
+		star2 = asterism[2 * i + 1]->getJ2000EquatorialPos(core);
 		star1.normalize();
 		star2.normalize();
-		sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+		StelCircleArcRenderer(renderer, projector)
+			.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 	}
 }
 
-void Constellation::drawName(StelPainter& sPainter) const
+void Constellation::drawName(StelRenderer* renderer, QFont& font) const
 {
-	if (!nameFader.getInterstate())
+	if (nameFader.getInterstate() <= 0.001f)
+	{
 		return;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
-	sPainter.drawText(XYname[0], XYname[1], nameI18, 0., -sPainter.getFontMetrics().width(nameI18)/2, 0, false);
+	}
+
+	renderer->setFont(font);
+	renderer->setGlobalColor(labelColor[0], labelColor[1], 
+	                         labelColor[2], nameFader.getInterstate());
+	renderer->drawText(TextParams(XYname[0], XYname[1], nameI18)
+	                   .shift(-QFontMetrics(font).width(nameI18) * 0.5, 0.0f)
+	                   .useGravity());
 }
 
-void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
+void Constellation::drawArtOptim
+	(StelRenderer* renderer, StelProjectorP projector, const SphericalRegion& region) const
 {
 	const float intensity = artFader.getInterstate();
-	if (artTexture && intensity && region.intersects(boundingCap))
+	// Art polygon not yet generated (only generated once the texture is loaded)
+	if (NULL == artVertices) {return;}
+	Q_ASSERT_X(NULL != artIndices, Q_FUNC_INFO, 
+	           "Vertex buffer was generated but index buffer was not");
+
+	renderer->setCulledFaces(CullFace_Back);
+	// Don't draw if outside viewport.
+	if (intensity > 0.001f && region.intersects(boundingCap))
 	{
+		artTexture->bind();
 		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(intensity, 0.0, 0.0);
+			renderer->setGlobalColor(intensity, 0.0, 0.0);
 		else
-			sPainter.setColor(intensity,intensity,intensity);
-
-		// The texture is not fully loaded
-		if (artTexture->bind()==false)
-			return;
-
-		sPainter.drawStelVertexArray(artPolygon);
+			renderer->setGlobalColor(intensity,intensity,intensity);
+		renderer->drawVertexBuffer(artVertices, artIndices, projector);
 	}
-}
-
-// Draw the art texture
-void Constellation::drawArt(StelPainter& sPainter) const
-{
-	glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
-	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
-	drawArtOptim(sPainter, *region);
-
-	glDisable(GL_CULL_FACE);
+	renderer->setCulledFaces(CullFace_None);
 }
 
 const Constellation* Constellation::isStarIn(const StelObject* s) const
@@ -177,41 +244,39 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
+void Constellation::drawBoundaryOptim(StelRenderer* renderer, StelProjectorP projector) const
 {
-	if (!boundaryFader.getInterstate())
-		return;
-
-	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
-	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
-
-	unsigned int i, j, size;
-	Vec3f pt1, pt2;
-	Vec3d ptd1, ptd2;
-	std::vector<Vec3f> *points;
-
-	if (singleSelected) size = isolatedBoundarySegments.size();
-	else size = sharedBoundarySegments.size();
-
-	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
-
-	for (i=0;i<size;i++)
+	if (boundaryFader.getInterstate() < 0.001)
 	{
-		if (singleSelected) points = isolatedBoundarySegments[i];
-		else points = sharedBoundarySegments[i];
+		return;
+	}
 
-		for (j=0;j<points->size()-1;j++)
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setGlobalColor(boundaryColor[0], boundaryColor[1], 
+	                         boundaryColor[2], boundaryFader.getInterstate());
+
+	int size = singleSelected ? isolatedBoundarySegments.size() 
+	                          : sharedBoundarySegments.size();
+
+	const SphericalCap& viewportHalfspace = projector->getBoundingCap();
+
+	for (int i = 0; i < size; i++)
+	{
+		std::vector<Vec3f>* points = singleSelected ? isolatedBoundarySegments[i] 
+		                                            : sharedBoundarySegments[i];
+
+		for (int j = 0; j < static_cast<int>(points->size()) - 1; j++)
 		{
-			pt1 = points->at(j);
-			pt2 = points->at(j+1);
-			if (pt1*pt2>0.9999999f)
+			const Vec3f pt1 = points->at(j) ;
+			const Vec3f pt2 = points->at(j +1);
+			if (pt1 * pt2 > 0.99999f)
+			{
 				continue;
-			ptd1.set(pt1[0], pt1[1], pt1[2]);
-			ptd2.set(pt2[0], pt2[1], pt2[2]);
-			sPainter.drawGreatCircleArc(ptd1, ptd2, &viewportHalfspace);
+			}
+			const Vec3d ptd1(pt1[0], pt1[1], pt1[2]);
+			const Vec3d ptd2(pt2[0], pt2[1], pt2[2]);
+			StelCircleArcRenderer(renderer, projector)
+				.drawGreatCircleArc(ptd1, ptd2, &viewportHalfspace);
 		}
 	}
 }

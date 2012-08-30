@@ -417,13 +417,26 @@ bool isPowerOfTwo(int value)
 	return (value & -value) == value;
 }
 
-// Return the first power of two bigger than the given value
-int getBiggerPowerOfTwo(int value)
+// Return the first power of two greater or equal to the given value
+int smallestPowerOfTwoGreaterOrEqualTo(int value)
 {
-	int p=1;
-	while (p<value)
-		p<<=1;
-	return p;
+#ifndef NDEBUG
+	const int twoTo30 = 1073741824;
+	Q_ASSERT_X(value <= twoTo30, Q_FUNC_INFO,
+	           "Value too large - smallest greater/equal power-of-2 is out of range");
+#endif
+
+	if(value == 0){return 0;}
+
+	int pot=1;
+	while (pot<value){pot<<=1;}
+	return pot;
+}
+
+QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base)
+{
+	return QSize(smallestPowerOfTwoGreaterOrEqualTo(base.width()), 
+	             smallestPowerOfTwoGreaterOrEqualTo(base.height()));
 }
 
 // Return the inverse sinus hyperbolic of z

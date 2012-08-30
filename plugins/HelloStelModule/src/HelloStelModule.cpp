@@ -17,12 +17,12 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "HelloStelModule.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QDebug>
 
@@ -87,11 +87,10 @@ void HelloStelModule::init()
 /*************************************************************************
  Draw our module. This should print "Hello world!" in the main window
 *************************************************************************/
-void HelloStelModule::draw(StelCore* core)
+void HelloStelModule::draw(StelCore* core, StelRenderer* renderer)
 {
-	StelPainter painter(core->getProjection2d());
-	painter.setColor(1,1,1,1);
-	painter.setFont(font);
-	painter.drawText(300, 300, "Hello World!");
+	renderer->setColor(1, 1, 1, 1);
+	renderer->setFont(font);
+	renderer->drawText(300, 300, "Hello World!")
 }
 
