@@ -17,30 +17,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifdef USE_OPENGL_ES2
- #include "GLES2/gl2.h"
-#endif
-
-#ifndef GL_POINT_SPRITE
- #define GL_POINT_SPRITE 0x8861
-#endif
-#ifndef GL_VERTEX_PROGRAM_POINT_SIZE
- #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
-#endif
-
-#include <QGLShaderProgram>
-#include <QtOpenGL>
-
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
 
 #include "StelToneReproducer.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureNew.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelPainter.hpp"
 
 #include <QStringList>
 #include <QSettings>
@@ -49,9 +35,22 @@
 
 // The 0.025 corresponds to the maximum eye resolution in degree
 #define EYE_RESOLUTION (0.25f)
-#define MAX_LINEAR_RADIUS 8.f
+#define MAX_LINEAR_RADIUS (8.f)
 
-StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(NULL)
+StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
+	: core(acore)
+	, renderer(renderer)
+	, texHalo(NULL)
+	, starPointBuffer(NULL)
+	, starSpriteBuffer(NULL)
+	, starSpriteIndices(NULL)
+	, bigHaloIndices(NULL)
+	, sunHaloIndices(NULL)
+	, coronaIndices(NULL)
+	, drawing(false)
+	, texBigHalo(NULL)
+	, texSunHalo(NULL)
+	, texCorona(NULL)
 {
 	eye = core->getToneReproducer();
 
@@ -76,7 +75,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(
 	setFlagHasAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
-	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
+	setDrawStarsAsPoints(conf->value("stars/flag_point_star",false).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -130,102 +129,37 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(
 		ok = true;
 	}
 
-	// Initialize buffers for use by gl vertex array
-	nbPointSources = 0;
-	maxPointSources = 1000;
-	verticesGrid = new Vec2f[maxPointSources*6];
-	colorGrid = new Vec3f[maxPointSources*6];
-	textureGrid = new Vec2f[maxPointSources*6];
-	for (unsigned int i=0;i<maxPointSources; ++i)
-	{
-		textureGrid[i*6].set(0,0);
-		textureGrid[i*6+1].set(1,0);
-		textureGrid[i*6+2].set(1,1);
-		textureGrid[i*6+3].set(0,0);
-		textureGrid[i*6+4].set(1,1);
-		textureGrid[i*6+5].set(0,1);
-	}
+	starPointBuffer  = renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_Points);
+	starSpriteBuffer = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
+
+	bigHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
+	sunHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
+	starSpriteIndices = renderer->createIndexBuffer(IndexType_U16);
+	coronaIndices     = renderer->createIndexBuffer(IndexType_U16);
 }
 
 StelSkyDrawer::~StelSkyDrawer()
-{
-	if (verticesGrid)
-		delete[] verticesGrid;
-	verticesGrid = NULL;
-	if (colorGrid)
-		delete[] colorGrid;
-	colorGrid = NULL;
-	if (textureGrid)
-		delete[] textureGrid;
-	textureGrid = NULL;
-
-	if (useShader)
-	{
-		delete starsShaderProgram;
-	}
+{                               
+	if(NULL != starPointBuffer)  {delete starPointBuffer;}
+	if(NULL != starSpriteBuffer) {delete starSpriteBuffer;}
+	if(NULL != bigHaloIndices)   {delete bigHaloIndices;}
+	if(NULL != sunHaloIndices)   {delete sunHaloIndices;}
+	if(NULL != starSpriteIndices){delete starSpriteIndices;}
+	if(NULL != coronaIndices)    {delete coronaIndices;}
+	if(NULL != texBigHalo)       {delete texBigHalo;}
+	if(NULL != texSunHalo)       {delete texSunHalo;}
+	if(NULL != texHalo)          {delete texHalo;}
+	if(NULL != texCorona)        {delete texCorona;}
 }
 
 // Init parameters from config file
 void StelSkyDrawer::init()
 {
-	StelPainter::makeMainGLContextCurrent();
-
 	// Load star texture no mipmap:
-	texHalo = StelApp::getInstance().getTextureManager().createTexture("textures/star16x16.png");
-	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("textures/haloLune.png");
-	texSunHalo = StelApp::getInstance().getTextureManager().createTexture("textures/halo.png");
-
-	useShader = StelApp::getInstance().getUseGLShaders();
-	if (useShader)
-	{
-		qDebug() << "Use vertex shader for stars rendering";
-		QGLShader* vShader = new QGLShader(QGLShader::Vertex);
-		vShader->compileSourceCode(
-						"uniform mediump mat4 projectionMatrix;\n"
-						"attribute mediump vec2 skyVertex;\n"
-						"attribute mediump vec3 starColor;\n"
-						"attribute mediump vec2 starSize;\n"
-						"varying mediump vec4 outColor;\n"
-						"void main()\n"
-						"{	gl_Position = projectionMatrix*vec4(skyVertex[0], skyVertex[1], 0., 1.);\n"
-						"	gl_PointSize = starSize[0]*2.;\n"
-						"	outColor = vec4(starColor, 1.);}");
-		starsShaderProgram = new QGLShaderProgram();
-		if (!vShader->isCompiled())
-		{
-			qWarning() << "Error while compiling shader: " << vShader->log();
-			useShader = false;
-		}
-		if (!vShader->log().isEmpty())
-		{
-			qWarning() << "Warnings while compiling vertex shader: " << vShader->log();
-		}
-		QGLShader* fShader = new QGLShader(QGLShader::Fragment);
-		if (!fShader->compileSourceCode(
-				"uniform sampler2D tex;\n"
-				"varying mediump vec4 outColor;\n"
-				"void main(){gl_FragColor = texture2D(tex,gl_PointCoord)*outColor;}"))
-		{
-			qWarning() << "Error while compiling fragment shader: " << fShader->log();
-			useShader = false;
-		}
-		if (!fShader->log().isEmpty())
-		{
-			qWarning() << "Warnings while compiling fragment shader: " << vShader->log();
-		}
-		starsShaderProgram->addShader(vShader);
-		starsShaderProgram->addShader(fShader);
-		if (!starsShaderProgram->link())
-		{
-			qWarning() << "Error while linking shader program: " << starsShaderProgram->log();
-			useShader = false;
-		}
-		if (!starsShaderProgram->log().isEmpty())
-		{
-			qWarning() << "Warnings while linking shader: " << starsShaderProgram->log();
-		}
-		maxPointSources*=6;
-	}
+	texHalo    = renderer->createTexture("textures/star16x16.png");
+	texBigHalo = renderer->createTexture("textures/haloLune.png");
+	texSunHalo = renderer->createTexture("textures/halo.png");
+	texCorona  = renderer->createTexture("textures/corona.png");
 
 	update(0);
 }
@@ -399,193 +333,148 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	return true;
 }
 
-void StelSkyDrawer::preDrawPointSource(StelPainter* p)
+void StelSkyDrawer::preDrawPointSource()
 {
-	Q_ASSERT(p);
-	Q_ASSERT(nbPointSources==0);
+	Q_ASSERT_X(!drawing, Q_FUNC_INFO,
+	           "Attempting to start drawing point sources when it is already started");
 
-	// Blending is really important. Otherwise faint stars in the vicinity of
-	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	drawing = true;
+}
 
-	if (getFlagPointStar())
+// Helper function that sets Add blend mode, then draws and clears a vertex buffer.
+//
+// The buffer is cleared since we re-add the stars on each frame.
+template<class VB>
+void drawStars(StelTextureNew* texture, VB* vertices, StelIndexBuffer* indices, StelRenderer* renderer, StelProjectorP projector)
+{
+	if(NULL != texture){texture->bind();}
+	renderer->setBlendMode(BlendMode_Add);
+	vertices->lock();
+	if(NULL != indices){indices->lock();}
+
+	// Vertices are already projected, so we use the dontProject
+	// argument of drawVertexBuffer.
+	//
+	// This is a hack - it would be better to refactor StelSkyDrawer,
+	// ZoneArray, etc, so projection gets done by the projector 
+	// during drawing like elsewhere.
+	
+	renderer->drawVertexBuffer(vertices, indices, projector, true);
+	vertices->unlock();
+	vertices->clear();
+	if(NULL != indices)
 	{
-		p->enableTexture2d(false);
-		p->setPointSize(0.1);
-	}
-	else
-	{
-		p->enableTexture2d(true);
+		indices->unlock();
+		indices->clear();
 	}
 }
 
 // Finalize the drawing of point sources
-void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
+void StelSkyDrawer::postDrawPointSource(StelProjectorP projector)
 {
-	Q_ASSERT(sPainter);
-
-	if (nbPointSources==0)
-		return;
-	texHalo->bind();
-	sPainter->enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
-	glEnable(GL_BLEND);
-
-	if (useShader)
+	drawStars(texBigHalo, starSpriteBuffer, bigHaloIndices, renderer, projector);
+	drawStars(texSunHalo, starSpriteBuffer, sunHaloIndices, renderer, projector);
+	if(drawStarsAsPoints)
 	{
-		Q_ASSERT(starsShaderProgram);
-#ifndef USE_OPENGL_ES2
-		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
-		glEnable(GL_POINT_SPRITE);
-#endif
-		starsShaderProgram->bind();
-		const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
-		starsShaderProgram->setUniformValue("projectionMatrix",
-			QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
-		starsShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)verticesGrid, 2, 0);
-		starsShaderProgram->setAttributeArray("starColor", (const GLfloat*)colorGrid, 3, 0);
-		starsShaderProgram->setAttributeArray("starSize", (const GLfloat*)textureGrid, 2, 0);
-		starsShaderProgram->enableAttributeArray("skyVertex");
-		starsShaderProgram->enableAttributeArray("starColor");
-		starsShaderProgram->enableAttributeArray("starSize");
-		glDrawArrays(GL_POINTS, 0, nbPointSources);
-		starsShaderProgram->disableAttributeArray("skyVertex");
-		starsShaderProgram->disableAttributeArray("starColor");
-		starsShaderProgram->disableAttributeArray("starSize");
-		starsShaderProgram->release();
-#ifndef USE_OPENGL_ES2
-		glDisable(GL_POINT_SPRITE);
-		glDisable(GL_VERTEX_PROGRAM_POINT_SIZE);
-#endif
+		drawStars(NULL, starPointBuffer, NULL, renderer, projector);
 	}
-	else
+	else                 
 	{
-#ifndef USE_OPENGL_ES2
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-		// Load the color components
-		glColorPointer(3, GL_FLOAT, 0, colorGrid);
-		// Load the vertex array
-		glVertexPointer(2, GL_FLOAT, 0, verticesGrid);
-		// Load the texture coordinates array
-		glTexCoordPointer(2, GL_FLOAT, 0, textureGrid);
-
-		// And draw everything at once
-		glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
-
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-#endif
+		drawStars(texHalo, starSpriteBuffer, starSpriteIndices, renderer, projector);
 	}
-	nbPointSources = 0;
+
+	drawing = false;
 }
 
-static Vec3d win;
-// Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen)
+//Helper function that adds the halo of a star/other point source to given vertex buffer.
+//
+//The template parameter is only used so we don't need to write ColoredTexturedVertex
+//every time, this function is only meant to be used from drawPointSource.
+//
+//If this pattern (2-triangle quad with 0,0 - 1,1 texcoords) appears in other 
+//classes in well, it might be good to add it as a helper function of 
+//StelVertexBuffer.
+template<class V>
+void addStar(StelVertexBuffer<V>* vertices, StelIndexBuffer* indices,
+             const float x, const float y, const float radius, const Vec3f& color)
 {
-	Q_ASSERT(sPainter);
-	Vec3f color(bcolor);
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		color[1] = 0;
-		color[2] = 0;
-	}
+	const int i = vertices->length();
 
-	if (rcMag[0]<=0.f)
-		return false;
+	//4 vertices, 2 triangles.
+	
+	vertices->addVertex(V(Vec2f(x - radius, y - radius), color, Vec2f(0.0f, 0.0f)));
+	vertices->addVertex(V(Vec2f(x + radius, y - radius), color, Vec2f(1.0f, 0.0f)));
+	vertices->addVertex(V(Vec2f(x + radius, y + radius), color, Vec2f(1.0f, 1.0f)));
+	vertices->addVertex(V(Vec2f(x - radius, y + radius), color, Vec2f(0.0f, 1.0f)));
 
-	// TODO: compute Vec3f v_refr (position including refraction) --> NO: This is done in ZoneArray!
+	indices->addIndex(i);
+	indices->addIndex(i + 1);
+	indices->addIndex(i + 2);
+	indices->addIndex(i);
+	indices->addIndex(i + 2);
+	indices->addIndex(i + 3);
+}
 
-	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
-		return false;
+// Draw a point source halo.
+bool StelSkyDrawer::drawPointSource
+	(StelProjectorP projector, const Vec3d& v, const float rcMag[2],
+	 const Vec3f& bcolor, bool checkInScreen)
+{
+	Q_ASSERT_X(drawing, Q_FUNC_INFO,
+	           "Attempting to draw a point source without calling preDrawPointSource first.");
+	const float radius    = rcMag[0];
+	const float luminance = rcMag[1];
 
-	const float radius = rcMag[0];
+	if (radius <= 0.0f){return false;}
+	Vec3d win;
+	const bool validProjection = checkInScreen ? projector->projectCheck(v, win) 
+	                                           : projector->project(v, win);
+	if (!validProjection){return false;}
+
+	const Vec3f color = StelApp::getInstance().getVisionModeNight() 
+	                  ? Vec3f(bcolor[0], 0, 0) : bcolor;
 	// Random coef for star twinkling
-	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag[1] : rcMag[1];
+	const float tw = (flagStarTwinkle && flagHasAtmosphere) 
+	                 ? (1.0f - twinkleAmount * rand() / RAND_MAX) * luminance
+	                 : luminance;
+
+	const float x = win[0];
+	const float y = win[1];
 
 	// If the rmag is big, draw a big halo
-	if (radius>MAX_LINEAR_RADIUS+5.f)
+	if (radius > MAX_LINEAR_RADIUS + 5.0f)
 	{
-		float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
-		float rmag = 150.f;
-		if (cmag>1.f)
-			cmag = 1.f;
-
-		texBigHalo->bind();
-		sPainter->enableTexture2d(true);
-		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);				
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter->setColor(color[0]*cmag, 0.0, 0.0);
-		else
-			sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-
-		sPainter->drawSprite2dMode(win[0], win[1], rmag);
+		const float cmag = qMin(1.0f, qMin(luminance, (radius - MAX_LINEAR_RADIUS + 5.0f) / 30.f));
+		addStar(starSpriteBuffer, bigHaloIndices, x, y, 150.0f, color * cmag);
 	}
 
-#ifndef USE_OPENGL_ES2
-	if (useShader)
+	if (drawStarsAsPoints)
 	{
-#endif
-		// Use point based rendering
-		verticesGrid[nbPointSources].set(win[0], win[1]);
-		colorGrid[nbPointSources].set(color[0]*tw, color[1]*tw, color[2]*tw);
-		textureGrid[nbPointSources][0]=radius;
-#ifndef USE_OPENGL_ES2
+		starPointBuffer->addVertex(ColoredVertex(Vec2f(x, y), color * tw));
 	}
 	else
 	{
-		if (flagPointStar)
-		{
-			// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-			sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
-			sPainter->drawPoint2d(win[0], win[1]);
-		}
-		else
-		{
-			// Store the drawing instructions in the vertex arrays
-			Vec2f* v = &(verticesGrid[nbPointSources*6]);
-			v->set(win[0]-radius,win[1]-radius); ++v;
-			v->set(win[0]+radius,win[1]-radius); ++v;
-			v->set(win[0]+radius,win[1]+radius); ++v;
-			v->set(win[0]-radius,win[1]-radius); ++v;
-			v->set(win[0]+radius,win[1]+radius); ++v;
-			v->set(win[0]-radius,win[1]+radius); ++v;
-
-			Vec3f w = color;
-			w = color;
-			w*=tw;
-			Vec3f* cv = &(colorGrid[nbPointSources*6]);
-			*cv = w; ++cv;
-			*cv = w; ++cv;
-			*cv = w; ++cv;
-			*cv = w; ++cv;
-			*cv = w; ++cv;
-			*cv = w; ++cv;
-			win = Vec3d(w[0],w[1],w[2]);
-		}
+		addStar(starSpriteBuffer, starSpriteIndices, x, y, radius, color * tw);
 	}
-#endif
 
-	++nbPointSources;
-	if (nbPointSources>=maxPointSources)
-	{
-		// Flush the buffer (draw all buffered stars)
-		postDrawPointSource(sPainter);
-	}
 	return true;
 }
 
+// Draw's the sun's corona during a solar eclipse on earth.
+void StelSkyDrawer::drawSunCorona(StelProjectorP projector, const Vec3d &v, float radius, float alpha)
+{
+	Vec3d win;
+	projector->project(v, win);
+	addStar(starSpriteBuffer, coronaIndices, win[0], win[1], radius * 2, Vec3f(alpha, alpha, alpha));
+	drawStars(texCorona, starSpriteBuffer, coronaIndices, renderer, projector);
+}
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel
+	(StelProjectorP projector, const Vec3d& v, float illuminatedArea, 
+	 float mag, const Vec3f& color)
 {
-	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
+	const float pixPerRad = projector->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
 
@@ -593,23 +482,19 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 
 	if (mag<-15.f)
 	{
-		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer
-		// as the sun as seen from earth
-		texSunHalo->bind();
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
-		painter->enableTexture2d(true);
-		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
+		const float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
 		float cmag = 1.f;
-		if (rmag<pixRadius*3.f+100.)
+		if (rmag<pixRadius*3.f+100.0f)
+		{
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
-		painter->getProjector()->project(v, win);
+		}
+		Vec3d win;
+		projector->project(v, win);
 		Vec3f c = color;
 		if (StelApp::getInstance().getVisionModeNight())
 			c = StelUtils::getNightColor(c);
 
-		painter->setColor(c[0]*cmag, c[1]*cmag, c[2]*cmag);
-		painter->drawSprite2dMode(win[0], win[1], rmag);
+		addStar(starSpriteBuffer, sunHaloIndices, win[0], win[1], rmag, c * cmag);
 		noStarHalo = true;
 	}
 
@@ -657,9 +542,9 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 
 	if (!noStarHalo)
 	{
-		preDrawPointSource(painter);
-		drawPointSource(painter, v,rcm,color);
-		postDrawPointSource(painter);
+		preDrawPointSource();
+		drawPointSource(projector, v, rcm, color);
+		postDrawPointSource(projector);
 	}
 	flagStarTwinkle=save;
 }

@@ -27,7 +27,6 @@
 
 #include <QFont>
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
 #include "Planet.hpp"
 
 class Orbit;
@@ -60,10 +59,11 @@ public:
 	virtual void init();
 
 	//! Draw SolarSystem objects (planets).
-	//! @param core The StelCore object.
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to use for drawing.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual void draw(StelCore *core);
+	virtual void draw(StelCore *core, class StelRenderer* renderer);
 
 	//! Update time-varying components.
 	//! This includes planet motion trails.
@@ -211,6 +211,9 @@ public:
 	//! Reload the planets
 	void reloadPlanets();
 
+	//! Determines relative amount of sun visible from the observer's position.
+	double getEclipseFactor(const StelCore *core) const;
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -251,7 +254,10 @@ private:
 	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(const StelCore* core);
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void drawPointer(const StelCore* core, class StelRenderer* renderer);
 
 	//! Load planet data from the Solar System configuration file.
 	//! This function attempts to load every possible instance of the
@@ -263,6 +269,16 @@ private:
 	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
+
+	//! Calculates the shadow information for the shadow planet shader.
+	class StelTextureNew* computeShadowInfo(StelRenderer* renderer);
+
+	//! Used by computeShadowInfo to generate shadow info texture before uploading it.
+	QVector<Vec4f> shadowInfoBuffer;
+
+	//! Used by computeShadowInfo to store computed planet model matrices used to generate the 
+	//! shadow info texture.
+	QVector<Mat4d> shadowModelMatricesBuffer;
 
 	PlanetP sun;
 	PlanetP moon;
@@ -295,13 +311,15 @@ private:
 	bool flagLightTravelTime;
 
 	//! The selection pointer texture.
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
 
 	bool flagShow;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
 	Vec3f trailColor;
+
+	Planet::SharedPlanetGraphics sharedPlanetGraphics;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED

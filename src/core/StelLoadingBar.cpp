@@ -20,50 +20,56 @@
 #include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelCore.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QDebug>
-#include <QtOpenGL>
 
 StelLoadingBar::StelLoadingBar(const QString& splashTex,
 	const QString& extraTextString, float extraTextSize,
-	float extraTextPosx, float extraTextPosy, int aWidth, int aHeight) :
-	width(aWidth), height(aHeight), extraText(extraTextString), sPainter(NULL)
+	float extraTextPosx, float extraTextPosy, int aWidth, int aHeight) 
+	: width(aWidth)
+	, height(aHeight)
+	, splash(NULL)
+	, extraText(extraTextString)
+	, splashName(splashTex)
+	, viewportXywh(StelApp::getInstance().getCore()->getProjection2d()->getViewportXywh())
 {
 	extraTextFont.setPixelSize(extraTextSize);
-	sPainter = new StelPainter(StelApp::getInstance().getCore()->getProjection2d());
-	int screenw = sPainter->getProjector()->getViewportWidth();
-	int screenh = sPainter->getProjector()->getViewportHeight();
-	splashx = sPainter->getProjector()->getViewportPosX() + (screenw - width)/2;
-	splashy = sPainter->getProjector()->getViewportPosY() + (screenh - height)/2;
-	if (!splashTex.isEmpty())
-		splash = StelApp::getInstance().getTextureManager().createTexture(splashTex);
+	splashx = viewportXywh[0] + (viewportXywh[2] - width)/2;
+	splashy = viewportXywh[1] + (viewportXywh[3] - height)/2;
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 }
 
 StelLoadingBar::~StelLoadingBar()
 {
-	delete sPainter;
+	if(NULL != splash) {delete splash;}
 }
 
-void StelLoadingBar::draw()
+void StelLoadingBar::draw(StelRenderer* renderer)
 {
-	sPainter->setColor(1.f, 1.f, 1.f);
-	sPainter->enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	// Draw the splash screen if available
-	if (splash)
+	if(NULL == splash)
 	{
-		splash->bind();
-		sPainter->drawRect2d(splashx, splashy, width, height);
+		splash = renderer->createTexture(splashName);
 	}
 
-	sPainter->setFont(extraTextFont);
-	sPainter->drawText(splashx + extraTextPos[0], splashy + extraTextPos[1]-sPainter->getFontMetrics().height()-1, extraText);
-	StelPainter::swapBuffer();	// And swap the buffers
+	// Background.
+	renderer->setGlobalColor(0.0f, 0.0f, 0.0f);
+	renderer->drawRect(viewportXywh[0], viewportXywh[1], viewportXywh[2], viewportXywh[3]);
+
+	renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
+	renderer->setBlendMode(BlendMode_Alpha);
+
+	// Draw the splash screen.
+	splash->bind();
+	renderer->drawTexturedRect(splashx, splashy, width, height);
+
+	renderer->setFont(extraTextFont);
+	const QFontMetrics fontMetrics(extraTextFont);
+	renderer->drawText(TextParams(splashx + extraTextPos[0], 
+	                              splashy + extraTextPos[1] - fontMetrics.height() - 1, 
+	                              extraText));
+
+	renderer->swapBuffers();
 }

@@ -20,7 +20,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelAppGraphicsWidget.hpp"
-#include "StelPainter.hpp"
+#include "StelRenderer.hpp"
 #include "StelGuiBase.hpp"
 #include "StelViewportEffect.hpp"
 
@@ -31,8 +31,52 @@
 #include <QGLFramebufferObject>
 #include <QSettings>
 
-StelAppGraphicsWidget::StelAppGraphicsWidget()
-	: paintState(0), useBuffers(false), backgroundBuffer(NULL), foregroundBuffer(NULL), viewportEffect(NULL), doPaint(true)
+//! Provides access to paintPartial and drawing related classes to Renderer.
+//!
+//! This is basically just a callback object, it is created and passed 
+//! on every frame.
+//!
+//! Renderer uses drawPartial to draw parts of the scene, allowing it 
+//! to measure rendering time and suspend rendering if it's too slow.
+//!
+//! @see StelRenderClient
+class StelAppGraphicsWidgetRenderClient : public StelRenderClient
+{
+public:
+	//! Construct a StelAppGraphicsWidgetRenderClient providing access to specified widget.
+	//!
+	//! @param widget  Widget that manages drawing of the scene.
+	//! @param painter Painter that paints on the widget.
+	explicit StelAppGraphicsWidgetRenderClient(StelAppGraphicsWidget* widget,
+	                                           QPainter* painter)
+		: StelRenderClient()
+		, widget(widget)
+		, painter(painter)
+	{
+	}
+
+	virtual bool drawPartial() {return widget->paintPartial();}
+
+	virtual QPainter* getPainter() 
+	{
+		return painter;
+	}
+
+	virtual StelViewportEffect* getViewportEffect() {return widget->viewportEffect;}
+
+private:
+	//! Widget that manages drawing of the scene. 
+	StelAppGraphicsWidget* const widget;
+
+	//! QPainter that paints on the graphics widget.
+	QPainter* const painter;
+};
+
+StelAppGraphicsWidget::StelAppGraphicsWidget(StelRenderer* renderer)
+	: paintState(0), 
+	  renderer(renderer),
+	  viewportEffect(NULL), 
+	  doPaint(true)
 {
 	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
@@ -43,10 +87,7 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 {
 	delete stelApp;
 	stelApp = NULL;
-	if (backgroundBuffer) delete backgroundBuffer;
-	backgroundBuffer = NULL;
-	if (foregroundBuffer) delete foregroundBuffer;
-	foregroundBuffer = NULL;
+	
 	if (viewportEffect) delete viewportEffect;
 	viewportEffect = NULL;
 	
@@ -55,17 +96,16 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 
 void StelAppGraphicsWidget::init(QSettings* conf)
 {
-	stelApp->init(conf);
+	stelApp->init(conf, renderer);
 	Q_ASSERT(viewportEffect==NULL);
 	setViewportEffect(conf->value("video/viewport_effect", "none").toString());
-	
+	renderer->viewportHasBeenResized(scene()->sceneRect().size().toSize());
 	//previousPaintTime needs to be updated after the time zone is set
 	//in StelLocaleMgr::init(), otherwise this causes an invalid value of
 	//deltaT the first time it is calculated in paintPartial(), which in
 	//turn causes Stellarium to start with a wrong time.
 	previousPaintTime = StelApp::getTotalRunTime();
 }
-
 
 void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 {
@@ -76,32 +116,21 @@ void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 		delete viewportEffect;
 		viewportEffect=NULL;
 	}
-	if (name=="none")
+	
+	if (name == "none")
 	{
-		useBuffers = false;
-		return;
-	}
-	if (!QGLFramebufferObject::hasOpenGLFramebufferObjects())
-	{
-		qWarning() << "Don't support OpenGL framebuffer objects, can't use Viewport effect: " << name;
-		useBuffers = false;
-		return;
-	}
-
-	qDebug() << "Use OpenGL framebuffer objects for viewport effect: " << name;
-	useBuffers = true;
-	if (name == "framebufferOnly")
-	{
-		viewportEffect = new StelViewportEffect();
+		qDebug() << "Not using any viewport effect";
 	}
 	else if (name == "sphericMirrorDistorter")
 	{
-		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(size().width(), size().height());
+		qDebug() << "Setting sphericMirrorDistorter viewport effect";
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(size().width(),
+		                                                                 size().height(),
+		                                                                 renderer);
 	}
 	else
 	{
-		qWarning() << "Unknown viewport effect name: " << name;
-		useBuffers=false;
+		qWarning() << "Unknown viewport effect name (using no effect): " << name;
 	}
 }
 
@@ -144,7 +173,7 @@ bool StelAppGraphicsWidget::paintPartial()
 	if (paintState == 1)
 	{
 		// And draw them
-		if (stelApp->drawPartial())
+		if (stelApp->drawPartial(renderer))
 			return true;
 
 		paintState = 0;
@@ -159,74 +188,12 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
 	if (!stelApp || !stelApp->getCore() || !doPaint)
 		return;
-	
-	StelPainter::setQPainter(painter);
 
-	if (useBuffers)
-	{
-		StelPainter::makeMainGLContextCurrent();
-		initBuffers();
-		backgroundBuffer->bind();
-		QPainter* pa = new QPainter(backgroundBuffer);
-		StelPainter::setQPainter(pa);
+	StelAppGraphicsWidgetRenderClient client(this, painter);
 
-		// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
-		int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
-		while (true)
-		{
-			bool keep = paintPartial();
-			if (!keep) // The paint is done
-			{
-				delete pa;
-				backgroundBuffer->release();
-				swapBuffers();
-				break;
-			}
-			double spentTime = StelApp::getTotalRunTime() - previousPaintFrameTime;
-			if (1. / spentTime <= minFps) // we spent too much time
-			{
-				// We stop the painting operation for now
-				delete pa;
-				backgroundBuffer->release();
-				break;
-			}
-		}
-		Q_ASSERT(!backgroundBuffer->isBound());
-		Q_ASSERT(!foregroundBuffer->isBound());
-		// Paint the last completed painted buffer
-		StelPainter::setQPainter(painter);
-		viewportEffect->paintViewportBuffer(foregroundBuffer);
-	}
-	else
-	{
-		while (paintPartial()) {;}
-	}
-	StelPainter::setQPainter(NULL);
-	previousPaintFrameTime = StelApp::getTotalRunTime();
-}
-
-//! Swap the buffers
-//! this should be called after we finish the paint
-void StelAppGraphicsWidget::swapBuffers()
-{
-	Q_ASSERT(useBuffers);
-	QGLFramebufferObject* tmp = backgroundBuffer;
-	backgroundBuffer = foregroundBuffer;
-	foregroundBuffer = tmp;
-}
-
-//! Initialize the opengl buffer objects.
-void StelAppGraphicsWidget::initBuffers()
-{
-	Q_ASSERT(useBuffers);
-	Q_ASSERT(QGLFramebufferObject::hasOpenGLFramebufferObjects());
-	if (!backgroundBuffer)
-	{
-		backgroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
-		foregroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
-		Q_ASSERT(backgroundBuffer->isValid());
-		Q_ASSERT(foregroundBuffer->isValid());
-	}
+	// Renderer manages the rendering process in detail, e.g. 
+	// deciding whether or not to suspend drawing because FPS is too low.
+	renderer->renderFrame(client);
 }
 
 void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -283,15 +250,11 @@ void StelAppGraphicsWidget::keyReleaseEvent(QKeyEvent* event)
 void StelAppGraphicsWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
 	QGraphicsWidget::resizeEvent(event);
-	stelApp->glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
-	if (backgroundBuffer)
-	{
-		delete backgroundBuffer;
-		backgroundBuffer = NULL;
-	}
-	if (foregroundBuffer)
-	{
-		delete foregroundBuffer;
-		foregroundBuffer = NULL;
-	}
+	const float w = geometry().width();
+	const float h = geometry().height();
+	const float x = scenePos().x();
+	const float y = scene()->sceneRect().height() - (scenePos().y() + geometry().height());
+	
+	stelApp->windowHasBeenResized(x, y, w, h);
+	renderer->viewportHasBeenResized(scene()->sceneRect().size().toSize());
 }

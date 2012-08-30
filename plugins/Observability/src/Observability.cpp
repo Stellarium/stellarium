@@ -19,7 +19,6 @@
 #include <QSettings>
 #include <QPixmap>
 #include <QTimer>
-#include <QtOpenGL>
 #include <QString>
 #include <QDebug>
 #include <QAction>
@@ -28,6 +27,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 
+#include "renderer/StelRenderer.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -42,9 +42,7 @@
 #include "StelGuiItems.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelVertexArray.hpp"
 #include "StelCore.hpp"
-#include "StelPainter.hpp"
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
 #include "Observability.hpp"
@@ -239,7 +237,7 @@ void Observability::init()
 
 /////////////////////////////////////////////
 // MAIN CODE:
-void Observability::draw(StelCore* core)
+void Observability::draw(StelCore* core, StelRenderer* renderer)
 {
 
 	if (!flagShowObservability) return; // Button is off.
@@ -255,10 +253,10 @@ void Observability::draw(StelCore* core)
 	if (core->getCurrentLocation().planetName != "Earth") {return;};
 
 // Set the painter:
-	StelPainter paintresult(core->getProjection2d());
-	paintresult.setColor(fontColor[0],fontColor[1],fontColor[2],1);
+	StelProjectorP projector = core->getProjection2d();
+	renderer->setGlobalColor(fontColor[0],fontColor[1],fontColor[2],1);
 	font.setPixelSize(fontSize);
-	paintresult.setFont(font);
+	renderer->setFont(font);
 
 
 // Get current date, location, and check if there is something selected.
@@ -675,30 +673,30 @@ void Observability::draw(StelCore* core)
 
 	if (show_Today) 
 	{
-		paintresult.drawText(xLine, yLine,q_("TODAY:"));
-		paintresult.drawText(xLine+fontSize, yLine-spacing, RS2);
-		paintresult.drawText(xLine+fontSize, yLine-spacing*2, RS1);
-		paintresult.drawText(xLine+fontSize, yLine-spacing*3, Cul);
+		renderer->drawText(TextParams(xLine, yLine,q_(" TODAY:")));
+		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing, RS2));
+		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*2, RS1));
+		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*3, Cul));
 		yLine -= spacing2;
 	};
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{
-		paintresult.drawText(xLine,yLine,q_("THIS YEAR:"));
+		renderer->drawText(TextParams(xLine,yLine," THIS YEAR:"));
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= spacing;
-			paintresult.drawText(xLine+fontSize, yLine, bestNight);
+			renderer->drawText(TextParams(xLine+fontSize, yLine, bestNight));
 		};
 		if (show_Good_Nights) 
 		{
 			yLine -= spacing;
-			paintresult.drawText(xLine+fontSize, yLine, ObsRange);
+			renderer->drawText(TextParams(xLine+fontSize, yLine, ObsRange));
 		};
 		if (show_AcroCos) 
 		{
 			yLine -= spacing;
-			paintresult.drawText(xLine+fontSize, yLine, AcroCos);
+			renderer->drawText(TextParams(xLine+fontSize, yLine, AcroCos));
 		};
 
 	};

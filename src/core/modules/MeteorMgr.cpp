@@ -20,17 +20,15 @@
 #include <functional>
 #include <cstdlib>
 #include <QSettings>
-#include <QtOpenGL>
 
-#include "StelProjector.hpp"
-
+#include "LandscapeMgr.hpp"
+#include "Meteor.hpp"
 #include "MeteorMgr.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "Meteor.hpp"
-#include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelPainter.hpp"
+#include "StelProjector.hpp"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv ) : flagShow(true)
 {
@@ -147,7 +145,7 @@ void MeteorMgr::update(double deltaTime)
 }
 
 
-void MeteorMgr::draw(StelCore* core)
+void MeteorMgr::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (!flagShow)
 		return;
@@ -156,14 +154,11 @@ void MeteorMgr::draw(StelCore* core)
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 		return;
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	sPainter.setShadeModel(StelPainter::ShadeModelSmooth);
+	renderer->setBlendMode(BlendMode_Alpha);
 
 	// step through and draw all active meteors
 	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
-		(*iter)->draw(core, sPainter);
+		(*iter)->draw(core, core->getProjection(StelCore::FrameAltAz), renderer);
 	}
 }
