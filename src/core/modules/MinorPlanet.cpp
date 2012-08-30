@@ -23,8 +23,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-#include "StelTexture.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
@@ -65,7 +63,6 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;

@@ -31,6 +31,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelUtils.hpp"
 //#include "StelTranslator.hpp"
 
 
@@ -235,13 +236,13 @@ bool ManualImportWindow::verifyTextureFile(QString filePath)
 		return false;
 	}
 
-	if (!verifyPowerOfTwo(texture.height()))
+	if (!StelUtils::isPowerOfTwo(texture.height()))
 	{
 		qDebug() << "Invalid texure height:" << texture.height()
 				<< "for file" << filePath;
 		return false;
 	}
-	if (!verifyPowerOfTwo(texture.width()))
+	if (!StelUtils::isPowerOfTwo(texture.width()))
 	{
 		qDebug() << "Invalid texture width:" << texture.width()
 				<< "for file" << filePath;
@@ -249,12 +250,4 @@ bool ManualImportWindow::verifyTextureFile(QString filePath)
 	}
 
 	return true;
-}
-
-bool ManualImportWindow::verifyPowerOfTwo(int value)
-{
-	if (value > 0 && (value & (value-1)) == 0)
-		return true;
-	else
-		return false;
 }

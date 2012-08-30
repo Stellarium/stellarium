@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2009 Fabien Chereau
+ * Copyright (C) 2012 Ferdinand Majerech
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,24 +17,25 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTSTELVERTEXARRAY_HPP_
-#define _TESTSTELVERTEXARRAY_HPP_
+#ifndef _TRIPLET_HPP_
+#define _TRIPLET_HPP_
 
-#include <QObject>
-#include <QtTest>
-
-#include "StelVertexArray.hpp"
-
-class TestStelVertexArray : public QObject
+//! A simple struct holding a triplet of values of some type.
+//!
+//! Safer and more readable than using fixed-size arrays and passing them as pointers.
+//!
+//! Used e.g. for triangles. 
+template<class T>
+struct Triplet
 {
-Q_OBJECT
-private slots:
-	void initTestCase();
-	void benchmarkForeachTriangleNoOp();
-	void benchmarkForeachTriangle();
-	void benchmarkForeachTriangleDirect();
-private:
-	StelVertexArray array;
+	//! First, second, and third element of the triplet.
+	T a, b, c;
+
+	//! Default constructor for collections.
+	Triplet(){}
+
+	//! Construct a triplet from three values.
+	Triplet(const T& a, const T& b, const T& c) : a(a), b(b), c(c){}
 };
 
-#endif // _TESTSTELVERTEXARRAY_HPP_
+#endif // _TRIPLET_HPP_

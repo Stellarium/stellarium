@@ -22,8 +22,6 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
-#include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Exoplanet.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -37,7 +35,6 @@ class QProgressBar;
 class QSettings;
 class QTimer;
 class ExoplanetsDialog;
-class StelPainter;
 class QPixmap;
 class StelButton;
 
@@ -66,8 +63,9 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual void drawPointer(StelCore* core, StelPainter& painter);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void drawPointer(StelCore* core, class StelRenderer* renderer,
+	                         StelProjectorP projector);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -181,7 +179,8 @@ private:
 
 	QString jsonCatalogPath;
 
-	StelTextureSP texPointer;
+	StelTextureNew* texPointer;
+	StelTextureNew* markerTexture;
 	QList<ExoplanetP> ep;
 
 	// variables and functions for the updater

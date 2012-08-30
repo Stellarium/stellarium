@@ -22,8 +22,6 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
-#include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Pulsar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -38,7 +36,6 @@ class QSettings;
 class QTimer;
 class PulsarsDialog;
 
-class StelPainter;
 
 typedef QSharedPointer<Pulsar> PulsarP;
 
@@ -65,8 +62,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core);
-	virtual void drawPointer(StelCore* core, StelPainter& painter);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -180,7 +177,8 @@ private:
 
 	QString jsonCatalogPath;
 
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
+	class StelTextureNew* markerTexture;
 	QList<PulsarP> psr;
 
 	// variables and functions for the updater
