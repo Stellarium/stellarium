@@ -175,7 +175,7 @@ inline QString glErrorToString(const GLenum error)
 	return QString();
 }
 
-//! Get OpenGL internal (on-GPU) pixel format (internalFormat passed to glTexImage2D()) of an image.
+//! Get GL internal (on-GPU) pixel format (internalFormat passed to glTexImage2D()) of an image.
 //! 
 //! Qt handles image conversion to a compatible in-RAM format before uploading to the GPU.
 //! Changes might be needed if we replace Qt texture functions with our own.
@@ -189,7 +189,27 @@ inline GLint glGetTextureInternalFormat(const QImage& image)
 	else     {return alpha ? GL_RGBA8 : GL_RGB8;}
 }
 
-//! Return format of pixels to be uploaded to a GPU.
+//! Get GL internal (on-GPU) pixel format (internalFormat passed to glTexImage2D())
+//! corresponding to a TextureDataFormat.
+//! 
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+inline GLint glGetTextureInternalFormat(const TextureDataFormat format)
+{
+	switch(format)
+	{
+		// Mac seems to not define GL_RGBA32F yet (might be fixed in future).
+#ifdef Q_OS_MAC
+		case TextureDataFormat_RGBA_F32: return GL_RGBA32F_ARB; break;
+#else
+		case TextureDataFormat_RGBA_F32: return GL_RGBA32F; break;
+#endif
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
+	}
+	// Avoid compiler warnings
+	return -1;
+}
+
+//! Return GL format of pixels to be uploaded to a GPU.
 //!
 //! This needs to match the value Qt will use when calling glTexImage2D()
 //! (Qt might internally convert the image). Changes might be needed if we 
@@ -204,7 +224,21 @@ inline GLenum glGetTextureLoadFormat(const QImage& image)
 	else     {return alpha ? GL_RGBA : GL_RGB;}
 }
 
-//! Return data type of data in pixels of an image.
+//! Return GL format of pixels to be uploaded to a GPU corresponding to a TextureDataFormat.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+inline GLint glGetTextureLoadFormat(const TextureDataFormat format)
+{
+	switch(format)
+	{
+		case TextureDataFormat_RGBA_F32: return GL_RGBA; break;
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
+	}
+	// Avoid compiler warnings
+	return -1;
+}
+
+//! Return GL data type of data in pixels of an image.
 //!
 //! This needs to match the value Qt will use when calling glTexImage2D()
 //! (Qt might internally convert the image). Changes might be needed if we 
@@ -217,24 +251,28 @@ inline GLenum glGetTextureType(const QImage& image)
 	return GL_UNSIGNED_BYTE;
 }
 
+//! Return GL data type of data in pixels corresponding to a TextureDataFormat.
+//!
+//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
+inline GLint glGetTextureType(const TextureDataFormat format)
+{
+	switch(format)
+	{
+		case TextureDataFormat_RGBA_F32: return GL_FLOAT; break;
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
+	}
+	// Avoid compiler warnings
+	return -1;
+}
+
 //! Determine if specified texture size is within maximum texture size limits.
 //!
 //! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline bool glTextureSizeWithinLimits(const QSize size, const TextureDataFormat format)
 {
-	GLint internalFormat;
-	GLenum loadFormat, type;
-	switch(format)
-	{
-		case TextureDataFormat_RGBA_F32:
-			internalFormat = GL_RGBA32F;
-			loadFormat     = GL_RGBA;
-			type           = GL_FLOAT;
-			break;
-		default:
-			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
-			break;
-	}
+	const GLint internalFormat = glGetTextureInternalFormat(format);
+	const GLenum loadFormat    = glGetTextureLoadFormat(format);
+	const GLenum type          = glGetTextureType(format);
 
 	glTexImage2D(GL_PROXY_TEXTURE_2D, 0, internalFormat, size.width(), size.height(), 0,
 	             loadFormat, type, NULL);

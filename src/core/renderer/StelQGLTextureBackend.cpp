@@ -353,21 +353,14 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 #endif
 
 	// Determine GL texture format.
-	GLint internalFormat;
-	GLenum loadFormat, type;
-	// For statistics
 	switch(format)
 	{
-		case TextureDataFormat_RGBA_F32:
-			internalFormat     = GL_RGBA32F;
-			loadFormat         = GL_RGBA;
-			type               = GL_FLOAT;
-			result->pixelBytes = 16.0f;
-			break;
-		default:
-			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
-			break;
+		case TextureDataFormat_RGBA_F32: result->pixelBytes = 16.0f; break;
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format"); break;
 	}
+	const GLint internalFormat = glGetTextureInternalFormat(format);
+	const GLenum loadFormat    = glGetTextureLoadFormat(format);
+	const GLenum type          = glGetTextureType(format);
 
 	// Flushes any previous errors.
 	checkGLErrors("fromRawData() before texture data upload");
