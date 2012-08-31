@@ -49,7 +49,7 @@ public:
 	//! @param shader           Shader used for drawing, with any needed projection/transform 
 	//!                         shaders enabled.
 	void draw(class StelQGL2Renderer& renderer, const Mat4f& projectionMatrix,
-	          class StelQGLIndexBuffer* indexBuffer, StelQGLGLSLShader* shader);
+	          class StelQGLIndexBuffer* indexBuffer, class StelQGLGLSLShader* shader);
 
 private:
 	//! Construct a StelQGL2ArrayVertexBufferBackend. Only StelQGL2Renderer can do this.
@@ -57,7 +57,7 @@ private:
 	//! @param type Graphics primitive type stored in the buffer.
 	//! @param attributes Specifications of vertex attributes that will be stored in the buffer.
 	StelQGL2ArrayVertexBufferBackend(const PrimitiveType type,
-	                                const QVector<StelVertexAttribute>& attributes);
+	                                 const QVector<StelVertexAttribute>& attributes);
 };
 
 #endif // _STELQGL2ARRAYVERTEXBUFFERBACKEND_

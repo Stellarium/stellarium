@@ -42,7 +42,7 @@
 
 StelQGL2ArrayVertexBufferBackend::
 StelQGL2ArrayVertexBufferBackend(const PrimitiveType type,
-                                const QVector<StelVertexAttribute>& attributes)
+                                 const QVector<StelVertexAttribute>& attributes)
 	: StelQGLArrayVertexBufferBackend(type, attributes)
 {
 }

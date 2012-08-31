@@ -131,10 +131,6 @@ public:
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
 
-	//! Draw all registered StelModule in the order defined by the order lists.
-	//! @return the max squared distance in pixels that any object has travelled since the last update.
-	void draw(class StelRenderer* renderer);
-
 	//! Iterate through the drawing sequence.
 	//! This allow us to split the slow drawing operation into small parts,
 	//! we can then decide to pause the painting for this frame and used the cached image instead.
