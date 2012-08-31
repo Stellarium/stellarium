@@ -470,6 +470,8 @@ protected:
 		// Set up viewport for the projector.
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
+
+		updateDrawStatistics(backend, glIndexBuffer);
 		backend->draw(*this, projectionMatrix, glIndexBuffer, shader);
 
 		// Restore default state to avoid interfering with Qt OpenGL drawing.

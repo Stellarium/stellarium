@@ -57,7 +57,7 @@ private:
 	//! @param type Graphics primitive type stored in the buffer.
 	//! @param attributes Specifications of vertex attributes that will be stored in the buffer.
 	StelQGL2ArrayVertexBufferBackend(const PrimitiveType type,
-	                                const QVector<StelVertexAttribute>& attributes);
+	                                 const QVector<StelVertexAttribute>& attributes);
 };
 
 #endif // _STELQGL2ARRAYVERTEXBUFFERBACKEND_
