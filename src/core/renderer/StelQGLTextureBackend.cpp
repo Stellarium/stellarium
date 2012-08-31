@@ -121,7 +121,8 @@ void StelQGLTextureBackend::bind(const int textureUnit)
 	           "Trying to bind to a texture unit with negative index");
 
 	renderer->makeGLContextCurrent();
-	glActiveTexture(GL_TEXTURE0 + textureUnit);
+	QGLFunctions& gl = renderer->getGLFunctions();
+	gl.glActiveTexture(GL_TEXTURE0 + textureUnit);
 	glBindTexture(GL_TEXTURE_2D, glTextureID);
 	invariant();
 }
@@ -507,7 +508,8 @@ QGLContext* StelQGLTextureBackend::prepareContextForLoading()
 {
 	renderer->makeGLContextCurrent();
 	// Apparently needed for GLES2 (test?)
-	glActiveTexture(GL_TEXTURE0);
+	QGLFunctions& gl = renderer->getGLFunctions();
+	gl.glActiveTexture(GL_TEXTURE0);
 	return renderer->getGLContext();
 }
 
