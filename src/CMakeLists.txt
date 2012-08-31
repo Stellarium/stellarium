@@ -770,22 +770,22 @@ ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SR
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
-#SET(tests_testStelVertexBuffer_SRCS
-#  tests/testStelVertexBuffer.hpp
-#  tests/testStelVertexBuffer.cpp
-#  core/StelFileMgr.cpp
-#  core/renderer/StelVertexBuffer.hpp
-#  core/renderer/StelVertexBufferBackend.hpp
-#  core/renderer/StelGLUtilityFunctions.cpp
-#  core/renderer/StelQGLArrayVertexBufferBackend.cpp
-#  core/renderer/StelQGLArrayVertexBufferBackend.hpp
-#  core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
-#  core/renderer/StelQGL2ArrayVertexBufferBackend.hpp)
-#QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
-#ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
-#${tests_testStelVertexBuffer_MOC_SRCS})
-#TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
-#ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
+SET(tests_testStelVertexBuffer_SRCS
+  tests/testStelVertexBuffer.hpp
+  tests/testStelVertexBuffer.cpp
+  core/StelFileMgr.cpp
+  core/renderer/StelVertexBuffer.hpp
+  core/renderer/StelVertexBufferBackend.hpp
+  core/renderer/StelGLUtilityFunctions.cpp
+  core/renderer/StelQGLArrayVertexBufferBackend.cpp
+  core/renderer/StelQGLArrayVertexBufferBackend.hpp
+  core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
+  core/renderer/StelQGL2ArrayVertexBufferBackend.hpp)
+QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
+ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
+${tests_testStelVertexBuffer_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
 ######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 #
@@ -806,6 +806,7 @@ ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexBuffer WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 # ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testRefractionExtinction WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
