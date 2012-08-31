@@ -77,8 +77,8 @@ template<class BufferBackend, class Vertex>
 void TestStelVertexBuffer::testVertexBuffer()
 {
 	StelVertexBuffer<Vertex>* buffer = 
-		new StelVertexBuffer<Vertex>(new BufferBackend(PrimitiveType_Triangles, 
-		                                               Vertex::attributes()));
+		new StelVertexBuffer<Vertex>(new BufferBackend(PrimitiveType_Triangles, Vertex::attributes()), 
+		                             PrimitiveType_Triangles);
 	
 	// Make sure the buffer was initialized correctly.
 	QCOMPARE(buffer->locked(), false);
@@ -121,9 +121,9 @@ void TestStelVertexBuffer::testVertexBuffer()
 	delete buffer;
 }
 
-void TestStelVertexBuffer::testStelTestQGL2VertexBuffer()
+void TestStelVertexBuffer::testStelQGL2ArrayVertexBuffer()
 {
-	testVertexBuffer<StelTestQGL2VertexBufferBackend, TestVertex1>();
-	testVertexBuffer<StelTestQGL2VertexBufferBackend, TestVertex2>();
-	testVertexBuffer<StelTestQGL2VertexBufferBackend, TestVertex3>();
+	testVertexBuffer<StelQGL2ArrayVertexBufferBackend, TestVertex1>();
+	testVertexBuffer<StelQGL2ArrayVertexBufferBackend, TestVertex2>();
+	testVertexBuffer<StelQGL2ArrayVertexBufferBackend, TestVertex3>();
 }
