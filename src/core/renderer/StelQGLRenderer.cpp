@@ -180,9 +180,10 @@ void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 	glClear(GL_COLOR_BUFFER_BIT);
 	while (true)
 	{
-		const bool keepDrawing = renderClient.drawPartial();
-		if(!keepDrawing) 
+		const bool doneDrawing = !renderClient.drawPartial();
+		if(doneDrawing) 
 		{
+			clearFrameStatistics();
 			viewport.finishFrame();
 			break;
 		}
@@ -190,7 +191,7 @@ void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 		const double spentTime = StelApp::getTotalRunTime() - previousFrameEndTime;
 
 		// We need FBOs to do partial drawing.
-		if (viewport.useFBO() && 1. / spentTime <= minFps)
+		if (viewport.useFBO() && 1.0 / spentTime <= minFps)
 		{
 			// We stop the painting operation for now
 			viewport.suspendFrame();

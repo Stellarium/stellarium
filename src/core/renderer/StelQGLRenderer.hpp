@@ -33,6 +33,7 @@
 #include "StelGuiBase.hpp"
 #include "StelProjectorType.hpp"
 #include "StelRenderer.hpp"
+#include "StelQGLArrayVertexBufferBackend.hpp"
 #include "StelQGLIndexBuffer.hpp"
 #include "StelQGLTextureBackend.hpp"
 #include "StelQGLViewport.hpp"
@@ -459,6 +460,53 @@ protected:
 		glEnable(GL_BLEND);
 	}
 
+	//! Update statistics in a drawVertexBufferBackend() call.
+	//!
+	//! @param vertexBuffer Vertex buffer drawn.
+	//! @param indexBuffer  Index buffer (if any), specifying which vertices to draw.
+	void updateDrawStatistics(StelQGLArrayVertexBufferBackend* vertexBuffer,
+	                          StelQGLIndexBuffer* indexBuffer)
+	{
+		++statistics["batches_per_frame"];
+		++statistics["batches_total"];
+
+		const int vertices  = 
+			(NULL == indexBuffer ? vertexBuffer->length() : indexBuffer->length());
+
+		int triangles = 0;
+		int lines     = 0;
+		switch(vertexBuffer->getPrimitiveType())
+		{
+			case PrimitiveType_Points: 
+				break;
+			case PrimitiveType_Triangles:
+				triangles = vertices / 3;
+				break;
+			case PrimitiveType_TriangleStrip:
+			case PrimitiveType_TriangleFan:
+				triangles = vertices - 2;
+				break;
+			case PrimitiveType_Lines: 
+				lines = vertices / 2;
+				break;
+			case PrimitiveType_LineStrip:
+				lines = vertices - 1;
+				break;
+			case PrimitiveType_LineLoop:
+				lines = vertices;
+				break;
+			default:
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown graphics primitive type");
+		}
+
+		statistics["vertices_per_frame"]  += vertices;
+		statistics["vertices_total"]      += vertices;
+		statistics["triangles_per_frame"] += triangles;
+		statistics["triangles_total"]     += triangles;
+		statistics["lines_per_frame"]     += lines;
+		statistics["lines_total"]         += lines;
+	}
+
 private:
 	//! OpenGL context.
 	QGLContext* glContext;
@@ -554,6 +602,25 @@ private:
 	void initStatistics()
 	{
 		statistics["estimated_texture_memory"] = 0.0;
+
+		// Draw statistics
+		statistics["batches_per_frame"]   = 0.0;
+		statistics["batches_total"]       = 0.0;
+		statistics["vertices_per_frame"]  = 0.0;
+		statistics["vertices_total"]      = 0.0;
+		statistics["triangles_per_frame"] = 0.0;
+		statistics["triangles_total"]     = 0.0;
+		statistics["lines_per_frame"]     = 0.0;
+		statistics["lines_total"]         = 0.0;
+	}
+
+	//! Clear per-frame statistics (called when the frame ends).
+	void clearFrameStatistics()
+	{
+		statistics["batches_per_frame"]   = 0.0;
+		statistics["vertices_per_frame"]  = 0.0;
+		statistics["triangles_per_frame"] = 0.0;
+		statistics["lines_per_frame"]     = 0.0;
 	}
 
 	//! Handles gravity text logic. Called by draText().

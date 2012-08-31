@@ -111,11 +111,23 @@ public:
 	void projectVertices(StelProjector* projector, 
 	                     class StelQGLIndexBuffer* indexBuffer);
 
+	//! Get the number of vertices in the buffer.
+	int length() const
+	{
+		return vertexCount;
+	}
+
+	//! Return graphics primitive type formed by the vertices of the buffer,
+	PrimitiveType getPrimitiveType() const
+	{
+		return primitiveType;
+	}
+
 protected:
 	//! Is the vertex buffer locked (i.e. ready to draw?).
 	bool locked;
 
-	//! Graphics primitive type formad by the vertices of this buffer.
+	//! Graphics primitive type formed by the vertices of this buffer.
 	PrimitiveType primitiveType;
 
 	//! Number of used vertices in the buffer.
