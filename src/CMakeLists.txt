@@ -716,26 +716,26 @@ ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS} ${
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 
-#SET(tests_testStelSphereGeometry_SRCS
-#	tests/testStelSphereGeometry.hpp
-#	tests/testStelSphereGeometry.cpp
-#	core/StelSphereGeometry.hpp
-#	core/StelSphereGeometry.cpp
-#	core/OctahedronPolygon.hpp
-#	core/OctahedronPolygon.cpp
-#	core/StelJsonParser.hpp
-#	core/StelJsonParser.cpp
-#	core/StelUtils.cpp
-#	core/StelUtils.hpp
-#	core/StelProjector.cpp
-#	core/StelProjector.hpp
-#	core/StelTranslator.cpp
-#	core/StelTranslator.hpp
-#	${glues_lib_SRCS})
-#QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
-#ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
-#TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
-#ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
+SET(tests_testStelSphereGeometry_SRCS
+	tests/testStelSphereGeometry.hpp
+	tests/testStelSphereGeometry.cpp
+	core/StelSphereGeometry.hpp
+	core/StelSphereGeometry.cpp
+	core/OctahedronPolygon.hpp
+	core/OctahedronPolygon.cpp
+	core/StelJsonParser.hpp
+	core/StelJsonParser.cpp
+	core/StelUtils.cpp
+	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
+	${glues_lib_SRCS})
+QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
+ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
+ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 
 SET(tests_testStelSphericalIndex_SRCS
 	tests/testStelSphericalIndex.hpp
@@ -804,7 +804,7 @@ ADD_DEPENDENCIES(buildTests testStelJsonParser)
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 # ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testRefractionExtinction WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
