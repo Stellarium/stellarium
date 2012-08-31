@@ -776,12 +776,28 @@ TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
 SET(tests_testStelVertexBuffer_SRCS
+  ${glues_lib_SRCS}
   tests/testStelVertexBuffer.hpp
   tests/testStelVertexBuffer.cpp
   core/StelFileMgr.cpp
+  core/StelSphereGeometry.cpp
+  core/StelSphereGeometry.hpp
+  core/StelProjector.cpp
+  core/StelProjector.hpp
+  core/OctahedronPolygon.cpp
+  core/OctahedronPolygon.hpp
+  core/StelJsonParser.cpp
+  core/StelJsonParser.hpp
+  core/StelUtils.cpp
+  core/StelUtils.hpp
+  core/StelTranslator.cpp
+  core/StelTranslator.hpp
   core/renderer/StelVertexBuffer.hpp
   core/renderer/StelVertexBufferBackend.hpp
   core/renderer/StelGLUtilityFunctions.cpp
+  core/renderer/StelGLSLShader.hpp
+  core/renderer/StelQGLGLSLShader.cpp
+  core/renderer/StelQGLGLSLShader.hpp
   core/renderer/StelQGLArrayVertexBufferBackend.cpp
   core/renderer/StelQGLArrayVertexBufferBackend.hpp
   core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
