@@ -641,6 +641,11 @@ ENDIF()
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/VirGO/src/${CMAKE_CFG_INTDIR}/libVirGO.a ${CFITSIO_LIBRARIES})
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
   ENDIF()
+
+  IF (USE_PLUGIN_RENDERERSTATISTICS)
+	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/RendererStatistics/src/${CMAKE_CFG_INTDIR}/libRendererStatistics.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_RENDERERSTATISTICS)
+  ENDIF()
 ENDIF()
 
 
@@ -771,12 +776,28 @@ TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
 SET(tests_testStelVertexBuffer_SRCS
+  ${glues_lib_SRCS}
   tests/testStelVertexBuffer.hpp
   tests/testStelVertexBuffer.cpp
   core/StelFileMgr.cpp
+  core/StelSphereGeometry.cpp
+  core/StelSphereGeometry.hpp
+  core/StelProjector.cpp
+  core/StelProjector.hpp
+  core/OctahedronPolygon.cpp
+  core/OctahedronPolygon.hpp
+  core/StelJsonParser.cpp
+  core/StelJsonParser.hpp
+  core/StelUtils.cpp
+  core/StelUtils.hpp
+  core/StelTranslator.cpp
+  core/StelTranslator.hpp
   core/renderer/StelVertexBuffer.hpp
   core/renderer/StelVertexBufferBackend.hpp
   core/renderer/StelGLUtilityFunctions.cpp
+  core/renderer/StelGLSLShader.hpp
+  core/renderer/StelQGLGLSLShader.cpp
+  core/renderer/StelQGLGLSLShader.hpp
   core/renderer/StelQGLArrayVertexBufferBackend.cpp
   core/renderer/StelQGLArrayVertexBufferBackend.hpp
   core/renderer/StelQGL2ArrayVertexBufferBackend.cpp

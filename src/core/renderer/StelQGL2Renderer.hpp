@@ -394,6 +394,7 @@ protected:
 		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes)
 	{
 		invariant();
+		statistics["vertex_buffers_created"] += 1.0;
 		return new StelQGL2ArrayVertexBufferBackend(primitiveType, attributes);
 	}
 
@@ -444,7 +445,19 @@ protected:
 			{
 				backend->projectVertices(projector, glIndexBuffer);
 				glslProjector = NULL;
+				statistics["batch_projections_cpu"]           += 1.0;
+				statistics["batch_projections_cpu_per_frame"] += 1.0;
 			}
+			else
+			{
+				statistics["batch_projections_gpu"]            += 1.0;
+				statistics["batch_projections_gpu_per_frame"]  += 1.0;
+			}
+		}
+		else
+		{
+			statistics["batch_projections_none"]           += 1.0;
+			statistics["batch_projections_none_per_frame"] += 1.0;
 		}
 		
 		if(!shader->getProgram().bind())
@@ -470,6 +483,8 @@ protected:
 		// Set up viewport for the projector.
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
+
+		updateDrawStatistics(backend, glIndexBuffer);
 		backend->draw(*this, projectionMatrix, glIndexBuffer, shader);
 
 		// Restore default state to avoid interfering with Qt OpenGL drawing.

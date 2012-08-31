@@ -396,14 +396,6 @@ bool StelApp::drawPartial(StelRenderer* renderer)
 	return false;
 }
 
-//! Main drawing function called at each frame
-void StelApp::draw(StelRenderer* renderer)
-{
-	Q_ASSERT(drawState == 0);
-	while (drawPartial(renderer)) {}
-	Q_ASSERT(drawState == 0);
-}
-
 /*************************************************************************
  Call this when the size of the window has changed
 *************************************************************************/

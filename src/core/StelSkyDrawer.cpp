@@ -134,7 +134,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 
 	bigHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
 	sunHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
-	starSpriteIndices = renderer->createIndexBuffer(IndexType_U16);
+	starSpriteIndices = renderer->createIndexBuffer(IndexType_U32);
 	coronaIndices     = renderer->createIndexBuffer(IndexType_U16);
 }
 

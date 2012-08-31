@@ -71,6 +71,10 @@ Q_IMPORT_PLUGIN(AngleMeasure)
 Q_IMPORT_PLUGIN(CompassMarks)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_RENDERERSTATISTICS
+Q_IMPORT_PLUGIN(RendererStatistics)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 Q_IMPORT_PLUGIN(Satellites)
 #endif

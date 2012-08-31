@@ -5,7 +5,7 @@
 #include <QtTest>
 
 #include "renderer/StelVertexBuffer.hpp"
-#include "renderer/StelTestQGL2VertexBufferBackend.hpp"
+#include "renderer/StelQGL2ArrayVertexBufferBackend.hpp"
 
 //! Unittests for StelVertexBuffer implementations.
 class TestStelVertexBuffer : public QObject
@@ -14,7 +14,7 @@ Q_OBJECT
 private slots:
 	void initTestCase();
 	
-	void testStelTestQGL2VertexBuffer();
+	void testStelQGL2ArrayVertexBuffer();
 	
 private:
 	//! Test specified StelVertexBuffer backend with specified vertex type.
