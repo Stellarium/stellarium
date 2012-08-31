@@ -256,7 +256,7 @@ public:
 
 	virtual const QMap<QString, double>& getStatistics() const
 	{
-		return statistics;
+		return previousStatistics;
 	}
 
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
@@ -321,6 +321,11 @@ protected:
 
 	//! Statistics collected during program run (such as estimated texture memory usage, etc.).
 	QMap<QString, double> statistics;
+
+	//! Statistics from the previous frame.
+	//!
+	//! Returned by getStatistics() so stats for a full frame are provided.
+	QMap<QString, double> previousStatistics;
 
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
@@ -633,6 +638,7 @@ private:
 	//! Clear per-frame statistics (called when a frame starts).
 	void clearFrameStatistics()
 	{
+		previousStatistics = statistics;
 		statistics["frames"] += 1.0;
 		statistics["batches_per_frame"]                = 0.0;
 		statistics["vertices_per_frame"]               = 0.0;
