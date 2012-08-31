@@ -188,7 +188,7 @@ public:
 			if(currentlyBoundTextures[t] == textureBackend)
 			{
 				currentlyBoundTextures[t] = NULL;
-				glActiveTexture(GL_TEXTURE0 + t);
+				gl.glActiveTexture(GL_TEXTURE0 + t);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 		}
@@ -490,13 +490,13 @@ protected:
 				break;
 			case PrimitiveType_TriangleStrip:
 			case PrimitiveType_TriangleFan:
-				triangles = vertices - 2;
+				triangles = vertices >= 3 ? vertices - 2 : 0;
 				break;
 			case PrimitiveType_Lines: 
 				lines = vertices / 2;
 				break;
 			case PrimitiveType_LineStrip:
-				lines = vertices - 1;
+				lines = vertices >= 2 ? vertices - 1 : 0;
 				break;
 			case PrimitiveType_LineLoop:
 				lines = vertices;
