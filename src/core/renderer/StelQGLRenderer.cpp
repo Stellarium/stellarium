@@ -162,6 +162,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 {
 	invariant();
+	clearFrameStatistics();
 	if(previousFrameEndTime < 0.0)
 	{
 		previousFrameEndTime = StelApp::getTotalRunTime();
@@ -183,7 +184,6 @@ void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 		const bool doneDrawing = !renderClient.drawPartial();
 		if(doneDrawing) 
 		{
-			clearFrameStatistics();
 			viewport.finishFrame();
 			break;
 		}
@@ -294,6 +294,7 @@ void StelQGLRenderer::drawTextGravityHelper
 
 void StelQGLRenderer::drawText(const TextParams& params)
 {
+	statistics["text_draws_per_frame"] += 1.0;
 	StelQGLTextureBackend* currentTexture = currentlyBoundTextures[0];
 
 	viewport.enablePainting();
@@ -469,6 +470,7 @@ void StelQGLRenderer::drawRectInternal
 	(const bool textured, const float x, const float y, const float width, 
 	 const float height, const float angle)
 {
+	statistics["rect_draws_per_frame"] += 1.0;
 	// Could be improved by keeping the vertex buffer as a data member,
 	// or even caching all rectangle draws to the same buffer and drawing them 
 	// at once at the end of the frame.

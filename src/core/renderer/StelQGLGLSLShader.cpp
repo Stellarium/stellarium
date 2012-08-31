@@ -38,6 +38,7 @@ StelQGLGLSLShader::StelQGLGLSLShader(StelQGL2Renderer* renderer, bool internal)
 	, uniformCount(0)
 	, uniformStorageStackSize(0)
 {
+	renderer->getStatisticsWritable()["shaders_created"] += 1.0;
 	if(!addVertexShader("DefaultProjector",
 		"vec4 project(in vec4 v){return v;}\n"))
 	{
