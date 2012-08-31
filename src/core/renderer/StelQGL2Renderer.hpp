@@ -394,6 +394,7 @@ protected:
 		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes)
 	{
 		invariant();
+		statistics["vertex_buffers_created"] += 1.0;
 		return new StelQGL2ArrayVertexBufferBackend(primitiveType, attributes);
 	}
 
@@ -444,7 +445,19 @@ protected:
 			{
 				backend->projectVertices(projector, glIndexBuffer);
 				glslProjector = NULL;
+				statistics["batch_projections_cpu"]           += 1.0;
+				statistics["batch_projections_cpu_per_frame"] += 1.0;
 			}
+			else
+			{
+				statistics["batch_projections_gpu"]            += 1.0;
+				statistics["batch_projections_gpu_per_frame"]  += 1.0;
+			}
+		}
+		else
+		{
+			statistics["batch_projections_none"]           += 1.0;
+			statistics["batch_projections_none_per_frame"] += 1.0;
 		}
 		
 		if(!shader->getProgram().bind())

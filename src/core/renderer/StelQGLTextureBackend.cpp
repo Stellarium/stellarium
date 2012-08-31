@@ -70,6 +70,7 @@ StelQGLTextureBackend::StelQGLTextureBackend
 	, loader(NULL)
 	, pixelBytes(0.0f)
 {
+	renderer->getStatisticsWritable()["textures_created"] += 1.0;
 	invariant();
 }
 
