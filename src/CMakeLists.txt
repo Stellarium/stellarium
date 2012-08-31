@@ -716,26 +716,26 @@ ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS} ${
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 
-SET(tests_testStelSphereGeometry_SRCS
-	tests/testStelSphereGeometry.hpp
-	tests/testStelSphereGeometry.cpp
-	core/StelSphereGeometry.hpp
-	core/StelSphereGeometry.cpp
-	core/OctahedronPolygon.hpp
-	core/OctahedronPolygon.cpp
-	core/StelJsonParser.hpp
-	core/StelJsonParser.cpp
-	core/StelUtils.cpp
-	core/StelUtils.hpp
-	core/StelProjector.cpp
-	core/StelProjector.hpp
-	core/StelTranslator.cpp
-	core/StelTranslator.hpp
-	${glues_lib_SRCS})
-QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
-ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
-TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
-ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
+#SET(tests_testStelSphereGeometry_SRCS
+#	tests/testStelSphereGeometry.hpp
+#	tests/testStelSphereGeometry.cpp
+#	core/StelSphereGeometry.hpp
+#	core/StelSphereGeometry.cpp
+#	core/OctahedronPolygon.hpp
+#	core/OctahedronPolygon.cpp
+#	core/StelJsonParser.hpp
+#	core/StelJsonParser.cpp
+#	core/StelUtils.cpp
+#	core/StelUtils.hpp
+#	core/StelProjector.cpp
+#	core/StelProjector.hpp
+#	core/StelTranslator.cpp
+#	core/StelTranslator.hpp
+#	${glues_lib_SRCS})
+#QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
+#ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
+#TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
+#ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 
 SET(tests_testStelSphericalIndex_SRCS
 	tests/testStelSphericalIndex.hpp
@@ -770,22 +770,22 @@ ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SR
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
-SET(tests_testStelVertexBuffer_SRCS
-  tests/testStelVertexBuffer.hpp
-  tests/testStelVertexBuffer.cpp
-  core/StelFileMgr.cpp
-  core/renderer/StelVertexBuffer.hpp
-  core/renderer/StelVertexBufferBackend.hpp
-  core/renderer/StelGLUtilityFunctions.cpp
-  core/renderer/StelQGLArrayVertexBufferBackend.cpp
-  core/renderer/StelQGLArrayVertexBufferBackend.hpp
-  core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
-  core/renderer/StelQGL2ArrayVertexBufferBackend.hpp)
-QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
-ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
-${tests_testStelVertexBuffer_MOC_SRCS})
-TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
-ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
+#SET(tests_testStelVertexBuffer_SRCS
+#  tests/testStelVertexBuffer.hpp
+#  tests/testStelVertexBuffer.cpp
+#  core/StelFileMgr.cpp
+#  core/renderer/StelVertexBuffer.hpp
+#  core/renderer/StelVertexBufferBackend.hpp
+#  core/renderer/StelGLUtilityFunctions.cpp
+#  core/renderer/StelQGLArrayVertexBufferBackend.cpp
+#  core/renderer/StelQGLArrayVertexBufferBackend.hpp
+#  core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
+#  core/renderer/StelQGL2ArrayVertexBufferBackend.hpp)
+#QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
+#ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
+#${tests_testStelVertexBuffer_MOC_SRCS})
+#TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
+#ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
 ######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 #
