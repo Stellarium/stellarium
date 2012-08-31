@@ -161,6 +161,7 @@ public:
 
 	StelIndexBuffer* createIndexBuffer(const IndexType type)
 	{
+		statistics["index_buffers_created"] += 1.0;
 		return new StelQGLIndexBuffer(type);
 	}
 
@@ -467,8 +468,8 @@ protected:
 	void updateDrawStatistics(StelQGLArrayVertexBufferBackend* vertexBuffer,
 	                          StelQGLIndexBuffer* indexBuffer)
 	{
-		++statistics["batches_per_frame"];
-		++statistics["batches_total"];
+		statistics["batches_per_frame"] += 1.0;
+		statistics["batches_total"]     += 1.0;
 
 		const int vertices  = 
 			(NULL == indexBuffer ? vertexBuffer->length() : indexBuffer->length());
@@ -612,15 +613,36 @@ private:
 		statistics["triangles_total"]     = 0.0;
 		statistics["lines_per_frame"]     = 0.0;
 		statistics["lines_total"]         = 0.0;
+		statistics["frames"]              = 0.0;
+
+		// Projection statistics
+		statistics["batch_projections_none"]           = 0.0;
+		statistics["batch_projections_none_per_frame"] = 0.0;
+		statistics["batch_projections_cpu"]            = 0.0;
+		statistics["batch_projections_cpu_per_frame"]  = 0.0;
+		statistics["batch_projections_gpu"]            = 0.0;
+		statistics["batch_projections_gpu_per_frame"]  = 0.0;
+
+		// Creation of Renderer objects
+		statistics["vertex_buffers_created"]      = 0.0;
+		statistics["index_buffers_created"]       = 0.0;
+		statistics["textures_created"]            = 0.0;
+		statistics["shaders_created"]             = 0.0;
 	}
 
-	//! Clear per-frame statistics (called when the frame ends).
+	//! Clear per-frame statistics (called when a frame starts).
 	void clearFrameStatistics()
 	{
-		statistics["batches_per_frame"]   = 0.0;
-		statistics["vertices_per_frame"]  = 0.0;
-		statistics["triangles_per_frame"] = 0.0;
-		statistics["lines_per_frame"]     = 0.0;
+		statistics["frames"] += 1.0;
+		statistics["batches_per_frame"]                = 0.0;
+		statistics["vertices_per_frame"]               = 0.0;
+		statistics["triangles_per_frame"]              = 0.0;
+		statistics["lines_per_frame"]                  = 0.0;
+		statistics["text_draws_per_frame"]             = 0.0;
+		statistics["rect_draws_per_frame"]             = 0.0;
+		statistics["batch_projections_none_per_frame"] = 0.0;
+		statistics["batch_projections_cpu_per_frame"]  = 0.0;
+		statistics["batch_projections_gpu_per_frame"]  = 0.0;
 	}
 
 	//! Handles gravity text logic. Called by draText().

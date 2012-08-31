@@ -156,6 +156,13 @@ protected:
 		if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector)))
 		{
 			backend->projectVertices(projector, glIndexBuffer);
+			statistics["batch_projections_cpu"]           += 1.0;
+			statistics["batch_projections_cpu_per_frame"] += 1.0;
+		}
+		else
+		{
+			statistics["batch_projections_none"]           += 1.0;
+			statistics["batch_projections_none_per_frame"] += 1.0;
 		}
 
 		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
