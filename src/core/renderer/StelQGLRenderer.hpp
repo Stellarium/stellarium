@@ -367,6 +367,11 @@ protected:
 		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
 		// are called, we only set it before drawing and reset after drawing to avoid 
 		// conflicts with e.g. Qt OpenGL backend, or any other GL code that might be running.
+		//
+		// Optimization note: 
+		// Disabling GL state setup and reset improves performance by 3-8% 
+		// (open source AMD driver), so that is the maximum speedup achievable 
+		// by moving state setup into functions such as setBlendMode, setDepthTest, etc.
 
 		// GL setup before drawing.
 		// Fix some problem when using Qt OpenGL2 engine
