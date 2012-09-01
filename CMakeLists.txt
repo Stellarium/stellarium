@@ -111,6 +111,13 @@ IF(BUILD_FOR_MAEMO)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DBUILD_FOR_MAEMO")
 ENDIF()
 
+# FreeBSD-specific compiler flags
+# resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
+IF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+  # Use -pthread compilation option to properly link to threading library
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+ENDIF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+
 # best way to get to APPLE?
 IF(APPLE)
  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra")
@@ -245,7 +252,7 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-SET(QT_MIN_VERSION "4.6.2")
+SET(QT_MIN_VERSION "4.8.0")
 FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 IF(ENABLE_SCRIPTING)
