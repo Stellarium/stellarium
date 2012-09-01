@@ -800,6 +800,7 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 // Return heliocentric coordinate of p
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
+	//XXX optimizable through non-shared copies of parent pointers.
 	Vec3d pos = p;
 	PlanetP pp = parent;
 	if (pp)
