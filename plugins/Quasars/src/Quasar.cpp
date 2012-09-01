@@ -185,9 +185,7 @@ void Quasar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP project
 	if (GETSTELMODULE(Quasars)->getDisplayMode())
 	{
 		renderer->setBlendMode(BlendMode_Add);
-		renderer->setGlobalColor(dcolor[0], dcolor[1], dcolor[2], 1);
-		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
-		shift = 5.f + size/1.6f;
+		renderer->setGlobalColor(dcolor[0], dcolor[1], dcolor[2], 1);		
 		markerTexture->bind();
 		if (labelsFader.getInterstate()<=0.f)
 		{

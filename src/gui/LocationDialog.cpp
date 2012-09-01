@@ -266,7 +266,6 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 
 void LocationDialog::populatePlanetList()
 {
-	Q_ASSERT(ui);
 	Q_ASSERT(ui->planetNameComboBox);
 
 	QComboBox* planets = ui->planetNameComboBox;
@@ -293,7 +292,6 @@ void LocationDialog::populatePlanetList()
 
 void LocationDialog::populateCountryList()
 {
-	Q_ASSERT(ui);
 	Q_ASSERT(ui->countryNameComboBox);
 	
 	QComboBox* countries = ui->countryNameComboBox;
