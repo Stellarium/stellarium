@@ -661,7 +661,7 @@ public:
 	//!
 	//! Contents are backend specific - 
 	//! might include thing like vertices per frame, estimated texture memory, etc. .
-	virtual const QMap<QString, double>& getStatistics() const = 0;
+	virtual const QMap<const char*, double>& getStatistics() const = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
