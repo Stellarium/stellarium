@@ -297,6 +297,11 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	statistics["text_draws_per_frame"] += 1.0;
 	StelQGLTextureBackend* currentTexture = currentlyBoundTextures[0];
 
+	if(params.string_.length() == 0)
+	{
+		return;
+	}
+
 	viewport.enablePainting();
 	if(currentFontSet)
 	{
