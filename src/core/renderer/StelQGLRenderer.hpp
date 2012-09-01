@@ -134,6 +134,8 @@ public:
 		textureUnitCount = getTextureUnitCountBackend();
 		glVendorString = QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 		qDebug() << "GL vendor is " << glVendorString;
+		glRendererString = QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		qDebug() << "GL renderer is " << glRendererString;
 		initStatistics();
 		return true;
 	}
@@ -318,6 +320,9 @@ public:
 protected:
 	//! OpenGL vendor string (used to enable/disable features based on driver).
 	QString glVendorString;
+
+	//! OpenGL renderer (usually GPU) string (can be used to enable/disable features based on GPU).
+	QString glRendererString;
 
 	//! Statistics collected during program run (such as estimated texture memory usage, etc.).
 	QMap<QString, double> statistics;
