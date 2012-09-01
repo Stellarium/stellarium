@@ -31,12 +31,14 @@
 #include "StelQGL1ArrayVertexBufferBackend.hpp"
 
 
-//! Renderer backend using OpenGL 1.1 with Qt.
+//! Renderer backend using OpenGL 1.2 with Qt.
 //!
-//! GL 1.0 is not supported as it doesn't have vertex arrays.
-//! That said, pretty much everything supports GL 1.1 (introduced in 1997) - 
-//! and I doubt even those are powerful enough to run Stellarium 
-//! (ATI Rage, NVidia Riva TNT, etc.)
+//! GL 1.0 is not supported as it doesn't have vertex arrays,
+//! and GL 1.1 doesn't have clamp to edge texture wrap mode.
+//! That said, pretty much everything supports GL 1.2 (introduced in 1998).
+//! The oldest GPUs supporting GL 1.2 are ATI Rage and GeForce 2
+//! (GeForce 1 and TNT2 support GL 1.2 with updated drivers, although 
+//! some functionality might be software emulated).
 //!
 //! Although later GL1 versions and extensions have many useful features 
 //! (basic shaders, VBOs, etc.), these are not used - with the exception of 

@@ -211,7 +211,7 @@ OpenGL features.
 
 @image html renderer-implementation-overview.png
 
-Currently there are two Renderer backends: QGL1 and QGL2, based on OpenGL 1.1
+Currently there are two Renderer backends: QGL1 and QGL2, based on OpenGL 1.2
 and OpenGL 2.1 respectively. They use Qt's QGL classes for things like context
 management and texture upload.  Code common for both versions, like some GL
 state, textures, viewport and vertex array manipulation, is shared between
@@ -219,10 +219,11 @@ these, while code such as fixed-function/shaders and drawing is separate.
 
 The QGL1 backend is designed for compatibility with old hardware; it doesn't
 usually use new features brought by extensions or later GL 1.x versions.  It
-requires GL 1.1 for vertex array support. After Qt5 removes GL 1.x support this
-backend should still work as GL 2.x is backwards compatible with GL 1.x; but
-only on drivers that support GL 2.x . It provides better compatibility/speed
-for older GPUs and buggy drivers.
+requires GL 1.2 for vertex array and texture clamp to edge wrapping mode 
+support. After Qt5 removes GL 1.x support this backend should still work as 
+GL 2.x is backwards compatible with GL 1.x; but only on drivers that support 
+GL 2.x . It provides better compatibility/speed for older GPUs and buggy 
+drivers.
 
 The QGL2 backend should use GL 2.1 to its fullest, and might even have
 optionally use features from GL 3.x and extensions, but never require them. An
