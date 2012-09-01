@@ -131,6 +131,7 @@ SET(stellarium_lib_SRCS
 	
 	core/renderer/StelCircleArcRenderer.hpp
 
+	core/renderer/StelGLCompatibility.hpp
 	core/renderer/StelGLUtilityFunctions.cpp
 	core/renderer/StelGLUtilityFunctions.hpp
 

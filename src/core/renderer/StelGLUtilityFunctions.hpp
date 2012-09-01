@@ -23,6 +23,7 @@
 #include <QGLContext>
 #include <QString>
 
+#include "StelGLCompatibility.hpp"
 #include "StelRenderer.hpp"
 #include "StelIndexBuffer.hpp"
 #include "StelTextureParams.hpp"
@@ -197,12 +198,7 @@ inline GLint glGetTextureInternalFormat(const TextureDataFormat format)
 {
 	switch(format)
 	{
-		// Mac seems to not define GL_RGBA32F yet (might be fixed in future).
-#ifdef Q_OS_MAC
-		case TextureDataFormat_RGBA_F32: return GL_RGBA32F_ARB; break;
-#else
 		case TextureDataFormat_RGBA_F32: return GL_RGBA32F; break;
-#endif
 		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture data format");
 	}
 	// Avoid compiler warnings
