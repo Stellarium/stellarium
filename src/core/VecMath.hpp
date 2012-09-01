@@ -85,10 +85,10 @@ public:
 	inline operator const T*() const;
 	inline operator T*();
 
-	inline Vector2& operator+=(const Vector2<T>&);
-	inline Vector2& operator-=(const Vector2<T>&);
-	inline Vector2& operator*=(T);
-	inline Vector2& operator/=(T);
+	inline void operator+=(const Vector2<T>&);
+	inline void operator-=(const Vector2<T>&);
+	inline void operator*=(T);
+	inline void operator/=(T);
 
 	inline Vector2 operator-(const Vector2<T>&) const;
 	inline Vector2 operator+(const Vector2<T>&) const;
@@ -137,10 +137,10 @@ public:
 	inline const T* data() const {return v;}
 	inline T* data() {return v;}
 
-	inline Vector3& operator+=(const Vector3<T>&);
-	inline Vector3& operator-=(const Vector3<T>&);
-	inline Vector3& operator*=(T);
-	inline Vector3& operator/=(T);
+	inline void operator+=(const Vector3<T>&);
+	inline void operator-=(const Vector3<T>&);
+	inline void operator*=(T);
+	inline void operator/=(T);
 
 	inline Vector3 operator-(const Vector3<T>&) const;
 	inline Vector3 operator+(const Vector3<T>&) const;
@@ -200,10 +200,10 @@ public:
 	inline operator T*();
 	inline operator const T*() const;
 
-	inline Vector4& operator+=(const Vector4<T>&);
-	inline Vector4& operator-=(const Vector4<T>&);
-	inline Vector4& operator*=(T);
-	inline Vector4& operator/=(T);
+	inline void operator+=(const Vector4<T>&);
+	inline void operator-=(const Vector4<T>&);
+	inline void operator*=(T);
+	inline void operator/=(T);
 
 	inline Vector4 operator-(const Vector4<T>&) const;
 	inline Vector4 operator+(const Vector4<T>&) const;
@@ -338,22 +338,19 @@ template<class T> Vector2<T>::operator T*()
 }
 
 
-template<class T> Vector2<T>& Vector2<T>::operator+=(const Vector2<T>& a)
+template<class T> void Vector2<T>::operator+=(const Vector2<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1];
-	return *this;
 }
 
-template<class T> Vector2<T>& Vector2<T>::operator-=(const Vector2<T>& a)
+template<class T> void Vector2<T>::operator-=(const Vector2<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1];
-	return *this;
 }
 
-template<class T> Vector2<T>& Vector2<T>::operator*=(T s)
+template<class T> void Vector2<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s;
-	return *this;
 }
 
 template<class T> Vector2<T> Vector2<T>::operator-() const
@@ -494,28 +491,24 @@ template<class T> Vector3<T>::operator T*()
 	return v;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator+=(const Vector3<T>& a)
+template<class T> void Vector3<T>::operator+=(const Vector3<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1]; v[2] += a.v[2];
-	return *this;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator-=(const Vector3<T>& a)
+template<class T> void Vector3<T>::operator-=(const Vector3<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2];
-	return *this;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator*=(T s)
+template<class T> void Vector3<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s;
-	return *this;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator/=(T s)
+template<class T> void Vector3<T>::operator/=(T s)
 {
 	v[0] /= s; v[1] /= s; v[2] /= s;
-	return *this;
 }
 
 template<class T> Vector3<T> Vector3<T>::operator-() const
@@ -692,22 +685,19 @@ template<class T> Vector4<T>::operator const T*() const
 	return v;
 }
 
-template<class T> Vector4<T>& Vector4<T>::operator+=(const Vector4<T>& a)
+template<class T> void Vector4<T>::operator+=(const Vector4<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1]; v[2] += a.v[2]; v[3] += a.v[3];
-	return *this;
 }
 
-template<class T> Vector4<T>& Vector4<T>::operator-=(const Vector4<T>& a)
+template<class T> void Vector4<T>::operator-=(const Vector4<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a/v[3];
-	return *this;
 }
 
-template<class T> Vector4<T>& Vector4<T>::operator*=(T s)
+template<class T> void Vector4<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s; v[3] *= s;
-	return *this;
 }
 
 template<class T> Vector4<T> Vector4<T>::operator-() const
