@@ -57,7 +57,7 @@ private:
 	class StelButton* toolbarButton;
 
 	//! Renderer statistics from the last update.
-	QMap<QString, double> statistics;
+	QMap<const char*, double> statistics;
 
 	//! Last time the statistics were updated.
 	QTime lastUpdateTime;
