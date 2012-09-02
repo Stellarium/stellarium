@@ -333,9 +333,9 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelRenderer* renderer)
 {
 	if (!fogFader.getInterstate()) {return;}
 
-	const float vpos = radius * (tanMode || calibrated) 
+	const float vpos = radius * ((tanMode || calibrated) 
 	                          ? std::tan(fogAngleShift * M_PI / 180.0) 
-	                          : std::sin(fogAngleShift * M_PI / 180.0);
+	                          : std::sin(fogAngleShift * M_PI / 180.0));
 
 	StelProjector::ModelViewTranformP transform =
 		core->getAltAzModelViewTransform(StelCore::RefractionOff);
