@@ -134,6 +134,8 @@ public:
 		textureUnitCount = getTextureUnitCountBackend();
 		glVendorString = QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 		qDebug() << "GL vendor is " << glVendorString;
+		glRendererString = QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		qDebug() << "GL renderer is " << glRendererString;
 		initStatistics();
 		return true;
 	}
@@ -254,7 +256,7 @@ public:
 	                              const float width, const float height, 
 	                              const float angle = 0.0f);
 
-	virtual const QMap<QString, double>& getStatistics() const
+	virtual const QMap<const char*, double>& getStatistics() const
 	{
 		return previousStatistics;
 	}
@@ -301,7 +303,7 @@ public:
 	//! Get a non-const reference to statistics 
 	//!
 	//! Used e.g. by texture backend to collect statistics.
-	QMap<QString, double>& getStatisticsWritable()
+	QMap<const char*, double>& getStatisticsWritable()
 	{
 		return statistics;
 	}
@@ -319,13 +321,27 @@ protected:
 	//! OpenGL vendor string (used to enable/disable features based on driver).
 	QString glVendorString;
 
+	//! OpenGL renderer (usually GPU) string (can be used to enable/disable features based on GPU).
+	QString glRendererString;
+
 	//! Statistics collected during program run (such as estimated texture memory usage, etc.).
-	QMap<QString, double> statistics;
+	//!
+	//! @note Any writes to the QMap (only the backend can write, getStatistics()
+	//!       provides a const pointer) must be done with _string literals_. 
+	//!       Identical literals are merged and the QMap can compare their 
+	//!       pointers instead of QStrings. This is a semi-unsafe optimization. 
+	//!       AFAIK all or almost all C/C++ compilers do constant merging for
+	//!       a very long time. At least GCC, LLVM and MSVC do it (I checked 
+	//!       those). Compilers that don't will result in messed up statistics
+	//!       (pointers will not match), but not segfaults, as the C standard
+	//!       requires literals to be stored for the entire runtime of the program.
+	//!
+	QMap<const char*, double> statistics;
 
 	//! Statistics from the previous frame.
 	//!
 	//! Returned by getStatistics() so stats for a full frame are provided.
-	QMap<QString, double> previousStatistics;
+	QMap<const char*, double> previousStatistics;
 
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);

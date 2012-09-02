@@ -58,6 +58,8 @@ protected:
 		AttributeArray(const AttributeInterpretation interpretation)
 			:interpretation(interpretation)
 		{
+			// Just enough for a triangle pair to be created without reallocation.
+			data.reserve(6);
 		}
 
 		virtual const void* constData()
