@@ -123,9 +123,12 @@ struct DrawNebulaFuncObject
 	{
 		angularSizeLimit = 5.0f / projector->getPixelPerRadAtCenter() * 180.0f / M_PI;
 	}
-	void operator()(StelRegionObjectP obj)
+
+	// Optimization: Smart pointer is intentionally not used.
+	// This is safe as long as we don't save it (the caller owns the pointer).
+	void operator()(StelRegionObject* obj)
 	{
-		Nebula* n = obj.staticCast<Nebula>().data();
+		Nebula* n = static_cast<Nebula*>(obj);
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
