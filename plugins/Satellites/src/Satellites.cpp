@@ -373,7 +373,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	{
 		QString numberString = regExp.capturedTexts().at(2);
 		bool ok;
-		int number = numberString.toInt(&ok);
+		/* int number = */ numberString.toInt(&ok);
 		if (!ok)
 			return StelObjectP();
 		
@@ -405,7 +405,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	{
 		QString numberString = regExp.capturedTexts().at(2);
 		bool ok;
-		int number = numberString.toInt(&ok);
+		/* int number = */ numberString.toInt(&ok);
 		if (ok)
 			numberPrefix = numberString;
 	}

@@ -33,7 +33,7 @@ class QSettings;
 
 namespace BigStarCatalogExtension {
   class ZoneArray;
-  class HipIndexStruct;
+  struct HipIndexStruct;
 }
 
 static const int RCMAG_TABLE_SIZE = 4096;
