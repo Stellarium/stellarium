@@ -332,7 +332,11 @@ public:
 	//! @return a list of vertices which define the contours of the polygon.
 	virtual const QVector<Vec3d>& getOutlineVertexPositions() const 
 	{
-		return getOctahedronPolygon().outlineVertices();
+		// This is a workaround around a compiler bug with Clang (as of Clang 3.2).
+		// Returning the reference directly results in an uninitialized
+		// reference which breaks calling code.
+		const QVector<Vec3d>& result(getOctahedronPolygon().outlineVertices());
+		return result;
 	}
 
 	//! Get primitive type determining how vertices in vector returned by
