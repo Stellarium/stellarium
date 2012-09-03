@@ -29,65 +29,55 @@ StelQGLArrayVertexBufferBackend(const PrimitiveType type,
 	, locked(false)
 	, primitiveType(type)
 	, vertexCount(0)
-	, vertexCapacity(0)
+	, vertexCapacity(4)
 	, usingProjectedPositions(false)
+	, projectedPositions(NULL)
+	, projectedPositionsSize(0)
 {
+	// Unused buffers will be NULL.
+	memset(attributeBuffers, '\0', AttributeInterpretation_MAX * sizeof(void*));
 	// Create a buffer for each vertex attribute.
 	for(int attrib = 0; attrib < this->attributes.count; ++attrib)
 	{
-		const AttributeInterpretation interpretation = 
-			this->attributes.attributes[attrib].interpretation;
+		const StelVertexAttribute& attribute(this->attributes.attributes[attrib]);
 
-		switch(this->attributes.attributes[attrib].type)
-		{
-			case AttributeType_Vec2f: buffers.append(new AttributeArray<Vec2f>(interpretation)); break;
-			case AttributeType_Vec3f: buffers.append(new AttributeArray<Vec3f>(interpretation)); break;
-			case AttributeType_Vec4f: buffers.append(new AttributeArray<Vec4f>(interpretation)); break;
-			default:  Q_ASSERT(false);
-		}
+		attributeBuffers[attribute.interpretation] =
+			std::malloc(vertexCapacity * attributeSize(attribute.type));
 	}
 }
 
 StelQGLArrayVertexBufferBackend::~StelQGLArrayVertexBufferBackend()
 {
-	Q_ASSERT_X(buffers.size() == static_cast<int>(attributes.count),
-	           Q_FUNC_INFO, "Attribute buffer count does not match attribute count");
-
-	for(int buffer = 0; buffer < buffers.size(); ++buffer)
+	for(int buffer = 0; buffer < AttributeInterpretation_MAX; ++buffer)
 	{
-		delete buffers[buffer];
+		if(NULL != attributeBuffers[buffer]){std::free(attributeBuffers[buffer]);}
+	}
+	if(NULL != projectedPositions)
+	{
+		std::free(projectedPositions);
 	}
 }
 
 void StelQGLArrayVertexBufferBackend::addVertex(const void* const vertexInPtr)
 {
 	//StelVertexBuffer enforces bounds, so we don't need to
-	++vertexCount;
-	if(vertexCount <= vertexCapacity)
+	Q_ASSERT_X(vertexCount <= vertexCapacity, Q_FUNC_INFO,
+	           "Vertex count is greater than vertex capacity");
+	// We're out of space; reallocate.
+	if(Q_UNLIKELY(vertexCount == vertexCapacity))
 	{
-		setVertexNonVirtual(vertexCount - 1, vertexInPtr);
-		return;
-	}
-	++vertexCapacity;
-	// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
-	const unsigned char* attribPtr = static_cast<const unsigned char*>(vertexInPtr);
-	for(int attrib = 0; attrib < attributes.count; ++attrib)
-	{
-		// Add each attribute to its buffer.
-		switch(attributes.attributes[attrib].type)
+		vertexCapacity *= 2;
+		for(int attrib = 0; attrib < attributes.count; ++attrib)
 		{
-			case AttributeType_Vec2f: addAttribute<Vec2f>(attrib, attribPtr); break;
-			case AttributeType_Vec3f: addAttribute<Vec3f>(attrib, attribPtr); break;
-			case AttributeType_Vec4f: addAttribute<Vec4f>(attrib, attribPtr); break;
-			default: Q_ASSERT(false);
+			const StelVertexAttribute& attribute(attributes.attributes[attrib]);
+			attributeBuffers[attribute.interpretation] = 
+				std::realloc(attributeBuffers[attribute.interpretation], 
+				             vertexCapacity * attributeSize(attribute.type));
 		}
-
-		// This always works, because the C standard requires that 
-		// sizeof(unsigned char) == 1  (that 1 might mean e.g. 16 bits instead of 8
-		// on some platforms, but both the size of attribute and of unsigned char is 
-		// measured in the same unit, so it's not a problem.
-		attribPtr += attributes.sizes[attrib];
 	}
+
+	setVertexNonVirtual(vertexCount, vertexInPtr);
+	++vertexCount;
 }
 
 void StelQGLArrayVertexBufferBackend::getVertex
@@ -97,17 +87,22 @@ void StelQGLArrayVertexBufferBackend::getVertex
 	unsigned char* attribPtr = static_cast<unsigned char*>(vertexOutPtr);
 	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
+		const AttributeInterpretation interpretation = 
+			attributes.attributes[attrib].interpretation;
 		// Get each attribute from its buffer and set result's attribute to that.
 		switch(attributes.attributes[attrib].type)
 		{
 			case AttributeType_Vec2f:
-				*reinterpret_cast<Vec2f*>(attribPtr) = getAttributeConst<Vec2f>(attrib, index);
+				*reinterpret_cast<Vec2f*>(attribPtr) 
+					= getAttributeConst<Vec2f>(interpretation, index);
 				break;
 			case AttributeType_Vec3f:
-				*reinterpret_cast<Vec3f*>(attribPtr) = getAttributeConst<Vec3f>(attrib, index);
+				*reinterpret_cast<Vec3f*>(attribPtr) 
+					= getAttributeConst<Vec3f>(interpretation, index);
 				break;
 			case AttributeType_Vec4f:
-				*reinterpret_cast<Vec4f*>(attribPtr) = getAttributeConst<Vec4f>(attrib, index);
+				*reinterpret_cast<Vec4f*>(attribPtr) 
+					= getAttributeConst<Vec4f>(interpretation, index);
 				break;
 			default:
 				Q_ASSERT(false);
@@ -118,85 +113,6 @@ void StelQGLArrayVertexBufferBackend::getVertex
 		// on some platforms, but both the size of attribute and of unsigned char is 
 		// measured in the same unit, so it's not a problem.
 		attribPtr += attributes.sizes[attrib];
-	}
-}
-
-void StelQGLArrayVertexBufferBackend::
-	projectVertices(StelProjector* projector, StelQGLIndexBuffer* indexBuffer)
-{
-	// This is a backend function called during (right before) drawing, so we need 
-	// to be locked.
-	Q_ASSERT_X(locked, Q_FUNC_INFO,
-	           "Trying to project a vertex buffer that is not locked.");
-
-	// Get the position attribute and ensure that we can project it.
-	const int posIndex = getAttributeIndex(AttributeInterpretation_Position);
-#ifndef NDEBUG
-	const StelVertexAttribute& attribute(attributes.attributes[posIndex]);
-#endif
-	Q_ASSERT_X(posIndex >= 0, Q_FUNC_INFO, "Vertex format without a position attribute");
-	Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
-	           "Trying to use a custom StelProjector to project non-3D vertex positions");
-	Q_ASSERT_X(attribute.type == AttributeType_Vec3f, Q_FUNC_INFO, 
-	           "Unknown 3D vertex attribute type");
-	AttributeArray<Vec3f>* positions = 
-		dynamic_cast<AttributeArray<Vec3f>*>(buffers[posIndex]);
-	Q_ASSERT_X(NULL != positions, Q_FUNC_INFO,
-	           "Unexpected attribute buffer data type");
-
-	usingProjectedPositions = true;
-
-
-	// We have two different cases :
-	// a) Not using an index array. Size of vertex data is known.
-	// b) Using an index array. 
-	//    We find the max index and project vertices until that index, 
-	//    or if there are not many indices, project vertices separately 
-	//    based on indices.
-	const int minProjectedSize =
-		(NULL == indexBuffer) ? vertexCount : (indexBuffer->maxIndex() + 1);
-	if(projectedPositions.size() < minProjectedSize)
-	{
-		projectedPositions.resize(minProjectedSize);
-	}
-
-	// If the index buffer is big, it's likely that it covers most 
-	// of the vertex buffer so we can just project everything en masse, 
-	// taking advantage of the cache.
-	if(NULL == indexBuffer || indexBuffer->length() >= minProjectedSize)
-	{
-		projector->project(minProjectedSize, positions->data.constData(), 
-		                   projectedPositions.data());
-	}
-	// Project vertices separately based on indices.
-	else
-	{
-		const Vec3f* const pos = positions->data.constData();
-		Vec3f* const projected = projectedPositions.data();
-		if(indexBuffer->indexType() == IndexType_U16)
-		{
-			const ushort* const indices = indexBuffer->indices16.constData();
-			const int indexCount        = indexBuffer->indices16.size();
-			for(int i = 0; i < indexCount; ++i)
-			{
-				const ushort index = indices[i];
-				projector->project(pos[index], projected[index]);
-			}
-		}
-		else if(indexBuffer->indexType() == IndexType_U32)
-		{
-			const uint* const indices = indexBuffer->indices32.constData();
-			const int indexCount      = indexBuffer->indices32.size();
-			for(int i = 0; i < indexCount; ++i)
-			{
-				const uint index = indices[i];
-				projector->project(pos[index], projected[index]);
-			}
-		}
-		else
-		{
-			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
-		}
 	}
 }
 
@@ -212,4 +128,87 @@ int StelQGLArrayVertexBufferBackend::
 		}
 	}
 	return -1;
+}
+
+void StelQGLArrayVertexBufferBackend::
+	projectVertices(StelProjector* projector, StelQGLIndexBuffer* indexBuffer)
+{
+	// This is a backend function called during (right before) drawing, so we need 
+	// to be locked.
+	Q_ASSERT_X(locked, Q_FUNC_INFO,
+	           "Trying to project a vertex buffer that is not locked.");
+
+	// Get the position attribute and ensure that we can project it.
+#ifndef NDEBUG
+	const int posIndex = getAttributeIndex(AttributeInterpretation_Position);
+	const StelVertexAttribute& attribute(attributes.attributes[posIndex]);
+	Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
+	           "Trying to use a custom StelProjector to project non-3D vertex positions");
+	Q_ASSERT_X(attribute.type == AttributeType_Vec3f, Q_FUNC_INFO, 
+	           "Unknown 3D vertex attribute type");
+#endif
+
+	usingProjectedPositions = true;
+
+	const Vec3f* const positions = 
+		static_cast<Vec3f*>(attributeBuffers[AttributeInterpretation_Position]);
+	Q_ASSERT_X(NULL != positions, Q_FUNC_INFO, "Vertex format without a position attribute");
+
+
+	// We have two different cases :
+	// a) Not using an index array. Size of vertex data is known.
+	// b) Using an index array. 
+	//    We find the max index and project vertices until that index, 
+	//    or if there are not many indices, project vertices separately 
+	//    based on indices.
+	const int minProjectedSize =
+		(NULL == indexBuffer) ? vertexCount : (indexBuffer->maxIndex() + 1);
+
+	if(Q_UNLIKELY(NULL == projectedPositions))
+	{
+		projectedPositions =
+			static_cast<Vec3f*>(std::malloc(minProjectedSize * sizeof(Vec3f)));
+	}
+	else if(projectedPositionsSize < minProjectedSize)
+	{
+		projectedPositions =
+			static_cast<Vec3f*>(std::realloc(projectedPositions, minProjectedSize * sizeof(Vec3f)));
+		projectedPositionsSize = minProjectedSize;
+	}
+
+	// If the index buffer is big, it's likely that it covers most 
+	// of the vertex buffer so we can just project everything en masse, 
+	// taking advantage of the cache.
+	if(NULL == indexBuffer || indexBuffer->length() >= minProjectedSize)
+	{
+		projector->project(minProjectedSize, positions, projectedPositions);
+	}
+	// Project vertices separately based on indices.
+	else
+	{
+		if(indexBuffer->indexType() == IndexType_U16)
+		{
+			const ushort* const indices = indexBuffer->indices16.constData();
+			const int indexCount        = indexBuffer->indices16.size();
+			for(int i = 0; i < indexCount; ++i)
+			{
+				const ushort index = indices[i];
+				projector->project(positions[index], projectedPositions[index]);
+			}
+		}
+		else if(indexBuffer->indexType() == IndexType_U32)
+		{
+			const uint* const indices = indexBuffer->indices32.constData();
+			const int indexCount      = indexBuffer->indices32.size();
+			for(int i = 0; i < indexCount; ++i)
+			{
+				const uint index = indices[i];
+				projector->project(positions[index], projectedPositions[index]);
+			}
+		}
+		else
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
+		}
+	}
 }

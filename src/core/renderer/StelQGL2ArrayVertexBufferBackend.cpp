@@ -17,25 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-/*
- * Stellarium
- * Copyright (C) 2012 Ferdinand Majerech
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
- */
-
 #include "StelQGL2Renderer.hpp"
 #include "StelQGL2ArrayVertexBufferBackend.hpp"
 
@@ -105,7 +86,7 @@ void StelQGL2ArrayVertexBufferBackend::
 		}
 
 		const bool position = (attribute.interpretation == AttributeInterpretation_Position);
-		const void* attributeData = buffers[attrib]->constData();
+		const void* attributeData = attributeBuffers[attribute.interpretation];
 	
 		// Some shaders (e.g. lighting) need unprojected vertex positions. Vertex 
 		// positions can be projected on the CPU or GPU. If they are projected on the
@@ -139,7 +120,7 @@ void StelQGL2ArrayVertexBufferBackend::
 			usingProjectedPositions = false;
 
 			// Using projected positions, use projectedPositions vertex array.
-			attributeData = projectedPositions.constData();
+			attributeData = projectedPositions;
 		}
 
 		enableAttribute(program, enabledAttributes[totalAttributes], attribute, attributeData);
