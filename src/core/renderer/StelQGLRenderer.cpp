@@ -29,7 +29,7 @@ void StelQGLRenderer::bindTextureBackend
 	StelQGLTextureBackend* qglTextureBackend =
 		dynamic_cast<StelQGLTextureBackend*>(textureBackend);
 	Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
-				  "Trying to bind a texture created by a different renderer backend");
+	           "Trying to bind a texture created by a different renderer backend");
 
 	const TextureStatus status = qglTextureBackend->getStatus();
 	if(status == TextureStatus_Uninitialized)
@@ -45,8 +45,11 @@ void StelQGLRenderer::bindTextureBackend
 	}
 	if(status == TextureStatus_Loaded)
 	{
-		qglTextureBackend->bind(textureUnit);
-		currentlyBoundTextures[textureUnit] = qglTextureBackend;
+		if(currentlyBoundTextures[textureUnit] != qglTextureBackend)
+		{
+			qglTextureBackend->bind(textureUnit);
+			currentlyBoundTextures[textureUnit] = qglTextureBackend;
+		}
 	}
 	else
 	{
