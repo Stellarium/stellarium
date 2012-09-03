@@ -122,7 +122,6 @@ void StelQGL2ArrayVertexBufferBackend::
 			// Using projected positions, use projectedPositions vertex array.
 			attributeData = projectedPositions;
 		}
-
 		enableAttribute(program, enabledAttributes[totalAttributes], attribute, attributeData);
 	}
 

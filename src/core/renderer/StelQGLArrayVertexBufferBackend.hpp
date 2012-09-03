@@ -20,7 +20,6 @@
 #ifndef _STELQGLARRAYVERTEXBUFFERBACKEND_HPP_
 #define _STELQGLARRAYVERTEXBUFFERBACKEND_HPP_
 
-
 #include "VecMath.hpp"
 #include "StelProjectorType.hpp"
 #include "StelVertexBuffer.hpp"
@@ -28,7 +27,7 @@
 #include "StelVertexAttribute.hpp"
 
 
-//! Base class for QGL-using vertex array based vertex buffer backends.
+//! Base class for QGL-using vertex buffer backends based on separate attribute arrays.
 //!
 //! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLArrayVertexBufferBackend : public StelVertexBufferBackend
@@ -117,7 +116,9 @@ protected:
 	//! This replaces the buffer with Position interpretation during drawing when 
 	//! usingProjectedPositions is true. The positions are projected by projectVertices().
 	Vec3f* projectedPositions;
-	int projectedPositionsSize;
+
+	//! Allocated capacity of the projectedPositions array.
+	int projectedPositionsCapacity;
 
 	//! Construct a StelQGLArrayVertexBufferBackend.
 	//!
@@ -191,7 +192,7 @@ private:
 		return static_cast<A*>(attributeBuffers[interpretation])[vertexIndex];
 	}
 
-	//! Get index of attribute with specified interpretation in the buffers vector.
+	//! Get index of attribute with specified interpretation.
 	//!
 	//! (No two attributes can have the same interpretation)
 	//!

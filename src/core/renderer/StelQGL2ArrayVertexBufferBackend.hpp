@@ -26,8 +26,6 @@
 
 //! OpenGL 2 vertex array style VertexBuffer backend, used for testing and transition.
 //!
-//! Should be replaced by a StelQGL2VBOVertexBufferBackend based on QGL and/or using VBOs.
-//!
 //! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 //!
 //! @sa StelVertexBuffer, StelRenderer
