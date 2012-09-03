@@ -342,7 +342,9 @@ void StelGeodesicGrid::searchZones(const QVector<SphericalCap>& convex,
 		const SphericalCap& half_space(convex.at(h));
 		for (int i=0;i<12;i++)
 		{
-			corner_inside[i][h] = half_space.contains(icosahedron_corners[i]);
+			const Vec3f corner = icosahedron_corners[i];
+			corner_inside[i][h] = 
+				half_space.contains(Vec3d(corner[0], corner[1], corner[2]));
 		}
 	}
 	for (int i=0;i<20;i++)
@@ -424,9 +426,9 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 			{
 				const int i = halfs_used[h];
 				const SphericalCap& half_space(convex.at(i));
-				edge0_inside[i] = half_space.contains(t.e0);
-				edge1_inside[i] = half_space.contains(t.e1);
-				edge2_inside[i] = half_space.contains(t.e2);
+				edge0_inside[i] = half_space.contains(Vec3d(t.e0[0], t.e0[1], t.e0[2]));
+				edge1_inside[i] = half_space.contains(Vec3d(t.e1[0], t.e1[1], t.e1[2]));
+				edge2_inside[i] = half_space.contains(Vec3d(t.e2[0], t.e2[1], t.e2[2]));
 			}
 			searchZones(lev,index+0,
 			            convex,halfs_used,halfs_used_count,
