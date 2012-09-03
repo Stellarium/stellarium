@@ -31,7 +31,7 @@
 #include "StelQGLRenderer.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
-#include "StelQGL2ArrayVertexBufferBackend.hpp"
+#include "StelQGL2InterleavedArrayVertexBufferBackend.hpp"
 
 
 //! Renderer backend using OpenGL 2.1 or GLSL 2.0 with Qt.
@@ -395,7 +395,7 @@ protected:
 	{
 		invariant();
 		statistics["vertex_buffers_created"] += 1.0;
-		return new StelQGL2ArrayVertexBufferBackend(primitiveType, attributes);
+		return new StelQGL2InterleavedArrayVertexBufferBackend(primitiveType, attributes);
 	}
 
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
@@ -405,8 +405,8 @@ protected:
 	{
 		invariant();
 
-		StelQGL2ArrayVertexBufferBackend* backend =
-			dynamic_cast<StelQGL2ArrayVertexBufferBackend*>(vertexBuffer);
+		StelQGL2InterleavedArrayVertexBufferBackend* backend =
+			dynamic_cast<StelQGL2InterleavedArrayVertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
 		           "StelQGL2Renderer: Vertex buffer created by different renderer backend "
 		           "or uninitialized");
