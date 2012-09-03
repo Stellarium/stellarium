@@ -32,7 +32,7 @@ StelQGLArrayVertexBufferBackend(const PrimitiveType type,
 	, vertexCapacity(4)
 	, usingProjectedPositions(false)
 	, projectedPositions(NULL)
-	, projectedPositionsSize(0)
+	, projectedPositionsCapacity(0)
 {
 	// Unused buffers will be NULL.
 	memset(attributeBuffers, '\0', AttributeInterpretation_MAX * sizeof(void*));
@@ -169,11 +169,11 @@ void StelQGLArrayVertexBufferBackend::
 		projectedPositions =
 			static_cast<Vec3f*>(std::malloc(minProjectedSize * sizeof(Vec3f)));
 	}
-	else if(projectedPositionsSize < minProjectedSize)
+	else if(projectedPositionsCapacity < minProjectedSize)
 	{
 		projectedPositions =
 			static_cast<Vec3f*>(std::realloc(projectedPositions, minProjectedSize * sizeof(Vec3f)));
-		projectedPositionsSize = minProjectedSize;
+		projectedPositionsCapacity = minProjectedSize;
 	}
 
 	// If the index buffer is big, it's likely that it covers most 
