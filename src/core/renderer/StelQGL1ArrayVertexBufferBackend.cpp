@@ -98,8 +98,7 @@ void StelQGL1ArrayVertexBufferBackend::
 		   usingProjectedPositions)
 		{
 			// Using projected positions, use projectedPositions vertex array.
-			enableAttribute(enabledAttributes[attrib], 
-			                attribute, projectedPositions.constData());
+			enableAttribute(enabledAttributes[attrib], attribute, projectedPositions);
 
 			// Projected positions are used within a single renderer drawVertexBufferBackend
 			// call - we set this so any further calls with this buffer won't accidentally 
@@ -112,7 +111,7 @@ void StelQGL1ArrayVertexBufferBackend::
 		// Not a position attribute, or not using projected positions, 
 		// so use the normal vertex array.
 		enableAttribute(enabledAttributes[attrib], attribute, 
-		                buffers[attrib]->constData());
+		                attributeBuffers[attribute.interpretation]);
 	}
 
 	glMatrixMode(GL_PROJECTION);

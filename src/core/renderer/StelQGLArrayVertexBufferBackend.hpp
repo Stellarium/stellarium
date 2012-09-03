@@ -20,7 +20,6 @@
 #ifndef _STELQGLARRAYVERTEXBUFFERBACKEND_HPP_
 #define _STELQGLARRAYVERTEXBUFFERBACKEND_HPP_
 
-#include <QVector>
 
 #include "VecMath.hpp"
 #include "StelProjectorType.hpp"
@@ -34,46 +33,6 @@
 //! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 class StelQGLArrayVertexBufferBackend : public StelVertexBufferBackend
 {
-protected:
-	//! Buffer containing values of a single vertex attribute.
-	//!
-	//! Must be downcasted to AttributeArray to access the stored data.
-	struct AnyAttributeArray
-	{
-		//! Required to ensure that derived classes get properly deallocated.
-		virtual ~AnyAttributeArray(){};
-
-		//! Get a read only pointer to the data stored in buffer.
-		virtual const void* constData() = 0;
-	};
-
-	//! Concrete attribute buffer storing attributes of a particular type.
-	//!
-	//! Handles the GL logic required to provide the buffer to the GPU.
-	template<class A> struct AttributeArray : public AnyAttributeArray
-	{
-		//! Construct an AttributeArray.
-		//!
-		//! @param interpretation How should GL interpret this attribute? (e.g. color, normal, etc).
-		AttributeArray(const AttributeInterpretation interpretation)
-			:interpretation(interpretation)
-		{
-			// Just enough for a triangle pair to be created without reallocation.
-			data.reserve(6);
-		}
-
-		virtual const void* constData()
-		{
-			return static_cast<const void*>(data.constData());
-		}
-
-		//! Stores the attribute data (in GL terms, a vertex array).
-		QVector<A> data;
-
-		//! Specifies how should the attribute be interpreted (color, normal, etc.).
-		const AttributeInterpretation interpretation;
-	};
-
 public:
 	virtual ~StelQGLArrayVertexBufferBackend();
 
@@ -132,14 +91,17 @@ protected:
 	//! Graphics primitive type formed by the vertices of this buffer.
 	PrimitiveType primitiveType;
 
-	//! Number of used vertices in the buffer.
+	//! Number of vertices in the buffer.
 	int vertexCount;
 
 	//! Number of vertices we have allocated space for.
 	int vertexCapacity;
 
 	//! Buffers storing vertex attributes.
-	QVector<AnyAttributeArray*> buffers;
+	//!
+	//! Attribute interpretation is an index specifying the buffer.
+	//! Buffers not used by the vertex format are NULL.
+	void* attributeBuffers[AttributeInterpretation_MAX];
 
 	//! Are we using vertex positions projected by a StelProjector?
 	//!
@@ -154,7 +116,8 @@ protected:
 	//!
 	//! This replaces the buffer with Position interpretation during drawing when 
 	//! usingProjectedPositions is true. The positions are projected by projectVertices().
-	QVector<Vec3f> projectedPositions;
+	Vec3f* projectedPositions;
+	int projectedPositionsSize;
 
 	//! Construct a StelQGLArrayVertexBufferBackend.
 	//!
@@ -176,17 +139,22 @@ private:
 		const unsigned char* attribPtr = static_cast<const unsigned char*>(vertexInPtr);
 		for(int attrib = 0; attrib < attributes.count; ++attrib)
 		{
+			const AttributeInterpretation interpretation = 
+				attributes.attributes[attrib].interpretation;
 			//Set each attribute in its buffer.
 			switch(attributes.attributes[attrib].type)
 			{
 				case AttributeType_Vec2f:
-					getAttribute<Vec2f>(attrib, index) = *reinterpret_cast<const Vec2f*>(attribPtr);
+					getAttribute<Vec2f>(interpretation, index) 
+						= *reinterpret_cast<const Vec2f*>(attribPtr);
 					break;
 				case AttributeType_Vec3f:
-					getAttribute<Vec3f>(attrib, index) = *reinterpret_cast<const Vec3f*>(attribPtr);
+					getAttribute<Vec3f>(interpretation, index) 
+						= *reinterpret_cast<const Vec3f*>(attribPtr);
 					break;
 				case AttributeType_Vec4f:
-					getAttribute<Vec4f>(attrib, index) = *reinterpret_cast<const Vec4f*>(attribPtr);
+					getAttribute<Vec4f>(interpretation, index) 
+						= *reinterpret_cast<const Vec4f*>(attribPtr);
 					break;
 				default:
 					Q_ASSERT(false);
@@ -200,61 +168,27 @@ private:
 		}
 	}
 
-	//! Add an attribute to specified attribute buffer.
-	//!
-	//! @param attributeIndex Specifies which attribute (e.g. normal, texcoord, vertex) we're
-	//!                       adding.
-	//! @param attributePtr   Raw pointer to attribute data. Data format must match
-	//!                       the attribute at specified index.
-	template<class A>
-	void addAttribute(const int attributeIndex, const void* attributePtr)
-	{
-		const A* attrib = reinterpret_cast<const A*>(attributePtr);
-		getBuffer<A>(attributeIndex).data.append(*attrib);
-	}
-
 	//! Access specified attribute of a vertex.
 	//!
 	//! @tparam A             Attribute type. Must match the type of attribute at
 	//!                       attributeIndex.
-	//! @param attributeIndex Specifies which attribute (e.g. normal, texcoord, vertex) we're
+	//! @param interpretation Specifies which attribute (e.g. normal, texcoord, vertex) we're
 	//!                       accessing.
 	//! @param vertexIndex    Specifies which vertex we're accessing.
 	//! @return               Non-const reference to the attribute.
 	template<class A>
-	A& getAttribute(const int attributeIndex, const int vertexIndex) 
+	A& getAttribute(const AttributeInterpretation interpretation, const int vertexIndex) 
 	{
-		return getBuffer<A>(attributeIndex).data[vertexIndex];
+		return static_cast<A*>(attributeBuffers[interpretation])[vertexIndex];
 	}
 
 	//! Const version of getAttribute.
 	//!
 	//! @see getAttribute
 	template<class A>
-	const A& getAttributeConst(const int attributeIndex, const int vertexIndex)  const
+	const A& getAttributeConst(const AttributeInterpretation interpretation, const int vertexIndex) const
 	{
-		return getBufferConst<A>(attributeIndex).data[vertexIndex];
-	}
-
-	//! Access buffer of the specified vertex attribute.
-	//!
-	//! @tparam A    Attribute type. Must match the type of attribute at specified index.
-	//! @param index Attribute index. Specifies which attribute (e.g. normal, texcoord, vertex)
-	//!              we're working with.
-	//! @return      Non-const reference to the attribute buffer.
-	template<class A>
-	AttributeArray<A>& getBuffer(const int attributeIndex)
-	{
-		return *static_cast<AttributeArray<A>*>(buffers[attributeIndex]);
-	}
-
-	//! Const version of getBuffer.
-	//!
-	//! @see getBuffer
-	template<class A>
-	const AttributeArray<A>& getBufferConst(const int attributeIndex) const
-	{
-		return *static_cast<const AttributeArray<A>*>(buffers[attributeIndex]);
+		return static_cast<A*>(attributeBuffers[interpretation])[vertexIndex];
 	}
 
 	//! Get index of attribute with specified interpretation in the buffers vector.
