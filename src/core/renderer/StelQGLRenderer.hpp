@@ -491,7 +491,8 @@ protected:
 	//!
 	//! @param vertexBuffer Vertex buffer drawn.
 	//! @param indexBuffer  Index buffer (if any), specifying which vertices to draw.
-	void updateDrawStatistics(StelQGLArrayVertexBufferBackend* vertexBuffer,
+	template<class VBufferBackend>
+	void updateDrawStatistics(VBufferBackend* vertexBuffer,
 	                          StelQGLIndexBuffer* indexBuffer)
 	{
 		statistics["batches_per_frame"] += 1.0;
