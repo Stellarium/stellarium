@@ -134,7 +134,7 @@ void StelQGL2InterleavedArrayVertexBufferBackend::
 		}
 
 		enableAttribute(program, enabledAttributes[totalAttributes], 
-		                           attribute, attributeData, stride);
+		                attribute, attributeData, stride);
 
 		attributeOffset += attributeSize(attribute.type);
 	}

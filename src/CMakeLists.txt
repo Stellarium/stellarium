@@ -120,6 +120,7 @@ SET(stellarium_lib_SRCS
 
 	core/Triplet.hpp
 
+	core/renderer/StelRendererStatistics.hpp
 	core/renderer/StelRenderer.cpp
 	core/renderer/StelRenderer.hpp
 	core/renderer/StelQGLViewport.cpp
