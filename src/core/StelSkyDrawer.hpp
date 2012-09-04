@@ -318,19 +318,17 @@ private:
 	//! When stars are drawn as points, these are stored in this buffer.
 	StelVertexBuffer<ColoredVertex>* starPointBuffer;
 
-	//! When stars/point sources are drawn as triangle pairs ("sprites"), their vertices are stored here.
-	//!
-	//! Vertices for big halos are stored here as well.
+	//! Star sprite triangles.
 	StelVertexBuffer<ColoredTexturedVertex>* starSpriteBuffer;
 
-	//! Index buffer pointing to starSpriteBuffer storing indices of stars' sprites.
-	StelIndexBuffer* starSpriteIndices;
-	//! Index buffer pointing to starSpriteBuffer storing indices of big halos.
-	StelIndexBuffer* bigHaloIndices;
-	//! Index buffer pointing to starSpriteBuffer storing indices of the sun halo.
-	StelIndexBuffer* sunHaloIndices;
-	//! Index buffer pointing to starSpriteBuffer storing indices of the sun's corona.
-	StelIndexBuffer* coronaIndices;
+	//! Big halo triangles.
+	StelVertexBuffer<ColoredTexturedVertex>* bigHaloBuffer;
+
+	//! Sun halo triangles.
+	StelVertexBuffer<ColoredTexturedVertex>* sunHaloBuffer;
+
+	//! Sun corona triangles.
+	StelVertexBuffer<ColoredTexturedVertex>* coronaBuffer;
 
 	//! Are we drawing point sources at the moment?
 	bool drawing;
