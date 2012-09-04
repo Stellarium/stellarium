@@ -64,6 +64,15 @@ public:
     //! If set to true, bump mapping is enabled for the 3D scene.
     void setEnableBumps(bool enableBumps);
     bool getEnableBumps(void){return enableBumps;}
+    //! Use this to set/get the enableFilter flag.
+    //! If set to true, the shadows in the 3D scene are filtered.
+    void setEnableShadowsFilter(bool enableShadowsFilter);
+    bool getEnableShadowsFilter(void){return enableShadowsFilter;}
+    //! Use this to set/get the enableFilter flag.
+    //! If set to true, the shadows in the 3D scene are filtered using more taps per pass.
+    void setEnableShadowsFilterHQ(bool enableShadowsFilterHQ);
+    bool getEnableShadowsFilterHQ(void){return enableShadowsFilterHQ;}
+
 
     static const QString MODULE_PATH;
 
@@ -105,8 +114,10 @@ private:
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;
     QString defaultScenery3dID;
-    bool enableShadows;  // toggle shadow mapping
-    bool enableBumps;    // toggle bump mapping
+    bool enableShadows;          // toggle shadow mapping
+    bool enableBumps;            // toggle bump mapping
+    bool enableShadowsFilter;    // toggle shadow filtering
+    bool enableShadowsFilterHQ;  // toggle shadow filtering HQ
     StelButton* toolbarEnableButton;
     StelButton* toolbarSettingsButton;
     StelCore::ProjectionType oldProjectionType;
@@ -116,7 +127,6 @@ private:
     StelShader* bumpShader;
     StelShader* univShader;
     StelShader* debugShader;
-    StelShader* parallaxShader;
 
     //screen messages (taken largely from AngleMeasure as of 2012-01-21)
     LinearFader messageFader;

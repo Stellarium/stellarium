@@ -23,19 +23,20 @@
 attribute vec4 vecTangent;
 
 uniform bool boolBump;
-
+uniform bool boolHeight;
+ 
 varying vec3 vecLight;
 varying vec3 vecEye;
 varying vec3 vecNormal;
 varying vec4 vecEyeView;
 varying vec4 vecPos;
- 
+
 void main(void)
 {
 	vecPos = gl_Vertex;
 	vecEyeView = gl_ModelViewMatrix * vecPos;
 	vecNormal = normalize(gl_NormalMatrix * gl_Normal);
-	vecLight = normalize(gl_LightSource[0].position.xyz);
+	vecLight = normalize(gl_LightSource[0].position.xyz);		
 	vecEye = normalize(-vecEyeView.xyz);
 	
 	//Bring eye- and lightvector into TBN space

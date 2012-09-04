@@ -56,6 +56,9 @@
 
 #include "AABB.hpp"
 
+#include <iostream>
+#include <fstream>
+
 #define MEANINGLESS 1.E34
 #define MEANINGLESS_INT -32767
 #define FROM_MODEL (MEANINGLESS_INT + 1)
@@ -136,10 +139,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     }
     shadowsEnabled = false;
     bumpsEnabled = false;
-    parallaxEnabled = false;
-    torchEnabled=false;
-    textEnabled=false;
-    debugEnabled=false;
+    torchEnabled = false;
+    textEnabled = false;
+    debugEnabled = false;
     curEffect = No;
     curShader = 0;
     lightCamEnabled = false;
@@ -148,6 +150,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     groundGenNormals = false;
     sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
     frustEnabled = false;
+    filterShadowsEnabled = true;
+    filterHQ = false;
+    venusOn = false;
 
     //Preset frustumSplits
     frustumSplits = 4;
@@ -171,6 +176,14 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     camDepthFBO = 0;
     camDepthTex = 0;
     analyzeDebug = false;
+
+    writeTex = 0;
+    readTex = 1;
+    attachments = new GLenum[2];
+    attachments[0] = GL_COLOR_ATTACHMENT0;
+    attachments[1] = GL_COLOR_ATTACHMENT1;
+    pingpongTex = new GLuint[2];
+
 
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
@@ -398,6 +411,7 @@ void Scenery3d::loadModel()
 
         hasModels = objModel->hasStelModels();
         objModel->transform(zRotateMatrix*obj2gridMatrix);
+        //objModel->transform(obj2gridMatrix);
 
 
         /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
@@ -490,7 +504,7 @@ void Scenery3d::loadModel()
         else if(maxSize < 400.0f)
             splitWeight = 0.70f;
         else
-            splitWeight = 0.80f;
+            splitWeight = 0.99f;
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -504,7 +518,6 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         {
             //case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
             //case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
-            case Qt::Key_I:         parallaxEnabled = !parallaxEnabled; e->accept(); break;
             case Qt::Key_L:         torchEnabled = !torchEnabled; e->accept(); break;
             case Qt::Key_K:         textEnabled  = !textEnabled;  e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
@@ -515,9 +528,9 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             case Qt::Key_Left:      movement_x = -1.0f * speedup; e->accept(); break;
             case Qt::Key_P:         saveFrusts(); e->accept(); break;
             case Qt::Key_D:         debugEnabled = !debugEnabled; e->accept(); break;
-            case Qt::Key_U:         parallaxScale += 0.01f; e->accept(); break;
-            case Qt::Key_J:         parallaxScale -= 0.01f; e->accept(); break;
             case Qt::Key_H:         analyzeDebug = !analyzeDebug; e->accept(); break;
+            //case Qt::Key_I:         filterShadowsEnabled = ! filterShadowsEnabled; e->accept(); break;
+            //case Qt::Key_U:         filterHQ = !filterHQ; e->accept(); break;
         }
     }
     else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
@@ -879,6 +892,15 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
         location = curShader->uniformLocation("alpha");
         curShader->setUniform(location, pStelModel->pMaterial->alpha);
 
+        location = curShader->uniformLocation("boolFilterHQ");
+        curShader->setUniform(location, filterHQ);
+
+        location = curShader->uniformLocation("boolFilterShadows");
+        curShader->setUniform(location, filterShadowsEnabled);
+
+        location = curShader->uniformLocation("boolVenus");
+        curShader->setUniform(location, venusOn);
+
         int iIllum = pStelModel->pMaterial->illum;
         if(iIllum < 0 || iIllum > 2)
         {
@@ -918,7 +940,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
 
 
         //Bump Mapping
-        if(cur == BumpMapping || cur == All || cur == ParallaxMapping)
+        if(cur == BumpMapping || cur == All)
         {
             //Send tangents to shader
             if(objModel->hasTangents())
@@ -942,12 +964,12 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
 
             if (pStelModel->pMaterial->bump_texture)
             {
-                glActiveTexture(GL_TEXTURE2);
+                glActiveTexture(GL_TEXTURE1);
                 pStelModel->pMaterial->bump_texture.data()-> bind();
 
                 //Send bump map to shader
                 location = curShader->uniformLocation("bmap");
-                curShader->setUniform(location, 2);
+                curShader->setUniform(location, 1);
 
                 //Flag for bumped lighting
                 location = curShader->uniformLocation("boolBump");
@@ -956,12 +978,12 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
 
             if (pStelModel->pMaterial->height_texture)
             {
-                glActiveTexture(GL_TEXTURE7);
+                glActiveTexture(GL_TEXTURE2);
                 pStelModel->pMaterial->height_texture.data()-> bind();
 
                 //Send bump map to shader
                 location = curShader->uniformLocation("hmap");
-                curShader->setUniform(location, 7);
+                curShader->setUniform(location, 2);
 
                 //Flag for parallax mapping
                 location = curShader->uniformLocation("boolHeight");
@@ -997,11 +1019,9 @@ void Scenery3d::bindShader()
     curEffect = No;
     curShader = 0;
 
-    if(shadowsEnabled && !bumpsEnabled && !parallaxEnabled) { curShader = shadowShader; curEffect = ShadowMapping; }
-    else if(!shadowsEnabled && bumpsEnabled && !parallaxEnabled) { curShader = bumpShader; curEffect = BumpMapping; }
-    else if(shadowsEnabled && bumpsEnabled && !parallaxEnabled) { curShader = univShader; curEffect = All; }
-    else if(shadowsEnabled && bumpsEnabled && parallaxEnabled) { curShader = univShader; curEffect = All; }
-    else if(shadowsEnabled && !bumpsEnabled && parallaxEnabled) { curShader = parallaxShader; curEffect = ParallaxMapping; }
+    if(shadowsEnabled && !bumpsEnabled){ curShader = shadowShader; curEffect = ShadowMapping; }
+    else if(!shadowsEnabled && bumpsEnabled){ curShader = bumpShader; curEffect = BumpMapping; }
+    else if(shadowsEnabled && bumpsEnabled){ curShader = univShader; curEffect = All; }
 
     //Bind the selected shader
     if(curShader != 0) curShader->use();
@@ -1166,11 +1186,11 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
         bb.expand(focusBodies[frustumIndex]->getVerts()[i]);
 
     //Project the frustum into light space and find the boundaries
-    //! for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
-    for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
+    for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
+    //for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
     {
-        //Vec3f tmp = focusBodies[frustumIndex]->getVerts()[i];
-        Vec3f tmp = bb.getCorner(static_cast<AABB::Corner>(i));
+        Vec3f tmp = focusBodies[frustumIndex]->getVerts()[i];
+        //Vec3f tmp = bb.getCorner(static_cast<AABB::Corner>(i));
         Vec4f transf = lightMVP*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
 
         transf.v[0] /= transf.v[3];
@@ -1272,11 +1292,6 @@ void Scenery3d::adjustFrustum()
 
 void Scenery3d::analyzeViewSamples(StelPainter &painter)
 {
-    //Setup the frustum
-    Frustum camFrust;
-    camFrust.setCamInternals(camFOV, camAspect, camNear, camFar);
-    camFrust.calcFrustum(viewPos, viewDir, viewUp);
-
     float f = 2.0 / tan(camFOV * M_PI / 360.0);
     Mat4f camProj = Mat4f(f / camAspect, 0, 0, 0,
                     0, f, 0, 0,
@@ -1287,9 +1302,6 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
-    glEnable(GL_CULL_FACE);
-    //Backface culling for ESM!
-    glCullFace(GL_FRONT);
     glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
 
     glMatrixMode(GL_PROJECTION);
@@ -1311,7 +1323,7 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     glViewport(0, 0, shadowmapSize, shadowmapSize);
 
     //Activate texture unit as usual
-    glActiveTexture(GL_TEXTURE8);
+    glActiveTexture(GL_TEXTURE7);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, camDepthTex, 0);
 
     //Clear everything
@@ -1319,6 +1331,46 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
 
     //Draw the scene
     drawArrays(painter, false);
+
+    //Switch to the minMax reduction shader
+    minMaxShader->use();
+
+    //Send the depth map as base level to the min/max shader
+    int location = curShader->uniformLocation("tex");
+    curShader->setUniform(location, 7);
+
+    //Calculate dimensions of the next level
+    int outDim = shadowmapSize/2;
+
+    //Set the first colorattachment as render target
+    glDrawBuffer(attachments[writeTex]);
+
+    //Draw a fullscreen quad to trigger the calculation
+    drawFullscreenQuad(outDim);
+
+    //Calculate remaining passes
+    unsigned int steps = std::floor(std::log(outDim+0.5)/std::log(2.0));
+
+    //Render remaining passes
+    for(unsigned int i=0; i<steps; i++)
+    {
+        //Set viewport
+        glPushAttrib(GL_VIEWPORT_BIT);
+        glViewport(0, 0, outDim, outDim);
+
+        //Send the previously generated texture as current level to the shader
+        glActiveTexture(GL_TEXTURE8+readTex);
+        location = curShader->uniformLocation("tex");
+        curShader->setUniform(location, 8+readTex);
+
+        //Output will be written in writeTex
+        glDrawBuffer(attachments[writeTex]);
+        outDim /= 2;
+        drawFullscreenQuad(outDim);
+    }
+
+    //Done
+    glUseProgram(0);
 
     //Reset Viewportbit
     glPopAttrib();
@@ -1337,12 +1389,30 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     //Reset
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
-    glCullFace(GL_BACK);
-    glDisable(GL_CULL_FACE);
     glColorMask(1, 1, 1, 1);
+}
 
+void Scenery3d::drawFullscreenQuad(int dim)
+{
+    float fDim = static_cast<float>(dim);
+    glBegin(GL_QUADS);
+        glVertex2f(0.0f, 0.0f);
+        glVertex2f(fDim, 0.0f);
+        glVertex2f(fDim, fDim);
+        glVertex2f(0.0, fDim);
+    glEnd();
 
-    //Send to shader and see if we can work with it
+    //Swap around textures
+    if(writeTex == 0)
+    {
+        writeTex = 1;
+        readTex = 0;
+    }
+    else
+    {
+        writeTex = 0;
+        readTex = 1;
+    }
 }
 
 void Scenery3d::generateShadowMap(StelCore* core)
@@ -1359,7 +1429,10 @@ void Scenery3d::generateShadowMap(StelCore* core)
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
 
-    analyzeViewSamples(painter);
+    //Adjust the frustum to the scene before analyzing the view samples
+    adjustFrustum();
+    //Further adjust
+    //analyzeViewSamples(painter);
 
     //Determine sun position
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -1401,18 +1474,21 @@ void Scenery3d::generateShadowMap(StelCore* core)
         gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
         lightDir = Vec3f(sunPosition[0], sunPosition[1], sunPosition[2]);
         lightDir.normalize();
+        venusOn = false;
     }
     else if (moonPosition[2]>0)
     {
         gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
         lightDir = Vec3f(moonPosition[0], moonPosition[1], moonPosition[2]);
         lightDir.normalize();
+        venusOn = false;
     }
     else
     {
         gluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
         lightDir = Vec3f(venusPosition[0], venusPosition[1], venusPosition[2]);
         lightDir.normalize();
+        venusOn = true;
     }
 
     /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
@@ -1433,9 +1509,6 @@ void Scenery3d::generateShadowMap(StelCore* core)
     //Set viewport
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, shadowmapSize, shadowmapSize);
-
-    //Adjust the frustum to the scene before splitting it
-    adjustFrustum();
 
     //Compute and set z-distances for each split
     computeZDist(camNear, camFar);
@@ -2031,6 +2104,10 @@ void Scenery3d::drawDebugText(StelCore* core)
     screen_y -= 30.0f;
     str = QString("Current shader: %1").arg(static_cast<int>(curEffect));
     painter.drawText(screen_x, screen_y, str);
+
+    screen_y -= 30.0f;
+    str = QString("Venus: %1").arg(static_cast<int>(venusOn));
+    painter.drawText(screen_x, screen_y, str);
 }
 
 void Scenery3d::initShadowMapping()
@@ -2115,11 +2192,12 @@ void Scenery3d::initShadowMapping()
     //Bind the FBO
     glBindFramebuffer(GL_FRAMEBUFFER, camDepthFBO);
 
-    //Generate the depth maps
+    //Generate the depth maps and color maps for min/max
     glGenTextures(1, &camDepthTex);
-    //Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 3
-    glActiveTexture(GL_TEXTURE8);
+    glGenTextures(2, pingpongTex);
 
+    //Activate the texture unit
+    glActiveTexture(GL_TEXTURE7);
     //Bind the depth map and setup parameters
     glBindTexture(GL_TEXTURE_2D, camDepthTex);
 
@@ -2135,8 +2213,33 @@ void Scenery3d::initShadowMapping()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
-    //Attach the depthmap to the Buffer
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    //Setup Color attachment 0 and 1
+    glActiveTexture(GL_TEXTURE8);
+    glBindTexture(GL_TEXTURE_2D, pingpongTex[writeTex]);
+    //turn off filtering and wrap modes
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    //define texture with floating point format
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, shadowmapSize, shadowmapSize, 0, GL_RGBA, GL_FLOAT,0);
+
+    glActiveTexture(GL_TEXTURE9);
+    glBindTexture(GL_TEXTURE_2D, pingpongTex[readTex]);
+    //turn off filtering and wrap modes
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    //define texture with floating point format
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, shadowmapSize, shadowmapSize, 0, GL_RGBA, GL_FLOAT,0);
+
+    //Attach to the Buffer
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, camDepthTex, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, attachments[writeTex], GL_TEXTURE_2D, pingpongTex[writeTex], 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, attachments[readTex], GL_TEXTURE_2D, pingpongTex[readTex], 0);
 
     glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
     glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
@@ -2147,6 +2250,13 @@ void Scenery3d::initShadowMapping()
     if(glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE)
 #endif
         qWarning() << "[Scenery3D] GL_FRAMEBUFFER_COMPLETE failed, can't use FBO";
+
+    //Create PBO for readback when analyzing the depth buffer
+    glGenBuffers(1, &camDepthPBO);
+    glBindBuffer(GL_PIXEL_PACK_BUFFER, camDepthPBO);
+    glBufferData(GL_PIXEL_PACK_BUFFER, shadowmapSize*shadowmapSize*sizeof(GLfloat), NULL, GL_STREAM_READ);
+    //Done. Unbind
+    glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
 
     //Done. Unbind and switch to normal texture unit 0
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

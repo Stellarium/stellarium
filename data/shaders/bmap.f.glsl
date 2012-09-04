@@ -21,12 +21,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#version 110
+#version 120
  
 uniform sampler2D tex;
 uniform sampler2D bmap;
+uniform sampler2D hmap;
 
 uniform bool boolBump;
+uniform bool boolHeight;
 uniform vec4 vecColor;
 uniform bool onlyColor;
  
@@ -37,18 +39,29 @@ uniform int iIllum;
 varying vec3 vecLight;
 varying vec3 vecEye;
 varying vec3 vecNormal;
-varying vec4 vecEyeView;
 varying vec4 vecPos;
+
+uniform float s = 0.015;
   
 vec4 getLighting()
 {
+	vec2 hTexCoord = gl_TexCoord[0].st;
+	vec3 v = normalize(vecEye);
+		
+	if(boolHeight)
+	{
+		float height = texture2D(hmap, hTexCoord).r;
+		//*scale +bias
+		height = height * s - 0.5*s;
+		
+		hTexCoord = hTexCoord + (height * v.xz);
+	}
+
 	//For bump mapping, the normal comes from the bump map texture lookup
 	vec3 n = normalize(vecNormal);
-	vec3 v = normalize(vecEye);
-	
 	if(boolBump)
 	{
-		n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
+		n = normalize(texture2D(bmap, hTexCoord).xyz * 2.0 - 1.0);
 	}
 	
 	vec3 l = normalize(vecLight);
@@ -66,18 +79,14 @@ vec4 getLighting()
 		//Add reflect
 		if(iIllum == 2)
 		{
-			//Reflection term
-			if(NdotL > 0.0)
-			{		
-				vec3 e = normalize(v);
-				vec3 r = normalize(-reflect(l,n)); 
-				float RdotE = max(0.0, dot(r, e));
-					
-				if (RdotE > 0.0)
-				{
-					float spec = pow(RdotE, gl_FrontMaterial.shininess);		
-					color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
-				}
+			vec3 e = normalize(v);
+			vec3 r = normalize(-reflect(l,n)); 
+			float RdotE = max(0.0, dot(r, e));
+				
+			if (RdotE > 0.0)
+			{
+				float spec = pow(RdotE, gl_FrontMaterial.shininess);		
+				color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
 			}
 		}
 	}
@@ -87,7 +96,7 @@ vec4 getLighting()
 		color += gl_LightSource[0].ambient;
 	}
 	
-	return color;
+	return color * texture2D(tex, hTexCoord);
 } 
   
 void main(void)
@@ -102,12 +111,8 @@ void main(void)
 	//Color only mode?
 	if(onlyColor)
 	{
-		color *= vecColor;
+		color = vecColor;
 	}
-	else
-	{
-		color *= texel;
-	}	
 
 	if(iIllum == 9)
 	{
