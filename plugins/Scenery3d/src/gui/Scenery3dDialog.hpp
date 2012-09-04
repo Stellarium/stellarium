@@ -21,6 +21,8 @@ private slots:
     void scenery3dChanged(QListWidgetItem* item);
     void renderingShadowmapChanged(void);
     void renderingBumpChanged(void);
+    void renderingShadowsFilterChanged(void);
+    void renderingShadowsFilterHQChanged(void);
     //! Update the widget to make sure it is synchrone if a value was changed programmatically
     //! This function should be called repeatedly with e.g. a timer
     void updateFromProgram();

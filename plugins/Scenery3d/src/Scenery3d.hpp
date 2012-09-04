@@ -56,13 +56,12 @@ public:
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
-    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0, StelShader* debugShader = 0, StelShader* parallaxShader = 0)
+    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0, StelShader* debugShader = 0)
     {
         this->shadowShader = shadowShader;
         this->bumpShader = bumpShader;
         this->univShader = univShader;
         this->debugShader = debugShader;
-        this->parallaxShader = parallaxShader;
     }
 
     //! Loads configuration values from a scenery3d.ini file.
@@ -96,6 +95,10 @@ public:
     void setBumpsEnabled(bool bumpsEnabled) { this->bumpsEnabled = bumpsEnabled; }
     bool getTorchEnabled(void) { return torchEnabled;}
     void setTorchEnabled(bool torchEnabled) { this->torchEnabled = torchEnabled; }
+    bool getShadowsFilterEnabled(void) { return filterShadowsEnabled; }
+    void setShadowsFilterEnabled(bool filterShadowsEnabled) { this->filterShadowsEnabled = filterShadowsEnabled; }
+    bool getShadowsFilterHQEnabled(void) { return filterHQ; }
+    void setShadowsFilterHQEnabled(bool filterHQ) { this->filterHQ = filterHQ; }
 
     //! @return Name of the scenery.
     QString getName() const { return name; }
@@ -119,7 +122,7 @@ public:
 
 
     enum ShadowCaster { None, Sun, Moon, Venus };
-    enum Effect { No, BumpMapping, ShadowMapping, All, ParallaxMapping};
+    enum Effect { No, BumpMapping, ShadowMapping, All};
     Mat4d mv;
     Mat4d mp;
     Mat4f mv2;
@@ -150,7 +153,6 @@ private:
     bool hasModels;             // flag to see if there's anything to draw
     bool shadowsEnabled;        // switchable value (^SPACE): Use shadow mapping
     bool bumpsEnabled;          // switchable value (^B): Use bump mapping
-    bool parallaxEnabled;
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
     bool torchEnabled;          // switchable value (^L): adds artificial ambient light
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
@@ -158,6 +160,9 @@ private:
     bool sceneryGenNormals;     // Config flag, true generates normals for the given OBJ
     bool groundGenNormals;      // Config flag, true generates normals for the given ground Model
     bool frustEnabled;
+    bool filterShadowsEnabled;  // switchable value (^I): Filter shadows
+    bool filterHQ;              // switchable value (^U): 64 tap filter shadows
+    bool venusOn;
 
     unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
     unsigned int shadowmapSize;
@@ -222,8 +227,6 @@ private:
     StelShader* univShader;
     //Debug shader
     StelShader* debugShader;
-    //Parallax shader
-    StelShader* parallaxShader;
     //Depth texture id
     GLuint shadowMapTexture;
     //Shadow Map FBO handle
@@ -289,5 +292,13 @@ private:
     bool analyzeDebug;
     float parallaxScale;
     int vpWidth, vpHeight;
+    GLuint camDepthPBO;
+    GLuint *pingpongTex;
+    int writeTex, readTex;
+    GLenum *attachments;
+
+    StelShader *minMaxShader;
+
+    void drawFullscreenQuad(int dim);
 };
 #endif
