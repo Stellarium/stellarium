@@ -130,12 +130,13 @@ public:
 	{
 		// Can't call makeGLContextCurrent() before initialization is complete.
 		glContext->makeCurrent();
-		viewport.init(gl.hasOpenGLFeature(QGLFunctions::NPOTTextures));
 		textureUnitCount = getTextureUnitCountBackend();
 		glVendorString = QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 		qDebug() << "GL vendor is " << glVendorString;
 		glRendererString = QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 		qDebug() << "GL renderer is " << glRendererString;
+		viewport.init(gl.hasOpenGLFeature(QGLFunctions::NPOTTextures), 
+		              glVendorString, glRendererString);
 		initStatistics();
 		return true;
 	}
