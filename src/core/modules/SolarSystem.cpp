@@ -85,7 +85,7 @@ SolarSystem::~SolarSystem()
 
 	delete allTrails;
 	allTrails = NULL;
-	
+
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
 	foreach (PlanetP p, systemPlanets)
 	{
@@ -131,7 +131,7 @@ void SolarSystem::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
@@ -171,7 +171,10 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		sPainter.setColor(1.0f,0.3f,0.3f);
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(1.0f,0.0f,0.0f);
+		else
+			sPainter.setColor(1.0f,0.3f,0.3f);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
@@ -743,6 +746,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 
+			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
+
 		}
 		else if (type == "comet")
 		{
@@ -784,9 +789,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               pd.value(secname+"/radius").toDouble()/AU,
 			               pd.value(secname+"/oblateness", 0.0).toDouble(),
 			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-			               pd.value(secname+"/albedo").toFloat(),
+				       pd.value(secname+"/albedo").toFloat(),
 			               pd.value(secname+"/tex_map").toString(),
-			               posfunc,
+				       posfunc,
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
@@ -1004,6 +1009,14 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
+float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	float r = 0.f;
+	r = p->getVMagnitude(StelApp::getInstance().getCore(), withExtinction);
+	return r;
+}
+
 // Search if any Planet is close to position given in earth equatorial position and return the distance
 StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 {
@@ -1042,12 +1055,16 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	v.normalize();
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
+	double cosAngularSize;
 
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		equPos = p->getEquinoxEquatorialPos(core);
 		equPos.normalize();
-		if (equPos*v>=cosLimFov)
+
+		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
+
+		if (equPos*v>=std::min(cosLimFov, cosAngularSize))
 		{
 			result.append(qSharedPointerCast<StelObject>(p));
 		}
@@ -1284,15 +1301,20 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 
 void SolarSystem::reloadPlanets()
 {
-	//Save flag states
+	// Save flag states
 	bool flagScaleMoon = getFlagMoonScale();
 	float moonScale = getMoonScale();
 	bool flagPlanets = getFlagPlanets();
 	bool flagHints = getFlagHints();
 	bool flagLabels = getFlagLabels();
 	bool flagOrbits = getFlagOrbits();
+	
+	// Save observer location (fix for LP bug # 969211)
+	// TODO: This can probably be done better with a better understanding of StelObserver --BM
+	StelCore* core = StelApp::getInstance().getCore();
+	StelLocation loc = core->getCurrentLocation();
 
-	//Unload all Solar System objects
+	// Unload all Solar System objects
 	selected.clear();//Release the selected one
 	foreach (Orbit* orb, orbits)
 	{
@@ -1315,15 +1337,18 @@ void SolarSystem::reloadPlanets()
 		p.clear();
 	}
 	systemPlanets.clear();
-	//Memory leak? What's the proper way of cleaning shared pointers?
+	// Memory leak? What's the proper way of cleaning shared pointers?
 
-	//Re-load the ssystem.ini file
+	// Re-load the ssystem.ini file
 	loadPlanets();
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");
 	recreateTrails();
+	
+	// Restore observer location
+	core->moveObserverTo(loc, 0., 0.);
 
-	//Restore flag states
+	// Restore flag states
 	setFlagMoonScale(flagScaleMoon);
 	setMoonScale(moonScale);
 	setFlagPlanets(flagPlanets);
@@ -1331,6 +1356,6 @@ void SolarSystem::reloadPlanets()
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
 
-	//Restore translations
+	// Restore translations
 	updateI18n();
 }

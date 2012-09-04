@@ -99,6 +99,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		tex->qImage = QImage(tex->fullPath);
 		if (tex->qImage.isNull())
 			return StelTextureSP();
+
 		tex->loadParams = params;
 		tex->downloaded = true;
 
