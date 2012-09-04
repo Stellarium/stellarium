@@ -137,13 +137,45 @@ public:
 
 	//! Initialize the viewport.
 	//!
-	//! @param npot Are non-power-of-two textures supported?
-	void init(const bool npot)
+	//! @param npot       Are non-power-of-two textures supported?
+	//! @param glVendor   The GL_VENDOR string (usually specifies the GPU driver).
+	//! @param glRenderer The GL_RENDERER string (usually specifies the GPU).
+	void init(const bool npot, const QString& glVendor, const QString& glRenderer)
 	{
 		invariant();
 		this->nonPowerOfTwoTexturesSupported = npot;
 		// Prevent flickering on mac Leopard/Snow Leopard
 		glWidget->setAutoFillBackground(false);
+
+		// In some virtual machines.
+		// Not all needed FBO functionality needed is supported.
+		if(glRenderer == "Chromium")
+		{
+			fboDisabled = true;
+		}
+		if(glVendor == "Tungsten Graphics, Inc")
+		{
+			if(glRenderer.contains("945") || 
+			   glRenderer.contains("810") || 
+			   glRenderer.contains("845") || 
+			   glRenderer.contains("855") || 
+			   glRenderer.contains("865") || 
+			   glRenderer.contains("915") || 
+			   glRenderer.contains("946") || 
+			   glRenderer.contains("500") || 
+			   glRenderer.contains("965") || 
+			   glRenderer.contains("950") || 
+			   glRenderer.contains("X3100") || 
+			   glRenderer.contains("GM45") || 
+			   glRenderer.contains("Ironlake") || 
+			   glRenderer.contains("G33") || 
+			   glRenderer.contains("G41") || 
+			   glRenderer.contains("IGD"))
+			{
+				fboDisabled = true;
+			}
+		}
+
 		fboSupported = QGLFramebufferObject::hasOpenGLFramebufferObjects();
 		invariant();
 	}
