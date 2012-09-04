@@ -297,7 +297,7 @@ void StelQGLRenderer::drawTextGravityHelper
 
 void StelQGLRenderer::drawText(const TextParams& params)
 {
-	statistics["text_draws_per_frame"] += 1.0;
+	statistics[TEXT_DRAWS_PER_FRAME] += 1.0;
 	StelQGLTextureBackend* currentTexture = currentlyBoundTextures[0];
 
 	if(params.string_.length() == 0)
@@ -478,7 +478,7 @@ void StelQGLRenderer::drawRectInternal
 	(const bool textured, const float x, const float y, const float width, 
 	 const float height, const float angle)
 {
-	statistics["rect_draws_per_frame"] += 1.0;
+	statistics[RECT_DRAWS_PER_FRAME] += 1.0;
 	// Could be improved by keeping the vertex buffer as a data member,
 	// or even caching all rectangle draws to the same buffer and drawing them 
 	// at once at the end of the frame.
