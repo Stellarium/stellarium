@@ -43,10 +43,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	, texHalo(NULL)
 	, starPointBuffer(NULL)
 	, starSpriteBuffer(NULL)
-	, starSpriteIndices(NULL)
-	, bigHaloIndices(NULL)
-	, sunHaloIndices(NULL)
-	, coronaIndices(NULL)
 	, drawing(false)
 	, texBigHalo(NULL)
 	, texSunHalo(NULL)
@@ -129,23 +125,20 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 		ok = true;
 	}
 
-	starPointBuffer  = renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_Points);
-	starSpriteBuffer = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
-
-	bigHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
-	sunHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
-	starSpriteIndices = renderer->createIndexBuffer(IndexType_U32);
-	coronaIndices     = renderer->createIndexBuffer(IndexType_U16);
+	starPointBuffer   = renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_Points);
+	starSpriteBuffer  = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
+	bigHaloBuffer     = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
+	sunHaloBuffer     = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
+	coronaBuffer      = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
 }
 
 StelSkyDrawer::~StelSkyDrawer()
 {                               
 	if(NULL != starPointBuffer)  {delete starPointBuffer;}
 	if(NULL != starSpriteBuffer) {delete starSpriteBuffer;}
-	if(NULL != bigHaloIndices)   {delete bigHaloIndices;}
-	if(NULL != sunHaloIndices)   {delete sunHaloIndices;}
-	if(NULL != starSpriteIndices){delete starSpriteIndices;}
-	if(NULL != coronaIndices)    {delete coronaIndices;}
+	if(NULL != bigHaloBuffer)    {delete bigHaloBuffer;}
+	if(NULL != sunHaloBuffer)    {delete sunHaloBuffer;}
+	if(NULL != coronaBuffer)     {delete coronaBuffer;}
 	if(NULL != texBigHalo)       {delete texBigHalo;}
 	if(NULL != texSunHalo)       {delete texSunHalo;}
 	if(NULL != texHalo)          {delete texHalo;}
@@ -345,12 +338,11 @@ void StelSkyDrawer::preDrawPointSource()
 //
 // The buffer is cleared since we re-add the stars on each frame.
 template<class VB>
-void drawStars(StelTextureNew* texture, VB* vertices, StelIndexBuffer* indices, StelRenderer* renderer, StelProjectorP projector)
+void drawStars(StelTextureNew* texture, VB* vertices, StelRenderer* renderer, StelProjectorP projector)
 {
 	if(NULL != texture){texture->bind();}
 	renderer->setBlendMode(BlendMode_Add);
 	vertices->lock();
-	if(NULL != indices){indices->lock();}
 
 	// Vertices are already projected, so we use the dontProject
 	// argument of drawVertexBuffer.
@@ -359,28 +351,23 @@ void drawStars(StelTextureNew* texture, VB* vertices, StelIndexBuffer* indices, 
 	// ZoneArray, etc, so projection gets done by the projector 
 	// during drawing like elsewhere.
 	
-	renderer->drawVertexBuffer(vertices, indices, projector, true);
+	renderer->drawVertexBuffer(vertices, NULL, projector, true);
 	vertices->unlock();
 	vertices->clear();
-	if(NULL != indices)
-	{
-		indices->unlock();
-		indices->clear();
-	}
 }
 
 // Finalize the drawing of point sources
 void StelSkyDrawer::postDrawPointSource(StelProjectorP projector)
 {
-	drawStars(texBigHalo, starSpriteBuffer, bigHaloIndices, renderer, projector);
-	drawStars(texSunHalo, starSpriteBuffer, sunHaloIndices, renderer, projector);
+	drawStars(texBigHalo, bigHaloBuffer, renderer, projector);
+	drawStars(texSunHalo, sunHaloBuffer, renderer, projector);
 	if(drawStarsAsPoints)
 	{
-		drawStars(NULL, starPointBuffer, NULL, renderer, projector);
+		drawStars(NULL, starPointBuffer, renderer, projector);
 	}
-	else                 
+	else
 	{
-		drawStars(texHalo, starSpriteBuffer, starSpriteIndices, renderer, projector);
+		drawStars(texHalo, starSpriteBuffer, renderer, projector);
 	}
 
 	drawing = false;
@@ -395,24 +382,24 @@ void StelSkyDrawer::postDrawPointSource(StelProjectorP projector)
 //classes in well, it might be good to add it as a helper function of 
 //StelVertexBuffer.
 template<class V>
-void addStar(StelVertexBuffer<V>* vertices, StelIndexBuffer* indices,
-             const float x, const float y, const float radius, const Vec3f& color)
+static void addStar(StelVertexBuffer<V>* vertices,
+                    const float x, const float y,
+                    const float radius, const Vec3f& color)
 {
-	const int i = vertices->length();
-
-	//4 vertices, 2 triangles.
+	// 1 triangle around the star sprite. We use the fact 
+	// that edges of the halo textures are transparent and 
+	// the clamp to edge draw mode. With that, we can draw 1 
+	// larger triangle around the sprite quad instead of drawing
+	// the quad as 2 triangles.
 	
-	vertices->addVertex(V(Vec2f(x - radius, y - radius), color, Vec2f(0.0f, 0.0f)));
-	vertices->addVertex(V(Vec2f(x + radius, y - radius), color, Vec2f(1.0f, 0.0f)));
-	vertices->addVertex(V(Vec2f(x + radius, y + radius), color, Vec2f(1.0f, 1.0f)));
-	vertices->addVertex(V(Vec2f(x - radius, y + radius), color, Vec2f(0.0f, 1.0f)));
+	const float yBase  = y - radius;
+	const float yTop   = y + radius * 2.6666666;
+	const float xLeft  = x - radius * 2.3333333;
+	const float xRight = x + radius * 2.3333333;
 
-	indices->addIndex(i);
-	indices->addIndex(i + 1);
-	indices->addIndex(i + 2);
-	indices->addIndex(i);
-	indices->addIndex(i + 2);
-	indices->addIndex(i + 3);
+	vertices->addVertex(V(Vec2f(xLeft,  yBase), color, Vec2f(-0.6666666f, 0.0f)));
+	vertices->addVertex(V(Vec2f(xRight, yBase), color, Vec2f(1.6666666f,  0.0f)));
+	vertices->addVertex(V(Vec2f(x,      yTop),  color, Vec2f(0.5f,        1.83333333f)));
 }
 
 // Draw a point source halo.
@@ -445,7 +432,7 @@ bool StelSkyDrawer::drawPointSource
 	if (radius > MAX_LINEAR_RADIUS + 5.0f)
 	{
 		const float cmag = qMin(1.0f, qMin(luminance, (radius - MAX_LINEAR_RADIUS + 5.0f) / 30.f));
-		addStar(starSpriteBuffer, bigHaloIndices, x, y, 150.0f, color * cmag);
+		addStar(bigHaloBuffer, x, y, 150.0f, color * cmag);
 	}
 
 	if (drawStarsAsPoints)
@@ -454,7 +441,7 @@ bool StelSkyDrawer::drawPointSource
 	}
 	else
 	{
-		addStar(starSpriteBuffer, starSpriteIndices, x, y, radius, color * tw);
+		addStar(starSpriteBuffer, x, y, radius, color * tw);
 	}
 
 	return true;
@@ -465,8 +452,8 @@ void StelSkyDrawer::drawSunCorona(StelProjectorP projector, const Vec3d &v, floa
 {
 	Vec3d win;
 	projector->project(v, win);
-	addStar(starSpriteBuffer, coronaIndices, win[0], win[1], radius * 2, Vec3f(alpha, alpha, alpha));
-	drawStars(texCorona, starSpriteBuffer, coronaIndices, renderer, projector);
+	addStar(coronaBuffer, win[0], win[1], radius * 2, Vec3f(alpha, alpha, alpha));
+	drawStars(texCorona, coronaBuffer, renderer, projector);
 }
 
 // Terminate drawing of a 3D model, draw the halo
@@ -494,7 +481,7 @@ void StelSkyDrawer::postDrawSky3dModel
 		if (StelApp::getInstance().getVisionModeNight())
 			c = StelUtils::getNightColor(c);
 
-		addStar(starSpriteBuffer, sunHaloIndices, win[0], win[1], rmag, c * cmag);
+		addStar(sunHaloBuffer, win[0], win[1], rmag, c * cmag);
 		noStarHalo = true;
 	}
 
