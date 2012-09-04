@@ -36,6 +36,12 @@ void Scenery3dDialog::createDialogContent()
     connect(ui->checkBoxEnableBump, SIGNAL(stateChanged(int)), this,
             SLOT(renderingBumpChanged()));
 
+    connect(ui->checkBoxEnableFiltering, SIGNAL(stateChanged(int)), this,
+            SLOT(renderingShadowsFilterChanged()));
+
+    connect(ui->checkBoxFilterHQ, SIGNAL(stateChanged(int)), this,
+            SLOT(renderingShadowsFilterHQChanged()));
+
     // Fill the scenery list
     QListWidget* l = ui->scenery3dListWidget;
     l->blockSignals(true);
@@ -82,6 +88,19 @@ void Scenery3dDialog::renderingBumpChanged(void)
     smgr->setEnableBumps(ui->checkBoxEnableBump->isChecked());
 }
 
+void Scenery3dDialog::renderingShadowsFilterChanged(void)
+{
+    Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
+    smgr->setEnableShadowsFilter(ui->checkBoxEnableFiltering->isChecked());
+}
+
+void Scenery3dDialog::renderingShadowsFilterHQChanged(void)
+{
+    Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
+    smgr->setEnableShadowsFilterHQ(ui->checkBoxFilterHQ->isChecked());
+}
+
+
 // Update the widget to make sure it is synchrone if a value was changed programmatically
 void Scenery3dDialog::updateFromProgram()
 {
@@ -92,4 +111,6 @@ void Scenery3dDialog::updateFromProgram()
     Q_ASSERT(smgr);
     ui->checkBoxEnableBump->setChecked(smgr->getEnableBumps());
     ui->checkBoxEnableShadows->setChecked(smgr->getEnableShadows());
+    ui->checkBoxEnableFiltering->setChecked(smgr->getEnableShadowsFilter());
+    ui->checkBoxFilterHQ->setChecked(smgr->getEnableShadowsFilterHQ());
 }
