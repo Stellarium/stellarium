@@ -143,6 +143,8 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGLArrayVertexBufferBackend.hpp
 	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.cpp
 	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.hpp
+	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.cpp
+	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.hpp
 	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.cpp
 	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.hpp
 	core/renderer/StelQGL1ArrayVertexBufferBackend.cpp

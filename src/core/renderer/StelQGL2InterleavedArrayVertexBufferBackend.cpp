@@ -38,7 +38,7 @@ StelQGL2InterleavedArrayVertexBufferBackend
 //! @param stride      Offset betweeen consecutive attributes in the array.
 //!                    If 0, size of the attribute is assumed
 //!                    (i.e. attributes are tightly packed).
-static void enableAttributeInterleaved
+static void enableAttribute
 	(QGLShaderProgram& program, int& handleOut, const StelVertexAttribute& attribute,
 	 const void* data, const int stride)
 {
@@ -128,12 +128,12 @@ void StelQGL2InterleavedArrayVertexBufferBackend::
 			// from before (we don't destroy the buffer so we can reuse it).
 			usingProjectedPositions = false;
 
-			// Using projected positions, use projectedPositions vertex array.
+			// Using projected positions from projectedPositions vertex array.
 			attributeData = projectedPositions;
 			stride = 0;
 		}
 
-		enableAttributeInterleaved(program, enabledAttributes[totalAttributes], 
+		enableAttribute(program, enabledAttributes[totalAttributes], 
 		                           attribute, attributeData, stride);
 
 		attributeOffset += attributeSize(attribute.type);
