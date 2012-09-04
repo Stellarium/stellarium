@@ -117,6 +117,9 @@ void CompletionLabel::updateText()
 }
 
 // Start of members for class SearchDialog
+
+const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
+
 SearchDialog::SearchDialog() : simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
@@ -158,7 +161,7 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
-	useMirror = conf->value("search/use_simbad_mirror_url", "http://simbad.u-strasbg.fr/").toString();
+	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 }
 
 SearchDialog::~SearchDialog()
@@ -178,7 +181,7 @@ void SearchDialog::retranslate()
 		QString text(ui->lineEditSearchSkyObject->text());
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
-		populateMirrorList();
+		populateSimbadServerList();
 	}
 }
 
@@ -237,15 +240,16 @@ void SearchDialog::createDialogContent()
 		this, SLOT(enableSimbadSearch(bool)));
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
 
-	populateMirrorList();
-	int idx = ui->useSimbadMirrorComboBox->findData(useMirror, Qt::UserRole, Qt::MatchCaseSensitive);
+	populateSimbadServerList();
+	int idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use University of Strasbourg as default
-		idx = ui->useSimbadMirrorComboBox->findData(QVariant("http://simbad.u-strasbg.fr/"), Qt::UserRole, Qt::MatchCaseSensitive);
+		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
-	ui->useSimbadMirrorComboBox->setCurrentIndex(idx);
-	connect(ui->useSimbadMirrorComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(mirrorBoxChanged(const QString&)));
+	ui->serverListComboBox->setCurrentIndex(idx);
+	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
+	        this, SLOT(selectSimbadServer(int)));
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -313,8 +317,9 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->simbadStatusLabel->setText("");
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	} else {
-		if (useSimbad) {
-			simbadReply = simbadSearcher->lookup(useMirror, trimmedText, 3);
+		if (useSimbad)
+		{
+			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 3);
 			onSimbadStatusChanged();
 			connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		}
@@ -342,13 +347,17 @@ void SearchDialog::onSimbadStatusChanged()
 	Q_ASSERT(simbadReply);
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
 	{
-		ui->simbadStatusLabel->setText(QString("Simbad Lookup Error: ")+simbadReply->getErrorString());
+		ui->simbadStatusLabel->setText(QString("%1: %2")
+					       .arg(q_("Simbad Lookup Error"))
+					       .arg(simbadReply->getErrorString()));
 		if (ui->completionLabel->isEmpty())
 			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	}
 	else
 	{
-		ui->simbadStatusLabel->setText(QString("Simbad Lookup: ")+simbadReply->getCurrentStatusString());
+		ui->simbadStatusLabel->setText(QString("%1: %2")
+					       .arg(q_("Simbad Lookup"))
+					       .arg(simbadReply->getCurrentStatusString()));
 		// Query not over, don't disable button
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
@@ -413,8 +422,8 @@ void SearchDialog::gotoObject()
 			close();
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().name)
+			// Can't point to home planet			
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 			{
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);
@@ -483,38 +492,36 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 	return potentialGreekLetterName;
 }
 
-void SearchDialog::populateMirrorList()
+void SearchDialog::populateSimbadServerList()
 {
 	Q_ASSERT(ui);
-	Q_ASSERT(ui->useSimbadMirrorComboBox);
+	Q_ASSERT(ui->serverListComboBox);
 
-	QComboBox* mirrors = ui->useSimbadMirrorComboBox;
+	QComboBox* servers = ui->serverListComboBox;
 	//Save the current selection to be restored later
-	mirrors->blockSignals(true);
-	int index = mirrors->currentIndex();
-	QVariant selectedMirrorId = mirrors->itemData(index);
-	mirrors->clear();
-	//For each mirror, display the localized description and store the URL as user data.
-	mirrors->addItem(q_("SIMBAD - University of Strasbourg"), "http://simbad.u-strasbg.fr/");
-	mirrors->addItem(q_("SIMBAD - Harvard University"), "http://simbad.harvard.edu/");
+	servers->blockSignals(true);
+	int index = servers->currentIndex();
+	QVariant selectedUrl = servers->itemData(index);
+	servers->clear();
+	//For each server, display the localized description and store the URL as user data.
+	servers->addItem(q_("University of Strasbourg (France)"), DEF_SIMBAD_URL);
+	servers->addItem(q_("Harvard University (USA)"), "http://simbad.harvard.edu/");
 
 	//Restore the selection
-	index = mirrors->findData(selectedMirrorId, Qt::UserRole, Qt::MatchCaseSensitive);
-	mirrors->setCurrentIndex(index);
-	mirrors->model()->sort(0);
-	mirrors->blockSignals(false);
+	index = servers->findData(selectedUrl, Qt::UserRole, Qt::MatchCaseSensitive);
+	servers->setCurrentIndex(index);
+	servers->model()->sort(0);
+	servers->blockSignals(false);
 }
 
-// Called when the mirror is changed by hand
-void SearchDialog::mirrorBoxChanged(const QString&)
+void SearchDialog::selectSimbadServer(int index)
 {
-	int index = ui->useSimbadMirrorComboBox->currentIndex();
 	if (index < 0)
-		useMirror = QString();//As returned by QComboBox::currentText()
+		simbadServerUrl = DEF_SIMBAD_URL;
 	else
-		useMirror = ui->useSimbadMirrorComboBox->itemData(index).toString();
+		simbadServerUrl = ui->serverListComboBox->itemData(index).toString();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	conf->setValue("search/use_simbad_mirror_url", useMirror);
+	conf->setValue("search/simbad_server_url", simbadServerUrl);
 }

@@ -80,10 +80,7 @@ public:
 	//! - Extra2: Comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
 	virtual float getVMagnitude(const StelCore* core=NULL, bool withExtinction=false) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
@@ -94,6 +91,8 @@ public:
 	{
 		return name;
 	}
+	//! Returns the (NORAD) catalog number. (For now, the ID string.)
+	QString getCatalogNumberString() const {return id;}
 
 	//! Set new tleElements.  This assumes the designation is already set, populates
 	//! the tleElements values and configures internal orbit parameters.

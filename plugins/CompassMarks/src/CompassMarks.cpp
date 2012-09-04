@@ -77,6 +77,9 @@ CompassMarks::CompassMarks()
 	if (!conf->contains("CompassMarks/font_size"))
 		conf->setValue("CompassMarks/font_size", 10);
 
+	if (!conf->contains("CompassMarks/enable_at_startup"))
+		conf->setValue("CompassMarks/enable_at_startup", false);
+
 	// Load settings from main config file
 	markColor = StelUtils::strToVec3f(conf->value("CompassMarks/mark_color", "1,0,0").toString());
 	font.setPixelSize(conf->value("CompassMarks/font_size", 10).toInt());
@@ -128,11 +131,16 @@ void CompassMarks::init()
 		connect(gui->getGuiActions("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
 		connect(gui->getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
+
+		QSettings* conf = StelApp::getInstance().getSettings();
+		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: unable create toolbar button for CompassMarks plugin: " << e.what();
 	}
+
+
 }
 
 //! Draw any parts on the screen which are for our module
@@ -145,7 +153,13 @@ void CompassMarks::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	glColor4f(markColor[0],markColor[1],markColor[2], markFader.getInterstate());
+	Vec3f mColor;
+	if (StelApp::getInstance().getVisionModeNight())
+		mColor = StelUtils::getNightColor(markColor);
+	else
+		mColor = markColor;
+
+	glColor4f(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);

@@ -251,7 +251,8 @@ QPixmap StelButton::makeRed(const QPixmap& p)
 	const QRgb* stop = bits+im.width()*im.height();
 	do
 	{
-		*bits = qRgba(qRed(*bits), (int)(0.2*qGreen(*bits)), (int)(0.2*qBlue(*bits)), qAlpha(*bits));
+		Vec3f col = StelUtils::getNightColor(Vec3f(qRed(*bits)/256.0, qGreen(*bits)/256.0, qBlue(*bits)/256.0));
+		*bits = qRgba((int)(256*col[0]), (int)(256*col[1]), (int)(256*col[2]), qAlpha(*bits));
 		++bits;
 	}
 	while (bits!=stop);

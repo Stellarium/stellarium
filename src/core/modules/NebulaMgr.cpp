@@ -54,7 +54,7 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
 
-NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false)
+NebulaMgr::NebulaMgr(void) : nebGrid(200)
 {
 	setObjectName("NebulaMgr");
 }
@@ -103,8 +103,7 @@ void NebulaMgr::init()
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
-	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());
-	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
+	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 
 	updateI18n();
 	
@@ -179,8 +178,12 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		// Compute 2D pos and return if outside screen
-		if (!prj->projectInPlace(pos)) return;
-		sPainter.setColor(0.4f,0.5f,0.8f);
+		if (!prj->projectInPlace(pos)) return;		
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(0.8f,0.0f,0.0f);
+		else
+			sPainter.setColor(0.4f,0.5f,0.8f);
+
 		texPointer->bind();
 
 		sPainter.enableTexture2d(true);
