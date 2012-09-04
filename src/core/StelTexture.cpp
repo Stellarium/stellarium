@@ -16,7 +16,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
-
 #include <cstdlib>
 #include "StelTextureMgr.hpp"
 #include "StelTexture.hpp"
@@ -98,10 +97,12 @@ void ImageLoader::directLoad() {
 	emit finished(image);
 }
 
-
 StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f)
 {
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 	width = -1;
 	height = -1;
 }
@@ -144,6 +145,7 @@ void StelTexture::reportError(const QString& aerrorMessage)
 /*************************************************************************
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
+
 bool StelTexture::bind()
 {
 	// qDebug() << "TEST bind" << fullPath;
@@ -153,6 +155,7 @@ bool StelTexture::bind()
 #ifdef USE_OPENGL_ES2
 		glActiveTexture(GL_TEXTURE0);
 #endif
+
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
@@ -186,6 +189,7 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 {
 	if (width<0 || height<0)
 	{
+
 		if (!qImage.isNull())
 		{
 			width = qImage.width();
@@ -203,6 +207,7 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 			width = size.width();
 			height = size.height();
 		}
+
 	}
 	awidth = width;
 	aheight = height;

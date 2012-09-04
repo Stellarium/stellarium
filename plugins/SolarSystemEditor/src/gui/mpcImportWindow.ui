@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>478</width>
-    <height>490</height>
+    <width>476</width>
+    <height>488</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -79,7 +79,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-	 <string extracomment="The title of the window will be set during runtime">Import data</string>
+         <string extracomment="The title of the window will be set during runtime">Import data</string>
         </property>
        </widget>
       </item>
@@ -503,19 +503,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEditSearch">
-            <property name="styleSheet">
-             <string notr="true">QLineEdit {
-	margin: 0px 0px 4px 0px;
-	padding: 4px;
-	padding-left: 32px;
-	background-image: url(:/graphicGui/searchBoxBackground.png);
-	background-repeat: none;
-	background-position: center left;
-	border: none;
-}/* Stolen from the #citySearchLineEdit widget. */</string>
-            </property>
-           </widget>
+           <widget class="QLineEdit" name="lineEditSearch"/>
           </item>
           <item>
            <widget class="QListView" name="listViewObjects">

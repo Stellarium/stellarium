@@ -12,7 +12,7 @@ ENDIF()
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
 SET(STELLARIUM_MINOR "11")
-SET(STELLARIUM_PATCH "3")
+SET(STELLARIUM_PATCH "4")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}-scenery3D")
 SET(PACKAGE stellarium)
 
@@ -24,7 +24,7 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Release RelWithDebInfo MinSizeRel." FORCE)
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
@@ -34,9 +34,56 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
 ENDIF()
 
+# Add valgrind build options if necessary
+IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
+ENDIF()
+
+IF(NOT STELLARIUM_SPLASH)
+ SET(STELLARIUM_SPLASH Development CACHE STRING "Choose the type of Stellarium's splash image, options are: Release Development ReleaseCandidate." FORCE)
+ENDIF()
+ADD_DEFINITIONS(-DSTELLARIUM_SPLASH="${STELLARIUM_SPLASH}")
+
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(APPLE 1)
 ENDIF()
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+ EXEC_PROGRAM(${CMAKE_C_COMPILER} ARGS "-v" OUTPUT_VARIABLE _clang_version_info)
+ STRING(REGEX REPLACE "^.*[ ]([0-9]+)\\.[0-9].*$" "\\1" CLANG_MAJOR "${_clang_version_info}")
+ STRING(REGEX REPLACE "^.*[ ][0-9]+\\.([0-9]).*$" "\\1" CLANG_MINOR "${_clang_version_info}")
+ MESSAGE(STATUS "Found Clang ${CLANG_MAJOR}.${CLANG_MINOR}")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Woverloaded-virtual")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual")
+ELSE()
+ SET(CLANG_MAJOR 0)
+ SET(CLANG_MINOR 0)
+ENDIF()
+SET(CLANG_VERSION "${CLANG_MAJOR}.${CLANG_MINOR}")
+
+IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
+ EXEC_PROGRAM(${CMAKE_C_COMPILER} ARGS "-dumpversion" OUTPUT_VARIABLE _gcc_version_info)
+ STRING(REGEX REPLACE "^([0-9]+).*$"                   "\\1" GCC_MAJOR ${_gcc_version_info})
+ STRING(REGEX REPLACE "^[0-9]+\\.([0-9]+).*$"          "\\1" GCC_MINOR ${_gcc_version_info})
+ STRING(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*$" "\\1" GCC_PATCH ${_gcc_version_info})
+
+ IF(GCC_PATCH MATCHES "\\.+")
+  SET(GCC_PATCH "")
+ ENDIF()
+ IF(GCC_MINOR MATCHES "\\.+")
+  SET(GCC_MINOR "")
+ ENDIF()
+ IF(GCC_MAJOR MATCHES "\\.+")
+  SET(GCC_MAJOR "")
+ ENDIF()
+ MESSAGE(STATUS "Found GCC ${GCC_MAJOR}.${GCC_MINOR}")
+ SET(COMPILER_VERSION gcc${GCC_MAJOR}${GCC_MINOR}${GCC_PATCH})
+ELSE()
+ SET(GCC_MAJOR 0)
+ SET(GCC_MINOR 0)
+ENDIF()
+SET(GCC_VERSION "${GCC_MAJOR}.${GCC_MINOR}")
 
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
@@ -44,7 +91,7 @@ IF(UNIX AND NOT WIN32)
 ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
- SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows ")  # --large-address-aware --enable-runtime-pseudo-reloc --verbose
+ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  #  --large-address-aware --enable-runtime-pseudo-reloc --verbose
 ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
@@ -74,13 +121,13 @@ IF(APPLE)
  #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
  #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6")
  #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.6.sdk/")
- 
+
  # uncomment one of the following, depending on what platforms you want.
  # NOTE: Qt build for Cocoa is Intel only.  Qt with Carbon is both, but does not seem
  # to handle 64bit well.
  #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64;ppc;ppc64")
  #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
- #SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+ SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
 ########### Check functions ###########
@@ -159,6 +206,8 @@ SET(USE_PLUGIN_SOLARSYSTEMEDITOR 1 CACHE BOOL "Define whether the Solar System E
 SET(USE_PLUGIN_SUPERNOVAE 1 CACHE BOOL "Define whether the Historical Supernova plugin should be created.")
 SET(USE_PLUGIN_QUASARS 1 CACHE BOOL "Define whether the Quasars plugin should be created.")
 SET(USE_PLUGIN_PULSARS 1 CACHE BOOL "Define whether the Pulsars plugin should be created.")
+SET(USE_PLUGIN_EXOPLANETS 1 CACHE BOOL "Define whether the Exoplanets plugin should be created.")
+SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plugin should be created.")
 SET(USE_PLUGIN_SCENERY3D 1 CACHE BOOL "Define whether the Scenery3d plugin should be created.")
 
 ########## Static plugins need to define includes and libraries
@@ -196,7 +245,7 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-SET(QT_MIN_VERSION "4.6.0")
+SET(QT_MIN_VERSION "4.6.2")
 FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 IF(ENABLE_SCRIPTING)
@@ -215,6 +264,7 @@ STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
 # Get rid of the GLU dependency, it's not needed in stellarium.
 STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 
+FIND_PACKAGE(OpenGL) # Introduced in revision 5284, may cause problems when compiling in OpenGL ES mode - see lines 248-255 below. --BM
 FIND_PACKAGE(ZLIB)
 
 IF(ENABLE_NLS)
@@ -252,11 +302,11 @@ ELSE(APPLE)
   ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
   # Used in generating the documentation (doc/stellarium.pod.cmake):
   SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
-ENDIF()
-ELSE()
+ENDIF(APPLE)
+ELSE(UNIX AND NOT WIN32)
   ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
   ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
-ENDIF()
+ENDIF(UNIX AND NOT WIN32)
 
 ########### Get revision number for non-release builds ###########
 IF(NOT RELEASE_BUILD)
@@ -278,10 +328,33 @@ IF(ENABLE_STRATOSCRIPT_COMPAT)
   ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
 
+### [Optional] Embed icon in the Windows executable ###
+IF(WIN32)
+  SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
+  IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+    #The mingGW snapshot distributed with the Qt SDK has it under this name.
+    SET(RC_COMPILER_FILENAME "windres.exe")
+	FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
+    IF (RC_COMPILER_PATH)
+     MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
+    ENDIF(RC_COMPILER_PATH)
+  ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+ENDIF(WIN32)
 
 ### Generate an Inno Setup project file ###
 IF(WIN32)
-  SET(CONFIGURED_FILE_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
+  # Try to guess the MinGW /bin directory...
+  GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
+  IF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+    SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
+    SET(ISS_PACKAGE_PLATFORM "win32")
+    SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/mingwm10.dll\"; DestDir: \"{app}\";")
+  ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+    SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+    SET(ISS_PACKAGE_PLATFORM "win64")
+    SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";")
+  ENDIF()
+  SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
   CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
 ENDIF(WIN32)
 
@@ -317,6 +390,14 @@ IF(GENERATE_PACKAGE_TARGET)
   SET(CPACK_STRIP_FILES "bin/stellarium")
   SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
   SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "builds/" "installers/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+  SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
+  SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
+  SET(CPACK_RPM_PACKAGE_URL "http://stellarium.org/")
+  SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium-pubdevel@lists.sourceforge.net>")
+  SET(CPACK_DEBIAN_PACKAGE_SECTION "science")
+  SET(CPACK_DEBIAN_PACKAGE_VERSION "${VERSION}+deb1")
+  SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "${CPACK_RPM_PACKAGE_URL}")
+  SET(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
   INCLUDE(CPack)
 ENDIF()
 
@@ -329,7 +410,6 @@ ENDIF()
 ########### Generate doxygen doc ###############
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
-
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
@@ -345,15 +425,8 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
 	${CMAKE_SOURCE_DIR}/src/gui
 	${CMAKE_SOURCE_DIR}/src/scripting
-	${OPENGL_INCLUDE_DIR}
-	${ICONV_INCLUDE_DIR}
 	${INTL_INCLUDE_DIR}
-	${ZLIB_INCLUDE_DIR}
-	${QT_INCLUDE_DIR}/QtScript
-	${QT_QTSCRIPT_INCLUDE_DIR}
 	${CMAKE_BINARY_DIR}/src
-	${QT_QTTEST_INCLUDE_DIR}
-	${QT_DECLARATIVE_INCLUDE_DIR}
 )
 
 ########### Subdirectories ###############

@@ -1,12 +1,9 @@
-.bzrignore
 builds
 installers
 .DS_Store
 CMakeLists.txt.user
 Stellarium.bat
 stellarium.iss
-*.aux
-*.dvi
-*.log
-*.out
-*.dll
+./doc/qt.tag
+./locale
+

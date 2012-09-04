@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003 Fabien Chereau
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +34,7 @@
 #include "StelObjectMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QtOpenGL>
 #include <QSettings>
@@ -109,7 +111,9 @@ void StelCore::init()
 	QString presetTimeStr = conf->value("navigation/preset_sky_time",2451545.).toString();
 	presetSkyTime = presetTimeStr.toDouble(&ok);
 	if (ok)
+	{
 		qDebug() << "navigation/preset_sky_time is a double - treating as jday:" << presetSkyTime;
+	}
 	else
 	{
 		qDebug() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
@@ -226,6 +230,47 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 	return getProjection2d();
 }
 
+StelToneReproducer* StelCore::getToneReproducer()
+{
+	return toneConverter;
+}
+
+const StelToneReproducer* StelCore::getToneReproducer() const
+{
+	return toneConverter;
+}
+
+StelSkyDrawer* StelCore::getSkyDrawer()
+{
+	return skyDrawer;
+}
+
+const StelSkyDrawer* StelCore::getSkyDrawer() const
+{
+	return skyDrawer;
+}
+
+StelMovementMgr* StelCore::getMovementMgr()
+{
+	return movementMgr;
+}
+
+const StelMovementMgr* StelCore::getMovementMgr() const
+{
+	return movementMgr;
+}
+
+void StelCore::setClippingPlanes(double znear, double zfar)
+{
+	currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;
+}
+
+void StelCore::getClippingPlanes(double* zn, double* zf) const
+{
+	*zn = currentProjectorParams.zNear;
+	*zf = currentProjectorParams.zFar;
+}
+
 // Handle the resizing of the window
 void StelCore::windowHasBeenResized(float x, float y, float width, float height)
 {
@@ -292,6 +337,11 @@ void StelCore::setCurrentProjectionType(ProjectionType type)
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
 }
 
+StelCore::ProjectionType StelCore::getCurrentProjectionType() const
+{
+	return currentProjectionType;
+}
+
 //! Set the current projection type to use
 void StelCore::setCurrentProjectionTypeKey(QString key)
 {
@@ -321,7 +371,46 @@ QStringList StelCore::getAllProjectionTypeKeys() const
 	return l;
 }
 
-//! Get the translated projection name from its TypeKey for the current locale
+void StelCore::setMaskType(StelProjector::StelProjectorMaskType m)
+{
+	currentProjectorParams.maskType = m;
+}
+
+void StelCore::setFlagGravityLabels(bool gravity)
+{
+	currentProjectorParams.gravityLabels = gravity;
+}
+
+void StelCore::setDefautAngleForGravityText(float a)
+{
+	currentProjectorParams.defautAngleForGravityText = a;
+}
+
+void StelCore::setFlipHorz(bool flip)
+{
+	currentProjectorParams.flipHorz = flip;
+}
+
+void StelCore::setFlipVert(bool flip)
+{
+	currentProjectorParams.flipVert = flip;
+}
+
+bool StelCore::getFlipHorz(void) const
+{
+	return currentProjectorParams.flipHorz;
+}
+
+bool StelCore::getFlipVert(void) const
+{
+	return currentProjectorParams.flipVert;
+}
+
+QString StelCore::getDefaultLocationID() const
+{
+	return defaultLocationID;
+}
+
 QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
@@ -329,7 +418,6 @@ QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 	return s;
 }
 
-//! Get the projection TypeKey from its translated name for the current locale
 QString StelCore::projectionNameI18nToTypeKey(const QString& nameI18n) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
@@ -343,6 +431,15 @@ QString StelCore::projectionNameI18nToTypeKey(const QString& nameI18n) const
 	return en.valueToKey(ProjectionStereographic);
 }
 
+StelProjector::StelProjectorParams StelCore::getCurrentStelProjectorParams() const
+{
+	return currentProjectorParams;
+}
+
+void StelCore::setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams)
+{
+	currentProjectorParams=newParams;
+}
 
 void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 {
@@ -357,12 +454,169 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 	Vec3d u(s^f);	// Up vector in AltAz coordinates
 	u.normalize();
 	matAltAzModelView.set(s[0],u[0],-f[0],0.,
-						 s[1],u[1],-f[1],0.,
-						 s[2],u[2],-f[2],0.,
-						 0.,0.,0.,1.);
+			      s[1],u[1],-f[1],0.,
+			      s[2],u[2],-f[2],0.,
+			      0.,0.,0.,1.);
 	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
+Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matAltAzToEquinoxEqu*v;
+	Vec3d r(v);
+	skyDrawer->getRefraction().backward(r);
+	r.transfo4d(matAltAzToEquinoxEqu);
+	return r;
+}
+
+Vec3d StelCore::equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matEquinoxEquToAltAz*v;
+	Vec3d r(v);
+	r.transfo4d(matEquinoxEquToAltAz);
+	skyDrawer->getRefraction().forward(r);
+	return r;
+}
+
+Vec3d StelCore::altAzToJ2000(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
+	Vec3d r(v);
+	skyDrawer->getRefraction().backward(r);
+	r.transfo4d(matEquinoxEquToJ2000*matAltAzToEquinoxEqu);
+	return r;
+}
+
+Vec3d StelCore::j2000ToAltAz(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matJ2000ToAltAz*v;
+	Vec3d r(v);
+	r.transfo4d(matJ2000ToAltAz);
+	skyDrawer->getRefraction().forward(r);
+	return r;
+}
+
+Vec3d StelCore::galacticToJ2000(const Vec3d& v) const
+{
+	return matGalacticToJ2000*v;
+}
+
+Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v) const
+{
+	return matEquinoxEquToJ2000*v;
+}
+
+Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v) const
+{
+	return matJ2000ToEquinoxEqu*v;
+}
+
+Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
+{
+	return matJ2000ToGalactic*v;
+}
+
+//! Transform vector from heliocentric ecliptic coordinate to altazimuthal
+Vec3d StelCore::heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matHeliocentricEclipticToAltAz*v;
+	Vec3d r(v);
+	r.transfo4d(matHeliocentricEclipticToAltAz);
+	skyDrawer->getRefraction().forward(r);
+	return r;
+}
+
+//! Transform from heliocentric coordinate to equatorial at current equinox (for the planet where the observer stands)
+Vec3d StelCore::heliocentricEclipticToEquinoxEqu(const Vec3d& v) const
+{
+	return matHeliocentricEclipticToEquinoxEqu*v;
+}
+
+//! Transform vector from heliocentric coordinate to false equatorial : equatorial
+//! coordinate but centered on the observer position (usefull for objects close to earth)
+Vec3d StelCore::heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const
+{
+	return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v;
+}
+
+StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticToAltAz));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matHeliocentricEclipticToAltAz);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
+//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
+StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
+//! Get the modelview matrix for observer-centric equatorial at equinox drawing
+StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matEquinoxEquToAltAz);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
+//! Get the modelview matrix for observer-centric altazimuthal drawing
+StelProjector::ModelViewTranformP StelCore::getAltAzModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	{
+		// Catch problem with improperly initialized matAltAzModelView
+		Q_ASSERT(matAltAzModelView[0]==matAltAzModelView[0]);
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView));
+	}
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
+//! Get the modelview matrix for observer-centric J2000 equatorial drawing
+StelProjector::ModelViewTranformP StelCore::getJ2000ModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
+//! Get the modelview matrix for observer-centric Galactic equatorial drawing
+StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
 
 void StelCore::updateTransformMatrices()
 {
@@ -394,11 +648,76 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
+	bool ok = false;
+	StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	if (!ok)
+		return;
 	defaultLocationID = id;
-	StelApp::getInstance().getLocationMgr().locationForSmallString(id);
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("init_location/location", id);
+}
+
+void StelCore::returnToDefaultLocation()
+{
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+}
+
+void StelCore::returnToHome()
+{
+	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
+	// between planets using SpaceShip and second method give does not exist data
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+
+	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
+
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
+	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
+	landscapeMgr->setFlagFog(p->hasAtmosphere());
+
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	StelMovementMgr* smmgr = getMovementMgr();
+	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
+}
+
+void StelCore::setJDay(double JD)
+{
+	JDay=JD;
+}
+
+double StelCore::getJDay() const
+{
+	return JDay;
+}
+
+double StelCore::getPresetSkyTime() const
+{
+	return presetSkyTime;
+}
+
+void StelCore::setPresetSkyTime(double d)
+{
+	presetSkyTime=d;
+}
+
+void StelCore::setTimeRate(double ts)
+{
+	timeSpeed=ts; emit timeRateChanged(timeSpeed);
+}
+
+double StelCore::getTimeRate() const
+{
+	return timeSpeed;
 }
 
 void StelCore::moveObserverToSelected()
@@ -412,10 +731,13 @@ void StelCore::moveObserverToSelected()
 		{
 			// We need to move to the selected planet. Try to generate a location from the current one
 			StelLocation loc = getCurrentLocation();
+			if (loc.planetName != pl->getEnglishName())
+			{
 			loc.planetName = pl->getEnglishName();
 			loc.name = "-";
 			loc.state = "";
 			moveObserverTo(loc);
+			}
 		}
 	}
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
@@ -432,6 +754,7 @@ const StelLocation& StelCore::getCurrentLocation() const
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
+	emit(locationChanged(target));
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
 	{
@@ -451,7 +774,6 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 		delete position;
 		position = new StelObserver(target);
 	}
-	emit(locationChanged(target));
 }
 
 
@@ -491,6 +813,92 @@ bool StelCore::getIsTimeNow(void) const
 	return previousResult;
 }
 
+QTime StelCore::getInitTodayTime(void)
+{
+	return initTodayTime;
+}
+
+void StelCore::setInitTodayTime(const QTime& t)
+{
+	initTodayTime=t;
+}
+
+void StelCore::setPresetSkyTime(QDateTime dt)
+{
+	setPresetSkyTime(StelUtils::qDateTimeToJd(dt));
+}
+
+void StelCore::addHour()
+{
+	addSolarDays(JD_HOUR);
+}
+
+void StelCore::addDay()
+{
+	addSolarDays(1.0);
+}
+
+void StelCore::addWeek()
+{
+	addSolarDays(7.0);
+}
+
+void StelCore::addSiderealDay()
+{
+	addSiderealDays(1.0);
+}
+
+void StelCore::addSiderealWeek()
+{
+	addSiderealDays(7.0);
+}
+
+void StelCore::addSiderealMonth()
+{
+	addSiderealDays(27.321661);
+}
+
+void StelCore::addSiderealYear()
+{
+	addSolarDays(365.256363004);
+}
+
+
+void StelCore::subtractHour()
+{
+	addSolarDays(-JD_HOUR);
+}
+
+void StelCore::subtractDay()
+{
+	addSolarDays(-1.0);
+}
+
+void StelCore::subtractWeek()
+{
+	addSolarDays(-7.0);
+}
+
+void StelCore::subtractSiderealDay()
+{
+	addSiderealDays(-1.0);
+}
+
+void StelCore::subtractSiderealWeek()
+{
+	addSiderealDays(-7.0);
+}
+
+void StelCore::subtractSiderealMonth()
+{
+	addSiderealDays(-27.321661);
+}
+
+void StelCore::subtractSiderealYear()
+{
+	addSolarDays(-365.256363004);
+}
+
 void StelCore::addSolarDays(double d)
 {
 	setJDay(getJDay() + d);
@@ -514,6 +922,11 @@ double StelCore::getLocalSideralTime() const
 double StelCore::getLocalSideralDayLength() const
 {
 	return position->getHomePlanet()->getSiderealDay();
+}
+
+QString StelCore::getStartupTimeMode()
+{
+	return startupTimeMode;
 }
 
 //! Increase the time speed
@@ -558,6 +971,25 @@ void StelCore::decreaseTimeSpeedLess()
 	setTimeRate(s);
 }
 
+void StelCore::setZeroTimeSpeed()
+{
+	setTimeRate(0);
+}
+
+void StelCore::setRealTimeSpeed()
+{
+	setTimeRate(JD_SECOND);
+}
+
+void StelCore::toggleRealTimeSpeed()
+{
+	(!getRealTimeSpeed()) ? setRealTimeSpeed() : setZeroTimeSpeed();
+}
+
+bool StelCore::getRealTimeSpeed() const
+{
+	return (fabs(timeSpeed-JD_SECOND)<0.0000001);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Increment time
@@ -592,10 +1024,4 @@ void StelCore::updateTime(double deltaTime)
 void StelCore::setStartupTimeMode(const QString& s)
 {
 	startupTimeMode = s;
-}
-
-
-void StelCore::setPresetSkyTime(QDateTime dt)
-{
-	setPresetSkyTime(StelUtils::qDateTimeToJd(dt));
 }
