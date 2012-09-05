@@ -21,25 +21,30 @@
 #include "StelQGL2ArrayVertexBufferBackend.hpp"
 
 
-StelQGL2ArrayVertexBufferBackend::
-StelQGL2ArrayVertexBufferBackend(const PrimitiveType type,
-                                 const QVector<StelVertexAttribute>& attributes)
-	: StelQGLArrayVertexBufferBackend(type, attributes)
+StelQGL2InterleavedArrayVertexBufferBackend::
+StelQGL2InterleavedArrayVertexBufferBackend
+	(const PrimitiveType type, const QVector<StelVertexAttribute>& attributes)
+	: StelQGLInterleavedArrayVertexBufferBackend(type, attributes)
 {
 }
 
-//! Helper function that enables a vertex attribute and provides attribute data to GL.
+//! Helper function that enables a vertex attribute in an interleaved array and
+//! provides attribute data to GL.
 //!
-//! @param program   Shader program we're drawing with.
-//! @param handleOut GL handle to the attribute (attribute location) will be stored here.
-//! @param attribute Defines the attribute to enable.
-//! @param data      Attribute data (e.g. positions, texcoords, normals, etc.)
-void enableAttribute(QGLShaderProgram& program, int& handleOut,
-                     const StelVertexAttribute& attribute, const void* data)
+//! @param program     Shader program we're drawing with.
+//! @param handleOut   GL handle to the attribute (attribute location) will be stored here.
+//! @param attribute   Defines the attribute to enable.
+//! @param data        Attribute data (e.g. positions, texcoords, normals, etc.)
+//! @param stride      Offset betweeen consecutive attributes in the array.
+//!                    If 0, size of the attribute is assumed
+//!                    (i.e. attributes are tightly packed).
+static void enableAttribute
+	(QGLShaderProgram& program, int& handleOut, const StelVertexAttribute& attribute,
+	 const void* data, const int stride)
 {
 	const char* const name = glslAttributeName(attribute.interpretation);
 	const int handle = program.attributeLocation(name);
-	if(handle == -1)
+	if(Q_UNLIKELY(handle == -1))
 	{
 		qDebug() << "Missing vertex attribute: " << name;
 		foreach(QGLShader* shader, program.shaders())
@@ -52,13 +57,14 @@ void enableAttribute(QGLShaderProgram& program, int& handleOut,
 	}
 
 	program.setAttributeArray(handle, glAttributeType(attribute.type), 
-	                          data, attributeDimensions(attribute.type));
+	                          data, attributeDimensions(attribute.type), 
+	                          stride);
 	program.enableAttributeArray(handle);
 
 	handleOut = handle;
 }
 
-void StelQGL2ArrayVertexBufferBackend::
+void StelQGL2InterleavedArrayVertexBufferBackend::
 	draw(StelQGL2Renderer& renderer, const Mat4f& projectionMatrix,
 	     StelQGLIndexBuffer* indexBuffer, StelQGLGLSLShader* shader)
 {
@@ -73,6 +79,8 @@ void StelQGL2ArrayVertexBufferBackend::
 	bool usingVertexColors = false;
 	// Number of all attributes, including any special ones like unprojected position.
 	int totalAttributes = 0;
+	// Offset of the current attribute relative to start of a vertex in the array.
+	int attributeOffset = 0;
 	// Provide all vertex attributes' arrays to GL.
 	for(int attrib = 0; attrib < attributes.count; ++attrib, ++totalAttributes)
 	{
@@ -86,7 +94,8 @@ void StelQGL2ArrayVertexBufferBackend::
 		}
 
 		const bool position = (attribute.interpretation == AttributeInterpretation_Position);
-		const void* attributeData = attributeBuffers[attribute.interpretation];
+		const void* attributeData = vertices + attributeOffset;
+		int stride = vertexStride;
 	
 		// Some shaders (e.g. lighting) need unprojected vertex positions. Vertex 
 		// positions can be projected on the CPU or GPU. If they are projected on the
@@ -94,6 +103,7 @@ void StelQGL2ArrayVertexBufferBackend::
 		// attribute), but we'd need two versions of each shader: One for CPU 
 		// projection (need "unprojectedVertex"), and one for GPU ("vertex" is enough).
 		// So we just pass unprojectedVertex in both cases.
+		//
 		if(position && shader->useUnprojectedPosition())
 		{
 			const int handle = program.attributeLocation("unprojectedVertex");
@@ -104,25 +114,29 @@ void StelQGL2ArrayVertexBufferBackend::
 				                               "enabled, but not present in the GLSL shader");
 			}
 			program.setAttributeArray(handle, glAttributeType(attribute.type), 
-			                          attributeData, attributeDimensions(attribute.type));
+			                          attributeData, attributeDimensions(attribute.type),
+			                          stride);
 			program.enableAttributeArray(handle);
 			enabledAttributes[totalAttributes] = handle;
-			++totalAttributes;
 		}
 
 		// If we're projecting vertices on the CPU, we pass them here.
-		// (CPU-projected vertices are stored in a separate array - projectedPositions)
-		if(position && usingProjectedPositions)
+		if(Q_UNLIKELY(position && usingProjectedPositions))
 		{
 			// Projected positions are valid for a single renderer drawVertexBufferBackend
 			// call - we set this so further draws won't accidentally use projected data 
 			// from before (we don't destroy the buffer so we can reuse it).
 			usingProjectedPositions = false;
 
-			// Using projected positions, use projectedPositions vertex array.
+			// Using projected positions from projectedPositions vertex array.
 			attributeData = projectedPositions;
+			stride = 0;
 		}
-		enableAttribute(program, enabledAttributes[totalAttributes], attribute, attributeData);
+
+		enableAttribute(program, enabledAttributes[totalAttributes], 
+		                attribute, attributeData, stride);
+
+		attributeOffset += attributeSize(attribute.type);
 	}
 
 	const RAW_GL_MATRIX& glProjectionMatrix

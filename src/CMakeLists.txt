@@ -120,6 +120,7 @@ SET(stellarium_lib_SRCS
 
 	core/Triplet.hpp
 
+	core/renderer/StelRendererStatistics.hpp
 	core/renderer/StelRenderer.cpp
 	core/renderer/StelRenderer.hpp
 	core/renderer/StelQGLViewport.cpp
@@ -141,6 +142,12 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelVertexBufferBackend.hpp
 	core/renderer/StelQGLArrayVertexBufferBackend.cpp
 	core/renderer/StelQGLArrayVertexBufferBackend.hpp
+	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.cpp
+	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.hpp
+	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.cpp
+	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.hpp
+	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.cpp
+	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.hpp
 	core/renderer/StelQGL1ArrayVertexBufferBackend.cpp
 	core/renderer/StelQGL1ArrayVertexBufferBackend.hpp
 	core/renderer/StelQGL2ArrayVertexBufferBackend.cpp

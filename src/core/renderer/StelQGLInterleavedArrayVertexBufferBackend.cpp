@@ -1,3 +1,4 @@
+
 /*
  * Stellarium
  * Copyright (C) 2012 Ferdinand Majerech
@@ -18,13 +19,13 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelQGLArrayVertexBufferBackend.hpp"
+#include "StelQGLInterleavedArrayVertexBufferBackend.hpp"
 #include "StelQGLIndexBuffer.hpp"
 
 
-StelQGLArrayVertexBufferBackend::
-StelQGLArrayVertexBufferBackend(const PrimitiveType type, 
-                                const QVector<StelVertexAttribute>& attributes)
+StelQGLInterleavedArrayVertexBufferBackend::
+StelQGLInterleavedArrayVertexBufferBackend
+	(const PrimitiveType type, const QVector<StelVertexAttribute>& attributes)
 	: StelVertexBufferBackend(attributes)
 	, locked(false)
 	, primitiveType(type)
@@ -34,31 +35,26 @@ StelQGLArrayVertexBufferBackend(const PrimitiveType type,
 	, projectedPositions(NULL)
 	, projectedPositionsCapacity(0)
 {
-	// Unused buffers will be NULL.
-	memset(attributeBuffers, '\0', AttributeInterpretation_MAX * sizeof(void*));
-	// Create a buffer for each vertex attribute.
+	vertexBytes = 0;
 	for(int attrib = 0; attrib < this->attributes.count; ++attrib)
 	{
-		const StelVertexAttribute& attribute(this->attributes.attributes[attrib]);
-
-		attributeBuffers[attribute.interpretation] =
-			std::malloc(vertexCapacity * attributeSize(attribute.type));
+		vertexBytes += attributeSize(this->attributes.attributes[attrib].type);
 	}
+	// Align to VERTEX_ALIGN
+	vertexStride = (vertexBytes + VERTEX_ALIGN - 1) & ~(VERTEX_ALIGN - 1);
+	vertices = static_cast<char*>(std::malloc(vertexCapacity * vertexStride));
 }
 
-StelQGLArrayVertexBufferBackend::~StelQGLArrayVertexBufferBackend()
+StelQGLInterleavedArrayVertexBufferBackend::~StelQGLInterleavedArrayVertexBufferBackend()
 {
-	for(int buffer = 0; buffer < AttributeInterpretation_MAX; ++buffer)
-	{
-		if(NULL != attributeBuffers[buffer]){std::free(attributeBuffers[buffer]);}
-	}
+	delete vertices;
 	if(NULL != projectedPositions)
 	{
 		std::free(projectedPositions);
 	}
 }
 
-void StelQGLArrayVertexBufferBackend::addVertex(const void* const vertexInPtr)
+void StelQGLInterleavedArrayVertexBufferBackend::addVertex(const void* const vertexInPtr)
 {
 	//StelVertexBuffer enforces bounds, so we don't need to
 	Q_ASSERT_X(vertexCount <= vertexCapacity, Q_FUNC_INFO,
@@ -67,70 +63,20 @@ void StelQGLArrayVertexBufferBackend::addVertex(const void* const vertexInPtr)
 	if(Q_UNLIKELY(vertexCount == vertexCapacity))
 	{
 		vertexCapacity *= 2;
-		for(int attrib = 0; attrib < attributes.count; ++attrib)
-		{
-			const StelVertexAttribute& attribute(attributes.attributes[attrib]);
-			attributeBuffers[attribute.interpretation] = 
-				std::realloc(attributeBuffers[attribute.interpretation], 
-				             vertexCapacity * attributeSize(attribute.type));
-		}
+		vertices = static_cast<char*>(std::realloc(vertices, vertexCapacity * vertexStride));
 	}
 
-	setVertexNonVirtual(vertexCount, vertexInPtr);
+	std::memcpy(vertices + vertexCount * vertexStride, vertexInPtr, vertexBytes);
 	++vertexCount;
 }
 
-void StelQGLArrayVertexBufferBackend::getVertex
+void StelQGLInterleavedArrayVertexBufferBackend::getVertex
 	(const int index, void* const vertexOutPtr) const
 {
-	// Points to the current attribute (e.g. color, normal, vertex) within output.
-	unsigned char* attribPtr = static_cast<unsigned char*>(vertexOutPtr);
-	for(int attrib = 0; attrib < attributes.count; ++attrib)
-	{
-		const AttributeInterpretation interpretation = 
-			attributes.attributes[attrib].interpretation;
-		// Get each attribute from its buffer and set result's attribute to that.
-		switch(attributes.attributes[attrib].type)
-		{
-			case AttributeType_Vec2f:
-				*reinterpret_cast<Vec2f*>(attribPtr) 
-					= getAttributeConst<Vec2f>(interpretation, index);
-				break;
-			case AttributeType_Vec3f:
-				*reinterpret_cast<Vec3f*>(attribPtr) 
-					= getAttributeConst<Vec3f>(interpretation, index);
-				break;
-			case AttributeType_Vec4f:
-				*reinterpret_cast<Vec4f*>(attribPtr) 
-					= getAttributeConst<Vec4f>(interpretation, index);
-				break;
-			default:
-				Q_ASSERT(false);
-		}
-
-		// This always works, because the C standard requires that 
-		// sizeof(unsigned char) == 1  (that 1 might mean e.g. 16 bits instead of 8
-		// on some platforms, but both the size of attribute and of unsigned char is 
-		// measured in the same unit, so it's not a problem.
-		attribPtr += attributes.sizes[attrib];
-	}
+	std::memcpy(vertexOutPtr, vertices + index * vertexStride, vertexBytes);
 }
 
-int StelQGLArrayVertexBufferBackend::
-	getAttributeIndex(const AttributeInterpretation interpretation) const
-{
-	for(int attrib = 0; attrib < attributes.count; ++attrib)
-	{
-		const StelVertexAttribute& attribute(attributes.attributes[attrib]);
-		if(attribute.interpretation == interpretation)
-		{
-			return attrib;
-		}
-	}
-	return -1;
-}
-
-void StelQGLArrayVertexBufferBackend::
+void StelQGLInterleavedArrayVertexBufferBackend::
 	projectVertices(StelProjector* projector, StelQGLIndexBuffer* indexBuffer)
 {
 	// This is a backend function called during (right before) drawing, so we need 
@@ -138,9 +84,23 @@ void StelQGLArrayVertexBufferBackend::
 	Q_ASSERT_X(locked, Q_FUNC_INFO,
 	           "Trying to project a vertex buffer that is not locked.");
 
+	// Index of the position attribute in attributes.
+	int posIndex  = 0;
+	// Offset of the position attribute relative to start of each vertex in
+	// the vertices array.
+	int posOffset = 0;
+	for(; posIndex < attributes.count; ++posIndex)
+	{
+		const StelVertexAttribute& attribute(attributes.attributes[posIndex]);
+		if(attribute.interpretation == AttributeInterpretation_Position)
+		{
+			break;
+		}
+		posOffset += attributeSize(attribute.type);
+	}
+
 	// Get the position attribute and ensure that we can project it.
 #ifndef NDEBUG
-	const int posIndex = getAttributeIndex(AttributeInterpretation_Position);
 	const StelVertexAttribute& attribute(attributes.attributes[posIndex]);
 	Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
 	           "Trying to use a custom StelProjector to project non-3D vertex positions");
@@ -149,11 +109,6 @@ void StelQGLArrayVertexBufferBackend::
 #endif
 
 	usingProjectedPositions = true;
-
-	const Vec3f* const positions = 
-		static_cast<Vec3f*>(attributeBuffers[AttributeInterpretation_Position]);
-	Q_ASSERT_X(NULL != positions, Q_FUNC_INFO, "Vertex format without a position attribute");
-
 
 	// We have two different cases :
 	// a) Not using an index array. Size of vertex data is known.
@@ -176,16 +131,20 @@ void StelQGLArrayVertexBufferBackend::
 		projectedPositionsCapacity = minProjectedSize;
 	}
 
-	// If the index buffer is big, it's likely that it covers most 
+	// If the index buffer is large, it probably covers most 
 	// of the vertex buffer so we can just project everything en masse, 
 	// taking advantage of the cache.
 	if(NULL == indexBuffer || indexBuffer->length() >= minProjectedSize)
 	{
-		projector->project(minProjectedSize, positions, projectedPositions);
+		const char* position = vertices + posOffset;
+		for(int i = 0; i < minProjectedSize; ++i, position += vertexStride)
+		{
+			projector->project(*reinterpret_cast<const Vec3f*>(position), projectedPositions[i]);
+		}
 	}
-	// Project vertices separately based on indices.
 	else
 	{
+		const char* const firstPosition = vertices + posOffset;
 		if(indexBuffer->indexType() == IndexType_U16)
 		{
 			const ushort* const indices = indexBuffer->indices16.constData();
@@ -193,7 +152,9 @@ void StelQGLArrayVertexBufferBackend::
 			for(int i = 0; i < indexCount; ++i)
 			{
 				const ushort index = indices[i];
-				projector->project(positions[index], projectedPositions[index]);
+				const Vec3f* const position = 
+					(reinterpret_cast<const Vec3f*>(firstPosition + index * vertexStride));
+				projector->project(*position, projectedPositions[index]);
 			}
 		}
 		else if(indexBuffer->indexType() == IndexType_U32)
@@ -203,7 +164,9 @@ void StelQGLArrayVertexBufferBackend::
 			for(int i = 0; i < indexCount; ++i)
 			{
 				const uint index = indices[i];
-				projector->project(positions[index], projectedPositions[index]);
+				const Vec3f* const position = 
+					(reinterpret_cast<const Vec3f*>(firstPosition + index * vertexStride));
+				projector->project(*position, projectedPositions[index]);
 			}
 		}
 		else

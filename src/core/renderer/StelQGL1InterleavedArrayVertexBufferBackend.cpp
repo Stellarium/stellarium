@@ -19,24 +19,28 @@
 
 
 #include "StelQGL1Renderer.hpp"
-#include "StelQGL1ArrayVertexBufferBackend.hpp"
+#include "StelQGL1InterleavedArrayVertexBufferBackend.hpp"
 
 
-StelQGL1ArrayVertexBufferBackend::
-StelQGL1ArrayVertexBufferBackend(const PrimitiveType type,
-                                 const QVector<StelVertexAttribute>& attributes)
-	: StelQGLArrayVertexBufferBackend(type, attributes)
+StelQGL1InterleavedArrayVertexBufferBackend::
+StelQGL1InterleavedArrayVertexBufferBackend
+	(const PrimitiveType type, const QVector<StelVertexAttribute>& attributes)
+	: StelQGLInterleavedArrayVertexBufferBackend(type, attributes)
 {
 }
 
-//! Helper function that enables a vertex attribute and provides attribute data to GL.
+//! Helper function that enables a vertex attribute in an interleaved array and
+//! provides attribute data to GL.
 //!
 //! @param attribEnum GL enumeration corresponding to the attribute interpretation will be
 //!                   written here.
 //! @param attribute  Defines the attribute to enable.
 //! @param data       Attribute data (e.g. positions, texcoords, normals, etc.)
+//! @param stride     Offset betweeen consecutive attributes in the array.
+//!                   If 0, size of the attribute is assumed
+//!                   (i.e. attributes are tightly packed).
 void enableAttribute(GLenum& attribEnum, const StelVertexAttribute& attribute, 
-                     const void* data)
+                     const void* data, const int stride)
 {
 	attribEnum = gl1AttributeEnum(attribute.interpretation);
 	glEnableClientState(attribEnum);
@@ -44,25 +48,25 @@ void enableAttribute(GLenum& attribEnum, const StelVertexAttribute& attribute,
 	{
 		case AttributeInterpretation_Position:
 			glVertexPointer(attributeDimensions(attribute.type),
-			                glAttributeType(attribute.type), 0, data);
+			                glAttributeType(attribute.type), stride, data);
 			break;
 		case AttributeInterpretation_TexCoord:
 			glTexCoordPointer(attributeDimensions(attribute.type),
-			                  glAttributeType(attribute.type), 0, data);
+			                  glAttributeType(attribute.type), stride, data);
 			break;
 		case AttributeInterpretation_Color:
 			glColorPointer(attributeDimensions(attribute.type),
-			               glAttributeType(attribute.type), 0, data);
+			               glAttributeType(attribute.type), stride, data);
 			break;
 		case AttributeInterpretation_Normal:
-			glNormalPointer(glAttributeType(attribute.type), 0, data);
+			glNormalPointer(glAttributeType(attribute.type), stride, data);
 			break;
 		default:
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown attribute interpretation");
 	}
 }
 
-void StelQGL1ArrayVertexBufferBackend::
+void StelQGL1InterleavedArrayVertexBufferBackend::
 	draw(StelQGL1Renderer& renderer, const Mat4f& projectionMatrix,
 	     StelQGLIndexBuffer* indexBuffer)
 {
@@ -73,6 +77,8 @@ void StelQGL1ArrayVertexBufferBackend::
 
 	bool usingVertexColors = false;
 	bool usingTexturing = false;
+	// Offset of the current attribute relative to start of a vertex in the array.
+	int attributeOffset = 0;
 	// Provide all vertex attributes' arrays to GL.
 	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
@@ -84,6 +90,8 @@ void StelQGL1ArrayVertexBufferBackend::
 		{
 			usingVertexColors = true;
 		}
+		const void* attributeData = vertices + attributeOffset;
+		int stride = vertexStride;
 
 		if(attribute.interpretation == AttributeInterpretation_TexCoord)
 		{
@@ -97,21 +105,23 @@ void StelQGL1ArrayVertexBufferBackend::
 		if(attribute.interpretation == AttributeInterpretation_Position &&
 		   usingProjectedPositions)
 		{
-			// Using projected positions, use projectedPositions vertex array.
-			enableAttribute(enabledAttributes[attrib], attribute, projectedPositions);
-
 			// Projected positions are used within a single renderer drawVertexBufferBackend
 			// call - we set this so any further calls with this buffer won't accidentally 
 			// use projected data from before (we don't destroy the buffer so we can 
 			// reuse it).
 			usingProjectedPositions = false;
-			continue;
+
+			// Using projected positions from projectedPositions vertex array.
+			attributeData = projectedPositions;
+			stride = 0;
 		}
 
 		// Not a position attribute, or not using projected positions, 
 		// so use the normal vertex array.
 		enableAttribute(enabledAttributes[attrib], attribute, 
-		                attributeBuffers[attribute.interpretation]);
+		                attributeData, stride);
+
+		attributeOffset += attributeSize(attribute.type);
 	}
 
 	glMatrixMode(GL_PROJECTION);

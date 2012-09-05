@@ -58,20 +58,54 @@ public:
 	//! Finalize the drawing of point sources.
 	void postDrawPointSource(StelProjectorP projector);
 
-	//! Draw a point source halo.
-	//! @param projector Projector to project the point source.
-	//! @param v the 3d position of the source in J2000 reference frame
-	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
-	//! @param bV the source B-V index
-	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
-	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelProjectorP projector, const Vec3d& v, 
-	                     const float rcMag[2], unsigned int bV, bool checkInScreen=false)
+
+	//! Determine if a point source is visible (should be drawn).
+	//!
+	//! This function is separate from drawPointSource for optimization.
+	//!
+	//! Also projects the point source to window coordinates.
+	//!
+	//! @param projector            Projector to project the point source.
+	//! @param v                    the 3d position of the source in J2000 reference frame
+	//! @param rcMag                the radius and luminance of the source as computed by computeRCMag()
+	//! @param checkInScreen        Whether source in screen should be checked to avoid unnecessary drawing.
+	//! @param outWindowCoordinates Window coordinates out the point source are written here.
+	//!
+	//! @return true if the point source is visible, false otherwise.
+	bool pointSourceVisible(StelProjector* projector, const Vec3f& v, const float rcMag[2],
+	                        bool checkInScreen, Vec3f& outWindowCoordinates)
 	{
-		return drawPointSource(projector, v, rcMag, colorTable[bV], checkInScreen);
+		// If radius is negative
+		if (rcMag[0] <= 0.0f){return false;}
+		return checkInScreen ? projector->projectCheck(v, outWindowCoordinates) 
+		                     : projector->project(v, outWindowCoordinates);
 	}
 
-	bool drawPointSource(StelProjectorP projector, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen=false);
+	//! Draw a point source halo.
+	//!
+	//! This is used in combination with pointSourceVisible (which 
+	//! avoids unnecessary draws and projects a point source to window coordinates).
+	//!
+	//! Example:
+	//!
+	//! @code
+	//! Vec3f win;
+	//! if(skyDrawer->pointSourceVisible(&(*projector), pos3D, rcMag, checkInScreen, win))
+	//! {
+	//! 	skyDrawer->drawPointSource(win, rcMag, bV);
+	//! }
+	//! @endcode
+	//!
+	//! @param win   Coordinates of the point source in the window 
+	//!              (computed by pointSourceVisible)
+	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
+	//! @param bV    the source B-V index
+	void drawPointSource(const Vec3f& win, const float rcMag[2], unsigned int bV)
+	{
+		return drawPointSource(win, rcMag, colorTable[bV]);
+	}
+
+	void drawPointSource(const Vec3f& win, const float rcMag[2], const Vec3f& bcolor);
 
 	//! Draw's the sun's corona during a solar eclipse on earth.
 	void drawSunCorona(StelProjectorP projector, const Vec3d& v, float radius, float alpha);
@@ -318,19 +352,17 @@ private:
 	//! When stars are drawn as points, these are stored in this buffer.
 	StelVertexBuffer<ColoredVertex>* starPointBuffer;
 
-	//! When stars/point sources are drawn as triangle pairs ("sprites"), their vertices are stored here.
-	//!
-	//! Vertices for big halos are stored here as well.
+	//! Star sprite triangles.
 	StelVertexBuffer<ColoredTexturedVertex>* starSpriteBuffer;
 
-	//! Index buffer pointing to starSpriteBuffer storing indices of stars' sprites.
-	StelIndexBuffer* starSpriteIndices;
-	//! Index buffer pointing to starSpriteBuffer storing indices of big halos.
-	StelIndexBuffer* bigHaloIndices;
-	//! Index buffer pointing to starSpriteBuffer storing indices of the sun halo.
-	StelIndexBuffer* sunHaloIndices;
-	//! Index buffer pointing to starSpriteBuffer storing indices of the sun's corona.
-	StelIndexBuffer* coronaIndices;
+	//! Big halo triangles.
+	StelVertexBuffer<ColoredTexturedVertex>* bigHaloBuffer;
+
+	//! Sun halo triangles.
+	StelVertexBuffer<ColoredTexturedVertex>* sunHaloBuffer;
+
+	//! Sun corona triangles.
+	StelVertexBuffer<ColoredTexturedVertex>* coronaBuffer;
 
 	//! Are we drawing point sources at the moment?
 	bool drawing;

@@ -73,8 +73,8 @@ inline const char* glslAttributeName(const AttributeInterpretation interpretatio
 		case AttributeInterpretation_TexCoord: return "texCoord";
 		case AttributeInterpretation_Normal:   return "normal";
 		case AttributeInterpretation_Color:    return "color";
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
 	}
-	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
 	
 	// Prevents GCC from complaining about exiting a non-void function:
 	return NULL;
@@ -100,8 +100,8 @@ inline GLenum gl1AttributeEnum(const AttributeInterpretation interpretation)
 		case AttributeInterpretation_TexCoord: return GL_TEXTURE_COORD_ARRAY;
 		case AttributeInterpretation_Normal:   return GL_NORMAL_ARRAY;
 		case AttributeInterpretation_Color:    return GL_COLOR_ARRAY;
+		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
 	}
-	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
 	
 	// Prevents GCC from complaining about exiting a non-void function:
 	return GL_VERTEX_ARRAY;
