@@ -17,46 +17,43 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELQGL2ARRAYVERTEXBUFFERBACKEND_
-#define _STELQGL2ARRAYVERTEXBUFFERBACKEND_
+#ifndef _STELQGL1INTERLEAVEDARRAYVERTEXBUFFERBACKEND_HPP_
+#define _STELQGL1INTERLEAVEDARRAYVERTEXBUFFERBACKEND_HPP_
 
 #include "StelGLUtilityFunctions.hpp"
-#include "StelQGLArrayVertexBufferBackend.hpp"
+#include "StelQGLInterleavedArrayVertexBufferBackend.hpp"
 
-
-//! OpenGL 2 vertex array style VertexBuffer backend, used for testing and transition.
+//! OpenGL 1 interleaved vertex array VertexBuffer backend.
 //!
 //! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 //!
 //! @sa StelVertexBuffer, StelRenderer
-class StelQGL2ArrayVertexBufferBackend : public StelQGLArrayVertexBufferBackend
+class StelQGL1InterleavedArrayVertexBufferBackend : public StelQGLInterleavedArrayVertexBufferBackend
 {
-//! Only StelQGL2Renderer can construct this backend, and we also need unittesting.
-friend class StelQGL2Renderer;
+//! Only StelQGL1Renderer can construct this backend, and we also need unittesting.
+friend class StelQGL1Renderer;
 friend class TestStelVertexBuffer;
 public:
 	//! Draw the vertex buffer, optionally with index buffer specifying which indices to draw.
 	//!
-	//! Called by StelQGL2Renderer::drawVertexBufferBackend().
+	//! Called by StelQGL1Renderer::drawVertexBufferBackend().
 	//!
 	//! @param renderer         Renderer that created this buffer.
 	//! @param projectionMatrix Projection matrix (column major) used for drawing.
 	//! @param indexBuffer      If NULL, all vertices in the buffer are drawn 
 	//!                         in the order they are stored.
 	//!                         If not NULL, specifies indices of vertices to draw.
-	//! @param shader           Shader used for drawing, with any needed projection/transform 
-	//!                         shaders enabled.
-	void draw(class StelQGL2Renderer& renderer, const Mat4f& projectionMatrix,
-	          class StelQGLIndexBuffer* indexBuffer, class StelQGLGLSLShader* shader);
+	void draw(class StelQGL1Renderer& renderer, const Mat4f& projectionMatrix,
+	          class StelQGLIndexBuffer* indexBuffer);
 
 private:
-	//! Construct a StelQGL2ArrayVertexBufferBackend. Only StelQGL2Renderer can do this.
+	//! Construct a StelQGL1InterleavedArrayVertexBufferBackend. Only StelQGL1Renderer can do this.
 	//!
 	//! @param type Graphics primitive type stored in the buffer.
 	//! @param attributes Specifications of vertex attributes that will be stored in the buffer.
-	StelQGL2ArrayVertexBufferBackend(const PrimitiveType type,
-	                                 const QVector<StelVertexAttribute>& attributes);
+	StelQGL1InterleavedArrayVertexBufferBackend
+		(const PrimitiveType type, const QVector<StelVertexAttribute>& attributes);
 };
 
-#endif // _STELQGL2ARRAYVERTEXBUFFERBACKEND_
+#endif // _STELQGL1INTERLEAVEDARRAYVERTEXBUFFERBACKEND_HPP_
 

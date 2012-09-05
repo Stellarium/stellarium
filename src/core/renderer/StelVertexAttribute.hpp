@@ -57,7 +57,7 @@ inline int attributeDimensions(const AttributeType type)
 	return attributeDimensionsArray[type];
 }
 
-//! Get size of a vertex attribute of specified type.
+//! Get size of a vertex attribute of specified type in bytes.
 //!
 //! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 //!
@@ -77,13 +77,15 @@ inline int attributeSize(const AttributeType type)
 enum AttributeInterpretation
 {
 	//! Vertex position.
-	AttributeInterpretation_Position,
+	AttributeInterpretation_Position = 0,
 	//! Color of the vertex.
-	AttributeInterpretation_Color,
+	AttributeInterpretation_Color    = 1,
 	//! Normal of the vertex.
-	AttributeInterpretation_Normal,
+	AttributeInterpretation_Normal   = 2,
 	//! Texture coordinate of the vertex.
-	AttributeInterpretation_TexCoord
+	AttributeInterpretation_TexCoord = 3,
+	//! Never used in an attribute; used to determine maximum number of attributes.
+	AttributeInterpretation_MAX
 };
 
 //! Describes a single vertex attribute (e.g. 2D vertex, 3D normal and so on).

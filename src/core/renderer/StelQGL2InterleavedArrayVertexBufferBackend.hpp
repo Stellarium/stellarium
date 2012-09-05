@@ -17,19 +17,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELQGL2ARRAYVERTEXBUFFERBACKEND_
-#define _STELQGL2ARRAYVERTEXBUFFERBACKEND_
+#ifndef _STELQGL2INTERLEAVEDARRAYVERTEXBUFFERBACKEND_HPP_
+#define _STELQGL2INTERLEAVEDARRAYVERTEXBUFFERBACKEND_HPP_
 
 #include "StelGLUtilityFunctions.hpp"
-#include "StelQGLArrayVertexBufferBackend.hpp"
+#include "StelQGLInterleavedArrayVertexBufferBackend.hpp"
 
-
-//! OpenGL 2 vertex array style VertexBuffer backend, used for testing and transition.
+//! OpenGL 2 interleaved vertex array VertexBuffer backend.
 //!
 //! @note This is an internal class of the Renderer subsystem and should not be used elsewhere.
 //!
 //! @sa StelVertexBuffer, StelRenderer
-class StelQGL2ArrayVertexBufferBackend : public StelQGLArrayVertexBufferBackend
+class StelQGL2InterleavedArrayVertexBufferBackend : public StelQGLInterleavedArrayVertexBufferBackend
 {
 //! Only StelQGL2Renderer can construct this backend, and we also need unittesting.
 friend class StelQGL2Renderer;
@@ -50,13 +49,12 @@ public:
 	          class StelQGLIndexBuffer* indexBuffer, class StelQGLGLSLShader* shader);
 
 private:
-	//! Construct a StelQGL2ArrayVertexBufferBackend. Only StelQGL2Renderer can do this.
+	//! Construct a StelQGL2InterleavedArrayVertexBufferBackend. Only StelQGL2Renderer can do this.
 	//!
 	//! @param type Graphics primitive type stored in the buffer.
 	//! @param attributes Specifications of vertex attributes that will be stored in the buffer.
-	StelQGL2ArrayVertexBufferBackend(const PrimitiveType type,
-	                                 const QVector<StelVertexAttribute>& attributes);
+	StelQGL2InterleavedArrayVertexBufferBackend
+		(const PrimitiveType type, const QVector<StelVertexAttribute>& attributes);
 };
 
-#endif // _STELQGL2ARRAYVERTEXBUFFERBACKEND_
-
+#endif // _STELQGL2INTERLEAVEDARRAYVERTEXBUFFERBACKEND_HPP_

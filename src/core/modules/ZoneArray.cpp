@@ -490,6 +490,7 @@ void SpecialZoneArray<Star>::draw
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
 	const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
 
+
 	// go through all stars, which are sorted by magnitude (bright stars first)
 	for (const Star *s=z->getStars();s<end;++s)
 	{
@@ -497,33 +498,41 @@ void SpecialZoneArray<Star>::draw
 		if (*tmpRcmag<=0.f) break; // no size for this and following (even dimmer, unextincted) stars? --> early exit
 		s->getJ2000Pos(z,movementFactor, vf);
 
+		const Vec3d vd(vf[0], vf[1], vf[2]);
+
 		// GZ new:
 		if (withExtinction)
 		{
 			//GZ: We must compute position first, then shift magnitude.
-			Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOn);
-			float extMagShift=0.0f;
+			Vec3d altAz = core->j2000ToAltAz(vd, StelCore::RefractionOn);
+			float extMagShift = 0.0f;
 			extinction.forward(&altAz, &extMagShift);
-			int extMagShiftStep=qMin((int)floor(extMagShift/k), RCMAG_TABLE_SIZE-mag_steps); 
-			tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
+			const int extMagShiftStep = 
+				qMin((int)floor(extMagShift / k), RCMAG_TABLE_SIZE-mag_steps); 
+			tmpRcmag = rcmag_table + 2 * (s->mag+extMagShiftStep);
 		}
 
-		if (drawer->drawPointSource(projector, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !is_inside)
-		    && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
+		Vec3f win;
+		if(drawer->pointSourceVisible(&(*projector), vf, tmpRcmag, !is_inside, win))
 		{
-			const float offset = *tmpRcmag*0.7f;
-			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
+			drawer->drawPointSource(win, tmpRcmag, s->bV);
+			if(s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
+			{
+				const float offset = *tmpRcmag*0.7f;
+				const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
 
-			renderer->setGlobalColor(colorr[0], colorr[1], colorr[2], names_brightness);
-			renderer->drawText(TextParams(vf, projector, s->getNameI18n())
-			                   .shift(offset, offset).useGravity());
+				renderer->setGlobalColor(colorr[0], colorr[1], colorr[2], names_brightness);
+				renderer->drawText(TextParams(vf, projector, s->getNameI18n())
+				                   .shift(offset, offset).useGravity());
+			}
 		}
 	}
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
-					  QList<StelObjectP > &result)
+void SpecialZoneArray<Star>::searchAround
+	(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
+	 QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25)/ star_position_scale;
