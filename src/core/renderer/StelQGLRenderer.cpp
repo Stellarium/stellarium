@@ -29,7 +29,7 @@ void StelQGLRenderer::bindTextureBackend
 	StelQGLTextureBackend* qglTextureBackend =
 		dynamic_cast<StelQGLTextureBackend*>(textureBackend);
 	Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
-				  "Trying to bind a texture created by a different renderer backend");
+	           "Trying to bind a texture created by a different renderer backend");
 
 	const TextureStatus status = qglTextureBackend->getStatus();
 	if(status == TextureStatus_Uninitialized)
@@ -45,8 +45,11 @@ void StelQGLRenderer::bindTextureBackend
 	}
 	if(status == TextureStatus_Loaded)
 	{
-		qglTextureBackend->bind(textureUnit);
-		currentlyBoundTextures[textureUnit] = qglTextureBackend;
+		if(currentlyBoundTextures[textureUnit] != qglTextureBackend)
+		{
+			qglTextureBackend->bind(textureUnit);
+			currentlyBoundTextures[textureUnit] = qglTextureBackend;
+		}
 	}
 	else
 	{
@@ -294,7 +297,7 @@ void StelQGLRenderer::drawTextGravityHelper
 
 void StelQGLRenderer::drawText(const TextParams& params)
 {
-	statistics["text_draws_per_frame"] += 1.0;
+	statistics[TEXT_DRAWS_PER_FRAME] += 1.0;
 	StelQGLTextureBackend* currentTexture = currentlyBoundTextures[0];
 
 	if(params.string_.length() == 0)
@@ -475,7 +478,7 @@ void StelQGLRenderer::drawRectInternal
 	(const bool textured, const float x, const float y, const float width, 
 	 const float height, const float angle)
 {
-	statistics["rect_draws_per_frame"] += 1.0;
+	statistics[RECT_DRAWS_PER_FRAME] += 1.0;
 	// Could be improved by keeping the vertex buffer as a data member,
 	// or even caching all rectangle draws to the same buffer and drawing them 
 	// at once at the end of the frame.

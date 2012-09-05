@@ -24,7 +24,6 @@
 #include "RendererStatistics.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "renderer/StelRenderer.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -131,13 +130,14 @@ void RendererStatistics::draw(class StelCore* core, StelRenderer* renderer)
 		statistics = renderer->getStatistics();
 		lastUpdateTime.start();
 	}
-	QMapIterator<const char*, double> stats(statistics);
-	while (stats.hasNext()) 
+	const char* key;
+	double value;
+	statistics.resetIteration();
+	while (statistics.getNext(key, value)) 
 	{
-		stats.next();
-		renderer->drawText(TextParams(64, top - row * rowHeight, stats.key()));
-		const QString value = QString("%1").arg(stats.value(), 0, 'f', 3);
-		renderer->drawText(TextParams(384, top - row * rowHeight, value));
+		renderer->drawText(TextParams(64, top - row * rowHeight, key));
+		const QString valueStr = QString("%1").arg(value, 0, 'f', 3);
+		renderer->drawText(TextParams(384, top - row * rowHeight, valueStr));
 		++row;
 	}
 }

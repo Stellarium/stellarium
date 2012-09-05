@@ -28,7 +28,7 @@
 #include "StelQGLRenderer.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
-#include "StelQGL1ArrayVertexBufferBackend.hpp"
+#include "StelQGL1InterleavedArrayVertexBufferBackend.hpp"
 
 
 //! Renderer backend using OpenGL 1.2 with Qt.
@@ -103,7 +103,8 @@ protected:
 		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes)
 	{
 		invariant();
-		return new StelQGL1ArrayVertexBufferBackend(primitiveType, attributes);
+		statistics[VERTEX_BUFFERS_CREATED] += 1.0;
+		return new StelQGL1InterleavedArrayVertexBufferBackend(primitiveType, attributes);
 	}
 
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
@@ -131,8 +132,8 @@ protected:
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glShadeModel(GL_SMOOTH);
 
-		StelQGL1ArrayVertexBufferBackend* backend =
-			dynamic_cast<StelQGL1ArrayVertexBufferBackend*>(vertexBuffer);
+		StelQGL1InterleavedArrayVertexBufferBackend* backend =
+			dynamic_cast<StelQGL1InterleavedArrayVertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
 		           "StelQGL1Renderer: Vertex buffer created by different renderer backend "
 		           "or uninitialized");
@@ -158,13 +159,13 @@ protected:
 		if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector)))
 		{
 			backend->projectVertices(projector, glIndexBuffer);
-			statistics["batch_projections_cpu"]           += 1.0;
-			statistics["batch_projections_cpu_per_frame"] += 1.0;
+			statistics[BATCH_PROJECTIONS_CPU]           += 1.0;
+			statistics[BATCH_PROJECTIONS_CPU_PER_FRAME] += 1.0;
 		}
 		else
 		{
-			statistics["batch_projections_none"]           += 1.0;
-			statistics["batch_projections_none_per_frame"] += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE]           += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] += 1.0;
 		}
 
 		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()

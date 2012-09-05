@@ -31,7 +31,7 @@
 #include "StelQGLRenderer.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
-#include "StelQGL2ArrayVertexBufferBackend.hpp"
+#include "StelQGL2InterleavedArrayVertexBufferBackend.hpp"
 
 
 //! Renderer backend using OpenGL 2.1 or GLSL 2.0 with Qt.
@@ -110,6 +110,12 @@ public:
 		if(!gl.hasOpenGLFeature(QGLFunctions::Multitexture))
 		{
 			qWarning() << "StelQGL2Renderer::init : Required feature not supported: Multitexturing";
+			return false;
+		}
+
+		if(!StelQGLRenderer::init())
+		{
+			qWarning() << "StelQGL2Renderer::init : parent init failed";
 			return false;
 		}
 
@@ -257,12 +263,6 @@ public:
 		}
 		builtinShaders.append(colorTextureShader);
 		
-		if(!StelQGLRenderer::init())
-		{
-			qWarning() << "StelQGL2Renderer::init : parent init failed";
-			return false;
-		}
-
 		// Float texture support blacklist 
 		// (mainly open source drivers, which don't support them due to patents on 
 		//  float textures)
@@ -394,8 +394,8 @@ protected:
 		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes)
 	{
 		invariant();
-		statistics["vertex_buffers_created"] += 1.0;
-		return new StelQGL2ArrayVertexBufferBackend(primitiveType, attributes);
+		statistics[VERTEX_BUFFERS_CREATED] += 1.0;
+		return new StelQGL2InterleavedArrayVertexBufferBackend(primitiveType, attributes);
 	}
 
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
@@ -405,8 +405,8 @@ protected:
 	{
 		invariant();
 
-		StelQGL2ArrayVertexBufferBackend* backend =
-			dynamic_cast<StelQGL2ArrayVertexBufferBackend*>(vertexBuffer);
+		StelQGL2InterleavedArrayVertexBufferBackend* backend =
+			dynamic_cast<StelQGL2InterleavedArrayVertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
 		           "StelQGL2Renderer: Vertex buffer created by different renderer backend "
 		           "or uninitialized");
@@ -445,19 +445,19 @@ protected:
 			{
 				backend->projectVertices(projector, glIndexBuffer);
 				glslProjector = NULL;
-				statistics["batch_projections_cpu"]           += 1.0;
-				statistics["batch_projections_cpu_per_frame"] += 1.0;
+				statistics[BATCH_PROJECTIONS_CPU]           += 1.0;
+				statistics[BATCH_PROJECTIONS_CPU_PER_FRAME] += 1.0;
 			}
 			else
 			{
-				statistics["batch_projections_gpu"]            += 1.0;
-				statistics["batch_projections_gpu_per_frame"]  += 1.0;
+				statistics[BATCH_PROJECTIONS_GPU]            += 1.0;
+				statistics[BATCH_PROJECTIONS_GPU_PER_FRAME]  += 1.0;
 			}
 		}
 		else
 		{
-			statistics["batch_projections_none"]           += 1.0;
-			statistics["batch_projections_none_per_frame"] += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE]           += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] += 1.0;
 		}
 		
 		if(!shader->getProgram().bind())
