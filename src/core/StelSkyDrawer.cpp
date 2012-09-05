@@ -377,10 +377,6 @@ void StelSkyDrawer::postDrawPointSource(StelProjectorP projector)
 //
 //The template parameter is only used so we don't need to write ColoredTexturedVertex
 //every time, this function is only meant to be used from drawPointSource.
-//
-//If this pattern (2-triangle quad with 0,0 - 1,1 texcoords) appears in other 
-//classes in well, it might be good to add it as a helper function of 
-//StelVertexBuffer.
 template<class V>
 static void addStar(StelVertexBuffer<V>* vertices,
                     const float x, const float y,
@@ -403,20 +399,13 @@ static void addStar(StelVertexBuffer<V>* vertices,
 }
 
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource
-	(StelProjectorP projector, const Vec3d& v, const float rcMag[2],
-	 const Vec3f& bcolor, bool checkInScreen)
+void StelSkyDrawer::drawPointSource
+	(const Vec3f& win, const float rcMag[2], const Vec3f& bcolor)
 {
 	Q_ASSERT_X(drawing, Q_FUNC_INFO,
 	           "Attempting to draw a point source without calling preDrawPointSource first.");
 	const float radius    = rcMag[0];
 	const float luminance = rcMag[1];
-
-	if (radius <= 0.0f){return false;}
-	Vec3d win;
-	const bool validProjection = checkInScreen ? projector->projectCheck(v, win) 
-	                                           : projector->project(v, win);
-	if (!validProjection){return false;}
 
 	const Vec3f color = StelApp::getInstance().getVisionModeNight() 
 	                  ? Vec3f(bcolor[0], 0, 0) : bcolor;
@@ -443,8 +432,6 @@ bool StelSkyDrawer::drawPointSource
 	{
 		addStar(starSpriteBuffer, x, y, radius, color * tw);
 	}
-
-	return true;
 }
 
 // Draw's the sun's corona during a solar eclipse on earth.
@@ -530,7 +517,12 @@ void StelSkyDrawer::postDrawSky3dModel
 	if (!noStarHalo)
 	{
 		preDrawPointSource();
-		drawPointSource(projector, v, rcm, color);
+		const Vec3f vf(v[0], v[1], v[2]);
+		Vec3f win;
+		if(pointSourceVisible(&(*projector), vf, rcm, false, win))
+		{
+			drawPointSource(win, rcm, color);
+		}
 		postDrawPointSource(projector);
 	}
 	flagStarTwinkle=save;
