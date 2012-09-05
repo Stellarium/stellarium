@@ -69,6 +69,7 @@ RendererStatistics::RendererStatistics()
 	// Load settings from main config file
 	fontSize = conf->value("RendererStatistics/font_size", 16).toInt();
 	font.setPixelSize(fontSize);
+	font.setWeight(QFont::Black);
 	lastUpdateTime.start();
 }
 
