@@ -165,6 +165,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 void StelQGLRenderer::renderFrame(StelRenderClient& renderClient)
 {
 	invariant();
+	recentFrames.update();
 	clearFrameStatistics();
 	if(previousFrameEndTime < 0.0)
 	{
