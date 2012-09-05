@@ -31,6 +31,7 @@
 #include "GenericVertexTypes.hpp"
 #include "StelApp.hpp"
 #include "StelGuiBase.hpp"
+#include "StelUtils.hpp"
 #include "StelProjectorType.hpp"
 #include "StelRenderer.hpp"
 #include "StelQGLArrayVertexBufferBackend.hpp"
@@ -46,6 +47,8 @@
 //! Enumerates statistics that can be collected about a StelQGLRenderer.
 //!
 //! Used to access individual statistics.
+//!
+//! @note This is an internal enum of the Renderer subsystem and should not be used elsewhere.
 enum QGLRendererStatistics
 {
 	ESTIMATED_TEXTURE_MEMORY         = 0,
@@ -60,16 +63,17 @@ enum QGLRendererStatistics
 	FRAMES                           = 9,
 	TEXT_DRAWS_PER_FRAME             = 10,
 	RECT_DRAWS_PER_FRAME             = 11,
-	BATCH_PROJECTIONS_NONE           = 12,
-	BATCH_PROJECTIONS_NONE_PER_FRAME = 13,
-	BATCH_PROJECTIONS_CPU            = 14,
-	BATCH_PROJECTIONS_CPU_PER_FRAME  = 15,
-	BATCH_PROJECTIONS_GPU            = 16,
-	BATCH_PROJECTIONS_GPU_PER_FRAME  = 17,
-	VERTEX_BUFFERS_CREATED           = 18,
-	INDEX_BUFFERS_CREATED            = 19,
-	TEXTURES_CREATED                 = 20,
-	SHADERS_CREATED                  = 21
+	GL_FPS                           = 12,
+	BATCH_PROJECTIONS_NONE           = 13,
+	BATCH_PROJECTIONS_NONE_PER_FRAME = 14,
+	BATCH_PROJECTIONS_CPU            = 15,
+	BATCH_PROJECTIONS_CPU_PER_FRAME  = 16,
+	BATCH_PROJECTIONS_GPU            = 17,
+	BATCH_PROJECTIONS_GPU_PER_FRAME  = 18,
+	VERTEX_BUFFERS_CREATED           = 19,
+	INDEX_BUFFERS_CREATED            = 20,
+	TEXTURES_CREATED                 = 21,
+	SHADERS_CREATED                  = 22
 };
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
@@ -559,6 +563,56 @@ protected:
 	}
 
 private:
+	//! Stores times (relative to start) of most recent frames in a queue (using a circular array).
+	//!
+	//! @note This is an internal struct of the Renderer subsystem and should not be used elsewhere.
+	struct FrameTimeQueue
+	{
+	public:
+		//! Construct a frame queue with all frames set to zero.
+		FrameTimeQueue()
+			: nextFrame(0)
+		{
+			memset(frames, '\0', FRAME_CAPACITY * sizeof(long double));
+		}
+
+		//! Update the frame queue (record new frame).
+		//!
+		//! Called at the start of each frame.
+		void update()
+		{
+			frames[nextFrame++] = StelUtils::secondsSinceStart();
+			nextFrame = nextFrame % FRAME_CAPACITY;
+		}
+
+		//! Get current FPS.
+		double getFPS()
+		{
+			const long double newest = frames[(nextFrame - 1 + 256) % FRAME_CAPACITY];
+			long double oldest = frames[nextFrame];
+			Q_ASSERT_X(newest >= oldest, Q_FUNC_INFO, 
+						  "Oldest frame time is more recent than newest");
+			int tooOldCount = 0;
+			// Don't compute FPS from more than one second of frames.
+			while(newest - oldest > 1.0 && tooOldCount < FRAME_CAPACITY - 1)
+			{
+				++tooOldCount;
+				oldest = frames[(nextFrame + tooOldCount) % FRAME_CAPACITY];
+			}
+			return (FRAME_CAPACITY - tooOldCount) / (newest - oldest);
+		}
+
+	private:
+		//! Index in the frames array where the next frame will be written.
+		int nextFrame;
+
+		//! Number of frames stored in the queue.
+		static const int FRAME_CAPACITY = 128;
+
+		//! Stores frame start times.
+		long double frames[FRAME_CAPACITY];
+	};
+
 	//! OpenGL context.
 	QGLContext* glContext;
 
@@ -646,6 +700,9 @@ private:
 	//! Number of texture units supported (1 if multitexturing is not supproted).
 	int textureUnitCount;
 
+	//! Stores start times of most recent frames (see FrameTimeQueue).
+	FrameTimeQueue recentFrames;
+
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect);
 	
@@ -669,6 +726,7 @@ private:
 		statistics.addStatistic("frames");
 		statistics.addStatistic("text_draws_per_frame");
 		statistics.addStatistic("rect_draws_per_frame");
+		statistics.addStatistic("gl_fps");
 		statistics[BATCHES_PER_FRAME]    = 0.0;
 		statistics[BATCHES_TOTAL]        = 0.0;
 		statistics[VERTICES_PER_FRAME]   = 0.0;
@@ -680,6 +738,7 @@ private:
 		statistics[FRAMES]               = 0.0;
 		statistics[TEXT_DRAWS_PER_FRAME] = 0.0;
 		statistics[RECT_DRAWS_PER_FRAME] = 0.0;
+		statistics[GL_FPS]               = 0.0;
 
 		// Projection statistics
 		statistics.addStatistic("batch_projections_none");
@@ -720,6 +779,7 @@ private:
 		statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] = 0.0;
 		statistics[BATCH_PROJECTIONS_CPU_PER_FRAME]  = 0.0;
 		statistics[BATCH_PROJECTIONS_GPU_PER_FRAME]  = 0.0;
+		statistics[GL_FPS]                           = recentFrames.getFPS();
 	}
 
 	//! Handles gravity text logic. Called by draText().
