@@ -1614,3 +1614,10 @@ void Planet::update(int deltaTime)
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
 }
+
+void Planet::setSphereScale(float s)
+{
+	sphereScale = s;
+	if(NULL != unlitSphere) {unlitSphere->setRadius(radius * s);}
+	if(NULL != litSphere)   {litSphere->setRadius(radius * s);}
+}
