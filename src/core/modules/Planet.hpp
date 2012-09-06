@@ -261,7 +261,8 @@ public:
 
 	void setRings(Ring* r) {rings = r;}
 
-	void setSphereScale(float s) {sphereScale = s;}
+	void setSphereScale(float s);
+
 	float getSphereScale(void) const {return sphereScale;}
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
