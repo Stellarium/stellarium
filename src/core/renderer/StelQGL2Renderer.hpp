@@ -418,6 +418,14 @@ protected:
 			Q_ASSERT_X(glIndexBuffer != NULL, Q_FUNC_INFO,
 			           "StelQGL2Renderer: Index buffer created by different renderer " 
 			           "backend or uninitialized");
+			if(indexBuffer->length() == 0)
+			{
+				statistics[EMPTY_BATCHES] += 1.0;
+			}
+		}
+		else if(backend->length() == 0)
+		{
+			statistics[EMPTY_BATCHES] += 1.0;
 		}
 
 		// We don't own this - we just have a pointer to it.
@@ -445,19 +453,19 @@ protected:
 			{
 				backend->projectVertices(projector, glIndexBuffer);
 				glslProjector = NULL;
-				statistics[BATCH_PROJECTIONS_CPU]           += 1.0;
-				statistics[BATCH_PROJECTIONS_CPU_PER_FRAME] += 1.0;
+				statistics[BATCH_PROJECTIONS_CPU_TOTAL] += 1.0;
+				statistics[BATCH_PROJECTIONS_CPU]       += 1.0;
 			}
 			else
 			{
-				statistics[BATCH_PROJECTIONS_GPU]            += 1.0;
-				statistics[BATCH_PROJECTIONS_GPU_PER_FRAME]  += 1.0;
+				statistics[BATCH_PROJECTIONS_GPU_TOTAL] += 1.0;
+				statistics[BATCH_PROJECTIONS_GPU]       += 1.0;
 			}
 		}
 		else
 		{
-			statistics[BATCH_PROJECTIONS_NONE]           += 1.0;
-			statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE_TOTAL] += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE]       += 1.0;
 		}
 		
 		if(!shader->getProgram().bind())
