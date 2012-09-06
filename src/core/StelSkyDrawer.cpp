@@ -47,6 +47,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	, texBigHalo(NULL)
 	, texSunHalo(NULL)
 	, texCorona(NULL)
+	, statisticsInitialized(false)
+	, bigHaloStatID(-1)
+	, sunHaloStatID(-1)
+	, starStatID(-1)
 {
 	eye = core->getToneReproducer();
 
@@ -359,14 +363,32 @@ void drawStars(StelTextureNew* texture, VB* vertices, StelRenderer* renderer, St
 // Finalize the drawing of point sources
 void StelSkyDrawer::postDrawPointSource(StelProjectorP projector)
 {
-	drawStars(texBigHalo, bigHaloBuffer, renderer, projector);
-	drawStars(texSunHalo, sunHaloBuffer, renderer, projector);
-	if(drawStarsAsPoints)
+	StelRendererStatistics& stats = renderer->getStatistics();
+	if(!statisticsInitialized)
 	{
+		bigHaloStatID = stats.addStatistic("big_halo_draws", StatisticSwapMode_SetToZero);
+		sunHaloStatID = stats.addStatistic("sun_halo_draws", StatisticSwapMode_SetToZero);
+		starStatID    = stats.addStatistic("star_draws",     StatisticSwapMode_SetToZero);
+		statisticsInitialized = true;
+	}
+	if(bigHaloBuffer->length() > 0)
+	{
+		drawStars(texBigHalo, bigHaloBuffer, renderer, projector);
+		stats[bigHaloStatID] += 1.0;
+	}
+	if(sunHaloBuffer->length() > 0)
+	{
+		drawStars(texSunHalo, sunHaloBuffer, renderer, projector);
+		stats[sunHaloStatID] += 1.0;
+	}
+	if(drawStarsAsPoints && starPointBuffer->length() > 0)
+	{
+		stats[starStatID] += 1.0;
 		drawStars(NULL, starPointBuffer, renderer, projector);
 	}
-	else
+	else if(starSpriteBuffer->length() > 0)
 	{
+		stats[starStatID] += 1.0;
 		drawStars(texHalo, starSpriteBuffer, renderer, projector);
 	}
 
