@@ -114,6 +114,31 @@ protected:
 	{
 		invariant();
 
+		StelQGL1InterleavedArrayVertexBufferBackend* backend =
+			dynamic_cast<StelQGL1InterleavedArrayVertexBufferBackend*>(vertexBuffer);
+		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
+		           "StelQGL1Renderer: Vertex buffer created by different renderer backend "
+		           "or uninitialized");
+		
+		StelQGLIndexBuffer* glIndexBuffer = NULL;
+		if(indexBuffer != NULL)
+		{
+			glIndexBuffer = dynamic_cast<StelQGLIndexBuffer*>(indexBuffer);
+			Q_ASSERT_X(glIndexBuffer != NULL, Q_FUNC_INFO,
+			           "StelQGL1Renderer: Index buffer created by different renderer " 
+			           "backend or uninitialized");
+			if(indexBuffer->length() == 0)
+			{
+				statistics[EMPTY_BATCHES] += 1.0;
+				return;
+			}
+		}
+		else if(backend->length() == 0)
+		{
+			statistics[EMPTY_BATCHES] += 1.0;
+			return;
+		}
+
 		// Save openGL projection state
 		glMatrixMode(GL_TEXTURE);
 		glPushMatrix();
@@ -131,29 +156,6 @@ protected:
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glShadeModel(GL_SMOOTH);
-
-		StelQGL1InterleavedArrayVertexBufferBackend* backend =
-			dynamic_cast<StelQGL1InterleavedArrayVertexBufferBackend*>(vertexBuffer);
-		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
-		           "StelQGL1Renderer: Vertex buffer created by different renderer backend "
-		           "or uninitialized");
-		
-		StelQGLIndexBuffer* glIndexBuffer = NULL;
-		if(indexBuffer != NULL)
-		{
-			glIndexBuffer = dynamic_cast<StelQGLIndexBuffer*>(indexBuffer);
-			Q_ASSERT_X(glIndexBuffer != NULL, Q_FUNC_INFO,
-			           "StelQGL1Renderer: Index buffer created by different renderer " 
-			           "backend or uninitialized");
-			if(indexBuffer->length() == 0)
-			{
-				statistics[EMPTY_BATCHES] += 1.0;
-			}
-		}
-		else if(backend->length() == 0)
-		{
-			statistics[EMPTY_BATCHES] += 1.0;
-		}
 
 		// We need a shared pointer when we're getting the projector ourselves (the 2D case), 
 		// to prevent destructor of returned shared pointer from destroying it 
