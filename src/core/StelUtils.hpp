@@ -275,6 +275,15 @@ namespace StelUtils
 
 	//! Calculate and getting orbital period in days from semi-major axis (in AU)
 	double calculateOrbitalPeriod(double SemiMajorAxis);
+
+	//! Get the number of seconds since program start.
+	//!
+	//! @note This is implemented in platform-specific ways to be as precise 
+	//!       as possible, but there is a fallback for other platforms that 
+	//!       might not be precise at all.
+	//!       This is currently used e.g. to measure FPS, but it should never 
+	//!       be used for critical functionality.
+	long double secondsSinceStart();
 }
 
 #endif // _STELUTILS_HPP_

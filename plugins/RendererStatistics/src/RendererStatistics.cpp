@@ -69,6 +69,7 @@ RendererStatistics::RendererStatistics()
 	// Load settings from main config file
 	fontSize = conf->value("RendererStatistics/font_size", 16).toInt();
 	font.setPixelSize(fontSize);
+	font.setWeight(QFont::Black);
 	lastUpdateTime.start();
 }
 
@@ -118,7 +119,7 @@ void RendererStatistics::draw(class StelCore* core, StelRenderer* renderer)
 
 	if(!enabled){return;}
 	renderer->setFont(font);
-	renderer->setGlobalColor(1.0f, 1.0f, 0.0f);
+	renderer->setGlobalColor(1.0f, 0.0f, 0.0f);
 
 	int row = 0;
 	int rowHeight = static_cast<int>(fontSize * 1.25);

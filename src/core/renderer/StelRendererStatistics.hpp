@@ -20,91 +20,23 @@
 #ifndef _STELRENDERERSTATISTICS_HPP_
 #define _STELRENDERERSTATISTICS_HPP_
 
-//! Renderer statistics backend.
-//! 
-//! Provides storage and functions to set statistics.
-//! This class is designed to behave like a map but to have minimum overhead.
-//!
-//! When a statistic is added (specifying a name), it is assigned an index
-//! which can be used to access it. To make this sane an enum with names 
-//! corresponding to statistic names can be used 
-//! to access the statistics.
-//!
-//! For example of this see the QGLRendererStatistics enum in StelQGLRenderer.hpp 
-//! and the StelQGLRenderer::initStatistics() function.
-//!
-//!
-//! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
-struct RendererStatisticsBackend
+
+//! Enumerates options of what should be done with a statistic 
+//! when the StelRendererStatistics swap() function is callse (i.e. at the end of frame)
+enum StatisticSwapMode
 {
-	//! Maximum number of statistics.
-	//!
-	//! Can be increased when needed but note that size of this object, 
-	//! which is copied a few times (2 currently) per frame is determined 
-	//! by two static-size arrays with this size.
-	static const int MAX_STATISTICS = 32;
-
-	//! Statistic values. Fixed-size array is used to allow simple copying 
-	//! without allocation overhead.
-	double statistics[MAX_STATISTICS];
-
-	//! Names of the statistics. 
-	//!
-	//! We only store pointers - names are stored outside (generally as 
-	//! global constants - literals)
-	//! For index i, statisticNames[i] is the name of statistics[i]
-	//!
-	//! Note that the names are only used for output - not for indexing.
-	const char* statisticNames[MAX_STATISTICS];
-
-	//! Number of statistic values used.
-	int statisticCount;
-
-	//! Construct a RendererStatisticsBackend.
-	RendererStatisticsBackend()
-		: statisticCount(0)
-	{
-		memset(statistics, '\0', MAX_STATISTICS * sizeof(double));
-		memset(statisticNames, '\0', MAX_STATISTICS * sizeof(const char*));
-	}
-
-	//! Access statistic with specified index (e.g. to modify it).
-	//!
-	//! Statistics are accessed by integer indices.
-	//! A clean way to do this is to use an enum with name corresponding
-	//! to the name of the statistic.
-	double& operator [] (int index)
-	{
-		Q_ASSERT_X(index >= 0 && index < statisticCount, Q_FUNC_INFO,
-		           "Index of a statistic out of range ");
-		return statistics[index];
-	}
-
-	//! Add a statistic with specified name.
-	//!
-	//! Also returns the index of the statistic. Index will be 0 for the 
-	//! first statistic added, 1 for the second and so on.
-	//!
-	//! @note ALL statistics must be added before any statistics are set 
-	//!       (i.e. at renderer initialization).
-	//!
-	//! @param name Name of the statistic. This MUST exist as long as the statistics
-	//!             exist. The best way to ensure this is to use a string literal.
-	//! @return Index of the statistic to use with the [] operator.
-	int addStatistic(const char* name)
-	{
-		Q_ASSERT_X(statisticCount < MAX_STATISTICS, Q_FUNC_INFO,
-		           "Adding too many statistics (at most 32 are supported)");
-		statisticNames[statisticCount++] = name;
-		return statisticCount - 1;
-	}
+	StatisticSwapMode_SetToZero,
+	StatisticSwapMode_DoNothing
 };
 
 //! Stores and provides access to statistics about a StelRenderer backend.
 //!
 //! This acts as a map of stings (const char*) and doubles.
 //!
-//! It can be iterated like this:
+//! Two sets of statistics are stored: current (this frame, currently recorded)
+//! and previous (previous frame, currently readable.)
+//!
+//! To read statistics (from previous frame), they can be iterated like this:
 //!
 //! @code
 //! const char* name, double value;
@@ -114,7 +46,15 @@ struct RendererStatisticsBackend
 //! }
 //! @endcode
 //!
-//! The reset() member fuction can be used to reset iteration to start.
+//! To record statistics, the [] operator is used, modifying the current frame's
+//! statistics. The index is an integer previously returned by the addStatistic() 
+//! member function:
+//!
+//! @code
+//! statistics[statisticID] += 1.0;
+//! @endcode
+//!
+//! The resetIteration() member fuction can be used to reset iteration to start.
 class StelRendererStatistics
 {
 friend class StelQGLRenderer;
@@ -122,7 +62,12 @@ public:
 	//! Construct an empty StelRendererStatistics object.
 	StelRendererStatistics()
 		: iterationIndex(0)
+		, statisticCount(0)
 	{
+		memset(statistics,         '\0', MAX_STATISTICS * sizeof(double));
+		memset(previousStatistics, '\0', MAX_STATISTICS * sizeof(double));
+		memset(statisticNames,     '\0', MAX_STATISTICS * sizeof(const char*));
+		memset(swapModes,          '\0', MAX_STATISTICS * sizeof(StatisticSwapMode));
 	}
 
 	//! Get next statistic name and value.
@@ -134,13 +79,15 @@ public:
 	//!         name and value were not set.
 	bool getNext(const char*& name, double& value)
 	{
-		if(iterationIndex == backend.statisticCount)
+		Q_ASSERT_X(iterationIndex <= statisticCount, Q_FUNC_INFO,
+		           "Statistics iteration index out of bounds");
+		if(iterationIndex == statisticCount)
 		{
 			return false;
 		}
 
-		name  = backend.statisticNames[iterationIndex];
-		value = backend.statistics[iterationIndex];
+		name  = statisticNames[iterationIndex];
+		value = previousStatistics[iterationIndex];
 		++iterationIndex;
 
 		return true;
@@ -152,15 +99,96 @@ public:
 		iterationIndex = 0;
 	}
 
-private:
-	//! Stores the actual statistics.
-	RendererStatisticsBackend backend;
+	//! Access statistic with specified index to modify it.
+	//!
+	//! Statistics are accessed by integer indices.
+	//! A clean way to do this is to use an enum with name corresponding
+	//! to the name of the statistic.
+	double& operator [] (int index)
+	{
+		Q_ASSERT_X(index >= 0 && index < statisticCount, Q_FUNC_INFO,
+		           "Index of a statistic out of range");
+		return statistics[index];
+	}
 
+	//! Add a statistic with specified name.
+	//!
+	//! Also returns the index of the statistic. Index will be 0 for the 
+	//! first statistic added, 1 for the second and so on.
+	//!
+	//! @param name     Name of the statistic. This MUST exist as long as the statistics
+	//!                 exist. The best way to ensure this is to use a string literal.
+	//! @param swapMode Specifies what to do when when the swap() function is called 
+	//!                 (at the end of a frame). Used for statistics that are recorded 
+	//!                 separately each frame and need to be zeroed out.
+	//! @return Index of the statistic to use with the [] operator.
+	int addStatistic
+		(const char* name, const StatisticSwapMode swapMode = StatisticSwapMode_DoNothing)
+	{
+		Q_ASSERT_X(statisticCount < MAX_STATISTICS, Q_FUNC_INFO,
+		           "Can't add any more statistics (at most 48 are supported)");
+		swapModes[statisticCount]    = swapMode;
+		statisticNames[statisticCount] = name;
+		++statisticCount;
+		return statisticCount - 1;
+	}
+
+	//! Called at the end of frame - changes current statistics to previous statistics.
+	//!
+	//! Also handles StatisticSwapMode logic, e.g. zeroing out statistics
+	//! that have StatisticSwapMode_SetToZero.
+	void swap()
+	{
+		memcpy(previousStatistics, statistics, MAX_STATISTICS * sizeof(double));
+		for(int s = 0; s < statisticCount; ++s)
+		{
+			if(swapModes[s] == StatisticSwapMode_SetToZero)
+			{
+				statistics[s] = 0.0f;
+			}
+			else if(!swapModes[s] == StatisticSwapMode_DoNothing)
+			{
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown statistic swap mode");
+			}
+		}
+	}
+
+private:
 	//! Current index in backend. Used in iteration when getting statistics.
 	int iterationIndex;
 
-	//! Used by StelRenderer implementations (friends of StelRendererStatistics) to write statistics
-	RendererStatisticsBackend& getBackend() {return backend;}
+	//! Maximum number of statistics.
+	//!
+	//! Can be increased when needed but note that size of this object, 
+	//! which is copied once per frame is determined 
+	//! by four static-size arrays with this size.
+	static const int MAX_STATISTICS = 40;
+
+	//! Statistic values. Fixed-size array is used to allow simple copying 
+	//! without allocation overhead.
+	//!
+	//! This is where statistics are modified.
+	double statistics[MAX_STATISTICS];
+
+	//! Statistics from the previous frame, saved at the last swap() call.
+	//!
+	//! These are read by iteration.
+	double previousStatistics[MAX_STATISTICS];
+
+	//! Names of the statistics. 
+	//!
+	//! We only store pointers - names are stored outside (generally as 
+	//! global constants - literals)
+	//! For index i, statisticNames[i] is the name of statistics[i]
+	//!
+	//! Note that the names are only used for output - not for indexing.
+	const char* statisticNames[MAX_STATISTICS];
+
+	//! Swap modes of each statistic.
+	StatisticSwapMode swapModes[MAX_STATISTICS];
+
+	//! Number of statistic values used.
+	int statisticCount;
 };
 
 #endif // _STELRENDERERSTATISTICS_HPP_

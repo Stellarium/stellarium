@@ -31,6 +31,7 @@
 #include "GenericVertexTypes.hpp"
 #include "StelApp.hpp"
 #include "StelGuiBase.hpp"
+#include "StelUtils.hpp"
 #include "StelProjectorType.hpp"
 #include "StelRenderer.hpp"
 #include "StelQGLArrayVertexBufferBackend.hpp"
@@ -46,30 +47,34 @@
 //! Enumerates statistics that can be collected about a StelQGLRenderer.
 //!
 //! Used to access individual statistics.
+//!
+//! @note This is an internal enum of the Renderer subsystem and should not be used elsewhere.
 enum QGLRendererStatistics
 {
-	ESTIMATED_TEXTURE_MEMORY         = 0,
-	BATCHES_PER_FRAME                = 1,
-	BATCHES_TOTAL                    = 2,
-	VERTICES_PER_FRAME               = 3,
-	VERTICES_TOTAL                   = 4,
-	TRIANGLES_PER_FRAME              = 5,
-	TRIANGLES_TOTAL                  = 6,
-	LINES_PER_FRAME                  = 7,
-	LINES_TOTAL                      = 8,
-	FRAMES                           = 9,
-	TEXT_DRAWS_PER_FRAME             = 10,
-	RECT_DRAWS_PER_FRAME             = 11,
-	BATCH_PROJECTIONS_NONE           = 12,
-	BATCH_PROJECTIONS_NONE_PER_FRAME = 13,
-	BATCH_PROJECTIONS_CPU            = 14,
-	BATCH_PROJECTIONS_CPU_PER_FRAME  = 15,
-	BATCH_PROJECTIONS_GPU            = 16,
-	BATCH_PROJECTIONS_GPU_PER_FRAME  = 17,
-	VERTEX_BUFFERS_CREATED           = 18,
-	INDEX_BUFFERS_CREATED            = 19,
-	TEXTURES_CREATED                 = 20,
-	SHADERS_CREATED                  = 21
+	ESTIMATED_TEXTURE_MEMORY     = 0,
+	BATCHES                      = 1,
+	EMPTY_BATCHES                = 2,
+	BATCHES_TOTAL                = 3,
+	VERTICES                     = 4,
+	VERTICES_TOTAL               = 5,
+	TRIANGLES                    = 6,
+	TRIANGLES_TOTAL              = 7,
+	LINES                        = 8,
+	LINES_TOTAL                  = 9,
+	FRAMES                       = 10,
+	TEXT_DRAWS                   = 11,
+	RECT_DRAWS                   = 12,
+	GL_FPS                       = 13,
+	BATCH_PROJECTIONS_NONE_TOTAL = 14,
+	BATCH_PROJECTIONS_NONE       = 15,
+	BATCH_PROJECTIONS_CPU_TOTAL  = 16,
+	BATCH_PROJECTIONS_CPU        = 17,
+	BATCH_PROJECTIONS_GPU_TOTAL  = 18,
+	BATCH_PROJECTIONS_GPU        = 19,
+	VERTEX_BUFFERS_CREATED       = 20,
+	INDEX_BUFFERS_CREATED        = 21,
+	TEXTURES_CREATED             = 22,
+	SHADERS_CREATED              = 23
 };
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
@@ -85,7 +90,6 @@ public:
 	//!                     This should be true for mobile platforms with PowerVR GPUs.
 	StelQGLRenderer(QGraphicsView* const parent, const bool pvrSupported)
 		: StelRenderer()
-		, statistics(statisticsFrontend.getBackend())
 		, glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
 		                                     QGL::DepthBuffer   |
 		                                     QGL::DoubleBuffer)))
@@ -289,7 +293,7 @@ public:
 
 	virtual StelRendererStatistics& getStatistics() 
 	{
-		return previousStatisticsFrontend;
+		return statistics;
 	}
 
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
@@ -331,14 +335,6 @@ public:
 		return globalColor;
 	}
 
-	//! Get a reference to the statistics backend.
-	//!
-	//! Used e.g. by texture backend to collect statistics.
-	RendererStatisticsBackend& getStatisticsWritable()
-	{
-		return statistics;
-	}
-
 	//! Returns true if non-power-of-two textures are supported, false otherwise.
 	virtual bool areNonPowerOfTwoTexturesSupported() const = 0;
 
@@ -356,15 +352,7 @@ protected:
 	QString glRendererString;
 
 	//! Statistics collected during program run (such as estimated texture memory usage, etc.).
-	StelRendererStatistics statisticsFrontend;
-
-	//! Statistics backend - used to write statistics.
-	RendererStatisticsBackend& statistics;
-
-	//! Statistics from the previous frame.
-	//!
-	//! Returned by getStatistics() so stats for a full frame are provided.
-	StelRendererStatistics previousStatisticsFrontend;
+	StelRendererStatistics statistics;
 
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
@@ -518,7 +506,7 @@ protected:
 	void updateDrawStatistics(VBufferBackend* vertexBuffer,
 	                          StelQGLIndexBuffer* indexBuffer)
 	{
-		statistics[BATCHES_PER_FRAME] += 1.0;
+		statistics[BATCHES]           += 1.0;
 		statistics[BATCHES_TOTAL]     += 1.0;
 
 		const int vertices  = 
@@ -550,15 +538,65 @@ protected:
 				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown graphics primitive type");
 		}
 
-		statistics[VERTICES_PER_FRAME]  += vertices;
-		statistics[VERTICES_TOTAL]      += vertices;
-		statistics[TRIANGLES_PER_FRAME] += triangles;
-		statistics[TRIANGLES_TOTAL]     += triangles;
-		statistics[LINES_PER_FRAME]     += lines;
-		statistics[LINES_TOTAL]         += lines;
+		statistics[VERTICES]        += vertices;
+		statistics[VERTICES_TOTAL]  += vertices;
+		statistics[TRIANGLES]       += triangles;
+		statistics[TRIANGLES_TOTAL] += triangles;
+		statistics[LINES]           += lines;
+		statistics[LINES_TOTAL]     += lines;
 	}
 
 private:
+	//! Stores times (relative to start) of most recent frames in a queue (using a circular array).
+	//!
+	//! @note This is an internal struct of the Renderer subsystem and should not be used elsewhere.
+	struct FrameTimeQueue
+	{
+	public:
+		//! Construct a frame queue with all frames set to zero.
+		FrameTimeQueue()
+			: nextFrame(0)
+		{
+			memset(frames, '\0', FRAME_CAPACITY * sizeof(long double));
+		}
+
+		//! Update the frame queue (record new frame).
+		//!
+		//! Called at the start of each frame.
+		void update()
+		{
+			frames[nextFrame++] = StelUtils::secondsSinceStart();
+			nextFrame = nextFrame % FRAME_CAPACITY;
+		}
+
+		//! Get current FPS.
+		double getFPS()
+		{
+			const long double newest = frames[(nextFrame - 1 + 256) % FRAME_CAPACITY];
+			long double oldest = frames[nextFrame];
+			Q_ASSERT_X(newest >= oldest, Q_FUNC_INFO, 
+						  "Oldest frame time is more recent than newest");
+			int tooOldCount = 0;
+			// Don't compute FPS from more than one second of frames.
+			while(newest - oldest > 1.0 && tooOldCount < FRAME_CAPACITY - 1)
+			{
+				++tooOldCount;
+				oldest = frames[(nextFrame + tooOldCount) % FRAME_CAPACITY];
+			}
+			return (FRAME_CAPACITY - tooOldCount) / (newest - oldest);
+		}
+
+	private:
+		//! Index in the frames array where the next frame will be written.
+		int nextFrame;
+
+		//! Number of frames stored in the queue.
+		static const int FRAME_CAPACITY = 128;
+
+		//! Stores frame start times.
+		long double frames[FRAME_CAPACITY];
+	};
+
 	//! OpenGL context.
 	QGLContext* glContext;
 
@@ -646,6 +684,9 @@ private:
 	//! Number of texture units supported (1 if multitexturing is not supproted).
 	int textureUnitCount;
 
+	//! Stores start times of most recent frames (see FrameTimeQueue).
+	FrameTimeQueue recentFrames;
+
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect);
 	
@@ -655,71 +696,43 @@ private:
 		// NOTE: Order of statistics added here _must_ match the order 
 		// of values of the QGLRendererStatistics enum.
 		statistics.addStatistic("estimated_texture_memory");
-		statistics[ESTIMATED_TEXTURE_MEMORY] = 0.0;
 
 		// Draw statistics
-		statistics.addStatistic("batches_per_frame");
+		statistics.addStatistic("batches", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("empty_batches", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("batches_total");
-		statistics.addStatistic("vertices_per_frame");
+		statistics.addStatistic("vertices", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("vertices_total");
-		statistics.addStatistic("triangles_per_frame");
+		statistics.addStatistic("triangles", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("triangles_total");
-		statistics.addStatistic("lines_per_frame");
+		statistics.addStatistic("lines", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("lines_total");
 		statistics.addStatistic("frames");
-		statistics.addStatistic("text_draws_per_frame");
-		statistics.addStatistic("rect_draws_per_frame");
-		statistics[BATCHES_PER_FRAME]    = 0.0;
-		statistics[BATCHES_TOTAL]        = 0.0;
-		statistics[VERTICES_PER_FRAME]   = 0.0;
-		statistics[VERTICES_TOTAL]       = 0.0;
-		statistics[TRIANGLES_PER_FRAME]  = 0.0;
-		statistics[TRIANGLES_TOTAL]      = 0.0;
-		statistics[LINES_PER_FRAME]      = 0.0;
-		statistics[LINES_TOTAL]          = 0.0;
-		statistics[FRAMES]               = 0.0;
-		statistics[TEXT_DRAWS_PER_FRAME] = 0.0;
-		statistics[RECT_DRAWS_PER_FRAME] = 0.0;
+		statistics.addStatistic("text_draws", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("rect_draws", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("gl_fps");
 
 		// Projection statistics
-		statistics.addStatistic("batch_projections_none");
-		statistics.addStatistic("batch_projections_none_per_frame");
-		statistics.addStatistic("batch_projections_cpu");
-		statistics.addStatistic("batch_projections_cpu_per_frame");
-		statistics.addStatistic("batch_projections_gpu");
-		statistics.addStatistic("batch_projections_gpu_per_frame");
-		statistics[BATCH_PROJECTIONS_NONE]           = 0.0;
-		statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] = 0.0;
-		statistics[BATCH_PROJECTIONS_CPU]            = 0.0;
-		statistics[BATCH_PROJECTIONS_CPU_PER_FRAME]  = 0.0;
-		statistics[BATCH_PROJECTIONS_GPU]            = 0.0;
-		statistics[BATCH_PROJECTIONS_GPU_PER_FRAME]  = 0.0;
+		statistics.addStatistic("batch_projections_none_total");
+		statistics.addStatistic("batch_projections_none", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("batch_projections_cpu_total");
+		statistics.addStatistic("batch_projections_cpu", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("batch_projections_gpu_total");
+		statistics.addStatistic("batch_projections_gpu", StatisticSwapMode_SetToZero);
 
 		// Creation of Renderer objects
 		statistics.addStatistic("vertex_buffers_created");
 		statistics.addStatistic("index_buffers_created");
 		statistics.addStatistic("textures_created");
 		statistics.addStatistic("shaders_created");
-		statistics[VERTEX_BUFFERS_CREATED]      = 0.0;
-		statistics[INDEX_BUFFERS_CREATED]       = 0.0;
-		statistics[TEXTURES_CREATED]            = 0.0;
-		statistics[SHADERS_CREATED]             = 0.0;
 	}
 
 	//! Clear per-frame statistics (called when a frame starts).
 	void clearFrameStatistics()
 	{
-		previousStatisticsFrontend = statisticsFrontend;
+		statistics.swap();
 		statistics[FRAMES] += 1.0;
-		statistics[BATCHES_PER_FRAME]                = 0.0;
-		statistics[VERTICES_PER_FRAME]               = 0.0;
-		statistics[TRIANGLES_PER_FRAME]              = 0.0;
-		statistics[LINES_PER_FRAME]                  = 0.0;
-		statistics[TEXT_DRAWS_PER_FRAME]             = 0.0;
-		statistics[RECT_DRAWS_PER_FRAME]             = 0.0;
-		statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] = 0.0;
-		statistics[BATCH_PROJECTIONS_CPU_PER_FRAME]  = 0.0;
-		statistics[BATCH_PROJECTIONS_GPU_PER_FRAME]  = 0.0;
+		statistics[GL_FPS] = recentFrames.getFPS();
 	}
 
 	//! Handles gravity text logic. Called by draText().
