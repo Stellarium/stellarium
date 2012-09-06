@@ -380,6 +380,17 @@ private:
 	bool flagLuminanceAdaptation;
 
 	float big3dModelHaloRadius;
+
+
+	//! Are the statistics IDs initialized?
+	bool statisticsInitialized;
+
+	//! ID used to modify the big halo draw statistic.
+	int bigHaloStatID;
+	//! ID used to modify the sun halo draw statistic.
+	int sunHaloStatID;
+	//! ID used to modify the star draw statistic.
+	int starStatID;
 };
 
 #endif // _STELSKYDRAWER_HPP_

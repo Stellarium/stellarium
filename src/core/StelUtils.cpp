@@ -32,6 +32,7 @@
 #include <QDebug>
 #include <QLocale>
 #include <QRegExp>
+#include <QtGlobal>
 
 namespace StelUtils
 {
@@ -1060,6 +1061,40 @@ double calculateOrbitalPeriod(double SemiMajorAxis)
 	return period/86400; // return period in days
 }
 
+#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+#include <sys/time.h>
+#else
+#include <ctime>
+#endif
+
+//! Get current time in seconds (relative to some arbitrary beginning in the past)
+//!
+//! Currently we only have a high-precision implementation for Mac, Linux and 
+//! FreeBSD. A Windows implementation would be good as well (clock_t, 
+//! which we use right now, might be faster/slower than wall clock time 
+//! and usually supports milliseconds at best).
+static long double getTime()
+{
+#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+	struct timeval timeVal;
+	if(gettimeofday(&timeVal, NULL) != 0)
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to get time");
+	}
+	return static_cast<long double>(timeVal.tv_sec) + 0.000001L * timeVal.tv_usec;
+#else
+	std::clock_t cpuTime = std::clock();
+	return static_cast<long double>(cpuTime) / CLOCKS_PER_SEC;
+#endif
+}
+
+//! Time when the program execution started.
+long double startTime = getTime();
+
+long double secondsSinceStart()
+{
+	return getTime() - startTime;
+}
 
 } // end of the StelUtils namespace
 
