@@ -81,9 +81,9 @@ struct SphereParams
 	//!
 	//! Higher values result in more detail, but also higher resource usage.
 	//!
-	//! @param stacks Number of stacks/rows/rings, i.e. vertical resolution of the sphere.
-	//!               Must be at least 3 and at most 4096.
 	//! @param slices Number of slices/columns, i.e. horizontal resolution of the sphere.
+	//!               Must be at least 3 and at most 4096.
+	//! @param stacks Number of stacks/rows/rings, i.e. vertical resolution of the sphere.
 	//!               Must be at least 3 and at most 4096.
 	SphereParams& resolution(const int slices, const int stacks)
 	{
