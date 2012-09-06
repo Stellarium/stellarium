@@ -421,11 +421,13 @@ protected:
 			if(indexBuffer->length() == 0)
 			{
 				statistics[EMPTY_BATCHES] += 1.0;
+				return;
 			}
 		}
 		else if(backend->length() == 0)
 		{
 			statistics[EMPTY_BATCHES] += 1.0;
+			return;
 		}
 
 		// We don't own this - we just have a pointer to it.
