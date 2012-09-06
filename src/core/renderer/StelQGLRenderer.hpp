@@ -51,29 +51,30 @@
 //! @note This is an internal enum of the Renderer subsystem and should not be used elsewhere.
 enum QGLRendererStatistics
 {
-	ESTIMATED_TEXTURE_MEMORY         = 0,
-	BATCHES_PER_FRAME                = 1,
-	BATCHES_TOTAL                    = 2,
-	VERTICES_PER_FRAME               = 3,
-	VERTICES_TOTAL                   = 4,
-	TRIANGLES_PER_FRAME              = 5,
-	TRIANGLES_TOTAL                  = 6,
-	LINES_PER_FRAME                  = 7,
-	LINES_TOTAL                      = 8,
-	FRAMES                           = 9,
-	TEXT_DRAWS_PER_FRAME             = 10,
-	RECT_DRAWS_PER_FRAME             = 11,
-	GL_FPS                           = 12,
-	BATCH_PROJECTIONS_NONE           = 13,
-	BATCH_PROJECTIONS_NONE_PER_FRAME = 14,
-	BATCH_PROJECTIONS_CPU            = 15,
-	BATCH_PROJECTIONS_CPU_PER_FRAME  = 16,
-	BATCH_PROJECTIONS_GPU            = 17,
-	BATCH_PROJECTIONS_GPU_PER_FRAME  = 18,
-	VERTEX_BUFFERS_CREATED           = 19,
-	INDEX_BUFFERS_CREATED            = 20,
-	TEXTURES_CREATED                 = 21,
-	SHADERS_CREATED                  = 22
+	ESTIMATED_TEXTURE_MEMORY     = 0,
+	BATCHES                      = 1,
+	EMPTY_BATCHES                = 2,
+	BATCHES_TOTAL                = 3,
+	VERTICES                     = 4,
+	VERTICES_TOTAL               = 5,
+	TRIANGLES                    = 6,
+	TRIANGLES_TOTAL              = 7,
+	LINES                        = 8,
+	LINES_TOTAL                  = 9,
+	FRAMES                       = 10,
+	TEXT_DRAWS                   = 11,
+	RECT_DRAWS                   = 12,
+	GL_FPS                       = 13,
+	BATCH_PROJECTIONS_NONE_TOTAL = 14,
+	BATCH_PROJECTIONS_NONE       = 15,
+	BATCH_PROJECTIONS_CPU_TOTAL  = 16,
+	BATCH_PROJECTIONS_CPU        = 17,
+	BATCH_PROJECTIONS_GPU_TOTAL  = 18,
+	BATCH_PROJECTIONS_GPU        = 19,
+	VERTEX_BUFFERS_CREATED       = 20,
+	INDEX_BUFFERS_CREATED        = 21,
+	TEXTURES_CREATED             = 22,
+	SHADERS_CREATED              = 23
 };
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
@@ -505,7 +506,7 @@ protected:
 	void updateDrawStatistics(VBufferBackend* vertexBuffer,
 	                          StelQGLIndexBuffer* indexBuffer)
 	{
-		statistics[BATCHES_PER_FRAME] += 1.0;
+		statistics[BATCHES]           += 1.0;
 		statistics[BATCHES_TOTAL]     += 1.0;
 
 		const int vertices  = 
@@ -537,12 +538,12 @@ protected:
 				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown graphics primitive type");
 		}
 
-		statistics[VERTICES_PER_FRAME]  += vertices;
-		statistics[VERTICES_TOTAL]      += vertices;
-		statistics[TRIANGLES_PER_FRAME] += triangles;
-		statistics[TRIANGLES_TOTAL]     += triangles;
-		statistics[LINES_PER_FRAME]     += lines;
-		statistics[LINES_TOTAL]         += lines;
+		statistics[VERTICES]        += vertices;
+		statistics[VERTICES_TOTAL]  += vertices;
+		statistics[TRIANGLES]       += triangles;
+		statistics[TRIANGLES_TOTAL] += triangles;
+		statistics[LINES]           += lines;
+		statistics[LINES_TOTAL]     += lines;
 	}
 
 private:
@@ -695,57 +696,35 @@ private:
 		// NOTE: Order of statistics added here _must_ match the order 
 		// of values of the QGLRendererStatistics enum.
 		statistics.addStatistic("estimated_texture_memory");
-		statistics[ESTIMATED_TEXTURE_MEMORY] = 0.0;
 
 		// Draw statistics
-		statistics.addStatistic("batches_per_frame", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("batches", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("empty_batches", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("batches_total");
-		statistics.addStatistic("vertices_per_frame", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("vertices", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("vertices_total");
-		statistics.addStatistic("triangles_per_frame", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("triangles", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("triangles_total");
-		statistics.addStatistic("lines_per_frame", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("lines", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("lines_total");
 		statistics.addStatistic("frames");
-		statistics.addStatistic("text_draws_per_frame", StatisticSwapMode_SetToZero);
-		statistics.addStatistic("rect_draws_per_frame", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("text_draws", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("rect_draws", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("gl_fps");
-		statistics[BATCHES_PER_FRAME]    = 0.0;
-		statistics[BATCHES_TOTAL]        = 0.0;
-		statistics[VERTICES_PER_FRAME]   = 0.0;
-		statistics[VERTICES_TOTAL]       = 0.0;
-		statistics[TRIANGLES_PER_FRAME]  = 0.0;
-		statistics[TRIANGLES_TOTAL]      = 0.0;
-		statistics[LINES_PER_FRAME]      = 0.0;
-		statistics[LINES_TOTAL]          = 0.0;
-		statistics[FRAMES]               = 0.0;
-		statistics[TEXT_DRAWS_PER_FRAME] = 0.0;
-		statistics[RECT_DRAWS_PER_FRAME] = 0.0;
-		statistics[GL_FPS]               = 0.0;
 
 		// Projection statistics
-		statistics.addStatistic("batch_projections_none");
-		statistics.addStatistic("batch_projections_none_per_frame", StatisticSwapMode_SetToZero);
-		statistics.addStatistic("batch_projections_cpu");
-		statistics.addStatistic("batch_projections_cpu_per_frame", StatisticSwapMode_SetToZero);
-		statistics.addStatistic("batch_projections_gpu");
-		statistics.addStatistic("batch_projections_gpu_per_frame", StatisticSwapMode_SetToZero);
-		statistics[BATCH_PROJECTIONS_NONE]           = 0.0;
-		statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] = 0.0;
-		statistics[BATCH_PROJECTIONS_CPU]            = 0.0;
-		statistics[BATCH_PROJECTIONS_CPU_PER_FRAME]  = 0.0;
-		statistics[BATCH_PROJECTIONS_GPU]            = 0.0;
-		statistics[BATCH_PROJECTIONS_GPU_PER_FRAME]  = 0.0;
+		statistics.addStatistic("batch_projections_none_total");
+		statistics.addStatistic("batch_projections_none", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("batch_projections_cpu_total");
+		statistics.addStatistic("batch_projections_cpu", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("batch_projections_gpu_total");
+		statistics.addStatistic("batch_projections_gpu", StatisticSwapMode_SetToZero);
 
 		// Creation of Renderer objects
 		statistics.addStatistic("vertex_buffers_created");
 		statistics.addStatistic("index_buffers_created");
 		statistics.addStatistic("textures_created");
 		statistics.addStatistic("shaders_created");
-		statistics[VERTEX_BUFFERS_CREATED]      = 0.0;
-		statistics[INDEX_BUFFERS_CREATED]       = 0.0;
-		statistics[TEXTURES_CREATED]            = 0.0;
-		statistics[SHADERS_CREATED]             = 0.0;
 	}
 
 	//! Clear per-frame statistics (called when a frame starts).

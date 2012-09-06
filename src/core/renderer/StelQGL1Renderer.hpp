@@ -145,6 +145,14 @@ protected:
 			Q_ASSERT_X(glIndexBuffer != NULL, Q_FUNC_INFO,
 			           "StelQGL1Renderer: Index buffer created by different renderer " 
 			           "backend or uninitialized");
+			if(indexBuffer->length() == 0)
+			{
+				statistics[EMPTY_BATCHES] += 1.0;
+			}
+		}
+		else if(backend->length() == 0)
+		{
+			statistics[EMPTY_BATCHES] += 1.0;
 		}
 
 		// We need a shared pointer when we're getting the projector ourselves (the 2D case), 
@@ -159,13 +167,13 @@ protected:
 		if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector)))
 		{
 			backend->projectVertices(projector, glIndexBuffer);
-			statistics[BATCH_PROJECTIONS_CPU]           += 1.0;
-			statistics[BATCH_PROJECTIONS_CPU_PER_FRAME] += 1.0;
+			statistics[BATCH_PROJECTIONS_CPU_TOTAL] += 1.0;
+			statistics[BATCH_PROJECTIONS_CPU]       += 1.0;
 		}
 		else
 		{
-			statistics[BATCH_PROJECTIONS_NONE]           += 1.0;
-			statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE_TOTAL] += 1.0;
+			statistics[BATCH_PROJECTIONS_NONE]       += 1.0;
 		}
 
 		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
