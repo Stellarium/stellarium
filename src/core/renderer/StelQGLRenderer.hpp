@@ -89,7 +89,6 @@ public:
 	//!                     This should be true for mobile platforms with PowerVR GPUs.
 	StelQGLRenderer(QGraphicsView* const parent, const bool pvrSupported)
 		: StelRenderer()
-		, statistics(statisticsFrontend.getBackend())
 		, glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
 		                                     QGL::DepthBuffer   |
 		                                     QGL::DoubleBuffer)))
@@ -293,7 +292,7 @@ public:
 
 	virtual StelRendererStatistics& getStatistics() 
 	{
-		return previousStatisticsFrontend;
+		return statistics;
 	}
 
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
@@ -335,14 +334,6 @@ public:
 		return globalColor;
 	}
 
-	//! Get a reference to the statistics backend.
-	//!
-	//! Used e.g. by texture backend to collect statistics.
-	RendererStatisticsBackend& getStatisticsWritable()
-	{
-		return statistics;
-	}
-
 	//! Returns true if non-power-of-two textures are supported, false otherwise.
 	virtual bool areNonPowerOfTwoTexturesSupported() const = 0;
 
@@ -360,15 +351,7 @@ protected:
 	QString glRendererString;
 
 	//! Statistics collected during program run (such as estimated texture memory usage, etc.).
-	StelRendererStatistics statisticsFrontend;
-
-	//! Statistics backend - used to write statistics.
-	RendererStatisticsBackend& statistics;
-
-	//! Statistics from the previous frame.
-	//!
-	//! Returned by getStatistics() so stats for a full frame are provided.
-	StelRendererStatistics previousStatisticsFrontend;
+	StelRendererStatistics statistics;
 
 	virtual StelTextureBackend* createTextureBackend
 		(const QString& filename, const TextureParams& params, const TextureLoadingMode loadingMode);
@@ -715,17 +698,17 @@ private:
 		statistics[ESTIMATED_TEXTURE_MEMORY] = 0.0;
 
 		// Draw statistics
-		statistics.addStatistic("batches_per_frame");
+		statistics.addStatistic("batches_per_frame", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("batches_total");
-		statistics.addStatistic("vertices_per_frame");
+		statistics.addStatistic("vertices_per_frame", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("vertices_total");
-		statistics.addStatistic("triangles_per_frame");
+		statistics.addStatistic("triangles_per_frame", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("triangles_total");
-		statistics.addStatistic("lines_per_frame");
+		statistics.addStatistic("lines_per_frame", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("lines_total");
 		statistics.addStatistic("frames");
-		statistics.addStatistic("text_draws_per_frame");
-		statistics.addStatistic("rect_draws_per_frame");
+		statistics.addStatistic("text_draws_per_frame", StatisticSwapMode_SetToZero);
+		statistics.addStatistic("rect_draws_per_frame", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("gl_fps");
 		statistics[BATCHES_PER_FRAME]    = 0.0;
 		statistics[BATCHES_TOTAL]        = 0.0;
@@ -742,11 +725,11 @@ private:
 
 		// Projection statistics
 		statistics.addStatistic("batch_projections_none");
-		statistics.addStatistic("batch_projections_none_per_frame");
+		statistics.addStatistic("batch_projections_none_per_frame", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("batch_projections_cpu");
-		statistics.addStatistic("batch_projections_cpu_per_frame");
+		statistics.addStatistic("batch_projections_cpu_per_frame", StatisticSwapMode_SetToZero);
 		statistics.addStatistic("batch_projections_gpu");
-		statistics.addStatistic("batch_projections_gpu_per_frame");
+		statistics.addStatistic("batch_projections_gpu_per_frame", StatisticSwapMode_SetToZero);
 		statistics[BATCH_PROJECTIONS_NONE]           = 0.0;
 		statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] = 0.0;
 		statistics[BATCH_PROJECTIONS_CPU]            = 0.0;
@@ -768,18 +751,9 @@ private:
 	//! Clear per-frame statistics (called when a frame starts).
 	void clearFrameStatistics()
 	{
-		previousStatisticsFrontend = statisticsFrontend;
+		statistics.swap();
 		statistics[FRAMES] += 1.0;
-		statistics[BATCHES_PER_FRAME]                = 0.0;
-		statistics[VERTICES_PER_FRAME]               = 0.0;
-		statistics[TRIANGLES_PER_FRAME]              = 0.0;
-		statistics[LINES_PER_FRAME]                  = 0.0;
-		statistics[TEXT_DRAWS_PER_FRAME]             = 0.0;
-		statistics[RECT_DRAWS_PER_FRAME]             = 0.0;
-		statistics[BATCH_PROJECTIONS_NONE_PER_FRAME] = 0.0;
-		statistics[BATCH_PROJECTIONS_CPU_PER_FRAME]  = 0.0;
-		statistics[BATCH_PROJECTIONS_GPU_PER_FRAME]  = 0.0;
-		statistics[GL_FPS]                           = recentFrames.getFPS();
+		statistics[GL_FPS] = recentFrames.getFPS();
 	}
 
 	//! Handles gravity text logic. Called by draText().
