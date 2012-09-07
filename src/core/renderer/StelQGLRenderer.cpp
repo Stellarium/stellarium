@@ -383,7 +383,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		// function. QPixmap could be used as well (not sure which is faster, 
 		// needs profiling)
 		QImage image = areNonPowerOfTwoTexturesSupported() 
-		             ? QImage(requiredWidth, requiredHeight, QImage::Format_ARGB32) 
+		             ? QImage(requiredWidth, requiredHeight, QImage::Format_ARGB32_Premultiplied) 
 		             : QImage(StelUtils::smallestPowerOfTwoGreaterOrEqualTo(requiredWidth), 
 		                      StelUtils::smallestPowerOfTwoGreaterOrEqualTo(requiredHeight),
 		                      QImage::Format_ARGB32);
