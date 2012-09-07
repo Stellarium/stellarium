@@ -617,7 +617,7 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 	texFov = atexturefov*M_PI/180.f;
 	angleRotateZ = aangleRotateZ*M_PI/180.f;
 
-	const SphereParams params = SphereParams(radius).resolution(rows, cols).orientInside();
+	const SphereParams params = SphereParams(radius).resolution(cols, rows).orientInside();
 	fisheyeSphere = StelGeometryBuilder().buildSphereFisheye(params, texFov);
 }
 
@@ -653,7 +653,8 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 LandscapeSpherical::LandscapeSpherical(float _radius) 
 	: Landscape(_radius)
 	, mapTex(NULL)
-{}
+{
+}
 
 LandscapeSpherical::~LandscapeSpherical()
 {
@@ -697,7 +698,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 	mapTexPath = _maptex;
 
 	const SphereParams params 
-		= SphereParams(radius).resolution(20, 40).orientInside().flipTexture();
+		= SphereParams(radius).resolution(48, 20).orientInside().flipTexture();
 	landscapeSphere = StelGeometryBuilder().buildSphereUnlit(params);
 }
 
