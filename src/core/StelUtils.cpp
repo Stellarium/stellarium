@@ -1064,7 +1064,7 @@ double calculateOrbitalPeriod(double SemiMajorAxis)
 #if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #include <sys/time.h>
 #else
-#include <ctime>
+#include <time.h>
 #endif
 
 //! Get current time in seconds (relative to some arbitrary beginning in the past)
@@ -1083,7 +1083,7 @@ static long double getTime()
 	}
 	return static_cast<long double>(timeVal.tv_sec) + 0.000001L * timeVal.tv_usec;
 #else
-	std::clock_t cpuTime = std::clock();
+	clock_t cpuTime = clock();
 	return static_cast<long double>(cpuTime) / CLOCKS_PER_SEC;
 #endif
 }
