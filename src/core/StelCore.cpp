@@ -958,21 +958,20 @@ void StelCore::subtractSiderealYear()
 void StelCore::addSolarDays(double d)
 {
 	double dsol = 1;
-	double sp = 0;
-	double coeff;
+	double sp, coeff;
 	const PlanetP& home = position->getHomePlanet();
 	if (home->getEnglishName() != "Solar System StelObserver")
 	{
 		sp = home->getSiderealPeriod();
 		dsol = home->getSiderealDay();
+
+		if ((home->getEnglishName() == "Venus") || (home->getEnglishName() == "Uranus"))
+			coeff = -1 * (sp - 1)/sp;
+		else
+			coeff = (sp + 1)/sp;
+
+		d *= dsol*coeff;
 	}
-
-	if ((home->getEnglishName() == "Venus") || (home->getEnglishName() == "Uranus"))
-		coeff = -1 * (sp - 1)/sp;
-	else
-		coeff = (sp + 1)/sp;
-
-	d *= dsol*coeff;
 
 	setJDay(getJDay() + d);
 }
