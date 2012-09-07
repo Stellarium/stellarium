@@ -906,7 +906,12 @@ void StelCore::addSiderealMonth()
 
 void StelCore::addSiderealYear()
 {
-	addSolarDays(365.256363004);
+	double days = 365.256363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System StelObserver") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod();
+
+	addSolarDays(days);
 }
 
 
@@ -942,11 +947,31 @@ void StelCore::subtractSiderealMonth()
 
 void StelCore::subtractSiderealYear()
 {
-	addSolarDays(-365.256363004);
+	double days = 365.256363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System StelObserver") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod();
+
+	addSolarDays(-days);
 }
 
 void StelCore::addSolarDays(double d)
 {
+	double sp, coeff;
+	const PlanetP& home = position->getHomePlanet();
+	if (home->getEnglishName() != "Solar System StelObserver")
+	{
+		sp = home->getSiderealPeriod();
+		double dsol = home->getSiderealDay();
+
+		if ((home->getEnglishName() == "Venus") || (home->getEnglishName() == "Uranus"))
+			coeff = -1 * (sp - 1)/sp;
+		else
+			coeff = (sp + 1)/sp;
+
+		d *= dsol*coeff;
+	}
+
 	setJDay(getJDay() + d);
 }
 
