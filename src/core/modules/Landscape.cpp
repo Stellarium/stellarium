@@ -698,7 +698,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 	mapTexPath = _maptex;
 
 	const SphereParams params 
-		= SphereParams(radius).resolution(48, 20).orientInside().flipTexture();
+		= SphereParams(radius).resolution(64, 48).orientInside().flipTexture();
 	landscapeSphere = StelGeometryBuilder().buildSphereUnlit(params);
 }
 
