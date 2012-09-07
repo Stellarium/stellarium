@@ -28,11 +28,19 @@ void StelRenderer::drawLine
 	// Could be improved by keeping the vertex buffer as a data member,
 	// or even caching all rectangle draws to the same buffer and drawing them 
 	// at once at the end of the frame.
+	const VertexP2 start(round(startX), round(startY));
+	VertexP2 end(round(endX), round(endY));
+
+	// Make sure the line is always visible.
+	if(start.position == end.position)
+	{
+		end.position[1] -= 1.0f;
+	}
 	
 	// Create a vertex buffer for the line and draw it.
 	StelVertexBuffer<VertexP2>* buffer = createVertexBuffer<VertexP2>(PrimitiveType_Lines);
-	buffer->addVertex(VertexP2(startX, startY));
-	buffer->addVertex(VertexP2(endX, endY));
+	buffer->addVertex(start);
+	buffer->addVertex(end);
 	buffer->lock();
 	drawVertexBuffer(buffer);
 	delete buffer;
