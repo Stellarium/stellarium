@@ -155,9 +155,33 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
 	*/
 
+	// If semi-major axis not zero then calculate and display orbital period for comet in days
+	double siderealPeriod = getSiderealPeriod();
+	if ((flags&Extra1) && (siderealPeriod>0))
+	{
+		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+	}
+
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+void Comet::setSemiMajorAxis(double value)
+{
+	semiMajorAxis = value;
+}
+
+double Comet::getSiderealPeriod() const
+{
+	double period;
+	if (semiMajorAxis>0)
+		period = StelUtils::calculateOrbitalPeriod(semiMajorAxis);
+	else
+		period = 0;
+
+	return period;
 }
 
 float Comet::getVMagnitude(const StelCore* core, bool withExtinction) const

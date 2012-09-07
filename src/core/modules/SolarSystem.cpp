@@ -789,6 +789,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 
+			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
+
 		}
 		else
 		{
