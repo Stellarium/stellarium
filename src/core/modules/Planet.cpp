@@ -475,6 +475,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<br>";
 	}
 
+	double siderealPeriod = getSiderealPeriod();
+	if ((flags&Extra1) && (siderealPeriod>0))
+	{
+		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+	}
+
 	if ((flags&Extra2) && (englishName.compare("Sun")!=0))
 	{
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();

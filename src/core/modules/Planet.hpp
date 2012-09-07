@@ -211,6 +211,7 @@ public:
 	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
 	double getSiderealDay(void) const {return re.period;}
+	double getSiderealPeriod(void) const { return re.siderealPeriod; }
 
 	const QString& getTextMapName() const {return texMapName;}	
 
