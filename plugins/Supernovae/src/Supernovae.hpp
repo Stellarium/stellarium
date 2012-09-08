@@ -89,7 +89,7 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QString getName() const { return "Supernovae"; }
+	virtual QString getName() const { return "Historical Supernovae"; }
 
 	//! get a supernova object by identifier
 	SupernovaP getByID(const QString& id);
