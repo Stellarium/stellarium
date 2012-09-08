@@ -46,19 +46,19 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
 	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds),
-							  ccdModel,
-							  ccdModel->propertyMap());
+											ccdModel,
+											ccdModel->propertyMap());
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
 	Ocular* ocularModel = Ocular::ocularModel();
 	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars),
-								  ocularModel, ocularModel->propertyMap());
+												 ocularModel, ocularModel->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
 	Telescope* telescopeModel = Telescope::telescopeModel();
 	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
-									  telescopeModel,
-									  telescopeModel->propertyMap());
+														telescopeModel,
+														telescopeModel->propertyMap());
 	
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -235,7 +235,7 @@ void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
 	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->getGuiActions("actionShow_Ocular");
+	QAction* action = gui->getGuiAction("actionShow_Ocular");
 	if (action != NULL) {
 		action->setShortcut(QKeySequence(newString.trimmed()));
 	}
@@ -246,12 +246,12 @@ void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newStrin
 	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->getGuiActions("actionShow_Ocular_Menu");
+	QAction* action = gui->getGuiAction("actionShow_Ocular_Menu");
 	if (action != NULL) {
 		action->setShortcut(QKeySequence(newString.trimmed()));
 	}
 }
-					  
+
 void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
@@ -284,7 +284,7 @@ void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+					this, SLOT(retranslate()));
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
@@ -326,28 +326,28 @@ void OcularDialog::createDialogContent()
 	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
 	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)),
-	        this, SLOT(keyBindingTogglePluginChanged(const QString&)));
+					this, SLOT(keyBindingTogglePluginChanged(const QString&)));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)),
-	        this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
+					this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
 	
 	initAboutText();
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(QString)),
-	        this, SLOT(initAboutText()));
+					this, SLOT(initAboutText()));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(QString)),
-	        this, SLOT(initAboutText()));
+					this, SLOT(initAboutText()));
 
 	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
-	       this, SLOT(moveUpSelectedOcular()));
+					this, SLOT(moveUpSelectedOcular()));
 	connect(ui->pushButtonMoveOcularDown, SIGNAL(pressed()),
-	        this, SLOT(moveDownSelectedOcular()));
+					this, SLOT(moveDownSelectedOcular()));
 	connect(ui->pushButtonMoveSensorUp, SIGNAL(pressed()),
-	        this, SLOT(moveUpSelectedSensor()));
+					this, SLOT(moveUpSelectedSensor()));
 	connect(ui->pushButtonMoveSensorDown, SIGNAL(pressed()),
-	        this, SLOT(moveDownSelectedSensor()));
+					this, SLOT(moveDownSelectedSensor()));
 	connect(ui->pushButtonMoveTelescopeUp, SIGNAL(pressed()),
-	        this, SLOT(moveUpSelectedTelescope()));
+					this, SLOT(moveUpSelectedTelescope()));
 	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()),
-	        this, SLOT(moveDownSelectedTelescope()));
+					this, SLOT(moveDownSelectedTelescope()));
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -362,7 +362,7 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdResY, 6);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+					ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
 	// The ocular mapper
@@ -376,7 +376,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			  ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
 	// The telescope mapper
@@ -390,7 +390,7 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->addMapping(ui->telescopeVFlip, 4, "checked");
 	ocularMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+					telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
@@ -438,9 +438,9 @@ void OcularDialog::initAboutText()
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* actionOcular = gui->getGuiActions("actionShow_Ocular");
+	QAction* actionOcular = gui->getGuiAction("actionShow_Ocular");
 	Q_ASSERT(actionOcular);
-	QAction* actionMenu = gui->getGuiActions("actionShow_Ocular_Menu");
+	QAction* actionMenu = gui->getGuiAction("actionShow_Ocular_Menu");
 	Q_ASSERT(actionMenu);
 	QKeySequence ocularShortcut = actionOcular->shortcut();
 	QString ocularString = ocularShortcut.toString(QKeySequence::NativeText);

@@ -98,10 +98,9 @@ void RendererStatistics::init()
 		onIcon       = new QPixmap(":/RendererStatistics/btRendererStatistics_on.png");
 		offIcon      = new QPixmap(":/RendererStatistics/btRendererStatistics_off.png");
 
-		gui->addGuiActions("actionShow_RendererStatistics", N_("Show renderer statistics"), "", N_("Plugin Key Bindings"), true, false);
-		toolbarButton = new StelButton(NULL, *onIcon, *offIcon, *glowIcon, gui->getGuiActions("actionShow_RendererStatistics"));
+		toolbarButton = new StelButton(NULL, *onIcon, *offIcon, *glowIcon, gui->getGuiAction("actionShow_RendererStatistics"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(gui->getGuiActions("actionShow_RendererStatistics"), SIGNAL(toggled(bool)), this, SLOT(setEnabled(bool)));
+		connect(gui->getGuiAction("actionShow_RendererStatistics"), SIGNAL(toggled(bool)), this, SLOT(setEnabled(bool)));
 
 		QSettings* conf = StelApp::getInstance().getSettings();
 		setEnabled(conf->value("RendererStatistics/enable_at_startup", false).toBool());

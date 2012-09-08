@@ -117,6 +117,10 @@ SET(stellarium_lib_SRCS
 	core/RefractionExtinction.cpp
 	core/StelLoadingBar.cpp
 	core/StelLoadingBar.hpp 
+	core/StelShortcutMgr.hpp
+	core/StelShortcutMgr.cpp
+	core/StelShortcutGroup.cpp
+	core/StelShortcutGroup.hpp
 
 	core/Triplet.hpp
 
@@ -393,6 +397,8 @@ SET(stellarium_MOC_HDRS
 	core/StelSkyLayer.hpp
 	core/StelSkyCultureMgr.hpp
 	core/SimbadSearcher.hpp
+	core/StelShortcutMgr.hpp
+	core/StelShortcutGroup.hpp
 	core/renderer/StelTextureBackend.hpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp
@@ -436,6 +442,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/StelGuiItems.cpp
 		gui/HelpDialog.hpp
 		gui/HelpDialog.cpp
+		gui/ShortcutsDialog.hpp
+		gui/ShortcutsDialog.cpp
 		gui/Dialog.hpp
 		gui/Dialog.cpp
 		gui/MapLabel.hpp
@@ -465,6 +473,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SkyGui.hpp
 		gui/StelGuiItems.hpp
 		gui/HelpDialog.hpp
+		gui/ShortcutsDialog.hpp
 		gui/Dialog.hpp
 		gui/MapLabel.hpp
 		gui/AngleSpinBox.hpp
@@ -481,6 +490,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	SET(stellarium_UIS
 	gui/locationDialogGui.ui
 	gui/helpDialogGui.ui
+	gui/shortcutsDialog.ui
 	gui/dateTimeDialogGui.ui
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
@@ -629,7 +639,7 @@ ENDIF()
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Pulsars/src/${CMAKE_CFG_INTDIR}/libPulsars.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_PULSARS)
   ENDIF()
-  
+
   IF (USE_PLUGIN_EXOPLANETS)
     SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/${CMAKE_CFG_INTDIR}/libExoplanets.a")
     ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_EXOPLANETS)

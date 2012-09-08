@@ -159,23 +159,19 @@ void Exoplanets::init()
 		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
 
 		// key bindings and other actions
-		// TRANSLATORS: Title of a group of key bindings in the Help window
-		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Exoplanets/btExoplanets-on.png");
 		OffIcon = new QPixmap(":/Exoplanets/btExoplanets-off.png");
 
-		gui->addGuiActions("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets configuration window"), "", groupName, true, false);
-		gui->addGuiActions("actionShow_Exoplanets", N_("Show exoplanets"), "Ctrl+Alt+E", groupName, true, false);
-		gui->getGuiActions("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiActions("actionShow_Exoplanets"));
+		gui->getGuiAction("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
+		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Exoplanets"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 
-		connect(gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
-		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiActions("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
+		connect(gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
+		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -502,7 +498,7 @@ bool Exoplanets::configureGui(bool show)
 	if (show)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_Exoplanets_ConfigDialog")->setChecked(true);
+		gui->getGuiAction("actionShow_Exoplanets_ConfigDialog")->setChecked(true);
 	}
 
 	return true;
