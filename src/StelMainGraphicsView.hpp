@@ -33,7 +33,7 @@ class StelQGLWidget;
 
 //! @class StelMainGraphicsView
 //! Reimplement a QGraphicsView for Stellarium.
-//! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
+//! It is the class creating the main StelApp instance as well as the main GUI.
 class StelMainGraphicsView : public QGraphicsView
 {
 Q_OBJECT
@@ -47,8 +47,8 @@ public:
 	//! Get the StelMainGraphicsView singleton instance.
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
-	//! Delete openGL textures (to call before the GLContext disappears)
-	void deinitGL();
+	//! Delete textures (to call before the renderer disappears)
+	void deinit();
 
 	//! Return the QGraphicsWidget encapsulating the Stellarium main sky view.
 	//! Use its layout if you want to add widget on the top of the main sky view.
@@ -150,9 +150,8 @@ private:
 	QGraphicsWidget* backItem;
 	class StelAppGraphicsWidget* mainSkyItem;
 
-	//! The openGL window
-	StelQGLWidget* glWidget;
-	class QGLContext* glContext;
+	//! Handles all rendering (e.g. GL) functionality.
+	class StelRenderer* renderer;
 
 	StelGuiBase* gui;
 

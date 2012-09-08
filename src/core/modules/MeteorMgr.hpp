@@ -49,7 +49,7 @@ public:
 	virtual void init();
 	
 	//! Draw meteors.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	
 	//! Update time-dependent parts of the module.
 	//! This function adds new meteors to the list of currently visiable

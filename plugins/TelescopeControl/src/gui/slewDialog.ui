@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>291</height>
+    <width>440</width>
+    <height>352</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -178,19 +178,13 @@
          <property name="margin">
           <number>0</number>
          </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelRA">
+         <item row="0" column="1">
+          <widget class="AngleSpinBox" name="spinBoxRA">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
-           </property>
-           <property name="text">
-            <string>&amp;Right Ascension (J2000):</string>
-           </property>
-           <property name="buddy">
-            <cstring>spinBoxRA</cstring>
            </property>
           </widget>
          </item>
@@ -210,6 +204,22 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelRA">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>&amp;Right Ascension (J2000):</string>
+           </property>
+           <property name="buddy">
+            <cstring>spinBoxRA</cstring>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="1">
           <widget class="AngleSpinBox" name="spinBoxDec">
            <property name="sizePolicy">
@@ -220,13 +230,10 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="AngleSpinBox" name="spinBoxRA">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+         <item row="2" column="0" colspan="2">
+          <widget class="QPushButton" name="pushButtonCurrent">
+           <property name="text">
+            <string>&amp;Current object</string>
            </property>
           </widget>
          </item>

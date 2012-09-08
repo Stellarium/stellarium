@@ -74,9 +74,16 @@ public:
 	//! as the same parameters in MinorPlanet.
 	void setAbsoluteMagnitudeAndSlope(double magnitude, double slope);
 
+	//! set value for semi-major axis in AU
+	void setSemiMajorAxis(double value);
+
+	//! get sidereal period for minor planet
+	double getSiderealPeriod() const;
+
 private:
 	double absoluteMagnitude;
 	double slopeParameter;
+	double semiMajorAxis;
 
 	bool isCometFragment;
 	bool nameIsProvisionalDesignation;

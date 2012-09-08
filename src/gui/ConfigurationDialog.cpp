@@ -231,6 +231,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+	ui->renderSolarShadowsCheckbox->setChecked(StelApp::getInstance().getRenderSolarShadows());
+	connect(ui->renderSolarShadowsCheckbox, SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setRenderSolarShadows(bool)));
 
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
@@ -378,7 +380,9 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	if (ui->checkBoxExtra2->isChecked())
 		flags |= StelObject::Extra2;
 	if (ui->checkBoxExtra3->isChecked())
-		flags |= StelObject::Extra3;
+		flags |= StelObject::Extra3;	
+	if (ui->checkBoxGalacticCoordJ2000->isChecked())
+		flags |= StelObject::GalCoordJ2000;
 	
 	gui->setInfoTextFilters(flags);
 }
@@ -553,6 +557,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Extra2));
 		conf->setValue("flag_show_extra3",
 		               (bool) (flags & StelObject::Extra3));
+		conf->setValue("flag_show_galcoordj2000",
+			       (bool) (flags & StelObject::GalCoordJ2000));
 		conf->endGroup();
 	}
 
@@ -583,6 +589,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("video/viewport_effect", StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
+	conf->setValue("viewing/flag_render_solar_shadows", StelApp::getInstance().getRenderSolarShadows());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainGraphicsView::getInstance().getFlagCursorTimeout());
 	conf->setValue("gui/mouse_cursor_timeout", StelMainGraphicsView::getInstance().getCursorTimeout());
@@ -1030,6 +1037,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxExtra1->setChecked(flags & StelObject::Extra1);
 	ui->checkBoxExtra2->setChecked(flags & StelObject::Extra2);
 	ui->checkBoxExtra3->setChecked(flags & StelObject::Extra3);
+	ui->checkBoxGalacticCoordJ2000->setChecked(flags & StelObject::GalCoordJ2000);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()

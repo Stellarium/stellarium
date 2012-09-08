@@ -32,7 +32,7 @@ class StelAppGraphicsWidget : public QGraphicsWidget
 {
 	Q_OBJECT
 public:
-	StelAppGraphicsWidget();
+	StelAppGraphicsWidget(class StelRenderer* renderer);
 	~StelAppGraphicsWidget();
 
 	//! Initialize the StelAppGraphicsWidget.
@@ -61,28 +61,18 @@ protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
 
 private:
+	//! Provides Renderer with access to paintPartial.
+	friend class StelAppGraphicsWidgetRenderClient;
+
 	double previousPaintTime;
-	//! The time at the last time re refreshed the frame
-	//! Since paint may decide to stop before we finish to render a complete scene, this is not necessarily the same
-	//! than `previousPaintTime`.
-	double previousPaintFrameTime;
 	//! The main application instance.
 	class StelApp* stelApp;
 	//! The state of paintPartial method
 	int paintState;
+	
+	//! Used for all graphics functionality.
+	class StelRenderer* renderer;
 
-	//! set to true to use buffers
-	bool useBuffers;
-	//! The framebuffer where we are currently drawing the scene
-	class QGLFramebufferObject* backgroundBuffer;
-	//! The framebuffer that we use while waiting for the drawing to be done
-	class QGLFramebufferObject* foregroundBuffer;
-
-	//! Initialize the opengl buffer objects.
-	void initBuffers();
-	//! Swap the buffers
-	//! this should be called after we finish the paint
-	void swapBuffers();
 	//! Iterate through the drawing sequence.
 	bool paintPartial();
 

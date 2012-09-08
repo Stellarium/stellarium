@@ -104,6 +104,9 @@ public:
 	//! set value for semi-major axis in AU
 	void setSemiMajorAxis(double value);
 
+	//! get sidereal period for minor planet
+	double getSiderealPeriod() const;
+
 private:
 	int minorPlanetNumber;
 	double absoluteMagnitude;

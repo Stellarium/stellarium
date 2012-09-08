@@ -45,7 +45,7 @@ public:
 	virtual void init();
 
 	//! Draws sky background
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update state which is time dependent.
 	virtual void update(double) {;}

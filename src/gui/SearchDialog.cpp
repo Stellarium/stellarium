@@ -523,7 +523,6 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 
 void SearchDialog::populateSimbadServerList()
 {
-	Q_ASSERT(ui);
 	Q_ASSERT(ui->serverListComboBox);
 
 	QComboBox* servers = ui->serverListComboBox;

@@ -24,9 +24,8 @@
 #include <QString>
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
-#include "StelTextureTypes.hpp"
+#include "StelProjectorType.hpp"
 
-class StelPainter;
 class QDataStream;
 
 class Nebula : public StelObject
@@ -71,6 +70,28 @@ public:
 
 private:
 	friend struct DrawNebulaFuncObject;
+
+	//! Textures used to draw nebula hints.
+	struct NebulaHintTextures
+	{
+		//! The symbolic circle texture.
+		class StelTextureNew* texCircle;  
+		//! The open cluster marker texture.
+		class StelTextureNew* texOpenCluster;
+		//! The globular cluster marker texture.
+		class StelTextureNew* texGlobularCluster;
+		//! The planetary nebula marker texture.
+		class StelTextureNew* texPlanetaryNebula;
+		//! Are we initialized yet?
+		bool initialized;
+
+		//! Default constructor - construct uninitialized NebulaHintTextures.
+		NebulaHintTextures(): initialized(false){}
+		//! Destructor - frees resources if initialized.
+		~NebulaHintTextures();
+		//! Lazily initialize the data, using given renderer to create textures/shader.
+		void lazyInit(class StelRenderer* renderer);
+	};
 	
 	//! @enum NebulaType Nebula types
 	enum NebulaType
@@ -92,8 +113,8 @@ private:
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);
 			
-	void drawLabel(StelPainter& sPainter, float maxMagLabel);
-	void drawHints(StelPainter& sPainter, float maxMagHints);
+	void drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintTextures& hintTextures);
+	void drawLabel(StelRenderer* renderer, StelProjectorP projector, float maxMagLabel);
 
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
@@ -108,10 +129,6 @@ private:
 
 	SphericalRegionP pointRegion;
 
-	static StelTextureSP texCircle;   // The symbolic circle texture
-	static StelTextureSP texOpenCluster;
-	static StelTextureSP texGlobularCluster;
-	static StelTextureSP texPlanetNebula;
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;

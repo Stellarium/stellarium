@@ -28,13 +28,13 @@
 #include "TuiNodeEnum.hpp"
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -52,11 +52,14 @@
 #endif
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
+#include "renderer/StelRenderer.hpp"
 
-#include <QtOpenGL>
+
 #include <QKeyEvent>
 #include <QDebug>
 #include <QLabel>
+#include <QTime>
+#include <QProcess>
 
 /*************************************************************************
  Utility functions
@@ -471,7 +474,8 @@ void TextUserInterface::init()
 	TuiNode* m8_2 = new TuiNodeActivate(N_("Save current configuration"),
 	                                    this, SLOT(saveDefaultSettings()),
 	                                    m8, m8_1);
-	TuiNode* m8_3 = new TuiNode(N_("Shut down"), m8, m8_2);
+	TuiNode* m8_3 = new TuiNodeActivate(N_("Shut down"), this, SLOT(shutDown()), 
+					    m8, m8_2);
 	m8_1->setNextNode(m8_2);
 	m8_2->setNextNode(m8_3);
 	m8_3->setNextNode(m8_1);
@@ -491,44 +495,119 @@ void TextUserInterface::loadConfiguration(void)
 	Q_ASSERT(conf);
 
 	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
+	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
+	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
+	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
 }
 
 /*************************************************************************
  Draw our module.
 *************************************************************************/
-void TextUserInterface::draw(StelCore* core)
+void TextUserInterface::draw(StelCore* core, StelRenderer* renderer)
 {
+	if (!tuiActive && !tuiDateTime && !tuiObjInfo)
+		return;
+
+	int x = 0, y = 0;
+	int xVc = 0, yVc = 0;
+	int pixOffset = 15;
+	int fovOffsetX = 0, fovOffsetY=0;
+	bool fovMaskDisk = false;
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui->getVisible())
+	{
+		QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
+		LeftStelBar* sideBar = gui->getWindowsButtonBar();			
+		x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
+		y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+	}
+
+	// Alternate x,y for Disk viewport
+	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
+	{
+		fovMaskDisk = true;
+		StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
+		xVc = projParams.viewportCenter[0];
+		yVc = projParams.viewportCenter[1];
+		fovOffsetX = projParams.viewportFovDiameter*std::sin(20)/2;
+		fovOffsetY = projParams.viewportFovDiameter*std::cos(20)/2;
+	}
+	else 
+	{
+		xVc = core->getProjection(StelCore::FrameJ2000)->getViewportWidth()/2;
+	}
+
 	if (tuiActive)
 	{
-		int x = 0, y = 0;
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui->getVisible())
-		{
-			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
-			LeftStelBar* sideBar = gui->getWindowsButtonBar();			
-			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
-			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+		int text_x = x + pixOffset, text_y = y + pixOffset;
+		if (fovMaskDisk) {
+			text_x = xVc - fovOffsetX + pixOffset;
+			text_y = yVc - fovOffsetY + pixOffset;
 		}
-
-		// Alternate x,y for Disk viewport
-		if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-		{
-			StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
-			x = projParams.viewportCenter[0] - projParams.viewportFovDiameter/2;
-			y = projParams.viewportCenter[1];
-		}
-		
-		x += 20;
-		y += 15;
-
+			
 		QString tuiText = q_("[no TUI node]");
-		if (currentNode!=NULL)
+		if (currentNode!=NULL) {
 			tuiText = currentNode->getDisplayText();
+		}
 
-		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-		painter.setFont(font);
-		painter.setColor(0.3,1,0.3);
-		painter.drawText(x, y, tuiText, 0, 0, 0, false);
+		renderer->setFont(font);
+		renderer->setGlobalColor(0.3f, 1.0f, 0.3f);
+		TextParams params = TextParams(text_x, text_y, tuiText)
+		                    .projector(core->getProjection(StelCore::FrameJ2000));
+		if(tuiGravityUi){params.useGravity();}
+		renderer->drawText(params);
+	}
+
+	if (tuiDateTime) 
+	{
+		double jd = core->getJDay();
+		int text_x = x + xVc*2/3, text_y = y + pixOffset;
+
+		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) + "   "
+                       +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd);
+		 
+		if (fovMaskDisk) {
+			text_x = xVc + fovOffsetY - pixOffset;
+			text_y = yVc - fovOffsetX + pixOffset;
+		}
+
+		renderer->setFont(font);
+		renderer->setGlobalColor(0.3f, 1.0f, 0.3f);
+		TextParams params = TextParams(text_x, text_y, newDate)
+		                    .projector(core->getProjection(StelCore::FrameAltAz));
+		if(tuiGravityUi){params.useGravity();}
+		renderer->drawText(params);
+	}
+
+	if (tuiObjInfo) 
+	{
+		QString objInfo = ""; 
+		StelObject::InfoStringGroup tuiInfo(StelObject::Name|StelObject::CatalogNumber
+				|StelObject::Distance|StelObject::PlainText);
+		int text_x = x + xVc*4/3, text_y = y + pixOffset; 
+
+		QList<StelObjectP> selectedObj = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+		if (selectedObj.isEmpty()) {
+			objInfo = "";	
+		} else {
+			objInfo = selectedObj[0]->getInfoString(core, tuiInfo);
+			objInfo.replace("\n"," ");
+			objInfo.replace("Distance:"," ");
+			objInfo.replace("Light Years","ly");
+		}
+
+		if (fovMaskDisk) {
+			text_x = xVc + fovOffsetX - pixOffset;
+			text_y = yVc + fovOffsetY - pixOffset;
+		}
+
+		renderer->setFont(font);
+		renderer->setGlobalColor(0.3f, 1.0f, 0.3f);
+		TextParams params = TextParams(text_x, text_y, objInfo)
+		                    .projector(core->getProjection(StelCore::FrameJ2000));
+		if(tuiGravityUi){params.useGravity();}
+		renderer->drawText(params);
 	}
 }
 
@@ -739,6 +818,12 @@ void TextUserInterface::saveDefaultSettings(void)
 	qDebug() << "TextUserInterface::saveDefaultSettings done";
 }
 
-
-
-
+void TextUserInterface::shutDown()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString shutdownCmd = conf->value("tui/admin_shutdown_cmd", "").toString();
+	int err; 
+	if (!(err = QProcess::execute(shutdownCmd))) {
+		qDebug() << "[TextUserInterface] shutdown error, QProcess::execute():" << err;
+	}
+}

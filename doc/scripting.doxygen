@@ -29,7 +29,7 @@ Since version 0.10.1, Stellarium includes a scripting feature based on the
 This makes it possible to write small programs within Stellarium to produce 
 presentations, set up custom configurations, and to automate repetitive 
 tasks.  Prior to version 0.10.0, Stellarium used a different scripting engine 
-called @ref StratoScript.
+called @ref stratoscript.
 
 The core scripting language is
 <a href="http://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, giving users
@@ -38,7 +38,7 @@ string manipulation and so on. Interaction with Stellarium-specific features
 is done via a collection of objects which represent components of Stellarium
 itself.  See @ref scripting_api for more details.
 
-@section scratoscript StratoScript
+@section stratoscript StratoScript
 
 Prior to version 0.10.0, Stellarium had a simple scripting engine, known as 
 \e StratoScript.  Using \e StratoScript it was possible to record and play back 

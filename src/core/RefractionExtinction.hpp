@@ -48,6 +48,7 @@ public:
 	Extinction();
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
 	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! @param mag the magnitudes
 	//! This call must therefore be done after application of Refraction, and only if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(const Vec3d *altAzPos, float *mag, const int num=1) const;
@@ -59,6 +60,7 @@ public:
 
 	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
 	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! @param mag the magnitudes
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(const Vec3d *altAzPos, float *mag, const int num=1) const;
 	void backward(const Vec3f *altAzPos, float *mag, const int num=1) const;
@@ -105,31 +107,124 @@ public:
 	//! Apply refraction.
 	//! @param altAzPos is the geometrical star position vector, to be transformed into apparent position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(Vec3d& altAzPos) const;
+	virtual void forward(Vec3d& altAzPos) const;
 
 	//! Remove refraction from position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(Vec3d& altAzPos) const;
+	virtual void backward(Vec3d& altAzPos) const;
 
 	//! Apply refraction.
 	//! @param altAzPos is the geometrical star position vector, to be transformed into apparent position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(Vec3f& altAzPos) const;
+	virtual void forward(Vec3f& altAzPos) const;
 
 	//! Remove refraction from position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(Vec3f& altAzPos) const;
+	virtual void backward(Vec3f& altAzPos) const;
 
-	void combine(const Mat4d& m)
+	virtual void combine(const Mat4d& m)
 	{
 		setPreTransfoMat(preTransfoMat*m);
 	}
 
-	Mat4d getApproximateLinearTransfo() const {return postTransfoMat*preTransfoMat;}
+	virtual Mat4d getApproximateLinearTransfo() const {return postTransfoMat*preTransfoMat;}
 
-	StelProjector::ModelViewTranformP clone() const {Refraction* refr = new Refraction(); *refr=*this; return StelProjector::ModelViewTranformP(refr);}
+	virtual StelProjector::ModelViewTranformP clone() const {Refraction* refr = new Refraction(); *refr=*this; return StelProjector::ModelViewTranformP(refr);}
+
+	virtual bool setupGLSLTransform(StelGLSLShader* shader)
+	{
+		Q_UNUSED(shader);
+		return false;
+
+		// GL-REFACTOR:
+		//
+		// I reimplemented the forward() member function in GLSL, but the result is
+		// not usable at the moment.
+		//
+		// On Intel drivers, the projection gets completely messed up.
+		// On AMD, most of the time, the coordinates are projected in slightly 
+		// different locations (e.g. a planet is slightly above/below where it's
+		// supposed to be), and there is very nasty jitter on the individual vertex 
+		// positions.
+		// NVidia behaves the same, _and_ the viewport borders are messed up.
+		//
+		//
+		// The most likely cause of the problem is the imprecision of GLSL 
+		// sin, asin and tan (which AFAIK are implemented through low-resolution 
+		// lookup tables in hardware).
+		//
+		// However, it is also possible that I incorrectly translated forward() to 
+		// GLSL.
+		//
+		//
+		// Different possible ways to implement refraction in GLSL would be 
+		// to use custom, higher-resolution lookup tables (textures), or to use 
+		// a different, maybe simpler (less trig) algorithm for refraction.
+
+		// if(!shader->hasVertexShader("RefractionTransform"))
+		// {
+		// 	static const QString source(
+		// 		"uniform mat4 preTransfoMat;\n"
+		// 		"uniform mat4 postTransfoMat;\n"
+		// 		"uniform float press_temp_corr_Saemundson;\n"
+		// 		"// These values must match the C++ code.\n"
+		// 		"const float MIN_GEO_ALTITUDE_DEG = -3.54;\n"
+		// 		"const float TRANSITION_WIDTH_GEO_DEG = 1.46;\n"
+		// 		"\n"
+		// 		"vec4 modelViewForward(in vec4 altAzPos)\n"
+		// 		"{\n"
+		// 		"    vec4 localAltAzPos = preTransfoMat * altAzPos;\n"
+		// 		"    float len = length(localAltAzPos.xyz);\n"
+		// 		"    float geom_alt_deg = degrees(asin(localAltAzPos.z / len));\n"
+		// 		"    if(geom_alt_deg > MIN_GEO_ALTITUDE_DEG)\n"
+		// 		"    {\n"
+		// 		"        // refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.\n"
+		// 		"        float r = press_temp_corr_Saemundson / \n"
+		// 		"                  tan(radians(geom_alt_deg + 10.3 / (geom_alt_deg + 5.11))) + 0.0019279;\n"
+		// 		"        geom_alt_deg += r;\n"
+		// 		"        geom_alt_deg = min(geom_alt_deg, 90.0); // SAFETY\n" 
+		// 		"        localAltAzPos.z = sin(radians(geom_alt_deg)) * len;\n"
+		// 		"    }\n"
+		// 		"    else if(geom_alt_deg > (MIN_GEO_ALTITUDE_DEG - TRANSITION_WIDTH_GEO_DEG))\n"
+		// 		"    {\n"
+		// 		"        // Avoids the jump below -5 by interpolating linearly between\n"
+		// 		"        // MIN_GEO_ALTITUDE_DEG and bottom of transition zone\n"
+		// 		"        float r_m5 = press_temp_corr_Saemundson / \n"
+		// 		"                     tan(radians(MIN_GEO_ALTITUDE_DEG + 10.3 / (MIN_GEO_ALTITUDE_DEG + 5.11)))\n"
+		// 		"                     + 0.0019279;\n"
+		// 		"        geom_alt_deg += r_m5 * \n"
+		// 		"                        (geom_alt_deg - (MIN_GEO_ALTITUDE_DEG - TRANSITION_WIDTH_GEO_DEG)) /\n"
+		// 		"                        TRANSITION_WIDTH_GEO_DEG;\n"
+		// 		"        localAltAzPos.z = sin(radians(geom_alt_deg)) * len;\n"
+		// 		"    }\n"
+		// 		"    return postTransfoMat * localAltAzPos;\n"
+		// 		"}\n");
+
+		// 	if(!shader->addVertexShader("RefractionTransform", source))
+		// 	{
+		// 		return false;
+		// 	}
+		// 	qDebug() << "Build log after adding a refraction shader: " << shader->log();
+		// }
+		// shader->enableVertexShader("RefractionTransform");
+		// return true;
+	}
+
+	virtual void setGLSLUniforms(StelGLSLShader* shader)
+	{
+		Q_UNUSED(shader);
+		// shader->setUniformValue("preTransfoMat", preTransfoMatf);
+		// shader->setUniformValue("postTransfoMat", postTransfoMatf);
+		// shader->setUniformValue("press_temp_corr_Saemundson", press_temp_corr_Saemundson);
+	}
+
+	virtual void disableGLSLTransform(StelGLSLShader* shader)
+	{
+		Q_UNUSED(shader);
+		// shader->disableVertexShader("RefractionTransform");
+	}
 
 	//! Set surface air pressure (mbars), influences refraction computation.
 	void setPressure(float p_mbar);
