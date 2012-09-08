@@ -24,20 +24,21 @@
 #include <QSharedPointer>
 #include "StelCore.hpp"
 
+#include "StelProjectorType.hpp"
+
 class StelCore;
-class StelPainter;
 
 //! Abstract class defining the API to implement for all sky layer.
 //! A sky layer is a graphical layer containing image or polygons displayed in the sky.
-//! The StelSkyImageMgr allows to set the display order for layers, as well as opacity.
+//! The StelSkyLayerMgr allows to set the display order for layers, as well as opacity.
 class StelSkyLayer : public QObject
 {
 	Q_OBJECT
 public:
-	StelSkyLayer(QObject* parent=NULL) : QObject(parent) {;}
+	StelSkyLayer(QObject* parent=NULL) : QObject(parent), frameType(StelCore::FrameUninitialized) {;}
 
 	//! Draws the content of the layer.
-	virtual void draw(StelCore* core, StelPainter& sPainter, float opacity=1.)=0;
+	virtual void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, float opacity=1.)=0;
 
 	//! Return the short name to display in the loading bar.
 	virtual QString getShortName() const =0;

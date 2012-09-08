@@ -71,7 +71,7 @@ public:
 	virtual void init();
 
 	//! Draw the landscape graphics, cardinal points and atmosphere.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update time-dependent state.
 	//! Includes:
@@ -226,24 +226,24 @@ public slots:
 	//! @todo Find a better way to pass error messages.
 	QString installLandscapeFromArchive(QString pathToSourceArchive, bool display = false, bool forAllUsers = false);
 
-	//! Install a landscape from a directory.
-	//! Expected directory structure: the name of the directory that contains
-	//! a landscape.ini file is assumed to be the landscape ID and should be
-	//! unique.
-	//! This directory and all files in it will be installed, but its
-	//! subdirectories will be skipped along with any other files or
-	//! directories in the archive.
-	//! @param pathToSourceLandscapeIni path to a landscape.ini file. Its parent
-	//! directory is assumed to be the landscape source directory.
-	//! @param display If true, the landscape will be set to be the current
-	//! landscape after installation.
-	//! @param forAllUsers If true, this function will try to install the
-	//! landscape in a way that meakes it is available to all users of this
-	//! computer. May require running Stellarium as an administrator (root)
-	//! on some Windows or *nix systems. (NOT IMPLEMENTED!)
-	//! @returns the installed landscape's identifier (the folder name), or
-	//! an empty string on failure.
-	//QString installLandscapeFromDirectory(QString pathToSourceLandscapeIni, bool display = false, bool forAllUsers = false);
+	// //! Install a landscape from a directory.
+	// //! Expected directory structure: the name of the directory that contains
+	// //! a landscape.ini file is assumed to be the landscape ID and should be
+	// //! unique.
+	// //! This directory and all files in it will be installed, but its
+	// //! subdirectories will be skipped along with any other files or
+	// //! directories in the archive.
+	// //! @param pathToSourceLandscapeIni path to a landscape.ini file. Its parent
+	// //! directory is assumed to be the landscape source directory.
+	// //! @param display If true, the landscape will be set to be the current
+	// //! landscape after installation.
+	// //! @param forAllUsers If true, this function will try to install the
+	// //! landscape in a way that meakes it is available to all users of this
+	// //! computer. May require running Stellarium as an administrator (root)
+	// //! on some Windows or *nix systems. (NOT IMPLEMENTED!)
+	// //! @returns the installed landscape's identifier (the folder name), or
+	// //! an empty string on failure.
+	// QString installLandscapeFromDirectory(QString pathToSourceLandscapeIni, bool display = false, bool forAllUsers = false);
 
 	//! This function removes a landscape from the user data directory.
 	//! It tries to recursively delete all files in the landscape directory
@@ -251,7 +251,7 @@ public slots:
 	//! If the function encounters any file that can't be deleted
 	//! it aborts the operation (previously deleted files are not restored).
 	//! Landscapes that were packaged with Stellarium can't be removed,
-	//! thanks to the #packagedtLandscapeIDs list.
+	//! thanks to the #packagedLandscapeIDs list.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @todo Find a better way to pass error messages.
 	bool removeLandscape(QString landscapeID);

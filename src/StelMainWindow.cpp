@@ -102,14 +102,14 @@ void StelMainWindow::init(QSettings* conf)
 		move(x, y);
 	}
 	show();
-	// Process the event to make the window visible and create the openGL context.
+	// Process the event to make the window visible and create the renderer.
 	QCoreApplication::processEvents();
 	mainGraphicsView->init(conf);
 }
 
 void StelMainWindow::deinit()
 {
-	mainGraphicsView->deinitGL();
+	mainGraphicsView->deinit();
 }
 
 // Alternate fullscreen mode/windowed mode if possible
