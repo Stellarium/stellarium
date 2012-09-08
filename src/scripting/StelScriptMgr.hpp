@@ -57,6 +57,10 @@ public:
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
 	QString runningScriptId();
+
+	// Pre-processor functions
+	bool preprocessScript(const QString& input, QString& output, const QString& scriptDir);
+	bool preprocessScript(QFile &input, QString& output, const QString& scriptDir);
 	
 	//! Add all the StelModules into the script engine
 	void addModules();
@@ -93,6 +97,11 @@ public slots:
 	//! If the file is not found or cannot be opened for some reason, an 
 	//! Empty string will be returned.
 	const QString getDescription(const QString& s);
+
+	//! Run the prprocessed script
+	//! @param preprocessedScript the string containing the preprocessed script.
+	//! @return false if the given script could not be run, true otherwise
+	bool runPreprocessedScript(const QString& preprocessedScript);
 
 	//! Run the script located at the given location
 	//! @param fileName the location of the file containing the script.
@@ -144,8 +153,6 @@ private:
 	// Utility functions for preprocessor
 	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
-	// Pre-processor functions
-	bool preprocessScript(QFile& input, QString& output, const QString& scriptDir);
 
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 	bool preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir);

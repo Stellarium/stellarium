@@ -76,7 +76,7 @@ void SatellitesDialog::retranslate()
 		ui->retranslateUi(dialog);
 		refreshUpdateValues();
 		setAboutHtml();
-		// This may be a problem if we add group name translations, as the 
+		// This may be a problem if we add group name translations, as the
 		// sorting order may be different. --BM
 		int index = ui->groupsCombo->currentIndex();
 		populateGroupsList();
@@ -90,7 +90,7 @@ void SatellitesDialog::createDialogContent()
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+					this, SLOT(retranslate()));
 
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
@@ -109,7 +109,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	// Settings tab / General settings group
-	connect(ui->labelsGroup, SIGNAL(toggled(bool)), StelApp::getInstance().getGui()->getGuiActions("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
+	connect(ui->labelsGroup, SIGNAL(toggled(bool)), dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -146,9 +146,9 @@ void SatellitesDialog::createDialogContent()
 	
 	importWindow = new SatellitesImportDialog();
 	connect(ui->addSatellitesButton, SIGNAL(clicked()),
-	        importWindow, SLOT(setVisible()));
+					importWindow, SLOT(setVisible()));
 	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)),
-	        this, SLOT(addSatellites(TleDataList)));
+					this, SLOT(addSatellites(TleDataList)));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -296,10 +296,10 @@ void SatellitesDialog::setAboutHtml(void)
 	html += "<li>" + q_("Orbital elements go out of date pretty quickly (over mere weeks, sometimes days).  To get useful data out, you need to update the TLE data regularly.") + "</li>";
 	// TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 	QString resetSettingsText = QString(q_("Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to the default %3 file.  The old file will be backed up as %4.  This can be found in the user data directory, under \"modules/Satellites/\"."))
-	        .arg(ui->restoreDefaultsButton->text())
-	        .arg(ui->tabs->tabText(ui->tabs->indexOf(ui->settingsTab)))
-	        .arg(jsonFileName)
-	        .arg(oldJsonFileName);
+			.arg(ui->restoreDefaultsButton->text())
+			.arg(ui->tabs->tabText(ui->tabs->indexOf(ui->settingsTab)))
+			.arg(jsonFileName)
+			.arg(oldJsonFileName);
 	html += "<li>" + resetSettingsText + "</li>";
 	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
 	html += "</ul></p>";
@@ -600,7 +600,7 @@ void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
 	if (!SatellitesMgr->getFlagHints())
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		QAction* setHintsAction = gui->getGuiActions("actionShow_Satellite_Hints");
+		QAction* setHintsAction = gui->getGuiAction("actionShow_Satellite_Hints");
 		Q_ASSERT(setHintsAction);
 		setHintsAction->setChecked(true);
 	}
@@ -631,9 +631,9 @@ void SatellitesDialog::updateTLEs(void)
 	else
 	{
 		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainGraphicsView::getInstance(),
-									q_("Select TLE Update File"),
-									StelFileMgr::getDesktopDir(),
-									"*.*");
+																														q_("Select TLE Update File"),
+																														StelFileMgr::getDesktopDir(),
+																														"*.*");
 		GETSTELMODULE(Satellites)->updateFromFiles(updateFiles, false);
 	}
 }

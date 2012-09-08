@@ -40,6 +40,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelProjector.hpp"
@@ -137,52 +138,51 @@ void TelescopeControl::init()
 		//(not necessary since revision 6308; remains as an example)
 		//StelApp::getInstance().getModuleMgr().unloadModule("TelescopeMgr", false);
 		/*If the alsoDelete parameter is set to true, Stellarium crashes with a
-		  segmentation fault when an object is selected. TODO: Find out why.
-		  unloadModule() didn't work prior to revision 5058: the module unloaded
-		  normally, but Stellarium crashed later with a segmentation fault,
-		  because LandscapeMgr::getCallOrder() depended on the module's
-		  existence to return a value.*/
+			segmentation fault when an object is selected. TODO: Find out why.
+			unloadModule() didn't work prior to revision 5058: the module unloaded
+			normally, but Stellarium crashed later with a segmentation fault,
+			because LandscapeMgr::getCallOrder() depended on the module's
+			existence to return a value.*/
 		
 		//Load and start all telescope clients
 		loadTelescopes();
 		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		
+		StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
+
 		//Create telescope key bindings
-		 /* QAction-s with these key bindings existed in Stellarium prior to
+		/* QAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
-		QString group = N_("Telescope Control");
+		QString group = "PluginTelescopeControl";
 		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 		{
 			// "Slew to object" commands
 			QString name = QString("actionMove_Telescope_To_Selection_%1").arg(i);
 			QString description = q_("Move telescope #%1 to selected object").arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			gui->addGuiActions(name, description, shortcut, group, false, false);
-			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+            shMgr->addGuiAction(name, true, description, shortcut, "", group, false, false);
+			connect(shMgr->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 
 			// "Slew to the center of the screen" commands
 			name = QString("actionSlew_Telescope_To_Direction_%1").arg(i);
 			description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
 			shortcut = QString("Alt+%1").arg(i);
-			gui->addGuiActions(name, description, shortcut, group, false, false);
-			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+			shMgr->addGuiAction(name, true, description, shortcut, "", group, false, false);
+			connect(shMgr->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		}
 	
 		//Create and initialize dialog windows 
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
 		
-		//TODO: Think of a better keyboard shortcut
-		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", group, true, false);
-		connect(gui->getGuiActions("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
-		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Slew_Window"), SLOT(setChecked(bool)));
+		connect(shMgr->getGuiAction("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
+		connect(slewDialog, SIGNAL(visibleChanged(bool)), shMgr->getGuiAction("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
 		//Create toolbar button
 		pixmapHover   = new QPixmap(":/graphicGui/glow32x32.png");
 		pixmapOnIcon  = new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
 		pixmapOffIcon = new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton = new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Slew_Window"));
+        toolbarButton = new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiAction("actionShow_Slew_Window"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error &e)
@@ -208,11 +208,11 @@ void TelescopeControl::deinit()
 	while(iterator != telescopeServerProcess.constEnd())
 	{
 		int slotNumber = iterator.key();
-		#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 		telescopeServerProcess[slotNumber]->close();
-		#else
+#else
 		telescopeServerProcess[slotNumber]->terminate();
-		#endif
+#endif
 		telescopeServerProcess[slotNumber]->waitForFinished();
 		delete telescopeServerProcess[slotNumber];
 		qDebug() << "TelescopeControl::deinit(): Server process at slot" << slotNumber << "terminated successfully.";
@@ -376,7 +376,7 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->getEnglishName() == name)
-		return qSharedPointerCast<StelObject>(telescope);
+			return qSharedPointerCast<StelObject>(telescope);
 	}
 	return 0;
 }
@@ -418,7 +418,7 @@ bool TelescopeControl::configureGui(bool show)
 // Misc methods (from TelescopeMgr; TODO: Better categorization)
 void TelescopeControl::setFontSize(int fontSize)
 {
-	 labelFont.setPixelSize(fontSize);
+	labelFont.setPixelSize(fontSize);
 }
 
 void TelescopeControl::slewTelescopeToSelectedObject()
@@ -457,7 +457,7 @@ void TelescopeControl::slewTelescopeToViewDirection()
 
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelRenderer* renderer)
 {
-	#ifndef COMPATIBILITY_001002
+#ifndef COMPATIBILITY_001002
 	//Leaves this whole routine empty if this is the backport version.
 	//Otherwise, there will be two concentric selection markers drawn around the telescope pointer.
 	//In 0.10.3, the plug-in unloads the module that draws the surplus marker.
@@ -478,7 +478,7 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		renderer->drawTexturedRect(screenpos[0] - 25.0f, screenpos[1] - 25.0f, 50.0f, 50.0f,
 		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
-	#endif //COMPATIBILITY_001002
+#endif //COMPATIBILITY_001002
 }
 
 void TelescopeControl::telescopeGoto(int slotNumber, const Vec3d &j2000Pos)
@@ -560,7 +560,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	else
 	{
 		qWarning() << "TelescopeControl: No telescope server executables found in"
-				   << serverExecutablesDirectoryPath;
+							 << serverExecutablesDirectoryPath;
 	}
 }
 
@@ -581,11 +581,11 @@ void TelescopeControl::loadConfiguration()
 	setFlagTelescopeCircles(settings->value("flag_telescope_circles", true).toBool());
 
 	//Load font size
-	#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 	setFontSize(settings->value("telescope_labels_font_size", 13).toInt()); //Windows Qt bug workaround
-	#else
+#else
 	setFontSize(settings->value("telescope_labels_font_size", 12).toInt());
-	#endif
+#endif
 
 	//Load colours
 	reticleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString());
@@ -1216,15 +1216,15 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 			return false;
 		}
 
-		#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 		QString serialPortName;
 		if(portSerial.right(portSerial.size() - SERIAL_PORT_PREFIX.size()).toInt() > 9)
 			serialPortName = "\\\\.\\" + portSerial;//"\\.\COMxx", not sure if it will work
 		else
 			serialPortName = portSerial;
-		#else
+#else
 		QString serialPortName = portSerial;
-		#endif //Q_OS_WIN32
+#endif //Q_OS_WIN32
 		QStringList serverArguments;
 		serverArguments << QString::number(portTCP) << serialPortName;
 		if(useTelescopeServerLogs)
@@ -1254,11 +1254,11 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 		return false;
 
 	//Stop/close the process
-	#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 	telescopeServerProcess[slotNumber]->close();
-	#else
+#else
 	telescopeServerProcess[slotNumber]->terminate();
-	#endif //Q_OS_WIN32
+#endif //Q_OS_WIN32
 	telescopeServerProcess[slotNumber]->waitForFinished();
 
 	delete telescopeServerProcess[slotNumber];
@@ -1284,24 +1284,24 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 	QString initString;
 	switch (connectionType)
 	{
-	case ConnectionVirtual:
-		initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
-		break;
+		case ConnectionVirtual:
+			initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
+			break;
 
-	case ConnectionInternal:
-		if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
-			initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
-		break;
+		case ConnectionInternal:
+			if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
+				initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
+			break;
 
-	case ConnectionLocal:
-		if (isValidPort(portTCP))
-			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
-		break;
+		case ConnectionLocal:
+			if (isValidPort(portTCP))
+				initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
+			break;
 
-	case ConnectionRemote:
-	default:
-		if (isValidPort(portTCP) && !host.isEmpty())
-			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, host, QString::number(portTCP), QString::number(delay));
+		case ConnectionRemote:
+		default:
+			if (isValidPort(portTCP) && !host.isEmpty())
+				initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, host, QString::number(portTCP), QString::number(delay));
 	}
 
 	//qDebug() << "initString:" << initString;
@@ -1554,7 +1554,7 @@ bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 	if(telescopeServerExecutables.isEmpty())
 	{
 		qWarning() << "TelescopeControl: No telescope server executables found in"
-				   << serverExecutablesDirectoryPath;
+							 << serverExecutablesDirectoryPath;
 		return false;
 	}
 
@@ -1594,7 +1594,7 @@ void TelescopeControl::addLogAtSlot(int slot)
 		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
 		{
 			qWarning() << "TelescopeControl: Unable to create a log file for slot"
-					   << slot << ":" << filePath;
+								 << slot << ":" << filePath;
 			telescopeServerLogFiles.insert(slot, logFile);
 			telescopeServerLogStreams.insert(slot, new QTextStream(new QFile()));
 		}

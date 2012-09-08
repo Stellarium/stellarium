@@ -40,6 +40,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
@@ -105,6 +106,7 @@ StelApp::StelApp(QObject* parent)
 	localeMgr=NULL;
 	stelObjectMgr=NULL;
 	networkAccessManager=NULL;
+	shortcutMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -135,6 +137,7 @@ StelApp::~StelApp()
 	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
+	delete shortcutMgr; shortcutMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -222,13 +225,13 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 #ifdef BUILD_FOR_MAEMO
 	StelLoadingBar loadingBar(splashFileName, "", 25, 320, 101, 800, 400);
 #else
- #ifdef BZR_REVISION
+#ifdef BZR_REVISION
 	StelLoadingBar loadingBar(splashFileName, QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
- #elif SVN_REVISION
+#elif SVN_REVISION
 	StelLoadingBar loadingBar(splashFileName, QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
- #else
+#else
 	StelLoadingBar loadingBar(splashFileName, PACKAGE_VERSION, 45, 320, 121);
- #endif
+#endif
 #endif
 	loadingBar.draw(renderer);
 
@@ -247,11 +250,15 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	stelObjectMgr->init();
 	getModuleMgr().registerModule(stelObjectMgr);
 
-	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
 
+	shortcutMgr = new StelShortcutMgr();
+	shortcutMgr->init();
+
+	localeMgr = new StelLocaleMgr();
 	localeMgr->init();
+
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
@@ -344,7 +351,7 @@ void StelApp::initPlugIns()
 
 void StelApp::update(double deltaTime)
 {
-	 if (!initialized)
+	if (!initialized)
 		return;
 
 	++frame;
