@@ -193,7 +193,7 @@ bool StelQGLGLSLShader::build()
 		// Link the program.
 		if(!newProgram->link()) {goto FAILED;}
 
-		aggregatedLog += "\nBuilt successfully\n";
+		aggregatedLog += "Built successfully";
 		// Add the program to the cache, and set the current program to it.
 		programCache.insert(id, newProgram);
 		program = newProgram;
