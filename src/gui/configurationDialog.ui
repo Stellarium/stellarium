@@ -417,7 +417,7 @@
                 <string>Visual magnitude</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+                <string>buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
@@ -430,7 +430,7 @@
                 <string>Size</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+                <string>buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
@@ -440,7 +440,7 @@
                 <string>Additional information 3</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+                <string>buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
@@ -453,7 +453,7 @@
                 <string>Additional information 2</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+                <string>buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
@@ -463,7 +463,7 @@
                 <string>Absolute magnitude</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+                <string>buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
@@ -519,7 +519,7 @@
                 <string>Right ascension/Declination (of date)</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+                <string>buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
@@ -574,6 +574,30 @@
                 <string>Enable mouse navigation</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QPushButton" name="editShortcutsPushButton">
+                 <property name="text">
+                  <string>Edit keyboard shortcuts</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>

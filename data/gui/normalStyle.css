@@ -138,6 +138,14 @@ QLineEdit {
 	font-size: 12px;
 }
 
+QLineEdit[enabled="false"] {
+	background: rgb(90, 90, 90);
+}
+
+QLineEdit[collision="true"] {
+	color: red;
+}
+
 QTextEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;

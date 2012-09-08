@@ -38,20 +38,6 @@ public:
 	HelpDialog();
 	~HelpDialog();
 
-	//! Set a key and description.
-	//!
-	//! @note @a group and @a description must be in English; this function takes
-	//! care of translating them. Of course, they still have to be marked for
-	//! translation using the <tt>N_()</tt> macro.
-	//!
-	//! @param group is the help group.  e.g. "Movement" or "Time & Date"
-	//! @param oldKey is the textual representation of the old key binding (in the
-	//!        case or re-mapping), e.g. "CTRL + H".  Can be an empty string
-	//! @param newKey is the textual representation of the key binding, e.g. "CTRL + H"
-	//! @param description is a short description of what the key does
-	void setKey(QString group, QString oldKey, QString newKey, QString description);
-
-
 	//! Notify that the application style changed
 	void styleChanged();
 
@@ -76,23 +62,12 @@ private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
-	//! Return the header text.
-	QString getHeaderText(void);
-
-	//! Return the footer text.
-	QString getFooterText(void);
+	//! Return the help text with keys description and external links.
+	QString getHelpText(void);
 
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
-
-	//! This uses the group key description as the key to the map, and a
-	//! containing the helpGroup and description as the map value.
-	//! code and description.
-	QMultiMap<QString, QPair<QString, QString> > keyData;
-
-	//! A hash that maps some special keys to translatable strings.
-	QHash<QString, QString> specialKeys;
 
 	//! Sort function for qSort to compare QPair<QString,QString> values.
 	//! This is used when displaying the hlp text to sort the items in a group

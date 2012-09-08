@@ -219,15 +219,12 @@ void Observability::init()
 		OnIcon = new QPixmap(":/observability/bt_observab_on.png");
 		OffIcon = new QPixmap(":/observability/bt_observab_off.png");
 
-		gui->addGuiActions("actionShow_Observability",N_("Observability"),"",N_("Plugin Key Bindings"),true, false);
-		gui->getGuiActions("actionShow_Observability")->setChecked(flagShowObservability);
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiActions("actionShow_Observability"));
+		gui->getGuiAction("actionShow_Observability")->setChecked(flagShowObservability);
+		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Observability"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(gui->getGuiActions("actionShow_Observability"), SIGNAL(toggled(bool)), this, SLOT(enableObservability(bool)));
-
-		gui->addGuiActions("actionShow_Observability_ConfigDialog", N_("Observability configuration window"), "",N_("Plugin Key Bindings"), true);
-		connect(gui->getGuiActions("actionShow_Observability_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Observability_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiAction("actionShow_Observability"), SIGNAL(toggled(bool)), this, SLOT(enableObservability(bool)));
+		connect(gui->getGuiAction("actionShow_Observability_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Observability_ConfigDialog"), SLOT(setChecked(bool)));
 	}
 	catch (std::exception &e)
 	{
@@ -1497,7 +1494,7 @@ bool Observability::configureGui(bool show)
 	if (show)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_Observability_ConfigDialog")->setChecked(true);
+		gui->getGuiAction("actionShow_Observability_ConfigDialog")->setChecked(true);
 	}
 
 	return true;

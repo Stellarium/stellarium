@@ -30,6 +30,7 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
+class StelShortcutMgr;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -98,12 +99,13 @@ public:
 	//! @return the StelObject manager to use for querying from all stellarium objects 	.
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
 
-	//! Get the StelObject manager to use for querying from all stellarium objects.
-	//! @return the StelObject manager to use for querying from all stellarium objects 	.
 	StelSkyLayerMgr& getSkyImageMgr() {return *skyImageMgr;}
 
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
+
+	//! Get the shortcuts manager to use for managing and editing shortcuts
+	StelShortcutMgr* getStelShortcutManager() {return shortcutMgr;}
 
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
@@ -205,6 +207,9 @@ private:
 
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
+
+	//Shortcuts manager for the application
+	StelShortcutMgr* shortcutMgr;
 
 	// Manager for all the StelObjects of the program
 	StelObjectMgr* stelObjectMgr;
