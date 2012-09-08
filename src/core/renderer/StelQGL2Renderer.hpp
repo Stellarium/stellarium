@@ -91,6 +91,7 @@ public:
 		   !QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0))
 		{
 			qWarning() << "StelQGL2Renderer::init : StelQGL2Renderer needs OpenGL 2.1 or OpenGL ES 2.0";
+			return false;
 		}
 
 		// Check for features required for the GL2 backend.
