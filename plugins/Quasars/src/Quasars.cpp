@@ -315,6 +315,26 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
+QStringList Quasars::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	if (inEnglish)
+	{
+		foreach (const QuasarP& quasar, QSO)
+		{
+			result << quasar->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach (const QuasarP& quasar, QSO)
+		{
+			result << quasar->getNameI18n();
+		}
+	}
+	return result;
+}
+
 /*
   Replace the JSON file with the default from the compiled-in resource
 */
