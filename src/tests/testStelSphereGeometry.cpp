@@ -367,8 +367,8 @@ void TestStelSphericalGeometry::testLoading()
 	QVERIFY(reg->getType()==SphericalRegion::Polygon);
 	qDebug() << reg->getArea()*180./M_PI*180/M_PI;
 
-	StelVertexArray vertexAr = reg->getOutlineVertexArray();
-	QVERIFY(vertexAr.primitiveType==StelVertexArray::Lines && vertexAr.vertex.size()%2==0);
+	QVERIFY(reg->getOutlinePrimitiveType()==PrimitiveType_Lines &&
+	        reg->getOutlineVertexPositions().size()%2==0);
 }
 
 void TestStelSphericalGeometry::benchmarkContains()
@@ -416,9 +416,9 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	OctahedronPolygon splittedSub(contour);
 	QCOMPARE(splittedSub.getArea(), smallSquareConvex.getArea());
 
-	QVector<Vec3d> va = northPoleSquare.getOutlineVertexArray().vertex;
+	QVector<Vec3d> va = northPoleSquare.getOutlineVertexPositions();
 	QCOMPARE(va.size(),16);
-	va = southPoleSquare.getOutlineVertexArray().vertex;
+	va = southPoleSquare.getOutlineVertexPositions();
 	QCOMPARE(va.size(),16);
 
 	// Copy

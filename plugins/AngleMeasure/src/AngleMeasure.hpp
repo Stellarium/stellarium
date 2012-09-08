@@ -40,7 +40,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);

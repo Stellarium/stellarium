@@ -237,7 +237,8 @@ void ShortcutsDialog::handleCollisions(ShortcutLineEdit *currentEdit)
 	resetCollisions();
 	// handle collisions
 	QString text = currentEdit->text();
-	collisionItems = findCollidingItems(QKeySequence(text));
+    collisionItems = findCollidingItems(QKeySequence(text));
+    collisionItems.removeOne(ui->shortcutsTreeWidget->currentItem());
 	if (!collisionItems.isEmpty())
 	{
 		drawCollisions();

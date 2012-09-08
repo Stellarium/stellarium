@@ -18,7 +18,6 @@
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
@@ -30,8 +29,9 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
 
-#include <QtOpenGL>
 #include <QAction>
 #include <QDebug>
 #include <QPixmap>
@@ -146,27 +146,22 @@ void CompassMarks::init()
 }
 
 //! Draw any parts on the screen which are for our module
-void CompassMarks::draw(StelCore* core)
+void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 
-	Vec3d pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.
-	StelPainter painter(prj);
-	painter.setFont(font);
+	Vec3f pos;
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.yy
 
-	Vec3f mColor;
-	if (StelApp::getInstance().getVisionModeNight())
-		mColor = StelUtils::getNightColor(markColor);
-	else
-		mColor = markColor;
+	renderer->setFont(font);
+	const Vec3f mColor = StelApp::getInstance().getVisionModeNight() 
+	                   ? StelUtils::getNightColor(markColor) : markColor;
 
-	glColor4f(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
-	glDisable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH);
+	renderer->setGlobalColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
+	renderer->setBlendMode(BlendMode_Alpha);
 
+	const QFontMetrics fontMetrics(font);
+	
 	for(int i=0; i<360; i++)
 	{
 		float a = i*M_PI/180;
@@ -177,24 +172,21 @@ void CompassMarks::draw(StelCore* core)
 			h = -0.02;  // the size of the mark every 15 degrees
 
 			QString s = QString("%1").arg((i+90)%360);
-
-			float shiftx = painter.getFontMetrics().width(s) / 2.;
-			float shifty = painter.getFontMetrics().height() / 2.;
-			painter.drawText(pos, s, 0, -shiftx, shifty);
+			const float shiftx = fontMetrics.width(s) / 2.;
+			const float shifty = fontMetrics.height() / 2.;
+			renderer->drawText(TextParams(pos, prj, s).shift(-shiftx, shifty));
 		}
 		else if (i % 5 == 0)
 		{
 			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
-		glEnable(GL_TEXTURE_2D);
+		Vec3f win1, win2;
+		if(prj->project(pos, win1) && prj->project(Vec3f(pos[0], pos[1], h), win2))
+		{
+			renderer->drawLine(win1[0], win1[1], win2[0], win2[1]);
+		}
 	}
-	glDisable(GL_LINE_SMOOTH);
-	glDisable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
-
 }
 
 void CompassMarks::update(double deltaTime)

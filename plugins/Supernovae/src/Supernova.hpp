@@ -27,11 +27,9 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
+#include "StelProjectorType.hpp"
 
-class StelPainter;
 
 //! @class Supernova
 //! A Supernova object represents one supernova on the sky.
@@ -83,9 +81,7 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position
 
-	static StelTextureSP hintTexture;
-
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
 
 	// Supernova
 	QString designation;               //! The ID of the supernova

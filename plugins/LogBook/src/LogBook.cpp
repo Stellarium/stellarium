@@ -34,7 +34,6 @@
 #include "StelObjectMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelStyle.hpp"
 #include "StelTranslator.hpp"
 
@@ -50,13 +49,6 @@
 #include <QSqlRelation>
 #include <QSqlRelationalTableModel>
 #include <QSqlTableModel>
-
-#if defined(__APPLE__) && defined(__MACH__)
-#include <OpenGL/glu.h>	/* Header File For The GLU Library */
-#else
-#include <GL/glu.h>	/* Header File For The GLU Library */
-#endif
-
 
 /* ********************************************************************* */
 #if 0
@@ -119,9 +111,8 @@ bool LogBook::configureGui(bool)
 	return true;
 }
 
-void LogBook::draw(StelCore* core)
+void LogBook::draw(StelCore* core, class StelRenderer* renderer)
 {
-	StelPainter painter(core->getProjection2d());
 }
 
 double LogBook::getCallOrder(StelModuleActionName actionName) const

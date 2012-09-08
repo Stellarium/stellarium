@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -25,7 +24,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -33,6 +31,7 @@
 #include "LabelMgr.hpp"
 #include "Quasar.hpp"
 #include "Quasars.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "QuasarsDialog.hpp"
 
 #include <QNetworkAccessManager>
@@ -41,14 +40,15 @@
 #include <QAction>
 #include <QProgressBar>
 #include <QDebug>
-#include <QFileInfo>
 #include <QFile>
+#include <QFileInfo>
 #include <QTimer>
-#include <QVariantMap>
-#include <QVariant>
 #include <QList>
+#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
+#include <QVariant>
+#include <QVariantMap>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -81,7 +81,9 @@ Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
  Constructor
 */
 Quasars::Quasars()
-	: progressBar(NULL)
+	: texPointer(NULL)
+	, markerTexture(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Quasars");
 	configDialog = new QuasarsDialog();
@@ -99,9 +101,10 @@ Quasars::~Quasars()
 
 void Quasars::deinit()
 {
+	if(NULL != texPointer)    {delete texPointer;}
+	if(NULL != markerTexture) {delete markerTexture;}
+	texPointer = markerTexture = NULL;
 	QSO.clear();
-	Quasar::markerTexture.clear();
-	texPointer.clear();
 }
 
 /*
@@ -135,9 +138,6 @@ void Quasars::init()
 		readSettingsFromConfig();
 
 		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
-
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
-		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -192,45 +192,55 @@ void Quasars::init()
 /*
  Draw our module. This should print name of first QSO in the main window
 */
-void Quasars::draw(StelCore* core)
+void Quasars::draw(StelCore* core, class StelRenderer* renderer)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
-	painter.setFont(font);
+	renderer->setFont(font);
+
+	if(NULL == markerTexture)
+	{
+		markerTexture = renderer->createTexture(":/Quasars/quasar.png");
+	}
 	
 	foreach (const QuasarP& quasar, QSO)
 	{
 		if (quasar && quasar->initialized)
-			quasar->draw(core, painter);
+		{
+			quasar->draw(core, renderer, prj, markerTexture);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
-
+	{
+		drawPointer(core, renderer, prj);
+	}
 }
 
-void Quasars::drawPointer(StelCore* core, StelPainter& painter)
+void Quasars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Quasar");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3d screenPos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
+		if (!projector->project(pos, screenPos))
+		{
 			return;
+		}
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur2.png");
+		}
 
 		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		renderer->setGlobalColor(c[0], c[1], c[2]);
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		renderer->drawTexturedRect(screenPos[0] - 13.0f, screenPos[1] - 13.0f, 26.0f, 26.0f, 
+		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 }
 

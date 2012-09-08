@@ -77,7 +77,7 @@ public:
 	//! Dialog windows don't need explicit drawing, it's done automatically.
 	//! If a plug-in draws on the screen, it should be able to respect
 	//! the night vision mode.
-	virtual void draw(StelCore * core);
+	virtual void draw(StelCore * core, class StelRenderer* renderer);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	virtual bool configureGui(bool show);
