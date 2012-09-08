@@ -22,16 +22,14 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelQGL1Renderer.hpp"
+#include "StelQGL2Renderer.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
 #include "StelMainWindow.hpp"
 
-#include <QGLFormat>
-#include <QPaintEngine>
 #include <QGraphicsView>
-#include <QGLWidget>
 #include <QResizeEvent>
 #include <QSettings>
 #include <QApplication>
@@ -71,6 +69,10 @@ Q_IMPORT_PLUGIN(AngleMeasure)
 
 #ifdef USE_STATIC_PLUGIN_COMPASSMARKS
 Q_IMPORT_PLUGIN(CompassMarks)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_RENDERERSTATISTICS
+Q_IMPORT_PLUGIN(RendererStatistics)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
@@ -124,50 +126,8 @@ Q_IMPORT_PLUGIN(Observability)
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-class StelQGLWidget : public QGLWidget
-{
-public:
-	StelQGLWidget(QGLContext* ctx, QWidget* parent) : QGLWidget(ctx, parent)
-	{
-		setAttribute(Qt::WA_PaintOnScreen);
-		setAttribute(Qt::WA_NoSystemBackground);
-		setAttribute(Qt::WA_OpaquePaintEvent);
-		//setAutoFillBackground(false);
-		setBackgroundRole(QPalette::Window);
-	}
-
-protected:
-	virtual void initializeGL()
-	{
-		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
-
-		QGLWidget::initializeGL();
-
-		if (!format().stencil())
-			qWarning("Could not get stencil buffer; results will be suboptimal");
-		if (!format().depth())
-			qWarning("Could not get depth buffer; results will be suboptimal");
-		if (!format().doubleBuffer())
-			qWarning("Could not get double buffer; results will be suboptimal");
-
-		QString paintEngineStr;
-		switch (paintEngine()->type())
-		{
-		case QPaintEngine::OpenGL:
-			paintEngineStr = "OpenGL";
-			break;
-		case QPaintEngine::OpenGL2:
-			paintEngineStr = "OpenGL2";
-			break;
-		default:
-			paintEngineStr = "Other";
-		}
-		qDebug() << "Qt GL paint engine is: " << paintEngineStr;
-	}
-};
-
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
-	: QGraphicsView(parent), backItem(NULL), gui(NULL),
+	: QGraphicsView(parent), backItem(NULL), renderer(NULL), gui(NULL), 
 #ifndef DISABLE_SCRIPTING
 	scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
@@ -205,12 +165,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	lastEventTimeSec = 0;
 
-	// Create an openGL viewport
-	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
-	glContext = new QGLContext(glFormat);
-	glWidget = new StelQGLWidget(glContext, this);
-	glWidget->updateGL();
-	setViewport(glWidget);
 
 	// This line seems to cause font aliasing troubles on win32
 	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
@@ -232,15 +186,31 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 StelMainGraphicsView::~StelMainGraphicsView()
 {
+	if(NULL != renderer)
+	{
+		delete renderer;
+	}
 }
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
-	Q_ASSERT(glWidget->isValid());
-	glWidget->makeCurrent();
-
+	// TODO: On hardware with .pvr texture support, the second argument should be true
+	qDebug() << "Going to initialize the OpenGL 2 renderer";
+	renderer = new StelQGL2Renderer(this, false);
+	if(!renderer->init())
+	{
+		qWarning() << "Failed to initialize the OpenGL 2 renderer, "
+		              "falling back to the OpenGL 1 renderer";
+		delete renderer;
+		renderer = new StelQGL1Renderer(this);
+		if(!renderer->init())
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to initialize fallback renderer");
+		}
+	}
+	
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
-	mainSkyItem = new StelAppGraphicsWidget();
+	mainSkyItem = new StelAppGraphicsWidget(renderer);
 	mainSkyItem->setZValue(-10);
 	mainSkyItem->setContentsMargins(0,0,0,0);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
@@ -252,7 +222,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 
 	// Activate the resizing caused by the layout
 	QCoreApplication::processEvents();
-
+	
 	mainSkyItem->setFocus();
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
@@ -260,16 +230,9 @@ void StelMainGraphicsView::init(QSettings* conf)
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
-
-	StelPainter::initSystemGLInfo(glContext);
-
-	QPainter qPainter(glWidget);
-	StelPainter::setQPainter(&qPainter);
-
+	
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
-	// Prevent flickering on mac Leopard/Snow Leopard
-	glWidget->setAutoFillBackground (false);
 
 #ifndef DISABLE_SCRIPTING
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
@@ -314,7 +277,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 #endif
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
-        StelPainter::setQPainter(NULL);
+	
 	startMainLoop();
 }
 
@@ -415,8 +378,8 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 	QGraphicsView::keyReleaseEvent(event);
 }
 
-//! Delete openGL textures (to call before the GLContext disappears)
-void StelMainGraphicsView::deinitGL()
+//! Delete textures (to call before the renderer disappears)
+void StelMainGraphicsView::deinit()
 {
 	// Can be called only once
 	if (wasDeinit==true)
@@ -443,7 +406,7 @@ void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QStri
 void StelMainGraphicsView::doScreenshot(void)
 {
 	QFileInfo shotDir;
-	QImage im = glWidget->grabFrameBuffer();
+	QImage im = renderer->screenshot();
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 

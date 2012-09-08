@@ -22,7 +22,9 @@
 
 #include "StelModule.hpp"
 #include "VecMath.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/GenericVertexTypes.hpp"
+#include "renderer/StelIndexBuffer.hpp"
+#include "renderer/StelVertexBuffer.hpp"
 
 //! @class MilkyWay 
 //! Manages the displaying of the Milky Way.
@@ -42,7 +44,10 @@ public:
 	virtual void init();
 
 	//! Draw the Milky Way.
-	virtual void draw(StelCore* core);
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	
 	//! Update and time-dependent state.  Updates the fade level while the 
 	//! Milky way rendering is being changed from on to off or off to on.
@@ -71,12 +76,13 @@ public slots:
 	
 private:
 	float radius;
-	StelTextureSP tex;
+	class StelTextureNew* tex;
 	Vec3f color;
 	float intensity;
 	class LinearFader* fader;
 
-	struct StelVertexArray* vertexArray;
+	//! Sphere used to draw the Milky Way.
+	class StelGeometrySphere* skySphere;
 };
 
 #endif // _MILKYWAY_HPP_

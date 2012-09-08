@@ -53,6 +53,7 @@ public:
 	//! Supported reference frame types
 	enum FrameType
 	{
+		FrameUninitialized,           //!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
 		FrameAltAz,                   //!< Altazimuthal reference frame centered on observer.
 		FrameHeliocentricEcliptic,    //!< Ecliptic reference frame centered on the Sun
 		FrameObservercentricEcliptic, //!< Ecliptic reference frame centered on the Observer
@@ -88,7 +89,7 @@ public:
 	virtual ~StelCore();
 
 	//! Init and load all main core components.
-	void init();
+	void init(class StelRenderer* renderer);
 
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in sec.
@@ -101,7 +102,7 @@ public:
 	void preDraw();
 
 	//! Update core state after drawing modules.
-	void postDraw();
+	void postDraw(StelRenderer* renderer);
 
 	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
 	//! only for 2d painting

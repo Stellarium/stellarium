@@ -21,9 +21,14 @@
 #include <QBuffer>
 #include <stdexcept>
 
+#include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
-#include "StelJsonParser.hpp"
+#include "StelProjector.hpp"
+#include "TriangleIterator.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
+
 
 // Definition of static constants.
 int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
@@ -75,6 +80,7 @@ QDataStream& operator>>(QDataStream& in, SphericalRegionP& region)
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Default implementations of methods for SphericalRegion
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
 QByteArray SphericalRegion::toJSON() const
 {
 	QByteArray res;
@@ -299,6 +305,735 @@ SphericalRegionP SphericalRegion::getSubtractionDefault(const SphericalRegion* r
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+// Drawing code for SphericalRegion and derived classes
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//! Append a triangle to a vertex buffer, PlainVertex overload.
+//!
+//! Used in projectSphericalTriangle(), which is templated with vertex type.
+//!
+//! @param buffer    Vertex buffer to add the triangle to.
+//! @param vertices  Positions of vertices in the triangle.
+//! @param texCoords Texture coordinates of vertices in the triangle.
+//!                  Must be NULL for this overload.
+void appendTriangle(StelVertexBuffer<SphericalRegion::PlainVertex>* buffer, 
+                    const Triplet<Vec3f>& vertices, const Triplet<Vec2f>* texCoords)
+{
+#ifndef NDEBUG
+	Q_ASSERT_X(texCoords == NULL, Q_FUNC_INFO,
+	           "Got texCoords even though building buffer without texture coords");
+#else
+	Q_UNUSED(texCoords);
+#endif
+	buffer->addVertex(SphericalRegion::PlainVertex(vertices.a));
+	buffer->addVertex(SphericalRegion::PlainVertex(vertices.b));
+	buffer->addVertex(SphericalRegion::PlainVertex(vertices.c));
+}
+
+//! Append a triangle to a vertex buffer, TexturedVertex overload.
+//!
+//! Used in projectSphericalTriangle(), which is templated with vertex type.
+//!
+//! @param buffer    Vertex buffer to add the triangle to.
+//! @param vertices  Positions of vertices in the triangle.
+//! @param texCoords Texture coordinates of vertices in the triangle.
+void appendTriangle(StelVertexBuffer<SphericalRegion::TexturedVertex>* buffer, 
+                    const Triplet<Vec3f>& vertices, const Triplet<Vec2f>* texCoords)
+{
+	buffer->addVertex(SphericalRegion::TexturedVertex(vertices.a, texCoords->a));
+	buffer->addVertex(SphericalRegion::TexturedVertex(vertices.b, texCoords->b));
+	buffer->addVertex(SphericalRegion::TexturedVertex(vertices.c, texCoords->c));
+}
+
+//! Project a triangle to the screen ensuring that it will look smooth, even for
+//! nonlinear distortions by splitting it into subtriangles. 
+//! The size of each edge must be < 180 deg.
+//!
+//! @param projector       Used to project the vertices.
+//! @param vertices        Positions of vertices in the triangle.
+//! @param texturePos      Texture coordinates of vertices in the triangle.
+//! @param buffer          Vertex buffer to output resulting vertices to.
+//!
+//! @todo Needs more complete documentation (non-documented parameters).
+template<class V>
+void projectSphericalTriangle
+	(StelProjector* projector,
+	 const SphericalCap* clippingCap, 
+	 const Triplet<Vec3d>* vertices, 
+	 const Triplet<Vec2f>* texCoords,
+	 StelVertexBuffer<V>* buffer,
+	 double maxSqDistortion, 
+	 int nbI = 0, 
+	 bool checkDisc1 = true, 
+	 bool checkDisc2 = true, 
+	 bool checkDisc3 = true) 
+{
+	Q_ASSERT(fabs(vertices->a.length()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices->b.length()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices->c.length()-1.)<0.00001);
+	if (clippingCap && clippingCap->containsTriangle(*vertices))
+		clippingCap = NULL;
+	// Culling unnecessary triangles
+	if (clippingCap && !clippingCap->intersectsTriangle(*vertices))
+		return;
+	bool cDiscontinuity1 = checkDisc1 && projector->intersectViewportDiscontinuity(vertices->a, vertices->b);
+	bool cDiscontinuity2 = checkDisc2 && projector->intersectViewportDiscontinuity(vertices->b, vertices->c);
+	bool cDiscontinuity3 = checkDisc3 && projector->intersectViewportDiscontinuity(vertices->a, vertices->c);
+	const bool cd1=cDiscontinuity1;
+	const bool cd2=cDiscontinuity2;
+	const bool cd3=cDiscontinuity3;
+
+	Vec3d e0=vertices->a;
+	Vec3d e1=vertices->b;
+	Vec3d e2=vertices->c;
+	bool valid = projector->projectInPlace(e0);
+	valid = projector->projectInPlace(e1) || valid;
+	valid = projector->projectInPlace(e2) || valid;
+	// Clip polygons behind the viewer
+	if (!valid)
+		return;
+
+	if (checkDisc1 && cDiscontinuity1==false)
+	{
+		// If the distortion at segment e0,e1 is too big, flags it for subdivision
+		Vec3d win3 = vertices->a; win3+=vertices->b;
+		projector->projectInPlace(win3);
+		win3[0]-=(e0[0]+e1[0])*0.5; win3[1]-=(e0[1]+e1[1])*0.5;
+		cDiscontinuity1 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
+	}
+	if (checkDisc2 && cDiscontinuity2==false)
+	{
+		// If the distortion at segment e1,e2 is too big, flags it for subdivision
+		Vec3d win3 = vertices->b; win3+=vertices->c;
+		projector->projectInPlace(win3);
+		win3[0]-=(e2[0]+e1[0])*0.5; win3[1]-=(e2[1]+e1[1])*0.5;
+		cDiscontinuity2 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
+	}
+	if (checkDisc3 && cDiscontinuity3==false)
+	{
+		// If the distortion at segment e2,e0 is too big, flags it for subdivision
+		Vec3d win3 = vertices->c; win3+=vertices->a;
+		projector->projectInPlace(win3);
+		win3[0] -= (e0[0]+e2[0])*0.5;
+		win3[1] -= (e0[1]+e2[1])*0.5;
+		cDiscontinuity3 = (win3[0]*win3[0]+win3[1]*win3[1])>maxSqDistortion;
+	}
+
+	if (!cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
+	{
+		const Triplet<Vec3f> triangle(Vec3f(e0[0], e0[1], e0[2]), 
+		                              Vec3f(e1[0], e1[1], e1[2]), 
+		                              Vec3f(e2[0], e2[1], e2[2]));
+		// The triangle is clean, append it
+		appendTriangle(buffer, triangle, texCoords);
+		return;
+	}
+
+	if (nbI > 4)
+	{
+		// If we reached the limit number of iterations and still have a discontinuity,
+		// discards the triangle.
+		if (cd1 || cd2 || cd3)
+			return;
+
+		const Triplet<Vec3f> triangle(Vec3f(e0[0], e0[1], e0[2]), 
+		                              Vec3f(e1[0], e1[1], e2[2]),
+		                              Vec3f(e2[0], e2[1], e2[2]));
+		// Else display it, it will be suboptimal though.
+		appendTriangle(buffer, triangle, texCoords);
+		return;
+	}
+
+	// Recursively splits the triangle into sub triangles.
+	// Depending on which combination of sides of the triangle has to be split a different strategy is used.
+	Triplet<Vec3d> va;
+	Triplet<Vec2f> ta;
+	// Only 1 side has to be split: split the triangle in 2
+	if (cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
+	{
+		va.a=vertices->a;
+		va.b=vertices->a;va.b+=vertices->b;
+		va.b.normalize();
+		va.c=vertices->c;
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=(texCoords->a+texCoords->b)*0.5;
+			ta.c=texCoords->c;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, true, false);
+
+		//va.a=vertices->a+vertices->b;
+		//va.a.normalize();
+		va.a=va.b;
+		va.b=vertices->b;
+		va.c=vertices->c;
+		if (NULL != texCoords)
+		{
+			ta.a=(texCoords->a+texCoords->b)*0.5;
+			ta.b=texCoords->b;
+			ta.c=texCoords->c;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, false, true);
+		return;
+	}
+
+	if (!cDiscontinuity1 && cDiscontinuity2 && !cDiscontinuity3)
+	{
+		va.a=vertices->a;
+		va.b=vertices->b;
+		va.c=vertices->b;va.c+=vertices->c;
+		va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=texCoords->b;
+			ta.c=(texCoords->b+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, false, true, true);
+
+		va.a=vertices->a;
+		//va.b=vertices->b+vertices->c;
+		//va.b.normalize();
+		va.b=va.c;
+		va.c=vertices->c;
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=(texCoords->b+texCoords->c)*0.5;
+			ta.c=texCoords->c;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, true, false);
+		return;
+	}
+
+	if (!cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
+	{
+		va.a=vertices->a;
+		va.b=vertices->b;
+		va.c=vertices->a;va.c+=vertices->c;
+		va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=texCoords->b;
+			ta.c=(texCoords->a+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, false, true, true);
+
+		//va.a=vertices->a+vertices->c;
+		//va.a.normalize();
+		va.a=va.c;
+		va.b=vertices->b;
+		va.c=vertices->c;
+		if (NULL != texCoords)
+		{
+			ta.a=(texCoords->a+texCoords->c)*0.5;
+			ta.b=texCoords->b;
+			ta.c=texCoords->c;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, false, true);
+		return;
+	}
+
+	// 2 sides have to be split: split the triangle in 3
+	if (cDiscontinuity1 && cDiscontinuity2 && !cDiscontinuity3)
+	{
+		va.a=vertices->a;
+		va.b=vertices->a;va.b+=vertices->b;
+		va.b.normalize();
+		va.c=vertices->b;va.c+=vertices->c;
+		va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=(texCoords->a+texCoords->b)*0.5;
+			ta.c=(texCoords->b+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+		//va.a=vertices->a+vertices->b;
+		//va.a.normalize();
+		va.a=va.b;
+		va.b=vertices->b;
+		//va.c=vertices->b+vertices->c;
+		//va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=(texCoords->a+texCoords->b)*0.5;
+			ta.b=texCoords->b;
+			ta.c=(texCoords->b+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+		va.a=vertices->a;
+		//va.b=vertices->b+vertices->c;
+		//va.b.normalize();
+		va.b=va.c;
+		va.c=vertices->c;
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=(texCoords->b+texCoords->c)*0.5;
+			ta.c=texCoords->c;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, true, false);
+		return;
+	}
+	if (cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
+	{
+		va.a=vertices->a;
+		va.b=vertices->a;va.b+=vertices->b;
+		va.b.normalize();
+		va.c=vertices->a;va.c+=vertices->c;
+		va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=(texCoords->a+texCoords->b)*0.5;
+			ta.c=(texCoords->a+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+		//va.a=vertices->a+vertices->b;
+		//va.a.normalize();
+		va.a=va.b;
+		va.b=vertices->c;
+		//va.c=vertices->a+vertices->c;
+		//va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=(texCoords->a+texCoords->b)*0.5;
+			ta.b=texCoords->c;
+			ta.c=(texCoords->a+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+
+		//va.a=vertices->a+vertices->b;
+		//va.a.normalize();
+		va.b=vertices->b;
+		va.c=vertices->c;
+		if (NULL != texCoords)
+		{
+			ta.a=(texCoords->a+texCoords->b)*0.5;
+			ta.b=texCoords->b;
+			ta.c=texCoords->c;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, false, true);
+
+		return;
+	}
+	if (!cDiscontinuity1 && cDiscontinuity2 && cDiscontinuity3)
+	{
+		va.a=vertices->a;
+		va.b=vertices->b;
+		va.c=vertices->b;va.c+=vertices->c;
+		va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=texCoords->b;
+			ta.c=(texCoords->b+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, false, true, true);
+
+		//va.a=vertices->b+vertices->c;
+		//va.a.normalize();
+		va.a=va.c;
+		va.b=vertices->c;
+		va.c=vertices->a;va.c+=vertices->c;
+		va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=(texCoords->b+texCoords->c)*0.5;
+			ta.b=texCoords->c;
+			ta.c=(texCoords->a+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+		va.b=va.a;
+		va.a=vertices->a;
+		//va.b=vertices->b+vertices->c;
+		//va.b.normalize();
+		//va.c=vertices->a+vertices->c;
+		//va.c.normalize();
+		if (NULL != texCoords)
+		{
+			ta.a=texCoords->a;
+			ta.b=(texCoords->b+texCoords->c)*0.5;
+			ta.c=(texCoords->a+texCoords->c)*0.5;
+		}
+		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+		return;
+	}
+
+	// Last case: the 3 sides have to be split: cut in 4 triangles a' la HTM
+	va.a=vertices->a;va.a+=vertices->b;
+	va.a.normalize();
+	va.b=vertices->b;va.b+=vertices->c;
+	va.b.normalize();
+	va.c=vertices->a;va.c+=vertices->c;
+	va.c.normalize();
+	if (NULL != texCoords)
+	{
+		ta.a=(texCoords->a+texCoords->b)*0.5;
+		ta.b=(texCoords->b+texCoords->c)*0.5;
+		ta.c=(texCoords->a+texCoords->c)*0.5;
+	}
+	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+	va.b=va.a;
+	va.a=vertices->a;
+	//va.b=vertices->a+vertices->b;
+	//va.b.normalize();
+	//va.c=vertices->a+vertices->c;
+	//va.c.normalize();
+	if (NULL != texCoords)
+	{
+		ta.a=texCoords->a;
+		ta.b=(texCoords->a+texCoords->b)*0.5;
+		ta.c=(texCoords->a+texCoords->c)*0.5;
+	}
+	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+	//va.a=vertices->a+vertices->b;
+	//va.a.normalize();
+	va.a=va.b;
+	va.b=vertices->b;
+	va.c=vertices->b;va.c+=vertices->c;
+	va.c.normalize();
+	if (NULL != texCoords)
+	{
+		ta.a=(texCoords->a+texCoords->b)*0.5;
+		ta.b=texCoords->b;
+		ta.c=(texCoords->b+texCoords->c)*0.5;
+	}
+	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+	va.a=vertices->a;va.a+=vertices->c;
+	va.a.normalize();
+	//va.b=vertices->b+vertices->c;
+	//va.b.normalize();
+	va.b=va.c;
+	va.c=vertices->c;
+	if (NULL != texCoords)
+	{
+		ta.a=(texCoords->a+texCoords->c)*0.5;
+		ta.b=(texCoords->b+texCoords->c)*0.5;
+		ta.c=texCoords->c;
+	}
+	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+
+	return;
+}
+
+//! Prepare a cached vertex buffer for update, constructing it if needed, unlocking and clearing.
+//!
+//! @param buffer   Pointer to pointer to buffer to prepare.
+//! @param renderer Renderer to construct the buffer if not constructed yet.
+template<class V>
+void prepareVertexBufferUpdate(StelVertexBuffer<V>** buffer, StelRenderer* renderer)
+{
+	if(NULL == (*buffer))
+	{
+		(*buffer) = renderer->createVertexBuffer<V>(PrimitiveType_Triangles);
+		return;
+	}
+	(*buffer)->unlock();
+	(*buffer)->clear();
+}
+
+//! Determine whether a triangle instersects a projection discontinuity.
+//!
+//! @param projector Projector to check against.
+//! @param triangle  Positions of vertices in the triangle.
+bool triangleIntersectsDiscontinuity(StelProjector* projector, const Triplet<Vec3d>& triangle)
+{
+	return projector->intersectViewportDiscontinuity(triangle.a, triangle.b) ||
+	       projector->intersectViewportDiscontinuity(triangle.b, triangle.c) ||
+	       projector->intersectViewportDiscontinuity(triangle.c, triangle.a);
+}
+
+void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
+{
+	const QVector<Vec3d>& vertices = getOctahedronPolygon().fillVertices();
+	StelProjector* projector = params.projector_;
+
+	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
+
+	if(!params.subdivide_)
+	{
+		// The simplest case, we don't need to iterate through the triangles at all.
+		if (handleDiscontinuity)
+		{
+			// We don't use indices here, since we don't have a vertex buffer yet.
+			// If we did it as it was done in 
+			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
+			// vertices and then use indices to specify which to draw.
+			// 
+			// So we only copy _some_ of the vertices.
+
+			// Iterating over triangles,
+			// adding them to the buffer if they don't cross the discontinuity.
+			for (int i = 0; i < vertices.size(); i += 3)
+			{
+				const Triplet<Vec3d> triVertices
+					(vertices.at(i), vertices.at(i + 1), vertices.at(i + 2));
+				if(!triangleIntersectsDiscontinuity(projector, triVertices))
+				{
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.a));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.b));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.c));
+				}
+			} 
+		}
+		else
+		{
+			// Copy the vertex data to the buffer without subdividing or changing anything.
+			for (int v = 0; v < vertices.size(); v++) 
+			{
+				fillPlainVertexBuffer->addVertex(SphericalRegion::PlainVertex(vertices[v]));
+			}
+		} 
+		fillPlainVertexBuffer->lock();
+		useProjector = true;
+		return;
+	}
+	useProjector = false;
+
+	// Iterating over triangles, projecting/subdividing them
+	// and appending to the buffer.
+	for (int i = 0; i < vertices.size(); i += 3)
+	{
+		const Triplet<Vec3d> triVertices(vertices.at(i), vertices.at(i + 1), vertices.at(i + 2));
+		projectSphericalTriangle(params.projector_, params.clippingCap_, 
+		                         &triVertices, NULL, fillPlainVertexBuffer, 
+		                         params.maxSqDistortion_);
+	}
+
+	fillPlainVertexBuffer->lock(); 
+}
+
+void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
+{
+	const QVector<Vec3d>& vertices = contour;
+	StelProjector* projector = params.projector_;
+
+	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
+
+	if(!params.subdivide_)
+	{
+		if (handleDiscontinuity)
+		{
+			// We don't use indices here, since we don't have a vertex buffer yet.
+			// If we did it as it was done in 
+			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
+			// vertices and then use indices to specify which to draw.
+			// 
+			// So we only copy _some_ of the vertices.
+
+			// Iterating over triangles in a triangle fan, 
+			// adding them as separate triangles if they don't cross the discontinuity.
+			const Vec3d v0 = vertices.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
+			{
+				const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+				if(!triangleIntersectsDiscontinuity(projector, triVertices))
+				{
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.a));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.b));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.c));
+				}
+			}
+		}
+		else
+		{
+			//Decomposing the triangle fan into triangles. 
+			//
+			//We could get less overhead with initializing the vertex buffer with 
+			//triangle fan primitive type, but we might end up deleting/constructing
+			//a new buffer based on draw parameters (which would complicate code).
+			const Vec3d v0 = vertices.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
+			{
+				fillPlainVertexBuffer->addVertex(PlainVertex(v0));
+				fillPlainVertexBuffer->addVertex(PlainVertex(vertices.at(i)));
+				fillPlainVertexBuffer->addVertex(PlainVertex(vertices.at(i + 1)));
+			}
+		}
+		fillPlainVertexBuffer->lock();
+		useProjector = true;
+		return;
+	}
+	useProjector = false;
+
+	// Iterating over triangles in a triangle fan, projecting/subdividing them
+	// and appending to the buffer.
+	const Vec3d v0 = vertices.at(0);
+	for (int i = 1; i < vertices.size() - 1; ++i)
+	{
+		const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+		projectSphericalTriangle(params.projector_, params.clippingCap_, 
+		                         &triVertices, NULL, fillPlainVertexBuffer, 
+		                         params.maxSqDistortion_);
+	}
+
+	fillPlainVertexBuffer->lock(); 
+}
+
+void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
+{
+	const QVector<Vec3d>& vertices  = contour;
+	const QVector<Vec2f>& texCoords = textureCoords;
+	StelProjector* projector = params.projector_;
+
+	Q_ASSERT_X(vertices.size() == texCoords.size(), Q_FUNC_INFO,
+	           "Numbers of vertices and texture coordinates do not match");
+
+	prepareVertexBufferUpdate(&fillTexturedVertexBuffer, renderer);
+
+	if(!params.subdivide_)
+	{
+		if (handleDiscontinuity)
+		{
+			// We don't use indices here, since we don't have a vertex buffer yet.
+			// If we did it as it was done in 
+			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
+			// vertices and then use indices to specify which to draw.
+			// 
+			// So we only copy _some_ of the vertices.
+
+			// Iterating over triangles in a triangle fan, 
+			// adding them as separate triangles if they don't cross the discontinuity.
+			const Vec3d v0 = vertices.at(0);
+			const Vec2f t0 = texCoords.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
+			{
+				const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+				if(!triangleIntersectsDiscontinuity(projector, triVertices))
+				{
+					fillTexturedVertexBuffer->
+						addVertex(TexturedVertex(triVertices.a, t0));
+					fillTexturedVertexBuffer->
+						addVertex(TexturedVertex(triVertices.b, texCoords.at(i)));
+					fillTexturedVertexBuffer->
+						addVertex(TexturedVertex(triVertices.c, texCoords.at(i + 1)));
+				}
+			}
+		}
+		else
+		{
+			//Decomposing the triangle fan into triangles. 
+			//
+			//We could get less overhead with initializing the vertex buffer with 
+			//triangle fan primitive type, but we might end up deleting/constructing
+			//a new buffer based on draw parameters (which would complicate code).
+			const Vec3d v0 = vertices.at(0);
+			const Vec2f t0 = texCoords.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
+			{
+				fillTexturedVertexBuffer->
+					addVertex(TexturedVertex(v0, t0));
+				fillTexturedVertexBuffer->
+					addVertex(TexturedVertex(vertices.at(i), texCoords.at(i)));
+				fillTexturedVertexBuffer->
+					addVertex(TexturedVertex(vertices.at(i + 1), texCoords.at(i + 1)));
+			}
+		}
+		useProjector = true;
+		fillTexturedVertexBuffer->lock();
+		return;
+	}
+
+	useProjector = false;
+
+	// Iterating over triangles in a triangle fan, projecting/subdividing them
+	// and appending to the buffer.
+	const Vec3d v0 = vertices.at(0);
+	const Vec2f t0 = texCoords.at(0);
+	for (int i = 1; i < vertices.size() - 1; ++i)
+	{
+		const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+		const Triplet<Vec2f> triTexCoords(t0, texCoords.at(i), texCoords.at(i + 1));
+
+		projectSphericalTriangle(params.projector_, params.clippingCap_, 
+		                         &triVertices, &triTexCoords, fillTexturedVertexBuffer, 
+		                         params.maxSqDistortion_);
+	}
+
+	fillTexturedVertexBuffer->lock();
+}
+
+void SphericalRegion::drawFill(StelRenderer* renderer, const DrawParams& params)
+{
+	StelProjector* projector = params.projector_;
+	//! We don't need to draw stuff outside the view.
+	if (!projector->getBoundingCap().intersects(getBoundingCap()))
+	{
+		return;
+	}
+
+	const bool intersectsDiscontinuity = 
+		projector->intersectViewportDiscontinuity(getBoundingCap());
+	// We need to update cached vertex data in the following cases:
+	//
+	// a) SphericalRegion implementation says so.
+	// b) Drawing parameters (those that affect vertex generation) have changed.
+	// c) We're subdividing the triangles, in which case we're projecting them
+	//    manually, outside of StelRenderer, which means any change in projector
+	//    (which we can't determine) invalidates our cache.
+	if(needToUpdateFillVertexBuffers() || 
+	   params != previousFillDrawParams ||
+	   params.subdivide_)
+	{
+		// hasDiscontinuity was removed as if intersectsDiscontinuity is true,
+		// hasDiscontinuity is true as well.
+		updateFillVertexBuffer(renderer, params, intersectsDiscontinuity);
+		fillVertexBuffersUpdated();
+	}
+
+	drawFillVertexBuffer(renderer, useProjector ? projector : NULL);
+}
+
+void SphericalRegion::drawFillVertexBuffer(StelRenderer* renderer, StelProjector* projector)
+{
+	renderer->drawVertexBuffer(fillPlainVertexBuffer, NULL, projector);
+}
+
+void SphericalConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjector* projector)
+{
+	renderer->drawVertexBuffer(fillPlainVertexBuffer, NULL, projector);
+}
+
+void SphericalTexturedConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjector* projector)
+{
+	renderer->drawVertexBuffer(fillTexturedVertexBuffer, NULL, projector);
+}
+
+void SphericalRegion::drawOutline(StelRenderer* renderer, const DrawParams& params)
+{
+	if(params.subdivide_ || params.projector_->intersectViewportDiscontinuity(getBoundingCap()))
+	{
+		StelCircleArcRenderer circleArcRenderer(renderer, params.projector_);
+		circleArcRenderer.drawGreatCircleArcs(getOutlineVertexPositions(), 
+		                                      getOutlinePrimitiveType(), params.clippingCap_);
+		return;
+	}
+	StelVertexBuffer<PlainVertex>* vertices = 
+		renderer->createVertexBuffer<PlainVertex>(getOutlinePrimitiveType());
+	const QVector<Vec3d>& positions = getOutlineVertexPositions();
+	for (int p = 0; p < positions.size(); p++) 
+	{
+		vertices->addVertex(PlainVertex(positions[p]));
+	}
+
+	vertices->lock();
+	renderer->drawVertexBuffer(vertices, NULL, params.projector_);
+	delete vertices;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -316,21 +1051,25 @@ bool SphericalCap::contains(const SphericalConvexPolygon& cvx) const
 	return true;
 }
 
-bool SphericalCap::containsTriangle(const Vec3d* v) const
+bool SphericalCap::containsTriangle(const Triplet<Vec3d> triangle) const
 {
-	return contains(*(v++)) && contains(*(v++)) && contains(*v);
+	return contains(triangle.a) && contains(triangle.b) && contains(triangle.c);
 }
 
-bool SphericalCap::intersectsTriangle(const Vec3d* v) const
+bool SphericalCap::intersectsTriangle(const Triplet<Vec3d>& triangle) const
 {
-	if (contains(*v) || contains(*(v+1)) || contains(*(v+2)))
+	if (contains(triangle.a) || contains(triangle.b) || contains(triangle.c))
 		return true;
 	// No points of the triangle are inside the cap
 	if (d<=0)
 		return false;
 
-	if (!sideHalfSpaceIntersects(*v, *(v+1), *this) || !sideHalfSpaceIntersects(*(v+1), *(v+2), *this) || !sideHalfSpaceIntersects(*(v+2), *v, *this))
+	if (!sideHalfSpaceIntersects(triangle.a, triangle.b, *this) ||
+	    !sideHalfSpaceIntersects(triangle.b, triangle.c, *this) ||
+	    !sideHalfSpaceIntersects(triangle.c, triangle.a, *this))
+	{
 		return false;
+	}
 
 	// Warning!!!! There is a last case which is not managed!
 	// When all the points of the polygon are outside the circle but the halfspace of the corner the closest to the
@@ -372,8 +1111,8 @@ bool SphericalCap::intersects(const SphericalConvexPolygon& cvx) const
 
 bool SphericalCap::intersects(const SphericalPolygon& polyBase) const
 {
-	// Go through the full list of triangle
-	const QVector<Vec3d>& vArray = polyBase.getFillVertexArray().vertex;
+	// Go through the full list of triangles
+	const QVector<Vec3d>& vArray = polyBase.getFillVertexPositions();
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (intersectsConvexContour(vArray.constData()+i*3, 3))
@@ -703,40 +1442,33 @@ SphericalCap SphericalPolygon::getBoundingCap() const
 	return res;
 }
 
-struct TriangleSerializer
+QVariantList SphericalPolygon::toQVariant() const
 {
-	TriangleSerializer(const TriangleSerializer& ts) : triangleList(ts.triangleList) {}
+	QVariantList triangleList;
+	TriangleIterator<Vec3d> triterator(getFillVertexPositions(), getFillPrimitiveType());
 
-	TriangleSerializer() {}
-	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
-						   unsigned int , unsigned int , unsigned int )
+	Vec3d a, b, c;
+	while(triterator.next(a, b, c))
 	{
 		QVariantList triangle;
 		double ra, dec;
 		QVariantList l;
-		StelUtils::rectToSphe(&ra, &dec, *v1);
-		l << ra*180./M_PI << dec*180./M_PI;
+		StelUtils::rectToSphe(&ra, &dec, a);
+		l << ra * 180. / M_PI << dec * 180. / M_PI;
 		triangle << QVariant(l);
 		l.clear();
-		StelUtils::rectToSphe(&ra, &dec, *v2);
-		l << ra*180./M_PI << dec*180./M_PI;
+		StelUtils::rectToSphe(&ra, &dec, b);
+		l << ra * 180. / M_PI << dec * 180. / M_PI;
 		triangle << QVariant(l);
 		l.clear();
-		StelUtils::rectToSphe(&ra, &dec, *v3);
-		l << ra*180./M_PI << dec*180./M_PI;
+		StelUtils::rectToSphe(&ra, &dec, c);
+		l << ra * 180. / M_PI << dec * 180. / M_PI;
 		triangle << QVariant(l);
 		Q_ASSERT(triangle.size()==3);
 		triangleList << QVariant(triangle);
 	}
 
-	QVariantList triangleList;
-};
-
-QVariantList SphericalPolygon::toQVariant() const
-{
-	TriangleSerializer result = getFillVertexArray().foreachTriangle(TriangleSerializer());
-	return result.triangleList;
+	return triangleList;
 }
 
 void SphericalPolygon::serialize(QDataStream& out) const
@@ -815,11 +1547,6 @@ SphericalRegionP SphericalPolygon::multiIntersection(const QList<SphericalRegion
 		reg = reg->getIntersection(regions.at(i));
 	return reg;
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// Methods for SphericalTexturedPolygon
-///////////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalConvexPolygon
@@ -935,7 +1662,7 @@ bool SphericalConvexPolygon::contains(const SphericalPolygon& poly) const
 	if (!cachedBoundingCap.contains(poly.getBoundingCap()))
 		return false;
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
+	const QVector<Vec3d>& vArray = poly.getFillVertexPositions();
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (!containsConvexContour(vArray.constData()+i*3, 3))
@@ -982,7 +1709,7 @@ bool SphericalConvexPolygon::intersects(const SphericalPolygon& poly) const
 	if (!cachedBoundingCap.intersects(poly.getBoundingCap()))
 		return false;
 	// For standard polygons, go through the full list of triangles
-	const QVector<Vec3d>& vArray = poly.getFillVertexArray().vertex;
+	const QVector<Vec3d>& vArray = poly.getFillVertexPositions();
 	for (int i=0;i<vArray.size()/3;++i)
 	{
 		if (!areAllPointsOutsideOneSide(contour.constData(), contour.size(), vArray.constData()+i*3, 3) && !areAllPointsOutsideOneSide(vArray.constData()+i*3, 3, contour.constData(), contour.size()))
@@ -1053,18 +1780,6 @@ QVariantList SphericalTexturedConvexPolygon::toQVariant() const
 	res << cv;
 	return res;
 }
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Methods for SphericalTexturedPolygon
-///////////////////////////////////////////////////////////////////////////////
-QVariantList SphericalTexturedPolygon::toQVariant() const
-{
-	Q_ASSERT(0);
-	// TODO store a tesselated polygon?, including edge flags?
-	return QVariantList();
-}
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1145,27 +1860,20 @@ inline void parseRaDec(const QVariant& vRaDec, Vec3d& v)
 		throw std::runtime_error(qPrintable(QString("invalid Ra,Dec pair: \"%1\" (expect 2 double values in degree)").arg(vRaDec.toString())));
 }
 
-struct TriangleDumper
+QVector<QVector<Vec3d > > SphericalRegion::getSimplifiedContours() const
 {
-	TriangleDumper(const TriangleDumper& ts) : triangleList(ts.triangleList) {}
+	QVector<QVector<Vec3d > > triangleList;
+	TriangleIterator<Vec3d> triterator(getFillVertexPositions(), getFillPrimitiveType());
 
-	TriangleDumper() {}
-	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
-						   unsigned int , unsigned int , unsigned int )
+	Vec3d a, b, c;
+	while(triterator.next(a, b, c))
 	{
 		QVector<Vec3d> triangle;
-		triangle << *v1 << *v2 << *v3;
+		triangle << a << b << c;
 		triangleList.append(triangle);
 	}
 
-	QVector<QVector<Vec3d > > triangleList;
-};
-
-QVector<QVector<Vec3d > > SphericalRegion::getSimplifiedContours() const
-{
-	TriangleDumper result = getFillVertexArray().foreachTriangle(TriangleDumper());
-	return result.triangleList;
+	return triangleList;
 }
 
 SphericalRegionP capFromQVariantList(const QVariantList& l)
@@ -1330,50 +2038,13 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 	if (!texCoordList.isEmpty() && contoursList.size()!=texCoordList.size())
 		throw std::runtime_error(qPrintable(QString("the number of sky contours (%1) does not match the number of texture space contours (%2)").arg( contoursList.size()).arg(texCoordList.size())));
 
-	bool ok;
 	if (texCoordList.isEmpty())
 	{
 		// No texture coordinates
 		return loadFromQVariant(contoursList);
 	}
-	else
-	{
-		// With texture coordinates
-		QVector<QVector<SphericalTexturedPolygon::TextureVertex> > contours;
-		QVector<SphericalTexturedPolygon::TextureVertex> vertices;
-		for (int i=0;i<contoursList.size();++i)
-		{
-			// Load vertices
-			const QVariantList& polyRaDecToList = contoursList.at(i).toList();
-			if (polyRaDecToList.size()<3)
-				throw std::runtime_error("a polygon contour must have at least 3 vertices");
-			SphericalTexturedPolygon::TextureVertex v;
-			foreach (const QVariant& vRaDec, polyRaDecToList)
-			{
-				parseRaDec(vRaDec, v.vertex);
-				vertices.append(v);
-			}
-			Q_ASSERT(vertices.size()>2);
 
-			// Add the texture coordinates
-			const QVariantList& polyXYToList = texCoordList.at(i).toList();
-			if (polyXYToList.size()!=vertices.size())
-				throw std::runtime_error("texture coordinate and vertices number mismatch for contour");
-			for (int n=0;n<polyXYToList.size();++n)
-			{
-				const QVariantList& vl = polyXYToList.at(n).toList();
-				if (vl.size()!=2)
-					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
-				vertices[n].texCoord.set(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok));
-				if (!ok)
-					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
-			}
-			contours.append(vertices);
-			vertices.clear();
-		}
-		return SphericalRegionP(new SphericalTexturedPolygon(contours));
-	}
-	Q_ASSERT(0);
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Code to load textured spherical region not yet implemented");
 	return SphericalRegionP(new SphericalCap());
 }
 

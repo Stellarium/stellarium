@@ -18,32 +18,51 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
-#include <QFile>
-#include <QString>
-
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
-#include "StelTexture.hpp"
 
-#include "StelUtils.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-#include "StelPainter.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelUtils.hpp"
 
-#include <QDebug>
 #include <QBuffer>
+#include <QDebug>
+#include <QFile>
+#include <QString>
+#include <QTextStream>
 
-StelTextureSP Nebula::texCircle;
-StelTextureSP Nebula::texOpenCluster;
-StelTextureSP Nebula::texGlobularCluster;
-StelTextureSP Nebula::texPlanetNebula;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
+
+Nebula::NebulaHintTextures::~NebulaHintTextures()
+{
+	if(!initialized){return;}
+
+	delete texCircle; 
+	delete texOpenCluster;    
+	delete texGlobularCluster;
+	delete texPlanetaryNebula;   
+	
+	initialized = false;
+}
+
+void Nebula::NebulaHintTextures::lazyInit(StelRenderer* renderer)
+{
+	if(initialized){return;}
+
+	texCircle          = renderer->createTexture("textures/neb.png");   // Load circle texture
+	texOpenCluster     = renderer->createTexture("textures/ocl.png");   // Load open cluster marker texture
+	texGlobularCluster = renderer->createTexture("textures/gcl.png");   // Load globular cluster marker texture
+	texPlanetaryNebula = renderer->createTexture("textures/pnb.png");   // Load planetary nebula marker texture
+
+	initialized = true;
+}
+
 
 Nebula::Nebula() :
 		M_nb(0),
@@ -152,36 +171,41 @@ double Nebula::getCloseViewFov(const StelCore*) const
 	return angularSize>0 ? angularSize * 4 : 1;
 }
 
-void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
+void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintTextures& hintTextures)
 {
 	float lim = mag;
 	if (lim > 50) lim = 15.f;
 	if (lim>maxMagHints)
 		return;
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	renderer->setBlendMode(BlendMode_Add);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 	if (StelApp::getInstance().getVisionModeNight())
 		col = StelUtils::getNightColor(col);
 
-	sPainter.setColor(col[0], col[1], col[2], 1);
+	renderer->setGlobalColor(col[0], col[1], col[2], 1);
 	if (nType == 1)
-		Nebula::texOpenCluster->bind();
+	{
+		hintTextures.texOpenCluster->bind();
+	}
+	else if (nType == 2)
+	{
+		hintTextures.texGlobularCluster->bind();
+	}
+	else if (nType == 4)
+	{
+		hintTextures.texPlanetaryNebula->bind();
+	}
+	else
+	{
+		hintTextures.texCircle->bind();
+	}
 
-	if (nType == 2)
-		Nebula::texGlobularCluster->bind();
-
-	if (nType == 4)
-		Nebula::texPlanetNebula->bind();
-
-	if (nType != 1 && nType != 2 && nType != 4)
-		Nebula::texCircle->bind();
-
-	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
+	renderer->drawTexturedRect(XY[0] - 6, XY[1] - 6, 12, 12);
 }
 
-void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
+
+void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float maxMagLabel)
 {
 	float lim = mag;
 	if (lim > 50) lim = 15.f;
@@ -191,10 +215,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
 	if (StelApp::getInstance().getVisionModeNight())
 		col = StelUtils::getNightColor(col);
+	renderer->setGlobalColor(col[0], col[1], col[2], hintsBrightness);
 
-	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
-	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 4.f + size/1.8f;
 	QString str;
 	if (nameI18!="")
 		str = getNameI18n();
@@ -206,9 +228,12 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
 			str = QString("IC %1").arg(IC_nb);
-	}
+	}                   
 
-	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
+	float size = getAngularSize(NULL) * M_PI / 180.0 * projector->getPixelPerRadAtCenter();
+	float shift = 4.f + size / 1.8f;
+
+	renderer->drawText(TextParams(XY[0] + shift, XY[1] + shift, str).useGravity().projector(projector));
 }
 
 
