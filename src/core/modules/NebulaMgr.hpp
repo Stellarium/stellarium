@@ -93,7 +93,7 @@ public:
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 	// empty for now
 	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
-	virtual QString getName() const { return "Nebulaes"; }
+	virtual QString getName() const { return "Nebulae"; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
