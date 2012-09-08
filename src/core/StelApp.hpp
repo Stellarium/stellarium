@@ -26,7 +26,6 @@
 
 // Predeclaration of some classes
 class StelCore;
-class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
@@ -71,7 +70,7 @@ public:
 	virtual ~StelApp();
 
 	//! Initialize core and default modules.
-	void init(QSettings* conf);
+	void init(QSettings* conf, class StelRenderer* renderer);
 
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
@@ -91,10 +90,6 @@ public:
 	//! Get the sky cultures manager.
 	//! @return the sky cultures manager
 	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
-
-	//! Get the texture manager to use for loading textures.
-	//! @return the texture manager to use for loading textures.
-	StelTextureMgr& getTextureManager() {return *textureMgr;}
 
 	//! Get the Location manager to use for managing stored locations
 	//! @return the Location manager to use for managing stored locations
@@ -138,18 +133,14 @@ public:
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
 
-	//! Draw all registered StelModule in the order defined by the order lists.
-	//! @return the max squared distance in pixels that any object has travelled since the last update.
-	void draw();
-
 	//! Iterate through the drawing sequence.
 	//! This allow us to split the slow drawing operation into small parts,
 	//! we can then decide to pause the painting for this frame and used the cached image instead.
 	//! @return true if we should continue drawing (by calling the method again)
-	bool drawPartial();
+	bool drawPartial(class StelRenderer* renderer);
 
-	//! Call this when the size of the GL window has changed.
-	void glWindowHasBeenResized(float x, float y, float w, float h);
+	//! Call this when the size of the window has changed.
+	void windowHasBeenResized(float x, float y, float w, float h);
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
@@ -160,12 +151,15 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
-	//! Get flag for using opengl shaders
-	bool getUseGLShaders() const {return useGLShaders;}
+	//! Get whether solar shadows should be rendered.
+	bool getRenderSolarShadows() const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
+
+	//! Set flag for activating solar shadow rendering.
+	void setRenderSolarShadows(bool);
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
@@ -182,7 +176,7 @@ public slots:
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
-	
+
 signals:
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
@@ -213,9 +207,6 @@ private:
 
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
-
-	// Textures manager for the application
-	StelTextureMgr* textureMgr;
 
 	//Shortcuts manager for the application
 	StelShortcutMgr* shortcutMgr;
@@ -249,8 +240,8 @@ private:
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
 
-	//! Define whether we use opengl shaders
-	bool useGLShaders;
+	//! Define whether solar shadows should be rendered (using GLSL shaders)
+	bool renderSolarShadows;
 
 	QSettings* confSettings;
 
@@ -259,7 +250,7 @@ private:
 
 	static QTime* qtime;
 
-	// Temporary variables used to store the last gl window resize
+	// Temporary variables used to store the last window resize
 	// if the core was not yet initialized
 	int saveProjW;
 	int saveProjH;

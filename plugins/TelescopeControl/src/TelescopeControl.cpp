@@ -43,10 +43,11 @@
 #include "StelShortcutMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelProjector.hpp"
 #include "StelStyle.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelGeometryBuilder.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -86,6 +87,13 @@ Q_EXPORT_PLUGIN2(TelescopeControl, TelescopeControlStelPluginInterface)
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
+	: pixmapHover(NULL)
+	, pixmapOnIcon(NULL)
+	, pixmapOffIcon(NULL)
+	, reticleTexture(NULL)
+	, selectionTexture(NULL)
+	, telescopeDialog(NULL)
+	, slewDialog(NULL)
 {
 	setObjectName("TelescopeControl");
 
@@ -139,10 +147,6 @@ void TelescopeControl::init()
 		//Load and start all telescope clients
 		loadTelescopes();
 		
-		//Load OpenGL textures
-		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
-		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
-		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
 
@@ -156,7 +160,7 @@ void TelescopeControl::init()
 			QString name = QString("actionMove_Telescope_To_Selection_%1").arg(i);
 			QString description = q_("Move telescope #%1 to selected object").arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			shMgr->addGuiAction(name, true, description, "", "", group, false, false);
+            shMgr->addGuiAction(name, true, description, shortcut, "", group, false, false);
 			connect(shMgr->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 
 			// "Slew to the center of the screen" commands
@@ -166,8 +170,8 @@ void TelescopeControl::init()
 			shMgr->addGuiAction(name, true, description, shortcut, "", group, false, false);
 			connect(shMgr->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		}
-
-		//Create and initialize dialog windows
+	
+		//Create and initialize dialog windows 
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
 		
@@ -175,10 +179,10 @@ void TelescopeControl::init()
 		connect(slewDialog, SIGNAL(visibleChanged(bool)), shMgr->getGuiAction("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
 		//Create toolbar button
-		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
-		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
-		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, shMgr->getGuiAction("actionShow_Slew_Window"));
+		pixmapHover   = new QPixmap(":/graphicGui/glow32x32.png");
+		pixmapOnIcon  = new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
+		pixmapOffIcon = new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
+        toolbarButton = new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiAction("actionShow_Slew_Window"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error &e)
@@ -216,6 +220,18 @@ void TelescopeControl::deinit()
 		++iterator;
 	}
 
+	if(NULL != reticleTexture)   {delete reticleTexture;}
+	if(NULL != selectionTexture) {delete selectionTexture;}
+	if(NULL != telescopeDialog)  {delete telescopeDialog;}
+	if(NULL != slewDialog)       {delete slewDialog;}
+	if(NULL != pixmapHover)      {delete pixmapHover;}
+	if(NULL != pixmapOnIcon)     {delete pixmapOnIcon;}
+	if(NULL != pixmapOffIcon)    {delete pixmapOffIcon;}
+	reticleTexture = selectionTexture = NULL;
+	telescopeDialog = NULL;
+	slewDialog = NULL;
+	pixmapHover = pixmapOnIcon = pixmapOffIcon;
+
 	//TODO: Decide if it should be saved on change
 	//Save the configuration on exit
 	saveConfiguration();
@@ -230,15 +246,17 @@ void TelescopeControl::update(double deltaTime)
 	communicate();
 }
 
-void TelescopeControl::draw(StelCore* core)
+void TelescopeControl::draw(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-	sPainter.setFont(labelFont);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	reticleTexture->bind();
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	renderer->setFont(labelFont);
+	if(NULL == reticleTexture)
+	{
+		Q_ASSERT_X(NULL == selectionTexture, Q_FUNC_INFO, "Textures should be created simultaneously");
+		reticleTexture   = renderer->createTexture(":/telescopeControl/telescope_reticle.png");
+		selectionTexture = renderer->createTexture("textures/pointeur2.png");
+		
+	}
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
@@ -249,35 +267,50 @@ void TelescopeControl::draw(StelCore* core)
 				//Telescope circles appear synchronously with markers
 				if (circleFader.getInterstate() >= 0)
 				{
-					glColor4f(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
-					glDisable(GL_TEXTURE_2D);
+					renderer->setGlobalColor(circleColor[0], circleColor[1], circleColor[2],
+					                         circleFader.getInterstate());
+					renderer->setBlendMode(BlendMode_None);
+					StelVertexBuffer<VertexP2>* circleBuffer =
+						renderer->createVertexBuffer<VertexP2>(PrimitiveType_LineStrip);
 					foreach (double circle, telescope->getOculars())
 					{
-						sPainter.drawCircle(XY[0], XY[1], 0.5 * prj->getPixelPerRadAtCenter() * (M_PI/180) * (circle));
+						StelGeometryBuilder()
+							.buildCircle(circleBuffer, XY[0], XY[1],
+							             0.5f * prj->getPixelPerRadAtCenter() * (M_PI / 180.0f) * circle);
+						renderer->drawVertexBuffer(circleBuffer);
+					
+						circleBuffer->unlock();
+						circleBuffer->clear();
 					}
-					glEnable(GL_TEXTURE_2D);
+					delete circleBuffer;
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
-					glColor4f(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
-					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
+					renderer->setBlendMode(BlendMode_Alpha);
+					reticleTexture->bind();
+					renderer->setGlobalColor(reticleColor[0], reticleColor[1], reticleColor[2],
+					                         reticleFader.getInterstate());
+					renderer->drawTexturedRect(XY[0] - 15.0f, XY[1] - 15.0f, 30.0f, 30.0f);
 				}
 				if (labelFader.getInterstate() >= 0)
 				{
-					glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+					renderer->setGlobalColor(labelColor[0], labelColor[1], labelColor[2],
+					                         labelFader.getInterstate());
 					//TODO: Different position of the label if circles are shown?
 					//TODO: Remove magic number (text spacing)
-					sPainter.drawText(XY[0], XY[1], telescope->getNameI18n(), 0, 6 + 10, -4, false);
+					renderer->drawText(TextParams(XY[0], XY[1], telescope->getNameI18n())
+					                   .shift(6 + 10, - 4).useGravity());
 					//Same position as the other objects: doesn't work, telescope label overlaps object label
 					//sPainter.drawText(XY[0], XY[1], scope->getNameI18n(), 0, 10, 10, false);
-					reticleTexture->bind();
 				}
 			}
 		}
 	}
 
 	if(GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(prj, core, sPainter);
+	{
+		drawPointer(prj, core, renderer);
+	}
 }
 
 void TelescopeControl::setStelStyle(const QString& section)
@@ -422,7 +455,7 @@ void TelescopeControl::slewTelescopeToViewDirection()
 	telescopeGoto(slotNumber, centerPosition);
 }
 
-void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
+void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelRenderer* renderer)
 {
 #ifndef COMPATIBILITY_001002
 	//Leaves this whole routine empty if this is the backport version.
@@ -439,12 +472,11 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 			return;
 
 		const Vec3f& c(obj->getInfoColor());
-		sPainter.setColor(c[0], c[1], c[2]);
+		renderer->setGlobalColor(c[0], c[1], c[2]);
 		selectionTexture->bind();
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		renderer->drawTexturedRect(screenpos[0] - 25.0f, screenpos[1] - 25.0f, 50.0f, 50.0f,
+		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 #endif //COMPATIBILITY_001002
 }

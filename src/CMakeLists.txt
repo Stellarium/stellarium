@@ -28,13 +28,6 @@ SET(glues_lib_SRCS
 	core/external/glues_stel/source/libtess/tessmono.h
 	)
 
-IF (OPENGL_MODE STREQUAL "Desktop")
-  SET(gl_lib_SRCS core/external/GLee.c core/external/GLee.h)
-ENDIF()
-IF(OPENGL_MODE STREQUAL "ES2")
-  SET(gl_lib_SRCS core/external/GLee.h)
-ENDIF()
-
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
@@ -57,8 +50,6 @@ SET(stellarium_lib_SRCS
 	core/StelProjectorType.hpp
 	core/StelSkyDrawer.cpp
 	core/StelSkyDrawer.hpp
-	core/StelPainter.hpp
-	core/StelPainter.cpp
 	core/MultiLevelJsonBase.hpp
 	core/MultiLevelJsonBase.cpp
 	core/StelSkyImageTile.hpp
@@ -91,11 +82,6 @@ SET(stellarium_lib_SRCS
 	core/StelPluginInterface.hpp
 	core/StelSkyCultureMgr.cpp
 	core/StelSkyCultureMgr.hpp
-	core/StelTextureMgr.cpp
-	core/StelTextureMgr.hpp
-	core/StelTexture.cpp
-	core/StelTexture.hpp
-	core/StelTextureTypes.hpp
 	core/StelToneReproducer.cpp
 	core/StelToneReproducer.hpp
 	core/StelSkyLayerMgr.cpp
@@ -105,6 +91,7 @@ SET(stellarium_lib_SRCS
 	core/StelFader.hpp
 	core/StelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
+	core/TriangleIterator.hpp
 	core/OctahedronPolygon.cpp
 	core/OctahedronPolygon.hpp
 	core/StelIniParser.cpp
@@ -120,8 +107,6 @@ SET(stellarium_lib_SRCS
 	core/SimbadSearcher.cpp
 	core/StelSphericalIndex.hpp
 	core/StelSphericalIndex.cpp
-	core/StelVertexArray.hpp
-	core/StelVertexArray.cpp
 	core/StelGuiBase.hpp
 	core/StelGuiBase.cpp
 	core/StelViewportEffect.hpp
@@ -131,11 +116,65 @@ SET(stellarium_lib_SRCS
 	core/RefractionExtinction.hpp
 	core/RefractionExtinction.cpp
 	core/StelLoadingBar.cpp
-	core/StelLoadingBar.hpp
+	core/StelLoadingBar.hpp 
 	core/StelShortcutMgr.hpp
 	core/StelShortcutMgr.cpp
 	core/StelShortcutGroup.cpp
 	core/StelShortcutGroup.hpp
+
+	core/Triplet.hpp
+
+	core/renderer/StelRendererStatistics.hpp
+	core/renderer/StelRenderer.cpp
+	core/renderer/StelRenderer.hpp
+	core/renderer/StelQGLViewport.cpp
+	core/renderer/StelQGLViewport.hpp
+	core/renderer/StelQGLRenderer.cpp
+	core/renderer/StelQGLRenderer.hpp
+	core/renderer/StelQGL1Renderer.hpp
+	core/renderer/StelQGL2Renderer.hpp
+	
+	core/renderer/StelCircleArcRenderer.hpp
+
+	core/renderer/StelGLCompatibility.hpp
+	core/renderer/StelGLUtilityFunctions.cpp
+	core/renderer/StelGLUtilityFunctions.hpp
+
+	core/renderer/StelIndexBuffer.hpp
+	core/renderer/StelQGLIndexBuffer.hpp
+	core/renderer/StelVertexBuffer.hpp
+	core/renderer/StelVertexBufferBackend.hpp
+	core/renderer/StelQGLArrayVertexBufferBackend.cpp
+	core/renderer/StelQGLArrayVertexBufferBackend.hpp
+	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.cpp
+	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.hpp
+	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.cpp
+	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.hpp
+	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.cpp
+	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.hpp
+	core/renderer/StelQGL1ArrayVertexBufferBackend.cpp
+	core/renderer/StelQGL1ArrayVertexBufferBackend.hpp
+	core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
+	core/renderer/StelQGL2ArrayVertexBufferBackend.hpp
+	core/renderer/StelVertexAttribute.hpp
+	core/renderer/StelGeometryBuilder.hpp
+	core/renderer/StelGeometryBuilder.cpp
+	core/renderer/GenericVertexTypes.hpp
+
+	core/renderer/StelTextureParams.hpp
+	core/renderer/StelTextureNew.cpp
+	core/renderer/StelTextureNew.hpp
+	core/renderer/StelTextureBackend.hpp
+	core/renderer/StelTextureCache.hpp
+	core/renderer/StelQGLTextureBackend.cpp
+	core/renderer/StelQGLTextureBackend.hpp
+	core/renderer/StelTextureLoader.hpp
+
+	core/renderer/StelLight.hpp
+
+	core/renderer/StelGLSLShader.hpp
+	core/renderer/StelQGLGLSLShader.hpp
+	core/renderer/StelQGLGLSLShader.cpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
@@ -349,7 +388,6 @@ SET(stellarium_MOC_HDRS
 	core/StelLocationMgr.hpp
 	core/StelCore.hpp
 	core/StelAppGraphicsWidget.hpp
-	core/StelTexture.hpp
 	core/StelMovementMgr.hpp
 	core/MultiLevelJsonBase.hpp
 	core/StelSkyImageTile.hpp
@@ -361,6 +399,9 @@ SET(stellarium_MOC_HDRS
 	core/SimbadSearcher.hpp
 	core/StelShortcutMgr.hpp
 	core/StelShortcutGroup.hpp
+	core/renderer/StelTextureBackend.hpp
+	core/renderer/StelQGLTextureBackend.hpp
+	core/renderer/StelTextureLoader.hpp
 	core/modules/ConstellationMgr.hpp
 	core/modules/GridLinesMgr.hpp
 	core/modules/LabelMgr.hpp
@@ -618,6 +659,11 @@ ENDIF()
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/VirGO/src/${CMAKE_CFG_INTDIR}/libVirGO.a ${CFITSIO_LIBRARIES})
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
   ENDIF()
+
+  IF (USE_PLUGIN_RENDERERSTATISTICS)
+	  SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/RendererStatistics/src/${CMAKE_CFG_INTDIR}/libRendererStatistics.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_RENDERERSTATISTICS)
+  ENDIF()
 ENDIF()
 
 
@@ -669,7 +715,8 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ################################## Build unit tests #########################################
 #############################################################################################
 
-SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(extLinkerOptionTest ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
+
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -697,8 +744,6 @@ SET(tests_testStelSphereGeometry_SRCS
 	tests/testStelSphereGeometry.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
-	core/StelVertexArray.hpp
-	core/StelVertexArray.cpp
 	core/OctahedronPolygon.hpp
 	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
@@ -722,8 +767,6 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelSphericalIndex.cpp
 	core/StelSphereGeometry.hpp
 	core/StelSphereGeometry.cpp
-	core/StelVertexArray.hpp
-	core/StelVertexArray.cpp
 	core/OctahedronPolygon.hpp
 	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
@@ -750,35 +793,46 @@ ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SR
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
-SET(tests_testStelVertexArray_SRCS
-  tests/testStelVertexArray.hpp
-  tests/testStelVertexArray.cpp
-  core/StelVertexArray.hpp)
-QT4_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
-ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
-TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
-ADD_DEPENDENCIES(buildTests testStelVertexArray)
-
-#
-# Temporary disable RefractionExtinction test because now we have two classes:  Refraction and Extinction
-#
-#SET(tests_testRefractionExtinction_SRCS
-#  tests/testRefractionExtinction.hpp
-#  tests/testRefractionExtinction.cpp
-#  core/RefractionExtinction.hpp
-#  core/RefractionExtinction.cpp)
-#QT4_WRAP_CPP(tests_testRefractionExtinction_MOC_SRCS tests/testRefractionExtinction.hpp)
-#ADD_EXECUTABLE(testRefractionExtinction EXCLUDE_FROM_ALL ${tests_testRefractionExtinction_SRCS} ${tests_testRefractionExtinction_MOC_SRCS})
-#TARGET_LINK_LIBRARIES(testRefractionExtinction ${extLinkerOptionTest})
-#ADD_DEPENDENCIES(buildTests testRefractionExtinction)
+SET(tests_testStelVertexBuffer_SRCS
+  ${glues_lib_SRCS}
+  tests/testStelVertexBuffer.hpp
+  tests/testStelVertexBuffer.cpp
+  core/StelFileMgr.cpp
+  core/StelSphereGeometry.cpp
+  core/StelSphereGeometry.hpp
+  core/StelProjector.cpp
+  core/StelProjector.hpp
+  core/OctahedronPolygon.cpp
+  core/OctahedronPolygon.hpp
+  core/StelJsonParser.cpp
+  core/StelJsonParser.hpp
+  core/StelUtils.cpp
+  core/StelUtils.hpp
+  core/StelTranslator.cpp
+  core/StelTranslator.hpp
+  core/renderer/StelVertexBuffer.hpp
+  core/renderer/StelVertexBufferBackend.hpp
+  core/renderer/StelGLUtilityFunctions.cpp
+  core/renderer/StelGLSLShader.hpp
+  core/renderer/StelQGLGLSLShader.cpp
+  core/renderer/StelQGLGLSLShader.hpp
+  core/renderer/StelQGLArrayVertexBufferBackend.cpp
+  core/renderer/StelQGLArrayVertexBufferBackend.hpp
+  core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
+  core/renderer/StelQGL2ArrayVertexBufferBackend.hpp)
+QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
+ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
+${tests_testStelVertexBuffer_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
+######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexBuffer WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-# ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testRefractionExtinction WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
 

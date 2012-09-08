@@ -50,7 +50,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--help (or -h)          : This cruft.\n"
 		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
-		          << "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
+		          << "--safe-mode (or -s)     : Disable shaders and use older GL renderer\n"
 		          << "                          Try this is you have graphics problems\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 		          << "                          the full screen setting in the config file\n"

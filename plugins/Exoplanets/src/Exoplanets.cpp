@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -25,11 +24,12 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "LabelMgr.hpp"
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
@@ -47,6 +47,7 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
 #include <QPixmap>
@@ -82,7 +83,14 @@ Q_EXPORT_PLUGIN2(Exoplanets, ExoplanetsStelPluginInterface)
  Constructor
 */
 Exoplanets::Exoplanets()
-	: flagShowExoplanets(false), OnIcon(NULL), OffIcon(NULL), GlowIcon(NULL), toolbarButton(NULL), progressBar(NULL)
+	: texPointer(NULL)
+	, markerTexture(NULL)
+	, flagShowExoplanets(false)
+	, OnIcon(NULL)
+	, OffIcon(NULL)
+	, GlowIcon(NULL)
+	, toolbarButton(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
@@ -108,8 +116,9 @@ Exoplanets::~Exoplanets()
 void Exoplanets::deinit()
 {
 	ep.clear();
-	Exoplanet::markerTexture.clear();
-	texPointer.clear();
+	if(NULL != texPointer)    {delete texPointer;}
+	if(NULL != markerTexture) {delete markerTexture;}
+	texPointer = markerTexture = NULL;
 }
 
 void Exoplanets::update(double) //deltaTime
@@ -148,9 +157,6 @@ void Exoplanets::init()
 		readSettingsFromConfig();
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
-
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
-		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -214,27 +220,33 @@ void Exoplanets::init()
 /*
  Draw our module. This should print name of first PSR in the main window
 */
-void Exoplanets::draw(StelCore* core)
+void Exoplanets::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (!flagShowExoplanets)
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
-	painter.setFont(font);
+	renderer->setFont(font);
+
+	if(NULL == texPointer)
+	{
+		Q_ASSERT_X(NULL == markerTexture, Q_FUNC_INFO, "Textures need to be created simultaneously");
+		texPointer    = renderer->createTexture("textures/pointeur2.png");
+		markerTexture = renderer->createTexture(":/Exoplanets/exoplanet.png");
+	}
 	
 	foreach (const ExoplanetP& eps, ep)
 	{
 		if (eps && eps->initialized)
-			eps->draw(core, painter);
+			eps->draw(core, renderer, prj, markerTexture);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
+		drawPointer(core, renderer, prj);
 
 }
 
-void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
+void Exoplanets::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -246,16 +258,15 @@ void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
 
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
+		if (!projector->project(pos, screenpos))
 			return;
 
 		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		renderer->setGlobalColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 
+		                           26.0f, StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 }
 

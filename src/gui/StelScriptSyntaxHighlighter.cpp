@@ -119,7 +119,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 			}
 		}
         }
-	moduleNames << "\\bStelSkyImageMgr\\b" << "\\bStelSkyDrawer\\b" << "\\bcore\\b";
+	moduleNames << "\\bStelSkyLayerMgr\\b" << "\\bStelSkyDrawer\\b" << "\\bcore\\b";
 	foreach(const QString &pattern, moduleNames)
 	{
 		rule.pattern = QRegExp(pattern);

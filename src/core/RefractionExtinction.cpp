@@ -230,25 +230,37 @@ void Refraction::backward(Vec3d& altAzPos) const
 
 void Refraction::forward(Vec3f& altAzPos) const
 {
-	altAzPos.transfo4d(preTransfoMatf);
-	const float length = altAzPos.length();
-	float geom_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
-	if (geom_alt_deg > Refraction::MIN_GEO_ALTITUDE_DEG_F)
+	// Using doubles internally to avoid jitter.
+	// (This affects planet drawing - which is done using floats, 
+	// as doubles are unsupported/slow on GPUs)
+	Vec3d altAzPosD(altAzPos[0], altAzPos[1], altAzPos[2]);
+	altAzPosD.transfo4d(preTransfoMat);
+	const double length = altAzPosD.length();
+	double geom_alt_deg=180./M_PI*std::asin(altAzPosD[2]/length);
+	if (geom_alt_deg > Refraction::MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
+		double r=press_temp_corr_Saemundson / 
+		        std::tan((geom_alt_deg+10.3/(geom_alt_deg+5.11))*M_PI/180.) + 0.0019279;
 		geom_alt_deg += r;
-		if (geom_alt_deg > 90.f) geom_alt_deg=90.f; // SAFETY
-		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.f)*length;
+		if (geom_alt_deg > 90.) geom_alt_deg=90.; // SAFETY
+		altAzPosD[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
-	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_GEO_DEG_F)
+	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_GEO_DEG)
 	{
-		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG_F and bottom of transition zone
-		float r_m5=press_temp_corr_Saemundson / std::tan((Refraction::MIN_GEO_ALTITUDE_DEG_F+10.3f/(Refraction::MIN_GEO_ALTITUDE_DEG_F+5.11f))*M_PI/180.f) + 0.0019279f;
-		geom_alt_deg += r_m5*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_GEO_DEG_F))/Refraction::TRANSITION_WIDTH_GEO_DEG_F;
-		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
+		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG and bottom of transition zone
+		double r_m5=press_temp_corr_Saemundson /
+		          std::tan((Refraction::MIN_GEO_ALTITUDE_DEG+10.3/
+		                    (Refraction::MIN_GEO_ALTITUDE_DEG+5.11))*M_PI/180.) + 0.0019279;
+		geom_alt_deg += 
+			r_m5*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG-
+			                    Refraction::TRANSITION_WIDTH_GEO_DEG))
+			/Refraction::TRANSITION_WIDTH_GEO_DEG;
+		altAzPosD[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
-	altAzPos.transfo4d(postTransfoMatf);
+	altAzPosD.transfo4d(postTransfoMat);
+
+	altAzPos = Vec3f(altAzPosD[0], altAzPosD[1], altAzPosD[2]);
 }
 
 void Refraction::backward(Vec3f& altAzPos) const

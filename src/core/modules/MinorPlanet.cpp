@@ -23,8 +23,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-#include "StelTexture.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
@@ -65,7 +63,6 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
@@ -243,8 +240,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true)) << "<br>";
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
-	if ((flags&Extra1) && (semiMajorAxis>0))
-		oss << q_("Orbital period: %1 days").arg(QString::number(StelUtils::calculateOrbitalPeriod(semiMajorAxis), 'f', 0)) << "<br>";
+	double siderealPeriod = getSiderealPeriod();
+	if ((flags&Extra1) && (siderealPeriod>0))
+	{
+		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+	}
 
 	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
 	/*
@@ -255,6 +256,17 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+double MinorPlanet::getSiderealPeriod() const
+{
+	double period;
+	if (semiMajorAxis>0)
+		period = StelUtils::calculateOrbitalPeriod(semiMajorAxis);
+	else
+		period = 0;
+
+	return period;
 }
 
 float MinorPlanet::getVMagnitude(const StelCore* core, bool withExtinction) const

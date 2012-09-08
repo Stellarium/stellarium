@@ -31,11 +31,10 @@
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -43,7 +42,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelSkyImageTile.hpp"
-#include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
@@ -54,17 +52,18 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
 
-NebulaMgr::NebulaMgr(void) : nebGrid(200)
+NebulaMgr::NebulaMgr(void) : nebGrid(200),  texPointer(NULL)
 {
 	setObjectName("NebulaMgr");
 }
 
 NebulaMgr::~NebulaMgr()
 {
-	Nebula::texCircle = StelTextureSP();
-	Nebula::texOpenCluster = StelTextureSP();
-	Nebula::texGlobularCluster = StelTextureSP();
-	Nebula::texPlanetNebula = StelTextureSP();
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+		texPointer = NULL;
+	}
 }
 
 /*************************************************************************
@@ -93,11 +92,6 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
-	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");   // Load circle texture
-	Nebula::texOpenCluster = StelApp::getInstance().getTextureManager().createTexture("textures/ocl.png");   // Load open clister marker texture
-	Nebula::texGlobularCluster = StelApp::getInstance().getTextureManager().createTexture("textures/gcl.png");   // Load globular clister marker texture
-	Nebula::texPlanetNebula = StelApp::getInstance().getTextureManager().createTexture("textures/pnb.png");   // Load planetary nebula marker texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
@@ -115,42 +109,52 @@ void NebulaMgr::init()
 
 struct DrawNebulaFuncObject
 {
-	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, StelCore* aCore, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), core(aCore), checkMaxMagHints(acheckMaxMagHints)
+	DrawNebulaFuncObject
+		(float amaxMagHints, float amaxMagLabels, StelProjectorP projector,
+		 StelRenderer* renderer, StelCore* aCore, bool acheckMaxMagHints,
+		 Nebula::NebulaHintTextures& nebulaHintTextures) 
+		: maxMagHints(amaxMagHints)
+		, maxMagLabels(amaxMagLabels)
+		, projector(projector)
+		, renderer(renderer)
+		, core(aCore)
+		, checkMaxMagHints(acheckMaxMagHints)
+		, nebulaHintTextures(nebulaHintTextures)
 	{
-		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
+		angularSizeLimit = 5.0f / projector->getPixelPerRadAtCenter() * 180.0f / M_PI;
 	}
-	void operator()(StelRegionObjectP obj)
+
+	// Optimization: Smart pointer is intentionally not used.
+	// This is safe as long as we don't save it (the caller owns the pointer).
+	void operator()(StelRegionObject* obj)
 	{
-		Nebula* n = obj.staticCast<Nebula>().data();
+		Nebula* n = static_cast<Nebula*>(obj);
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
-			sPainter->getProjector()->project(n->XYZ,n->XY);
-			n->drawLabel(*sPainter, maxMagLabels-refmag_add);
-			n->drawHints(*sPainter, maxMagHints -refmag_add);
+			projector->project(n->XYZ,n->XY);
+			n->drawLabel(renderer, projector, maxMagLabels-refmag_add);
+			n->drawHints(renderer, maxMagHints -refmag_add, nebulaHintTextures);
 		}
 	}
 	float maxMagHints;
 	float maxMagLabels;
-	StelPainter* sPainter;
+	StelProjectorP projector;
+	StelRenderer* renderer;
 	StelCore* core;
 	float angularSizeLimit;
 	bool checkMaxMagHints;
+	Nebula::NebulaHintTextures& nebulaHintTextures;
 };
 
 // Draw all the Nebulae
-void NebulaMgr::draw(StelCore* core)
+void NebulaMgr::draw(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
 
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
-
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
 
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
@@ -159,15 +163,20 @@ void NebulaMgr::draw(StelCore* core)
 	// Print all the nebulae of all the selected zones
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
-	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
+	
+	renderer->setFont(nebulaFont);
+	nebulaHintTextures.lazyInit(renderer);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, prj, renderer, core, 
+	                          hintsFader.getInterstate()>0.0001, nebulaHintTextures);
 	nebGrid.processIntersectingRegions(p, func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, sPainter);
+	{
+		drawPointer(core, renderer);
+	}
 }
 
-void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
+void NebulaMgr::drawPointer(const StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -177,27 +186,38 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		// Compute 2D pos and return if outside screen
-		if (!prj->projectInPlace(pos)) return;		
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(0.8f,0.0f,0.0f);
-		else
-			sPainter.setColor(0.4f,0.5f,0.8f);
+		// Compute 2D pos and don't draw if outside screen
+		if (!prj->projectInPlace(pos)) return;
 
+		const Vec4f color = StelApp::getInstance().getVisionModeNight()
+		                  ? Vec4f(0.8f,0.0f,0.0f,1.0f) : Vec4f(0.4f,0.5f,0.8f,1.0f);
+		renderer->setGlobalColor(color);
+
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur5.png");   // Load pointer texture
+		}
 		texPointer->bind();
 
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		renderer->setBlendMode(BlendMode_Alpha);
 
-		// Size on screen
+		// Size of the whole pointer on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]-size/2, 10, 90);
-		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]+size/2, 10, 0);
-		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]+size/2, 10, -90);
-		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]-size/2, 10, -180);
+
+		const float halfSize = size * 0.5;
+
+		const float xLeft   = pos[0] - halfSize - 10;
+		const float xRight  = pos[0] + halfSize - 10;
+		const float yTop    = pos[1] - halfSize - 10;
+		const float yBottom = pos[1] + halfSize - 10;
+
+		// Every part of the pointer has size 20.
+		renderer->drawTexturedRect(xLeft,  yTop,    20, 20, 90);
+		renderer->drawTexturedRect(xLeft,  yBottom, 20, 20, 0);
+		renderer->drawTexturedRect(xRight, yBottom, 20, 20, -90);
+		renderer->drawTexturedRect(xRight, yTop,    20, 20, -180);;
 	}
 }
 

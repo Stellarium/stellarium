@@ -1,0 +1,422 @@
+/*
+ * Stellarium
+ * Copyright (c) 2012 Ferdinand Majerech
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+/*!
+
+@page renderer Renderer
+
+
+
+@section introduction Introduction
+
+During Google Summer of Code 2012, graphics code was separated into a subsystem
+called Renderer (<code>src/core/renderer</code>).
+
+Renderer is composed of interface classes abstracting away low-level graphics
+work, and backend classes either derived from or used by the interface classes.
+
+This allows to change underlying implementation without rewriting drawing code.
+For example, we now have two sets of backend classes: GL1 and GL2.  Which one
+us used is decided at startup without affecting drawing code.
+
+
+
+@section outline API outline
+
+@image html renderer-api-overview.png
+
+@subsection stelrenderer StelRenderer
+
+The central class of the Renderer subsystem is StelRenderer.  It constructs
+other graphics classes (textures, vertex and index buffers, etc.) and sets
+graphics state (global color, depth test mode, etc.). It also handles drawing.
+There is always only one StelRenderer instance, though it's not a singleton (no
+global access). While the graphics classes are constructed by StelRenderer,
+it's the caller's responsibility to delete them. Also, they must be destroyed
+before StelRenderer (which is destroyed right before the program exits).
+
+For example, to construct a texture (StelTextureNew), call
+StelRenderer::createTexture(), to construct a vertex buffer (StelVertexBuffer),
+call StelRenderer::createVertexBuffer(), and so on. 
+
+Handling construction of graphics classes in StelRenderer allows different
+backends (e.g. GL1, GL2) to construct their own implementations.
+
+@subsection stelvertexbuffer StelVertexBuffer
+
+StelVertexBuffer is a templated array-like container constructed by
+StelRenderer that stores vertices. A vertex is a struct specified by user
+through the template argument; it has to fulfill some requirements (see
+StelVertexBuffer documentation), e.g. it can't have data members that don't
+make sense in a vertex.  Various vertex types are possible; vertex type
+specifies what attributes to use (position, texcoord, color, normal) as well as
+their dimensions.
+
+Before drawing, a vertex buffer must be locked, allowing things like uploading
+vertices to the GPU.  Vertex buffers are drawn using StelRenderer. If possible,
+they should be filled once, locked, and never unlocked again.  Backend might
+then move the vertex data to the GPU, greatly improving performance even if
+some extra vertices are drawn.
+
+@subsection stelindexbuffer StelIndexBuffer
+
+Index buffers can be used with vertex buffers to specify which vertices to
+draw.  For example, a vertex buffer containing a 2D grid might be used with
+many index buffers (one draw per index buffer), each specifying a row of the
+grid as a triangle strip.  StelIndexBuffer API is similar to StelVertexBuffer,
+but it's not templated. There are 2 index types (specified at construction);
+16bit and 32bit. 16bit is faster but only usable with with up to 65535
+vertices.  Again, the buffer must be locked before drawing, and it's best to
+keep it locked for a long time without modifications.
+
+@subsection steltexturenew StelTextureNew
+
+Textures are bound to texture units to be used in following draws.  Textures
+are used only with vertex types that have texture coordinates. By default, only
+the texture bound to the first texture unit is drawn, interpreted as color.
+Shaders can also use other texture units and interpret the texture differently
+(as normals, specularity, etc.).
+
+StelTextureNew is the interface class for textures. StelRenderer never fails to
+construct a texture, but the new texture might be in various states. If loading
+fails, the texture is in "Error" state, and, when bound, a placeholder texture
+is used instead.  Depending on creation parameters, a texture might still be
+loading in background when constructed. It might even wait to start loading
+until the first time it's bound. In this case the placeholder is used until
+loading finishes.
+
+@subsection stelglslshader StelGLSLShader
+
+Shaders are programs running on the GPU that can override default graphics
+functionality. They are usually used for advanced effects such as normal
+mapping, shadows, and so on. Some backends (GL2) might draw everything with
+shaders internally, but default graphics functionality is unchanged.  Graphics
+APIs have different shader languages; for OpenGL, GLSL is used.  There is no
+simple way to abstract this behind a backend-independent interface, so instead
+of a generic "Shader" class, GLSL is used as an optional StelRenderer feature
+that might not be supported by a backend. If ever needed, support for HLSL
+(used by Direct3D) might be implemented in a similar way.
+
+StelGLSLShader is a GLSL shader program class constructed by StelRenderer.  The
+program is composed of vertex and fragment shaders, equivalent to .c files in
+a C program. There must be at least one vertex and one fragment shader.  There
+might be more, which is useful for more complex shaders.  There can only be one
+main() function for vertex shader and one for fragment shader.  Shaders can be
+named, and enabled or disabled by name, allowing for exchangeable modules.
+
+Vertex shaders run once per vertex while fragment shaders run at least once per
+pixel. Keep this in mind; a graphics scene might have 100000 vertices but it
+will likely have many more pixels, e.g. 1920x1080 is roughly 2000000 pixels.
+
+Code using GLSL must be optional as the renderer might not support it. The code
+must first ask StelRenderer if GLSL is supported, if so, use the GLSL-based
+code, and otherwise use a fallback implemented without shaders. For
+non-essential effects, like shadows, disabling the effect without a fallback
+might be enough.
+
+
+@subsection extensions Renderer extension classes
+
+Some graphics functionality is commonly used but can be implemented using
+existing Renderer API. Unless heavy optimizations are needed , this
+functionality should be built on top of other Renderer classes. I call this
+"extensions". The advantage of extensions is that they only depend on the
+public Renderer API, reducing work needed to be done in each backend.
+
+An example is sphere drawing. While StelRenderer could have a "drawSphere"
+member function, adding such functions might result in a difficult to implement
+API.  So instead we have a class that builds sphere vertex/index buffers using
+existing API.
+
+Current extension classes are StelGeometryBuilder and StelCircleArcRenderer.
+The former builds vertex buffers with various geometry to be drawn. The latter
+draws circle arcs, used to display various lines in the sky with correct
+curvature.
+
+
+@section api_philosophy API design philosophy
+
+Renderer is designed with five priorities, in this order:
+
+<ol>
+<li> ease of use (code using Renderer) </li>
+<li> portability (ease of backend implementation) </li>
+<li> maintainability (avoid bug creep, avoid API breaking) </li>
+<li> speed (FPS) </li>
+<li> power (features) </li>
+</ol>
+
+This is not absolute. Portability can trump ease of use; otherwise we'd use
+a plain GL2+ wrapper. Same is true for speed; otherwise we'd have an
+immediate mode style API.
+
+Ease of use is rather obvious. Drawing code should be as simple as possible.
+While some graphics knowledge is required, we should not require mastery of
+OpenGL.
+
+Portability matters as Stellarium runs not only on the PC OS's, but also on
+mobile platforms and maybe even some embedded systems.  Getting a basic backend
+for a new platform to work should be a straightforward, one-week task.
+Eventually, Stellarium will need backends for OpenGL 4+ and OpenGL ES 3.
+A backend should not need to implement hundreds of functions.
+
+Maintainability is close to portability. To be portable, an API should be
+simple, and a simple API will also be more maintainable. Features should not be
+added because they are cool; they should be added when needed.  They should be
+well documented, both API and implementation. Documentation should include code
+examples if possible, and be updated immediately when a feature changes, not
+"when time allows it". Tests should be added when possible; we still need to
+improve this.  Code should be simple first.  Unless it absolutely needs to be
+powerful and/or optimized, it should be easy to read.  100-line functions are
+bad.  1000-line files are unacceptable.
+
+Speed is important as Stellarium is a real-time app. It's not Crysis, so speed
+isn't the main priority, but it's not Crysis, so it shouldn't require high-end
+hardware. Old GPUs should work, as should modern integrated GPUs.  With
+Stellarium's graphics it's viable to support mainstream hardware up to 10 years
+old. That said, speed often conflicts with maintainability. Optimization should
+only be done based on careful profiling and measurable gains.  Adding 1000
+lines to get 0.1 FPS will result in bugs and maybe even slowdown as code rots
+and hardware changes.
+
+The API must be powerful to draw everything Stellarium needs.  However, we
+don't compete in the demoscene; if not adding a feature Stellarium does not
+need will make the API simpler or more portable, we shouldn't add it. For
+example, StelRenderer depth buffer functionality doesn't match OpenGL; it only
+covers the cases we use (with a mechanism to add more if needed).  This
+disallows creating some effects possible with OpenGL, but it is simpler, and
+much easier to emulate on a backend that does not support these particular
+OpenGL features.
+
+
+@section implementation Implementation
+
+@subsection impl_overview Overview
+
+@image html renderer-implementation-overview.png
+
+Currently there are two Renderer backends: QGL1 and QGL2, based on OpenGL 1.2
+and OpenGL 2.1 respectively. They use Qt's QGL classes for things like context
+management and texture upload.  Code common for both versions, like some GL
+state, textures, viewport and vertex array manipulation, is shared between
+these, while code such as fixed-function/shaders and drawing is separate.
+
+The QGL1 backend is designed for compatibility with old hardware; it doesn't
+usually use new features brought by extensions or later GL 1.x versions.  It
+requires GL 1.2 for vertex array and texture clamp to edge wrapping mode 
+support. After Qt5 removes GL 1.x support this backend should still work as 
+GL 2.x is backwards compatible with GL 1.x; but only on drivers that support 
+GL 2.x . It provides better compatibility/speed for older GPUs and buggy 
+drivers.
+
+The QGL2 backend should use GL 2.1 to its fullest, and might even have
+optionally use features from GL 3.x and extensions, but never require them. An
+example is float texture support, which requires GL 3.0 .  It's required for
+advanced effects such as shadows, and obviously for any GLSL based effects.
+It's also likely to be slower than the QGL1 backend.
+
+
+@subsection viewport StelQGLViewport
+
+Manages the viewport. It handles capturing the screen to a texture, screenshots
+and so on. If FBOs are supported and not disabled, custom double buffering
+logic is used allowing to interrupt a frame in progress to increase
+responsiveness, finishing the drawing later.
+
+@subsection vertexbufferbackend StelVertexBufferBackend and implementations
+
+In C++, a templated function can never be virtual; so
+<strong>createVertexBuffer()</strong> functions of StelRenderer implementations
+can't construct objects derived from
+<strong>StelVertexBuffer<SomeVertexType></strong> . To work around this
+limitation without sacrificing its safe templated API StelVertexBuffer wraps
+a non-templated class, StelVertexBufferBackend, from which backend vertex
+buffers are derived.  StelRenderer has an internal virtual function that allows
+its implementations to return a custom vertex buffer backend type.
+
+StelVertexBufferBackend doesn't know the vertex type directly; it uses metadata
+from the VERTEX_ATTRIBUTES macro in the vertex type describing its layout and
+vertex attributes (data members).
+
+Currently, only one vertex buffer backend exists;
+StelQGLArrayVertexBufferBackend, based on vertex arrays where each vertex
+attribute is in a separate array. GL version specific backends
+StelQGL1ArrayVertexBufferBackend and StelQGL2ArrayVertexBufferBackend, used by
+StelQGL1Renderer and StelQGL2Renderer respectively, derive from it, specifying
+drawing logic (fixed function for QGL1 and shaders for QGL2).
+
+@subsection texturebackend StelTextureBackend and implementations
+
+Like StelVertexBuffer, StelTextureNew wraps a backend class;
+StelTextureBackend, from which the each backend derives.  The reason is not
+templating; the API class and backend are separate so the former is owned by
+user code, while the latter might be owned by the renderer backend.  This
+allows for features like texture caching; deleting the frontend decreases
+a reference count of the backend in cache.  Caching is used internally to avoid
+loading the same texture twice. If creating a texture from a previously loaded
+file we can return a cached texture instead, wrapping the same
+StelTextureBackend in a different StelTextureNew. Caching is not mandatory, so
+there might be backends that don't use it.
+
+The only backend right now is StelQGLTextureBackend, used both for GL1 and GL2
+(it's managed by StelQGLRenderer).  It uses Qt functions to load textures with
+some exceptions like loading textures from raw data, when plain GL texture
+functions are used.
+
+@subsection qglglslshader StelQGLGLSLShader
+
+This is the shader backend used by StelQGL2Renderer. It uses QGL to manage
+shaders. All shaders added are stored in compiled form.  When
+<strong>build()</strong> is called, enabled shaders are linked into a shader
+program, but the program is only bound inside StelQGL2Renderer's draw code.
+Linked programs are cached so we never link the same program twice.  Any
+uniforms set are stored in temporary storage and only passed when the
+underlying program is bound.
+
+@subsection rendererbackend StelQGLRenderer, StelQGL1Renderer, StelQGL2Renderer
+
+The GL1 and GL2 backends share much code; this code is in the StelQGLRenderer
+class. This includes text and rectangle drawing, texture management,
+viewport (StelQGLViewport), and so on.
+
+StelQGL1Renderer contains GL1 specific code. This is mostly pre-draw setup
+(drawing is done by StelQGL1ArrayVertexBufferBackend) and various GL1 specific
+state.
+
+StelQGL2Renderer is more complicated. Along with functionality equivalent to
+StelQGL1Renderer, it also manages shaders.  Especially important is swapping of
+default shaders, which emulate a simplified fixed function pipeline with
+specific vertex formats, and custom shaders specified by the user by binding
+a StelGLSLShader.
+
+
+@section implementation_philosophy Implementation philosophy
+
+Implementation is usually secondary to the API (ease of use); it needs to work
+within its constraints. It's not acceptable to break the API just to make
+implementation a bit more convenient. The main priorities of the implementation
+are maintainability and speed. Portability is not much of a concern - we might
+e.g. have a Windows-only Direct3D implementation, as long as we have
+implementations to cover other platforms.  Power and ease of use are determined
+by the API.
+
+Maintainability is often in direct conflict with speed; highly optimized code
+is hard to maintain. There is one way we can deal with this; for any part of
+the subsystem, a simple and readable, not necessarily fast, implementation
+should exist. This can then be used as a reference when writing other
+implementations (for different platforms or for speed) and for testing.
+StelQGLArrayVertexBufferBackend, StelQGLIndexBuffer, StelQGLGLSLShader and
+StelQGLTextureBackend can be considered such references, but they could
+probably be simpler if they should serve exclusively this purpose.
+
+We can also have implementations designed for speed, optimized as much as
+possible. For example, a vertex buffer implementation could internally switch
+between vertex arrays and VBOs based on last time the buffer was updated.
+Complexity is acceptable here as long as it brings speed gains.
+
+The advantage of this approach is that we always have an implementation that
+works and is maintainable. Optimized implementations might be thrown out and
+replaced if maintainability is a problem, but we still have something that
+works.
+
+
+@section usage_patterns Why not singleton & Usage patterns
+
+Unlike other core services, StelRenderer is not directly accessible through
+StelCore, nor is there any way to access it globally. Only one StelRenderer
+exists, but it's not a singleton. Drawing code usually gets a StelRenderer
+through a parameter.  This has more to do with maintainability than ease of
+use; a globally accessible StelRenderer might be easier to use, removing need
+for lazy initialization.
+
+Initialization and destruction of StelRenderer backend happens at well defined
+times and when a StelRenderer pointer is passed to drawing code, it's
+guaranteed to be initialized. Graphics accessing a StelRenderer globally might
+end up using an uninitialized StelRenderer, or, if it was a lazily initialized
+singleton, trigger premature initialization.
+
+In future Renderer could be enhanced to allow switching backends
+post-initialization, even for single frames (e.g. export to document formats).
+This would be more complicated with a global renderer, although the main
+problem here is different - allowing API objects constructed by one renderer to
+work with another.
+
+Finally, the main reason why StelRenderer is not globally accessible is making
+any future (however distant) major rewrites less complicated.  Refactoring
+previous drawing code was made difficult by circular dependencies of various
+parts of code; not in the "include" sense, but in "classes using each other"
+sense. There was no clear point to start - many things had to be refactored
+simultaneously. Removing global accessibility makes dependencies more similar
+to a directed acyclic graph and there are clear points to start changes.
+
+The disadvantage of a non-global StelRenderer is that we can't access it when
+initializing drawing code (unless it's explicitly passed). I.e. we can't load
+our textures when a class using StelRenderer is constructed.  However, we don't
+need to initialize at construction; we only need the drawing objects to be
+ready before drawing. We can initialize them lazily. One way to do this is
+initializing drawing data in a function called during the first draw,setting an
+"initialized" flag, and only letting destructor destroy this data if this flag
+is set. This is less convenient, but it might actually improve performance as
+we only initialize drawing data once we need it.
+
+
+@section future Future development 
+
+
+The Renderer API is quite complete and should be sufficient for some time;
+especially the shader support can be used for various new graphics features.
+However, backend performance, especially the GL2 backend, leaves something to
+be desired. Also, now that all drawing is separated, new debugging and
+profiling features are possible.
+
+One near-term goal is collection of statistics about the backend's operation.
+We should be able to collect data about things such as the number of calls of
+specific functions per frame, triangles/vertices/indices per frame, underlying
+OpenGL draw calls, state changes, etc. . In combination with profiling data
+this should make finding bottlenecks easier. More importantly, it should help
+find inefficiencies in user code, such as plugins, and help plugin authors
+improve performance of their code.
+
+Currently, Renderer backend classes are implemented in a mostly straightforward
+way. We should be able to improve performance by optimizing or adding
+alternative high-performance backends.
+
+A major optimization would be a VBO (vertex buffer object) vertex buffer
+backend.  With VBOs, vertex data is in GPU memory, freeing the bus.  This can
+result in massive performance increase, even an order of magnitude. As the data
+must be stored on the GPU instead of being permanently re-uploaded, this is
+only useful if we have a lot of graphics data that never changes. Otherwise
+performance is likely to drop instead of increasing.  Right now VBOs could help
+with things like planets and models, but the majority of drawing is done by
+StelSkyDrawer (point sources, mostly stars), where vertex data is regenerated
+every frame. Rewriting some StelSkyDrawer users, especially
+BigStarCatalogExtension::ZoneArray, to use static vertex buffers initialized
+once and never modified, would result in more vertices per frame, but it might
+make VBOs viable which would likely bring massive performance boost.  Other
+work currently done on the CPU, such as vertex projection, would also have to
+be done on GPU (this is already done for stereographic projection).
+
+A non-essential, but useful future addition would be the ability to switch
+backends at any time. This would require all StelRenderer constructed classes
+to have separate frontend and backend objects, as StelVertexBuffer and
+StelTextureNew already have, and the frontends would need to store all data
+needed to reconstruct the backends - probably duplicating a lot of data.  If
+a StelRenderer backend would be passed an object constructed by a different
+backend, it would delete the object's backend and replace it with its own.
+*/

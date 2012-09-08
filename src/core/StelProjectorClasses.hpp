@@ -22,6 +22,8 @@
 
 #include <limits>
 #include "StelProjector.hpp"
+#include "StelSphereGeometry.hpp"
+#include "renderer/StelGLSLShader.hpp"
 
 class StelProjectorPerspective : public StelProjector
 {
@@ -88,8 +90,150 @@ protected:
 
 class StelProjectorStereographic : public StelProjector
 {
+	friend class StereographicGLSLProjectorShader;
+private:
+	//! GLSL projector code for StelProjectorStereographic.
+	//!
+	//! Note that when adding GLSL projection to other projectors, a lot 
+	//! of this code might be shared (maybe the main GLSL projection function) 
+	//! and need to be refactored to the parent class.
+	class StereographicGLSLProjector : public StelProjector::GLSLProjector
+	{
+	friend class StelProjectorStereographic;
+		StelProjectorStereographic& projector;
+
+	public:
+		virtual bool init(StelGLSLShader* shader)
+		{
+			if(projector.disableShaderProjection)
+			{
+				return false;
+			}
+
+			shader->unlock();
+
+			// Add (or enable, if already added) shader for the used modelview transform.
+			// Not all ModelViewTranforms have GLSL implementations (e.g. Refraction)
+			if(!projector.modelViewTransform->setupGLSLTransform(shader))
+			{
+				// Failed to add the transform shader, return the shader into locked state.
+				if(!shader->build())
+				{
+					Q_ASSERT_X(false, Q_FUNC_INFO, 
+					           "Failed to restore shader after failing to add a modelview "
+					           "transform shader to it");
+				}
+				return false;
+			}
+
+			// Add the stereographic projector shader if not yet added.
+			if(!shader->hasVertexShader("StereographicProjector"))
+			{
+				static const QString projectorSource(
+					"vec4 modelViewForward(in vec4 v);\n"
+					"\n"
+					"uniform vec2 viewportCenter;\n"
+					"uniform float flipHorz;\n"
+					"uniform float flipVert;\n"
+					"uniform float pixelPerRad;\n"
+					"uniform float zNear;\n"
+					"uniform float oneOverZNearMinusZFar;\n"
+					"\n"
+					"vec4 projectorForward(in vec4 v)\n"
+					"{\n"
+					"	float r = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);\n"
+					"	float h = 0.5 * (r - v.z);\n"
+					"	if (h <= 0.0) \n"
+					"	{\n"
+					"		return vec4(1000000.0, 1000000.0, -1000000.0, 1.0);\n"
+					"	}\n"
+					"	float f = 1.0 / h;\n"
+					"	return vec4(v.x * f, v.y * f, r, 1.0);\n"
+					"}\n"
+					"\n"
+					"vec4 project(in vec4 posIn)\n"
+					"{\n"
+					"	vec4 v = posIn;\n"
+					"	v = modelViewForward(v);\n"
+					"	v = projectorForward(v);\n"
+					"	return vec4(viewportCenter.x + flipHorz * pixelPerRad * v.x,\n"
+					"	            viewportCenter.y + flipVert * pixelPerRad * v.y,\n"
+					"	            (v.z - zNear) * oneOverZNearMinusZFar, 1.0);\n"
+					"}\n");
+
+				if(!shader->addVertexShader("StereographicProjector", projectorSource))
+				{
+					// Failed to add the projector shader, return the shader into locked state.
+					if(!shader->build())
+					{
+						Q_ASSERT_X(false, Q_FUNC_INFO, 
+						           "Failed to restore shader after failing to add a stereographic "
+						           "projector shader to it");
+					}
+					projector.disableShaderProjection = true;
+					return false;
+				}
+				qDebug() << "Build log after adding a stereographic projection shader: "
+				         << shader->log();
+			}
+
+			shader->disableVertexShader("DefaultProjector");
+			shader->enableVertexShader("StereographicProjector");
+			if(!shader->build())
+			{
+				qDebug() << "Failed to build with a stereographic projector shader: "
+				         << shader->log();
+				projector.disableShaderProjection = true;
+				shader->enableVertexShader("DefaultProjector");
+				shader->disableVertexShader("StereographicProjector");
+				if(!shader->build())
+				{
+					Q_ASSERT_X(false, Q_FUNC_INFO, 
+					           "Failed to restore default projector shader after failing to link "
+					           "with a (succesfully compiled) stereographic projector shader");
+				}
+
+			}
+			return true;
+		}
+
+		virtual void preDraw(StelGLSLShader* shader)
+		{
+			projector.modelViewTransform->setGLSLUniforms(shader);
+
+			shader->setUniformValue("viewportCenter",        projector.viewportCenter);
+			shader->setUniformValue("flipHorz",              projector.flipHorz);
+			shader->setUniformValue("flipVert",              projector.flipVert);
+			shader->setUniformValue("pixelPerRad",           projector.pixelPerRad);
+			shader->setUniformValue("zNear",                 projector.zNear);
+			shader->setUniformValue("oneOverZNearMinusZFar", projector.oneOverZNearMinusZFar);
+		}
+
+		virtual void postDraw(StelGLSLShader* shader)
+		{
+			shader->unlock();
+			projector.modelViewTransform->disableGLSLTransform(shader);
+			shader->disableVertexShader("StereographicProjector");
+			shader->enableVertexShader("DefaultProjector");
+			if(!shader->build())
+			{
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to disable projector shader");
+			}
+		}
+
+	private:
+		//! Constructor. Only a StelProjectorStereographic can call this.
+		StereographicGLSLProjector(StelProjectorStereographic& projector)
+			: projector(projector)
+		{
+		}
+	};
+
 public:
-	StelProjectorStereographic(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorStereographic(ModelViewTranformP func) 
+		: StelProjector(func)
+		, glslProjector(*this)
+	{;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 235.f;}
@@ -125,6 +269,11 @@ public:
 		}
 	}
 
+	virtual GLSLProjector* getGLSLProjector()
+	{
+		return &glslProjector;
+	}
+
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -133,6 +282,10 @@ protected:
 	virtual bool hasDiscontinuity() const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
+
+private:
+	//! If GLSL is supported, this is used for GPU projection.
+	StereographicGLSLProjector glslProjector;
 };
 
 class StelProjectorFisheye : public StelProjector

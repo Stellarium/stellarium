@@ -496,6 +496,7 @@ void SatellitesDialog::populateGroupsList()
 void SatellitesDialog::saveSettings(void)
 {
 	GETSTELMODULE(Satellites)->saveSettingsToConfig();
+	GETSTELMODULE(Satellites)->saveTleData();
 }
 
 void SatellitesDialog::addSatellites(const TleDataList& newSatellites)

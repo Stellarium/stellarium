@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -25,7 +24,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -34,6 +32,7 @@
 #include "Pulsar.hpp"
 #include "Pulsars.hpp"
 #include "PulsarsDialog.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -47,6 +46,7 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
 
@@ -81,7 +81,9 @@ Q_EXPORT_PLUGIN2(Pulsars, PulsarsStelPluginInterface)
  Constructor
 */
 Pulsars::Pulsars()
-	: progressBar(NULL)
+	: texPointer(NULL)
+	, markerTexture(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
@@ -100,8 +102,14 @@ Pulsars::~Pulsars()
 void Pulsars::deinit()
 {
 	psr.clear();
-	Pulsar::markerTexture.clear();
-	texPointer.clear();
+	if(NULL != markerTexture)
+	{
+		delete markerTexture;
+	}
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 /*
@@ -135,9 +143,6 @@ void Pulsars::init()
 		readSettingsFromConfig();
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
-
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
-		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -192,27 +197,31 @@ void Pulsars::init()
 /*
  Draw our module. This should print name of first PSR in the main window
 */
-void Pulsars::draw(StelCore* core)
+void Pulsars::draw(StelCore* core, StelRenderer* renderer)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
-	painter.setFont(font);
+	renderer->setFont(font);
 	
 	foreach (const PulsarP& pulsar, psr)
 	{
 		if (pulsar && pulsar->initialized)
-			pulsar->draw(core, painter);
+		{
+			if(NULL == markerTexture)
+			{
+				markerTexture = renderer->createTexture(":/Pulsars/pulsar.png");
+			}
+			pulsar->draw(core, renderer, prj, markerTexture);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
-
+	{
+		drawPointer(core, renderer, prj);
+	}
 }
 
-void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
+void Pulsars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Pulsar");
 	if (!newSelected.empty())
 	{
@@ -221,16 +230,21 @@ void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
 
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
-			return;
+		if (!projector->project(pos, screenpos))
+		{
+			 return;
+		}
 
 		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		renderer->setGlobalColor(c[0], c[1], c[2]);
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur2.png");
+		}
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 26.0f,
+		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 }
 

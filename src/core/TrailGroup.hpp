@@ -24,14 +24,15 @@
 #include "StelCore.hpp"
 #include "StelObjectType.hpp"
 
-class StelPainter;
 
 class TrailGroup
 {
 public:
 	TrailGroup(float atimeExtent);
 
-	void draw(StelCore* core, StelPainter*);
+	~TrailGroup();
+
+	void draw(StelCore* core, class StelRenderer* renderer);
 
 	// Add 1 point to all the curves at current time and suppress too old points
 	void update();
@@ -41,20 +42,44 @@ public:
 
 	void addObject(const StelObjectP&, const Vec3f* col=NULL);
 
-	void setOpacity(float op) {opacity=op;}
+	void setOpacity(float op) 
+	{
+		opacity = op;
+	}
 
 	//! Reset all trails points
 	void reset();
 
 private:
-	class Trail
+	//! Vertex with a position and a color.
+	struct ColoredVertex
 	{
-	public:
-		Trail(const StelObjectP& obj, const Vec3f& col) : stelObject(obj), color(col) {;}
+		Vec3f position;
+		Vec4f color;
+
+		ColoredVertex(){}
+
+		VERTEX_ATTRIBUTES(Vec3f Position, Vec4f Color);
+	};
+
+	struct Trail
+	{
+		Trail(const StelObjectP& obj, const Vec3f& col) 
+			: stelObject(obj), color(col), vertexBuffer(NULL) 
+		{
+		}
+
 		StelObjectP stelObject;
+
+		// Using QVector instead of QList.
+		// QList is an array of pointers to elements, which are 8 byte on 64-bit,
+		// while Vec3f is 12 byte, so not much space saved (or time, at popFront).
+		// At the same time, it has a bad cache performance that slows down drawing.
+
 		// All previous positions
-		QList<Vec3d> posHistory;
+		QVector<Vec3f> posHistory;
 		Vec3f color;
+		StelVertexBuffer<ColoredVertex>* vertexBuffer;
 	};
 
 	QList<Trail> allTrails;
@@ -68,6 +93,11 @@ private:
 	Mat4d j2000ToTrailNativeInverted;
 
 	float opacity;
+
+	//! Last time for which we have positions in history.
+	//!
+	//! We only add new positions to history after a long enough interval (one minute).
+	double lastTimeInHistory;
 };
 
 #endif // TRAILMGR_HPP
