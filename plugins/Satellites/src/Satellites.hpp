@@ -127,6 +127,10 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
+	virtual QStringList listAllObjects(bool inEnglish) const;
+
+	virtual QString getName() const { return "Satellites"; }
+
 	//! Implment this to tell the main Stellarium GUi that there is a GUI element to configure this
 	//! plugin. 
 	virtual bool configureGui(bool show=true);
