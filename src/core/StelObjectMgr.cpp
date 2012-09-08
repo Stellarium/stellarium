@@ -244,3 +244,33 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	result.sort();
 	return result;
 }
+
+QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
+{
+	// search for module
+	StelObjectModule* module = NULL;
+	foreach(StelObjectModule* m, objectsModule)
+	{
+		if (m->objectName() == moduleId)
+		{
+			module = m;
+			break;
+		}
+	}
+	if (module == NULL)
+	{
+		qWarning() << "Can't find module with id " << moduleId;
+		return QStringList();
+	}
+	return module->listAllObjects(inEnglish);
+}
+
+QMap<QString, QString> StelObjectMgr::objectModulesMap() const
+{
+	QMap<QString, QString> result;
+	foreach(const StelObjectModule* m, objectsModule)
+	{
+		result[m->objectName()] = m->getName();
+	}
+	return result;
+}
