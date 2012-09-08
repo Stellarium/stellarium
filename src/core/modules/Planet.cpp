@@ -25,42 +25,309 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
+#include "renderer/GenericVertexTypes.hpp"
+#include "renderer/StelGeometryBuilder.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
 #include "sideral_time.h"
-#include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
-StelTextureSP Planet::hintCircleTex;
-StelTextureSP Planet::texEarthShadow;
+
+Planet::SharedPlanetGraphics::~SharedPlanetGraphics()
+{
+	if(!initialized){return;}
+	delete texEarthShadow;
+	delete texHintCircle;
+
+	if(NULL != simplePlanetShader)
+		delete simplePlanetShader;
+
+	if(NULL != shadowPlanetShader)
+		delete shadowPlanetShader;
+
+	initialized = false;
+}
+
+void Planet::SharedPlanetGraphics::lazyInit(StelRenderer* renderer)
+{
+	if(initialized){return;}
+	texHintCircle  = renderer->createTexture("textures/planet-indicator.png");
+	texEarthShadow = renderer->createTexture("textures/earth-shadow.png");
+	planetShader = simplePlanetShader = shadowPlanetShader = NULL;
+
+	if(renderer->isGLSLSupported())
+	{
+		if(!loadPlanetShaders(renderer))
+		{
+			qWarning() << "Failed to load planet shaders, falling back to CPU implementation";
+			simplePlanetShader = shadowPlanetShader = NULL;
+		}
+	}
+
+	initialized = true;
+}
+
+bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
+{
+	Q_ASSERT_X(renderer->isGLSLSupported(), Q_FUNC_INFO,
+	           "Trying to load planet shaders but GLSL is not supported");
+
+	simplePlanetShader = renderer->createGLSLShader();
+	if(!simplePlanetShader->addVertexShader(
+	  "vec4 project(in vec4 v);\n"
+	  "attribute mediump vec4 vertex;\n"
+	  "attribute mediump vec4 unprojectedVertex;\n"
+	  "attribute mediump vec2 texCoord;\n"
+	  "uniform mediump mat4 projectionMatrix;\n"
+	  "uniform highp vec3 lightPos;\n"
+	  "uniform highp float oneMinusOblateness;\n"
+	  "uniform highp float radius;\n"
+	  "uniform mediump vec4 ambientLight;\n"
+	  "uniform mediump vec4 diffuseLight;\n"
+	  "varying mediump vec2 texc;\n"
+	  "varying mediump vec4 litColor;\n"
+	  "void main(void)\n"
+	  "{\n"
+	  "    gl_Position = projectionMatrix * project(vertex);\n"
+	  "    texc = texCoord;\n"
+	  "    // Must be a separate variable due to Intel drivers\n"
+	  "    vec4 normal = unprojectedVertex / radius;\n"
+	  "    float c = lightPos.x * normal.x * oneMinusOblateness +\n"
+	  "              lightPos.y * normal.y * oneMinusOblateness +\n"
+	  "              lightPos.z * normal.z / oneMinusOblateness;\n"
+	  "    litColor = clamp(c, 0.0, 0.5) * diffuseLight + ambientLight;\n"
+	  "}\n"))
+	{
+		qWarning() << "Error adding simple planet vertex shader: " << simplePlanetShader->log();
+		delete simplePlanetShader;
+		return false;
+	}
+
+	if(!simplePlanetShader->addFragmentShader(
+	  "varying mediump vec2 texc;\n"
+	  "varying mediump vec4 litColor;\n"
+	  "uniform sampler2D tex;\n"
+	  "uniform mediump vec4 globalColor;\n"
+	  "void main(void)\n"
+	  "{\n"
+	  "    gl_FragColor = texture2D(tex, texc) * litColor;\n"
+	  "}\n"))
+	{
+		qWarning() << "Error adding simple planet fragment shader: " << simplePlanetShader->log();
+		delete simplePlanetShader;
+		return false;
+	}
+	if(!simplePlanetShader->build())
+	{
+		qWarning() << "Error building shader: " << simplePlanetShader->log();
+		delete simplePlanetShader;
+		return false;
+	}
+	qDebug() << "Simple planet shader build log: " << simplePlanetShader->log();
+
+	shadowPlanetShader = renderer->createGLSLShader();
+	if(!shadowPlanetShader->addVertexShader(
+	  "vec4 project(in vec4 v);\n"
+	  "attribute mediump vec4 vertex;\n"
+	  "attribute mediump vec4 unprojectedVertex;\n"
+	  "attribute mediump vec2 texCoord;\n"
+	  "uniform mediump mat4 projectionMatrix;\n"
+	  "uniform highp vec3 lightPos;\n"
+	  "uniform highp float oneMinusOblateness;\n"
+	  "uniform highp float radius;\n"
+	  "varying mediump vec2 texc;\n"
+	  "varying mediump float lambert;\n"
+	  "varying highp vec3 P;\n"
+	  "\n"
+	  "void main()\n"
+	  "{\n"
+	  "    gl_Position = projectionMatrix * project(vertex);\n"
+	  "    texc = texCoord;\n"
+	  "    // Must be a separate variable due to Intel drivers\n"
+	  "    vec4 normal = unprojectedVertex / radius;\n"
+	  "    float c = lightPos.x * normal.x * oneMinusOblateness +\n"
+	  "              lightPos.y * normal.y * oneMinusOblateness +\n"
+	  "              lightPos.z * normal.z / oneMinusOblateness;\n"
+	  "    lambert = clamp(c, 0.0, 0.5);\n"
+	  "\n"
+	  "    P = vec3(unprojectedVertex);\n"
+	  "}\n"
+	  "\n"))
+	{
+		qWarning() << "Error adding shadow planet vertex shader: " << shadowPlanetShader->log();
+		delete shadowPlanetShader;
+		return false;
+	}
+
+	if(!shadowPlanetShader->addFragmentShader(
+	  "varying mediump vec2 texc;\n"
+	  "varying mediump float lambert;\n"
+	  "uniform sampler2D tex;\n"
+	  "uniform mediump vec4 globalColor;\n"
+	  "uniform mediump vec4 ambientLight;\n"
+	  "uniform mediump vec4 diffuseLight;\n"
+	  "\n"
+	  "varying highp vec3 P;\n"
+	  "\n"
+	  "uniform sampler2D info;\n"
+	  "uniform int current;\n"
+	  "uniform int infoCount;\n"
+	  "uniform float infoSize;\n"
+	  "\n"
+	  "uniform bool ring;\n"
+	  "uniform highp float outerRadius;\n"
+	  "uniform highp float innerRadius;\n"
+	  "uniform sampler2D ringS;\n"
+	  "uniform bool isRing;\n"
+	  "\n"
+	  "bool visible(vec3 normal, vec3 light)\n"
+	  "{\n"
+	  "    return (dot(light, normal) > 0.0);\n"
+	  "}\n"
+	  "\n"
+	  "void main()\n"
+	  "{\n"
+	  "    float final_illumination = 1.0;\n"
+	  "    vec4 diffuse = diffuseLight;\n"
+	  "    vec4 data = texture2D(info, vec2(0.0, current) / infoSize);\n"
+	  "    float RS = data.w;\n"
+	  "    vec3 Lp = data.xyz;\n"
+	  "\n"
+	  "    vec3 P3;\n"
+	  "\n"
+	  "    if(isRing)\n"
+	  "        P3 = P;\n"
+	  "    else\n"
+	  "    {\n"
+	  "        data = texture2D(info, vec2(current, current) / infoSize);\n"
+	  "        P3 = normalize(P) * data.w;\n"
+	  "    }\n"
+	  "\n"
+	  "    if((lambert > 0.0) || isRing)\n"
+	  "    {\n"
+	  "        if(ring && !isRing)\n"
+	  "        {\n"
+	  "            vec3 ray = normalize(Lp);\n"
+	  "            vec3 normal = normalize(vec3(0.0, 0.0, 1.0));\n"
+	  "            float u = - dot(P3, normal) / dot(ray, normal);\n"
+	  "\n"
+	  "            if(u > 0.0 && u < 1e10)\n"
+	  "            {\n"
+	  "                float ring_radius = length(P3 + u * ray);\n"
+	  "\n"
+	  "                if(ring_radius > innerRadius && ring_radius < outerRadius)\n"
+	  "                {\n"
+	  "                    ring_radius = (ring_radius - innerRadius) / (outerRadius - innerRadius);\n"
+	  "                    data = texture2D(ringS, vec2(ring_radius, 0.5));\n"
+	  "\n"
+	  "                    final_illumination = 1.0 - data.w;\n"
+	  "                }\n"
+	  "            }\n"
+	  "        }\n"
+	  "\n"
+	  "        for(int i = 1; i < infoCount; i++)\n"
+	  "        {\n"
+	  "            if(current == i && !isRing)\n"
+	  "                continue;\n"
+	  "\n"
+	  "            data = texture2D(info, vec2(i, current) / infoSize);\n"
+	  "            vec3 C = data.rgb;\n"
+	  "            float radius = data.a;\n"
+	  "\n"
+	  "            float L = length(Lp - P3);\n"
+	  "            float l = length(C - P3);\n"
+	  "\n"
+	  "            float R = RS / L;\n"
+	  "            float r = radius / l;\n"
+	  "            float d = length( (Lp - P3) / L - (C - P3) / l );\n"
+	  "\n"
+	  "            float illumination = 1.0;\n"
+	  "\n"
+	  "            // distance too far -> red\n"
+	  "            if(d >= R + r)\n"
+	  "            {\n"
+	  "                illumination = 1.0;\n"
+	  "            }\n"
+	  "            // umbra -> blue\n"
+	  "            else if(r >= R + d)\n"
+	  "            {\n"
+	  "                illumination = 0.0;\n"
+	  "            }\n"
+	  "            // penumbra completely inside -> green\n"
+	  "            else if(d + r <= R)\n"
+	  "            {\n"
+	  "                illumination = 1.0 - r * r / (R * R);\n"
+	  "            }\n"
+	  "            // penumbra partially inside -> light blue\n"
+	  "            else\n"
+	  "            {\n"
+	  "                float x = (R * R + d * d - r * r) / (2.0 * d);\n"
+	  "\n"
+	  "                float alpha = acos(x / R);\n"
+	  "                float beta = acos((d - x) / r);\n"
+	  "\n"
+	  "                float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
+	  "                float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
+	  "                float AS = R * R * 2.0 * asin(1.0);\n"
+	  "\n"
+	  "                illumination = 1.0 - (AR + Ar) / AS;\n"
+	  "            }\n"
+	  "\n"
+	  "            if(illumination < final_illumination)\n"
+	  "                final_illumination = illumination;\n"
+	  "        }\n"
+	  "    }\n"
+	  "\n"
+	  "    vec4 litColor = (isRing ? 1.0 : lambert) * final_illumination * diffuse + ambientLight;\n"
+	  "    gl_FragColor = texture2D(tex, texc) * litColor;\n"
+	  "}\n"
+	  "\n"))
+	{
+		qWarning() << "Error adding shadow planet fragment shader: " << shadowPlanetShader->log();
+		delete shadowPlanetShader;
+		return false;
+	}
+	if(!shadowPlanetShader->build())
+	{
+		qWarning() << "Error building shader: " << shadowPlanetShader->log();
+		delete shadowPlanetShader;
+		return false;
+	}
+	qDebug() << "Shadow planet shader build log: " << shadowPlanetShader->log();
+
+	return true;
+}
+
 Planet::Planet(const QString& englishName,
-			   int flagLighting,
-			   double radius,
-			   double oblateness,
-			   Vec3f color,
-			   float albedo,
-			   const QString& atexMapName,
-			   posFuncType coordFunc,
-			   void* auserDataPtr,
-			   OsculatingFunctType *osculatingFunc,
-			   bool acloseOrbit,
-			   bool hidden,
-			   bool hasAtmosphere)
+               int flagLighting,        
+               double radius,
+               double oblateness,
+               Vec3f color,
+               float albedo,
+               const QString& atexMapName,
+               posFuncType coordFunc,
+               void* auserDataPtr,
+               OsculatingFunctType *osculatingFunc,
+               bool acloseOrbit,
+               bool hidden,
+               bool hasAtmosphere)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
-	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
+	  color(color), albedo(albedo), axisRotation(0.),
+	  texture(NULL),
+	  rings(NULL),
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
@@ -68,17 +335,19 @@ Planet::Planet(const QString& englishName,
 	  osculatingFunc(osculatingFunc),
 	  parent(NULL),
 	  hidden(hidden),
-	  atmosphere(hasAtmosphere)
+	  atmosphere(hasAtmosphere),
+	  unlitSphere(NULL),
+	  litSphere(NULL)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
 	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
+	orbitVertices = NULL;
 	closeOrbit = acloseOrbit;
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -90,8 +359,37 @@ Planet::Planet(const QString& englishName,
 
 Planet::~Planet()
 {
-	if (rings)
+	if(NULL != rings)
+	{
 		delete rings;
+		rings = NULL;
+	}
+
+	if(NULL != orbitVertices)
+	{
+		delete orbitVertices;
+		orbitVertices = NULL;
+	}
+
+	if(NULL != litSphere)
+	{
+		Q_ASSERT_X(NULL == unlitSphere, Q_FUNC_INFO,
+		           "Both lit and unlit spheres have been generated");
+		delete litSphere;
+		litSphere = NULL;
+	}
+	if(NULL != unlitSphere)
+	{
+		Q_ASSERT_X(NULL == litSphere, Q_FUNC_INFO,
+		           "Both lit and unlit spheres have been generated");
+		delete unlitSphere;
+		unlitSphere = NULL;
+	}
+	if(NULL != texture)
+	{
+		delete texture;
+		texture = NULL;
+	}
 }
 
 void Planet::translateName(StelTranslator& trans)
@@ -175,6 +473,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
 		}
 		oss << "<br>";
+	}
+
+	double siderealPeriod = getSiderealPeriod();
+	if ((flags&Extra1) && (siderealPeriod>0))
+	{
+		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 	}
 
 	if ((flags&Extra2) && (englishName.compare("Sun")!=0))
@@ -427,6 +732,17 @@ void Planet::computeTransMatrix(double jd)
 	}
 }
 
+void Planet::computeModelMatrix(Mat4d &result) const
+{
+	result = Mat4d::translation(eclipticPos) * rotLocalToParent * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
+	PlanetP p = parent;
+	while (p && p->parent)
+	{
+		result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
+		p = p->parent;
+	}
+}
+
 Mat4d Planet::getRotEquatorialToVsop87(void) const
 {
 	Mat4d rval = rotLocalToParent;
@@ -491,14 +807,35 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 // Return heliocentric coordinate of p
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
+	// Optimization:
+	//
+	// This code used about 8% of runtime before,
+	// this is an optimized version - avoiding smart pointer checks 
+	// (this function doesn't own any of the parents - planets 
+	// and solar system do, so we're OK)
+	//
+	// This is the equivalent (previous) unoptimized code:
+	// (update this if you make any functionality changes)
+	// PlanetP pp = parent;
+	// if (pp)
+	// {
+	// 	while (pp->parent)
+	// 	{
+	// 		pos += pp->eclipticPos;
+	// 		pp = pp->parent;
+	// 	}
+	// }
 	Vec3d pos = p;
-	PlanetP pp = parent;
-	if (pp)
+	const Planet* ourParent = &(*parent);
+	const Planet* parentsParent;
+	// int i = 0;
+	if (NULL != ourParent)
 	{
-		while (pp->parent)
+		// const Planet* const parentsParent = &(*(ourParent->parent));
+		while (NULL != (parentsParent = &(*(ourParent->parent))))
 		{
-			pos += pp->eclipticPos;
-			pp = pp->parent;
+			pos += ourParent->eclipticPos;
+			ourParent = parentsParent;
 		}
 	}
 	return pos;
@@ -562,7 +899,14 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	{
 		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
-		return 4.83 + 5.*(std::log10(distParsec)-1.) + extinctionMag;
+
+		// check how much of it is visible
+		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+		double shadowFactor = ssm->getEclipseFactor(core);
+		if(shadowFactor < 1e-11)
+			shadowFactor = 1e-11;
+
+		return 4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor)) + extinctionMag;
 	}
 
 	// Compute the angular phase
@@ -736,7 +1080,9 @@ double Planet::getSpheroidAngularSize(const StelCore* core) const
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
+void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, 
+                  const QFont& planetNameFont,
+                  SharedPlanetGraphics& planetGraphics)
 {
 	if (hidden)
 		return;
@@ -757,8 +1103,8 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
 		{
-			StelPainter sPainter(core->getProjection(transfo));
-			rings->draw(&sPainter,transfo,1000.0);
+			rings->draw(core->getProjection(transfo), renderer, transfo, planetGraphics.planetShader, 1000.0,
+						planetGraphics.planetShader == planetGraphics.shadowPlanetShader ? &planetGraphics.info : NULL);
 		}
 		return;
 	}
@@ -779,7 +1125,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
-		drawOrbit(core);  // TODO - fade in here also...
+		drawOrbit(core, renderer);  // TODO - fade in here also...
 
 		if (flagLabels && ang_dist>0.25 && maxMagLabels>getVMagnitude(core))
 		{
@@ -789,60 +1135,41 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		{
 			labelsFader=false;
 		}
-		drawHints(core, planetNameFont);
+		drawHints(core, renderer, planetNameFont, planetGraphics);
 
-		draw3dModel(core,transfo,screenSz);
+		draw3dModel(core, renderer, planetGraphics, transfo, screenSz);
 	}
 	return;
 }
 
-void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz)
+void Planet::draw3dModel(StelCore* core, StelRenderer* renderer,
+                         SharedPlanetGraphics& planetGraphics,
+                         StelProjector::ModelViewTranformP transfo, float screenSz)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
 
-	if (screenSz>1.)
+	if (screenSz > 1.0f)
 	{
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
-		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
+		StelProjectorP projector = core->getProjection(transfo2);
+		StelLight light;
 
 		if (flagLighting)
 		{
-			sPainter->getLight().enable();
-
 			// Set the main source of light to be the sun
 			Vec3d sunPos(0);
 			core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
-			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
-
 			// Set the light parameters taking sun as the light source
-			static Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
-			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
-			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
+			light.position = Vec3f(sunPos[0], sunPos[1], sunPos[2]);
+			light.ambient  = Vec4f(0.02f, 0.02f, 0.02f, 0.02f);
+			light.diffuse  = Vec4f(2.0f, 2.0f, 2.0f, 1.0f);
 			if (StelApp::getInstance().getVisionModeNight())
 			{
-				diffuse[1] = 0.; diffuse[2] = 0.;
-				ambient[1] = 0.; ambient[2] = 0.;
+				light.diffuse[1] = 0.; light.diffuse[2] = 0.;
+				light.ambient[1] = 0.; light.ambient[2] = 0.;
 			}
-			else
-			{
-				diffuse[1] = 2.; diffuse[2] = 2.;
-				ambient[1] = 0.02; ambient[2] = 0.02;
-			}
-			sPainter->getLight().setAmbient(ambient);
-			sPainter->getLight().setDiffuse(diffuse);
-			sPainter->getLight().setSpecular(zero);
-
-			sPainter->getMaterial().setAmbient(ambient);
-			sPainter->getMaterial().setEmission(zero);
-			sPainter->getMaterial().setShininess(0.f);
-			sPainter->getMaterial().setSpecular(zero);
-		}
-		else
-		{
-			sPainter->getLight().disable();
-			sPainter->setColor(1.f,1.f,1.f);
 		}
 
 		if (rings)
@@ -854,15 +1181,15 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			double n,f;
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
-			glDepthMask(GL_TRUE);
-			glClear(GL_DEPTH_BUFFER_BIT);
-			glEnable(GL_DEPTH_TEST);
-			drawSphere(sPainter, screenSz);
-			glDepthMask(GL_FALSE);
-			sPainter->getLight().disable();
-			rings->draw(sPainter,transfo,screenSz);
-			sPainter->getLight().enable();
-			glDisable(GL_DEPTH_TEST);
+
+			renderer->clearDepthBuffer();
+			renderer->setDepthTest(DepthTest_ReadWrite);
+			drawSphere(renderer, projector, flagLighting ? &light : NULL, 
+					   planetGraphics, screenSz);
+			renderer->setDepthTest(DepthTest_ReadOnly);
+			rings->draw(projector, renderer, transfo, planetGraphics.planetShader, screenSz,
+						planetGraphics.planetShader == planetGraphics.shadowPlanetShader ? &planetGraphics.info : NULL);
+			renderer->setDepthTest(DepthTest_Disabled);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
 		else
@@ -873,78 +1200,158 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				// Draw earth shadow over moon using stencil buffer if appropriate
 				// This effect curently only looks right from earth viewpoint
 				// TODO: moon magnitude label during eclipse isn't accurate...
-				glClearStencil(0x0);
-				glClear(GL_STENCIL_BUFFER_BIT);
-				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
-				glEnable(GL_STENCIL_TEST);
-				drawSphere(sPainter, screenSz);
-				glDisable(GL_STENCIL_TEST);
-
-				sPainter->getLight().disable();
-				drawEarthShadow(core, sPainter);
+				renderer->clearStencilBuffer();
+				renderer->setStencilTest(StencilTest_Write_1);
+				drawSphere(renderer, projector, flagLighting ? &light : NULL, 
+						   planetGraphics, screenSz);
+				renderer->setStencilTest(StencilTest_Disabled);
+				if(planetGraphics.planetShader == planetGraphics.simplePlanetShader)
+					drawEarthShadow(core, renderer, planetGraphics);
 			}
 			else
 			{
 				// Normal planet
-				drawSphere(sPainter, screenSz);
+				drawSphere(renderer, projector, flagLighting ? &light : NULL, 
+						   planetGraphics, screenSz);
 			}
 		}
-		if (sPainter)
-			delete sPainter;
-		sPainter=NULL;
 	}
 
 	// Draw the halo
 
-	// Prepare openGL lighting parameters according to luminance
 	float surfArcMin2 = getSpheroidAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitude(core, true), color);
-}
+	const Vec3d tmp = getJ2000EquatorialPos(core);
+	float mag = getVMagnitude(core, true);
 
-
-void Planet::drawSphere(StelPainter* painter, float screenSz)
-{
-	if (texMap)
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	if(this != ssm->getSun() || mag < -15.0f)
+		core->getSkyDrawer()
+			->postDrawSky3dModel(core->getProjection(StelCore::FrameJ2000),
+								 tmp, surfArcMin2, mag, color);
+	if(this == ssm->getSun() && core->getCurrentLocation().planetName == "Earth")
 	{
-		// For lazy loading, return if texture not yet loaded
-		if (!texMap->bind())
+		float eclipseFactor = ssm->getEclipseFactor(core);
+		if(eclipseFactor < 0.001)
 		{
-			return;
+			core->getSkyDrawer()->drawSunCorona(core->getProjection(StelCore::FrameJ2000), tmp, screenSz, 1.0 - eclipseFactor * 1000);
 		}
 	}
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		painter->setColor(1.f, 0.f, 0.f);
+}
+
+void Planet::drawUnlitSphere(StelRenderer* renderer, StelProjectorP projector)
+{
+	if(NULL == unlitSphere)
+	{
+		const SphereParams params = SphereParams(radius * sphereScale).resolution(40, 40)
+		                            .oneMinusOblateness(oneMinusOblateness);
+		unlitSphere = StelGeometryBuilder().buildSphereUnlit(params);
+	}
+
+	unlitSphere->draw(renderer, projector);
+}
+
+void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
+						const StelLight* light, SharedPlanetGraphics& planetGraphics, float screenSz)
+{
+	if(texMapName == "") {return;}
+	if(NULL == texture)
+	{
+		const TextureParams textureParams = 
+			TextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
+		texture = renderer->createTexture("textures/" + texMapName, textureParams,
+		                                  TextureLoadingMode_LazyAsynchronous);
+	}
+	texture->bind();
+
+	renderer->setBlendMode(BlendMode_None);
+	renderer->setCulledFaces(CullFace_Back);
+
+	// Now draw the sphere
+	// Lighting is disabled, so just draw the plain sphere.
+	if(NULL == light)
+	{
+		const Vec4f color = StelApp::getInstance().getVisionModeNight()
+		                  ? Vec4f(1.f, 0.f, 0.f, 1.0f) : Vec4f(1.f, 1.f, 1.f, 1.0f);
+		renderer->setGlobalColor(color);
+		drawUnlitSphere(renderer, projector);
+	}
+	// Do the lighting on shader, avoiding the need to regenerate the sphere.
+	// Shader is NULL if it failed to load, in that case we need to do lighting on the CPU.
+	else if(renderer->isGLSLSupported() && NULL != planetGraphics.planetShader)
+	{
+		StelGLSLShader* shader = planetGraphics.planetShader;
+
+		shader->bind();
+		// provides the unprojectedVertex attribute to the shader.
+		shader->useUnprojectedPositionAttribute();
+
+		Vec3d lightPos = Vec3d(light->position[0], light->position[1], light->position[2]);
+		projector->getModelViewTransform()
+		         ->getApproximateLinearTransfo()
+		         .transpose()
+		         .multiplyWithoutTranslation(Vec3d(lightPos[0], lightPos[1], lightPos[2]));
+		projector->getModelViewTransform()->backward(lightPos);
+		lightPos.normalize();
+
+		shader->setUniformValue("lightPos"           , Vec3f(lightPos[0], lightPos[1] , lightPos[2]));
+		shader->setUniformValue("diffuseLight"       , light->diffuse);
+		shader->setUniformValue("ambientLight"       , light->ambient);
+		shader->setUniformValue("radius"             , static_cast<float>(radius * sphereScale));
+		shader->setUniformValue("oneMinusOblateness" , static_cast<float>(oneMinusOblateness));
+
+		if(shader == planetGraphics.shadowPlanetShader)
+		{
+			shader->setUniformValue("info", planetGraphics.info.info);
+			shader->setUniformValue("infoCount", planetGraphics.info.infoCount);
+			shader->setUniformValue("infoSize", planetGraphics.info.infoSize);
+			shader->setUniformValue("current", planetGraphics.info.current);
+
+			shader->setUniformValue("isRing", false);
+
+			const bool ring = (rings != NULL) && rings->texture;
+			if(ring){rings->texture->bind(2);}
+			shader->setUniformValue("ring", ring);
+			shader->setUniformValue("outerRadius", ring ? static_cast<float>(rings->radiusMax) : 0.0f);
+			shader->setUniformValue("innerRadius", ring ? static_cast<float>(rings->radiusMin) : 0.0f);
+			shader->setUniformValue("ringS",       ring ? 2 : 0);
+		}
+
+		drawUnlitSphere(renderer, projector);
+
+		shader->release();
+	}
+	// If shaders are not supported and we need lighting, we generate the sphere 
+	// with lighting baked into vertex colors.
 	else
-		painter->setColor(1.f, 1.f, 1.f);
+	{
+		// Adapt the number of facets according with the size of the sphere for optimization
+		// 40 facets for 1024 pixels diameter on screen
+		const int resolution = std::min(40, std::max(7, static_cast<int>(screenSz * 40.0 / 50.0)));
 
-	painter->enableTexture2d(true);
-	glDisable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+		// Lazily construct the lit sphere.
+		if(NULL == litSphere)
+		{
+			const SphereParams params = SphereParams(radius * sphereScale)
+			                            .resolution(resolution, resolution)
+			                            .oneMinusOblateness(oneMinusOblateness);
+			litSphere = StelGeometryBuilder().buildSphereLit(params, *light);
+		}
+		else
+		{
+			litSphere->setResolution(resolution, resolution);
+		}
+		litSphere->draw(renderer, projector);
+	}
 
-	// Draw the spheroid itself
-	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
-	if (nb_facet<10) nb_facet = 10;
-	if (nb_facet>40) nb_facet = 40;
-	painter->setShadeModel(StelPainter::ShadeModelSmooth);
-	// Rotate and add an extra quarter rotation so that the planet texture map
-	// fits to the observers position. No idea why this is necessary,
-	// perhaps some openGl strangeness, or confusing sin/cos.
-
-	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-	painter->setShadeModel(StelPainter::ShadeModelFlat);
-	glDisable(GL_CULL_FACE);
+	renderer->setCulledFaces(CullFace_None);
 }
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
-void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
+void Planet::drawEarthShadow(StelCore* core, StelRenderer* renderer, 
+                             SharedPlanetGraphics& planetGraphics)
 {
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	Vec3d e = ssm->getEarth()->getEclipticPos();
@@ -975,107 +1382,118 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 
 	shadow = mh + mdist*mscale;
 
-	StelProjectorP saveProj = sPainter->getProjector();
-	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic));
+	StelProjectorP projector = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 
-	sPainter->enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter->setColor(1,1,1);
-
-	glEnable(GL_STENCIL_TEST);
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
 	// We draw only where the stencil buffer is at 1, i.e. where the moon was drawn
-	glStencilFunc(GL_EQUAL, 0x1, 0x1);
-	// Don't change stencil buffer value
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	renderer->setStencilTest(StencilTest_DrawIf_1);
 
 	// shadow radial texture
-	texEarthShadow->bind();
-
-	Vec3d r;
+	planetGraphics.texEarthShadow->bind();
 
 	// Draw umbra first
-	QVector<Vec2f> texCoordArray;
-	QVector<Vec3d> vertexArray;
-	texCoordArray.reserve(210);
-	vertexArray.reserve(210);
-	texCoordArray << Vec2f(0.f, 0.5f);
-	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
-	vertexArray << shadow;
+	StelVertexBuffer<VertexP3T2>* umbra =
+		renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleFan);
 
+	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
 	const Mat4d& rotMat = Mat4d::rotation(shadow, 2.*M_PI/100.);
-	r = upt;
+	Vec3f r(upt[0], upt[1], upt[2]);
+	const Vec3f shadowF(shadow[0], shadow[1], shadow[2]);
+
+	umbra->addVertex(VertexP3T2(shadowF, Vec2f(0.0f, 0.5f)));
 	for (int i=1; i<=101; ++i)
 	{
-		// position in texture of umbra edge
-		texCoordArray << Vec2f(0.6f, 0.5f);
 		r.transfo4d(rotMat);
-		vertexArray << shadow + r;
+		// position in texture of umbra edge
+		umbra->addVertex(VertexP3T2(shadowF + r, Vec2f(0.6f, 0.5f)));
 	}
-	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
-	sPainter->drawFromArray(StelPainter::TriangleFan, 102);
+	umbra->lock();
+	renderer->drawVertexBuffer(umbra, NULL, projector);
+	delete umbra;
 
 	// now penumbra
-	vertexArray.resize(0);
-	texCoordArray.resize(0);
-	Vec3d u;
-	r = rpt;
-	u = upt;
+	StelVertexBuffer<VertexP3T2>* penumbra =
+		renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+	Vec3f u = r;
+	r = Vec3f(rpt[0], rpt[1], rpt[2]);
 	for (int i=0; i<=200; i+=2)
 	{
 		r.transfo4d(rotMat);
 		u.transfo4d(rotMat);
-		texCoordArray << Vec2f(0.6f, 0.5f) << Vec2f(1.f, 0.5f); // position in texture of umbra edge
-		vertexArray <<  shadow + u << shadow + r;
+
+		// position in texture of umbra edge
+		penumbra->addVertex(VertexP3T2(shadowF + u, Vec2f(0.6f, 0.5f)));
+		penumbra->addVertex(VertexP3T2(shadowF + r, Vec2f(1.0f, 0.5f)));
 	}
-	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
-	sPainter->drawFromArray(StelPainter::TriangleStrip, 202);
-	glDisable(GL_STENCIL_TEST);
-	glClearStencil(0x0);
-	glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
-	sPainter->setProjector(saveProj);
+	penumbra->lock();
+	renderer->drawVertexBuffer(penumbra, NULL, projector);
+	delete penumbra;
+
+	renderer->setStencilTest(StencilTest_Disabled);
+	renderer->clearStencilBuffer();
 }
 
-void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
+void Planet::drawHints(const StelCore* core, StelRenderer* renderer, 
+                       const QFont& planetNameFont, SharedPlanetGraphics& planetGraphics)
 {
 	if (labelsFader.getInterstate()<=0.f)
 		return;
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-	sPainter.setFont(planetNameFont);
+	renderer->setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = (hintFader.getInterstate()<=0 ? 7.f : 10.f) + getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
-	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(core), 0, tmp, tmp, false);
+
+	Vec4f color(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
+	renderer->setGlobalColor(color);
+	renderer->drawText(TextParams(screenPos[0], screenPos[1], getSkyLabel(core))
+	                   .shift(tmp, tmp).useGravity());
 
 	// hint disapears smoothly on close view
 	if (hintFader.getInterstate()<=0)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
+	color[3] *= hintFader.getInterstate() / tmp * 0.7f;
+	renderer->setGlobalColor(color);
 
 	// Draw the 2D small circle
-	glEnable(GL_BLEND);
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	Planet::hintCircleTex->bind();
-	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 11);
+	renderer->setBlendMode(BlendMode_Alpha);
+	planetGraphics.texHintCircle->bind();
+	renderer->drawTexturedRect(screenPos[0] - 11, screenPos[1] - 11, 22, 22);
 }
 
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
-	 :radiusMin(radiusMin),radiusMax(radiusMax)
+	 : radiusMin(radiusMin)
+	 , radiusMax(radiusMax)
+	 , texName(texname)
+	 , texture(NULL)
+	 , ring(NULL)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture("textures/"+texname);
 }
 
 Ring::~Ring(void)
 {
+	if(NULL != ring)
+	{
+		delete ring;
+		ring = NULL;
+	}
+	if(NULL != texture)
+	{
+		delete texture;
+		texture = NULL;
+	}
 }
 
-void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,double screenSz)
+void Ring::draw(StelProjectorP projector, StelRenderer* renderer, 
+				StelProjector::ModelViewTranformP transfo, class StelGLSLShader* shader, double screenSz, ShadowPlanetShaderInfo* info)
 {
+	if(NULL == texture)
+	{
+		texture = renderer->createTexture("textures/" + texName);
+	}
 	screenSz -= 50;
 	screenSz /= 250.0;
 	if (screenSz < 0.0) screenSz = 0.0;
@@ -1083,32 +1501,69 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 	const int slices = 128+(int)((256-128)*screenSz);
 	const int stacks = 8+(int)((32-8)*screenSz);
 
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter->setColor(1.f, 0.f, 0.f);
-	else
-		sPainter->setColor(1.f, 1.f, 1.f);
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setCulledFaces(CullFace_Back);
+	const Vec4f color = StelApp::getInstance().getVisionModeNight()
+	                  ? Vec4f(1.f, 0.f, 0.f, 1.0f) : Vec4f(1.f, 1.f, 1.f, 1.0f);
+	renderer->setGlobalColor(color);
 
-	sPainter->enableTexture2d(true);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
-
-	if (tex) tex->bind();
+	texture->bind();
 
 	Mat4d mat = transfo->getApproximateLinearTransfo();
-	  // solve the ring wraparound by culling:
-	  // decide if we are above or below the ring plane
-	const double h = mat.r[ 8]*mat.r[12]
-				   + mat.r[ 9]*mat.r[13]
-				   + mat.r[10]*mat.r[14];
-	sPainter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
-	glDisable(GL_CULL_FACE);
+	// solve the ring wraparound by culling:
+	// decide if we are above or below the ring plane
+	const double h = mat.r[ 8] * mat.r[12]
+	               + mat.r[ 9] * mat.r[13]
+	               + mat.r[10] * mat.r[14];
+
+	if(NULL == ring)
+	{
+		ring = StelGeometryBuilder()
+			.buildRingTextured(RingParams(radiusMin, radiusMax).resolution(slices, stacks));
+	}
+	else
+	{
+		ring->setResolution(slices, stacks);
+	}
+	ring->setFlipFaces(h >= 0);
+
+	if(info && renderer->isGLSLSupported())
+	{
+		shader->bind();
+		// provides the unprojectedVertex attribute to the shader.
+		shader->useUnprojectedPositionAttribute();
+
+		shader->setUniformValue("lightPos"           , Vec3f(0, 0, 0));
+		shader->setUniformValue("diffuseLight"       , Vec4f(1, 1, 1, 1));
+		shader->setUniformValue("ambientLight"       , Vec4f(0, 0, 0, 1));
+		shader->setUniformValue("radius"             , static_cast<float>(1));
+		shader->setUniformValue("oneMinusOblateness" , static_cast<float>(1));
+
+		shader->setUniformValue("info",      info->info);
+		shader->setUniformValue("infoCount", info->infoCount);
+		shader->setUniformValue("infoSize",  info->infoSize);
+		shader->setUniformValue("current",   info->current);
+
+		shader->setUniformValue("isRing", true);
+
+		shader->setUniformValue("ring",        true);
+		shader->setUniformValue("outerRadius", static_cast<float>(radiusMax));
+		shader->setUniformValue("innerRadius", static_cast<float>(radiusMin));
+		shader->setUniformValue("ringS",       0);
+	}
+
+	ring->draw(renderer, projector);
+
+	if(info && renderer->isGLSLSupported())
+	{
+		shader->release();
+	}
+
+	renderer->setCulledFaces(CullFace_None);
 }
 
-
 // draw orbital path of Planet
-void Planet::drawOrbit(const StelCore* core)
+void Planet::drawOrbit(const StelCore* core, StelRenderer* renderer)
 {
 	if (!orbitFader.getInterstate())
 		return;
@@ -1117,13 +1572,10 @@ void Planet::drawOrbit(const StelCore* core)
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 
-	StelPainter sPainter(prj);
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setGlobalColor(orbitColor[0], orbitColor[1], 
+	                         orbitColor[2], orbitFader.getInterstate());
 
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-
-	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
 	// on it's orbit all the time (since segmented rather than smooth curve)
@@ -1131,31 +1583,36 @@ void Planet::drawOrbit(const StelCore* core)
 	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos();
 	orbit[ORBIT_SEGMENTS]=orbit[0];
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
-	QVarLengthArray<float, 1024> vertexArray;
 
-	sPainter.enableClientStates(true, false, false);
+	if(NULL == orbitVertices)
+	{
+		orbitVertices = 
+			renderer->createVertexBuffer<Vertex2D>(PrimitiveType_LineStrip);
+	}
 
 	for (int n=0; n<=nbIter; ++n)
 	{
-		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
+		if (prj->project(orbit[n],onscreen) && (orbitVertices->length()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
 		{
-			vertexArray.append(onscreen[0]);
-			vertexArray.append(onscreen[1]);
+			orbitVertices->addVertex(Vertex2D(onscreen[0], onscreen[1]));
 		}
-		else if (!vertexArray.isEmpty())
+		else if(orbitVertices->length() > 0)
 		{
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
-			vertexArray.clear();
+			orbitVertices->lock();
+			renderer->drawVertexBuffer(orbitVertices);
+			orbitVertices->unlock();
+			orbitVertices->clear();
 		}
 	}
 	orbit[ORBIT_SEGMENTS/2]=savePos;
-	if (!vertexArray.isEmpty())
+
+	if(orbitVertices->length() > 0)
 	{
-		sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
+		orbitVertices->lock();
+		renderer->drawVertexBuffer(orbitVertices);
+		orbitVertices->unlock();
+		orbitVertices->clear();
 	}
-	sPainter.enableClientStates(false);
 }
 
 void Planet::update(int deltaTime)
@@ -1163,4 +1620,11 @@ void Planet::update(int deltaTime)
 	hintFader.update(deltaTime);
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
+}
+
+void Planet::setSphereScale(float s)
+{
+	sphereScale = s;
+	if(NULL != unlitSphere) {unlitSphere->setRadius(radius * s);}
+	if(NULL != litSphere)   {litSphere->setRadius(radius * s);}
 }

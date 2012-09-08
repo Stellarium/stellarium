@@ -20,14 +20,16 @@
 #ifndef _STELSPHEREGEOMETRY_HPP_
 #define _STELSPHEREGEOMETRY_HPP_
 
-#include <QVector>
-#include <QVariant>
 #include <QDebug>
 #include <QSharedPointer>
+#include <QVariant>
 #include <QVarLengthArray>
-#include "VecMath.hpp"
+#include <QVector>
+
 #include "OctahedronPolygon.hpp"
-#include "StelVertexArray.hpp"
+#include "renderer/StelVertexBuffer.hpp"
+#include "Triplet.hpp"
+#include "VecMath.hpp"
 
 class SphericalRegion;
 class SphericalPolygon;
@@ -36,6 +38,7 @@ class SphericalCap;
 class SphericalPoint;
 class AllSkySphericalRegion;
 class EmptySphericalRegion;
+
 
 //! @file StelSphereGeometry.hpp
 //! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
@@ -141,7 +144,146 @@ public:
 		Invalid = 6
 	};
 
-	virtual ~SphericalRegion() {;}
+	//! Parameters specifying how to draw a SphericalRegion.
+	//!
+	//! Passed to e.g. drawFill().
+	//!
+	//! Also used to remember previously used draw parameters, which enables 
+	//! vertex buffer caching.
+	//!
+	//! This is a builder-style struct. Parameters can be specified like this:
+	//!
+	//! @code
+	//! // Default parameters. Projector is mandatory, so it is specified in the constructor.
+	//! SphericalRegion::DrawParams a(someProjectorPointer);
+	//! // Do not subdivide the region into smaller triangles.
+	//! SphericalRegion::DrawParams b = SphericalRegion::DrawParams(someProjectorPointer)
+	//!                                                 .doNotSubdivide();
+	//! // Do not subdivide and clip the part of the region outside of specified cap.
+	//! SphericalRegion::DrawParams c = SphericalRegion::DrawParams(someProjectorPointer)
+	//!                                                 .doNotSubdivide()
+	//!                                                 .clippingCap(someSphericalCapPointer);
+	//! @endcode
+	//!
+	//!
+	struct DrawParams
+	{
+		//! Construct DrawParams with default parameters and specified projector.
+		//!
+		//! @param projector Projector to use for drawing.
+		//!
+		//! The default parameters are: no clipping cap, subdivide the region to
+		//! follow projection distortions, max distortion 5.0.
+		DrawParams(class StelProjector* projector)
+			: projector_(projector)
+			, clippingCap_(NULL)
+			, subdivide_(true)
+			, maxSqDistortion_(5.0)
+		{}
+
+		//! Only used to determine whether to update cached vertex buffers.
+		//! 
+		//! Compares parameters given in a previous drawXXX() 
+		//! call with parameters given in the current call.
+		//!
+		//! Projector is ignored - outside code needs to figure out if projector 
+		//! affects vertex buffer generation. Clipping cap is only assumed to be 
+		//! the same if both previos and current is NULL (which is usually the case).
+		bool operator != (const DrawParams& rhs) const 
+		{
+			// Projector is ignored, as even if the pointer points to the same object, 
+			// the objects' state might have changed, making comparison useless. 
+			// Instead, we only cache in cases when projector is not used used outside 
+			// Renderer (i.e. not affecting vertex buffers that get cached) or NULL.
+
+			// Clipping caps are only considered equal when NULL (which is the 
+			// most common case, anyway). There is no opportunity for special handling
+			// like projectors, since, when not NULL, clipping caps are always used 
+			// in vertex buffer generation.
+
+			return (clippingCap_ == NULL && rhs.clippingCap_ == NULL) ||
+			       subdivide_ != rhs.subdivide_   ||
+			       //Fuzzy compare might be better here
+			       maxSqDistortion_ != rhs.maxSqDistortion_;
+		}
+
+		//! If not NULL, used to clip the part of the region outside the cap.
+		DrawParams& clippingCap(const SphericalCap* clippingCap)
+		{
+			clippingCap_ = clippingCap;
+			return *this;
+		}
+
+		//! Do not subdivide the region to follow projection distortions.
+		//!
+		//! Improves drawing speed.
+		//!
+		//! You can use this if you think that the region is fully contained in the viewport.
+		DrawParams& doNotSubdivide()
+		{
+			subdivide_ = false;
+			return *this;
+		}
+
+		//! Specify maximum distortion - we try to subdivide to be withil this limit.
+		DrawParams& maxSqDistortion(const double maxSqDistortion)
+		{
+			maxSqDistortion_ = maxSqDistortion;
+			return *this;
+		}
+
+		//! Projector to use when drawing.
+		class StelProjector* projector_;
+
+		//! If specified, clips the part of the region outside of cap.
+		const SphericalCap* clippingCap_;
+
+		//! Subdivide triangles?
+		bool subdivide_;
+
+		//! Maximum distortion.
+		double maxSqDistortion_;
+	};
+
+	//! 3D vertex with only a position.
+	struct PlainVertex
+	{
+		Vec3f position;
+		PlainVertex(const Vec3f& position) : position(position){}
+		PlainVertex(const Vec3d& pos) : position(pos[0], pos[1], pos[2]) {}
+		VERTEX_ATTRIBUTES(Vec3f Position);
+	};
+
+	//! 3D vertex with position and a texture coordinate.
+	struct TexturedVertex
+	{
+		Vec3f position;
+		Vec2f texCoord;
+		TexturedVertex(const Vec3f& position, const Vec2f& texCoord)
+			: position(position) , texCoord(texCoord) {}
+		TexturedVertex(const Vec3d& pos, const Vec2f& texCoord)
+			: position(pos[0], pos[1], pos[2]) , texCoord(texCoord) {}
+		VERTEX_ATTRIBUTES(Vec3f Position, Vec2f TexCoord);
+	};
+
+	//! Default constructor. Inializes with no vertex buffers.
+	SphericalRegion()
+		: fillPlainVertexBuffer(NULL)
+		, previousFillDrawParams(NULL)
+	{
+		// Make sure previousFillDrawParams is invalid at start, so it gets replaced 
+		// at first drawFill() call.
+		previousFillDrawParams.maxSqDistortion_ = -42.0f;
+	}
+
+	//! Destructor. Cleans up vertex buffers, if any.
+	virtual ~SphericalRegion() 
+	{
+		if(NULL != fillPlainVertexBuffer)
+		{
+			delete fillPlainVertexBuffer;
+		}
+	}
 
 	virtual SphericalRegionType getType() const = 0;
 
@@ -173,12 +315,36 @@ public:
 	//! @param margin the minimum enlargement margin in radian.
 	virtual SphericalRegionP getEnlarged(double margin) const;
 
-	//! Return an openGL compatible array to be displayed using vertex arrays.
-	virtual StelVertexArray getFillVertexArray() const {return getOctahedronPolygon().getFillVertexArray();}
+	//! Get a vector of vertex positions forming the region.
+	virtual const QVector<Vec3d>& getFillVertexPositions() const
+	{
+		return getOctahedronPolygon().fillVertices();
+	}
+
+	//! Get primitive type determining how vertices in vector returned by
+	//! getFillVertexPositions() form triangles.
+	virtual PrimitiveType getFillPrimitiveType() const 
+	{
+		return PrimitiveType_Triangles;
+	}
 
 	//! Get the outline of the contours defining the SphericalPolygon.
-	//! @return a list of vertex which taken 2 by 2 define the contours of the polygon.
-	virtual StelVertexArray getOutlineVertexArray() const {return getOctahedronPolygon().getOutlineVertexArray();}
+	//! @return a list of vertices which define the contours of the polygon.
+	virtual const QVector<Vec3d>& getOutlineVertexPositions() const 
+	{
+		// This is a workaround around a compiler bug with Clang (as of Clang 3.2).
+		// Returning the reference directly results in an uninitialized
+		// reference which breaks calling code.
+		const QVector<Vec3d>& result(getOctahedronPolygon().outlineVertices());
+		return result;
+	}
+
+	//! Get primitive type determining how vertices in vector returned by
+	//! getOutlinePrimitiveType() form lines.
+	virtual PrimitiveType getOutlinePrimitiveType() const
+	{
+		return PrimitiveType_Lines;
+	}
 
 	//! Get the contours defining the SphericalPolygon when combined using a positive winding rule.
 	//! The default implementation return a list of tesselated triangles derived from the OctahedronPolygon.
@@ -251,7 +417,78 @@ public:
 	SphericalRegionP getSubtraction(const AllSkySphericalRegion& r) const;
 	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion& r) const;
 
+	//! Draw the region as triangles (i.e. filling the region).
+	//!
+	//! @param renderer Renderer to use for drawing.
+	//! @param params   Drawing parameters (projector, clipping cap, if any, etc.).
+	//!
+	//! @see DrawParams
+	virtual void drawFill(class StelRenderer* renderer, const DrawParams& params);
+
+	//! Draw the outline of the region.
+	//!
+	//! @param renderer Renderer to use for drawing.
+	//! @param params   Drawing parameters (projector, clipping cap, if any, etc.).
+	//!                 Note that maxSqDistortion has no effect here.
+	//!
+	//! @see DrawParams
+	virtual void drawOutline(class StelRenderer* renderer, const DrawParams& params);
+
+protected:
+	//! Cached plain vertex buffer for drawing.
+	StelVertexBuffer<PlainVertex>* fillPlainVertexBuffer;
+
+	//! Should Renderer draw calls specify a projector?
+	//!
+	//! This is true unless we've projected the vertices ourselves (which is the
+	//! case when we're subdividing the region into smaller triangles.)
+	bool useProjector;
+
+	//! Update the vertex buffer used by drawFill().
+	//!
+	//! Called when drawing parameters have changed, or when we cannot cache 
+	//! vertices (e.g. when subdividing and this projecting outside Renderer).
+	//!
+	//! @param renderer            Renderer to create vertex buffer.
+	//! @param params              Parameters used for drawing 
+	//!                            (which also affect vertex generation).
+	//! @param handleDiscontinuity Do we need to ensure that no triangles cross a 
+	//!                            projection discontinuity?
+	virtual void updateFillVertexBuffer(class StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity);
+
+	//! Drawing part of drawFill() - assumes the buffer/s is/are generated.
+	//!
+	//! @param renderer  Renderer used for drawing.
+	//! @param projector Projector to project the vertices 
+	//!                  (NULL if subdivision is enabled, as in that case
+	//!                  the projection is done during buffer generation)
+	virtual void drawFillVertexBuffer(class StelRenderer* renderer, class StelProjector* projector);
+
+	//! Do we need to update vertex buffer/s used by drawFill()?
+	//!
+	//! Might be true if e.g. the region has changed. Note that this is only
+	//! one possible reason to update the buffers, drawFill() contains the full 
+	//! logic to determine this (e.g. we always update when subdividing is enabled).
+	virtual bool needToUpdateFillVertexBuffers() const
+	{
+		// Can't determine whether we can cache anything - 
+		// we'd need to know if polygon returned by getOctahedronPolygon has changed,
+		// but since getOctahedronPolygon returns by value, not reference,
+		// it returns a new octahedronPolygon every time.
+		//
+		// If it was by reference, _and_ guaranteed to always point to the same polygon,
+		// we might store a flag in the polygon determining if its vertex array has 
+		// changed, and use that for caching.
+		return true;
+	}
+
+	//! Called after updating vertex buffer/s used by drawFill().
+	virtual void fillVertexBuffersUpdated() {}
+
 private:
+	//! Parameters used for the previous drawFill() call.
+	DrawParams previousFillDrawParams;
+
 	bool containsDefault(const SphericalRegion* r) const;
 	bool intersectsDefault(const SphericalRegion* r) const;
 	SphericalRegionP getIntersectionDefault(const SphericalRegion* r) const;
@@ -297,8 +534,11 @@ public:
 	virtual SphericalCap getBoundingCap() const {return *this;}
 
 	// Contain and intersect	
-	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);return (v*n>=d);}
-	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000002f);return (v[0]*n[0]+v[1]*n[1]+v[2]*n[2]>=d);}
+	bool contains(const Vec3d &v) const 
+	{
+		Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.00000021);
+		return (v*n>=d);
+	}
 	virtual bool contains(const SphericalConvexPolygon& r) const;
 	virtual bool contains(const SphericalCap& h) const
 	{
@@ -354,11 +594,11 @@ public:
 	//! Return whether the cap intersect with a convex contour defined by nbVertice.
 	bool intersectsConvexContour(const Vec3d* vertice, int nbVertice) const;
 
-	//! Return whether the cap contains the passed triangle.
-	bool containsTriangle(const Vec3d* vertice) const;
+	//! Does the cap contain the passed triangle?
+	bool containsTriangle(const Triplet<Vec3d> triangle) const;
 
-	//! Return whether the cap intersect with the passed triangle.
-	bool intersectsTriangle(const Vec3d* vertice) const;
+	//! Does the cap intersect with the passed triangle?
+	bool intersectsTriangle(const Triplet<Vec3d>& triangle) const;
 
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
@@ -455,7 +695,10 @@ public:
 	virtual ~AllSkySphericalRegion() {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::AllSky;}
-	virtual OctahedronPolygon getOctahedronPolygon() const {return OctahedronPolygon::getAllSkyOctahedronPolygon();}
+	virtual OctahedronPolygon getOctahedronPolygon() const 
+	{
+		return OctahedronPolygon::getAllSkyOctahedronPolygon();
+	}
 	virtual double getArea() const {return 4.*M_PI;}
 	virtual bool isEmpty() const {return false;}
 	virtual Vec3d getPointInside() const {return Vec3d(1,0,0);}
@@ -497,7 +740,10 @@ public:
 	virtual ~EmptySphericalRegion() {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Empty;}
-	virtual OctahedronPolygon getOctahedronPolygon() const {return OctahedronPolygon::getEmptyOctahedronPolygon();}
+	virtual OctahedronPolygon getOctahedronPolygon() const 
+	{
+		return OctahedronPolygon::getEmptyOctahedronPolygon();
+	}
 	virtual double getArea() const {return 0.;}
 	virtual bool isEmpty() const {return true;}
 	virtual Vec3d getPointInside() const {return Vec3d(1,0,0);}
@@ -546,7 +792,10 @@ public:
 	SphericalPolygon(const QList<OctahedronPolygon>& octContours) : octahedronPolygon(octContours) {;}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::Polygon;}
-	virtual OctahedronPolygon getOctahedronPolygon() const {return octahedronPolygon;}
+	virtual OctahedronPolygon getOctahedronPolygon() const 
+	{
+		return octahedronPolygon;
+	}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
@@ -584,11 +833,17 @@ public:
 	//! Set the contours defining the SphericalPolygon.
 	//! @param contours the list of contours defining the polygon area. The contours are combined using
 	//! the positive winding rule, meaning that the polygon is the union of the positive contours minus the negative ones.
-	void setContours(const QVector<QVector<Vec3d> >& contours) {octahedronPolygon = OctahedronPolygon(contours);}
+	void setContours(const QVector<QVector<Vec3d> >& contours) 
+	{
+		octahedronPolygon = OctahedronPolygon(contours);
+	}
 
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param contour a contour defining the polygon area.
-	void setContour(const QVector<Vec3d>& contour) {octahedronPolygon = OctahedronPolygon(contour);}
+	void setContour(const QVector<Vec3d>& contour) 
+	{
+		octahedronPolygon = OctahedronPolygon(contour);
+	}
 
 	//! Return the list of closed contours defining the polygon boundaries.
 	QVector<QVector<Vec3d> > getClosedOutlineContours() const {Q_ASSERT(0); return QVector<QVector<Vec3d> >();}
@@ -620,18 +875,61 @@ public:
 	SphericalConvexPolygon() {;}
 
 	//! Constructor from a list of contours.
-	SphericalConvexPolygon(const QVector<QVector<Vec3d> >& contours) {Q_ASSERT(contours.size()==1); setContour(contours.at(0));}
+	SphericalConvexPolygon(const QVector<QVector<Vec3d> >& contours)
+		: fillVertexBufferNeedsUpdate(true)
+	{
+		Q_ASSERT(contours.size()==1); 
+		setContour(contours.at(0));
+	}
+
 	//! Constructor from one contour.
-	SphericalConvexPolygon(const QVector<Vec3d>& contour) {setContour(contour);}
+	SphericalConvexPolygon(const QVector<Vec3d>& contour) 
+		: fillVertexBufferNeedsUpdate(true)
+	{
+		setContour(contour);
+	}
+
 	//! Special constructor for triangle.
-	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2) {contour << e0 << e1 << e2; updateBoundingCap();}
+	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2) 
+		: fillVertexBufferNeedsUpdate(true)
+	{
+		contour << e0 << e1 << e2; updateBoundingCap();
+	}
+
 	//! Special constructor for quads.
-	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)  {contour << e0 << e1 << e2 << e3; updateBoundingCap();}
+	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)  
+		: fillVertexBufferNeedsUpdate(true)
+	{
+		contour << e0 << e1 << e2 << e3; updateBoundingCap();
+	}
 
 	virtual SphericalRegionType getType() const {return SphericalRegion::ConvexPolygon;}
-	virtual OctahedronPolygon getOctahedronPolygon() const {return OctahedronPolygon(contour);}
-	virtual StelVertexArray getFillVertexArray() const {return StelVertexArray(contour, StelVertexArray::TriangleFan);}
-	virtual StelVertexArray getOutlineVertexArray() const {return StelVertexArray(contour, StelVertexArray::LineLoop);}
+
+	virtual OctahedronPolygon getOctahedronPolygon() const 
+	{
+		return OctahedronPolygon(contour);
+	}
+
+	virtual const QVector<Vec3d>& getFillVertexPositions() const
+	{
+		return contour;
+	}
+
+	virtual PrimitiveType getFillPrimitiveType() const 
+	{
+		return PrimitiveType_TriangleFan;
+	}
+
+	virtual const QVector<Vec3d>& getOutlineVertexPositions() const 
+	{
+		return contour;
+	}
+
+	virtual PrimitiveType getOutlinePrimitiveType() const
+	{
+		return PrimitiveType_LineLoop;
+	}
+
 	virtual double getArea() const;
 	virtual bool isEmpty() const {return contour.isEmpty();}
 	virtual Vec3d getPointInside() const;
@@ -679,7 +977,12 @@ public:
 	////////////////////////////////////////////////////////////////////
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param acontour a contour defining the polygon area.
-	void setContour(const QVector<Vec3d>& acontour) {contour=acontour; updateBoundingCap();}
+	void setContour(const QVector<Vec3d>& acontour) 
+	{
+		contour = acontour;
+		fillVertexBufferNeedsUpdate = true;
+		updateBoundingCap();
+	}
 
 	//! Get the single contour defining the SphericalConvexPolygon.
 	const QVector<Vec3d>& getConvexContour() const {return contour;}
@@ -700,8 +1003,25 @@ protected:
 	//! Cache the bounding cap.
 	SphericalCap cachedBoundingCap;
 
+	//! Does the drawFill() vertex buffer need an update?
+	bool fillVertexBufferNeedsUpdate;
+
 	//! Update the bounding cap from the vertex list.
 	void updateBoundingCap();
+
+	virtual void updateFillVertexBuffer(class StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity);
+
+	virtual void drawFillVertexBuffer(class StelRenderer* renderer, class StelProjector* projector);
+
+	virtual bool needToUpdateFillVertexBuffers() const
+	{
+		return fillVertexBufferNeedsUpdate;
+	}
+
+	virtual void fillVertexBuffersUpdated()
+	{
+		fillVertexBufferNeedsUpdate = false;
+	}
 
 	//! Computes whether the passed points are all outside of at least one SphericalCap defining the polygon boundary.
 	//! @param thisContour the vertices defining the contour.
@@ -780,55 +1100,6 @@ protected:
 //	void updateBoundingCap();
 //};
 
-//! @class SphericalTexturedPolygon
-//! An extension of SphericalPolygon with addition of texture coordinates.
-class SphericalTexturedPolygon : public SphericalPolygon
-{
-public:
-	//! @struct TextureVertex
-	//! A container for 3D vertex + associated texture coordinates
-	struct TextureVertex
-	{
-		Vec3d vertex;
-		Vec2f texCoord;
-	};
-
-	SphericalTexturedPolygon() {;}
-	//! Constructor from a list of contours.
-	SphericalTexturedPolygon(const QVector<QVector<TextureVertex> >& contours) {Q_UNUSED(contours); Q_ASSERT(0);}
-	//! Constructor from one contour.
-	SphericalTexturedPolygon(const QVector<TextureVertex>& contour) {Q_UNUSED(contour); Q_ASSERT(0);}
-
-	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual StelVertexArray getFillVertexArray() const {Q_ASSERT(0); return StelVertexArray();}
-	//! Serialize the region into a QVariant map matching the JSON format.
-	//! The format is:
-	//! @code["TEXTURED_POLYGON", [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
-	//! [[[u,v],[u,v],[u,v],[u,v]], [[u,v],[u,v],[u,v]], [...]]]@endcode
-	//! where the two lists are a list of closed contours, with each points defined by ra dec in degree in the ICRS frame 
-	//! followed by a list of texture coordinates in the u,v texture space (between 0 and 1).
-	//! There must be one texture coordinate for each vertex.
-	virtual QVariantList toQVariant() const;
-	virtual void serialize(QDataStream& out) const {Q_UNUSED(out); Q_ASSERT(0);}
-
-	////////////////////////////////////////////////////////////////////
-	// Methods specific to SphericalTexturedPolygon
-	//! Set the contours defining the SphericalPolygon.
-	//! @param contours the list of contours defining the polygon area using the WindingPositive winding rule.
-	void setContours(const QVector<QVector<TextureVertex> >& contours) {Q_UNUSED(contours); Q_ASSERT(0);}
-
-	//! Set a single contour defining the SphericalPolygon.
-	//! @param contour a contour defining the polygon area.
-	void setContour(const QVector<TextureVertex>& contour) {Q_UNUSED(contour); Q_ASSERT(0);}
-
-private:
-	//! A list of uv textures coordinates corresponding to the triangle vertices.
-	//! There should be 1 uv position per vertex.
-	QVector<Vec2f> textureCoords;
-};
-
-
-Q_DECLARE_TYPEINFO(SphericalTexturedPolygon::TextureVertex, Q_PRIMITIVE_TYPE);
 
 //! @class SphericalTexturedConvexPolygon
 //! Extension of SphericalConvexPolygon for textured polygon.
@@ -836,26 +1107,46 @@ class SphericalTexturedConvexPolygon : public SphericalConvexPolygon
 {
 public:
 	//! Default constructor.
-	SphericalTexturedConvexPolygon() {;}
+	SphericalTexturedConvexPolygon() : fillTexturedVertexBuffer(NULL) 
+	{
+		fillVertexBufferNeedsUpdate = true;
+	}
 
 	//! Constructor from one contour.
-	SphericalTexturedConvexPolygon(const QVector<Vec3d>& contour, const QVector<Vec2f>& texCoord) {setContour(contour, texCoord);}
+	SphericalTexturedConvexPolygon(const QVector<Vec3d>& contour, const QVector<Vec2f>& texCoord) 
+		: fillTexturedVertexBuffer(NULL)
+	{
+		setContour(contour, texCoord);
+		fillVertexBufferNeedsUpdate = true;
+	}
 
 	//! Special constructor for quads.
 	//! Use the 4 textures corners for the 4 vertices.
-	SphericalTexturedConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3) : SphericalConvexPolygon(e0,e1,e2,e3)
+	SphericalTexturedConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3) 
+		: SphericalConvexPolygon(e0,e1,e2,e3)
+		, fillTexturedVertexBuffer(NULL)
 	{
 		textureCoords << Vec2f(0.f, 0.f) << Vec2f(1.f, 0.f) << Vec2f(1.f, 1.f) << Vec2f(0.f, 1.f);
+		fillVertexBufferNeedsUpdate = true;
 	}
 
-	//! Return an openGL compatible array to be displayed using vertex arrays.
-	//! This method is not optimized for SphericalConvexPolygon instances.
-	virtual StelVertexArray getFillVertexArray() const {return StelVertexArray(contour, StelVertexArray::TriangleFan, textureCoords);}
+	virtual ~SphericalTexturedConvexPolygon()
+	{
+		if(NULL != fillTexturedVertexBuffer)
+		{
+			delete fillTexturedVertexBuffer;
+		}
+	}
 
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param acontour a contour defining the polygon area.
 	//! @param texCoord a list of texture coordinates matching the vertices of the contour.
-	virtual void setContour(const QVector<Vec3d>& acontour, const QVector<Vec2f>& texCoord) {SphericalConvexPolygon::setContour(acontour); textureCoords=texCoord;}
+	virtual void setContour(const QVector<Vec3d>& acontour, const QVector<Vec2f>& texCoord) 
+	{
+		SphericalConvexPolygon::setContour(acontour); 
+		textureCoords=texCoord;
+		fillVertexBufferNeedsUpdate = true;
+	}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
@@ -868,18 +1159,32 @@ public:
 	virtual void serialize(QDataStream& out) const {out << contour << textureCoords;}
 
 protected:
-	//! A list of uv textures coordinates corresponding to the triangle vertices.
+	//! A list of uv texture coordinates corresponding to the triangle vertices.
 	//! There should be 1 uv position per vertex.
 	QVector<Vec2f> textureCoords;
+
+	//! Vertex buffer used in our override of drawFill() (using vertices with texcoords).
+	StelVertexBuffer<TexturedVertex>* fillTexturedVertexBuffer;
+
+	virtual void updateFillVertexBuffer(class StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity);
+
+	virtual void drawFillVertexBuffer(class StelRenderer* renderer, class StelProjector* projector);
 };
 
 
 //! Compute the intersection of 2 great circles segments.
+//! @param p1 Start of the first great circle segment.
+//! @param p2 End of the first great circle segment.
+//! @param p3 Start of the second great circle segment.
+//! @param p4 End of the second great circle segment.
 //! @param ok is set to false if no intersection was found.
 //! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3, const Vec3d& p4, bool& ok);
 
 //! Compute the intersection of a great circles segment with another great circle.
+//! @param p1 Start of the great circle segment.
+//! @param p2 End of the great circle segment.
+//! @param nHalfSpace Normal of the plane separating half space to intersect with.
 //! @param ok is set to false if no intersection was found.
 //! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& nHalfSpace, bool& ok);

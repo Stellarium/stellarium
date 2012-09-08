@@ -24,19 +24,54 @@
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
+#include "renderer/StelGLSLShader.hpp"
+
 
 //! @class StelProjector
 //! Provide the main interface to all operations of projecting coordinates from sky to screen.
 //! The StelProjector also defines the viewport size and position.
 //! All methods from this class are threadsafe. The usual usage is to create local instances of StelProjectorP using the
 //! getProjection() method from StelCore where needed.
-//! For performing drawing using a particular projection, refer to the StelPainter class.
+//! For performing drawing using a particular projection, see 
+//! StelRenderer and its backends.
 //! @sa StelProjectorP
 class StelProjector
 {
 public:
-	friend class StelPainter;
 	friend class StelCore;
+
+	//! Base class for classes implementing vertex projection in GLSL.
+	//!
+	//! Each StelProjector implementation can have its own GLSLProjector
+	//! implementation implementing the project() member function in GLSL.
+	class GLSLProjector
+	{
+	public:
+		//! Initialize GLSL projection. Called by renderer backend before drawing.
+		//!
+		//! This attempts to attach (or re-enable, if already attached) the  
+		//! projection GLSL code to specified shader.
+		//!
+		//! This function may fail (e.g. due to a build error).
+		//! In that case, the renderer will fall back to CPU projection.
+		//!
+		//! @param shader Shader to attach the GLSL projection code to.
+		//! @return true on success, false on failure.
+		virtual bool init(class StelGLSLShader* shader) = 0;
+
+		//! Called after init() succeeds, directly before drawing.
+		//!
+		//! This is used to set up uniforms.
+		//!
+		//! @param shader Shader previously passed to init() in bound state,
+		//!               ready to set uniforms.
+		virtual void preDraw(class StelGLSLShader* shader) = 0;
+
+		//! Called after init() succeeds, after drawing.
+		//!
+		//! Used to disable the projection GLSL code.
+		virtual void postDraw(class StelGLSLShader* shader) = 0;
+	};
 
 	class ModelViewTranform;
 	//! @typedef ModelViewTranformP
@@ -58,20 +93,76 @@ public:
 		virtual void combine(const Mat4d&)=0;
 		virtual ModelViewTranformP clone() const=0;
 
+		//! Attaches (or enables, if attached already) the GLSL transform shader to specified shader.
+		//!
+		//! The shader attached must implement one function:
+		//!
+		//! vec4(modelViewForward(in vec4 v));
+		//!
+		//! This function should implement the same logic as the forward() member function,
+		//! except that it returns the result instead of modifying the parameter.
+		//!
+		//! @param shader Shader to attach to.
+		//!
+		//! @return true if the shader was succesfully attached, false otherwise.
+		virtual bool setupGLSLTransform(class StelGLSLShader* shader) = 0;
+
+		//! Set GLSL uniforms needed for the transform shader.
+		//!
+		//! Called by the renderer backend before drawing, if the transform 
+		//! shader was attached successfully.
+		virtual void setGLSLUniforms(class StelGLSLShader* shader) = 0;
+
+		//! Disable the attached GLSL transform shader.
+		virtual void disableGLSLTransform(class StelGLSLShader* shader) = 0;
+
 		virtual Mat4d getApproximateLinearTransfo() const=0;
 	};
 
 	class Mat4dTransform: public ModelViewTranform
 	{
 	public:
-        Mat4dTransform(const Mat4d& m);
-        void forward(Vec3d& v) const;
-        void backward(Vec3d& v) const;
-        void forward(Vec3f& v) const;
-        void backward(Vec3f& v) const;
-        void combine(const Mat4d& m);
-        Mat4d getApproximateLinearTransfo() const;
-        ModelViewTranformP clone() const;
+		Mat4dTransform(const Mat4d& m);
+		void forward(Vec3d& v) const;
+		void backward(Vec3d& v) const;
+		void forward(Vec3f& v) const;
+		void backward(Vec3f& v) const;
+		void combine(const Mat4d& m);
+		Mat4d getApproximateLinearTransfo() const;
+		ModelViewTranformP clone() const;
+
+		virtual bool setupGLSLTransform(StelGLSLShader* shader)
+		{
+			if(!shader->hasVertexShader("Mat4dTransform"))
+			{
+				static const QString source(
+					"uniform mat4 modelViewMatrix;\n"
+					"\n"
+					"vec4 modelViewForward(in vec4 v)\n"
+					"{\n"
+					"	return modelViewMatrix * v;\n"
+					"}\n");
+
+				if(!shader->addVertexShader("Mat4dTransform", source))
+				{
+					return false;
+				}
+				qDebug() << "Build log after adding a Mat4d transform shader: "
+				         << shader->log();
+			}
+			shader->enableVertexShader("Mat4dTransform");
+			return true;
+		}
+
+		virtual void setGLSLUniforms(StelGLSLShader* shader)
+		{
+			shader->setUniformValue("modelViewMatrix", transfoMatf);
+		}
+
+		virtual void disableGLSLTransform(StelGLSLShader* shader)
+		{
+			shader->disableVertexShader("Mat4dTransform");
+		}
 
 	private:
 		//! transfo matrix and invert
@@ -176,7 +267,11 @@ public:
 	float getFov() const;
 
 	//! Get whether front faces need to be oriented in the clockwise direction
-	bool needGlFrontFaceCW() const;
+	bool flipFrontBackFace() const
+	{
+		// Moved to header for inlining
+		return (flipHorz*flipVert < 0.f);
+	}
 
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods
@@ -207,6 +302,16 @@ public:
 	virtual void project(int n, const Vec3d* in, Vec3f* out);
 
 	virtual void project(int n, const Vec3f* in, Vec3f* out);
+
+	//! Return the GLSLProjector to provide GLSL projection functionality.
+	//!
+	//! This can return NULL if the StelProjector implementation
+	//! does not support GLSL projection.
+	virtual GLSLProjector* getGLSLProjector() 
+	{
+		// No GLSL projection support by default.
+		return NULL;
+	}
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param vd the vector in the current frame.
@@ -249,7 +354,15 @@ public:
 	ModelViewTranformP getModelViewTransform() const;
 
 	//! Get the current projection matrix.
-	Mat4f getProjectionMatrix() const;
+	Mat4f getProjectionMatrix() const
+	{
+		// Moved to header for inlining.
+		return Mat4f(2.f/viewportXywh[2], 0, 0, 0,
+		             0, 2.f/viewportXywh[3], 0, 0, 
+		             0, 0, -1., 0.,
+		             -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);
+	}
+
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Get a string description of a StelProjectorMaskType.
@@ -260,9 +373,42 @@ public:
 	//! Get the current type of the mask if any.
 	StelProjectorMaskType getMaskType(void) const;
 
+	//! Get viewport extents.
+	Vec4i getViewportXywh() const 
+	{
+		return viewportXywh;
+	}
+
+	//! Should label text align with the horizon?
+	bool useGravityLabels() const 
+	{
+		return gravityLabels;
+	}
+
+	//! Return the rotation angle to apply to gravity text (only if gravityLabels is false) .
+	float getDefaultAngleForGravityText() const
+	{
+		return defautAngleForGravityText;
+	}
+
+	//! Get center of the viewport on the screen in pixels.
+	Vec2f getViewportCenterAbsolute() const 
+	{
+		return viewportCenter;
+	}
+
+	//! Get diameter of the FOV disk in pixels.
+	float getViewportFovDiameter() 
+	{
+		return viewportFovDiameter;
+	}
+
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
+	StelProjector(ModelViewTranformP amodelViewTransform) 
+		: modelViewTransform(amodelViewTransform)
+		, disableShaderProjection(false)
+	{;}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
@@ -289,6 +435,11 @@ protected:
 	bool gravityLabels;                 // should label text align with the horizon?
 	float defautAngleForGravityText;    // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
+
+	//! If true, shader projection is disabled.
+	//!
+	//! Set when an attempt to set up shader projection fails.
+	bool disableShaderProjection;
 
 private:
 	//! Initialise the StelProjector from a param instance.

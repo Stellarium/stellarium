@@ -18,19 +18,17 @@
 
 #include "Supernova.hpp"
 #include "StelObject.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelRenderer.hpp"
 
 #include <QTextStream>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
@@ -202,7 +200,7 @@ void Supernova::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Supernova::draw(StelCore* core, StelPainter& painter)
+void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
@@ -215,21 +213,25 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 
 	StelUtils::spheToRect(snra, snde, XYZ);
 	mag = getVMagnitude(core, true);
-	sd->preDrawPointSource(&painter);
+	sd->preDrawPointSource();
 	
 	if (mag <= sd->getLimitMagnitude())
 	{
-		sd->computeRCMag(mag, rcMag);		
-//		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
-		sd->drawPointSource(&painter, XYZ, rcMag, color, false);
-		painter.setColor(color[0], color[1], color[2], 1);
-		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		sd->computeRCMag(mag, rcMag);
+		const Vec3f XYZf(XYZ[0], XYZ[1], XYZ[2]);
+		Vec3f win;
+		if(sd->pointSourceVisible(&(*projector), XYZf, rcMag, false, win))
+		{
+			sd->drawPointSource(win, rcMag, color);
+		}
+		renderer->setGlobalColor(color[0], color[1], color[2], 1);
+		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
+			renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
 		}
 	}
 
-	sd->postDrawPointSource(&painter);
+	sd->postDrawPointSource(projector);
 }
