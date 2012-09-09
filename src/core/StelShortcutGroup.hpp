@@ -95,7 +95,7 @@ public:
 
 	QAction* registerAction(const QString& actionId, bool temporary, const QString& text, const QString& primaryKey,
 													const QString& altKey, bool checkable, bool autoRepeat = true,
-													bool global = false, QGraphicsWidget *parent = false);
+                                                    bool global = false, QGraphicsWidget *parent = 0);
 
 	QAction* getAction(const QString &actionId);
 	StelShortcut* getShortcut(const QString& id);
