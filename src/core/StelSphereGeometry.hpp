@@ -251,7 +251,7 @@ public:
 		Vec3f position;
 		PlainVertex(const Vec3f& position) : position(position){}
 		PlainVertex(const Vec3d& pos) : position(pos[0], pos[1], pos[2]) {}
-		VERTEX_ATTRIBUTES(Vec3f Position);
+        VERTEX_ATTRIBUTES(Vec3f Position)
 	};
 
 	//! 3D vertex with position and a texture coordinate.
@@ -263,7 +263,7 @@ public:
 			: position(position) , texCoord(texCoord) {}
 		TexturedVertex(const Vec3d& pos, const Vec2f& texCoord)
 			: position(pos[0], pos[1], pos[2]) , texCoord(texCoord) {}
-		VERTEX_ATTRIBUTES(Vec3f Position, Vec2f TexCoord);
+        VERTEX_ATTRIBUTES(Vec3f Position, Vec2f TexCoord)
 	};
 
 	//! Default constructor. Inializes with no vertex buffers.
