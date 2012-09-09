@@ -412,7 +412,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 			{
 				result << sat->getNameI18n().toUpper();
 			}
-			else if (sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
+			else if (!numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
 			{
 				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
 			}
