@@ -1050,8 +1050,8 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 	return false;
 }
 
-// Calculate and getting orbital period in days from semi-major axis
-double calculateOrbitalPeriod(double SemiMajorAxis)
+// Calculate and getting sidereal period in days from semi-major axis
+double calculateSiderealPeriod(double SemiMajorAxis)
 {
 	// Calculate semi-major axis in meters
 	double a = AU*1000*SemiMajorAxis;
@@ -1059,6 +1059,27 @@ double calculateOrbitalPeriod(double SemiMajorAxis)
 	// Here 1.32712440018e20 is heliocentric gravitational constant
 	double period = 2*M_PI*std::sqrt(a*a*a/1.32712440018e20);
 	return period/86400; // return period in days
+}
+
+// Calculate duration of mean solar day
+double calculateSolarDay(double siderealPeriod, double siderealDay, bool forwardDirection)
+{
+	double coeff;
+	if (forwardDirection)
+		coeff = (siderealPeriod + 1)/siderealPeriod;
+	else
+		coeff = -1 * (siderealPeriod - 1)/siderealPeriod;
+
+	return siderealDay/coeff;
+}
+
+QString hoursToHmsStr(double hours)
+{
+	int h = (int)hours;
+	int m = (int)((hours-h)*60);
+	float s = (((hours-h)*60)-m)*60;
+
+	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
 }
 
 #if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)

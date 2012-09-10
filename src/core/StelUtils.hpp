@@ -273,8 +273,13 @@ namespace StelUtils
 		return Vec3f(max, 0, 0);
 	}
 
-	//! Calculate and getting orbital period in days from semi-major axis (in AU)
-	double calculateOrbitalPeriod(double SemiMajorAxis);
+	//! Calculate and getting sidereal period in days from semi-major axis (in AU)
+	double calculateSiderealPeriod(double SemiMajorAxis);
+
+	//! Calculate duration of mean solar day
+	double calculateSolarDay(double siderealPeriod, double siderealDay, bool forwardDirection);
+
+	QString hoursToHmsStr(double hours);
 
 	//! Get the number of seconds since program start.
 	//!
