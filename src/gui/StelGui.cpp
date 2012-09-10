@@ -288,9 +288,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	tempAction = getGuiAction("actionShow_Shortcuts_Window_Global");
 	connect(tempAction, SIGNAL(toggled(bool)),
-					shortcutsDialog, SLOT(setVisible(bool)));
+		shortcutsDialog, SLOT(setVisible(bool)));
 	connect(shortcutsDialog, SIGNAL(visibleChanged(bool)),
-					tempAction, SLOT(setChecked(bool)));
+		tempAction, SLOT(setChecked(bool)));
 
 	connect(getGuiAction("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
 	connect(getGuiAction("actionSave_Copy_Object_Information_Global"), SIGNAL(triggered()), this, SLOT(copySelectedObjectInfo()));
@@ -500,6 +500,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	p.setColor(QPalette::Active, QPalette::Button, QColor(255,255,255));
 	QApplication::setPalette(p);
 	
+	// FIXME: Workaround for set UI language when app is started --AW
+	updateI18n();
+
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));

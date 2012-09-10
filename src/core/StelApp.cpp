@@ -250,15 +250,13 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	stelObjectMgr->init();
 	getModuleMgr().registerModule(stelObjectMgr);
 
+	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-
 	shortcutMgr = new StelShortcutMgr();
-	shortcutMgr->init();
 
-	localeMgr = new StelLocaleMgr();
 	localeMgr->init();
-
+	shortcutMgr->init();
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
