@@ -262,7 +262,7 @@ double MinorPlanet::getSiderealPeriod() const
 {
 	double period;
 	if (semiMajorAxis>0)
-		period = StelUtils::calculateOrbitalPeriod(semiMajorAxis);
+		period = StelUtils::calculateSiderealPeriod(semiMajorAxis);
 	else
 		period = 0;
 
