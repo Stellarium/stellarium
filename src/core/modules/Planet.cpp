@@ -480,6 +480,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+		if (std::abs(getSiderealDay())>0)
+		{
+			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getSiderealDay()*24))) << "<br>";
+			bool fwddir = true;
+			if (englishName.compare("Venus") || englishName.compare("Uranus"))
+				fwddir = false;
+			oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(StelUtils::calculateSolarDay(siderealPeriod, getSiderealDay(), fwddir)*24))) << "<br>";
+		}
 	}
 
 	if ((flags&Extra2) && (englishName.compare("Sun")!=0))
