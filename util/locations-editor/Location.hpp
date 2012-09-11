@@ -80,10 +80,14 @@ public:
 	//! @}
 	
 	//! Output the location as a tab-delimited string.
-	//! @author Fabien Chereau (and everyone else who edited StelLocation after him).
+	//! @author Fabien Chereau
+	//! @author (and everyone else who edited this function in StelLocation)
+	//! @author Bogdan Marinov
 	QString toLine() const;
 	//! Parse a tab-delimited line string location from a string line serialization.
-	//! @author Fabien Chereau (and everyone else who edited StelLocation after him).
+	//! @author Fabien Chereau
+	//! @author (and everyone else who edited this function in StelLocation)
+	//! @author Bogdan Marinov
 	static Location fromLine(const QString& line);
 };
 

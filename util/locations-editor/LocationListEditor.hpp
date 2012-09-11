@@ -30,6 +30,7 @@ class LocationListEditor;
 }
 class LocationListModel;
 
+//! Main class of the Location List Editor.
 class LocationListEditor : public QMainWindow
 {
 	Q_OBJECT
@@ -40,14 +41,21 @@ public:
 	
 protected:
 	void changeEvent(QEvent* event);
+	//! Reimplemented to prompt for saving.
 	void closeEvent(QCloseEvent* event);
 	
 private:
 	Ui::LocationListEditor *ui;
 	LocationListModel* locations;
 	
+	//! Path to the currently opened list.
 	QString openFilePath;
+	//! Path to the /data/base_locations.txt file of the curret project.
+	//! The "current" is the project from which's /utils the app is run.
+	//! Empty if not found.
 	QString projectFilePath;
+	//! Path to the user_locations.txt in the curren user data directory.
+	//! Empty if not found.
 	QString userFilePath;
 	
 	//! Used in system file dialogs.
@@ -60,7 +68,9 @@ private:
 	//! was not modified.
 	bool checkIfFileIsSaved();
 	
+	//! Load a list from the specified path.
 	bool loadFile(const QString& path);
+	//! Save the current list to the specified path.
 	bool saveFile(const QString& path);
 	//! Save the current list in binary form.
 	//! (The binary format used by Stellarium to speed up the base location
