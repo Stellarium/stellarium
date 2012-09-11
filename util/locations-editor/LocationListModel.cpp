@@ -76,6 +76,21 @@ LocationListModel* LocationListModel::load(QFile* file)
 	return result;
 }
 
+bool LocationListModel::save(QFile* file)
+{
+	if (!file || !file->isWritable())
+		return false;
+	
+	QTextStream stream(file);
+	stream.setCodec("UTF-8");
+	foreach(const Location& loc, locations)
+	{
+		stream << loc.toLine() << '\n';
+	}
+	
+	return true;
+}
+
 int LocationListModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent);

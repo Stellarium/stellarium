@@ -202,34 +202,47 @@ bool LocationListEditor::loadFile(const QString& path)
 
 bool LocationListEditor::saveFile(const QString& path)
 {
-	// TODO:
-	bool ok = true;
+	if (path.isEmpty())
+		return false;
 	
-	if (ok)
+	QFile file(path);
+	if (!file.open(QFile::WriteOnly | QFile::Text))
 	{
-		locations->setModified(false);
-		
-		QString message;
-		
-		// Save the list also in binary format if necessary.
-		if (ui->actionBinary->isChecked())
-		{
-			if (saveBinary(openFilePath))
-				message = "List saved, with binary, to " + path;
-			else
-				message = "Error saving as binary! But list saved to " + path;
-		}
-		else
-		{
-			message = "List saved to " + path;
-		}
-		
-		ui->statusBar->showMessage(message);
-		return true;
+		QMessageBox::warning(this,
+		                     qApp->applicationName(),
+		                     QString("Cannot save to file %1:\n%2.")
+		                     .arg(path)
+		                     .arg(file.errorString()));
+		return false;
+	}
+	bool ok = locations->save(&file);
+	file.close();
+	
+	if (!ok)
+	{
+		ui->statusBar->showMessage("Error saving list!");
+		return false;
 	}
 	
-	ui->statusBar->showMessage("Error saving list!");
-	return false;
+	locations->setModified(false);
+	
+	QString message;
+	
+	// Save the list also in binary format if necessary.
+	if (ui->actionBinary->isChecked())
+	{
+		if (saveBinary(openFilePath))
+			message = "List saved, with binary, to " + path;
+		else
+			message = "Error saving as binary! But list saved to " + path;
+	}
+	else
+	{
+		message = "List saved to " + path;
+	}
+	
+	ui->statusBar->showMessage(message);
+	return true;
 }
 
 bool LocationListEditor::saveBinary(const QString& path)
