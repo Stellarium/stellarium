@@ -41,8 +41,8 @@ public:
 	LocationListModel(QList<Location> locationList, QObject *parent = 0);
 	
 	static LocationListModel* load(QFile* file);
-	bool save(const QString& filePath);
-	bool saveBinary(const QString& filePath);
+	bool save(QFile* file);
+	bool saveBinary(QFile* file);
 	
 	bool isModified() const {return wasModified;}
 	

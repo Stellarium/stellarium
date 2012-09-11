@@ -77,6 +77,8 @@ Location Location::fromLine(const QString& line)
 	loc.region  = splitline.at(1);
 	loc.country = splitline.at(2);
 	loc.role    = splitline.at(3).at(0);
+	if (loc.role == '\0')
+		loc.role = 'N'; // TODO: Define standard default/unknown value. ('X'?)
 	loc.population = (int) (splitline.at(4).toFloat());
 	
 	const QString& latStr = splitline.at(5);
