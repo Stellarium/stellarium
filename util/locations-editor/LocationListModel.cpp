@@ -23,6 +23,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QFont>
 #include <QTextStream>
 
 LocationListModel::LocationListModel(QObject *parent) :
@@ -123,8 +124,22 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 			break;
 			
 		case 2: // Country
-			if (role == Qt::DisplayRole || role == Qt::EditRole)
+			if (role == Qt::DisplayRole)
+				return loc.countryName;
+			else if (role == Qt::EditRole)
 				return loc.country;
+			else if (role == Qt::FontRole)
+			{
+				// Mark non-coded countries
+				if (loc.country == loc.countryName)
+				{
+					QFont font;
+					font.setBold(true);
+					return font;
+				}
+				else
+					return QVariant();
+			}
 			break;
 			
 		case 3: // Type

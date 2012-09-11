@@ -23,6 +23,7 @@
 #define LOCATION_HPP
 
 #include <QDataStream>
+#include <QMap>
 #include <QString>
 
 //! Simplified location class reusing code from StelLocation.
@@ -33,18 +34,20 @@ class Location
 public:
 	Location();
 	
-	//! @name Original data fields of StelLocation.
+	//! @name Data fields, mostly reused from StelLocation.
 	//! The entries marked by [IGNORED] are not (yet) used by Stellarium.
 	//! @{
 	//! Location name.
 	QString name;
-	//! Country code or name.
+	//! Country (code or name, <strong>as it is in the source file</strong>).
 	//! Allegedly can be empty, but people keep filling it.
 	//! Note that in StelLocation it is the full country name. Here for now
 	//! it is the contents of the file.
 	QString country;
-	//! Name of region (state, county, etc.), used for disambiguation.
-	//! Can be empty.
+	//! Country (human-readable name, used for ID/disambiguation).
+	QString countryName;
+	//! Region (state, county, municipality, etc.), used for disambiguation.
+	//! Can be empty. And should be empty, if there are no two with that name.
 	QString region;
 	//! Planet name (empty if Earth).
 	QString planetName;
@@ -79,6 +82,16 @@ public:
 	QString landscapeKey;
 	//! @}
 	
+	//! Identifier as used by LocationListModel and StelLocationMgr.
+	QString id;
+	
+	//! Form the ID used by StelLocationMgr.
+	//! Format: "Place, Country".
+	QString getBasicId();
+	//! Form the ID used by StelLocationMgr if there are duplicates.
+	//! Format: "Place (Region), Country".
+	QString getExtendedId();
+	
 	//! Output the location as a tab-delimited string.
 	//! @author Fabien Chereau
 	//! @author (and everyone else who edited this function in StelLocation)
@@ -89,13 +102,21 @@ public:
 	//! @author (and everyone else who edited this function in StelLocation)
 	//! @author Bogdan Marinov
 	static Location fromLine(const QString& line);
+	
+	//! Convert database field string to human-readable country name.
+	//! @param string may contain a two-letter country code or a country name.
+	static QString stringToCountry(const QString& string);
+
+protected:
+	//! Load the two-letter country codes list in the resources.
+	static void loadCountryCodes();
+	//! Map matching two-letter country codes (ISO 3166-1 alpha-2) to names.
+	static QMap<QString,QString> mapCodeToCountry;
 };
 
 //! Serialize the passed Location into a binary blob.
+//! No need for the other operator, as the app won't be reading binary lists.
 //! @author Fabien Chereau (and possibly others)
 QDataStream& operator<<(QDataStream& out, const Location& loc);
-//! Load the Location from a binary blob.
-//! @author Fabien Chereau (and possibly others)
-QDataStream& operator>>(QDataStream& in, Location& loc);
 
 #endif // LOCATION_HPP
