@@ -276,7 +276,10 @@ void LocationListEditor::open()
 void LocationListEditor::openProjectLocations()
 {
 	if (checkIfFileIsSaved())
-		loadFile(projectFilePath);
+	{
+		if (loadFile(projectFilePath))
+			ui->actionBinary->setChecked(true);
+	}
 }
 
 void LocationListEditor::openUserLocations()
