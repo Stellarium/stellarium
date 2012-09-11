@@ -22,3 +22,6 @@ HEADERS  += LocationListEditor.hpp \
     LocationListModel.hpp
 
 FORMS    += LocationListEditor.ui
+
+RESOURCES += \
+    ../../data/locationsEditor.qrc
