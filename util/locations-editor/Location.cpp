@@ -58,7 +58,7 @@ QString Location::toLine() const
 	        .arg(latStr)
 	        .arg(longStr)
 	        .arg(altitude)
-	        .arg(bortleScaleIndex)
+	        .arg(bortleScaleIndex < 0 ? "" : QString::number(bortleScaleIndex))
 	        .arg(timeZone)
 	        .arg(planetName)
 	        .arg(landscapeKey);

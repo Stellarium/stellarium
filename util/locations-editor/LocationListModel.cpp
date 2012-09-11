@@ -27,14 +27,14 @@
 
 LocationListModel::LocationListModel(QObject *parent) :
     QAbstractTableModel(parent),
-    modified(false)
+    wasModified(false)
 {
 }
 
 LocationListModel::LocationListModel(QList<Location> locationList,
                                      QObject *parent) :
     QAbstractTableModel(parent),
-    modified(false),
+    wasModified(false),
     locations(locationList)
 {
 }
@@ -90,10 +90,7 @@ int LocationListModel::rowCount(const QModelIndex& parent) const
 
 QVariant LocationListModel::data(const QModelIndex& index, int role) const
 {
-	if (!index.isValid())
-		return QVariant();
-	
-	if (index.row() >= locations.count() || index.column() >= 12)
+	if (!isValidIndex(index))
 		return QVariant();
 	
 	const Location& loc = locations[index.row()];
@@ -101,61 +98,70 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 	switch (index.column())
 	{
 		case 0: // Name
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.name;
 			break;
 			
 		case 1: // Region
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.region;
 			break;
 			
 		case 2: // Country
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.country;
 			break;
 			
 		case 3: // Type
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.role;
 			break;
 			
 		case 4: // Population
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.population;
 			break;
 			
 		case 5: // Latitude
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.latitude;
 			break;
 			
 		case 6: // Longitude
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.longitude;
 			break;
 			
 		case 7: // Altitude
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.altitude;
 			break;
 			
 		case 8: // Light pollution
 			if (role == Qt::DisplayRole)
+			{
+				if (loc.bortleScaleIndex < 0.)
+					return QVariant();
+				else
+					return loc.bortleScaleIndex;
+			}
+			else if (role == Qt::EditRole)
+			{
 				return loc.bortleScaleIndex;
+			}
 			
 		case 9: // Time zone
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.timeZone;
 			break;
 			
 		case 10: // Planet
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.planetName;
 			break;
 			
 		case 11: // Landscape
-			if (role == Qt::DisplayRole)
+			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.landscapeKey;
 			break;
 			
@@ -163,6 +169,14 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 			break;
 	}
 	return QVariant();
+}
+
+Qt::ItemFlags LocationListModel::flags(const QModelIndex& index) const
+{
+	if (!index.isValid())
+		return Qt::ItemIsEnabled;
+	
+	return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
 QVariant LocationListModel::headerData(int section,
@@ -211,4 +225,111 @@ QVariant LocationListModel::headerData(int section,
 			return (section + 1);
 	}
 	return QVariant();
+}
+
+bool LocationListModel::setData(const QModelIndex& index,
+                                const QVariant& value,
+                                int role)
+{
+	if (!isValidIndex(index) || role != Qt::EditRole)
+		return false;
+	
+	Location& loc = locations[index.row()];
+	switch (index.column())
+	{
+		case 0:
+			loc.name = value.toString();
+			break;
+			
+		case 1:
+			loc.region = value.toString();
+			break;
+			
+		case 2:
+			loc.country = value.toString(); // TODO: Country code?
+			break;
+			
+		case 3:
+		{
+			QChar role = value.toChar(); // TODO: Validate
+			loc.role = (role != '\0') ? role : QChar('N');// TODO: Decide default role character
+		}
+			break;
+			
+		case 4:
+		{
+			int population = value.toInt();
+			if (population < 0)
+				return false;
+			loc.population = population;
+		}
+			break;
+		
+		case 5:
+		{
+			float latitude = value.toFloat();
+			if (latitude < -90. || latitude > 90.)
+				return false;
+			loc.latitude = latitude;
+		}
+			break;
+			
+		case 6:
+		{
+			float longitude = value.toFloat();
+			if (longitude < -180. || longitude > 180.)
+				return false;
+			loc.longitude = longitude;
+		}
+			break;
+			
+		case 7:
+			loc.altitude = value.toInt();
+			break;
+			
+		case 8:
+		{
+			float lightPollution = value.toFloat();
+			if (lightPollution < -1. || lightPollution > 9.0)
+				return false;
+			// TODO: This may be a problem. I hate floating point operations...
+			if (lightPollution < 0. && lightPollution != -1.)
+				return false;
+			loc.bortleScaleIndex = lightPollution;
+		}
+			break;
+			
+		case 9:
+			loc.timeZone = value.toString();
+			break;
+			
+		case 10:
+			loc.planetName = value.toString();
+			break;
+			
+		case 11:
+			loc.landscapeKey = value.toString();
+			break;
+			
+		default:
+			;
+	}
+	emit dataChanged(index, index);
+	setModified(true);
+	return true;
+}
+
+void LocationListModel::setModified(bool changed)
+{
+	if (wasModified == changed)
+		return;
+	wasModified = changed;
+	emit modified(changed);
+}
+
+bool LocationListModel::isValidIndex(const QModelIndex& index) const
+{
+	return (index.isValid() &&
+	    (index.column() < 12) &&
+	    (index.row() < locations.count()));
 }

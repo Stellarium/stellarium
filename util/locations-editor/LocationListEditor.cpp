@@ -38,6 +38,7 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
     locations(0)
 {
 	ui->setupUi(this);
+	setWindowIcon(QIcon(":/locationListEditor/icon.bmp"));
 	
 	connect(ui->actionOpenFile, SIGNAL(triggered()),
 	        this, SLOT(open()));
@@ -115,7 +116,6 @@ void LocationListEditor::closeEvent(QCloseEvent* event)
 {
 	if (checkIfFileIsSaved())
 	{
-		qDebug() << "About to close.";
 		event->accept();
 	}
 	else // "Cancel" has been chosen.
@@ -192,6 +192,8 @@ bool LocationListEditor::loadFile(const QString& path)
 		delete locations;
 	}
 	locations = newLocations;
+	connect(locations, SIGNAL(modified(bool)),
+	        this, SLOT(setWindowModified(bool)));
 	
 	if (checkIfFileIsLoaded())
 		ui->statusBar->showMessage("Loaded " + path);

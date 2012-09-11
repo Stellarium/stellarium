@@ -88,10 +88,10 @@ public:
 };
 
 //! Serialize the passed Location into a binary blob.
-//! @author Fabien Chereau (and everyone else who edited StelLocation after him).
+//! @author Fabien Chereau (and possibly others)
 QDataStream& operator<<(QDataStream& out, const Location& loc);
 //! Load the Location from a binary blob.
-//! @author Fabien Chereau (and everyone else who edited StelLocation after him).
+//! @author Fabien Chereau (and possibly others)
 QDataStream& operator>>(QDataStream& in, Location& loc);
 
 #endif // LOCATION_HPP
