@@ -20,7 +20,12 @@
 
 #include "Location.hpp"
 
+#include <QDebug>
+#include <QFile>
 #include <QStringList>
+#include <QTextStream>
+
+QMap<QString,QString> Location::mapCodeToCountry;
 
 Location::Location() :
     longitude(0.),
@@ -32,6 +37,40 @@ Location::Location() :
 {
 	;
 }
+
+
+QString Location::getBasicId()
+{
+	if (name.isEmpty())
+		return QString();
+	
+	if (countryName.isEmpty())
+		return name;
+	else
+		return QString("%1, %2").arg(name, countryName);
+}
+
+QString Location::getExtendedId()
+{
+	if (name.isEmpty())
+		return QString();
+	
+	if (countryName.isEmpty())
+	{
+		if (region.isEmpty())
+			return name;
+		else
+			return QString("%1 (%2)").arg(name, region);
+	}
+	else
+	{
+		if (region.isEmpty())
+			return getBasicId();
+		else
+			return QString("%1 (%2), %3").arg(name, region, country);
+	}
+}
+
 
 // Write the location as a tab-separated string.
 // Reuses code from the same function in StelLocation with some changes.
@@ -76,6 +115,7 @@ Location Location::fromLine(const QString& line)
 		return loc;
 	loc.region  = splitline.at(1);
 	loc.country = splitline.at(2);
+	loc.countryName = Location::stringToCountry(loc.country);
 	loc.role    = splitline.at(3).at(0);
 	if (loc.role == '\0')
 		loc.role = 'N'; // TODO: Define standard default/unknown value. ('X'?)
@@ -126,38 +166,51 @@ Location Location::fromLine(const QString& line)
 	return loc;
 }
 
+QString Location::stringToCountry(const QString& string)
+{
+	if (mapCodeToCountry.isEmpty())
+		loadCountryCodes();
+	
+	return mapCodeToCountry.value(string, string);
+}
+
+void Location::loadCountryCodes()
+{
+	QFile file(":/locationListEditor/iso3166-1-alpha-2.utf8");
+	file.open(QFile::ReadOnly | QFile::Text);
+	QTextStream stream(&file);
+	while (!stream.atEnd())
+	{
+		QString line = stream.readLine();
+		if (line.isEmpty())
+			continue;
+		
+		QStringList splitLine = line.split('\t');
+		//qDebug() << splitLine;
+		mapCodeToCountry.insert(splitLine.first(), splitLine.last());
+	}
+	file.close();
+	//qDebug() << mapCodeToCountry;
+}
+
+
 QDataStream& operator<< (QDataStream& out, Location& loc)
 {
+	// The strange manglings are because of the discrepancies between my
+	// data structures and Stellarium's model.
+	// Note that there's no time zone field. :(
 	bool dummyUserLocationFlag = false;
 	out << loc.name
 	    << loc.region
-	    << loc.country
+	    << loc.countryName
 	    << loc.role
-	    << loc.population
+	    << ((int) loc.population*1000)
 	    << loc.latitude
 	    << loc.longitude
 	    << loc.altitude
 	    << loc.bortleScaleIndex
-	    << loc.planetName
+	    << (loc.planetName.isEmpty() ? QString("Earth") : loc.planetName)
 	    << loc.landscapeKey
 	    << dummyUserLocationFlag;
 	return out;
-}
-
-QDataStream& operator>> (QDataStream& in, Location& loc)
-{
-	bool dummyUserLocationFlag;
-	in >> loc.name
-	   >> loc.region
-	   >> loc.country
-	   >> loc.role
-	   >> loc.population
-	   >> loc.latitude
-	   >> loc.longitude
-	   >> loc.altitude
-	   >> loc.bortleScaleIndex
-	   >> loc.planetName
-	   >> loc.landscapeKey
-	   >> dummyUserLocationFlag;
-	return in;
 }
