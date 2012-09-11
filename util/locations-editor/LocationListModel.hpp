@@ -44,25 +44,30 @@ public:
 	bool save(const QString& filePath);
 	bool saveBinary(const QString& filePath);
 	
-	bool isModified() const {return modified;}
+	bool isModified() const {return wasModified;}
 	
 	// Reimplemented:
-	int columnCount (const QModelIndex& parent = QModelIndex() ) const;
-	int rowCount (const QModelIndex& parent = QModelIndex() ) const;
+	int columnCount(const QModelIndex& parent = QModelIndex() ) const;
+	int rowCount(const QModelIndex& parent = QModelIndex() ) const;
 	
-	QVariant data (const QModelIndex& index, int role = Qt::DisplayRole ) const;
-	QVariant headerData (int section, Qt::Orientation orientation, int role) const;
+	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole ) const;
+	Qt::ItemFlags flags(const QModelIndex& index) const;
+	QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+	bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 	
 signals:
+	void modified(bool modified);
 	
 public slots:
-	void setModified(bool changed = true) {modified = changed;}
+	void setModified(bool changed = true);
 	
 private:
 	//! Flag set to "true" if the model has been modified.
-	bool modified;
+	bool wasModified;
 	//! The location list stored by the model.
 	QList<Location> locations;
+	
+	bool isValidIndex(const QModelIndex& index) const;
 };
 
 #endif // LOCATIONLISTMODEL_HPP
