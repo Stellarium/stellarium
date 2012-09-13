@@ -62,6 +62,8 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 		loc.country = splitline.at(2);
 
 	loc.role    = splitline.at(3).at(0);
+	if (loc.role == '\0')
+		loc.role = 'X';
 	loc.population = (int) (splitline.at(4).toFloat()*1000);
 
 	const QString& latstring = splitline.at(5);

@@ -28,7 +28,7 @@
 
 StelLocationMgr::StelLocationMgr()
 {
-	// The line below allows to re-generate the location file, you still need to gunzip manually it afterward.
+	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
 	// generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
