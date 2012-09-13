@@ -84,12 +84,15 @@ private:
 	//! Line number of the last detected duplicate original, used for logging.
 	int lastDupLine;
 	
-	//! Add a Location to the model, check for unique ID and mark duplicates.
+	//! Check for unique ID, add the location to the map and mark duplicates.
 	//! Tries to avoid duplicate IDs by expanding them.
 	//! @param skipDuplicates if true, the argument is deleted if
 	//! there's already a location with that ID.
 	//! @returns 0 if the argument has been deleted as a duplicate.
-	Location* addLocation(Location* loc, bool skipDuplicates = false);
+	Location* addLocationId(Location* loc, bool skipDuplicates = false);
+	
+	//! Update duplicate status.
+	bool updateDuplicates(Location* loc);
 	
 	//! Check if the index is within the model.
 	bool isValidIndex(const QModelIndex& index) const;
