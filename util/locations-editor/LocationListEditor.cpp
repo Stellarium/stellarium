@@ -28,14 +28,16 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
-#include "kfilterdev.h"
+#include <QSortFilterProxyModel>
+#include "kfilterdev.h" // For compressing binary lists
 
 #include "LocationListModel.hpp"
 
 LocationListEditor::LocationListEditor(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LocationListEditor),
-    locations(0)
+    locations(0),
+    proxyModel(0)
 {
 	ui->setupUi(this);
 	setWindowIcon(QIcon(":/locationListEditor/icon.bmp"));
@@ -54,6 +56,9 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	        this, SLOT(close()));
 	connect(ui->actionAbout, SIGNAL(triggered()),
 	        this, SLOT(showAboutWindow()));
+	
+	connect(ui->comboBoxFilteredColumn, SIGNAL(currentIndexChanged(int)),
+	        this, SLOT(setFilteredColumn(int)));
 	
 	// Base location list
 	QFileInfo projectList(QDir::current(), "../../data/base_locations.txt");
@@ -132,6 +137,7 @@ bool LocationListEditor::checkIfFileIsLoaded()
 	ui->actionSaveAs->setEnabled(enabled);
 	ui->actionBinary->setEnabled(enabled);
 	ui->tableView->setVisible(enabled);
+	ui->frameFilter->setVisible(enabled);
 	
 	return enabled;
 }
@@ -186,7 +192,11 @@ bool LocationListEditor::loadFile(const QString& path)
 	setWindowFilePath(path);
 	setWindowModified(false);
 	
-	ui->tableView->setModel(newLocations);
+	
+	QSortFilterProxyModel* newProxy = new QSortFilterProxyModel(this);
+	newProxy->setSourceModel(newLocations);
+	ui->tableView->setModel(newProxy);
+	
 	if (locations)
 	{
 		delete locations;
@@ -194,17 +204,24 @@ bool LocationListEditor::loadFile(const QString& path)
 	locations = newLocations;
 	connect(locations, SIGNAL(modified(bool)),
 	        this, SLOT(setWindowModified(bool)));
+	if (proxyModel)
+	{
+		delete proxyModel;
+	}
+	proxyModel = newProxy;
+	connect(ui->lineEditFilter, SIGNAL(textEdited(QString)),
+	        proxyModel, SLOT(setFilterWildcard(QString)));
 	
 	if (checkIfFileIsLoaded())
 		ui->statusBar->showMessage("Loaded " + path);
 	
-	if (!newLocations->loadingLog.isEmpty())
+	if (!locations->loadingLog.isEmpty())
 	{
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(qApp->applicationName());
 		msgBox.setText(path + " was loaded succsessfully, but there were some errors.");
 		msgBox.setInformativeText("Click \"Show details\" to see the log or \"Save\" to save it to file.");
-		msgBox.setDetailedText(newLocations->loadingLog);
+		msgBox.setDetailedText(locations->loadingLog);
 		msgBox.setStandardButtons(QMessageBox::Save|QMessageBox::Ok);
 		msgBox.setDefaultButton(QMessageBox::Ok);
 		msgBox.setEscapeButton(QMessageBox::Ok);
@@ -221,7 +238,7 @@ bool LocationListEditor::loadFile(const QString& path)
 			if (file.open(QFile::WriteOnly|QFile::Text))
 			{
 				QTextStream out(&file);
-				out << newLocations->loadingLog;
+				out << locations->loadingLog;
 				file.close();
 			}
 			else
@@ -231,10 +248,17 @@ bool LocationListEditor::loadFile(const QString& path)
 				                     QString("Cannot save to file %1:\n%2. Dumping log contents to stderr.")
 				                     .arg(path)
 				                     .arg(file.errorString()));
-				qWarning() << newLocations->loadingLog;
+				qWarning() << locations->loadingLog;
 			}
 		}
 	}
+
+	for (int i = 0; i < locations->columnCount(); i++)
+	{
+		QString column = locations->headerData(i, Qt::Horizontal).toString();
+		ui->comboBoxFilteredColumn->addItem(column);
+	}
+	
 	return true;
 }
 
@@ -374,4 +398,10 @@ void LocationListEditor::showAboutWindow()
 	s += "Copyright (c) 2012 Bogdan Marinov (and others)<br/><br/>";
 	s += "The <b>Location List Editor</b> is a tool created to ease the maintenance of Stellarium location list files - both the base location file and user-defined lists of locations.";
 	QMessageBox::about(this, "About the program", s);
+}
+
+void LocationListEditor::setFilteredColumn(int column)
+{
+	if (proxyModel && column >= 0 && column < proxyModel->columnCount())
+		proxyModel->setFilterKeyColumn(column);
 }
