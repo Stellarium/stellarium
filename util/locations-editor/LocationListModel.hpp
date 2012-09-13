@@ -76,6 +76,12 @@ private:
 	//! 
 	QMap<QString,Location*> uniqueIds;
 	
+	//! Comment lines from the block at the beginning of the list file.
+	QList<QString> leadingComments;
+	//! Aggregated comment lines from the body of the list file.
+	//! Written at the end of the file when saving.
+	QList<QString> comments;
+	
 	bool isValidIndex(const QModelIndex& index) const;
 };
 

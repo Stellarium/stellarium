@@ -60,6 +60,8 @@ LocationListModel* LocationListModel::load(QFile* file)
 	
 	QTextStream stream(file);
 	stream.setCodec("UTF-8");
+	
+	bool inLeadingBlock = true;
 	QString line;
 	Location* loc;
 	QChar commentPrefix('#');
@@ -69,9 +71,20 @@ LocationListModel* LocationListModel::load(QFile* file)
 		lineNum++;
 		line = stream.readLine();
 		
-		// Skip emtpy lines and comments
-		if (line.isEmpty() || line.startsWith(commentPrefix))
+		// Skip emtpy lines
+		if (line.isEmpty())
 			continue;
+		
+		// Aggregate comments
+		if (line.startsWith(commentPrefix))
+		{
+			if (inLeadingBlock)
+				result->leadingComments.append(line);
+			else
+				result->comments.append(line);
+		}
+		else
+			inLeadingBlock = false;
 		
 		loc = Location::fromLine(line);
 		// Check if it's a valid location
@@ -135,10 +148,14 @@ bool LocationListModel::save(QFile* file)
 	
 	QTextStream stream(file);
 	stream.setCodec("UTF-8");
+	foreach(const QString& comment, leadingComments)
+		stream << comment << endl;
 	foreach(const Location* loc, locations)
 	{
 		stream << loc->toLine() << '\n';
 	}
+	foreach(const QString& comment, comments)
+		stream << comment << endl;
 	
 	return true;
 }
