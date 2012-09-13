@@ -96,12 +96,17 @@ LocationListModel* LocationListModel::load(QFile* file)
 			loc->lineNum = lineNum;
 			
 			// Check for duplicate IDs and avoid them if possible.
-			loc = result->addLocation(loc);
-			if (loc && loc->hasDuplicate)
+			loc = result->addLocationId(loc);
+			if (loc)
 			{
-				log << lineNum << ": duplicate ID (\"" << loc->stelId
-				    << "\") with line " << result->lastDupLine << ": "
-				    << line << endl;
+				result->locations.append(loc);
+				
+				if (loc->hasDuplicate)
+				{
+					log << lineNum << ": duplicate ID (\"" << loc->stelId
+					    << "\") with line " << result->lastDupLine << ": "
+					    << line << endl;
+				}
 			}
 		}
 	}
@@ -379,20 +384,37 @@ bool LocationListModel::setData(const QModelIndex& index,
 		case 0:
 		{
 			QString name = value.toString();
+			if (name.isEmpty())
+				return false;
 			if (name != loc.name)
 			{
-				//
 				loc.name = name;
+				updateDuplicates(&loc);
 			}
 		}
 			break;
 			
 		case 1:
-			loc.region = value.toString();
+		{
+			QString region = value.toString();
+			if (region != loc.region)
+			{
+				loc.region = region;
+				updateDuplicates(&loc);
+			}
+		}
 			break;
 			
 		case 2:
-			loc.country = value.toString(); // TODO: Country code?
+		{
+			QString country = value.toString();
+			if (country != loc.country)
+			{
+				loc.country = country;
+				loc.countryName = Location::stringToCountry(country);
+				updateDuplicates(&loc);
+			}
+		}
 			break;
 			
 		case 3:
@@ -499,7 +521,7 @@ void LocationListModel::setModified(bool changed)
 	emit modified(changed);
 }
 
-Location* LocationListModel::addLocation(Location* loc, bool skipDuplicates)
+Location* LocationListModel::addLocationId(Location* loc, bool skipDuplicates)
 {
 	QString id = loc->generateId();
 	Location* dupLoc = stelIds.value(id, 0); // In multi-map, returns the most recent
@@ -528,17 +550,45 @@ Location* LocationListModel::addLocation(Location* loc, bool skipDuplicates)
 			loc->hasDuplicate = true;
 			dupLoc->hasDuplicate = true;
 		}
-		else
+		//else
 		{
 			stelIds.remove(id); //In mult-maps, removes the most recent
 			stelIds.insertMulti(dupLoc->stelId, dupLoc);
 			// The new location will be added after the block
 		}
 	}
-	locations.append(loc);
 	stelIds.insertMulti(loc->stelId, loc);
 	
 	return loc;
+}
+
+bool LocationListModel::updateDuplicates(Location* loc)
+{
+	int duplicatesCount = 0;
+	QString id = loc->stelId;
+	QMap<QString, Location*>::iterator i = stelIds.lowerBound(id);
+	QMap<QString, Location*>::iterator upperBound = stelIds.upperBound(id);
+	while (i != upperBound)
+	{
+		if (i.value() == loc)
+			i = stelIds.erase(i);
+		else
+		{
+			duplicatesCount++;
+			i++;
+		}
+	}
+	
+	if (duplicatesCount == 1)
+	{
+		stelIds.value(id)->hasDuplicate = false;
+	}
+	
+	loc->generateId();
+	loc->hasDuplicate = false;
+	addLocationId(loc);
+	
+	return true;
 }
 
 bool LocationListModel::isValidIndex(const QModelIndex& index) const

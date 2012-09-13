@@ -31,8 +31,7 @@ It has been developed and used only on Linux, so:
 Test on Windows.
 Test on Mac OS.
 
-Better handling of duplicates.
-Better replications of the current format of base_locations.txt
+Adding/removing items.
 Verification of entered values. Item delegates.
 
 In the long term: Support for adding time zone information.
