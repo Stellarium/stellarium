@@ -21,6 +21,7 @@
 
 #include "LocationListModel.hpp"
 
+#include <QDataStream>
 #include <QDebug>
 #include <QFile>
 #include <QFont>
@@ -32,12 +33,19 @@ LocationListModel::LocationListModel(QObject *parent) :
 {
 }
 
-LocationListModel::LocationListModel(QList<Location> locationList,
+LocationListModel::LocationListModel(QList<Location*> locationList,
                                      QObject *parent) :
     QAbstractTableModel(parent),
     wasModified(false),
     locations(locationList)
 {
+}
+
+LocationListModel::~LocationListModel()
+{
+	qDeleteAll(locations);
+	locations.clear();
+	uniqueIds.clear();
 }
 
 LocationListModel* LocationListModel::load(QFile* file)
@@ -49,7 +57,7 @@ LocationListModel* LocationListModel::load(QFile* file)
 	QTextStream stream(file);
 	stream.setCodec("UTF-8");
 	QString line;
-	Location loc;
+	Location* loc;
 	QChar commentPrefix('#');
 	int numLine = 0;
 	while (!stream.atEnd())
@@ -63,17 +71,47 @@ LocationListModel* LocationListModel::load(QFile* file)
 		
 		loc = Location::fromLine(line);
 		// Check if it's a valid location
-		if (loc.name.isEmpty())
+		if (!loc)
 		{
 			qWarning() << "Line" << numLine
 			           << "is not a valid location:" << line;
+			continue;
 		}
 		else
 		{
+			// Check for duplicate IDs and avoid them if possible.
+			QString id = loc->generateId();
+			Location* dupLoc = result->uniqueIds.value(id, 0);
+			if (dupLoc)
+			{
+				QString origId = id;
+				id = loc->extendId();
+				QString dupId = dupLoc->extendId();
+				if (id == dupId)
+				{
+					qWarning() << "Duplicate location" << id
+					           << "on line" << numLine
+					           << line;
+					delete loc;
+					loc = 0;
+					// Restore the original ID of the original location,
+					// because the map key wasn't changed.
+					dupLoc->stelName = dupLoc->name;
+					dupLoc->generateId();
+					// Skip adding the new location
+					continue;
+				}
+				else
+				{
+					result->uniqueIds.remove(origId);
+					result->uniqueIds.insert(dupId, dupLoc);
+					// The new location will be added after the block
+				}
+			}
 			result->locations.append(loc);
+			result->uniqueIds.insert(id, loc);
 		}
 	}
-	
 	return result;
 }
 
@@ -84,11 +122,28 @@ bool LocationListModel::save(QFile* file)
 	
 	QTextStream stream(file);
 	stream.setCodec("UTF-8");
-	foreach(const Location& loc, locations)
+	foreach(const Location* loc, locations)
 	{
-		stream << loc.toLine() << '\n';
+		stream << loc->toLine() << '\n';
 	}
 	
+	return true;
+}
+
+bool LocationListModel::saveBinary(QIODevice* file)
+{
+	if (!file || !file->isWritable())
+		return false;
+	
+	QDataStream stream(file);
+	stream.setVersion(QDataStream::Qt_4_6);
+	stream << ((quint32)uniqueIds.count());
+	QMapIterator<QString,Location*> i(uniqueIds);
+	while (i.hasNext())
+	{
+		i.next();
+		stream << i.key() << *(i.value());
+	}
 	return true;
 }
 
@@ -109,7 +164,7 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 	if (!isValidIndex(index))
 		return QVariant();
 	
-	const Location& loc = locations[index.row()];
+	const Location& loc = *locations[index.row()];
 	// Columns follow the formatting of the file.
 	switch (index.column())
 	{
@@ -264,7 +319,7 @@ bool LocationListModel::setData(const QModelIndex& index,
 	if (!isValidIndex(index) || role != Qt::EditRole)
 		return false;
 	
-	Location& loc = locations[index.row()];
+	Location& loc = *locations[index.row()];
 	switch (index.column())
 	{
 		case 0:

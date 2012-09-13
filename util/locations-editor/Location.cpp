@@ -32,43 +32,37 @@ Location::Location() :
     latitude(0.),
     altitude(0.),
     bortleScaleIndex(-1.),
-    role('N'),
-    population(0)
+    role('X')
 {
 	;
 }
 
 
-QString Location::getBasicId()
+QString Location::generateId()
 {
-	if (name.isEmpty())
+	if (name.isEmpty() || stelName.isEmpty())
 		return QString();
 	
 	if (countryName.isEmpty())
-		return name;
+		stelId = stelName;
 	else
-		return QString("%1, %2").arg(name, countryName);
+		stelId = QString("%1, %2").arg(stelName, countryName);
+	
+	return stelId;
 }
 
-QString Location::getExtendedId()
+QString Location::extendId()
 {
 	if (name.isEmpty())
 		return QString();
 	
-	if (countryName.isEmpty())
-	{
-		if (region.isEmpty())
-			return name;
-		else
-			return QString("%1 (%2)").arg(name, region);
-	}
+	if (region.isEmpty())
+		stelName = name;
 	else
-	{
-		if (region.isEmpty())
-			return getBasicId();
-		else
-			return QString("%1 (%2), %3").arg(name, region, country);
-	}
+		stelName = QString("%1 (%2)").arg(name, region);
+	
+	// This will also re-set stelId
+	return generateId();
 }
 
 
@@ -78,15 +72,15 @@ QString Location::toLine() const
 {
 	QString latStr;
 	if (latitude < 0)
-		latStr = QString("%1S").arg(-latitude, 0, 'f', 6);
+		latStr = QString("%1S").arg(-latitude, 0, 'g', 6);
 	else
-		latStr = QString("%1N").arg(latitude, 0, 'f', 6);
+		latStr = QString("%1N").arg(latitude, 0, 'g', 6);
 	
 	QString longStr;
 	if (longitude < 0)
-		longStr = QString("%1W").arg(-longitude, 0, 'f', 6);
+		longStr = QString("%1W").arg(-longitude, 0, 'g', 6);
 	else
-		longStr = QString("%1E").arg(longitude, 0, 'f', 6);
+		longStr = QString("%1E").arg(longitude, 0, 'g', 6);
 	
 	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
 	        .arg(name)
@@ -100,67 +94,69 @@ QString Location::toLine() const
 	        .arg(bortleScaleIndex < 0 ? "" : QString::number(bortleScaleIndex))
 	        .arg(timeZone)
 	        .arg(planetName)
-	        .arg(landscapeKey);
+	        .arg(landscapeKey)
+	        .trimmed();
 }
 
 // Read a location from a tab-separated string.
-Location Location::fromLine(const QString& line)
+Location* Location::fromLine(const QString& line)
 {
-	Location loc;
+	Location* loc = new Location();
 	const QStringList& splitline = line.split("\t");
 	if (splitline.size() < 8)
-		return loc;
-	loc.name    = splitline.at(0);
-	if (loc.name.isEmpty())
-		return loc;
-	loc.region  = splitline.at(1);
-	loc.country = splitline.at(2);
-	loc.countryName = Location::stringToCountry(loc.country);
-	loc.role    = splitline.at(3).at(0);
-	if (loc.role == '\0')
-		loc.role = 'N'; // TODO: Define standard default/unknown value. ('X'?)
-	loc.population = (int) (splitline.at(4).toFloat());
+		return 0;
+	loc->name    = splitline.at(0);
+	if (loc->name.isEmpty())
+		return 0;
+	loc->stelName = loc->name;
+	loc->region  = splitline.at(1);
+	loc->country = splitline.at(2);
+	loc->countryName = Location::stringToCountry(loc->country);
+	loc->role    = splitline.at(3).at(0);
+	if (loc->role == '\0')
+		loc->role = 'X';
+	loc->population = splitline.at(4);
 	
 	const QString& latStr = splitline.at(5);
-	loc.latitude = latStr.left(latStr.size() - 1).toFloat();
+	loc->latitude = latStr.left(latStr.size() - 1).toFloat();
 	if (latStr.endsWith('S'))
-		loc.latitude =- loc.latitude;
+		loc->latitude =- loc->latitude;
 	
 	const QString& longStr = splitline.at(6);
-	loc.longitude = longStr.left(longStr.size() - 1).toFloat();
+	loc->longitude = longStr.left(longStr.size() - 1).toFloat();
 	if (longStr.endsWith('W'))
-		loc.longitude =- loc.longitude;
+		loc->longitude =- loc->longitude;
 	
-	loc.altitude = (int)splitline.at(7).toFloat();
+	loc->altitude = (int)splitline.at(7).toFloat();
 	
 	// Light pollution -1 is interpreted as system-determined.
 	if (splitline.size() > 8)
 	{
 		bool ok;
-		loc.bortleScaleIndex = splitline.at(8).toInt(&ok);
+		loc->bortleScaleIndex = splitline.at(8).toInt(&ok);
 		if (ok == false)
-			loc.bortleScaleIndex = -1.;
+			loc->bortleScaleIndex = -1.;
 	}
 	else
-		loc.bortleScaleIndex = -1.;
+		loc->bortleScaleIndex = -1.;
 	
 	// Empty time zone is interpreted as default time.
 	if (splitline.size() > 9)
 	{
-		loc.timeZone = splitline.at(9);
+		loc->timeZone = splitline.at(9);
 	}
 	
 	// Empty planet name is interpreted as Earth.
 	if (splitline.size() > 10)
 	{
 		
-		loc.planetName = splitline.at(10);
+		loc->planetName = splitline.at(10);
 	}
 	
 	// Associated landscape is optional.
 	if (splitline.size() > 11)
 	{
-		loc.landscapeKey = splitline.at(11);
+		loc->landscapeKey = splitline.at(11);
 	}
 	
 	return loc;
@@ -194,17 +190,17 @@ void Location::loadCountryCodes()
 }
 
 
-QDataStream& operator<< (QDataStream& out, Location& loc)
+QDataStream& operator<<(QDataStream& out, const Location& loc)
 {
 	// The strange manglings are because of the discrepancies between my
 	// data structures and Stellarium's model.
 	// Note that there's no time zone field. :(
 	bool dummyUserLocationFlag = false;
-	out << loc.name
+	out << loc.stelName
 	    << loc.region
 	    << loc.countryName
 	    << loc.role
-	    << ((int) loc.population*1000)
+	    << ((int) (loc.population.toFloat()*1000))
 	    << loc.latitude
 	    << loc.longitude
 	    << loc.altitude
