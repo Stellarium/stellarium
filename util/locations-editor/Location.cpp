@@ -72,17 +72,8 @@ QString Location::extendId()
 // Reuses code from the same function in StelLocation with some changes.
 QString Location::toLine() const
 {
-	QString latStr;
-	if (latitude < 0)
-		latStr = QString("%1S").arg(-latitude, 0, 'g', 6);
-	else
-		latStr = QString("%1N").arg(latitude, 0, 'g', 6);
-	
-	QString longStr;
-	if (longitude < 0)
-		longStr = QString("%1W").arg(-longitude, 0, 'g', 6);
-	else
-		longStr = QString("%1E").arg(longitude, 0, 'g', 6);
+	//QString latStr = latitudeToString(latitude);
+	//QString longStr = longitudeFromString(longitude);
 	
 	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
 	        .arg(name)
@@ -90,8 +81,8 @@ QString Location::toLine() const
 	        .arg(country)
 	        .arg(role)
 	        .arg(population)
-	        .arg(latStr)
-	        .arg(longStr)
+	        .arg(latitudeStr)
+	        .arg(longitudeStr)
 	        .arg(altitude)
 	        .arg(bortleScaleIndex < 0 ? "" : QString::number(bortleScaleIndex))
 	        .arg(timeZone)
@@ -120,16 +111,14 @@ Location* Location::fromLine(const QString& line)
 	loc->population = splitline.at(4);
 	
 	const QString& latStr = splitline.at(5);
-	loc->latitude = latStr.left(latStr.size() - 1).toFloat();
-	if (latStr.endsWith('S'))
-		loc->latitude =- loc->latitude;
+	loc->latitude = latitudeFromString(latStr);
+	loc->latitudeStr = latStr;
 	
 	const QString& longStr = splitline.at(6);
-	loc->longitude = longStr.left(longStr.size() - 1).toFloat();
-	if (longStr.endsWith('W'))
-		loc->longitude =- loc->longitude;
+	loc->longitude = longitudeFromString(longStr);
+	loc->longitudeStr = longStr;
 	
-	loc->altitude = (int)splitline.at(7).toFloat();
+	loc->altitude = (int) splitline.at(7).toFloat();
 	
 	// Light pollution -1 is interpreted as system-determined.
 	if (splitline.size() > 8)
@@ -170,6 +159,42 @@ QString Location::stringToCountry(const QString& string)
 		loadCountryCodes();
 	
 	return mapCodeToCountry.value(string, string);
+}
+
+float Location::latitudeFromString(const QString& string, bool* ok)
+{
+	float latitude = string.left(string.size() - 1).toFloat(ok);
+	if (string.endsWith('S') && latitude >= 0)
+		latitude = -latitude;
+	else if (ok && (!string.endsWith('N') || latitude < 0))
+		*ok = false;
+	return latitude;
+}
+
+float Location::longitudeFromString(const QString &string, bool* ok)
+{
+	float longitude = string.left(string.size() - 1).toFloat(ok);
+	if (string.endsWith('W') && longitude >= 0)
+		longitude = -longitude;
+	else if (ok && (!string.endsWith('E') || longitude < 0))
+		*ok = false;
+	return longitude;
+}
+
+QString Location::latitudeToString(float latitude)
+{
+	if (latitude < 0)
+		return QString("%1S").arg(-latitude, 0, 'g', 6);
+	else
+		return QString("%1N").arg(latitude, 0, 'g', 6);
+}
+
+QString Location::longitudeToString(float longitude)
+{
+	if (longitude < 0)
+		return QString("%1W").arg(-longitude, 0, 'g', 6);
+	else
+		return QString("%1E").arg(longitude, 0, 'g', 6);
 }
 
 void Location::loadCountryCodes()
