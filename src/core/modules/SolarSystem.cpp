@@ -936,11 +936,13 @@ StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
 {
 	// Acquire shadow informations
 	const int planetCount = systemPlanets.size();
-	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(planetCount + 1);
+	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(planetCount);
+
 	if(shadowInfoBuffer.size() < size * size)
 	{
 		shadowInfoBuffer.resize(size * size);
 	}
+
 	// Shadow info texture data
 	Vec4f* data = shadowInfoBuffer.data();
 	memset(data, '\0', size * size * sizeof(Vec4f));
@@ -949,6 +951,7 @@ StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
 	{
 		shadowModelMatricesBuffer.resize(planetCount);
 	}
+
 	Mat4d* modelMatrices = shadowModelMatricesBuffer.data();
 	int p = 0;
 	foreach (const PlanetP& planet, systemPlanets)
@@ -957,32 +960,32 @@ StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
 	}
 
 	int y = 1;
+	int i = -1;
+
 	foreach (const PlanetP& target, systemPlanets)
 	{
+		i++;
+
 		if(target == sun)
 			continue;
 
-		const Mat4d mTarget = modelMatrices[y - 1].inverse();
-		const Vec4d sunPos = mTarget * Vec4d(0, 0, 0, 1);
-		data[y * size] = Vec4f(sunPos[0], sunPos[1], sunPos[2], sun->getRadius());
-
-		const Vec4d vTarget0(mTarget[0], mTarget[0 + 4], mTarget[0 + 8], mTarget[0 + 12]);
-		const Vec4d vTarget1(mTarget[1], mTarget[1 + 4], mTarget[1 + 8], mTarget[1 + 12]);
-		const Vec4d vTarget2(mTarget[2], mTarget[2 + 4], mTarget[2 + 8], mTarget[2 + 12]);
+		const Mat4d mTarget = modelMatrices[i].inverse();
+		data[y * size] = Vec4f(mTarget[12], mTarget[13], mTarget[14], sun->getRadius());
 
 		int x = 1;
+		int j = -1;
+
 		foreach (const PlanetP& source, systemPlanets)
 		{
+			j++;
+
 			if(source == sun)
 				continue;
 
-			const Mat4d& mSource(modelMatrices[x - 1]);
-			const Vec4d vSource(mSource[12], mSource[13], mSource[14], mSource[15]);
-			const float X = vSource * vTarget0;
-			const float Y = vSource * vTarget1;
-			const float Z = vSource * vTarget2;
+			const Mat4d& mSource(modelMatrices[j]);
+			const Vec4d position = mTarget * mSource.getColumn(3);
 
-			data[y * size + x] = Vec4f(X, Y, Z, source->getRadius());
+			data[y * size + x] = Vec4f(position[0], position[1], position[2], source->getRadius());
 			x++;
 		}
 
@@ -1044,6 +1047,10 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 		{
 			sharedPlanetGraphics.info.current = p != sun ? i : 0;
 			p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+
+			if(p == sun)
+				continue;
+
 			i++;
 		}
 
