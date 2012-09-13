@@ -26,12 +26,15 @@
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), isUserLocation(true) {;}
+	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), role('X'), isUserLocation(true) {;}
 
-	//! Return a short string which can be used in a list view
+	//! Return a short string which can be used in a list view.
 	QString getID() const
 	{
-		return name + ", " +country;
+		if (country.isEmpty())
+			return name;
+		else
+			return name + ", " +country;
 	}
 
 	//! Output the location as a string ready to be stored in the user_location file
@@ -57,8 +60,16 @@ public:
 	QString landscapeKey;
 	//! Population in number of inhabitants
 	int population;
-	//! Location role code
-	//! C/B=Capital, R=Regional capital, N=Normal city, O=Observatory, L=lander, I=spacecraft impact, A=spacecraft crash
+	//! Location role code.
+	//! Possible values:
+	//! - \p C or \p B is a capital city
+	//! - \p R is a regional capital
+	//! - \p N is a normal city (any other type of settlement)
+	//! - \p O is an observatory
+	//! - \p L is a spacecraft lander
+	//! - \p I is a spacecraft impact
+	//! - \p A is a spacecraft crash
+	//! - \p X is an unknown or user-defined location (the default value).
 	QChar role;
 
 	//! Parse a location from a line serialization
