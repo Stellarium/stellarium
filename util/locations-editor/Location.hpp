@@ -106,11 +106,12 @@ public:
 	//! Line number in the file from which the location was loaded.
 	int lineNum;
 	
-	//! Returns the ID used by StelLocationMgr.
-	//! Format: "::stelName, ::country".
+	//! Set and return the ID used by StelLocationMgr.
+	//! Format: "stelName, countryName" or just "stelName".
 	QString generateId();
 	//! Set and return the ID used by StelLocationMgr if there are duplicates.
-	//! Format: "::name (::region), ::country".
+	//! Format: "name (region), countryName".
+	//! Calls generateId() to re-set #stelName.
 	QString extendId();
 	
 	//! Output the location as a tab-delimited string.
