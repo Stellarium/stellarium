@@ -40,7 +40,6 @@ class LocationListModel : public QAbstractTableModel
 	Q_OBJECT
 public:
 	explicit LocationListModel(QObject *parent = 0);
-	LocationListModel(QList<Location*> locationList, QObject *parent = 0);
 	~LocationListModel();
 	
 	static LocationListModel* load(QFile* file);
@@ -73,8 +72,8 @@ private:
 	bool wasModified;
 	//! The location list stored by the model.
 	QList<Location*> locations;
-	//! 
-	QMap<QString,Location*> uniqueIds;
+	//! Similar to the one in StelLocationMgr, but a multi-map.
+	QMap<QString,Location*> stelIds;
 	
 	//! Comment lines from the block at the beginning of the list file.
 	QList<QString> leadingComments;
@@ -82,6 +81,17 @@ private:
 	//! Written at the end of the file when saving.
 	QList<QString> comments;
 	
+	//! Line number of the last detected duplicate original, used for logging.
+	int lastDupLine;
+	
+	//! Add a Location to the model, check for unique ID and mark duplicates.
+	//! Tries to avoid duplicate IDs by expanding them.
+	//! @param skipDuplicates if true, the argument is deleted if
+	//! there's already a location with that ID.
+	//! @returns 0 if the argument has been deleted as a duplicate.
+	Location* addLocation(Location* loc, bool skipDuplicates = false);
+	
+	//! Check if the index is within the model.
 	bool isValidIndex(const QModelIndex& index) const;
 };
 
