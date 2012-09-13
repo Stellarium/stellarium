@@ -23,12 +23,12 @@
 
 #include <QApplication>
 #include <QCloseEvent>
+#include <QDebug>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
-
-#include <QDebug>
+#include "kfilterdev.h"
 
 #include "LocationListModel.hpp"
 
@@ -231,7 +231,7 @@ bool LocationListEditor::saveFile(const QString& path)
 	// Save the list also in binary format if necessary.
 	if (ui->actionBinary->isChecked())
 	{
-		if (saveBinary(openFilePath))
+		if (saveBinary(path))
 			message = "List saved, with binary, to " + path;
 		else
 			message = "Error saving as binary! But list saved to " + path;
@@ -252,12 +252,29 @@ bool LocationListEditor::saveBinary(const QString& path)
 	
 	QFileInfo fileInfo(path);
 	QString binPath = fileInfo.path();
+	binPath += '/';
 	binPath += fileInfo.baseName();
 	binPath += ".bin.gz";
 	qDebug() << "Binary path:" << binPath;
 	
-	//return locations->saveBinary(binPath);
-	return true;
+	QFile file(binPath);
+	if (!file.open(QFile::WriteOnly))
+	{
+		QMessageBox::warning(this,
+		                     qApp->applicationName(),
+		                     QString("Cannot save to binary file %1:\n%2.")
+		                     .arg(path)
+		                     .arg(file.errorString()));
+		return false;
+	}
+	QIODevice* device = KFilterDev::device(&file, "application/x-gzip", false);
+	device->open(QIODevice::WriteOnly);
+	bool ok = locations->saveBinary(device);
+	device->close();
+	delete device;
+	file.close();
+	
+	return ok;
 }
 
 void LocationListEditor::open()

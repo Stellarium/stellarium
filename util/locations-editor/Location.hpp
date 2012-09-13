@@ -37,12 +37,17 @@ public:
 	//! @name Data fields, mostly reused from StelLocation.
 	//! The entries marked by [IGNORED] are not (yet) used by Stellarium.
 	//! @{
-	//! Location name.
+	
+	//! @brief %Location name <strong>as stored in the source file</strong>.
 	QString name;
-	//! Country (code or name, <strong>as it is in the source file</strong>).
+	//! %Location name as used in StelLocationMgr.
+	//! Usually the same as #name, but can also contain the #region.
+	//! Necessary for binary serialization. :(
+	QString stelName;
+	//! Country (code or name, <strong>as stored in the source file</strong>).
 	//! Allegedly can be empty, but people keep filling it.
-	//! Note that in StelLocation it is the full country name. Here for now
-	//! it is the contents of the file.
+	//! In StelLocation it is populated with the full country name, which
+	//! here is stored in #countryName.
 	QString country;
 	//! Country (human-readable name, used for ID/disambiguation).
 	QString countryName;
@@ -74,23 +79,26 @@ public:
 	//! * L for a spacecraft lander
 	//! * I for a spacecraft impact
 	//! * A for a spacecraft crash
+	//! * X for unknown/user defined [DEFAULT value]
 	QChar role;
 	//! [IGNORED] Population in thousands of inhabitants.
-	//! Note that StelLocation uses the exact population (this * 1000).
-	int population;
+	//! Note that StelLocation uses an int with the exact
+	//! population (this * 1000).
+	QString population;
 	//! [IGNORED] A hint for associating a landscape to the location.
 	QString landscapeKey;
 	//! @}
 	
 	//! Identifier as used by LocationListModel and StelLocationMgr.
-	QString id;
+	//! Generated and set by generateId() and extendId().
+	QString stelId;
 	
-	//! Form the ID used by StelLocationMgr.
-	//! Format: "Place, Country".
-	QString getBasicId();
-	//! Form the ID used by StelLocationMgr if there are duplicates.
-	//! Format: "Place (Region), Country".
-	QString getExtendedId();
+	//! Returns the ID used by StelLocationMgr.
+	//! Format: "::stelName, ::country".
+	QString generateId();
+	//! Set and return the ID used by StelLocationMgr if there are duplicates.
+	//! Format: "::name (::region), ::country".
+	QString extendId();
 	
 	//! Output the location as a tab-delimited string.
 	//! @author Fabien Chereau
@@ -98,10 +106,11 @@ public:
 	//! @author Bogdan Marinov
 	QString toLine() const;
 	//! Parse a tab-delimited line string location from a string line serialization.
+	//! @returns null pointer if the line does not describe a valid location.
 	//! @author Fabien Chereau
 	//! @author (and everyone else who edited this function in StelLocation)
 	//! @author Bogdan Marinov
-	static Location fromLine(const QString& line);
+	static Location* fromLine(const QString& line);
 	
 	//! Convert database field string to human-readable country name.
 	//! @param string may contain a two-letter country code or a country name.
