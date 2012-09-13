@@ -32,7 +32,9 @@ Location::Location() :
     latitude(0.),
     altitude(0.),
     bortleScaleIndex(-1.),
-    role('X')
+    role('X'),
+    hasDuplicate(false),
+    lineNum(0)
 {
 	;
 }
