@@ -56,10 +56,16 @@ public:
 	QString region;
 	//! Planet name (empty if Earth).
 	QString planetName;
-	//! Longitude in degrees
+	//! Longitude in degrees, negative is West.
 	float longitude;
-	//! Latitude in degrees
+	//! Longitude in string form.
+	//! Necessary to minimize changes to the source list when saving.
+	QString longitudeStr;
+	//! Latitude in degrees, negative is South.
 	float latitude;
+	//! Latitude in string form.
+	//! Necessary to minimize changes to the source list when saving.
+	QString latitudeStr;
 	//! Altitude in meters.
 	int altitude;
 	//! [IGNORED] Time zone string.
@@ -122,6 +128,11 @@ public:
 	//! Convert database field string to human-readable country name.
 	//! @param string may contain a two-letter country code or a country name.
 	static QString stringToCountry(const QString& string);
+	
+	static float latitudeFromString(const QString& string, bool* ok = 0);
+	static float longitudeFromString(const QString& string, bool* ok = 0);
+	static QString latitudeToString(float latitude);
+	static QString longitudeToString(float longitude);
 
 protected:
 	//! Load the two-letter country codes list in the resources.

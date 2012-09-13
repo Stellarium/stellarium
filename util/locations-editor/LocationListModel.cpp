@@ -190,6 +190,8 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 		case 0: // Name
 			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.name;
+			if (role == Qt::ToolTipRole)
+				return loc.stelId;
 			break;
 			
 		case 1: // Region
@@ -228,11 +230,15 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 			
 		case 5: // Latitude
 			if (role == Qt::DisplayRole || role == Qt::EditRole)
+				return loc.latitudeStr;
+			if (role == Qt::ToolTipRole)
 				return loc.latitude;
 			break;
 			
 		case 6: // Longitude
 			if (role == Qt::DisplayRole || role == Qt::EditRole)
+				return loc.longitudeStr;
+			if (role == Qt::ToolTipRole)
 				return loc.longitude;
 			break;
 			
@@ -289,36 +295,67 @@ QVariant LocationListModel::headerData(int section,
 {
 	if (orientation == Qt::Horizontal)
 	{
-		// TODO: Also show tooltips/status tips
-		if (role != Qt::DisplayRole)
-			return QVariant();
-		
 		switch (section)
 		{
 			case 0:
-				return "Name";
+				if (role == Qt::DisplayRole)
+					return "Name";
+				if (role == Qt::ToolTipRole)
+					return "Tool tip is StelLocationMgr ID";
 			case 1:
-				return "Region or State";
+				if (role == Qt::DisplayRole)
+					return "Region";
+				if (role == Qt::ToolTipRole)
+					return "Region (state, municipality, etc.). Used only for disambiguation. Can be empty.";
 			case 2:
-				return "Country";
+				if (role == Qt::DisplayRole)
+					return "Country";
+				if (role == Qt::ToolTipRole)
+					return "In <b>bold</b> are countries that are not entered as codes.";
 			case 3:
-				return "Type";
+				if (role == Qt::DisplayRole)
+					return "Type";
+				if (role == Qt::ToolTipRole)
+					return "Location type:<ul>"
+					        "<li><b>C</b> or <b>B</b> for a capital city"
+					        "<li><b>R</b> for a regional captial"
+					        "<li><b>N</b> for a normal city (any settlement)"
+					        "<li><b>O</b> for an observatory"
+					        "<li><b>L</b> for a spacecraft lander"
+					        "<li><b>I</b> for a spacecraft impact"
+					        "<li><b>A</b> for a spacecraft crash"
+					        "<li><b>X</b> for unknown/user defined [DEFAULT]"
+					        "</ul>";
 			case 4:
-				return "Population";
+				if (role == Qt::DisplayRole)
+					return "Population";
+				if (role == Qt::ToolTipRole)
+					return "In thousands of people.";
 			case 5:
-				return "Latitude";
+				if (role == Qt::DisplayRole)
+					return "Latitude";
+				if (role == Qt::ToolTipRole)
+					return "Can accept values ending in N/S or signed values";
 			case 6:
-				return "Longitude";
+				if (role == Qt::DisplayRole)
+					return "Longitude";
+				if (role == Qt::ToolTipRole)
+					return "Can accept values ending in E/W or signed values";
 			case 7:
-				return "Altitude";
+				if (role == Qt::DisplayRole)
+					return "Altitude";
 			case 8:
-				return "Light Pollution";
+				if (role == Qt::DisplayRole)
+					return "Light Pollution";
 			case 9:
-				return "Time Zone";
+				if (role == Qt::DisplayRole)
+					return "Time Zone";
 			case 10:
-				return "Planet";
+				if (role == Qt::DisplayRole)
+					return "Planet";
 			case 11:
-				return "Landscape";
+				if (role == Qt::DisplayRole)
+					return "Landscape";
 			default:
 				return QVariant();
 		}
@@ -369,21 +406,47 @@ bool LocationListModel::setData(const QModelIndex& index,
 		}
 			break;
 		
-		case 5:
+		case 5: // Latitude
 		{
-			float latitude = value.toFloat();
+			QString latStr = value.toString();
+			bool ok = false;
+			float latitude = value.toFloat(&ok);
+			if (ok)
+			{
+				latStr = Location::latitudeToString(latitude);
+			}
+			else
+			{
+				latitude = Location::latitudeFromString(latStr, &ok);
+				if (!ok)
+					return false;
+			}
 			if (latitude < -90. || latitude > 90.)
 				return false;
 			loc.latitude = latitude;
+			loc.latitudeStr = latStr;
 		}
 			break;
 			
 		case 6:
 		{
-			float longitude = value.toFloat();
+			QString longStr = value.toString();
+			bool ok = false;
+			float longitude = value.toFloat(&ok);
+			if (ok)
+			{
+				longStr = Location::longitudeToString(longitude);
+			}
+			else
+			{
+				longitude = Location::longitudeFromString(longStr, &ok);
+				if (!ok)
+					return false;
+			}
 			if (longitude < -180. || longitude > 180.)
 				return false;
 			loc.longitude = longitude;
+			loc.longitudeStr = longStr;
 		}
 			break;
 			
