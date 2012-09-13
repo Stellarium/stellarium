@@ -57,6 +57,10 @@ public:
 	QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 	bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 	
+	
+	//! Messages logged during loading: duplicates, invalid lines, etc.
+	QString loadingLog;
+	
 signals:
 	void modified(bool modified);
 	

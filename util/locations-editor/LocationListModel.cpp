@@ -21,6 +21,7 @@
 
 #include "LocationListModel.hpp"
 
+#include <QBrush>
 #include <QDataStream>
 #include <QDebug>
 #include <QFile>
@@ -54,15 +55,18 @@ LocationListModel* LocationListModel::load(QFile* file)
 	if (!file || !file->isReadable())
 		return result;
 	
+	QTextStream log(&result->loadingLog);
+	log.setCodec("UTF-8");
+	
 	QTextStream stream(file);
 	stream.setCodec("UTF-8");
 	QString line;
 	Location* loc;
 	QChar commentPrefix('#');
-	int numLine = 0;
+	int lineNum = 0;
 	while (!stream.atEnd())
 	{
-		numLine++;
+		lineNum++;
 		line = stream.readLine();
 		
 		// Skip emtpy lines and comments
@@ -73,12 +77,13 @@ LocationListModel* LocationListModel::load(QFile* file)
 		// Check if it's a valid location
 		if (!loc)
 		{
-			qWarning() << "Line" << numLine
-			           << "is not a valid location:" << line;
+			log << lineNum << ": not a valid location: " << line << endl;
 			continue;
 		}
 		else
 		{
+			loc->lineNum = lineNum;
+			
 			// Check for duplicate IDs and avoid them if possible.
 			QString id = loc->generateId();
 			Location* dupLoc = result->uniqueIds.value(id, 0);
@@ -89,17 +94,25 @@ LocationListModel* LocationListModel::load(QFile* file)
 				QString dupId = dupLoc->extendId();
 				if (id == dupId)
 				{
-					qWarning() << "Duplicate location" << id
-					           << "on line" << numLine
-					           << line;
+					log << lineNum << ": duplicate ID (\"" << id
+					    << "\") with line " << dupLoc->lineNum << ": "
+					    << line << endl;
+					
+					/*
 					delete loc;
 					loc = 0;
 					// Restore the original ID of the original location,
 					// because the map key wasn't changed.
+					// Note: this is not (yet?) done in Stellarium.
 					dupLoc->stelName = dupLoc->name;
 					dupLoc->generateId();
 					// Skip adding the new location
 					continue;
+					*/
+					
+					//Instead of deleting, mark both as duplicates.
+					loc->hasDuplicate = true;
+					dupLoc->hasDuplicate = true;
 				}
 				else
 				{
@@ -165,6 +178,12 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 		return QVariant();
 	
 	const Location& loc = *locations[index.row()];
+	
+	if (role == Qt::BackgroundRole && loc.hasDuplicate)
+	{
+		return QBrush(Qt::red, Qt::SolidPattern);
+	}
+	
 	// Columns follow the formatting of the file.
 	switch (index.column())
 	{
