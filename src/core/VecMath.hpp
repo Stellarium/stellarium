@@ -269,6 +269,9 @@ template<class T> class Matrix4
 	Matrix4<T> transpose() const;
 	Matrix4<T> inverse() const;
 
+	inline Vector4<T> getRow(const int row) const;
+	inline Vector4<T> getColumn(const int column) const;
+
 	inline void print(void) const;
 
 	T r[16];
@@ -1153,6 +1156,15 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 #undef SWAP_ROWS
 }
 
+template<class T> Vector4<T> Matrix4<T>::getRow(const int row) const
+{
+	return Vector4<T>(r[0 + row], r[4 + row], r[8 + row], r[12 + row]);
+}
+
+template<class T> Vector4<T> Matrix4<T>::getColumn(const int column) const
+{
+	return Vector4<T>(r[0 + column * 4], r[1 + column * 4], r[2 + column * 4], r[3 + column * 4]);
+}
 
 template<class T> void Matrix4<T>::print(void) const
 {

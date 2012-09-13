@@ -1544,8 +1544,8 @@ void Ring::draw(StelProjectorP projector, StelRenderer* renderer,
 		shader->setUniformValue("lightPos"           , Vec3f(0, 0, 0));
 		shader->setUniformValue("diffuseLight"       , Vec4f(1, 1, 1, 1));
 		shader->setUniformValue("ambientLight"       , Vec4f(0, 0, 0, 1));
-		shader->setUniformValue("radius"             , static_cast<float>(1));
-		shader->setUniformValue("oneMinusOblateness" , static_cast<float>(1));
+		shader->setUniformValue("radius"             , 1.0f);
+		shader->setUniformValue("oneMinusOblateness" , 1.0f);
 
 		shader->setUniformValue("info",      info->info);
 		shader->setUniformValue("infoCount", info->infoCount);
