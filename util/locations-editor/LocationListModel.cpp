@@ -30,15 +30,8 @@
 
 LocationListModel::LocationListModel(QObject *parent) :
     QAbstractTableModel(parent),
-    wasModified(false)
-{
-}
-
-LocationListModel::LocationListModel(QList<Location*> locationList,
-                                     QObject *parent) :
-    QAbstractTableModel(parent),
     wasModified(false),
-    locations(locationList)
+    lastDupLine(0)
 {
 }
 
@@ -46,7 +39,7 @@ LocationListModel::~LocationListModel()
 {
 	qDeleteAll(locations);
 	locations.clear();
-	uniqueIds.clear();
+	stelIds.clear();
 }
 
 LocationListModel* LocationListModel::load(QFile* file)
@@ -55,6 +48,7 @@ LocationListModel* LocationListModel::load(QFile* file)
 	if (!file || !file->isReadable())
 		return result;
 	
+	result->loadingLog.clear();
 	QTextStream log(&result->loadingLog);
 	log.setCodec("UTF-8");
 	
@@ -62,6 +56,9 @@ LocationListModel* LocationListModel::load(QFile* file)
 	stream.setCodec("UTF-8");
 	
 	bool inLeadingBlock = true;
+	result->leadingComments.clear();
+	result->comments.clear();
+	
 	QString line;
 	Location* loc;
 	QChar commentPrefix('#');
@@ -82,6 +79,7 @@ LocationListModel* LocationListModel::load(QFile* file)
 				result->leadingComments.append(line);
 			else
 				result->comments.append(line);
+			continue;
 		}
 		else
 			inLeadingBlock = false;
@@ -98,44 +96,13 @@ LocationListModel* LocationListModel::load(QFile* file)
 			loc->lineNum = lineNum;
 			
 			// Check for duplicate IDs and avoid them if possible.
-			QString id = loc->generateId();
-			Location* dupLoc = result->uniqueIds.value(id, 0);
-			if (dupLoc)
+			loc = result->addLocation(loc);
+			if (loc && loc->hasDuplicate)
 			{
-				QString origId = id;
-				id = loc->extendId();
-				QString dupId = dupLoc->extendId();
-				if (id == dupId)
-				{
-					log << lineNum << ": duplicate ID (\"" << id
-					    << "\") with line " << dupLoc->lineNum << ": "
-					    << line << endl;
-					
-					/*
-					delete loc;
-					loc = 0;
-					// Restore the original ID of the original location,
-					// because the map key wasn't changed.
-					// Note: this is not (yet?) done in Stellarium.
-					dupLoc->stelName = dupLoc->name;
-					dupLoc->generateId();
-					// Skip adding the new location
-					continue;
-					*/
-					
-					//Instead of deleting, mark both as duplicates.
-					loc->hasDuplicate = true;
-					dupLoc->hasDuplicate = true;
-				}
-				else
-				{
-					result->uniqueIds.remove(origId);
-					result->uniqueIds.insert(dupId, dupLoc);
-					// The new location will be added after the block
-				}
+				log << lineNum << ": duplicate ID (\"" << loc->stelId
+				    << "\") with line " << result->lastDupLine << ": "
+				    << line << endl;
 			}
-			result->locations.append(loc);
-			result->uniqueIds.insert(id, loc);
 		}
 	}
 	return result;
@@ -167,11 +134,25 @@ bool LocationListModel::saveBinary(QIODevice* file)
 	
 	QDataStream stream(file);
 	stream.setVersion(QDataStream::Qt_4_6);
-	stream << ((quint32)uniqueIds.count());
-	QMapIterator<QString,Location*> i(uniqueIds);
+	stream << ((quint32)stelIds.uniqueKeys().count());
+	QMapIterator<QString,Location*> i(stelIds);
 	while (i.hasNext())
 	{
 		i.next();
+		
+		// If there are multiple values with one key, skip them.
+		if (i.hasNext() && (i.key() == i.peekNext().key()))
+		{
+			QString key = i.key();
+			// qDebug() << "Trying to skip key:" << key;
+			while (i.hasNext() && (key == i.peekNext().key()))
+			{
+				i.next();
+				// qDebug() << "Skipping" << i.key();
+			}
+		}
+		
+		// In case of a multi-map, save the last added key?
 		stream << i.key() << *(i.value());
 	}
 	return true;
@@ -396,7 +377,14 @@ bool LocationListModel::setData(const QModelIndex& index,
 	switch (index.column())
 	{
 		case 0:
-			loc.name = value.toString();
+		{
+			QString name = value.toString();
+			if (name != loc.name)
+			{
+				//
+				loc.name = name;
+			}
+		}
 			break;
 			
 		case 1:
@@ -509,6 +497,48 @@ void LocationListModel::setModified(bool changed)
 		return;
 	wasModified = changed;
 	emit modified(changed);
+}
+
+Location* LocationListModel::addLocation(Location* loc, bool skipDuplicates)
+{
+	QString id = loc->generateId();
+	Location* dupLoc = stelIds.value(id, 0); // In multi-map, returns the most recent
+	if (dupLoc)
+	{
+		loc->extendId();
+		dupLoc->extendId();
+		if (loc->stelId == dupLoc->stelId)
+		{
+			lastDupLine = dupLoc->lineNum;
+			
+			if (skipDuplicates)
+			{
+				delete loc;
+				loc = 0;
+				// Restore the original ID of the original location,
+				// because the map key wasn't changed.
+				// Note: this is not (yet?) done in Stellarium.
+				dupLoc->stelName = dupLoc->name;
+				dupLoc->generateId();
+				// Skip adding the new location
+				return 0;
+			}
+			
+			//Instead of deleting, mark both as duplicates.
+			loc->hasDuplicate = true;
+			dupLoc->hasDuplicate = true;
+		}
+		else
+		{
+			stelIds.remove(id); //In mult-maps, removes the most recent
+			stelIds.insertMulti(dupLoc->stelId, dupLoc);
+			// The new location will be added after the block
+		}
+	}
+	locations.append(loc);
+	stelIds.insertMulti(loc->stelId, loc);
+	
+	return loc;
 }
 
 bool LocationListModel::isValidIndex(const QModelIndex& index) const
