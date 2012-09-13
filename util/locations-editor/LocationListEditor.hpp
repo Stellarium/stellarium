@@ -29,6 +29,7 @@ namespace Ui {
 class LocationListEditor;
 }
 class LocationListModel;
+class QSortFilterProxyModel;
 
 //! Main class of the Location List Editor.
 class LocationListEditor : public QMainWindow
@@ -47,6 +48,7 @@ protected:
 private:
 	Ui::LocationListEditor *ui;
 	LocationListModel* locations;
+	QSortFilterProxyModel* proxyModel;
 	
 	//! Path to the currently opened list.
 	QString openFilePath;
@@ -95,6 +97,9 @@ private slots:
 	bool saveAs();
 	//! Shows a window with author and copyright information.
 	void showAboutWindow();
+	
+	//! Sets the view column affected by the search/filter field.
+	void setFilteredColumn(int column);
 };
 
 #endif // LOCATIONLISTEDITOR_HPP
