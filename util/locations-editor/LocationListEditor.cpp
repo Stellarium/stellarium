@@ -197,6 +197,44 @@ bool LocationListEditor::loadFile(const QString& path)
 	
 	if (checkIfFileIsLoaded())
 		ui->statusBar->showMessage("Loaded " + path);
+	
+	if (!newLocations->loadingLog.isEmpty())
+	{
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(qApp->applicationName());
+		msgBox.setText(path + " was loaded succsessfully, but there were some errors.");
+		msgBox.setInformativeText("Click \"Show details\" to see the log or \"Save\" to save it to file.");
+		msgBox.setDetailedText(newLocations->loadingLog);
+		msgBox.setStandardButtons(QMessageBox::Save|QMessageBox::Ok);
+		msgBox.setDefaultButton(QMessageBox::Ok);
+		msgBox.setEscapeButton(QMessageBox::Ok);
+		msgBox.setIcon(QMessageBox::Information);
+		
+		int ret = msgBox.exec();
+		if (ret == QMessageBox::Save)
+		{
+			QString path = QFileDialog::getSaveFileName(this,
+			                                            "Save file as...",
+			                                            "log.txt");
+			
+			QFile file(path);
+			if (file.open(QFile::WriteOnly|QFile::Text))
+			{
+				QTextStream out(&file);
+				out << newLocations->loadingLog;
+				file.close();
+			}
+			else
+			{
+				QMessageBox::warning(this,
+				                     qApp->applicationName(),
+				                     QString("Cannot save to file %1:\n%2. Dumping log contents to stderr.")
+				                     .arg(path)
+				                     .arg(file.errorString()));
+				qWarning() << newLocations->loadingLog;
+			}
+		}
+	}
 	return true;
 }
 
@@ -320,7 +358,7 @@ bool LocationListEditor::saveAs()
 {
 	QString path = QFileDialog::getSaveFileName(this,
 	                                            "Save file as...",
-	                                            "locations.txt",
+	                                            openFilePath,
 	                                            fileFilters);
 	if (path.isEmpty())
 		return false;

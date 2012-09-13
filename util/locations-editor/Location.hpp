@@ -93,6 +93,13 @@ public:
 	//! Generated and set by generateId() and extendId().
 	QString stelId;
 	
+	//! True if there's another Location with the same Stellarium ID.
+	//! True for both the original and the later read.
+	bool hasDuplicate;
+	
+	//! Line number in the file from which the location was loaded.
+	int lineNum;
+	
 	//! Returns the ID used by StelLocationMgr.
 	//! Format: "::stelName, ::country".
 	QString generateId();
