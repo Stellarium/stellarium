@@ -25,6 +25,7 @@
 
 #include <QFile>
 #include <QList>
+#include <QMap>
 #include <QString>
 
 #include "Location.hpp"
@@ -38,11 +39,12 @@ class LocationListModel : public QAbstractTableModel
 	Q_OBJECT
 public:
 	explicit LocationListModel(QObject *parent = 0);
-	LocationListModel(QList<Location> locationList, QObject *parent = 0);
+	LocationListModel(QList<Location*> locationList, QObject *parent = 0);
+	~LocationListModel();
 	
 	static LocationListModel* load(QFile* file);
 	bool save(QFile* file);
-	bool saveBinary(QFile* file);
+	bool saveBinary(QIODevice *file);
 	
 	bool isModified() const {return wasModified;}
 	
@@ -65,7 +67,9 @@ private:
 	//! Flag set to "true" if the model has been modified.
 	bool wasModified;
 	//! The location list stored by the model.
-	QList<Location> locations;
+	QList<Location*> locations;
+	//! 
+	QMap<QString,Location*> uniqueIds;
 	
 	bool isValidIndex(const QModelIndex& index) const;
 };
