@@ -33,6 +33,7 @@
 //! Custom Model class to store the locations list.
 //! Location objects are stored in QList instead of a QMap as it is in
 //! Stellarium, which may lead to some problems...
+//! On the other hand, it allows editing duplicate entries.
 //! @author Bogdan Marinov
 class LocationListModel : public QAbstractTableModel
 {
@@ -54,7 +55,7 @@ public:
 	
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole ) const;
 	Qt::ItemFlags flags(const QModelIndex& index) const;
-	QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 	bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 	
 	

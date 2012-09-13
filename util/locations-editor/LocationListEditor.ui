@@ -14,7 +14,30 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTableView" name="tableView"/>
+     <widget class="QTableView" name="tableView">
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frameFilter">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineEditFilter">
+         <property name="placeholderText">
+          <string>Search/filter...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxFilteredColumn"/>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -162,29 +185,59 @@
     <string>Also save as a &amp;binary file</string>
    </property>
   </action>
-  <action name="action_Name">
+  <action name="actionShowName">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>&amp;Name</string>
    </property>
+   <property name="toolTip">
+    <string>Show the Name column</string>
+   </property>
   </action>
-  <action name="action_Region">
+  <action name="actionShowRegion">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>&amp;Region</string>
    </property>
+   <property name="toolTip">
+    <string>Toggle the Region column</string>
+   </property>
   </action>
-  <action name="action_Country">
+  <action name="actionShowCountry">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>&amp;Country</string>
    </property>
+   <property name="toolTip">
+    <string>Toggle the Country column</string>
+   </property>
   </action>
-  <action name="action_Type">
+  <action name="actionShowType">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>&amp;Type</string>
    </property>
+   <property name="toolTip">
+    <string>Toggle the Type column</string>
+   </property>
   </action>
-  <action name="action_Population">
+  <action name="actionShowPopulation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>&amp;Population</string>
+   </property>
+   <property name="toolTip">
+    <string>Show the Population column</string>
    </property>
   </action>
  </widget>
