@@ -31,7 +31,7 @@ class LocationListEditor;
 class LocationListModel;
 class QSortFilterProxyModel;
 
-//! Main class of the Location List Editor.
+//! Main class of the %Location List Editor.
 class LocationListEditor : public QMainWindow
 {
 	Q_OBJECT
