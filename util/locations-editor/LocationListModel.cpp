@@ -390,6 +390,8 @@ bool LocationListModel::setData(const QModelIndex& index,
 			{
 				loc->name = loc->stelName = name;
 				updateDuplicates(loc);
+				loc->hasDuplicate = false;
+				addLocationId(loc);
 			}
 		}
 			break;
@@ -402,6 +404,8 @@ bool LocationListModel::setData(const QModelIndex& index,
 				loc->region = region;
 				loc->stelName = loc->name;
 				updateDuplicates(loc);
+				loc->hasDuplicate = false;
+				addLocationId(loc);
 			}
 		}
 			break;
@@ -415,6 +419,8 @@ bool LocationListModel::setData(const QModelIndex& index,
 				loc->countryName = Location::stringToCountry(country);
 				loc->stelName = loc->name;
 				updateDuplicates(loc);
+				loc->hasDuplicate = false;
+				addLocationId(loc);
 			}
 		}
 			break;
@@ -524,25 +530,7 @@ void LocationListModel::removeLocation(int row)
 	beginRemoveRows(QModelIndex(), row, row);
 	
 	Location* loc = locations.takeAt(row);
-	
-	QString id = loc->stelId;
-	QList<Location*> duplicates;
-	QMap<QString, Location*>::iterator i = stelIds.lowerBound(id);
-	QMap<QString, Location*>::iterator upperBound = stelIds.upperBound(id);
-	while (i != upperBound)
-	{
-		if (i.value() != loc)
-			duplicates.append(i.value());
-		
-		i = stelIds.erase(i);
-	}
-	
-	foreach(Location*const dupLoc, duplicates)
-	{
-		dupLoc->stelName = dupLoc->name;
-		dupLoc->hasDuplicate = false;
-		addLocationId(dupLoc);
-	}
+	updateDuplicates(loc);
 	
 	endRemoveRows();
 }
@@ -561,66 +549,70 @@ Location* LocationListModel::addLocationId(Location* loc, bool skipDuplicates)
 	Location* dupLoc = stelIds.take(id); // In multi-map, returns the most recent
 	if (dupLoc)
 	{
-		//qDebug() << "Duplicate found for ID" << id;
+		qDebug() << "Duplicate found for ID" << id;
 		loc->extendId();
 		dupLoc->extendId();
+		qDebug() << "Extending ID to" << loc->stelId << dupLoc->stelId;
 		if (loc->stelId == dupLoc->stelId)
 		{
-			//qDebug() << "Extending ID to" << loc->stelId;
+			qDebug() << "Extended IDs match.";
 			lastDupLine = dupLoc->lineNum;
-			
-			if (skipDuplicates)
-			{
-				delete loc;
-				loc = 0;
-				// Restore the original ID of the original location,
-				// because the map key wasn't changed.
-				// Note: this is not (yet?) done in Stellarium.
-				dupLoc->stelName = dupLoc->name;
-				dupLoc->generateId();
-				stelIds.insertMulti(dupLoc->stelId, dupLoc);
-				// Skip adding the new location
-				return 0;
-			}
 			
 			//Instead of deleting, mark both as duplicates.
 			loc->hasDuplicate = true;
 			dupLoc->hasDuplicate = true;
 		}
+		else
+		{
+			// There may be already another one...
+			Location* extDupLoc = stelIds.value(loc->stelId, 0);
+			if (extDupLoc)
+			{
+				lastDupLine = extDupLoc->lineNum;
+				loc->hasDuplicate = true;
+				extDupLoc->hasDuplicate = true;
+			}
+		}
+		if (skipDuplicates && loc->hasDuplicate)
+		{
+			delete loc;
+			loc = 0;
+			// Restore the original ID of the original location,
+			// because the map key wasn't changed.
+			// Note: this is not (yet?) done in Stellarium.
+			dupLoc->stelName = dupLoc->name;
+			dupLoc->generateId();
+		}
 		stelIds.insertMulti(dupLoc->stelId, dupLoc);
 	}
-	stelIds.insertMulti(loc->stelId, loc);
+	
+	if (loc)
+		stelIds.insertMulti(loc->stelId, loc);
 	
 	return loc;
 }
 
-bool LocationListModel::updateDuplicates(Location* loc)
+void LocationListModel::updateDuplicates(Location* loc)
 {
-	int duplicatesCount = 0;
 	QString id = loc->stelId;
 	QMap<QString, Location*>::iterator i = stelIds.lowerBound(id);
 	QMap<QString, Location*>::iterator upperBound = stelIds.upperBound(id);
+	QList<Location*> duplicates;
 	while (i != upperBound)
 	{
-		if (i.value() == loc)
-			i = stelIds.erase(i);
-		else
-		{
-			duplicatesCount++;
-			i++;
-		}
+		if (i.value() != loc)
+			duplicates.append(i.value());
+			
+		i = stelIds.erase(i);
 	}
 	
-	if (duplicatesCount == 1)
+	foreach (Location* duplicate, duplicates)
 	{
-		stelIds.value(id)->hasDuplicate = false;
+		duplicate->hasDuplicate = false;
+		duplicate->stelName = duplicate->name;
+		addLocationId(duplicate);
 	}
-	
-	loc->hasDuplicate = false;
-	addLocationId(loc);
-	//qDebug() << id << loc->stelId;
-	
-	return true;
+	return;
 }
 
 bool LocationListModel::isValidIndex(const QModelIndex& index) const
