@@ -95,6 +95,8 @@ private slots:
 	//! Save the currently opened file in another location.
 	//! Propmts for a path to the new location.
 	bool saveAs();
+	//! Delete the currently selected rows.
+	void deleteSelected();
 	//! Shows a window with author and copyright information.
 	void showAboutWindow();
 	

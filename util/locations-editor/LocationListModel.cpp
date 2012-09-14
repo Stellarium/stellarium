@@ -378,7 +378,7 @@ bool LocationListModel::setData(const QModelIndex& index,
 	if (!isValidIndex(index) || role != Qt::EditRole)
 		return false;
 	
-	Location& loc = *locations[index.row()];
+	Location* loc = locations[index.row()];
 	switch (index.column())
 	{
 		case 0:
@@ -386,10 +386,10 @@ bool LocationListModel::setData(const QModelIndex& index,
 			QString name = value.toString();
 			if (name.isEmpty())
 				return false;
-			if (name != loc.name)
+			if (name != loc->name)
 			{
-				loc.name = name;
-				updateDuplicates(&loc);
+				loc->name = loc->stelName = name;
+				updateDuplicates(loc);
 			}
 		}
 			break;
@@ -397,10 +397,11 @@ bool LocationListModel::setData(const QModelIndex& index,
 		case 1:
 		{
 			QString region = value.toString();
-			if (region != loc.region)
+			if (region != loc->region)
 			{
-				loc.region = region;
-				updateDuplicates(&loc);
+				loc->region = region;
+				loc->stelName = loc->name;
+				updateDuplicates(loc);
 			}
 		}
 			break;
@@ -408,11 +409,12 @@ bool LocationListModel::setData(const QModelIndex& index,
 		case 2:
 		{
 			QString country = value.toString();
-			if (country != loc.country)
+			if (country != loc->country)
 			{
-				loc.country = country;
-				loc.countryName = Location::stringToCountry(country);
-				updateDuplicates(&loc);
+				loc->country = country;
+				loc->countryName = Location::stringToCountry(country);
+				loc->stelName = loc->name;
+				updateDuplicates(loc);
 			}
 		}
 			break;
@@ -420,7 +422,7 @@ bool LocationListModel::setData(const QModelIndex& index,
 		case 3:
 		{
 			QChar role = value.toChar(); // TODO: Validate
-			loc.role = (role != '\0') ? role : QChar('N');// TODO: Decide default role character
+			loc->role = (role != '\0') ? role : QChar('N');// TODO: Decide default role character
 		}
 			break;
 			
@@ -429,7 +431,7 @@ bool LocationListModel::setData(const QModelIndex& index,
 			int population = value.toInt();
 			if (population < 0)
 				return false;
-			loc.population = population;
+			loc->population = population;
 		}
 			break;
 		
@@ -450,8 +452,8 @@ bool LocationListModel::setData(const QModelIndex& index,
 			}
 			if (latitude < -90. || latitude > 90.)
 				return false;
-			loc.latitude = latitude;
-			loc.latitudeStr = latStr;
+			loc->latitude = latitude;
+			loc->latitudeStr = latStr;
 		}
 			break;
 			
@@ -472,13 +474,13 @@ bool LocationListModel::setData(const QModelIndex& index,
 			}
 			if (longitude < -180. || longitude > 180.)
 				return false;
-			loc.longitude = longitude;
-			loc.longitudeStr = longStr;
+			loc->longitude = longitude;
+			loc->longitudeStr = longStr;
 		}
 			break;
 			
 		case 7:
-			loc.altitude = value.toInt();
+			loc->altitude = value.toInt();
 			break;
 			
 		case 8:
@@ -489,20 +491,20 @@ bool LocationListModel::setData(const QModelIndex& index,
 			// TODO: This may be a problem. I hate floating point operations...
 			if (lightPollution < 0. && lightPollution != -1.)
 				return false;
-			loc.bortleScaleIndex = lightPollution;
+			loc->bortleScaleIndex = lightPollution;
 		}
 			break;
 			
 		case 9:
-			loc.timeZone = value.toString();
+			loc->timeZone = value.toString();
 			break;
 			
 		case 10:
-			loc.planetName = value.toString();
+			loc->planetName = value.toString();
 			break;
 			
 		case 11:
-			loc.landscapeKey = value.toString();
+			loc->landscapeKey = value.toString();
 			break;
 			
 		default:
@@ -511,6 +513,38 @@ bool LocationListModel::setData(const QModelIndex& index,
 	emit dataChanged(index, index);
 	setModified(true);
 	return true;
+}
+
+
+void LocationListModel::removeLocation(int row)
+{
+	if (row < 0 || row >= locations.count())
+		return;
+	
+	beginRemoveRows(QModelIndex(), row, row);
+	
+	Location* loc = locations.takeAt(row);
+	
+	QString id = loc->stelId;
+	QList<Location*> duplicates;
+	QMap<QString, Location*>::iterator i = stelIds.lowerBound(id);
+	QMap<QString, Location*>::iterator upperBound = stelIds.upperBound(id);
+	while (i != upperBound)
+	{
+		if (i.value() != loc)
+			duplicates.append(i.value());
+		
+		i = stelIds.erase(i);
+	}
+	
+	foreach(Location*const dupLoc, duplicates)
+	{
+		dupLoc->stelName = dupLoc->name;
+		dupLoc->hasDuplicate = false;
+		addLocationId(dupLoc);
+	}
+	
+	endRemoveRows();
 }
 
 void LocationListModel::setModified(bool changed)
@@ -524,13 +558,15 @@ void LocationListModel::setModified(bool changed)
 Location* LocationListModel::addLocationId(Location* loc, bool skipDuplicates)
 {
 	QString id = loc->generateId();
-	Location* dupLoc = stelIds.value(id, 0); // In multi-map, returns the most recent
+	Location* dupLoc = stelIds.take(id); // In multi-map, returns the most recent
 	if (dupLoc)
 	{
+		//qDebug() << "Duplicate found for ID" << id;
 		loc->extendId();
 		dupLoc->extendId();
 		if (loc->stelId == dupLoc->stelId)
 		{
+			//qDebug() << "Extending ID to" << loc->stelId;
 			lastDupLine = dupLoc->lineNum;
 			
 			if (skipDuplicates)
@@ -542,6 +578,7 @@ Location* LocationListModel::addLocationId(Location* loc, bool skipDuplicates)
 				// Note: this is not (yet?) done in Stellarium.
 				dupLoc->stelName = dupLoc->name;
 				dupLoc->generateId();
+				stelIds.insertMulti(dupLoc->stelId, dupLoc);
 				// Skip adding the new location
 				return 0;
 			}
@@ -550,12 +587,7 @@ Location* LocationListModel::addLocationId(Location* loc, bool skipDuplicates)
 			loc->hasDuplicate = true;
 			dupLoc->hasDuplicate = true;
 		}
-		//else
-		{
-			stelIds.remove(id); //In mult-maps, removes the most recent
-			stelIds.insertMulti(dupLoc->stelId, dupLoc);
-			// The new location will be added after the block
-		}
+		stelIds.insertMulti(dupLoc->stelId, dupLoc);
 	}
 	stelIds.insertMulti(loc->stelId, loc);
 	
@@ -584,9 +616,9 @@ bool LocationListModel::updateDuplicates(Location* loc)
 		stelIds.value(id)->hasDuplicate = false;
 	}
 	
-	loc->generateId();
 	loc->hasDuplicate = false;
 	addLocationId(loc);
+	//qDebug() << id << loc->stelId;
 	
 	return true;
 }
