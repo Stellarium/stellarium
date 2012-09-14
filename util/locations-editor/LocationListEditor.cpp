@@ -70,19 +70,20 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	// User location list
 	// TODO: What happens if a user file is created while the program is run?
 	// TODO: If no file exists, create one?
-	QString path;
+	QString path = QDir::homePath();
 #if defined(Q_OS_WIN)
 	// As there is no way to know which version of Windows it is, try both
-	path = "\\AppData\\Roaming\\Stellarium\\data\\user_locations.txt";
-	QFileInfo fileInfo(QDir::home(), path);
+	path += "\\AppData\\Roaming\\Stellarium\\data\\user_locations.txt";
+	QFileInfo fileInfo(path);
 	if (!fileInfo.exists())
-		path = "\\Application Data\\Stellarium\\data\\user_locations.txt";
+		path = QDir::homePath() + "\\Application Data\\Stellarium\\data\\user_locations.txt";
 #elif defined(Q_OS_MAC)
-	path = "Library/Application Support/Stellarium/data/user_locations.txt";
+	path += "/Library/Application Support/Stellarium/data/user_locations.txt";
 #else
-	path = ".stellarium/data/user_locations.txt";
+	path += "/.stellarium/data/user_locations.txt";
 #endif
-	QFileInfo userList(QDir::home(), path);
+	QFileInfo userList(path);
+	//qDebug() << userList.absoluteFilePath() << QDir::homePath();
 	if (userList.exists())
 		userFilePath = userList.absoluteFilePath();
 	else
