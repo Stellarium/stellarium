@@ -73,10 +73,10 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	QString path;
 #if defined(Q_OS_WIN)
 	// As there is no way to know which version of Windows it is, try both
-	path = "AppData\Roaming\Stellarium\data\user_locations.txt";
+	path = "\\AppData\\Roaming\\Stellarium\\data\\user_locations.txt";
 	QFileInfo fileInfo(QDir::home(), path);
 	if (!fileInfo.exists())
-		path = "Application Data\Stellarium\data\user_locations.txt";
+		path = "\\Application Data\\Stellarium\\data\\user_locations.txt";
 #elif defined(Q_OS_MAC)
 	path = "Library/Application Support/Stellarium/data/user_locations.txt";
 #else
