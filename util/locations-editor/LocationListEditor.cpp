@@ -137,6 +137,7 @@ bool LocationListEditor::checkIfFileIsLoaded()
 	ui->actionSave->setEnabled(enabled);
 	ui->actionSaveAs->setEnabled(enabled);
 	ui->actionBinary->setEnabled(enabled);
+	ui->actionNativeEolChars->setEnabled(enabled);
 	ui->tableView->setVisible(enabled);
 	ui->frameFilter->setVisible(enabled);
 	
@@ -268,8 +269,14 @@ bool LocationListEditor::saveFile(const QString& path)
 	if (path.isEmpty())
 		return false;
 	
+	QFile::OpenMode flags = QFile::WriteOnly;
+	if (ui->actionNativeEolChars->isChecked())
+		flags |= QFile::Text;
+	// QFile::Text saves with Windows line-endings on Windows,
+	// which creates artificial differences when diff-ing base_locations.txt
+		
 	QFile file(path);
-	if (!file.open(QFile::WriteOnly | QFile::Text))
+	if (!file.open(flags))
 	{
 		QMessageBox::warning(this,
 		                     qApp->applicationName(),
@@ -358,7 +365,10 @@ void LocationListEditor::openProjectLocations()
 	if (checkIfFileIsSaved())
 	{
 		if (loadFile(projectFilePath))
+		{
 			ui->actionBinary->setChecked(true);
+			ui->actionNativeEolChars->setChecked(false);
+		}
 	}
 }
 
@@ -367,7 +377,10 @@ void LocationListEditor::openUserLocations()
 	if (checkIfFileIsSaved())
 	{
 		if (loadFile(userFilePath))
+		{
 			ui->actionBinary->setChecked(false);
+			ui->actionNativeEolChars->setChecked(true);
+		}
 	}
 }
 
