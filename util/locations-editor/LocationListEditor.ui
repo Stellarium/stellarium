@@ -47,7 +47,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLocations">
@@ -61,6 +61,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="actionBinary"/>
+    <addaction name="actionNativeEolChars"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -238,6 +239,14 @@
    </property>
    <property name="toolTip">
     <string>Show the Population column</string>
+   </property>
+  </action>
+  <action name="actionNativeEolChars">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Use native line endings</string>
    </property>
   </action>
  </widget>
