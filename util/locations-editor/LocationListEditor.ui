@@ -26,6 +26,9 @@
     <item>
      <widget class="QFrame" name="frameFilter">
       <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="margin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QLineEdit" name="lineEditFilter">
          <property name="placeholderText">
@@ -47,7 +50,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLocations">
@@ -76,19 +79,13 @@
      <string>&amp;Edit</string>
     </property>
     <addaction name="actionNewLocation"/>
+    <addaction name="action_Clone_selected"/>
+    <addaction name="separator"/>
     <addaction name="actionDelete"/>
    </widget>
    <addaction name="menuLocations"/>
    <addaction name="menuEdit"/>
    <addaction name="menuAbout"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpenProject">
@@ -133,6 +130,12 @@
   <action name="actionNewLocation">
    <property name="text">
     <string>&amp;New location</string>
+   </property>
+   <property name="iconText">
+    <string>Insert a new location</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert a new location</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -239,6 +242,11 @@
    </property>
    <property name="toolTip">
     <string>Show the Population column</string>
+   </property>
+  </action>
+  <action name="action_Clone_selected">
+   <property name="text">
+    <string>&amp;Clone selected</string>
    </property>
   </action>
   <action name="actionNativeEolChars">
