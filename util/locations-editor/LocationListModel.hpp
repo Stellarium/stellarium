@@ -94,8 +94,9 @@ private:
 	//! @returns 0 if the argument has been deleted as a duplicate.
 	Location* addLocationId(Location* loc, bool skipDuplicates = false);
 	
-	//! Update duplicate status.
-	bool updateDuplicates(Location* loc);
+	//! Remove the location ID from #stelIds and update duplicate IDs.
+	//! If you want the location back in #stelIds, you need to re-add it manually.
+	void updateDuplicates(Location* loc);
 	
 	//! Check if the index is within the model.
 	bool isValidIndex(const QModelIndex& index) const;
