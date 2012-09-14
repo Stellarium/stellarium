@@ -52,6 +52,8 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	        this, SLOT(save()));
 	connect(ui->actionSaveAs, SIGNAL(triggered()),
 	        this, SLOT(saveAs()));
+	connect(ui->actionDelete, SIGNAL(triggered()),
+	        this, SLOT(deleteSelected()));
 	connect(ui->actionExit, SIGNAL(triggered()),
 	        this, SLOT(close()));
 	connect(ui->actionAbout, SIGNAL(triggered()),
@@ -402,6 +404,25 @@ bool LocationListEditor::saveAs()
 		return false;
 	
 	return saveFile(path);
+}
+
+void LocationListEditor::deleteSelected()
+{
+	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
+	if (!selectionModel->hasSelection())
+		return;
+	
+	QList<int> rows;
+	QModelIndexList list = selectionModel->selectedRows();
+	foreach (const QModelIndex& index, list)
+		rows.append(proxyModel->mapToSource(index).row());
+	qSort(rows);
+	
+	QList<int>::iterator i = rows.end();
+	while (i != rows.begin())
+		locations->removeLocation(*(--i));
+	
+	locations->setModified(true);
 }
 
 void LocationListEditor::showAboutWindow()
