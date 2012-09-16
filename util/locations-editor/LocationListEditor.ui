@@ -25,19 +25,26 @@
     </item>
     <item>
      <widget class="QFrame" name="frameFilter">
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QGridLayout" name="gridLayout">
        <property name="margin">
         <number>0</number>
        </property>
-       <item>
+       <item row="0" column="0">
         <widget class="QLineEdit" name="lineEditFilter">
          <property name="placeholderText">
           <string>Search/filter...</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="1">
         <widget class="QComboBox" name="comboBoxFilteredColumn"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="checkBoxCaseSensitive">
+         <property name="text">
+          <string>&amp;Case sensitive</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
