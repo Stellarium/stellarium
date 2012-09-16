@@ -670,7 +670,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 
 	if (show_Today) 
 	{
-		renderer->drawText(TextParams(xLine, yLine,q_(" TODAY:")));
+		renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
 		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing, RS2));
 		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*2, RS1));
 		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*3, Cul));
@@ -679,7 +679,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{
-		renderer->drawText(TextParams(xLine,yLine," THIS YEAR:"));
+		renderer->drawText(TextParams(xLine,yLine,"THIS YEAR:"));
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= spacing;
