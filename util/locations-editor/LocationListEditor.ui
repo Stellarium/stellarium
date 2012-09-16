@@ -81,7 +81,9 @@
     <addaction name="actionAddNew"/>
     <addaction name="actionInsertAfter"/>
     <addaction name="actionInsertBefore"/>
+    <addaction name="separator"/>
     <addaction name="actionCloneSelected"/>
+    <addaction name="actionClonedAtTheEnd"/>
     <addaction name="separator"/>
     <addaction name="actionDelete"/>
     <addaction name="separator"/>
@@ -231,6 +233,23 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+I, B</string>
+   </property>
+  </action>
+  <action name="actionClonedAtTheEnd">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Add cloned at the &amp;end</string>
+   </property>
+   <property name="toolTip">
+    <string>Add cloned locations at the end of the list</string>
+   </property>
+   <property name="statusTip">
+    <string>Add cloned locations at the end of the list</string>
    </property>
   </action>
  </widget>

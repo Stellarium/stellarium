@@ -60,7 +60,7 @@ public:
 	//! Insert a Location at the given index.
 	void insertLocation(int row, Location* loc);
 	//! Insert a copy of the location after it.
-	void cloneLocation(int row);
+	void cloneLocation(int row, bool atEnd = true);
 	//! Delete the location and re-trigger duplicate ID calculation.
 	void removeLocation(int row);
 	

@@ -540,12 +540,13 @@ void LocationListModel::insertLocation(int row, Location *loc)
 	setModified(true);
 }
 
-void LocationListModel::cloneLocation(int row)
+void LocationListModel::cloneLocation(int row, bool atEnd)
 {
 	if (row < 0 || row >= locations.count())
 		return;
 	
-	insertLocation(row + 1, new Location(*locations.value(row)));
+	int newRow = atEnd ? locations.count() : (row + 1);
+	insertLocation(newRow, new Location(*locations.value(row)));
 }
 
 void LocationListModel::removeLocation(int row)
