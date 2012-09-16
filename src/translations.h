@@ -129,6 +129,10 @@ class Translations
 		N_("Eros");
 		// TRANSLATORS: Asteroid (624) Hektor
 		N_("Hektor");
+		// TRANSLATORS: Asteroid (20000) Varuna
+		N_("Varuna");
+		// TRANSLATORS: Asteroid (136472) Makemake
+		N_("Makemake");
 		
 		// TRANSLATORS: Name of supernova SN 1572A and script name
 		N_("Tycho's Supernova");
