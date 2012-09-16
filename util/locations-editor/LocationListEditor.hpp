@@ -123,6 +123,8 @@ private slots:
 	
 	//! Sets the view column affected by the search/filter field.
 	void setFilteredColumn(int column);
+	//! 
+	void setFilterCaseSensitivity(bool sensitive);
 };
 
 #endif // LOCATIONLISTEDITOR_HPP
