@@ -389,9 +389,11 @@ void LocationListEditor::setCurrentRowIndex(int row)
 	if (!index.isValid())
 		return;
 	QModelIndex proxyIndex = proxyModel->mapFromSource(index);
-	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
-	selectionModel->setCurrentIndex(proxyIndex,
-	                                QItemSelectionModel::NoUpdate);
+	//QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
+	//selectionModel->setCurrentIndex(proxyIndex,
+	//                                QItemSelectionModel::NoUpdate);
+	ui->tableView->setCurrentIndex(proxyIndex);
+	ui->tableView->edit(proxyIndex);
 }
 
 
