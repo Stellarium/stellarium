@@ -223,6 +223,9 @@ bool LocationListEditor::loadFile(const QString& path)
 	proxyModel = newProxy;
 	connect(ui->lineEditFilter, SIGNAL(textEdited(QString)),
 	        proxyModel, SLOT(setFilterWildcard(QString)));
+	setFilterCaseSensitivity(false);
+	connect(ui->checkBoxCaseSensitive, SIGNAL(toggled(bool)),
+	        this, SLOT(setFilterCaseSensitivity(bool)));
 	
 	if (checkIfFileIsLoaded())
 		ui->statusBar->showMessage("Loaded " + path);
@@ -525,4 +528,15 @@ void LocationListEditor::setFilteredColumn(int column)
 {
 	if (proxyModel && column >= 0 && column < proxyModel->columnCount())
 		proxyModel->setFilterKeyColumn(column);
+}
+
+void LocationListEditor::setFilterCaseSensitivity(bool sensitive)
+{
+	if (proxyModel)
+	{
+		if (sensitive)
+			proxyModel->setFilterCaseSensitivity(Qt::CaseSensitive);
+		else
+			proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	}
 }
