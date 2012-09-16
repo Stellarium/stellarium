@@ -57,9 +57,12 @@ public:
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 	bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 	
+	//! Insert a Location at the given index.
+	void insertLocation(int row, Location* loc);
+	//! Insert a copy of the location after it.
+	void cloneLocation(int row);
 	//! Delete the location and re-trigger duplicate ID calculation.
 	void removeLocation(int row);
-	
 	
 	//! Messages logged during loading: duplicates, invalid lines, etc.
 	QString loadingLog;
