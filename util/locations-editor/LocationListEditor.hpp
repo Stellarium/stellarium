@@ -23,6 +23,7 @@
 
 #include <QMainWindow>
 
+#include <QList>
 #include <QString>
 
 namespace Ui {
@@ -81,6 +82,15 @@ private:
 	//! use the same path and file name, but with ".bin.gz" suffix.
 	bool saveBinary(const QString& path);
 	
+	//! Get a sorted list of the row numbers/list indexes of the selection.
+	QList<int> getIndexesOfSelection();
+	//! Get the row number/list index of the current item.
+	//! @returns -1 if there's no valid current item (really unlikely).
+	//! @warning There's a difference between "selected" and "current". See the Qt documentation.
+	int getIndexOfCurrentRow();
+	//! Set the current row to the location with that index in the model.
+	void setCurrentRowIndex(int row);
+	
 private slots:
 	//! Prompts for file location and opens that file.
 	void open();
@@ -95,7 +105,18 @@ private slots:
 	//! Save the currently opened file in another location.
 	//! Propmts for a path to the new location.
 	bool saveAs();
+	//! Append a new location at the end of the list.
+	void addNew();
+	//! Insert a new location on the row before the current row.
+	//! @warning There's a difference between "selected" and "current". See the Qt documentation.
+	void insertBefore();
+	//! Insert a new location on the row after the current row.
+	//! @warning There's a difference between "selected" and "current". See the Qt documentation.
+	void insertAfter();
+	//! For each selected row, insert a duplicate on the next row.
+	void cloneSelected();
 	//! Delete the currently selected rows.
+	//! @warning There's a difference between "selected" and "current". See the Qt documentation.
 	void deleteSelected();
 	//! Shows a window with author and copyright information.
 	void showAboutWindow();

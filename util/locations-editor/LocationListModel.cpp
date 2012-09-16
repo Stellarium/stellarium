@@ -522,6 +522,32 @@ bool LocationListModel::setData(const QModelIndex& index,
 }
 
 
+void LocationListModel::insertLocation(int row, Location *loc)
+{
+	if (!loc)
+		return;
+	
+	if (row < 0 || row > locations.count())
+		return;
+	// (Works even if locations is empty, i.e. count() == 0.)
+	
+	beginInsertRows(QModelIndex(), row, row);
+	
+	locations.insert(row, loc);
+	addLocationId(loc);
+	
+	endInsertRows();
+	setModified(true);
+}
+
+void LocationListModel::cloneLocation(int row)
+{
+	if (row < 0 || row >= locations.count())
+		return;
+	
+	insertLocation(row + 1, new Location(*locations.value(row)));
+}
+
 void LocationListModel::removeLocation(int row)
 {
 	if (row < 0 || row >= locations.count())
@@ -533,6 +559,7 @@ void LocationListModel::removeLocation(int row)
 	updateDuplicates(loc);
 	
 	endRemoveRows();
+	setModified(true);
 }
 
 void LocationListModel::setModified(bool changed)

@@ -52,6 +52,14 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	        this, SLOT(save()));
 	connect(ui->actionSaveAs, SIGNAL(triggered()),
 	        this, SLOT(saveAs()));
+	connect(ui->actionAddNew, SIGNAL(triggered()),
+	        this, SLOT(addNew()));
+	connect(ui->actionInsertBefore, SIGNAL(triggered()),
+	        this, SLOT(insertBefore()));
+	connect(ui->actionInsertAfter, SIGNAL(triggered()),
+	        this, SLOT(insertAfter()));
+	connect(ui->actionCloneSelected, SIGNAL(triggered()),
+	        this, SLOT(cloneSelected()));
 	connect(ui->actionDelete, SIGNAL(triggered()),
 	        this, SLOT(deleteSelected()));
 	connect(ui->actionExit, SIGNAL(triggered()),
@@ -349,6 +357,44 @@ bool LocationListEditor::saveBinary(const QString& path)
 	return ok;
 }
 
+QList<int> LocationListEditor::getIndexesOfSelection()
+{
+	QList<int> rows;
+	
+	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
+	if (!selectionModel->hasSelection())
+		return rows;
+	
+	QModelIndexList list = selectionModel->selectedRows();
+	foreach (const QModelIndex& index, list)
+		rows.append(proxyModel->mapToSource(index).row());
+	qSort(rows);
+	
+	return rows;
+}
+
+int LocationListEditor::getIndexOfCurrentRow()
+{
+	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
+	QModelIndex index = selectionModel->currentIndex();
+	if (index.isValid())
+		return index.row();
+	else
+		return -1;
+}
+
+void LocationListEditor::setCurrentRowIndex(int row)
+{
+	QModelIndex index = locations->index(row, 0);
+	if (!index.isValid())
+		return;
+	QModelIndex proxyIndex = proxyModel->mapFromSource(index);
+	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
+	selectionModel->setCurrentIndex(proxyIndex,
+	                                QItemSelectionModel::NoUpdate);
+}
+
+
 void LocationListEditor::open()
 {
 	if (checkIfFileIsSaved())
@@ -406,23 +452,60 @@ bool LocationListEditor::saveAs()
 	return saveFile(path);
 }
 
-void LocationListEditor::deleteSelected()
+
+void LocationListEditor::addNew()
 {
-	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
-	if (!selectionModel->hasSelection())
+	Location* loc = new Location();
+	loc->stelName = loc->name = "New Location";
+	locations->insertLocation(locations->rowCount(), loc);
+	setCurrentRowIndex(locations->rowCount() - 1);
+}
+
+void LocationListEditor::insertBefore()
+{
+	int row = getIndexOfCurrentRow();
+	if (row < 0)
+		return;
+
+	Location* loc = new Location();
+	loc->stelName = loc->name = "New Location";
+	locations->insertLocation(row, loc);
+	setCurrentRowIndex(row);
+}
+
+void LocationListEditor::insertAfter()
+{
+	int row = getIndexOfCurrentRow();
+	if (row < 0)
+		return;
+	row += 1;
+	
+	Location* loc = new Location();
+	loc->stelName = loc->name = "New Location";
+	locations->insertLocation(row, loc);
+	setCurrentRowIndex(row);
+}
+
+void LocationListEditor::cloneSelected()
+{
+	QList<int> rows = getIndexesOfSelection();
+	if (rows.isEmpty())
 		return;
 	
-	QList<int> rows;
-	QModelIndexList list = selectionModel->selectedRows();
-	foreach (const QModelIndex& index, list)
-		rows.append(proxyModel->mapToSource(index).row());
-	qSort(rows);
+	QList<int>::iterator i = rows.end();
+	while (i != rows.begin())
+		locations->cloneLocation(*(--i));
+}
+
+void LocationListEditor::deleteSelected()
+{
+	QList<int> rows = getIndexesOfSelection();
+	if (rows.isEmpty())
+		return;
 	
 	QList<int>::iterator i = rows.end();
 	while (i != rows.begin())
 		locations->removeLocation(*(--i));
-	
-	locations->setModified(true);
 }
 
 void LocationListEditor::showAboutWindow()
