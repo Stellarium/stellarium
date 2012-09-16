@@ -225,6 +225,7 @@ static void dpper
 
      /* kill warning */
      inclo = 0.;
+     inclo = inclo;
 
      /* ---------------------- constants ----------------------------- */
      zns   = 1.19459e-5;
@@ -1051,7 +1052,8 @@ static void dspace
                delt = stepn;
 
          iretn = 381; // added for do loop
-         iret  =   0; // added for loop
+	 iret  =   0; // added for loop
+	 iret  = iret;
          while (iretn == 381)
            {
              /* ------------------- dot terms calculated ------------- */
@@ -1091,7 +1093,7 @@ static void dspace
              // sgp4fix move end checks to end of routine
              if (fabs(t - atime) >= stepp)
                {
-                 iret  = 0;
+		 iret  = 0;
                  iretn = 381;
                }
                else // exit here
@@ -1194,6 +1196,7 @@ static void initl
 
      /* kill warning */
      satn = 0;
+     satn = satn;
 
      // sgp4fix use old way of finding gst
      double ds70;
