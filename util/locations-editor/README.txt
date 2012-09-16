@@ -1,6 +1,17 @@
 Stellarium Location List Editor
 ===============================
 
+Locations list policies
+-----------------------
+
+The original base_locations.txt seems to contain every or almost every notable
+settlement with population >= 15 thousand people. Please remember this number
+when proposing new additions to the list.
+
+If you wish to translate an entry, please clone it and edit the new copy. This
+way, the original string will be still available. Another posibility is to
+aggregate all translations at the end of the file.
+
 Building
 --------
 
@@ -24,14 +35,19 @@ The "Also save as binary" option is automatically checked if a project list is l
 When saving a list that contains duplicates in binary form, items with duplicateIDs get conflated with the last item with the same ID, the same as in the
 binary saving function in StelLocationMgr.
 
+Known Issues
+------------
+
+The .bin.gz file saved by the app is not an actual archive, as it can't be
+opened with an archive manager. Nevertheless, Stellarium can read it.
+
 TODO
 ----
 
 It has been developed and used only on Linux, so:
-Test on Windows.
 Test on Mac OS.
 
-Adding/removing items.
-Verification of entered values. Item delegates.
+Better verification and auto-completion/auto-suggestion of values with
+item delegates.
 
 In the long term: Support for adding time zone information.

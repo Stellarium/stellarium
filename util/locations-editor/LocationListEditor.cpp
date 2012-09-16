@@ -492,9 +492,10 @@ void LocationListEditor::cloneSelected()
 	if (rows.isEmpty())
 		return;
 	
+	bool appendAtEnd = ui->actionClonedAtTheEnd->isChecked();
 	QList<int>::iterator i = rows.end();
 	while (i != rows.begin())
-		locations->cloneLocation(*(--i));
+		locations->cloneLocation(*(--i), appendAtEnd);
 }
 
 void LocationListEditor::deleteSelected()
