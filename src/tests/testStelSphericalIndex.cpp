@@ -43,7 +43,7 @@ void TestStelSphericalIndex::initTestCase()
 struct CountFuncObject
 {
 	CountFuncObject() : count(0) {;}
-	void operator()(const StelRegionObject* obj)
+	void operator()(const StelRegionObject*)
 	{
 		count++;
 	}
