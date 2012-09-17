@@ -141,7 +141,7 @@ QGLShaderProgram* StelQGLGLSLShader::getProgramFromCache()
 	}
 	foreach(OptionalShader shader, namedVertexShaders)
 	{
-		id += shader.enabled ? reinterpret_cast<ulong>(shader.shader) : 0;
+		id += shader.enabled ? reinterpret_cast<uintptr_t>(shader.shader) : 0;
 	}
 	foreach(QGLShader* shader, defaultFragmentShaders)
 	{
@@ -166,27 +166,27 @@ bool StelQGLGLSLShader::build()
 	// No matching program in cache, need to link a new program.
 	if(cached == NULL)
 	{
-		ulong id = 0;
+		uintptr_t id = 0;
 		QGLShaderProgram* newProgram = new QGLShaderProgram(renderer->getGLContext());
 
 		// Add all the shaders to the program.
 		foreach(QGLShader* shader, defaultVertexShaders)
 		{
 			if(!newProgram->addShader(shader)) {goto FAILED;}
-			id += reinterpret_cast<ulong>(shader);
+			id += reinterpret_cast<uintptr_t>(shader);
 		}
 		foreach(OptionalShader shader, namedVertexShaders)
 		{
 			if(shader.enabled)
 			{
 				if(!newProgram->addShader(shader.shader)) {goto FAILED;}
-				id += reinterpret_cast<ulong>(shader.shader);
+				id += reinterpret_cast<uintptr_t>(shader.shader);
 			}
 		}
 		foreach(QGLShader* shader, defaultFragmentShaders)
 		{
 			if(!newProgram->addShader(shader)) {goto FAILED;}
-			id += reinterpret_cast<ulong>(shader);
+			id += reinterpret_cast<uintptr_t>(shader);
 		}
 		Q_ASSERT_X(id > 0, Q_FUNC_INFO, "Trying to build() a StelQGLGLSLShader "
 		           "but no vertex or fragment shaders were added");
