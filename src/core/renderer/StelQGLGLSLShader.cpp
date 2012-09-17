@@ -20,6 +20,7 @@
 #include "StelQGLGLSLShader.hpp"
 #include "StelQGL2Renderer.hpp"
 
+#include <stdint.h>
 
 int StelQGLGLSLShader::UNIFORM_SIZES[UniformType_max] =
 	{0, sizeof(float), sizeof(Vec2f), sizeof(Vec3f),
@@ -133,10 +134,10 @@ bool StelQGLGLSLShader::addFragmentShader(const QString& source)
 QGLShaderProgram* StelQGLGLSLShader::getProgramFromCache()
 {
 	// Add up pointers to used shaders to get the ID.
-	ulong id = 0;
+	uintptr_t id = 0;
 	foreach(QGLShader* shader, defaultVertexShaders)
 	{
-		id += reinterpret_cast<ulong>(shader);
+		id += reinterpret_cast<uintptr_t>(shader);
 	}
 	foreach(OptionalShader shader, namedVertexShaders)
 	{
@@ -144,7 +145,7 @@ QGLShaderProgram* StelQGLGLSLShader::getProgramFromCache()
 	}
 	foreach(QGLShader* shader, defaultFragmentShaders)
 	{
-		id += reinterpret_cast<ulong>(shader);
+		id += reinterpret_cast<uintptr_t>(shader);
 	}
 
 	// If no such program in cache, return NULL
