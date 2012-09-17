@@ -5,7 +5,10 @@
 #
 
 $PSRCAT	= "./psrcat.db";
-$JSON	= "../resources/catalog.json";
+$JSON	= "./pulsars.json";
+
+$FORMAT = 2;
+$CATVER = 1.41;
 
 open (PSRCAT, "<$PSRCAT");
 @catalog = <PSRCAT>;
@@ -20,8 +23,8 @@ foreach $s (@catalog) {
 
 open (JSON, ">$JSON");
 print JSON "{\n";
-print JSON "\t\"version\": \"0.2.0\",\n";
-print JSON "\t\"shortName\": \"A catalogue of pulsars, based on ATNF Pulsar Catalogue v. 1.41\",\n";
+print JSON "\t\"version\": \"".$FORMAT."\",\n";
+print JSON "\t\"shortName\": \"A catalogue of pulsars, based on ATNF Pulsar Catalogue v. ".$CATVER."\",\n";
 print JSON "\t\"pulsars\":\n";
 print JSON "\t{\n";
 
