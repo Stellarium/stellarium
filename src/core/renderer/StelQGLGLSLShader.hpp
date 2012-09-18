@@ -360,7 +360,7 @@ protected:
 	//!
 	//! In case this happens, some very simple hash algorithm (still on pointers) might 
 	//! be used instead.
-	QMap<ulong, QGLShaderProgram*> programCache;
+	QMap<uintptr_t, QGLShaderProgram*> programCache;
 
 	//! Currently used shader program (linked from default and currently enabled shaders).
 	QGLShaderProgram* program;
