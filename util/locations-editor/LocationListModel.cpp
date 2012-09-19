@@ -320,7 +320,9 @@ bool LocationListModel::dropMimeData(const QMimeData* data,
 	beginInsertRows(QModelIndex(), beginRow, beginRow + count - 1);
 	foreach (const Location& loc, insertedLocations)
 	{
-		locations.insert(row++, new Location(loc));
+		Location* newLocation = new Location(loc);
+		locations.insert(row++, newLocation);
+		addLocationId(newLocation);
 	}
 	endInsertRows();
 	return true;
