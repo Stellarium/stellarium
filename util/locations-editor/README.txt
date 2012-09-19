@@ -5,8 +5,8 @@ Locations list policies
 -----------------------
 
 The original base_locations.txt seems to contain every or almost every notable
-settlement with population >= 15 thousand people. Please remember this number
-when proposing new additions to the list.
+settlement with population >= 15 thousand people. I suggest this number as a
+cut-off when proposing new additions to the list.
 
 If you wish to translate an entry, please clone it and edit the new copy. This
 way, the original string will be still available. Another posibility is to
@@ -34,6 +34,9 @@ The "Also save as binary" option is automatically checked if a project list is l
 
 When saving a list that contains duplicates in binary form, items with duplicateIDs get conflated with the last item with the same ID, the same as in the
 binary saving function in StelLocationMgr.
+
+Due to the way drag-and-drop is implemented, it's possible to move rows from one instance of the app to another,
+or to drop rows into a text editor or a spreadsheet.
 
 Known Issues
 ------------
