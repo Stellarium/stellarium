@@ -268,6 +268,7 @@ bool LocationListEditor::loadFile(const QString& path)
 		}
 	}
 
+	ui->comboBoxFilteredColumn->clear();
 	for (int i = 0; i < locations->columnCount(); i++)
 	{
 		QString column = locations->headerData(i, Qt::Horizontal).toString();
