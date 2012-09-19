@@ -53,9 +53,19 @@ public:
 	int rowCount(const QModelIndex& parent = QModelIndex() ) const;
 	
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole ) const;
+	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
 	Qt::ItemFlags flags(const QModelIndex& index) const;
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+	bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex());
+	QMimeData* mimeData(const QModelIndexList &indexes) const;
+	QStringList mimeTypes () const;
+	bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
 	bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+	// Implemented as a part of the default drag/drop mechanism.
+	// Doesn't work for rows in tables, because on drop shifts the columns if
+	// the row hasn't been dropped in the first column.
+	//bool setItemData(const QModelIndex &index, const QMap<int, QVariant> &roles);
+	Qt::DropActions supportedDropActions() const;
 	
 	//! Insert a Location at the given index.
 	void insertLocation(int row, Location* loc);

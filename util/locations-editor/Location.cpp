@@ -153,6 +153,26 @@ Location* Location::fromLine(const QString& line)
 	return loc;
 }
 
+void Location::toBinary(QDataStream& out)
+{
+	// The strange manglings are because of the discrepancies between my
+	// data structures and Stellarium's model.
+	// Note that there's no time zone field. :(
+	bool dummyUserLocationFlag = false;
+	out << stelName
+	    << region
+	    << countryName
+	    << role
+	    << ((int) (population.toFloat()*1000))
+	    << latitude
+	    << longitude
+	    << altitude
+	    << bortleScaleIndex
+	    << (planetName.isEmpty() ? QString("Earth") : planetName)
+	    << landscapeKey
+	    << dummyUserLocationFlag;
+}
+
 QString Location::stringToCountry(const QString& string)
 {
 	if (mapCodeToCountry.isEmpty())
@@ -219,21 +239,48 @@ void Location::loadCountryCodes()
 
 QDataStream& operator<<(QDataStream& out, const Location& loc)
 {
-	// The strange manglings are because of the discrepancies between my
-	// data structures and Stellarium's model.
-	// Note that there's no time zone field. :(
-	bool dummyUserLocationFlag = false;
-	out << loc.stelName
-	    << loc.region
+	out << loc.name
+	    << loc.stelName
+	    << loc.country
 	    << loc.countryName
-	    << loc.role
-	    << ((int) (loc.population.toFloat()*1000))
-	    << loc.latitude
+	    << loc.region
+	    << loc.planetName
 	    << loc.longitude
+	    << loc.longitudeStr
+	    << loc.latitude
+	    << loc.latitudeStr
 	    << loc.altitude
+	    << loc.timeZone
 	    << loc.bortleScaleIndex
-	    << (loc.planetName.isEmpty() ? QString("Earth") : loc.planetName)
+	    << loc.role
+	    << loc.population
 	    << loc.landscapeKey
-	    << dummyUserLocationFlag;
+	    << loc.stelId
+	    << loc.hasDuplicate
+	    << loc.lineNum;
 	return out;
+}
+
+QDataStream& operator>>(QDataStream& in, Location& loc)
+{
+	in >> loc.name
+	   >> loc.stelName
+	   >> loc.country
+	   >> loc.countryName
+	   >> loc.region
+	   >> loc.planetName
+	   >> loc.longitude
+	   >> loc.longitudeStr
+	   >> loc.latitude
+	   >> loc.latitudeStr
+	   >> loc.altitude
+	   >> loc.timeZone
+	   >> loc.bortleScaleIndex
+	   >> loc.role
+	   >> loc.population
+	   >> loc.landscapeKey
+	   >> loc.stelId
+	   >> loc.hasDuplicate
+	   >> loc.lineNum;
+	return in;
 }

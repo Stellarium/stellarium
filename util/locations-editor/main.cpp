@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	app.setOrganizationName("Stellarium.org");
 	app.setApplicationName("Location List Editor");
 	// The only place the version number is stored.
-	app.setApplicationVersion("0.9.1");
+	app.setApplicationVersion("1.0.0");
 	LocationListEditor mainWindow;
 	mainWindow.show();
 	

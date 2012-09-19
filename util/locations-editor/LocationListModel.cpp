@@ -26,6 +26,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFont>
+#include <QMimeData>
 #include <QTextStream>
 
 LocationListModel::LocationListModel(QObject *parent) :
@@ -158,7 +159,8 @@ bool LocationListModel::saveBinary(QIODevice* file)
 		}
 		
 		// In case of a multi-map, save the last added key?
-		stream << i.key() << *(i.value());
+		stream << i.key();
+		i.value()->toBinary(stream);
 	}
 	return true;
 }
@@ -236,12 +238,16 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 				return loc.latitudeStr;
 			if (role == Qt::ToolTipRole)
 				return loc.latitude;
+			if (role == (Qt::UserRole + 1))
+				return loc.latitude;
 			break;
 			
 		case 6: // Longitude
 			if (role == Qt::DisplayRole || role == Qt::EditRole)
 				return loc.longitudeStr;
 			if (role == Qt::ToolTipRole)
+				return loc.longitude;
+			if (role == (Qt::UserRole + 1))
 				return loc.longitude;
 			break;
 			
@@ -284,12 +290,51 @@ QVariant LocationListModel::data(const QModelIndex& index, int role) const
 	return QVariant();
 }
 
+bool LocationListModel::dropMimeData(const QMimeData* data,
+                                     Qt::DropAction action,
+                                     int row, int column,
+                                     const QModelIndex &parent)
+{
+	Q_UNUSED(column);
+	
+	if (action == Qt::IgnoreAction)
+		return true;
+	
+	// Rows can be dropped only between other rows, not on to of items.
+	if (parent.isValid())
+		return false;
+	
+	// For now, it can accept only the internal format.
+	if (!data->hasFormat("application/x-stellarium-location-list"))
+		return false;
+	
+	QByteArray binData = data->data("application/x-stellarium-location-list");
+	QDataStream dataStream(&binData, QIODevice::ReadOnly);
+	QList<Location> insertedLocations;
+	dataStream >> insertedLocations;
+	
+	int beginRow = 0;
+	if (row > 0)
+		beginRow = row;
+	int count = insertedLocations.count();
+	beginInsertRows(QModelIndex(), beginRow, beginRow + count - 1);
+	foreach (const Location& loc, insertedLocations)
+	{
+		locations.insert(row++, new Location(loc));
+	}
+	endInsertRows();
+	return true;
+}
+
 Qt::ItemFlags LocationListModel::flags(const QModelIndex& index) const
 {
-	if (!index.isValid())
-		return Qt::ItemIsEnabled;
+	Qt::ItemFlags flags = QAbstractTableModel::flags(index) |
+	                      Qt::ItemIsEnabled;
 	
-	return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
+	if (!index.isValid())
+		return flags | Qt::ItemIsDropEnabled;
+
+	return flags | Qt::ItemIsEditable | Qt::ItemIsDragEnabled;
 }
 
 QVariant LocationListModel::headerData(int section,
@@ -369,6 +414,85 @@ QVariant LocationListModel::headerData(int section,
 			return (section + 1);
 	}
 	return QVariant();
+}
+
+bool LocationListModel::insertRows(int row,
+                                   int count,
+                                   const QModelIndex& parent)
+{
+	Q_UNUSED(parent);
+	if (row < 0 || row >= locations.count())
+		return false;
+	int endRow = row + count - 1;
+	
+	beginInsertRows(QModelIndex(), row, endRow);
+	for (int i = row; i <= endRow; i++)
+		locations.insert(i, new Location());
+	endInsertRows();
+	
+	return true;
+}
+
+QMimeData* LocationListModel::mimeData(const QModelIndexList& indexes) const
+{
+	QSet<int> rows;
+	foreach (const QModelIndex& index, indexes)
+	{
+		if (index.row() >= 0)
+			rows.insert(index.row());
+	}
+	
+	QByteArray textData;
+	QTextStream textStream(&textData);
+	textStream.setCodec("UTF-8");
+	QList<Location> exportedLocations;
+	
+	QList<int> sortedRows = rows.toList();
+	foreach (int row, sortedRows)
+	{
+		Location* loc = locations[row];
+		textStream << loc->toLine() << endl;
+		exportedLocations.append(*loc);
+	}
+	
+	QByteArray binaryData;
+	QDataStream dataStream(&binaryData, QIODevice::WriteOnly);
+	dataStream << exportedLocations;
+	
+	QMimeData* mimeData = new QMimeData();
+	mimeData->setData("application/x-stellarium-location-list", binaryData);
+	mimeData->setData("text/tab-separated-values;charset=UTF-8", textData);
+	mimeData->setData("text/plain;charset=UTF-8", textData);
+	
+	return mimeData;
+}
+
+QStringList LocationListModel::mimeTypes() const
+{
+	QStringList types;
+	types << "text/plain;charset=UTF-8";
+	types << "text/tab-separated-values;charset=UTF-8";
+	types << "application/x-stellarium-location-list";
+	return types;
+}
+
+bool LocationListModel::removeRows(int row,
+                                   int count,
+                                   const QModelIndex& parent)
+{
+	Q_UNUSED(parent);
+	
+	if (row >= locations.count() || row + count <= 0)
+		return false;
+	//int endRow = qMax(row + count - 1, locations.count() - 1);;
+	
+	// As this is used only by drag-moving, there's no need for other actions.
+	//beginRemoveRows(QModelIndex(), row, endRow);
+	for (int i = 0; i < count; i++)
+		removeLocation(row);
+	//endRemoveRows();
+	
+	return true;
 }
 
 bool LocationListModel::setData(const QModelIndex& index,
@@ -521,6 +645,85 @@ bool LocationListModel::setData(const QModelIndex& index,
 	return true;
 }
 
+/*
+bool LocationListModel::setItemData(const QModelIndex &index,
+                                    const QMap<int, QVariant> &roles)
+{
+	if (!isValidIndex(index))
+		return false;
+	
+	Location* loc = locations[index.row()];
+	QVariant value = roles[Qt::EditRole];
+	qDebug() << index << index.parent() << value;
+	int column = index.column();
+	switch (column)
+	{
+		case 0:
+			loc->name = loc->stelName = value.toString();
+			break;
+		case 1:
+			loc->region = value.toString();
+			loc->stelName = loc->name;
+			break;
+		case 2:
+		{
+			QString country = value.toString();
+			loc->country = country;
+			loc->countryName = Location::stringToCountry(country);
+			loc->stelName = loc->name;
+		}
+			break;
+		case 3:
+			loc->role = value.toChar();
+			break;
+		case 4:
+			loc->population = value.toString();
+			break;
+		case 5:
+			loc->latitudeStr = value.toString();
+			loc->latitude = roles[Qt::UserRole + 1].toFloat();
+			break;
+		case 6:
+			loc->longitudeStr = value.toString();
+			loc->longitude = roles[Qt::UserRole + 1].toFloat();
+			break;
+		case 7:
+			loc->altitude = value.toInt();
+			break;
+		case 8:
+			loc->bortleScaleIndex = value.toFloat();
+			break;
+		case 9:
+			loc->timeZone = value.toString();
+			break;
+		case 10:
+			loc->planetName = value.toString();
+			break;
+		case 11:
+			loc->landscapeKey = value.toString();
+			break;
+		default:
+			;
+	}
+	
+	if (column >= 0 && column <= 2)
+	{
+		updateDuplicates(loc);
+		loc->hasDuplicate = false;
+		addLocationId(loc);
+	}
+	
+	emit dataChanged(index, index);
+	setModified(true);
+	return true;
+}
+*/
+
+Qt::DropActions LocationListModel::supportedDropActions() const
+{
+	return Qt::MoveAction;
+}
+
 
 void LocationListModel::insertLocation(int row, Location *loc)
 {
@@ -558,6 +761,7 @@ void LocationListModel::removeLocation(int row)
 	
 	Location* loc = locations.takeAt(row);
 	updateDuplicates(loc);
+	delete loc;
 	
 	endRemoveRows();
 	setModified(true);
@@ -577,13 +781,13 @@ Location* LocationListModel::addLocationId(Location* loc, bool skipDuplicates)
 	Location* dupLoc = stelIds.take(id); // In multi-map, returns the most recent
 	if (dupLoc)
 	{
-		qDebug() << "Duplicate found for ID" << id;
+		//qDebug() << "Duplicate found for ID" << id;
 		loc->extendId();
 		dupLoc->extendId();
-		qDebug() << "Extending ID to" << loc->stelId << dupLoc->stelId;
+		//qDebug() << "Extending ID to" << loc->stelId << dupLoc->stelId;
 		if (loc->stelId == dupLoc->stelId)
 		{
-			qDebug() << "Extended IDs match.";
+			//qDebug() << "Extended IDs match.";
 			lastDupLine = dupLoc->lineNum;
 			
 			//Instead of deleting, mark both as duplicates.

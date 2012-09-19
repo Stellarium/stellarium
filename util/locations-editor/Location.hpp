@@ -126,6 +126,11 @@ public:
 	//! @author Bogdan Marinov
 	static Location* fromLine(const QString& line);
 	
+	//! Serialize selected fields into a Stellarium-compatible blob.
+	//! Necessary for saving location lists as binary files.
+	//! No need for the other operator, as the app won't be reading binary lists.
+	void toBinary(QDataStream& out);
+	
 	//! Convert database field string to human-readable country name.
 	//! @param string may contain a two-letter country code or a country name.
 	static QString stringToCountry(const QString& string);
@@ -142,9 +147,10 @@ protected:
 	static QMap<QString,QString> mapCodeToCountry;
 };
 
-//! Serialize the passed Location into a binary blob.
-//! No need for the other operator, as the app won't be reading binary lists.
-//! @author Fabien Chereau (and possibly others)
+//! Output \b all of the location's fields in a binary stream.
+//! The old implementation was moved to Location::toBinary().
 QDataStream& operator<<(QDataStream& out, const Location& loc);
+//! 
+QDataStream& operator>>(QDataStream& in, Location& loc);
 
 #endif // LOCATION_HPP
