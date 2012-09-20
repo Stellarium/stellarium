@@ -100,52 +100,54 @@ Observability::Observability()
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Setup defaults if not present
-	if (!conf->contains("Observability/font_size"))
-		conf->setValue("Observability/font_size", 15);
+	conf->beginGroup("Observability");
+	if (!conf->contains("font_size"))
+		conf->setValue("font_size", 15);
 
-	if (!conf->contains("Observability/font_color"))
-		conf->setValue("Observability/font_color", "0,0.5,1");
+	if (!conf->contains("font_color"))
+		conf->setValue("font_color", "0,0.5,1");
 
-	if (!conf->contains("Observability/show_AcroCos"))
-		conf->setValue("Observability/show_AcroCos", true);
+	if (!conf->contains("show_AcroCos"))
+		conf->setValue("show_AcroCos", true);
 
-	if (!conf->contains("Observability/show_Good_Nights"))
-		conf->setValue("Observability/show_Good_Nights", true);
+	if (!conf->contains("show_Good_Nights"))
+		conf->setValue("show_Good_Nights", true);
 
-	if (!conf->contains("Observability/show_Best_Night"))
-		conf->setValue("Observability/show_Best_Night", true);
+	if (!conf->contains("show_Best_Night"))
+		conf->setValue("show_Best_Night", true);
 
-	if (!conf->contains("Observability/show_Today"))
-		conf->setValue("Observability/show_Today", true);
+	if (!conf->contains("show_Today"))
+		conf->setValue("show_Today", true);
 
-	if (!conf->contains("Observability/Sun_Altitude"))
-		conf->setValue("Observability/Sun_Altitude", 12);
+	if (!conf->contains("Sun_Altitude"))
+		conf->setValue("Sun_Altitude", 12);
 
-	if (!conf->contains("Observability/show_FullMoon"))
-		conf->setValue("Observability/show_FullMoon", true);
+	if (!conf->contains("show_FullMoon"))
+		conf->setValue("show_FullMoon", true);
 
-//	if (!conf->contains("Observability/show_Crescent"))
-//		conf->setValue("Observability/show_Crescent", true);
+//	if (!conf->contains("show_Crescent"))
+//		conf->setValue("show_Crescent", true);
 
-//	if (!conf->contains("Observability/show_SuperMoon"))
-//		conf->setValue("Observability/show_SuperMoon", true);
+//	if (!conf->contains("show_SuperMoon"))
+//		conf->setValue("show_SuperMoon", true);
 
 
 	// Load settings from main config file
-	fontSize = conf->value("Observability/font_size",15).toInt();
-	iAltitude = conf->value("Observability/Sun_Altitude",12).toInt();
+	fontSize = conf->value("font_size",15).toInt();
+	iAltitude = conf->value("Sun_Altitude",12).toInt();
 	AstroTwiAlti = -((double) iAltitude)/Rad2Deg ;
 	font.setPixelSize(fontSize);
-	QString fontColorStr = conf->value("Observability/font_color", "0,0.5,1").toString();
+	QString fontColorStr = conf->value("font_color", "0,0.5,1").toString();
 	fontColor = StelUtils::strToVec3f(fontColorStr);
-	show_AcroCos = conf->value("Observability/show_AcroCos", true).toBool();
-	show_Good_Nights = conf->value("Observability/show_Good_Nights", true).toBool();
-	show_Best_Night = conf->value("Observability/show_Best_Night", true).toBool();
-	show_Today = conf->value("Observability/show_Today", true).toBool();
-	show_FullMoon = conf->value("Observability/show_FullMoon", true).toBool();
-//	show_Crescent = conf->value("Observability/show_Crescent", true).toBool();
-//	show_SuperMoon = conf->value("Observability/show_SuperMoon", true).toBool();
+	show_AcroCos = conf->value("show_AcroCos", true).toBool();
+	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
+	show_Best_Night = conf->value("show_Best_Night", true).toBool();
+	show_Today = conf->value("show_Today", true).toBool();
+	show_FullMoon = conf->value("show_FullMoon", true).toBool();
+//	show_Crescent = conf->value("show_Crescent", true).toBool();
+//	show_SuperMoon = conf->value("show_SuperMoon", true).toBool();
 
+	conf->endGroup();
 /////////////////////////////////
 
 
@@ -1510,42 +1512,48 @@ void Observability::restoreDefaultConfigIni(void)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
+	conf->beginGroup("Observability");
+
 	// delete all existing settings...
 	conf->remove("");
 
 	// Set defaults
-	conf->setValue("Observability/font_size", 15);
-	conf->setValue("Observability/Sun_Altitude", 12);
-	conf->setValue("Observability/font_color", "0,0.5,1");
-	conf->setValue("Observability/show_AcroCos", true);
-	conf->setValue("Observability/show_Good_Nights", true);
-	conf->setValue("Observability/show_Best_Night", true);
-	conf->setValue("Observability/show_Today", true);
-	conf->setValue("Observability/show_FullMoon", true);
-//	conf->setValue("Observability/show_Crescent", true);
-//	conf->setValue("Observability/show_SuperMoon", true);
+	conf->setValue("font_size", 15);
+	conf->setValue("Sun_Altitude", 12);
+	conf->setValue("font_color", "0,0.5,1");
+	conf->setValue("show_AcroCos", true);
+	conf->setValue("show_Good_Nights", true);
+	conf->setValue("show_Best_Night", true);
+	conf->setValue("show_Today", true);
+	conf->setValue("show_FullMoon", true);
+//	conf->setValue("show_Crescent", true);
+//	conf->setValue("show_SuperMoon", true);
+
+	conf->endGroup();
 }
 
 void Observability::readSettingsFromConfig(void)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	// Load settings from main config file
-	fontSize = conf->value("Observability/font_size",15).toInt();
-	font.setPixelSize(fontSize);
-	fontColor = StelUtils::strToVec3f(conf->value("Observability/font_color", "0,0.5,1").toString());
-	show_AcroCos = conf->value("Observability/show_AcroCos", true).toBool();
-	show_Good_Nights = conf->value("Observability/show_Good_Nights", true).toBool();
-	show_Best_Night = conf->value("Observability/show_Best_Night", true).toBool();
-	show_Today = conf->value("Observability/show_Today", true).toBool();
-	show_FullMoon = conf->value("Observability/show_FullMoon", true).toBool();
-//	show_Crescent = conf->value("Observability/show_Crescent", true).toBool();
-//	show_SuperMoon = conf->value("Observability/show_SuperMoon", true).toBool();
+	conf->beginGroup("Observability");
 
-	iAltitude = conf->value("Observability/Sun_Altitude", 12).toInt();
+	// Load settings from main config file
+	fontSize = conf->value("font_size",15).toInt();
+	font.setPixelSize(fontSize);
+	fontColor = StelUtils::strToVec3f(conf->value("font_color", "0,0.5,1").toString());
+	show_AcroCos = conf->value("show_AcroCos", true).toBool();
+	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
+	show_Best_Night = conf->value("show_Best_Night", true).toBool();
+	show_Today = conf->value("show_Today", true).toBool();
+	show_FullMoon = conf->value("show_FullMoon", true).toBool();
+//	show_Crescent = conf->value("show_Crescent", true).toBool();
+//	show_SuperMoon = conf->value("show_SuperMoon", true).toBool();
+
+	iAltitude = conf->value("Sun_Altitude", 12).toInt();
 	AstroTwiAlti  = -((double)iAltitude)/Rad2Deg ;
 	
-
+	conf->endGroup();
 }
 
 void Observability::saveSettingsToConfig(void)
@@ -1553,16 +1561,18 @@ void Observability::saveSettingsToConfig(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString fontColorStr = QString("%1,%2,%3").arg(fontColor[0],0,'f',2).arg(fontColor[1],0,'f',2).arg(fontColor[2],0,'f',2);
 	// Set updated values
-	conf->setValue("Observability/font_size", fontSize);
-	conf->setValue("Observability/Sun_Altitude", iAltitude);
-	conf->setValue("Observability/font_color", fontColorStr);
-	conf->setValue("Observability/show_AcroCos", show_AcroCos);
-	conf->setValue("Observability/show_Good_Nights", show_Good_Nights);
-	conf->setValue("Observability/show_Best_Night", show_Best_Night);
-	conf->setValue("Observability/show_Today", show_Today);
-	conf->setValue("Observability/show_FullMoon", show_FullMoon);
-//	conf->setValue("Observability/show_Crescent", show_Crescent);
-//	conf->setValue("Observability/show_SuperMoon", show_SuperMoon);
+	conf->beginGroup("Observability");
+	conf->setValue("font_size", fontSize);
+	conf->setValue("Sun_Altitude", iAltitude);
+	conf->setValue("font_color", fontColorStr);
+	conf->setValue("show_AcroCos", show_AcroCos);
+	conf->setValue("show_Good_Nights", show_Good_Nights);
+	conf->setValue("show_Best_Night", show_Best_Night);
+	conf->setValue("show_Today", show_Today);
+	conf->setValue("show_FullMoon", show_FullMoon);
+//	conf->setValue("show_Crescent", show_Crescent);
+//	conf->setValue("show_SuperMoon", show_SuperMoon);
+	conf->endGroup();
 }
 
 
