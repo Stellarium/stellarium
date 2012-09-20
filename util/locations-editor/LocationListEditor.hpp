@@ -88,8 +88,10 @@ private:
 	//! @returns -1 if there's no valid current item (really unlikely).
 	//! @warning There's a difference between "selected" and "current". See the Qt documentation.
 	int getIndexOfCurrentRow();
-	//! Set the current row to the location with that index in the model.
-	void setCurrentRowIndex(int row);
+	//! Set the current location and open its name for editing.
+	void setCurrentlyEditedLocation(int row);
+	//! Set the current row and scroll to the item.
+	void goToRow(int row);
 	
 private slots:
 	//! Prompts for file location and opens that file.
@@ -118,8 +120,12 @@ private slots:
 	//! Delete the currently selected rows.
 	//! @warning There's a difference between "selected" and "current". See the Qt documentation.
 	void deleteSelected();
+	//! Prompt the user for a row number and center that row in the view.
+	void goToRow();
 	//! Shows a window with author and copyright information.
 	void showAboutWindow();
+	//! 
+	void test();
 	
 	//! Sets the view column affected by the search/filter field.
 	void setFilteredColumn(int column);
