@@ -122,6 +122,8 @@ private slots:
 	void deleteSelected();
 	//! Prompt the user for a row number and center that row in the view.
 	void goToRow();
+	//! Go to the next location with a duplicate ID in the list.
+	void goToNextDuplicate();
 	//! Shows a window with author and copyright information.
 	void showAboutWindow();
 	//! 

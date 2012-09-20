@@ -65,6 +65,8 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	        this, SLOT(deleteSelected()));
 	connect(ui->actionGoToRow, SIGNAL(triggered()),
 	        this, SLOT(goToRow()));
+	connect(ui->actionNextDuplicate, SIGNAL(triggered()),
+	        this, SLOT(goToNextDuplicate()));
 	connect(ui->actionExit, SIGNAL(triggered()),
 	        this, SLOT(close()));
 	connect(ui->actionAbout, SIGNAL(triggered()),
@@ -545,6 +547,16 @@ void LocationListEditor::goToRow()
 		goToRow(row);
 	}
 }
+
+void LocationListEditor::goToNextDuplicate()
+{
+	int currentRow = getIndexOfCurrentRow();
+	bool wrapAround = ui->actionDuplicateWrapAround->isChecked();
+	int duplicateRow = locations->findNextDuplicateRow(currentRow, wrapAround);
+	if (duplicateRow >= 0)
+		goToRow(duplicateRow);
+}
+
 
 void LocationListEditor::showAboutWindow()
 {

@@ -165,6 +165,34 @@ bool LocationListModel::saveBinary(QIODevice* file)
 	return true;
 }
 
+
+int LocationListModel::findNextDuplicateRow(int startRow, bool wrapAround) const
+{
+	int count = locations.count();
+	if (startRow < 0 || startRow >= count)
+		return -1;
+	
+	Location* loc = locations[startRow];
+	if (!loc->hasDuplicate)
+		return -1;
+	
+	for (int row = startRow + 1; row < count; row++)
+	{
+		if (locations[row]->stelId == loc->stelId)
+			return row;
+		
+		if (wrapAround && (row == (count - 1)))
+		{
+			row = -1;
+			count = startRow;
+			wrapAround = false;
+		}
+	}
+	
+	return -1;
+}
+
+
 int LocationListModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent);
