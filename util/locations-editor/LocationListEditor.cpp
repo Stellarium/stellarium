@@ -27,6 +27,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QInputDialog>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include "kfilterdev.h" // For compressing binary lists
@@ -62,10 +63,14 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	        this, SLOT(cloneSelected()));
 	connect(ui->actionDelete, SIGNAL(triggered()),
 	        this, SLOT(deleteSelected()));
+	connect(ui->actionGoToRow, SIGNAL(triggered()),
+	        this, SLOT(goToRow()));
 	connect(ui->actionExit, SIGNAL(triggered()),
 	        this, SLOT(close()));
 	connect(ui->actionAbout, SIGNAL(triggered()),
 	        this, SLOT(showAboutWindow()));
+	connect(ui->actionTest, SIGNAL(triggered()),
+	        this, SLOT(test()));
 	
 	connect(ui->comboBoxFilteredColumn, SIGNAL(currentIndexChanged(int)),
 	        this, SLOT(setFilteredColumn(int)));
@@ -144,6 +149,7 @@ bool LocationListEditor::checkIfFileIsLoaded()
 	
 	bool enabled = (locations != 0);
 	ui->menuEdit->setEnabled(enabled);
+	ui->menuNavigation->setEnabled(enabled);
 	ui->actionSave->setEnabled(enabled);
 	ui->actionSaveAs->setEnabled(enabled);
 	ui->actionBinary->setEnabled(enabled);
@@ -387,7 +393,7 @@ int LocationListEditor::getIndexOfCurrentRow()
 		return -1;
 }
 
-void LocationListEditor::setCurrentRowIndex(int row)
+void LocationListEditor::setCurrentlyEditedLocation(int row)
 {
 	QModelIndex index = locations->index(row, 0);
 	if (!index.isValid())
@@ -398,6 +404,16 @@ void LocationListEditor::setCurrentRowIndex(int row)
 	//                                QItemSelectionModel::NoUpdate);
 	ui->tableView->setCurrentIndex(proxyIndex);
 	ui->tableView->edit(proxyIndex);
+}
+
+void LocationListEditor::goToRow(int row)
+{
+	QModelIndex index = locations->index(row, 0);
+	if (!index.isValid())
+		return;
+	QModelIndex proxyIndex = proxyModel->mapFromSource(index);
+	ui->tableView->setCurrentIndex(proxyIndex);
+	ui->tableView->scrollTo(proxyIndex, QTableView::PositionAtCenter);	
 }
 
 
@@ -464,7 +480,7 @@ void LocationListEditor::addNew()
 	Location* loc = new Location();
 	loc->stelName = loc->name = "New Location";
 	locations->insertLocation(locations->rowCount(), loc);
-	setCurrentRowIndex(locations->rowCount() - 1);
+	setCurrentlyEditedLocation(locations->rowCount() - 1);
 }
 
 void LocationListEditor::insertBefore()
@@ -476,7 +492,7 @@ void LocationListEditor::insertBefore()
 	Location* loc = new Location();
 	loc->stelName = loc->name = "New Location";
 	locations->insertLocation(row, loc);
-	setCurrentRowIndex(row);
+	setCurrentlyEditedLocation(row);
 }
 
 void LocationListEditor::insertAfter()
@@ -489,7 +505,7 @@ void LocationListEditor::insertAfter()
 	Location* loc = new Location();
 	loc->stelName = loc->name = "New Location";
 	locations->insertLocation(row, loc);
-	setCurrentRowIndex(row);
+	setCurrentlyEditedLocation(row);
 }
 
 void LocationListEditor::cloneSelected()
@@ -515,6 +531,21 @@ void LocationListEditor::deleteSelected()
 		locations->removeLocation(*(--i));
 }
 
+void LocationListEditor::goToRow()
+{
+	bool ok = false;
+	int row = QInputDialog::getInt(this,
+	                               "Go to row...",
+	                               "Row number:",
+	                               1, 0, locations->rowCount(), 1,
+	                               &ok);
+	row -= 1; // Visible rows start counting from 1.
+	if (ok && row >= 0 && row < locations->rowCount())
+	{
+		goToRow(row);
+	}
+}
+
 void LocationListEditor::showAboutWindow()
 {
 	QString s;
@@ -523,6 +554,11 @@ void LocationListEditor::showAboutWindow()
 	s += "Copyright (c) 2012 Bogdan Marinov (and others)<br/><br/>";
 	s += "The <b>Location List Editor</b> is a tool created to ease the maintenance of Stellarium location list files - both the base location file and user-defined lists of locations.";
 	QMessageBox::about(this, "About the program", s);
+}
+
+void LocationListEditor::test()
+{
+	//
 }
 
 void LocationListEditor::setFilteredColumn(int column)
