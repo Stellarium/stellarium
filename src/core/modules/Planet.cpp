@@ -191,6 +191,9 @@ bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
 	  "uniform sampler2D ringS;\n"
 	  "uniform bool isRing;\n"
 	  "\n"
+	  "uniform bool isMoon;\n"
+	  "uniform sampler2D earthShadow;\n"
+	  "\n"
 	  "bool visible(vec3 normal, vec3 light)\n"
 	  "{\n"
 	  "    return (dot(light, normal) > 0.0);\n"
@@ -254,34 +257,42 @@ bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
 	  "\n"
 	  "            float illumination = 1.0;\n"
 	  "\n"
-	  "            // distance too far -> red\n"
+	  "            // distance too far\n"
 	  "            if(d >= R + r)\n"
 	  "            {\n"
 	  "                illumination = 1.0;\n"
 	  "            }\n"
-	  "            // umbra -> blue\n"
+	  "            // umbra\n"
 	  "            else if(r >= R + d)\n"
 	  "            {\n"
-	  "                illumination = 0.0;\n"
+	  "                if(isMoon)\n"
+	  "                    illumination = d / (r - R) * 0.6;\n"
+	  "                else"
+	  "                    illumination = 0.0;\n"
 	  "            }\n"
-	  "            // penumbra completely inside -> green\n"
+	  "            // penumbra completely inside\n"
 	  "            else if(d + r <= R)\n"
 	  "            {\n"
 	  "                illumination = 1.0 - r * r / (R * R);\n"
 	  "            }\n"
-	  "            // penumbra partially inside -> light blue\n"
+	  "            // penumbra partially inside\n"
 	  "            else\n"
 	  "            {\n"
-	  "                float x = (R * R + d * d - r * r) / (2.0 * d);\n"
+	  "                if(isMoon)\n"
+	  "                    illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
+	  "                else\n"
+	  "                {\n"
+	  "                    float x = (R * R + d * d - r * r) / (2.0 * d);\n"
 	  "\n"
-	  "                float alpha = acos(x / R);\n"
-	  "                float beta = acos((d - x) / r);\n"
+	  "                    float alpha = acos(x / R);\n"
+	  "                    float beta = acos((d - x) / r);\n"
 	  "\n"
-	  "                float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
-	  "                float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
-	  "                float AS = R * R * 2.0 * asin(1.0);\n"
+	  "                    float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
+	  "                    float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
+	  "                    float AS = R * R * 2.0 * asin(1.0);\n"
 	  "\n"
-	  "                illumination = 1.0 - (AR + Ar) / AS;\n"
+	  "                    illumination = 1.0 - (AR + Ar) / AS;\n"
+	  "                }\n"
 	  "            }\n"
 	  "\n"
 	  "            if(illumination < final_illumination)\n"
@@ -290,7 +301,13 @@ bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
 	  "    }\n"
 	  "\n"
 	  "    vec4 litColor = (isRing ? 1.0 : lambert) * final_illumination * diffuse + ambientLight;\n"
-	  "    gl_FragColor = texture2D(tex, texc) * litColor;\n"
+	  "    if(isMoon && final_illumination < 1.0)\n"
+	  "    {\n"
+	  "        vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));\n"
+	  "        gl_FragColor = mix(texture2D(tex, texc) * litColor, shadowColor, shadowColor.a);\n"
+	  "    }\n"
+	  "    else\n"
+	  "        gl_FragColor = texture2D(tex, texc) * litColor;\n"
 	  "}\n"
 	  "\n"))
 	{
@@ -1319,11 +1336,18 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 			shader->setUniformValue("isRing", false);
 
 			const bool ring = (rings != NULL) && rings->texture;
-			if(ring){rings->texture->bind(2);}
+			if(ring)
+				rings->texture->bind(2);
 			shader->setUniformValue("ring", ring);
 			shader->setUniformValue("outerRadius", ring ? static_cast<float>(rings->radiusMax) : 0.0f);
 			shader->setUniformValue("innerRadius", ring ? static_cast<float>(rings->radiusMin) : 0.0f);
 			shader->setUniformValue("ringS",       ring ? 2 : 0);
+
+			const bool moon = this == GETSTELMODULE(SolarSystem)->getMoon();
+			if(moon)
+				planetGraphics.texEarthShadow->bind(3);
+			shader->setUniformValue("isMoon", moon);
+			shader->setUniformValue("earthShadow", moon ? 3: 0);
 		}
 
 		drawUnlitSphere(renderer, projector);

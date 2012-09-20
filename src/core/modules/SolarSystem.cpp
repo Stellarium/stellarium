@@ -262,6 +262,12 @@ void SolarSystem::loadPlanets()
 			}
 		}
 	}
+
+	shadowPlanetCount = 0;
+
+	foreach (const PlanetP& planet, systemPlanets)
+		if(planet->parent != sun || !planet->satellites.isEmpty())
+			shadowPlanetCount++;
 }
 
 bool SolarSystem::loadPlanets(const QString& filePath)
@@ -935,8 +941,22 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
 {
 	// Acquire shadow informations
-	const int planetCount = systemPlanets.size();
-	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(planetCount);
+	if(shadowModelMatricesBuffer.size() < shadowPlanetCount)
+	{
+		shadowModelMatricesBuffer.resize(shadowPlanetCount);
+	}
+
+	Mat4d* modelMatrices = shadowModelMatricesBuffer.data();
+	int p = 1;
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		if(planet->parent != sun || !planet->satellites.isEmpty())
+		{
+			planet->computeModelMatrix(modelMatrices[planet == sun ? 0 : p++]);
+		}
+	}
+
+	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(shadowPlanetCount);
 
 	if(shadowInfoBuffer.size() < size * size)
 	{
@@ -947,42 +967,24 @@ StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
 	Vec4f* data = shadowInfoBuffer.data();
 	memset(data, '\0', size * size * sizeof(Vec4f));
 
-	if(shadowModelMatricesBuffer.size() < planetCount)
-	{
-		shadowModelMatricesBuffer.resize(planetCount);
-	}
-
-	Mat4d* modelMatrices = shadowModelMatricesBuffer.data();
-	int p = 0;
-	foreach (const PlanetP& planet, systemPlanets)
-	{
-		planet->computeModelMatrix(modelMatrices[p++]);
-	}
-
 	int y = 1;
-	int i = -1;
 
 	foreach (const PlanetP& target, systemPlanets)
 	{
-		i++;
-
-		if(target == sun)
+		if(target == sun || (target->parent == sun && target->satellites.isEmpty()))
 			continue;
 
-		const Mat4d mTarget = modelMatrices[i].inverse();
+		const Mat4d mTarget = modelMatrices[y].inverse();
 		data[y * size] = Vec4f(mTarget[12], mTarget[13], mTarget[14], sun->getRadius());
 
 		int x = 1;
-		int j = -1;
 
 		foreach (const PlanetP& source, systemPlanets)
 		{
-			j++;
-
-			if(source == sun)
+			if(source == sun || (source->parent == sun && source->satellites.isEmpty()))
 				continue;
 
-			const Mat4d& mSource(modelMatrices[j]);
+			const Mat4d& mSource(modelMatrices[x]);
 			const Vec4d position = mTarget * mSource.getColumn(3);
 
 			data[y * size + x] = Vec4f(position[0], position[1], position[2], source->getRadius());
@@ -1033,7 +1035,7 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 
 		sharedPlanetGraphics.planetShader = sharedPlanetGraphics.shadowPlanetShader;
 		sharedPlanetGraphics.info.info = 1;
-		sharedPlanetGraphics.info.infoCount = systemPlanets.size();
+		sharedPlanetGraphics.info.infoCount = shadowPlanetCount;
 		const QSize size = shadowInfo->getDimensions();
 		Q_ASSERT_X(size.width() == size.height(), Q_FUNC_INFO,
 		           "Shadow info texture is not square");
@@ -1045,13 +1047,20 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 		int i = 1;
 		foreach (const PlanetP& p, systemPlanets)
 		{
-			sharedPlanetGraphics.info.current = p != sun ? i : 0;
-			p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+			if((p == sun || (p->parent == sun && p->satellites.isEmpty())) && sharedPlanetGraphics.planetShader == sharedPlanetGraphics.shadowPlanetShader)
+			{
+				sharedPlanetGraphics.info.current = 0;
+				sharedPlanetGraphics.planetShader = sharedPlanetGraphics.simplePlanetShader;
+				p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+				sharedPlanetGraphics.planetShader = sharedPlanetGraphics.shadowPlanetShader;
+			}
+			else
+			{
+				sharedPlanetGraphics.info.current = i;
+				p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
 
-			if(p == sun)
-				continue;
-
-			i++;
+				i++;
+			}
 		}
 
 		delete shadowInfo;
