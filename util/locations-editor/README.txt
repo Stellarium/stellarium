@@ -27,8 +27,12 @@ Alternatively, from the command line, run:
 Usage
 -----
 
-If you run it from the /utils directory, it will be able to sniff out and load
-the checkout's base_locations.txt file in the /data directory.
+If you run it from the /utils/locations-editor directory, it will be able to
+detect and load the checkout's base_locations.txt file in the /data directory.
+
+If Qt Creator had built the project in a subdirectory (/debug or /release),
+set the working directory ("Projects" -> "Run Settings") to the /locations-editor
+directory, otherwise the application won't detect base_locations.txt.
 
 The "Also save as binary" option is automatically checked if a project list is loaded and unchecked when a user list is loaded.
 

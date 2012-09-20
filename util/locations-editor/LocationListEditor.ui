@@ -72,7 +72,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLocations">
@@ -108,10 +108,16 @@
     <addaction name="actionClonedAtTheEnd"/>
     <addaction name="separator"/>
     <addaction name="actionDelete"/>
-    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuNavigation">
+    <property name="title">
+     <string>&amp;Navigation</string>
+    </property>
+    <addaction name="actionGoToRow"/>
    </widget>
    <addaction name="menuLocations"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuNavigation"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -272,6 +278,19 @@
    </property>
    <property name="statusTip">
     <string>Add cloned locations at the end of the list</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>Test</string>
+   </property>
+  </action>
+  <action name="actionGoToRow">
+   <property name="text">
+    <string>&amp;Go to row...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
    </property>
   </action>
  </widget>
