@@ -48,6 +48,14 @@ public:
 	
 	bool isModified() const {return wasModified;}
 	
+	//! Find the next location with a duplicate ID in the list.
+	//! @param startRow Row number of the location with the original ID.
+	//! @param wrapAround If true, return to the beginning of the list
+	//! if the end has been reached without any result.
+	//! @returns -1 if no row has been found or if the location
+	//! has no duplicates (determined by Location::hasDuplicate flag).
+	int findNextDuplicateRow(int startRow, bool wrapAround = false) const;
+	
 	// Reimplemented:
 	int columnCount(const QModelIndex& parent = QModelIndex() ) const;
 	int rowCount(const QModelIndex& parent = QModelIndex() ) const;
@@ -81,6 +89,7 @@ signals:
 	void modified(bool modified);
 	
 public slots:
+	//! Marks the model as modified and emits modified().
 	void setModified(bool changed = true);
 	
 private:

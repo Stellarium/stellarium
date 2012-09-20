@@ -114,6 +114,9 @@
      <string>&amp;Navigation</string>
     </property>
     <addaction name="actionGoToRow"/>
+    <addaction name="separator"/>
+    <addaction name="actionNextDuplicate"/>
+    <addaction name="actionDuplicateWrapAround"/>
    </widget>
    <addaction name="menuLocations"/>
    <addaction name="menuEdit"/>
@@ -291,6 +294,25 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionNextDuplicate">
+   <property name="text">
+    <string>Go to next &amp;duplicate</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionDuplicateWrapAround">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Wrap around</string>
    </property>
   </action>
  </widget>
