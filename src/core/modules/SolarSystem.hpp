@@ -282,6 +282,9 @@ private:
 	//! shadow info texture.
 	QVector<Mat4d> shadowModelMatricesBuffer;
 
+	//! Used to count how many planets actually need shadow information
+	int shadowPlanetCount;
+
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
