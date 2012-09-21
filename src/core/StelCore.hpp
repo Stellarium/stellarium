@@ -358,6 +358,38 @@ public slots:
 	//! on the current planetary body on which the observer is located.
 	void subtractSiderealYear();
 
+	//! Add one synodic month to the simulation time.
+	void addSynodicMonth();
+
+	//! Add one draconic year to the simulation time.
+	void addDraconicYear();
+	//! Add one draconic month to the simulation time.
+	void addDraconicMonth();
+
+	//! Add one anomalistic month to the simulation time.
+	void addAnomalisticMonth();
+
+	//! Add one mean tropical month to the simulation time.
+	void addTropicalMonth();
+	//! Add one mean tropical year to the simulation time.
+	void addTropicalYear();
+
+	//! Subtract one synodic month to the simulation time.
+	void subtractSynodicMonth();
+
+	//! Subtract one draconic year to the simulation time.
+	void subtractDraconicYear();
+	//! Subtract one draconic month to the simulation time.
+	void subtractDraconicMonth();
+
+	//! Subtract one anomalistic month to the simulation time.
+	void subtractAnomalisticMonth();
+
+	//! Subtract one mean tropical month to the simulation time.
+	void subtractTropicalMonth();
+	//! Subtract one mean tropical year to the simulation time.
+	void subtractTropicalYear();
+
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)
 	void addSolarDays(double d);

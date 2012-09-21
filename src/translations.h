@@ -492,6 +492,12 @@ class Translations
 		N_("Add 1 solar day");
 		N_("Add 1 solar hour");
 		N_("Add 1 solar week");
+		N_("Add 1 synodic month");
+		N_("Add 1 draconic month");
+		N_("Add 1 anomalistic month");
+		N_("Add 1 mean tropical month");
+		N_("Add 1 draconic year");
+		N_("Add 1 mean tropical year");
 		N_("Slow down the script execution rate");
 		N_("Decrease time speed");
 		N_("Decrease time speed (a little)");
@@ -512,6 +518,12 @@ class Translations
 		N_("Subtract 1 solar day");
 		N_("Subtract 1 solar hour");
 		N_("Subtract 1 solar week");
+		N_("Subtract 1 synodic month");
+		N_("Subtract 1 draconic month");
+		N_("Subtract 1 anomalistic month");
+		N_("Subtract 1 mean tropical month");
+		N_("Subtract 1 draconic year");
+		N_("Subtract 1 mean tropical year");
 		N_("Display Options");
 		N_("Flip scene horizontally");
 		N_("Full-screen mode");

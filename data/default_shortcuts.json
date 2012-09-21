@@ -506,6 +506,13 @@
 					"checkable": false,
 					"autorepeat": true
 				},
+				"actionSubtract_Sidereal_Month":
+				{
+					"text": "Subtract 1 sidereal month",
+					"primaryKey": "Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
 				"actionAdd_Sidereal_Year":
 				{
 					"text": "Add 1 sidereal year",
@@ -517,6 +524,90 @@
 				{
 					"text": "Subtract 1 sidereal year",
 					"primaryKey": "Ctrl+Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Synodic_Month":
+				{
+					"text": "Add 1 synodic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Synodic_Month":
+				{
+					"text": "Subtract 1 synodic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Draconic_Month":
+				{
+					"text": "Add 1 draconic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Draconic_Month":
+				{
+					"text": "Subtract 1 draconic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Tropical_Month":
+				{
+					"text": "Add 1 mean tropical month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Tropical_Month":
+				{
+					"text": "Subtract 1 mean tropical month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Anomalistic_Month":
+				{
+					"text": "Add 1 anomalistic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Anomalistic_Month":
+				{
+					"text": "Subtract 1 anomalistic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Draconic_Year":
+				{
+					"text": "Add 1 draconic year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Draconic_Year":
+				{
+					"text": "Subtract 1 draconic year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Tropical_Year":
+				{
+					"text": "Add 1 mean tropical year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Tropical_Year":
+				{
+					"text": "Subtract 1 mean tropical year",
+					"primaryKey": "",
 					"checkable": false,
 					"autorepeat": true
 				}
