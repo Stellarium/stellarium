@@ -914,6 +914,35 @@ void StelCore::addSiderealYear()
 	addSolarDays(days);
 }
 
+void StelCore::addSynodicMonth()
+{
+	addSolarDays(29.530588853);
+}
+
+void StelCore::addDraconicMonth()
+{
+	addSolarDays(27.212220817);
+}
+
+void StelCore::addTropicalMonth()
+{
+	addSolarDays(27.321582241);
+}
+
+void StelCore::addAnomalisticMonth()
+{
+	addSolarDays(27.554549878);
+}
+
+void StelCore::addDraconicYear()
+{
+	addSolarDays(346.620075883);
+}
+
+void StelCore::addTropicalYear()
+{
+	addSolarDays(365.2421897);
+}
 
 void StelCore::subtractHour()
 {
@@ -953,6 +982,36 @@ void StelCore::subtractSiderealYear()
 		days = home->getSiderealPeriod();
 
 	addSolarDays(-days);
+}
+
+void StelCore::subtractSynodicMonth()
+{
+	addSolarDays(-29.530588853);
+}
+
+void StelCore::subtractDraconicMonth()
+{
+	addSolarDays(-27.212220817);
+}
+
+void StelCore::subtractTropicalMonth()
+{
+	addSolarDays(-27.321582241);
+}
+
+void StelCore::subtractAnomalisticMonth()
+{
+	addSolarDays(-27.554549878);
+}
+
+void StelCore::subtractDraconicYear()
+{
+	addSolarDays(-346.620075883);
+}
+
+void StelCore::subtractTropicalYear()
+{
+	addSolarDays(-365.2421897);
 }
 
 void StelCore::addSolarDays(double d)
