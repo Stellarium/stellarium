@@ -681,7 +681,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{
-		renderer->drawText(TextParams(xLine,yLine,"THIS YEAR:"));
+		renderer->drawText(TextParams(xLine,yLine,q_("THIS YEAR:")));
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= spacing;
