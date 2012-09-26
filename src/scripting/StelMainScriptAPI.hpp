@@ -114,7 +114,28 @@ public slots:
 	//! - dec : declenation angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! @deprecated Use getObjectInfo()
 	QVariantMap getObjectPosition(const QString& name);
+
+	//! Fetch a map with data about an object's position, magnitude and so on
+	//! @param name is the English name of the object for which data will be
+	//! returned.
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
+	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (extincted)
+	//! - size : angular size in decimal degrees
+	//! - localized-name : localized name
+	QVariantMap getObjectInfo(const QString& name);
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
