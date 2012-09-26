@@ -452,8 +452,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		oss << q_("Ecliptic Geocentric (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) << "<br>";
-		oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+		oss << q_("Ecliptic Topocentric (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) << "<br>";
+		oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
 	}
 
 	if (flags&Distance)
