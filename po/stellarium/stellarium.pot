@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-23 19:06+0700\n"
+"POT-Creation-Date: 2012-09-26 18:56+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,12 +122,12 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:455
 #, qt-format
-msgid "Ecliptic Geocentric (of date): %1/%2"
+msgid "Ecliptic Topocentric (of date): %1/%2"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
-msgid "Obliquity (of date): %1"
+msgid "Obliquity (of date, for Earth): %1"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
@@ -672,7 +672,7 @@ msgstr ""
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:406
+#: src/gui/LocationDialog.cpp:409
 msgid "New Location"
 msgstr ""
 
