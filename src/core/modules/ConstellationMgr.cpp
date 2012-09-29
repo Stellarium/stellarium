@@ -151,16 +151,14 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 
 	// TODO: do we need to have an else { clearBoundaries(); } ?
-        if (skyCultureDir.startsWith("western"))
+	// load constellation boundaries
+	try
 	{
-		try
-		{
-			loadBoundaries(StelFileMgr::findFile("data/constellations_boundaries.dat"));
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR loading constellation boundaries file: " << e.what();
-		}
+		loadBoundaries(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat"));
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR loading constellation boundaries file: " << e.what();
 	}
 
 	lastLoadedSkyCulture = skyCultureDir;
