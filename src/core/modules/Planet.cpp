@@ -516,8 +516,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
 		const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
 		float planetPhase = 0.5f * std::abs(1.f + cos_chi);
-		oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhase(core->getObserverHeliocentricEclipticPos()))) << "<br>";
-		oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(core->getObserverHeliocentricEclipticPos()))) << "<br>";
+		oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhase(observerHelioPos))) << "<br>";
+		oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(observerHelioPos))) << "<br>";
 		oss << QString(q_("Phase: %1")).arg(planetPhase, 0, 'f', 2) << "<br>";
 		oss << QString(q_("Illuminated: %1%")).arg(planetPhase * 100, 0, 'f', 1) << "<br>";		
 	}
