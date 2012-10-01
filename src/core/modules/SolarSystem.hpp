@@ -184,6 +184,26 @@ public slots:
 	//! @return a magnitude
 	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
 
+	//! Get distance to Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a distance (in AU)
+	double getDistanceToPlanet(QString planetName) const;
+
+	//! Get elongation for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a elongation (in radians)
+	double getElongationForPlanet(QString planetName) const;
+
+	//! Get phase angle for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase angle (in radians)
+	double getPhaseAngleForPlanet(QString planetName) const;
+
+	//! Get phase for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase
+	float getPhaseForPlanet(QString planetName) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
