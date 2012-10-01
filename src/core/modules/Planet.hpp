@@ -238,6 +238,8 @@ public:
 	double getElongation(const Vec3d& obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
+	// Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
+	float getPlanetPhase(const Vec3d& obsPos) const;
 
 	// Set the orbital elements
 	void setRotationElements(float _period, float _offset, double _epoch,

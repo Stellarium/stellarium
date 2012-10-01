@@ -1132,6 +1132,38 @@ float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) 
 	return r;
 }
 
+double SolarSystem::getDistanceToPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	double r = 0.f;
+	r = p->getDistance();
+	return r;
+}
+
+double SolarSystem::getElongationForPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	double r = 0.f;
+	r = p->getElongation(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	return r;
+}
+
+double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	double r = 0.f;
+	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	return r;
+}
+
+float SolarSystem::getPhaseForPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	float r = 0.f;
+	r = p->getPlanetPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	return r;
+}
+
 // Search if any Planet is close to position given in earth equatorial position and return the distance
 StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 {
