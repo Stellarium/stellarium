@@ -1152,7 +1152,7 @@ double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	double r = 0.f;
-	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	r = p->getPhaseAngle(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
 }
 
@@ -1160,7 +1160,7 @@ float SolarSystem::getPhaseForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	float r = 0.f;
-	r = p->getPlanetPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
 }
 

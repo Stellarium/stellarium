@@ -202,7 +202,7 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
 	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
-		ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
+		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
 		core, ssystem->getEclipseFactor(core), core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
