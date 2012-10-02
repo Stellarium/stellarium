@@ -798,7 +798,14 @@ double Planet::getSiderealTime(double jd) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-	return remainder * 360. + re.offset;
+	if (englishName=="Jupiter")
+	{
+		// use semi-empirical coefficient for GRS drift
+		// TODO: need improved
+		return remainder * 360. + re.offset - 0.2483 * std::abs(StelApp::getInstance().getCore()->getJDay() - 2456172);
+	}
+	else
+		return remainder * 360. + re.offset;
 }
 
 // Get the Planet position in the parent Planet ecliptic coordinate in AU
