@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Bogdan Marinov</author>
+ <class>LocationListEditor</class>
+ <widget class="QMainWindow" name="LocationListEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTableView" name="tableView">
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropOverwriteMode">
+       <bool>false</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::DragDrop</enum>
+      </property>
+      <property name="defaultDropAction">
+       <enum>Qt::MoveAction</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frameFilter">
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="lineEditFilter">
+         <property name="placeholderText">
+          <string>Search/filter...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBoxFilteredColumn"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="checkBoxCaseSensitive">
+         <property name="text">
+          <string>&amp;Case sensitive</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuLocations">
+    <property name="title">
+     <string>&amp;Locations</string>
+    </property>
+    <addaction name="actionOpenProject"/>
+    <addaction name="actionOpenUser"/>
+    <addaction name="actionOpenFile"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="actionBinary"/>
+    <addaction name="actionNativeEolChars"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionAddNew"/>
+    <addaction name="actionInsertAfter"/>
+    <addaction name="actionInsertBefore"/>
+    <addaction name="separator"/>
+    <addaction name="actionCloneSelected"/>
+    <addaction name="actionClonedAtTheEnd"/>
+    <addaction name="separator"/>
+    <addaction name="actionDelete"/>
+   </widget>
+   <widget class="QMenu" name="menuNavigation">
+    <property name="title">
+     <string>&amp;Navigation</string>
+    </property>
+    <addaction name="actionGoToRow"/>
+    <addaction name="separator"/>
+    <addaction name="actionNextDuplicate"/>
+    <addaction name="actionDuplicateWrapAround"/>
+   </widget>
+   <addaction name="menuLocations"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuNavigation"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpenProject">
+   <property name="text">
+    <string>Open &amp;current project locations</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O, P</string>
+   </property>
+  </action>
+  <action name="actionOpenUser">
+   <property name="text">
+    <string>Open current &amp;user locations</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O, U</string>
+   </property>
+  </action>
+  <action name="actionOpenFile">
+   <property name="text">
+    <string>&amp;Open locations file...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O, F</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save the current location list</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Save &amp;As...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionAddNew">
+   <property name="text">
+    <string>Add &amp;new location</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="text">
+    <string>&amp;Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete the selected location(s)</string>
+   </property>
+   <property name="statusTip">
+    <string>Delete the selected location(s)</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About...</string>
+   </property>
+  </action>
+  <action name="actionBinary">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Also save as a &amp;binary file</string>
+   </property>
+   <property name="toolTip">
+    <string>Also save the list as a compressed .bin.gz file</string>
+   </property>
+   <property name="statusTip">
+    <string>Also save the list as a compressed .bin.gz file</string>
+   </property>
+  </action>
+  <action name="actionCloneSelected">
+   <property name="text">
+    <string>&amp;Clone selected</string>
+   </property>
+   <property name="toolTip">
+    <string>Clone the selected location(s)</string>
+   </property>
+   <property name="statusTip">
+    <string>Clone the selected location(s)</string>
+   </property>
+  </action>
+  <action name="actionNativeEolChars">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Use native line endings</string>
+   </property>
+   <property name="toolTip">
+    <string>Save the list with Windows line endings on Windows</string>
+   </property>
+   <property name="statusTip">
+    <string>Save the list with Windows line endings on Windows</string>
+   </property>
+  </action>
+  <action name="actionInsertAfter">
+   <property name="text">
+    <string>Insert &amp;after</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert a new location after the current location</string>
+   </property>
+   <property name="statusTip">
+    <string>Insert a new location after the current location</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I, A</string>
+   </property>
+  </action>
+  <action name="actionInsertBefore">
+   <property name="text">
+    <string>Insert &amp;before</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert a new location before the current location</string>
+   </property>
+   <property name="statusTip">
+    <string>Insert a new location before the current location</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I, B</string>
+   </property>
+  </action>
+  <action name="actionClonedAtTheEnd">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Add cloned at the &amp;end</string>
+   </property>
+   <property name="toolTip">
+    <string>Add cloned locations at the end of the list</string>
+   </property>
+   <property name="statusTip">
+    <string>Add cloned locations at the end of the list</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>Test</string>
+   </property>
+  </action>
+  <action name="actionGoToRow">
+   <property name="text">
+    <string>&amp;Go to row...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionNextDuplicate">
+   <property name="text">
+    <string>Go to next &amp;duplicate</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionDuplicateWrapAround">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Wrap around</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
