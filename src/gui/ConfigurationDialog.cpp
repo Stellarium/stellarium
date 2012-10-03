@@ -217,7 +217,9 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
 	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
-	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), gui->getGuiAction("actionShow_Shortcuts_Window_Global"), SLOT(trigger()));
+	connect(ui->editShortcutsPushButton, SIGNAL(clicked()),
+	        this,
+	        SLOT(showShortcutsWindow()));
 
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
@@ -303,6 +305,17 @@ void ConfigurationDialog::setStartupTimeMode()
 
 	StelApp::getInstance().getCore()->setInitTodayTime(ui->todayTimeSpinBox->time());
 	StelApp::getInstance().getCore()->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
+}
+
+void ConfigurationDialog::showShortcutsWindow()
+{
+	QAction* action = gui->getGuiAction("actionShow_Shortcuts_Window_Global");
+	if (action)
+	{
+		if (action->isChecked())
+			action->setChecked(false);
+		action->setChecked(true);
+	}
 }
 
 void ConfigurationDialog::setDiskViewport(bool b)
