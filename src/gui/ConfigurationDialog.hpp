@@ -74,9 +74,9 @@ private:
 	QProgressBar* progressBar;
 
 private slots:
-	void setNoSelectedInfo(void);
-	void setAllSelectedInfo(void);
-	void setBriefSelectedInfo(void);
+	void setNoSelectedInfo();
+	void setAllSelectedInfo();
+	void setBriefSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
 	//! Called when any of the boxes has been clicked. Sets the
 	//! "selected info" mode to "Custom".
@@ -84,6 +84,8 @@ private slots:
 	
 	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
+	//! Show/bring to foreground the shortcut editor window.
+	void showShortcutsWindow();
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
 	void cursorTimeOutChanged();
