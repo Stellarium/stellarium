@@ -1536,7 +1536,7 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 
 	foreach (const PlanetP& planet, systemPlanets)
 	{
-		if(planet == sun)
+		if(planet == sun || planet == core->getCurrentPlanet())
 			continue;
 
 		Mat4d trans;

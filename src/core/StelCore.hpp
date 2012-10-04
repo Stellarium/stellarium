@@ -204,6 +204,8 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 
+	const QSharedPointer<class Planet> getCurrentPlanet() const;
+
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
 	//! @param duration direction of view move duration in s
