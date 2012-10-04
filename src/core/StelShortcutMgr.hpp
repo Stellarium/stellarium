@@ -23,77 +23,104 @@
 #include <QObject>
 #include <QAction>
 
-QT_FORWARD_DECLARE_CLASS(StelShortcutGroup)
-QT_FORWARD_DECLARE_CLASS(StelShortcut)
-QT_FORWARD_DECLARE_CLASS(StelAppGraphicsWidget)
+class StelShortcutGroup;
+class StelShortcut;
+class StelAppGraphicsWidget;
 
+//! Manager of the keyboard shortcuts tied to different features.
+//! At the moment, the vast majority of QActions used in Stellarium are
+//! defined in a JSON file copied to the user data directory on the first
+//! run, similar to the configuration file.
 class StelShortcutMgr : public QObject
 {
 	Q_OBJECT
 public:
 	StelShortcutMgr();
-	
+
 	void init();
 
-	// load shortcuts from existing file
+	//! Load shortcuts from existing file.
 	bool loadShortcuts(const QString &filePath);
-	// search for file with shortcuts, load shortcuts from it
+	//! Search for file with shortcuts, load shortcuts from it.
 	void loadShortcuts();
 
-	// save current shortcuts to file
+	//! Save current shortcuts to file.
 	void saveShortcuts();
 
 	void saveShortcuts(QIODevice* output) const;
 
-	// Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
-	QAction* addGuiAction(const QString& actionId, bool temporary, const QString& text, const QString& primaryKey,
-												const QString& altKey, const QString &groupId,
-												bool checkable = true, bool autoRepeat = false, bool global = false);
+	//! Add a new action managed by the GUI.
+	//! This method should be used to add new shortcuts to the program.
+	//! @param text Short human-readable description in English.
+	//! \ref translation_sec "Mark the string for translation"
+	//! with the N_() macro and it will be translated when displayed
+	//! in ShortcutsDialog or HelpDialog.
+	//! @todo Add explanation of parameters.
+	QAction* addGuiAction(const QString& actionId,
+	                      bool temporary,
+	                      const QString& text,
+	                      const QString& primaryKey,
+	                      const QString& altKey,
+	                      const QString &groupId,
+	                      bool checkable = true,
+	                      bool autoRepeat = false,
+	                      bool global = false);
 
 	void changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
 	void changeActionAltKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
 
-	//! Get a pointer on an action managed by the GUI
-	//! @param actionName qt object name for this action
-	//! @return a pointer on the QAction object or NULL if don't exist
+	//! Get a pointer to an action managed by the GUI.
+	//! Directly queryies the StelAppGraphicsWidget instance
+	//! for a child with the given name.
+	//! @param actionName Qt object name for this action
+	//! @return a pointer to the QAction object or NULL if doesn't exist
 	QAction* getGuiAction(const QString& actionName);
-	// unlike getGuiAction with only actionId parameter search by
-	// iterationg over map of groups and map of shortcuts in each group
-	QAction* getGuiAction(const QString& groupId, const QString& actionId);
 
-	// bind script evaluation to given action
+	//! Bind script evaluation to given action.
 	QAction* addScriptToAction(const QString& actionId, const QString& script, const QString& scriptAction = QString());
 
-	// get list of all group of shortcuts
+	//! Get a list of all shortcut groups.
 	QList<StelShortcutGroup*> getGroupList() const;
+	
 signals:
 	void shortcutChanged(StelShortcut* shortcut);
-	
+
 public slots:
-	// enable/disable all actions of application
-	// need for editing shortcuts without trigging any actions
+	//! Enable/disable all actions of application.
+	//! need for editing shortcuts without trigging any actions
+	//! @todo find out if this is really necessary and why.
 	void setAllActionsEnabled(bool enable);
 
-	// restore all shortcuts from default file
+	//! Restore the default combinations by reloading and resaving.
 	void restoreDefaultShortcuts();
 
-	// look through default shortcuts file for shortcuts missed in current file
-	// can be used for getting shortcuts for newly added plugins
-	// probably in future default shortcut can be downloaded for
-	// keeping actual data
-	void mergeWithDefaults();
-
 private:
-	// copy default shortcuts file (in usr dir) to shortcuts file.
-	// Return value - whether copy was successful
+	//! Copy the default shortcuts file to the user data directory.
+	//! @returns true on success.
 	bool copyDefaultFile();
 
-	// init and add to map group with parsed from file properties
-	void addGroup(const QString& id, QString text, const QString& pluginId = "");
+	//! Get a QAction managed by this class.
+	//! Searches shGroups.
+	//! @returns null pointer if no such action is found.
+	QAction* getAction(const QString& groupId, const QString& actionId);
+	//! Get a StelShortcut managed by this class.
+	//! Searches shGroups.
+	//! @returns null pointer if no such shortcut is found.
+	StelShortcut* getShortcut(const QString& groupId, const QString& shId);
+	//! Create a new shortcut group.
+	//! If the group name has been \ref translation_sec 
+	//! "marked for translation" (for example, with the N_() macro),
+	//! it will be translated when displayed.
+	//! @param id Group identifier.
+	//! @param text Human-readable group name (in English).
+	//! @param pluginId Plugin identifier if the group belongs to a plugin.
+	void addGroup(const QString& id,
+	              QString text,
+	              const QString& pluginId = QString());
 
-	// pointer to StelAppGraphicsWidget, used for obtaining actions by their object names
+	//! Used for obtaining actions by their object names.
 	StelAppGraphicsWidget* stelAppGraphicsWidget;
-	// QMap, containing all shortcuts groups
+	//! Map of shortcut groups by ID.
 	QMap<QString, StelShortcutGroup*> shGroups;
 };
 
