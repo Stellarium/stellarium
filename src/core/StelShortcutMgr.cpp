@@ -70,14 +70,14 @@ QAction* StelShortcutMgr::addGuiAction(const QString& actionId,
 
 void StelShortcutMgr::changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey)
 {
-	StelShortcut* shortcut = getShortcut(actionId, groupId);
+	StelShortcut* shortcut = getShortcut(groupId, actionId);
 	if (shortcut)
 		shortcut->setPrimaryKey(newKey);
 }
 
 void StelShortcutMgr::changeActionAltKey(const QString& actionId, const QString& groupId, QKeySequence newKey)
 {
-	StelShortcut* shortcut = getShortcut(actionId, groupId);
+	StelShortcut* shortcut = getShortcut(groupId, actionId);
 	if (shortcut)
 		shortcut->setAltKey(newKey);
 }
