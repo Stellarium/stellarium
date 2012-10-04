@@ -177,7 +177,7 @@ void StelShortcutMgr::addGroup(const QString &id, QString text, const QString &p
 			// if no text provided in file, get text from plugin descriptor
 			if (text.isEmpty())
 			{
-				text = pluginDescriptor.info.displayedName + " Plugin";
+				text = pluginDescriptor.info.displayedName;
 			}
 			// enable group only when plugin is enabled
 			enabled = pluginDescriptor.loadAtStartup;
