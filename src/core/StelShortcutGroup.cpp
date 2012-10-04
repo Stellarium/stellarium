@@ -206,7 +206,7 @@ QAction *StelShortcutGroup::getAction(const QString &actionId)
 {
 	if (!m_shortcuts.contains(actionId))
 	{
-		qDebug() << "Attempt to get non-existing shortcut by id: " << actionId << endl;
+		//qDebug() << "Attempt to get non-existing shortcut by id: " << actionId << endl;
 		return NULL;
 	}
 	return m_shortcuts[actionId]->getAction();
