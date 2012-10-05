@@ -50,7 +50,7 @@ void ShortcutLineEdit::backspace()
 {
 	if (m_keyNum <= 0)
 	{
-		qWarning() << "Clear button works when it shouldn't: lineEdit is empty ";
+		qDebug() << "Clear button works when it shouldn't: lineEdit is empty ";
 		return;
 	}
 	--m_keyNum;
@@ -62,7 +62,7 @@ void ShortcutLineEdit::backspace()
 void ShortcutLineEdit::setContents(QKeySequence ks)
 {
 	// need for avoiding infinite loop of same signal-slot emitting/calling
-	if (ks.toString() == text())
+	if (ks.toString(QKeySequence::NativeText) == text())
 		return;
 	// clear before setting up
 	clear();
@@ -72,7 +72,8 @@ void ShortcutLineEdit::setContents(QKeySequence ks)
 	{
 		m_keys[i] = ks[i];
 	}
-	setText(ks.toString());
+	// Show Ctrl button as Cmd on Mac
+	setText(ks.toString(QKeySequence::NativeText));
 	emit contentsChanged();
 }
 
@@ -80,18 +81,21 @@ void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 {
 	int nextKey = e->key();
 	if ( m_keyNum > 3 || // too long shortcut
-			 nextKey == Qt::Key_Control || // dont count modifier keys
-			 nextKey == Qt::Key_Shift ||
-			 nextKey == Qt::Key_Meta ||
-			 nextKey == Qt::Key_Alt )
+	     nextKey == Qt::Key_Control || // dont count modifier keys
+	     nextKey == Qt::Key_Shift ||
+	     nextKey == Qt::Key_Meta ||
+	     nextKey == Qt::Key_Alt )
 		return;
+	
 	// applying current modifiers to key
 	nextKey |= getModifiers(e->modifiers(), e->text());
 	m_keys[m_keyNum] = nextKey;
 	++m_keyNum;
+	
 	// set displaying information
 	QKeySequence ks(m_keys[0], m_keys[1], m_keys[2], m_keys[3]);
-	setText(ks);
+	setText(ks.toString(QKeySequence::NativeText));
+	
 	emit contentsChanged();
 	// not call QLineEdit's event because we already changed contents
 	e->accept();
@@ -116,9 +120,9 @@ int ShortcutLineEdit::getModifiers(Qt::KeyboardModifiers state, const QString &t
 	// The shift modifier only counts when it is not used to type a symbol
 	// that is only reachable using the shift key anyway
 	if ((state & Qt::ShiftModifier) && (text.size() == 0
-																			|| !text.at(0).isPrint()
-																			|| text.at(0).isLetterOrNumber()
-																			|| text.at(0).isSpace()))
+	                                    || !text.at(0).isPrint()
+	                                    || text.at(0).isLetterOrNumber()
+	                                    || text.at(0).isSpace()))
 		result |= Qt::SHIFT;
 	if (state & Qt::ControlModifier)
 		result |= Qt::CTRL;
@@ -139,7 +143,8 @@ ShortcutsDialog::ShortcutsDialog() :
 ShortcutsDialog::~ShortcutsDialog()
 {
 	collisionItems.clear();
-	delete ui; ui = NULL;
+	delete ui;
+	ui = NULL;
 }
 
 void ShortcutsDialog::drawCollisions()
@@ -176,19 +181,20 @@ void ShortcutsDialog::retranslate()
 
 void ShortcutsDialog::initEditors()
 {
-	if (itemIsEditable(ui->shortcutsTreeWidget->currentItem())) {
+	QTreeWidgetItem* currentItem = ui->shortcutsTreeWidget->currentItem();
+	if (itemIsEditable(currentItem))
+	{
 		// current item is shortcut, not group (group items aren't selectable)
 		ui->primaryShortcutEdit->setEnabled(true);
 		ui->altShortcutEdit->setEnabled(true);
 		// fill editors with item's shortcuts
 		ui->primaryShortcutEdit->setContents(
-					ui->shortcutsTreeWidget->currentItem()->
-					data(1, Qt::DisplayRole).value<QKeySequence>());
+		    currentItem->data(1, Qt::DisplayRole).value<QKeySequence>());
 		ui->altShortcutEdit->setContents(
-					ui->shortcutsTreeWidget->currentItem()->
-					data(2, Qt::DisplayRole).value<QKeySequence>());
+		    currentItem->data(2, Qt::DisplayRole).value<QKeySequence>());
 	}
-	else {
+	else
+	{
 		// item is group, not shortcut
 		ui->primaryShortcutEdit->setEnabled(false);
 		ui->altShortcutEdit->setEnabled(false);
@@ -222,7 +228,7 @@ QList<QTreeWidgetItem *> ShortcutsDialog::findCollidingItems(QKeySequence ks)
 	while (*it)
 	{
 		if (prefixMatchKeySequence(ks, QKeySequence((*it)->data(1, Qt::DisplayRole).toString())) ||
-				prefixMatchKeySequence(ks, QKeySequence((*it)->data(2, Qt::DisplayRole).toString())))
+		        prefixMatchKeySequence(ks, QKeySequence((*it)->data(2, Qt::DisplayRole).toString())))
 		{
 			res.push_back(*it);
 		}
@@ -233,12 +239,12 @@ QList<QTreeWidgetItem *> ShortcutsDialog::findCollidingItems(QKeySequence ks)
 
 void ShortcutsDialog::handleCollisions(ShortcutLineEdit *currentEdit)
 {
-	// clear previous collisions
 	resetCollisions();
+	
 	// handle collisions
 	QString text = currentEdit->text();
-    collisionItems = findCollidingItems(QKeySequence(text));
-    collisionItems.removeOne(ui->shortcutsTreeWidget->currentItem());
+	collisionItems = findCollidingItems(QKeySequence(text));
+	collisionItems.removeOne(ui->shortcutsTreeWidget->currentItem());
 	if (!collisionItems.isEmpty())
 	{
 		drawCollisions();
@@ -270,9 +276,10 @@ void ShortcutsDialog::handleChanges()
 		ui->altBackspaceButton->setEnabled(!currentEditor->isEmpty());
 	}
 	// updating apply button
-	if (ui->shortcutsTreeWidget->currentItem() == NULL ||
-			(isPrimary && currentEditor->text() == ui->shortcutsTreeWidget->currentItem()->text(1)) ||
-			(!isPrimary && currentEditor->text() == ui->shortcutsTreeWidget->currentItem()->text(2)))
+	QTreeWidgetItem* currentItem = ui->shortcutsTreeWidget->currentItem();
+	if (currentItem == NULL ||
+	        (isPrimary && currentEditor->text() == currentItem->text(1)) ||
+	        (!isPrimary && currentEditor->text() == currentItem->text(2)))
 	{
 		// nothing to apply
 		ui->applyButton->setEnabled(false);
@@ -288,9 +295,10 @@ void ShortcutsDialog::handleChanges()
 void ShortcutsDialog::applyChanges() const
 {
 	// get ids stored in tree
-	QString actionId = ui->shortcutsTreeWidget->currentItem()->data(0, Qt::UserRole).toString();
-	QString groupId = ui->shortcutsTreeWidget->currentItem()->parent()->
-			data(0, Qt::UserRole).toString();
+	QTreeWidgetItem* currentItem = ui->shortcutsTreeWidget->currentItem();
+	QString actionId = currentItem->data(0, Qt::UserRole).toString();
+	QString groupId = currentItem->parent()->data(0,
+	                                              Qt::UserRole).toString();
 	// changing keys in shortcuts
 	shortcutMgr->changeActionPrimaryKey(actionId, groupId, ui->primaryShortcutEdit->getKeySequence());
 	shortcutMgr->changeActionAltKey(actionId, groupId, ui->altShortcutEdit->getKeySequence());
@@ -317,7 +325,10 @@ void ShortcutsDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(initEditors()));
-	connect(ui->shortcutsTreeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(switchToEditors(QTreeWidgetItem*, int)));
+	connect(ui->shortcutsTreeWidget,
+	        SIGNAL(itemActivated(QTreeWidgetItem*,int)),
+	        this,
+	        SLOT(switchToEditors(QTreeWidgetItem*, int)));
 	// apply button logic
 	connect(ui->applyButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
 	// restore defaults button logic
@@ -348,7 +359,8 @@ void ShortcutsDialog::polish()
 
 QTreeWidgetItem *ShortcutsDialog::updateGroup(StelShortcutGroup *group)
 {
-	QTreeWidgetItem* groupItem = findItemByData(QVariant(group->getId()), Qt::UserRole);
+	QTreeWidgetItem* groupItem = findItemByData(QVariant(group->getId()),
+	                                            Qt::UserRole);
 	if (!groupItem)
 	{
 		// create new
@@ -362,10 +374,13 @@ QTreeWidgetItem *ShortcutsDialog::updateGroup(StelShortcutGroup *group)
 	// store id
 	groupItem->setData(0, Qt::UserRole, group->getId());
 	// expand only enabled group
-	groupItem->setExpanded(group->isEnabled());
+	bool enabled = group->isEnabled();
+	groupItem->setExpanded(enabled);
+	groupItem->setHidden(!enabled);
 	// setup bold font for group lines
 	QFont rootFont = groupItem->font(0);
-	rootFont.setBold(true); rootFont.setPixelSize(14);
+	rootFont.setBold(true);
+	rootFont.setPixelSize(14);
 	groupItem->setFont(0, rootFont);
 
 	return groupItem;

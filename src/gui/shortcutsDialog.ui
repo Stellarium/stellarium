@@ -11,9 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="margin">
     <number>0</number>
    </property>
@@ -66,7 +69,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string>Shortcuts Editor</string>
+         <string>Keyboard Shortcuts</string>
         </property>
        </widget>
       </item>
@@ -119,27 +122,11 @@
       </property>
       <item>
        <widget class="QTreeWidget" name="shortcutsTreeWidget">
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="rootIsDecorated">
-         <bool>false</bool>
-        </property>
         <property name="uniformRowHeights">
          <bool>true</bool>
         </property>
-        <property name="sortingEnabled">
-         <bool>false</bool>
-        </property>
         <property name="allColumnsShowFocus">
          <bool>true</bool>
-        </property>
-        <property name="headerHidden">
-         <bool>false</bool>
         </property>
         <attribute name="headerDefaultSectionSize">
          <number>200</number>
@@ -152,12 +139,7 @@
         </attribute>
         <column>
          <property name="text">
-          <string>Action name</string>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>11</pointsize>
-          </font>
+          <string>Action</string>
          </property>
         </column>
         <column>
