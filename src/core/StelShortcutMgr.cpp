@@ -298,14 +298,15 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 			QString filePath = actionMap.value("scriptFile").toString();
 			if (!filePath.isEmpty())
 			{
-				if (!QFileInfo(filePath).exists())
+				QString scriptFilePath = StelFileMgr::findFile(filePath);
+				if (!QFileInfo(scriptFilePath).exists())
 				{
-					qWarning() << "Couldn't find script file" << filePath
-					           << "for shortcut" << actionId;
+					qWarning() << "Couldn't find script file" << scriptFilePath
+						   << "for shortcut" << actionId;
 				}
 				else
 				{
-					QFile scriptFile(filePath);
+					QFile scriptFile(scriptFilePath);
 					if (scriptFile.open(QIODevice::ReadOnly))
 					{
 						QString code = QString(scriptFile.readAll());
