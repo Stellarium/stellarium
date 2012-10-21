@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-26 18:56+0700\n"
-"PO-Revision-Date: 2012-08-23 19:26+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2012-10-20 18:00+0700\n"
+"PO-Revision-Date: 2012-10-21 10:32+0000\n"
+"Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-29 13:05+0000\n"
-"X-Generator: Launchpad (build 16049)\n"
+"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
+"X-Generator: Launchpad (build 16165)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -162,29 +162,29 @@ msgstr ""
 #: src/core/modules/Planet.cpp:502
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "恒星日: %1"
 
 #: src/core/modules/Planet.cpp:506
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "平太阳日: %1"
 
-#: src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "位相角: %1"
 
-#: src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Elongation: %1"
 msgstr "距角: %1"
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Phase: %1"
 msgstr "相: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:516
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "被照亮的部分: %1%"
@@ -192,7 +192,7 @@ msgstr "被照亮的部分: %1%"
 #: src/core/modules/MinorPlanet.cpp:189
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "临时编号: %1"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -337,7 +337,7 @@ msgstr "赤经/赤纬 (日期): %1/%2"
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "银经/银纬 (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -383,31 +383,31 @@ msgstr "没有找到"
 msgid "Found"
 msgstr "已找到"
 
-#: src/gui/ConfigurationDialog.cpp:403 src/gui/ConfigurationDialog.cpp:405
+#: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:620
+#: src/gui/ConfigurationDialog.cpp:633
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:628
+#: src/gui/ConfigurationDialog.cpp:641
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:670
+#: src/gui/ConfigurationDialog.cpp:683
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:671 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:754
+#: src/gui/ConfigurationDialog.cpp:767
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -416,19 +416,19 @@ msgstr "联系信息"
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:758
+#: src/gui/ConfigurationDialog.cpp:771
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:782
+#: src/gui/ConfigurationDialog.cpp:795
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:789
+#: src/gui/ConfigurationDialog.cpp:802
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:852
+#: src/gui/ConfigurationDialog.cpp:865
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -436,16 +436,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:856
+#: src/gui/ConfigurationDialog.cpp:869
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:874
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:881
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -454,7 +454,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:888
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -465,7 +465,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:918 src/gui/ConfigurationDialog.cpp:954
+#: src/gui/ConfigurationDialog.cpp:931 src/gui/ConfigurationDialog.cpp:967
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -474,11 +474,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1006
+#: src/gui/ConfigurationDialog.cpp:1019
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:1010
+#: src/gui/ConfigurationDialog.cpp:1023
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -537,11 +537,11 @@ msgstr "CTRL + 鼠标左键"
 
 #: src/gui/HelpDialog.cpp:149
 msgid "F7"
-msgstr ""
+msgstr "F7 键"
 
 #: src/gui/HelpDialog.cpp:150
 msgid "Show and edit all keyboard shortcuts"
-msgstr ""
+msgstr "显示并编辑所有快捷键"
 
 #: src/gui/HelpDialog.cpp:156
 msgid "Further Reading"
@@ -1151,7 +1151,7 @@ msgstr ""
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "鸟神星"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1318,7 +1318,7 @@ msgstr "2068年 1月 10日从奥林匹斯山观测到的日蚀"
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr ""
+msgstr "2048年地球掩木星"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:208
@@ -1353,7 +1353,7 @@ msgstr "金星凌日"
 #. TRANSLATORS: Name of script
 #: src/translations.h:220
 msgid "Analemma"
-msgstr ""
+msgstr "日行迹"
 
 #: src/translations.h:223
 msgid "Look around each installed landscape."
@@ -1392,7 +1392,7 @@ msgstr "黄道星座演示脚本。黄道星座是位于黄道带上，太阳在
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
-msgstr ""
+msgstr "由于水星公转轨道与自转周期的巧合，在某些时候和地点，一水星日能出现三次太阳升落。"
 
 #: src/translations.h:231
 msgid ""
@@ -2457,27 +2457,27 @@ msgstr "增加 1 太阳周"
 
 #: src/translations.h:495
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "增加1朔望月"
 
 #: src/translations.h:496
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "增加1交点月"
 
 #: src/translations.h:497
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "增加1近点月"
 
 #: src/translations.h:498
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "增加1平分至月"
 
 #: src/translations.h:499
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "增加1交点年"
 
 #: src/translations.h:500
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "增加1平回归年"
 
 #: src/translations.h:501
 msgid "Slow down the script execution rate"
@@ -2561,27 +2561,27 @@ msgstr "减少 1 太阳周"
 
 #: src/translations.h:521
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "减少1朔望月"
 
 #: src/translations.h:522
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "减少1交点月"
 
 #: src/translations.h:523
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "减少1近点月"
 
 #: src/translations.h:524
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "减少1平分至月"
 
 #: src/translations.h:525
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "减少1交点年"
 
 #: src/translations.h:526
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "减少1平回归年"
 
 #: src/translations.h:527
 msgid "Display Options"
@@ -2778,7 +2778,7 @@ msgstr "缩小"
 
 #: src/translations.h:572
 msgid "Angle Measure Plugin"
-msgstr ""
+msgstr "角度测量插件"
 
 #: src/translations.h:573
 msgid "Angle measure"
@@ -2794,7 +2794,7 @@ msgstr "罗盘标记"
 
 #: src/translations.h:576
 msgid "Exoplanets Plugin"
-msgstr ""
+msgstr "地外行星插件"
 
 #: src/translations.h:577
 msgid "Show exoplanets"
@@ -2806,7 +2806,7 @@ msgstr "系外行星设置窗口"
 
 #: src/translations.h:579
 msgid "Observability analysis Plugin"
-msgstr ""
+msgstr "可观测性分析插件"
 
 #: src/translations.h:580
 msgid "Observability"
@@ -2846,7 +2846,7 @@ msgstr ""
 
 #: src/translations.h:589
 msgid "Pulsars Plugin"
-msgstr ""
+msgstr "脉冲星插件"
 
 #: src/translations.h:590
 msgid "Pulsars configuration window"
@@ -2854,7 +2854,7 @@ msgstr "脉冲星设置窗口"
 
 #: src/translations.h:591
 msgid "Quasars Plugin"
-msgstr ""
+msgstr "类星体插件"
 
 #: src/translations.h:592
 msgid "Quasars configuration window"
@@ -2862,7 +2862,7 @@ msgstr "类星体设置窗口"
 
 #: src/translations.h:593
 msgid "Satellites Plugin"
-msgstr ""
+msgstr "人造卫星插件"
 
 #: src/translations.h:594
 msgid "Satellites configuration window"
@@ -2878,7 +2878,7 @@ msgstr "人造卫星标签"
 
 #: src/translations.h:597
 msgid "Historical Supernovae Plugin"
-msgstr ""
+msgstr "历史上的超新星插件"
 
 #: src/translations.h:598
 msgid "Historical Supernovae configuration window"
@@ -2886,13 +2886,13 @@ msgstr "历史超新星配置窗口"
 
 #: src/translations.h:599
 msgid "Telescope Control Plugin"
-msgstr ""
+msgstr "望远镜控制插件"
 
 #: src/translations.h:600
 msgid "Move a telescope to a given set of coordinates"
 msgstr "将天文望远镜对准某一坐标"
 
-#: src/translations.h:601 src/ui_configurationDialog.h:1129
+#: src/translations.h:601 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Scripts"
 msgstr "脚本"
@@ -2942,7 +2942,7 @@ msgid ":"
 msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "帮助"
 
@@ -3160,8 +3160,8 @@ msgstr "服务器："
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:1100 src/ui_configurationDialog.h:1111
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: src/ui_configurationDialog.h:1092 src/ui_configurationDialog.h:1103
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "选项"
 
@@ -3382,394 +3382,394 @@ msgstr "将此星空述语设为预设值"
 msgid "Visible"
 msgstr "可见"
 
-#: src/ui_configurationDialog.h:949
+#: src/ui_configurationDialog.h:941
 msgid "Configuration"
 msgstr "设定"
 
-#: src/ui_configurationDialog.h:951
+#: src/ui_configurationDialog.h:943
 msgid "Program language"
 msgstr "程序介面语言"
 
-#: src/ui_configurationDialog.h:952
+#: src/ui_configurationDialog.h:944
 msgid "Default options"
 msgstr "默认选项"
 
-#: src/ui_configurationDialog.h:954
+#: src/ui_configurationDialog.h:946
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "保存更改并在下次启动 Stellarium 时恢复"
 
-#: src/ui_configurationDialog.h:956
+#: src/ui_configurationDialog.h:948
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "保存设置"
 
-#: src/ui_configurationDialog.h:958
+#: src/ui_configurationDialog.h:950
 msgid "Restore the default settings that came with Stellarium"
 msgstr "恢复 Stellarium 的原有设置"
 
-#: src/ui_configurationDialog.h:960
+#: src/ui_configurationDialog.h:952
 msgid "Restore defaults"
 msgstr "还原预设值"
 
-#: src/ui_configurationDialog.h:961
+#: src/ui_configurationDialog.h:953
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr "恢复默认设置需要重新启动 Stellarium。保存设置后，下次启动将使用当前视野大小、观看方向等设置。"
 
-#: src/ui_configurationDialog.h:963
+#: src/ui_configurationDialog.h:955
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium 默认的视野宽度"
 
-#: src/ui_configurationDialog.h:966
+#: src/ui_configurationDialog.h:958
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium 默认的地理位置"
 
-#: src/ui_configurationDialog.h:968 src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:960 src/ui_configurationDialog.h:1114
 msgid "Selected object information"
 msgstr "已选择天体资料"
 
-#: src/ui_configurationDialog.h:970
+#: src/ui_configurationDialog.h:962
 msgid "Display all information available"
 msgstr "显示所有信息"
 
-#: src/ui_configurationDialog.h:972
+#: src/ui_configurationDialog.h:964
 msgid "All available"
 msgstr "完整显示"
 
-#: src/ui_configurationDialog.h:974
+#: src/ui_configurationDialog.h:966
 msgid "Display less information"
 msgstr "显示精简信息"
 
-#: src/ui_configurationDialog.h:976
+#: src/ui_configurationDialog.h:968
 msgid "Short"
 msgstr "简短显示"
 
-#: src/ui_configurationDialog.h:978
+#: src/ui_configurationDialog.h:970
 msgid "Display no information"
 msgstr "不要显示信息"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:972
 msgid "None"
 msgstr "无"
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
 msgstr "显示用户设置信息"
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:976
 msgid "Customized"
 msgstr "自定义"
 
-#: src/ui_configurationDialog.h:985
+#: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
 msgstr "显示区域"
 
-#: src/ui_configurationDialog.h:987
+#: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "地心赤道坐标系，春分点按J2000.0"
 
-#: src/ui_configurationDialog.h:989
+#: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (J2000)"
 msgstr "赤经/赤纬 (J2000)"
 
-#: src/ui_configurationDialog.h:991
+#: src/ui_configurationDialog.h:983
 msgid "Topocentric equatorial coordinates"
 msgstr "站心赤道坐标"
 
-#: src/ui_configurationDialog.h:993
+#: src/ui_configurationDialog.h:985
 msgid "Hour angle/Declination"
 msgstr "时角/赤纬"
 
-#: src/ui_configurationDialog.h:995
+#: src/ui_configurationDialog.h:987
 msgid "Horizontal coordinates"
 msgstr "地平坐标"
 
-#: src/ui_configurationDialog.h:997
+#: src/ui_configurationDialog.h:989
 msgid "Altitude/Azimuth"
 msgstr "高度角/方位角"
 
-#: src/ui_configurationDialog.h:998
+#: src/ui_configurationDialog.h:990
 msgid "Visual magnitude"
 msgstr "视星等"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:992
 msgid "Angular or physical size"
 msgstr "角面积或物理面积"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:994
 msgid "Size"
 msgstr "大小"
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:995
 msgid "Additional information 3"
 msgstr "额外信息2"
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:999
 msgid "Additional information 2"
 msgstr "额外信息2"
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1000
 msgid "Absolute magnitude"
 msgstr "绝对星等"
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1001
 msgid "Distance"
 msgstr "距离"
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1002
 msgid "Catalog number(s)"
 msgstr "星表编号"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1003
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "名称"
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1005
 msgid "Spectral class, nebula type, etc."
 msgstr "光谱型、星云类别等。"
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1007
 msgid "Additional information 1"
 msgstr "额外信息1"
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "地心赤道坐标系，春分点按日"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
 msgstr "赤经/赤纬 (日期)"
 
-#: src/ui_configurationDialog.h:1021
+#: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1016
 msgid "Control"
 msgstr "控制"
 
-#: src/ui_configurationDialog.h:1026
+#: src/ui_configurationDialog.h:1018
 msgid "Allow keyboard to pan and zoom"
 msgstr "使用键盘移动及缩放画面"
 
-#: src/ui_configurationDialog.h:1028
+#: src/ui_configurationDialog.h:1020
 msgid "Enable keyboard navigation"
 msgstr "开启键盘导览"
 
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1022
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "使用鼠标移动及缩放画面 (拖拉滚轮)"
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1024
 msgid "Enable mouse navigation"
 msgstr "启用鼠标导览"
 
-#: src/ui_configurationDialog.h:1033
-msgid "Edit keyboard shortcuts"
+#: src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
 msgstr "启动时的日期及时间"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1028
 msgid "Starts Stellarium at system clock date and time"
 msgstr "以系统设定的时间启动"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1030
 msgid "System date and time"
 msgstr "系统日期及时间"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1032
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "下次启动 Stellarium 时设定此时间为模拟时间"
 
-#: src/ui_configurationDialog.h:1042
+#: src/ui_configurationDialog.h:1034
 msgid "System date at:"
 msgstr "系统日期:"
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1036
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "启动Stellarium时，使用特定时间及日期"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1038
 msgid "Other:"
 msgstr "其他:"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1039
 msgid "use current"
 msgstr "使用现在的设定"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1040
 msgid "Other"
 msgstr "其他"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1042
 msgid "Hides the mouse cursor when inactive"
 msgstr "静止时隐藏滑鼠指标"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1044
 msgid "Mouse cursor timeout (seconds):"
 msgstr "指定时间后静止时隐藏鼠标(s):"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1046
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "转换垂直及水平翻转按钮"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1048
 msgid "Show flip buttons"
 msgstr "显示翻转按键"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1050
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "显示/隐藏星云的背景。"
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1052
 msgid "Show nebula background button"
 msgstr "显示星云背景开关按钮"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1053
 msgid "Planetarium options"
 msgstr "天文馆选项"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1055
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "遮去在中间圆形范围以外的星空"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1057
 msgid "Disc viewport"
 msgstr "圆形视角"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1059
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "球面镜扭曲 (使用 Stellarium 做为低成本星象投影系统的场合)"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1061
 msgid "Spheric mirror distortion"
 msgstr "球面镜扭曲"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1063
 msgid "Align labels with the horizon"
 msgstr "星空名称文字保持水平"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1065
 msgid "Gravity labels"
 msgstr "重力名称文字"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1067
 msgid "Hide other constellations when you click one"
 msgstr "选中星系后隐藏其他其他星系"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1069
 msgid "Select single constellation"
 msgstr "选择单一星座"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1072
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "启动后，「自动缩小」键亦会将还原观测方向。"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1074
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "自动缩小时回到原本的观看方向"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1075
 msgid "Screenshots"
 msgstr "屏幕截图"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1076
 msgid "Screenshot Directory"
 msgstr "截图储存资料夹"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1078
 msgid "Invert colors"
 msgstr "对调颜色"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1079
 msgid "Star catalog updates"
 msgstr "天体目录更新"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1081
 msgid "Click here to start downloading"
 msgstr "点击这里开始下载"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1083
 msgid "Download this file to view even more stars"
 msgstr "下载此文件可观看更多天体"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1085
 msgid "Restart the download"
 msgstr "恢复下载"
 
-#: src/ui_configurationDialog.h:1095
+#: src/ui_configurationDialog.h:1087
 msgid "Retry"
 msgstr "重试"
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1089
 msgid "Stop the download. You can always restart it later"
 msgstr "停止下载(你可以随时恢复)"
 
-#: src/ui_configurationDialog.h:1099
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
+#: src/ui_configurationDialog.h:1091
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "取消"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1094
 msgid "Close window when script runs"
 msgstr "执行指令时关闭窗口"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1096
 msgid "Run the selected script"
 msgstr "执行选取的指令"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1100
 msgid "Stop a running script"
 msgstr "停止执行中的指令"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1104
 msgid "Load at startup"
 msgstr "启动时加载"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1105
 msgid "configure"
 msgstr "配置"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1110
 msgid "Main"
 msgstr "主设定画面"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1112
 msgid "Information"
 msgstr "信息"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1117
 msgid "Navigation"
 msgstr "导航"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1119
 msgid "Tools"
 msgstr "工具"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1123
 msgid "Plugins"
 msgstr "插件"
 
@@ -3794,7 +3794,7 @@ msgid "Remove an installed landscape"
 msgstr "移除已安装的地景"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Remove"
 msgstr "移除"
@@ -3805,44 +3805,37 @@ msgid ""
 "operation is irreversible."
 msgstr "警告：移除选择的地景会删除其文件，此操作是不可撤销的。"
 
-#: src/ui_shortcutsDialog.h:212
-#: plugins/TelescopeControl/src/ui_slewDialog.h:287
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
-msgid "Form"
-msgstr "格式"
+#: src/ui_shortcutsDialog.h:201
+msgid "Keyboard Shortcuts"
+msgstr "键盘快捷键"
 
-#: src/ui_shortcutsDialog.h:213
-msgid "Shortcuts Editor"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:216
+#: src/ui_shortcutsDialog.h:204
 msgid "Alternative shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:217
+#: src/ui_shortcutsDialog.h:205
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:218
-msgid "Action name"
-msgstr ""
+#: src/ui_shortcutsDialog.h:206
+msgid "Action"
+msgstr "动作"
 
-#: src/ui_shortcutsDialog.h:219
+#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:220
+#: src/ui_shortcutsDialog.h:208
 msgid "Edit Alternative Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:223
+#: src/ui_shortcutsDialog.h:211
 msgid "Restore Defaults"
-msgstr ""
+msgstr "恢复默认值"
 
-#: src/ui_shortcutsDialog.h:224
+#: src/ui_shortcutsDialog.h:212
 msgid "Apply"
-msgstr ""
+msgstr "应用"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
@@ -4234,7 +4227,7 @@ msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
-msgstr ""
+msgstr "您可以启用视野中的十字丝。我本希望它能指向北方，但我没办法这样做。所以目前十字丝指向屏幕顶端。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4316,7 +4309,7 @@ msgstr "目镜"
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "添加"
 
@@ -4324,7 +4317,7 @@ msgstr "添加"
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "名称："
 
@@ -4376,8 +4369,8 @@ msgstr "像素高度（微米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "望远镜"
 
@@ -4395,7 +4388,7 @@ msgstr "竖直翻转"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
@@ -5114,7 +5107,7 @@ msgid "virtual"
 msgstr "虚拟"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Start"
 msgstr "启动"
 
@@ -5150,103 +5143,103 @@ msgstr "断开选中的望远镜"
 msgid "Select a directory"
 msgstr "选择目录"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:288
+#: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to"
 msgstr "把望远镜指向"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:290
+#: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "There are no active devices."
 msgstr "没有活动设备。"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:291
+#: plugins/TelescopeControl/src/ui_slewDialog.h:290
 msgid "Slew telescope to coordinates"
 msgstr "把望远镜指向坐标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:292
+#: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "De&clination (J2000):"
 msgstr "赤纬 (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:293
+#: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Right Ascension (J2000):"
 msgstr "赤经 (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:294
+#: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
-msgstr ""
+msgstr "&当前目标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:296
+#: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
 msgstr "时分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "Degrees-minutes-seconds format"
 msgstr "度分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:302
+#: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:304
+#: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Decimal degrees"
 msgstr "十进制度"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:306
+#: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "D&ecimal"
 msgstr "十进制 (&e)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "&Slew"
 msgstr "指向 (&S)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:308
+#: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Configure &telescopes..."
 msgstr "配置望远镜 (%T)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "Telescope Configuration"
 msgstr "望远镜配置"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope controlled by:"
 msgstr "望远镜由...控制："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr "望远镜通过串口连接到本机，并被Stellarium直接控制。"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid "Stellarium, directly through a serial port"
 msgstr "Stellarium 直接通过串口控制"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:479
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr "望远镜被外部程序控制，不在本机就在远程计算机。"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "External software or a remote computer"
 msgstr "外部程序或远程计算机"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr "模拟一个"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Telescope properties"
 msgstr "望远镜属性"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Connection delay:"
 msgstr "连接延迟："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:487
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
@@ -5255,130 +5248,130 @@ msgstr ""
 "望远镜的信号传入 Stellarium 所用的近似时间。\n"
 "如果您发现十字准星在跳动，请增大这一数值。"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
 msgstr "指标系统："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
 msgstr "J2000 (默认)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
 msgstr "本日历元 (JNow)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr "启动时自动尝试连接望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
 msgstr "启动时自动连接"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
 msgstr "设备设置"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
 msgstr "串口："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
 msgstr "设备型号:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
 msgstr "连接设置"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
 msgstr "主机："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr "望远镜服务器主机名或IPv4地址"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "TCP port:"
 msgstr "TCP端口："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "User interface settings"
 msgstr "用户界面设置"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:508
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr "在望远镜十字准星周围显示指定视角的圆圈"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Use field of view indicators"
 msgstr "使用视场标记"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Circle size(s):"
 msgstr "圆圈大小："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr "最多十个角度，以逗号分隔。"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
 msgstr "确定"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
 msgstr "望远镜控制"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
 msgstr "配置所选定的望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
 msgstr "配置"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
 msgstr "增加一个新望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Remove the selected telescope"
 msgstr "移除所选的望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
 msgstr "用户图形界面"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
 msgstr "显示望远镜标签"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
 msgstr "显示望远镜十字线"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
 msgstr "显示视场标记"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
 msgstr "文件"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
 msgstr "将望远镜设备消息记录至文件"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr "使用望远镜服务器的可执行文件（用以覆盖内置驱动）"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
 msgstr "可执行文件目录:"
 
@@ -6231,7 +6224,7 @@ msgstr "秒差距"
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr ""
+msgstr "自转能量损失速率：%1尔格/秒"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
@@ -6252,7 +6245,7 @@ msgstr "周年视差：%1 毫弧秒"
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "基于电子密度分布模型计算的距离：%1 千秒差距（%2 光年）"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
@@ -6508,62 +6501,62 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "一月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "二月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "三月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "四月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "五月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "六月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "七月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "八月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "九月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "十月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "十一月"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "十二月"
 
 #: plugins/Observability/src/Observability.cpp:467
 #: plugins/Observability/src/Observability.cpp:468
@@ -6672,11 +6665,11 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:675
 msgid "TODAY:"
-msgstr ""
+msgstr "今天："
 
 #: plugins/Observability/src/Observability.cpp:684
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "本年："
 
 #: plugins/Observability/src/Observability.cpp:1428
 #, qt-format
@@ -6989,6 +6982,9 @@ msgstr "0 度"
 
 #~ msgid "Planets labels"
 #~ msgstr "行星标签"
+
+#~ msgid "Form"
+#~ msgstr "格式"
 
 #~ msgid "Light pollution: "
 #~ msgstr "光污染: "

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-09-26 18:56+0700\n"
+"POT-Creation-Date: 2012-10-20 18:00+0700\n"
 "PO-Revision-Date: 2012-01-26 14:00+0000\n"
 "Last-Translator: Ravi Prakash Arya <vedicscience@hotmail.com>\n"
 "Language-Team: Hindi <hi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-29 13:04+0000\n"
-"X-Generator: Launchpad (build 16049)\n"
+"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
+"X-Generator: Launchpad (build 16165)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -169,22 +169,22 @@ msgstr ""
 msgid "Mean solar day: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Elongation: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Phase: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:516
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr ""
@@ -389,31 +389,31 @@ msgstr ""
 msgid "Found"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:403 src/gui/ConfigurationDialog.cpp:405
+#: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
 msgstr "स्क्रीनशॉट डायरेक्टरी चुने"
 
-#: src/gui/ConfigurationDialog.cpp:620
+#: src/gui/ConfigurationDialog.cpp:633
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "प्रारंभिक कोणीय दृष्टिक्षेत्र: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:628
+#: src/gui/ConfigurationDialog.cpp:641
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "प्रारंभिक दृश्य दिशा एज/आल्ट: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:670
+#: src/gui/ConfigurationDialog.cpp:683
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "रचयिता"
 
-#: src/gui/ConfigurationDialog.cpp:671 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "सम्पर्क करें"
 
-#: src/gui/ConfigurationDialog.cpp:754
+#: src/gui/ConfigurationDialog.cpp:767
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -422,19 +422,19 @@ msgstr "सम्पर्क करें"
 msgid "Author"
 msgstr "रचयिता"
 
-#: src/gui/ConfigurationDialog.cpp:758
+#: src/gui/ConfigurationDialog.cpp:771
 msgid "License"
 msgstr "अनुज्ञापत्र (लाइसेंस)"
 
-#: src/gui/ConfigurationDialog.cpp:782
+#: src/gui/ConfigurationDialog.cpp:795
 msgid "Running script: "
 msgstr "सक्रिय स्क्रिप्ट: "
 
-#: src/gui/ConfigurationDialog.cpp:789
+#: src/gui/ConfigurationDialog.cpp:802
 msgid "Running script: [none]"
 msgstr "सक्रिय स्क्रिप्ट: [कोई नहीं]"
 
-#: src/gui/ConfigurationDialog.cpp:852
+#: src/gui/ConfigurationDialog.cpp:865
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -442,16 +442,16 @@ msgstr ""
 "तारों के नए कैटालोग डाऊनलोड हो चुके है!\n"
 "उन्हें देखने के लिए स्टेलारियम पुनः शुरू करें"
 
-#: src/gui/ConfigurationDialog.cpp:856
+#: src/gui/ConfigurationDialog.cpp:869
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:874
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 में से %1 कैटालोग प्राप्त करें"
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:881
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -460,7 +460,7 @@ msgstr ""
 "डाउनलोड शुरू %1...\n"
 "(खिडकी बंद कर सकते है)"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:888
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -471,7 +471,7 @@ msgstr ""
 "तारों की संख्या: %2 Million\n"
 "तेजस्विता विस्तार: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:918 src/gui/ConfigurationDialog.cpp:954
+#: src/gui/ConfigurationDialog.cpp:931 src/gui/ConfigurationDialog.cpp:967
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -480,11 +480,11 @@ msgstr ""
 "%1 डाउनलोड नही हो पाया:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1006
+#: src/gui/ConfigurationDialog.cpp:1019
 msgid "Verifying file integrity..."
 msgstr "फाइल की जांच हो रही है..."
 
-#: src/gui/ConfigurationDialog.cpp:1010
+#: src/gui/ConfigurationDialog.cpp:1023
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2898,7 +2898,7 @@ msgstr ""
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
-#: src/translations.h:601 src/ui_configurationDialog.h:1129
+#: src/translations.h:601 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Scripts"
 msgstr "स्क्रिप्ट"
@@ -2948,7 +2948,7 @@ msgid ":"
 msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "सहायता"
 
@@ -3167,8 +3167,8 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:1100 src/ui_configurationDialog.h:1111
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: src/ui_configurationDialog.h:1092 src/ui_configurationDialog.h:1103
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "पर्याय"
 
@@ -3389,19 +3389,19 @@ msgstr "यह परंपरा प्रारंभ से दिखाए�
 msgid "Visible"
 msgstr "दृश्य"
 
-#: src/ui_configurationDialog.h:949
+#: src/ui_configurationDialog.h:941
 msgid "Configuration"
 msgstr "विन्यास"
 
-#: src/ui_configurationDialog.h:951
+#: src/ui_configurationDialog.h:943
 msgid "Program language"
 msgstr "प्रोग्राम की भाषा"
 
-#: src/ui_configurationDialog.h:952
+#: src/ui_configurationDialog.h:944
 msgid "Default options"
 msgstr "शुरूआती विकल्प"
 
-#: src/ui_configurationDialog.h:954
+#: src/ui_configurationDialog.h:946
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3409,20 +3409,20 @@ msgstr ""
 "इस बार बदले गए विकल्पों को अगली बार स्टेलारियम की शुरुआत में लागू करने के "
 "लिए सेव करें."
 
-#: src/ui_configurationDialog.h:956
+#: src/ui_configurationDialog.h:948
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "विकल्प सेव करें"
 
-#: src/ui_configurationDialog.h:958
+#: src/ui_configurationDialog.h:950
 msgid "Restore the default settings that came with Stellarium"
 msgstr "स्टेलारियम के साथ आये आरंभिक विकल्प लागु करें"
 
-#: src/ui_configurationDialog.h:960
+#: src/ui_configurationDialog.h:952
 msgid "Restore defaults"
 msgstr "आरंभिक विकल्प लागु करें"
 
-#: src/ui_configurationDialog.h:961
+#: src/ui_configurationDialog.h:953
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3432,239 +3432,239 @@ msgstr ""
 "वर्तमान विकल्पों में से दृष्टिक्षेत्र व दृश्य की दिशा अगली बार के लिए सेव की "
 "जा रही है."
 
-#: src/ui_configurationDialog.h:963
+#: src/ui_configurationDialog.h:955
 msgid "The width of your view when Stellarium starts"
 msgstr "स्टेलारियम सुरु होते ही दिखने वाले दृश्य की चौड़ाई"
 
-#: src/ui_configurationDialog.h:966
+#: src/ui_configurationDialog.h:958
 msgid "The direction you're looking when Stellarium starts"
 msgstr "स्टेलारियम इस दिशा से शुरू करें"
 
-#: src/ui_configurationDialog.h:968 src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:960 src/ui_configurationDialog.h:1114
 msgid "Selected object information"
 msgstr "चुनी वस्तु की जानकारी देखें"
 
-#: src/ui_configurationDialog.h:970
+#: src/ui_configurationDialog.h:962
 msgid "Display all information available"
 msgstr "पूर्ण जानकारी देखें"
 
-#: src/ui_configurationDialog.h:972
+#: src/ui_configurationDialog.h:964
 msgid "All available"
 msgstr "उपलब्ध सारी"
 
-#: src/ui_configurationDialog.h:974
+#: src/ui_configurationDialog.h:966
 msgid "Display less information"
 msgstr "कम जानकारी देखें"
 
-#: src/ui_configurationDialog.h:976
+#: src/ui_configurationDialog.h:968
 msgid "Short"
 msgstr "थोड़ी सी"
 
-#: src/ui_configurationDialog.h:978
+#: src/ui_configurationDialog.h:970
 msgid "Display no information"
 msgstr "कोई जानकारी न दिखाएँ"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:972
 msgid "None"
 msgstr "बिलकुल नहीं"
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:976
 msgid "Customized"
 msgstr ""
 
-#: src/ui_configurationDialog.h:985
+#: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
 msgstr ""
 
-#: src/ui_configurationDialog.h:987
+#: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:989
+#: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:991
+#: src/ui_configurationDialog.h:983
 msgid "Topocentric equatorial coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:993
+#: src/ui_configurationDialog.h:985
 msgid "Hour angle/Declination"
 msgstr ""
 
-#: src/ui_configurationDialog.h:995
+#: src/ui_configurationDialog.h:987
 msgid "Horizontal coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:997
+#: src/ui_configurationDialog.h:989
 msgid "Altitude/Azimuth"
 msgstr ""
 
-#: src/ui_configurationDialog.h:998
+#: src/ui_configurationDialog.h:990
 msgid "Visual magnitude"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:992
 msgid "Angular or physical size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:994
 msgid "Size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:995
 msgid "Additional information 3"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:999
 msgid "Additional information 2"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1000
 msgid "Absolute magnitude"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1001
 msgid "Distance"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1002
 msgid "Catalog number(s)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1003
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1005
 msgid "Spectral class, nebula type, etc."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1007
 msgid "Additional information 1"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1021
+#: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1016
 msgid "Control"
 msgstr "संचालन"
 
-#: src/ui_configurationDialog.h:1026
+#: src/ui_configurationDialog.h:1018
 msgid "Allow keyboard to pan and zoom"
 msgstr "कीबोर्ड से दृश्य घुमाएँ व ज़ूम करें"
 
-#: src/ui_configurationDialog.h:1028
+#: src/ui_configurationDialog.h:1020
 msgid "Enable keyboard navigation"
 msgstr "कीबोर्ड से आकाश की सैर करें"
 
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1022
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "माउस से दृश्य घुमाएँ (खिंच कर) तथा ज़ूम करें (स्क्रोल पहिये से)"
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1024
 msgid "Enable mouse navigation"
 msgstr "माउस से आकाश की सैर करें"
 
-#: src/ui_configurationDialog.h:1033
-msgid "Edit keyboard shortcuts"
+#: src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
 msgstr "प्रारम्भिक तिथि व समय"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1028
 msgid "Starts Stellarium at system clock date and time"
 msgstr "स्टेलारियम को कंप्यूटर के समय और तिथि के साथ शुरू करें"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1030
 msgid "System date and time"
 msgstr "कंप्यूटर की तिथि व समय"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1032
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "अगली बार स्टेलारियम की शुरुआत वर्तमान तिथि के इस समय से करें."
 
-#: src/ui_configurationDialog.h:1042
+#: src/ui_configurationDialog.h:1034
 msgid "System date at:"
 msgstr "कम्पूटर तिथि का यह समय:"
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1036
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "स्टेलारियम को निर्धारित तिथि और समय में शुरू करें"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1038
 msgid "Other:"
 msgstr "अन्य:"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1039
 msgid "use current"
 msgstr "वर्तमानकाल का प्रयोग करें"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1040
 msgid "Other"
 msgstr "अन्य"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1042
 msgid "Hides the mouse cursor when inactive"
 msgstr "निष्क्रिय होने पर माउस कर्सर अदृश्य किया जायेगा"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1044
 msgid "Mouse cursor timeout (seconds):"
 msgstr "माउस कर्सर इतनी देर दिखेगा (सेकंड में):"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1046
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "दृश्य को लम्बवत व क्षैतिज रूप से पलटने वाली बटन शुरू / बंद करें."
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1048
 msgid "Show flip buttons"
 msgstr "दृश्य पलटने वाली बटन दिखाएँ"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1050
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1052
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1053
 msgid "Planetarium options"
 msgstr "ताराघर प्रयोग के विकल्प"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1055
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "एक केंद्रीय गोल छोड़ अतिरिक्त सारा दृश्य काला करें"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1057
 msgid "Disc viewport"
 msgstr "चकती जैसा दृश्यपटल"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1059
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3672,31 +3672,31 @@ msgstr ""
 "गोलाकार दर्पण विरूपण का स्टेलारियम के किसी कम लागत के तारघर में गोलाकार "
 "दर्पण के साथ प्रदर्शन के लिए किया जाता है."
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1061
 msgid "Spheric mirror distortion"
 msgstr "गोलाकार दर्पण विरूपण"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1063
 msgid "Align labels with the horizon"
 msgstr "नामों को क्षितिज से समांतर लिखें"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1065
 msgid "Gravity labels"
 msgstr "दृश्य केंद्रित नाम"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1067
 msgid "Hide other constellations when you click one"
 msgstr "एक आकृति चुनते ही दूसरी आकृतियाँ अदृश्य करें"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1069
 msgid "Select single constellation"
 msgstr "एक आकृति चुने"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1072
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3704,88 +3704,88 @@ msgstr ""
 "सक्रिय करने पर \"स्वतः बाहर ज़ूम\" कुंजी ही आरंभिक दृश्य की दिशा भी निर्धारित "
 "करेगी"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1074
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "स्वतः बाहर ज़ूम होने पर आरंभिक दृश्य की दिशा दिखेगी"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1075
 msgid "Screenshots"
 msgstr "स्क्रीनशॉट"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1076
 msgid "Screenshot Directory"
 msgstr "स्क्रीनशॉट डायरेक्टरी"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1078
 msgid "Invert colors"
 msgstr "रंग उल्टे करें"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1079
 msgid "Star catalog updates"
 msgstr "नवीनतम तारों के कटालोग"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1081
 msgid "Click here to start downloading"
 msgstr "डाऊनलोड के लिए यहाँ क्लिक करें"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1083
 msgid "Download this file to view even more stars"
 msgstr "अधिक तारें देखने के लिए यह फाइल डाउनलोड करें"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1085
 msgid "Restart the download"
 msgstr "डाउनलोड पुनः शुरू करें"
 
-#: src/ui_configurationDialog.h:1095
+#: src/ui_configurationDialog.h:1087
 msgid "Retry"
 msgstr "फिर से"
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1089
 msgid "Stop the download. You can always restart it later"
 msgstr "डाउन्लोड स्थगित करें. यह बाद में शुरू किया जा सकता है."
 
-#: src/ui_configurationDialog.h:1099
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
+#: src/ui_configurationDialog.h:1091
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1094
 msgid "Close window when script runs"
 msgstr "स्क्रिप्ट चलने पर खिडकी बंद करें"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1096
 msgid "Run the selected script"
 msgstr "चुनी हुई स्क्रिप्ट को चलायें"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1100
 msgid "Stop a running script"
 msgstr "स्क्रिप्ट चलना बंद करें"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1104
 msgid "Load at startup"
 msgstr "शुरुआत से इस्तेमाल करें"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1105
 msgid "configure"
 msgstr "रुचि अनुसार बदलें"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1110
 msgid "Main"
 msgstr "मुख्य"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1112
 msgid "Information"
 msgstr "जानकारी"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1117
 msgid "Navigation"
 msgstr "भ्रमण"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1119
 msgid "Tools"
 msgstr "उपकरण"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1123
 msgid "Plugins"
 msgstr "प्लग-इन"
 
@@ -3810,7 +3810,7 @@ msgid "Remove an installed landscape"
 msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:275
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Remove"
 msgstr ""
@@ -3821,42 +3821,35 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:212
-#: plugins/TelescopeControl/src/ui_slewDialog.h:287
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
-msgid "Form"
-msgstr "फॉर्म"
-
-#: src/ui_shortcutsDialog.h:213
-msgid "Shortcuts Editor"
+#: src/ui_shortcutsDialog.h:201
+msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:216
+#: src/ui_shortcutsDialog.h:204
 msgid "Alternative shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:217
+#: src/ui_shortcutsDialog.h:205
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:218
-msgid "Action name"
+#: src/ui_shortcutsDialog.h:206
+msgid "Action"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:219
+#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:220
+#: src/ui_shortcutsDialog.h:208
 msgid "Edit Alternative Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:223
+#: src/ui_shortcutsDialog.h:211
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:224
+#: src/ui_shortcutsDialog.h:212
 msgid "Apply"
 msgstr ""
 
@@ -4330,7 +4323,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr ""
 
@@ -4338,7 +4331,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr ""
 
@@ -4390,8 +4383,8 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr ""
 
@@ -4409,7 +4402,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
@@ -5121,7 +5114,7 @@ msgid "virtual"
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Start"
 msgstr ""
 
@@ -5157,233 +5150,233 @@ msgstr ""
 msgid "Select a directory"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:288
+#: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:290
+#: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:291
+#: plugins/TelescopeControl/src/ui_slewDialog.h:290
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:292
+#: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "De&clination (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:293
+#: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:294
+#: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:296
+#: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:302
+#: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:304
+#: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:306
+#: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:308
+#: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Configure &telescopes..."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "Telescope Configuration"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope controlled by:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid "Stellarium, directly through a serial port"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:479
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "External software or a remote computer"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Telescope properties"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Connection delay:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:487
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "TCP port:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "User interface settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:508
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Use field of view indicators"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Circle size(s):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Remove the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
 msgstr ""
 
@@ -7071,3 +7064,6 @@ msgstr ""
 
 #~ msgid "Set UI Locale: "
 #~ msgstr "उपयोगकर्ता के अनुरूप UI बदलें: "
+
+#~ msgid "Form"
+#~ msgstr "फॉर्म"
