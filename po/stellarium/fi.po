@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-26 18:56+0700\n"
-"PO-Revision-Date: 2011-10-24 08:31+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
+"POT-Creation-Date: 2012-10-20 18:00+0700\n"
+"PO-Revision-Date: 2012-10-13 08:56+0000\n"
+"Last-Translator: Tuomas Teipainen <tuomastpnen@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-29 13:04+0000\n"
-"X-Generator: Launchpad (build 16049)\n"
+"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
+"X-Generator: Launchpad (build 16165)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -123,12 +123,12 @@ msgstr "Absoluuttinen magnitudi: %1"
 #: src/core/modules/Planet.cpp:455
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptinen toposentri (päivän): %1/%2"
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Kaltevuus (päivän, maalle): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -157,34 +157,34 @@ msgstr "Näennäinen läpimitta: %1"
 #: src/core/modules/Comet.cpp:163
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Sideerinen kiertoaika: %1 päivää (%2a)"
 
 #: src/core/modules/Planet.cpp:502
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Sideerinen päivä: %1"
 
 #: src/core/modules/Planet.cpp:506
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Keskimääräinen aurinkopäivä: %1"
 
-#: src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Vaihekulma: %1"
 
-#: src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongaatio: %1"
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Phase: %1"
 msgstr "Vaihe: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:516
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Valaistu: %1"
@@ -192,7 +192,7 @@ msgstr "Valaistu: %1"
 #: src/core/modules/MinorPlanet.cpp:189
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Väliaikainen nimitys: %1"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -358,7 +358,7 @@ msgstr "Rekl./Dekl. (nykyhetki): %1/%2"
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "Galaktinen pituuspiiri/leveyspiiri (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -386,7 +386,7 @@ msgstr "Verkkovirhe"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Virheenkorjaustila"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
@@ -404,31 +404,31 @@ msgstr "Ei löytynyt"
 msgid "Found"
 msgstr "Löydetty"
 
-#: src/gui/ConfigurationDialog.cpp:403 src/gui/ConfigurationDialog.cpp:405
+#: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
 msgstr "Valitse kuvankaappaushakemisto"
 
-#: src/gui/ConfigurationDialog.cpp:620
+#: src/gui/ConfigurationDialog.cpp:633
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Aloitusnäkökenttä: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:628
+#: src/gui/ConfigurationDialog.cpp:641
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Aloituskatselusuunta Atsim./Kork.: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:670
+#: src/gui/ConfigurationDialog.cpp:683
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Tekijät"
 
-#: src/gui/ConfigurationDialog.cpp:671 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Yhteystieto"
 
-#: src/gui/ConfigurationDialog.cpp:754
+#: src/gui/ConfigurationDialog.cpp:767
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -437,19 +437,19 @@ msgstr "Yhteystieto"
 msgid "Author"
 msgstr "Tekijä"
 
-#: src/gui/ConfigurationDialog.cpp:758
+#: src/gui/ConfigurationDialog.cpp:771
 msgid "License"
 msgstr "Lisenssi"
 
-#: src/gui/ConfigurationDialog.cpp:782
+#: src/gui/ConfigurationDialog.cpp:795
 msgid "Running script: "
 msgstr "Suorittaa komentosarjaa: "
 
-#: src/gui/ConfigurationDialog.cpp:789
+#: src/gui/ConfigurationDialog.cpp:802
 msgid "Running script: [none]"
 msgstr "Suorittaa komentosarjaa: [ei mitään]"
 
-#: src/gui/ConfigurationDialog.cpp:852
+#: src/gui/ConfigurationDialog.cpp:865
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -457,16 +457,16 @@ msgstr ""
 "Uudet tähtiluettelot haettu!\n"
 "Käynnistä Stellarium uudellen nähdäksesi ne."
 
-#: src/gui/ConfigurationDialog.cpp:856
+#: src/gui/ConfigurationDialog.cpp:869
 msgid "All available star catalogs have been installed."
 msgstr "Kaikki saatavilla olevat tähtiluettelot on asennettu."
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:874
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Hae luettelo %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:881
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -475,7 +475,7 @@ msgstr ""
 "Haetaan %1...\n"
 "(Voit sulkea tämän ikkunan.)"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:888
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -486,7 +486,7 @@ msgstr ""
 "Tähtien määrä: %2 miljoonaa\n"
 "Magnitudiväli: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:918 src/gui/ConfigurationDialog.cpp:954
+#: src/gui/ConfigurationDialog.cpp:931 src/gui/ConfigurationDialog.cpp:967
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -495,11 +495,11 @@ msgstr ""
 "Virhe haettaessa tiedostoa %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1006
+#: src/gui/ConfigurationDialog.cpp:1019
 msgid "Verifying file integrity..."
 msgstr "Tarkastetaan yhteensopivuutta..."
 
-#: src/gui/ConfigurationDialog.cpp:1010
+#: src/gui/ConfigurationDialog.cpp:1023
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -558,11 +558,11 @@ msgstr "CTRL + napsauta vasemmalla"
 
 #: src/gui/HelpDialog.cpp:149
 msgid "F7"
-msgstr ""
+msgstr "F7"
 
 #: src/gui/HelpDialog.cpp:150
 msgid "Show and edit all keyboard shortcuts"
-msgstr ""
+msgstr "Näytä ja muokkaa kaikkia pikanäppäimiä"
 
 #: src/gui/HelpDialog.cpp:156
 msgid "Further Reading"
@@ -798,7 +798,7 @@ msgstr "Voit poistaa sen käsin poistamalla seuraavan hakemiston: %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "pikakäynnistys..."
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
@@ -806,15 +806,15 @@ msgstr "valittu teksti"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "poista teksti"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "poista kuvat"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "luonnollinen"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
@@ -1110,22 +1110,22 @@ msgstr "Aurinkokunnan havaitsija"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "Sedna"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "Quaoar"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Orcus"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "Haumea"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1180,12 +1180,12 @@ msgstr "Hektor"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "Varuna"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "Makemake"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1272,7 +1272,7 @@ msgstr "Länsimainen"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:166
 msgid "Guereins"
-msgstr ""
+msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:168
@@ -1282,7 +1282,7 @@ msgstr "Puut"
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:172
 msgid "Hurricane"
-msgstr ""
+msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:174
@@ -1292,7 +1292,7 @@ msgstr "Valtameri"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:176
 msgid "Garching"
-msgstr ""
+msgstr "Garching"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
@@ -1332,62 +1332,62 @@ msgstr "Eläinrata"
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "Merkurius, kolminjkertainen auringonnousu ja -lasku"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:200
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "Kaksinkertainen pimennys Deimoksessa 2017"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:202
 msgid "Double eclipse from Deimos in 2031"
-msgstr ""
+msgstr "Kaksinkertainen pimennys Deimoksessa 2031"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:204
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr ""
+msgstr "Pimennys Olympys Monsilta 10. tammikuuta 2068"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr ""
+msgstr "Maan ja Jupiterin peittyminen 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:208
 msgid "A Quintuple eclipse from Deimos 2027"
-msgstr ""
+msgstr "Viisnkertainen pimennys Deimoksessa 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:210
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "Aurinkokuntanäytönsäästäjä"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:212
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Tähdistömatka"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:214
 msgid "Sun from different planets"
-msgstr ""
+msgstr "Aurinko eri planeetoilta"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "Parhaat näkymät maahan eri taivaankappaleilta"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
 msgid "Transit of Venus"
-msgstr ""
+msgstr "Venuksen ylikulku"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:220
 msgid "Analemma"
-msgstr ""
+msgstr "Analemma"
 
 #: src/translations.h:223
 msgid "Look around each installed landscape."
@@ -1431,22 +1431,32 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
+"Merkuriuksen radan ja pyörimisen erikoisuuden takia aurinko nousee ja laskee "
+"tietyistä planeetan pinnan kohdista havaittuna 3 kertaa yhden Merkuriuksen "
+"päivän aikana."
 
 #: src/translations.h:231
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
+"Juuri ennen kuin Mars pimentää auringon, Phobos tulee esiin sen takaa ja "
+"pimentää auringon ensimmäisenä. Pimennys tapahtuu Skorpionin ja Jousimiehen "
+"välillä 26. huhtikuuta 2017."
 
 #: src/translations.h:232
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
+"Juuri ennen kuin Mars peittää Auringon, Phobos tulee esiin sen takaa ja "
+"pimentää Auringon ensin. Pimennys tapahtuu härän ja kaksosten välillä 23. "
+"heinäkuuta 2031."
 
 #: src/translations.h:233
 msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
 msgstr ""
+"Phobos pimentää auringon nähtynä Olympys Monsilta 10. tammikuuta 2068."
 
 #: src/translations.h:234
 msgid ""
@@ -1454,6 +1464,9 @@ msgid ""
 "Occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Maan peittyminen Phoboksen taakse on yleistä, kuten Jupiterinkin. Näiden "
+"tapahtuminen samana päivänä on kuitenkin hyvin harvinaista. Tämä pimennys "
+"tapahtuu 23. tammikuuta 2048."
 
 #: src/translations.h:234
 msgid ""
@@ -1467,6 +1480,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 171 events in all!"
 msgstr ""
+"Näytönsäästäjä aurinkokunnan erilaisista tapahtumista. Kaikkiaan 171 "
+"tapahtumaa!"
 
 #: src/translations.h:236
 msgid "A tour via western constellations."
@@ -1474,21 +1489,25 @@ msgstr ""
 
 #: src/translations.h:237
 msgid "Look at Sun from big planets of Solar system and Pluto."
-msgstr ""
+msgstr "Näkymä aurinkoon aurinkokuntamme isoilta planeetoilta sekä Plutosta."
 
 #: src/translations.h:238
 msgid "Earth best views from other Solar system bodies in the 21st Century."
 msgstr ""
+"Parhaat näkymät maahan muilta taivaankappaleilta 2000-luvun ensimmäisellä "
+"vuosisadalla."
 
 #: src/translations.h:239
 msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
-msgstr ""
+msgstr "Venuksen ylikulku nähtynä Sydenystä Australiasta 6. kesäkuuta 2012."
 
 #: src/translations.h:240
 msgid ""
 "This script shows the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"Komentosarja esittelee analemman - Auringon vuotuisen liikkeen muodostaman "
+"kuvion taivaalla."
 
 #: src/translations.h:241
 msgid ""
@@ -2930,7 +2949,7 @@ msgstr ""
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Suuntaa kaukoputki annetuihin koordinaatteihin"
 
-#: src/translations.h:601 src/ui_configurationDialog.h:1129
+#: src/translations.h:601 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Scripts"
 msgstr "Komentojonot"
@@ -2980,7 +2999,7 @@ msgid ":"
 msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "Ohje"
 
@@ -3200,8 +3219,8 @@ msgstr "Palvelin:"
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:1100 src/ui_configurationDialog.h:1111
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: src/ui_configurationDialog.h:1092 src/ui_configurationDialog.h:1103
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Asetukset"
 
@@ -3422,19 +3441,19 @@ msgstr "Käytä tätä taivaskulttuuria oletuksena"
 msgid "Visible"
 msgstr "Näkyvä"
 
-#: src/ui_configurationDialog.h:949
+#: src/ui_configurationDialog.h:941
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: src/ui_configurationDialog.h:951
+#: src/ui_configurationDialog.h:943
 msgid "Program language"
 msgstr "Ohjelman kieli"
 
-#: src/ui_configurationDialog.h:952
+#: src/ui_configurationDialog.h:944
 msgid "Default options"
 msgstr "Oletusasetukset"
 
-#: src/ui_configurationDialog.h:954
+#: src/ui_configurationDialog.h:946
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3442,20 +3461,20 @@ msgstr ""
 "Tallenna tässä istunnossa muuttamasi asetukset, jotta ne olisivat samat "
 "seuraavalla Stellariumin käynnistyskerralla"
 
-#: src/ui_configurationDialog.h:956
+#: src/ui_configurationDialog.h:948
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "Tallenna asetukset"
 
-#: src/ui_configurationDialog.h:958
+#: src/ui_configurationDialog.h:950
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Palauta Stellariumin mukana tulleet oletusasetukset"
 
-#: src/ui_configurationDialog.h:960
+#: src/ui_configurationDialog.h:952
 msgid "Restore defaults"
 msgstr "Palauta oletusarvot"
 
-#: src/ui_configurationDialog.h:961
+#: src/ui_configurationDialog.h:953
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3465,241 +3484,241 @@ msgstr ""
 "Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset mukaan "
 "lukien nykyinen näkökenttä ja katselusuunta."
 
-#: src/ui_configurationDialog.h:963
+#: src/ui_configurationDialog.h:955
 msgid "The width of your view when Stellarium starts"
 msgstr "Näkymän leveys Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:966
+#: src/ui_configurationDialog.h:958
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Katselusuunta Stellarium käynnistyessä"
 
-#: src/ui_configurationDialog.h:968 src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:960 src/ui_configurationDialog.h:1114
 msgid "Selected object information"
 msgstr "Valitun kohteen tiedot"
 
-#: src/ui_configurationDialog.h:970
+#: src/ui_configurationDialog.h:962
 msgid "Display all information available"
 msgstr "Näytä kaikki saatavat olevat tiedot"
 
-#: src/ui_configurationDialog.h:972
+#: src/ui_configurationDialog.h:964
 msgid "All available"
 msgstr "Kaikki saatavilla olevat"
 
-#: src/ui_configurationDialog.h:974
+#: src/ui_configurationDialog.h:966
 msgid "Display less information"
 msgstr "Näytä vähemmän tietoja"
 
-#: src/ui_configurationDialog.h:976
+#: src/ui_configurationDialog.h:968
 msgid "Short"
 msgstr "Lyhennetyt"
 
-#: src/ui_configurationDialog.h:978
+#: src/ui_configurationDialog.h:970
 msgid "Display no information"
 msgstr "Älä näytä tietoja"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:972
 msgid "None"
 msgstr "Ei tietoja"
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:976
 msgid "Customized"
 msgstr ""
 
-#: src/ui_configurationDialog.h:985
+#: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
 msgstr ""
 
-#: src/ui_configurationDialog.h:987
+#: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:989
+#: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:991
+#: src/ui_configurationDialog.h:983
 msgid "Topocentric equatorial coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:993
+#: src/ui_configurationDialog.h:985
 msgid "Hour angle/Declination"
 msgstr ""
 
-#: src/ui_configurationDialog.h:995
+#: src/ui_configurationDialog.h:987
 msgid "Horizontal coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:997
+#: src/ui_configurationDialog.h:989
 msgid "Altitude/Azimuth"
 msgstr ""
 
-#: src/ui_configurationDialog.h:998
+#: src/ui_configurationDialog.h:990
 msgid "Visual magnitude"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:992
 msgid "Angular or physical size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:994
 msgid "Size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:995
 msgid "Additional information 3"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:999
 msgid "Additional information 2"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1000
 msgid "Absolute magnitude"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1001
 msgid "Distance"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1002
 msgid "Catalog number(s)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1003
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1005
 msgid "Spectral class, nebula type, etc."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1007
 msgid "Additional information 1"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1021
+#: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1016
 msgid "Control"
 msgstr "Hallinta"
 
-#: src/ui_configurationDialog.h:1026
+#: src/ui_configurationDialog.h:1018
 msgid "Allow keyboard to pan and zoom"
 msgstr "Salli siirtyminen ja suurennus/loitonnus näppäimistöllä"
 
-#: src/ui_configurationDialog.h:1028
+#: src/ui_configurationDialog.h:1020
 msgid "Enable keyboard navigation"
 msgstr "Salli liikkuminen näppäimistöllä"
 
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1022
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Salli hiirellä liikkuminen (vetämällä) ja suurennus/loitonnus (rullalla)"
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1024
 msgid "Enable mouse navigation"
 msgstr "Salli hiirellä liikkuminen"
 
-#: src/ui_configurationDialog.h:1033
-msgid "Edit keyboard shortcuts"
+#: src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
 msgstr "Aloituspäiväys ja -aika"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1028
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Käynnistää Stellariumin järjestelmän päiväyksellä ja ajalla"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1030
 msgid "System date and time"
 msgstr "Järjestelmän päiväys ja aika"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1032
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 "Asettaa simulaation ajaksi Stellariumin käynnistyspäivää seuraavaksi ajaksi"
 
-#: src/ui_configurationDialog.h:1042
+#: src/ui_configurationDialog.h:1034
 msgid "System date at:"
 msgstr "Järjestelmän päiväys:"
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1036
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Käytä tiettyä päiväystä ja aikaa Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1038
 msgid "Other:"
 msgstr "Muu:"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1039
 msgid "use current"
 msgstr "Käytä nykyistä"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1040
 msgid "Other"
 msgstr "Muut"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1042
 msgid "Hides the mouse cursor when inactive"
 msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1044
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Hiiren osoittimen aikakatkaisu (sekunteja):"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1046
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Pysty- ja vaakapeilauksen painikkeet päälle/pois."
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1048
 msgid "Show flip buttons"
 msgstr "Näytä peilauspainikkeet"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1050
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1052
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1053
 msgid "Planetarium options"
 msgstr "Planetaarioasetukset"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1055
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1057
 msgid "Disc viewport"
 msgstr "Putkinäkymä"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1059
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3707,31 +3726,31 @@ msgstr ""
 "Pallopeilikorjausta käytetään, kun Stellarium heijastetaan pallopeilille "
 "halvoissa planetaariojärjestelmissä."
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1061
 msgid "Spheric mirror distortion"
 msgstr "Pallopeilikorjaus"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1063
 msgid "Align labels with the horizon"
 msgstr "Suuntaa nimet horisontin mukaan"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1065
 msgid "Gravity labels"
 msgstr "\"Gravitaationimet\""
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1067
 msgid "Hide other constellations when you click one"
 msgstr "Piilota muut tähdistöstä napsautettaessa yhtä"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1069
 msgid "Select single constellation"
 msgstr "Valitse yksittäinen tähdistö"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1072
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3739,88 +3758,88 @@ msgstr ""
 "Kun käytössä, \"automaattinen loitonnus\"-näppäin asettaa myös "
 "aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1074
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automaattinen loitonnus palauttaa aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1075
 msgid "Screenshots"
 msgstr "Kuvankaappaukset"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1076
 msgid "Screenshot Directory"
 msgstr "Kuvankaappaushakemisto"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1078
 msgid "Invert colors"
 msgstr "Käänteiset värit"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1079
 msgid "Star catalog updates"
 msgstr "Tähtiluetteloiden päivitykset"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1081
 msgid "Click here to start downloading"
 msgstr "Napsauta tästä aloittaaksesi haku"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1083
 msgid "Download this file to view even more stars"
 msgstr "Hae tämä tiedosto näyttääkseni enemmän tähtiä"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1085
 msgid "Restart the download"
 msgstr "Aloita haku uudelleen"
 
-#: src/ui_configurationDialog.h:1095
+#: src/ui_configurationDialog.h:1087
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1089
 msgid "Stop the download. You can always restart it later"
 msgstr "Keskeytä haku. Voit aina aloittaa sen myöhemmin uudelleen"
 
-#: src/ui_configurationDialog.h:1099
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
+#: src/ui_configurationDialog.h:1091
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "Peru"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1094
 msgid "Close window when script runs"
 msgstr "Sulje ikkuna komentosarjaa suoritettaessa"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1096
 msgid "Run the selected script"
 msgstr "Suorita valittu komentosarja"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1100
 msgid "Stop a running script"
 msgstr "Pysäytä suoritettava komentosarja"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1104
 msgid "Load at startup"
 msgstr "Lataa käynnistettäessä"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1105
 msgid "configure"
 msgstr "muuta asetuksia"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1110
 msgid "Main"
 msgstr "Pää"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1112
 msgid "Information"
 msgstr "Tiedot"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1117
 msgid "Navigation"
 msgstr "Siirtyminen"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1119
 msgid "Tools"
 msgstr "Työkalut"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1123
 msgid "Plugins"
 msgstr "Liitännäiset"
 
@@ -3845,7 +3864,7 @@ msgid "Remove an installed landscape"
 msgstr "Poista asennettu maisema"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Remove"
 msgstr "Poista"
@@ -3858,42 +3877,35 @@ msgstr ""
 "VAROITUS: Valitun maiseman poistaminen tarkoittaa sen tiedostojen "
 "poistamista. Toimenpidettä ei voi perua."
 
-#: src/ui_shortcutsDialog.h:212
-#: plugins/TelescopeControl/src/ui_slewDialog.h:287
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
-msgid "Form"
-msgstr "Muoto"
-
-#: src/ui_shortcutsDialog.h:213
-msgid "Shortcuts Editor"
+#: src/ui_shortcutsDialog.h:201
+msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:216
+#: src/ui_shortcutsDialog.h:204
 msgid "Alternative shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:217
+#: src/ui_shortcutsDialog.h:205
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:218
-msgid "Action name"
+#: src/ui_shortcutsDialog.h:206
+msgid "Action"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:219
+#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:220
+#: src/ui_shortcutsDialog.h:208
 msgid "Edit Alternative Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:223
+#: src/ui_shortcutsDialog.h:211
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:224
+#: src/ui_shortcutsDialog.h:212
 msgid "Apply"
 msgstr ""
 
@@ -4372,7 +4384,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr ""
 
@@ -4380,7 +4392,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr ""
 
@@ -4432,8 +4444,8 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr ""
 
@@ -4451,7 +4463,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
@@ -5169,7 +5181,7 @@ msgid "virtual"
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Start"
 msgstr ""
 
@@ -5205,233 +5217,233 @@ msgstr ""
 msgid "Select a directory"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:288
+#: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:290
+#: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:291
+#: plugins/TelescopeControl/src/ui_slewDialog.h:290
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:292
+#: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "De&clination (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:293
+#: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:294
+#: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:296
+#: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:302
+#: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:304
+#: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:306
+#: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:308
+#: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Configure &telescopes..."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "Telescope Configuration"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope controlled by:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid "Stellarium, directly through a serial port"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:479
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "External software or a remote computer"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Telescope properties"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Connection delay:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:487
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "TCP port:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "User interface settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:508
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Use field of view indicators"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Circle size(s):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
 msgstr "OK"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Remove the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
 msgstr ""
 
@@ -7077,6 +7089,9 @@ msgstr ""
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Korjaa valon matka-aika: "
 
+#~ msgid "Form"
+#~ msgstr "Muoto"
+
 #~ msgid "Art brightness: "
 #~ msgstr "Kuvien voimakkuus: "
 
@@ -7156,3 +7171,10 @@ msgstr ""
 
 #~ msgid "millisecond pulsar"
 #~ msgstr "millisekuntipulsari"
+
+#~ msgid "Night vision mode"
+#~ msgstr "Yönäkymä"
+
+#, qt-format
+#~ msgid "Orbital period: %1 days"
+#~ msgstr "Kiertoaika: %1 päivää"

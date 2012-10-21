@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-26 18:56+0700\n"
-"PO-Revision-Date: 2012-03-22 17:36+0000\n"
+"POT-Creation-Date: 2012-10-20 18:00+0700\n"
+"PO-Revision-Date: 2012-10-13 19:37+0000\n"
 "Last-Translator: Kārlis Goba <karlis.goba@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-29 13:06+0000\n"
-"X-Generator: Launchpad (build 16049)\n"
+"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
+"X-Generator: Launchpad (build 16165)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -66,7 +66,7 @@ msgstr "Tips: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:174
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Zvaigžņlielums: <b>%1</b> (ierobežots ar <b>%2</b>)"
+msgstr "Zvaigžņlielums: <b>%1</b> (ar ekstinkciju: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:123 src/core/modules/Planet.cpp:439
 #: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
@@ -123,12 +123,12 @@ msgstr "Absolūtais zvaigžņlielums: %1"
 #: src/core/modules/Planet.cpp:455
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptiskās topocentriskās koordinātes (datumā): %1/%2"
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Ekliptikas slīpums (datumā, Zemei): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -145,7 +145,7 @@ msgstr "Attālums: %1AU"
 #: src/core/modules/Planet.cpp:484
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Šķietamais diametrs: %1, ar gredzeniem: %2"
 
 #: src/core/modules/Planet.cpp:490 src/core/modules/MinorPlanet.cpp:240
 #, qt-format
@@ -157,42 +157,42 @@ msgstr "Redzamais diametrs: %1"
 #: src/core/modules/Comet.cpp:163
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Sideriskais periods: %1 dienas (%2 a)"
 
 #: src/core/modules/Planet.cpp:502
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Sideriskā diena: %1"
 
 #: src/core/modules/Planet.cpp:506
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Vidējā Saules diena: %1"
 
-#: src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr "Fāzes Leņķis: %1"
+msgstr "Fāzes leņķis: %1"
 
-#: src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongācija: %1"
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fāze: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:516
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Apgaismotā daļa: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:189
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Pagaidu nosaukums: %1"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -202,12 +202,12 @@ msgstr "Zvaigžņlielums: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr "Šķietamais zvaigžņlielums: <b>%1</b> (pēc absorbcijas)"
+msgstr "Šķietamais zvaigžņlielums: <b>%1</b> (ar ekstinkciju)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Zvaigžņlielums: <b>%1</b> (ar ekstinkciju: <b>%2</b>. B-V: <b>%3</b>"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
@@ -349,12 +349,12 @@ msgstr "RA/DE (J2000): %1/%2"
 #: src/core/StelObject.cpp:99
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (datumam): %1/%2"
+msgstr "RA/DE (datumā): %1/%2"
 
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "Galaktiskais garums/platums (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -382,11 +382,11 @@ msgstr "Tīkla kļūda"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Kļūda pozīcijas tekstā"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Vaicā"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -400,31 +400,31 @@ msgstr "Nav atrasts"
 msgid "Found"
 msgstr "Atrasts"
 
-#: src/gui/ConfigurationDialog.cpp:403 src/gui/ConfigurationDialog.cpp:405
+#: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
-msgstr "Izvēlēties ekrāna attēlu direktoriju"
+msgstr "Izvēlēties ekrānattēlu direktoriju"
 
-#: src/gui/ConfigurationDialog.cpp:620
+#: src/gui/ConfigurationDialog.cpp:633
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Sākotnējais redzes leņķis (FOV): %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:628
+#: src/gui/ConfigurationDialog.cpp:641
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Sākotnējais skata virziens az./augst.: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:670
+#: src/gui/ConfigurationDialog.cpp:683
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:671 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
 msgid "Contact"
 msgstr "Kontakts"
 
-#: src/gui/ConfigurationDialog.cpp:754
+#: src/gui/ConfigurationDialog.cpp:767
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -433,34 +433,36 @@ msgstr "Kontakts"
 msgid "Author"
 msgstr "Autors"
 
-#: src/gui/ConfigurationDialog.cpp:758
+#: src/gui/ConfigurationDialog.cpp:771
 msgid "License"
 msgstr "Licence"
 
-#: src/gui/ConfigurationDialog.cpp:782
+#: src/gui/ConfigurationDialog.cpp:795
 msgid "Running script: "
-msgstr ""
+msgstr "Darbina skriptu: "
 
-#: src/gui/ConfigurationDialog.cpp:789
+#: src/gui/ConfigurationDialog.cpp:802
 msgid "Running script: [none]"
-msgstr ""
+msgstr "Darbina skriptu: [tukšs]"
 
-#: src/gui/ConfigurationDialog.cpp:852
+#: src/gui/ConfigurationDialog.cpp:865
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
+"Jaunu zvaigžņu katalogu ielāde pabeigta!\n"
+"Pārstartējiet Stellarium, lai tos lietotu."
 
-#: src/gui/ConfigurationDialog.cpp:856
+#: src/gui/ConfigurationDialog.cpp:869
 msgid "All available star catalogs have been installed."
 msgstr "Visi pieejamie zvaigžņu katalogi ir uzstādīti."
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:874
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Iegūst katalogu %1 no %2"
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:881
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -469,7 +471,7 @@ msgstr ""
 "Lejupielādē %1...\n"
 "(Varat aizvērt šo logu.)"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:888
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -480,7 +482,7 @@ msgstr ""
 "Zvaigžņu skaits: %2 miljoni\n"
 "Zvaigžņlieluma diapazons: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:918 src/gui/ConfigurationDialog.cpp:954
+#: src/gui/ConfigurationDialog.cpp:931 src/gui/ConfigurationDialog.cpp:967
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -489,11 +491,11 @@ msgstr ""
 "Kļūda lejupielādējot %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1006
+#: src/gui/ConfigurationDialog.cpp:1019
 msgid "Verifying file integrity..."
 msgstr "Pārbauda faila pareizumu..."
 
-#: src/gui/ConfigurationDialog.cpp:1010
+#: src/gui/ConfigurationDialog.cpp:1023
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -552,11 +554,11 @@ msgstr "CTRL + kreisais klikšķis"
 
 #: src/gui/HelpDialog.cpp:149
 msgid "F7"
-msgstr ""
+msgstr "F7"
 
 #: src/gui/HelpDialog.cpp:150
 msgid "Show and edit all keyboard shortcuts"
-msgstr ""
+msgstr "Parādīt un rediģēt visas klaviatūras saīsnes"
 
 #: src/gui/HelpDialog.cpp:156
 msgid "Further Reading"
@@ -659,7 +661,7 @@ msgstr "Dažādi"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:609
 msgid "Script console window"
-msgstr ""
+msgstr "Skriptu konsoles logs"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:604
 msgid "Windows"
@@ -799,15 +801,15 @@ msgstr "dabisks"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "zvaigžņu karte"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Simbad meklējuma kļūda"
 
 #: src/gui/SearchDialog.cpp:367
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Meklēt Simbad datubāzē"
 
 #: src/gui/SearchDialog.cpp:535
 msgid "University of Strasbourg (France)"
@@ -1101,7 +1103,7 @@ msgstr ""
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Orkuss"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
@@ -1121,12 +1123,12 @@ msgstr ""
 #. TRANSLATORS: Asteroid (7) Iris
 #: src/translations.h:115
 msgid "Iris"
-msgstr ""
+msgstr "Irīda"
 
 #. TRANSLATORS: Asteroid (8) Flora
 #: src/translations.h:117
 msgid "Flora"
-msgstr ""
+msgstr "Flora"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
 #: src/translations.h:121
@@ -1171,7 +1173,7 @@ msgstr ""
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "Tiho Brahes supernova"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:140
@@ -1220,7 +1222,7 @@ msgstr "Korejiešu"
 
 #: src/translations.h:155
 msgid "Lakota"
-msgstr "Lakota"
+msgstr "Lakotu"
 
 #: src/translations.h:156
 msgid "Maori"
@@ -1228,7 +1230,7 @@ msgstr "Maoru"
 
 #: src/translations.h:157
 msgid "Navajo"
-msgstr "Navajo"
+msgstr "Navahu"
 
 #: src/translations.h:158
 msgid "Norse"
@@ -1303,7 +1305,7 @@ msgstr "2009. gada Saules aptumsums"
 #. TRANSLATORS: Name of script
 #: src/translations.h:194
 msgid "Startup Script"
-msgstr ""
+msgstr "Palaišanas skripts"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:196
@@ -1313,57 +1315,57 @@ msgstr "Zodiaks"
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "Merkura trīskāršais saullēkts un saulriets"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:200
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "Dubultais aptumsums uz Deimosa 2017. gadā"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:202
 msgid "Double eclipse from Deimos in 2031"
-msgstr ""
+msgstr "Dubultais aptumsums no Deimosa 2031. gadā"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:204
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr ""
+msgstr "Aptumsums no Olimpa kalna 2068. gada 10. janvārī"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr ""
+msgstr "Zemes un Jupitera okultācija 2048. gadā"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:208
 msgid "A Quintuple eclipse from Deimos 2027"
-msgstr ""
+msgstr "Pieckārtējs aptumsums uz Deimosa 2027. gadā"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:210
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "Saules sistēmas ekrānsaudzētājs"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:212
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Zvaigznāju ekskursija"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:214
 msgid "Sun from different planets"
-msgstr ""
+msgstr "Skats uz Sauli no dažādām planētām"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "Labākie skati uz Zemi no citiem debess ķermeņiem"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
 msgid "Transit of Venus"
-msgstr ""
+msgstr "Venēras tranzīts"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:220
@@ -1372,11 +1374,11 @@ msgstr ""
 
 #: src/translations.h:223
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Visu instalēto ainavu apskats."
 
 #: src/translations.h:224
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Skripts, kurš demonstrē daļēju Mēness aptumsumu."
 
 #: src/translations.h:225
 msgid "Script to demonstrate a total lunar eclipse."
@@ -1384,17 +1386,19 @@ msgstr "Skripts, kurš demonstrē pilnu Mēness aptumsumu."
 
 #: src/translations.h:226
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Lēna, bezgalīga ekskursija pa debesīm, apmeklējot nejaušus objektus."
 
 #: src/translations.h:227
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Skripts, kurš demonstrē pilnu Saules aptumsumu 2009. gadā (Rangpūra, "
+"Bangladeša)."
 
 #: src/translations.h:228
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Skripts, kurš darbojas automātiski programmas palaišanas laikā"
 
 #: src/translations.h:229
 msgid ""
@@ -1402,28 +1406,39 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Šis skripts attēlo Zodiaka zvaigznājus, t.i. zvaigznājus, kuri atrodas tuvu "
+"riņķim, kuru Saule veic debesīs gada laikā."
 
 #: src/translations.h:230
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
+"Merkura īpatnējās orbītas un rotācijas dēļ noteiktās vietās Saule lec un "
+"riet 3 reizes vienā Merkura dienā."
 
 #: src/translations.h:231
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
+"Pirms Marss aizsedz Sauli, Foboss parādās no Marsa aizmugures un aizsedz "
+"Sauli pirmais. Aptumsums notiek starp Skorpiona un Strēlnieka zvaigznājiem "
+"2017. gada 26. aprīlī."
 
 #: src/translations.h:232
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
+"Pirms Marss aizsedz Sauli, Foboss parādās no Marsa aizmugures un aizsedz "
+"Sauli pirmais. Aptumsums notiek starp Vērša un Dvīņu zvaigznājiem 2031. gada "
+"23. jūlijā."
 
 #: src/translations.h:233
 msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
 msgstr ""
+"Foboss aizsedz Sauli, skatoties no Olimpa kalna 2068. gada 10. janvārī."
 
 #: src/translations.h:234
 msgid ""
@@ -1447,11 +1462,11 @@ msgstr ""
 
 #: src/translations.h:236
 msgid "A tour via western constellations."
-msgstr ""
+msgstr "Ekskursija pa zvaigznājiem rietumu kultūrā."
 
 #: src/translations.h:237
 msgid "Look at Sun from big planets of Solar system and Pluto."
-msgstr ""
+msgstr "Palūkojies uz Sauli no lielajām Saules sistēmas planētām un Plutona."
 
 #: src/translations.h:238
 msgid "Earth best views from other Solar system bodies in the 21st Century."
@@ -1460,6 +1475,7 @@ msgstr ""
 #: src/translations.h:239
 msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
 msgstr ""
+"Venēras tranzīts, vērojot no Sidnejas Austrālijā 2012. gada 6. jūnijā."
 
 #: src/translations.h:240
 msgid ""
@@ -1472,6 +1488,8 @@ msgid ""
 "Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
 "need enable plugin for supernovae."
 msgstr ""
+"Supernovas uzliesmojums, kuru 1572. gadā novēroja Tiho Brahe. Lai vērotu "
+"demonstrāciju, ir jāieslēdz supernovu spraudnis."
 
 #: src/translations.h:244
 msgid "Andorra"
@@ -1487,11 +1505,11 @@ msgstr "Afganistāna"
 
 #: src/translations.h:247
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigva un Barbuda"
 
 #: src/translations.h:248
 msgid "Anguilla"
-msgstr ""
+msgstr "Angilja"
 
 #: src/translations.h:249
 msgid "Albania"
@@ -1503,7 +1521,7 @@ msgstr "Armēnija"
 
 #: src/translations.h:251
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Nīderlandes Antiļu salas"
 
 #: src/translations.h:252
 msgid "Angola"
@@ -1519,7 +1537,7 @@ msgstr "Argentīna"
 
 #: src/translations.h:255
 msgid "American Samoa"
-msgstr ""
+msgstr "Amerikas Samoa"
 
 #: src/translations.h:256
 msgid "Austria"
@@ -1531,7 +1549,7 @@ msgstr "Austrālija"
 
 #: src/translations.h:258
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: src/translations.h:259
 msgid "Azerbaijan"
@@ -1567,19 +1585,19 @@ msgstr "Bahreina"
 
 #: src/translations.h:267
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: src/translations.h:268
 msgid "Benin"
-msgstr ""
+msgstr "Benina"
 
 #: src/translations.h:269
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermudu salas"
 
 #: src/translations.h:270
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Bruneja"
 
 #: src/translations.h:271
 msgid "Bolivia"
@@ -1599,7 +1617,7 @@ msgstr "Butāna"
 
 #: src/translations.h:275
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Buvē Sala"
 
 #: src/translations.h:276
 msgid "Botswana"
@@ -1611,7 +1629,7 @@ msgstr "Baltkrievija"
 
 #: src/translations.h:278
 msgid "Belize"
-msgstr ""
+msgstr "Beliza"
 
 #: src/translations.h:279
 msgid "Canada"
@@ -1619,7 +1637,7 @@ msgstr "Kanāda"
 
 #: src/translations.h:280
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Kokosu salas"
 
 #: src/translations.h:281
 msgid "Democratic Republic of the Congo"
@@ -1627,7 +1645,7 @@ msgstr "Kongo Demokrātiskā Republika"
 
 #: src/translations.h:282
 msgid "Central African Republic"
-msgstr ""
+msgstr "Centrālāfrikas Republika"
 
 #: src/translations.h:283
 msgid "Republic of the Congo"
@@ -1675,19 +1693,19 @@ msgstr "Kuba"
 
 #: src/translations.h:294
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kaboverde"
 
 #: src/translations.h:295
 msgid "Christmas Island"
-msgstr ""
+msgstr "Ziemsvētku sala"
 
 #: src/translations.h:296
 msgid "Cyprus"
-msgstr ""
+msgstr "Kipra"
 
 #: src/translations.h:297
 msgid "Czech Republic"
-msgstr ""
+msgstr "Čehijas Republika"
 
 #: src/translations.h:298
 msgid "Germany"
@@ -1695,11 +1713,11 @@ msgstr "Vācija"
 
 #: src/translations.h:299
 msgid "Djibouti"
-msgstr ""
+msgstr "Džibuti"
 
 #: src/translations.h:300
 msgid "Denmark"
-msgstr ""
+msgstr "Dānija"
 
 #: src/translations.h:301
 msgid "Dominica"
@@ -1707,115 +1725,115 @@ msgstr ""
 
 #: src/translations.h:302
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Dominikānas Republika"
 
 #: src/translations.h:303
 msgid "Algeria"
-msgstr ""
+msgstr "Alžīrija"
 
 #: src/translations.h:304
 msgid "Ecuador"
-msgstr ""
+msgstr "Ekvadora"
 
 #: src/translations.h:305
 msgid "Estonia"
-msgstr ""
+msgstr "Igaunija"
 
 #: src/translations.h:306
 msgid "Egypt"
-msgstr ""
+msgstr "Ēģipte"
 
 #: src/translations.h:307
 msgid "Western Sahara"
-msgstr ""
+msgstr "Rietumsahāra"
 
 #: src/translations.h:308
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritreja"
 
 #: src/translations.h:309
 msgid "Spain"
-msgstr ""
+msgstr "Spānija"
 
 #: src/translations.h:310
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiopija"
 
 #: src/translations.h:311
 msgid "Finland"
-msgstr ""
+msgstr "Somija"
 
 #: src/translations.h:312
 msgid "Fiji"
-msgstr ""
+msgstr "Fidži"
 
 #: src/translations.h:313
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Folklenda salas"
 
 #: src/translations.h:314
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikronēzija"
 
 #: src/translations.h:315
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Fēru salas"
 
 #: src/translations.h:316
 msgid "France"
-msgstr ""
+msgstr "Francija"
 
 #: src/translations.h:317
 msgid "Gabon"
-msgstr ""
+msgstr "Gabona"
 
 #: src/translations.h:318
 msgid "United Kingdom"
-msgstr ""
+msgstr "Apvienotā Karaliste"
 
 #: src/translations.h:319
 msgid "Grenada"
-msgstr ""
+msgstr "Grenāda"
 
 #: src/translations.h:320
 msgid "Georgia"
-msgstr ""
+msgstr "Gruzija"
 
 #: src/translations.h:321
 msgid "French Guiana"
-msgstr ""
+msgstr "Franču Gviāna"
 
 #: src/translations.h:322
 msgid "Ghana"
-msgstr ""
+msgstr "Gana"
 
 #: src/translations.h:323
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltārs"
 
 #: src/translations.h:324
 msgid "Greenland"
-msgstr ""
+msgstr "Grenlande"
 
 #: src/translations.h:325
 msgid "Gambia"
-msgstr ""
+msgstr "Gambija"
 
 #: src/translations.h:326
 msgid "Guinea"
-msgstr ""
+msgstr "Gvineja"
 
 #: src/translations.h:327
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Gvadelupa"
 
 #: src/translations.h:328
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Ekvatoriālā Gvineja"
 
 #: src/translations.h:329
 msgid "Greece"
-msgstr ""
+msgstr "Grieķija"
 
 #: src/translations.h:330
 msgid "South Georgia and the South Sandwich Islands"
@@ -1823,23 +1841,23 @@ msgstr ""
 
 #: src/translations.h:331
 msgid "Guatemala"
-msgstr ""
+msgstr "Gvatemala"
 
 #: src/translations.h:332
 msgid "Guam"
-msgstr ""
+msgstr "Guama"
 
 #: src/translations.h:333
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Gvineja-Bisava"
 
 #: src/translations.h:334
 msgid "Guyana"
-msgstr ""
+msgstr "Gajāna"
 
 #: src/translations.h:335
 msgid "Hong Kong"
-msgstr ""
+msgstr "Honkonga"
 
 #: src/translations.h:336
 msgid "Heard Island and McDonald Islands"
@@ -1847,35 +1865,35 @@ msgstr ""
 
 #: src/translations.h:337
 msgid "Honduras"
-msgstr ""
+msgstr "Hondurasa"
 
 #: src/translations.h:338
 msgid "Croatia"
-msgstr ""
+msgstr "Horvātija"
 
 #: src/translations.h:339
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: src/translations.h:340
 msgid "Hungary"
-msgstr ""
+msgstr "Ungārija"
 
 #: src/translations.h:341
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonēzija"
 
 #: src/translations.h:342
 msgid "Ireland"
-msgstr ""
+msgstr "Īrija"
 
 #: src/translations.h:343
 msgid "Israel"
-msgstr ""
+msgstr "Izraēla"
 
 #: src/translations.h:344
 msgid "India"
-msgstr ""
+msgstr "Indija"
 
 #: src/translations.h:345
 msgid "British Indian Ocean Territory"
@@ -1883,47 +1901,47 @@ msgstr ""
 
 #: src/translations.h:346
 msgid "Iraq"
-msgstr ""
+msgstr "Irāka"
 
 #: src/translations.h:347
 msgid "Iran"
-msgstr ""
+msgstr "Irāna"
 
 #: src/translations.h:348
 msgid "Iceland"
-msgstr ""
+msgstr "Islande"
 
 #: src/translations.h:349
 msgid "Italy"
-msgstr ""
+msgstr "Itālija"
 
 #: src/translations.h:350
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaika"
 
 #: src/translations.h:351
 msgid "Jordan"
-msgstr ""
+msgstr "Jordānija"
 
 #: src/translations.h:352
 msgid "Japan"
-msgstr ""
+msgstr "Japāna"
 
 #: src/translations.h:353
 msgid "Kenya"
-msgstr ""
+msgstr "Kenija"
 
 #: src/translations.h:354
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirgizstāna"
 
 #: src/translations.h:355
 msgid "Cambodia"
-msgstr ""
+msgstr "Kambodža"
 
 #: src/translations.h:356
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: src/translations.h:357
 msgid "Comoros"
@@ -1943,23 +1961,23 @@ msgstr ""
 
 #: src/translations.h:361
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuveita"
 
 #: src/translations.h:362
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Kaimanu salas"
 
 #: src/translations.h:363
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazahstāna"
 
 #: src/translations.h:364
 msgid "Lao"
-msgstr ""
+msgstr "Laosa"
 
 #: src/translations.h:365
 msgid "Lebanon"
-msgstr ""
+msgstr "Libāna"
 
 #: src/translations.h:366
 msgid "Saint Lucia"
@@ -1967,31 +1985,31 @@ msgstr ""
 
 #: src/translations.h:367
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Lihtenšteina"
 
 #: src/translations.h:368
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Šrilanka"
 
 #: src/translations.h:369
 msgid "Liberia"
-msgstr ""
+msgstr "Libērija"
 
 #: src/translations.h:370
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesoto"
 
 #: src/translations.h:371
 msgid "Lithuania"
-msgstr ""
+msgstr "Lietuva"
 
 #: src/translations.h:372
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luksemburga"
 
 #: src/translations.h:373
 msgid "Latvia"
-msgstr ""
+msgstr "Latvija"
 
 #: src/translations.h:374
 msgid "Libyan Arab Jamahiriya"
@@ -1999,19 +2017,19 @@ msgstr ""
 
 #: src/translations.h:375
 msgid "Morocco"
-msgstr ""
+msgstr "Maroka"
 
 #: src/translations.h:376
 msgid "Monaco"
-msgstr ""
+msgstr "Monako"
 
 #: src/translations.h:377
 msgid "Moldova"
-msgstr ""
+msgstr "Moldova"
 
 #: src/translations.h:378
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskara"
 
 #: src/translations.h:379
 msgid "Marshall Islands"
@@ -2019,23 +2037,23 @@ msgstr ""
 
 #: src/translations.h:380
 msgid "Macedonia"
-msgstr ""
+msgstr "Maķedonija"
 
 #: src/translations.h:381
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: src/translations.h:382
 msgid "Myanmar"
-msgstr ""
+msgstr "Mjanma"
 
 #: src/translations.h:383
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolija"
 
 #: src/translations.h:384
 msgid "Macau"
-msgstr ""
+msgstr "Makao"
 
 #: src/translations.h:385
 msgid "Northern Mariana Islands"
@@ -2055,7 +2073,7 @@ msgstr ""
 
 #: src/translations.h:389
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: src/translations.h:390
 msgid "Mauritius"
@@ -2071,23 +2089,23 @@ msgstr ""
 
 #: src/translations.h:393
 msgid "Mexico"
-msgstr ""
+msgstr "Meksika"
 
 #: src/translations.h:394
 msgid "Malaysia"
-msgstr ""
+msgstr "Malaizija"
 
 #: src/translations.h:395
 msgid "Mozambique"
-msgstr ""
+msgstr "Mozambika"
 
 #: src/translations.h:396
 msgid "Namibia"
-msgstr ""
+msgstr "Namībija"
 
 #: src/translations.h:397
 msgid "New Caledonia"
-msgstr ""
+msgstr "Jaunkaledonija"
 
 #: src/translations.h:398
 msgid "Niger"
@@ -2107,15 +2125,15 @@ msgstr ""
 
 #: src/translations.h:402
 msgid "Netherlands"
-msgstr ""
+msgstr "Nīderlande"
 
 #: src/translations.h:403
 msgid "Norway"
-msgstr ""
+msgstr "Norvēģija"
 
 #: src/translations.h:404
 msgid "Nepal"
-msgstr ""
+msgstr "Nepāla"
 
 #: src/translations.h:405
 msgid "Nauru"
@@ -2127,19 +2145,19 @@ msgstr ""
 
 #: src/translations.h:407
 msgid "New Zealand"
-msgstr ""
+msgstr "Jaunzēlande"
 
 #: src/translations.h:408
 msgid "Oman"
-msgstr ""
+msgstr "Omāna"
 
 #: src/translations.h:409
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: src/translations.h:410
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: src/translations.h:411
 msgid "French Polynesia"
@@ -2147,19 +2165,19 @@ msgstr ""
 
 #: src/translations.h:412
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua-Jaungvineja"
 
 #: src/translations.h:413
 msgid "Philippines"
-msgstr ""
+msgstr "Filipīnas"
 
 #: src/translations.h:414
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistāna"
 
 #: src/translations.h:415
 msgid "Poland"
-msgstr ""
+msgstr "Polija"
 
 #: src/translations.h:416
 msgid "Saint Pierre and Miquelon"
@@ -2171,7 +2189,7 @@ msgstr ""
 
 #: src/translations.h:418
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Puertoriko"
 
 #: src/translations.h:419
 msgid "Palestinian Territories"
@@ -2179,7 +2197,7 @@ msgstr ""
 
 #: src/translations.h:420
 msgid "Portugal"
-msgstr ""
+msgstr "Portugāle"
 
 #: src/translations.h:421
 msgid "Palau"
@@ -2191,7 +2209,7 @@ msgstr ""
 
 #: src/translations.h:423
 msgid "Qatar"
-msgstr ""
+msgstr "Katara"
 
 #: src/translations.h:424
 msgid "Réunion"
@@ -2199,19 +2217,19 @@ msgstr ""
 
 #: src/translations.h:425
 msgid "Romania"
-msgstr ""
+msgstr "Rumānija"
 
 #: src/translations.h:426
 msgid "Serbia"
-msgstr ""
+msgstr "Serbija"
 
 #: src/translations.h:427
 msgid "Russian Federation"
-msgstr ""
+msgstr "Krievijas Federācija"
 
 #: src/translations.h:428
 msgid "Rwanda"
-msgstr ""
+msgstr "Ruanda"
 
 #: src/translations.h:429
 msgid "Saudi Arabia"
@@ -2227,31 +2245,31 @@ msgstr ""
 
 #: src/translations.h:432
 msgid "Sudan"
-msgstr ""
+msgstr "Sudāna"
 
 #: src/translations.h:433
 msgid "Sweden"
-msgstr ""
+msgstr "Zviedrija"
 
 #: src/translations.h:434
 msgid "Singapore"
-msgstr ""
+msgstr "Singapūra"
 
 #: src/translations.h:435
 msgid "Saint Helena"
-msgstr ""
+msgstr "Sv. Helēnas sala"
 
 #: src/translations.h:436
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovēnija"
 
 #: src/translations.h:437
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Svalbāra un Jana Majena sala"
 
 #: src/translations.h:438
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovākija"
 
 #: src/translations.h:439
 msgid "Sierra Leone"
@@ -2263,19 +2281,19 @@ msgstr ""
 
 #: src/translations.h:441
 msgid "Senegal"
-msgstr ""
+msgstr "Senegāla"
 
 #: src/translations.h:442
 msgid "Somalia"
-msgstr ""
+msgstr "Somālija"
 
 #: src/translations.h:443
 msgid "Suriname"
-msgstr ""
+msgstr "Surinama"
 
 #: src/translations.h:444
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Santome un Prinsipi"
 
 #: src/translations.h:445
 msgid "El Salvador"
@@ -2283,11 +2301,11 @@ msgstr ""
 
 #: src/translations.h:446
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Sīrija"
 
 #: src/translations.h:447
 msgid "Swaziland"
-msgstr ""
+msgstr "Svazilenda"
 
 #: src/translations.h:448
 msgid "Turks and Caicos Islands"
@@ -2295,7 +2313,7 @@ msgstr ""
 
 #: src/translations.h:449
 msgid "Chad"
-msgstr ""
+msgstr "Čada"
 
 #: src/translations.h:450
 msgid "French Southern Territories"
@@ -2303,15 +2321,15 @@ msgstr ""
 
 #: src/translations.h:451
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: src/translations.h:452
 msgid "Thailand"
-msgstr ""
+msgstr "Taizeme"
 
 #: src/translations.h:453
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tadžikistāna"
 
 #: src/translations.h:454
 msgid "Tokelau"
@@ -2319,27 +2337,27 @@ msgstr ""
 
 #: src/translations.h:455
 msgid "East Timor"
-msgstr ""
+msgstr "Austrumtimora"
 
 #: src/translations.h:456
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistāna"
 
 #: src/translations.h:457
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisija"
 
 #: src/translations.h:458
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: src/translations.h:459
 msgid "Turkey"
-msgstr ""
+msgstr "Turcija"
 
 #: src/translations.h:460
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidada un Tobago"
 
 #: src/translations.h:461
 msgid "Tuvalu"
@@ -2347,19 +2365,19 @@ msgstr ""
 
 #: src/translations.h:462
 msgid "Taiwan"
-msgstr ""
+msgstr "Taivāna"
 
 #: src/translations.h:463
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzānija"
 
 #: src/translations.h:464
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukraina"
 
 #: src/translations.h:465
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: src/translations.h:466
 msgid "United States Minor Outlying Islands"
@@ -2367,15 +2385,15 @@ msgstr ""
 
 #: src/translations.h:467
 msgid "United States"
-msgstr ""
+msgstr "Amerikas Savienotās Valstis"
 
 #: src/translations.h:468
 msgid "Uruguay"
-msgstr ""
+msgstr "Urugvaja"
 
 #: src/translations.h:469
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistāna"
 
 #: src/translations.h:470
 msgid "Vatican City State"
@@ -2387,7 +2405,7 @@ msgstr ""
 
 #: src/translations.h:472
 msgid "Venezuela"
-msgstr ""
+msgstr "Venecuēla"
 
 #: src/translations.h:473
 msgid "British Virgin Islands"
@@ -2399,7 +2417,7 @@ msgstr ""
 
 #: src/translations.h:475
 msgid "Viet Nam"
-msgstr ""
+msgstr "Vjetnama"
 
 #: src/translations.h:476
 msgid "Vanuatu"
@@ -2415,7 +2433,7 @@ msgstr ""
 
 #: src/translations.h:479
 msgid "Yemen"
-msgstr ""
+msgstr "Jemena"
 
 #: src/translations.h:480
 msgid "Mayotte"
@@ -2427,7 +2445,7 @@ msgstr ""
 
 #: src/translations.h:482
 msgid "South Africa"
-msgstr ""
+msgstr "Dienvidāfrika"
 
 #: src/translations.h:483
 msgid "Zambia"
@@ -2435,7 +2453,7 @@ msgstr ""
 
 #: src/translations.h:484
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabve"
 
 #: src/translations.h:487 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:164
@@ -2448,7 +2466,7 @@ msgstr "Pievienot 1 siderisko dienu"
 
 #: src/translations.h:489
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Pievienot 1 siderisko mēnesi"
 
 #: src/translations.h:490
 msgid "Add 1 sidereal week"
@@ -2456,7 +2474,7 @@ msgstr "Pievienot 1 siderisko nedēļu"
 
 #: src/translations.h:491
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Pievienot 1 siderisko gadu"
 
 #: src/translations.h:492
 msgid "Add 1 solar day"
@@ -2472,7 +2490,7 @@ msgstr "Pievienot 1 Saules laika nedēļu"
 
 #: src/translations.h:495
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Pievienot 1 sinodisko mēnesi"
 
 #: src/translations.h:496
 msgid "Add 1 draconic month"
@@ -2520,15 +2538,15 @@ msgstr "Paātrināt laika plūdumu (nedaudz)"
 
 #: src/translations.h:507
 msgid "Pause script execution"
-msgstr ""
+msgstr "Pārtraukt skripta izpildi"
 
 #: src/translations.h:508
 msgid "Resume script execution"
-msgstr ""
+msgstr "Turpināt skripta izpildi"
 
 #: src/translations.h:509
 msgid "Set time to now"
-msgstr "Uzstādīt tekošo laiku"
+msgstr "Pašreizējais laiks"
 
 #: src/translations.h:510
 msgid "Set the normal script execution rate"
@@ -2544,7 +2562,7 @@ msgstr "Apturēt laika plūdumu"
 
 #: src/translations.h:513
 msgid "Stop script execution"
-msgstr ""
+msgstr "Apturēt skripta izpildi"
 
 #: src/translations.h:514
 msgid "Subtract 1 sidereal day"
@@ -2552,7 +2570,7 @@ msgstr "Atņemt 1 siderisko dienu"
 
 #: src/translations.h:515
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Atņemt 1 siderisko mēnesi"
 
 #: src/translations.h:516
 msgid "Subtract 1 sidereal week"
@@ -2560,7 +2578,7 @@ msgstr "Atņemt 1 siderisko nedēļu"
 
 #: src/translations.h:517
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Atņemt 1 siderisko gadu"
 
 #: src/translations.h:518
 msgid "Subtract 1 solar day"
@@ -2576,7 +2594,7 @@ msgstr "Atņemt 1 Saules laika nedēļu"
 
 #: src/translations.h:521
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "Atņemt 1 sinodisko mēnesi"
 
 #: src/translations.h:522
 msgid "Subtract 1 draconic month"
@@ -2604,7 +2622,7 @@ msgstr "Attēlojuma iestatījumi"
 
 #: src/translations.h:528
 msgid "Flip scene horizontally"
-msgstr "Apgriezt attēlu horizontāli"
+msgstr "Apvērst attēlu horizontāli"
 
 #: src/translations.h:529
 msgid "Full-screen mode"
@@ -2650,7 +2668,7 @@ msgstr "Miglāju fona attēli"
 
 #: src/translations.h:538 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptikas J2000 koordinātu tīkls"
 
 #: src/translations.h:539
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:338
@@ -2729,11 +2747,11 @@ msgstr "Zvaigznes"
 
 #: src/translations.h:555
 msgid "Stars labels"
-msgstr ""
+msgstr "Zvaigžņu nosaukumi"
 
 #: src/translations.h:556
 msgid "Flip scene vertically"
-msgstr "Apgriezt attēlu vertikāli"
+msgstr "Apvērst attēlu vertikāli"
 
 #: src/translations.h:558
 msgid "Auto hide horizontal button bar"
@@ -2765,7 +2783,7 @@ msgstr "Pārslēgties starp ekvatoriālo un azimutālo montējumu"
 
 #: src/translations.h:565
 msgid "Toggle visibility of GUI"
-msgstr ""
+msgstr "Pārslēgt vizuālās saskarnes attēlošanu"
 
 #: src/translations.h:566
 msgid "Movement and Selection"
@@ -2809,15 +2827,15 @@ msgstr ""
 
 #: src/translations.h:576
 msgid "Exoplanets Plugin"
-msgstr ""
+msgstr "Eksoplanētu spraudnis"
 
 #: src/translations.h:577
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Parādīt eksoplanētas"
 
 #: src/translations.h:578
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Eksoplanētu konfigurācijas logs"
 
 #: src/translations.h:579
 msgid "Observability analysis Plugin"
@@ -2861,27 +2879,27 @@ msgstr ""
 
 #: src/translations.h:589
 msgid "Pulsars Plugin"
-msgstr ""
+msgstr "Pulsāru spraudnis"
 
 #: src/translations.h:590
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Pulsāru konfigurācijas logs"
 
 #: src/translations.h:591
 msgid "Quasars Plugin"
-msgstr ""
+msgstr "Kvazāru spraudnis"
 
 #: src/translations.h:592
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Kvazāru konfigurācijas logs"
 
 #: src/translations.h:593
 msgid "Satellites Plugin"
-msgstr ""
+msgstr "Pavadoņu spraudnis"
 
 #: src/translations.h:594
 msgid "Satellites configuration window"
-msgstr ""
+msgstr "Pavadoņu konfigurācijas logs"
 
 #: src/translations.h:595
 msgid "Satellite hints"
@@ -2889,15 +2907,15 @@ msgstr ""
 
 #: src/translations.h:596
 msgid "Satellite labels"
-msgstr ""
+msgstr "Pavadoņu nosaukumi"
 
 #: src/translations.h:597
 msgid "Historical Supernovae Plugin"
-msgstr ""
+msgstr "Vēsturisko supernovu spraudnis"
 
 #: src/translations.h:598
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Vēsturisko supernovu konfigurācijas logs"
 
 #: src/translations.h:599
 msgid "Telescope Control Plugin"
@@ -2907,7 +2925,7 @@ msgstr ""
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
-#: src/translations.h:601 src/ui_configurationDialog.h:1129
+#: src/translations.h:601 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Scripts"
 msgstr "Skripti"
@@ -2922,23 +2940,23 @@ msgstr ""
 
 #: src/translations.h:605
 msgid "Configuration window"
-msgstr "Konfigurācijas logs"
+msgstr "Programmas iestatījumi"
 
 #: src/translations.h:606
 msgid "Date/time window"
-msgstr "Datuma/laika logs"
+msgstr "Datums un laiks"
 
 #: src/translations.h:607
 msgid "Help window"
-msgstr "Palīdzības logs"
+msgstr "Palīdzība"
 
 #: src/translations.h:608
 msgid "Location window"
-msgstr "Atrašanās vietas logs"
+msgstr "Atrašanās vieta"
 
 #: src/translations.h:610
 msgid "Search window"
-msgstr "Meklēšanas logs"
+msgstr "Meklēšana"
 
 #: src/translations.h:611
 msgid "Shortcuts window"
@@ -2946,18 +2964,18 @@ msgstr ""
 
 #: src/translations.h:612
 msgid "Sky and viewing options window"
-msgstr "Debess un attēlojuma iestatījumu logs"
+msgstr "Debess un attēlojuma iestatījumi"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
-msgstr ""
+msgstr "/"
 
 #: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "Paskaidrojumi"
 
@@ -3157,7 +3175,7 @@ msgstr "Objekts"
 
 #: src/ui_searchDialogGui.h:622
 msgid "RA/Dec (J2000):"
-msgstr ""
+msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:623
 msgid "Position"
@@ -3165,7 +3183,7 @@ msgstr "Pozīcija"
 
 #: src/ui_searchDialogGui.h:624
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Tiešsaistes astronomiskā datubāze SIMBAD"
 
 #: src/ui_searchDialogGui.h:625
 msgid "Extend search with SIMBAD"
@@ -3177,23 +3195,23 @@ msgstr "Serveris:"
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:1100 src/ui_configurationDialog.h:1111
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: src/ui_configurationDialog.h:1092 src/ui_configurationDialog.h:1103
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Iestatījumi"
 
 #: src/ui_searchDialogGui.h:628
 msgid "names in English"
-msgstr ""
+msgstr "nosaukumi angļu valodā"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Search in list..."
-msgstr ""
+msgstr "Meklēt sarakstā..."
 
 #: src/ui_searchDialogGui.h:630
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
-msgstr ""
+msgstr "Saraksti"
 
 #: src/ui_viewDialog.h:1101
 msgid "View"
@@ -3275,11 +3293,11 @@ msgstr "Gaismas piesārņojums:"
 
 #: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
-msgstr "spiediens, temperatūra, absorbcijas koeficients"
+msgstr "spiediens, temperatūra, ekstinkcijas koeficients"
 
 #: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
-msgstr "Refrakcijas/absorbcijas iestatījumi..."
+msgstr "Refrakcijas/ekstinkcijas iestatījumi..."
 
 #: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
@@ -3299,23 +3317,23 @@ msgstr "Zenīta intensitāte stundā"
 
 #: src/ui_viewDialog.h:1143
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: src/ui_viewDialog.h:1144
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #: src/ui_viewDialog.h:1145
 msgid "80"
-msgstr ""
+msgstr "80"
 
 #: src/ui_viewDialog.h:1146
 msgid "10000"
-msgstr ""
+msgstr "10000"
 
 #: src/ui_viewDialog.h:1147
 msgid "144000"
-msgstr ""
+msgstr "144000"
 
 #: src/ui_viewDialog.h:1149
 msgid "Constellations"
@@ -3349,23 +3367,23 @@ msgstr "Debess sfēra"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Rādīt ekvatora līniju"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Rādīt meridiāna līniju"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Rādīt horizonta līniju"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "Rādīt ekliptikas līniju"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "Rādīt Galaktikas plaknes līniju"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3373,11 +3391,11 @@ msgstr "Projekcija"
 
 #: src/ui_viewDialog.h:1183
 msgid "Add/remove landscapes..."
-msgstr ""
+msgstr "Pievienot/noņemt ainavas..."
 
 #: src/ui_viewDialog.h:1185
 msgid "Show ground"
-msgstr ""
+msgstr "Rādīt zemi"
 
 #: src/ui_viewDialog.h:1186
 msgid "Show fog"
@@ -3389,7 +3407,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1188
 msgid "Use this landscape as default"
-msgstr ""
+msgstr "Uzstādīt ainavu kā noklusēto"
 
 #: src/ui_viewDialog.h:1190
 msgid "Use this sky culture as default"
@@ -3399,394 +3417,394 @@ msgstr ""
 msgid "Visible"
 msgstr "Redzams"
 
-#: src/ui_configurationDialog.h:949
+#: src/ui_configurationDialog.h:941
 msgid "Configuration"
-msgstr "Konfigurācija"
+msgstr "Programmas iestatījumi"
 
-#: src/ui_configurationDialog.h:951
+#: src/ui_configurationDialog.h:943
 msgid "Program language"
 msgstr "Programmas valoda"
 
-#: src/ui_configurationDialog.h:952
+#: src/ui_configurationDialog.h:944
 msgid "Default options"
 msgstr "Noklusētie iestatījumi"
 
-#: src/ui_configurationDialog.h:954
+#: src/ui_configurationDialog.h:946
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
 
-#: src/ui_configurationDialog.h:956
+#: src/ui_configurationDialog.h:948
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "Saglabāt iestatījumus"
 
-#: src/ui_configurationDialog.h:958
+#: src/ui_configurationDialog.h:950
 msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
-#: src/ui_configurationDialog.h:960
+#: src/ui_configurationDialog.h:952
 msgid "Restore defaults"
 msgstr "Atjaunot noklusētos iestatījumus"
 
-#: src/ui_configurationDialog.h:961
+#: src/ui_configurationDialog.h:953
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
 
-#: src/ui_configurationDialog.h:963
+#: src/ui_configurationDialog.h:955
 msgid "The width of your view when Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:966
+#: src/ui_configurationDialog.h:958
 msgid "The direction you're looking when Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:968 src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:960 src/ui_configurationDialog.h:1114
 msgid "Selected object information"
 msgstr "Informācija par iezīmēto objektu"
 
-#: src/ui_configurationDialog.h:970
+#: src/ui_configurationDialog.h:962
 msgid "Display all information available"
 msgstr "Attēlot visu pieejamo informāciju"
 
-#: src/ui_configurationDialog.h:972
+#: src/ui_configurationDialog.h:964
 msgid "All available"
 msgstr "Visa pieejamā"
 
-#: src/ui_configurationDialog.h:974
+#: src/ui_configurationDialog.h:966
 msgid "Display less information"
 msgstr "Attēlot mazāk informācijas"
 
-#: src/ui_configurationDialog.h:976
+#: src/ui_configurationDialog.h:968
 msgid "Short"
 msgstr "Īsi"
 
-#: src/ui_configurationDialog.h:978
+#: src/ui_configurationDialog.h:970
 msgid "Display no information"
 msgstr "Neattēlot informāciju"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:972
 msgid "None"
 msgstr "Nav"
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:976
 msgid "Customized"
-msgstr ""
+msgstr "Pielāgota"
 
-#: src/ui_configurationDialog.h:985
+#: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
-msgstr ""
+msgstr "Attēlotie lauki"
 
-#: src/ui_configurationDialog.h:987
+#: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:989
+#: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Rektascensija/deklinācija (J2000)"
 
-#: src/ui_configurationDialog.h:991
+#: src/ui_configurationDialog.h:983
 msgid "Topocentric equatorial coordinates"
-msgstr ""
+msgstr "Topocentriskās ekvatoriālās koordinātes"
 
-#: src/ui_configurationDialog.h:993
+#: src/ui_configurationDialog.h:985
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Stundu leņķis/deklinācija"
+
+#: src/ui_configurationDialog.h:987
+msgid "Horizontal coordinates"
+msgstr "Horizontālās koordinātes"
+
+#: src/ui_configurationDialog.h:989
+msgid "Altitude/Azimuth"
+msgstr "Augstums/azimuts"
+
+#: src/ui_configurationDialog.h:990
+msgid "Visual magnitude"
+msgstr "Redzamais zvaigžņlielums"
+
+#: src/ui_configurationDialog.h:992
+msgid "Angular or physical size"
+msgstr "Leņķiskais vai fiziskais izmērs"
+
+#: src/ui_configurationDialog.h:994
+msgid "Size"
+msgstr "Izmērs"
 
 #: src/ui_configurationDialog.h:995
-msgid "Horizontal coordinates"
-msgstr ""
-
-#: src/ui_configurationDialog.h:997
-msgid "Altitude/Azimuth"
-msgstr ""
-
-#: src/ui_configurationDialog.h:998
-msgid "Visual magnitude"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1000
-msgid "Angular or physical size"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1002
-msgid "Size"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1003
 msgid "Additional information 3"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:999
 msgid "Additional information 2"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1000
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Absolūtais zvaigžņlielums"
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1001
 msgid "Distance"
-msgstr ""
+msgstr "Attālums"
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1002
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Kataloga numurs(-i)"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1003
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Nosaukums"
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1005
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Spektra klase, miglāja tips, u.tml."
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1007
 msgid "Additional information 1"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Ģeocentriskās ekvatoriālās koordinātes (ekvinokcijas datumā)"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Rektascensija/deklinācija (datumā)"
 
-#: src/ui_configurationDialog.h:1021
+#: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
-msgstr ""
+msgstr "Platums/garums (J2000)"
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1016
 msgid "Control"
 msgstr "Vadība"
 
-#: src/ui_configurationDialog.h:1026
+#: src/ui_configurationDialog.h:1018
 msgid "Allow keyboard to pan and zoom"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1028
+#: src/ui_configurationDialog.h:1020
 msgid "Enable keyboard navigation"
 msgstr "Navigācija ar taustiņiem"
 
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1022
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1024
 msgid "Enable mouse navigation"
 msgstr "Navigācija ar peli"
 
-#: src/ui_configurationDialog.h:1033
-msgid "Edit keyboard shortcuts"
-msgstr ""
+#: src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
+msgstr "Rediģēt klaviatūras saīsnes..."
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
-msgstr ""
+msgstr "Programmas sākotnējais datums un laiks"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1028
 msgid "Starts Stellarium at system clock date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1030
 msgid "System date and time"
-msgstr ""
+msgstr "Sistēmas datums un laiks"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1032
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1042
+#: src/ui_configurationDialog.h:1034
 msgid "System date at:"
-msgstr ""
+msgstr "Sistēmas datums plkst."
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1036
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1038
 msgid "Other:"
-msgstr ""
+msgstr "Cits:"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1039
 msgid "use current"
-msgstr ""
+msgstr "izmantot pašreizējo"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1040
 msgid "Other"
-msgstr ""
+msgstr "Citi iestatījumi"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1042
 msgid "Hides the mouse cursor when inactive"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1044
 msgid "Mouse cursor timeout (seconds):"
-msgstr ""
+msgstr "Peles kursora paslēpšana (sekundes):"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1046
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr ""
+msgstr "Apmainīt vietām vertikālās un horizontālās attēla apvēršanas pogas"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1048
 msgid "Show flip buttons"
-msgstr ""
+msgstr "Parādīt attēla apvēršanas pogas"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1050
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1052
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1053
 msgid "Planetarium options"
-msgstr ""
+msgstr "Planetārija iestatījumi"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1055
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1057
 msgid "Disc viewport"
-msgstr ""
+msgstr "Diska skatvieta"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1059
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1061
 msgid "Spheric mirror distortion"
-msgstr ""
+msgstr "Sfēriskā spoguļa aberācija"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1063
 msgid "Align labels with the horizon"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1065
 msgid "Gravity labels"
-msgstr ""
+msgstr "Pagriezt nosaukumus"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1067
 msgid "Hide other constellations when you click one"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1069
 msgid "Select single constellation"
-msgstr ""
+msgstr "Izvēlēties vienu zvaigznāju"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1072
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1074
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1075
 msgid "Screenshots"
-msgstr ""
+msgstr "Ekrānattēli"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1076
 msgid "Screenshot Directory"
-msgstr ""
+msgstr "Ekrānattēlu direktorija"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1078
 msgid "Invert colors"
-msgstr ""
+msgstr "Invertēt krāsas"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1079
 msgid "Star catalog updates"
-msgstr ""
+msgstr "Zvaigžņu katalogu jauninājumi"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1081
 msgid "Click here to start downloading"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1083
 msgid "Download this file to view even more stars"
-msgstr ""
+msgstr "Lejupielādējiet šo failu, lai redzētu vēl vairāk zvaigžņu"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1085
 msgid "Restart the download"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1095
+#: src/ui_configurationDialog.h:1087
 msgid "Retry"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1089
 msgid "Stop the download. You can always restart it later"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1099
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
+#: src/ui_configurationDialog.h:1091
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1094
 msgid "Close window when script runs"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1096
 msgid "Run the selected script"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1100
 msgid "Stop a running script"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1104
 msgid "Load at startup"
-msgstr ""
+msgstr "Ielādēt programmas sākumā"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1105
 msgid "configure"
-msgstr ""
+msgstr "iestatīt"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1110
 msgid "Main"
-msgstr "Galvenā"
+msgstr "Galvenie"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1112
 msgid "Information"
 msgstr "Informācija"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1117
 msgid "Navigation"
 msgstr "Navigācija"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1119
 msgid "Tools"
 msgstr "Rīki"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1123
 msgid "Plugins"
 msgstr "Spraudņi"
 
@@ -3811,7 +3829,7 @@ msgid "Remove an installed landscape"
 msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:275
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Remove"
 msgstr ""
@@ -3822,42 +3840,35 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:212
-#: plugins/TelescopeControl/src/ui_slewDialog.h:287
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
-msgid "Form"
+#: src/ui_shortcutsDialog.h:201
+msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:213
-msgid "Shortcuts Editor"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:216
+#: src/ui_shortcutsDialog.h:204
 msgid "Alternative shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:217
+#: src/ui_shortcutsDialog.h:205
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:218
-msgid "Action name"
+#: src/ui_shortcutsDialog.h:206
+msgid "Action"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:219
+#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:220
+#: src/ui_shortcutsDialog.h:208
 msgid "Edit Alternative Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:223
+#: src/ui_shortcutsDialog.h:211
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:224
+#: src/ui_shortcutsDialog.h:212
 msgid "Apply"
 msgstr ""
 
@@ -3883,10 +3894,13 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Ekstinkcija ir zvaigznes spožuma vājināšanās Zemes atmosfērā. To izsaka ar "
+"zvagžņlielumu uz gaisa masu, kur gaisa masa ir atmosfēras biezums, kuru "
+"gaisma pārvar (zenīts: 1, horizonts: aptuveni 40)."
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Ekstinkcijas koeficients:"
 
 #: src/ui_AtmosphereDialog.h:189
 msgid ""
@@ -4015,7 +4029,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:887
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Iestatīt &okulārus"
 
 #: plugins/Oculars/src/Oculars.cpp:896
 msgid "Toggle &CCD"
@@ -4331,7 +4345,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr ""
 
@@ -4339,7 +4353,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr ""
 
@@ -4391,8 +4405,8 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:899
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr ""
 
@@ -4402,15 +4416,15 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Horizontal flip"
-msgstr ""
+msgstr "Apvērst horizontāli"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Vertical flip"
-msgstr ""
+msgstr "Apvērst vertikāli"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
@@ -5024,7 +5038,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Iestatīt teleskopu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 #: plugins/Observability/src/Observability.cpp:596
@@ -5072,11 +5086,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Statuss"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "Tips"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -5122,7 +5136,7 @@ msgid "virtual"
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Start"
 msgstr ""
 
@@ -5158,233 +5172,233 @@ msgstr "Atvienoties no iezīmētā teleskopa"
 msgid "Select a directory"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:288
+#: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:290
+#: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:291
+#: plugins/TelescopeControl/src/ui_slewDialog.h:290
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:292
+#: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "De&clination (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:293
+#: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:294
+#: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:296
+#: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:302
+#: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:304
+#: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:306
+#: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:308
+#: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Iestatīt &teleskopus"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "Telescope Configuration"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope controlled by:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid "Stellarium, directly through a serial port"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:479
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "External software or a remote computer"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Telescope properties"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Connection delay:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:487
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "TCP port:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "User interface settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:508
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Use field of view indicators"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Circle size(s):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
 msgstr "OK"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
 msgstr "Iestatīt iezīmēto teleskopu"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
-msgstr ""
+msgstr "Iestatīt"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Remove the selected telescope"
 msgstr "Noņemt iezīmēto teleskopu"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
 msgstr ""
 
@@ -5876,27 +5890,27 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroīdi"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Comets"
-msgstr ""
+msgstr "Komētas"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
-msgstr ""
+msgstr "Izvēlieties avotu"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Lejupielādēt objektu sarakstu no interneta"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Izvēlieties avotu no saraksta:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Vai ievadiet URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Add this URL to the bookmarks list"
@@ -5946,16 +5960,16 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add objects"
-msgstr ""
+msgstr "Pievienot objektus"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:294
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Solar System objects"
-msgstr ""
+msgstr "Saules sistēmas objekti"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
-msgstr ""
+msgstr "Brīdinājums"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
@@ -5971,7 +5985,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Atjaunot noklusējuma vērtības"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
@@ -5993,11 +6007,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Configuration file"
-msgstr ""
+msgstr "Iestatījumu fails"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Pievienot jaunus Saules sistēmas objektus"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import orbital elements in MPC format..."
@@ -6005,36 +6019,40 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
-msgstr ""
+msgstr "Saules Sistēma"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Vēsturiskās supernovas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
+"Spraudnis, kurš attēlo vairākas vēsturiskās supernovas, kuru redzamais "
+"zvaigžņlielums ir mazāks par 10."
 
 #: plugins/Supernovae/src/Supernova.cpp:97
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:113
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Supernovas tips: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Vēsturisko supernovu spraudnis"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
 "A plugin that shows some historical supernovae brighter than visual "
 "magnitude 10: "
 msgstr ""
+"Spraudnis, kurš attēlo vairākas vēsturiskās supernovas, kuru redzamais "
+"zvaigžņlielums ir mazāks par 10: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
@@ -6212,12 +6230,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:151
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
@@ -6232,7 +6250,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Ekscentricitāte: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:170
@@ -6260,13 +6278,13 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
 #: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
 #: plugins/Pulsars/src/Pulsar.cpp:214
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:218
 #, qt-format
@@ -6374,7 +6392,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:72
 msgid "Exoplanets"
-msgstr ""
+msgstr "Eksoplanētas"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 msgid ""
@@ -6389,29 +6407,29 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Mass"
-msgstr ""
+msgstr "Masa"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Radius"
-msgstr ""
+msgstr "Rādiuss"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:213
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Efektīvā temperatūra: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Exoplanet"
-msgstr ""
+msgstr "Eksoplanēta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Period"
-msgstr ""
+msgstr "Periods"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "days"
-msgstr ""
+msgstr "dienas"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
@@ -6428,11 +6446,11 @@ msgstr "AU (astr.vien.)"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Eccentricity"
-msgstr ""
+msgstr "Ekscentricitāte"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Inclination"
-msgstr ""
+msgstr "Inklinācija"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Angle Distance"
