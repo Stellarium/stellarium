@@ -87,7 +87,7 @@ void SimpleDrawLine::init()
 }
 
 /*************************************************************************
- Draw our module. This should print "Hello world!" in the main window
+ Draw our module. This should draw line in the main window
 *************************************************************************/
 void SimpleDrawLine::draw(StelCore* core, StelRenderer* renderer)
 {
