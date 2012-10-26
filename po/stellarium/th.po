@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-09-16 03:41+0000\n"
+"PO-Revision-Date: 2012-10-22 06:40+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
-"X-Generator: Launchpad (build 16165)\n"
+"X-Launchpad-Export-Date: 2012-10-26 04:44+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -125,12 +125,12 @@ msgstr "โชติมาตรสัมบูรณ์: %1"
 #: src/core/modules/Planet.cpp:455
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "พิกัดสุริยวิถีจากผิวโลก (ของวัน): %1/%2"
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "ความเอียงของสุริยวิถี (ของวัน, สำหรับโลก): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -142,7 +142,7 @@ msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร�
 #: src/core/modules/Comet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "ระยะทาง: %1 หน่วยดาราศาสตร์"
+msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร์"
 
 #: src/core/modules/Planet.cpp:484
 #, qt-format
@@ -2666,7 +2666,7 @@ msgstr "เส้นกลุ่มดาว"
 
 #: src/translations.h:537
 msgid "Nebulas background images"
-msgstr "ภาพเบื้องหลังของเนบิวลา"
+msgstr "ภาพพื้นหลังของเนบิวลา"
 
 #: src/translations.h:538 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
@@ -3676,11 +3676,11 @@ msgstr "แสดงปุ่มพลิก"
 
 #: src/ui_configurationDialog.h:1050
 msgid "Toggle display backgrounds of the nebulae."
-msgstr ""
+msgstr "สลับการแสดงภาพพื้นหลังของเนบิวลา"
 
 #: src/ui_configurationDialog.h:1052
 msgid "Show nebula background button"
-msgstr ""
+msgstr "แสดงปุ่มภาพพื้นหลังของเนบิวลา"
 
 #: src/ui_configurationDialog.h:1053
 msgid "Planetarium options"
@@ -6555,7 +6555,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Discovered year"
-msgstr ""
+msgstr "ปีที่ค้นพบ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
@@ -6774,11 +6774,11 @@ msgstr "คืนที่วัตถุอยู่เหนือขอบฟ
 
 #: plugins/Observability/src/Observability.cpp:675
 msgid "TODAY:"
-msgstr ""
+msgstr "วันนี้:"
 
 #: plugins/Observability/src/Observability.cpp:684
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "ปีนี้:"
 
 #: plugins/Observability/src/Observability.cpp:1428
 #, qt-format

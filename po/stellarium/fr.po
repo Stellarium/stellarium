@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-10-05 16:55+0000\n"
-"Last-Translator: Nicolas Martignoni <Unknown>\n"
+"PO-Revision-Date: 2012-10-24 04:28+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-21 13:52+0000\n"
-"X-Generator: Launchpad (build 16165)\n"
+"X-Launchpad-Export-Date: 2012-10-26 04:38+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -417,7 +417,7 @@ msgstr "Trouvé"
 
 #: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
-msgstr "Sélectionner le répertoire pour la capture d'écran"
+msgstr "Sélectionner le dossier de sauvegarde des captures d'écran"
 
 #: src/gui/ConfigurationDialog.cpp:633
 #, qt-format
@@ -427,7 +427,7 @@ msgstr "Champ de vision au démarrage : %1%2"
 #: src/gui/ConfigurationDialog.cpp:641
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Direction de la vue Az/Haut au démarrage : %1/%2"
+msgstr "Direction de la vue au démarrage (Az/Haut) : %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:683
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
@@ -807,8 +807,7 @@ msgstr "Un paysage avec le même nom ou identifiant (%1) existe déjà."
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
-"Vous pouvez le supprimer manuellement en supprimant le répertoire suivant : "
-"%1"
+"Vous pouvez le supprimer manuellement en supprimant le dossier suivant : %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
@@ -2709,7 +2708,7 @@ msgstr "Lignes des constellations"
 
 #: src/translations.h:537
 msgid "Nebulas background images"
-msgstr "Images des nébuleuses en arrière-plan"
+msgstr "Photos des nébuleuses"
 
 #: src/translations.h:538 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
@@ -3009,7 +3008,7 @@ msgstr "Fenêtre de raccourcis"
 
 #: src/translations.h:612
 msgid "Sky and viewing options window"
-msgstr "Fenêtre de configuration du ciel et de l'affichage"
+msgstr "Fenêtre de configuration de l'affichage"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -3043,7 +3042,7 @@ msgstr "Emplacement"
 
 #: src/ui_locationDialogGui.h:393
 msgid "Current location information"
-msgstr "Information sur la position actuelle"
+msgstr "Informations sur la position actuelle"
 
 #: src/ui_locationDialogGui.h:394
 msgid "Use as default"
@@ -3491,7 +3490,7 @@ msgstr "Sauvegarder les paramètres"
 
 #: src/ui_configurationDialog.h:950
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Restaurer les paramètres par défaut de Stellarium"
+msgstr "Restaurer les valeurs par défaut de Stellarium"
 
 #: src/ui_configurationDialog.h:952
 msgid "Restore defaults"
@@ -3503,9 +3502,9 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"Restaurer les paramètres par défaut nécessite le redémarrage de Stellarium. "
-"Sauvegarder toutes les options courantes inclut le champ visuel actuel et "
-"l'orientation pour les utiliser au prochain démarrage."
+"Restaurer les valeurs par défaut nécessite le redémarrage de Stellarium. "
+"Sauvegarder les paramètres actuels inclut le champ visuel et l'orientation "
+"actuels pour les utiliser au prochain démarrage."
 
 #: src/ui_configurationDialog.h:955
 msgid "The width of your view when Stellarium starts"
@@ -3517,7 +3516,7 @@ msgstr "La direction dans laquelle vous regardez quand Stellarium démarre"
 
 #: src/ui_configurationDialog.h:960 src/ui_configurationDialog.h:1114
 msgid "Selected object information"
-msgstr "Information sur l'objet sélectionné"
+msgstr "Informations sur l'objet sélectionné"
 
 #: src/ui_configurationDialog.h:962
 msgid "Display all information available"
@@ -3533,7 +3532,7 @@ msgstr "Afficher moins d'information"
 
 #: src/ui_configurationDialog.h:968
 msgid "Short"
-msgstr "Court"
+msgstr "Brèves"
 
 #: src/ui_configurationDialog.h:970
 msgid "Display no information"
@@ -3541,7 +3540,7 @@ msgstr "Ne pas afficher d'information"
 
 #: src/ui_configurationDialog.h:972
 msgid "None"
-msgstr "(Aucun)"
+msgstr "Aucune"
 
 #: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
@@ -3549,7 +3548,7 @@ msgstr "Afficher les réglages de l'utilisateur"
 
 #: src/ui_configurationDialog.h:976
 msgid "Customized"
-msgstr "Personnalisé"
+msgstr "Personnalisées"
 
 #: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
@@ -3577,7 +3576,7 @@ msgstr "Coordonnées horizontales"
 
 #: src/ui_configurationDialog.h:989
 msgid "Altitude/Azimuth"
-msgstr "Hauteur/Azimut"
+msgstr "Azimut/Hauteur"
 
 #: src/ui_configurationDialog.h:990
 msgid "Visual magnitude"
@@ -3585,11 +3584,11 @@ msgstr "Magnitude visuelle"
 
 #: src/ui_configurationDialog.h:992
 msgid "Angular or physical size"
-msgstr "Taille angulaire ou physique"
+msgstr "Grandeur angulaire ou physique"
 
 #: src/ui_configurationDialog.h:994
 msgid "Size"
-msgstr "Taille"
+msgstr "Grandeur"
 
 #: src/ui_configurationDialog.h:995
 msgid "Additional information 3"
@@ -3673,23 +3672,22 @@ msgstr "Date et heure au lancement du programme"
 
 #: src/ui_configurationDialog.h:1028
 msgid "Starts Stellarium at system clock date and time"
-msgstr "Démarrer Stellarium réglé à la date et l'heure du système"
+msgstr ""
+"Utiliser la date et l'heure de l'ordinateur lors du démarrage de Stellarium"
 
 #: src/ui_configurationDialog.h:1030
 msgid "System date and time"
-msgstr "Date et heure du système"
+msgstr "Date et heure de l'ordinateur"
 
 #: src/ui_configurationDialog.h:1032
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
-msgstr ""
-"Régler l'heure de la simulation à la prochaine occurrence de cette heure du "
-"jour au démarrage de Stellarium"
+msgstr "Utiliser cette heure du jour lors du démarrage de Stellarium"
 
 #: src/ui_configurationDialog.h:1034
 msgid "System date at:"
-msgstr "Heure du système à :"
+msgstr "À cette heure du jour :"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Use a specific date and time when Stellarium starts up"
@@ -3709,27 +3707,28 @@ msgstr "Divers"
 
 #: src/ui_configurationDialog.h:1042
 msgid "Hides the mouse cursor when inactive"
-msgstr "Cacher le curseur de la souris si inactif"
+msgstr "Cacher le pointeur de la souris si inactif"
 
 #: src/ui_configurationDialog.h:1044
 msgid "Mouse cursor timeout (seconds):"
-msgstr "Délai de disparition du curseur de la souris (en secondes) :"
+msgstr "Délai de disparition du pointeur de la souris (en secondes) :"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "Alterne bouton d'inversion verticale et horizontale de l'image"
+msgstr ""
+"Afficher les boutons d'inversion verticale et horizontale de l'image."
 
 #: src/ui_configurationDialog.h:1048
 msgid "Show flip buttons"
-msgstr "Afficher les boutons d'inversion"
+msgstr "Afficher les boutons d'inversion d'image"
 
 #: src/ui_configurationDialog.h:1050
 msgid "Toggle display backgrounds of the nebulae."
-msgstr "Alterner l'affichage de l'image d'arrière-plan des nébuleuses."
+msgstr "Afficher le bouton d'affichage des photos des nébuleuses."
 
 #: src/ui_configurationDialog.h:1052
 msgid "Show nebula background button"
-msgstr "Afficher le bouton image d'arrière-plan des nébuleuses"
+msgstr "Afficher le bouton photos des nébuleuses."
 
 #: src/ui_configurationDialog.h:1053
 msgid "Planetarium options"
@@ -3742,7 +3741,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1057
 msgid "Disc viewport"
-msgstr "Affichage en disque"
+msgstr "Cache circulaire"
 
 #: src/ui_configurationDialog.h:1059
 msgid ""
@@ -3794,7 +3793,7 @@ msgstr "Captures d'écran"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Screenshot Directory"
-msgstr "Répertoire de captures d'écran"
+msgstr "Dossier des captures d'écran"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Invert colors"
@@ -3856,7 +3855,7 @@ msgstr "Principal"
 
 #: src/ui_configurationDialog.h:1112
 msgid "Information"
-msgstr "Information"
+msgstr "Informations"
 
 #: src/ui_configurationDialog.h:1117
 msgid "Navigation"
@@ -4021,11 +4020,11 @@ msgstr "Sortie"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr "Position du curseur"
+msgstr "Position du pointeur"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
-msgstr "Inclure le répertoire:"
+msgstr "Inclure le dossier :"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
@@ -5321,7 +5320,7 @@ msgstr "Se déconnecter du télescope sélectionné"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr "Sélectionner un répertoire"
+msgstr "Sélectionner un dossier"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to"
@@ -5413,7 +5412,7 @@ msgstr "Logiciel tiers ou poste distant"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Rien, sauf une simulation (un réticule mouvant)"
+msgstr "Rien, seulement une simulation (un réticule mouvant)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Telescope properties"
@@ -5567,7 +5566,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
-msgstr "Répertoire des exécutables:"
+msgstr "Dossier des exécutables :"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -5948,7 +5947,7 @@ msgstr "Durée du zoom:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:425
 msgid "Cursor timeout:"
-msgstr "Délai de disparition du curseur:"
+msgstr "Délai de disparition du pointeur :"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Setting landscape sets location"
@@ -7533,16 +7532,6 @@ msgstr "0 deg."
 #~ msgid "Distance: %1 kpc (%2 ly)"
 #~ msgstr "Distance : %1 kpc (%2 al)"
 
-#~ msgid "Night vision mode"
-#~ msgstr "Mode de vision nocture"
-
-#, qt-format
-#~ msgid "Orbital period: %1 days"
-#~ msgstr "Période orbitale : %1 jours"
-
-#~ msgid "Stop currently running script"
-#~ msgstr "Arrêter le script en cours"
-
 #~ msgid ""
 #~ "This plugin plots the position of various pulsars, with object information "
 #~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
@@ -7559,3 +7548,16 @@ msgstr "0 deg."
 #, qt-format
 #~ msgid "Type of pulsar: %1"
 #~ msgstr "Type de pulsar: %1"
+
+#~ msgid "glitches in period"
+#~ msgstr "variation de période (glitch)"
+
+#, qt-format
+#~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
+#~ msgstr "Largeur équivalente du profil de pulsation intégré :  %1 ms"
+
+#~ msgid "Display a derived class-specific extra fields"
+#~ msgstr "Afficher des champs supplémentaires dépendant du type"
+
+#~ msgid "extragalactic (in MC) pulsar"
+#~ msgstr "pulsar extragalactique (dans MC)"
