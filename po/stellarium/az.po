@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-10-19 21:01+0000\n"
+"PO-Revision-Date: 2012-10-22 07:33+0000\n"
 "Last-Translator: Nadir Teymurov <nadir_teymurov@mail.ru>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
-"X-Generator: Launchpad (build 16165)\n"
+"X-Launchpad-Export-Date: 2012-10-26 04:35+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -387,7 +387,7 @@ msgstr "Tapıldı"
 
 #: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
-msgstr ""
+msgstr "Ekran görüntülərinin qovluğunu seçin"
 
 #: src/gui/ConfigurationDialog.cpp:633
 #, qt-format
@@ -543,7 +543,7 @@ msgstr "F7"
 
 #: src/gui/HelpDialog.cpp:150
 msgid "Show and edit all keyboard shortcuts"
-msgstr ""
+msgstr "Bütün klaviatura qısayollarını aç və redaktə et"
 
 #: src/gui/HelpDialog.cpp:156
 msgid "Further Reading"
@@ -632,7 +632,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:231
 #, qt-format
 msgid "Graphic/other designer: %1"
-msgstr ""
+msgstr "Qrafik/digər dizayner: %1"
 
 #: src/gui/HelpDialog.cpp:236 src/gui/HelpDialog.cpp:237
 #, qt-format
@@ -646,7 +646,7 @@ msgstr "Müxtəlif"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:609
 msgid "Script console window"
-msgstr ""
+msgstr "Skript konsol pəncərəsi"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:604
 msgid "Windows"
@@ -713,7 +713,7 @@ msgstr "Müvəffəqiyyətli"
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 #: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
-msgstr ""
+msgstr "Heç bir mənzərə yüklənməyib"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:147
 #: src/gui/AddRemoveLandscapesDialog.cpp:171
@@ -790,23 +790,23 @@ msgstr "ulduz xəritəsi"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Simbad axtarış xətası"
 
 #: src/gui/SearchDialog.cpp:367
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Simbad axtarış"
 
 #: src/gui/SearchDialog.cpp:535
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Strasburq Universiteti (Fransa)"
 
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Harvard Universiteti (ABŞ)"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
-msgstr ""
+msgstr "Bu sistem OpenGL-i dəstəkləmir."
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:205
 #: plugins/Exoplanets/src/Exoplanet.cpp:209
@@ -1363,11 +1363,11 @@ msgstr ""
 
 #: src/translations.h:224
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Yarınçıq ay tutulmasını göstərən skript"
 
 #: src/translations.h:225
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Bütöv ay tutulmasını göstərən skript"
 
 #: src/translations.h:226
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -1434,7 +1434,7 @@ msgstr ""
 
 #: src/translations.h:236
 msgid "A tour via western constellations."
-msgstr ""
+msgstr "Qərbi bürclər üzrə tur."
 
 #: src/translations.h:237
 msgid "Look at Sun from big planets of Solar system and Pluto."
@@ -2422,7 +2422,7 @@ msgstr "Zambiya"
 
 #: src/translations.h:484
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabve"
 
 #: src/translations.h:487 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:164
@@ -2868,7 +2868,7 @@ msgstr "\"Peyklər\" əlavəsi"
 
 #: src/translations.h:594
 msgid "Satellites configuration window"
-msgstr ""
+msgstr "Peyklərin konfiqurasiyası pəncərəsi"
 
 #: src/translations.h:595
 msgid "Satellite hints"
@@ -3154,7 +3154,7 @@ msgstr "SİMBAD onlayn astronomik bazası"
 
 #: src/ui_searchDialogGui.h:625
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Axtarışı SİMBAD ilə genişləndirmək"
 
 #: src/ui_searchDialogGui.h:626
 msgid "Server:"
@@ -3370,15 +3370,15 @@ msgstr "Dumanı göstər"
 
 #: src/ui_viewDialog.h:1187
 msgid "Use associated planet and position"
-msgstr ""
+msgstr "Bağlı planeti və mövüeni işlət"
 
 #: src/ui_viewDialog.h:1188
 msgid "Use this landscape as default"
-msgstr ""
+msgstr "Bu mənzərəni əsas kimi işlət"
 
 #: src/ui_viewDialog.h:1190
 msgid "Use this sky culture as default"
-msgstr ""
+msgstr "Bu ulduzlar barədə məlumatı əsas kimi işlət"
 
 #: src/ui_viewDialog.h:1192
 msgid "Visible"
@@ -3409,7 +3409,7 @@ msgstr "Qurğuları qeyd et"
 
 #: src/ui_configurationDialog.h:950
 msgid "Restore the default settings that came with Stellarium"
-msgstr ""
+msgstr "Stellariumun ilkin qurğularını bərpa etmək"
 
 #: src/ui_configurationDialog.h:952
 msgid "Restore defaults"
@@ -3431,7 +3431,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:958
 msgid "The direction you're looking when Stellarium starts"
-msgstr ""
+msgstr "Stellarium açılanda baxışın istiqaməti"
 
 #: src/ui_configurationDialog.h:960 src/ui_configurationDialog.h:1114
 msgid "Selected object information"
@@ -3471,11 +3471,12 @@ msgstr "İstifadəçi"
 
 #: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
-msgstr ""
+msgstr "Göstərilən lövhələr"
 
 #: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
+"Geosentrik ekvatorial koordinatlar, J2000.0 gecə-gündüzün bərabərliyi"
 
 #: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (J2000)"
@@ -3545,6 +3546,7 @@ msgstr "Əlavə məlumat 1"
 #: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr ""
+"Geosentrik ekvatorial koordinatlar, tarixin gecə-gündüzün bərabərliyi"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
@@ -3552,7 +3554,7 @@ msgstr "Qalxma/Enmə (tarixdən)"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Qalaktik koordinatlar, J2000.0 gecə-gündüzün bərabərliyi"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
@@ -3580,7 +3582,7 @@ msgstr "Siçan naviqasiyasını aktivləşdir"
 
 #: src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "Klaviatura qısayollarını dəyişmək"
 
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
@@ -3589,7 +3591,7 @@ msgstr "Başlanğıc tarix və vaxt"
 
 #: src/ui_configurationDialog.h:1028
 msgid "Starts Stellarium at system clock date and time"
-msgstr ""
+msgstr "Stellariumu sistemin saati və vaxtı ilə başlamaq"
 
 #: src/ui_configurationDialog.h:1030
 msgid "System date and time"
@@ -3685,7 +3687,7 @@ msgstr "Tək bürcü seç"
 
 #: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
-msgstr ""
+msgstr "Günəş kölgələrinin vizuallaşdırılması"
 
 #: src/ui_configurationDialog.h:1072
 msgid ""
@@ -3744,7 +3746,7 @@ msgstr "Skript işləyəndə pəncərəni bağla"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Run the selected script"
-msgstr ""
+msgstr "Seçilən skripti başlamaq"
 
 #: src/ui_configurationDialog.h:1100
 msgid "Stop a running script"
@@ -3802,7 +3804,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Remove"
-msgstr ""
+msgstr "Sil"
 
 #: src/ui_addRemoveLandscapesDialog.h:276
 msgid ""
@@ -3937,12 +3939,12 @@ msgstr "Bucaq Ölçmə"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:59
 msgid "Provides an angle measurement tool"
-msgstr ""
+msgstr "Bu əlavə bucaqı ölcməyə imkan verir"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:307
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "Bucaq Ölçən işləyir:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:309
@@ -3996,7 +3998,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:887
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Okulyarların konfiqurasiyası"
 
 #: plugins/Oculars/src/Oculars.cpp:896
 msgid "Toggle &CCD"
@@ -4087,7 +4089,7 @@ msgstr "Ölçülər: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Sensor #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1522
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
@@ -4784,7 +4786,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:633
 #: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Peyklər əlavəsinin seçənəkləri"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Update TLE lists from Internet sources"
@@ -4895,7 +4897,7 @@ msgstr "Orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
-msgstr ""
+msgstr "Kataloqda nömrəsi:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
@@ -5932,7 +5934,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:294
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Solar System objects"
-msgstr ""
+msgstr "Günəş Sisteminin obyektləri"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
@@ -6142,7 +6144,7 @@ msgstr ""
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:246
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Kvazarlazrın konfiqurasiyası"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
@@ -6213,7 +6215,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Ekssentrisitet: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:170
@@ -6261,7 +6263,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "İki və ya daha çox kompanyonu var"
 
 #: plugins/Pulsars/src/Pulsar.cpp:297
 msgid "with pulsed emission from radio to infrared or higher frequencies"
@@ -6311,7 +6313,7 @@ msgstr "Təşəkkürlər"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodurov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
@@ -6327,15 +6329,15 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "Fransada"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Pulsarlar yenilənir"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:246
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Pulsarlarin konfiqurasiyası"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
@@ -6365,7 +6367,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Metallicity"
-msgstr ""
+msgstr "Metallikliyi"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
@@ -6413,7 +6415,7 @@ msgstr "Ekssentrisitet"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Inclination"
-msgstr ""
+msgstr "Əyilmə"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Angle Distance"
@@ -6421,7 +6423,7 @@ msgstr "Bucaq məsafəsi"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Discovered year"
-msgstr ""
+msgstr "Açılış ili"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
@@ -6444,15 +6446,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Ekzoplanetlər yenilənir"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:230
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Ekzoplanetlərin konfiqurasiyası"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:231
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "Ekzoplanetlər əlavəsinin seçənəkləri"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
@@ -6573,7 +6575,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "Circumpolar."
-msgstr ""
+msgstr "Polarətraf."
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "No rise."
@@ -6628,11 +6630,11 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:649
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "Bütöv il ərzində müşahidə olunur."
 
 #: plugins/Observability/src/Observability.cpp:653
 msgid "Not observable at dark night."
-msgstr ""
+msgstr "Gecə vaxtı müşahidə olunmur."
 
 #: plugins/Observability/src/Observability.cpp:658
 msgid "Nights above horizon: "
@@ -6774,7 +6776,7 @@ msgstr "dər."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:338
 msgid "Observability Configuration"
-msgstr ""
+msgstr "\"Müşahidə şəraiti\" əlavəsinin konfiqurasiyası"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:339
 msgid "Observability Plug-in Configuration"
