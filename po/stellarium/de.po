@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-10-19 23:23+0000\n"
-"Last-Translator: Dennis Baudys <Unknown>\n"
+"PO-Revision-Date: 2012-10-24 04:22+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
-"X-Generator: Launchpad (build 16165)\n"
+"X-Launchpad-Export-Date: 2012-10-26 04:38+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -125,12 +125,12 @@ msgstr "Absolute Helligkeit: %1"
 #: src/core/modules/Planet.cpp:455
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "Topozentrisch ekliptikal (zum Datum): %1/%2"
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Schiefe der Ekliptik (zum Datum): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -169,7 +169,7 @@ msgstr "Siderischer Tag: %1"
 #: src/core/modules/Planet.cpp:506
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Mittlerer Sonnentag: %1"
 
 #: src/core/modules/Planet.cpp:513
 #, qt-format
@@ -361,7 +361,7 @@ msgstr "RA/DE (des Datums): %1/%2"
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "Galaktische Länge/Breite: %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -2526,27 +2526,27 @@ msgstr "Addiere 1 Sonnenwoche"
 
 #: src/translations.h:495
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "1 Synodischen Monat vorwärts"
 
 #: src/translations.h:496
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "1 Drakonitischen Monat vorwärts"
 
 #: src/translations.h:497
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "1 Anomalistischen Monat vorwärts"
 
 #: src/translations.h:498
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "1 Mittleren Tropischen Monat vorwärts"
 
 #: src/translations.h:499
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "1 Drakonitisches Jahr vorwärts"
 
 #: src/translations.h:500
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "1 Mittleres Tropisches Jahr vorwärts"
 
 #: src/translations.h:501
 msgid "Slow down the script execution rate"
@@ -2630,27 +2630,27 @@ msgstr "Subtrahiere 1 Sonnenwoche"
 
 #: src/translations.h:521
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "1 Synodisches Monat zurück"
 
 #: src/translations.h:522
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "1 Drakonitisches Monat zurück"
 
 #: src/translations.h:523
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "1 Anomalistisches Monat zurück"
 
 #: src/translations.h:524
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "1 Mittleres Tropisches Monat zurück"
 
 #: src/translations.h:525
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "1 Drakonitisches Jahr zurück"
 
 #: src/translations.h:526
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "1 Mittleres Tropisches Jahr zurück"
 
 #: src/translations.h:527
 msgid "Display Options"
@@ -3625,11 +3625,11 @@ msgstr "Rektaszension und Deklination (Äquinoktium des Datums)"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Galaktische Koordinaten (System II)"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
-msgstr ""
+msgstr "Länge/Breite (J2000)"
 
 #: src/ui_configurationDialog.h:1016
 msgid "Control"
@@ -7520,13 +7520,3 @@ msgstr "0 Grad"
 
 #~ msgid "Object's size"
 #~ msgstr "Objektgröße"
-
-#~ msgid "Stop currently running script"
-#~ msgstr "Derzeitig laufendes Script abbrechen"
-
-#~ msgid "Night vision mode"
-#~ msgstr "Nachtsichtmodus"
-
-#, qt-format
-#~ msgid "Orbital period: %1 days"
-#~ msgstr "Umlaufzeit: %1"

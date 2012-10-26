@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-10-21 11:42+0000\n"
+"PO-Revision-Date: 2012-10-24 19:00+0000\n"
 "Last-Translator: Joan Salvat <jsalvat@hotmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-21 13:53+0000\n"
-"X-Generator: Launchpad (build 16165)\n"
+"X-Launchpad-Export-Date: 2012-10-26 04:36+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -6723,6 +6723,13 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
+"Informa d'una anàlisi de observabilitat de la font (sortida, posta, i els "
+"temps de trànsit), així com les èpoques de l'any quan la font s'observa "
+"millor. Se suposa que una font és observable si està per sobre de l'horitzó "
+"durant una fracció de la nit. El connector també dóna el dia de major "
+"separació del Sol i els dies de sortida/posta còsmics i anacrònics. <br> "
+"<br> Una explicació de les quantitats indicades per aquesta seqüencia "
+"d'ordres es dóna a la pestanya 'Quant a' de la finestra de configuració"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
@@ -6805,111 +6812,111 @@ msgstr "s"
 #: plugins/Observability/src/Observability.cpp:477
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "Posta a %1 (en %2)"
 
 #: plugins/Observability/src/Observability.cpp:478
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "Ha sortit a %1 (fa %2)"
 
 #: plugins/Observability/src/Observability.cpp:488
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "S'ha amagat a %1 (fa %2)"
 
 #: plugins/Observability/src/Observability.cpp:489
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "Surt a %1 (en %2)"
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "Circumpolar."
-msgstr ""
+msgstr "Circumpolar."
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "No rise."
-msgstr ""
+msgstr "No surt"
 
 #: plugins/Observability/src/Observability.cpp:515
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "Culmina a %1 (en %2) a %3 graus."
 
 #: plugins/Observability/src/Observability.cpp:519
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "Va culminar a %1 (fa %2) a %3 graus."
 
 #: plugins/Observability/src/Observability.cpp:560
 msgid "Source is not observable."
-msgstr ""
+msgstr "La font no és observable."
 
 #: plugins/Observability/src/Observability.cpp:561
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "Sense sortida/posta còsmica o anacrònica"
 
 #: plugins/Observability/src/Observability.cpp:578
 msgid "Greatest elongation: "
-msgstr ""
+msgstr "Màxima elongació: "
 
 #: plugins/Observability/src/Observability.cpp:581
 msgid "Largest Sun separation: "
-msgstr ""
+msgstr "Major separació del Sol: "
 
 #: plugins/Observability/src/Observability.cpp:584
 #, qt-format
 msgid " (at %1 deg.)"
-msgstr ""
+msgstr " (a %1 graus)"
 
 #: plugins/Observability/src/Observability.cpp:602
 msgid "Acronychal rise/set"
-msgstr ""
+msgstr "Sortida/posta anacrònica"
 
 #: plugins/Observability/src/Observability.cpp:602
 msgid "No Acronychal rise/set."
-msgstr ""
+msgstr "Sense sortida/posta anacrònica"
 
 #: plugins/Observability/src/Observability.cpp:603
 msgid "Cosmical rise/set"
-msgstr ""
+msgstr "Sortida/posta còsmica"
 
 #: plugins/Observability/src/Observability.cpp:603
 msgid "No Cosmical rise/set."
-msgstr ""
+msgstr "Sense sortida/posta còsmica"
 
 #: plugins/Observability/src/Observability.cpp:649
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "Observable durant tot l'any."
 
 #: plugins/Observability/src/Observability.cpp:653
 msgid "Not observable at dark night."
-msgstr ""
+msgstr "No és observable en la nit fosca."
 
 #: plugins/Observability/src/Observability.cpp:658
 msgid "Nights above horizon: "
-msgstr ""
+msgstr "Nits per sobre de l'horitzó: "
 
 #: plugins/Observability/src/Observability.cpp:675
 msgid "TODAY:"
-msgstr ""
+msgstr "AVUI:"
 
 #: plugins/Observability/src/Observability.cpp:684
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "AQUEST ANY:"
 
 #: plugins/Observability/src/Observability.cpp:1428
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Anterior Lluna Plena: %1 %2 at %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:1433
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Propera Lluna Plena: %1 %2 at %3:%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "Coonector de observació"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
 msgid ""
@@ -6922,14 +6929,23 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
+"Connector que analitza la observabilitat de la font seleccionada (o el "
+"centre de la pantalla, si no es selecciona cap font). El connector pot "
+"mostrar temps de sortida, trànsit i posta, així com la millor època de l'any "
+"(és a dir, la major separació angular del Sol), l'interval de dates quan la "
+"font està per sobre de l'horitzó a la nit fosca, i les dates de "
+"sortida/posta còsmiques i anacròniques <br>. Es tenen en compte les "
+"efemèrides dels objectes del Sistema Solar i els efectes de paralatje <br> "
+"<br>. L'autor agraeix a Alexander Wolf i Georg Zotti els seus consells. "
+"<br><br> Ivan Marti-Vidal (Onsala Space Observatory)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "Explicació d'alguns paràmetres"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "Altitud del Sol en el crepuscle:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid ""
@@ -6938,10 +6954,14 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"Qualsevol objecte celeste es considerarà visible quan el Sol està per sota "
+"d'aquesta altitud. L'altitud en el moment del crepuscle astronòmic oscil·la "
+"generalment entre -12 i -18 graus. Aquest paràmetre només s'utilitza per a "
+"l'estimació del rang d'èpoques observables (veure més avall)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
-msgstr ""
+msgstr "Efemèrides d'avui:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -6950,10 +6970,14 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
+"S'explica per si sol. El programa mostrarà els temps de sortida, posta, i "
+"culminació (trànsit). Els temps exactes d'aquestes efemèrides es presenten "
+"en dues formes: com intervals de temps (referits a l'hora actual) i com "
+"hores del rellotge (en hora local)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid "Acronychal/Cosmical rise/set:"
-msgstr ""
+msgstr "Sortida/posta còsmica/anacrònica"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid ""
@@ -6967,10 +6991,19 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
+"La sortida (o posta) anacrònica d'un objecte passa quan l'objecte surt (o es "
+"pon) just quan el sol es pon (o surt), respectivament. Les dates exactes "
+"d'aquestes efemèrides depenen de la ubicació de l'observador. Les dates "
+"entre la posta i la sortida anacrònica són aquelles en què l'altitud de "
+"l'objecte celeste sol ser alta quan el Sol està molt per sota de l'horitzó "
+"(per tant l'objecte pot ser ben observat). Per contra, la sortida (o posta) "
+"còsmica passa quan tant l'objecte com el Sol surten (o es ponen) de manera "
+"simultània. És obvi que la font és difícilment observable (o no es "
+"observable en absolut) en els dies entre la sortida i la posta còsmica."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid "Largest Sun separation:"
-msgstr ""
+msgstr "Major separació del Sol:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
@@ -6983,10 +7016,18 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
+"Ocorre quan la separació angular entre el Sol i l'objecte celeste són "
+"màximes. En la majoria dels casos, això és equivalent a dir que les "
+"longituds equatorials del Sol i l'objecte difereixen en 180 graus, de manera "
+"que el Sol està en oposició a l'objecte. Quan un objecte està en el seu "
+"màxim possible de separació angular del Sol (no importa si és un planeta o "
+"una estrella), culmina aproximadament a la mitjanit, i en la zona més fosca "
+"possible del cel en aquesta declinació. Per tant, aquesta és la \"millor\" "
+"la nit per observar un objecte en particular."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "Nits amb font sobre l'horitzó:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid ""
@@ -7007,57 +7048,77 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
+"El programa calcula l'interval de dates quan l'objecte celeste està per "
+"sobre de l'horitzó, com a mínim durant un moment de la nit. Per 'nit', el "
+"programa considera que el lapse de temps quan l'altitud del sol és inferior "
+"a la del crepuscle (que pot ser ajustat per l'usuari, consulteu més amunt). "
+"Quan els objectes estan fixos al cel (o són planetes exteriors), el rang de "
+"les èpoques observables per al'any en curs pot tenir dues formes possibles: "
+"o bé una sèrie d'una data a una altra (per exemple, des del 20 de Gener al "
+"15 de Setembre) o en dos passos (d'1 de Gener a una data determinada i d'una "
+"altra data al 31 de Desembre). En el primer cas, la primera data (20 de "
+"Gener en el nostre exemple) ha d'estar a prop del \"ortus helíac d'una "
+"estrella\" i la segona data (15 September en el nostre exemple) ha d'estar a "
+"prop del \"ocàs helíac\" . En el segon cas (per exemple, un rang de l'1 de "
+"Gener  al 20 de Maig i del 21 de Setembre al 31 de Desembre), la primera "
+"data (20 de Maig en el nostre exemple) s'aproparia al ocàs helíac i la "
+"segona (21 de Setembre al nostre exemple) al ortus helíac. Equacions més "
+"exactes per estimar l'ortus/ocàs helíac de les estrelles i els planetes (que "
+"no depenen de la mera entrada de l'elevació del Sol en el crepuscle) "
+"s'implementaran en futures versions d'aquest connector."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"
-msgstr ""
+msgstr "Lluna Plena:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
+"Quan la Lluna està seleccionada, el programa pot calcular la data exacta més "
+"propera de l'oposició de la Lluna al Sol."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
 msgid "deg."
-msgstr ""
+msgstr "grau."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:338
 msgid "Observability Configuration"
-msgstr ""
+msgstr "Configuració de observabilitat"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:339
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "Configuració del connector de observabilitat"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:341
 msgid "Showing Options"
-msgstr ""
+msgstr "Mostrant Opcions"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr ""
+msgstr "Efemèrides d'avui (temps de sortida, posta i trànsit)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr ""
+msgstr "Dates de sortida/posta anacròniques i còsmiques"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:344
 msgid "Date of largest separation to the Sun"
-msgstr ""
+msgstr "Data de la separació més gran del Sol"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "Nits amb la font sobre l'horitzó"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "Dates de la Lluna plena anterior i següent"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font color and size"
-msgstr ""
+msgstr "Color i la mida de la font"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Red"
@@ -7077,11 +7138,11 @@ msgstr "Mida de la lletra"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Sun altitude at twilight"
-msgstr ""
+msgstr "Altitud del Sol al crepuscle"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "0 deg."
-msgstr ""
+msgstr "0 graus."
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Quadrícula Equatorial"
@@ -7470,13 +7531,3 @@ msgstr ""
 
 #~ msgid "glitches in period"
 #~ msgstr "paràsits en el període"
-
-#~ msgid "Stop currently running script"
-#~ msgstr "Atura l'execució actual de l'script"
-
-#~ msgid "Night vision mode"
-#~ msgstr "Mode de visió nocturna"
-
-#, qt-format
-#~ msgid "Orbital period: %1 days"
-#~ msgstr "Període orbital: %1 days"
