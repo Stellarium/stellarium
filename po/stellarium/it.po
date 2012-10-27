@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-09-17 05:54+0000\n"
-"Last-Translator: Gianfranco Frisani <gfrisani@libero.it>\n"
+"PO-Revision-Date: 2012-10-26 09:05+0000\n"
+"Last-Translator: Ross <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-21 13:54+0000\n"
-"X-Generator: Launchpad (build 16165)\n"
+"X-Launchpad-Export-Date: 2012-10-27 04:37+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -128,7 +128,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Obliquità (alla data, per la Terra): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -2522,27 +2522,27 @@ msgstr "Aggiungi 1 settimana solare"
 
 #: src/translations.h:495
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Aggiungi 1 mese sinodico"
 
 #: src/translations.h:496
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "Aggiungi 1 mese draconico"
 
 #: src/translations.h:497
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "Aggiungi 1 mese anomalistico"
 
 #: src/translations.h:498
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "Aggiungi 1 mese tropicale medio"
 
 #: src/translations.h:499
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "Aggiungi un anno draconico"
 
 #: src/translations.h:500
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "Aggiungi un anno tropicale medio"
 
 #: src/translations.h:501
 msgid "Slow down the script execution rate"
@@ -2626,27 +2626,27 @@ msgstr "Sottrai 1 settimana solare"
 
 #: src/translations.h:521
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "Sottrai 1 mese sinodico"
 
 #: src/translations.h:522
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "Sottrai 1 mese draconico"
 
 #: src/translations.h:523
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "Sottrai 1 mese anomalistico"
 
 #: src/translations.h:524
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "Sottrai 1 mese tropicale medio"
 
 #: src/translations.h:525
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "Sottrai 1 anno draconico"
 
 #: src/translations.h:526
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "Sottrai 1 anno tropicale medio"
 
 #: src/translations.h:527
 msgid "Display Options"
@@ -3649,7 +3649,7 @@ msgstr "Abilita la navigazione con il mouse"
 
 #: src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "Configura i tasti di selezione rapida..."
 
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
@@ -3891,7 +3891,7 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:201
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Tasti di selezione rapida"
 
 #: src/ui_shortcutsDialog.h:204
 msgid "Alternative shortcut"
@@ -7465,9 +7465,6 @@ msgstr "0 gr."
 #~ msgid "Additional info (Extra 3)"
 #~ msgstr "Info aggiuntive (Extra 3)"
 
-#~ msgid "Stop currently running script"
-#~ msgstr "Ferma lo script in esecuzione"
-
 #~ msgid "Plugin Key Bindings"
 #~ msgstr "Chiave blocco plugin"
 
@@ -7536,10 +7533,3 @@ msgstr "0 gr."
 
 #~ msgid "Display info about an object's name"
 #~ msgstr "Visualizza informazioni sul nome di un oggetto"
-
-#~ msgid "Night vision mode"
-#~ msgstr "Modalità visione notturna"
-
-#, qt-format
-#~ msgid "Orbital period: %1 days"
-#~ msgstr "Periodo orbitale: %1 giorni"
