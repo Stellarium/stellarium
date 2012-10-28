@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-10-24 04:51+0000\n"
+"PO-Revision-Date: 2012-10-27 15:52+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-26 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-10-28 04:40+0000\n"
 "X-Generator: Launchpad (build 16194)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -128,7 +128,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "自转轴倾角（当前日期，相对于地球轨道面）: %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -157,7 +157,7 @@ msgstr "视直径: %1"
 #: src/core/modules/Comet.cpp:163
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "公转轨道周期：%1天 (%2儒略年)"
 
 #: src/core/modules/Planet.cpp:502
 #, qt-format
@@ -1146,7 +1146,7 @@ msgstr "赫克托(小行星624号)"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "伐楼拿"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
@@ -1343,7 +1343,7 @@ msgstr "从不同行星所见的太阳"
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "其他太阳系天体上看到的地球"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
@@ -1408,14 +1408,14 @@ msgstr ""
 
 #: src/translations.h:233
 msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
-msgstr ""
+msgstr "2068年1月10日在火星的奥林匹斯山上能看到火卫一食日。"
 
 #: src/translations.h:234
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "Occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
-msgstr ""
+msgstr "火卫一掩地和掩木都是很常见的，然而它们在同一天发生却是非常地罕见。这里给出一个在2048年1月23日发生的例子，以真实的速度。"
 
 #: src/translations.h:234
 msgid ""
@@ -1440,7 +1440,7 @@ msgstr "从太阳系各大行星以及冥王星所看到的太阳。"
 
 #: src/translations.h:238
 msgid "Earth best views from other Solar system bodies in the 21st Century."
-msgstr ""
+msgstr "在二十一世纪其他太阳系天体上看到的地球"
 
 #: src/translations.h:239
 msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
@@ -1450,13 +1450,13 @@ msgstr "从澳大利亚悉尼观测的发生在2012年6月6日的金星凌日。
 msgid ""
 "This script shows the analemma - the path of the Sun across the sky during "
 "the year."
-msgstr ""
+msgstr "这个脚本显示了日行迹——太阳在一年中经过天上的轨迹。（注：通常是每天同一时刻，比如上中天时的位置组成的图，在地球上为“8”字形）"
 
 #: src/translations.h:241
 msgid ""
 "Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
 "need enable plugin for supernovae."
-msgstr ""
+msgstr "1572年被第谷观测到的一个超新星。欲播放录像请打开超新星插件。"
 
 #: src/translations.h:244
 msgid "Andorra"
@@ -2668,7 +2668,7 @@ msgstr "银道坐标网格"
 
 #: src/translations.h:545 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
-msgstr "星系平面"
+msgstr "银道面"
 
 #: src/translations.h:546
 msgid "Ground"
@@ -2786,7 +2786,7 @@ msgstr "角度测量"
 
 #: src/translations.h:574
 msgid "Compass Marks Plugin"
-msgstr ""
+msgstr "罗盘标记插件"
 
 #: src/translations.h:575
 msgid "Compass marks"
@@ -2818,7 +2818,7 @@ msgstr "观测性配置窗口"
 
 #: src/translations.h:582
 msgid "Oculars Plugin"
-msgstr ""
+msgstr "目镜视角插件"
 
 #: src/translations.h:583
 msgid "Oculars plugin configuration"
@@ -2830,7 +2830,7 @@ msgstr "目镜视图"
 
 #: src/translations.h:585
 msgid "Show crosshairs"
-msgstr ""
+msgstr "显示十字丝"
 
 #: src/translations.h:586
 msgid "Oculars popup menu"
@@ -2899,11 +2899,11 @@ msgstr "脚本"
 
 #: src/translations.h:602
 msgid "Run landscapes script from file"
-msgstr ""
+msgstr "从文件运行地景脚本"
 
 #: src/translations.h:603
 msgid "Show and zoom Moon"
-msgstr ""
+msgstr "显示和缩放月球"
 
 #: src/translations.h:605
 msgid "Configuration window"
@@ -3167,11 +3167,11 @@ msgstr "选项"
 
 #: src/ui_searchDialogGui.h:628
 msgid "names in English"
-msgstr ""
+msgstr "英文名"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Search in list..."
-msgstr ""
+msgstr "在列表中搜索..."
 
 #: src/ui_searchDialogGui.h:630
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
@@ -3547,11 +3547,11 @@ msgstr "赤经/赤纬 (日期)"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "银道坐标系，纪元J2000.0"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
-msgstr ""
+msgstr "经度/纬度（纪元J2000.0）"
 
 #: src/ui_configurationDialog.h:1016
 msgid "Control"
@@ -3575,7 +3575,7 @@ msgstr "启用鼠标导览"
 
 #: src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "编辑键盘快捷键..."
 
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
@@ -3680,7 +3680,7 @@ msgstr "选择单一星座"
 
 #: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
-msgstr ""
+msgstr "渲染日光透影"
 
 #: src/ui_configurationDialog.h:1072
 msgid ""
@@ -5716,7 +5716,7 @@ msgstr "星云标记"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic plane line"
-msgstr "星系平面线"
+msgstr "银道线"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:391
 msgid "Effects"
@@ -6175,7 +6175,7 @@ msgstr "类星体显示模式"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "不显示类星体标签"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
@@ -6598,7 +6598,7 @@ msgstr "升于 %1 (于 %2)"
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "Circumpolar."
-msgstr "北极圈"
+msgstr "拱极天体（总在地平线上）"
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "No rise."
@@ -6607,12 +6607,12 @@ msgstr "不会升起"
 #: plugins/Observability/src/Observability.cpp:515
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "%1 上中天（%2 之后）高度为%3 度"
 
 #: plugins/Observability/src/Observability.cpp:519
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "%1 上中天（%2 之前）高度为%3 度"
 
 #: plugins/Observability/src/Observability.cpp:560
 msgid "Source is not observable."
@@ -6661,7 +6661,7 @@ msgstr "黑夜不可见"
 
 #: plugins/Observability/src/Observability.cpp:658
 msgid "Nights above horizon: "
-msgstr ""
+msgstr "在地平线上的夜晚： "
 
 #: plugins/Observability/src/Observability.cpp:675
 msgid "TODAY:"
@@ -6674,12 +6674,12 @@ msgstr "本年："
 #: plugins/Observability/src/Observability.cpp:1428
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "上一次满月：%1 %2 在%3:%4。 "
 
 #: plugins/Observability/src/Observability.cpp:1433
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "下一次满月：%1 %2 在%3:%4。 "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
@@ -6712,6 +6712,7 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"当太阳低于这个高度时，所有天体都可以认为是可见的。天文曙暮光的太阳高度大约为-12度到-18度，这个数据只被用于估计可进行观测的时间（见下文）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
