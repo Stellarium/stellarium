@@ -82,6 +82,13 @@ void StelShortcutMgr::changeActionAltKey(const QString& actionId, const QString&
 		shortcut->setAltKey(newKey);
 }
 
+void StelShortcutMgr::setShortcutText(const QString &actionId, const QString &groupId, const QString &description)
+{
+	StelShortcut* shortcut = getShortcut(groupId, actionId);
+	if (shortcut)
+		shortcut->setText(description);
+}
+
 QAction* StelShortcutMgr::getGuiAction(const QString& actionName)
 {
 	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);
@@ -105,7 +112,7 @@ QAction* StelShortcutMgr::getAction(const QString& groupId,
 
 QAction *StelShortcutMgr::addScriptToAction(const QString &actionId, const QString &script, const QString& scriptPath)
 {
-	StelShortcut* sc;
+	StelShortcut* sc = 0;
 	// firstly search in "Scripts" group, all the scripts actions should be there
 	if (shGroups.contains("Scripts"))
 	{

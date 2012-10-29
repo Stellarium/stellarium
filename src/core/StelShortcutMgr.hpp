@@ -68,6 +68,9 @@ public:
 
 	void changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
 	void changeActionAltKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
+	void setShortcutText(const QString& actionId,
+	                            const QString& groupId,
+	                            const QString& description);
 
 	//! Get a pointer to an action managed by the GUI.
 	//! Directly queryies the StelAppGraphicsWidget instance
