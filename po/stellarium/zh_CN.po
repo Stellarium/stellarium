@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-10-27 15:52+0000\n"
+"POT-Creation-Date: 2012-10-28 15:59+0700\n"
+"PO-Revision-Date: 2012-10-28 11:36+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-28 04:40+0000\n"
+"X-Launchpad-Export-Date: 2012-10-29 04:49+0000\n"
 "X-Generator: Launchpad (build 16194)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -103,7 +103,7 @@ msgstr "行星状星云"
 
 #: src/core/modules/Nebula.cpp:357
 msgid "Cluster associated with nebulosity"
-msgstr "星云状星团"
+msgstr "带有星云状物质的星团"
 
 #: src/core/modules/Nebula.cpp:360
 msgid "Unknown"
@@ -332,7 +332,7 @@ msgstr "赤经/赤纬 (J2000): %1/%2"
 #: src/core/StelObject.cpp:99
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "赤经/赤纬 (日期): %1/%2"
+msgstr "赤经/赤纬（当前日期纪元）：%1/%2"
 
 #: src/core/StelObject.cpp:106
 #, qt-format
@@ -3140,7 +3140,7 @@ msgstr "物件"
 
 #: src/ui_searchDialogGui.h:622
 msgid "RA/Dec (J2000):"
-msgstr "RA/DEC (J2000):"
+msgstr "赤经/赤纬 (J2000)"
 
 #: src/ui_searchDialogGui.h:623
 msgid "Position"
@@ -3245,7 +3245,7 @@ msgstr "模拟光速"
 
 #: src/ui_viewDialog.h:1129
 msgid "Scale Moon"
-msgstr "月球尺寸"
+msgstr "放大月球"
 
 #: src/ui_viewDialog.h:1131
 msgid "Show atmosphere"
@@ -3470,7 +3470,7 @@ msgstr "显示区域"
 
 #: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr "地心赤道坐标系，春分点按J2000.0"
+msgstr "地心赤道坐标系，春分点纪元J2000.0"
 
 #: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (J2000)"
@@ -3539,11 +3539,11 @@ msgstr "额外信息1"
 
 #: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr "地心赤道坐标系，春分点按日"
+msgstr "地心赤道坐标系，当前日期春分点"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
-msgstr "赤经/赤纬 (日期)"
+msgstr "赤经/赤纬（当前日期纪元）"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
@@ -3668,7 +3668,7 @@ msgstr "星空名称文字保持水平"
 
 #: src/ui_configurationDialog.h:1065
 msgid "Gravity labels"
-msgstr "重力名称文字"
+msgstr "标签正立"
 
 #: src/ui_configurationDialog.h:1067
 msgid "Hide other constellations when you click one"
@@ -3851,7 +3851,7 @@ msgstr "气压(毫巴):"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid "Temperature (C):"
-msgstr "温度(射氏)"
+msgstr "温度(摄氏)"
 
 #: src/ui_AtmosphereDialog.h:185
 msgid ""
@@ -4221,6 +4221,8 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefore I "
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
+"您可以选择缩放您在屏幕上看到的图像。这是为了向您展示一个更好的某套目镜/主镜的结合和其他组合的比较。同一个目镜在不同焦距的主镜上会产生不同的成像圈，使得我"
+"们看到的图像不同。然而，图像缩放后，屏幕的大部分面积会被浪费。因此我建议您除非需要，不要使用这个功能。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -4237,6 +4239,8 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"您可以开启红圈寻星镜，但这只能在您没有开启目镜视图时使用。这个功能会显示三个同心圆，分别是0.5%1,2.0%1和4.0%1。这可以帮助您看到您在真实的红"
+"圈（或者类似的）寻星镜能看到的。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -4480,7 +4484,7 @@ msgstr "此卫星不可见。"
 #: plugins/Satellites/src/Satellite.cpp:323
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr "%1 MHz（%2%3 kHz）"
+msgstr "%1 兆赫兹(%2%3 千赫兹)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Stellarium Satellites Plugin"
@@ -6175,7 +6179,7 @@ msgstr "类星体显示模式"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Plot all quasars without labels"
-msgstr "不显示类星体标签"
+msgstr "显示所有类星体且不带标签"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
@@ -6209,7 +6213,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:145
 msgid "Dispersion measure:"
-msgstr "色散量："
+msgstr "频散量"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:148
@@ -6229,7 +6233,7 @@ msgstr "自转能量损失速率：%1尔格/秒"
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr ""
+msgstr "脉冲双星轨道周期：%1 天"
 
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
@@ -6256,7 +6260,7 @@ msgstr "半峰值宽度：%1 毫秒"
 #: plugins/Pulsars/src/Pulsar.cpp:184 plugins/Pulsars/src/Pulsar.cpp:196
 #: plugins/Pulsars/src/Pulsar.cpp:208
 msgid "Time averaged flux density at"
-msgstr "时均通量密度为"
+msgstr "时均流量密度在"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
@@ -6278,7 +6282,7 @@ msgstr "说明：%1"
 #: plugins/Pulsars/src/Pulsar.cpp:287
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
-msgstr ""
+msgstr "反常X射线脉冲星和软伽玛射线再现源"
 
 #: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "has one or more binary companions"
@@ -6286,19 +6290,19 @@ msgstr "存在至少一个伴星"
 
 #: plugins/Pulsars/src/Pulsar.cpp:297
 msgid "with pulsed emission from radio to infrared or higher frequencies"
-msgstr ""
+msgstr "有在从无线电到红外线波段或更高频率的脉冲发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:302
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr ""
+msgstr "有只在红外线波段或更高频率的脉冲发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:307
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "有在无线电波段的脉冲发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:312
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "有间歇性的脉冲无线电发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:317
 msgid ""
@@ -6334,7 +6338,7 @@ msgstr "鸣谢"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "弗拉基米尔·萨莫杜罗夫(Vladimir Samodourov)"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
@@ -6370,7 +6374,7 @@ msgstr "脉冲星显示模式"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "显示所有脉冲星且不带标签"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
@@ -6388,7 +6392,7 @@ msgstr "此插件标出了包含系外行星的恒星的位置。系外行星的
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Metallicity"
-msgstr ""
+msgstr "金属丰度"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
@@ -6420,7 +6424,7 @@ msgstr "天"
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Jup"
-msgstr ""
+msgstr "木星"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Semi-Major Axis"
@@ -6496,7 +6500,7 @@ msgid ""
 "configuration window"
 msgstr ""
 "本插件提供观测条件（升起、落下，和可见时间）的分析，以及目标在一年中的最佳观测时间。插件假定在夜间处于地平线上方的对象为可观测的。同时，插件还提供了目标与"
-"太阳的最大距离以及冲日日期和 Cosmical 升起/落下时间。<br><br>关于插件显示内容的具体说明可以在配置窗口的“关于”中找到。"
+"太阳的最大距离以及冲日日期和 Cosmical 升/落时间。<br><br>关于插件显示内容的具体说明可以在配置窗口的“关于”中找到。"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
@@ -6624,7 +6628,7 @@ msgstr "无冲日和 Cosmical 升/落"
 
 #: plugins/Observability/src/Observability.cpp:578
 msgid "Greatest elongation: "
-msgstr ""
+msgstr "大距： "
 
 #: plugins/Observability/src/Observability.cpp:581
 msgid "Largest Sun separation: "
@@ -6703,7 +6707,7 @@ msgstr "显示项说明"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "曙暮光太阳高度"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid ""
@@ -6716,7 +6720,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
-msgstr ""
+msgstr "今日星历表"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -6724,11 +6728,11 @@ msgid ""
 "(transit) times. The exact times for these ephemeris are given in two ways: "
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
-msgstr ""
+msgstr "顾名思义。这个程序会显示天体的升落、中天（凌日）时间。这些星历的具体时间会被用两种形式给出：时间差（根据目前时间）和实际时间（地方时）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid "Acronychal/Cosmical rise/set:"
-msgstr ""
+msgstr "日没/偕日 升/落"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid ""
