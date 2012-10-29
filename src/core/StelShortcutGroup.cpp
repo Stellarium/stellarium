@@ -27,11 +27,16 @@
 #include <QDebug>
 
 
-StelShortcut::StelShortcut(const QString &id, StelShortcutGroup* group, const QString &text,
-													 const QString &primaryKey, const QString &altKey,
-													 bool checkable, bool autoRepeat, bool global,
-													 QGraphicsWidget *parent) :
-	m_id(id), m_script()
+StelShortcut::StelShortcut(const QString &id,
+                           StelShortcutGroup* group,
+                           const QString &text,
+                           const QString &primaryKey,
+                           const QString &altKey,
+                           bool checkable,
+                           bool autoRepeat,
+                           bool global,
+                           QGraphicsWidget *parent) :
+    m_id(id), m_temporary(false)
 {
 	if (parent == NULL)
 	{
@@ -245,6 +250,9 @@ QVariant StelShortcutGroup::toQVariant() const
 		{
 			actionsMap[it.key()] = sc->toQVariant();
 		}
+//		else
+//			qDebug() << shortcut->getGroup() << shortcut->getId()
+//			         << "is not added as temporary.";
 	}
 	resMap["actions"] = QVariant(actionsMap);
 	return resMap;
