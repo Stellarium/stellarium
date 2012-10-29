@@ -63,7 +63,7 @@ QVariant StelShortcut::toQVariant() const
 	resMap["primaryKey"] = QVariant(m_primaryKey.toString());
 	resMap["altKey"] = QVariant(m_altKey.toString());
 	resMap["checkable"] = QVariant(m_checkable);
-	resMap["autoRepeat"] = QVariant(m_autoRepeat);
+	resMap["autorepeat"] = QVariant(m_autoRepeat);
 	resMap["global"] = QVariant(m_global);
 	if (!m_scriptFile.isEmpty())
 	{
