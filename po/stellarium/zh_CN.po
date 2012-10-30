@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-28 15:59+0700\n"
-"PO-Revision-Date: 2012-10-28 11:36+0000\n"
+"PO-Revision-Date: 2012-10-29 05:35+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-29 04:49+0000\n"
-"X-Generator: Launchpad (build 16194)\n"
+"X-Launchpad-Export-Date: 2012-10-30 04:42+0000\n"
+"X-Generator: Launchpad (build 16206)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -128,7 +128,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr "自转轴倾角（当前日期，相对于地球轨道面）: %1"
+msgstr "自转轴倾角(当前日期，相对于地球轨道面): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -332,7 +332,7 @@ msgstr "赤经/赤纬 (J2000): %1/%2"
 #: src/core/StelObject.cpp:99
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "赤经/赤纬（当前日期纪元）：%1/%2"
+msgstr "赤经/赤纬(当前日期纪元)：%1/%2"
 
 #: src/core/StelObject.cpp:106
 #, qt-format
@@ -1398,13 +1398,13 @@ msgstr "由于水星公转轨道与自转周期的巧合，在某些时候和地
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
-msgstr ""
+msgstr "就在火星食太阳之前，火卫一从火星后面赶上并先行挡住太阳。这发生在2017年4月26日，天蝎座和人马座之间。"
 
 #: src/translations.h:232
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
-msgstr ""
+msgstr "就在火星食太阳之前，火卫一从火星后面赶上并先行挡住太阳。这发生在2031年7月23日，金牛座和双子座之间。"
 
 #: src/translations.h:233
 msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
@@ -2927,7 +2927,7 @@ msgstr "搜索"
 
 #: src/translations.h:611
 msgid "Shortcuts window"
-msgstr ""
+msgstr "快捷键窗口"
 
 #: src/translations.h:612
 msgid "Sky and viewing options window"
@@ -3543,7 +3543,7 @@ msgstr "地心赤道坐标系，当前日期春分点"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
-msgstr "赤经/赤纬（当前日期纪元）"
+msgstr "赤经/赤纬(当前日期纪元)"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
@@ -3811,11 +3811,11 @@ msgstr "键盘快捷键"
 
 #: src/ui_shortcutsDialog.h:204
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "次要快捷键"
 
 #: src/ui_shortcutsDialog.h:205
 msgid "Primary shortcut"
-msgstr ""
+msgstr "主要快捷键"
 
 #: src/ui_shortcutsDialog.h:206
 msgid "Action"
@@ -3823,11 +3823,11 @@ msgstr "动作"
 
 #: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
-msgstr ""
+msgstr "编辑主要快捷键"
 
 #: src/ui_shortcutsDialog.h:208
 msgid "Edit Alternative Shortcut"
-msgstr ""
+msgstr "编辑次要快捷键"
 
 #: src/ui_shortcutsDialog.h:211
 msgid "Restore Defaults"
@@ -6499,8 +6499,8 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
-"本插件提供观测条件（升起、落下，和可见时间）的分析，以及目标在一年中的最佳观测时间。插件假定在夜间处于地平线上方的对象为可观测的。同时，插件还提供了目标与"
-"太阳的最大距离以及冲日日期和 Cosmical 升/落时间。<br><br>关于插件显示内容的具体说明可以在配置窗口的“关于”中找到。"
+"本插件提供观测条件（升起、落下和中天）的分析，以及目标在一年中的最佳观测时间。插件假定在夜间处于地平线上方的对象为可观测的。同时，插件还提供了目标对太阳的"
+"大距、日没和偕日升/落时间。<br><br>关于插件显示内容的具体说明可以在配置窗口的“关于”中找到。"
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
@@ -6624,7 +6624,7 @@ msgstr "对象不可见"
 
 #: plugins/Observability/src/Observability.cpp:561
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr "无冲日和 Cosmical 升/落"
+msgstr "无日没或偕日升/落"
 
 #: plugins/Observability/src/Observability.cpp:578
 msgid "Greatest elongation: "
@@ -6645,15 +6645,15 @@ msgstr "冲日升/落"
 
 #: plugins/Observability/src/Observability.cpp:602
 msgid "No Acronychal rise/set."
-msgstr "无冲日"
+msgstr "无日没升/落"
 
 #: plugins/Observability/src/Observability.cpp:603
 msgid "Cosmical rise/set"
-msgstr "Cosmical 升/落"
+msgstr "偕日升/落"
 
 #: plugins/Observability/src/Observability.cpp:603
 msgid "No Cosmical rise/set."
-msgstr "无 Cosmical 升/落"
+msgstr "无偕日升/落"
 
 #: plugins/Observability/src/Observability.cpp:649
 msgid "Observable during the whole year."
@@ -6728,11 +6728,11 @@ msgid ""
 "(transit) times. The exact times for these ephemeris are given in two ways: "
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
-msgstr "顾名思义。这个程序会显示天体的升落、中天（凌日）时间。这些星历的具体时间会被用两种形式给出：时间差（根据目前时间）和实际时间（地方时）。"
+msgstr "顾名思义。这个程序会显示天体的升落、中天时间。这些星历的具体时间会被用两种形式给出：时间差（根据目前时间）和实际时间（地方时）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid "Acronychal/Cosmical rise/set:"
-msgstr "日没/偕日 升/落"
+msgstr "日没/偕日 升/落:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid ""
@@ -6816,11 +6816,11 @@ msgstr "显示设置"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr ""
+msgstr "今日星历表(升、落和中天)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr ""
+msgstr "日没和偕日升/落日期"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:344
 msgid "Date of largest separation to the Sun"
@@ -6856,7 +6856,7 @@ msgstr "字体大小"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Sun altitude at twilight"
-msgstr ""
+msgstr "曙暮光太阳高度"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "0 deg."
