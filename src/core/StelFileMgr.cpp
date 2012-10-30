@@ -368,7 +368,11 @@ QString StelFileMgr::getDesktopDir()
 	// For Linux and perhaps some BSDs, we can call the external program
 	// "xdg-user-dir DESKTOP" if it exists, but I'm not sure about OSX.
 	result = QFile::decodeName(getenv("HOME"));
-	result += "/Desktop";
+
+	// workaround for non-English machines
+	if (QFileInfo(QString("%1/Desktop").arg(result)).isDir()) {
+		result += "/Desktop";
+	}
 
 	if (!QFileInfo(result).isDir())
 	{
