@@ -175,7 +175,6 @@ void ShortcutsDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		updateText(); // This does nothing? --BM
 		updateTreeData();
 	}
 }
