@@ -33,19 +33,23 @@
 #include <QDebug>
 
 #include "ui_helpDialogGui.h"
-
 #include "HelpDialog.hpp"
+
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelStyle.hpp"
-#include "StelLogger.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelLogger.hpp"
+#include "StelShortcutGroup.hpp"
+#include "StelShortcutMgr.hpp"
+#include "StelStyle.hpp"
 
-HelpDialog::HelpDialog()
+HelpDialog::HelpDialog() : keyMgr(0)
 {
 	ui = new Ui_helpDialogForm;
+	keyMgr = StelApp::getInstance().getStelShortcutManager();
+	Q_ASSERT(keyMgr);
 }
 
 HelpDialog::~HelpDialog()
@@ -100,8 +104,12 @@ void HelpDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
+	// Help page
 	updateText();
+	connect(ui->editShortcutsButton, SIGNAL(clicked()),
+	        this, SLOT(showShortcutsWindow()));
 
+	// Log page
 	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUserDir()));
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
@@ -109,9 +117,22 @@ void HelpDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
+
+void HelpDialog::showShortcutsWindow()
+{
+	QAction* action =
+	        keyMgr->getGuiAction("actionShow_Shortcuts_Window_Global");
+	if (action)
+	{
+		if (action->isChecked())
+			action->setChecked(false);
+		action->setChecked(true);
+	}
+}
+
 void HelpDialog::updateLog(int)
 {
-	if(ui->stackedWidget->currentWidget() == ui->page_3)
+	if (ui->stackedWidget->currentWidget() == ui->pageLog)
 		refreshLog();
 }
 
@@ -122,38 +143,105 @@ void HelpDialog::refreshLog()
 
 QString HelpDialog::getHelpText(void)
 {
-	QString htmlText = "<html><head><title>" + Qt::escape(q_("Stellarium Help")) + "</title></head><body>\n"
-			+ "<h2>" + Qt::escape(q_("Keys")) + "</h2>\n";
-	// Describe keys for those keys which do not have actions.
+	QString htmlText = "<html><head><title>";
+	htmlText += Qt::escape(q_("Stellarium Help"));
+	htmlText += "</title></head><body>\n";
+	
+	// WARNING! Section titles are re-used below!
+	htmlText += "<p align=\"center\"><a href=\"#keys\">" +
+	            Qt::escape(q_("Keys")) +
+	            "</a> &bull; <a href=\"#links\">" +
+	            Qt::escape(q_("Further Reading")) +
+	            "</a></p>\n";
+	
+	htmlText += "<h2 id='keys'>" + Qt::escape(q_("Keys")) + "</h2>\n";
 	htmlText += "<table cellpadding=\"10%\">\n";
+	// Describe keys for those keys which do not have actions.
 	// navigate
-	htmlText += "<tr><td><b>" + Qt::escape(q_("Arrow keys & left mouse drag")) + "</b></td>";
-	htmlText += "<td>" + Qt::escape(q_("Pan view around the sky")) + "</td></tr>\n";
-	// zoom in/out with PageUp/PageDown
-	htmlText += "<tr><td><b>" + Qt::escape(q_("Page Up/Down")) + "</b></td>";
-	htmlText += "<td>" + Qt::escape(q_("Zoom in/out")) + "</td></tr>\n";
-	// zoom in/out with arrows
-	htmlText += "<tr><td><b>" + Qt::escape(q_("CTRL + Up/Down")) + "</b></td>";
-	htmlText += "<td>" + Qt::escape(q_("Zoom in/out")) + "</td></tr>\n";
+	htmlText += "<tr><td>" + Qt::escape(q_("Pan view around the sky")) + "</td>";
+	htmlText += "<td><b>" + Qt::escape(q_("Arrow keys & left mouse drag")) + "</b></td></tr>\n";
+	// zoom in/out
+	htmlText += "<tr><td rowspan='2'>" + Qt::escape(q_("Zoom in/out")) +
+	            "</td>";
+	htmlText += "<td><b>" + Qt::escape(q_("Page Up/Down")) +
+	            "</b></td></tr>\n";
+	htmlText += "<tr><td><b>" + Qt::escape(q_("CTRL + Up/Down")) +
+	            "</b></td></tr>\n";
 	// select object
-	htmlText += "<tr><td><b>" + Qt::escape(q_("Left click")) + "</b></td>";
-	htmlText += "<td>" + Qt::escape(q_("Select object")) + "</td></tr>\n";
+	htmlText += "<tr><td>" + Qt::escape(q_("Select object")) + "</td>";
+	htmlText += "<td><b>" + Qt::escape(q_("Left click")) + "</b></td></tr>\n";
 	// clear selection
-	htmlText += "<tr><td><b>" + Qt::escape(q_("Right click")) + "</b></td>";
-	htmlText += "<td>" + Qt::escape(q_("Clear selection")) + "</td></tr>\n";
+	htmlText += "<tr>";
 #ifdef Q_OS_MAC
-	htmlText += "<tr><td><b>" + Qt::escape(q_("CTRL + Left click")) + "</b></td>";
-	htmlText += "<td>" + Qt::escape(q_("Clear selection")) + "</td></tr>\n";
+	htmlText += "<td rowspan='2'>";
+#else
+	htmlText += "<td>";
 #endif
+	htmlText += Qt::escape(q_("Clear selection")) + "</td>";
+	htmlText += "<td><b>" + Qt::escape(q_("Right click")) + "</b></td></tr>\n";
+#ifdef Q_OS_MAC
+	htmlText += "<tr><td><b>" + Qt::escape(q_("CTRL + Left click")) + "</b></td></tr>\n";
+	//htmlText += "<td>" + Qt::escape(q_("Clear selection")) + "</td>";
+#endif
+	
+	htmlText += "</table>\n<p>" +
+	            Qt::escape(
+	                q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
+	                .arg(ui->editShortcutsButton->text())
+	                ) +
+	            "</p><table cellpadding=\"10%\">\n";
+	
+	QList<StelShortcutGroup*> groups = keyMgr->getGroupList();
+	foreach (const StelShortcutGroup* group, groups)
+	{
+		QString groupName= group->getText();
+		if (groupName.isEmpty())
+			groupName = group->getId();
+		
+		QList< KeyDescription > descriptions;
+		QList<StelShortcut*> shortcuts = group->getActionList();
+		if (shortcuts.isEmpty())
+			continue;
+		
+		foreach (const StelShortcut* shortcut, shortcuts)
+		{
+			QString text = q_(shortcut->getText());
+			QKeySequence primary = shortcut->getPrimaryKey();
+			if (primary.isEmpty())
+			{
+				// TODO: Decide whether to display undefined actions.
+				continue;
+			}
+			QString keyString = primary.toString(QKeySequence::NativeText);
+			descriptions.append(KeyDescription(text, keyString));
+		}
+		if (descriptions.isEmpty())
+			continue;
+		// Sort by translated description:
+		// - on one hand, pre-determined order is lost
+		// - on the other, easier for the users
+		qSort(descriptions);
+		
+		htmlText += "<tr></tr><tr><td><b><u>" + Qt::escape(q_(groupName)) +
+		            ":</u></b></td></tr>\n";
+		foreach (const KeyDescription& desc, descriptions)
+		{
+			htmlText += "<tr><td>" + Qt::escape(desc.first) + "</td>";
+			htmlText += "<td><b>" + Qt::escape(desc.second) +
+			            "</b></td></tr>\n";
+		}
+	}
+	
 	// edit shortcuts
-	htmlText += "<tr><td><b>" + Qt::escape(q_("F7")) + "</b></td>";
-	htmlText += "<td>" + Qt::escape(q_("Show and edit all keyboard shortcuts")) + "</td></tr>\n";
+//	htmlText += "<tr><td><b>" + Qt::escape(q_("F7")) + "</b></td>";
+//	htmlText += "<td>" + Qt::escape(q_("Show and edit all keyboard shortcuts")) + "</td></tr>\n";
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
 	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
 
-	htmlText += "<h2>" + Qt::escape(q_("Further Reading")) + "</h2>\n";
+	// WARNING! Section titles are re-used above!
+	htmlText += "<h2 id=\"links\">" + Qt::escape(q_("Further Reading")) + "</h2>\n";
 	htmlText += Qt::escape(q_("The following links are external web links, and will launch your web browser:\n"));
 	htmlText += "<p><a href=\"http://stellarium.org/wiki/index.php/Category:User%27s_Guide\">" + Qt::escape(q_("The Stellarium User Guide")) + "</a>";
 
@@ -240,35 +328,6 @@ void HelpDialog::updateText(void)
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->aboutBrowser->insertHtml(newHtml);
 	ui->aboutBrowser->scrollToAnchor("top");
-}
-
-bool HelpDialog::helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2)
-{
-	// To be 100% proper, we should sort F1 F2 F11 F12 in that order, although
-	// right now we will get F1 F11 F12 F2.  However, at time of writing, no group
-	// of keys has F1-F9, and one from F10-F12 in it, so it doesn't really matter.
-	// -MNG 2008-06-01
-	if (p1.first.split(",").at(0).size()!=p2.first.split(",").at(0).size())
-		return p1.first.size() < p2.first.size();
-	else
-		return p1.first < p2.first;
-}
-
-bool HelpDialog::helpGroupSort(const QString& s1, const QString& s2)
-{
-	QString s1c = s1.toUpper();
-	QString s2c = s2.toUpper();
-
-	if (s1c=="" || s1c==QString(N_("Miscellaneous")).toUpper())
-		s1c = "ZZZ" + s1c;
-	if (s2c=="" || s2c==QString(N_("Miscellaneous")).toUpper())
-		s2c = "ZZZ" + s2c;
-	if (s1c=="DEBUG")
-		s1c = "ZZZZ" + s1c;
-	if (s2c=="DEBUG")
-		s2c = "ZZZZ" + s2c;
-
-	return s1c < s2c;
 }
 
 void HelpDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
