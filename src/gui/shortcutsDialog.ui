@@ -121,7 +121,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QTreeWidget" name="shortcutsTreeWidget">
+       <widget class="QTreeView" name="shortcutsTreeView">
         <property name="uniformRowHeights">
          <bool>true</bool>
         </property>
@@ -131,27 +131,15 @@
         <attribute name="headerDefaultSectionSize">
          <number>200</number>
         </attribute>
-        <attribute name="headerHighlightSections">
-         <bool>false</bool>
-        </attribute>
         <attribute name="headerMinimumSectionSize">
          <number>100</number>
         </attribute>
-        <column>
-         <property name="text">
-          <string>Action</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Primary shortcut</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Alternative shortcut</string>
-         </property>
-        </column>
+        <attribute name="headerShowSortIndicator" stdset="0">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="headerStretchLastSection">
+         <bool>true</bool>
+        </attribute>
        </widget>
       </item>
       <item>
