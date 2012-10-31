@@ -183,6 +183,7 @@ void ShortcutsDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		setModelHeader();
 		updateTreeData();
 	}
 }
@@ -349,7 +350,7 @@ void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	
-	initModel();
+	resetModel();
 	ui->shortcutsTreeView->setModel(mainModel);
 	QHeaderView* header = ui->shortcutsTreeView->header();
 	header->setMovable(false);
@@ -395,10 +396,12 @@ QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
 {
 	QStandardItem* groupItem = findItemByData(QVariant(group->getId()),
 	                                          Qt::UserRole);
+	bool isNew = false;
 	if (!groupItem)
 	{
 		// create new
 		groupItem = new QStandardItem();
+		isNew = true;
 	}
 	// group items aren't selectable, so reset default flag
 	groupItem->setFlags(Qt::ItemIsEnabled);
@@ -413,7 +416,8 @@ QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
 	rootFont.setBold(true);
 	rootFont.setPixelSize(14);
 	groupItem->setFont(rootFont);
-	mainModel->appendRow(groupItem);
+	if (isNew)
+		mainModel->appendRow(groupItem);
 	
 	// expand only enabled group
 	bool enabled = group->isEnabled();
@@ -498,7 +502,7 @@ void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut,
 
 void ShortcutsDialog::restoreDefaultShortcuts()
 {
-	initModel();
+	resetModel();
 	shortcutMgr->restoreDefaultShortcuts();
 	updateTreeData();
 	initEditors();
@@ -528,15 +532,19 @@ bool ShortcutsDialog::itemIsEditable(QStandardItem *item)
 	return (Qt::ItemIsSelectable & item->flags());
 }
 
-void ShortcutsDialog::initModel()
+void ShortcutsDialog::resetModel()
 {
 	mainModel->blockSignals(true);
 	mainModel->clear();
-	// TODO: Check if the translation idea will work.
-	QStringList headerLabels;
-	headerLabels << N_("Action")
-	             << N_("Primary shortcut")
-	             << N_("Alternative shortcut");
-	mainModel->setHorizontalHeaderLabels(headerLabels);
+	setModelHeader();
 	mainModel->blockSignals(false);
+}
+
+void ShortcutsDialog::setModelHeader()
+{
+	QStringList headerLabels;
+	headerLabels << q_("Action")
+	             << q_("Primary shortcut")
+	             << q_("Alternative shortcut");
+	mainModel->setHorizontalHeaderLabels(headerLabels);
 }
