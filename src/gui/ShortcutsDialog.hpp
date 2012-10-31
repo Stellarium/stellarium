@@ -142,7 +142,9 @@ private:
 	QSortFilterProxyModel* filterModel;
 	QStandardItemModel* mainModel;
 	//! Initialize or reset the main model.
-	void initModel();
+	void resetModel();
+	//! Set the main model's column lables.
+	void setModelHeader();
 };
 
 #endif // SHORTCUTSDIALOG_HPP
