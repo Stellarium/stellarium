@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-20 18:00+0700\n"
+"POT-Creation-Date: 2012-11-01 19:53+0700\n"
 "PO-Revision-Date: 2012-10-24 04:42+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-26 04:41+0000\n"
-"X-Generator: Launchpad (build 16194)\n"
+"X-Launchpad-Export-Date: 2012-11-02 04:43+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -508,67 +508,66 @@ msgstr ""
 "Ralat memuat turun %1:/n\n"
 "fail telah rosak."
 
-#: src/gui/HelpDialog.cpp:125
+#: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
 msgstr "Bantuan Stellarium"
 
-#: src/gui/HelpDialog.cpp:126
+#: src/gui/HelpDialog.cpp:152 src/gui/HelpDialog.cpp:157
 msgid "Keys"
 msgstr "Kekunci"
 
-#: src/gui/HelpDialog.cpp:130
-msgid "Arrow keys & left mouse drag"
-msgstr "kekunci Arah & leretan kiri tetikus"
-
-#: src/gui/HelpDialog.cpp:131
-msgid "Pan view around the sky"
-msgstr "Paparan bergerak mengelilingi langit"
-
-#: src/gui/HelpDialog.cpp:133
-msgid "Page Up/Down"
-msgstr "gerak paparan ke atas/bawah"
-
-#: src/gui/HelpDialog.cpp:134 src/gui/HelpDialog.cpp:137
-msgid "Zoom in/out"
-msgstr "Zum masuk/keluar"
-
-#: src/gui/HelpDialog.cpp:136
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Up/Down"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Left click"
-msgstr "Klik kiri"
-
-#: src/gui/HelpDialog.cpp:140
-msgid "Select object"
-msgstr "Pilih objek"
-
-#: src/gui/HelpDialog.cpp:142
-msgid "Right click"
-msgstr "Klik kanan"
-
-#: src/gui/HelpDialog.cpp:143 src/gui/HelpDialog.cpp:146
-msgid "Clear selection"
-msgstr "Kosongkan pilihan"
-
-#: src/gui/HelpDialog.cpp:145
-msgid "CTRL + Left click"
-msgstr "CTRL + Klik Kiri"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "F7"
-msgstr "F7"
-
-#: src/gui/HelpDialog.cpp:150
-msgid "Show and edit all keyboard shortcuts"
-msgstr "Papar dan sunting semua pintasan papan kekunci"
-
-#: src/gui/HelpDialog.cpp:156
+#: src/gui/HelpDialog.cpp:154 src/gui/HelpDialog.cpp:244
 msgid "Further Reading"
 msgstr "Maklumat Lanjut"
 
-#: src/gui/HelpDialog.cpp:157
+#: src/gui/HelpDialog.cpp:161
+msgid "Pan view around the sky"
+msgstr "Paparan bergerak mengelilingi langit"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Arrow keys & left mouse drag"
+msgstr "kekunci Arah & leretan kiri tetikus"
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Zoom in/out"
+msgstr "Zum masuk/keluar"
+
+#: src/gui/HelpDialog.cpp:166
+msgid "Page Up/Down"
+msgstr "gerak paparan ke atas/bawah"
+
+#: src/gui/HelpDialog.cpp:168
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:171
+msgid "Select object"
+msgstr "Pilih objek"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "Left click"
+msgstr "Klik kiri"
+
+#: src/gui/HelpDialog.cpp:180
+msgid "Clear selection"
+msgstr "Kosongkan pilihan"
+
+#: src/gui/HelpDialog.cpp:181
+msgid "Right click"
+msgstr "Klik kanan"
+
+#: src/gui/HelpDialog.cpp:183
+msgid "CTRL + Left click"
+msgstr "CTRL + Klik Kiri"
+
+#: src/gui/HelpDialog.cpp:189
+#, qt-format
+msgid ""
+"Below are listed only the actions with assigned keys. Further actions may be "
+"available via the \"%1\" button."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:245
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -576,17 +575,17 @@ msgstr ""
 "Pautan dibawah adalah pautan luar, dan akan memulakan pelayar sesawang "
 "anda:/n\n"
 
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:246
 msgid "The Stellarium User Guide"
 msgstr "Panduan Pengguna Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:250
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Soalan Pertanyaan Lazim} mengenai Stellarium. Jawapan disertakan."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:255
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -595,7 +594,7 @@ msgstr ""
 "dari pengguna disini."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:260
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -604,7 +603,7 @@ msgstr ""
 "Stellarium, poskan permintaan sokongan disini & kami akan cuba membantu."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:265
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -615,43 +614,43 @@ msgstr ""
 "boleh membuka laporan pepijat disini"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:270
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forum} - Bincang mengenai Stellariun dengan pengguna lain."
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:307
 msgid "Developers"
 msgstr "Pembangun"
 
-#: src/gui/HelpDialog.cpp:220
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Koordinator Projek & pembangun utama: %1"
 
-#: src/gui/HelpDialog.cpp:221
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Doc pengarang/pembangun: %1"
 
-#: src/gui/HelpDialog.cpp:222 src/gui/HelpDialog.cpp:223
-#: src/gui/HelpDialog.cpp:224 src/gui/HelpDialog.cpp:225
-#: src/gui/HelpDialog.cpp:226 src/gui/HelpDialog.cpp:232
-#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:234
-#: src/gui/HelpDialog.cpp:235
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 #, qt-format
 msgid "Developer: %1"
 msgstr "Pembangun: %1"
 
-#: src/gui/HelpDialog.cpp:227 src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Tester: %1"
 msgstr "Penguji: %1"
 
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
 msgstr "Pembangun Terdahulu"
 
-#: src/gui/HelpDialog.cpp:230
+#: src/gui/HelpDialog.cpp:318
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -660,20 +659,15 @@ msgstr ""
 "walaupun mereka tidak lagi aktif. Usaha mereka telah membuat perbezaan yang "
 "ketara terhadap projek ini:"
 
-#: src/gui/HelpDialog.cpp:231
+#: src/gui/HelpDialog.cpp:319
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Pereka grafik/lain: %1"
 
-#: src/gui/HelpDialog.cpp:236 src/gui/HelpDialog.cpp:237
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Pembangun OSX: %1"
-
-#: src/gui/HelpDialog.cpp:262 src/gui/HelpDialog.cpp:264
-#: src/translations.h:557
-msgid "Miscellaneous"
-msgstr "Pelbagai"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:609
 msgid "Script console window"
@@ -2784,6 +2778,10 @@ msgstr "Label bintang"
 msgid "Flip scene vertically"
 msgstr "Kalih pandangan secara menegak"
 
+#: src/translations.h:557
+msgid "Miscellaneous"
+msgstr "Pelbagai"
+
 #: src/translations.h:558
 msgid "Auto hide horizontal button bar"
 msgstr "Sembunyi secara automatik butang palang melintang"
@@ -3005,20 +3003,24 @@ msgstr "/"
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+#: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "Bantuan"
 
-#: src/ui_helpDialogGui.h:267
+#: src/ui_helpDialogGui.h:286
 msgid "About"
 msgstr "Perihal"
 
-#: src/ui_helpDialogGui.h:269
+#: src/ui_helpDialogGui.h:288
 msgid "Log"
 msgstr "Log"
 
-#: src/ui_helpDialogGui.h:272
+#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
+msgstr "Sunting pintasan papan kekunci..."
+
+#: src/ui_helpDialogGui.h:292
 msgid "Refresh"
 msgstr "Segar Semula"
 
@@ -3645,10 +3647,6 @@ msgstr ""
 msgid "Enable mouse navigation"
 msgstr "Benarkan pandu arah tetikus"
 
-#: src/ui_configurationDialog.h:1025
-msgid "Edit keyboard shortcuts..."
-msgstr "Sunting pintasan papan kekunci..."
-
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
@@ -3885,35 +3883,23 @@ msgstr ""
 "AMARAN: Pembuangan lanskap pilihan bermakna pemadaman failnya. Operasi ini "
 "tidak boleh dikembalikan."
 
-#: src/ui_shortcutsDialog.h:201
+#: src/ui_shortcutsDialog.h:202
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Papan Kekunci"
 
 #: src/ui_shortcutsDialog.h:204
-msgid "Alternative shortcut"
-msgstr "Pintasan Gantian"
-
-#: src/ui_shortcutsDialog.h:205
-msgid "Primary shortcut"
-msgstr "Pintasan utama"
-
-#: src/ui_shortcutsDialog.h:206
-msgid "Action"
-msgstr "Tindakan"
-
-#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr "Sunting Pintasan Utama"
 
-#: src/ui_shortcutsDialog.h:208
+#: src/ui_shortcutsDialog.h:205
 msgid "Edit Alternative Shortcut"
 msgstr "Sunting Pintasan Gantian"
 
-#: src/ui_shortcutsDialog.h:211
+#: src/ui_shortcutsDialog.h:208
 msgid "Restore Defaults"
 msgstr "Pulih Lalai"
 
-#: src/ui_shortcutsDialog.h:212
+#: src/ui_shortcutsDialog.h:209
 msgid "Apply"
 msgstr "Laksana"
 
@@ -5131,12 +5117,12 @@ msgstr ""
 "Pemalam ini membenarkan Stellarium menghantar perintah \"pusing\" ke "
 "teleskop melalui lekapan berkomputer (\"Pergi Ke teleskop\")."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:161
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Alih teleskop #%1 ke objek pilihan"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
@@ -7506,3 +7492,18 @@ msgstr "0 darj."
 
 #~ msgid "Display a derived class-specific extra fields"
 #~ msgstr "Papar medan tambahan spesifik-kelas terpacu"
+
+#~ msgid "F7"
+#~ msgstr "F7"
+
+#~ msgid "Show and edit all keyboard shortcuts"
+#~ msgstr "Papar dan sunting semua pintasan papan kekunci"
+
+#~ msgid "Alternative shortcut"
+#~ msgstr "Pintasan Gantian"
+
+#~ msgid "Primary shortcut"
+#~ msgstr "Pintasan utama"
+
+#~ msgid "Action"
+#~ msgstr "Tindakan"

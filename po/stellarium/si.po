@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-10-20 18:00+0700\n"
+"POT-Creation-Date: 2012-11-01 19:53+0700\n"
 "PO-Revision-Date: 2012-05-21 06:52+0000\n"
 "Last-Translator: පසිඳු කාවින්ද <info@pk-soft.tk>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-26 04:42+0000\n"
-"X-Generator: Launchpad (build 16194)\n"
+"X-Launchpad-Export-Date: 2012-11-02 04:44+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
 "X-Poedit-Country: SRI LANKA\n"
 "X-Poedit-Language: Estonian\n"
 
@@ -496,99 +496,98 @@ msgstr ""
 "බාගතකිරීමේ ගැටළුවක් %1:\n"
 "ගොනුව විකෘති වී ඇත"
 
-#: src/gui/HelpDialog.cpp:125
+#: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
 msgstr "Stellarium උදව්"
 
-#: src/gui/HelpDialog.cpp:126
+#: src/gui/HelpDialog.cpp:152 src/gui/HelpDialog.cpp:157
 msgid "Keys"
 msgstr "බොත්තම්"
 
-#: src/gui/HelpDialog.cpp:130
-msgid "Arrow keys & left mouse drag"
-msgstr "ඊ තල බොත්තම් සහ වම් මූසික බොත්තම"
-
-#: src/gui/HelpDialog.cpp:131
-msgid "Pan view around the sky"
-msgstr "එහා මෙහා කිරීම"
-
-#: src/gui/HelpDialog.cpp:133
-msgid "Page Up/Down"
-msgstr "පිටු ඉහල/පහල බොත්තම්"
-
-#: src/gui/HelpDialog.cpp:134 src/gui/HelpDialog.cpp:137
-msgid "Zoom in/out"
-msgstr "සූම් කිරීම"
-
-#: src/gui/HelpDialog.cpp:136
-msgid "CTRL + Up/Down"
-msgstr "CTRL + ඉහල/පහල බොත්තම්"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Left click"
-msgstr "වම් පස - ක්ලික්"
-
-#: src/gui/HelpDialog.cpp:140
-msgid "Select object"
-msgstr "වස්තු තේරීම"
-
-#: src/gui/HelpDialog.cpp:142
-msgid "Right click"
-msgstr "දකුණු පස - ක්ලික්"
-
-#: src/gui/HelpDialog.cpp:143 src/gui/HelpDialog.cpp:146
-msgid "Clear selection"
-msgstr "සියළු තේරීම් වලින් ඉවත් වන්න"
-
-#: src/gui/HelpDialog.cpp:145
-msgid "CTRL + Left click"
-msgstr "CTRL + වම් පස - ක්ලික්"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "F7"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:150
-msgid "Show and edit all keyboard shortcuts"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:156
+#: src/gui/HelpDialog.cpp:154 src/gui/HelpDialog.cpp:244
 msgid "Further Reading"
 msgstr "වැඩිදුර කියවීමට"
 
-#: src/gui/HelpDialog.cpp:157
+#: src/gui/HelpDialog.cpp:161
+msgid "Pan view around the sky"
+msgstr "එහා මෙහා කිරීම"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Arrow keys & left mouse drag"
+msgstr "ඊ තල බොත්තම් සහ වම් මූසික බොත්තම"
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Zoom in/out"
+msgstr "සූම් කිරීම"
+
+#: src/gui/HelpDialog.cpp:166
+msgid "Page Up/Down"
+msgstr "පිටු ඉහල/පහල බොත්තම්"
+
+#: src/gui/HelpDialog.cpp:168
+msgid "CTRL + Up/Down"
+msgstr "CTRL + ඉහල/පහල බොත්තම්"
+
+#: src/gui/HelpDialog.cpp:171
+msgid "Select object"
+msgstr "වස්තු තේරීම"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "Left click"
+msgstr "වම් පස - ක්ලික්"
+
+#: src/gui/HelpDialog.cpp:180
+msgid "Clear selection"
+msgstr "සියළු තේරීම් වලින් ඉවත් වන්න"
+
+#: src/gui/HelpDialog.cpp:181
+msgid "Right click"
+msgstr "දකුණු පස - ක්ලික්"
+
+#: src/gui/HelpDialog.cpp:183
+msgid "CTRL + Left click"
+msgstr "CTRL + වම් පස - ක්ලික්"
+
+#: src/gui/HelpDialog.cpp:189
+#, qt-format
+msgid ""
+"Below are listed only the actions with assigned keys. Further actions may be "
+"available via the \"%1\" button."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:245
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr "පහත සබැදුම් ක්ලික් කල විට ඔබේ වෙබ් බ්‍රව්සරයෙන් විවෘත වේ:\n"
 
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:246
 msgid "The Stellarium User Guide"
 msgstr "Stellarium උපකාරක ගොනුව"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:250
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 "{Frequently Asked Questions}.Stellarium ගැන නිතර අසන ප්‍රශ්ණ පිළිතුරු ද එහි "
 "ඇත."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:255
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr "{The Stellarium Wiki} - ස්ටෙලාරියම් විකිය. සාමාන්‍ය තොරතුරු."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:260
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr "{Support ticket system} - උදව් ටිකට්පත් පද්ධතිය"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:265
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -598,62 +597,57 @@ msgstr ""
 "ඒ පිළිබඳව වාර්තා කිරීමට මෙහි පිවිසෙන්න."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:270
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} - ෆෝරමය"
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:307
 msgid "Developers"
 msgstr "නිර්මාණකරුවෝ"
 
-#: src/gui/HelpDialog.cpp:220
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "ව්‍යාපෘති පරිපලක සහ ප්‍රධාන නිර්මාණකරු : %1"
 
-#: src/gui/HelpDialog.cpp:221
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "ලිපි කර්තෘ/නිර්මාණකරු: %1"
 
-#: src/gui/HelpDialog.cpp:222 src/gui/HelpDialog.cpp:223
-#: src/gui/HelpDialog.cpp:224 src/gui/HelpDialog.cpp:225
-#: src/gui/HelpDialog.cpp:226 src/gui/HelpDialog.cpp:232
-#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:234
-#: src/gui/HelpDialog.cpp:235
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 #, qt-format
 msgid "Developer: %1"
 msgstr "නිර්මාණකරු: %1"
 
-#: src/gui/HelpDialog.cpp:227 src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:230
+#: src/gui/HelpDialog.cpp:318
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:231
+#: src/gui/HelpDialog.cpp:319
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "ග්‍රැෆික්/වෙනත් නිර්මාණකරු: %1"
 
-#: src/gui/HelpDialog.cpp:236 src/gui/HelpDialog.cpp:237
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX නිර්මාණකරු: %1"
-
-#: src/gui/HelpDialog.cpp:262 src/gui/HelpDialog.cpp:264
-#: src/translations.h:557
-msgid "Miscellaneous"
-msgstr "වෙනත්"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:609
 msgid "Script console window"
@@ -2734,6 +2728,10 @@ msgstr ""
 msgid "Flip scene vertically"
 msgstr "දික් අතට හරවන්න"
 
+#: src/translations.h:557
+msgid "Miscellaneous"
+msgstr "වෙනත්"
+
 #: src/translations.h:558
 msgid "Auto hide horizontal button bar"
 msgstr "තිරස් බොත්තම් පෙල ස්වයංක්‍රීයව හංගන්න"
@@ -2955,20 +2953,24 @@ msgstr "/"
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+#: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "උදව්"
 
-#: src/ui_helpDialogGui.h:267
+#: src/ui_helpDialogGui.h:286
 msgid "About"
 msgstr "පිළිබඳ"
 
-#: src/ui_helpDialogGui.h:269
+#: src/ui_helpDialogGui.h:288
 msgid "Log"
 msgstr "ලඝු"
 
-#: src/ui_helpDialogGui.h:272
+#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
+msgstr ""
+
+#: src/ui_helpDialogGui.h:292
 msgid "Refresh"
 msgstr "Refresh"
 
@@ -3592,10 +3594,6 @@ msgstr "මූසිකයෙන් එහා මෙහා කිරීමට �
 msgid "Enable mouse navigation"
 msgstr "මූසිකයෙන් හැසිරවීමට ඉඩ දෙන්න"
 
-#: src/ui_configurationDialog.h:1025
-msgid "Edit keyboard shortcuts..."
-msgstr ""
-
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
@@ -3830,35 +3828,23 @@ msgstr ""
 "අවවාදයයි : මෙම ග්‍රහලෝකාගාර පසුබිම ඉවත් කිරීම යනු එහි අදාල ගොනු මකා දැමීමයි. "
 "මකා දැමීමෙන් පසුව එම ගොනු නැවතත් ලබාගත නොහැක."
 
-#: src/ui_shortcutsDialog.h:201
+#: src/ui_shortcutsDialog.h:202
 msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: src/ui_shortcutsDialog.h:204
-msgid "Alternative shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:205
-msgid "Primary shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:206
-msgid "Action"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:208
+#: src/ui_shortcutsDialog.h:205
 msgid "Edit Alternative Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:211
+#: src/ui_shortcutsDialog.h:208
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:212
+#: src/ui_shortcutsDialog.h:209
 msgid "Apply"
 msgstr ""
 
@@ -5014,12 +5000,12 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr "මෙම ප්ලගිනයෙන් ස්ටෙලාරියම් හරහා දුරේක්ෂයක් ක්‍රියා කරවිය හැකි ය."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:161
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "දුරේක්ෂය #%1 ක් තේරූ වස්තුව දෙසට චලනය කරන්න"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "දුරේක්ෂය #%1 ක් තිරයේ මැදට චලනය කරන්න"

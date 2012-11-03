@@ -7,43 +7,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-20 18:00+0700\n"
-"PO-Revision-Date: 2012-10-24 04:46+0000\n"
-"Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
+"POT-Creation-Date: 2012-11-01 19:53+0700\n"
+"PO-Revision-Date: 2012-10-28 17:30+0000\n"
+"Last-Translator: Batarale <batarale@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-26 04:42+0000\n"
-"X-Generator: Launchpad (build 16194)\n"
+"X-Launchpad-Export-Date: 2012-11-02 04:44+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
-msgstr "Меридијан"
+msgstr "Meridijan"
 
 #: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
-msgstr "Еклиптика"
+msgstr "Ekliptika"
 
 #: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1164
 msgid "Equator"
-msgstr "Екватор"
+msgstr "Ekvator"
 
 #: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
 msgid "Horizon"
-msgstr "Хоризонт"
+msgstr "Horizont"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
-msgstr "Галактичка раван"
+msgstr "Galaktička ravan"
 
 #: src/core/modules/LandscapeMgr.cpp:500
 msgid "Author: "
-msgstr "Аутор: "
+msgstr "Autor: "
 
 #: src/core/modules/LandscapeMgr.cpp:503
 msgid "Location: "
-msgstr "Локација: "
+msgstr "Mesto "
 
 #: src/core/modules/LandscapeMgr.cpp:508
 #, qt-format
@@ -52,13 +52,13 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:512
 msgid "Planet: "
-msgstr "Планета: "
+msgstr "Planeta "
 
 #: src/core/modules/Nebula.cpp:115 plugins/Supernovae/src/Supernova.cpp:97
 #: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:125
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Тип: <b>%1</b>"
+msgstr "Tip: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:120 src/core/modules/Planet.cpp:436
 #: src/core/modules/MinorPlanet.cpp:197 src/core/modules/Comet.cpp:117
@@ -66,7 +66,7 @@ msgstr "Тип: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:174
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Величина: <b>%1</b> (неактивно до: <b>%2</b>)"
+msgstr "Veličina: <b>%1</b> (neaktivno do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:123 src/core/modules/Planet.cpp:439
 #: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
@@ -74,51 +74,51 @@ msgstr "Величина: <b>%1</b> (неактивно до: <b>%2</b>)"
 #: plugins/Exoplanets/src/Exoplanet.cpp:179
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Ред величине: <b>%1</b>"
+msgstr "Red veličine:  <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:128
 #, qt-format
 msgid "Size: %1"
-msgstr "Величина: %1"
+msgstr "Veličina: %1"
 
 #: src/core/modules/Nebula.cpp:342
 msgid "Galaxy"
-msgstr "Галаксија"
+msgstr "Galaksija"
 
 #: src/core/modules/Nebula.cpp:345
 msgid "Open cluster"
-msgstr "Отворено јато"
+msgstr "Otvoreno jato"
 
 #: src/core/modules/Nebula.cpp:348
 msgid "Globular cluster"
-msgstr "Лоптасто јато"
+msgstr "Globularno jato"
 
 #: src/core/modules/Nebula.cpp:351
 msgid "Nebula"
-msgstr "Маглина"
+msgstr "Maglina"
 
 #: src/core/modules/Nebula.cpp:354
 msgid "Planetary nebula"
-msgstr "Планетарна маглина"
+msgstr "Planetarna maglina"
 
 #: src/core/modules/Nebula.cpp:357
 msgid "Cluster associated with nebulosity"
-msgstr "Јато повезано са измаглицом"
+msgstr "Jato sa maglinom"
 
 #: src/core/modules/Nebula.cpp:360
 msgid "Unknown"
-msgstr "Непознато"
+msgstr "Nepoznato"
 
 #: src/core/modules/Nebula.cpp:363
 msgid "Undocumented type"
-msgstr "Недокументован тип"
+msgstr "Nedokumentovan tip"
 
 #: src/core/modules/Planet.cpp:442 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:129
 #: src/core/modules/StarWrapper.cpp:124 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Апсолутна величина: %1"
+msgstr "Apsolutna magnituda: %1"
 
 #: src/core/modules/Planet.cpp:455
 #, qt-format
@@ -134,115 +134,115 @@ msgstr ""
 #: src/core/modules/Comet.cpp:141
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr "Растојање: %1AU (%2 km)"
+msgstr "Rastojanje: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:473 src/core/modules/MinorPlanet.cpp:234
 #: src/core/modules/Comet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Даљина: %1АЈ"
+msgstr "Daljina: %1AJ"
 
 #: src/core/modules/Planet.cpp:484
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr "Привидни пречник: %1, са прстеновима: %2"
+msgstr "Prividni prečnik: %1, sa prstenovima: %2"
 
 #: src/core/modules/Planet.cpp:490 src/core/modules/MinorPlanet.cpp:240
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "Привидни пречник: %1"
+msgstr "Prividni prečnik: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:499 src/core/modules/MinorPlanet.cpp:247
 #: src/core/modules/Comet.cpp:163
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Siderički period: %1 dana (%2 a)"
 
 #: src/core/modules/Planet.cpp:502
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Siderički dan: %1"
 
 #: src/core/modules/Planet.cpp:506
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Srednji sunčev dan: %1"
 
 #: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr "Фазни угао: %1"
+msgstr "Fazni ugao: %1"
 
 #: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Elongation: %1"
-msgstr "Издужење: %1"
+msgstr "Elongacija: %1"
 
 #: src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Phase: %1"
-msgstr "Фаза: %1"
+msgstr "Faza: %1"
 
 #: src/core/modules/Planet.cpp:516
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr "Осветљени: %1%"
+msgstr "Osvetljen: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:189
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Privremena oznaka: %1"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Величина: <b>%1</b> (B-V: %2)"
+msgstr "Magnituda: <b>%1</b> (B-V: %2)"
 
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr "Привидна величина: <b>%1</b> (по неактивности)"
+msgstr "Prividna magnituda: <b>%1</b> (by extinction)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr "Величина: <b>%1</b> (неактивно до: <b>%2</b>. B-V: <b>%3</b>)"
+msgstr "Magnituda: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr "Величина: <b>%1</b> (B-V: <b>%2</b>)"
+msgstr "Magnituda: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #: plugins/Exoplanets/src/Exoplanet.cpp:189
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "Спектрални тип: %1"
+msgstr "Spektralni tip: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "Даљина: %1 Светлосних година"
+msgstr "Udaljenost: %1 Svetlosna godina"
 
 #: src/core/modules/StarWrapper.cpp:137
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Паралакса: %1\""
+msgstr "Paralaksa: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr "Свемирске летелице"
+msgstr "Svemirski brod"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
-msgstr "Максимално видно поље: "
+msgstr "Maksimalno vidno polje: "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr "Перспектива"
+msgstr "Perspektiva"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
@@ -254,7 +254,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
-msgstr "Једнако подручје"
+msgstr "Јеdnako područje"
 
 #: src/core/StelProjectorClasses.cpp:68
 msgid ""
@@ -266,7 +266,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr "Стереографски"
+msgstr "Stereografski"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -280,7 +280,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr "Рибље око"
+msgstr "Riblje oko"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -308,7 +308,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "Ваљак"
+msgstr "valjak"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -320,7 +320,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr "Меркатор"
+msgstr "Merkatorova"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -347,45 +347,45 @@ msgstr ""
 #: src/core/StelObject.cpp:92
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr "Ректасцензија/Деклинација (J2000): %1/%2"
+msgstr "RA/DE (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:99
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "Ректасцензија/Деклинација (датума): %1/%2"
+msgstr "RA/DE (datuma): %1/%2"
 
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "Galaktička longituda/latituda (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Часовни угао/Деклинација: %1/%2"
+msgstr "Deklinacija/DE: %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:135
 msgid "(geometric)"
-msgstr "(геометријски)"
+msgstr "geometrijski"
 
 #: src/core/StelObject.cpp:119 src/core/StelObject.cpp:141
 msgid "(apparent)"
-msgstr "(видљив)"
+msgstr "prividni"
 
 #: src/core/StelObject.cpp:135 src/core/StelObject.cpp:141
 #: src/core/StelObject.cpp:144
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "Азимута/Угаона висина: %1/%2"
+msgstr "Az/Alt: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr "Мрежна грешка"
+msgstr "Mrežna greška"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr "Грешка у анализи положаја"
+msgstr "Greška u analizi položaja"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
@@ -393,19 +393,19 @@ msgstr "Испитивање"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr "Грешка"
+msgstr "Greška"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr "Није пронађено"
+msgstr "Nije nađeno"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr "Пронађено"
+msgstr "Pronađeno"
 
 #: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
-msgstr "Изаберите директоријум за \"слике са екрана\""
+msgstr "Izaberite screenshot fasciklu"
 
 #: src/gui/ConfigurationDialog.cpp:633
 #, qt-format
@@ -421,11 +421,11 @@ msgstr "Почетни правац гледања азимуте/угаоне �
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
-msgstr "Аутори"
+msgstr "Autori"
 
 #: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
 msgid "Contact"
-msgstr "Контакт"
+msgstr "Kontakt"
 
 #: src/gui/ConfigurationDialog.cpp:767
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
@@ -434,11 +434,11 @@ msgstr "Контакт"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Author"
-msgstr "Аутор"
+msgstr "Autor"
 
 #: src/gui/ConfigurationDialog.cpp:771
 msgid "License"
-msgstr "Лиценца"
+msgstr "Licenca"
 
 #: src/gui/ConfigurationDialog.cpp:795
 msgid "Running script: "
@@ -507,67 +507,66 @@ msgstr ""
 "Грешка при преузимању %1:\n"
 "Датотека није исправна."
 
-#: src/gui/HelpDialog.cpp:125
+#: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
 msgstr "Стеларијумова Помоћ"
 
-#: src/gui/HelpDialog.cpp:126
+#: src/gui/HelpDialog.cpp:152 src/gui/HelpDialog.cpp:157
 msgid "Keys"
-msgstr "Тастери"
+msgstr "Tasteri"
 
-#: src/gui/HelpDialog.cpp:130
-msgid "Arrow keys & left mouse drag"
-msgstr "Тастери са стрелицама и превлачење левим кликом миша"
-
-#: src/gui/HelpDialog.cpp:131
-msgid "Pan view around the sky"
-msgstr "Померање погледа по небу"
-
-#: src/gui/HelpDialog.cpp:133
-msgid "Page Up/Down"
-msgstr "Страна Горе/Доле"
-
-#: src/gui/HelpDialog.cpp:134 src/gui/HelpDialog.cpp:137
-msgid "Zoom in/out"
-msgstr "Увеличање/умањење"
-
-#: src/gui/HelpDialog.cpp:136
-msgid "CTRL + Up/Down"
-msgstr "Контролни тастер (CTRL) + Горе/Доле"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Left click"
-msgstr "Леви клик"
-
-#: src/gui/HelpDialog.cpp:140
-msgid "Select object"
-msgstr "Изаберите објекат"
-
-#: src/gui/HelpDialog.cpp:142
-msgid "Right click"
-msgstr "Десни клик"
-
-#: src/gui/HelpDialog.cpp:143 src/gui/HelpDialog.cpp:146
-msgid "Clear selection"
-msgstr "Поништите избор"
-
-#: src/gui/HelpDialog.cpp:145
-msgid "CTRL + Left click"
-msgstr "Контролни тастер (CTRL) + Леви клик на мишу"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "F7"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:150
-msgid "Show and edit all keyboard shortcuts"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:156
+#: src/gui/HelpDialog.cpp:154 src/gui/HelpDialog.cpp:244
 msgid "Further Reading"
 msgstr "За даље читање"
 
-#: src/gui/HelpDialog.cpp:157
+#: src/gui/HelpDialog.cpp:161
+msgid "Pan view around the sky"
+msgstr "Померање погледа по небу"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Arrow keys & left mouse drag"
+msgstr "Тастери са стрелицама и превлачење левим кликом миша"
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Zoom in/out"
+msgstr "Увеличање/умањење"
+
+#: src/gui/HelpDialog.cpp:166
+msgid "Page Up/Down"
+msgstr "Страна Горе/Доле"
+
+#: src/gui/HelpDialog.cpp:168
+msgid "CTRL + Up/Down"
+msgstr "Контролни тастер (CTRL) + Горе/Доле"
+
+#: src/gui/HelpDialog.cpp:171
+msgid "Select object"
+msgstr "Изаберите објекат"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "Left click"
+msgstr "Леви клик"
+
+#: src/gui/HelpDialog.cpp:180
+msgid "Clear selection"
+msgstr "Поништите избор"
+
+#: src/gui/HelpDialog.cpp:181
+msgid "Right click"
+msgstr "Десни клик"
+
+#: src/gui/HelpDialog.cpp:183
+msgid "CTRL + Left click"
+msgstr "Контролни тастер (CTRL) + Леви клик на мишу"
+
+#: src/gui/HelpDialog.cpp:189
+#, qt-format
+msgid ""
+"Below are listed only the actions with assigned keys. Further actions may be "
+"available via the \"%1\" button."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:245
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -575,17 +574,17 @@ msgstr ""
 "Следеће везе воде ка спољашњим интернет страницама, и покренуће Ваш интернет "
 "претраживач:\n"
 
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:246
 msgid "The Stellarium User Guide"
 msgstr "Стеларијумов Водич за кориснике"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:250
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Често Постављана Питања} о Стеларијуму. Одговори такође."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:255
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -594,7 +593,7 @@ msgstr ""
 "пејзаже и скрипте дониране од стране корисника."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:260
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -603,7 +602,7 @@ msgstr ""
 "захтев за подршку и покушаћемо да Вам помогнемо."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:265
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -614,43 +613,43 @@ msgstr ""
 "нови извештај о грешци."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:270
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Форуми} - расправљајте о Стеларијуму са другим корисницима."
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:307
 msgid "Developers"
 msgstr "Програмери"
 
-#: src/gui/HelpDialog.cpp:220
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор пројекта и главни програмер: %1"
 
-#: src/gui/HelpDialog.cpp:221
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Аутор/програмер документа: %1"
 
-#: src/gui/HelpDialog.cpp:222 src/gui/HelpDialog.cpp:223
-#: src/gui/HelpDialog.cpp:224 src/gui/HelpDialog.cpp:225
-#: src/gui/HelpDialog.cpp:226 src/gui/HelpDialog.cpp:232
-#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:234
-#: src/gui/HelpDialog.cpp:235
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 #, qt-format
 msgid "Developer: %1"
 msgstr "Програмер: %1"
 
-#: src/gui/HelpDialog.cpp:227 src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Tester: %1"
 msgstr "Испитивач: %1"
 
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
 msgstr "Последњи програмери"
 
-#: src/gui/HelpDialog.cpp:230
+#: src/gui/HelpDialog.cpp:318
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -658,20 +657,15 @@ msgstr ""
 "Више људи су направили значајан допринос, али  више нису активни. Њихов рад "
 "је направио велики допринос пројекту :"
 
-#: src/gui/HelpDialog.cpp:231
+#: src/gui/HelpDialog.cpp:319
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Графички дизајнер/остало: %1"
 
-#: src/gui/HelpDialog.cpp:236 src/gui/HelpDialog.cpp:237
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX програмер: %1"
-
-#: src/gui/HelpDialog.cpp:262 src/gui/HelpDialog.cpp:264
-#: src/translations.h:557
-msgid "Miscellaneous"
-msgstr "Разно"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:609
 msgid "Script console window"
@@ -1177,7 +1171,7 @@ msgstr "Хектор"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "Астероид Варуна"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
@@ -2755,6 +2749,10 @@ msgstr ""
 msgid "Flip scene vertically"
 msgstr "Преокренути призор вертикално"
 
+#: src/translations.h:557
+msgid "Miscellaneous"
+msgstr "Разно"
+
 #: src/translations.h:558
 msgid "Auto hide horizontal button bar"
 msgstr "Аутоматско сакривање хоризонталне траке са дугмићима"
@@ -2976,20 +2974,24 @@ msgstr "/"
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+#: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "Помоћ"
 
-#: src/ui_helpDialogGui.h:267
+#: src/ui_helpDialogGui.h:286
 msgid "About"
 msgstr "О програму"
 
-#: src/ui_helpDialogGui.h:269
+#: src/ui_helpDialogGui.h:288
 msgid "Log"
 msgstr "Дневник"
 
-#: src/ui_helpDialogGui.h:272
+#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
+msgstr ""
+
+#: src/ui_helpDialogGui.h:292
 msgid "Refresh"
 msgstr "Освежи"
 
@@ -3616,10 +3618,6 @@ msgstr ""
 msgid "Enable mouse navigation"
 msgstr "Омогућите навигацију преко миша"
 
-#: src/ui_configurationDialog.h:1025
-msgid "Edit keyboard shortcuts..."
-msgstr ""
-
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
@@ -3855,35 +3853,23 @@ msgstr ""
 "УПОЗОРЕЊЕ: Уклањање изабраног пејзажа значи брисање његових датотека. Ова "
 "операција је неповратна."
 
-#: src/ui_shortcutsDialog.h:201
+#: src/ui_shortcutsDialog.h:202
 msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: src/ui_shortcutsDialog.h:204
-msgid "Alternative shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:205
-msgid "Primary shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:206
-msgid "Action"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:208
+#: src/ui_shortcutsDialog.h:205
 msgid "Edit Alternative Shortcut"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:211
+#: src/ui_shortcutsDialog.h:208
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:212
+#: src/ui_shortcutsDialog.h:209
 msgid "Apply"
 msgstr ""
 
@@ -5085,12 +5071,12 @@ msgstr ""
 "Овај додатак омогућава Stellarium-у да пошаље \" мноштво \" команди "
 "телескопу  с компјутеризованим носачем (на \"GoTo телескоп\")."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:161
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Помери телескоп #%1 на изабрани објекат"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "Помери телескоп #%1 на тачку која је тренутно у средишту екрана"
@@ -7355,3 +7341,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Подршка је обезбеђена преко Launchpad-ове веб странице. Не заборавите "
 #~ "уписати \"Satellites plugin\" као наслов приликом објављивања."
+
+#~ msgid "F7"
+#~ msgstr "F7"

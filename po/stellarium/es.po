@@ -9,19 +9,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-20 18:00+0700\n"
+"POT-Creation-Date: 2012-11-01 19:53+0700\n"
 "PO-Revision-Date: 2012-10-24 04:27+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-26 04:43+0000\n"
-"X-Generator: Launchpad (build 16194)\n"
+"X-Launchpad-Export-Date: 2012-11-02 04:45+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
-#: src/gui/HelpDialog.cpp:145
+#: src/gui/HelpDialog.cpp:183
 msgid "CTRL + Left click"
 msgstr "CTRL + Clic izq."
 
@@ -147,12 +147,12 @@ msgstr ""
 "Este complemento permite a Stellarium enviar \"montones\" de mensajes a un "
 "telescopio en un montaje computarizado (un telescopio \"dirigible\")"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:161
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Mover el telescopio #%1 a el objecto seleccionado"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "Mover el telescopio #%1 a el punto en el centro de la pantalla"
@@ -654,63 +654,62 @@ msgstr ""
 "Error descargando %1:\n"
 "El archivo está corrupto."
 
-#: src/gui/HelpDialog.cpp:125
+#: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
 msgstr "Ayuda de Stellarium"
 
-#: src/gui/HelpDialog.cpp:126
+#: src/gui/HelpDialog.cpp:152 src/gui/HelpDialog.cpp:157
 msgid "Keys"
 msgstr "Teclas"
 
-#: src/gui/HelpDialog.cpp:130
-msgid "Arrow keys & left mouse drag"
-msgstr "Flechas de teclado y arrastre de ratón"
-
-#: src/gui/HelpDialog.cpp:131
-msgid "Pan view around the sky"
-msgstr "Trasladar vista por el cielo"
-
-#: src/gui/HelpDialog.cpp:133
-msgid "Page Up/Down"
-msgstr "Re Pág/Av Pág"
-
-#: src/gui/HelpDialog.cpp:134 src/gui/HelpDialog.cpp:137
-msgid "Zoom in/out"
-msgstr "Acercar/alejar zoom"
-
-#: src/gui/HelpDialog.cpp:136
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Arriba/Abajo"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Left click"
-msgstr "Clic izquierdo"
-
-#: src/gui/HelpDialog.cpp:140
-msgid "Select object"
-msgstr "Seleccionar objeto"
-
-#: src/gui/HelpDialog.cpp:142
-msgid "Right click"
-msgstr "Clic derecho"
-
-#: src/gui/HelpDialog.cpp:143 src/gui/HelpDialog.cpp:146
-msgid "Clear selection"
-msgstr "Limpiar selección"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "F7"
-msgstr "F7"
-
-#: src/gui/HelpDialog.cpp:150
-msgid "Show and edit all keyboard shortcuts"
-msgstr "Mostrar y editar todos los atajos de teclado"
-
-#: src/gui/HelpDialog.cpp:156
+#: src/gui/HelpDialog.cpp:154 src/gui/HelpDialog.cpp:244
 msgid "Further Reading"
 msgstr "Lecturas complementarias"
 
-#: src/gui/HelpDialog.cpp:157
+#: src/gui/HelpDialog.cpp:161
+msgid "Pan view around the sky"
+msgstr "Trasladar vista por el cielo"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Arrow keys & left mouse drag"
+msgstr "Flechas de teclado y arrastre de ratón"
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Zoom in/out"
+msgstr "Acercar/alejar zoom"
+
+#: src/gui/HelpDialog.cpp:166
+msgid "Page Up/Down"
+msgstr "Re Pág/Av Pág"
+
+#: src/gui/HelpDialog.cpp:168
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Arriba/Abajo"
+
+#: src/gui/HelpDialog.cpp:171
+msgid "Select object"
+msgstr "Seleccionar objeto"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "Left click"
+msgstr "Clic izquierdo"
+
+#: src/gui/HelpDialog.cpp:180
+msgid "Clear selection"
+msgstr "Limpiar selección"
+
+#: src/gui/HelpDialog.cpp:181
+msgid "Right click"
+msgstr "Clic derecho"
+
+#: src/gui/HelpDialog.cpp:189
+#, qt-format
+msgid ""
+"Below are listed only the actions with assigned keys. Further actions may be "
+"available via the \"%1\" button."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:245
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -718,17 +717,17 @@ msgstr ""
 "Los siguientes enlaces son enlaces web externos y se abrirán en su navegador "
 "web:\n"
 
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:246
 msgid "The Stellarium User Guide"
 msgstr "Guía del usuario"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:250
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Preguntas frecuentes} acerca de Stellarium. Y también respuestas."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:255
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -737,7 +736,7 @@ msgstr ""
 "paisajes y scripts creados por los usuarios."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:260
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -746,7 +745,7 @@ msgstr ""
 "envíe aquí una solicitud de asistencia e intentaremos ayudarle."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:265
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -757,43 +756,43 @@ msgstr ""
 "de errores aquí."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:270
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums}: comente sobre Stellarium con otros usuarios."
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:307
 msgid "Developers"
 msgstr "Desarrolladores"
 
-#: src/gui/HelpDialog.cpp:220
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinador del proyecto y desarrollador líder: %1"
 
-#: src/gui/HelpDialog.cpp:221
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Doc autor/desarrollador: %1"
 
-#: src/gui/HelpDialog.cpp:222 src/gui/HelpDialog.cpp:223
-#: src/gui/HelpDialog.cpp:224 src/gui/HelpDialog.cpp:225
-#: src/gui/HelpDialog.cpp:226 src/gui/HelpDialog.cpp:232
-#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:234
-#: src/gui/HelpDialog.cpp:235
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 #, qt-format
 msgid "Developer: %1"
 msgstr "Desarrollador: %1"
 
-#: src/gui/HelpDialog.cpp:227 src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Tester: %1"
 msgstr "Comprobador: %1"
 
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
 msgstr "Antiguos desarrolladores"
 
-#: src/gui/HelpDialog.cpp:230
+#: src/gui/HelpDialog.cpp:318
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -801,20 +800,15 @@ msgstr ""
 "Varias personas han hecho contribuciones significativas, pero ya no están "
 "activas. Su trabajo se ha hecho una gran diferencia con el proyecto:"
 
-#: src/gui/HelpDialog.cpp:231
+#: src/gui/HelpDialog.cpp:319
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Diseñador gráfico/otro: %1"
 
-#: src/gui/HelpDialog.cpp:236 src/gui/HelpDialog.cpp:237
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Desarrollador de OSX: %1"
-
-#: src/gui/HelpDialog.cpp:262 src/gui/HelpDialog.cpp:264
-#: src/translations.h:557
-msgid "Miscellaneous"
-msgstr "Miscelánea"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:604
 msgid "Windows"
@@ -2858,6 +2852,10 @@ msgstr "Etiquetas de estrellas"
 msgid "Flip scene vertically"
 msgstr "Invertir vista verticalmente"
 
+#: src/translations.h:557
+msgid "Miscellaneous"
+msgstr "Miscelánea"
+
 #: src/translations.h:558
 msgid "Auto hide horizontal button bar"
 msgstr "Ocultación automática de la barra horizontal de botones"
@@ -3079,20 +3077,24 @@ msgstr "/"
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+#: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "Ayuda"
 
-#: src/ui_helpDialogGui.h:267
+#: src/ui_helpDialogGui.h:286
 msgid "About"
 msgstr "Acerca de"
 
-#: src/ui_helpDialogGui.h:269
+#: src/ui_helpDialogGui.h:288
 msgid "Log"
 msgstr "Registro"
 
-#: src/ui_helpDialogGui.h:272
+#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
+msgstr "Editar atajos de teclado..."
+
+#: src/ui_helpDialogGui.h:292
 msgid "Refresh"
 msgstr "Actualizar"
 
@@ -3711,10 +3713,6 @@ msgstr "Permitir desplazamiento y zoom con teclado"
 msgid "Enable keyboard navigation"
 msgstr "Activar navegación mediante teclado"
 
-#: src/ui_configurationDialog.h:1025
-msgid "Edit keyboard shortcuts..."
-msgstr "Editar atajos de teclado..."
-
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
@@ -3948,35 +3946,23 @@ msgstr ""
 "ADVERTENCIA: Remover el paisaje seleccionado quiere decir borrar su fichero. "
 "Esta operacion es irreversible."
 
-#: src/ui_shortcutsDialog.h:201
+#: src/ui_shortcutsDialog.h:202
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de teclado"
 
 #: src/ui_shortcutsDialog.h:204
-msgid "Alternative shortcut"
-msgstr "Atajo alternativo"
-
-#: src/ui_shortcutsDialog.h:205
-msgid "Primary shortcut"
-msgstr "Atajo primario"
-
-#: src/ui_shortcutsDialog.h:206
-msgid "Action"
-msgstr "Acción"
-
-#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr "Editar Atajo Primario"
 
-#: src/ui_shortcutsDialog.h:208
+#: src/ui_shortcutsDialog.h:205
 msgid "Edit Alternative Shortcut"
 msgstr "Editar Atajo Alternativo"
 
-#: src/ui_shortcutsDialog.h:211
+#: src/ui_shortcutsDialog.h:208
 msgid "Restore Defaults"
 msgstr "Restaurar los valores predeterminados"
 
-#: src/ui_shortcutsDialog.h:212
+#: src/ui_shortcutsDialog.h:209
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -7551,3 +7537,18 @@ msgstr "0 grad."
 
 #~ msgid "Display the equatorial position (of date)"
 #~ msgstr "Muestra la posición ecuatorial (de fecha)"
+
+#~ msgid "Alternative shortcut"
+#~ msgstr "Atajo alternativo"
+
+#~ msgid "Primary shortcut"
+#~ msgstr "Atajo primario"
+
+#~ msgid "F7"
+#~ msgstr "F7"
+
+#~ msgid "Show and edit all keyboard shortcuts"
+#~ msgstr "Mostrar y editar todos los atajos de teclado"
+
+#~ msgid "Action"
+#~ msgstr "Acción"
