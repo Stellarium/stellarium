@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-20 18:00+0700\n"
+"POT-Creation-Date: 2012-11-01 19:53+0700\n"
 "PO-Revision-Date: 2012-10-26 09:05+0000\n"
 "Last-Translator: Ross <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-27 04:37+0000\n"
-"X-Generator: Launchpad (build 16194)\n"
+"X-Launchpad-Export-Date: 2012-11-02 04:41+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -510,67 +510,66 @@ msgstr ""
 "Errore nello scaricamento di %1:\n"
 "Il file è danneggiato."
 
-#: src/gui/HelpDialog.cpp:125
+#: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
 msgstr "Aiuto di Stellarium"
 
-#: src/gui/HelpDialog.cpp:126
+#: src/gui/HelpDialog.cpp:152 src/gui/HelpDialog.cpp:157
 msgid "Keys"
 msgstr "Tasti"
 
-#: src/gui/HelpDialog.cpp:130
-msgid "Arrow keys & left mouse drag"
-msgstr "Spostamento con frecce e tasto sinistro del mouse"
-
-#: src/gui/HelpDialog.cpp:131
-msgid "Pan view around the sky"
-msgstr "Visuale panoramica del cielo"
-
-#: src/gui/HelpDialog.cpp:133
-msgid "Page Up/Down"
-msgstr "Pagina Su/Giù"
-
-#: src/gui/HelpDialog.cpp:134 src/gui/HelpDialog.cpp:137
-msgid "Zoom in/out"
-msgstr "Ingrandisci/riduci"
-
-#: src/gui/HelpDialog.cpp:136
-msgid "CTRL + Up/Down"
-msgstr "CRTL + Su/Giù"
-
-#: src/gui/HelpDialog.cpp:139
-msgid "Left click"
-msgstr "Clic con il tasto sinistro"
-
-#: src/gui/HelpDialog.cpp:140
-msgid "Select object"
-msgstr "Seleziona oggetto"
-
-#: src/gui/HelpDialog.cpp:142
-msgid "Right click"
-msgstr "Clic con il tasto destro"
-
-#: src/gui/HelpDialog.cpp:143 src/gui/HelpDialog.cpp:146
-msgid "Clear selection"
-msgstr "Annulla selezione"
-
-#: src/gui/HelpDialog.cpp:145
-msgid "CTRL + Left click"
-msgstr "CTRL + Clic con il tasto sinistro"
-
-#: src/gui/HelpDialog.cpp:149
-msgid "F7"
-msgstr "F7"
-
-#: src/gui/HelpDialog.cpp:150
-msgid "Show and edit all keyboard shortcuts"
-msgstr "Visualizza e modifica tutte le scorciatoie da tastiera"
-
-#: src/gui/HelpDialog.cpp:156
+#: src/gui/HelpDialog.cpp:154 src/gui/HelpDialog.cpp:244
 msgid "Further Reading"
 msgstr "Ulteriore Lettura"
 
-#: src/gui/HelpDialog.cpp:157
+#: src/gui/HelpDialog.cpp:161
+msgid "Pan view around the sky"
+msgstr "Visuale panoramica del cielo"
+
+#: src/gui/HelpDialog.cpp:162
+msgid "Arrow keys & left mouse drag"
+msgstr "Spostamento con frecce e tasto sinistro del mouse"
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Zoom in/out"
+msgstr "Ingrandisci/riduci"
+
+#: src/gui/HelpDialog.cpp:166
+msgid "Page Up/Down"
+msgstr "Pagina Su/Giù"
+
+#: src/gui/HelpDialog.cpp:168
+msgid "CTRL + Up/Down"
+msgstr "CRTL + Su/Giù"
+
+#: src/gui/HelpDialog.cpp:171
+msgid "Select object"
+msgstr "Seleziona oggetto"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "Left click"
+msgstr "Clic con il tasto sinistro"
+
+#: src/gui/HelpDialog.cpp:180
+msgid "Clear selection"
+msgstr "Annulla selezione"
+
+#: src/gui/HelpDialog.cpp:181
+msgid "Right click"
+msgstr "Clic con il tasto destro"
+
+#: src/gui/HelpDialog.cpp:183
+msgid "CTRL + Left click"
+msgstr "CTRL + Clic con il tasto sinistro"
+
+#: src/gui/HelpDialog.cpp:189
+#, qt-format
+msgid ""
+"Below are listed only the actions with assigned keys. Further actions may be "
+"available via the \"%1\" button."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:245
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -578,17 +577,17 @@ msgstr ""
 "I collegamenti seguenti sono collegamenti web esterni, e apriranno il vostro "
 "browser web\n"
 
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:246
 msgid "The Stellarium User Guide"
 msgstr "La Guida Utente Di Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:250
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Domande Frequenti} su Stellarium. E anche le risposte."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:255
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -597,7 +596,7 @@ msgstr ""
 "scenari e script creati dagli utenti."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:260
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -606,7 +605,7 @@ msgstr ""
 "Stellarium, scrivi una richiesta di supporto qui e proveremo ad aiutarti."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:265
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -617,43 +616,43 @@ msgstr ""
 "nelle segnalazioni, è possibile aprire una segnalazione bug qui."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:270
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forum} - parla di Stellarium con altri utenti"
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:307
 msgid "Developers"
 msgstr "Sviluppatori"
 
-#: src/gui/HelpDialog.cpp:220
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinatore di progetto e capo sviluppo: %1"
 
-#: src/gui/HelpDialog.cpp:221
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autore della documentazione/Sviluppatore: %1"
 
-#: src/gui/HelpDialog.cpp:222 src/gui/HelpDialog.cpp:223
-#: src/gui/HelpDialog.cpp:224 src/gui/HelpDialog.cpp:225
-#: src/gui/HelpDialog.cpp:226 src/gui/HelpDialog.cpp:232
-#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:234
-#: src/gui/HelpDialog.cpp:235
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 #, qt-format
 msgid "Developer: %1"
 msgstr "Sviluppatore: %1"
 
-#: src/gui/HelpDialog.cpp:227 src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Tester: %1"
 msgstr "Collaudatore: %1"
 
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
 msgstr "Ex sviluppatori"
 
-#: src/gui/HelpDialog.cpp:230
+#: src/gui/HelpDialog.cpp:318
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -661,20 +660,15 @@ msgstr ""
 "Diverse persone hanno effettuato contributi significativi, però non sono più "
 "attive. Il loro lavoro ha fatto molta differenza nel progetto:"
 
-#: src/gui/HelpDialog.cpp:231
+#: src/gui/HelpDialog.cpp:319
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer grafico/Altro: %1"
 
-#: src/gui/HelpDialog.cpp:236 src/gui/HelpDialog.cpp:237
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Sviluppatore OSX: %1"
-
-#: src/gui/HelpDialog.cpp:262 src/gui/HelpDialog.cpp:264
-#: src/translations.h:557
-msgid "Miscellaneous"
-msgstr "Varie"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:609
 msgid "Script console window"
@@ -2785,6 +2779,10 @@ msgstr "Nomi delle stelle"
 msgid "Flip scene vertically"
 msgstr "Capovolgi la visuale verticalmente"
 
+#: src/translations.h:557
+msgid "Miscellaneous"
+msgstr "Varie"
+
 #: src/translations.h:558
 msgid "Auto hide horizontal button bar"
 msgstr "Nascondi automaticamente la barra orizzontale dei comandi"
@@ -3006,20 +3004,24 @@ msgstr "/"
 msgid ":"
 msgstr ":"
 
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+#: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
 msgstr "Aiuto"
 
-#: src/ui_helpDialogGui.h:267
+#: src/ui_helpDialogGui.h:286
 msgid "About"
 msgstr "Informazioni"
 
-#: src/ui_helpDialogGui.h:269
+#: src/ui_helpDialogGui.h:288
 msgid "Log"
 msgstr "Registro"
 
-#: src/ui_helpDialogGui.h:272
+#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
+msgid "Edit keyboard shortcuts..."
+msgstr "Configura i tasti di selezione rapida..."
+
+#: src/ui_helpDialogGui.h:292
 msgid "Refresh"
 msgstr "Aggiorna"
 
@@ -3647,10 +3649,6 @@ msgstr ""
 msgid "Enable mouse navigation"
 msgstr "Abilita la navigazione con il mouse"
 
-#: src/ui_configurationDialog.h:1025
-msgid "Edit keyboard shortcuts..."
-msgstr "Configura i tasti di selezione rapida..."
-
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Startup date and time"
@@ -3889,35 +3887,23 @@ msgstr ""
 "ATTENZIONE: Rimuovendo lo sfondo selezionato significa eliminare i suoi "
 "file. L'operazione è irreversibile."
 
-#: src/ui_shortcutsDialog.h:201
+#: src/ui_shortcutsDialog.h:202
 msgid "Keyboard Shortcuts"
 msgstr "Tasti di selezione rapida"
 
 #: src/ui_shortcutsDialog.h:204
-msgid "Alternative shortcut"
-msgstr "Scorciatoia alternativa"
-
-#: src/ui_shortcutsDialog.h:205
-msgid "Primary shortcut"
-msgstr "Scorciatoia primaria"
-
-#: src/ui_shortcutsDialog.h:206
-msgid "Action"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:207
 msgid "Edit Primary Shortcut"
 msgstr "Modifica scorciatoia primaria"
 
-#: src/ui_shortcutsDialog.h:208
+#: src/ui_shortcutsDialog.h:205
 msgid "Edit Alternative Shortcut"
 msgstr "Modifica scorciatoie alternative"
 
-#: src/ui_shortcutsDialog.h:211
+#: src/ui_shortcutsDialog.h:208
 msgid "Restore Defaults"
 msgstr "Ripristina i valori predefiniti"
 
-#: src/ui_shortcutsDialog.h:212
+#: src/ui_shortcutsDialog.h:209
 msgid "Apply"
 msgstr "Applica"
 
@@ -5146,12 +5132,12 @@ msgstr ""
 "tipo \"slew\") ad un telescopio con montatura computerizzata (un telescopio "
 "\"go to\")."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:161
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Sposta il telescopio #%1 per l'oggetto selezionato"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "Muovi il telescopio #%1 al punto corrente al centro dello schermo"
@@ -7533,3 +7519,15 @@ msgstr "0 gr."
 
 #~ msgid "Display info about an object's name"
 #~ msgstr "Visualizza informazioni sul nome di un oggetto"
+
+#~ msgid "F7"
+#~ msgstr "F7"
+
+#~ msgid "Show and edit all keyboard shortcuts"
+#~ msgstr "Visualizza e modifica tutte le scorciatoie da tastiera"
+
+#~ msgid "Alternative shortcut"
+#~ msgstr "Scorciatoia alternativa"
+
+#~ msgid "Primary shortcut"
+#~ msgstr "Scorciatoia primaria"
