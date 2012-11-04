@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-01 19:53+0700\n"
+"POT-Creation-Date: 2012-11-03 20:34+0700\n"
 "PO-Revision-Date: 2012-10-24 04:27+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-02 04:37+0000\n"
+"X-Launchpad-Export-Date: 2012-11-04 04:43+0000\n"
 "X-Generator: Launchpad (build 16218)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -831,6 +831,18 @@ msgstr "Estrasburgoko Unibertsitatea (Frantzia)"
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
 msgstr "Harvard Unibertsitatea (AEB)"
+
+#: src/gui/ShortcutsDialog.cpp:546
+msgid "Action"
+msgstr "Ekintza"
+
+#: src/gui/ShortcutsDialog.cpp:547
+msgid "Primary shortcut"
+msgstr "Lasterbide nagusia"
+
+#: src/gui/ShortcutsDialog.cpp:548
+msgid "Alternative shortcut"
+msgstr "Lasterbide alternatiboa"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -7309,12 +7321,3 @@ msgstr "0 gradu"
 
 #~ msgid "F7"
 #~ msgstr "F7"
-
-#~ msgid "Alternative shortcut"
-#~ msgstr "Lasterbide alternatiboa"
-
-#~ msgid "Primary shortcut"
-#~ msgstr "Lasterbide nagusia"
-
-#~ msgid "Action"
-#~ msgstr "Ekintza"

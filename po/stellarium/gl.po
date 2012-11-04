@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-01 19:53+0700\n"
+"POT-Creation-Date: 2012-11-03 20:34+0700\n"
 "PO-Revision-Date: 2012-11-02 14:09+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-03 04:41+0000\n"
+"X-Launchpad-Export-Date: 2012-11-04 04:45+0000\n"
 "X-Generator: Launchpad (build 16218)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -829,6 +829,18 @@ msgstr "Universidade de Strasbourg (Francia)"
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
 msgstr "Universidade de Harvard (USA)"
+
+#: src/gui/ShortcutsDialog.cpp:546
+msgid "Action"
+msgstr "Acción"
+
+#: src/gui/ShortcutsDialog.cpp:547
+msgid "Primary shortcut"
+msgstr "Tecla rápida primaria"
+
+#: src/gui/ShortcutsDialog.cpp:548
+msgid "Alternative shortcut"
+msgstr "Tecla rápida alternativa"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -7514,12 +7526,3 @@ msgstr "0 graos."
 
 #~ msgid "Show and edit all keyboard shortcuts"
 #~ msgstr "Amosar e editar todos os atallos do teclado"
-
-#~ msgid "Alternative shortcut"
-#~ msgstr "Tecla rápida alternativa"
-
-#~ msgid "Primary shortcut"
-#~ msgstr "Tecla rápida primaria"
-
-#~ msgid "Action"
-#~ msgstr "Acción"

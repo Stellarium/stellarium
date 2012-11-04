@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-01 19:53+0700\n"
+"POT-Creation-Date: 2012-11-03 20:34+0700\n"
 "PO-Revision-Date: 2012-10-24 04:42+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-02 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-11-04 04:49+0000\n"
 "X-Generator: Launchpad (build 16218)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -830,6 +830,18 @@ msgstr "Universitetet i Strasbourg (Frankrike)"
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
 msgstr "Harvard University (USA)"
+
+#: src/gui/ShortcutsDialog.cpp:546
+msgid "Action"
+msgstr "Handling"
+
+#: src/gui/ShortcutsDialog.cpp:547
+msgid "Primary shortcut"
+msgstr "Primærsnarvei"
+
+#: src/gui/ShortcutsDialog.cpp:548
+msgid "Alternative shortcut"
+msgstr "Alternativ snarvei"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -7428,12 +7440,3 @@ msgstr "0 grd."
 
 #~ msgid "Show and edit all keyboard shortcuts"
 #~ msgstr "Vis og rediger alle tastesnarveier"
-
-#~ msgid "Alternative shortcut"
-#~ msgstr "Alternativ snarvei"
-
-#~ msgid "Primary shortcut"
-#~ msgstr "Primærsnarvei"
-
-#~ msgid "Action"
-#~ msgstr "Handling"

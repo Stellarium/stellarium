@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-01 19:53+0700\n"
+"POT-Creation-Date: 2012-11-03 20:34+0700\n"
 "PO-Revision-Date: 2012-10-24 04:21+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-02 04:38+0000\n"
+"X-Launchpad-Export-Date: 2012-11-04 04:44+0000\n"
 "X-Generator: Launchpad (build 16218)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -825,6 +825,18 @@ msgstr "Univerzita ve Štrasburku (Francie)"
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
 msgstr "Harvardova univerzita (USA)"
+
+#: src/gui/ShortcutsDialog.cpp:546
+msgid "Action"
+msgstr "Činnost"
+
+#: src/gui/ShortcutsDialog.cpp:547
+msgid "Primary shortcut"
+msgstr "Hlavní zkratka"
+
+#: src/gui/ShortcutsDialog.cpp:548
+msgid "Alternative shortcut"
+msgstr "Alternativní zkratka"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -7439,12 +7451,3 @@ msgstr "0 stup."
 
 #~ msgid "Show and edit all keyboard shortcuts"
 #~ msgstr "Zobrazit a upravit všechny klávesové zkratky"
-
-#~ msgid "Primary shortcut"
-#~ msgstr "Hlavní zkratka"
-
-#~ msgid "Alternative shortcut"
-#~ msgstr "Alternativní zkratka"
-
-#~ msgid "Action"
-#~ msgstr "Činnost"

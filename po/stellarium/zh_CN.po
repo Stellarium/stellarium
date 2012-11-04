@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-01 19:53+0700\n"
-"PO-Revision-Date: 2012-11-01 05:27+0000\n"
+"POT-Creation-Date: 2012-11-03 20:34+0700\n"
+"PO-Revision-Date: 2012-11-03 15:05+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-02 04:47+0000\n"
+"X-Launchpad-Export-Date: 2012-11-04 04:53+0000\n"
 "X-Generator: Launchpad (build 16218)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -123,7 +123,7 @@ msgstr "绝对星等: %1"
 #: src/core/modules/Planet.cpp:455
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "站心黄道坐标(当前日期纪元):%1/%2"
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
@@ -544,7 +544,7 @@ msgstr "CTRL + 鼠标左键"
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
-msgstr ""
+msgstr "以下只列出了被指派了快捷键的动作。更多动作可以通过“%1”按钮查看。"
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -795,6 +795,18 @@ msgstr "斯特拉斯堡大学（法国）"
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
 msgstr "哈佛大学（美国）"
+
+#: src/gui/ShortcutsDialog.cpp:546
+msgid "Action"
+msgstr "动作"
+
+#: src/gui/ShortcutsDialog.cpp:547
+msgid "Primary shortcut"
+msgstr "主要快捷键"
+
+#: src/gui/ShortcutsDialog.cpp:548
+msgid "Alternative shortcut"
+msgstr "次要快捷键"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -1307,12 +1319,12 @@ msgstr "2031年从火卫二观测到的双重食"
 #. TRANSLATORS: Name of script
 #: src/translations.h:204
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr "2068年 1月 10日从奥林匹斯山观测到的日蚀"
+msgstr "2068年1月10日从奥林匹斯山观测到的日食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr "2048年地球掩木星"
+msgstr "2048年火卫一掩地球和木星"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:208
@@ -1417,7 +1429,7 @@ msgid ""
 "retrogrades back towards the sun and just partially eclipses it (only seen "
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
-msgstr ""
+msgstr "火卫一超过火星，食太阳后穿过它并逆行返回，部分挡住太阳（只能在SH看到），以后火星完全食太阳和火卫一，接着火卫一进入火星的阴影里变暗。"
 
 #: src/translations.h:235
 msgid ""
@@ -2840,7 +2852,7 @@ msgstr "图像传感器画幅"
 
 #: src/translations.h:588
 msgid "Telrad sight"
-msgstr ""
+msgstr "红圈寻星镜"
 
 #: src/translations.h:589
 msgid "Pulsars Plugin"
@@ -3678,7 +3690,7 @@ msgstr "选择单一星座"
 
 #: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
-msgstr "渲染日光透影"
+msgstr "渲染日光阴影"
 
 #: src/ui_configurationDialog.h:1072
 msgid ""
@@ -5646,7 +5658,7 @@ msgstr "设置时区"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Day keys"
-msgstr ""
+msgstr "日键"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Startup date/time preset"
@@ -6049,7 +6061,7 @@ msgstr "我们特别感谢以下所有人的贡献和宝贵意见："
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "谢尔盖·比列尼科夫(Sergei Blinnikov)"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Institute for Theoretical and Experimental Physics"
@@ -6145,7 +6157,7 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
@@ -6195,7 +6207,7 @@ msgstr "自转周期: %1 s"
 #: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr ""
+msgstr "质心周期对时间的导数:%1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:145
 msgid "Dispersion measure:"
@@ -6294,7 +6306,7 @@ msgstr "有间歇性的脉冲无线电发射"
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
-msgstr ""
+msgstr "有热X射线脉冲发射的孤立中子星，但是没有可检测的无线电发射"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
@@ -6332,7 +6344,7 @@ msgstr "Pushchino 射电天文台"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "马切伊·萨拉莱(Maciej Serylak)"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
@@ -6569,7 +6581,7 @@ msgstr "秒"
 #: plugins/Observability/src/Observability.cpp:477
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr "落于 %1 (在 %2 )"
+msgstr "落于 %1 (%2 之后)"
 
 #: plugins/Observability/src/Observability.cpp:478
 #, qt-format
@@ -6584,7 +6596,7 @@ msgstr "落于 %1 (%2 之前)"
 #: plugins/Observability/src/Observability.cpp:489
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr "升于 %1 (于 %2)"
+msgstr "升于 %1 (%2 之后)"
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "Circumpolar."
@@ -6687,7 +6699,7 @@ msgid ""
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
 "这个插件分析选择的天体的可观测性（或者当没有天体被选择时，屏幕中心天区）。这个插件可以显示天体升、中天、落时间和一年中的最佳观测时间。（也就是天体对太阳的"
-"角距离最大的时间），天体夜晚在地平线以上的日期范围，以及日没升/日出落（冲日）和偕日升/偕日落（合日）日期。<br>太阳系天体的公转和恒星视差也被考虑在内"
+"角距离最大的时间），天体夜晚在地平线以上的日期范围，以及日没升/日出落（冲日）和偕日升/偕日落（合日）日期。<br>太阳系天体的运行和恒星视差也被考虑在内"
 "。<br><br>作者感谢Alexander Wolf和Georg Zotti所提出的建议。<br><br>Ivan Marti-"
 "Vidal（昂萨拉天文台）"
 
@@ -6736,6 +6748,9 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
+"日没升/日出落是指一个目标的升/落时太阳恰好落/升（发生在太阳系天体时一般称为冲日）。这一事件的具体发生日期取决于观测者的位置。在天体日没升/日出落附近的"
+"一段时间中，其地平高度较高时太阳的地平高度则远低于地平线（这时该天体可以很好的被观测）。与之相反的是，偕日升/偕日落是指天体和太阳同时升/落（发生在太阳系"
+"天体时一般称为合日）。很显然，在天体偕日升/偕日落附近的一段时间中，该天体是很难被观测的（甚至根本无法观测）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid "Largest Sun separation:"
@@ -6752,10 +6767,12 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
+"这发生在天体和太阳的的角距离达到最大值时。在大多数情况下，这是指该天体和太阳的赤经恰好相差180度，亦即太阳在天体的对面。当天体位于它与太阳最大角距离的位"
+"置时（不论该天体是行星还是恒星），它大约在午夜上中天，处于天空中最黑暗的区域。因此，这是观测某个人天体“最好”的机会。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "在地平线上的夜晚："
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid ""
@@ -6776,6 +6793,11 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
+"这个程序计算天体夜晚至少有一刻在地平线上的时间范围。对于“夜晚”，这个程序将其定义为太阳高度角低于曙暮光高度（可以被用户定义，见上文）。当天体(或系外行星"
+")被选定时，程序给出的本年可观测时间范围有两种形式：一是一个从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日"
+"期，再从另一个日期到12月31日）。在第一种情况下，第一个日期（在我们的例子中是1月20日）会接近该天体的偕日落（合日）。在第二种情况中（比如类似于从1月"
+"1日到5月20日，再从9月21日到12月31日），第一个日期（在我们的例子中是5月20日）会接近该天体的偕日升（合日）。用于计算恒星和行星偕日升/偕日落（"
+"合日）的更加精确的公式（不依赖于用户设定的曙暮光太阳高度角）会在这个插件的未来版本中实现。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"
@@ -6818,7 +6840,7 @@ msgstr "最大太阳张角日期"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "在地平线上的夜晚"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Dates of previous and next Full Moon"
@@ -7211,12 +7233,3 @@ msgstr "0 度"
 
 #~ msgid "F7"
 #~ msgstr "F7 键"
-
-#~ msgid "Action"
-#~ msgstr "动作"
-
-#~ msgid "Alternative shortcut"
-#~ msgstr "次要快捷键"
-
-#~ msgid "Primary shortcut"
-#~ msgstr "主要快捷键"
