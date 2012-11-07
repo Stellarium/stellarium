@@ -870,10 +870,18 @@
 	},
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
-		"imageUrl" : "nebulae/default/m105.png",
+		"imageUrl" : "nebulae/default/m105.png", 
 		"worldCoords" : [[[162.1267, 12.5719], [162.0142, 12.5614], [162.0117, 12.6772], [162.1258, 12.6828]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.075167886,
 		"maxBrightness" : 13.1
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n7023kepler.png",
+		"worldCoords" : [[[316.3, 67.8162], [314.461, 67.8162], [314.461, 68.5007], [316.3, 68.5007]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
 	}]
 }
