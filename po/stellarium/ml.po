@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-03 20:34+0700\n"
-"PO-Revision-Date: 2012-10-07 03:43+0000\n"
-"Last-Translator: BRIJESH E.P <Unknown>\n"
+"PO-Revision-Date: 2012-11-08 21:20+0000\n"
+"Last-Translator: Raziman T V <razimantv@gmail.com>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-04 04:48+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-09 04:37+0000\n"
+"X-Generator: Launchpad (build 16250)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -23,11 +23,11 @@ msgstr "മേരീഡിയന്‍"
 
 #: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
-msgstr "കിരാണീയമായ"
+msgstr "ക്രാന്തിവൃത്തം"
 
 #: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1164
 msgid "Equator"
-msgstr "ഭൂമധൃരേഖ"
+msgstr "ഭൂമധ്യരേഖ"
 
 #: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
 msgid "Horizon"
@@ -35,7 +35,7 @@ msgstr "ചക്രവാളം"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
-msgstr "താരാപഥ തലം"
+msgstr "താരാപഥതലം"
 
 #: src/core/modules/LandscapeMgr.cpp:500
 msgid "Author: "
@@ -67,6 +67,7 @@ msgstr "തരം: <b>%1</b>"
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
+"ദൃശ്യകാന്തിമാനം: <b>%1</b> (എക്സ്റ്റിങ്ഷന്‍ കാരണം <b>%2</b> ആയിരിക്കുന്നു)"
 
 #: src/core/modules/Nebula.cpp:123 src/core/modules/Planet.cpp:439
 #: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
@@ -87,11 +88,11 @@ msgstr "താരാപഥം"
 
 #: src/core/modules/Nebula.cpp:345
 msgid "Open cluster"
-msgstr "ഓപ്പണ്‍ ക്ലസ്റ്റര്‍"
+msgstr "തുറന്ന താരവ്യൂഹം"
 
 #: src/core/modules/Nebula.cpp:348
 msgid "Globular cluster"
-msgstr "ഗോളിയ ക്ലസ്റ്റര്‍"
+msgstr "ഗോളീയ താരവ്യൂഹം"
 
 #: src/core/modules/Nebula.cpp:351
 msgid "Nebula"
@@ -145,7 +146,7 @@ msgstr "ദൂരം: %1AU"
 #: src/core/modules/Planet.cpp:484
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "ദൃശ്യ വ്യാസം: %1, വലയങ്ങളെ കണക്കിലെടുത്താല്‍: %2"
 
 #: src/core/modules/Planet.cpp:490 src/core/modules/MinorPlanet.cpp:240
 #, qt-format
@@ -162,7 +163,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:502
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "നാക്ഷത്രദിനം: %1"
 
 #: src/core/modules/Planet.cpp:506
 #, qt-format
