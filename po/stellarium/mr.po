@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-11-03 20:34+0700\n"
-"PO-Revision-Date: 2012-10-24 04:41+0000\n"
+"PO-Revision-Date: 2012-11-08 17:35+0000\n"
 "Last-Translator: nyogi <nyogi2004@gmail.com>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-04 04:48+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-09 04:37+0000\n"
+"X-Generator: Launchpad (build 16250)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -31,7 +31,7 @@ msgstr "विषुववृत्त"
 
 #: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
 msgid "Horizon"
-msgstr "Kshitij"
+msgstr "क्षितिज"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
@@ -128,7 +128,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "(या दिनांकाची पृथ्वीची ) तिर्यकता: %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -157,17 +157,17 @@ msgstr "भासमान व्यास: %1"
 #: src/core/modules/Comet.cpp:163
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "नाक्षत्र कालावधी : %1 दिवस (%2 a)"
 
 #: src/core/modules/Planet.cpp:502
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "नाक्षत्र दिन : %1"
 
 #: src/core/modules/Planet.cpp:506
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "सरासरी सौर्य दिन: %1"
 
 #: src/core/modules/Planet.cpp:513
 #, qt-format
@@ -192,7 +192,7 @@ msgstr "प्रकाशित: %1%"
 #: src/core/modules/MinorPlanet.cpp:189
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "अस्थयी पदनाम : %1"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -234,7 +234,7 @@ msgstr "पराशय: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr "Avakash yaan"
+msgstr "अवकाशयान"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -242,7 +242,7 @@ msgstr "जास्तित जास्त दृस्टीक्षेत�
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr "दृष्टीकोन"
+msgstr "यथार्थदर्शन"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
@@ -357,7 +357,7 @@ msgstr "आरए/डेक (दिनांक): %1/%2"
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "दिर्घिकेचे अक्षांश/रेखांश(J2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -565,6 +565,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"खालील यादीतील क्रिया संबधित कि ज शी जोडलेल्या आहेत. जादाच्या कृती  \"%1\" "
+"यातून मिळतील."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -829,15 +831,15 @@ msgstr "हावर्ड विश्वविद्यालय (अमेर
 
 #: src/gui/ShortcutsDialog.cpp:546
 msgid "Action"
-msgstr ""
+msgstr "कृती"
 
 #: src/gui/ShortcutsDialog.cpp:547
 msgid "Primary shortcut"
-msgstr ""
+msgstr "प्राथमिक दुवा"
 
 #: src/gui/ShortcutsDialog.cpp:548
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "पर्यायी दुवा"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -1183,12 +1185,12 @@ msgstr "हेक्टर"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "वरुण"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "माकेमाके"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1335,12 +1337,12 @@ msgstr "राशीचक्र"
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "बुध सूर्योदय-सुर्यास्त"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:200
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "२०१७ चे डिमोस चे दुहेरी ग्रहण"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:202
