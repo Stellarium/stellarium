@@ -442,6 +442,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/StelGuiItems.cpp
 		gui/HelpDialog.hpp
 		gui/HelpDialog.cpp
+		gui/ShortcutLineEdit.hpp
+		gui/ShortcutLineEdit.cpp
 		gui/ShortcutsDialog.hpp
 		gui/ShortcutsDialog.cpp
 		gui/Dialog.hpp
@@ -473,6 +475,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SkyGui.hpp
 		gui/StelGuiItems.hpp
 		gui/HelpDialog.hpp
+		gui/ShortcutLineEdit.hpp
 		gui/ShortcutsDialog.hpp
 		gui/Dialog.hpp
 		gui/MapLabel.hpp
