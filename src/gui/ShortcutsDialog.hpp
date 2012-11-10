@@ -20,54 +20,13 @@
 #ifndef SHORTCUTSDIALOG_HPP
 #define SHORTCUTSDIALOG_HPP
 
-#include "StelDialog.hpp"
-
-#include <QLineEdit>
+#include <QKeySequence>
 #include <QModelIndex>
 
-//! Specialised GUI control for entering keyboard shortcut combinations.
-//! Allows Emacs-style key sequences (for example "Ctrl+E, Ctrl+2",
-//! see the documentation of QKeySequence for details.)
-class ShortcutLineEdit : public QLineEdit
-{
-	Q_OBJECT
-
-public:
-	ShortcutLineEdit(QWidget* parent);
-
-	QKeySequence getKeySequence();
-	bool isEmpty() const
-	{
-		return (m_keyNum <= 0);
-	}
-
-public slots:
-	//! Clear contents and stored keys.
-	void clear();
-	//! Remove the last key from the key sequence.
-	void backspace();
-	void setContents(QKeySequence ks);
-
-signals:
-	//! Needed for enabling/disabling buttons in ShortcutsDialog.
-	void focusChanged(bool focus);
-	void contentsChanged();
-
-protected:
-	void keyPressEvent(QKeyEvent *e);
-	void focusInEvent(QFocusEvent *e);
-	void focusOutEvent(QFocusEvent *e);
-
-private:
-	//! transform modifiers to int.
-	static int getModifiers(Qt::KeyboardModifiers state, const QString &text);
-
-	//! Length of the stored key sequence.
-	int m_keyNum;
-	int m_keys[4]; // QKeySequence allows only 4 keys in single shortcut
-};
+#include "StelDialog.hpp"
 
 class Ui_shortcutsDialogForm;
+class ShortcutLineEdit;
 class StelShortcut;
 class StelShortcutGroup;
 class StelShortcutMgr;
