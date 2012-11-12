@@ -39,8 +39,11 @@ public:
 
 	void init();
 
-	//! Load shortcuts from existing file.
-	bool loadShortcuts(const QString &filePath);
+	//! Load shortcuts from an existing file.
+	//! @param filePath full path to the file.
+	//! @param overload if true, if a shortcut in the file already exists,
+	//! replace its keys with the ones in the file. 
+	bool loadShortcuts(const QString& filePath, bool overload = false);
 	//! Search for file with shortcuts, load shortcuts from it.
 	void loadShortcuts();
 
