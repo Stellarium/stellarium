@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2012 Anton Samoylov
+ * Copyright (C) 2012 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,47 +32,43 @@ ShortcutLineEdit::ShortcutLineEdit(QWidget *parent) :
 
 QKeySequence ShortcutLineEdit::getKeySequence()
 {
-	return QKeySequence(m_keys[0], m_keys[1], m_keys[2], m_keys[3]);
+	return QKeySequence(keys.value(0, 0), keys.value(1, 0),
+	                    keys.value(2, 0), keys.value(3, 0));
 }
 
 bool ShortcutLineEdit::isEmpty() const
 {
-	return (m_keyNum <= 0);
+	return (keys.isEmpty());
 }
 
 void ShortcutLineEdit::clear()
 {
-	m_keyNum = m_keys[0] = m_keys[1] = m_keys[2] = m_keys[3] = 0;
+	keys.clear();
 	QLineEdit::clear();
 	emit contentsChanged();
 }
 
 void ShortcutLineEdit::backspace()
 {
-	if (m_keyNum <= 0)
-	{
-		qDebug() << "Clear button works when it shouldn't: lineEdit is empty ";
+	if (keys.isEmpty())
 		return;
-	}
-	--m_keyNum;
-	m_keys[m_keyNum] = 0;
-	// update text
+	keys.removeLast();
 	setContents(getKeySequence());
 }
 
 void ShortcutLineEdit::setContents(QKeySequence ks)
 {
-	// need for avoiding infinite loop of same signal-slot emitting/calling
+	// Avoiding infinite loop of same signal-slot emitting/calling
 	if (ks.toString(QKeySequence::NativeText) == text())
 		return;
-	// clear before setting up
+	
+	// Set the keys from the given key sequence
 	clear();
-	// set up m_keys from given key sequence
-	m_keyNum = ks.count();
-	for (int i = 0; i < m_keyNum; ++i)
+	for (uint i = 0; i < ks.count(); ++i)
 	{
-		m_keys[i] = ks[i];
+		keys.append(ks[i]);
 	}
+	
 	// Show Ctrl button as Cmd on Mac
 	setText(ks.toString(QKeySequence::NativeText));
 	emit contentsChanged();
@@ -80,7 +77,7 @@ void ShortcutLineEdit::setContents(QKeySequence ks)
 void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 {
 	int nextKey = e->key();
-	if ( m_keyNum > 3 || // too long shortcut
+	if ( keys.count() > 3 || // too long shortcut
 	     nextKey == Qt::Key_Control || // dont count modifier keys
 	     nextKey == Qt::Key_Shift ||
 	     nextKey == Qt::Key_Meta ||
@@ -89,20 +86,26 @@ void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 	
 	// applying current modifiers to key
 	nextKey |= getModifiers(e->modifiers(), e->text());
-	m_keys[m_keyNum] = nextKey;
-	++m_keyNum;
+	
+	// If there is selected text, replace *all* instead of appending. 
+	if (hasSelectedText())
+	{
+		keys.clear();
+	}
+	keys.append(nextKey);
 	
 	// set displaying information
-	QKeySequence ks(m_keys[0], m_keys[1], m_keys[2], m_keys[3]);
-	setText(ks.toString(QKeySequence::NativeText));
-	
+	setText(getKeySequence().toString(QKeySequence::NativeText));
 	emit contentsChanged();
+	
 	// not call QLineEdit's event because we already changed contents
 	e->accept();
 }
 
 void ShortcutLineEdit::focusInEvent(QFocusEvent *e)
 {
+	// Select the contents so that they are replaced on the next edit
+	selectAll();
 	emit focusChanged(false);
 	QLineEdit::focusInEvent(e);
 }
