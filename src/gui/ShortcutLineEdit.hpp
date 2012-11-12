@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2012 Anton Samoylov
+ * Copyright (C) 2012 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,14 +24,20 @@
 #include <QKeySequence>
 
 //! Specialised GUI control for entering keyboard shortcut combinations.
-//! Allows Emacs-style key sequences (for example "Ctrl+E, Ctrl+2",
-//! see the documentation of QKeySequence for details.)
+//! Allows Emacs-style key sequences (for example "Ctrl+E, Ctrl+2")
+//! no longer than four combinations. See the documentation of 
+//! QKeySequence for details.
+//! 
+//! When ShortcutLineEdit receives the focus, its whole contents get
+//! selected. On a key press, if any of the contents are selected,
+//! the new key replaces @em all the previous contents. Otherwise, it's
+//! appended to the sequence.
 class ShortcutLineEdit : public QLineEdit
 {
 	Q_OBJECT
 
 public:
-	ShortcutLineEdit(QWidget* parent);
+	ShortcutLineEdit(QWidget* parent = 0);
 
 	QKeySequence getKeySequence();
 	bool isEmpty() const;
@@ -40,10 +47,13 @@ public slots:
 	void clear();
 	//! Remove the last key from the key sequence.
 	void backspace();
+	//! Emits contentsChanged() if the new sequence is not the same.
 	void setContents(QKeySequence ks);
 
 signals:
 	//! Needed for enabling/disabling buttons in ShortcutsDialog.
+	//! @param[out] focus @b false if the widget has the focus,
+	//! true otherwise.
 	void focusChanged(bool focus);
 	void contentsChanged();
 
@@ -56,9 +66,8 @@ private:
 	//! transform modifiers to int.
 	static int getModifiers(Qt::KeyboardModifiers state, const QString &text);
 
-	//! Length of the stored key sequence.
-	int m_keyNum;
-	int m_keys[4]; // QKeySequence allows only 4 keys in single shortcut
+	//! Codes of the keys in the manipulated key sequence.
+	QList<int> keys;
 };
 
 #endif // SHORTCUTLINEEDIT_H
