@@ -18,7 +18,6 @@
  */
 
 #include <QDialog>
-#include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 
 #include "StelApp.hpp"
@@ -31,9 +30,41 @@
 #include "ui_shortcutsDialog.h"
 
 
+
+
+ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
+    QSortFilterProxyModel(parent)
+{
+	//
+}
+
+bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+{
+	if (filterRegExp().isEmpty())
+		return true;
+	
+	if (source_parent.isValid())
+	{
+		QModelIndex index = source_parent.child(source_row, filterKeyColumn());
+		QString data = sourceModel()->data(index, filterRole()).toString();
+		return data.contains(filterRegExp());
+	}
+	else
+	{
+		QModelIndex index = sourceModel()->index(source_row, filterKeyColumn());
+		for (int row = 0; row < sourceModel()->rowCount(index); row++)
+		{
+			if (filterAcceptsRow(row, index))
+				return true;
+		}
+	}
+	return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+}
+
+
 ShortcutsDialog::ShortcutsDialog() :
 	ui(new Ui_shortcutsDialogForm),
-	filterModel(new QSortFilterProxyModel(this)),
+	filterModel(new ShortcutsFilterModel(this)),
 	mainModel(new QStandardItemModel(this))
 {
 	shortcutMgr = StelApp::getInstance().getStelShortcutManager();
@@ -85,7 +116,7 @@ void ShortcutsDialog::retranslate()
 
 void ShortcutsDialog::initEditors()
 {
-	QModelIndex index = ui->shortcutsTreeView->currentIndex();
+	QModelIndex index = filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
 	index = index.sibling(index.row(), 0);
 	QStandardItem* currentItem = mainModel->itemFromIndex(index);
 	if (itemIsEditable(currentItem))
@@ -157,22 +188,26 @@ void ShortcutsDialog::handleCollisions(ShortcutLineEdit *currentEdit)
 	// handle collisions
 	QString text = currentEdit->text();
 	collisionItems = findCollidingItems(QKeySequence(text));
-	QModelIndex currentIndex = ui->shortcutsTreeView->currentIndex();
-	currentIndex = currentIndex.sibling(currentIndex.row(), 0);
-	QStandardItem* currentItem = mainModel->itemFromIndex(currentIndex);
+	QModelIndex index =
+	        filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
+	index = index.sibling(index.row(), 0);
+	QStandardItem* currentItem = mainModel->itemFromIndex(index);
 	collisionItems.removeOne(currentItem);
 	if (!collisionItems.isEmpty())
 	{
 		drawCollisions();
 		ui->applyButton->setEnabled(false);
 		// scrolling to first collision item
-		ui->shortcutsTreeView->scrollTo(collisionItems.first()->index());
+		QModelIndex first =
+		        filterModel->mapFromSource(collisionItems.first()->index());
+		ui->shortcutsTreeView->scrollTo(first);
 		currentEdit->setProperty("collision", true);
 	}
 	else
 	{
 		// scrolling back to current item
-		ui->shortcutsTreeView->scrollTo(currentIndex);
+		QModelIndex current = filterModel->mapFromSource(index);
+		ui->shortcutsTreeView->scrollTo(current);
 		currentEdit->setProperty("collision", false);
 	}
 }
@@ -192,7 +227,8 @@ void ShortcutsDialog::handleChanges()
 		ui->altBackspaceButton->setEnabled(!editor->isEmpty());
 	}
 	// updating apply button
-	QModelIndex index = ui->shortcutsTreeView->currentIndex();
+	QModelIndex index =
+	        filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
 	if (!index.isValid() ||
 	    (isPrimary &&
 	     editor->text() == mainModel->data(index.sibling(index.row(), 1))) ||
@@ -213,7 +249,8 @@ void ShortcutsDialog::handleChanges()
 void ShortcutsDialog::applyChanges() const
 {
 	// get ids stored in tree
-	QModelIndex index = ui->shortcutsTreeView->currentIndex();
+	QModelIndex index =
+	        filterModel->mapToSource(ui->shortcutsTreeView->currentIndex());
 	if (!index.isValid())
 		return;
 	index = index.sibling(index.row(), 0);
@@ -234,7 +271,8 @@ void ShortcutsDialog::applyChanges() const
 
 void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 {
-	QStandardItem* item = mainModel->itemFromIndex(index);
+	QModelIndex mainIndex = filterModel->mapToSource(index);
+	QStandardItem* item = mainModel->itemFromIndex(mainIndex);
 	if (itemIsEditable(item))
 	{
 		ui->primaryShortcutEdit->setFocus();
@@ -246,9 +284,14 @@ void ShortcutsDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	resetModel();
-	ui->shortcutsTreeView->setModel(mainModel);
-	QHeaderView* header = ui->shortcutsTreeView->header();
-	header->setMovable(false);
+	filterModel->setSourceModel(mainModel);
+	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	filterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+	filterModel->setDynamicSortFilter(true);
+	filterModel->setSortLocaleAware(true);
+	ui->shortcutsTreeView->setModel(filterModel);
+	ui->shortcutsTreeView->header()->setMovable(false);
+	ui->shortcutsTreeView->sortByColumn(0, Qt::AscendingOrder);
 	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeView->selectionModel(),
@@ -259,6 +302,9 @@ void ShortcutsDialog::createDialogContent()
 	        SIGNAL(activated(QModelIndex)),
 	        this,
 	        SLOT(switchToEditors(QModelIndex)));
+	connect(ui->lineEditSearch, SIGNAL(textChanged(QString)),
+	        filterModel, SLOT(setFilterFixedString(QString)));
+	
 	// apply button logic
 	connect(ui->applyButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
 	// restore defaults button logic
@@ -271,6 +317,16 @@ void ShortcutsDialog::createDialogContent()
 	connect(ui->altShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
 	// handle outer shortcuts changes
 	connect(shortcutMgr, SIGNAL(shortcutChanged(StelShortcut*)), this, SLOT(updateShortcutsItem(StelShortcut*)));
+	
+	QString backspaceChar;
+	backspaceChar.append(QChar(0x232B)); // Erase left
+	//test.append(QChar(0x2672));
+	//test.append(QChar(0x267B));
+	//test.append(QChar(0x267C));
+	//test.append(QChar(0x21BA)); // Counter-clockwise
+	//test.append(QChar(0x2221)); // Angle sign
+	ui->primaryBackspaceButton->setText(backspaceChar);
+	ui->altBackspaceButton->setText(backspaceChar);
 
 	updateTreeData();
 }
@@ -289,7 +345,8 @@ void ShortcutsDialog::polish()
 
 QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
 {
-	QStandardItem* groupItem = findItemByData(QVariant(group->getId()),
+	QString groupId = group->getId();
+	QStandardItem* groupItem = findItemByData(QVariant(groupId),
 	                                          Qt::UserRole);
 	bool isNew = false;
 	if (!groupItem)
@@ -300,11 +357,13 @@ QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
 	}
 	// group items aren't selectable, so reset default flag
 	groupItem->setFlags(Qt::ItemIsEnabled);
+	
 	// setup displayed text
-	QString text(q_(group->getText().isEmpty() ? group->getId() : group->getText()));
+	QString groupText = group->getText();
+	QString text(q_(groupText.isEmpty() ? groupId : groupText));
 	groupItem->setText(text);
 	// store id
-	groupItem->setData(group->getId(), Qt::UserRole);
+	groupItem->setData(groupId, Qt::UserRole);
 	groupItem->setColumnCount(3);
 	// setup bold font for group lines
 	QFont rootFont = groupItem->font();
@@ -316,7 +375,7 @@ QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
 	
 	// expand only enabled group
 	bool enabled = group->isEnabled();
-	QModelIndex index = groupItem->index();
+	QModelIndex index = filterModel->mapFromSource(groupItem->index());
 	if (enabled)
 		ui->shortcutsTreeView->expand(index);
 	else
@@ -381,8 +440,8 @@ void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut,
 		shortcutItem->setData(shortcutId, Qt::UserRole);
 		QStandardItem* primaryItem = new QStandardItem();
 		QStandardItem* secondaryItem = new QStandardItem();
-		primaryItem->setFlags(Qt::ItemIsEnabled);
-		secondaryItem->setFlags(Qt::ItemIsEnabled);
+		primaryItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+		secondaryItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 		groupItem->setChild(shortcutItem->row(), 1, primaryItem);
 		groupItem->setChild(shortcutItem->row(), 2, secondaryItem);
 	}
@@ -429,14 +488,13 @@ bool ShortcutsDialog::itemIsEditable(QStandardItem *item)
 
 void ShortcutsDialog::resetModel()
 {
-	mainModel->blockSignals(true);
 	mainModel->clear();
 	setModelHeader();
-	mainModel->blockSignals(false);
 }
 
 void ShortcutsDialog::setModelHeader()
 {
+	// Warning! The latter two strings are reused elsewhere in the GUI.
 	QStringList headerLabels;
 	headerLabels << q_("Action")
 	             << q_("Primary shortcut")
