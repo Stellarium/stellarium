@@ -161,7 +161,9 @@ class Translations
 		N_("Tupi-Guarani");
 		N_("Western");
 
-		// Landscapes names
+		
+		// =====================================================================
+		// Landscape names
 		// TRANSLATORS: Name of landscape
 		N_("Guereins");
 		// TRANSLATORS: Name of landscape
@@ -179,7 +181,9 @@ class Translations
 		// TRANSLATORS: Name of landscape and planet
 		N_("Saturn");
 
-		// Scripts names
+		
+		// =====================================================================
+		// Script names
 		// TRANSLATORS: Name of script
 		N_("Landscape Tour");
 		// TRANSLATORS: Name of script
@@ -219,7 +223,11 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Analemma");
 
-		// Scripts description
+		
+		// =====================================================================
+		// Script descriptions
+		
+		// TRANSLATORS: Description of the landscape tour script.
 		N_("Look around each installed landscape.");
 		N_("Script to demonstrate a partial lunar eclipse.");
 		N_("Script to demonstrate a total lunar eclipse.");
@@ -230,17 +238,19 @@ class Translations
 		N_("Due to the quirks in Mercury's orbit and rotation at certain spots the sun will rise & set 3 different times in one Mercury day.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Scorpio and Sagittarius on April 26, 2017.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Taurus and Gemini on July 23, 2031.");
-		N_("Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068.");
-		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But Occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
-		N_("Phobos races ahead of Mars and eclipses the sun, passes thru it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.");
+		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
+		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
+		N_("Phobos races ahead of Mars and eclipses the sun, passes through it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.");
 		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
-		N_("A tour via western constellations.");
-		N_("Look at Sun from big planets of Solar system and Pluto.");
-		N_("Earth best views from other Solar system bodies in the 21st Century.");
-		N_("Transit of Venus as seen from Sydney Australia 6th June 2012.");
-		N_("This script shows the analemma - the path of the Sun across the sky during the year.");
-		N_("Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos need enable plugin for supernovae.");
+		N_("A tour of the western constellations.");
+		N_("Look at the Sun from big planets of Solar System and Pluto.");
+		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
+		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
+		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
+		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
 
+		
+		// =====================================================================
 		// List of countries
 		N_("Andorra");
 		N_("United Arab Emirates");
@@ -484,7 +494,11 @@ class Translations
 		N_("Zambia");
 		N_("Zimbabwe");
 
-		// shortcuts descriptions
+		
+		// =====================================================================
+		// Keyboard action descriptions
+		
+		// TRANSLATORS: Keyboard action group name, also used elsewhere.
 		N_("Date and Time");
 		N_("Add 1 sidereal day");
 		N_("Add 1 sidereal month");
@@ -525,6 +539,8 @@ class Translations
 		N_("Subtract 1 mean tropical month");
 		N_("Subtract 1 draconic year");
 		N_("Subtract 1 mean tropical year");
+		
+		// TRANSLATORS: Keyboard action group name
 		N_("Display Options");
 		N_("Flip scene horizontally");
 		N_("Full-screen mode");
@@ -555,6 +571,8 @@ class Translations
 		N_("Stars");
 		N_("Stars labels");
 		N_("Flip scene vertically");
+		
+		// TRANSLATORS: Keyboard action group name
 		N_("Miscellaneous");
 		N_("Auto hide horizontal button bar");
 		N_("Auto hide vertical button bar");
@@ -564,44 +582,60 @@ class Translations
 		N_("Save screenshot");
 		N_("Switch between equatorial and azimuthal mount");
 		N_("Toggle visibility of GUI");
+		
+		// TRANSLATORS: Keyboard action group name
 		N_("Movement and Selection");
 		N_("Center on selected object");
 		N_("Set home planet to selected planet");
 		N_("Track object");
 		N_("Zoom in on selected object");
 		N_("Zoom out");
-		N_("Angle Measure Plugin");
+		
+		// Angle Measure Plugin
 		N_("Angle measure");
-		N_("Compass Marks Plugin");
+		
+		// Compass Marks Plugin
 		N_("Compass marks");
-		N_("Exoplanets Plugin");
+		
+		// Exoplanets Plugin
 		N_("Show exoplanets");
 		N_("Exoplanets configuration window");
-		N_("Observability analysis Plugin");
+		
+		// Observability Analysis Plugin
 		N_("Observability");
 		N_("Observability configuration window");
-		N_("Oculars Plugin");
+		
+		// Oculars Plugin
 		N_("Oculars plugin configuration");
 		N_("Ocular view");
 		N_("Show crosshairs");
 		N_("Oculars popup menu");
 		N_("Image sensor frame");
 		N_("Telrad sight");
-		N_("Pulsars Plugin");
+		
+		// Pulsars Plugin
 		N_("Pulsars configuration window");
-		N_("Quasars Plugin");
+		
+		// Quasars Plugin
 		N_("Quasars configuration window");
-		N_("Satellites Plugin");
+		
+		// Satellites Plugin
 		N_("Satellites configuration window");
 		N_("Satellite hints");
 		N_("Satellite labels");
-		N_("Historical Supernovae Plugin");
+		
+		// Historical Supernovae Plugin
 		N_("Historical Supernovae configuration window");
-		N_("Telescope Control Plugin");
+		
+		// Telescope Control Plugin
 		N_("Move a telescope to a given set of coordinates");
+		
+		// TRANSLATORS: Keyboard action group name
 		N_("Scripts");
 		N_("Run landscapes script from file");
 		N_("Show and zoom Moon");
+		
+		// TRANSLATORS: Keyboard action group name
 		N_("Windows");
 		N_("Configuration window");
 		N_("Date/time window");
