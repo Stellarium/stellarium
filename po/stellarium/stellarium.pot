@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-12 14:43+0700\n"
+"POT-Creation-Date: 2012-11-12 15:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -785,15 +785,15 @@ msgstr ""
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:441
+#: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:442
+#: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:443
+#: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
 msgstr ""
 
@@ -3804,23 +3804,15 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:202
+#: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:204
-msgid "Edit Primary Shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:205
-msgid "Edit Alternative Shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:208
+#: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:209
+#: src/ui_shortcutsDialog.h:201
 msgid "Apply"
 msgstr ""
 

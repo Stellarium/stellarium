@@ -22,8 +22,10 @@
 
 #include <QKeySequence>
 #include <QModelIndex>
+#include <QSortFilterProxyModel>
 
 #include "StelDialog.hpp"
+
 
 class Ui_shortcutsDialogForm;
 class ShortcutLineEdit;
@@ -31,9 +33,25 @@ class StelShortcut;
 class StelShortcutGroup;
 class StelShortcutMgr;
 
-class QSortFilterProxyModel;
 class QStandardItemModel;
 class QStandardItem;
+
+
+//! Custom filter class for filtering tree sub-items.
+//! (The standard QSortFilterProxyModel shows child items only if the
+//! parent item matches the filter.)
+class ShortcutsFilterModel : public QSortFilterProxyModel
+{
+	Q_OBJECT
+	
+public:
+	ShortcutsFilterModel(QObject* parent = 0);
+	
+protected:
+	bool filterAcceptsRow(int source_row,
+	                      const QModelIndex &source_parent) const;
+};
+
 
 class ShortcutsDialog : public StelDialog
 {
@@ -98,7 +116,7 @@ private:
 	QList<QStandardItem*> collisionItems;
 
 	Ui_shortcutsDialogForm *ui;
-	QSortFilterProxyModel* filterModel;
+	ShortcutsFilterModel* filterModel;
 	QStandardItemModel* mainModel;
 	//! Initialize or reset the main model.
 	void resetModel();
