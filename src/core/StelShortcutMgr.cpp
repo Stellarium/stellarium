@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2012 Anton Samoylov
+ * Copyright (C) 2012 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -238,7 +239,7 @@ bool StelShortcutMgr::copyDefaultFile()
 	return true;
 }
 
-bool StelShortcutMgr::loadShortcuts(const QString &filePath)
+bool StelShortcutMgr::loadShortcuts(const QString& filePath, bool overload)
 {
 	QVariantMap groups;
 	try
@@ -274,16 +275,14 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 		for (QVariantMap::const_iterator action = actions.begin(); action != actions.end(); ++action)
 		{
 			QString actionId = action.key();
-			// if action exist, don't touch it
-			if (getAction(groupId, actionId))
+			// Skip exisiting actions if overloading is disabled
+			if (!overload && getAction(groupId, actionId))
 			{
 				continue;
 			}
-			QVariantMap actionMap = action.value().toMap();
-			// parsing action (shortcut) properties
-			QString text = actionMap.value("text").toString();
 			
-			// get primary and alternative keys of shortcut
+			QVariantMap actionMap = action.value().toMap();
+			QString text = actionMap.value("text").toString();
 			QString primaryKey = actionMap["primaryKey"].toString();
 			QString altKey = actionMap["altKey"].toString();
 			
@@ -360,8 +359,10 @@ void StelShortcutMgr::restoreDefaultShortcuts()
 		           << ") doesn't exist, restore defaults failed.";
 		return;
 	}
-
-	loadShortcuts(defaultPath);
+	
+	// Reload default shortcuts
+	loadShortcuts(defaultPath, true);
+	
 	// save shortcuts to actual file
 	saveShortcuts();
 }
