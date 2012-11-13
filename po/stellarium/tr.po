@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 20:34+0700\n"
+"POT-Creation-Date: 2012-11-12 16:17+0200\n"
 "PO-Revision-Date: 2012-10-24 04:49+0000\n"
 "Last-Translator: Hüsamettin Ertürk <hsmertk@gmail.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-04 04:52+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-13 05:03+0000\n"
+"X-Generator: Launchpad (build 16251)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -665,11 +665,12 @@ msgstr "Grafik/ diger tasarimci: %1"
 msgid "OSX Developer: %1"
 msgstr "OSX gelistirici: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:609
+#: src/gui/StelGui.cpp:178 src/translations.h:644
 msgid "Script console window"
 msgstr "Yazılım destek penceresi"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:604
+#. TRANSLATORS: Keyboard action group name
+#: src/gui/StelGui.cpp:178 src/translations.h:639
 msgid "Windows"
 msgstr "Windows"
 
@@ -827,15 +828,15 @@ msgstr "Strasbourg Üniversitesi (Fransa)"
 msgid "Harvard University (USA)"
 msgstr "Harvard Üniversitesi (ABD)"
 
-#: src/gui/ShortcutsDialog.cpp:546
+#: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:547
+#: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:548
+#: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
 msgstr ""
 
@@ -861,12 +862,12 @@ msgid "Earth"
 msgstr "Dünya"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:170
+#: src/translations.h:37 src/translations.h:172
 msgid "Moon"
 msgstr "Ay"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:178
+#: src/translations.h:38 src/translations.h:180
 msgid "Mars"
 msgstr "Mars"
 
@@ -964,7 +965,7 @@ msgid "Metis"
 msgstr "Metis"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:180
+#: src/translations.h:62 src/translations.h:182
 msgid "Saturn"
 msgstr "Satürn"
 
@@ -1273,1704 +1274,1671 @@ msgid "Western"
 msgstr "Batı"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:166
+#: src/translations.h:168
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:168
+#: src/translations.h:170
 msgid "Trees"
 msgstr "Ağaçlar"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:172
+#: src/translations.h:174
 msgid "Hurricane"
 msgstr "Kasırga"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:174
+#: src/translations.h:176
 msgid "Ocean"
 msgstr "Okyanus"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:176
+#: src/translations.h:178
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Landscape Tour"
 msgstr "Manzara Turu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Partial Lunar Eclipse"
 msgstr "Parçalı Ay Tutulması"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Total Lunar Eclipse"
 msgstr "Tam Ay Tutulması"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Screensaver"
 msgstr "Ekran Koruyucu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Solar Eclipse 2009"
 msgstr "2009 Güneş Tutulması"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Startup Script"
 msgstr "Başlangıç Komutu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Zodiac"
 msgstr "Zodiac"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:206
+#: src/translations.h:210
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "A Quintuple eclipse from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:210
+#: src/translations.h:214
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:212
+#: src/translations.h:216
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:216
+#: src/translations.h:220
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:218
+#: src/translations.h:222
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Analemma"
 msgstr ""
 
-#: src/translations.h:223
+#. TRANSLATORS: Description of the landscape tour script.
+#: src/translations.h:231
 msgid "Look around each installed landscape."
 msgstr ""
 
-#: src/translations.h:224
+#: src/translations.h:232
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Kısmi ay tutulmasını görüntülemek için gerekli komut."
 
-#: src/translations.h:225
+#: src/translations.h:233
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Tam ay tutulmasını göstermek için gerekli komut."
 
-#: src/translations.h:226
+#: src/translations.h:234
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Rastgele nesnelere bakarak gökyüzünde yavaş,bitmeyen bir tur"
 
-#: src/translations.h:227
+#: src/translations.h:235
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:228
+#: src/translations.h:236
 msgid "Script which runs automatically at startup"
 msgstr "Başlangıçta otomatik olarak çalışan komutlar"
 
-#: src/translations.h:229
+#: src/translations.h:237
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:230
+#: src/translations.h:238
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:231
+#: src/translations.h:239
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:232
+#: src/translations.h:240
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:233
-msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
+#: src/translations.h:241
+msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:234
+#: src/translations.h:242
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
-"Occultations of both on the same day are very rare. Here's one that takes "
+"occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:234
+#: src/translations.h:243
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes thru it and then "
+"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
 "retrogrades back towards the sun and just partially eclipses it (only seen "
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
 
-#: src/translations.h:235
+#: src/translations.h:244
 msgid ""
 "Screensaver of various happenings in the Solar System. 171 events in all!"
 msgstr ""
 
-#: src/translations.h:236
-msgid "A tour via western constellations."
+#: src/translations.h:245
+msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:237
-msgid "Look at Sun from big planets of Solar system and Pluto."
+#: src/translations.h:246
+msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:238
-msgid "Earth best views from other Solar system bodies in the 21st Century."
-msgstr ""
-
-#: src/translations.h:239
-msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
-msgstr ""
-
-#: src/translations.h:240
+#: src/translations.h:247
 msgid ""
-"This script shows the analemma - the path of the Sun across the sky during "
+"Best views of Earth from other Solar System bodies in the 21st Century."
+msgstr ""
+
+#: src/translations.h:248
+msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
+msgstr ""
+
+#: src/translations.h:249
+msgid ""
+"A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 
-#: src/translations.h:241
+#: src/translations.h:250
 msgid ""
-"Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
-"need enable plugin for supernovae."
+"Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
+"plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:244
+#: src/translations.h:255
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:245
+#: src/translations.h:256
 msgid "United Arab Emirates"
 msgstr "Birleşik Arap Emirlikleri"
 
-#: src/translations.h:246
+#: src/translations.h:257
 msgid "Afghanistan"
 msgstr "Afganistan"
 
-#: src/translations.h:247
+#: src/translations.h:258
 msgid "Antigua and Barbuda"
 msgstr "Antiga ve Barbuda"
 
-#: src/translations.h:248
+#: src/translations.h:259
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:249
+#: src/translations.h:260
 msgid "Albania"
 msgstr "Arnavutluk"
 
-#: src/translations.h:250
+#: src/translations.h:261
 msgid "Armenia"
 msgstr "Ermenistan"
 
-#: src/translations.h:251
+#: src/translations.h:262
 msgid "Netherlands Antilles"
 msgstr "Hollanda Antilleri"
 
-#: src/translations.h:252
+#: src/translations.h:263
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:253
+#: src/translations.h:264
 msgid "Antarctica"
 msgstr "Antarktika"
 
-#: src/translations.h:254
+#: src/translations.h:265
 msgid "Argentina"
 msgstr "Arjantin"
 
-#: src/translations.h:255
+#: src/translations.h:266
 msgid "American Samoa"
 msgstr "Amerikan Samoası"
 
-#: src/translations.h:256
+#: src/translations.h:267
 msgid "Austria"
 msgstr "Avusturya"
 
-#: src/translations.h:257
+#: src/translations.h:268
 msgid "Australia"
 msgstr "Avustralya"
 
-#: src/translations.h:258
+#: src/translations.h:269
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:259
+#: src/translations.h:270
 msgid "Azerbaijan"
 msgstr "Azerbaycan"
 
-#: src/translations.h:260
+#: src/translations.h:271
 msgid "Bosnia and Herzegowina"
 msgstr "Bosna Hersek"
 
-#: src/translations.h:261
+#: src/translations.h:272
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:262
+#: src/translations.h:273
 msgid "Bangladesh"
 msgstr "Bangladeş"
 
-#: src/translations.h:263
+#: src/translations.h:274
 msgid "Belgium"
 msgstr "Belçika"
 
-#: src/translations.h:264
+#: src/translations.h:275
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:265
+#: src/translations.h:276
 msgid "Bulgaria"
 msgstr "Bulgaristan"
 
-#: src/translations.h:266
+#: src/translations.h:277
 msgid "Bahrain"
 msgstr "Bahreyn"
 
-#: src/translations.h:267
+#: src/translations.h:278
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:268
+#: src/translations.h:279
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:269
+#: src/translations.h:280
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: src/translations.h:270
+#: src/translations.h:281
 msgid "Brunei Darussalam"
 msgstr "Brunei Sultanlığı"
 
-#: src/translations.h:271
+#: src/translations.h:282
 msgid "Bolivia"
 msgstr "Bolivya"
 
-#: src/translations.h:272
+#: src/translations.h:283
 msgid "Brazil"
 msgstr "Brezilya"
 
-#: src/translations.h:273
+#: src/translations.h:284
 msgid "Bahamas"
 msgstr "Bahamalar"
 
-#: src/translations.h:274
+#: src/translations.h:285
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: src/translations.h:275
+#: src/translations.h:286
 msgid "Bouvet Island"
 msgstr "Bouvet Adası"
 
-#: src/translations.h:276
+#: src/translations.h:287
 msgid "Botswana"
 msgstr "Botsvana"
 
-#: src/translations.h:277
+#: src/translations.h:288
 msgid "Belarus"
 msgstr "Belarus"
 
-#: src/translations.h:278
+#: src/translations.h:289
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:279
+#: src/translations.h:290
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:280
+#: src/translations.h:291
 msgid "Cocos Islands"
 msgstr "Cocos Adaları"
 
-#: src/translations.h:281
+#: src/translations.h:292
 msgid "Democratic Republic of the Congo"
 msgstr "Demokratik Kongo Cumhuriyeti"
 
-#: src/translations.h:282
+#: src/translations.h:293
 msgid "Central African Republic"
 msgstr "Orta Afrika Cumhuriyeti"
 
-#: src/translations.h:283
+#: src/translations.h:294
 msgid "Republic of the Congo"
 msgstr "Kongo Cumhuriyeti"
 
-#: src/translations.h:284
+#: src/translations.h:295
 msgid "Switzerland"
 msgstr "İsviçre"
 
-#: src/translations.h:285
+#: src/translations.h:296
 msgid "Cote d'Ivoire"
 msgstr "Fildişi Sahili"
 
-#: src/translations.h:286
+#: src/translations.h:297
 msgid "Cook Islands"
 msgstr "Cook Adaları"
 
-#: src/translations.h:287
+#: src/translations.h:298
 msgid "Chile"
 msgstr "Şili"
 
-#: src/translations.h:288
+#: src/translations.h:299
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: src/translations.h:289
+#: src/translations.h:300
 msgid "China"
 msgstr "Çin"
 
-#: src/translations.h:290
+#: src/translations.h:301
 msgid "Colombia"
 msgstr "Kolombiya"
 
-#: src/translations.h:291
+#: src/translations.h:302
 msgid "Costa Rica"
 msgstr "Kosta Rika"
 
-#: src/translations.h:292
+#: src/translations.h:303
 msgid "Serbia and Montenegro"
 msgstr "Sırbistan-Karadağ"
 
-#: src/translations.h:293
+#: src/translations.h:304
 msgid "Cuba"
 msgstr "Küba"
 
-#: src/translations.h:294
+#: src/translations.h:305
 msgid "Cape Verde"
 msgstr "Yeşil Burun"
 
-#: src/translations.h:295
+#: src/translations.h:306
 msgid "Christmas Island"
 msgstr "Christmas Adası"
 
-#: src/translations.h:296
+#: src/translations.h:307
 msgid "Cyprus"
 msgstr "Kıbrıs"
 
-#: src/translations.h:297
+#: src/translations.h:308
 msgid "Czech Republic"
 msgstr "Çek Cumhuriyeti"
 
-#: src/translations.h:298
+#: src/translations.h:309
 msgid "Germany"
 msgstr "Almanya"
 
-#: src/translations.h:299
+#: src/translations.h:310
 msgid "Djibouti"
 msgstr "Cibuti"
 
-#: src/translations.h:300
+#: src/translations.h:311
 msgid "Denmark"
 msgstr "Danimarka"
 
-#: src/translations.h:301
+#: src/translations.h:312
 msgid "Dominica"
 msgstr "Dominika"
 
-#: src/translations.h:302
+#: src/translations.h:313
 msgid "Dominican Republic"
 msgstr "Dominik Cumhuriyeti"
 
-#: src/translations.h:303
+#: src/translations.h:314
 msgid "Algeria"
 msgstr "Cezayir"
 
-#: src/translations.h:304
+#: src/translations.h:315
 msgid "Ecuador"
 msgstr "Ekvador"
 
-#: src/translations.h:305
+#: src/translations.h:316
 msgid "Estonia"
 msgstr "Estonya"
 
-#: src/translations.h:306
+#: src/translations.h:317
 msgid "Egypt"
 msgstr "Mısır"
 
-#: src/translations.h:307
+#: src/translations.h:318
 msgid "Western Sahara"
 msgstr "Batı Sahra"
 
-#: src/translations.h:308
+#: src/translations.h:319
 msgid "Eritrea"
 msgstr "Eritre"
 
-#: src/translations.h:309
+#: src/translations.h:320
 msgid "Spain"
 msgstr "İspanya"
 
-#: src/translations.h:310
+#: src/translations.h:321
 msgid "Ethiopia"
 msgstr "Etiyopya"
 
-#: src/translations.h:311
+#: src/translations.h:322
 msgid "Finland"
 msgstr "Finlandiya"
 
-#: src/translations.h:312
+#: src/translations.h:323
 msgid "Fiji"
 msgstr "Fiji"
 
-#: src/translations.h:313
+#: src/translations.h:324
 msgid "Falkland Islands"
 msgstr "Falkland Adaları"
 
-#: src/translations.h:314
+#: src/translations.h:325
 msgid "Micronesia"
 msgstr "Mikronezya"
 
-#: src/translations.h:315
+#: src/translations.h:326
 msgid "Faroe Islands"
 msgstr "Faroe Adaları"
 
-#: src/translations.h:316
+#: src/translations.h:327
 msgid "France"
 msgstr "Fransa"
 
-#: src/translations.h:317
+#: src/translations.h:328
 msgid "Gabon"
 msgstr "Gabon"
 
-#: src/translations.h:318
+#: src/translations.h:329
 msgid "United Kingdom"
 msgstr "Birleşik Krallık"
 
-#: src/translations.h:319
+#: src/translations.h:330
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:320
+#: src/translations.h:331
 msgid "Georgia"
 msgstr "Gürcistan"
 
-#: src/translations.h:321
+#: src/translations.h:332
 msgid "French Guiana"
 msgstr "Fransız Guyanası"
 
-#: src/translations.h:322
+#: src/translations.h:333
 msgid "Ghana"
 msgstr "Gana"
 
-#: src/translations.h:323
+#: src/translations.h:334
 msgid "Gibraltar"
 msgstr "Cebelitarık"
 
-#: src/translations.h:324
+#: src/translations.h:335
 msgid "Greenland"
 msgstr "Grönland"
 
-#: src/translations.h:325
+#: src/translations.h:336
 msgid "Gambia"
 msgstr "Gambiya"
 
-#: src/translations.h:326
+#: src/translations.h:337
 msgid "Guinea"
 msgstr "Gine"
 
-#: src/translations.h:327
+#: src/translations.h:338
 msgid "Guadeloupe"
 msgstr "Guadalup"
 
-#: src/translations.h:328
+#: src/translations.h:339
 msgid "Equatorial Guinea"
 msgstr "Ekvator Ginesi"
 
-#: src/translations.h:329
+#: src/translations.h:340
 msgid "Greece"
 msgstr "Yunanistan"
 
-#: src/translations.h:330
+#: src/translations.h:341
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Güney Georgia ve Güney Sandwich Adaları"
 
-#: src/translations.h:331
+#: src/translations.h:342
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:332
+#: src/translations.h:343
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:333
+#: src/translations.h:344
 msgid "Guinea-Bissau"
 msgstr "Gine-Bissau"
 
-#: src/translations.h:334
+#: src/translations.h:345
 msgid "Guyana"
 msgstr "Guyana"
 
-#: src/translations.h:335
+#: src/translations.h:346
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: src/translations.h:336
+#: src/translations.h:347
 msgid "Heard Island and McDonald Islands"
 msgstr "Heard Adası ve McDonald Adaları"
 
-#: src/translations.h:337
+#: src/translations.h:348
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:338
+#: src/translations.h:349
 msgid "Croatia"
 msgstr "Hırvatistan"
 
-#: src/translations.h:339
+#: src/translations.h:350
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:340
+#: src/translations.h:351
 msgid "Hungary"
 msgstr "Macaristan"
 
-#: src/translations.h:341
+#: src/translations.h:352
 msgid "Indonesia"
 msgstr "Endonezya"
 
-#: src/translations.h:342
+#: src/translations.h:353
 msgid "Ireland"
 msgstr "İrlanda"
 
-#: src/translations.h:343
+#: src/translations.h:354
 msgid "Israel"
 msgstr "İsrail"
 
-#: src/translations.h:344
+#: src/translations.h:355
 msgid "India"
 msgstr "Hindistan"
 
-#: src/translations.h:345
+#: src/translations.h:356
 msgid "British Indian Ocean Territory"
 msgstr "Britanya Hint Okyanusu Toprakları"
 
-#: src/translations.h:346
+#: src/translations.h:357
 msgid "Iraq"
 msgstr "Irak"
 
-#: src/translations.h:347
+#: src/translations.h:358
 msgid "Iran"
 msgstr "İran"
 
-#: src/translations.h:348
+#: src/translations.h:359
 msgid "Iceland"
 msgstr "İzlanda"
 
-#: src/translations.h:349
+#: src/translations.h:360
 msgid "Italy"
 msgstr "İtalya"
 
-#: src/translations.h:350
+#: src/translations.h:361
 msgid "Jamaica"
 msgstr "Jamaika"
 
-#: src/translations.h:351
+#: src/translations.h:362
 msgid "Jordan"
 msgstr "Ürdün"
 
-#: src/translations.h:352
+#: src/translations.h:363
 msgid "Japan"
 msgstr "Japonya"
 
-#: src/translations.h:353
+#: src/translations.h:364
 msgid "Kenya"
 msgstr "Kenya"
 
-#: src/translations.h:354
+#: src/translations.h:365
 msgid "Kyrgyzstan"
 msgstr "Kırgızistan"
 
-#: src/translations.h:355
+#: src/translations.h:366
 msgid "Cambodia"
 msgstr "Kamboçya"
 
-#: src/translations.h:356
+#: src/translations.h:367
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:357
+#: src/translations.h:368
 msgid "Comoros"
 msgstr "Komorlar"
 
-#: src/translations.h:358
+#: src/translations.h:369
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts ve Nevis"
 
-#: src/translations.h:359
+#: src/translations.h:370
 msgid "Democratic People's Republic of Korea"
 msgstr "Kore Demokratik Halk Cumhuriyeti"
 
-#: src/translations.h:360
+#: src/translations.h:371
 msgid "Republic of Korea"
 msgstr "Kore Cumhuriyeti"
 
-#: src/translations.h:361
+#: src/translations.h:372
 msgid "Kuwait"
 msgstr "Kuveyt"
 
-#: src/translations.h:362
+#: src/translations.h:373
 msgid "Cayman Islands"
 msgstr "Cayman Adaları"
 
-#: src/translations.h:363
+#: src/translations.h:374
 msgid "Kazakhstan"
 msgstr "Kazakistan"
 
-#: src/translations.h:364
+#: src/translations.h:375
 msgid "Lao"
 msgstr "Lao"
 
-#: src/translations.h:365
+#: src/translations.h:376
 msgid "Lebanon"
 msgstr "Lübnan"
 
-#: src/translations.h:366
+#: src/translations.h:377
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
 
-#: src/translations.h:367
+#: src/translations.h:378
 msgid "Liechtenstein"
 msgstr "Lihtenştayn"
 
-#: src/translations.h:368
+#: src/translations.h:379
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: src/translations.h:369
+#: src/translations.h:380
 msgid "Liberia"
 msgstr "Liberya"
 
-#: src/translations.h:370
+#: src/translations.h:381
 msgid "Lesotho"
 msgstr "Lesoto"
 
-#: src/translations.h:371
+#: src/translations.h:382
 msgid "Lithuania"
 msgstr "Litvanya"
 
-#: src/translations.h:372
+#: src/translations.h:383
 msgid "Luxembourg"
 msgstr "Lüksemburg"
 
-#: src/translations.h:373
+#: src/translations.h:384
 msgid "Latvia"
 msgstr "Letonya"
 
-#: src/translations.h:374
+#: src/translations.h:385
 msgid "Libyan Arab Jamahiriya"
 msgstr "Libya Arap Cemahiriyesi"
 
-#: src/translations.h:375
+#: src/translations.h:386
 msgid "Morocco"
 msgstr "Fas"
 
-#: src/translations.h:376
+#: src/translations.h:387
 msgid "Monaco"
 msgstr "Monako"
 
-#: src/translations.h:377
+#: src/translations.h:388
 msgid "Moldova"
 msgstr "Moldovya"
 
-#: src/translations.h:378
+#: src/translations.h:389
 msgid "Madagascar"
 msgstr "Madagaskar"
 
-#: src/translations.h:379
+#: src/translations.h:390
 msgid "Marshall Islands"
 msgstr "Marshall Adaları"
 
-#: src/translations.h:380
+#: src/translations.h:391
 msgid "Macedonia"
 msgstr "Makedonya"
 
-#: src/translations.h:381
+#: src/translations.h:392
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:382
+#: src/translations.h:393
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: src/translations.h:383
+#: src/translations.h:394
 msgid "Mongolia"
 msgstr "Moğolistan"
 
-#: src/translations.h:384
+#: src/translations.h:395
 msgid "Macau"
 msgstr "Makao"
 
-#: src/translations.h:385
+#: src/translations.h:396
 msgid "Northern Mariana Islands"
 msgstr "Kuzey Mariana Adaları"
 
-#: src/translations.h:386
+#: src/translations.h:397
 msgid "Martinique"
 msgstr "Martinik"
 
-#: src/translations.h:387
+#: src/translations.h:398
 msgid "Mauritania"
 msgstr "Moritanya"
 
-#: src/translations.h:388
+#: src/translations.h:399
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:389
+#: src/translations.h:400
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:390
+#: src/translations.h:401
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: src/translations.h:391
+#: src/translations.h:402
 msgid "Maldives"
 msgstr "Maldivler"
 
-#: src/translations.h:392
+#: src/translations.h:403
 msgid "Malawi"
 msgstr "Malavi"
 
-#: src/translations.h:393
+#: src/translations.h:404
 msgid "Mexico"
 msgstr "Meksika"
 
-#: src/translations.h:394
+#: src/translations.h:405
 msgid "Malaysia"
 msgstr "Malezya"
 
-#: src/translations.h:395
+#: src/translations.h:406
 msgid "Mozambique"
 msgstr "Mozambik"
 
-#: src/translations.h:396
+#: src/translations.h:407
 msgid "Namibia"
 msgstr "Namibya"
 
-#: src/translations.h:397
+#: src/translations.h:408
 msgid "New Caledonia"
 msgstr "Yeni Kaledonya"
 
-#: src/translations.h:398
+#: src/translations.h:409
 msgid "Niger"
 msgstr "Nijer"
 
-#: src/translations.h:399
+#: src/translations.h:410
 msgid "Norfolk Island"
 msgstr "Norfolk Adası"
 
-#: src/translations.h:400
+#: src/translations.h:411
 msgid "Nigeria"
 msgstr "Nijerya"
 
-#: src/translations.h:401
+#: src/translations.h:412
 msgid "Nicaragua"
 msgstr "Nikaragua"
 
-#: src/translations.h:402
+#: src/translations.h:413
 msgid "Netherlands"
 msgstr "Hollanda"
 
-#: src/translations.h:403
+#: src/translations.h:414
 msgid "Norway"
 msgstr "Norveç"
 
-#: src/translations.h:404
+#: src/translations.h:415
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:405
+#: src/translations.h:416
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:406
+#: src/translations.h:417
 msgid "Niue"
 msgstr "Niue"
 
-#: src/translations.h:407
+#: src/translations.h:418
 msgid "New Zealand"
 msgstr "Yeni Zelanda"
 
-#: src/translations.h:408
+#: src/translations.h:419
 msgid "Oman"
 msgstr "Umman"
 
-#: src/translations.h:409
+#: src/translations.h:420
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:410
+#: src/translations.h:421
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:411
+#: src/translations.h:422
 msgid "French Polynesia"
 msgstr "Fransız Polinezyası"
 
-#: src/translations.h:412
+#: src/translations.h:423
 msgid "Papua New Guinea"
 msgstr "Papua Yeni Gine"
 
-#: src/translations.h:413
+#: src/translations.h:424
 msgid "Philippines"
 msgstr "Filipinler"
 
-#: src/translations.h:414
+#: src/translations.h:425
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: src/translations.h:415
+#: src/translations.h:426
 msgid "Poland"
 msgstr "Polonya"
 
-#: src/translations.h:416
+#: src/translations.h:427
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre ve Miquelon"
 
-#: src/translations.h:417
+#: src/translations.h:428
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: src/translations.h:418
+#: src/translations.h:429
 msgid "Puerto Rico"
 msgstr "Porto Riko"
 
-#: src/translations.h:419
+#: src/translations.h:430
 msgid "Palestinian Territories"
 msgstr "Filistin Toprakları"
 
-#: src/translations.h:420
+#: src/translations.h:431
 msgid "Portugal"
 msgstr "Portekiz"
 
-#: src/translations.h:421
+#: src/translations.h:432
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:422
+#: src/translations.h:433
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:423
+#: src/translations.h:434
 msgid "Qatar"
 msgstr "Katar"
 
-#: src/translations.h:424
+#: src/translations.h:435
 msgid "Réunion"
 msgstr "Réunion"
 
-#: src/translations.h:425
+#: src/translations.h:436
 msgid "Romania"
 msgstr "Romanya"
 
-#: src/translations.h:426
+#: src/translations.h:437
 msgid "Serbia"
 msgstr "Sırbistan"
 
-#: src/translations.h:427
+#: src/translations.h:438
 msgid "Russian Federation"
 msgstr "Rusya Federasyonu"
 
-#: src/translations.h:428
+#: src/translations.h:439
 msgid "Rwanda"
 msgstr "Ruanda"
 
-#: src/translations.h:429
+#: src/translations.h:440
 msgid "Saudi Arabia"
 msgstr "Suudi Arabistan"
 
-#: src/translations.h:430
+#: src/translations.h:441
 msgid "Solomon Islands"
 msgstr "Solomon Adaları"
 
-#: src/translations.h:431
+#: src/translations.h:442
 msgid "Seychelles"
 msgstr "Seyşeller"
 
-#: src/translations.h:432
+#: src/translations.h:443
 msgid "Sudan"
 msgstr "Sudan"
 
-#: src/translations.h:433
+#: src/translations.h:444
 msgid "Sweden"
 msgstr "İsveç"
 
-#: src/translations.h:434
+#: src/translations.h:445
 msgid "Singapore"
 msgstr "Singapur"
 
-#: src/translations.h:435
+#: src/translations.h:446
 msgid "Saint Helena"
 msgstr "Saint Helena"
 
-#: src/translations.h:436
+#: src/translations.h:447
 msgid "Slovenia"
 msgstr "Slovenya"
 
-#: src/translations.h:437
+#: src/translations.h:448
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard ve Jan Mayen"
 
-#: src/translations.h:438
+#: src/translations.h:449
 msgid "Slovakia"
 msgstr "Slovakya"
 
-#: src/translations.h:439
+#: src/translations.h:450
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
-#: src/translations.h:440
+#: src/translations.h:451
 msgid "San Marino"
 msgstr "San Marino"
 
-#: src/translations.h:441
+#: src/translations.h:452
 msgid "Senegal"
 msgstr "Senegal"
 
-#: src/translations.h:442
+#: src/translations.h:453
 msgid "Somalia"
 msgstr "Somali"
 
-#: src/translations.h:443
+#: src/translations.h:454
 msgid "Suriname"
 msgstr "Surinam"
 
-#: src/translations.h:444
+#: src/translations.h:455
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome ve Principe"
 
-#: src/translations.h:445
+#: src/translations.h:456
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: src/translations.h:446
+#: src/translations.h:457
 msgid "Syrian Arab Republic"
 msgstr "Suriye Arap Cumhuriyeti"
 
-#: src/translations.h:447
+#: src/translations.h:458
 msgid "Swaziland"
 msgstr "Svaziland"
 
-#: src/translations.h:448
+#: src/translations.h:459
 msgid "Turks and Caicos Islands"
 msgstr "Turks and Caicos Adaları"
 
-#: src/translations.h:449
+#: src/translations.h:460
 msgid "Chad"
 msgstr "Çad"
 
-#: src/translations.h:450
+#: src/translations.h:461
 msgid "French Southern Territories"
 msgstr "Fransız Güney Toprakları"
 
-#: src/translations.h:451
+#: src/translations.h:462
 msgid "Togo"
 msgstr "Togo"
 
-#: src/translations.h:452
+#: src/translations.h:463
 msgid "Thailand"
 msgstr "Tayland"
 
-#: src/translations.h:453
+#: src/translations.h:464
 msgid "Tajikistan"
 msgstr "Tacikistan"
 
-#: src/translations.h:454
+#: src/translations.h:465
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:455
+#: src/translations.h:466
 msgid "East Timor"
 msgstr "Doğu Timor"
 
-#: src/translations.h:456
+#: src/translations.h:467
 msgid "Turkmenistan"
 msgstr "Türkmenistan"
 
-#: src/translations.h:457
+#: src/translations.h:468
 msgid "Tunisia"
 msgstr "Tunus"
 
-#: src/translations.h:458
+#: src/translations.h:469
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:459
+#: src/translations.h:470
 msgid "Turkey"
 msgstr "Türkiye"
 
-#: src/translations.h:460
+#: src/translations.h:471
 msgid "Trinidad and Tobago"
 msgstr "Trinidad ve Tobago"
 
-#: src/translations.h:461
+#: src/translations.h:472
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:462
+#: src/translations.h:473
 msgid "Taiwan"
 msgstr "Tayvan"
 
-#: src/translations.h:463
+#: src/translations.h:474
 msgid "Tanzania"
 msgstr "Tanzanya"
 
-#: src/translations.h:464
+#: src/translations.h:475
 msgid "Ukraine"
 msgstr "Ukrayna"
 
-#: src/translations.h:465
+#: src/translations.h:476
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:466
+#: src/translations.h:477
 msgid "United States Minor Outlying Islands"
 msgstr "Birleşik Devletler Küçük Dış Adalar"
 
-#: src/translations.h:467
+#: src/translations.h:478
 msgid "United States"
 msgstr "Birleşik Devletler"
 
-#: src/translations.h:468
+#: src/translations.h:479
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:469
+#: src/translations.h:480
 msgid "Uzbekistan"
 msgstr "Özbekistan"
 
-#: src/translations.h:470
+#: src/translations.h:481
 msgid "Vatican City State"
 msgstr "Vatikan Şehir Devleti"
 
-#: src/translations.h:471
+#: src/translations.h:482
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent ve Grenadinler"
 
-#: src/translations.h:472
+#: src/translations.h:483
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:473
+#: src/translations.h:484
 msgid "British Virgin Islands"
 msgstr "Britanya Virgin Adaları"
 
-#: src/translations.h:474
+#: src/translations.h:485
 msgid "United States Virgin Islands"
 msgstr "Birleşik Devletler Virgin Adaları"
 
-#: src/translations.h:475
+#: src/translations.h:486
 msgid "Viet Nam"
 msgstr "Vietnam"
 
-#: src/translations.h:476
+#: src/translations.h:487
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:477
+#: src/translations.h:488
 msgid "Wallis and Futuna"
 msgstr "Wallis ve Futuna"
 
-#: src/translations.h:478
+#: src/translations.h:489
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:479
+#: src/translations.h:490
 msgid "Yemen"
 msgstr "Yemen"
 
-#: src/translations.h:480
+#: src/translations.h:491
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: src/translations.h:481
+#: src/translations.h:492
 msgid "Yugoslavia"
 msgstr "Yugoslavya"
 
-#: src/translations.h:482
+#: src/translations.h:493
 msgid "South Africa"
 msgstr "Güney Afrika"
 
-#: src/translations.h:483
+#: src/translations.h:494
 msgid "Zambia"
 msgstr "Zambiya"
 
-#: src/translations.h:484
+#: src/translations.h:495
 msgid "Zimbabwe"
 msgstr "Zimbabve"
 
-#: src/translations.h:487 src/ui_dateTimeDialogGui.h:294
+#. TRANSLATORS: Keyboard action group name, also used elsewhere.
+#: src/translations.h:502 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:164
 msgid "Date and Time"
 msgstr "Tarih ve Zaman"
 
-#: src/translations.h:488
+#: src/translations.h:503
 msgid "Add 1 sidereal day"
 msgstr "1 yildiz gunu ekle"
 
-#: src/translations.h:489
+#: src/translations.h:504
 msgid "Add 1 sidereal month"
 msgstr "1 yıldız ayı ekle"
 
-#: src/translations.h:490
+#: src/translations.h:505
 msgid "Add 1 sidereal week"
 msgstr "1 yildiz haftasi ekle"
 
-#: src/translations.h:491
+#: src/translations.h:506
 msgid "Add 1 sidereal year"
 msgstr "Bir yıldız yılı ekle"
 
-#: src/translations.h:492
+#: src/translations.h:507
 msgid "Add 1 solar day"
 msgstr "1 gunes gunu ekle"
 
-#: src/translations.h:493
+#: src/translations.h:508
 msgid "Add 1 solar hour"
 msgstr "1 gunes saati ekle"
 
-#: src/translations.h:494
+#: src/translations.h:509
 msgid "Add 1 solar week"
 msgstr "1 gunes haftasi ekle"
 
-#: src/translations.h:495
+#: src/translations.h:510
 msgid "Add 1 synodic month"
 msgstr ""
 
-#: src/translations.h:496
+#: src/translations.h:511
 msgid "Add 1 draconic month"
 msgstr ""
 
-#: src/translations.h:497
+#: src/translations.h:512
 msgid "Add 1 anomalistic month"
 msgstr ""
 
-#: src/translations.h:498
+#: src/translations.h:513
 msgid "Add 1 mean tropical month"
 msgstr ""
 
-#: src/translations.h:499
+#: src/translations.h:514
 msgid "Add 1 draconic year"
 msgstr ""
 
-#: src/translations.h:500
+#: src/translations.h:515
 msgid "Add 1 mean tropical year"
 msgstr ""
 
-#: src/translations.h:501
+#: src/translations.h:516
 msgid "Slow down the script execution rate"
 msgstr "Yazılım çalıştırma hızını düşürünüz"
 
-#: src/translations.h:502
+#: src/translations.h:517
 msgid "Decrease time speed"
 msgstr "Zaman hizini dusur"
 
-#: src/translations.h:503
+#: src/translations.h:518
 msgid "Decrease time speed (a little)"
 msgstr "Zaman hızını (bir miktar) azaltınız."
 
-#: src/translations.h:504
+#: src/translations.h:519
 msgid "Speed up the script execution rate"
 msgstr "Yazılım çalıştırma hızını artırınız"
 
-#: src/translations.h:505
+#: src/translations.h:520
 msgid "Increase time speed"
 msgstr "Zaman hizini artir"
 
-#: src/translations.h:506
+#: src/translations.h:521
 msgid "Increase time speed (a little)"
 msgstr "Zaman hızını (bir miktar) artırınız."
 
-#: src/translations.h:507
+#: src/translations.h:522
 msgid "Pause script execution"
 msgstr "Betiğin yürütülmesini duraklat"
 
-#: src/translations.h:508
+#: src/translations.h:523
 msgid "Resume script execution"
 msgstr "Betiğin yürütülmesini devam ettir"
 
-#: src/translations.h:509
+#: src/translations.h:524
 msgid "Set time to now"
 msgstr "Zamani simdiye ayarla"
 
-#: src/translations.h:510
+#: src/translations.h:525
 msgid "Set the normal script execution rate"
 msgstr "Normal yazılım hızı ayarına geçiniz"
 
-#: src/translations.h:511
+#: src/translations.h:526
 msgid "Set normal time rate"
 msgstr "Normal zaman hizina ayarla"
 
-#: src/translations.h:512
+#: src/translations.h:527
 msgid "Set time rate to zero"
 msgstr "Saat oranını sıfıra ayarlayın."
 
-#: src/translations.h:513
+#: src/translations.h:528
 msgid "Stop script execution"
 msgstr "Betiği çalıştırmayı durdur"
 
-#: src/translations.h:514
+#: src/translations.h:529
 msgid "Subtract 1 sidereal day"
 msgstr "1 yildiz gunu cikar"
 
-#: src/translations.h:515
+#: src/translations.h:530
 msgid "Subtract 1 sidereal month"
 msgstr "1 yıldız ayı çıkar"
 
-#: src/translations.h:516
+#: src/translations.h:531
 msgid "Subtract 1 sidereal week"
 msgstr "1 yildiz haftasi cikar"
 
-#: src/translations.h:517
+#: src/translations.h:532
 msgid "Subtract 1 sidereal year"
 msgstr "Bir yıldız yılı çıkar"
 
-#: src/translations.h:518
+#: src/translations.h:533
 msgid "Subtract 1 solar day"
 msgstr "1 gunes gunu cikar"
 
-#: src/translations.h:519
+#: src/translations.h:534
 msgid "Subtract 1 solar hour"
 msgstr "1 gunes saati cikar"
 
-#: src/translations.h:520
+#: src/translations.h:535
 msgid "Subtract 1 solar week"
 msgstr "1 gunes haftasi cikar"
 
-#: src/translations.h:521
+#: src/translations.h:536
 msgid "Subtract 1 synodic month"
 msgstr ""
 
-#: src/translations.h:522
+#: src/translations.h:537
 msgid "Subtract 1 draconic month"
 msgstr ""
 
-#: src/translations.h:523
+#: src/translations.h:538
 msgid "Subtract 1 anomalistic month"
 msgstr ""
 
-#: src/translations.h:524
+#: src/translations.h:539
 msgid "Subtract 1 mean tropical month"
 msgstr ""
 
-#: src/translations.h:525
+#: src/translations.h:540
 msgid "Subtract 1 draconic year"
 msgstr ""
 
-#: src/translations.h:526
+#: src/translations.h:541
 msgid "Subtract 1 mean tropical year"
 msgstr ""
 
-#: src/translations.h:527
+#. TRANSLATORS: Keyboard action group name
+#: src/translations.h:544
 msgid "Display Options"
 msgstr "Görünüm Seçenekleri"
 
-#: src/translations.h:528
+#: src/translations.h:545
 msgid "Flip scene horizontally"
 msgstr "Görüntüyü yatay olarak çevir"
 
-#: src/translations.h:529
+#: src/translations.h:546
 msgid "Full-screen mode"
 msgstr "Tam ekran modu"
 
-#: src/translations.h:530 src/ui_viewDialog.h:1130
+#: src/translations.h:547 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "Atmosfer"
 
-#: src/translations.h:531 src/ui_viewDialog.h:1159
+#: src/translations.h:548 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:318
 msgid "Azimuthal grid"
 msgstr "Azimutal ızgara"
 
-#: src/translations.h:532 src/ui_viewDialog.h:1181
+#: src/translations.h:549 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Cardinal points"
 msgstr "Kardinal noktalar"
 
-#: src/translations.h:533
+#: src/translations.h:550
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:281
 msgid "Constellation art"
 msgstr "Takimyildiz Gosterisi"
 
-#: src/translations.h:534
+#: src/translations.h:551
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:282
 msgid "Constellation boundaries"
 msgstr "Takımyıldız sınırları"
 
-#: src/translations.h:535
+#: src/translations.h:552
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:276
 msgid "Constellation labels"
 msgstr "Takımyıldız etiketleri"
 
-#: src/translations.h:536
+#: src/translations.h:553
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:271
 msgid "Constellation lines"
 msgstr "Takımyıldız çizgileri"
 
-#: src/translations.h:537
+#: src/translations.h:554
 msgid "Nebulas background images"
 msgstr "Bulutsu artalan görüntuleri"
 
-#: src/translations.h:538 src/ui_viewDialog.h:1158
+#: src/translations.h:555 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptik J2000 ızgarası"
 
-#: src/translations.h:539
+#: src/translations.h:556
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Ecliptic line"
 msgstr "Ekliptik Hat"
 
-#: src/translations.h:540
+#: src/translations.h:557
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equator line"
 msgstr "Ekvator cizgisi"
 
-#: src/translations.h:541 src/ui_viewDialog.h:1157
+#: src/translations.h:558 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Equatorial grid"
 msgstr "Ekvatoral ızgara"
 
-#: src/translations.h:542 src/ui_viewDialog.h:1156
+#: src/translations.h:559 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatoral J2000 ızgarası"
 
-#: src/translations.h:543
+#: src/translations.h:560
 msgid "Fog"
 msgstr "Sis"
 
-#: src/translations.h:544 src/ui_viewDialog.h:1160
+#: src/translations.h:561 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Galactic grid"
 msgstr "Gökadasal ızgara"
 
-#: src/translations.h:545 src/ui_viewDialog.h:1180
+#: src/translations.h:562 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Gökada düzlemi"
 
-#: src/translations.h:546
+#: src/translations.h:563
 msgid "Ground"
 msgstr "Yeryüzü"
 
-#: src/translations.h:547
+#: src/translations.h:564
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Horizon line"
 msgstr "Ufuk çizgisi"
 
-#: src/translations.h:548
+#: src/translations.h:565
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Meridian line"
 msgstr "Meridyen cizgisi"
 
-#: src/translations.h:549 src/ui_viewDialog.h:1139
+#: src/translations.h:566 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "Bulutsular"
 
-#: src/translations.h:550
+#: src/translations.h:567
 msgid "Night mode"
 msgstr "Gece modu"
 
-#: src/translations.h:551
+#: src/translations.h:568
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet labels"
 msgstr "Gezegen etiketleri"
 
-#: src/translations.h:552
+#: src/translations.h:569
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet orbits"
 msgstr "Gezegen yörüngeleri"
 
-#: src/translations.h:553
+#: src/translations.h:570
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet trails"
 msgstr "Gezegen izleri"
 
-#: src/translations.h:554 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/translations.h:571 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Stars"
 msgstr "Yıldızlar"
 
-#: src/translations.h:555
+#: src/translations.h:572
 msgid "Stars labels"
 msgstr ""
 
-#: src/translations.h:556
+#: src/translations.h:573
 msgid "Flip scene vertically"
 msgstr "Manzarayi dikey olarak cevir."
 
-#: src/translations.h:557
+#. TRANSLATORS: Keyboard action group name
+#: src/translations.h:576
 msgid "Miscellaneous"
 msgstr "Çeşitli"
 
-#: src/translations.h:558
+#: src/translations.h:577
 msgid "Auto hide horizontal button bar"
 msgstr "Yatay arac cubugunu otomatik sakla"
 
-#: src/translations.h:559
+#: src/translations.h:578
 msgid "Auto hide vertical button bar"
 msgstr "Dikey arac cubugunu otomatik sakla"
 
-#: src/translations.h:560
+#: src/translations.h:579
 msgid "Go to home"
 msgstr ""
 
-#: src/translations.h:561
+#: src/translations.h:580
 msgid "Quit"
 msgstr "Bitir"
 
-#: src/translations.h:562
+#: src/translations.h:581
 msgid "Copy selected object information to clipboard"
 msgstr "Seçili cisim bilgilerini panoya koplayala"
 
-#: src/translations.h:563
+#: src/translations.h:582
 msgid "Save screenshot"
 msgstr "Ekran görüntüsünü kaydet"
 
-#: src/translations.h:564
+#: src/translations.h:583
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Ekvatoryal ve ufuk acisi arasinda degisim"
 
-#: src/translations.h:565
+#: src/translations.h:584
 msgid "Toggle visibility of GUI"
 msgstr "Grafik arayüzün görünürlüğünü ayarla"
 
-#: src/translations.h:566
+#. TRANSLATORS: Keyboard action group name
+#: src/translations.h:587
 msgid "Movement and Selection"
 msgstr "Seçim ve Hareket"
 
-#: src/translations.h:567
+#: src/translations.h:588
 msgid "Center on selected object"
 msgstr "Seçili cismi ortala"
 
-#: src/translations.h:568
+#: src/translations.h:589
 msgid "Set home planet to selected planet"
 msgstr "Yerel gezegeni secilen secilen gezegene gore ayarla"
 
-#: src/translations.h:569
+#: src/translations.h:590
 msgid "Track object"
 msgstr "Cisim izle"
 
-#: src/translations.h:570
+#: src/translations.h:591
 msgid "Zoom in on selected object"
 msgstr "Seçili cisme yakınlaş"
 
-#: src/translations.h:571
+#: src/translations.h:592
 msgid "Zoom out"
 msgstr "Uzaklaş"
 
-#: src/translations.h:572
-msgid "Angle Measure Plugin"
-msgstr ""
-
-#: src/translations.h:573
+#: src/translations.h:595
 msgid "Angle measure"
 msgstr "Açı ölçümü"
 
-#: src/translations.h:574
-msgid "Compass Marks Plugin"
-msgstr ""
-
-#: src/translations.h:575
+#: src/translations.h:598
 msgid "Compass marks"
 msgstr "Pusula izleri"
 
-#: src/translations.h:576
-msgid "Exoplanets Plugin"
-msgstr ""
-
-#: src/translations.h:577
+#: src/translations.h:601
 msgid "Show exoplanets"
 msgstr ""
 
-#: src/translations.h:578
+#: src/translations.h:602
 msgid "Exoplanets configuration window"
 msgstr ""
 
-#: src/translations.h:579
-msgid "Observability analysis Plugin"
-msgstr ""
-
-#: src/translations.h:580
+#: src/translations.h:605
 msgid "Observability"
 msgstr ""
 
-#: src/translations.h:581
+#: src/translations.h:606
 msgid "Observability configuration window"
 msgstr ""
 
-#: src/translations.h:582
-msgid "Oculars Plugin"
-msgstr ""
-
-#: src/translations.h:583
+#: src/translations.h:609
 msgid "Oculars plugin configuration"
 msgstr "Öküler eklenti yapılandırması"
 
-#: src/translations.h:584 plugins/Oculars/src/ui_ocularDialog.h:860
+#: src/translations.h:610 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "Öküler görüş"
 
-#: src/translations.h:585
+#: src/translations.h:611
 msgid "Show crosshairs"
 msgstr ""
 
-#: src/translations.h:586
+#: src/translations.h:612
 msgid "Oculars popup menu"
 msgstr "Okülerler açılır menüsü"
 
-#: src/translations.h:587
+#: src/translations.h:613
 msgid "Image sensor frame"
 msgstr ""
 
-#: src/translations.h:588
+#: src/translations.h:614
 msgid "Telrad sight"
 msgstr "Telrad görüşü"
 
-#: src/translations.h:589
-msgid "Pulsars Plugin"
-msgstr ""
-
-#: src/translations.h:590
+#: src/translations.h:617
 msgid "Pulsars configuration window"
 msgstr "Atarcalar yapılandırma penceresi"
 
-#: src/translations.h:591
-msgid "Quasars Plugin"
-msgstr ""
-
-#: src/translations.h:592
+#: src/translations.h:620
 msgid "Quasars configuration window"
 msgstr "Kuazarlar yapılandırma penceresi"
 
-#: src/translations.h:593
-msgid "Satellites Plugin"
-msgstr ""
-
-#: src/translations.h:594
+#: src/translations.h:623
 msgid "Satellites configuration window"
 msgstr "Uydu ayarlama penceresi"
 
-#: src/translations.h:595
+#: src/translations.h:624
 msgid "Satellite hints"
 msgstr "Uydu ipuçları"
 
-#: src/translations.h:596
+#: src/translations.h:625
 msgid "Satellite labels"
 msgstr "Uydu etiketleri"
 
-#: src/translations.h:597
-msgid "Historical Supernovae Plugin"
-msgstr ""
-
-#: src/translations.h:598
+#: src/translations.h:628
 msgid "Historical Supernovae configuration window"
 msgstr "Tarihsel Süpernovalar yapılandırma penceresi"
 
-#: src/translations.h:599
-msgid "Telescope Control Plugin"
-msgstr ""
-
-#: src/translations.h:600
+#: src/translations.h:631
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Teleskopu ayarlanan koordinatlara taşı"
 
-#: src/translations.h:601 src/ui_configurationDialog.h:1121
+#. TRANSLATORS: Keyboard action group name
+#: src/translations.h:634 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Scripts"
 msgstr "Betikler"
 
-#: src/translations.h:602
+#: src/translations.h:635
 msgid "Run landscapes script from file"
 msgstr ""
 
-#: src/translations.h:603
+#: src/translations.h:636
 msgid "Show and zoom Moon"
 msgstr ""
 
-#: src/translations.h:605
+#: src/translations.h:640
 msgid "Configuration window"
 msgstr "Yapılandırma Penceresi"
 
-#: src/translations.h:606
+#: src/translations.h:641
 msgid "Date/time window"
 msgstr "Tarih/Zaman penceresi"
 
-#: src/translations.h:607
+#: src/translations.h:642
 msgid "Help window"
 msgstr "Yardım penceresi"
 
-#: src/translations.h:608
+#: src/translations.h:643
 msgid "Location window"
 msgstr "Konum penceresi"
 
-#: src/translations.h:610
+#: src/translations.h:645
 msgid "Search window"
 msgstr "Arama penceresi"
 
-#: src/translations.h:611
+#: src/translations.h:646
 msgid "Shortcuts window"
 msgstr ""
 
-#: src/translations.h:612
+#: src/translations.h:647
 msgid "Sky and viewing options window"
 msgstr "Gökyüzü ve görüntüleme seçenekleri penceresi"
 
@@ -3862,23 +3830,15 @@ msgstr ""
 "UYARI: Seçili alan haritasını kaldırmak, dosyalarını silmek demektir. Bu "
 "işlem geri alınamaz."
 
-#: src/ui_shortcutsDialog.h:202
+#: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:204
-msgid "Edit Primary Shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:205
-msgid "Edit Alternative Shortcut"
-msgstr ""
-
-#: src/ui_shortcutsDialog.h:208
+#: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
 msgstr ""
 
-#: src/ui_shortcutsDialog.h:209
+#: src/ui_shortcutsDialog.h:201
 msgid "Apply"
 msgstr ""
 
