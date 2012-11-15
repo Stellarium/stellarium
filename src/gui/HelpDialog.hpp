@@ -22,14 +22,15 @@
 
 #include <QString>
 #include <QObject>
-#include <QMultiMap>
 #include <QPair>
-#include <QHash>
 
 #include "StelDialog.hpp"
 
 class Ui_helpDialogForm;
 class QListWidgetItem;
+class StelShortcutMgr;
+
+typedef QPair<QString, QString> KeyDescription;
 
 class HelpDialog : public StelDialog
 {
@@ -52,8 +53,10 @@ protected:
 	Ui_helpDialogForm* ui;
 
 private slots:
-	//! Slot that's called when the current tab changes. Updates log file
-	//! if Log tab is selected.
+	//! Show/bring to foreground the shortcut editor window.
+	void showShortcutsWindow();
+	
+	//! On tab change, if the Log tab is selected, call refreshLog().
 	void updateLog(int);
 
 	//! Sync the displayed log.
@@ -68,14 +71,8 @@ private:
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
-
-	//! Sort function for qSort to compare QPair<QString,QString> values.
-	//! This is used when displaying the hlp text to sort the items in a group
-	//! by the key code (first item of the QPair)
-	static bool helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2);
-
-	//! Sort function for putting the Misc group at the end of the list of groups
-	static bool helpGroupSort(const QString& s1, const QString& s2);
+	
+	StelShortcutMgr* keyMgr;
 };
 
 #endif /*_HELPDIALOG_HPP_*/

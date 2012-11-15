@@ -785,6 +785,18 @@ QTreeView::item:!enabled#treeView {
 color : rgb(58,59,62);
 }
 
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+         border-image: none;
+         image: url(:/graphicGui/spinright.png);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+         border-image: none;
+         image: url(:/graphicGui/spindown.png);
+ }
+
 QHeaderView::section {
 	background-color: rgb(31, 31, 31);
 	border: 1px solid rgb(76,77,80);

@@ -442,6 +442,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/StelGuiItems.cpp
 		gui/HelpDialog.hpp
 		gui/HelpDialog.cpp
+		gui/ShortcutLineEdit.hpp
+		gui/ShortcutLineEdit.cpp
 		gui/ShortcutsDialog.hpp
 		gui/ShortcutsDialog.cpp
 		gui/Dialog.hpp
@@ -473,6 +475,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SkyGui.hpp
 		gui/StelGuiItems.hpp
 		gui/HelpDialog.hpp
+		gui/ShortcutLineEdit.hpp
 		gui/ShortcutsDialog.hpp
 		gui/Dialog.hpp
 		gui/MapLabel.hpp
@@ -568,6 +571,11 @@ IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_HELLOSTELMODULE)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/HelloStelModule/src/${CMAKE_CFG_INTDIR}/libHelloStelModule.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_HELLOSTELMODULE)
+  ENDIF()
+  
+  IF (USE_PLUGIN_SIMPLEDRAWLINE)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/SimpleDrawLine/src/${CMAKE_CFG_INTDIR}/libSimpleDrawLine.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SIMPLEDRAWLINE)
   ENDIF()
 
 IF (USE_PLUGIN_OBSERVABILITY)

@@ -20,52 +20,38 @@
 #ifndef SHORTCUTSDIALOG_HPP
 #define SHORTCUTSDIALOG_HPP
 
+#include <QKeySequence>
+#include <QModelIndex>
+#include <QSortFilterProxyModel>
+
 #include "StelDialog.hpp"
 
-#include <QLineEdit>
-
-// auxilary class for convenient editing shortcuts
-class ShortcutLineEdit : public QLineEdit
-{
-	Q_OBJECT
-
-public:
-	ShortcutLineEdit(QWidget* parent);
-
-	QKeySequence getKeySequence();
-	bool isEmpty() const { return (m_keyNum <= 0); }
-
-public slots:
-	// clear contents; also clear stored keys
-	void clear();
-	// remove last key from keysequence
-	void backspace();
-	void setContents(QKeySequence ks);
-
-signals:
-	// need for enable/disable buttons in dialog
-	void focusChanged(bool focus);
-	void contentsChanged();
-
-protected:
-	void keyPressEvent(QKeyEvent *e);
-	void focusInEvent(QFocusEvent *e);
-	void focusOutEvent(QFocusEvent *e);
-
-private:
-	// transform modifiers to int
-	static int getModifiers(Qt::KeyboardModifiers state, const QString &text);
-
-	// counter and array for storing entered keys
-	int m_keyNum;
-	int m_keys[4]; // QKeySequence allows only 4 keys in single shortcut
-};
 
 class Ui_shortcutsDialogForm;
-QT_FORWARD_DECLARE_CLASS(QTreeWidgetItem)
-QT_FORWARD_DECLARE_CLASS(StelShortcutMgr)
-QT_FORWARD_DECLARE_CLASS(StelShortcut)
-QT_FORWARD_DECLARE_CLASS(StelShortcutGroup)
+class ShortcutLineEdit;
+class StelShortcut;
+class StelShortcutGroup;
+class StelShortcutMgr;
+
+class QStandardItemModel;
+class QStandardItem;
+
+
+//! Custom filter class for filtering tree sub-items.
+//! (The standard QSortFilterProxyModel shows child items only if the
+//! parent item matches the filter.)
+class ShortcutsFilterModel : public QSortFilterProxyModel
+{
+	Q_OBJECT
+	
+public:
+	ShortcutsFilterModel(QObject* parent = 0);
+	
+protected:
+	bool filterAcceptsRow(int source_row,
+	                      const QModelIndex &source_parent) const;
+};
+
 
 class ShortcutsDialog : public StelDialog
 {
@@ -75,58 +61,67 @@ public:
 	ShortcutsDialog();
 	~ShortcutsDialog();
 
-	// higlight items that have collisions with current lineEdits' state according to css
-	// Note: previous collisions aren't redrawn
+	//! higlight items that have collisions with current lineEdits' state according to css.
+	//! Note: previous collisions aren't redrawn.
 	void drawCollisions();
 
 public slots:
-	// restore colors of all items it TreeWidget to defaults
+	//! restore colors of all items it TreeWidget to defaults.
 	void resetCollisions();
 	void retranslate();
-	// ititialize editors state when current item changed
+	//! ititialize editors state when current item changed.
 	void initEditors();
-	// checks whether one QKeySequence is prefix of another
-	bool prefixMatchKeySequence(QKeySequence ks1, QKeySequence ks2);
-	QList<QTreeWidgetItem*> findCollidingItems(QKeySequence ks);
+	//! checks whether one QKeySequence is prefix of another.
+	bool prefixMatchKeySequence(const QKeySequence &ks1, const QKeySequence &ks2);
+	//! Compile a list of items that share a prefix with this sequence.
+	QList<QStandardItem*> findCollidingItems(QKeySequence ks);
 	void handleCollisions(ShortcutLineEdit* currentEdit);
-	// called when editors' state changed
+	//! called when editors' state changed.
 	void handleChanges();
-	// called when apply button clicked
+	//! called when apply button clicked.
 	void applyChanges() const;
-	// called by doubleclick; if click is on editable item, switch to editors
-	void switchToEditors(QTreeWidgetItem* item, int column);
-	// update shortcut representation in tree correspondingly to its actual contents
-	// if no shortcutTreeItem specified, search for it in tree, if no items found, create new item
-	void updateShortcutsItem(StelShortcut* shortcut, QTreeWidgetItem* shortcutsTreeItem = NULL);
+	//! called by doubleclick; if click is on editable item, switch to editors
+	void switchToEditors(const QModelIndex& index);
+	//! update shortcut representation in tree correspondingly to its actual contents.
+	//! if no item is specified, search for it in tree, if no items found, create new item
+	void updateShortcutsItem(StelShortcut* shortcut, QStandardItem* shortcutItem = NULL);
 	void restoreDefaultShortcuts();
 	void updateTreeData();
 
 protected:
-	//! Initialize the dialog widgets and connect the signals/slots
+	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent();
 
 private:
-	// checks whether given item can be changed by editors
-	static bool itemIsEditable(QTreeWidgetItem *item);
-	//! This function concatenates the header, key codes and footer to build
+	//! checks whether given item can be changed by editors.
+	static bool itemIsEditable(QStandardItem *item);
+	//! Concatenate the header, key codes and footer to build
 	//! up the help text.
-	void updateText(void);
+	//! @todo FIXME: This does nothing? 
+	void updateText();
 
-	// apply style changes, see http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
+	//! Apply style changes.
+	//! See http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
 	void polish();
 
-	QTreeWidgetItem* updateGroup(StelShortcutGroup* group);
+	QStandardItem* updateGroup(StelShortcutGroup* group);
 
-	// search for first appearence of item with requested data
-	QTreeWidgetItem* findItemByData(QVariant value, int role, int column = 0);
+	//! search for first appearence of item with requested data.
+	QStandardItem* findItemByData(QVariant value, int role, int column = 0);
 
-	// pointer to mgr, for not getting it from stelapp every time
+	//! pointer to mgr, for not getting it from stelapp every time.
 	StelShortcutMgr* shortcutMgr;
 
-	// list for storing collisions items, so we can easy restore their colors
-	QList<QTreeWidgetItem*> collisionItems;
+	//! list for storing collisions items, so we can easy restore their colors.
+	QList<QStandardItem*> collisionItems;
 
 	Ui_shortcutsDialogForm *ui;
+	ShortcutsFilterModel* filterModel;
+	QStandardItemModel* mainModel;
+	//! Initialize or reset the main model.
+	void resetModel();
+	//! Set the main model's column lables.
+	void setModelHeader();
 };
 
 #endif // SHORTCUTSDIALOG_HPP

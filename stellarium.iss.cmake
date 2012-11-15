@@ -58,6 +58,7 @@ Name: removeconfig; Description: "Remove the main configuration file"; GroupDesc
 Name: removeplugins; Description: "Remove plug-ins' configuration files"; GroupDescription: "Remove files left over from a previous installation:"; Flags: unchecked
 Name: removesolar; Description: "Remove Solar System file"; GroupDescription: "Remove files left over from a previous installation:"; Flags: unchecked
 Name: removelandscapes; Description: "Remove user-installed landscapes"; GroupDescription: "Remove files left over from a previous installation:"; Flags: unchecked
+Name: removeshortcuts; Description: "Remove shortcut's configuration file"; GroupDescription: "Remove files left over from a previous installation:"; Flags: unchecked
 
 [Run]
 ;An option to start Stellarium after setup has finished
@@ -70,6 +71,7 @@ Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
 Type: files; Name: "{userappdata}\Stellarium\data\ssystem.ini"; Tasks: removesolar
 Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
 Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: removelandscapes
+Type: files; Name: "{userappdata}\Stellarium\data\shortcuts.json"; Tasks: removeshortcuts
 
 [UninstallDelete]
 
