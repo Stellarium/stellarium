@@ -397,7 +397,7 @@ void Satellite::update(double)
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
 			// the satellite.
-			qWarning() << "Satellite has invalid orbit:" << name;
+			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
 			return;
 		}
