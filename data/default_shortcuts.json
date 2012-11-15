@@ -12,7 +12,7 @@
 					"primaryKey": "C",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Constellation_Art":
 				{
@@ -20,7 +20,7 @@
 					"primaryKey": "R",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Constellation_Labels":
 				{
@@ -28,7 +28,7 @@
 					"primaryKey": "V",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Constellation_Boundaries":
 				{
@@ -36,7 +36,7 @@
 					"primaryKey": "B",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Azimuthal_Grid":
 				{
@@ -44,7 +44,7 @@
 					"primaryKey": "Z",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Equatorial_Grid":
 				{
@@ -52,7 +52,7 @@
 					"primaryKey": "E",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Equatorial_J2000_Grid":
 				{
@@ -60,7 +60,7 @@
 					"primaryKey": "",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Ecliptic_J2000_Grid":
 				{
@@ -68,7 +68,7 @@
 					"primaryKey": "",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Galactic_Grid":
 				{
@@ -76,7 +76,7 @@
 					"primaryKey": "",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Galactic_Plane_Line":
 				{
@@ -84,7 +84,7 @@
 					"primaryKey": "",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Ecliptic_Line":
 				{
@@ -92,7 +92,7 @@
 					"primaryKey": ",",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Equator_Line":
 				{
@@ -100,7 +100,7 @@
 					"primaryKey": ".",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Meridian_Line":
 				{
@@ -108,7 +108,7 @@
 					"primaryKey": ";",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Horizon_Line":
 				{
@@ -116,7 +116,7 @@
 					"primaryKey": "",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Cardinal_Points":
 				{
@@ -124,7 +124,7 @@
 					"primaryKey": "Q",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Ground":
 				{
@@ -132,7 +132,7 @@
 					"primaryKey": "G",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Atmosphere":
 				{
@@ -140,7 +140,7 @@
 					"primaryKey": "A",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Fog":
 				{
@@ -148,7 +148,7 @@
 					"primaryKey": "F",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Nebulas":
 				{
@@ -156,7 +156,7 @@
 					"primaryKey": "N",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_DSS":
 				{
@@ -164,7 +164,7 @@
 					"primaryKey": "",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Stars":
 				{
@@ -172,14 +172,15 @@
 					"primaryKey": "S",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Stars_Labels":
 				{
 					"text": "Stars labels",
 					"primaryKey": "Alt+S",
 					"checkable": true,
-					"autorepeat": false
+					"autorepeat": false,
+					"global": true
 				},
 				"actionShow_Planets_Labels":
 				{
@@ -187,7 +188,7 @@
 					"primaryKey": "P",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Planets_Orbits":
 				{
@@ -195,7 +196,7 @@
 					"primaryKey": "O",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Planets_Trails":
 				{
@@ -203,7 +204,7 @@
 					"primaryKey": "Shift+T",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionShow_Night_Mode":
 				{
@@ -211,7 +212,7 @@
 					"primaryKey": "",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionSet_Full_Screen_Global":
 				{
@@ -227,7 +228,7 @@
 					"primaryKey": "Ctrl+Shift+H",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				},
 				"actionVertical_Flip":
 				{
@@ -235,7 +236,7 @@
 					"primaryKey": "Ctrl+Shift+V",
 					"checkable": "1",
 					"autorepeat": "0",
-					"global": "0"
+					"global": "1"
 				}
 			}
 		},
@@ -506,6 +507,13 @@
 					"checkable": false,
 					"autorepeat": true
 				},
+				"actionSubtract_Sidereal_Month":
+				{
+					"text": "Subtract 1 sidereal month",
+					"primaryKey": "Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
 				"actionAdd_Sidereal_Year":
 				{
 					"text": "Add 1 sidereal year",
@@ -517,6 +525,90 @@
 				{
 					"text": "Subtract 1 sidereal year",
 					"primaryKey": "Ctrl+Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Synodic_Month":
+				{
+					"text": "Add 1 synodic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Synodic_Month":
+				{
+					"text": "Subtract 1 synodic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Draconic_Month":
+				{
+					"text": "Add 1 draconic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Draconic_Month":
+				{
+					"text": "Subtract 1 draconic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Tropical_Month":
+				{
+					"text": "Add 1 mean tropical month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Tropical_Month":
+				{
+					"text": "Subtract 1 mean tropical month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Anomalistic_Month":
+				{
+					"text": "Add 1 anomalistic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Anomalistic_Month":
+				{
+					"text": "Subtract 1 anomalistic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Draconic_Year":
+				{
+					"text": "Add 1 draconic year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Draconic_Year":
+				{
+					"text": "Subtract 1 draconic year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Tropical_Year":
+				{
+					"text": "Add 1 mean tropical year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Tropical_Year":
+				{
+					"text": "Subtract 1 mean tropical year",
+					"primaryKey": "",
 					"checkable": false,
 					"autorepeat": true
 				}

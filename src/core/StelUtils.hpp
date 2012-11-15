@@ -203,11 +203,14 @@ namespace StelUtils
 	//! Also handles negative and distant years.
 	double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok);
 	
-	//! Format the date and day-of-week per the format in fmt (see QDateTime::toString()).
+	//! Format the date and day-of-week per the format in fmt
+	//! (see QDateTime::toString()). Uses the @b system locale, not
+	//! the one set in Stellarium.
 	//! @return QString representing the formatted date
 	QString localeDateString(int year, int month, int day, int dayOfWeek, QString fmt);
 
-	//! Format the date and day-of-week per the default locale's QLocale::ShortFormat.
+	//! Format the date and day-of-week per the @b system locale's
+	//! QLocale::ShortFormat.
 	//! @return QString representing the formatted date
 	QString localeDateString(int year, int month, int day, int dayOfWeek);
 

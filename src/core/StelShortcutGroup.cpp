@@ -27,11 +27,16 @@
 #include <QDebug>
 
 
-StelShortcut::StelShortcut(const QString &id, StelShortcutGroup* group, const QString &text,
-													 const QString &primaryKey, const QString &altKey,
-													 bool checkable, bool autoRepeat, bool global,
-													 QGraphicsWidget *parent) :
-	m_id(id), m_script()
+StelShortcut::StelShortcut(const QString &id,
+                           StelShortcutGroup* group,
+                           const QString &text,
+                           const QString &primaryKey,
+                           const QString &altKey,
+                           bool checkable,
+                           bool autoRepeat,
+                           bool global,
+                           QGraphicsWidget *parent) :
+    m_id(id), m_temporary(false)
 {
 	if (parent == NULL)
 	{
@@ -63,7 +68,7 @@ QVariant StelShortcut::toQVariant() const
 	resMap["primaryKey"] = QVariant(m_primaryKey.toString());
 	resMap["altKey"] = QVariant(m_altKey.toString());
 	resMap["checkable"] = QVariant(m_checkable);
-	resMap["autoRepeat"] = QVariant(m_autoRepeat);
+	resMap["autorepeat"] = QVariant(m_autoRepeat);
 	resMap["global"] = QVariant(m_global);
 	if (!m_scriptFile.isEmpty())
 	{
@@ -206,7 +211,7 @@ QAction *StelShortcutGroup::getAction(const QString &actionId)
 {
 	if (!m_shortcuts.contains(actionId))
 	{
-		qDebug() << "Attempt to get non-existing shortcut by id: " << actionId << endl;
+		//qDebug() << "Attempt to get non-existing shortcut by id: " << actionId << endl;
 		return NULL;
 	}
 	return m_shortcuts[actionId]->getAction();
@@ -245,6 +250,9 @@ QVariant StelShortcutGroup::toQVariant() const
 		{
 			actionsMap[it.key()] = sc->toQVariant();
 		}
+//		else
+//			qDebug() << shortcut->getGroup() << shortcut->getId()
+//			         << "is not added as temporary.";
 	}
 	resMap["actions"] = QVariant(actionsMap);
 	return resMap;

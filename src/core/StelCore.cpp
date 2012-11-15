@@ -137,7 +137,7 @@ void StelCore::init(class StelRenderer* renderer)
 	skyDrawer = new StelSkyDrawer(this, renderer);
 	skyDrawer->init();
 
-	QString tmpstr = conf->value("projection/type", "stereographic").toString();
+	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
 }
 
@@ -779,10 +779,24 @@ void StelCore::moveObserverToSelected()
 			StelLocation loc = getCurrentLocation();
 			if (loc.planetName != pl->getEnglishName())
 			{
-			loc.planetName = pl->getEnglishName();
-			loc.name = "-";
-			loc.state = "";
-			moveObserverTo(loc);
+				loc.planetName = pl->getEnglishName();
+				loc.name = "-";
+				loc.state = "";
+				moveObserverTo(loc);
+
+				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+				if (pl->getEnglishName() == "Solar System Observer")
+				{
+					landscapeMgr->setFlagAtmosphere(false);
+					landscapeMgr->setFlagFog(false);
+					landscapeMgr->setFlagLandscape(false);
+				}
+				else
+				{
+					landscapeMgr->setFlagAtmosphere(pl->hasAtmosphere());
+					landscapeMgr->setFlagFog(pl->hasAtmosphere());
+					landscapeMgr->setFlagLandscape(true);
+				}
 			}
 		}
 	}
@@ -795,6 +809,11 @@ void StelCore::moveObserverToSelected()
 const StelLocation& StelCore::getCurrentLocation() const
 {
 	return position->getCurrentLocation();
+}
+
+const QSharedPointer<Planet> StelCore::getCurrentPlanet() const
+{
+	return position->getHomePlanet();
 }
 
 // Smoothly move the observer to the given location
@@ -908,12 +927,41 @@ void StelCore::addSiderealYear()
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System StelObserver") && (home->getSiderealPeriod()>0))
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(days);
 }
 
+void StelCore::addSynodicMonth()
+{
+	addSolarDays(29.530588853);
+}
+
+void StelCore::addDraconicMonth()
+{
+	addSolarDays(27.212220817);
+}
+
+void StelCore::addTropicalMonth()
+{
+	addSolarDays(27.321582241);
+}
+
+void StelCore::addAnomalisticMonth()
+{
+	addSolarDays(27.554549878);
+}
+
+void StelCore::addDraconicYear()
+{
+	addSolarDays(346.620075883);
+}
+
+void StelCore::addTropicalYear()
+{
+	addSolarDays(365.2421897);
+}
 
 void StelCore::subtractHour()
 {
@@ -949,16 +997,46 @@ void StelCore::subtractSiderealYear()
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System StelObserver") && (home->getSiderealPeriod()>0))
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(-days);
 }
 
+void StelCore::subtractSynodicMonth()
+{
+	addSolarDays(-29.530588853);
+}
+
+void StelCore::subtractDraconicMonth()
+{
+	addSolarDays(-27.212220817);
+}
+
+void StelCore::subtractTropicalMonth()
+{
+	addSolarDays(-27.321582241);
+}
+
+void StelCore::subtractAnomalisticMonth()
+{
+	addSolarDays(-27.554549878);
+}
+
+void StelCore::subtractDraconicYear()
+{
+	addSolarDays(-346.620075883);
+}
+
+void StelCore::subtractTropicalYear()
+{
+	addSolarDays(-365.2421897);
+}
+
 void StelCore::addSolarDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System StelObserver")
+	if (home->getEnglishName() != "Solar System Observer")
 	{
 		double sp = home->getSiderealPeriod();
 		double dsol = home->getSiderealDay();
@@ -976,7 +1054,7 @@ void StelCore::addSolarDays(double d)
 void StelCore::addSiderealDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System StelObserver")
+	if (home->getEnglishName() != "Solar System Observer")
 		d *= home->getSiderealDay();
 	setJDay(getJDay() + d);
 }

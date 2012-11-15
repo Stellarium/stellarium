@@ -647,7 +647,13 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 		omgr->findAndSelect(name);
 }
 
+//DEPRECATED: Use getObjectInfo()
 QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
+{
+	return getObjectInfo(name);
+}
+
+QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
@@ -666,30 +672,48 @@ QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 
 	
 	Vec3d pos;
-	double ra, dec, alt, azi;
+	double ra, dec, alt, azi, glong, glat;
+	StelCore* core = StelApp::getInstance().getCore();
 
 	// ra/dec
-	pos = obj->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+	pos = obj->getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
 	map.insert("dec", dec*180./M_PI);
 
 	// ra/dec in J2000
-	pos = obj->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+	pos = obj->getJ2000EquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*180./M_PI);
 	map.insert("decJ2000", dec*180./M_PI);
 
-	// altitude/azimuth
-	pos = obj->getAltAzPosApparent(StelApp::getInstance().getCore());
+	// apparent altitude/azimuth
+	pos = obj->getAltAzPosApparent(core);
 	StelUtils::rectToSphe(&azi, &alt, pos);
 	map.insert("altitude", alt*180./M_PI);
 	map.insert("azimuth", azi*180./M_PI);
 
-	pos = obj->getAltAzPosGeometric(StelApp::getInstance().getCore());
+	// geometric altitude/azimuth
+	pos = obj->getAltAzPosGeometric(core);
 	StelUtils::rectToSphe(&azi, &alt, pos);
 	map.insert("altitude-geometric", alt*180./M_PI);
 	map.insert("azimuth-geometric", azi*180./M_PI);
+
+	// galactic long/lat in J2000
+	pos = obj->getJ2000GalacticPos(core);
+	StelUtils::rectToSphe(&glong, &glat, pos);
+	map.insert("glong", alt*180./M_PI);
+	map.insert("glat", azi*180./M_PI);
+
+	// magnitude
+	map.insert("vmag", obj->getVMagnitude(core, false));
+	map.insert("vmage", obj->getVMagnitude(core, true));
+
+	// angular size
+	map.insert("size", obj->getAngularSize(core));
+
+	// localized name
+	map.insert("localized-name", obj->getNameI18n());
 
 	return map;
 }

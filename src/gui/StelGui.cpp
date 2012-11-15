@@ -221,10 +221,22 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiAction("actionAdd_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(addSiderealWeek()));
 	connect(getGuiAction("actionAdd_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(addSiderealMonth()));
 	connect(getGuiAction("actionAdd_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(addSiderealYear()));
+	connect(getGuiAction("actionAdd_Synodic_Month"), SIGNAL(triggered()), core, SLOT(addSynodicMonth()));
+	connect(getGuiAction("actionAdd_Draconic_Month"), SIGNAL(triggered()), core, SLOT(addDraconicMonth()));
+	connect(getGuiAction("actionAdd_Draconic_Year"), SIGNAL(triggered()), core, SLOT(addDraconicYear()));
+	connect(getGuiAction("actionAdd_Anomalistic_Month"), SIGNAL(triggered()), core, SLOT(addAnomalisticMonth()));
+	connect(getGuiAction("actionAdd_Tropical_Month"), SIGNAL(triggered()), core, SLOT(addTropicalMonth()));
+	connect(getGuiAction("actionAdd_Tropical_Year"), SIGNAL(triggered()), core, SLOT(addTropicalYear()));
 	connect(getGuiAction("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(subtractSiderealDay()));
 	connect(getGuiAction("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(subtractSiderealWeek()));
 	connect(getGuiAction("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
 	connect(getGuiAction("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
+	connect(getGuiAction("actionSubtract_Synodic_Month"), SIGNAL(triggered()), core, SLOT(subtractSynodicMonth()));
+	connect(getGuiAction("actionSubtract_Draconic_Month"), SIGNAL(triggered()), core, SLOT(subtractDraconicMonth()));
+	connect(getGuiAction("actionSubtract_Draconic_Year"), SIGNAL(triggered()), core, SLOT(subtractDraconicYear()));
+	connect(getGuiAction("actionSubtract_Anomalistic_Month"), SIGNAL(triggered()), core, SLOT(subtractAnomalisticMonth()));
+	connect(getGuiAction("actionSubtract_Tropical_Month"), SIGNAL(triggered()), core, SLOT(subtractTropicalMonth()));
+	connect(getGuiAction("actionSubtract_Tropical_Year"), SIGNAL(triggered()), core, SLOT(subtractTropicalYear()));
 	connect(getGuiAction("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
 	connect(getGuiAction("actionGo_Home_Global"), SIGNAL(triggered()), core, SLOT(returnToHome()));
 

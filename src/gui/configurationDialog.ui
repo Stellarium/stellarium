@@ -130,7 +130,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -519,7 +519,7 @@
                 <string>Right ascension/Declination (of date)</string>
                </property>
                <attribute name="buttonGroup">
-                <string>buttonGroupDisplayedFields</string>
+                <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
@@ -551,11 +551,11 @@
             <property name="title">
              <string>Control</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_X">
+            <layout class="QGridLayout" name="gridLayout">
              <property name="margin">
               <number>0</number>
              </property>
-             <item>
+             <item row="0" column="0">
               <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
                <property name="toolTip">
                 <string>Allow keyboard to pan and zoom</string>
@@ -565,7 +565,7 @@
                </property>
               </widget>
              </item>
-             <item>
+             <item row="1" column="0" colspan="2">
               <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
                <property name="toolTip">
                 <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
@@ -575,29 +575,12 @@
                </property>
               </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
-               <item>
-                <widget class="QPushButton" name="editShortcutsPushButton">
-                 <property name="text">
-                  <string>Edit keyboard shortcuts</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
+             <item row="0" column="1">
+              <widget class="QPushButton" name="editShortcutsPushButton">
+               <property name="text">
+                <string>Edit keyboard shortcuts...</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1371,6 +1354,7 @@
   <tabstop>checkBoxAbsoluteMag</tabstop>
   <tabstop>checkBoxRaDecJ2000</tabstop>
   <tabstop>checkBoxRaDecOfDate</tabstop>
+  <tabstop>checkBoxGalacticCoordJ2000</tabstop>
   <tabstop>checkBoxHourAngle</tabstop>
   <tabstop>checkBoxAltAz</tabstop>
   <tabstop>checkBoxDistance</tabstop>
@@ -1380,6 +1364,7 @@
   <tabstop>checkBoxExtra3</tabstop>
   <tabstop>enableKeysNavigationCheckBox</tabstop>
   <tabstop>enableMouseNavigationCheckBox</tabstop>
+  <tabstop>editShortcutsPushButton</tabstop>
   <tabstop>systemTimeRadio</tabstop>
   <tabstop>todayRadio</tabstop>
   <tabstop>todayTimeSpinBox</tabstop>
@@ -1395,6 +1380,7 @@
   <tabstop>gravityLabelCheckbox</tabstop>
   <tabstop>selectSingleConstellationButton</tabstop>
   <tabstop>autoZoomResetsDirectionCheckbox</tabstop>
+  <tabstop>renderSolarShadowsCheckbox</tabstop>
   <tabstop>screenshotBrowseButton</tabstop>
   <tabstop>screenshotDirEdit</tabstop>
   <tabstop>invertScreenShotColorsCheckBox</tabstop>
@@ -1402,9 +1388,9 @@
   <tabstop>downloadRetryButton</tabstop>
   <tabstop>downloadCancelButton</tabstop>
   <tabstop>scriptInfoBrowser</tabstop>
+  <tabstop>closeWindowAtScriptRunCheckbox</tabstop>
   <tabstop>runScriptButton</tabstop>
   <tabstop>stopScriptButton</tabstop>
-  <tabstop>closeWindowAtScriptRunCheckbox</tabstop>
   <tabstop>pluginsInfoBrowser</tabstop>
   <tabstop>pluginLoadAtStartupCheckBox</tabstop>
   <tabstop>pluginConfigureButton</tabstop>
