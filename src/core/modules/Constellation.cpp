@@ -269,7 +269,7 @@ void Constellation::drawBoundaryOptim(StelRenderer* renderer, StelProjectorP pro
 		{
 			const Vec3f pt1 = points->at(j) ;
 			const Vec3f pt2 = points->at(j +1);
-			if (pt1 * pt2 > 0.99999f)
+			if (pt1 * pt2 > 0.9999999f)
 			{
 				continue;
 			}
