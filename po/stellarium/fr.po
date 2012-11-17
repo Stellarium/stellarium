@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-12 16:17+0200\n"
-"PO-Revision-Date: 2012-11-12 19:57+0000\n"
+"PO-Revision-Date: 2012-11-16 10:12+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-13 04:54+0000\n"
-"X-Generator: Launchpad (build 16251)\n"
+"X-Launchpad-Export-Date: 2012-11-17 04:34+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -2935,7 +2935,7 @@ msgstr "Fenêtre de configuration des satellites"
 
 #: src/translations.h:624
 msgid "Satellite hints"
-msgstr "Suggestions pour les satellites"
+msgstr "Satellites"
 
 #: src/translations.h:625
 msgid "Satellite labels"
@@ -4582,8 +4582,8 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"Le plugin Satellites prédit la position des satellites artificiels en orbite "
-"autour de la Terre."
+"Le plugin Satellites affiche la position des satellites artificiels en "
+"orbite autour de la Terre."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 msgid "Notes for users"
@@ -4647,9 +4647,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"Le plugin Satellites peut télécharger automatiquement les données TLE des "
-"sources Internet, et, par défaut, le fera si les données existantes datent "
-"de plus de 72h. "
+"Le plugin Satellites peut télécharger automatiquement les données TLE à "
+"partir de sources Internet, et, par défaut, le fera si les données "
+"existantes datent de plus de 72h. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
 #, qt-format
@@ -4667,9 +4667,9 @@ msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
-"<b>Note:</b> si le nom d'un satellite des données de mise à jour se termine "
-"par des caractères entre crochets, il sera supprimé avant utilisation des "
-"données."
+"<b>Note :</b> si dans les données mises à jour le nom d'un satellite se "
+"termine par des caractères entre crochets, il sera supprimé avant "
+"utilisation des données."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
 msgid "Adding new satellites"
@@ -4847,7 +4847,7 @@ msgstr "Erreur lors de la mise à jour"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:393
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr "Mise à jour de %1/%2 satellite(s) effectuée; %3 manquants"
+msgstr "Mise à jour de %1/%2 satellite(s) effectuée ; %3 manquants"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 msgid "[new source]"
@@ -4886,8 +4886,8 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"Stellarium est en train de télécharger les données des satellites à partir "
-"des sources de mise à jour. Merci de patienter ..."
+"Stellarium télécharge les données des satellites à partir des sources de "
+"mise à jour. Merci de patienter ..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
 msgid "Select TLE source file(s)..."
