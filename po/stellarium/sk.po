@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-12 16:17+0200\n"
-"PO-Revision-Date: 2012-10-28 17:06+0000\n"
+"PO-Revision-Date: 2012-11-16 12:05+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-13 05:01+0000\n"
-"X-Generator: Launchpad (build 16251)\n"
+"X-Launchpad-Export-Date: 2012-11-17 04:34+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -128,7 +128,7 @@ msgstr "Ekliptika voči stredu Zeme (k dátumu): %1/%2"
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Sklon (k dátumu, pre Zem): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -565,6 +565,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Nižšie sú uvedené len akcie, ktoré majú priradené klávesy. Ďalšie akcie "
+"sprístupníte stlačením tlačidla \"%1\"."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1461,6 +1463,8 @@ msgstr ""
 #: src/translations.h:241
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
+"Mesiac Fobos prechádza pred Slnkom pri pohľade z hory Olympus Mons 10. "
+"januára 2068."
 
 #: src/translations.h:242
 msgid ""
@@ -1468,6 +1472,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Zákryty Zeme Fobosom sú časné, podobne ako zákryty Jupitera. Ale súčasný "
+"zákryt oboch telies v rovnaký deň je vzácny úkaz. Takto bude prebiehať "
+"dvojitý zákryt 21. januára 2048. Zobrazenie prebieha reálnou rýchlosťou."
 
 #: src/translations.h:243
 msgid ""
@@ -1476,6 +1483,10 @@ msgid ""
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
+"Fobos predbieha Mars a zakrýva Slnko, prechádza pred ním a potom retrográdne "
+"cúva naspäť k Slnku, ktoré ešte čiastočne zakryje (viditeľné je to iba v "
+"SH), potom už Mars celkom zakryje Slnko aj Fobos a nakoniec Fobos vyjde "
+"spoza Slnka, prejde cez tieň Marsu a stmavne."
 
 #: src/translations.h:244
 msgid ""
@@ -1486,32 +1497,37 @@ msgstr ""
 
 #: src/translations.h:245
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "Prechádza súhvezdiami západnej kultúry."
 
 #: src/translations.h:246
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "Pohľad na Slnko z veľkých planét Slnečnej sústavy a z Pluta."
 
 #: src/translations.h:247
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
+"Najlepšie pohľady na Zem z iných telies Slnečnej sústavy v priebehu 21. "
+"storočia."
 
 #: src/translations.h:248
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
+"Prechod Venuše pri pohľade z austrálskeho mesta Sydney, 6. júna 2012."
 
 #: src/translations.h:249
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
-msgstr ""
+msgstr "Ukážka analemy - dráhy Slnka na oblohe počas roka."
 
 #: src/translations.h:250
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Záblesk supernovy, ktorú pozoroval Tycho Brahe v roku 1572. Musí byť zapnutý "
+"modul Supernovy."
 
 #: src/translations.h:255
 msgid "Andorra"
@@ -4363,7 +4379,7 @@ msgstr "Názov:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "aFOV:"
-msgstr ""
+msgstr "zZP:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:895
@@ -4372,7 +4388,7 @@ msgstr "Hĺbka zaostrenia:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Field stop:"
-msgstr ""
+msgstr "Clona:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Binoculars"
@@ -4491,7 +4507,7 @@ msgstr "Výška (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:258
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr ""
+msgstr "Podbod (Zem. šír./dĺžka): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:272
@@ -5887,7 +5903,7 @@ msgstr "Vypnúť"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:549
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[žiaden režim TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
@@ -6245,7 +6261,7 @@ msgstr "Frekvencia aktualizácií (v dňoch):"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "[next update info]"
-msgstr ""
+msgstr "[informácia o nasledujúcej aktualizácii]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
