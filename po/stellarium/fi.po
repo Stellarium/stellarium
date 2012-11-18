@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-12 16:17+0200\n"
-"PO-Revision-Date: 2012-10-24 04:27+0000\n"
+"PO-Revision-Date: 2012-11-17 23:18+0000\n"
 "Last-Translator: Tuomas Teipainen <tuomastpnen@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-13 04:54+0000\n"
-"X-Generator: Launchpad (build 16251)\n"
+"X-Launchpad-Export-Date: 2012-11-18 04:34+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -566,6 +566,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Alla on listattu vain toiminnot joille on määritelty näppäinkomento. Lisää "
+"toimintoja voi olla saatavilla \"%1\"-näppäimellä."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -833,15 +835,15 @@ msgstr "Harvardin yliopisto (USA)"
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "Toiminto"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
-msgstr ""
+msgstr "Pääasiallinen pikanäppäin"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "Vaihtoehtoinen pikanäppäin"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -1464,6 +1466,7 @@ msgstr ""
 #: src/translations.h:241
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
+"Phobos pimentää auringon nähtynä Olympus monsilta 10 tammikuuta 2068."
 
 #: src/translations.h:242
 msgid ""
@@ -1471,6 +1474,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Phoboksen maanpimennykset ovat yleisiä, kuten myös jupiterin. Mutta "
+"molempien pimennykset samana päivänä ovat harvinaisia. Tässä yksi joka "
+"tapahtuu 23. tammikuuta 2048. Reealiaikaisella nopeudella."
 
 #: src/translations.h:243
 msgid ""
@@ -1479,6 +1485,10 @@ msgid ""
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
+"Phobos kulkee marsin edestä, kulkee auringon editse pimentäen sen ja "
+"perääntyy sen jälkeen uudestaan aurinkoa kohti ja osittain pimentää sen. Sen "
+"jälkeen mars pimentää  täydellisesti auringon ja phoboksen, jonka jälkeen "
+"phobos tulee esiin auringosta ja pimentyy marsin varjoon."
 
 #: src/translations.h:244
 msgid ""
@@ -1489,996 +1499,1001 @@ msgstr ""
 
 #: src/translations.h:245
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "Matka länsimaisiin tähtikuvioihin."
 
 #: src/translations.h:246
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "Katsele aurinkoa aurinkokunnan planeetoilta ja plutosta."
 
 #: src/translations.h:247
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
+"Parhaat näkymät maahan aurinkokunnan muilta kappaleilta 21. vuosisadalla."
 
 #: src/translations.h:248
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
-msgstr ""
+msgstr "Venuksen ylikulku nähtynä Sydneystä, Australiasta 6 kesäkuuta 2012."
 
 #: src/translations.h:249
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"Analemman esittely - analemma on kuvio jonka aurinko piirtää taivaalle "
+"vuoden aikana."
 
 #: src/translations.h:250
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Tyko Brahen vuonna 1572 havaitseman supernovan räjähdys. Supernovat-"
+"lisäsosan on oltava päällä."
 
 #: src/translations.h:255
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: src/translations.h:256
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Yhdistyneet arabiemiirikunnat"
 
 #: src/translations.h:257
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afganistan"
 
 #: src/translations.h:258
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua ja Barbuda"
 
 #: src/translations.h:259
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #: src/translations.h:260
 msgid "Albania"
-msgstr ""
+msgstr "Albania"
 
 #: src/translations.h:261
 msgid "Armenia"
-msgstr ""
+msgstr "Armenia"
 
 #: src/translations.h:262
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Alankomaiden Antillit"
 
 #: src/translations.h:263
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #: src/translations.h:264
 msgid "Antarctica"
-msgstr ""
+msgstr "Etelämanner"
 
 #: src/translations.h:265
 msgid "Argentina"
-msgstr ""
+msgstr "Argentiina"
 
 #: src/translations.h:266
 msgid "American Samoa"
-msgstr ""
+msgstr "Amerikan Samoa"
 
 #: src/translations.h:267
 msgid "Austria"
-msgstr ""
+msgstr "Itävalta"
 
 #: src/translations.h:268
 msgid "Australia"
-msgstr ""
+msgstr "Australia"
 
 #: src/translations.h:269
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: src/translations.h:270
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbaidžan"
 
 #: src/translations.h:271
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "Bosnia ja Herzegovina"
 
 #: src/translations.h:272
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: src/translations.h:273
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #: src/translations.h:274
 msgid "Belgium"
-msgstr ""
+msgstr "Belgia"
 
 #: src/translations.h:275
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #: src/translations.h:276
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgaria"
 
 #: src/translations.h:277
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrain"
 
 #: src/translations.h:278
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: src/translations.h:279
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #: src/translations.h:280
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermuda"
 
 #: src/translations.h:281
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Brunei Darussalamin sulttaanikunta"
 
 #: src/translations.h:282
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivia"
 
 #: src/translations.h:283
 msgid "Brazil"
-msgstr ""
+msgstr "Brasilia"
 
 #: src/translations.h:284
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahama"
 
 #: src/translations.h:285
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhutan"
 
 #: src/translations.h:286
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Bouvent'nsaari"
 
 #: src/translations.h:287
 msgid "Botswana"
-msgstr ""
+msgstr "Botswana"
 
 #: src/translations.h:288
 msgid "Belarus"
-msgstr ""
+msgstr "Valko-Venäjä"
 
 #: src/translations.h:289
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #: src/translations.h:290
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 #: src/translations.h:291
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Kookossaaret"
 
 #: src/translations.h:292
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Kongon demokraattinen tasavalta"
 
 #: src/translations.h:293
 msgid "Central African Republic"
-msgstr ""
+msgstr "Keski-Afrikan tasavalta"
 
 #: src/translations.h:294
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Kongon tasavalta"
 
 #: src/translations.h:295
 msgid "Switzerland"
-msgstr ""
+msgstr "Sveitsi"
 
 #: src/translations.h:296
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Norsunluurannikko"
 
 #: src/translations.h:297
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cookinsaaret"
 
 #: src/translations.h:298
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #: src/translations.h:299
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerun"
 
 #: src/translations.h:300
 msgid "China"
-msgstr ""
+msgstr "Kiinan kansantasavalta"
 
 #: src/translations.h:301
 msgid "Colombia"
-msgstr ""
+msgstr "Kolumbia"
 
 #: src/translations.h:302
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 #: src/translations.h:303
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Serbia ja Montenegro"
 
 #: src/translations.h:304
 msgid "Cuba"
-msgstr ""
+msgstr "Kuuba"
 
 #: src/translations.h:305
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kap Verde"
 
 #: src/translations.h:306
 msgid "Christmas Island"
-msgstr ""
+msgstr "Joulusaari"
 
 #: src/translations.h:307
 msgid "Cyprus"
-msgstr ""
+msgstr "Kypros"
 
 #: src/translations.h:308
 msgid "Czech Republic"
-msgstr ""
+msgstr "Tšekin tasavalta"
 
 #: src/translations.h:309
 msgid "Germany"
-msgstr ""
+msgstr "Saksa"
 
 #: src/translations.h:310
 msgid "Djibouti"
-msgstr ""
+msgstr "Djibouti"
 
 #: src/translations.h:311
 msgid "Denmark"
-msgstr ""
+msgstr "Tanska"
 
 #: src/translations.h:312
 msgid "Dominica"
-msgstr ""
+msgstr "Dominica"
 
 #: src/translations.h:313
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Dominikaaninen tasavalta"
 
 #: src/translations.h:314
 msgid "Algeria"
-msgstr ""
+msgstr "Algeria"
 
 #: src/translations.h:315
 msgid "Ecuador"
-msgstr ""
+msgstr "Ecuador"
 
 #: src/translations.h:316
 msgid "Estonia"
-msgstr ""
+msgstr "Viro"
 
 #: src/translations.h:317
 msgid "Egypt"
-msgstr ""
+msgstr "Egypti"
 
 #: src/translations.h:318
 msgid "Western Sahara"
-msgstr ""
+msgstr "Länsi-Sahara"
 
 #: src/translations.h:319
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritrea"
 
 #: src/translations.h:320
 msgid "Spain"
-msgstr ""
+msgstr "Espanja"
 
 #: src/translations.h:321
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiopia"
 
 #: src/translations.h:322
 msgid "Finland"
-msgstr ""
+msgstr "Suomi"
 
 #: src/translations.h:323
 msgid "Fiji"
-msgstr ""
+msgstr "Fidži"
 
 #: src/translations.h:324
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Falklandsaaret"
 
 #: src/translations.h:325
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikronesia"
 
 #: src/translations.h:326
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Färsaaret"
 
 #: src/translations.h:327
 msgid "France"
-msgstr ""
+msgstr "Ranska"
 
 #: src/translations.h:328
 msgid "Gabon"
-msgstr ""
+msgstr "Gabon"
 
 #: src/translations.h:329
 msgid "United Kingdom"
-msgstr ""
+msgstr "Yhdistynyt kuningaskunta"
 
 #: src/translations.h:330
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: src/translations.h:331
 msgid "Georgia"
-msgstr ""
+msgstr "Gruusia"
 
 #: src/translations.h:332
 msgid "French Guiana"
-msgstr ""
+msgstr "Ranskan Guayana"
 
 #: src/translations.h:333
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #: src/translations.h:334
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltar"
 
 #: src/translations.h:335
 msgid "Greenland"
-msgstr ""
+msgstr "Grönlanti"
 
 #: src/translations.h:336
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: src/translations.h:337
 msgid "Guinea"
-msgstr ""
+msgstr "Guinea"
 
 #: src/translations.h:338
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #: src/translations.h:339
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Päiväntasaajan Guinea"
 
 #: src/translations.h:340
 msgid "Greece"
-msgstr ""
+msgstr "Kreikka"
 
 #: src/translations.h:341
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Etelä-Georgia ja Eteläiset Sandwichsaaret"
 
 #: src/translations.h:342
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemala"
 
 #: src/translations.h:343
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: src/translations.h:344
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: src/translations.h:345
 msgid "Guyana"
-msgstr ""
+msgstr "Guayana"
 
 #: src/translations.h:346
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #: src/translations.h:347
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Heard ja McDonaldinsaaret"
 
 #: src/translations.h:348
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: src/translations.h:349
 msgid "Croatia"
-msgstr ""
+msgstr "Kroatia"
 
 #: src/translations.h:350
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: src/translations.h:351
 msgid "Hungary"
-msgstr ""
+msgstr "Unkari"
 
 #: src/translations.h:352
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonesia"
 
 #: src/translations.h:353
 msgid "Ireland"
-msgstr ""
+msgstr "Irlanti"
 
 #: src/translations.h:354
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 #: src/translations.h:355
 msgid "India"
-msgstr ""
+msgstr "Intia"
 
 #: src/translations.h:356
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Brittiläinen Intian valtameren alue"
 
 #: src/translations.h:357
 msgid "Iraq"
-msgstr ""
+msgstr "Irak"
 
 #: src/translations.h:358
 msgid "Iran"
-msgstr ""
+msgstr "Iran"
 
 #: src/translations.h:359
 msgid "Iceland"
-msgstr ""
+msgstr "Islanti"
 
 #: src/translations.h:360
 msgid "Italy"
-msgstr ""
+msgstr "Italia"
 
 #: src/translations.h:361
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaika"
 
 #: src/translations.h:362
 msgid "Jordan"
-msgstr ""
+msgstr "Jordania"
 
 #: src/translations.h:363
 msgid "Japan"
-msgstr ""
+msgstr "Japani"
 
 #: src/translations.h:364
 msgid "Kenya"
-msgstr ""
+msgstr "Kenia"
 
 #: src/translations.h:365
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirgiisia"
 
 #: src/translations.h:366
 msgid "Cambodia"
-msgstr ""
+msgstr "Kambodža"
 
 #: src/translations.h:367
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: src/translations.h:368
 msgid "Comoros"
-msgstr ""
+msgstr "Komorit"
 
 #: src/translations.h:369
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts ja Nevis"
 
 #: src/translations.h:370
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Korean demokraattinen kansantasavalta"
 
 #: src/translations.h:371
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Korean tasavalta"
 
 #: src/translations.h:372
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuwait"
 
 #: src/translations.h:373
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Caymansaaret"
 
 #: src/translations.h:374
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazahstan"
 
 #: src/translations.h:375
 msgid "Lao"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations.h:376
 msgid "Lebanon"
-msgstr ""
+msgstr "Libanon"
 
 #: src/translations.h:377
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Saint Lucia"
 
 #: src/translations.h:378
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Liechtenstein"
 
 #: src/translations.h:379
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanka"
 
 #: src/translations.h:380
 msgid "Liberia"
-msgstr ""
+msgstr "Liberia"
 
 #: src/translations.h:381
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #: src/translations.h:382
 msgid "Lithuania"
-msgstr ""
+msgstr "Lithuania"
 
 #: src/translations.h:383
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxemburg"
 
 #: src/translations.h:384
 msgid "Latvia"
-msgstr ""
+msgstr "Latvia"
 
 #: src/translations.h:385
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "Libya"
 
 #: src/translations.h:386
 msgid "Morocco"
-msgstr ""
+msgstr "Marokko"
 
 #: src/translations.h:387
 msgid "Monaco"
-msgstr ""
+msgstr "Monaco"
 
 #: src/translations.h:388
 msgid "Moldova"
-msgstr ""
+msgstr "Moldavia"
 
 #: src/translations.h:389
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #: src/translations.h:390
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshallsaaret"
 
 #: src/translations.h:391
 msgid "Macedonia"
-msgstr ""
+msgstr "Makedonia"
 
 #: src/translations.h:392
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: src/translations.h:393
 msgid "Myanmar"
-msgstr ""
+msgstr "Myanmar"
 
 #: src/translations.h:394
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolia"
 
 #: src/translations.h:395
 msgid "Macau"
-msgstr ""
+msgstr "Makao"
 
 #: src/translations.h:396
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Pohjois-Mariaanit"
 
 #: src/translations.h:397
 msgid "Martinique"
-msgstr ""
+msgstr "Martinique"
 
 #: src/translations.h:398
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritania"
 
 #: src/translations.h:399
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: src/translations.h:400
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: src/translations.h:401
 msgid "Mauritius"
-msgstr ""
+msgstr "Mauritius"
 
 #: src/translations.h:402
 msgid "Maldives"
-msgstr ""
+msgstr "Malediivit"
 
 #: src/translations.h:403
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: src/translations.h:404
 msgid "Mexico"
-msgstr ""
+msgstr "Meksiko"
 
 #: src/translations.h:405
 msgid "Malaysia"
-msgstr ""
+msgstr "Malesia"
 
 #: src/translations.h:406
 msgid "Mozambique"
-msgstr ""
+msgstr "Mosambik"
 
 #: src/translations.h:407
 msgid "Namibia"
-msgstr ""
+msgstr "Namibia"
 
 #: src/translations.h:408
 msgid "New Caledonia"
-msgstr ""
+msgstr "Uusi-Kaledonia"
 
 #: src/translations.h:409
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 #: src/translations.h:410
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolkinsaari"
 
 #: src/translations.h:411
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigeria"
 
 #: src/translations.h:412
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nicaragua"
 
 #: src/translations.h:413
 msgid "Netherlands"
-msgstr ""
+msgstr "Alankomaat"
 
 #: src/translations.h:414
 msgid "Norway"
-msgstr ""
+msgstr "Norja"
 
 #: src/translations.h:415
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: src/translations.h:416
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: src/translations.h:417
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: src/translations.h:418
 msgid "New Zealand"
-msgstr ""
+msgstr "Uusi-Seelanti"
 
 #: src/translations.h:419
 msgid "Oman"
-msgstr ""
+msgstr "Oman"
 
 #: src/translations.h:420
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: src/translations.h:421
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: src/translations.h:422
 msgid "French Polynesia"
-msgstr ""
+msgstr "Ranskan Polynesia"
 
 #: src/translations.h:423
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua-Uusi-Guinea"
 
 #: src/translations.h:424
 msgid "Philippines"
-msgstr ""
+msgstr "Filippiinit"
 
 #: src/translations.h:425
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #: src/translations.h:426
 msgid "Poland"
-msgstr ""
+msgstr "Puola"
 
 #: src/translations.h:427
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Saint-Pierre ja Miquelon"
 
 #: src/translations.h:428
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairn"
 
 #: src/translations.h:429
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Puerto Rico"
 
 #: src/translations.h:430
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Palestiinalaishallinto"
 
 #: src/translations.h:431
 msgid "Portugal"
-msgstr ""
+msgstr "Portugali"
 
 #: src/translations.h:432
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: src/translations.h:433
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 #: src/translations.h:434
 msgid "Qatar"
-msgstr ""
+msgstr "Qatar"
 
 #: src/translations.h:435
 msgid "Réunion"
-msgstr ""
+msgstr "Réunion"
 
 #: src/translations.h:436
 msgid "Romania"
-msgstr ""
+msgstr "Romania"
 
 #: src/translations.h:437
 msgid "Serbia"
-msgstr ""
+msgstr "Serbia"
 
 #: src/translations.h:438
 msgid "Russian Federation"
-msgstr ""
+msgstr "Venäjän federaatio"
 
 #: src/translations.h:439
 msgid "Rwanda"
-msgstr ""
+msgstr "Ruanda"
 
 #: src/translations.h:440
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Saudi-Arabia"
 
 #: src/translations.h:441
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Salomonsaaret"
 
 #: src/translations.h:442
 msgid "Seychelles"
-msgstr ""
+msgstr "Seychellit"
 
 #: src/translations.h:443
 msgid "Sudan"
-msgstr ""
+msgstr "Sudan"
 
 #: src/translations.h:444
 msgid "Sweden"
-msgstr ""
+msgstr "Ruotsi"
 
 #: src/translations.h:445
 msgid "Singapore"
-msgstr ""
+msgstr "Singapore"
 
 #: src/translations.h:446
 msgid "Saint Helena"
-msgstr ""
+msgstr "Saint Helena"
 
 #: src/translations.h:447
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovenia"
 
 #: src/translations.h:448
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Huippuvuoret ja Jan Mayen"
 
 #: src/translations.h:449
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovakia"
 
 #: src/translations.h:450
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leone"
 
 #: src/translations.h:451
 msgid "San Marino"
-msgstr ""
+msgstr "San Marino"
 
 #: src/translations.h:452
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #: src/translations.h:453
 msgid "Somalia"
-msgstr ""
+msgstr "Somalia"
 
 #: src/translations.h:454
 msgid "Suriname"
-msgstr ""
+msgstr "Suriname"
 
 #: src/translations.h:455
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Sao Tome ja Principe"
 
 #: src/translations.h:456
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #: src/translations.h:457
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Syyrian arabitasavalta"
 
 #: src/translations.h:458
 msgid "Swaziland"
-msgstr ""
+msgstr "Swazimaa"
 
 #: src/translations.h:459
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Turks- ja Caicossaaret"
 
 #: src/translations.h:460
 msgid "Chad"
-msgstr ""
+msgstr "Tšad"
 
 #: src/translations.h:461
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Ranskan eteläiset ja antarktiset alueet"
 
 #: src/translations.h:462
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: src/translations.h:463
 msgid "Thailand"
-msgstr ""
+msgstr "Thaimaa"
 
 #: src/translations.h:464
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tadžikistan"
 
 #: src/translations.h:465
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: src/translations.h:466
 msgid "East Timor"
-msgstr ""
+msgstr "Itä-Timor"
 
 #: src/translations.h:467
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistan"
 
 #: src/translations.h:468
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisia"
 
 #: src/translations.h:469
 msgid "Tonga"
-msgstr ""
+msgstr "Toga"
 
 #: src/translations.h:470
 msgid "Turkey"
-msgstr ""
+msgstr "Turkki"
 
 #: src/translations.h:471
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad ja Tobago"
 
 #: src/translations.h:472
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: src/translations.h:473
 msgid "Taiwan"
-msgstr ""
+msgstr "Kiinan tasavalta (Taiwan)"
 
 #: src/translations.h:474
 msgid "Tanzania"
-msgstr ""
+msgstr "Tansania"
 
 #: src/translations.h:475
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukraina"
 
 #: src/translations.h:476
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: src/translations.h:477
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Yhdysvaltain pienet erillissaaret"
 
 #: src/translations.h:478
 msgid "United States"
-msgstr ""
+msgstr "Yhdysvallat"
 
 #: src/translations.h:479
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 #: src/translations.h:480
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
 #: src/translations.h:481
 msgid "Vatican City State"
-msgstr ""
+msgstr "Vatikaanivaltio"
 
 #: src/translations.h:482
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Saint Vincent ja Grenadiinit"
 
 #: src/translations.h:483
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #: src/translations.h:484
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Brittiläiset Neitsytsaaret"
 
 #: src/translations.h:485
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Yhdysvaltain Neitsytsaaret"
 
 #: src/translations.h:486
 msgid "Viet Nam"
-msgstr ""
+msgstr "Vietnam"
 
 #: src/translations.h:487
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #: src/translations.h:488
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis ja Futuna"
 
 #: src/translations.h:489
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: src/translations.h:490
 msgid "Yemen"
-msgstr ""
+msgstr "Jemen"
 
 #: src/translations.h:491
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: src/translations.h:492
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Jugoslavia"
 
 #: src/translations.h:493
 msgid "South Africa"
-msgstr ""
+msgstr "Etelä-Afrikka"
 
 #: src/translations.h:494
 msgid "Zambia"
-msgstr ""
+msgstr "Sambia"
 
 #: src/translations.h:495
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
 #: src/translations.h:502 src/ui_dateTimeDialogGui.h:294
@@ -2516,15 +2531,15 @@ msgstr "Lisää aurinkoviikko"
 
 #: src/translations.h:510
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Lisää 1 synodinen kuukausi"
 
 #: src/translations.h:511
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "Lisää 1 drakoninen kuukausi"
 
 #: src/translations.h:512
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "Lisää 1 anomalistinen kuukausi"
 
 #: src/translations.h:513
 msgid "Add 1 mean tropical month"
