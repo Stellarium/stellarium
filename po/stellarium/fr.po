@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-12 16:17+0200\n"
-"PO-Revision-Date: 2012-11-16 10:12+0000\n"
+"PO-Revision-Date: 2012-11-17 13:16+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-17 04:34+0000\n"
+"X-Launchpad-Export-Date: 2012-11-18 04:35+0000\n"
 "X-Generator: Launchpad (build 16278)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -53,7 +53,7 @@ msgstr "Auteur : "
 
 #: src/core/modules/LandscapeMgr.cpp:503
 msgid "Location: "
-msgstr "Emplacement : "
+msgstr "Situation : "
 
 #: src/core/modules/LandscapeMgr.cpp:508
 #, qt-format
@@ -2879,7 +2879,7 @@ msgstr "Goniomètre"
 
 #: src/translations.h:598
 msgid "Compass marks"
-msgstr "Graduations azimutales"
+msgstr "Graduation azimutale"
 
 #: src/translations.h:601
 msgid "Show exoplanets"
@@ -2965,23 +2965,23 @@ msgstr "Afficher et zoomer sur la lune"
 
 #: src/translations.h:640
 msgid "Configuration window"
-msgstr "Fenêtre de configuration"
+msgstr "Configuration générale"
 
 #: src/translations.h:641
 msgid "Date/time window"
-msgstr "Fenêtre date/heure"
+msgstr "Date et heure"
 
 #: src/translations.h:642
 msgid "Help window"
-msgstr "Fenêtre d'aide"
+msgstr "Aide"
 
 #: src/translations.h:643
 msgid "Location window"
-msgstr "Fenêtre de positionnement"
+msgstr "Situation"
 
 #: src/translations.h:645
 msgid "Search window"
-msgstr "Fenêtre de recherche"
+msgstr "Recherche"
 
 #: src/translations.h:646
 msgid "Shortcuts window"
@@ -2989,7 +2989,7 @@ msgstr "Fenêtre de raccourcis"
 
 #: src/translations.h:647
 msgid "Sky and viewing options window"
-msgstr "Fenêtre de configuration de l'affichage"
+msgstr "Affichage"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -3023,7 +3023,7 @@ msgstr "Actualiser"
 #: src/ui_locationDialogGui.h:389
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:137
 msgid "Location"
-msgstr "Emplacement"
+msgstr "Situation"
 
 #: src/ui_locationDialogGui.h:393
 msgid "Current location information"
@@ -4016,11 +4016,11 @@ msgstr "Un clic gauche changera seulement le point terminal."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
-msgstr "Graduations azimutales"
+msgstr "Graduation azimutale"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:60
 msgid "Displays compass bearing marks along the horizon"
-msgstr "Affiche sur l'horizon les graduations azimutales"
+msgstr "Affiche sur l'horizon une graduation de l'azimut"
 
 #: plugins/Oculars/src/Oculars.cpp:81
 #: plugins/Oculars/src/ui_ocularDialog.h:858
@@ -4959,7 +4959,7 @@ msgstr "Nombre de segments utilisés pour tracer la ligne"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Number of  segments:"
-msgstr "Nombre de segments:"
+msgstr "Nombre de segments :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:652
 #: plugins/Satellites/src/ui_satellitesDialog.h:656
@@ -4968,7 +4968,7 @@ msgstr "Durée d'un segment en secondes"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Segment length (s):"
-msgstr "Longueur du segment (s):"
+msgstr "Longueur de segment (s) :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
@@ -5724,8 +5724,8 @@ msgid ""
 msgstr ""
 "Par défaut, l'heure affichée dans Stellarium est à interpréter comme l'heure "
 "locale selon le fuseau horaire du système, et non pas selon le fuseau "
-"horaire de l'emplacement affiché. Ce comportement peut être modifié en "
-"changeant les paramètres de fuseau horaire globaux de Stellarium."
+"horaire du lieu affiché. Ce comportement peut être modifié en changeant les "
+"paramètres globaux de fuseau horaire de Stellarium."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
