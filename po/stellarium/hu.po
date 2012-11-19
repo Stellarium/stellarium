@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-12 16:17+0200\n"
-"PO-Revision-Date: 2012-10-26 22:49+0000\n"
+"PO-Revision-Date: 2012-11-18 08:15+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-13 04:56+0000\n"
-"X-Generator: Launchpad (build 16251)\n"
+"X-Launchpad-Export-Date: 2012-11-19 04:35+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -385,7 +385,7 @@ msgstr "Hálózati hiba"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Pozíciófeldolgozási hiba"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
@@ -563,6 +563,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Alább a gombokhoz rendelt műveletek láthatók. További műveletek a  \"%1\"  "
+"gombbal érhetők el."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1448,7 +1450,7 @@ msgstr ""
 
 #: src/translations.h:241
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr ""
+msgstr "A Phobos a Nap előtt az Olympus Monsról nézve 2068. január 10-én."
 
 #: src/translations.h:242
 msgid ""
@@ -1474,32 +1476,34 @@ msgstr ""
 
 #: src/translations.h:245
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "Nyugati csillagképek meglátogatása"
 
 #: src/translations.h:246
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "A Nap a nagyobb bolygókról és a Plutóról nézve."
 
 #: src/translations.h:247
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
-msgstr ""
+msgstr "A Föld legjobb látványa a Naprendszer égitestjeiről a 21. században."
 
 #: src/translations.h:248
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
-msgstr ""
+msgstr "Vénuszátvonulás, Sydney, Ausztrália, 2012. június 6."
 
 #: src/translations.h:249
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
-msgstr ""
+msgstr "Az analemma bemutatása - a Nap útja az égbolton az év során."
 
 #: src/translations.h:250
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"A Tycho Brahe által megfigyelt szupernóva fellobbanása 1572-ben.  (a "
+"\"szupernóva\" plug-int be kell tölteni hozzá)"
 
 #: src/translations.h:255
 msgid "Andorra"
@@ -2829,11 +2833,11 @@ msgstr "Kicsinyítés"
 
 #: src/translations.h:595
 msgid "Angle measure"
-msgstr ""
+msgstr "szögmérés"
 
 #: src/translations.h:598
 msgid "Compass marks"
-msgstr ""
+msgstr "iránytű jelzések"
 
 #: src/translations.h:601
 msgid "Show exoplanets"
@@ -2861,7 +2865,7 @@ msgstr ""
 
 #: src/translations.h:611
 msgid "Show crosshairs"
-msgstr ""
+msgstr "célkereszt mutatása"
 
 #: src/translations.h:612
 msgid "Oculars popup menu"
@@ -2911,7 +2915,7 @@ msgstr "Szkript"
 
 #: src/translations.h:635
 msgid "Run landscapes script from file"
-msgstr ""
+msgstr "A tájképek szkriptjének indítása"
 
 #: src/translations.h:636
 msgid "Show and zoom Moon"
@@ -2931,7 +2935,7 @@ msgstr "Súgóablak"
 
 #: src/translations.h:643
 msgid "Location window"
-msgstr "Hely ablak"
+msgstr "Megfigyelési hely"
 
 #: src/translations.h:645
 msgid "Search window"
@@ -3935,11 +3939,11 @@ msgstr "…"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:56
 msgid "Angle Measure"
-msgstr ""
+msgstr "Szögmérés"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:59
 msgid "Provides an angle measurement tool"
-msgstr ""
+msgstr "Szögmérési eszköz"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:307
@@ -4070,7 +4074,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Nagyítás: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
@@ -4083,7 +4087,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Dimenziók: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1518
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
@@ -4245,7 +4249,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr ""
+msgstr "Problémák esetén kérem értesítsen!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
@@ -4907,7 +4911,7 @@ msgstr "Megjelenítve"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "A kiválasztott műholdak pályáinak mutatása"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
@@ -4954,6 +4958,8 @@ msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
+"A kiválasztott forrás URL-jének megadása vagy szerkesztése.  Az Enter "
+"megnyomása elmenti a változtatást."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Add new source"
@@ -5294,7 +5300,7 @@ msgstr "Soros port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
-msgstr ""
+msgstr "Az eszköz típusa:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
@@ -5315,7 +5321,7 @@ msgstr "TCP port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "User interface settings"
-msgstr ""
+msgstr "A felhasználói felület beállításai"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:508
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -6031,6 +6037,7 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
+"Néhány történelmi szupernóva, amik fényesebbek voltak 10 magnitúdónál."
 
 #: plugins/Supernovae/src/Supernova.cpp:97
 msgid "supernova"
@@ -6039,7 +6046,7 @@ msgstr "szupernova"
 #: plugins/Supernovae/src/Supernova.cpp:113
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "A szupernóva típusa: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -6050,6 +6057,7 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than visual "
 "magnitude 10: "
 msgstr ""
+"Néhány történelmi szupernóva, amik fényesebbek voltak 10 magnitúdónál: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
@@ -6066,13 +6074,15 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 msgid "Acknowledgments"
-msgstr ""
+msgstr "Köszönetnyilvánítás"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
+"Köszönetet mondunk a következő embereknek a hozzájárulásukért és értékes "
+"megjegyzéseikért:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Sergei Blinnikov"
@@ -6096,6 +6106,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
+"Ha további információra van szüksége ezzel a plug-innal kapcsolatban, %1itt "
+"megszerezheti%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -6106,15 +6118,15 @@ msgstr "Következő frissítés:  %1 nap múlva"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:199
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Történelmi szupernóvák frissítve"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Történelmi szupernóvák beállításai"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:231
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Történelmi szupernóvák plug-in beállításai"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
@@ -6145,6 +6157,9 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Néhány 16 magnitúdónál fényesebb kvazár bemutatása. A kvazárok katalógusa a "
+"\"Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) \" alapján "
+"készült."
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
@@ -6165,10 +6180,12 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"A kvazárok katalógusa a \"Quasars and Active Galactic Nuclei' (13th Ed.)  "
+"alapján készült"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
@@ -6203,7 +6220,7 @@ msgstr "pulzárok"
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr ""
+msgstr "Ez a plug-in néhány pulzár pozícióját adja meg."
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
@@ -6213,7 +6230,7 @@ msgstr "pulzár"
 #: plugins/Pulsars/src/Pulsar.cpp:136
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "Baricentrikus periódus: %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
@@ -6286,7 +6303,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:218
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "Megjegyzések: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:287
 msgid ""
@@ -6344,7 +6361,7 @@ msgstr "a pulzárazonosítók PSR-előtaggal rendelkeznek"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "Köszönetnyilvánítás"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
@@ -6420,7 +6437,7 @@ msgstr "Sugár"
 #: plugins/Exoplanets/src/Exoplanet.cpp:213
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Effektív hőmérséklet: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Exoplanet"
@@ -6441,7 +6458,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Fél nagytengely"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "AU"
@@ -6633,7 +6650,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:560
 msgid "Source is not observable."
-msgstr ""
+msgstr "A forrás nem megfigyelhető."
 
 #: plugins/Observability/src/Observability.cpp:561
 msgid "No Acronychal nor Cosmical rise/set."
@@ -6786,7 +6803,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "Azok az éjszakák, amikor a forrás a látóhatár fölött van:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid ""
@@ -6849,7 +6866,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "Azok az éjszakák, amikor a forrás a látóhatár fölött van."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Dates of previous and next Full Moon"
