@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-12 16:17+0200\n"
-"PO-Revision-Date: 2012-11-18 18:21+0000\n"
+"PO-Revision-Date: 2012-11-19 16:16+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-19 04:35+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-11-20 04:40+0000\n"
+"X-Generator: Launchpad (build 16286)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -4014,7 +4014,7 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
-"Näytä taivas kuten kaukoputken okulaarista katsottuna. (Vain suurennos ja "
+"Näyttää taivaan kuten kaukoputken okulaarista katsottuna. (Vain suurennos ja "
 "näkökenttä on mallinnettu.) Myös CCD-kenno ja telrad-tähtäin."
 
 #: plugins/Oculars/src/Oculars.cpp:752
@@ -4274,8 +4274,8 @@ msgid ""
 msgstr ""
 "Voit skaalata ruudulla näkyvää kuvaa. Tämän tarkoitus on näyttää paremmin "
 "miltä yksi okulaari/kaukoputki -yhdistelmä näyttää toiseen verrattuna. Sama "
-"okulaari tuottaa eri polttovälisisssä kaukoputkissa erilaisia ympyröitä "
-"muutaen näkymää. Huonona puolena on se, että osa ruudusta menee hukkaan. "
+"okulaari tuottaa eri polttovälisisssä kaukoputkissa erilaisia näkökenttiä "
+"muuttaen näkymää. Huonona puolena on se, että osa ruudusta menee hukkaan. "
 "Näin ollen on parasta jättää skaalaus pois, ellei sille ole tarvetta."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
@@ -4285,8 +4285,8 @@ msgid ""
 "top of the screen."
 msgstr ""
 "Voit myös ottaa tähtäinristikon käyttöön kuvan keskelle. Ihannetapauksessa "
-"se olisi kohdistettu pohjoiseen. Tämä on toistaiseksi tekemättä., joten "
-"tällä hetkellä se on kohdistettu ruudun yläreunaan."
+"ristikko olisi kohdistettu pohjoiseen. Tämä ominaisuus on toistaiseksi "
+"tekemättä, joten tällä hetkellä se on kohdistettu ruudun yläreunaan."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4439,7 +4439,7 @@ msgstr "Kaukoputket"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Diameter:"
-msgstr "Halkaisija:"
+msgstr "Peilin/linssin halkaisija:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Horizontal flip"
@@ -4486,11 +4486,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:231
 #: plugins/Satellites/src/Satellite.cpp:235
 msgid "Catalog #"
-msgstr "katalogi #"
+msgstr "Luettelonumero #"
 
 #: plugins/Satellites/src/Satellite.cpp:237
 msgid "International Designator"
-msgstr "Kansinvälinen tunnus"
+msgstr "Kansainvälinen tunnus"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:249
@@ -4596,7 +4596,7 @@ msgid ""
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
 "Klikkaamalla \"%1\"-näppäintä tämän valintaikkunan \"%2\"-välilehdellä "
-"palauttaa oletus%3tiedoston. Vanha tiedosto varmuuskopioidaan nimellä %4.  "
+"palauttaa oletus-%3-tiedoston. Vanha tiedosto varmuuskopioidaan nimellä %4. "
 "Vanha tiedosto löytyy kansiosta modules/Satellites/."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
@@ -4630,7 +4630,7 @@ msgid ""
 "(see %1 for an example)."
 msgstr ""
 "Jos kytket internet-päivitykset pois päältä, voit päivittää tietokoneellasi "
-"olevasta tiedostosta. Tiedoston on oltava samaa formaattia kuin Celstrak-"
+"olevasta tiedostosta. Tiedoston on oltava samaa formaattia kuin Celestrak-"
 "päivitykset (katso %1 esimerkiksi)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
@@ -4666,7 +4666,7 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
-"Paikat lasketaan käyttäen SGP4 & SDP4 -metodeja, käyttäen NORAD TLE -dataa. "
+"Paikat lasketaan SGP4 & SDP4 -metodeilla, käyttäen NORAD TLE -dataa. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
 msgid ""
@@ -4731,7 +4731,7 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
-"Jos haluta ehdotta uutta ominaisuutta, voit tehdä bugiraportin ja merkitä "
+"Jos haluat ehdottaa uutta ominaisuutta, voit tehdä bugiraportin ja merkitä "
 "sen tärkeydeksi \"wishlist\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
@@ -4975,7 +4975,7 @@ msgstr "Näytä valitut satelliitit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Displayed"
-msgstr "Näytetty"
+msgstr "Näytä"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -6201,7 +6201,7 @@ msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr "Teoreettisen ja kokellisen fysiikan instituuttia"
+msgstr "Teoreettisen ja kokeellisen fysiikan instituutti"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
@@ -6656,8 +6656,8 @@ msgstr ""
 "Analysoi kohteiden havaittavuutta (nousu, lasku, meridiaanin ylitys), sekä "
 "sitä mikä aika vuodesta on paras kohteen havainnointiin. Liitännäinen "
 "olettaa että kohde havaittavissa kun se on horisontin yläpuolella yöaikaan. "
-"liitännäinen kertoo myös milloin kohde on kauimpana auringosta tai "
-"akronikaalisen ja kosmisen nousun/laskun ajankohtia.<br><br> Tässä tekstissä "
+"Liitännäinen kertoo myös milloin kohde on kauimpana auringosta sekä "
+"akronikaalisen ja kosmisen nousun/laskun ajankohdat.<br><br> Tässä tekstissä "
 "mainittujen termien selitykset löytyvät tietoja-välilehden alta."
 
 #: plugins/Observability/src/Observability.cpp:187
@@ -6836,12 +6836,12 @@ msgstr "TÄNÄ VUONNA:"
 #: plugins/Observability/src/Observability.cpp:1428
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "Edellinen täysikuu: %1 %2 at %3:%4. "
+msgstr "Edellinen täysikuu: %1 %2 kello %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:1433
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "Seuraava täysikuu: %1 %2 at %3:%4. "
+msgstr "Seuraava täysikuu: %1 %2 kello %3:%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
@@ -6858,7 +6858,7 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Liitännäinen analysoi valitun kohteen havittavuutta (ruudun keskellä olevan "
+"Liitännäinen analysoi valitun kohteen havaittavuutta (ruudun keskellä olevan "
 "kohteen, jos mitään ei ole valittuna). Liitännäinen näyttää nousun, "
 "meridiaanin ylityksen ja laskun ajankohdan, kuten myös vuoden parhaan "
 "ajankohdan havainnointiin (eli ajankohdan jolloin kohteen etäisyys "
@@ -6866,7 +6866,7 @@ msgstr ""
 "yläpuolella pimeän aikaan, ja akronikaalisen ja kosmisen nousun/laskun "
 "ajankohdat.<br>Aurinkokunnan kohteiden efemeridi ja parallaksi-ilmiö on myös "
 "otettu huomioon.<br><br> Tekijä kiittää Alexander Wolfia ja Georg Zottia "
-"heidän antamastaan neuvoista.<br><br>Ivan Martin-Vidal (Onsalan observatorio)"
+"heidän antamistaan neuvoista.<br><br>Ivan Martin-Vidal (Onsalan observatorio)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
 msgid "Explanation of some parameters"
@@ -6874,7 +6874,7 @@ msgstr "Joidenkin parametrien selityksiä"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Sun altitude at twilight:"
-msgstr "Auringon korkeus hämärän aikaan:"
+msgstr "Auringon korkeus hämärän loppuessa:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid ""
@@ -6920,7 +6920,7 @@ msgid ""
 "between Cosmical set and rise."
 msgstr ""
 "Akronikaalinen nousu (tai lasku) tapahtuu kun kohde nousee (tai laskee) "
-"samaa aikaan kuin aurinko laskee (tai nousee). Näiden tapahtumien tarkat "
+"samaan aikaan kun aurinko laskee (tai nousee). Näiden tapahtumien tarkat "
 "ajankohdat riippuvat havaitsijan sijainnista. Akronikaalisen laskun ja "
 "nousun välisenä aikan taivaankappale on korkealla kun aurinko on horisontin "
 "alapuolella (eli siten kohde on hyvin havaittavissa). Kosminen nousu taas on "
@@ -6975,7 +6975,7 @@ msgid ""
 msgstr ""
 "Liitännäinen laskee aikavälin jolloin taivaankappale on horisontin "
 "yläpuolella edes hetken yöaikaan. 'Yöllä' liitännäinen tarkoittaa aikaväliä "
-"jolloin aurinko on hämärän korkeuden alapuolella (jonka käyttäjä voi tse "
+"jolloin aurinko on hämärän korkeuden alapuolella (jonka käyttäjä voi itse "
 "asettaa; katso yllä). Kun kohteet pysyvät paikallaan taivaalla (tai ovat "
 "ulkoplaneettoja), voidaan niille antaa kaksi mahdollista havaintoväliä: joko "
 "aikaväli yhdestä päivästä toiseen (kuten tammikuun 20:sta syyskuun "
@@ -7062,7 +7062,7 @@ msgstr "Kirjasinkoko"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Sun altitude at twilight"
-msgstr "Auringon korkeus hämärän aikaan"
+msgstr "Auringon korkeus hämärän loppuessa"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "0 deg."
