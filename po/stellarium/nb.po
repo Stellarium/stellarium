@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-12 16:17+0200\n"
-"PO-Revision-Date: 2012-10-24 04:42+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2012-11-21 21:05+0000\n"
+"Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-13 04:59+0000\n"
-"X-Generator: Launchpad (build 16251)\n"
+"X-Launchpad-Export-Date: 2012-11-22 04:44+0000\n"
+"X-Generator: Launchpad (build 16293)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -569,6 +569,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Under vises bare handlinger med tastatursnarveier.  Flere handlinger kan "
+"være tilgjengelige med «%1»-tasten."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1467,7 +1469,7 @@ msgstr ""
 
 #: src/translations.h:241
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr ""
+msgstr "Phobos dekker for sola som sett fra Olympus Mons 10. januar 2068."
 
 #: src/translations.h:242
 msgid ""
@@ -1475,6 +1477,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Phobosformørkelser på jorda er vanlig, det er de på Jupiter også.  Begge "
+"fomørkelsene samme dag er veldig skjeldent.  Her er en den 23/1/2048.  I "
+"sanntid."
 
 #: src/translations.h:243
 msgid ""
@@ -1483,6 +1488,10 @@ msgid ""
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
+"Phobos raser forbi Mars og dekker for sola, går forbi for så å gå tilbake og "
+"skape en delvis formørkelse (ses bare pfra den sørlige halvkula) igjen, så "
+"dekker Mars helt for sola og Phobos, og så mens Phobos kommer bort fra sola "
+"går den gjennom Mars skygge og blir mørk."
 
 #: src/translations.h:244
 msgid ""
@@ -1492,32 +1501,37 @@ msgstr ""
 
 #: src/translations.h:245
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "En tur gjennom vestlige stjernebilder."
 
 #: src/translations.h:246
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "Se på sola fra store planeter i solsystemet og Pluto."
 
 #: src/translations.h:247
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
+"De beste synene av jorda fra andre himmellegemer i solsystemet i det 21. "
+"århundret."
 
 #: src/translations.h:248
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
-msgstr ""
+msgstr "Venuspassasjen som sett fra Sydney i Australia den 6. juni 2012."
 
 #: src/translations.h:249
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"En demonstrasjon av analemmaet - Solens bane på himmelen i løpet av året."
 
 #: src/translations.h:250
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Glimt fra supernovaen som ble observert av Tycho Brage i 1572.  Supernova-"
+"tillegget må være på."
 
 #: src/translations.h:255
 msgid "Andorra"
@@ -4255,6 +4269,12 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefore I "
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
+"Du kan velge å skalere bildet du ser på skjermen.  Dette er for å vise deg "
+"en bedre sammenligning av hvordan én okular/teleskop-kombinasjon er i "
+"forhold til en annen.  Det samme okularet i to ulike teleskop med ulik "
+"fokuslengde gir to ulike utgangsirkler, og endrer utsikten.  Haken er at for "
+"skalerte bilder blir mye an skjermen bortkastet.  Derfor anbefaler jeg at du "
+"har den av om du ikke synes du trenger den."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -4262,6 +4282,9 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"Du kan velge et trådkors i denne utsikten.  Ideelt sett ville jeg hatt dette "
+"justert mot Nord.  Dette har jeg ikke klart.  Derfor er det justert mot "
+"toppen av skjermen."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4271,10 +4294,14 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Du kan slå en Telradfinner på eller av, dette kan ikke gjøres hvis du har "
+"okulært syn på.  Denne egenskaper tegner tre konsentriske sirkler på 0,5%1, "
+"2,0%1 og 4,0%1, for å hjelpe deg med å se det du hadde ventet å se med det "
+"blotte øyet gjennom Telradfinneren (eller lignende finner)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr ""
+msgstr "Hvis du finner problem, vær snill å fortell meg.  Nyt!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
@@ -6325,11 +6352,11 @@ msgstr "Barysentrisk periode: %1 s"
 #: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr ""
+msgstr "Tidsendring for barysentrisk periode: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:145
 msgid "Dispersion measure:"
-msgstr ""
+msgstr "Spredningsmål"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:148
@@ -6344,12 +6371,12 @@ msgstr "pc"
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr ""
+msgstr "Senk energitapraten: %1 erg/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr ""
+msgstr "Binærperiode til pulsar: %1 dager"
 
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
@@ -6365,7 +6392,7 @@ msgstr "Årlig parallakse: %1 mas"
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Avstand basert på elektrontetthetmodellen: %1  KPC (%2 ly)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
@@ -6399,32 +6426,36 @@ msgstr "Merknader: %1"
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
+"Avvikende røntgenstråle eller myk gammabølge-gjenntaker  med defekte "
+"pulseringer"
 
 #: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "har en eller flere binære sammenlikninger"
 
 #: plugins/Pulsars/src/Pulsar.cpp:297
 msgid "with pulsed emission from radio to infrared or higher frequencies"
-msgstr ""
+msgstr "med pulsert utslipp fra radio til infrarød eller høyere frekvenser"
 
 #: plugins/Pulsars/src/Pulsar.cpp:302
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr ""
+msgstr "med pulsert utslipp bare ved infrarød eller høyere frekvenser"
 
 #: plugins/Pulsars/src/Pulsar.cpp:307
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "med pulsert utslipp i radiosonen"
 
 #: plugins/Pulsars/src/Pulsar.cpp:312
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "med ujevne utslipp i radiosonen"
 
 #: plugins/Pulsars/src/Pulsar.cpp:317
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
+"isolert nøytronstjerne med pulser temperert røntgenutslipp men ingen merkbar "
+"radioutslipp"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
@@ -6459,7 +6490,7 @@ msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Pushchino Radioastronomiobservatorie"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
@@ -6467,7 +6498,7 @@ msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Nancay Radioastronomiske Observatorie"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
@@ -6590,6 +6621,8 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
+"Hvis du vil lese fullstendig informasjon om tillegg, historie og "
+"katalogformat kan du %1få informasjon her%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
@@ -6851,6 +6884,10 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"Himmellegemer blir ansett som synlige når sola er under denne høyden.  "
+"Høyden ved astronomisk skumring er stort sett mellom -12 og -18 grader.  "
+"Dette parameteret blir bare brukt til å beregne området til observerbare "
+"epoker (se under)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
