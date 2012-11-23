@@ -17,6 +17,7 @@
  */
 
 #include "Exoplanet.hpp"
+#include "Exoplanets.hpp"
 #include "StelObject.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -332,13 +333,20 @@ float Exoplanet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
-	if (Vmag<99)
+	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
 	{
-		return Vmag + extinctionMag;
+		return 4.f;
 	}
 	else
 	{
-		return 6.f + extinctionMag;
+		if (Vmag<99)
+		{
+			return Vmag + extinctionMag;
+		}
+		else
+		{
+			return 6.f + extinctionMag;
+		}
 	}
 }
 
@@ -374,7 +382,12 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 		if (labelsFader.getInterstate()<=0.f)
 		{
 			Vec3d win;
-			if(projector->project(XYZ, win))
+			if(!projector->project(XYZ, win)){return;}
+			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
+			{
+				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
+			}
+			else
 			{
 				renderer->drawTexturedRect(win[0] - 5, win[1] - 5, 10, 10);
 				renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());

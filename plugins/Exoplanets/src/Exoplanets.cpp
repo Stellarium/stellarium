@@ -539,6 +539,7 @@ void Exoplanets::restoreDefaultConfigIni(void)
 	// delete all existing Exoplanets settings...
 	conf->remove("");
 
+	conf->setValue("distribution_enabled", false);
 	conf->setValue("updates_enabled", true);
 	conf->setValue("flag_show_exoplanets", false);
 	conf->setValue("url", "http://stellarium.org/json/exoplanets.json");
@@ -554,6 +555,7 @@ void Exoplanets::readSettingsFromConfig(void)
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
+	distributionEnabled = conf->value("distribution_enabled", false).toBool();
 	flagShowExoplanets = conf->value("flag_show_exoplanets", false).toBool();
 
 	conf->endGroup();
@@ -566,6 +568,7 @@ void Exoplanets::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("updates_enabled", updatesEnabled );
+	conf->setValue("distribution_enabled", distributionEnabled);
 	conf->setValue("flag_show_exoplanets", flagShowExoplanets);
 
 	conf->endGroup();

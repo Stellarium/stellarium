@@ -72,6 +72,8 @@ void ExoplanetsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
+	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getDisplayMode());
+	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(GETSTELMODULE(Exoplanets), SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -151,6 +153,12 @@ void ExoplanetsDialog::setUpdateValues(int hours)
 {
 	GETSTELMODULE(Exoplanets)->setUpdateFrequencyHours(hours);
 	refreshUpdateValues();
+}
+
+void ExoplanetsDialog::setDistributionEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Exoplanets)->setDisplayMode(b);
 }
 
 void ExoplanetsDialog::setUpdatesEnabled(int checkState)
