@@ -121,6 +121,9 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
+	bool getDisplayMode(void) {return distributionEnabled;}
+	void setDisplayMode(bool b) {distributionEnabled=b;}
+
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
@@ -198,6 +201,7 @@ private:
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
+	bool distributionEnabled;
 
 	QSettings* conf;
 
