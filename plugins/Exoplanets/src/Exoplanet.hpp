@@ -77,7 +77,7 @@ public:
 	{
 		return XYZ;
 	}
-	//! Get the visual magnitude of pulsar
+	//! Get the visual magnitude
 	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
@@ -86,11 +86,13 @@ public:
 	{
 		return designation;
 	}
-	//! Get the english name of pulsar
+	//! Get the english name
 	virtual QString getEnglishName(void) const
 	{
 		return designation;
 	}
+
+	bool isDiscovered(const StelCore* core);
 
 	void update(double deltaTime);
 
