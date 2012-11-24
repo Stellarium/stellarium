@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>528</width>
-    <height>459</height>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -239,6 +239,16 @@
             </property>
             <property name="text">
              <string>Enable display of distribution for exoplanets</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="timelineModeCheckBox">
+            <property name="toolTip">
+             <string>Display exoplanets since their discovery</string>
+            </property>
+            <property name="text">
+             <string>Enable timeline discovery of exoplanets</string>
             </property>
            </widget>
           </item>

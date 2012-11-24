@@ -355,6 +355,29 @@ double Exoplanet::getAngularSize(const StelCore*) const
 	return 0.0001;
 }
 
+bool Exoplanet::isDiscovered(const StelCore *core)
+{
+	int year, month, day;
+	QList<int> discovery;
+	StelUtils::getDateFromJulianDay(core->getJDay(), &year, &month, &day);
+	foreach(const exoplanetData &p, exoplanets)
+	{
+		if (p.discovered>0)
+		{
+			discovery.append(p.discovered);
+		}
+	}
+	qSort(discovery.begin(),discovery.end());
+	if (discovery.at(0)<=year && discovery.at(0)>0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void Exoplanet::update(double deltaTime)
 {
 	labelsFader.update((int)(deltaTime*1000));
@@ -363,6 +386,7 @@ void Exoplanet::update(double deltaTime)
 void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, 
                      StelTextureNew* markerTexture)
 {
+	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
 	Vec3f color = Vec3f(0.4f,1.2f,0.5f);
@@ -374,6 +398,17 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 	renderer->setBlendMode(BlendMode_Add);
 	renderer->setGlobalColor(color[0], color[1], color[2]);
 
+	if (GETSTELMODULE(Exoplanets)->getTimelineMode())
+	{
+		visible = isDiscovered(core);
+	}
+	else
+	{
+		visible = true;
+	}
+
+	if(!visible) {return;}
+
 	if (mag <= sd->getLimitMagnitude())
 	{
 		markerTexture->bind();
@@ -382,7 +417,7 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 		if (labelsFader.getInterstate()<=0.f)
 		{
 			Vec3d win;
-			if(!projector->project(XYZ, win)){return;}
+			if(!projector->project(XYZ, win)){return;}			
 			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
 			{
 				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);

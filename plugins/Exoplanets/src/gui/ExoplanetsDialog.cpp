@@ -74,6 +74,8 @@ void ExoplanetsDialog::createDialogContent()
 	// Settings tab / updates group
 	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getDisplayMode());
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
+	ui->timelineModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getTimelineMode());
+	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(GETSTELMODULE(Exoplanets), SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -159,6 +161,12 @@ void ExoplanetsDialog::setDistributionEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Exoplanets)->setDisplayMode(b);
+}
+
+void ExoplanetsDialog::setTimelineEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Exoplanets)->setTimelineMode(b);
 }
 
 void ExoplanetsDialog::setUpdatesEnabled(int checkState)
