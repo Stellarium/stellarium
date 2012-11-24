@@ -48,6 +48,7 @@ private slots:
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
+	void setTimelineEnabled(int checkState);
 	void updateStateReceiver(Exoplanets::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
