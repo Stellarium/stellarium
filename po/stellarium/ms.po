@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-23 22:39+0700\n"
+"POT-Creation-Date: 2012-11-24 19:14+0700\n"
 "PO-Revision-Date: 2012-11-20 10:05+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-24 05:22+0000\n"
+"X-Launchpad-Export-Date: 2012-11-25 05:17+0000\n"
 "X-Generator: Launchpad (build 16293)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -432,7 +432,7 @@ msgstr "Hubungi"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Author"
 msgstr "Pengarang"
@@ -4229,7 +4229,7 @@ msgstr "Pemalam Okular"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:109
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:111
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Version"
 msgstr "Versi"
@@ -4447,7 +4447,7 @@ msgstr "Kalih menegak"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -4676,7 +4676,7 @@ msgstr "Rujuk %1 dokumen ini %2 untuk perincian."
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 msgid "Links"
 msgstr "Pautan"
 
@@ -4684,7 +4684,7 @@ msgstr "Pautan"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:115
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:117
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -4698,7 +4698,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Jika anda mempunyai soalan, anda boleh %1dapatkan jawapan disini%2"
@@ -4708,7 +4708,7 @@ msgstr "Jika anda mempunyai soalan, anda boleh %1dapatkan jawapan disini%2"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Laporan boleh dibuat %1disini%2."
@@ -4718,7 +4718,7 @@ msgstr "Laporan boleh dibuat %1disini%2."
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -4730,7 +4730,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Internet updates disabled"
 msgstr "Kemaskini Internet dilumpuhkan"
 
@@ -4742,8 +4742,8 @@ msgstr "Kemaskini Internet dilumpuhkan"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Updating now..."
 msgstr "Mengemaskini sekarang..."
 
@@ -4751,7 +4751,7 @@ msgstr "Mengemaskini sekarang..."
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 msgid "Next update: < 1 minute"
 msgstr "Kemaskini Berikutnya: < 1 minit"
 
@@ -4759,7 +4759,7 @@ msgstr "Kemaskini Berikutnya: < 1 minit"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Kemaskini Berikutnya: %1 minit"
@@ -4768,7 +4768,7 @@ msgstr "Kemaskini Berikutnya: %1 minit"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Kemaskini Berikutnya: %1 jam"
@@ -4781,8 +4781,8 @@ msgstr "Kemaskini Berikutnya: %1 jam"
 #: plugins/Quasars/src/ui_quasarsDialog.h:254
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:254
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:259
 msgid "Update now"
 msgstr "Kemaskini sekarang"
 
@@ -4790,7 +4790,7 @@ msgstr "Kemaskini sekarang"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Update from files"
 msgstr "Kemaskini dari fail"
 
@@ -4798,7 +4798,7 @@ msgstr "Kemaskini dari fail"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "Update error"
 msgstr "Ralat kemaskini"
 
@@ -4880,7 +4880,7 @@ msgstr "Kemaskini senarai TLE dari sumber Internet"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:249
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:255
 msgid "Update from Internet sources"
 msgstr "Kemaskini dari sumber Internet"
 
@@ -4888,12 +4888,12 @@ msgstr "Kemaskini dari sumber Internet"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:251
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:250
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:256
 msgid "Last update:"
 msgstr "Terakhir dikemaskini:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:639
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:251
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:257
 msgid "Update frequency (hours):"
 msgstr "Kekerapan kemaskini (jam):"
 
@@ -4940,7 +4940,7 @@ msgstr "Panjang lenyap:"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:259
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
 #: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Restore default settings"
 msgstr "Pulih tetapan lalai"
@@ -4949,7 +4949,7 @@ msgstr "Pulih tetapan lalai"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Save settings as default"
 msgstr "Simpan tetapan  sebagai lalai"
@@ -4958,7 +4958,7 @@ msgstr "Simpan tetapan  sebagai lalai"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:261
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
 #: plugins/Observability/src/ui_ObservabilityDialog.h:356
 msgid "Settings"
 msgstr "Tetapan"
@@ -6253,7 +6253,7 @@ msgstr "Kekerapan kemaskini (hari):"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:252
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:258
 msgid "[next update info]"
 msgstr "[maklumat kemaskini berikutnya]"
 
@@ -6599,11 +6599,11 @@ msgstr "Jarak Sudut"
 msgid "Discovered year"
 msgstr "Tahun ditemui"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
 msgstr "Pemalam Eksoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -6613,7 +6613,7 @@ msgstr ""
 "diambil dari  \"%1The Extrasolar Planets Encyclopaedia%2\""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:126
 #, qt-format
 msgid ""
 "If you want read full information about plugin, his history and format of "
@@ -6622,32 +6622,40 @@ msgstr ""
 "Jika anda hendak baca maklumat penuh mengenai pemalam, sejarahnya dan format "
 "katalog, anda boleh %1dapatkan maklumat disini%2."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Exoplanets is updated"
 msgstr "Eksopanet telah dikemaskini"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:251
 msgid "Exoplanets Configuration"
 msgstr "Konfigurasi Eksoplanet"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:246
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:252
 msgid "Exoplanets Plug-in Configuration"
 msgstr "Konfigurasi Pemalam Eksoplanet"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:248
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:254
 msgid "Update exoplanets data from Internet"
 msgstr "Kemaskini data eksoplanet dari Internet"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:254
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
 msgid "Display mode for exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:256
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Plot all systems with exoplanets without labels"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:258
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
 msgid "Enable display of distribution for exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
+msgid "Display exoplanets since their discovery"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
+msgid "Enable timeline discovery of exoplanets"
 msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:66
