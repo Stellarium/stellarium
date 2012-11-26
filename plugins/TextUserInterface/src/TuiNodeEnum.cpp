@@ -68,15 +68,20 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 
 QString TuiNodeEnum::getDisplayText() 
 {
-	QString value = q_(stringList.at(currentIdx));
-	if (!editing)
-	{
-		return prefixText + q_(displayText) + QString(":  %1").arg(value);
-	}
-	else
-	{
-		return prefixText + q_(displayText) + QString(": >%1<").arg(value);
-	}
+    if (!stringList.isEmpty())
+    {
+        QString value = q_(stringList.at(currentIdx));
+        if (!editing)
+        {
+            return prefixText + q_(displayText) + QString(":  %1").arg(value);
+        }
+        else
+        {
+            return prefixText + q_(displayText) + QString(": >%1<").arg(value);
+        }
+    }
+    else
+    {
+        return prefixText + q_(displayText) + ": (none)";
+    }
 }
-
-
