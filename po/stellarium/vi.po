@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-24 19:14+0700\n"
-"PO-Revision-Date: 2012-02-20 08:32+0000\n"
-"Last-Translator: de tran <Unknown>\n"
+"PO-Revision-Date: 2012-11-27 14:09+0000\n"
+"Last-Translator: thanbang <thanbang00@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-25 05:21+0000\n"
-"X-Generator: Launchpad (build 16293)\n"
+"X-Launchpad-Export-Date: 2012-11-28 04:37+0000\n"
+"X-Generator: Launchpad (build 16309)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -468,7 +468,9 @@ msgstr "Lấy catalog thứ %1 trong %2"
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
-msgstr "Đang tải %1..."
+msgstr ""
+"Đang tải %1...\n"
+"(Bạn có thể đóng cữa sổ cấu hình)"
 
 #: src/gui/ConfigurationDialog.cpp:888
 #, qt-format
@@ -509,7 +511,7 @@ msgstr "Trợ giúp cho chương trình Stellarium"
 
 #: src/gui/HelpDialog.cpp:152 src/gui/HelpDialog.cpp:157
 msgid "Keys"
-msgstr ""
+msgstr "Phím tắt"
 
 #: src/gui/HelpDialog.cpp:154 src/gui/HelpDialog.cpp:244
 msgid "Further Reading"
@@ -537,7 +539,7 @@ msgstr "Phím CTRL + Lên/xuống"
 
 #: src/gui/HelpDialog.cpp:171
 msgid "Select object"
-msgstr ""
+msgstr "Chọn đối tượng"
 
 #: src/gui/HelpDialog.cpp:172
 msgid "Left click"
@@ -2586,15 +2588,15 @@ msgstr ""
 
 #: src/translations.h:533
 msgid "Subtract 1 solar day"
-msgstr ""
+msgstr "Quay lại ngày trước"
 
 #: src/translations.h:534
 msgid "Subtract 1 solar hour"
-msgstr ""
+msgstr "Quay lại giờ trước"
 
 #: src/translations.h:535
 msgid "Subtract 1 solar week"
-msgstr ""
+msgstr "Quay lại tuần trước"
 
 #: src/translations.h:536
 msgid "Subtract 1 synodic month"
@@ -2912,23 +2914,23 @@ msgstr ""
 
 #: src/translations.h:640
 msgid "Configuration window"
-msgstr "Cửa sổ cấu hình"
+msgstr "Cấu hình"
 
 #: src/translations.h:641
 msgid "Date/time window"
-msgstr ""
+msgstr "Ngày/Giờ"
 
 #: src/translations.h:642
 msgid "Help window"
-msgstr ""
+msgstr "Trợ Giúp"
 
 #: src/translations.h:643
 msgid "Location window"
-msgstr ""
+msgstr "Địa điểm"
 
 #: src/translations.h:645
 msgid "Search window"
-msgstr ""
+msgstr "Tìm kiếm"
 
 #: src/translations.h:646
 msgid "Shortcuts window"
@@ -2974,7 +2976,7 @@ msgstr "Địa điểm"
 
 #: src/ui_locationDialogGui.h:393
 msgid "Current location information"
-msgstr ""
+msgstr "Vị trí hiện tại"
 
 #: src/ui_locationDialogGui.h:394
 msgid "Use as default"
@@ -2988,16 +2990,16 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Delete"
-msgstr ""
+msgstr "Xóa"
 
 #: src/ui_locationDialogGui.h:397
 msgid "Add to list"
-msgstr ""
+msgstr "Thêm vào danh sách"
 
 #: src/ui_locationDialogGui.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Latitude:"
-msgstr ""
+msgstr "Vĩ độ:"
 
 #: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
 msgid ""
@@ -3008,12 +3010,12 @@ msgstr ""
 #: src/ui_locationDialogGui.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Longitude:"
-msgstr ""
+msgstr "Kinh độ:"
 
 #: src/ui_locationDialogGui.h:406
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Altitude:"
-msgstr ""
+msgstr "Độ cao:"
 
 #: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
@@ -3029,19 +3031,19 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:412
 msgid "Country:"
-msgstr ""
+msgstr "Quốc gia:"
 
 #: src/ui_locationDialogGui.h:413
 msgid "Planet:"
-msgstr ""
+msgstr "Hành tinh:"
 
 #: src/ui_searchDialogGui.h:542
 msgid "Find Object"
-msgstr ""
+msgstr "Tìm đối tượng"
 
 #: src/ui_searchDialogGui.h:543
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Tìm đối tượng hoặc Vị trí"
 
 #: src/ui_searchDialogGui.h:549
 msgid "iota"
@@ -3145,7 +3147,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:621
 msgid "Object"
-msgstr ""
+msgstr "Đối tượng"
 
 #: src/ui_searchDialogGui.h:622
 msgid "RA/Dec (J2000):"
@@ -3193,7 +3195,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1107
 msgid "Sky"
-msgstr ""
+msgstr "Bầu trời"
 
 #: src/ui_viewDialog.h:1109
 msgid "Markings"
@@ -3711,7 +3713,7 @@ msgstr "Đảo ngược màu sắc"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Star catalog updates"
-msgstr "Danh mục mới của Sao"
+msgstr "Danh mục sao mới"
 
 #: src/ui_configurationDialog.h:1081
 msgid "Click here to start downloading"
