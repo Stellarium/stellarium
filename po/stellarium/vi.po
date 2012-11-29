@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-24 19:14+0700\n"
-"PO-Revision-Date: 2012-11-27 14:09+0000\n"
+"PO-Revision-Date: 2012-11-28 10:38+0000\n"
 "Last-Translator: thanbang <thanbang00@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-28 04:37+0000\n"
-"X-Generator: Launchpad (build 16309)\n"
+"X-Launchpad-Export-Date: 2012-11-29 05:11+0000\n"
+"X-Generator: Launchpad (build 16319)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -31,7 +31,7 @@ msgstr "Xích đạo"
 
 #: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
 msgid "Horizon"
-msgstr "chân trời"
+msgstr "Chân trời"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
@@ -118,7 +118,7 @@ msgstr "Loại chưa xác định"
 #: src/core/modules/StarWrapper.cpp:124 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Độ sáng tuyệt đối: %1"
+msgstr "Độ sáng tuyệt đối (M): %1"
 
 #: src/core/modules/Planet.cpp:455
 #, qt-format
@@ -128,7 +128,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Độ nghiêng trục (of date, for Earth): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -172,12 +172,12 @@ msgstr ""
 #: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Pha quỹ đạo: %1"
 
 #: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Ly độ: %1"
 
 #: src/core/modules/Planet.cpp:515
 #, qt-format
@@ -187,7 +187,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:516
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Độ sáng: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:189
 #, qt-format
@@ -328,9 +328,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"Phép chiếu Mercator là một trong những phép chiếu bản đồ thế giới thường "
-"được sử dụng nhết. Nó bảo toàn hướng và hình dạng nhưng bóp méo kích thước, "
-"trong một góc độ tăng dần từ xích đạo."
+"Phép chiếu Mercator là một trong những phép chiếu được sử dụng nhiều nhất "
+"thế giới. Nó bảo toàn hướng và hình dạng nhưng bóp méo kích thước, trong một "
+"góc độ tăng dần từ xích đạo."
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
@@ -2717,7 +2717,7 @@ msgstr "Mặt đất"
 #: src/translations.h:564
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Horizon line"
-msgstr ""
+msgstr "Đường chân trời"
 
 #: src/translations.h:565
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
@@ -3351,7 +3351,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Hiện đường chân trời"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
@@ -3485,7 +3485,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Xích kinh/Xích vĩ (J2000)"
 
 #: src/ui_configurationDialog.h:983
 msgid "Topocentric equatorial coordinates"
@@ -3493,7 +3493,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:985
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Góc giờ/Xích vĩ độ"
 
 #: src/ui_configurationDialog.h:987
 msgid "Horizontal coordinates"
@@ -3525,7 +3525,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1000
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Cấp sao tuyệt đối"
 
 #: src/ui_configurationDialog.h:1001
 msgid "Distance"
@@ -3554,7 +3554,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Xích kinh/Xích vĩ (of date)"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
@@ -4038,13 +4038,13 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Kính thiên văn #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1484 plugins/Oculars/src/Oculars.cpp:1541
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Kính thiên văn #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1495
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
@@ -4079,7 +4079,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1731
 msgid "&Telescope"
-msgstr ""
+msgstr "&Kính thiên văn"
 
 #: plugins/Oculars/src/Oculars.cpp:1732
 msgid "&Previous telescope"
@@ -4330,11 +4330,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Độ phân giải x (pixels):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Độ phân giải y (pixels):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "Chip width (mm):"
@@ -4388,7 +4388,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:64
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Satellites"
-msgstr ""
+msgstr "Vệ tinh"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid ""
@@ -4873,7 +4873,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
-msgstr ""
+msgstr "Quỹ đạo"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
@@ -5843,7 +5843,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Comets"
-msgstr ""
+msgstr "Sao chổi"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
@@ -6370,7 +6370,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Period"
-msgstr ""
+msgstr "Chu kỳ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "days"
@@ -6383,7 +6383,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Bán trục lớn"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "AU"
@@ -6395,7 +6395,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Inclination"
-msgstr ""
+msgstr "Độ nghiêng"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Angle Distance"
