@@ -391,8 +391,8 @@ void TextUserInterface::init()
 	TuiNode* m6 = new TuiNode(N_("Effects"), NULL, m5);
 	m5->setNextNode(m6);
 	TuiNode* m6_1 = new TuiNodeInt(N_("Light pollution:"),
-	                               landscapeMgr,
-	                               SLOT(setAtmosphereBortleLightPollution(int)),
+				       this,
+				       SLOT(setBortleScale(int)),
 	                               3, 1, 9, 1,
 	                               m6);
 	TuiNode* m6_2 = new TuiNodeEnum(N_("Landscape"),
@@ -826,4 +826,12 @@ void TextUserInterface::shutDown()
 	if (!(err = QProcess::execute(shutdownCmd))) {
 		qDebug() << "[TextUserInterface] shutdown error, QProcess::execute():" << err;
 	}
+}
+
+void TextUserInterface::setBortleScale(int bortle)
+{
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	landscapeMgr->setAtmosphereBortleLightPollution(bortle);
+	skyDrawer->setBortleScale(bortle);
 }
