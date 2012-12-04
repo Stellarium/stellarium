@@ -35,6 +35,7 @@ class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QTime;
+class QTimer;
 class StelLocationMgr;
 class StelSkyLayerMgr;
 class StelAudioMgr;
@@ -232,6 +233,9 @@ private:
 	StelSkyLayerMgr* skyImageMgr;
 
 	StelGuiBase* stelGui;
+
+	// Used to collect wheel events
+	QTimer * wheelEventTimer;
 
 	float fps;
 	int frame;
