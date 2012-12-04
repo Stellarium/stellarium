@@ -49,21 +49,22 @@
 
 #include "renderer/StelRenderer.hpp"
 
+#include <cstdlib>
 #include <iostream>
-#include <QStringList>
-#include <QString>
+#include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QTextStream>
-#include <QMouseEvent>
-#include <QDebug>
-#include <QNetworkAccessManager>
-#include <QSysInfo>
-#include <QNetworkProxy>
 #include <QMessageBox>
+#include <QMouseEvent>
+#include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
+#include <QNetworkProxy>
 #include <QNetworkReply>
-#include <cstdlib>
+#include <QString>
+#include <QStringList>
+#include <QSysInfo>
+#include <QTextStream>
+#include <QTimer>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -113,6 +114,10 @@ StelApp::StelApp(QObject* parent)
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
+
+	wheelEventTimer = new QTimer(this);
+	wheelEventTimer->setInterval(25);
+	wheelEventTimer->setSingleShot(TRUE);
 }
 
 /*************************************************************************
@@ -429,16 +434,54 @@ void StelApp::handleClick(QMouseEvent* event)
 }
 
 // Handle mouse wheel.
+// This deltaEvent is a work-around for QTBUG-22269
 void StelApp::handleWheel(QWheelEvent* event)
 {
+	// variables used to track the changes
+	static int x = 0;
+	static int y = 0;
+	static int globalX = 0;
+	static int globalY = 0;
+	static int delta = 0;
+
 	event->setAccepted(false);
-	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
-	{
-		i->handleMouseWheel(event);
-		if (event->isAccepted())
-			return;
+	if (wheelEventTimer->isActive()) {
+		// Collect the values; we only care about the fianl position values, but we want to accumalate the delta.
+		x = event->x();
+		y = event->y();
+		globalX = event->globalX();
+		globalY = event->globalY();
+		delta += event->delta();
+	} else {
+		// The first time in, the values will not have been set.
+		if (delta == 0) {
+			x = event->x();
+			y = event->y();
+			globalX = event->globalX();
+			globalY = event->globalY();
+			delta += event->delta();
+		}
+
+		wheelEventTimer->start();
+		QWheelEvent deltaEvent(QPoint(x, y), QPoint(globalX, globalY), delta, event->buttons(), event->modifiers(), event->orientation());
+		deltaEvent.setAccepted(FALSE);
+		// Send the event to every StelModule
+		foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
+			i->handleMouseWheel(&deltaEvent);
+			if (deltaEvent.isAccepted()) {
+				event->accept();
+				break;
+			}
+		}
+		// Reset the collected values
+		x = 0;
+		y = 0;
+		globalX = 0;
+		globalY = 0;
+		delta = 0;
+
 	}
+
 }
 
 // Handle mouse move
