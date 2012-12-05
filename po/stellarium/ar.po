@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-24 19:14+0700\n"
-"PO-Revision-Date: 2012-10-30 04:25+0000\n"
+"PO-Revision-Date: 2012-12-05 01:39+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-25 05:11+0000\n"
-"X-Generator: Launchpad (build 16293)\n"
+"X-Launchpad-Export-Date: 2012-12-05 05:17+0000\n"
+"X-Generator: Launchpad (build 16335)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -123,12 +123,12 @@ msgstr "‎القدر المطلق:‎ %1"
 #: src/core/modules/Planet.cpp:455
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "‎الكسوفي‎(الحالي‎): %1/%2"
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "‎زاوية الميل على المدار‎(الحالية للأرض‎): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -157,17 +157,17 @@ msgstr "القطر الظاهري‎: %1"
 #: src/core/modules/Comet.cpp:163
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "‎الدورة النجمية‎: %1‎يوم‎ (%2 a)"
 
 #: src/core/modules/Planet.cpp:502
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "‎اليوم النجمي‎: %1"
 
 #: src/core/modules/Planet.cpp:506
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "‎اليوم الشمسي المتوسط‎: %1"
 
 #: src/core/modules/Planet.cpp:513
 #, qt-format
@@ -355,7 +355,7 @@ msgstr "‎الميل / المطلع المستقيم ‎(‎الحالي‎):�
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "‎خطالطول‎/خط العرض المجري‎(2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -563,6 +563,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"في الأسفل قائمة بالإجراءات التي لها مفاتيح اختصار. يمكن إضافة إجراءات عن "
+"طريق زر \"%1\""
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -831,15 +833,15 @@ msgstr "جامعة هارفارد - الولايات المتحدة"
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "الإجراء"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
-msgstr ""
+msgstr "الاختصار الرئيس"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "الختصار البديل"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -1457,7 +1459,7 @@ msgstr ""
 
 #: src/translations.h:241
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr ""
+msgstr "قمر فوبوس يكسف الشمس من جبل أولمبس في 10 يناير 2068."
 
 #: src/translations.h:242
 msgid ""
@@ -1465,6 +1467,8 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"حجب فوبوس للأرض أمر شائع وكذلك حجبه للمشتري، ولكن حجب الإثنين في نفس اليوم "
+"أمر نادر. هذا أحد الأحداث في 1-23-2048، بالسرعة الحقيقية."
 
 #: src/translations.h:243
 msgid ""
@@ -1473,6 +1477,9 @@ msgid ""
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
+"فوبوس يتقدم على المريخ ويكسف الشمس، ويمر خلالها ثم يتقهقر أليها ويكسفها "
+"جزئيا مرة اخرى، يرى فقط في نصف الكرة الجنوبي، ثم يكسف المريخ فوبوس والشمس، "
+"وبينما يخرج فوبوس عن الشمس يمر بظل المريخ ويخفت ضوؤه."
 
 #: src/translations.h:244
 msgid ""
@@ -1482,32 +1489,35 @@ msgstr ""
 
 #: src/translations.h:245
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "جولة في كوكبات التراث الفلكي الغربي"
 
 #: src/translations.h:246
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "انظر إلى الشمس من الكواكب الكبرى وبلوتو"
 
 #: src/translations.h:247
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
+"افضل مناظر الأرض من أجرام النظام الشمسي الأخرى خلال القرن الواحد والعشرين"
 
 #: src/translations.h:248
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
-msgstr ""
+msgstr "عبور الزهرة كما شوهد في سيدني استراليا 6 يونيه 2012م."
 
 #: src/translations.h:249
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
-msgstr ""
+msgstr "عرض لظاهرة الاناليما - مسار الشمس السنوي في السماء"
 
 #: src/translations.h:250
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"لمعان المستعر العظيم الذي رصده تايخو براهي في 1572. يجب تفعيل إضافة "
+"المستعرات العظيمة."
 
 #: src/translations.h:255
 msgid "Andorra"
@@ -2525,11 +2535,11 @@ msgstr "أضف شهراً مدارياً واحداً"
 
 #: src/translations.h:514
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "أضف سنة تنينية واحدة"
 
 #: src/translations.h:515
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "أضف سنة استوائية متوسطة واحدة"
 
 #: src/translations.h:516
 msgid "Slow down the script execution rate"
@@ -2629,11 +2639,11 @@ msgstr "اطرح شهراً مداريّاً واحداً"
 
 #: src/translations.h:540
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "اطرح سنة تنينية واحدة"
 
 #: src/translations.h:541
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "اطرح سنة استوائية متوسطة واحدة"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:544
@@ -2869,7 +2879,7 @@ msgstr "منظر العدسة العينية"
 
 #: src/translations.h:611
 msgid "Show crosshairs"
-msgstr ""
+msgstr "أظهر الشعرتين المتقاطعتين"
 
 #: src/translations.h:612
 msgid "Oculars popup menu"
@@ -2919,11 +2929,11 @@ msgstr "البرامج النصية‏"
 
 #: src/translations.h:635
 msgid "Run landscapes script from file"
-msgstr ""
+msgstr "نفذ سكربت مناظر الرصد من ملف"
 
 #: src/translations.h:636
 msgid "Show and zoom Moon"
-msgstr ""
+msgstr "أظهر وكبر القمر"
 
 #: src/translations.h:640
 msgid "Configuration window"
@@ -2947,7 +2957,7 @@ msgstr "نافذة البحث"
 
 #: src/translations.h:646
 msgid "Shortcuts window"
-msgstr ""
+msgstr "نافذة الاختصارات"
 
 #: src/translations.h:647
 msgid "Sky and viewing options window"
@@ -2976,7 +2986,7 @@ msgstr "السجلّ"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "حرِّر مفاتيح الاختصارات"
 
 #: src/ui_helpDialogGui.h:292
 msgid "Refresh"
@@ -3193,11 +3203,11 @@ msgstr "الخيارات"
 
 #: src/ui_searchDialogGui.h:628
 msgid "names in English"
-msgstr ""
+msgstr "الأسماء بالإنجليزية"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Search in list..."
-msgstr ""
+msgstr "ابحث في القائمة"
 
 #: src/ui_searchDialogGui.h:630
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
@@ -3578,11 +3588,11 @@ msgstr "(المطلع المستقيم/الميل (الحالي"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "الإحداثيات المجرية بمرجعية عام عام 2000"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
-msgstr ""
+msgstr "خط اطول/خط العرض (2000)"
 
 #: src/ui_configurationDialog.h:1016
 msgid "Control"
@@ -3709,7 +3719,7 @@ msgstr "اختر مجموعة نجمية واحدة"
 
 #: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
-msgstr ""
+msgstr "ارسم الظل الشمسي"
 
 #: src/ui_configurationDialog.h:1072
 msgid ""
@@ -3840,15 +3850,15 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "مفاتيح الاختصارات"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
-msgstr ""
+msgstr "استرجع الاختصارات الافتراضية"
 
 #: src/ui_shortcutsDialog.h:201
 msgid "Apply"
-msgstr ""
+msgstr "تطبيق"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
@@ -5245,7 +5255,7 @@ msgstr "&المطلع المستقيم (2000)"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
-msgstr ""
+msgstr "&الجرم الحالي"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
@@ -6612,23 +6622,23 @@ msgstr "حدّث بيانات الكواكب الخارجية من الإنتر�
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
 msgid "Display mode for exoplanets"
-msgstr ""
+msgstr "نسق عرض الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "ارسم جميع النظم الشمسية من دون الأسماء"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "فعِّل عرض توزيع الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "اعرض الكواكب الخارجية من وقت اكتشافها"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "فعِّل التسلسل التاريخي لاكتشاف الكواكب الخارجية"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
