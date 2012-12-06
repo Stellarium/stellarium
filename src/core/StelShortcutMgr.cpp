@@ -111,6 +111,7 @@ QAction* StelShortcutMgr::getAction(const QString& groupId,
 		return 0;
 }
 
+#ifndef DISABLE_SCRIPTING
 QAction *StelShortcutMgr::addScriptToAction(const QString &actionId, const QString &script, const QString& scriptPath)
 {
 	StelShortcut* sc = 0;
@@ -141,6 +142,7 @@ QAction *StelShortcutMgr::addScriptToAction(const QString &actionId, const QStri
 	           << actionId;
 	return NULL;
 }
+#endif
 
 QList<StelShortcutGroup *> StelShortcutMgr::getGroupList() const
 {
@@ -295,6 +297,7 @@ bool StelShortcutMgr::loadShortcuts(const QString& filePath, bool overload)
 			// create & init shortcut
 			addGuiAction(actionId, false, text, primaryKey, altKey,
 			             groupId, checkable, autorepeat, global);
+#ifndef DISABLE_SCRIPTING
 			// set script if it exist
 			QString script = actionMap.value("script").toString();
 			if (!script.isEmpty())
@@ -321,6 +324,7 @@ bool StelShortcutMgr::loadShortcuts(const QString& filePath, bool overload)
 					}
 				}
 			}
+#endif
 		}
 	}
 	return true;
