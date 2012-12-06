@@ -21,7 +21,9 @@
 #include "StelAppGraphicsWidget.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
+#ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
+#endif
 #include "StelFileMgr.hpp"
 
 #include <QDebug>
@@ -138,6 +140,7 @@ void StelShortcut::setTemporary(bool temp)
 	emit shortcutChanged(this);
 }
 
+#ifndef DISABLE_SCRIPTING
 void StelShortcut::setScript(const QString &scriptText)
 {
 	QString scriptsDir = StelFileMgr::findFile("scripts/", StelFileMgr::Directory);
@@ -163,6 +166,7 @@ void StelShortcut::runScript() const
 {
 	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(m_script);
 }
+#endif
 
 void StelShortcut::updateActionShortcuts()
 {

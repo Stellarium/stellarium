@@ -82,8 +82,10 @@ public:
 	//! @return a pointer to the QAction object or NULL if doesn't exist
 	QAction* getGuiAction(const QString& actionName);
 
+#ifndef DISABLE_SCRIPTING
 	//! Bind script evaluation to given action.
 	QAction* addScriptToAction(const QString& actionId, const QString& script, const QString& scriptAction = QString());
+#endif
 
 	//! Get a list of all shortcut groups.
 	QList<StelShortcutGroup*> getGroupList() const;
