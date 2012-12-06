@@ -8,16 +8,11 @@ SET(RendererStatistics_SRCS
 SET(RendererStatistics_RES ../resources/RendererStatistics.qrc)
 QT4_ADD_RESOURCES(RendererStatistics_RES_CXX ${RendererStatistics_RES})
 
-SET(RendererStatistics_MOC_HDRS
-  RendererStatistics.hpp)
-
-QT4_WRAP_CPP(RendererStatistics_MOC_SRCS ${RendererStatistics_MOC_HDRS})
-
 SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(RendererStatistics MODULE ${RendererStatistics_SRCS} ${RendererStatistics_MOC_SRCS} ${RendererStatistics_RES_CXX})
+	ADD_LIBRARY(RendererStatistics MODULE ${RendererStatistics_SRCS} ${RendererStatistics_RES_CXX})
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
@@ -37,7 +32,7 @@ ENDIF()
 
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(RendererStatistics-static STATIC ${RendererStatistics_SRCS} ${RendererStatistics_MOC_SRCS} ${RendererStatistics_RES_CXX})
+	ADD_LIBRARY(RendererStatistics-static STATIC ${RendererStatistics_SRCS} ${RendererStatistics_RES_CXX})
 	SET_TARGET_PROPERTIES(RendererStatistics-static PROPERTIES OUTPUT_NAME "RendererStatistics")
 	TARGET_LINK_LIBRARIES(RendererStatistics-static ${extLinkerOption})
 	SET_TARGET_PROPERTIES(RendererStatistics-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

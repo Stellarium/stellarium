@@ -23,22 +23,11 @@ SET(TimeZoneConfiguration_UIS
 
 QT4_WRAP_UI(TimeZoneConfiguration_UIS_H ${TimeZoneConfiguration_UIS})
 
-#SET(TimeZoneConfiguration_RES ../resources/resources.qrc)
-#QT4_ADD_RESOURCES(TimeZoneConfiguration_RES_CXX ${TimeZoneConfiguration_RES})
-
-SET(TimeZoneConfiguration_MOC_HDRS
-  gui/TimeZoneConfigurationWindow.hpp
-  gui/DefineTimeZoneWindow.hpp
-  TimeZoneConfiguration.hpp
-  )
-
-QT4_WRAP_CPP(TimeZoneConfiguration_MOC_SRCS ${TimeZoneConfiguration_MOC_HDRS})
-
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
 #Dynamic library
 IF(BUILD_DYNAMIC_PLUGINS)
- ADD_LIBRARY(TimeZoneConfiguration MODULE ${TimeZoneConfiguration_SRCS} ${TimeZoneConfiguration_MOC_SRCS} ${TimeZoneConfiguration_RES_CXX} ${TimeZoneConfiguration_UIS_H})
+ ADD_LIBRARY(TimeZoneConfiguration MODULE ${TimeZoneConfiguration_SRCS} ${TimeZoneConfiguration_RES_CXX} ${TimeZoneConfiguration_UIS_H})
 
  IF(APPLE)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
@@ -60,7 +49,7 @@ ENDIF()
 
 #Static library
 IF(BUILD_STATIC_PLUGINS)
- ADD_LIBRARY(TimeZoneConfiguration-static STATIC ${TimeZoneConfiguration_SRCS} ${TimeZoneConfiguration_MOC_SRCS} ${TimeZoneConfiguration_RES_CXX} ${TimeZoneConfiguration_UIS_H})
+ ADD_LIBRARY(TimeZoneConfiguration-static STATIC ${TimeZoneConfiguration_SRCS} ${TimeZoneConfiguration_RES_CXX} ${TimeZoneConfiguration_UIS_H})
  SET_TARGET_PROPERTIES(TimeZoneConfiguration-static PROPERTIES OUTPUT_NAME "TimeZoneConfiguration")
  TARGET_LINK_LIBRARIES(TimeZoneConfiguration-static ${extLinkerOption})
  SET_TARGET_PROPERTIES(TimeZoneConfiguration-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
