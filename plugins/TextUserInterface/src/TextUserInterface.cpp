@@ -60,6 +60,10 @@
 #include <QLabel>
 #include <QTime>
 #include <QProcess>
+#ifdef DISABLE_SCRIPTING
+#include "QSettings" // WTF?
+#endif
+
 
 /*************************************************************************
  Utility functions

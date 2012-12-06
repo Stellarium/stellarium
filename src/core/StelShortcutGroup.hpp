@@ -54,14 +54,18 @@ public:
 	void setAutoRepeat(bool ar);
 	void setGlobal(bool g);
 	void setTemporary(bool temp);
+#ifndef DISABLE_SCRIPTING
 	void setScript(const QString& scriptText);
 	void setScriptPath(const QString& scriptPath);
+#endif
 
 signals:
 	void shortcutChanged(StelShortcut* shortcut);
 
+#ifndef DISABLE_SCRIPTING
 public slots:
 	void runScript() const;
+#endif
 
 protected slots:
 	void updateActionShortcuts();
