@@ -375,58 +375,6 @@ SET(stellarium_exe_SRCS main.cpp)
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
 QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 
-################# compiles moc files ############
-# Add here all the files which require moc compilation
-# that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
-SET(stellarium_MOC_HDRS
-	core/StelAudioMgr.hpp
-	core/StelVideoMgr.hpp
-	core/StelModuleMgr.hpp
-	core/StelObjectMgr.hpp
-	core/StelObserver.hpp
-	core/StelApp.hpp
-	core/StelLocationMgr.hpp
-	core/StelCore.hpp
-	core/StelAppGraphicsWidget.hpp
-	core/StelMovementMgr.hpp
-	core/MultiLevelJsonBase.hpp
-	core/StelSkyImageTile.hpp
-	core/StelSkyPolygon.hpp
-	core/StelSkyDrawer.hpp
-	core/StelSkyLayerMgr.hpp
-	core/StelSkyLayer.hpp
-	core/StelSkyCultureMgr.hpp
-	core/SimbadSearcher.hpp
-	core/StelShortcutMgr.hpp
-	core/StelShortcutGroup.hpp
-	core/renderer/StelTextureBackend.hpp
-	core/renderer/StelQGLTextureBackend.hpp
-	core/renderer/StelTextureLoader.hpp
-	core/modules/ConstellationMgr.hpp
-	core/modules/GridLinesMgr.hpp
-	core/modules/LabelMgr.hpp
-	core/modules/LandscapeMgr.hpp
-	core/modules/MeteorMgr.hpp
-	core/modules/MilkyWay.hpp
-	core/modules/NebulaMgr.hpp
-	core/modules/SolarSystem.hpp
-	core/modules/StarMgr.hpp
-	StelMainGraphicsView.hpp
-	StelMainWindow.hpp
-)
-
-IF(ENABLE_SCRIPTING)
-	SET(stellarium_MOC_HDRS ${stellarium_MOC_HDRS}
-		scripting/ScreenImageMgr.hpp
-		scripting/StelScriptMgr.hpp
-		scripting/StelMainScriptAPI.hpp
-		scripting/StelMainScriptAPIProxy.hpp
-	)
-ENDIF()
-
-# After this call, stellarium_MOC_SRCS = moc_stellarium.cxx
-QT4_WRAP_CPP(stellarium_MOC_SRCS ${stellarium_MOC_HDRS})
-
 
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
@@ -469,26 +417,6 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
-	################# compiles GUI moc files ############
-	SET(stellarium_gui_MOC_HDRS
-		gui/StelGui.hpp
-		gui/SkyGui.hpp
-		gui/StelGuiItems.hpp
-		gui/HelpDialog.hpp
-		gui/ShortcutLineEdit.hpp
-		gui/ShortcutsDialog.hpp
-		gui/Dialog.hpp
-		gui/MapLabel.hpp
-		gui/AngleSpinBox.hpp
-		gui/LocationDialog.hpp
-		gui/DateTimeDialog.hpp
-		gui/ViewDialog.hpp
-		gui/SearchDialog.hpp
-		gui/ConfigurationDialog.hpp
-		gui/AddRemoveLandscapesDialog.hpp
-		gui/AtmosphereDialog.hpp
-		gui/StelDialog.hpp)
-
 	################# compiles .ui files ############
 	SET(stellarium_UIS
 	gui/locationDialogGui.ui
@@ -507,17 +435,11 @@ IF (GUI_MODE STREQUAL "Standard")
 			gui/ScriptConsole.cpp
 			gui/StelScriptSyntaxHighlighter.hpp
 			gui/StelScriptSyntaxHighlighter.cpp)
-		SET(stellarium_gui_MOC_HDRS ${stellarium_gui_MOC_HDRS}
-			gui/ScriptConsole.hpp
-			gui/StelScriptSyntaxHighlighter.hpp)
 		SET(stellarium_UIS ${stellarium_UIS}
 			gui/scriptConsole.ui)
 	ENDIF(ENABLE_SCRIPT_CONSOLE)
 
 	QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
-
-	# After this call, stellarium_gui_MOC_SRCS = moc_stellarium_gui.cxx
-	QT4_WRAP_CPP(stellarium_gui_MOC_SRCS ${stellarium_gui_MOC_HDRS})
 
 	# compiles resources files
 	SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
@@ -526,7 +448,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
 
 	# Compile the static library
-	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_gui_MOC_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
+	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
 	SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/${CMAKE_CFG_INTDIR}/libStelGuiLib.a)
@@ -540,10 +462,7 @@ IF (GUI_MODE STREQUAL "None")
 	SET(stellarium_nogui_SRCS
 		noGui/StelNoGui.hpp
 		noGui/StelNoGui.cpp)
-	SET(stellarium_nogui_MOC_HDRS
-		noGui/StelNoGui.hpp)
-	QT4_WRAP_CPP(stellarium_nogui_MOC_SRCS ${stellarium_nogui_MOC_HDRS})
-	ADD_LIBRARY(StelNoGuiLib STATIC ${stellarium_nogui_SRCS} ${stellarium_nogui_MOC_SRCS})
+	ADD_LIBRARY(StelNoGuiLib STATIC ${stellarium_nogui_SRCS})
 	TARGET_LINK_LIBRARIES(StelNoGuiLib ${extLinkerOption})
 	SET_TARGET_PROPERTIES(StelNoGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelNoGuiLib.a)
@@ -697,14 +616,14 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 
 IF(GENERATE_STELMAINLIB)
- ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})
+ ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
  TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
  INSTALL(TARGETS stelMain DESTINATION lib)
  ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
  #stelMain should be after the plug-ins, otherwise the build crashes
  TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
 ELSE()
- ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+ ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
  IF(APPLE)
 # SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/works/OpenGL.framework/Versions/A/Libraries/libGL.dylib -framework Cocoa -framework QtDeclarative")
@@ -733,8 +652,7 @@ SET(tests_testDates_SRCS
 	core/StelUtils.cpp
 	core/StelUtils.hpp
 	tests/testDates.cpp)
-QT4_WRAP_CPP(testDates_MOC_SRCS tests/testDates.hpp)
-ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS} ${testDates_MOC_SRCS})
+ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 
@@ -742,8 +660,7 @@ SET(tests_testStelFileMgr_SRCS
 	core/StelFileMgr.cpp
 	core/StelFileMgr.hpp
 	tests/testStelFileMgr.cpp)
-QT4_WRAP_CPP(testStelFileMgr_MOC_SRCS tests/testStelFileMgr.hpp)
-ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS} ${testStelFileMgr_MOC_SRCS})
+ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 
@@ -763,8 +680,7 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelTranslator.cpp
 	core/StelTranslator.hpp
 	${glues_lib_SRCS})
-QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
-ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
+ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 
@@ -786,8 +702,7 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelTranslator.cpp
 	core/StelTranslator.hpp
 	${glues_lib_SRCS})
-QT4_WRAP_CPP(tests_testStelSphericalIndex_MOC_SRCS tests/testStelSphericalIndex.hpp)
-ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
+ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
 ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
 
@@ -796,8 +711,7 @@ SET(tests_testStelJsonParser_SRCS
 	tests/testStelJsonParser.cpp
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp)
-QT4_WRAP_CPP(tests_testStelJsonParser_MOC_SRCS tests/testStelJsonParser.hpp)
-ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS} ${tests_testStelJsonParser_MOC_SRCS})
+ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
@@ -828,9 +742,7 @@ SET(tests_testStelVertexBuffer_SRCS
   core/renderer/StelQGLArrayVertexBufferBackend.hpp
   core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
   core/renderer/StelQGL2ArrayVertexBufferBackend.hpp)
-QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
-ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
-${tests_testStelVertexBuffer_MOC_SRCS})
+ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS})
 TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
 ######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
