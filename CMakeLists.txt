@@ -1,5 +1,5 @@
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7)
 
 # Avoid repeating the IF statement in the ENDIF and ELSE
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
@@ -254,6 +254,12 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 ########### Find packages ###########
 SET(QT_MIN_VERSION "4.8.0")
 FIND_PACKAGE(Qt4 REQUIRED)
+# Tell CMake to run moc when necessary:
+set(CMAKE_AUTOMOC ON)
+# As moc files are generated in the binary dir, tell CMake
+# to always look for includes there:
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 SET(QT_USE_QTOPENGL TRUE)
 IF(ENABLE_SCRIPTING)
   SET(QT_USE_QTSCRIPT TRUE)
