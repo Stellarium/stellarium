@@ -56,7 +56,6 @@ SOURCE_GROUP(GUI FILES REGULAR_EXPRESSION .*Dialog*.+pp|ui$)
 SOURCE_GROUP(DataMappers FILES REGULAR_EXPRESSION .*DataMapper.+pp)
 SOURCE_GROUP(Models FILES REGULAR_EXPRESSION .*Model.+pp)
 SOURCE_GROUP(Validators FILES REGULAR_EXPRESSION .*Validator*.+pp)
-SOURCE_GROUP("moc Files" FILES REGULAR_EXPRESSION moc_.*cxx$)
 
 
 SET(LogBook_RES ../resources/LogBook.qrc)
@@ -78,32 +77,6 @@ SET(LogBook_UIS
 )
 QT4_WRAP_UI(LogBook_UIS_H ${LogBook_UIS})
 
-# Add here all the files which require moc compilation
-# that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
-SET(LogBook_MOC_HDRS
-	LogBook.hpp
-	gui/LogBookConfigDialog.hpp
-	gui/ObservationsDialog.hpp
-	gui/SessionsDialog.hpp
-	gui/StelDialogLogBook.hpp
-	gui/TargetsDialog.hpp
-	gui/dataMappers/BarlowsDataMapper.hpp
-	gui/dataMappers/FiltersDataMapper.hpp
-	gui/dataMappers/ImagersDataMapper.hpp
-	gui/dataMappers/ObserversDataMapper.hpp
-	gui/dataMappers/OcularsDataMapper.hpp
-	gui/dataMappers/OpticsDataMapper.hpp
-	gui/dataMappers/SitesDataMapper.hpp
-	gui/validators/LimitingDoubleValidator.hpp
-	gui/validators/LimitingIntValidator.hpp
-	gui/validators/NonEmptyStringValidator.hpp
-	gui/widgets/LogBookTextEdit.hpp
-	models/FieldConcatModel.hpp
-)
-
-# After this call, LogBook_MOC_SRCS = moc_LogBook.cxx
-QT4_WRAP_CPP(LogBook_MOC_SRCS ${LogBook_MOC_HDRS})
-
 SET(QT_USE_QTSQL TRUE)
 INCLUDE(${QT_USE_FILE})
 
@@ -112,7 +85,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INT
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
 	ADD_LIBRARY(LogBook 
-		MODULE ${LogBook_SRCS} ${LogBook_MOC_SRCS} ${LogBook_RES_CXX} ${LogBook_UIS_H}
+		MODULE ${LogBook_SRCS} ${LogBook_RES_CXX} ${LogBook_UIS_H}
 	)
 
 	IF(APPLE)
@@ -139,7 +112,7 @@ ENDIF()
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(LogBook-static 
-		STATIC ${LogBook_SRCS} ${LogBook_MOC_SRCS} ${LogBook_RES_CXX} ${LogBook_UIS_H}
+		STATIC ${LogBook_SRCS} ${LogBook_RES_CXX} ${LogBook_UIS_H}
 	)
 	SET_TARGET_PROPERTIES(LogBook-static PROPERTIES OUTPUT_NAME "LogBook")
 	TARGET_LINK_LIBRARIES(LogBook-static ${StelMain} ${extLinkerOption})
