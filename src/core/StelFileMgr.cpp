@@ -54,7 +54,7 @@ void StelFileMgr::init()
 #elif defined(Q_OS_MAC)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
 #else
-	userDir = QDir::homePath() + "/.config/stellarium";
+	userDir = QDir::homePath() + "/.stellarium";
 #endif
 
 	if (!QFile(userDir).exists())
