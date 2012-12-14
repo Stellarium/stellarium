@@ -279,7 +279,7 @@ void StelQGLRenderer::drawTextGravityHelper
 	const float yVc       = viewportCenter[1] + params.yShift_;
 	const QString lang    = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 
-	const bool leftToRight = !QString("ar fa ur he yi").contains(lang);
+	const bool leftToRight = !QString("ar fa ur he yi ckb").contains(lang);
 	// Draw each character separately
 	for (int i = 0; i < charCount; ++i)
 	{
