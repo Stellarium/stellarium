@@ -461,7 +461,7 @@ void StelViewportDistorterFisheyeToSphericMirror::recalculateTexCoords(const QSi
 	vertexGrid->unlock();
 	const int length = vertexGrid->length();
 	Vertex vertex;
-	for(int v = 0; v < length; ++v) 
+	for(int v = 0; v < length; ++v)
 	{
 		vertex = vertexGrid->getVertex(v);
 		vertex.texCoord[0] *= xMult;
@@ -486,7 +486,7 @@ void StelViewportDistorterFisheyeToSphericMirror::drawToViewport(StelRenderer* r
 	const QSize viewportSize = renderer->getViewportSize();
 	const QSize texSize = screenTexture->getDimensions();
 	const QSizeF newMaxTexCoords(viewportSize.width() / static_cast<float>(texSize.width()),
-	                             viewportSize.height() / static_cast<float>(texSize.height()));
+				     viewportSize.height() / static_cast<float>(texSize.height()));
 	if(maxTexCoords != newMaxTexCoords)
 	{
 		recalculateTexCoords(newMaxTexCoords);
