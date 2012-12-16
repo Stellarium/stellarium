@@ -382,7 +382,7 @@ ENDIF(APPLE)
 ELSE(UNIX AND NOT WIN32)
   ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
   ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
-ENDIF(UNIX AND NOT WIN32)
+ENDIF()
 
 ########### Get revision number for non-release builds ###########
 IF(NOT RELEASE_BUILD)

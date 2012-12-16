@@ -431,10 +431,15 @@ QString StelFileMgr::getInstallationDir()
 	QFileInfo installLocation(ResourcesDir.absolutePath());
 	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
 #else
+#ifdef ANDROID
+    QFileInfo installLocation(QFile::decodeName("/sdcard/stellarium"));
+    QFileInfo checkFile(QFile::decodeName("/sdcard/stellarium/" CHECK_FILE));
+#else
 	// Linux, BSD, Solaris etc.
 	// We use the value from the config.h filesystem
 	QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
 	QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
+#endif
 #endif
 
 	if (checkFile.exists())
