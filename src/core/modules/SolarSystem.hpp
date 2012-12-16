@@ -27,7 +27,6 @@
 
 #include <QFont>
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
 #include "Planet.hpp"
 
 class Orbit;
@@ -60,10 +59,11 @@ public:
 	virtual void init();
 
 	//! Draw SolarSystem objects (planets).
-	//! @param core The StelCore object.
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to use for drawing.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual void draw(StelCore *core);
+	virtual void draw(StelCore *core, class StelRenderer* renderer);
 
 	//! Update time-varying components.
 	//! This includes planet motion trails.
@@ -101,6 +101,8 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QString getName() const { return "Solar System"; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -182,6 +184,26 @@ public slots:
 	//! @return a magnitude
 	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
 
+	//! Get distance to Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a distance (in AU)
+	double getDistanceToPlanet(QString planetName) const;
+
+	//! Get elongation for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a elongation (in radians)
+	double getElongationForPlanet(QString planetName) const;
+
+	//! Get phase angle for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase angle (in radians)
+	double getPhaseAngleForPlanet(QString planetName) const;
+
+	//! Get phase for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase
+	float getPhaseForPlanet(QString planetName) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -210,6 +232,9 @@ public:
 
 	//! Reload the planets
 	void reloadPlanets();
+
+	//! Determines relative amount of sun visible from the observer's position.
+	double getEclipseFactor(const StelCore *core) const;
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -251,7 +276,10 @@ private:
 	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(const StelCore* core);
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void drawPointer(const StelCore* core, class StelRenderer* renderer);
 
 	//! Load planet data from the Solar System configuration file.
 	//! This function attempts to load every possible instance of the
@@ -263,6 +291,19 @@ private:
 	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
+
+	//! Calculates the shadow information for the shadow planet shader.
+	class StelTextureNew* computeShadowInfo(StelRenderer* renderer);
+
+	//! Used by computeShadowInfo to generate shadow info texture before uploading it.
+	QVector<Vec4f> shadowInfoBuffer;
+
+	//! Used by computeShadowInfo to store computed planet model matrices used to generate the 
+	//! shadow info texture.
+	QVector<Mat4d> shadowModelMatricesBuffer;
+
+	//! Used to count how many planets actually need shadow information
+	int shadowPlanetCount;
 
 	PlanetP sun;
 	PlanetP moon;
@@ -295,13 +336,15 @@ private:
 	bool flagLightTravelTime;
 
 	//! The selection pointer texture.
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
 
 	bool flagShow;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
 	Vec3f trailColor;
+
+	Planet::SharedPlanetGraphics sharedPlanetGraphics;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED

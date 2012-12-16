@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>545</width>
-    <height>473</height>
+    <width>539</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
    <item>
     <widget class="BarFrame" name="TitleBar">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -36,7 +36,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>560</width>
+       <width>16777215</width>
        <height>25</height>
       </size>
      </property>
@@ -125,9 +125,6 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabs">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
      <property name="documentMode">
       <bool>false</bool>
      </property>
@@ -240,6 +237,9 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QCheckBox" name="displayModeCheckBox">
+            <property name="toolTip">
+             <string>Plot all pulsars without labels</string>
+            </property>
             <property name="text">
              <string>Enable display of distribution for pulsars</string>
             </property>
@@ -295,7 +295,7 @@
      </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
-       <string>About</string>
+       <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <property name="spacing">

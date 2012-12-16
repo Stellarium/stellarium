@@ -163,7 +163,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
 
 	// write addressing mode
-#ifdef __LP64__
+#if defined(__LP64__) || defined(_WIN64)
 	writeLog("Addressing mode: 64-bit");
 #else
 	writeLog("Addressing mode: 32-bit");
@@ -233,31 +233,7 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 #endif
 
-#if defined Q_OS_BSD4
-	QProcess dmesg
-	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
-	dmesg.waitForStarted();
-	dmesg.waitForFinished();
-	const QString dmesgData(dmesg.readAll());
-	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
-	for (int i = 0; i<dmesgLines.size(); i++)
-	{
-		if (dmesgLines.at(i).contains("memory"))
-		{
-			writeLog(dmesgLines.at(i).trimmed());
-		}
-		if (dmesgLines.at(i).contains("CPU"))
-		{
-			writeLog(dmesgLines.at(i).trimmed());
-		}
-		if (dmesgLines.at(i).contains("VGA"))
-		{
-			writeLog(dmesgLines.at(i).trimmed());
-		}
-	}
-#endif
-
-	// Aargh Windows API
+// Aargh Windows API
 #elif defined Q_OS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
 	// I'm gonna test it or anything.
@@ -351,7 +327,29 @@ void StelLogger::init(const QString& logFilePath)
 		}
 
 	}
-	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
+
+#elif defined Q_OS_BSD4
+	QProcess dmesg;
+	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
+	dmesg.waitForStarted();
+	dmesg.waitForFinished();
+	const QString dmesgData(dmesg.readAll());
+	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
+	for (int i = 0; i<dmesgLines.size(); i++)
+	{
+		if (dmesgLines.at(i).contains("memory"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("CPU"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("VGA"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+	}
 #endif
 }
 

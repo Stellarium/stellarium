@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
-    <height>199</height>
+    <width>527</width>
+    <height>229</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -210,10 +210,6 @@
             </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="icon">
-             <iconset resource="../../data/gui/guiRes.qrc">
-              <normaloff>:/graphicGui/searchButtonImage.png</normaloff>:/graphicGui/searchButtonImage.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -691,7 +687,7 @@
        <item>
         <widget class="QGroupBox" name="simbadGroupBox">
          <property name="title">
-	  <string>On-line astronomical database SIMBAD</string>
+          <string>On-line astronomical database SIMBAD</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="margin">
@@ -700,7 +696,7 @@
           <item>
            <widget class="QCheckBox" name="checkBoxUseSimbad">
             <property name="text">
-	     <string>Extend search with SIMBAD</string>
+             <string>Extend search with SIMBAD</string>
             </property>
            </widget>
           </item>
@@ -745,6 +741,48 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabLists">
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+       </font>
+      </property>
+      <attribute name="title">
+       <string>Lists</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item row="0" column="0" colspan="2">
+        <widget class="QComboBox" name="objectTypeComboBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <widget class="QListWidget" name="objectsListWidget"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="searchInEnglishCheckBox">
+         <property name="text">
+          <string>names in English</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QLineEdit" name="searchInListLineEdit">
+         <property name="placeholderText">
+          <string>Search in list...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -773,8 +811,6 @@
   <tabstop>RAAngleSpinBox</tabstop>
   <tabstop>DEAngleSpinBox</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

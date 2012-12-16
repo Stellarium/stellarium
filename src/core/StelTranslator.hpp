@@ -26,6 +26,7 @@
 #include <QMap>
 #include <QString>
 #include "StelUtils.hpp"
+#include <QDebug>
 
 // These macro are used as global function replacing standard gettext operation
 #ifndef ANDROID
@@ -40,6 +41,11 @@
 //! Return the gettext translated english text @a str using the current global translator.
 //! The returned value is a localized QString.
 #define q_(str) StelTranslator::globalTranslator.qtranslate(str)
+
+//! @def qc_(str, ctxt)
+//! Return the gettext translated english text @a str in context @b ctxt using the current global translator.
+//! The returned value is a localized QString.
+#define qc_(str, ctxt) StelTranslator::globalTranslator.qtranslate(str, ctxt)
 
 //! @def N_(str)
 //! A pseudo function call that serves as a marker for the automated extraction of messages.
@@ -70,12 +76,32 @@ public:
 	
 	//! Translate input message and return it as a QString.
 	//! @param s input string in english.
+	//! @param c disambiguation string (gettext "context" string).
 	//! @return The translated QString
-	QString qtranslate(const QString& s)
+	QString qtranslate(const QString& s, const QString& c = QString())
 	{
 		if (s.isEmpty()) return QString();
 		reload();
-		return QString::fromUtf8(gettext(s.toUtf8().constData()));
+		if (c.isEmpty())
+		{
+			return QString::fromUtf8(gettext(s.toUtf8().constData()));
+		}
+		else
+		{
+			// Avoid using pgettext() by manually forming
+			// the context/message combined string.
+			QByteArray bytesC = c.toUtf8();
+			QByteArray bytesS = s.toUtf8();
+			QByteArray glue(1, (char)0x4);
+			QByteArray bytes = bytesC + glue + bytesS;
+			QString t = QString::fromUtf8(gettext(bytes.data()));
+			// If no translation is found, return the original
+			// without the context.
+			if (t.toUtf8() == bytes)
+				return s;
+			else
+				return t;
+		}
 	}
 	
 	//! Get true translator locale name. Actual locale, never "system".

@@ -24,19 +24,19 @@
 #include <QVariantMap>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
 class StelObject;
 class StelToneReproducer;
 class StelProjector;
-class StelPainter;
 class QSettings;
 
 namespace BigStarCatalogExtension {
   class ZoneArray;
-  class HipIndexStruct;
+  struct HipIndexStruct;
 }
+
+static const int RCMAG_TABLE_SIZE = 4096;
 
 //! @class StarMgr
 //! Stores the star catalogue data.
@@ -81,7 +81,7 @@ public:
 	virtual void init();
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
@@ -109,6 +109,9 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	// empty, as there's too much stars for displaying at once
+	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QString getName() const { return "Stars"; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -204,7 +207,7 @@ private:
 	void loadData(QVariantMap starsConfigFile);
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(StelPainter& sPainter, const StelCore* core);
+	void drawPointer(class StelRenderer* renderer, StelProjectorP projector, const StelCore* core);
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
@@ -244,7 +247,7 @@ private:
 	static bool flagSciNames;
 	Vec3f labelColor;
 
-	StelTextureSP texPointer;		// The selection pointer texture
+	class StelTextureNew* texPointer;		// The selection pointer texture
 
 	class StelObjectMgr* objectMgr;
 

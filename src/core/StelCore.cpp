@@ -28,14 +28,15 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
+#include "renderer/GenericVertexTypes.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "LandscapeMgr.hpp"
 
-#include <QtOpenGL>
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>
@@ -89,7 +90,7 @@ StelCore::~StelCore()
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
-void StelCore::init()
+void StelCore::init(class StelRenderer* renderer)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
@@ -133,10 +134,10 @@ void StelCore::init()
 	currentProjectorParams.fov = movementMgr->getInitFov();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
-	skyDrawer = new StelSkyDrawer(this);
+	skyDrawer = new StelSkyDrawer(this, renderer);
 	skyDrawer->init();
 
-	QString tmpstr = conf->value("projection/type", "stereographic").toString();
+	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
 }
 
@@ -304,26 +305,72 @@ void StelCore::update(double deltaTime)
 *************************************************************************/
 void StelCore::preDraw()
 {
-	// Init openGL viewing with fov, screen size and clip planes
 	currentProjectorParams.zNear = 0.000001;
 	currentProjectorParams.zFar = 50.;
-
 	skyDrawer->preDraw();
-
-	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
-	StelPainter sPainter(getProjection2d());
-	glClearColor(0,0,0,0);
-	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+//! Fill with black around viewport disc shape.
+static void drawViewportShape(StelRenderer* renderer, StelProjectorP projector)
+{
+	if (projector->getMaskType() != StelProjector::MaskDisk)
+	{
+		return;
+	}
+
+	renderer->setBlendMode(BlendMode_None);
+	renderer->setGlobalColor(0.0f, 0.0f, 0.0f);
+
+	const float innerRadius = 0.5 * projector->getViewportFovDiameter();
+	const float outerRadius = projector->getViewportWidth() + projector->getViewportHeight();
+	Q_ASSERT_X(innerRadius >= 0.0f && outerRadius > innerRadius,
+	           Q_FUNC_INFO, "Inner radius must be at least zero and outer radius must be greater");
+
+	const float sweepAngle = 360.0f;
+
+	static const int resolution = 192;
+
+	float sinCache[resolution];
+	float cosCache[resolution];
+
+	const float deltaRadius = outerRadius - innerRadius;
+	const int slices = resolution - 1;
+	// Cache is the vertex locations cache
+	for (int s = 0; s <= slices; s++)
+	{
+		const float angle = (M_PI * sweepAngle) / 180.0f * s / slices;
+		sinCache[s] = std::sin(angle);
+		cosCache[s] = std::cos(angle);
+	}
+	sinCache[slices] = sinCache[0];
+	cosCache[slices] = cosCache[0];
+
+	const float radiusHigh = outerRadius - deltaRadius;
+
+	StelVertexBuffer<VertexP2>* vertices = 
+		renderer->createVertexBuffer<VertexP2>(PrimitiveType_TriangleStrip);
+
+	const Vec2f center = projector->getViewportCenterAbsolute();
+	for (int i = 0; i <= slices; i++)
+	{
+		vertices->addVertex(VertexP2(center[0] + outerRadius * sinCache[i],
+		                             center[1] + outerRadius * cosCache[i]));
+		vertices->addVertex(VertexP2(center[0] + radiusHigh * sinCache[i],
+		                             center[1] + radiusHigh * cosCache[i]));
+	}
+
+	vertices->lock();
+	renderer->setCulledFaces(CullFace_None);
+	renderer->drawVertexBuffer(vertices);
+	delete vertices;
+}
 
 /*************************************************************************
  Update core state after drawing modules
 *************************************************************************/
-void StelCore::postDraw()
+void StelCore::postDraw(StelRenderer* renderer)
 {
-	StelPainter sPainter(getProjection(StelCore::FrameJ2000));
-	sPainter.drawViewportShape();
+	drawViewportShape(renderer, getProjection(StelCore::FrameJ2000));
 }
 
 void StelCore::setCurrentProjectionType(ProjectionType type)
@@ -647,11 +694,46 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
+	bool ok = false;
+	StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	if (!ok)
+		return;
 	defaultLocationID = id;
-	StelApp::getInstance().getLocationMgr().locationForSmallString(id);
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("init_location/location", id);
+}
+
+void StelCore::returnToDefaultLocation()
+{
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+}
+
+void StelCore::returnToHome()
+{
+	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
+	// between planets using SpaceShip and second method give does not exist data
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+
+	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
+
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
+	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
+	landscapeMgr->setFlagFog(p->hasAtmosphere());
+
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	StelMovementMgr* smmgr = getMovementMgr();
+	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 void StelCore::setJDay(double JD)
@@ -697,10 +779,24 @@ void StelCore::moveObserverToSelected()
 			StelLocation loc = getCurrentLocation();
 			if (loc.planetName != pl->getEnglishName())
 			{
-			loc.planetName = pl->getEnglishName();
-			loc.name = "-";
-			loc.state = "";
-			moveObserverTo(loc);
+				loc.planetName = pl->getEnglishName();
+				loc.name = "-";
+				loc.state = "";
+				moveObserverTo(loc);
+
+				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+				if (pl->getEnglishName() == "Solar System Observer")
+				{
+					landscapeMgr->setFlagAtmosphere(false);
+					landscapeMgr->setFlagFog(false);
+					landscapeMgr->setFlagLandscape(false);
+				}
+				else
+				{
+					landscapeMgr->setFlagAtmosphere(pl->hasAtmosphere());
+					landscapeMgr->setFlagFog(pl->hasAtmosphere());
+					landscapeMgr->setFlagLandscape(true);
+				}
 			}
 		}
 	}
@@ -715,9 +811,15 @@ const StelLocation& StelCore::getCurrentLocation() const
 	return position->getCurrentLocation();
 }
 
+const QSharedPointer<Planet> StelCore::getCurrentPlanet() const
+{
+	return position->getHomePlanet();
+}
+
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
+	emit(locationChanged(target));
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
 	{
@@ -737,7 +839,6 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 		delete position;
 		position = new StelObserver(target);
 	}
-	emit(locationChanged(target));
 }
 
 
@@ -824,9 +925,43 @@ void StelCore::addSiderealMonth()
 
 void StelCore::addSiderealYear()
 {
-	addSolarDays(365.256363004);
+	double days = 365.256363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod();
+
+	addSolarDays(days);
 }
 
+void StelCore::addSynodicMonth()
+{
+	addSolarDays(29.530588853);
+}
+
+void StelCore::addDraconicMonth()
+{
+	addSolarDays(27.212220817);
+}
+
+void StelCore::addTropicalMonth()
+{
+	addSolarDays(27.321582241);
+}
+
+void StelCore::addAnomalisticMonth()
+{
+	addSolarDays(27.554549878);
+}
+
+void StelCore::addDraconicYear()
+{
+	addSolarDays(346.620075883);
+}
+
+void StelCore::addTropicalYear()
+{
+	addSolarDays(365.2421897);
+}
 
 void StelCore::subtractHour()
 {
@@ -860,18 +995,66 @@ void StelCore::subtractSiderealMonth()
 
 void StelCore::subtractSiderealYear()
 {
-	addSolarDays(-365.256363004);
+	double days = 365.256363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod();
+
+	addSolarDays(-days);
+}
+
+void StelCore::subtractSynodicMonth()
+{
+	addSolarDays(-29.530588853);
+}
+
+void StelCore::subtractDraconicMonth()
+{
+	addSolarDays(-27.212220817);
+}
+
+void StelCore::subtractTropicalMonth()
+{
+	addSolarDays(-27.321582241);
+}
+
+void StelCore::subtractAnomalisticMonth()
+{
+	addSolarDays(-27.554549878);
+}
+
+void StelCore::subtractDraconicYear()
+{
+	addSolarDays(-346.620075883);
+}
+
+void StelCore::subtractTropicalYear()
+{
+	addSolarDays(-365.2421897);
 }
 
 void StelCore::addSolarDays(double d)
 {
+	const PlanetP& home = position->getHomePlanet();
+	if (home->getEnglishName() != "Solar System Observer")
+	{
+		double sp = home->getSiderealPeriod();
+		double dsol = home->getSiderealDay();
+		bool fwdDir = true;
+
+		if ((home->getEnglishName() == "Venus") || (home->getEnglishName() == "Uranus"))
+			fwdDir = false;
+
+		d *= StelUtils::calculateSolarDay(sp, dsol, fwdDir);
+	}
+
 	setJDay(getJDay() + d);
 }
 
 void StelCore::addSiderealDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System StelObserver")
+	if (home->getEnglishName() != "Solar System Observer")
 		d *= home->getSiderealDay();
 	setJDay(getJDay() + d);
 }

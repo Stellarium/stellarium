@@ -19,20 +19,21 @@
 
 #include "Satellite.hpp"
 #include "StelObject.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelLocation.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
+
 
 #include <QTextStream>
 #include <QRegExp>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QSettings>
 #include <QByteArray>
 
@@ -41,7 +42,6 @@
 #include <cmath>
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
-StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.0;
 float Satellite::hintScale = 1.f;
@@ -134,6 +134,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QString line2 = map.value("tle2").toString();
 	setNewTleElements(line1, line2);
 	internationalDesignator = extractInternationalDesignator(line1);
+	StelUtils::getJDFromDate(&jdLaunchYearJan1, extractLaunchYear(line1), 1, 1, 0, 0, 0);
 
 	if (map.contains("lastUpdated"))
 	{
@@ -396,7 +397,7 @@ void Satellite::update(double)
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
 			// the satellite.
-			qWarning() << "Satellite has invalid orbit:" << name;
+			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
 			return;
 		}
@@ -452,36 +453,58 @@ QString Satellite::extractInternationalDesignator(const QString& tle1)
 	return result;
 }
 
-
-void Satellite::draw(const StelCore* core, StelPainter& painter, float)
+int Satellite::extractLaunchYear(const QString& tle1)
 {
+	if (tle1.isEmpty())
+		return 1957;
+
+	// The designator is encoded as the 3rd group on the first line
+	QString rawString = tle1.split(' ').at(2);
+	if (rawString.isEmpty())
+		return 1957;
+
+	//TODO: Use a regular expression?
+	bool ok;
+	int year = rawString.left(2).toInt(&ok);
+	if (!ok)
+		return 1957;
+
+	// Y2K bug :) I wonder what NORAD will do in 2057. :)
+	if (year < 57)
+		return year + 2000;
+	else
+		return year + 1900;
+}
+
+void Satellite::draw(const StelCore* core, StelRenderer* renderer, 
+                     StelProjectorP projector, StelTextureNew* hintTexture)
+{
+	if (core->getJDay() < jdLaunchYearJan1) return;
+
 	XYZ = getJ2000EquatorialPos(core);
 	Vec3f drawColor;
 	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
-	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
-
-	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	StelApp::getInstance().getVisionModeNight() 
+		? renderer->setGlobalColor(0.6,0.0,0.0,1.0) 
+		: renderer->setGlobalColor(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
 
 	Vec3d xy;
-	if (prj->project(XYZ,xy))
+	if (core->getProjection(StelCore::FrameJ2000)->project(XYZ,xy))
 	{
 		if (Satellite::showLabels)
 		{
-			painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
-			Satellite::hintTexture->bind();
+			renderer->drawText(TextParams(xy[0], xy[1], name).shift(10, 10).useGravity());
 		}
-		painter.drawSprite2dMode(xy[0], xy[1], 11);
+		renderer->drawTexturedRect(xy[0] - 11, xy[1] - 11, 22, 22);
 
-		if (orbitVisible && Satellite::orbitLinesFlag) drawOrbit(painter);
+		if (orbitVisible && Satellite::orbitLinesFlag) {drawOrbit(renderer, projector);}
 	}
 }
 
 
-void Satellite::drawOrbit(StelPainter& painter)
+void Satellite::drawOrbit(StelRenderer* renderer, StelProjectorP projector)
 {
 	Vec3d position,previousPosition;
-
-	glDisable(GL_TEXTURE_2D);
 
 	QList<Vec3d>::iterator it= orbitPoints.begin();
 
@@ -489,9 +512,9 @@ void Satellite::drawOrbit(StelPainter& painter)
 	previousPosition.set(it->operator [](0), it->operator [](1), it->operator [](2));
 
 	it++;
-	StelVertexArray vertexArray;
-	vertexArray.primitiveType=StelVertexArray::Lines;
 
+	QVector<Vec3d> orbitArcPoints;
+	StelCircleArcRenderer circleArcRenderer(renderer, projector);
 	//Rest of points
 	for (int i=1; i<orbitPoints.size(); i++)
 	{
@@ -503,21 +526,21 @@ void Satellite::drawOrbit(StelPainter& painter)
 		// Draw end (fading) parts of orbit lines one segment at a time.
 		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
 		{
-			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
+			renderer->setGlobalColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2],
+			                         hintBrightness * calculateOrbitSegmentIntensity(i));
+			circleArcRenderer.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
 		}
 		else
 		{
-			vertexArray.vertex << previousPosition << position;
+			orbitArcPoints << previousPosition << position;
 		}
 		previousPosition = position;
 	}
 
 	// Draw center section of orbit in one go
-	painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness);
-	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
-
-	glEnable(GL_TEXTURE_2D);
+	renderer->setGlobalColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2],
+	                         hintBrightness);
+	circleArcRenderer.drawGreatCircleArcs(orbitArcPoints, PrimitiveType_Lines, &viewportHalfspace);
 }
 
 

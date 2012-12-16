@@ -23,8 +23,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-#include "StelTexture.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
@@ -65,12 +63,11 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
 	absoluteMagnitude = 0;
-	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
+	slopeParameter = -1;//== uninitialized: used in getVMagnitude()	
 
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -130,6 +127,11 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 MinorPlanet::~MinorPlanet()
 {
 	//Do nothing for the moment
+}
+
+void MinorPlanet::setSemiMajorAxis(double value)
+{
+	semiMajorAxis = value;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -235,7 +237,15 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	}
 
 	if (flags&Size)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
+		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true)) << "<br>";
+
+	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
+	double siderealPeriod = getSiderealPeriod();
+	if ((flags&Extra1) && (siderealPeriod>0))
+	{
+		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+	}
 
 	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
 	/*
@@ -246,6 +256,17 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+double MinorPlanet::getSiderealPeriod() const
+{
+	double period;
+	if (semiMajorAxis>0)
+		period = StelUtils::calculateSiderealPeriod(semiMajorAxis);
+	else
+		period = 0;
+
+	return period;
 }
 
 float MinorPlanet::getVMagnitude(const StelCore* core, bool withExtinction) const

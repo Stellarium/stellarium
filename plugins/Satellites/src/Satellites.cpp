@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -27,7 +26,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Satellites.hpp"
 #include "Satellite.hpp"
@@ -37,6 +35,7 @@
 #include "SatellitesDialog.hpp"
 #include "LabelMgr.hpp"
 #include "StelTranslator.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -57,24 +56,31 @@ StelModule* SatellitesStelPluginInterface::getStelModule() const
 
 StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 {
-		// Allow to load the resources when used as a static plugin
-		Q_INIT_RESOURCE(Satellites);
+	// Allow to load the resources when used as a static plugin
+	Q_INIT_RESOURCE(Satellites);
 
-		StelPluginInfo info;
-		info.id = "Satellites";
-		info.displayedName = N_("Satellites");
-		info.authors = "Matthew Gates, Jose Luis Canales";
-		info.contact = "http://stellarium.org/";
-		info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
-		return info;
+	StelPluginInfo info;
+	info.id = "Satellites";
+	info.displayedName = N_("Satellites");
+	info.authors = "Matthew Gates, Jose Luis Canales";
+	info.contact = "http://stellarium.org/";
+	info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
+	return info;
 }
 
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
 
 Satellites::Satellites()
-	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
-	  earth(NULL), defaultHintColor(0.0, 0.4, 0.6), defaultOrbitColor(0.0, 0.3, 0.6),
-	  progressBar(NULL)
+	: hintTexture(NULL)
+	, texPointer(NULL)
+	, pxmapGlow(NULL)
+	, pxmapOnIcon(NULL)
+	, pxmapOffIcon(NULL)
+	, toolbarButton(NULL)
+	, earth(NULL)
+	, defaultHintColor(0.0, 0.4, 0.6)
+	, defaultOrbitColor(0.0, 0.3, 0.6)
+    , progressBar(NULL)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -82,8 +88,14 @@ Satellites::Satellites()
 
 void Satellites::deinit()
 {
-	Satellite::hintTexture.clear();
-	texPointer.clear();
+	if(NULL != hintTexture)
+	{
+		delete hintTexture;
+	}
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 Satellites::~Satellites()
@@ -120,30 +132,23 @@ void Satellites::init()
 		satellitesJsonPath = StelFileMgr::findFile("modules/Satellites", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/satellites.json";
 
 		// Load and find resources used in the plugin
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");
-		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
 		// key bindings and other actions
-		// TRANSLATORS: Title of a group of key bindings in the Help window
-		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Satellite_ConfigDialog_Global", N_("Satellites configuration window"), "Alt+Z", groupName, true, false, true);
-		gui->addGuiActions("actionShow_Satellite_Hints", N_("Satellite hints"), "Ctrl+Z", groupName, true, false);
-		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(getFlagHints());
-		gui->addGuiActions("actionShow_Satellite_Labels", N_("Satellite labels"), "Shift+Z", groupName, true, false);
-		gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
+		gui->getGuiAction("actionShow_Satellite_Hints")->setChecked(getFlagHints());
+		gui->getGuiAction("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
 
 		// Gui toolbar button
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/satellites/bt_satellites_on.png");
 		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Satellite_Hints"));
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiAction("actionShow_Satellite_Hints"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 
-		connect(gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global"), SLOT(setChecked(bool)));
-		connect(gui->getGuiActions("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
-		connect(gui->getGuiActions("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
+		connect(gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global"), SLOT(setChecked(bool)));
+		connect(gui->getGuiAction("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
+		connect(gui->getGuiAction("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
 
 	}
 	catch (std::runtime_error &e)
@@ -310,8 +315,12 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return NULL;
-
+	
 	QString objw = nameI18n.toUpper();
+	
+	StelObjectP result = searchByNoradNumber(objw);
+	if (result)
+		return result;
 
 	foreach(const SatelliteP& sat, satellites)
 	{
@@ -331,6 +340,11 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 		return NULL;
 
 	QString objw = englishName.toUpper();
+	
+	StelObjectP result = searchByNoradNumber(objw);
+	if (result)
+		return result;
+	
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->visible)
@@ -343,6 +357,34 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	return NULL;
 }
 
+StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
+{
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+		return NULL;
+	
+	// If the search string is a catalog number...
+	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	if (regExp.exactMatch(noradNumber))
+	{
+		QString numberString = regExp.capturedTexts().at(2);
+		bool ok;
+		/* int number = */ numberString.toInt(&ok);
+		if (!ok)
+			return StelObjectP();
+		
+		foreach(const SatelliteP& sat, satellites)
+		{
+			if (sat->initialized && sat->visible)
+			{
+				if (sat->getCatalogNumberString() == numberString)
+					return qSharedPointerCast<StelObject>(sat);
+			}
+		}
+	}
+	
+	return StelObjectP();
+}
+
 QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
@@ -352,6 +394,16 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 
 	QString objw = objPrefix.toUpper();
 
+	QString numberPrefix;
+	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	if (regExp.exactMatch(objw))
+	{
+		QString numberString = regExp.capturedTexts().at(2);
+		bool ok;
+		/* int number = */ numberString.toInt(&ok);
+		if (ok)
+			numberPrefix = numberString;
+	}
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->visible)
@@ -359,6 +411,10 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 			if (sat->getNameI18n().toUpper().left(objw.length()) == objw)
 			{
 				result << sat->getNameI18n().toUpper();
+			}
+			else if (!numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
+			{
+				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
 			}
 		}
 	}
@@ -369,12 +425,32 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
+QStringList Satellites::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	if (inEnglish)
+	{
+		foreach(const SatelliteP& sat, satellites)
+		{
+			result << sat->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(const SatelliteP& sat, satellites)
+		{
+			result << sat->getNameI18n();
+		}
+	}
+	return result;
+}
+
 bool Satellites::configureGui(bool show)
 {
 	if (show)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global")->setChecked(true);
+		gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global")->setChecked(true);
 	}
 
 	return true;
@@ -455,7 +531,7 @@ void Satellites::readSettingsFromConfig(void)
 	// populate updateUrls from tle_url? keys
 	QRegExp keyRE("^tle_url\\d+$");
 	updateUrls.clear();
-        foreach(const QString& key, conf->childKeys())
+	foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 		{
@@ -492,7 +568,7 @@ void Satellites::saveSettingsToConfig(void)
 
 	// update tle urls... first clear the existing ones in the file
 	QRegExp keyRE("^tle_url\\d+$");
-        foreach(const QString& key, conf->childKeys())
+	foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 			conf->remove(key);
@@ -501,7 +577,7 @@ void Satellites::saveSettingsToConfig(void)
 
 	// populate updateUrls from tle_url? keys
 	int n=0;
-        foreach(const QString& url, updateUrls)
+	foreach(const QString& url, updateUrls)
 	{
 		QString key = QString("tle_url%1").arg(n++);
 		conf->setValue(key, url);
@@ -636,8 +712,8 @@ QVariantMap Satellites::getTleMap(void)
 	QVariantMap map;
 	QVariantList defHintCol;
 	defHintCol << Satellite::roundToDp(defaultHintColor[0],3)
-		   << Satellite::roundToDp(defaultHintColor[1],3)
-		   << Satellite::roundToDp(defaultHintColor[2],3);
+						 << Satellite::roundToDp(defaultHintColor[1],3)
+						 << Satellite::roundToDp(defaultHintColor[2],3);
 
 	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(SATELLITES_PLUGIN_VERSION);
 	map["hintColor"] = defHintCol;
@@ -666,7 +742,7 @@ QStringList Satellites::getGroups(void) const
 	{
 		if (sat->initialized)
 		{
-                        foreach(const QString& group, sat->groupIDs)
+			foreach(const QString& group, sat->groupIDs)
 			{
 				if (!groups.contains(group))
 					groups << group;
@@ -687,10 +763,10 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vi
 			if ((group.isEmpty() || sat->groupIDs.contains(group)) && ! result.contains(sat->id))
 			{
 				if (vis==Both ||
-				        (vis==Visible && sat->visible) ||
-				        (vis==NotVisible && !sat->visible) ||
-					(vis==OrbitError && !sat->orbitValid) ||
-					(vis==NewlyAdded && sat->isNew()))
+						(vis==Visible && sat->visible) ||
+						(vis==NotVisible && !sat->visible) ||
+						(vis==OrbitError && !sat->orbitValid) ||
+						(vis==NewlyAdded && sat->isNew()))
 					result.insert(sat->id, sat->name);
 			}
 		}
@@ -723,17 +799,17 @@ void Satellites::add(const TleDataList& newSatellites)
 {
 	int numAdded = 0;
 	QVariantList defaultHintColorMap;
-	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] 
-	                    << defaultHintColor[2];
+	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1]
+											<< defaultHintColor[2];
 	
 	foreach (const TleData& tleSet, newSatellites)
 	{
 		//TODO: Duplicates check? --BM
 		
 		if (tleSet.id.isEmpty() ||
-		    tleSet.name.isEmpty() ||
-		    tleSet.first.isEmpty() ||
-		    tleSet.second.isEmpty())
+				tleSet.name.isEmpty() ||
+				tleSet.first.isEmpty() ||
+				tleSet.second.isEmpty())
 			continue;
 		
 		QVariantMap satProperties;
@@ -755,9 +831,9 @@ void Satellites::add(const TleDataList& newSatellites)
 		}
 	}
 	qDebug() << "Satellites: "
-	         << newSatellites.count() << "satellites proposed for addition, "
-	         << numAdded << " added, "
-	         << satellites.count() << " total after the operation.";
+					 << newSatellites.count() << "satellites proposed for addition, "
+					 << numAdded << " added, "
+					 << satellites.count() << " total after the operation.";
 }
 
 void Satellites::remove(const QStringList& idList)
@@ -781,9 +857,9 @@ void Satellites::remove(const QStringList& idList)
 	}
 
 	qDebug() << "Satellites: "
-	         << idList.count() << "satellites proposed for removal, "
-	         << numRemoved << " removed, "
-	         << satellites.count() << " remain.";
+					 << idList.count() << "satellites proposed for removal, "
+					 << numRemoved << " removed, "
+					 << satellites.count() << " remain.";
 }
 
 int Satellites::getSecondsToUpdate(void)
@@ -800,7 +876,7 @@ void Satellites::setTleSources(QStringList tleSources)
 
 	// clear old source list
 	QRegExp keyRE("^tle_url\\d+$");
-        foreach(const QString& key, conf->childKeys())
+	foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 			conf->remove(key);
@@ -808,7 +884,7 @@ void Satellites::setTleSources(QStringList tleSources)
 
 	// set the new sources list
 	int i=0;
-        foreach (const QString& url, updateUrls)
+	foreach (const QString& url, updateUrls)
 	{
 		conf->setValue(QString("tle_url%1").arg(i++), url);
 	}
@@ -946,9 +1022,9 @@ void Satellites::displayMessage(const QString& message, const QString hexColor)
 
 void Satellites::messageTimeout(void)
 {
-        foreach(const int& id, messageIDs)
+	foreach(const int& id, messageIDs)
 	{
-                GETSTELMODULE(LabelMgr)->deleteLabel(id);
+		GETSTELMODULE(LabelMgr)->deleteLabel(id);
 	}
 }
 
@@ -959,7 +1035,7 @@ void Satellites::saveTleData(QString path)
 
 void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 {
-	// Container for the new data. 
+	// Container for the new data.
 	TleDataHash newTleSets;
 
 	if (progressBar)
@@ -998,8 +1074,8 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		{
 			TleData newTle = newTleSets.value(id);
 			if (sat->tleElements.first  != newTle.first ||
-			    sat->tleElements.second != newTle.second ||
-			    sat->name != newTle.name)
+					sat->tleElements.second != newTle.second ||
+					sat->name != newTle.name)
 			{
 				// We have updated TLE elements for this satellite
 				sat->setNewTleElements(newTle.first, newTle.second);
@@ -1015,9 +1091,9 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		else
 		{
 			qWarning() << "Satellites: could not update orbital elements for"
-			           << sat->name
-			           << sat->id
-			           << ": no entry found in the source TLE lists.";
+								 << sat->name
+								 << sat->id
+								 << ": no entry found in the source TLE lists.";
 			numMissing++;
 		}
 	}
@@ -1031,8 +1107,8 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	progressBar = NULL;
 
 	qDebug() << "Satellites: updated" << numUpdated << "/" << totalSats
-		 << "satellites.  Update URLs contained" << newTleSets.size() << "objects. "
-		 << "There were" << numMissing << "satellies missing from the update URLs";
+					 << "satellites.  Update URLs contained" << newTleSets.size() << "objects. "
+					 << "There were" << numMissing << "satellies missing from the update URLs";
 
 	if (numUpdated==0)
 		updateState = CompleteNoUpdates;
@@ -1060,7 +1136,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList)
 			// New entry in the list, so reset all fields
 			lastData = TleData();
 			
-			//TODO: We need to think of some kind of ecaping these 
+			//TODO: We need to think of some kind of ecaping these
 			//characters in the JSON parser. --BM
 			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
 			lastData.name = line;
@@ -1082,7 +1158,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList)
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
 				if (!lastData.name.isEmpty() &&
-				    !lastData.first.isEmpty())
+						!lastData.first.isEmpty())
 				{
 					//TODO: This overwrites duplicates. Display warning? --BM
 					tleList.insert(id, lastData);
@@ -1109,32 +1185,40 @@ void Satellites::update(double deltaTime)
 	}
 }
 
-void Satellites::draw(StelCore* core)
+void Satellites::draw(StelCore* core, StelRenderer* renderer)
 {
-	if (core->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||
+			(core->getJDay()<2436116.3115)                               || // do not draw anything before Oct 4, 1957, 19:28:34GMT ;-)
+			(!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	StelPainter painter(prj);
-	painter.setFont(labelFont);
+	renderer->setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
-	Satellite::hintTexture->bind();
-	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
+	renderer->setBlendMode(BlendMode_Alpha);
+
+	if(NULL == hintTexture)
+	{
+		hintTexture = renderer->createTexture(":/satellites/hint.png");
+	}
+	hintTexture->bind();
+	Satellite::viewportHalfspace = prj->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->visible)
-			sat->draw(core, painter, 1.0);
+		{
+			sat->draw(core, renderer, prj, hintTexture);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
+	{
+		drawPointer(core, renderer);
+	}
 }
 
-void Satellites::drawPointer(StelCore* core, StelPainter& painter)
+void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -1147,22 +1231,33 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
+		{
 			return;
-		glColor3f(0.4f,0.5f,0.8f);
+		}
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur5.png");
+		}
+		if (StelApp::getInstance().getVisionModeNight())
+			renderer->setGlobalColor(0.8f,0.0f,0.0f);
+		else
+			renderer->setGlobalColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		renderer->setBlendMode(BlendMode_Alpha);
 
 		// Size on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+		const float halfSize = size * 0.5;
+		const float left   = screenpos[0] - halfSize - 20;
+		const float right  = screenpos[0] + halfSize - 20;
+		const float top    = screenpos[1] - halfSize - 20;
+		const float bottom = screenpos[1] + halfSize - 20;
+		renderer->drawTexturedRect(left,  top,    40, 40, 90);
+		renderer->drawTexturedRect(left,  bottom, 40, 40, 0);
+		renderer->drawTexturedRect(right, bottom, 40, 40, -90);
+		renderer->drawTexturedRect(right, top,    40, 40, -180);
 	}
 }
 

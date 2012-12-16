@@ -27,6 +27,7 @@
 #include "StelLocation.hpp"
 
 #include <QDateTime>
+#include <QFile>
 #include <QSharedPointer>
 #include <QVariantMap>
 
@@ -92,8 +93,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual void drawPointer(StelCore* core, StelPainter& painter);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void drawPointer(StelCore* core, class StelRenderer* renderer);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -112,12 +113,23 @@ public:
 	//! Return the matching satellite if exists or NULL.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+	
+	//! Return the satellite with the given catalog number.
+	//! Used as a helper function by searchByName() and
+	//! searchByNameI18n().
+	//! @param noradNumber search string in the format "NORAD XXXX".
+	//! @returns a null pointer if no such satellite is found.
+	StelObjectP searchByNoradNumber(const QString& noradNumber) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+
+	virtual QStringList listAllObjects(bool inEnglish) const;
+
+	virtual QString getName() const { return "Satellites"; }
 
 	//! Implment this to tell the main Stellarium GUi that there is a GUI element to configure this
 	//! plugin. 
@@ -290,7 +302,8 @@ private:
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;
 	LinearFader hintFader;
-	StelTextureSP texPointer;
+	class StelTextureNew* hintTexture;
+	class StelTextureNew* texPointer;
 	QPixmap* pxmapGlow;
 	QPixmap* pxmapOnIcon;
 	QPixmap* pxmapOffIcon;

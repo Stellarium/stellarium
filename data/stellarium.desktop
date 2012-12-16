@@ -1,6 +1,5 @@
 [Desktop Entry]
-Encoding=UTF-8
-Version=0.11.3
+Version=1.0
 Type=Application
 Name=Stellarium
 GenericName=Desktop planetarium
@@ -14,22 +13,22 @@ Comment=Planetarium
 Comment[fr]=Planétarium
 Comment[ru]=Планетарий
 
-Actions=Window;Fullscreen;Safemode
+Actions=Window;Fullscreen;Safemode;
 
 [Desktop Action Window]
 Name=Open in window
 Name[ru]=Открыть в окне
 Exec=stellarium -f no
-OnlyShowIn=Unity
+OnlyShowIn=Unity;
 
 [Desktop Action Fullscreen]
 Name=Open in fullscreen
 Name[ru]=Открыть в полноэкранном режиме
 Exec=stellarium -f yes
-OnlyShowIn=Unity
+OnlyShowIn=Unity;
 
 [Desktop Action Safemode]
 Name=Open in safe mode
 Name[ru]=Открыть в безопасном режиме
 Exec=stellarium --safe-mode
-OnlyShowIn=Unity
+OnlyShowIn=Unity;

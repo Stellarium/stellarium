@@ -1,0 +1,276 @@
+//
+// Author: Qam1
+// Version: 4.1
+// License: Public Domain
+// Name: Earth best views from other bodies
+// Description: Best views of Earth from other Solar System bodies in the 21st Century.
+//
+
+//basics
+var spd = 5; // speed for screen saver mode in seconds
+StelSkyDrawer.setFlagLuminanceAdaptation(false);
+var o = 1;
+var i = 1;
+var sl = StarMgr.getLabelsAmount();
+var ss = 0;
+
+// Labels
+var txt1 = LabelMgr.labelScreen("Press = for next outer body", 770, 20, false, 15, "#FF0000");
+LabelMgr.setLabelShow(txt1, true);
+
+txt1 = LabelMgr.labelScreen("Press -  for previous inner body", 770, 40, false, 15, "#FF0000");
+LabelMgr.setLabelShow(txt1, true);
+
+txt1 = LabelMgr.labelScreen("Press [  to toggle flags and labels", 770, 60, false, 15, "#FF0000");
+LabelMgr.setLabelShow(txt1, true);
+
+txt1 = LabelMgr.labelScreen("Press ]  toggle scrren saver mode", 770, 80, false, 15, "#FF0000");
+LabelMgr.setLabelShow(txt1, true);
+
+txt1 = LabelMgr.labelScreen("By Qam1", 770, 100, false, 15, "#FF0000");
+LabelMgr.setLabelShow(txt1, true);
+
+spd = spd * 4;
+
+// program
+var q = 0;
+while (q == 0)
+{
+	if (o == 1)
+	{
+		core.selectObjectByName("Earth", pointer = true);
+		StelMovementMgr.setFlagTracking(true);
+
+		SolarSystem.setFlagOrbits(true);
+
+		SolarSystem.setLabelsAmount(20);
+		StarMgr.setLabelsAmount(sl);
+		ConstellationMgr.setFlagLines(true);
+		ConstellationMgr.setFlagLabels(true);
+		GridLinesMgr.setFlagEclipticLine(true);
+		GridLinesMgr.setFlagEquatorLine(true);
+	}
+
+	if (o == -1)
+	{
+		core.selectObjectByName("Earth", pointer = false);
+		StelMovementMgr.setFlagTracking(true);
+
+		SolarSystem.setFlagOrbits(false);
+
+		SolarSystem.setLabelsAmount(-20);
+		StarMgr.setLabelsAmount(-20);
+		ConstellationMgr.setFlagLines(false);
+		ConstellationMgr.setFlagLabels(false);
+		GridLinesMgr.setFlagEclipticLine(false);
+		GridLinesMgr.setFlagEquatorLine(false);
+	}
+
+	if (i == 1) 
+	{
+		LandscapeMgr.setFlagAtmosphere(false);
+		LandscapeMgr.setFlagFog(false);
+		LandscapeMgr.setCurrentLandscapeID("moon");
+
+		core.setDate("2061-05-31T01:04:47", "utc");
+		core.setObserverLocation(91.80, 44.24, 7, 1, "", "Mercury");
+		StelMovementMgr.zoomTo(90, 1);
+
+		SolarSystem.setFlagOrbits(false);
+	}
+
+	if (i == 2) 
+	{
+		LandscapeMgr.setFlagAtmosphere(true);
+		LandscapeMgr.setFlagFog(true);
+		LandscapeMgr.setCurrentLandscapeID("moon");
+
+		core.setDate("2093-12-17T12:04:47", "utc");
+		core.setObserverLocation(-84.7, 40.3, 50000, 1, "", "Venus");
+		StelMovementMgr.zoomTo(90, 1);
+
+		SolarSystem.setFlagOrbits(false);
+	}
+
+	if (i == 3) 
+	{
+		LandscapeMgr.setFlagAtmosphere(false);
+		LandscapeMgr.setFlagFog(false);
+		LandscapeMgr.setCurrentLandscapeID("moon");
+
+		core.setDate("2023-01-21T20:57:47", "utc");
+		core.setObserverLocation(19.7, 39.0, 50, 1, "", "Moon");
+		StelMovementMgr.zoomTo(12, 1);
+
+		SolarSystem.setFlagOrbits(false);
+	}
+
+	if (i == 4) 
+	{
+		LandscapeMgr.setFlagAtmosphere(true);
+		LandscapeMgr.setFlagFog(true);
+		LandscapeMgr.setCurrentLandscapeID("mars");
+		
+		core.setObserverLocation(-175.399994, -14.48, 17, 1, "", "Mars");
+		core.setDate("2099-07-26T04:16:00", "utc");
+		LandscapeMgr.setFlagAtmosphere(true);
+
+		StelMovementMgr.zoomTo(62, 1);
+	}
+
+	if (i == 5) 
+	{
+		LandscapeMgr.setFlagAtmosphere(false);
+		LandscapeMgr.setFlagFog(false);
+		LandscapeMgr.setCurrentLandscapeID("ocean");
+
+		core.setDate("2082-10-19T21:08:21", "utc");
+		core.setObserverLocation(-73.71, 44.24, 17, 1, "", "Ceres");
+		StelMovementMgr.zoomTo(42, 1);
+	}
+
+	if (i == 6) 
+	{
+		LandscapeMgr.setFlagAtmosphere(true);
+		LandscapeMgr.setFlagFog(true);
+		LandscapeMgr.setCurrentLandscapeID("saturn");
+
+		core.setDate("2058-07-15T11:52:00", "utc");
+		core.setObserverLocation(-73.71, 44.24, 71492000, 1, "", "Jupiter");
+		StelMovementMgr.zoomTo(34, 1);
+
+		txt1 = LabelMgr.labelScreen("Elongation: 11.849 degrees", 150, 10, false, 15, "#AAFFAA");
+		LabelMgr.setLabelShow(txt1, true);
+	}
+
+	if (i == 7) 
+	{
+		LandscapeMgr.setFlagAtmosphere(true);
+		LandscapeMgr.setFlagFog(true);
+		LandscapeMgr.setCurrentLandscapeID("saturn");
+
+		core.setDate("2031-09-16T10:48:57", "utc");
+		core.setObserverLocation(-73.71, 9.24, 200000, 1, "", "Saturn");
+		core.wait(0.1);
+		StelMovementMgr.zoomTo(28, 1);
+
+		txt1 = LabelMgr.labelScreen("Elongation: 6.343 degrees", 150, 10, false, 15, "#AAFFAA");
+		LabelMgr.setLabelShow(txt1, true);
+	}
+
+	if (i == 8) 
+	{
+		LandscapeMgr.setFlagAtmosphere(true);
+		LandscapeMgr.setFlagFog(true);
+		LandscapeMgr.setCurrentLandscapeID("saturn");
+
+		core.setDate("2052-06-16T11:00:00", "utc");
+		core.setObserverLocation(-76.73, 76.92, 30268000, 1, "", "Uranus");
+		StelMovementMgr.zoomTo(15.6, 1);
+
+		txt1 = LabelMgr.labelScreen("Elongation: 3.185 degrees", 150, 10, false, 15, "#AAFFAA");
+		LabelMgr.setLabelShow(txt1, true);
+	}
+
+	if (i == 9) 
+	{
+		LandscapeMgr.setFlagAtmosphere(true);
+		LandscapeMgr.setFlagFog(true);
+		LandscapeMgr.setCurrentLandscapeID("saturn");
+
+		core.setDate("2035-07-17T15:00:00", "utc");
+		core.setObserverLocation(76.71, 41.24, 24764000, 1, "", "Neptune");
+		StelMovementMgr.zoomTo(10.6, 1);
+
+		txt1 = LabelMgr.labelScreen("Elongation: 1.952 degrees", 150, 10, false, 15, "#AAFFAA");
+		LabelMgr.setLabelShow(txt1, true);
+	}
+
+	if (i == 10) 
+	{
+		LandscapeMgr.setFlagAtmosphere(false);
+		LandscapeMgr.setFlagFog(false);
+		LandscapeMgr.setCurrentLandscapeID("moon");
+
+		core.setDate("2000-09-01T12:35:49", "utc");
+		core.setObserverLocation(113.49, 31.04, 76, 1, "", "Pluto");
+		StelMovementMgr.zoomTo(25, 1);
+
+		txt1 = LabelMgr.labelScreen("Elongation: 0.952 degrees", 150, 10, false, 15, "#AAFFAA");
+		LabelMgr.setLabelShow(txt1, true);
+	}
+
+	var d = Math.floor(core.getJDay());
+	var r = d;
+	var pak = 0;
+
+	if (ss ==1)
+	{
+		while (pak < spd)
+		{
+			core.wait(0.25);
+			pak = pak + 1;
+			r = Math.floor(core.getJDay());
+
+			if (Math.abs(r-d) > 0)
+			{
+				pak = spd + 1;
+				core.setDate("+100 days");
+			} 
+		}
+		r = Math.floor(core.getJDay()) + 1;
+	}
+
+	while (d == r) 
+	{
+		r = Math.floor(core.getJDay());
+	}
+
+	if (r - d == 1) 
+	{
+		i = i + 1;
+	}
+
+	if (r - d == -1) 
+	{
+		i = i - 1;
+	}
+
+	if (i < 1) 
+	{
+		i = 10;
+	}
+
+	if (i > 10) 
+	{
+		i = 1;
+	}
+
+	if (r - d == -7)
+	{
+		o = o * -1;
+	}
+
+	//toggle screen saver
+	if (r - d > 6) 
+	{
+		ss = ss + 1;
+
+		if (ss == 2)
+		{
+			ss = 0;
+			txt1 = LabelMgr.labelScreen("Screensaver Mode off", 400, 20, false, 25, "#F6A101");
+			LabelMgr.setLabelShow(txt1, true);
+			core.wait(1);
+		}
+		else
+		{
+			txt1 = LabelMgr.labelScreen("Screensaver Mode on", 400, 20, false, 25, "#F6A101");
+			LabelMgr.setLabelShow(txt1, true);
+		}
+		core.wait(1);
+	}
+
+	LabelMgr.deleteAllLabels();
+}
+

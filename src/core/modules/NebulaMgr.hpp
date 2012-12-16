@@ -24,17 +24,16 @@
 #include <QString>
 #include <QStringList>
 #include <QFont>
+#include "Nebula.hpp"
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
 
 class Nebula;
 class StelTranslator;
 class StelToneReproducer;
 class QSettings;
-class StelPainter;
 
 typedef QSharedPointer<Nebula> NebulaP;
 
@@ -61,7 +60,7 @@ public:
 	virtual void init();
 
 	//! Draws all nebula objects.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
@@ -92,6 +91,9 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	// empty for now
+	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QString getName() const { return "Nebulae"; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -123,11 +125,6 @@ public slots:
 	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;
-
-	//! Set flag for displaying nebulae even without textures.
-	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
-	//! Get flag for displaying nebulae without textures.
-	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}
 
 	//! Set the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
@@ -172,7 +169,7 @@ private:
 	void loadNebulaSet(const QString& setName);
 
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const StelCore* core, StelPainter& sPainter);
+	void drawPointer(const StelCore* core, class StelRenderer* renderer);
 
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);
@@ -194,12 +191,13 @@ private:
 	//! The amount of labels (between 0 and 10)
 	float labelsAmount;
 
-	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
-
 	//! The selection pointer texture
-	StelTextureSP texPointer;
+	StelTextureNew* texPointer;
 	
 	QFont nebulaFont;      // Font used for names printing
+
+	//! Textures used to draw nebula hints.
+	Nebula::NebulaHintTextures nebulaHintTextures;
 };
 
 #endif // _NEBULAMGR_HPP_

@@ -64,7 +64,7 @@ public:
 	//! @param helpGroup hint on how to group the text in the help window
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+    //virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
 
 	virtual void forceRefreshGui();
 
@@ -77,7 +77,7 @@ public:
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
-	Q_INVOKABLE QAction* getGuiActions(const QString& actionName);
+    //Q_INVOKABLE QAction* getGuiActions(const QString& actionName);
 
 	/* things to access from QML */
 	//Q_INVOKABLE QVariant getAction(const QString& actionName);

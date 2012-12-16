@@ -28,14 +28,12 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
+#include "StelProjectorType.hpp"
 
-#include "StelPainter.hpp"
 #include "gSatWrapper.hpp"
 
 
-class StelPainter;
 class StelLocation;
 
 typedef struct
@@ -91,6 +89,8 @@ public:
 	{
 		return name;
 	}
+	//! Returns the (NORAD) catalog number. (For now, the ID string.)
+	QString getCatalogNumberString() const {return id;}
 
 	//! Set new tleElements.  This assumes the designation is already set, populates
 	//! the tleElements values and configures internal orbit parameters.
@@ -110,6 +110,7 @@ public:
 	bool isNew() const {return newlyAdded;}
 	
 	static QString extractInternationalDesignator(const QString& tle1);
+	static int extractLaunchYear(const QString& tle1);
 
 public:
 	void enableDrawOrbit(bool b);
@@ -117,7 +118,7 @@ public:
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
-	void drawOrbit(StelPainter& painter);
+	void drawOrbit(class StelRenderer* renderer, StelProjectorP projector);
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
@@ -141,6 +142,8 @@ private:
 	QString description;
 	//! International Designator / COSPAR designation / NSSDC ID
 	QString internationalDesignator;
+	//! JD for Jan 1st of launch year, extracted from TLE (will be for 1957-1-1 if extraction fails). Used to hide objects before launch year.
+	double jdLaunchYearJan1;
 	//! Contains the J2000 position 
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
@@ -150,7 +153,6 @@ private:
 	QStringList groupIDs;
 	QDateTime lastUpdated;
 
-	static StelTextureSP hintTexture;
 	static SphericalCap  viewportHalfspace;
 	static float hintBrightness;
 	static float hintScale;
@@ -159,15 +161,16 @@ private:
 	static int   orbitLineSegmentDuration; //measured in seconds
 	static bool  orbitLinesFlag;
 
-	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
+	void draw(const StelCore* core, class StelRenderer* renderer, 
+	          StelProjectorP projector, class StelTextureNew* hintTexture);
 
-        //Satellite Orbit Position calculation
-        gSatWrapper *pSatWrapper;
-        Vec3d position;
-        Vec3d velocity;
-        Vec3d latLongSubPointPosition;
-        Vec3d elAzPosition;
-        int   visibility;
+	//Satellite Orbit Position calculation
+	gSatWrapper *pSatWrapper;
+	Vec3d position;
+	Vec3d velocity;
+	Vec3d latLongSubPointPosition;
+	Vec3d elAzPosition;
+	int   visibility;
 
 	//Satellite Orbit Draw
 	QFont     font;

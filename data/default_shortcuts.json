@@ -1,0 +1,985 @@
+{
+	"groups":
+	{
+		"DisplayOptions":
+		{
+			"text" : "Display Options",
+			"actions":
+			{
+				"actionShow_Constellation_Lines":
+				{
+					"text": "Constellation lines",
+					"primaryKey": "C",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Constellation_Art":
+				{
+					"text": "Constellation art",
+					"primaryKey": "R",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Constellation_Labels":
+				{
+					"text": "Constellation labels",
+					"primaryKey": "V",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Constellation_Boundaries":
+				{
+					"text": "Constellation boundaries",
+					"primaryKey": "B",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Azimuthal_Grid":
+				{
+					"text": "Azimuthal grid",
+					"primaryKey": "Z",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Equatorial_Grid":
+				{
+					"text": "Equatorial grid",
+					"primaryKey": "E",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Equatorial_J2000_Grid":
+				{
+					"text": "Equatorial J2000 grid",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Ecliptic_J2000_Grid":
+				{
+					"text": "Ecliptic J2000 grid",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Galactic_Grid":
+				{
+					"text": "Galactic grid",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Galactic_Plane_Line":
+				{
+					"text": "Galactic plane",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Ecliptic_Line":
+				{
+					"text": "Ecliptic line",
+					"primaryKey": ",",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Equator_Line":
+				{
+					"text": "Equator line",
+					"primaryKey": ".",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Meridian_Line":
+				{
+					"text": "Meridian line",
+					"primaryKey": ";",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Horizon_Line":
+				{
+					"text": "Horizon line",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Cardinal_Points":
+				{
+					"text": "Cardinal points",
+					"primaryKey": "Q",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Ground":
+				{
+					"text": "Ground",
+					"primaryKey": "G",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Atmosphere":
+				{
+					"text": "Atmosphere",
+					"primaryKey": "A",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Fog":
+				{
+					"text": "Fog",
+					"primaryKey": "F",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Nebulas":
+				{
+					"text": "Nebulas",
+					"primaryKey": "N",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_DSS":
+				{
+					"text": "Nebulas background images",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Stars":
+				{
+					"text": "Stars",
+					"primaryKey": "S",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Stars_Labels":
+				{
+					"text": "Stars labels",
+					"primaryKey": "Alt+S",
+					"checkable": true,
+					"autorepeat": false,
+					"global": true
+				},
+				"actionShow_Planets_Labels":
+				{
+					"text": "Planet labels",
+					"primaryKey": "P",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Planets_Orbits":
+				{
+					"text": "Planet orbits",
+					"primaryKey": "O",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Planets_Trails":
+				{
+					"text": "Planet trails",
+					"primaryKey": "Shift+T",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Night_Mode":
+				{
+					"text": "Night mode",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionSet_Full_Screen_Global":
+				{
+					"text": "Full-screen mode",
+					"primaryKey": "F11",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionHorizontal_Flip":
+				{
+					"text": "Flip scene horizontally",
+					"primaryKey": "Ctrl+Shift+H",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionVertical_Flip":
+				{
+					"text": "Flip scene vertically",
+					"primaryKey": "Ctrl+Shift+V",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				}
+			}
+		},
+		"Windows":
+		{
+			"text" : "Windows",
+			"actions":
+			{
+				"actionShow_Help_Window_Global":
+				{
+					"text": "Help window",
+					"primaryKey": "F1",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Shortcuts_Window_Global":
+				{
+					"text": "Shortcuts window",
+					"primaryKey": "F7",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Configuration_Window_Global":
+				{
+					"text": "Configuration window",
+					"primaryKey": "F2",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Search_Window_Global":
+				{
+					"text": "Search window",
+					"primaryKey": "F3",
+					"altKey": "Ctrl+F",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_SkyView_Window_Global":
+				{
+					"text": "Sky and viewing options window",
+					"primaryKey": "F4",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_DateTime_Window_Global":
+				{
+					"text": "Date/time window",
+					"primaryKey": "F5",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionShow_Location_Window_Global":
+				{
+					"text": "Location window",
+					"primaryKey": "F6",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				}
+			}
+		},
+		"DateAndTime":
+		{
+			"text" : "Date and Time",
+			"actions":
+			{
+				"actionDecrease_Script_Speed":
+				{
+					"text": "Slow down the script execution rate",
+					"primaryKey": "",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionIncrease_Script_Speed":
+				{
+					"text": "Speed up the script execution rate",
+					"primaryKey": "",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionSet_Real_Script_Speed":
+				{
+					"text": "Set the normal script execution rate",
+					"primaryKey": "",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionStop_Script":
+				{
+					"text": "Stop script execution",
+					"primaryKey": "Ctrl+D, S",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionPause_Script":
+				{
+					"text": "Pause script execution",
+					"primaryKey": "Ctrl+D, P",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionResume_Script":
+				{
+					"text": "Resume script execution",
+					"primaryKey": "Ctrl+D, R",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionDecrease_Time_Speed":
+				{
+					"text": "Decrease time speed",
+					"primaryKey": "J",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionIncrease_Time_Speed":
+				{
+					"text": "Increase time speed",
+					"primaryKey": "L",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionSet_Real_Time_Speed":
+				{
+					"text": "Set normal time rate",
+					"primaryKey": "K",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionDecrease_Time_Speed_Less":
+				{
+					"text": "Decrease time speed (a little)",
+					"primaryKey": "Shift+J",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionIncrease_Time_Speed_Less":
+				{
+					"text": "Increase time speed (a little)",
+					"primaryKey": "Shift+L",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionSet_Time_Rate_Zero":
+				{
+					"text": "Set time rate to zero",
+					"primaryKey": "7",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionReturn_To_Current_Time":
+				{
+					"text": "Set time to now",
+					"primaryKey": "8",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionAdd_Solar_Hour":
+				{
+					"text": "Add 1 solar hour",
+					"primaryKey": "Ctrl+=",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionSubtract_Solar_Hour":
+				{
+					"text": "Subtract 1 solar hour",
+					"primaryKey": "Ctrl+-",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionAdd_Solar_Day":
+				{
+					"text": "Add 1 solar day",
+					"primaryKey": "",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionSubtract_Solar_Day":
+				{
+					"text": "Subtract 1 solar day",
+					"primaryKey": "-",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionAdd_Solar_Week":
+				{
+					"text": "Add 1 solar week",
+					"primaryKey": "]",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionSubtract_Solar_Week":
+				{
+					"text": "Subtract 1 solar week",
+					"primaryKey": "[",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionAdd_Sidereal_Day":
+				{
+					"text": "Add 1 sidereal day",
+					"primaryKey": "Alt+=",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionSubtract_Sidereal_Day":
+				{
+					"text": "Subtract 1 sidereal day",
+					"primaryKey": "Alt+-",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionAdd_Sidereal_Week":
+				{
+					"text": "Add 1 sidereal week",
+					"primaryKey": "Alt+]",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionSubtract_Sidereal_Week":
+				{
+					"text": "Subtract 1 sidereal week",
+					"primaryKey": "Alt+[",
+					"checkable": "0",
+					"autorepeat": "1",
+					"global": "0"
+				},
+				"actionAdd_Sidereal_Month":
+				{
+					"text": "Add 1 sidereal month",
+					"primaryKey": "Alt+Shift+]",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Sidereal_Month":
+				{
+					"text": "Subtract 1 sidereal month",
+					"primaryKey": "Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Sidereal_Month":
+				{
+					"text": "Subtract 1 sidereal month",
+					"primaryKey": "Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Sidereal_Year":
+				{
+					"text": "Add 1 sidereal year",
+					"primaryKey": "Ctrl+Alt+Shift+]",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Sidereal_Year":
+				{
+					"text": "Subtract 1 sidereal year",
+					"primaryKey": "Ctrl+Alt+Shift+[",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Synodic_Month":
+				{
+					"text": "Add 1 synodic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Synodic_Month":
+				{
+					"text": "Subtract 1 synodic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Draconic_Month":
+				{
+					"text": "Add 1 draconic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Draconic_Month":
+				{
+					"text": "Subtract 1 draconic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Tropical_Month":
+				{
+					"text": "Add 1 mean tropical month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Tropical_Month":
+				{
+					"text": "Subtract 1 mean tropical month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Anomalistic_Month":
+				{
+					"text": "Add 1 anomalistic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Anomalistic_Month":
+				{
+					"text": "Subtract 1 anomalistic month",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Draconic_Year":
+				{
+					"text": "Add 1 draconic year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Draconic_Year":
+				{
+					"text": "Subtract 1 draconic year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Tropical_Year":
+				{
+					"text": "Add 1 mean tropical year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Tropical_Year":
+				{
+					"text": "Subtract 1 mean tropical year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				}
+			}
+		},
+		"MovementAndSelection":
+		{
+			"text" : "Movement and Selection",
+			"actions":
+			{
+				"actionGoto_Selected_Object":
+				{
+					"text": "Center on selected object",
+					"primaryKey": "Space",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionSet_Tracking":
+				{
+					"text": "Track object",
+					"primaryKey": "T",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionZoom_In_Auto":
+				{
+					"text": "Zoom in on selected object",
+					"primaryKey": "/",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionZoom_Out_Auto":
+				{
+					"text": "Zoom out",
+					"primaryKey": "\\",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionSet_Home_Planet_To_Selected":
+				{
+					"text": "Set home planet to selected planet",
+					"primaryKey": "Ctrl+G",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "0"
+				}
+			}
+		},
+		"Miscellaneous":
+		{
+			"text": "Miscellaneous",
+			"actions":
+			{
+				"actionSwitch_Equatorial_Mount":
+				{
+					"text": "Switch between equatorial and azimuthal mount",
+					"primaryKey": "Ctrl+M",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionQuit_Global":
+				{
+					"text": "Quit",
+					"primaryKey": "Ctrl+Q",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionSave_Screenshot_Global":
+				{
+					"text": "Save screenshot",
+					"primaryKey": "Ctrl+S",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionSave_Copy_Object_Information_Global":
+				{
+					"text": "Copy selected object information to clipboard",
+					"primaryKey": "Ctrl+C",
+					"checkable": "0",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionAutoHideHorizontalButtonBar":
+				{
+					"text": "Auto hide horizontal button bar",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionAutoHideVerticalButtonBar":
+				{
+					"text": "Auto hide vertical button bar",
+					"primaryKey": "",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "0"
+				},
+				"actionToggle_GuiHidden_Global":
+				{
+					"text": "Toggle visibility of GUI",
+					"primaryKey": "Ctrl+T",
+					"checkable": "1",
+					"autorepeat": "0",
+					"global": "1"
+				},
+				"actionGo_Home_Global":
+				{
+					"text": "Go to home",
+					"primaryKey": "Ctrl+H",
+					"checkable": false,
+					"autorepeat": false,
+					"global": true
+				}
+			}
+		},
+		"Scripts":
+		{
+			"text" : "Scripts",
+			"actions":
+			{
+				"scriptShowMoon":
+				{
+					"text" : "Show and zoom Moon",
+					"primaryKey" : "Ctrl+U, 1",
+					"script" : "core.wait(1);
+											core.clear(\"natural\");
+											LandscapeMgr.setFlagLandscape(false);
+											LandscapeMgr.setFlagAtmosphere(false);
+											LandscapeMgr.setFlagFog(false);
+											core.wait(1);
+											core.setDate(\"2004:05:04T17:51:00\");
+											core.selectObjectByName(\"Moon\", false);
+											StelMovementMgr.setFlagTracking(true);
+											core.wait(2);
+											StelMovementMgr.autoZoomIn(2);
+											core.wait(2);
+											core.setTimeRate(250);",
+					"checkable" : "0",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"scriptLandscapes":
+				{
+					"text" : "Run landscapes script from file",
+					"primaryKey" : "Ctrl+U, 2",
+					"scriptFile" : "scripts/landscapes.ssc",
+					"checkable" : "0",
+					"autorepeat" : "0",
+					"global" : "0"
+				}
+			}
+		},
+		"PluginAngleMeasure":
+		{
+			"pluginId" : "AngleMeasure",
+			"actions" :
+			{
+				"actionShow_Angle_Measure":
+				{
+					"text" : "Angle measure",
+					"primaryKey" : "Ctrl+A",
+					"checkable" : "1",
+					"autorepeat" : "0"
+				}
+			}
+		},
+		"PluginExoplanets":
+		{
+			"pluginId" : "Exoplanets",
+			"actions" :
+			{
+				"actionShow_Exoplanets_ConfigDialog":
+				{
+					"text" : "Exoplanets configuration window",
+					"primaryKey" : "",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"actionShow_Exoplanets":
+				{
+					"text" : "Show exoplanets",
+					"primaryKey" : "Ctrl+Alt+E",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				}
+			}
+		},
+		"PluginPulsars":
+		{
+			"pluginId" : "Pulsars",
+			"actions":
+			{
+				"actionShow_Pulsars_ConfigDialog":
+				{
+					"text" : "Pulsars configuration window",
+					"primaryKey" : "",
+					"checkable" : "1"
+				}
+			}
+		},
+		"PluginSupernovae" :
+		{
+			"pluginId" : "Supernovae",
+			"actions" :
+			{
+				"actionShow_Supernovae_ConfigDialog":
+				{
+					"text" : "Historical Supernovae configuration window",
+					"primaryKey" : "",
+					"checkable": "1"
+				}
+			}
+		},
+		"PluginQuasars" :
+		{
+			"pluginId" : "Quasars",
+			"actions":
+			{
+				"actionShow_Quasars_ConfigDialog":
+				{
+					"text" : "Quasars configuration window",
+					"primaryKey" : "",
+					"checkable" : "1"
+				}
+			}
+		},
+		"PluginCompassMarks":
+		{
+			"pluginId" : "CompassMarks",
+			"actions" :
+			{
+				"actionShow_Compass_Marks":
+				{
+					"text" : "Compass marks",
+					"primaryKey" : "",
+					"checkable" : "1",
+					"autorepeat" : "0"
+				}
+			}
+		},
+		"PluginOculars":
+		{
+			"pluginId" : "Oculars",
+			"actions" :
+			{
+				"actionShow_Ocular":
+				{
+					"text" : "Ocular view",
+					"primaryKey" : "Ctrl+O",
+					"checkable" : "1"
+				},
+				"actionShow_Ocular_Menu":
+				{
+					"text": "Oculars popup menu",
+					"primaryKey" : "Alt+O",
+					"checkable" : "1"
+				},
+				"actionShow_Ocular_Crosshairs":
+				{
+					"text": "Show crosshairs",
+					"primaryKey": "Alt+C",
+					"checkable": true
+				},
+				"actionShow_Sensor":
+				{
+					"text": "Image sensor frame",
+					"primaryKey": "",
+					"checkable": true
+				},
+				"actionShow_Telrad":
+				{
+					"text": "Telrad sight",
+					"primaryKey": "Ctrl+B",
+					"checkable": true
+				},
+				"actionOpen_Oculars_Configuration":
+				{
+					"text": "Oculars plugin configuration",
+					"primaryKey": "",
+					"checkable": true
+				}
+			}
+		},
+		"PluginObservability":
+		{
+			"pluginId": "Observability",
+			"actions":
+			{
+				"actionShow_Observability":
+				{
+					"text": "Observability",
+					"primaryKey": "",
+					"checkable": true,
+					"autorepeat": false
+				},
+				"actionShow_Observability_ConfigDialog":
+				{
+					"text": "Observability configuration window",
+					"primaryKey": "",
+					"checkable": true
+				}
+			}
+		},
+		"PluginSatellites":
+		{
+			"pluginId" : "Satellites",
+			"actions" :
+			{
+				"actionShow_Satellite_ConfigDialog_Global":
+				{
+					"text" : "Satellites configuration window",
+					"primaryKey" : "Alt+Z",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "1"
+					},
+				"actionShow_Satellite_Hints":
+				{
+					"text" : "Satellite hints",
+					"primaryKey" : "Ctrl+Z",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"actionShow_Satellite_Labels":
+				{
+					"text" : "Satellite labels",
+					"primaryKey" : "Shift+Z",
+					"checkable" :  "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				}
+			}
+		},
+		"PluginTelescopeControl":
+		{
+			"pluginId" : "TelescopeControl",
+			"actions" :
+			{
+				"actionShow_Slew_Window":
+				{
+					"text": "Move a telescope to a given set of coordinates",
+					"primaryKey": "Ctrl+0",
+					"checkable": true,
+					"autorepeat": false
+				}
+			}
+		},
+		"PluginRendererStatistics":
+		{
+			"pluginId" : "RendererStatistics",
+			"actions" :
+			{
+				"actionShow_RendererStatistics":
+				{
+					"text": "Show renderer statistics",
+					"primaryKey": "",
+					"checkable": true,
+					"autorepeat": false
+				}
+			}
+		}
+	}
+}

@@ -53,6 +53,7 @@ public:
 	//! Supported reference frame types
 	enum FrameType
 	{
+		FrameUninitialized,           //!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
 		FrameAltAz,                   //!< Altazimuthal reference frame centered on observer.
 		FrameHeliocentricEcliptic,    //!< Ecliptic reference frame centered on the Sun
 		FrameObservercentricEcliptic, //!< Ecliptic reference frame centered on the Observer
@@ -88,7 +89,7 @@ public:
 	virtual ~StelCore();
 
 	//! Init and load all main core components.
-	void init();
+	void init(class StelRenderer* renderer);
 
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in sec.
@@ -101,7 +102,7 @@ public:
 	void preDraw();
 
 	//! Update core state after drawing modules.
-	void postDraw();
+	void postDraw(StelRenderer* renderer);
 
 	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
 	//! only for 2d painting
@@ -203,6 +204,8 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 
+	const QSharedPointer<class Planet> getCurrentPlanet() const;
+
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
 	//! @param duration direction of view move duration in s
@@ -265,6 +268,10 @@ public slots:
 	QString getDefaultLocationID() const;
 	//! Set the location to use by default at startup
 	void setDefaultLocationID(const QString& id);
+	//! Return to the default location.
+	void returnToDefaultLocation();
+	//! Return to the default location and set default landscape with atmosphere and fog effects
+	void returnToHome();
 
 	//! Set the current date in Julian Day
 	void setJDay(double JD);
@@ -352,6 +359,38 @@ public slots:
 	//! Subtract one sidereal year to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void subtractSiderealYear();
+
+	//! Add one synodic month to the simulation time.
+	void addSynodicMonth();
+
+	//! Add one draconic year to the simulation time.
+	void addDraconicYear();
+	//! Add one draconic month to the simulation time.
+	void addDraconicMonth();
+
+	//! Add one anomalistic month to the simulation time.
+	void addAnomalisticMonth();
+
+	//! Add one mean tropical month to the simulation time.
+	void addTropicalMonth();
+	//! Add one mean tropical year to the simulation time.
+	void addTropicalYear();
+
+	//! Subtract one synodic month to the simulation time.
+	void subtractSynodicMonth();
+
+	//! Subtract one draconic year to the simulation time.
+	void subtractDraconicYear();
+	//! Subtract one draconic month to the simulation time.
+	void subtractDraconicMonth();
+
+	//! Subtract one anomalistic month to the simulation time.
+	void subtractAnomalisticMonth();
+
+	//! Subtract one mean tropical month to the simulation time.
+	void subtractTropicalMonth();
+	//! Subtract one mean tropical year to the simulation time.
+	void subtractTropicalYear();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)

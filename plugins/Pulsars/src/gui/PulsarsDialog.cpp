@@ -118,7 +118,7 @@ void PulsarsDialog::setAboutHtml(void)
 			.arg(q_("Note"))
 			.arg(q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
 	html += "<h3>" + q_("Acknowledgment") + "</h3>";
-	html += "<p>" + q_("We thank the following people for their contribution and of the valuable comments:") + "</p><ul>";
+	html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";
 	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
 			.arg(q_("Vladimir Samodourov"))
 			.arg("http://www.prao.ru/")
@@ -130,7 +130,7 @@ void PulsarsDialog::setAboutHtml(void)
 			.arg(q_("Nancay Radioastronomical Observatory"))
 			.arg(q_("in France")) + "</li>";
 	html += "</ul><h3>" + q_("Links") + "</h3>";
-	html += "<p>" + q_("Support is provided via the Launchpad website.  Be sure to put \"Pulsars plugin\" in the subject when posting.") + "</p>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Pulsars plugin") + "</p>";
 	html += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
@@ -139,7 +139,7 @@ void PulsarsDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Pulsars_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Pulsars_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());

@@ -32,21 +32,6 @@ SET(Oculars_UIS
 )
 QT4_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
-# Add here all the files which require moc compilation
-# that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
-SET(Oculars_MOC_HDRS
-  CCD.hpp
-  Ocular.hpp
-  Oculars.hpp
-  Telescope.hpp
-  gui/OcularDialog.hpp
-  gui/PropertyBasedTableModel.hpp
-  gui/OcularsGuiPanel.hpp
-)
-
-# After this call, Oculars_MOC_SRCS = moc_Oculars.cxx
-QT4_WRAP_CPP(Oculars_MOC_SRCS ${Oculars_MOC_HDRS})
-
 INCLUDE(${QT_USE_FILE})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
@@ -54,7 +39,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INT
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
 	ADD_LIBRARY(Oculars
-		MODULE ${Oculars_SRCS} ${Oculars_MOC_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
+		MODULE ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
 	)
 
 	IF(APPLE)
@@ -81,7 +66,7 @@ ENDIF()
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Oculars-static
-		STATIC ${Oculars_SRCS} ${Oculars_MOC_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
+		STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
 	)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
 	TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})

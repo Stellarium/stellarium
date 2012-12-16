@@ -22,8 +22,6 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
-#include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Pulsar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -38,7 +36,6 @@ class QSettings;
 class QTimer;
 class PulsarsDialog;
 
-class StelPainter;
 
 typedef QSharedPointer<Pulsar> PulsarP;
 
@@ -65,8 +62,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core);
-	virtual void drawPointer(StelCore* core, StelPainter& painter);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -91,6 +88,8 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QString getName() const { return "Pulsars"; }
 
 	//! get a Pulsar object by identifier
 	PulsarP getByID(const QString& id);
@@ -180,7 +179,8 @@ private:
 
 	QString jsonCatalogPath;
 
-	StelTextureSP texPointer;
+	class StelTextureNew* texPointer;
+	class StelTextureNew* markerTexture;
 	QList<PulsarP> psr;
 
 	// variables and functions for the updater
@@ -197,10 +197,10 @@ private:
 	int updateFrequencyDays;
 	bool distributionEnabled;
 
+	QSettings* conf;
+
 	// GUI
 	PulsarsDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

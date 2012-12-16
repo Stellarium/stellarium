@@ -42,7 +42,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init() {;}
-	virtual void draw(StelCore*) {;}
+	virtual void draw(StelCore*, class StelRenderer*) {;}
 	virtual void update(double) {;}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -82,6 +82,9 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
 	QStringList listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem=5) const;
+
+	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
+	QMap<QString, QString> objectModulesMap() const;
 
 	//! Return whether an object was selected during last selection related event.
 	bool getWasSelected(void) const {return !lastSelectedObjects.empty();}
@@ -126,12 +129,10 @@ public:
 	//! Default to 1.
 	void setDistanceWeight(float newDistanceWeight) {distanceWeight=newDistanceWeight;}
 
-	int getCustomInfoString(void);
-
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
-	void selectedObjectChanged(StelModule::StelModuleSelectAction);
+	void selectedObjectChanged(StelModule::StelModuleSelectAction action);
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium

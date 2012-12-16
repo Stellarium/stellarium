@@ -49,8 +49,8 @@ private:
 //! An example GUI plugin with an empty GUI.
 class StelNoGuiPluginInterface : public QObject, public StelGuiPluginInterface
 {
-	Q_OBJECT
-	Q_INTERFACES(StelGuiPluginInterface)
+	Q_OBJECT;
+	Q_INTERFACES(StelGuiPluginInterface);
 public:
 	virtual class StelGuiBase* getStelGuiBase() const;
 };

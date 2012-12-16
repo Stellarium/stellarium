@@ -22,21 +22,23 @@
 #include <QObject>
 #include <QString>
 #include <QSharedPointer>
+#include "StelCore.hpp"
+
+#include "StelProjectorType.hpp"
 
 class StelCore;
-class StelPainter;
 
 //! Abstract class defining the API to implement for all sky layer.
 //! A sky layer is a graphical layer containing image or polygons displayed in the sky.
-//! The StelSkyImageMgr allows to set the display order for layers, as well as opacity.
+//! The StelSkyLayerMgr allows to set the display order for layers, as well as opacity.
 class StelSkyLayer : public QObject
 {
 	Q_OBJECT
 public:
-	StelSkyLayer(QObject* parent=NULL) : QObject(parent) {;}
+	StelSkyLayer(QObject* parent=NULL) : QObject(parent), frameType(StelCore::FrameUninitialized) {;}
 
 	//! Draws the content of the layer.
-	virtual void draw(StelCore* core, StelPainter& sPainter, float opacity=1.)=0;
+	virtual void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, float opacity=1.)=0;
 
 	//! Return the short name to display in the loading bar.
 	virtual QString getShortName() const =0;
@@ -52,6 +54,12 @@ public:
 	//! links and copyrights.
 	virtual QString getLayerDescriptionHtml() const {return "No description.";}
 
+	//! Set the reference frame type.
+	void setFrameType(StelCore::FrameType ft) {frameType = ft;}
+
+	//! Get the reference frame type.
+	StelCore::FrameType getFrameType() {return frameType;}
+
 signals:
 	//! Emitted when loading of data started or stopped.
 	//! @param b true if data loading started, false if finished.
@@ -60,6 +68,9 @@ signals:
 	//! Emitted when the percentage of loading tiles/tiles to be displayed changed.
 	//! @param percentage the percentage of loaded data.
 	void percentLoadedChanged(int percentage);
+private:
+	//! Reference frametype for painter
+	StelCore::FrameType frameType;
 };
 
 //! @file StelSkyLayerMgr.hpp

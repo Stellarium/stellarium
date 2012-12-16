@@ -46,19 +46,19 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
 	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds),
-							  ccdModel,
-							  ccdModel->propertyMap());
+											ccdModel,
+											ccdModel->propertyMap());
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
 	Ocular* ocularModel = Ocular::ocularModel();
 	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars),
-								  ocularModel, ocularModel->propertyMap());
+												 ocularModel, ocularModel->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
 	Telescope* telescopeModel = Telescope::telescopeModel();
 	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
-									  telescopeModel,
-									  telescopeModel->propertyMap());
+														telescopeModel,
+														telescopeModel->propertyMap());
 	
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -235,7 +235,7 @@ void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
 	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->getGuiActions("actionShow_Ocular");
+	QAction* action = gui->getGuiAction("actionShow_Ocular");
 	if (action != NULL) {
 		action->setShortcut(QKeySequence(newString.trimmed()));
 	}
@@ -246,12 +246,12 @@ void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newStrin
 	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->getGuiActions("actionShow_Ocular_Menu");
+	QAction* action = gui->getGuiAction("actionShow_Ocular_Menu");
 	if (action != NULL) {
 		action->setShortcut(QKeySequence(newString.trimmed()));
 	}
 }
-					  
+
 void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
@@ -284,7 +284,7 @@ void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+					this, SLOT(retranslate()));
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
@@ -293,8 +293,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
-	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableGuiPanel(bool)));
+	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
+	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -326,28 +326,28 @@ void OcularDialog::createDialogContent()
 	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
 	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)),
-	        this, SLOT(keyBindingTogglePluginChanged(const QString&)));
+					this, SLOT(keyBindingTogglePluginChanged(const QString&)));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)),
-	        this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
+					this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
 	
 	initAboutText();
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(QString)),
-	        this, SLOT(initAboutText()));
+					this, SLOT(initAboutText()));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(QString)),
-	        this, SLOT(initAboutText()));
+					this, SLOT(initAboutText()));
 
 	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
-	       this, SLOT(moveUpSelectedOcular()));
+					this, SLOT(moveUpSelectedOcular()));
 	connect(ui->pushButtonMoveOcularDown, SIGNAL(pressed()),
-	        this, SLOT(moveDownSelectedOcular()));
+					this, SLOT(moveDownSelectedOcular()));
 	connect(ui->pushButtonMoveSensorUp, SIGNAL(pressed()),
-	        this, SLOT(moveUpSelectedSensor()));
+					this, SLOT(moveUpSelectedSensor()));
 	connect(ui->pushButtonMoveSensorDown, SIGNAL(pressed()),
-	        this, SLOT(moveDownSelectedSensor()));
+					this, SLOT(moveDownSelectedSensor()));
 	connect(ui->pushButtonMoveTelescopeUp, SIGNAL(pressed()),
-	        this, SLOT(moveUpSelectedTelescope()));
+					this, SLOT(moveUpSelectedTelescope()));
 	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()),
-	        this, SLOT(moveDownSelectedTelescope()));
+					this, SLOT(moveDownSelectedTelescope()));
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -362,7 +362,7 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdResY, 6);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+					ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
 	// The ocular mapper
@@ -376,7 +376,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			  ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
 	// The telescope mapper
@@ -390,7 +390,7 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->addMapping(ui->telescopeVFlip, 4, "checked");
 	ocularMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+					telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
@@ -403,6 +403,10 @@ void OcularDialog::createDialogContent()
 	if (Oculars::appSettings()->value("enable_control_panel", false).toBool())
 	{
 		ui->checkBoxControlPanel->setChecked(true);
+	}
+	if (Oculars::appSettings()->value("use_decimal_degrees", false).toBool())
+	{
+		ui->checkBoxDecimalDegrees->setChecked(true);
 	}
 
 	//Initialize the style
@@ -423,7 +427,7 @@ void OcularDialog::initAboutText()
 	html += "<h2>" + q_("Overview") + "</h2>";
 
 	html += "<p>" + q_("This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get your started.") + "</p>";
-	html += "<p>" + q_("You can choose to scale the image you see on the screen.  This is intended to show you a better comparison of what one eyepiece/telescope combination will be like as compared to another.  The same eyepiece in two different telescopes of differing focal length will produce two different exit circles, changing the view someone.  The trade-off of this is that, with the image scaled, a good deal of the screen can be wasted.  Therefor I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
+	html += "<p>" + q_("You can choose to scale the image you see on the screen.  This is intended to show you a better comparison of what one eyepiece/telescope combination will be like as compared to another.  The same eyepiece in two different telescopes of differing focal length will produce two different exit circles, changing the view someone.  The trade-off of this is that, with the image scaled, a good deal of the screen can be wasted.  Therefore I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
 	html += "<p>" + q_("You can toggle a crosshair in the view.  Ideally, I wanted this to be aligned to North.  I've been unable to do so.  So currently it aligns to the top of the screen.") + "</p>";
 	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view.  This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0)) + "</p>";
 	html += "<p>" + q_("If you find any issues, please let me know.  Enjoy!") + "</p>";
@@ -434,9 +438,9 @@ void OcularDialog::initAboutText()
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* actionOcular = gui->getGuiActions("actionShow_Ocular");
+	QAction* actionOcular = gui->getGuiAction("actionShow_Ocular");
 	Q_ASSERT(actionOcular);
-	QAction* actionMenu = gui->getGuiActions("actionShow_Ocular_Menu");
+	QAction* actionMenu = gui->getGuiAction("actionShow_Ocular_Menu");
 	Q_ASSERT(actionMenu);
 	QKeySequence ocularShortcut = actionOcular->shortcut();
 	QString ocularString = ocularShortcut.toString(QKeySequence::NativeText);

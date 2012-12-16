@@ -21,7 +21,6 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -41,28 +40,31 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
 #include "StelGuiBase.hpp"
-#include "StelPainter.hpp"
 
+#include "renderer/StelRenderer.hpp"
+
+#include <cstdlib>
 #include <iostream>
-#include <QStringList>
-#include <QString>
+#include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QTextStream>
-#include <QMouseEvent>
-#include <QDebug>
-#include <QNetworkAccessManager>
-#include <QSysInfo>
-#include <QNetworkProxy>
 #include <QMessageBox>
+#include <QMouseEvent>
+#include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
+#include <QNetworkProxy>
 #include <QNetworkReply>
-#include <cstdlib>
+#include <QString>
+#include <QStringList>
+#include <QSysInfo>
+#include <QTextStream>
+#include <QTimer>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -80,12 +82,17 @@ void StelApp::deinitStatic()
 	StelApp::qtime = NULL;
 }
 
+bool StelApp::getRenderSolarShadows() const
+{
+	return renderSolarShadows;
+}
+
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
 	: QObject(parent), core(NULL), stelGui(NULL), fps(0),
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
+	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false), renderSolarShadows(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 {
 	// Stat variables
@@ -99,15 +106,18 @@ StelApp::StelApp(QObject* parent)
 	skyCultureMgr=NULL;
 	localeMgr=NULL;
 	stelObjectMgr=NULL;
-	textureMgr=NULL;
-	moduleMgr=NULL;
 	networkAccessManager=NULL;
+	shortcutMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
+
+	wheelEventTimer = new QTimer(this);
+	wheelEventTimer->setInterval(25);
+	wheelEventTimer->setSingleShot(TRUE);
 }
 
 /*************************************************************************
@@ -128,10 +138,11 @@ StelApp::~StelApp()
 	delete skyCultureMgr; skyCultureMgr=NULL;
 	delete localeMgr; localeMgr=NULL;
 	delete audioMgr; audioMgr=NULL;
+	delete videoMgr; videoMgr=NULL;
 	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
-	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
+	delete shortcutMgr; shortcutMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -204,7 +215,7 @@ void StelApp::setupHttpProxy()
 	}
 }
 
-void StelApp::init(QSettings* conf)
+void StelApp::init(QSettings* conf, StelRenderer* renderer)
 {
 	confSettings = conf;
 
@@ -212,36 +223,22 @@ void StelApp::init(QSettings* conf)
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
-#ifndef USE_OPENGL_ES2
-	// Avoid using GL Shaders by default since it causes so many problems with broken drivers.
-	useGLShaders = confSettings->value("main/use_glshaders", false).toBool();
-	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms() && !qApp->property("onetime_safe_mode").isValid();
-
-	// We use OpenGL 2.1 features in our shaders
-	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
-#else
-	useGLShaders = true;
-#endif
-
-	// Initialize AFTER creation of openGL context
-	textureMgr = new StelTextureMgr();
-	textureMgr->init();
+	renderSolarShadows = renderer->areFloatTexturesSupported();
 
 	QString splashFileName = "textures/logo24bits.png";
 
 #ifdef BUILD_FOR_MAEMO
 	StelLoadingBar loadingBar(splashFileName, "", 25, 320, 101, 800, 400);
 #else
- #ifdef BZR_REVISION
+#ifdef BZR_REVISION
 	StelLoadingBar loadingBar(splashFileName, QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
- #elif SVN_REVISION
+#elif SVN_REVISION
 	StelLoadingBar loadingBar(splashFileName, QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
- #else
+#else
 	StelLoadingBar loadingBar(splashFileName, PACKAGE_VERSION, 45, 320, 121);
- #endif
 #endif
-
-	loadingBar.draw();
+#endif
+	loadingBar.draw(renderer);
 
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
@@ -261,8 +258,10 @@ void StelApp::init(QSettings* conf)
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
+	shortcutMgr = new StelShortcutMgr();
 
 	localeMgr->init();
+	shortcutMgr->init();
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
@@ -274,7 +273,7 @@ void StelApp::init(QSettings* conf)
 	hip_stars->init();
 	getModuleMgr().registerModule(hip_stars);
 
-	core->init();
+	core->init(renderer);
 
 	// Init nebulas
 	NebulaMgr* nebulas = new NebulaMgr();
@@ -355,7 +354,7 @@ void StelApp::initPlugIns()
 
 void StelApp::update(double deltaTime)
 {
-	 if (!initialized)
+	if (!initialized)
 		return;
 
 	++frame;
@@ -382,7 +381,7 @@ void StelApp::update(double deltaTime)
 }
 
 //! Iterate through the drawing sequence.
-bool StelApp::drawPartial()
+bool StelApp::drawPartial(StelRenderer* renderer)
 {
 	if (drawState == 0)
 	{
@@ -397,28 +396,20 @@ bool StelApp::drawPartial()
 	int index = drawState - 1;
 	if (index < modules.size())
 	{
-		if (modules[index]->drawPartial(core))
+		if (modules[index]->drawPartial(core, renderer))
 			return true;
 		drawState++;
 		return true;
 	}
-	core->postDraw();
+	core->postDraw(renderer);
 	drawState = 0;
 	return false;
 }
 
-//! Main drawing function called at each frame
-void StelApp::draw()
-{
-	Q_ASSERT(drawState == 0);
-	while (drawPartial()) {}
-	Q_ASSERT(drawState == 0);
-}
-
 /*************************************************************************
- Call this when the size of the GL window has changed
+ Call this when the size of the window has changed
 *************************************************************************/
-void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
+void StelApp::windowHasBeenResized(float x, float y, float w, float h)
 {
 	if (core)
 		core->windowHasBeenResized(x, y, w, h);
@@ -443,15 +434,35 @@ void StelApp::handleClick(QMouseEvent* event)
 }
 
 // Handle mouse wheel.
+// This deltaEvent is a work-around for QTBUG-22269
 void StelApp::handleWheel(QWheelEvent* event)
 {
+	// variables used to track the changes
+	static int delta = 0;
+
 	event->setAccepted(false);
-	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
-	{
-		i->handleMouseWheel(event);
-		if (event->isAccepted())
-			return;
+	if (wheelEventTimer->isActive()) {
+		// Collect the values; we only care about the fianl position values, but we want to accumalate the delta.
+		delta += event->delta();
+	} else {
+		// The first time in, the values will not have been set.
+		if (delta == 0) {
+			delta += event->delta();
+		}
+
+		wheelEventTimer->start();
+		QWheelEvent deltaEvent(event->pos(), event->globalPos(), delta, event->buttons(), event->modifiers(), event->orientation());
+		deltaEvent.setAccepted(FALSE);
+		// Send the event to every StelModule
+		foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
+			i->handleMouseWheel(&deltaEvent);
+			if (deltaEvent.isAccepted()) {
+				event->accept();
+				break;
+			}
+		}
+		// Reset the collected values
+		delta = 0;
 	}
 }
 
@@ -479,6 +490,10 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
+void StelApp::setRenderSolarShadows(bool b)
+{
+	renderSolarShadows = b;
+}
 
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(bool b)

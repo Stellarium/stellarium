@@ -26,23 +26,12 @@ SET(SolarSystemEditor_UIS
 
 QT4_WRAP_UI(SolarSystemEditor_UIS_H ${SolarSystemEditor_UIS})
 
-#SET(SolarSystemEditor_RES ../resources/resources.qrc)
-#QT4_ADD_RESOURCES(SolarSystemEditor_RES_CXX ${SolarSystemEditor_RES})
-
-SET(SolarSystemEditor_MOC_HDRS
-  gui/SolarSystemManagerWindow.hpp
-  gui/MpcImportWindow.hpp
-  gui/ManualImportWindow.hpp
-  SolarSystemEditor.hpp
-  )
-
-QT4_WRAP_CPP(SolarSystemEditor_MOC_SRCS ${SolarSystemEditor_MOC_HDRS})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
 #Dynamic library
 IF(BUILD_DYNAMIC_PLUGINS)
- ADD_LIBRARY(SolarSystemEditor MODULE ${SolarSystemEditor_SRCS} ${SolarSystemEditor_MOC_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
+ ADD_LIBRARY(SolarSystemEditor MODULE ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
 
  IF(APPLE)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
@@ -64,7 +53,7 @@ ENDIF()
 
 #Static library
 IF(BUILD_STATIC_PLUGINS)
- ADD_LIBRARY(SolarSystemEditor-static STATIC ${SolarSystemEditor_SRCS} ${SolarSystemEditor_MOC_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
+ ADD_LIBRARY(SolarSystemEditor-static STATIC ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
  SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES OUTPUT_NAME "SolarSystemEditor")
  TARGET_LINK_LIBRARIES(SolarSystemEditor-static ${extLinkerOption})
  SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

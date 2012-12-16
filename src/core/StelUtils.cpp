@@ -32,6 +32,7 @@
 #include <QDebug>
 #include <QLocale>
 #include <QRegExp>
+#include <QtGlobal>
 
 namespace StelUtils
 {
@@ -417,13 +418,26 @@ bool isPowerOfTwo(int value)
 	return (value & -value) == value;
 }
 
-// Return the first power of two bigger than the given value
-int getBiggerPowerOfTwo(int value)
+// Return the first power of two greater or equal to the given value
+int smallestPowerOfTwoGreaterOrEqualTo(int value)
 {
-	int p=1;
-	while (p<value)
-		p<<=1;
-	return p;
+#ifndef NDEBUG
+	const int twoTo30 = 1073741824;
+	Q_ASSERT_X(value <= twoTo30, Q_FUNC_INFO,
+	           "Value too large - smallest greater/equal power-of-2 is out of range");
+#endif
+
+	if(value == 0){return 0;}
+
+	int pot=1;
+	while (pot<value){pot<<=1;}
+	return pot;
+}
+
+QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base)
+{
+	return QSize(smallestPowerOfTwoGreaterOrEqualTo(base.width()), 
+	             smallestPowerOfTwoGreaterOrEqualTo(base.height()));
 }
 
 // Return the inverse sinus hyperbolic of z
@@ -1036,6 +1050,72 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 	return false;
 }
 
+// Calculate and getting sidereal period in days from semi-major axis
+double calculateSiderealPeriod(double SemiMajorAxis)
+{
+	// Calculate semi-major axis in meters
+	double a = AU*1000*SemiMajorAxis;
+	// Calculate orbital period in seconds
+	// Here 1.32712440018e20 is heliocentric gravitational constant
+	double period = 2*M_PI*std::sqrt(a*a*a/1.32712440018e20);
+	return period/86400; // return period in days
+}
+
+// Calculate duration of mean solar day
+double calculateSolarDay(double siderealPeriod, double siderealDay, bool forwardDirection)
+{
+	double coeff;
+	if (forwardDirection)
+		coeff = (siderealPeriod + 1)/siderealPeriod;
+	else
+		coeff = -1 * (siderealPeriod - 1)/siderealPeriod;
+
+	return siderealDay/coeff;
+}
+
+QString hoursToHmsStr(double hours)
+{
+	int h = (int)hours;
+	int m = (int)((hours-h)*60);
+	float s = (((hours-h)*60)-m)*60;
+
+	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
+}
+
+#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+#include <sys/time.h>
+#else
+#include <time.h>
+#endif
+
+//! Get current time in seconds (relative to some arbitrary beginning in the past)
+//!
+//! Currently we only have a high-precision implementation for Mac, Linux and 
+//! FreeBSD. A Windows implementation would be good as well (clock_t, 
+//! which we use right now, might be faster/slower than wall clock time 
+//! and usually supports milliseconds at best).
+static long double getTime()
+{
+#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+	struct timeval timeVal;
+	if(gettimeofday(&timeVal, NULL) != 0)
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to get time");
+	}
+	return static_cast<long double>(timeVal.tv_sec) + 0.000001L * timeVal.tv_usec;
+#else
+	clock_t cpuTime = clock();
+	return static_cast<long double>(cpuTime) / CLOCKS_PER_SEC;
+#endif
+}
+
+//! Time when the program execution started.
+long double startTime = getTime();
+
+long double secondsSinceStart()
+{
+	return getTime() - startTime;
+}
 
 } // end of the StelUtils namespace
 

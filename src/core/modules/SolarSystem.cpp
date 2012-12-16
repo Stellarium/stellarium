@@ -20,44 +20,51 @@
  */
 
 #include "SolarSystem.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelGLSLShader.hpp"
+#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureNew.hpp"
 #include "stellplanet.h"
 #include "Orbit.hpp"
 
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
+#include "StelUtils.hpp"
 #include "Planet.hpp"
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
-#include "StelPainter.hpp"
 #include "TrailGroup.hpp"
 #include "RefractionExtinction.hpp"
 
-#include <functional>
 #include <algorithm>
+#include <functional>
 
-#include <QTextStream>
+#include <QDebug>
+#include <QFile>
+#include <QMap>
+#include <QMapIterator>
+#include <QMultiMap>
 #include <QSettings>
-#include <QVariant>
 #include <QString>
 #include <QStringList>
-#include <QMap>
-#include <QMultiMap>
-#include <QMapIterator>
-#include <QDebug>
+#include <QTextStream>
+#include <QVariant>
 
-SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
+SolarSystem::SolarSystem() 
+	: moonScale(1.)
+	, flagOrbits(false)
+	, flagLightTravelTime(false)
+	, texPointer(NULL)
+	, allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
@@ -80,11 +87,15 @@ SolarSystem::~SolarSystem()
 	sun.clear();
 	moon.clear();
 	earth.clear();
-	Planet::hintCircleTex.clear();
-	Planet::texEarthShadow.clear();
 
 	delete allTrails;
 	allTrails = NULL;
+
+	if(NULL !=  texPointer)
+	{
+		delete texPointer;
+		texPointer = NULL;
+	}
 
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
 	foreach (PlanetP p, systemPlanets)
@@ -134,9 +145,6 @@ void SolarSystem::init()
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
-	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("textures/planet-indicator.png");
-
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -154,7 +162,7 @@ void SolarSystem::recreateTrails()
 	}
 }
 
-void SolarSystem::drawPointer(const StelCore* core)
+void SolarSystem::drawPointer(const StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -169,18 +177,21 @@ void SolarSystem::drawPointer(const StelCore* core)
 		if (!prj->project(pos, screenpos))
 			return;
 
-
-		StelPainter sPainter(prj);
-		sPainter.setColor(1.0f,0.3f,0.3f);
+		const Vec4f color = StelApp::getInstance().getVisionModeNight()
+		                  ? Vec4f(1.0f,0.0f,0.0f,1.0f) : Vec4f(1.0f,0.3f,0.3f,1.0f);
+		renderer->setGlobalColor(color);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur4.png");
+		}
+
 		texPointer->bind();
 
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		renderer->setBlendMode(BlendMode_Alpha);
 
 		size*=0.5;
 		const float angleBase = StelApp::getInstance().getTotalRunTime() * 10;
@@ -190,7 +201,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 			const float angle = angleBase + i * 90;
 			const double x = screenpos[0] + size * cos(angle / 180 * M_PI);
 			const double y = screenpos[1] + size * sin(angle / 180 * M_PI);
-			sPainter.drawSprite2dMode(x, y, 10, angle);
+			renderer->drawTexturedRect(x - 10, y - 10, 20, 20, angle);
 		}
 	}
 }
@@ -251,6 +262,12 @@ void SolarSystem::loadPlanets()
 			}
 		}
 	}
+
+	shadowPlanetCount = 0;
+
+	foreach (const PlanetP& planet, systemPlanets)
+		if(planet->parent != sun || !planet->satellites.isEmpty())
+			shadowPlanetCount++;
 }
 
 bool SolarSystem::loadPlanets(const QString& filePath)
@@ -743,6 +760,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 
+			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
+
 		}
 		else if (type == "comet")
 		{
@@ -775,6 +794,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, 4.0);
 				}
 			}
+
+			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
 
 		}
 		else
@@ -857,9 +878,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		return false;
 	}
 
-	// special case: load earth shadow texture
-	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("textures/earth-shadow.png");
-
 	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits from" << filePath;
 	return true;
 }
@@ -920,9 +938,69 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 	}
 };
 
+StelTextureNew* SolarSystem::computeShadowInfo(StelRenderer* renderer)
+{
+	// Acquire shadow informations
+	if(shadowModelMatricesBuffer.size() < shadowPlanetCount)
+	{
+		shadowModelMatricesBuffer.resize(shadowPlanetCount);
+	}
+
+	Mat4d* modelMatrices = shadowModelMatricesBuffer.data();
+	int p = 1;
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		if(planet->parent != sun || !planet->satellites.isEmpty())
+		{
+			planet->computeModelMatrix(modelMatrices[planet == sun ? 0 : p++]);
+		}
+	}
+
+	const int size = StelUtils::smallestPowerOfTwoGreaterOrEqualTo(shadowPlanetCount);
+
+	if(shadowInfoBuffer.size() < size * size)
+	{
+		shadowInfoBuffer.resize(size * size);
+	}
+
+	// Shadow info texture data
+	Vec4f* data = shadowInfoBuffer.data();
+	memset(data, '\0', size * size * sizeof(Vec4f));
+
+	int y = 1;
+
+	foreach (const PlanetP& target, systemPlanets)
+	{
+		if(target == sun || (target->parent == sun && target->satellites.isEmpty()))
+			continue;
+
+		const Mat4d mTarget = modelMatrices[y].inverse();
+		data[y * size] = Vec4f(mTarget[12], mTarget[13], mTarget[14], sun->getRadius());
+
+		int x = 1;
+
+		foreach (const PlanetP& source, systemPlanets)
+		{
+			if(source == sun || (source->parent == sun && source->satellites.isEmpty()))
+				continue;
+
+			const Mat4d& mSource(modelMatrices[x]);
+			const Vec4d position = mTarget * mSource.getColumn(3);
+
+			data[y * size + x] = Vec4f(position[0], position[1], position[2], source->getRadius());
+			x++;
+		}
+
+		y++;
+	}
+
+	return renderer->createTexture(data, QSize(size, size), TextureDataFormat_RGBA_F32,
+	                               TextureParams().filtering(TextureFiltering_Nearest));
+}
+
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(StelCore* core)
+void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 {
 	if (!flagShow)
 		return;
@@ -938,26 +1016,68 @@ void SolarSystem::draw(StelCore* core)
 	// And sort them from the furthest to the closest
 	sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
+
 	if (trailFader.getInterstate()>0.0000001f)
 	{
-		StelPainter* sPainter = new StelPainter(core->getProjection2d());
 		allTrails->setOpacity(trailFader.getInterstate());
-		allTrails->draw(core, sPainter);
-		delete sPainter;
+		allTrails->draw(core, renderer);
 	}
 
 	// Make some voodoo to determine when labels should be displayed
 	float maxMagLabel = (core->getSkyDrawer()->getLimitMagnitude()<5.f ? core->getSkyDrawer()->getLimitMagnitude() :
 			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
 
-	// Draw the elements
-	foreach (const PlanetP& p, systemPlanets)
+	sharedPlanetGraphics.lazyInit(renderer);
+
+	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader)
 	{
-		p->draw(core, maxMagLabel, planetNameFont);
+		StelTextureNew* shadowInfo = computeShadowInfo(renderer);
+
+		sharedPlanetGraphics.planetShader = sharedPlanetGraphics.shadowPlanetShader;
+		sharedPlanetGraphics.info.info = 1;
+		sharedPlanetGraphics.info.infoCount = shadowPlanetCount;
+		const QSize size = shadowInfo->getDimensions();
+		Q_ASSERT_X(size.width() == size.height(), Q_FUNC_INFO,
+		           "Shadow info texture is not square");
+		sharedPlanetGraphics.info.infoSize = size.width();
+
+		shadowInfo->bind(1);
+
+		// Draw the elements
+		int i = 1;
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if((p == sun || (p->parent == sun && p->satellites.isEmpty())) && sharedPlanetGraphics.planetShader == sharedPlanetGraphics.shadowPlanetShader)
+			{
+				sharedPlanetGraphics.info.current = 0;
+				sharedPlanetGraphics.planetShader = sharedPlanetGraphics.simplePlanetShader;
+				p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+				sharedPlanetGraphics.planetShader = sharedPlanetGraphics.shadowPlanetShader;
+			}
+			else
+			{
+				sharedPlanetGraphics.info.current = i;
+				p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+
+				i++;
+			}
+		}
+
+		delete shadowInfo;
+	}
+	else
+	{
+		sharedPlanetGraphics.planetShader = sharedPlanetGraphics.simplePlanetShader;
+
+		// Draw the elements
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			p->draw(core, renderer, maxMagLabel, planetNameFont, sharedPlanetGraphics);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core);
+		drawPointer(core, renderer);
 }
 
 void SolarSystem::setStelStyle(const QString& section)
@@ -1009,6 +1129,38 @@ float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) 
 	PlanetP p = searchByEnglishName(planetName);
 	float r = 0.f;
 	r = p->getVMagnitude(StelApp::getInstance().getCore(), withExtinction);
+	return r;
+}
+
+double SolarSystem::getDistanceToPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	double r = 0.f;
+	r = p->getDistance();
+	return r;
+}
+
+double SolarSystem::getElongationForPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	double r = 0.f;
+	r = p->getElongation(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	return r;
+}
+
+double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	double r = 0.f;
+	r = p->getPhaseAngle(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	return r;
+}
+
+float SolarSystem::getPhaseForPlanet(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	float r = 0.f;
+	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
 }
 
@@ -1232,6 +1384,26 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	return result;
 }
 
+QStringList SolarSystem::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	if (inEnglish)
+	{
+		foreach(const PlanetP& p, systemPlanets)
+		{
+			result << p->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(const PlanetP& p, systemPlanets)
+		{
+			result << p->getNameI18n();
+		}
+	}
+	return result;
+}
+
 void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
@@ -1321,7 +1493,6 @@ void SolarSystem::reloadPlanets()
 	sun.clear();
 	moon.clear();
 	earth.clear();
-	Planet::texEarthShadow.clear(); //Loaded in loadPlanets()
 
 	delete allTrails;
 	allTrails = NULL;
@@ -1353,4 +1524,88 @@ void SolarSystem::reloadPlanets()
 
 	// Restore translations
 	updateI18n();
+}
+
+double SolarSystem::getEclipseFactor(const StelCore* core) const
+{
+	Vec3d Lp = sun->getEclipticPos();
+	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
+	const double RS = sun->getRadius();
+
+	double final_illumination = 1.0;
+
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		if(planet == sun || planet == core->getCurrentPlanet())
+			continue;
+
+		Mat4d trans;
+		planet->computeModelMatrix(trans);
+
+		const Vec3d C = trans * Vec3d(0, 0, 0);
+		const double radius = planet->getRadius();
+
+		Vec3d v1 = Lp - P3;
+		Vec3d v2 = C - P3;
+
+		const double L = v1.length();
+		const double l = v2.length();
+
+		v1 = v1 / L;
+		v2 = v2 / l;
+
+		const double R = RS / L;
+		const double r = radius / l;
+		const double d = ( v1 - v2 ).length();
+
+		/*double L = (Lp - P3).length();
+		double l = (C - P3).length();
+
+		double R = RS / L;
+		double r = radius / l;
+		double d = ( (Lp - P3) / L - (C - P3) / l ).length();*/
+
+		if(planet->englishName == "Moon")
+		{
+			v1 = planet->getHeliocentricEclipticPos();
+			//C = planet->getHeliocentricEclipticPos();
+		}
+
+		double illumination;
+
+		// distance too far
+		if(d >= R + r)
+		{
+			illumination = 1.0;
+		}
+		// umbra
+		else if(r >= R + d)
+		{
+			illumination = 0.0;
+		}
+		// penumbra completely inside
+		else if(d + r <= R)
+		{
+			illumination = 1.0 - r * r / (R * R);
+		}
+		// penumbra partially inside
+		else
+		{
+			const double x = (R * R + d * d - r * r) / (2.0 * d);
+
+			const double alpha = std::acos(x / R);
+			const double beta = std::acos((d - x) / r);
+
+			const double AR = R * R * (alpha - 0.5 * std::sin(2.0 * alpha));
+			const double Ar = r * r * (beta - 0.5 * std::sin(2.0 * beta));
+			const double AS = R * R * 2.0 * std::asin(1.0);
+
+			illumination = 1.0 - (AR + Ar) / AS;
+		}
+
+		if(illumination < final_illumination)
+			final_illumination = illumination;
+	}
+
+	return final_illumination;
 }

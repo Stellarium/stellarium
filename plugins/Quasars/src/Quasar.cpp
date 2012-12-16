@@ -17,23 +17,23 @@
  */
 
 #include "Quasar.hpp"
+#include "Quasars.hpp"
 #include "StelObject.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QTextStream>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+
 
 Quasar::Quasar(const QVariantMap& map)
 		: initialized(false)
@@ -154,7 +154,7 @@ float Quasar::getVMagnitude(const StelCore* core, bool withExtinction) const
 		core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
-        return VMagnitude + extinctionMag;
+	return VMagnitude + extinctionMag;
 }
 
 double Quasar::getAngularSize(const StelCore*) const
@@ -167,33 +167,59 @@ void Quasar::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Quasar::draw(StelCore* core, StelPainter& painter)
+void Quasar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, StelTextureNew* markerTexture)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
+	const Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
+	Vec3f dcolor = Vec3f(1.2f,0.5f,0.4f);
+	if (StelApp::getInstance().getVisionModeNight())
+		dcolor = StelUtils::getNightColor(dcolor);
+
 	float rcMag[2], size, shift;
 	double mag;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
-        mag = getVMagnitude(core, true);	
-	sd->preDrawPointSource(&painter);
-	
-	if (mag <= sd->getLimitMagnitude())
+	mag = getVMagnitude(core, true);	
+
+	if (GETSTELMODULE(Quasars)->getDisplayMode())
 	{
-		sd->computeRCMag(mag, rcMag);
-		//sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
-		sd->drawPointSource(&painter, XYZ, rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
-		painter.setColor(color[0], color[1], color[2], 1);
-		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-		shift = 6.f + size/1.8f;
+		renderer->setBlendMode(BlendMode_Add);
+		renderer->setGlobalColor(dcolor[0], dcolor[1], dcolor[2], 1);		
+		markerTexture->bind();
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
+			Vec3d win;
+			if(projector->project(XYZ, win))
+			{
+				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
+			}
 		}
 	}
+	else
+	{
+		sd->preDrawPointSource();
+	
+		if (mag <= sd->getLimitMagnitude())
+		{
+			sd->computeRCMag(mag, rcMag);
+			const Vec3f XYZf(XYZ[0], XYZ[1], XYZ[2]);
+			Vec3f win;
+			if(sd->pointSourceVisible(&(*projector), XYZf, rcMag, false, win))
+			{
+				sd->drawPointSource(win, rcMag, sd->indexToColor(BvToColorIndex(bV)));
+			}
+			renderer->setGlobalColor(color[0], color[1], color[2], 1.0f);
+			size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
+			shift = 6.f + size/1.8f;
+			if (labelsFader.getInterstate()<=0.f)
+			{
+				renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+			}
+		}
 
-	sd->postDrawPointSource(&painter);
+		sd->postDrawPointSource(projector);
+	}
 }
 
 unsigned char Quasar::BvToColorIndex(float b_v)

@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -25,9 +24,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "StelIniParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
@@ -35,6 +32,7 @@
 #include "Pulsar.hpp"
 #include "Pulsars.hpp"
 #include "PulsarsDialog.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -48,6 +46,7 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
 
@@ -82,11 +81,14 @@ Q_EXPORT_PLUGIN2(Pulsars, PulsarsStelPluginInterface)
  Constructor
 */
 Pulsars::Pulsars()
-	: progressBar(NULL)
+	: texPointer(NULL)
+	, markerTexture(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
-	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	conf = StelApp::getInstance().getSettings();
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -100,8 +102,14 @@ Pulsars::~Pulsars()
 void Pulsars::deinit()
 {
 	psr.clear();
-	Pulsar::markerTexture.clear();
-	texPointer.clear();
+	if(NULL != markerTexture)
+	{
+		delete markerTexture;
+	}
+	if(NULL != texPointer)
+	{
+		delete texPointer;
+	}
 }
 
 /*
@@ -120,8 +128,6 @@ double Pulsars::getCallOrder(StelModuleActionName actionName) const
 */
 void Pulsars::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Pulsars");
@@ -138,17 +144,11 @@ void Pulsars::init()
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
-		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
-
 		// key bindings and other actions
-		// TRANSLATORS: Title of a group of key bindings in the Help window
-		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Pulsars_ConfigDialog", N_("Pulsars configuration window"), "", groupName, true);
 
-		connect(gui->getGuiActions("actionShow_Pulsars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Pulsars_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SLOT(setChecked(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -197,27 +197,31 @@ void Pulsars::init()
 /*
  Draw our module. This should print name of first PSR in the main window
 */
-void Pulsars::draw(StelCore* core)
+void Pulsars::draw(StelCore* core, StelRenderer* renderer)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
-	painter.setFont(font);
+	renderer->setFont(font);
 	
 	foreach (const PulsarP& pulsar, psr)
 	{
 		if (pulsar && pulsar->initialized)
-			pulsar->draw(core, painter);
+		{
+			if(NULL == markerTexture)
+			{
+				markerTexture = renderer->createTexture(":/Pulsars/pulsar.png");
+			}
+			pulsar->draw(core, renderer, prj, markerTexture);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
-
+	{
+		drawPointer(core, renderer, prj);
+	}
 }
 
-void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
+void Pulsars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Pulsar");
 	if (!newSelected.empty())
 	{
@@ -226,16 +230,21 @@ void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
 
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
-			return;
+		if (!projector->project(pos, screenpos))
+		{
+			 return;
+		}
 
 		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		renderer->setGlobalColor(c[0], c[1], c[2]);
+		if(NULL == texPointer)
+		{
+			texPointer = renderer->createTexture("textures/pointeur2.png");
+		}
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 26.0f,
+		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
 	}
 }
 
@@ -310,6 +319,26 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
+QStringList Pulsars::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	if (inEnglish)
+	{
+		foreach(const PulsarP& pulsar, psr)
+		{
+			result << pulsar->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(const PulsarP& pulsar, psr)
+		{
+			result << pulsar->getNameI18n();
+		}
+	}
+	return result;
+}
+
 /*
   Replace the JSON file with the default from the compiled-in resource
 */
@@ -330,6 +359,12 @@ void Pulsars::restoreDefaultJsonFile(void)
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+
+		// Make sure that in the case where an online update has previously been done, but
+		// the json file has been manually removed, that an update is schreduled in a timely
+		// manner
+		conf->remove("Pulsars/last_update");
+		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
 	}
 }
 
@@ -452,7 +487,7 @@ bool Pulsars::configureGui(bool show)
 	if (show)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_Pulsars_ConfigDialog")->setChecked(true);
+		gui->getGuiAction("actionShow_Pulsars_ConfigDialog")->setChecked(true);
 	}
 
 	return true;
@@ -468,7 +503,6 @@ void Pulsars::restoreDefaults(void)
 
 void Pulsars::restoreDefaultConfigIni(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
 	// delete all existing Pulsars settings...
@@ -476,17 +510,16 @@ void Pulsars::restoreDefaultConfigIni(void)
 
 	conf->setValue("distribution_enabled", false);
 	conf->setValue("updates_enabled", true);
-	conf->setValue("url", "http://stellarium.astro.uni-altai.ru/pulsars.json");
+	conf->setValue("url", "http://stellarium.org/json/pulsars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
 }
 
 void Pulsars::readSettingsFromConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
-	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/pulsars.json").toString();
+	updateUrl = conf->value("url", "http://stellarium.org/json/pulsars.json").toString();
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
@@ -497,7 +530,6 @@ void Pulsars::readSettingsFromConfig(void)
 
 void Pulsars::saveSettingsToConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
 	conf->setValue("url", updateUrl);
@@ -533,7 +565,6 @@ void Pulsars::updateJSON(void)
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("Pulsars/last_update", lastUpdate.toString(Qt::ISODate));
 
 	emit(jsonUpdateComplete());

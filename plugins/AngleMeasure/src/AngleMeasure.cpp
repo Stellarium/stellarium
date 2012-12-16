@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -26,10 +25,10 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
-#include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
 
-#include <QtOpenGL>
 #include <QDebug>
 #include <QTimer>
 #include <QAction>
@@ -66,7 +65,7 @@ Q_EXPORT_PLUGIN2(AngleMeasure, AngleMeasureStelPluginInterface)
 
 AngleMeasure::AngleMeasure()
 	: flagShowAngleMeasure(false), dragging(false),
-	  angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
+		angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);
@@ -120,11 +119,7 @@ void AngleMeasure::init()
 	// Create action for enable/disable & hook up signals
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->addGuiActions("actionShow_Angle_Measure",
-	                                     N_("Angle measure"),
-	                                     "Ctrl+A",
-	                                     N_("Plugin Key Bindings"),
-	                                     true, false);
+	QAction* action = gui->getGuiAction("actionShow_Angle_Measure");
 	action->setChecked(flagShowAngleMeasure);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
 
@@ -136,7 +131,8 @@ void AngleMeasure::init()
 	// Add a toolbar button
 	try
 	{
-		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"), QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiActions("actionShow_Angle_Measure"));
+		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
+																	 QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiAction("actionShow_Angle_Measure"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)
@@ -152,58 +148,61 @@ void AngleMeasure::update(double deltaTime)
 }
 
 //! Draw any parts on the screen which are for our module
-void AngleMeasure::draw(StelCore* core)
+void AngleMeasure::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
 	
 	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
-	StelPainter painter(prj);
-	painter.setFont(font);
+
+	renderer->setFont(font);
+
+	const bool night = StelApp::getInstance().getVisionModeNight();
+	const Vec3f tColor = night ? StelUtils::getNightColor(textColor) : lineColor;
+	const Vec3f lColor = night ? StelUtils::getNightColor(lineColor) : lineColor;
 
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		glEnable(GL_TEXTURE_2D);
+		renderer->setBlendMode(BlendMode_Alpha);
 		
 		Vec3d xy;
 		if (prj->project(perp1EndPoint,xy))
 		{
-			painter.setColor(textColor[0], textColor[1], textColor[2], lineVisible.getInterstate());
-			painter.drawText(xy[0], xy[1], angleText, 0, 15, 15);
+			renderer->setGlobalColor(tColor[0], tColor[1], tColor[2],
+			                         lineVisible.getInterstate());
+			renderer->drawText(TextParams(xy[0], xy[1], angleText).shift(15, 15));
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_BLEND);
-		
+		renderer->setGlobalColor(lColor[0], lColor[1], lColor[2],
+		                         lineVisible.getInterstate());
+
 		// main line is a great circle
-		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
-		painter.drawGreatCircleArc(startPoint, endPoint, NULL);
+		StelCircleArcRenderer circleArcRenderer(renderer, prj);
+		circleArcRenderer.drawGreatCircleArc(startPoint, endPoint);
 
 		// End lines
-		painter.drawGreatCircleArc(perp1StartPoint, perp1EndPoint, NULL);
-		painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, NULL);
+		circleArcRenderer.drawGreatCircleArc(perp1StartPoint, perp1EndPoint);
+		circleArcRenderer.drawGreatCircleArc(perp2StartPoint, perp2EndPoint);
 	}
 
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		renderer->setGlobalColor(tColor[0], tColor[1], tColor[2],
+		                         messageFader.getInterstate());
 		int x = 83;
 		int y = 120;
-		int ls = painter.getFontMetrics().lineSpacing();
-		painter.drawText(x, y, messageEnabled);
+		const int ls = QFontMetrics(font).lineSpacing();
+		renderer->drawText(TextParams(x, y, messageEnabled));
 		y -= ls;
-		painter.drawText(x, y, messageLeftButton);
+		renderer->drawText(TextParams(x, y, messageLeftButton));
 		y -= ls;
-		painter.drawText(x, y, messageRightButton);
+		renderer->drawText(TextParams(x, y, messageRightButton));
 	}
 }
 
 void AngleMeasure::handleKeys(QKeyEvent* event)
 {
-		event->setAccepted(false);
+	event->setAccepted(false);
 }
 
 void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
@@ -267,27 +266,27 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 
 void AngleMeasure::calculateEnds(void)
 {
-		Vec3d v0 = endPoint - startPoint;
-		Vec3d v1 = Vec3d(0,0,0) - startPoint;
-		Vec3d p = v0 ^ v1;
-		p *= 0.08;  // end width
-		perp1StartPoint.set(startPoint[0]-p[0],startPoint[1]-p[1],startPoint[2]-p[2]);
-		perp1EndPoint.set(startPoint[0]+p[0],startPoint[1]+p[1],startPoint[2]+p[2]);
+	Vec3d v0 = endPoint - startPoint;
+	Vec3d v1 = Vec3d(0,0,0) - startPoint;
+	Vec3d p = v0 ^ v1;
+	p *= 0.08;  // end width
+	perp1StartPoint.set(startPoint[0]-p[0],startPoint[1]-p[1],startPoint[2]-p[2]);
+	perp1EndPoint.set(startPoint[0]+p[0],startPoint[1]+p[1],startPoint[2]+p[2]);
 
-		v1 = Vec3d(0,0,0) - endPoint;
-		p = v0 ^ v1;
-		p *= 0.08;  // end width
-		perp2StartPoint.set(endPoint[0]-p[0],endPoint[1]-p[1],endPoint[2]-p[2]);
-		perp2EndPoint.set(endPoint[0]+p[0],endPoint[1]+p[1],endPoint[2]+p[2]);
+	v1 = Vec3d(0,0,0) - endPoint;
+	p = v0 ^ v1;
+	p *= 0.08;  // end width
+	perp2StartPoint.set(endPoint[0]-p[0],endPoint[1]-p[1],endPoint[2]-p[2]);
+	perp2EndPoint.set(endPoint[0]+p[0],endPoint[1]+p[1],endPoint[2]+p[2]);
 
-		unsigned int d, m;
-		double s;
-		bool sign;
-		StelUtils::radToDms(startPoint.angle(endPoint), sign, d, m, s);
-		if (flagUseDmsFormat)
-			angleText = QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
-		else
-			angleText = QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	unsigned int d, m;
+	double s;
+	bool sign;
+	StelUtils::radToDms(startPoint.angle(endPoint), sign, d, m, s);
+	if (flagUseDmsFormat)
+		angleText = QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+	else
+		angleText = QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
 }
 
 void AngleMeasure::enableAngleMeasure(bool b)

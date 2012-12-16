@@ -24,6 +24,7 @@
 
 #include <QVariantMap>
 #include <QDateTime>
+#include <QSize>
 #include <QString>
 
 // astonomical unit (km)
@@ -94,7 +95,7 @@ namespace StelUtils
 	QString radToDmsStr(double angle, bool decimal=false, bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
-	//! @param dsm The input string
+	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
@@ -173,8 +174,11 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(int value);
 
-	//! Return the first power of two bigger than the given value.
-	int getBiggerPowerOfTwo(int value);
+	//! Return the first power of two greater or equal to the given value.
+	int smallestPowerOfTwoGreaterOrEqualTo(int value);
+
+	//! Return the smallest size with power-of two dimensions at least as large as given size.
+	QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(double z);
@@ -199,11 +203,14 @@ namespace StelUtils
 	//! Also handles negative and distant years.
 	double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok);
 	
-	//! Format the date and day-of-week per the format in fmt (see QDateTime::toString()).
+	//! Format the date and day-of-week per the format in fmt
+	//! (see QDateTime::toString()). Uses the @b system locale, not
+	//! the one set in Stellarium.
 	//! @return QString representing the formatted date
 	QString localeDateString(int year, int month, int day, int dayOfWeek, QString fmt);
 
-	//! Format the date and day-of-week per the default locale's QLocale::ShortFormat.
+	//! Format the date and day-of-week per the @b system locale's
+	//! QLocale::ShortFormat.
 	//! @return QString representing the formatted date
 	QString localeDateString(int year, int month, int day, int dayOfWeek);
 
@@ -256,6 +263,35 @@ namespace StelUtils
 			(1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f))))):
 				1.f / (1.f -x*(1.f -x/2.f*(1.f- x/3.f*(1.f-x/4.f*(1.f-x/5.f)))));
 	}
+
+	//! Get a night mode version of a color.  That is find the brightness of a color and set that in the
+	//! red channel only
+	inline Vec3f getNightColor(const Vec3f& dayColor)
+	{
+		float max = 0.0;
+		for(int i=0; i<3; i++)
+		{
+			max = dayColor[i] > max ? dayColor[i] : max;
+		}
+		return Vec3f(max, 0, 0);
+	}
+
+	//! Calculate and getting sidereal period in days from semi-major axis (in AU)
+	double calculateSiderealPeriod(double SemiMajorAxis);
+
+	//! Calculate duration of mean solar day
+	double calculateSolarDay(double siderealPeriod, double siderealDay, bool forwardDirection);
+
+	QString hoursToHmsStr(double hours);
+
+	//! Get the number of seconds since program start.
+	//!
+	//! @note This is implemented in platform-specific ways to be as precise 
+	//!       as possible, but there is a fallback for other platforms that 
+	//!       might not be precise at all.
+	//!       This is currently used e.g. to measure FPS, but it should never 
+	//!       be used for critical functionality.
+	long double secondsSinceStart();
 }
 
 #endif // _STELUTILS_HPP_

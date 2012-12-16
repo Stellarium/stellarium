@@ -1,10 +1,10 @@
 
+# WARNING: Update also the version number in resources/device_models.json,
+# otherwise the local copy will be overwritten each time Stellarium is started.
 SET(TELESCOPE_CONTROL_MAJOR "0")
 SET(TELESCOPE_CONTROL_MINOR "2")
-SET(TELESCOPE_CONTROL_PATCH "3")
+SET(TELESCOPE_CONTROL_PATCH "4")
 SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MINOR}.${TELESCOPE_CONTROL_PATCH}")
-#Don't forget to increment the version in device_models.json too,
-#otherwise the local copy will be overwritten each time Stellarium is started.
 
 IF(APPLE)
 	SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)

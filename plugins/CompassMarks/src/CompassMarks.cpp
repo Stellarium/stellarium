@@ -18,7 +18,6 @@
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
@@ -30,8 +29,9 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
 
-#include <QtOpenGL>
 #include <QAction>
 #include <QDebug>
 #include <QPixmap>
@@ -77,6 +77,9 @@ CompassMarks::CompassMarks()
 	if (!conf->contains("CompassMarks/font_size"))
 		conf->setValue("CompassMarks/font_size", 10);
 
+	if (!conf->contains("CompassMarks/enable_at_startup"))
+		conf->setValue("CompassMarks/enable_at_startup", false);
+
 	// Load settings from main config file
 	markColor = StelUtils::strToVec3f(conf->value("CompassMarks/mark_color", "1,0,0").toString());
 	font.setPixelSize(conf->value("CompassMarks/font_size", 10).toInt());
@@ -121,36 +124,44 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "", N_("Plugin Key Bindings"), true, false);
-		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
+		QAction *showCompassAction = gui->getGuiAction("actionShow_Compass_Marks");
+		//showCompassAction->setChecked(markFader);
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, showCompassAction);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(gui->getGuiActions("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
-		connect(gui->getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
+		connect(showCompassAction, SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
+		connect(gui->getGuiAction("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
+
+		QSettings* conf = StelApp::getInstance().getSettings();
+		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
+		// GZ: This must go here, else button may show wrong state
+		gui->getGuiAction("actionShow_Compass_Marks")->setChecked(markFader);
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: unable create toolbar button for CompassMarks plugin: " << e.what();
 	}
+
+
 }
 
 //! Draw any parts on the screen which are for our module
-void CompassMarks::draw(StelCore* core)
+void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 
-	Vec3d pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214
-	StelPainter painter(prj);
-	painter.setFont(font);
+	Vec3f pos;
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.yy
 
-	glColor4f(markColor[0],markColor[1],markColor[2], markFader.getInterstate());
-	glDisable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH);
+	renderer->setFont(font);
+	const Vec3f mColor = StelApp::getInstance().getVisionModeNight() 
+	                   ? StelUtils::getNightColor(markColor) : markColor;
 
+	renderer->setGlobalColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
+	renderer->setBlendMode(BlendMode_Alpha);
+
+	const QFontMetrics fontMetrics(font);
+	
 	for(int i=0; i<360; i++)
 	{
 		float a = i*M_PI/180;
@@ -160,21 +171,22 @@ void CompassMarks::draw(StelCore* core)
 		{
 			h = -0.02;  // the size of the mark every 15 degrees
 
-			// draw a label every 15 degrees
 			QString s = QString("%1").arg((i+90)%360);
-			float shiftx = painter.getFontMetrics().width(s) / 2.;
-			float shifty = painter.getFontMetrics().height() / 2.;
-			painter.drawText(pos, s, 0, -shiftx, shifty);
+			const float shiftx = fontMetrics.width(s) / 2.;
+			const float shifty = fontMetrics.height() / 2.;
+			renderer->drawText(TextParams(pos, prj, s).shift(-shiftx, shifty));
 		}
 		else if (i % 5 == 0)
 		{
-			h = -0.01;  // the size of the marking every 5 degrees
+			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
+		Vec3f win1, win2;
+		if(prj->project(pos, win1) && prj->project(Vec3f(pos[0], pos[1], h), win2))
+		{
+			renderer->drawLine(win1[0], win1[1], win2[0], win2[1]);
+		}
 	}
-	glDisable(GL_LINE_SMOOTH);
 }
 
 void CompassMarks::update(double deltaTime)
@@ -198,7 +210,7 @@ void CompassMarks::setCompassMarks(bool b)
 	{
 		// Using QActions instead of directly calling
 		// setFlagCardinalsPoints() in order to sync with the buttons
-		dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiActions("actionShow_Cardinal_Points")->trigger();
+		dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Cardinal_Points")->trigger();
 	}
 }
 
@@ -211,7 +223,7 @@ void CompassMarks::cardinalPointsChanged(bool b)
 		if(markFader)
 		{
 			cardinalPointsState = false; // actionShow_Cardinal_Points should not be triggered again
-			dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiActions("actionShow_Compass_Marks")->trigger();
+			dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Compass_Marks")->trigger();
 		}
 	}
 }

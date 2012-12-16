@@ -44,11 +44,23 @@ class GettextStelTranslator : public QTranslator
 public:
 	virtual bool isEmpty() const { return false; }
 
+	//! Overrides QTranslator::translate().
+	//! Calls StelTranslator::qtranslate().
+	//! Can handle the Qt disambiguation strings of translatable
+	//! widgets from compiled .ui files - they are interpreted as
+	//! gettext context strings. See http://www.gnu.org/software/gettext/manual/gettext.html#Contexts 
+	//! @param context Qt context string - IGNORED.
+	//! @param sourceText the source message.
+	//! @param comment optional parameter, Qt disambiguation
+	//! comment string is interpreted as a gettext context.
+	//! (msgctxt) string.
 	virtual QString translate(const char* context, const char* sourceText, const char* comment=0) const
 	{
 		Q_UNUSED(context);
-		Q_UNUSED(comment);
-		return q_(sourceText);
+		if (comment)
+			return StelTranslator::globalTranslator.qtranslate(sourceText, comment);
+		else
+			return q_(sourceText);
 	}
 };
 
