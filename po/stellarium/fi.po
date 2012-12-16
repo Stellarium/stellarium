@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-24 19:14+0700\n"
-"PO-Revision-Date: 2012-12-08 21:01+0000\n"
-"Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
+"PO-Revision-Date: 2012-12-15 19:43+0000\n"
+"Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-09 04:36+0000\n"
-"X-Generator: Launchpad (build 16341)\n"
+"X-Launchpad-Export-Date: 2012-12-16 04:42+0000\n"
+"X-Generator: Launchpad (build 16372)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "Horisontti"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
-msgstr "Galaktinen taso"
+msgstr "Linnunradan taso"
 
 #: src/core/modules/LandscapeMgr.cpp:500
 msgid "Author: "
@@ -402,7 +402,7 @@ msgstr "Ei löytynyt"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr "Löydetty"
+msgstr "Löytyi"
 
 #: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
@@ -3984,13 +3984,13 @@ msgstr "Kulmanmittaus on käytössä"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:309
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
-"Vedä hiirtä painaen vasenta painikkeella mitataksesi, napsautus poistaa "
-"mittauksen."
+"Vedä hiirtä painaen vasenta painikketta mitataksesi, vasemman napsautus "
+"poistaa mittauksen."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:311
 msgid "Right-clicking changes the end point only."
-msgstr "Oikean painike napsautus muuttaa vain mittauksen loppupistettä."
+msgstr "Oikean painikkeen napsautus muuttaa vain mittauksen loppupistettä."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -4045,7 +4045,7 @@ msgstr "Näytä &CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:904
 msgid "Toggle &Telrad"
-msgstr "Näytä &telrad"
+msgstr "Näytä &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:914
 msgid "&Previous CCD"
@@ -4065,51 +4065,51 @@ msgstr "&Kierrä CCD:tä"
 
 #: plugins/Oculars/src/Oculars.cpp:970
 msgid "&Reset rotation"
-msgstr "&Resetoi kääntö"
+msgstr "&Palauta kääntö"
 
 #: plugins/Oculars/src/Oculars.cpp:1443
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr "Okulaari #%1"
+msgstr "Okulaari %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1448
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr "Okulaari #%1 : %2"
+msgstr "Okulaari %1 : %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1462
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr "okulaarin polttoväli: %1 mm"
+msgstr "Okulaarin polttoväli: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1469
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr "Okulaarin näen. näkökenttä: %1"
+msgstr "Okulaarin näenn. näkökenttä: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1479 plugins/Oculars/src/Oculars.cpp:1536
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
-msgstr "Kaukoputki #%1"
+msgstr "Kaukoputki %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1484 plugins/Oculars/src/Oculars.cpp:1541
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr "Kaukoputki #%1: %2"
+msgstr "Kaukoputki %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1495
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
-msgstr "Suurennos: %1"
+msgstr "Suurennus: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
@@ -4128,13 +4128,13 @@ msgstr "Mitat: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr "Kenno #%1"
+msgstr "Ilmaisin %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1522
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr "Kenno #%1: %2"
+msgstr "Ilmaisin %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1731
 msgid "&Telescope"
@@ -4158,11 +4158,11 @@ msgstr "Seuraava okulaari"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr "Edellinen CCD-kenno"
+msgstr "Edellinen CCD-kenttä"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr "Seuraava CCD-kenno"
+msgstr "Seuraava CCD-kenttä"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
@@ -4174,35 +4174,35 @@ msgstr "Seuraava kaukoputki"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr "Kierrä kennoa 15 astetta vastapäivään"
+msgstr "Kierrä ilmaisimen kenttää 15 astetta vastapäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr "Kierrä kennoa 5 astetta vastapäivään"
+msgstr "Kierrä ilmaisimen kenttää 5 astetta vastapäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr "Kierrä kennoa 1 aste vastapäivään"
+msgstr "Kierrä ilmaisimen kenttää 1 aste vastapäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr "Resetoi kennon kierto"
+msgstr "Palauta kennon kierto"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr "Kierrä kennoa 1 aste myötäpäivään"
+msgstr "Kierrä ilmaisimen kenttää 1 aste myötäpäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr "Kierrä kennoa 5 astetta myötäpäivään"
+msgstr "Kierrä ilmaisimen kenttää 5 astetta myötäpäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr "Kierrä kennoa 15 astetta myötäpäivään"
+msgstr "Kierrä ilmaisimen kenttää 15 astetta myötäpäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr "Okulaarin todellinen polttoväli"
+msgstr "Okulaarin efektiivinen polttoväli"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
@@ -4215,24 +4215,23 @@ msgstr "Kierto: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 msgid "Magnification provided by these binoculars"
-msgstr "Näiden kiikarien tuottama suurennos"
+msgstr "Näiden kiikarien antama suurennus"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:715
 msgid "Actual field of view provided by these binoculars"
-msgstr "Näiden kiikarien tuottama todellinen näkökenttä"
+msgstr "Näiden kiikarien antama todellinen näkökenttä"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr "Tämän okulaari/kaukoputki -yhditelmän tuottama suurennos"
+msgstr "Tämän okulaari/kaukoputki-yhditelmän antama suurennus"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:724
 msgid "Actual field of view provided by this ocular/telescope combination"
-msgstr ""
-"Tämän okulaari/kaukoputki -yhdistelmän tuottama todellinen näkökenttä"
+msgstr "Tämän okulaari/kaukoputki -yhdistelmän antama todellinen näkökenttä"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:421
 msgid "Oculars Plug-in"
-msgstr "Okulaarit-lisäosa"
+msgstr "Okulaarit-laajennus"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
@@ -4255,10 +4254,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
-"Tämän lisäosan tarkoitus on simuloida näkymää okulaarin läpi. Tämän "
-"asetusikkunan kautta voit lisätä, muokata tai poistaa okulaareja ja "
-"kaukoputkia, kuten myös CCD-kennoja. Ensimmäisellä käynnistyskerralla "
-"näytetään joitakin esimerkkejä joilla pääset alkuun."
+"Tämän laajennuksen tarkoitus on mallintaa näkymää okulaarin läpi. Tässä "
+"asetusvalintaikkunassa voit lisätä, muokata tai poistaa okulaareja ja "
+"kaukoputkia, kuten myös CCD-ilmaisimia. Ensimmäisellä käynnistyskerralla "
+"näytetään joitakin esimerkkejä, joilla pääset alkuun."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:430
 msgid ""
@@ -4270,11 +4269,13 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefore I "
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
-"Voit skaalata ruudulla näkyvää kuvaa. Tämän tarkoitus on näyttää paremmin "
-"miltä yksi okulaari/kaukoputki -yhdistelmä näyttää toiseen verrattuna. Sama "
-"okulaari tuottaa eri polttovälisisssä kaukoputkissa erilaisia näkökenttiä "
-"muuttaen näkymää. Huonona puolena on se, että osa ruudusta menee hukkaan. "
-"Näin ollen on parasta jättää skaalaus pois, ellei sille ole tarvetta."
+"Voit muuttaa ruudulla näkyvän kuvan mittakaavaa. Tämän tarkoituksena on "
+"näyttää paremmin vertailu, miltä yksi okulaari/kaukoputki-yhdistelmä näyttää "
+"toiseen verrattuna. Sama okulaari tuottaa eri polttovälin kaukoputkessa "
+"erilaisia lähtöpupilleja muuttaen joillekin näkymää. Komporomissina kuvan "
+"mittakaavan muuttamiselle iso osa ruudusta voi mennä hukkaan. Näin ollen "
+"suosittelemme jättämään mittakaavan muuttamisen pois, ellei sille ole "
+"tarvetta."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -4282,9 +4283,9 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
-"Voit myös ottaa tähtäinristikon käyttöön kuvan keskelle. Ihannetapauksessa "
-"ristikko olisi kohdistettu pohjoiseen. Tämä ominaisuus on toistaiseksi "
-"tekemättä, joten tällä hetkellä se on kohdistettu ruudun yläreunaan."
+"Voit lisätä tähtäinristikon näkymään. Ihannetapauksessa se olisi suunnattuna "
+"pohjoiseen. Tätä ominaisuutta ei ole voitu toteutettaa, joten tällä hetkellä "
+"risitikko on suunnattu ruudun yläreunaan."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4294,14 +4295,14 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"Voit ottaa käyttöön myös telrad-etsimen; tämän on mahdollista vain kun et "
-"ole okulaarinäkymässä. Tämä ominaisuus piirtää kolme samankeskistä ympyrää, "
-"0.5%1, 2.0%1, ja 4.0%1, auttaen arvioimaan miltä kohde näyttää paljain "
-"silmin katsottuna telradin (tai samankaltaisen) etsimen läpi."
+"Voit asettaa käyttöön myös Telrad-etsimen; tämän on mahdollista vain, kun et "
+"ole okulaarinäkymässä. Ominaisuus piirtää kolme samankeskistä ympyrää, "
+"0,5%1, 2,0%1, ja 4,0%1, auttaen arvioimaan miltä näyttäisi katsoa paljain "
+"silmin Telradin-etsimen (tai vastaavan) läpi."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr "Jos kohtaat ongelmia, voit ilmoittaa niistä."
+msgstr "Jos kohtaat ongelmia, voit ilmoittaa niistä. Nauti!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
@@ -4309,40 +4310,40 @@ msgstr "Pikanäppäimet"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr "Lisäosan näppäinkomentoja voi muokata yleistä-välilehdellä."
+msgstr "Laajennuksen näppäinkomentoja voi muokata Yleistä-välilehdellä."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:449
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "[no key defined]"
-msgstr "[näppäintä ei löytynyt]"
+msgstr "[näppäintä ei ole määritelty]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
-msgstr "Okulaari päälle/pois."
+msgstr "Asettaa okulaarinäkymän käyttöön/pois."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
-msgstr "Avaa valikon"
+msgstr "Avaa pudotusvalikon navigointiin."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:861
 msgid "Enable only if an object is selected"
-msgstr "Päällä vain jos kohde on valittuna"
+msgstr "Käytössä vain, jos kohde on valittuna"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Scale image circle"
-msgstr "Skaalaa ympyrää"
+msgstr "Muuta ympyrän kokoa"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:863
 msgid "Key mappings"
-msgstr "Näppäinkomennot"
+msgstr "Näppäinmäärittelyt"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Toggle ocular view:"
-msgstr "Okulaarinäkymä päälle"
+msgstr "Okulaarinäkymä käyttöön"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Open pop-up navigation menu:"
-msgstr "Avaa valikko:"
+msgstr "Avaa pudotusvalikko navigointiin:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Interface"
@@ -4384,7 +4385,7 @@ msgstr "Nimi:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "aFOV:"
-msgstr "Näen. näkökenttä"
+msgstr "Näenn. näkökenttä"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:895
@@ -4402,7 +4403,7 @@ msgstr "Kiikarit"
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Sensors"
-msgstr "Kennot"
+msgstr "Ilmaisimet"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Resolution x (pixels):"
@@ -4422,11 +4423,11 @@ msgstr "Kennon korkeus (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Pixel width (micron):"
-msgstr "Pikselin leveys (mikronia):"
+msgstr "Pikselin leveys (mikrometriä):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Pixel height (micron):"
-msgstr "Pikselin korkeus (mikronia):"
+msgstr "Pikselin korkeus (mikrometriä):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:899
@@ -4437,15 +4438,15 @@ msgstr "Kaukoputket"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Diameter:"
-msgstr "Peilin/linssin halkaisija:"
+msgstr "Halkaisija:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Horizontal flip"
-msgstr "Käännä vaakasuunnassa"
+msgstr "Peilaa vaakasuunnassa"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Vertical flip"
-msgstr "Käännä pystysuunnassa"
+msgstr "Peilaa pystysuunnassa"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
@@ -4484,7 +4485,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:231
 #: plugins/Satellites/src/Satellite.cpp:235
 msgid "Catalog #"
-msgstr "Luettelonumero #"
+msgstr "Luettelo"
 
 #: plugins/Satellites/src/Satellite.cpp:237
 msgid "International Designator"
@@ -4512,7 +4513,7 @@ msgstr "Korkeus (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:258
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "Alakohta (Lat./Long.): %1%2%3%4"
+msgstr "Sijainti (Lat./Long.): %1%2%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:272
@@ -4536,7 +4537,7 @@ msgstr "Satelliitti on näkyvissä."
 
 #: plugins/Satellites/src/Satellite.cpp:294
 msgid "The satellite is eclipsed."
-msgstr "Satelliitti on pimennossa."
+msgstr "Satelliitti on varjossa."
 
 #: plugins/Satellites/src/Satellite.cpp:297
 msgid "The satellite is not visible"
@@ -4549,13 +4550,14 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Stellarium Satellites Plugin"
-msgstr "Stellariumin satelliitit-lisäosa"
+msgstr "Stellariumin Satelliitit-laajennus"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
-msgstr "Satelliitit-lisäosa ennustaa tekokuiden paikkoja maan kiertoradalla."
+msgstr ""
+"Satelliitit-laajennus ennustaa tekokuiden paikkoja Maan kiertoradalla."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 msgid "Notes for users"
@@ -4565,7 +4567,7 @@ msgstr "Huomautuksia käyttäjille"
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
-"Satelliitit ja niiden kiertoradat näytetään vain kun havaitsija on maassa."
+"Satelliitit ja niiden radat näytetään vain, kun havaitsija on Maassa."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid ""
@@ -4573,17 +4575,18 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"Ennusteet pitävät paikkansa vain lyhyen aikaa (päiviä, viikkoja, kuukausia "
-"menneisyyteen ja tulevaisuuteen). Tarkastellessa satelliitteja tämän ajan "
-"ulkopuolella niiden paikat voivat erota suuresti todellisista."
+"Ennusteet pitävät paikkansa vain lyhyen aikaa (päiviä, viikkoja tai ehkä "
+"kuukauden menneisyyteen ja tulevaisuuteen). Havaittaessa tämän jakson "
+"ulkopuolella suuria poikkeavuuksia voi ilmetä."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
-"Kiertorataelementit vanhentuvat melko nopeasti (viikoissa, jopa päivissä). "
-"Tämän vuoksi elementit pitää päivittää säännöllisesti."
+"Rataelementit vanhentuvat melko nopeasti (jopa viikoissa, joskus päivissä). "
+"Saadakseni käyttäkelpoisia tietoja\r\n"
+"TLE-tiedot pitää päivittää säännöllisesti."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
@@ -4593,22 +4596,22 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
-"Klikkaamalla \"%1\"-näppäintä tämän valintaikkunan \"%2\"-välilehdellä "
-"palauttaa oletus-%3-tiedoston. Vanha tiedosto varmuuskopioidaan nimellä %4. "
-"Vanha tiedosto löytyy kansiosta modules/Satellites/."
+"Napsauttamalla \"%1\"-näppäintä tämän valintaikkunan \"%2\"-välilehdellä "
+"palautetaan oletus-%3-tiedosto. Vanha tiedosto varmuuskopioidaan nimellä %4. "
+"Se löytyy käyttäjätietojen hakemiston alihakemistosta modules/Satellites/."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"Satelliitit-lisäosa on yhä kehityksen alla. Jotkut ominaisuudet voivat "
-"puuttua, niiden kehitys voi olla kesken tai ne voivat toimia virheellisesti."
+"Satelliitit-laajennusta kehitetään edelleen. Jotkut ominaisuudet ovat "
+"epätäydellisiä, voivat puuttua tai niissä voi olla vikoja."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:308
 msgid "TLE data updates"
-msgstr "TLE-päivitykset"
+msgstr "TLE-tietojen päivitykset"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:309
 msgid ""
@@ -4616,9 +4619,8 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"Satelliitit-lisäosa voi ladata automaattisesti kiertoratatietoja "
-"internetistä, ja oletuksena lisäosa tekee tämän jos tiedot ovat yli 72 "
-"tuntia vanhoja. "
+"Satelliitit-laajennus voi automaattisesti hakea TLE-tietoja internetistä ja "
+"oletuksena lajjennus tekee tämän, jos tiedot ovat yli 72 tuntia vanhoja. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
 #, qt-format
@@ -4627,8 +4629,8 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
-"Jos kytket internet-päivitykset pois päältä, voit päivittää tietokoneellasi "
-"olevasta tiedostosta. Tiedoston on oltava samaa formaattia kuin Celestrak-"
+"Jos kytket internet-päivitykset pois, voit päivittää tietokoneellasi "
+"olevasta tiedostosta. Tiedoston on oltava samassa muodossa kuin Celestrak-"
 "päivitykset (katso %1 esimerkiksi)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
@@ -4636,12 +4638,12 @@ msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
-"<b>Huomautus:</b> jos päivitysdatassa olevan satelliitin nimessä on lopussa "
-"hakasulkeissa olevaa tekstiä, se poistetaan ennen tietojen käyttämistä."
+"<b>Huomaa:</b> jos päivitystiedoissa olevan satelliitin nimen lopussa "
+"hakasuluissa olevaa tekstiä, se poistetaan ennen tietojen käyttämistä."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
 msgid "Adding new satellites"
-msgstr "Uusien satelliittien lisääminen"
+msgstr "Lisätään uusia satelliitteja"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
 msgid ""
@@ -4650,10 +4652,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
-"1. Varmista että satelliitit jotka haluat lisätä sisältyvät johonkin "
-"asetusikkunan lähteet-välilehden osoitteista. Mene satelliitit-välilehteen, "
-"ja klikkaa '+'-painiketta. Valitse satelliitit jotka haluat lisätä ja "
-"klikkaa \"lisää\"-painiketta."
+"1. Varmista, että haluamasi lisättävät satelliitit löytyvät jostakin "
+"satelliittein asetusikkunan Lähteet-välilehden osoitteista. 2. Mene "
+"satelliitit-välilehdelle, ja napsauta '+'-painiketta. Valitse satelliitit, "
+"jotka haluat lisätä ja paina \"Lisää\"-painiketta."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "Technical notes"
@@ -4664,19 +4666,22 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
-"Paikat lasketaan SGP4 & SDP4 -metodeilla, käyttäen NORAD TLE -dataa. "
+"Paikat lasketaan SGP4- ja SDP4-menetelmillä käyttäen NORAD TLE -dataa "
+"syötteenä. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
-msgstr "Kiertoradanlaskentakoodin on kirjoittanut  Jose Luis Canales. "
+msgstr ""
+"Ratalaskentakoodin on kirjoittanut Jose Luis Canales laajennetun Spacerack "
+"Report #3 -julkaisun mukaan (sisältää Spcetrack Report #6:n). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr "Katso %1tämä dokumentti%2 saadaksesi lisätietoja."
+msgstr "Katso lisätietoja %1tästä dokumentista%2."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
@@ -4696,8 +4701,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
-"Tuki tarjotaan Launchpad-sivuston kautta. Varmista että laitat \"%1\" "
-"aiheeseen kun lähetät viestiä."
+"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon "
+"\"%1\", kun lähetät viestin."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
@@ -4707,7 +4712,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr "Jos sinulla on kysymyksiä, vastaus %1löytyy täältä%2"
+msgstr "Jos sinulla on kysyttävää, vastaus %1löytyy täältä%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
@@ -4717,7 +4722,7 @@ msgstr "Jos sinulla on kysymyksiä, vastaus %1löytyy täältä%2"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr "Bugiraportteja voi lähettää %1tänne%2."
+msgstr "Virheraportteja voi tehdä %1tänne%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:331
@@ -4729,8 +4734,8 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
-"Jos haluat ehdottaa uutta ominaisuutta, voit tehdä bugiraportin ja merkitä "
-"sen tärkeydeksi \"wishlist\"."
+"Jos haluat ehdottaa uutta ominaisuutta, voit laatia virheraportin ja "
+"asetttaa sen tärkeysarvoksi \"wishlist\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
@@ -4751,7 +4756,7 @@ msgstr "Internet-päivitykset pois käytöstä."
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Updating now..."
-msgstr "Päivittää..."
+msgstr "Päivitetään..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
@@ -4819,11 +4824,11 @@ msgstr "[uusi lähde]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:489
 msgid "[orbit calculation error]"
-msgstr "[kiertoradanlaskentavirhe]"
+msgstr "[ratalaskentavirhe]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:490
 msgid "[all newly added]"
-msgstr "[kaikki uusia lisättyjä]"
+msgstr "[kaikki äsken lisättyjä]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:491
 msgid "[all not displayed]"
@@ -4843,13 +4848,13 @@ msgstr "Valitse TLE-päivitystiedosto"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid "Downloading data..."
-msgstr "Ladataan tietoja..."
+msgstr "Haetaan tietoja..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
-msgstr "Stellarium lataa satelliittien päivitysdataa. Odota hetki..."
+msgstr "Stellarium hakee satelliittien tietoja päivityslähteistä. Odota..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
 msgid "Select TLE source file(s)..."
@@ -4864,12 +4869,12 @@ msgstr "Käsitellään tietoja..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 msgid "No data could be downloaded. Try again later."
-msgstr "Tietoja ei voitu ladata. Yritä myöhemmin uudelleen."
+msgstr "Tietoja ei voitu hakea. Yritä myöhemmin uudelleen."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:359
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr "Kataloginumero: %1"
+msgstr "Luettelonumero: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:633
 #: plugins/Satellites/src/ui_satellitesDialog.h:634
@@ -4899,19 +4904,19 @@ msgstr "Viimeisin päivitys:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:257
 msgid "Update frequency (hours):"
-msgstr "Päivitysten väli (tuntia):"
+msgstr "Päivitysväli (tuntia):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
-msgstr "Osoittimet"
+msgstr "Nimet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
-msgstr "Osoittimien fonttikoko (pikseliä):"
+msgstr "Nimien kirjasinkoko (pikseliä):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Orbit lines"
-msgstr "Kiertoradat"
+msgstr "Radat"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
@@ -4934,11 +4939,11 @@ msgstr "Segmenttien pituudet"
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Number of segments used to draw each end of the line"
-msgstr "Viivan päätyjen piirtämiseen käytettävien segmenttien määrä"
+msgstr "Viivan päiden piirtämiseen käytettävien segmenttien määrä"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Fade length:"
-msgstr "Häivytyksen kesto"
+msgstr "Häivytyksen pituus"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -4973,7 +4978,7 @@ msgstr "Näytä valitut satelliitit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Displayed"
-msgstr "Näytä"
+msgstr "Näytettävät"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -4981,11 +4986,11 @@ msgstr "Näytä valittujen satelliittien kiertoradat"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
-msgstr "Kiertorata"
+msgstr "Rata"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
-msgstr "Kataloginumero:"
+msgstr "Luettelonumero:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
@@ -4997,7 +5002,7 @@ msgstr "Ryhmät:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid "Comma separated list of groups"
-msgstr "Pilkulla erotettu lista ryhmistä"
+msgstr "Pilkulla erotettu ryhmälista"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "TLE data:"
@@ -5005,7 +5010,7 @@ msgstr "TLE-data:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "NORAD two line element orbit data"
-msgstr "NORADin kakslinjainen elementtikiertoratadata"
+msgstr "NORADin kaksirivinen rataelementtitieto"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove the selected satellites"
@@ -5013,7 +5018,7 @@ msgstr "Poista valitut satelliitit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Add more satellites"
-msgstr "Lisää uusia satelliitteja"
+msgstr "Lisää enemmän satelliitteja"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Save changes"
@@ -5024,8 +5029,8 @@ msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
-"Mene valitun lähteen osoitteeseen tai muokkaa sitä. Muutokset tallennetaan "
-"enteriä painamalla."
+"Mene valittuun lähteeseen tai muokkaa sen osoitetta. Muutokset tallennetaan "
+"painamalla Enter-näppäintä."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:703
 msgid "Add new source"
@@ -5045,12 +5050,12 @@ msgstr "Lisää satelliitteja"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 msgid "Get data from update sources"
-msgstr "Lataa data päivityslähteistä"
+msgstr "Hae tiedot päivityslähteistä"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Abort download"
-msgstr "Keskeytä lataus"
+msgstr "Keskeytä haku"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 msgid "New satellites"
@@ -5080,8 +5085,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Tämä ohjelmalaajennus mahdollistaa ohjauskomentojen lähettämisen "
-"tietokoneistetulle kaukoputken jalustalle (\"GoTo-kaukoputki\")."
+"Tämä ohjelmalaajennus mahdollistaa Stellariumille ohjauskomentojen "
+"lähettämisen tietokoneistetulle kaukoputken jalustalle (\"GoTo-kaukoputki\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
@@ -5099,7 +5104,7 @@ msgstr "Lisää uusi kaukoputki"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr "Konfiguroi kaukoputki"
+msgstr "Kaukoputken asetukset"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 #: plugins/Observability/src/Observability.cpp:596
@@ -5131,7 +5136,7 @@ msgstr "Pysäytetty"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr "Kaukoputken ohjaus -lisäosa"
+msgstr "Kaukoputken ohjaus -laajennus"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -5143,7 +5148,7 @@ msgstr "Versio %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr "#"
+msgstr "Nro"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
@@ -5161,10 +5166,10 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
-"Kääntääksesi yhdistetyn kaukoputken kohteeseen (esimerkiksi tähteen), "
-"valitse kohde, pidä pohjassa %1-näppäintä ja paina kaukoputken numeroa "
-"vastaavaa näppäintä. Kääntääksesi keskelle nykyistä näkymää, pidä pohjassa "
-"alt-näppäintä ja paina kaukoputken numeroa vastaavaa näppäintä."
+"Suunnataksesi kytketyn kaukoputken kohteeseen (esimerkiksi tähteen) valitse "
+"kohde, pidä %1-näppäin painettuna ja paina kaukoputken numeroa vastaavaa "
+"näppäintä. Suunnatuksen nykyisen näkymän keskelle pidä Alt-näppäin "
+"painettuna ja paina kaukoputken numeroa vastaavaa näppäintä."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
@@ -5173,15 +5178,15 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
-"Laitteen mallikuvausta ei saatavilla. Stellarium ei pysty ohjaamaan "
-"kaukoputkea omillaan, mutta se voi olla mahdollista ulkoisen sovelluksen "
-"kautta tai etälaitteeseen yhdistämällä."
+"Laitteen mallikuvausta ei saatavilla. Stellarium ei pysty itse ohjaamaan "
+"kaukoputkea, mutta se voi olla mahdollista ulkoisella sovelluksella tai "
+"yhdistämällä etälaitteeseen."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr "Paina \"%1\"-painiketta asettaaksesi uuden yhteyden kaukoputkeen"
+msgstr "Paina \"%1\"-painiketta luodaksesi uuden kaukoputkiyhteyden."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
@@ -5201,7 +5206,7 @@ msgstr "etäohjaus, tuntematon"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
-msgstr "Virtuaalinen"
+msgstr "virtuaalinen"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
@@ -5242,7 +5247,7 @@ msgstr "Valitse hakemisto"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to"
-msgstr "Käännä kaukoputki kohteeseen"
+msgstr "Suuntaa kaukoputki kohteeseen"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "There are no active devices."
@@ -5250,7 +5255,7 @@ msgstr "Ei aktiivisia laitteita"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:290
 msgid "Slew telescope to coordinates"
-msgstr "Käännä kaukoputki koordinaatteihin"
+msgstr "Suuntaa kaukoputki koordinaatteihin"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "De&clination (J2000):"
@@ -5266,19 +5271,19 @@ msgstr "&Nykyinen kohde"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
-msgstr "Tunnit-minuutit-sekunnit -formaatti"
+msgstr "Tunnit-minuutit-sekunnit -muoto"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "&HMS"
-msgstr "&TMS"
+msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "Degrees-minutes-seconds format"
-msgstr "Asteet-minuutit-sekunnit -formaatti"
+msgstr "Asteet-minuutit-sekunnit -muoto"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "&DMS"
-msgstr "&AMS"
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Decimal degrees"
@@ -5290,38 +5295,38 @@ msgstr "D&esimaali"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "&Slew"
-msgstr "&Käännä"
+msgstr "&Suuntaa"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Configure &telescopes..."
-msgstr "Konfiguroi &kaukoputkia..."
+msgstr "&Kaukoputkien asetukset"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "Telescope Configuration"
-msgstr "Kaukoputkien konfigurointi"
+msgstr "Kaukoputkien asetukset"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope controlled by:"
-msgstr "Kaukoputken kontrolli:"
+msgstr "Kaukoputken ohjaus:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
-"Kaukoputki yhdistetty tähän tietokoneeseen sarjaportin kautta ja "
-"kontrolloitu suoraan Stellariumista."
+"Kaukoputki yhdistetty tähän tietokoneeseen sarjaportin kautta ja ohjataan "
+"suoraan Stellariumista."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid "Stellarium, directly through a serial port"
-msgstr "Stellarium, suoraan sarjaportin läpi"
+msgstr "Stellarium, suoraan sarjaportin kautta"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:479
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
-"Kaukoputkea kontrolloi ulkoinen sovellus, joko tämä tietokone tai etälaite."
+"Kaukoputkea ohjaa ulkoinen sovellus, joko tämä tietokone tai etälaite."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "External software or a remote computer"
@@ -5345,8 +5350,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
-"Signaalin arvioitu viive kaukoputkesta Stellariumiin.\n"
-"Nosta tätä arvoa jos ristikko hyppii."
+"Signaalin arvioitu viive kaukoputkelta Stellariumiin.\n"
+"Kasvata tätä arvoa jos ristikko hyppii."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
@@ -5358,7 +5363,7 @@ msgstr "J2000 (oletus)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
-msgstr "Nykyinen kevätpäiväntasaus (Jnow)"
+msgstr "Nykyinen epookki (Jnow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
@@ -5421,8 +5426,7 @@ msgstr "Renkaiden koot:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
-"Desimaaliarvoja enintään kymmenneen asti asteissa, erotettuna pilkulla"
+msgstr "Enintään kymmenen desimaalilukua asteissa erotettuna pilkulla"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
@@ -5430,15 +5434,15 @@ msgstr "OK"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
-msgstr "Kontrolloidut kaukoputket"
+msgstr "Ohjatut kaukoputket"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
-msgstr "Konfiguroi valittu kaukoputki"
+msgstr "Valittujen kaukoputkien asetukset"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
-msgstr "Konfiguroi"
+msgstr "Asetukset"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
@@ -5454,7 +5458,7 @@ msgstr "Käyttöliittymä"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
-msgstr "Näytä kaukoputkien osoittimet"
+msgstr "Näytä kaukoputkien nimet"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
@@ -5470,17 +5474,16 @@ msgstr "Tiedostot"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
-msgstr "Tee logi kaukoputken ajurin viesteistä"
+msgstr "Tee loki kaukoputken ajurin viesteistä"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
-"Käytä kaukoputken palvelimen ohjelmatiedostoja (ohittaa sisäänrakennetut "
-"ajurit)"
+"Käytä kaukoputken palvelimen ohjelmatiedostoja (ohittaa sisäiset ajurit)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
-msgstr "Ohjelmatiedostojen kansio:"
+msgstr "Ohjelmatiedostojen hakemisto:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -5499,7 +5502,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:638
 msgid "January"
-msgstr "Tammikui"
+msgstr "Tammikuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:638
@@ -5602,11 +5605,11 @@ msgstr "Perjantai"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr "Launtai"
+msgstr "Lauantai"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr "Aikavyöhyke-lisäosa"
+msgstr "Aikavyöhyke-laajennus"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
@@ -5626,7 +5629,7 @@ msgstr "Aikavyöhykkeen nimi"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid "Offset from UTC (hours):"
-msgstr "Ero UTC:hen (tuntia):"
+msgstr "Ero UTC-aikaan (tuntia):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
@@ -5638,7 +5641,7 @@ msgstr "Aikavyöhykkeen nimi (kesäaika):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr "Kesäajan ero UTC:hen (tuntia)"
+msgstr "Kesäajan ero UTC-aikaan (tuntia)"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
@@ -5674,9 +5677,9 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
-"Oletuksena Stellarium käyttää systeemin aikaa näytettävän paikkakunnan "
-"aikavyöhykkeen sijaan. Tämän voi muuttaa Stellariumin aikavyöhyke-"
-"asetuksista."
+"Oletuksena Stellariumin näyttämä aika tulkitaan järjestelmän aikavyöhykkeen "
+"paikalliseksi ajaksi, ei näytettävän paikkakunnan aikavyöhykkeen ajaksi. "
+"Tämän ominaisuuden voi muuttaa Stellariumin yleisistä aikavyöhykeasetuksista."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
@@ -5684,7 +5687,7 @@ msgstr "Käytä systeemin asetuksia (oletus)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
-msgstr "Koordinoitu yleisaika, Universal Coordinated Time (UTC)"
+msgstr "Koordinoitu yleisaika (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "(offset = local time - UTC time)"
@@ -5697,23 +5700,23 @@ msgstr "Käyttäjän määrittelemä:"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
-"Muutokset otetaan käyttöön Stellariumin seuraavan käynnistyksen yhteydessä."
+"Muutokset tulevat voimaan Stellariumin seuraavan käynnistyksen yhteydessä."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "Display formats"
-msgstr "Ajan näyttäminen"
+msgstr "Ajan muodot"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
-"Nämä asetukset määrittelevät miten aika ja päivämärä näytetään alapalkissa."
+"Nämä asetukset määrittelevät, miten aika ja päivämäärä näytetään alapalkissa."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:202
 msgid "Time display format"
-msgstr "Ajan näyttö"
+msgstr "Ajan näyttömuoto"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
@@ -5722,16 +5725,16 @@ msgstr "Järjestelmän oletus"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
-msgstr "12-tuntinen näyttö"
+msgstr "12 tunnin näyttö"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 msgid "24-hour format"
-msgstr "24-tuntinen näyttö"
+msgstr "24 tunnin näyttö"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Date display format"
-msgstr "Päivämäärän näyttö"
+msgstr "Päivämäärän muoto"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
@@ -5754,7 +5757,7 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Liitännäistoteutus versiosarjan 0.9.x tekstikäyttöliittymästä (TUI), "
+"Laajennustoteutus 0.9.x-versioperheen tekstikäyttöliittymästä (TUI), "
 "käytetään planetaariosysteemeissä"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:152
@@ -5763,7 +5766,7 @@ msgstr "Aurinkokunnan kappale"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:166
 msgid "Current date/time"
-msgstr "Nykyinen aika/päivämäärä"
+msgstr "Nykyinen päiväys/aika"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:171
 msgid "Set time zone"
@@ -5775,7 +5778,7 @@ msgstr "Päiväysnäppäimet"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Startup date/time preset"
-msgstr "Käynnistyspäivä/ajastus"
+msgstr "Käynnistyksen päiväys/aika-asetus"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
@@ -5831,7 +5834,7 @@ msgstr "Tähtisumujen merkit"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic plane line"
-msgstr "Galaktisen tason linja"
+msgstr "Linnunradan taso"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:391
 msgid "Effects"
@@ -5839,11 +5842,11 @@ msgstr "Efektit"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
 msgid "Manual zoom"
-msgstr "Manuaalinen zoomaus"
+msgstr "Koon muuttaminen käsin"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:410
 msgid "Magnitude scaling multiplier"
-msgstr "Magnitudin skaalauskerroin"
+msgstr "Magnitudin mittakaavakerroin"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:412
 msgid "Milky Way intensity:"
@@ -5851,15 +5854,15 @@ msgstr "Linnunradan kirkkaus:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:418
 msgid "Nebula label frequency:"
-msgstr "Tähtisumujen osoittimien tiheys"
+msgstr "Tähtisumujen nimien tiheys"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Zoom duration:"
-msgstr "Zoomauksen kesto:"
+msgstr "Suurennuksen kesto:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:425
 msgid "Cursor timeout:"
-msgstr "Kursorin aikakatkaisu"
+msgstr "Osoittimen aikakatkaisu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Setting landscape sets location"
@@ -5875,20 +5878,20 @@ msgstr "Pysäytä suoritettava komentosarja"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:456
 msgid "CD/DVD script"
-msgstr "CD/DVD -komentosarja"
+msgstr "CD/DVD-komentosarja"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 msgid "Administration"
-msgstr "Järjestelmänhallinta"
+msgstr "Ylläpito"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Load default configuration"
-msgstr "Lataa oletus konfiguraatio"
+msgstr "Hae oletusasetukset"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Save current configuration"
-msgstr "Tallenna nykyinen konfiguraatio"
+msgstr "Tallenna nykyiset asetukset"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:477
 msgid "Shut down"
@@ -5937,15 +5940,15 @@ msgstr "Kysely MPC:n pikkuplaneettapalvelusta %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr "Vain yksi tulos palautetaan jos kysely onnistuu."
+msgstr "Vain yksi tulos palautetaan, jos kysely onnistuu."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
-"Sekä komeettoja että asteroideja voidaan identifioida numerolla, nimellä tai "
-"väliaikaisella designaatiolla."
+"Sekä komeettoja että asteroideja voidaan tunnistaa numerolla, nimellä tai "
+"tilapäisellä tunnuksella."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -5974,14 +5977,14 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
-"Voit tuoda komeetta- ja asteroididataa IAU:n Pikkuplaneettakeskuksen (%1) "
-"vientimuodoissa. Voit tuoda tiedostoja joissa on lista kohteista, ladata "
-"sellaisia internetistä tai hakea Minor Planet and Comet Ephemeris Servicestä "
-"(MPES)."
+"Voit tuoda komeetta- ja asteroiditietoja IAU:n Minor Planet Centerin (%1) "
+"vientimuodoissa. Voit tuoda tiedostoja, joissa on lista kohteista, hakea "
+"listoja internetistä tai etsiä Minor Planet and Comet Ephemeris Service -"
+"palvelusta (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
-msgstr "Aurinkokuntaeditori-lisäosa"
+msgstr "Aurinkokuntaeditori-laajennus"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:512
 msgid "Import data"
@@ -6005,7 +6008,7 @@ msgstr "Valitse lähde"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
-msgstr "Lataa luettelo kohteista internetistä"
+msgstr "Hae kohteiden luettelo internetistä"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Select a source from the list:"
@@ -6013,11 +6016,11 @@ msgstr "Valitse lähde luettelosta:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Or enter a URL:"
-msgstr "Tai anna URL:"
+msgstr "Tai anna URL-osoite:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Add this URL to the bookmarks list"
-msgstr "Lisää tämä osoite kirjanmerkkeihin"
+msgstr "Lisää tämä osoite kirjanmerkkilistaan"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Bookmark title:"
@@ -6025,16 +6028,16 @@ msgstr "Kirjanmerkin nimi:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
-msgstr "Tiedosto joka sisältää luettelon kohteista"
+msgstr "Kohteiden luettelon sisältävä tiedosto"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Get orbital elements"
-msgstr "Hae kiertorataelementit"
+msgstr "Hae rataelementit"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
-msgstr "Online-haku"
+msgstr "Verkkohaku"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
@@ -6048,10 +6051,10 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
-"Merkkaa kohteet jotka haluat tuoda. Jo asennetut kohteet on luetteloitu "
-"<i>kursiivilla</i>. <b>Lihavoituna</b> on listattu kohteet jotka löytyvät "
-"Stellariumista oletuksena.<br/>Huomaa että lisättäessä suuria määriä "
-"kohteita kerralla Stellarium voi hidastua."
+"Merkitse kohteet, jotka haluat tuoda. <i>Kursiivilla</i> on listattu jo "
+"haettujen kohteiden nimet. <b>Lihavoituna</b> on listattu nimet, jotka ovat "
+"oletuksena Stellariumin aurinkokunta-asetuksissa.<br/>Huomaa, että suuren "
+"kohdemäärän lisääminen voi hidastaa Stellariumia."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Overwrite existing objects"
@@ -6063,7 +6066,7 @@ msgstr "Päivitä nykyiset kohteet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Update only the orbital elements"
-msgstr "Päivitä vain kiertorataelementit"
+msgstr "Päivitä vain rataelementit"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add objects"
@@ -6084,18 +6087,18 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
-"Tämä liitännäinen käyttää kustomoitua aurinkokuntatiedostoa. Jos jokin menee "
-"vikaan ja Stellarium kaatuu ja/tai ei käynnisty, voit  poistaa tiedoston "
-"käsin seuraavasta:"
+"Tämä laajennus käyttää muokattua aurinkokunnan asetustiedostoa. Jos jokin "
+"menee vikaan ja Stellariumin suoritus keskeytyy ja/tai se ei käynnisty, voit "
+"poistaa tiedoston käsin paikasta:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid ""
 "You can also reset all changes and return to the default configuration:"
-msgstr "Voit kumota kaikki muutokset ja palata oletuskonfiguraatioon:"
+msgstr "Voit kumota kaikki muutokset ja palata oletusasetuksiin:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Reset to defaults"
-msgstr "Palauta oletukset"
+msgstr "Palauta oletusasetukset"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
@@ -6106,16 +6109,16 @@ msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"Voit luoda varmuuskopion kustomoidusta aurinkokuntatiedostosta sopivaan "
-"sijaintiin, tai korvata sen tällaisella kopiolla."
+"Voit luoda varmuuskopion muokatusta aurinkokunnan asetustiedostosta sopivaan "
+"paikkaa, tai korvata sen tällaisella kopiolla."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Copy the Solar System file..."
-msgstr "Kopioi aurinkokuntatiedosto"
+msgstr "Kopioi aurinkokuntatiedosto..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Replace the Solar System file..."
-msgstr "Korvaa aurinkokuntatiedosto"
+msgstr "Korvaa aurinkokuntatiedosto..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Configuration file"
@@ -6127,7 +6130,7 @@ msgstr "Lisää uusia aurinkokunnan kohteita"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import orbital elements in MPC format..."
-msgstr "Tuo kiertorataelementtejä MPC-formaatissa"
+msgstr "Tuo rataelementtejä MPC-muodossa"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
@@ -6142,7 +6145,7 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
-"Lisäsosa joka näyttää muutamia 10 magnitudia kirkkaampia historiallisia "
+"Laajennus, joka näyttää muutamia 10 magnitudia kirkkaampia historiallisia "
 "supernovia."
 
 #: plugins/Supernovae/src/Supernova.cpp:97
@@ -6156,14 +6159,15 @@ msgstr "Supernovan tyyppi: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr "Historialliset supernovat -lisäosa"
+msgstr "Historialliset supernovat -laajennus"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
 "A plugin that shows some historical supernovae brighter than visual "
 "magnitude 10: "
 msgstr ""
-"Lisäosa näyttää muutamia 10 magnitudia kirkkampia historiallisia supernovia: "
+"Laajennus näyttää muutamia 10 magnitudia kirkkampia historiallisia "
+"supernovia: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
@@ -6177,10 +6181,10 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
-"Tämä liitännäinen toteuttaa yksinkertaisen mallin erilaisten supernovien "
-"valokäyristä. Tyypilliset valokäyrät tyypin I ja tyypin II supernoville ovat "
-"nähtävissä %1täältä%2 (oikea asteikko päiviä), ja tätä mallia käyetään tässä "
-"liitännäisessä."
+"Tämä laajennus toteuttaa yksinkertaisen mallin eri supernovien valokäyristä. "
+"Tyypilliset valokäyrät tyypin I ja tyypin II supernoville ovat nähtävissä "
+"%1täältä%2 (oikea asteikko päiviä), ja tätä mallia on käytetty tässä "
+"laajennuksessa."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 msgid "Acknowledgments"
@@ -6191,7 +6195,7 @@ msgstr "Kiitokset"
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
-"Kiitämme seuraavia henkilöitä osallistumisesta ja arvokkaista neuvoista:"
+"Kiitämme seuraavia henkilöitä panoksestaan ja arvokkaista kommenteistaan:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Sergei Blinnikov"
@@ -6215,8 +6219,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
-"Jos haluat lukea lisää tästä liitännäisestä, kuten historian ja katalogin "
-"formaatin, se löytyy %1täältä%2."
+"Jos haluat lukea lisää tästä laajennuksesta, sen historiasta ja luettelon "
+"muodosta, löydät %1tietoa täältä%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -6231,17 +6235,17 @@ msgstr "Historialliset supernovat on päivitetty"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Configuration"
-msgstr "Historiallisetn supernovien asetukset"
+msgstr "Historiallisten supernovien asetukset"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:231
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Historialliset supernovat -lisäosan asetukset"
+msgstr "Historialliset supernovat -laajennuksen asetukset"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Update catalog from Internet"
-msgstr "Päivitä katalogi internetistä"
+msgstr "Päivitä luettelo internetistä"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
@@ -6254,7 +6258,7 @@ msgstr "Päivitysväli (päivää):"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:258
 msgid "[next update info]"
-msgstr "[seuraavan päivityksen info]"
+msgstr "[seuraavan päivityksen tiedot]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
@@ -6266,9 +6270,9 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
-"Liitännäinen joka näyttää muutamia kvasaareja jotka ovat kirkkampia kuin 16 "
-"magnitudia. Kvasaarien luettelo on peräisin kirjasta 'Quasars and Active "
-"Galactic Nuclei' (13. painos) (Veron+ 2010) =2010A&A...518A..10V"
+"Laajennus, joka näyttää 16 magnituida kirkkaammpia muutamia kvasaareja. "
+"Kvasaarien luettelo on koottu julkaisusta 'Quasars and Active Galactic "
+"Nuclei' (13. painos) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
@@ -6281,7 +6285,7 @@ msgstr "Z (punasiirtymä): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr "Kvasaarit-lisäosa"
+msgstr "Kvasaarit-laajennus"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -6289,8 +6293,9 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
-"Kvasaarit-liitännäinen näyttää muutamia kvasaareita jotka ovat kirkkaampia "
-"kuin 16 magnitudia. 'Quasars and Active Galactic Nuclei' (13. painos)"
+"Kvasaarit-laajennus näyttää muutamia 16 magnitudia kirkkaampia kvasaareita. "
+"Luettelo kvasaareista on julkaisusta 'Quasars and Active Galactic Nuclei' "
+"(13. painos)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -6306,7 +6311,7 @@ msgstr "Kvasaarien asetukset"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
-msgstr "Kvasaarit-lisäosan asetukset"
+msgstr "Kvasaarit-laajennuksen asetukset"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Display mode for quasars"
@@ -6314,11 +6319,11 @@ msgstr "Kvasaarien näyttötila"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Plot all quasars without labels"
-msgstr "Näytä kaikki kvasaarit ilman tekstejä"
+msgstr "Näytä kaikki kvasaarit ilman nimiä"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
-msgstr "Näytä kvasaarien jakauma"
+msgstr "Näytä kvasaarien jakauman näyttö"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -6329,9 +6334,7 @@ msgstr "Pulsarit"
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr ""
-"Liitännäinen kartoittaa useita pulsareja, ja kaikista pulsareista on myös "
-"tarkemmat tiedot."
+msgstr "Laajennus tulostaa useita pulsareja kohdetietoineen."
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
@@ -6365,12 +6368,12 @@ msgstr "pc"
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr "Alaspyörimisen energianmenetysnopeus: %1 ergiä/s"
+msgstr "Pyörimisen hidastumisen energiamenetysnopeus: %1 erg/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr "Pulsarin binäärinen jakso: %1 päivää"
+msgstr "Kaksoispulsarin jakso: %1 päivää"
 
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
@@ -6381,23 +6384,23 @@ msgstr "Eksentrisyys: %1"
 #: plugins/Pulsars/src/Pulsar.cpp:170
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr "Vuosittainen parallaksi: %1 mks"
+msgstr "Vuotuinen parallaksi: %1 mks"
 
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr "Etäisyys perustuen elektronitiheysmalliin: %1 kpc (%2 ly)"
+msgstr "Elektronitiheysmalliin perustuva etäisyys: %1 kpc (%2 valovuotta)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr "Profiilin leveys 50% huippuarvosta: %1 ms"
+msgstr "Profiilin leveys 50 % huippuarvosta: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:184 plugins/Pulsars/src/Pulsar.cpp:196
 #: plugins/Pulsars/src/Pulsar.cpp:208
 msgid "Time averaged flux density at"
-msgstr "Aikakeskimääräistetty tiheysvuo"
+msgstr "Aikakeskiarvoistettu vuontiheys"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
@@ -6420,42 +6423,42 @@ msgstr "Huomautuksia: %1"
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
-"Epäsäännöllinen röntgensädepulsari tai lievä gammasädetoistaja jolla on "
-"tunnettuja värähtelyjä"
+"Erikoinen röntgenpulsari tai pehmeä gammatoistaja, jolla on havaittu "
+"sykkimistä"
 
 #: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "has one or more binary companions"
-msgstr "omaa yhden tai useamman kaksoisseuralaisen"
+msgstr "on yksi tai useampia komponentteja"
 
 #: plugins/Pulsars/src/Pulsar.cpp:297
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
-"pulssinen emissio radioaalloista infrapunaan tai korkeampiin aallonpituuksiin"
+"sykkivä emissio radioaallonpituuksista infrapunaan tai korkeampiin "
+"taajuuksiin"
 
 #: plugins/Pulsars/src/Pulsar.cpp:302
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr ""
-"pulssinen emissio vain infrapuna- ja sitä korkeammilla aallonpituuksilla"
+msgstr "sykkivä emissio vain infrapunassa ja sitä korkeammilla taajuuksilla"
 
 #: plugins/Pulsars/src/Pulsar.cpp:307
 msgid "with pulsed emission in the radio band"
-msgstr "pulssinen emissio radioalueella"
+msgstr "sykkivä emissio radioalueella"
 
 #: plugins/Pulsars/src/Pulsar.cpp:312
 msgid "with intermittently pulsed radio emission"
-msgstr "ajoittain pulssinen radioemissio"
+msgstr "ajoittain sykkivä radioemissio"
 
 #: plugins/Pulsars/src/Pulsar.cpp:317
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
-"yksittäinen neutronitähti jolla on pulssinen lämpö-röntgen-emissio, muttei "
+"yksittäinen neutronitähti jolla on sykkivä terminen röntgen-emissio, muttei "
 "havaittavaa radioemissiota"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr "Pulsarit-lisäosa"
+msgstr "Pulsarit-laajennus"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6464,7 +6467,7 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
-"Pulsarien tiedot ovat peräisin luettelosta 'The ATNF Pulsar Catalogue' "
+"Pulsarien tiedot on koottu julkaisusta 'The ATNF Pulsar Catalogue' "
 "(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
 "1993-2006 (2005) (%1astro-ph/0412641%2))."
 
@@ -6474,7 +6477,7 @@ msgstr "Huomautus"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr "pulsarien tunnistajilla on etuliite 'PSR'"
+msgstr "pulsarien tunnuksissa on etuliite 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
@@ -6486,7 +6489,7 @@ msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr "Puštšinon radioastronomiaobservatorio"
+msgstr "Puštšinon radioastronominen observatorio"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
@@ -6494,7 +6497,7 @@ msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr "Nancayn radioastronomiaobservatorio"
+msgstr "Nancayn radioastronominen observatorio"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
@@ -6510,7 +6513,7 @@ msgstr "Pulsarien asetukset"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
-msgstr "Pulsarit-lisäosan asetukset"
+msgstr "Pulsarit-laajennuksen asetukset"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Display mode for pulsars"
@@ -6518,7 +6521,7 @@ msgstr "Pulsarien näyttötila"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Plot all pulsars without labels"
-msgstr "Näytä kaikki pulsarit ilman tekstejä"
+msgstr "Näytä kaikki pulsarit ilman nimiä"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
@@ -6533,13 +6536,13 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
-"Tämä liitännäinen kartoittaa niiden tähtien paikat joilla on "
-"eksoplaneettoja. Eksoplaneettojen tiedot ovat peräisin 'Extrasolar Planets "
-"Encyclopaediasta' osoitteessa exoplanet.eu"
+"Tämä laajennus näyttää niiden tähtien paikat, joilla on eksoplaneettoja. "
+"Eksoplaneettojen tiedot ovat koottu  'Extrasolar Planets Encyclopaedia'-"
+"luettelosta osoitteessa exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Metallicity"
-msgstr "Metallipitoisuus"
+msgstr "Metallisuus"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
@@ -6554,7 +6557,7 @@ msgstr "Säde"
 #: plugins/Exoplanets/src/Exoplanet.cpp:214
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr "Todellinen lämpötila: %1 K"
+msgstr "Efektiivinen lämpötila: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Exoplanet"
@@ -6587,7 +6590,7 @@ msgstr "Eksentrisyys"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Inclination"
-msgstr "Kaltevuus"
+msgstr "Inklinaatio"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Angle Distance"
@@ -6599,7 +6602,7 @@ msgstr "Löytövuosi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
-msgstr "Eksoplaneetat-lisäosa"
+msgstr "Eksoplaneetat-laajennus"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
 #, qt-format
@@ -6607,9 +6610,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
-"Tämä liitännäinen kartoittaa niiden tähtien paikat joilla on "
-"eksoplaneettoja. Eksoplaneettojen tiedot ovat peräisin sivulta \"%1The "
-"Extrasolar Planets Encyclopaedia%2\""
+"Tämä laajennus näyttää niiden tähtien paikat, joilla on eksoplaneettoja. "
+"Eksoplaneettojen tiedot ovat koottu verkkosivulta \"%1The Extrasolar Planets "
+"Encyclopaedia%2\""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:126
@@ -6618,8 +6621,8 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
-"Jos haluat lukea lisää liitännäisestä, sen historiasta ja katalogin "
-"formaatista, niin lisätietoja löytyy %1täältä%2."
+"Jos haluat lukea lisää laajennuksesta, sen historiasta ja luettelon "
+"muodosta, löydät lisätietoja %1täältä%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Exoplanets is updated"
@@ -6631,7 +6634,7 @@ msgstr "Eksoplaneettojen asetukset"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:252
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Eksoplaneetat-lisäosan asetukset"
+msgstr "Eksoplaneetat-laajennuksen asetukset"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:254
 msgid "Update exoplanets data from Internet"
@@ -6672,12 +6675,13 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
-"Analysoi kohteiden havaittavuutta (nousu, lasku, meridiaanin ylitys), sekä "
-"sitä mikä aika vuodesta on paras kohteen havainnointiin. Liitännäinen "
-"olettaa että kohde havaittavissa kun se on horisontin yläpuolella yöaikaan. "
-"Liitännäinen kertoo myös milloin kohde on kauimpana auringosta sekä "
-"akronikaalisen ja kosmisen nousun/laskun ajankohdat.<br><br> Tässä tekstissä "
-"mainittujen termien selitykset löytyvät tietoja-välilehden alta."
+"Analysoi kohteiden havaittavuutta (nousu, lasku, meridiaanin ohitus), sekä "
+"parasta vuodenaikaa kohteen havainnointiin. Laajennus olettaa kohteen olevan "
+"havaittavissa, kun se on horisontin yläpuolella osan aikaa ystä. Laajennus "
+"kertoo myös, milloin kohteella on suurin kulmaetäsiyys auringosta sekä "
+"akronikaalisen ja kosmisen nousun/laskun ajankohdat.<br><br> Tekstissä "
+"mainittujen suureiden selitykset löytyvät asetusikkunan 'Tietoja'-"
+"välilehdeltä."
 
 #: plugins/Observability/src/Observability.cpp:187
 msgctxt "short month name"
@@ -6760,7 +6764,7 @@ msgstr "s"
 #: plugins/Observability/src/Observability.cpp:477
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr "Laskee %1 (%2)"
+msgstr "Laskee %1 (%2 kuluttua)"
 
 #: plugins/Observability/src/Observability.cpp:478
 #, qt-format
@@ -6775,7 +6779,7 @@ msgstr "Laski %1 (%2 sitten)"
 #: plugins/Observability/src/Observability.cpp:489
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr "Nousee %1 (%2)"
+msgstr "Nousee %1 (%2 kuluttua)"
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "Circumpolar."
@@ -6783,12 +6787,12 @@ msgstr "Sirkumpolaarinen (näkyy aina)."
 
 #: plugins/Observability/src/Observability.cpp:493
 msgid "No rise."
-msgstr "Ei nousua."
+msgstr "Ei nouse."
 
 #: plugins/Observability/src/Observability.cpp:515
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr "Korkeimmillaan %1 (%2) %3 asteessa."
+msgstr "Korkeimmillaan %1 (%2 kuluttua) %3 asteessa."
 
 #: plugins/Observability/src/Observability.cpp:519
 #, qt-format
@@ -6809,12 +6813,12 @@ msgstr "Suurin elongaatio: "
 
 #: plugins/Observability/src/Observability.cpp:581
 msgid "Largest Sun separation: "
-msgstr "Suurin etäisyys auringosta: "
+msgstr "Suurin kulmaetäisyys auringosta: "
 
 #: plugins/Observability/src/Observability.cpp:584
 #, qt-format
 msgid " (at %1 deg.)"
-msgstr " (%1 astetta)"
+msgstr " (%1 asteessa)"
 
 #: plugins/Observability/src/Observability.cpp:602
 msgid "Acronychal rise/set"
@@ -6838,7 +6842,7 @@ msgstr "Havaittavissa vuoden ympäri."
 
 #: plugins/Observability/src/Observability.cpp:653
 msgid "Not observable at dark night."
-msgstr "Ei havaittavissa pimeän aikaan."
+msgstr "Ei havaittavissa pimeän yön aikaan."
 
 #: plugins/Observability/src/Observability.cpp:658
 msgid "Nights above horizon: "
@@ -6855,16 +6859,16 @@ msgstr "TÄNÄ VUONNA:"
 #: plugins/Observability/src/Observability.cpp:1428
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "Edellinen täysikuu: %1 %2 kello %3:%4. "
+msgstr "Edellinen täysikuu: %1 %2 kello %3.%4. "
 
 #: plugins/Observability/src/Observability.cpp:1433
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "Seuraava täysikuu: %1 %2 kello %3:%4. "
+msgstr "Seuraava täysikuu: %1 %2 kello %3.%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
 msgid "Observability Plug-in"
-msgstr "Havaittavuus-lisäosa"
+msgstr "Havaittavuus-laajennus"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
 msgid ""
@@ -6877,15 +6881,15 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Liitännäinen analysoi valitun kohteen havaittavuutta (ruudun keskellä olevan "
-"kohteen, jos mitään ei ole valittuna). Liitännäinen näyttää nousun, "
-"meridiaanin ylityksen ja laskun ajankohdan, kuten myös vuoden parhaan "
-"ajankohdan havainnointiin (eli ajankohdan jolloin kohteen etäisyys "
-"auringosta on suurimmillaan), ajanjakson jolloin kohde on horisontin "
-"yläpuolella pimeän aikaan, ja akronikaalisen ja kosmisen nousun/laskun "
-"ajankohdat.<br>Aurinkokunnan kohteiden efemeridi ja parallaksi-ilmiö on myös "
-"otettu huomioon.<br><br> Tekijä kiittää Alexander Wolfia ja Georg Zottia "
-"heidän antamistaan neuvoista.<br><br>Ivan Martin-Vidal (Onsalan observatorio)"
+"Laajennus analysoi valitun kohteen havaittavuutta (tai ruudun keskikohdan, "
+"jos kohdetta ei ole valittuna). Laajennus näyttää nousun, meridiaanin "
+"ohituksen ja laskun ajankohdan, kuten myös parhaan vuodenajan havaintoihin "
+"(eli ajan, jolloin kohteen kulmaetäisyys Auringosta on suurimmillaan), "
+"ajanjakson, jolloin kohde on horisontin yläpuolella pimeään yöaikaan, ja "
+"akronikaalisen ja kosmisen nousun/laskun päivämäärät.<br>Aurinkokunnan "
+"kohteiden efemeridit ja parallaksi-ilmiö on otettu huomioon.<br><br> Tekijä "
+"kiittää Alexander Wolfia ja Georg Zottia heidän antamistaan "
+"neuvoista.<br><br>Ivan Martin-Vidal (Onsala Space Observatory)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
 msgid "Explanation of some parameters"
@@ -6893,7 +6897,7 @@ msgstr "Joidenkin parametrien selityksiä"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Sun altitude at twilight:"
-msgstr "Auringon korkeus hämärän loppuessa:"
+msgstr "Auringon korkeus hämärän aikaan:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid ""
@@ -6902,10 +6906,10 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
-"Mikä tahansa taivaankappale katsotaan havaittavaksi jos aurinko on tämän "
+"Jokainen taivaankappale katsotaan havaittavaksi, jos Aurinko on tämän "
 "korkeuden alapuolella. Astronominen hämärä vallitsee -12 ja -18 asteen "
-"välillä. Tätä parametriä käytetään ainoastaan ennustamaan ajanjaksoa jolloin "
-"kohde on havaittavissa (katso alla)."
+"välillä. Tätä parametriä käytetään vain arvioitaessa havaittuvuusjaksoa "
+"(katso alla)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
@@ -6918,13 +6922,13 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
-"Lyhyt kuvaus. liitännäinen näyttää nousu-, lasku- ja meridiaanin ohitusajat. "
-"Tarkat ajat näille efemerideille on annettu kahdella tavalla: aikaväleinä "
-"(viitattuna nykyiseen aikaan) ja tunteina (paikallista aikaa)."
+"Itsensäselvittävä. Laajennus näyttää nousun, laskun ja meridiaanin ohituksen "
+"ajat. Tarkat ajat näille efemerideille on annettu kahdella tavalla: "
+"aikaväleinä (viitaten nykyhetkeen) ja kellonaikoina (paikallista aikaa)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid "Acronychal/Cosmical rise/set:"
-msgstr "Akroninkaalinen/kosminen nousu/lasku:"
+msgstr "Akronikaalinen/kosminen nousu/lasku:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid ""
@@ -6938,18 +6942,18 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
-"Akronikaalinen nousu (tai lasku) tapahtuu kun kohde nousee (tai laskee) "
-"samaan aikaan kun aurinko laskee (tai nousee). Näiden tapahtumien tarkat "
-"ajankohdat riippuvat havaitsijan sijainnista. Akronikaalisen laskun ja "
-"nousun välisenä aikan taivaankappale on korkealla kun aurinko on horisontin "
-"alapuolella (eli siten kohde on hyvin havaittavissa). Kosminen nousu taas on "
-"päinvastainen tapahtuma, silloin sekä kohde että aurinko nousevat (tai "
-"laskevat) yhtä aikaa. Luonnollisesti kohteen havainnointi on tällöin hyvin "
-"hankalaa tai jopa mahdotonta."
+"Kohteen akronikaalinen nousu (tai lasku) tapahtuu kun se nousee (tai laskee) "
+"Auringon laskiessa (tai noustessa). Näiden tapahtumien tarkat ajankohdat "
+"riippuvat havaitsijan sijainnista. Akronikaalisen laskun ja nousun välillä "
+"taivaankappale on tyypillisesti korkealla Auringon ollessa riittävästi "
+"horisontin alapuolella (eli kohde on hyvin havaittavissa). Puolestaan "
+"kosminen nousu (tai lasku) tapahtuu, kun kohde ja Aurinko nousevat (tai "
+"laskevat) yhtä aikaa. Luonnollisesti kohde on huonosti (tai ei ole "
+"ollenkaan) havaittavissa kosmisen laskun ja nousun välillä."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid "Largest Sun separation:"
-msgstr "Suurin etäisyys auringosta:"
+msgstr "Suurin kulmaetäisyys auringosta:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
@@ -6962,16 +6966,17 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
-"Tapahtuu kun taivaankappaleen etäisyys aurinkoon on asteissa mitattuna "
-"suurin mahdollinen. Useimmissa tapauksissa voidaan sanoa myös, että auringon "
-"ja kohteen ekvatoriaaliset longitudit eroavat 180 astetta, eli aurinko on "
-"kohdetta vastapäätä. Kun kohde on kaukaisimmillaan auringosta (oli se sitten "
-"planeetta tai tähti), se on etelässä keskiyöllä. Tällöin siis on 'paras' "
-"mahdollinen yö kyseisen kohteen havainnointiin."
+"Tapahtuu kun taivaankappaleen kulmaetäisyys Aurinkoon on asteissa mitattuna "
+"suurimmillaan. Useimmissa tapauksissa voidaan sanoa, että Auringon ja "
+"kohteen ekvatoriaaliset longitudit eroavat 180 astetta, eli Aurinko on "
+"kohteen vastakkaisella puolella. Kun kohteen kulmaetäisyys on suurimmillaan "
+"Auringosta (oli se sitten planeetta tai tähti), se kulminoi (on etelässä) "
+"keskiyöllä ja on taivaan tummillaan alueella tääl deklinaatiolla. Eli on "
+"siis 'paras' yö tämän nimenomaisen kohteen havaitsemiseen."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid "Nights with source above horizon:"
-msgstr "Yöt jolloin kohde on horisontin yllä:"
+msgstr "Yöt, jolloin kohde on horisontin yllä:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid ""
@@ -6992,23 +6997,23 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"Liitännäinen laskee aikavälin jolloin taivaankappale on horisontin "
-"yläpuolella edes hetken yöaikaan. 'Yöllä' liitännäinen tarkoittaa aikaväliä "
-"jolloin aurinko on hämärän korkeuden alapuolella (jonka käyttäjä voi itse "
-"asettaa; katso yllä). Kun kohteet pysyvät paikallaan taivaalla (tai ovat "
-"ulkoplaneettoja), voidaan niille antaa kaksi mahdollista havaintoväliä: joko "
-"aikaväli yhdestä päivästä toiseen (kuten tammikuun 20:sta syyskuun "
-"15:nteen). tai kahdessa vaiheessa (tammikuun ensimmäisestä annettuun päivään "
-"ja toisesta päivästä joulukuun viimeiseen). Ensimmäisessä tapauksessa "
-"ensimmäisen päivän (esimerkissämme 20. tammikuuta) tulisi olla lähellä ns. "
-"'heliakaalista nousua' ja toisen päivän (esimerkissämme 15. syyskuuta) "
-"lähellä 'heliakaalista laskua'. Toisessa tapauksessa (esim. aikaväli 1. "
-"tammikuuta - 20. toukokuuta ja 21. syyskuuta - 31. joulukuuta), ensimmäisen "
-"päivän (esimerkissämme 20. toukokuuta) tulisi olla lähellä heliakaalista "
-"laskua ja toinen (esimerkissämme 21. syyskuuta) lähellä heliakaalista "
-"nousua. Tarkempia heliakaalisen nousun/laskun laskentatapoja tähdille ja "
-"planeetoille (jotka eivät riipu käyttäjän asettamasta hämärän korkeudesta) "
-"tullaan tulevaisuudessa sisällyttämään tähän liitännäiseen."
+"Ohjelma laskee päivämäärävälin, jolloin taivaankappale on horisontin "
+"yläpuolella edes hetken yöaikaan. 'Yöllä' ohjelma ymmärtää aikaväliä, "
+"jolloin Aurinko korkeus hämäräarvon alapuolella (jonka käyttäjä voi itse "
+"asettaa; katso yllä). Kun kohteet on kiinteästi taivaalla (tai ovat "
+"ulkoplaneettoja), voidaan kuluvan vuoden havaintojakson väli antaa kahdessa "
+"muodossa: joko jaksona yhdestä päivämäärästä toiseen (kuten tammikuun "
+"20:nnesta syyskuun 15:nteen) tai kahdessa jaksossa (tammikuun ensimmäisestä "
+"annettuun päivään ja toisesta päivästä joulukuun 31:seen). Ensimmäisessä "
+"tapauksessa ensimmäisen päivän (esimerkissämme 20. tammikuuta) tulisi olla "
+"lähellä ns. 'tähden heliaakista nousua' ja toisen päivän (esimerkissämme 15. "
+"syyskuuta) lähellä 'heliaakkista laskua'. Toisessa tapauksessa (esim. "
+"aikavälin 1. tammikuuta - 20. toukokuuta ja 21. syyskuuta - 31. joulukuuta), "
+"ensimmäisen päivän (esimerkissämme 20. toukokuuta) tulisi olla lähellä "
+"heliaakkista laskua ja toinen (esimerkissämme 21. syyskuuta) lähellä "
+"heliaakkista nousua. Tarkempia heliaakkisen nousun/laskun laskentakaavoja "
+"tähdille ja planeetoille (jotka eivät riipu käyttäjän asettamasta hämärän "
+"korkeudesta) liitetään tulevaisuudessa tähän laajennukseen."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"
@@ -7019,8 +7024,8 @@ msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
-"Kun kuu on valittuna, liitännäinen laskee lähimmät ajnakohdat kuun "
-"oppositiolle aurinkoon nähden."
+"Kun Kuu on valittuna, ohjelma laskee lähimmät tarkat päivämäärät Kuun "
+"oppositiolle Auringon suhteen."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
@@ -7033,7 +7038,7 @@ msgstr "Havaittavuuden asetukset"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:339
 msgid "Observability Plug-in Configuration"
-msgstr "Havaittavuus-lisäosan asetukset"
+msgstr "Havaittavuus-laajennuksen asetukset"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:341
 msgid "Showing Options"
@@ -7045,23 +7050,23 @@ msgstr "Efemeridit tänään (nousu-,lasku- ja meridiaaninohitusajat)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr "Akronikaalisen ja kosmisen nousun/laskun ajankohdat"
+msgstr "Akronikaalisen ja kosmisen nousun/laskun päivämäärät"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:344
 msgid "Date of largest separation to the Sun"
-msgstr "Ajankohta jolloin kohteen etäisyys auringosta on suurin"
+msgstr "Päiväys, jolloin kohteen kulmaetäisyys Aurinkoon on suurin"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Nights with the source above horizon"
-msgstr "Yöt jolloin kohde on horisontin yläpuolella"
+msgstr "Yöt, jolloin kohde on horisontin yläpuolella"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Dates of previous and next Full Moon"
-msgstr "Edellisen ja seuraavan täydenkuun ajankohdat"
+msgstr "Edellisen ja seuraavan täydenkuun päivämäärät"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font color and size"
-msgstr "Fontin väri ja koko"
+msgstr "Kirjasimen väri ja koko"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Red"
