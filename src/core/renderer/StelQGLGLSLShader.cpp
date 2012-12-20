@@ -39,12 +39,16 @@ StelQGLGLSLShader::StelQGLGLSLShader(StelQGL2Renderer* renderer, bool internal)
 	, uniformCount(0)
 	, uniformStorageStackSize(0)
 {
-	renderer->getStatistics()[SHADERS_CREATED] += 1.0;
+#ifndef USE_OPENGL_ES2
+    //Need the overridden addVertexShader in ES2, but that can't be called from within this class's constructor
+
+    renderer->getStatistics()[SHADERS_CREATED] += 1.0;
 	if(!addVertexShader("DefaultProjector",
 		"vec4 project(in vec4 v){return v;}\n"))
 	{
 		qWarning() << "Failed to add default projection vertex shader: " << log();
 	}
+#endif
 }
 
 void StelQGLGLSLShader::bind()

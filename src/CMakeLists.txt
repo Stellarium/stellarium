@@ -130,8 +130,7 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGLViewport.cpp
 	core/renderer/StelQGLViewport.hpp
 	core/renderer/StelQGLRenderer.cpp
-	core/renderer/StelQGLRenderer.hpp
-	core/renderer/StelQGL1Renderer.hpp
+        core/renderer/StelQGLRenderer.hpp
 	core/renderer/StelQGL2Renderer.hpp
 	
 	core/renderer/StelCircleArcRenderer.hpp
@@ -147,13 +146,9 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGLArrayVertexBufferBackend.cpp
 	core/renderer/StelQGLArrayVertexBufferBackend.hpp
 	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.cpp
-	core/renderer/StelQGLInterleavedArrayVertexBufferBackend.hpp
-	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.cpp
-	core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.hpp
+        core/renderer/StelQGLInterleavedArrayVertexBufferBackend.hpp
 	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.cpp
-	core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.hpp
-	core/renderer/StelQGL1ArrayVertexBufferBackend.cpp
-	core/renderer/StelQGL1ArrayVertexBufferBackend.hpp
+        core/renderer/StelQGL2InterleavedArrayVertexBufferBackend.hpp
 	core/renderer/StelQGL2ArrayVertexBufferBackend.cpp
 	core/renderer/StelQGL2ArrayVertexBufferBackend.hpp
 	core/renderer/StelVertexAttribute.hpp
@@ -277,6 +272,24 @@ SET(stellarium_lib_SRCS
 	CLIProcessor.cpp
 	translations.h
 )
+
+#Compile in OpenGL1 support iff we're not compiling for OpenGL ES2
+IF (OPENGL_MODE STREQUAL "Desktop")
+        SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+                core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.cpp
+                core/renderer/StelQGL1InterleavedArrayVertexBufferBackend.hpp
+                core/renderer/StelQGL1ArrayVertexBufferBackend.cpp
+                core/renderer/StelQGL1ArrayVertexBufferBackend.hpp
+                core/renderer/StelQGL1Renderer.hpp
+        )
+ELSE()
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+		core/renderer/StelQGLES2Renderer.hpp
+		core/renderer/StelQGLES2GLSLShader.cpp
+		core/renderer/StelQGLES2GLSLShader.hpp
+	)
+ENDIF()
+
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		scripting/StelScriptMgr.cpp

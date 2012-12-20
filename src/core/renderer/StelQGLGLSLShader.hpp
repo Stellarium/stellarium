@@ -47,24 +47,6 @@ private:
 		QGLShader* shader;
 	};
 
-	//! Possible states the shader can be found in.
-	enum State
-	{
-		//! The shader program can be modified by adding/enabling/disabling vertex/fragment shaders.
-		//!
-		//! Adding/enabling/disabling a shader will result in the Modified state.
-		//! A successful call to build() will result in the Built state.
-		State_Unlocked,
-		//! The shader has been modified since the last call to build(), 
-		//! which means the next build() call might need to re-link or use a previously
-		//! linked shader program from cache.
-		//! A successful call to build() will result in the Built state.
-		State_Modified,
-		//! The shader has been succesfully built and can't be modified unless unlock() is
-		//! called, but can be bound. A call to unlock() results in Unlocked state.
-		State_Built,
-	};
-
 	//! Enumerates supported uniform data types.
 	enum UniformType
 	{
@@ -112,7 +94,7 @@ public:
 	//! @param renderer Renderer that created this shader.
 	//! @param internal Is this shader internal to the renderer backend?
 	//!                 (Not directly used by the user)
-	StelQGLGLSLShader(class StelQGL2Renderer* renderer, bool internal);
+    StelQGLGLSLShader(class StelQGL2Renderer* renderer, bool internal);
 
 	virtual ~StelQGLGLSLShader()
 	{
@@ -216,50 +198,57 @@ public:
 	{
 		Q_ASSERT_X(bound && state == State_Built, Q_FUNC_INFO, 
 		           "uploadUniforms called on a shader that is not bound");
-		const unsigned char* data = uniformStorage;
+        const unsigned char* data = uniformStorage;
 		for (int u = 0; u < uniformCount; u++) 
 		{
-			const UniformType type = static_cast<UniformType>(uniformTypes[u]);
+            const UniformType type = static_cast<UniformType>(uniformTypes[u]);
 			switch(type)
 			{
 				case UniformType_float:
-				{
+                {
 					const float& value(*reinterpret_cast<const float* const>(data));
 					program->setUniformValue(uniformNames[u], value);
 					break;
 				}
 				case UniformType_vec2:
-				{
+                {
 					const Vec2f& v(*reinterpret_cast<const Vec2f* const>(data));
 					program->setUniformValue(uniformNames[u], v[0], v[1]);
 					break;
 				}
 				case UniformType_vec3:
-				{
-					const Vec3f& v(*reinterpret_cast<const Vec3f* const>(data));
-					program->setUniformValue(uniformNames[u], v[0], v[1], v[2]);
+                {
+#ifndef ANDROID
+                    const Vec3f& v(*reinterpret_cast<const Vec3f* const>(data));
+#else
+                    //Why do I need to do this? :|
+                    //TODO: look at the assembly and find out why assignments are failing
+                    Vec3f v;
+                    memcpy(&v,reinterpret_cast<const Vec3f* const>(data), sizeof(Vec3f));
+#endif
+                    program->setUniformValue(uniformNames[u], v[0], v[1], v[2]);
 					break;
 				}
 				case UniformType_vec4:
-				{
+                {
 					const Vec4f& v(*reinterpret_cast<const Vec4f* const>(data));
 					program->setUniformValue(uniformNames[u], v[0], v[1], v[2], v[3]);
 					break;
 				}
 				case UniformType_mat4:
-				{
+                {
 					const RAW_GL_MATRIX& m(*reinterpret_cast<const RAW_GL_MATRIX* const>(data));
 					program->setUniformValue(uniformNames[u], m);
 					break;
 				}
 				case UniformType_bool:
-				{
+                {
 					const bool& value(*reinterpret_cast<const bool* const>(data));
 					program->setUniformValue(uniformNames[u], value);
-					break;
+                    break;
 				}
 				case UniformType_int:
-				{
+                {
 					const int& value(*reinterpret_cast<const int* const>(data));
 					program->setUniformValue(uniformNames[u], value);
 					break;
@@ -327,6 +316,24 @@ public:
 	}
 
 protected:
+    //! Possible states the shader can be found in.
+    enum State
+    {
+        //! The shader program can be modified by adding/enabling/disabling vertex/fragment shaders.
+        //!
+        //! Adding/enabling/disabling a shader will result in the Modified state.
+        //! A successful call to build() will result in the Built state.
+        State_Unlocked,
+        //! The shader has been modified since the last call to build(),
+        //! which means the next build() call might need to re-link or use a previously
+        //! linked shader program from cache.
+        //! A successful call to build() will result in the Built state.
+        State_Modified,
+        //! The shader has been succesfully built and can't be modified unless unlock() is
+        //! called, but can be bound. A call to unlock() results in Unlocked state.
+        State_Built,
+    };
+
 	//! Renderer that created this shader.
 	class StelQGL2Renderer* renderer;
 
@@ -436,7 +443,7 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(float)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*static_cast<float*>(uniformStoragePointer) = value;
+        memcpy(uniformStoragePointer, &value, sizeof(float));
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount++] = UniformType_float;
 		uniformStorageUsed += sizeof(float);
@@ -450,7 +457,7 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec2f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*static_cast<Vec2f*>(uniformStoragePointer) = value;
+        memcpy(uniformStoragePointer, &value, sizeof(Vec2f));
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_vec2;
 		++uniformCount;
@@ -465,7 +472,7 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec3f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*static_cast<Vec3f*>(uniformStoragePointer) = value;
+        memcpy(uniformStoragePointer, &value, sizeof(Vec3f));
 		uniformNames[uniformCount] = name;
 		uniformTypes[uniformCount] = UniformType_vec3;
 		++uniformCount;
@@ -478,7 +485,7 @@ protected:
 		Q_ASSERT_X(bound, Q_FUNC_INFO,
 		           "Trying to set a uniform value with an unbound shader");
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
-		*static_cast<Vec4f*>(uniformStoragePointer) = value;
+        memcpy(uniformStoragePointer, &value, sizeof(Vec4f));
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
 		uniformNames[uniformCount] = name;
@@ -495,11 +502,11 @@ protected:
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
 		Q_ASSERT_X((uniformStorageUsed + sizeof(Mat4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		*static_cast<Mat4f*>(uniformStoragePointer) = m;
-		uniformNames[uniformCount] = name;
-		uniformTypes[uniformCount] = UniformType_mat4;
-		++uniformCount;
-		uniformStorageUsed += sizeof(Mat4f);
+        memcpy(uniformStoragePointer, &m, sizeof(Mat4f));
+        uniformNames[uniformCount] = name;
+        uniformTypes[uniformCount] = UniformType_mat4;
+        ++uniformCount;
+        uniformStorageUsed += sizeof(Mat4f);
 		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 

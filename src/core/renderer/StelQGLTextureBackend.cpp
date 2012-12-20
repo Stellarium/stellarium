@@ -241,17 +241,29 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 
 	if(r == 8 && g == 8 && b == 8 && a == 8)     
 	{
+#ifdef USE_OPENGL_ES2
+        glFormat           = GL_RGBA;
+#else
 		glFormat           = GL_RGBA8;
+#endif
 		result->pixelBytes = 4.0f;
 	}
 	else if(r == 8 && g == 8 && b == 8 && a == 0)
 	{
+#ifdef USE_OPENGL_ES2
+        glFormat           = GL_RGB;
+#else
 		glFormat           = GL_RGB8;
+#endif
 		result->pixelBytes = 3.0f;
 	}
 	else if(r == 5 && g == 6 && b == 5 && a == 0)
 	{
-		glFormat           = GL_RGB5;
+#ifdef USE_OPENGL_ES2
+        glFormat           = GL_RGB565;
+#else
+        glFormat           = GL_RGB5;
+#endif
 		result->pixelBytes = 2.0f;
 	}
 	else
@@ -306,6 +318,12 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 		result->errorOccured("fromRawData(): Texture size too large");
 		return result;
 	}
+
+#ifdef USE_OPENGL_ES2
+    //Cannot grab texture width/height in OpenGL ES 2, so force it and hope the texture loaded in
+    result->setImageSize(size);
+#endif
+
 	if(!renderer->areNonPowerOfTwoTexturesSupported() && 
 		(!StelUtils::isPowerOfTwo(size.width()) ||
 		 !StelUtils::isPowerOfTwo(size.height())))
@@ -340,7 +358,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	}
 	// TODO investigate if this is still buggy
 	// Mipmap seems to be pretty buggy on windows
-#ifndef Q_OS_WIN
+#if !defined(Q_OS_WIN) && !defined(USE_OPENGL_ES2)
 	if (params.autoGenerateMipmaps)
 	{
 		if(QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_1_4))
@@ -369,6 +387,10 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	// Upload the texture
 	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, size.width(), size.height(), 0,
 	             loadFormat, type, data);
+
+#ifdef USE_OPENGL_ES2
+    glGenerateMipmap(GL_TEXTURE_2D);
+#endif
 
 	// Check for errors during upload.
 	const GLenum glError = glGetError();
@@ -437,6 +459,11 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 	// Shrink if needed.
 	glEnsureTextureSizeWithinLimits(image);
 
+#ifdef USE_OPENGL_ES2
+    //Cannot grab texture width/height in OpenGL ES 2, so force it and hope the texture loaded in
+    setImageSize(image.size());
+#endif
+
 	if(!renderer->areNonPowerOfTwoTexturesSupported() && 
 		(!StelUtils::isPowerOfTwo(image.width()) ||
 		 !StelUtils::isPowerOfTwo(image.height())))
@@ -451,10 +478,17 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 	GLint internalFormat = glGetTextureInternalFormat(image);
 	switch(internalFormat)
 	{
+#ifndef USE_OPENGL_ES2
 		case GL_RGBA8:             pixelBytes = 4.0f; break;
 		case GL_RGB8:              pixelBytes = 3.0f; break;
 		case GL_LUMINANCE8_ALPHA8: pixelBytes = 2.0f; break;
 		case GL_LUMINANCE8:        pixelBytes = 1.0f; break;
+#else
+        case GL_RGBA:               pixelBytes = 4.0f; break;
+        case GL_RGB:                pixelBytes = 3.0f; break;
+        case GL_LUMINANCE_ALPHA:    pixelBytes = 2.0f; break;
+        case GL_LUMINANCE:          pixelBytes = 1.0f; break;
+#endif
 		default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown GL internal format for QImage");
 	}
 
@@ -516,6 +550,7 @@ QGLContext* StelQGLTextureBackend::prepareContextForLoading()
 void StelQGLTextureBackend::completeLoading()
 {
 	// Determine texture size.
+#ifndef USE_OPENGL_ES2
 	GLint width, height;
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH,  &width);
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
@@ -526,6 +561,9 @@ void StelQGLTextureBackend::completeLoading()
 	renderer->getStatistics()[ESTIMATED_TEXTURE_MEMORY]
 		+= width * height * pixelBytes;
 	finishedLoading(QSize(width, height));
+#else
+    finishedLoading(getDimensionsEarly());
+#endif
 }
 
 void StelQGLTextureBackend::setTextureWrapping()

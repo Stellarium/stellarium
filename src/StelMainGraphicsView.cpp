@@ -22,7 +22,13 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+
+#ifdef USE_OPENGL_ES2
+#include "StelQGLES2Renderer.hpp"
+#else
 #include "StelQGL1Renderer.hpp"
+#endif
+
 #include "StelQGL2Renderer.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
@@ -198,9 +204,11 @@ StelMainGraphicsView::~StelMainGraphicsView()
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
-	// TODO: On hardware with .pvr texture support, the second argument should be true
-	qDebug() << "Going to initialize the OpenGL 2 renderer";
-	renderer = new StelQGL2Renderer(this, false);
+#ifndef USE_OPENGL_ES2
+    // TODO: On hardware with .pvr texture support, the second argument should be true
+    qDebug() << "Going to initialize the OpenGL 2 renderer";
+    renderer = new StelQGL2Renderer(this, false);
+
 	if(!renderer->init())
 	{
 		qWarning() << "Failed to initialize the OpenGL 2 renderer, "
@@ -212,6 +220,19 @@ void StelMainGraphicsView::init(QSettings* conf)
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to initialize fallback renderer");
 		}
 	}
+#else
+    // If using OpenGL ES 2.0, assume the platform doesn't support OpenGL 2, nor OpenGL 1.
+    // These are generally mobile platforms that won't have such support.
+
+    // TODO: On hardware with .pvr texture support, the second argument should be true
+    qDebug() << "Going to initialize the OpenGL ES2 renderer";
+    renderer = new StelQGLES2Renderer(this, false);
+
+    if(!renderer->init())
+    {
+        Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to initialize OpenGL ES2 renderer");
+    }
+#endif
 	
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
 	mainSkyItem = new StelAppGraphicsWidget(renderer);

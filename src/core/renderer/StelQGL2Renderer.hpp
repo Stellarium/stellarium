@@ -47,7 +47,7 @@ public:
 	//!                     This should be true for mobile platforms with PowerVR GPUs.
 	StelQGL2Renderer(QGraphicsView* parent, bool pvrSupported)
 		: StelQGLRenderer(parent, pvrSupported)
-		, initialized(false)
+        , initialized(false)
 		, floatTexturesDisabled(true)
 		, builtinShaders()
 		, customShader(NULL)
@@ -531,7 +531,10 @@ protected:
 	}
 #endif
 	
+#ifndef USE_OPENGL_ES2
+//uh, I shouldn't do this. OTOH, I don't really want to duplicate the whole renderer for ES2
 private:
+#endif
 	//! Is the renderer initialized?
 	bool initialized;
 
@@ -571,7 +574,7 @@ private:
 	//! @param fSrc Fragment shader source.
 	//!
 	//! @return Complete shader program at success, NULL on compiling or linking error.
-	StelQGLGLSLShader *loadBuiltinShader(const char* const name,
+    StelQGLGLSLShader *loadBuiltinShader(const char* const name,
 	                                     const char* const vSrc, const char* const fSrc)
 	{
 		// No invariants, as this is called from init - before the Renderer is
@@ -583,7 +586,7 @@ private:
 		if(!result->addVertexShader(QString(vSrc)))
 		{
 			qWarning() << "Failed to compile vertex shader of builtin shader \"" 
-			           << name << "\" : " << result->log();
+                       << name << "\" : " << result->log();
 			delete result;
 			return NULL;
 		}

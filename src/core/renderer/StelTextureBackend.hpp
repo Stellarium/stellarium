@@ -128,11 +128,11 @@ public:
 	//! @return Texture width and height in pixels.
 	QSize getDimensions() const
 	{
-		invariant();
+        invariant();
 		Q_ASSERT_X(status == TextureStatus_Loaded, Q_FUNC_INFO,
 		           "Trying to get dimensions of a texture that is not loaded. "
 		           "Use StelTextureBackend::getStatus to determine if the texture "
-		           "is loaded or not.");
+                   "is loaded or not.");
 		return size;
 	}
 
@@ -143,7 +143,21 @@ public:
 	{
 		invariant();
 		return errorMessage;
-	}
+    }
+
+#ifdef USE_OPENGL_ES2
+    //! Save image dimensions. OpenGL ES 2 only.
+    //!
+    //! @param dimensions Size of texture in pixels
+    void setImageSize(const QSize dimensions)
+    {
+        invariant();
+        Q_ASSERT_X(status == TextureStatus_Loading, Q_FUNC_INFO,
+                   "Only force set image dimensions on unloaded images");
+        size = dimensions;
+        invariant();
+    }
+#endif
 
 protected:
 	//! Full file system path or URL of the texture file.
@@ -187,7 +201,7 @@ protected:
 		Q_ASSERT_X(status == TextureStatus_Loading, Q_FUNC_INFO,
 		           "Only a texture that has started loading can finish loading");
 		size = dimensions;
-		status = TextureStatus_Loaded;
+        status = TextureStatus_Loaded;
 		invariant();
 	}
 
@@ -212,15 +226,23 @@ protected:
 		status = TextureStatus_Error;
 		invariant();
 	}
-	
+
+#ifdef USE_OPENGL_ES2
+    //! Allows us to retrieve size before the texture is built. This is not guaranteed to be representative of the final size; if it's 0, size hasn't been set up yet.
+    QSize getDimensionsEarly() const
+    {
+        return size;
+    }
+#endif
+
 private:
 	//! Stores the error message if status is TextureStatus_Error.
 	QString errorMessage;
 
-	//! Size of the texture in pixels.
-	//!
-	//! Only valid once the texture is loaded.
-	QSize size;
+    //! Size of the texture in pixels.
+    //!
+    //! Only valid once the texture is loaded.
+    QSize size;
 
 	//! Current texture status.
 	//!

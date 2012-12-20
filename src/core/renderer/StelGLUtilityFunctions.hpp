@@ -81,6 +81,7 @@ inline const char* glslAttributeName(const AttributeInterpretation interpretatio
 }
 
 
+#ifndef USE_OPENGL_ES2
 //! Get the enum value matching specified attribute interpreation used to enable 
 //! GL1 vertex array client state.
 //!
@@ -106,6 +107,7 @@ inline GLenum gl1AttributeEnum(const AttributeInterpretation interpretation)
 	// Prevents GCC from complaining about exiting a non-void function:
 	return GL_VERTEX_ARRAY;
 }
+#endif //USE_OPENGL_ES2
 
 //! Translate PrimitiveType to OpenGL primitive type.
 //!
@@ -186,8 +188,13 @@ inline GLint glGetTextureInternalFormat(const QImage& image)
 {
 	const bool gray  = image.isGrayscale();
 	const bool alpha = image.hasAlphaChannel();
+#ifndef USE_OPENGL_ES2
 	if(gray) {return alpha ? GL_LUMINANCE8_ALPHA8 : GL_LUMINANCE8;}
 	else     {return alpha ? GL_RGBA8 : GL_RGB8;}
+#else
+    if(gray) {return alpha ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;}
+    else     {return alpha ? GL_RGBA : GL_RGB;}
+#endif
 }
 
 //! Get GL internal (on-GPU) pixel format (internalFormat passed to glTexImage2D())
@@ -266,6 +273,7 @@ inline GLint glGetTextureType(const TextureDataFormat format)
 //! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline bool glTextureSizeWithinLimits(const QSize size, const TextureDataFormat format)
 {
+#ifndef USE_OPENGL_ES2
 	const GLint internalFormat = glGetTextureInternalFormat(format);
 	const GLenum loadFormat    = glGetTextureLoadFormat(format);
 	const GLenum type          = glGetTextureType(format);
@@ -279,6 +287,13 @@ inline bool glTextureSizeWithinLimits(const QSize size, const TextureDataFormat 
 	glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &height);
 
 	return width != 0 && height != 0;
+#else
+    Q_UNUSED(format)
+    //ES2 doesn't have proxy textures, nor fetching a texture's height/width; can only rely on GL_MAX_TEXTURE_SIZE
+    GLint maxDim;
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxDim);
+    return size.width() <= maxDim && size.height() <= maxDim;
+#endif
 }
 
 //! Determine if an image is not too large for the GPU.
@@ -288,6 +303,7 @@ inline bool glTextureSizeWithinLimits(const QSize size, const TextureDataFormat 
 //! @note This is an internal function of the Renderer subsystem and should not be used elsewhere.
 inline bool glTextureSizeWithinLimits(const QImage& image)
 {
+#ifndef USE_OPENGL_ES2
 	const GLint  internalFormat = glGetTextureInternalFormat(image);
 	const GLenum loadFormat     = glGetTextureLoadFormat(image);
 	const GLenum type           = glGetTextureType(image);
@@ -301,6 +317,12 @@ inline bool glTextureSizeWithinLimits(const QImage& image)
 	glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &height);
 
 	return width != 0 && height != 0;
+#else
+    //ES2 doesn't have proxy textures, nor fetching a texture's height/width; can only rely on GL_MAX_TEXTURE_SIZE
+    GLint maxDim;
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxDim);
+    return image.width() <= maxDim && image.height() <= maxDim;
+#endif
 }
 
 //! Ensure that an image is within maximum texture size limits, shrinking it if needed.
