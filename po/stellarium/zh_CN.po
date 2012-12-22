@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-24 19:14+0700\n"
+"POT-Creation-Date: 2012-12-17 22:19+0700\n"
 "PO-Revision-Date: 2012-12-10 12:09+0000\n"
 "Last-Translator: Eddy Xiao <xyy82148@yahoo.com.cn>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-11 04:44+0000\n"
-"X-Generator: Launchpad (build 16356)\n"
+"X-Launchpad-Export-Date: 2012-12-18 04:55+0000\n"
+"X-Generator: Launchpad (build 16372)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -2433,8 +2433,8 @@ msgid "Zimbabwe"
 msgstr "津巴布韦"
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
-#: src/translations.h:502 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+#: src/translations.h:502 src/ui_dateTimeDialogGui.h:298
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Date and Time"
 msgstr "日期及时间"
 
@@ -2607,37 +2607,37 @@ msgstr "水平翻转"
 msgid "Full-screen mode"
 msgstr "全屏模式"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1130
+#: src/translations.h:547 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "大气层"
 
 #: src/translations.h:548 src/ui_viewDialog.h:1159
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:318
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "地平坐标网格"
 
 #: src/translations.h:549 src/ui_viewDialog.h:1181
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "基点"
 
 #: src/translations.h:550
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:281
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "星座图绘"
 
 #: src/translations.h:551
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:282
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "星座边界"
 
 #: src/translations.h:552
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "星座标示"
 
 #: src/translations.h:553
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "星座连线"
 
@@ -2650,22 +2650,22 @@ msgid "Ecliptic J2000 grid"
 msgstr "黄道坐标（J2000）"
 
 #: src/translations.h:556
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "黄道"
 
 #: src/translations.h:557
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:333
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "赤道"
 
 #: src/translations.h:558 src/ui_viewDialog.h:1157
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:323
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "赤道坐标网格"
 
 #: src/translations.h:559 src/ui_viewDialog.h:1156
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:328
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "赤道坐标网格 (J2000)"
 
@@ -2674,7 +2674,7 @@ msgid "Fog"
 msgstr "雾"
 
 #: src/translations.h:561 src/ui_viewDialog.h:1160
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "银道坐标网格"
 
@@ -2687,16 +2687,16 @@ msgid "Ground"
 msgstr "地面"
 
 #: src/translations.h:564
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr "地平线"
 
 #: src/translations.h:565
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "子午线"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1139
+#: src/translations.h:566 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "星云"
 
@@ -2705,22 +2705,22 @@ msgid "Night mode"
 msgstr "夜间模式"
 
 #: src/translations.h:568
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "行星标签"
 
 #: src/translations.h:569
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "行星轨道"
 
 #: src/translations.h:570
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "行星轨迹"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:237
+#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "天体"
 
@@ -2872,7 +2872,7 @@ msgstr "将天文望远镜对准某一坐标"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:634 src/ui_configurationDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "脚本"
 
@@ -2912,14 +2912,6 @@ msgstr "快捷键窗口"
 msgid "Sky and viewing options window"
 msgstr "星空及显示"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
-
 #: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
@@ -2942,7 +2934,7 @@ msgid "Refresh"
 msgstr "重新整理"
 
 #: src/ui_locationDialogGui.h:389
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Location"
 msgstr "所在位置"
 
@@ -2969,7 +2961,7 @@ msgid "Add to list"
 msgstr "加入列表"
 
 #: src/ui_locationDialogGui.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
 msgid "Latitude:"
 msgstr "纬度:"
 
@@ -2980,12 +2972,12 @@ msgid ""
 msgstr "您可以输入十进位度数，或是使用 dms 格式，例如: +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Longitude:"
 msgstr "经度:"
 
 #: src/ui_locationDialogGui.h:406
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
 msgid "Altitude:"
 msgstr "海拔:"
 
@@ -3161,127 +3153,107 @@ msgstr "在列表中搜索..."
 msgid "Lists"
 msgstr "列表"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1106
 msgid "View"
 msgstr "显示"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1112
 msgid "Sky"
 msgstr "天空"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1114
 msgid "Markings"
 msgstr "标示"
 
-#: src/ui_viewDialog.h:1111
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+#: src/ui_viewDialog.h:1116
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "地景"
 
-#: src/ui_viewDialog.h:1113
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
+#: src/ui_viewDialog.h:1118
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "星空术语"
 
-#: src/ui_viewDialog.h:1117
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:250
+#: src/ui_viewDialog.h:1122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "绝对大小:"
 
-#: src/ui_viewDialog.h:1118
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
+#: src/ui_viewDialog.h:1123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "相对大小:"
 
-#: src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:256
+#: src/ui_viewDialog.h:1124
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "闪烁:"
 
-#: src/ui_viewDialog.h:1121
+#: src/ui_viewDialog.h:1126
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "降低明亮天体附近其馀天体的亮度"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1128
 msgid "Dynamic eye adaptation"
 msgstr "人眼动态视觉调适"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1129
 msgid "Planets and satellites"
 msgstr "行星及卫星"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1130
 msgid "Show planets"
 msgstr "显示行星"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1131
 msgid "Show planet markers"
 msgstr "显示行星标记"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1132
 msgid "Show planet orbits"
 msgstr "显示行星轨道"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1133
 msgid "Simulate light speed"
 msgstr "模拟光速"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1134
 msgid "Scale Moon"
 msgstr "放大月球"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1136
 msgid "Show atmosphere"
 msgstr "显示大气层"
 
-#: src/ui_viewDialog.h:1132
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:393
+#: src/ui_viewDialog.h:1137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "光污染："
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1139
 msgid "pressure, temperature, extinction coefficient"
 msgstr "压力，温度，消光系数"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1141
 msgid "Refraction/Extinction settings..."
 msgstr "折射/光吸收设置..."
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1142
 msgid "Labels and Markers"
 msgstr "名称及标记"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1145
 msgid "Planets"
 msgstr "行星"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1146
 msgid "Shooting Stars"
 msgstr "流星"
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1147
 msgid "Hourly zenith rate:"
 msgstr "流星天顶小时率:"
-
-#: src/ui_viewDialog.h:1143
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:1144
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:1145
-msgid "80"
-msgstr "80"
-
-#: src/ui_viewDialog.h:1146
-msgid "10000"
-msgstr "10000"
-
-#: src/ui_viewDialog.h:1147
-msgid "144000"
-msgstr "144000"
 
 #: src/ui_viewDialog.h:1149
 msgid "Constellations"
@@ -3305,7 +3277,7 @@ msgstr "显示星座图绘"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1154
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:288
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "图绘亮度："
 
@@ -3557,7 +3529,7 @@ msgid "Enable mouse navigation"
 msgstr "启用鼠标导览"
 
 #: src/ui_configurationDialog.h:1026
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Startup date and time"
 msgstr "启动时的日期及时间"
 
@@ -4259,7 +4231,7 @@ msgid "Use degrees and minutes for FOV of CCD"
 msgstr "使用度和分来表示CCD的视场"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "通用"
 
@@ -5561,7 +5533,7 @@ msgid ""
 msgstr "这些设置能够改变在底部边栏显示时间与日期的格式。"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:202
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
 msgid "Time display format"
 msgstr "时间显示格式"
 
@@ -5579,7 +5551,7 @@ msgid "24-hour format"
 msgstr "24小时制"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "Date display format"
 msgstr "日期显示格式"
 
@@ -5595,154 +5567,154 @@ msgstr "日-月-年"
 msgid "mm-dd-yyyy"
 msgstr "月-日-年"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:85
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
 msgstr "文本用户界面（TUI）"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:88
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:92
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr "适用于天相系统，为 0.9.x 系列的文本模式的用户界面（TUI）提供实现的插件。"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Solar System body"
 msgstr "太阳系"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:166
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Current date/time"
 msgstr "目前日期/时间"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:171
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Set time zone"
 msgstr "设置时区"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Day keys"
 msgstr "日键"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:173
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date/time preset"
 msgstr "启动时的日期与时间"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "system"
 msgstr "系统"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "preset"
 msgstr "预设值"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "mmddyyyy"
 msgstr "月日年"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "ddmmyyyy"
 msgstr "日月年"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "yyyymmdd"
 msgstr "年月日"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:203
 msgid "12h"
 msgstr "12小时制"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:201
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:205
 msgid "24h"
 msgstr "24小时制"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:226
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Language"
 msgstr "语言"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:240
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Show stars"
 msgstr "显示恒星"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Colors"
 msgstr "颜色"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
 msgstr "星云名称"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
 msgstr "星云标记"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
 msgstr "银道线"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Effects"
 msgstr "效果"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Manual zoom"
 msgstr "手动缩放"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Magnitude scaling multiplier"
 msgstr "放大倍数"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:412
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Milky Way intensity:"
 msgstr "银河亮度："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
 msgstr "星云标记数量："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Zoom duration:"
 msgstr "缩放持续时间："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:429
 msgid "Cursor timeout:"
 msgstr "鼠标指针自动隐藏延时："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Setting landscape sets location"
 msgstr "设置地景时转到与之关联的位置"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Run local script"
 msgstr "运行本地脚本"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
 msgstr "停止运行脚本"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
 msgstr "CD/DVD 脚本"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
 msgid "Administration"
 msgstr "系统管理"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
 msgid "Load default configuration"
 msgstr "载入默认设置"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
 msgid "Save current configuration"
 msgstr "保存当前设置"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Shut down"
 msgstr "退出程序"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:549
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:553
 msgid "[no TUI node]"
 msgstr "[无 TUI 节点]"
 
@@ -6951,11 +6923,32 @@ msgstr "0 度"
 #~ msgid "Calendar"
 #~ msgstr "日历"
 
+#~ msgid "10000"
+#~ msgstr "10000"
+
 #~ msgid "Solar System Body: "
 #~ msgstr "太阳系天体: "
 
 #~ msgid "Arrow down to load list."
 #~ msgstr "按向下键以载入列表"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "/"
+#~ msgstr "/"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "80"
+#~ msgstr "80"
+
+#~ msgid "144000"
+#~ msgstr "144000"
+
+#~ msgid "0"
+#~ msgstr "0"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "起始视场: XX"

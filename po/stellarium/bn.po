@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-24 19:14+0700\n"
+"POT-Creation-Date: 2012-12-17 22:19+0700\n"
 "PO-Revision-Date: 2012-12-01 06:21+0000\n"
 "Last-Translator: অনির্বাণ আইন <anirbanain@gmail.com>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-02 04:34+0000\n"
-"X-Generator: Launchpad (build 16319)\n"
+"X-Launchpad-Export-Date: 2012-12-18 04:45+0000\n"
+"X-Generator: Launchpad (build 16372)\n"
 "Language: bn\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -2464,8 +2464,8 @@ msgid "Zimbabwe"
 msgstr "জিম্বাবোয়ে"
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
-#: src/translations.h:502 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+#: src/translations.h:502 src/ui_dateTimeDialogGui.h:298
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Date and Time"
 msgstr "তারিখ ও সময় ব্যবহারের বোতামগুলি"
 
@@ -2638,37 +2638,37 @@ msgstr "অনুভূমিকভাবে স্ক্রিন ঘোরা�
 msgid "Full-screen mode"
 msgstr "স্ক্রিন জুড়ে প্রদর্শন মোড"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1130
+#: src/translations.h:547 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "বায়ুমন্ডল প্রদর্শন"
 
 #: src/translations.h:548 src/ui_viewDialog.h:1159
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:318
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "দিগংশিক ছক প্রদর্শন"
 
 #: src/translations.h:549 src/ui_viewDialog.h:1181
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "দিকচিহ্ন প্রদর্শন"
 
 #: src/translations.h:550
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:281
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "নক্ষত্রমন্ডলীর চিত্রাবলী প্রদর্শন"
 
 #: src/translations.h:551
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:282
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "নক্ষত্রমন্ডলীর সীমারেখা প্রদর্শন"
 
 #: src/translations.h:552
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "নক্ষত্রমন্ডলীর নামসমূহ প্রদর্শন"
 
 #: src/translations.h:553
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "নক্ষত্রমন্ডলীর রেখাসমূহ প্রদর্শন"
 
@@ -2681,22 +2681,22 @@ msgid "Ecliptic J2000 grid"
 msgstr "সৌরপথীয় J2000 ছক"
 
 #: src/translations.h:556
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "সৌরপথ প্রদর্শন"
 
 #: src/translations.h:557
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:333
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "নিরক্ষরেখা প্রদর্শন"
 
 #: src/translations.h:558 src/ui_viewDialog.h:1157
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:323
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "নিরক্ষীয় ছক প্রদর্শন"
 
 #: src/translations.h:559 src/ui_viewDialog.h:1156
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:328
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "ইকুয়েটোরিয়াল J2000 ছক প্রদর্শন"
 
@@ -2705,7 +2705,7 @@ msgid "Fog"
 msgstr "কুয়াশা প্রদর্শন"
 
 #: src/translations.h:561 src/ui_viewDialog.h:1160
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "নক্ষত্রলৌকিক ছক প্রদর্শন"
 
@@ -2718,16 +2718,16 @@ msgid "Ground"
 msgstr "ভূমি প্রদর্শন"
 
 #: src/translations.h:564
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr "দিগন্তরেখা প্রদর্শন"
 
 #: src/translations.h:565
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "মূলমধ্যরেখা প্রদর্শন"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1139
+#: src/translations.h:566 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "নীহারিকা প্রদর্শন"
 
@@ -2736,22 +2736,22 @@ msgid "Night mode"
 msgstr "নাইট মোড"
 
 #: src/translations.h:568
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "গ্রহের নাম প্রদর্শন"
 
 #: src/translations.h:569
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "গ্রহের কক্ষপথ প্রদর্শন"
 
 #: src/translations.h:570
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "গ্রহের গমনপথ প্রদর্শন"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:237
+#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "নক্ষত্র প্রদর্শন"
 
@@ -2903,7 +2903,7 @@ msgstr "দূরবীনে প্রদত্ত স্থানাঙ্ক�
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:634 src/ui_configurationDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "স্ক্রিপ্টসমূহ"
 
@@ -2943,14 +2943,6 @@ msgstr ""
 msgid "Sky and viewing options window"
 msgstr "আকাশ এবং প্রেক্ষাপট বিকল্প উইন্ডো প্রদর্শন"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
-
 #: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
@@ -2973,7 +2965,7 @@ msgid "Refresh"
 msgstr "সতেজ করন"
 
 #: src/ui_locationDialogGui.h:389
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Location"
 msgstr "অবস্থান"
 
@@ -3000,7 +2992,7 @@ msgid "Add to list"
 msgstr "তালিকায় যোগ করুন"
 
 #: src/ui_locationDialogGui.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
 msgid "Latitude:"
 msgstr "অক্ষাংশ:"
 
@@ -3013,12 +3005,12 @@ msgstr ""
 "উদাহরণ:+1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Longitude:"
 msgstr "দ্রাঘিমাংশ:"
 
 #: src/ui_locationDialogGui.h:406
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
 msgid "Altitude:"
 msgstr "উচ্চতা:"
 
@@ -3194,127 +3186,107 @@ msgstr ""
 msgid "Lists"
 msgstr "তালিকা"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1106
 msgid "View"
 msgstr "দর্শন বিকল্প"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1112
 msgid "Sky"
 msgstr "আকাশ"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1114
 msgid "Markings"
 msgstr "চিহ্ন"
 
-#: src/ui_viewDialog.h:1111
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+#: src/ui_viewDialog.h:1116
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "ভূমিরূপ"
 
-#: src/ui_viewDialog.h:1113
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
+#: src/ui_viewDialog.h:1118
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "মহাকাশ সম্পর্কীয় নানা সংস্কৃতি"
 
-#: src/ui_viewDialog.h:1117
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:250
+#: src/ui_viewDialog.h:1122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "পরম মান :"
 
-#: src/ui_viewDialog.h:1118
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
+#: src/ui_viewDialog.h:1123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "আপেক্ষিক মান :"
 
-#: src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:256
+#: src/ui_viewDialog.h:1124
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "তারার ঝিকমিক:"
 
-#: src/ui_viewDialog.h:1121
+#: src/ui_viewDialog.h:1126
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "খুবই উজ্জ্বল জ্যোতিষ্কর সান্যিধ্যে নিস্প্রভ তারার অস্পষ্ট হওয়া"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1128
 msgid "Dynamic eye adaptation"
 msgstr "ডাইনামিক চক্ষু অভিযোজন"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1129
 msgid "Planets and satellites"
 msgstr "গ্রহ এবং উপগ্রহ"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1130
 msgid "Show planets"
 msgstr "গ্রহগুলি প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1131
 msgid "Show planet markers"
 msgstr "গ্রহের অবস্থান চিহ্নিত করুন"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1132
 msgid "Show planet orbits"
 msgstr "গ্রহের কক্ষপথ প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1133
 msgid "Simulate light speed"
 msgstr "আলোর গতি অনুকরণ করুন"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1134
 msgid "Scale Moon"
 msgstr "চাঁদের মাপ"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1136
 msgid "Show atmosphere"
 msgstr "বায়ুমন্ডল প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1132
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:393
+#: src/ui_viewDialog.h:1137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "আলোক দূষন :"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1139
 msgid "pressure, temperature, extinction coefficient"
 msgstr "চাপ, তাপমাত্রা, বিলুপ্তির গুণাঙ্ক"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1141
 msgid "Refraction/Extinction settings..."
 msgstr "প্রতিসরণ / বিলুপ্তি প্রদর্শিত হওয়ার বিন্য়াস ..."
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1142
 msgid "Labels and Markers"
 msgstr "নাম এবং চিহ্ন"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1145
 msgid "Planets"
 msgstr "গ্রহ"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1146
 msgid "Shooting Stars"
 msgstr "উল্কা"
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1147
 msgid "Hourly zenith rate:"
 msgstr "প্রতি ঘণ্টায় পরমোন্নতির হার:"
-
-#: src/ui_viewDialog.h:1143
-msgid "0"
-msgstr "০"
-
-#: src/ui_viewDialog.h:1144
-msgid "10"
-msgstr "১০"
-
-#: src/ui_viewDialog.h:1145
-msgid "80"
-msgstr "৮০"
-
-#: src/ui_viewDialog.h:1146
-msgid "10000"
-msgstr "১০০০০"
-
-#: src/ui_viewDialog.h:1147
-msgid "144000"
-msgstr "১৪৪০০০"
 
 #: src/ui_viewDialog.h:1149
 msgid "Constellations"
@@ -3338,7 +3310,7 @@ msgstr "তারামণ্ডলের কাল্পনিক চিত্�
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1154
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:288
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "চিত্রগুলির উজ্জ্বলতা:"
 
@@ -3598,7 +3570,7 @@ msgid "Enable mouse navigation"
 msgstr "মাউসের সাহায্যে আকাশ দেখুন"
 
 #: src/ui_configurationDialog.h:1026
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Startup date and time"
 msgstr "শুরুর তারিখ এবং সময়"
 
@@ -4320,7 +4292,7 @@ msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCD এর দৃষ্টিসীমা পরিমাপের একক হিসাবে ডিগ্রি ও মিনিট ব্যবহার করুন"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "সার্বজনীন"
 
@@ -5676,7 +5648,7 @@ msgid ""
 msgstr "সময় ও তারিখ নীচের বারে প্রদর্শিত হওয়ার বিন্য়াস"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:202
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
 msgid "Time display format"
 msgstr "সময় প্রদর্শনের বিন্যাস"
 
@@ -5694,7 +5666,7 @@ msgid "24-hour format"
 msgstr "২৪ ঘন্টার বিন্যাস"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "Date display format"
 msgstr "তারিখ প্রদর্শনের বিন্যাস"
 
@@ -5710,11 +5682,11 @@ msgstr "দিন-মাস-বছর"
 msgid "mm-dd-yyyy"
 msgstr "মাস-দিন-বছর"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:85
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
 msgstr "টেক্সট ইউজার ইন্টারফেস"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:88
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:92
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -5722,144 +5694,144 @@ msgstr ""
 "0.9.x সিরিজে শুরু টেক্সট ইউজার ইন্টারফেস (TUI) প্লাগইন যা সাধারণত "
 "গ্রহমণ্ডলীর নকশা সিস্টেমে ব্যবহৃত হয় ।"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Solar System body"
 msgstr "সৌরমন্ডলীয় জ্যোতিষ্ক"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:166
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Current date/time"
 msgstr "বর্তমান তারিখ / সময়"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:171
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Set time zone"
 msgstr "সময় অঞ্চল নির্ধারণ করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Day keys"
 msgstr "দিন নির্দেশক"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:173
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date/time preset"
 msgstr "প্রারম্ভকালে তারিখ /সময় পূর্বনির্ধারণ"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "system"
 msgstr "সিস্টেম"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "preset"
 msgstr "পূর্বনির্ধারণ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "mmddyyyy"
 msgstr "mmddyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "ddmmyyyy"
 msgstr "ddmmyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "yyyymmdd"
 msgstr "yyyymmdd"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:203
 msgid "12h"
 msgstr "১২ ঘন্টা"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:201
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:205
 msgid "24h"
 msgstr "২৪ ঘন্টা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:226
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Language"
 msgstr "ভাষা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:240
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Show stars"
 msgstr "নক্ষত্র দেখান"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Colors"
 msgstr "রঙ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
 msgstr "নীহারিকার নাম"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
 msgstr "নীহারিকার সূত্র সংকেত"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
 msgstr "মহাজাগতিক সমতল রেখা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Effects"
 msgstr "আরোপিত প্রভাব"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Manual zoom"
 msgstr "হাতেহাতে কাছেদূরে করা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Magnitude scaling multiplier"
 msgstr "ঔজ্জ্বল্যতার মাত্রার গুণক"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:412
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Milky Way intensity:"
 msgstr "ছায়াপথের তীব্রতা :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
 msgstr "নীহারিকার নাম প্রদর্শণের ঘনত্ব :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Zoom duration:"
 msgstr "কাছেদূরের সময়কাল :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:429
 msgid "Cursor timeout:"
 msgstr "কার্সারের সময়সীমা :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Setting landscape sets location"
 msgstr "ভূমিরূপ নির্ধারণ স্থান ঠিক করে দেয়"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Run local script"
 msgstr "স্থানীয় স্ক্রিপ্ট চালান"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
 msgstr "চলমান স্ক্রিপ্টটি বন্ধ করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
 msgstr "CD / DVD প্রয়োগ স্ক্রিপ্ট"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
 msgid "Administration"
 msgstr "প্রশাসন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
 msgid "Load default configuration"
 msgstr "প্রারম্ভিক সূচনা বিন্যাস আমদানি করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
 msgid "Save current configuration"
 msgstr "বর্তমান বিন্যাস সংরক্ষণ করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Shut down"
 msgstr "কাজ বন্ধ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:549
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:553
 msgid "[no TUI node]"
 msgstr "[কোন TUI নোড নেই]"
 
@@ -7080,6 +7052,27 @@ msgstr ""
 
 #~ msgid "Cursor Timeout: "
 #~ msgstr "কার্সার অদৃশ্য হওয়ার সময়: "
+
+#~ msgid "/"
+#~ msgstr "/"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "10"
+#~ msgstr "১০"
+
+#~ msgid "80"
+#~ msgstr "৮০"
+
+#~ msgid "10000"
+#~ msgstr "১০০০০"
+
+#~ msgid "144000"
+#~ msgstr "১৪৪০০০"
+
+#~ msgid "0"
+#~ msgstr "০"
 
 #~ msgid "Art brightness: "
 #~ msgstr "চিত্রগুলির ঔজ্জ্বল্য "

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-24 19:14+0700\n"
+"POT-Creation-Date: 2012-12-17 22:19+0700\n"
 "PO-Revision-Date: 2012-09-11 18:15+0000\n"
 "Last-Translator: Gaman Gabriel <gamangabriel@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-25 05:19+0000\n"
-"X-Generator: Launchpad (build 16293)\n"
+"X-Launchpad-Export-Date: 2012-12-18 04:52+0000\n"
+"X-Generator: Launchpad (build 16372)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -2464,8 +2464,8 @@ msgid "Zimbabwe"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
-#: src/translations.h:502 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+#: src/translations.h:502 src/ui_dateTimeDialogGui.h:298
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Date and Time"
 msgstr "Dată și oră"
 
@@ -2638,37 +2638,37 @@ msgstr "Imagine în oglindă"
 msgid "Full-screen mode"
 msgstr "Mod pe tot ecranul"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1130
+#: src/translations.h:547 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "Atmosferă"
 
 #: src/translations.h:548 src/ui_viewDialog.h:1159
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:318
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Grilă azimutală"
 
 #: src/translations.h:549 src/ui_viewDialog.h:1181
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Punctele cardinale"
 
 #: src/translations.h:550
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:281
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "Reprezentarea artistică a constelațiilor"
 
 #: src/translations.h:551
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:282
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "Limitele constelațiilor"
 
 #: src/translations.h:552
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "Numele constelațiilor"
 
 #: src/translations.h:553
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "Liniile constelațiilor"
 
@@ -2681,22 +2681,22 @@ msgid "Ecliptic J2000 grid"
 msgstr ""
 
 #: src/translations.h:556
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "Ecliptica"
 
 #: src/translations.h:557
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:333
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "Ecuatorul"
 
 #: src/translations.h:558 src/ui_viewDialog.h:1157
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:323
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Grilă ecuatorială"
 
 #: src/translations.h:559 src/ui_viewDialog.h:1156
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:328
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Grilă ecuatorială J2000"
 
@@ -2705,7 +2705,7 @@ msgid "Fog"
 msgstr "Ceață"
 
 #: src/translations.h:561 src/ui_viewDialog.h:1160
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Grilă galactică"
 
@@ -2718,16 +2718,16 @@ msgid "Ground"
 msgstr "Pământ"
 
 #: src/translations.h:564
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr ""
 
 #: src/translations.h:565
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "Meridianul"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1139
+#: src/translations.h:566 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "Nebuloase"
 
@@ -2736,22 +2736,22 @@ msgid "Night mode"
 msgstr "Mod de noapte"
 
 #: src/translations.h:568
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr ""
 
 #: src/translations.h:569
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "Orbitele planetelor"
 
 #: src/translations.h:570
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "Traseul planetei"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:237
+#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Stelele"
 
@@ -2903,7 +2903,7 @@ msgstr "Deplasează un telescop către un set dat de coordonate"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:634 src/ui_configurationDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Scripturi"
 
@@ -2943,14 +2943,6 @@ msgstr ""
 msgid "Sky and viewing options window"
 msgstr "Opțiuni de vizualizare"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
-
 #: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
@@ -2973,7 +2965,7 @@ msgid "Refresh"
 msgstr "Reactualizare"
 
 #: src/ui_locationDialogGui.h:389
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Location"
 msgstr "Locație"
 
@@ -3000,7 +2992,7 @@ msgid "Add to list"
 msgstr "Adaugă la listă"
 
 #: src/ui_locationDialogGui.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
 msgid "Latitude:"
 msgstr "Latitudine:"
 
@@ -3013,12 +3005,12 @@ msgstr ""
 "ex.: +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Longitude:"
 msgstr "Longitudine:"
 
 #: src/ui_locationDialogGui.h:406
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
 msgid "Altitude:"
 msgstr "Altitudine:"
 
@@ -3194,129 +3186,109 @@ msgstr ""
 msgid "Lists"
 msgstr ""
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1106
 msgid "View"
 msgstr "Vizualizare"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1112
 msgid "Sky"
 msgstr "Cer"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1114
 msgid "Markings"
 msgstr "Marcheri:"
 
-#: src/ui_viewDialog.h:1111
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+#: src/ui_viewDialog.h:1116
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "Peisaj"
 
-#: src/ui_viewDialog.h:1113
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
+#: src/ui_viewDialog.h:1118
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "Mitologie stelară"
 
-#: src/ui_viewDialog.h:1117
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:250
+#: src/ui_viewDialog.h:1122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "Scară absolută:"
 
-#: src/ui_viewDialog.h:1118
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
+#: src/ui_viewDialog.h:1123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "Scară relativă:"
 
-#: src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:256
+#: src/ui_viewDialog.h:1124
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "Sclipire:"
 
-#: src/ui_viewDialog.h:1121
+#: src/ui_viewDialog.h:1126
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "Reduce luminozitatea stelelor slabe atunci când este vizibil un obiect "
 "foarte strălucitor"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1128
 msgid "Dynamic eye adaptation"
 msgstr "Adaptare oculară dinamică"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1129
 msgid "Planets and satellites"
 msgstr "Planete și sateliți"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1130
 msgid "Show planets"
 msgstr "Afișează planetele"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1131
 msgid "Show planet markers"
 msgstr "Afișează marcherii planetelor"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1132
 msgid "Show planet orbits"
 msgstr "Afișează orbitele planetelor"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1133
 msgid "Simulate light speed"
 msgstr "Simulează viteza luminii"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1134
 msgid "Scale Moon"
 msgstr "Redimensionează Luna"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1136
 msgid "Show atmosphere"
 msgstr "Arată atmosfera"
 
-#: src/ui_viewDialog.h:1132
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:393
+#: src/ui_viewDialog.h:1137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1139
 msgid "pressure, temperature, extinction coefficient"
 msgstr ""
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1141
 msgid "Refraction/Extinction settings..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1142
 msgid "Labels and Markers"
 msgstr "Etichete și marcheri"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1145
 msgid "Planets"
 msgstr "Planete"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1146
 msgid "Shooting Stars"
 msgstr "Stele căzătoare"
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1147
 msgid "Hourly zenith rate:"
 msgstr "Rata orară zenitală:"
-
-#: src/ui_viewDialog.h:1143
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:1144
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:1145
-msgid "80"
-msgstr "80"
-
-#: src/ui_viewDialog.h:1146
-msgid "10000"
-msgstr "10000"
-
-#: src/ui_viewDialog.h:1147
-msgid "144000"
-msgstr "144000"
 
 #: src/ui_viewDialog.h:1149
 msgid "Constellations"
@@ -3340,7 +3312,7 @@ msgstr "Afișează reprezentările artistice"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1154
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:288
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr ""
 
@@ -3599,7 +3571,7 @@ msgid "Enable mouse navigation"
 msgstr "Activează navigarea cu mausul"
 
 #: src/ui_configurationDialog.h:1026
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Startup date and time"
 msgstr "Data și ora la pornirea programului"
 
@@ -4303,7 +4275,7 @@ msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr ""
 
@@ -5604,7 +5576,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:202
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
 msgid "Time display format"
 msgstr ""
 
@@ -5622,7 +5594,7 @@ msgid "24-hour format"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "Date display format"
 msgstr ""
 
@@ -5638,11 +5610,11 @@ msgstr ""
 msgid "mm-dd-yyyy"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:85
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
 msgstr "Interfața textuală a utilizatorului"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:88
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:92
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -5650,144 +5622,144 @@ msgstr ""
 "Implementarea modulului interfeței textuale a utilizatorului (ITU) de "
 "versiunea 0.9.x, utilizate în sisteme planetarium"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Solar System body"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:166
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Current date/time"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:171
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Set time zone"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Day keys"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:173
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date/time preset"
 msgstr ""
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "system"
 msgstr ""
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "preset"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "mmddyyyy"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "ddmmyyyy"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "yyyymmdd"
 msgstr ""
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:203
 msgid "12h"
 msgstr ""
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:201
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:205
 msgid "24h"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:226
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Language"
 msgstr "Limba"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:240
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Show stars"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Colors"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Effects"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Manual zoom"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Magnitude scaling multiplier"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:412
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Milky Way intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Zoom duration:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:429
 msgid "Cursor timeout:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Setting landscape sets location"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Run local script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
 msgid "Administration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
 msgid "Load default configuration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
 msgid "Save current configuration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Shut down"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:549
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:553
 msgid "[no TUI node]"
 msgstr ""
 
@@ -6929,11 +6901,32 @@ msgstr ""
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Corectează pentru timpul de călătorie al luminii: "
 
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "/"
+#~ msgstr "/"
+
 #~ msgid "Form"
 #~ msgstr "Formular"
 
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "80"
+#~ msgstr "80"
+
+#~ msgid "10000"
+#~ msgstr "10000"
+
+#~ msgid "144000"
+#~ msgstr "144000"
+
 #~ msgid "Light pollution: "
 #~ msgstr "Poluare luminoasă: "
+
+#~ msgid "0"
+#~ msgstr "0"
 
 #~ msgid "Star Value Multiplier: "
 #~ msgstr "Coeficient de multiplicare al stelei: "
