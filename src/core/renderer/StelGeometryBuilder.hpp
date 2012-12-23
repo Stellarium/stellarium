@@ -241,6 +241,7 @@ public:
 	{
 		Q_ASSERT_X(type == SphereType_Lit, Q_FUNC_INFO,
 		           "Trying to set light for an unlit sphere");
+		if(this->light == light){return;}
 		this->light = light;
 		updated     = true;
 	}
