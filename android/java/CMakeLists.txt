@@ -82,7 +82,7 @@ if (BUILD_FOR_ANDROID)
 		file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/gdb.setup "directory ${INCLUDE_DIRECTORIES}\n")
 
 		# 3. copy gdbserver executable
-		file(COPY ${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.4.3/prebuilt/gdbserver DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/)
+                file(COPY ${ANDROID_NDK}/prebuilt/android-arm/gdbserver/gdbserver DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/)
 	ENDIF()
 	
 	#also possible:

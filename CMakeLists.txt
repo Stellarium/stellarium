@@ -140,7 +140,7 @@ IF(BUILD_FOR_ANDROID)
   SET(GUI_MODE Mobile CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External, Mobile")
     
   #force CMAKE to find QT
-  SET(NECESSITAS_QT_ROOT "C:/Users/Brady/necessitas/Android/Qt/480" CACHE STRING "Android: Location of necessitas Qt")
+  SET(NECESSITAS_QT_ROOT "C:/Users/Brady/necessitas/Android/Qt/482" CACHE STRING "Android: Location of necessitas Qt")
   
   SET(NECESSITAS_QT_ROOT_ARCH "${NECESSITAS_QT_ROOT}/${ARM_TARGET}")
   #SET(QT_QMAKE_EXECUTABLE ${NECESSITAS_QT_ROOT_ARCH}/bin/qmake${TOOL_OS_SUFFIX})
