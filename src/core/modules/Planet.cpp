@@ -1385,6 +1385,7 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 		else
 		{
 			litSphere->setResolution(resolution, resolution);
+			litSphere->setLight(*light);
 		}
 		litSphere->draw(renderer, projector);
 	}
