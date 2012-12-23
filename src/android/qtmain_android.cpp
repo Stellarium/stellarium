@@ -64,7 +64,7 @@ static void * startMainMethod(void * /*data*/)
     if (m_javaVM->AttachCurrentThread(&env, NULL)<0)
     {
         qCritical()<<"AttachCurrentThread failed";
-        return false;
+        return NULL;
     }
     jclass applicationClass = env->GetObjectClass(objptr);
     if (applicationClass){
