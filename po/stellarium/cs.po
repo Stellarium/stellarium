@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-17 22:19+0700\n"
-"PO-Revision-Date: 2012-10-24 04:21+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2012-12-25 20:56+0000\n"
+"Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-18 04:46+0000\n"
-"X-Generator: Launchpad (build 16372)\n"
+"X-Launchpad-Export-Date: 2012-12-26 04:36+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -123,12 +123,12 @@ msgstr "Absolutní magnituda: %1"
 #: src/core/modules/Planet.cpp:455
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptická topocentrická (k datuú: %1/%2"
 
 #: src/core/modules/Planet.cpp:456
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Zkosení (k datu, pro Zemi): %1"
 
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/Comet.cpp:141
@@ -351,7 +351,7 @@ msgstr "Rektascenze/Deklinace (J2000): %1/%2"
 #: src/core/StelObject.cpp:99
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "Rektascenze/deklinace (k ekvinokciu): %1/%2"
+msgstr "Rektascenze/Deklinace (k datu): %1/%2"
 
 #: src/core/StelObject.cpp:106
 #, qt-format
@@ -564,6 +564,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Níže jsou vypsány pouze činnosti s přidělenými klávesami. Další činnosti "
+"jsou přístupné pomocí tlačítka \"%1\"."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1218,7 +1220,7 @@ msgstr "Z"
 
 #: src/translations.h:149
 msgid "Arabic"
-msgstr "Arabština"
+msgstr "Arabská"
 
 #: src/translations.h:150
 msgid "Aztec"
@@ -1226,11 +1228,11 @@ msgstr "Aztécká"
 
 #: src/translations.h:151
 msgid "Chinese"
-msgstr "čínský"
+msgstr "čínská"
 
 #: src/translations.h:152
 msgid "Egyptian"
-msgstr "egyptský"
+msgstr "Egyptská"
 
 #: src/translations.h:153
 msgid "Inuit"
@@ -1246,7 +1248,7 @@ msgstr "Lakotská"
 
 #: src/translations.h:156
 msgid "Maori"
-msgstr "Maorština"
+msgstr "Maorská"
 
 #: src/translations.h:157
 msgid "Navajo"
@@ -1254,11 +1256,11 @@ msgstr "Navajská"
 
 #: src/translations.h:158
 msgid "Norse"
-msgstr "Severský"
+msgstr "Severská"
 
 #: src/translations.h:159
 msgid "Polynesian"
-msgstr "polynéský"
+msgstr "Polynéská"
 
 #: src/translations.h:160
 msgid "Sami"
@@ -1270,7 +1272,7 @@ msgstr "Tupi-Guarani"
 
 #: src/translations.h:162
 msgid "Western"
-msgstr "západoevropský"
+msgstr "Západní"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:168
@@ -1456,7 +1458,7 @@ msgstr ""
 
 #: src/translations.h:241
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr ""
+msgstr "Phobos zastiňující Slunce, zobrazené z Olympus Mons 10. ledna, 2068."
 
 #: src/translations.h:242
 msgid ""
@@ -1464,6 +1466,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Zakrytí Země měsícem Phobus jsou běžná, tak jako zakrytí Jupitera. Ale "
+"zakrytí obou ve stejný den jsou velmi vzácná. Zde jedno probíhá ve skutečné "
+"rychlosti 21. ledna 2048."
 
 #: src/translations.h:243
 msgid ""
@@ -1472,6 +1477,10 @@ msgid ""
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
+"Phobos předežene Mars a zastíní slunce, projde jím a pak se retrográdně "
+"vrátí zpět ke slunci a zastíní ho pouze částečně (lze vidět pouze v SH), pak "
+"Mars zcela zastíní slunce a Phobose, pak se Phobos vynoří ze slunce, projde "
+"stínem Marsu a ztmavne."
 
 #: src/translations.h:244
 msgid ""
@@ -1482,20 +1491,21 @@ msgstr ""
 
 #: src/translations.h:245
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "Prohlídka západních souhvězdí."
 
 #: src/translations.h:246
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "Pohled na Slunce z vlekých planet sluneční soustavy a Pluta."
 
 #: src/translations.h:247
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
-msgstr ""
+msgstr "Nejlepší pohledy na Zemi z jiných těles sluneční soustavy"
 
 #: src/translations.h:248
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
+"Přechod Venuše, jak byl viděn ze Sydney v Austrálii dne 6. června 2012."
 
 #: src/translations.h:249
 msgid ""
@@ -3546,7 +3556,7 @@ msgstr "Geocentrické rovníkové souřadnice, rovnodennost ze dne"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Right ascension/Declination (of date)"
-msgstr "Rektascenze / Deklinace (ze dne)"
+msgstr "Rektascenze / Deklinace (k datu)"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Galactic coordinates, equinox of J2000.0"
@@ -3599,7 +3609,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1034
 msgid "System date at:"
-msgstr "Systémové datum na:"
+msgstr "Systémové datum v:"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Use a specific date and time when Stellarium starts up"
