@@ -37,6 +37,12 @@ struct StelLight
 	Vec4f diffuse;
 	//! Ambient light color.
 	Vec4f ambient;
+
+	//! Is this light identical to another light?
+	bool operator == (const StelLight& rhs) const
+	{
+		return position == rhs.position && diffuse == rhs.diffuse && ambient == rhs.ambient;
+	}
 };
 
 #endif // _STELLIGHT_HPP_
