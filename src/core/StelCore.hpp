@@ -339,6 +339,9 @@ public slots:
 	//! Add one sidereal year to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void addSiderealYear();
+	//! Add one sidereal century to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void addSiderealCentury();
 
 	//! Subtract one [Earth, solar] hour to the current simulation time.
 	void subtractHour();
@@ -359,6 +362,9 @@ public slots:
 	//! Subtract one sidereal year to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void subtractSiderealYear();
+	//! Subtract one sidereal century to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void subtractSiderealCentury();
 
 	//! Add one synodic month to the simulation time.
 	void addSynodicMonth();
@@ -375,6 +381,8 @@ public slots:
 	void addTropicalMonth();
 	//! Add one mean tropical year to the simulation time.
 	void addTropicalYear();
+	//! Add one mean tropical century to the simulation time.
+	void addTropicalCentury();
 
 	//! Subtract one synodic month to the simulation time.
 	void subtractSynodicMonth();
@@ -391,6 +399,8 @@ public slots:
 	void subtractTropicalMonth();
 	//! Subtract one mean tropical year to the simulation time.
 	void subtractTropicalYear();
+	//! Subtract one mean tropical century to the simulation time.
+	void subtractTropicalCentury();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)
