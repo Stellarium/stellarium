@@ -933,6 +933,16 @@ void StelCore::addSiderealYear()
 	addSolarDays(days);
 }
 
+void StelCore::addSiderealCentury()
+{
+	double days = 36525.6363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod()*100;
+
+	addSolarDays(days);
+}
+
 void StelCore::addSynodicMonth()
 {
 	addSolarDays(29.530588853);
@@ -961,6 +971,11 @@ void StelCore::addDraconicYear()
 void StelCore::addTropicalYear()
 {
 	addSolarDays(365.2421897);
+}
+
+void StelCore::addTropicalCentury()
+{
+	addSolarDays(36524.21897);
 }
 
 void StelCore::subtractHour()
@@ -1003,6 +1018,16 @@ void StelCore::subtractSiderealYear()
 	addSolarDays(-days);
 }
 
+void StelCore::subtractSiderealCentury()
+{
+	double days = 36525.6363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod()*100;
+
+	addSolarDays(-days);
+}
+
 void StelCore::subtractSynodicMonth()
 {
 	addSolarDays(-29.530588853);
@@ -1031,6 +1056,11 @@ void StelCore::subtractDraconicYear()
 void StelCore::subtractTropicalYear()
 {
 	addSolarDays(-365.2421897);
+}
+
+void StelCore::subtractTropicalCentury()
+{
+	addSolarDays(-36524.21897);
 }
 
 void StelCore::addSolarDays(double d)
