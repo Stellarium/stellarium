@@ -504,6 +504,7 @@ class Translations
 		N_("Add 1 sidereal month");
 		N_("Add 1 sidereal week");
 		N_("Add 1 sidereal year");
+		N_("Add 1 sidereal century");
 		N_("Add 1 solar day");
 		N_("Add 1 solar hour");
 		N_("Add 1 solar week");
@@ -513,6 +514,7 @@ class Translations
 		N_("Add 1 mean tropical month");
 		N_("Add 1 draconic year");
 		N_("Add 1 mean tropical year");
+		N_("Add 1 mean tropical century");
 		N_("Slow down the script execution rate");
 		N_("Decrease time speed");
 		N_("Decrease time speed (a little)");
@@ -530,6 +532,7 @@ class Translations
 		N_("Subtract 1 sidereal month");
 		N_("Subtract 1 sidereal week");
 		N_("Subtract 1 sidereal year");
+		N_("Subtract 1 sidereal century");
 		N_("Subtract 1 solar day");
 		N_("Subtract 1 solar hour");
 		N_("Subtract 1 solar week");
@@ -539,6 +542,7 @@ class Translations
 		N_("Subtract 1 mean tropical month");
 		N_("Subtract 1 draconic year");
 		N_("Subtract 1 mean tropical year");
+		N_("Subtract 1 mean tropical century");
 		
 		// TRANSLATORS: Keyboard action group name
 		N_("Display Options");
