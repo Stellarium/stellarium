@@ -236,6 +236,16 @@ public:
 		updated = true;
 	}
 
+	//! Update the light. Can only be called if this is a lit sphere (constructed by buildSphereLit). 
+	void setLight(const StelLight& light)
+	{
+		Q_ASSERT_X(type == SphereType_Lit, Q_FUNC_INFO,
+		           "Trying to set light for an unlit sphere");
+		if(this->light == light){return;}
+		this->light = light;
+		updated     = true;
+	}
+
 private:
 	//! Sphere type. Affects how the sphere is generated and drawn.
 	const SphereType type;
@@ -262,7 +272,7 @@ private:
 	const float fisheyeTextureFov;
 
 	//! Light used to bake lighting when type is SphereType_Lit.
-	const StelLight light;
+	StelLight light;
 
 	//! Vertex buffer used when sphere type is SphereType_Fisheye or SphereType_Unlit
 	StelVertexBuffer<VertexP3T2>* unlitVertices;
