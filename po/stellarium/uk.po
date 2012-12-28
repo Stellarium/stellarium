@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-17 22:19+0700\n"
-"PO-Revision-Date: 2012-11-24 13:37+0000\n"
+"POT-Creation-Date: 2012-12-27 20:16+0700\n"
+"PO-Revision-Date: 2012-12-27 17:01+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-18 04:54+0000\n"
-"X-Generator: Launchpad (build 16372)\n"
+"X-Launchpad-Export-Date: 2012-12-28 04:47+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -675,12 +675,12 @@ msgstr "Створення графіки/інших елементів: %1"
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:644
+#: src/gui/StelGui.cpp:178 src/translations.h:648
 msgid "Script console window"
 msgstr "Вікно консолі скриптів"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:639
+#: src/gui/StelGui.cpp:178 src/translations.h:643
 msgid "Windows"
 msgstr "Вікна"
 
@@ -2521,460 +2521,476 @@ msgid "Add 1 sidereal year"
 msgstr "Додати 1 сидеричний рік"
 
 #: src/translations.h:507
+msgid "Add 1 sidereal century"
+msgstr "Додати одне сидеричне століття"
+
+#: src/translations.h:508
 msgid "Add 1 solar day"
 msgstr "Додати 1 сонячний день"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Add 1 solar hour"
 msgstr "Додати 1 сонячну годину"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Add 1 solar week"
 msgstr "Додати 1 сонячний тиждень"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Add 1 synodic month"
 msgstr "Додати один синодичний місяць"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Add 1 draconic month"
 msgstr "Додати один драконічний місяць"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Add 1 anomalistic month"
 msgstr "Додати один аномалістичний місяць"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Add 1 mean tropical month"
 msgstr "Додати один середній тропічний місяць"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Add 1 draconic year"
 msgstr "Додати один драконічний рік"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Add 1 mean tropical year"
 msgstr "Додати один середній тропічний рік"
 
-#: src/translations.h:516
+#: src/translations.h:517
+msgid "Add 1 mean tropical century"
+msgstr "Додати одне середнє тропічне століття"
+
+#: src/translations.h:518
 msgid "Slow down the script execution rate"
 msgstr "Уповільнити виконання скрипту"
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Decrease time speed"
 msgstr "Зменшити швидкість часу"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Decrease time speed (a little)"
 msgstr "Сповільнити плин часу (трошки)"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Speed up the script execution rate"
 msgstr "Пришвидшити виконання скрипту"
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Increase time speed"
 msgstr "Збільшити швидкість часу"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Increase time speed (a little)"
 msgstr "Пришвидшити плин часу (трошки)"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Pause script execution"
 msgstr "Призупинити виконання скрипту"
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Resume script execution"
 msgstr "Поновити виконання скрипту"
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Set time to now"
 msgstr "Встановити поточний час"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Set the normal script execution rate"
 msgstr "Встановити звичайну швидкість виконання"
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Set normal time rate"
 msgstr "Встановити нормальну швидкість часу"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Set time rate to zero"
 msgstr "Призупинення часу"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Stop script execution"
 msgstr "Припинити виконання скрипту"
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Subtract 1 sidereal day"
 msgstr "Відняти 1 зірковий день"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Subtract 1 sidereal month"
 msgstr "Відняти 1 сидеричний місяць"
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Subtract 1 sidereal week"
 msgstr "Відняти 1 зірковий тиждень"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Subtract 1 sidereal year"
 msgstr "Відняти 1 сидеричний рік"
 
-#: src/translations.h:533
+#: src/translations.h:535
+msgid "Subtract 1 sidereal century"
+msgstr "Відняти одне сидеричне століття"
+
+#: src/translations.h:536
 msgid "Subtract 1 solar day"
 msgstr "Відняти 1 сонячний день"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "Subtract 1 solar hour"
 msgstr "Відняти 1 сонячну годину"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Subtract 1 solar week"
 msgstr "Відняти 1 сонячний день"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Subtract 1 synodic month"
 msgstr "Відняти один синодичний рік"
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "Subtract 1 draconic month"
 msgstr "Відняти один драконічний місяць"
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "Subtract 1 anomalistic month"
 msgstr "Відняти один аномалістичний місяць"
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Subtract 1 mean tropical month"
 msgstr "Відняти один середній тропічний місяць"
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Subtract 1 draconic year"
 msgstr "Відняти один драконічний рік"
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Subtract 1 mean tropical year"
 msgstr "Відняти один середній тропічний рік"
 
+#: src/translations.h:545
+msgid "Subtract 1 mean tropical century"
+msgstr "Відняти одне середнє тропічне століття"
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Display Options"
 msgstr "Параметри показу"
 
-#: src/translations.h:545
+#: src/translations.h:549
 msgid "Flip scene horizontally"
 msgstr "Повернути горизонтально"
 
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1135
+#: src/translations.h:551 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/translations.h:548 src/ui_viewDialog.h:1159
+#: src/translations.h:552 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Азимутальна сітка"
 
-#: src/translations.h:549 src/ui_viewDialog.h:1181
+#: src/translations.h:553 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Частини світу"
 
-#: src/translations.h:550
+#: src/translations.h:554
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "Зображення сузір’їв"
 
-#: src/translations.h:551
+#: src/translations.h:555
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "Межі сузір’їв"
 
-#: src/translations.h:552
+#: src/translations.h:556
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "Мітки сузір’їв"
 
-#: src/translations.h:553
+#: src/translations.h:557
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "Лінії сузір’їв"
 
-#: src/translations.h:554
+#: src/translations.h:558
 msgid "Nebulas background images"
 msgstr "Зображення туманностей"
 
-#: src/translations.h:555 src/ui_viewDialog.h:1158
+#: src/translations.h:559 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Сітка екліптичних координат, J2000"
 
-#: src/translations.h:556
+#: src/translations.h:560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "Лінія екліптики"
 
-#: src/translations.h:557
+#: src/translations.h:561
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "Лінія екватора"
 
-#: src/translations.h:558 src/ui_viewDialog.h:1157
+#: src/translations.h:562 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
 
-#: src/translations.h:559 src/ui_viewDialog.h:1156
+#: src/translations.h:563 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Екваторіальна сітка J2000"
 
-#: src/translations.h:560
+#: src/translations.h:564
 msgid "Fog"
 msgstr "Туман"
 
-#: src/translations.h:561 src/ui_viewDialog.h:1160
+#: src/translations.h:565 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Галактична сітка"
 
-#: src/translations.h:562 src/ui_viewDialog.h:1180
+#: src/translations.h:566 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Галактична площина"
 
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Ground"
 msgstr "Земля"
 
-#: src/translations.h:564
+#: src/translations.h:568
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr "Лінія горизонту"
 
-#: src/translations.h:565
+#: src/translations.h:569
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "Лінія меридіана"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1144
+#: src/translations.h:570 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "Туманності"
 
-#: src/translations.h:567
+#: src/translations.h:571
 msgid "Night mode"
 msgstr "Нічний режим"
 
-#: src/translations.h:568
+#: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "Мітки планет"
 
-#: src/translations.h:569
+#: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "Орбіти планет"
 
-#: src/translations.h:570
+#: src/translations.h:574
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "Траєкторії планет"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:575 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Зірки"
 
-#: src/translations.h:572
+#: src/translations.h:576
 msgid "Stars labels"
 msgstr "Мітки зірок"
 
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:576
+#: src/translations.h:580
 msgid "Miscellaneous"
 msgstr "Інше"
 
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Auto hide horizontal button bar"
 msgstr "Автоматично ховати горизонтальні клавіші"
 
-#: src/translations.h:578
+#: src/translations.h:582
 msgid "Auto hide vertical button bar"
 msgstr "Автоматично ховати вертикальні клавіші"
 
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Go to home"
 msgstr "Домівка"
 
-#: src/translations.h:580
+#: src/translations.h:584
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/translations.h:581
+#: src/translations.h:585
 msgid "Copy selected object information to clipboard"
 msgstr "Копіювати дані щодо позначеного об’єкта до буфера обміну"
 
-#: src/translations.h:582
+#: src/translations.h:586
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/translations.h:583
+#: src/translations.h:587
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Перемкнутися між екваторіальною і азимутальною сіткою"
 
-#: src/translations.h:584
+#: src/translations.h:588
 msgid "Toggle visibility of GUI"
 msgstr "Увімкнути/Вимкнути графічний інтерфейс"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:587
+#: src/translations.h:591
 msgid "Movement and Selection"
 msgstr "Пересування і вибір"
 
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Center on selected object"
 msgstr "Центрувати за позначеним об’єктом"
 
-#: src/translations.h:589
+#: src/translations.h:593
 msgid "Set home planet to selected planet"
 msgstr "Встановити позначену планету як домашню"
 
-#: src/translations.h:590
+#: src/translations.h:594
 msgid "Track object"
 msgstr "Відслідкувати об’єкт"
 
-#: src/translations.h:591
+#: src/translations.h:595
 msgid "Zoom in on selected object"
 msgstr "Збільшити позначений об’єкт"
 
-#: src/translations.h:592
+#: src/translations.h:596
 msgid "Zoom out"
 msgstr "Віддалити"
 
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Angle measure"
 msgstr "Вимірювання кутів"
 
-#: src/translations.h:598
+#: src/translations.h:602
 msgid "Compass marks"
 msgstr "Позначки румбів"
 
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Show exoplanets"
 msgstr "Показувати екзопланети"
 
-#: src/translations.h:602
+#: src/translations.h:606
 msgid "Exoplanets configuration window"
 msgstr "Вікно налаштовування показу екзопланет"
 
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Observability"
 msgstr "Спостережність"
 
-#: src/translations.h:606
+#: src/translations.h:610
 msgid "Observability configuration window"
 msgstr "Вікно параметрів спостережності"
 
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Oculars plugin configuration"
 msgstr "Налаштування додатка «Окуляри»"
 
-#: src/translations.h:610 plugins/Oculars/src/ui_ocularDialog.h:860
+#: src/translations.h:614 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "Перегляд крізь окуляр"
 
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Show crosshairs"
 msgstr "Додаток візирів"
 
-#: src/translations.h:612
+#: src/translations.h:616
 msgid "Oculars popup menu"
 msgstr "Контекстне меню окулярів"
 
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Image sensor frame"
 msgstr "Рамка датчика зображення"
 
-#: src/translations.h:614
+#: src/translations.h:618
 msgid "Telrad sight"
 msgstr "Поле зору Telrad"
 
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "Pulsars configuration window"
 msgstr "Вікно налаштовування показу пульсарів"
 
-#: src/translations.h:620
+#: src/translations.h:624
 msgid "Quasars configuration window"
 msgstr "Вікно налаштовування додатка квазарів"
 
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Satellites configuration window"
 msgstr "Вікно налаштування супутників"
 
-#: src/translations.h:624
+#: src/translations.h:628
 msgid "Satellite hints"
 msgstr "Підказки щодо супутників"
 
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Satellite labels"
 msgstr "Мітки супутників"
 
-#: src/translations.h:628
+#: src/translations.h:632
 msgid "Historical Supernovae configuration window"
 msgstr "Вікно налаштовування показу відомих з історії наднових"
 
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Навести телескоп на точку з вказаним набором координат"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:634 src/ui_configurationDialog.h:1121
+#: src/translations.h:638 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Скрипти"
 
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Run landscapes script from file"
 msgstr "Запустити скрипт ландшафтів з файла"
 
-#: src/translations.h:636
+#: src/translations.h:640
 msgid "Show and zoom Moon"
 msgstr "Показати і збільшити Місяць"
 
-#: src/translations.h:640
+#: src/translations.h:644
 msgid "Configuration window"
 msgstr "Вікно налаштування"
 
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Date/time window"
 msgstr "Вікно встановлення дати і часу"
 
-#: src/translations.h:642
+#: src/translations.h:646
 msgid "Help window"
 msgstr "Вікно довідки"
 
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Location window"
 msgstr "Вікно розташування"
 
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Search window"
 msgstr "Вікно пошуку"
 
-#: src/translations.h:646
+#: src/translations.h:650
 msgid "Shortcuts window"
 msgstr "Вікно клавіатурних скорочень"
 
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Sky and viewing options window"
 msgstr "Вікно параметрів неба та відображення"
 

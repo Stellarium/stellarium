@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-17 22:19+0700\n"
+"POT-Creation-Date: 2012-12-27 20:16+0700\n"
 "PO-Revision-Date: 2012-10-24 04:27+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-18 04:45+0000\n"
-"X-Generator: Launchpad (build 16372)\n"
+"X-Launchpad-Export-Date: 2012-12-28 04:38+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -669,12 +669,12 @@ msgstr "Diseinatzaile grafiko/bestelakoa: %1"
 msgid "OSX Developer: %1"
 msgstr "OSX Garatzailea: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:644
+#: src/gui/StelGui.cpp:178 src/translations.h:648
 msgid "Script console window"
 msgstr "Script kontsola leihoa"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:639
+#: src/gui/StelGui.cpp:178 src/translations.h:643
 msgid "Windows"
 msgstr "Leihoak"
 
@@ -2499,460 +2499,476 @@ msgid "Add 1 sidereal year"
 msgstr "Gehitu izar-urte bat"
 
 #: src/translations.h:507
+msgid "Add 1 sidereal century"
+msgstr ""
+
+#: src/translations.h:508
 msgid "Add 1 solar day"
 msgstr "Gehitu eguzki-egun bat"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Add 1 solar hour"
 msgstr "Gehitu eguzki-ordu bat"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Add 1 solar week"
 msgstr "Gehitu eguzki-aste bat"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Add 1 synodic month"
 msgstr "Gehitu ilargi-hilabete bat"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Add 1 draconic month"
 msgstr "Gehitu hilabete drakoniko bat"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Add 1 anomalistic month"
 msgstr "Gehitu hilabete anomalistiko bat"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Add 1 mean tropical month"
 msgstr "Gehitu batez besteko hilabete tropikal bat"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Add 1 draconic year"
 msgstr "Gehitu urte drakoniko bat"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Add 1 mean tropical year"
 msgstr "Gehitu batez besteko urte tropikal bat"
 
-#: src/translations.h:516
+#: src/translations.h:517
+msgid "Add 1 mean tropical century"
+msgstr ""
+
+#: src/translations.h:518
 msgid "Slow down the script execution rate"
 msgstr "Moteldu scriptaren exekuzio-abiadura"
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Decrease time speed"
 msgstr "Mantsotu denboraren abiadura"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Decrease time speed (a little)"
 msgstr "Mantsotu denboraren abiadura (pixka bat)"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Speed up the script execution rate"
 msgstr "Azkartu scriptaren exekuzio-abiadura"
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Increase time speed"
 msgstr "Azkartu denboraren abiadura"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Increase time speed (a little)"
 msgstr "Azkartu denboraren abiadura (pixka bat)"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Pause script execution"
 msgstr "Pausatu script-aren exekuzioa"
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Resume script execution"
 msgstr "Berrekin script-aren exekuzioa"
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Set time to now"
 msgstr "Ezarri uneko data eta ordua"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Set the normal script execution rate"
 msgstr "Ezarri  script exekuzio-abiadura normala"
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Set normal time rate"
 msgstr "Ezarri denboraren abiadura arrunta"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Set time rate to zero"
 msgstr "Ezarri denbora abiadura zerora"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Stop script execution"
 msgstr "Gelditu script-aren exekuzioa"
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Subtract 1 sidereal day"
 msgstr "Kendu izar-egun bat"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Subtract 1 sidereal month"
 msgstr "Kendu izar-hilabete bat"
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Subtract 1 sidereal week"
 msgstr "Kendu izar-aste bat"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Subtract 1 sidereal year"
 msgstr "Kendu izar-urte bat"
 
-#: src/translations.h:533
+#: src/translations.h:535
+msgid "Subtract 1 sidereal century"
+msgstr ""
+
+#: src/translations.h:536
 msgid "Subtract 1 solar day"
 msgstr "Kendu eguzki-egun bat"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "Subtract 1 solar hour"
 msgstr "Kendu eguzki-ordu bat"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Subtract 1 solar week"
 msgstr "Kendu eguzki-aste bat"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Subtract 1 synodic month"
 msgstr "Kendu ilargi-hilabete bat"
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "Subtract 1 draconic month"
 msgstr "Kendu hilabete drakoniko bat"
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "Subtract 1 anomalistic month"
 msgstr "Kendu hilabete anomalistiko bat"
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Subtract 1 mean tropical month"
 msgstr "Kendu batez besteko hilabete tropikal bat"
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Subtract 1 draconic year"
 msgstr "Kendu urte drakoniko bat"
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Subtract 1 mean tropical year"
 msgstr "Kendu batez besteko urte tropikal bat"
 
+#: src/translations.h:545
+msgid "Subtract 1 mean tropical century"
+msgstr ""
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Display Options"
 msgstr "Bistaratze aukerak"
 
-#: src/translations.h:545
+#: src/translations.h:549
 msgid "Flip scene horizontally"
 msgstr "Ikuspegia horizontalki irauli"
 
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Full-screen mode"
 msgstr "Pantaila osoko modua"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1135
+#: src/translations.h:551 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/translations.h:548 src/ui_viewDialog.h:1159
+#: src/translations.h:552 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Sareta azimutala"
 
-#: src/translations.h:549 src/ui_viewDialog.h:1181
+#: src/translations.h:553 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Puntu kardinalak"
 
-#: src/translations.h:550
+#: src/translations.h:554
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "Konstelazioen irudiak"
 
-#: src/translations.h:551
+#: src/translations.h:555
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "Konstelazioen mugak"
 
-#: src/translations.h:552
+#: src/translations.h:556
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "Konstelazioen etiketak"
 
-#: src/translations.h:553
+#: src/translations.h:557
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "Konstelazio lerroak"
 
-#: src/translations.h:554
+#: src/translations.h:558
 msgid "Nebulas background images"
 msgstr "Nebulosen atzeko irudiak"
 
-#: src/translations.h:555 src/ui_viewDialog.h:1158
+#: src/translations.h:559 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "J2000 sareta ekliptikoa"
 
-#: src/translations.h:556
+#: src/translations.h:560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "Ekliptika lerroa"
 
-#: src/translations.h:557
+#: src/translations.h:561
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "Ekuatore lerroa"
 
-#: src/translations.h:558 src/ui_viewDialog.h:1157
+#: src/translations.h:562 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Sareta ekuatoriala"
 
-#: src/translations.h:559 src/ui_viewDialog.h:1156
+#: src/translations.h:563 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "J2000 sareta ekuatoriala"
 
-#: src/translations.h:560
+#: src/translations.h:564
 msgid "Fog"
 msgstr "Lainoa"
 
-#: src/translations.h:561 src/ui_viewDialog.h:1160
+#: src/translations.h:565 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Sareta galaktikoa"
 
-#: src/translations.h:562 src/ui_viewDialog.h:1180
+#: src/translations.h:566 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Galaxia-planoa"
 
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Ground"
 msgstr "Lurra"
 
-#: src/translations.h:564
+#: src/translations.h:568
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr "Zerumuga lerroa"
 
-#: src/translations.h:565
+#: src/translations.h:569
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "Meridiano lerroa"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1144
+#: src/translations.h:570 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "Nebulosak"
 
-#: src/translations.h:567
+#: src/translations.h:571
 msgid "Night mode"
 msgstr "Gau modua"
 
-#: src/translations.h:568
+#: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "Planeten etiketak"
 
-#: src/translations.h:569
+#: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "Planeten orbitak"
 
-#: src/translations.h:570
+#: src/translations.h:574
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "Planeten arrastoak"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:575 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Izarrak"
 
-#: src/translations.h:572
+#: src/translations.h:576
 msgid "Stars labels"
 msgstr "Izarren etiketak"
 
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Flip scene vertically"
 msgstr "Ikuspegia bertikalki irauli"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:576
+#: src/translations.h:580
 msgid "Miscellaneous"
 msgstr "Askotarikoak"
 
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Auto hide horizontal button bar"
 msgstr "Ezkutatu automatikoki botoi barra horizontala"
 
-#: src/translations.h:578
+#: src/translations.h:582
 msgid "Auto hide vertical button bar"
 msgstr "Ezkutatu automatikoki botoi barra bertikala"
 
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Go to home"
 msgstr "Joan etxera"
 
-#: src/translations.h:580
+#: src/translations.h:584
 msgid "Quit"
 msgstr "Irten"
 
-#: src/translations.h:581
+#: src/translations.h:585
 msgid "Copy selected object information to clipboard"
 msgstr "Kopiatu hautatutako objektuaren informazioa arbelera"
 
-#: src/translations.h:582
+#: src/translations.h:586
 msgid "Save screenshot"
 msgstr "Gorde pantaila-argazkia"
 
-#: src/translations.h:583
+#: src/translations.h:587
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Aldatu montura ekuatorial eta azimutalaren artean"
 
-#: src/translations.h:584
+#: src/translations.h:588
 msgid "Toggle visibility of GUI"
 msgstr "Txandakatu GUI-aren ikusgarritasuna"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:587
+#: src/translations.h:591
 msgid "Movement and Selection"
 msgstr "Mugimendua eta Hautapena"
 
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Center on selected object"
 msgstr "Zentratu hautatutako objektuaren gainean"
 
-#: src/translations.h:589
+#: src/translations.h:593
 msgid "Set home planet to selected planet"
 msgstr "Ezarri hautatutako planeta etxeko planeta bezala"
 
-#: src/translations.h:590
+#: src/translations.h:594
 msgid "Track object"
 msgstr "Jarraitu objektua"
 
-#: src/translations.h:591
+#: src/translations.h:595
 msgid "Zoom in on selected object"
 msgstr "Egin zoom hautatutako objektuan"
 
-#: src/translations.h:592
+#: src/translations.h:596
 msgid "Zoom out"
 msgstr "Txikiagotu zooma"
 
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Angle measure"
 msgstr "Angelu neurgailua"
 
-#: src/translations.h:598
+#: src/translations.h:602
 msgid "Compass marks"
 msgstr "Iparrorratzaren markak"
 
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Show exoplanets"
 msgstr "Erakutsi exoplanetak"
 
-#: src/translations.h:602
+#: src/translations.h:606
 msgid "Exoplanets configuration window"
 msgstr "Exoplanetak konfigurazio leihoa"
 
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Observability"
 msgstr "Behagarritasuna"
 
-#: src/translations.h:606
+#: src/translations.h:610
 msgid "Observability configuration window"
 msgstr "Behagarritasunaren konfigurazio-leihoa"
 
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Oculars plugin configuration"
 msgstr "Okularrak pluginaren konfigurazioa"
 
-#: src/translations.h:610 plugins/Oculars/src/ui_ocularDialog.h:860
+#: src/translations.h:614 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "Okular ikuspegia"
 
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Show crosshairs"
 msgstr ""
 
-#: src/translations.h:612
+#: src/translations.h:616
 msgid "Oculars popup menu"
 msgstr "Okular laster-menua"
 
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Image sensor frame"
 msgstr "Irudi sentsorearen markoa"
 
-#: src/translations.h:614
+#: src/translations.h:618
 msgid "Telrad sight"
 msgstr "Telrad mira"
 
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "Pulsars configuration window"
 msgstr "Pulsarren konfigurazio leihoa"
 
-#: src/translations.h:620
+#: src/translations.h:624
 msgid "Quasars configuration window"
 msgstr "Quasarrak konfigurazio leihoa"
 
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Satellites configuration window"
 msgstr "Sateliteen konfigurazio leihoa"
 
-#: src/translations.h:624
+#: src/translations.h:628
 msgid "Satellite hints"
 msgstr "Sateliteen posizioak"
 
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Satellite labels"
 msgstr "Sateliteen etiketak"
 
-#: src/translations.h:628
+#: src/translations.h:632
 msgid "Historical Supernovae configuration window"
 msgstr "Supernoba historikoen konfigurazio leihoa"
 
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Mugitu teleskopioa koordenatu jakin batzuetara"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:634 src/ui_configurationDialog.h:1121
+#: src/translations.h:638 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Skript-ak"
 
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Run landscapes script from file"
 msgstr ""
 
-#: src/translations.h:636
+#: src/translations.h:640
 msgid "Show and zoom Moon"
 msgstr "Erakutsi eta gerturatu Ilargia"
 
-#: src/translations.h:640
+#: src/translations.h:644
 msgid "Configuration window"
 msgstr "Konfigurazio leihoa"
 
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Date/time window"
 msgstr "Data/ordua leihoa"
 
-#: src/translations.h:642
+#: src/translations.h:646
 msgid "Help window"
 msgstr "Laguntza leihoa"
 
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Location window"
 msgstr "Kokaleku leihoa"
 
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Search window"
 msgstr "Bilaketa leihoa"
 
-#: src/translations.h:646
+#: src/translations.h:650
 msgid "Shortcuts window"
 msgstr "Lasterbideak leihoa"
 
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Sky and viewing options window"
 msgstr "Zeru eta ikuspegiaren aukera leihoa"
 
