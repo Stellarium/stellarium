@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 20:16+0700\n"
-"PO-Revision-Date: 2012-11-30 10:54+0000\n"
+"PO-Revision-Date: 2012-12-28 14:11+0000\n"
 "Last-Translator: thanbang <thanbang00@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-28 04:47+0000\n"
+"X-Launchpad-Export-Date: 2012-12-29 04:38+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -527,11 +527,11 @@ msgstr "Phím mũi tên và kéo chuột trái"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Zoom in/out"
-msgstr ""
+msgstr "Phóng to/Thu nhỏ"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Page Up/Down"
-msgstr "Kép trang lên/xuống"
+msgstr "Page Up/Page Down"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "CTRL + Up/Down"
@@ -543,7 +543,7 @@ msgstr "Chọn đối tượng"
 
 #: src/gui/HelpDialog.cpp:172
 msgid "Left click"
-msgstr "Nhấp trái"
+msgstr "Chuột trái"
 
 #: src/gui/HelpDialog.cpp:180
 msgid "Clear selection"
@@ -551,11 +551,11 @@ msgstr "Xoá bỏ chọn lự"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Right click"
-msgstr ""
+msgstr "Chuột phải"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "CTRL + Left click"
-msgstr ""
+msgstr "CTRL + Chuột trái"
 
 #: src/gui/HelpDialog.cpp:189
 #, qt-format
@@ -2464,7 +2464,7 @@ msgstr ""
 #: src/translations.h:502 src/ui_dateTimeDialogGui.h:298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Date and Time"
-msgstr ""
+msgstr "Ngày và Giờ"
 
 #: src/translations.h:503
 msgid "Add 1 sidereal day"
@@ -2560,7 +2560,7 @@ msgstr ""
 
 #: src/translations.h:526
 msgid "Set time to now"
-msgstr ""
+msgstr "Thời gian hiện tại"
 
 #: src/translations.h:527
 msgid "Set the normal script execution rate"
@@ -2649,7 +2649,7 @@ msgstr ""
 
 #: src/translations.h:550
 msgid "Full-screen mode"
-msgstr ""
+msgstr "Toàn màn hình"
 
 #: src/translations.h:551 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
@@ -2696,12 +2696,12 @@ msgstr ""
 #: src/translations.h:560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
-msgstr ""
+msgstr "Đường hoàng đạo"
 
 #: src/translations.h:561
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
-msgstr ""
+msgstr "Đường Xích đạo"
 
 #: src/translations.h:562 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
@@ -2836,7 +2836,7 @@ msgstr ""
 
 #: src/translations.h:596
 msgid "Zoom out"
-msgstr ""
+msgstr "Thu nhỏ"
 
 #: src/translations.h:599
 msgid "Angle measure"
@@ -3331,7 +3331,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Hiện đường xích đạo"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
