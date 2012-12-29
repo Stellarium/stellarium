@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-17 22:19+0700\n"
-"PO-Revision-Date: 2012-11-22 14:47+0000\n"
-"Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
+"POT-Creation-Date: 2012-12-27 20:16+0700\n"
+"PO-Revision-Date: 2012-12-28 17:30+0000\n"
+"Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-18 04:51+0000\n"
-"X-Generator: Launchpad (build 16372)\n"
+"X-Launchpad-Export-Date: 2012-12-29 04:38+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -569,8 +569,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
-"Under vises bare handlinger med tastatursnarveier.  Flere handlinger kan "
-"være tilgjengelige med «%1»-tasten."
+"Under vises bare handlingene med tilordnede tastesnarveier. Flere handlinger "
+"kan være tilgjengelige med \"%1\"-knappen."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -671,12 +671,12 @@ msgstr "Designer for grafikk og annet: %1"
 msgid "OSX Developer: %1"
 msgstr "OSX-utvikler: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:644
+#: src/gui/StelGui.cpp:178 src/translations.h:648
 msgid "Script console window"
 msgstr "Skript-konsollvindu"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:639
+#: src/gui/StelGui.cpp:178 src/translations.h:643
 msgid "Windows"
 msgstr "Vinduer"
 
@@ -1469,7 +1469,7 @@ msgstr ""
 
 #: src/translations.h:241
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr "Phobos dekker for sola som sett fra Olympus Mons 10. januar 2068."
+msgstr "Phobos formørker solen, sett fra Olympus Mons 10. januar 2068."
 
 #: src/translations.h:242
 msgid ""
@@ -1477,9 +1477,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
-"Phobosformørkelser på jorda er vanlig, det er de på Jupiter også.  Begge "
-"fomørkelsene samme dag er veldig skjeldent.  Her er en den 23/1/2048.  I "
-"sanntid."
+"Phobos okkultasjoner av jorden er vanlig, det samme er okkultasjoner av "
+"Jupiter. Men okkultasjoner av begge på samme dag er svært sjeldne. Her er en "
+"som finner sted 23/1/2048. I virkelig hastighet."
 
 #: src/translations.h:243
 msgid ""
@@ -1488,10 +1488,10 @@ msgid ""
 "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
-"Phobos raser forbi Mars og dekker for sola, går forbi for så å gå tilbake og "
-"skape en delvis formørkelse (ses bare fra den sørlige halvkula) igjen, så "
-"dekker Mars helt for sola og Phobos, og så mens Phobos kommer bort fra sola "
-"går den gjennom Mars skygge og blir mørk."
+"Phobos farer foran Mars og formørker solen, passerer den og går så tilbake "
+"mot solen og formørker den igjen bare delvis (sees bare på den sørlige "
+"halvkule), så formørker Mars fullstendig solen og Phobos, og så mens Phobos "
+"dukker opp fra solen passerer den gjennom skyggen til Mars og mørkner."
 
 #: src/translations.h:244
 msgid ""
@@ -1505,14 +1505,14 @@ msgstr "En tur gjennom vestlige stjernebilder."
 
 #: src/translations.h:246
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr "Se på sola fra store planeter i solsystemet og Pluto."
+msgstr "Se på solen fra solsystemets store planeter og Pluto."
 
 #: src/translations.h:247
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
-"De beste synene av jorda fra andre himmellegemer i solsystemet i det 21. "
-"århundret."
+"De beste utsiktene over jorden fra andre himmellegemer i solsystemet i det "
+"21. århundre."
 
 #: src/translations.h:248
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
@@ -1523,15 +1523,15 @@ msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
-"En demonstrasjon av analemmaet - Solens bane på himmelen i løpet av året."
+"En demonstrasjon av analemmaet - solens bane over himmelen i løpet av året."
 
 #: src/translations.h:250
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
-"Glimt fra supernovaen som ble observert av Tycho Brage i 1572.  Supernova-"
-"tillegget må være på."
+"Glimt av supernovaen observert av Tycho Brahe i 1572. Supernova-tillegget må "
+"være aktivert."
 
 #: src/translations.h:255
 msgid "Andorra"
@@ -2520,460 +2520,476 @@ msgid "Add 1 sidereal year"
 msgstr "Legg til 1 siderisk år"
 
 #: src/translations.h:507
+msgid "Add 1 sidereal century"
+msgstr "Legg til 1 siderisk århundre"
+
+#: src/translations.h:508
 msgid "Add 1 solar day"
 msgstr "Legg til 1 soldøgn"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Add 1 solar hour"
 msgstr "Legg til 1 soltime"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Add 1 solar week"
 msgstr "Legg til 1 soluke"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Add 1 synodic month"
 msgstr "Legg til 1 synodisk måned"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Add 1 draconic month"
 msgstr "Legg til 1 drakonisk måned"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Add 1 anomalistic month"
 msgstr "Legg til 1 anomalistisk måned"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Add 1 mean tropical month"
 msgstr "Legg til 1 tropisk måned"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Add 1 draconic year"
 msgstr "Legg til 1 drakonisk år"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Add 1 mean tropical year"
 msgstr "Legg til 1 tropisk år"
 
-#: src/translations.h:516
+#: src/translations.h:517
+msgid "Add 1 mean tropical century"
+msgstr "Legg til 1 tropisk århundre"
+
+#: src/translations.h:518
 msgid "Slow down the script execution rate"
 msgstr "Reduser kjørehastigheten for skript"
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Decrease time speed"
 msgstr "Reduser tidshastighet"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Decrease time speed (a little)"
 msgstr "Reduser tidshastigheten (litt)"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Speed up the script execution rate"
 msgstr "Øk kjørehastigheten for skript"
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Increase time speed"
 msgstr "Øk tidshastighet"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Increase time speed (a little)"
 msgstr "Øk tidshastigheten (litt)"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Pause script execution"
 msgstr "Stopp skriptkjøring midlertidig"
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Resume script execution"
 msgstr "Gjenoppta skriptkjøring"
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Set time to now"
 msgstr "Sett tid til nå"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Set the normal script execution rate"
 msgstr "Velg vanlig kjørehastighet for skript"
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Set normal time rate"
 msgstr "Normal tidshastighet"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Set time rate to zero"
 msgstr "Sett tidshastighet til null"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Stop script execution"
 msgstr "Stopp skriptkjøring"
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Subtract 1 sidereal day"
 msgstr "Trekk fra 1 stjernedøgn"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Subtract 1 sidereal month"
 msgstr "Trekk fra 1 siderisk måned"
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Subtract 1 sidereal week"
 msgstr "Trekk fra 1 stjerneuke"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Subtract 1 sidereal year"
 msgstr "Trekk fra 1 siderisk år"
 
-#: src/translations.h:533
+#: src/translations.h:535
+msgid "Subtract 1 sidereal century"
+msgstr "Trekk fra 1 siderisk århundre"
+
+#: src/translations.h:536
 msgid "Subtract 1 solar day"
 msgstr "Trekk fra 1 soldøgn"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "Subtract 1 solar hour"
 msgstr "Trekk fra 1 soltime"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Subtract 1 solar week"
 msgstr "Trekk fra 1 soluke"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Subtract 1 synodic month"
 msgstr "Trekk fra 1 synodisk måned"
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "Subtract 1 draconic month"
 msgstr "Trekk fra 1 drakonisk måned"
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "Subtract 1 anomalistic month"
 msgstr "Trekk fra 1 anomalistisk måned"
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Subtract 1 mean tropical month"
 msgstr "Trekk fra 1 tropisk måned"
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Subtract 1 draconic year"
 msgstr "Trekk fra 1 drakonisk år"
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Subtract 1 mean tropical year"
 msgstr "Trekk fra 1 tropisk år"
 
+#: src/translations.h:545
+msgid "Subtract 1 mean tropical century"
+msgstr "Trekk fra 1 tropisk århundre"
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Display Options"
 msgstr "Visningsalternativer"
 
-#: src/translations.h:545
+#: src/translations.h:549
 msgid "Flip scene horizontally"
 msgstr "Speilvend horisontalt"
 
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Full-screen mode"
 msgstr "Fullskjermmodus"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1135
+#: src/translations.h:551 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "Atmosfære"
 
-#: src/translations.h:548 src/ui_viewDialog.h:1159
+#: src/translations.h:552 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Asimutnett"
 
-#: src/translations.h:549 src/ui_viewDialog.h:1181
+#: src/translations.h:553 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Himmelretninger"
 
-#: src/translations.h:550
+#: src/translations.h:554
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "Stjernebildekunst"
 
-#: src/translations.h:551
+#: src/translations.h:555
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "Stjernebildegrenser"
 
-#: src/translations.h:552
+#: src/translations.h:556
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "Stjernebildenavn"
 
-#: src/translations.h:553
+#: src/translations.h:557
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "Stjernebildelinjer"
 
-#: src/translations.h:554
+#: src/translations.h:558
 msgid "Nebulas background images"
 msgstr "Bakgrunnsbilder for stjernetåker"
 
-#: src/translations.h:555 src/ui_viewDialog.h:1158
+#: src/translations.h:559 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptisk J2000-nett"
 
-#: src/translations.h:556
+#: src/translations.h:560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "Ekliptikken"
 
-#: src/translations.h:557
+#: src/translations.h:561
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "Ekvatorlinje"
 
-#: src/translations.h:558 src/ui_viewDialog.h:1157
+#: src/translations.h:562 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Ekvatorialt nett"
 
-#: src/translations.h:559 src/ui_viewDialog.h:1156
+#: src/translations.h:563 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatorialt J2000-nett"
 
-#: src/translations.h:560
+#: src/translations.h:564
 msgid "Fog"
 msgstr "Dis"
 
-#: src/translations.h:561 src/ui_viewDialog.h:1160
+#: src/translations.h:565 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
-#: src/translations.h:562 src/ui_viewDialog.h:1180
+#: src/translations.h:566 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Galaktisk plan"
 
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Ground"
 msgstr "Landskap"
 
-#: src/translations.h:564
+#: src/translations.h:568
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr "Horisontlinje"
 
-#: src/translations.h:565
+#: src/translations.h:569
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "Meridianlinje"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1144
+#: src/translations.h:570 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "Stjernetåker"
 
-#: src/translations.h:567
+#: src/translations.h:571
 msgid "Night mode"
 msgstr "Nattmodus"
 
-#: src/translations.h:568
+#: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "Planetnavn"
 
-#: src/translations.h:569
+#: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "Planetbaner"
 
-#: src/translations.h:570
+#: src/translations.h:574
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "Planetspor"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:575 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Stjerner"
 
-#: src/translations.h:572
+#: src/translations.h:576
 msgid "Stars labels"
 msgstr "Stjernepåskrifter"
 
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Flip scene vertically"
 msgstr "Speilvend vertikalt"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:576
+#: src/translations.h:580
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Auto hide horizontal button bar"
 msgstr "Skjul den horisontale knappe-linjen automatisk"
 
-#: src/translations.h:578
+#: src/translations.h:582
 msgid "Auto hide vertical button bar"
 msgstr "Skjul den vertikale knappe-linje automatisk"
 
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Go to home"
 msgstr "Gå tilbake til opprinnelig sted"
 
-#: src/translations.h:580
+#: src/translations.h:584
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/translations.h:581
+#: src/translations.h:585
 msgid "Copy selected object information to clipboard"
 msgstr "Kopier valgte objektinformasjon til utklippstavle"
 
-#: src/translations.h:582
+#: src/translations.h:586
 msgid "Save screenshot"
 msgstr "Lagre skjermbilde"
 
-#: src/translations.h:583
+#: src/translations.h:587
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Skift mellom ekvatorial- og asimutmontering"
 
-#: src/translations.h:584
+#: src/translations.h:588
 msgid "Toggle visibility of GUI"
 msgstr "Grafisk brukerflate av/på"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:587
+#: src/translations.h:591
 msgid "Movement and Selection"
 msgstr "Bevegelse og valg"
 
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Center on selected object"
 msgstr "Sentrer på valgt objekt"
 
-#: src/translations.h:589
+#: src/translations.h:593
 msgid "Set home planet to selected planet"
 msgstr "Bruk valgte planet som hjemmeplanet"
 
-#: src/translations.h:590
+#: src/translations.h:594
 msgid "Track object"
 msgstr "Følg objekt"
 
-#: src/translations.h:591
+#: src/translations.h:595
 msgid "Zoom in on selected object"
 msgstr "Zoom inn på valgte objekt"
 
-#: src/translations.h:592
+#: src/translations.h:596
 msgid "Zoom out"
 msgstr "Zoom ut"
 
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Angle measure"
 msgstr "Vinkelmål"
 
-#: src/translations.h:598
+#: src/translations.h:602
 msgid "Compass marks"
 msgstr "Kompassmarkeringer"
 
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Show exoplanets"
 msgstr "Vis eksoplaneter"
 
-#: src/translations.h:602
+#: src/translations.h:606
 msgid "Exoplanets configuration window"
 msgstr "Innstillingsvindu for eksoplaneter"
 
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Observability"
 msgstr "Observerbarhet"
 
-#: src/translations.h:606
+#: src/translations.h:610
 msgid "Observability configuration window"
 msgstr "Innstillingsvindu for observerbarhet"
 
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Oculars plugin configuration"
 msgstr "Innstilling av programtillegg for okularer"
 
-#: src/translations.h:610 plugins/Oculars/src/ui_ocularDialog.h:860
+#: src/translations.h:614 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "Okularvisning"
 
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Show crosshairs"
 msgstr "Vis trådkors"
 
-#: src/translations.h:612
+#: src/translations.h:616
 msgid "Oculars popup menu"
 msgstr "Oppsprettsmeny for okularer"
 
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Image sensor frame"
 msgstr "Bildesensorramme"
 
-#: src/translations.h:614
+#: src/translations.h:618
 msgid "Telrad sight"
 msgstr "Telrad-sikte"
 
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "Pulsars configuration window"
 msgstr "Innstillingsvindu for pulsarer"
 
-#: src/translations.h:620
+#: src/translations.h:624
 msgid "Quasars configuration window"
 msgstr "Innstillingsvindu for kvasarer"
 
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Satellites configuration window"
 msgstr "Innstillingsvindu for satellitter"
 
-#: src/translations.h:624
+#: src/translations.h:628
 msgid "Satellite hints"
 msgstr "Satellitt-hint"
 
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Satellite labels"
 msgstr "Satellitt-påskrifter"
 
-#: src/translations.h:628
+#: src/translations.h:632
 msgid "Historical Supernovae configuration window"
 msgstr "Innstillingsvindu for historiske supernovaer"
 
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Beveg et teleskop til et gitt sett av koordinater"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:634 src/ui_configurationDialog.h:1121
+#: src/translations.h:638 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Skript"
 
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Run landscapes script from file"
 msgstr "Kjør landskapskript fra fil"
 
-#: src/translations.h:636
+#: src/translations.h:640
 msgid "Show and zoom Moon"
 msgstr "Vis og zoom månen"
 
-#: src/translations.h:640
+#: src/translations.h:644
 msgid "Configuration window"
 msgstr "Innstillinger"
 
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Date/time window"
 msgstr "Dato/Klokkeslett"
 
-#: src/translations.h:642
+#: src/translations.h:646
 msgid "Help window"
 msgstr "Hjelp"
 
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Location window"
 msgstr "Stedsvalg"
 
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Search window"
 msgstr "Søk"
 
-#: src/translations.h:646
+#: src/translations.h:650
 msgid "Shortcuts window"
 msgstr "Snarveivindu"
 
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Sky and viewing options window"
 msgstr "Himmel- og visningsalternativer"
 
@@ -4241,12 +4257,13 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefore I "
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
-"Du kan velge å skalere bildet du ser på skjermen.  Dette er for å vise deg "
-"en bedre sammenligning av hvordan én okular/teleskop-kombinasjon er i "
-"forhold til en annen.  Det samme okularet i to ulike teleskop med ulik "
-"fokuslengde gir to ulike utgangsirkler, og endrer utsikten.  Haken er at for "
-"skalerte bilder blir mye an skjermen bortkastet.  Derfor anbefaler jeg at du "
-"har den av om du ikke synes du trenger den."
+"Du kan velge å skalere bildet du ser på skjermen. Dette er for å vise deg en "
+"bedre sammenligning av hvordan én okular/teleskop-kombinasjon er i forhold "
+"til en annen. Det samme okularet i to ulike teleskop med forskjellig "
+"brennvidde gir to ulike utgangsirkler, og endrer visningen. Avveiningen av "
+"dette er at med bildet skalert, kan en god del av skjermen bli bortkastet. "
+"Det anbefales derfor at alternativet er deaktivert så sant du ikke har behov "
+"for det."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -4254,9 +4271,8 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
-"Du kan velge et trådkors i denne utsikten.  Ideelt sett ville jeg hatt dette "
-"justert mot Nord.  Dette har jeg ikke klart.  Derfor er det justert mot "
-"toppen av skjermen."
+"Du kan slå av/på et trådkors i visningen. Ideelt skulle dette vært justert "
+"mot nord. Nå er det bare justert mot toppen av skjermen."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4266,14 +4282,14 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"Du kan slå en Telradfinner på eller av, dette kan ikke gjøres hvis du har "
-"okulært syn på.  Denne egenskaper tegner tre konsentriske sirkler på 0,5%1, "
-"2,0%1 og 4,0%1, for å hjelpe deg med å se det du hadde ventet å se med det "
-"blotte øyet gjennom Telradfinneren (eller lignende finner)."
+"Du kan slå av/på en Telrad-søker, men bare hvis okularvisningen ikke er "
+"slått på. Denne funksjonen tegner tre konsentriske sirkler på 0,5%1, 2,0%1 "
+"og 4,0%1, for å hjelpe deg med å se det du ville forventet å se med det "
+"blotte øyet gjennom Telrad-søkeren (eller lignende)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr "Hvis du finner problem, vær snill å fortell meg.  Nyt!"
+msgstr "Hvis du finner noen problemer, vennligst gi beskjed. God fornøyelse!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
@@ -6324,11 +6340,11 @@ msgstr "Barysentrisk periode: %1 s"
 #: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr "Tidsendring for barysentrisk periode: %1"
+msgstr "Tidsderivasjon for barysentrisk periode: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:145
 msgid "Dispersion measure:"
-msgstr "Spredningsmål"
+msgstr "Spredningsmål:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:148
@@ -6343,7 +6359,7 @@ msgstr "pc"
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr "Senk energitapraten: %1 erg/s"
+msgstr "Nedspinnings-energitapsrate: %1 ergs/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
@@ -6364,7 +6380,7 @@ msgstr "Årlig parallakse: %1 mas"
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr "Avstand basert på elektrontetthetmodellen: %1  KPC (%2 ly)"
+msgstr "Avstand basert på elektrontetthetmodell: %1 kpc (%2 lå)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
@@ -6398,36 +6414,36 @@ msgstr "Merknader: %1"
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
-"Avvikende røntgenstråle eller myk gammabølge-gjenntaker  med defekte "
+"Avvikende røntgenpulsar eller \"Soft Gamma-ray Repeater\" med registrerte "
 "pulseringer"
 
 #: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "has one or more binary companions"
-msgstr "har en eller flere binære sammenlikninger"
+msgstr "har en eller flere binær-ledsagere"
 
 #: plugins/Pulsars/src/Pulsar.cpp:297
 msgid "with pulsed emission from radio to infrared or higher frequencies"
-msgstr "med pulsert utslipp fra radio til infrarød eller høyere frekvenser"
+msgstr "med pulset emisjon fra radio til infrarød eller høyere frekvenser"
 
 #: plugins/Pulsars/src/Pulsar.cpp:302
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr "med pulsert utslipp bare ved infrarød eller høyere frekvenser"
+msgstr "med pulset emisjon bare ved infrarød eller høyere frekvenser"
 
 #: plugins/Pulsars/src/Pulsar.cpp:307
 msgid "with pulsed emission in the radio band"
-msgstr "med pulsert utslipp i radiosonen"
+msgstr "med pulset emisjon i radiobåndet"
 
 #: plugins/Pulsars/src/Pulsar.cpp:312
 msgid "with intermittently pulsed radio emission"
-msgstr "med ujevne utslipp i radiosonen"
+msgstr "med periodisk pulserende radioemisjon"
 
 #: plugins/Pulsars/src/Pulsar.cpp:317
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
-"isolert nøytronstjerne med pulser temperert røntgenutslipp men ingen merkbar "
-"radioutslipp"
+"isolert nøytronstjerne med pulset termisk røntgenstråling, men ingen "
+"registrerbar radioemisjon"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
@@ -6470,7 +6486,7 @@ msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr "Nancay Radioastronomiske Observatorie"
+msgstr "Nancay Radioastronomiobservatorie"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
@@ -6593,8 +6609,8 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
-"Hvis du vil lese fullstendig informasjon om tillegg, historie og "
-"katalogformat kan du %1få informasjon her%2."
+"Hvis du vil lese fullstendig informasjon om dette programtillegget, dets "
+"historikk og katalogformat, kan du %1få informasjon her%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Exoplanets is updated"
@@ -6614,23 +6630,23 @@ msgstr "Oppdater eksoplanetdata fra internett"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
 msgid "Display mode for exoplanets"
-msgstr ""
+msgstr "Visningsmodus for eksoplaneter"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "Plott alle systemer med eksoplaneter uten påskrifter"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "Aktiver distribusjonsvisning for eksoplaneter"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "Vis eksoplaneter siden deres oppdagelse"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "Aktiver tidslinje for eksoplaneters oppdagelse"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
@@ -6876,10 +6892,10 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
-"Himmellegemer blir ansett som synlige når sola er under denne høyden.  "
-"Høyden ved astronomisk skumring er stort sett mellom -12 og -18 grader.  "
-"Dette parameteret blir bare brukt til å beregne området til observerbare "
-"epoker (se under)."
+"Et himmelobjekt blir ansett som synlig når solen er under denne høyden. "
+"Høyden ved astronomisk tussmørke varierer vanligvis mellom -12 og -18 "
+"grader. Denne parameteren blir bare brukt til å beregne "
+"observerbarhetsperioden (se under)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid "Today ephemeris:"
@@ -6913,15 +6929,15 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
-"Den akroniske stigningen (eller fallet) til et objekt er når objektet går "
-"opp (eller ned) når sola går ned (eller opp).  De konkrete dataene til disse "
-"forbigåelsene kommer an på hvor observatøren befinner seg.  Datoene mellom "
-"den akroniske stigningen og fallet er de når høyden på himmellegemet pleide "
-"å være like høye når sola er under horisonten (og objektet kan observeres "
-"godt).  På den annen side skjer den kosmiske stigningen (eller fallet) når "
-"både objektet og sola stiger (eller synker) samtidig.  Det er åpenbart at "
-"kilden er vanskelig (eller umulig) å observere i løpet av den kosmiske "
-"stigningen og fallet."
+"Den akroniske oppgangen (eller nedgangen) til et objekt er når objektet går "
+"opp (eller ned) akkurat når solen går ned (eller opp). De eksakte "
+"efemeridedatoene avhenger av observatørens plassering. Datoene mellom den "
+"akroniske nedgangen og oppgangen er de som er når høyden på himmelobjektet "
+"pleier å være høy når solen er godt under horisonten (følgelig kan objektet "
+"fint observeres). I motsetning til den kosmiske oppgangen (eller nedgangen) "
+"som skjer når både objektet og solen stiger opp (eller ned) samtidig. Det er "
+"åpenbart at kilden knapt er observerbar (eller ikke observerbar i det hele "
+"tatt) i datoene mellom kosmisk nedgang og oppgang."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid "Largest Sun separation:"
@@ -6938,12 +6954,14 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
-"Skjer når vinkelforskjellen mellom sola og himmellegemet er på sitt meste.  "
-"I de fleste tilfeller tilsvarer dette at lengdegradene til sola og objektet "
-"er ulike med 180 grader slik at sola er på motsatt side av objektet.  Når et "
-"objekt er på maksimal vinkelforskjell fra sola (planet eller stjerne), "
-"kulminerer det rundt midnatt, og i det mørkeste området av himmelen ved det "
-"fallet.  Derfor er dette den «beste» natta å observere et gitt objekt."
+"Skjer når vinkel-separasjonen mellom solen og himmelobjektet er maksimal. I "
+"de fleste tilfeller er dette tilsvarende til å si at de ekvatoriale "
+"lengdegradene til solen og objektet avviker med 180 grader, så solen er i "
+"opposisjon til objektet. Når et objekt er på sin maksimalt mulige vinkel-"
+"separasjon fra solen (uansett om det er en planet eller en stjerne), "
+"kulminerer det omtrent ved midnatt, og på det mørkest mulige område av "
+"himmelen på den deklinasjonen. Derfor er dette den 'beste' natten å "
+"observere et bestemt objekt."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
 msgid "Nights with source above horizon:"
@@ -6968,23 +6986,20 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"Programmet kalkulerer områdene for datoene himmellegemet er over horisonten "
-"minst ett øyeblikk i løpet av natta.  Med «natt», menes tiden hvor sola er "
-"lavere enn i skumringen (som kan tilpasses av brukeren, se ovenfor).  Når "
-"objektene sitter fast på himmelen (eller er andre planeter), kan området for "
-"observerbare epoker dette året ha to mulige former: enten et område mellom "
-"en dato og en annen: enten et område fra én dato til en annen (f.eks. 20. "
-"jan. til 15. sep.) eller i to trinn (fra 1. jan. til en gitt dato og fra en "
-"annen dato til 31. des.).  I det første tilfellet skal den første datoen(20. "
-"jan. i vårt eksempel) være nærme den såkalte «stjerneoppgangen» og den andre "
-"datoen (21. sep. i vårt eksempel) skal være nærme den såkalte "
-"«stjernenedgangen».  I det andre tilfellet (for eksempel et område i form av "
-"1. jan. til 20. mai og 21. sep. til 31. des.), er den første datoen (20. mai "
-"i dette tilfellet) nærme stjernenedgangen og den andre (21. sep. i dette "
-"tilfellet) nærme stjerneoppgangen.  Mer nøyaktige ligninger for å beregne "
-"stjerneopp-/-nedgangen til stjerner og planeter (som ikke avhenger av "
-"brukerens oppgivelse av når det er skumring) blir integrert i senere "
-"versjoner av dette tillegget."
+"Programmet beregner datoområdet når himmelobjektet er over horisonten i "
+"minst et kort øyeblikk av natten. 'Natt' er i dette tilfellet når solen er "
+"under tussmørkegrensen (som kan stilles inn av brukeren, se ovenfor). Når "
+"objektene er fast på himmelen (eller er ytre planeter), kan "
+"observervasjonstidsrommet ha to mulige former: Enten et intervall mellom to "
+"datoer (f.eks. 20. jan. til 15. sep.) eller to intervaller (fra 1. jan. til "
+"en gitt dato og fra en annen dato til 31. des.). I det første tilfellet skal "
+"den første datoen (20. jan. i vårt eksempel) være nær den såkalte heliakiske "
+"oppgangen til en stjerne og den andre datoen (15. sep. i vårt eksempel) skal "
+"være nær den heliakiske nedgangen. I det andre tilfellet (f.eks. et område "
+"fra 1. jan. til 20. mai og 21. sep. til 31. des.), vil den andre datoen (20. "
+"mai i dette eksempelet) være nær den heliakiske nedgangen og den tredje (21. "
+"sep.) nær den heliakiske oppgangen. Et bedre estimat på heliakiske opp- og "
+"nedganger er planlagt i en fremtidig utgave av programtillegget."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Full Moon:"

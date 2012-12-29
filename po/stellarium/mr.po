@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-17 22:19+0700\n"
+"POT-Creation-Date: 2012-12-27 20:16+0700\n"
 "PO-Revision-Date: 2012-11-09 18:09+0000\n"
 "Last-Translator: nyogi <nyogi2004@gmail.com>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-18 04:51+0000\n"
-"X-Generator: Launchpad (build 16372)\n"
+"X-Launchpad-Export-Date: 2012-12-28 04:43+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -669,12 +669,12 @@ msgstr "रेखाचित्र/ इतर रचनाकार: %1"
 msgid "OSX Developer: %1"
 msgstr "ओ एस् एक्स् विकासक: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:644
+#: src/gui/StelGui.cpp:178 src/translations.h:648
 msgid "Script console window"
 msgstr "आज्ञावली नियंत्रक खिडकी"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:639
+#: src/gui/StelGui.cpp:178 src/translations.h:643
 msgid "Windows"
 msgstr "खिडक्या"
 
@@ -2490,460 +2490,476 @@ msgid "Add 1 sidereal year"
 msgstr "१ नाक्षत्र वर्ष वाढवा"
 
 #: src/translations.h:507
+msgid "Add 1 sidereal century"
+msgstr ""
+
+#: src/translations.h:508
 msgid "Add 1 solar day"
 msgstr "१ सौर दिवस वाढवा"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Add 1 solar hour"
 msgstr "१ सौरतास वाढवा"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Add 1 solar week"
 msgstr "१ सौर आठवडा वाढवा"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Add 1 synodic month"
 msgstr "1  सांवासिक महिना वाढवा"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Add 1 draconic month"
 msgstr "1  ड्राकोनिक महिना वाढवा"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Add 1 anomalistic month"
 msgstr "1  अ‍ॅनोमॅलिस्टिक  महिना वाढवा"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Add 1 mean tropical month"
 msgstr ""
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Add 1 draconic year"
 msgstr ""
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Add 1 mean tropical year"
 msgstr ""
 
-#: src/translations.h:516
+#: src/translations.h:517
+msgid "Add 1 mean tropical century"
+msgstr ""
+
+#: src/translations.h:518
 msgid "Slow down the script execution rate"
 msgstr "आज्ञावली प्रक्रिया वेग कमी करा"
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Decrease time speed"
 msgstr "वेळेचा वेग कमी करा"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Decrease time speed (a little)"
 msgstr "वेळ वेग वाढवा (थोडा)"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Speed up the script execution rate"
 msgstr "आज्ञावली प्रक्रिया वेग वाढवा"
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Increase time speed"
 msgstr "वेळेचा वेग जास्त करा"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Increase time speed (a little)"
 msgstr "वेळ वेग कमी करा  (थोडा)"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Pause script execution"
 msgstr "आज्ञावलींचे अंमलबजावणी थोपवा"
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Resume script execution"
 msgstr "आज्ञावलींचे अंमलबजावणी सुरु करा"
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Set time to now"
 msgstr "सध्याच्या वेळेशी सुसंगत करा"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Set the normal script execution rate"
 msgstr "आज्ञावली प्रक्रिया वेग सामान्य ठेवा"
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Set normal time rate"
 msgstr "वेळेचा वेग सामान्य ठेवा"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Set time rate to zero"
 msgstr "वेळेचा वेग शुन्य करा"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Stop script execution"
 msgstr "आज्ञावलीची कार्यवाही  थांबवा"
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Subtract 1 sidereal day"
 msgstr "१ नक्षत्र दिवस कमी करा"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Subtract 1 sidereal month"
 msgstr "१ नाक्षत्र महिना कमी करा"
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Subtract 1 sidereal week"
 msgstr "१ नक्षत्र आठवडा कमी करा"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Subtract 1 sidereal year"
 msgstr "१ नाक्षत्र वर्ष कमी करा"
 
-#: src/translations.h:533
+#: src/translations.h:535
+msgid "Subtract 1 sidereal century"
+msgstr ""
+
+#: src/translations.h:536
 msgid "Subtract 1 solar day"
 msgstr "१ सौर दिवस कमी करा"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "Subtract 1 solar hour"
 msgstr "१ सौरतास कमी करा"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Subtract 1 solar week"
 msgstr "१ सौर आठवडा कमी करा"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Subtract 1 synodic month"
 msgstr "१  सांवासिक  महिना वजा करा"
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "Subtract 1 draconic month"
 msgstr "१ ड्राकोनिक महिना वजा करा."
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "Subtract 1 anomalistic month"
 msgstr "१ अ‍ॅनमलिस्टिक महिना वजा करा"
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Subtract 1 mean tropical month"
 msgstr "१ सरासरी आयनिक महिना वजा करा"
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Subtract 1 draconic year"
 msgstr "१ ड्राकोनिक  वर्ष वजा करा"
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Subtract 1 mean tropical year"
 msgstr "१ सरासरी आयनिक महिना वजा करा"
 
+#: src/translations.h:545
+msgid "Subtract 1 mean tropical century"
+msgstr ""
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Display Options"
 msgstr "पटल पर्याय"
 
-#: src/translations.h:545
+#: src/translations.h:549
 msgid "Flip scene horizontally"
 msgstr "देखाव्याची आडवी बाजू पालट"
 
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Full-screen mode"
 msgstr "पुर्ण पटल स्थिती"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1135
+#: src/translations.h:551 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "वातावरण"
 
-#: src/translations.h:548 src/ui_viewDialog.h:1159
+#: src/translations.h:552 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "दिगंश"
 
-#: src/translations.h:549 src/ui_viewDialog.h:1181
+#: src/translations.h:553 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "प्रमाणक बिंदू"
 
-#: src/translations.h:550
+#: src/translations.h:554
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "तारकापुंजाचे चित्र"
 
-#: src/translations.h:551
+#: src/translations.h:555
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "तारकापुंज सीमा"
 
-#: src/translations.h:552
+#: src/translations.h:556
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "तारकापुंज नावे"
 
-#: src/translations.h:553
+#: src/translations.h:557
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "तारकापुंजाची आकृती"
 
-#: src/translations.h:554
+#: src/translations.h:558
 msgid "Nebulas background images"
 msgstr "तेजोमेघ पार्श्वचित्रे"
 
-#: src/translations.h:555 src/ui_viewDialog.h:1158
+#: src/translations.h:559 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "क्रांतीवृत्त J2000 जालीका"
 
-#: src/translations.h:556
+#: src/translations.h:560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "अयनवृत्त"
 
-#: src/translations.h:557
+#: src/translations.h:561
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "विषुवृत्त रेषा"
 
-#: src/translations.h:558 src/ui_viewDialog.h:1157
+#: src/translations.h:562 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "विषुवांश"
 
-#: src/translations.h:559 src/ui_viewDialog.h:1156
+#: src/translations.h:563 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "विषुवांश J2000 जाळी"
 
-#: src/translations.h:560
+#: src/translations.h:564
 msgid "Fog"
 msgstr "धुके"
 
-#: src/translations.h:561 src/ui_viewDialog.h:1160
+#: src/translations.h:565 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "दिर्घीका जाल"
 
-#: src/translations.h:562 src/ui_viewDialog.h:1180
+#: src/translations.h:566 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "दिर्घिका प्रतल"
 
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Ground"
 msgstr "जमीन"
 
-#: src/translations.h:564
+#: src/translations.h:568
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr "kshitij rekha"
 
-#: src/translations.h:565
+#: src/translations.h:569
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "मध्यानवृत्त रेषा"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1144
+#: src/translations.h:570 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "तेजोमेघ"
 
-#: src/translations.h:567
+#: src/translations.h:571
 msgid "Night mode"
 msgstr "रात्र स्थिती"
 
-#: src/translations.h:568
+#: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "ग्रहांची नावे"
 
-#: src/translations.h:569
+#: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "ग्रह कक्षा"
 
-#: src/translations.h:570
+#: src/translations.h:574
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "ग्रहाचे माग"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:575 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "तारे"
 
-#: src/translations.h:572
+#: src/translations.h:576
 msgid "Stars labels"
 msgstr "तारे नामनोर्देश"
 
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Flip scene vertically"
 msgstr "देखाव्याची उभी बाजू पालट"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:576
+#: src/translations.h:580
 msgid "Miscellaneous"
 msgstr "इतर"
 
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Auto hide horizontal button bar"
 msgstr "आडवी कळ पट्टी स्वत:हून लपवा"
 
-#: src/translations.h:578
+#: src/translations.h:582
 msgid "Auto hide vertical button bar"
 msgstr "उभी कळ पट्टी स्वत:हून लपवा"
 
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Go to home"
 msgstr "मूल स्थान"
 
-#: src/translations.h:580
+#: src/translations.h:584
 msgid "Quit"
 msgstr "बाहेर पडा"
 
-#: src/translations.h:581
+#: src/translations.h:585
 msgid "Copy selected object information to clipboard"
 msgstr "निवडलेला मजकूर क्लिपबोर्डवर घ्या"
 
-#: src/translations.h:582
+#: src/translations.h:586
 msgid "Save screenshot"
 msgstr "पटलचित्र साठवून ठेवा"
 
-#: src/translations.h:583
+#: src/translations.h:587
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "विषुवांश व दिगंश आरोपण यात बदल करा"
 
-#: src/translations.h:584
+#: src/translations.h:588
 msgid "Toggle visibility of GUI"
 msgstr "पडद्यावरील आकृत्य़ांची दृष्यमानता बदला"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:587
+#: src/translations.h:591
 msgid "Movement and Selection"
 msgstr "हालचाल आणि निवड"
 
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Center on selected object"
 msgstr "निवडलेले लक्ष्य मधोमध आणा"
 
-#: src/translations.h:589
+#: src/translations.h:593
 msgid "Set home planet to selected planet"
 msgstr "निवडलेला ग्रह गृह म्हणून निश्चित करा"
 
-#: src/translations.h:590
+#: src/translations.h:594
 msgid "Track object"
 msgstr "लक्ष्याचा मागोवा घ्या"
 
-#: src/translations.h:591
+#: src/translations.h:595
 msgid "Zoom in on selected object"
 msgstr "निवडलेले लक्षाचा आकार मोठा करा( निकटन)"
 
-#: src/translations.h:592
+#: src/translations.h:596
 msgid "Zoom out"
 msgstr "आकार छोटा करा(दुरावलोकन)"
 
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Angle measure"
 msgstr "अंश मापन"
 
-#: src/translations.h:598
+#: src/translations.h:602
 msgid "Compass marks"
 msgstr "होकायंत्र   माग"
 
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Show exoplanets"
 msgstr "बहिस्थग्रह दर्शवा"
 
-#: src/translations.h:602
+#: src/translations.h:606
 msgid "Exoplanets configuration window"
 msgstr "बहिस्थग्रह  संरचना खिडकी"
 
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Observability"
 msgstr ""
 
-#: src/translations.h:606
+#: src/translations.h:610
 msgid "Observability configuration window"
 msgstr ""
 
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: src/translations.h:610 plugins/Oculars/src/ui_ocularDialog.h:860
+#: src/translations.h:614 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "नेत्रिकेतले दृष्य"
 
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Show crosshairs"
 msgstr ""
 
-#: src/translations.h:612
+#: src/translations.h:616
 msgid "Oculars popup menu"
 msgstr ""
 
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Image sensor frame"
 msgstr ""
 
-#: src/translations.h:614
+#: src/translations.h:618
 msgid "Telrad sight"
 msgstr ""
 
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "Pulsars configuration window"
 msgstr ""
 
-#: src/translations.h:620
+#: src/translations.h:624
 msgid "Quasars configuration window"
 msgstr ""
 
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Satellites configuration window"
 msgstr ""
 
-#: src/translations.h:624
+#: src/translations.h:628
 msgid "Satellite hints"
 msgstr ""
 
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Satellite labels"
 msgstr ""
 
-#: src/translations.h:628
+#: src/translations.h:632
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:634 src/ui_configurationDialog.h:1121
+#: src/translations.h:638 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "आज्ञावली"
 
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Run landscapes script from file"
 msgstr ""
 
-#: src/translations.h:636
+#: src/translations.h:640
 msgid "Show and zoom Moon"
 msgstr ""
 
-#: src/translations.h:640
+#: src/translations.h:644
 msgid "Configuration window"
 msgstr "संरचना खिडकी"
 
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Date/time window"
 msgstr "दिनांक/वेळ खिडकी"
 
-#: src/translations.h:642
+#: src/translations.h:646
 msgid "Help window"
 msgstr "सहाय्य खिडकी"
 
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Location window"
 msgstr "स्थान खिडकी"
 
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Search window"
 msgstr "शोध खिडकी"
 
-#: src/translations.h:646
+#: src/translations.h:650
 msgid "Shortcuts window"
 msgstr ""
 
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Sky and viewing options window"
 msgstr "आकाश आणि निरिक्षण पर्याय खिडकी"
 
