@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-17 22:19+0700\n"
+"POT-Creation-Date: 2012-12-27 20:16+0700\n"
 "PO-Revision-Date: 2012-10-13 16:08+0000\n"
 "Last-Translator: முரளி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-18 04:53+0000\n"
-"X-Generator: Launchpad (build 16372)\n"
+"X-Launchpad-Export-Date: 2012-12-28 04:46+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -644,12 +644,12 @@ msgstr "வரைகலை/மற்ற கலைஞர்:%1"
 msgid "OSX Developer: %1"
 msgstr "ஒ ச க்ஸ்(OSX) உருவாக்குநர்: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:644
+#: src/gui/StelGui.cpp:178 src/translations.h:648
 msgid "Script console window"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:639
+#: src/gui/StelGui.cpp:178 src/translations.h:643
 msgid "Windows"
 msgstr "சாளரம்"
 
@@ -2465,460 +2465,476 @@ msgid "Add 1 sidereal year"
 msgstr ""
 
 #: src/translations.h:507
+msgid "Add 1 sidereal century"
+msgstr ""
+
+#: src/translations.h:508
 msgid "Add 1 solar day"
 msgstr "ஒரு சூரிய தினத்தை கூட்டவும்"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Add 1 solar hour"
 msgstr "ஒரு சூரிய மணி நேரத்தை கூட்டு"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Add 1 solar week"
 msgstr "ஒரு சூரிய வரத்தை கூட்டவும்"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Add 1 synodic month"
 msgstr ""
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Add 1 draconic month"
 msgstr ""
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Add 1 anomalistic month"
 msgstr ""
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Add 1 mean tropical month"
 msgstr ""
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Add 1 draconic year"
 msgstr ""
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Add 1 mean tropical year"
 msgstr ""
 
-#: src/translations.h:516
+#: src/translations.h:517
+msgid "Add 1 mean tropical century"
+msgstr ""
+
+#: src/translations.h:518
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Decrease time speed"
 msgstr "நேர வேகத்தை குறைக்கவும்"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Decrease time speed (a little)"
 msgstr "நேர வேகத்தை குறைக்கவும் (கொஞ்சமாக)"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Speed up the script execution rate"
 msgstr ""
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Increase time speed"
 msgstr "நேர வேகத்தை அதிகரிக்கவும்"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Increase time speed (a little)"
 msgstr "நேர வேகத்தை கூட்டவும் (கொஞ்சமாக)"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Pause script execution"
 msgstr ""
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Resume script execution"
 msgstr ""
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Set time to now"
 msgstr "இப்போதைய நேரத்திற்கு அமை"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Set the normal script execution rate"
 msgstr ""
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Set normal time rate"
 msgstr "வழக்கமான நேர வேகத்திற்கு அமை"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Set time rate to zero"
 msgstr "நேர வேகத்தை பூஜ்ஜியத்திற்கு வைக்கவும்"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Stop script execution"
 msgstr ""
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Subtract 1 sidereal day"
 msgstr "ஒரு மீன்வழி நாளை கழி"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Subtract 1 sidereal month"
 msgstr ""
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Subtract 1 sidereal week"
 msgstr "ஒரு மீன்வழி வாரத்தை கழி"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
-#: src/translations.h:533
+#: src/translations.h:535
+msgid "Subtract 1 sidereal century"
+msgstr ""
+
+#: src/translations.h:536
 msgid "Subtract 1 solar day"
 msgstr "ஒரு சூரிய தினத்தை கழிக்கவும்"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "Subtract 1 solar hour"
 msgstr "ஒரு சூரிய மணி நேரத்தை கழி"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Subtract 1 solar week"
 msgstr "ஒரு சூரிய வாரத்தை  கழிக்கவும்"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Subtract 1 synodic month"
 msgstr ""
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "Subtract 1 draconic month"
 msgstr ""
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "Subtract 1 anomalistic month"
 msgstr ""
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Subtract 1 mean tropical month"
 msgstr ""
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Subtract 1 draconic year"
 msgstr ""
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Subtract 1 mean tropical year"
 msgstr ""
 
+#: src/translations.h:545
+msgid "Subtract 1 mean tropical century"
+msgstr ""
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Display Options"
 msgstr "காட்சி குணங்கள்"
 
-#: src/translations.h:545
+#: src/translations.h:549
 msgid "Flip scene horizontally"
 msgstr "கிடைமட்டமாக காட்சியை திருப்பு"
 
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Full-screen mode"
 msgstr "முழுத்திரை நிலை"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1135
+#: src/translations.h:551 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "வளிமண்டலம்"
 
-#: src/translations.h:548 src/ui_viewDialog.h:1159
+#: src/translations.h:552 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "திசைவில் கட்டம்"
 
-#: src/translations.h:549 src/ui_viewDialog.h:1181
+#: src/translations.h:553 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "சிறப்பியல்புப் புள்ளிகள்"
 
-#: src/translations.h:550
+#: src/translations.h:554
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "விண்மீன் குழு கலை"
 
-#: src/translations.h:551
+#: src/translations.h:555
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "விண்மீன் குழு எல்லைகள்"
 
-#: src/translations.h:552
+#: src/translations.h:556
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "விண்மீன் குழு விவரக்குறிப்புகள்"
 
-#: src/translations.h:553
+#: src/translations.h:557
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "நட்சத்திரக்கூட்ட கோடுகள்"
 
-#: src/translations.h:554
+#: src/translations.h:558
 msgid "Nebulas background images"
 msgstr "பின்னணி நெபுலா படங்கள்"
 
-#: src/translations.h:555 src/ui_viewDialog.h:1158
+#: src/translations.h:559 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/translations.h:556
+#: src/translations.h:560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "கிரகணத்திற்குரியகோடு"
 
-#: src/translations.h:557
+#: src/translations.h:561
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "பூமத்திய ரேகை"
 
-#: src/translations.h:558 src/ui_viewDialog.h:1157
+#: src/translations.h:562 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "மத்தியகோட்டிற்குரிய கட்டம்"
 
-#: src/translations.h:559 src/ui_viewDialog.h:1156
+#: src/translations.h:563 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "பூமத்திய ரேகை J2000 கட்டம்"
 
-#: src/translations.h:560
+#: src/translations.h:564
 msgid "Fog"
 msgstr "மூடு பனி"
 
-#: src/translations.h:561 src/ui_viewDialog.h:1160
+#: src/translations.h:565 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "அண்ட கட்டம்"
 
-#: src/translations.h:562 src/ui_viewDialog.h:1180
+#: src/translations.h:566 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr ""
 
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Ground"
 msgstr "தரை"
 
-#: src/translations.h:564
+#: src/translations.h:568
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr ""
 
-#: src/translations.h:565
+#: src/translations.h:569
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "உச்சநெடுங்கோடு"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1144
+#: src/translations.h:570 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "நெபுளாக்கள்"
 
-#: src/translations.h:567
+#: src/translations.h:571
 msgid "Night mode"
 msgstr "இரவு நிலை"
 
-#: src/translations.h:568
+#: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "கோள் விவரச்சீட்டு"
 
-#: src/translations.h:569
+#: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "கோள்களின் கோளப்பாதை"
 
-#: src/translations.h:570
+#: src/translations.h:574
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "கோள்களின் சுவடு"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:575 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "நட்சத்திரங்கள்"
 
-#: src/translations.h:572
+#: src/translations.h:576
 msgid "Stars labels"
 msgstr ""
 
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Flip scene vertically"
 msgstr "செங்குத்தாக காட்சியை திருப்பு"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:576
+#: src/translations.h:580
 msgid "Miscellaneous"
 msgstr "இதர வகை"
 
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Auto hide horizontal button bar"
 msgstr ""
 
-#: src/translations.h:578
+#: src/translations.h:582
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Go to home"
 msgstr ""
 
-#: src/translations.h:580
+#: src/translations.h:584
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: src/translations.h:581
+#: src/translations.h:585
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/translations.h:582
+#: src/translations.h:586
 msgid "Save screenshot"
 msgstr "திரைப்பிடிப்பினை சேமி"
 
-#: src/translations.h:583
+#: src/translations.h:587
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
-#: src/translations.h:584
+#: src/translations.h:588
 msgid "Toggle visibility of GUI"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:587
+#: src/translations.h:591
 msgid "Movement and Selection"
 msgstr "அசைவு மற்றும் தேர்வு"
 
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Center on selected object"
 msgstr "தேர்தெடுத்த பொருளை மத்தியபடுது"
 
-#: src/translations.h:589
+#: src/translations.h:593
 msgid "Set home planet to selected planet"
 msgstr "தேர்தெடுத்த கோளை தொடக்க கோளாக அமை"
 
-#: src/translations.h:590
+#: src/translations.h:594
 msgid "Track object"
 msgstr "பொருளை பின்தொடர்"
 
-#: src/translations.h:591
+#: src/translations.h:595
 msgid "Zoom in on selected object"
 msgstr "தேர்வு செய்யப்பட்ட பொருளை பெரிதாக்கு"
 
-#: src/translations.h:592
+#: src/translations.h:596
 msgid "Zoom out"
 msgstr "பெரிதாக்கு"
 
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Angle measure"
 msgstr "கோண அளவு"
 
-#: src/translations.h:598
+#: src/translations.h:602
 msgid "Compass marks"
 msgstr "திசைக்காட்டி குறிகள்"
 
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Show exoplanets"
 msgstr ""
 
-#: src/translations.h:602
+#: src/translations.h:606
 msgid "Exoplanets configuration window"
 msgstr ""
 
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Observability"
 msgstr ""
 
-#: src/translations.h:606
+#: src/translations.h:610
 msgid "Observability configuration window"
 msgstr ""
 
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: src/translations.h:610 plugins/Oculars/src/ui_ocularDialog.h:860
+#: src/translations.h:614 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr ""
 
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Show crosshairs"
 msgstr ""
 
-#: src/translations.h:612
+#: src/translations.h:616
 msgid "Oculars popup menu"
 msgstr ""
 
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Image sensor frame"
 msgstr ""
 
-#: src/translations.h:614
+#: src/translations.h:618
 msgid "Telrad sight"
 msgstr ""
 
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "Pulsars configuration window"
 msgstr ""
 
-#: src/translations.h:620
+#: src/translations.h:624
 msgid "Quasars configuration window"
 msgstr ""
 
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Satellites configuration window"
 msgstr "செயற்கைக்கோள் கட்டமைப்பு ஜன்னல்"
 
-#: src/translations.h:624
+#: src/translations.h:628
 msgid "Satellite hints"
 msgstr "செயற்கைக்கோள் குறிப்புகள்"
 
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Satellite labels"
 msgstr "செயற்கைக்கோள் விவரச்சீட்டுகள்"
 
-#: src/translations.h:628
+#: src/translations.h:632
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:634 src/ui_configurationDialog.h:1121
+#: src/translations.h:638 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "ஸ்கிரிப்டுகள்"
 
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Run landscapes script from file"
 msgstr ""
 
-#: src/translations.h:636
+#: src/translations.h:640
 msgid "Show and zoom Moon"
 msgstr ""
 
-#: src/translations.h:640
+#: src/translations.h:644
 msgid "Configuration window"
 msgstr "வடிவமைபுச்சாளரம்"
 
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Date/time window"
 msgstr "தேதி/நேரம் சாளரம்"
 
-#: src/translations.h:642
+#: src/translations.h:646
 msgid "Help window"
 msgstr "உதவிச்சாளரம்"
 
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Location window"
 msgstr "இருப்பிடச்சாளரம்"
 
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Search window"
 msgstr "தேடுதல் சாளரம்"
 
-#: src/translations.h:646
+#: src/translations.h:650
 msgid "Shortcuts window"
 msgstr ""
 
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Sky and viewing options window"
 msgstr "வானம் மற்றும் பார்வை விருப்பங்கள் ஜன்னல்"
 
