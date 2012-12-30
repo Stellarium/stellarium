@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-27 20:16+0700\n"
-"PO-Revision-Date: 2012-12-27 17:35+0000\n"
+"PO-Revision-Date: 2012-12-29 16:07+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-28 04:40+0000\n"
+"X-Launchpad-Export-Date: 2012-12-30 05:09+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -731,7 +731,7 @@ msgstr "Nouvel emplacement"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "Sélectionner une archive ZIP qui contient un paysage Stellarium"
+msgstr "Sélectionner un fichier ZIP contenant un paysage Stellarium"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
@@ -741,7 +741,7 @@ msgstr "Archives ZIP"
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "Le paysage « %1 » à été installé avec succès."
+msgstr "Le paysage « %1 » à été correctement installé."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -767,7 +767,7 @@ msgstr "Erreur !"
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr "Le paysage « %1 » à été supprimé avec succès."
+msgstr "Le paysage « %1 » à été supprimé."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:170
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
@@ -791,14 +791,14 @@ msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
-"Le fichier sélectionné n'est pas une archive ZIP ou ne contient pas de "
+"Le fichier sélectionné n'est pas un fichier ZIP ou ne contient pas de "
 "paysage Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr "Un paysage avec le même nom ou identifiant (%1) existe déjà."
+msgstr "Un paysage de même nom ou identifiant (%1) est déjà installé."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:243
@@ -3844,11 +3844,11 @@ msgstr "Ajouter/supprimer des paysages"
 
 #: src/ui_addRemoveLandscapesDialog.h:268
 msgid "Add a new landscape"
-msgstr "Ajouter un nouveau paysage"
+msgstr "Ajouter un paysage"
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Install a new landscape from a ZIP archive..."
-msgstr "Installer un nouveau paysage à partir d'une archive ZIP..."
+msgstr "Installer un paysage à partir d'un fichier ZIP..."
 
 #: src/ui_addRemoveLandscapesDialog.h:270
 msgid "Switch to the new landscape after installation"
@@ -3856,7 +3856,7 @@ msgstr "Utiliser le nouveau paysage après installation"
 
 #: src/ui_addRemoveLandscapesDialog.h:273
 msgid "Remove an installed landscape"
-msgstr "Supprimer un paysage installé"
+msgstr "Supprimer un paysage"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
@@ -3920,8 +3920,8 @@ msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
-"Utiliser environ 0.12 pour de superbes sommets en montagne, 0.2 pour des "
-"paysages de campagne, 0.35 pour de classiques conditions sombres."
+"Indiquer 0.12 pour des sommets en montagne, 0.2 pour des conditions de "
+"campagne, 0.35 pour de classiques conditions sombres."
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
