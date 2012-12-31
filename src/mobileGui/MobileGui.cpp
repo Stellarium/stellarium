@@ -141,40 +141,6 @@ QProgressBar* MobileGui::addProgressBar()
 	return new QProgressBar();
 }
 
-//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
-//! @param actionName qt object name. Used as a reference for later uses
-//! @param text the text to display when hovering, or in the help window
-//! @param shortCut the qt shortcut to use
-//! @param helpGroup hint on how to group the text in the help window
-//! @param checkable whether the action should be checkable
-//! @param autoRepeat whether the action should be autorepeated
-//QAction* MobileGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
-//{
-//	QAction* a = StelGuiBase::addGuiActions(actionName, text, shortCut, helpGroup, checkable, autoRepeat);
-//
-//	//add the action to the engine's context so we can see it within the qml code
-//	engine->rootContext()->setContextProperty(QString("action_") + actionName, qobject_cast<QObject*>(a));
-//
-//	return a;
-//}
-
-//QAction* MobileGui::getGuiActions(const QString &actionName)
-//{
-//	return StelGuiBase::getGuiActions(actionName);
-//}
-
-/*QVariant MobileGui::getAction(const QString &actionName)
-{
-	QVariant action = engine->rootContext()->contextProperty("action_" + actionName);
-    if(qobject_cast<QObject*>(action) == NULL)
-	{
-        qWarning(QString("Could not find guiAction ").append(actionName));
-    }
-}*/
-
-//void MobileGui::addButton(...)
-//add a new element to the listview corresponding to the button's category
-
 void MobileGui::forceRefreshGui()
 {
 	updateGui();
@@ -283,18 +249,6 @@ void MobileGui::initActions()
     shortcutMgr->addGuiAction("actionSet_Real_Time_Speed", true, N_("Set normal time rate"), "", "", group, true, false)->setChecked(core->getRealTimeSpeed());
     shortcutMgr->addGuiAction("actionReturn_To_Current_Time", true, N_("Set time to now"), "", "", group, true, false)->setChecked(core->getIsTimeNow());
     shortcutMgr->addGuiAction("actionShow_Night_Mode", true, N_("Night mode"), "", "", group, true, false)->setChecked(StelApp::getInstance().getVisionModeNight());
-
-    /*
-     *QAction* StelShortcutMgr::addGuiAction(const QString& actionId,
-                                       bool temporary,
-                                       const QString& text,
-                                       const QString& primaryKey,
-                                       const QString& altKey,
-                                       const QString& groupId,
-                                       bool checkable,
-                                       bool autoRepeat,
-                                       bool global)*/
-
 }
 
 QAction *MobileGui::getGuiAction(const QString &actionName)
