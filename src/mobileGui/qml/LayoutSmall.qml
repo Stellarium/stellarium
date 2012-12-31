@@ -41,8 +41,7 @@ Item {
 
 		Rectangle {
 			anchors.fill: parent
-			color: "black"
-			opacity: 0.3
+            color:"#55000000"
 		}
 
 		Item
@@ -263,19 +262,26 @@ Item {
 		model:
 			ListModel {
 				ListElement { action: "actionShow_Night_Mode"
-							  text: "Night mode"}
-				ListElement { action: ""
-							  text: "Sky"}
-				ListElement { action: ""
-							  text: "View"}
-				ListElement { action: ""
-							  text: "Plugins"}
-				ListElement { action: ""
-							  text: "Date / Time"}
-				ListElement { action: ""
-							  text: "Location"}
-				ListElement { action: ""
-							  text: "Settings"}
+                              useActionText: true
+                              imageSource: "image://mobileGui/nightMode"}
+                ListElement { action: "actionSky_Dialog"
+                              useActionText: true
+                              imageSource: "image://mobileGui/sky"}
+                ListElement { action: "actionView_Dialog"
+                              useActionText: true
+                              imageSource: "image://mobileGui/viewdialog"}
+                ListElement { action: "actionPlugins_Dialog"
+                              useActionText: true
+                              imageSource: "image://mobileGui/plugins"}
+                ListElement { action: "actionDateTime_Dialog"
+                              useActionText: true
+                              imageSource: "image://mobileGui/datetime"}
+                ListElement { action: "actionLocations_Dialog"
+                              useActionText: true
+                              imageSource: "image://mobileGui/location"}
+                ListElement { action: "actionSettings_Dialog"
+                              useActionText: true
+                              imageSource: "image://mobileGui/settings"}
 			}
 	}
 

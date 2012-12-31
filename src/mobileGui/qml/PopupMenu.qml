@@ -9,7 +9,8 @@ Item {
 	property ListModel model //the menu model to display
 
 	property int lineHeight: dp(48)  //the height of each item
-	property int fontSize: dp(14)
+    property int imageSize: dp(36) //size (rather, either height or width) of images for each item (if they have them)
+    property int fontSize: dp(18)
 
 	anchors.fill: parent
 
@@ -21,10 +22,10 @@ Item {
 
 	state: "dialog"
 
-	MouseArea {
-		anchors.fill: parent
-		onClicked: popupMenu.opacity = 0;
-	}
+    MouseArea {
+        anchors.fill: parent
+        onClicked: popupMenu.opacity = 0;
+    }
 
 	states: [
 		State {
@@ -47,7 +48,7 @@ Item {
 			 PropertyChanges {
 				 target: menu
 				 anchors.rightMargin: 0
-				 anchors.leftMargin: popupMenu.width - menu.widest
+                 anchors.leftMargin: popupMenu.width - menu.widest
 				 anchors.topMargin: dp(48)
 				 anchors.bottomMargin: popupMenu.height - (list.childrenRect.height + dp(48))
 			 }
@@ -56,19 +57,17 @@ Item {
 
 	function widestWidth (width)
 	{
-		if(width + dp(4) > menu.widest)
-		{
-			menu.widest = width + dp(4);
-		}
-
-		console.log("*B* " + width + " " + menu.widest);
+        if(width > menu.widest)
+        {
+            menu.widest = width;
+        }
 
 		return menu.widest;
 	}
 
-	Rectangle {
+    Rectangle {
 		id: menu
-		color:"#282828"
+        color:"#55000000"
 		anchors.fill: parent
 		property int widest: dp(54)
 
@@ -84,24 +83,65 @@ Item {
 			id: popupMenuDelegate
 			Clickable {
 				action: model.action
+                height: lineHeight
 
 				state: "UNCHECKABLE"
 
 				states: [
 					State {
 						name: "ENABLED"
-						when: checked && checkable
-						PropertyChanges { target: checkbox; checked: true }
+                        when: checked && checkable
+                        PropertyChanges { target: checkbox; checked: true }
+                        StateChangeScript {
+                                 script: {
+                                     if(model.imageSource != "" && image.sourceSize.height > 0)
+                                     {
+                                         image.opacity = 0.8;
+                                         checkbox.opacity = 0.0;
+                                     }
+                                     else
+                                     {
+                                         image.opacity = 0;
+                                         checkbox.opacity = 1;
+                                     }
+                                 }
+                             }
 					},
 					State {
 						name: "DISABLED"
-						when: !checked && checkable
+                        when: !checked && checkable
 						PropertyChanges { target: checkbox; checked: false }
+                        StateChangeScript {
+                                 script: {
+                                     if(model.imageSource != "" && image.sourceSize.height > 0)
+                                     {
+                                         image.opacity = 0.2;
+                                         checkbox.opacity = 0.0;
+                                     }
+                                     else
+                                     {
+                                         image.opacity = 0;
+                                         checkbox.opacity = 1;
+                                     }
+                                 }
+                             }
 					},
 					State {
 						name: "UNCHECKABLE"
-						when: !checkable
+                        when: !checkable
 						PropertyChanges { target: checkbox; opacity: 0	 }
+                        StateChangeScript {
+                                 script: {
+                                     if(model.imageSource != "" && image.sourceSize.height > 0)
+                                     {
+                                         image.opacity = 0.8;
+                                     }
+                                     else
+                                     {
+                                         image.opacity = 0;
+                                     }
+                                 }
+                             }
 					}
 				]
 
@@ -109,25 +149,36 @@ Item {
 				{
 					id: rowContent
 					height: lineHeight
-					width: childrenRect.width
-					anchors.horizontalCenter: parent.horizontalCenter
-					anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width - dp(24)
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: dp(12)
+
+                    Image {
+                        id: image
+                        fillMode: Image.PreserveAspectFit
+                        sourceSize.width: imageSize
+                        sourceSize.height: imageSize
+                        anchors.verticalCenter: parent.verticalCenter
+                        source: model.imageSource
+                    }
 
 					Text {
-						text: model.text
-						anchors.verticalCenter: parent.verticalCenter
-						font.pixelSize: popupMenu.fontSize
+                        id: textField
+                        text: model.useActionText ? baseGui.getGuiAction(model.action).text : model.text
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: popupMenu.fontSize
 						color: "white"
 					}
 
 					Checkbox
-					{
+                    {
 						id: checkbox
-						anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenter: parent.verticalCenter
 					}
 				}
 				onClicked: model.onClicked
-				width: widestWidth(rowContent.width)
+                width: widestWidth(rowContent.childrenRect.width + dp(24))
 			}
 		}
 

@@ -116,5 +116,11 @@ Item {
 			clickable.released();
 			highlightFadeOut.start();
 		}
+        onCanceled: {
+            if(clickable.opacity > 0)
+            {
+                highlightFadeOut.start();
+            }
+        }
 	}
 }

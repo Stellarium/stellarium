@@ -249,6 +249,15 @@ void MobileGui::initActions()
     shortcutMgr->addGuiAction("actionSet_Real_Time_Speed", true, N_("Set normal time rate"), "", "", group, true, false)->setChecked(core->getRealTimeSpeed());
     shortcutMgr->addGuiAction("actionReturn_To_Current_Time", true, N_("Set time to now"), "", "", group, true, false)->setChecked(core->getIsTimeNow());
     shortcutMgr->addGuiAction("actionShow_Night_Mode", true, N_("Night mode"), "", "", group, true, false)->setChecked(StelApp::getInstance().getVisionModeNight());
+
+    //Dialogs / screens (could be either one, really, depending on the screen's size)
+    group = N_("Dialogs");
+    shortcutMgr->addGuiAction("actionSky_Dialog", true, N_("Sky"), "", "", group, false, false);
+    shortcutMgr->addGuiAction("actionView_Dialog", true, N_("View"), "", "", group, false, false);
+    shortcutMgr->addGuiAction("actionPlugins_Dialog", true, N_("Plugins"), "", "", group, false, false);
+    shortcutMgr->addGuiAction("actionDateTime_Dialog", true, N_("Date / Time"), "", "", group, false, false);
+    shortcutMgr->addGuiAction("actionLocations_Dialog", true, N_("Locations"), "", "", group, false, false);
+    shortcutMgr->addGuiAction("actionSettings_Dialog", true, N_("Settings"), "", "", group, false, false);
 }
 
 QAction *MobileGui::getGuiAction(const QString &actionName)
