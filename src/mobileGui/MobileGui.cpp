@@ -47,6 +47,7 @@
 #include "StelAppGraphicsWidget.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
+#include "StelShortcutMgr.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -165,10 +166,10 @@ QProgressBar* MobileGui::addProgressBar()
 /*QVariant MobileGui::getAction(const QString &actionName)
 {
 	QVariant action = engine->rootContext()->contextProperty("action_" + actionName);
-	if(qobject_cast<QObject*>(action) == NULL)
+    if(qobject_cast<QObject*>(action) == NULL)
 	{
-		qWarning(QString("Could not find guiAction ").append(actionName));
-	}
+        qWarning(QString("Could not find guiAction ").append(actionName));
+    }
 }*/
 
 //void MobileGui::addButton(...)
@@ -216,10 +217,10 @@ void MobileGui::updateGui()
 
 	StelCore* core = StelApp::getInstance().getCore();
 
-    //getGuiActions("actionDecrease_Time_Speed")->setChecked(core->getTimeRate()<-0.99*StelCore::JD_SECOND);
-    //getGuiActions("actionIncrease_Time_Speed")->setChecked(core->getTimeRate()>1.01*StelCore::JD_SECOND);
-    //getGuiActions("actionSet_Real_Time_Speed")->setChecked(core->getRealTimeSpeed());
-    //getGuiActions("actionReturn_To_Current_Time")->setChecked(core->getIsTimeNow());
+    getGuiAction("actionDecrease_Time_Speed")->setChecked(core->getTimeRate()<-0.99*StelCore::JD_SECOND);
+    getGuiAction("actionIncrease_Time_Speed")->setChecked(core->getTimeRate()>1.01*StelCore::JD_SECOND);
+    getGuiAction("actionSet_Real_Time_Speed")->setChecked(core->getRealTimeSpeed());
+    getGuiAction("actionReturn_To_Current_Time")->setChecked(core->getIsTimeNow());
 
 	updated(); //signal the QML-side to update itself
 }
@@ -252,34 +253,52 @@ void MobileGui::connectSignals()
 {
 	StelCore* core = StelApp::getInstance().getCore();
 
-    //QObject::connect(rootObject, SIGNAL(fovChanged(qreal)), stelWrapper, SLOT(setFov(qreal)));
+    QObject::connect(rootObject, SIGNAL(fovChanged(qreal)), stelWrapper, SLOT(setFov(qreal)));
 
-    //QObject::connect(rootObject, SIGNAL(mousePressed(int, int, int, int, int)), this, SLOT(mousePress(int,int,int,int,int)));
-    //QObject::connect(rootObject, SIGNAL(mouseReleased(int, int, int, int, int)), this, SLOT(mouseRelease(int,int,int,int,int)));
-    //QObject::connect(rootObject, SIGNAL(mouseMoved(int, int, int, int, int)), this, SLOT(mouseMove(int,int,int,int,int)));
+    QObject::connect(rootObject, SIGNAL(mousePressed(int, int, int, int, int)), this, SLOT(mousePress(int,int,int,int,int)));
+    QObject::connect(rootObject, SIGNAL(mouseReleased(int, int, int, int, int)), this, SLOT(mouseRelease(int,int,int,int,int)));
+    QObject::connect(rootObject, SIGNAL(mouseMoved(int, int, int, int, int)), this, SLOT(mouseMove(int,int,int,int,int)));
 
-    //QObject::connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
-    //QObject::connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
-    //QObject::connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
-    //QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
-    //getGuiActions("actionReturn_To_Current_Time")->trigger(); //HACK: why is the app starting a few seconds behind real time?
+    QObject::connect(getGuiAction("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
+    QObject::connect(getGuiAction("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
+    QObject::connect(getGuiAction("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
+    QObject::connect(getGuiAction("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
+    getGuiAction("actionReturn_To_Current_Time")->trigger(); //HACK: why is the app starting a few seconds behind real time?
 
-    //connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
+    connect(getGuiAction("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 }
 
 void MobileGui::initActions()
 {
-    //This has to be rewritten. Rather than what was done before (hooking into addGuiActions in order to add an action into the GUI), I need... something new
-    // On second thought, was I even using the "action_..." objects? I don't think I was. I think I was just calling getGuiActions from QML directly. That makes things simpler...
-    //StelCore* core = StelApp::getInstance().getCore();
+    //Shortcuts are currently hardcoded. Ought they use the JSON shortcuts file like normal Stellarium?
+    StelCore* core = StelApp::getInstance().getCore();
 
     //StelApp::getInstance().getStelShortcutManager()->loadShortcuts();
 
-    //QString group = N_("Date and Time");
-    //addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, true, false)->setChecked(core->getTimeRate()<-0.99*StelCore::JD_SECOND);
-    //addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, true, false)->setChecked(core->getTimeRate()>1.01*StelCore::JD_SECOND);
-    //addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, true, false)->setChecked(core->getRealTimeSpeed());
-    //addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, true, false)->setChecked(core->getIsTimeNow());
-    //addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false)->setChecked(StelApp::getInstance().getVisionModeNight());
+    StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
 
+    QString group = N_("Date and Time");
+    shortcutMgr->addGuiAction("actionDecrease_Time_Speed", true, N_("Decrease time speed"), "", "", group, true, false)->setChecked(core->getTimeRate()<-0.99*StelCore::JD_SECOND);
+    shortcutMgr->addGuiAction("actionIncrease_Time_Speed", true, N_("Increase time speed"), "", "", group, true, false)->setChecked(core->getTimeRate()>1.01*StelCore::JD_SECOND);
+    shortcutMgr->addGuiAction("actionSet_Real_Time_Speed", true, N_("Set normal time rate"), "", "", group, true, false)->setChecked(core->getRealTimeSpeed());
+    shortcutMgr->addGuiAction("actionReturn_To_Current_Time", true, N_("Set time to now"), "", "", group, true, false)->setChecked(core->getIsTimeNow());
+    shortcutMgr->addGuiAction("actionShow_Night_Mode", true, N_("Night mode"), "", "", group, true, false)->setChecked(StelApp::getInstance().getVisionModeNight());
+
+    /*
+     *QAction* StelShortcutMgr::addGuiAction(const QString& actionId,
+                                       bool temporary,
+                                       const QString& text,
+                                       const QString& primaryKey,
+                                       const QString& altKey,
+                                       const QString& groupId,
+                                       bool checkable,
+                                       bool autoRepeat,
+                                       bool global)*/
+
+}
+
+QAction *MobileGui::getGuiAction(const QString &actionName)
+{
+    StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
+    return shortcutMgr->getGuiAction(actionName);
 }

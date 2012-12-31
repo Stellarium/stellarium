@@ -34,7 +34,7 @@ Item {
 	/* Placeholder values so the designer can be used;
 	  these are set to fill 100% of the screen by the
 	  MobileGui C++ class */
-	width: 480
+	width: 460
 	height: 800
 
 	////////////////////////

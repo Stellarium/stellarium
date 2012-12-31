@@ -54,12 +54,12 @@ Item {
 	}
 
 	onActionChanged : {
-		clicked.connect(baseGui.getGuiActions(action).toggle());
-		clicked.connect(baseGui.getGuiActions(action).trigger());
+		clicked.connect(baseGui.getGuiAction(action).toggle());
+		clicked.connect(baseGui.getGuiAction(action).trigger());
 
-		checkable = baseGui.getGuiActions(action).checkable;
+		checkable = baseGui.getGuiAction(action).checkable;
 
-		if(baseGui.getGuiActions(action).checked)
+		if(baseGui.getGuiAction(action).checked)
 		{
 			checked = true;
 		}
@@ -73,7 +73,7 @@ Item {
 	{
 		if(action != "")
 		{
-			baseGui.getGuiActions(action).trigger();
+			baseGui.getGuiAction(action).trigger();
 		}
 		clicked();
 
@@ -84,11 +84,11 @@ Item {
 
 	Connections
 	{
-		target: baseGui.getGuiActions(action)
+		target: baseGui.getGuiAction(action)
 		onToggled: {
-			//checkable = baseGui.getGuiActions(action).checkable;
+			//checkable = baseGui.getGuiAction(action).checkable;
 
-			if(baseGui.getGuiActions(action).checked)
+			if(baseGui.getGuiAction(action).checked)
 			{
 				checked = true
 			}
@@ -100,7 +100,7 @@ Item {
 
 		onTriggered: {
 			//Flash the highlight or something?
-			//checkable = baseGui.getGuiActions(action).checkable;
+			//checkable = baseGui.getGuiAction(action).checkable;
 		}
 	}
 

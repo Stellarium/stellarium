@@ -77,10 +77,13 @@ public:
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
-    //Q_INVOKABLE QAction* getGuiActions(const QString& actionName);
+    Q_INVOKABLE QAction* getGuiAction(const QString &actionName);
 
 	/* things to access from QML */
-	//Q_INVOKABLE QVariant getAction(const QString& actionName);
+    //Q_INVOKABLE QVariant getAction(const QString& actionName);
+
+
+
 
 public slots:
 	//! Show whether the GUI is visible.
