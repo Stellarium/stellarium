@@ -92,6 +92,8 @@ void StelMainWindow::init(QSettings* conf)
 	resize(width, height);
 
 #ifdef ANDROID
+    setFullScreen(false);
+#else
 	if (conf->value("video/fullscreen", true).toBool())
 	{
 		setFullScreen(true);
@@ -102,9 +104,7 @@ void StelMainWindow::init(QSettings* conf)
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
-	}
-#else
-    setFullScreen(false);
+    }
 #endif
 
 	show();
