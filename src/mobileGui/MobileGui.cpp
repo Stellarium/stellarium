@@ -38,16 +38,22 @@
 #include "SystemDisplayInfo.hpp"
 #include "UpdateSignallingItem.hpp"
 #include "MobileImageProvider.hpp"
+#include "MenuListModel.hpp"
 
 #include "StelWrapper.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelAppGraphicsWidget.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
 #include "StelShortcutMgr.hpp"
+
+#include "StelMainWindow.hpp"
+
+//Actions
+#include "NebulaMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -60,7 +66,9 @@ MobileGui::MobileGui() : topLevelGraphicsWidget(NULL),
 	engine(NULL), component(NULL), rootObject(NULL), displayInfo(NULL),
 	stelWrapper(NULL)
 {
-
+    skyModel = new MenuListModel(this, N_("Sky"));
+    viewModel = new MenuListModel(this, N_("View"));
+    pluginsModel = new MenuListModel(this, N_("Plugins"));
 }
 
 MobileGui::~MobileGui()
@@ -75,6 +83,8 @@ MobileGui::~MobileGui()
 
 void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget)
 {
+    qRegisterMetaType<MenuListModel*>("MenuListModel*");
+
 	this->topLevelGraphicsWidget = topLevelGraphicsWidget;
 	StelGuiBase::init(topLevelGraphicsWidget, stelAppGraphicsWidget);
 
@@ -95,6 +105,10 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	engine->rootContext()->setContextProperty("baseGui", this);
 
 	initActions();
+
+    engine->rootContext()->setContextProperty("skyModel",  skyModel);
+    engine->rootContext()->setContextProperty("viewModel",  viewModel);
+    engine->rootContext()->setContextProperty("pluginsModel",  pluginsModel);
 
 	component = new QDeclarativeComponent(engine, QUrl("qrc:/qml/MobileGui.qml"));
 
@@ -219,12 +233,14 @@ void MobileGui::connectSignals()
 {
 	StelCore* core = StelApp::getInstance().getCore();
 
+    //Sky input
     QObject::connect(rootObject, SIGNAL(fovChanged(qreal)), stelWrapper, SLOT(setFov(qreal)));
 
     QObject::connect(rootObject, SIGNAL(mousePressed(int, int, int, int, int)), this, SLOT(mousePress(int,int,int,int,int)));
     QObject::connect(rootObject, SIGNAL(mouseReleased(int, int, int, int, int)), this, SLOT(mouseRelease(int,int,int,int,int)));
     QObject::connect(rootObject, SIGNAL(mouseMoved(int, int, int, int, int)), this, SLOT(mouseMove(int,int,int,int,int)));
 
+    //Action bar
     QObject::connect(getGuiAction("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
     QObject::connect(getGuiAction("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
     QObject::connect(getGuiAction("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
@@ -232,6 +248,10 @@ void MobileGui::connectSignals()
     getGuiAction("actionReturn_To_Current_Time")->trigger(); //HACK: why is the app starting a few seconds behind real time?
 
     connect(getGuiAction("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
+
+    //Sky dialog
+    NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+    connect(getGuiAction("actionShow_Nebulas"), SIGNAL(toggled(bool)), nmgr, SLOT(setFlagHints(bool)));
 }
 
 void MobileGui::initActions()
@@ -258,10 +278,37 @@ void MobileGui::initActions()
     shortcutMgr->addGuiAction("actionDateTime_Dialog", true, N_("Date / Time"), "", "", group, false, false);
     shortcutMgr->addGuiAction("actionLocations_Dialog", true, N_("Locations"), "", "", group, false, false);
     shortcutMgr->addGuiAction("actionSettings_Dialog", true, N_("Settings"), "", "", group, false, false);
+
+    //Setup the Sky and View dialogs
+    group = N_("SkyDialog");
+    shortcutMgr->addGuiAction("actionShow_Nebulas", true, N_("Nebulas"), "", "", group, true);
+
+    skyModel->addRow(getGuiAction("actionShow_Nebulas"), "image://mobileGui/showNebulas");
+    viewModel->addRow(getGuiAction("actionShow_Nebulas"), "image://mobileGui/showNebulas");
 }
 
 QAction *MobileGui::getGuiAction(const QString &actionName)
 {
     StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
     return shortcutMgr->getGuiAction(actionName);
+}
+
+void MobileGui::addPluginButton(const QString& imageSource, QAction* action)
+{
+    addGuiButton(imageSource, action, BG_Plugins);
+}
+
+void MobileGui::addPluginButton(const QString& imageSource, QString& actionName)
+{
+    addGuiButton(imageSource, actionName, BG_Plugins);
+}
+
+void MobileGui::addGuiButton(const QString& imageSource, QAction* action, ButtonGroup group)
+{
+
+}
+
+void MobileGui::addGuiButton(const QString& imageSource, QString& actionName, ButtonGroup group)
+{
+
 }

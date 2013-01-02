@@ -30,15 +30,20 @@ class QDeclarativeComponent;
 class QGraphicsObject;
 class SystemDisplayInfo;
 class StelWrapper;
+class MenuListModel;
 
 //! @class MobileGui
 //! Main class for the MobileGui, using QML/QDeclarative on top of the QGraphicsView
 class MobileGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
+    Q_ENUMS(ButtonGroup)
+
 public:
 	MobileGui();
 	virtual ~MobileGui();
+
+    enum ButtonGroup { BG_Sky, BG_View, BG_Plugins } ;
 
 	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget);
 
@@ -79,6 +84,9 @@ public:
     //! @return a pointer on the QAction object or NULL if don't exist
     Q_INVOKABLE QAction* getGuiAction(const QString &actionName);
 
+    void addPluginButton(const QString& imageSource, QAction* action);
+    void addPluginButton(const QString& imageSource, QString& actionName);
+
 public slots:
 	//! Show whether the GUI is visible.
 	//! @param b when true, GUI will be shown, else it will be hidden.
@@ -99,6 +107,14 @@ protected:
 	//! Translate all texts to the new Locale.
 	void updateI18n();
 
+    //! Add a button directly to one of the button dialogs.
+    //! @param onImageSource path to the image to display when the action is "checked", or if it's uncheckable
+    //! @param offImageSource path to the image to display when the action is unchecked
+    //! @param action the action to tie to the button
+    //! @param group the group in which to throw this button. Because of size constraints, mobileGui restricts the number of these
+    void addGuiButton(const QString& imageSource, QAction* action, ButtonGroup group);
+    void addGuiButton(const QString& imageSource, QString& actionName, ButtonGroup group);
+
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
 	QDeclarativeEngine* engine;
@@ -107,6 +123,10 @@ private:
 	SystemDisplayInfo * displayInfo; //worth keeping in memory?
 	StelWrapper * stelWrapper;
 	QSize guiSize;
+
+    MenuListModel * skyModel;
+    MenuListModel * viewModel;
+    MenuListModel * pluginsModel;
 
 	void connectSignals();
 	void initActions();

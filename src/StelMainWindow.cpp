@@ -90,6 +90,8 @@ void StelMainWindow::init(QSettings* conf)
 	int width = conf->value("video/screen_w", 800).toInt();
 	int height = conf->value("video/screen_h", 600).toInt();
 	resize(width, height);
+
+#ifdef ANDROID
 	if (conf->value("video/fullscreen", true).toBool())
 	{
 		setFullScreen(true);
@@ -101,6 +103,10 @@ void StelMainWindow::init(QSettings* conf)
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
 	}
+#else
+    setFullScreen(false);
+#endif
+
 	show();
 	// Process the event to make the window visible and create the renderer.
 	QCoreApplication::processEvents();

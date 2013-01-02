@@ -58,7 +58,7 @@ public:
 	virtual bool getVisible() const =0;
 	//! Show wether the Gui is currently used.
 	//! This can then be used to optimize the rendering to increase reactivity.
-	virtual bool isCurrentlyUsed() const =0;
+    virtual bool isCurrentlyUsed() const =0;
 
 
 protected:

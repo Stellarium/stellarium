@@ -123,7 +123,7 @@ Item {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					onClicked: barMenu.opacity = 1
+                    onClicked: barMenu.opacity = 1
 					imageSource: "image://mobileGui/menu"
 					imageSize: dp(32)
 				}
@@ -152,7 +152,7 @@ Item {
 					width: minButtonWidth()
 					imageSource: "image://mobileGui/rewind"
 					imageSize: dp(32)
-					action: "actionDecrease_Time_Speed"
+					action: baseGui.getGuiAction("actionDecrease_Time_Speed")
 				}
 				BarIcon {
 					anchors.top: parent.top
@@ -160,7 +160,7 @@ Item {
 					width: minButtonWidth()
 					imageSource: "image://mobileGui/play"
 					imageSize: dp(32)
-					action: "actionSet_Real_Time_Speed"
+					action: baseGui.getGuiAction("actionSet_Real_Time_Speed")
 				}
 				BarIcon {
 					anchors.top: parent.top
@@ -168,7 +168,7 @@ Item {
 					width: minButtonWidth()
 					imageSource: "image://mobileGui/currenttime"
 					imageSize: dp(32)
-					action: "actionReturn_To_Current_Time"
+					action: baseGui.getGuiAction("actionReturn_To_Current_Time")
 				}
 				BarIcon {
 					anchors.top: parent.top
@@ -176,7 +176,7 @@ Item {
 					width: minButtonWidth()
 					imageSource: "image://mobileGui/fastforward"
 					imageSize: dp(32)
-					action: "actionIncrease_Time_Speed"
+					action: baseGui.getGuiAction("actionIncrease_Time_Speed")
 				}
 			}
 
@@ -248,42 +248,104 @@ Item {
 						}
 					}
 				}
-			}
+            }
 		}
 
 	}
 
-	PopupMenu
-	{
+    PopupMenu {
 		id: barMenu
 		lineHeight: dp(48)
 		position: barMenu.positionTopRight
 		opacity: 0 //hook this up to state change for pretty anims?
-		model:
-			ListModel {
-				ListElement { action: "actionShow_Night_Mode"
+        model:
+            ListModel {
+                ListElement { actionString: "actionShow_Night_Mode"
                               useActionText: true
                               imageSource: "image://mobileGui/nightMode"}
-                ListElement { action: "actionSky_Dialog"
+                ListElement { actionString: "actionSky_Dialog"
                               useActionText: true
                               imageSource: "image://mobileGui/sky"}
-                ListElement { action: "actionView_Dialog"
+                ListElement { actionString: "actionView_Dialog"
                               useActionText: true
                               imageSource: "image://mobileGui/viewdialog"}
-                ListElement { action: "actionPlugins_Dialog"
+                ListElement { actionString: "actionPlugins_Dialog"
                               useActionText: true
                               imageSource: "image://mobileGui/plugins"}
-                ListElement { action: "actionDateTime_Dialog"
+                ListElement { actionString: "actionDateTime_Dialog"
                               useActionText: true
                               imageSource: "image://mobileGui/datetime"}
-                ListElement { action: "actionLocations_Dialog"
+                ListElement { actionString: "actionLocations_Dialog"
                               useActionText: true
                               imageSource: "image://mobileGui/location"}
-                ListElement { action: "actionSettings_Dialog"
+                ListElement { actionString: "actionSettings_Dialog"
                               useActionText: true
                               imageSource: "image://mobileGui/settings"}
-			}
+            }
 	}
+
+    PopupMenu {
+        id: skyMenu
+        lineHeight: dp(48)
+        position: barMenu.positionTopRight
+        opacity: 0
+        model: skyModel
+
+        Connections
+        {
+            target: baseGui.getGuiAction("actionSky_Dialog")
+
+            onTriggered: {
+                if(barMenu.opacity > 0)
+                {
+                    skyMenu.opacity = 1;
+                    barMenu.opacity = 0;
+                }
+            }
+        }
+    }
+
+    PopupMenu {
+        id: viewMenu
+        lineHeight: dp(48)
+        position: barMenu.positionTopRight
+        opacity: 0
+        model: viewModel
+
+        Connections
+        {
+            target: baseGui.getGuiAction("actionView_Dialog")
+
+            onTriggered: {
+                if(barMenu.opacity > 0)
+                {
+                    viewMenu.opacity = 1;
+                    barMenu.opacity = 0;
+                }
+            }
+        }
+    }
+
+    PopupMenu {
+        id: pluginsMenu
+        lineHeight: dp(48)
+        position: barMenu.positionTopRight
+        opacity: 0
+        model: pluginsModel
+
+        Connections
+        {
+            target: baseGui.getGuiAction("actionPlugins_Dialog")
+
+            onTriggered: {
+                if(barMenu.opacity > 0)
+                {
+                    pluginsMenu.opacity = 1;
+                    barMenu.opacity = 0;
+                }
+            }
+        }
+    }
 
 
 	Item {

@@ -6,7 +6,7 @@ import QtQuick 1.0
 Item {
 	id:popupMenu
 
-	property ListModel model //the menu model to display
+    property variant model //the menu model to display
 
 	property int lineHeight: dp(48)  //the height of each item
     property int imageSize: dp(36) //size (rather, either height or width) of images for each item (if they have them)
@@ -73,16 +73,18 @@ Item {
 
 		/* Expected model format:
 		ListModel {
-				 ListElement { action: "some_action";
-							   text: "label";
-							   onClicked: function; }
+                 ListElement { action: baseGui.getGuiAction("actionSettings_Dialog")
+                               imageSource: "image://mobileGui/settings"
+                               overrideActionText: true //if false or omitted, the action's text property is used instead of the "text" property here
+                               text: "Settings" }
 				 ...
 			 }*/
 
 		Component {
 			id: popupMenuDelegate
 			Clickable {
-				action: model.action
+                id: myClickable
+                action: model.action == undefined ? baseGui.getGuiAction(model.actionString) : model.action
                 height: lineHeight
 
 				state: "UNCHECKABLE"
@@ -165,11 +167,11 @@ Item {
 
 					Text {
                         id: textField
-                        text: model.useActionText ? baseGui.getGuiAction(model.action).text : model.text
+                        text: myClickable.action.text
                         anchors.verticalCenter: parent.verticalCenter
                         font.pixelSize: popupMenu.fontSize
 						color: "white"
-					}
+                    }
 
 					Checkbox
                     {
@@ -177,7 +179,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
 					}
 				}
-				onClicked: model.onClicked
+                //onClicked: model.onClicked
                 width: widestWidth(rowContent.childrenRect.width + dp(24))
 			}
 		}

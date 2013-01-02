@@ -17,7 +17,7 @@ Item {
 	//#33B5E5
 	//#0099CC
 	property color highlightColor: "#33B5E5"
-	property string action: ""
+    property variant action
 
 	property real bgOpacity: 0.3
 
@@ -54,26 +54,29 @@ Item {
 	}
 
 	onActionChanged : {
-		clicked.connect(baseGui.getGuiAction(action).toggle());
-		clicked.connect(baseGui.getGuiAction(action).trigger());
+        if(action != undefined)
+        {
+            clicked.connect(action.toggle());
+            clicked.connect(action.trigger());
 
-		checkable = baseGui.getGuiAction(action).checkable;
+            checkable = action.checkable;
 
-		if(baseGui.getGuiAction(action).checked)
-		{
-			checked = true;
-		}
-		else
-		{
-			checked = false;
-		}
+            if(action.checked)
+            {
+                checked = true;
+            }
+            else
+            {
+                checked = false;
+            }
+        }
 	}
 
 	function processClick()
 	{
-		if(action != "")
+        if(action != undefined)
 		{
-			baseGui.getGuiAction(action).trigger();
+            action.trigger();
 		}
 		clicked();
 
@@ -84,23 +87,23 @@ Item {
 
 	Connections
 	{
-		target: baseGui.getGuiAction(action)
-		onToggled: {
-			//checkable = baseGui.getGuiAction(action).checkable;
+        target: action
+        onToggled: {
+			//checkable = action.checkable;
 
-			if(baseGui.getGuiAction(action).checked)
+            if(action != undefined && action.checked)
 			{
 				checked = true
 			}
 			else
-			{
+            {
 				checked = false;
 			}
 		}
 
-		onTriggered: {
+        onTriggered: {
 			//Flash the highlight or something?
-			//checkable = baseGui.getGuiAction(action).checkable;
+			//checkable = action.checkable;
 		}
 	}
 

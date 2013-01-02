@@ -494,6 +494,8 @@ ENDIF()
 ############################# Mobile GUI plugin compilation #################################
 #############################################################################################
 IF (GUI_MODE STREQUAL "Mobile")
+        ADD_DEFINITIONS(-DMOBILE_GUI)
+
 	SET(mobilegui_SRCS
 		mobileGui/MobileGui.hpp
 		mobileGui/MobileGui.cpp
@@ -504,11 +506,14 @@ IF (GUI_MODE STREQUAL "Mobile")
 		mobileGui/UpdateSignallingItem.hpp
 		mobileGui/UpdateSignallingItem.cpp
 		mobileGui/MobileImageProvider.hpp
-		mobileGui/MobileImageProvider.cpp)
+                mobileGui/MobileImageProvider.cpp
+                mobileGui/MenuListModel.hpp
+                mobileGui/MenuListModel.cpp)
 	SET(mobilegui_MOC_HDRS
 		mobileGui/MobileGui.hpp
 		mobileGui/SystemDisplayInfo.hpp
-		mobileGui/StelWrapper.hpp)
+                mobileGui/StelWrapper.hpp
+                mobileGui/MenuListModel.hpp)
 	SET(mobilegui_RES
 		mobileGui/qml/qmlResources.qrc)
 	QT4_ADD_RESOURCES(mobilegui_RES_CXX ${mobilegui_RES})
