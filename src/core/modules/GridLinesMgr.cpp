@@ -592,11 +592,23 @@ void SkyLine::draw(StelCore *core, StelRenderer* renderer) const
 	// Get the bounding halfspace
 	const SphericalCap& viewPortSphericalCap = projector->getBoundingCap();
 
-	const Vec4f skyLineColor(color[0], color[1], color[2], fader.getInterstate());
+	Vec4f textColor, skyLineColor;
+	if (StelApp::getInstance().getVisionModeNight())
+	{
+		// instead of a filter which just zeros G&B, set the red
+		// value to the mean brightness of RGB.
+		float red = (color[0] + color[1] + color[2]) / 3.0;
+		textColor = Vec4f(red, 0.0f, 0.0f, 0.0f);
+		skyLineColor = Vec4f(red, 0.0f, 0.0f, fader.getInterstate());
+	}
+	else
+	{
+		skyLineColor = Vec4f(color[0], color[1], color[2], fader.getInterstate());
+		textColor = Vec4f(color[0], color[1], color[2], 0.0f);
+	}
 	renderer->setGlobalColor(skyLineColor);
 	renderer->setBlendMode(BlendMode_Alpha);
 
-	Vec4f textColor(color[0], color[1], color[2], 0);	
 	textColor *= 2;
 	textColor[3] = fader.getInterstate();
 
