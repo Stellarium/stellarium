@@ -1123,90 +1123,93 @@ double decYear2DeltaT(double y)
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus]
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+
+	double r = 0.;
+
 	if (y < -1999 || y > 3000)
 	{
-		return 0.;
+		r = 0.;
 	}
 	else if (y < -500)
 	{
-		return -20 + 32 * std::pow((y-1820)/100. ,2.0);
+		r = -20 + 32 * std::pow((y-1820)/100. ,2.0);
 	}
 	else if (y < 500)
 	{
 		double u = y/100;
-		return(10583.6 - 1014.41 * u + 33.78311 * std::pow(u,2) - 5.952053 * std::pow(u,3)
+		r = (10583.6 - 1014.41 * u + 33.78311 * std::pow(u,2) - 5.952053 * std::pow(u,3)
 		       - 0.1798452 * std::pow(u,4) + 0.022174192 * std::pow(u,5) + 0.0090316521 * std::pow(u,6));
 	}
 	else if (y < 1600)
 	{
 		double u = (y-1000)/100;
-		return(1574.2 - 556.01 * u + 71.23472 * std::pow(u,2) + 0.319781 * std::pow(u,3)
+		r = (1574.2 - 556.01 * u + 71.23472 * std::pow(u,2) + 0.319781 * std::pow(u,3)
 		       - 0.8503463 * std::pow(u,4) - 0.005050998 * std::pow(u,5) + 0.0083572073 * std::pow(u,6));
 	}
 	else if (y < 1700)
 	{
 		double t = y - 1600;
-		return(120 - 0.9808 * t - 0.01532 * std::pow(t,2) + std::pow(t,3) / 7129);
+		r = (120 - 0.9808 * t - 0.01532 * std::pow(t,2) + std::pow(t,3) / 7129);
 	}
 	else if (y < 1800)
 	{
 		double t = y - 1700;
-		return(8.83 + 0.1603 * t - 0.0059285 * std::pow(t,2) + 0.00013336 * std::pow(t,3) - std::pow(t,4) / 1174000);
+		r = (8.83 + 0.1603 * t - 0.0059285 * std::pow(t,2) + 0.00013336 * std::pow(t,3) - std::pow(t,4) / 1174000);
 	}
 	else if (y < 1860)
 	{
 		double t = y - 1800;
-		return(13.72 - 0.332447 * t + 0.0068612 * std::pow(t,2) + 0.0041116 * std::pow(t,3) - 0.00037436 * std::pow(t,4)
+		r = (13.72 - 0.332447 * t + 0.0068612 * std::pow(t,2) + 0.0041116 * std::pow(t,3) - 0.00037436 * std::pow(t,4)
 		       + 0.0000121272 * std::pow(t,5) - 0.0000001699 * std::pow(t,6) + 0.000000000875 * std::pow(t,7));
 	}
 	else if (y < 1900)
 	{
 		double t = y - 1860;
-		return (7.62 + 0.5737 * t - 0.251754 * std::pow(t,2) + 0.01680668 * std::pow(t,3)
+		r = (7.62 + 0.5737 * t - 0.251754 * std::pow(t,2) + 0.01680668 * std::pow(t,3)
 			-0.0004473624 * std::pow(t,4) + std::pow(t,5) / 233174);
 	}
 	else if (y < 1920)
 	{
 		double t = y - 1900;
-		return (-2.79 + 1.494119 * t - 0.0598939 * std::pow(t,2) + 0.0061966 * std::pow(t,3) - 0.000197 * std::pow(t,4));
+		r = (-2.79 + 1.494119 * t - 0.0598939 * std::pow(t,2) + 0.0061966 * std::pow(t,3) - 0.000197 * std::pow(t,4));
 	}
 	else if (y < 1941)
 	{
 		double t = y - 1920;
-		return (21.20 + 0.84493*t - 0.076100 * std::pow(t,2) + 0.0020936 * std::pow(t,3));
+		r = (21.20 + 0.84493*t - 0.076100 * std::pow(t,2) + 0.0020936 * std::pow(t,3));
 	}
 	else if (y < 1961)
 	{
 		double t = y - 1950;
-		return (29.07 + 0.407*t - std::pow(t,2)/233 + std::pow(t,3) / 2547);
+		r = (29.07 + 0.407*t - std::pow(t,2)/233 + std::pow(t,3) / 2547);
 	}
 	else if (y < 1986)
 	{
 		double t = y - 1975;
-		return (45.45 + 1.067*t - std::pow(t,2)/260 - std::pow(t,3) / 718);
+		r = (45.45 + 1.067*t - std::pow(t,2)/260 - std::pow(t,3) / 718);
 	}
 	else if (y < 2005)
 	{
 		double t = y - 2000;
-		return (63.86 + 0.3345 * t - 0.060374 * std::pow(t,2) + 0.0017275 * std::pow(t,3) + 0.000651814 * std::pow(t,4)
+		r = (63.86 + 0.3345 * t - 0.060374 * std::pow(t,2) + 0.0017275 * std::pow(t,3) + 0.000651814 * std::pow(t,4)
 			+ 0.00002373599 * std::pow(t,5));
 	}
 	else if (y < 2050)
 	{
 		double t = y - 2000;
-		return (62.92 + 0.32217 * t + 0.005589 * std::pow(t,2));
+		r = (62.92 + 0.32217 * t + 0.005589 * std::pow(t,2));
 	}
 	else if (y < 2150)
 	{
-		return (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
+		r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
 	}
 	else if (y < 3000)
 	{
 		double u = (y-1820)/100.;
-		return (-20 + 32 * std::pow(u,2));
+		r = (-20 + 32 * std::pow(u,2));
 	}
-	else // prevent compiler warning
-		return 0.0;
+
+	return r;
 }
 
 double getDeltaT(double jDay)
