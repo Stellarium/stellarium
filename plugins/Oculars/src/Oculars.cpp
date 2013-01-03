@@ -1419,7 +1419,10 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 
 	// set up drawing
-	renderer->setGlobalColor(0.8f, 0.48f, 0.0f);
+	if (StelApp::getInstance().getVisionModeNight())
+		renderer->setGlobalColor(0.8f, 0.0f, 0.0f);
+	else
+		renderer->setGlobalColor(0.8f, 0.48f, 0.0f);
 	renderer->setBlendMode(BlendMode_Alpha);
 
 	// Get the X & Y positions, and the line height
