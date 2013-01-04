@@ -330,17 +330,20 @@ public slots:
 	//! Add one sidereal day to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void addSiderealDay();
-	//! Add one sidereal week to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Add one sidereal week (7 sidereal days) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
 	void addSiderealWeek();
-	//! Add one sidereal month to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Add one sidereal month (1/12 of sidereal year) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
 	void addSiderealMonth();
 	//! Add one sidereal year to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! on the current planetary body on which the observer is located. Sidereal year
+	//! connected to orbital period of planets.
 	void addSiderealYear();
-	//! Add one sidereal century to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Add one sidereal century (100 sidereal years) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
 	void addSiderealCentury();
 
 	//! Subtract one [Earth, solar] hour to the current simulation time.
@@ -353,17 +356,20 @@ public slots:
 	//! Subtract one sidereal day to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void subtractSiderealDay();
-	//! Subtract one sidereal week to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Subtract one sidereal week (7 sidereal days) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
 	void subtractSiderealWeek();
-	//! Subtract one sidereal month to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Subtract one sidereal month (1/12 of sidereal year) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
 	void subtractSiderealMonth();
 	//! Subtract one sidereal year to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! on the current planetary body on which the observer is located. Sidereal year
+	//! connected to orbital period of planets.
 	void subtractSiderealYear();
-	//! Subtract one sidereal century to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Subtract one sidereal century (100 sidereal years) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
 	void subtractSiderealCentury();
 
 	//! Add one synodic month to the simulation time.

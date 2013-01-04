@@ -920,7 +920,7 @@ void StelCore::addSiderealWeek()
 
 void StelCore::addSiderealMonth()
 {
-	double days = 27.321661;
+	double days = 30.4380302503;
 	const PlanetP& home = position->getHomePlanet();
 	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod()/12;
@@ -1010,7 +1010,7 @@ void StelCore::subtractSiderealWeek()
 
 void StelCore::subtractSiderealMonth()
 {
-	double days = -27.321661;
+	double days = -30.4380302503;
 	const PlanetP& home = position->getHomePlanet();
 	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
 		days = -1*(home->getSiderealPeriod()/12);
