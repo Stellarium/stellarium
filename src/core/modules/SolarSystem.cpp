@@ -125,7 +125,7 @@ void SolarSystem::init()
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
 	double JD = StelUtils::getJDFromSystem();
-	computePositions(JD - StelUtils::getDeltaT(JD));
+	computePositions(JD + StelUtils::getDeltaT(JD));
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
@@ -1509,7 +1509,7 @@ void SolarSystem::reloadPlanets()
 	// Re-load the ssystem.ini file
 	loadPlanets();
 	double JD = StelUtils::getJDFromSystem();
-	computePositions(JD - StelUtils::getDeltaT(JD));
+	computePositions(JD + StelUtils::getDeltaT(JD));
 	setSelected("");
 	recreateTrails();
 	
