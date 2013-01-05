@@ -52,7 +52,7 @@
 
 #include <cmath>
 
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 extern void qt_set_sequence_auto_mnemonic(bool b);
 #endif
 
@@ -132,7 +132,7 @@ Oculars::Oculars():
 
 	setObjectName("Oculars");
 
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 	qt_set_sequence_auto_mnemonic(true);
 #endif
 }
