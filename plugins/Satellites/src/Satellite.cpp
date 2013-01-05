@@ -241,7 +241,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags & Extra1)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("artifical satellite")) << "<br/>";
+		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
 	}
 	
 	// Ra/Dec etc.
