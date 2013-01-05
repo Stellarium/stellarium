@@ -40,7 +40,8 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 						 void* auserDataPtr,
 						 OsculatingFunctType *osculatingFunc,
 						 bool acloseOrbit,
-						 bool hidden)
+						 bool hidden,
+						 const QString& pType)
 						: Planet (englishName,
 								  flagLighting,
 								  radius,
@@ -53,7 +54,8 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 								  osculatingFunc,
 								  acloseOrbit,
 								  hidden,
-								  false) //No atmosphere
+								  false, //No atmosphere
+								  pType)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
@@ -189,6 +191,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			oss << QString(q_("Provisional designation: %1")).arg(provisionalDesignationHtml);
 			oss << "<br>";
 		}
+	}
+
+	if (flags&Extra1)
+	{
+		if (pType.length()>0)
+			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
 	}
 
 	if (flags&Magnitude)
