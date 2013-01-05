@@ -39,7 +39,8 @@ Comet::Comet(const QString& englishName,
 						 void* auserDataPtr,
 						 OsculatingFunctType *osculatingFunc,
 						 bool acloseOrbit,
-						 bool hidden)
+						 bool hidden,
+						 const QString& pType)
 						: Planet (englishName,
 								  flagLighting,
 								  radius,
@@ -52,7 +53,8 @@ Comet::Comet(const QString& englishName,
 								  osculatingFunc,
 								  acloseOrbit,
 								  hidden,
-								  false) //No atmosphere
+								  false, //No atmosphere
+								  pType)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
@@ -109,6 +111,12 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		if (sphereScale != 1.f)
 			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 		oss << "</h2>";
+	}
+
+	if (flags&Extra1)
+	{
+		if (pType.length()>0)
+			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
 	}
 
 	if (flags&Magnitude)
