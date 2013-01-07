@@ -338,7 +338,8 @@ Planet::Planet(const QString& englishName,
                OsculatingFunctType *osculatingFunc,
                bool acloseOrbit,
                bool hidden,
-               bool hasAtmosphere)
+	       bool hasAtmosphere,
+	       const QString& pType)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
@@ -353,6 +354,7 @@ Planet::Planet(const QString& englishName,
 	  parent(NULL),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
+	  pType(pType),
 	  unlitSphere(NULL),
 	  litSphere(NULL)
 {
@@ -428,6 +430,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (sphereScale != 1.f)
 			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 		oss << "</h2>";
+	}
+
+	if (flags&Extra1)
+	{
+		if (pType.length()>0)
+			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
 	}
 
 	if (flags&Magnitude)

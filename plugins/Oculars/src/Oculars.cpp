@@ -52,7 +52,7 @@
 
 #include <cmath>
 
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 extern void qt_set_sequence_auto_mnemonic(bool b);
 #endif
 
@@ -132,7 +132,7 @@ Oculars::Oculars():
 
 	setObjectName("Oculars");
 
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 	qt_set_sequence_auto_mnemonic(true);
 #endif
 }
@@ -1419,7 +1419,10 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 
 	// set up drawing
-	renderer->setGlobalColor(0.8f, 0.48f, 0.0f);
+	if (StelApp::getInstance().getVisionModeNight())
+		renderer->setGlobalColor(0.8f, 0.0f, 0.0f);
+	else
+		renderer->setGlobalColor(0.8f, 0.48f, 0.0f);
 	renderer->setBlendMode(BlendMode_Alpha);
 
 	// Get the X & Y positions, and the line height

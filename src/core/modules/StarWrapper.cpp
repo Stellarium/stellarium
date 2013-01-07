@@ -47,6 +47,11 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QString str;
 	QTextStream oss(&str);
 
+	if (flags&Extra1)
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
+	}
+
 	if (flags&Magnitude)
 	{
 	    oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
@@ -107,6 +112,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
+	}
+
+	if (flags&Extra1)
+	{
+		if (s->componentIds)
+			oss << q_("Type: <b>%1</b>").arg(q_("double star")) << "<br />";
+		else
+			oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
 	}
 
 	if (flags&Magnitude)

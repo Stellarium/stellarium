@@ -43,7 +43,8 @@ public:
 	       void* userDataPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
-	       bool hidden);
+	       bool hidden,
+	       const QString &pType);
 
 	~Comet();
 

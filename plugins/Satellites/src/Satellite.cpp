@@ -238,6 +238,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			                 .arg(internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
+
+	if (flags & Extra1)
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
+	}
 	
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
