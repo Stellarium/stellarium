@@ -123,9 +123,8 @@ void SolarSystem::init()
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
-	double JD = StelUtils::getJDFromSystem();
-	computePositions(JD + StelUtils::getDeltaT(JD));
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
+	computePositions(StelUtils::getJDFromSystem());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
@@ -1507,9 +1506,8 @@ void SolarSystem::reloadPlanets()
 	// Memory leak? What's the proper way of cleaning shared pointers?
 
 	// Re-load the ssystem.ini file
-	loadPlanets();
-	double JD = StelUtils::getJDFromSystem();
-	computePositions(JD + StelUtils::getDeltaT(JD));
+	loadPlanets();	
+	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");
 	recreateTrails();
 	
