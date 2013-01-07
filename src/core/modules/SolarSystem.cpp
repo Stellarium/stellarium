@@ -726,7 +726,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-			               pd.value(secname+"/hidden", 0).toBool()));
+				       pd.value(secname+"/hidden", 0).toBool(),
+				       type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
 
@@ -776,7 +777,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-			               pd.value(secname+"/hidden", 0).toBool()));
+				       pd.value(secname+"/hidden", 0).toBool(),
+				       type));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
@@ -812,7 +814,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               osculatingFunc,
 			               closeOrbit,
 			               pd.value(secname+"/hidden", 0).toBool(),
-			               pd.value(secname+"/atmosphere", false).toBool()));
+				       pd.value(secname+"/atmosphere", false).toBool(),
+				       type));
 		}
 
 

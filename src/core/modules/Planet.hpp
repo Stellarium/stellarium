@@ -156,7 +156,8 @@ public:
 	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden,
-	       bool hasAtmosphere);
+	       bool hasAtmosphere,
+	       const QString &pType);
 
 	~Planet();
 
@@ -364,7 +365,7 @@ protected:
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
-	QString texMapName;              // Texture file path
+	QString texMapName;              // Texture file path	
 	RotationElements re;             // Rotation param
 
 	// Note: vertex/index buffer generation depends on the fact that 
@@ -402,6 +403,7 @@ protected:
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
+	QString pType;			 // Type of body
 
 	//! Sphere used to draw the planet when lighting is disabled or when it is done in shaders.
 	class StelGeometrySphere* unlitSphere;
