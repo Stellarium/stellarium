@@ -145,6 +145,22 @@ class Translations
 		N_("E");	// East
 		N_("W");	// West
 
+		// =====================================================================
+		// List of types solar system bodies
+		// TRANSLATORS: Type of object
+		N_("star");
+		// TRANSLATORS: Type of object
+		N_("planet");
+		// TRANSLATORS: Type of object
+		N_("comet");
+		// TRANSLATORS: Type of object
+		N_("asteroid");
+		// TRANSLATORS: Type of object
+		N_("moon");
+		// TRANSLATORS: Type of object
+		N_("plutoid");
+
+		// =====================================================================
 		// Constellation cultures
 		N_("Arabic");
 		N_("Aztec");

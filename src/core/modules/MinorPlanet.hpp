@@ -38,17 +38,18 @@ class MinorPlanet : public Planet
 {
 public:
 	MinorPlanet(const QString& englishName,
-	       int flagLighting,
-	       double radius,
-	       double oblateness,
-	       Vec3f color,
-	       float albedo,
-	       const QString& texMapName,
-	       posFuncType _coordFunc,
-	       void* userDataPtr,
-	       OsculatingFunctType *osculatingFunc,
-	       bool closeOrbit,
-	       bool hidden);
+		int flagLighting,
+		double radius,
+		double oblateness,
+		Vec3f color,
+		float albedo,
+		const QString& texMapName,
+		posFuncType _coordFunc,
+		void* userDataPtr,
+		OsculatingFunctType *osculatingFunc,
+		bool closeOrbit,
+		bool hidden,
+		const QString &pType);
 
 	~MinorPlanet();
 
