@@ -127,8 +127,9 @@ private:
 //! @param DecSun declination of the Sun (in radians).
 //! @param RAMoon idem for the Moon.
 //! @param DecMoon idem for the Moon.
+//! @param EclLon is the module of the vector product of Heliocentric Ecliptic Coordinates of Sun and Moon (projected over the Ecliptic plane). Useful to derive the dates of Full Moon.
 //! @param getBack controls whether Earth and Moon must be returned to their original positions after computation.
-	virtual void getSunMoonCoords(StelCore* core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, bool getBack);
+	virtual void getSunMoonCoords(StelCore* core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, double &EclLon, bool getBack);
 
 
 //! computes the selected-planet coordinates at a given Julian date.
