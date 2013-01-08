@@ -68,12 +68,10 @@ void StelTranslator::initSystemLanguage(void)
 		{
 #ifdef Q_OS_WIN
 			char ulng[3], ctry[3];
-			int ulBuf = GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, ulng, 3);
-			int ctBuf = GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO3166CTRYNAME, ctry, 3);
-			if (ulBuf!=0)
+			if (GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, ulng, 3))
 			{
 				ulng[2] = '\0';
-				if (ctBuf!=0)
+				if (GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO3166CTRYNAME, ctry, 3))
 				{
 					ctry[2] = '\0';
 					systemLangName = QString("%1_%2").arg(ulng).arg(ctry);
