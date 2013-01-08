@@ -1053,7 +1053,7 @@ double Observability::sign(double d)
 //////////////////////////
 // Get the coordinates of Sun or Moon for a given JD:
 // getBack controls whether Earth and Moon must be returned to their original positions after computation.
-void Observability::getSunMoonCoords(StelCore *core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, bool getBack) //, Vec3d &AltAzVector)
+void Observability::getSunMoonCoords(StelCore *core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, double &EclLon, bool getBack) //, Vec3d &AltAzVector)
 {
 
 	if (getBack) // Return the Moon and Earth to their current position:
@@ -1082,6 +1082,8 @@ void Observability::getSunMoonCoords(StelCore *core, double JD, double &RASun, d
 		myMoon->computeTransMatrix(JD);
 		Pos1 = myMoon->getHeliocentricEclipticPos();
 		Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1))-RotObserver;
+
+                EclLon = Pos1[0]*Pos0[1] - Pos1[1]*Pos0[0];
 
 		toRADec(Pos2,RAMoon,DecMoon);
 	};
@@ -1171,7 +1173,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
 	int Niter = 100;
 	int i;
-	double Hhoriz, RA, Dec, RAS, DecS, TempH, jd1, tempEphH, currSidT;
+	double Hhoriz, RA, Dec, RAS, DecS, TempH, jd1, tempEphH, currSidT, EclLon;
 	Vec3d Observer;
 
 	Hhoriz = HourAngle(mylat,RefracHoriz,selDec);
@@ -1242,7 +1244,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 	
 				if (Kind<3)
 				{
-					getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false);
+					getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,EclLon,false);
 				} else
 				{
 					getPlanetCoords(core,jd1,RA,Dec,false);
@@ -1277,7 +1279,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
                 	        if (Kind<3)
 				{
-                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false);
+                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,EclLon,false);
                         	} else
                         	{
                                 	getPlanetCoords(core,jd1,RA,Dec,false);
@@ -1317,7 +1319,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
                 	        if (Kind<3)
                        		{
-                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false);
+                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,EclLon,false);
                         	} else
                         	{
                                 	getPlanetCoords(core,jd1,RA,Dec,false);
@@ -1371,10 +1373,10 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 	// Improve the estimate iteratively (Secant method over Lunar-phase vs. time):
 
 			dT = 0.1/1440.; // 6 seconds. Our time span for the finite-difference derivative estimate.
-			double Deriv1, Deriv2; // Variables for temporal use.
-			double Sec1, Sec2, SecMed, Temp1, Temp2; // Variables for temporal use.
+//			double Deriv1, Deriv2; // Variables for temporal use.
+			double Sec1, Sec2, Temp1, Temp2; // Variables for temporal use.
 			double iniEst1, iniEst2;  // JD values that MUST include the solution within them.
-			double Phase1, Phase2, PhaseMed;
+			double Phase1;
 
 			for (int j=0; j<2; j++) 
 			{ // Two steps: one for the previos Full Moon and the other for the next one.
@@ -1385,54 +1387,39 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 				Sec1 = iniEst1; // TempFullMoon - 0.05*MoonT; // Initial estimates of Full-Moon dates
 				Sec2 = iniEst2; // TempFullMoon + 0.05*MoonT; 
 
+				getSunMoonCoords(core,Sec1,RAS,DecS,RA,Dec,EclLon,false);
+				Temp1 = EclLon; //Lambda(RA,Dec,RAS,DecS);
+				getSunMoonCoords(core,Sec2,RAS,DecS,RA,Dec,EclLon,false);
+				Temp2 = EclLon; //Lambda(RA,Dec,RAS,DecS);
+
+
 				for (int i=0; i<100; i++) // A limit of 100 iterations.
 				{
-					getSunMoonCoords(core,Sec1+dT/2.,RAS,DecS,RA,Dec,false);
-					Temp1 = Lambda(RA,Dec,RAS,DecS);
-					getSunMoonCoords(core,Sec1-dT/2.,RAS,DecS,RA,Dec,false);
-					Temp2 = Lambda(RA,Dec,RAS,DecS);
+                                        Phase1 = (Sec2-Sec1)/(Temp1-Temp2)*Temp1+Sec1;
+					getSunMoonCoords(core,Phase1,RAS,DecS,RA,Dec,EclLon,false);
 
-					Deriv1 = (Temp1-Temp2)/dT;
-					Phase1 =  (Temp1+Temp2)/2.;
-
-					getSunMoonCoords(core,Sec2+dT/2.,RAS,DecS,RA,Dec,false);
-					Temp1 = Lambda(RA,Dec,RAS,DecS);
-					getSunMoonCoords(core,Sec2-dT/2.,RAS,DecS,RA,Dec,false);
-					Temp2 = Lambda(RA,Dec,RAS,DecS);
-
-					Deriv2 = (Temp1-Temp2)/dT;
-					Phase2 =  (Temp1+Temp2)/2.;
-
-					SecMed = (Sec2+Sec1)/2.;
-					getSunMoonCoords(core,SecMed+dT/2.,RAS,DecS,RA,Dec,false);
-					Temp1 = Lambda(RA,Dec,RAS,DecS);
-					getSunMoonCoords(core,SecMed-dT/2.,RAS,DecS,RA,Dec,false);
-					Temp2 = Lambda(RA,Dec,RAS,DecS);
-
-				//	DerivMed = (Temp1-Temp2)/dT;
-					PhaseMed =  (Temp1+Temp2)/2.;
-
-					Temp1 = Sec2 - Deriv2*(Sec2-Sec1)/(Deriv2-Deriv1);
-
-					// Force the solution to fall within the range of good possible solutions:
-					if (Temp1 < iniEst1 || Temp1 > iniEst2) 
+                                        if (Temp1*EclLon < 0.0) 
 					{
-						if (Phase1>Phase2)
-						{
-							Sec2 = (Phase2 > PhaseMed)?Sec2:SecMed;
-						} else 
-						{
-							Sec1 = Sec2;
-							Sec2 = (Phase1>PhaseMed)?Sec1:SecMed;
-						};
-					} else
-					{
-						Sec1 = Sec2; Sec2 = Temp1;
+						Sec2 = Phase1;
+						Temp2 = EclLon;
+					} else {
+						Sec1 = Phase1;
+						Temp1 = EclLon;
+
 					};
 
-					if (std::abs(Sec2-Sec1) < 10.*dT) {TempFullMoon = Temp1; break;}  // 1 minute accuracy. Convergence.
+				//	qDebug() << QString("%1 %2 %3 %4 ").arg(Sec1).arg(Sec2).arg(Temp1).arg(Temp2);	
 
+
+					if (std::abs(Sec2-Sec1) < 10.*dT)  // 1 minute accuracy; convergence.
+					{
+						TempFullMoon = (Sec1+Sec2)/2.;
+				//		qDebug() << QString("%1%2 ").arg(TempFullMoon);	
+						break;
+					};
+					
 				};
+
 
 				if (TempFullMoon > myJD) 
 				{
@@ -1503,7 +1490,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 // Return the Moon and Earth to its current position:
 	if (Kind<3)
 	{
-		getSunMoonCoords(core,myJD,RAS,DecS,RA,Dec,true);
+		getSunMoonCoords(core,myJD,RAS,DecS,RA,Dec,EclLon,true);
 	} else
 	{
                 getPlanetCoords(core,myJD,RA,Dec,true);
