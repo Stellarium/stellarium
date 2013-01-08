@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-06 01:47+0700\n"
-"PO-Revision-Date: 2012-05-08 17:26+0000\n"
+"PO-Revision-Date: 2013-01-07 11:03+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-06 04:41+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-08 04:51+0000\n"
+"X-Generator: Launchpad (build 16402)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -23,15 +23,15 @@ msgstr "Меридиан"
 
 #: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
-msgstr ""
+msgstr "Мадори Офтоб"
 
 #: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1164
 msgid "Equator"
-msgstr ""
+msgstr "Экватор"
 
 #: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
 msgid "Horizon"
-msgstr ""
+msgstr "Уфуқ"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
@@ -84,11 +84,11 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:128
 #, qt-format
 msgid "Size: %1"
-msgstr ""
+msgstr "Андоза: %1"
 
 #: src/core/modules/Nebula.cpp:342
 msgid "Galaxy"
-msgstr ""
+msgstr "Роҳи Қаҳкашон"
 
 #: src/core/modules/Nebula.cpp:345
 msgid "Open cluster"
@@ -112,7 +112,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:360
 msgid "Unknown"
-msgstr ""
+msgstr "Ношинос"
 
 #: src/core/modules/Nebula.cpp:363
 msgid "Undocumented type"
@@ -203,7 +203,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "ситора"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -310,7 +310,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr ""
+msgstr "Силиндр"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -331,7 +331,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
-msgstr ""
+msgstr "Ортографикӣ"
 
 #: src/core/StelProjectorClasses.cpp:327
 msgid ""
@@ -388,11 +388,11 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Хато"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Ёфт нашуд"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
@@ -416,11 +416,11 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
-msgstr ""
+msgstr "Муаллиф"
 
 #: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
 msgid "Contact"
-msgstr ""
+msgstr "Тамос"
 
 #: src/gui/ConfigurationDialog.cpp:767
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
@@ -429,11 +429,11 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Author"
-msgstr ""
+msgstr "Муаллиф"
 
 #: src/gui/ConfigurationDialog.cpp:771
 msgid "License"
-msgstr ""
+msgstr "Литсензия"
 
 #: src/gui/ConfigurationDialog.cpp:795
 msgid "Running script: "
@@ -703,7 +703,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
-msgstr ""
+msgstr "Муваффақият"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:146
 #: src/gui/AddRemoveLandscapesDialog.cpp:216
@@ -719,7 +719,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:234
 #: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
-msgstr ""
+msgstr "Хато!"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
@@ -820,29 +820,29 @@ msgstr ""
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:206
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 msgid "Sun"
-msgstr ""
+msgstr "Офтоб"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr ""
+msgstr "Уторид"
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr ""
+msgstr "Зӯҳра"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr ""
+msgstr "Замин"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
 #: src/translations.h:37 src/translations.h:188
 msgid "Moon"
-msgstr ""
+msgstr "Моҳ"
 
 #. TRANSLATORS: Name of landscape and planet
 #: src/translations.h:38 src/translations.h:196
 msgid "Mars"
-msgstr ""
+msgstr "Миррих"
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -870,23 +870,23 @@ msgstr ""
 
 #: src/translations.h:45
 msgid "Jupiter"
-msgstr ""
+msgstr "Муштарӣ"
 
 #: src/translations.h:46
 msgid "Io"
-msgstr ""
+msgstr "Ио"
 
 #: src/translations.h:47
 msgid "Europa"
-msgstr ""
+msgstr "Аврупо"
 
 #: src/translations.h:48
 msgid "Ganymede"
-msgstr ""
+msgstr "Ганимед"
 
 #: src/translations.h:49
 msgid "Callisto"
-msgstr ""
+msgstr "Калистро"
 
 #: src/translations.h:50
 msgid "Amalthea"
@@ -940,7 +940,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape and planet
 #: src/translations.h:62 src/translations.h:198
 msgid "Saturn"
-msgstr ""
+msgstr "Зуҳал"
 
 #: src/translations.h:63
 msgid "Mimas"
@@ -980,11 +980,11 @@ msgstr ""
 
 #: src/translations.h:72
 msgid "Neptune"
-msgstr ""
+msgstr "Нептун"
 
 #: src/translations.h:73
 msgid "Uranus"
-msgstr ""
+msgstr "Уран"
 
 #: src/translations.h:74
 msgid "Miranda"
@@ -1008,7 +1008,7 @@ msgstr ""
 
 #: src/translations.h:79
 msgid "Pluto"
-msgstr ""
+msgstr "Плутон"
 
 #: src/translations.h:80
 msgid "Charon"
@@ -1193,17 +1193,17 @@ msgstr ""
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "сайёра"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "комета"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "астероидҳо"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
@@ -1217,15 +1217,15 @@ msgstr ""
 
 #: src/translations.h:165
 msgid "Arabic"
-msgstr ""
+msgstr "Арабӣ"
 
 #: src/translations.h:166
 msgid "Aztec"
-msgstr ""
+msgstr "Азтек"
 
 #: src/translations.h:167
 msgid "Chinese"
-msgstr ""
+msgstr "Хитоӣ"
 
 #: src/translations.h:168
 msgid "Egyptian"
@@ -1237,19 +1237,19 @@ msgstr ""
 
 #: src/translations.h:170
 msgid "Korean"
-msgstr ""
+msgstr "Кореягӣ"
 
 #: src/translations.h:171
 msgid "Lakota"
-msgstr ""
+msgstr "Лакота"
 
 #: src/translations.h:172
 msgid "Maori"
-msgstr ""
+msgstr "Маори"
 
 #: src/translations.h:173
 msgid "Navajo"
-msgstr ""
+msgstr "Наваҷо"
 
 #: src/translations.h:174
 msgid "Norse"
@@ -1284,7 +1284,7 @@ msgstr ""
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:190
 msgid "Hurricane"
-msgstr ""
+msgstr "Тӯфон"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:192
@@ -1502,7 +1502,7 @@ msgstr ""
 
 #: src/translations.h:272
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Аморатҳои Муттаҳидаи Арабӣ"
 
 #: src/translations.h:273
 msgid "Afghanistan"
@@ -1534,7 +1534,7 @@ msgstr ""
 
 #: src/translations.h:280
 msgid "Antarctica"
-msgstr ""
+msgstr "Антарктика"
 
 #: src/translations.h:281
 msgid "Argentina"
@@ -1578,19 +1578,19 @@ msgstr ""
 
 #: src/translations.h:291
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Буркина-Фассо"
 
 #: src/translations.h:292
 msgid "Bulgaria"
-msgstr ""
+msgstr "Болғория"
 
 #: src/translations.h:293
 msgid "Bahrain"
-msgstr ""
+msgstr "Баҳраин"
 
 #: src/translations.h:294
 msgid "Burundi"
-msgstr ""
+msgstr "Бурундии"
 
 #: src/translations.h:295
 msgid "Benin"
@@ -1598,7 +1598,7 @@ msgstr ""
 
 #: src/translations.h:296
 msgid "Bermuda"
-msgstr ""
+msgstr "Ҷазираҳои Бермуд"
 
 #: src/translations.h:297
 msgid "Brunei Darussalam"
@@ -1618,15 +1618,15 @@ msgstr ""
 
 #: src/translations.h:301
 msgid "Bhutan"
-msgstr ""
+msgstr "Бутан"
 
 #: src/translations.h:302
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Ҷазираҳои Буве"
 
 #: src/translations.h:303
 msgid "Botswana"
-msgstr ""
+msgstr "Боствана"
 
 #: src/translations.h:304
 msgid "Belarus"
@@ -1646,19 +1646,19 @@ msgstr ""
 
 #: src/translations.h:308
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Ҷумҳурии Демократии Конго"
 
 #: src/translations.h:309
 msgid "Central African Republic"
-msgstr ""
+msgstr "Ҷумҳурии Африкои Марказӣ"
 
 #: src/translations.h:310
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Ҷумҳурии Конго"
 
 #: src/translations.h:311
 msgid "Switzerland"
-msgstr ""
+msgstr "Швейцария"
 
 #: src/translations.h:312
 msgid "Cote d'Ivoire"
@@ -1666,7 +1666,7 @@ msgstr ""
 
 #: src/translations.h:313
 msgid "Cook Islands"
-msgstr ""
+msgstr "Ҷазираҳои Кук"
 
 #: src/translations.h:314
 msgid "Chile"
@@ -1678,11 +1678,11 @@ msgstr ""
 
 #: src/translations.h:316
 msgid "China"
-msgstr ""
+msgstr "Чин"
 
 #: src/translations.h:317
 msgid "Colombia"
-msgstr ""
+msgstr "Коломбия"
 
 #: src/translations.h:318
 msgid "Costa Rica"
@@ -1690,7 +1690,7 @@ msgstr ""
 
 #: src/translations.h:319
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Сербия ва Монтенего"
 
 #: src/translations.h:320
 msgid "Cuba"
@@ -1702,7 +1702,7 @@ msgstr ""
 
 #: src/translations.h:322
 msgid "Christmas Island"
-msgstr ""
+msgstr "ҷ. Мавлуди Исо"
 
 #: src/translations.h:323
 msgid "Cyprus"
@@ -1710,7 +1710,7 @@ msgstr ""
 
 #: src/translations.h:324
 msgid "Czech Republic"
-msgstr ""
+msgstr "Республикаи Чехӣ"
 
 #: src/translations.h:325
 msgid "Germany"
@@ -1718,11 +1718,11 @@ msgstr ""
 
 #: src/translations.h:326
 msgid "Djibouti"
-msgstr ""
+msgstr "Джибути"
 
 #: src/translations.h:327
 msgid "Denmark"
-msgstr ""
+msgstr "Денмарк"
 
 #: src/translations.h:328
 msgid "Dominica"
@@ -1730,7 +1730,7 @@ msgstr ""
 
 #: src/translations.h:329
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Ҷумҳурии Доминикан"
 
 #: src/translations.h:330
 msgid "Algeria"
@@ -1750,7 +1750,7 @@ msgstr ""
 
 #: src/translations.h:334
 msgid "Western Sahara"
-msgstr ""
+msgstr "Саҳрои Шарқӣ"
 
 #: src/translations.h:335
 msgid "Eritrea"
@@ -1774,19 +1774,19 @@ msgstr ""
 
 #: src/translations.h:340
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Ҷазираҳои Фолкленд"
 
 #: src/translations.h:341
 msgid "Micronesia"
-msgstr ""
+msgstr "Микронезия"
 
 #: src/translations.h:342
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Ҷазираи Фарер"
 
 #: src/translations.h:343
 msgid "France"
-msgstr ""
+msgstr "Франсия"
 
 #: src/translations.h:344
 msgid "Gabon"
@@ -1802,11 +1802,11 @@ msgstr ""
 
 #: src/translations.h:347
 msgid "Georgia"
-msgstr ""
+msgstr "Ҷорҷия"
 
 #: src/translations.h:348
 msgid "French Guiana"
-msgstr ""
+msgstr "Гуанаи Франсузӣ"
 
 #: src/translations.h:349
 msgid "Ghana"
@@ -1814,7 +1814,7 @@ msgstr ""
 
 #: src/translations.h:350
 msgid "Gibraltar"
-msgstr ""
+msgstr "Ҷабалуттарик"
 
 #: src/translations.h:351
 msgid "Greenland"
@@ -1834,7 +1834,7 @@ msgstr ""
 
 #: src/translations.h:355
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Гвинеяи Экваториалӣ"
 
 #: src/translations.h:356
 msgid "Greece"
@@ -1858,11 +1858,11 @@ msgstr ""
 
 #: src/translations.h:361
 msgid "Guyana"
-msgstr ""
+msgstr "Гуана"
 
 #: src/translations.h:362
 msgid "Hong Kong"
-msgstr ""
+msgstr "Гонконг"
 
 #: src/translations.h:363
 msgid "Heard Island and McDonald Islands"
@@ -1902,7 +1902,7 @@ msgstr ""
 
 #: src/translations.h:372
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Территорияи Британия ин Уқьёнусии Хинд"
 
 #: src/translations.h:373
 msgid "Iraq"
@@ -1926,11 +1926,11 @@ msgstr ""
 
 #: src/translations.h:378
 msgid "Jordan"
-msgstr ""
+msgstr "Ӯрдон"
 
 #: src/translations.h:379
 msgid "Japan"
-msgstr ""
+msgstr "Япония"
 
 #: src/translations.h:380
 msgid "Kenya"
@@ -1938,19 +1938,19 @@ msgstr ""
 
 #: src/translations.h:381
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Кирғизстон"
 
 #: src/translations.h:382
 msgid "Cambodia"
-msgstr ""
+msgstr "Комбоҷа"
 
 #: src/translations.h:383
 msgid "Kiribati"
-msgstr ""
+msgstr "Кирибати"
 
 #: src/translations.h:384
 msgid "Comoros"
-msgstr ""
+msgstr "Ҷазираҳои Камар"
 
 #: src/translations.h:385
 msgid "Saint Kitts and Nevis"
@@ -1958,15 +1958,15 @@ msgstr ""
 
 #: src/translations.h:386
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Ҷумҳурии Халқии Демократии Корея"
 
 #: src/translations.h:387
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Ҷумҳурии Корея"
 
 #: src/translations.h:388
 msgid "Kuwait"
-msgstr ""
+msgstr "Кувайт"
 
 #: src/translations.h:389
 msgid "Cayman Islands"
@@ -1978,15 +1978,15 @@ msgstr ""
 
 #: src/translations.h:391
 msgid "Lao"
-msgstr ""
+msgstr "Лаосӣ"
 
 #: src/translations.h:392
 msgid "Lebanon"
-msgstr ""
+msgstr "Ливан"
 
 #: src/translations.h:393
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Сент-Люсия"
 
 #: src/translations.h:394
 msgid "Liechtenstein"
@@ -2018,11 +2018,11 @@ msgstr ""
 
 #: src/translations.h:401
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "Ҷумҳурияти Либияи Араб"
 
 #: src/translations.h:402
 msgid "Morocco"
-msgstr ""
+msgstr "Морокко"
 
 #: src/translations.h:403
 msgid "Monaco"
@@ -2030,7 +2030,7 @@ msgstr ""
 
 #: src/translations.h:404
 msgid "Moldova"
-msgstr ""
+msgstr "Малдав"
 
 #: src/translations.h:405
 msgid "Madagascar"
@@ -2038,31 +2038,31 @@ msgstr ""
 
 #: src/translations.h:406
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Ҷазираҳои Маршалл"
 
 #: src/translations.h:407
 msgid "Macedonia"
-msgstr ""
+msgstr "Македония"
 
 #: src/translations.h:408
 msgid "Mali"
-msgstr ""
+msgstr "Мали"
 
 #: src/translations.h:409
 msgid "Myanmar"
-msgstr ""
+msgstr "Мьянма"
 
 #: src/translations.h:410
 msgid "Mongolia"
-msgstr ""
+msgstr "Монголия"
 
 #: src/translations.h:411
 msgid "Macau"
-msgstr ""
+msgstr "Макао"
 
 #: src/translations.h:412
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Ҷазираҳои Шимолии Маршал"
 
 #: src/translations.h:413
 msgid "Martinique"
@@ -2086,11 +2086,11 @@ msgstr ""
 
 #: src/translations.h:418
 msgid "Maldives"
-msgstr ""
+msgstr "Ҷазираҳои  Малдив"
 
 #: src/translations.h:419
 msgid "Malawi"
-msgstr ""
+msgstr "Малави"
 
 #: src/translations.h:420
 msgid "Mexico"
@@ -2142,7 +2142,7 @@ msgstr ""
 
 #: src/translations.h:432
 msgid "Nauru"
-msgstr ""
+msgstr "Наури"
 
 #: src/translations.h:433
 msgid "Niue"
@@ -2150,7 +2150,7 @@ msgstr ""
 
 #: src/translations.h:434
 msgid "New Zealand"
-msgstr ""
+msgstr "Зеландия Нав"
 
 #: src/translations.h:435
 msgid "Oman"
@@ -2166,11 +2166,11 @@ msgstr ""
 
 #: src/translations.h:438
 msgid "French Polynesia"
-msgstr ""
+msgstr "Полинезияи Фрасиягӣ"
 
 #: src/translations.h:439
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Папуа-Гвинеяи Нав"
 
 #: src/translations.h:440
 msgid "Philippines"
@@ -2194,7 +2194,7 @@ msgstr ""
 
 #: src/translations.h:445
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Пуэрто-Рико"
 
 #: src/translations.h:446
 msgid "Palestinian Territories"
@@ -2206,7 +2206,7 @@ msgstr ""
 
 #: src/translations.h:448
 msgid "Palau"
-msgstr ""
+msgstr "Палау"
 
 #: src/translations.h:449
 msgid "Paraguay"
@@ -2218,11 +2218,11 @@ msgstr ""
 
 #: src/translations.h:451
 msgid "Réunion"
-msgstr ""
+msgstr "Ренион"
 
 #: src/translations.h:452
 msgid "Romania"
-msgstr ""
+msgstr "Румыния"
 
 #: src/translations.h:453
 msgid "Serbia"
@@ -2230,7 +2230,7 @@ msgstr ""
 
 #: src/translations.h:454
 msgid "Russian Federation"
-msgstr ""
+msgstr "Федератсияи Русия"
 
 #: src/translations.h:455
 msgid "Rwanda"
@@ -2238,7 +2238,7 @@ msgstr ""
 
 #: src/translations.h:456
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Арабистони Суудӣ"
 
 #: src/translations.h:457
 msgid "Solomon Islands"
@@ -2246,15 +2246,15 @@ msgstr ""
 
 #: src/translations.h:458
 msgid "Seychelles"
-msgstr ""
+msgstr "ҷ. Сейшели"
 
 #: src/translations.h:459
 msgid "Sudan"
-msgstr ""
+msgstr "Судан"
 
 #: src/translations.h:460
 msgid "Sweden"
-msgstr ""
+msgstr "Швесия"
 
 #: src/translations.h:461
 msgid "Singapore"
@@ -2274,11 +2274,11 @@ msgstr ""
 
 #: src/translations.h:465
 msgid "Slovakia"
-msgstr ""
+msgstr "Ссловакия"
 
 #: src/translations.h:466
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Серра Леона"
 
 #: src/translations.h:467
 msgid "San Marino"
@@ -2290,7 +2290,7 @@ msgstr ""
 
 #: src/translations.h:469
 msgid "Somalia"
-msgstr ""
+msgstr "Сомали"
 
 #: src/translations.h:470
 msgid "Suriname"
@@ -2298,23 +2298,23 @@ msgstr ""
 
 #: src/translations.h:471
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Сан-Томе ва Принсипи"
 
 #: src/translations.h:472
 msgid "El Salvador"
-msgstr ""
+msgstr "Ал-Салвадор"
 
 #: src/translations.h:473
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Ҷумҳурии Сурияи Араб"
 
 #: src/translations.h:474
 msgid "Swaziland"
-msgstr ""
+msgstr "Свазиланд"
 
 #: src/translations.h:475
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Теркс ва Кайкос"
 
 #: src/translations.h:476
 msgid "Chad"
@@ -2330,7 +2330,7 @@ msgstr ""
 
 #: src/translations.h:479
 msgid "Thailand"
-msgstr ""
+msgstr "Тайланд"
 
 #: src/translations.h:480
 msgid "Tajikistan"
@@ -2342,19 +2342,19 @@ msgstr ""
 
 #: src/translations.h:482
 msgid "East Timor"
-msgstr ""
+msgstr "Шарқи Тимор"
 
 #: src/translations.h:483
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Туркменистон"
 
 #: src/translations.h:484
 msgid "Tunisia"
-msgstr ""
+msgstr "Тунисия"
 
 #: src/translations.h:485
 msgid "Tonga"
-msgstr ""
+msgstr "Тонгавӣ"
 
 #: src/translations.h:486
 msgid "Turkey"
@@ -2374,7 +2374,7 @@ msgstr ""
 
 #: src/translations.h:490
 msgid "Tanzania"
-msgstr ""
+msgstr "Танзания"
 
 #: src/translations.h:491
 msgid "Ukraine"
@@ -2390,7 +2390,7 @@ msgstr ""
 
 #: src/translations.h:494
 msgid "United States"
-msgstr ""
+msgstr "Штатҳои Муттаҳидаи Амрико"
 
 #: src/translations.h:495
 msgid "Uruguay"
@@ -2414,7 +2414,7 @@ msgstr ""
 
 #: src/translations.h:500
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Ҷазираҳои Бритониёвӣ Виргинӣ"
 
 #: src/translations.h:501
 msgid "United States Virgin Islands"
@@ -2422,7 +2422,7 @@ msgstr ""
 
 #: src/translations.h:502
 msgid "Viet Nam"
-msgstr ""
+msgstr "Ветнам"
 
 #: src/translations.h:503
 msgid "Vanuatu"
@@ -2438,19 +2438,19 @@ msgstr ""
 
 #: src/translations.h:506
 msgid "Yemen"
-msgstr ""
+msgstr "Йемен"
 
 #: src/translations.h:507
 msgid "Mayotte"
-msgstr ""
+msgstr "Майотта"
 
 #: src/translations.h:508
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Югославия"
 
 #: src/translations.h:509
 msgid "South Africa"
-msgstr ""
+msgstr "Африкои Ҷанубӣ"
 
 #: src/translations.h:510
 msgid "Zambia"
@@ -2464,7 +2464,7 @@ msgstr ""
 #: src/translations.h:518 src/ui_dateTimeDialogGui.h:298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Date and Time"
-msgstr ""
+msgstr "Дата и время"
 
 #: src/translations.h:519
 msgid "Add 1 sidereal day"
@@ -6804,19 +6804,19 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Red"
-msgstr ""
+msgstr "Сурх"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Green"
-msgstr ""
+msgstr "Сабз"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Blue"
-msgstr ""
+msgstr "Кабуд"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Font Size"
-msgstr ""
+msgstr "Андозаи ҳарф"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Sun altitude at twilight"
