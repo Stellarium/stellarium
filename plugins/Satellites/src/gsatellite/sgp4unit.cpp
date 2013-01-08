@@ -225,7 +225,7 @@ static void dpper
 
      /* kill warning */
      inclo = 0.;
-     inclo = inclo;
+     static_cast<void>(inclo);
 
      /* ---------------------- constants ----------------------------- */
      zns   = 1.19459e-5;
@@ -1053,7 +1053,7 @@ static void dspace
 
          iretn = 381; // added for do loop
 	 iret  =   0; // added for loop
-	 iret  = iret;
+	 static_cast<void>(iret);
          while (iretn == 381)
            {
              /* ------------------- dot terms calculated ------------- */
@@ -1196,7 +1196,7 @@ static void initl
 
      /* kill warning */
      satn = 0;
-     satn = satn;
+     static_cast<void>(satn);
 
      // sgp4fix use old way of finding gst
      double ds70;
