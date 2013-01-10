@@ -24,7 +24,6 @@
 #include <QtGlobal>
 #include <QVariantList>
 #include <QMap>
-#include <QChar>
 
 #define ERROR_LIMIT 1e-6
 
