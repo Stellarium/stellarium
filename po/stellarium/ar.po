@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-08 19:02+0700\n"
-"PO-Revision-Date: 2013-01-05 18:53+0000\n"
+"POT-Creation-Date: 2013-01-09 18:40+0700\n"
+"PO-Revision-Date: 2013-01-09 18:17+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-09 04:39+0000\n"
+"X-Launchpad-Export-Date: 2013-01-10 04:35+0000\n"
 "X-Generator: Launchpad (build 16412)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -1403,8 +1403,8 @@ msgstr "<P DIR=RTL>احتجاب الأرض والمشتري عام 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
-msgid "A Quintuple eclipse from Deimos 2027"
-msgstr "<P DIR=RTL>كسوف خماسي من ديموس 2027"
+msgid "3 Transits and 2 Eclipses from Deimos 2027"
+msgstr "3 عبورات وكسوفين من ديموس 2027 م"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1512,14 +1512,17 @@ msgstr ""
 
 #: src/translations.h:259
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
-"retrogrades back towards the sun and just partially eclipses it (only seen "
-"in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-"Phobos emerges from the sun it passes through Mars' shadow and dims."
+"Phobos races ahead of Mars and transits the sun, passes through it and then "
+"retrogrades back towards the sun and just partially transits it again (only "
+"seen in the southern hemisphere of Deimos), then Mars totally eclipses the "
+"sun while Phobos transits in darkness between Mars and Deimos. When Phobos "
+"emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
+"light up later."
 msgstr ""
-"فوبوس يتقدم على المريخ ويكسف الشمس، ويمر خلالها ثم يتقهقر أليها ويكسفها "
-"جزئيا مرة اخرى، يرى فقط في نصف الكرة الجنوبي، ثم يكسف المريخ فوبوس والشمس، "
-"وبينما يخرج فوبوس عن الشمس يمر بظل المريخ ويخفت ضوؤه."
+"فوبوس يسبق المريخ ويعبر أمام الشمس ويتجاوزها ثم يتقهقر باتجاه الشمس، ويعبر "
+"امامها جزئيا (يرى فقط في النصف الجنوبي من ديموس) ثم يكسف المريخ بالشمس كسوفا "
+"كليا بينما يعبر فوبوس بالظلام بين المريخ وديموس. عندما يتجلى فوبوس عن المريخ "
+"يكون مكسوفا جزئيا ومعتم بظل المريخ ثم يتعيد ضياءه."
 
 #: src/translations.h:260
 msgid ""
@@ -7505,6 +7508,9 @@ msgstr "0 درجة"
 
 #~ msgid "Custom Info Settings"
 #~ msgstr "اختر المعلومات التي تريد إظهارها"
+
+#~ msgid "A Quintuple eclipse from Deimos 2027"
+#~ msgstr "<P DIR=RTL>كسوف خماسي من ديموس 2027"
 
 #~ msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
 #~ msgstr ""

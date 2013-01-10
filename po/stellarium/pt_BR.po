@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-08 19:02+0700\n"
-"PO-Revision-Date: 2013-01-07 11:32+0000\n"
+"POT-Creation-Date: 2013-01-09 18:40+0700\n"
+"PO-Revision-Date: 2013-01-09 12:15+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-09 04:50+0000\n"
+"X-Launchpad-Export-Date: 2013-01-10 04:44+0000\n"
 "X-Generator: Launchpad (build 16412)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -1409,8 +1409,8 @@ msgstr "Ocultação da Terra e de Júpiter em 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
-msgid "A Quintuple eclipse from Deimos 2027"
-msgstr "Eclipse quíntuplo de Deimos em 2027"
+msgid "3 Transits and 2 Eclipses from Deimos 2027"
+msgstr "Três trânsitos e dois eclipses de Deimos em 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1532,16 +1532,19 @@ msgstr ""
 
 #: src/translations.h:259
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
-"retrogrades back towards the sun and just partially eclipses it (only seen "
-"in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-"Phobos emerges from the sun it passes through Mars' shadow and dims."
+"Phobos races ahead of Mars and transits the sun, passes through it and then "
+"retrogrades back towards the sun and just partially transits it again (only "
+"seen in the southern hemisphere of Deimos), then Mars totally eclipses the "
+"sun while Phobos transits in darkness between Mars and Deimos. When Phobos "
+"emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
+"light up later."
 msgstr ""
-"<p align=\"justify\">Fobos corre à frente de Marte e eclipsa o Sol, passa "
-"através dele e depois retrocede de volta para o Sol e novamente o ofusca de "
-"forma apenas parcial (visto somente no Hemisfério Sul). Então Marte eclipsa "
-"totalmente o Sol e Fobos, e depois, quando Fobos emerge do Sol, ele passa "
-"através da sombra de Marte e escurece."
+"<p align=\"justify\">Fobos corre à frente de Marte e transita pelo Sol, "
+"passa através dele e depois retrocede de volta para o Sol e, de forma apenas "
+"parcial, novamente o transita (visto somente no Hemisfério Sul de Deimos). "
+"Então Marte eclipsa totalmente o Sol, enquanto Fobos transita na escuridão "
+"entre Marte e Deimos. Quando Fobos emerge de Marte, ele ainda está eclipsado "
+"e escurecido na sombra de Marte, ficando iluminado apenas mais tarde."
 
 #: src/translations.h:260
 msgid ""
@@ -7627,6 +7630,9 @@ msgstr "0 grau"
 #~ msgstr ""
 #~ "É fornecido auxílio no sítio do Launchpad. Assegure-se de colocar "
 #~ "“Satellites plugin” como assunto ao postar a sua pergunta."
+
+#~ msgid "A Quintuple eclipse from Deimos 2027"
+#~ msgstr "Eclipse quíntuplo de Deimos em 2027"
 
 #~ msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
 #~ msgstr ""
