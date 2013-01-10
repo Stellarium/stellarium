@@ -56,7 +56,7 @@ QString getApplicationVersion()
 
 double hmsToRad(unsigned int h, unsigned int m, double s )
 {
-	//return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.; // This is wrong formula! --AW
+	//return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.; // Wrong formula! --AW
 	return (double)h*M_PI/12.+(double)m*M_PI/10800.+(double)s*M_PI/648000.;
 }
 
