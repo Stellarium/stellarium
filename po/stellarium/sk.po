@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-08 19:02+0700\n"
+"POT-Creation-Date: 2013-01-09 18:40+0700\n"
 "PO-Revision-Date: 2012-11-16 12:05+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-09 04:48+0000\n"
+"X-Launchpad-Export-Date: 2013-01-10 04:42+0000\n"
 "X-Generator: Launchpad (build 16412)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -1403,8 +1403,8 @@ msgstr "Zákryt Zeme a Jupitera v r. 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
-msgid "A Quintuple eclipse from Deimos 2027"
-msgstr "Štvornásobné zatmenie z Deimosu v r. 2027"
+msgid "3 Transits and 2 Eclipses from Deimos 2027"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1518,15 +1518,13 @@ msgstr ""
 
 #: src/translations.h:259
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
-"retrogrades back towards the sun and just partially eclipses it (only seen "
-"in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-"Phobos emerges from the sun it passes through Mars' shadow and dims."
+"Phobos races ahead of Mars and transits the sun, passes through it and then "
+"retrogrades back towards the sun and just partially transits it again (only "
+"seen in the southern hemisphere of Deimos), then Mars totally eclipses the "
+"sun while Phobos transits in darkness between Mars and Deimos. When Phobos "
+"emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
+"light up later."
 msgstr ""
-"Fobos predbieha Mars a zakrýva Slnko, prechádza pred ním a potom retrográdne "
-"cúva naspäť k Slnku, ktoré ešte čiastočne zakryje (viditeľné je to iba v "
-"SH), potom už Mars celkom zakryje Slnko aj Fobos a nakoniec Fobos vyjde "
-"spoza Slnka, prejde cez tieň Marsu a stmavne."
 
 #: src/translations.h:260
 msgid ""
@@ -7406,6 +7404,9 @@ msgstr "0 stup."
 
 #~ msgid "Object's size"
 #~ msgstr "Veľkosť objektu"
+
+#~ msgid "A Quintuple eclipse from Deimos 2027"
+#~ msgstr "Štvornásobné zatmenie z Deimosu v r. 2027"
 
 #~ msgid "Earth best views from other Solar system bodies in the 21st Century."
 #~ msgstr ""
