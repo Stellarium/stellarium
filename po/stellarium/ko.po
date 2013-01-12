@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-09 18:40+0700\n"
-"PO-Revision-Date: 2013-01-08 14:41+0000\n"
+"PO-Revision-Date: 2013-01-12 03:52+0000\n"
 "Last-Translator: Juho Kim <juo6442@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-10 04:40+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-01-12 04:35+0000\n"
+"X-Generator: Launchpad (build 16420)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -139,7 +139,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "거리: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:242
 #: src/core/modules/Comet.cpp:156
@@ -150,7 +150,7 @@ msgstr "거리: %1AU"
 #: src/core/modules/Planet.cpp:492
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "시직경: %1, 고리 포함: %2"
 
 #: src/core/modules/Planet.cpp:498 src/core/modules/MinorPlanet.cpp:248
 #, qt-format
@@ -162,32 +162,32 @@ msgstr "시직경: %1"
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "항성주기: %1일 (%2 a)"
 
 #: src/core/modules/Planet.cpp:510
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "항성일: %1"
 
 #: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "평균태양일: %1"
 
 #: src/core/modules/Planet.cpp:521
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "위상각: %1"
 
 #: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "이각: %1"
 
 #: src/core/modules/Planet.cpp:523
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "위상: %1"
 
 #: src/core/modules/Planet.cpp:524
 #, qt-format
@@ -203,7 +203,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "항성"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -304,14 +304,14 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr "함메르도법"
+msgstr "함메르 도법"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"함메르도법은 Ernst Hammer가 1892년에 만든, 정적도법의 하나입니다. 그리고 직접적으로 아이토프도법의 영향을 받았습니다."
+"함메르 도법은 Ernst Hammer가 1892년에 만든, 정적도법의 하나입니다. 그리고 직접적으로 아이토프 도법의 영향을 받았습니다."
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
@@ -333,7 +333,7 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"메르카토르도법은 세계지도 투영에서 가장 많이 사용됩니다. 이 투영법은 방향과 모양은 유지하나 적도로부터 각도가 증가할 때 크기를 "
+"메르카토르 도법은 세계지도 투영에서 가장 많이 사용됩니다. 이 투영법은 방향과 모양은 유지하나 적도로부터 각도가 증가할 때 크기를 "
 "왜곡합니다."
 
 #: src/core/StelProjectorClasses.cpp:322
@@ -373,7 +373,7 @@ msgstr "(기하학적)"
 
 #: src/core/StelObject.cpp:119 src/core/StelObject.cpp:141
 msgid "(apparent)"
-msgstr ""
+msgstr "(겉보기)"
 
 #: src/core/StelObject.cpp:135 src/core/StelObject.cpp:141
 #: src/core/StelObject.cpp:144
@@ -1301,22 +1301,22 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:186
 msgid "Trees"
-msgstr ""
+msgstr "나무"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:190
 msgid "Hurricane"
-msgstr ""
+msgstr "허리케인"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:192
 msgid "Ocean"
-msgstr ""
+msgstr "바다"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:194
 msgid "Garching"
-msgstr ""
+msgstr "가르힝"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:204
@@ -2748,7 +2748,7 @@ msgstr "성운 눈금"
 
 #: src/translations.h:582 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
-msgstr ""
+msgstr "은하면"
 
 #: src/translations.h:583
 msgid "Ground"
@@ -3347,7 +3347,7 @@ msgstr "그림 보기"
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
-msgstr ""
+msgstr "그림 밝기:"
 
 #: src/ui_viewDialog.h:1155
 msgid "Celestial Sphere"
@@ -3355,23 +3355,23 @@ msgstr "천구"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "적도 보기"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "자오선 보기"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "지평선 보기"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "황도 보기"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "은하면 보기"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3483,11 +3483,11 @@ msgstr "없음"
 
 #: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
-msgstr ""
+msgstr "사용자가 설정한 정보 보기"
 
 #: src/ui_configurationDialog.h:976
 msgid "Customized"
-msgstr ""
+msgstr "사용자 정의"
 
 #: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
@@ -5708,7 +5708,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
-msgstr ""
+msgstr "은하면"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Effects"

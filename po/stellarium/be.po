@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-09 18:40+0700\n"
-"PO-Revision-Date: 2012-12-28 00:46+0000\n"
+"PO-Revision-Date: 2013-01-11 17:49+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-10 04:36+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-01-12 04:35+0000\n"
+"X-Generator: Launchpad (build 16420)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -205,7 +205,7 @@ msgstr "Часовае абазначэньне: %1"
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "зорка"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -219,7 +219,7 @@ msgstr "Бачная велічыня: <b>%1</b> (паводле згаслас�
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "падвойная зорка"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -1244,27 +1244,27 @@ msgstr "З"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "плянэта"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "камэта"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "астэроід"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "месяц"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "плютоід"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1410,7 +1410,7 @@ msgstr "Пакрыцьцё Зямлі й Юпітэра ў 2048 годзе"
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "Тры транзыты й два зацьменьні на Дэймасе ў 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1529,6 +1529,11 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Фобас абганяе Марс і праходзіць па Сонцы, а пасьля рухаецца назад у напрамку "
+"Сонца й часткова зацьмявае яго ізноў (бачна толькі ў паўднёвай паўкулі "
+"Дэймаса), пасьля Марс цалкам зацьмявае Сонца, пакуль Фобас праходзіць у "
+"цемры між Марсам і Дэймасам. Калі Фобас зьяўляецца з-за Марса, ён усё яшчэ "
+"зацьмёны  ценем Марса і будзе асьветлены пазьней."
 
 #: src/translations.h:260
 msgid ""
@@ -4523,7 +4528,7 @@ msgstr "Міжнародае абазначэньне"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "штучны спадарожнік"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
