@@ -755,6 +755,15 @@ ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 
+SET(tests_testConversions_SRCS
+	core/StelUtils.cpp
+	core/StelUtils.hpp
+	tests/testConversions.hpp
+	tests/testConversions.cpp)
+ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
+TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testConversions)
+
 ######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
@@ -765,5 +774,6 @@ ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORK
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexBuffer WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDeltaT WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testConversions WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
 
