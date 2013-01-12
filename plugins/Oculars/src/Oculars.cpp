@@ -755,8 +755,13 @@ void Oculars::enableOcular(bool enableOcularMode)
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
 			int yPosition = projectorParams.viewportCenter[1];
 			yPosition = yPosition - 0.5 * (metrics.height());
+			const char *tcolor;
+			if (StelApp::getInstance().getVisionModeNight())
+				tcolor = "#C40303";
+			else
+				tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
-																											true, font.pixelSize(), "#99FF99");
+									true, font.pixelSize(), tcolor);
 		}
 		// we didn't accept the new status - make sure the toolbar button reflects this
 		disconnect(actionShowOcular, SIGNAL(toggled(bool)),
