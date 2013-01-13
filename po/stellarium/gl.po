@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-09 18:40+0700\n"
-"PO-Revision-Date: 2013-01-05 18:57+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2013-01-12 13:54+0000\n"
+"Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-10 04:38+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-01-13 04:35+0000\n"
+"X-Generator: Launchpad (build 16420)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -217,7 +217,7 @@ msgstr "Magnitude aparente: <b>%1</b> (por extinción)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "Estrela dobre"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -1253,12 +1253,12 @@ msgstr "asteroide"
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "lúa"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoide"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1404,7 +1404,7 @@ msgstr "Ocultación da Terra e Xúpite 2048"
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "3 tránsitos e 2 eclipses dende Deimos 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1524,6 +1524,12 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Phobos atravesa por diante de Marte e transita o sol, pasa por el e, a "
+"continuación, volve cara atrás para o sol e transita só parcialmente de novo "
+"(só vendo dende o hemisferio sur de Deimos), entón Marte eclipsa totalmente "
+"o sol mentres Phobos transita na escuridade entre Marte e Deimos. Cando "
+"Phobos emerxe de Marte segue estando eclipsado e mergullado na sombra de "
+"Marte, só para iluminarse máis tarde."
 
 #: src/translations.h:260
 msgid ""
@@ -4513,7 +4519,7 @@ msgstr "Deseñador internacional"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "satélite artificial"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
