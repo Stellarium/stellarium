@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-09 18:40+0700\n"
-"PO-Revision-Date: 2012-11-30 15:42+0000\n"
+"PO-Revision-Date: 2013-01-12 14:13+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-10 04:41+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-01-13 04:35+0000\n"
+"X-Generator: Launchpad (build 16420)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -203,7 +203,7 @@ msgstr "Penentuan sementara: %1"
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "bintang"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -217,7 +217,7 @@ msgstr "Magnitude Ketara: <b>%1</b> (oleh kepupusan)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "bintang dubel"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -1241,27 +1241,27 @@ msgstr "W"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "planet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "komet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "asteroid"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "bulan"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1407,7 +1407,7 @@ msgstr "Penghijaban Bumi dan Musytari 2048"
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "3 Lintasan dan 2 Gerhana dari Deimos 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1529,6 +1529,12 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Phobos menuju ke arah Marikh dan melintasi matahari, melepasinya dan "
+"kemudian mundur ke matahari dan hanya lintas sebahagiannya sekali lagi "
+"(hanya kelihatan di hemisfera selatan Deimos), kemudian Marikh menggerhana "
+"sepenuhnya matahari semasa Phobos melintas di dalam kegelapan diantara "
+"Marikh dengan Deimos. Bila Phobos muncul dari Marikh ia masih digerhana dan "
+"kelihatan kabur di sebalik bayang Marikh, dan akan dicerahkan kemudian nanti."
 
 #: src/translations.h:260
 msgid ""
@@ -2559,7 +2565,7 @@ msgstr "Tambah 1 tahun ikut bintang"
 
 #: src/translations.h:523
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Tambah  1 abad ikut bintang"
 
 #: src/translations.h:524
 msgid "Add 1 solar day"
@@ -2599,7 +2605,7 @@ msgstr "Tambah 1 tahun min tropika"
 
 #: src/translations.h:533
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Tambah 1 abad tropika min"
 
 #: src/translations.h:534
 msgid "Slow down the script execution rate"
@@ -2671,7 +2677,7 @@ msgstr "Tolak 1 tahun ikut bintang"
 
 #: src/translations.h:551
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Tolak 1 abad ikut bintang"
 
 #: src/translations.h:552
 msgid "Subtract 1 solar day"
@@ -2711,7 +2717,7 @@ msgstr "Tolak 1 tahun min tropika"
 
 #: src/translations.h:561
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Tolak 1 abad tropika min"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:564
@@ -4520,7 +4526,7 @@ msgstr "Pereka Antarabangsa"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "satelit tiruan"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
