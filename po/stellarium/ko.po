@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-09 18:40+0700\n"
-"PO-Revision-Date: 2013-01-12 03:52+0000\n"
+"PO-Revision-Date: 2013-01-13 06:42+0000\n"
 "Last-Translator: Juho Kim <juo6442@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-13 04:35+0000\n"
+"X-Launchpad-Export-Date: 2013-01-14 04:35+0000\n"
 "X-Generator: Launchpad (build 16420)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -391,7 +391,7 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "요청 중"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -640,7 +640,7 @@ msgstr "개발자: %1"
 #: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "테스터: %1"
 
 #: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
@@ -710,7 +710,7 @@ msgstr "새 위치"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "Stellarium 전망 자료를 담고 있는 ZIP 압축 파일을 선택합니다."
+msgstr "Stellarium 풍경 자료를 담고 있는 ZIP 압축 파일을 선택합니다."
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
@@ -720,7 +720,7 @@ msgstr "ZIP 압축 파일"
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "\"%1\" 전망 자료를 무사히 설치하였습니다."
+msgstr "\"%1\" 풍경을 성공적으로 설치하였습니다."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -732,7 +732,7 @@ msgstr "성공"
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 #: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
-msgstr "전망 자료를 전혀 설치하지 않았습니다."
+msgstr "설치한 풍경이 없습니다."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:147
 #: src/gui/AddRemoveLandscapesDialog.cpp:171
@@ -746,12 +746,12 @@ msgstr "오류!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr "\"%1\" 전망 자료를 무사히 제거하였습니다"
+msgstr "\"%1\" 풍경을 무사히 제거하였습니다"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:170
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
-msgstr "선택한 전망 자료는 (완전히) 제거할 수 없습니다."
+msgstr "선택한 풍경을 (완전히) 제거할 수 없습니다."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:193
@@ -769,13 +769,13 @@ msgstr "Stellarium에서 %1을(를) 읽거나 쓰기 위하여 열수 없습니�
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
-msgstr "선택하 파일은 ZIP 압축 파일이 아니거나 Stellarium 전망 자료를 담고 있지 않습니다."
+msgstr "선택한 파일은 ZIP 압축 파일이 아니거나 Stellarium 풍경을 담고 있지 않습니다."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr "같은 이름의 전망 자료이거나 식별자(%1)가 이미 존재합니다."
+msgstr "같은 이름의 풍경이거나 식별자(%1)가 이미 존재합니다."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:243
@@ -809,19 +809,19 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Simbad 검색 오류"
 
 #: src/gui/SearchDialog.cpp:367
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Simbad 검색"
 
 #: src/gui/SearchDialog.cpp:535
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "스트라스부르 대학교 (프랑스)"
 
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "하버드 대학교 (미국)"
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
@@ -3191,7 +3191,7 @@ msgstr "위치"
 
 #: src/ui_searchDialogGui.h:624
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "온라인 천문학 데이터베이스 SIMBAD"
 
 #: src/ui_searchDialogGui.h:625
 msgid "Extend search with SIMBAD"
@@ -3199,7 +3199,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:626
 msgid "Server:"
-msgstr ""
+msgstr "서버:"
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
@@ -3301,11 +3301,11 @@ msgstr "빛공해:"
 
 #: src/ui_viewDialog.h:1139
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "대기압, 온도, 소광계수"
 
 #: src/ui_viewDialog.h:1141
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "굴절/소광 설정..."
 
 #: src/ui_viewDialog.h:1142
 msgid "Labels and Markers"
@@ -3379,7 +3379,7 @@ msgstr "투영"
 
 #: src/ui_viewDialog.h:1183
 msgid "Add/remove landscapes..."
-msgstr "전망 자료 추가/삭제..."
+msgstr "풍경 추가/삭제..."
 
 #: src/ui_viewDialog.h:1185
 msgid "Show ground"
@@ -3796,23 +3796,23 @@ msgstr "플러그인"
 
 #: src/ui_addRemoveLandscapesDialog.h:266
 msgid "Add/Remove Landscapes"
-msgstr "전망 자료 추가/삭제"
+msgstr "풍경 추가/삭제"
 
 #: src/ui_addRemoveLandscapesDialog.h:268
 msgid "Add a new landscape"
-msgstr "새 전망 자료 추가"
+msgstr "새 풍경 추가"
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Install a new landscape from a ZIP archive..."
-msgstr "ZIP 압축 파일에서 새 전망 자료 설치..."
+msgstr "ZIP 압축 파일에서 새 풍경 설치..."
 
 #: src/ui_addRemoveLandscapesDialog.h:270
 msgid "Switch to the new landscape after installation"
-msgstr "설치후 새 전망 자료로 전환합니다."
+msgstr "설치 후 새 풍경으로 전환"
 
 #: src/ui_addRemoveLandscapesDialog.h:273
 msgid "Remove an installed landscape"
-msgstr "설치한 전망 자료를 제거합니다."
+msgstr "설치한 풍경 제거"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
@@ -3824,7 +3824,7 @@ msgstr "제거"
 msgid ""
 "WARNING: Removing the selected landscape means deleting its files. This "
 "operation is irreversible."
-msgstr "경고: 선택한 전망 자료를 제거하시면 자료 파일을 삭제합니다. 삭제후 복구할 수 없습니다."
+msgstr "경고: 선택한 풍경을 제거하시면 자료 파일을 삭제합니다. 삭제 후 복구할 수 없습니다."
 
 #: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
@@ -3844,15 +3844,15 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
-msgstr ""
+msgstr "굴절 설정"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "대기압 (mbar):"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid "Temperature (C):"
-msgstr ""
+msgstr "기온 (C):"
 
 #: src/ui_AtmosphereDialog.h:185
 msgid ""
