@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
+    <width>530</width>
     <height>556</height>
    </rect>
   </property>
@@ -351,16 +351,40 @@
             </font>
            </property>
            <property name="text">
-            <string>Sun altitude at twilight</string>
+            <string>Observing conditions</string>
            </property>
           </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
+            <widget class="QLabel" name="HorizText">
+             <property name="text">
+              <string>Horizon altitude: 0 deg.</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignLeft">
+            <widget class="QSlider" name="HorizAltitude">
+             <property name="maximum">
+              <number>45</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_55">
+           <item>
             <widget class="QLabel" name="AltiText">
              <property name="text">
-              <string>0 deg.</string>
+              <string>Sun altitude at twilight: 0 deg.</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -378,6 +402,7 @@
             </widget>
            </item>
           </layout>
+
          </item>
         </layout>
        </item>
