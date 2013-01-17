@@ -149,7 +149,7 @@ void ObservabilityDialog::updateGuiFromSettings(void)
 
 	SAlti = GETSTELMODULE(Observability)->getHorizAltitude();
 	ui->HorizAltitude->setValue(SAlti);
-	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(SAlti).arg(q_("deg.)")));
+	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(SAlti).arg(q_("deg.")));
 
 }
 
@@ -229,7 +229,7 @@ void ObservabilityDialog::setAltitude(int Value)
 
 void ObservabilityDialog::setHorizon(int Value)
 {
-	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(Value).arg(q_("deg.)")));
+	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(Value).arg(q_("deg.")));
 	GETSTELMODULE(Observability)->setHorizAltitude(Value);
 }
 
