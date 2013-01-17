@@ -225,7 +225,7 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Occultation of Earth and Jupiter 2048");
 		// TRANSLATORS: Name of script
-		N_("A Quintuple eclipse from Deimos 2027");
+		N_("3 Transits and 2 Eclipses from Deimos 2027");
 		// TRANSLATORS: Name of script
 		N_("Solar System Screensaver");
 		// TRANSLATORS: Name of script
@@ -256,7 +256,7 @@ class Translations
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Taurus and Gemini on July 23, 2031.");
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
-		N_("Phobos races ahead of Mars and eclipses the sun, passes through it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.");
+		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
 		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
 		N_("A tour of the western constellations.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
