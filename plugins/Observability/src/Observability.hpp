@@ -71,6 +71,9 @@ public:
 	//! Set the Sun altitude at twilight:
 	void setSunAltitude(int);
 
+	//! Set the Sun altitude at twilight:
+	void setHorizAltitude(int);
+
 
 	//! get Show Flags from current configuration:
 	bool getShowFlags(int);
@@ -83,6 +86,10 @@ public:
 
 	//! get current Sun altitude at twilight:
 	int getSunAltitude(void);
+
+	//! get current Horizon altitude:
+	int getHorizAltitude(void);
+
 
 public slots:
 //! Set whether observability will execute or not:
@@ -195,7 +202,7 @@ private:
 	virtual bool CheckRise(int i);
 
 //! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune,RefracHoriz;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune,RefracHoriz,HorizAlti;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
@@ -225,7 +232,7 @@ private:
 
 
 //! Current simulation year and number of days in the year.;
-	int currYear, nDays, iAltitude;
+	int currYear, nDays, iAltitude, iHorizAltitude;
 
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
 	QString selName, bestNight, ObsRange, objname, AcroCos;

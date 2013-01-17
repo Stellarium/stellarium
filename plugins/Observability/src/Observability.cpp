@@ -123,6 +123,9 @@ Observability::Observability()
 	if (!conf->contains("Sun_Altitude"))
 		conf->setValue("Sun_Altitude", 12);
 
+	if (!conf->contains("Horizon_Altitude"))
+		conf->setValue("Horizon_Altitude", 0);
+
 	if (!conf->contains("show_FullMoon"))
 		conf->setValue("show_FullMoon", true);
 
@@ -136,7 +139,9 @@ Observability::Observability()
 	// Load settings from main config file
 	fontSize = conf->value("font_size",15).toInt();
 	iAltitude = conf->value("Sun_Altitude",12).toInt();
+	iHorizAltitude = conf->value("Horizon_Altitude",0).toInt();
 	AstroTwiAlti = -((double) iAltitude)/Rad2Deg ;
+	HorizAlti = ((double) iHorizAltitude)/Rad2Deg ;
 	font.setPixelSize(fontSize);
 	QString fontColorStr = conf->value("font_color", "0,0.5,1").toString();
 	fontColor = StelUtils::strToVec3f(fontColorStr);
@@ -311,9 +316,9 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 
 // Add refraction, if necessary:
 	Vec3d TempRefr;	
-	TempRefr[0] = 1.0; //std::cos(HorizAlti);  
+	TempRefr[0] = std::cos(HorizAlti);  
 	TempRefr[1] = 0.0; 
-	TempRefr[2] = 0.0; //std::sin(HorizAlti);  
+	TempRefr[2] = std::sin(HorizAlti);  
 	Vec3d CorrRefr = core->altAzToEquinoxEqu(TempRefr,StelCore::RefractionAuto);
 	TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionOff);
 	double RefracAlt = std::asin(TempRefr[2]);
@@ -567,7 +572,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			PlanetRADec(core);} // Re-compute ephemeris.
 
 		else { // Object is fixed on the sky.
-			double auxH = HourAngle(mylat,0.0,selDec);
+			double auxH = HourAngle(mylat,RefracHoriz,selDec);
 			double auxSidT1 = toUnsignedRA(selRA - auxH); 
 			double auxSidT2 = toUnsignedRA(selRA + auxH); 
 			for (int i=0;i<nDays;i++) {
@@ -620,11 +625,11 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 					QString AcroRiseStr, AcroSetStr;
 					QString CosmRiseStr, CosmSetStr;
 
-					AcroRiseStr = (selRise>0)?CalenDate(selRise):q_("N/A");
-					AcroSetStr = (selSet>0)?CalenDate(selSet):q_("N/A");
+					AcroRiseStr = (selRise>0)?CalenDate(selRise):q_("None");
+					AcroSetStr = (selSet>0)?CalenDate(selSet):q_("None");
 
-					CosmRiseStr = (selRise2>0)?CalenDate(selRise2):q_("N/A");
-					CosmSetStr = (selSet2>0)?CalenDate(selSet2):q_("N/A");
+					CosmRiseStr = (selRise2>0)?CalenDate(selRise2):q_("None");
+					CosmSetStr = (selSet2>0)?CalenDate(selSet2):q_("None");
 
 					AcroCos = (Acro==3 || Acro==1)?QString("%1: %2/%3.").arg(q_("Acronychal rise/set")).arg(AcroRiseStr).arg(AcroSetStr):q_("No Acronychal rise/set.");
 					AcroCos += (Acro==3 || Acro==2)?QString(" %1: %2/%3.").arg(q_("Cosmical rise/set")).arg(CosmRiseStr).arg(CosmSetStr):QString(" %1").arg(q_("No Cosmical rise/set."));
@@ -856,7 +861,7 @@ void Observability::PlanetRADec(StelCore *core)
 
 	for (int i=0;i<nDays;i++) {
 		getPlanetCoords(core,yearJD[i],ObjectRA[i],ObjectDec[i],false);
-		TempH = HourAngle(mylat,0.0,ObjectDec[i]);
+		TempH = HourAngle(mylat,RefracHoriz,ObjectDec[i]);
 		ObjectH0[i] = TempH;
 		ObjectSidT[0][i] = toUnsignedRA(ObjectRA[i]-TempH);
 		ObjectSidT[1][i] = toUnsignedRA(ObjectRA[i]+TempH);
@@ -911,7 +916,7 @@ void Observability::SunHTwi()
 
 	for (int i=0; i<nDays; i++) {
 		TempH = HourAngle(mylat,AstroTwiAlti,SunDec[i]);
-		TempH00 = HourAngle(mylat,0.0,SunDec[i]);
+		TempH00 = HourAngle(mylat,RefracHoriz,SunDec[i]);
 		if (TempH>0.0) {
 			SunSidT[0][i] = toUnsignedRA(SunRA[i]-TempH*(1.00278));
 			SunSidT[1][i] = toUnsignedRA(SunRA[i]+TempH*(1.00278));}
@@ -1535,6 +1540,7 @@ void Observability::restoreDefaultConfigIni(void)
 	// Set defaults
 	conf->setValue("font_size", 15);
 	conf->setValue("Sun_Altitude", 12);
+	conf->setValue("Horizon_Altitude", 0);
 	conf->setValue("font_color", "0,0.5,1");
 	conf->setValue("show_AcroCos", true);
 	conf->setValue("show_Good_Nights", true);
@@ -1567,7 +1573,11 @@ void Observability::readSettingsFromConfig(void)
 
 	iAltitude = conf->value("Sun_Altitude", 12).toInt();
 	AstroTwiAlti  = -((double)iAltitude)/Rad2Deg ;
+
+	iHorizAltitude = conf->value("Horizon_Altitude", 0).toInt();
+	HorizAlti = ((double)iHorizAltitude)/Rad2Deg ;
 	
+
 	conf->endGroup();
 }
 
@@ -1579,6 +1589,7 @@ void Observability::saveSettingsToConfig(void)
 	conf->beginGroup("Observability");
 	conf->setValue("font_size", fontSize);
 	conf->setValue("Sun_Altitude", iAltitude);
+	conf->setValue("Horizon_Altitude", iHorizAltitude);
 	conf->setValue("font_color", fontColorStr);
 	conf->setValue("show_AcroCos", show_AcroCos);
 	conf->setValue("show_Good_Nights", show_Good_Nights);
@@ -1638,6 +1649,12 @@ int Observability::getSunAltitude(void)
 	return iAltitude;
 }
 
+int Observability::getHorizAltitude(void)
+{
+	return iHorizAltitude;
+}
+
+
 void Observability::setFontColor(int color, int value)
 {
 	float fValue = (float)(value) / 100.; 
@@ -1653,6 +1670,13 @@ void Observability::setSunAltitude(int value)
 {
 	AstroTwiAlti  = -((double) value)/Rad2Deg ;
 	iAltitude = value;
+	configChanged = true;
+}
+
+void Observability::setHorizAltitude(int value)
+{
+	HorizAlti = ((double) value)/Rad2Deg ;
+	iHorizAltitude = value;
 	configChanged = true;
 }
 
