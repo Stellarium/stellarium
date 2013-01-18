@@ -74,6 +74,7 @@ void ObservabilityDialog::createDialogContent()
 	connect(ui->Blue, SIGNAL(sliderMoved(int)), this, SLOT(setBlue(int)));
 	connect(ui->fontSize, SIGNAL(sliderMoved(int)), this, SLOT(setSize(int)));
 	connect(ui->SunAltitude, SIGNAL(sliderMoved(int)), this, SLOT(setAltitude(int)));
+	connect(ui->HorizAltitude, SIGNAL(sliderMoved(int)), this, SLOT(setHorizon(int)));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
@@ -101,6 +102,9 @@ void ObservabilityDialog::setAboutHtml(void)
 
 	html += "<h3>" + q_("Explanation of some parameters") + "</h3><table width=\"90%\">";
 	html += QString("<tr><td>%1</td><td>%2</td></tr>").arg(q_("Sun altitude at twilight:")).arg(q_("Any celestial object will be considered visible when the Sun is below this altitude. The altitude at astronomical twilight ranges usually between -12 and -18 degrees. This parameter is only used for the estimate of the range of observable epochs (see below)."));
+
+	html += QString("<tr><td>%1</td><td>%2</td></tr>").arg(q_("Horizon altitude:")).arg(q_("Minimum observable altitude (due to mountains, buildings, or just a limited telescope mount)."));
+
 	html += QString("<tr><td>%1</td><td>%2</td></tr>").arg(q_("Today ephemeris:")).arg(q_("Self-explanatory. The program will show the rise, set, and culmination (transit) times. The exact times for these ephemeris are given in two ways: as time spans (referred to the current time) and as clock hours (in local time)."));
 	html += QString("<tr><td>%1</td><td>%2</td></tr>").arg(q_("Acronychal/Cosmical rise/set:")).arg(q_("The Acronychal rise (or set) of an object happens when the object rises (or sets) just when the Sun sets (or rises), respectively. The exact dates of these ephemeris depend on the Observer's location. The dates between the Acronychal set and rise are those when the altitude of the celestial object uses to be high when the Sun is well below the horizon (hence the object can be well observed). On the contrary, the Cosmical rise (or set) happens when both, the object and the Sun, rise (or set) simultaneously. It is obvious that the source is hardly observable (or not observable at all) in the dates between Cosmical set and rise."));
 	html += QString("<tr><td>%1</td><td>%2</td></tr>").arg(q_("Largest Sun separation:")).arg(q_("Happens when the angular separation between the Sun and the celestial object are maximum. In most cases, this is equivalent to say that the Equatorial longitudes of the Sun and the object differ by 180 degrees, so the Sun is in opposition to the object. When an object is at its maximum possible angular separation from the Sun (no matter if it is a planet or a star), it culminates roughly at midnight, and on the darkest possible area of the Sky at that declination. Hence, that is the 'best' night to observe a particular object."));
@@ -141,7 +145,12 @@ void ObservabilityDialog::updateGuiFromSettings(void)
 	ui->fontSize->setValue(GETSTELMODULE(Observability)->getFontSize());
 	int SAlti = GETSTELMODULE(Observability)->getSunAltitude();
 	ui->SunAltitude->setValue(SAlti);
-	ui->AltiText->setText(QString("-%1 %2").arg(SAlti).arg(q_("deg.")));
+	ui->AltiText->setText(QString("%1 -%2 %3").arg(q_("Sun altitude at twilight:")).arg(SAlti).arg(q_("deg.")));
+
+	SAlti = GETSTELMODULE(Observability)->getHorizAltitude();
+	ui->HorizAltitude->setValue(SAlti);
+	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(SAlti).arg(q_("deg.")));
+
 }
 
 void ObservabilityDialog::saveSettings(void)
@@ -213,9 +222,15 @@ void ObservabilityDialog::setSize(int Value)
 
 void ObservabilityDialog::setAltitude(int Value)
 {
-	ui->AltiText->setText(QString("-%1 %2").arg(Value).arg(q_("deg.")));
+	ui->AltiText->setText(QString("%1 -%2 %3").arg(q_("Sun altitude at twilight:")).arg(Value).arg(q_("deg.")));
 	GETSTELMODULE(Observability)->setSunAltitude(Value);
 }
 
+
+void ObservabilityDialog::setHorizon(int Value)
+{
+	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(Value).arg(q_("deg.")));
+	GETSTELMODULE(Observability)->setHorizAltitude(Value);
+}
 
 
