@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 10:07+0700\n"
-"PO-Revision-Date: 2013-01-12 14:13+0000\n"
+"POT-Creation-Date: 2013-01-18 23:15+0700\n"
+"PO-Revision-Date: 2013-01-18 05:28+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-18 04:40+0000\n"
+"X-Launchpad-Export-Date: 2013-01-19 04:45+0000\n"
 "X-Generator: Launchpad (build 16430)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -6841,8 +6841,8 @@ msgstr "Berakhir pada %1 (dalam %2) pada %3 darj."
 
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
-msgid "Transit at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgid "Culminated at %1 (%2 ago) at %3 deg."
+msgstr "Berakhir pada %1 (%2 yang lalu) pada %3 darj."
 
 #: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
@@ -6961,13 +6961,15 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Altitud ufuk:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"Altitud boleh cerap minimum (disebabkan gunung, bangunan, atau hanya lekapan "
+"teleskop yang terhad)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
@@ -7148,15 +7150,15 @@ msgstr "Saiz Fon"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "Mencerap keadaan"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Altitut ufuk: 0 darj."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "Altitud matahari pada senjakala: 0 darj."
 
 #~ msgid "Set Location "
 #~ msgstr "Tentukan Lokasi "
@@ -7625,10 +7627,6 @@ msgstr ""
 
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "Altitud Matahari pada waktu senja"
-
-#, qt-format
-#~ msgid "Culminated at %1 (%2 ago) at %3 deg."
-#~ msgstr "Berakhir pada %1 (%2 yang lalu) pada %3 darj."
 
 #~ msgid "F7"
 #~ msgstr "F7"

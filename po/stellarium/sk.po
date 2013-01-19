@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 10:07+0700\n"
+"POT-Creation-Date: 2013-01-18 23:15+0700\n"
 "PO-Revision-Date: 2012-11-16 12:05+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-18 04:42+0000\n"
+"X-Launchpad-Export-Date: 2013-01-19 04:47+0000\n"
 "X-Generator: Launchpad (build 16430)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -6824,8 +6824,8 @@ msgstr "Kulminuje o %1 (%2) vo výške %3 st."
 
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
-msgid "Transit at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgid "Culminated at %1 (%2 ago) at %3 deg."
+msgstr "Kulminácia nastala o %1 (pred %2) vo výške %3 st."
 
 #: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
@@ -7531,7 +7531,3 @@ msgstr ""
 
 #~ msgid "Telescope Control Plugin"
 #~ msgstr "Modul ovládanie ďalekohľadu"
-
-#, qt-format
-#~ msgid "Culminated at %1 (%2 ago) at %3 deg."
-#~ msgstr "Kulminácia nastala o %1 (pred %2) vo výške %3 st."

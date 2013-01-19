@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 10:07+0700\n"
-"PO-Revision-Date: 2013-01-10 13:21+0000\n"
+"POT-Creation-Date: 2013-01-18 23:15+0700\n"
+"PO-Revision-Date: 2013-01-18 20:27+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-18 04:41+0000\n"
+"X-Launchpad-Export-Date: 2013-01-19 04:46+0000\n"
 "X-Generator: Launchpad (build 16430)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -6830,8 +6830,8 @@ msgstr "Kulminerer kl. %1 (om %2) ved %3 grd."
 
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
-msgid "Transit at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgid "Culminated at %1 (%2 ago) at %3 deg."
+msgstr "Kulminerte kl. %1 (%2 siden) ved %3 grd."
 
 #: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
@@ -6951,13 +6951,15 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Horisonthøyde:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"Minimum observerbar høyde (pga. fjell, bygninger eller bare en begrenset "
+"teleskopmontering)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
@@ -7136,15 +7138,15 @@ msgstr "Skriftstørrelse"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "Observasjonsforhold"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Horisonthøyde: 0 grd."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "Solhøyde ved tussmørke: 0 grd."
 
 #~ msgid "Equator Line"
 #~ msgstr "Ekvatorlinje"
@@ -7579,10 +7581,6 @@ msgstr ""
 
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "Solhøyde ved tussmørke"
-
-#, qt-format
-#~ msgid "Culminated at %1 (%2 ago) at %3 deg."
-#~ msgstr "Kulminerte kl. %1 (%2 siden) ved %3 grd."
 
 #~ msgid "F7"
 #~ msgstr "F7"
