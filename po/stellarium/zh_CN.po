@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-12 13:42+0000\n"
-"Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
+"PO-Revision-Date: 2013-01-21 04:05+0000\n"
+"Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-19 04:50+0000\n"
+"X-Launchpad-Export-Date: 2013-01-21 04:39+0000\n"
 "X-Generator: Launchpad (build 16430)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -128,7 +128,7 @@ msgstr "绝对星等: %1"
 #: src/core/modules/Planet.cpp:463
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr "站心黄道坐标(当前日期纪元):%1/%2"
+msgstr "站心黄道坐标(当前日期纪元): %1/%2"
 
 #: src/core/modules/Planet.cpp:464
 #, qt-format
@@ -139,7 +139,7 @@ msgstr "自转轴倾角(当前日期，相对于地球轨道面): %1"
 #: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr "距离：%1 天文单位（%2 千米）"
+msgstr "距离: %1 天文单位(%2 千米)"
 
 #: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:242
 #: src/core/modules/Comet.cpp:156
@@ -347,7 +347,7 @@ msgstr "赤经/赤纬 (J2000): %1/%2"
 #: src/core/StelObject.cpp:99
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "赤经/赤纬(当前日期纪元)：%1/%2"
+msgstr "赤经/赤纬(当前日期纪元): %1/%2"
 
 #: src/core/StelObject.cpp:106
 #, qt-format
@@ -1446,17 +1446,17 @@ msgstr "由于水星公转轨道与自转周期的巧合，在某些时候和地
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
-msgstr "就在火星食太阳之前，火卫一从火星后面赶上并先行挡住太阳。这发生在2017年4月26日，天蝎座和人马座之间。"
+msgstr "就在火星掩食太阳之前，火卫一从火星后面赶上并先行遮挡太阳。这发生在2017年4月26日，位于天蝎座和人马座之间。"
 
 #: src/translations.h:256
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
-msgstr "就在火星食太阳之前，火卫一从火星后面赶上并先行挡住太阳。这发生在2031年7月23日，金牛座和双子座之间。"
+msgstr "就在火星掩食太阳之前，火卫一从火星后面赶上并先行遮挡太阳。这发生在2031年7月23日，位于金牛座和双子座之间。"
 
 #: src/translations.h:257
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr "从奥林匹斯山上看火卫一2068年 1月10日的日蚀"
+msgstr "从奥林匹斯山上看2068年1月10日的火卫一日食"
 
 #: src/translations.h:258
 msgid ""
@@ -1464,7 +1464,7 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
-"在火星上，火卫一时常遮掩地球或木星（掩星），但在一天之内遮掩到它们两个的情况就非常罕见了。这里是其中的一次，2048年 1月23日，真实时间速度播放。"
+"从火星上看，火卫一时常遮掩地球或木星（掩星），但在一天之内遮掩到它们两个的情况就非常罕见了。这里是其中的一次，2048年 1月23日，按真实时间速度播放。"
 
 #: src/translations.h:259
 msgid ""
@@ -1508,7 +1508,7 @@ msgstr "日行迹演示 —— 一年当中每天同一时刻太阳所在位置�
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
-msgstr "第谷·布拉赫1572年观测到的超新星爆发。需启用超新星插件。"
+msgstr "演示第谷·布拉赫于1572年观测到的超新星爆发。需启用超新星插件。"
 
 #: src/translations.h:271
 msgid "Andorra"
@@ -3041,7 +3041,7 @@ msgstr "海拔:"
 
 #: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
-msgstr "输入海拔高度(以m为单位)"
+msgstr "输入海拔高度(以米为单位)"
 
 #: src/ui_locationDialogGui.h:410
 msgid " m"
@@ -3568,7 +3568,7 @@ msgstr "银道坐标系，纪元J2000.0"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
-msgstr "经度/纬度（纪元J2000.0）"
+msgstr "经度/纬度(纪元J2000.0)"
 
 #: src/ui_configurationDialog.h:1016
 msgid "Control"
@@ -4406,7 +4406,7 @@ msgstr "人造卫星"
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
-msgstr "使用基于北美防空联合司令部的两行轨道数据[NORAD TLE]来预测绕地人造卫星的位置"
+msgstr "使用基于北美防空联合司令部的两行轨道数据(NORAD TLE)来预测绕地人造卫星的位置"
 
 #: plugins/Satellites/src/Satellites.cpp:172
 msgid ""
@@ -4442,7 +4442,7 @@ msgstr "距离变率：%1 千米/秒"
 #: plugins/Satellites/src/Satellite.cpp:260
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr "高度：%1 千米"
+msgstr "高度: %1 千米"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:263
@@ -4513,7 +4513,7 @@ msgstr "预测的位置仅在较短时间内较为准确（距目前几天、几
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
-msgstr "轨道资料很容易过时（在数周甚至几天后）。如果您需要获得有用的资料，请及时更新两行式轨道数据[TLE]。"
+msgstr "轨道资料很容易过时（在数周甚至几天后）。如果您需要获得有用的资料，请及时更新两行式轨道数据(TLE)。"
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
@@ -4533,14 +4533,14 @@ msgstr "此卫星插件目前仍在开发阶段，一些功能可能不甚完全
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:308
 msgid "TLE data updates"
-msgstr "两行式轨道数据[TLE]更新"
+msgstr "两行式轨道数据(TLE)更新"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:309
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
-msgstr "此卫星插件能够自动从网络下载两行式轨道数据[TLE]，而默认的更新频率为 72小时，超过此时间的旧数据将被更新。 "
+msgstr "此卫星插件能够自动从网络下载两行式轨道数据(TLE)，默认的更新频率为72小时，超过此时间的旧数据将被更新。 "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
 #, qt-format
@@ -4579,8 +4579,8 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
-"此插件使用简化常规/深空扰动的近似解析解模型[SGP4/SDP4]来计算卫星的位置，并使用北美防空联合司令部的两行式轨道数据[NORAD "
-"TLE]作为输入。 "
+"此插件使用简化常规/深空扰动的近似解析解模型(SGP4/SDP4)来计算卫星的位置，并使用北美防空联合司令部的两行式轨道数据(NORAD "
+"TLE)作为输入。 "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
 msgid ""
@@ -4753,7 +4753,7 @@ msgstr "[所有卫星]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:634
 msgid "Select TLE Update File"
-msgstr "选择两行式轨道数据[TLE]更新文件"
+msgstr "选择两行式轨道数据(TLE)更新文件"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid "Downloading data..."
@@ -4792,7 +4792,7 @@ msgstr "卫星设置"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Update TLE lists from Internet sources"
-msgstr "从网络更新两行式轨道数据[TLE]列表"
+msgstr "从网络更新两行式轨道数据(TLE)列表"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:637
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -4919,7 +4919,7 @@ msgstr "TLE 数据："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "NORAD two line element orbit data"
-msgstr "北美防空联合司令部的两行轨道数据[NORAD TLE]"
+msgstr "北美防空联合司令部的两行轨道数据(NORAD TLE)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove the selected satellites"
@@ -5807,8 +5807,8 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"这是一个用于为 Stellarium 添加小行星或是彗星的界面。它可以通过从小行星中心[Minor Planet "
-"Center]的网站上下载天体列表并在其在线数据库中检索信息。此功能暂处于开发阶段。"
+"这是一个用于为 Stellarium 添加小行星或是彗星的界面。它可以通过从小行星中心(Minor Planet "
+"Center)的网站上下载天体列表并在其在线数据库中检索信息。此功能暂处于开发阶段。"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
@@ -5851,8 +5851,8 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
-"您可以导入使用国际天文学联合会[IAU]小行星中心[MPC]的输出格式的彗星与小行星数据（%1）。您可以导入列表文件，从互联网下载这种的列表，或是使用在线"
-"的小行星和彗星星历服务[MPES]进行检索。"
+"您可以导入使用国际天文学联合会(IAU)小行星中心(MPC)的输出格式的彗星与小行星数据(%1)。您可以导入列表文件，从互联网下载这种的列表，或是使用在线"
+"的小行星和彗星星历服务(MPES)进行检索。"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
@@ -6624,12 +6624,12 @@ msgstr "不会升起"
 #: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr "%1 上中天（%2 之后）高度为%3 度"
+msgstr "%1 上中天(%2 之后)高度为 %3 度"
 
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr "%1 上中天（%2 之前）高度为%3 度"
+msgstr "%1 上中天(%2 之前)高度为 %3 度"
 
 #: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
@@ -6713,10 +6713,9 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"这个插件分析选择的天体的可观测性（或者当没有天体被选择时，屏幕中心天区）。这个插件可以显示天体升、中天、落时间和一年中的最佳观测时间。（也就是天体对太阳的"
-"角距离最大的时间），天体夜晚在地平线以上的日期范围，以及日没升/日出落（冲日）和偕日升/偕日落（合日）日期。<br>太阳系天体的运行和恒星视差也被考虑在内"
-"。<br><br>作者感谢Alexander Wolf和Georg Zotti所提出的建议。<br><br>Ivan Marti-"
-"Vidal（昂萨拉天文台）"
+"本插件分析选中天体的可观测性（未选中任何天体时则分析屏幕中心天区）。插件可以显示天体升、中天、落时间和一年中的最佳观测时间。（也就是天体对太阳的角距离最大"
+"的时间），天体夜晚在地平线以上的日期范围，以及日没升/日出落（冲日）和偕日升/偕日落（合日）日期。<br>太阳系天体的运行和恒星视差也被考虑在内。<br>"
+"<br>作者感谢 Alexander Wolf 和 Georg Zotti 所提出的建议。<br><br>Ivan Marti-Vidal（昂萨拉天文台）"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
@@ -6726,7 +6725,7 @@ msgstr "显示项说明"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
-msgstr "曙暮光太阳高度"
+msgstr "晨昏蒙影时太阳高度:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -6735,19 +6734,19 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
-"当太阳低于这个高度时，所有天体都可以认为是可见的。天文曙暮光的太阳高度大约为-12度到-18度，这个数据只被用于估计可进行观测的时间（见下文）。"
+"当太阳低于这个高度时，可以认为所有天体都是可见的。天文晨昏蒙影的太阳高度大约为-12度到-18度，这个数据只被用于估计可进行观测的时间（见下文）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "地平高度限制："
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
-msgstr ""
+msgstr "最小可观测高度（考虑到地面遮挡和望远镜限制等）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
@@ -6796,8 +6795,8 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
-"这发生在天体和太阳的的角距离达到最大值时。在大多数情况下，这是指该天体和太阳的赤经恰好相差180度，亦即太阳在天体的对面。当天体位于它与太阳最大角距离的位"
-"置时（不论该天体是行星还是恒星），它大约在午夜上中天，处于天空中最黑暗的区域。因此，这是观测某个人天体“最好”的机会。"
+"最大太阳张角发生在天体和太阳的的角距离达到最大值时。在大多数情况下，这是指该天体和太阳的赤经恰好相差180度，亦即太阳处在该天体的对面。当天体位于它与太阳"
+"最大角距离的位置时（不论该天体是行星还是恒星），它大约在午夜上中天，处于天空中最黑暗的区域。因此，这是观测某个天体的“最佳”时间。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
@@ -6822,11 +6821,11 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"这个程序计算天体夜晚至少有一刻在地平线上的时间范围。对于“夜晚”，这个程序将其定义为太阳高度角低于曙暮光高度（可以被用户定义，见上文）。当天体(或系外行星"
-")被选定时，程序给出的本年可观测时间范围有两种形式：一是一个从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日"
-"期，再从另一个日期到12月31日）。在第一种情况下，第一个日期（在我们的例子中是1月20日）会接近该天体的偕日落（合日）。在第二种情况中（比如类似于从1月"
-"1日到5月20日，再从9月21日到12月31日），第一个日期（在我们的例子中是5月20日）会接近该天体的偕日升（合日）。用于计算恒星和行星偕日升/偕日落（"
-"合日）的更加精确的公式（不依赖于用户设定的曙暮光太阳高度角）会在这个插件的未来版本中实现。"
+"这个程序计算天体夜晚至少有一刻在地平线上的时间范围。对于“夜晚”，这个程序将其定义为太阳高度角低于晨昏蒙影的高度（用户可设置，见上文）。当天体（或系外行星"
+"）被选定时，程序给出的本年可观测时间范围有两种形式：从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日期，再从"
+"另一个日期到12月31日）。在第一种情况下，第一个日期（本例中为1月20日）会接近该天体的偕日落（合日）。在第二种情况中（比如类似于从1月1日到5月20日"
+"，再从9月21日到12月31日），第一个日期（本例中为5月20日）会接近该天体的偕日升（合日）。用于计算恒星和行星偕日升/偕日落（合日）的更加精确的算法（"
+"不依赖于用户设定的晨昏蒙影太阳高度角）会在插件的未来版本中实现。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
@@ -6899,15 +6898,15 @@ msgstr "字体大小"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "观测条件"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "地平高度限制: 0 度。"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "晨昏蒙影时太阳高度: 0 度。"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道坐标网格"
