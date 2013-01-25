@@ -116,6 +116,20 @@ double StelMainScriptAPI::getJDay() const
 	return StelApp::getInstance().getCore()->getJDay();
 }
 
+//! Set the current date in Modified Julian Day
+//! @param MJD the Modified Julian Date
+void StelMainScriptAPI::setMJDay(double MJD)
+{
+	StelApp::getInstance().getCore()->setMJDay(MJD);
+}
+
+//! Get the current date in Modified Julian Day
+//! @return the Modified Julian Date
+double StelMainScriptAPI::getMJDay() const
+{
+	return StelApp::getInstance().getCore()->getMJDay();
+}
+
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
 	StelApp::getInstance().getCore()->setJDay(jdFromDateString(dt, spec));
