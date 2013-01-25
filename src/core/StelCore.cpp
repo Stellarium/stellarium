@@ -746,6 +746,16 @@ double StelCore::getJDay() const
 	return JDay;
 }
 
+void StelCore::setMJDay(double MJD)
+{
+	JDay=MJD+2400000.5;
+}
+
+double StelCore::getMJDay() const
+{
+	return JDay-2400000.5;
+}
+
 double StelCore::getPresetSkyTime() const
 {
 	return presetSkyTime;
