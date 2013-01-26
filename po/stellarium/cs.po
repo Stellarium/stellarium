@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-06 18:13+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2013-01-25 21:05+0000\n"
+"Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-19 04:41+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-26 04:42+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -217,7 +217,7 @@ msgstr "Zdánlivá magnituda: <b>%1</b> (podle absorpce)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "dvojitá hvězda"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -1251,12 +1251,12 @@ msgstr "asteroid"
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "měsíc"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1402,7 +1402,7 @@ msgstr "Zákryt Zěme a Jupitera v 2048"
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "3 přechody a 2 zatmění z Deimosu 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1519,6 +1519,11 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Phobos předežene Mars a přejde přes Slunce, projde jím a pak se retrográdně "
+"vrátí zpět ke slunci, částečně jím znovu přejde (lze vidět pouze v jižní "
+"polokouli na Deimosu), následně Mars zcela zatmí slunce zatímco Phobos "
+"projde temnotou mezi Marsem a Deimosem. Když se Phobos vynoří z Marsu, je "
+"stále zastíněn jeho stínem a později je znovu osvětlen."
 
 #: src/translations.h:260
 msgid ""
@@ -1549,13 +1554,15 @@ msgstr ""
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
-msgstr ""
+msgstr "Ukázka analemy - dráhy Slunce po obloze během roku."
 
 #: src/translations.h:266
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Záblesk supernovy, jenž zpozoroval Tycho Brahe v roce 1572. Musí být povolen "
+"zásuvný modul Supernov."
 
 #: src/translations.h:271
 msgid "Andorra"
@@ -2545,7 +2552,7 @@ msgstr "Přidat 1 hvězdný rok"
 
 #: src/translations.h:523
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Přidat 1 siderické století"
 
 #: src/translations.h:524
 msgid "Add 1 solar day"
@@ -2585,7 +2592,7 @@ msgstr "Přidat1 průměrný tropický rok"
 
 #: src/translations.h:533
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Přidat 1 střední tropické století"
 
 #: src/translations.h:534
 msgid "Slow down the script execution rate"
@@ -2657,7 +2664,7 @@ msgstr "Odebrat 1 hvězdný rok"
 
 #: src/translations.h:551
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Odečíst 1 siderické století"
 
 #: src/translations.h:552
 msgid "Subtract 1 solar day"
@@ -2697,7 +2704,7 @@ msgstr "Odečíst 1 průměrný tropický rok"
 
 #: src/translations.h:561
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Odečíst 1 střední tropické století"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:564
@@ -3662,8 +3669,8 @@ msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
-"Při spuštění nastaví Stellarium dátum a čas na nejbližší příští výskyt "
-"tohoto času."
+"Při spuštění Stellaria nastaví datum a čas na nejbližší příští výskyt tohoto "
+"času"
 
 #: src/ui_configurationDialog.h:1034
 msgid "System date at:"
@@ -4508,7 +4515,7 @@ msgstr "Mezinárodní označení"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "umělý satelit"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
@@ -6659,23 +6666,23 @@ msgstr "Aktualizovat data exoplanet z internetu"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
 msgid "Display mode for exoplanets"
-msgstr ""
+msgstr "Režim zobrazení pro exoplanety"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "Znázornit všechny systémy s exoplanetami bez jmenovek"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "Povolit zobrazení rozšíření exoplanet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "Zobrazit exoplanety od jejich objevení"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "Povolit časovou osu objevů exoplanet"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
@@ -6691,6 +6698,12 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
+"Zobrazí analýzu pozorovatelnosti zdroje (časy východu, západu a přechodu) a "
+"také epochy v roce, kdy lze zdroj nejlépe pozorovat. Předpokládá, že zdroj "
+"lze pozorovat, pokud je nad horizontem během části noci. Zásuvný modul také "
+"udává den největší vzdálenosti od Slunce a dny Akronického a Kosmického "
+"východu/západu.<br><br> Vysvětlení veličin, zobrazených tímto skriptem, je "
+"uvedeno v kartě 'O aplikaci' v okně nastavení"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
@@ -6814,7 +6827,7 @@ msgstr "Zdroj není pozorovatelný."
 
 #: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "Akronický ani Kosmický východ/západ nejsou nastaveny."
 
 #: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
@@ -6831,7 +6844,7 @@ msgstr " (na %1 atup.)"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
-msgstr ""
+msgstr "Akronický východ/západ"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
