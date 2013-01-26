@@ -190,12 +190,26 @@ QString StelMainScriptAPI::getObserverLocation()
 QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 {
 	StelCore* core = StelApp::getInstance().getCore();
+	const PlanetP& planet = core->getCurrentPlanet();
+	double siderealDay = planet->getSiderealDay();
+	double siderealPeriod = planet->getSiderealPeriod();
+	double solarDay;
+	QString planetName = core->getCurrentLocation().planetName;
+	if ((planetName == "Venus") || (planetName == "Uranus"))
+		solarDay = StelUtils::calculateSolarDay(siderealPeriod, siderealDay, false);
+	else
+		solarDay = StelUtils::calculateSolarDay(siderealPeriod, siderealDay, true);
+
 	QVariantMap map;
 	map.insert("longitude", core->getCurrentLocation().longitude);
 	map.insert("latitude", core->getCurrentLocation().latitude);
-	map.insert("planet", core->getCurrentLocation().planetName);
+	map.insert("planet", planetName);
 	map.insert("altitude", core->getCurrentLocation().altitude);
 	map.insert("location", core->getCurrentLocation().getID());
+	// extra data
+	map.insert("sidereal-year", siderealPeriod);
+	map.insert("sidereal-day", siderealDay*24.);
+	map.insert("solar-day", solarDay*24.);
 
 	return map;
 }
