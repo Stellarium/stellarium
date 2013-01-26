@@ -203,7 +203,9 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// This is a kludge
 	if( lat > 90.0 )  lat = 90.0;
 	if( lat < -90.0 ) lat = -90.0;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.)
+	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
+	// 360 degrees = 24hrs; 15 degrees = 1hr = 3600s; 1 degree = 240s
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude-StelUtils::getDeltaT(jd)/240.)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
