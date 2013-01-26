@@ -1216,9 +1216,12 @@ double decYear2DeltaT(double y)
 double getDeltaT(double jDay)
 {
 	int year, month, day;
+	double moon = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+	if (year<1955 or year>2005)
+		moon = getMoonSecularAcceleration(jDay);
 	// approximate "decimal year" = year + (month - 0.5)/12
-	return decYear2DeltaT(year + (month - 0.5)/12);
+	return decYear2DeltaT(year + (month - 0.5)/12)+moon;
 }
 
 double getMoonSecularAcceleration(double jDay)
