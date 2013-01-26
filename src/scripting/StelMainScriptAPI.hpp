@@ -231,6 +231,9 @@ public slots:
 	//! - latitude : latitude in decimal degrees
 	//! - planet : name of planet
 	//! - location : city and country
+	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
+	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
+	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
 	QVariantMap getObserverLocationInfo();
 
 	//! Save a screenshot.
