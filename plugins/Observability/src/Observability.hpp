@@ -71,6 +71,9 @@ public:
 	//! Set the Sun altitude at twilight:
 	void setSunAltitude(int);
 
+	//! Set the Sun altitude at twilight:
+	void setHorizAltitude(int);
+
 
 	//! get Show Flags from current configuration:
 	bool getShowFlags(int);
@@ -83,6 +86,10 @@ public:
 
 	//! get current Sun altitude at twilight:
 	int getSunAltitude(void);
+
+	//! get current Horizon altitude:
+	int getHorizAltitude(void);
+
 
 public slots:
 //! Set whether observability will execute or not:
@@ -127,8 +134,9 @@ private:
 //! @param DecSun declination of the Sun (in radians).
 //! @param RAMoon idem for the Moon.
 //! @param DecMoon idem for the Moon.
+//! @param EclLon is the module of the vector product of Heliocentric Ecliptic Coordinates of Sun and Moon (projected over the Ecliptic plane). Useful to derive the dates of Full Moon.
 //! @param getBack controls whether Earth and Moon must be returned to their original positions after computation.
-	virtual void getSunMoonCoords(StelCore* core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, bool getBack);
+	virtual void getSunMoonCoords(StelCore* core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, double &EclLon, bool getBack);
 
 
 //! computes the selected-planet coordinates at a given Julian date.
@@ -194,7 +202,7 @@ private:
 	virtual bool CheckRise(int i);
 
 //! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune,RefracHoriz,HorizAlti;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
@@ -224,7 +232,7 @@ private:
 
 
 //! Current simulation year and number of days in the year.;
-	int currYear, nDays, iAltitude;
+	int currYear, nDays, iAltitude, iHorizAltitude;
 
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
 	QString selName, bestNight, ObsRange, objname, AcroCos;

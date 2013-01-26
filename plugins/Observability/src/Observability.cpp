@@ -91,6 +91,7 @@ Observability::Observability()
 	MoonPerilune = 0.0024236308; // Smallest Earth-Moon distance (in AU). 
 	nextFullMoon = 0.0;
 	prevFullMoon = 0.0;
+	RefracHoriz = 0.0;   // Geometric altitude at refraction-corrected horizon. 
 	selName = "";
 
 
@@ -122,6 +123,9 @@ Observability::Observability()
 	if (!conf->contains("Sun_Altitude"))
 		conf->setValue("Sun_Altitude", 12);
 
+	if (!conf->contains("Horizon_Altitude"))
+		conf->setValue("Horizon_Altitude", 0);
+
 	if (!conf->contains("show_FullMoon"))
 		conf->setValue("show_FullMoon", true);
 
@@ -135,7 +139,9 @@ Observability::Observability()
 	// Load settings from main config file
 	fontSize = conf->value("font_size",15).toInt();
 	iAltitude = conf->value("Sun_Altitude",12).toInt();
+	iHorizAltitude = conf->value("Horizon_Altitude",0).toInt();
 	AstroTwiAlti = -((double) iAltitude)/Rad2Deg ;
+	HorizAlti = ((double) iHorizAltitude)/Rad2Deg ;
 	font.setPixelSize(fontSize);
 	QString fontColorStr = conf->value("font_color", "0,0.5,1").toString();
 	fontColor = StelUtils::strToVec3f(fontColorStr);
@@ -264,7 +270,11 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	double currheight = (6371.+(core->getCurrentLocation().altitude)/1000.)/UA;
 	double currJD = core->getJDay();
 	double currJDint;
+//	GMTShift = StelUtils::getGMTShiftFromQT(currJD)/24.0;
 	GMTShift = StelApp::getInstance().getLocaleMgr().getGMTShift(currJD)/24.0;
+
+//	qDebug() << QString("%1%2 ").arg(GMTShift);
+
 	double currLocalT = 24.*modf(currJD + GMTShift,&currJDint);
 
 	int auxm, auxd, auxy;
@@ -301,6 +311,28 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		ObserverLoc[1] = temp1*std::sin(currlon);
 		ObserverLoc[2] = currheight*std::sin(currlat);
 	};
+
+
+
+// Add refraction, if necessary:
+	Vec3d TempRefr;	
+	TempRefr[0] = std::cos(HorizAlti);  
+	TempRefr[1] = 0.0; 
+	TempRefr[2] = std::sin(HorizAlti);  
+	Vec3d CorrRefr = core->altAzToEquinoxEqu(TempRefr,StelCore::RefractionAuto);
+	TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionOff);
+	double RefracAlt = std::asin(TempRefr[2]);
+
+	if (std::abs(RefracHoriz-RefracAlt)>2.91e-4)  // Diference larger than 1 arcminute.
+	{   // Configuration for refraction changed notably:
+		RefracHoriz = RefracAlt;
+		configChanged = true;
+		souChanged = true;
+	};
+
+
+
+
 
 // If we have changed latitude (or year), we update the vector of Sun's hour 
 // angles at twilight, and re-compute Sun/Moon ephemeris (if selected):
@@ -409,7 +441,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 /////////////////////////////////////////////////////////////////
 // NOW WE COMPUTE RISE/SET/TRANSIT TIMES FOR THE CURRENT DAY:
 	double currH = HourAngle(mylat,alti,selDec);
-	horizH = HourAngle(mylat,0.0,selDec);
+	horizH = HourAngle(mylat,RefracHoriz,selDec);
 	QString RS1, RS2, Cul; // strings with Rise/Set/Culmination times
 	double Rise, Set; // Actual Rise/Set times (in GMT).
 	int d1,m1,s1,d2,m2,s2,dc,mc,sc; // Integers for the time spans in hh:mm:ss.
@@ -490,7 +522,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			};				
 		}
 		else { // The source is either circumpolar or never rises:
-			(alti>0.0)? RS1 = q_("Circumpolar."): RS1 = q_("No rise.");
+			(alti>RefracHoriz)? RS1 = q_("Circumpolar."): RS1 = q_("No rise.");
 			RS2 = "";
 		};
 
@@ -502,8 +534,8 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		transit = LocPos[1]<0.0;
 	};
 
-	if (culmAlt<halfpi) { // Source can be observed.
-		double altiAtCulmi = Rad2Deg*(halfpi-culmAlt);
+	if (culmAlt<halfpi-RefracHoriz) { // Source can be observed.
+		double altiAtCulmi = Rad2Deg*(halfpi-culmAlt-RefracHoriz);
 		double2hms(TFrac*currH,dc,mc,sc);
 
 //		String with the time span for culmination:	
@@ -540,7 +572,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			PlanetRADec(core);} // Re-compute ephemeris.
 
 		else { // Object is fixed on the sky.
-			double auxH = HourAngle(mylat,0.0,selDec);
+			double auxH = HourAngle(mylat,RefracHoriz,selDec);
 			double auxSidT1 = toUnsignedRA(selRA - auxH); 
 			double auxSidT2 = toUnsignedRA(selRA + auxH); 
 			for (int i=0;i<nDays;i++) {
@@ -556,7 +588,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		if ((souChanged || locChanged || yearChanged)) {
 			bestNight=""; ObsRange = "";
 
-			if (culmAlt>=halfpi) { // Source cannot be seen.
+			if (culmAlt>=halfpi-RefracHoriz) { // Source cannot be seen.
 				ObsRange = q_("Source is not observable.");
 				AcroCos = q_("No Acronychal nor Cosmical rise/set.");
 			}
@@ -593,11 +625,11 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 					QString AcroRiseStr, AcroSetStr;
 					QString CosmRiseStr, CosmSetStr;
 
-					AcroRiseStr = (selRise>0)?CalenDate(selRise):q_("N/A");
-					AcroSetStr = (selSet>0)?CalenDate(selSet):q_("N/A");
+					AcroRiseStr = (selRise>0)?CalenDate(selRise):q_("None");
+					AcroSetStr = (selSet>0)?CalenDate(selSet):q_("None");
 
-					CosmRiseStr = (selRise2>0)?CalenDate(selRise2):q_("N/A");
-					CosmSetStr = (selSet2>0)?CalenDate(selSet2):q_("N/A");
+					CosmRiseStr = (selRise2>0)?CalenDate(selRise2):q_("None");
+					CosmSetStr = (selSet2>0)?CalenDate(selSet2):q_("None");
 
 					AcroCos = (Acro==3 || Acro==1)?QString("%1: %2/%3.").arg(q_("Acronychal rise/set")).arg(AcroRiseStr).arg(AcroSetStr):q_("No Acronychal rise/set.");
 					AcroCos += (Acro==3 || Acro==2)?QString(" %1: %2/%3.").arg(q_("Cosmical rise/set")).arg(CosmRiseStr).arg(CosmSetStr):QString(" %1").arg(q_("No Cosmical rise/set."));
@@ -829,7 +861,7 @@ void Observability::PlanetRADec(StelCore *core)
 
 	for (int i=0;i<nDays;i++) {
 		getPlanetCoords(core,yearJD[i],ObjectRA[i],ObjectDec[i],false);
-		TempH = HourAngle(mylat,0.0,ObjectDec[i]);
+		TempH = HourAngle(mylat,RefracHoriz,ObjectDec[i]);
 		ObjectH0[i] = TempH;
 		ObjectSidT[0][i] = toUnsignedRA(ObjectRA[i]-TempH);
 		ObjectSidT[1][i] = toUnsignedRA(ObjectRA[i]+TempH);
@@ -884,7 +916,7 @@ void Observability::SunHTwi()
 
 	for (int i=0; i<nDays; i++) {
 		TempH = HourAngle(mylat,AstroTwiAlti,SunDec[i]);
-		TempH00 = HourAngle(mylat,0.0,SunDec[i]);
+		TempH00 = HourAngle(mylat,RefracHoriz,SunDec[i]);
 		if (TempH>0.0) {
 			SunSidT[0][i] = toUnsignedRA(SunRA[i]-TempH*(1.00278));
 			SunSidT[1][i] = toUnsignedRA(SunRA[i]+TempH*(1.00278));}
@@ -1026,7 +1058,7 @@ double Observability::sign(double d)
 //////////////////////////
 // Get the coordinates of Sun or Moon for a given JD:
 // getBack controls whether Earth and Moon must be returned to their original positions after computation.
-void Observability::getSunMoonCoords(StelCore *core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, bool getBack) //, Vec3d &AltAzVector)
+void Observability::getSunMoonCoords(StelCore *core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, double &EclLon, bool getBack) //, Vec3d &AltAzVector)
 {
 
 	if (getBack) // Return the Moon and Earth to their current position:
@@ -1055,6 +1087,8 @@ void Observability::getSunMoonCoords(StelCore *core, double JD, double &RASun, d
 		myMoon->computeTransMatrix(JD);
 		Pos1 = myMoon->getHeliocentricEclipticPos();
 		Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1))-RotObserver;
+
+                EclLon = Pos1[0]*Pos0[1] - Pos1[1]*Pos0[0];
 
 		toRADec(Pos2,RAMoon,DecMoon);
 	};
@@ -1144,10 +1178,10 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
 	int Niter = 100;
 	int i;
-	double Hhoriz, RA, Dec, RAS, DecS, TempH, jd1, tempEphH, currSidT;
+	double Hhoriz, RA, Dec, RAS, DecS, TempH, jd1, tempEphH, currSidT, EclLon;
 	Vec3d Observer;
 
-	Hhoriz = HourAngle(mylat,0.0,selDec);
+	Hhoriz = HourAngle(mylat,RefracHoriz,selDec);
 	bool raises = Hhoriz > 0.0;
 
 
@@ -1187,7 +1221,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
 		toRADec(Pos2,RA,Dec);
 		Vec3d MoonAltAz = core->equinoxEquToAltAz(Pos2,StelCore::RefractionOff);
-		raised = MoonAltAz[2] > 0.0;
+		raised = MoonAltAz[2] > RefracHoriz;
 
 // Initial guesses of rise/set/transit times.
 // They are called 'Moon', but are also used for the Sun or planet:
@@ -1215,7 +1249,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 	
 				if (Kind<3)
 				{
-					getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false);
+					getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,EclLon,false);
 				} else
 				{
 					getPlanetCoords(core,jd1,RA,Dec,false);
@@ -1229,7 +1263,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 				Hcurr -= (Hcurr>12.)?24.0:0.0;
 
 	// H at horizon for mod. coordinates:
-				Hhoriz = HourAngle(mylat,0.0,Dec);
+				Hhoriz = HourAngle(mylat,RefracHoriz,Dec);
 	// Compute eph. times for mod. coordinates:
 				TempH = (-Hhoriz-Hcurr)*TFrac;
 				if (raised==false) TempH += (TempH<0.0)?24.0:0.0;
@@ -1250,7 +1284,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
                 	        if (Kind<3)
 				{
-                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false);
+                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,EclLon,false);
                         	} else
                         	{
                                 	getPlanetCoords(core,jd1,RA,Dec,false);
@@ -1263,7 +1297,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 				Hcurr -= (raised)?24.:0.;
 				Hcurr += (Hcurr<-12.)?24.0:0.0;
 	// H at horizon for mod. coordinates:
-				Hhoriz = HourAngle(mylat,0.0,Dec);
+				Hhoriz = HourAngle(mylat,RefracHoriz,Dec);
 	// Compute eph. times for mod. coordinates:
 				TempH = (Hhoriz-Hcurr)*TFrac;
 				if (raised==false) TempH -= (TempH>0.0)?24.0:0.0;
@@ -1290,7 +1324,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 
                 	        if (Kind<3)
                        		{
-                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,false);
+                                	getSunMoonCoords(core,jd1,RAS,DecS,RA,Dec,EclLon,false);
                         	} else
                         	{
                                 	getPlanetCoords(core,jd1,RA,Dec,false);
@@ -1315,6 +1349,9 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 		};
 
 //		qDebug() << q_("%1").arg(MoonCulm,0,'f',5);
+
+
+	lastJDMoon = myJD;
 
 	}; // Comes from if (std::abs(myJD-lastJDMoon)>JDsec || LastObject!=Kind)
 
@@ -1341,10 +1378,10 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 	// Improve the estimate iteratively (Secant method over Lunar-phase vs. time):
 
 			dT = 0.1/1440.; // 6 seconds. Our time span for the finite-difference derivative estimate.
-			double Deriv1, Deriv2; // Variables for temporal use.
-			double Sec1, Sec2, SecMed, Temp1, Temp2; // Variables for temporal use.
+//			double Deriv1, Deriv2; // Variables for temporal use.
+			double Sec1, Sec2, Temp1, Temp2; // Variables for temporal use.
 			double iniEst1, iniEst2;  // JD values that MUST include the solution within them.
-			double Phase1, Phase2, PhaseMed;
+			double Phase1;
 
 			for (int j=0; j<2; j++) 
 			{ // Two steps: one for the previos Full Moon and the other for the next one.
@@ -1355,54 +1392,39 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 				Sec1 = iniEst1; // TempFullMoon - 0.05*MoonT; // Initial estimates of Full-Moon dates
 				Sec2 = iniEst2; // TempFullMoon + 0.05*MoonT; 
 
+				getSunMoonCoords(core,Sec1,RAS,DecS,RA,Dec,EclLon,false);
+				Temp1 = EclLon; //Lambda(RA,Dec,RAS,DecS);
+				getSunMoonCoords(core,Sec2,RAS,DecS,RA,Dec,EclLon,false);
+				Temp2 = EclLon; //Lambda(RA,Dec,RAS,DecS);
+
+
 				for (int i=0; i<100; i++) // A limit of 100 iterations.
 				{
-					getSunMoonCoords(core,Sec1+dT/2.,RAS,DecS,RA,Dec,false);
-					Temp1 = Lambda(RA,Dec,RAS,DecS);
-					getSunMoonCoords(core,Sec1-dT/2.,RAS,DecS,RA,Dec,false);
-					Temp2 = Lambda(RA,Dec,RAS,DecS);
+                                        Phase1 = (Sec2-Sec1)/(Temp1-Temp2)*Temp1+Sec1;
+					getSunMoonCoords(core,Phase1,RAS,DecS,RA,Dec,EclLon,false);
 
-					Deriv1 = (Temp1-Temp2)/dT;
-					Phase1 =  (Temp1+Temp2)/2.;
-
-					getSunMoonCoords(core,Sec2+dT/2.,RAS,DecS,RA,Dec,false);
-					Temp1 = Lambda(RA,Dec,RAS,DecS);
-					getSunMoonCoords(core,Sec2-dT/2.,RAS,DecS,RA,Dec,false);
-					Temp2 = Lambda(RA,Dec,RAS,DecS);
-
-					Deriv2 = (Temp1-Temp2)/dT;
-					Phase2 =  (Temp1+Temp2)/2.;
-
-					SecMed = (Sec2+Sec1)/2.;
-					getSunMoonCoords(core,SecMed+dT/2.,RAS,DecS,RA,Dec,false);
-					Temp1 = Lambda(RA,Dec,RAS,DecS);
-					getSunMoonCoords(core,SecMed-dT/2.,RAS,DecS,RA,Dec,false);
-					Temp2 = Lambda(RA,Dec,RAS,DecS);
-
-				//	DerivMed = (Temp1-Temp2)/dT;
-					PhaseMed =  (Temp1+Temp2)/2.;
-
-					Temp1 = Sec2 - Deriv2*(Sec2-Sec1)/(Deriv2-Deriv1);
-
-					// Force the solution to fall within the range of good possible solutions:
-					if (Temp1 < iniEst1 || Temp1 > iniEst2) 
+                                        if (Temp1*EclLon < 0.0) 
 					{
-						if (Phase1>Phase2)
-						{
-							Sec2 = (Phase2 > PhaseMed)?Sec2:SecMed;
-						} else 
-						{
-							Sec1 = Sec2;
-							Sec2 = (Phase1>PhaseMed)?Sec1:SecMed;
-						};
-					} else
-					{
-						Sec1 = Sec2; Sec2 = Temp1;
+						Sec2 = Phase1;
+						Temp2 = EclLon;
+					} else {
+						Sec1 = Phase1;
+						Temp1 = EclLon;
+
 					};
 
-					if (std::abs(Sec2-Sec1) < 10.*dT) {TempFullMoon = Temp1; break;}  // 1 minute accuracy. Convergence.
+				//	qDebug() << QString("%1 %2 %3 %4 ").arg(Sec1).arg(Sec2).arg(Temp1).arg(Temp2);	
 
+
+					if (std::abs(Sec2-Sec1) < 10.*dT)  // 1 minute accuracy; convergence.
+					{
+						TempFullMoon = (Sec1+Sec2)/2.;
+				//		qDebug() << QString("%1%2 ").arg(TempFullMoon);	
+						break;
+					};
+					
 				};
+
 
 				if (TempFullMoon > myJD) 
 				{
@@ -1473,13 +1495,11 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 // Return the Moon and Earth to its current position:
 	if (Kind<3)
 	{
-		getSunMoonCoords(core,myJD,RAS,DecS,RA,Dec,true);
+		getSunMoonCoords(core,myJD,RAS,DecS,RA,Dec,EclLon,true);
 	} else
 	{
                 getPlanetCoords(core,myJD,RA,Dec,true);
 	};
-
-	lastJDMoon = myJD;
 
 
 	return raises;
@@ -1520,6 +1540,7 @@ void Observability::restoreDefaultConfigIni(void)
 	// Set defaults
 	conf->setValue("font_size", 15);
 	conf->setValue("Sun_Altitude", 12);
+	conf->setValue("Horizon_Altitude", 0);
 	conf->setValue("font_color", "0,0.5,1");
 	conf->setValue("show_AcroCos", true);
 	conf->setValue("show_Good_Nights", true);
@@ -1552,7 +1573,11 @@ void Observability::readSettingsFromConfig(void)
 
 	iAltitude = conf->value("Sun_Altitude", 12).toInt();
 	AstroTwiAlti  = -((double)iAltitude)/Rad2Deg ;
+
+	iHorizAltitude = conf->value("Horizon_Altitude", 0).toInt();
+	HorizAlti = ((double)iHorizAltitude)/Rad2Deg ;
 	
+
 	conf->endGroup();
 }
 
@@ -1564,6 +1589,7 @@ void Observability::saveSettingsToConfig(void)
 	conf->beginGroup("Observability");
 	conf->setValue("font_size", fontSize);
 	conf->setValue("Sun_Altitude", iAltitude);
+	conf->setValue("Horizon_Altitude", iHorizAltitude);
 	conf->setValue("font_color", fontColorStr);
 	conf->setValue("show_AcroCos", show_AcroCos);
 	conf->setValue("show_Good_Nights", show_Good_Nights);
@@ -1623,6 +1649,12 @@ int Observability::getSunAltitude(void)
 	return iAltitude;
 }
 
+int Observability::getHorizAltitude(void)
+{
+	return iHorizAltitude;
+}
+
+
 void Observability::setFontColor(int color, int value)
 {
 	float fValue = (float)(value) / 100.; 
@@ -1638,6 +1670,13 @@ void Observability::setSunAltitude(int value)
 {
 	AstroTwiAlti  = -((double) value)/Rad2Deg ;
 	iAltitude = value;
+	configChanged = true;
+}
+
+void Observability::setHorizAltitude(int value)
+{
+	HorizAlti = ((double) value)/Rad2Deg ;
+	iHorizAltitude = value;
 	configChanged = true;
 }
 

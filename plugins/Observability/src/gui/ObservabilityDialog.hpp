@@ -58,6 +58,7 @@ private slots:
 	void setBlue(int);
 	void setSize(int);
 	void setAltitude(int);
+	void setHorizon(int);
 
 private:
         Ui_ObservabilityDialog* ui;
