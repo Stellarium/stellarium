@@ -1125,25 +1125,19 @@ double decYear2DeltaT(double y)
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
 
-	double r = 0.;
+	// set the default value for Delta T
+	double u = (y-1820)/100.;
+	double r = (-20 + 32 * std::pow(u,2.0));;
 
-	if (y < -1999 || y > 3000)
+	if (y < 500 and y > -500)
 	{
-		r = 0.;
-	}
-	else if (y < -500)
-	{
-		r = -20 + 32 * std::pow((y-1820)/100. ,2.0);
-	}
-	else if (y < 500)
-	{
-		double u = y/100;
+		u = y/100;
 		r = (10583.6 - 1014.41 * u + 33.78311 * std::pow(u,2) - 5.952053 * std::pow(u,3)
 		       - 0.1798452 * std::pow(u,4) + 0.022174192 * std::pow(u,5) + 0.0090316521 * std::pow(u,6));
 	}
 	else if (y < 1600)
 	{
-		double u = (y-1000)/100;
+		u = (y-1000)/100;
 		r = (1574.2 - 556.01 * u + 71.23472 * std::pow(u,2) + 0.319781 * std::pow(u,3)
 		       - 0.8503463 * std::pow(u,4) - 0.005050998 * std::pow(u,5) + 0.0083572073 * std::pow(u,6));
 	}
@@ -1203,12 +1197,7 @@ double decYear2DeltaT(double y)
 	else if (y < 2150)
 	{
 		r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
-	}
-	else if (y < 3000)
-	{
-		double u = (y-1820)/100.;
-		r = (-20 + 32 * std::pow(u,2));
-	}
+	}	
 
 	return r;
 }
