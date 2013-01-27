@@ -583,8 +583,9 @@ void BottomStelBar::updateText(bool updatePos)
 	double jd = core->getJDay();
 	double deltaT = StelUtils::getDeltaT(jd);
 
-	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
-			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ";
+	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
+	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd-deltaT/86400.) +"   "
+			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd-deltaT/86400.) : " ";
 	if (datetime->text()!=newDate)
 	{
 		updatePos = true;

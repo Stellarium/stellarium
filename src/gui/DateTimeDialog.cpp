@@ -53,8 +53,7 @@ void DateTimeDialog::createDialogContent()
 	double jd = StelApp::getInstance().getCore()->getJDay();
 	// UTC -> local tz
 	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-	// setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0)-(StelUtils::getDeltaT(jd)/86400.));
-	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0));
+	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0)-(StelUtils::getDeltaT(jd)/86400.));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -173,8 +172,7 @@ double DateTimeDialog::newJd()
   double jd;  
   StelUtils::getJDFromDate(&jd,year, month, day, hour, minute, second);
   // Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-  // jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0-StelUtils::getDeltaT(jd)/86400.); // local tz -> UTC
-  jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0); // local tz -> UTC
+  jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0-StelUtils::getDeltaT(jd)/86400.); // local tz -> UTC
   return jd;
 }
 
@@ -205,8 +203,7 @@ void DateTimeDialog::setDateTime(double newJd)
 {
 	if (this->visible()) {
 		// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-		// newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0-StelUtils::getDeltaT(newJd)/86400.); // UTC -> local tz
-		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0); // UTC -> local tz
+		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0-StelUtils::getDeltaT(newJd)/86400.); // UTC -> local tz
 		StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
 		StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
 		pushToWidgets();
