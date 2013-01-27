@@ -746,6 +746,15 @@ ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffe
 TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
 
+SET(tests_testDeltaT_SRCS
+  tests/testDeltaT.hpp
+  tests/testDeltaT.cpp
+  core/StelUtils.cpp
+  core/StelUtils.hpp)
+ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
+TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testDeltaT)
+
 SET(tests_testConversions_SRCS
 	core/StelUtils.cpp
 	core/StelUtils.hpp
@@ -764,6 +773,7 @@ ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORK
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexBuffer WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDeltaT WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testConversions WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
 
