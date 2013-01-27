@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-07 10:31+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2013-01-26 14:51+0000\n"
+"Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-19 04:40+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 04:34+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -217,7 +217,7 @@ msgstr "Itxurazko magnitudea: <b>%1</b> (itzaltzearen arabera)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "izar bitarra"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -1255,7 +1255,7 @@ msgstr "asteroidea"
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "ilargia"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
@@ -2542,7 +2542,7 @@ msgstr "Gehitu izar-urte bat"
 
 #: src/translations.h:523
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Gehitu mende sideral bat"
 
 #: src/translations.h:524
 msgid "Add 1 solar day"
@@ -2582,7 +2582,7 @@ msgstr "Gehitu batez besteko urte tropikal bat"
 
 #: src/translations.h:533
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Gehitu batezbesteko mende tropikal bat"
 
 #: src/translations.h:534
 msgid "Slow down the script execution rate"
@@ -2654,7 +2654,7 @@ msgstr "Kendu izar-urte bat"
 
 #: src/translations.h:551
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Kendu mende sidereal bat"
 
 #: src/translations.h:552
 msgid "Subtract 1 solar day"
@@ -2694,7 +2694,7 @@ msgstr "Kendu batez besteko urte tropikal bat"
 
 #: src/translations.h:561
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Kendu batezbesteko mende tropikal bat"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:564
@@ -4492,7 +4492,7 @@ msgstr "Nazioarteko izendatzailea"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "satelite artifiziala"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
@@ -6592,7 +6592,7 @@ msgstr "Eguneratu exoplaneten datuak internetetik"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
 msgid "Display mode for exoplanets"
-msgstr ""
+msgstr "Exoplanetak bistaratzeko modua"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Plot all systems with exoplanets without labels"

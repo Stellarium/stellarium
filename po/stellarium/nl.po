@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2012-10-07 08:05+0000\n"
-"Last-Translator: Hendrik Daenekindt <hendrik.daenekindt@base.be>\n"
+"PO-Revision-Date: 2013-01-26 13:20+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-19 04:42+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 04:34+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -206,7 +206,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "ster"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -1239,17 +1239,17 @@ msgstr "W"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "planeet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "komeet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "asteroïde"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
@@ -3550,7 +3550,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:987
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Horizontale coördinaten"
 
 #: src/ui_configurationDialog.h:989
 msgid "Altitude/Azimuth"
@@ -3558,7 +3558,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:990
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Visuele magnitude"
 
 #: src/ui_configurationDialog.h:992
 msgid "Angular or physical size"
@@ -5101,12 +5101,12 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Versie %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
@@ -5238,7 +5238,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Decimale graden"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "D&ecimal"
@@ -5675,15 +5675,15 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "jjjj-mm-dd (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "dd-mm-jjjj"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "mm-dd-jjjj"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
@@ -5729,15 +5729,15 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "mmddyyyy"
-msgstr ""
+msgstr "mmddjjjj"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ddmmjjjj"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "yyyymmdd"
-msgstr ""
+msgstr "jjjjmmdd"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:203
@@ -5755,11 +5755,11 @@ msgstr "Taal"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Show stars"
-msgstr ""
+msgstr "Toon sterren"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Colors"
-msgstr ""
+msgstr "Kleuren"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
@@ -5775,7 +5775,7 @@ msgstr "Lijn vlak van de Melkweg"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Effects"
-msgstr ""
+msgstr "Effecten"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Manual zoom"
@@ -5898,7 +5898,7 @@ msgstr ""
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
 msgid "website"
-msgstr ""
+msgstr "website"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
@@ -5924,11 +5924,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroïden"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Comets"
-msgstr ""
+msgstr "Kometen"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
@@ -6053,7 +6053,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
-msgstr ""
+msgstr "Zonnestelsel"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
@@ -6067,7 +6067,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:97
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:113
 #, qt-format
@@ -6181,7 +6181,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "quasar"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
@@ -6476,11 +6476,11 @@ msgstr "AE"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Eccentricity"
-msgstr ""
+msgstr "Excentriciteit"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Inclination"
-msgstr ""
+msgstr "Inclinatie"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Angle Distance"
