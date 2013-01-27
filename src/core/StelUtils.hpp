@@ -292,6 +292,17 @@ namespace StelUtils
 	//!       This is currently used e.g. to measure FPS, but it should never 
 	//!       be used for critical functionality.
 	long double secondsSinceStart();
+
+	//! Get Delta-T estimation for a given date.
+	//! Note that this method is valid for the year range:
+	//! -1999 to +3000, outside of which "0" will be returned.
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaT(double jDay);
+	//! Get Secular Acceleration estimation for a given year.
+	//! @param jDay the JD
+	//! @return SecularAcceleration in seconds
+	double getMoonSecularAcceleration(double jDay);
 }
 
 #endif // _STELUTILS_HPP_
