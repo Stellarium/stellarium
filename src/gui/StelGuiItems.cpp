@@ -589,7 +589,7 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		updatePos = true;
 		datetime->setText(newDate);
-		datetime->setToolTip(QString("%1T = %2s").arg(QChar(0x0394)).arg(deltaT));
+		datetime->setToolTip(QString("%1T = %2s").arg(QChar(0x0394)).arg(deltaT, 5, 'f', 3));
 	}
 
 	QString newLocation = flagShowLocation ? q_(core->getCurrentLocation().planetName) +", "
