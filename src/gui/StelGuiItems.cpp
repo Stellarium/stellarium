@@ -581,6 +581,7 @@ void BottomStelBar::updateText(bool updatePos)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getJDay();
+	double deltaT = StelUtils::getDeltaT(jd);
 
 	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
 			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ";
@@ -588,6 +589,7 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		updatePos = true;
 		datetime->setText(newDate);
+		datetime->setToolTip(QString("%1T = %2s").arg(QChar(0x0394)).arg(deltaT));
 	}
 
 	QString newLocation = flagShowLocation ? q_(core->getCurrentLocation().planetName) +", "
