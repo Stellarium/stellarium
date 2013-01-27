@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-24 17:54+0000\n"
+"PO-Revision-Date: 2013-01-26 19:05+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-25 05:23+0000\n"
-"X-Generator: Launchpad (build 16445)\n"
+"X-Launchpad-Export-Date: 2013-01-27 04:34+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
@@ -73,7 +73,7 @@ msgstr "Típus: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Magnitúdó: <b>%1</b> (ennyire elhalványulva: <b>%2</b>"
+msgstr "Magnitúdó: <b>%1</b> (ennyire elhalványulva: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:123 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:128
@@ -224,7 +224,7 @@ msgstr "kettős csillag"
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr "Magnitódó: <b>%1</b> (kioltva: <b>%2</b>. B-V: <b>%3</b>)"
+msgstr "Magnitúdó: <b>%1</b> (kioltva: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:132 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
@@ -392,7 +392,7 @@ msgstr "(látszó)"
 #: src/core/StelObject.cpp:144
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "A, h: %1, %2"
+msgstr "Az/Alt: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
@@ -430,7 +430,7 @@ msgstr "Kezdeti látószög: %1%2"
 #: src/gui/ConfigurationDialog.cpp:641
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Kezdeti látóirány (A, h): %1, %2"
+msgstr "Kezdeti látóirány Az/Alt: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:683
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
@@ -461,7 +461,7 @@ msgstr "Futó szkript: "
 
 #: src/gui/ConfigurationDialog.cpp:802
 msgid "Running script: [none]"
-msgstr "Futó szkript [semmi]:"
+msgstr "Futó szkript [nincs]:"
 
 #: src/gui/ConfigurationDialog.cpp:865
 msgid ""
@@ -681,7 +681,7 @@ msgstr "OSX-es fejlesztő: %1"
 
 #: src/gui/StelGui.cpp:178 src/translations.h:664
 msgid "Script console window"
-msgstr "Script konzol ablak"
+msgstr "Szkript konzol ablak"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/gui/StelGui.cpp:178 src/translations.h:659
@@ -1390,7 +1390,7 @@ msgstr "Kettős fogyatkozás a Deimosról 2031-ben"
 #. TRANSLATORS: Name of script
 #: src/translations.h:224
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr "Fogyatkozás az Olympus Monsról 2068 január 10-én"
+msgstr "Fogyatkozás az Olympus Monsról nézve 2068. január 10-én"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:226
@@ -2589,7 +2589,7 @@ msgstr "+1 tropikus évszázad"
 
 #: src/translations.h:534
 msgid "Slow down the script execution rate"
-msgstr "Lassítsa le a script végrehajtási sebességét"
+msgstr "Lassítsa le a szkript végrehajtási sebességét"
 
 #: src/translations.h:535
 msgid "Decrease time speed"
@@ -2601,7 +2601,7 @@ msgstr "Csökkentse az idő sebességét (egy kicsit)"
 
 #: src/translations.h:537
 msgid "Speed up the script execution rate"
-msgstr "Gyorsítsa fel a script végrehajtási sebességét"
+msgstr "Gyorsítsa fel a szkript végrehajtási sebességét"
 
 #: src/translations.h:538
 msgid "Increase time speed"
@@ -2625,7 +2625,7 @@ msgstr "Vissza a jelenbe"
 
 #: src/translations.h:543
 msgid "Set the normal script execution rate"
-msgstr "állítsa be a script normális végrehajtási sebességét"
+msgstr "A szkript normál végrehajtási sebességen"
 
 #: src/translations.h:544
 msgid "Set normal time rate"
@@ -2987,7 +2987,7 @@ msgstr "A tájképek szkriptjének indítása"
 
 #: src/translations.h:656
 msgid "Show and zoom Moon"
-msgstr ""
+msgstr "Hold mutatása, zoom"
 
 #: src/translations.h:660
 msgid "Configuration window"
@@ -3946,11 +3946,11 @@ msgstr "szkript törlése"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "szkript előfeldolgozása SSC preprocesszorral"
 
 #: src/ui_scriptConsole.h:359
 msgid "pre-process script using STS preprocessor"
-msgstr ""
+msgstr "szkript előfeldolgozása STS preprocesszorral"
 
 #: src/ui_scriptConsole.h:362
 msgid "quickly load and run a utility script"
@@ -4026,6 +4026,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Az égboltot úgy mutatja, mintha egy távcső szemlencséjén keresztül néznénk. "
+"Csak a nagyítás és a látótér nagysága állítható. Mutatja a képszenzor "
+"keretét és a Telradot is."
 
 #: plugins/Oculars/src/Oculars.cpp:752
 msgid "Please select an object before switching to ocular view."
@@ -5063,7 +5066,7 @@ msgstr "Elvetés"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:77
 msgid "Telescope Control"
-msgstr "Távcső irányítás"
+msgstr "Távcső irányítása"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:80
 msgid ""
@@ -5127,7 +5130,7 @@ msgstr "Verzió: %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
@@ -5729,6 +5732,7 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
+"A planetáriumokban használt 0.9.x sorozatú Text User Interface (TUI)."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Solar System body"
@@ -5844,7 +5848,7 @@ msgstr "Helyi szkript futtatása"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
-msgstr "Futó szkript meállítása"
+msgstr "Futó szkript megállítása"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
@@ -6225,7 +6229,7 @@ msgstr "[következő frissítés]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
-msgstr "kvazárok"
+msgstr "Kvazárok"
 
 #: plugins/Quasars/src/Quasars.cpp:73
 msgid ""
@@ -6269,7 +6273,7 @@ msgstr "Kvazárok frissítve"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:246
 msgid "Quasars Configuration"
-msgstr "kvazárok beállításai"
+msgstr "Kvazárok beállításai"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
@@ -6289,7 +6293,7 @@ msgstr "Kvazárok eloszlásának mutatása"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
-msgstr "pulzárok"
+msgstr "Pulzárok"
 
 #: plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
@@ -6461,11 +6465,11 @@ msgstr "Franciaország"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr "pulzárok frissítve"
+msgstr "Pulzárok frissítve"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:246
 msgid "Pulsars Configuration"
-msgstr "pulzárok beállításai"
+msgstr "Pulzárok beállításai"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
@@ -6542,7 +6546,7 @@ msgstr "CsE"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Eccentricity"
-msgstr "Excentritás - e"
+msgstr "Excentricitás - e"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Inclination"
@@ -6615,7 +6619,7 @@ msgstr "Exobolygók felfedezési sorrendben"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
-msgstr "Megfigyelhetőség vizsgálata"
+msgstr "Megfigyelhetőség"
 
 #: plugins/Observability/src/Observability.cpp:69
 msgid ""
@@ -6629,9 +6633,9 @@ msgid ""
 msgstr ""
 "A forrás láthatóságát állapítja meg (kelési, nyugvási és áthaladási idők); "
 "mikor látható abban az évben legjobban. Feltételezzük, hogy a forrás "
-"látható, ha a horizont fölött van valamikor éjszaka. A program kiszámolja "
+"látható, ha valamikor éjszaka a horizont fölött van. A program kiszámolja "
 "azt a napot, amikor az objektum a legnagyobb szögtávolságra van a Naptól. "
-"Megadja az akronikus és kozmikus kelési/nyugvási időket.<br><br>a "
+"Megadja az akronikus és kozmikus kelési/nyugvási időket.<br><br>A "
 "mennyiségek magyarázata a konfigurációs ablakból elérhető."
 
 #: plugins/Observability/src/Observability.cpp:193
@@ -6715,12 +6719,12 @@ msgstr "s"
 #: plugins/Observability/src/Observability.cpp:509
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "Lenyugszik %1 (%2)"
 
 #: plugins/Observability/src/Observability.cpp:510
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "Felkelt %1 (ezelőtt %2)"
 
 #: plugins/Observability/src/Observability.cpp:520
 #, qt-format
@@ -6748,7 +6752,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "Kulminált %1 (ezelőtt %2) %3 fokkal"
 
 #: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
