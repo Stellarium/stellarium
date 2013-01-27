@@ -9,6 +9,8 @@ LINK_DIRECTORIES(/src)
 SET(Oculars_SRCS
   CCD.hpp
   CCD.cpp
+  Barlow.hpp
+  Barlow.cpp
   Ocular.hpp
   Ocular.cpp
   Oculars.hpp
@@ -73,4 +75,3 @@ IF(BUILD_STATIC_PLUGINS)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
 ENDIF()
-
