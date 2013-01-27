@@ -61,7 +61,8 @@ private slots:
 	//! Updates the information that depends on the current telescope.
 	//! Called in both updateOcularControls() and updateCcdControls().
 	void updateTelescopeControls();
-
+	//! Updates the information that depends on the current barlow
+	void updateBarlowControls();
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
 
@@ -78,6 +79,7 @@ private:
 	//! Mini-toolbar holding StelButtons
 	QGraphicsWidget* buttonBar;
 	QGraphicsWidget* ocularControls;
+	QGraphicsWidget* barlowControls;
 	QGraphicsWidget* ccdControls;
 	QGraphicsWidget* telescopeControls;
 
@@ -95,6 +97,10 @@ private:
 	StelButton* nextTelescopeButton;
 	StelButton* prevCcdButton;
 	StelButton* nextCcdButton;
+	StelButton* prevBarlowButton;
+	StelButton* nextBarlowButton;
+	QGraphicsTextItem* fieldBarlowName;
+	QGraphicsTextItem* fieldBarlowMultipler;
 	QGraphicsTextItem* fieldOcularName;
 	QGraphicsTextItem* fieldOcularFl;
 	QGraphicsTextItem* fieldOcularAfov;
@@ -118,6 +124,7 @@ private:
 	void setOcularControlsVisible(bool show);
 	void setCcdControlsVisible(bool show);
 	void setTelescopeControlsVisible(bool show);
+	void setBarlowControlsVisible(bool show);
 	//! Updates the positions of the buttons inside the button bar.
 	void updateMainButtonsPositions();
 
