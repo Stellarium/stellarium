@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-07 10:33+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2013-01-26 13:20+0000\n"
+"Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-19 04:41+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 04:34+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -125,7 +125,7 @@ msgstr "Apsolutna veličina: %1"
 #: src/core/modules/Planet.cpp:463
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptički topocentrični (za datum): %1/%2"
 
 #: src/core/modules/Planet.cpp:464
 #, qt-format
@@ -214,7 +214,7 @@ msgstr "Vidljiva veličina: <b>%1</b> (po neaktivnosti)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "dvostruka zvijezda"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -368,7 +368,7 @@ msgstr "RA/DE (datum): %1/%2"
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "Galaktička geogr. dužina/širina (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -1247,12 +1247,12 @@ msgstr "asteroid"
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "mjesec"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -2529,7 +2529,7 @@ msgstr "Dodaj 1 zvjezdanu godinu"
 
 #: src/translations.h:523
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Dodaj 1 zvjezdano stoljeće"
 
 #: src/translations.h:524
 msgid "Add 1 solar day"
@@ -2569,7 +2569,7 @@ msgstr "Dodaj 1 prosječnu tropsku godinu"
 
 #: src/translations.h:533
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Dodaj 1 prosječno tropsko stoljeće"
 
 #: src/translations.h:534
 msgid "Slow down the script execution rate"
@@ -2641,7 +2641,7 @@ msgstr "Oduzmi 1 zvjezdanu godinu"
 
 #: src/translations.h:551
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Oduzmi 1 zvjezdano stoljeće"
 
 #: src/translations.h:552
 msgid "Subtract 1 solar day"
@@ -2681,7 +2681,7 @@ msgstr "Oduzmi 1 prosječnu tropsku godinu"
 
 #: src/translations.h:561
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Oduzmi 1 prosječno tropsko stoljeće"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:564
@@ -4481,7 +4481,7 @@ msgstr "Internacionalna odrednica"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "vještački satelit"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
@@ -6164,7 +6164,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
-msgstr ""
+msgstr "Svijetle krivulje"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 #, qt-format
@@ -6304,7 +6304,7 @@ msgstr "Mod prikaza za kvazare"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "Crtaj sve kvazare bez natpisa"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
@@ -6864,7 +6864,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Visina horizonta:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
@@ -7014,15 +7014,15 @@ msgstr "Veličina fonta"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "Uslovi osmatranja"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Visina horizonta: 0 deg."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "Visina Sunca na nebu pri zalasku: 0 deg."
 
 #~ msgid "General "
 #~ msgstr "Općenito "
