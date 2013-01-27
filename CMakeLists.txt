@@ -215,7 +215,7 @@ SET(USE_PLUGIN_QUASARS 1 CACHE BOOL "Define whether the Quasars plugin should be
 SET(USE_PLUGIN_PULSARS 1 CACHE BOOL "Define whether the Pulsars plugin should be created.")
 SET(USE_PLUGIN_EXOPLANETS 1 CACHE BOOL "Define whether the Exoplanets plugin should be created.")
 SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plugin should be created.")
-SET(USE_PLUGIN_RENDERERSTATISTICS 1 CACHE BOOL "Define whether the RendererStatistics plugin should be created.")
+SET(USE_PLUGIN_RENDERERSTATISTICS 0 CACHE BOOL "Define whether the RendererStatistics plugin should be created.")
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
