@@ -52,7 +52,11 @@ void DateTimeDialog::createDialogContent()
 	ui->setupUi(dialog);
 	double jd = StelApp::getInstance().getCore()->getJDay();
 	// UTC -> local tz
-	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0));
+	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
+	double deltaT = 0.;
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
+		deltaT = StelUtils::getDeltaT(jd)/86400.;
+	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0)-deltaT);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -168,9 +172,13 @@ void DateTimeDialog::secondChanged(int newsecond)
 
 double DateTimeDialog::newJd()
 {
-  double jd;
+  double jd;  
   StelUtils::getJDFromDate(&jd,year, month, day, hour, minute, second);
-  jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0); // local tz -> UTC
+  // Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
+  double deltaT = 0.;
+  if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
+	  deltaT = StelUtils::getDeltaT(jd)/86400.;
+  jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0-deltaT); // local tz -> UTC
   return jd;
 }
 
@@ -200,7 +208,11 @@ Send newJd to spinner_*
 void DateTimeDialog::setDateTime(double newJd)
 {
 	if (this->visible()) {
-		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0); // UTC -> local tz
+		// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
+		double deltaT = 0.;
+		if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
+			deltaT = StelUtils::getDeltaT(newJd)/86400.;
+		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0-deltaT); // UTC -> local tz
 		StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
 		StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
 		pushToWidgets();
