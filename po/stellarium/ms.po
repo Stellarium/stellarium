@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-06 01:47+0700\n"
-"PO-Revision-Date: 2012-11-30 15:42+0000\n"
+"POT-Creation-Date: 2013-01-18 23:15+0700\n"
+"PO-Revision-Date: 2013-01-18 05:28+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-06 04:38+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-19 04:45+0000\n"
+"X-Generator: Launchpad (build 16430)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -203,7 +203,7 @@ msgstr "Penentuan sementara: %1"
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "bintang"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -217,7 +217,7 @@ msgstr "Magnitude Ketara: <b>%1</b> (oleh kepupusan)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "bintang dubel"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -448,7 +448,7 @@ msgstr "Hubungi"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
 msgstr "Pengarang"
 
@@ -1241,27 +1241,27 @@ msgstr "W"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "planet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "komet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "asteroid"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "bulan"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1406,8 +1406,8 @@ msgstr "Penghijaban Bumi dan Musytari 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
-msgid "A Quintuple eclipse from Deimos 2027"
-msgstr "Gerhana Kuintupel melalui Deimos 2027"
+msgid "3 Transits and 2 Eclipses from Deimos 2027"
+msgstr "3 Lintasan dan 2 Gerhana dari Deimos 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1522,16 +1522,19 @@ msgstr ""
 
 #: src/translations.h:259
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
-"retrogrades back towards the sun and just partially eclipses it (only seen "
-"in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-"Phobos emerges from the sun it passes through Mars' shadow and dims."
+"Phobos races ahead of Mars and transits the sun, passes through it and then "
+"retrogrades back towards the sun and just partially transits it again (only "
+"seen in the southern hemisphere of Deimos), then Mars totally eclipses the "
+"sun while Phobos transits in darkness between Mars and Deimos. When Phobos "
+"emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
+"light up later."
 msgstr ""
-"Phobos berada dihadapan Marikh dan mengorbit matahari, melepasinya dan "
-"kemudian berputar songsang kembali ke matahari dan hanya mengorbit separanya "
-"(hanya kelihatan dalam SH) lagi, kemudian Marikh sepenuhnya mengorbit "
-"matahari dan Phobos, dan selanjutnya Phobos muncul dari matahari melalui "
-"bayang Marikh dan menjadi malap."
+"Phobos menuju ke arah Marikh dan melintasi matahari, melepasinya dan "
+"kemudian mundur ke matahari dan hanya lintas sebahagiannya sekali lagi "
+"(hanya kelihatan di hemisfera selatan Deimos), kemudian Marikh menggerhana "
+"sepenuhnya matahari semasa Phobos melintas di dalam kegelapan diantara "
+"Marikh dengan Deimos. Bila Phobos muncul dari Marikh ia masih digerhana dan "
+"kelihatan kabur di sebalik bayang Marikh, dan akan dicerahkan kemudian nanti."
 
 #: src/translations.h:260
 msgid ""
@@ -2562,7 +2565,7 @@ msgstr "Tambah 1 tahun ikut bintang"
 
 #: src/translations.h:523
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Tambah  1 abad ikut bintang"
 
 #: src/translations.h:524
 msgid "Add 1 solar day"
@@ -2602,7 +2605,7 @@ msgstr "Tambah 1 tahun min tropika"
 
 #: src/translations.h:533
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Tambah 1 abad tropika min"
 
 #: src/translations.h:534
 msgid "Slow down the script execution rate"
@@ -2674,7 +2677,7 @@ msgstr "Tolak 1 tahun ikut bintang"
 
 #: src/translations.h:551
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Tolak 1 abad ikut bintang"
 
 #: src/translations.h:552
 msgid "Subtract 1 solar day"
@@ -2714,7 +2717,7 @@ msgstr "Tolak 1 tahun min tropika"
 
 #: src/translations.h:561
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Tolak 1 abad tropika min"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:564
@@ -3537,6 +3540,10 @@ msgid "Display no information"
 msgstr "Jangan paparkan maklumat"
 
 #: src/ui_configurationDialog.h:972
+#: plugins/Observability/src/Observability.cpp:628
+#: plugins/Observability/src/Observability.cpp:629
+#: plugins/Observability/src/Observability.cpp:631
+#: plugins/Observability/src/Observability.cpp:632
 msgid "None"
 msgstr "Tiada"
 
@@ -4050,132 +4057,132 @@ msgstr ""
 msgid "Please select an object before switching to ocular view."
 msgstr "Sila pilih objek sebelum menukar ke paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:831
+#: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
 msgstr "Okular &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:832
+#: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
 msgstr "Okular &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:833
+#: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
 msgstr "Pilih o&kular"
 
-#: plugins/Oculars/src/Oculars.cpp:878
+#: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
 msgstr "Togol reramb&ut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:887
+#: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
 msgstr "Konfigur &Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:896
+#: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
 msgstr "Togol &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:904
+#: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
 msgstr "Togol Tel&rad"
 
-#: plugins/Oculars/src/Oculars.cpp:914
+#: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
 msgstr "CCD &Terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:915
+#: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
 msgstr "CCD &Berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:916
+#: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
 msgstr "&Pilih CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:938
+#: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
 msgstr "P&utar CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:970
+#: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
 msgstr "T&etap semula putaran"
 
-#: plugins/Oculars/src/Oculars.cpp:1446
+#: plugins/Oculars/src/Oculars.cpp:1451
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1451
+#: plugins/Oculars/src/Oculars.cpp:1456
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1465
+#: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "JF Ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1472
+#: plugins/Oculars/src/Oculars.cpp:1477
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV Ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1482 plugins/Oculars/src/Oculars.cpp:1539
+#: plugins/Oculars/src/Oculars.cpp:1487 plugins/Oculars/src/Oculars.cpp:1544
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1487 plugins/Oculars/src/Oculars.cpp:1544
+#: plugins/Oculars/src/Oculars.cpp:1492 plugins/Oculars/src/Oculars.cpp:1549
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1498
+#: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Pembesaran: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1506
+#: plugins/Oculars/src/Oculars.cpp:1511
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1516
+#: plugins/Oculars/src/Oculars.cpp:1521
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensi: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1521
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Penderia #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1530
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Penderia #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1734
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1735
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Previous telescope"
 msgstr "Teleskop &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1741
 msgid "&Next telescope"
 msgstr "Teleskop &berikutnya"
 
@@ -4271,7 +4278,7 @@ msgstr "Pemalam Okular"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:111
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "Versi"
 
@@ -4489,7 +4496,7 @@ msgstr "Kalih menegak"
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
-#: plugins/Observability/src/ui_ObservabilityDialog.h:357
+#: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Perihal"
@@ -4523,7 +4530,7 @@ msgstr "Pereka Antarabangsa"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "satelit tiruan"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
@@ -4986,7 +4993,7 @@ msgstr "Panjang lenyap:"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
-#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+#: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
 msgstr "Pulih tetapan lalai"
 
@@ -4995,7 +5002,7 @@ msgstr "Pulih tetapan lalai"
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
-#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+#: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Save settings as default"
 msgstr "Simpan tetapan  sebagai lalai"
 
@@ -5004,7 +5011,7 @@ msgstr "Simpan tetapan  sebagai lalai"
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
-#: plugins/Observability/src/ui_ObservabilityDialog.h:356
+#: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
 msgstr "Tetapan"
 
@@ -5145,10 +5152,6 @@ msgid "Configure Telescope"
 msgstr "Konfigur Teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
-#: plugins/Observability/src/Observability.cpp:596
-#: plugins/Observability/src/Observability.cpp:597
-#: plugins/Observability/src/Observability.cpp:599
-#: plugins/Observability/src/Observability.cpp:600
 msgid "N/A"
 msgstr "T/A"
 
@@ -6725,194 +6728,194 @@ msgstr ""
 "Kosmos. Satu penerangan kuantiti juga dipaparkan oleh skrip ini dinyatakan "
 "dalam tab 'Perihal' dalam tetingkap konfigurasi."
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jan"
 msgstr "Jan"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Feb"
 msgstr "Feb"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Mar"
 msgstr "Mac"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Apr"
 msgstr "Apr"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "May"
 msgstr "Mei"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jun"
 msgstr "Jun"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jul"
 msgstr "Jul"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Aug"
 msgstr "Ogs"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Sep"
 msgstr "Sep"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Oct"
 msgstr "Okt"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Nov"
 msgstr "Nov"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Dec"
 msgstr "Dis"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "h"
 msgstr "j"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "m"
 msgstr "m"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:477
+#: plugins/Observability/src/Observability.cpp:509
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Terbenam pada %1 (pada %2)"
 
-#: plugins/Observability/src/Observability.cpp:478
+#: plugins/Observability/src/Observability.cpp:510
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "Terbit pada %1 (%2 yang lalu)"
 
-#: plugins/Observability/src/Observability.cpp:488
+#: plugins/Observability/src/Observability.cpp:520
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "Terbenam pada %1 (%2 yang lalu)"
 
-#: plugins/Observability/src/Observability.cpp:489
+#: plugins/Observability/src/Observability.cpp:521
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "Terbit pada %1 (dalam %2)"
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "Circumpolar."
 msgstr "Keliling kutub."
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "No rise."
 msgstr "Tiada terbit."
 
-#: plugins/Observability/src/Observability.cpp:515
+#: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Berakhir pada %1 (dalam %2) pada %3 darj."
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "Berakhir pada %1 (%2 yang lalu) pada %3 darj."
 
-#: plugins/Observability/src/Observability.cpp:560
+#: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
 msgstr "Sumber tidak boleh dicerap."
 
-#: plugins/Observability/src/Observability.cpp:561
+#: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "Tiada terbit/terbenam Akronik ataupun Kosmos."
 
-#: plugins/Observability/src/Observability.cpp:578
+#: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
 msgstr "Pemanjangan terhebat: "
 
-#: plugins/Observability/src/Observability.cpp:581
+#: plugins/Observability/src/Observability.cpp:613
 msgid "Largest Sun separation: "
 msgstr "Pemisahan Matahari yang terbesar: "
 
-#: plugins/Observability/src/Observability.cpp:584
+#: plugins/Observability/src/Observability.cpp:616
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " (pada %1 darj.)"
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
 msgstr "Terbit/terbenam akronik"
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
 msgstr "Tiada terbit/terbenam akronik."
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
 msgstr "Terbit/terbenam kosmik"
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
 msgstr "Tiada terbit/terbenam kosmik."
 
-#: plugins/Observability/src/Observability.cpp:649
+#: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
 msgstr "Boleh dicerap sepanjang tahun."
 
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:685
 msgid "Not observable at dark night."
 msgstr "Tidak boleh dicerap pada waktu malam."
 
-#: plugins/Observability/src/Observability.cpp:658
+#: plugins/Observability/src/Observability.cpp:690
 msgid "Nights above horizon: "
 msgstr "Malam diatas ufuk: "
 
-#: plugins/Observability/src/Observability.cpp:675
+#: plugins/Observability/src/Observability.cpp:707
 msgid "TODAY:"
 msgstr "HARI INI:"
 
-#: plugins/Observability/src/Observability.cpp:684
+#: plugins/Observability/src/Observability.cpp:716
 msgid "THIS YEAR:"
 msgstr "TAHUN INI:"
 
-#: plugins/Observability/src/Observability.cpp:1428
+#: plugins/Observability/src/Observability.cpp:1450
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "Bulan Purnama Terdahulu: %1 %2 pada %3: %4. "
 
-#: plugins/Observability/src/Observability.cpp:1433
+#: plugins/Observability/src/Observability.cpp:1455
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Bulan Purnama Berikutnya: %1 %2 pada %3: %4. "
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
 msgstr "Pemalam Ketercerapan"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen "
 "center, if no source is selected). The plugin can show rise, transit, and "
@@ -6932,15 +6935,17 @@ msgstr ""
 "mengucapkan terima kasih keatas Alexander Wolf dan Georg Zotti atas nasihat "
 "mereka.<br><br>Ivan Marti-Vidal (Balai Cerap Angkasa Onsala)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
 msgstr "Penerangan beberapa parameter"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
 msgstr "Altitut Matahari pada waktu senja:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -6952,11 +6957,25 @@ msgstr ""
 "18 darjah. Parameter ini hanya digunakan untuk menganggar julat bagi epok "
 "yang boleh dicerap (rujuk dibawah)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
+msgid "Horizon altitude:"
+msgstr "Altitud ufuk:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid ""
+"Minimum observable altitude (due to mountains, buildings, or just a limited "
+"telescope mount)."
+msgstr ""
+"Altitud boleh cerap minimum (disebabkan gunung, bangunan, atau hanya lekapan "
+"teleskop yang terhad)."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
 msgstr "Efemeris hari ini:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -6968,11 +6987,11 @@ msgstr ""
 "sebagai rentang masa (dirujuk terhadap masa semasa) dan sebagai jam waktu "
 "(dalam masa setempat)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
 msgstr "Terbit/terbenam Akronik/Kosmos:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
 "The Acronychal rise (or set) of an object happens when the object rises (or "
 "sets) just when the Sun sets (or rises), respectively. The exact dates of "
@@ -6994,11 +7013,11 @@ msgstr ""
 "jelaslah sumber itu sukar dicerap (atau tidak boleh dicerap langsung) pada "
 "tarikh diantara terbenam dan terbit Kosmos."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid "Largest Sun separation:"
 msgstr "Pemisahan Matahari yang terbesar:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object "
 "are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -7017,11 +7036,11 @@ msgstr ""
 "mencapai puncaknya ditengah malam, dan pada kawasan tergelap Langit pada "
 "keserongan. Maka, ia adalah malam 'terbaik' untuk mencerap objek tertentu."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
 msgstr "Malam dengan sumber diatas ufuk:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
@@ -7058,11 +7077,11 @@ msgstr ""
 "Matahari Senja oleh pengguna) akan dilaksana dalam versi akan datang pemalam "
 "ini."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
 msgstr "Bulan Purnama:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
@@ -7070,70 +7089,76 @@ msgstr ""
 "Bila Bula dipilih, program dapat mengira tarikh terdekat sebenar bagi Bulan "
 "yang bertentangan dengan Matahari."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "deg."
 msgstr "darj."
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:338
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
 msgstr "Konfigurasi Ketercerapan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:339
+#: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
 msgstr "Konfigurasi Pemalam Ketercerapan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:341
+#: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
 msgstr "Pilihan Paparan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:342
+#: plugins/Observability/src/ui_ObservabilityDialog.h:363
 msgid "Today's ephemeris (rise, set, and transit times)"
 msgstr "Efemeris hari ini (terbit, terbenam, dan masa peralihan)"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:343
+#: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
 msgstr "Tarikh terbit/terbenam Akronik dan Kosmos"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:344
+#: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
 msgstr "Tarikh pemisahan terbesar Matahari"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+#: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Nights with the source above horizon"
 msgstr "Malam dengan sumber diatas ufuk"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+#: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Dates of previous and next Full Moon"
 msgstr "Tarikh Bulan Purnama terdahulu dan berikutnya"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+#: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
 msgstr "Warna dan Saiz fon"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+#: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
 msgstr "Merah"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:351
+#: plugins/Observability/src/ui_ObservabilityDialog.h:372
 msgid "Green"
 msgstr "Hijau"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
+#: plugins/Observability/src/ui_ObservabilityDialog.h:373
 msgid "Blue"
 msgstr "Biru"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:353
+#: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
 msgstr "Saiz Fon"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:354
-msgid "Sun altitude at twilight"
-msgstr "Altitud Matahari pada waktu senja"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:375
+msgid "Observing conditions"
+msgstr "Mencerap keadaan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:355
-msgid "0 deg."
-msgstr "0 darj."
+#: plugins/Observability/src/ui_ObservabilityDialog.h:376
+msgid "Horizon altitude: 0 deg."
+msgstr "Altitut ufuk: 0 darj."
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+msgid "Sun altitude at twilight: 0 deg."
+msgstr "Altitud matahari pada senjakala: 0 darj."
 
 #~ msgid "Set Location "
 #~ msgstr "Tentukan Lokasi "
@@ -7541,6 +7566,9 @@ msgstr "0 darj."
 #~ msgid "Display a derived class-specific extra fields"
 #~ msgstr "Papar medan tambahan spesifik-kelas terpacu"
 
+#~ msgid "A Quintuple eclipse from Deimos 2027"
+#~ msgstr "Gerhana Kuintupel melalui Deimos 2027"
+
 #~ msgid ""
 #~ "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 #~ "Occultations of both on the same day are very rare. Here's one that takes "
@@ -7593,6 +7621,12 @@ msgstr "0 darj."
 #~ msgstr ""
 #~ "Ledakan supernova yang telah diperhati oleh Tycho Brahe pada tahun 1572. "
 #~ "Demo perlu benarkan pemalam untuk supernovae."
+
+#~ msgid "0 deg."
+#~ msgstr "0 darj."
+
+#~ msgid "Sun altitude at twilight"
+#~ msgstr "Altitud Matahari pada waktu senja"
 
 #~ msgid "F7"
 #~ msgstr "F7"

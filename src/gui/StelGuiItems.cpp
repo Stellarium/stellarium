@@ -581,13 +581,30 @@ void BottomStelBar::updateText(bool updatePos)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getJDay();
+	double deltaT = 0.;
+	bool displayDeltaT = false;
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
+	{
+		deltaT = StelUtils::getDeltaT(jd);
+		displayDeltaT = true;
+	}
 
-	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +"   "
-			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd) : " ";
+	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
+	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd-deltaT/86400.) +"   "
+			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd-deltaT/86400.) : " ";
 	if (datetime->text()!=newDate)
 	{
 		updatePos = true;
 		datetime->setText(newDate);
+		if (displayDeltaT)
+		{
+			if (deltaT>60.)
+				datetime->setToolTip(QString("%1T = %2 (%3s)").arg(QChar(0x0394)).arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2));
+			else
+				datetime->setToolTip(QString("%1T = %2s").arg(QChar(0x0394)).arg(deltaT, 3, 'f', 3));
+		}
+		else
+			datetime->setToolTip("");
 	}
 
 	QString newLocation = flagShowLocation ? q_(core->getCurrentLocation().planetName) +", "
