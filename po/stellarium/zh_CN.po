@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-21 04:05+0000\n"
+"PO-Revision-Date: 2013-01-27 09:33+0000\n"
 "Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-22 04:44+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-28 05:12+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -6725,7 +6725,7 @@ msgstr "显示项说明"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
-msgstr "晨昏蒙影时太阳高度:"
+msgstr "晨昏蒙影时太阳高度："
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -6758,7 +6758,7 @@ msgid ""
 "(transit) times. The exact times for these ephemeris are given in two ways: "
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
-msgstr "顾名思义。这个程序会显示天体的升落、中天时间。这些星历的具体时间会被用两种形式给出：时间差（根据目前时间）和实际时间（地方时）。"
+msgstr "顾名思义，这个程序会显示天体的升落、中天时间。这些星历的具体时间会被用两种形式给出：时间差（根据目前时间）和实际时间（地方时）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
@@ -6821,11 +6821,11 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"这个程序计算天体夜晚至少有一刻在地平线上的时间范围。对于“夜晚”，这个程序将其定义为太阳高度角低于晨昏蒙影的高度（用户可设置，见上文）。当天体（或系外行星"
-"）被选定时，程序给出的本年可观测时间范围有两种形式：从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日期，再从"
-"另一个日期到12月31日）。在第一种情况下，第一个日期（本例中为1月20日）会接近该天体的偕日落（合日）。在第二种情况中（比如类似于从1月1日到5月20日"
-"，再从9月21日到12月31日），第一个日期（本例中为5月20日）会接近该天体的偕日升（合日）。用于计算恒星和行星偕日升/偕日落（合日）的更加精确的算法（"
-"不依赖于用户设定的晨昏蒙影太阳高度角）会在插件的未来版本中实现。"
+"此插件计算天体在夜晚至少有一刻处于地平线上的时间范围。对于“夜晚”，插件将其定义为太阳高度角低于晨昏蒙影的高度（用户可设置，见上文）。当天体（或系外行星）"
+"被选定时，程序给出的本年可观测时间范围有两种形式：从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日期，再从另"
+"一个日期到12月31日）。在第一种情况下，第一个日期（本例中为1月20日）会接近该天体的偕日落（合日）。在第二种情况中（比如从1月1日到5月20日，再从9"
+"月21日到12月31日），第一个日期（本例中为5月20日）会接近该天体的偕日升（合日）。用于计算恒星和行星偕日升/偕日落（合日）的更加精确的算法（不依赖于"
+"用户设定的晨昏蒙影太阳高度角）会在插件的未来版本中实现。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
@@ -6902,11 +6902,11 @@ msgstr "观测条件"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr "地平高度限制: 0 度。"
+msgstr "地平高度限制：0 度。"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr "晨昏蒙影时太阳高度: 0 度。"
+msgstr "晨昏蒙影时太阳高度：0 度。"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道坐标网格"

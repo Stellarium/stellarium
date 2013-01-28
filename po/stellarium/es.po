@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-26 19:24+0000\n"
-"Last-Translator: Carlos A. Lopez <Unknown>\n"
+"PO-Revision-Date: 2013-01-27 14:25+0000\n"
+"Last-Translator: Ivan Marti-Vidal <i.martividal@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-27 04:35+0000\n"
+"X-Launchpad-Export-Date: 2013-01-28 05:11+0000\n"
 "X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -6729,7 +6729,7 @@ msgstr "Activar la visualización de la distribución de exoplanetas"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
 msgid "Display exoplanets since their discovery"
-msgstr "Mostras exoplanetas desde su descubrimiento"
+msgstr "Muestra exoplanetas desde su descubrimiento"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
 msgid "Enable timeline discovery of exoplanets"
@@ -6749,14 +6749,14 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
-"Repota un análisis de observabilidad de la fuente (salida, puesta, y horas "
-"de tránsito), así como las épocas del año cuando la fuente se observa mejor. "
-"Este asume que la fuente es observable si está arriba del horizonte durante "
-"una fracción de la noche. El complemento también da el día para la "
-"separación más larga de el sol y los días de salida/puesta cósmicos y "
-"anacrónicos.<br><br> Una explicación de las cantidades mostradas por este "
-"guion es proporcionado en la pestaña de 'Acerca de' de la ventana de "
-"configuración."
+"Muestra un análisis de observabilidad (hora de salida, puesta y tránsito), "
+"así como las fechas cuando el objeto celeste puede ser observado "
+"óptimamente. Asume que un objeto es observable cuando se encuentra sobre el "
+"horizonte durante parte de la noche. Este complemento también muestra la "
+"fecha de máxima separación del Sol, así como los días de salida/puesta "
+"cósmica y acrónica.<br><br>En la pestaña \"Acerca\" de la ventana de "
+"configuración de este complemento se da una explicación de la información "
+"mostrada."
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
@@ -6880,15 +6880,15 @@ msgstr "La fuente no es observable."
 
 #: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr "Sin salida/ocaso Cósmico ó Anacrónico"
+msgstr "Sin salida/ocaso cósmico ni acrónico"
 
 #: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
-msgstr "Mayor elongación: "
+msgstr "Elongación máxima: "
 
 #: plugins/Observability/src/Observability.cpp:613
 msgid "Largest Sun separation: "
-msgstr "Separación más larga del Sol: "
+msgstr "Máxima separación del Sol: "
 
 #: plugins/Observability/src/Observability.cpp:616
 #, qt-format
@@ -6897,19 +6897,19 @@ msgstr " (a %1 grad.)"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
-msgstr "Salida/ocaso Anacrónico"
+msgstr "Salida/ocaso acrónico"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
-msgstr "Sin salida/ocaso Anacrónico."
+msgstr "Sin salida/ocaso acrónico"
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
-msgstr "Salida/ocaso Cósmico"
+msgstr "Salida/ocaso cósmico"
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
-msgstr "Sin salida/ocaso Cósmico."
+msgstr "Sin salida/ocaso cósmico"
 
 #: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
@@ -6921,11 +6921,11 @@ msgstr "No es observable en la noche oscura."
 
 #: plugins/Observability/src/Observability.cpp:690
 msgid "Nights above horizon: "
-msgstr "Noches arriba del horizonte: "
+msgstr "Noches sobre el horizonte "
 
 #: plugins/Observability/src/Observability.cpp:707
 msgid "TODAY:"
-msgstr "AHORA:"
+msgstr "HOY:"
 
 #: plugins/Observability/src/Observability.cpp:716
 msgid "THIS YEAR:"
@@ -6956,15 +6956,16 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Un complemento que analiza la observabilidad de la fuente seleccionada (o "
-"del centro de la pantalla, si no se selecciona una fuente). El complemento "
-"puede mostrar los tiempos de salida, tránsito, y de ocaso, así como también "
-"la mejor época del año (i.e., la mayor separación angular del Sol), la el "
-"rango de fecha cuando la fuente está arriba del horizonte en la noche "
-"obscura, y las fechas de salida/ocaso Cósmico y Anacrónico.<br>Las "
-"efemérides del objetos del Sistema Solar y los efectos del paralaje se toman "
-"en cuenta.<br><br> El autor agradece a Alexander Wolf y a Georg Zotti por "
-"sus consejos.<br><br>Ivan Marti-Vidal (Observatorio Espacial de Onsala)"
+"Complemento que analiza la observabilidad del objeto seleccionado (o del "
+"centro de la pantalla, si no hay seleccionado ningún objeto). Este "
+"complemento puede mostrar las horas de salida, puesta, tránsito y ocaso, así "
+"como la mejor noche para observar (cuando la separación del Sol es máxima), "
+"el rango de fechas cuando la fuente se encuentra sobre el horizonte durante "
+"la noche oscura, y las fechas de salida/puesta acrónica y cósmica.<br>Este "
+"complemento tiene en cuenta las efemérides de los objetos del Sistema Solar "
+"y los efectos de la paralaje.<br><br>El autor agradece a Alexandor Wolf y a "
+"Georg Zotti por su ayuda.<br><br> Iván Martí-Vidal (Observatorio Espacial de "
+"Onsala)<br>"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
@@ -6974,7 +6975,7 @@ msgstr "Explicación de algunos parámetros"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
-msgstr "Altitud del Sol en el crepúsculo:"
+msgstr "Altitud del Sol en el ocaso:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -6983,28 +6984,29 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
-"Cualquier objeto celeste será considerado como visible cuando el Sol esté "
-"debajo de esta altitud. La altitud de los rangos del crepúsculo astronómico "
-"usualmente son entre -12 y -18 grados. Este parámetro sólo es usado para "
-"estimar el rango de las épocas observables (véase más abajo)."
+"Cualquier objeto celeste se considerará visible cuando el Sol se encuentre "
+"por debajo de esta altitud. La altitud del Sol en el ocaso astronómico suele "
+"variar entre los -12 y los -18 grados. Este parámetro se usa únicamente para "
+"estimar el rango de fechas cuando puede observarse un objeto celeste (ver "
+"más abajo)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr "Altitud del horizonte"
+msgstr "Altitud del horizonte:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
-"Altitud mínima que se puede observar (sin obstrucciones por montañas, "
-"edificios, o simplemente limitadas por la montura del telescopio)"
+"Altitud mínima a la que puede observarse (debido a montañas, edificios o, "
+"simplemente, a una limitada montura de telescopio)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
-msgstr "Efemérides de ahora:"
+msgstr "Efemérides de hoy:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
@@ -7013,14 +7015,14 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
-"Se explica por sí. El programa mostrará los tiempos de salida, puesta, y "
-"culminación (tránsito). Los tiempos exactos para estas efemérides se dan en "
-"dos maneras: en lapsos de tiempo (en referencia al momento actual) y las "
-"horas del reloj (en hora local)."
+"Autoexplicativo. Se mostrará la hora de salida, puesta y culminación (o "
+"tránsito). El momento exacto de estas efemérides se da de dos maneras: como "
+"lapso de tiempo (a contar desde el momento actual) y como hora de reloj "
+"(hora local)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
-msgstr "Salida/puesta Cósmico y Anacrónico:"
+msgstr "Salida/puesta acrónica/cósmica:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
@@ -7034,20 +7036,21 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
-"La salida (u ocaso) Anacrónico de un objero sucede cuando el objero sale (u "
-"oculta) justo cuando el Sol se oculta (o sale), respectivamente. Las fechas "
-"exactas de estas efemérides dependen de la Ubicacion del observador. Las "
-"fechas entre la puesta y salida Anacrónica son aquellas cuando la altitud "
-"del objeto celeste suele ser alta cuando el Sol está muy por debajo del "
-"horizonte (por lo tanto, el objeto puede ser bien observado). Por el "
-"contrario, la salida (o puesta) Astronómica sucede cuando ambos, el objeto y "
-"el Sol, salen (u ocultan) simultáneamente. Es obvio que la fuente es "
-"difícilmente observable (o no observable del todo) en las fechas del entre "
-"la salida y puesta Cósmica."
+"La salida (o puesta) acrónica de un objeto se produce cuando dicho objeto "
+"sale (o se pone) en el momento en que el Sol se pone (o sale), "
+"respectivamente. La fecha exacta de estas efemérides depende de las "
+"coordenadas del observador. El periodo comprendido entre la puesta y la "
+"salida acrónicas de un objeto es aquel en que la altitud de dicho objeto es "
+"alta cuando el Sol se encuentra muy por debajo del horizonte (noche oscura), "
+"por lo que el objeto puede observarse mejor. Por el contrario, la salida (o "
+"puesta) cósmica de un objeto se produce cuando dicho objeto sale (o se pone) "
+"al mismo tiempo que el Sol. Obviamente, el objeto será difícilmente "
+"observable (o imposible de observar) en el periodo comprendido entre la "
+"salida y la puesta cósmicas."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid "Largest Sun separation:"
-msgstr "Mayor separación del Sol:"
+msgstr "Máxima separación del Sol:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid ""
@@ -7060,18 +7063,18 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
-"Sucede cuando la separación angular entre el Sol y el objeto celeste son "
-"máximos. En la muchos casos, esto es equivalente a decir que las longitudes "
-"ecuatoriales de el Sol y del objeto difieren en 180 grados, entonces el Sol "
-"es en oposición al objeto. Cuando un objeto está en su máxima separación "
-"angular del Sol (sin importar si es un planeta o una estrella), este culmina "
-"aproximadamente a la medianoche, y en la zona más oscura posible, del cielo "
-"a esa declinación. Por lo tanto, es la \"mejor\" de noche para observar un "
-"objeto en particular."
+"Sucede cuando la distancia angular entre el Sol y el objeto celeste es "
+"máxima. En la mayoría de los casos, esto es equivalente a decir que la "
+"longitud ecuatorial del Sol difiere 180 de la del objeto, por lo que el Sol "
+"y el objeto están en oposición. Cuando el objeto está a su máxima distancia "
+"angular del Sol (no importa si el objeto está fijo o es un planeta), culmina "
+"aproximadamente a medianoche, y en la región más oscura del cielo. Por lo "
+"tanto, la noche cuando un objeto está en oposición es la \"mejor\" noche "
+"para observarlo."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
-msgstr "Noches con la fuente arriba del horizonte:"
+msgstr "Noches con la fuente sobre el horizonte:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
@@ -7092,24 +7095,22 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"El programa calcula los intervalos de fecha cuando el objeto celeste está "
-"por encima del horizonte al menos durante un momento de la noche. Por "
-"'noche', el programa considera el lapso de tiempo en que el la altitud del "
-"sol está por debajo del crepúsculo (que puede ser establecido por el "
-"usuario; véase arriba). Cuando el objeto está fijo en el cielo (o son "
-"planetas exteriores), el rango de las épocas observables para el año actual "
-"puede tener dos formas posibles: ya sea un rango de una fecha a otra (e.g. "
-"20 de ene. a 25 de sept.) o en dos pasos (desde 1 de ene. a una fecha dada y "
-"desde otra fecha al 31 de dic.) En el primer caso, la primera fecha (20 de "
-"ene. en nuestro ejemplo) será estar cerca a la llamada 'Salida helíaca de "
-"una estrella' y la segunda fecha (15 de sept. en nuestro ejemplo) será estar "
-"cerca a la 'Puesta helíaca'. En el segundo caso (e.g., un rango en la forma "
-"1 de ene. al 20 de mayo y 21 de sept. al 31 de dic.), la primera fecha (20 "
-"de mayo en nuestro ejemplo) sería estar cerca de la Puesta helíaca y la "
-"segunda (21 de sept. en nuestro ejemplo) a la Salida helíaca. Las ecuaciones "
-"más exactas para estimar la salida/puesta helíaca de planetas y estrellas "
-"(que no dependen en la mera entrada de la elevación del sol en el crepúsculo "
-"por el usuario) se implementará en futuras versiones de este complemento."
+"El programa calcula el rango de fechas en que el objeto celeste se encuentra "
+"sobre el horizonte durante al menos un instante de la noche. Por \"noche\", "
+"se entiende el intervalo de tiempo en que el Sol se encuentra por debajo de "
+"su altitud en el Ocaso (este parámetro puede modificarse manualmente; ver "
+"más arriba). Cuando el objeto está fijo en el cielo, o es un planeta "
+"exterior, el rango de fechas observables para el año actual puede tener dos "
+"formas: un rango entre dos fechas (p. ej., 20 de enero a 25 de septiembre) o "
+"dos rangos (p. ej., del 1 de enero al 20 de mayo y del 21 de septiembre al "
+"31 de diciembre). En el primer caso, la primera fecha (20 de enero, en "
+"nuestro ejemplo), es cercana a la llamada \"Salida Helíaca\" y la segunda "
+"fecha es cercana a la \"Puesta Helíaca\". En el segundo caso, la primera "
+"fecha (20 de mayo, en nuestro ejemplo) será cercana a la Puesta Helíaca y la "
+"segunda (21 de septiembre, en nuestro ejemplo) a la Salida Helíaca. Las "
+"ecuaciones más exactas para estimar la Salida/Puesta Helíaca de planetas y "
+"estrellas (que no dependen sencillamente de la mera altitud del Sol en el "
+"Ocaso) se implementará en futuras veriones de este complemento."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
@@ -7120,8 +7121,8 @@ msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
-"Cuando la Luna es seleccionada, el programa puede calcular las fechas más "
-"exactas de la oposición de la luna con el sol."
+"Cuando se seleccione la Luna, el programa mostrará las fechas más próximas "
+"en que la Luna estará en oposición al Sol (Luna Llena)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
@@ -7144,19 +7145,19 @@ msgstr "Opciones de Vista"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:363
 msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr "Efemérides de ahora (tiempos de salida, puesta, y tránsito)"
+msgstr "Efemérides para hoy (hora de salida, puesta, y tránsito)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr "Fechas de salida/puesta Cósmica y Anacrónica"
+msgstr "Fechas de salida/puesta Cósmica y Acrónica"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
-msgstr "Fecha de la mayór separación del sol"
+msgstr "Fecha de máxima separación del sol"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Nights with the source above horizon"
-msgstr "Noches con la fuente arriba del horizonte"
+msgstr "Noches con la fuente sobre el horizonte"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Dates of previous and next Full Moon"
@@ -7164,7 +7165,7 @@ msgstr "Fecha de la previa y siguiente Luna Llena"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
-msgstr "Tamaño y color de letra"
+msgstr "Tamaño y color de la fuente"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
@@ -7180,7 +7181,7 @@ msgstr "Azul"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
-msgstr "Tamaño de Letra"
+msgstr "Tamaño de la fuente"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
@@ -7188,11 +7189,11 @@ msgstr "Condiciones de observación"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Altitud del horizonte: 0 grad."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "Altitud del sol en el ocaso: 0 grad."
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Eclíptica"

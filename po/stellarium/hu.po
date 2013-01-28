@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-26 19:05+0000\n"
+"PO-Revision-Date: 2013-01-27 15:19+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-27 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-01-28 05:11+0000\n"
 "X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -1518,6 +1518,11 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"A Phobos megelőzi a Marsot és elhalad a Nap előtt, majd retrográd mozgással "
+"a Nap felé indul és részben újból elhalad előtte (csak a Deimos déli feléről "
+"látható).  A Mars teljesen eltakarja a Napot, mialatt a Phobos  a "
+"sötétségben halad a Mars és a Deimos között. Amikor a Phobos előtűnik a Mars "
+"mögül, fogyatkozásban látszik a Mars árnyéka miatt."
 
 #: src/translations.h:260
 msgid ""
@@ -1555,7 +1560,7 @@ msgid ""
 "plugin has to be enabled."
 msgstr ""
 "A Tycho Brahe által megfigyelt szupernóva fellobbanása 1572-ben.  (a "
-"\"szupernóva\" plug-int be kell tölteni hozzá)"
+"\"szupernóva\" bővítményt be kell tölteni hozzá)"
 
 #: src/translations.h:271
 msgid "Andorra"
@@ -2925,7 +2930,7 @@ msgstr "Megfigyelhetőség beállító ablak"
 
 #: src/translations.h:629
 msgid "Oculars plugin configuration"
-msgstr "Okulár plug-in beállításai"
+msgstr "Okulár bővítmény beállításai"
 
 #: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
@@ -2945,7 +2950,7 @@ msgstr "Képérzékelő"
 
 #: src/translations.h:634
 msgid "Telrad sight"
-msgstr ""
+msgstr "Telrad nézet"
 
 #: src/translations.h:637
 msgid "Pulsars configuration window"
@@ -4036,27 +4041,27 @@ msgstr "Válasszon objektumot az okulár nézetbe kapcsolás előtt."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "&Előző okulár"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "&Következő okulár"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "&Okulár választása"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "&Célkereszt be/ki"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "&Okulárok beállításai"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "&CCD be/ki"
 
 #: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
@@ -4246,7 +4251,7 @@ msgstr "Okulár és távcső kombinációjának látómezeje"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:421
 msgid "Oculars Plug-in"
-msgstr "Okulár plug-in"
+msgstr "Okulár bővítmény"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
@@ -4289,7 +4294,7 @@ msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
-msgstr ""
+msgstr "A célkeresztet a nézetben be/ki lehet kapcsolni."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -4310,7 +4315,7 @@ msgstr "Gyorsbillentyűk"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr ""
+msgstr "A bővítményhez rendelt nyomógombok megváltoztathatók."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:449
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
@@ -4319,19 +4324,19 @@ msgstr "(nincs billentyű megadva)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Az okulár nézetet kapcsolja be/ki."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "A navigációs menüt nyitja meg."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:861
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Csak ha ki van választva objektum"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Scale image circle"
-msgstr ""
+msgstr "Kép méretének skálázása"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:863
 msgid "Key mappings"
@@ -4355,7 +4360,7 @@ msgstr "Beállítópanel"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
+msgstr "Fok és perc használata a FOV és a CCD számára"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
@@ -4551,13 +4556,13 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Stellarium Satellites Plugin"
-msgstr "Műhold plug-in"
+msgstr "Műhold bővítmény"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
-msgstr "A műhold plug-in előrejelzi a Föld körüli műholdak pozícióját."
+msgstr "A műhold bővítmény előrejelzi a Föld körüli műholdak pozícióját."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 msgid "Notes for users"
@@ -4593,13 +4598,16 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"Az  \"%1\" gombra kattintva a \"%2\" fülön a beállítások visszaállnak az "
+"alapértelmezés szerinti %3 fájlra. A régebbi fájl elmentődik %4 néven. Ezt a "
+"felhasználói mappák között lehet találni a \"modules/Satellites/\" alatt."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"A plug-in fejlesztés alatt áll, egyes funkciói hiányosak vagy hibásak "
+"A bővítmény fejlesztés alatt áll, egyes funkciói hiányosak vagy hibásak "
 "lehetnek."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
@@ -4613,8 +4621,8 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"A műhold plug-in automatikusan le tudja tölteni a műholdak TLE adatait, "
-"alapértelmezés szerint ezt 72 óránként megteszi. "
+"A műhold bővítmény automatikusan le tudja tölteni a műholdak pályáinak TLE "
+"adatait, alapértelmezés szerint ezt 72 óránként megteszi. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
 #, qt-format
@@ -4646,6 +4654,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Bizonyosodj meg róla, hogy a műhold, amit hozzá akarsz adni, ott van "
+"valamelyik URL-en, ami a Források fülön meg van adva a műholdak beállító "
+"ablakában.   2. A műholdak fülön  kattints a \"+\" gombra. Válaszd ki a "
+"műholdat, amit hozzá akarsz adni és nyomd le a \"hozzáad\" gombot."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "Technical notes"
@@ -4824,7 +4836,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:492
 msgid "[all displayed]"
-msgstr ""
+msgstr "[összes megjelenítve]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:493
 msgid "[all]"
@@ -4931,7 +4943,7 @@ msgstr "Szegmensek száma a vonal mindkét végén"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Fade length:"
-msgstr ""
+msgstr "Halványodás hossza"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -5072,7 +5084,7 @@ msgstr "Távcső irányítása"
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
-msgstr "A plug-in elfordítási parancsot küld a távcsőnek."
+msgstr "A bővítmény elfordítási parancsot küld a távcsőnek."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
@@ -5094,7 +5106,7 @@ msgstr "Távcső beállításai"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "Nem elérhető"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
@@ -5118,7 +5130,7 @@ msgstr "Leállítva"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr "Távcsővezérlő plug-in"
+msgstr "Távcsővezérlő bővítmény"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -5248,7 +5260,7 @@ msgstr "&RA (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
-msgstr ""
+msgstr "&Kiválasztott objektum"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
@@ -5272,11 +5284,11 @@ msgstr "Decimális fokok"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "D&ecimal"
-msgstr ""
+msgstr "D&ecimális"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "&Slew"
-msgstr ""
+msgstr "Forgatá&s"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Configure &telescopes..."
@@ -5345,7 +5357,7 @@ msgstr "J2000 (alapértelmezés)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Napéjegyenlőség (most)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
@@ -5396,15 +5408,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Látómező jelzése be"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Kör mérete:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "Legfeljebb tíz decimális jegy a fokok számára, vesszővel elválasztva"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
@@ -5444,7 +5456,7 @@ msgstr "Távcső célkereszt mutatása"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Látómező jelzése"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
@@ -5585,7 +5597,7 @@ msgstr "szombat"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr "Időzóna plug-in"
+msgstr "Időzóna bővítmény"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
@@ -5957,7 +5969,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
-msgstr "Naprendszer szerkesztő plug-in"
+msgstr "Naprendszer szerkesztő bővítmény"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:512
 msgid "Import data"
@@ -6060,7 +6072,7 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
-"Ez a plug-in egyéni naprendszer-fájlt használ. Ha a Stellarium ettől "
+"Ez a bővítmény egyéni naprendszer-fájlt használ. Ha a Stellarium ettől "
 "összeomlik, vagy nem indul, kézzel törölhető a fájl:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
@@ -6130,7 +6142,7 @@ msgstr "A szupernóva típusa: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr "Történelmi szupernóvák plug-in"
+msgstr "Történelmi szupernóvák bővítmény"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
@@ -6186,8 +6198,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
-"Ha további információra van szüksége ezzel a plug-innal kapcsolatban, %1itt "
-"megszerezheti%2."
+"Ha további információra van szüksége ezzel a bővítménnyel kapcsolatban, "
+"%1itt megszerezheti%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -6206,7 +6218,7 @@ msgstr "Történelmi szupernóvák beállításai"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:231
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Történelmi szupernóvák plug-in beállításai"
+msgstr "Történelmi szupernóvák bővítmény beállításai"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
@@ -6252,7 +6264,7 @@ msgstr "Z (vöröseltolódás): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr "Kvazár plug-in"
+msgstr "Kvazár bővítmény"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -6277,7 +6289,7 @@ msgstr "Kvazárok beállításai"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
-msgstr "Kvazár plug-in beállítása"
+msgstr "Kvazár bővítmény beállítása"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Display mode for quasars"
@@ -6300,7 +6312,7 @@ msgstr "Pulzárok"
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr "Ez a plug-in néhány pulzár pozícióját adja meg."
+msgstr "Ez a bővítmény néhány pulzár pozícióját adja meg."
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
@@ -6418,7 +6430,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr "Pulzár plug-in"
+msgstr "Pulzár bővítmény"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6473,7 +6485,7 @@ msgstr "Pulzárok beállításai"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
-msgstr "Pulzár plug-in beállítás"
+msgstr "Pulzár bővítmény beállítása"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Display mode for pulsars"
@@ -6562,7 +6574,7 @@ msgstr "Felfedezés éve"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
-msgstr "Exobolygó plug-in"
+msgstr "Exobolygó bővítmény"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
 #, qt-format
@@ -6570,7 +6582,7 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
-"Ez a plug-in az exobolygók napjainak pozícióját mutatja. Az exobolygók "
+"Ez a bővítmény az exobolygók napjainak pozícióját mutatja. Az exobolygók "
 "adatai innen származnak:  \"%1The Extrasolar Planets Encyclopaedia%2\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
@@ -6579,7 +6591,7 @@ msgstr ""
 msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
-msgstr "A plug-inra vonatkozó információkat le lehet tölteni %1innen%2."
+msgstr "A bővítményre vonatkozó információkat le lehet tölteni %1innen%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Exoplanets is updated"
@@ -6591,7 +6603,7 @@ msgstr "Exobolygók beállításai"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:252
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Exobolygó plug-in beállítás"
+msgstr "Exobolygó bővítmény beállításai"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:254
 msgid "Update exoplanets data from Internet"
@@ -6729,12 +6741,12 @@ msgstr "Felkelt %1 (ezelőtt %2)"
 #: plugins/Observability/src/Observability.cpp:520
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "Nyugvás  %1 (ezelőtt %2)"
 
 #: plugins/Observability/src/Observability.cpp:521
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "Kelés %1 (%2)"
 
 #: plugins/Observability/src/Observability.cpp:525
 msgid "Circumpolar."
@@ -6747,7 +6759,7 @@ msgstr "Nem kel fel."
 #: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "Delelés %1 (%2 múlva) %3 foknál"
 
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
@@ -6823,7 +6835,7 @@ msgstr "Következő telihold: %1 %2 at %3:%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
-msgstr "Megfigyelhetőség plug-in"
+msgstr "Megfigyelhetőség bővítmény"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
@@ -6836,7 +6848,7 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Ez a plug-in a kiválasztott forrás megfigyelhetőségét vizsgálja. Mutatni "
+"Ez a bővítmény a kiválasztott forrás megfigyelhetőségét vizsgálja. Mutatni "
 "tudja a felkelési, az áthaladási és lenyugvási időt, az időszakot, amikor az "
 "objektum éjszaka a horizont fölött van, az akronikus és kozmikus "
 "kelést/nyugvást. <br>A naprendszer objektumainak efemerisze és a parallax-"
@@ -6968,7 +6980,7 @@ msgstr ""
 "megfigyelhetőségi időszak kétféle lehet: vagy két dátum közötti, vagy két "
 "időszak is van (-tól -ig dátummal). Az első időszak kezdete közel esik a "
 "helikális nyugváshoz, az időszak vége a helikális keléshez. Pontosabb "
-"számítások a plug-in frissebb változataiban lesznek elérhetők."
+"számítások a bővítmény frissebb változataiban lesznek elérhetők."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
@@ -6995,7 +7007,7 @@ msgstr "Megfigyelhetőség beállításai"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
-msgstr "Megfigyelhetőség plug-in beállítása"
+msgstr "Megfigyelhetőség bővítmény beállítása"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
@@ -7043,15 +7055,15 @@ msgstr "Betűméret"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "Megfigyelési feltételek"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Horizont magassága nulla fok."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "A Nap magassága szürkületkor nulla fok."
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Egyenlítői rács"
