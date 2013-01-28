@@ -1127,9 +1127,14 @@ double decYear2DeltaT(double y)
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
-	double r = (-20 + 32 * std::pow(u,2.0));;
+	double r = (-20 + 32 * std::pow(u,2.0));
 
-	if (y < 500 and y > -500)
+	if (y < -500)
+	{
+		u = (y-1820)/100.;
+		r = (-20 + 32 * std::pow(u,2.0));
+	}
+	else if (y < 500)
 	{
 		u = y/100;
 		r = (10583.6 - 1014.41 * u + 33.78311 * std::pow(u,2) - 5.952053 * std::pow(u,3)
