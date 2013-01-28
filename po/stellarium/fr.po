@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-06 01:47+0700\n"
-"PO-Revision-Date: 2013-01-05 18:57+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2013-01-18 23:15+0700\n"
+"PO-Revision-Date: 2013-01-26 13:12+0000\n"
+"Last-Translator: Hélion du Mas des Bourboux <helion331990@gmail.com>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-06 04:35+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-27 04:34+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -227,7 +227,7 @@ msgstr "Magnitude apparente : <b>%1%</b> (par extinction)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "étoile double"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -459,7 +459,7 @@ msgstr "Contact"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
 msgstr "Auteur"
 
@@ -1269,12 +1269,12 @@ msgstr "astéroïde"
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "lune"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoïde"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1419,8 +1419,8 @@ msgstr "Occultation de la Terre et Jupiter en 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
-msgid "A Quintuple eclipse from Deimos 2027"
-msgstr "Éclipse quintuple depuis Déimos en 2027"
+msgid "3 Transits and 2 Eclipses from Deimos 2027"
+msgstr "3 transits et 2 éclipses vues de Deimos en 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -1534,15 +1534,19 @@ msgstr ""
 
 #: src/translations.h:259
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
-"retrogrades back towards the sun and just partially eclipses it (only seen "
-"in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-"Phobos emerges from the sun it passes through Mars' shadow and dims."
+"Phobos races ahead of Mars and transits the sun, passes through it and then "
+"retrogrades back towards the sun and just partially transits it again (only "
+"seen in the southern hemisphere of Deimos), then Mars totally eclipses the "
+"sun while Phobos transits in darkness between Mars and Deimos. When Phobos "
+"emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
+"light up later."
 msgstr ""
-"Phobos dépasse Mars et éclipse le Soleil, le traverse puis rétrograde et "
-"éclipse à nouveau partiellement le Soleil, puis Mars éclipse totalement le "
-"Soleil et Phobos, puis Phobos émerge du Soleil et traverse l'ombre de Mars "
-"et disparaît."
+"Phobos dépasse Mars et rejoint le Soleil, le traverse puis rétrograde vers "
+"le Soleil et passe devant partiellement (visible seulement depuis "
+"l'hémisphère sud de Deimos), puis Mars éclipse totalement le Soleil tandis "
+"que Phobos passe dans l'ombre, entre Mars et Deimos. Lorsque Phobos "
+"réapparaît, il est encore éclipsé par l'ombre de Mars et s'éclaire un peu "
+"plus tard."
 
 #: src/translations.h:260
 msgid ""
@@ -3552,6 +3556,10 @@ msgid "Display no information"
 msgstr "Ne pas afficher d'information"
 
 #: src/ui_configurationDialog.h:972
+#: plugins/Observability/src/Observability.cpp:628
+#: plugins/Observability/src/Observability.cpp:629
+#: plugins/Observability/src/Observability.cpp:631
+#: plugins/Observability/src/Observability.cpp:632
 msgid "None"
 msgstr "Aucune"
 
@@ -4069,132 +4077,132 @@ msgstr ""
 msgid "Please select an object before switching to ocular view."
 msgstr "Veuillez sélectionner un objet avant de passer à la vue oculaire."
 
-#: plugins/Oculars/src/Oculars.cpp:831
+#: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
 msgstr "&Oculaire précédent"
 
-#: plugins/Oculars/src/Oculars.cpp:832
+#: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
 msgstr "&Oculaire suivant"
 
-#: plugins/Oculars/src/Oculars.cpp:833
+#: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
 msgstr "Sélectionner l'&oculaire"
 
-#: plugins/Oculars/src/Oculars.cpp:878
+#: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
 msgstr "Afficher/cacher le &réticule"
 
-#: plugins/Oculars/src/Oculars.cpp:887
+#: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
 msgstr "Configurer les &oculaires"
 
-#: plugins/Oculars/src/Oculars.cpp:896
+#: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
 msgstr "Afficher/cacher la &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:904
+#: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
 msgstr "Afficher/cacher &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:914
+#: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
 msgstr "CCD &précédente"
 
-#: plugins/Oculars/src/Oculars.cpp:915
+#: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
 msgstr "CCD &suivante"
 
-#: plugins/Oculars/src/Oculars.cpp:916
+#: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
 msgstr "&Choisir la CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:938
+#: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
 msgstr "&Tourner la CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:970
+#: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
 msgstr "&Réinitialiser la rotation"
 
-#: plugins/Oculars/src/Oculars.cpp:1446
+#: plugins/Oculars/src/Oculars.cpp:1451
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Oculaire #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1451
+#: plugins/Oculars/src/Oculars.cpp:1456
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Oculaire #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1465
+#: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Oculaire FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1472
+#: plugins/Oculars/src/Oculars.cpp:1477
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Oculaire aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1482 plugins/Oculars/src/Oculars.cpp:1539
+#: plugins/Oculars/src/Oculars.cpp:1487 plugins/Oculars/src/Oculars.cpp:1544
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Télescope #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1487 plugins/Oculars/src/Oculars.cpp:1544
+#: plugins/Oculars/src/Oculars.cpp:1492 plugins/Oculars/src/Oculars.cpp:1549
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Télescope #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1498
+#: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Grossissement : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1506
+#: plugins/Oculars/src/Oculars.cpp:1511
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1516
+#: plugins/Oculars/src/Oculars.cpp:1521
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensions: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1521
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Capteur #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1530
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Capteur #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1734
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Telescope"
 msgstr "&Télescope"
 
-#: plugins/Oculars/src/Oculars.cpp:1735
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Previous telescope"
 msgstr "& Télescope précédent"
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1741
 msgid "&Next telescope"
 msgstr "&Télescope suivant"
 
@@ -4289,7 +4297,7 @@ msgstr "Plugin pour les oculaires"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:111
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "Version"
 
@@ -4443,7 +4451,7 @@ msgstr "aFOV:"
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Focal length:"
-msgstr "Distance focale:"
+msgstr "Distance focale :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Field stop:"
@@ -4510,7 +4518,7 @@ msgstr "Renversement vertical"
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
-#: plugins/Observability/src/ui_ObservabilityDialog.h:357
+#: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "À propos"
@@ -4546,7 +4554,7 @@ msgstr "Indicatif International"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "satellite artificiel"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
@@ -5016,7 +5024,7 @@ msgstr "Durée du fondu :"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
-#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+#: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
 msgstr "Restaurer les paramètres par défaut"
 
@@ -5025,7 +5033,7 @@ msgstr "Restaurer les paramètres par défaut"
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
-#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+#: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Save settings as default"
 msgstr "Sauvegarder ces paramètres comme paramètres par défaut"
 
@@ -5034,7 +5042,7 @@ msgstr "Sauvegarder ces paramètres comme paramètres par défaut"
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
-#: plugins/Observability/src/ui_ObservabilityDialog.h:356
+#: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -5173,10 +5181,6 @@ msgid "Configure Telescope"
 msgstr "Configurer le télescope"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
-#: plugins/Observability/src/Observability.cpp:596
-#: plugins/Observability/src/Observability.cpp:597
-#: plugins/Observability/src/Observability.cpp:599
-#: plugins/Observability/src/Observability.cpp:600
 msgid "N/A"
 msgstr "N/D"
 
@@ -6772,194 +6776,194 @@ msgstr ""
 "données par ce script est offert dans l'onglet « À propos » de la fenêtre de "
 "configuration"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jan"
 msgstr "Janv"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Feb"
 msgstr "Fév"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Mar"
 msgstr "Mars"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Apr"
 msgstr "Avr"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "May"
 msgstr "Mai"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jun"
 msgstr "Juin"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jul"
 msgstr "Juil"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Aug"
 msgstr "Août"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Sep"
 msgstr "Sept"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Oct"
 msgstr "Oct"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Nov"
 msgstr "Nov"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Dec"
 msgstr "Déc"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "h"
 msgstr "h"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "m"
 msgstr "min"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:477
+#: plugins/Observability/src/Observability.cpp:509
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Se couche à %1 (dans %2)"
 
-#: plugins/Observability/src/Observability.cpp:478
+#: plugins/Observability/src/Observability.cpp:510
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "S'est levé à %1 (il y a %2)"
 
-#: plugins/Observability/src/Observability.cpp:488
+#: plugins/Observability/src/Observability.cpp:520
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "S'est couché à %1 (il y a %2)"
 
-#: plugins/Observability/src/Observability.cpp:489
+#: plugins/Observability/src/Observability.cpp:521
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "Se lève à %1 (dans %2)"
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "Circumpolar."
 msgstr "Circumpolaire"
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "No rise."
 msgstr "Pas de lever."
 
-#: plugins/Observability/src/Observability.cpp:515
+#: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Culmine à %1 (dans %2) à %3 deg."
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "A culminé a %1 (il y a %2) à %3 deg."
 
-#: plugins/Observability/src/Observability.cpp:560
+#: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
 msgstr "Source non observable."
 
-#: plugins/Observability/src/Observability.cpp:561
+#: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "Pas de lever/coucher achronique ou cosmique."
 
-#: plugins/Observability/src/Observability.cpp:578
+#: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
 msgstr "Plus grande élongation : "
 
-#: plugins/Observability/src/Observability.cpp:581
+#: plugins/Observability/src/Observability.cpp:613
 msgid "Largest Sun separation: "
 msgstr "Séparation maximale au Soleil : "
 
-#: plugins/Observability/src/Observability.cpp:584
+#: plugins/Observability/src/Observability.cpp:616
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " (à %1 deg.)"
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
 msgstr "Lever/coucher achronique"
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
 msgstr "Pas de lever/coucher achronique."
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
 msgstr "Lever/coucher cosmique"
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
 msgstr "Pas de lever/coucher cosmique."
 
-#: plugins/Observability/src/Observability.cpp:649
+#: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
 msgstr "Observable durant toute l'année."
 
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:685
 msgid "Not observable at dark night."
 msgstr "Non observable par nuit noire."
 
-#: plugins/Observability/src/Observability.cpp:658
+#: plugins/Observability/src/Observability.cpp:690
 msgid "Nights above horizon: "
 msgstr "La nuit au-dessus de l'horizon : "
 
-#: plugins/Observability/src/Observability.cpp:675
+#: plugins/Observability/src/Observability.cpp:707
 msgid "TODAY:"
 msgstr "Aujourd'hui :"
 
-#: plugins/Observability/src/Observability.cpp:684
+#: plugins/Observability/src/Observability.cpp:716
 msgid "THIS YEAR:"
 msgstr "Cette année :"
 
-#: plugins/Observability/src/Observability.cpp:1428
+#: plugins/Observability/src/Observability.cpp:1450
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "Pleine lune précédente : %1 %2 à %3h%4. "
 
-#: plugins/Observability/src/Observability.cpp:1433
+#: plugins/Observability/src/Observability.cpp:1455
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Prochaine pleine lune : %1 %2 à %3h%4. "
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
 msgstr "Plugin Observabilité"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen "
 "center, if no source is selected). The plugin can show rise, transit, and "
@@ -6980,15 +6984,17 @@ msgstr ""
 "compte.<br><br> L'auteur remercie Alexander Wolf et Georg Zotti  pour leurs "
 "conseils.<br><br>Ivan Marti-Vidal (Observatoire Spatial d'Onsala)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
 msgstr "Explication de quelques paramètres"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
 msgstr "Altitude du Soleil au crépuscule :"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -7000,11 +7006,25 @@ msgstr ""
 "astronomique se situe en général entre –12 et –18 degrés. Ce paramètre n'est "
 "utilisé que pour l'estimation des périodes d'observation (voir ci-dessous)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
+msgid "Horizon altitude:"
+msgstr "Hauteur d'horizon :"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid ""
+"Minimum observable altitude (due to mountains, buildings, or just a limited "
+"telescope mount)."
+msgstr ""
+"Hauteur minimale observable (en raison de montagnes, bâtiments ou d'une "
+"monture de télescope limitée)."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
 msgstr "Éphéméride du jour :"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -7015,11 +7035,11 @@ msgstr ""
 "au méridien). Les heures précises de ces éphémérides sont données sous deux "
 "formes : en durée depuis l'heure actuelle et en heure locale."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
 msgstr "Lever/coucher achronique/cosmique :"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
 "The Acronychal rise (or set) of an object happens when the object rises (or "
 "sets) just when the Sun sets (or rises), respectively. The exact dates of "
@@ -7042,11 +7062,11 @@ msgstr ""
 "ce cas, l'objet est difficilement observable ou pas observable du tout dans "
 "l'intervalle entre son lever et son coucher cosmique."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid "Largest Sun separation:"
 msgstr "Séparation maximale au Soleil :"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object "
 "are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -7065,11 +7085,11 @@ msgstr ""
 "culmine vers minuit dans la portion la plus sombre du ciel à cette "
 "déclinaison. C'est donc la meilleure nuit pour observer cet objet."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
 msgstr "Nuits avec la source au-dessus de l'horizon :"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
@@ -7108,11 +7128,11 @@ msgstr ""
 "des planètes. Ils ne dépendront plus simplement de l'élévation du soleil au "
 "crépuscule donnée par l'utilisateur."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
 msgstr "Pleine lune :"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
@@ -7120,70 +7140,76 @@ msgstr ""
 "Quand la Lune est sélectionnée, le programme peut calculer les plus proches "
 "dates exactes de l'opposition de la Lune au Soleil."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "deg."
 msgstr "deg."
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:338
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
 msgstr "Configuration de l'observabilité"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:339
+#: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
 msgstr "Configuration du plugin Observabilité"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:341
+#: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
 msgstr "Options visibles"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:342
+#: plugins/Observability/src/ui_ObservabilityDialog.h:363
 msgid "Today's ephemeris (rise, set, and transit times)"
 msgstr "Éphéméride du jour (heures du lever, du coucher et du transit)"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:343
+#: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
 msgstr "Dates des levers/couchers achroniques et cosmiques"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:344
+#: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
 msgstr "Date de la séparation maximale au Soleil"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+#: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Nights with the source above horizon"
 msgstr "Nuits avec la source au-dessus de l'horizon"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+#: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Dates of previous and next Full Moon"
 msgstr "Dates de la dernière pleine lune et de la prochaine"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+#: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
 msgstr "Couleur et taille de la police"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+#: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
 msgstr "Rouge"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:351
+#: plugins/Observability/src/ui_ObservabilityDialog.h:372
 msgid "Green"
 msgstr "Vert"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
+#: plugins/Observability/src/ui_ObservabilityDialog.h:373
 msgid "Blue"
 msgstr "Bleu"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:353
+#: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
 msgstr "Taille de la police"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:354
-msgid "Sun altitude at twilight"
-msgstr "Élévation du soleil au crépuscule"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:375
+msgid "Observing conditions"
+msgstr "Conditions d'observation"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:355
-msgid "0 deg."
-msgstr "0 deg."
+#: plugins/Observability/src/ui_ObservabilityDialog.h:376
+msgid "Horizon altitude: 0 deg."
+msgstr "Hauteur d'horizon : 0 deg."
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+msgid "Sun altitude at twilight: 0 deg."
+msgstr "Hauteur du Soleil au crépuscule : 0 deg."
 
 #~ msgid "Date & Time"
 #~ msgstr "Date & Heure"
@@ -7560,6 +7586,9 @@ msgstr "0 deg."
 #~ msgid "Distance: %1 kpc (%2 ly)"
 #~ msgstr "Distance : %1 kpc (%2 al)"
 
+#~ msgid "A Quintuple eclipse from Deimos 2027"
+#~ msgstr "Éclipse quintuple depuis Déimos en 2027"
+
 #~ msgid ""
 #~ "Phobos races ahead of Mars and eclipses the sun, passes thru it and then "
 #~ "retrogrades back towards the sun and just partially eclipses it (only seen "
@@ -7607,10 +7636,16 @@ msgstr "0 deg."
 #~ "Flash de la supernova que Tycho Brahe a observée en 1572. Pour les démos, il "
 #~ "faut activer le plug-in pour les supernovas."
 
+#~ msgid "0 deg."
+#~ msgstr "0 deg."
+
 #~ msgid "Earth best views from other Solar system bodies in the 21st Century."
 #~ msgstr ""
 #~ "Meilleures vues de la Terre depuis d'autres corps du Système solaire au XXIe "
 #~ "siècle."
+
+#~ msgid "Sun altitude at twilight"
+#~ msgstr "Élévation du soleil au crépuscule"
 
 #~ msgid "10000"
 #~ msgstr "10 000"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-01-06 01:47+0700\n"
-"PO-Revision-Date: 2012-12-17 12:07+0000\n"
+"POT-Creation-Date: 2013-01-18 23:15+0700\n"
+"PO-Revision-Date: 2013-01-11 07:10+0000\n"
 "Last-Translator: Chynggyz Jumaliev <translatorky@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-06 04:37+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-19 04:44+0000\n"
+"X-Generator: Launchpad (build 16430)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -447,7 +447,7 @@ msgstr "Кербайланыш"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
 msgstr "Автор"
 
@@ -1401,7 +1401,7 @@ msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
-msgid "A Quintuple eclipse from Deimos 2027"
+msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
@@ -1502,10 +1502,12 @@ msgstr ""
 
 #: src/translations.h:259
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
-"retrogrades back towards the sun and just partially eclipses it (only seen "
-"in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-"Phobos emerges from the sun it passes through Mars' shadow and dims."
+"Phobos races ahead of Mars and transits the sun, passes through it and then "
+"retrogrades back towards the sun and just partially transits it again (only "
+"seen in the southern hemisphere of Deimos), then Mars totally eclipses the "
+"sun while Phobos transits in darkness between Mars and Deimos. When Phobos "
+"emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
+"light up later."
 msgstr ""
 
 #: src/translations.h:260
@@ -2582,7 +2584,7 @@ msgstr "Убакыттын жүрүшүн басаңдатуу"
 
 #: src/translations.h:536
 msgid "Decrease time speed (a little)"
-msgstr "Убакыттын ылдамдыгын басаңдатуу (кичине)"
+msgstr "Убакыттын өтүшүн басаңдатуу (кичине)"
 
 #: src/translations.h:537
 msgid "Speed up the script execution rate"
@@ -2594,11 +2596,11 @@ msgstr "Убакыттын жүрүшүн тездетүү"
 
 #: src/translations.h:539
 msgid "Increase time speed (a little)"
-msgstr "Убакыттын жүрүшүн тездетүү (кичине)"
+msgstr "Убакыттын өтүшүн ылдамдатуу (кичине)"
 
 #: src/translations.h:540
 msgid "Pause script execution"
-msgstr "Сценарийдин аткарылуусун паузага коюу"
+msgstr "Сценарийдин аткарылуусун бир азга токтотуу"
 
 #: src/translations.h:541
 msgid "Resume script execution"
@@ -2606,23 +2608,23 @@ msgstr "Сценарийдин аткарылуусун улантуу"
 
 #: src/translations.h:542
 msgid "Set time to now"
-msgstr "Убакытты азырга коюу"
+msgstr "Кезектеги убакыт"
 
 #: src/translations.h:543
 msgid "Set the normal script execution rate"
-msgstr "Сценарийдин аткарылуусун нормалдуу кылуу"
+msgstr "Сценарийдин аткарылуусу үчүн нормалдуу ылдамдыкты коюу"
 
 #: src/translations.h:544
 msgid "Set normal time rate"
-msgstr "Нормалдуу убакыт жүрүшү"
+msgstr "Убакыттын нормалдуу жүрүшү"
 
 #: src/translations.h:545
 msgid "Set time rate to zero"
-msgstr "Убакыт жүрүшүн нөлгө коюу"
+msgstr "Убакытты токтотуу"
 
 #: src/translations.h:546
 msgid "Stop script execution"
-msgstr ""
+msgstr "Сценарийдин иштөөсүн токтотуу"
 
 #: src/translations.h:547
 msgid "Subtract 1 sidereal day"
@@ -2687,15 +2689,15 @@ msgstr ""
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:564
 msgid "Display Options"
-msgstr "Көрсөтүү опциялары"
+msgstr "Көрсөтүү параметрлери"
 
 #: src/translations.h:565
 msgid "Flip scene horizontally"
-msgstr "Сахнаны горизонталынан оодаруу"
+msgstr "Горизонталь боюнча чагылтуу"
 
 #: src/translations.h:566
 msgid "Full-screen mode"
-msgstr "Толук-экран режими"
+msgstr "Толук экран режими"
 
 #: src/translations.h:567 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
@@ -2709,45 +2711,45 @@ msgstr "Азимуттук тор"
 #: src/translations.h:569 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
-msgstr "Дүйнө жактары"
+msgstr "Дүйнө тараптары"
 
 #: src/translations.h:570
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
-msgstr "Топ жылдыз көркөм өнөрү"
+msgstr "Топ жылдыздардын сүрөттөрү"
 
 #: src/translations.h:571
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
-msgstr "Топ жылдыз чек аралары"
+msgstr "Топ жылдыздардын чек аралары"
 
 #: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
-msgstr "Топ жылдыз атамалары"
+msgstr "Топ жылдыздардын атттары"
 
 #: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
-msgstr "Топ жылдыз сызыктары"
+msgstr "Топ жылдыздардын сызыктары"
 
 #: src/translations.h:574
 msgid "Nebulas background images"
-msgstr "Жыбыраган калың жылдыздардын фон сүрөттөрү"
+msgstr "Жыбыраган калың жылдыздардын фондук сүрөттөрү"
 
 #: src/translations.h:575 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr "Эклиптика J2000 тору"
+msgstr "Эклиптикалык тор J2000"
 
 #: src/translations.h:576
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
-msgstr "Эклиптика сызыгы"
+msgstr "Эклиптиканын сызыгы"
 
 #: src/translations.h:577
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
-msgstr "Экватор сызыгы"
+msgstr "Экватордун сызыгы"
 
 #: src/translations.h:578 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
@@ -2757,7 +2759,7 @@ msgstr "Экватордук тор"
 #: src/translations.h:579 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
-msgstr "Экватордук J2000 тору"
+msgstr "Экватордук тор J2000"
 
 #: src/translations.h:580
 msgid "Fog"
@@ -2766,11 +2768,11 @@ msgstr "Чаң-түтүн"
 #: src/translations.h:581 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
-msgstr "Галактика тору"
+msgstr "Галактикалык тор"
 
 #: src/translations.h:582 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
-msgstr "Галактика тегиздиги"
+msgstr "Галактиканын тегиздиги"
 
 #: src/translations.h:583
 msgid "Ground"
@@ -2779,12 +2781,12 @@ msgstr "Кыртыш"
 #: src/translations.h:584
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
-msgstr "Горизонт сызыгы"
+msgstr "Горизонттун сызыгы"
 
 #: src/translations.h:585
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
-msgstr "Меридиан сызыгы"
+msgstr "Меридиандын сызыгы"
 
 #: src/translations.h:586 src/ui_viewDialog.h:1144
 msgid "Nebulas"
@@ -2797,17 +2799,17 @@ msgstr "Түнкү режим"
 #: src/translations.h:588
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
-msgstr "Планета атамалары"
+msgstr "Планеталардын аттары"
 
 #: src/translations.h:589
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
-msgstr "Планета орбиталары"
+msgstr "Планеталардын орбиталары"
 
 #: src/translations.h:590
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
-msgstr "Планета чыйырлары"
+msgstr "Планеталардын издери"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
@@ -2816,24 +2818,24 @@ msgstr "Жылдыздар"
 
 #: src/translations.h:592
 msgid "Stars labels"
-msgstr "Жылдыздардын атамалары"
+msgstr "Жылдыздардын аттары"
 
 #: src/translations.h:593
 msgid "Flip scene vertically"
-msgstr "Сахнаны вертикалынан оодаруу"
+msgstr "Вертикаль боюнча чагылтуу"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:596
 msgid "Miscellaneous"
-msgstr "Ар башкалар"
+msgstr "Калгандар"
 
 #: src/translations.h:597
 msgid "Auto hide horizontal button bar"
-msgstr "Горизонталдуу панельди авто жашыруу"
+msgstr "Горизонталдуу панелди авто жашыруу"
 
 #: src/translations.h:598
 msgid "Auto hide vertical button bar"
-msgstr "Вертикалдуу панельди авто жашыруу"
+msgstr "Вертикалдуу панелди авто жашыруу"
 
 #: src/translations.h:599
 msgid "Go to home"
@@ -2845,11 +2847,11 @@ msgstr "Чыгуу"
 
 #: src/translations.h:601
 msgid "Copy selected object information to clipboard"
-msgstr "Тандалган объектинин информациясын алмашуу буферине көчүрүү"
+msgstr "Тандалган объектт жөнүндө маалыматты алмашуу буферине көчүрүү"
 
 #: src/translations.h:602
 msgid "Save screenshot"
-msgstr "Экран сүрөтүн сактоо"
+msgstr "Экрандын сүрөтүн сактоо"
 
 #: src/translations.h:603
 msgid "Switch between equatorial and azimuthal mount"
@@ -2857,28 +2859,28 @@ msgstr "Экватордук жана азимуттук чыгуунун ара
 
 #: src/translations.h:604
 msgid "Toggle visibility of GUI"
-msgstr "КГИ көрүнүүсүнө которуу"
+msgstr "Аспап панелин көрсөтүү"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:607
 msgid "Movement and Selection"
-msgstr "Которуу жана тандоо"
+msgstr "Ташуу жана тандоо"
 
 #: src/translations.h:608
 msgid "Center on selected object"
-msgstr "Тандалган объектке борборлотуу"
+msgstr "Тандалган объектти борборлотуу"
 
 #: src/translations.h:609
 msgid "Set home planet to selected planet"
-msgstr "Тандалган объектти үй планетасы кылып коюу"
+msgstr "Тандалган планетаны үйдүк кылуу"
 
 #: src/translations.h:610
 msgid "Track object"
-msgstr "Объектти байкоо"
+msgstr "Объектти көзөмөлдөө"
 
 #: src/translations.h:611
 msgid "Zoom in on selected object"
-msgstr "Тандалган объектке жакындатуу"
+msgstr "Тандалган объектти чоңойнтуу"
 
 #: src/translations.h:612
 msgid "Zoom out"
@@ -2890,7 +2892,7 @@ msgstr "Бурч ченөөч"
 
 #: src/translations.h:618
 msgid "Compass marks"
-msgstr "Компас белгилери"
+msgstr "Компас"
 
 #: src/translations.h:621
 msgid "Show exoplanets"
@@ -2898,7 +2900,7 @@ msgstr "Экзопланеталарды көрсөтүү"
 
 #: src/translations.h:622
 msgid "Exoplanets configuration window"
-msgstr "Экзопланеталар ырастоосунун терезеси"
+msgstr "\"Экзопланеталар\" плагинин ырастоо терезеси"
 
 #: src/translations.h:625
 msgid "Observability"
@@ -2910,11 +2912,11 @@ msgstr ""
 
 #: src/translations.h:629
 msgid "Oculars plugin configuration"
-msgstr "Окулярлар плагининин ырастоосу"
+msgstr "Плагиндин конфигурациясы"
 
 #: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
-msgstr "Окуляр көрүнүшү"
+msgstr "Окулярдын көрүнүшү"
 
 #: src/translations.h:631
 msgid "Show crosshairs"
@@ -2922,43 +2924,43 @@ msgstr ""
 
 #: src/translations.h:632
 msgid "Oculars popup menu"
-msgstr "Окулярлардын калкуучу менюсу"
+msgstr "Окулярлардын контексттик менюсу"
 
 #: src/translations.h:633
 msgid "Image sensor frame"
-msgstr "Сүрөт сенсорунун кадры"
+msgstr "Сенсордун кадры"
 
 #: src/translations.h:634
 msgid "Telrad sight"
-msgstr "Telrad көрүнүп турган мейкин"
+msgstr "Telrad'дын көрүнүп турган мейкини"
 
 #: src/translations.h:637
 msgid "Pulsars configuration window"
-msgstr "Пульсарлар ырастоосунун терезеси"
+msgstr "\"Пульсарлар\" плагинин ырастоо терезеси"
 
 #: src/translations.h:640
 msgid "Quasars configuration window"
-msgstr "Квазарлар ырастоосунун терезеси"
+msgstr "\"Квазарлар\" плагинин ырастоо терезеси"
 
 #: src/translations.h:643
 msgid "Satellites configuration window"
-msgstr "Жолдоштор ырастоосунун терезеси"
+msgstr "\"Жолдоштор\" плагинин ырастоо терезеси"
 
 #: src/translations.h:644
 msgid "Satellite hints"
-msgstr "Жолдоштун багыттары"
+msgstr "Жердин жасалма жолдоштору"
 
 #: src/translations.h:645
 msgid "Satellite labels"
-msgstr "Жолдош атамалары"
+msgstr "Жолдоштордун аттары"
 
 #: src/translations.h:648
 msgid "Historical Supernovae configuration window"
-msgstr "Тарыхый супернова ырастоосунун терезеси"
+msgstr "\"Тарыхый суперновалар\" плагинин ырастоо терезеси"
 
 #: src/translations.h:651
 msgid "Move a telescope to a given set of coordinates"
-msgstr "Белгилүү багыт координаттарына телескопту жылдыруу"
+msgstr "Көрсөтүлгөн координаттар боюнча телескопту каратуу"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:654 src/ui_configurationDialog.h:1121
@@ -2988,7 +2990,7 @@ msgstr "Жардам терезеси"
 
 #: src/translations.h:663
 msgid "Location window"
-msgstr "Турган жер терезеси"
+msgstr "Турган жердин терезеси"
 
 #: src/translations.h:665
 msgid "Search window"
@@ -3000,7 +3002,7 @@ msgstr ""
 
 #: src/translations.h:667
 msgid "Sky and viewing options window"
-msgstr "Асман жана көрүнүш опцияларынын терезеси"
+msgstr "Асмандын жана байкоонун ырастоо терезеси"
 
 #: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3013,7 +3015,7 @@ msgstr "Программа жөнүндө"
 
 #: src/ui_helpDialogGui.h:288
 msgid "Log"
-msgstr "Лог"
+msgstr "Журнал"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
@@ -3030,7 +3032,7 @@ msgstr "Орун"
 
 #: src/ui_locationDialogGui.h:393
 msgid "Current location information"
-msgstr "Кезектеги турган жер жөнүндөгү информация"
+msgstr "Кезектеги турган жер жөнүндөгү маалымат"
 
 #: src/ui_locationDialogGui.h:394
 msgid "Use as default"
@@ -3083,7 +3085,7 @@ msgstr " м"
 
 #: src/ui_locationDialogGui.h:411
 msgid "Name/City:"
-msgstr "Ат/Шаар:"
+msgstr "Орун:"
 
 #: src/ui_locationDialogGui.h:412
 msgid "Country:"
@@ -3095,11 +3097,11 @@ msgstr "Планета:"
 
 #: src/ui_searchDialogGui.h:542
 msgid "Find Object"
-msgstr "Объектти табуу"
+msgstr "Объектти издөө"
 
 #: src/ui_searchDialogGui.h:543
 msgid "Find Object or Position"
-msgstr "Объект же орунду табуу"
+msgstr "Объект же турган жерди табуу"
 
 #: src/ui_searchDialogGui.h:549
 msgid "iota"
@@ -3199,7 +3201,7 @@ msgstr "омега"
 
 #: src/ui_searchDialogGui.h:620
 msgid "Greek letters for Bayer designations"
-msgstr "Байер белгилөөлөрү үчүн грек тамгалар"
+msgstr "Байер белгилөөлөрү үчүн грек тамгалары"
 
 #: src/ui_searchDialogGui.h:621
 msgid "Object"
@@ -3211,7 +3213,7 @@ msgstr "Тик чыгуу/Эңкейүү (J2000):"
 
 #: src/ui_searchDialogGui.h:623
 msgid "Position"
-msgstr "Орун"
+msgstr "Турган жер"
 
 #: src/ui_searchDialogGui.h:624
 msgid "On-line astronomical database SIMBAD"
@@ -3234,11 +3236,11 @@ msgstr "Параметрлер"
 
 #: src/ui_searchDialogGui.h:628
 msgid "names in English"
-msgstr ""
+msgstr "англисче аттар"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Search in list..."
-msgstr ""
+msgstr "Тизмеден издөө..."
 
 #: src/ui_searchDialogGui.h:630
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
@@ -3255,7 +3257,7 @@ msgstr "Асман"
 
 #: src/ui_viewDialog.h:1114
 msgid "Markings"
-msgstr "Белгилер"
+msgstr "Белгилөөлөр"
 
 #: src/ui_viewDialog.h:1116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
@@ -3265,17 +3267,17 @@ msgstr "Ландшафт"
 #: src/ui_viewDialog.h:1118
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
-msgstr "Жылдыз билими"
+msgstr "Жылдыздар жөнүндөгү билим"
 
 #: src/ui_viewDialog.h:1122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
-msgstr "Накта өлчөм:"
+msgstr "Абсолюттук чоңойтуу:"
 
 #: src/ui_viewDialog.h:1123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
-msgstr "Салыштырмалуу өлчөм:"
+msgstr "Салыштырмалуу чоңойтуу:"
 
 #: src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -3288,7 +3290,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1128
 msgid "Dynamic eye adaptation"
-msgstr "Динамикалык көз байырлануусу"
+msgstr "Сезгичтиктин динамикалык адаптациясы"
 
 #: src/ui_viewDialog.h:1129
 msgid "Planets and satellites"
@@ -3300,19 +3302,19 @@ msgstr "Планеталарды көрсөтүү"
 
 #: src/ui_viewDialog.h:1131
 msgid "Show planet markers"
-msgstr "Планета белгилөөчтөрүн көрсөтүү"
+msgstr "Планеталардын белгилерин көрсөтүү"
 
 #: src/ui_viewDialog.h:1132
 msgid "Show planet orbits"
-msgstr "Планета орбиталарын көрсөтүү"
+msgstr "Планеталардын орбиталарын көрсөтүү"
 
 #: src/ui_viewDialog.h:1133
 msgid "Simulate light speed"
-msgstr "Жарык ылдамдыгын анткорлоо"
+msgstr "Жарыктын ылдамдыгын моделдөө"
 
 #: src/ui_viewDialog.h:1134
 msgid "Scale Moon"
-msgstr "Ай өлчөмү"
+msgstr "Айды масштабдоо"
 
 #: src/ui_viewDialog.h:1136
 msgid "Show atmosphere"
@@ -3325,15 +3327,15 @@ msgstr "Жарыктык булганыш:"
 
 #: src/ui_viewDialog.h:1139
 msgid "pressure, temperature, extinction coefficient"
-msgstr "басым, температура, өчүү коэфициенти"
+msgstr "басым, температура, экстинкциянын коэфициенти"
 
 #: src/ui_viewDialog.h:1141
 msgid "Refraction/Extinction settings..."
-msgstr "Рефракция/Экстинкция ырастоолору..."
+msgstr "Рефракциянын/экстинкциянын ырастоолору..."
 
 #: src/ui_viewDialog.h:1142
 msgid "Labels and Markers"
-msgstr "Атамалар жана белгилөөчтөр"
+msgstr "Аттар жана маркерлер"
 
 #: src/ui_viewDialog.h:1145
 msgid "Planets"
@@ -3341,7 +3343,7 @@ msgstr "Планеталар"
 
 #: src/ui_viewDialog.h:1146
 msgid "Shooting Stars"
-msgstr "Учуучу жылдыздар"
+msgstr "Метеорлор"
 
 #: src/ui_viewDialog.h:1147
 msgid "Hourly zenith rate:"
@@ -3357,7 +3359,7 @@ msgstr "Сызыктарды көрсөтүү"
 
 #: src/ui_viewDialog.h:1151
 msgid "Show labels"
-msgstr "Атамаларды көрсөтүү"
+msgstr "Аттарды көрсөтүү"
 
 #: src/ui_viewDialog.h:1152
 msgid "Show boundaries"
@@ -3365,13 +3367,13 @@ msgstr "Чек араларды көрсөтүү"
 
 #: src/ui_viewDialog.h:1153
 msgid "Show art"
-msgstr "Көркөм өнөрдү көрсөтүү"
+msgstr "Сүрөттөрдү көрсөтүү"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
-msgstr "Көркөм өнөр ачык түстүүлүгү:"
+msgstr "Сүрөттөрдүн ачык түстүүлүгү:"
 
 #: src/ui_viewDialog.h:1155
 msgid "Celestial Sphere"
@@ -3379,19 +3381,19 @@ msgstr "Асман сферасы"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr "Экватор сызыгын көрсөтүү"
+msgstr "Экватордун сызыгын көрсөтүү"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr "Меридиан сызыгын көрсөтүү"
+msgstr "Меридиандын сызыгын көрсөтүү"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr "Горизонт сызыгын көрсөтүү"
+msgstr "Горизонттун сызыгын көрсөтүү"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr "Эклиптика сызыгын көрсөтүү"
+msgstr "Эклиптиканын сызыгын көрсөтүү"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
@@ -3403,7 +3405,7 @@ msgstr "Проекция"
 
 #: src/ui_viewDialog.h:1183
 msgid "Add/remove landscapes..."
-msgstr "Ландшафттарды кошуу/алуу..."
+msgstr "Ландшафттарды кошуу/өчүрүү..."
 
 #: src/ui_viewDialog.h:1185
 msgid "Show ground"
@@ -3415,19 +3417,19 @@ msgstr "Чаң-түтүндү көрсөтүү"
 
 #: src/ui_viewDialog.h:1187
 msgid "Use associated planet and position"
-msgstr "Байланыштуу планета жана орунду колдонуу"
+msgstr "Туура келүүчү планетаны жана турган жерди колдонуу"
 
 #: src/ui_viewDialog.h:1188
 msgid "Use this landscape as default"
-msgstr "Ушу ландшафты жарыяланбасча колдонуу"
+msgstr "Бул ландшафтты жарыяланбасча колдонуу"
 
 #: src/ui_viewDialog.h:1190
 msgid "Use this sky culture as default"
-msgstr "Ушу асман маданиятын жарыяланбасча колдонуу"
+msgstr "Бул асман маданиятын жарыяланбасча колдонуу"
 
 #: src/ui_viewDialog.h:1192
 msgid "Visible"
-msgstr "Көрүнүп турган"
+msgstr "Көрүнүүчү"
 
 #: src/ui_configurationDialog.h:941
 msgid "Configuration"
@@ -3435,17 +3437,17 @@ msgstr "Ырастоо"
 
 #: src/ui_configurationDialog.h:943
 msgid "Program language"
-msgstr "Программа тили"
+msgstr "Программанын тили"
 
 #: src/ui_configurationDialog.h:944
 msgid "Default options"
-msgstr "Жарыяланбас опциялар"
+msgstr "Жарыяланбасча опциялар"
 
 #: src/ui_configurationDialog.h:946
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
-msgstr "Ушу сессияда өзгөртүлгөн ырастоолорду сактоо"
+msgstr "Бул ырастоолорду бүт кийинки сессияларга сактоо"
 
 #: src/ui_configurationDialog.h:948
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -3454,7 +3456,7 @@ msgstr "Ырастоолорду сактоо"
 
 #: src/ui_configurationDialog.h:950
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Stellarium менен келген жарыяланбас ырастоолорду калыбына келтирүү"
+msgstr "Баштапкы ырастоолор"
 
 #: src/ui_configurationDialog.h:952
 msgid "Restore defaults"
@@ -3466,21 +3468,21 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"Жарыяланбас ырастоолорду калыбына келтириш үчүн Stellarium'ду кайта жүргүзүш "
-"керек. Кезектеги КТМ жана көрүнүш багыты менен кошо бүт опциялар эмки сеанс "
-"үчүн сакталышат."
+"Жарыяланбасча ырастоолорду калыбына келтирүү Stellarium'дун кайта "
+"жүргүзүүсүн талап кылат. Кезектеги КТМ жана көрүнүш багыты менен кошо бүт "
+"опциялар эмки сеанс үчүн сакталышат."
 
 #: src/ui_configurationDialog.h:955
 msgid "The width of your view when Stellarium starts"
-msgstr "Stellarium жүргүзүлүп жаткандагы сиздин көрүнүштүн туурасы"
+msgstr "Stellarium'ду жүргүзүү учурундагы көрүнүп турган мейкин"
 
 #: src/ui_configurationDialog.h:958
 msgid "The direction you're looking when Stellarium starts"
-msgstr "Stellarium жүргүзүлгөндө сиз көрүп жаткан багыт"
+msgstr "Stellarium'ду жүргүзүү учурундагы караштын багыты"
 
 #: src/ui_configurationDialog.h:960 src/ui_configurationDialog.h:1114
 msgid "Selected object information"
-msgstr "Тандалган объекттин информациясы"
+msgstr "Тандалган объект жөнүндөгү маалымат"
 
 #: src/ui_configurationDialog.h:962
 msgid "Display all information available"
@@ -3500,11 +3502,15 @@ msgstr "Кыска"
 
 #: src/ui_configurationDialog.h:970
 msgid "Display no information"
-msgstr "Информацияны көрсөтпөө"
+msgstr "Маалыматты көрсөтпөө"
 
 #: src/ui_configurationDialog.h:972
+#: plugins/Observability/src/Observability.cpp:628
+#: plugins/Observability/src/Observability.cpp:629
+#: plugins/Observability/src/Observability.cpp:631
+#: plugins/Observability/src/Observability.cpp:632
 msgid "None"
-msgstr "Эч бир"
+msgstr "Өчүк"
 
 #: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
@@ -3512,7 +3518,7 @@ msgstr "Колдонуучу ырастоолорунун информацияс
 
 #: src/ui_configurationDialog.h:976
 msgid "Customized"
-msgstr "Өзгөчөлөнгөн"
+msgstr "Колдонулуучу"
 
 #: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
@@ -4003,132 +4009,132 @@ msgstr ""
 msgid "Please select an object before switching to ocular view."
 msgstr "Окуляр көрүнүшүнө которуу алдында объектти тандаңыз."
 
-#: plugins/Oculars/src/Oculars.cpp:831
+#: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
 msgstr "&Абалкы окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:832
+#: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
 msgstr "&Кийинки окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:833
+#: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
 msgstr "&Окулярды тандоо"
 
-#: plugins/Oculars/src/Oculars.cpp:878
+#: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
 msgstr "&Айкашманы которуу"
 
-#: plugins/Oculars/src/Oculars.cpp:887
+#: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
 msgstr "&Окулярларды ырастоо"
 
-#: plugins/Oculars/src/Oculars.cpp:896
+#: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
 msgstr "&CCD которуу"
 
-#: plugins/Oculars/src/Oculars.cpp:904
+#: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
 msgstr "&Telrad которуу"
 
-#: plugins/Oculars/src/Oculars.cpp:914
+#: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
 msgstr "&Абалкы CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:915
+#: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
 msgstr "&Кийинки CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:916
+#: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
 msgstr "CCD &тандоо"
 
-#: plugins/Oculars/src/Oculars.cpp:938
+#: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
 msgstr "CCD &айлантуу"
 
-#: plugins/Oculars/src/Oculars.cpp:970
+#: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
 msgstr "&Айланууну түшүрүү"
 
-#: plugins/Oculars/src/Oculars.cpp:1446
+#: plugins/Oculars/src/Oculars.cpp:1451
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Окуляр #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1451
+#: plugins/Oculars/src/Oculars.cpp:1456
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Окуляр #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1465
+#: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Окуляр ФА: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1472
+#: plugins/Oculars/src/Oculars.cpp:1477
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Окуляр кКТМ: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1482 plugins/Oculars/src/Oculars.cpp:1539
+#: plugins/Oculars/src/Oculars.cpp:1487 plugins/Oculars/src/Oculars.cpp:1544
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1487 plugins/Oculars/src/Oculars.cpp:1544
+#: plugins/Oculars/src/Oculars.cpp:1492 plugins/Oculars/src/Oculars.cpp:1549
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1498
+#: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Чоңоюу: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1506
+#: plugins/Oculars/src/Oculars.cpp:1511
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "FOV: %1"
 msgstr "КТМ: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1516
+#: plugins/Oculars/src/Oculars.cpp:1521
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Чендер: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1521
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сенсор #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1530
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сенсор #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1734
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Telescope"
 msgstr "&Телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1735
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Previous telescope"
 msgstr "&Абалкы телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1741
 msgid "&Next telescope"
 msgstr "&Кийинки телескоп"
 
@@ -4223,7 +4229,7 @@ msgstr "Окулярлар плагини"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:111
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "Версия"
 
@@ -4424,7 +4430,7 @@ msgstr "Вертикалдуу оодарыш"
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
-#: plugins/Observability/src/ui_ObservabilityDialog.h:357
+#: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -4888,7 +4894,7 @@ msgstr "Жоюлуш аралыгы:"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
-#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+#: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
 msgstr "Жарыяланбас ырастоолорду калыбына келтирүү"
 
@@ -4897,7 +4903,7 @@ msgstr "Жарыяланбас ырастоолорду калыбына кел�
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
-#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+#: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Save settings as default"
 msgstr "Ырастоолорду жарыяланбасча сактоо"
 
@@ -4906,7 +4912,7 @@ msgstr "Ырастоолорду жарыяланбасча сактоо"
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
-#: plugins/Observability/src/ui_ObservabilityDialog.h:356
+#: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
 msgstr "Ырастоолор"
 
@@ -5041,10 +5047,6 @@ msgid "Configure Telescope"
 msgstr "Телескопту ырастоо"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
-#: plugins/Observability/src/Observability.cpp:596
-#: plugins/Observability/src/Observability.cpp:597
-#: plugins/Observability/src/Observability.cpp:599
-#: plugins/Observability/src/Observability.cpp:600
 msgid "N/A"
 msgstr "Маалымат жок"
 
@@ -6532,194 +6534,194 @@ msgid ""
 "configuration window"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jan"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Feb"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Mar"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Apr"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "May"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jun"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jul"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Aug"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Sep"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Oct"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Nov"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Dec"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "h"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "m"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "s"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:477
+#: plugins/Observability/src/Observability.cpp:509
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:478
+#: plugins/Observability/src/Observability.cpp:510
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:488
+#: plugins/Observability/src/Observability.cpp:520
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:489
+#: plugins/Observability/src/Observability.cpp:521
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "Circumpolar."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "No rise."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:515
+#: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:560
+#: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:561
+#: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:578
+#: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:581
+#: plugins/Observability/src/Observability.cpp:613
 msgid "Largest Sun separation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:584
+#: plugins/Observability/src/Observability.cpp:616
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:649
+#: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:685
 msgid "Not observable at dark night."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:658
+#: plugins/Observability/src/Observability.cpp:690
 msgid "Nights above horizon: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:675
+#: plugins/Observability/src/Observability.cpp:707
 msgid "TODAY:"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:684
+#: plugins/Observability/src/Observability.cpp:716
 msgid "THIS YEAR:"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:1428
+#: plugins/Observability/src/Observability.cpp:1450
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:1433
+#: plugins/Observability/src/Observability.cpp:1455
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen "
 "center, if no source is selected). The plugin can show rise, transit, and "
@@ -6731,15 +6733,17 @@ msgid ""
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -6747,11 +6751,23 @@ msgid ""
 "of observable epochs (see below)."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
+msgid "Horizon altitude:"
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid ""
+"Minimum observable altitude (due to mountains, buildings, or just a limited "
+"telescope mount)."
+msgstr ""
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -6759,11 +6775,11 @@ msgid ""
 "time)."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
 "The Acronychal rise (or set) of an object happens when the object rises (or "
 "sets) just when the Sun sets (or rises), respectively. The exact dates of "
@@ -6776,11 +6792,11 @@ msgid ""
 "between Cosmical set and rise."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid "Largest Sun separation:"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object "
 "are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -6792,11 +6808,11 @@ msgid ""
 "object."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
@@ -6816,79 +6832,85 @@ msgid ""
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "deg."
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:338
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:339
+#: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:341
+#: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:342
+#: plugins/Observability/src/ui_ObservabilityDialog.h:363
 msgid "Today's ephemeris (rise, set, and transit times)"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:343
+#: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:344
+#: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+#: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Nights with the source above horizon"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+#: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Dates of previous and next Full Moon"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+#: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+#: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:351
+#: plugins/Observability/src/ui_ObservabilityDialog.h:372
 msgid "Green"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
+#: plugins/Observability/src/ui_ObservabilityDialog.h:373
 msgid "Blue"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:353
+#: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:354
-msgid "Sun altitude at twilight"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:375
+msgid "Observing conditions"
 msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:355
-msgid "0 deg."
+#: plugins/Observability/src/ui_ObservabilityDialog.h:376
+msgid "Horizon altitude: 0 deg."
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+msgid "Sun altitude at twilight: 0 deg."
 msgstr ""
 
 #~ msgid ":"
