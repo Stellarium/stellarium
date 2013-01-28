@@ -235,11 +235,11 @@ QPushButton#pushButtonGotoSearchSkyObject {
         image: url(:/graphicGui/nv_searchButtonImage.png);
 }
 
-QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp, QPushButton#pushButtonMoveBarlowUp {
         image: url(:/graphicGui/nv_spinup.png);
 }
 
-QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown {
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown, QPushButton#pushButtonMoveBarlowDown {
         image: url(:/graphicGui/nv_spindown.png);
 }
 
