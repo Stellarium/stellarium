@@ -147,7 +147,7 @@
       <item>
        <widget class="QTabWidget" name="Tabs">
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
@@ -1400,6 +1400,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>Tabs</tabstop>
   <tabstop>requireSelectionCheckBox</tabstop>
   <tabstop>scaleImageCircleCheckBox</tabstop>
   <tabstop>togglePluginLineEdit</tabstop>
@@ -1438,8 +1439,6 @@
   <tabstop>telescopeVFlip</tabstop>
   <tabstop>textBrowser</tabstop>
  </tabstops>
- <resources>
-  <include location="../../resources/Oculars.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
