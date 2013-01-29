@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-07 02:49+0000\n"
+"PO-Revision-Date: 2013-01-29 02:58+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-19 04:48+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-29 05:19+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -4246,7 +4246,7 @@ msgstr "รุ่น"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Overview"
-msgstr ""
+msgstr "ทั่วไป"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid ""
@@ -4255,6 +4255,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"โปรแกรมเสริมนี้จะจำลองสิ่งที่คุณเห็นเมื่อดูผ่านเลนส์ใกล้ตา "
+"หน้าต่างนี้สามารถใช้เพิ่ม ปรับแต่ง หรือลบเลนส์ใกล้ตาและกล้องโทรทรรศน์ "
+"รวมไปถึงซีซีดี เมื่อเปิดใช้งานครั้งแรก "
+"โปรแกรมจะแสดงตัวอย่างของอุปกรณ์เพื่อให้คุณสามารถเริ่มใช้งานได้"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:430
 msgid ""
@@ -4338,7 +4342,7 @@ msgstr "แผงควบคุมบนหน้าจอ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
+msgstr "ใช้หน่วยองศาและลิปดาสำหรับขอบเขตการมองเห็นของซีซีดี"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
@@ -4472,7 +4476,7 @@ msgstr "ชื่อเรียกสากล"
 
 #: plugins/Satellites/src/Satellite.cpp:244
 msgid "artificial satellite"
-msgstr ""
+msgstr "ดาวเทียม"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:254
@@ -6118,6 +6122,7 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
+"โปรแกรมเสริมที่แสดงซูเปอร์โนวาในประวัติศาสตร์ซึ่งสว่างกว่าโชติมาตร 10"
 
 #: plugins/Supernovae/src/Supernova.cpp:97
 msgid "supernova"
@@ -6130,13 +6135,14 @@ msgstr "ชนิดของซูเปอร์โนวา: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมซูเปอร์โนวาในประวัติศาสตร์"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
 "A plugin that shows some historical supernovae brighter than visual "
 "magnitude 10: "
 msgstr ""
+"โปรแกรมเสริมที่แสดงซูเปอร์โนวาในประวัติศาสตร์ซึ่งสว่างกว่าโชติมาตร 10: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
@@ -6164,11 +6170,11 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr ""
+msgstr "Institute for Theoretical and Experimental Physics"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
@@ -6184,44 +6190,46 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
+"หากคุณต้องการข้อมูลโดยละเอียดเกี่ยวกับโปรแกรมเสริมนี้ ความเป็นมา "
+"และรูปแบบของแค็ตตาล็อก คุณสามารถอ่านได้%1จากที่นี่%2"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
-msgstr "อัปเดตครั้งถัดไป: %1 วัน"
+msgstr "ปรับปรุงครั้งถัดไป: %1 วัน"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:199
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "ซูเปอร์โนวาในประวัติศาสตร์ได้รับการปรับปรุงแล้ว"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "การตั้งค่าซูเปอร์โนวาในประวัติศาสตร์"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:231
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมซูเปอร์โนวาในประวัติศาสตร์"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Update catalog from Internet"
-msgstr "อัปเดตแค็ตตาล็อกจากอินเทอร์เน็ต"
+msgstr "ปรับปรุงแค็ตตาล็อกจากอินเทอร์เน็ต"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Update frequency (days):"
-msgstr "ความถี่ในการอัปเดต (วัน):"
+msgstr "ความถี่ในการปรับปรุง (วัน):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:258
 msgid "[next update info]"
-msgstr ""
+msgstr "[ข้อมูลการปรับปรุงถัดไป]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
@@ -6247,7 +6255,7 @@ msgstr "Z (การเลื่อนไปทางแดง): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมเควซาร์"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -6255,6 +6263,8 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"โปรแกรมเสริมเควซาร์แสดงเควซาร์ที่สว่างกว่าโชติมาตร 16 ข้อมูลจาก \"Quasars "
+"and Active Galactic Nuclei\" (13th Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -6262,27 +6272,27 @@ msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
-msgstr ""
+msgstr "เควซาร์ได้รับการปรับปรุงแล้ว"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:246
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "การตั้งค่าเควซาร์"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมเควซาร์"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "โหมดการแสดงผลสำหรับเควซาร์"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "แสดงทุกเควซาร์โดยไม่ต้องแสดงป้ายชื่อ"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "แสดงการกระจายตัวสำหรับเควซาร์"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -6293,7 +6303,7 @@ msgstr "พัลซาร์"
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr ""
+msgstr "โปรแกรมเสริมนี้แสดงตำแหน่งและข้อมูลของพัลซาร์"
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
@@ -6337,18 +6347,19 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "ภาวะเยื้องศูนย์กลาง: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:170
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "แพรัลแลกซ์รายปี: %1 มิลลิพิลิปดา"
 
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
+"ระยะห่างคำนวณจากแบบจำลองความหนาแน่นอิเล็กตรอน: %1 กิโลพาร์เซก (%2 ปีแสง)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
@@ -6385,7 +6396,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "มีดาวที่เป็นคู่จำนวนหนึ่งดวงหรือมากกว่า"
 
 #: plugins/Pulsars/src/Pulsar.cpp:297
 msgid "with pulsed emission from radio to infrared or higher frequencies"
@@ -6411,7 +6422,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมพัลซาร์"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6420,6 +6431,9 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"ข้อมูลพัลซาร์จาก 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. "
+"B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-"
+"ph/0412641%2))"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
@@ -6467,15 +6481,15 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "โหมดการแสดงผลสำหรับพัลซาร์"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "แสดงทุกพัลซาร์โดยไม่ต้องแสดงป้ายชื่อ"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "แสดงการกระจายตัวสำหรับพัลซาร์"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:72
 msgid "Exoplanets"
@@ -6557,6 +6571,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"โปรแกรมเสริมสำหรับแสดงตำแหน่งดาวฤกษ์ที่มีดาวเคราะห์เป็นบริวาร ข้อมูลจาก "
+"\"%1The Extrasolar Planets Encyclopaedia%2\""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:126
@@ -6572,7 +6588,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:251
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "การปรับแต่งดาวเคราะห์นอกระบบ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:252
 msgid "Exoplanets Plug-in Configuration"
@@ -6580,31 +6596,31 @@ msgstr "การตั้งค่าโปรแกรมเสริมดา
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:254
 msgid "Update exoplanets data from Internet"
-msgstr "อัปเดตข้อมูลดาวเคราะห์นอกระบบจากอินเทอร์เน็ต"
+msgstr "ปรับปรุงข้อมูลดาวเคราะห์นอกระบบจากอินเทอร์เน็ต"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
 msgid "Display mode for exoplanets"
-msgstr ""
+msgstr "โหมดการแสดงผลสำหรับดาวเคราะห์นอกระบบ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "แสดงทุกระบบที่มีดาวเคราะห์โดยไม่ต้องแสดงป้ายชื่อ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "แสดงการกระจายตัวสำหรับดาวเคราะห์นอกระบบ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "แสดงดาวเคราะห์นอกระบบโดยเริ่มตั้งแต่มีการค้นพบ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "แสดงเส้นเวลาการค้นพบดาวเคราะห์นอกระบบ"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
-msgstr ""
+msgstr "วิเคราะห์ความสามารถในการสังเกตได้"
 
 #: plugins/Observability/src/Observability.cpp:69
 msgid ""
@@ -6999,11 +7015,11 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "มุมเงยที่ขอบฟ้า: 0 องศา"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "มุมเงยของดวงอาทิตย์ขณะสนธยา: 0 องศา"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
