@@ -77,6 +77,11 @@ public slots:
 	//! @return the current simulation time.
 	QString getDate(const QString& spec="utc");
 
+	//! get the DeltaT for the simulation date and time as a string
+	//! in HMS format, e.g. "0h1m68.2s"
+	//! @return the DeltaT for current simulation time.
+	QString getDeltaT() const;
+
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
 	//! For example if ts is 1, time will pass at the normal rate.  If ts == 10

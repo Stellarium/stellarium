@@ -129,6 +129,11 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 		return StelUtils::julianDayToISO8601String(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
 }
 
+QString StelMainScriptAPI::getDeltaT() const
+{
+	return StelUtils::hoursToHmsStr(StelUtils::getDeltaT(getJDay())/3600.);
+}
+
 //! Set time speed in JDay/sec
 //! @param ts time speed in JDay/sec
 void StelMainScriptAPI::setTimeRate(double ts)
