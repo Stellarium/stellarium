@@ -580,6 +580,18 @@ public slots:
 	//! Go to defaults position and direction of view
 	void goHome();
 
+	//! Show or hide the Milky Way.
+	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
+	void setMilkyWayVisible(bool b);
+
+	//! Set Milky Way intensity.
+	//! @param i value of intensity for the Milky Way
+	void setMilkyWayIntensity(float i);
+
+	//! Get Milky Way intensity.
+	//! @return value of Milky Way intensity, e.g. "1.2"
+	float getMilkyWayIntensity();
+
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
