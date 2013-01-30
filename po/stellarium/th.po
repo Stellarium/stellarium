@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-29 02:58+0000\n"
+"PO-Revision-Date: 2013-01-30 04:37+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-29 05:19+0000\n"
-"X-Generator: Launchpad (build 16451)\n"
+"X-Launchpad-Export-Date: 2013-01-30 04:37+0000\n"
+"X-Generator: Launchpad (build 16455)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -199,7 +199,7 @@ msgstr "ส่วนสว่าง: %1%"
 #: src/core/modules/MinorPlanet.cpp:191
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "ชื่อชั่วคราว: %1"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
@@ -827,11 +827,11 @@ msgstr "แผนที่ดาว"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "เกิดข้อผิดพลาดในการค้นหาบน Simbad"
 
 #: src/gui/SearchDialog.cpp:367
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "การค้นหาบน Simbad"
 
 #: src/gui/SearchDialog.cpp:535
 msgid "University of Strasbourg (France)"
@@ -843,15 +843,15 @@ msgstr "มหาวิทยาลัยฮาร์วาร์ด (สหร�
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "การกระทำ"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
-msgstr ""
+msgstr "ปุ่มลัดหลัก"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "ปุ่มลัดรอง"
 
 #: src/main.cpp:349
 msgid "This system does not support OpenGL."
@@ -1202,7 +1202,7 @@ msgstr "วรุณ"
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "มาเกะมาเกะ"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1314,7 +1314,7 @@ msgstr "ตะวันตก"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:184
 msgid "Guereins"
-msgstr ""
+msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:186
@@ -1374,17 +1374,17 @@ msgstr "จักรราศี"
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "ดวงอาทิตย์ขึ้นและดวงอาทิตย์ตกบนดาวพุธสามครั้ง"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:220
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "อุปราคาคู่เมื่อมองจากดีมอสในปี 2017"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:222
 msgid "Double eclipse from Deimos in 2031"
-msgstr ""
+msgstr "อุปราคาคู่เมื่อมองจากดีมอสในปี 2031"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:224
@@ -1399,12 +1399,12 @@ msgstr "การบังโลกและดาวพฤหัสบดี �
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "การผ่านหน้า 3 ครั้ง และอุปราคา 2 ครั้ง เมื่อมองจากดีมอสในปี 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "ภาพพักหน้าจอระบบสุริยะ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:232
@@ -1419,7 +1419,7 @@ msgstr "ดวงอาทิตย์จากดาวเคราะห์ต
 #. TRANSLATORS: Name of script
 #: src/translations.h:236
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "โลกเมื่อมองจากวัตถุอื่น"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:238
@@ -1490,6 +1490,8 @@ msgstr ""
 #: src/translations.h:257
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
+"โฟบอสบดบังดวงอาทิตย์เมื่อสังเกตจากภูเขาโอลิมปัสเมื่อวันที่ 10 มกราคม ค.ศ. "
+"2068"
 
 #: src/translations.h:258
 msgid ""
@@ -1515,11 +1517,12 @@ msgstr ""
 
 #: src/translations.h:261
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "การท่องไปตามกลุ่มดาวแบบตะวันตก"
 
 #: src/translations.h:262
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
+"มองไปที่ดวงอาทิตย์เมื่ออยู่บนดาวเคราะห์ขนาดใหญ่ในระบบสุริยะ และบนพลูโต"
 
 #: src/translations.h:263
 msgid ""
@@ -1541,6 +1544,8 @@ msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"แสงวาบจากซูเปอร์โนวา ซึ่งทีโค บราห์ สังเกตเมื่อ ค.ศ. 1572 "
+"โปรแกรมเสริมซูเปอร์โนวาต้องถูกเปิดใช้งาน"
 
 #: src/translations.h:271
 msgid "Andorra"
@@ -2530,7 +2535,7 @@ msgstr "เพิ่ม 1 ปีดาราคติ"
 
 #: src/translations.h:523
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "เพิ่ม 1 ศตวรรษดาราคติ"
 
 #: src/translations.h:524
 msgid "Add 1 solar day"
@@ -2602,7 +2607,7 @@ msgstr ""
 
 #: src/translations.h:541
 msgid "Resume script execution"
-msgstr ""
+msgstr "ให้สคริปต์ทำงานต่อ"
 
 #: src/translations.h:542
 msgid "Set time to now"
@@ -2622,7 +2627,7 @@ msgstr "ตั้งอัตราเวลาไปที่ศูนย์"
 
 #: src/translations.h:546
 msgid "Stop script execution"
-msgstr ""
+msgstr "หยุดสคริปต์"
 
 #: src/translations.h:547
 msgid "Subtract 1 sidereal day"
@@ -2816,7 +2821,7 @@ msgstr "ดาวฤกษ์"
 
 #: src/translations.h:592
 msgid "Stars labels"
-msgstr ""
+msgstr "ป้ายชื่อดาวฤกษ์"
 
 #: src/translations.h:593
 msgid "Flip scene vertically"
@@ -2902,11 +2907,11 @@ msgstr "หน้าต่างการตั้งค่าดาวเคร
 
 #: src/translations.h:625
 msgid "Observability"
-msgstr ""
+msgstr "ความสามารถในการสังเกต"
 
 #: src/translations.h:626
 msgid "Observability configuration window"
-msgstr ""
+msgstr "หน้าต่างตั้งค่าความสามารถในการสังเกต"
 
 #: src/translations.h:629
 msgid "Oculars plugin configuration"
@@ -2934,11 +2939,11 @@ msgstr "วง Telrad"
 
 #: src/translations.h:637
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "หน้าต่างการตั้งค่าพัลซาร์"
 
 #: src/translations.h:640
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "หน้าต่างการตั้งค่าเควซาร์"
 
 #: src/translations.h:643
 msgid "Satellites configuration window"
@@ -2954,7 +2959,7 @@ msgstr "ชื่อดาวเทียม"
 
 #: src/translations.h:648
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "หน้าต่างการตั้งค่าซูเปอร์โนวาในประวัติศาสตร์"
 
 #: src/translations.h:651
 msgid "Move a telescope to a given set of coordinates"
@@ -2968,11 +2973,11 @@ msgstr "สคริปต์"
 
 #: src/translations.h:655
 msgid "Run landscapes script from file"
-msgstr ""
+msgstr "เปิดใช้งานสคริปต์ภูมิทัศน์จากแฟ้ม"
 
 #: src/translations.h:656
 msgid "Show and zoom Moon"
-msgstr ""
+msgstr "แสดงและซูมไปที่ดวงจันทร์"
 
 #: src/translations.h:660
 msgid "Configuration window"
@@ -2996,7 +3001,7 @@ msgstr "หน้าต่างการค้นหา"
 
 #: src/translations.h:666
 msgid "Shortcuts window"
-msgstr ""
+msgstr "หน้าต่างปุ่มลัด"
 
 #: src/translations.h:667
 msgid "Sky and viewing options window"
@@ -3017,7 +3022,7 @@ msgstr "บันทึก"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "แก้ปุ่มลัดแป้นพิมพ์..."
 
 #: src/ui_helpDialogGui.h:292
 msgid "Refresh"
@@ -3038,7 +3043,7 @@ msgstr "ใช้เป็นค่าเริ่มต้น"
 
 #: src/ui_locationDialogGui.h:395
 msgid "Return to default"
-msgstr ""
+msgstr "กลับไปค่าปริยาย"
 
 #: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/Oculars/src/ui_ocularDialog.h:882
@@ -3865,7 +3870,7 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "ปุ่มลัดแป้นพิมพ์"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
@@ -4013,7 +4018,7 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 "แสดงท้องฟ้าเมื่อมองผ่านเลนส์ใกล้ตาของกล้องโทรทรรศน์ "
-"(จำลองเฉพาะกำลังขยายและขอบเขตภาพ) นอกจากนี้ ยังสามารถแสดงเฟรมเซอเซอร์และวง "
+"(จำลองเฉพาะกำลังขยายและขอบเขตภาพ) นอกจากนี้ ยังสามารถแสดงเฟรมเซนเซอร์และวง "
 "Telrad ด้วย"
 
 #: plugins/Oculars/src/Oculars.cpp:752
@@ -4232,7 +4237,7 @@ msgstr "ขอบเขตภาพจริงจากการรวมเล
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:421
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมเลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
@@ -4289,7 +4294,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr ""
+msgstr "หากคุณพบปัญหาใด ๆ กรุณาแจ้งให้เราทราบ ขอให้เพลิดเพลิน!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
@@ -4569,7 +4574,7 @@ msgid ""
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
 "องค์ประกอบวงโคจรจะล้าสมัยได้อย่างรวดเร็ว (ภายในไม่กี่สัปดาห์หรือไม่กี่วัน) "
-"คุณจำเป็นต้องอัปเดตข้อมูล TLE เป็นระยะ ๆ อย่างสม่ำเสมอ "
+"คุณจำเป็นต้องปรับปรุงข้อมูล TLE เป็นระยะ ๆ อย่างสม่ำเสมอ "
 "เพื่อให้ได้ข้อมูลที่ถูกต้อง"
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
@@ -4594,7 +4599,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:308
 msgid "TLE data updates"
-msgstr "การอัปเดตข้อมูล TLE"
+msgstr "การปรับปรุงข้อมูล TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:309
 msgid ""
@@ -4603,7 +4608,7 @@ msgid ""
 "than 72 hours old. "
 msgstr ""
 "โปรแกรมเสริมดาวเทียมสามารถดาวน์โหลดข้อมูล TLE จากอินเทอร์เน็ตได้โดยอัตโนมัติ "
-"ค่าเริ่มต้นได้กำหนดให้ทำการอัปเดตเมื่อข้อมูลที่มีอยู่ล้าสมัยเกินกว่า 72 "
+"ค่าเริ่มต้นได้กำหนดให้ทำการปรับปรุงเมื่อข้อมูลที่มีอยู่ ล้าสมัยเกินกว่า 72 "
 "ชั่วโมง "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
@@ -4613,9 +4618,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
-"ถ้าคุณปิดการอัปเดตจากอินเทอร์เน็ต "
-"คุณอาจอัปเดตข้อมูลจากแฟ้มข้อมูลในคอมพิวเตอร์ของคุณ "
-"แฟ้มข้อมูลนี้ต้องมีรูปแบบเดียวกับเว็บไซต์ Celestrak (ดู %1)"
+"ถ้าคุณปิดการปรับปรุงจากอินเทอร์เน็ต "
+"คุณอาจปรับปรุงข้อมูลจากแฟ้มข้อมูลในคอมพิวเตอร์ของคุณ "
+"โดยต้องมีรูปแบบเดียวกับบนเว็บไซต์ Celestrak (ดู %1)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 msgid ""
@@ -4686,6 +4691,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"เราให้การสนับสนุนผ่านเว็บไซต์ Launchpad โปรดแน่ใจว่าได้ระบุ \"%1\" "
+"ในหัวเรื่อง เมื่อส่งข้อความ"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
@@ -4726,7 +4733,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Internet updates disabled"
-msgstr "การอัปเดตจากอินเทอร์เน็ตถูกปิดการใช้งาน"
+msgstr "การปรับปรุงจากอินเทอร์เน็ตถูกปิดการใช้งาน"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:351
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
@@ -4739,7 +4746,7 @@ msgstr "การอัปเดตจากอินเทอร์เน็ต
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Updating now..."
-msgstr "กำลังอัปเดต..."
+msgstr "กำลังปรับปรุง..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
@@ -4747,7 +4754,7 @@ msgstr "กำลังอัปเดต..."
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 msgid "Next update: < 1 minute"
-msgstr "อัปเดตครั้งถัดไป: < 1 นาที"
+msgstr "ปรับปรุงครั้งถัดไป: < 1 นาที"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
@@ -4756,7 +4763,7 @@ msgstr "อัปเดตครั้งถัดไป: < 1 นาที"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr "อัปเดตครั้งถัดไป: %1 นาที"
+msgstr "ปรับปรุงครั้งถัดไป: %1 นาที"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:357
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
@@ -4765,7 +4772,7 @@ msgstr "อัปเดตครั้งถัดไป: %1 นาที"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr "อัปเดตครั้งถัดไป: %1 ชั่วโมง"
+msgstr "ปรับปรุงครั้งถัดไป: %1 ชั่วโมง"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
@@ -4778,7 +4785,7 @@ msgstr "อัปเดตครั้งถัดไป: %1 ชั่วโม�
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:259
 msgid "Update now"
-msgstr "อัปเดตเดี๋ยวนี้"
+msgstr "ปรับปรุงเดี๋ยวนี้"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:374
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
@@ -4786,7 +4793,7 @@ msgstr "อัปเดตเดี๋ยวนี้"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Update from files"
-msgstr "อัปเดตจากแฟ้มข้อมูล"
+msgstr "ปรับปรุงจากแฟ้มข้อมูล"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:386
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
@@ -4794,12 +4801,12 @@ msgstr "อัปเดตจากแฟ้มข้อมูล"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "Update error"
-msgstr "มีข้อผิดพลาดในการอัปเดต"
+msgstr "มีข้อผิดพลาดในการปรับปรุงข้อมูล"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:393
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr "อัปเดตดาวเทียม %1/%2 ดวง; ไม่พบ %3 ดวง"
+msgstr "ปรับปรุงข้อมูลดาวเทียมแล้ว %1/%2 ดวง; ไม่พบ %3 ดวง"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 msgid "[new source]"
@@ -4827,7 +4834,7 @@ msgstr "[ทั้งหมด]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:634
 msgid "Select TLE Update File"
-msgstr "เลือกแฟ้มข้อมูล TLE ที่จะอัปเดต"
+msgstr "เลือกแฟ้มข้อมูล TLE ที่จะปรับปรุง"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid "Downloading data..."
@@ -4866,7 +4873,7 @@ msgstr "การตั้งค่าดาวเทียม"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Update TLE lists from Internet sources"
-msgstr "อัปเดตรายชื่อ TLE จากแหล่งข้อมูลบนอินเทอร์เน็ต"
+msgstr "ปรับปรุงรายชื่อ TLE จากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:637
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -4874,7 +4881,7 @@ msgstr "อัปเดตรายชื่อ TLE จากแหล่งข�
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:255
 msgid "Update from Internet sources"
-msgstr "อัปเดตจากแหล่งข้อมูลบนอินเทอร์เน็ต"
+msgstr "ปรับปรุงจากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -4882,12 +4889,12 @@ msgstr "อัปเดตจากแหล่งข้อมูลบนอิ
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:256
 msgid "Last update:"
-msgstr "อัปเดตครั้งล่าสุด:"
+msgstr "ปรับปรุงล่าสุด:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:257
 msgid "Update frequency (hours):"
-msgstr "ความถี่ในการอัปเดต (ชั่วโมง):"
+msgstr "ความถี่ในการปรับปรุง (ชั่วโมง):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
@@ -6441,7 +6448,7 @@ msgstr "หมายเหตุ"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "พัลซาร์จะมีชื่อนำหน้าด้วย 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
@@ -6449,19 +6456,19 @@ msgstr "กิตติกรรมประกาศ"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Pushchino Radio Astronomy Observatory"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Nancay Radioastronomical Observatory"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
@@ -6469,15 +6476,15 @@ msgstr "ในฝรั่งเศส"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "พัลซาร์ได้รับการปรับปรุงแล้ว"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:246
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "การตั้งค่าพัลซาร์"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมพัลซาร์"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Display mode for pulsars"
@@ -6535,7 +6542,7 @@ msgstr "วัน"
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Jup"
-msgstr ""
+msgstr "ดาวพฤหัสบดี"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Semi-Major Axis"
@@ -6555,7 +6562,7 @@ msgstr "มุมเอียง"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Angle Distance"
-msgstr ""
+msgstr "ระยะห่างเชิงมุม"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "Discovered year"
@@ -6563,7 +6570,7 @@ msgstr "ปีที่ค้นพบ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมดาวเคราะห์นอกระบบ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
 #, qt-format
@@ -6581,10 +6588,12 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
+"หากคุณต้องการข้อมูลโดยละเอียดเกี่ยวกับโปรแกรมเสริมนี้ ความเป็นมา "
+"และรูปแบบของแค็ตตาล็อก คุณสามารถอ่านได้%1จากที่นี่%2"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "ดาวเคราะห์นอกระบบได้รับการปรับปรุงแล้ว"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:251
 msgid "Exoplanets Configuration"
@@ -6632,6 +6641,12 @@ msgid ""
 "the quantities shown by this script is given in the 'About' tab of the "
 "configuration window"
 msgstr ""
+"รายงานผลการวิเคราะห์ความสามารถในการสังเกต (เวลาขึ้น, ตก, และถึงจุดสูงสุด) "
+"รวมไปถึงช่วงเวลาที่สังเกตได้ดีที่สุดในรอบปี "
+"โดยถือว่าจะสังเกตวัตถุท้องฟ้าได้เมื่อวัตถุอยู่เหนือขอบฟ้าในเวลากลางคืน "
+"โปรแกรมเสริมนี้ยังแสดงวันที่วัตถุทำมุมห่างจากดวงอาทิตย์ที่สุด "
+"และวันที่วัตถุขึ้น-ตก โดยสัมพันธ์กับดวงอาทิตย์<br><br> "
+"คำอธิบายเกี่ยวกับปริมาณเหล่านี้แสดงในแท็บ 'เกี่ยวกับ' ของหน้าต่างการตั้งค่า"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
@@ -6755,7 +6770,7 @@ msgstr "ไม่สามารถสังเกตได้"
 
 #: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "ไม่มีการขึ้น/ตก ที่สัมพันธ์กับดวงอาทิตย์"
 
 #: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
@@ -6772,19 +6787,19 @@ msgstr " (ที่ระยะ %1 องศา)"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
-msgstr ""
+msgstr "ขึ้นขณะดวงอาทิตย์ตก/ตกขณะดวงอาทิตย์ขึ้น"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
-msgstr ""
+msgstr "ไม่มีการขึ้นขณะดวงอาทิตย์ตก/ตกขณะดวงอาทิตย์ขึ้น"
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
-msgstr ""
+msgstr "ขึ้นขณะดวงอาทิตย์ขึ้น/ตกขณะดวงอาทิตย์ตก"
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
-msgstr ""
+msgstr "ไม่มีการขึ้นขณะดวงอาทิตย์ขึ้น/ตกขณะดวงอาทิตย์ตก"
 
 #: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
@@ -6818,7 +6833,7 @@ msgstr "จันทร์เพ็ญครั้งถัดไป: %2 %1 เ�
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมความสามารถในการสังเกต"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
@@ -6831,10 +6846,19 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
+"โปรแกรมเสริมที่วิเคราะห์ความสามารถในการสังเกตของวัตถุท้องฟ้า "
+"(หรือจุดศูนย์กลางหน้าจอ - ในกรณีที่ไม่ได้เลือกวัตถุ) โปรแกรมจะแสดงเวลาขึ้น, "
+"เวลาถึงจุดสูงสุด, และเวลาตก รวมไปถึงเวลาที่สังเกตได้ดีที่สุดในรอบปี "
+"(นั่นคือเมื่อวัตถุทำมุมห่างจากดวงอาทิตย์ที่สุด), "
+"ช่วงเวลาที่วัตถุอยู่เหนือขอบฟ้าในเวลากลางคืน "
+"และวันที่วัตถุขึ้น/ตกโดยสัมพันธ์กับเวลาดวงอาทิตย์ขึ้น/ตก<br>การวิเคราะห์นี้ได"
+"้คำนึงถึงการเคลื่อนที่และแพรัลแลกซ์ของวัตถุในระบบสุริยะแล้ว <br><br> "
+"ผู้พัฒนาขอขอบคุณ Alexander Wolf และ Georg Zotti สำหรับคำแนะนำ<br><br>Ivan "
+"Marti-Vidal (Onsala Space Observatory)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "คำอธิบายพารามิเตอร์บางตัว"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
@@ -6849,18 +6873,25 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"วัตถุท้องฟ้าใด ๆ "
+"จะถือว่าปรากฏให้สังเกตได้เมื่อดวงอาทิตย์อยู่ต่ำกว่ามุมเงยนี้ มุมเงยเมื่อสนธยา"
+"ดาราศาสตร์อยู่ในช่วงระหว่าง -12 ถึง -18 องศา "
+"ค่านี้จะถูกนำมาใช้เฉพาะการประมาณช่วงเวลาที่สังเกตวัตถุท้องฟ้านั้นได้ "
+"(ดูด้านล่าง)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "มุมเงยของขอบฟ้า:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"มุมเงยต่ำสุดที่สามารถสังเกตได้ (เนื่องจากมีภูเขา, สิ่งปลูกสร้าง, "
+"หรือขีดจำกัดของฐานยึดกล้องโทรทรรศน์)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
@@ -6873,10 +6904,12 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
+"คำอธิบาย - โปรแกรมจะแสดงเวลาขึ้น, ตก, และถึงจุดสูงสุด โดยแสดงเป็น 2 แบบ คือ "
+"ช่วงเวลา (อ้างอิงกับเวลาปัจจุบัน) และเวลานาฬิกา (ตามเวลาท้องถิ่น)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
-msgstr ""
+msgstr "การขึ้น/ตก ที่สัมพันธ์กับดวงอาทิตย์"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
@@ -6959,11 +6992,11 @@ msgstr "องศา"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
-msgstr ""
+msgstr "การตั้งค่าความสามารถในการสังเกต"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมความสามารถในการสังเกต"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
@@ -6975,7 +7008,7 @@ msgstr "อิเฟเมอริสของวันนี้ (เวลา�
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr ""
+msgstr "วันที่เกิดการขึ้น/ตกที่สัมพันธ์กับดวงอาทิตย์"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
@@ -7011,11 +7044,11 @@ msgstr "ขนาดตัวอักษร"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "ปัจจัยแวดล้อมในการสังเกตการณ์"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr "มุมเงยที่ขอบฟ้า: 0 องศา"
+msgstr "มุมเงยของขอบฟ้า: 0 องศา"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
