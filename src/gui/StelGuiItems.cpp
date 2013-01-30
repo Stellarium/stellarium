@@ -653,8 +653,10 @@ void BottomStelBar::updateText(bool updatePos)
 	if (updatePos)
 	{
 		QRectF rectCh = getButtonsBoundingRect();
-		location->setPos(0, 0);
-		datetime->setPos(rectCh.right()-datetime->boundingRect().width()-5,0);
+		location->setPos(0, 0);		
+		int dtp = rectCh.right()-datetime->boundingRect().width()-5;
+		if ((dtp%2) == 1) dtp--; // make even pixel
+		datetime->setPos(dtp,0);
 		fov->setPos(datetime->x()-200, 0);
 		fps->setPos(datetime->x()-95, 0);
 	}
