@@ -50,6 +50,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
+#include "MilkyWay.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -973,4 +974,19 @@ void StelMainScriptAPI::setSkyLanguage(QString langCode)
 void StelMainScriptAPI::goHome()
 {
 	emit(requestSetHomePosition());
+}
+
+void StelMainScriptAPI::setMilkyWayVisible(bool b)
+{
+	GETSTELMODULE(MilkyWay)->setFlagShow(b);
+}
+
+void StelMainScriptAPI::setMilkyWayIntensity(float i)
+{
+	GETSTELMODULE(MilkyWay)->setIntensity(i);
+}
+
+float StelMainScriptAPI::getMilkyWayIntensity()
+{
+	return GETSTELMODULE(MilkyWay)->getIntensity();
 }
