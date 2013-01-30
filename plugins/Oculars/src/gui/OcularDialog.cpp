@@ -72,6 +72,10 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 
 OcularDialog::~OcularDialog()
 {
+	ocularTableModel->disconnect();
+	telescopeTableModel->disconnect();
+	ccdTableModel->disconnect();
+
 	delete ui;
 	ui = NULL;
 }
