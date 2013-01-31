@@ -210,6 +210,9 @@ while (@stars = $sth->fetchrow_array()) {
 		if ($discovered ne '') {
 			$out .= "\t\t\t\t\"discovered\": ".$discovered.",\n";
 		}
+		if ($pname eq '') {
+			$pname = "a";
+		}
 		$out .= "\t\t\t\t\"planetName\": \"".$pname."\"\n";
 		$out .= "\t\t\t}";
 		$j += 1;
