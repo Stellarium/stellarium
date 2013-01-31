@@ -41,7 +41,7 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
 ENDIF()
 
 IF(NOT STELLARIUM_SPLASH)
- SET(STELLARIUM_SPLASH Development CACHE STRING "Choose the type of Stellarium's splash image, options are: Release Development ReleaseCandidate." FORCE)
+ SET(STELLARIUM_SPLASH Release CACHE STRING "Choose the type of Stellarium's splash image, options are: Release Development ReleaseCandidate." FORCE)
 ENDIF()
 ADD_DEFINITIONS(-DSTELLARIUM_SPLASH="${STELLARIUM_SPLASH}")
 
