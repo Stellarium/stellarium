@@ -51,6 +51,13 @@ public slots:
 	//! @return the Julian Date
 	double getJDay() const;
 
+	//! Set the current date in Modified Julian Day
+	//! @param MJD the Modified Julian Date
+	void setMJDay(double MJD);
+	//! Get the current date in Modified Julian Day
+	//! @return the Modified Julian Date
+	double getMJDay() const;
+
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
 	//! @param dt the date string to use.  Formats:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
