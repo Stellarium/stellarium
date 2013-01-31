@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-18 23:15+0700\n"
-"PO-Revision-Date: 2013-01-18 19:09+0000\n"
+"PO-Revision-Date: 2013-01-31 02:22+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-19 04:49+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-31 04:37+0000\n"
+"X-Generator: Launchpad (build 16455)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -333,7 +333,7 @@ msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"<p align=\"justify\">O nome completo deste modo de projeção é <i>projeção "
+"<p align=\"justify\">O nome completo deste método de projeção é <i>projeção "
 "cilíndrica equidistante</i>. Nesta projeção, todos os paralelos são "
 "igualmente espaçados."
 
@@ -2774,7 +2774,7 @@ msgstr "Limites das constelações"
 #: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
-msgstr "Nomes das constelações"
+msgstr "Rótulos das constelações"
 
 #: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
@@ -2847,7 +2847,7 @@ msgstr "Modo noturno"
 #: src/translations.h:588
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
-msgstr "Indicações dos planetas"
+msgstr "Rótulos dos planetas"
 
 #: src/translations.h:589
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -2961,7 +2961,7 @@ msgstr "Janela de configuração de observabilidade"
 
 #: src/translations.h:629
 msgid "Oculars plugin configuration"
-msgstr "Configuração do complemento das oculares"
+msgstr "Configuração do complemento de oculares"
 
 #: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
@@ -2997,11 +2997,11 @@ msgstr "Janela de configuração de satélites"
 
 #: src/translations.h:644
 msgid "Satellite hints"
-msgstr "Dicas de satélites"
+msgstr "Indicações de satélites"
 
 #: src/translations.h:645
 msgid "Satellite labels"
-msgstr "Identificações dos satélites"
+msgstr "Rótulos dos satélites"
 
 #: src/translations.h:648
 msgid "Historical Supernovae configuration window"
@@ -3043,7 +3043,7 @@ msgstr "Janela de localização"
 
 #: src/translations.h:665
 msgid "Search window"
-msgstr "Janela de busca"
+msgstr "Janela de pesquisa"
 
 #: src/translations.h:666
 msgid "Shortcuts window"
@@ -3381,11 +3381,11 @@ msgstr "Pressão, temperatura e coeficiente de extinção"
 
 #: src/ui_viewDialog.h:1141
 msgid "Refraction/Extinction settings..."
-msgstr "Configurações de refração/extinção…"
+msgstr "Configurações de refração e extinção…"
 
 #: src/ui_viewDialog.h:1142
 msgid "Labels and Markers"
-msgstr "Identificações e marcadores"
+msgstr "Rótulos e marcadores"
 
 #: src/ui_viewDialog.h:1145
 msgid "Planets"
@@ -3409,7 +3409,7 @@ msgstr "Exibir linhas"
 
 #: src/ui_viewDialog.h:1151
 msgid "Show labels"
-msgstr "Exibir identificações"
+msgstr "Exibir rótulos"
 
 #: src/ui_viewDialog.h:1152
 msgid "Show boundaries"
@@ -3427,7 +3427,7 @@ msgstr "Brilho das imagens:"
 
 #: src/ui_viewDialog.h:1155
 msgid "Celestial Sphere"
-msgstr "Esfera celestial"
+msgstr "Esfera celeste"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
@@ -3673,7 +3673,7 @@ msgstr "Possibilita visão panorâmica e zum com o teclado"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Enable keyboard navigation"
-msgstr "Habilitar navegação com o teclado"
+msgstr "Ativar navegação com o teclado"
 
 #: src/ui_configurationDialog.h:1022
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
@@ -3682,7 +3682,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1024
 msgid "Enable mouse navigation"
-msgstr "Habilitar navegação com o mause"
+msgstr "Ativar navegação com o mause"
 
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
@@ -3776,11 +3776,11 @@ msgstr "Distorção de espelho esférico"
 
 #: src/ui_configurationDialog.h:1063
 msgid "Align labels with the horizon"
-msgstr "Alinha as identificações com o horizonte"
+msgstr "Alinha os rótulos com o horizonte"
 
 #: src/ui_configurationDialog.h:1065
 msgid "Gravity labels"
-msgstr "Indicações de gravidade"
+msgstr "Rótulos atrativos"
 
 #: src/ui_configurationDialog.h:1067
 msgid "Hide other constellations when you click one"
@@ -3799,12 +3799,12 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Quando ativado, o tecla de “reduzir zum automaticamente” também definirá a "
+"Quando ativada, o tecla de “reduzir zum automaticamente” também definirá a "
 "direção de visualização inicial"
 
 #: src/ui_configurationDialog.h:1074
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "Redução do zum automático retorna à direção de visualização inicial"
+msgstr "Redução automática do zum retorna à direção de visualização inicial"
 
 #: src/ui_configurationDialog.h:1075
 msgid "Screenshots"
@@ -3812,7 +3812,7 @@ msgstr "Capturas de tela"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Screenshot Directory"
-msgstr "Diretório de capturas de tela"
+msgstr "Diretório das capturas de tela"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Invert colors"
@@ -4551,7 +4551,7 @@ msgstr ""
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
-"O arquivo “satellites.json” antigo não é mais compatível - utilizando o "
+"O arquivo “satellites.json” antigo não é mais compatível – utilizando o "
 "arquivo padrão"
 
 #: plugins/Satellites/src/Satellite.cpp:231
@@ -4832,7 +4832,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Internet updates disabled"
-msgstr "Atualizações a partir da Internet desabilitadas"
+msgstr "Atualizações a partir da Internet desativadas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:351
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
@@ -4999,11 +4999,11 @@ msgstr "Frequência de atualização (em horas):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
-msgstr "Identificações"
+msgstr "Rótulos"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
-msgstr "Tamanho da fonte das identificações (em píxeis):"
+msgstr "Tamanho da fonte dos rótulos (em píxeis):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Orbit lines"
@@ -5556,7 +5556,7 @@ msgstr "Interface gráfica de usuário"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
-msgstr "Exibir identificações dos telescópios"
+msgstr "Exibir rótulos dos telescópios"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
@@ -5929,11 +5929,11 @@ msgstr "Cores"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
-msgstr "Nomes das nebulosas"
+msgstr "Rótulos das nebulosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
-msgstr "Dicas de nebulosas"
+msgstr "Indicações de nebulosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
@@ -5957,7 +5957,7 @@ msgstr "Intensidade da Via Láctea:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
-msgstr "Frequência das identificações de nebulosas:"
+msgstr "Frequência dos rótulos das nebulosas:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Zoom duration:"
@@ -6033,7 +6033,7 @@ msgid ""
 msgstr ""
 "<p align=\"justify\">Uma interface para adicionar asteroides e cometas ao "
 "Stellarium. Por meio dela, é possível baixar listas de objetos do sítio da "
-"Minor Planet Center e realizar buscas em seu banco de dados na rede. Essa "
+"Minor Planet Center e realizar pesquisas em seu banco de dados na rede. Essa "
 "interface é ainda um trabalho em desenvolvimento."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
@@ -6086,8 +6086,8 @@ msgstr ""
 "<p align=\"justify\">Você pode importar dados de cometas e asteroides "
 "formatados no padrão de exportação do Minor Planet Center da UAI (%1). Você "
 "pode importar arquivos com listas de objetos, baixar tais listas da Internet "
-"ou efetuar uma busca no Minor Planet and Comet Ephemeris Service (MPES) na "
-"rede."
+"ou efetuar uma pesquisa no Minor Planet and Comet Ephemeris Service (MPES) "
+"na rede."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
@@ -6144,7 +6144,7 @@ msgstr "Obter elementos orbitais"
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
-msgstr "Busca na rede"
+msgstr "Pesquisa na rede"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
@@ -6410,10 +6410,9 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
-"<p align=\"justify\">O complemento de quasares oferece visualização de "
-"alguns quasares com magnitude visual maior do que 16. O catálogo de quasares "
-"foi compilado a partir da obra “Quasars and Active Galactic Nuclei” (13th "
-"Ed.)"
+"<p align=\"justify\">O complemento de quasares permite visualizar alguns "
+"quasares com magnitude visual maior do que 16. O catálogo de quasares foi "
+"compilado a partir da obra “Quasars and Active Galactic Nuclei” (13th Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -6437,7 +6436,7 @@ msgstr "Modo de exibição dos quasares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Plot all quasars without labels"
-msgstr "Mostrar todos os quasares sem rótulos"
+msgstr "Exibir todos os quasares sem os rótulos"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
@@ -6458,7 +6457,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
-msgstr "Pulsar"
+msgstr "pulsar"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:136
@@ -6643,7 +6642,7 @@ msgstr "Modo de exibição dos pulsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Plot all pulsars without labels"
-msgstr "Mostrar todos os pulsares sem rótulos"
+msgstr "Exibir todos os pulsares sem os rótulos"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
@@ -6886,22 +6885,22 @@ msgstr "s"
 #: plugins/Observability/src/Observability.cpp:509
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr "Pôr-se-á às %1 (em %2)"
+msgstr "Pôr-se-á às %1 (em %2)."
 
 #: plugins/Observability/src/Observability.cpp:510
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr "Nasceu às %1 (%2 atrás)"
+msgstr "Nasceu às %1 (%2 atrás)."
 
 #: plugins/Observability/src/Observability.cpp:520
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr "Pôs-se às %1 (%2 atrás)"
+msgstr "Pôs-se às %1 (%2 atrás)."
 
 #: plugins/Observability/src/Observability.cpp:521
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr "Nascerá às %1 (em %2)"
+msgstr "Nascerá às %1 (em %2)."
 
 #: plugins/Observability/src/Observability.cpp:525
 msgid "Circumpolar."
@@ -6914,12 +6913,12 @@ msgstr "Sem nascer."
 #: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr "Culminará às %1 (em %2) em %3 graus"
+msgstr "Culminará às %1 (em %2) em %3 graus."
 
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr "Culminou às %1 (%2 atrás) em %3 graus"
+msgstr "Culminou às %1 (%2 atrás) em %3 graus."
 
 #: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
@@ -6927,7 +6926,7 @@ msgstr "Não é possível observar a fonte."
 
 #: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr "Sem nascer/pôr acrônico nem cósmico."
+msgstr "Sem nascer e sem pôr acrônico nem cósmico."
 
 #: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
@@ -6940,23 +6939,23 @@ msgstr "Maior separação do Sol: "
 #: plugins/Observability/src/Observability.cpp:616
 #, qt-format
 msgid " (at %1 deg.)"
-msgstr " (em %1 graus)"
+msgstr " (em %1 graus)."
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
-msgstr "Nascer/pôr acrônico"
+msgstr "Nascer e pôr acrônico"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
-msgstr "Sem nascer/pôr acrônico."
+msgstr "Sem nascer e sem pôr acrônico."
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
-msgstr "Nascer/pôr cósmico"
+msgstr "Nascer e pôr cósmico"
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
-msgstr "Sem nascer/pôr cósmico."
+msgstr "Sem nascer e sem pôr cósmico."
 
 #: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
@@ -7039,19 +7038,19 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr "Altitude do horizonte:"
+msgstr "Altura do horizonte:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
-"<p align=\"justify\">Altitude observável mínima (devido a montanhas, a "
+"<p align=\"justify\">Altura observável mínima (devido a montanhas, a "
 "edifícios ou apenas a uma montagem de telescópio limitada)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
-msgstr "Efemérides de hoje"
+msgstr "Efemérides de hoje:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
@@ -7067,7 +7066,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
-msgstr "Nascer/pôr acrônico/cósmico:"
+msgstr "Nascer e pôr acrônico e cósmico:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
@@ -7138,25 +7137,25 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"<p align=\"justify\">O programa calcula o intervalo de datas em que o "
-"objecto celeste está acima do horizonte, pelo menos durante um momento da "
-"noite. O programa considera como “noite” o intervalo de tempo em que a "
-"altura do Sol é inferior à do crepúsculo (o qual pode ser definido pelo "
-"usuário; veja acima). Quando os objetos são fixos no céu (ou são planetas "
-"exteriores), a faixa de épocas observáveis do ano em curso pode ter duas "
-"formas possíveis: ou um intervalo de uma data para outra (por exemplo, de 20 "
-"de janeiro a 15 de setembro) ou em duas etapas (de 1º de janeiro a uma "
-"determinada data e de uma outra data até 31 de dezembro). No primeiro caso, "
-"a primeira data (20 de janeiro, no nosso exemplo) deve estar próxima do "
-"assim chamado “nascer helíaco de uma estrela”, e a segunda data (15 de "
-"setembro, no nosso exemplo) deve estar próxima do “pôr helíaco”. No segundo "
-"caso (por exemplo, um intervalo na forma 1º de janeiro a 20 de maio e 21 de "
-"setembro a 31 de dezembro), a primeira data (20 de maio, no nosso exemplo) "
-"estará próxima do pôr helíaco, e a segunda (21 de setembro, no nosso "
-"exemplo), do nascer helíaco. Equações mais exatas para estimar o nascer e o "
-"pôr helíaco de estrelas e de planetas (que não dependerão da simples "
-"inserção de uma elevação do Sol ao crepúsculo pelo usuário) serão "
-"implementadas em futuras versões deste complemento."
+"<p align=\"justify\">O programa calcula o intervalo de datas em que o objeto "
+"celeste está acima do horizonte, pelo menos durante um momento da noite. O "
+"programa considera como “noite” o intervalo de tempo em que a altura do Sol "
+"é inferior à do crepúsculo (o qual pode ser definido pelo usuário; veja "
+"acima). Quando os objetos são fixos no céu (ou são planetas exteriores), a "
+"faixa de épocas observáveis do ano em curso pode ter duas formas possíveis: "
+"ou um intervalo de uma data para outra (por exemplo, de 20 de janeiro a 15 "
+"de setembro) ou em duas etapas (de 1º de janeiro a uma determinada data e de "
+"uma outra data até 31 de dezembro). No primeiro caso, a primeira data (20 de "
+"janeiro, no nosso exemplo) deve estar próxima do assim chamado “nascer "
+"helíaco de uma estrela”, e a segunda data (15 de setembro, no nosso exemplo) "
+"deve estar próxima do “pôr helíaco”. No segundo caso (por exemplo, um "
+"intervalo na forma 1º de janeiro a 20 de maio e 21 de setembro a 31 de "
+"dezembro), a primeira data (20 de maio, no nosso exemplo) estará próxima do "
+"pôr helíaco, e a segunda (21 de setembro, no nosso exemplo), do nascer "
+"helíaco. Equações mais exatas para estimar o nascer e o pôr helíaco de "
+"estrelas e de planetas (que não dependerão da simples inserção de uma "
+"elevação do Sol ao crepúsculo pelo usuário) serão implementadas em futuras "
+"versões deste complemento."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
@@ -7195,7 +7194,7 @@ msgstr "Efemérides de hoje (nascer, pôr e horários de trânsito)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr "Datas de nascer/pôr acrônico e cósmico"
+msgstr "Datas de nascer e de pôr acrônico e cósmico"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
