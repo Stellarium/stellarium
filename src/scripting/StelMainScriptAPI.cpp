@@ -995,12 +995,12 @@ void StelMainScriptAPI::setMilkyWayVisible(bool b)
 	GETSTELMODULE(MilkyWay)->setFlagShow(b);
 }
 
-void StelMainScriptAPI::setMilkyWayIntensity(float i)
+void StelMainScriptAPI::setMilkyWayIntensity(double i)
 {
 	GETSTELMODULE(MilkyWay)->setIntensity(i);
 }
 
-float StelMainScriptAPI::getMilkyWayIntensity()
+double StelMainScriptAPI::getMilkyWayIntensity()
 {
 	return GETSTELMODULE(MilkyWay)->getIntensity();
 }

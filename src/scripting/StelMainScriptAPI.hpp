@@ -593,11 +593,11 @@ public slots:
 
 	//! Set Milky Way intensity.
 	//! @param i value of intensity for the Milky Way
-	void setMilkyWayIntensity(float i);
+	void setMilkyWayIntensity(double i);
 
 	//! Get Milky Way intensity.
 	//! @return value of Milky Way intensity, e.g. "1.2"
-	float getMilkyWayIntensity();
+	double getMilkyWayIntensity();
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
