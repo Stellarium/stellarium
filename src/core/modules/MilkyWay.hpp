@@ -60,9 +60,9 @@ public:
 	// Setter and getters
 public slots:
 	//! Get Milky Way intensity.
-	float getIntensity() const {return intensity;}
+	double getIntensity() const {return intensity;}
 	//! Set Milky Way intensity.
-	void setIntensity(float aintensity) {intensity = aintensity;}
+	void setIntensity(double aintensity) {intensity = aintensity;}
 	
 	//! Get the color used for rendering the milky way
 	Vec3f getColor() const {return color;}
