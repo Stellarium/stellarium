@@ -278,6 +278,11 @@ public slots:
 	//! Get the current date in Julian Day
 	double getJDay() const;
 
+	//! Set the current date in Modified Julian Day
+	void setMJDay(double MJD);
+	//! Get the current date in Modified Julian Day
+	double getMJDay() const;
+
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;
 	//! Set the preset sky time from a JD
