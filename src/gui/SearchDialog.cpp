@@ -556,11 +556,11 @@ void SearchDialog::selectSimbadServer(int index)
 
 void SearchDialog::updateListWidget(int index)
 {
-
 	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
 	ui->objectsListWidget->clear();
 	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
 	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
+	ui->objectsListWidget->sortItems(Qt::AscendingOrder);
 	connect(ui->objectsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
 }
 

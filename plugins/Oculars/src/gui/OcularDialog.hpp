@@ -27,6 +27,7 @@
 #include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
+#include "Barlow.hpp"
 
 class Ui_ocularDialogForm;
 
@@ -46,7 +47,7 @@ class OcularDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
+    OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Barlow *>* barlows);
 	virtual ~OcularDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -57,15 +58,19 @@ public slots:
 	void deleteSelectedCCD();
 	void deleteSelectedOcular();
 	void deleteSelectedTelescope();
+	void deleteSelectedBarlow();
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
+	void insertNewBarlow();
 	void moveUpSelectedSensor();
 	void moveUpSelectedOcular();
 	void moveUpSelectedTelescope();
+	void moveUpSelectedBarlow();
 	void moveDownSelectedSensor();
 	void moveDownSelectedOcular();
 	void moveDownSelectedTelescope();
+	void moveDownSelectedBarlow();
 	void retranslate();
 
 signals:
@@ -96,10 +101,14 @@ private:
 	QDataWidgetMapper*			telescopeMapper;
 	QList<Telescope *>*			telescopes;
 	PropertyBasedTableModel*	telescopeTableModel;
+	QDataWidgetMapper*			barlowMapper;
+	QList<Barlow *>*			barlows;
+	PropertyBasedTableModel*	barlowTableModel;
 	QDoubleValidator*				validatorOcularAFOV;
 	QDoubleValidator*				validatorOcularEFL;
 	QDoubleValidator*				validatorTelescopeDiameter;
 	QDoubleValidator*				validatorTelescopeFL;
+	QDoubleValidator*				validatorBarlowMultipler;
 	QRegExpValidator*				validatorName;
 	QIntValidator*					validatorPositiveInt;
 	QDoubleValidator*				validatorPositiveDouble;

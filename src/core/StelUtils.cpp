@@ -1223,7 +1223,7 @@ double getMoonSecularAcceleration(double jDay)
 	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
-	double t = (year-1995)/100;
+	double t = (year-1955)/100;
 	return -0.12932224 * t * t;
 }
 

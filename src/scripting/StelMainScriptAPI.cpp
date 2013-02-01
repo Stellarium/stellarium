@@ -50,6 +50,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
+#include "MilkyWay.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -116,6 +117,20 @@ double StelMainScriptAPI::getJDay() const
 	return StelApp::getInstance().getCore()->getJDay();
 }
 
+//! Set the current date in Modified Julian Day
+//! @param MJD the Modified Julian Date
+void StelMainScriptAPI::setMJDay(double MJD)
+{
+	StelApp::getInstance().getCore()->setMJDay(MJD);
+}
+
+//! Get the current date in Modified Julian Day
+//! @return the Modified Julian Date
+double StelMainScriptAPI::getMJDay() const
+{
+	return StelApp::getInstance().getCore()->getMJDay();
+}
+
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
 	StelApp::getInstance().getCore()->setJDay(jdFromDateString(dt, spec));
@@ -127,6 +142,11 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 		return StelUtils::julianDayToISO8601String(getJDay());
 	else
 		return StelUtils::julianDayToISO8601String(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
+}
+
+QString StelMainScriptAPI::getDeltaT() const
+{
+	return StelUtils::hoursToHmsStr(StelUtils::getDeltaT(getJDay())/3600.);
 }
 
 //! Set time speed in JDay/sec
@@ -968,4 +988,19 @@ void StelMainScriptAPI::setSkyLanguage(QString langCode)
 void StelMainScriptAPI::goHome()
 {
 	emit(requestSetHomePosition());
+}
+
+void StelMainScriptAPI::setMilkyWayVisible(bool b)
+{
+	GETSTELMODULE(MilkyWay)->setFlagShow(b);
+}
+
+void StelMainScriptAPI::setMilkyWayIntensity(float i)
+{
+	GETSTELMODULE(MilkyWay)->setIntensity(i);
+}
+
+float StelMainScriptAPI::getMilkyWayIntensity()
+{
+	return GETSTELMODULE(MilkyWay)->getIntensity();
 }
