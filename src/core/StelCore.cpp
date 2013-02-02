@@ -1092,7 +1092,7 @@ void StelCore::addSolarDays(double d)
 		double dsol = home->getSiderealDay();
 		bool fwdDir = true;
 
-		if ((home->getEnglishName() == "Venus") || (home->getEnglishName() == "Uranus"))
+		if ((home->getEnglishName() == "Venus") || (home->getEnglishName() == "Uranus") || (home->getEnglishName() == "Pluto"))
 			fwdDir = false;
 
 		d *= StelUtils::calculateSolarDay(sp, dsol, fwdDir);
