@@ -123,7 +123,7 @@ void SolarSystem::init()
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
 	computePositions(StelUtils::getJDFromSystem());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
@@ -726,7 +726,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-			               pd.value(secname+"/hidden", 0).toBool()));
+				       pd.value(secname+"/hidden", 0).toBool(),
+				       type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
 
@@ -776,7 +777,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-			               pd.value(secname+"/hidden", 0).toBool()));
+				       pd.value(secname+"/hidden", 0).toBool(),
+				       type));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
@@ -812,7 +814,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               osculatingFunc,
 			               closeOrbit,
 			               pd.value(secname+"/hidden", 0).toBool(),
-			               pd.value(secname+"/atmosphere", false).toBool()));
+				       pd.value(secname+"/atmosphere", false).toBool(),
+				       type));
 		}
 
 
@@ -1506,7 +1509,7 @@ void SolarSystem::reloadPlanets()
 	// Memory leak? What's the proper way of cleaning shared pointers?
 
 	// Re-load the ssystem.ini file
-	loadPlanets();
+	loadPlanets();	
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");
 	recreateTrails();

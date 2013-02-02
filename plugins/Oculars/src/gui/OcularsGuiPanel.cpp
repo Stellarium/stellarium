@@ -130,6 +130,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	ocularControls = new QGraphicsWidget(this);
 	ocularControls->setParentItem(this);
 	ocularControls->setVisible(false);
+	barlowControls = new QGraphicsWidget(this);
+	barlowControls->setParentItem(this);
+	barlowControls->setVisible(false);
 	ccdControls = new QGraphicsWidget(this);
 	ccdControls->setParentItem(this);
 	ccdControls->setVisible(false);
@@ -146,6 +149,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldTelescopeName = new QGraphicsTextItem(telescopeControls);
 	fieldMagnification = new QGraphicsTextItem(telescopeControls);
 	fieldFov = new QGraphicsTextItem(telescopeControls);
+
+	fieldBarlowName = new QGraphicsTextItem(barlowControls);
+	fieldBarlowMultipler = new QGraphicsTextItem(barlowControls);
 
 	QFont newFont = font();
 	newFont.setPixelSize(12);
@@ -166,6 +172,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldTelescopeName->setTextWidth(maxWidth);
 	fieldMagnification->setTextWidth(maxWidth);
 	fieldFov->setTextWidth(maxWidth);
+
+	fieldBarlowName->setTextWidth(maxWidth);
+	fieldBarlowMultipler->setTextWidth(maxWidth);
 
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
 	QPixmap prevArrow = pa.scaledToHeight(lineHeight, Qt::SmoothTransformation);
@@ -190,6 +199,18 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                  QPixmap(),
 	                                  defaultAction);
 	nextOcularButton->setToolTip(q_("Next ocular"));
+	prevBarlowButton = new StelButton(barlowControls,
+                                      prevArrow,
+                                      prevArrowOff,
+                                      QPixmap(),
+                                      defaultAction);
+	prevBarlowButton->setToolTip(q_("Previous Barlow lens"));
+	nextBarlowButton = new StelButton(barlowControls,
+                                      nextArrow,
+                                      nextArrowOff,
+                                      QPixmap(),
+                                      defaultAction);
+	nextBarlowButton->setToolTip(q_("Next Barlow lens"));
 	prevCcdButton = new StelButton(ccdControls,
 	                               prevArrow,
 	                               prevArrowOff,
@@ -227,6 +248,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	        ocularsPlugin, SLOT(decrementCCDIndex()));
 	connect(prevTelescopeButton, SIGNAL(triggered()),
 	        ocularsPlugin, SLOT(decrementTelescopeIndex()));
+	connect(nextBarlowButton, SIGNAL(triggered()),
+			ocularsPlugin, SLOT(incrementBarlowIndex()));
+	connect(prevBarlowButton, SIGNAL(triggered()),
+			ocularsPlugin, SLOT(decrementBarlowIndex()));
 
 	QColor cOn(255, 255, 255);
 	QColor cOff(102, 102, 102);
@@ -368,6 +393,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	ocularControls->setMaximumWidth(width);
 	ccdControls->setMaximumWidth(width);
 	telescopeControls->setMaximumWidth(width);
+	barlowControls->setMaximumWidth(width);
 	resize(width + left + right, 10);
 	buttonBar->resize(width, size().height());
 	updateMainButtonsPositions();
@@ -394,6 +420,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	        this, SLOT(updateCcdControls()));
 	connect(ocularsPlugin, SIGNAL(selectedTelescopeChanged()),
 	        this, SLOT(updateTelescopeControls()));
+    connect(ocularsPlugin, SIGNAL(selectedBarlowChanged()),
+            this, SLOT(updateTelescopeControls()));
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)),
@@ -418,6 +446,7 @@ void OcularsGuiPanel::showOcularGui()
 	{
 		setOcularControlsVisible(false);
 		setTelescopeControlsVisible(false);
+		setBarlowControlsVisible(false);
 		updatePosition();
 	}
 }
@@ -433,6 +462,7 @@ void OcularsGuiPanel::foldGui()
 	setOcularControlsVisible(false);
 	setCcdControlsVisible(false);
 	setTelescopeControlsVisible(false);
+	setBarlowControlsVisible(false);
 	updatePosition();
 }
 
@@ -543,6 +573,76 @@ void OcularsGuiPanel::updateOcularControls()
 	setOcularControlsVisible(true);
 
 	updateTelescopeControls();//Contains a call to updatePosition()
+}
+
+void OcularsGuiPanel::updateBarlowControls()
+{
+	if (ocularsPlugin->flagShowCCD)
+	{
+		setBarlowControlsVisible(false);
+		return;
+	}
+	int index = ocularsPlugin->selectedOcularIndex;
+	Ocular* ocular = ocularsPlugin->oculars[index];
+
+	Barlow* barlow = ocularsPlugin->selectedBarlow();
+	index = ocularsPlugin->selectedBarlowIndex;
+
+	QString fullName;
+	QString multiplerString;
+	if (barlow != NULL)
+	{
+		QString name = barlow->name();
+		if (name.isEmpty())
+		{
+			fullName = QString(q_("Barlow #%1")).arg(index);
+		}
+		else
+		{
+			fullName = QString(q_("Barlow #%1: %2")).arg(index).arg(name);
+		}
+		multiplerString = QString(q_("Multiplicity: %1")).arg(barlow->multipler());
+		multiplerString.append(QChar(0x00D7));
+	}
+	else
+	{
+		fullName = QString(q_("Barlow: None"));
+		multiplerString = QString(q_("Multiplicity: N/A"));
+	}
+	fieldBarlowName->setPlainText(fullName);
+	fieldBarlowMultipler->setPlainText(multiplerString);
+	fieldOcularFl->setToolTip(q_("Multiplicity of barlow lens"));
+	
+	qreal posX = 0.;
+	qreal posY = 0.;
+	qreal widgetWidth = 0.;
+	qreal widgetHeight = 0.;
+
+	//Prev button
+	qreal heightAdjustment = (fieldBarlowName->boundingRect().height() - prevBarlowButton->boundingRect().height()) / 2.;
+	prevBarlowButton->setPos(posX, round(posY + heightAdjustment));
+	posX += prevBarlowButton->boundingRect().width();
+	widgetWidth += prevBarlowButton->boundingRect().width();
+
+	//Name field
+	fieldBarlowName->setPos(posX, posY);
+	posX += fieldBarlowName->boundingRect().width();
+	widgetWidth += fieldBarlowName->boundingRect().width();
+	widgetHeight += fieldBarlowName->boundingRect().height();
+
+	//Next button
+	nextBarlowButton->setPos(posX, posY + heightAdjustment);
+	widgetWidth += nextBarlowButton->boundingRect().width();
+
+	posX = prevBarlowButton->boundingRect().width();
+	posY += fieldBarlowName->boundingRect().height();
+	fieldBarlowMultipler->setPos(posX, posY);
+	widgetHeight += fieldBarlowMultipler->boundingRect().height();
+
+	barlowControls->setMinimumSize(widgetWidth, widgetHeight);
+	barlowControls->resize(widgetWidth, widgetHeight);
+
+	setBarlowControlsVisible(true);
 }
 
 void OcularsGuiPanel::updateCcdControls()
@@ -702,6 +802,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 		int index = ocularsPlugin->selectedOcularIndex;
 		Ocular* ocular = ocularsPlugin->oculars[index];
 		Q_ASSERT(ocular);
+                
+		Barlow *barlow = ocularsPlugin->selectedBarlow();
 
 		if (ocular->isBinoculars())
 		{
@@ -720,12 +822,12 @@ void OcularsGuiPanel::updateTelescopeControls()
 			nextTelescopeButton->setVisible(true);
 			fieldTelescopeName->setVisible(true);
 
-			fieldMagnification->setToolTip(q_("Magnification provided by this ocular/telescope combination"));
-			fieldFov->setToolTip(q_("Actual field of view provided by this ocular/telescope combination"));
+			fieldMagnification->setToolTip(q_("Magnification provided by this ocular/barlow/telescope combination"));
+			fieldFov->setToolTip(q_("Actual field of view provided by this ocular/barlow/telescope combination"));
 		}
 
 		//WTF? Rounding?
-		double magnification = ((int)(ocular->magnification(telescope) * 10.0)) / 10.0;
+		double magnification = ((int)(ocular->magnification(telescope, barlow) * 10.0)) / 10.0;
 		QString magnificationString = QString::number(magnification);
 		magnificationString.append(QChar(0x00D7));
 		QString magnificationLabel = QString(q_("Magnification: %1"))
@@ -735,7 +837,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 
-		double fov = ((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0;
+		double fov = ((int)(ocular->actualFOV(telescope, barlow) * 10000.00)) / 10000.0;
 		QString fovString = QString::number(fov) + QChar(0x00B0);
 		QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
 		fieldFov->setPlainText(fovLabel);
@@ -759,7 +861,32 @@ void OcularsGuiPanel::updateTelescopeControls()
 	telescopeControls->resize(widgetWidth, widgetHeight);
 	setTelescopeControlsVisible(true);
 
+	updateBarlowControls();
 	updatePosition();
+}
+
+void OcularsGuiPanel::setBarlowControlsVisible(bool show)
+{
+	if (show)
+	{
+		if (!barlowControls->isVisible())
+		{
+			barlowControls->setVisible(true);
+			mainLayout->insertItem(2, barlowControls);
+		}
+	}
+	else
+	{
+		if (barlowControls->isVisible())
+		{
+			mainLayout->removeItem(barlowControls);
+			barlowControls->setVisible(false);
+		}
+	}
+	mainLayout->invalidate();
+	mainLayout->activate();
+	resize(mainLayout->geometry().width(),
+	       mainLayout->geometry().height());
 }
 
 void OcularsGuiPanel::setOcularControlsVisible(bool show)
@@ -881,6 +1008,8 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
 	Q_ASSERT(fieldFov);
+	Q_ASSERT(fieldBarlowName);
+	Q_ASSERT(fieldBarlowMultipler);
 
 	fieldOcularName->setDefaultTextColor(color);
 	fieldOcularFl->setDefaultTextColor(color);
@@ -891,6 +1020,8 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldTelescopeName->setDefaultTextColor(color);
 	fieldMagnification->setDefaultTextColor(color);
 	fieldFov->setDefaultTextColor(color);
+	fieldBarlowName->setDefaultTextColor(color);
+	fieldBarlowMultipler->setDefaultTextColor(color);
 }
 
 void OcularsGuiPanel::setControlsFont(const QFont& font)
@@ -904,6 +1035,8 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
 	Q_ASSERT(fieldFov);
+	Q_ASSERT(fieldBarlowName);
+	Q_ASSERT(fieldBarlowMultipler);
 
 	fieldOcularName->setFont(font);
 	fieldOcularFl->setFont(font);
@@ -914,6 +1047,8 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldTelescopeName->setFont(font);
 	fieldMagnification->setFont(font);
 	fieldFov->setFont(font);
+	fieldBarlowName->setFont(font);
+	fieldBarlowMultipler->setFont(font);
 }
 
 void OcularsGuiPanel::setButtonsNightMode(bool nightMode)

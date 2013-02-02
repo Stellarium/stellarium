@@ -519,7 +519,7 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 
 bool StelScriptMgr::preprocessScript(QFile &input, QString& output, const QString& scriptDir)
 {
-	QString s(input.readAll());
+	QString s = QString::fromUtf8(input.readAll());
 	return preprocessScript(s, output, scriptDir);
 }
 

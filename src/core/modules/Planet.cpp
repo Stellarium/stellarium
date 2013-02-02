@@ -338,7 +338,8 @@ Planet::Planet(const QString& englishName,
                OsculatingFunctType *osculatingFunc,
                bool acloseOrbit,
                bool hidden,
-               bool hasAtmosphere)
+	       bool hasAtmosphere,
+	       const QString& pType)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
@@ -353,6 +354,7 @@ Planet::Planet(const QString& englishName,
 	  parent(NULL),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
+	  pType(pType),
 	  unlitSphere(NULL),
 	  litSphere(NULL)
 {
@@ -430,6 +432,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
+	if (flags&Extra1)
+	{
+		if (pType.length()>0)
+			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
+	}
+
 	if (flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -493,17 +501,18 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	double siderealPeriod = getSiderealPeriod();
+	double siderealDay = getSiderealDay();
 	if ((flags&Extra1) && (siderealPeriod>0))
 	{
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
-		if (std::abs(getSiderealDay())>0)
-		{
-			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getSiderealDay()*24))) << "<br>";
-			bool fwddir = true;
-			if (englishName.compare("Venus") || englishName.compare("Uranus"))
-				fwddir = false;
-			oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(StelUtils::calculateSolarDay(siderealPeriod, getSiderealDay(), fwddir)*24))) << "<br>";
+		if (std::abs(siderealDay)>0)
+		{			
+			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";
+			if (englishName == "Venus" || englishName == "Uranus" || englishName == "Pluto")
+				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(24*StelUtils::calculateSolarDay(siderealPeriod, siderealDay, false)))) << "<br>";
+			else
+				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay/((siderealPeriod - 1)/siderealPeriod)*24))) << "<br>";
 		}
 	}
 
@@ -1397,6 +1406,7 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 		else
 		{
 			litSphere->setResolution(resolution, resolution);
+			litSphere->setLight(*light);
 		}
 		litSphere->draw(renderer, projector);
 	}

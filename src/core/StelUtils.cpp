@@ -56,7 +56,8 @@ QString getApplicationVersion()
 
 double hmsToRad(unsigned int h, unsigned int m, double s )
 {
-	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
+	//return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.; // Wrong formula! --AW
+	return (double)h*M_PI/12.+(double)m*M_PI/10800.+(double)s*M_PI/648000.;
 }
 
 double dmsToRad(int d, unsigned int m, double s)
@@ -1064,13 +1065,15 @@ double calculateSiderealPeriod(double SemiMajorAxis)
 // Calculate duration of mean solar day
 double calculateSolarDay(double siderealPeriod, double siderealDay, bool forwardDirection)
 {
-	double coeff;
+	double coeff, solarDay;
 	if (forwardDirection)
-		coeff = (siderealPeriod + 1)/siderealPeriod;
+		coeff = 1 - siderealDay/siderealPeriod;
 	else
-		coeff = -1 * (siderealPeriod - 1)/siderealPeriod;
+		coeff = 1 + std::abs(siderealDay)/siderealPeriod;
 
-	return siderealDay/coeff;
+	solarDay = siderealDay/coeff;
+
+	return solarDay;
 }
 
 QString hoursToHmsStr(double hours)
@@ -1115,6 +1118,117 @@ long double startTime = getTime();
 long double secondsSinceStart()
 {
 	return getTime() - startTime;
+}
+
+double decYear2DeltaT(double y)
+{
+	// Note: the method here is adapted from Adapted from
+	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus]
+	// A summary is described here:
+	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+
+	// set the default value for Delta T
+	double u = (y-1820)/100.;
+	double r = (-20 + 32 * std::pow(u,2.0));
+
+	if (y < -500)
+	{
+		u = (y-1820)/100.;
+		r = (-20 + 32 * std::pow(u,2.0));
+	}
+	else if (y < 500)
+	{
+		u = y/100;
+		r = (10583.6 - 1014.41 * u + 33.78311 * std::pow(u,2) - 5.952053 * std::pow(u,3)
+		       - 0.1798452 * std::pow(u,4) + 0.022174192 * std::pow(u,5) + 0.0090316521 * std::pow(u,6));
+	}
+	else if (y < 1600)
+	{
+		u = (y-1000)/100;
+		r = (1574.2 - 556.01 * u + 71.23472 * std::pow(u,2) + 0.319781 * std::pow(u,3)
+		       - 0.8503463 * std::pow(u,4) - 0.005050998 * std::pow(u,5) + 0.0083572073 * std::pow(u,6));
+	}
+	else if (y < 1700)
+	{
+		double t = y - 1600;
+		r = (120 - 0.9808 * t - 0.01532 * std::pow(t,2) + std::pow(t,3) / 7129);
+	}
+	else if (y < 1800)
+	{
+		double t = y - 1700;
+		r = (8.83 + 0.1603 * t - 0.0059285 * std::pow(t,2) + 0.00013336 * std::pow(t,3) - std::pow(t,4) / 1174000);
+	}
+	else if (y < 1860)
+	{
+		double t = y - 1800;
+		r = (13.72 - 0.332447 * t + 0.0068612 * std::pow(t,2) + 0.0041116 * std::pow(t,3) - 0.00037436 * std::pow(t,4)
+		       + 0.0000121272 * std::pow(t,5) - 0.0000001699 * std::pow(t,6) + 0.000000000875 * std::pow(t,7));
+	}
+	else if (y < 1900)
+	{
+		double t = y - 1860;
+		r = (7.62 + 0.5737 * t - 0.251754 * std::pow(t,2) + 0.01680668 * std::pow(t,3)
+			-0.0004473624 * std::pow(t,4) + std::pow(t,5) / 233174);
+	}
+	else if (y < 1920)
+	{
+		double t = y - 1900;
+		r = (-2.79 + 1.494119 * t - 0.0598939 * std::pow(t,2) + 0.0061966 * std::pow(t,3) - 0.000197 * std::pow(t,4));
+	}
+	else if (y < 1941)
+	{
+		double t = y - 1920;
+		r = (21.20 + 0.84493*t - 0.076100 * std::pow(t,2) + 0.0020936 * std::pow(t,3));
+	}
+	else if (y < 1961)
+	{
+		double t = y - 1950;
+		r = (29.07 + 0.407*t - std::pow(t,2)/233 + std::pow(t,3) / 2547);
+	}
+	else if (y < 1986)
+	{
+		double t = y - 1975;
+		r = (45.45 + 1.067*t - std::pow(t,2)/260 - std::pow(t,3) / 718);
+	}
+	else if (y < 2005)
+	{
+		double t = y - 2000;
+		r = (63.86 + 0.3345 * t - 0.060374 * std::pow(t,2) + 0.0017275 * std::pow(t,3) + 0.000651814 * std::pow(t,4)
+			+ 0.00002373599 * std::pow(t,5));
+	}
+	else if (y < 2050)
+	{
+		double t = y - 2000;
+		r = (62.92 + 0.32217 * t + 0.005589 * std::pow(t,2));
+	}
+	else if (y < 2150)
+	{
+		r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
+	}	
+
+	return r;
+}
+
+double getDeltaT(double jDay)
+{
+	int year, month, day;
+	double moon = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	if (year<1955 or year>2005)
+		moon = getMoonSecularAcceleration(jDay);
+	// approximate "decimal year" = year + (month - 0.5)/12
+	return decYear2DeltaT(year + (month - 0.5)/12)+moon;
+}
+
+double getMoonSecularAcceleration(double jDay)
+{
+	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
+	// For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
+	// For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	double t = (year-1955)/100;
+	return -0.12932224 * t * t;
 }
 
 } // end of the StelUtils namespace

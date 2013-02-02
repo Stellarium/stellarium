@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-24 19:14+0700\n"
-"PO-Revision-Date: 2012-11-30 15:42+0000\n"
+"POT-Creation-Date: 2013-01-18 23:15+0700\n"
+"PO-Revision-Date: 2013-01-18 05:28+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-01 04:34+0000\n"
-"X-Generator: Launchpad (build 16319)\n"
+"X-Launchpad-Export-Date: 2013-01-19 04:45+0000\n"
+"X-Generator: Launchpad (build 16430)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -54,22 +54,27 @@ msgstr ", %1 m"
 msgid "Planet: "
 msgstr "Planet "
 
-#: src/core/modules/Nebula.cpp:115 plugins/Supernovae/src/Supernova.cpp:97
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:125
+#: src/core/modules/Nebula.cpp:115 src/core/modules/Planet.cpp:438
+#: src/core/modules/MinorPlanet.cpp:199 src/core/modules/Comet.cpp:119
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:120
+#: src/core/modules/StarWrapper.cpp:122
+#: plugins/Satellites/src/Satellite.cpp:244
+#: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Pulsars/src/Pulsar.cpp:125
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Jenis: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:120 src/core/modules/Planet.cpp:436
-#: src/core/modules/MinorPlanet.cpp:197 src/core/modules/Comet.cpp:117
+#: src/core/modules/Nebula.cpp:120 src/core/modules/Planet.cpp:444
+#: src/core/modules/MinorPlanet.cpp:205 src/core/modules/Comet.cpp:125
 #: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:123 src/core/modules/Planet.cpp:439
-#: src/core/modules/MinorPlanet.cpp:200 src/core/modules/Comet.cpp:120
+#: src/core/modules/Nebula.cpp:123 src/core/modules/Planet.cpp:447
+#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:128
 #: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 #, qt-format
@@ -113,121 +118,131 @@ msgstr "Tidak diketahui"
 msgid "Undocumented type"
 msgstr "Jenis yang tidak didokumentasi"
 
-#: src/core/modules/Planet.cpp:442 src/core/modules/MinorPlanet.cpp:210
-#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:129
-#: src/core/modules/StarWrapper.cpp:124 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:218
+#: src/core/modules/MinorPlanet.cpp:222 src/core/modules/Comet.cpp:137
+#: src/core/modules/StarWrapper.cpp:137 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitud Mutlak: %1"
 
-#: src/core/modules/Planet.cpp:455
+#: src/core/modules/Planet.cpp:463
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
 msgstr "Toposentrik Ekliptik (tarikh): %1/%2"
 
-#: src/core/modules/Planet.cpp:456
+#: src/core/modules/Planet.cpp:464
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "Keserongan (tarikh, untuk Bumi): %1"
 
-#: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:227
-#: src/core/modules/Comet.cpp:141
+#: src/core/modules/Planet.cpp:474 src/core/modules/MinorPlanet.cpp:235
+#: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Jarak: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:473 src/core/modules/MinorPlanet.cpp:234
-#: src/core/modules/Comet.cpp:148
+#: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:242
+#: src/core/modules/Comet.cpp:156
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Jarak: %1AU"
 
-#: src/core/modules/Planet.cpp:484
+#: src/core/modules/Planet.cpp:492
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Diameter ketara: %1, dengan gelang: %2"
 
-#: src/core/modules/Planet.cpp:490 src/core/modules/MinorPlanet.cpp:240
+#: src/core/modules/Planet.cpp:498 src/core/modules/MinorPlanet.cpp:248
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diameter ketara: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:499 src/core/modules/MinorPlanet.cpp:247
-#: src/core/modules/Comet.cpp:163
+#: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Tempoh ikut bintang: %1 hari (%2 a)"
 
-#: src/core/modules/Planet.cpp:502
+#: src/core/modules/Planet.cpp:510
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "hari ikut bintang: %1"
 
-#: src/core/modules/Planet.cpp:506
+#: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Min hari suria: %1"
 
-#: src/core/modules/Planet.cpp:513
+#: src/core/modules/Planet.cpp:521
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Sudut Fasa: %1"
 
-#: src/core/modules/Planet.cpp:514
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Pemanjangan: %1"
 
-#: src/core/modules/Planet.cpp:515
+#: src/core/modules/Planet.cpp:523
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fasa: %1"
 
-#: src/core/modules/Planet.cpp:516
+#: src/core/modules/Planet.cpp:524
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Disinari: %1%"
 
-#: src/core/modules/MinorPlanet.cpp:189
+#: src/core/modules/MinorPlanet.cpp:191
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "Penentuan sementara: %1"
 
-#: src/core/modules/StarWrapper.cpp:52
+#. TRANSLATORS: Type of object
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
+#: src/translations.h:151
+msgid "star"
+msgstr "bintang"
+
+#: src/core/modules/StarWrapper.cpp:57
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "Magnitud: <b>%1</b> (B-V: %2)"
 
-#: src/core/modules/StarWrapper.cpp:55
+#: src/core/modules/StarWrapper.cpp:60
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Magnitude Ketara: <b>%1</b> (oleh kepupusan)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:120
+msgid "double star"
+msgstr "bintang dubel"
+
+#: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:132 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:130
+#: src/core/modules/StarWrapper.cpp:143
 #: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Jenis Spektrum: %1"
 
-#: src/core/modules/StarWrapper.cpp:134
+#: src/core/modules/StarWrapper.cpp:147
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:195
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Jarak: %1 Tahun Cahaya"
 
-#: src/core/modules/StarWrapper.cpp:137
+#: src/core/modules/StarWrapper.cpp:150
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaks: %1\""
@@ -433,7 +448,7 @@ msgstr "Hubungi"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
 msgstr "Pengarang"
 
@@ -671,12 +686,12 @@ msgstr "Pereka grafik/lain: %1"
 msgid "OSX Developer: %1"
 msgstr "Pembangun OSX: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:644
+#: src/gui/StelGui.cpp:178 src/translations.h:664
 msgid "Script console window"
 msgstr "Tetingkap konsol skrip"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:639
+#: src/gui/StelGui.cpp:178 src/translations.h:659
 msgid "Windows"
 msgstr "Tetingkap"
 
@@ -868,12 +883,12 @@ msgid "Earth"
 msgstr "Bumi"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:172
+#: src/translations.h:37 src/translations.h:188
 msgid "Moon"
 msgstr "Bulan"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:180
+#: src/translations.h:38 src/translations.h:196
 msgid "Mars"
 msgstr "Marikh"
 
@@ -971,7 +986,7 @@ msgid "Metis"
 msgstr "Metis"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:182
+#: src/translations.h:62 src/translations.h:198
 msgid "Saturn"
 msgstr "Zuhal"
 
@@ -1223,200 +1238,225 @@ msgstr "E"
 msgid "W"
 msgstr "W"
 
-#: src/translations.h:149
+#. TRANSLATORS: Type of object
+#: src/translations.h:153
+msgid "planet"
+msgstr "planet"
+
+#. TRANSLATORS: Type of object
+#: src/translations.h:155
+msgid "comet"
+msgstr "komet"
+
+#. TRANSLATORS: Type of object
+#: src/translations.h:157
+msgid "asteroid"
+msgstr "asteroid"
+
+#. TRANSLATORS: Type of object
+#: src/translations.h:159
+msgid "moon"
+msgstr "bulan"
+
+#. TRANSLATORS: Type of object
+#: src/translations.h:161
+msgid "plutoid"
+msgstr "plutoid"
+
+#: src/translations.h:165
 msgid "Arabic"
 msgstr "Arab"
 
-#: src/translations.h:150
+#: src/translations.h:166
 msgid "Aztec"
 msgstr "Aztek"
 
-#: src/translations.h:151
+#: src/translations.h:167
 msgid "Chinese"
 msgstr "Cina"
 
-#: src/translations.h:152
+#: src/translations.h:168
 msgid "Egyptian"
 msgstr "Mesir"
 
-#: src/translations.h:153
+#: src/translations.h:169
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:154
+#: src/translations.h:170
 msgid "Korean"
 msgstr "Korea"
 
-#: src/translations.h:155
+#: src/translations.h:171
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:156
+#: src/translations.h:172
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:157
+#: src/translations.h:173
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/translations.h:158
+#: src/translations.h:174
 msgid "Norse"
 msgstr "Norse"
 
-#: src/translations.h:159
+#: src/translations.h:175
 msgid "Polynesian"
 msgstr "Polinesia"
 
-#: src/translations.h:160
+#: src/translations.h:176
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:161
+#: src/translations.h:177
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:162
+#: src/translations.h:178
 msgid "Western"
 msgstr "Barat"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:168
+#: src/translations.h:184
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:170
+#: src/translations.h:186
 msgid "Trees"
 msgstr "Pepohon"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:174
+#: src/translations.h:190
 msgid "Hurricane"
 msgstr "Ribut Taufan"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:176
+#: src/translations.h:192
 msgid "Ocean"
 msgstr "Lautan"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:178
+#: src/translations.h:194
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:188
+#: src/translations.h:204
 msgid "Landscape Tour"
 msgstr "mengenal lanskap"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:190
+#: src/translations.h:206
 msgid "Partial Lunar Eclipse"
 msgstr "gerhana bulan separa"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:192
+#: src/translations.h:208
 msgid "Total Lunar Eclipse"
 msgstr "gerhana bulan penuh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:194
+#: src/translations.h:210
 msgid "Screensaver"
 msgstr "Penyelamat Skrin"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:196
+#: src/translations.h:212
 msgid "Solar Eclipse 2009"
 msgstr "gerhana matahari 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:198
+#: src/translations.h:214
 msgid "Startup Script"
 msgstr "Skrip Permulaan"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:200
+#: src/translations.h:216
 msgid "Zodiac"
 msgstr "Zodiak"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:202
+#: src/translations.h:218
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Terbit & Terbenam Matahari Tripel Utarid"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:204
+#: src/translations.h:220
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Gerhana Dubel melalui Deimos pada 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:206
+#: src/translations.h:222
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Gerhana Dubel melalui Deimos pada 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:208
+#: src/translations.h:224
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Gerhana dari Gunung Olympus 10 Jan 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:210
+#: src/translations.h:226
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Penghijaban Bumi dan Musytari 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:212
-msgid "A Quintuple eclipse from Deimos 2027"
-msgstr "Gerhana Kuintupel melalui Deimos 2027"
+#: src/translations.h:228
+msgid "3 Transits and 2 Eclipses from Deimos 2027"
+msgstr "3 Lintasan dan 2 Gerhana dari Deimos 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:214
+#: src/translations.h:230
 msgid "Solar System Screensaver"
 msgstr "Penyelamat Skrin Sistem Suria"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:216
+#: src/translations.h:232
 msgid "Constellations Tour"
 msgstr "Jelajah Buruj"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:218
+#: src/translations.h:234
 msgid "Sun from different planets"
 msgstr "Matahari dari planet yang berlainan"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:220
+#: src/translations.h:236
 msgid "Earth best views from other bodies"
 msgstr "Pandangan terbaik bumi dari jasad lain"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:222
+#: src/translations.h:238
 msgid "Transit of Venus"
 msgstr "Pertukaran Venus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:224
+#: src/translations.h:240
 msgid "Analemma"
 msgstr "Analema"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:231
+#: src/translations.h:247
 msgid "Look around each installed landscape."
 msgstr "lihat lanskap yang tersedia"
 
-#: src/translations.h:232
+#: src/translations.h:248
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "skrip untuk demonstrasi gerhana bulan separa"
 
-#: src/translations.h:233
+#: src/translations.h:249
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "skrip untuk demonstrasi gerhana bulan penuh"
 
-#: src/translations.h:234
+#: src/translations.h:250
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "melihat objek langit secara random"
 
-#: src/translations.h:235
+#: src/translations.h:251
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -1424,11 +1464,11 @@ msgstr ""
 "skrip untuk demonstrasi gerhana matahari penuh yang berlaku pada 2009 di "
 "Rangpur, Bangladesh"
 
-#: src/translations.h:236
+#: src/translations.h:252
 msgid "Script which runs automatically at startup"
 msgstr "skrip supaya mula dengan automatik pada startup"
 
-#: src/translations.h:237
+#: src/translations.h:253
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -1437,7 +1477,7 @@ msgstr ""
 "skrip ini memaparkan buruj buruj zodiak. Buruj zodiak ialah 12 buruj yang "
 "dilalui oleh orbit matahari dalam masa setahun"
 
-#: src/translations.h:238
+#: src/translations.h:254
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -1446,7 +1486,7 @@ msgstr ""
 "matahari akan terbit & terbenam pada 3 masa yang berlainan dalam satu hari "
 "Utarid."
 
-#: src/translations.h:239
+#: src/translations.h:255
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -1454,7 +1494,7 @@ msgstr ""
 "Sebelum Marikh melindungi matahari, Phobos timbul dari belakang dan "
 "melindunginya dahulu. Ia berlaku diantara Kala dan Kaus pada 26 April, 2017."
 
-#: src/translations.h:240
+#: src/translations.h:256
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -1463,13 +1503,13 @@ msgstr ""
 "melindunginya dahulu. Ia berlaku diantara Lembu Jantan dan Jauza pada 22 "
 "Julai, 2031."
 
-#: src/translations.h:241
+#: src/translations.h:257
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Phobos mengelilingi Matahari sepertimana dilihat melalui Olympus Mons pada "
 "Jan 10, 2068."
 
-#: src/translations.h:242
+#: src/translations.h:258
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -1480,53 +1520,56 @@ msgstr ""
 "jarang berlaku. Peristiwa ini berlaku pada 1/23/2048. Dalam kelajuan yang "
 "sebenar."
 
-#: src/translations.h:243
+#: src/translations.h:259
 msgid ""
-"Phobos races ahead of Mars and eclipses the sun, passes through it and then "
-"retrogrades back towards the sun and just partially eclipses it (only seen "
-"in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-"Phobos emerges from the sun it passes through Mars' shadow and dims."
+"Phobos races ahead of Mars and transits the sun, passes through it and then "
+"retrogrades back towards the sun and just partially transits it again (only "
+"seen in the southern hemisphere of Deimos), then Mars totally eclipses the "
+"sun while Phobos transits in darkness between Mars and Deimos. When Phobos "
+"emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
+"light up later."
 msgstr ""
-"Phobos berada dihadapan Marikh dan mengorbit matahari, melepasinya dan "
-"kemudian berputar songsang kembali ke matahari dan hanya mengorbit separanya "
-"(hanya kelihatan dalam SH) lagi, kemudian Marikh sepenuhnya mengorbit "
-"matahari dan Phobos, dan selanjutnya Phobos muncul dari matahari melalui "
-"bayang Marikh dan menjadi malap."
+"Phobos menuju ke arah Marikh dan melintasi matahari, melepasinya dan "
+"kemudian mundur ke matahari dan hanya lintas sebahagiannya sekali lagi "
+"(hanya kelihatan di hemisfera selatan Deimos), kemudian Marikh menggerhana "
+"sepenuhnya matahari semasa Phobos melintas di dalam kegelapan diantara "
+"Marikh dengan Deimos. Bila Phobos muncul dari Marikh ia masih digerhana dan "
+"kelihatan kabur di sebalik bayang Marikh, dan akan dicerahkan kemudian nanti."
 
-#: src/translations.h:244
+#: src/translations.h:260
 msgid ""
 "Screensaver of various happenings in the Solar System. 171 events in all!"
 msgstr ""
 "Penyelamat skrin pelbagai kejadian berlaku dalam Sistem Suria. Terdapat 171 "
 "peristiwa didalamnya!"
 
-#: src/translations.h:245
+#: src/translations.h:261
 msgid "A tour of the western constellations."
 msgstr "Lawatan ke buruj barat"
 
-#: src/translations.h:246
+#: src/translations.h:262
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Melihat Matahari daripada planet besar Sistem Suria dan Pluto."
 
-#: src/translations.h:247
+#: src/translations.h:263
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Pandangan terbaik Bumi dari jasad Sistem Suria lain dalam Abad ke 21."
 
-#: src/translations.h:248
+#: src/translations.h:264
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Lintasan Zuhrah sebagaimana dilihat dari Sydney Australia, 6 Jun 2012."
 
-#: src/translations.h:249
+#: src/translations.h:265
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 "Demonstrasi analemma - laluan Matahari merentasi langit sepanjang tahun."
 
-#: src/translations.h:250
+#: src/translations.h:266
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -1534,1457 +1577,1465 @@ msgstr ""
 "Pancaran supernova yang dicerap oleh Tycho Brahe pada tahun 1572. Pemalam "
 "Supernovae mesti dibenarkan."
 
-#: src/translations.h:255
+#: src/translations.h:271
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:256
+#: src/translations.h:272
 msgid "United Arab Emirates"
 msgstr "Emiriah Arab Bersatu"
 
-#: src/translations.h:257
+#: src/translations.h:273
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
-#: src/translations.h:258
+#: src/translations.h:274
 msgid "Antigua and Barbuda"
 msgstr "Antigua dan Barbuda"
 
-#: src/translations.h:259
+#: src/translations.h:275
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:260
+#: src/translations.h:276
 msgid "Albania"
 msgstr "Albania"
 
-#: src/translations.h:261
+#: src/translations.h:277
 msgid "Armenia"
 msgstr "Armenia"
 
-#: src/translations.h:262
+#: src/translations.h:278
 msgid "Netherlands Antilles"
 msgstr "Netherlands Antilles"
 
-#: src/translations.h:263
+#: src/translations.h:279
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:264
+#: src/translations.h:280
 msgid "Antarctica"
 msgstr "Antartika"
 
-#: src/translations.h:265
+#: src/translations.h:281
 msgid "Argentina"
 msgstr "Argentina"
 
-#: src/translations.h:266
+#: src/translations.h:282
 msgid "American Samoa"
 msgstr "Samoa Amerika"
 
-#: src/translations.h:267
+#: src/translations.h:283
 msgid "Austria"
 msgstr "Austria"
 
-#: src/translations.h:268
+#: src/translations.h:284
 msgid "Australia"
 msgstr "Australia"
 
-#: src/translations.h:269
+#: src/translations.h:285
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:270
+#: src/translations.h:286
 msgid "Azerbaijan"
 msgstr "Azerbaijan"
 
-#: src/translations.h:271
+#: src/translations.h:287
 msgid "Bosnia and Herzegowina"
 msgstr "Bosnia dan Herzegowina"
 
-#: src/translations.h:272
+#: src/translations.h:288
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:273
+#: src/translations.h:289
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: src/translations.h:274
+#: src/translations.h:290
 msgid "Belgium"
 msgstr "Belgium"
 
-#: src/translations.h:275
+#: src/translations.h:291
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:276
+#: src/translations.h:292
 msgid "Bulgaria"
 msgstr "Bulgaria"
 
-#: src/translations.h:277
+#: src/translations.h:293
 msgid "Bahrain"
 msgstr "Bahrain"
 
-#: src/translations.h:278
+#: src/translations.h:294
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:279
+#: src/translations.h:295
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:280
+#: src/translations.h:296
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: src/translations.h:281
+#: src/translations.h:297
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
 
-#: src/translations.h:282
+#: src/translations.h:298
 msgid "Bolivia"
 msgstr "Bolivia"
 
-#: src/translations.h:283
+#: src/translations.h:299
 msgid "Brazil"
 msgstr "Brazil"
 
-#: src/translations.h:284
+#: src/translations.h:300
 msgid "Bahamas"
 msgstr "Bahamas"
 
-#: src/translations.h:285
+#: src/translations.h:301
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: src/translations.h:286
+#: src/translations.h:302
 msgid "Bouvet Island"
 msgstr "Pulau Bouvet"
 
-#: src/translations.h:287
+#: src/translations.h:303
 msgid "Botswana"
 msgstr "Botswana"
 
-#: src/translations.h:288
+#: src/translations.h:304
 msgid "Belarus"
 msgstr "Belarus"
 
-#: src/translations.h:289
+#: src/translations.h:305
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:290
+#: src/translations.h:306
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:291
+#: src/translations.h:307
 msgid "Cocos Islands"
 msgstr "Kepulauan Coco"
 
-#: src/translations.h:292
+#: src/translations.h:308
 msgid "Democratic Republic of the Congo"
 msgstr "Republik Demokratik Kongo"
 
-#: src/translations.h:293
+#: src/translations.h:309
 msgid "Central African Republic"
 msgstr "Republik Afrika Tengah"
 
-#: src/translations.h:294
+#: src/translations.h:310
 msgid "Republic of the Congo"
 msgstr "Republik Kongo"
 
-#: src/translations.h:295
+#: src/translations.h:311
 msgid "Switzerland"
 msgstr "Switzerland"
 
-#: src/translations.h:296
+#: src/translations.h:312
 msgid "Cote d'Ivoire"
 msgstr "Cote d'Ivoire"
 
-#: src/translations.h:297
+#: src/translations.h:313
 msgid "Cook Islands"
 msgstr "Kepulauan Cook"
 
-#: src/translations.h:298
+#: src/translations.h:314
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:299
+#: src/translations.h:315
 msgid "Cameroon"
 msgstr "Cameroon"
 
-#: src/translations.h:300
+#: src/translations.h:316
 msgid "China"
 msgstr "China"
 
-#: src/translations.h:301
+#: src/translations.h:317
 msgid "Colombia"
 msgstr "Colombia"
 
-#: src/translations.h:302
+#: src/translations.h:318
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:303
+#: src/translations.h:319
 msgid "Serbia and Montenegro"
 msgstr "Serbia dan Montenegro"
 
-#: src/translations.h:304
+#: src/translations.h:320
 msgid "Cuba"
 msgstr "Cuba"
 
-#: src/translations.h:305
+#: src/translations.h:321
 msgid "Cape Verde"
 msgstr "Cape Verde"
 
-#: src/translations.h:306
+#: src/translations.h:322
 msgid "Christmas Island"
 msgstr "Pulau Christmas"
 
-#: src/translations.h:307
+#: src/translations.h:323
 msgid "Cyprus"
 msgstr "Cyprus"
 
-#: src/translations.h:308
+#: src/translations.h:324
 msgid "Czech Republic"
 msgstr "Republik Czech"
 
-#: src/translations.h:309
+#: src/translations.h:325
 msgid "Germany"
 msgstr "Jerman"
 
-#: src/translations.h:310
+#: src/translations.h:326
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: src/translations.h:311
+#: src/translations.h:327
 msgid "Denmark"
 msgstr "Denmark"
 
-#: src/translations.h:312
+#: src/translations.h:328
 msgid "Dominica"
 msgstr "Dominica"
 
-#: src/translations.h:313
+#: src/translations.h:329
 msgid "Dominican Republic"
 msgstr "Republik Dominica"
 
-#: src/translations.h:314
+#: src/translations.h:330
 msgid "Algeria"
 msgstr "Algeria"
 
-#: src/translations.h:315
+#: src/translations.h:331
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: src/translations.h:316
+#: src/translations.h:332
 msgid "Estonia"
 msgstr "Estonia"
 
-#: src/translations.h:317
+#: src/translations.h:333
 msgid "Egypt"
 msgstr "Mesir"
 
-#: src/translations.h:318
+#: src/translations.h:334
 msgid "Western Sahara"
 msgstr "Sahara Barat"
 
-#: src/translations.h:319
+#: src/translations.h:335
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: src/translations.h:320
+#: src/translations.h:336
 msgid "Spain"
 msgstr "Sepanyol"
 
-#: src/translations.h:321
+#: src/translations.h:337
 msgid "Ethiopia"
 msgstr "Ethiopia"
 
-#: src/translations.h:322
+#: src/translations.h:338
 msgid "Finland"
 msgstr "Finland"
 
-#: src/translations.h:323
+#: src/translations.h:339
 msgid "Fiji"
 msgstr "Fiji"
 
-#: src/translations.h:324
+#: src/translations.h:340
 msgid "Falkland Islands"
 msgstr "Kepulauan Falkland"
 
-#: src/translations.h:325
+#: src/translations.h:341
 msgid "Micronesia"
 msgstr "Micronesia"
 
-#: src/translations.h:326
+#: src/translations.h:342
 msgid "Faroe Islands"
 msgstr "Kepulauan Faroe"
 
-#: src/translations.h:327
+#: src/translations.h:343
 msgid "France"
 msgstr "Perancis"
 
-#: src/translations.h:328
+#: src/translations.h:344
 msgid "Gabon"
 msgstr "Gabon"
 
-#: src/translations.h:329
+#: src/translations.h:345
 msgid "United Kingdom"
 msgstr "United Kingdom"
 
-#: src/translations.h:330
+#: src/translations.h:346
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:331
+#: src/translations.h:347
 msgid "Georgia"
 msgstr "Georgia"
 
-#: src/translations.h:332
+#: src/translations.h:348
 msgid "French Guiana"
 msgstr "Guyana Perancis"
 
-#: src/translations.h:333
+#: src/translations.h:349
 msgid "Ghana"
 msgstr "Ghana"
 
-#: src/translations.h:334
+#: src/translations.h:350
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: src/translations.h:335
+#: src/translations.h:351
 msgid "Greenland"
 msgstr "Greenland"
 
-#: src/translations.h:336
+#: src/translations.h:352
 msgid "Gambia"
 msgstr "Gambia"
 
-#: src/translations.h:337
+#: src/translations.h:353
 msgid "Guinea"
 msgstr "Guinea"
 
-#: src/translations.h:338
+#: src/translations.h:354
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: src/translations.h:339
+#: src/translations.h:355
 msgid "Equatorial Guinea"
 msgstr "Guinea Khatulistiwa"
 
-#: src/translations.h:340
+#: src/translations.h:356
 msgid "Greece"
 msgstr "Yunani"
 
-#: src/translations.h:341
+#: src/translations.h:357
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Kepulauan Georgia Selatan dan Sandwich Selatan"
 
-#: src/translations.h:342
+#: src/translations.h:358
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:343
+#: src/translations.h:359
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:344
+#: src/translations.h:360
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
-#: src/translations.h:345
+#: src/translations.h:361
 msgid "Guyana"
 msgstr "Guyana"
 
-#: src/translations.h:346
+#: src/translations.h:362
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: src/translations.h:347
+#: src/translations.h:363
 msgid "Heard Island and McDonald Islands"
 msgstr "Kepulauan Heard dan Kepulauan McDonald"
 
-#: src/translations.h:348
+#: src/translations.h:364
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:349
+#: src/translations.h:365
 msgid "Croatia"
 msgstr "Croatia"
 
-#: src/translations.h:350
+#: src/translations.h:366
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:351
+#: src/translations.h:367
 msgid "Hungary"
 msgstr "Hungary"
 
-#: src/translations.h:352
+#: src/translations.h:368
 msgid "Indonesia"
 msgstr "Indonesia"
 
-#: src/translations.h:353
+#: src/translations.h:369
 msgid "Ireland"
 msgstr "Ireland"
 
-#: src/translations.h:354
+#: src/translations.h:370
 msgid "Israel"
 msgstr "Israel"
 
-#: src/translations.h:355
+#: src/translations.h:371
 msgid "India"
 msgstr "India"
 
-#: src/translations.h:356
+#: src/translations.h:372
 msgid "British Indian Ocean Territory"
 msgstr "Wilayah British Indian Ocean"
 
-#: src/translations.h:357
+#: src/translations.h:373
 msgid "Iraq"
 msgstr "Iraq"
 
-#: src/translations.h:358
+#: src/translations.h:374
 msgid "Iran"
 msgstr "Iran"
 
-#: src/translations.h:359
+#: src/translations.h:375
 msgid "Iceland"
 msgstr "Iceland"
 
-#: src/translations.h:360
+#: src/translations.h:376
 msgid "Italy"
 msgstr "Itali"
 
-#: src/translations.h:361
+#: src/translations.h:377
 msgid "Jamaica"
 msgstr "Jamaica"
 
-#: src/translations.h:362
+#: src/translations.h:378
 msgid "Jordan"
 msgstr "Jordan"
 
-#: src/translations.h:363
+#: src/translations.h:379
 msgid "Japan"
 msgstr "Jepun"
 
-#: src/translations.h:364
+#: src/translations.h:380
 msgid "Kenya"
 msgstr "Kenya"
 
-#: src/translations.h:365
+#: src/translations.h:381
 msgid "Kyrgyzstan"
 msgstr "Kyrgyzstan"
 
-#: src/translations.h:366
+#: src/translations.h:382
 msgid "Cambodia"
 msgstr "Kemboja"
 
-#: src/translations.h:367
+#: src/translations.h:383
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:368
+#: src/translations.h:384
 msgid "Comoros"
 msgstr "Comoros"
 
-#: src/translations.h:369
+#: src/translations.h:385
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts dan Nevis"
 
-#: src/translations.h:370
+#: src/translations.h:386
 msgid "Democratic People's Republic of Korea"
 msgstr "Republik Demokratik Rakyat Korea"
 
-#: src/translations.h:371
+#: src/translations.h:387
 msgid "Republic of Korea"
 msgstr "Republik Korea"
 
-#: src/translations.h:372
+#: src/translations.h:388
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: src/translations.h:373
+#: src/translations.h:389
 msgid "Cayman Islands"
 msgstr "Kepulauan Cayman"
 
-#: src/translations.h:374
+#: src/translations.h:390
 msgid "Kazakhstan"
 msgstr "Kazakhstan"
 
-#: src/translations.h:375
+#: src/translations.h:391
 msgid "Lao"
 msgstr "Lao"
 
-#: src/translations.h:376
+#: src/translations.h:392
 msgid "Lebanon"
 msgstr "Lubnan"
 
-#: src/translations.h:377
+#: src/translations.h:393
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
 
-#: src/translations.h:378
+#: src/translations.h:394
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: src/translations.h:379
+#: src/translations.h:395
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: src/translations.h:380
+#: src/translations.h:396
 msgid "Liberia"
 msgstr "Liberia"
 
-#: src/translations.h:381
+#: src/translations.h:397
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: src/translations.h:382
+#: src/translations.h:398
 msgid "Lithuania"
 msgstr "Lithuania"
 
-#: src/translations.h:383
+#: src/translations.h:399
 msgid "Luxembourg"
 msgstr "Luxembourg"
 
-#: src/translations.h:384
+#: src/translations.h:400
 msgid "Latvia"
 msgstr "Latvia"
 
-#: src/translations.h:385
+#: src/translations.h:401
 msgid "Libyan Arab Jamahiriya"
 msgstr "Jamahiriya Arab Libya"
 
-#: src/translations.h:386
+#: src/translations.h:402
 msgid "Morocco"
 msgstr "Maghribi"
 
-#: src/translations.h:387
+#: src/translations.h:403
 msgid "Monaco"
 msgstr "Monaco"
 
-#: src/translations.h:388
+#: src/translations.h:404
 msgid "Moldova"
 msgstr "Moldova"
 
-#: src/translations.h:389
+#: src/translations.h:405
 msgid "Madagascar"
 msgstr "Madagascar"
 
-#: src/translations.h:390
+#: src/translations.h:406
 msgid "Marshall Islands"
 msgstr "Kepulauan Marshall"
 
-#: src/translations.h:391
+#: src/translations.h:407
 msgid "Macedonia"
 msgstr "Macedonia"
 
-#: src/translations.h:392
+#: src/translations.h:408
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:393
+#: src/translations.h:409
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: src/translations.h:394
+#: src/translations.h:410
 msgid "Mongolia"
 msgstr "Mongolia"
 
-#: src/translations.h:395
+#: src/translations.h:411
 msgid "Macau"
 msgstr "Macau"
 
-#: src/translations.h:396
+#: src/translations.h:412
 msgid "Northern Mariana Islands"
 msgstr "Kepulauan Mariana Utara"
 
-#: src/translations.h:397
+#: src/translations.h:413
 msgid "Martinique"
 msgstr "Martinique"
 
-#: src/translations.h:398
+#: src/translations.h:414
 msgid "Mauritania"
 msgstr "Mauritania"
 
-#: src/translations.h:399
+#: src/translations.h:415
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:400
+#: src/translations.h:416
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:401
+#: src/translations.h:417
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: src/translations.h:402
+#: src/translations.h:418
 msgid "Maldives"
 msgstr "Maldives"
 
-#: src/translations.h:403
+#: src/translations.h:419
 msgid "Malawi"
 msgstr "Malawi"
 
-#: src/translations.h:404
+#: src/translations.h:420
 msgid "Mexico"
 msgstr "Mexico"
 
-#: src/translations.h:405
+#: src/translations.h:421
 msgid "Malaysia"
 msgstr "Malaysia"
 
-#: src/translations.h:406
+#: src/translations.h:422
 msgid "Mozambique"
 msgstr "Mozambique"
 
-#: src/translations.h:407
+#: src/translations.h:423
 msgid "Namibia"
 msgstr "Namibia"
 
-#: src/translations.h:408
+#: src/translations.h:424
 msgid "New Caledonia"
 msgstr "New Caledonia"
 
-#: src/translations.h:409
+#: src/translations.h:425
 msgid "Niger"
 msgstr "Niger"
 
-#: src/translations.h:410
+#: src/translations.h:426
 msgid "Norfolk Island"
 msgstr "Kepulauan Norfolk"
 
-#: src/translations.h:411
+#: src/translations.h:427
 msgid "Nigeria"
 msgstr "Nigeria"
 
-#: src/translations.h:412
+#: src/translations.h:428
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: src/translations.h:413
+#: src/translations.h:429
 msgid "Netherlands"
 msgstr "Belanda"
 
-#: src/translations.h:414
+#: src/translations.h:430
 msgid "Norway"
 msgstr "Norway"
 
-#: src/translations.h:415
+#: src/translations.h:431
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:416
+#: src/translations.h:432
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:417
+#: src/translations.h:433
 msgid "Niue"
 msgstr "Niue"
 
-#: src/translations.h:418
+#: src/translations.h:434
 msgid "New Zealand"
 msgstr "New Zealand"
 
-#: src/translations.h:419
+#: src/translations.h:435
 msgid "Oman"
 msgstr "Oman"
 
-#: src/translations.h:420
+#: src/translations.h:436
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:421
+#: src/translations.h:437
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:422
+#: src/translations.h:438
 msgid "French Polynesia"
 msgstr "Polinesia Perancis"
 
-#: src/translations.h:423
+#: src/translations.h:439
 msgid "Papua New Guinea"
 msgstr "Papua New Guinea"
 
-#: src/translations.h:424
+#: src/translations.h:440
 msgid "Philippines"
 msgstr "Filipina"
 
-#: src/translations.h:425
+#: src/translations.h:441
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: src/translations.h:426
+#: src/translations.h:442
 msgid "Poland"
 msgstr "Poland"
 
-#: src/translations.h:427
+#: src/translations.h:443
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre dan Miquelon"
 
-#: src/translations.h:428
+#: src/translations.h:444
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: src/translations.h:429
+#: src/translations.h:445
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: src/translations.h:430
+#: src/translations.h:446
 msgid "Palestinian Territories"
 msgstr "Wilayah Palastin"
 
-#: src/translations.h:431
+#: src/translations.h:447
 msgid "Portugal"
 msgstr "Portugis"
 
-#: src/translations.h:432
+#: src/translations.h:448
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:433
+#: src/translations.h:449
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:434
+#: src/translations.h:450
 msgid "Qatar"
 msgstr "Qatar"
 
-#: src/translations.h:435
+#: src/translations.h:451
 msgid "Réunion"
 msgstr "Réunion"
 
-#: src/translations.h:436
+#: src/translations.h:452
 msgid "Romania"
 msgstr "Romania"
 
-#: src/translations.h:437
+#: src/translations.h:453
 msgid "Serbia"
 msgstr "Serbia"
 
-#: src/translations.h:438
+#: src/translations.h:454
 msgid "Russian Federation"
 msgstr "Persekutuan Rusia"
 
-#: src/translations.h:439
+#: src/translations.h:455
 msgid "Rwanda"
 msgstr "Rwanda"
 
-#: src/translations.h:440
+#: src/translations.h:456
 msgid "Saudi Arabia"
 msgstr "Arab Saudi"
 
-#: src/translations.h:441
+#: src/translations.h:457
 msgid "Solomon Islands"
 msgstr "Kepulauan Solomon"
 
-#: src/translations.h:442
+#: src/translations.h:458
 msgid "Seychelles"
 msgstr "Seychelles"
 
-#: src/translations.h:443
+#: src/translations.h:459
 msgid "Sudan"
 msgstr "Sudan"
 
-#: src/translations.h:444
+#: src/translations.h:460
 msgid "Sweden"
 msgstr "Sweden"
 
-#: src/translations.h:445
+#: src/translations.h:461
 msgid "Singapore"
 msgstr "Singapura"
 
-#: src/translations.h:446
+#: src/translations.h:462
 msgid "Saint Helena"
 msgstr "Saint Helena"
 
-#: src/translations.h:447
+#: src/translations.h:463
 msgid "Slovenia"
 msgstr "Slovenia"
 
-#: src/translations.h:448
+#: src/translations.h:464
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard dan Jan Mayen"
 
-#: src/translations.h:449
+#: src/translations.h:465
 msgid "Slovakia"
 msgstr "Slovakia"
 
-#: src/translations.h:450
+#: src/translations.h:466
 msgid "Sierra Leone"
 msgstr "Siera Leon"
 
-#: src/translations.h:451
+#: src/translations.h:467
 msgid "San Marino"
 msgstr "San Marino"
 
-#: src/translations.h:452
+#: src/translations.h:468
 msgid "Senegal"
 msgstr "Senegal"
 
-#: src/translations.h:453
+#: src/translations.h:469
 msgid "Somalia"
 msgstr "Somalia"
 
-#: src/translations.h:454
+#: src/translations.h:470
 msgid "Suriname"
 msgstr "Surinam"
 
-#: src/translations.h:455
+#: src/translations.h:471
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome dan Principe"
 
-#: src/translations.h:456
+#: src/translations.h:472
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: src/translations.h:457
+#: src/translations.h:473
 msgid "Syrian Arab Republic"
 msgstr "Republik Arab Syria"
 
-#: src/translations.h:458
+#: src/translations.h:474
 msgid "Swaziland"
 msgstr "Swaziland"
 
-#: src/translations.h:459
+#: src/translations.h:475
 msgid "Turks and Caicos Islands"
 msgstr "Kepulauan Turks dan Caicos"
 
-#: src/translations.h:460
+#: src/translations.h:476
 msgid "Chad"
 msgstr "Chad"
 
-#: src/translations.h:461
+#: src/translations.h:477
 msgid "French Southern Territories"
 msgstr "Wilayah Selatan Perancis"
 
-#: src/translations.h:462
+#: src/translations.h:478
 msgid "Togo"
 msgstr "Togo"
 
-#: src/translations.h:463
+#: src/translations.h:479
 msgid "Thailand"
 msgstr "Thailand"
 
-#: src/translations.h:464
+#: src/translations.h:480
 msgid "Tajikistan"
 msgstr "Tajikistan"
 
-#: src/translations.h:465
+#: src/translations.h:481
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:466
+#: src/translations.h:482
 msgid "East Timor"
 msgstr "Timor Timur"
 
-#: src/translations.h:467
+#: src/translations.h:483
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-#: src/translations.h:468
+#: src/translations.h:484
 msgid "Tunisia"
 msgstr "Tunisia"
 
-#: src/translations.h:469
+#: src/translations.h:485
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:470
+#: src/translations.h:486
 msgid "Turkey"
 msgstr "Turki"
 
-#: src/translations.h:471
+#: src/translations.h:487
 msgid "Trinidad and Tobago"
 msgstr "Trinidad dan Tobago"
 
-#: src/translations.h:472
+#: src/translations.h:488
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:473
+#: src/translations.h:489
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: src/translations.h:474
+#: src/translations.h:490
 msgid "Tanzania"
 msgstr "Tanzania"
 
-#: src/translations.h:475
+#: src/translations.h:491
 msgid "Ukraine"
 msgstr "Ukraine"
 
-#: src/translations.h:476
+#: src/translations.h:492
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:477
+#: src/translations.h:493
 msgid "United States Minor Outlying Islands"
 msgstr "Kepulauan Luar Minor Amerika Syarikat"
 
-#: src/translations.h:478
+#: src/translations.h:494
 msgid "United States"
 msgstr "Amerika Syarikat"
 
-#: src/translations.h:479
+#: src/translations.h:495
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:480
+#: src/translations.h:496
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
-#: src/translations.h:481
+#: src/translations.h:497
 msgid "Vatican City State"
 msgstr "Negara Bandar Vatican"
 
-#: src/translations.h:482
+#: src/translations.h:498
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent dan Grenadines"
 
-#: src/translations.h:483
+#: src/translations.h:499
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:484
+#: src/translations.h:500
 msgid "British Virgin Islands"
 msgstr "Kepulauan Virgin Britain"
 
-#: src/translations.h:485
+#: src/translations.h:501
 msgid "United States Virgin Islands"
 msgstr "Kepulauan Virgin Amerika Syarikat"
 
-#: src/translations.h:486
+#: src/translations.h:502
 msgid "Viet Nam"
 msgstr "Viet Nam"
 
-#: src/translations.h:487
+#: src/translations.h:503
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:488
+#: src/translations.h:504
 msgid "Wallis and Futuna"
 msgstr "Wallis dan Futuna"
 
-#: src/translations.h:489
+#: src/translations.h:505
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:490
+#: src/translations.h:506
 msgid "Yemen"
 msgstr "Yaman"
 
-#: src/translations.h:491
+#: src/translations.h:507
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: src/translations.h:492
+#: src/translations.h:508
 msgid "Yugoslavia"
 msgstr "Yugoslavia"
 
-#: src/translations.h:493
+#: src/translations.h:509
 msgid "South Africa"
 msgstr "Afrika Selatan"
 
-#: src/translations.h:494
+#: src/translations.h:510
 msgid "Zambia"
 msgstr "Zambia"
 
-#: src/translations.h:495
+#: src/translations.h:511
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
-#: src/translations.h:502 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+#: src/translations.h:518 src/ui_dateTimeDialogGui.h:298
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Date and Time"
 msgstr "Tarikh dan Masa"
 
-#: src/translations.h:503
+#: src/translations.h:519
 msgid "Add 1 sidereal day"
 msgstr "Tambah 1 hari ikut bintang"
 
-#: src/translations.h:504
+#: src/translations.h:520
 msgid "Add 1 sidereal month"
 msgstr "Tambah 1 bulan ikut bintang"
 
-#: src/translations.h:505
+#: src/translations.h:521
 msgid "Add 1 sidereal week"
 msgstr "Tambah 1 minggu ikut bintang"
 
-#: src/translations.h:506
+#: src/translations.h:522
 msgid "Add 1 sidereal year"
 msgstr "Tambah 1 tahun ikut bintang"
 
-#: src/translations.h:507
+#: src/translations.h:523
+msgid "Add 1 sidereal century"
+msgstr "Tambah  1 abad ikut bintang"
+
+#: src/translations.h:524
 msgid "Add 1 solar day"
 msgstr "Tambah 1 hari solar"
 
-#: src/translations.h:508
+#: src/translations.h:525
 msgid "Add 1 solar hour"
 msgstr "Tambah 1 jam solar"
 
-#: src/translations.h:509
+#: src/translations.h:526
 msgid "Add 1 solar week"
 msgstr "Tambah 1 minggu solar"
 
-#: src/translations.h:510
+#: src/translations.h:527
 msgid "Add 1 synodic month"
 msgstr "Tambah 1 bulan qamari"
 
-#: src/translations.h:511
+#: src/translations.h:528
 msgid "Add 1 draconic month"
 msgstr "Tambah 1 bulan drakonik"
 
-#: src/translations.h:512
+#: src/translations.h:529
 msgid "Add 1 anomalistic month"
 msgstr "Tambah 1 bulan anomali"
 
-#: src/translations.h:513
+#: src/translations.h:530
 msgid "Add 1 mean tropical month"
 msgstr "Tambah 1 bulan min tropika"
 
-#: src/translations.h:514
+#: src/translations.h:531
 msgid "Add 1 draconic year"
 msgstr "Tambah 1 tahun drakonik"
 
-#: src/translations.h:515
+#: src/translations.h:532
 msgid "Add 1 mean tropical year"
 msgstr "Tambah 1 tahun min tropika"
 
-#: src/translations.h:516
+#: src/translations.h:533
+msgid "Add 1 mean tropical century"
+msgstr "Tambah 1 abad tropika min"
+
+#: src/translations.h:534
 msgid "Slow down the script execution rate"
 msgstr "Lambatkan kadar perlakuan skrip"
 
-#: src/translations.h:517
+#: src/translations.h:535
 msgid "Decrease time speed"
 msgstr "Kurangkan kelajuan masa"
 
-#: src/translations.h:518
+#: src/translations.h:536
 msgid "Decrease time speed (a little)"
 msgstr "Kurangkan kelajuan masa (sedikit)"
 
-#: src/translations.h:519
+#: src/translations.h:537
 msgid "Speed up the script execution rate"
 msgstr "Lajukan kadar perlakuan skrip"
 
-#: src/translations.h:520
+#: src/translations.h:538
 msgid "Increase time speed"
 msgstr "Cepatkan kelajuan masa"
 
-#: src/translations.h:521
+#: src/translations.h:539
 msgid "Increase time speed (a little)"
 msgstr "Tingkatkan kelajuan masa (sedikit)"
 
-#: src/translations.h:522
+#: src/translations.h:540
 msgid "Pause script execution"
 msgstr "Jeda pelakuan skrip"
 
-#: src/translations.h:523
+#: src/translations.h:541
 msgid "Resume script execution"
 msgstr "Sambung semula pelakuan skrip"
 
-#: src/translations.h:524
+#: src/translations.h:542
 msgid "Set time to now"
 msgstr "Tetapkan masa sekarang"
 
-#: src/translations.h:525
+#: src/translations.h:543
 msgid "Set the normal script execution rate"
 msgstr "Tetapkan kadar perlakuan skrip normal"
 
-#: src/translations.h:526
+#: src/translations.h:544
 msgid "Set normal time rate"
 msgstr "Tetapkan kadar normal masa"
 
-#: src/translations.h:527
+#: src/translations.h:545
 msgid "Set time rate to zero"
 msgstr "Tetapkan kadar masa kepada kosong"
 
-#: src/translations.h:528
+#: src/translations.h:546
 msgid "Stop script execution"
 msgstr "Henti pelakuan skrip"
 
-#: src/translations.h:529
+#: src/translations.h:547
 msgid "Subtract 1 sidereal day"
 msgstr "Tolak 1 hari ikut bintang"
 
-#: src/translations.h:530
+#: src/translations.h:548
 msgid "Subtract 1 sidereal month"
 msgstr "Tolak 1 bulan tolak bintang"
 
-#: src/translations.h:531
+#: src/translations.h:549
 msgid "Subtract 1 sidereal week"
 msgstr "Tolak 1 minggu ikut bintang"
 
-#: src/translations.h:532
+#: src/translations.h:550
 msgid "Subtract 1 sidereal year"
 msgstr "Tolak 1 tahun ikut bintang"
 
-#: src/translations.h:533
+#: src/translations.h:551
+msgid "Subtract 1 sidereal century"
+msgstr "Tolak 1 abad ikut bintang"
+
+#: src/translations.h:552
 msgid "Subtract 1 solar day"
 msgstr "Tolak 1 hari solar"
 
-#: src/translations.h:534
+#: src/translations.h:553
 msgid "Subtract 1 solar hour"
 msgstr "Tolak 1 jam solar"
 
-#: src/translations.h:535
+#: src/translations.h:554
 msgid "Subtract 1 solar week"
 msgstr "Tolah 1 minggu solar"
 
-#: src/translations.h:536
+#: src/translations.h:555
 msgid "Subtract 1 synodic month"
 msgstr "Tolak 1 bulan qamari"
 
-#: src/translations.h:537
+#: src/translations.h:556
 msgid "Subtract 1 draconic month"
 msgstr "Tolak 1 bulan drakonik"
 
-#: src/translations.h:538
+#: src/translations.h:557
 msgid "Subtract 1 anomalistic month"
 msgstr "Tolak 1 bulan anomali"
 
-#: src/translations.h:539
+#: src/translations.h:558
 msgid "Subtract 1 mean tropical month"
 msgstr "Tolak 1 bulan min tropika"
 
-#: src/translations.h:540
+#: src/translations.h:559
 msgid "Subtract 1 draconic year"
 msgstr "Tolak 1 tahun drakonik"
 
-#: src/translations.h:541
+#: src/translations.h:560
 msgid "Subtract 1 mean tropical year"
 msgstr "Tolak 1 tahun min tropika"
 
+#: src/translations.h:561
+msgid "Subtract 1 mean tropical century"
+msgstr "Tolak 1 abad tropika min"
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:544
+#: src/translations.h:564
 msgid "Display Options"
 msgstr "Pilihan Paparan"
 
-#: src/translations.h:545
+#: src/translations.h:565
 msgid "Flip scene horizontally"
 msgstr "Kalih pandangan secara mendatar"
 
-#: src/translations.h:546
+#: src/translations.h:566
 msgid "Full-screen mode"
 msgstr "Mod Skrin penuh"
 
-#: src/translations.h:547 src/ui_viewDialog.h:1130
+#: src/translations.h:567 src/ui_viewDialog.h:1135
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/translations.h:548 src/ui_viewDialog.h:1159
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:318
+#: src/translations.h:568 src/ui_viewDialog.h:1159
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Grid azimut"
 
-#: src/translations.h:549 src/ui_viewDialog.h:1181
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
+#: src/translations.h:569 src/ui_viewDialog.h:1181
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Titil Kardinal"
 
-#: src/translations.h:550
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:281
+#: src/translations.h:570
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "Seni Buruj"
 
-#: src/translations.h:551
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:282
+#: src/translations.h:571
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "Sempadan Buruj"
 
-#: src/translations.h:552
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
+#: src/translations.h:572
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "Label Buruj"
 
-#: src/translations.h:553
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+#: src/translations.h:573
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "Garis Buruj"
 
-#: src/translations.h:554
+#: src/translations.h:574
 msgid "Nebulas background images"
 msgstr "Imej latar belakang nebula"
 
-#: src/translations.h:555 src/ui_viewDialog.h:1158
+#: src/translations.h:575 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr "Grid Ekliptik J2000"
 
-#: src/translations.h:556
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
+#: src/translations.h:576
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "Garis Ekliptik"
 
-#: src/translations.h:557
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:333
+#: src/translations.h:577
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "Garis khatulistiwa"
 
-#: src/translations.h:558 src/ui_viewDialog.h:1157
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:323
+#: src/translations.h:578 src/ui_viewDialog.h:1157
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Grid Khatulistiwa"
 
-#: src/translations.h:559 src/ui_viewDialog.h:1156
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:328
+#: src/translations.h:579 src/ui_viewDialog.h:1156
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Grid khatulistiwa J2000"
 
-#: src/translations.h:560
+#: src/translations.h:580
 msgid "Fog"
 msgstr "Kabus"
 
-#: src/translations.h:561 src/ui_viewDialog.h:1160
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+#: src/translations.h:581 src/ui_viewDialog.h:1160
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Grid Galaksi"
 
-#: src/translations.h:562 src/ui_viewDialog.h:1180
+#: src/translations.h:582 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Satah galaktik"
 
-#: src/translations.h:563
+#: src/translations.h:583
 msgid "Ground"
 msgstr "Tanah"
 
-#: src/translations.h:564
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: src/translations.h:584
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr "Garis horizon"
 
-#: src/translations.h:565
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
+#: src/translations.h:585
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "Garis Meridian"
 
-#: src/translations.h:566 src/ui_viewDialog.h:1139
+#: src/translations.h:586 src/ui_viewDialog.h:1144
 msgid "Nebulas"
 msgstr "Nebula"
 
-#: src/translations.h:567
+#: src/translations.h:587
 msgid "Night mode"
 msgstr "Mod Malam"
 
-#: src/translations.h:568
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: src/translations.h:588
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "Label planet"
 
-#: src/translations.h:569
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: src/translations.h:589
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "Orbit planet"
 
-#: src/translations.h:570
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
+#: src/translations.h:590
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "Jejak planet"
 
-#: src/translations.h:571 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:237
+#: src/translations.h:591 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Bintang"
 
-#: src/translations.h:572
+#: src/translations.h:592
 msgid "Stars labels"
 msgstr "Label bintang"
 
-#: src/translations.h:573
+#: src/translations.h:593
 msgid "Flip scene vertically"
 msgstr "Kalih pandangan secara menegak"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:576
+#: src/translations.h:596
 msgid "Miscellaneous"
 msgstr "Pelbagai"
 
-#: src/translations.h:577
+#: src/translations.h:597
 msgid "Auto hide horizontal button bar"
 msgstr "Sembunyi secara automatik butang palang melintang"
 
-#: src/translations.h:578
+#: src/translations.h:598
 msgid "Auto hide vertical button bar"
 msgstr "Sembunyi secara automatik butang palang menengak"
 
-#: src/translations.h:579
+#: src/translations.h:599
 msgid "Go to home"
 msgstr "Pergi ke rumah"
 
-#: src/translations.h:580
+#: src/translations.h:600
 msgid "Quit"
 msgstr "Keluar"
 
-#: src/translations.h:581
+#: src/translations.h:601
 msgid "Copy selected object information to clipboard"
 msgstr "salin informasi objek"
 
-#: src/translations.h:582
+#: src/translations.h:602
 msgid "Save screenshot"
 msgstr "Simpan cekupan skrin"
 
-#: src/translations.h:583
+#: src/translations.h:603
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Tukar diantara peletakan khatulistiwa dan azimut"
 
-#: src/translations.h:584
+#: src/translations.h:604
 msgid "Toggle visibility of GUI"
 msgstr "Togol ketampakan GUI"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:587
+#: src/translations.h:607
 msgid "Movement and Selection"
 msgstr "Pergerakan dan Pilihan"
 
-#: src/translations.h:588
+#: src/translations.h:608
 msgid "Center on selected object"
 msgstr "Tengahkan objek pilihan"
 
-#: src/translations.h:589
+#: src/translations.h:609
 msgid "Set home planet to selected planet"
 msgstr "Tetapkan planet rumah kepada planet pilihan"
 
-#: src/translations.h:590
+#: src/translations.h:610
 msgid "Track object"
 msgstr "Jejak objek"
 
-#: src/translations.h:591
+#: src/translations.h:611
 msgid "Zoom in on selected object"
 msgstr "Zum ke dalam objek yang dipilih"
 
-#: src/translations.h:592
+#: src/translations.h:612
 msgid "Zoom out"
 msgstr "Zum keluar"
 
-#: src/translations.h:595
+#: src/translations.h:615
 msgid "Angle measure"
 msgstr "Ukuran sudut"
 
-#: src/translations.h:598
+#: src/translations.h:618
 msgid "Compass marks"
 msgstr "Tanda kompas"
 
-#: src/translations.h:601
+#: src/translations.h:621
 msgid "Show exoplanets"
 msgstr "Papar exoplanet"
 
-#: src/translations.h:602
+#: src/translations.h:622
 msgid "Exoplanets configuration window"
 msgstr "Tetingkap konfigurasi eksoplanet"
 
-#: src/translations.h:605
+#: src/translations.h:625
 msgid "Observability"
 msgstr "Ketercerapan"
 
-#: src/translations.h:606
+#: src/translations.h:626
 msgid "Observability configuration window"
 msgstr "Tetingkap konfigurasi ketercerapan"
 
-#: src/translations.h:609
+#: src/translations.h:629
 msgid "Oculars plugin configuration"
 msgstr "Konfigurasi pemalam okular"
 
-#: src/translations.h:610 plugins/Oculars/src/ui_ocularDialog.h:860
+#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:860
 msgid "Ocular view"
 msgstr "Paparan okular"
 
-#: src/translations.h:611
+#: src/translations.h:631
 msgid "Show crosshairs"
 msgstr "Papar rerambut silang"
 
-#: src/translations.h:612
+#: src/translations.h:632
 msgid "Oculars popup menu"
 msgstr "Menu timbul okular"
 
-#: src/translations.h:613
+#: src/translations.h:633
 msgid "Image sensor frame"
 msgstr "Bingkai penderia imej"
 
-#: src/translations.h:614
+#: src/translations.h:634
 msgid "Telrad sight"
 msgstr "Pandangan telrad"
 
-#: src/translations.h:617
+#: src/translations.h:637
 msgid "Pulsars configuration window"
 msgstr "Tetingkap konfigurasi pulsar"
 
-#: src/translations.h:620
+#: src/translations.h:640
 msgid "Quasars configuration window"
 msgstr "Tetingkap konfigurasi Kuasar"
 
-#: src/translations.h:623
+#: src/translations.h:643
 msgid "Satellites configuration window"
 msgstr "Tetingkap konfigurasi satelit"
 
-#: src/translations.h:624
+#: src/translations.h:644
 msgid "Satellite hints"
 msgstr "Pembayang satelit"
 
-#: src/translations.h:625
+#: src/translations.h:645
 msgid "Satellite labels"
 msgstr "Label satelit"
 
-#: src/translations.h:628
+#: src/translations.h:648
 msgid "Historical Supernovae configuration window"
 msgstr "Tetingkap konfigurasi Supernova bersejarah"
 
-#: src/translations.h:631
+#: src/translations.h:651
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Alih teleskop ke kedudukan koordinat yang diberikan"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:634 src/ui_configurationDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: src/translations.h:654 src/ui_configurationDialog.h:1121
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Skrip"
 
-#: src/translations.h:635
+#: src/translations.h:655
 msgid "Run landscapes script from file"
 msgstr "Jalankan skrip landskap dari fail"
 
-#: src/translations.h:636
+#: src/translations.h:656
 msgid "Show and zoom Moon"
 msgstr "Papar dan zum Bulan"
 
-#: src/translations.h:640
+#: src/translations.h:660
 msgid "Configuration window"
 msgstr "Tetingkap Konfigurasi"
 
-#: src/translations.h:641
+#: src/translations.h:661
 msgid "Date/time window"
 msgstr "Tetingkap tarikh/masa"
 
-#: src/translations.h:642
+#: src/translations.h:662
 msgid "Help window"
 msgstr "Tetingkap Bantuan"
 
-#: src/translations.h:643
+#: src/translations.h:663
 msgid "Location window"
 msgstr "Tetingkap lokasi"
 
-#: src/translations.h:645
+#: src/translations.h:665
 msgid "Search window"
 msgstr "Tetingkap Gelintar"
 
-#: src/translations.h:646
+#: src/translations.h:666
 msgid "Shortcuts window"
 msgstr "Tetingkap pintasan"
 
-#: src/translations.h:647
+#: src/translations.h:667
 msgid "Sky and viewing options window"
 msgstr "Tetingkap pilihan pandangan dan langit"
-
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
 
 #: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3008,7 +3059,7 @@ msgid "Refresh"
 msgstr "Segar Semula"
 
 #: src/ui_locationDialogGui.h:389
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Location"
 msgstr "Lokasi"
 
@@ -3035,7 +3086,7 @@ msgid "Add to list"
 msgstr "Tambah dalam senarai"
 
 #: src/ui_locationDialogGui.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
 msgid "Latitude:"
 msgstr "Latitud:"
 
@@ -3048,12 +3099,12 @@ msgstr ""
 "contoh: +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Longitude:"
 msgstr "Longitud:"
 
 #: src/ui_locationDialogGui.h:406
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
 msgid "Altitude:"
 msgstr "Altitud:"
 
@@ -3229,127 +3280,107 @@ msgstr "Gelintar dalam senarai..."
 msgid "Lists"
 msgstr "Senarai"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1106
 msgid "View"
 msgstr "Papar"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1112
 msgid "Sky"
 msgstr "Langit"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1114
 msgid "Markings"
 msgstr "Penanda"
 
-#: src/ui_viewDialog.h:1111
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+#: src/ui_viewDialog.h:1116
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "Landskap"
 
-#: src/ui_viewDialog.h:1113
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
+#: src/ui_viewDialog.h:1118
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "Peribudaya Bintang"
 
-#: src/ui_viewDialog.h:1117
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:250
+#: src/ui_viewDialog.h:1122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "Skala Mutlak:"
 
-#: src/ui_viewDialog.h:1118
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
+#: src/ui_viewDialog.h:1123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "Skala Relatif:"
 
-#: src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:256
+#: src/ui_viewDialog.h:1124
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "Kerlipan:"
 
-#: src/ui_viewDialog.h:1121
+#: src/ui_viewDialog.h:1126
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Malapkan bintang samar bila objek yang sangat cerah kelihatan"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1128
 msgid "Dynamic eye adaptation"
 msgstr "Penyesuaian mata secara dinamik"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1129
 msgid "Planets and satellites"
 msgstr "Planet dan satelit"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1130
 msgid "Show planets"
 msgstr "Papar planet"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1131
 msgid "Show planet markers"
 msgstr "Papar penanda planet"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1132
 msgid "Show planet orbits"
 msgstr "Papar orbit planet"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1133
 msgid "Simulate light speed"
 msgstr "Simulasikan kelajuan cahaya"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1134
 msgid "Scale Moon"
 msgstr "Skalakan Bulan"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1136
 msgid "Show atmosphere"
 msgstr "Papar atmsofera"
 
-#: src/ui_viewDialog.h:1132
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:393
+#: src/ui_viewDialog.h:1137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "Pencemaran cahaya:"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1139
 msgid "pressure, temperature, extinction coefficient"
 msgstr "tekanan, suhu, pemalar kepupusan"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1141
 msgid "Refraction/Extinction settings..."
 msgstr "Tetapan Pembiasan/Kepupusan"
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1142
 msgid "Labels and Markers"
 msgstr "Label dan Penanda"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1145
 msgid "Planets"
 msgstr "Planet"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1146
 msgid "Shooting Stars"
 msgstr "Tahi Bintang"
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1147
 msgid "Hourly zenith rate:"
 msgstr "Kadar zenit mengikut jam:"
-
-#: src/ui_viewDialog.h:1143
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:1144
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:1145
-msgid "80"
-msgstr "80"
-
-#: src/ui_viewDialog.h:1146
-msgid "10000"
-msgstr "10000"
-
-#: src/ui_viewDialog.h:1147
-msgid "144000"
-msgstr "144000"
 
 #: src/ui_viewDialog.h:1149
 msgid "Constellations"
@@ -3373,7 +3404,7 @@ msgstr "Papar seni"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1154
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:288
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "Kecerahan seni:"
 
@@ -3509,6 +3540,10 @@ msgid "Display no information"
 msgstr "Jangan paparkan maklumat"
 
 #: src/ui_configurationDialog.h:972
+#: plugins/Observability/src/Observability.cpp:628
+#: plugins/Observability/src/Observability.cpp:629
+#: plugins/Observability/src/Observability.cpp:631
+#: plugins/Observability/src/Observability.cpp:632
 msgid "None"
 msgstr "Tiada"
 
@@ -3631,7 +3666,7 @@ msgid "Enable mouse navigation"
 msgstr "Benarkan pandu arah tetikus"
 
 #: src/ui_configurationDialog.h:1026
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Startup date and time"
 msgstr "Tarikh dan masa permulaan"
 
@@ -4022,132 +4057,132 @@ msgstr ""
 msgid "Please select an object before switching to ocular view."
 msgstr "Sila pilih objek sebelum menukar ke paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:831
+#: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
 msgstr "Okular &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:832
+#: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
 msgstr "Okular &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:833
+#: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
 msgstr "Pilih o&kular"
 
-#: plugins/Oculars/src/Oculars.cpp:878
+#: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
 msgstr "Togol reramb&ut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:887
+#: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
 msgstr "Konfigur &Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:896
+#: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
 msgstr "Togol &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:904
+#: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
 msgstr "Togol Tel&rad"
 
-#: plugins/Oculars/src/Oculars.cpp:914
+#: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
 msgstr "CCD &Terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:915
+#: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
 msgstr "CCD &Berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:916
+#: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
 msgstr "&Pilih CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:938
+#: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
 msgstr "P&utar CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:970
+#: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
 msgstr "T&etap semula putaran"
 
-#: plugins/Oculars/src/Oculars.cpp:1443
+#: plugins/Oculars/src/Oculars.cpp:1451
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1448
+#: plugins/Oculars/src/Oculars.cpp:1456
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1462
+#: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "JF Ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1469
+#: plugins/Oculars/src/Oculars.cpp:1477
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV Ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1479 plugins/Oculars/src/Oculars.cpp:1536
+#: plugins/Oculars/src/Oculars.cpp:1487 plugins/Oculars/src/Oculars.cpp:1544
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1484 plugins/Oculars/src/Oculars.cpp:1541
+#: plugins/Oculars/src/Oculars.cpp:1492 plugins/Oculars/src/Oculars.cpp:1549
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1495
+#: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Pembesaran: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1503
+#: plugins/Oculars/src/Oculars.cpp:1511
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1513
+#: plugins/Oculars/src/Oculars.cpp:1521
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensi: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1518
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Penderia #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1522
+#: plugins/Oculars/src/Oculars.cpp:1530
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Penderia #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1731
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1732
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Previous telescope"
 msgstr "Teleskop &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1733
+#: plugins/Oculars/src/Oculars.cpp:1741
 msgid "&Next telescope"
 msgstr "Teleskop &berikutnya"
 
@@ -4243,7 +4278,7 @@ msgstr "Pemalam Okular"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:111
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "Versi"
 
@@ -4362,7 +4397,7 @@ msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Guna darjah dan minit untuk FOV CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "Am"
 
@@ -4461,7 +4496,7 @@ msgstr "Kalih menegak"
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
-#: plugins/Observability/src/ui_ObservabilityDialog.h:357
+#: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Perihal"
@@ -4493,59 +4528,63 @@ msgstr "Katalog #"
 msgid "International Designator"
 msgstr "Pereka Antarabangsa"
 
+#: plugins/Satellites/src/Satellite.cpp:244
+msgid "artificial satellite"
+msgstr "satelit tiruan"
+
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:249
+#: plugins/Satellites/src/Satellite.cpp:254
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Julat (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Kadar julat (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:260
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Altitud (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:258
+#: plugins/Satellites/src/Satellite.cpp:263
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Sub-Titik (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:272
+#: plugins/Satellites/src/Satellite.cpp:277
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Koordinat EME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:280
+#: plugins/Satellites/src/Satellite.cpp:285
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Kelajuan TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:288
+#: plugins/Satellites/src/Satellite.cpp:293
 msgid "The satellite and the observer are in sunlight."
 msgstr "Satelit dan pemerhati dalam sinaran matahari."
 
-#: plugins/Satellites/src/Satellite.cpp:291
+#: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is visible."
 msgstr "Satelit kelihatan."
 
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:299
 msgid "The satellite is eclipsed."
 msgstr "Satelit bergerak secara elips."
 
-#: plugins/Satellites/src/Satellite.cpp:297
+#: plugins/Satellites/src/Satellite.cpp:302
 msgid "The satellite is not visible"
 msgstr "Satelit tidak kelihatan"
 
-#: plugins/Satellites/src/Satellite.cpp:323
+#: plugins/Satellites/src/Satellite.cpp:328
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
@@ -4954,7 +4993,7 @@ msgstr "Panjang lenyap:"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
-#: plugins/Observability/src/ui_ObservabilityDialog.h:347
+#: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
 msgstr "Pulih tetapan lalai"
 
@@ -4963,7 +5002,7 @@ msgstr "Pulih tetapan lalai"
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
-#: plugins/Observability/src/ui_ObservabilityDialog.h:348
+#: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Save settings as default"
 msgstr "Simpan tetapan  sebagai lalai"
 
@@ -4972,7 +5011,7 @@ msgstr "Simpan tetapan  sebagai lalai"
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
-#: plugins/Observability/src/ui_ObservabilityDialog.h:356
+#: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
 msgstr "Tetapan"
 
@@ -5113,10 +5152,6 @@ msgid "Configure Telescope"
 msgstr "Konfigur Teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
-#: plugins/Observability/src/Observability.cpp:596
-#: plugins/Observability/src/Observability.cpp:597
-#: plugins/Observability/src/Observability.cpp:599
-#: plugins/Observability/src/Observability.cpp:600
 msgid "N/A"
 msgstr "T/A"
 
@@ -5721,7 +5756,7 @@ msgstr ""
 "Tetapan ini mengawal cara masa dan tarikh dipaparkan pada palang bawah."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:202
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
 msgid "Time display format"
 msgstr "Format paparan masa"
 
@@ -5739,7 +5774,7 @@ msgid "24-hour format"
 msgstr "Format 24-jam"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "Date display format"
 msgstr "Format paparan tarikh"
 
@@ -5755,11 +5790,11 @@ msgstr "hh-bb-tttt"
 msgid "mm-dd-yyyy"
 msgstr "bb-hh-tttt"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:85
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
 msgstr "Antaramuka Teks Pengguna"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:88
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:92
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -5767,144 +5802,144 @@ msgstr ""
 "Perlaksanaan pemalam bagi Antaramuka Teks Pengguna 0.9.x (TUI), yang "
 "digunakan didalam sistem planetarium"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Solar System body"
 msgstr "Jasad Sistem Matahari"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:166
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Current date/time"
 msgstr "Tarikh/masa semasa"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:171
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Set time zone"
 msgstr "Tetapkan zon waktu"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Day keys"
 msgstr "Kunci hari"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:173
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date/time preset"
 msgstr "Praset masa/tarikh permulaan"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "system"
 msgstr "sistem"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "preset"
 msgstr "praset"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "mmddyyyy"
 msgstr "bbhhtttt"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "ddmmyyyy"
 msgstr "hhbbtttt"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "yyyymmdd"
 msgstr "ttttbbhh"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:203
 msgid "12h"
 msgstr "12j"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:201
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:205
 msgid "24h"
 msgstr "24j"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:226
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Language"
 msgstr "Bahasa"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:240
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Show stars"
 msgstr "Papar bintang"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Colors"
 msgstr "Warna"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
 msgstr "Nama Nebula"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
 msgstr "Pembayang Nebula"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
 msgstr "Garis satah galaktik"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Effects"
 msgstr "Kesan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Manual zoom"
 msgstr "Zum manual"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Magnitude scaling multiplier"
 msgstr "Pendarab penskalaan magnitud"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:412
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Milky Way intensity:"
 msgstr "Keamatan Bima Sakti:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
 msgstr "Kekerapan label Nebula:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Zoom duration:"
 msgstr "Tempoh zum:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:429
 msgid "Cursor timeout:"
 msgstr "Had masa tamat kursor:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Setting landscape sets location"
 msgstr "Menetapkan lokasi set lanskap"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Run local script"
 msgstr "Jalankan skrip setempat"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
 msgstr "Henti menjalankan skrip"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
 msgstr "Skrip CD/DVD"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
 msgid "Administration"
 msgstr "Pentadbiran"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
 msgid "Load default configuration"
 msgstr "Muat konfigurasi lalai"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
 msgid "Save current configuration"
 msgstr "Simpan konfigurasi semasa"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Shut down"
 msgstr "Matikan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:549
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:553
 msgid "[no TUI node]"
 msgstr "[tiada nod TUI]"
 
@@ -6693,194 +6728,194 @@ msgstr ""
 "Kosmos. Satu penerangan kuantiti juga dipaparkan oleh skrip ini dinyatakan "
 "dalam tab 'Perihal' dalam tetingkap konfigurasi."
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jan"
 msgstr "Jan"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Feb"
 msgstr "Feb"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Mar"
 msgstr "Mac"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Apr"
 msgstr "Apr"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "May"
 msgstr "Mei"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jun"
 msgstr "Jun"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jul"
 msgstr "Jul"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Aug"
 msgstr "Ogs"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Sep"
 msgstr "Sep"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Oct"
 msgstr "Okt"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Nov"
 msgstr "Nov"
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Dec"
 msgstr "Dis"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "h"
 msgstr "j"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "m"
 msgstr "m"
 
-#: plugins/Observability/src/Observability.cpp:467
-#: plugins/Observability/src/Observability.cpp:468
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:499
+#: plugins/Observability/src/Observability.cpp:500
+#: plugins/Observability/src/Observability.cpp:542
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:477
+#: plugins/Observability/src/Observability.cpp:509
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Terbenam pada %1 (pada %2)"
 
-#: plugins/Observability/src/Observability.cpp:478
+#: plugins/Observability/src/Observability.cpp:510
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "Terbit pada %1 (%2 yang lalu)"
 
-#: plugins/Observability/src/Observability.cpp:488
+#: plugins/Observability/src/Observability.cpp:520
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "Terbenam pada %1 (%2 yang lalu)"
 
-#: plugins/Observability/src/Observability.cpp:489
+#: plugins/Observability/src/Observability.cpp:521
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "Terbit pada %1 (dalam %2)"
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "Circumpolar."
 msgstr "Keliling kutub."
 
-#: plugins/Observability/src/Observability.cpp:493
+#: plugins/Observability/src/Observability.cpp:525
 msgid "No rise."
 msgstr "Tiada terbit."
 
-#: plugins/Observability/src/Observability.cpp:515
+#: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Berakhir pada %1 (dalam %2) pada %3 darj."
 
-#: plugins/Observability/src/Observability.cpp:519
+#: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "Berakhir pada %1 (%2 yang lalu) pada %3 darj."
 
-#: plugins/Observability/src/Observability.cpp:560
+#: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
 msgstr "Sumber tidak boleh dicerap."
 
-#: plugins/Observability/src/Observability.cpp:561
+#: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "Tiada terbit/terbenam Akronik ataupun Kosmos."
 
-#: plugins/Observability/src/Observability.cpp:578
+#: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
 msgstr "Pemanjangan terhebat: "
 
-#: plugins/Observability/src/Observability.cpp:581
+#: plugins/Observability/src/Observability.cpp:613
 msgid "Largest Sun separation: "
 msgstr "Pemisahan Matahari yang terbesar: "
 
-#: plugins/Observability/src/Observability.cpp:584
+#: plugins/Observability/src/Observability.cpp:616
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " (pada %1 darj.)"
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "Acronychal rise/set"
 msgstr "Terbit/terbenam akronik"
 
-#: plugins/Observability/src/Observability.cpp:602
+#: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
 msgstr "Tiada terbit/terbenam akronik."
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
 msgstr "Terbit/terbenam kosmik"
 
-#: plugins/Observability/src/Observability.cpp:603
+#: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
 msgstr "Tiada terbit/terbenam kosmik."
 
-#: plugins/Observability/src/Observability.cpp:649
+#: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
 msgstr "Boleh dicerap sepanjang tahun."
 
-#: plugins/Observability/src/Observability.cpp:653
+#: plugins/Observability/src/Observability.cpp:685
 msgid "Not observable at dark night."
 msgstr "Tidak boleh dicerap pada waktu malam."
 
-#: plugins/Observability/src/Observability.cpp:658
+#: plugins/Observability/src/Observability.cpp:690
 msgid "Nights above horizon: "
 msgstr "Malam diatas ufuk: "
 
-#: plugins/Observability/src/Observability.cpp:675
+#: plugins/Observability/src/Observability.cpp:707
 msgid "TODAY:"
 msgstr "HARI INI:"
 
-#: plugins/Observability/src/Observability.cpp:684
+#: plugins/Observability/src/Observability.cpp:716
 msgid "THIS YEAR:"
 msgstr "TAHUN INI:"
 
-#: plugins/Observability/src/Observability.cpp:1428
+#: plugins/Observability/src/Observability.cpp:1450
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "Bulan Purnama Terdahulu: %1 %2 pada %3: %4. "
 
-#: plugins/Observability/src/Observability.cpp:1433
+#: plugins/Observability/src/Observability.cpp:1455
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Bulan Purnama Berikutnya: %1 %2 pada %3: %4. "
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:96
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
 msgstr "Pemalam Ketercerapan"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen "
 "center, if no source is selected). The plugin can show rise, transit, and "
@@ -6900,15 +6935,17 @@ msgstr ""
 "mengucapkan terima kasih keatas Alexander Wolf dan Georg Zotti atas nasihat "
 "mereka.<br><br>Ivan Marti-Vidal (Balai Cerap Angkasa Onsala)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:102
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
 msgstr "Penerangan beberapa parameter"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
 msgstr "Altitut Matahari pada waktu senja:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -6920,11 +6957,25 @@ msgstr ""
 "18 darjah. Parameter ini hanya digunakan untuk menganggar julat bagi epok "
 "yang boleh dicerap (rujuk dibawah)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
+msgid "Horizon altitude:"
+msgstr "Altitud ufuk:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+msgid ""
+"Minimum observable altitude (due to mountains, buildings, or just a limited "
+"telescope mount)."
+msgstr ""
+"Altitud boleh cerap minimum (disebabkan gunung, bangunan, atau hanya lekapan "
+"teleskop yang terhad)."
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
 msgstr "Efemeris hari ini:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -6936,11 +6987,11 @@ msgstr ""
 "sebagai rentang masa (dirujuk terhadap masa semasa) dan sebagai jam waktu "
 "(dalam masa setempat)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
 msgstr "Terbit/terbenam Akronik/Kosmos:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
 "The Acronychal rise (or set) of an object happens when the object rises (or "
 "sets) just when the Sun sets (or rises), respectively. The exact dates of "
@@ -6962,11 +7013,11 @@ msgstr ""
 "jelaslah sumber itu sukar dicerap (atau tidak boleh dicerap langsung) pada "
 "tarikh diantara terbenam dan terbit Kosmos."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid "Largest Sun separation:"
 msgstr "Pemisahan Matahari yang terbesar:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object "
 "are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -6985,11 +7036,11 @@ msgstr ""
 "mencapai puncaknya ditengah malam, dan pada kawasan tergelap Langit pada "
 "keserongan. Maka, ia adalah malam 'terbaik' untuk mencerap objek tertentu."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
 msgstr "Malam dengan sumber diatas ufuk:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:107
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
@@ -7026,11 +7077,11 @@ msgstr ""
 "Matahari Senja oleh pengguna) akan dilaksana dalam versi akan datang pemalam "
 "ini."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
 msgstr "Bulan Purnama:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
@@ -7038,70 +7089,76 @@ msgstr ""
 "Bila Bula dipilih, program dapat mengira tarikh terdekat sebenar bagi Bulan "
 "yang bertentangan dengan Matahari."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:216
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "deg."
 msgstr "darj."
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:338
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
 msgstr "Konfigurasi Ketercerapan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:339
+#: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
 msgstr "Konfigurasi Pemalam Ketercerapan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:341
+#: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
 msgstr "Pilihan Paparan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:342
+#: plugins/Observability/src/ui_ObservabilityDialog.h:363
 msgid "Today's ephemeris (rise, set, and transit times)"
 msgstr "Efemeris hari ini (terbit, terbenam, dan masa peralihan)"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:343
+#: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
 msgstr "Tarikh terbit/terbenam Akronik dan Kosmos"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:344
+#: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
 msgstr "Tarikh pemisahan terbesar Matahari"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:345
+#: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Nights with the source above horizon"
 msgstr "Malam dengan sumber diatas ufuk"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:346
+#: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Dates of previous and next Full Moon"
 msgstr "Tarikh Bulan Purnama terdahulu dan berikutnya"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:349
+#: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
 msgstr "Warna dan Saiz fon"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:350
+#: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
 msgstr "Merah"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:351
+#: plugins/Observability/src/ui_ObservabilityDialog.h:372
 msgid "Green"
 msgstr "Hijau"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:352
+#: plugins/Observability/src/ui_ObservabilityDialog.h:373
 msgid "Blue"
 msgstr "Biru"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:353
+#: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
 msgstr "Saiz Fon"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:354
-msgid "Sun altitude at twilight"
-msgstr "Altitud Matahari pada waktu senja"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:375
+msgid "Observing conditions"
+msgstr "Mencerap keadaan"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:355
-msgid "0 deg."
-msgstr "0 darj."
+#: plugins/Observability/src/ui_ObservabilityDialog.h:376
+msgid "Horizon altitude: 0 deg."
+msgstr "Altitut ufuk: 0 darj."
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+msgid "Sun altitude at twilight: 0 deg."
+msgstr "Altitud matahari pada senjakala: 0 darj."
 
 #~ msgid "Set Location "
 #~ msgstr "Tentukan Lokasi "
@@ -7199,6 +7256,12 @@ msgstr "0 darj."
 #~ msgid "Planets labels"
 #~ msgstr "Label planet"
 
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "/"
+#~ msgstr "/"
+
 #~ msgid "Get catalog x of y"
 #~ msgstr "Dapatkan katalog x dari y"
 
@@ -7208,8 +7271,23 @@ msgstr "0 darj."
 #~ msgid "Form"
 #~ msgstr "Bentuk"
 
+#~ msgid "10"
+#~ msgstr "10"
+
 #~ msgid "Light pollution: "
 #~ msgstr "Pencemaran cahaya: "
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "80"
+#~ msgstr "80"
+
+#~ msgid "144000"
+#~ msgstr "144000"
+
+#~ msgid "10000"
+#~ msgstr "10000"
 
 #~ msgid "Effects "
 #~ msgstr "Kesan "
@@ -7488,6 +7566,9 @@ msgstr "0 darj."
 #~ msgid "Display a derived class-specific extra fields"
 #~ msgstr "Papar medan tambahan spesifik-kelas terpacu"
 
+#~ msgid "A Quintuple eclipse from Deimos 2027"
+#~ msgstr "Gerhana Kuintupel melalui Deimos 2027"
+
 #~ msgid ""
 #~ "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 #~ "Occultations of both on the same day are very rare. Here's one that takes "
@@ -7540,6 +7621,12 @@ msgstr "0 darj."
 #~ msgstr ""
 #~ "Ledakan supernova yang telah diperhati oleh Tycho Brahe pada tahun 1572. "
 #~ "Demo perlu benarkan pemalam untuk supernovae."
+
+#~ msgid "0 deg."
+#~ msgstr "0 darj."
+
+#~ msgid "Sun altitude at twilight"
+#~ msgstr "Altitud Matahari pada waktu senja"
 
 #~ msgid "F7"
 #~ msgstr "F7"

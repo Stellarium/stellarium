@@ -161,7 +161,7 @@
 				"actionShow_DSS":
 				{
 					"text": "Nebulas background images",
-					"primaryKey": "",
+					"primaryKey": "I",
 					"checkable": "1",
 					"autorepeat": "0",
 					"global": "1"
@@ -432,7 +432,7 @@
 				"actionAdd_Solar_Day":
 				{
 					"text": "Add 1 solar day",
-					"primaryKey": "",
+					"primaryKey": "=",
 					"checkable": "0",
 					"autorepeat": "1",
 					"global": "0"
@@ -528,6 +528,20 @@
 					"checkable": false,
 					"autorepeat": true
 				},
+				"actionAdd_Sidereal_Century":
+				{
+					"text": "Add 1 sidereal century",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Sidereal_Century":
+				{
+					"text": "Subtract 1 sidereal century",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
 				"actionAdd_Synodic_Month":
 				{
 					"text": "Add 1 synodic month",
@@ -608,6 +622,20 @@
 				"actionSubtract_Tropical_Year":
 				{
 					"text": "Subtract 1 mean tropical year",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionAdd_Tropical_Century":
+				{
+					"text": "Add 1 mean tropical century",
+					"primaryKey": "",
+					"checkable": false,
+					"autorepeat": true
+				},
+				"actionSubtract_Tropical_Century":
+				{
+					"text": "Subtract 1 mean tropical century",
 					"primaryKey": "",
 					"checkable": false,
 					"autorepeat": true
@@ -962,20 +990,6 @@
 				{
 					"text": "Move a telescope to a given set of coordinates",
 					"primaryKey": "Ctrl+0",
-					"checkable": true,
-					"autorepeat": false
-				}
-			}
-		},
-		"PluginRendererStatistics":
-		{
-			"pluginId" : "RendererStatistics",
-			"actions" :
-			{
-				"actionShow_RendererStatistics":
-				{
-					"text": "Show renderer statistics",
-					"primaryKey": "",
 					"checkable": true,
 					"autorepeat": false
 				}

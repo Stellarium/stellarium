@@ -25,6 +25,7 @@
 #include <QSettings>
 
 class Telescope;
+class Barlow;
 
 class Ocular : public QObject
 {
@@ -52,8 +53,8 @@ public:
 	bool isBinoculars() const;
 	void setBinoculars(bool flag);
 
-	double actualFOV(Telescope *telescope) const;
-	double magnification(Telescope *telescope) const;
+    double actualFOV(Telescope *telescope, Barlow *barlow) const;
+        double magnification(Telescope *telescope, Barlow *barlow) const;
 	QMap<int, QString> propertyMap();
 
 private:

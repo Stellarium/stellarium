@@ -51,6 +51,13 @@ public slots:
 	//! @return the Julian Date
 	double getJDay() const;
 
+	//! Set the current date in Modified Julian Day
+	//! @param MJD the Modified Julian Date
+	void setMJDay(double MJD);
+	//! Get the current date in Modified Julian Day
+	//! @return the Modified Julian Date
+	double getMJDay() const;
+
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
 	//! @param dt the date string to use.  Formats:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
@@ -76,6 +83,11 @@ public slots:
 	//! else it is local time.
 	//! @return the current simulation time.
 	QString getDate(const QString& spec="utc");
+
+	//! get the DeltaT for the simulation date and time as a string
+	//! in HMS format, e.g. "0h1m68.2s"
+	//! @return the DeltaT for current simulation time.
+	QString getDeltaT() const;
 
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
@@ -231,6 +243,9 @@ public slots:
 	//! - latitude : latitude in decimal degrees
 	//! - planet : name of planet
 	//! - location : city and country
+	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
+	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
+	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
 	QVariantMap getObserverLocationInfo();
 
 	//! Save a screenshot.
@@ -571,6 +586,18 @@ public slots:
 
 	//! Go to defaults position and direction of view
 	void goHome();
+
+	//! Show or hide the Milky Way.
+	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
+	void setMilkyWayVisible(bool b);
+
+	//! Set Milky Way intensity.
+	//! @param i value of intensity for the Milky Way
+	void setMilkyWayIntensity(double i);
+
+	//! Get Milky Way intensity.
+	//! @return value of Milky Way intensity, e.g. "1.2"
+	double getMilkyWayIntensity();
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().

@@ -48,7 +48,7 @@ private:
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
 		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "",
-		NULL, NULL, 0, false, true, false), dest(0),
+		       NULL, NULL, 0, false, true, false, ""), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	// radius = 0;
@@ -203,7 +203,13 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// This is a kludge
 	if( lat > 90.0 )  lat = 90.0;
 	if( lat < -90.0 ) lat = -90.0;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.)
+	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
+	// 360 degrees = 24hrs; 15 degrees = 1hr = 3600s; 1 degree = 240s
+	// Apply DeltaT correction only for Earth
+	double deltaT = 0.;
+	if (getHomePlanet()->getEnglishName()=="Earth")
+		deltaT = StelUtils::getDeltaT(jd)/240.;
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude-deltaT)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 

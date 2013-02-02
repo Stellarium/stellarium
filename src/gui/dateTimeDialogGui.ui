@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>396</width>
-    <height>86</height>
+    <width>401</width>
+    <height>84</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -270,7 +270,7 @@
             </size>
            </property>
            <property name="text">
-            <string>/</string>
+            <string notr="true">/</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -320,7 +320,7 @@
             </size>
            </property>
            <property name="text">
-            <string>/</string>
+            <string notr="true">/</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -419,7 +419,7 @@
             </size>
            </property>
            <property name="text">
-            <string>:</string>
+            <string notr="true">:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -469,7 +469,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>:</string>
+            <string notr="true">:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -529,8 +529,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

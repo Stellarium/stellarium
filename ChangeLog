@@ -1,3 +1,36 @@
+0.12.0 [2013-01-31]
+New rendering engine, editable keybindings, bug fixes and improvements.
+
+Added:
+- New rendering engine (LP: #673183)
+- Editable keybindings (LP: #1098851, #1035635, #832256, #789002)
+- Scripting for plugins (LP: #1040242)
+- Some transneptunian objects (LP: #899084, #1051205)
+- New geographical locations (LP: #1051803)
+- New textures for DSO
+- DeltaT and lunar acceleration computation (LP: #575621)
+
+Changed:
+- Improving the scripting engine (LP: #1059368)
+- Improving the plugins (LP: #1082167, #1042714)
+- Improving the coordinate grids (LP: #1036294)
+- Improving the constellation boundaries (LP: #1039072)
+- Improving the search tool
+
+Fixed:
+- Clang Wself-assign warning during build process on some platforms (LP: #1097358)
+- Bugs in Observability plugin (LP: #1042059, #1054599, #1053058)
+- Bugs in TUI plugin (LP: #1083380)
+- Bugs in Satellites plugin (LP: #1048220)
+- Bugs in Compass plugin (LP: #695891)
+- Bugs in scripting engine (LP: #1046518, #1092781)
+- Font corruption bugs (LP: #597633, #778747, #819278, #903310)
+- Screen flashing in fullscreen mode (LP: #716695, #824788)
+- Lost nebula images (LP: #1042393, #1051038)
+- Bugs in Night Vision mode (LP: #578367)
+- Bugs in GUI and Core (LP: #1090722, #1082510, #1071455, #1071458, #1056868, #1054600, #1045111, #1040944, #1077545)
+- Crashes (LP: #1043640, #1044654, #1045783)
+
 0.11.4 [2012-08-26]
 Bug fix release with new features.
 

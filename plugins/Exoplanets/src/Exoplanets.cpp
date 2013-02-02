@@ -248,8 +248,6 @@ void Exoplanets::draw(StelCore* core, StelRenderer* renderer)
 
 void Exoplanets::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Exoplanet");
 	if (!newSelected.empty())
 	{

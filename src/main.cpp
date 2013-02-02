@@ -163,7 +163,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2012 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) 2000-2013 Fabien Chereau et al");
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -323,13 +323,31 @@ int main(int argc, char **argv)
 		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
 	}
 
+	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
+	if (!fileFont.isEmpty())
+	{
+		try
+		{
+			const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
+			if (!afName.isEmpty())
+				QFontDatabase::addApplicationFont(afName);
+		}
+		catch (std::runtime_error& e)
+		{
+			qWarning() << "ERROR while loading custom font " << fileFont << " : " << e.what();
+		}
+	}
+
+	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
+	QString safeFont = confSettings->value("gui/safe_font_name", "Verdana").toString();
+
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
 #ifdef Q_OS_WIN
 
 	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
 	// See Launchpad question #111823 for more info
-	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
+	QFont tmpFont(safeMode ? safeFont : baseFont);
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 
 	// Activate verdana by defaut for all win32 builds to see if it improves things.
@@ -337,9 +355,9 @@ int main(int argc, char **argv)
 	// QFont tmpFont("Verdana");
 #else
 #ifdef Q_OS_MAC
-	QFont tmpFont("Verdana");
+	QFont tmpFont(safeFont);
 #else
-	QFont tmpFont("DejaVu Sans");
+	QFont tmpFont(baseFont);
 #endif
 #endif
 #endif
