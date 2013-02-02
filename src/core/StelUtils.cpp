@@ -1221,6 +1221,8 @@ double getDeltaT(double jDay)
 double getMoonSecularAcceleration(double jDay)
 {
 	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
+	// For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
+	// For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	double t = (year-1955)/100;
