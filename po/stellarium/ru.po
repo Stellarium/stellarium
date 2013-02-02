@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-01 09:42+0700\n"
-"PO-Revision-Date: 2013-01-27 15:43+0000\n"
+"POT-Creation-Date: 2013-02-02 01:43+0700\n"
+"PO-Revision-Date: 2013-02-02 02:08+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-01 04:42+0000\n"
-"X-Generator: Launchpad (build 16455)\n"
+"X-Launchpad-Export-Date: 2013-02-02 04:41+0000\n"
+"X-Generator: Launchpad (build 16462)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
 msgstr "Меридиан"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1176
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1206
 msgid "Ecliptic"
 msgstr "Эклиптика"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1164
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1194
 msgid "Equator"
 msgstr "Экватор"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1202
 msgid "Horizon"
 msgstr "Горизонт"
 
@@ -439,7 +439,7 @@ msgstr "Начальное направление обзора аз/выс: %1/%
 msgid "Authors"
 msgstr "Авторы"
 
-#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:425
 msgid "Contact"
 msgstr "Обратная связь"
 
@@ -701,27 +701,27 @@ msgstr "Пробел"
 msgid "%1m"
 msgstr "%1 м"
 
-#: src/gui/ViewDialog.cpp:481
+#: src/gui/ViewDialog.cpp:486
 msgid "No description"
 msgstr "Нет описания"
 
-#: src/gui/ViewDialog.cpp:594
+#: src/gui/ViewDialog.cpp:599
 msgid "No shooting stars"
 msgstr "Без метеоров"
 
-#: src/gui/ViewDialog.cpp:597
+#: src/gui/ViewDialog.cpp:602
 msgid "Normal rate"
 msgstr "Нормальный ход"
 
-#: src/gui/ViewDialog.cpp:600
+#: src/gui/ViewDialog.cpp:605
 msgid "Standard Perseids rate"
 msgstr "Стандартный поток Персеид"
 
-#: src/gui/ViewDialog.cpp:603
+#: src/gui/ViewDialog.cpp:608
 msgid "Exceptional Leonid rate"
 msgstr "Выдающееся для Леонид"
 
-#: src/gui/ViewDialog.cpp:606
+#: src/gui/ViewDialog.cpp:611
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Максимальный (Леониды, 1966)"
 
@@ -2726,16 +2726,16 @@ msgstr "Отразить по горизонтали"
 msgid "Full-screen mode"
 msgstr "Полноэкранный режим"
 
-#: src/translations.h:567 src/ui_viewDialog.h:1135
+#: src/translations.h:567 src/ui_viewDialog.h:1165
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/translations.h:568 src/ui_viewDialog.h:1159
+#: src/translations.h:568 src/ui_viewDialog.h:1189
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Азимутальная сетка"
 
-#: src/translations.h:569 src/ui_viewDialog.h:1181
+#: src/translations.h:569 src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Стороны света"
@@ -2764,7 +2764,7 @@ msgstr "Линии созвездий"
 msgid "Nebulas background images"
 msgstr "Фоновые изображения туманностей"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1158
+#: src/translations.h:575 src/ui_viewDialog.h:1188
 msgid "Ecliptic J2000 grid"
 msgstr "Эклиптическая сетка J2000"
 
@@ -2778,12 +2778,12 @@ msgstr "Линия эклиптики"
 msgid "Equator line"
 msgstr "Линия экватора"
 
-#: src/translations.h:578 src/ui_viewDialog.h:1157
+#: src/translations.h:578 src/ui_viewDialog.h:1187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Экваториальная сетка"
 
-#: src/translations.h:579 src/ui_viewDialog.h:1156
+#: src/translations.h:579 src/ui_viewDialog.h:1186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Экваториальная сетка J2000"
@@ -2792,12 +2792,12 @@ msgstr "Экваториальная сетка J2000"
 msgid "Fog"
 msgstr "Дымка"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1160
+#: src/translations.h:581 src/ui_viewDialog.h:1190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Галактическая сетка"
 
-#: src/translations.h:582 src/ui_viewDialog.h:1180
+#: src/translations.h:582 src/ui_viewDialog.h:1210
 msgid "Galactic plane"
 msgstr "Плоскость Галактики"
 
@@ -2815,7 +2815,7 @@ msgstr "Линия горизонта"
 msgid "Meridian line"
 msgstr "Линия меридиана"
 
-#: src/translations.h:586 src/ui_viewDialog.h:1144
+#: src/translations.h:586 src/ui_viewDialog.h:1174
 msgid "Nebulas"
 msgstr "Туманности"
 
@@ -2838,7 +2838,7 @@ msgstr "Орбиты планет"
 msgid "Planet trails"
 msgstr "Следы планет"
 
-#: src/translations.h:591 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:591 src/ui_viewDialog.h:1150 src/ui_viewDialog.h:1173
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Звёзды"
@@ -3255,8 +3255,8 @@ msgstr "Расширить поиск с помощью SIMBAD"
 msgid "Server:"
 msgstr "Сервер:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
-#: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1219 src/ui_viewDialog.h:1221
 #: src/ui_configurationDialog.h:1092 src/ui_configurationDialog.h:1103
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3275,187 +3275,191 @@ msgstr "Поиск по списку..."
 msgid "Lists"
 msgstr "Списки"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1135
 msgid "View"
 msgstr "Вид"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1141
 msgid "Sky"
 msgstr "Небо"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1143
 msgid "Markings"
 msgstr "Обозначения"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "Ландшафт"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "Знания о звёздах"
 
-#: src/ui_viewDialog.h:1122
+#: src/ui_viewDialog.h:1151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "Абсолютное увеличение:"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1152
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "Относительное увеличение:"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1153
+msgid "Milky Way brightness:"
+msgstr "Яркость Млечного пути:"
+
+#: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "Мерцание:"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1156
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Приглушать неяркие звёзды на фоне очень яркого объекта"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1158
 msgid "Dynamic eye adaptation"
 msgstr "Динамическая адаптация чувствительности"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1159
 msgid "Planets and satellites"
 msgstr "Планеты и спутники"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1160
 msgid "Show planets"
 msgstr "Показывать планеты"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1161
 msgid "Show planet markers"
 msgstr "Показывать метки планет"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1162
 msgid "Show planet orbits"
 msgstr "Показывать орбиты планет"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1163
 msgid "Simulate light speed"
 msgstr "Моделировать скорость света"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1164
 msgid "Scale Moon"
 msgstr "Масштабирование Луны"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1166
 msgid "Show atmosphere"
 msgstr "Показать атмосферу"
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1167
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "Засветка:"
 
-#: src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1169
 msgid "pressure, temperature, extinction coefficient"
 msgstr "давление, температура, коэффициент экстинкции"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1171
 msgid "Refraction/Extinction settings..."
 msgstr "Настройки рефракции/экстинкции..."
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1172
 msgid "Labels and Markers"
 msgstr "Названия и маркеры"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1175
 msgid "Planets"
 msgstr "Планеты"
 
-#: src/ui_viewDialog.h:1146
+#: src/ui_viewDialog.h:1176
 msgid "Shooting Stars"
 msgstr "Метеоры"
 
-#: src/ui_viewDialog.h:1147
+#: src/ui_viewDialog.h:1177
 msgid "Hourly zenith rate:"
 msgstr "Число метеоров в час"
 
-#: src/ui_viewDialog.h:1149
+#: src/ui_viewDialog.h:1179
 msgid "Constellations"
 msgstr "Созвездия"
 
-#: src/ui_viewDialog.h:1150
+#: src/ui_viewDialog.h:1180
 msgid "Show lines"
 msgstr "Показывать линии"
 
-#: src/ui_viewDialog.h:1151
+#: src/ui_viewDialog.h:1181
 msgid "Show labels"
 msgstr "Показывать названия"
 
-#: src/ui_viewDialog.h:1152
+#: src/ui_viewDialog.h:1182
 msgid "Show boundaries"
 msgstr "Показать границы"
 
-#: src/ui_viewDialog.h:1153
+#: src/ui_viewDialog.h:1183
 msgid "Show art"
 msgstr "Показывать изображения"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1154
+#: src/ui_viewDialog.h:1184
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "Яркость изображений:"
 
-#: src/ui_viewDialog.h:1155
+#: src/ui_viewDialog.h:1185
 msgid "Celestial Sphere"
 msgstr "Небесная сфера"
 
-#: src/ui_viewDialog.h:1162
+#: src/ui_viewDialog.h:1192
 msgid "Show equator line"
 msgstr "Показать линию экватора"
 
-#: src/ui_viewDialog.h:1166
+#: src/ui_viewDialog.h:1196
 msgid "Show meridian line"
 msgstr "Показать линию меридиана"
 
-#: src/ui_viewDialog.h:1170
+#: src/ui_viewDialog.h:1200
 msgid "Show horizon line"
 msgstr "Показать линию горизонта"
 
-#: src/ui_viewDialog.h:1174
+#: src/ui_viewDialog.h:1204
 msgid "Show ecliptic line"
 msgstr "Показать линию эклиптики"
 
-#: src/ui_viewDialog.h:1178
+#: src/ui_viewDialog.h:1208
 msgid "Show Galactic plane line"
 msgstr "Показать линию плоскости Галактики"
 
-#: src/ui_viewDialog.h:1182
+#: src/ui_viewDialog.h:1212
 msgid "Projection"
 msgstr "Проекция"
 
-#: src/ui_viewDialog.h:1183
+#: src/ui_viewDialog.h:1213
 msgid "Add/remove landscapes..."
 msgstr "Добавление/Удаление ландшафтов..."
 
-#: src/ui_viewDialog.h:1185
+#: src/ui_viewDialog.h:1215
 msgid "Show ground"
 msgstr "Показывать землю"
 
-#: src/ui_viewDialog.h:1186
+#: src/ui_viewDialog.h:1216
 msgid "Show fog"
 msgstr "Показать дымку"
 
-#: src/ui_viewDialog.h:1187
+#: src/ui_viewDialog.h:1217
 msgid "Use associated planet and position"
 msgstr "Использовать соответствующую планету и положение"
 
-#: src/ui_viewDialog.h:1188
+#: src/ui_viewDialog.h:1218
 msgid "Use this landscape as default"
 msgstr "Использовать этот ландшафт по умолчанию"
 
-#: src/ui_viewDialog.h:1190
+#: src/ui_viewDialog.h:1220
 msgid "Use this sky culture as default"
 msgstr "Использовать эту культуру неба по умолчанию"
 
-#: src/ui_viewDialog.h:1192
+#: src/ui_viewDialog.h:1222
 msgid "Visible"
 msgstr "Видимое"
 
@@ -4130,17 +4134,17 @@ msgstr "Видимое ПЗ окуляра: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Barlow #%1"
-msgstr ""
+msgstr "Барлоу #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Barlow #%1: %2"
-msgstr ""
+msgstr "Барлоу #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Barlow: none"
-msgstr ""
+msgstr "Барлоу: нет"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4187,15 +4191,15 @@ msgstr "Сенсор #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Barlow"
-msgstr ""
+msgstr "&Барлоу"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous barlow"
-msgstr ""
+msgstr "&Предыдущая линза"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next barlow"
-msgstr ""
+msgstr "&Следующая линза"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4219,11 +4223,11 @@ msgstr "Следующий окуляр"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous Barlow lens"
-msgstr ""
+msgstr "Предыдущая линза Барлоу"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next Barlow lens"
-msgstr ""
+msgstr "Следующая линза Барлоу"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4280,19 +4284,19 @@ msgstr "Видимое поле зрения окуляра"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Кратность: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Barlow: None"
-msgstr ""
+msgstr "Барлоу: нет"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Кратность: н/д"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of barlow lens"
-msgstr ""
+msgstr "Кратность линзы Барлоу"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4495,15 +4499,15 @@ msgstr "Бинокль"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:997
 msgid "Barlows"
-msgstr ""
+msgstr "Барлоу"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1001
 msgid "Multiplicity"
-msgstr ""
+msgstr "Кратность"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1002
 msgid "Barlow lenses"
-msgstr ""
+msgstr "Линзы Барлоу"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1003
 #: plugins/Oculars/src/ui_ocularDialog.h:1013

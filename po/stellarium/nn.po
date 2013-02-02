@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-01 09:42+0700\n"
+"POT-Creation-Date: 2013-02-02 01:43+0700\n"
 "PO-Revision-Date: 2012-11-24 19:42+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-01 04:41+0000\n"
-"X-Generator: Launchpad (build 16455)\n"
+"X-Launchpad-Export-Date: 2013-02-02 04:40+0000\n"
+"X-Generator: Launchpad (build 16462)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1176
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1206
 msgid "Ecliptic"
 msgstr "Ekliptikken"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1164
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1194
 msgid "Equator"
 msgstr "Ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1202
 msgid "Horizon"
 msgstr "Horisont"
 
@@ -439,7 +439,7 @@ msgstr "Visningsretning ved oppstart Az/Alt: %1/%2"
 msgid "Authors"
 msgstr "Forfattarar"
 
-#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:425
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -702,27 +702,27 @@ msgstr "Mellomrom"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:481
+#: src/gui/ViewDialog.cpp:486
 msgid "No description"
 msgstr "Inga skildring"
 
-#: src/gui/ViewDialog.cpp:594
+#: src/gui/ViewDialog.cpp:599
 msgid "No shooting stars"
 msgstr "Ingen stjerneskot"
 
-#: src/gui/ViewDialog.cpp:597
+#: src/gui/ViewDialog.cpp:602
 msgid "Normal rate"
 msgstr "Normal rate"
 
-#: src/gui/ViewDialog.cpp:600
+#: src/gui/ViewDialog.cpp:605
 msgid "Standard Perseids rate"
 msgstr "Standard Perseiderate"
 
-#: src/gui/ViewDialog.cpp:603
+#: src/gui/ViewDialog.cpp:608
 msgid "Exceptional Leonid rate"
 msgstr "Eksepsjonell Leoniderate"
 
-#: src/gui/ViewDialog.cpp:606
+#: src/gui/ViewDialog.cpp:611
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Høgste rate nokonsinne (Leonidane i 1966)"
 
@@ -2719,16 +2719,16 @@ msgstr "Speilvend horisontalt"
 msgid "Full-screen mode"
 msgstr "Fullskjerm-modus"
 
-#: src/translations.h:567 src/ui_viewDialog.h:1135
+#: src/translations.h:567 src/ui_viewDialog.h:1165
 msgid "Atmosphere"
 msgstr "Atmosfære"
 
-#: src/translations.h:568 src/ui_viewDialog.h:1159
+#: src/translations.h:568 src/ui_viewDialog.h:1189
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Asimutnett"
 
-#: src/translations.h:569 src/ui_viewDialog.h:1181
+#: src/translations.h:569 src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Himmelretningar"
@@ -2757,7 +2757,7 @@ msgstr "Stjernebiletelinjer"
 msgid "Nebulas background images"
 msgstr "Bakgrunnsbilete for stjernetåker"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1158
+#: src/translations.h:575 src/ui_viewDialog.h:1188
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptisk J2000-nett"
 
@@ -2771,12 +2771,12 @@ msgstr "Ekliptisk line"
 msgid "Equator line"
 msgstr "Ekvatorline"
 
-#: src/translations.h:578 src/ui_viewDialog.h:1157
+#: src/translations.h:578 src/ui_viewDialog.h:1187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Ekvatorialt nett"
 
-#: src/translations.h:579 src/ui_viewDialog.h:1156
+#: src/translations.h:579 src/ui_viewDialog.h:1186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatorialt J2000-nett"
@@ -2785,12 +2785,12 @@ msgstr "Ekvatorialt J2000-nett"
 msgid "Fog"
 msgstr "Tåke"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1160
+#: src/translations.h:581 src/ui_viewDialog.h:1190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
-#: src/translations.h:582 src/ui_viewDialog.h:1180
+#: src/translations.h:582 src/ui_viewDialog.h:1210
 msgid "Galactic plane"
 msgstr "Galaktisk plan"
 
@@ -2808,7 +2808,7 @@ msgstr "Horisontlinje"
 msgid "Meridian line"
 msgstr "Meridianline"
 
-#: src/translations.h:586 src/ui_viewDialog.h:1144
+#: src/translations.h:586 src/ui_viewDialog.h:1174
 msgid "Nebulas"
 msgstr "Stjernetåker"
 
@@ -2831,7 +2831,7 @@ msgstr "Planetveg"
 msgid "Planet trails"
 msgstr "Planetspor"
 
-#: src/translations.h:591 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:591 src/ui_viewDialog.h:1150 src/ui_viewDialog.h:1173
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Stjerner"
@@ -3247,8 +3247,8 @@ msgstr "Utvid søket med SIMBAD"
 msgid "Server:"
 msgstr "Tenar:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
-#: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1219 src/ui_viewDialog.h:1221
 #: src/ui_configurationDialog.h:1092 src/ui_configurationDialog.h:1103
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3267,187 +3267,191 @@ msgstr "Søk i liste..."
 msgid "Lists"
 msgstr "Lister"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1135
 msgid "View"
 msgstr "Syn"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1141
 msgid "Sky"
 msgstr "Himmel"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1143
 msgid "Markings"
 msgstr "Merke"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "Landskap"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "Stjernemytar"
 
-#: src/ui_viewDialog.h:1122
+#: src/ui_viewDialog.h:1151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "Absolutt skala:"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1152
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "Relativ skala:"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1153
+msgid "Milky Way brightness:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "Blinking:"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1156
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Demp svake stjerner når eit veldig ljost objekt er synleg"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1158
 msgid "Dynamic eye adaptation"
 msgstr "Dynamisk augnetilpassing"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1159
 msgid "Planets and satellites"
 msgstr "Planetar og satelittar"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1160
 msgid "Show planets"
 msgstr "Vis planetar"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1161
 msgid "Show planet markers"
 msgstr "Vis planetmerke"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1162
 msgid "Show planet orbits"
 msgstr "Vis planetbanar"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1163
 msgid "Simulate light speed"
 msgstr "Simulér lysfart"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1164
 msgid "Scale Moon"
 msgstr "Skaler måne"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1166
 msgid "Show atmosphere"
 msgstr "Vis atmosfære"
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1167
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "Ljosureining"
 
-#: src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1169
 msgid "pressure, temperature, extinction coefficient"
 msgstr "trykk, temperatur, ekstinksjonskoeffisient"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1171
 msgid "Refraction/Extinction settings..."
 msgstr "Still inn refraksjon/ekstinksjon"
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1172
 msgid "Labels and Markers"
 msgstr "Påskrifter og merke"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1175
 msgid "Planets"
 msgstr "Planetar"
 
-#: src/ui_viewDialog.h:1146
+#: src/ui_viewDialog.h:1176
 msgid "Shooting Stars"
 msgstr "Stjerneskot"
 
-#: src/ui_viewDialog.h:1147
+#: src/ui_viewDialog.h:1177
 msgid "Hourly zenith rate:"
 msgstr "Timerate i senit (ZHR):"
 
-#: src/ui_viewDialog.h:1149
+#: src/ui_viewDialog.h:1179
 msgid "Constellations"
 msgstr "Stjernebilete"
 
-#: src/ui_viewDialog.h:1150
+#: src/ui_viewDialog.h:1180
 msgid "Show lines"
 msgstr "Vis liner"
 
-#: src/ui_viewDialog.h:1151
+#: src/ui_viewDialog.h:1181
 msgid "Show labels"
 msgstr "Vis etikettar"
 
-#: src/ui_viewDialog.h:1152
+#: src/ui_viewDialog.h:1182
 msgid "Show boundaries"
 msgstr "Vis grenser"
 
-#: src/ui_viewDialog.h:1153
+#: src/ui_viewDialog.h:1183
 msgid "Show art"
 msgstr "Vis kunst"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1154
+#: src/ui_viewDialog.h:1184
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "Ljosstyrke på kunst:"
 
-#: src/ui_viewDialog.h:1155
+#: src/ui_viewDialog.h:1185
 msgid "Celestial Sphere"
 msgstr "Himmelkvelv"
 
-#: src/ui_viewDialog.h:1162
+#: src/ui_viewDialog.h:1192
 msgid "Show equator line"
 msgstr "Vis ekvatorlinje"
 
-#: src/ui_viewDialog.h:1166
+#: src/ui_viewDialog.h:1196
 msgid "Show meridian line"
 msgstr "Vis meridianlinje"
 
-#: src/ui_viewDialog.h:1170
+#: src/ui_viewDialog.h:1200
 msgid "Show horizon line"
 msgstr "Vis horisontlinje"
 
-#: src/ui_viewDialog.h:1174
+#: src/ui_viewDialog.h:1204
 msgid "Show ecliptic line"
 msgstr "Vis ekliptikken"
 
-#: src/ui_viewDialog.h:1178
+#: src/ui_viewDialog.h:1208
 msgid "Show Galactic plane line"
 msgstr "Vis linje for det galaktiske planet"
 
-#: src/ui_viewDialog.h:1182
+#: src/ui_viewDialog.h:1212
 msgid "Projection"
 msgstr "Projeksjon"
 
-#: src/ui_viewDialog.h:1183
+#: src/ui_viewDialog.h:1213
 msgid "Add/remove landscapes..."
 msgstr "Legg til/fjern landskap..."
 
-#: src/ui_viewDialog.h:1185
+#: src/ui_viewDialog.h:1215
 msgid "Show ground"
 msgstr "Vis horisont"
 
-#: src/ui_viewDialog.h:1186
+#: src/ui_viewDialog.h:1216
 msgid "Show fog"
 msgstr "Vis tåke"
 
-#: src/ui_viewDialog.h:1187
+#: src/ui_viewDialog.h:1217
 msgid "Use associated planet and position"
 msgstr "Bruk planeten og posisjonen som høyrer til"
 
-#: src/ui_viewDialog.h:1188
+#: src/ui_viewDialog.h:1218
 msgid "Use this landscape as default"
 msgstr "Nytt dette landskapet som standard"
 
-#: src/ui_viewDialog.h:1190
+#: src/ui_viewDialog.h:1220
 msgid "Use this sky culture as default"
 msgstr "Bruk denne himmelkulturen som standard"
 
-#: src/ui_viewDialog.h:1192
+#: src/ui_viewDialog.h:1222
 msgid "Visible"
 msgstr "Synleg"
 

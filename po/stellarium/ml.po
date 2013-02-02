@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-01 09:42+0700\n"
+"POT-Creation-Date: 2013-02-02 01:43+0700\n"
 "PO-Revision-Date: 2012-12-20 17:38+0000\n"
 "Last-Translator: Noble P Abraham <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-01 04:41+0000\n"
-"X-Generator: Launchpad (build 16455)\n"
+"X-Launchpad-Export-Date: 2013-02-02 04:39+0000\n"
+"X-Generator: Launchpad (build 16462)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1168
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
 msgstr "മേരീഡിയന്‍"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1176
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1206
 msgid "Ecliptic"
 msgstr "ക്രാന്തിവൃത്തം"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1164
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1194
 msgid "Equator"
 msgstr "ഭൂമധ്യരേഖ"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1172
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1202
 msgid "Horizon"
 msgstr "ചക്രവാളം"
 
@@ -432,7 +432,7 @@ msgstr "തുടക്കത്തിലെ വീക്ഷണ ദിശ Az/Alt
 msgid "Authors"
 msgstr "രചയിതാക്കള്‍"
 
-#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:420
+#: src/gui/ConfigurationDialog.cpp:684 src/gui/ViewDialog.cpp:425
 msgid "Contact"
 msgstr "വിലാസം"
 
@@ -689,27 +689,27 @@ msgstr "Space"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:481
+#: src/gui/ViewDialog.cpp:486
 msgid "No description"
 msgstr "വിശദീകരണം ലഭ്യമല്ല"
 
-#: src/gui/ViewDialog.cpp:594
+#: src/gui/ViewDialog.cpp:599
 msgid "No shooting stars"
 msgstr "കൊള്ളിമീനുകള്‍ ഇല്ല"
 
-#: src/gui/ViewDialog.cpp:597
+#: src/gui/ViewDialog.cpp:602
 msgid "Normal rate"
 msgstr "സാധാരണ നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:600
+#: src/gui/ViewDialog.cpp:605
 msgid "Standard Perseids rate"
 msgstr "ശരാശരി Perseids നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:603
+#: src/gui/ViewDialog.cpp:608
 msgid "Exceptional Leonid rate"
 msgstr "അസാധാരണ ലിയനോയിഡ് നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:606
+#: src/gui/ViewDialog.cpp:611
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "ഏറ്റവും കൂടിയ നിരക്ക് (1966 ലെ ലിയനോയിഡ് )"
 
@@ -2684,16 +2684,16 @@ msgstr "തിരശ്ശീല തിരശ്ചീനദിശയില്�
 msgid "Full-screen mode"
 msgstr "ഫുള്‍-സ്ക്രീന്‍ മോഡ്"
 
-#: src/translations.h:567 src/ui_viewDialog.h:1135
+#: src/translations.h:567 src/ui_viewDialog.h:1165
 msgid "Atmosphere"
 msgstr "അന്തരീക്ഷം"
 
-#: src/translations.h:568 src/ui_viewDialog.h:1159
+#: src/translations.h:568 src/ui_viewDialog.h:1189
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "അഗ്രകോടി വരകള്‍"
 
-#: src/translations.h:569 src/ui_viewDialog.h:1181
+#: src/translations.h:569 src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "ദിശാ സൂചകങ്ങള്‍"
@@ -2722,7 +2722,7 @@ msgstr "നക്ഷത്രരാശിയുടെ രേഖകള്‍"
 msgid "Nebulas background images"
 msgstr "നെബുലകളുടെ ചിത്രങ്ങള്‍"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1158
+#: src/translations.h:575 src/ui_viewDialog.h:1188
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
@@ -2736,12 +2736,12 @@ msgstr "ക്രാന്തിവൃത്ത രേഖ"
 msgid "Equator line"
 msgstr "ഭൂമധ്യരേഖ"
 
-#: src/translations.h:578 src/ui_viewDialog.h:1157
+#: src/translations.h:578 src/ui_viewDialog.h:1187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "ഭൂമധ്യരേഖാപരമായ വരകള്‍"
 
-#: src/translations.h:579 src/ui_viewDialog.h:1156
+#: src/translations.h:579 src/ui_viewDialog.h:1186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr ""
@@ -2750,12 +2750,12 @@ msgstr ""
 msgid "Fog"
 msgstr "മൂടല്‍ മഞ്ഞ്"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1160
+#: src/translations.h:581 src/ui_viewDialog.h:1190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "ആകാശഗംഗ വരകള്‍"
 
-#: src/translations.h:582 src/ui_viewDialog.h:1180
+#: src/translations.h:582 src/ui_viewDialog.h:1210
 msgid "Galactic plane"
 msgstr "ആകാശഗംഗ  തലം"
 
@@ -2773,7 +2773,7 @@ msgstr "ചക്രവാളം രേഖ"
 msgid "Meridian line"
 msgstr "ഉച്ചസ്ഥാന രേഖ"
 
-#: src/translations.h:586 src/ui_viewDialog.h:1144
+#: src/translations.h:586 src/ui_viewDialog.h:1174
 msgid "Nebulas"
 msgstr "നെബുലകള്‍"
 
@@ -2796,7 +2796,7 @@ msgstr "ഗ്രഹ പ്രദക്ഷിണപഥം"
 msgid "Planet trails"
 msgstr ""
 
-#: src/translations.h:591 src/ui_viewDialog.h:1121 src/ui_viewDialog.h:1143
+#: src/translations.h:591 src/ui_viewDialog.h:1150 src/ui_viewDialog.h:1173
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "നക്ഷത്രങ്ങള്‍"
@@ -3213,8 +3213,8 @@ msgstr ""
 msgid "Server:"
 msgstr "സെര്‍വര്‍:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1184
-#: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1219 src/ui_viewDialog.h:1221
 #: src/ui_configurationDialog.h:1092 src/ui_configurationDialog.h:1103
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3233,189 +3233,193 @@ msgstr ""
 msgid "Lists"
 msgstr "പട്ടികകള്‍"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1135
 msgid "View"
 msgstr "ദൃശ്യം"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1141
 msgid "Sky"
 msgstr "ആകാശം"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1143
 msgid "Markings"
 msgstr "രേഖപ്പെടുത്തലുകള്‍"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "പ്രകൃതിദൃശ്യം"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "സ്റ്റാര്‍ലോറെ"
 
-#: src/ui_viewDialog.h:1122
+#: src/ui_viewDialog.h:1151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "കേവല അനുപാതം:"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1152
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "താരതമ്യ അനുപാതം:"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1153
+msgid "Milky Way brightness:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "മിന്നിതിളങ്ങുക:"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1156
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "തീവ്രതയുള്ള വസ്തുക്കള്‍ ദൃശ്യമാകുമ്പോള്‍ ദ്യോതി കുറഞ്ഞ നക്ഷത്രങ്ങളെ "
 "മങ്ങിപ്പിക്കുക"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1158
 msgid "Dynamic eye adaptation"
 msgstr "കണ്ണിന്റെ സ്വഭാവത്തിന്റെ അനുരൂപീകരണം"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1159
 msgid "Planets and satellites"
 msgstr "ഗ്രഹങ്ങളും ഉപഗ്രഹങ്ങളും"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1160
 msgid "Show planets"
 msgstr "ഗ്രഹങ്ങളെ കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1161
 msgid "Show planet markers"
 msgstr "ഗ്രഹങ്ങളുടെ അടയാളങ്ങള്‍ കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1162
 msgid "Show planet orbits"
 msgstr "ഗ്രഹങ്ങളുടെ പ്രദക്ഷിണപഥം കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1163
 msgid "Simulate light speed"
 msgstr "പ്രകാശവേഗതയെ അനുകരിക്കുക"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1164
 msgid "Scale Moon"
 msgstr "ചന്ദ്രനെ അനുപാതത്തിലാക്കുക"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1166
 msgid "Show atmosphere"
 msgstr "അന്തരീക്ഷം കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1167
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "പ്രകാശ മലിനീകരണം:"
 
-#: src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1169
 msgid "pressure, temperature, extinction coefficient"
 msgstr "മര്‍ദ്ദം, താപനില, extinction coefficient"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1171
 msgid "Refraction/Extinction settings..."
 msgstr "അപവര്‍ത്തനം/Extinction  ക്രമീകരണങ്ങള്‍..."
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1172
 msgid "Labels and Markers"
 msgstr "പേരുകുറികളും രേഖപ്പെടുത്തലുകളും"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1175
 msgid "Planets"
 msgstr "ഗ്രഹങ്ങള്‍"
 
-#: src/ui_viewDialog.h:1146
+#: src/ui_viewDialog.h:1176
 msgid "Shooting Stars"
 msgstr "കൊള്ളിമീന്‍"
 
-#: src/ui_viewDialog.h:1147
+#: src/ui_viewDialog.h:1177
 msgid "Hourly zenith rate:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1149
+#: src/ui_viewDialog.h:1179
 msgid "Constellations"
 msgstr "നക്ഷത്രരാശികള്‍"
 
-#: src/ui_viewDialog.h:1150
+#: src/ui_viewDialog.h:1180
 msgid "Show lines"
 msgstr "വരകള്‍ കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1151
+#: src/ui_viewDialog.h:1181
 msgid "Show labels"
 msgstr "കുറിമാനം കാട്ടുക"
 
-#: src/ui_viewDialog.h:1152
+#: src/ui_viewDialog.h:1182
 msgid "Show boundaries"
 msgstr "അതിരുകള്‍ കാട്ടുക"
 
-#: src/ui_viewDialog.h:1153
+#: src/ui_viewDialog.h:1183
 msgid "Show art"
 msgstr "കലാരൂപങ്ങള്‍ കാണിക്കുക"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1154
+#: src/ui_viewDialog.h:1184
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "കലാരൂപത്തിന്റെ തിളക്കം"
 
-#: src/ui_viewDialog.h:1155
+#: src/ui_viewDialog.h:1185
 msgid "Celestial Sphere"
 msgstr "ഖഗോളം"
 
-#: src/ui_viewDialog.h:1162
+#: src/ui_viewDialog.h:1192
 msgid "Show equator line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1166
+#: src/ui_viewDialog.h:1196
 msgid "Show meridian line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1170
+#: src/ui_viewDialog.h:1200
 msgid "Show horizon line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1174
+#: src/ui_viewDialog.h:1204
 msgid "Show ecliptic line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1178
+#: src/ui_viewDialog.h:1208
 msgid "Show Galactic plane line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1182
+#: src/ui_viewDialog.h:1212
 msgid "Projection"
 msgstr "പ്രക്ഷേപണം"
 
-#: src/ui_viewDialog.h:1183
+#: src/ui_viewDialog.h:1213
 msgid "Add/remove landscapes..."
 msgstr "പ്രകൃതിദൃശ്യങ്ങള്‍ ചേര്‍ക്കുക/ഒഴിവാക്കുക"
 
-#: src/ui_viewDialog.h:1185
+#: src/ui_viewDialog.h:1215
 msgid "Show ground"
 msgstr "ഭൗമോപരിതലം കാട്ടുക"
 
-#: src/ui_viewDialog.h:1186
+#: src/ui_viewDialog.h:1216
 msgid "Show fog"
 msgstr "പൊടിപടലം, മഞ്ഞ് കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1187
+#: src/ui_viewDialog.h:1217
 msgid "Use associated planet and position"
 msgstr "ബന്ധപ്പെട്ട ഗ്രഹവും സ്ഥാനവും ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1188
+#: src/ui_viewDialog.h:1218
 msgid "Use this landscape as default"
 msgstr "ഈ പ്രകൃതിദൃശ്യം സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1190
+#: src/ui_viewDialog.h:1220
 msgid "Use this sky culture as default"
 msgstr "ഈ ആകാശസംസ്കാരം സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1192
+#: src/ui_viewDialog.h:1222
 msgid "Visible"
 msgstr "ദൃശ്യമായതു്"
 
