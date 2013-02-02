@@ -276,7 +276,7 @@ void MobileGui::initActions()
     shortcutMgr->addGuiAction("actionView_Dialog", true, N_("View"), "", "", group, false, false);
     shortcutMgr->addGuiAction("actionPlugins_Dialog", true, N_("Plugins"), "", "", group, false, false);
     shortcutMgr->addGuiAction("actionDateTime_Dialog", true, N_("Date / Time"), "", "", group, false, false);
-    shortcutMgr->addGuiAction("actionLocations_Dialog", true, N_("Locations"), "", "", group, false, false);
+    shortcutMgr->addGuiAction("actionLocations_Dialog", true, N_("Location"), "", "", group, false, false);
     shortcutMgr->addGuiAction("actionSettings_Dialog", true, N_("Settings"), "", "", group, false, false);
 
     //Setup the Sky and View dialogs
