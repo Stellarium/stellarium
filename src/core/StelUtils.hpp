@@ -296,9 +296,29 @@ namespace StelUtils
 	//! Get Delta-T estimation for a given date.
 	//! Note that this method is valid for the year range:
 	//! -1999 to +3000, outside of which "0" will be returned.
+	//! Implementation algorithm by Espenak & Meeus (2006) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-	double getDeltaT(double jDay);
+	double getDeltaTByEspenakMeeus(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by IAU (1952) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByIAU(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Astronomical Ephemeris (1960) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByAstronomicalEphemeris(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByTuckermanGoldstine(double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! @param jDay the JD
 	//! @return SecularAcceleration in seconds

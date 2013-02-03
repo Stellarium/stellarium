@@ -622,6 +622,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("video/screen_y", mainWindow.y());
 	}
 
+	conf->setValue("astro/time_correction_algorithm", core->getCurrentDeltaTAlgorithmKey());
+
 	// clear the restore defaults flag if it is set.
 	conf->setValue("main/restore_defaults", false);
 

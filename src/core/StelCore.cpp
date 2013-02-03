@@ -139,6 +139,9 @@ void StelCore::init(class StelRenderer* renderer)
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
+
+	QString tmpDT = conf->value("astro/time_correction_algorithm", "EspenakMeeus").toString();
+	setCurrentDeltaTAlgorithmKey(tmpDT);
 }
 
 
@@ -1221,4 +1224,77 @@ void StelCore::updateTime(double deltaTime)
 void StelCore::setStartupTimeMode(const QString& s)
 {
 	startupTimeMode = s;
+}
+
+double StelCore::getDeltaT(double jDay)
+{
+	double DeltaT = 0.;
+	switch (getCurrentDeltaTAlgorithm())
+	{
+		case WithoutCorrection:
+			DeltaT = 0.;
+			break;
+		case IAU:
+			DeltaT = StelUtils::getDeltaTByIAU(jDay);
+			break;
+		case AstronomicalEphemeris:
+			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(jDay);
+			break;
+		case TuckermanGoldstine:
+			DeltaT = StelUtils::getDeltaTByTuckermanGoldstine(jDay);
+			break;
+		case MullerStephenson:
+			DeltaT = 0.;
+			break;
+		case Stephenson:
+			DeltaT = 0.;
+			break;
+		case MorrisonStephenson:
+			DeltaT = 0.;
+			break;
+		case StephensonMorrison:
+			DeltaT = 0;
+			break;
+		case StephensonHoulden:
+			DeltaT = 0.;
+			break;
+		case Espenak:
+			DeltaT = 0.;
+			break;
+		case Borkowski:
+			DeltaT = 0.;
+			break;
+		case ChaprontTouze:
+			DeltaT = 0.;
+			break;
+		case ChaprontFrancou:
+			DeltaT = 0.;
+			break;
+		case JPLHorizons:
+			DeltaT = 0.;
+			break;
+		case EspenakMeeus:
+			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
+			break;
+	}
+	return DeltaT;
+}
+
+//! Set the current algorithm for time correction to use
+void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm"));
+	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toAscii().data());
+	if (algo<0)
+	{
+		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"EspenakMeeus\" instead";
+		algo = EspenakMeeus;
+	}
+	setCurrentDeltaTAlgorithm(algo);
+}
+
+//! Get the current algorithm used by the DeltaT
+QString StelCore::getCurrentDeltaTAlgorithmKey(void) const
+{
+	return metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm")).key(currentDeltaTAlgorithm);
 }
