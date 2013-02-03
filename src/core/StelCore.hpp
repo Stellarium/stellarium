@@ -47,34 +47,35 @@ class StelCore : public QObject
 {
 	Q_OBJECT
 	Q_ENUMS(ProjectionType)
+	Q_ENUMS(DeltaTAlgorithm)
 
 public:
 	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType
 	{
-		FrameUninitialized,           //!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
-		FrameAltAz,                   //!< Altazimuthal reference frame centered on observer.
-		FrameHeliocentricEcliptic,    //!< Ecliptic reference frame centered on the Sun
-		FrameObservercentricEcliptic, //!< Ecliptic reference frame centered on the Observer
-		FrameEquinoxEqu,              //!< Equatorial reference frame at the current equinox centered on the observer.
-									  //! The north pole follows the precession of the planet on which the observer is located.
-		FrameJ2000,                   //!< Equatorial reference frame at the J2000 equinox centered on the observer.
-									  //! This is also the ICRS reference frame.
-		FrameGalactic                 //! Galactic reference frame centered on observer.
+		FrameUninitialized,		//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
+		FrameAltAz,			//!< Altazimuthal reference frame centered on observer.
+		FrameHeliocentricEcliptic,	//!< Ecliptic reference frame centered on the Sun
+		FrameObservercentricEcliptic,	//!< Ecliptic reference frame centered on the Observer
+		FrameEquinoxEqu,		//!< Equatorial reference frame at the current equinox centered on the observer.
+						//! The north pole follows the precession of the planet on which the observer is located.
+		FrameJ2000,			//!< Equatorial reference frame at the J2000 equinox centered on the observer.
+						//! This is also the ICRS reference frame.
+		FrameGalactic			//! Galactic reference frame centered on observer.
 	};
 
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
-		ProjectionPerspective,    //!< Perspective projection
-		ProjectionEqualArea,      //!< Equal Area projection
-		ProjectionStereographic,  //!< Stereograhic projection
-		ProjectionFisheye,	      //!< Fisheye projection
-		ProjectionHammer,         //!< Hammer-Aitoff projection
-		ProjectionCylinder,	      //!< Cylinder projection
-		ProjectionMercator,	      //!< Mercator projection
-		ProjectionOrthographic	  //!< Orthographic projection
+		ProjectionPerspective,		//!< Perspective projection
+		ProjectionEqualArea,		//!< Equal Area projection
+		ProjectionStereographic,	//!< Stereograhic projection
+		ProjectionFisheye,		//!< Fisheye projection
+		ProjectionHammer,		//!< Hammer-Aitoff projection
+		ProjectionCylinder,		//!< Cylinder projection
+		ProjectionMercator,		//!< Mercator projection
+		ProjectionOrthographic		//!< Orthographic projection
 	};
 
 	//! Available refraction mode.
@@ -83,6 +84,27 @@ public:
 		RefractionAuto,			//!< Automatically decide to add refraction if atmosphere is activated
 		RefractionOn,			//!< Always add refraction (i.e. apparent coordinates)
 		RefractionOff			//!< Never add refraction (i.e. geometric coordinates)
+	};
+
+	//! @enum DeltaTAlgorithm
+	//! Available DeltaT algorithms
+	enum DeltaTAlgorithm
+	{
+		WithoutCorrection,              //!< Without correction, DeltaT is disabled
+		IAU,                            //!< IAU (1959) algorithm for DeltaT (based on observations by Spencer Jones (1939))
+		AstronomicalEphemeris,          //!< Astronomical Ephemeris (1960) algorithm for DeltaT
+		TuckermanGoldstine,             //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
+		MullerStephenson,               //!< Muller & Stephenson (1975) algorithm for DeltaT
+		Stephenson,                     //!< Stephenson (1978) algorithm for DeltaT
+		MorrisonStephenson,             //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+		StephensonMorrison,             //!< Stephenson & Morrison (1984) algorithm for DeltaT
+		StephensonHoulden,              //!< Stephenson & Houlden (1986) algorithm for DeltaT
+		Espenak,                        //!< Espenak (1987, 1989) algorithm for DeltaT
+		Borkowski,                      //!< Borkowski (1988) algorithm for DeltaT
+		ChaprontTouze,                  //!< Chapront-Touze & Chapront (1991) algorithm for DeltaT
+		ChaprontFrancou,                //!< Chapront, Chapront-Touze & Francou (1997) algorithm for DeltaT
+		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
+		EspenakMeeus                    //!< Espenak & Meeus (2006) algorithm for DeltaT
 	};
 
 	StelCore();
@@ -230,6 +252,11 @@ public:
 	QString getStartupTimeMode();
 	void setStartupTimeMode(const QString& s);
 
+	//! Get Delta-T estimation for a given date.
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaT(double jDay);
+
 public slots:
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);
@@ -242,6 +269,16 @@ public slots:
 
 	//! Get the list of all the available projections
 	QStringList getAllProjectionTypeKeys() const;
+
+	//! Set the current algorithm for time correction (DeltaT)
+	void setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm) { currentDeltaTAlgorithm=algorithm; }
+	//! Get the current algorithm for time correction (DeltaT)
+	DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
+
+	//! Get the current algorithm used by the DeltaT
+	QString getCurrentDeltaTAlgorithmKey(void) const;
+	//! Set the current algorithm to use from its key
+	void setCurrentDeltaTAlgorithmKey(QString type);
 
 	//! Set the mask type.
 	void setMaskType(StelProjector::StelProjectorMaskType m);
@@ -441,6 +478,9 @@ private:
 
 	// The currently used projection type
 	ProjectionType currentProjectionType;
+
+	// The currentrly used time correction (DeltaT)
+	DeltaTAlgorithm currentDeltaTAlgorithm;
 
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;
