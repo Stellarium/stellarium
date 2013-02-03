@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 01:43+0700\n"
+"POT-Creation-Date: 2013-02-02 20:24+0700\n"
 "PO-Revision-Date: 2013-01-30 07:20+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-02 04:43+0000\n"
+"X-Launchpad-Export-Date: 2013-02-03 04:46+0000\n"
 "X-Generator: Launchpad (build 16462)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -160,38 +160,38 @@ msgid "Apparent diameter: %1"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:508 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "คาบดาราคติ: %1 วัน (%2 a)"
 
-#: src/core/modules/Planet.cpp:510
+#: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "วันดาราคติ: %1"
 
-#: src/core/modules/Planet.cpp:514
+#: src/core/modules/Planet.cpp:513 src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "วันสุริยคติปานกลาง: %1"
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "มุมดิถี: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:523
 #, qt-format
 msgid "Elongation: %1"
 msgstr "มุมห่างจากดวงอาทิตย์: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:524
 #, qt-format
 msgid "Phase: %1"
 msgstr "ดิถี: %1"
 
-#: src/core/modules/Planet.cpp:524
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "ส่วนสว่าง: %1%"
