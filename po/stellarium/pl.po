@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 01:43+0700\n"
-"PO-Revision-Date: 2013-01-30 01:38+0000\n"
+"POT-Creation-Date: 2013-02-02 20:24+0700\n"
+"PO-Revision-Date: 2013-02-03 03:09+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-02 04:41+0000\n"
+"X-Launchpad-Export-Date: 2013-02-03 04:43+0000\n"
 "X-Generator: Launchpad (build 16462)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -163,38 +163,38 @@ msgid "Apparent diameter: %1"
 msgstr "Średnica widoma: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:508 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Okres gwiazdowy: %1 dni (%2 a)"
 
-#: src/core/modules/Planet.cpp:510
+#: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Dzień gwiazdowy: %1"
 
-#: src/core/modules/Planet.cpp:514
+#: src/core/modules/Planet.cpp:513 src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Kąt fazowy: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:523
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongacja: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:524
 #, qt-format
 msgid "Phase: %1"
 msgstr "Faza: %1"
 
-#: src/core/modules/Planet.cpp:524
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Oświetlone: %1%"
@@ -3325,7 +3325,7 @@ msgstr "Skala względna:"
 
 #: src/ui_viewDialog.h:1153
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Jasność Drogi Mlecznej:"
 
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -4167,7 +4167,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Barlow: none"
-msgstr ""
+msgstr "Barlow: brak"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4218,11 +4218,11 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous barlow"
-msgstr ""
+msgstr "&Poprzedni barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next barlow"
-msgstr ""
+msgstr "&Następny barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4246,11 +4246,11 @@ msgstr "Następny okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous Barlow lens"
-msgstr ""
+msgstr "Poprzednia soczewka Barlowa"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next Barlow lens"
-msgstr ""
+msgstr "&Następna soczewka Barlowa"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4320,7 +4320,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Barlow: None"
-msgstr ""
+msgstr "Barlow: Brak"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
@@ -4346,6 +4346,7 @@ msgstr "Rzeczywiste pole widzenia tej lornetki"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/barlow/telescope combination"
 msgstr ""
+"Powiększenie uzyskiwane w wyniku użycia tego okularu/barlowa/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
@@ -4537,7 +4538,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1002
 msgid "Barlow lenses"
-msgstr ""
+msgstr "Soczewki Barlowa"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1003
 #: plugins/Oculars/src/ui_ocularDialog.h:1013

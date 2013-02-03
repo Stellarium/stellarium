@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 01:43+0700\n"
+"POT-Creation-Date: 2013-02-02 20:24+0700\n"
 "PO-Revision-Date: 2012-05-09 17:21+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-02 04:37+0000\n"
+"X-Launchpad-Export-Date: 2013-02-03 04:40+0000\n"
 "X-Generator: Launchpad (build 16462)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -158,38 +158,38 @@ msgid "Apparent diameter: %1"
 msgstr ""
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:508 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:510
+#: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:514
+#: src/core/modules/Planet.cpp:513 src/core/modules/Planet.cpp:515
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:523
 #, qt-format
 msgid "Elongation: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:524
 #, qt-format
 msgid "Phase: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:524
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr ""
