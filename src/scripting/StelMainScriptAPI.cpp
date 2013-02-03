@@ -146,7 +146,7 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 
 QString StelMainScriptAPI::getDeltaT() const
 {
-	return StelUtils::hoursToHmsStr(StelUtils::getDeltaT(getJDay())/3600.);
+	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT(getJDay())/3600.);
 }
 
 //! Set time speed in JDay/sec

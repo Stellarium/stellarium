@@ -1207,7 +1207,8 @@ double decYear2DeltaT(double y)
 	return r;
 }
 
-double getDeltaT(double jDay)
+// Implementation algorithm by Espenak & Meeus (2006) for DeltaT computation
+double getDeltaTByEspenakMeeus(double jDay)
 {
 	int year, month, day;
 	double moon = 0.;
@@ -1216,6 +1217,36 @@ double getDeltaT(double jDay)
 		moon = getMoonSecularAcceleration(jDay);
 	// approximate "decimal year" = year + (month - 0.5)/12
 	return decYear2DeltaT(year + (month - 0.5)/12)+moon;
+}
+
+// Implementation algorithm by IAU (1952) for DeltaT computation
+double getDeltaTByIAU(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1900)/100;
+	return 24.349+72.318*u+29.950*std::pow(u,2);
+}
+
+// Implementation algorithm by Astronomical Ephemeris (1960) for DeltaT computation
+double getDeltaTByAstronomicalEphemeris(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1900)/100;
+	return 24.349+72.3165*u+29.949*std::pow(u,2);
+}
+
+// Implementation algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
+double getDeltaTByTuckermanGoldstine(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1900)/100;
+	return 4.87+35.06*u+36.79*std::pow(u,2);
 }
 
 double getMoonSecularAcceleration(double jDay)

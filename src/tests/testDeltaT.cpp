@@ -88,7 +88,7 @@ void TestDeltaT::historicalTest()
 		double expectedResult = data.takeFirst().toDouble();
 		double acceptableError = data.takeFirst().toDouble();		
 		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
-		double result = StelUtils::getDeltaT(JD);
+		double result = StelUtils::getDeltaTByEspenakMeeus(JD);
 		double actualError = std::abs(expectedResult) - std::abs(result);
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
 		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 error=%5 acceptable=%6")

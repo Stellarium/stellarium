@@ -585,7 +585,7 @@ void BottomStelBar::updateText(bool updatePos)
 	bool displayDeltaT = false;
 	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
 	{
-		deltaT = StelUtils::getDeltaT(jd);
+		deltaT = core->getDeltaT(jd);
 		displayDeltaT = true;
 	}
 
