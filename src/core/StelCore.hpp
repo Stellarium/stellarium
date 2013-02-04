@@ -101,8 +101,8 @@ public:
 		StephensonHoulden,              //!< Stephenson & Houlden (1986) algorithm for DeltaT
 		Espenak,                        //!< Espenak (1987, 1989) algorithm for DeltaT
 		Borkowski,                      //!< Borkowski (1988) algorithm for DeltaT
-		ChaprontTouze,                  //!< Chapront-Touze & Chapront (1991) algorithm for DeltaT
-		ChaprontFrancou,                //!< Chapront, Chapront-Touze & Francou (1997) algorithm for DeltaT
+		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+		ChaprontFrancou,                //!< Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT
 		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
 		EspenakMeeus                    //!< Espenak & Meeus (2006) algorithm for DeltaT
 	};
