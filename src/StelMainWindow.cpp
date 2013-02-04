@@ -95,7 +95,6 @@ void StelMainWindow::init(QSettings* conf)
     setFullScreen(false);
 #else
 	if (conf->value("video/fullscreen", true).toBool())
-#endif
 	{
 		setFullScreen(true);
 	}
@@ -106,6 +105,7 @@ void StelMainWindow::init(QSettings* conf)
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
     }
+#endif
 
 	show();
 	// Process the event to make the window visible and create the renderer.
