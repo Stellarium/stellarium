@@ -1232,48 +1232,63 @@ double StelCore::getDeltaT(double jDay)
 	switch (getCurrentDeltaTAlgorithm())
 	{
 		case WithoutCorrection:
+			// Without correction, DeltaT is disabled
 			DeltaT = 0.;
 			break;
 		case IAU:
+			// IAU (1959) algorithm for DeltaT, based on observations by Spencer Jones (1939)
 			DeltaT = StelUtils::getDeltaTByIAU(jDay);
 			break;
 		case AstronomicalEphemeris:
+			// Astronomical Ephemeris (1960) algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(jDay);
 			break;
 		case TuckermanGoldstine:
+			// Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByTuckermanGoldstine(jDay);
 			break;
 		case MullerStephenson:
-			DeltaT = 0.;
+			// Muller & Stephenson (1975) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByMullerStephenson(jDay);
 			break;
 		case Stephenson:
-			DeltaT = 0.;
+			// Stephenson (1978) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByStephenson(jDay);
 			break;
 		case MorrisonStephenson:
-			DeltaT = 0.;
+			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+			DeltaT = StelUtils::getDeltaTByMorrisonStephenson(jDay);
 			break;
 		case StephensonMorrison:
-			DeltaT = 0;
+			// Stephenson & Morrison (1984) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByStephensonMorrison(jDay);
 			break;
 		case StephensonHoulden:
-			DeltaT = 0.;
+			// Stephenson & Houlden (1986) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByStephensonHoulden(jDay);
 			break;
 		case Espenak:
-			DeltaT = 0.;
+			// Espenak (1987, 1989) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByEspenak(jDay);
 			break;
 		case Borkowski:
-			DeltaT = 0.;
+			// Borkowski (1988) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByBorkowski(jDay);
 			break;
 		case ChaprontTouze:
-			DeltaT = 0.;
+			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByChaprontTouze(jDay);
 			break;
 		case ChaprontFrancou:
-			DeltaT = 0.;
+			// Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByChaprontFrancou(jDay);
 			break;
 		case JPLHorizons:
-			DeltaT = 0.;
+			// JPL Horizons algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByJPLHorizons(jDay);
 			break;
 		case EspenakMeeus:
+			// Espenak & Meeus (2006) algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
 			break;
 	}

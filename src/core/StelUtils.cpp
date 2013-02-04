@@ -1249,6 +1249,149 @@ double getDeltaTByTuckermanGoldstine(double jDay)
 	return 4.87+35.06*u+36.79*std::pow(u,2);
 }
 
+// Implementation algorithm by Muller & Stephenson (1975) for DeltaT computation
+double getDeltaTByMullerStephenson(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1900)/100;
+	return 66.0+120.38*u+45.78*std::pow(u,2);
+}
+
+// Implementation algorithm by Stephenson (1978) for DeltaT computation
+double getDeltaTByStephenson(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1900)/100;
+	return 20.0+114.0*u+38.30*std::pow(u,2);
+}
+
+// Implementation algorithm by Morrison & Stephenson (1982) for DeltaT computation
+double getDeltaTByMorrisonStephenson(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1810)/100;
+	return -15.0+32.50*std::pow(u,2);
+}
+
+// Implementation algorithm by Stephenson & Morrison (1984) for DeltaT computation
+double getDeltaTByStephensonMorrison(double jDay)
+{
+	int year, month, day;
+	double u;
+	double deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1800)/100;
+	if (-391 < year and year <= 948)
+		deltaT = 1360.0 + 320*u + 44.3*std::pow(u,2);
+	if (948 < year and year <= 1600)
+		deltaT = 25.5*std::pow(u,2);
+
+	return deltaT;
+}
+
+// Implementation algorithm by Stephenson & Houlden (1986) for DeltaT computation
+double getDeltaTByStephensonHoulden(double jDay)
+{
+	int year, month, day;
+	double u;
+	double deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	if (year <= 948)
+	{
+		u = (year-948)/100;
+		deltaT = 1830.0 - 405.0*u + 46.5*std::pow(u,2);
+	}
+	if (948 < year and year <= 1600)
+	{
+		u = (year-1850)/100;
+		deltaT = 25.5*std::pow(u,2);
+	}
+
+	return deltaT;
+}
+
+// Implementation algorithm by Espenak (1987, 1989) for DeltaT computation
+// This relation should not be used before around 1950 or after around 2100 (Espenak, pers. comm.).
+double getDeltaTByEspenak(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-2000)/100;
+	return 67.0+61.0*u + 64.3*std::pow(u,2);
+}
+
+// Implementation algorithm by Borkowski (1988) for DeltaT computation
+double getDeltaTByBorkowski(double jDay)
+{
+	int year, month, day;
+	double u;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-1625)/100;
+	return 40.0 + 35.0*std::pow(u,2);
+}
+
+// Implementation algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
+double getDeltaTByChaprontTouze(double jDay)
+{
+	int year, month, day;
+	double u;
+	double deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-2000)/100;
+	if (-391 < year and year <= 948)
+		deltaT = 2177.0 - 495.0*u + 42.4*std::pow(u,2);
+	if (948 < year and year <= 1600)
+		deltaT = 102.0 + 100.0*u + 23.6*std::pow(u,2);
+
+	return deltaT;
+}
+
+// Implementation algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
+double getDeltaTByChaprontFrancou(double jDay)
+{
+	int year, month, day;
+	double u;
+	double deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	u = (year-2000)/100;
+	if (year <= 948)
+		deltaT = 2177.0 - 497.0*u + 44.1*std::pow(u,2);
+	if (948 < year and year <= 1600)
+		deltaT = 102.0 + 102.0*u + 25.3*std::pow(u,2);
+	if (2000 < year and year <= 2100)
+		deltaT = 102.0 + 102.0*u + 25.3*std::pow(u,2) + 0.37*(year - 2100);
+
+	return deltaT;
+}
+
+// Implementation algorithm by JPL Horizons for DeltaT computation
+double getDeltaTByJPLHorizons(double jDay)
+{
+	int year, month, day;
+	double u;
+	double deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	if (-2999 < year and year < 948)
+	{
+		u = (year-1820)/100;
+		deltaT = 31.0*std::pow(u,2);
+	}
+	if (948 < year and year <= 1620)
+	{
+		u = (year-2000)/100;
+		deltaT = 50.6 + 67.5*u + 22.5*std::pow(u,2);
+	}
+
+	return deltaT;
+}
+
 double getMoonSecularAcceleration(double jDay)
 {
 	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
