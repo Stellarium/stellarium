@@ -241,11 +241,12 @@ void LandscapeMgr::update(double deltaTime)
 
 	// We define the brigthness zero when the sun is 8 degrees below the horizon.
 	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+	float initBrightness = getInitialLandscapeBrightness();
 
 	if(sinSunAngleRad < -0.1/1.5 )
-		landscapeBrightness = 0.01;
+		landscapeBrightness = initBrightness;
 	else
-		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+		landscapeBrightness = (initBrightness + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
 		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core, true),0.)*moonPos[2];
 
@@ -290,6 +291,8 @@ void LandscapeMgr::init()
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
+	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
+	setInitialLandscapeBrightness(conf->value("landscape/initial_landscape_brightness", 0.01).toFloat());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("landscape/init_bortle_scale",3).toInt(&ok));
