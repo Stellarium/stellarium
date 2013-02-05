@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2012-11-06 14:42+0000\n"
-"Last-Translator: KOBAYASHI Masashi <kobayashi.masashi@osaka-shoin.ac.jp>\n"
+"PO-Revision-Date: 2013-02-04 15:39+0000\n"
+"Last-Translator: vine_user <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:41+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-05 04:42+0000\n"
+"X-Generator: Launchpad (build 16468)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "地平線"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
-msgstr ""
+msgstr "銀河面"
 
 #: src/core/modules/LandscapeMgr.cpp:500
 msgid "Author: "
@@ -139,7 +139,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "距離: %1天文単位 (%2 km)"
 
 #: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:242
 #: src/core/modules/Comet.cpp:156
@@ -177,7 +177,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "位相角: %1"
 
 #: src/core/modules/Planet.cpp:523
 #, qt-format
@@ -397,15 +397,15 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "見つかりません"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "見つかりました"
 
 #: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
@@ -457,12 +457,12 @@ msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"新しいスターカタログのダウンロードが終了しました！\n"
+"新しい星表のダウンロードが終了しました！\n"
 "表示するには Stellarium を再起動してください。"
 
 #: src/gui/ConfigurationDialog.cpp:869
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "利用可能なすべての星表がインストールされました。"
 
 #: src/gui/ConfigurationDialog.cpp:874
 #, qt-format
@@ -545,7 +545,7 @@ msgstr "CTRL + ↑/↓"
 
 #: src/gui/HelpDialog.cpp:171
 msgid "Select object"
-msgstr "選択"
+msgstr "天体を選択"
 
 #: src/gui/HelpDialog.cpp:172
 msgid "Left click"
@@ -646,7 +646,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
-msgstr ""
+msgstr "過去の開発者"
 
 #: src/gui/HelpDialog.cpp:318
 msgid ""
@@ -795,11 +795,11 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "テキストをクリア"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "画像をクリア"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
@@ -807,7 +807,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "星座表"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup Error"
@@ -819,7 +819,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:535
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "ストラスブール大学(フランス)"
 
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
@@ -827,7 +827,7 @@ msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "アクション"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
@@ -1217,22 +1217,22 @@ msgstr "西"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "惑星"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "彗星"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "小惑星"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "月"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
@@ -1241,7 +1241,7 @@ msgstr ""
 
 #: src/translations.h:165
 msgid "Arabic"
-msgstr ""
+msgstr "アラビア"
 
 #: src/translations.h:166
 msgid "Aztec"
@@ -1298,7 +1298,7 @@ msgstr "西洋"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:184
 msgid "Guereins"
-msgstr ""
+msgstr "ゲラン"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:186
@@ -1313,12 +1313,12 @@ msgstr "ハリケーン"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:192
 msgid "Ocean"
-msgstr ""
+msgstr "海"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:194
 msgid "Garching"
-msgstr ""
+msgstr "ガーヒンク"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:204
@@ -1328,22 +1328,22 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "部分月食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:208
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "皆既月食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:210
 msgid "Screensaver"
-msgstr ""
+msgstr "スクリーンセーバー"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:212
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "2009年の日食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:214
@@ -1422,11 +1422,11 @@ msgstr ""
 
 #: src/translations.h:248
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "部分月食をデモンストレーションするスクリプト"
 
 #: src/translations.h:249
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "皆既月食をデモンストレーションするスクリプト"
 
 #: src/translations.h:250
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -1436,11 +1436,11 @@ msgstr ""
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
-msgstr ""
+msgstr "2009年に起こった皆既日食をデモンストレーションするスクリプト (位置=ランプル, バングラディッシュ)"
 
 #: src/translations.h:252
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "起動時に自動実行するスクリプト"
 
 #: src/translations.h:253
 msgid ""
@@ -1588,7 +1588,7 @@ msgstr "アゼルバイジャン共和国"
 
 #: src/translations.h:287
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "ボスニア・ヘルツェゴビナ"
 
 #: src/translations.h:288
 msgid "Barbados"
@@ -2518,7 +2518,7 @@ msgstr "太陽時で一日進む"
 
 #: src/translations.h:525
 msgid "Add 1 solar hour"
-msgstr "太陽時で1時間進む"
+msgstr "太陽時で一時間進む"
 
 #: src/translations.h:526
 msgid "Add 1 solar week"
@@ -2750,7 +2750,7 @@ msgstr "銀河角"
 
 #: src/translations.h:582 src/ui_viewDialog.h:1210
 msgid "Galactic plane"
-msgstr ""
+msgstr "銀河面"
 
 #: src/translations.h:583
 msgid "Ground"
@@ -2825,7 +2825,7 @@ msgstr "終了"
 
 #: src/translations.h:601
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "選択された天体の情報をクリップボードにコピー"
 
 #: src/translations.h:602
 msgid "Save screenshot"
@@ -2846,7 +2846,7 @@ msgstr "動きと選択"
 
 #: src/translations.h:608
 msgid "Center on selected object"
-msgstr "対象を画面中心へ"
+msgstr "天体を画面中心へ"
 
 #: src/translations.h:609
 msgid "Set home planet to selected planet"
@@ -2854,11 +2854,11 @@ msgstr "選択した惑星を母星とする"
 
 #: src/translations.h:610
 msgid "Track object"
-msgstr "対象を追尾"
+msgstr "天体を追尾"
 
 #: src/translations.h:611
 msgid "Zoom in on selected object"
-msgstr "対象にズームイン"
+msgstr "選択された天体にズームイン"
 
 #: src/translations.h:612
 msgid "Zoom out"
@@ -2976,11 +2976,11 @@ msgstr "検索画面"
 
 #: src/translations.h:666
 msgid "Shortcuts window"
-msgstr ""
+msgstr "ショートカット画面"
 
 #: src/translations.h:667
 msgid "Sky and viewing options window"
-msgstr "空と見た目の設定"
+msgstr "空と表示の設定"
 
 #: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -2997,7 +2997,7 @@ msgstr "ログ"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "キーボードショートカットを編集..."
 
 #: src/ui_helpDialogGui.h:292
 msgid "Refresh"
@@ -3018,7 +3018,7 @@ msgstr "デフォルトとして利用する"
 
 #: src/ui_locationDialogGui.h:395
 msgid "Return to default"
-msgstr ""
+msgstr "デフォルトに戻す"
 
 #: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:990
 #: plugins/Oculars/src/ui_ocularDialog.h:999
@@ -3078,7 +3078,7 @@ msgstr "天体を検索"
 
 #: src/ui_searchDialogGui.h:543
 msgid "Find Object or Position"
-msgstr "物体それとも位置が探すまで"
+msgstr "天体または位置を検索"
 
 #: src/ui_searchDialogGui.h:549
 msgid "iota"
@@ -3230,7 +3230,7 @@ msgstr "表示"
 
 #: src/ui_viewDialog.h:1141
 msgid "Sky"
-msgstr "天空"
+msgstr "空"
 
 #: src/ui_viewDialog.h:1143
 msgid "Markings"
@@ -3304,7 +3304,7 @@ msgstr "大気を表示"
 #: src/ui_viewDialog.h:1167
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
-msgstr ""
+msgstr "光害:"
 
 #: src/ui_viewDialog.h:1169
 msgid "pressure, temperature, extinction coefficient"
@@ -3354,7 +3354,7 @@ msgstr "星座絵の表示"
 #: src/ui_viewDialog.h:1184
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
-msgstr ""
+msgstr "星座絵の明るさ:"
 
 #: src/ui_viewDialog.h:1185
 msgid "Celestial Sphere"
@@ -3497,7 +3497,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:976
 msgid "Customized"
-msgstr ""
+msgstr "カスタム"
 
 #: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
@@ -3553,7 +3553,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1001
 msgid "Distance"
-msgstr ""
+msgstr "距離"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Catalog number(s)"
@@ -3591,7 +3591,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1016
 msgid "Control"
-msgstr "Control"
+msgstr "操作"
 
 #: src/ui_configurationDialog.h:1018
 msgid "Allow keyboard to pan and zoom"
@@ -3642,7 +3642,7 @@ msgstr "その他:"
 
 #: src/ui_configurationDialog.h:1039
 msgid "use current"
-msgstr "現在の設定を維持"
+msgstr "現在の設定を使用"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Other"
@@ -3662,7 +3662,7 @@ msgstr "上下左右切り替えボタンを下のメニューへ表示する"
 
 #: src/ui_configurationDialog.h:1048
 msgid "Show flip buttons"
-msgstr "上下左右切り替えボタン表示"
+msgstr "上下左右切り替えボタンを表示"
 
 #: src/ui_configurationDialog.h:1050
 msgid "Toggle display backgrounds of the nebulae."
@@ -3670,7 +3670,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1052
 msgid "Show nebula background button"
-msgstr ""
+msgstr "星雲の背景ボタンを表示"
 
 #: src/ui_configurationDialog.h:1053
 msgid "Planetarium options"
@@ -3712,7 +3712,7 @@ msgstr "一つの星座を選択"
 
 #: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
-msgstr ""
+msgstr "太陽の影を描画"
 
 #: src/ui_configurationDialog.h:1072
 msgid ""
@@ -3738,7 +3738,7 @@ msgstr "色の反転"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Star catalog updates"
-msgstr "スターカタログのアップデート"
+msgstr "星表のアップデート"
 
 #: src/ui_configurationDialog.h:1081
 msgid "Click here to start downloading"
@@ -3746,7 +3746,7 @@ msgstr "クリックするとダウンロードを開始します"
 
 #: src/ui_configurationDialog.h:1083
 msgid "Download this file to view even more stars"
-msgstr "多くの星を表示するためこのファイルをダウンロード"
+msgstr "多くの星を表示するためファイルをダウンロード"
 
 #: src/ui_configurationDialog.h:1085
 msgid "Restart the download"
@@ -3839,15 +3839,15 @@ msgstr "警告: 選択された背景を削除するとファイルは削除さ�
 
 #: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "キーボードショートカット"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
-msgstr ""
+msgstr "デフォルトに戻す"
 
 #: src/ui_shortcutsDialog.h:201
 msgid "Apply"
-msgstr ""
+msgstr "適用"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
@@ -4367,7 +4367,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:988
 #: plugins/Oculars/src/ui_ocularDialog.h:996
 msgid "Eyepieces"
-msgstr ""
+msgstr "アイピース"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:989
 #: plugins/Oculars/src/ui_ocularDialog.h:998
@@ -4401,7 +4401,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:995
 msgid "Binoculars"
-msgstr ""
+msgstr "双眼鏡"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:997
 msgid "Barlows"
@@ -4449,7 +4449,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
-msgstr ""
+msgstr "望遠鏡"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1019
 msgid "Diameter:"
@@ -4491,7 +4491,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:172
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
-msgstr ""
+msgstr "古いsatellites.jsonファイルとは互換性がありません - デフォルトファイルを使用します"
 
 #: plugins/Satellites/src/Satellite.cpp:231
 #: plugins/Satellites/src/Satellite.cpp:235
@@ -4522,7 +4522,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:260
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "高度(km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:263
@@ -5235,7 +5235,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
-msgstr ""
+msgstr "現在の天体(&C)"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "Hours-minutes-seconds format"
@@ -5774,7 +5774,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
-msgstr ""
+msgstr "星雲名"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
@@ -5963,7 +5963,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "天体リストを含んだファイル"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Get orbital elements"
@@ -5976,7 +5976,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
-msgstr ""
+msgstr "天体が見つかりました"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid ""
@@ -6064,7 +6064,7 @@ msgstr "太陽系"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "歴史的な超新星"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid ""
@@ -6074,12 +6074,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:97
 msgid "supernova"
-msgstr ""
+msgstr "超新星"
 
 #: plugins/Supernovae/src/Supernova.cpp:113
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "超新星の種類: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
