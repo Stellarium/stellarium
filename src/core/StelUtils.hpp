@@ -381,8 +381,9 @@ namespace StelUtils
 
 	//! Get Secular Acceleration estimation for a given year.
 	//! @param jDay the JD
+	//! @param ndot value n.dot which use in the algorithm
 	//! @return SecularAcceleration in seconds
-	double getMoonSecularAcceleration(double jDay);
+	double getMoonSecularAcceleration(double jDay, double ndot);
 }
 
 #endif // _STELUTILS_HPP_
