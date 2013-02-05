@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2013-01-25 21:05+0000\n"
+"PO-Revision-Date: 2013-02-04 21:29+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:38+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-05 04:42+0000\n"
+"X-Generator: Launchpad (build 16468)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -3302,7 +3302,7 @@ msgstr "Relativní stupnice"
 
 #: src/ui_viewDialog.h:1153
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Jas Mléčné Dráhy"
 
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -4127,17 +4127,17 @@ msgstr "zZP okuláru: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Barlow #%1"
-msgstr ""
+msgstr "Barlow #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Barlow #%1: %2"
-msgstr ""
+msgstr "Barlow #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Barlow: none"
-msgstr ""
+msgstr "Barlow: žádný"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4184,15 +4184,15 @@ msgstr "Senzor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Barlow"
-msgstr ""
+msgstr "&Barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous barlow"
-msgstr ""
+msgstr "&Předchozí barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next barlow"
-msgstr ""
+msgstr "&Další barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4216,11 +4216,11 @@ msgstr "Další okulár"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous Barlow lens"
-msgstr ""
+msgstr "Předchozí Barlowova čočka"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next Barlow lens"
-msgstr ""
+msgstr "Další Barlowova čočka"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4277,19 +4277,19 @@ msgstr "Zdánlivé zorné pole okuláru"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Mnohočetnost: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Barlow: None"
-msgstr ""
+msgstr "Barlow: Žádná"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Mnohočetnost: N/A"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of barlow lens"
-msgstr ""
+msgstr "Mnohočetnost barlowovy čočky"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4307,11 +4307,14 @@ msgstr "Skutečné zorné pole poskytnuté tímto dalekohledem"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/barlow/telescope combination"
 msgstr ""
+"Zvětšení poskytnuté touto kombinací okuláru/barlowovy čočky/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/barlow/telescope combination"
 msgstr ""
+"Skutečné zorné pole poskytnuté touto kombinací okuláru/barlowovy "
+"čočky/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4486,15 +4489,15 @@ msgstr "Dalekohled"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:997
 msgid "Barlows"
-msgstr ""
+msgstr "Barlowy"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1001
 msgid "Multiplicity"
-msgstr ""
+msgstr "Mnohočetnost"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1002
 msgid "Barlow lenses"
-msgstr ""
+msgstr "Barlowovy čočky"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1003
 #: plugins/Oculars/src/ui_ocularDialog.h:1013
@@ -6900,7 +6903,7 @@ msgstr "Zdroj není pozorovatelný."
 
 #: plugins/Observability/src/Observability.cpp:593
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr "Akronický ani Kosmický východ/západ nejsou nastaveny."
+msgstr "Žádný Akronický ani Kosmický východ/západ."
 
 #: plugins/Observability/src/Observability.cpp:610
 msgid "Greatest elongation: "
@@ -6921,15 +6924,15 @@ msgstr "Akronický východ/západ"
 
 #: plugins/Observability/src/Observability.cpp:634
 msgid "No Acronychal rise/set."
-msgstr ""
+msgstr "Žádný Akronický východ/západ."
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "Cosmical rise/set"
-msgstr ""
+msgstr "Kosmický východ/západ."
 
 #: plugins/Observability/src/Observability.cpp:635
 msgid "No Cosmical rise/set."
-msgstr ""
+msgstr "Žádný Kosmický východ/západ."
 
 #: plugins/Observability/src/Observability.cpp:681
 msgid "Observable during the whole year."
@@ -6976,6 +6979,14 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
+"Zásuvný modul který analyzuje pozorovatelnost zvoleného zdroje (pokud není "
+"vybrán, pak středu obrazovky). Modul může zobrazit dobu východu, přechodu a "
+"západu a také nejlepší epochu v roce (tj. největší úhlové oddělení od "
+"Slunce), časové období kdy je zdroj nad horizontem za temné noci a daty "
+"Akronického a Kosmického východu/západu.<br>Jsou započítávány efemeridy "
+"těles Sluneční soustavy a paralaxové účinky.<br><br> Autor děkuje Alexandru "
+"Wolfovi a Georgi Zottimu za jejich rady.<br><br>Ivan Marti-Vidal (Onsala "
+"Space Observatory)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
@@ -7003,13 +7014,15 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Horizontální výška:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"Minimální výška pro pozorování (kvůli horám, budovám nebo omezenému držáku "
+"teleskopu)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
@@ -7028,7 +7041,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
-msgstr ""
+msgstr "Akronický/Kosmický východ/západ:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
@@ -7042,6 +7055,14 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
+"Akronické svítání (nebo západ) objektu nastává, když objekt vychází (nebo "
+"zapadá) právě když Slunce příslušně zapadá (nebo vychází). Přesná data "
+"těchto efemerid záleží na umístění pozorovatele. Data mezi Akronickým "
+"východem a západem odpovídají okamžikům, kdy nebeský objekt je vysoko a "
+"Slunce je hluboko pod horizontem (proto může být objekt dobře pozorován). "
+"Naopak Kosmický východ (nebo západ) nastává, když jak objekt, tak Slunce "
+"vychází (nebo zapadají) současně. Je jasné, že v těchto obdobích objekt lze "
+"těžko pozorovat (nebo ho nelze pozorovat vůbec)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid "Largest Sun separation:"
@@ -7089,6 +7110,21 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
+"Program vypočítá časová období kdy je nebeský objekt nad horizontem alespoň "
+"během jedné části noci. Za 'noc' program považuje časový rozsah kdy je výška "
+"Slunce pod úrovní soumraku (který může uživatel nastavit; viz výše). Když "
+"jsou objekty na pevno stanoveny na obloze (nebo to jsou vnější planety), "
+"rozsah epoch pozorovatelnosti pro současný rok může mít dvě možné formy: buď "
+"je to období od jednoho data k druhému (např. od 20. led do 15. zář) nebo ve "
+"dvou krocích (od 1. led k zadanému datu a od jiného data k 31. pro). V "
+"prvním případě se první datum (v našem příkladě 20. ĺed) bude blížit tzv. "
+"'Heliakálnímu východu hvězdy' a druhé datum (v našem příkladě 15. zář) se "
+"bude blížit 'Heliakálnímu západu'. V druhém případě (např. rozsah ve formě "
+"'od 1. led do 20. kvě' a 'od 21. zář do 31. pro) se první datum (v našem "
+"případě 20. kvě) blíží k Heliakalickému západu a druhé (v našem případě 21. "
+"zář) k Heliakalickému východu. Další přesné rovnice k odhadu Heliakalického "
+"východu/západu hvězd a planet (které nebudou záviset na pouhém zadání výšky "
+"Slunce za soumraku) budou zavedeny v budoucích verzích tohoto modulu."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
@@ -7127,7 +7163,7 @@ msgstr "Dnešní efemeridy (doba východu, západu, přechodu)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr ""
+msgstr "Data Akronického a Kosmického východu/západu"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
@@ -7163,15 +7199,15 @@ msgstr "Velikost písma"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "Podmínky pozorovatelnosti"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Horizontální výška: 0 stup."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
-msgstr ""
+msgstr "Výška Slunce za soumraku: 0 stup."
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriální mřížka"
