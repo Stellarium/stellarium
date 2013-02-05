@@ -140,7 +140,7 @@ void StelCore::init(class StelRenderer* renderer)
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
 
-	QString tmpDT = conf->value("astro/time_correction_algorithm", "EspenakMeeus").toString();
+	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeus").toString();
 	setCurrentDeltaTAlgorithmKey(tmpDT);
 }
 

@@ -591,6 +591,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/startup_time_mode", core->getStartupTimeMode());
 	conf->setValue("navigation/today_time", core->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", core->getPresetSkyTime());
+	conf->setValue("navigation/time_correction_algorithm", core->getCurrentDeltaTAlgorithmKey());
 	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
@@ -621,8 +622,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("video/screen_x", mainWindow.x());
 		conf->setValue("video/screen_y", mainWindow.y());
 	}
-
-	conf->setValue("astro/time_correction_algorithm", core->getCurrentDeltaTAlgorithmKey());
 
 	// clear the restore defaults flag if it is set.
 	conf->setValue("main/restore_defaults", false);
