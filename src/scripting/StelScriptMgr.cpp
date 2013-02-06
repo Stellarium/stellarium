@@ -432,11 +432,7 @@ void StelScriptMgr::scriptEnded()
 {
 	if (engine.hasUncaughtException())
 	{
-		// NOTE: engine.uncaughtExceptionLineNumber() gives incorrect line number (probably Qt bug). Correct line number can be
-		// calculate as (engine.uncaughtExceptionLineNumber()+1)/2
-		// More info: https://bugs.launchpad.net/stellarium/+bug/1046518 and
-		// http://sourceforge.net/projects/stellarium/forums/forum/278769/topic/5591465
-		QString msg = QString("script error: \"%1\" @ line %2").arg(engine.uncaughtException().toString()).arg((engine.uncaughtExceptionLineNumber() + 1)/2);
+		QString msg = QString("script error: \"%1\" @ line %2").arg(engine.uncaughtException().toString()).arg(engine.uncaughtExceptionLineNumber());
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 	}
