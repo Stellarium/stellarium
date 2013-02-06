@@ -29,7 +29,7 @@
 #include "Skybright.hpp"
 #include "StelUtils.hpp"
 
-#ifdef __NetBSD__
+#if defined(__NetBSD__) || defined(__SUNOS__)
 #undef FS
 #endif
 
