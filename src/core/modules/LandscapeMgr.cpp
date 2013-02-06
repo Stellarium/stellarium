@@ -292,7 +292,7 @@ void LandscapeMgr::init()
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
-	setInitialLandscapeBrightness(conf->value("landscape/initial_landscape_brightness", 0.01).toFloat());
+	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("landscape/init_bortle_scale",3).toInt(&ok));
