@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2013-02-03 21:25+0000\n"
-"Last-Translator: Mike08 <micou8@gmail.com>\n"
+"PO-Revision-Date: 2013-02-06 02:12+0000\n"
+"Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-04 05:11+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-06 05:13+0000\n"
+"X-Generator: Launchpad (build 16468)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -1508,8 +1508,8 @@ msgid ""
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 "Tuż przed zaćmieniem Słońca przez Merkurego, wyłania się zza niego Phobos i "
-"sam wywołuje zaćmienie. Zjawisko ma miejsce pomiędzy gwiazdozbiorami "
-"Skorpiona i Strzelca 26 kwietnia 2017 r."
+"sam wywołuje zaćmienie. Zjawisko zachodzi pomiędzy gwiazdozbiorami Skorpiona "
+"i Strzelca 26 kwietnia 2017 r."
 
 #: src/translations.h:256
 msgid ""
@@ -1531,6 +1531,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Zakrycie Ziemi przez Phobosa zdarza się często, podobnie jak zakrycie "
+"Jowisza. Jednakże bardzo rzadko oba te zjawiska występują tego samego dnia. "
+"Oto taka sytuacja, mająca miejsce 23 stycznia 2048 r. Prędkość rzeczywista."
 
 #: src/translations.h:259
 msgid ""
@@ -4345,13 +4348,14 @@ msgstr "Rzeczywiste pole widzenia tej lornetki"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/barlow/telescope combination"
-msgstr ""
-"Powiększenie uzyskiwane w wyniku użycia tego okularu/barlowa/teleskopu"
+msgstr "Powiększenie uzyskiwane przy użyciu tego okularu/barlowa/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/barlow/telescope combination"
 msgstr ""
+"Rzeczywiste pole widzenia uzyskiwane przy użyciu tego "
+"okularu/barlowa/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -6127,6 +6131,11 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Istnieje możliwość zaimportowania parametrów komet i asteroid w formatach "
+"dostępnych na stronie Minor Planet Center (%1) Międzynarodowej Unii "
+"Astronomicznej. Można importować pliki z listami obiektów, pobierać listy z "
+"Internetu i przeszukiwać sieciową bazę Minor Planet and Comet Ephemeris "
+"Service (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
@@ -7061,7 +7070,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
-msgstr ""
+msgstr "Dzisiejsze efemerydy:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid ""
