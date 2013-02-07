@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2013-01-11 07:10+0000\n"
+"PO-Revision-Date: 2013-02-06 11:10+0000\n"
 "Last-Translator: Chynggyz Jumaliev <translatorky@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:41+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-07 04:41+0000\n"
+"X-Generator: Launchpad (build 16477)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -43,7 +43,7 @@ msgstr "Автор: "
 
 #: src/core/modules/LandscapeMgr.cpp:503
 msgid "Location: "
-msgstr "Турган жери: "
+msgstr "Жайгашкан жери: "
 
 #: src/core/modules/LandscapeMgr.cpp:508
 #, qt-format
@@ -725,7 +725,7 @@ msgstr "Максималдуу (Леониддер, 1966)"
 
 #: src/gui/LocationDialog.cpp:409
 msgid "New Location"
-msgstr "Жаңы турган жер"
+msgstr "Жаңы жайгашкан жери"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -2726,7 +2726,7 @@ msgstr "Топ жылдыздардын чек аралары"
 #: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
-msgstr "Топ жылдыздардын атттары"
+msgstr "Топ жылдыздардын аттары"
 
 #: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
@@ -2990,7 +2990,7 @@ msgstr "Жардам терезеси"
 
 #: src/translations.h:663
 msgid "Location window"
-msgstr "Турган жердин терезеси"
+msgstr "Жайгашкан жердин терезеси"
 
 #: src/translations.h:665
 msgid "Search window"
@@ -3002,7 +3002,7 @@ msgstr ""
 
 #: src/translations.h:667
 msgid "Sky and viewing options window"
-msgstr "Асмандын жана байкоонун ырастоо терезеси"
+msgstr "Асман жана байкоонун ырастоо терезеси"
 
 #: src/ui_helpDialogGui.h:278 src/ui_helpDialogGui.h:284
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3032,7 +3032,7 @@ msgstr "Орун"
 
 #: src/ui_locationDialogGui.h:393
 msgid "Current location information"
-msgstr "Кезектеги турган жер жөнүндөгү маалымат"
+msgstr "Кезектеги жайгашкан жер жөнүндөгү маалымат"
 
 #: src/ui_locationDialogGui.h:394
 msgid "Use as default"
@@ -3491,7 +3491,7 @@ msgstr "Тандалган объект жөнүндөгү маалымат"
 
 #: src/ui_configurationDialog.h:962
 msgid "Display all information available"
-msgstr "Болгон информациянын баарын көрсөтүү"
+msgstr "Болгон маалыматтын баарын көрсөтүү"
 
 #: src/ui_configurationDialog.h:964
 msgid "All available"
@@ -3499,7 +3499,7 @@ msgstr "Болгондун баары"
 
 #: src/ui_configurationDialog.h:966
 msgid "Display less information"
-msgstr "Азыраак информация көрсөтүү"
+msgstr "Азыраак маалымат көрсөтүү"
 
 #: src/ui_configurationDialog.h:968
 msgid "Short"
@@ -3519,7 +3519,7 @@ msgstr "Өчүк"
 
 #: src/ui_configurationDialog.h:974
 msgid "Display user settings information"
-msgstr "Колдонуучу ырастоолорунун информациясын көрсөтүү"
+msgstr "Колдонуучу ырастоолорунун маалыматын көрсөтүү"
 
 #: src/ui_configurationDialog.h:976
 msgid "Customized"
@@ -3567,11 +3567,11 @@ msgstr "Өлчөм"
 
 #: src/ui_configurationDialog.h:995
 msgid "Additional information 3"
-msgstr "Кошумча информация 3"
+msgstr "Кошумча маалымат 3"
 
 #: src/ui_configurationDialog.h:999
 msgid "Additional information 2"
-msgstr "Кошумча информация 2"
+msgstr "Кошумча маалымат 2"
 
 #: src/ui_configurationDialog.h:1000
 msgid "Absolute magnitude"
@@ -3597,7 +3597,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1007
 msgid "Additional information 1"
-msgstr "Кошумча информация 1"
+msgstr "Кошумча маалымат 1"
 
 #: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -3724,11 +3724,11 @@ msgstr "Сфералык күзгү бурмаланышы"
 
 #: src/ui_configurationDialog.h:1063
 msgid "Align labels with the horizon"
-msgstr "Атамаларды горизонт менен түптүз кылып тегиздөө"
+msgstr "Аттарды горизонт боюнча тегиздөө"
 
 #: src/ui_configurationDialog.h:1065
 msgid "Gravity labels"
-msgstr "Тартыш атамалары"
+msgstr "Объекттердин горизонталдуу эмес аттары"
 
 #: src/ui_configurationDialog.h:1067
 msgid "Hide other constellations when you click one"
@@ -3819,7 +3819,7 @@ msgstr "Башкы"
 
 #: src/ui_configurationDialog.h:1112
 msgid "Information"
-msgstr "Информация"
+msgstr "Маалымат"
 
 #: src/ui_configurationDialog.h:1117
 msgid "Navigation"
@@ -4925,11 +4925,11 @@ msgstr "Жаңыртуу жыштыгы (саат):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
-msgstr "Атамалар"
+msgstr "Аттар"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
-msgstr "Атама шрифтинин чени (пиксельдер):"
+msgstr "Аттардын шрифт өлчөмү (пиксель):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Orbit lines"
@@ -5453,7 +5453,7 @@ msgstr "Колдонуучунун графикалык интерфейси"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
-msgstr "Телескоп атын көрсөтүү"
+msgstr "Телескоптун атын көрсөтүү"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
@@ -5840,7 +5840,7 @@ msgstr "Саманчы жолунун күчөгөндүгү:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
-msgstr "Жыбыраган калың жылдыз атамасынын жыштыгы:"
+msgstr "Жыбыраган калың жылдыздардын аттарынын жыштыгы:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Zoom duration:"
@@ -5852,7 +5852,7 @@ msgstr "Курсор күтүү убагы:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Setting landscape sets location"
-msgstr "Орунду ландшафттан коюу"
+msgstr "Жайгашкан жерди ландшафттан коюу"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Run local script"
@@ -5997,7 +5997,7 @@ msgstr "Ушу даректи чөп каттар тизмесине кошуу"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Bookmark title:"
-msgstr "Чөп кат аты:"
+msgstr "Чөп каттын аталышы:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
@@ -6553,7 +6553,7 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
-"Эгер сиз плагин жөнүндө толук инормация окуңуз келсе, анын тарыхын жана "
+"Эгер сиз плагин жөнүндө толук маалымат окуңуз келсе, анын тарыхын жана "
 "каталог форматын сиз %1бул жерден алсаңыз болот%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
