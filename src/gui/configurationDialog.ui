@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>511</width>
-    <height>475</height>
+    <width>509</width>
+    <height>473</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -805,7 +805,7 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_4">
-                <item>
+                <item alignment="Qt::AlignTop">
                  <widget class="QComboBox" name="deltaTAlgorithmComboBox"/>
                 </item>
                 <item>
