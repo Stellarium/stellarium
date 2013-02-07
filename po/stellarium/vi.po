@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2013-01-27 12:28+0000\n"
+"PO-Revision-Date: 2013-02-06 15:58+0000\n"
 "Last-Translator: thanbang <thanbang00@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:46+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-07 04:42+0000\n"
+"X-Generator: Launchpad (build 16477)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -396,7 +396,7 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Lỗi mạng"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -408,11 +408,11 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Lỗi"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Không tìm thấy"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
@@ -634,7 +634,7 @@ msgstr "{Forums} - thảo luận chương trình Stellarium với người dùng
 
 #: src/gui/HelpDialog.cpp:307
 msgid "Developers"
-msgstr ""
+msgstr "Nhà phát triển"
 
 #: src/gui/HelpDialog.cpp:308
 #, qt-format
@@ -700,7 +700,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:486
 msgid "No description"
-msgstr ""
+msgstr "Không có mô tả"
 
 #: src/gui/ViewDialog.cpp:599
 msgid "No shooting stars"
@@ -724,7 +724,7 @@ msgstr ""
 
 #: src/gui/LocationDialog.cpp:409
 msgid "New Location"
-msgstr ""
+msgstr "Địa chỉ mới"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -743,7 +743,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
-msgstr ""
+msgstr "Hoàn tất"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:146
 #: src/gui/AddRemoveLandscapesDialog.cpp:216
@@ -3255,7 +3255,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
-msgstr ""
+msgstr "Phong cảnh"
 
 #: src/ui_viewDialog.h:1147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:224
@@ -3374,7 +3374,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1185
 msgid "Celestial Sphere"
-msgstr ""
+msgstr "Thiên cầu"
 
 #: src/ui_viewDialog.h:1192
 msgid "Show equator line"
@@ -3398,7 +3398,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1212
 msgid "Projection"
-msgstr ""
+msgstr "Phép chiếu"
 
 #: src/ui_viewDialog.h:1213
 msgid "Add/remove landscapes..."
