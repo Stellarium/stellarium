@@ -146,7 +146,7 @@ dl.el {
 	font-size: 105%;
 }
 
-pre.fragment {
+pre.fragment, .fragment {
 	border: 1px solid #C4CFE5;
 	background-color: #FBFCFD;
 	padding: 4px 6px;
@@ -155,6 +155,27 @@ pre.fragment {
 	word-wrap: break-word;
 	font-size:  9pt;
 	line-height: 125%;
+}
+
+table.stel {
+	padding: 0;
+	border: 0;
+	background: none;
+	max-width: 1000px;
+}
+
+table.stel td {
+	padding: 5px;
+}
+
+tr.stel {
+	background: #E5E5E5;
+	border: 1px;
+}
+
+table.stel tr.header {
+	background: #66B036;
+	font-weight: bold;
 }
 
 div.ah {
