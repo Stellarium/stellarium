@@ -60,6 +60,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QComboBox>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
@@ -99,6 +100,9 @@ void ConfigurationDialog::retranslate()
 
 		//Plug-in information
 		populatePluginsList();
+
+		populateDeltaTAlgorithmsList();
+		setDeltaTAlgorithmDescription(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey());
 	}
 }
 
@@ -220,6 +224,17 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()),
 	        this,
 	        SLOT(showShortcutsWindow()));
+
+	populateDeltaTAlgorithmsList();
+	setDeltaTAlgorithmDescription(core->getCurrentDeltaTAlgorithmKey());
+	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use Earth as default
+		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeus"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
+	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
 
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
@@ -1087,4 +1102,104 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 	// ... and allow manual resize later.
 	ui->stackListWidget->setMinimumWidth(0);
 	*/
+}
+
+void ConfigurationDialog::populateDeltaTAlgorithmsList()
+{
+	Q_ASSERT(ui->deltaTAlgorithmComboBox);
+
+	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
+
+	//Save the current selection to be restored later
+	algorithms->blockSignals(true);
+	int index = algorithms->currentIndex();
+	QVariant selectedAlgorithmId = algorithms->itemData(index);
+	algorithms->clear();
+	//For each algorithm, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	algorithms->addItem(q_("Without correction"), "WithoutCorrection");
+	algorithms->addItem(q_("IAU (1959)"), "IAU");
+	algorithms->addItem(q_("Astronomical Ephemeris (1960)"), "AstronomicalEphemeris");
+	algorithms->addItem(q_("Tuckerman (1962, 1964) & Goldstine (1973)"), "TuckermanGoldstine");
+	algorithms->addItem(q_("Muller & Stephenson (1975)"), "MullerStephenson");
+	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson");
+	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson");
+	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "StephensonMorrison");
+	algorithms->addItem(q_("Stephenson & Houlden (1986)"), "StephensonHoulden");
+	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
+	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
+	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");
+	algorithms->addItem(q_("Chapront, Chapront-Touze & Francou (1997)"), "ChaprontFrancou");
+	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");
+	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
+
+	//Restore the selection
+	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
+	algorithms->setCurrentIndex(index);
+	//algorithms->model()->sort(0);
+	algorithms->blockSignals(false);
+}
+
+void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setCurrentDeltaTAlgorithmKey(ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString());
+	setDeltaTAlgorithmDescription(core->getCurrentDeltaTAlgorithmKey());
+}
+
+void ConfigurationDialog::setDeltaTAlgorithmDescription(QString algorithm)
+{
+	QStringList algoList;
+	algoList << "WithoutCorrection" << "IAU" << "AstronomicalEphemeris" << "TuckermanGoldstine" << "MullerStephenson" << "Stephenson" << "MorrisonStephenson" << "StephensonMorrison" << "StephensonHoulden" << "Espenak" << "Borkowski" << "ChaprontTouze" << "ChaprontFrancou" << "JPLHorizons" << "EspenakMeeus";
+	switch (algoList.indexOf(algorithm))
+	{
+		case 0:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Correction is disabled")+"</i></small>");
+			break;
+		case 1:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("IAU (1959), based on observations by Spencer Jones (1939)")+"</i></small>");
+			break;
+		case 2:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Astronomical Ephemeris (1960)")+"</i></small>");
+			break;
+		case 3:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Tuckerman (1962, 1964) & Goldstine (1973)")+"</i></small>");
+			break;
+		case 4:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Muller & Stephenson (1975)")+"</i></small>");
+			break;
+		case 5:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Stephenson (1978)")+"</i></small>");
+			break;
+		case 6:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Morrison & Stephenson (1982) algorithm, used by RedShift")+"</i></small>");
+			break;
+		case 7:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Stephenson & Morrison (1984)")+"</i></small>");
+			break;
+		case 8:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Stephenson & Houlden (1986)")+"</i></small>");
+			break;
+		case 9:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Espenak (1987, 1989)")+"</i></small>");
+			break;
+		case 10:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Borkowski (1988)")+"</i></small>");
+			break;
+		case 11:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Chapront-Touze & Chapront (1991)")+"</i></small>");
+			break;
+		case 12:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Chapront, Chapront-Touze & Francou (1997)")+"</i></small>");
+			break;
+		case 13:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Algorithm which used by JPL Horizons")+"</i></small>");
+			break;
+		case 14:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Espenak & Meeus (2006)")+"</i></small>");
+			break;
+		default:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+"Error"+"</i></small>");
+	}
+
 }

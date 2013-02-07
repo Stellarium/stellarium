@@ -120,6 +120,10 @@ private slots:
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 
+	void populateDeltaTAlgorithmsList();
+	void setDeltaTAlgorithm(int algorithmID);
+	void setDeltaTAlgorithmDescription(QString algorithm);
+
 	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel

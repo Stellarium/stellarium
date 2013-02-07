@@ -1302,8 +1302,8 @@ void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toAscii().data());
 	if (algo<0)
 	{
-		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"EspenakMeeus\" instead";
-		algo = EspenakMeeus;
+		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"WithoutCorrection\" instead";
+		algo = WithoutCorrection;
 	}
 	setCurrentDeltaTAlgorithm(algo);
 }
