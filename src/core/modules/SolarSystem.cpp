@@ -713,7 +713,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// Create the Solar System body and add it to the list
 		QString type = pd.value(secname+"/type").toString();
 		PlanetP p;
-		if (type == "asteroid" || type == "plutoid")
+		// New class objects, named "plutoid", has properties similar asteroids and we should calculate their
+		// positions like for asteroids. Plutoids having one exception - Pluto - we should use special
+		// function for calculation of orbit of Pluto.
+		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
 			               pd.value(secname+"/lighting").toBool(),
