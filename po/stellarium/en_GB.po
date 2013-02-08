@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2013-01-22 00:18+0000\n"
+"PO-Revision-Date: 2013-02-07 13:49+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:47+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-08 04:34+0000\n"
+"X-Generator: Launchpad (build 16482)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -3308,7 +3308,7 @@ msgstr "Relative scale:"
 
 #: src/ui_viewDialog.h:1153
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Milky Way brightness:"
 
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -4133,17 +4133,17 @@ msgstr "Ocular aFOV: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Barlow #%1"
-msgstr ""
+msgstr "Barlow #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Barlow #%1: %2"
-msgstr ""
+msgstr "Barlow #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Barlow: none"
-msgstr ""
+msgstr "Barlow: none"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4190,15 +4190,15 @@ msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Barlow"
-msgstr ""
+msgstr "&Barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous barlow"
-msgstr ""
+msgstr "&Previous barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next barlow"
-msgstr ""
+msgstr "&Next barlow"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4222,11 +4222,11 @@ msgstr "Next ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous Barlow lens"
-msgstr ""
+msgstr "Previous Barlow lens"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next Barlow lens"
-msgstr ""
+msgstr "Next Barlow lens"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4283,19 +4283,19 @@ msgstr "Apparent field of view of the ocular"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Multiplicity: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Barlow: None"
-msgstr ""
+msgstr "Barlow: None"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Multiplicity: N/A"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of barlow lens"
-msgstr ""
+msgstr "Multiplicity of barlow lens"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4312,12 +4312,13 @@ msgstr "Actual field of view provided by these binoculars"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/barlow/telescope combination"
-msgstr ""
+msgstr "Magnification provided by this ocular/barlow/telescope combination"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/barlow/telescope combination"
 msgstr ""
+"Actual field of view provided by this ocular/barlow/telescope combination"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4493,15 +4494,15 @@ msgstr "Binoculars"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:997
 msgid "Barlows"
-msgstr ""
+msgstr "Barlows"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1001
 msgid "Multiplicity"
-msgstr ""
+msgstr "Multiplicity"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1002
 msgid "Barlow lenses"
-msgstr ""
+msgstr "Barlow lenses"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1003
 #: plugins/Oculars/src/ui_ocularDialog.h:1013
