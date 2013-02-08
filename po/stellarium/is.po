@@ -1,24 +1,24 @@
-# translation of 20120325-po_stellarium_stellarium-is.po to Icelandic
+# translation of 20130131_stellarium_stellarium-is to Icelandic
 # translation of po_stellarium_stellarium-is.po to
 # Icelandic translation for stellarium
 # Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
 # This file is distributed under the same license as the stellarium package.
 #
-# Sveinn í Felli <sveinki@nett.is>, 2008, 2009.
+# Sveinn í Felli <sveinki@nett.is>, 2008, 2009, 2013.
 # Sverrir Guðmundsson <sverrgu@hotmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: 20120325-po_stellarium_stellarium-is\n"
+"Project-Id-Version: 20130131_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2012-12-13 07:43+0000\n"
+"PO-Revision-Date: 2013-02-07 13:14+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
-"Language-Team: Icelandic <is@li.org>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:40+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-08 04:34+0000\n"
+"X-Generator: Launchpad (build 16482)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -206,7 +206,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "stjarna"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -220,7 +220,7 @@ msgstr "Sýndarbirtustig: <b>%1</b> (með ljósdeyfingu)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "tvístirni"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -396,7 +396,7 @@ msgstr "Villa við nettengingu"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Villa við að þátta staðsetningu"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
@@ -576,6 +576,9 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Hér að neðan eru einungis taldar upp aðgerðir sem hafa úthlutaða lykla. "
+"Fleiri aðgerðir gætu verið tiltækar með því að nota \"%1\" "
+"lyklaborðshnappinn."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -846,11 +849,11 @@ msgstr "Aðgerð"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
-msgstr ""
+msgstr "Fyrsti flýtilykill"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "Auka flýtilykill"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
@@ -1196,12 +1199,12 @@ msgstr "Hektor"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "Varuna"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "Makemake"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1232,31 +1235,31 @@ msgstr "V"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "reikistjarna"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "halastjarna"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "smástirni"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "tungl"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "dvergreikistjarna"
 
 #: src/translations.h:165
 msgid "Arabic"
-msgstr "Arabískt"
+msgstr "Arabísk"
 
 #: src/translations.h:166
 msgid "Aztec"
@@ -1373,62 +1376,62 @@ msgstr "Dýrahringurinn"
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "Merkúr - þrefalt sólris og sólsetur"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:220
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "Tvöfaldur myrkvi frá Deimos árið 2017"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:222
 msgid "Double eclipse from Deimos in 2031"
-msgstr ""
+msgstr "Tvöfaldur myrkvi frá Deimos árið 2031"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:224
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr ""
+msgstr "Myrkvi frá Olympus Mons 10. janúar 2068"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:226
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr ""
+msgstr "Stjörnumyrkvi Jarðar og Júpíter 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "3 þvergöngur og 2 myrkvar frá Deimos árið 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "Skjáhvíla með sólkerfinu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:232
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Ferð um stjörnumerkin"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:234
 msgid "Sun from different planets"
-msgstr ""
+msgstr "Sólin frá ýmsum plánetum"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:236
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "Besta sýn á Jörðina frá öðrum hnöttum"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:238
 msgid "Transit of Venus"
-msgstr ""
+msgstr "Þverganga Venusar"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:240
 msgid "Analemma"
-msgstr ""
+msgstr "Analemma"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:247
@@ -1511,11 +1514,11 @@ msgstr ""
 #: src/translations.h:260
 msgid ""
 "Screensaver of various happenings in the Solar System. 171 events in all!"
-msgstr ""
+msgstr "Skjáhvíla með ýmsum atburðum í sólkerfinu, alls 171 atburðir!"
 
 #: src/translations.h:261
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "Kynnisferð um vestræn stjörnumerki."
 
 #: src/translations.h:262
 msgid "Look at the Sun from big planets of Solar System and Pluto."
@@ -1529,6 +1532,7 @@ msgstr ""
 #: src/translations.h:264
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
+"Þverganga Venusar eins og hún sást frá Sidney, Ástralíu, þann 6. júní 2012."
 
 #: src/translations.h:265
 msgid ""
@@ -2530,7 +2534,7 @@ msgstr "Bæta við 1 stjörnuári"
 
 #: src/translations.h:523
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Bæta við 1 stjörnuöld"
 
 #: src/translations.h:524
 msgid "Add 1 solar day"
@@ -2598,11 +2602,11 @@ msgstr "Auka tímahraða (lítillega)"
 
 #: src/translations.h:540
 msgid "Pause script execution"
-msgstr ""
+msgstr "Gera hlé á keyrslu skriftunnar"
 
 #: src/translations.h:541
 msgid "Resume script execution"
-msgstr ""
+msgstr "Halda áfram með keyrslu skriftunnar"
 
 #: src/translations.h:542
 msgid "Set time to now"
@@ -2622,7 +2626,7 @@ msgstr "Stilla tímahröðun á núll"
 
 #: src/translations.h:546
 msgid "Stop script execution"
-msgstr ""
+msgstr "Stöðva keyrslu skriftunnar"
 
 #: src/translations.h:547
 msgid "Subtract 1 sidereal day"
@@ -2642,7 +2646,7 @@ msgstr "Draga frá 1 stjörnuár"
 
 #: src/translations.h:551
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Draga frá 1 stjörnuöld"
 
 #: src/translations.h:552
 msgid "Subtract 1 solar day"
@@ -2816,7 +2820,7 @@ msgstr "Stjörnur"
 
 #: src/translations.h:592
 msgid "Stars labels"
-msgstr ""
+msgstr "Stjörnumerkingar"
 
 #: src/translations.h:593
 msgid "Flip scene vertically"
@@ -2837,7 +2841,7 @@ msgstr "Fela sjálfvirkt lóðrétta valstiku"
 
 #: src/translations.h:599
 msgid "Go to home"
-msgstr ""
+msgstr "Fara heim"
 
 #: src/translations.h:600
 msgid "Quit"
@@ -2894,11 +2898,11 @@ msgstr "Áttavitastrik"
 
 #: src/translations.h:621
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Birta fjarreikistjörnur"
 
 #: src/translations.h:622
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Stillingagluggi fyrir fjarreikistjörnur"
 
 #: src/translations.h:625
 msgid "Observability"
@@ -2910,7 +2914,7 @@ msgstr ""
 
 #: src/translations.h:629
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Stillingar Oculars hjálparforrits"
 
 #: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:977
 msgid "Ocular view"
@@ -2918,7 +2922,7 @@ msgstr "Augnglersskoðun"
 
 #: src/translations.h:631
 msgid "Show crosshairs"
-msgstr ""
+msgstr "Sýna krossmið"
 
 #: src/translations.h:632
 msgid "Oculars popup menu"
@@ -2934,11 +2938,11 @@ msgstr ""
 
 #: src/translations.h:637
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Stillingagluggi fyrir tifstjörnur"
 
 #: src/translations.h:640
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Stillingagluggi fyrir kvasa"
 
 #: src/translations.h:643
 msgid "Satellites configuration window"
@@ -2954,7 +2958,7 @@ msgstr "Merkingar gervitungla"
 
 #: src/translations.h:648
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Stillingagluggi fyrir sögulegar sprengistjörnur"
 
 #: src/translations.h:651
 msgid "Move a telescope to a given set of coordinates"
@@ -2968,11 +2972,11 @@ msgstr "Skriftur"
 
 #: src/translations.h:655
 msgid "Run landscapes script from file"
-msgstr ""
+msgstr "Keyra landslagsskriftu úr skrá"
 
 #: src/translations.h:656
 msgid "Show and zoom Moon"
-msgstr ""
+msgstr "Birta og draga að tunglið"
 
 #: src/translations.h:660
 msgid "Configuration window"
@@ -2996,7 +3000,7 @@ msgstr "Leitargluggi"
 
 #: src/translations.h:666
 msgid "Shortcuts window"
-msgstr ""
+msgstr "Flýtilyklagluggi"
 
 #: src/translations.h:667
 msgid "Sky and viewing options window"
@@ -3017,7 +3021,7 @@ msgstr "Annálar"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1025
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "Breyta flýtilyklum á lyklaborði..."
 
 #: src/ui_helpDialogGui.h:292
 msgid "Refresh"
@@ -3038,7 +3042,7 @@ msgstr "Vista sem sjálfgefið"
 
 #: src/ui_locationDialogGui.h:395
 msgid "Return to default"
-msgstr ""
+msgstr "Endurstilla á sjálfgefið"
 
 #: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:990
 #: plugins/Oculars/src/ui_ocularDialog.h:999
@@ -3235,11 +3239,11 @@ msgstr "Valkostir"
 
 #: src/ui_searchDialogGui.h:628
 msgid "names in English"
-msgstr ""
+msgstr "heiti á ensku"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Search in list..."
-msgstr ""
+msgstr "Leita í lista..."
 
 #: src/ui_searchDialogGui.h:630
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
@@ -3523,11 +3527,11 @@ msgstr "Sýna upplýsingar um stillingar notanda"
 
 #: src/ui_configurationDialog.h:976
 msgid "Customized"
-msgstr ""
+msgstr "Sérsniðið"
 
 #: src/ui_configurationDialog.h:977
 msgid "Displayed fields"
-msgstr ""
+msgstr "Birtir reitir"
 
 #: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -3547,11 +3551,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:987
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Lárétt hnit"
 
 #: src/ui_configurationDialog.h:989
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Hæð/Stefna"
 
 #: src/ui_configurationDialog.h:990
 msgid "Visual magnitude"
@@ -3563,15 +3567,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:994
 msgid "Size"
-msgstr ""
+msgstr "Stærð"
 
 #: src/ui_configurationDialog.h:995
 msgid "Additional information 3"
-msgstr ""
+msgstr "Aukaupplýsingar 3"
 
 #: src/ui_configurationDialog.h:999
 msgid "Additional information 2"
-msgstr ""
+msgstr "Aukaupplýsingar 2"
 
 #: src/ui_configurationDialog.h:1000
 msgid "Absolute magnitude"
@@ -3579,11 +3583,11 @@ msgstr "Reyndarbirtustig"
 
 #: src/ui_configurationDialog.h:1001
 msgid "Distance"
-msgstr ""
+msgstr "Fjarlægð"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Númer katalóga"
 
 #: src/ui_configurationDialog.h:1003
 #: plugins/Oculars/src/ui_ocularDialog.h:1000
@@ -3597,7 +3601,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1007
 msgid "Additional information 1"
-msgstr ""
+msgstr "Aukaupplýsingar 1"
 
 #: src/ui_configurationDialog.h:1009
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -3613,11 +3617,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1015
 msgid "Longitude/Latitude (J2000)"
-msgstr ""
+msgstr "Lengd/Breidd (J2000)"
 
 #: src/ui_configurationDialog.h:1016
 msgid "Control"
-msgstr "Stjórn"
+msgstr "Stýring"
 
 #: src/ui_configurationDialog.h:1018
 msgid "Allow keyboard to pan and zoom"
@@ -3740,7 +3744,7 @@ msgstr "Veldu stakt stjörnumerki"
 
 #: src/ui_configurationDialog.h:1070
 msgid "Render Solar Shadows"
-msgstr ""
+msgstr "Myndgera skugga frá sól"
 
 #: src/ui_configurationDialog.h:1072
 msgid ""
@@ -3871,15 +3875,15 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Flýtileiðir á lyklaborði"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Endurheimta sjálfgefið"
 
 #: src/ui_shortcutsDialog.h:201
 msgid "Apply"
-msgstr ""
+msgstr "Virkja"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
@@ -4026,15 +4030,15 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:877
 msgid "&Previous ocular"
-msgstr ""
+msgstr "&Fyrra augngler"
 
 #: plugins/Oculars/src/Oculars.cpp:878
 msgid "&Next ocular"
-msgstr ""
+msgstr "&Næsta augngler"
 
 #: plugins/Oculars/src/Oculars.cpp:879
 msgid "Select &ocular"
-msgstr ""
+msgstr "&Velja augngler"
 
 #: plugins/Oculars/src/Oculars.cpp:926
 msgid "Toggle &crosshair"
@@ -4042,7 +4046,7 @@ msgstr "Víxla krossmiði af/á"
 
 #: plugins/Oculars/src/Oculars.cpp:935
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Stilla &Oculars"
 
 #: plugins/Oculars/src/Oculars.cpp:944
 msgid "Toggle &CCD"
@@ -4070,33 +4074,33 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1018
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&Núllstilla snúning"
 
 #: plugins/Oculars/src/Oculars.cpp:1521
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "Augngler #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "Augngler #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1540
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "Augnglers FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "Augnglers aFOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1559
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
@@ -4136,26 +4140,26 @@ msgstr "Stækkun: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "FOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1612
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Málsetning: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1617
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Myndflaga #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1621
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:664
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Myndflaga #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Barlow"
@@ -4183,11 +4187,11 @@ msgstr "&Næsti sjónauki"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
 msgid "Previous ocular"
-msgstr ""
+msgstr "Fyrra augngler"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
 msgid "Next ocular"
-msgstr ""
+msgstr "Næsta augngler"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous Barlow lens"
@@ -4290,7 +4294,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "Hjálparforrit augnglerja (Oculars)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:490
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
@@ -4304,7 +4308,7 @@ msgstr "Útgáfa"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
 msgid "Overview"
-msgstr ""
+msgstr "Yfirlit"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:497
 msgid ""
@@ -4347,7 +4351,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Hot Keys"
-msgstr ""
+msgstr "Flýtilyklar"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:505
 msgid "The plug-in's key bindings can be edited in the General Tab."
@@ -4356,7 +4360,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "[no key defined]"
-msgstr ""
+msgstr "(engir lyklar skilgreindir)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid "Switches on/off the ocular overlay."
@@ -4376,7 +4380,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:980
 msgid "Key mappings"
-msgstr ""
+msgstr "Lyklavörpun"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:981
 msgid "Toggle ocular view:"
@@ -4392,7 +4396,7 @@ msgstr "Viðmót"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:985
 msgid "On-screen control panel"
-msgstr ""
+msgstr "Stjórnborð á skjá"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:986
 msgid "Use degrees and minutes for FOV of CCD"
@@ -4406,7 +4410,7 @@ msgstr "Almennt"
 #: plugins/Oculars/src/ui_ocularDialog.h:988
 #: plugins/Oculars/src/ui_ocularDialog.h:996
 msgid "Eyepieces"
-msgstr ""
+msgstr "Augngler"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:989
 #: plugins/Oculars/src/ui_ocularDialog.h:998
@@ -4427,7 +4431,7 @@ msgstr "Heiti:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:992
 msgid "aFOV:"
-msgstr ""
+msgstr "aFOV:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:993
 #: plugins/Oculars/src/ui_ocularDialog.h:1018
@@ -4469,19 +4473,19 @@ msgstr "Upplausn y (mynddílar):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1009
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "Breidd myndflögu (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1010
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "Hæð myndflögu (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1011
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Breidd mynddíla (míkron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1012
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Hæð mynddíla (míkron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1014
 #: plugins/Oculars/src/ui_ocularDialog.h:1022
@@ -4514,7 +4518,7 @@ msgstr "Spegla lóðrétt"
 #: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "Um hugbúnað"
 
 #: plugins/Satellites/src/Satellites.cpp:64
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
@@ -5349,7 +5353,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Connection delay:"
-msgstr ""
+msgstr "Seinkun tengingar:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:487
 msgid ""
@@ -5360,11 +5364,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Hnitakerfi:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (sjálfgefið)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
@@ -5378,19 +5382,19 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Ræsa/tengja við ræsingu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr ""
+msgstr "Stillingar tækis"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
-msgstr ""
+msgstr "Raðtengi (serial):"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
-msgstr ""
+msgstr "Tegund tækis:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
@@ -5407,11 +5411,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "TCP port:"
-msgstr ""
+msgstr "TCP gátt:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "User interface settings"
-msgstr ""
+msgstr "Stillingar notendaviðmóts"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:508
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -5655,7 +5659,7 @@ msgstr "Dagur:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Tími skiptingar:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
@@ -5692,7 +5696,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "User-defined:"
-msgstr ""
+msgstr "Skilgreint af notanda:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
@@ -5716,7 +5720,7 @@ msgstr "Birtingasnið tíma"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
-msgstr ""
+msgstr "Sjálfgefið í kerfinu"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
@@ -5761,7 +5765,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Current date/time"
-msgstr ""
+msgstr "Núverandi dagur/tími"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Set time zone"
@@ -5769,7 +5773,7 @@ msgstr "Setja tímabelti"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Day keys"
-msgstr ""
+msgstr "Dagalyklar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date/time preset"
@@ -5821,11 +5825,11 @@ msgstr "Litir"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
-msgstr ""
+msgstr "Nöfn stjörnuþoka"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
-msgstr ""
+msgstr "Vísbendingar um stjörnuþokur"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
@@ -5837,7 +5841,7 @@ msgstr "Sjónhverfingar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Manual zoom"
-msgstr ""
+msgstr "Handvirkur aðdráttur"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Magnitude scaling multiplier"
@@ -5845,7 +5849,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Ljósstyrkur Vetrarbrautar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
@@ -5857,23 +5861,23 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:429
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Tímamörk bendils:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Stillingar landslags ráða staðsetningu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Run local script"
-msgstr ""
+msgstr "Keyra staðværa skriftu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
-msgstr ""
+msgstr "Hætta að keyra skriftu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
-msgstr ""
+msgstr "CD/DVD skrifta"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:472
@@ -5882,11 +5886,11 @@ msgstr "Stjórnun"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:477
 msgid "Load default configuration"
-msgstr ""
+msgstr "Lesa inn sjálfgefnar stillingar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:478
 msgid "Save current configuration"
-msgstr ""
+msgstr "Vista þessar stillingar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Shut down"
@@ -5931,7 +5935,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Senda fyrirspurn til MPC %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
@@ -5989,7 +5993,7 @@ msgstr "Halastjörnur"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
-msgstr ""
+msgstr "Veldu uppruna"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
@@ -6001,15 +6005,15 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Eða settu inn slóð (URL):"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Bæta þessari slóð í bókamerkjalistann"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Heiti bókamerkis:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "A file containing a list of objects"
@@ -6022,11 +6026,11 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
-msgstr ""
+msgstr "Leit á netinu"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
-msgstr ""
+msgstr "Hlutir fundust"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid ""
@@ -6156,7 +6160,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 msgid "Acknowledgments"
-msgstr ""
+msgstr "Þakkir"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
@@ -6166,7 +6170,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Institute for Theoretical and Experimental Physics"
@@ -6175,7 +6179,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr ""
+msgstr "í Rússlandi"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
@@ -6261,7 +6265,7 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
@@ -6289,7 +6293,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
-msgstr ""
+msgstr "Pulsars"
 
 #: plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
@@ -6297,10 +6301,12 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Þetta íforrit setur inn staðsetningar ýmissa tifstjarna, með upplýsingum um "
+"hverja þeirra."
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
-msgstr ""
+msgstr "tifstjarna"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:136
@@ -6320,12 +6326,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "cm"
-msgstr ""
+msgstr "sm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:151
 msgid "pc"
-msgstr ""
+msgstr "psek"
 
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
@@ -6340,7 +6346,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Miðskekkja: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:170
@@ -6379,7 +6385,7 @@ msgstr "mJy"
 #: plugins/Pulsars/src/Pulsar.cpp:218
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "Minnispunktar: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:287
 msgid ""
@@ -6414,7 +6420,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Tifstjörnuviðbót (Pulsars)"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6423,46 +6429,49 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"Tifstjörnugögn koma frá 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
+"Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Athugasemd"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "auðkenni tifstjarna eru með forskeytið 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "Þakkir"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Pushchino Radio Astronomy Observatory"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Station de radioastronomie de Nançay"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "í Frakklandi"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Pulsars er uppfært"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:246
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Stillingar Pulsars"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
@@ -6482,7 +6491,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:72
 msgid "Exoplanets"
-msgstr ""
+msgstr "Fjarreikistjörnur"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 msgid ""
@@ -6492,34 +6501,34 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Metallicity"
-msgstr ""
+msgstr "Málmslikja"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Mass"
-msgstr ""
+msgstr "Massi"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Radius"
-msgstr ""
+msgstr "Radíus"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:214
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Raunhitastig: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Exoplanet"
-msgstr ""
+msgstr "Fjarreikistjarna"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Period"
-msgstr ""
+msgstr "Umferðartími"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "days"
-msgstr ""
+msgstr "dagar"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
@@ -6528,7 +6537,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Hálfur langás (umferðarbrautar)"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "AU"
@@ -6536,11 +6545,11 @@ msgstr "Stjörnufræðieiningar"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Eccentricity"
-msgstr ""
+msgstr "Miðskekkja"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Inclination"
-msgstr ""
+msgstr "Möndulhalli"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Angle Distance"
@@ -6548,11 +6557,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "Discovered year"
-msgstr ""
+msgstr "Uppgötvunarár"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Fjarreikistjörnuviðbót (Exoplanets)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
 #, qt-format
@@ -6571,11 +6580,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Exoplanets er uppfært"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:251
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Stillingar Exoplanets"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:252
 msgid "Exoplanets Plug-in Configuration"
@@ -6623,118 +6632,118 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "jan"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "feb"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "mar"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "apr"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "maí"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "jún"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "júl"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "ágú"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "sep"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "okt"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "nóv"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "des"
 
 #: plugins/Observability/src/Observability.cpp:499
 #: plugins/Observability/src/Observability.cpp:500
 #: plugins/Observability/src/Observability.cpp:542
 msgid "h"
-msgstr ""
+msgstr "klst"
 
 #: plugins/Observability/src/Observability.cpp:499
 #: plugins/Observability/src/Observability.cpp:500
 #: plugins/Observability/src/Observability.cpp:542
 msgid "m"
-msgstr "m"
+msgstr "mín"
 
 #: plugins/Observability/src/Observability.cpp:499
 #: plugins/Observability/src/Observability.cpp:500
 #: plugins/Observability/src/Observability.cpp:542
 msgid "s"
-msgstr ""
+msgstr "sek"
 
 #: plugins/Observability/src/Observability.cpp:509
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "Sest kl. %1 (eftir %2)"
 
 #: plugins/Observability/src/Observability.cpp:510
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "Reis kl. %1 (fyrir %2)"
 
 #: plugins/Observability/src/Observability.cpp:520
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "Settist kl. %1 (fyrir %2)"
 
 #: plugins/Observability/src/Observability.cpp:521
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "Rís kl. %1 (eftir %2)"
 
 #: plugins/Observability/src/Observability.cpp:525
 msgid "Circumpolar."
-msgstr ""
+msgstr "Pólhverf."
 
 #: plugins/Observability/src/Observability.cpp:525
 msgid "No rise."
-msgstr ""
+msgstr "Ekkert ris."
 
 #: plugins/Observability/src/Observability.cpp:547
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "Verður hæst kl. %1 (eftir %2) í %3 gráðum"
 
 #: plugins/Observability/src/Observability.cpp:551
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "Varð hæst kl. %1 (fyrir %2) í %3 gráðum"
 
 #: plugins/Observability/src/Observability.cpp:592
 msgid "Source is not observable."
@@ -6783,25 +6792,25 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:690
 msgid "Nights above horizon: "
-msgstr ""
+msgstr "Nætur ofan sjóndeildarhrings: "
 
 #: plugins/Observability/src/Observability.cpp:707
 msgid "TODAY:"
-msgstr ""
+msgstr "Í DAG:"
 
 #: plugins/Observability/src/Observability.cpp:716
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "Á ÞESSU ÁRI:"
 
 #: plugins/Observability/src/Observability.cpp:1450
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Fyrra fullt tungl: %1 %2 kl. %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:1455
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Næsta fullt tungl: %1 %2 kl. %3:%4. "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
@@ -6821,7 +6830,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "Útskýringar á nokkrum atriðum"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
@@ -6841,7 +6850,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Hæð sjóndeildarhrings:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 msgid ""
@@ -6896,7 +6905,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "Nætur þar sem hlutur er ofan sjóndeildarhrings:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
@@ -6920,7 +6929,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
-msgstr ""
+msgstr "Fullt tungl:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid ""
@@ -6961,39 +6970,39 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "Nætur þar sem hlutur er ofan sjóndeildarhrings"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "Dagsetningar á fyrra og næsta fullu tungli"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
-msgstr ""
+msgstr "Litur og stærð á letri"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
-msgstr ""
+msgstr "Rautt"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:372
 msgid "Green"
-msgstr ""
+msgstr "Grænt"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:373
 msgid "Blue"
-msgstr ""
+msgstr "Blátt"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
-msgstr ""
+msgstr "Leturstærð"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "Skilyrði við skoðun"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Hæð sjóndeildarhrings: 0 gráður"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."
