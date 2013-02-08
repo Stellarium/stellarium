@@ -1062,20 +1062,6 @@ double calculateSiderealPeriod(double SemiMajorAxis)
 	return period/86400; // return period in days
 }
 
-// Calculate duration of mean solar day
-double calculateSolarDay(double siderealPeriod, double siderealDay, bool forwardDirection)
-{
-	double coeff, solarDay;
-	if (forwardDirection)
-		coeff = 1 - siderealDay/siderealPeriod;
-	else
-		coeff = 1 + std::abs(siderealDay)/siderealPeriod;
-
-	solarDay = siderealDay/coeff;
-
-	return solarDay;
-}
-
 QString hoursToHmsStr(double hours)
 {
 	int h = (int)hours;

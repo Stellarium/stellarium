@@ -211,8 +211,12 @@ public:
 	//! Get the radius of the planet in AU.
 	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
+	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
+	//! Get duration of sidereal year
 	double getSiderealPeriod(void) const { return re.siderealPeriod; }
+	//! Get duration of mean solar day
+	double getMeanSolarDay(void) const;
 
 	const QString& getTextMapName() const {return texMapName;}	
 
