@@ -1414,12 +1414,12 @@ double getDeltaTByMorrisonStephenson2004(double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	
-	if (-700 <= year)
+	if (year <= -700)
 	{
 		u = (year-1820)/100;
 		deltaT = -20.0 + 32.0 * std::pow(u, 2);
 	}
-	if (-700 > year)
+	if (year > -700)
 	{
 		u = (year-2000)/100;
 		deltaT = -745.0 + 16.18*u + 28.863 * std::pow(u, 2);
