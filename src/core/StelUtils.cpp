@@ -1405,6 +1405,34 @@ double getDeltaTByJPLHorizons(double jDay)
 	return deltaT;
 }
 
+// Implementation algorithm by Morrison & Stephenson (2004, 2005) for DeltaT computation
+double getDeltaTByMorrisonStephenson2004(double jDay)
+{
+	int year, month, day;
+	double u;
+	double moon = 0;
+	double deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	
+	if (-700 <= year)
+	{
+		u = (year-1820)/100;
+		deltaT = -20.0 + 32.0 * std::pow(u, 2);
+	}
+	if (-700 > year)
+	{
+		u = (year-2000)/100;
+		deltaT = -745.0 + 16.18*u + 28.863 * std::pow(u, 2);
+	}
+	
+	if (year<1955 or year>2005)
+		moon = getMoonSecularAcceleration(jDay, -26.0);
+
+	return deltaT + moon;
+}
+
+
+
 double getMoonSecularAcceleration(double jDay, double ndot)
 {
 	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html

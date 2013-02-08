@@ -1131,6 +1131,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");
 	algorithms->addItem(q_("Chapront, Chapront-Touze & Francou (1997)"), "ChaprontFrancou");
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");
+	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
 
 	//Restore the selection
@@ -1150,7 +1151,7 @@ void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
 void ConfigurationDialog::setDeltaTAlgorithmDescription(QString algorithm)
 {
 	QStringList algoList;
-	algoList << "WithoutCorrection" << "IAU" << "AstronomicalEphemeris" << "TuckermanGoldstine" << "MullerStephenson" << "Stephenson" << "MorrisonStephenson" << "StephensonMorrison" << "StephensonHoulden" << "Espenak" << "Borkowski" << "ChaprontTouze" << "ChaprontFrancou" << "JPLHorizons" << "EspenakMeeus";
+	algoList << "WithoutCorrection" << "IAU" << "AstronomicalEphemeris" << "TuckermanGoldstine" << "MullerStephenson" << "Stephenson" << "MorrisonStephenson" << "StephensonMorrison" << "StephensonHoulden" << "Espenak" << "Borkowski" << "ChaprontTouze" << "ChaprontFrancou" << "JPLHorizons" << "MorrisonStephenson2004" << "EspenakMeeus";
 	switch (algoList.indexOf(algorithm))
 	{
 		case 0:
@@ -1172,34 +1173,37 @@ void ConfigurationDialog::setDeltaTAlgorithmDescription(QString algorithm)
 			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Stephenson (1978)")+"</i></small>");
 			break;
 		case 6:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Morrison & Stephenson (1982) algorithm, used by RedShift")+"</i></small>");
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm was adopted in Bretagnon & Simon’s Planetary Programs and Tables from –4000 to +2800 (1986) and in the PC planetarium program  RedShift.")+"</i></small>");
 			break;
 		case 7:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Stephenson & Morrison (1984)")+"</i></small>");
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Valid range of usage between –391 and 1600 years.")+"</i></small>");
 			break;
 		case 8:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Stephenson & Houlden (1986)")+"</i></small>");
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm are used in the PC planetarium program Guide 7.")+"</i></small>");
 			break;
 		case 9:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Espenak (1987, 1989)")+"</i></small>");
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm was given by Fred Espenak in his <i>Fifty Year Canon of Solar Eclipses: 1986 – 2035</i> (1987) and in his <i>Fifty Year Canon of Lunar Eclipses: 1986 – 2035</i> (1989).")+" "+q_("This relation should not be used before around 1950 or after around 2100.")+"</i></small>");
 			break;
 		case 10:
 			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Borkowski (1988)")+"</i></small>");
 			break;
 		case 11:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Chapront-Touze & Chapront (1991)")+"</i></small>");
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm was adopted in the ELP 2000-85 lunar theory.")+"</i></small>");
 			break;
 		case 12:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Chapront, Chapront-Touze & Francou (1997)")+"</i></small>");
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm are used in  Shinobu Takesako’s  EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline’s interactive planetarium Sky View Cafe.")+"</i></small>");
 			break;
 		case 13:
 			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Algorithm which used by JPL Horizons")+"</i></small>");
 			break;
 		case 14:
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Morrison & Stephenson (2004, 2005)")+"</i></small>");
+			break;
+		case 15:
 			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Espenak & Meeus (2006)")+"</i></small>");
 			break;
 		default:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+"Error"+"</i></small>");
+			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Error")+"</i></small>");
 	}
 
 }

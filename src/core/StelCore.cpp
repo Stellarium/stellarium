@@ -1287,6 +1287,10 @@ double StelCore::getDeltaT(double jDay)
 			// JPL Horizons algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByJPLHorizons(jDay);
 			break;
+		case MorrisonStephenson2004:
+			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(jDay);
+			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
