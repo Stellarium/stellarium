@@ -1086,17 +1086,8 @@ void StelCore::subtractTropicalCentury()
 void StelCore::addSolarDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System Observer")
-	{
-		double sp = home->getSiderealPeriod();
-		double dsol = home->getSiderealDay();
-		bool fwdDir = true;
-
-		if ((home->getEnglishName() == "Venus") || (home->getEnglishName() == "Uranus") || (home->getEnglishName() == "Pluto"))
-			fwdDir = false;
-
-		d *= StelUtils::calculateSolarDay(sp, dsol, fwdDir);
-	}
+	if (home->getEnglishName() != "Solar System Observer")	
+		d *= home->getMeanSolarDay();
 
 	setJDay(getJDay() + d);
 }
