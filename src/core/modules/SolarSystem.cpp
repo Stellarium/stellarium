@@ -713,7 +713,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// Create the Solar System body and add it to the list
 		QString type = pd.value(secname+"/type").toString();
 		PlanetP p;
-		if (type == "asteroid")
+		if (type == "asteroid" || type == "plutoid")
 		{
 			p = PlanetP(new MinorPlanet(englishName,
 			               pd.value(secname+"/lighting").toBool(),
