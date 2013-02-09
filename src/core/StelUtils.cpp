@@ -1431,7 +1431,20 @@ double getDeltaTByMorrisonStephenson2004(double jDay)
 	return deltaT + moon;
 }
 
+// Implementation algorithm by Reijs (2006) for DeltaT computation
+double getDeltaTByReijs(double jDay)
+{
+	double moon = 0;
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	double OffSetYear = (2385800 - jDay)/365.25;
+	double deltaT = ((1.8 * std::pow(OffSetYear,2)/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
 
+	if (year<1955 or year>2005)
+		moon = getMoonSecularAcceleration(jDay, -26.0);
+
+	return deltaT + moon;
+}
 
 double getMoonSecularAcceleration(double jDay, double nd)
 {

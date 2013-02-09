@@ -1292,6 +1292,10 @@ double StelCore::getDeltaT(double jDay)
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(jDay);
 			break;
+		case Reijs:
+			// Reijs (2006) algorithm for DeltaT
+			DeltaT = StelUtils::getDeltaTByReijs(jDay);
+			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
@@ -1369,6 +1373,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			break;
 		case MorrisonStephenson2004:
 			description = q_("Morrison & Stephenson (2004, 2005).");
+			break;
+		case Reijs:
+			description = q_("Reijs (2006).");
 			break;
 		case EspenakMeeus:
 			description = q_("Espenak & Meeus (2006).");
