@@ -650,6 +650,9 @@ class Translations
 		// Telescope Control Plugin
 		N_("Move a telescope to a given set of coordinates");
 		
+		// Renderer Statistics Plugin
+		N_("Show renderer statistics");
+		
 		// TRANSLATORS: Keyboard action group name
 		N_("Scripts");
 		N_("Run landscapes script from file");
