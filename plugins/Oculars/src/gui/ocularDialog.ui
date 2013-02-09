@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
-    <height>400</height>
+    <width>615</width>
+    <height>396</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,12 +15,6 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>300</width>
-    <height>400</height>
-   </size>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -148,6 +142,9 @@
        <widget class="QTabWidget" name="Tabs">
         <property name="currentIndex">
          <number>0</number>
+        </property>
+        <property name="usesScrollButtons">
+         <bool>false</bool>
         </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
