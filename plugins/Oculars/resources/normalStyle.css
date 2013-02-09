@@ -5,7 +5,7 @@ based on Stellarium's main stylesheet.
 Styles for the "normal mode" (as opposed to the "night mode").
 */
 
-/*QTabBar {
+QTabBar {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(31, 33, 36), stop: 1 rgb(0, 0, 0));
 }
 
@@ -43,4 +43,12 @@ QTabBar::tab:last {
 QTabWidget::pane {
 	margin-top: 0px;
 	border-top: none;
-}*/
+}
+
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp, QPushButton#pushButtonMoveBarlowUp {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown, QPushButton#pushButtonMoveBarlowDown {
+        image: url(:/graphicGui/spindown.png);
+}

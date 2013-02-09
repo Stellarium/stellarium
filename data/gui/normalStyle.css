@@ -243,14 +243,6 @@ QPushButton:hover#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton-hover.png);
 }
 
-QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp, QPushButton#pushButtonMoveBarlowUp {
-        image: url(:/graphicGui/spinup.png);
-}
-
-QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown, QPushButton#pushButtonMoveBarlowDown {
-        image: url(:/graphicGui/spindown.png);
-}
-
 QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {
         image: url(:/satellites/bt_delete.png);
 }
