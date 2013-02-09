@@ -508,9 +508,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 		if (std::abs(siderealDay)>0)
 		{			
-			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";
-			if (!pType.contains("moon"))
-				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";			
+			oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
 		}
 	}
 
@@ -817,18 +816,24 @@ double Planet::getSiderealTime(double jd) const
 
 double Planet::getMeanSolarDay() const
 {
-	double sday = getSiderealDay();
+	double msd = 0.;
+	double sday = getSiderealDay();	
 	double coeff = std::abs(sday/getSiderealPeriod());
 	float sign = -1;
 	// planets with retrograde rotation
 	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
 		sign = 1;
 
-	// calculate mean solar day only for non-moons, otherwise use duration 24 hours
-	if (!pType.contains("moon"))
-		return sday/(1 + sign*coeff);
+	if (pType.contains("moon"))
+	{
+		// duration of mean solar day on moon are same as synodic month on this moon
+		double a = parent->getSiderealPeriod()/sday;
+		msd = sday*(a/(a-1));
+	}
 	else
-		return 24.;
+		msd = sday/(1 + sign*coeff);
+
+	return msd;
 }
 
 // Get the Planet position in the parent Planet ecliptic coordinate in AU
