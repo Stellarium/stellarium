@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-02 20:24+0700\n"
-"PO-Revision-Date: 2013-02-04 10:36+0000\n"
+"PO-Revision-Date: 2013-02-08 09:05+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-05 04:42+0000\n"
-"X-Generator: Launchpad (build 16468)\n"
+"X-Launchpad-Export-Date: 2013-02-09 04:34+0000\n"
+"X-Generator: Launchpad (build 16482)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -4221,11 +4221,11 @@ msgstr "เลนส์ใกล้ตาถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous Barlow lens"
-msgstr ""
+msgstr "เลนส์บาร์โลว์ก่อนหน้านี้"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next Barlow lens"
-msgstr ""
+msgstr "เลนส์บาร์โลว์ถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4312,11 +4312,13 @@ msgstr "ขอบเขตภาพจริงจากกล้องสอง
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/barlow/telescope combination"
 msgstr ""
+"กำลังขยายที่ได้จากการรวมกันของเลนส์ใกล้ตา/เลนส์บาร์โลว์/กล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/barlow/telescope combination"
 msgstr ""
+"ขอบเขตภาพจริงที่ได้จากการรวมกันของเลนส์ใกล้ตา/เลนส์บาร์โลว์/กล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
