@@ -994,6 +994,20 @@
 					"autorepeat": false
 				}
 			}
+		},
+		"PluginRendererStatistics":
+		{
+			"pluginId" : "RendererStatistics",
+			"actions" :
+			{
+				"actionShow_RendererStatistics":
+				{
+					"text": "Show renderer statistics",
+					"primaryKey": "",
+					"checkable": true,
+					"autorepeat": false
+				}
+			}
 		}
 	}
 }
