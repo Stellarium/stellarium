@@ -1433,16 +1433,17 @@ double getDeltaTByMorrisonStephenson2004(double jDay)
 
 
 
-double getMoonSecularAcceleration(double jDay, double ndot)
+double getMoonSecularAcceleration(double jDay, double nd)
 {
 	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
 	// For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
-	// For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
-	double elpNDot = -23.8946; // n.dot from ELP2000-82B
+	// For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656	
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	double t = (year-1955)/100;
-	return -0.91072 * (elpNDot + std::abs(ndot))*std::pow(t, 2);
+	// n' for secular acceleration of the Moon in ELP2000-82B
+	// have value -23.8946 "/cy/cy
+	return -0.91072 * (-23.8946 + std::abs(nd))*std::pow(t, 2);
 }
 
 } // end of the StelUtils namespace

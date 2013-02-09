@@ -101,8 +101,7 @@ void ConfigurationDialog::retranslate()
 		//Plug-in information
 		populatePluginsList();
 
-		populateDeltaTAlgorithmsList();
-		setDeltaTAlgorithmDescription(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey());
+		populateDeltaTAlgorithmsList();		
 	}
 }
 
@@ -225,8 +224,7 @@ void ConfigurationDialog::createDialogContent()
 	        this,
 	        SLOT(showShortcutsWindow()));
 
-	populateDeltaTAlgorithmsList();
-	setDeltaTAlgorithmDescription(core->getCurrentDeltaTAlgorithmKey());
+	populateDeltaTAlgorithmsList();	
 	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
@@ -1139,71 +1137,17 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->setCurrentIndex(index);
 	//algorithms->model()->sort(0);
 	algorithms->blockSignals(false);
+	setDeltaTAlgorithmDescription();
 }
 
 void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setCurrentDeltaTAlgorithmKey(ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString());
-	setDeltaTAlgorithmDescription(core->getCurrentDeltaTAlgorithmKey());
+	setDeltaTAlgorithmDescription();
 }
 
-void ConfigurationDialog::setDeltaTAlgorithmDescription(QString algorithm)
+void ConfigurationDialog::setDeltaTAlgorithmDescription()
 {
-	QStringList algoList;
-	algoList << "WithoutCorrection" << "IAU" << "AstronomicalEphemeris" << "TuckermanGoldstine" << "MullerStephenson" << "Stephenson" << "MorrisonStephenson" << "StephensonMorrison" << "StephensonHoulden" << "Espenak" << "Borkowski" << "ChaprontTouze" << "ChaprontFrancou" << "JPLHorizons" << "MorrisonStephenson2004" << "EspenakMeeus";
-	switch (algoList.indexOf(algorithm))
-	{
-		case 0:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Correction is disabled")+"</i></small>");
-			break;
-		case 1:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("IAU (1959), based on observations by Spencer Jones (1939)")+"</i></small>");
-			break;
-		case 2:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Astronomical Ephemeris (1960)")+"</i></small>");
-			break;
-		case 3:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Tuckerman (1962, 1964) & Goldstine (1973)")+"</i></small>");
-			break;
-		case 4:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Muller & Stephenson (1975)")+"</i></small>");
-			break;
-		case 5:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Stephenson (1978)")+"</i></small>");
-			break;
-		case 6:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm was adopted in Bretagnon & Simon’s Planetary Programs and Tables from –4000 to +2800 (1986) and in the PC planetarium program  RedShift.")+"</i></small>");
-			break;
-		case 7:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Valid range of usage between –391 and 1600 years.")+"</i></small>");
-			break;
-		case 8:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm are used in the PC planetarium program Guide 7.")+"</i></small>");
-			break;
-		case 9:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm was given by Fred Espenak in his <i>Fifty Year Canon of Solar Eclipses: 1986 – 2035</i> (1987) and in his <i>Fifty Year Canon of Lunar Eclipses: 1986 – 2035</i> (1989).")+" "+q_("This relation should not be used before around 1950 or after around 2100.")+"</i></small>");
-			break;
-		case 10:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Borkowski (1988)")+"</i></small>");
-			break;
-		case 11:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm was adopted in the ELP 2000-85 lunar theory.")+"</i></small>");
-			break;
-		case 12:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("This algorithm are used in  Shinobu Takesako’s  EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline’s interactive planetarium Sky View Cafe.")+"</i></small>");
-			break;
-		case 13:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Algorithm which used by JPL Horizons")+"</i></small>");
-			break;
-		case 14:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Morrison & Stephenson (2004, 2005)")+"</i></small>");
-			break;
-		case 15:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Espenak & Meeus (2006)")+"</i></small>");
-			break;
-		default:
-			ui->deltaTAlgorithmDescription->setText(QString("<small><i>")+q_("Error")+"</i></small>");
-	}
-
+	ui->deltaTAlgorithmDescription->setText(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
 }
