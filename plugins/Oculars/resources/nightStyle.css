@@ -5,7 +5,7 @@ based on Stellarium's main stylesheet.
 Styles for the night-vision-friendly "night mode".
 */
 
-QTabBar {
+/*QTabBar {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(23, 0, 0), stop: 1 rgb(0, 0, 0));
 }
 
@@ -43,5 +43,5 @@ QTabBar::tab:last {
 QTabWidget::pane {
 	margin-top: 0px;
 	border-top: none;
-}
+}*/
 
