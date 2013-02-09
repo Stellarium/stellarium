@@ -390,6 +390,7 @@ namespace StelUtils
 	//! @param jDay the JD
 	//! @param ndot value n.dot which use in the algorithm
 	//! @return SecularAcceleration in seconds
+	//! @note n' for secular acceleration of the Moon in ELP2000-82B have value -23.8946 "/cy/cy
 	double getMoonSecularAcceleration(double jDay, double ndot);
 }
 

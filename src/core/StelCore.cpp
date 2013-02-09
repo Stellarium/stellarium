@@ -36,6 +36,7 @@
 #include "renderer/GenericVertexTypes.hpp"
 #include "renderer/StelRenderer.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -1316,4 +1317,64 @@ void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 QString StelCore::getCurrentDeltaTAlgorithmKey(void) const
 {
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm")).key(currentDeltaTAlgorithm);
+}
+
+//! Get description of the current algorithm for time correction
+QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
+{
+	QString description;
+	switch (currentDeltaTAlgorithm)
+	{
+		case WithoutCorrection:
+			description = q_("Correction is disabled.");
+			break;
+		case IAU:
+			description = q_("IAU (1959), based on observations by Spencer Jones (1939).");
+			break;
+		case AstronomicalEphemeris:
+			description = q_("Astronomical Ephemeris (1960).");
+			break;
+		case TuckermanGoldstine:
+			description = q_("Tuckerman (1962, 1964) & Goldstine (1973).");
+			break;
+		case MullerStephenson:
+			description = q_("Muller & Stephenson (1975).");
+			break;
+		case Stephenson:
+			description = q_("Stephenson (1978).");
+			break;
+		case MorrisonStephenson:
+			description = q_("This algorithm was adopted in Bretagnon & Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program  RedShift.");
+			break;
+		case StephensonMorrison:
+			description = q_("Valid range of usage between -391 and 1600 years.");
+			break;
+		case StephensonHoulden:
+			description = q_("This algorithm are used in the PC planetarium program Guide 7.");
+			break;
+		case Espenak:
+			description = QString("%1 %2").arg(q_("This algorithm was given by Fred Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).")).arg(q_("This relation should not be used before around 1950 or after around 2100."));
+			break;
+		case Borkowski:
+			description = q_("Borkowski (1988).");
+			break;
+		case ChaprontTouze:
+			description = q_("This algorithm was adopted in the ELP 2000-85 lunar theory.");
+			break;
+		case ChaprontFrancou:
+			description = q_("This algorithm are used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
+			break;
+		case JPLHorizons:
+			description = q_("Algorithm which used by JPL Horizons.");
+			break;
+		case MorrisonStephenson2004:
+			description = q_("Morrison & Stephenson (2004, 2005).");
+			break;
+		case EspenakMeeus:
+			description = q_("Espenak & Meeus (2006).");
+			break;
+		default:
+			description = q_("Error");
+	}
+	return description;
 }
