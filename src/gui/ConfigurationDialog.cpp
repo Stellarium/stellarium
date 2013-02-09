@@ -1131,6 +1131,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
+	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 
 	//Restore the selection
 	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
