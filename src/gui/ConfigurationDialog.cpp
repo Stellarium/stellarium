@@ -1106,6 +1106,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 {
 	Q_ASSERT(ui->deltaTAlgorithmComboBox);
 
+	ui->deltaTGroupBox->setToolTip(QString("%1T").arg(QChar(0x0394)));
+
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
 
 	//Save the current selection to be restored later
