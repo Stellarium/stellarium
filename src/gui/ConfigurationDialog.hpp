@@ -122,7 +122,7 @@ private slots:
 
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);
-	void setDeltaTAlgorithmDescription(QString algorithm);
+	void setDeltaTAlgorithmDescription();
 
 	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed

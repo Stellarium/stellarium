@@ -599,9 +599,9 @@ void BottomStelBar::updateText(bool updatePos)
 		if (displayDeltaT)
 		{
 			if (deltaT>60.)
-				datetime->setToolTip(QString("%1T = %2 (%3s)").arg(QChar(0x0394)).arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2));
+				datetime->setToolTip(QString("%1T = %2 (%3s) %4").arg(QChar(0x0394)).arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg("[<em>n</em>=-23.8946 \"/cy/cy]"));
 			else
-				datetime->setToolTip(QString("%1T = %2s").arg(QChar(0x0394)).arg(deltaT, 3, 'f', 3));
+				datetime->setToolTip(QString("%1T = %2s %3").arg(QChar(0x0394)).arg(deltaT, 3, 'f', 3).arg("[<em>n</em>=-23.8946 \"/cy/cy]"));
 		}
 		else
 			datetime->setToolTip("");

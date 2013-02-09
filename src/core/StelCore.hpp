@@ -275,7 +275,8 @@ public slots:
 	void setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm) { currentDeltaTAlgorithm=algorithm; }
 	//! Get the current algorithm for time correction (DeltaT)
 	DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
-
+	//! Get description of the current algorithm for time correction
+	QString getCurrentDeltaTAlgorithmDescription(void) const;
 	//! Get the current algorithm used by the DeltaT
 	QString getCurrentDeltaTAlgorithmKey(void) const;
 	//! Set the current algorithm to use from its key
