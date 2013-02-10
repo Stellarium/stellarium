@@ -819,10 +819,10 @@ double Planet::getMeanSolarDay() const
 	double msd = 0.;
 	double sday = getSiderealDay();	
 	double coeff = std::abs(sday/getSiderealPeriod());
-	float sign = -1;
+	float sign = 1;
 	// planets with retrograde rotation
 	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
-		sign = 1;
+		sign = -1;
 
 	if (pType.contains("moon"))
 	{
@@ -831,7 +831,7 @@ double Planet::getMeanSolarDay() const
 		msd = sday*(a/(a-1));
 	}
 	else
-		msd = sday/(1 + sign*coeff);
+		msd = sign*sday/(1 - sign*coeff);
 
 	return msd;
 }
