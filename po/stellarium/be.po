@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 20:24+0700\n"
+"POT-Creation-Date: 2013-02-09 19:56+0700\n"
 "PO-Revision-Date: 2013-02-03 10:52+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-04 05:11+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-10 04:36+0000\n"
+"X-Generator: Launchpad (build 16482)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -39,20 +39,20 @@ msgstr "Гарызонт"
 msgid "Galactic Plane"
 msgstr "Ґаляктычная плоскасьць"
 
-#: src/core/modules/LandscapeMgr.cpp:500
+#: src/core/modules/LandscapeMgr.cpp:503
 msgid "Author: "
 msgstr "Стваральнік: "
 
-#: src/core/modules/LandscapeMgr.cpp:503
+#: src/core/modules/LandscapeMgr.cpp:506
 msgid "Location: "
 msgstr "Месца: "
 
-#: src/core/modules/LandscapeMgr.cpp:508
+#: src/core/modules/LandscapeMgr.cpp:511
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:512
+#: src/core/modules/LandscapeMgr.cpp:515
 msgid "Planet: "
 msgstr "Плянэта: "
 
@@ -171,27 +171,27 @@ msgstr "Зоркавы пэрыяд: %1 дзён (%2 a)"
 msgid "Sidereal day: %1"
 msgstr "Зоркавы дзень: %1"
 
-#: src/core/modules/Planet.cpp:513 src/core/modules/Planet.cpp:515
+#: src/core/modules/Planet.cpp:512
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Сярэдні сонечны дзень: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:519
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Фазавы вугал: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:520
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Эланґацыя: %1"
 
-#: src/core/modules/Planet.cpp:524
+#: src/core/modules/Planet.cpp:521
 #, qt-format
 msgid "Phase: %1"
 msgstr "Фаза: %1"
 
-#: src/core/modules/Planet.cpp:525
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Асьветлены: %1%"
@@ -689,12 +689,12 @@ msgstr "Дызайнэр ґрафікі й іншага: %1"
 msgid "OSX Developer: %1"
 msgstr "Распрацоўнік для OSX: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:664
+#: src/gui/StelGui.cpp:178 src/translations.h:667
 msgid "Script console window"
 msgstr "Вакно кансолі сцэнароў"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:659
+#: src/gui/StelGui.cpp:178 src/translations.h:662
 msgid "Windows"
 msgstr "Вокны"
 
@@ -2995,45 +2995,49 @@ msgstr "Вакно настаўленьняў гістарычных звышн�
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Павернуць тэлескоп на зададзеныя каардынаты"
 
+#: src/translations.h:654
+msgid "Show renderer statistics"
+msgstr ""
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:654 src/ui_configurationDialog.h:1121
+#: src/translations.h:657 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Сцэнары"
 
-#: src/translations.h:655
+#: src/translations.h:658
 msgid "Run landscapes script from file"
 msgstr "Выканаць сцэнар краявідаў з файла"
 
-#: src/translations.h:656
+#: src/translations.h:659
 msgid "Show and zoom Moon"
 msgstr "Паказваць і павялічваць Месяц"
 
-#: src/translations.h:660
+#: src/translations.h:663
 msgid "Configuration window"
 msgstr "Вакно настаўленьняў"
 
-#: src/translations.h:661
+#: src/translations.h:664
 msgid "Date/time window"
 msgstr "Вакно выбару даты/часу"
 
-#: src/translations.h:662
+#: src/translations.h:665
 msgid "Help window"
 msgstr "Вакно даведкі"
 
-#: src/translations.h:663
+#: src/translations.h:666
 msgid "Location window"
 msgstr "Вакно выбару месца"
 
-#: src/translations.h:665
+#: src/translations.h:668
 msgid "Search window"
 msgstr "Вакно пошуку"
 
-#: src/translations.h:666
+#: src/translations.h:669
 msgid "Shortcuts window"
 msgstr "Вакно скаротаў"
 
-#: src/translations.h:667
+#: src/translations.h:670
 msgid "Sky and viewing options window"
 msgstr "Вакно выбораў неба й прагляду"
 

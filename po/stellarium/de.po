@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 20:24+0700\n"
+"POT-Creation-Date: 2013-02-09 19:56+0700\n"
 "PO-Revision-Date: 2013-02-02 02:33+0000\n"
 "Last-Translator: Dennis Baudys <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:39+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-10 04:39+0000\n"
+"X-Generator: Launchpad (build 16482)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -39,20 +39,20 @@ msgstr "Horizont"
 msgid "Galactic Plane"
 msgstr "Galaktische Ebene"
 
-#: src/core/modules/LandscapeMgr.cpp:500
+#: src/core/modules/LandscapeMgr.cpp:503
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:503
+#: src/core/modules/LandscapeMgr.cpp:506
 msgid "Location: "
 msgstr "Standort: "
 
-#: src/core/modules/LandscapeMgr.cpp:508
+#: src/core/modules/LandscapeMgr.cpp:511
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:512
+#: src/core/modules/LandscapeMgr.cpp:515
 msgid "Planet: "
 msgstr "Planet: "
 
@@ -171,27 +171,27 @@ msgstr "Siderische Periode: %1 Tage (%2 Jahre)"
 msgid "Sidereal day: %1"
 msgstr "Siderischer Tag: %1"
 
-#: src/core/modules/Planet.cpp:513 src/core/modules/Planet.cpp:515
+#: src/core/modules/Planet.cpp:512
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Mittlerer Sonnentag: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:519
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Phasenwinkel: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:520
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongation: %1"
 
-#: src/core/modules/Planet.cpp:524
+#: src/core/modules/Planet.cpp:521
 #, qt-format
 msgid "Phase: %1"
 msgstr "Phase: %1"
 
-#: src/core/modules/Planet.cpp:525
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Erleuchtet: %1%"
@@ -688,12 +688,12 @@ msgstr "Designer für Grafik und anderes: %1"
 msgid "OSX Developer: %1"
 msgstr "OSX Entwickler: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:664
+#: src/gui/StelGui.cpp:178 src/translations.h:667
 msgid "Script console window"
 msgstr "Skript Konsolen-Fenster"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:659
+#: src/gui/StelGui.cpp:178 src/translations.h:662
 msgid "Windows"
 msgstr "Fenster"
 
@@ -3003,45 +3003,49 @@ msgstr "Konfiguration für Historische Supernovae"
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Bewege ein Teleskop zu angegebenen Koordinaten"
 
+#: src/translations.h:654
+msgid "Show renderer statistics"
+msgstr ""
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:654 src/ui_configurationDialog.h:1121
+#: src/translations.h:657 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Skripte"
 
-#: src/translations.h:655
+#: src/translations.h:658
 msgid "Run landscapes script from file"
 msgstr "Landschaften-Skript aus Datei ausführen"
 
-#: src/translations.h:656
+#: src/translations.h:659
 msgid "Show and zoom Moon"
 msgstr "Mond anzeigen und vergrößern"
 
-#: src/translations.h:660
+#: src/translations.h:663
 msgid "Configuration window"
 msgstr "Einstellungsfenster"
 
-#: src/translations.h:661
+#: src/translations.h:664
 msgid "Date/time window"
 msgstr "Datum/Zeit-Fenster"
 
-#: src/translations.h:662
+#: src/translations.h:665
 msgid "Help window"
 msgstr "Hilfe-Fenster"
 
-#: src/translations.h:663
+#: src/translations.h:666
 msgid "Location window"
 msgstr "Standortfenster"
 
-#: src/translations.h:665
+#: src/translations.h:668
 msgid "Search window"
 msgstr "Suchfeld"
 
-#: src/translations.h:666
+#: src/translations.h:669
 msgid "Shortcuts window"
 msgstr "Fenster mit Tastenkombinationen"
 
-#: src/translations.h:667
+#: src/translations.h:670
 msgid "Sky and viewing options window"
 msgstr "Himmel- und Anzeigeoptionsfenster"
 
