@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 20:24+0700\n"
+"POT-Creation-Date: 2013-02-09 19:56+0700\n"
 "PO-Revision-Date: 2013-01-18 05:28+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-03 04:42+0000\n"
-"X-Generator: Launchpad (build 16462)\n"
+"X-Launchpad-Export-Date: 2013-02-10 04:42+0000\n"
+"X-Generator: Launchpad (build 16482)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -37,20 +37,20 @@ msgstr "Horizon"
 msgid "Galactic Plane"
 msgstr "Satah Galaksi"
 
-#: src/core/modules/LandscapeMgr.cpp:500
+#: src/core/modules/LandscapeMgr.cpp:503
 msgid "Author: "
 msgstr "Pengarang: "
 
-#: src/core/modules/LandscapeMgr.cpp:503
+#: src/core/modules/LandscapeMgr.cpp:506
 msgid "Location: "
 msgstr "Lokasi: "
 
-#: src/core/modules/LandscapeMgr.cpp:508
+#: src/core/modules/LandscapeMgr.cpp:511
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:512
+#: src/core/modules/LandscapeMgr.cpp:515
 msgid "Planet: "
 msgstr "Planet "
 
@@ -169,27 +169,27 @@ msgstr "Tempoh ikut bintang: %1 hari (%2 a)"
 msgid "Sidereal day: %1"
 msgstr "hari ikut bintang: %1"
 
-#: src/core/modules/Planet.cpp:513 src/core/modules/Planet.cpp:515
+#: src/core/modules/Planet.cpp:512
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Min hari suria: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:519
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Sudut Fasa: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:520
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Pemanjangan: %1"
 
-#: src/core/modules/Planet.cpp:524
+#: src/core/modules/Planet.cpp:521
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fasa: %1"
 
-#: src/core/modules/Planet.cpp:525
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Disinari: %1%"
@@ -686,12 +686,12 @@ msgstr "Pereka grafik/lain: %1"
 msgid "OSX Developer: %1"
 msgstr "Pembangun OSX: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:664
+#: src/gui/StelGui.cpp:178 src/translations.h:667
 msgid "Script console window"
 msgstr "Tetingkap konsol skrip"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:659
+#: src/gui/StelGui.cpp:178 src/translations.h:662
 msgid "Windows"
 msgstr "Tetingkap"
 
@@ -2995,45 +2995,49 @@ msgstr "Tetingkap konfigurasi Supernova bersejarah"
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Alih teleskop ke kedudukan koordinat yang diberikan"
 
+#: src/translations.h:654
+msgid "Show renderer statistics"
+msgstr ""
+
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:654 src/ui_configurationDialog.h:1121
+#: src/translations.h:657 src/ui_configurationDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Skrip"
 
-#: src/translations.h:655
+#: src/translations.h:658
 msgid "Run landscapes script from file"
 msgstr "Jalankan skrip landskap dari fail"
 
-#: src/translations.h:656
+#: src/translations.h:659
 msgid "Show and zoom Moon"
 msgstr "Papar dan zum Bulan"
 
-#: src/translations.h:660
+#: src/translations.h:663
 msgid "Configuration window"
 msgstr "Tetingkap Konfigurasi"
 
-#: src/translations.h:661
+#: src/translations.h:664
 msgid "Date/time window"
 msgstr "Tetingkap tarikh/masa"
 
-#: src/translations.h:662
+#: src/translations.h:665
 msgid "Help window"
 msgstr "Tetingkap Bantuan"
 
-#: src/translations.h:663
+#: src/translations.h:666
 msgid "Location window"
 msgstr "Tetingkap lokasi"
 
-#: src/translations.h:665
+#: src/translations.h:668
 msgid "Search window"
 msgstr "Tetingkap Gelintar"
 
-#: src/translations.h:666
+#: src/translations.h:669
 msgid "Shortcuts window"
 msgstr "Tetingkap pintasan"
 
-#: src/translations.h:667
+#: src/translations.h:670
 msgid "Sky and viewing options window"
 msgstr "Tetingkap pilihan pandangan dan langit"
 
