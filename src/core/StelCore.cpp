@@ -1410,7 +1410,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison [2004]), Victor Reijs derived a DeltaT formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson [2004]. See for more info %1here%2.").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>");
 			break;
 		case EspenakMeeus:
-			description = q_("This algorithm Fred Espenak and Jean Meeus used for NASA Eclipse Web Site. These relations are also adopted in the solar, lunar and planetary ephemeris program SOLEX.");
+			description = q_("This algorithm Fred Espenak and Jean Meeus used for %1NASA Eclipse Web Site%2. These relations are also adopted in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>");
 			break;
 		default:
 			description = q_("Error");
