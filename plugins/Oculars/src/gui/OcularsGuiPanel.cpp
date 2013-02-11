@@ -583,7 +583,7 @@ void OcularsGuiPanel::updateBarlowControls()
 		return;
 	}
 	int index = ocularsPlugin->selectedOcularIndex;
-	Ocular* ocular = ocularsPlugin->oculars[index];
+	//Ocular* ocular = ocularsPlugin->oculars[index];
 
 	Barlow* barlow = ocularsPlugin->selectedBarlow();
 	index = ocularsPlugin->selectedBarlowIndex;
