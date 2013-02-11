@@ -1106,7 +1106,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 {
 	Q_ASSERT(ui->deltaTAlgorithmComboBox);
 
-	ui->deltaTGroupBox->setToolTip(QString("%1T").arg(QChar(0x0394)));
+	ui->deltaTLabel->setText(QString("%1 %2T:").arg("Algorithm of").arg(QChar(0x0394)));
 
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
 
@@ -1152,5 +1152,6 @@ void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
 
 void ConfigurationDialog::setDeltaTAlgorithmDescription()
 {
-	ui->deltaTAlgorithmDescription->setText(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
+	ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->deltaTAlgorithmDescription->setHtml(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
 }
