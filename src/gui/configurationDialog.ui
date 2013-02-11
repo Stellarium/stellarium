@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
-    <height>461</height>
+    <width>493</width>
+    <height>457</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -643,6 +643,60 @@
              <property name="margin">
               <number>0</number>
              </property>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="_4">
+               <item>
+                <widget class="QRadioButton" name="fixedTimeRadio">
+                 <property name="toolTip">
+                  <string>Use a specific date and time when Stellarium starts up</string>
+                 </property>
+                 <property name="text">
+                  <string>Other:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="date">
+                  <date>
+                   <year>1952</year>
+                   <month>5</month>
+                   <day>11</day>
+                  </date>
+                 </property>
+                 <property name="time">
+                  <time>
+                   <hour>0</hour>
+                   <minute>42</minute>
+                   <second>0</second>
+                  </time>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="text">
+                <string>use current</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="systemTimeRadio">
                <property name="toolTip">
@@ -650,13 +704,6 @@
                </property>
                <property name="text">
                 <string>System date and time</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
-               <property name="text">
-                <string>use current</string>
                </property>
               </widget>
              </item>
@@ -718,53 +765,6 @@
                </item>
               </layout>
              </item>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="_4">
-               <item>
-                <widget class="QRadioButton" name="fixedTimeRadio">
-                 <property name="toolTip">
-                  <string>Use a specific date and time when Stellarium starts up</string>
-                 </property>
-                 <property name="text">
-                  <string>Other:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="date">
-                  <date>
-                   <year>1952</year>
-                   <month>5</month>
-                   <day>11</day>
-                  </date>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>0</hour>
-                   <minute>42</minute>
-                   <second>0</second>
-                  </time>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
             </layout>
            </widget>
           </item>
@@ -786,27 +786,38 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout">
-                <item alignment="Qt::AlignTop">
-                 <widget class="QLabel" name="label_2">
-                  <property name="text">
-                   <string>Algorithm:</string>
+                <property name="margin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_12">
+                  <property name="leftMargin">
+                   <number>6</number>
                   </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_2">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_4">
-                <item alignment="Qt::AlignTop">
-                 <widget class="QComboBox" name="deltaTAlgorithmComboBox"/>
+                  <item>
+                   <widget class="QLabel" name="deltaTLabel">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="deltaTAlgorithmComboBox"/>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
                 </item>
                 <item>
                  <widget class="QTextBrowser" name="deltaTAlgorithmDescription">
@@ -814,19 +825,6 @@
                    <bool>true</bool>
                   </property>
                  </widget>
-                </item>
-                <item>
-                 <spacer name="verticalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                </layout>
               </widget>

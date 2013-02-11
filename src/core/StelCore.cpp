@@ -1250,10 +1250,12 @@ double StelCore::getDeltaT(double jDay)
 			break;
 		case MullerStephenson:
 			// Muller & Stephenson (1975) algorithm for DeltaT
+			// n-dot = -37.5 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMullerStephenson(jDay);
 			break;
 		case Stephenson:
 			// Stephenson (1978) algorithm for DeltaT
+			// n-dot = -30.0 "/cy/cy.
 			DeltaT = StelUtils::getDeltaTByStephenson(jDay);
 			break;
 		case MorrisonStephenson:
@@ -1274,14 +1276,17 @@ double StelCore::getDeltaT(double jDay)
 			break;
 		case Borkowski:
 			// Borkowski (1988) algorithm for DeltaT
+			// n-dot = -23.8946 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByBorkowski(jDay);
 			break;
 		case ChaprontTouze:
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+			// n-dot = -23.8946 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByChaprontTouze(jDay);
 			break;
 		case ChaprontFrancou:
 			// Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT
+			// n-dot = -25.7376 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByChaprontFrancou(jDay);
 			break;
 		case JPLHorizons:
@@ -1290,6 +1295,7 @@ double StelCore::getDeltaT(double jDay)
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
+			// n-dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(jDay);
 			break;
 		case Reijs:
@@ -1333,13 +1339,13 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("Correction is disabled.");
 			break;
 		case IAU:
-			description = q_("IAU (1959), based on observations by Spencer Jones (1939).");
+			description = q_("This formula based on a study of the post-1650 observations of the Sun, the Moon and the planets by Spencer Jones (1939) and used by Meeus in his <em>Astronomical Formulae for Calculators</em>. It was also adopted in the PC program SunTracker Pro.");
 			break;
 		case AstronomicalEphemeris:
-			description = q_("Astronomical Ephemeris (1960).");
+			description = q_("This a slightly modified version of the IAU (1952) formula was adopted in the <em>Astronomical Ephemeris</em>.");
 			break;
 		case TuckermanGoldstine:
-			description = q_("Tuckerman (1962, 1964) & Goldstine (1973).");
+			description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. near sunset) or 16h 00m GMT. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).");
 			break;
 		case MullerStephenson:
 			description = q_("Muller & Stephenson (1975).");
@@ -1354,31 +1360,31 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("Valid range of usage between -391 and 1600 years.");
 			break;
 		case StephensonHoulden:
-			description = q_("This algorithm are used in the PC planetarium program Guide 7.");
+			description = q_("This algorithm are used in the PC planetarium program Guide 7. This relation valid for dates before 1600 year.");
 			break;
 		case Espenak:
-			description = QString("%1 %2").arg(q_("This algorithm was given by Fred Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).")).arg(q_("This relation should not be used before around 1950 or after around 2100."));
+			description = q_("This algorithm was given by Fred Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989). This relation should not be used before around 1950 or after around 2100.");
 			break;
 		case Borkowski:
-			description = q_("Borkowski (1988).");
+			description = q_("This formula was obtained by K.M. Borkowski from an analysis of 31 solar eclipse records dating between 2137 BCE to 1715 CE.");
 			break;
 		case ChaprontTouze:
-			description = q_("This algorithm was adopted in the ELP 2000-85 lunar theory.");
+			description = q_("This formula was adopted by Michelle Chapront-Touze & Jean Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).");
 			break;
 		case ChaprontFrancou:
-			description = q_("This algorithm are used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
+			description = q_("This formula are recommended by Jean Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
 			break;
 		case JPLHorizons:
-			description = q_("Algorithm which used by JPL Horizons.");
+			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory used this formula in interactive website %1JPL Horizons%2 for calculating positions of the solar system bodies.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>");
 			break;
 		case MorrisonStephenson2004:
 			description = q_("Morrison & Stephenson (2004, 2005).");
 			break;
 		case Reijs:
-			description = q_("Reijs (2006).");
+			description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison [2004]), Victor Reijs derived a DeltaT formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson [2004]. See for more info %1here%2.").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>");
 			break;
 		case EspenakMeeus:
-			description = q_("Espenak & Meeus (2006).");
+			description = q_("This algorithm Fred Espenak and Jean Meeus used for NASA Eclipse Web Site. These relations are also adopted in the solar, lunar and planetary ephemeris program SOLEX.");
 			break;
 		default:
 			description = q_("Error");
