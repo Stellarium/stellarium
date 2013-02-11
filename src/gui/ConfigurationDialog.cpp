@@ -1130,7 +1130,10 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
 	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");
 	algorithms->addItem(q_("Chapront, Chapront-Touze & Francou (1997)"), "ChaprontFrancou");
+	algorithms->addItem(q_("Meeus (1998)"), "Meeus");
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");
+	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
+	algorithms->addItem(q_("Reingold & Dershowitz (2001, 2002)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
