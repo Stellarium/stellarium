@@ -295,10 +295,10 @@ void LandscapeMgr::init()
 	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
 
 	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("landscape/init_bortle_scale",3).toInt(&ok));
+	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
 	{
-		conf->setValue("landscape/init_bortle_scale",3);
+		conf->setValue("stars/init_bortle_scale",3);
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
