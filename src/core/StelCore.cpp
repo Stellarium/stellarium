@@ -1348,21 +1348,24 @@ QString StelCore::getCurrentDeltaTAlgorithmKey(void) const
 
 //! Get description of the current algorithm for time correction
 QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
-{
+{   // GZ remarked where more info would be desirable. Generally, a full citation and the math. term would be nice to have displayed if it's just one formula, and the range of valid dates.
 	QString description;
 	switch (currentDeltaTAlgorithm)
 	{
 		case WithoutCorrection:
-			description = q_("Correction is disabled.");
+			description = q_("Correction is disabled. Use only if you know what you are doing!");
 			break;
 		case IAU:
-			description = q_("This formula based on a study of the post-1650 observations of the Sun, the Moon and the planets by Spencer Jones (1939) and used by Meeus in his <em>Astronomical Formulae for Calculators</em>. It was also adopted in the PC program SunTracker Pro.");
+			description = q_("This formula is based on a study of the post-1650 observations of the Sun, the Moon and the planets by Spencer Jones (1939) and used by Jean Meeus in his <em>Astronomical Formulae for Calculators</em>. It was also adopted in the PC program SunTracker Pro.");
+			// find year of publication of AFFC
 			break;
 		case AstronomicalEphemeris:
-			description = q_("This a slightly modified version of the IAU (1952) formula was adopted in the <em>Astronomical Ephemeris</em>.");
+			description = q_("This is a slightly modified version of the IAU (1952) formula which was adopted in the <em>Astronomical Ephemeris</em>.");
+			// TODO: expand the sentence: ... adopted ... from 19xx-19yy?
 			break;
 		case TuckermanGoldstine:
 			description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. near sunset) or 16h 00m GMT. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).");
+			// TODO: These tables are sometimes found cited, but I have no details. Maybe add "based on ... " ?
 			break;
 		case MullerStephenson:
 			description = q_("Muller & Stephenson (1975).");
@@ -1371,31 +1374,32 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("Stephenson (1978).");
 			break;
 		case MorrisonStephenson:
-			description = q_("This algorithm was adopted in Bretagnon & Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program  RedShift.");
+			description = q_("This algorithm was adopted in Bretagnon & Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.");
 			break;
 		case StephensonMorrison:
-			description = q_("Valid range of usage between -391 and 1600 years.");
+			description = q_("Valid range of usage: between years -391 and 1600.");
 			break;
 		case StephensonHoulden:
-			description = q_("This algorithm are used in the PC planetarium program Guide 7. This relation valid for dates before 1600 year.");
+			description = q_("This algorithm is used in the PC planetarium program Guide 7. The relation is valid only for dates before year 1600.");
 			break;
 		case Espenak:
-			description = q_("This algorithm was given by Fred Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989). This relation should not be used before around 1950 or after around 2100.");
+			description = q_("This algorithm was given by Fred Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989). This relation should not be used before about 1950 or after about 2100.");
 			break;
 		case Borkowski:
-			description = q_("This formula was obtained by K.M. Borkowski from an analysis of 31 solar eclipse records dating between 2137 BCE to 1715 CE.");
+			description = q_("This formula was obtained by K.M. Borkowski from an analysis of 31 solar eclipse records dating between 2137 BCE and 1715 CE.");
 			break;
 		case ChaprontTouze:
 			description = q_("This formula was adopted by Michelle Chapront-Touze & Jean Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).");
 			break;
 		case ChaprontFrancou:
-			description = q_("This formula are recommended by Jean Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
+			description = q_("This formula is recommended by Jean Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
 			break;
 		case Meeus:
 			description = q_("Jean Meeus, in the second edition of his <em>Astronomical Algorithms</em> (1998), gives a 12th-order polynomial valid for the time span 1800 to 1997 with a maximum error of 2.3 seconds and two lower-order polynomials covering the same time span with a maximum error of 0.9 seconds.");
+			// TODO: specify which one this is? (I have the book at home only)
 			break;
 		case JPLHorizons:
-			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory used this formula in interactive website %1JPL Horizons%2 for calculating positions of the solar system bodies.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>");
+			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory used this formula in their interactive website %1JPL Horizons%2 for calculating positions of the solar system bodies.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>");
 			break;
 		case MontenbruckPfleger:
 			description = q_("The fourth edition of Montenbruck & Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials valid for the period between 1825 and 2000 with a typical 1-second accuracy.");
@@ -1404,13 +1408,13 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("Edward M. Reingold & Nachum Dershowitz adopt the approximate relations in the second edition of <em>Calendrical Calculations</em> (2001) and in their <em>Calendrical Tabulations</em> (2002).");
 			break;
 		case MorrisonStephenson2004:
-			description = q_("Morrison & Stephenson (2004, 2005).");
+			description = q_("Morrison & Stephenson (2004, 2005)."); // TODO: paper title, range of validity?
 			break;
 		case Reijs:
 			description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison [2004]), Victor Reijs derived a DeltaT formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson [2004]. See for more info %1here%2.").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>");
 			break;
 		case EspenakMeeus:
-			description = q_("This algorithm Fred Espenak and Jean Meeus used for %1NASA Eclipse Web Site%2. These relations are also adopted in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>");
+			description = q_("This algorithm by Fred Espenak and Jean Meeus is used for the %1NASA Eclipse Web Site%2. These relations are also adopted in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>");
 			break;
 		default:
 			description = q_("Error");
