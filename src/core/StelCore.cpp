@@ -1238,10 +1238,12 @@ double StelCore::getDeltaT(double jDay)
 			break;
 		case IAU:
 			// IAU (1959) algorithm for DeltaT, based on observations by Spencer Jones (1939)
+			// n-dot = -22.44 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByIAU(jDay);
 			break;
 		case AstronomicalEphemeris:
 			// Astronomical Ephemeris (1960) algorithm for DeltaT
+			// n-dot = -22.44 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(jDay);
 			break;
 		case TuckermanGoldstine:
@@ -1289,9 +1291,24 @@ double StelCore::getDeltaT(double jDay)
 			// n-dot = -25.7376 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByChaprontFrancou(jDay);
 			break;
+		case Meeus:
+			// Meeus (1998) algorithm for DeltaT
+			// n-dot = -26.0 "/cy/cy
+			DeltaT = StelUtils::getDeltaTByMeeus(jDay);
+			break;
 		case JPLHorizons:
 			// JPL Horizons algorithm for DeltaT
 			DeltaT = StelUtils::getDeltaTByJPLHorizons(jDay);
+			break;
+		case MontenbruckPfleger:
+			// Montenbruck & Pfleger (2000) algorithm for DeltaT
+			// n-dot = -26.0 "/cy/cy
+			DeltaT = StelUtils::getDeltaTByMontenbruckPfleger(jDay);
+			break;
+		case ReingoldDershowitz:
+			// Reingold & Dershowitz (2001, 2002) algorithm for DeltaT
+			// n-dot = -26.0 "/cy/cy
+			DeltaT = StelUtils::getDeltaTByReingoldDershowitz(jDay);
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
@@ -1374,8 +1391,17 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case ChaprontFrancou:
 			description = q_("This formula are recommended by Jean Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
 			break;
+		case Meeus:
+			description = q_("Jean Meeus, in the second edition of his <em>Astronomical Algorithms</em> (1998), gives a 12th-order polynomial valid for the time span 1800 to 1997 with a maximum error of 2.3 seconds and two lower-order polynomials covering the same time span with a maximum error of 0.9 seconds.");
+			break;
 		case JPLHorizons:
 			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory used this formula in interactive website %1JPL Horizons%2 for calculating positions of the solar system bodies.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>");
+			break;
+		case MontenbruckPfleger:
+			description = q_("The fourth edition of Montenbruck & Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials valid for the period between 1825 and 2000 with a typical 1-second accuracy.");
+			break;
+		case ReingoldDershowitz:
+			description = q_("Edward M. Reingold & Nachum Dershowitz adopt the approximate relations in the second edition of <em>Calendrical Calculations</em> (2001) and in their <em>Calendrical Tabulations</em> (2002).");
 			break;
 		case MorrisonStephenson2004:
 			description = q_("Morrison & Stephenson (2004, 2005).");

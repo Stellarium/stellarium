@@ -391,11 +391,29 @@ namespace StelUtils
 	//! @return Delta-T in seconds
 	double getDeltaTByReijs(double jDay);
 
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Meeus (1998) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMeeus(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Montenbruck & Pfleger (2000) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMontenbruckPfleger(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Reingold & Dershowitz (2001, 2002) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByReingoldDershowitz(double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! @param jDay the JD
-	//! @param ndot value n.dot which use in the algorithm
+	//! @param ndot value n-dot which use in the algorithm
 	//! @return SecularAcceleration in seconds
-	//! @note n' for secular acceleration of the Moon in ELP2000-82B have value -23.8946 "/cy/cy
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B have value -23.8946 "/cy/cy
 	double getMoonSecularAcceleration(double jDay, double ndot);
 }
 
