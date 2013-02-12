@@ -1142,7 +1142,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
-	//algorithms->addItem(q_("User defined equation"), "Custom");
+	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
 
 	//Restore the selection
 	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
