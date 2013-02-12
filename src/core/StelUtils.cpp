@@ -1412,21 +1412,11 @@ double getDeltaTByJPLHorizons(double jDay)
 double getDeltaTByMorrisonStephenson2004(double jDay)
 {
 	int year, month, day;
-	double u;
 	double moon = 0;
-	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	
-	if (year <= -700)
-	{
-		u = (year-1820)/100;
-		deltaT = -20.0 + 32.0 * std::pow(u, 2);
-	}
-	if (year > -700)
-	{
-		u = (year-2000)/100;
-		deltaT = -745.0 + 16.18*u + 28.863 * std::pow(u, 2);
-	}
+	double u = (year-1820)/100;
+	double deltaT = -20.0 + 32.0 * std::pow(u, 2);
 	
 	if (year<1955 or year>2005)
 		moon = getMoonSecularAcceleration(jDay, -26.0);
