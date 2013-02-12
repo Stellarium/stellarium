@@ -91,25 +91,30 @@ public:
 	enum DeltaTAlgorithm
 	{
 		WithoutCorrection,              //!< Without correction, DeltaT is disabled
+		Clemence,                       //!< Clemence (1948) algorithm for DeltaT
 		IAU,                            //!< IAU (1959) algorithm for DeltaT (based on observations by Spencer Jones (1939))
 		AstronomicalEphemeris,          //!< Astronomical Ephemeris (1960) algorithm for DeltaT
 		TuckermanGoldstine,             //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 		MullerStephenson,               //!< Muller & Stephenson (1975) algorithm for DeltaT
 		Stephenson,                     //!< Stephenson (1978) algorithm for DeltaT
-		MorrisonStephenson,             //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
-		StephensonMorrison,             //!< Stephenson & Morrison (1984) algorithm for DeltaT
+		SchmadelZech1979,               //!< Schmadel & Zech (1979) algorithm for DeltaT
+		MorrisonStephenson1982,         //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+		MorrisonStephenson1984,         //!< Stephenson & Morrison (1984) algorithm for DeltaT
 		StephensonHoulden,              //!< Stephenson & Houlden (1986) algorithm for DeltaT
 		Espenak,                        //!< Espenak (1987, 1989) algorithm for DeltaT
 		Borkowski,                      //!< Borkowski (1988) algorithm for DeltaT
+		SchmadelZech1988,               //!< Schmadel & Zech (1988) algorithm for DeltaT
 		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
 		ChaprontFrancou,                //!< Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT
 		Meeus,                          //!< Meeus (1998) algorithm for DeltaT
 		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
+		MeeusSimons,                    //!< Meeus & Simons (2000) algorithm for DeltaT
 		MontenbruckPfleger,             //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
 		ReingoldDershowitz,             //!< Reingold & Dershowitz (2001, 2002) algorithm for DeltaT
 		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
-		EspenakMeeus                    //!< Espenak & Meeus (2006) algorithm for DeltaT
+		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT
+		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 
 	StelCore();

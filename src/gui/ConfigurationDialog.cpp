@@ -1119,25 +1119,30 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	//For each algorithm, display the localized name and store the key as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	algorithms->addItem(q_("Without correction"), "WithoutCorrection");
+	algorithms->addItem(q_("Clemence (1948)"), "Clemence");
 	algorithms->addItem(q_("IAU (1959)"), "IAU");
 	algorithms->addItem(q_("Astronomical Ephemeris (1960)"), "AstronomicalEphemeris");
 	algorithms->addItem(q_("Tuckerman (1962, 1964) & Goldstine (1973)"), "TuckermanGoldstine");
 	algorithms->addItem(q_("Muller & Stephenson (1975)"), "MullerStephenson");
 	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson");
-	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson");
-	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "StephensonMorrison");
+	algorithms->addItem(q_("Schmadel & Zech (1979)"), "SchmadelZech1979");
+	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson1982");
+	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "MorrisonStephenson1984");
 	algorithms->addItem(q_("Stephenson & Houlden (1986)"), "StephensonHoulden");
 	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
 	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
+	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
 	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");
 	algorithms->addItem(q_("Chapront, Chapront-Touze & Francou (1997)"), "ChaprontFrancou");
 	algorithms->addItem(q_("Meeus (1998)"), "Meeus");
-	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");
+	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
+	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
 	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
 	algorithms->addItem(q_("Reingold & Dershowitz (2001, 2002)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
+	//algorithms->addItem(q_("User defined equation"), "Custom");
 
 	//Restore the selection
 	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
