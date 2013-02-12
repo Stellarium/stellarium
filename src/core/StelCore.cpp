@@ -141,8 +141,15 @@ void StelCore::init(class StelRenderer* renderer)
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
 
+	// Define default algorithm for time correction (Delta T)
 	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeus").toString();
 	setCurrentDeltaTAlgorithmKey(tmpDT);
+
+	// Define variables of custom equation for calculation of Delta T
+	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
+	setCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
+	setCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
+	setCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 }
 
 
@@ -1344,8 +1351,13 @@ double StelCore::getDeltaT(double jDay)
 			break;
 		case Custom:
 			// User defined coefficients for quadratic equation for DeltaT
-			// TODO: Implementation custom formula for DeltaT
-			DeltaT = 0.;
+			int year, month, day;
+			Vec3f coeff = getCustomEquationCoefficients();
+			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
+			double u = (year-getCustomYear())/100;
+			DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
+			if (year<1955 or year>2005)
+				DeltaT += StelUtils::getMoonSecularAcceleration(jDay, getCustomNDot());
 			break;
 	}
 	return DeltaT;
@@ -1453,7 +1465,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("This algorithm by Fred Espenak and Jean Meeus is used for the %1NASA Eclipse Web Site%2. These relations are also adopted in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>");
 			break;
 		case Custom:
-			description = q_("This is quadratic equation with user defined coefficients for %1T").arg(QChar(0x0394));
+			description = q_("This is quadratic equation for calculation of %1T with coefficients defined by user.").arg(QChar(0x0394));
 			break;
 		default:
 			description = q_("Error");

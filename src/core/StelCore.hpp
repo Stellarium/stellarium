@@ -473,6 +473,23 @@ public slots:
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected();
 
+	//! Set year for custom equation for calculation of Delta-T
+	//! @param y the year, e.g. 1820
+	void setCustomYear(float y) { customYear=y; }
+	//! Set n-dot for custom equation for calculation of Delta-T
+	//! @param y the n-dot value, e.g. -26.0
+	void setCustomNDot(float v) { customNDot=v; }
+	//! Set coefficients for custom equation for calculation of Delta-T
+	//! @param y the coefficients, e.g. -20,0,32
+	void setCustomEquationCoefficients(Vec3f c) { customEquationCoeff=c; }
+
+	//! Get year for custom equation for calculation of Delta-T
+	float getCustomYear() { return customYear; }
+	//! Get n-dot for custom equation for calculation of Delta-T
+	float getCustomNDot() { return customNDot; }
+	//! Get coefficients for custom equation for calculation of Delta-T
+	Vec3f getCustomEquationCoefficients() { return customEquationCoeff; }
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
@@ -523,6 +540,12 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
+
+	// Variables for custom equation of Delta-T
+	Vec3f customEquationCoeff;
+	float customNDot;
+	float customYear;
+
 };
 
 #endif // _STELCORE_HPP_
