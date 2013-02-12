@@ -134,6 +134,16 @@ MinorPlanet::~MinorPlanet()
 void MinorPlanet::setSemiMajorAxis(double value)
 {
 	semiMajorAxis = value;
+	// GZ: patched for 2012DA14 and other NEA rendez-vous:
+	if (semiMajorAxis < 1.666)
+	{
+		deltaJD = 0.1*StelCore::JD_SECOND;
+	}
+	if (semiMajorAxis < 1.25)
+	{
+		deltaJD = 0.001*StelCore::JD_SECOND;
+	}
+
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
