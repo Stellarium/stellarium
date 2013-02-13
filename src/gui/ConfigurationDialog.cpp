@@ -21,6 +21,7 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
+#include "CustomDeltaTEquationDialog.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
@@ -65,6 +66,7 @@
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
+	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
@@ -73,7 +75,9 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), star
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
-	ui = 0;
+	ui = NULL;
+	delete customDeltaTEquationDialog;
+	customDeltaTEquationDialog = NULL;
 }
 
 void ConfigurationDialog::retranslate()
@@ -224,15 +228,17 @@ void ConfigurationDialog::createDialogContent()
 	        this,
 	        SLOT(showShortcutsWindow()));
 
+	// Delta-T
 	populateDeltaTAlgorithmsList();	
 	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use Earth as default
+		// Use Espenak & Meeus (2006) as default
 		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeus"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
+	connect(ui->pushButtonCustomDeltaTEquationDialog, SIGNAL(clicked()), this, SLOT(showCustomDeltaTEquationDialog()));
 
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
@@ -1155,12 +1161,25 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	core->setCurrentDeltaTAlgorithmKey(ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString());
+	QString currentAlgorithm = ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString();
+	core->setCurrentDeltaTAlgorithmKey(currentAlgorithm);
 	setDeltaTAlgorithmDescription();
+	if (currentAlgorithm.contains("Custom"))
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
+	else
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setDeltaTAlgorithmDescription()
 {
 	ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->deltaTAlgorithmDescription->setHtml(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
+}
+
+void ConfigurationDialog::showCustomDeltaTEquationDialog()
+{
+	if (customDeltaTEquationDialog == NULL)
+		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
+
+	customDeltaTEquationDialog->setVisible(true);
 }
