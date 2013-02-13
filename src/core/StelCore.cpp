@@ -1243,6 +1243,11 @@ double StelCore::getDeltaT(double jDay)
 			// Without correction, DeltaT is disabled
 			DeltaT = 0.;
 			break;
+		case Schoch:
+			// Schoch (1931) algorithm for DeltaT
+			// n-dot = -29.68"/cy/cy
+			DeltaT = StelUtils::getDeltaTBySchoch(jDay);
+			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
 			// n-dot = -22.44 "/cy/cy
@@ -1390,6 +1395,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	{
 		case WithoutCorrection:
 			description = q_("Correction is disabled. Use only if you know what you are doing!");
+			break;
+		case Schoch:
+			description = q_("This formula was obtained by C. Schoch in 1931 year and was used by G. Henriksson in 2010 year in article <em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em>. See for more info %1here%2.").arg("<a href='http://journalofcosmology.com/AncientAstronomy123.html'>").arg("</a>");
 			break;
 		case Clemence:
 			description = q_("This empirical equation was published by G. M. Clemence in article <em>%1On the system of astronomical constants%2</em> [1948].").arg("<a href='http://adsabs.harvard.edu/abs/1948AJ.....53..169C'>").arg("</a>");

@@ -302,6 +302,12 @@ namespace StelUtils
 	double getDeltaTByEspenakMeeus(double jDay);
 
 	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Schoch (1931) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTBySchoch(double jDay);
+
+	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Clemence (1948) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
