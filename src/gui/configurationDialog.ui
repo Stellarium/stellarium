@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>493</width>
-    <height>457</height>
+    <width>483</width>
+    <height>447</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -803,6 +803,19 @@
                   </item>
                   <item>
                    <widget class="QComboBox" name="deltaTAlgorithmComboBox"/>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButtonCustomDeltaTEquationDialog">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                    <property name="toolTip">
+                     <string>Edit equation</string>
+                    </property>
+                    <property name="text">
+                     <string notr="true">...</string>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <spacer name="horizontalSpacer_2">

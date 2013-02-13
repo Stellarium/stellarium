@@ -32,6 +32,7 @@ class QDataStream;
 class QNetworkAccessManager;
 class QListWidgetItem;
 class StelGui;
+class CustomDeltaTEquationDialog;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -123,6 +124,7 @@ private slots:
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();
+	void showCustomDeltaTEquationDialog();
 
 	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed
@@ -143,6 +145,8 @@ private slots:
 
 private:
 	StelGui* gui;
+
+	CustomDeltaTEquationDialog* customDeltaTEquationDialog;
 
 	int savedProjectionType;
 	
