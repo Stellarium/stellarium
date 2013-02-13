@@ -91,6 +91,7 @@ public:
 	enum DeltaTAlgorithm
 	{
 		WithoutCorrection,              //!< Without correction, DeltaT is disabled
+		Schoch,                         //!< Schoch (1931) algorithm for DeltaT
 		Clemence,                       //!< Clemence (1948) algorithm for DeltaT
 		IAU,                            //!< IAU (1959) algorithm for DeltaT (based on observations by Spencer Jones (1939))
 		AstronomicalEphemeris,          //!< Astronomical Ephemeris (1960) algorithm for DeltaT

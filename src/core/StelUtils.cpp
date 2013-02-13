@@ -1219,6 +1219,26 @@ double getDeltaTByEspenakMeeus(double jDay)
 	return decYear2DeltaT(year + (month - 0.5)/12)+moon;
 }
 
+// Implementation algorithm by Schoch (1931) for DeltaT computation
+double getDeltaTBySchoch(double jDay)
+{
+	// On the system of astronomical constants.
+	// Clemence, G. M.
+	// Astronomical Journal, Vol. 53, p. 169
+	// 1948AJ.....53..169C [http://adsabs.harvard.edu/abs/1948AJ.....53..169C]
+	int year, month, day;
+	double moon = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	double u = (year-1800)/100;
+	double deltaT = -36.28 + 36.28*std::pow(u,2);
+
+	if (year<1955 or year>2005)
+		moon = getMoonSecularAcceleration(jDay, -29.68);
+
+	return deltaT + moon;
+}
+
 // Implementation algorithm by Clemence (1948) for DeltaT computation
 double getDeltaTByClemence(double jDay)
 {

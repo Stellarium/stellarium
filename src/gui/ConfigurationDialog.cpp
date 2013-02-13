@@ -1124,7 +1124,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->clear();
 	//For each algorithm, display the localized name and store the key as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
-	algorithms->addItem(q_("Without correction"), "WithoutCorrection");
+	algorithms->addItem(q_("Without correction"), "WithoutCorrection");	
+	algorithms->addItem(q_("Schoch (1931)"), "Schoch");
 	algorithms->addItem(q_("Clemence (1948)"), "Clemence");
 	algorithms->addItem(q_("IAU (1959)"), "IAU");
 	algorithms->addItem(q_("Astronomical Ephemeris (1960)"), "AstronomicalEphemeris");
