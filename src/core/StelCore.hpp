@@ -93,7 +93,7 @@ public:
 		WithoutCorrection,              //!< Without correction, DeltaT is disabled
 		Schoch,                         //!< Schoch (1931) algorithm for DeltaT
 		Clemence,                       //!< Clemence (1948) algorithm for DeltaT
-		IAU,                            //!< IAU (1959) algorithm for DeltaT (based on observations by Spencer Jones (1939))
+		IAU,                            //!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
 		AstronomicalEphemeris,          //!< Astronomical Ephemeris (1960) algorithm for DeltaT
 		TuckermanGoldstine,             //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 		MullerStephenson,               //!< Muller & Stephenson (1975) algorithm for DeltaT

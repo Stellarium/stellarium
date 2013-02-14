@@ -1263,11 +1263,15 @@ double getDeltaTByClemence(double jDay)
 double getDeltaTByIAU(double jDay)
 {
 	int year, month, day;
-	double moon = 0.;
+	double moon = 0.;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1900)/100;
-	double deltaT = 24.349+72.318*u+29.950*std::pow(u,2);
+	// TODO: Calculate Moon's longitude fluctuation
+	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
+	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+	// http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
+	double deltaT = 24.349+72.3165*u+29.949*std::pow(u,2)/* + 1.821*b*/;
 
 	if (year<1955 or year>2005)
 		moon = getMoonSecularAcceleration(jDay, -22.44);
@@ -1279,11 +1283,15 @@ double getDeltaTByIAU(double jDay)
 double getDeltaTByAstronomicalEphemeris(double jDay)
 {
 	int year, month, day;
-	double moon = 0.;
+	double moon = 0.;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1900)/100;
-	double deltaT = 24.349+72.3165*u+29.949*std::pow(u,2);
+	// TODO: Calculate Moon's longitude fluctuation
+	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
+	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+	// http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
+	double deltaT = 24.349+72.318*u+29.950*std::pow(u,2)/* + 1.82144*b*/;
 
 	if (year<1955 or year>2005)
 		moon = getMoonSecularAcceleration(jDay, -22.44);
