@@ -1305,7 +1305,7 @@ double getDeltaTByMullerStephenson(double jDay)
 }
 
 // Implementation algorithm by Stephenson (1978) for DeltaT computation
-double getDeltaTByStephenson(double jDay)
+double getDeltaTByStephenson1978(double jDay)
 {
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
@@ -1314,6 +1314,18 @@ double getDeltaTByStephenson(double jDay)
 	double u = (yeardec-1900)/100;
 
 	return 20.0+114.0*u+38.30*std::pow(u,2);
+}
+
+// Implementation algorithm by Stephenson (1997) for DeltaT computation
+double getDeltaTByStephenson1997(double jDay)
+{
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1735)/100;
+
+	return -20.0 + 35.0*std::pow(u,2);
 }
 
 // Implementation algorithm by Schmadel & Zech (1979) for DeltaT computation
@@ -1364,6 +1376,19 @@ double getDeltaTByStephensonMorrison1984(double jDay)
 		deltaT = 25.5*std::pow(u,2);
 
 	return deltaT;
+}
+
+// Implementation algorithm by Stephenson & Morrison (1995) for DeltaT computation
+double getDeltaTByStephensonMorrison1995(double jDay)
+{
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1820)/100;
+
+
+	return -20.0 + 31.0*std::pow(u,2);
 }
 
 // Implementation algorithm by Stephenson & Houlden (1986) for DeltaT computation
