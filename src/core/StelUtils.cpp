@@ -1214,7 +1214,8 @@ double getDeltaTByEspenakMeeus(double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	// approximate "decimal year" = year + (month - 0.5)/12
-	return decYear2DeltaT(year + (month - 0.5)/12);
+	//return decYear2DeltaT(year + (month - 0.5)/12);
+	return decYear2DeltaT(year+((month-1)*30.5+day/31*30.5)/366);
 }
 
 // Implementation algorithm by Schoch (1931) for DeltaT computation
@@ -1227,7 +1228,8 @@ double getDeltaTBySchoch(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1800)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1800)/100;
 
 	return -36.28 + 36.28*std::pow(u,2);
 }
@@ -1242,7 +1244,8 @@ double getDeltaTByClemence(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 
 	return +8.72 + 26.75*u + 11.22*std::pow(u,2);
 }
@@ -1253,7 +1256,8 @@ double getDeltaTByIAU(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 	// TODO: Calculate Moon's longitude fluctuation
 	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
 	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
@@ -1267,7 +1271,8 @@ double getDeltaTByAstronomicalEphemeris(double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 	// TODO: Calculate Moon's longitude fluctuation
 	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
 	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
@@ -1281,7 +1286,8 @@ double getDeltaTByTuckermanGoldstine(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 
 	return 4.87+35.06*u+36.79*std::pow(u,2);
 }
@@ -1292,7 +1298,8 @@ double getDeltaTByMullerStephenson(double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 
 	return 66.0+120.38*u+45.78*std::pow(u,2);
 }
@@ -1303,7 +1310,8 @@ double getDeltaTByStephenson(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 
 	return 20.0+114.0*u+38.30*std::pow(u,2);
 }
@@ -1318,7 +1326,8 @@ double getDeltaTBySchmadelZech1979(double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 
 	double deltaT = -0.000029 + 0.001233*u + 0.003081*std::pow(u,2) - 0.013867*std::pow(u,3) - 0.020446*std::pow(u,4) + 0.076929*std::pow(u,5)
 			+ 0.075456*std::pow(u,6) - 0.200097*std::pow(u,7) - 0.159732*std::pow(u,8) + 0.247433*std::pow(u,9) + 0.185489*std::pow(u,10)
@@ -1333,19 +1342,21 @@ double getDeltaTByMorrisonStephenson1982(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1810)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1810)/100;
 
 	return -15.0+32.50*std::pow(u,2);
 }
 
 // Implementation algorithm by Stephenson & Morrison (1984) for DeltaT computation
-double getDeltaTByMorrisonStephenson1984(double jDay)
+double getDeltaTByStephensonMorrison1984(double jDay)
 {
 	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1800)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1800)/100;
 
 	if (-391 < year and year <= 948)
 		deltaT = 1360.0 + 320*u + 44.3*std::pow(u,2);
@@ -1362,14 +1373,17 @@ double getDeltaTByStephensonHoulden(double jDay)
 	double u;
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+
 	if (year <= 948)
 	{
-		u = (year-948)/100;
+		u = (yeardec-948)/100;
 		deltaT = 1830.0 - 405.0*u + 46.5*std::pow(u,2);
 	}
 	if (948 < year and year <= 1600)
 	{
-		u = (year-1850)/100;
+		u = (yeardec-1850)/100;
 		deltaT = 25.5*std::pow(u,2);
 	}
 
@@ -1383,7 +1397,8 @@ double getDeltaTByEspenak(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-2000)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-2000)/100;
 
 	return 67.0+61.0*u + 64.3*std::pow(u,2);
 }
@@ -1398,7 +1413,8 @@ double getDeltaTByBorkowski(double jDay)
 	int year, month, day;		
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1625)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1625)/100;
 
 	return 40.0 + 35.0*std::pow(u,2);
 }
@@ -1413,7 +1429,8 @@ double getDeltaTBySchmadelZech1988(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 
 	double deltaT = -0.000014 + 0.001148*u + 0.003357*std::pow(u,2) - 0.012462*std::pow(u,3) - 0.022542*std::pow(u,4) + 0.062971*std::pow(u,5)
 			+ 0.079441*std::pow(u,6) - 0.146960*std::pow(u,7) - 0.149279*std::pow(u,8) + 0.161416*std::pow(u,9) + 0.145932*std::pow(u,10)
@@ -1429,7 +1446,8 @@ double getDeltaTByChaprontTouze(double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-2000)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-2000)/100;
 
 	if (-391 < year and year <= 948)
 		deltaT = 2177.0 - 495.0*u + 42.4*std::pow(u,2);
@@ -1446,7 +1464,8 @@ double getDeltaTByChaprontFrancou(double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-2000)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-2000)/100;
 
 	if (year <= 948)
 		deltaT = 2177.0 - 497.0*u + 44.1*std::pow(u,2);
@@ -1465,14 +1484,17 @@ double getDeltaTByJPLHorizons(double jDay)
 	double u;
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+
 	if (-2999 < year and year < 948)
 	{
-		u = (year-1820)/100;
+		u = (yeardec-1820)/100;
 		deltaT = 31.0*std::pow(u,2);
 	}
 	if (948 < year and year <= 1620)
 	{
-		u = (year-2000)/100;
+		u = (yeardec-2000)/100;
 		deltaT = 50.6 + 67.5*u + 22.5*std::pow(u,2);
 	}
 
@@ -1494,7 +1516,8 @@ double getDeltaTByMorrisonStephenson2004(double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	
-	double u = (year-1820)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1820)/100;
 
 	return -20.0 + 32.0 * std::pow(u, 2);
 }
@@ -1516,7 +1539,8 @@ double getDeltaTByMeeus(double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1900)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1900)/100;
 
 	if (1800 <= year and year < 1900)
 		deltaT = -2.50 + 228.95*u + 5218.61*std::pow(u,2) + 56282.84*std::pow(u,3) + 324011.78*std::pow(u,4) + 1061660.75*std::pow(u,5)
@@ -1537,39 +1561,41 @@ double getDeltaTByMontenbruckPfleger(double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+
 	if (1825 <= year and year < 1850)
 	{
-		u = (year-1825)/100;
+		u = (yeardec-1825)/100;
 		deltaT = +10.4 - 80.8*u + 413.9*std::pow(u,2) - 572.3*std::pow(u,3);
 	}
 	if (1850 <= year and year < 1875)
 	{
-		u = (year-1850)/100;
+		u = (yeardec-1850)/100;
 		deltaT = +6.6 + 46.3*u - 358.4*std::pow(u,2) + 18.8*std::pow(u,3);
 	}
 	if (1875 <= year and year < 1900)
 	{
-		u = (year-1875)/100;
+		u = (yeardec-1875)/100;
 		deltaT = -3.9 - 10.8*u - 166.2*std::pow(u,2) + 867.4*std::pow(u,3);
 	}
 	if (1900 <= year and year < 1925)
 	{
-		u = (year-1900)/100;
+		u = (yeardec-1900)/100;
 		deltaT = -2.6 + 114.1*u + 327.5*std::pow(u,2) - 1467.4*std::pow(u,3);
 	}
 	if (1925 <= year and year < 1950)
 	{
-		u = (year-1925)/100;
+		u = (yeardec-1925)/100;
 		deltaT = +24.2 - 6.3*u - 8.2*std::pow(u,2) + 483.4*std::pow(u,3);
 	}
 	if (1950 <= year and year < 1975)
 	{
-		u = (year-1950)/100;
+		u = (yeardec-1950)/100;
 		deltaT = +29.3 + 32.5*u - 3.8*std::pow(u,2) + 550.7*std::pow(u,3);
 	}
 	if (1975 <= year and year <= 2000)
 	{
-		u = (year-1975)/100;
+		u = (yeardec-1975)/100;
 		deltaT = +45.3 + 130.5*u - 570.5*std::pow(u,2) + 1516.7*std::pow(u,3);
 	}
 
@@ -1588,7 +1614,8 @@ double getDeltaTByMeeusSimons(double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double ub = (year-2000)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double ub = (yeardec-2000)/100;
 
 	if (1620 <= year and year < 1690)
 	{
@@ -1640,28 +1667,29 @@ double getDeltaTByReingoldDershowitz(double jDay)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double u = (year-1810)/100;;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double u = (yeardec-1810)/100;;
 	double deltaT = -15.0 + 32.5*std::pow(u,2);
 
 	if (1620 <= year and year < 1800)
 	{
-		u = (year-1600)/100;
+		u = (yeardec-1600)/100;
 		deltaT = +196.58333 - 406.75*u + 219.167*std::pow(u,2);
 	}
 	if (1800 <= year and year < 1900)
 	{
-		u = (year-1900)/100;
+		u = (yeardec-1900)/100;
 		deltaT = (-0.000009 + 0.003844*u + 0.083563*std::pow(u,2) + 0.865736*std::pow(u,3) + 4.867575*std::pow(u,4) + 15.845535*std::pow(u,5)
 			 + 31.332267*std::pow(u,6) + 38.291999*std::pow(u,7) + 28.316289*std::pow(u,8) + 11.636204*std::pow(u,9) + 2.043794*std::pow(u,10))*86400;
 	}
 	if (1900 <= year and year < 1987)
 	{
-		u = (year-1900)/100;
+		u = (yeardec-1900)/100;
 		deltaT = (-0.00002 + 0.000297*u + 0.025184*std::pow(u,2) - 0.181133*std::pow(u,3) + 0.553040*std::pow(u,4) - 0.861938*std::pow(u,5) + 0.677066*std::pow(u,6) - 0.212591*std::pow(u,7))*86400;
 	}
 	if (1987 <= year and year < 2019)
 	{
-		u = (year-1933)/100;
+		u = (yeardec-1933)/100;
 		deltaT = 100.0*u;
 	}
 
@@ -1676,7 +1704,8 @@ double getMoonSecularAcceleration(double jDay, double nd)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double t = (year-1955.5)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double t = (yeardec-1955.5)/100;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
 	return -0.91072 * (-23.8946 + std::abs(nd))*std::pow(t, 2);
