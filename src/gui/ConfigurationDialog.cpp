@@ -1131,7 +1131,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Astronomical Ephemeris (1960)"), "AstronomicalEphemeris");
 	algorithms->addItem(q_("Tuckerman (1962, 1964) & Goldstine (1973)"), "TuckermanGoldstine");
 	algorithms->addItem(q_("Muller & Stephenson (1975)"), "MullerStephenson");
-	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson");
+	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson1978");
 	algorithms->addItem(q_("Schmadel & Zech (1979)"), "SchmadelZech1979");
 	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson1982");
 	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "StephensonMorrison1984");
@@ -1140,6 +1140,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
 	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
 	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
+	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
+	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
 	algorithms->addItem(q_("Chapront, Chapront-Touze & Francou (1997)"), "ChaprontFrancou");
 	algorithms->addItem(q_("Meeus (1998)"), "Meeus");
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
