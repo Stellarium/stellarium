@@ -1292,10 +1292,10 @@ double StelCore::getDeltaT(double jDay)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1982(jDay);
 			break;
-		case MorrisonStephenson1984:
+		case StephensonMorrison1984:
 			// Stephenson & Morrison (1984) algorithm for DeltaT			
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1984(jDay);
+			DeltaT = StelUtils::getDeltaTByStephensonMorrison1984(jDay);
 			break;
 		case StephensonHoulden:
 			// Stephenson & Houlden (1986) algorithm for DeltaT			
@@ -1378,7 +1378,8 @@ double StelCore::getDeltaT(double jDay)
 			int year, month, day;
 			Vec3f coeff = getCustomEquationCoefficients();
 			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
-			double u = (year-getCustomYear())/100;
+			double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+			double u = (yeardec-getCustomYear())/100;
 			DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
 			break;
 	}
@@ -1447,7 +1448,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case MorrisonStephenson1982:
 			description = q_("This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.");
 			break;
-		case MorrisonStephenson1984:
+		case StephensonMorrison1984:
 			description = q_("Valid range: -391 to 1600.");
 			break;
 		case StephensonHoulden:
