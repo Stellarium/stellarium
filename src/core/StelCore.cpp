@@ -1331,7 +1331,7 @@ double StelCore::getDeltaT(double jDay)
 			break;
 		case Stephenson1997:
 			// Stephenson (1997) algorithm for DeltaT
-			ndot = -30.0; // n.dot = -30.0 "/cy/cy
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByStephenson1997(jDay);
 			break;
 		case ChaprontFrancou:
