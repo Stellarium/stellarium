@@ -1238,11 +1238,13 @@ double StelCore::getDeltaT(double jDay)
 {
 	double DeltaT = 0.;
 	double ndot = 0.;
+	bool dontUseMoon = false;
 	switch (getCurrentDeltaTAlgorithm())
 	{
 		case WithoutCorrection:
 			// Without correction, DeltaT is disabled
 			DeltaT = 0.;
+			dontUseMoon = true;
 			break;
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
@@ -1380,7 +1382,11 @@ double StelCore::getDeltaT(double jDay)
 			DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
 			break;
 	}
-	return DeltaT + StelUtils::getMoonSecularAcceleration(jDay, ndot);
+
+	if (!dontUseMoon)
+		DeltaT += StelUtils::getMoonSecularAcceleration(jDay, ndot);
+
+	return DeltaT;
 }
 
 //! Set the current algorithm for time correction to use
