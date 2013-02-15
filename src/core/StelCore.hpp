@@ -97,7 +97,7 @@ public:
 		AstronomicalEphemeris,          //!< Astronomical Ephemeris (1960) algorithm for DeltaT
 		TuckermanGoldstine,             //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 		MullerStephenson,               //!< Muller & Stephenson (1975) algorithm for DeltaT
-		Stephenson,                     //!< Stephenson (1978) algorithm for DeltaT
+		Stephenson1978,                 //!< Stephenson (1978) algorithm for DeltaT
 		SchmadelZech1979,               //!< Schmadel & Zech (1979) algorithm for DeltaT
 		MorrisonStephenson1982,         //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
 		StephensonMorrison1984,         //!< Stephenson & Morrison (1984) algorithm for DeltaT
@@ -105,7 +105,9 @@ public:
 		Espenak,                        //!< Espenak (1987, 1989) algorithm for DeltaT
 		Borkowski,                      //!< Borkowski (1988) algorithm for DeltaT
 		SchmadelZech1988,               //!< Schmadel & Zech (1988) algorithm for DeltaT
-		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT		
+		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+		StephensonMorrison1995,         //!< Stephenson & Morrison (1995) algorithm for DeltaT
+		Stephenson1997,                 //!< Stephenson (1997) algorithm for DeltaT
 		ChaprontFrancou,                //!< Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT		
 		Meeus,                          //!< Meeus (1998) algorithm for DeltaT
 		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT

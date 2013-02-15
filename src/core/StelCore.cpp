@@ -1277,10 +1277,10 @@ double StelCore::getDeltaT(double jDay)
 			ndot = -37.5; // n.dot = -37.5 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMullerStephenson(jDay);
 			break;
-		case Stephenson:
+		case Stephenson1978:
 			// Stephenson (1978) algorithm for DeltaT			
 			ndot = -30.0; // n.dot = -30.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephenson(jDay);
+			DeltaT = StelUtils::getDeltaTByStephenson1978(jDay);
 			break;
 		case SchmadelZech1979:
 			// Schmadel & Zech (1979) algorithm for DeltaT			
@@ -1323,6 +1323,16 @@ double StelCore::getDeltaT(double jDay)
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
 			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByChaprontTouze(jDay);
+			break;
+		case StephensonMorrison1995:
+			// Stephenson & Morrison (1995) algorithm for DeltaT
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
+			DeltaT = StelUtils::getDeltaTByStephensonMorrison1995(jDay);
+			break;
+		case Stephenson1997:
+			// Stephenson (1997) algorithm for DeltaT
+			ndot = -30.0; // n.dot = -30.0 "/cy/cy
+			DeltaT = StelUtils::getDeltaTByStephenson1997(jDay);
 			break;
 		case ChaprontFrancou:
 			// Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT
@@ -1439,7 +1449,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case MullerStephenson:
 			description = q_("This equation was published by P. M. Muller and F. R. Stephenson in article <em>The accelerations of the earth and moon from early astronomical observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1975grhe.conf..459M'>1975</a>");
 			break;
-		case Stephenson:
+		case Stephenson1978:
 			description = q_("This equation was published by F. R. Stephenson in article <em>Pre-Telescopic Astronomical Observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1978tfer.conf....5S'>1978</a>");
 			break;
 		case SchmadelZech1979:
@@ -1465,6 +1475,12 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			break;
 		case ChaprontTouze:
 			description = q_("This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).");
+			break;
+		case StephensonMorrison1995:
+			description = q_("This equation was published by F. R. Stephenson and L. V. Morrison in article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1). Valid range: -700 to 1600.").arg("<a href='http://adsabs.harvard.edu/abs/1995RSPTA.351..165S'>1995</a>");
+			break;
+		case Stephenson1997:
+			description = q_("F. R. Stephenson published this formula in their book <em>Historical Eclipses and Earth's Rotation</em> (%1). Valid range: -500 to 1600.").arg("<a href='http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186'>1997</a>");
 			break;
 		case ChaprontFrancou:
 			description = q_("This formula is recommended by J. Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
