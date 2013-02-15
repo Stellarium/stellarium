@@ -1237,6 +1237,7 @@ void StelCore::setStartupTimeMode(const QString& s)
 double StelCore::getDeltaT(double jDay)
 {
 	double DeltaT = 0.;
+	double ndot = 0.;
 	switch (getCurrentDeltaTAlgorithm())
 	{
 		case WithoutCorrection:
@@ -1245,127 +1246,141 @@ double StelCore::getDeltaT(double jDay)
 			break;
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
-			// n-dot = -29.68"/cy/cy
+			ndot = -29.68; // n.dot = -29.68"/cy/cy
 			DeltaT = StelUtils::getDeltaTBySchoch(jDay);
 			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
-			// n-dot = -22.44 "/cy/cy
+			ndot = -22.44; // n.dot = -22.44 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByClemence(jDay);
 			break;
 		case IAU:
 			// IAU (1952) algorithm for DeltaT, based on observations by Spencer Jones (1939)
-			// n-dot = -22.44 "/cy/cy
+			ndot = -22.44; // n.dot = -22.44 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByIAU(jDay);
 			break;
 		case AstronomicalEphemeris:
 			// Astronomical Ephemeris (1960) algorithm for DeltaT
-			// n-dot = -22.44 "/cy/cy
+			ndot = -22.44; // n.dot = -22.44 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(jDay);
 			break;
 		case TuckermanGoldstine:
 			// Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
+			//FIXME: n.dot
+			ndot = -22.44; // n.dot = -22.44 "/cy/cy ???
 			DeltaT = StelUtils::getDeltaTByTuckermanGoldstine(jDay);
 			break;
 		case MullerStephenson:
-			// Muller & Stephenson (1975) algorithm for DeltaT
-			// n-dot = -37.5 "/cy/cy
+			// Muller & Stephenson (1975) algorithm for DeltaT						
+			ndot = -37.5; // n.dot = -37.5 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMullerStephenson(jDay);
 			break;
 		case Stephenson:
-			// Stephenson (1978) algorithm for DeltaT
-			// n-dot = -30.0 "/cy/cy.
+			// Stephenson (1978) algorithm for DeltaT			
+			ndot = -30.0; // n.dot = -30.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByStephenson(jDay);
 			break;
 		case SchmadelZech1979:
-			// Schmadel & Zech (1979) algorithm for DeltaT
+			// Schmadel & Zech (1979) algorithm for DeltaT			
+			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy
 			DeltaT = StelUtils::getDeltaTBySchmadelZech1979(jDay);
 			break;
 		case MorrisonStephenson1982:
-			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)			
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1982(jDay);
 			break;
 		case MorrisonStephenson1984:
-			// Stephenson & Morrison (1984) algorithm for DeltaT
+			// Stephenson & Morrison (1984) algorithm for DeltaT			
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1984(jDay);
 			break;
 		case StephensonHoulden:
-			// Stephenson & Houlden (1986) algorithm for DeltaT
+			// Stephenson & Houlden (1986) algorithm for DeltaT			
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByStephensonHoulden(jDay);
 			break;
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
+			//FIXME: n.dot
+			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy ???
 			DeltaT = StelUtils::getDeltaTByEspenak(jDay);
 			break;
 		case Borkowski:
-			// Borkowski (1988) algorithm for DeltaT
-			// n-dot = -23.895 "/cy/cy
+			// Borkowski (1988) algorithm for DeltaT			
+			ndot = -23.859; // n.dot = -23.859 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByBorkowski(jDay);
 			break;
 		case SchmadelZech1988:
 			// Schmadel & Zech (1988) algorithm for DeltaT
-			// n-dot = -26.0 "/cy/cy
+			//FIXME: n.dot
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			DeltaT = StelUtils::getDeltaTBySchmadelZech1988(jDay);
 			break;
 		case ChaprontTouze:
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
-			// n-dot = -23.8946 "/cy/cy
+			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByChaprontTouze(jDay);
 			break;
 		case ChaprontFrancou:
 			// Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT
-			// n-dot = -25.7376 "/cy/cy
+			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByChaprontFrancou(jDay);
 			break;
 		case Meeus:
 			// Meeus (1998) algorithm for DeltaT
-			// n-dot = -26.0 "/cy/cy
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMeeus(jDay);
 			break;
 		case JPLHorizons:
-			// JPL Horizons algorithm for DeltaT
+			// JPL Horizons algorithm for DeltaT			
+			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByJPLHorizons(jDay);
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
-			// n-dot = -25.7376 "/cy/cy
+			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMeeusSimons(jDay);
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
-			// n-dot = -26.0 "/cy/cy
+			// NOTE: book not contains n.dot value
+			// FIXME: n.dot
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			DeltaT = StelUtils::getDeltaTByMontenbruckPfleger(jDay);
 			break;
 		case ReingoldDershowitz:
 			// Reingold & Dershowitz (2001, 2002) algorithm for DeltaT
-			// n-dot = -26.0 "/cy/cy
+			// FIXME: n.dot
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			DeltaT = StelUtils::getDeltaTByReingoldDershowitz(jDay);
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
-			// n-dot = -26.0 "/cy/cy
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(jDay);
 			break;
 		case Reijs:
 			// Reijs (2006) algorithm for DeltaT
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByReijs(jDay);
 			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
+			ndot = -25.858; // n.dot = -25.858 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
 			break;
 		case Custom:
 			// User defined coefficients for quadratic equation for DeltaT
+			ndot = getCustomNDot(); // n.dot = custom value "/cy/cy
 			int year, month, day;
 			Vec3f coeff = getCustomEquationCoefficients();
 			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
 			double u = (year-getCustomYear())/100;
 			DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
-			if (year<1955 or year>2005)
-				DeltaT += StelUtils::getMoonSecularAcceleration(jDay, getCustomNDot());
 			break;
 	}
-	return DeltaT;
+	return DeltaT + StelUtils::getMoonSecularAcceleration(jDay, ndot);
 }
 
 //! Set the current algorithm for time correction to use
@@ -1418,62 +1433,62 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("This equation was published by P. M. Muller and F. R. Stephenson in article <em>The accelerations of the earth and moon from early astronomical observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1975grhe.conf..459M'>1975</a>");
 			break;
 		case Stephenson:
-			description = q_("This equation was published by Francis Richard Stephenson in article <em>Pre-Telescopic Astronomical Observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1978tfer.conf....5S'>1978</a>");
+			description = q_("This equation was published by F. R. Stephenson in article <em>Pre-Telescopic Astronomical Observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1978tfer.conf....5S'>1978</a>");
 			break;
 		case SchmadelZech1979:
 			description = q_("This equation was published by L. D. Schmadel and G. Zech in article <em>Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1979AcA....29..101S'>1979</a>");
 			break;
 		case MorrisonStephenson1982:
-			description = q_("This algorithm was adopted in Bretagnon & Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.");
+			description = q_("This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.");
 			break;
 		case MorrisonStephenson1984:
-			description = q_("Valid range of usage: between years -391 and 1600.");
+			description = q_("Valid range: -391 to 1600.");
 			break;
 		case StephensonHoulden:
-			description = q_("This algorithm is used in the PC planetarium program Guide 7. The relation is valid only for dates before year 1600.");
+			description = q_("This algorithm is used in the PC planetarium program Guide 7. Valid range: before 1600.");
 			break;
 		case Espenak:
-			description = q_("This algorithm was given by Fred Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989). This relation should not be used before about 1950 or after about 2100.");
+			description = q_("This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).  Valid range: 1950 to about 2100.");
 			break;
 		case Borkowski:
 			description = q_("This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 solar eclipse records dating between 2137 BCE and 1715 CE.").arg("<a href='http://adsabs.harvard.edu/abs/1988A&A...205L...8B'>1988</a>");
 			break;
 		case SchmadelZech1988:
-			description = q_("This equation was published by L. D. Schmadel and G. Zech in article <em>Empirical Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1988AN....309..219S'>1988</a>");
+			description = q_("This equation was published by L. D. Schmadel and G. Zech in article <em>Empirical Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1). Valid range: 1800 to 1988.").arg("<a href='http://adsabs.harvard.edu/abs/1988AN....309..219S'>1988</a>");
 			break;
 		case ChaprontTouze:
-			description = q_("This formula was adopted by Michelle Chapront-Touze & Jean Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).");
+			description = q_("This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).");
 			break;
 		case ChaprontFrancou:
-			description = q_("This formula is recommended by Jean Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
+			description = q_("This formula is recommended by J. Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.");
 			break;
 		case Meeus:
-			description = q_("Jean Meeus, in the second edition of his <em>Astronomical Algorithms</em> (1998), gives a 12th-order polynomial valid for the time span 1800 to 1997 with a maximum error of 2.3 seconds and two lower-order polynomials covering the same time span with a maximum error of 0.9 seconds.");
+			description = q_("J. Meeus, in the second edition of his <em>Astronomical Algorithms</em> (1998), gives a 12th-order formula. Valid range: 1800 to 1997, with a maximum error of 2.3 seconds.");
 			// TODO: specify which one this is? (I have the book at home only)
 			break;
 		case JPLHorizons:
-			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory used this formula in their interactive website %1JPL Horizons%2 for calculating positions of the solar system bodies.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>");
+			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory used this formula in their interactive website %1JPL Horizons%2.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>");
 			break;
 		case MeeusSimons:
-			description = q_("This polinom was published by Jean Meeus and Larry Simons in article <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2000JBAA..110..323M'>2000</a>");
+			description = q_("This polinom was published by J. Meeus and L. Simons in article <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2000JBAA..110..323M'>2000</a>");
 			break;
 		case MontenbruckPfleger:
-			description = q_("The fourth edition of Montenbruck & Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials valid for the period between 1825 and 2000 with a typical 1-second accuracy.");
+			description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials. Valid range: 1825 to 2000, with a typical 1-second accuracy.");
 			break;
 		case ReingoldDershowitz:
-			description = q_("Edward M. Reingold & Nachum Dershowitz adopt the approximate relations in the second edition of <em>Calendrical Calculations</em> (2001) and in their <em>Calendrical Tabulations</em> (2002).");
+			description = q_("E. M. Reingold & N. Dershowitz adopt the approximate formula in the second edition of <em>Calendrical Calculations</em> (2001) and in their <em>Calendrical Tabulations</em> (2002).");
 			break;
 		case MorrisonStephenson2004:
-			description = q_("This equation was published by Leslie V. Morrison and Francis Richard Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3). Valid range of usage: between years -1000 and 2000.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>");
+			description = q_("This equation was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3). Valid range of usage: between years -1000 and 2000.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>");
 			break;
 		case Reijs:
 			description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>");
 			break;
 		case EspenakMeeus:
-			description = q_("This algorithm by Fred Espenak and Jean Meeus is used for the %1NASA Eclipse Web Site%2. These relations are also adopted in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>");
+			description = q_("This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web Site%2. This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>");
 			break;
 		case Custom:
-			description = q_("This is quadratic equation for calculation of %1T with coefficients defined by user.").arg(QChar(0x0394));
+			description = q_("This is quadratic formula for calculation of %1T with coefficients defined by user.").arg(QChar(0x0394));
 			break;
 		default:
 			description = q_("Error");

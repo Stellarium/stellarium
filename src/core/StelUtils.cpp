@@ -1210,13 +1210,11 @@ double decYear2DeltaT(double y)
 // Implementation algorithm by Espenak & Meeus (2006) for DeltaT computation
 double getDeltaTByEspenakMeeus(double jDay)
 {
-	int year, month, day;
-	double moon = 0.;
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -26.);
+
 	// approximate "decimal year" = year + (month - 0.5)/12
-	return decYear2DeltaT(year + (month - 0.5)/12)+moon;
+	return decYear2DeltaT(year + (month - 0.5)/12);
 }
 
 // Implementation algorithm by Schoch (1931) for DeltaT computation
@@ -1226,17 +1224,12 @@ double getDeltaTBySchoch(double jDay)
 	// Clemence, G. M.
 	// Astronomical Journal, Vol. 53, p. 169
 	// 1948AJ.....53..169C [http://adsabs.harvard.edu/abs/1948AJ.....53..169C]
-	int year, month, day;
-	double moon = 0.;
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1800)/100;
-	double deltaT = -36.28 + 36.28*std::pow(u,2);
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -29.68);
-
-	return deltaT + moon;
+	return -36.28 + 36.28*std::pow(u,2);
 }
 
 // Implementation algorithm by Clemence (1948) for DeltaT computation
@@ -1246,24 +1239,18 @@ double getDeltaTByClemence(double jDay)
 	// Clemence, G. M.
 	// Astronomical Journal, Vol. 53, p. 169
 	// 1948AJ.....53..169C [http://adsabs.harvard.edu/abs/1948AJ.....53..169C]
-	int year, month, day;
-	double moon = 0.;
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1900)/100;
-	double deltaT = +8.72 + 26.75*u + 11.22*std::pow(u,2);
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -22.44);
-
-	return deltaT + moon;
+	return +8.72 + 26.75*u + 11.22*std::pow(u,2);
 }
 
 // Implementation algorithm by IAU (1952) for DeltaT computation
 double getDeltaTByIAU(double jDay)
 {
-	int year, month, day;
-	double moon = 0.;	
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1900)/100;
@@ -1271,19 +1258,13 @@ double getDeltaTByIAU(double jDay)
 	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
 	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
 	// http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
-	double deltaT = 24.349+72.3165*u+29.949*std::pow(u,2)/* + 1.821*b*/;
-
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -22.44);
-
-	return deltaT + moon;
+	return 24.349+72.3165*u+29.949*std::pow(u,2)/* + 1.821*b*/;
 }
 
 // Implementation algorithm by Astronomical Ephemeris (1960) for DeltaT computation
 double getDeltaTByAstronomicalEphemeris(double jDay)
 {
 	int year, month, day;
-	double moon = 0.;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1900)/100;
@@ -1291,12 +1272,7 @@ double getDeltaTByAstronomicalEphemeris(double jDay)
 	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
 	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
 	// http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
-	double deltaT = 24.349+72.318*u+29.950*std::pow(u,2)/* + 1.82144*b*/;
-
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -22.44);
-
-	return deltaT + moon;
+	return 24.349+72.318*u+29.950*std::pow(u,2)/* + 1.82144*b*/;
 }
 
 // Implementation algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
@@ -1304,7 +1280,9 @@ double getDeltaTByTuckermanGoldstine(double jDay)
 {
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double u = (year-1900)/100;
+
 	return 4.87+35.06*u+36.79*std::pow(u,2);
 }
 
@@ -1312,27 +1290,22 @@ double getDeltaTByTuckermanGoldstine(double jDay)
 double getDeltaTByMullerStephenson(double jDay)
 {
 	int year, month, day;
-	double moon = 0.;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double u = (year-1900)/100;
-	double deltaT = 66.0+120.38*u+45.78*std::pow(u,2);
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -37.5);
-	return deltaT + moon;
+
+	return 66.0+120.38*u+45.78*std::pow(u,2);
 }
 
 // Implementation algorithm by Stephenson (1978) for DeltaT computation
 double getDeltaTByStephenson(double jDay)
 {
-	int year, month, day;
-	double moon = 0.;	
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
-	double u = (year-1900)/100;
-	double deltaT = 20.0+114.0*u+38.30*std::pow(u,2);
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -30.);
 
-	return deltaT + moon;
+	double u = (year-1900)/100;
+
+	return 20.0+114.0*u+38.30*std::pow(u,2);
 }
 
 // Implementation algorithm by Schmadel & Zech (1979) for DeltaT computation
@@ -1346,6 +1319,7 @@ double getDeltaTBySchmadelZech1979(double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1900)/100;
+
 	double deltaT = -0.000029 + 0.001233*u + 0.003081*std::pow(u,2) - 0.013867*std::pow(u,3) - 0.020446*std::pow(u,4) + 0.076929*std::pow(u,5)
 			+ 0.075456*std::pow(u,6) - 0.200097*std::pow(u,7) - 0.159732*std::pow(u,8) + 0.247433*std::pow(u,9) + 0.185489*std::pow(u,10)
 			- 0.117389*std::pow(u,11) - 0.089491*std::pow(u,12);
@@ -1358,7 +1332,9 @@ double getDeltaTByMorrisonStephenson1982(double jDay)
 {
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double u = (year-1810)/100;
+
 	return -15.0+32.50*std::pow(u,2);
 }
 
@@ -1368,7 +1344,9 @@ double getDeltaTByMorrisonStephenson1984(double jDay)
 	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double u = (year-1800)/100;
+
 	if (-391 < year and year <= 948)
 		deltaT = 1360.0 + 320*u + 44.3*std::pow(u,2);
 	if (948 < year and year <= 1600)
@@ -1404,7 +1382,9 @@ double getDeltaTByEspenak(double jDay)
 {
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double u = (year-2000)/100;
+
 	return 67.0+61.0*u + 64.3*std::pow(u,2);
 }
 
@@ -1415,17 +1395,12 @@ double getDeltaTByBorkowski(double jDay)
 	// Borkowski, K. M.
 	// Astronomy and Astrophysics (ISSN 0004-6361), vol. 205, no. 1-2, Oct. 1988, p. L8-L10.
 	// 1988A&A...205L...8B [http://adsabs.harvard.edu/abs/1988A&A...205L...8B]
-	int year, month, day;	
-	double moon = 0.;
+	int year, month, day;		
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1625)/100;
-	double deltaT = 40.0 + 35.0*std::pow(u,2);
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -23.895);
-
-	return deltaT + moon;
+	return 40.0 + 35.0*std::pow(u,2);
 }
 
 // Implementation algorithm by Schmadel & Zech (1988) for DeltaT computation
@@ -1435,19 +1410,16 @@ double getDeltaTBySchmadelZech1988(double jDay)
 	// Schmadel, L. D.; Zech, G.
 	// Astronomische Nachrichten 309, 219-221
 	// 1988AN....309..219S [http://adsabs.harvard.edu/abs/1988AN....309..219S]
-	int year, month, day;
-	double moon = 0.;
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1900)/100;
+
 	double deltaT = -0.000014 + 0.001148*u + 0.003357*std::pow(u,2) - 0.012462*std::pow(u,3) - 0.022542*std::pow(u,4) + 0.062971*std::pow(u,5)
 			+ 0.079441*std::pow(u,6) - 0.146960*std::pow(u,7) - 0.149279*std::pow(u,8) + 0.161416*std::pow(u,9) + 0.145932*std::pow(u,10)
 			- 0.067471*std::pow(u,11) - 0.058091*std::pow(u,12);
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -26.0);
-
-	return deltaT + moon;
+	return deltaT;
 }
 
 // Implementation algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
@@ -1456,7 +1428,9 @@ double getDeltaTByChaprontTouze(double jDay)
 	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double u = (year-2000)/100;
+
 	if (-391 < year and year <= 948)
 		deltaT = 2177.0 - 495.0*u + 42.4*std::pow(u,2);
 	if (948 < year and year <= 1600)
@@ -1468,11 +1442,12 @@ double getDeltaTByChaprontTouze(double jDay)
 // Implementation algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
 double getDeltaTByChaprontFrancou(double jDay)
 {
-	int year, month, day;	
-	double moon = 0;
+	int year, month, day;		
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double u = (year-2000)/100;
+
 	if (year <= 948)
 		deltaT = 2177.0 - 497.0*u + 44.1*std::pow(u,2);
 	if (948 < year and year <= 1600)
@@ -1480,10 +1455,7 @@ double getDeltaTByChaprontFrancou(double jDay)
 	if (2000 < year and year <= 2100)
 		deltaT = 102.0 + 102.0*u + 25.3*std::pow(u,2) + 0.37*(year - 2100);
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -25.7376);
-
-	return deltaT + moon;
+	return deltaT;
 }
 
 // Implementation algorithm by JPL Horizons for DeltaT computation
@@ -1520,38 +1492,27 @@ double getDeltaTByMorrisonStephenson2004(double jDay)
 	// Journal for the History of Astronomy (ISSN 0021-8286), Vol. 36, Part 3, No. 124, p. 339 (2005)
 	// 2005JHA....36..339M [http://adsabs.harvard.edu/abs/2005JHA....36..339M]
 	int year, month, day;
-	double moon = 0;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	
 	double u = (year-1820)/100;
-	double deltaT = -20.0 + 32.0 * std::pow(u, 2);
-	
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -26.0);
 
-	return deltaT + moon;
+	return -20.0 + 32.0 * std::pow(u, 2);
 }
 
 // Implementation algorithm by Reijs (2006) for DeltaT computation
 double getDeltaTByReijs(double jDay)
 {
-	double moon = 0;
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	double OffSetYear = (2385800 - jDay)/365.25;
-	double deltaT = ((1.8 * std::pow(OffSetYear,2)/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -26.0);
-
-	return deltaT + moon;
+	return ((1.8 * std::pow(OffSetYear,2)/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
 }
 
 // Implementation algorithm by Meeus (1998) for DeltaT computation
 double getDeltaTByMeeus(double jDay)
 {
-	int year, month, day;
-	double moon = 0;
+	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
@@ -1565,17 +1526,13 @@ double getDeltaTByMeeus(double jDay)
 		deltaT = -2.44 + 87.24*u + 815.20*std::pow(u,2) - 2637.80*std::pow(u,3) - 18756.33*std::pow(u,4) + 124906.15*std::pow(u,5)
 			 -303191.19*std::pow(u,6) + 372919.88*std::pow(u,7) - 232424.66*std::pow(u,8) + 58353.42*std::pow(u,9);
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -26.0);
-
-	return deltaT + moon;
+	return deltaT;
 }
 
 // Implementation algorithm by Montenbruck & Pfleger (2000) for DeltaT computation
 double getDeltaTByMontenbruckPfleger(double jDay)
 {
-	int year, month, day;
-	double moon = 0;
+	int year, month, day;	
 	double u;
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
@@ -1616,10 +1573,7 @@ double getDeltaTByMontenbruckPfleger(double jDay)
 		deltaT = +45.3 + 130.5*u - 570.5*std::pow(u,2) + 1516.7*std::pow(u,3);
 	}
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -26.0);
-
-	return deltaT + moon;
+	return deltaT;
 }
 
 // Implementation algorithm by Meeus & Simons (2000) for DeltaT computation
@@ -1630,8 +1584,7 @@ double getDeltaTByMeeusSimons(double jDay)
 	// Journal of the British Astronomical Association, vol.110, no.6, 323
 	// 2000JBAA..110..323M [http://adsabs.harvard.edu/abs/2000JBAA..110..323M]
 	int year, month, day;
-	double u;
-	double moon = 0;
+	double u;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
@@ -1678,17 +1631,13 @@ double getDeltaTByMeeusSimons(double jDay)
 		deltaT = +60.8 + 82.0*u + 188.0*std::pow(u,2) - 5034.0*std::pow(u,3);
 	}
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -25.7376);
-
-	return deltaT + moon;
+	return deltaT;
 }
 
 // Implementation algorithm by Reingold & Dershowitz (2001, 2002) for DeltaT computation
 double getDeltaTByReingoldDershowitz(double jDay)
 {
-	int year, month, day;
-	double moon = 0;
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double u = (year-1810)/100;;
@@ -1716,10 +1665,7 @@ double getDeltaTByReingoldDershowitz(double jDay)
 		deltaT = 100.0*u;
 	}
 
-	if (year<1955 or year>2005)
-		moon = getMoonSecularAcceleration(jDay, -26.0);
-
-	return deltaT + moon;
+	return deltaT;
 }
 
 double getMoonSecularAcceleration(double jDay, double nd)
@@ -1729,8 +1675,9 @@ double getMoonSecularAcceleration(double jDay, double nd)
 	// For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656	
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	double t = (year-1955.5)/100;
-	// n' for secular acceleration of the Moon in ELP2000-82B
+	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
 	return -0.91072 * (-23.8946 + std::abs(nd))*std::pow(t, 2);
 }
