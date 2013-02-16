@@ -457,6 +457,11 @@ namespace StelUtils
 	//! @return SecularAcceleration in seconds
 	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B have value -23.8946 "/cy/cy
 	double getMoonSecularAcceleration(double jDay, double ndot);
+
+	//! Get the standard error (sigma) for the value of DeltaT
+	//! @param jDay the JD
+	//! @return sigma in seconds
+	double getDeltaTStandardError(double jDay);
 }
 
 #endif // _STELUTILS_HPP_
