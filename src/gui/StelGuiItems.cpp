@@ -583,7 +583,7 @@ void BottomStelBar::updateText(bool updatePos)
 	double jd = core->getJDay();
 	double deltaT = 0.;
 	bool displayDeltaT = false;
-	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
+	if (core->getCurrentLocation().planetName.contains("Earth"))
 	{
 		deltaT = core->getDeltaT(jd);
 		displayDeltaT = true;
@@ -596,7 +596,7 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		updatePos = true;
 		datetime->setText(newDate);
-		if (displayDeltaT)
+		if (displayDeltaT && core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 		{
 			if (std::abs(deltaT)>60.)
 				datetime->setToolTip(QString("%1T = %2 (%3s) [%4 @ -23.8946 %5/cy%6]").arg(QChar(0x0394)).arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(QChar(0x1e45)).arg(QChar(0x2033)).arg(QChar(0x00B2)));
