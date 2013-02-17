@@ -1533,7 +1533,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValigRange(double jDay, QString *mark
 		// Nothing make
 		break;
 	case Schoch:
-		// Nothing make
+		// Valid range unknown
 		break;
 	case Clemence:
 		start	= 1681;
@@ -1624,7 +1624,8 @@ QString StelCore::getCurrentDeltaTAlgorithmValigRange(double jDay, QString *mark
 		validRangeAppendix = q_("with a typical 1-second accuracy");
 		break;
 	case ReingoldDershowitz:
-		// Nothing make
+		start	= 1620;
+		finish	= 2019;
 		break;
 	case MorrisonStephenson2004:
 		start	= -1000;
@@ -1639,7 +1640,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValigRange(double jDay, QString *mark
 		finish	= 2150;
 		break;
 	case Custom:
-		// Nothing make
+		// Valid range unknown
 		break;
 	}
 
