@@ -104,6 +104,17 @@ void StelCore::init(class StelRenderer* renderer)
 	}
 	position = new StelObserver(location);
 
+	// Delta-T stuff
+	// Define default algorithm for time correction (Delta T)
+	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeus").toString();
+	setCurrentDeltaTAlgorithmKey(tmpDT);
+
+	// Define variables of custom equation for calculation of Delta T
+	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
+	setCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
+	setCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
+	setCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
+
 	// Time stuff
 	setTimeNow();
 
@@ -139,17 +150,7 @@ void StelCore::init(class StelRenderer* renderer)
 	skyDrawer->init();
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
-	setCurrentProjectionTypeKey(tmpstr);
-
-	// Define default algorithm for time correction (Delta T)
-	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeus").toString();
-	setCurrentDeltaTAlgorithmKey(tmpDT);
-
-	// Define variables of custom equation for calculation of Delta T
-	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
-	setCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
-	setCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
-	setCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
+	setCurrentProjectionTypeKey(tmpstr);	
 }
 
 
@@ -866,7 +867,9 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 //! Set stellarium time to current real world time
 void StelCore::setTimeNow()
 {
-	setJDay(StelUtils::getJDFromSystem());
+	double JD = StelUtils::getJDFromSystem();
+	// add Delta-T correction for actual time
+	setJDay(JD+getDeltaT(JD)/86400);
 }
 
 void StelCore::setTodayTime(const QTime& target)
