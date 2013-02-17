@@ -77,7 +77,7 @@ Type: files; Name: "{userappdata}\Stellarium\data\shortcuts.json"; Tasks: remove
 
 [Icons]
 Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-Name: "{group}\Stellarium (no OpenGL2)"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium (fallback mode)"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Uninstall Stellarium"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\Last run log"; Filename: "{userappdata}\Stellarium\log.txt"
