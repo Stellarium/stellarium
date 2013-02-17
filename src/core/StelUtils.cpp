@@ -1744,7 +1744,7 @@ double getDeltaTStandardError(double jDay)
 	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
 	double sigma = -1.;
 
-	if (-1000 <= year and year <= 1200)
+	if (-1000 <= year and year <= 1600)
 		sigma = 0.8 * std::pow((yeardec-1820.0)/100,2); // sigma(DeltaT) = 0.8*u^2
 
 	return sigma;
