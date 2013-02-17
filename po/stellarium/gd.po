@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-02-09 19:56+0700\n"
-"PO-Revision-Date: 2013-02-15 15:35+0000\n"
+"PO-Revision-Date: 2013-02-16 19:50+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-16 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-02-17 04:35+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 "Language: gd\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
-msgstr ""
+msgstr "Meadhan-loidhne"
 
 #: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1206
 msgid "Ecliptic"
@@ -28,15 +28,15 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1194
 msgid "Equator"
-msgstr ""
+msgstr "Crios-mheadhain"
 
 #: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1202
 msgid "Horizon"
-msgstr ""
+msgstr "Fàire"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Plèana reul-chriosa"
 
 #: src/core/modules/LandscapeMgr.cpp:503
 msgid "Author: "
@@ -134,19 +134,19 @@ msgstr ""
 #: src/core/modules/Planet.cpp:464
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Claoine (an-diugh, airson na Talamhainn): %1"
 
 #: src/core/modules/Planet.cpp:474 src/core/modules/MinorPlanet.cpp:235
 #: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr "Astar: %1AU (%2 km)"
+msgstr "Astar: %1 AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:242
 #: src/core/modules/Comet.cpp:156
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Astar: %1AU"
+msgstr "Astar: %1 AU"
 
 #: src/core/modules/Planet.cpp:492
 #, qt-format
@@ -163,42 +163,42 @@ msgstr "Tras-tomhais san lèirsinn: %1"
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Ùine nan reul: %1 latha (%2 a)"
 
 #: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Latha nan reul: %1"
 
 #: src/core/modules/Planet.cpp:512
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Latha grèine meadhanach: %1"
 
 #: src/core/modules/Planet.cpp:519
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Ceàrn mùthadh an t-solais: %1"
 
 #: src/core/modules/Planet.cpp:520
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Sìneadh: %1"
 
 #: src/core/modules/Planet.cpp:521
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Mùthadh an t-solais: %1"
 
 #: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Soillsichte: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:191
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Ainm sealadach: %1"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
@@ -250,7 +250,7 @@ msgstr ""
 
 #: src/core/StelObserver.cpp:271
 msgid "SpaceShip"
-msgstr ""
+msgstr "Soitheach fànais"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -265,6 +265,9 @@ msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Cumaidh an sealladh buaidhe-astair an fhàire na loidhne dhìreach. Is "
+"<i>sealladh gnomonaigeach</i> an t-ainm matamataigeach airson an dòigh "
+"seallaidh seo."
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
@@ -348,12 +351,12 @@ msgstr "RA/DE (J2000): %1/%2"
 #: src/core/StelObject.cpp:99
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr ""
+msgstr "RA/DE (an-diugh): %1/%2"
 
 #: src/core/StelObject.cpp:106
 #, qt-format
 msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr ""
+msgstr "Domhan-fhad/domhan-leud reul-chriosa (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:119
 #: src/core/StelObject.cpp:122
@@ -385,7 +388,7 @@ msgstr "Mearachd le parsadh an ionaid"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "A' cur ceist"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -397,7 +400,7 @@ msgstr "Cha deach a lorg"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Chaidh a lorg"
 
 #: src/gui/ConfigurationDialog.cpp:416 src/gui/ConfigurationDialog.cpp:418
 msgid "Select screenshot directory"
@@ -454,7 +457,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:869
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Chaidh a h-uile catalog nan reul a tha ri làimh a stàladh."
 
 #: src/gui/ConfigurationDialog.cpp:874
 #, qt-format
@@ -561,6 +564,9 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Chan fhaic thu gu h-ìosal ach na gnìomhan le h-iuchraichean sònraichte "
+"dhaibh. Dh'fhaoidte gu bheil barrachd ghnìomhan ri fhaighinn leis a' phutan "
+"\"%1\"."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -627,7 +633,7 @@ msgstr "Co-òrdanaiche a' phròiseict & prìomh leasaichear: %1"
 #: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Doc author/developer: %1"
-msgstr ""
+msgstr "Ùghdar sgrìobhainnean/leasaichear: %1"
 
 #: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
@@ -641,7 +647,7 @@ msgstr "Leasaichear: %1"
 #: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Tester: %1"
-msgstr "Meadhanaich %1"
+msgstr "Feuchadair: %1"
 
 #: src/gui/HelpDialog.cpp:317
 msgid "Past Developers"
@@ -652,6 +658,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Tha feadhainn ann air sìor chur ris a' phròiseact ach nach eil an sàs ann "
+"tuilleadh. Rinn an obair aca diofar mòr dhan phròiseact:"
 
 #: src/gui/HelpDialog.cpp:319
 #, qt-format
@@ -711,7 +719,7 @@ msgstr "Àite ùr"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr ""
+msgstr "Tagh tasglann ZIP sa bheil cruth-tìre Stellarium"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
@@ -721,7 +729,7 @@ msgstr "Tasglannan ZIP"
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
+msgstr "Chaidh an cruth-tìre \"%1\" a stàladh gu soirbheachail."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -733,7 +741,7 @@ msgstr "Shoirbhich leis"
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 #: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
-msgstr ""
+msgstr "Cha deach cruth-tìre sam bith a stàladh."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:147
 #: src/gui/AddRemoveLandscapesDialog.cpp:171
@@ -747,58 +755,61 @@ msgstr "Mearachd!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "Chaidh an cruth-tìre \"%1\" a thoirt air falbh gu soirbheachail."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:170
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "Cha b' urrainn dhuinn an cruth-tìre a thoirt air falbh (gu lèir)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "Meud air an diosga: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr ""
+"Chan urrainn dha Stellarium seo fhosgladh airson leughadh no sgrìobhadh: %1"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
+"Chan e tasglann ZIP a tha san fhaidhle a thagh thu air no nach eil cruth-"
+"tìre Stellarium na bhroinn."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
+msgstr "Tha cruth-tìre leis an aon ainm no aithnichear (%1) ann mu thràth."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
+msgstr "'S urrainn dhut a thoirt air falbh a làimh on phasgan seo: %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "ruith luath ..."
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "teacsa air a thaghadh"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "falamhaich an teacsa"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "falamhaich na dealbhan"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
@@ -806,35 +817,35 @@ msgstr "nàdarra"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "cairt-rèile"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Mearachd leis an rannsachadh Simbad"
 
 #: src/gui/SearchDialog.cpp:367
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Rannsachadh Simbad"
 
 #: src/gui/SearchDialog.cpp:535
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Oilthigh Strasbourg (An Fhraing)"
 
 #: src/gui/SearchDialog.cpp:536
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Oilthigh Harvard (SA)"
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr "Gnìomhachd"
+msgstr "Gnìomh"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
-msgstr ""
+msgstr "Prìomh-ath-ghoirid"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "Ath-ghoirid eile"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
@@ -1105,7 +1116,7 @@ msgstr ""
 
 #: src/translations.h:99
 msgid "Solar System Observer"
-msgstr ""
+msgstr "Coimheadaiche an rian-grèine"
 
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
@@ -1327,12 +1338,12 @@ msgstr "Turas crutha-thìre"
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Leth-dhubhradh na gealaich"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:208
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Dubhradh na gealaich slàn"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:210
@@ -1342,7 +1353,7 @@ msgstr "Sàbhalaiche-sgrìn"
 #. TRANSLATORS: Name of script
 #: src/translations.h:212
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Dubhradh na grèine 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:214
@@ -1357,52 +1368,52 @@ msgstr "Grian-chrios"
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "Èirigh is dol fodha na grèine triplichte air Mearcar"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:220
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "Dubhradh dùbailte bho Dheimos ann an 2017"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:222
 msgid "Double eclipse from Deimos in 2031"
-msgstr ""
+msgstr "Dubhradh dùbailte bho Dheimos ann an 2031"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:224
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr ""
+msgstr "Dubhradh bho Olympus Mons Faoi 10 2068"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:226
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr ""
+msgstr "Falach aig an Talamh is a' Bhliogh  2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:228
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "3 trasnaidhean is 2 dhubhradh bho Dheimos 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "Sàbhalaiche-sgrìn rian-grèine"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:232
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Cuairt nan reul-bhadan"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:234
 msgid "Sun from different planets"
-msgstr ""
+msgstr "A' Ghrian bho phlanaidean eadar-dhealaichte"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:236
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "Na seallaidhean as fhearr air an Talamh bho bhodhaigean eile"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:238
@@ -1417,15 +1428,15 @@ msgstr ""
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:247
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Thoir sùil air a h-uile cruth-tìre air a stàladh."
 
 #: src/translations.h:248
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Sgriobt gus leth-dhubhradh na gealaich a shealltainn."
 
 #: src/translations.h:249
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Sgriobt gus dubhradh na gealaich slàn a shealltainn."
 
 #: src/translations.h:250
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -2726,7 +2737,7 @@ msgstr "Loidhne èiclipteach"
 #: src/translations.h:577
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
-msgstr "Loidhne a' chrios-mheadhain"
+msgstr "Loidhne mheadhan-chriosach"
 
 #: src/translations.h:578 src/ui_viewDialog.h:1187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
@@ -2758,12 +2769,12 @@ msgstr "Làr"
 #: src/translations.h:584
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
-msgstr ""
+msgstr "Loidhne na fàire"
 
 #: src/translations.h:585
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
-msgstr "Loidhne na meadhan-loidhne"
+msgstr "Meadhan-loidhne"
 
 #: src/translations.h:586 src/ui_viewDialog.h:1174
 msgid "Nebulas"
@@ -2865,19 +2876,19 @@ msgstr "Sùm a-mach"
 
 #: src/translations.h:615
 msgid "Angle measure"
-msgstr ""
+msgstr "Tomhas ceàrna"
 
 #: src/translations.h:618
 msgid "Compass marks"
-msgstr ""
+msgstr "Comharran na combaiste"
 
 #: src/translations.h:621
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Seall exo-phlanaidean"
 
 #: src/translations.h:622
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Uinneag rèiteachaidh nan exo-phlanaidean"
 
 #: src/translations.h:625
 msgid "Observability"
@@ -3368,15 +3379,15 @@ msgstr "Cruinne speurach"
 
 #: src/ui_viewDialog.h:1192
 msgid "Show equator line"
-msgstr ""
+msgstr "Seall loidhne mheadhan-chriosach"
 
 #: src/ui_viewDialog.h:1196
 msgid "Show meridian line"
-msgstr ""
+msgstr "Seall am meadhan-loidhne"
 
 #: src/ui_viewDialog.h:1200
 msgid "Show horizon line"
-msgstr ""
+msgstr "Seall loidhne na fàire"
 
 #: src/ui_viewDialog.h:1204
 msgid "Show ecliptic line"
@@ -3610,7 +3621,7 @@ msgstr "Ceadaich panadh is sùmadh leis a' mheur-chlàr"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Enable keyboard navigation"
-msgstr "Cuir seòladh leis a' mheur-chlàr an comas"
+msgstr "Cuir seòladaireachd leis a' mheur-chlàr an comas"
 
 #: src/ui_configurationDialog.h:1022
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
@@ -3618,7 +3629,7 @@ msgstr "Ceadaich panadh (slaodadh) is sùmadh (cuibhle) leis an luchag"
 
 #: src/ui_configurationDialog.h:1024
 msgid "Enable mouse navigation"
-msgstr "Cuir seòladh leis an luchag an comas"
+msgstr "Cuir seòladaireachd leis an luchag an comas"
 
 #: src/ui_configurationDialog.h:1026
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
@@ -5694,7 +5705,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
-msgstr ""
+msgstr "Roghainn bhunaiteach an t-siostaim"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
@@ -5733,7 +5744,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Solar System body"
-msgstr ""
+msgstr "Bodhaig an rian-grèine"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Current date/time"
@@ -5754,7 +5765,7 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "system"
-msgstr ""
+msgstr "siostam"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
@@ -5891,7 +5902,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
-msgstr ""
+msgstr "Deasaiche an rian-grèine"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
 msgid ""
@@ -5942,7 +5953,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Plugan deasaiche an rian-grèine"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:512
 msgid "Import data"
@@ -6029,7 +6040,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:294
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Solar System objects"
-msgstr ""
+msgstr "Oibseactan an rian-grèine"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
@@ -6053,7 +6064,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Dèan lethbhreac/cuir na àite faidhle na rian-grèine"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
@@ -6063,11 +6074,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Dèan lethbhreac dhe dh'fhaidhle na rian-grèine ..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Cuir an àite faidhle an rian-grèine ..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Configuration file"
@@ -6075,7 +6086,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Cuir oibseactan an rian-grèine ùra ris"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import orbital elements in MPC format..."
@@ -6083,7 +6094,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
-msgstr ""
+msgstr "An rian-grèine"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
@@ -6290,12 +6301,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:151
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
@@ -6338,18 +6349,18 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
 #: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
 #: plugins/Pulsars/src/Pulsar.cpp:214
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:218
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "Nòta: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:287
 msgid ""
@@ -6408,7 +6419,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
@@ -6416,7 +6427,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
@@ -6424,7 +6435,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "san Fhraing"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
@@ -6472,7 +6483,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Radius"
-msgstr ""
+msgstr "Rèideas"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:214
 #, qt-format
@@ -6489,7 +6500,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "days"
-msgstr ""
+msgstr "latha"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
@@ -6502,7 +6513,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "AU"
-msgstr ""
+msgstr "AU"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Eccentricity"
@@ -6593,80 +6604,80 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "Faoi"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "Gearr"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "Màrt"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "Gib"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "Cèit"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "Ògmh"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "Iuch"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "Lùn"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "Sult"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "Dàmh"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "Samh"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "Dùbh"
 
 #: plugins/Observability/src/Observability.cpp:499
 #: plugins/Observability/src/Observability.cpp:500
 #: plugins/Observability/src/Observability.cpp:542
 msgid "h"
-msgstr ""
+msgstr "u"
 
 #: plugins/Observability/src/Observability.cpp:499
 #: plugins/Observability/src/Observability.cpp:500
 #: plugins/Observability/src/Observability.cpp:542
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: plugins/Observability/src/Observability.cpp:499
 #: plugins/Observability/src/Observability.cpp:500
 #: plugins/Observability/src/Observability.cpp:542
 msgid "s"
-msgstr ""
+msgstr "d"
 
 #: plugins/Observability/src/Observability.cpp:509
 #, qt-format
@@ -6753,15 +6764,15 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:690
 msgid "Nights above horizon: "
-msgstr ""
+msgstr "Oidhcheannan os cionn na fàire: "
 
 #: plugins/Observability/src/Observability.cpp:707
 msgid "TODAY:"
-msgstr ""
+msgstr "AN-DIUGH:"
 
 #: plugins/Observability/src/Observability.cpp:716
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "AM BLIADHNA:"
 
 #: plugins/Observability/src/Observability.cpp:1450
 #, qt-format
@@ -6903,7 +6914,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "deg."
-msgstr ""
+msgstr "ceum"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
@@ -6939,7 +6950,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
-msgstr ""
+msgstr "Dath is meud a' chrutha-chlò"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
