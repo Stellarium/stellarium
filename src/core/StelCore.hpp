@@ -268,7 +268,14 @@ public:
 	//! Get Delta-T estimation for a given date.
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
+	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
 	double getDeltaT(double jDay);
+
+	//! Get info about valid range for current algorithm for calculation of Delta-T
+	//! @param jDay the JD
+	//! @param marker the marker for valid range
+	//! @return valid range
+	QString getCurrentDeltaTAlgorithmValigRange(double jDay, QString* marker) const;
 
 public slots:
 	//! Set the current ProjectionType to use
