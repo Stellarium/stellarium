@@ -293,13 +293,172 @@ namespace StelUtils
 	//! Get Delta-T estimation for a given date.
 	//! Note that this method is valid for the year range:
 	//! -1999 to +3000, outside of which "0" will be returned.
+	//! Implementation algorithm by Espenak & Meeus (2006) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-	double getDeltaT(double jDay);
+	double getDeltaTByEspenakMeeus(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Schoch (1931) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTBySchoch(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Clemence (1948) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByClemence(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by IAU (1952) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByIAU(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Astronomical Ephemeris (1960) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByAstronomicalEphemeris(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByTuckermanGoldstine(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Muller & Stephenson (1975) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMullerStephenson(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Stephenson (1978) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByStephenson1978(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Stephenson (1997) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByStephenson1997(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Schmadel & Zech (1979) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTBySchmadelZech1979(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Morrison & Stephenson (1982) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMorrisonStephenson1982(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Stephenson & Morrison (1984) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByStephensonMorrison1984(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Stephenson & Morrison (1995) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByStephensonMorrison1995(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Stephenson & Houlden (1986) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByStephensonHoulden(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Espenak (1987, 1989) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByEspenak(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Borkowski (1988) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByBorkowski(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Schmadel & Zech (1988) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTBySchmadelZech1988(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByChaprontTouze(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByChaprontFrancou(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by JPL Horizons for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByJPLHorizons(double jDay);
+	
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Morrison & Stephenson (2004, 2005) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMorrisonStephenson2004(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Reijs (2006) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByReijs(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Meeus (1998) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMeeus(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Meeus & Simons (2000) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMeeusSimons(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Montenbruck & Pfleger (2000) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByMontenbruckPfleger(double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation algorithm by Reingold & Dershowitz (2001, 2002) for DeltaT computation
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByReingoldDershowitz(double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! @param jDay the JD
+	//! @param ndot value n-dot which use in the algorithm
 	//! @return SecularAcceleration in seconds
-	double getMoonSecularAcceleration(double jDay);
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B have value -23.8946 "/cy/cy
+	double getMoonSecularAcceleration(double jDay, double ndot);
+
+	//! Get the standard error (sigma) for the value of DeltaT
+	//! @param jDay the JD
+	//! @return sigma in seconds
+	double getDeltaTStandardError(double jDay);
 }
 
 #endif // _STELUTILS_HPP_
