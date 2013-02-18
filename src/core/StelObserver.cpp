@@ -208,7 +208,7 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// Apply DeltaT correction only for Earth
 	double deltaT = 0.;
 	if (getHomePlanet()->getEnglishName()=="Earth")
-		deltaT = StelUtils::getDeltaT(jd)/240.;
+		deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/240.;
 	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude-deltaT)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }

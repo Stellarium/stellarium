@@ -47,34 +47,35 @@ class StelCore : public QObject
 {
 	Q_OBJECT
 	Q_ENUMS(ProjectionType)
+	Q_ENUMS(DeltaTAlgorithm)
 
 public:
 	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType
 	{
-		FrameUninitialized,           //!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
-		FrameAltAz,                   //!< Altazimuthal reference frame centered on observer.
-		FrameHeliocentricEcliptic,    //!< Ecliptic reference frame centered on the Sun
-		FrameObservercentricEcliptic, //!< Ecliptic reference frame centered on the Observer
-		FrameEquinoxEqu,              //!< Equatorial reference frame at the current equinox centered on the observer.
-									  //! The north pole follows the precession of the planet on which the observer is located.
-		FrameJ2000,                   //!< Equatorial reference frame at the J2000 equinox centered on the observer.
-									  //! This is also the ICRS reference frame.
-		FrameGalactic                 //! Galactic reference frame centered on observer.
+		FrameUninitialized,		//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
+		FrameAltAz,			//!< Altazimuthal reference frame centered on observer.
+		FrameHeliocentricEcliptic,	//!< Ecliptic reference frame centered on the Sun
+		FrameObservercentricEcliptic,	//!< Ecliptic reference frame centered on the Observer
+		FrameEquinoxEqu,		//!< Equatorial reference frame at the current equinox centered on the observer.
+						//! The north pole follows the precession of the planet on which the observer is located.
+		FrameJ2000,			//!< Equatorial reference frame at the J2000 equinox centered on the observer.
+						//! This is also the ICRS reference frame.
+		FrameGalactic			//! Galactic reference frame centered on observer.
 	};
 
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
-		ProjectionPerspective,    //!< Perspective projection
-		ProjectionEqualArea,      //!< Equal Area projection
-		ProjectionStereographic,  //!< Stereograhic projection
-		ProjectionFisheye,	      //!< Fisheye projection
-		ProjectionHammer,         //!< Hammer-Aitoff projection
-		ProjectionCylinder,	      //!< Cylinder projection
-		ProjectionMercator,	      //!< Mercator projection
-		ProjectionOrthographic	  //!< Orthographic projection
+		ProjectionPerspective,		//!< Perspective projection
+		ProjectionEqualArea,		//!< Equal Area projection
+		ProjectionStereographic,	//!< Stereograhic projection
+		ProjectionFisheye,		//!< Fisheye projection
+		ProjectionHammer,		//!< Hammer-Aitoff projection
+		ProjectionCylinder,		//!< Cylinder projection
+		ProjectionMercator,		//!< Mercator projection
+		ProjectionOrthographic		//!< Orthographic projection
 	};
 
 	//! Available refraction mode.
@@ -83,6 +84,40 @@ public:
 		RefractionAuto,			//!< Automatically decide to add refraction if atmosphere is activated
 		RefractionOn,			//!< Always add refraction (i.e. apparent coordinates)
 		RefractionOff			//!< Never add refraction (i.e. geometric coordinates)
+	};
+
+	//! @enum DeltaTAlgorithm
+	//! Available DeltaT algorithms
+	enum DeltaTAlgorithm
+	{
+		WithoutCorrection,              //!< Without correction, DeltaT is disabled
+		Schoch,                         //!< Schoch (1931) algorithm for DeltaT
+		Clemence,                       //!< Clemence (1948) algorithm for DeltaT
+		IAU,                            //!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
+		AstronomicalEphemeris,          //!< Astronomical Ephemeris (1960) algorithm for DeltaT
+		TuckermanGoldstine,             //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
+		MullerStephenson,               //!< Muller & Stephenson (1975) algorithm for DeltaT
+		Stephenson1978,                 //!< Stephenson (1978) algorithm for DeltaT
+		SchmadelZech1979,               //!< Schmadel & Zech (1979) algorithm for DeltaT
+		MorrisonStephenson1982,         //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+		StephensonMorrison1984,         //!< Stephenson & Morrison (1984) algorithm for DeltaT
+		StephensonHoulden,              //!< Stephenson & Houlden (1986) algorithm for DeltaT
+		Espenak,                        //!< Espenak (1987, 1989) algorithm for DeltaT
+		Borkowski,                      //!< Borkowski (1988) algorithm for DeltaT
+		SchmadelZech1988,               //!< Schmadel & Zech (1988) algorithm for DeltaT
+		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+		StephensonMorrison1995,         //!< Stephenson & Morrison (1995) algorithm for DeltaT
+		Stephenson1997,                 //!< Stephenson (1997) algorithm for DeltaT
+		ChaprontFrancou,                //!< Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT		
+		Meeus,                          //!< Meeus (1998) algorithm for DeltaT
+		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
+		MeeusSimons,                    //!< Meeus & Simons (2000) algorithm for DeltaT
+		MontenbruckPfleger,             //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
+		ReingoldDershowitz,             //!< Reingold & Dershowitz (2001, 2002) algorithm for DeltaT
+		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
+		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
+		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT
+		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 
 	StelCore();
@@ -230,6 +265,18 @@ public:
 	QString getStartupTimeMode();
 	void setStartupTimeMode(const QString& s);
 
+	//! Get Delta-T estimation for a given date.
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
+	double getDeltaT(double jDay);
+
+	//! Get info about valid range for current algorithm for calculation of Delta-T
+	//! @param jDay the JD
+	//! @param marker the marker for valid range
+	//! @return valid range
+	QString getCurrentDeltaTAlgorithmValigRange(double jDay, QString* marker) const;
+
 public slots:
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);
@@ -242,6 +289,17 @@ public slots:
 
 	//! Get the list of all the available projections
 	QStringList getAllProjectionTypeKeys() const;
+
+	//! Set the current algorithm for time correction (DeltaT)
+	void setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm) { currentDeltaTAlgorithm=algorithm; }
+	//! Get the current algorithm for time correction (DeltaT)
+	DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
+	//! Get description of the current algorithm for time correction
+	QString getCurrentDeltaTAlgorithmDescription(void) const;
+	//! Get the current algorithm used by the DeltaT
+	QString getCurrentDeltaTAlgorithmKey(void) const;
+	//! Set the current algorithm to use from its key
+	void setCurrentDeltaTAlgorithmKey(QString type);
 
 	//! Set the mask type.
 	void setMaskType(StelProjector::StelProjectorMaskType m);
@@ -425,6 +483,23 @@ public slots:
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected();
 
+	//! Set year for custom equation for calculation of Delta-T
+	//! @param y the year, e.g. 1820
+	void setCustomYear(float y) { customYear=y; }
+	//! Set n-dot for custom equation for calculation of Delta-T
+	//! @param y the n-dot value, e.g. -26.0
+	void setCustomNDot(float v) { customNDot=v; }
+	//! Set coefficients for custom equation for calculation of Delta-T
+	//! @param y the coefficients, e.g. -20,0,32
+	void setCustomEquationCoefficients(Vec3f c) { customEquationCoeff=c; }
+
+	//! Get year for custom equation for calculation of Delta-T
+	float getCustomYear() { return customYear; }
+	//! Get n-dot for custom equation for calculation of Delta-T
+	float getCustomNDot() { return customNDot; }
+	//! Get coefficients for custom equation for calculation of Delta-T
+	Vec3f getCustomEquationCoefficients() { return customEquationCoeff; }
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
@@ -441,6 +516,9 @@ private:
 
 	// The currently used projection type
 	ProjectionType currentProjectionType;
+
+	// The currentrly used time correction (DeltaT)
+	DeltaTAlgorithm currentDeltaTAlgorithm;
 
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;
@@ -472,6 +550,12 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
+
+	// Variables for custom equation of Delta-T
+	Vec3f customEquationCoeff;
+	float customNDot;
+	float customYear;
+
 };
 
 #endif // _STELCORE_HPP_
