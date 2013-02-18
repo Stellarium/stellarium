@@ -312,6 +312,7 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Georg Zotti"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Alexander Wolf"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Continuous Integration: %1").arg(QString("Hans Lambermont"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Barry Gerdes"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Khalid AlAjaji"))) + "</li></ul>";
 	newHtml += "<h3>" + Qt::escape(q_("Past Developers")) + "</h3>";
