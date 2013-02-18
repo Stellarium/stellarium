@@ -1502,7 +1502,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
 		break;
 	case EspenakMeeus:
-		description = q_("This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web Site%2. This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+		description = q_("This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web Site%2. This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
 		break;
 	case Custom:
 		description = q_("This is quadratic formula for calculation of %1T with coefficients defined by user.").arg(QChar(0x0394));
