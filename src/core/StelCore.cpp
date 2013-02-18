@@ -1453,7 +1453,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		description = q_("This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
 		break;
 	case StephensonMorrison1984:
-		description = q_("This formula was published by Stephenson, F. R.; Morrison, L. V. in article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+		description = q_("This formula was published by F. R. Stephenson and L. V. Morrison in article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
 		break;
 	case StephensonHoulden:
 		description = q_("This algorithm is used in the PC planetarium program Guide 7.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
