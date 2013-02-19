@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 09:04+0700\n"
-"PO-Revision-Date: 2013-02-11 15:28+0000\n"
-"Last-Translator: pol971 <pbbazzanella@gmail.com>\n"
+"POT-Creation-Date: 2013-02-18 13:52+0700\n"
+"PO-Revision-Date: 2013-02-18 15:01+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-18 04:40+0000\n"
+"X-Launchpad-Export-Date: 2013-02-19 04:47+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -327,7 +327,7 @@ msgstr ""
 #: src/core/StelCore.cpp:1456
 #, qt-format
 msgid ""
-"This formula was published by Stephenson, F. R.; Morrison, L. V. in article "
+"This formula was published by F. R. Stephenson and L. V. Morrison in article "
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 msgstr ""
@@ -433,7 +433,7 @@ msgstr ""
 #: src/core/StelCore.cpp:1502
 #, qt-format
 msgid ""
-"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2), "
+"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
 "Victor Reijs derived a %1T formula by using a Simplex optimisation with a "
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
@@ -445,6 +445,10 @@ msgid ""
 "This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
 "Site%2. This formula is also used in the solar, lunar and planetary "
 "ephemeris program SOLEX."
+msgstr ""
+
+#: src/core/StelCore.cpp:1505
+msgid "Used by default."
 msgstr ""
 
 #: src/core/StelCore.cpp:1508
@@ -752,11 +756,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1128
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1129
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1130
 msgid "IAU (1952)"
@@ -776,7 +780,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Schmadel & Zech (1979)"
@@ -796,11 +800,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Schmadel & Zech (1988)"
@@ -816,7 +820,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Chapront, Chapront-Touze & Francou (1997)"
@@ -824,7 +828,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998)"
-msgstr ""
+msgstr "Meeus (1998)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "JPL Horizons"
@@ -846,15 +850,15 @@ msgstr ""
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1153
-msgid "Reijs (2006)"
-msgstr ""
-
 #: src/gui/ConfigurationDialog.cpp:1154
+msgid "Reijs (2006)"
+msgstr "Reijs (2006)"
+
+#: src/gui/ConfigurationDialog.cpp:1155
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -987,23 +991,28 @@ msgstr "Autore della documentazione/Sviluppatore: %1"
 
 #: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Developer: %1"
 msgstr "Sviluppatore: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:315
+#, qt-format
+msgid "Continuous Integration: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
 msgid "Tester: %1"
 msgstr "Collaudatore: %1"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 msgid "Past Developers"
 msgstr "Ex sviluppatori"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1011,12 +1020,12 @@ msgstr ""
 "Diverse persone hanno effettuato contributi significativi, però non sono più "
 "attive. Il loro lavoro ha fatto molta differenza nel progetto:"
 
-#: src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer grafico/Altro: %1"
 
-#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:325 src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Sviluppatore OSX: %1"
@@ -1209,11 +1218,11 @@ msgstr ""
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:52
 msgid "where"
-msgstr ""
+msgstr "dove"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:52
 msgid "year"
-msgstr ""
+msgstr "anno"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
@@ -4033,7 +4042,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1061
 msgid "seconds"
-msgstr ""
+msgstr "secondi"
 
 #: src/ui_configurationDialog.h:1063
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
