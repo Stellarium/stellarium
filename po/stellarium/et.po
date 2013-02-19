@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 09:04+0700\n"
+"POT-Creation-Date: 2013-02-18 13:52+0700\n"
 "PO-Revision-Date: 2012-01-14 15:35+0000\n"
 "Last-Translator: Merike <Unknown>\n"
 "Language-Team: Estonian <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-18 04:37+0000\n"
+"X-Launchpad-Export-Date: 2013-02-19 04:45+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -329,7 +329,7 @@ msgstr ""
 #: src/core/StelCore.cpp:1456
 #, qt-format
 msgid ""
-"This formula was published by Stephenson, F. R.; Morrison, L. V. in article "
+"This formula was published by F. R. Stephenson and L. V. Morrison in article "
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 msgstr ""
@@ -435,7 +435,7 @@ msgstr ""
 #: src/core/StelCore.cpp:1502
 #, qt-format
 msgid ""
-"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2), "
+"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
 "Victor Reijs derived a %1T formula by using a Simplex optimisation with a "
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
@@ -447,6 +447,10 @@ msgid ""
 "This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
 "Site%2. This formula is also used in the solar, lunar and planetary "
 "ephemeris program SOLEX."
+msgstr ""
+
+#: src/core/StelCore.cpp:1505
+msgid "Used by default."
 msgstr ""
 
 #: src/core/StelCore.cpp:1508
@@ -846,15 +850,15 @@ msgstr ""
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1155
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -984,34 +988,39 @@ msgstr "Dokumentatsiooni autor/arendaja: %1"
 
 #: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Developer: %1"
 msgstr "Arendaja: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:315
+#, qt-format
+msgid "Continuous Integration: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Graafika/muu kujundaja: %1"
 
-#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:325 src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX'i arendaja: %1"
