@@ -64,6 +64,8 @@ private:
 	float ndot;
 	Vec3f coeff;
 
+	void setDescription(void) const;
+
 };
 
 #endif // _CUSTOMDELTATEQUATIONDIALOG_HPP_
