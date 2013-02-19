@@ -38,18 +38,18 @@ CustomDeltaTEquationDialog::~CustomDeltaTEquationDialog()
 void CustomDeltaTEquationDialog::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		setDescription();
+	}
 }
 
 
 void CustomDeltaTEquationDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	setDescription();
 
-	ui->stelWindowTitle->setText(q_("Custom equation for %1T").arg(QChar(0x0394)));
-	ui->labelDescription->setText(q_("A typical equation for calculation of %1T looks like:").arg(QChar(0x0394)));
-	ui->labelEquation->setText(QString("<strong>%1T = a + b%2u + c%3u%4,</strong>").arg(QChar(0x0394)).arg(QChar(0x00B7)).arg(QChar(0x00B7)).arg(QChar(0x00B2)));
-	ui->labelSubEquation->setText(QString("%1 <em>u = (%2 - y)/100</em>").arg(q_("where")).arg(q_("year")));
 	ui->labelNDot->setText(QString("%1:").arg(QChar(0x1E45)));
 
 	ui->lineEditCoefficientA->setText(QString("%1").arg(coeff[0]));
@@ -119,4 +119,12 @@ void CustomDeltaTEquationDialog::setCoeffC(const QString& v)
 	coeff[2] = v.toFloat();
 	core->setCustomEquationCoefficients(coeff);
 	saveSettings();
+}
+
+void CustomDeltaTEquationDialog::setDescription() const
+{
+	ui->stelWindowTitle->setText(q_("Custom equation for %1T").arg(QChar(0x0394)));
+	ui->labelDescription->setText(q_("A typical equation for calculation of %1T looks like:").arg(QChar(0x0394)));
+	ui->labelEquation->setText(QString("<strong>%1T = a + b%2u + c%3u%4,</strong>").arg(QChar(0x0394)).arg(QChar(0x00B7)).arg(QChar(0x00B7)).arg(QChar(0x00B2)));
+	ui->labelSubEquation->setText(QString("%1 <em>u = (%2 - y)/100</em>").arg(q_("where")).arg(q_("year")));
 }
