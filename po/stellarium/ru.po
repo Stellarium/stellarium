@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 09:04+0700\n"
-"PO-Revision-Date: 2013-02-18 03:05+0000\n"
+"POT-Creation-Date: 2013-02-18 13:52+0700\n"
+"PO-Revision-Date: 2013-02-18 07:04+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-18 04:43+0000\n"
+"X-Launchpad-Export-Date: 2013-02-19 04:50+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -255,7 +255,7 @@ msgstr "Планетолёт"
 #: src/core/StelCore.cpp:1423
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
-"Коррекция отключен. Используйте только если вы знаете, что вы делаете!"
+"Коррекция отключена. Используйте только если вы знаете, что вы делаете!"
 
 #: src/core/StelCore.cpp:1426
 #, qt-format
@@ -264,6 +264,9 @@ msgid ""
 "Henriksson in article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Эта формула была получена С. Шохом в 1931 году и была использована Г. "
+"Хенрикссона в статье <em>Теория относительности Эёнштейна подтверждена "
+"древними солнечными затмениями</em> (%1). Подробности смотрите %2здесь%3."
 
 #: src/core/StelCore.cpp:1429
 #, qt-format
@@ -282,12 +285,18 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Эта формула основана на изучении пост-1650 наблюдений Солнца, Луны и планет "
+"Спенсером Джонсом (%1) и использована Жаном Меёсом в его книге "
+"<em>Астрономические формулы для калькуляторов</em>. Кроме того эта формула "
+"используется в компьютерной программе SunTracker Pro."
 
 #: src/core/StelCore.cpp:1436
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em>."
 msgstr ""
+"Это слегка измененная версия формулы МАС (1952), которая была использована в "
+"<em>Астрономических эфемеридах</em>."
 
 #: src/core/StelCore.cpp:1440
 msgid ""
@@ -297,6 +306,11 @@ msgid ""
 "near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
 "in the syzygy tables of Goldstine (1973)."
 msgstr ""
+"Таблицы Тукермана (1962, 1964) перечисяют положения Солнца, Луны и планет в "
+"5 - и 10-дневных интервалах от 601 г. до н.э. по 1649 г. н.э. Положения "
+"перечисляются для 19ч 00м (среднее) местного времени в Вавилоне/Багдаде (т. "
+"е. вблизи заката) или 16ч 00м GMT. Такое же соотношение было также неявно "
+"принято в таблице сизигий Голдштейна (1973)."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -305,6 +319,8 @@ msgid ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Это уравнение было опубликовано П. М. Мюллером и Ф. Р. Стефенсоном в статье "
+"<em>Ускорение Земли и Луны из ранних астрономических наблюдений</em> (%1)."
 
 #: src/core/StelCore.cpp:1447
 #, qt-format
@@ -322,6 +338,9 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1)."
 msgstr ""
+"Это уравнение было опубликовано Л. Д. Шмаделем и Г. Захом в статье "
+"<em>Полиноминальная аппроксимация для коррекции дельта T E.T.-U.T. за период "
+"1800-1975 г.г.</em> (%1)."
 
 #: src/core/StelCore.cpp:1453
 msgid ""
@@ -329,18 +348,25 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Этот алгоритм был использован П. Бретагоном и Л. Симоном в книге "
+"<em>Планетные программы и таблицы с -4000 по +2800 годы</em> (1986) и в "
+"компьютерной программе-планетарии RedShift."
 
 #: src/core/StelCore.cpp:1456
 #, qt-format
 msgid ""
-"This formula was published by Stephenson, F. R.; Morrison, L. V. in article "
+"This formula was published by F. R. Stephenson and L. V. Morrison in article "
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 msgstr ""
+"Эта формула была опубликована Ф. Р. Стефенсоном и Л. В. Моррисоном в статье "
+"<em>Долгосрочные изменения вращения Земли с 700 г. до н.э. до 1980 г. "
+"н.э.</em> (%1)."
 
 #: src/core/StelCore.cpp:1459
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
+"Этот алгоритм используется в компьютерной программе-планетарии Guide 7."
 
 #: src/core/StelCore.cpp:1462
 msgid ""
@@ -348,6 +374,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Этот алгоритм был предложен Ф. Эспенаком в его <em>Пятидесятилетнем каноне "
+"солнечных затмений: 1986-2035</em> (1987) и его <em>Пятидесятилетнем каноне "
+"лунных затмений: 1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:1465
 #, qt-format
@@ -366,6 +395,9 @@ msgid ""
 "<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1)."
 msgstr ""
+"Это уравнение было опубликовано Л. Д. Шмаделем и Г. Захом в статье "
+"<em>Эмпирические преобразования с U.T. в E.T. за период 1800-1988 г.г.</em> "
+"(%1)."
 
 #: src/core/StelCore.cpp:1471
 msgid ""
@@ -373,6 +405,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"Эта формула была использована М. Шапроном-Тузе и Ж. Шапроном в укороченной "
+"версии лунной теории ELP 2000-85 в их книге <em>Лунные таблицы и программы с "
+"4000 г. до н.э. до 8000 г. н.э.</em> (1991)."
 
 #: src/core/StelCore.cpp:1474
 #, qt-format
@@ -381,6 +416,9 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"Это уравнение было опубликовано Ф. Р. Стефенсоном и Л. В. Моррисоном в "
+"статье <em>Долгосрочные флуктуации во вращении Земли: с 700 г. до н.э. до "
+"1990 г. н.э.</em> (%1)."
 
 #: src/core/StelCore.cpp:1477
 #, qt-format
@@ -388,6 +426,8 @@ msgid ""
 "F. R. Stephenson published this formula in their book <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 msgstr ""
+"Ф. Р. Стефенсон опубликовал эту формулу в своей книге <em>Исторические "
+"затмения и вращение Земли</em> (%1)."
 
 #: src/core/StelCore.cpp:1480
 msgid ""
@@ -397,12 +437,19 @@ msgid ""
 "B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View "
 "Cafe."
 msgstr ""
+"Эта формула рекомендована Ж. Меёсом во второй редакции его книги "
+"<em>Астрономические алгоритмы</em> (1988) и использована в программе EmapWin "
+"Шинобу Такесако для построения обстоятельств солнечных затмений с 3000 г. до "
+"н.э. до 3000 г. н.э. и в интерактивном планетарии Sky View Cafe Керри "
+"Шетлайна."
 
 #: src/core/StelCore.cpp:1483
 msgid ""
 "J. Meeus, in the second edition of his <em>Astronomical Algorithms</em> "
 "(1998), gives a 12th-order formula."
 msgstr ""
+"Ж. Меёс во второй редакции его <em>Астрономических алгоритмов</em> (1998) "
+"даёт формулу 12 порядка."
 
 #: src/core/StelCore.cpp:1487
 #, qt-format
@@ -410,6 +457,8 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "used this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"Группа Динамики Солнечной Системы Лаборатории Реактивного Движения (JPL) "
+"NASA использует эут формулу на их интерактивном вебсайте %1JPL Horizons%2."
 
 #: src/core/StelCore.cpp:1490
 #, qt-format
@@ -425,6 +474,8 @@ msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides the 3rd-order polynomials."
 msgstr ""
+"Четвёртое издание книги О. Монтенбрука и Т. Пфлегера <em>Астрономия на "
+"персональном компьютере</em> (2000) предоставлена полиномом 3-го порядка."
 
 #: src/core/StelCore.cpp:1496
 msgid ""
@@ -432,6 +483,9 @@ msgid ""
 "edition of <em>Calendrical Calculations</em> (2001) and in their "
 "<em>Calendrical Tabulations</em> (2002)."
 msgstr ""
+"Е. М. Рейнгольд и Н. Дершовиц использовали приближенную формулу во втором "
+"издании их книги <em>Календарные расчеты</em> (2001) и в их книге "
+"<em>Календарные таблицы</em> (2002)."
 
 #: src/core/StelCore.cpp:1499
 #, qt-format
@@ -440,15 +494,22 @@ msgid ""
 "article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Это уравнение было опубликовано Л. В. Моррисоном и Ф. Р. Стефенсоном в "
+"статье <em>Исторические значения ошибки земных часов %1T и расчёт "
+"затмений</em> (%2) с добавлениями в (%3)."
 
 #: src/core/StelCore.cpp:1502
 #, qt-format
 msgid ""
-"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2), "
+"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
 "Victor Reijs derived a %1T formula by using a Simplex optimisation with a "
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Виктор Рьейс получил формулу %1T из продолжительности дня (LOD, как это "
+"определено Стефенсоном и Моррисоном (%2)) с помощью симплекс-оптимизации с "
+"косинусом и квадратным уравнением. Это уравнение основано на возможной "
+"периодичности, описанной Стефенсоном (%2). Подробнее смотрите %3здесь%4."
 
 #: src/core/StelCore.cpp:1505
 #, qt-format
@@ -457,6 +518,13 @@ msgid ""
 "Site%2. This formula is also used in the solar, lunar and planetary "
 "ephemeris program SOLEX."
 msgstr ""
+"Эта формула Ф. Эспенака и Ж. Меёса используется для %1сайта затмений NASA%2. "
+"Эта формула также используется для расчёта солнечных, лунных и планетных "
+"эфемерид в программе SOLEX."
+
+#: src/core/StelCore.cpp:1505
+msgid "Used by default."
+msgstr "Используется по умолчанию."
 
 #: src/core/StelCore.cpp:1508
 #, qt-format
@@ -818,7 +886,7 @@ msgstr "Шмадель и Зах (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr "Чапрон-Тузе и Чапрон (1991)"
+msgstr "Шапрон-Тузе и Шапрон (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Stephenson & Morrison (1995)"
@@ -830,7 +898,7 @@ msgstr "Стефенсон (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Chapront, Chapront-Touze & Francou (1997)"
-msgstr "Чапрон, Чапрон-Тузе и Франко (1997)"
+msgstr "Шапрон, Шапрон-Тузе и Франко (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998)"
@@ -856,15 +924,15 @@ msgstr "Рейнгольд и Дершовиц (2001, 2002)"
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Моррисон и Стефенсон (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Espenak & Meeus (2006)"
 msgstr "Эспенак и Меёс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reijs (2006)"
 msgstr "Рьейс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1155
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Пользовательское уравнение %1T"
@@ -995,23 +1063,28 @@ msgstr "Автор документации/разработчик: %1"
 
 #: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Developer: %1"
 msgstr "Разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:315
+#, qt-format
+msgid "Continuous Integration: %1"
+msgstr "Непрерывная интеграция: %1"
+
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
 msgid "Tester: %1"
 msgstr "Тестер: %1"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 msgid "Past Developers"
 msgstr "Бывшие разработчики"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1019,12 +1092,12 @@ msgstr ""
 "Несколько человек сделали значительный вклад в развтие проекта, но ныне они "
 "не активны:"
 
-#: src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Дизайнер графики/прочего: %1"
 
-#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:325 src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX-разработчик: %1"

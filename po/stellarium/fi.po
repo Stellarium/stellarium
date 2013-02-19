@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 09:04+0700\n"
-"PO-Revision-Date: 2013-02-09 18:39+0000\n"
+"POT-Creation-Date: 2013-02-18 13:52+0700\n"
+"PO-Revision-Date: 2013-02-18 18:23+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-18 04:38+0000\n"
+"X-Launchpad-Export-Date: 2013-02-19 04:45+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -254,6 +254,7 @@ msgstr "Avaruusalus"
 #: src/core/StelCore.cpp:1423
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"Korjaus on poistettu käytöstä. Käytä vain jos tiedät mitä olet tekemässä!"
 
 #: src/core/StelCore.cpp:1426
 #, qt-format
@@ -262,6 +263,9 @@ msgid ""
 "Henriksson in article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Tämän kaavan otti käyttöön C. Schoch vuonna 1931 ja sitä käytti G. "
+"Henrikkson artikkelissaan <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
 #: src/core/StelCore.cpp:1429
 #, qt-format
@@ -269,6 +273,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in article <em>On "
 "the system of astronomical constants</em> (%1)."
 msgstr ""
+"Tämän empiirisen yhtälön julkaisi G. M. Clemence artikkelissaan <em>On the "
+"system of astronomical constants</em> (%1)."
 
 #: src/core/StelCore.cpp:1432
 #, qt-format
@@ -278,12 +284,18 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Tämä kaava perustuu Spencer Jonesin (%1) tutkimuksiin auringon, kuun ja "
+"planeettojen havainnoista ennen vuotta 1650, ja sitä käytti Meeus "
+"teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin myös "
+"käyttöön PC-ohjelmaan SunTracker Pro."
 
 #: src/core/StelCore.cpp:1436
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em>."
 msgstr ""
+"Tämä on hieman muunneltu versio IAU:n (1952) kaavasta, ja otettiin käyttöön "
+"<em>Astronomical Ephemeris</em> -almanakkaan."
 
 #: src/core/StelCore.cpp:1440
 msgid ""
@@ -293,6 +305,11 @@ msgid ""
 "near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
 "in the syzygy tables of Goldstine (1973)."
 msgstr ""
+"Tuckermanin taulukot (1962, 1964) luetteloivat auringon, kuun ja "
+"planeettojen paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649. "
+"Luetteloidut paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin aikaa "
+"eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös Goldstinen  "
+"(1973) syzygitaulukoihin."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -301,6 +318,9 @@ msgid ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Tämän yhtälön julkaisivat P. M. Muller ja F. R. Stephenson artikkelissaan "
+"<em>The accelerations of the earth and moon from early astronomical "
+"observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1447
 #, qt-format
@@ -308,6 +328,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Tämän yhtälön julkaisi F. R. Stephenson artikkelissaan <em>Pre-Telescopic "
+"Astronomical Observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1450
 #, qt-format
@@ -316,6 +338,9 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1)."
 msgstr ""
+"Tämän yhtälön julkaisivat L. D. Schmadel ja G. Zech artikkelissaan "
+"<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
+"period 1800-1975</em> (%1)."
 
 #: src/core/StelCore.cpp:1453
 msgid ""
@@ -323,18 +348,23 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Algoritmin ottivat käyttöön P. Bretagnon & L. Simons teokseen <em>Planetary "
+"Programs and Tables from -4000 to +2800</em> (1986), sekä PC-planetaario-"
+"ohjelma RedShift."
 
 #: src/core/StelCore.cpp:1456
 #, qt-format
 msgid ""
-"This formula was published by Stephenson, F. R.; Morrison, L. V. in article "
+"This formula was published by F. R. Stephenson and L. V. Morrison in article "
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 msgstr ""
+"Kaavan julkaisivat F. R. Stephenson ja L. V. Morris artikkelissaan <em>Long-"
+"term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1)."
 
 #: src/core/StelCore.cpp:1459
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "Tämä algoritmi on käytössä PC-planetaario-ohjelmassa Guide 7."
 
 #: src/core/StelCore.cpp:1462
 msgid ""
@@ -342,6 +372,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Tämän algoritmin antoi F. Espenak teoksissaan <em>Fifty Year Canon of Solar "
+"Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar Eclipses: "
+"1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:1465
 #, qt-format
@@ -349,6 +382,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"Tämän kaavan kehitti K. M. Borkowski (%1) analysoimalla 31 "
+"auringonpimennystä jotka tapahtuivat vuosien 2173 eKr. ja 1715 välillä."
 
 #: src/core/StelCore.cpp:1468
 #, qt-format
@@ -357,6 +392,9 @@ msgid ""
 "<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1)."
 msgstr ""
+"Tämän yhtälön julkaisivat L. D. Schmadel ja G. Zech artikkelissaan "
+"<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
+"1988</em> (%1)."
 
 #: src/core/StelCore.cpp:1471
 msgid ""
@@ -364,6 +402,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"Tämän kaavan ottivat käyttöön M. Chapront-Touze & J. Chapront lyhennettyyn "
+"ELP 2000-85 -kuuteoriaan teoksessa <em>Lunar Tables and Programs from 4000 "
+"B.C. to A.D. 8000</em> (1991)."
 
 #: src/core/StelCore.cpp:1474
 #, qt-format
@@ -372,6 +413,9 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"Tämän yhtälön julkaisivat F. R. Stephenson ja L. V. Morrison artikkelissaan "
+"<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
+"(%1)."
 
 #: src/core/StelCore.cpp:1477
 #, qt-format
@@ -379,6 +423,8 @@ msgid ""
 "F. R. Stephenson published this formula in their book <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 msgstr ""
+"F. R. Stephenson julkaisi tämän kaavan kirjassaan <em>Historical Eclipses "
+"and Earth's Rotation</em> (%1)."
 
 #: src/core/StelCore.cpp:1480
 msgid ""
@@ -388,12 +434,18 @@ msgid ""
 "B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View "
 "Cafe."
 msgstr ""
+"Tätä kaavaa suosittelee J. Meeus teoksensa <em>Astronomical Algorithms</em> "
+"(1998) toisessa painoksessa, ja kaava on käytössä myös Shinobu Takesakon "
+"EmapWin-ohjelmassa, sekä myöskin Kerry Shetlinen interaktiivisessa Sky View "
+"Cafe -planetaariossa."
 
 #: src/core/StelCore.cpp:1483
 msgid ""
 "J. Meeus, in the second edition of his <em>Astronomical Algorithms</em> "
 "(1998), gives a 12th-order formula."
 msgstr ""
+"J. Meeus antaa 12. asteen kaavan teoksensa <em>Astronomical Algorithms</em> "
+"(1998) toisessa painoksessa."
 
 #: src/core/StelCore.cpp:1487
 #, qt-format
@@ -401,6 +453,8 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "used this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"JPL:n Solar System Dynamics -ryhmä käyttää tätä kaavaa interaktiivisella "
+"%1JPL Horizons%2 -sivustollaan."
 
 #: src/core/StelCore.cpp:1490
 #, qt-format
@@ -408,12 +462,16 @@ msgid ""
 "This polinom was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"Tämän polynomin julkaisivat J. Meeus ja L. Simons artikkelissaan "
+"<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
 #: src/core/StelCore.cpp:1493
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides the 3rd-order polynomials."
 msgstr ""
+"O. Montenbruckin & T. Pflegerin <em>Astronomy on the Personal "
+"Computerin</em> (2000) neljäs painos tarjoaa kolmannen asteen polynomeja."
 
 #: src/core/StelCore.cpp:1496
 msgid ""
@@ -421,6 +479,9 @@ msgid ""
 "edition of <em>Calendrical Calculations</em> (2001) and in their "
 "<em>Calendrical Tabulations</em> (2002)."
 msgstr ""
+"E. M. Reingold & N. Dershowitz ottivat käyttöön likimääräisen kaavan "
+"<em>Calendrical Calculationsin</em> (2001) toisessa painoksessa, sekä "
+"teoksessa <em>Calendrical Tabulations</em> (2002)."
 
 #: src/core/StelCore.cpp:1499
 #, qt-format
@@ -429,15 +490,22 @@ msgid ""
 "article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Tämän yhtälön julkaisivat L. V. Morrison ja F. R. Stephenson artikkelissaan "
+"<em>Historical values of the Earth's clock error %1T and the calculation of "
+"eclipses</em> (%2) lisäyksin (%3)."
 
 #: src/core/StelCore.cpp:1502
 #, qt-format
 msgid ""
-"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2), "
+"From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
 "Victor Reijs derived a %1T formula by using a Simplex optimisation with a "
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Victor Reijs johti %1T-kaavan päivän pituudesta (LOD; Stephensonin & "
+"Morrisonin määrittelemänä (%2)) käyttäen Simplex-optimisaatiota cosini- ja "
+"neliöfunktiolla. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
+"jaksollisuuteen (%2). Lisätietoa %3täällä%4."
 
 #: src/core/StelCore.cpp:1505
 #, qt-format
@@ -446,6 +514,12 @@ msgid ""
 "Site%2. This formula is also used in the solar, lunar and planetary "
 "ephemeris program SOLEX."
 msgstr ""
+"Tämä on F. Espenakin ja J. Meeuksen %1NASAn pimennyssivustolla%2 käytetty "
+"kaava. Käytössä myös aurinko-, kuu-, ja planeettaefemeridiohjelma SOLEXissa."
+
+#: src/core/StelCore.cpp:1505
+msgid "Used by default."
+msgstr "Käytössä oletuksena."
 
 #: src/core/StelCore.cpp:1508
 #, qt-format
@@ -453,6 +527,8 @@ msgid ""
 "This is quadratic formula for calculation of %1T with coefficients defined "
 "by user."
 msgstr ""
+"Tämä on toisen asteen kaava %1T:n laskemiseksi käyttäjän määrittelemillä "
+"kertoimilla."
 
 #: src/core/StelCore.cpp:1511 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -460,21 +536,21 @@ msgstr "Virhe"
 
 #: src/core/StelCore.cpp:1605
 msgid "with a maximum error of 2.3 seconds"
-msgstr ""
+msgstr "2.3 sekunnin enimmäisvirheellä"
 
 #: src/core/StelCore.cpp:1618
 msgid "with a typical 1-second accuracy"
-msgstr ""
+msgstr "tyypillisellä 1 sekunnin tarkkuudella"
 
 #: src/core/StelCore.cpp:1644
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2, %3."
 
 #: src/core/StelCore.cpp:1646
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2."
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -746,116 +822,116 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
-msgstr ""
+msgstr "Ilman korjausta"
 
 #: src/gui/ConfigurationDialog.cpp:1128
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1129
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1130
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "Astronomical Ephemeris (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller & Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel & Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel & Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Chapront, Chapront-Touze & Francou (1997)"
-msgstr ""
+msgstr "Chapront, Chapront-Touze & Francou (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998)"
-msgstr ""
+msgstr "Meeus (1998)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus & Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1149
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Reingold & Dershowitz (2001, 2002)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2001, 2002)"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1152
-msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
-msgid "Reijs (2006)"
-msgstr ""
+msgid "Espenak & Meeus (2006)"
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
+msgid "Reijs (2006)"
+msgstr "Reijs (2006)"
+
+#: src/gui/ConfigurationDialog.cpp:1155
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Käyttäjän määrittelemä %1T"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -984,23 +1060,28 @@ msgstr "Dokumentoija/kehittäjä:%1"
 
 #: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Developer: %1"
 msgstr "Kehittäjä: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:315
+#, qt-format
+msgid "Continuous Integration: %1"
+msgstr "Jatkuva integraatio: %1"
+
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testaaja: %1"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 msgid "Past Developers"
 msgstr "Aiemmat kehittäjät"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1008,12 +1089,12 @@ msgstr ""
 "Monet henkilöt ovat antaneet merkittävän panoksen, mutteivat ole enää "
 "aktiivisia. Heidän työnsä on ollut projektille todella tärkeää:"
 
-#: src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Graafinen/muu suunnittelija: %1"
 
-#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:325 src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX-kehittäjä: %1"
@@ -1197,20 +1278,20 @@ msgstr "Vaihtoehtoinen pikanäppäin"
 #: src/gui/CustomDeltaTEquationDialog.cpp:49
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Käyttäjän määrittelemä %1T-yhtälö"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:50
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "Tyypillinen yhtälö %1T:n laskemiseksi näyttää tältä."
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:52
 msgid "where"
-msgstr ""
+msgstr "jossa"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:52
 msgid "year"
-msgstr ""
+msgstr "vuosi"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
@@ -4030,11 +4111,11 @@ msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
 
 #: src/ui_configurationDialog.h:1059
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "Hiiren osoittimen aikakatkaisu:"
 
 #: src/ui_configurationDialog.h:1061
 msgid "seconds"
-msgstr ""
+msgstr "sekuntia"
 
 #: src/ui_configurationDialog.h:1063
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
@@ -4074,11 +4155,11 @@ msgstr "Järjestelmän päiväys:"
 
 #: src/ui_configurationDialog.h:1077
 msgid "Time correction"
-msgstr ""
+msgstr "Ajan korjaus"
 
 #: src/ui_configurationDialog.h:1080
 msgid "Edit equation"
-msgstr ""
+msgstr "Muokkaa yhtälöä"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Planetarium options"
