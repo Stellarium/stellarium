@@ -1437,7 +1437,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		// TODO: expand the sentence: ... adopted ... from 19xx-19yy?
 		break;
 	case TuckermanGoldstine:
-		description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. near sunset) or 16h 00m GMT. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+		description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
 		// TODO: These tables are sometimes found cited, but I have no details. Maybe add "based on ... " ?
 		break;
 	case MullerStephenson:
