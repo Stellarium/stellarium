@@ -1113,7 +1113,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	Q_ASSERT(ui->deltaTAlgorithmComboBox);
 
 	// TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-	ui->deltaTLabel->setText(QString("%1 %2T:").arg("Algorithm of").arg(QChar(0x0394)));
+	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
 
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
 
