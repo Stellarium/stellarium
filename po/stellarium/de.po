@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 13:52+0700\n"
-"PO-Revision-Date: 2013-02-18 14:58+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2013-02-20 00:01+0700\n"
+"PO-Revision-Date: 2013-02-19 14:53+0000\n"
+"Last-Translator: Dennis Baudys <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-19 04:46+0000\n"
+"X-Launchpad-Export-Date: 2013-02-20 04:38+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -256,6 +256,7 @@ msgstr "Raumschiff"
 #: src/core/StelCore.cpp:1423
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"Korrektur ist ausgeschaltet. Nur verwenden, wenn Sie wissen, was Sie tun!"
 
 #: src/core/StelCore.cpp:1426
 #, qt-format
@@ -290,10 +291,9 @@ msgstr ""
 #: src/core/StelCore.cpp:1440
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
-"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
-"listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. "
-"near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
-"in the syzygy tables of Goldstine (1973)."
+"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
+"relation was also implicitly adopted in the syzygy tables of Goldstine "
+"(1973)."
 msgstr ""
 
 #: src/core/StelCore.cpp:1444
@@ -451,7 +451,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1505
 msgid "Used by default."
-msgstr ""
+msgstr "Als Vorgabe verwendet."
 
 #: src/core/StelCore.cpp:1508
 #, qt-format
@@ -751,9 +751,14 @@ msgstr ""
 "Fehler beim Herunterladen von %1:\n"
 "Datei ist beschädigt."
 
+#. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+#: src/gui/ConfigurationDialog.cpp:1116
+msgid "Algorithm of"
+msgstr ""
+
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
-msgstr ""
+msgstr "Ohne Korrektur"
 
 #: src/gui/ConfigurationDialog.cpp:1128
 msgid "Schoch (1931)"
@@ -1211,21 +1216,21 @@ msgstr "Primäre Tastenkombination"
 msgid "Alternative shortcut"
 msgstr "Alternative Tastenkombination"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:49
+#: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:50
+#: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
 msgstr "jahr"
 
@@ -4051,7 +4056,7 @@ msgstr "Mauszeiger ausblenden, wenn inaktiv"
 
 #: src/ui_configurationDialog.h:1059
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "Mauszeiger-Timeout:"
 
 #: src/ui_configurationDialog.h:1061
 msgid "seconds"
@@ -4097,11 +4102,11 @@ msgstr "Systemzeit bei:"
 
 #: src/ui_configurationDialog.h:1077
 msgid "Time correction"
-msgstr ""
+msgstr "Zeitkorrektur"
 
 #: src/ui_configurationDialog.h:1080
 msgid "Edit equation"
-msgstr ""
+msgstr "Formel bearbeiten"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Planetarium options"

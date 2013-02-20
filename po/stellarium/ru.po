@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 13:52+0700\n"
-"PO-Revision-Date: 2013-02-18 07:04+0000\n"
+"POT-Creation-Date: 2013-02-20 00:01+0700\n"
+"PO-Revision-Date: 2013-02-19 17:06+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-19 04:50+0000\n"
+"X-Launchpad-Export-Date: 2013-02-20 04:43+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -265,7 +265,7 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 "Эта формула была получена С. Шохом в 1931 году и была использована Г. "
-"Хенрикссона в статье <em>Теория относительности Эёнштейна подтверждена "
+"Хенрикссоном в статье <em>Теория относительности Эйнштейна подтверждена "
 "древними солнечными затмениями</em> (%1). Подробности смотрите %2здесь%3."
 
 #: src/core/StelCore.cpp:1429
@@ -301,16 +301,13 @@ msgstr ""
 #: src/core/StelCore.cpp:1440
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
-"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
-"listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. "
-"near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
-"in the syzygy tables of Goldstine (1973)."
+"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
+"relation was also implicitly adopted in the syzygy tables of Goldstine "
+"(1973)."
 msgstr ""
 "Таблицы Тукермана (1962, 1964) перечисяют положения Солнца, Луны и планет в "
-"5 - и 10-дневных интервалах от 601 г. до н.э. по 1649 г. н.э. Положения "
-"перечисляются для 19ч 00м (среднее) местного времени в Вавилоне/Багдаде (т. "
-"е. вблизи заката) или 16ч 00м GMT. Такое же соотношение было также неявно "
-"принято в таблице сизигий Голдштейна (1973)."
+"5 - и 10-дневных интервалах от 601 г. до н.э. по 1649 г. н.э. Это же "
+"соотношение было также неявно принято в таблице сизигий Голдштейна (1973)."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -339,7 +336,7 @@ msgid ""
 "period 1800-1975</em> (%1)."
 msgstr ""
 "Это уравнение было опубликовано Л. Д. Шмаделем и Г. Захом в статье "
-"<em>Полиноминальная аппроксимация для коррекции дельта T E.T.-U.T. за период "
+"<em>Полиноминальное приближение для коррекции дельта T E.T.-U.T. за период "
 "1800-1975 г.г.</em> (%1)."
 
 #: src/core/StelCore.cpp:1453
@@ -396,7 +393,7 @@ msgid ""
 "1988</em> (%1)."
 msgstr ""
 "Это уравнение было опубликовано Л. Д. Шмаделем и Г. Захом в статье "
-"<em>Эмпирические преобразования с U.T. в E.T. за период 1800-1988 г.г.</em> "
+"<em>Эмпирические преобразования из U.T. в E.T. за период 1800-1988 г.г.</em> "
 "(%1)."
 
 #: src/core/StelCore.cpp:1471
@@ -439,9 +436,8 @@ msgid ""
 msgstr ""
 "Эта формула рекомендована Ж. Меёсом во второй редакции его книги "
 "<em>Астрономические алгоритмы</em> (1988) и использована в программе EmapWin "
-"Шинобу Такесако для построения обстоятельств солнечных затмений с 3000 г. до "
-"н.э. до 3000 г. н.э. и в интерактивном планетарии Sky View Cafe Керри "
-"Шетлайна."
+"Шинобу Такесако для построения обстоятельств солнечных затмений с -3000 до "
+"3000 г.г. и в интерактивном планетарии Sky View Cafe Керри Шетлайна."
 
 #: src/core/StelCore.cpp:1483
 msgid ""
@@ -824,6 +820,11 @@ msgstr ""
 "Ошибка при загрузке %1:\n"
 "Файл повреждён."
 
+#. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+#: src/gui/ConfigurationDialog.cpp:1116
+msgid "Algorithm of"
+msgstr "Алгоритм"
+
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
 msgstr "Без коррекции"
@@ -850,7 +851,7 @@ msgstr "Тукерман (1962, 1964) и Голдштейн (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Muller & Stephenson (1975)"
-msgstr "Миллер и Стефенсон (1975)"
+msgstr "Мюллер и Стефенсон (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "Stephenson (1978)"
@@ -1276,21 +1277,21 @@ msgstr "Основное сокращение"
 msgid "Alternative shortcut"
 msgstr "Альтернативное сокращение"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:49
+#: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "Пользовательское уравнение для %1T"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:50
+#: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "Типичное уравнение для вычисления %1T выглядит так:"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
 msgstr "где"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
 msgstr "год"
 

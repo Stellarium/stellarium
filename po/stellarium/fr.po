@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 13:52+0700\n"
-"PO-Revision-Date: 2013-02-18 20:24+0000\n"
+"POT-Creation-Date: 2013-02-20 00:01+0700\n"
+"PO-Revision-Date: 2013-02-19 18:55+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-19 04:45+0000\n"
+"X-Launchpad-Export-Date: 2013-02-20 04:38+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -307,22 +307,19 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em>."
 msgstr ""
 "Une version légèrement modifiée de la formule de l'IAU (1952), qui a été "
-"adoptées dans l'<em>Astronomical Ephemeris</em>."
+"adoptée dans l'<em>Astronomical Ephemeris</em>."
 
 #: src/core/StelCore.cpp:1440
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
-"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
-"listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. "
-"near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
-"in the syzygy tables of Goldstine (1973)."
+"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
+"relation was also implicitly adopted in the syzygy tables of Goldstine "
+"(1973)."
 msgstr ""
 "Les tables de Tuckerman (1962, 1964) donnent la liste des positions du "
-"Soleil, de la Lune et des planètes par intervalles de 5 et 10 jours de 601 "
-"av. J.-C. à 1649. Les positions données sont pour 19:00 h, temps local "
-"(moyen) à Babylone/Bagdad (c'est-à-dire vers le coucher du Soleil) ou 16:00 "
-"h GMT. Les mêmes calculs ont été également adoptés implicitement dans les "
-"tables de syzygie de Goldstine (1973)."
+"Soleil, de la Lune et des planètes par intervalles de 5 et 10 jours, entre "
+"601 av. J.-C. et 1649 apr. J.-C. Les mêmes relations ont été adoptées "
+"implicitement dans les tables de syzygie de Goldstine (1973)."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -378,7 +375,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1459
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr "Cet algorithme est utilisé dans logiciel de planétarium Guide 7."
+msgstr "Cet algorithme est utilisé dans le logiciel de planétarium Guide 7."
 
 #: src/core/StelCore.cpp:1462
 msgid ""
@@ -397,8 +394,7 @@ msgid ""
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 "Cette formule a été établie par K.M. Borkowski (%1) à partir de l'analyse "
-"des relations de 31 éclipses de Soleil entre 2137 av. J.-C. et 1715 apr. J.-"
-"C."
+"des récits de 31 éclipses de Soleil entre 2137 av. J.-C. et 1715 apr. J.-C."
 
 #: src/core/StelCore.cpp:1468
 #, qt-format
@@ -839,6 +835,11 @@ msgid ""
 msgstr ""
 "Erreur lors du téléchargement de %1 :\n"
 "Le fichier est corrompu."
+
+#. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+#: src/gui/ConfigurationDialog.cpp:1116
+msgid "Algorithm of"
+msgstr "Algorithme pour"
 
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
@@ -1298,21 +1299,21 @@ msgstr "Raccourci principal"
 msgid "Alternative shortcut"
 msgstr "Raccourci alternatif"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:49
+#: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "Équation personnalisée pour %1T"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:50
+#: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "Une équation typique pour le calcul de %1T ressemble à"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
 msgstr "où"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
 msgstr "année"
 
