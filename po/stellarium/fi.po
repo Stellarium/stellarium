@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 13:52+0700\n"
-"PO-Revision-Date: 2013-02-18 18:23+0000\n"
+"POT-Creation-Date: 2013-02-20 00:01+0700\n"
+"PO-Revision-Date: 2013-02-19 17:49+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-19 04:45+0000\n"
+"X-Launchpad-Export-Date: 2013-02-20 04:38+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -300,16 +300,15 @@ msgstr ""
 #: src/core/StelCore.cpp:1440
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
-"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
-"listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. "
-"near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
-"in the syzygy tables of Goldstine (1973)."
+"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
+"relation was also implicitly adopted in the syzygy tables of Goldstine "
+"(1973)."
 msgstr ""
-"Tuckermanin taulukot (1962, 1964) luetteloivat auringon, kuun ja "
-"planeettojen paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649. "
-"Luetteloidut paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin aikaa "
-"eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös Goldstinen  "
-"(1973) syzygitaulukoihin."
+"Tuckermanin luettelo (1962, 1964) taulukoi auringon, kuun ja planeettojen "
+"paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649. Luetteloidut "
+"paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin aikaa eli 16.00 "
+"GMT. Sama suhde otettiin epäsuorasti käyttöön myös Goldstinen (1973) "
+"syzygitaulukoihin."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -820,6 +819,11 @@ msgstr ""
 "Virhe haettaessa tiedostoa %1:\n"
 "Tiedosto vioittunut."
 
+#. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+#: src/gui/ConfigurationDialog.cpp:1116
+msgid "Algorithm of"
+msgstr "Algoritmi:"
+
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
 msgstr "Ilman korjausta"
@@ -1275,21 +1279,21 @@ msgstr "Ensisijainen pikanäppäin"
 msgid "Alternative shortcut"
 msgstr "Vaihtoehtoinen pikanäppäin"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:49
+#: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "Käyttäjän määrittelemä %1T-yhtälö"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:50
+#: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "Tyypillinen yhtälö %1T:n laskemiseksi näyttää tältä."
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
 msgstr "jossa"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
 msgstr "vuosi"
 
