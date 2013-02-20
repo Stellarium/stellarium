@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 13:52+0700\n"
+"POT-Creation-Date: 2013-02-20 00:01+0700\n"
 "PO-Revision-Date: 2013-02-19 02:43+0000\n"
 "Last-Translator: yurchor <Unknown>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-19 04:53+0000\n"
+"X-Launchpad-Export-Date: 2013-02-20 04:46+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -311,17 +311,10 @@ msgstr ""
 #: src/core/StelCore.cpp:1440
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
-"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
-"listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. "
-"near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
-"in the syzygy tables of Goldstine (1973)."
+"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
+"relation was also implicitly adopted in the syzygy tables of Goldstine "
+"(1973)."
 msgstr ""
-"У таблицях Tuckerman (1962, 1964) наведено дані щодо розташування Сонця, "
-"Місяця та планет з п’яти- і десятиденним інтервалом від 601 р. до н.е. до "
-"1649 р. н.е. Дані щодо розташування наведено для місцевого (середнього) часу "
-"19 год. 00 хв. у Вавилоні/Багдаді (час, близький до заходу сонця) або 16 "
-"год. 00 хв. за Гринвічем. Те саме співвідношення також неявно використано у "
-"таблицях Goldstine (1973)."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -842,6 +835,11 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "Файл пошкоджено."
 
+#. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+#: src/gui/ConfigurationDialog.cpp:1116
+msgid "Algorithm of"
+msgstr ""
+
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
 msgstr "Без виправлення"
@@ -1297,21 +1295,21 @@ msgstr "Основне скорочення"
 msgid "Alternative shortcut"
 msgstr "Альтернативне скорочення"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:49
+#: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "Нетипове рівняння для %1T"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:50
+#: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "Типове рівняння для обчислення %1T виглядає так:"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
 msgstr "де"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
 msgstr "рік"
 

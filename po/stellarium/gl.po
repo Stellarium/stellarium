@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 13:52+0700\n"
-"PO-Revision-Date: 2013-02-16 09:18+0000\n"
+"POT-Creation-Date: 2013-02-20 00:01+0700\n"
+"PO-Revision-Date: 2013-02-19 11:56+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-19 04:46+0000\n"
+"X-Launchpad-Export-Date: 2013-02-20 04:39+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -254,6 +254,7 @@ msgstr "Nave espacial"
 #: src/core/StelCore.cpp:1423
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"A corrección está desactivada. Usar só se se sabe o que se está a facer!"
 
 #: src/core/StelCore.cpp:1426
 #, qt-format
@@ -269,6 +270,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in article <em>On "
 "the system of astronomical constants</em> (%1)."
 msgstr ""
+"Esta ecuación empírica foi publicada por G. M. Clemence no artigo <em>No "
+"sistema de constantes astronómicas</em> (%1)."
 
 #: src/core/StelCore.cpp:1432
 #, qt-format
@@ -278,20 +281,25 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Esta fórmula baséase nun estudo das observacións do Sol, a Lúa e os planetas "
+" posteriores a 1650  que fixo Spencer Jones (%1) e que usou Jean Meeus no "
+"seu libro <em>Fórmulas Astronómicas para Calculadoras</em>. Tamén foi "
+"adoptada no programa de PC SunTracker Pro."
 
 #: src/core/StelCore.cpp:1436
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em>."
 msgstr ""
+"Esta é unha versión lixeiramente modificada da fórmula IAU (1952) que foi "
+"incorporada ó libro <em>Efemérides Astronómicas</ em>."
 
 #: src/core/StelCore.cpp:1440
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
-"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
-"listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. "
-"near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
-"in the syzygy tables of Goldstine (1973)."
+"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
+"relation was also implicitly adopted in the syzygy tables of Goldstine "
+"(1973)."
 msgstr ""
 
 #: src/core/StelCore.cpp:1444
@@ -301,6 +309,9 @@ msgid ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Esta ecuación foi publicada por P. M. Muller e F. R. Stephenson no artigo "
+"<em>As aceleracións da terra e da lúa dende o inicio das observacións "
+"astronómicas</em> (%1)."
 
 #: src/core/StelCore.cpp:1447
 #, qt-format
@@ -308,6 +319,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Esta ecuación foi publicada por F. R. Stephenson no artigo <em>Observacións "
+"Astronómicas antes dos Telescopios</em> (%1)."
 
 #: src/core/StelCore.cpp:1450
 #, qt-format
@@ -316,6 +329,9 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1)."
 msgstr ""
+"Esta ecuación foi publicada por L. D. Schmadel e G. Zech no artigo "
+"<em>Aproximacións polinomiais para a corrección delta T ET-UT durante o "
+"período de 1800-1975</em> (%1)."
 
 #: src/core/StelCore.cpp:1453
 msgid ""
@@ -323,6 +339,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Este algoritmo foi tomado de P. Bretagnon e L. Simon's <em>Programas "
+"Planetarios e Táboas dende o -4000 ó +2800</em> (1986) e no programa "
+"planetario para PC RedShift."
 
 #: src/core/StelCore.cpp:1456
 #, qt-format
@@ -334,7 +353,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1459
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "Este algoritmo usouse no programa planetario de PC Guide 7."
 
 #: src/core/StelCore.cpp:1462
 msgid ""
@@ -342,6 +361,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Este algoritmo foi creado por F. Espenak na súa <em> Canon de Cincuenta Anos "
+"de Eclipses Solares: 1986-2035 </ em> (1987) e no seu <em> Canon de "
+"Cincuenta Anos de Eclipses Lunares: 1986-2035 </ em> (1989)."
 
 #: src/core/StelCore.cpp:1465
 #, qt-format
@@ -357,6 +379,9 @@ msgid ""
 "<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1)."
 msgstr ""
+"Esta ecuación foi publicada por L.D. Schmadel e G.Zech no artigo "
+"<em>Transformacións empíricas de U.T. a E.T. para o Período 1800-"
+"1988</em>(%1)"
 
 #: src/core/StelCore.cpp:1471
 msgid ""
@@ -364,6 +389,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"Esta fórmula foi adoptada por Chapront-Touze e J. Chapront na versión "
+"abreviada da teoría lunar ELP teoría 2000-85 nas súas <em> Táboas lunares e "
+"Programas dende o 4000 aC ó 8000 dC </ em> (1991)."
 
 #: src/core/StelCore.cpp:1474
 #, qt-format
@@ -747,6 +775,11 @@ msgid ""
 msgstr ""
 "Erro ao descargar %1:\n"
 "O ficheiro está danado."
+
+#. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+#: src/gui/ConfigurationDialog.cpp:1116
+msgid "Algorithm of"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
@@ -1201,21 +1234,21 @@ msgstr "Tecla rápida primaria"
 msgid "Alternative shortcut"
 msgstr "Tecla rápida alternativa"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:49
+#: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:50
+#: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
 msgstr ""
 

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 13:52+0700\n"
-"PO-Revision-Date: 2013-02-18 21:14+0000\n"
+"POT-Creation-Date: 2013-02-20 00:01+0700\n"
+"PO-Revision-Date: 2013-02-19 17:31+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-19 04:53+0000\n"
+"X-Launchpad-Export-Date: 2013-02-20 04:46+0000\n"
 "X-Generator: Launchpad (build 16491)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -302,17 +302,14 @@ msgstr ""
 #: src/core/StelCore.cpp:1440
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
-"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
-"listed positions are for 19h 00m (mean) local time at Babylon/Baghdad (i.e. "
-"near sunset) or 16h 00m GMT. The same relation was also implicitly adopted "
-"in the syzygy tables of Goldstine (1973)."
+"and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
+"relation was also implicitly adopted in the syzygy tables of Goldstine "
+"(1973)."
 msgstr ""
 "As tabelas de Tuckerman (1962, 1964) listam as posições do Sol, da Lua e dos "
-"planetas em intervalos de cinco e de dez dias, de 601 a.C. a 1649 d.C. As "
-"posições listadas são para as 19:00 h do horário local (médio) na "
-"Babilônia/Bagdá (ou seja, próximo ao pôr do Sol) ou às 16:00 h GMT. A mesma "
-"relação também foi tacitamente adotada nas tabelas de conjunção de Goldstine "
-"(1973)."
+"planetas em intervalos de cinco e de dez dias, de 601 a.C. a 1649 d.C. A "
+"mesma relação também foi tacitamente adotada nas tabelas de conjunção de "
+"Goldstine (1973)."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -833,6 +830,11 @@ msgstr ""
 "Ocorreu um erro ao baixar %1:\n"
 "O arquivo está corrompido."
 
+#. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+#: src/gui/ConfigurationDialog.cpp:1116
+msgid "Algorithm of"
+msgstr "Algoritmo do"
+
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
 msgstr "Sem correção"
@@ -1288,21 +1290,21 @@ msgstr "Atalho primário"
 msgid "Alternative shortcut"
 msgstr "Atalho alternativo"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:49
+#: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "Equação personalizada para o %1T"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:50
+#: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "Uma equação típica para o cálculo do %1T se parece com:"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
 msgstr "em que"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:52
+#: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
 msgstr "ano"
 
