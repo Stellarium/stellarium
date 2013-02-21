@@ -269,7 +269,7 @@ public:
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
-	double getDeltaT(double jDay);
+	double getDeltaT(double jDay) const;
 
 	//! Get info about valid range for current algorithm for calculation of Delta-T
 	//! @param jDay the JD
@@ -494,11 +494,11 @@ public slots:
 	void setCustomEquationCoefficients(Vec3f c) { customEquationCoeff=c; }
 
 	//! Get year for custom equation for calculation of Delta-T
-	float getCustomYear() { return customYear; }
+	float getCustomYear() const { return customYear; }
 	//! Get n-dot for custom equation for calculation of Delta-T
-	float getCustomNDot() { return customNDot; }
+	float getCustomNDot() const { return customNDot; }
 	//! Get coefficients for custom equation for calculation of Delta-T
-	Vec3f getCustomEquationCoefficients() { return customEquationCoeff; }
+	Vec3f getCustomEquationCoefficients() const { return customEquationCoeff; }
 
 signals:
 	//! This signal is emitted when the observer location has changed.

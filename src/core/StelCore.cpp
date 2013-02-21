@@ -1228,7 +1228,7 @@ void StelCore::setStartupTimeMode(const QString& s)
 	startupTimeMode = s;
 }
 
-double StelCore::getDeltaT(double jDay)
+double StelCore::getDeltaT(double jDay) const
 {
 	double DeltaT = 0.;
 	double ndot = 0.;
