@@ -39,7 +39,9 @@ Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 // Get observer local sideral coordinate
 Vec3d StelObject::getSideralPosGeometric(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getLocalSideralTime())* getEquinoxEquatorialPos(core);
+	// Hour Angle corrected to Delta-T value
+	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
+	return Mat4d::zrotation(-core->getLocalSideralTime()+dt)* getEquinoxEquatorialPos(core);
 }
 
 // Get observer local sidereal coordinates, deflected by refraction
@@ -47,7 +49,9 @@ Vec3d StelObject::getSideralPosApparent(const StelCore* core) const
 {
 	Vec3d v=getAltAzPosApparent(core);
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
-	return Mat4d::zrotation(-core->getLocalSideralTime())*v;
+	// Hour Angle corrected to Delta-T value
+	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
+	return Mat4d::zrotation(-core->getLocalSideralTime()+dt)*v;
 }
 
 Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
