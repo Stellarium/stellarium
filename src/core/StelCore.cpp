@@ -1423,89 +1423,89 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		description = q_("Correction is disabled. Use only if you know what you are doing!");
 		break;
 	case Schoch:
-		description = q_("This formula was obtained by C. Schoch in 1931 year and was used by G. Henriksson in article <em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> (%1). See for more info %2here%3.").arg("<a href='http://adsabs.harvard.edu/abs/2009ASPC..409..166H'>2010</a>").arg("<a href='http://journalofcosmology.com/AncientAstronomy123.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This formula was obtained by C. Schoch in 1931 and was used by G. Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> (%1). See for more info %2here%3.").arg("<a href='http://adsabs.harvard.edu/abs/2009ASPC..409..166H'>2010</a>").arg("<a href='http://journalofcosmology.com/AncientAstronomy123.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Clemence:
-		description = q_("This empirical equation was published by G. M. Clemence in article <em>On the system of astronomical constants</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1948AJ.....53..169C'>1948</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This empirical equation was published by G. M. Clemence in the article <em>On the system of astronomical constants</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1948AJ.....53..169C'>1948</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case IAU:
-		description = q_("This formula is based on a study of the post-1650 observations of the Sun, the Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his <em>Astronomical Formulae for Calculators</em>. It was also adopted in the PC program SunTracker Pro.").arg("<a href='http://adsabs.harvard.edu/abs/1939MNRAS..99..541S'>1939</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This formula is based on a study of post-1650 observations of the Sun, the Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his <em>Astronomical Formulae for Calculators</em>. It was also adopted in the PC program SunTracker Pro.").arg("<a href='http://adsabs.harvard.edu/abs/1939MNRAS..99..541S'>1939</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		// find year of publication of AFFC
 		break;
 	case AstronomicalEphemeris:
-		description = q_("This is a slightly modified version of the IAU (1952) formula which was adopted in the <em>Astronomical Ephemeris</em>.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This is a slightly modified version of the IAU (1952) formula which was adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar Eclipses</em> by Mucke&Meeus (1983).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		// TODO: expand the sentence: ... adopted ... from 19xx-19yy?
 		break;
 	case TuckermanGoldstine:
-		description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		// TODO: These tables are sometimes found cited, but I have no details. Maybe add "based on ... " ?
 		break;
 	case MullerStephenson:
-		description = q_("This equation was published by P. M. Muller and F. R. Stephenson in article <em>The accelerations of the earth and moon from early astronomical observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1975grhe.conf..459M'>1975</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This equation was published by P. M. Muller and F. R. Stephenson in the article <em>The accelerations of the earth and moon from early astronomical observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1975grhe.conf..459M'>1975</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Stephenson1978:
-		description = q_("This equation was published by F. R. Stephenson in article <em>Pre-Telescopic Astronomical Observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1978tfer.conf....5S'>1978</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This equation was published by F. R. Stephenson in the article <em>Pre-Telescopic Astronomical Observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1978tfer.conf....5S'>1978</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case SchmadelZech1979:
-		description = q_("This equation was published by L. D. Schmadel and G. Zech in article <em>Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1979AcA....29..101S'>1979</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This equation was published by L. D. Schmadel and G. Zech in the article <em>Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1979AcA....29..101S'>1979</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MorrisonStephenson1982:
-		description = q_("This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case StephensonMorrison1984:
-		description = q_("This formula was published by F. R. Stephenson and L. V. Morrison in article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This formula was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case StephensonHoulden:
-		description = q_("This algorithm is used in the PC planetarium program Guide 7.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This algorithm is used in the PC planetarium program Guide 7.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Espenak:
-		description = q_("This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Borkowski:
-		description = q_("This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 solar eclipse records dating between 2137 BCE and 1715 CE.").arg("<a href='http://adsabs.harvard.edu/abs/1988A&A...205L...8B'>1988</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 solar eclipse records dating between 2137 BCE and 1715 CE.").arg("<a href='http://adsabs.harvard.edu/abs/1988A&A...205L...8B'>1988</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case SchmadelZech1988:
-		description = q_("This equation was published by L. D. Schmadel and G. Zech in article <em>Empirical Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1988AN....309..219S'>1988</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This equation was published by L. D. Schmadel and G. Zech in the article <em>Empirical Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1988AN....309..219S'>1988</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case ChaprontTouze:
-		description = q_("This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case StephensonMorrison1995:
-		description = q_("This equation was published by F. R. Stephenson and L. V. Morrison in article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1995RSPTA.351..165S'>1995</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This equation was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1995RSPTA.351..165S'>1995</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Stephenson1997:
-		description = q_("F. R. Stephenson published this formula in their book <em>Historical Eclipses and Earth's Rotation</em> (%1).").arg("<a href='http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186'>1997</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("F. R. Stephenson published this formula in his book <em>Historical Eclipses and Earth's Rotation</em> (%1).").arg("<a href='http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186'>1997</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case ChaprontFrancou:
-		description = q_("This formula is recommended by J. Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
-		break;
+        description = q_("This formula also is used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe. A variant is also given by J. Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+        // GZ: Did those programs use this very form or Meeus's variant?
+        break;
 	case Meeus:
-		description = q_("J. Meeus, in the second edition of his <em>Astronomical Algorithms</em> (1998), gives a 12th-order formula.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
-		// TODO: specify which one this is? (I have the book at home only)
+        description = q_("From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely used. Table for 1620..2000, and includes a variant of Chapront&Chapront-Touze&Francou (1997) for dates outside 1620..2000.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case JPLHorizons:
-		description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory used this formula in their interactive website %1JPL Horizons%2.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory use this formula in their interactive website %1JPL Horizons%2.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MeeusSimons:
-		description = q_("This polinom was published by J. Meeus and L. Simons in article <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2000JBAA..110..323M'>2000</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This polynome was published by J. Meeus and L. Simons in article <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2000JBAA..110..323M'>2000</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MontenbruckPfleger:
-		description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials.").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case ReingoldDershowitz:
-		description = q_("E. M. Reingold & N. Dershowitz adopt the approximate formula in the second edition of <em>Calendrical Calculations</em> (2001) and in their <em>Calendrical Tabulations</em> (2002).").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("E. M. Reingold & N. Dershowitz adopt the approximate formula in the second edition of <em>Calendrical Calculations</em> (2001) and in their <em>Calendrical Tabulations</em> (2002).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MorrisonStephenson2004:
-		description = q_("This equation was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("This equation was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Reijs:
-		description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker));
+        description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case EspenakMeeus:
-		description = q_("This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web Site%2. This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValigRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
+        description = q_("This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web Site%2. This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
 		break;
 	case Custom:
-		description = q_("This is quadratic formula for calculation of %1T with coefficients defined by user.").arg(QChar(0x0394));
+        description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
 		break;
 	default:
 		description = q_("Error");
@@ -1513,7 +1513,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	return description;
 }
 
-QString StelCore::getCurrentDeltaTAlgorithmValigRange(double jDay, QString *marker) const
+QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *marker) const
 {
 	QString validRange = "";
 	QString validRangeAppendix = "";
@@ -1524,8 +1524,8 @@ QString StelCore::getCurrentDeltaTAlgorithmValigRange(double jDay, QString *mark
 	StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
 	switch (getCurrentDeltaTAlgorithm()) {
 	case WithoutCorrection:
-		// Nothing make
-		break;
+        // say nothing
+        break;
 	case Schoch:
 		// Valid range unknown
 		break;
@@ -1538,8 +1538,10 @@ QString StelCore::getCurrentDeltaTAlgorithmValigRange(double jDay, QString *mark
 		finish	= 1900;
 		break;
 	case AstronomicalEphemeris:
-		start	= 1681;
-		finish	= 1900;
+        // GZ: What is the source of "1681..1900"? Expl.Suppl.AE 1961-p87 says "...over periods extending back to ancient times"
+        // I changed to what I estimate.
+        start	= -500; // 1681;
+        finish	=  2000; // 1900;
 		break;
 	case TuckermanGoldstine:
 		start	= -600;
@@ -1594,15 +1596,16 @@ QString StelCore::getCurrentDeltaTAlgorithmValigRange(double jDay, QString *mark
 		start	= -500;
 		finish	= 1600;
 		break;
-	case ChaprontFrancou:
-		// FIXME: This is valid range?
-		start	= -3000;
-		finish	= 3000;
-		break;
+    case ChaprontFrancou:
+        // FIXME: This is valid range?
+        start	= -3000;
+        finish	= 3000;
+        break;
 	case Meeus:
-		start	= 1800;
-		finish	= 1997;
-		validRangeAppendix = q_("with a maximum error of 2.3 seconds");
+        start	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
+        finish	=  2150; // 1997;
+        //validRangeAppendix = q_("with a maximum error of 2.3 seconds"); // Wrong: This is only for the unused expression on p. 80!
+        validRangeAppendix = q_("(estimated)");
 		break;
 	case JPLHorizons:
 		start	= -2999;
