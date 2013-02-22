@@ -275,7 +275,7 @@ public:
 	//! @param jDay the JD
 	//! @param marker the marker for valid range
 	//! @return valid range
-	QString getCurrentDeltaTAlgorithmValigRange(double jDay, QString* marker) const;
+    QString getCurrentDeltaTAlgorithmValidRange(double jDay, QString* marker) const;
 
 public slots:
 	//! Set the current ProjectionType to use
