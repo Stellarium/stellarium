@@ -1390,6 +1390,26 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	return result;
 }
 
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
+QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0)
+		return result;
+	QString objw = objPrefix.toUpper();
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		QString constw = p->getEnglishName().mid(0, objw.size()).toUpper();
+		if (constw==objw)
+		{
+			result << p->getEnglishName();
+			if (result.size()==maxNbItem)
+				return result;
+		}
+	}
+	return result;
+}
+
 QStringList SolarSystem::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

@@ -245,6 +245,27 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	return result;
 }
 
+/*************************************************************************
+ Find and return the list of at most maxNbItem objects auto-completing
+ passed object English name
+*************************************************************************/
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem) const
+{
+	QStringList result;
+
+	// For all StelObjectmodules..
+	foreach (const StelObjectModule* m, objectsModule)
+	{
+		// Get matching object for this module
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem);
+		result += matchingObj;
+		maxNbItem-=matchingObj.size();
+	}
+
+	result.sort();
+	return result;
+}
+
 QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
 {
 	// search for module

@@ -425,6 +425,46 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
+QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+		return result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+
+	QString numberPrefix;
+	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	if (regExp.exactMatch(objw))
+	{
+		QString numberString = regExp.capturedTexts().at(2);
+		bool ok;
+		/* int number = */ numberString.toInt(&ok);
+		if (ok)
+			numberPrefix = numberString;
+	}
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat->visible)
+		{
+			if (sat->getEnglishName().toUpper().left(objw.length()) == objw)
+			{
+				result << sat->getEnglishName().toUpper();
+			}
+			else if (!numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
+			{
+				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
+			}
+		}
+	}
+
+	result.sort();
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+
+	return result;
+}
+
 QStringList Satellites::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
