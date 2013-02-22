@@ -109,6 +109,11 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5) const;
 	// empty, as there's too much stars for displaying at once
 	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Stars"; }
@@ -239,9 +244,11 @@ private:
 	static QHash<int, QString> commonNamesMap;
 	static QHash<int, QString> commonNamesMapI18n;
 	static QMap<QString, int> commonNamesIndexI18n;
+	static QMap<QString, int> commonNamesIndex;
 
-	static QHash<int, QString> sciNamesMapI18n;
+	static QHash<int, QString> sciNamesMapI18n;	
 	static QMap<QString, int> sciNamesIndexI18n;
+
 
 	QFont starFont;
 	static bool flagSciNames;
