@@ -1606,7 +1606,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		start	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
 		finish	=  2150; // 1997;
 		//validRangeAppendix = q_("with a maximum error of 2.3 seconds"); // Wrong: This is only for the unused expression on p. 80!
-		validRangeAppendix = q_("(estimated)");
+		//validRangeAppendix = q_("(estimated)");
 		break;
 	case JPLHorizons:
 		start	= -2999;
