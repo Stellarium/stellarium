@@ -591,7 +591,7 @@ void BottomStelBar::updateText(bool updatePos)
 		deltaT = core->getDeltaT(jd);
 		displayDeltaT = true;		
 		sigma = StelUtils::getDeltaTStandardError(jd);
-		core->getCurrentDeltaTAlgorithmValigRange(jd, &validRangeInfo);
+        core->getCurrentDeltaTAlgorithmValidRange(jd, &validRangeInfo);
 	}
 
 	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
