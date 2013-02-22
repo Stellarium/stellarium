@@ -48,21 +48,21 @@ namespace StelUtils
 	//! @param m minute component
 	//!	@param s second component
 	//! @return angle in radian
-    double hmsToRad(const unsigned int h, const unsigned int m, const double s);
+	double hmsToRad(const unsigned int h, const unsigned int m, const double s);
 
 	//! Convert an angle in +-dms format to radian.
 	//! @param d degree component
 	//! @param m arcmin component
 	//!	@param s arcsec component
 	//! @return angle in radian
-    double dmsToRad(const int d, const unsigned int m, const double s);
+	double dmsToRad(const int d, const unsigned int m, const double s);
 
 	//! Convert an angle in radian to hms format.
 	//! @param rad input angle in radian
 	//! @param h hour component
 	//! @param m minute component
 	//!	@param s second component
-    void radToHms(double rad, unsigned int& h, unsigned int& m, double& s);
+	void radToHms(double rad, unsigned int& h, unsigned int& m, double& s);
 
 	//! Convert an angle in radian to +-dms format.
 	//! @param rad input angle in radian
@@ -70,29 +70,29 @@ namespace StelUtils
 	//! @param d degree component
 	//! @param m minute component
 	//!	@param s second component
-    void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);
+	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
 	//! @param angle input angle in radian
-    QString radToHmsStrAdapt(const double angle);
+	QString radToHmsStrAdapt(const double angle);
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! @param angle input angle in radian
 	//! @param decimal output decimal second value
-    QString radToHmsStr(const double angle, const bool decimal=false);
+	QString radToHmsStr(const double angle, const bool decimal=false);
 
 	//! Convert an angle in radian to a dms formatted string.
 	//! If the second, minute part is == 0, it is not output
 	//! @param angle input angle in radian
 	//! @param useD Define if letter "d" must be used instead of deg sign
-    QString radToDmsStrAdapt(const double angle, const bool useD=false);
+	QString radToDmsStrAdapt(const double angle, const bool useD=false);
 
 	//! Convert an angle in radian to a dms formatted string.
 	//! @param angle input angle in radian
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	//! @param decimal output decimal second value
-    QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
+	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
@@ -118,13 +118,13 @@ namespace StelUtils
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
 	//! @param v the resulting 3D unit vector
-    void spheToRect(const double lng, const double lat, Vec3d& v);
+	void spheToRect(const double lng, const double lat, Vec3d& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
 	//! @param v the resulting 3D unti vector
-    void spheToRect(const float lng, const float lat, Vec3f& v);
+	void spheToRect(const float lng, const float lat, Vec3f& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng double* to store longitude in radian
@@ -172,24 +172,24 @@ namespace StelUtils
 	double getDecAngle(const QString& str);
 
 	//! Check if a number is a power of 2.
-    bool isPowerOfTwo(const int value);
+	bool isPowerOfTwo(const int value);
 
 	//! Return the first power of two greater or equal to the given value.
-    int smallestPowerOfTwoGreaterOrEqualTo(const int value);
+	int smallestPowerOfTwoGreaterOrEqualTo(const int value);
 
 	//! Return the smallest size with power-of two dimensions at least as large as given size.
 	QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base);
 
 	//! Return the inverse sinus hyperbolic of z.
-    double asinh(const double z);
+	double asinh(const double z);
 
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
 	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
-    void getDateFromJulianDay(const double julianDay, int *year, int *month, int *day);
+	void getDateFromJulianDay(const double julianDay, int *year, int *month, int *day);
 
 	//! Make from julianDay an hour, minute, second.
-    void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second);
+	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second);
 
 	//! Parse an ISO8601 date string.
 	//! Also handles negative and distant years.
@@ -197,7 +197,7 @@ namespace StelUtils
 	
 	//! Format the given Julian Day in (UTC) ISO8601 date string.
 	//! Also handles negative and distant years.
-    QString julianDayToISO8601String(const double jd);
+	QString julianDayToISO8601String(const double jd);
 
 	//! Return the Julian Date matching the ISO8601 date string.
 	//! Also handles negative and distant years.
@@ -207,12 +207,12 @@ namespace StelUtils
 	//! (see QDateTime::toString()). Uses the @b system locale, not
 	//! the one set in Stellarium.
 	//! @return QString representing the formatted date
-    QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt);
+	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt);
 
 	//! Format the date and day-of-week per the @b system locale's
 	//! QLocale::ShortFormat.
 	//! @return QString representing the formatted date
-    QString localeDateString(const int year, const int month, const int day, const int dayOfWeek);
+	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek);
 
 	//! Get the current Julian Date from system time.
 	//! @return the current Julian Date
@@ -224,10 +224,10 @@ namespace StelUtils
 	double qTimeToJDFraction(const QTime& time);
 
 	//! Convert a fraction of a Julian Day to a QTime
-    QTime jdFractionToQTime(const double jd);
+	QTime jdFractionToQTime(const double jd);
 
 	//! Return number of hours offset from GMT, using Qt functions.
-    float getGMTShiftFromQT(const double jd);
+	float getGMTShiftFromQT(const double jd);
 
 	//! Convert a QT QDateTime class to julian day.
 	//! @param dateTime the UTC QDateTime to convert
@@ -239,11 +239,11 @@ namespace StelUtils
 	//! @result the matching UTC QDateTime
 	QDateTime jdToQDateTime(const double& jd);
 
-    bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s);
+	bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s);
 
-    int numberOfDaysInMonthInYear(const int month, const int year);
-    bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
-								   int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
+	int numberOfDaysInMonthInYear(const int month, const int year);
+	bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
+					int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
 
 	//! Output a QVariantMap to qDebug().  Formats like a tree where there are nested objects.
 	void debugQVariantMap(const QVariant& m, const QString& indent="", const QString& key="");
@@ -251,13 +251,13 @@ namespace StelUtils
 
 	/// Compute acos(x)
 	//! The taylor serie is not accurate around x=1 and x=-1
-    inline float fastAcos(const float x)
+	inline float fastAcos(const float x)
 	{
 		return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
 	}
 
 	//! Compute exp(x) for small exponents x
-    inline float fastExp(const float x)
+	inline float fastExp(const float x)
 	{
 		return (x>=0)?
 			(1.f + x*(1.f+ x/2.f*(1.f+ x/3.f*(1.f+x/4.f*(1.f+x/5.f))))):
@@ -277,9 +277,9 @@ namespace StelUtils
 	}
 
 	//! Calculate and getting sidereal period in days from semi-major axis (in AU)
-    double calculateSiderealPeriod(const double SemiMajorAxis);
+	double calculateSiderealPeriod(const double SemiMajorAxis);
 
-    QString hoursToHmsStr(const double hours);
+	QString hoursToHmsStr(const double hours);
 
 	//! Get the number of seconds since program start.
 	//!
@@ -296,169 +296,169 @@ namespace StelUtils
 	//! Implementation algorithm by Espenak & Meeus (2006) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByEspenakMeeus(const double jDay);
+	double getDeltaTByEspenakMeeus(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Schoch (1931) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTBySchoch(const double jDay);
+	double getDeltaTBySchoch(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Clemence (1948) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByClemence(const double jDay);
+	double getDeltaTByClemence(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by IAU (1952) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByIAU(const double jDay);
+	double getDeltaTByIAU(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Astronomical Ephemeris (1960) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByAstronomicalEphemeris(const double jDay);
+	double getDeltaTByAstronomicalEphemeris(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByTuckermanGoldstine(const double jDay);
+	double getDeltaTByTuckermanGoldstine(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Muller & Stephenson (1975) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByMullerStephenson(const double jDay);
+	double getDeltaTByMullerStephenson(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Stephenson (1978) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByStephenson1978(const double jDay);
+	double getDeltaTByStephenson1978(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Stephenson (1997) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByStephenson1997(const double jDay);
+	double getDeltaTByStephenson1997(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Schmadel & Zech (1979) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTBySchmadelZech1979(const double jDay);
+	double getDeltaTBySchmadelZech1979(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Morrison & Stephenson (1982) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByMorrisonStephenson1982(const double jDay);
+	double getDeltaTByMorrisonStephenson1982(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Stephenson & Morrison (1984) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByStephensonMorrison1984(const double jDay);
+	double getDeltaTByStephensonMorrison1984(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Stephenson & Morrison (1995) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByStephensonMorrison1995(const double jDay);
+	double getDeltaTByStephensonMorrison1995(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Stephenson & Houlden (1986) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByStephensonHoulden(const double jDay);
+	double getDeltaTByStephensonHoulden(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Espenak (1987, 1989) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByEspenak(const double jDay);
+	double getDeltaTByEspenak(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Borkowski (1988) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByBorkowski(const double jDay);
+	double getDeltaTByBorkowski(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Schmadel & Zech (1988) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTBySchmadelZech1988(const double jDay);
+	double getDeltaTBySchmadelZech1988(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByChaprontTouze(const double jDay);
+	double getDeltaTByChaprontTouze(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByChaprontFrancou(const double jDay);
+	double getDeltaTByChaprontFrancou(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by JPL Horizons for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByJPLHorizons(const double jDay);
-	
+	double getDeltaTByJPLHorizons(const double jDay);
+
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Morrison & Stephenson (2004, 2005) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByMorrisonStephenson2004(const double jDay);
+	double getDeltaTByMorrisonStephenson2004(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Reijs (2006) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByReijs(const double jDay);
+	double getDeltaTByReijs(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Meeus (1998) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByMeeus(const double jDay);
+	double getDeltaTByMeeus(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Meeus & Simons (2000) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByMeeusSimons(const double jDay);
+	double getDeltaTByMeeusSimons(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Montenbruck & Pfleger (2000) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByMontenbruckPfleger(const double jDay);
+	double getDeltaTByMontenbruckPfleger(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation algorithm by Reingold & Dershowitz (2001, 2002) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByReingoldDershowitz(const double jDay);
+	double getDeltaTByReingoldDershowitz(const double jDay);
 
 	//! Get Secular Acceleration estimation for a given year.
 	//! @param jDay the JD
 	//! @param ndot value n-dot which use in the algorithm
 	//! @return SecularAcceleration in seconds
 	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B have value -23.8946 "/cy/cy
-    double getMoonSecularAcceleration(const double jDay, const double ndot);
+	double getMoonSecularAcceleration(const double jDay, const double ndot);
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD
 	//! @return sigma in seconds
-    double getDeltaTStandardError(const double jDay);
+	double getDeltaTStandardError(const double jDay);
 }
 
 #endif // _STELUTILS_HPP_
