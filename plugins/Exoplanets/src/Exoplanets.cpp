@@ -348,6 +348,31 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 		return result;
 }
 
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (!flagShowExoplanets)
+		return result;
+
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+
+	foreach(const ExoplanetP& eps, ep)
+	{
+		if (eps->getEnglishName().toUpper().left(objw.length()) == objw)
+		{
+				result << eps->getEnglishName().toUpper();
+		}
+	}
+
+	result.sort();
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+
+		return result;
+}
+
+
 QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

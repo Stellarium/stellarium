@@ -642,3 +642,62 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	return result;
 }
 
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
+QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+
+	// Search by messier objects number (possible formats are "M31" or "M 31")
+	if (objw.size()>=1 && objw[0]=='M')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->M_nb==0) continue;
+			QString constw = QString("M%1").arg(n->M_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constw;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("M %1").arg(n->M_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
+	foreach (const NebulaP& n, nebArray)
+	{
+		if (n->NGC_nb==0) continue;
+		QString constw = QString("NGC%1").arg(n->NGC_nb);
+		QString constws = constw.mid(0, objw.size());
+		if (constws==objw)
+		{
+			result << constw;
+			continue;
+		}
+		constw = QString("NGC %1").arg(n->NGC_nb);
+		constws = constw.mid(0, objw.size());
+		if (constws==objw)
+			result << constw;
+	}
+
+	// Search by common names
+	foreach (const NebulaP& n, nebArray)
+	{
+		QString constw = n->englishName.mid(0, objw.size()).toUpper();
+		if (constw==objw)
+			result << n->englishName;
+	}
+
+	result.sort();
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+
+	return result;
+}
+
