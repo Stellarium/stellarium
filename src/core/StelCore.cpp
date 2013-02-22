@@ -1434,7 +1434,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		// find year of publication of AFFC
 		break;
 	case AstronomicalEphemeris:
-		description = q_("This is a slightly modified version of the IAU (1952) formula which was adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar Eclipses</em> by Mucke&Meeus (1983).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+		description = q_("This is a slightly modified version of the IAU (1952) formula which was adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar Eclipses</em> by Mucke & Meeus (1983).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		// TODO: expand the sentence: ... adopted ... from 19xx-19yy?
 		break;
 	case TuckermanGoldstine:
@@ -1482,7 +1482,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		// GZ: Did those programs use this very form or Meeus's variant?
 		break;
 	case Meeus:
-		description = q_("From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely used. Table for 1620..2000, and includes a variant of Chapront&Chapront-Touze&Francou (1997) for dates outside 1620..2000.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+		description = q_("From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely used. Table for 1620..2000, and includes a variant of Chapront, Chapront-Touze & Francou (1997) for dates outside 1620..2000.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case JPLHorizons:
 		description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory use this formula in their interactive website %1JPL Horizons%2.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
