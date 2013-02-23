@@ -1220,11 +1220,10 @@ double getDeltaTByEspenakMeeus(const double jDay)
 // Implementation algorithm by Schoch (1931) for DeltaT computation
 double getDeltaTBySchoch(const double jDay)
 {
-	// On the system of astronomical constants.
-	// Clemence, G. M.
-	// Astronomical Journal, Vol. 53, p. 169
-	// 1948AJ.....53..169C [http://adsabs.harvard.edu/abs/1948AJ.....53..169C]
 
+	// Schoch, C. (1931). Die sekulare Accelaration des Mondes und der Sonne.
+	// Astronomische Abhandlungen, Ergдnzungshefte zu den Astronomischen Nachrichten,
+	// Band 8, B2. Kiel.
 	double u=(jDay-2378496.0)/36525.0; // (1800-jan-0.5)
 
 	return -36.28 + 36.28*std::pow(u,2);
@@ -1281,6 +1280,13 @@ double getDeltaTByTuckermanGoldstine(const double jDay)
 // Implementation algorithm by Muller & Stephenson (1975) for DeltaT computation
 double getDeltaTByMullerStephenson(const double jDay)
 {
+	// The accelerations of the earth and moon from early astronomical observations
+	// Muller, P. M.; Stephenson, F. R.
+	// Growth rhythms and the history of the earth's rotation; Proceedings of the Interdisciplinary
+	// Winter Conference on Biological Clocks and Changes in the Earth's Rotation: Geophysical and
+	// Astronomical Consequences, Newcastle-upon-Tyne, England, January 8-10, 1974. (A76-18126 06-46)
+	// London, Wiley-Interscience, 1975, p. 459-533; Discussion, p. 534.
+	// 1975grhe.conf..459M [http://adsabs.harvard.edu/abs/1975grhe.conf..459M]
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
 
 	return 66.0+120.38*u+45.78*std::pow(u,2);
@@ -1289,6 +1295,11 @@ double getDeltaTByMullerStephenson(const double jDay)
 // Implementation algorithm by Stephenson (1978) for DeltaT computation
 double getDeltaTByStephenson1978(const double jDay)
 {
+	// Pre-Telescopic Astronomical Observations
+	// Stephenson, F. R.
+	// Tidal Friction and the Earth's Rotation, Proceedings of a Workshop, held in Bielefeld,
+	// September 26-30, 1977, Edited by P. Brosche, and J. Sundermann. Berlin: Springer-Verlag, 1978, p.5
+	// 1978tfer.conf....5S [http://adsabs.harvard.edu/abs/1978tfer.conf....5S]
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
 
 	return 20.0+114.0*u+38.30*std::pow(u,2);
@@ -1297,6 +1308,8 @@ double getDeltaTByStephenson1978(const double jDay)
 // Implementation algorithm by Stephenson (1997) for DeltaT computation
 double getDeltaTByStephenson1997(const double jDay)
 {
+	// Book "Historical Eclipses and Earth's Rotation" by F. R. Stephenson (1997)
+	// http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
 	double u=(jDay-2354755.0)/36525.0; // (1735-jan-0.5)
 
 	return -20.0 + 35.0*std::pow(u,2);
@@ -1329,6 +1342,10 @@ double getDeltaTByMorrisonStephenson1982(const double jDay)
 // Implementation algorithm by Stephenson & Morrison (1984) for DeltaT computation
 double getDeltaTByStephensonMorrison1984(const double jDay)
 {
+	// Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980
+	// Stephenson, F. R.; Morrison, L. V.
+	// Philosophical Transactions, Series A (ISSN 0080-4614), vol. 313, no. 1524, Nov. 27, 1984, p. 47-70.
+	// 1984RSPTA.313...47S [http://adsabs.harvard.edu/abs/1984RSPTA.313...47S]
 	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
@@ -1347,6 +1364,10 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 // Implementation algorithm by Stephenson & Morrison (1995) for DeltaT computation
 double getDeltaTByStephensonMorrison1995(const double jDay)
 {
+	// Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990
+	// Stephenson, F. R.; Morrison, L. V.
+	// Philosophical Transactions: Physical Sciences and Engineering, Volume 351, Issue 1695, pp. 165-202
+	// 1995RSPTA.351..165S [http://adsabs.harvard.edu/abs/1995RSPTA.351..165S]
 	double u=(jDay-2385800.0)/36525.0; // (1820-jan-0.5)
 
 	return -20.0 + 31.0*std::pow(u,2);
@@ -1489,6 +1510,7 @@ double getDeltaTByMorrisonStephenson2004(const double jDay)
 }
 
 // Implementation algorithm by Reijs (2006) for DeltaT computation
+// http://www.iol.ie/~geniet/eng/DeltaTeval.htm
 double getDeltaTByReijs(const double jDay)
 {
 	int year, month, day;
@@ -1543,6 +1565,7 @@ double getDeltaTByMeeus(const double jDay)
 // Implementation algorithm by Montenbruck & Pfleger (2000) for DeltaT computation
 double getDeltaTByMontenbruckPfleger(const double jDay)
 {
+	// Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4nd ed., 2000)
 	int year, month, day;	
 	double u;
 	double deltaT = 0.;
@@ -1651,6 +1674,7 @@ double getDeltaTByMeeusSimons(const double jDay)
 // Implementation algorithm by Reingold & Dershowitz (2001, 2002) for DeltaT computation
 double getDeltaTByReingoldDershowitz(const double jDay)
 {
+	// Book "Calendrical Calculations" by E. M. Reingold & N. Dershowitz (2nd ed., 2001)
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
