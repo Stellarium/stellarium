@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-22 10:38+0700\n"
-"PO-Revision-Date: 2013-02-20 18:29+0000\n"
+"PO-Revision-Date: 2013-02-22 05:06+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-22 04:50+0000\n"
+"X-Launchpad-Export-Date: 2013-02-23 04:55+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -270,6 +270,11 @@ msgid ""
 "in his article <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Цю формулу було отримано C. Schoch у 1931 році. Її було використано G. "
+"Henriksson у статті <em>Einstein's Theory of Relativity Confirmed by Ancient "
+"Solar Eclipses</em> (%1) (<em>Теорію відносності Айнштайна підтверджено на "
+"основі даних про сонячні затемнення, відомих з історії</em>). Докладніші "
+"відомості можна знайти %2тут%3."
 
 #: src/core/StelCore.cpp:1430
 #, qt-format
@@ -277,6 +282,9 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Це емпіричне рівняння було опубліковано G. M. Clemence у статті <em>On the "
+"system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
+"сталих</em>)."
 
 #: src/core/StelCore.cpp:1433
 #, qt-format
@@ -286,6 +294,11 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Цю формулу засновано на дослідженні даних спостережень Сонця, Місяця і "
+"планет після 1650 року виконаних Spencer Jones (%1) і використаних Jean "
+"Meeus у його праці <em>Astronomical Formulae for Calculators</em> "
+"(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
+"у комп’ютерній програмі SunTracker Pro."
 
 #: src/core/StelCore.cpp:1437
 msgid ""
@@ -293,6 +306,10 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Це трохи видозмінена версія формули IAU (1952), яку було реалізовано у "
+"<em>Astronomical Ephemeris</em> (<em>Астрономічних таблицях</em>) (1983) та "
+"у книзі <em>Canon of Solar Eclipses</em> (<em>Закони сонячних "
+"затемнень</em>), авторами якої є Mucke та Meeus (1983)."
 
 #: src/core/StelCore.cpp:1441
 msgid ""
@@ -313,6 +330,10 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Це рівняння було опубліковано P. M. Muller і F. R. Stephenson у статті "
+"<em>The accelerations of the earth and moon from early astronomical "
+"observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх "
+"астрономічних спостережень</em>)."
 
 #: src/core/StelCore.cpp:1448
 #, qt-format
@@ -320,6 +341,9 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Це рівняння було опубліковано F. R. Stephenson у статті <em>Pre-Telescopic "
+"Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи "
+"телескопів</em>)."
 
 #: src/core/StelCore.cpp:1451
 #, qt-format
@@ -328,6 +352,10 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1)."
 msgstr ""
+"Це рівняння було опубліковано L. D. Schmadel і G. Zech у статті "
+"<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
+"period 1800-1975</em> (%1) (<em>Поліномні наближення для поправки delta T "
+"E.T.-U.T. за період 1800-1975</em>)."
 
 #: src/core/StelCore.cpp:1454
 msgid ""
@@ -346,6 +374,10 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"Цю формулу було опубліковано F. R. Stephenson і L. V. Morrison у статті "
+"<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
+"1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
+"н.е. до 1980 р. н.е.</em>)."
 
 #: src/core/StelCore.cpp:1460
 msgid "This algorithm is used in the PC planetarium program Guide 7."
@@ -377,6 +409,8 @@ msgid ""
 "<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1)."
 msgstr ""
+"Це рівняння було опубліковано L D Schmadel і G. Zech у статті <em>Empirical "
+"Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1)."
 
 #: src/core/StelCore.cpp:1472
 msgid ""
@@ -395,6 +429,10 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"Це рівняння було опубліковано F. R. Stephenson і L. V. Morrison у статті "
+"<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
+"(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1990 "
+"р. н.е.</em>)."
 
 #: src/core/StelCore.cpp:1478
 #, qt-format
@@ -402,6 +440,9 @@ msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
+"F. R. Stephenson опублікував цю формулу у книзі <em>Historical Eclipses and "
+"Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
+"Землі</em>)."
 
 #: src/core/StelCore.cpp:1481
 msgid ""
@@ -411,6 +452,12 @@ msgid ""
 "J. Meeus in the second edition of his <em>Astronomical Algorithms</em> "
 "(1998)."
 msgstr ""
+"Цю формулу також використано у програмі Emapwin, автором якої є Shinobu "
+"Takesako, та у інтерактивному планетарії Sky View Cafe, автором якого є "
+"Kerry Shetline, для показу обставин сонячних затемнень від 3000 р. до н.е. "
+"до 3000 р. н.е.. Варіант формули наводить і J. Meeus у другому виданні своєї "
+"книги <em>Astronomical Algorithms</em> (1998) (<em>Астрономічні "
+"алгоритми</em>)."
 
 #: src/core/StelCore.cpp:1485
 msgid ""
@@ -418,6 +465,9 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"З книги J. Meeus, <em>Astronomical Algorithms</em> (друге видання, 1998). "
+"Широко використовується. Таблиця для 1620–2000 років. Включено варіант "
+"Chapront, Chapront-Touze та Francou (1997) для дат поза діапазоном 1620–2000."
 
 #: src/core/StelCore.cpp:1488
 #, qt-format
@@ -425,6 +475,9 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"Цю формулу використано Групою динаміки сонячної системи лабораторії "
+"реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
+"Horizons%2."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -432,6 +485,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
+"approximations to Delta T, 1620-2000 AD</em> (%1)."
 
 #: src/core/StelCore.cpp:1494
 msgid ""
@@ -498,6 +553,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
+"користувачем."
 
 #: src/core/StelCore.cpp:1512 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -505,7 +562,7 @@ msgstr "Помилка"
 
 #: src/core/StelCore.cpp:1609
 msgid "(estimated)"
-msgstr ""
+msgstr "(оцінка)"
 
 #: src/core/StelCore.cpp:1622
 msgid "with a typical 1-second accuracy"
@@ -8194,164 +8251,3 @@ msgstr "Висота сонця у сутінках: 0°"
 
 #~ msgid "Edit Alternative Shortcut"
 #~ msgstr "Змінити альтернативне скорочення"
-
-#, qt-format
-#~ msgid ""
-#~ "This formula was obtained by C. Schoch in 1931 year and was used by G. "
-#~ "Henriksson in article <em>Einstein's Theory of Relativity Confirmed by "
-#~ "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
-#~ msgstr ""
-#~ "Цю формулу було отримано C. Schoch у 1931 році. Її було використано G. "
-#~ "Henriksson у статті <em>Einstein's Theory of Relativity Confirmed by Ancient "
-#~ "Solar Eclipses</em> (%1) (<em>Теорію відносності Айнштайна підтверджено на "
-#~ "основі даних про сонячні затемнення, відомих з історії</em>). Докладніші "
-#~ "відомості можна знайти %2тут%3."
-
-#, qt-format
-#~ msgid ""
-#~ "This empirical equation was published by G. M. Clemence in article <em>On "
-#~ "the system of astronomical constants</em> (%1)."
-#~ msgstr ""
-#~ "Це емпіричне рівняння було опубліковано G. M. Clemence у статті <em>On the "
-#~ "system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
-#~ "сталих</em>)."
-
-#, qt-format
-#~ msgid ""
-#~ "This formula is based on a study of the post-1650 observations of the Sun, "
-#~ "the Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his "
-#~ "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
-#~ "PC program SunTracker Pro."
-#~ msgstr ""
-#~ "Цю формулу засновано на дослідженні даних спостережень Сонця, Місяця і "
-#~ "планет після 1650 року виконаних Spencer Jones (%1) і використаних Jean "
-#~ "Meeus у його праці <em>Astronomical Formulae for Calculators</em> "
-#~ "(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
-#~ "у комп’ютерній програмі SunTracker Pro."
-
-#~ msgid ""
-#~ "This is a slightly modified version of the IAU (1952) formula which was "
-#~ "adopted in the <em>Astronomical Ephemeris</em>."
-#~ msgstr ""
-#~ "Це трохи видозмінена версія формули IAU (1952), яку було реалізовано у "
-#~ "<em>Astronomical Ephemeris</em> (<em>Астрономічних таблицях</em>)."
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by P. M. Muller and F. R. Stephenson in article "
-#~ "<em>The accelerations of the earth and moon from early astronomical "
-#~ "observations</em> (%1)."
-#~ msgstr ""
-#~ "Це рівняння було опубліковано P. M. Muller і F. R. Stephenson у статті "
-#~ "<em>The accelerations of the earth and moon from early astronomical "
-#~ "observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх "
-#~ "астрономічних спостережень</em>)."
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by F. R. Stephenson in article <em>Pre-"
-#~ "Telescopic Astronomical Observations</em> (%1)."
-#~ msgstr ""
-#~ "Це рівняння було опубліковано F. R. Stephenson у статті <em>Pre-Telescopic "
-#~ "Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи "
-#~ "телескопів</em>)."
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by L. D. Schmadel and G. Zech in article "
-#~ "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
-#~ "period 1800-1975</em> (%1)."
-#~ msgstr ""
-#~ "Це рівняння було опубліковано L. D. Schmadel і G. Zech у статті "
-#~ "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
-#~ "period 1800-1975</em> (%1) (<em>Поліномні наближення для поправки delta T "
-#~ "E.T.-U.T. за період 1800-1975</em>)."
-
-#, qt-format
-#~ msgid ""
-#~ "This formula was published by F. R. Stephenson and L. V. Morrison in article "
-#~ "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
-#~ "1980</em> (%1)."
-#~ msgstr ""
-#~ "Цю формулу було опубліковано F. R. Stephenson і L. V. Morrison у статті "
-#~ "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
-#~ "1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
-#~ "н.е. до 1980 р. н.е.</em>)."
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by L. D. Schmadel and G. Zech in article "
-#~ "<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
-#~ "1988</em> (%1)."
-#~ msgstr ""
-#~ "Це рівняння було опубліковано L D Schmadel і G. Zech у статті <em>Empirical "
-#~ "Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1)."
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by F. R. Stephenson and L. V. Morrison in "
-#~ "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
-#~ "1990</em> (%1)."
-#~ msgstr ""
-#~ "Це рівняння було опубліковано F. R. Stephenson і L. V. Morrison у статті "
-#~ "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
-#~ "(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1980 "
-#~ "р. н.е.</em>)."
-
-#, qt-format
-#~ msgid ""
-#~ "F. R. Stephenson published this formula in their book <em>Historical "
-#~ "Eclipses and Earth's Rotation</em> (%1)."
-#~ msgstr ""
-#~ "F. R. Stephenson опублікував цю формулу у книзі <em>Historical Eclipses and "
-#~ "Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
-#~ "Землі</em>)."
-
-#~ msgid ""
-#~ "This formula is recommended by J. Meeus in the second edition of his "
-#~ "<em>Astronomical Algorithms</em> (1998) and used in Shinobu Takesako's "
-#~ "EmapWin program for plotting the circumstances of solar eclipses from 3000 "
-#~ "B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View "
-#~ "Cafe."
-#~ msgstr ""
-#~ "Цією формулою рекомендував користуватися J. Meeus у другому виданні книги "
-#~ "<em>Astronomical Algorithms</em> (<em>Астрономічні алгоритми</em>, 1998). Її "
-#~ "використано у програмі EmapWin? автором якої є Shinobu Takesako, для показу "
-#~ "обставин сонячних затемнень від 3000 р. до н.е. до 3000 р. н.е. Також "
-#~ "формулу використано у інтерактивному планетарії Sky View Cafe (автор — Kerry "
-#~ "Shetline)."
-
-#~ msgid ""
-#~ "J. Meeus, in the second edition of his <em>Astronomical Algorithms</em> "
-#~ "(1998), gives a 12th-order formula."
-#~ msgstr ""
-#~ "J. Meeus у другому виданні книги <em>Astronomical Algorithms</em> (1998) "
-#~ "наводить формулу 12 порядку точності."
-
-#, qt-format
-#~ msgid ""
-#~ "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
-#~ "used this formula in their interactive website %1JPL Horizons%2."
-#~ msgstr ""
-#~ "Цю формулу використано Групою динаміки сонячної системи лабораторії "
-#~ "реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
-#~ "Horizons%2."
-
-#, qt-format
-#~ msgid ""
-#~ "This polinom was published by J. Meeus and L. Simons in article "
-#~ "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
-#~ msgstr ""
-#~ "Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
-#~ "approximations to Delta T, 1620-2000 AD</em> (%1)."
-
-#, qt-format
-#~ msgid ""
-#~ "This is quadratic formula for calculation of %1T with coefficients defined "
-#~ "by user."
-#~ msgstr ""
-#~ "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
-#~ "користувачем."
-
-#~ msgid "with a maximum error of 2.3 seconds"
-#~ msgstr "з максимальною помилкою у 2,3 секунди"
