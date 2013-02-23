@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-22 10:38+0700\n"
-"PO-Revision-Date: 2013-01-10 12:50+0000\n"
-"Last-Translator: Emin Mastizada <emin25@ovi.com>\n"
+"PO-Revision-Date: 2013-02-22 07:51+0000\n"
+"Last-Translator: Nadir Teymurov <nadir_teymurov@mail.ru>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-22 04:41+0000\n"
+"X-Launchpad-Export-Date: 2013-02-23 04:45+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -1573,27 +1573,27 @@ msgstr "Q"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "planet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "komet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "asteroid"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "ay"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -3618,7 +3618,7 @@ msgstr "Nisbi böyüdülmə:"
 
 #: src/ui_viewDialog.h:1153
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Süd Yolun parlaqlığı"
 
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -3815,7 +3815,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:985
 msgid "The width of your view when Stellarium starts"
-msgstr ""
+msgstr "Stellarium başlayan zaman görünüş sahəsi"
 
 #: src/ui_configurationDialog.h:988
 msgid "The direction you're looking when Stellarium starts"
@@ -3983,7 +3983,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1061
 msgid "seconds"
-msgstr ""
+msgstr "saniyələr"
 
 #: src/ui_configurationDialog.h:1063
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
@@ -4022,7 +4022,7 @@ msgstr "Sistem vaxtı:"
 
 #: src/ui_configurationDialog.h:1077
 msgid "Time correction"
-msgstr ""
+msgstr "Saat düzəlişi"
 
 #: src/ui_configurationDialog.h:1080
 msgid "Edit equation"
@@ -5427,7 +5427,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Discard"
-msgstr ""
+msgstr "Rədd etmək"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:77
 msgid "Telescope Control"
@@ -5437,7 +5437,7 @@ msgstr "Teleskopun idarə etməsi"
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
-msgstr ""
+msgstr "Bu plaqin Stellariumdan teleskopa komandalar yollamaq imkan verir"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 #, qt-format
@@ -6299,7 +6299,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Select the type"
-msgstr ""
+msgstr "Tipi seç"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Asteroids"
@@ -6311,7 +6311,7 @@ msgstr "Kometlər"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
-msgstr ""
+msgstr "Mənbəni seç"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
@@ -6344,11 +6344,11 @@ msgstr "Orbital elementləri al"
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Online search"
-msgstr ""
+msgstr "Online axtarış"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Objects found"
-msgstr ""
+msgstr "Obyekt tapıldı"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid ""
@@ -6373,7 +6373,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add objects"
-msgstr ""
+msgstr "Obyektləri əlavə et"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:294
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
