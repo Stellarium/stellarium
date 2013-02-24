@@ -1354,12 +1354,6 @@ double StelCore::getDeltaT(double jDay) const
 		ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
 		DeltaT = StelUtils::getDeltaTByMontenbruckPfleger(jDay);
 		break;
-	case ReingoldDershowitz:
-		// Reingold & Dershowitz (2001, 2002) algorithm for DeltaT
-		// FIXME: n.dot
-		ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
-		DeltaT = StelUtils::getDeltaTByReingoldDershowitz(jDay);
-		break;
 	case MorrisonStephenson2004:
 		// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		ndot = -26.0; // n.dot = -26.0 "/cy/cy
@@ -1492,9 +1486,6 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		break;
 	case MontenbruckPfleger:
 		description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
-		break;
-	case ReingoldDershowitz:
-		description = q_("E. M. Reingold & N. Dershowitz adopt the approximate formula in the second edition of <em>Calendrical Calculations</em> (2001) and in their <em>Calendrical Tabulations</em> (2002).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MorrisonStephenson2004:
 		description = q_("This equation was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));

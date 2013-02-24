@@ -442,12 +442,6 @@ namespace StelUtils
 	//! @return Delta-T in seconds
 	double getDeltaTByMontenbruckPfleger(const double jDay);
 
-	//! Get Delta-T estimation for a given date.
-	//! Implementation algorithm by Reingold & Dershowitz (2001, 2002) for DeltaT computation
-	//! @param jDay the date and time expressed as a julian day
-	//! @return Delta-T in seconds
-	double getDeltaTByReingoldDershowitz(const double jDay);
-
 	//! Get Secular Acceleration estimation for a given year.
 	//! @param jDay the JD
 	//! @param ndot value n-dot which use in the algorithm

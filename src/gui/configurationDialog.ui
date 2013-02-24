@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>481</width>
-    <height>445</height>
+    <width>483</width>
+    <height>446</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -836,6 +836,12 @@
                  <widget class="QTextBrowser" name="deltaTAlgorithmDescription">
                   <property name="autoFillBackground">
                    <bool>true</bool>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOff</enum>
                   </property>
                   <property name="openExternalLinks">
                    <bool>true</bool>

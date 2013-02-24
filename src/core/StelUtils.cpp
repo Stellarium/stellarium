@@ -1671,42 +1671,6 @@ double getDeltaTByMeeusSimons(const double jDay)
 	return deltaT;
 }
 
-// Implementation algorithm by Reingold & Dershowitz (2001, 2002) for DeltaT computation
-double getDeltaTByReingoldDershowitz(const double jDay)
-{
-	// Book "Calendrical Calculations" by E. M. Reingold & N. Dershowitz (2nd ed., 2001)
-	int year, month, day;	
-	getDateFromJulianDay(jDay, &year, &month, &day);
-
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-	double u = (yeardec-1810)/100;
-	double deltaT = -15.0 + 32.5*std::pow(u,2);
-
-	if (1620 <= year and year < 1800)
-	{
-		u = (yeardec-1600)/100;
-		deltaT = +196.58333 - 406.75*u + 219.167*std::pow(u,2);
-	}
-	if (1800 <= year and year < 1900)
-	{
-		u = (yeardec-1900)/100;
-		deltaT = (-0.000009 + 0.003844*u + 0.083563*std::pow(u,2) + 0.865736*std::pow(u,3) + 4.867575*std::pow(u,4) + 15.845535*std::pow(u,5)
-			 + 31.332267*std::pow(u,6) + 38.291999*std::pow(u,7) + 28.316289*std::pow(u,8) + 11.636204*std::pow(u,9) + 2.043794*std::pow(u,10))*86400;
-	}
-	if (1900 <= year and year < 1987)
-	{
-		u = (yeardec-1900)/100;
-		deltaT = (-0.00002 + 0.000297*u + 0.025184*std::pow(u,2) - 0.181133*std::pow(u,3) + 0.553040*std::pow(u,4) - 0.861938*std::pow(u,5) + 0.677066*std::pow(u,6) - 0.212591*std::pow(u,7))*86400;
-	}
-	if (1987 <= year and year < 2019)
-	{
-		u = (yeardec-1933)/100;
-		deltaT = 100.0*u;
-	}
-
-	return deltaT;
-}
-
 double getMoonSecularAcceleration(const double jDay, const double nd)
 {
 	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
