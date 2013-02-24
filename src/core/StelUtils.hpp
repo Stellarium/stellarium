@@ -463,14 +463,7 @@ namespace StelUtils
 	//! Implementation of algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds or 0 if year not in -391..1600
-	double getDeltaTByChaprontTouze(const double jDay);
-
-	// GZ: This one is included in Meeus1998, we don't need it as separate entry IMHO. (or maybe check with original?)
-	//! Get Delta-T estimation for a given date.
-	//! Implementation of algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
-	//! @param jDay the date and time expressed as a julian day
-	//! @return Delta-T in seconds or 0 if year not in 948..1600 or 2000..2100
-	double getDeltaTByChaprontFrancou(const double jDay);
+	double getDeltaTByChaprontTouze(const double jDay);	
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of the "historical" part of the algorithm by JPL Horizons for DeltaT computation.
@@ -499,10 +492,10 @@ namespace StelUtils
 	double getDeltaTByReijs(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of algorithm by Meeus (1998) for DeltaT computation
+	//! Implementation of algorithm by Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-	double getDeltaTByMeeus(const double jDay);
+	double getDeltaTByChaprontMeeus(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Meeus & Simons (2000) for DeltaT computation.

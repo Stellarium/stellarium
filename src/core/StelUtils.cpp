@@ -1404,29 +1404,6 @@ double getDeltaTByChaprontTouze(const double jDay)
 	return deltaT;
 }
 
-// Implementation of algorithm by Chapront, Chapront-Touze & Francou (1997) for DeltaT computation
-/* GZ: I think we can remove this: Apparently it was taken from Meeus 1998, but it makes more sense (in terms of "used source")
- *     to just have Meeus (1998) as selectable algorithm which covers a wide range without the gap 1600..2000, or making sure
- *     this is really from the original source.
- **/
-double getDeltaTByChaprontFrancou(const double jDay)
-{ // GZ asks for FIXME: WHAT IS GIVEN FOR 1600...2000?
-	int year, month, day;		
-	double deltaT = 0.;
-	getDateFromJulianDay(jDay, &year, &month, &day);
-
-	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
-
-	if (year <= 948)
-		deltaT = (44.1*u -497.0)*u + 2177.0;
-	if (948 < year and year <= 1600)
-		deltaT = (25.3*u +102.0)*u + 102.0;
-	if (2000 < year) // and year <= 2100) // GZ: The limit 2100 causes return of zero. Better just further extrapolate. (?)
-		deltaT = (25.3*u +102.0)*u + 102.0 + 0.37*(year - 2100);
-
-	return deltaT;
-}
-
 // Implementation of algorithm by JPL Horizons for DeltaT computation
 double getDeltaTByJPLHorizons(const double jDay)
 { // GZ: TODO: FIXME! It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
@@ -1465,7 +1442,7 @@ double getDeltaTByReijs(const double jDay)
 	return ((1.8 * std::pow(OffSetYear,2)/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
 }
 
-// Implementation of algorithm by Meeus (1998) for DeltaT computation
+// Implementation of algorithm by Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) for DeltaT computation
 // 191 values in tenths of second for interpolation table 1620..2000, every 2nd year.
 static const int MeeusDeltaTTable[] = { 1210, 1120, 1030, 950, 880, 820, 770, 720, 680, 630, 600, 560, 530, 510, 480,
 					460, 440, 420, 400, 380, 350, 330, 310, 290, 260, 240, 220, 200, 180, 160, 140, 120, 110, 100,  90,  80,  70,  70,  70,  70, // before 1700
@@ -1475,7 +1452,7 @@ static const int MeeusDeltaTTable[] = { 1210, 1120, 1030, 950, 880, 820, 770, 72
 					68,  71,  73,  75,  76,  77,  73,  62,  52,  27,  14, -12, -28, -38, -48, -55, -53, -56, -57, -59, -60, -63, -65, -62, -47, // before 1900
 					-28,  -1,  26,  53,  77, 104, 133, 160, 182, 202, 211, 224, 235, 238, 243, 240, 239, 239, 237, 240, 243, 253, 262, 273, 282, // before 1950
 					291, 300, 307, 314, 322, 331, 340, 350, 365, 383, 402, 422, 445, 465, 485, 505, 522, 538, 549, 558, 569, 583, 600, 616, 630, 650}; //closing: 2000
-double getDeltaTByMeeus(const double jDay)
+double getDeltaTByChaprontMeeus(const double jDay)
 {
 	int year, month, day;
 	double deltaT = 0.;

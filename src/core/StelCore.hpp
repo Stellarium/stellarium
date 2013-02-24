@@ -107,9 +107,8 @@ public:
 		SchmadelZech1988,               //!< Schmadel & Zech (1988) algorithm for DeltaT
 		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
 		StephensonMorrison1995,         //!< Stephenson & Morrison (1995) algorithm for DeltaT
-		Stephenson1997,                 //!< Stephenson (1997) algorithm for DeltaT
-		ChaprontFrancou,                //!< Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT. // GZ: Included in Meeus, we can leave it away here.
-		Meeus,                          //!< Meeus (1998) algorithm for DeltaT
+		Stephenson1997,                 //!< Stephenson (1997) algorithm for DeltaT		
+		ChaprontMeeus,                  //!< Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
 		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
 		MeeusSimons,                    //!< Meeus & Simons (2000) algorithm for DeltaT
 		MontenbruckPfleger,             //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
