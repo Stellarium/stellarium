@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-24 22:53+0700\n"
+"POT-Creation-Date: 2013-02-24 23:55+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,9 +258,9 @@ msgstr ""
 #: src/core/StelCore.cpp:1422
 #, qt-format
 msgid ""
-"This formula was obtained by C. Schoch in 1931 and was used by G. Henriksson "
-"in his article <em>Einstein's Theory of Relativity Confirmed by Ancient "
-"Solar Eclipses</em> (%1). See for more info %2here%3."
+"This historical formula was obtained by C. Schoch in 1931 and was used by G. "
+"Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
 #: src/core/StelCore.cpp:1425
@@ -312,9 +312,10 @@ msgstr ""
 #: src/core/StelCore.cpp:1446
 #, qt-format
 msgid ""
-"This equation was published by L. D. Schmadel and G. Zech in the article "
+"This 12th-order polynomial equation (outdated and superseded by Schmadel & "
+"Zech (1988)) was published by L. D. Schmadel and G. Zech in the article "
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
-"period 1800-1975</em> (%1)."
+"period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
 #: src/core/StelCore.cpp:1449
@@ -353,9 +354,10 @@ msgstr ""
 #: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
-"This equation was published by L. D. Schmadel and G. Zech in the article "
-"<em>Empirical Transformations from U.T. to E.T. for the Period 1800-1988</"
-"em> (%1)."
+"This 12th-order polynomial equation was published by L. D. Schmadel and G. "
+"Zech in the article <em>Empirical Transformations from U.T. to E.T. for the "
+"Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
+"Morrison (1984)."
 msgstr ""
 
 #: src/core/StelCore.cpp:1467
@@ -457,20 +459,30 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: src/core/StelCore.cpp:1600 src/core/StelCore.cpp:1605
+#: src/core/StelCore.cpp:1552
+msgid "with meaningless values outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:1578
+msgid ""
+"with a mean error of less than one second, max. error 1.9s, and meaningless "
+"values outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1610
+#: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1637
+#: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1639
+#: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
