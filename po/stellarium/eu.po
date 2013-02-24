@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-22 10:38+0700\n"
-"PO-Revision-Date: 2013-01-26 14:51+0000\n"
+"PO-Revision-Date: 2013-02-23 14:06+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-23 04:45+0000\n"
+"X-Launchpad-Export-Date: 2013-02-24 04:39+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -450,7 +450,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1506
 msgid "Used by default."
-msgstr ""
+msgstr "Modu lehenetsian erabilia."
 
 #: src/core/StelCore.cpp:1509
 #, qt-format
@@ -465,7 +465,7 @@ msgstr "Errorea"
 
 #: src/core/StelCore.cpp:1609
 msgid "(estimated)"
-msgstr ""
+msgstr "(estimatua)"
 
 #: src/core/StelCore.cpp:1622
 msgid "with a typical 1-second accuracy"
@@ -751,7 +751,7 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1116
 msgid "Algorithm of"
-msgstr ""
+msgstr "Noren algoritmoa:"
 
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Without correction"
@@ -759,15 +759,15 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1128
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1129
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1130
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Astronomical Ephemeris (1960)"
@@ -775,63 +775,63 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) eta Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller eta Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel eta Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison eta Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson eta Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson eta Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel eta Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze eta Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson eta Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Chapront, Chapront-Touze & Francou (1997)"
-msgstr ""
+msgstr "Chapront, Chapront-Touze eta Francou (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998)"
-msgstr ""
+msgstr "Meeus (1998)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "JPL Horizons"
@@ -839,27 +839,27 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus eta Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1149
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck eta Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Reingold & Dershowitz (2001, 2002)"
-msgstr ""
+msgstr "Reingold eta Dershowitz (2001, 2002)"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison eta Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak eta Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 #, qt-format
@@ -1004,7 +1004,7 @@ msgstr "Garatzailea: %1"
 #: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Integrazio jarraitua: %1"
 
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
@@ -3663,7 +3663,7 @@ msgstr "Eskala erlatiboa:"
 
 #: src/ui_viewDialog.h:1153
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Esne Bidearen distira:"
 
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -4648,7 +4648,7 @@ msgstr "Okularraren itxurazko ikuseremua"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Anizkoiztasuna: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Barlow: None"
@@ -4656,7 +4656,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Anizkoiztasuna: E/E"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of barlow lens"
@@ -4844,7 +4844,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Multiplicity"
-msgstr ""
+msgstr "Anizkoiztasuna"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1024
 msgid "Barlow lenses"
