@@ -1365,9 +1365,10 @@ double getDeltaTByEspenak(const double jDay)
 }
 
 // Implementation of algorithm by Borkowski (1988) for DeltaT computation
+// This is explicitly compatible with ELP2000-85.
 double getDeltaTByBorkowski(const double jDay)
 {
-	double u=(jDay-2314579.0)/36525.0; // (1625-jan-0.5)
+	double u=(jDay-2451545.0)/36525.0 + 3.75; // (2000-jan-1.5), deviation from 1625 as given in the paper.
 	return 40.0 + 35.0*u*u;
 }
 
@@ -1426,7 +1427,6 @@ double getDeltaTByMorrisonStephenson2004(const double jDay)
 }
 
 // Implementation of algorithm by Reijs (2006) for DeltaT computation
-// http://www.iol.ie/~geniet/eng/DeltaTeval.htm
 double getDeltaTByReijs(const double jDay)
 {
 	double OffSetYear = (2385800.0 - jDay)/365.25;

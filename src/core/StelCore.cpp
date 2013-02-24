@@ -1302,8 +1302,8 @@ double StelCore::getDeltaT(double jDay) const
 		DeltaT = StelUtils::getDeltaTByEspenak(jDay);
 		break;
 	case Borkowski:
-		// Borkowski (1988) algorithm for DeltaT
-		ndot = -23.859; // n.dot = -23.859 "/cy/cy
+		// Borkowski (1988) algorithm for DeltaT, relates to ELP2000-85!
+		ndot = -23.895; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByBorkowski(jDay);
 		break;
 	case SchmadelZech1988:
@@ -1622,7 +1622,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		break;
 	case Reijs:
 		start	= -1500; // -500; // GZ: It models long-term variability, so we should reflect this. Not sure on the begin, though.
-		finish	= 1620; // 1990; // GZ: Not applicable for telescopic era (pers.comm.)
+		finish	= 1100; // not 1620; // GZ: Not applicable for telescopic era, and better not after 1100 (pers.comm.)
 		break;
 	case EspenakMeeus: // the default, range stated in the Canon, p. 14.
 		start	= -1999;
