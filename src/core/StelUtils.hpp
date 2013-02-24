@@ -239,18 +239,18 @@ namespace StelUtils
 	//! @result the matching UTC QDateTime
 	QDateTime jdToQDateTime(const double& jd);
 
-    //! Compute Julian day number from calendar date.
-    //! Uses QDate functionality if possible, but also works for negative JD.
-    //! Dates before 1582-10-15 are in the Julian Calendar.
-    //! @param newjd pointer to JD
-    //! @param y Calendar year.
-    //! @param m month, 1=January ... 12=December
-    //! @param d day
-    //! @param h hour
-    //! @param min minute
-    //! @param s second
-    //! @result true in all conceivable cases.
-    bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s);
+	//! Compute Julian day number from calendar date.
+	//! Uses QDate functionality if possible, but also works for negative JD.
+	//! Dates before 1582-10-15 are in the Julian Calendar.
+	//! @param newjd pointer to JD
+	//! @param y Calendar year.
+	//! @param m month, 1=January ... 12=December
+	//! @param d day
+	//! @param h hour
+	//! @param min minute
+	//! @param s second
+	//! @result true in all conceivable cases.
+	bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s);
 
 	int numberOfDaysInMonthInYear(const int month, const int year);
 	bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
@@ -488,6 +488,7 @@ namespace StelUtils
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Reijs (2006) for DeltaT computation
+	//! Details: http://www.iol.ie/~geniet/eng/DeltaTeval.htm
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByReijs(const double jDay);
