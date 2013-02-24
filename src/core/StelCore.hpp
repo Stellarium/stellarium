@@ -112,8 +112,7 @@ public:
 		Meeus,                          //!< Meeus (1998) algorithm for DeltaT
 		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
 		MeeusSimons,                    //!< Meeus & Simons (2000) algorithm for DeltaT
-		MontenbruckPfleger,             //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
-		ReingoldDershowitz,             //!< Reingold & Dershowitz (2001, 2002) algorithm for DeltaT
+		MontenbruckPfleger,             //!< Montenbruck & Pfleger (2000) algorithm for DeltaT		
 		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
 		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT
