@@ -1485,7 +1485,10 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		description = q_("This polynome was published by J. Meeus and L. Simons in article <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2000JBAA..110..323M'>2000</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MontenbruckPfleger:
-		description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides the 3rd-order polynomials.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+        description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides 3rd-order polynomials for the recent past only.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+		break;
+	case ReingoldDershowitz:
+        description = q_("E. M. Reingold & N. Dershowitz present an approximation formula in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' Astronomical Algorithms (1991)").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MorrisonStephenson2004:
 		description = q_("This equation was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
@@ -1494,7 +1497,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case EspenakMeeus:
-		description = q_("This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web Site%2. This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
+        description = q_("This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
 		break;
 	case Custom:
 		description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
@@ -1602,27 +1605,34 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 	case JPLHorizons:
 		start	= -2999;
 		finish	= 1620;
-		break;
+        validRangeAppendix = q_("with zero values outside this range");
+        break;
 	case MeeusSimons:
 		start	= 1620;
 		finish	= 2000;
-		break;
+        validRangeAppendix = q_("with zero values outside this range");
+        break;
 	case MontenbruckPfleger:
 		start	= 1825;
-		finish	= 2000;
-		validRangeAppendix = q_("with a typical 1-second accuracy");
+        finish	= 2005;
+        validRangeAppendix = q_("with a typical 1-second accuracy and zero values outside this range");
+		break;
+	case ReingoldDershowitz:
+        // GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
+        start	= -400; //1620;
+        finish	= 2100; //2019;
 		break;
 	case MorrisonStephenson2004:
 		start	= -1000;
 		finish	= 2000;
 		break;
 	case Reijs:
-		start	= -500;
-		finish	= 1990;
+	  start	= -1500; // -500; // GZ: It models long-term variability, so we should reflect this. Not sure on the begin, though.
+		finish	= 1620; // 1990; // GZ: Not applicable for telescopic era (pers.comm.)
 		break;
-	case EspenakMeeus:
-		start	= -500;
-		finish	= 2150;
+    case EspenakMeeus: // the default, range stated in the Canon, p. 14.
+        start	= -1999;
+        finish	= 3000;
 		break;
 	case Custom:
 		// Valid range unknown

@@ -90,7 +90,7 @@ public:
 	//! Available DeltaT algorithms
 	enum DeltaTAlgorithm
 	{
-		WithoutCorrection,              //!< Without correction, DeltaT is disabled
+        WithoutCorrection,              //!< Without correction, DeltaT is Zero. Like Stellarium versions before 0.12.
 		Schoch,                         //!< Schoch (1931) algorithm for DeltaT
 		Clemence,                       //!< Clemence (1948) algorithm for DeltaT
 		IAU,                            //!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
@@ -108,14 +108,14 @@ public:
 		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
 		StephensonMorrison1995,         //!< Stephenson & Morrison (1995) algorithm for DeltaT
 		Stephenson1997,                 //!< Stephenson (1997) algorithm for DeltaT
-		ChaprontFrancou,                //!< Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT		
+        ChaprontFrancou,                //!< Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT. // GZ: Included in Meeus, we can leave it away here.
 		Meeus,                          //!< Meeus (1998) algorithm for DeltaT
 		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
 		MeeusSimons,                    //!< Meeus & Simons (2000) algorithm for DeltaT
 		MontenbruckPfleger,             //!< Montenbruck & Pfleger (2000) algorithm for DeltaT		
 		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
-		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT
+        EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
 		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 
