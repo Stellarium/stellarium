@@ -1296,13 +1296,9 @@ double getDeltaTByStephenson1997(const double jDay)
 double getDeltaTBySchmadelZech1979(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-	// GZ: FIXME: Make sure this expression is seconds, not days (???)
-	//double deltaT = -0.000029 + 0.001233*u + 0.003081*std::pow(u,2) - 0.013867*std::pow(u,3) - 0.020446*std::pow(u,4) + 0.076929*std::pow(u,5)
-	//		+ 0.075456*std::pow(u,6) - 0.200097*std::pow(u,7) - 0.159732*std::pow(u,8) + 0.247433*std::pow(u,9) + 0.185489*std::pow(u,10)
-	//		- 0.117389*std::pow(u,11) - 0.089491*std::pow(u,12);
 	double deltaT=(((((((((((-0.089491*u -0.117389)*u + 0.185489)*u + 0.247433)*u - 0.159732)*u - 0.200097)*u + 0.075456)*u
 			+ 0.076929)*u - 0.020446)*u - 0.013867)*u + 0.003081)*u + 0.001233)*u -0.000029;
-	return deltaT;
+	return deltaT * 86400.0;
 }
 
 // Implementation of algorithm by Morrison & Stephenson (1982) for DeltaT computation
@@ -1379,12 +1375,8 @@ double getDeltaTByBorkowski(const double jDay)
 double getDeltaTBySchmadelZech1988(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-	// GZ: FIXME: Make sure this expression is seconds, not days (???)
-	//double deltaT = -0.000014 + 0.001148*u + 0.003357*std::pow(u,2) - 0.012462*std::pow(u,3) - 0.022542*std::pow(u,4) + 0.062971*std::pow(u,5)
-	//		+ 0.079441*std::pow(u,6) - 0.146960*std::pow(u,7) - 0.149279*std::pow(u,8) + 0.161416*std::pow(u,9) + 0.145932*std::pow(u,10)
-	//		- 0.067471*std::pow(u,11) - 0.058091*std::pow(u,12);
-	double deltaT = (((((((((((-0.058091*u -0.06747471)*u +.145932)*u +.161416)*u -.149279)*u -.146960)*u +.079441)*u +.062971)*u -.022542)*u -.012462)*u +.003357)*u +.001148)*u-.000014;
-	return deltaT;
+	double deltaT = (((((((((((-0.058091*u -0.067471)*u +.145932)*u +.161416)*u -.149279)*u -.146960)*u +.079441)*u +.062971)*u -.022542)*u -.012462)*u +.003357)*u +.001148)*u-.000014;
+	return deltaT * 86400.0;
 }
 
 // Implementation of algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation

@@ -392,6 +392,7 @@ namespace StelUtils
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation.
+	//! Outdated, but may be useful for science-historical purposes.
 	//! Source: Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975
 	//! Schmadel, L. D.; Zech, G.
 	//! Acta Astronomica, vol. 29, no. 1, 1979, p. 101-104.
