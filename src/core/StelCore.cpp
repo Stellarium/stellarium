@@ -1612,10 +1612,6 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		finish	= 2000;
 		validRangeAppendix = q_("with a typical 1-second accuracy");
 		break;
-	case ReingoldDershowitz:
-		start	= 1620;
-		finish	= 2019;
-		break;
 	case MorrisonStephenson2004:
 		start	= -1000;
 		finish	= 2000;
