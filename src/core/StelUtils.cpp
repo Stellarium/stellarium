@@ -1119,94 +1119,109 @@ long double secondsSinceStart()
 
 double decYear2DeltaT(const double y)
 {
-	// Note: the method here is adapted from Adapted from
-	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus]
+    // Note: the method here is adapted from
+    // "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+    // GZ: I replaced the std::pow() calls by Horner's scheme with reversed factors, it's more accurate and efficient.
+    //     Old code left for readability, but can also be deleted.
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
-	double r = (-20 + 32 * std::pow(u,2.0));
+    double r = (-20 + 32 * u * u);
 
 	if (y < -500)
-	{
-		u = (y-1820)/100.;
-		r = (-20 + 32 * std::pow(u,2.0));
+    {   // values are equal to defaults!
+        // u = (y-1820)/100.;
+        // r = (-20 + 32 * u * u);
 	}
 	else if (y < 500)
 	{
 		u = y/100;
-		r = (10583.6 - 1014.41 * u + 33.78311 * std::pow(u,2) - 5.952053 * std::pow(u,3)
-		       - 0.1798452 * std::pow(u,4) + 0.022174192 * std::pow(u,5) + 0.0090316521 * std::pow(u,6));
+        //r = (10583.6 - 1014.41 * u + 33.78311 * std::pow(u,2) - 5.952053 * std::pow(u,3)
+        //       - 0.1798452 * std::pow(u,4) + 0.022174192 * std::pow(u,5) + 0.0090316521 * std::pow(u,6));
+        r = (((((0.0090316521*u + 0.022174192)*u - 0.1798452)*u - 5.952053)*u + 33.78311)*u -1014.41)*u +10583.6;
 	}
 	else if (y < 1600)
 	{
 		u = (y-1000)/100;
-		r = (1574.2 - 556.01 * u + 71.23472 * std::pow(u,2) + 0.319781 * std::pow(u,3)
-		       - 0.8503463 * std::pow(u,4) - 0.005050998 * std::pow(u,5) + 0.0083572073 * std::pow(u,6));
+        //r = (1574.2 - 556.01 * u + 71.23472 * std::pow(u,2) + 0.319781 * std::pow(u,3)
+        //       - 0.8503463 * std::pow(u,4) - 0.005050998 * std::pow(u,5) + 0.0083572073 * std::pow(u,6));
+        r = (((((0.0083572073*u - 0.005050998)*u -0.8503463)*u +0.319781)*u + 71.23472)*u -556.01)*u + 1574.2;
 	}
 	else if (y < 1700)
 	{
 		double t = y - 1600;
-		r = (120 - 0.9808 * t - 0.01532 * std::pow(t,2) + std::pow(t,3) / 7129);
+        //r = (120 - 0.9808 * t - 0.01532 * std::pow(t,2) + std::pow(t,3) / 7129);
+        r = ((t/7129.0 - 0.01532)*t - 0.9808)*t +120.0;
 	}
 	else if (y < 1800)
 	{
 		double t = y - 1700;
-		r = (8.83 + 0.1603 * t - 0.0059285 * std::pow(t,2) + 0.00013336 * std::pow(t,3) - std::pow(t,4) / 1174000);
+        //r = (8.83 + 0.1603 * t - 0.0059285 * std::pow(t,2) + 0.00013336 * std::pow(t,3) - std::pow(t,4) / 1174000);
+        r = (((-t/1174000.0 + 0.00013336)*t - 0.0059285)*t + 0.1603)*t +8.83;
 	}
 	else if (y < 1860)
 	{
 		double t = y - 1800;
-		r = (13.72 - 0.332447 * t + 0.0068612 * std::pow(t,2) + 0.0041116 * std::pow(t,3) - 0.00037436 * std::pow(t,4)
-		       + 0.0000121272 * std::pow(t,5) - 0.0000001699 * std::pow(t,6) + 0.000000000875 * std::pow(t,7));
+        //r = (13.72 - 0.332447 * t + 0.0068612 * std::pow(t,2) + 0.0041116 * std::pow(t,3) - 0.00037436 * std::pow(t,4)
+        //       + 0.0000121272 * std::pow(t,5) - 0.0000001699 * std::pow(t,6) + 0.000000000875 * std::pow(t,7));
+        r = ((((((.000000000875*t -.0000001699)*t + 0.0000121272)*t - 0.00037436)*t + 0.0041116)*t + 0.0068612)*t - 0.332447)*t +13.72;
 	}
 	else if (y < 1900)
 	{
 		double t = y - 1860;
-		r = (7.62 + 0.5737 * t - 0.251754 * std::pow(t,2) + 0.01680668 * std::pow(t,3)
-			-0.0004473624 * std::pow(t,4) + std::pow(t,5) / 233174);
+        //r = (7.62 + 0.5737 * t - 0.251754 * std::pow(t,2) + 0.01680668 * std::pow(t,3)
+        //	-0.0004473624 * std::pow(t,4) + std::pow(t,5) / 233174);
+        r = ((((t/233174.0 -0.0004473624)*t + 0.01680668)*t - 0.251754)*t + 0.5737)*t + 7.62;
 	}
 	else if (y < 1920)
 	{
 		double t = y - 1900;
-		r = (-2.79 + 1.494119 * t - 0.0598939 * std::pow(t,2) + 0.0061966 * std::pow(t,3) - 0.000197 * std::pow(t,4));
+        //r = (-2.79 + 1.494119 * t - 0.0598939 * std::pow(t,2) + 0.0061966 * std::pow(t,3) - 0.000197 * std::pow(t,4));
+        r = (((-0.000197*t + 0.0061966)*t - 0.0598939)*t + 1.494119)*t -2.79;
 	}
 	else if (y < 1941)
 	{
 		double t = y - 1920;
-		r = (21.20 + 0.84493*t - 0.076100 * std::pow(t,2) + 0.0020936 * std::pow(t,3));
+        //r = (21.20 + 0.84493*t - 0.076100 * std::pow(t,2) + 0.0020936 * std::pow(t,3));
+        r = ((0.0020936*t - 0.076100)*t+ 0.84493)*t +21.20;
 	}
 	else if (y < 1961)
 	{
 		double t = y - 1950;
-		r = (29.07 + 0.407*t - std::pow(t,2)/233 + std::pow(t,3) / 2547);
+        //r = (29.07 + 0.407*t - std::pow(t,2)/233 + std::pow(t,3) / 2547);
+        r = ((t/2547.0 -1.0/233.0)*t + 0.407)*t +29.07;
 	}
 	else if (y < 1986)
 	{
 		double t = y - 1975;
-		r = (45.45 + 1.067*t - std::pow(t,2)/260 - std::pow(t,3) / 718);
+        //r = (45.45 + 1.067*t - std::pow(t,2)/260 - std::pow(t,3) / 718);
+        r = ((-t/718.0 +1/260.0)*t + 1.067)*t +45.45;
 	}
 	else if (y < 2005)
 	{
 		double t = y - 2000;
-		r = (63.86 + 0.3345 * t - 0.060374 * std::pow(t,2) + 0.0017275 * std::pow(t,3) + 0.000651814 * std::pow(t,4)
-			+ 0.00002373599 * std::pow(t,5));
+        //r = (63.86 + 0.3345 * t - 0.060374 * std::pow(t,2) + 0.0017275 * std::pow(t,3) + 0.000651814 * std::pow(t,4) + 0.00002373599 * std::pow(t,5));
+        r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
 	}
 	else if (y < 2050)
 	{
 		double t = y - 2000;
-		r = (62.92 + 0.32217 * t + 0.005589 * std::pow(t,2));
+        //r = (62.92 + 0.32217 * t + 0.005589 * std::pow(t,2));
+        r = (0.005589*t +0.32217)*t + 62.92;
 	}
 	else if (y < 2150)
 	{
-		r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
+        //r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
+        // r has been precomputed before, just add the term patching the discontinuity
+        r -= 0.5628*(2150.0-y);
 	}	
 
 	return r;
 }
 
-// Implementation algorithm by Espenak & Meeus (2006) for DeltaT computation
+// Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
 double getDeltaTByEspenakMeeus(const double jDay)
 {
 	int year, month, day;	
@@ -1217,135 +1232,88 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	return decYear2DeltaT(year+((month-1)*30.5+day/31*30.5)/366);
 }
 
-// Implementation algorithm by Schoch (1931) for DeltaT computation
+// Implementation of algorithm by Schoch (1931) for DeltaT computation
 double getDeltaTBySchoch(const double jDay)
 {
-
-	// Schoch, C. (1931). Die sekulare Accelaration des Mondes und der Sonne.
-	// Astronomische Abhandlungen, Ergдnzungshefte zu den Astronomischen Nachrichten,
-	// Band 8, B2. Kiel.
 	double u=(jDay-2378496.0)/36525.0; // (1800-jan-0.5)
-
 	return -36.28 + 36.28*std::pow(u,2);
 }
 
-// Implementation algorithm by Clemence (1948) for DeltaT computation
+// Implementation of algorithm by Clemence (1948) for DeltaT computation
 double getDeltaTByClemence(const double jDay)
 {
-	// On the system of astronomical constants.
-	// Clemence, G. M.
-	// Astronomical Journal, Vol. 53, p. 169
-	// 1948AJ.....53..169C [http://adsabs.harvard.edu/abs/1948AJ.....53..169C]
-
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-
 	return +8.72 + 26.75*u + 11.22*std::pow(u,2);
 }
 
-// Implementation algorithm by IAU (1952) for DeltaT computation
+// Implementation of algorithm by IAU (1952) for DeltaT computation
 double getDeltaTByIAU(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
 	// TODO: Calculate Moon's longitude fluctuation
-	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
-	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
-	// http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
-	return 24.349+72.3165*u+29.949*std::pow(u,2)/* + 1.821*b*/;
+    return (29.949*u +72.3165)*u +24.349 /* + 1.821*b*/ ;
 }
 
-// Implementation algorithm by Astronomical Ephemeris (1960) for DeltaT computation, also used by Mucke&Meeus, Canon of Solar Eclipses, Vienna 1983
+// Implementation of algorithm by Astronomical Ephemeris (1960) for DeltaT computation, also used by Mucke&Meeus, Canon of Solar Eclipses, Vienna 1983
 double getDeltaTByAstronomicalEphemeris(const double jDay)
 {
-	//int year, month, day;
-	//getDateFromJulianDay(jDay, &year, &month, &day);
-
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
 	// TODO: Calculate Moon's longitude fluctuation
-	// Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
-	// Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
-	// http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
-	// or Expl. Suppl. to the Astr. Eph., 1961, p.87
 	// Note: also Mucke&Meeus 1983 ignore b
-	return 24.349+72.318*u+29.950*std::pow(u,2)/* + 1.82144*b*/;
+    return (29.950*u +72.318)*u +24.349 /* + 1.82144*b */ ;
 }
 
-// Implementation algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
+// Implementation of algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
 double getDeltaTByTuckermanGoldstine(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-
-	return 4.87+35.06*u+36.79*std::pow(u,2);
+    return (36.79*u +35.06)*u + 4.87;
 }
 
-// Implementation algorithm by Muller & Stephenson (1975) for DeltaT computation
+// Implementation of algorithm by Muller & Stephenson (1975) for DeltaT computation
 double getDeltaTByMullerStephenson(const double jDay)
 {
-	// The accelerations of the earth and moon from early astronomical observations
-	// Muller, P. M.; Stephenson, F. R.
-	// Growth rhythms and the history of the earth's rotation; Proceedings of the Interdisciplinary
-	// Winter Conference on Biological Clocks and Changes in the Earth's Rotation: Geophysical and
-	// Astronomical Consequences, Newcastle-upon-Tyne, England, January 8-10, 1974. (A76-18126 06-46)
-	// London, Wiley-Interscience, 1975, p. 459-533; Discussion, p. 534.
-	// 1975grhe.conf..459M [http://adsabs.harvard.edu/abs/1975grhe.conf..459M]
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-
-	return 66.0+120.38*u+45.78*std::pow(u,2);
+    return (45.78*u +120.38)*u +66.0;
 }
 
-// Implementation algorithm by Stephenson (1978) for DeltaT computation
+// Implementation of algorithm by Stephenson (1978) for DeltaT computation
 double getDeltaTByStephenson1978(const double jDay)
 {
-	// Pre-Telescopic Astronomical Observations
-	// Stephenson, F. R.
-	// Tidal Friction and the Earth's Rotation, Proceedings of a Workshop, held in Bielefeld,
-	// September 26-30, 1977, Edited by P. Brosche, and J. Sundermann. Berlin: Springer-Verlag, 1978, p.5
-	// 1978tfer.conf....5S [http://adsabs.harvard.edu/abs/1978tfer.conf....5S]
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-
-	return 20.0+114.0*u+38.30*std::pow(u,2);
+    return (38.30*u +114.0)*u +20.0;
 }
 
-// Implementation algorithm by Stephenson (1997) for DeltaT computation
+// Implementation of algorithm by Stephenson (1997) for DeltaT computation
 double getDeltaTByStephenson1997(const double jDay)
 {
-	// Book "Historical Eclipses and Earth's Rotation" by F. R. Stephenson (1997)
-	// http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
 	double u=(jDay-2354755.0)/36525.0; // (1735-jan-0.5)
-
-	return -20.0 + 35.0*std::pow(u,2);
+    return -20.0 + 35.0*u*u;
 }
 
-// Implementation algorithm by Schmadel & Zech (1979) for DeltaT computation
+// Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation
 double getDeltaTBySchmadelZech1979(const double jDay)
 {
-	// Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975
-	// Schmadel, L. D.; Zech, G.
-	// Acta Astronomica, vol. 29, no. 1, 1979, p. 101-104.
-	// 1979AcA....29..101S [http://adsabs.harvard.edu/abs/1979AcA....29..101S]
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-
-	double deltaT = -0.000029 + 0.001233*u + 0.003081*std::pow(u,2) - 0.013867*std::pow(u,3) - 0.020446*std::pow(u,4) + 0.076929*std::pow(u,5)
-			+ 0.075456*std::pow(u,6) - 0.200097*std::pow(u,7) - 0.159732*std::pow(u,8) + 0.247433*std::pow(u,9) + 0.185489*std::pow(u,10)
-			- 0.117389*std::pow(u,11) - 0.089491*std::pow(u,12);
-
+    // GZ: FIXME: Make sure this expression is seconds, not days (???)
+    //double deltaT = -0.000029 + 0.001233*u + 0.003081*std::pow(u,2) - 0.013867*std::pow(u,3) - 0.020446*std::pow(u,4) + 0.076929*std::pow(u,5)
+    //		+ 0.075456*std::pow(u,6) - 0.200097*std::pow(u,7) - 0.159732*std::pow(u,8) + 0.247433*std::pow(u,9) + 0.185489*std::pow(u,10)
+    //		- 0.117389*std::pow(u,11) - 0.089491*std::pow(u,12);
+    double deltaT=(((((((((((-0.089491*u -0.117389)*u + 0.185489)*u + 0.247433)*u - 0.159732)*u - 0.200097)*u + 0.075456)*u
+                       + 0.076929)*u - 0.020446)*u - 0.013867)*u + 0.003081)*u + 0.001233)*u -0.000029;
 	return deltaT;
 }
 
-// Implementation algorithm by Morrison & Stephenson (1982) for DeltaT computation
+// Implementation of algorithm by Morrison & Stephenson (1982) for DeltaT computation
 double getDeltaTByMorrisonStephenson1982(const double jDay)
 {
 	double u=(jDay-2382148.0)/36525.0; // (1810-jan-0.5)
-
 	return -15.0+32.50*std::pow(u,2);
 }
 
-// Implementation algorithm by Stephenson & Morrison (1984) for DeltaT computation
+// Implementation of algorithm by Stephenson & Morrison (1984) for DeltaT computation
 double getDeltaTByStephensonMorrison1984(const double jDay)
 {
-	// Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980
-	// Stephenson, F. R.; Morrison, L. V.
-	// Philosophical Transactions, Series A (ISSN 0080-4614), vol. 313, no. 1524, Nov. 27, 1984, p. 47-70.
-	// 1984RSPTA.313...47S [http://adsabs.harvard.edu/abs/1984RSPTA.313...47S]
 	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
@@ -1354,26 +1322,21 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	double u = (yeardec-1800)/100;
 
 	if (-391 < year and year <= 948)
-		deltaT = 1360.0 + 320*u + 44.3*std::pow(u,2);
+        deltaT = (44.3*u +320.0)*u +1360.0;
 	if (948 < year and year <= 1600)
-		deltaT = 25.5*std::pow(u,2);
+        deltaT = 25.5*u*u;
 
 	return deltaT;
 }
 
-// Implementation algorithm by Stephenson & Morrison (1995) for DeltaT computation
+// Implementation of algorithm by Stephenson & Morrison (1995) for DeltaT computation
 double getDeltaTByStephensonMorrison1995(const double jDay)
 {
-	// Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990
-	// Stephenson, F. R.; Morrison, L. V.
-	// Philosophical Transactions: Physical Sciences and Engineering, Volume 351, Issue 1695, pp. 165-202
-	// 1995RSPTA.351..165S [http://adsabs.harvard.edu/abs/1995RSPTA.351..165S]
 	double u=(jDay-2385800.0)/36525.0; // (1820-jan-0.5)
-
-	return -20.0 + 31.0*std::pow(u,2);
+    return -20.0 + 31.0*u*u;
 }
 
-// Implementation algorithm by Stephenson & Houlden (1986) for DeltaT computation
+// Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
 double getDeltaTByStephensonHoulden(const double jDay)
 {
 	int year, month, day;
@@ -1386,55 +1349,44 @@ double getDeltaTByStephensonHoulden(const double jDay)
 	if (year <= 948)
 	{
 		u = (yeardec-948)/100;
-		deltaT = 1830.0 - 405.0*u + 46.5*std::pow(u,2);
+		deltaT = (46.5*u -405.0)*u + 1830.0; // GZ: TODO: merge conflict, did I mess orig -405->+405? Or AW?
 	}
 	if (948 < year and year <= 1600)
 	{
 		u = (yeardec-1850)/100;
-		deltaT = 25.5*std::pow(u,2);
+        deltaT = 25.5*u*u;
 	}
 
 	return deltaT;
 }
 
-// Implementation algorithm by Espenak (1987, 1989) for DeltaT computation
-// This relation should not be used before around 1950 or after around 2100 (Espenak, pers. comm.).
+// Implementation of algorithm by Espenak (1987, 1989) for DeltaT computation
 double getDeltaTByEspenak(const double jDay)
 {
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
-
-	return 67.0+61.0*u + 64.3*std::pow(u,2);
+    return (64.3*u +61.0)*u +67.0;
 }
 
-// Implementation algorithm by Borkowski (1988) for DeltaT computation
+// Implementation of algorithm by Borkowski (1988) for DeltaT computation
 double getDeltaTByBorkowski(const double jDay)
 {
-	// ELP 2000-85 and the dynamic time-universal time relation
-	// Borkowski, K. M.
-	// Astronomy and Astrophysics (ISSN 0004-6361), vol. 205, no. 1-2, Oct. 1988, p. L8-L10.
-	// 1988A&A...205L...8B [http://adsabs.harvard.edu/abs/1988A&A...205L...8B]
 	double u=(jDay-2314579.0)/36525.0; // (1625-jan-0.5)
-
-	return 40.0 + 35.0*std::pow(u,2);
+    return 40.0 + 35.0*u*u;
 }
 
-// Implementation algorithm by Schmadel & Zech (1988) for DeltaT computation
+// Implementation of algorithm by Schmadel & Zech (1988) for DeltaT computation
 double getDeltaTBySchmadelZech1988(const double jDay)
 {
-	// Empirical Transformations from U.T. to E.T. for the Period 1800-1988
-	// Schmadel, L. D.; Zech, G.
-	// Astronomische Nachrichten 309, 219-221
-	// 1988AN....309..219S [http://adsabs.harvard.edu/abs/1988AN....309..219S]
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-
-	double deltaT = -0.000014 + 0.001148*u + 0.003357*std::pow(u,2) - 0.012462*std::pow(u,3) - 0.022542*std::pow(u,4) + 0.062971*std::pow(u,5)
-			+ 0.079441*std::pow(u,6) - 0.146960*std::pow(u,7) - 0.149279*std::pow(u,8) + 0.161416*std::pow(u,9) + 0.145932*std::pow(u,10)
-			- 0.067471*std::pow(u,11) - 0.058091*std::pow(u,12);
-
+    // GZ: FIXME: Make sure this expression is seconds, not days (???)
+    //double deltaT = -0.000014 + 0.001148*u + 0.003357*std::pow(u,2) - 0.012462*std::pow(u,3) - 0.022542*std::pow(u,4) + 0.062971*std::pow(u,5)
+    //		+ 0.079441*std::pow(u,6) - 0.146960*std::pow(u,7) - 0.149279*std::pow(u,8) + 0.161416*std::pow(u,9) + 0.145932*std::pow(u,10)
+    //		- 0.067471*std::pow(u,11) - 0.058091*std::pow(u,12);
+    double deltaT = (((((((((((-0.058091*u -0.06747471)*u +.145932)*u +.161416)*u -.149279)*u -.146960)*u +.079441)*u +.062971)*u -.022542)*u -.012462)*u +.003357)*u +.001148)*u-.000014;
 	return deltaT;
 }
 
-// Implementation algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
+// Implementation of algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
 double getDeltaTByChaprontTouze(const double jDay)
 {
 	int year, month, day;	
@@ -1444,16 +1396,20 @@ double getDeltaTByChaprontTouze(const double jDay)
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
 	if (-391 < year and year <= 948)
-		deltaT = 2177.0 - 495.0*u + 42.4*std::pow(u,2);
+        deltaT = (42.4*u -495.0)*u + 2177.0;
 	if (948 < year and year <= 1600)
-		deltaT = 102.0 + 100.0*u + 23.6*std::pow(u,2);
+        deltaT = (23.6*u +100.0)*u + 102.0;
 
 	return deltaT;
 }
 
-// Implementation algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
+// Implementation of algorithm by Chapront, Chapront-Touze & Francou (1997) for DeltaT computation
+/* GZ: I think we can remove this: Apparently it was taken from Meeus 1998, but it makes more sense (in terms of "used source")
+ *     to just have Meeus (1998) as selectable algorithm which covers a wide range without the gap 1600..2000, or making sure
+ *     this is really from the original source.
+ **/
 double getDeltaTByChaprontFrancou(const double jDay)
-{
+{ // GZ asks for FIXME: WHAT IS GIVEN FOR 1600...2000?
 	int year, month, day;		
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
@@ -1461,18 +1417,18 @@ double getDeltaTByChaprontFrancou(const double jDay)
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
 	if (year <= 948)
-		deltaT = 2177.0 - 497.0*u + 44.1*std::pow(u,2);
+        deltaT = (44.1*u -497.0)*u + 2177.0;
 	if (948 < year and year <= 1600)
-		deltaT = 102.0 + 102.0*u + 25.3*std::pow(u,2);
-	if (2000 < year) // and year <= 2100) // GZ: The limit 2100 causes return of zero. Better just further extrapolate.
-		deltaT = 102.0 + 102.0*u + 25.3*std::pow(u,2) + 0.37*(year - 2100);
+        deltaT = (25.3*u +102.0)*u + 102.0;
+        if (2000 < year) // and year <= 2100) // GZ: The limit 2100 causes return of zero. Better just further extrapolate. (?)
+        deltaT = (25.3*u +102.0)*u + 102.0 + 0.37*(year - 2100);
 
 	return deltaT;
 }
 
-// Implementation algorithm by JPL Horizons for DeltaT computation
+// Implementation of algorithm by JPL Horizons for DeltaT computation
 double getDeltaTByJPLHorizons(const double jDay)
-{
+{ // GZ: TODO: FIXME! It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
 	int year, month, day;
 	double u;
 	double deltaT = 0.;
@@ -1480,53 +1436,43 @@ double getDeltaTByJPLHorizons(const double jDay)
 
 	if (-2999 < year and year < 948)
 	{
-		u=(jDay-2385800.0)/36525.0; // (1820-jan-1.5)
-		deltaT = 31.0*std::pow(u,2);
+	  u=(jDay-2385800.0)/36525.0; // (1820-jan-1.5)
+	  deltaT = 31.0*u*u;
 	}
 	if (948 < year and year <= 1620)
 	{
-		u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
-		deltaT = 50.6 + 67.5*u + 22.5*std::pow(u,2);
+	  u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
+	  deltaT = (22.5*u +67.5)*u + 50.6;
 	}
 
 	return deltaT;
 }
 
-// Implementation algorithm by Morrison & Stephenson (2004, 2005) for DeltaT computation
+// Implementation of algorithm by Morrison & Stephenson (2004, 2005) for DeltaT computation
 double getDeltaTByMorrisonStephenson2004(const double jDay)
 {
-	// Historical values of the Earth's clock error ΔT and the calculation of eclipses
-	// Morrison, L. V.; Stephenson, F. R.
-	// Journal for the History of Astronomy (ISSN 0021-8286), Vol. 35, Part 3, No. 120, p. 327 - 336 (2004)
-	// 2004JHA....35..327M [http://adsabs.harvard.edu/abs/2004JHA....35..327M]
-	//
-	// Addendum: Historical values of the Earth's clock error
-	// Morrison, L. V.; Stephenson, F. R.
-	// Journal for the History of Astronomy (ISSN 0021-8286), Vol. 36, Part 3, No. 124, p. 339 (2005)
-	// 2005JHA....36..339M [http://adsabs.harvard.edu/abs/2005JHA....36..339M]
 	double u=(jDay-2385800.0)/36525.0; // (1820-jan-0.5)
-
-	return -20.0 + 32.0 * std::pow(u, 2);
+    return -20.0 + 32.0 * u*u;
 }
 
-// Implementation algorithm by Reijs (2006) for DeltaT computation
+// Implementation of algorithm by Reijs (2006) for DeltaT computation
 // http://www.iol.ie/~geniet/eng/DeltaTeval.htm
 double getDeltaTByReijs(const double jDay)
 {
-	int year, month, day;
-	getDateFromJulianDay(jDay, &year, &month, &day);
-	double OffSetYear = (2385800 - jDay)/365.25;
+    //int year, month, day; // UNUSED
+    //getDateFromJulianDay(jDay, &year, &month, &day); // UNUSED
+    double OffSetYear = (2385800.0 - jDay)/365.25;
 
 	return ((1.8 * std::pow(OffSetYear,2)/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
 }
 
-// Implementation algorithm by Meeus (1998) for DeltaT computation
-// 191 values for interpolation table 1620..2000
+// Implementation of algorithm by Meeus (1998) for DeltaT computation
+// 191 values in tenths of second for interpolation table 1620..2000, every 2nd year.
 static const int MeeusDeltaTTable[] = { 1210, 1120, 1030, 950, 880, 820, 770, 720, 680, 630, 600, 560, 530, 510, 480,
 					460, 440, 420, 400, 380, 350, 330, 310, 290, 260, 240, 220, 200, 180, 160, 140, 120, 110, 100,  90,  80,  70,  70,  70,  70, // before 1700
 					70,  70,  80,  80,  90,  90,  90,  90,  90, 100, 100, 100, 100, 100, 100, 100, 100, 110, 110, 110, 110, 110, 120, 120, 120, // before 1750
 					120, 130, 130, 130, 140, 140, 140, 140, 150, 150, 150, 150, 150, 160, 160, 160, 160, 160, 160, 160, 160, 150, 150, 140, 130, // before 1800
-					131, 125, 122, 120, 120, 120, 120, 120, 120, 119, 116,  11, 102,  92,  82,  71,  62,  56,  54,  53,  54,  56,  59,  62,  65, // before 1850
+					131, 125, 122, 120, 120, 120, 120, 120, 120, 119, 116, 110, 102,  92,  82,  71,  62,  56,  54,  53,  54,  56,  59,  62,  65, // before 1850
 					68,  71,  73,  75,  76,  77,  73,  62,  52,  27,  14, -12, -28, -38, -48, -55, -53, -56, -57, -59, -60, -63, -65, -62, -47, // before 1900
 					-28,  -1,  26,  53,  77, 104, 133, 160, 182, 202, 211, 224, 235, 238, 243, 240, 239, 239, 237, 240, 243, 253, 262, 273, 282, // before 1950
 					291, 300, 307, 314, 322, 331, 340, 350, 365, 383, 402, 422, 445, 465, 485, 505, 522, 538, 549, 558, 569, 583, 600, 616, 630, 650}; //closing: 2000
@@ -1562,128 +1508,163 @@ double getDeltaTByMeeus(const double jDay)
 	return deltaT;
 }
 
-// Implementation algorithm by Montenbruck & Pfleger (2000) for DeltaT computation
+// Implementation of algorithm by Montenbruck & Pfleger (2000) for DeltaT computation
+// Their implementation explicitly returns 0 for out-of-range data, so must ours!
+// Note: the polynomes do not form a well-behaved continuous line.
+// The source of their data is likely the data table from Meeus, Astr. Alg. 1991.
 double getDeltaTByMontenbruckPfleger(const double jDay)
 {
-	// Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4nd ed., 2000)
-	int year, month, day;	
-	double u;
 	double deltaT = 0.;
-	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	const double T=(jDay-2451545)/36525;
+	double t;
+    if (jDay<2387627.5) // 1825-01-01 0:00 ...
+        deltaT=0.0;
+    else if (jDay < 2396758.5) { // 1850-01-01 0:00
+        t=T+1.75;
+        deltaT=(( -572.3*t+413.9)*t  -80.8)*t +10.4;
+    } else if (jDay < 2405889.5) { // 1875-01-01 0:00
+        t=T+1.50;
+        deltaT=((   18.8*t-358.4)*t  +46.3)*t + 6.6;
+    } else if (jDay < 2415020.5) { // 1900-01-01 0:00
+        t=T+1.25;
+        deltaT=((  867.4*t-166.2)*t  -10.8)*t - 3.9;
+    } else if (jDay < 2424151.5) { // 1925-01-01 0:00
+        t=T+1.00;
+        deltaT=((-1467.4*t+327.5)*t +114.1)*t - 2.6;
+    } else if (jDay < 2433282.5) { // 1950-01-01 0:00
+        t=T+0.75;
+        deltaT=((  483.4*t - 8.2)*t  - 6.3)*t +24.2;
+    } else if (jDay < 2442413.5) { // 1975-01-01 0:00
+        t=T+0.50;
+        deltaT=((  550.7*t - 3.8)*t  +32.5)*t +29.3;
+    } else if (jDay < 2453736.5) { // 2006-01-01 0:00
+        t=T+0.25;
+        deltaT=(( 1516.7*t-570.5)*t +130.5)*t +45.3;
+    }
 
-	if (1825 <= year and year < 1850)
+	return deltaT;
+}
+
+// Implementation of algorithm by Meeus & Simons (2000) for DeltaT computation
+// Zero outside defined range 1620..2000!
+double getDeltaTByMeeusSimons(const double jDay)
+{
+    int year, month, day;
+	double u;	
+	double deltaT = 0.;
+    getDateFromJulianDay(jDay, &year, &month, &day);
+
+    //double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+    //double ub = (yeardec-2000)/100;
+    const double ub=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
+
+    if (year <1620)
+        deltaT=0.0;
+    else if (year < 1690)
 	{
-		u = (yeardec-1825)/100;
-		deltaT = +10.4 - 80.8*u + 413.9*std::pow(u,2) - 572.3*std::pow(u,3);
+		u = 3.45 + ub;
+        //deltaT = +40.3 - 107.0*u + 50.0*std::pow(u,2) - 454.0*std::pow(u,3) + 1244.0*std::pow(u,4);
+        deltaT = (((1244.0*u -454.0)*u + 50.0)*u -107.0)*u +40.3;
 	}
-	if (1850 <= year and year < 1875)
+    else if (year < 1770)
 	{
-		u = (yeardec-1850)/100;
-		deltaT = +6.6 + 46.3*u - 358.4*std::pow(u,2) + 18.8*std::pow(u,3);
+		u = 2.70 + ub;
+        //deltaT = +10.2 + 11.3*u - std::pow(u,2) - 16.0*std::pow(u,3) + 70.0*std::pow(u,4);
+        deltaT = (((70.0*u -16.0)*u -1.0)*u +11.3)*u +10.2;
 	}
-	if (1875 <= year and year < 1900)
+    else if (year < 1820)
 	{
-		u = (yeardec-1875)/100;
-		deltaT = -3.9 - 10.8*u - 166.2*std::pow(u,2) + 867.4*std::pow(u,3);
+		u = 2.05 + ub;
+        //deltaT = +14.7 - 18.8*u - 22.0*std::pow(u,2) + 173.0*std::pow(u,3) + 6.0*std::pow(u,4);
+        deltaT = (((6.0*u -173.0)*u -22.0)*u -18.8)*u +14.7;
 	}
-	if (1900 <= year and year < 1925)
+    else if (year < 1870)
 	{
-		u = (yeardec-1900)/100;
-		deltaT = -2.6 + 114.1*u + 327.5*std::pow(u,2) - 1467.4*std::pow(u,3);
+		u = 1.55 + ub;
+        //deltaT = +5.7 + 12.7*u + 111.0*std::pow(u,2) - 534.0*std::pow(u,3) + 1654.0*std::pow(u,4);
+        deltaT = (((1654.0*u -534.0)*u +111)*u +12.7)*u +5.7;
 	}
-	if (1925 <= year and year < 1950)
+    else if (year < 1900)
 	{
-		u = (yeardec-1925)/100;
-		deltaT = +24.2 - 6.3*u - 8.2*std::pow(u,2) + 483.4*std::pow(u,3);
+		u = 1.15 + ub;
+        //deltaT = -5.8 - 14.6*u + 27.0*std::pow(u,2) + 101.0*std::pow(u,3) + 8234.0*std::pow(u,4);
+        deltaT = (((8234.0*u +101.0)*u +27.0)*u - 14.6)*u -5.8;
 	}
-	if (1950 <= year and year < 1975)
+    else if (year < 1940)
 	{
-		u = (yeardec-1950)/100;
-		deltaT = +29.3 + 32.5*u - 3.8*std::pow(u,2) + 550.7*std::pow(u,3);
+		u = 0.80 + ub;
+        //deltaT = +21.4 + 67.0*u + 443.0*std::pow(u,2) + 19.0*std::pow(u,3) + 4441.0*std::pow(u,4);
+        deltaT = (((4441.0*u + 19.0)*u +443.0)*u +67.0)*u +21.4;
 	}
-	if (1975 <= year and year <= 2000)
+    else if (year < 1990)
 	{
-		u = (yeardec-1975)/100;
-		deltaT = +45.3 + 130.5*u - 570.5*std::pow(u,2) + 1516.7*std::pow(u,3);
+		u = 0.35 + ub;
+        //deltaT = +36.2 + 74.0*u + 189.0*std::pow(u,2) - 140.0*std::pow(u,3) - 1883.0*std::pow(u,4);
+        deltaT = (((-1883.0*u -140.0)*u +189.0)*u +74.0)*u +36.2;
+	}
+    else if (year <= 2000)
+	{
+		u = 0.05 + ub;
+        //deltaT = +60.8 + 82.0*u + 188.0*std::pow(u,2) - 5034.0*std::pow(u,3);
+        deltaT = ((-5034.0*u +188.0)*u +82.0)*u +60.8;
 	}
 
 	return deltaT;
 }
 
-// Implementation algorithm by Meeus & Simons (2000) for DeltaT computation
-double getDeltaTByMeeusSimons(const double jDay)
+// Implementation of algorithm by Reingold & Dershowitz (Cal. Calc. 1997, 2001, 2007, Cal. Tab. 2002) for DeltaT computation.
+// GZ: Created as yet another multi-segment polynomial fit through the table in Meeus: Astronomical Algorithms (1991).
+// GZ: Note that only the Third edition (2007) adds the 1700-1799 term.
+// GZ: More efficient reimplementation with stricter adherence to the source.
+double getDeltaTByReingoldDershowitz(const double jDay)
 {
-	// Polynomial approximations to Delta T, 1620-2000 AD
-	// Meeus, J.; Simons, L.
-	// Journal of the British Astronomical Association, vol.110, no.6, 323
-	// 2000JBAA..110..323M [http://adsabs.harvard.edu/abs/2000JBAA..110..323M]
-	int year, month, day;
-	double u;	
-	double deltaT = 0.;
+	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
+    // GZ: R&D don't use a float-fraction year, but explicitly only the integer year! And R&D use a proleptic Gregorian year before 1582.
+    // GZ: We cannot do that, but the difference is negligible.
+    // GZ: FIXME: why are displayed values so far off the computed values? It seems currently broken!
+    double deltaT;
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-	double ub = (yeardec-2000)/100;
-
-	if (1620 <= year and year < 1690)
-	{
-		u = 3.45 + ub;
-		deltaT = +40.3 - 107.0*u + 50.0*std::pow(u,2) - 454.0*std::pow(u,3) + 1244.0*std::pow(u,4);
-	}
-	if (1690 <= year and year < 1770)
-	{
-		u = 2.70 + ub;
-		deltaT = +10.2 + 11.3*u - std::pow(u,2) - 16.0*std::pow(u,3) + 70.0*std::pow(u,4);
-	}
-	if (1770 <= year and year < 1820)
-	{
-		u = 2.05 + ub;
-		deltaT = +14.7 - 18.8*u - 22.0*std::pow(u,2) + 173.0*std::pow(u,3) + 6.0*std::pow(u,4);
-	}
-	if (1820 <= year and year < 1870)
-	{
-		u = 1.55 + ub;
-		deltaT = +5.7 + 12.7*u + 111.0*std::pow(u,2) - 534.0*std::pow(u,3) + 1654.0*std::pow(u,4);
-	}
-	if (1870 <= year and year < 1900)
-	{
-		u = 1.15 + ub;
-		deltaT = -5.8 - 14.6*u + 27.0*std::pow(u,2) + 101.0*std::pow(u,3) + 8234.0*std::pow(u,4);
-	}
-	if (1900 <= year and year < 1940)
-	{
-		u = 0.80 + ub;
-		deltaT = +21.4 + 67.0*u + 443.0*std::pow(u,2) + 19.0*std::pow(u,3) + 4441.0*std::pow(u,4);
-	}
-	if (1940 <= year and year < 1990)
-	{
-		u = 0.35 + ub;
-		deltaT = +36.2 + 74.0*u + 189.0*std::pow(u,2) - 140.0*std::pow(u,3) - 1883.0*std::pow(u,4);
-	}
-	if (1900 <= year and year <= 2000)
-	{
-		u = 0.05 + ub;
-		deltaT = +60.8 + 82.0*u + 188.0*std::pow(u,2) - 5034.0*std::pow(u,3);
-	}
-
+    if ((1988 <= year) && (year <= 2019)) {
+        deltaT = year-1933.0;
+    } else if (year >= 1800){
+        double jd1900_0; getJDFromDate(&jd1900_0, 1900, 1, 1, 0, 0, 0);
+        double jdYear_5; getJDFromDate(&jdYear_5, year, 7, 1, 0, 0, 0);
+        double c = (jdYear_5-jd1900_0) * (1/36525.0);
+        if (year >= 1900) {
+        deltaT = (((((((-0.212591*c +0.677066)*c -0.861938)*c +0.553040)*c -0.181133)*c +0.025184)*c +0.000297)*c -0.00002) * 86400.0;
+    } else //if (year >= 1800)
+        {
+        deltaT = ((((((((((2.043794*c +11.636204)*c +28.316289)*c +38.291999)*c +31.332267)*c +15.845535)*c +4.867575)*c +0.865736)*c +0.083563)*c +0.003844)*c -0.000009) * 86400.0;
+        }
+    }
+    else if (year >= 1700) { // This term was added in the third edition (2007), its omission was a fault of the authors!
+        double yDiff1700 = year-1700.0;
+        deltaT = ((-0.0000266484*yDiff1700 +0.003336121)*yDiff1700 + 0.005092142)*yDiff1700 + 8.118780842;
+    }
+    else if (year >= 1620) {
+        double yDiff1600 = year-1600.0;
+        deltaT = (0.0219167*yDiff1600 -4.0675)*yDiff1600 +196.58333;
+    } else { // before 1620, and after 2019
+        double jdYear_0; getJDFromDate(&jdYear_0, year, 1, 1, 0, 0, 0);
+        double jd1810_0; getJDFromDate(&jd1810_0, 1810, 1, 1, 0, 0, 0);
+        double x = (jdYear_0-jd1810_0+0.5);
+        deltaT = x*x/41048480.0 - 15.0;
+    }
 	return deltaT;
 }
 
 double getMoonSecularAcceleration(const double jDay, const double nd)
 {
-	// Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
-	// For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
-	// For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656	
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-	double t = (yeardec-1955.5)/100;
+	double yeardec=year+((month-1)*30.5+day/31*30.5)/366.0;
+	double t = (yeardec-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
-	return -0.91072 * (-23.8946 + std::abs(nd))*std::pow(t, 2);
+	return -0.91072 * (-23.8946 + std::abs(nd))*t*t;
 }
 
 double getDeltaTStandardError(const double jDay)
@@ -1691,12 +1672,15 @@ double getDeltaTStandardError(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+    //double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
 	double sigma = -1.;
 
 	if (-1000 <= year and year <= 1600)
-		sigma = 0.8 * std::pow((yeardec-1820.0)/100,2); // sigma(DeltaT) = 0.8*u^2
-
+    {
+        double cDiff1820= (jDay-2385800.0)/36525.0; //    1820.0=1820-jan-0.5=2385800.0
+        // sigma = std::pow((yeardec-1820.0)/100,2); // sigma(DeltaT) = 0.8*u^2
+        sigma = 0.8 * cDiff1820 * cDiff1820;
+}
 	return sigma;
 }
 
