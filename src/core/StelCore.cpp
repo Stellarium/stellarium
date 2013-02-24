@@ -1327,15 +1327,10 @@ double StelCore::getDeltaT(double jDay) const
 		ndot = -26.0; // n.dot = -26.0 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByStephenson1997(jDay);
 		break;
-	case ChaprontFrancou:
-		// Chapront, Chapront-Touzé & Francou (1997) algorithm for DeltaT
-		ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
-		DeltaT = StelUtils::getDeltaTByChaprontFrancou(jDay);
-		break;
-	case Meeus:
-		// Meeus (1998) algorithm for DeltaT
+	case ChaprontMeeus:
+		// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
 		ndot = -26.0; // n.dot = -26.0 "/cy/cy
-		DeltaT = StelUtils::getDeltaTByMeeus(jDay);
+		DeltaT = StelUtils::getDeltaTByChaprontMeeus(jDay);
 		break;
 	case JPLHorizons:
 		// JPL Horizons algorithm for DeltaT
@@ -1346,6 +1341,12 @@ double StelCore::getDeltaT(double jDay) const
 		// Meeus & Simons (2000) algorithm for DeltaT
 		ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByMeeusSimons(jDay);
+		break;
+	case ReingoldDershowitz:
+		// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+		// FIXME: n.dot
+		ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
+		DeltaT = StelUtils::getDeltaTByReingoldDershowitz(jDay);
 		break;
 	case MontenbruckPfleger:
 		// Montenbruck & Pfleger (2000) algorithm for DeltaT
@@ -1471,11 +1472,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	case Stephenson1997:
 		description = q_("F. R. Stephenson published this formula in his book <em>Historical Eclipses and Earth's Rotation</em> (%1).").arg("<a href='http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186'>1997</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
-	case ChaprontFrancou:
-		description = q_("This formula also is used in Shinobu Takesako's EmapWin program for plotting the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry Shetline's interactive planetarium Sky View Cafe. A variant is also given by J. Meeus in the second edition of his <em>Astronomical Algorithms</em> (1998).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
-		// GZ: Did those programs use this very form or Meeus's variant?
-		break;
-	case Meeus:
+	case ChaprontMeeus:
 		description = q_("From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely used. Table for 1620..2000, and includes a variant of Chapront, Chapront-Touze & Francou (1997) for dates outside 1620..2000.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case JPLHorizons:
@@ -1591,12 +1588,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		start	= -500;
 		finish	= 1600;
 		break;
-	case ChaprontFrancou:
-		// FIXME: This is valid range?
-		start	= -3000;
-		finish	= 3000;
-		break;
-	case Meeus:
+	case ChaprontMeeus:
 		start	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
 		finish	=  2150; // 1997;
 		//validRangeAppendix = q_("with a maximum error of 2.3 seconds"); // Wrong: This is only for the unused expression on p. 80!
