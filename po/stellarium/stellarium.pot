@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-24 15:56+0700\n"
+"POT-Creation-Date: 2013-02-24 22:09+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -413,10 +413,19 @@ msgstr ""
 #: src/core/StelCore.cpp:1488
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
-"Personal Computer</em> (2000) provides the 3rd-order polynomials."
+"Personal Computer</em> (2000) provides 3rd-order polynomials for the recent "
+"past only."
 msgstr ""
 
 #: src/core/StelCore.cpp:1491
+msgid ""
+"E. M. Reingold & N. Dershowitz present an approximation formula in "
+"<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
+"<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
+"Astronomical Algorithms (1991)"
+msgstr ""
+
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "This equation was published by L. V. Morrison and F. R. Stephenson in "
@@ -424,7 +433,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1494
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -433,39 +442,44 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
-"Site%2. This formula is also used in the solar, lunar and planetary "
-"ephemeris program SOLEX."
-msgstr ""
-
-#: src/core/StelCore.cpp:1497
-msgid "Used by default."
+"Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to "
+"+3000</em> (2006). This formula is also used in the solar, lunar and "
+"planetary ephemeris program SOLEX."
 msgstr ""
 
 #: src/core/StelCore.cpp:1500
+msgid "Used by default."
+msgstr ""
+
+#: src/core/StelCore.cpp:1503
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1506 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr ""
 
-#: src/core/StelCore.cpp:1613
-msgid "with a typical 1-second accuracy"
+#: src/core/StelCore.cpp:1608 src/core/StelCore.cpp:1613
+msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1639
+#: src/core/StelCore.cpp:1618
+msgid "with a typical 1-second accuracy and zero values outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:1645
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1641
+#: src/core/StelCore.cpp:1647
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -783,39 +797,43 @@ msgstr ""
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront, Chapront-Touze & Francou (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Meeus (1998)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1149
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1150
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1150
-msgid "Morrison & Stephenson (2004, 2005)"
+#: src/gui/ConfigurationDialog.cpp:1151
+msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1152
-msgid "Espenak & Meeus (2006)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1153
-msgid "Reijs (2006)"
+msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1154
+msgid "Espenak & Meeus (2006)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1155
+msgid "Reijs (2006)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1156
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
