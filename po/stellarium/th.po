@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-22 10:38+0700\n"
-"PO-Revision-Date: 2013-02-18 06:34+0000\n"
+"PO-Revision-Date: 2013-02-23 08:25+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-23 04:54+0000\n"
+"X-Launchpad-Export-Date: 2013-02-24 04:39+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -264,6 +264,9 @@ msgid ""
 "in his article <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"สูตรนี้มาจาก C. Schoch เมื่อ ค.ศ. 1931 และใช้โดย G. Henriksson ในบทความ "
+"<em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> "
+"(%1) สำหรับข้อมูลเพิ่มเติม ดู%2ที่นี่%3"
 
 #: src/core/StelCore.cpp:1430
 #, qt-format
@@ -271,6 +274,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"สมการเอมพิริคัลนี้เผยแพร่โดย G. M. Clemence ในบทความ <em>On the system of "
+"astronomical constants</em> (%1)"
 
 #: src/core/StelCore.cpp:1433
 #, qt-format
@@ -280,6 +285,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"สูตรนี้มาจากการศึกษาตำแหน่งดวงอาทิตย์ ดวงจันทร์ และดาวเคราะห์ หลัง ค.ศ. 1650 "
+"โดย Spencer Jones (%1) ซึ่ง Jean Meeus นำมาใช้ในหนังสือ <em>Astronomical "
+"Formulae for Calculators</em> และถูกนำมาใช้ในโปรแกรมคอมพิวเตอร์ SunTracker "
+"Pro"
 
 #: src/core/StelCore.cpp:1437
 msgid ""
@@ -452,7 +461,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1506
 msgid "Used by default."
-msgstr ""
+msgstr "ถูกใช้โดยปริยาย"
 
 #: src/core/StelCore.cpp:1509
 #, qt-format
@@ -460,6 +469,7 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"นี่คือสูตรกำลังสองสำหรับการคำนวณ %1T โดยมีสัมประสิทธ์ตามที่ผู้ใช้กำหนด"
 
 #: src/core/StelCore.cpp:1512 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -467,21 +477,21 @@ msgstr "เกิดข้อผิดพลาด"
 
 #: src/core/StelCore.cpp:1609
 msgid "(estimated)"
-msgstr ""
+msgstr "(ค่าประมาณ)"
 
 #: src/core/StelCore.cpp:1622
 msgid "with a typical 1-second accuracy"
-msgstr ""
+msgstr "ด้วยความแม่นโดยปกติที่ 1 วินาที"
 
 #: src/core/StelCore.cpp:1648
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2, %3"
 
 #: src/core/StelCore.cpp:1650
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
