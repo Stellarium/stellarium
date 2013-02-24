@@ -304,242 +304,241 @@ namespace StelUtils
 	//! Get Delta-T estimation for a given date.
 	//! Note that this method is valid for the year range:
 	//! -1999 to +3000, outside of which "0" will be returned.
-    // GZ: I don't see this returning 0. There is always a rough estimate beyond that.
-    //! Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
+	// GZ: I don't see this returning 0. There is always a rough estimate beyond that.
+	//! Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByEspenakMeeus(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Schoch (1931) for DeltaT computation,
-    //! outdated but may be useful for science-historical purposes.
-    //! Source: Schoch, C. (1931). Die sekulare Accelaration des Mondes und der Sonne.
-    //! Astronomische Abhandlungen, Erg�nzungshefte zu den Astronomischen Nachrichten,
-    //! Band 8, B2. Kiel.
+	//! Implementation of algorithm by Schoch (1931) for DeltaT computation,
+	//! outdated but may be useful for science-historical purposes.
+	//! Source: Schoch, C. (1931). Die sekulare Accelaration des Mondes und der Sonne.
+	//! Astronomische Abhandlungen, Ergnzungshefte zu den Astronomischen Nachrichten,
+	//! Band 8, B2. Kiel.
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTBySchoch(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Clemence (1948) for DeltaT computation,
-    //! outdated but may be useful for science-historical purposes.
-    //! Source: On the system of astronomical constants.
-    //! Clemence, G. M.
-    //! Astronomical Journal, Vol. 53, p. 169
-    //! 1948AJ.....53..169C [http://adsabs.harvard.edu/abs/1948AJ.....53..169C]
-    //! @param jDay the date and time expressed as a julian day
+	//! Implementation of algorithm by Clemence (1948) for DeltaT computation,
+	//! outdated but may be useful for science-historical purposes.
+	//! Source: On the system of astronomical constants.
+	//! Clemence, G. M.
+	//! Astronomical Journal, Vol. 53, p. 169
+	//! 1948AJ.....53..169C [http://adsabs.harvard.edu/abs/1948AJ.....53..169C]
+	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByClemence(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by IAU (1952) for DeltaT computation,
-    //! outdated but may be useful for science-historical purposes.
-    //! Source: Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
-    //! Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
-    //! http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
-    //! @param jDay the date and time expressed as a julian day
+	//! Implementation of algorithm by IAU (1952) for DeltaT computation,
+	//! outdated but may be useful for science-historical purposes.
+	//! Source: Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
+	//! Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+	//! http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
+	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByIAU(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Astronomical Ephemeris (1960) for DeltaT computation.
-    //! Sources: Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
-    //! Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
-    //! http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
-    //! or Explanatory Supplement to the Astr. Ephemeris, 1961, p.87.
-    //! Also used by Mucke&Meeus, Canon of Solar Eclipses, Vienna 1983.
+	//! Implementation of algorithm by Astronomical Ephemeris (1960) for DeltaT computation.
+	//! Sources: Spencer Jones, H., "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
+	//! Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+	//! http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
+	//! or Explanatory Supplement to the Astr. Ephemeris, 1961, p.87.
+	//! Also used by Mucke&Meeus, Canon of Solar Eclipses, Vienna 1983.
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByAstronomicalEphemeris(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
+	//! Implementation of algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByTuckermanGoldstine(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Muller & Stephenson (1975) for DeltaT computation.
-    //! Source: The accelerations of the earth and moon from early astronomical observations
-    //! Muller, P. M.; Stephenson, F. R.
-    //! Growth rhythms and the history of the earth's rotation; Proceedings of the Interdisciplinary
-    //! Winter Conference on Biological Clocks and Changes in the Earth's Rotation: Geophysical and
-    //! Astronomical Consequences, Newcastle-upon-Tyne, England, January 8-10, 1974. (A76-18126 06-46)
-    //! London, Wiley-Interscience, 1975, p. 459-533; Discussion, p. 534.
-    //! 1975grhe.conf..459M [http://adsabs.harvard.edu/abs/1975grhe.conf..459M]
+	//! Implementation of algorithm by Muller & Stephenson (1975) for DeltaT computation.
+	//! Source: The accelerations of the earth and moon from early astronomical observations
+	//! Muller, P. M.; Stephenson, F. R.
+	//! Growth rhythms and the history of the earth's rotation; Proceedings of the Interdisciplinary
+	//! Winter Conference on Biological Clocks and Changes in the Earth's Rotation: Geophysical and
+	//! Astronomical Consequences, Newcastle-upon-Tyne, England, January 8-10, 1974. (A76-18126 06-46)
+	//! London, Wiley-Interscience, 1975, p. 459-533; Discussion, p. 534.
+	//! 1975grhe.conf..459M [http://adsabs.harvard.edu/abs/1975grhe.conf..459M]
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByMullerStephenson(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Stephenson (1978) for DeltaT computation.
-    //! Source: Pre-Telescopic Astronomical Observations
-    //! Stephenson, F. R.
-    //! Tidal Friction and the Earth's Rotation, Proceedings of a Workshop, held in Bielefeld,
-    //! September 26-30, 1977, Edited by P. Brosche, and J. Sundermann. Berlin: Springer-Verlag, 1978, p.5
-    //! 1978tfer.conf....5S [http://adsabs.harvard.edu/abs/1978tfer.conf....5S]
+	//! Implementation of algorithm by Stephenson (1978) for DeltaT computation.
+	//! Source: Pre-Telescopic Astronomical Observations
+	//! Stephenson, F. R.
+	//! Tidal Friction and the Earth's Rotation, Proceedings of a Workshop, held in Bielefeld,
+	//! September 26-30, 1977, Edited by P. Brosche, and J. Sundermann. Berlin: Springer-Verlag, 1978, p.5
+	//! 1978tfer.conf....5S [http://adsabs.harvard.edu/abs/1978tfer.conf....5S]
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByStephenson1978(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Stephenson (1997) for DeltaT computation.
-    //! Source: Book "Historical Eclipses and Earth's Rotation" by F. R. Stephenson (1997)
-    //! http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
-    //! @param jDay the date and time expressed as a julian day
+	//! Implementation of algorithm by Stephenson (1997) for DeltaT computation.
+	//! Source: Book "Historical Eclipses and Earth's Rotation" by F. R. Stephenson (1997)
+	//! http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
+	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByStephenson1997(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation.
-    //! Source: Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975
-    //! Schmadel, L. D.; Zech, G.
-    //! Acta Astronomica, vol. 29, no. 1, 1979, p. 101-104.
-    //! 1979AcA....29..101S [http://adsabs.harvard.edu/abs/1979AcA....29..101S]
-    //! @param jDay the date and time expressed as a julian day
+	//! Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation.
+	//! Source: Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975
+	//! Schmadel, L. D.; Zech, G.
+	//! Acta Astronomica, vol. 29, no. 1, 1979, p. 101-104.
+	//! 1979AcA....29..101S [http://adsabs.harvard.edu/abs/1979AcA....29..101S]
+	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTBySchmadelZech1979(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Morrison & Stephenson (1982) for DeltaT computation
+	//! Implementation of algorithm by Morrison & Stephenson (1982) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByMorrisonStephenson1982(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Stephenson & Morrison (1984) for DeltaT computation
-    //! Source: Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980.
-    //! Stephenson, F. R.; Morrison, L. V.
-    //! Philosophical Transactions, Series A (ISSN 0080-4614), vol. 313, no. 1524, Nov. 27, 1984, p. 47-70.
-    //! 1984RSPTA.313...47S [http://adsabs.harvard.edu/abs/1984RSPTA.313...47S]
-    //! @param jDay the date and time expressed as a julian day
-    //! @return Delta-T in seconds or Zero if date outside years -391..1600
+	//! Implementation of algorithm by Stephenson & Morrison (1984) for DeltaT computation
+	//! Source: Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980.
+	//! Stephenson, F. R.; Morrison, L. V.
+	//! Philosophical Transactions, Series A (ISSN 0080-4614), vol. 313, no. 1524, Nov. 27, 1984, p. 47-70.
+	//! 1984RSPTA.313...47S [http://adsabs.harvard.edu/abs/1984RSPTA.313...47S]
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds or Zero if date outside years -391..1600
 	double getDeltaTByStephensonMorrison1984(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Stephenson & Morrison (1995) for DeltaT computation
-    //! Source: Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990.
-    //! Stephenson, F. R.; Morrison, L. V.
-    //! Philosophical Transactions: Physical Sciences and Engineering, Volume 351, Issue 1695, pp. 165-202
-    //! 1995RSPTA.351..165S [http://adsabs.harvard.edu/abs/1995RSPTA.351..165S]
+	//! Implementation of algorithm by Stephenson & Morrison (1995) for DeltaT computation
+	//! Source: Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990.
+	//! Stephenson, F. R.; Morrison, L. V.
+	//! Philosophical Transactions: Physical Sciences and Engineering, Volume 351, Issue 1695, pp. 165-202
+	//! 1995RSPTA.351..165S [http://adsabs.harvard.edu/abs/1995RSPTA.351..165S]
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByStephensonMorrison1995(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
+	//! Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
-    //! @return Delta-T in seconds or 0 if year > 1600
+	//! @return Delta-T in seconds or 0 if year > 1600
 	double getDeltaTByStephensonHoulden(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Espenak (1987, 1989) for DeltaT computation.
-    //! This relation should not be used before around 1950 or after around 2100 (Espenak, pers. comm.).
+	//! Implementation of algorithm by Espenak (1987, 1989) for DeltaT computation.
+	//! This relation should not be used before around 1950 or after around 2100 (Espenak, pers. comm.).
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByEspenak(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Borkowski (1988) for DeltaT computation.
-    //! Source: ELP 2000-85 and the dynamic time-universal time relation
-    //! Borkowski, K. M.
-    //! Astronomy and Astrophysics (ISSN 0004-6361), vol. 205, no. 1-2, Oct. 1988, p. L8-L10.
-    //! 1988A&A...205L...8B [http://adsabs.harvard.edu/abs/1988A&A...205L...8B]
+	//! Implementation of algorithm by Borkowski (1988) for DeltaT computation.
+	//! Source: ELP 2000-85 and the dynamic time-universal time relation
+	//! Borkowski, K. M.
+	//! Astronomy and Astrophysics (ISSN 0004-6361), vol. 205, no. 1-2, Oct. 1988, p. L8-L10.
+	//! 1988A&A...205L...8B [http://adsabs.harvard.edu/abs/1988A&A...205L...8B]
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByBorkowski(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Schmadel & Zech (1988) for DeltaT computation.
-    //! Source: Empirical Transformations from U.T. to E.T. for the Period 1800-1988
-    //! Schmadel, L. D.; Zech, G.
-    //! Astronomische Nachrichten 309, 219-221
-    //! 1988AN....309..219S [http://adsabs.harvard.edu/abs/1988AN....309..219S]
-    //! @param jDay the date and time expressed as a julian day
+	//! Implementation of algorithm by Schmadel & Zech (1988) for DeltaT computation.
+	//! Source: Empirical Transformations from U.T. to E.T. for the Period 1800-1988
+	//! Schmadel, L. D.; Zech, G.
+	//! Astronomische Nachrichten 309, 219-221
+	//! 1988AN....309..219S [http://adsabs.harvard.edu/abs/1988AN....309..219S]
+	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTBySchmadelZech1988(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
+	//! Implementation of algorithm by Chapront-Touzé & Chapront (1991) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
-    //! @return Delta-T in seconds or 0 if year not in -391..1600
+	//! @return Delta-T in seconds or 0 if year not in -391..1600
 	double getDeltaTByChaprontTouze(const double jDay);
 
-    // GZ: This one is included in Meeus1998, we don't need it as separate entry IMHO. (or maybe check with original?)
+	// GZ: This one is included in Meeus1998, we don't need it as separate entry IMHO. (or maybe check with original?)
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
+	//! Implementation of algorithm by Chapront, Chapront-Touzé & Francou (1997) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
-    //! @return Delta-T in seconds or 0 if year not in 948..1600 or 2000..2100
+	//! @return Delta-T in seconds or 0 if year not in 948..1600 or 2000..2100
 	double getDeltaTByChaprontFrancou(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of the "historical" part of the algorithm by JPL Horizons for DeltaT computation.
+	//! Implementation of the "historical" part of the algorithm by JPL Horizons for DeltaT computation.
 	//! @param jDay the date and time expressed as a julian day
-    //! @return Delta-T in seconds or 0 if year not in -2999..1620 (!)
+	//! @return Delta-T in seconds or 0 if year not in -2999..1620 (!)
 	double getDeltaTByJPLHorizons(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Morrison & Stephenson (2004, 2005) for DeltaT computation.
-    //! Sources: Historical values of the Earth's clock error ΔT and the calculation of eclipses
-    //! Morrison, L. V.; Stephenson, F. R.
-    //! Journal for the History of Astronomy (ISSN 0021-8286), Vol. 35, Part 3, No. 120, p. 327 - 336 (2004)
-    //! 2004JHA....35..327M [http://adsabs.harvard.edu/abs/2004JHA....35..327M]
-    //!
-    //! Addendum: Historical values of the Earth's clock error
-    //! Morrison, L. V.; Stephenson, F. R.
-    //! Journal for the History of Astronomy (ISSN 0021-8286), Vol. 36, Part 3, No. 124, p. 339 (2005)
-    //! 2005JHA....36..339M [http://adsabs.harvard.edu/abs/2005JHA....36..339M]
+	//! Implementation of algorithm by Morrison & Stephenson (2004, 2005) for DeltaT computation.
+	//! Sources: Historical values of the Earth's clock error ΔT and the calculation of eclipses
+	//! Morrison, L. V.; Stephenson, F. R.
+	//! Journal for the History of Astronomy (ISSN 0021-8286), Vol. 35, Part 3, No. 120, p. 327 - 336 (2004)
+	//! 2004JHA....35..327M [http://adsabs.harvard.edu/abs/2004JHA....35..327M]
+	//! Addendum: Historical values of the Earth's clock error
+	//! Morrison, L. V.; Stephenson, F. R.
+	//! Journal for the History of Astronomy (ISSN 0021-8286), Vol. 36, Part 3, No. 124, p. 339 (2005)
+	//! 2005JHA....36..339M [http://adsabs.harvard.edu/abs/2005JHA....36..339M]
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByMorrisonStephenson2004(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Reijs (2006) for DeltaT computation
+	//! Implementation of algorithm by Reijs (2006) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByReijs(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Meeus (1998) for DeltaT computation
+	//! Implementation of algorithm by Meeus (1998) for DeltaT computation
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByMeeus(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Meeus & Simons (2000) for DeltaT computation.
-    //! Source: Polynomial approximations to Delta T, 1620-2000 AD
-    //! Meeus, J.; Simons, L.
-    //! Journal of the British Astronomical Association, vol.110, no.6, 323
-    //! 2000JBAA..110..323M [http://adsabs.harvard.edu/abs/2000JBAA..110..323M]
+	//! Implementation of algorithm by Meeus & Simons (2000) for DeltaT computation.
+	//! Source: Polynomial approximations to Delta T, 1620-2000 AD
+	//! Meeus, J.; Simons, L.
+	//! Journal of the British Astronomical Association, vol.110, no.6, 323
+	//! 2000JBAA..110..323M [http://adsabs.harvard.edu/abs/2000JBAA..110..323M]
 	//! @param jDay the date and time expressed as a julian day
-    //! @return Delta-T in seconds or 0 if year not in 1620..2000
+	//! @return Delta-T in seconds or 0 if year not in 1620..2000
 	double getDeltaTByMeeusSimons(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Montenbruck & Pfleger (2000) for DeltaT computation,
-    //! a data fit through the table of values found in Meeus, Astronomical algorithms (1991).
-    //! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000)
+	//! Implementation of algorithm by Montenbruck & Pfleger (2000) for DeltaT computation,
+	//! a data fit through the table of values found in Meeus, Astronomical algorithms (1991).
+	//! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000)
 	//! @param jDay the date and time expressed as a julian day
-    //! @return Delta-T in seconds or 0 if not 1825<=year<2005
-    double getDeltaTByMontenbruckPfleger(const double jDay);
+	//! @return Delta-T in seconds or 0 if not 1825<=year<2005
+	double getDeltaTByMontenbruckPfleger(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-    //! Implementation of algorithm by Reingold & Dershowitz (1997, 2001, 2002, 2007) for DeltaT computation.
-    //! This is again mostly a data fit based on the table in Meeus, Astronomical Algorithms (1991).
-    //! This is the version given in the 3rd edition (2007) which added the fit for 1700..1799 omitted from previous editions.
+	//! Implementation of algorithm by Reingold & Dershowitz (1997, 2001, 2002, 2007) for DeltaT computation.
+	//! This is again mostly a data fit based on the table in Meeus, Astronomical Algorithms (1991).
+	//! This is the version given in the 3rd edition (2007) which added the fit for 1700..1799 omitted from previous editions.
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
-    double getDeltaTByReingoldDershowitz(const double jDay);
+	double getDeltaTByReingoldDershowitz(const double jDay);
 
 	//! Get Secular Acceleration estimation for a given year.
-    //! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
-    //! For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
-    //! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
-    //! @param jDay the JD
+	//! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
+	//! For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
+	//! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
+	//! @param jDay the JD
 	//! @param ndot value n-dot which use in the algorithm
 	//! @return SecularAcceleration in seconds
-    //! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy
-    double getMoonSecularAcceleration(const double jDay, const double ndot);
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy
+	double getMoonSecularAcceleration(const double jDay, const double ndot);
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD
