@@ -1485,7 +1485,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides 3rd-order polynomials for the recent past only.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case ReingoldDershowitz:
-		description = q_("E. M. Reingold & N. Dershowitz present an approximation formula in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' Astronomical Algorithms (1991)").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+		description = q_("E. M. Reingold & N. Dershowitz present an approximation formula in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case MorrisonStephenson2004:
 		description = q_("This equation was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
