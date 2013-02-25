@@ -107,7 +107,8 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	{
 		double glong, glat;
 		StelUtils::rectToSphe(&glong, &glat, getJ2000GalacticPos(core));
-		res += q_("Galactic longitude/latitude (J2000): %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
+		// Note that Gal. Coords are DEFINED in B1950 coordinates, and writing "J2000" to them does not make any sense.
+		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
 	}
 
 	if (flags&HourAngle)
