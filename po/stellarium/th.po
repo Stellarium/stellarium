@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-22 10:38+0700\n"
+"POT-Creation-Date: 2013-02-25 09:11+0700\n"
 "PO-Revision-Date: 2013-02-23 08:25+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-24 04:39+0000\n"
+"X-Launchpad-Export-Date: 2013-02-25 04:45+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -253,22 +253,19 @@ msgstr "แพรัลแลกซ์: %1\""
 msgid "SpaceShip"
 msgstr "ยานอวกาศ"
 
-#: src/core/StelCore.cpp:1424
+#: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:1427
+#: src/core/StelCore.cpp:1422
 #, qt-format
 msgid ""
-"This formula was obtained by C. Schoch in 1931 and was used by G. Henriksson "
-"in his article <em>Einstein's Theory of Relativity Confirmed by Ancient "
-"Solar Eclipses</em> (%1). See for more info %2here%3."
+"This historical formula was obtained by C. Schoch in 1931 and was used by G. "
+"Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
-"สูตรนี้มาจาก C. Schoch เมื่อ ค.ศ. 1931 และใช้โดย G. Henriksson ในบทความ "
-"<em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> "
-"(%1) สำหรับข้อมูลเพิ่มเติม ดู%2ที่นี่%3"
 
-#: src/core/StelCore.cpp:1430
+#: src/core/StelCore.cpp:1425
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -277,7 +274,7 @@ msgstr ""
 "สมการเอมพิริคัลนี้เผยแพร่โดย G. M. Clemence ในบทความ <em>On the system of "
 "astronomical constants</em> (%1)"
 
-#: src/core/StelCore.cpp:1433
+#: src/core/StelCore.cpp:1428
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -290,14 +287,14 @@ msgstr ""
 "Formulae for Calculators</em> และถูกนำมาใช้ในโปรแกรมคอมพิวเตอร์ SunTracker "
 "Pro"
 
-#: src/core/StelCore.cpp:1437
+#: src/core/StelCore.cpp:1432
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1441
+#: src/core/StelCore.cpp:1436
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -305,7 +302,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1445
+#: src/core/StelCore.cpp:1440
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -313,29 +310,30 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1448
+#: src/core/StelCore.cpp:1443
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1451
+#: src/core/StelCore.cpp:1446
 #, qt-format
 msgid ""
-"This equation was published by L. D. Schmadel and G. Zech in the article "
+"This 12th-order polynomial equation (outdated and superseded by Schmadel & "
+"Zech (1988)) was published by L. D. Schmadel and G. Zech in the article "
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
-"period 1800-1975</em> (%1)."
+"period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1454
+#: src/core/StelCore.cpp:1449
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1457
+#: src/core/StelCore.cpp:1452
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -343,40 +341,41 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1460
+#: src/core/StelCore.cpp:1455
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1463
+#: src/core/StelCore.cpp:1458
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1466
+#: src/core/StelCore.cpp:1461
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1469
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
-"This equation was published by L. D. Schmadel and G. Zech in the article "
-"<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
-"1988</em> (%1)."
+"This 12th-order polynomial equation was published by L. D. Schmadel and G. "
+"Zech in the article <em>Empirical Transformations from U.T. to E.T. for the "
+"Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
+"Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1472
+#: src/core/StelCore.cpp:1467
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1475
+#: src/core/StelCore.cpp:1470
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -384,65 +383,58 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1478
+#: src/core/StelCore.cpp:1473
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1481
-msgid ""
-"This formula also is used in Shinobu Takesako's EmapWin program for plotting "
-"the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry "
-"Shetline's interactive planetarium Sky View Cafe. A variant is also given by "
-"J. Meeus in the second edition of his <em>Astronomical Algorithms</em> "
-"(1998)."
-msgstr ""
-
-#: src/core/StelCore.cpp:1485
+#: src/core/StelCore.cpp:1476
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1488
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1491
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1494
+#: src/core/StelCore.cpp:1485
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
-"Personal Computer</em> (2000) provides the 3rd-order polynomials."
+"Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
+"for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1488
 msgid ""
-"E. M. Reingold & N. Dershowitz adopt the approximate formula in the second "
-"edition of <em>Calendrical Calculations</em> (2001) and in their "
-"<em>Calendrical Tabulations</em> (2002)."
+"E. M. Reingold & N. Dershowitz present this polynomial data fit in "
+"<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
+"<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
+"<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1500
+#: src/core/StelCore.cpp:1491
 #, qt-format
 msgid ""
-"This equation was published by L. V. Morrison and F. R. Stephenson in "
-"article <em>Historical values of the Earth's clock error %1T and the "
+"This important solution was published by L. V. Morrison and F. R. Stephenson "
+"in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1503
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -451,19 +443,21 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1506
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
-"This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
-"Site%2. This formula is also used in the solar, lunar and planetary "
-"ephemeris program SOLEX."
+"This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
+"(2004) and a polynomial fit through tabulated values for 1600-2000, is used "
+"for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
+"solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1506
+#: src/core/StelCore.cpp:1497
 msgid "Used by default."
 msgstr "ถูกใช้โดยปริยาย"
 
-#: src/core/StelCore.cpp:1509
+#: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -471,24 +465,34 @@ msgid ""
 msgstr ""
 "นี่คือสูตรกำลังสองสำหรับการคำนวณ %1T โดยมีสัมประสิทธ์ตามที่ผู้ใช้กำหนด"
 
-#: src/core/StelCore.cpp:1512 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "เกิดข้อผิดพลาด"
 
-#: src/core/StelCore.cpp:1609
-msgid "(estimated)"
-msgstr "(ค่าประมาณ)"
+#: src/core/StelCore.cpp:1552
+msgid "with meaningless values outside this range"
+msgstr ""
 
-#: src/core/StelCore.cpp:1622
-msgid "with a typical 1-second accuracy"
-msgstr "ด้วยความแม่นโดยปกติที่ 1 วินาที"
+#: src/core/StelCore.cpp:1578
+msgid ""
+"with a mean error of less than one second, max. error 1.9s, and meaningless "
+"values outside this range"
+msgstr ""
 
-#: src/core/StelCore.cpp:1648
+#: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
+msgid "with zero values outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:1612
+msgid "with a typical 1-second accuracy and zero values outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2, %3"
 
-#: src/core/StelCore.cpp:1650
+#: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2"
@@ -835,13 +839,9 @@ msgstr "Stephenson & Morrison (1995)"
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1145
-msgid "Chapront, Chapront-Touze & Francou (1997)"
-msgstr "Chapront, Chapront-Touze & Francou (1997)"
-
 #: src/gui/ConfigurationDialog.cpp:1146
-msgid "Meeus (1998)"
-msgstr "Meeus (1998)"
+msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "JPL Horizons"
@@ -856,8 +856,8 @@ msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
-msgid "Reingold & Dershowitz (2001, 2002)"
-msgstr "Reingold & Dershowitz (2001, 2002)"
+msgid "Reingold & Dershowitz (2002, 2007)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "Morrison & Stephenson (2004, 2005)"
@@ -1186,19 +1186,19 @@ msgstr "ธรรมชาติ"
 msgid "starchart"
 msgstr "แผนที่ดาว"
 
-#: src/gui/SearchDialog.cpp:359
+#: src/gui/SearchDialog.cpp:361
 msgid "Simbad Lookup Error"
 msgstr "เกิดข้อผิดพลาดในการค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:367
+#: src/gui/SearchDialog.cpp:369
 msgid "Simbad Lookup"
 msgstr "การค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:535
+#: src/gui/SearchDialog.cpp:537
 msgid "University of Strasbourg (France)"
 msgstr "มหาวิทยาลัยสทราซบูร์ (ฝรั่งเศส)"
 
-#: src/gui/SearchDialog.cpp:536
+#: src/gui/SearchDialog.cpp:538
 msgid "Harvard University (USA)"
 msgstr "มหาวิทยาลัยฮาร์วาร์ด (สหรัฐอเมริกา)"
 
@@ -3370,7 +3370,7 @@ msgid "Show renderer statistics"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:657 src/ui_configurationDialog.h:1158
+#: src/translations.h:657 src/ui_configurationDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "สคริปต์"
@@ -3424,7 +3424,7 @@ msgstr "เกี่ยวกับ"
 msgid "Log"
 msgstr "บันทึก"
 
-#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1055
+#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1057
 msgid "Edit keyboard shortcuts..."
 msgstr "แก้ปุ่มลัดแป้นพิมพ์..."
 
@@ -3637,7 +3637,7 @@ msgstr "เซิร์ฟเวอร์:"
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1214
 #: src/ui_viewDialog.h:1219 src/ui_viewDialog.h:1221
-#: src/ui_configurationDialog.h:1129 src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "ตัวเลือก"
@@ -3843,19 +3843,19 @@ msgstr "ใช้คุณลักษณะท้องฟ้านี้เป
 msgid "Visible"
 msgstr "มองเห็นได้"
 
-#: src/ui_configurationDialog.h:971
+#: src/ui_configurationDialog.h:973
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
-#: src/ui_configurationDialog.h:973
+#: src/ui_configurationDialog.h:975
 msgid "Program language"
 msgstr "ภาษาของโปรแกรม"
 
-#: src/ui_configurationDialog.h:974
+#: src/ui_configurationDialog.h:976
 msgid "Default options"
 msgstr "ตัวเลือกปริยาย"
 
-#: src/ui_configurationDialog.h:976
+#: src/ui_configurationDialog.h:978
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3863,20 +3863,20 @@ msgstr ""
 "บันทึกการตั้งค่าที่คุณได้เปลี่ยนแปลงนี้ ให้เป็นแบบเดียวกันเมื่อเริ่ม "
 "Stellarium ในครั้งต่อไป"
 
-#: src/ui_configurationDialog.h:978
+#: src/ui_configurationDialog.h:980
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Save settings"
 msgstr "บันทึกการตั้งค่าต่าง ๆ"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:982
 msgid "Restore the default settings that came with Stellarium"
 msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:984
 msgid "Restore defaults"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
-#: src/ui_configurationDialog.h:983
+#: src/ui_configurationDialog.h:985
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3886,31 +3886,31 @@ msgstr ""
 "บันทึกทุกตัวเลือกปัจจุบัน รวมทั้งพื้นที่การมองเห็น "
 "และทิศทางของมุมมองสำหรับใช้ในการเริ่มต้นถัดไป"
 
-#: src/ui_configurationDialog.h:985
+#: src/ui_configurationDialog.h:987
 msgid "The width of your view when Stellarium starts"
 msgstr "ความกว้างของมุมมองเมื่อเริ่มต้น Stellarium"
 
-#: src/ui_configurationDialog.h:988
+#: src/ui_configurationDialog.h:990
 msgid "The direction you're looking when Stellarium starts"
 msgstr "ทิศทางที่คุณต้องการเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:990 src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1153
 msgid "Selected object information"
 msgstr "ข้อมูลวัตถุที่เลือก"
 
-#: src/ui_configurationDialog.h:992
+#: src/ui_configurationDialog.h:994
 msgid "Display all information available"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: src/ui_configurationDialog.h:994
+#: src/ui_configurationDialog.h:996
 msgid "All available"
 msgstr "ทั้งหมดที่มี"
 
-#: src/ui_configurationDialog.h:996
+#: src/ui_configurationDialog.h:998
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:998 plugins/Oculars/src/Oculars.cpp:1844
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1844
 #: plugins/Observability/src/Observability.cpp:628
 #: plugins/Observability/src/Observability.cpp:629
 #: plugins/Observability/src/Observability.cpp:631
@@ -3918,192 +3918,192 @@ msgstr "ไม่แสดงข้อมูล"
 msgid "None"
 msgstr "ไม่มี"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:1002
 msgid "Display less information"
 msgstr "แสดงข้อมูลโดยสังเขป"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:1004
 msgid "Short"
 msgstr "สั้น"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1006
 msgid "Display user settings information"
 msgstr "แสดงข้อมูลการตั้งค่าโดยผู้ใช้"
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:1008
 msgid "Customized"
 msgstr "ได้รับการปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:1009
 msgid "Displayed fields"
 msgstr "ขอบเขตที่แสดง"
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1011
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "พิกัดศูนย์สูตรศูนย์โลก, วิษุวัต J2000.0"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000)"
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
 msgstr "พิกัดขอบฟ้า"
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1017
 msgid "Altitude/Azimuth"
 msgstr "มุมเงย/มุมทิศ"
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1018
 msgid "Visual magnitude"
 msgstr "โชติมาตรปรากฏ"
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1019
 msgid "Absolute magnitude"
 msgstr "โชติมาตรสัมบูรณ์"
 
-#: src/ui_configurationDialog.h:1018
+#: src/ui_configurationDialog.h:1020
 msgid "Catalog number(s)"
 msgstr "หมายเลขแค็ตตาล็อก"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1021
 #: plugins/Oculars/src/ui_ocularDialog.h:1022
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "ชื่อ"
 
-#: src/ui_configurationDialog.h:1021
+#: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "พิกัดศูนย์สูตรศูนย์โลก, วิษุวัตของวัน"
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1025
 msgid "Right ascension/Declination (of date)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน)"
 
-#: src/ui_configurationDialog.h:1025
+#: src/ui_configurationDialog.h:1027
 msgid "Galactic coordinates, equinox of J2000.0"
 msgstr "พิกัดดาราจักร, วิษุวัต J2000.0"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1029
 msgid "Longitude/Latitude (J2000)"
 msgstr "ลองจิจูด/ละติจูด (J2000)"
 
-#: src/ui_configurationDialog.h:1029
+#: src/ui_configurationDialog.h:1031
 msgid "Topocentric equatorial coordinates"
 msgstr "พิกัดศูนย์สูตรจากผิวโลก"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1033
 msgid "Hour angle/Declination"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1034
 msgid "Distance"
 msgstr "ระยะห่าง"
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
 msgstr "ขนาดจริงหรือขนาดเชิงมุม"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1038
 msgid "Size"
 msgstr "ขนาด"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
 msgstr "ชนิดสเปกตรัม, ชนิดเนบิวลา, ฯลฯ"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
 msgstr "ข้อมูลเพิ่มเติม 1"
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1046
 msgid "Additional information 2"
 msgstr "ข้อมูลเพิ่มเติม 2"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1047
 msgid "Additional information 3"
 msgstr "ข้อมูลเพิ่มเติม 3"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1048
 msgid "Control"
 msgstr "ควบคุม"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1050
 msgid "Allow keyboard to pan and zoom"
 msgstr "ใช้แป้นพิมพ์เพื่อกวาดและซูม"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1052
 msgid "Enable keyboard navigation"
 msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1054
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "ใช้เมาส์ในการกวาด (ลากเมาส์) และซูม (หมุนล้อของเมาส์)"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1056
 msgid "Enable mouse navigation"
 msgstr "เปิดใช้การนำทางด้วยเมาส์"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1059
 msgid "Hides the mouse cursor when inactive"
 msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1063
 msgid "seconds"
 msgstr "วินาที"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1065
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Startup date and time"
 msgstr "วันและเวลาเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1067
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1069
 msgid "Other:"
 msgstr "อื่น ๆ :"
 
-#: src/ui_configurationDialog.h:1068
+#: src/ui_configurationDialog.h:1070
 msgid "use current"
 msgstr "ใช้ค่าขณะนี้"
 
-#: src/ui_configurationDialog.h:1070
+#: src/ui_configurationDialog.h:1072
 msgid "Starts Stellarium at system clock date and time"
 msgstr "เริ่ม Stellarium ตามวันและเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1072
+#: src/ui_configurationDialog.h:1074
 msgid "System date and time"
 msgstr "ใช้วันที่และเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1074
+#: src/ui_configurationDialog.h:1076
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "ตั้งค่าเวลาของการจำลองเหตุการณ์หากวันที่ตรงกับการใช้งาน Stellarium"
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1078
 msgid "System date at:"
 msgstr "เวลาของระบบ:"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1079
 msgid "Time correction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
 msgstr "แก้ไขสมการ"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1084
 msgid "Planetarium options"
 msgstr "ตัวเลือกท้องฟ้าจำลอง"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1086
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4111,51 +4111,51 @@ msgstr ""
 "ปรับภาพเป็นการสะท้อนผิวโค้งสำหรับการใช้ในการฉายภาพลงบนกระจกโค้งของระบบท้องฟ้า"
 "จำลองราคาประหยัด"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1088
 msgid "Spheric mirror distortion"
 msgstr "ปรับภาพให้เหมือนสะท้อนกระจกโค้งทรงกลม"
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1090
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "บังส่วนที่อยู่นอกมุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1092
 msgid "Disc viewport"
 msgstr "มุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1094
 msgid "Hide other constellations when you click one"
 msgstr "ซ่อนกลุ่มดาวอื่นเมื่อคลิกที่กลุ่มดาวกลุ่มหนึ่ง"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1096
 msgid "Select single constellation"
 msgstr "เลือกกลุ่มดาวหนึ่ง"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1098
 msgid "Align labels with the horizon"
 msgstr "วางป้ายอักษรให้อยู่ในแนวขนานกับขอบฟ้า"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1100
 msgid "Gravity labels"
 msgstr "ป้ายแสดงความโน้มถ่วง"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1102
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "สลับการแสดงภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1104
 msgid "Show nebula background button"
 msgstr "แสดงปุ่มภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1106
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "สลับปุ่มพลิกภาพแนวตั้งและแนวนอน"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1108
 msgid "Show flip buttons"
 msgstr "แสดงปุ่มพลิก"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1110
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4163,92 +4163,92 @@ msgstr ""
 "เมื่อกำหนดให้ทำงาน, ปุ่ม \"ย่อภาพอัตโนมัติ\" "
 "จะถูกกำหนดเป็นค่าเริ่มต้นในทิศทางการมอง"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1112
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "ซูมออกอัตโนมัติเพื่อกลับไปยังทิศทางของมุมมองเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1111
+#: src/ui_configurationDialog.h:1113
 msgid "Render Solar Shadows"
 msgstr "แสดงเงาเนื่องจากดวงอาทิตย์"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1114
 msgid "Screenshots"
 msgstr "ภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1115
 msgid "Screenshot Directory"
 msgstr "ไดเร็กทอรีที่บันทึกภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1115
+#: src/ui_configurationDialog.h:1117
 msgid "Invert colors"
 msgstr "กลับสี"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1118
 msgid "Star catalog updates"
 msgstr "ปรับปรุงแค็ตตาล็อกดาว"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1120
 msgid "Click here to start downloading"
 msgstr "คลิกที่นี่เพื่อเริ่มการดาวน์โหลด"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1122
 msgid "Download this file to view even more stars"
 msgstr "ดาวน์โหลดแฟ้มนี้เพื่อเพิ่มจำนวนดาวให้มากขึ้น"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1124
 msgid "Restart the download"
 msgstr "เริ่มต้นการดาวน์โหลดใหม่"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1126
 msgid "Retry"
 msgstr "ลองซ้ำ"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1128
 msgid "Stop the download. You can always restart it later"
 msgstr "หยุดการดาวน์โหลด คุณสามารถเริ่มต้นใหม่ได้ในภายหลัง"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1130
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1133
 msgid "Close window when script runs"
 msgstr "ปิดหน้าต่างเมื่อสคริปต์ทำงาน"
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1135
 msgid "Run the selected script"
 msgstr "สั่งให้สคริปต์ที่เลือกไว้ทำงาน"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1139
 msgid "Stop a running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงานอยู่"
 
-#: src/ui_configurationDialog.h:1141
+#: src/ui_configurationDialog.h:1143
 msgid "Load at startup"
 msgstr "โหลดเมื่อเริ่มต้นระบบ"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1144
 msgid "configure"
 msgstr "ปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1147
+#: src/ui_configurationDialog.h:1149
 msgid "Main"
 msgstr "หลัก"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1151
 msgid "Information"
 msgstr "ข้อมูล"
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1156
 msgid "Navigation"
 msgstr "นำทาง"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1158
 msgid "Tools"
 msgstr "เครื่องมือ"
 
-#: src/ui_configurationDialog.h:1160
+#: src/ui_configurationDialog.h:1162
 msgid "Plugins"
 msgstr "โปรแกรมเสริม"
 
@@ -5565,12 +5565,12 @@ msgstr ""
 "โปรแกรมเสริมสำหรับให้ Stellarium ส่งคำสั่ง \"สลูว์\" "
 "ไปยังกล้องโทรทรรศน์ที่ฐานยึดควบคุมด้วยคอมพิวเตอร์ (กล้องแบบ GoTo)"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1666
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "หันกล้องโทรทรรศน์ #%1 ไปยังวัตถุที่เลือก"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1671
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "หันกล้องโทรทรรศน์ #%1 ไปยังตำแหน่งที่อยู่กลางจอภาพในขณะนี้"
@@ -5972,62 +5972,62 @@ msgstr ""
 "สามารถใช้สำหรับตั้งค่าเขตเวลาและเปลี่ยนแปลงรูปแบบวัน-เวลาในแถบด้านล่าง"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "January"
 msgstr "มกราคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "February"
 msgstr "กุมภาพันธ์"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "March"
 msgstr "มีนาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "April"
 msgstr "เมษายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "May"
 msgstr "พฤษภาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "June"
 msgstr "มิถุนายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "July"
 msgstr "กรกฎาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "August"
 msgstr "สิงหาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "September"
 msgstr "กันยายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "October"
 msgstr "ตุลาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "November"
 msgstr "พฤศจิกายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "December"
 msgstr "ธันวาคม"
 
