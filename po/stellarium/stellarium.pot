@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-24 23:55+0700\n"
+"POT-Creation-Date: 2013-02-25 09:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -406,13 +406,13 @@ msgstr ""
 #: src/core/StelCore.cpp:1485
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
-"Personal Computer</em> (2000) provides 3rd-order polynomials for the recent "
-"past only."
+"Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
+"for the recent past."
 msgstr ""
 
 #: src/core/StelCore.cpp:1488
 msgid ""
-"E. M. Reingold & N. Dershowitz present an approximation formula in "
+"E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
@@ -421,8 +421,8 @@ msgstr ""
 #: src/core/StelCore.cpp:1491
 #, qt-format
 msgid ""
-"This equation was published by L. V. Morrison and F. R. Stephenson in "
-"article <em>Historical values of the Earth's clock error %1T and the "
+"This important solution was published by L. V. Morrison and F. R. Stephenson "
+"in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
@@ -438,10 +438,11 @@ msgstr ""
 #: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
-"This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
-"Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to "
-"+3000</em> (2006). This formula is also used in the solar, lunar and "
-"planetary ephemeris program SOLEX."
+"This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
+"(2004) and a polynomial fit through tabulated values for 1600-2000, is used "
+"for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
+"solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
 #: src/core/StelCore.cpp:1497
@@ -800,39 +801,39 @@ msgstr ""
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
-msgid "Chapront, Chapront-Touze & Francou (1997) & Meeus (1998)"
-msgstr ""
-
 #: src/gui/ConfigurationDialog.cpp:1146
-msgid "JPL Horizons"
+msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1147
-msgid "Meeus & Simons (2000)"
+msgid "JPL Horizons"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1148
-msgid "Montenbruck & Pfleger (2000)"
+msgid "Meeus & Simons (2000)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1149
-msgid "Reingold & Dershowitz (2002, 2007)"
+msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1150
+msgid "Reingold & Dershowitz (2002, 2007)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1151
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1155
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
