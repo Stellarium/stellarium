@@ -350,13 +350,13 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra0 The right ascension of the first corner of the image in degrees
-	//! @param dec0 The declenation of the first corner of the image in degrees
+	//! @param dec0 The declination of the first corner of the image in degrees
 	//! @param ra1 The right ascension of the second corner of the image in degrees
-	//! @param dec1 The declenation of the second corner of the image in degrees
+	//! @param dec1 The declination of the second corner of the image in degrees
 	//! @param ra2 The right ascension of the third corner of the image in degrees
-	//! @param dec2 The declenation of the third corner of the image in degrees
+	//! @param dec2 The declination of the third corner of the image in degrees
 	//! @param ra3 The right ascension of the fourth corner of the image in degrees
-	//! @param dec3 The declenation of the fourth corner of the image in degrees
+	//! @param dec3 The declination of the fourth corner of the image in degrees
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
