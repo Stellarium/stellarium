@@ -1593,9 +1593,16 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	// GZ: R&D don't use a float-fraction year, but explicitly only the integer year! And R&D use a proleptic Gregorian year before 1582.
 	// GZ: We cannot do that, but the difference is negligible.
 	// GZ: FIXME: why are displayed values so far off the computed values? It seems currently broken!
-	double deltaT;
+	double deltaT=0.0; // If it returns 0, there is a bug!
 
-	if ((1988 <= year) && (year <= 2019))
+	if ((year >= 2019) || (year < 1620))
+	{
+		double jdYear_0; getJDFromDate(&jdYear_0, year, 1, 1, 0, 0, 0);
+		double jd1810_0; getJDFromDate(&jd1810_0, 1810, 1, 1, 0, 0, 0);
+		double x = (jdYear_0-jd1810_0+0.5);
+		deltaT = x*x/41048480.0 - 15.0;
+	}
+	else if (year >= 1988)
 	{
 		deltaT = year-1933.0;
 	}
@@ -1622,13 +1629,6 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	{
 		double yDiff1600 = year-1600.0;
 		deltaT = (0.0219167*yDiff1600 -4.0675)*yDiff1600 +196.58333;
-	}
-	else
-	{ // before 1620, and after 2019
-		double jdYear_0; getJDFromDate(&jdYear_0, year, 1, 1, 0, 0, 0);
-		double jd1810_0; getJDFromDate(&jd1810_0, 1810, 1, 1, 0, 0, 0);
-		double x = (jdYear_0-jd1810_0+0.5);
-		deltaT = x*x/41048480.0 - 15.0;
 	}
 	return deltaT;
 }

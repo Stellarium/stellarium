@@ -1142,7 +1142,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
 	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
 	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
-	algorithms->addItem(q_("Chapront, Chapront-Touze & Francou (1997) & Meeus (1998)"), "ChaprontMeeus");
+	// The dropdown label is too long for the string, and Meeus 1998 is very popular, this should be in the beginning of the tag.
+	algorithms->addItem(q_("Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"), "ChaprontMeeus");
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
 	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
 	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
