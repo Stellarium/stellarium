@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-25 09:11+0700\n"
-"PO-Revision-Date: 2013-02-24 17:32+0000\n"
+"PO-Revision-Date: 2013-02-25 05:57+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-25 04:43+0000\n"
+"X-Launchpad-Export-Date: 2013-02-26 04:52+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -319,7 +319,7 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
-"Это уравнение было опубликовано П. М. Мюллером и Ф. Р. Стефенсоном в статье "
+"Это уравнение было опубликовано П. М. Мюллером и Ф. Р. Стивенсоном в статье "
 "<em>Ускорение Земли и Луны из ранних астрономических наблюдений</em> (%1)."
 
 #: src/core/StelCore.cpp:1443
@@ -328,7 +328,7 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
-"Это уравнение было опубликовано Ф. Р. Стефенсоном в статье "
+"Это уравнение было опубликовано Ф. Р. Стивенсоном в статье "
 "<em>Дотелескопические астрономические наблюдения</em> (%1)."
 
 #: src/core/StelCore.cpp:1446
@@ -361,7 +361,7 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
-"Эта формула была опубликована Ф. Р. Стефенсоном и Л. В. Моррисоном в статье "
+"Эта формула была опубликована Ф. Р. Стивенсоном и Л. В. Моррисоном в статье "
 "<em>Долгосрочные изменения вращения Земли с 700 г. до н.э. до 1980 г. "
 "н.э.</em> (%1)."
 
@@ -400,7 +400,7 @@ msgid ""
 msgstr ""
 "Этот полином 12-го порядка был опубликовано Л. Д. Шмаделем и Г. Захом в "
 "статье <em>Эмпирические преобразования с U.T. в E.T. за период 1800-1988 "
-"г.г.</em> (%1) как аппроксимация данных, приведённых Стефенсоном и Моррисом "
+"г.г.</em> (%1) как аппроксимация данных, приведённых Стивенсоном и Моррисом "
 "(1984)."
 
 #: src/core/StelCore.cpp:1467
@@ -420,7 +420,7 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
-"Это уравнение было опубликовано Ф. Р. Стефенсоном и Л. В. Моррисоном в "
+"Это уравнение было опубликовано Ф. Р. Стивенсоном и Л. В. Моррисоном в "
 "статье <em>Долгосрочные флуктуации во вращении Земли: с 700 г. до н.э. до "
 "1990 г. н.э.</em> (%1)."
 
@@ -430,7 +430,7 @@ msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
-"Ф. Р. Стефенсон опубликовал эту формулу в своей книге <em>Исторические "
+"Ф. Р. Стивенсон опубликовал эту формулу в своей книге <em>Исторические "
 "затмения и вращение Земли</em> (%1)."
 
 #: src/core/StelCore.cpp:1476
@@ -479,6 +479,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"Э. М. Рейнгольд и Н. Дершовиц представили этот полином в их книгах "
+"<em>Календарные расчеты</em> (3-е изд. 2007) и <em>Календарные таблицы</em> "
+"(2002). Он основан на данных из книги Жана Меёса <em>Астрономические "
+"алгоритмы </em> (1991)."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -487,6 +491,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Это важное решение было опубликовано Л. В. Моррисоном и Ф. Р. Стивенсоном в "
+"статье <em>Исторические значения ошибки земных часов %1T и расчёт "
+"затмений</em> (%2) с добавлениямм в (%3)."
 
 #: src/core/StelCore.cpp:1494
 #, qt-format
@@ -497,9 +504,9 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 "Виктор Рьейс получил формулу %1T из продолжительности дня (LOD, как это "
-"определено Стефенсоном и Моррисоном (%2)) с помощью симплекс-оптимизации с "
+"определено Стивенсоном и Моррисоном (%2)) с помощью симплекс-оптимизации с "
 "косинусом и квадратным уравнением. Это уравнение основано на возможной "
-"периодичности, описанной Стефенсоном (%2). Подробнее смотрите %3здесь%4."
+"периодичности, описанной Стивенсоном (%2). Подробнее смотрите %3здесь%4."
 
 #: src/core/StelCore.cpp:1497
 #, qt-format
@@ -510,6 +517,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Это решение Ф. Эспенака и Ж. Меёса, основанное на Моррисоне и Стивенсоне "
+"(2004) и полиноме, проходящем через табличные значения для 1600-2000 годов, "
+"используется на %1сайте затмений NASA%2 и в их книге <em>Пятитысячелетний "
+"канон солнечных затмений: -1900 до +3000</em> (2006). Эта формула также "
+"используется для расчёта солнечных, лунных и планетных эфемерид в программе "
+"SOLEX."
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
@@ -857,11 +870,11 @@ msgstr "Тукерман (1962, 1964) и Голдштейн (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Muller & Stephenson (1975)"
-msgstr "Мюллер и Стефенсон (1975)"
+msgstr "Мюллер и Стивенсон (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "Stephenson (1978)"
-msgstr "Стефенсон (1978)"
+msgstr "Стивенсон (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Schmadel & Zech (1979)"
@@ -869,15 +882,15 @@ msgstr "Шмадель и Зах (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Morrison & Stephenson (1982)"
-msgstr "Моррисон и Стефенсон (1982)"
+msgstr "Моррисон и Стивенсон (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Stephenson & Morrison (1984)"
-msgstr "Стефенсон и Моррисон (1984)"
+msgstr "Стивенсон и Моррисон (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson & Houlden (1986)"
-msgstr "Стефенсон и Холден (1986)"
+msgstr "Стивенсон и Холден (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Espenak (1987, 1989)"
@@ -897,11 +910,11 @@ msgstr "Шапрон-Тузе и Шапрон (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Stephenson & Morrison (1995)"
-msgstr "Стефенсон и Моррисон (1995)"
+msgstr "Стивенсон и Моррисон (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Stephenson (1997)"
-msgstr "Стефенсон (1997)"
+msgstr "Стивенсон (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
@@ -925,7 +938,7 @@ msgstr "Рейнгольд и Дершовиц (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr "Моррисон и Стефенсон (2004, 2005)"
+msgstr "Моррисон и Стивенсон (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Espenak & Meeus (2006)"
