@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-25 09:11+0700\n"
-"PO-Revision-Date: 2013-02-24 18:25+0000\n"
+"PO-Revision-Date: 2013-02-25 06:25+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-25 04:38+0000\n"
+"X-Launchpad-Export-Date: 2013-02-26 04:46+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -465,6 +465,8 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"O. Montenbruckin & T. Pflegerin teos <em>Astronomy on the Personal "
+"Computer</em> (2000) tarjoaa kolmannen asteen polynomeja lähimenneisyydelle."
 
 #: src/core/StelCore.cpp:1488
 msgid ""
@@ -473,6 +475,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold & N. Dershowitz esittävät likimääräisen kaavan teoksissaan "
+"<em>Calendrical Calculations</em> (3. painos 2007) ja <em>Calendrical "
+"Tabulations</em> (2002) perustuen Jean Meeuksen teokseen <em>Astronomical "
+"Algorithms</em> (1991)."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -481,6 +487,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Tämän tärkeän ratkaisun julkaisivat L. V. Morrison ja F. R. Stephenson "
+"artikkelissaan <em>Historical values of the Earth's clock error %1T and the "
+"calculation of eclipses</em> (%2) lisäyksin (%3)."
 
 #: src/core/StelCore.cpp:1494
 #, qt-format
@@ -504,6 +513,10 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Tämä F. Espenakin ja J. Meeuksen teoksessaan <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> (2006) esittämä kaava on käytössä "
+"%1NASAn pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
+"planeettaefemeridiohjelma SOLEXissa."
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
@@ -901,7 +914,7 @@ msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (Chaprontin, Chapront-Touzen & Francoun kanssa (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "JPL Horizons"
