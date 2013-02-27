@@ -18,7 +18,7 @@
 
 #include "Ocular.hpp"
 #include "Telescope.hpp"
-#include "Barlow.hpp"
+#include "Lens.hpp"
 
 Ocular::Ocular()
 {
@@ -58,29 +58,29 @@ QMap<int, QString> Ocular::propertyMap()
 #pragma mark Instance Methods
 #endif
 /* ********************************************************************* */
-double Ocular::actualFOV(Telescope *telescope, Barlow *barlow) const
+double Ocular::actualFOV(Telescope *telescope, Lens *lens) const
 {
-	const double barlow_multipler = (barlow != NULL ? barlow->multipler() : 1.0f);
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
 	double actualFOV = 0.0;
 	if (m_binoculars) {
 		actualFOV = appearentFOV();
 	} else if (fieldStop() > 0.0) {
-            actualFOV =  fieldStop() / (telescope->focalLength() * barlow_multipler) * 57.3;
+		actualFOV =  fieldStop() / (telescope->focalLength() * lens_multipler) * 57.3;
 	} else {
 		//actualFOV = apparent / mag
-		actualFOV = appearentFOV() / (telescope->focalLength() * barlow_multipler / effectiveFocalLength());
+		actualFOV = appearentFOV() / (telescope->focalLength() * lens_multipler / effectiveFocalLength());
 	}
 	return actualFOV;
 }
 
-double Ocular::magnification(Telescope *telescope, Barlow *barlow) const
+double Ocular::magnification(Telescope *telescope, Lens *lens) const
 {
 	double magnifiction = 0.0;
 	if (m_binoculars) {
 		magnifiction = effectiveFocalLength();
 	} else {
-		const double barlow_multipler = (barlow != NULL ? barlow->multipler() : 1.0f);
-		magnifiction = telescope->focalLength() * barlow_multipler / effectiveFocalLength();
+		const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+		magnifiction = telescope->focalLength() * lens_multipler / effectiveFocalLength();
 	}
 	return magnifiction;
 }

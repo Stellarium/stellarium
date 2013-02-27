@@ -9,8 +9,8 @@ LINK_DIRECTORIES(/src)
 SET(Oculars_SRCS
   CCD.hpp
   CCD.cpp
-  Barlow.hpp
-  Barlow.cpp
+  Lens.hpp
+  Lens.cpp
   Ocular.hpp
   Ocular.cpp
   Oculars.hpp
