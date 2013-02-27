@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-25 09:11+0700\n"
-"PO-Revision-Date: 2013-02-22 21:05+0000\n"
+"PO-Revision-Date: 2013-02-26 21:08+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-26 04:45+0000\n"
+"X-Launchpad-Export-Date: 2013-02-27 04:34+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -262,6 +262,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Tento historický vzorec získal C. Schoch v roce 1931 a byl použit G. "
+"Henrikssonem ve článku <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). Další informace si přečtěte %2zde%3."
 
 #: src/core/StelCore.cpp:1425
 #, qt-format
@@ -334,6 +337,10 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Tuto polynomickou rovnici 12. řádu (zastaralá, nahrazena Schmadelem & Zechem "
+"v roce 1988) publikovali L. D. Schmadel a G. Zech ve článku <em>Polynomial "
+"approximations for the correction delta T E.T.-U.T. in the period 1800-"
+"1975</em> (%1) použitím dat publikovaných Brouwerem (1952)."
 
 #: src/core/StelCore.cpp:1449
 msgid ""
@@ -387,6 +394,10 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"Tuto polynomickou rovnici 12. řádu publikovali L. D. Schmadel a G. Zech ve "
+"článku <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
+"1988</em> (%1) jako úpravu dat z hodnot získaných od Stephensona & Morrisona "
+"(1984)."
 
 #: src/core/StelCore.cpp:1467
 msgid ""
@@ -451,6 +462,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"Čtvrté vydání knihy <em>Astronomy on the Personal Computer</em> (2000) od O. "
+"Montenbruck a T. Pfleger udává jednoduchou polynomickou regresi 3. řádu pro "
+"nedávnou minulost."
 
 #: src/core/StelCore.cpp:1488
 msgid ""
@@ -459,6 +473,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold a N. Dershowitz představují tuto polynomickou regresi dat v "
+"knihách <em>Calendrical Calculations</em> (3. vyd., 2007) a <em>Calendrical "
+"Tabulations</em> (2002). Je založena na knize <em>Astronomical "
+"Algorithms</em> (1991) od Jeana Meeuse."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -467,6 +485,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Toto důležité řešení publikovali L. V. Morrison a F. R. Stephenson e článku "
+"<em>Historical values of the Earth's clock error %1T and the calculation of "
+"eclipses</em> (%2) s dodatkem v (%3)."
 
 #: src/core/StelCore.cpp:1494
 #, qt-format
@@ -490,6 +511,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Toto řešení od . Espenaka and J. Meeuse, založené na výzkumu Morrisona a "
+"Stephensona (2004) a polynomické regresi tabulkových hodnot pro období 1600-"
+"2000, je použito pro %1Stránku o zatměních od NASA%2 a v jejich knize "
+"<em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). "
+"Tento vzorec je také použit v programu pro solární, lunární a planetární "
+"efemeridy SOLEX"
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
@@ -510,21 +537,24 @@ msgstr "Chyba"
 
 #: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "s nesmyslnými hodnotami mimo tento rozsah"
 
 #: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"s průměrnou chybou menší než jedna sekunda. max. chyba 1.9s a nesmyslnými "
+"hodnotami mimo tento rozsah"
 
 #: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "s nulovými hodnotami mimo tento rozsah"
 
 #: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"s typickou 1 vteřinovou přesností a nulovými hodnotami mimo tento rozsah"
 
 #: src/core/StelCore.cpp:1639
 #, qt-format
@@ -882,6 +912,7 @@ msgstr "Stephenson (1997)"
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
+"Meeus (1998) (spolu s Chaprontem, Chapront-Touzem & Francouem (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "JPL Horizons"
@@ -897,7 +928,7 @@ msgstr "Montenbruck a Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold a Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "Morrison & Stephenson (2004, 2005)"
@@ -8159,13 +8190,3 @@ msgstr "Výška Slunce za soumraku: 0 stup."
 
 #~ msgid "Edit Alternative Shortcut"
 #~ msgstr "Upravit alternativní zkratku"
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by L. V. Morrison and F. R. Stephenson in "
-#~ "article <em>Historical values of the Earth's clock error %1T and the "
-#~ "calculation of eclipses</em> (%2) with addendum in (%3)."
-#~ msgstr ""
-#~ "Tuto rovnici publikovali L. V. Morrison a F. R. Stephenson v článku "
-#~ "<em>Historical values of the Earth's clock error %1T and the calculation of "
-#~ "eclipses</em> (%2) s dodatkem v (%3)."
