@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-25 09:11+0700\n"
-"PO-Revision-Date: 2013-02-25 05:57+0000\n"
+"PO-Revision-Date: 2013-02-27 03:09+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-26 04:52+0000\n"
+"X-Launchpad-Export-Date: 2013-02-27 04:34+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -409,7 +409,7 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
-"Эта формула была использована М. Шапроном-Тузе и Ж. Шапроном в укороченной "
+"Эта формула была использована М. Шапроном-Таузи и Ж. Шапроном в укороченной "
 "версии лунной теории ELP 2000-85 в их книге <em>Лунные таблицы и программы с "
 "4000 г. до н.э. до 8000 г. н.э.</em> (1991)."
 
@@ -441,7 +441,7 @@ msgid ""
 msgstr ""
 "Из книги Ж. Меёса <em>Астрономические алгоритмы</em> (2-е изд., 1998) и "
 "широко используется. Таблица для 1620..2000, и включает в себя вариант "
-"Шапрон, Шапрон-Тузе и Франко (1997) для дат за пределами диапазона "
+"Шапрон, Шапрон-Таузи и Франко (1997) для дат за пределами диапазона "
 "1620..2000."
 
 #: src/core/StelCore.cpp:1479
@@ -906,7 +906,7 @@ msgstr "Шмадель и Зах (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr "Шапрон-Тузе и Шапрон (1991)"
+msgstr "Шапрон-Таузи и Шапрон (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Stephenson & Morrison (1995)"
@@ -918,7 +918,7 @@ msgstr "Стивенсон (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr "Меёс (1998) (с Шапрон, Шапрон-Туз и Франку (1997))"
+msgstr "Меёс (1998) (с Шапрон, Шапрон-Таузи и Франку (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "JPL Horizons"
@@ -8225,48 +8225,3 @@ msgstr "Высота Солнца в сумерках: 0 град."
 
 #~ msgid "Edit Alternative Shortcut"
 #~ msgstr "Править альтернативное сокращение"
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by L. V. Morrison and F. R. Stephenson in "
-#~ "article <em>Historical values of the Earth's clock error %1T and the "
-#~ "calculation of eclipses</em> (%2) with addendum in (%3)."
-#~ msgstr ""
-#~ "Это уравнение было опубликовано Л. В. Моррисоном и Ф. Р. Стефенсоном в "
-#~ "статье <em>Исторические значения ошибки земных часов %1T и расчёт "
-#~ "затмений</em> (%2) с добавлениями в (%3)."
-
-#~ msgid ""
-#~ "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
-#~ "Personal Computer</em> (2000) provides 3rd-order polynomials for the recent "
-#~ "past only."
-#~ msgstr ""
-#~ "Четвертое издание книги О. Монтенбрука и Т. Пфлегера <em>Астрономия на "
-#~ "персональном компьютере</em> (2000) приводит полином 3-го порядка только для "
-#~ "недавнего прошлого."
-
-#, qt-format
-#~ msgid ""
-#~ "This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
-#~ "Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to "
-#~ "+3000</em> (2006). This formula is also used in the solar, lunar and "
-#~ "planetary ephemeris program SOLEX."
-#~ msgstr ""
-#~ "Эта формула Ф. Эспенака и Ж. Меёса используется на %1вебсайте NASA о "
-#~ "солнечных затмениях%2 и в их книге <em>Пятитысячелетний канон солнечных "
-#~ "затмений: -1900 до +3000</em> (2006). Эта формула также используется для "
-#~ "расчёта солнечных, лунных и планетных эфемерид программой SOLEX."
-
-#~ msgid "Chapront, Chapront-Touze & Francou (1997) & Meeus (1998)"
-#~ msgstr "Шапрон, Шапрон-Туз и Франку (1997) и Меёс (1998)"
-
-#~ msgid ""
-#~ "E. M. Reingold & N. Dershowitz present an approximation formula in "
-#~ "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
-#~ "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
-#~ "<em>Astronomical Algorithms</em> (1991)."
-#~ msgstr ""
-#~ "Э. М. Рейнгольд и Н. Дершовиц представили приближенную формулу в их книгах "
-#~ "<em>Календарные вычисления</em> (3-я ред., 2007) и <em>календарные "
-#~ "таблицы</em> (2002). Формула основана на книге Жана Меёса "
-#~ "<em>Астрономические алгоритмы</em> (1991)."
