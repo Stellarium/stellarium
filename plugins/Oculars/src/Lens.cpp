@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2009 Timothy Reaves
- * Copytight (C) 2013 Pawel Stolowski
+ * Copyright (C) 2013 Pawel Stolowski
+ * Copyright (C) 2013 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,25 +18,25 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "Barlow.hpp"
+#include "Lens.hpp"
 #include <QSettings>
 
-Barlow::Barlow()
+Lens::Lens()
 {
 }
 
-Barlow::Barlow(const QObject& other)
+Lens::Lens(const QObject& other)
 {
     this->m_multipler = other.property("multipler").toDouble();
     this->m_name = other.property("name").toString();
 }
 
-Barlow::~Barlow()
+Lens::~Lens()
 {
 }
 
 static QMap<int, QString> mapping;
-QMap<int, QString> Barlow::propertyMap()
+QMap<int, QString> Lens::propertyMap()
 {
     if(mapping.isEmpty()) {
         mapping = QMap<int, QString>();
@@ -45,22 +46,22 @@ QMap<int, QString> Barlow::propertyMap()
     return mapping;
 }
 
-const QString Barlow::name() const
+const QString Lens::name() const
 {
     return m_name;
 }
 
-void Barlow::setName(const QString& theValue)
+void Lens::setName(const QString& theValue)
 {
     m_name = theValue;
 }
 
-double Barlow::multipler() const
+double Lens::multipler() const
 {
     return m_multipler;
 }
 
-void Barlow::setMultipler(double theValue)
+void Lens::setMultipler(double theValue)
 {
     m_multipler = theValue;
 }
@@ -72,21 +73,21 @@ void Barlow::setMultipler(double theValue)
 #endif
 /* ********************************************************************* */
 
-Barlow* Barlow:: barlowFromSettings(QSettings* theSettings, int barlowIndex)
+Lens* Lens:: lensFromSettings(QSettings* theSettings, int lensIndex)
 {
-    Barlow* barlow = new Barlow();
-    QString prefix = "barlow/" + QVariant(barlowIndex).toString() + "/";
+    Lens* lens = new Lens();
+    QString prefix = "lens/" + QVariant(lensIndex).toString() + "/";
 
-    barlow->setName(theSettings->value(prefix + "name", "").toString());
-    barlow->setMultipler(theSettings->value(prefix + "multipler", "1").toDouble());
+    lens->setName(theSettings->value(prefix + "name", "").toString());
+    lens->setMultipler(theSettings->value(prefix + "multipler", "1").toDouble());
 
-    return barlow;
+    return lens;
 }
 
-Barlow* Barlow::barlowModel()
+Lens* Lens::lensModel()
 {
-    Barlow* model = new Barlow();
-    model->setName("My Barlow");
+    Lens* model = new Lens();
+    model->setName("My Lens");
     model->setMultipler(2.0f);
     return model;
 }
