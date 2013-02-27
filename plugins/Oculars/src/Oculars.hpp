@@ -26,7 +26,7 @@
 #include "CCD.hpp"
 #include "Ocular.hpp"
 #include "Telescope.hpp"
-#include "Barlow.hpp"
+#include "Lens.hpp"
 
 #include <QFont>
 #include <QSettings>
@@ -87,7 +87,7 @@ public slots:
 	void decrementCCDIndex();
 	void decrementOcularIndex();
 	void decrementTelescopeIndex();
-	void decrementBarlowIndex();
+	void decrementLensIndex();
 	void displayPopupMenu();
 	//! This method is called with we detect that our hot key is pressed.  It handles
 	//! determining if we should do anything - based on a selected object.
@@ -95,13 +95,13 @@ public slots:
 	void incrementCCDIndex();
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
-	void incrementBarlowIndex();
-	void disableBarlow();
+	void incrementLensIndex();
+	void disableLens();
 	void rotateCCD(QString amount); //!< amount must be a number.
 	void selectCCDAtIndex(QString indexString); //!< indexString must be an integer, in the range of -1:ccds.count()
 	void selectOcularAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:oculars.count()
 	void selectTelescopeAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:telescopes.count()
-	void selectBarlowAtIndex(QString indexString); //!< indexString must be an integer, in the range -1:barlows.count<()
+	void selectLensAtIndex(QString indexString); //!< indexString must be an integer, in the range -1:lense.count<()
 	//! Toggles the sensor frame overlay.
 	void toggleCCD(bool show);
 	//! Toggles the sensor frame overlay (overloaded for blind switching).
@@ -120,7 +120,7 @@ signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
 	void selectedTelescopeChanged();
-	void selectedBarlowChanged();
+	void selectedLensChanged();
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -174,25 +174,25 @@ private:
 
 	void hideUsageMessageIfDisplayed();
 
-	//! Creates the sub-menu listing barlow lenses in the pop-up menu
-	QMenu* addBarlowSubmenu(QMenu* parent);
+	//! Creates the sub-menu listing lense in the pop-up menu
+	QMenu* addLensSubmenu(QMenu* parent);
 
 	//! Creates the sub-menu listing telescopes in the pop-up menu.
 	QMenu* addTelescopeSubmenu(QMenu* parent);
 
-	//! Returns selected barlow,or NULL if no barlow is selected
-	Barlow* selectedBarlow();
+	//! Returns selected lens,or NULL if no lens is selected
+	Lens* selectedLens();
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
-	QList<Barlow *> barlows;
+	QList<Lens *> lense;
 
 	int selectedCCDIndex; //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
 	int selectedOcularIndex; //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.
 	int selectedTelescopeIndex; //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
-	int selectedBarlowIndex; //!<  index of the current barlow lends, in the range of -1:barlows.count(). -1 means no barlow is selected
+	int selectedLensIndex; //!<  index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
 
 	QFont font;					//!< The font used for drawing labels.
 	bool flagShowCCD;				//!< flag used to track f we are in CCD mode.
@@ -224,7 +224,7 @@ private:
 	QSignalMapper* ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
 	QSignalMapper* ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
 	QSignalMapper* telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
-	QSignalMapper* barlowSignalMapper; //!< Used to determine which barlow was selected from the popup navigator */
+	QSignalMapper* lenseSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
 
 	// for toolbar button
 	QPixmap* pxmapGlow;

@@ -27,7 +27,7 @@
 #include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
-#include "Barlow.hpp"
+#include "Lens.hpp"
 
 class Ui_ocularDialogForm;
 
@@ -47,7 +47,7 @@ class OcularDialog : public StelDialog
 	Q_OBJECT
 
 public:
-    OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Barlow *>* barlows);
+	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *>* lense);
 	virtual ~OcularDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -58,19 +58,19 @@ public slots:
 	void deleteSelectedCCD();
 	void deleteSelectedOcular();
 	void deleteSelectedTelescope();
-	void deleteSelectedBarlow();
+	void deleteSelectedLens();
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
-	void insertNewBarlow();
+	void insertNewLens();
 	void moveUpSelectedSensor();
 	void moveUpSelectedOcular();
 	void moveUpSelectedTelescope();
-	void moveUpSelectedBarlow();
+	void moveUpSelectedLens();
 	void moveDownSelectedSensor();
 	void moveDownSelectedOcular();
 	void moveDownSelectedTelescope();
-	void moveDownSelectedBarlow();
+	void moveDownSelectedLens();
 	void retranslate();
 
 signals:
@@ -92,26 +92,26 @@ private slots:
 private:
 	Oculars* plugin;
 
-	QDataWidgetMapper*			ccdMapper;
-	QList<CCD *>*					ccds;
+	QDataWidgetMapper*		ccdMapper;
+	QList<CCD *>*			ccds;
 	PropertyBasedTableModel*	ccdTableModel;
-	QDataWidgetMapper*			ocularMapper;
-	QList<Ocular *>*				oculars;
+	QDataWidgetMapper*		ocularMapper;
+	QList<Ocular *>*		oculars;
 	PropertyBasedTableModel*	ocularTableModel;
-	QDataWidgetMapper*			telescopeMapper;
-	QList<Telescope *>*			telescopes;
+	QDataWidgetMapper*		telescopeMapper;
+	QList<Telescope *>*		telescopes;
 	PropertyBasedTableModel*	telescopeTableModel;
-	QDataWidgetMapper*			barlowMapper;
-	QList<Barlow *>*			barlows;
-	PropertyBasedTableModel*	barlowTableModel;
-	QDoubleValidator*				validatorOcularAFOV;
-	QDoubleValidator*				validatorOcularEFL;
-	QDoubleValidator*				validatorTelescopeDiameter;
-	QDoubleValidator*				validatorTelescopeFL;
-	QDoubleValidator*				validatorBarlowMultipler;
-	QRegExpValidator*				validatorName;
-	QIntValidator*					validatorPositiveInt;
-	QDoubleValidator*				validatorPositiveDouble;
+	QDataWidgetMapper*		lensMapper;
+	QList<Lens *>*			lense;
+	PropertyBasedTableModel*	lensTableModel;
+	QDoubleValidator*		validatorOcularAFOV;
+	QDoubleValidator*		validatorOcularEFL;
+	QDoubleValidator*		validatorTelescopeDiameter;
+	QDoubleValidator*		validatorTelescopeFL;
+	QDoubleValidator*		validatorLensMultipler;
+	QRegExpValidator*		validatorName;
+	QIntValidator*			validatorPositiveInt;
+	QDoubleValidator*		validatorPositiveDouble;
 };
 
 #endif // _OCULARDIALOG_HPP_

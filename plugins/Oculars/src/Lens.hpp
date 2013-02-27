@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2009 Timothy Reaves
- * Copytight (C) 2013 Pawel Stolowski
+ * Copyright (C) 2013 Pawel Stolowski
+ * Copyright (C) 2013 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef BARLOW_HPP_
-#define BARLOW_HPP_
+#ifndef LENS_HPP_
+#define LENS_HPP_
 
 #include <QObject>
 #include <QString>
@@ -26,18 +27,18 @@
 
 class QSettings;
 
-class Barlow : public QObject
+class Lens : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(double multipler READ multipler WRITE setMultipler)
 
 public:
-    Barlow();
-    Q_INVOKABLE Barlow(const QObject& other);
-    virtual ~Barlow();
-    static Barlow* barlowFromSettings(QSettings* theSettings, int barlowIndex);
-    static Barlow* barlowModel();
+    Lens();
+    Q_INVOKABLE Lens(const QObject& other);
+    virtual ~Lens();
+    static Lens* lensFromSettings(QSettings* theSettings, int lensIndex);
+    static Lens* lensModel();
 
     double multipler() const;
     void setMultipler(double theValue);

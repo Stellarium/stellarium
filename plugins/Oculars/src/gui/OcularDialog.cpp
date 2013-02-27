@@ -38,7 +38,7 @@
 #include <QStandardItemModel>
 #include <limits>
 
-OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Barlow *>* barlows) :
+OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *> *lense) :
 	plugin(pluginPtr)
 {
 	ui = new Ui_ocularDialogForm;
@@ -60,10 +60,10 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 														telescopeModel,
 														telescopeModel->propertyMap());
 	
-	this->barlows = barlows;
-	barlowTableModel = new PropertyBasedTableModel(this);
-	Barlow* barlowModel = Barlow::barlowModel();
-	barlowTableModel->init(reinterpret_cast<QList<QObject *>* >(barlows), barlowModel, barlowModel->propertyMap());
+	this->lense = lense;
+	lensTableModel = new PropertyBasedTableModel(this);
+	Lens* lensModel = Lens::lensModel();
+	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lense), lensModel, lensModel->propertyMap());
 
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -71,7 +71,7 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 	validatorOcularEFL = new QDoubleValidator(1.0, 60.0, 1, this);
 	validatorTelescopeDiameter = new QDoubleValidator(1.0, 1000.0, 1, this);
 	validatorTelescopeFL = new QDoubleValidator(1.0, 10000.0, 1, this);
-	validatorBarlowMultipler = new QDoubleValidator(1.0, 6.0, 1, this);
+	validatorLensMultipler = new QDoubleValidator(1.0, 6.0, 1, this);
 	QRegExp nameExp("^\\S.*");
 	validatorName = new QRegExpValidator(nameExp, this);
 }
@@ -81,7 +81,7 @@ OcularDialog::~OcularDialog()
 	ocularTableModel->disconnect();
 	telescopeTableModel->disconnect();
 	ccdTableModel->disconnect();
-	barlowTableModel->disconnect();
+	lensTableModel->disconnect();
 
 	delete ui;
 	ui = NULL;
@@ -157,12 +157,12 @@ void OcularDialog::deleteSelectedTelescope()
 	}
 }
 
-void OcularDialog::deleteSelectedBarlow()
+void OcularDialog::deleteSelectedLens()
 {
-    if (barlowTableModel->rowCount() > 0) {
-        barlowTableModel->removeRows(ui->barlowListView->currentIndex().row(), 1);
-        if (barlowTableModel->rowCount() > 0) {
-            ui->barlowListView->setCurrentIndex(barlowTableModel->index(0, 1));
+    if (lensTableModel->rowCount() > 0) {
+	lensTableModel->removeRows(ui->lensListView->currentIndex().row(), 1);
+	if (lensTableModel->rowCount() > 0) {
+	    ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
         }
         plugin->updateLists();
     }
@@ -186,10 +186,10 @@ void OcularDialog::insertNewTelescope()
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(telescopeTableModel->rowCount() - 1, 1));
 }
 
-void OcularDialog::insertNewBarlow()
+void OcularDialog::insertNewLens()
 {
-	barlowTableModel->insertRows(barlowTableModel->rowCount(), 1);
-	ui->barlowListView->setCurrentIndex(barlowTableModel->index(barlowTableModel->rowCount() - 1, 1));
+	lensTableModel->insertRows(lensTableModel->rowCount(), 1);
+	ui->lensListView->setCurrentIndex(lensTableModel->index(lensTableModel->rowCount() - 1, 1));
 }
 
 void OcularDialog::moveUpSelectedSensor()
@@ -222,12 +222,12 @@ void OcularDialog::moveUpSelectedTelescope()
 	}
 }
 
-void OcularDialog::moveUpSelectedBarlow()
+void OcularDialog::moveUpSelectedLens()
 {
-	int index = ui->barlowListView->currentIndex().row();
+	int index = ui->lensListView->currentIndex().row();
 	if (index > 0)
 	{
-		barlowTableModel->moveRowUp(index);
+		lensTableModel->moveRowUp(index);
 		plugin->updateLists();
 	}
 }
@@ -262,12 +262,12 @@ void OcularDialog::moveDownSelectedTelescope()
 	}
 }
 
-void OcularDialog::moveDownSelectedBarlow()
+void OcularDialog::moveDownSelectedLens()
 {
-	int index = ui->barlowListView->currentIndex().row();
-	if (index >= 0 && index < barlowTableModel->rowCount() - 1)
+	int index = ui->lensListView->currentIndex().row();
+	if (index >= 0 && index < lensTableModel->rowCount() - 1)
 	{
-		barlowTableModel->moveRowDown(index);
+		lensTableModel->moveRowDown(index);
 		plugin->updateLists();
 	}
 }
@@ -336,7 +336,7 @@ void OcularDialog::createDialogContent()
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
-	ui->barlowListView->setModel(barlowTableModel);
+	ui->lensListView->setModel(lensTableModel);
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -350,8 +350,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->deleteCCD, SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
 	connect(ui->addOcular, SIGNAL(clicked()), this, SLOT(insertNewOcular()));
 	connect(ui->deleteOcular, SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
-	connect(ui->addBarlow, SIGNAL(clicked()), this, SLOT(insertNewBarlow()));
-	connect(ui->deleteBarlow, SIGNAL(clicked()), this, SLOT(deleteSelectedBarlow()));
+	connect(ui->addLens, SIGNAL(clicked()), this, SLOT(insertNewLens()));
+	connect(ui->deleteLens, SIGNAL(clicked()), this, SLOT(deleteSelectedLens()));
 	connect(ui->addTelescope, SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
 
@@ -370,8 +370,8 @@ void OcularDialog::createDialogContent()
 	ui->telescopeDiameter->setValidator(validatorTelescopeDiameter);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
-	ui->barlowName->setValidator(validatorName);
-	ui->barlowMultipler->setValidator(validatorBarlowMultipler);
+	ui->lensName->setValidator(validatorName);
+	ui->lensMultipler->setValidator(validatorLensMultipler);
 	
 	// The key bindings
 	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
@@ -401,10 +401,10 @@ void OcularDialog::createDialogContent()
 					this, SLOT(moveUpSelectedTelescope()));
 	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()),
 					this, SLOT(moveDownSelectedTelescope()));
-	connect(ui->pushButtonMoveBarlowUp, SIGNAL(pressed()),
-					this, SLOT(moveUpSelectedBarlow()));
-	connect(ui->pushButtonMoveBarlowDown, SIGNAL(pressed()),
-					this, SLOT(moveDownSelectedBarlow()));
+	connect(ui->pushButtonMoveLensUp, SIGNAL(pressed()),
+					this, SLOT(moveUpSelectedLens()));
+	connect(ui->pushButtonMoveLensDown, SIGNAL(pressed()),
+					this, SLOT(moveDownSelectedLens()));
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -436,16 +436,16 @@ void OcularDialog::createDialogContent()
 					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
-	// The barlow lens mapper
-	barlowMapper = new QDataWidgetMapper();
-	barlowMapper->setModel(barlowTableModel);
-	barlowMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-	barlowMapper->addMapping(ui->barlowName, 0);
-	barlowMapper->addMapping(ui->barlowMultipler, 1);
-	barlowMapper->toFirst();
-	connect(ui->barlowListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			barlowMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	ui->barlowListView->setCurrentIndex(barlowTableModel->index(0, 1));
+	// The lens mapper
+	lensMapper = new QDataWidgetMapper();
+	lensMapper->setModel(lensTableModel);
+	lensMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+	lensMapper->addMapping(ui->lensName, 0);
+	lensMapper->addMapping(ui->lensMultipler, 1);
+	lensMapper->toFirst();
+	connect(ui->lensListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
+			lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();
