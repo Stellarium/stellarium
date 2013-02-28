@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-25 09:11+0700\n"
-"PO-Revision-Date: 2013-02-26 21:08+0000\n"
+"POT-Creation-Date: 2013-02-28 00:00+0700\n"
+"PO-Revision-Date: 2013-02-27 20:56+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-27 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-02-28 04:37+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -683,27 +683,27 @@ msgstr "Rektascenze/Deklinace (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "Rektascenze/Deklinace (k datu): %1/%2"
 
-#: src/core/StelObject.cpp:110
+#: src/core/StelObject.cpp:111
 #, qt-format
-msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr "Vesmírná délka/šířka (J2000): %1/%2"
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "Galaktická délka/šířka: %1/%2"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:123
-#: src/core/StelObject.cpp:126
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
+#: src/core/StelObject.cpp:127
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Hodinový úhel/Deklinace: %1/%2"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:139
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
 msgstr "(geometrický)"
 
-#: src/core/StelObject.cpp:123 src/core/StelObject.cpp:145
+#: src/core/StelObject.cpp:124 src/core/StelObject.cpp:146
 msgid "(apparent)"
 msgstr "(zdánlivý)"
 
-#: src/core/StelObject.cpp:139 src/core/StelObject.cpp:145
-#: src/core/StelObject.cpp:148
+#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:146
+#: src/core/StelObject.cpp:149
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Azimut/Výška: %1/%2"
@@ -3383,7 +3383,7 @@ msgstr "Okno nastavení pozorovatelnosti"
 msgid "Oculars plugin configuration"
 msgstr "Nastavení zásuvného modulu okulárů"
 
-#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:999
+#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:1020
 msgid "Ocular view"
 msgstr "Okulárové zobrazení"
 
@@ -3515,10 +3515,10 @@ msgstr "Použít jako předvolené"
 msgid "Return to default"
 msgstr "Návrat na výchozí"
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1012
-#: plugins/Oculars/src/ui_ocularDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1027
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Delete"
 msgstr "Odstranit"
 
@@ -4033,7 +4033,7 @@ msgid "Catalog number(s)"
 msgstr "Čísla katalogů"
 
 #: src/ui_configurationDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1022
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Název"
@@ -4493,7 +4493,7 @@ msgid "Displays compass bearing marks along the horizon"
 msgstr "Zobrazí stupnici azimutu kompasu po obzoru"
 
 #: plugins/Oculars/src/Oculars.cpp:81
-#: plugins/Oculars/src/ui_ocularDialog.h:997
+#: plugins/Oculars/src/ui_ocularDialog.h:1018
 msgid "Oculars"
 msgstr "Okuláry"
 
@@ -4587,18 +4587,18 @@ msgstr "zZP okuláru: %1"
 #: plugins/Oculars/src/Oculars.cpp:1559
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
-msgid "Barlow #%1"
-msgstr "Barlow #%1"
+msgid "Lens #%1"
+msgstr "Čočka #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
-msgid "Barlow #%1: %2"
-msgstr "Barlow #%1: %2"
+msgid "Lens #%1: %2"
+msgstr "Čočka #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
-msgid "Barlow: none"
-msgstr "Barlow: žádný"
+msgid "Lens: none"
+msgstr "Čočka: žádná"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4644,16 +4644,16 @@ msgid "Sensor #%1: %2"
 msgstr "Senzor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
-msgid "&Barlow"
-msgstr "&Barlow"
+msgid "&Lens"
+msgstr "Č&očka"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
-msgid "&Previous barlow"
-msgstr "&Předchozí barlow"
+msgid "&Previous lens"
+msgstr "&Předchozí čočka"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
-msgid "&Next barlow"
-msgstr "&Další barlow"
+msgid "&Next lens"
+msgstr "&Další čočka"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4676,12 +4676,12 @@ msgid "Next ocular"
 msgstr "Další okulár"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
-msgid "Previous Barlow lens"
-msgstr "Předchozí Barlowova čočka"
+msgid "Previous lens"
+msgstr "Předchozí čočka"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
-msgid "Next Barlow lens"
-msgstr "Další Barlowova čočka"
+msgid "Next lens"
+msgstr "Další čočka"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4741,16 +4741,16 @@ msgid "Multiplicity: %1"
 msgstr "Mnohočetnost: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
-msgid "Barlow: None"
-msgstr "Barlow: Žádná"
+msgid "Lens: None"
+msgstr "Čočka: žádná"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
 msgstr "Mnohočetnost: N/A"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
-msgid "Multiplicity of barlow lens"
-msgstr "Mnohočetnost barlowovy čočky"
+msgid "Multiplicity of lens"
+msgstr "Násobnost čočky"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4766,16 +4766,14 @@ msgid "Actual field of view provided by these binoculars"
 msgstr "Skutečné zorné pole poskytnuté tímto dalekohledem"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
-msgid "Magnification provided by this ocular/barlow/telescope combination"
-msgstr ""
-"Zvětšení poskytnuté touto kombinací okuláru/barlowovy čočky/teleskopu"
+msgid "Magnification provided by this ocular/lens/telescope combination"
+msgstr "Zvětšení poskytované touto kombinací okuláru/čočky/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
-"Actual field of view provided by this ocular/barlow/telescope combination"
+"Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
-"Skutečné zorné pole poskytnuté touto kombinací okuláru/barlowovy "
-"čočky/teleskopu"
+"Současné zorné pole poskytované touto kombinací okuláru/čočky/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4872,143 +4870,148 @@ msgstr "Přepíná překryv okuláru."
 msgid "Opens the pop-up navigation menu."
 msgstr "Otevře vyskakovací okno nabídky navigace."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1000
+#: plugins/Oculars/src/ui_ocularDialog.h:1021
 msgid "Enable only if an object is selected"
 msgstr "Povolit, pouze když je zvolen objekt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1001
+#: plugins/Oculars/src/ui_ocularDialog.h:1022
 msgid "Scale image circle"
 msgstr "Změnit velikost obrazového kruhu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1002
+#: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Key mappings"
 msgstr "Mapování kláves"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1003
+#: plugins/Oculars/src/ui_ocularDialog.h:1024
 msgid "Toggle ocular view:"
 msgstr "Přepnout okulárové zobrazení:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1005
+#: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Open pop-up navigation menu:"
 msgstr "Otevřít vyskakovací menu navigace:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1006
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Interface"
 msgstr "Rozhraní"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1007
+#: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "On-screen control panel"
 msgstr "Kontrolní panel na obrazovce"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1008
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Požít stupně a minuty pro FOV z CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1009
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "Obecné"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1010
-#: plugins/Oculars/src/ui_ocularDialog.h:1018
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
 msgid "Eyepieces"
 msgstr "Okuláry"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1011
-#: plugins/Oculars/src/ui_ocularDialog.h:1020
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
-#: plugins/Oculars/src/ui_ocularDialog.h:1037
+#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "Přidat"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1013
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "Název:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1014
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
 msgid "aFOV:"
 msgstr "zZP:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1015
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Focal length:"
 msgstr "Ohnisková vzdálenost"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1016
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Field stop:"
 msgstr "Clona:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1017
+#: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Binoculars"
 msgstr "Dalekohled"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1019
-msgid "Barlows"
-msgstr "Barlowy"
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
+msgid "Lense"
+msgstr "Čočka"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1023
+#: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid "Multiplicity"
 msgstr "Mnohočetnost"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1024
-msgid "Barlow lenses"
-msgstr "Barlowovy čočky"
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+msgid ""
+"Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
+"multiplicity <1 reduce the focal length (Shapley lens)."
+msgstr ""
+"Hodnoty násobnosti >1 zvětšují ohniskovou vzdálenost (Barlowova čočka). "
+"Hodnoty násobnosti <1 ji snižují (Shapleyho čočka)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1025
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Sensors"
 msgstr "Senzory"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution x (pixels):"
 msgstr "Rozlišení x (pixely):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Resolution y (pixels):"
 msgstr "Rozlišení y (pixely):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip width (mm):"
 msgstr "Šířka čipu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Chip height (mm):"
 msgstr "Výška čipu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel width (micron):"
 msgstr "Šířka pixelu (mikron)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Pixel height (micron):"
 msgstr "Výška pixelu (mikron)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
-#: plugins/Oculars/src/ui_ocularDialog.h:1044
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Teleskopy"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Diameter:"
 msgstr "Průměr:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Horizontal flip"
 msgstr "Vodorovné převrácení"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "Vertical flip"
 msgstr "Svislé převrácení"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
@@ -8157,6 +8160,10 @@ msgstr "Výška Slunce za soumraku: 0 stup."
 
 #~ msgid "Compass Marks Plugin"
 #~ msgstr "Zásuvný modul značek kompasu"
+
+#, qt-format
+#~ msgid "Galactic longitude/latitude (J2000): %1/%2"
+#~ msgstr "Vesmírná délka/šířka (J2000): %1/%2"
 
 #~ msgid "Oculars Plugin"
 #~ msgstr "Zásuvný modul okulárů"

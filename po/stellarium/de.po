@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-25 09:11+0700\n"
+"POT-Creation-Date: 2013-02-28 00:00+0700\n"
 "PO-Revision-Date: 2013-02-19 14:53+0000\n"
 "Last-Translator: Dennis Baudys <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-26 04:47+0000\n"
+"X-Launchpad-Export-Date: 2013-02-28 04:38+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -611,27 +611,27 @@ msgstr "RA/DE (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "RA/DE (des Datums): %1/%2"
 
-#: src/core/StelObject.cpp:110
+#: src/core/StelObject.cpp:111
 #, qt-format
-msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr "Galaktische Länge/Breite: %1/%2"
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr ""
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:123
-#: src/core/StelObject.cpp:126
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
+#: src/core/StelObject.cpp:127
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Stundenwinkel/DE: %1/%2"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:139
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
 msgstr "(geometrisch)"
 
-#: src/core/StelObject.cpp:123 src/core/StelObject.cpp:145
+#: src/core/StelObject.cpp:124 src/core/StelObject.cpp:146
 msgid "(apparent)"
 msgstr "(scheinbar)"
 
-#: src/core/StelObject.cpp:139 src/core/StelObject.cpp:145
-#: src/core/StelObject.cpp:148
+#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:146
+#: src/core/StelObject.cpp:149
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
@@ -3326,7 +3326,7 @@ msgstr "Beobachtbarkeits-Konfigurationsfenster"
 msgid "Oculars plugin configuration"
 msgstr "Konfiguration für Okular-Erweiterung"
 
-#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:999
+#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:1020
 msgid "Ocular view"
 msgstr "Okularansicht"
 
@@ -3458,10 +3458,10 @@ msgstr "Als Vorgabe verwenden"
 msgid "Return to default"
 msgstr "Rücksetzen"
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1012
-#: plugins/Oculars/src/ui_ocularDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1027
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Delete"
 msgstr "Löschen"
 
@@ -3978,7 +3978,7 @@ msgid "Catalog number(s)"
 msgstr "Katalognummer(n)"
 
 #: src/ui_configurationDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1022
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Name"
@@ -4441,7 +4441,7 @@ msgid "Displays compass bearing marks along the horizon"
 msgstr "Zeigt Kompass-Markierungen entlang des Horizonts"
 
 #: plugins/Oculars/src/Oculars.cpp:81
-#: plugins/Oculars/src/ui_ocularDialog.h:997
+#: plugins/Oculars/src/ui_ocularDialog.h:1018
 msgid "Oculars"
 msgstr "Okulare"
 
@@ -4536,18 +4536,18 @@ msgstr "Okular scheinb. Ges.-Fld: %1"
 #: plugins/Oculars/src/Oculars.cpp:1559
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
-msgid "Barlow #%1"
-msgstr "Barlow #%1"
+msgid "Lens #%1"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
-msgid "Barlow #%1: %2"
-msgstr "Barlow #%1: %2"
+msgid "Lens #%1: %2"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1568
-msgid "Barlow: none"
-msgstr "Barlow: keine"
+msgid "Lens: none"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4593,16 +4593,16 @@ msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
-msgid "&Barlow"
-msgstr "&Barlow"
+msgid "&Lens"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1841
-msgid "&Previous barlow"
-msgstr "&Vorige Barlow"
+msgid "&Previous lens"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1842
-msgid "&Next barlow"
-msgstr "&Nächste Barlow"
+msgid "&Next lens"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4625,12 +4625,12 @@ msgid "Next ocular"
 msgstr "Nächstes Okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
-msgid "Previous Barlow lens"
-msgstr "Vorige Barlow-Linse"
+msgid "Previous lens"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
-msgid "Next Barlow lens"
-msgstr "Nächste Barlow-Linse"
+msgid "Next lens"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4690,16 +4690,16 @@ msgid "Multiplicity: %1"
 msgstr "Verlängerungsfaktor: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
-msgid "Barlow: None"
-msgstr "Barlow: Keine"
+msgid "Lens: None"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
 msgstr "Verlängerungsfaktor: K.A."
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
-msgid "Multiplicity of barlow lens"
-msgstr "Verlängerungsfaktor der Barlowlinse"
+msgid "Multiplicity of lens"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4715,16 +4715,13 @@ msgid "Actual field of view provided by these binoculars"
 msgstr "Wahres Gesichtsfeld durch dieses Fernglas"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
-msgid "Magnification provided by this ocular/barlow/telescope combination"
+msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
-"Vergrößerung mit dieser Kombination von Okular, Barlowlinse und Teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
-"Actual field of view provided by this ocular/barlow/telescope combination"
+"Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
-"Wahres Gesichtsfeld mit dieser Kombination von Okular, Barlowlinse und "
-"Teleskop"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4820,143 +4817,146 @@ msgstr "Schaltet den Okularüberzug ein/aus."
 msgid "Opens the pop-up navigation menu."
 msgstr "Öffnet das Popup-Navigationsmenü"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1000
+#: plugins/Oculars/src/ui_ocularDialog.h:1021
 msgid "Enable only if an object is selected"
 msgstr "Nur aktivieren mit ausgewähltem Objekt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1001
+#: plugins/Oculars/src/ui_ocularDialog.h:1022
 msgid "Scale image circle"
 msgstr "Bildkreis skalieren"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1002
+#: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Key mappings"
 msgstr "Tastenbelegungen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1003
+#: plugins/Oculars/src/ui_ocularDialog.h:1024
 msgid "Toggle ocular view:"
 msgstr "Okularansicht ein/aus"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1005
+#: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Open pop-up navigation menu:"
 msgstr "Öffne Pop-up-Navigationsmenü:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1006
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Interface"
 msgstr "Schnittstelle"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1007
+#: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "On-screen control panel"
 msgstr "Bedienfeld"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1008
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Grad und Minuten für CCD-Gesichtsfeld verwenden"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1009
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "Allgemein"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1010
-#: plugins/Oculars/src/ui_ocularDialog.h:1018
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
 msgid "Eyepieces"
 msgstr "Okulare"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1011
-#: plugins/Oculars/src/ui_ocularDialog.h:1020
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
-#: plugins/Oculars/src/ui_ocularDialog.h:1037
+#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1013
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "Name:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1014
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1015
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Focal length:"
 msgstr "Brennweite:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1016
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Field stop:"
 msgstr "Blendenwert:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1017
+#: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Binoculars"
 msgstr "Fernglas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1019
-msgid "Barlows"
-msgstr "Barlowlinsen"
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
+msgid "Lense"
+msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1023
+#: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid "Multiplicity"
 msgstr "Verlängerungsfaktor"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1024
-msgid "Barlow lenses"
-msgstr "Barlowlinsen"
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+msgid ""
+"Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
+"multiplicity <1 reduce the focal length (Shapley lens)."
+msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1025
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Sensors"
 msgstr "Sensoren"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution x (pixels):"
 msgstr "Auflösung x (Pixels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Resolution y (pixels):"
 msgstr "Auflösung y (Pixels):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip width (mm):"
 msgstr "Chipbreite (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Chip height (mm):"
 msgstr "Chiphöhe (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel width (micron):"
 msgstr "Pixelbreite (µm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Pixel height (micron):"
 msgstr "Pixelhöhe (µm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
-#: plugins/Oculars/src/ui_ocularDialog.h:1044
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Teleskope"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Diameter:"
 msgstr "Durchmesser:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Horizontal flip"
 msgstr "Horizontal spiegeln"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "Vertical flip"
 msgstr "Vertkal spiegeln"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
@@ -8157,3 +8157,7 @@ msgstr "Sonnenhöhe bei Dämmerung: 0°"
 
 #~ msgid "Other"
 #~ msgstr "Sonstiges"
+
+#, qt-format
+#~ msgid "Galactic longitude/latitude (J2000): %1/%2"
+#~ msgstr "Galaktische Länge/Breite: %1/%2"

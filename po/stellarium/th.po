@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-25 09:11+0700\n"
+"POT-Creation-Date: 2013-02-28 00:00+0700\n"
 "PO-Revision-Date: 2013-02-23 08:25+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-26 04:53+0000\n"
+"X-Launchpad-Export-Date: 2013-02-28 04:44+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -613,27 +613,27 @@ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (
 msgid "RA/DE (of date): %1/%2"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน): %1/%2"
 
-#: src/core/StelObject.cpp:110
+#: src/core/StelObject.cpp:111
 #, qt-format
-msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr "ลองจิจูด/ละติจูดดาราจักร (J2000): %1/%2"
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr ""
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:123
-#: src/core/StelObject.cpp:126
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
+#: src/core/StelObject.cpp:127
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "มุมชั่วโมง/เดคลิเนชัน: %1/%2"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:139
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
 msgstr "(เรขาคณิต)"
 
-#: src/core/StelObject.cpp:123 src/core/StelObject.cpp:145
+#: src/core/StelObject.cpp:124 src/core/StelObject.cpp:146
 msgid "(apparent)"
 msgstr "(ปรากฏ)"
 
-#: src/core/StelObject.cpp:139 src/core/StelObject.cpp:145
-#: src/core/StelObject.cpp:148
+#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:146
+#: src/core/StelObject.cpp:149
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "มุมทิศ/มุมเงย: %1/%2"
@@ -3317,7 +3317,7 @@ msgstr "หน้าต่างตั้งค่าความสามาร
 msgid "Oculars plugin configuration"
 msgstr "การตั้งค่าโปรแกรมเสริมเลนส์ใกล้ตา"
 
-#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:999
+#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:1020
 msgid "Ocular view"
 msgstr "มุมมองเลนส์ใกล้ตา"
 
@@ -3449,10 +3449,10 @@ msgstr "ใช้เป็นค่าเริ่มต้น"
 msgid "Return to default"
 msgstr "กลับไปค่าปริยาย"
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1012
-#: plugins/Oculars/src/ui_ocularDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1027
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Delete"
 msgstr "ลบทิ้ง"
 
@@ -3967,7 +3967,7 @@ msgid "Catalog number(s)"
 msgstr "หมายเลขแค็ตตาล็อก"
 
 #: src/ui_configurationDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1022
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "ชื่อ"
@@ -4425,7 +4425,7 @@ msgid "Displays compass bearing marks along the horizon"
 msgstr "แสดงแบริงเข็มทิศตามแนวขอบฟ้า"
 
 #: plugins/Oculars/src/Oculars.cpp:81
-#: plugins/Oculars/src/ui_ocularDialog.h:997
+#: plugins/Oculars/src/ui_ocularDialog.h:1018
 msgid "Oculars"
 msgstr "เลนส์ใกล้ตา"
 
@@ -4520,18 +4520,18 @@ msgstr "ขอบเขตภาพปรากฏของเลนส์ใก
 #: plugins/Oculars/src/Oculars.cpp:1559
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
-msgid "Barlow #%1"
-msgstr "บาร์โลว์ #%1"
+msgid "Lens #%1"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
-msgid "Barlow #%1: %2"
-msgstr "บาร์โลว์ #%1: %2"
+msgid "Lens #%1: %2"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1568
-msgid "Barlow: none"
-msgstr "บาร์โลว์: ไม่มี"
+msgid "Lens: none"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4577,15 +4577,15 @@ msgid "Sensor #%1: %2"
 msgstr "เซนเซอร์ #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
-msgid "&Barlow"
-msgstr "&บาร์โลว์"
+msgid "&Lens"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1841
-msgid "&Previous barlow"
+msgid "&Previous lens"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1842
-msgid "&Next barlow"
+msgid "&Next lens"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1872
@@ -4609,12 +4609,12 @@ msgid "Next ocular"
 msgstr "เลนส์ใกล้ตาถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
-msgid "Previous Barlow lens"
-msgstr "เลนส์บาร์โลว์ก่อนหน้านี้"
+msgid "Previous lens"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
-msgid "Next Barlow lens"
-msgstr "เลนส์บาร์โลว์ถัดไป"
+msgid "Next lens"
+msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4674,7 +4674,7 @@ msgid "Multiplicity: %1"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
-msgid "Barlow: None"
+msgid "Lens: None"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
@@ -4682,7 +4682,7 @@ msgid "Multiplicity: N/A"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
-msgid "Multiplicity of barlow lens"
+msgid "Multiplicity of lens"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
@@ -4699,15 +4699,13 @@ msgid "Actual field of view provided by these binoculars"
 msgstr "ขอบเขตภาพจริงจากกล้องสองตานี้"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
-msgid "Magnification provided by this ocular/barlow/telescope combination"
+msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
-"กำลังขยายที่ได้จากการรวมกันของเลนส์ใกล้ตา/เลนส์บาร์โลว์/กล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
-"Actual field of view provided by this ocular/barlow/telescope combination"
+"Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
-"ขอบเขตภาพจริงที่ได้จากการรวมกันของเลนส์ใกล้ตา/เลนส์บาร์โลว์/กล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4791,143 +4789,146 @@ msgstr "เปิด/ปิด ภาพซ้อนแสดงเลนส์�
 msgid "Opens the pop-up navigation menu."
 msgstr "เปิดเมนูนำทางแบบผุดขึ้น"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1000
+#: plugins/Oculars/src/ui_ocularDialog.h:1021
 msgid "Enable only if an object is selected"
 msgstr "เปิดใช้งานเฉพาะเมื่อเลือกวัตถุใดวัตถุหนึ่ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1001
+#: plugins/Oculars/src/ui_ocularDialog.h:1022
 msgid "Scale image circle"
 msgstr "วงกลมมาตราส่วนภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1002
+#: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Key mappings"
 msgstr "กำหนดแป้นพิมพ์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1003
+#: plugins/Oculars/src/ui_ocularDialog.h:1024
 msgid "Toggle ocular view:"
 msgstr "สลับมุมมองเลนส์ใกล้ตา:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1005
+#: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Open pop-up navigation menu:"
 msgstr "เปิดเมนูนำทางแบบผุดขึ้น:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1006
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Interface"
 msgstr "ส่วนติดต่อกับผู้ใช้"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1007
+#: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "On-screen control panel"
 msgstr "แผงควบคุมบนหน้าจอ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1008
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "ใช้หน่วยองศาและลิปดาสำหรับขอบเขตการมองเห็นของซีซีดี"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1009
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "ทั่วไป"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1010
-#: plugins/Oculars/src/ui_ocularDialog.h:1018
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
 msgid "Eyepieces"
 msgstr "เลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1011
-#: plugins/Oculars/src/ui_ocularDialog.h:1020
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
-#: plugins/Oculars/src/ui_ocularDialog.h:1037
+#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "เพิ่ม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1013
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "ชื่อ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1014
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
 msgid "aFOV:"
 msgstr "ขอบเขตภาพปรากฏ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1015
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Focal length:"
 msgstr "ความยาวโฟกัส:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1016
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Field stop:"
 msgstr "ขั้นช่องจำกัดแสง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1017
+#: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Binoculars"
 msgstr "กล้องสองตา"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1019
-msgid "Barlows"
-msgstr "บาร์โลว์"
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
+msgid "Lense"
+msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1023
+#: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid "Multiplicity"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1024
-msgid "Barlow lenses"
-msgstr "เลนส์บาร์โลว์"
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+msgid ""
+"Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
+"multiplicity <1 reduce the focal length (Shapley lens)."
+msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1025
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Sensors"
 msgstr "เซนเซอร์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution x (pixels):"
 msgstr "ความละเอียด x (จุดภาพ):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Resolution y (pixels):"
 msgstr "ความละเอียด y (จุดภาพ):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip width (mm):"
 msgstr "ความกว้างของชิป (มม.):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Chip height (mm):"
 msgstr "ความสูงของชิป (มม.):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel width (micron):"
 msgstr "ความกว้างจุดภาพ (ไมครอน):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Pixel height (micron):"
 msgstr "ความสูงของจุดภาพ (ไมครอน):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
-#: plugins/Oculars/src/ui_ocularDialog.h:1044
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "กล้องโทรทรรศน์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Diameter:"
 msgstr "เส้นผ่านศูนย์กลาง:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Horizontal flip"
 msgstr "พลิกในแนวนอน"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "Vertical flip"
 msgstr "พลิกในแนวตั้ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
@@ -7980,6 +7981,10 @@ msgstr "มุมเงยของดวงอาทิตย์ขณะสน
 
 #~ msgid "Show and edit all keyboard shortcuts"
 #~ msgstr "แสดงและแก้ไขแป้นลัดทั้งหมด"
+
+#, qt-format
+#~ msgid "Galactic longitude/latitude (J2000): %1/%2"
+#~ msgstr "ลองจิจูด/ละติจูดดาราจักร (J2000): %1/%2"
 
 #~ msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
 #~ msgstr ""
