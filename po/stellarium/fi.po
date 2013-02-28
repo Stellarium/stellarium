@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-25 09:11+0700\n"
-"PO-Revision-Date: 2013-02-25 06:25+0000\n"
+"POT-Creation-Date: 2013-02-28 00:00+0700\n"
+"PO-Revision-Date: 2013-02-27 17:29+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-26 04:46+0000\n"
+"X-Launchpad-Export-Date: 2013-02-28 04:37+0000\n"
 "X-Generator: Launchpad (build 16506)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
@@ -686,27 +686,27 @@ msgstr "Rekt./Dekl. (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "Rekl./Dekl. (nykyhetki): %1/%2"
 
-#: src/core/StelObject.cpp:110
+#: src/core/StelObject.cpp:111
 #, qt-format
-msgid "Galactic longitude/latitude (J2000): %1/%2"
-msgstr "Galaktinen pituus/leveys (J2000): %1/%2"
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "Galaktinen pituus/leveys: %1/%2"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:123
-#: src/core/StelObject.cpp:126
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
+#: src/core/StelObject.cpp:127
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Tuntikulma/Dekl.: %1/%2"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:139
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
 msgstr "(geometrinen)"
 
-#: src/core/StelObject.cpp:123 src/core/StelObject.cpp:145
+#: src/core/StelObject.cpp:124 src/core/StelObject.cpp:146
 msgid "(apparent)"
 msgstr "(nykyinen)"
 
-#: src/core/StelObject.cpp:139 src/core/StelObject.cpp:145
-#: src/core/StelObject.cpp:148
+#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:146
+#: src/core/StelObject.cpp:149
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Atsim./Kork.: %1/%2"
@@ -3393,7 +3393,7 @@ msgstr "Havaittavuuden asetusikkuna"
 msgid "Oculars plugin configuration"
 msgstr "Okulaarit-laajennuksen asetukset"
 
-#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:999
+#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:1020
 msgid "Ocular view"
 msgstr "Okulaarinäkymä"
 
@@ -3525,10 +3525,10 @@ msgstr "Käytä oletuksena"
 msgid "Return to default"
 msgstr "Palauta oletukset"
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1012
-#: plugins/Oculars/src/ui_ocularDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1027
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Delete"
 msgstr "Poista"
 
@@ -4043,7 +4043,7 @@ msgid "Catalog number(s)"
 msgstr "Luettelonumero(t)"
 
 #: src/ui_configurationDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1022
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Nimi"
@@ -4504,7 +4504,7 @@ msgid "Displays compass bearing marks along the horizon"
 msgstr "Näyttää ilmansuuntien merkinnät horisontin ohessa"
 
 #: plugins/Oculars/src/Oculars.cpp:81
-#: plugins/Oculars/src/ui_ocularDialog.h:997
+#: plugins/Oculars/src/ui_ocularDialog.h:1018
 msgid "Oculars"
 msgstr "Okulaarit"
 
@@ -4599,18 +4599,18 @@ msgstr "Okulaarin näenn. näkökenttä: %1"
 #: plugins/Oculars/src/Oculars.cpp:1559
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
-msgid "Barlow #%1"
-msgstr "Barlow #%1"
+msgid "Lens #%1"
+msgstr "Linssi #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
-msgid "Barlow #%1: %2"
-msgstr "Barlow #%1: %2"
+msgid "Lens #%1: %2"
+msgstr "Linssi #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
-msgid "Barlow: none"
-msgstr "Barlow: ei"
+msgid "Lens: none"
+msgstr "Linssi: ei"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4656,16 +4656,16 @@ msgid "Sensor #%1: %2"
 msgstr "Ilmaisin %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
-msgid "&Barlow"
-msgstr "&Barlow"
+msgid "&Lens"
+msgstr "&Linssi"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
-msgid "&Previous barlow"
-msgstr "&Edellinen barlow"
+msgid "&Previous lens"
+msgstr "%Edellinen linssi"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
-msgid "&Next barlow"
-msgstr "&Seuraava barlow"
+msgid "&Next lens"
+msgstr "&Seuraava linssi"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4688,12 +4688,12 @@ msgid "Next ocular"
 msgstr "Seuraava okulaari"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
-msgid "Previous Barlow lens"
-msgstr "Edellinen Barlow-linssi"
+msgid "Previous lens"
+msgstr "Edellinen linssi"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
-msgid "Next Barlow lens"
-msgstr "Seuraava Barlow-linssi"
+msgid "Next lens"
+msgstr "Seuraava linssi"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4753,16 +4753,16 @@ msgid "Multiplicity: %1"
 msgstr "Kerroin: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
-msgid "Barlow: None"
-msgstr "Barlow: ei"
+msgid "Lens: None"
+msgstr "Linssi: ei"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
 msgstr "Kerroin: N/A"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
-msgid "Multiplicity of barlow lens"
-msgstr "Barlow-linssin kerroin"
+msgid "Multiplicity of lens"
+msgstr "Linssin kerroin"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4778,14 +4778,14 @@ msgid "Actual field of view provided by these binoculars"
 msgstr "Näiden kiikarien antama todellinen näkökenttä"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
-msgid "Magnification provided by this ocular/barlow/telescope combination"
-msgstr "Valitun okulaari/barlow/teleskooppi-yhdistelmän antama polttoväli"
+msgid "Magnification provided by this ocular/lens/telescope combination"
+msgstr "Tämän okulaari/barlow/kaukoputki-yhditelmän antama suurennus"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
-"Actual field of view provided by this ocular/barlow/telescope combination"
+"Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
-"Valitun okulaari/barlow/teleskooppi-yhdistelmän antama todellinen näkökenttä"
+"Tämän okulaari/barlow/kaukoputki -yhdistelmän antama todellinen näkökenttä"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4883,143 +4883,148 @@ msgstr "Asettaa okulaarinäkymän käyttöön/pois."
 msgid "Opens the pop-up navigation menu."
 msgstr "Avaa pudotusvalikon navigointiin."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1000
+#: plugins/Oculars/src/ui_ocularDialog.h:1021
 msgid "Enable only if an object is selected"
 msgstr "Käytössä vain, jos kohde on valittuna"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1001
+#: plugins/Oculars/src/ui_ocularDialog.h:1022
 msgid "Scale image circle"
 msgstr "Muuta ympyrän kokoa"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1002
+#: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Key mappings"
 msgstr "Näppäinmäärittelyt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1003
+#: plugins/Oculars/src/ui_ocularDialog.h:1024
 msgid "Toggle ocular view:"
 msgstr "Okulaarinäkymä käyttöön"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1005
+#: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Open pop-up navigation menu:"
 msgstr "Avaa pudotusvalikko navigointiin:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1006
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Interface"
 msgstr "Käyttöliittymä"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1007
+#: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "On-screen control panel"
 msgstr "Ohjauspaneeli näytöllä"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1008
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Käytä asteita ja minuutteja CCD:n näkökentälle"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1009
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "Yleiset"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1010
-#: plugins/Oculars/src/ui_ocularDialog.h:1018
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
 msgid "Eyepieces"
 msgstr "Okulaarit"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1011
-#: plugins/Oculars/src/ui_ocularDialog.h:1020
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
-#: plugins/Oculars/src/ui_ocularDialog.h:1037
+#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "Lisää"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1013
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "Nimi:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1014
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
 msgid "aFOV:"
 msgstr "Näenn. näkökenttä"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1015
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Focal length:"
 msgstr "Polttoväli"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1016
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Field stop:"
 msgstr "Kentän loppu:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1017
+#: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Binoculars"
 msgstr "Kiikarit"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1019
-msgid "Barlows"
-msgstr "Barlowit"
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
+msgid "Lense"
+msgstr "Linssi"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1023
+#: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid "Multiplicity"
 msgstr "Kerroin"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1024
-msgid "Barlow lenses"
-msgstr "Barlow-linssit"
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+msgid ""
+"Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
+"multiplicity <1 reduce the focal length (Shapley lens)."
+msgstr ""
+"Kerroin >1 kasvattaa polttoväliä (barlow-linssi). Kerroin <1 lyhentää "
+"polttoväliä (shapley-linssi)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1025
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Sensors"
 msgstr "Ilmaisimet"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution x (pixels):"
 msgstr "Resoluutio x (pikseliä):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Resolution y (pixels):"
 msgstr "Resoluutio y (pikseliä):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip width (mm):"
 msgstr "Kennon leveys (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Chip height (mm):"
 msgstr "Kennon korkeus (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel width (micron):"
 msgstr "Pikselin leveys (mikrometriä):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Pixel height (micron):"
 msgstr "Pikselin korkeus (mikrometriä):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
-#: plugins/Oculars/src/ui_ocularDialog.h:1044
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Kaukoputket"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Diameter:"
 msgstr "Halkaisija:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Horizontal flip"
 msgstr "Peilaa vaakasuunnassa"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "Vertical flip"
 msgstr "Peilaa pystysuunnassa"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
@@ -8062,6 +8067,10 @@ msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
 #~ msgid "Edit Alternative Shortcut"
 #~ msgstr "Muokkaa vaihtoehtoista pikanäppäintä"
 
+#, qt-format
+#~ msgid "Galactic longitude/latitude (J2000): %1/%2"
+#~ msgstr "Galaktinen pituus/leveys (J2000): %1/%2"
+
 #~ msgid "A Quintuple eclipse from Deimos 2027"
 #~ msgstr "Viisinkertainen pimennys Deimoksessa 2027"
 
@@ -8073,47 +8082,3 @@ msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
 
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "Auringon korkeus hämärän päättyessä"
-
-#, qt-format
-#~ msgid ""
-#~ "This equation was published by L. V. Morrison and F. R. Stephenson in "
-#~ "article <em>Historical values of the Earth's clock error %1T and the "
-#~ "calculation of eclipses</em> (%2) with addendum in (%3)."
-#~ msgstr ""
-#~ "Tämän yhtälön julkaisivat L. V. Morrison ja F. R. Stephenson artikkelissaan "
-#~ "<em>Historical values of the Earth's clock error %1T and the calculation of "
-#~ "eclipses</em> (%2) lisäyksin (%3)."
-
-#~ msgid ""
-#~ "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
-#~ "Personal Computer</em> (2000) provides 3rd-order polynomials for the recent "
-#~ "past only."
-#~ msgstr ""
-#~ "O. Montenbruckin & T. Pflegerin teos <em>Astronomy on the Personal "
-#~ "Computer</em> (2000) tarjoaa kolmannen asteen polynomeja lähimenneisyydelle."
-
-#~ msgid ""
-#~ "E. M. Reingold & N. Dershowitz present an approximation formula in "
-#~ "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
-#~ "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
-#~ "<em>Astronomical Algorithms</em> (1991)."
-#~ msgstr ""
-#~ "E. M. Reingold & N. Dershowitz esittävät likimääräisen kaavan teoksissaan "
-#~ "<em>Calendrical Calculations</em> (3. painos 2007) ja <em>Calendrical "
-#~ "Tabulations</em> (2002) perustuen Jean Meeuksen teokseen <em>Astronomical "
-#~ "Algorithms</em> (1991)."
-
-#, qt-format
-#~ msgid ""
-#~ "This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
-#~ "Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to "
-#~ "+3000</em> (2006). This formula is also used in the solar, lunar and "
-#~ "planetary ephemeris program SOLEX."
-#~ msgstr ""
-#~ "Tämä F. Espenakin ja J. Meeuksen teoksessaan <em>Five Millennium Canon of "
-#~ "Solar Eclipses: -1900 to +3000</em> (2006) esittämä kaava on käytössä "
-#~ "%1NASAn pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
-#~ "planeettaefemeridiohjelma SOLEXissa."
-
-#~ msgid "Chapront, Chapront-Touze & Francou (1997) & Meeus (1998)"
-#~ msgstr "Chapront, Chapront-Touze & Francou (1997) & Meeus (1998)"
