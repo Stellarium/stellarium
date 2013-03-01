@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-28 00:00+0700\n"
-"PO-Revision-Date: 2013-02-04 15:39+0000\n"
-"Last-Translator: vine_user <Unknown>\n"
+"PO-Revision-Date: 2013-02-28 17:23+0000\n"
+"Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-28 04:39+0000\n"
-"X-Generator: Launchpad (build 16506)\n"
+"X-Launchpad-Export-Date: 2013-03-01 04:41+0000\n"
+"X-Generator: Launchpad (build 16514)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
 msgid "Meridian"
@@ -150,7 +150,7 @@ msgstr "距離: %1天文単位"
 #: src/core/modules/Planet.cpp:492
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "視直径: %1, リングを含む: %2"
 
 #: src/core/modules/Planet.cpp:498 src/core/modules/MinorPlanet.cpp:258
 #, qt-format
@@ -608,11 +608,11 @@ msgstr "時角: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
-msgstr "幾何学の"
+msgstr "(幾何学上の)"
 
 #: src/core/StelObject.cpp:124 src/core/StelObject.cpp:146
 msgid "(apparent)"
-msgstr ""
+msgstr "(見かけ上の)"
 
 #: src/core/StelObject.cpp:140 src/core/StelObject.cpp:146
 #: src/core/StelObject.cpp:149
@@ -1607,7 +1607,7 @@ msgstr "月"
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "冥王星型天体"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1783,7 +1783,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:240
 msgid "Analemma"
-msgstr ""
+msgstr "アナレンマ"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:247
@@ -3752,7 +3752,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1208
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "銀河面の線を表示"
 
 #: src/ui_viewDialog.h:1212
 msgid "Projection"
@@ -6167,7 +6167,7 @@ msgstr "星雲のヒント"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
-msgstr ""
+msgstr "銀河面の線"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Effects"
