@@ -79,6 +79,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
+	setFlagClampStellarMagnitude((conf->value("astro/flag_clamp_stellar_mag", false).toBool()));
+	setClampStellarMagnitude(conf->value("astro/clamp_stellar_mag", 6.5).toFloat());
+	setFlagClampDSOMagnitude((conf->value("astro/flag_clamp_dso_mag", false).toBool()));
+	setClampDSOMagnitude(conf->value("astro/clamp_dso_mag", 8.5).toFloat());
 
 	bool ok=true;
 

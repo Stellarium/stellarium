@@ -243,7 +243,7 @@ double OctahedronPolygon::getArea() const
 	return area;
 }
 
-// Return a point located inside the polygon.
+// Return a point located inside the polygon. Actually, inside the first triangle in this case.
 Vec3d OctahedronPolygon::getPointInside() const
 {
 	const QVector<Vec3d>& trianglesArray = fillVertices();

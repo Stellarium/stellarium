@@ -35,7 +35,7 @@ class StelCore;
 
 //! @class StelSkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
-//! eyes adaptation, zoom level and instrument model
+//! eyes adaptation, zoom level, instrument model and artificially set magnitude limits
 class StelSkyDrawer : public QObject
 {
 	Q_OBJECT
@@ -193,6 +193,24 @@ public slots:
 	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
 
+	//! set true to draw stars only downto clampStellarMagnitude
+	void setFlagClampStellarMagnitude(bool flagClamp) {flagClampStellarMagnitude = flagClamp;}
+	//! set true to draw deep-sky objects only downto clampDSOMagnitude
+	void setFlagClampDSOMagnitude(bool flagClamp)     {flagClampDSOMagnitude = flagClamp;}
+	//! @return true if user wants to draw only upto clampStellarMagnitude
+	bool getFlagClampStellarMagnitude() const {return flagClampStellarMagnitude;}
+	//! @return true if user wants to draw only upto clampDSOMagnitude
+	bool getFlagClampDSOMagnitude()     const {return flagClampDSOMagnitude;}
+
+	//! Get the artificially set limit for point sources, to limit drawing e.g. for naked-eye display
+	float getClampStellarMagnitude() const {return clampStellarMagnitude;}
+	//! Set the artificially set limit for point sources, to limit drawing e.g. for naked-eye display
+	void setClampStellarMagnitude(float clampMag) {clampStellarMagnitude=clampMag;}
+	//! Get the artificially set limit for deep-sky sources, to limit drawing e.g. for naked-eye display
+	float getClampDSOMagnitude() const {return clampDSOMagnitude;}
+	//! Set the artificially set limit for deep-sky sources, to limit drawing e.g. for naked-eye display
+	void setClampDSOMagnitude(float clampMag) {clampDSOMagnitude=clampMag;}
+
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
 	//! @return the limit V luminance at which an object will be visible
@@ -300,6 +318,10 @@ private:
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	bool flagHasAtmosphere;
 
+	//! if true, only draw stars downto clampStellarMagnitude
+	bool flagClampStellarMagnitude;
+	//! if true, only draw Deep-sky objects downto clampDSOMagnitude
+	bool flagClampDSOMagnitude;
 
 	float starRelativeScale;
 	float starAbsoluteScaleF;
@@ -311,6 +333,11 @@ private:
 
 	//! Current magnitude luminance
 	float limitLuminance;
+
+	//! Magnitude limit, e.g. to display naked-eye stars only
+	float clampStellarMagnitude;
+	//! Magnitude limit, e.g. to display naked-eye or binocular deep-sky objects only
+	float clampDSOMagnitude;
 
 	//! Little halo texture
 	class StelTextureNew* texHalo;
