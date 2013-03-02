@@ -205,11 +205,11 @@ public slots:
 	//! Get the artificially set limit for point sources, to limit drawing e.g. for naked-eye display
 	float getClampStellarMagnitude() const {return clampStellarMagnitude;}
 	//! Set the artificially set limit for point sources, to limit drawing e.g. for naked-eye display
-	void setClampStellarMagnitude(float clampMag) {clampStellarMagnitude=clampMag;}
+	void setClampStellarMagnitude(double clampMag) {clampStellarMagnitude=clampMag;}
 	//! Get the artificially set limit for deep-sky sources, to limit drawing e.g. for naked-eye display
 	float getClampDSOMagnitude() const {return clampDSOMagnitude;}
 	//! Set the artificially set limit for deep-sky sources, to limit drawing e.g. for naked-eye display
-	void setClampDSOMagnitude(float clampMag) {clampDSOMagnitude=clampMag;}
+	void setClampDSOMagnitude(double clampMag) {clampDSOMagnitude=clampMag;}
 
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
