@@ -155,6 +155,19 @@ void ViewDialog::createDialogContent()
 	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
 
+	// Limit Magnitudes
+	ui->starLimitMagnitudeCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagClampStellarMagnitude());
+	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagClampStellarMagnitude(bool)));
+
+	ui->starLimitMagnitudeDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getClampStellarMagnitude());
+	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setClampStellarMagnitude(double)));
+
+	ui->nebulaLimitMagnitudeCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagClampDSOMagnitude());
+	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagClampDSOMagnitude(bool)));
+
+	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getClampDSOMagnitude());
+	connect(ui->nebulaLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setClampDSOMagnitude(double)));
+
 	// Planets section
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	ui->showPlanetCheckBox->setChecked(ssmgr->getFlagPlanets());
