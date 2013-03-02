@@ -495,7 +495,6 @@ void SpecialZoneArray<Star>::draw
 	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.
 	int cutoffMagStep=(drawer->getFlagClampStellarMagnitude() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
 
-
 	// go through all stars, which are sorted by magnitude (bright stars first)
 	for (const Star *s=z->getStars();s<end;++s)
 	{
