@@ -40,6 +40,8 @@ typedef QSharedPointer<Nebula> NebulaP;
 //! @class NebulaMgr
 //! Manage a collection of nebulae. This class is used
 //! to display the NGC catalog with information, and textures for some of them.
+// GZ: This doc seems outdated/misleading - photo textures are not mamaged here but in StelSkyImageTile
+
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
@@ -103,7 +105,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	//! Set the color used to draw the nebula circles.
+	//! Set the color used to draw the nebula symbols (circles, boxes. etc).
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
@@ -114,6 +116,7 @@ public slots:
 	float getCircleScale(void) const;
 
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
+	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
