@@ -513,7 +513,13 @@ public:
 	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
-	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {n.normalize(); Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+	// TODO:FIXME! GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
+	// for efficiency n.normalize() should not be called at this point.
+	// However, when zooming in a bit in Hammer-Aitoff and Mercator projections, this Assertion fires. It may have to do with DSO texture rendering.
+	// found at r5863.
+	// n.normalize() prevents this for now, but may cost performance.
+	// May be compiler dependent (seen on Win/MinGW), AW cannot confirm it on Linux.
 
 	//! Copy constructor.
 	SphericalCap(const SphericalCap& other) : SphericalRegion(), n(other.n), d(other.d) {;}
