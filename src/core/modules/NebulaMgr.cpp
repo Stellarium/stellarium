@@ -129,6 +129,10 @@ struct DrawNebulaFuncObject
 	void operator()(StelRegionObject* obj)
 	{
 		Nebula* n = static_cast<Nebula*>(obj);
+		StelSkyDrawer *drawer = core->getSkyDrawer();
+		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
+		if ((drawer->getFlagClampDSOMagnitude()) && (n->mag > drawer->getClampDSOMagnitude())) return;
+
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
@@ -161,8 +165,8 @@ void NebulaMgr::draw(StelCore* core, StelRenderer* renderer)
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 
 	// Print all the nebulae of all the selected zones
-	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount*1.2f)-2.f;
-	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
+	float maxMagHints  = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+	float maxMagLabels = skyDrawer->getLimitMagnitude()     -2.f+(labelsAmount*1.2f)-2.f;
 	
 	renderer->setFont(nebulaFont);
 	nebulaHintTextures.lazyInit(renderer);
@@ -176,6 +180,7 @@ void NebulaMgr::draw(StelCore* core, StelRenderer* renderer)
 	}
 }
 
+// Draw the pointer around the object if selected
 void NebulaMgr::drawPointer(const StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);

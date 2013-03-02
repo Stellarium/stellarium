@@ -44,9 +44,12 @@ Nebula::NebulaHintTextures::~NebulaHintTextures()
 	if(!initialized){return;}
 
 	delete texCircle; 
+	delete texGalaxy;
 	delete texOpenCluster;    
 	delete texGlobularCluster;
 	delete texPlanetaryNebula;   
+	delete texDiffuseNebula;
+	delete texOpenClusterWithNebulosity;
 	
 	initialized = false;
 }
@@ -55,10 +58,13 @@ void Nebula::NebulaHintTextures::lazyInit(StelRenderer* renderer)
 {
 	if(initialized){return;}
 
-	texCircle          = renderer->createTexture("textures/neb.png");   // Load circle texture
-	texOpenCluster     = renderer->createTexture("textures/ocl.png");   // Load open cluster marker texture
-	texGlobularCluster = renderer->createTexture("textures/gcl.png");   // Load globular cluster marker texture
-	texPlanetaryNebula = renderer->createTexture("textures/pnb.png");   // Load planetary nebula marker texture
+	texCircle          = renderer->createTexture("textures/neb.png");      // Load circle texture
+	texGalaxy          = renderer->createTexture("textures/neb_gal.png");  // Load ellipse texture
+	texOpenCluster     = renderer->createTexture("textures/neb_ocl.png");  // Load open cluster marker texture
+	texGlobularCluster = renderer->createTexture("textures/neb_gcl.png");  // Load globular cluster marker texture
+	texPlanetaryNebula = renderer->createTexture("textures/neb_pnb.png");  // Load planetary nebula marker texture
+	texDiffuseNebula   = renderer->createTexture("textures/neb_dif.png");  // Load diffuse nebula marker texture
+	texOpenClusterWithNebulosity = renderer->createTexture("textures/neb_ocln.png");  // Load Ocl/Nebula marker texture
 
 	initialized = true;
 }
@@ -184,22 +190,37 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintText
 		col = StelUtils::getNightColor(col);
 
 	renderer->setGlobalColor(col[0], col[1], col[2], 1);
-	if (nType == 1)
-	{
-		hintTextures.texOpenCluster->bind();
-	}
-	else if (nType == 2)
-	{
-		hintTextures.texGlobularCluster->bind();
-	}
-	else if (nType == 4)
-	{
-		hintTextures.texPlanetaryNebula->bind();
-	}
-	else
-	{
-		hintTextures.texCircle->bind();
-	}
+/*
+	if (nType == NebGx)		 hintTextures.texGalaxy->bind();
+	else if (nType == NebOc) hintTextures.texOpenCluster->bind();
+	else if (nType == NebGc) hintTextures.texGlobularCluster->bind();
+	else if (nType == NebN)  hintTextures.texDiffuseNebula->bind();
+	else if (nType == NebPn) hintTextures.texPlanetaryNebula->bind();
+	else if (nType == NebCn) hintTextures.texOpenClusterWithNebulosity->bind();
+	else hintTextures.texCircle->bind();
+*/
+	switch (nType) {
+		case NebGx:
+				hintTextures.texGalaxy->bind();
+				break;
+		case NebOc:
+				hintTextures.texOpenCluster->bind();
+				break;
+		case NebGc:
+				hintTextures.texGlobularCluster->bind();
+				break;
+		case NebN:
+				hintTextures.texDiffuseNebula->bind();
+				break;
+		case NebPn:
+				hintTextures.texPlanetaryNebula->bind();
+				break;
+		case NebCn:
+				hintTextures.texOpenClusterWithNebulosity->bind();
+				break;
+		default:
+				hintTextures.texCircle->bind();
+}
 
 	renderer->drawTexturedRect(XY[0] - 6, XY[1] - 6, 12, 12);
 }
@@ -255,6 +276,13 @@ void Nebula::readNGC(QDataStream& in)
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)type;
+	// GZ: Trace the undefined entries...
+	//if (type >= 5) {
+	//	qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
+	//}
+	if (type == 5) {
+		qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
+	}
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
 
@@ -352,6 +380,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebPn:
 			wsType = q_("Planetary nebula");
+			break;
+		case NebDn:
+			wsType = q_("Dark Nebula (?)"); // Find out if this is true!
 			break;
 		case NebCn:
 			wsType = q_("Cluster associated with nebulosity");
