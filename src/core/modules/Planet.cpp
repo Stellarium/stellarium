@@ -1050,7 +1050,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 		*/
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are two solutions:
-		// (1) G. Mller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		// (1) G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
 		// (2) Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
 		// The structure is almost identical, just the numbers are different!
 		// I activate (1) for now, because we want to simulate the eye's impression. (Esp. Venus!)
@@ -1068,7 +1068,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 			return -8.93 + d + extinctionMag;
 		if (englishName=="Saturn")
 		{
-			// TODO re-add rings computation
+			// add rings computation
 			// GZ: implemented from Meeus, Astr.Alg.1992
 			const double jd=core->getJDay();
 			const double T=(jd-2451545.0)/36525.0;
@@ -1100,7 +1100,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 			return -9.40 + d + 0.005*phaseDeg + extinctionMag;
 		if (englishName=="Saturn")
 		{
-			// TODO re-add rings computation
+			// add rings computation
 			// GZ: implemented from Meeus, Astr.Alg.1992
 			const double jd=core->getJDay();
 			const double T=(jd-2451545.0)/36525.0;
