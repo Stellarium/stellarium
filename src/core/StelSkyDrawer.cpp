@@ -83,6 +83,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	setClampStellarMagnitude(conf->value("astro/clamp_stellar_mag", 6.5).toFloat());
 	setFlagClampDSOMagnitude((conf->value("astro/flag_clamp_dso_mag", false).toBool()));
 	setClampDSOMagnitude(conf->value("astro/clamp_dso_mag", 8.5).toFloat());
+	// qDebug() << "drawer: clampStellarMag: " << clampStellarMagnitude << " , clampDSOmagnitude: " << clampDSOMagnitude;
 
 	bool ok=true;
 
@@ -474,6 +475,9 @@ void StelSkyDrawer::postDrawSky3dModel
 	(StelProjectorP projector, const Vec3d& v, float illuminatedArea, 
 	 float mag, const Vec3f& color)
 {
+	// GZ: Only draw if we did not clamp this object away.
+	if (flagClampStellarMagnitude && (mag > clampStellarMagnitude)) return;
+
 	const float pixPerRad = projector->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
