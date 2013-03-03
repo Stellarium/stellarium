@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-22 10:38+0700\n"
+"POT-Creation-Date: 2013-03-03 02:26+0700\n"
 "PO-Revision-Date: 2012-12-20 17:38+0000\n"
 "Last-Translator: Noble P Abraham <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-22 04:47+0000\n"
-"X-Generator: Launchpad (build 16506)\n"
+"X-Launchpad-Export-Date: 2013-03-03 04:43+0000\n"
+"X-Generator: Launchpad (build 16514)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1198
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
 msgstr "മേരീഡിയന്‍"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1206
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1267
 msgid "Ecliptic"
 msgstr "ക്രാന്തിവൃത്തം"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1194
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1255
 msgid "Equator"
 msgstr "ഭൂമധ്യരേഖ"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1202
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1263
 msgid "Horizon"
 msgstr "ചക്രവാളം"
 
@@ -54,7 +54,7 @@ msgstr ", %1 m"
 msgid "Planet: "
 msgstr "ഗ്രഹം: "
 
-#: src/core/modules/Nebula.cpp:115 src/core/modules/Planet.cpp:438
+#: src/core/modules/Nebula.cpp:121 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:120
 #: src/core/modules/StarWrapper.cpp:122
@@ -65,7 +65,7 @@ msgstr "ഗ്രഹം: "
 msgid "Type: <b>%1</b>"
 msgstr "തരം: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:120 src/core/modules/Planet.cpp:444
+#: src/core/modules/Nebula.cpp:126 src/core/modules/Planet.cpp:444
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
 #: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
@@ -74,7 +74,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 "ദൃശ്യകാന്തിമാനം: <b>%1</b> (എക്സ്റ്റിങ്ഷന്‍ കാരണം <b>%2</b> ആയിരിക്കുന്നു)"
 
-#: src/core/modules/Nebula.cpp:123 src/core/modules/Planet.cpp:447
+#: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
 #: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
@@ -82,40 +82,44 @@ msgstr ""
 msgid "Magnitude: <b>%1</b>"
 msgstr "കാന്തിമാനം: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:128
+#: src/core/modules/Nebula.cpp:134
 #, qt-format
 msgid "Size: %1"
 msgstr "വലിപ്പം: %1"
 
-#: src/core/modules/Nebula.cpp:342
+#: src/core/modules/Nebula.cpp:370
 msgid "Galaxy"
 msgstr "താരാപഥം"
 
-#: src/core/modules/Nebula.cpp:345
+#: src/core/modules/Nebula.cpp:373
 msgid "Open cluster"
 msgstr "തുറന്ന താരവ്യൂഹം"
 
-#: src/core/modules/Nebula.cpp:348
+#: src/core/modules/Nebula.cpp:376
 msgid "Globular cluster"
 msgstr "ഗോളീയ താരവ്യൂഹം"
 
-#: src/core/modules/Nebula.cpp:351
+#: src/core/modules/Nebula.cpp:379
 msgid "Nebula"
 msgstr "നീഹാരിക"
 
-#: src/core/modules/Nebula.cpp:354
+#: src/core/modules/Nebula.cpp:382
 msgid "Planetary nebula"
 msgstr "ഗ്രഹ നീഹാരിക"
 
-#: src/core/modules/Nebula.cpp:357
+#: src/core/modules/Nebula.cpp:385
+msgid "Dark Nebula (?)"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:388
 msgid "Cluster associated with nebulosity"
 msgstr "നീഹാരികയുമായി ചേര്‍ന്ന നക്ഷത്രക്കൂട്ടം"
 
-#: src/core/modules/Nebula.cpp:360
+#: src/core/modules/Nebula.cpp:391
 msgid "Unknown"
 msgstr "അജ്ഞാതം"
 
-#: src/core/modules/Nebula.cpp:363
+#: src/core/modules/Nebula.cpp:394
 msgid "Undocumented type"
 msgstr "രേഖപ്പെടുത്താത്ത തരം"
 
@@ -252,26 +256,26 @@ msgstr "ദൃഗ്‌ഭ്രംശം: %1"
 msgid "SpaceShip"
 msgstr "ആകാശകപ്പല്‍"
 
-#: src/core/StelCore.cpp:1424
+#: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:1427
+#: src/core/StelCore.cpp:1422
 #, qt-format
 msgid ""
-"This formula was obtained by C. Schoch in 1931 and was used by G. Henriksson "
-"in his article <em>Einstein's Theory of Relativity Confirmed by Ancient "
-"Solar Eclipses</em> (%1). See for more info %2here%3."
+"This historical formula was obtained by C. Schoch in 1931 and was used by G. "
+"Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1430
+#: src/core/StelCore.cpp:1425
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1433
+#: src/core/StelCore.cpp:1428
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -280,14 +284,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1437
+#: src/core/StelCore.cpp:1432
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1441
+#: src/core/StelCore.cpp:1436
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -295,7 +299,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1445
+#: src/core/StelCore.cpp:1440
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -303,29 +307,30 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1448
+#: src/core/StelCore.cpp:1443
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1451
+#: src/core/StelCore.cpp:1446
 #, qt-format
 msgid ""
-"This equation was published by L. D. Schmadel and G. Zech in the article "
+"This 12th-order polynomial equation (outdated and superseded by Schmadel & "
+"Zech (1988)) was published by L. D. Schmadel and G. Zech in the article "
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
-"period 1800-1975</em> (%1)."
+"period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1454
+#: src/core/StelCore.cpp:1449
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1457
+#: src/core/StelCore.cpp:1452
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -333,40 +338,41 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1460
+#: src/core/StelCore.cpp:1455
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1463
+#: src/core/StelCore.cpp:1458
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1466
+#: src/core/StelCore.cpp:1461
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1469
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
-"This equation was published by L. D. Schmadel and G. Zech in the article "
-"<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
-"1988</em> (%1)."
+"This 12th-order polynomial equation was published by L. D. Schmadel and G. "
+"Zech in the article <em>Empirical Transformations from U.T. to E.T. for the "
+"Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
+"Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1472
+#: src/core/StelCore.cpp:1467
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1475
+#: src/core/StelCore.cpp:1470
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -374,65 +380,58 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1478
+#: src/core/StelCore.cpp:1473
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1481
-msgid ""
-"This formula also is used in Shinobu Takesako's EmapWin program for plotting "
-"the circumstances of solar eclipses from 3000 B.C. to A.D. 3000 and in Kerry "
-"Shetline's interactive planetarium Sky View Cafe. A variant is also given by "
-"J. Meeus in the second edition of his <em>Astronomical Algorithms</em> "
-"(1998)."
-msgstr ""
-
-#: src/core/StelCore.cpp:1485
+#: src/core/StelCore.cpp:1476
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1488
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1491
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1494
+#: src/core/StelCore.cpp:1485
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
-"Personal Computer</em> (2000) provides the 3rd-order polynomials."
+"Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
+"for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1488
 msgid ""
-"E. M. Reingold & N. Dershowitz adopt the approximate formula in the second "
-"edition of <em>Calendrical Calculations</em> (2001) and in their "
-"<em>Calendrical Tabulations</em> (2002)."
+"E. M. Reingold & N. Dershowitz present this polynomial data fit in "
+"<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
+"<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
+"<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1500
+#: src/core/StelCore.cpp:1491
 #, qt-format
 msgid ""
-"This equation was published by L. V. Morrison and F. R. Stephenson in "
-"article <em>Historical values of the Earth's clock error %1T and the "
+"This important solution was published by L. V. Morrison and F. R. Stephenson "
+"in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1503
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -441,43 +440,55 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1506
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
-"This formula by F. Espenak and J. Meeus is used for the %1NASA Eclipse Web "
-"Site%2. This formula is also used in the solar, lunar and planetary "
-"ephemeris program SOLEX."
+"This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
+"(2004) and a polynomial fit through tabulated values for 1600-2000, is used "
+"for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
+"solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1506
+#: src/core/StelCore.cpp:1497
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:1509
+#: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1512 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "പിഴവ്"
 
-#: src/core/StelCore.cpp:1609
-msgid "(estimated)"
+#: src/core/StelCore.cpp:1552
+msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1622
-msgid "with a typical 1-second accuracy"
+#: src/core/StelCore.cpp:1578
+msgid ""
+"with a mean error of less than one second, max. error 1.9s, and meaningless "
+"values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1648
+#: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
+msgid "with zero values outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:1612
+msgid "with a typical 1-second accuracy and zero values outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1650
+#: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -593,27 +604,27 @@ msgstr "RA/DE (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "RA/DE (തീയതിയില്‍): %1/%2"
 
-#: src/core/StelObject.cpp:110
+#: src/core/StelObject.cpp:111
 #, qt-format
-msgid "Galactic longitude/latitude (J2000): %1/%2"
+msgid "Galactic longitude/latitude: %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:123
-#: src/core/StelObject.cpp:126
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
+#: src/core/StelObject.cpp:127
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:139
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
 msgstr "(ജ്യോമെട്രിക്)"
 
-#: src/core/StelObject.cpp:123 src/core/StelObject.cpp:145
+#: src/core/StelObject.cpp:124 src/core/StelObject.cpp:146
 msgid "(apparent)"
 msgstr "(പ്രത്യക്ഷമായ)"
 
-#: src/core/StelObject.cpp:139 src/core/StelObject.cpp:145
-#: src/core/StelObject.cpp:148
+#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:146
+#: src/core/StelObject.cpp:149
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
@@ -642,27 +653,27 @@ msgstr "ലഭ്യമാണ്"
 msgid "Select screenshot directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറക്ടറി തിരഞ്ഞെടുക്കുക"
 
-#: src/gui/ConfigurationDialog.cpp:653
+#: src/gui/ConfigurationDialog.cpp:657
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "തുടക്കത്തിലെ FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:661
+#: src/gui/ConfigurationDialog.cpp:665
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "തുടക്കത്തിലെ വീക്ഷണ ദിശ Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:703
+#: src/gui/ConfigurationDialog.cpp:707
 #: plugins/Oculars/src/gui/OcularDialog.cpp:491
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "രചയിതാക്കള്‍"
 
-#: src/gui/ConfigurationDialog.cpp:704 src/gui/ViewDialog.cpp:429
+#: src/gui/ConfigurationDialog.cpp:708 src/gui/ViewDialog.cpp:442
 msgid "Contact"
 msgstr "വിലാസം"
 
-#: src/gui/ConfigurationDialog.cpp:787
+#: src/gui/ConfigurationDialog.cpp:791
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -671,19 +682,19 @@ msgstr "വിലാസം"
 msgid "Author"
 msgstr "രചയിതാവ്"
 
-#: src/gui/ConfigurationDialog.cpp:791
+#: src/gui/ConfigurationDialog.cpp:795
 msgid "License"
 msgstr "അനുമതിപത്രം"
 
-#: src/gui/ConfigurationDialog.cpp:815
+#: src/gui/ConfigurationDialog.cpp:819
 msgid "Running script: "
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: "
 
-#: src/gui/ConfigurationDialog.cpp:822
+#: src/gui/ConfigurationDialog.cpp:826
 msgid "Running script: [none]"
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: [ശൂന്യം]"
 
-#: src/gui/ConfigurationDialog.cpp:885
+#: src/gui/ConfigurationDialog.cpp:889
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -692,16 +703,16 @@ msgstr ""
 "പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
 "അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
 
-#: src/gui/ConfigurationDialog.cpp:889
+#: src/gui/ConfigurationDialog.cpp:893
 msgid "All available star catalogs have been installed."
 msgstr "ലഭ്യമായ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഇന്‍സ്റ്റാള്‍ ചെയ്തിരിക്കുന്നു."
 
-#: src/gui/ConfigurationDialog.cpp:894
+#: src/gui/ConfigurationDialog.cpp:898
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "കാറ്റലോഗ് ലഭ്യമാക്കുന്നു %1 of %2"
 
-#: src/gui/ConfigurationDialog.cpp:901
+#: src/gui/ConfigurationDialog.cpp:905
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -710,7 +721,7 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു...\n"
 "(ഈ ജാലകം അടക്കുന്നതിന് കുഴപ്പമില്ല.)"
 
-#: src/gui/ConfigurationDialog.cpp:908
+#: src/gui/ConfigurationDialog.cpp:912
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -721,7 +732,7 @@ msgstr ""
 "നക്ഷത്രങ്ങളുടെ എണ്ണം: %2 മില്യണ്‍\n"
 "കാന്തിമാന പരിധി: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:951 src/gui/ConfigurationDialog.cpp:987
+#: src/gui/ConfigurationDialog.cpp:955 src/gui/ConfigurationDialog.cpp:991
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -730,11 +741,11 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1039
+#: src/gui/ConfigurationDialog.cpp:1043
 msgid "Verifying file integrity..."
 msgstr "പ്രമാണത്തിന്റെ സാധുത പരിശോധിച്ചുകൊണ്ടിരിക്കുന്നു"
 
-#: src/gui/ConfigurationDialog.cpp:1043
+#: src/gui/ConfigurationDialog.cpp:1047
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -744,119 +755,115 @@ msgstr ""
 "പ്രമാണം ദുഷിച്ചിരിക്കുന്നു."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1116
+#: src/gui/ConfigurationDialog.cpp:1120
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1127
+#: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1128
+#: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1129
+#: src/gui/ConfigurationDialog.cpp:1133
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1130
+#: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1131
+#: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1132
+#: src/gui/ConfigurationDialog.cpp:1136
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1133
+#: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1134
+#: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1135
+#: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1136
+#: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1137
+#: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1138
+#: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1139
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
-msgid "Chapront, Chapront-Touze & Francou (1997)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1146
-msgid "Meeus (1998)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1147
-msgid "JPL Horizons"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1148
-msgid "Meeus & Simons (2000)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1149
-msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
-
 #: src/gui/ConfigurationDialog.cpp:1150
-msgid "Reingold & Dershowitz (2001, 2002)"
+msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1151
-msgid "Morrison & Stephenson (2004, 2005)"
+msgid "JPL Horizons"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1152
+msgid "Meeus & Simons (2000)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1153
-msgid "Espenak & Meeus (2006)"
+msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1154
-msgid "Reijs (2006)"
+msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1155
+msgid "Morrison & Stephenson (2004, 2005)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1157
+msgid "Espenak & Meeus (2006)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1158
+msgid "Reijs (2006)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -1038,27 +1045,27 @@ msgstr "Space"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:490
+#: src/gui/ViewDialog.cpp:503
 msgid "No description"
 msgstr "വിശദീകരണം ലഭ്യമല്ല"
 
-#: src/gui/ViewDialog.cpp:603
+#: src/gui/ViewDialog.cpp:616
 msgid "No shooting stars"
 msgstr "കൊള്ളിമീനുകള്‍ ഇല്ല"
 
-#: src/gui/ViewDialog.cpp:606
+#: src/gui/ViewDialog.cpp:619
 msgid "Normal rate"
 msgstr "സാധാരണ നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:609
+#: src/gui/ViewDialog.cpp:622
 msgid "Standard Perseids rate"
 msgstr "ശരാശരി Perseids നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:612
+#: src/gui/ViewDialog.cpp:625
 msgid "Exceptional Leonid rate"
 msgstr "അസാധാരണ ലിയനോയിഡ് നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:615
+#: src/gui/ViewDialog.cpp:628
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "ഏറ്റവും കൂടിയ നിരക്ക് (1966 ലെ ലിയനോയിഡ് )"
 
@@ -1165,19 +1172,19 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:359
+#: src/gui/SearchDialog.cpp:361
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:367
+#: src/gui/SearchDialog.cpp:369
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:535
+#: src/gui/SearchDialog.cpp:537
 msgid "University of Strasbourg (France)"
 msgstr "സ്ട്രാസ്ബൌര്‍ഗ് സർവ്വകലാശാല (ഫ്രാൻസ്)"
 
-#: src/gui/SearchDialog.cpp:536
+#: src/gui/SearchDialog.cpp:538
 msgid "Harvard University (USA)"
 msgstr "ഹാര്‍വാര്‍ഡ് സർവ്വകലാശാല (യു.എസ്‌.എ)"
 
@@ -3051,16 +3058,16 @@ msgstr "തിരശ്ശീല തിരശ്ചീനദിശയില്�
 msgid "Full-screen mode"
 msgstr "ഫുള്‍-സ്ക്രീന്‍ മോഡ്"
 
-#: src/translations.h:567 src/ui_viewDialog.h:1165
+#: src/translations.h:567 src/ui_viewDialog.h:1206
 msgid "Atmosphere"
 msgstr "അന്തരീക്ഷം"
 
-#: src/translations.h:568 src/ui_viewDialog.h:1189
+#: src/translations.h:568 src/ui_viewDialog.h:1250
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "അഗ്രകോടി വരകള്‍"
 
-#: src/translations.h:569 src/ui_viewDialog.h:1211
+#: src/translations.h:569 src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "ദിശാ സൂചകങ്ങള്‍"
@@ -3089,7 +3096,7 @@ msgstr "നക്ഷത്രരാശിയുടെ രേഖകള്‍"
 msgid "Nebulas background images"
 msgstr "നെബുലകളുടെ ചിത്രങ്ങള്‍"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1188
+#: src/translations.h:575 src/ui_viewDialog.h:1249
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
@@ -3103,12 +3110,12 @@ msgstr "ക്രാന്തിവൃത്ത രേഖ"
 msgid "Equator line"
 msgstr "ഭൂമധ്യരേഖ"
 
-#: src/translations.h:578 src/ui_viewDialog.h:1187
+#: src/translations.h:578 src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "ഭൂമധ്യരേഖാപരമായ വരകള്‍"
 
-#: src/translations.h:579 src/ui_viewDialog.h:1186
+#: src/translations.h:579 src/ui_viewDialog.h:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr ""
@@ -3117,12 +3124,12 @@ msgstr ""
 msgid "Fog"
 msgstr "മൂടല്‍ മഞ്ഞ്"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1190
+#: src/translations.h:581 src/ui_viewDialog.h:1251
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "ആകാശഗംഗ വരകള്‍"
 
-#: src/translations.h:582 src/ui_viewDialog.h:1210
+#: src/translations.h:582 src/ui_viewDialog.h:1271
 msgid "Galactic plane"
 msgstr "ആകാശഗംഗ  തലം"
 
@@ -3140,7 +3147,7 @@ msgstr "ചക്രവാളം രേഖ"
 msgid "Meridian line"
 msgstr "ഉച്ചസ്ഥാന രേഖ"
 
-#: src/translations.h:586 src/ui_viewDialog.h:1174
+#: src/translations.h:586 src/ui_viewDialog.h:1199 src/ui_viewDialog.h:1239
 msgid "Nebulas"
 msgstr "നെബുലകള്‍"
 
@@ -3163,7 +3170,8 @@ msgstr "ഗ്രഹ പ്രദക്ഷിണപഥം"
 msgid "Planet trails"
 msgstr ""
 
-#: src/translations.h:591 src/ui_viewDialog.h:1150 src/ui_viewDialog.h:1173
+#: src/translations.h:591 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1235
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "നക്ഷത്രങ്ങള്‍"
@@ -3266,7 +3274,7 @@ msgstr ""
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:999
+#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:1020
 msgid "Ocular view"
 msgstr ""
 
@@ -3319,7 +3327,7 @@ msgid "Show renderer statistics"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:657 src/ui_configurationDialog.h:1158
+#: src/translations.h:657 src/ui_configurationDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "സ്ക്രിപ്റ്റുകള്‍"
@@ -3373,7 +3381,7 @@ msgstr "വിവരണം"
 msgid "Log"
 msgstr "സംഭവരേഖ"
 
-#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1055
+#: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1057
 msgid "Edit keyboard shortcuts..."
 msgstr ""
 
@@ -3398,10 +3406,10 @@ msgstr "സ്വതവേയായി ഉപയോഗിക്കുക"
 msgid "Return to default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1012
-#: plugins/Oculars/src/ui_ocularDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1027
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Delete"
 msgstr "മായ്ക്കുക"
 
@@ -3584,9 +3592,9 @@ msgstr ""
 msgid "Server:"
 msgstr "സെര്‍വര്‍:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1214
-#: src/ui_viewDialog.h:1219 src/ui_viewDialog.h:1221
-#: src/ui_configurationDialog.h:1129 src/ui_configurationDialog.h:1140
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1280 src/ui_viewDialog.h:1282
+#: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "ഐച്ഛികങ്ങള്‍"
@@ -3604,209 +3612,229 @@ msgstr ""
 msgid "Lists"
 msgstr "പട്ടികകള്‍"
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1181
 msgid "View"
 msgstr "ദൃശ്യം"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1187
 msgid "Sky"
 msgstr "ആകാശം"
 
-#: src/ui_viewDialog.h:1143
+#: src/ui_viewDialog.h:1189
 msgid "Markings"
 msgstr "രേഖപ്പെടുത്തലുകള്‍"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1191
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "പ്രകൃതിദൃശ്യം"
 
-#: src/ui_viewDialog.h:1147
+#: src/ui_viewDialog.h:1193
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "സ്റ്റാര്‍ലോറെ"
 
-#: src/ui_viewDialog.h:1151
+#: src/ui_viewDialog.h:1196
+msgid "Labels and Markers"
+msgstr "പേരുകുറികളും രേഖപ്പെടുത്തലുകളും"
+
+#: src/ui_viewDialog.h:1198
+msgid "Planets"
+msgstr "ഗ്രഹങ്ങള്‍"
+
+#: src/ui_viewDialog.h:1200
+msgid "Planets and satellites"
+msgstr "ഗ്രഹങ്ങളും ഉപഗ്രഹങ്ങളും"
+
+#: src/ui_viewDialog.h:1201
+msgid "Show planets"
+msgstr "ഗ്രഹങ്ങളെ കാണിക്കുക"
+
+#: src/ui_viewDialog.h:1202
+msgid "Show planet markers"
+msgstr "ഗ്രഹങ്ങളുടെ അടയാളങ്ങള്‍ കാണിക്കുക"
+
+#: src/ui_viewDialog.h:1203
+msgid "Show planet orbits"
+msgstr "ഗ്രഹങ്ങളുടെ പ്രദക്ഷിണപഥം കാണിക്കുക"
+
+#: src/ui_viewDialog.h:1204
+msgid "Simulate light speed"
+msgstr "പ്രകാശവേഗതയെ അനുകരിക്കുക"
+
+#: src/ui_viewDialog.h:1205
+msgid "Scale Moon"
+msgstr "ചന്ദ്രനെ അനുപാതത്തിലാക്കുക"
+
+#: src/ui_viewDialog.h:1207
+msgid "Show atmosphere"
+msgstr "അന്തരീക്ഷം കാണിക്കുക"
+
+#: src/ui_viewDialog.h:1208
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
+msgid "Light pollution:"
+msgstr "പ്രകാശ മലിനീകരണം:"
+
+#: src/ui_viewDialog.h:1210
+msgid "pressure, temperature, extinction coefficient"
+msgstr "മര്‍ദ്ദം, താപനില, extinction coefficient"
+
+#: src/ui_viewDialog.h:1212
+msgid "Refraction/Extinction settings..."
+msgstr "അപവര്‍ത്തനം/Extinction  ക്രമീകരണങ്ങള്‍..."
+
+#: src/ui_viewDialog.h:1214
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "കേവല അനുപാതം:"
 
-#: src/ui_viewDialog.h:1152
+#: src/ui_viewDialog.h:1215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "താരതമ്യ അനുപാതം:"
 
-#: src/ui_viewDialog.h:1153
+#: src/ui_viewDialog.h:1216
 msgid "Milky Way brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1154
+#: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "മിന്നിതിളങ്ങുക:"
 
-#: src/ui_viewDialog.h:1156
+#: src/ui_viewDialog.h:1219
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "തീവ്രതയുള്ള വസ്തുക്കള്‍ ദൃശ്യമാകുമ്പോള്‍ ദ്യോതി കുറഞ്ഞ നക്ഷത്രങ്ങളെ "
 "മങ്ങിപ്പിക്കുക"
 
-#: src/ui_viewDialog.h:1158
+#: src/ui_viewDialog.h:1221
 msgid "Dynamic eye adaptation"
 msgstr "കണ്ണിന്റെ സ്വഭാവത്തിന്റെ അനുരൂപീകരണം"
 
-#: src/ui_viewDialog.h:1159
-msgid "Planets and satellites"
-msgstr "ഗ്രഹങ്ങളും ഉപഗ്രഹങ്ങളും"
-
-#: src/ui_viewDialog.h:1160
-msgid "Show planets"
-msgstr "ഗ്രഹങ്ങളെ കാണിക്കുക"
-
-#: src/ui_viewDialog.h:1161
-msgid "Show planet markers"
-msgstr "ഗ്രഹങ്ങളുടെ അടയാളങ്ങള്‍ കാണിക്കുക"
-
-#: src/ui_viewDialog.h:1162
-msgid "Show planet orbits"
-msgstr "ഗ്രഹങ്ങളുടെ പ്രദക്ഷിണപഥം കാണിക്കുക"
-
-#: src/ui_viewDialog.h:1163
-msgid "Simulate light speed"
-msgstr "പ്രകാശവേഗതയെ അനുകരിക്കുക"
-
-#: src/ui_viewDialog.h:1164
-msgid "Scale Moon"
-msgstr "ചന്ദ്രനെ അനുപാതത്തിലാക്കുക"
-
-#: src/ui_viewDialog.h:1166
-msgid "Show atmosphere"
-msgstr "അന്തരീക്ഷം കാണിക്കുക"
-
-#: src/ui_viewDialog.h:1167
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
-msgid "Light pollution:"
-msgstr "പ്രകാശ മലിനീകരണം:"
-
-#: src/ui_viewDialog.h:1169
-msgid "pressure, temperature, extinction coefficient"
-msgstr "മര്‍ദ്ദം, താപനില, extinction coefficient"
-
-#: src/ui_viewDialog.h:1171
-msgid "Refraction/Extinction settings..."
-msgstr "അപവര്‍ത്തനം/Extinction  ക്രമീകരണങ്ങള്‍..."
-
-#: src/ui_viewDialog.h:1172
-msgid "Labels and Markers"
-msgstr "പേരുകുറികളും രേഖപ്പെടുത്തലുകളും"
-
-#: src/ui_viewDialog.h:1175
-msgid "Planets"
-msgstr "ഗ്രഹങ്ങള്‍"
-
-#: src/ui_viewDialog.h:1176
+#: src/ui_viewDialog.h:1222
 msgid "Shooting Stars"
 msgstr "കൊള്ളിമീന്‍"
 
-#: src/ui_viewDialog.h:1177
-msgid "Hourly zenith rate:"
+#: src/ui_viewDialog.h:1224
+msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1179
+#: src/ui_viewDialog.h:1226
+msgid "ZHR:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1229
+msgid "Limit Magnitudes (for unaided/binocular observers)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1231
+msgid "Limit Magnitudes"
+msgstr ""
+
+#: src/ui_viewDialog.h:1233
+msgid "Stars to magnitude"
+msgstr ""
+
+#: src/ui_viewDialog.h:1237
+msgid "Nebulas to magitude"
+msgstr ""
+
+#: src/ui_viewDialog.h:1240
 msgid "Constellations"
 msgstr "നക്ഷത്രരാശികള്‍"
 
-#: src/ui_viewDialog.h:1180
+#: src/ui_viewDialog.h:1241
 msgid "Show lines"
 msgstr "വരകള്‍ കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1181
+#: src/ui_viewDialog.h:1242
 msgid "Show labels"
 msgstr "കുറിമാനം കാട്ടുക"
 
-#: src/ui_viewDialog.h:1182
+#: src/ui_viewDialog.h:1243
 msgid "Show boundaries"
 msgstr "അതിരുകള്‍ കാട്ടുക"
 
-#: src/ui_viewDialog.h:1183
+#: src/ui_viewDialog.h:1244
 msgid "Show art"
 msgstr "കലാരൂപങ്ങള്‍ കാണിക്കുക"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1184
+#: src/ui_viewDialog.h:1245
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "കലാരൂപത്തിന്റെ തിളക്കം"
 
-#: src/ui_viewDialog.h:1185
+#: src/ui_viewDialog.h:1246
 msgid "Celestial Sphere"
 msgstr "ഖഗോളം"
 
-#: src/ui_viewDialog.h:1192
+#: src/ui_viewDialog.h:1253
 msgid "Show equator line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1196
+#: src/ui_viewDialog.h:1257
 msgid "Show meridian line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1261
 msgid "Show horizon line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1265
 msgid "Show ecliptic line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1269
 msgid "Show Galactic plane line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1273
 msgid "Projection"
 msgstr "പ്രക്ഷേപണം"
 
-#: src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1274
 msgid "Add/remove landscapes..."
 msgstr "പ്രകൃതിദൃശ്യങ്ങള്‍ ചേര്‍ക്കുക/ഒഴിവാക്കുക"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1276
 msgid "Show ground"
 msgstr "ഭൗമോപരിതലം കാട്ടുക"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1277
 msgid "Show fog"
 msgstr "പൊടിപടലം, മഞ്ഞ് കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1278
 msgid "Use associated planet and position"
 msgstr "ബന്ധപ്പെട്ട ഗ്രഹവും സ്ഥാനവും ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1279
 msgid "Use this landscape as default"
 msgstr "ഈ പ്രകൃതിദൃശ്യം സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1281
 msgid "Use this sky culture as default"
 msgstr "ഈ ആകാശസംസ്കാരം സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1283
 msgid "Visible"
 msgstr "ദൃശ്യമായതു്"
 
-#: src/ui_configurationDialog.h:971
+#: src/ui_configurationDialog.h:973
 msgid "Configuration"
 msgstr "ക്രമീകരണം"
 
-#: src/ui_configurationDialog.h:973
+#: src/ui_configurationDialog.h:975
 msgid "Program language"
 msgstr "പ്രോഗ്രാമിന്റെ ഭാഷ"
 
-#: src/ui_configurationDialog.h:974
+#: src/ui_configurationDialog.h:976
 msgid "Default options"
 msgstr "സ്വതവേയുള്ള ഐച്ഛീകങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:976
+#: src/ui_configurationDialog.h:978
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3814,22 +3842,22 @@ msgstr ""
 "ഈ സെഷനില്‍ താങ്കള്‍ വരുത്തിയ മാറ്റങ്ങള്‍ അടുത്ത തവണ സ്റ്റെല്ലേറിയം "
 "ആരംഭിക്കുമ്പോള്‍ തുടരുന്നതിനായി സംരക്ഷിക്കുക"
 
-#: src/ui_configurationDialog.h:978
+#: src/ui_configurationDialog.h:980
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Save settings"
 msgstr "ക്രമീകരണങ്ങള്‍ സംരക്ഷിക്കുക"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:982
 msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 "സ്റ്റെല്ലേറിയത്തിന്റെ കൂടെ വന്ന സ്വതവേയുള്ള ക്രമീകരണങ്ങള്‍ "
 "പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:984
 msgid "Restore defaults"
 msgstr "സ്വതവേകള്‍ പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
 
-#: src/ui_configurationDialog.h:983
+#: src/ui_configurationDialog.h:985
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3840,31 +3868,31 @@ msgstr ""
 "നിലവിലെ FOV ഉം അടുത്ത ആരംഭത്തില്‍ ഉപയോഗിക്കേണ്ട കാഴ്ചയുടെ ദിശയും "
 "ഉള്‍പ്പെടുന്നു."
 
-#: src/ui_configurationDialog.h:985
+#: src/ui_configurationDialog.h:987
 msgid "The width of your view when Stellarium starts"
 msgstr "സ്റ്റെല്ലേറിയം ആരംഭികുമ്പോഴുള്ള ദര്‍ശനത്തിന്റെ വീതി"
 
-#: src/ui_configurationDialog.h:988
+#: src/ui_configurationDialog.h:990
 msgid "The direction you're looking when Stellarium starts"
 msgstr "സ്റ്റെല്ലേറിയ ആരംഭിക്കുമ്പോള്‍ നിങ്ങള്‍ നോക്കുന്ന ദിശ"
 
-#: src/ui_configurationDialog.h:990 src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1153
 msgid "Selected object information"
 msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിന്റെ വിവരങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:992
+#: src/ui_configurationDialog.h:994
 msgid "Display all information available"
 msgstr "ലഭ്യമായ എല്ലാ വിവരങ്ങളും പ്രദര്‍ശിപ്പിക്കുക"
 
-#: src/ui_configurationDialog.h:994
+#: src/ui_configurationDialog.h:996
 msgid "All available"
 msgstr "ലഭ്യമായ എല്ലാം"
 
-#: src/ui_configurationDialog.h:996
+#: src/ui_configurationDialog.h:998
 msgid "Display no information"
 msgstr "വിവരങ്ങളൊന്നും പ്രദര്‍ശിപ്പിക്കേണ്ട"
 
-#: src/ui_configurationDialog.h:998 plugins/Oculars/src/Oculars.cpp:1844
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1844
 #: plugins/Observability/src/Observability.cpp:628
 #: plugins/Observability/src/Observability.cpp:629
 #: plugins/Observability/src/Observability.cpp:631
@@ -3872,172 +3900,172 @@ msgstr "വിവരങ്ങളൊന്നും പ്രദര്‍ശി�
 msgid "None"
 msgstr "ഒന്നുമില്ല"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:1002
 msgid "Display less information"
 msgstr "കുറഞ്ഞ വിവരങ്ങള്‍ പ്രദര്‍ശിപ്പിക്കുക"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:1004
 msgid "Short"
 msgstr "നീളം കുറഞ്ഞ"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1006
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:1008
 msgid "Customized"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:1009
 msgid "Displayed fields"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1011
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1017
 msgid "Altitude/Azimuth"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1018
 msgid "Visual magnitude"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1019
 msgid "Absolute magnitude"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1018
+#: src/ui_configurationDialog.h:1020
 msgid "Catalog number(s)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1019
-#: plugins/Oculars/src/ui_ocularDialog.h:1022
+#: src/ui_configurationDialog.h:1021
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "പേര്"
 
-#: src/ui_configurationDialog.h:1021
+#: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1025
 msgid "Right ascension/Declination (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1025
+#: src/ui_configurationDialog.h:1027
 msgid "Galactic coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1029
 msgid "Longitude/Latitude (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1029
+#: src/ui_configurationDialog.h:1031
 msgid "Topocentric equatorial coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1033
 msgid "Hour angle/Declination"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1034
 msgid "Distance"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1038
 msgid "Size"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1046
 msgid "Additional information 2"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1047
 msgid "Additional information 3"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1048
 msgid "Control"
 msgstr "നിയന്ത്രണം"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1050
 msgid "Allow keyboard to pan and zoom"
 msgstr "കീബോര്‍ഡുകൊണ്ട് നീക്കാനും വലുതാക്കാനും അനുവദിക്കുക"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1052
 msgid "Enable keyboard navigation"
 msgstr "കീബോര്‍ഡുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1054
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "മൌസുപയോഗിച്ച് നീക്കാനും (ഇഴയ്ക്കുക) വലുതാക്കാനും (മൌസ്‌വീല്‍) അനുവദിക്കുക"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1056
 msgid "Enable mouse navigation"
 msgstr "മൌസുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1059
 msgid "Hides the mouse cursor when inactive"
 msgstr "നിര്‍ജ്ജീവമായിരിക്കുമ്പോള്‍ മൗസ് കര്‍സര്‍ മറയ്ക്കുന്നു"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1063
 msgid "seconds"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1065
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Startup date and time"
 msgstr "ആരംഭ തിയ്യതിയും സമയവും"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1067
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 "സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോള്‍ ഒരു പ്രതേക തീയതിയും സമയവും ഉപയോഗിക്കുക"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1069
 msgid "Other:"
 msgstr "മറ്റുള്ളവ:"
 
-#: src/ui_configurationDialog.h:1068
+#: src/ui_configurationDialog.h:1070
 msgid "use current"
 msgstr "നിലവിലുള്ളത് ഉപയോഗിക്കുക"
 
-#: src/ui_configurationDialog.h:1070
+#: src/ui_configurationDialog.h:1072
 msgid "Starts Stellarium at system clock date and time"
 msgstr "സിസ്റ്റം തീയതിയിലും സമയത്തിലും സ്റ്റെല്ലേറിയം തുടങ്ങുക"
 
-#: src/ui_configurationDialog.h:1072
+#: src/ui_configurationDialog.h:1074
 msgid "System date and time"
 msgstr "സിസ്റ്റം തീയതിയും സമയവും"
 
-#: src/ui_configurationDialog.h:1074
+#: src/ui_configurationDialog.h:1076
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -4045,165 +4073,165 @@ msgstr ""
 "അനുകരണത്തിന്റെ സമയം സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോഴുള്ള ദിവസത്തിലെ സമയത്തോട് "
 "തൊട്ടടുത്ത നിലയിലാക്കുന്നു"
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1078
 msgid "System date at:"
 msgstr "സിസ്റ്റം തീയ്യതി :"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1079
 msgid "Time correction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1084
 msgid "Planetarium options"
 msgstr "പ്ലാനെറ്റേറിയം ഐച്ഛീകങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1086
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1088
 msgid "Spheric mirror distortion"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1090
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1092
 msgid "Disc viewport"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1094
 msgid "Hide other constellations when you click one"
 msgstr "ഒന്നില്‍ ക്ലിക് ചെയ്താല്‍ മറ്റുള്ള നക്ഷത്രരാശികള്‍ മറയ്ക്കുക"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1096
 msgid "Select single constellation"
 msgstr "ഒരു നക്ഷത്രരാശി മാത്രം തിരഞ്ഞെടുക്കുക"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1098
 msgid "Align labels with the horizon"
 msgstr "ലേബലുകള്‍ ചക്രവാളത്തോടടുപ്പിച്ച് നിര്‍ത്തുക"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1100
 msgid "Gravity labels"
 msgstr "ഗുരുത്വാകര്‍ഷണ ലേബലുകള്‍"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1102
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1104
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1106
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1108
 msgid "Show flip buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1110
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1112
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1111
+#: src/ui_configurationDialog.h:1113
 msgid "Render Solar Shadows"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1114
 msgid "Screenshots"
 msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1115
 msgid "Screenshot Directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍ സേവ് ചെയ്യേണ്ടയിടം"
 
-#: src/ui_configurationDialog.h:1115
+#: src/ui_configurationDialog.h:1117
 msgid "Invert colors"
 msgstr "നെഗറ്റീവ് നിറങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1118
 msgid "Star catalog updates"
 msgstr "നക്ഷത്ര കാറ്റലോഗിലെ പുതിയ മാറ്റങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1120
 msgid "Click here to start downloading"
 msgstr "ഡൌണ്‍ലോഡ് ചെയ്യാന്‍ ഇവിടെ ഞെക്കുക"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1122
 msgid "Download this file to view even more stars"
 msgstr "കൂടുതല്‍ നക്ഷത്രങ്ങള്‍ക്കായി ഇത് ഡൌണ്‍ലോഡ് ചെയ്യുക"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1124
 msgid "Restart the download"
 msgstr "ഡൌണ്‍ലോഡ്  പുനരാരംഭിക്കുക"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1126
 msgid "Retry"
 msgstr "വീണ്ടും ശ്രമിക്കുക"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1128
 msgid "Stop the download. You can always restart it later"
 msgstr ""
 "ഡൌണ്‍ലോഡ്  നിര്‍ത്തി വയ്ക്കുക. താങ്കള്‍ക്ക് പിന്നീട്  പുനരാരംഭിക്കാവുന്നതാണ്."
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1130
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "വേണ്ട"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1133
 msgid "Close window when script runs"
 msgstr "സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിക്കുന്പോള്‍ ജാലകം അടക്കുക"
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1135
 msgid "Run the selected script"
 msgstr "തിരഞ്ഞെടുത്ത സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിപ്പിക്കുക"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1139
 msgid "Stop a running script"
 msgstr "സ്ക്രിപ്റ്റ് നിര്‍ത്തിവക്കുക."
 
-#: src/ui_configurationDialog.h:1141
+#: src/ui_configurationDialog.h:1143
 msgid "Load at startup"
 msgstr "ആരംഭത്തില്‍ ലോഡ് ചെയ്യുക"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1144
 msgid "configure"
 msgstr "ക്രമീകരിക്കുക"
 
-#: src/ui_configurationDialog.h:1147
+#: src/ui_configurationDialog.h:1149
 msgid "Main"
 msgstr "പ്രധാനപ്പെട്ട"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1151
 msgid "Information"
 msgstr "വിവരം"
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1156
 msgid "Navigation"
 msgstr "നാവിഗേഷന്‍"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1158
 msgid "Tools"
 msgstr "ഉപകരണങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:1160
+#: src/ui_configurationDialog.h:1162
 msgid "Plugins"
 msgstr "പ്ലഗിനുകള്‍"
 
@@ -4374,7 +4402,7 @@ msgid "Displays compass bearing marks along the horizon"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:81
-#: plugins/Oculars/src/ui_ocularDialog.h:997
+#: plugins/Oculars/src/ui_ocularDialog.h:1018
 msgid "Oculars"
 msgstr ""
 
@@ -4466,17 +4494,17 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:1559
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
-msgid "Barlow #%1"
+msgid "Lens #%1"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
-msgid "Barlow #%1: %2"
+msgid "Lens #%1: %2"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1568
-msgid "Barlow: none"
+msgid "Lens: none"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
@@ -4523,15 +4551,15 @@ msgid "Sensor #%1: %2"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1840
-msgid "&Barlow"
+msgid "&Lens"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1841
-msgid "&Previous barlow"
+msgid "&Previous lens"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1842
-msgid "&Next barlow"
+msgid "&Next lens"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1872
@@ -4555,11 +4583,11 @@ msgid "Next ocular"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
-msgid "Previous Barlow lens"
+msgid "Previous lens"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
-msgid "Next Barlow lens"
+msgid "Next lens"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
@@ -4620,7 +4648,7 @@ msgid "Multiplicity: %1"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
-msgid "Barlow: None"
+msgid "Lens: None"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
@@ -4628,7 +4656,7 @@ msgid "Multiplicity: N/A"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
-msgid "Multiplicity of barlow lens"
+msgid "Multiplicity of lens"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
@@ -4645,12 +4673,12 @@ msgid "Actual field of view provided by these binoculars"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
-msgid "Magnification provided by this ocular/barlow/telescope combination"
+msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
-"Actual field of view provided by this ocular/barlow/telescope combination"
+"Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
@@ -4731,143 +4759,146 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1000
+#: plugins/Oculars/src/ui_ocularDialog.h:1021
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1001
+#: plugins/Oculars/src/ui_ocularDialog.h:1022
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1002
+#: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Key mappings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1003
+#: plugins/Oculars/src/ui_ocularDialog.h:1024
 msgid "Toggle ocular view:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1005
+#: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Open pop-up navigation menu:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1006
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Interface"
 msgstr "ദൃശ്യതലം"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1007
+#: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1008
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1009
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "സാധാരണമായ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1010
-#: plugins/Oculars/src/ui_ocularDialog.h:1018
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
 msgid "Eyepieces"
 msgstr "ഐപീസുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1011
-#: plugins/Oculars/src/ui_ocularDialog.h:1020
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
-#: plugins/Oculars/src/ui_ocularDialog.h:1037
+#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "ചേര്‍ക്കുക"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1013
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "പേര്:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1014
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1015
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Focal length:"
 msgstr "ഫോക്കല്‍ ലെങ്ത്ത്"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1016
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1017
+#: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Binoculars"
 msgstr "ബൈനോക്കുലറുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1019
-msgid "Barlows"
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
+msgid "Lense"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1023
+#: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid "Multiplicity"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1024
-msgid "Barlow lenses"
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+msgid ""
+"Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
+"multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1025
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Sensors"
 msgstr "സെന്‍സറുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
-#: plugins/Oculars/src/ui_ocularDialog.h:1044
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "ടെലിസ്കോപ്പുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Diameter:"
 msgstr "വ്യാസം:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Horizontal flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "Vertical flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
@@ -5475,12 +5506,12 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1666
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1671
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
@@ -5863,62 +5894,62 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "January"
 msgstr "ജനുവരി"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "February"
 msgstr "ഫെബ്രുവരി"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "March"
 msgstr "മാര്‍ച്ച്"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "April"
 msgstr "ഏപ്രില്‍"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "May"
 msgstr "മെയ്"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "June"
 msgstr "ജൂണ്‍"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "July"
 msgstr "ജൂലൈ"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "August"
 msgstr "ആഗസ്റ്റ്"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "September"
 msgstr "സെപ്തംബ‌ര്‍"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "October"
 msgstr "ഒക്ടോബര്‍"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "November"
 msgstr "നവംബ‌ര്‍"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:638
+#: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "December"
 msgstr "ഡിസംബ‌ര്‍"
 
