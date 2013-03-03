@@ -201,26 +201,26 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintText
 */
 	switch (nType) {
 		case NebGx:
-				hintTextures.texGalaxy->bind();
-				break;
+			hintTextures.texGalaxy->bind();
+			break;
 		case NebOc:
-				hintTextures.texOpenCluster->bind();
-				break;
+			hintTextures.texOpenCluster->bind();
+			break;
 		case NebGc:
-				hintTextures.texGlobularCluster->bind();
-				break;
+			hintTextures.texGlobularCluster->bind();
+			break;
 		case NebN:
-				hintTextures.texDiffuseNebula->bind();
-				break;
+			hintTextures.texDiffuseNebula->bind();
+			break;
 		case NebPn:
-				hintTextures.texPlanetaryNebula->bind();
-				break;
+			hintTextures.texPlanetaryNebula->bind();
+			break;
 		case NebCn:
-				hintTextures.texOpenClusterWithNebulosity->bind();
-				break;
+			hintTextures.texOpenClusterWithNebulosity->bind();
+			break;
 		default:
-				hintTextures.texCircle->bind();
-}
+			hintTextures.texCircle->bind();
+	}
 
 	renderer->drawTexturedRect(XY[0] - 6, XY[1] - 6, 12, 12);
 }
@@ -382,7 +382,7 @@ QString Nebula::getTypeString(void) const
 			wsType = q_("Planetary nebula");
 			break;
 		case NebDn:
-			wsType = q_("Dark Nebula (?)"); // Find out if this is true!
+			wsType = q_("Dark Nebula");
 			break;
 		case NebCn:
 			wsType = q_("Cluster associated with nebulosity");
