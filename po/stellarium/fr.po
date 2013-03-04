@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-03 02:26+0700\n"
-"PO-Revision-Date: 2013-03-02 21:41+0000\n"
+"POT-Creation-Date: 2013-03-03 23:02+0700\n"
+"PO-Revision-Date: 2013-03-03 19:13+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-03 04:40+0000\n"
+"X-Launchpad-Export-Date: 2013-03-04 05:14+0000\n"
 "X-Generator: Launchpad (build 16514)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -117,8 +117,8 @@ msgid "Planetary nebula"
 msgstr "Nébuleuse planétaire"
 
 #: src/core/modules/Nebula.cpp:385
-msgid "Dark Nebula (?)"
-msgstr ""
+msgid "Dark Nebula"
+msgstr "Nébuleuse obscure"
 
 #: src/core/modules/Nebula.cpp:388
 msgid "Cluster associated with nebulosity"
@@ -268,8 +268,7 @@ msgstr "Vaisseau spatial"
 #: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
-"La correction est désactivée. À n'utiliser que si vous savez ce que vous "
-"faites !"
+"Correction désactivée. À n'utiliser que si vous savez ce que vous faites !"
 
 #: src/core/StelCore.cpp:1422
 #, qt-format
@@ -455,10 +454,10 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
-"Formule de J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), très "
-"largement utilisée. Une table pour 1620 à 2000, et comprenant une variante "
-"de Chapront, Chapront-Touzé & Francou (1997) pour les dates en dehors de "
-"l'intervalle 1620–2000."
+"De J. Meeus, <em>Astronomical Algorithms</em> (2<sup>e</sup> éd., 1998), "
+"très largement utilisée. Une table pour 1620 à 2000, et comprenant une "
+"variante de Chapront, Chapront-Touzé & Francou (1997) pour les dates en "
+"dehors de l'intervalle 1620–2000."
 
 #: src/core/StelCore.cpp:1479
 #, qt-format
@@ -484,6 +483,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"Ajustements polynomiaux simples du 3e ordre pour le passé récent publiés par "
+"O. Montenbruck & T. Pfleger dans la quatrième édition de <em>Astronomy on "
+"the Personal Computer</em> (2000)."
 
 #: src/core/StelCore.cpp:1488
 msgid ""
@@ -492,6 +494,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold et N. Dershowitz ont présenté cet ajustement de données "
+"polynomial dans <em>Calendrical Calculations</em> (3<sup>e</sup> éd. 2007) "
+"et dans leurs <em>Calendrical Tabulations</em> (2002). Il se fonde sur "
+"l'ouvrage de Jean Meeus <em>Astronomical Algorithms</em> (1991)."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -500,6 +506,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Cette importante solution a été publiée par L. V. Morrison et F. R. "
+"Stephenson dans l'article <em>Historical values of the Earth's clock error "
+"%1T and the calculation of eclipses</em> (%2) avec un addendum dans (%3)."
 
 #: src/core/StelCore.cpp:1494
 #, qt-format
@@ -524,6 +533,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Cette solution de F. Espenak et J. Meeus, fondée sur Morrison et Stephenson "
+"(2004) et sur un ajustement de données polynomial de valeurs pour 1600-2000, "
+"est utilisée dans le %1site web des éclipses de la NASA%2 ainsi que dans "
+"leur <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> "
+"(2006). Elle est aussi utilisée par SOLEX, un logiciel de calcul "
+"d'éphémérides solaires, lunaires et planétaires."
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
@@ -3852,11 +3867,11 @@ msgstr "Étoiles filantes"
 
 #: src/ui_viewDialog.h:1224
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Taux horaire zénithal"
 
 #: src/ui_viewDialog.h:1226
 msgid "ZHR:"
-msgstr ""
+msgstr "THZ :"
 
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -6921,7 +6936,7 @@ msgid ""
 msgstr ""
 "Plugin montrant quelques quasars plus brillants que 16 de magnitude "
 "visuelle. Catalogue de quasars compilé de « Quasar and Active Galactic "
-"Nuclei » (13e éd.) (Veron+ 2010) =2010A&A...518A..10V"
+"Nuclei » (13<sup>e</sup> éd.) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
@@ -6944,7 +6959,7 @@ msgid ""
 msgstr ""
 "Plugin montrant quelques quasars plus brillants que 16 de magnitude "
 "visuelle. Catalogue de quasars compilé de « Quasar and Active Galactic "
-"Nuclei » (13e éd.)."
+"Nuclei » (13<sup>e</sup> éd.)."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -8303,3 +8318,6 @@ msgstr "Hauteur du Soleil au crépuscule : 0 deg."
 
 #~ msgid "extragalactic (in MC) pulsar"
 #~ msgstr "pulsar extragalactique (dans MC)"
+
+#~ msgid "Dark Nebula (?)"
+#~ msgstr "Nébuleuse obscure"
