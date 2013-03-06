@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-03 23:02+0700\n"
-"PO-Revision-Date: 2013-03-04 19:36+0000\n"
+"PO-Revision-Date: 2013-03-05 13:44+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-05 04:46+0000\n"
+"X-Launchpad-Export-Date: 2013-03-06 05:13+0000\n"
 "X-Generator: Launchpad (build 16514)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -260,7 +260,7 @@ msgstr "Romskip"
 
 #: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "Korrigering er deaktivert. Bruk kun hvis du vet hva du gjør!"
 
 #: src/core/StelCore.cpp:1422
 #, qt-format
@@ -770,7 +770,7 @@ msgstr "Algoritme for"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
-msgstr ""
+msgstr "Uten korrigering"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
@@ -842,11 +842,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (med Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
@@ -875,7 +875,7 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Egendefinert ligning for %1T"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -1220,7 +1220,7 @@ msgstr "Alternativ snarvei"
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Egendefinert ligning for %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
@@ -1891,7 +1891,7 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
-"Phobosokkultasjoner av jorden er vanlig, det samme er okkultasjoner av "
+"Phobos-okkultasjoner av jorden er vanlig, det samme er okkultasjoner av "
 "Jupiter. Men okkultasjoner av begge på samme dag er svært sjeldne. Her er en "
 "som finner sted 23/1/2048. I virkelig hastighet."
 
@@ -3372,7 +3372,7 @@ msgstr "Beveg et teleskop til et gitt sett av koordinater"
 
 #: src/translations.h:654
 msgid "Show renderer statistics"
-msgstr ""
+msgstr "Vis opptegningsstatistikk"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:657 src/ui_configurationDialog.h:1160
@@ -3773,18 +3773,20 @@ msgstr "ZHR:"
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
+"Høyeste magnitudeverdier (for observatører med kikkert eller uten "
+"hjelpemiddel)"
 
 #: src/ui_viewDialog.h:1231
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Grensemagnituder"
 
 #: src/ui_viewDialog.h:1233
 msgid "Stars to magnitude"
-msgstr ""
+msgstr "Stjerner til magnitude"
 
 #: src/ui_viewDialog.h:1237
 msgid "Nebulas to magitude"
-msgstr ""
+msgstr "Stjernetåker til magnitude"
 
 #: src/ui_viewDialog.h:1240
 msgid "Constellations"
@@ -4124,7 +4126,7 @@ msgstr "Tidskorrigering"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
-msgstr "Rediger formel"
+msgstr "Rediger ligning"
 
 #: src/ui_configurationDialog.h:1084
 msgid "Planetarium options"
@@ -4546,17 +4548,17 @@ msgstr "Okular - tils.lat. synsf.: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Linse #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Linse #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Lens: none"
-msgstr ""
+msgstr "Linse: Ingen"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4603,15 +4605,15 @@ msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Lens"
-msgstr ""
+msgstr "&Linse"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous lens"
-msgstr ""
+msgstr "&Forrige linse"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next lens"
-msgstr ""
+msgstr "&Neste linse"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4635,11 +4637,11 @@ msgstr "Neste okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "Forrige linse"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "Neste linse"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4700,7 +4702,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
-msgstr ""
+msgstr "Linse: Ingen"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
@@ -4725,12 +4727,12 @@ msgstr "Faktisk synsfelt som tilbys av disse kikkertene"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Forstørrelse gitt av denne okular/linse/teleskop-kombinasjonen"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Faktisk synsfelt gitt av denne okular/linse/teleskop-kombinasjonen"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4906,7 +4908,7 @@ msgstr "Kikkerter"
 #: plugins/Oculars/src/ui_ocularDialog.h:1040
 #: plugins/Oculars/src/ui_ocularDialog.h:1046
 msgid "Lense"
-msgstr ""
+msgstr "Linse"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid "Multiplicity"
