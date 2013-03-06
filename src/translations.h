@@ -175,6 +175,7 @@ class Translations
 		N_("Polynesian");
 		N_("Sami");
 		N_("Tupi-Guarani");
+		N_("Tongan");
 		N_("Western");
 
 		
