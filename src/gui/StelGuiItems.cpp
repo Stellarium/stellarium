@@ -727,10 +727,11 @@ void BottomStelBar::buttonHoverChanged(bool b)
 	Q_ASSERT(button);
 	if (b==true)
 	{
-		if (button->action)
+		QAction* action = button->action;
+		if (action)
 		{
-			QString tip(button->action->toolTip());
-			QString shortcut(button->action->shortcut().toString());
+			QString tip(action->toolTip());
+			QString shortcut(action->shortcut().toString(QKeySequence::NativeText));
 			if (!shortcut.isEmpty())
 			{
 				if (shortcut == "Space")
