@@ -623,6 +623,20 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		updatePos = true;
 		location->setText(newLocation);
+		float lat = core->getCurrentLocation().latitude;
+		float lon = core->getCurrentLocation().longitude;
+		QString latStr, lonStr, pm;
+		if (lat >= 0)
+			pm = "N";
+		else
+			pm = "S";
+		latStr = QString("%1%2%3").arg(pm).arg(lat).arg(QChar(0x00B0));
+		if (lat >= 0)
+			pm = "E";
+		else
+			pm = "W";
+		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
+		location->setToolTip(QString("%1 %2").arg(latStr).arg(lonStr));
 	}
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
