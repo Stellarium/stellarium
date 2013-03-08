@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-06 21:30+0700\n"
-"PO-Revision-Date: 2013-03-06 21:26+0000\n"
+"PO-Revision-Date: 2013-03-07 10:54+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-07 04:41+0000\n"
-"X-Generator: Launchpad (build 16514)\n"
+"X-Launchpad-Export-Date: 2013-03-08 04:34+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -467,6 +467,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Dette er en kvadratisk formel for beregning av %1T med koeffisienter "
+"definert av brukeren."
 
 #: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -779,71 +781,71 @@ msgstr "Uten korrigering"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "Astronomical Ephemeris (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller & Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel & Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel & Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
@@ -855,27 +857,27 @@ msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus & Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
@@ -1230,15 +1232,15 @@ msgstr "Egendefinert ligning for %1T"
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "En typisk ligning for beregning av %1T ser slik ut:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
-msgstr ""
+msgstr "hvor"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
-msgstr ""
+msgstr "år"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
