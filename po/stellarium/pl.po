@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-06 21:30+0700\n"
-"PO-Revision-Date: 2013-02-28 01:04+0000\n"
+"POT-Creation-Date: 2013-03-08 13:39+0200\n"
+"PO-Revision-Date: 2013-03-09 03:43+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-07 04:41+0000\n"
-"X-Generator: Launchpad (build 16514)\n"
+"X-Launchpad-Export-Date: 2013-03-09 04:47+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -113,7 +113,7 @@ msgstr "Mgławica planetarna"
 
 #: src/core/modules/Nebula.cpp:385
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Ciemna mgławica"
 
 #: src/core/modules/Nebula.cpp:388
 msgid "Cluster associated with nebulosity"
@@ -670,7 +670,7 @@ msgstr "RA/Dec (na dzień): %1/%2"
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Długość/szerokość galaktyczna: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -928,7 +928,7 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Własne równanie %1T"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -1109,7 +1109,7 @@ msgstr "Okno konsoli skryptu"
 msgid "Windows"
 msgstr "Okna"
 
-#: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:737
+#: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:738
 msgid "Space"
 msgstr "Spacja"
 
@@ -1279,7 +1279,7 @@ msgstr "Skrót alternatywny"
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Własne równanie dla %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
@@ -3385,7 +3385,7 @@ msgstr "Okno konfiguracji wtyczki Obserwowalność"
 msgid "Oculars plugin configuration"
 msgstr "Konfiguracja wtyczki Okulary"
 
-#: src/translations.h:631 plugins/Oculars/src/ui_ocularDialog.h:1020
+#: src/translations.h:631 plugins/Oculars/src/ui_ocularDialog.h:1019
 msgid "Ocular view"
 msgstr "Widok w okularze"
 
@@ -3517,10 +3517,10 @@ msgstr "Ustaw jako domyślne"
 msgid "Return to default"
 msgstr "Powrót do ustawienia domyślnego"
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1033
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
-#: plugins/Oculars/src/ui_ocularDialog.h:1049
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Delete"
 msgstr "Usuń"
 
@@ -4055,7 +4055,6 @@ msgid "Catalog number(s)"
 msgstr "Numer(y) katalogowy(-e)"
 
 #: src/ui_configurationDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Nazwa"
@@ -4521,7 +4520,7 @@ msgid "Displays compass bearing marks along the horizon"
 msgstr "Wyświetla podziałkę kompasu wzdłuż horyzontu"
 
 #: plugins/Oculars/src/Oculars.cpp:81
-#: plugins/Oculars/src/ui_ocularDialog.h:1018
+#: plugins/Oculars/src/ui_ocularDialog.h:1017
 msgid "Oculars"
 msgstr "Okulary"
 
@@ -4617,23 +4616,23 @@ msgstr "Pozorne pole widzenia okularu: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Soczewka nr %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Soczewka nr %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Lens: none"
-msgstr ""
+msgstr "Soczewka: brak"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
 #, qt-format
 msgid "Telescope #%1"
-msgstr "Teleskope nr %1"
+msgstr "Teleskop nr %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1583 plugins/Oculars/src/Oculars.cpp:1640
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:757
@@ -4674,15 +4673,15 @@ msgstr "Czujnik nr %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Lens"
-msgstr ""
+msgstr "S%oczewka"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous lens"
-msgstr ""
+msgstr "&Poprzednia soczewka"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next lens"
-msgstr ""
+msgstr "&Następna soczewka"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4706,11 +4705,11 @@ msgstr "Następny okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "Poprzednia soczewka"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "Następna soczewka"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4780,7 +4779,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
-msgstr ""
+msgstr "Soczewka: Brak"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
@@ -4806,11 +4805,14 @@ msgstr "Rzeczywiste pole widzenia tej lornetki"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
+"Powiększenie zapewniane przez tę kombinację: okular/soczewka/teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
+"Rzeczywiste pole widzenia zapewniane przez tę kombinację: "
+"okular/soczewka/teleskop"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4911,146 +4913,147 @@ msgstr "Włącza/wyłącza nakładkę okularu."
 msgid "Opens the pop-up navigation menu."
 msgstr "Otwiera menu nawigacji."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1021
+#: plugins/Oculars/src/ui_ocularDialog.h:1020
 msgid "Enable only if an object is selected"
 msgstr "Włączaj tylko wtedy, gdy zaznaczono jakiś obiekt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1022
+#: plugins/Oculars/src/ui_ocularDialog.h:1021
 msgid "Scale image circle"
 msgstr "Skaluj okrągłe pole obrazu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1023
+#: plugins/Oculars/src/ui_ocularDialog.h:1022
 msgid "Key mappings"
 msgstr "Przypisanie klawiszy"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1024
+#: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Toggle ocular view:"
 msgstr "Włącz/wyłącz widok przez okular:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
+#: plugins/Oculars/src/ui_ocularDialog.h:1025
 msgid "Open pop-up navigation menu:"
 msgstr "Otwórz menu nawigacji:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1027
+#: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Interface"
 msgstr "Interfejs"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "On-screen control panel"
 msgstr "Wyświetlaj panel sterowania"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Używaj minut i sekund do pomiaru pola widzenia sensora CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "Ogólne"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1031
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Eyepieces"
 msgstr "Okulary"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
-#: plugins/Oculars/src/ui_ocularDialog.h:1048
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "Dodaj"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
-#: plugins/Oculars/src/ui_ocularDialog.h:1050
-#: plugins/Oculars/src/ui_ocularDialog.h:1061
+#: plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "Nazwa:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1034
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 msgid "Focal length:"
 msgstr "Ogniskowa:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1037
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Binoculars"
 msgstr "Lornetka"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
-#: plugins/Oculars/src/ui_ocularDialog.h:1046
-msgid "Lense"
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+msgid "Lenses"
+msgstr "Soczewki"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
+msgid "Multiplicity:"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
-msgid "Multiplicity"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1047
-#: plugins/Oculars/src/ui_ocularDialog.h:1057
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Sensors"
 msgstr "Czujniki"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1051
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Resolution x (pixels):"
 msgstr "Rozdzielczość x (pikseli):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution y (pixels):"
 msgstr "Rozdzielczość y (pikseli):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Chip width (mm):"
 msgstr "Szerokość układu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip height (mm):"
 msgstr "Wysokość układu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1055
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Pixel width (micron):"
 msgstr "Średnica piksela (w mikronach):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel height (micron):"
 msgstr "Wysokość piksela (w mikronach):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1058
-#: plugins/Oculars/src/ui_ocularDialog.h:1066
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Teleskopy"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Diameter:"
 msgstr "Średnica:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Horizontal flip"
 msgstr "Odwrócenie w poziomie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Vertical flip"
 msgstr "Odwrócenie w pionie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
@@ -5703,12 +5706,13 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1666
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr "Ustaw teleskop #%1 na wybrany obiekt"
+msgstr "Ustaw teleskop nr %1 na wybrany obiekt"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1671
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "Ustaw teleskop #%1 na punkt znajdujący się obecnie na środku ekranu"
+msgstr ""
+"Ustaw teleskop nr %1 na punkt znajdujący się obecnie na środku ekranu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
