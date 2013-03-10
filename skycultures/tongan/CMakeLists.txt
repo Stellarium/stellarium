@@ -1,5 +1,20 @@
 
 ########### install files ###############
 
-INSTALL(FILES constellation_names.eng.fab constellationship.fab constellationsart.fab constellations_boundaries.dat star_names.fab info.ini description.en.utf8 DESTINATION share/${PACKAGE}/skycultures/tongan)
+# install info.ini
+INSTALL(FILES info.ini DESTINATION share/${PACKAGE}/skycultures/tongan)
 
+# install star_names.fab
+INSTALL(FILES star_names.fab DESTINATION share/${PACKAGE}/skycultures/tongan)
+
+# install constellations data
+INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/tongan
+	FILES_MATCHING PATTERN "constellation*" )
+
+# install artwork
+#INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/tongan
+#	FILES_MATCHING PATTERN "*.png" )
+
+# install descriptions
+INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/tongan
+	FILES_MATCHING PATTERN "description.*.utf8" )
