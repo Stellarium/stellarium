@@ -1,5 +1,11 @@
 
 ########### install files ###############
 
-INSTALL(FILES landscape.ini description.ar.utf8 description.be.utf8 description.bg.utf8 description.de.utf8 description.fr.utf8 description.nb.utf8 description.pt_BR.utf8 description.en.utf8 description.ru.utf8 saturn-256.png DESTINATION share/${PACKAGE}/landscapes/saturn)
+# install landscape.ini
+INSTALL (FILES landscape.ini DESTINATION share/${PACKAGE}/landscapes/saturn )
 
+# install texture
+INSTALL (FILES saturn-256.png DESTINATION share/${PACKAGE}/landscapes/saturn )
+
+# install descriptions
+INSTALL (DIRECTORY ./ DESTINATION share/${PACKAGE}/landscapes/saturn FILES_MATCHING PATTERN "description.*.utf8" )

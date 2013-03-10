@@ -1,5 +1,11 @@
 
 ########### install files ###############
 
-INSTALL(FILES landscape.ini description.ar.utf8 description.be.utf8 description.bg.utf8 description.de.utf8 description.nb.utf8 description.fr.utf8 description.pt_BR.utf8 description.en.utf8 description.ru.utf8 mars.png DESTINATION share/${PACKAGE}/landscapes/mars)
+# install landscape.ini
+INSTALL (FILES landscape.ini DESTINATION share/${PACKAGE}/landscapes/mars )
 
+# install texture
+INSTALL (FILES mars.png DESTINATION share/${PACKAGE}/landscapes/mars )
+
+# install descriptions
+INSTALL (DIRECTORY ./ DESTINATION share/${PACKAGE}/landscapes/mars FILES_MATCHING PATTERN "description.*.utf8" )
