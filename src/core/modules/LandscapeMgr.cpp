@@ -259,7 +259,13 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
-	landscape->setBrightness(landscapeBrightness+0.05);
+	if (core->getCurrentLocation().planetName.contains("Sun"))
+	{
+		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
+		landscape->setBrightness(1.f);
+	}
+	else
+		landscape->setBrightness(landscapeBrightness+0.05);
 }
 
 void LandscapeMgr::draw(StelCore* core, class StelRenderer* renderer)
