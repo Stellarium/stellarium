@@ -46,14 +46,14 @@ namespace StelUtils
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
 	//! @param m minute component
-	//!	@param s second component
+	//! @param s second component
 	//! @return angle in radian
 	double hmsToRad(const unsigned int h, const unsigned int m, const double s);
 
 	//! Convert an angle in +-dms format to radian.
 	//! @param d degree component
 	//! @param m arcmin component
-	//!	@param s arcsec component
+	//! @param s arcsec component
 	//! @return angle in radian
 	double dmsToRad(const int d, const unsigned int m, const double s);
 
@@ -61,7 +61,7 @@ namespace StelUtils
 	//! @param rad input angle in radian
 	//! @param h hour component
 	//! @param m minute component
-	//!	@param s second component
+	//! @param s second component
 	void radToHms(double rad, unsigned int& h, unsigned int& m, double& s);
 
 	//! Convert an angle in radian to +-dms format.
@@ -69,7 +69,7 @@ namespace StelUtils
 	//! @param sign true if positive, false otherwise
 	//! @param d degree component
 	//! @param m minute component
-	//!	@param s second component
+	//! @param s second component
 	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);
 
 	//! Convert an angle in radian to a hms formatted string.

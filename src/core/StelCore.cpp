@@ -150,7 +150,7 @@ void StelCore::init(class StelRenderer* renderer)
 	skyDrawer->init();
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
-	setCurrentProjectionTypeKey(tmpstr);	
+	setCurrentProjectionTypeKey(tmpstr);
 }
 
 
