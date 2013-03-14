@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-08 13:39+0200\n"
-"PO-Revision-Date: 2013-02-04 14:47+0000\n"
-"Last-Translator: Jonas Persson <jonas.persson@physics.org>\n"
+"POT-Creation-Date: 2013-03-14 03:11+0700\n"
+"PO-Revision-Date: 2013-03-13 15:46+0000\n"
+"Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-09 04:49+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-03-14 04:43+0000\n"
+"X-Generator: Launchpad (build 16532)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -37,20 +37,20 @@ msgstr "Horisont"
 msgid "Galactic Plane"
 msgstr "Galaktiska planet"
 
-#: src/core/modules/LandscapeMgr.cpp:502
+#: src/core/modules/LandscapeMgr.cpp:508
 msgid "Author: "
 msgstr "Upphovsman: "
 
-#: src/core/modules/LandscapeMgr.cpp:505
+#: src/core/modules/LandscapeMgr.cpp:511
 msgid "Location: "
 msgstr "Plats: "
 
-#: src/core/modules/LandscapeMgr.cpp:510
+#: src/core/modules/LandscapeMgr.cpp:516
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:514
+#: src/core/modules/LandscapeMgr.cpp:520
 msgid "Planet: "
 msgstr "Planet: "
 
@@ -71,7 +71,7 @@ msgstr "Typ: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitud: <b>%1</b> (extinktion: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
@@ -108,7 +108,7 @@ msgstr "Planetär nebulosa"
 
 #: src/core/modules/Nebula.cpp:385
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Mörk nebulosa"
 
 #: src/core/modules/Nebula.cpp:388
 msgid "Cluster associated with nebulosity"
@@ -132,12 +132,12 @@ msgstr "Absolut magnitud: %1"
 #: src/core/modules/Planet.cpp:463
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptisk position (per datum): %1/%2"
 
 #: src/core/modules/Planet.cpp:464
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Axellutning (per datum, för jorden): %1"
 
 #: src/core/modules/Planet.cpp:474 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:149
@@ -154,7 +154,7 @@ msgstr "Avstånd: %1AU"
 #: src/core/modules/Planet.cpp:492
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Synbar diameter: %1, med ringar: %2"
 
 #: src/core/modules/Planet.cpp:498 src/core/modules/MinorPlanet.cpp:258
 #, qt-format
@@ -166,17 +166,17 @@ msgstr "Apparent diameter: %1"
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Siderisk omloppstid: %1 dagar (%2 a)"
 
 #: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Stjärndygn: %1"
 
 #: src/core/modules/Planet.cpp:512
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Medelsoldygn: %1"
 
 #: src/core/modules/Planet.cpp:519
 #, qt-format
@@ -201,13 +201,13 @@ msgstr "Upplyst: %1%"
 #: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Provisorisk beteckning: %1"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "stjärna"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -217,16 +217,16 @@ msgstr "Magnitud: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:60
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Synbar magnitud:: <b>%1</b> (vid extinktion)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "dubbelstjärna"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Magnitud: <b>%1</b> (extinktion: <b>%2</b>. B–V-index: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:132 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
@@ -258,6 +258,8 @@ msgstr "Rymdskepp"
 #: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"Korrigering är inaktiverad! Använd endast om är säker på att du vet vad du "
+"gör!"
 
 #: src/core/StelCore.cpp:1422
 #, qt-format
@@ -266,6 +268,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Denna historiska formel utformades av C. Schoch 1931 och användes av G. "
+"Henriksson i artikeln <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). Läs mer %2här%3."
 
 #: src/core/StelCore.cpp:1425
 #, qt-format
@@ -273,6 +278,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Denna empiriska ekvation publicerades av G. M. Clemence i artikeln <em>On "
+"the system of astronomical constants</em> (%1)."
 
 #: src/core/StelCore.cpp:1428
 #, qt-format
@@ -282,6 +289,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Denna formel baseras på en studie av Spencer Jones (%1), som studerade "
+"observationer av solen, månen och planeterna, utförda efter 1650. Den "
+"användes av Jean Meeus i boken <em>Astronomical Formulae for "
+"Calculators</em> (1988) och i datorprogrammet SunTracker Pro."
 
 #: src/core/StelCore.cpp:1432
 msgid ""
@@ -289,6 +300,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Det här är en något omgjord version av IAU-formeln (1952), som användes i "
+"böckerna <em>Astronomical Ephemeris</em> och <em>Canon of Solar "
+"Eclipses</em> av Mucke & Meeus (1983)."
 
 #: src/core/StelCore.cpp:1436
 msgid ""
@@ -297,6 +311,9 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Tuckermantabellerna (1962, 1964) listar positionerna för solen, månen och "
+"planeterna vid 5- och 10-dagarsintervaller från 601 f.v.t. till 1649 e.v.t. "
+"Samma förhållande antogs även indirekt i Goldstines syzygytabeller (1973)."
 
 #: src/core/StelCore.cpp:1440
 #, qt-format
@@ -305,6 +322,9 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Denna ekvation publicerades av P. M. Muller & F. R. Stephenson i artikeln "
+"<em>The accelerations of the earth and moon from early astronomical "
+"observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1443
 #, qt-format
@@ -312,6 +332,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Denna ekvation publicerades av F. R. Stephenson i artikeln <em>Pre-"
+"Telescopic Astronomical Observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1446
 #, qt-format
@@ -321,6 +343,11 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Denna polynomekvation av tolfte graden (påvisad föråldrad och ersatt av "
+"Schmadel & Zech (1988)) publicerades av L. D. Schmadel & G. Zech i artikeln "
+"<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
+"period 1800-1975</em> (%1) efter att ha prövats och anpassats m.h.a. data "
+"från Brouwer (1952)."
 
 #: src/core/StelCore.cpp:1449
 msgid ""
@@ -328,6 +355,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Denna algoritm antogs i P. Bretagnons & L. Simons <em>Planetary Programs and "
+"Tables from -4000 to +2800</em> (1986) och i planetariumdatorprogrammet "
+"RedShift."
 
 #: src/core/StelCore.cpp:1452
 #, qt-format
@@ -336,10 +366,13 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"Denna formel publicerades av F. R. Stephenson & L. V. Morrison i artikeln "
+"<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
+"1980</em> (%1)."
 
 #: src/core/StelCore.cpp:1455
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "Denna algoritm används i planetariumdatorprogrammet Guide 7."
 
 #: src/core/StelCore.cpp:1458
 msgid ""
@@ -347,6 +380,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Denna algoritm lades fram av F. Espenak i <em>Fifty Year Canon of Solar "
+"Eclipses: 1986-2035</em> (1987) och <em>Fifty Year Canon of Lunar Eclipses: "
+"1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:1461
 #, qt-format
@@ -354,6 +390,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"Denna formel togs fram av K.M. Borkowski (%1) utifrån en analys av 31 "
+"registrerade solförmörkelser mellan 2137 f.v.t. och 1715 e.v.t."
 
 #: src/core/StelCore.cpp:1464
 #, qt-format
@@ -363,6 +401,10 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"Denna polynomekvation av tolfte graden publicerades av L. D. Schmadel & G. "
+"Zech i artikeln <em>Empirical Transformations from U.T. to E.T. for the "
+"Period 1800-1988</em> (%1) eftr att ha prövats och anpassats m.h.a. "
+"datavärden från Stephenson & Morrison (1984)."
 
 #: src/core/StelCore.cpp:1467
 msgid ""
@@ -370,6 +412,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"Denna formel antogs av M. Chapront-Touze & J. Chapront i en nedkortad "
+"version av månrörelseteorin ELP2000-85, publicerad som en del av <em>Lunar "
+"Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
 #: src/core/StelCore.cpp:1470
 #, qt-format
@@ -378,6 +423,9 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"Denna ekvation publicerades av F. R. Stephenson & L. V. Morrison i artikeln "
+"<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
+"(%1)."
 
 #: src/core/StelCore.cpp:1473
 #, qt-format
@@ -385,6 +433,8 @@ msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
+"F. R. Stephenson publicerade denna formel i boken <em>Historical Eclipses "
+"and Earth's Rotation</em> (%1)."
 
 #: src/core/StelCore.cpp:1476
 msgid ""
@@ -392,6 +442,9 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"Från J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), och flitigt "
+"använd. Tabell för 1620-2000 och innefattar en variant av Chapront, Chapront-"
+"Touze & Francou (1997) för datum utanför 1620-2000."
 
 #: src/core/StelCore.cpp:1479
 #, qt-format
@@ -399,6 +452,8 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"JPL Solar System Dynamics Group vid NASA Jet Propulsion Laboratory använder "
+"denna formel på sin interaktiva webbplats %1JPL Horizons%2."
 
 #: src/core/StelCore.cpp:1482
 #, qt-format
@@ -406,6 +461,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"Detta polynom publicerades av J. Meeus & L. Simons i artikeln <em>Polynomial "
+"approximations to Delta T, 1620-2000 AD</em> (%1)."
 
 #: src/core/StelCore.cpp:1485
 msgid ""
@@ -413,6 +470,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"Den fjärde utgåvan av <em>Astronomy on the Personal Computer</em> (O. "
+"Montenbruck & T. Pfleger, 2000) tillhandahåller enkla dataanpassningar för "
+"tredjegradspolynom för en nära dåtid."
 
 #: src/core/StelCore.cpp:1488
 msgid ""
@@ -421,6 +481,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold & N. Dershowitz presenterade denna polynomdataanpassning i "
+"böckerna <em>Calendrical Calculations</em> (3rd ed. 2007) och "
+"<em>Calendrical Tabulations</em> (2002). Den baseras på Jean Meeus "
+"<em>Astronomical Algorithms</em> (1991)."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -429,6 +493,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Denna viktiga lösning publicerades av L. V. Morrison & F. R. Stephenson i "
+"artikeln <em>Historical values of the Earth's clock error %1T and the "
+"calculation of eclipses</em> (%2) med tillägg i (%3)."
 
 #: src/core/StelCore.cpp:1494
 #, qt-format
@@ -438,6 +505,10 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Från dygnslängden (LOD; som den definieras av Stephenson & Morrison (%2)) "
+"härledde Victor Reijs en %1T-formel genom att använda en simplexoptimering "
+"med en cosinus- och andragradsfunktion. Detta är baserat på en möjlig "
+"periodicitet, som beskrivs av Stephenson (%2). Läs mer %3här%4."
 
 #: src/core/StelCore.cpp:1497
 #, qt-format
@@ -448,10 +519,15 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Denna lösning av F. Espenak och J. Meeus, baserad på Morrison & Stephenson "
+"(2004) och en polynomanpassning m.h.a. tabellerade värden för 1600-2000, "
+"används på %1NASA:s förmörkelsewebbplats%2 och i boken <em>Five Millennium "
+"Canon of Solar Eclipses: -1900 to +3000</em> (2006). Formeln används även i "
+"ett efemeridprogram för solen, månen och planeterna, kallat SOLEX."
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
-msgstr ""
+msgstr "Används som standard."
 
 #: src/core/StelCore.cpp:1500
 #, qt-format
@@ -459,6 +535,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Det här är en andragradsfunktion för beräkning av %1T, där koefficienterna "
+"definieras av användaren."
 
 #: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -466,31 +544,35 @@ msgstr "Fel"
 
 #: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "med meningslösa värden utanför detta intervall"
 
 #: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"med ett medelfel på mindre än en sekund, maximifel på 1,9 s och meningslösa "
+"värden utanför detta intervall"
 
 #: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "med noll och inga värden utanför detta intervall"
 
 #: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"med en typisk noggrannhet på 1 sekund samt noll och inga värden utanför "
+"detta intervall"
 
 #: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "Giltigt tidsintervall: mellan år %1 och %2, %3."
 
 #: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "Giltigt tidsintervall: mellan år %1 och %2."
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -614,7 +696,7 @@ msgstr "RA/DE (för datum): %1/%2"
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Galaktisk longitud/latitud: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -763,116 +845,116 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritm för"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
-msgstr ""
+msgstr "Utan korrigering"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "Astronomical Ephemeris (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller & Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel & Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel & Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (med Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus & Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Anpassad ekvation av %1T"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -932,6 +1014,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Nedan listas endast åtgärder som tilldelats kortkommandon. Fler åtgärder kan "
+"finnas tillgängliga via knappen \"%1\"."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1008,7 +1092,7 @@ msgstr "Utvecklare: %1"
 #: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Fortlöpande integrering: %1"
 
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
@@ -1024,6 +1108,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Ett flertal personer har gjort betydande insatser, men är inte längre "
+"aktiva. Deras arbete har varit till stor hjälp för projektet:"
 
 #: src/gui/HelpDialog.cpp:320
 #, qt-format
@@ -1044,7 +1130,7 @@ msgstr "Konsolfönster för skript"
 msgid "Windows"
 msgstr "Fönster"
 
-#: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:738
+#: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:752
 msgid "Space"
 msgstr "Mellanslag"
 
@@ -1160,15 +1246,15 @@ msgstr "Du kan ta bort den manuellt genom att ta bort följande mapp: %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "snabbkörning …"
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "markerad text"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "klartext"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
@@ -1176,57 +1262,57 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "naturlig"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "stjärnkarta"
 
 #: src/gui/SearchDialog.cpp:361
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "SIMBAD-sökningsfel"
 
 #: src/gui/SearchDialog.cpp:369
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Sök i SIMBAD"
 
 #: src/gui/SearchDialog.cpp:537
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Universitetet i Strasbourg (Frankrike)"
 
 #: src/gui/SearchDialog.cpp:538
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Harvard University (USA)"
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "Åtgärd"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
-msgstr ""
+msgstr "Primärt kortkommando"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "Alternativt kortkommando"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Anpassad ekvation för %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "En typisk ekvation för beräkning av %1T ser ut så här:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
-msgstr ""
+msgstr "där"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
-msgstr ""
+msgstr "år"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
@@ -1572,12 +1658,12 @@ msgstr "Hektor"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "Varuna"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "Makemake"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1608,27 +1694,27 @@ msgstr "V"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "planet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "komet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "asteroid"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "måne"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1718,17 +1804,17 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:205
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Landskapsrundtur"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:207
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Partiell månförmörkelse"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:209
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Total månförmörkelse"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:211
@@ -1738,104 +1824,108 @@ msgstr "Skärmsläckare"
 #. TRANSLATORS: Name of script
 #: src/translations.h:213
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Solförmörkelse 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:215
 msgid "Startup Script"
-msgstr ""
+msgstr "Programstartsskript"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:217
 msgid "Zodiac"
-msgstr ""
+msgstr "Zodiaken"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:219
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "Merkurius soluppgång & solnedgång x3"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:221
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "Dubbelförmörkelse från Deimos 2017"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:223
 msgid "Double eclipse from Deimos in 2031"
-msgstr ""
+msgstr "Dubbelförmörkelse från Deimos 2031"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:225
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr ""
+msgstr "Förmörkelse från Olympus Mons 10 jan 2068"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:227
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr ""
+msgstr "Ockultation av jorden och Jupiter 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:229
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "3 passager & 2 förmörkelser från Deimos 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:231
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "Skärmsläckare – Solsystemet"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:233
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Stjärnbildsrundtur"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:235
 msgid "Sun from different planets"
-msgstr ""
+msgstr "Solen från olika planeter"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:237
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "Bästa utsikt över jorden från andra himlakroppar"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:239
 msgid "Transit of Venus"
-msgstr ""
+msgstr "Venuspassage"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:241
 msgid "Analemma"
-msgstr ""
+msgstr "Analemman"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:248
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Se dig omkring i alla installerade landskap."
 
 #: src/translations.h:249
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Skript för att visa en partiell månförmörkelse."
 
 #: src/translations.h:250
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Skript för att visa en total månförmörkelse."
 
 #: src/translations.h:251
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
+"En långsam, oändlig rundtur på himlavalvet där du tittar på slumpmässiga "
+"objekt."
 
 #: src/translations.h:252
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Skript som visar en total solförmörkelse som inträffade 2009 (plats: Rangpur "
+"i Bangladesh)."
 
 #: src/translations.h:253
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Skript som körs automatiskt vid programstart"
 
 #: src/translations.h:254
 msgid ""
@@ -1843,28 +1933,36 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Detta skript visar stjärnbilderna i zodiaken. Det innebär att stjärnbilderna "
+"som ligger längs den bara som solen följer över himlavalvet under året."
 
 #: src/translations.h:255
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
+"På grund av Merkurius speciella kretslopp och rotation kommer solen att gå "
+"upp och gå ner vid 3 olika tillfällen och platser under samma dygn."
 
 #: src/translations.h:256
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
+"Precis innan Mars förmörkar solen tittar Phobos fram och hinner förmörka "
+"solen före Mars. Detta sker mellan Skorpionen och Skytten den 26 april 2017."
 
 #: src/translations.h:257
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
+"Precis innan Mars förmörkar solen tittar Phobos fram och hinner förmörka "
+"solen före Mars. Detta sker mellan Oxen och Tvillingarna den 23 juli 2031."
 
 #: src/translations.h:258
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr ""
+msgstr "Phobos förmörkar solen, betraktat från Olympus Mons den 10 jan 2068."
 
 #: src/translations.h:259
 msgid ""
