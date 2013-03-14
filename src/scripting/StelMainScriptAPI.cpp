@@ -133,7 +133,10 @@ double StelMainScriptAPI::getMJDay() const
 
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
-	StelApp::getInstance().getCore()->setJDay(jdFromDateString(dt, spec));
+	double JD = jdFromDateString(dt, spec);
+	StelCore* core = StelApp::getInstance().getCore();
+	// add Delta-T correction for date
+	core->setJDay(JD + core->getDeltaT(JD)/86400);
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
