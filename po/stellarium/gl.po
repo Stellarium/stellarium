@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-14 03:11+0700\n"
-"PO-Revision-Date: 2013-02-27 15:03+0000\n"
+"PO-Revision-Date: 2013-03-14 20:55+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-14 04:38+0000\n"
+"X-Launchpad-Export-Date: 2013-03-15 04:33+0000\n"
 "X-Generator: Launchpad (build 16532)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -108,7 +108,7 @@ msgstr "Nebulosa planetaria"
 
 #: src/core/modules/Nebula.cpp:385
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Nebulosa Escura"
 
 #: src/core/modules/Nebula.cpp:388
 msgid "Cluster associated with nebulosity"
@@ -1769,7 +1769,7 @@ msgstr "Tupi-Guaraní"
 
 #: src/translations.h:178
 msgid "Tongan"
-msgstr ""
+msgstr "Tongan"
 
 #: src/translations.h:179
 msgid "Western"
@@ -3844,27 +3844,28 @@ msgstr "Estrelas fugaces"
 
 #: src/ui_viewDialog.h:1224
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Ratio horaria cenital"
 
 #: src/ui_viewDialog.h:1226
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
+"Magnitudes límite (para observadores con binoculares / sen aparellos)"
 
 #: src/ui_viewDialog.h:1231
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Magnitudes límite"
 
 #: src/ui_viewDialog.h:1233
 msgid "Stars to magnitude"
-msgstr ""
+msgstr "Estrelas a magnitude"
 
 #: src/ui_viewDialog.h:1237
 msgid "Nebulas to magitude"
-msgstr ""
+msgstr "Nebulosas a magnitude"
 
 #: src/ui_viewDialog.h:1240
 msgid "Constellations"
@@ -4624,17 +4625,17 @@ msgstr "aFOV do ocular: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Lentes #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Lentes #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Lens: none"
-msgstr ""
+msgstr "Lentes: non"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4681,15 +4682,15 @@ msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Lens"
-msgstr ""
+msgstr "&Lentes"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous lens"
-msgstr ""
+msgstr "Lentes &Previas"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next lens"
-msgstr ""
+msgstr "Lentes &Seguintes"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4713,11 +4714,11 @@ msgstr "&Seguinte Ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "Lentes previas"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "Lentes seguintes"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4778,7 +4779,7 @@ msgstr "Multiplicidade: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
-msgstr ""
+msgstr "Lentes: non"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
@@ -4786,7 +4787,7 @@ msgstr "Multiplicidade: N/A"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of lens"
-msgstr ""
+msgstr "Multiplicidade de lentes"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4803,12 +4804,14 @@ msgstr "Campo de visión actual proporcionado por estes binoculares"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Aumentos fornecidos por esta combinación de ocular/lente/telecopio"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
+"Campo de visión actual fornecido por esta combinación de "
+"ocular/lente/telescopio"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4985,17 +4988,19 @@ msgstr "Binoculares"
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 #: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid "Lenses"
-msgstr ""
+msgstr "Lentes"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplicity:"
-msgstr ""
+msgstr "Multiplicidade:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
+"Valores de multiplicidade > 1 amplian a lonxitude focal (lentes Barlow). "
+"Valores de multiplicidade < 1 diminúen a lonxitude focal (lentes Shapley)."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1046
 #: plugins/Oculars/src/ui_ocularDialog.h:1056
