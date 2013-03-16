@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-03-03 02:26+0700\n"
+"POT-Creation-Date: 2013-03-14 03:11+0700\n"
 "PO-Revision-Date: 2012-10-13 16:08+0000\n"
 "Last-Translator: முரளி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-03 04:46+0000\n"
-"X-Generator: Launchpad (build 16514)\n"
+"X-Launchpad-Export-Date: 2013-03-14 04:44+0000\n"
+"X-Generator: Launchpad (build 16532)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -37,20 +37,20 @@ msgstr "தொடுவானம்"
 msgid "Galactic Plane"
 msgstr "அண்டத் தளம்"
 
-#: src/core/modules/LandscapeMgr.cpp:502
+#: src/core/modules/LandscapeMgr.cpp:508
 msgid "Author: "
 msgstr "எழுதியவர் "
 
-#: src/core/modules/LandscapeMgr.cpp:505
+#: src/core/modules/LandscapeMgr.cpp:511
 msgid "Location: "
 msgstr "இடம்: "
 
-#: src/core/modules/LandscapeMgr.cpp:510
+#: src/core/modules/LandscapeMgr.cpp:516
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:514
+#: src/core/modules/LandscapeMgr.cpp:520
 msgid "Planet: "
 msgstr "கோள் "
 
@@ -107,7 +107,7 @@ msgid "Planetary nebula"
 msgstr "கோள் விண்மீன் படலம்"
 
 #: src/core/modules/Nebula.cpp:385
-msgid "Dark Nebula (?)"
+msgid "Dark Nebula"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:388
@@ -1015,16 +1015,16 @@ msgstr "வரைகலை/மற்ற கலைஞர்:%1"
 msgid "OSX Developer: %1"
 msgstr "ஒ ச க்ஸ்(OSX) உருவாக்குநர்: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:667
+#: src/gui/StelGui.cpp:178 src/translations.h:668
 msgid "Script console window"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:662
+#: src/gui/StelGui.cpp:178 src/translations.h:663
 msgid "Windows"
 msgstr "சாளரம்"
 
-#: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:737
+#: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:752
 msgid "Space"
 msgstr "இடைவெளி"
 
@@ -1229,12 +1229,12 @@ msgid "Earth"
 msgstr "பூமி"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:188
+#: src/translations.h:37 src/translations.h:189
 msgid "Moon"
 msgstr "நிலா"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:196
+#: src/translations.h:38 src/translations.h:197
 msgid "Mars"
 msgstr "செவ்வாய் (Mars)"
 
@@ -1332,7 +1332,7 @@ msgid "Metis"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:198
+#: src/translations.h:62 src/translations.h:199
 msgid "Saturn"
 msgstr "சனி (Saturn)"
 
@@ -1662,147 +1662,151 @@ msgid "Tupi-Guarani"
 msgstr ""
 
 #: src/translations.h:178
+msgid "Tongan"
+msgstr ""
+
+#: src/translations.h:179
 msgid "Western"
 msgstr "வெஸ்டர்ன்"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:184
+#: src/translations.h:185
 msgid "Guereins"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:186
+#: src/translations.h:187
 msgid "Trees"
 msgstr "மரங்கள்"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:190
+#: src/translations.h:191
 msgid "Hurricane"
 msgstr "புயல் காற்று"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:192
+#: src/translations.h:193
 msgid "Ocean"
 msgstr "சமுத்திரம்"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:194
+#: src/translations.h:195
 msgid "Garching"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:204
+#: src/translations.h:205
 msgid "Landscape Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:206
+#: src/translations.h:207
 msgid "Partial Lunar Eclipse"
 msgstr "பகுதி சந்திர கிரகணம்"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:208
+#: src/translations.h:209
 msgid "Total Lunar Eclipse"
 msgstr "முழு சந்திர கிரகணம்"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:210
+#: src/translations.h:211
 msgid "Screensaver"
 msgstr "திரைசேமிப்பி"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:212
+#: src/translations.h:213
 msgid "Solar Eclipse 2009"
 msgstr "சூரிய கிரகணம் 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:214
+#: src/translations.h:215
 msgid "Startup Script"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:216
+#: src/translations.h:217
 msgid "Zodiac"
 msgstr "இராசி மண்டலம்"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:218
+#: src/translations.h:219
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:220
+#: src/translations.h:221
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:222
+#: src/translations.h:223
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:224
+#: src/translations.h:225
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:226
+#: src/translations.h:227
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:228
+#: src/translations.h:229
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:230
+#: src/translations.h:231
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:232
+#: src/translations.h:233
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:234
+#: src/translations.h:235
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:236
+#: src/translations.h:237
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:238
+#: src/translations.h:239
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:240
+#: src/translations.h:241
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:247
+#: src/translations.h:248
 msgid "Look around each installed landscape."
 msgstr ""
 
-#: src/translations.h:248
+#: src/translations.h:249
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:249
+#: src/translations.h:250
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:250
+#: src/translations.h:251
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:251
+#: src/translations.h:252
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -1810,47 +1814,47 @@ msgstr ""
 "2009ல் நடந்த முழு சூரிய கிறகணத்தின் தொகுப்பு (நடைபெற்ற இடம்: இரங்கபூர், "
 "வங்காளதேசம்)"
 
-#: src/translations.h:252
+#: src/translations.h:253
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:253
+#: src/translations.h:254
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:254
+#: src/translations.h:255
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:255
+#: src/translations.h:256
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:256
+#: src/translations.h:257
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:257
+#: src/translations.h:258
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:258
+#: src/translations.h:259
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:259
+#: src/translations.h:260
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -1860,1502 +1864,1502 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:260
+#: src/translations.h:261
 msgid ""
 "Screensaver of various happenings in the Solar System. 171 events in all!"
 msgstr ""
 
-#: src/translations.h:261
+#: src/translations.h:262
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:262
+#: src/translations.h:263
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:263
+#: src/translations.h:264
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:264
+#: src/translations.h:265
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:265
+#: src/translations.h:266
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 
-#: src/translations.h:266
+#: src/translations.h:267
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:271
+#: src/translations.h:272
 msgid "Andorra"
 msgstr "அன்டோரா"
 
-#: src/translations.h:272
+#: src/translations.h:273
 msgid "United Arab Emirates"
 msgstr "யுனைடெட் அரபி எமிரேட்ஸ்"
 
-#: src/translations.h:273
+#: src/translations.h:274
 msgid "Afghanistan"
 msgstr "ஆப்கானிஸ்தான்"
 
-#: src/translations.h:274
+#: src/translations.h:275
 msgid "Antigua and Barbuda"
 msgstr "ஆன்டிகுவா மற்றும் பார்புடா"
 
-#: src/translations.h:275
+#: src/translations.h:276
 msgid "Anguilla"
 msgstr "அங்க்யூலா"
 
-#: src/translations.h:276
+#: src/translations.h:277
 msgid "Albania"
 msgstr "அல்பானியா"
 
-#: src/translations.h:277
+#: src/translations.h:278
 msgid "Armenia"
 msgstr "அர்மேனியா"
 
-#: src/translations.h:278
+#: src/translations.h:279
 msgid "Netherlands Antilles"
 msgstr "நெதர்லாந்து அன்டில்ஸ்"
 
-#: src/translations.h:279
+#: src/translations.h:280
 msgid "Angola"
 msgstr "அங்கோலா"
 
-#: src/translations.h:280
+#: src/translations.h:281
 msgid "Antarctica"
 msgstr "அன்டார்டிக்கா"
 
-#: src/translations.h:281
+#: src/translations.h:282
 msgid "Argentina"
 msgstr "அர்ஜன்டைனா"
 
-#: src/translations.h:282
+#: src/translations.h:283
 msgid "American Samoa"
 msgstr "அமெரிகன் ஸமோவா"
 
-#: src/translations.h:283
+#: src/translations.h:284
 msgid "Austria"
 msgstr "ஆஸ்த்திரியா"
 
-#: src/translations.h:284
+#: src/translations.h:285
 msgid "Australia"
 msgstr "ஆஸ்த்திரேலியா"
 
-#: src/translations.h:285
+#: src/translations.h:286
 msgid "Aruba"
 msgstr "அரூபா"
 
-#: src/translations.h:286
+#: src/translations.h:287
 msgid "Azerbaijan"
 msgstr "அஸர்பைஜான்"
 
-#: src/translations.h:287
+#: src/translations.h:288
 msgid "Bosnia and Herzegowina"
 msgstr "போஸ்னியா மற்றும் ஹெர்ஷகோவினா"
 
-#: src/translations.h:288
+#: src/translations.h:289
 msgid "Barbados"
 msgstr "பார்பேடோஸ்"
 
-#: src/translations.h:289
+#: src/translations.h:290
 msgid "Bangladesh"
 msgstr "வங்காளதேசம்"
 
-#: src/translations.h:290
+#: src/translations.h:291
 msgid "Belgium"
 msgstr "பெல்ஜியம்"
 
-#: src/translations.h:291
+#: src/translations.h:292
 msgid "Burkina Faso"
 msgstr "புர்கினா ஃபாஸோ"
 
-#: src/translations.h:292
+#: src/translations.h:293
 msgid "Bulgaria"
 msgstr "பல்கேரியா"
 
-#: src/translations.h:293
+#: src/translations.h:294
 msgid "Bahrain"
 msgstr "பஹ்ரைன்"
 
-#: src/translations.h:294
+#: src/translations.h:295
 msgid "Burundi"
 msgstr "புரென்டி"
 
-#: src/translations.h:295
+#: src/translations.h:296
 msgid "Benin"
 msgstr "பெனின்"
 
-#: src/translations.h:296
+#: src/translations.h:297
 msgid "Bermuda"
 msgstr "பெர்முடா"
 
-#: src/translations.h:297
+#: src/translations.h:298
 msgid "Brunei Darussalam"
 msgstr "புருனெ டர்ஸ்சலாம்"
 
-#: src/translations.h:298
+#: src/translations.h:299
 msgid "Bolivia"
 msgstr "பொலிவியா"
 
-#: src/translations.h:299
+#: src/translations.h:300
 msgid "Brazil"
 msgstr "பிரேசில்"
 
-#: src/translations.h:300
+#: src/translations.h:301
 msgid "Bahamas"
 msgstr "பஹாமாஸ்"
 
-#: src/translations.h:301
+#: src/translations.h:302
 msgid "Bhutan"
 msgstr "பூடான்"
 
-#: src/translations.h:302
+#: src/translations.h:303
 msgid "Bouvet Island"
 msgstr "போவெட் தீவு"
 
-#: src/translations.h:303
+#: src/translations.h:304
 msgid "Botswana"
 msgstr "போட்ஸ்வானா"
 
-#: src/translations.h:304
+#: src/translations.h:305
 msgid "Belarus"
 msgstr "பெலாரஸ்"
 
-#: src/translations.h:305
+#: src/translations.h:306
 msgid "Belize"
 msgstr "பெலிஸ்"
 
-#: src/translations.h:306
+#: src/translations.h:307
 msgid "Canada"
 msgstr "கனடா"
 
-#: src/translations.h:307
+#: src/translations.h:308
 msgid "Cocos Islands"
 msgstr "கோகோஸ் தீவுகள்"
 
-#: src/translations.h:308
+#: src/translations.h:309
 msgid "Democratic Republic of the Congo"
 msgstr ""
 
-#: src/translations.h:309
+#: src/translations.h:310
 msgid "Central African Republic"
 msgstr "மத்திய ஆப்பிரிக்க குடியரசு"
 
-#: src/translations.h:310
+#: src/translations.h:311
 msgid "Republic of the Congo"
 msgstr "காங்கோ குடியரசு"
 
-#: src/translations.h:311
+#: src/translations.h:312
 msgid "Switzerland"
 msgstr "சுவிட்சர்லாந்து"
 
-#: src/translations.h:312
+#: src/translations.h:313
 msgid "Cote d'Ivoire"
 msgstr "கோட் டில்வொரி"
 
-#: src/translations.h:313
+#: src/translations.h:314
 msgid "Cook Islands"
 msgstr "கூக் தீவு"
 
-#: src/translations.h:314
+#: src/translations.h:315
 msgid "Chile"
 msgstr "சிலி"
 
-#: src/translations.h:315
+#: src/translations.h:316
 msgid "Cameroon"
 msgstr "கேமரூன்"
 
-#: src/translations.h:316
+#: src/translations.h:317
 msgid "China"
 msgstr "சீனா"
 
-#: src/translations.h:317
+#: src/translations.h:318
 msgid "Colombia"
 msgstr "கொலம்பியா"
 
-#: src/translations.h:318
+#: src/translations.h:319
 msgid "Costa Rica"
 msgstr "கோஸ்டா ரிகா"
 
-#: src/translations.h:319
+#: src/translations.h:320
 msgid "Serbia and Montenegro"
 msgstr "செர்பியா மற்றும் மோன்டே நெக்ரோ குடியரசு"
 
-#: src/translations.h:320
+#: src/translations.h:321
 msgid "Cuba"
 msgstr "கியூபா"
 
-#: src/translations.h:321
+#: src/translations.h:322
 msgid "Cape Verde"
 msgstr "காப் வெர்டே"
 
-#: src/translations.h:322
+#: src/translations.h:323
 msgid "Christmas Island"
 msgstr "கிறிஸ்துமஸ் தீவு"
 
-#: src/translations.h:323
+#: src/translations.h:324
 msgid "Cyprus"
 msgstr "சைப்ரஸ்"
 
-#: src/translations.h:324
+#: src/translations.h:325
 msgid "Czech Republic"
 msgstr "செக் குடியரசு"
 
-#: src/translations.h:325
+#: src/translations.h:326
 msgid "Germany"
 msgstr "ஜெர்மனி"
 
-#: src/translations.h:326
+#: src/translations.h:327
 msgid "Djibouti"
 msgstr "டிஜ்பொட்டி"
 
-#: src/translations.h:327
+#: src/translations.h:328
 msgid "Denmark"
 msgstr "டென்மார்க்"
 
-#: src/translations.h:328
+#: src/translations.h:329
 msgid "Dominica"
 msgstr "டொமினிக்கா"
 
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Dominican Republic"
 msgstr "டொமினிக்கன் குடியரசு"
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "Algeria"
 msgstr "அல்ஜீரியா"
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid "Ecuador"
 msgstr "ஈக்குவேடோர்"
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid "Estonia"
 msgstr "எஸ்டோனியா"
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid "Egypt"
 msgstr "எகிப்து"
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid "Western Sahara"
 msgstr "மேற்கு சஹாரா"
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid "Eritrea"
 msgstr "எரிட்ரியா"
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid "Spain"
 msgstr "ஸ்பெயின்"
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid "Ethiopia"
 msgstr "எத்தியோப்பியா"
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid "Finland"
 msgstr "ஃபின்லாந்து"
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid "Fiji"
 msgstr "ஃபிஜி"
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid "Falkland Islands"
 msgstr "ஃபால்க் தீவு"
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid "Micronesia"
 msgstr "மிக்ரோநேஷியா"
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid "Faroe Islands"
 msgstr "ஃபரோ தீவுகள்"
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid "France"
 msgstr "ஃபிரான்ஸ்"
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid "Gabon"
 msgstr "காபோன்"
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid "United Kingdom"
 msgstr "பிரிடிஷ் கூட்டரசு"
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid "Grenada"
 msgstr "கிரெனடா"
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid "Georgia"
 msgstr "ஜார்ஜியா"
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid "French Guiana"
 msgstr "ஃப்ரெஞ்ச் கையானா"
 
-#: src/translations.h:349
+#: src/translations.h:350
 msgid "Ghana"
 msgstr "கஹானா"
 
-#: src/translations.h:350
+#: src/translations.h:351
 msgid "Gibraltar"
 msgstr "கிப்ரால்டர்"
 
-#: src/translations.h:351
+#: src/translations.h:352
 msgid "Greenland"
 msgstr "கிரீன்லாந்து"
 
-#: src/translations.h:352
+#: src/translations.h:353
 msgid "Gambia"
 msgstr "காம்பியா"
 
-#: src/translations.h:353
+#: src/translations.h:354
 msgid "Guinea"
 msgstr "கினியா"
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "Guadeloupe"
 msgstr "க்வாடெல்போப்"
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "Equatorial Guinea"
 msgstr "ஈகோடோரியல் க்யுனியா"
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Greece"
 msgstr "கிரீஸ்"
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "தெற்கு ஜார்ஜியா மற்றும் தெற்கு சான்விச் தீவுகள்"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Guatemala"
 msgstr "க்வாதிமாலா"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Guam"
 msgstr "க்வாம்"
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Guinea-Bissau"
 msgstr "கினியா-பிஸ்ஸாவ்"
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Guyana"
 msgstr "கயானா"
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Hong Kong"
 msgstr "ஹாங் காங்"
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "Heard Island and McDonald Islands"
 msgstr "ஹெர்ட் தீவு மற்றும் மெக் டொனால்ட் தீவுகள்"
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "Honduras"
 msgstr "ஹான்டுராஸ்"
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "Croatia"
 msgstr "க்ரோடியா"
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Haiti"
 msgstr "ஹைதி"
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "Hungary"
 msgstr "ஹங்கேரி"
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "Indonesia"
 msgstr "இந்தோனேஷியா"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "Ireland"
 msgstr "அயர்லாந்து"
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Israel"
 msgstr "இஸ்ரேல்"
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "India"
 msgstr "இந்தியா"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "British Indian Ocean Territory"
 msgstr "ப்ரிட்டிஷ் இந்திய பெருங்கடல் பிரதேசம்"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Iraq"
 msgstr "ஈராக்"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "Iran"
 msgstr "ஈரான்"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Iceland"
 msgstr "ஐஸ்லேன்ட்"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Italy"
 msgstr "இத்தாலி"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Jamaica"
 msgstr "ஜமைக்கா"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Jordan"
 msgstr "ஜோர்டான்"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Japan"
 msgstr "ஜப்பான்"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Kenya"
 msgstr "கென்யா"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Kyrgyzstan"
 msgstr "கிரைகிஸ்த்தான்"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Cambodia"
 msgstr "கம்போடியா"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "Kiribati"
 msgstr "கிரிபாட்டி"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Comoros"
 msgstr "கோமொரோஸ்"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Saint Kitts and Nevis"
 msgstr "செயின்ட் கிட்ஸ் மற்றும் நிவிஸ்"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Democratic People's Republic of Korea"
 msgstr "கொரிய ஜனநாயக மக்கள் குடியரசு"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Republic of Korea"
 msgstr "கொரிய குடியரசு"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Kuwait"
 msgstr "குவைத்"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Cayman Islands"
 msgstr "கேய்மன் தீவு"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Kazakhstan"
 msgstr "கஜஸ்தான்`"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Lao"
 msgstr "லாவோ"
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Lebanon"
 msgstr "லெபனான்"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Saint Lucia"
 msgstr "செயின்ட் லூசியா"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Liechtenstein"
 msgstr "லிச்டெண்ஸ்டீன்"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Sri Lanka"
 msgstr "இலங்கை"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Liberia"
 msgstr "லிபெரியா"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "Lesotho"
 msgstr "லஸொதோ"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "Lithuania"
 msgstr "லித்துவேனியா"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "Luxembourg"
 msgstr "லக்ஸம்பர்க்"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Latvia"
 msgstr "லட்வியா"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Libyan Arab Jamahiriya"
 msgstr "லிபரியன் அராபிய ஜமாஹிரியா"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Morocco"
 msgstr "மொரோக்கோ"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Monaco"
 msgstr "மொனாக்கோ"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Moldova"
 msgstr "மோல்டோவா"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Madagascar"
 msgstr "மடகஸ்கார்"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Marshall Islands"
 msgstr "மார்ஷல் தீவுகள்"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Macedonia"
 msgstr "மாசிடோ னியா"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Mali"
 msgstr "மாலி"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Myanmar"
 msgstr "மயான்மார்"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Mongolia"
 msgstr "மங்கோலியா"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Macau"
 msgstr "மக்காவ்"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Northern Mariana Islands"
 msgstr "வட மரியானா தீவுகள்"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Martinique"
 msgstr "மார்டினீக்கு"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Mauritania"
 msgstr "மொரிசியேனியா"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Montserrat"
 msgstr "மோன்ஸிராட்"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Malta"
 msgstr "மால்டா"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Mauritius"
 msgstr "மொரீஷியஸ்"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Maldives"
 msgstr "மாலத்தீவுகள்"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Malawi"
 msgstr "மலவி"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Mexico"
 msgstr "மெக்சிகோ"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Malaysia"
 msgstr "மலேசியா"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Mozambique"
 msgstr "மோசாம்பிக்"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Namibia"
 msgstr "நாமிபியா"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "New Caledonia"
 msgstr "நியூ கலிடோனியா"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Niger"
 msgstr "நைகர்"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "Norfolk Island"
 msgstr "நார்போக் தீவு"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Nigeria"
 msgstr "நைஜீரியா"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "Nicaragua"
 msgstr "நிகராகுவே"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Netherlands"
 msgstr "நெதர்லாந்து"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "Norway"
 msgstr "நார்வே"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "Nepal"
 msgstr "நேபாளம்"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Nauru"
 msgstr "நௌரு"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Niue"
 msgstr "நீயு"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "New Zealand"
 msgstr "நீயூசீலாந்து"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Oman"
 msgstr "ஓமன்"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Panama"
 msgstr "பனாமா"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Peru"
 msgstr "பெரு"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "French Polynesia"
 msgstr "பிரெஞ்ச் பொலினேஷியா"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Papua New Guinea"
 msgstr "பாப்பா நியூ ஜினியா"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "Philippines"
 msgstr "பிலிப்பைன்ஸ்"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Pakistan"
 msgstr "பாகிஸ்தான்"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Poland"
 msgstr "போலாந்து"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Saint Pierre and Miquelon"
 msgstr "செயின்ட் பியரி மற்றும் மிக்யுலன்"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Pitcairn"
 msgstr "பிட்கெர்ய்ன்"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Puerto Rico"
 msgstr "போர்ட்டோ ரீக்கோ"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Palestinian Territories"
 msgstr "பாலஸ்தீன பிரதேசங்கள்"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Portugal"
 msgstr "போர்ச்சுகல்"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Palau"
 msgstr "பலாவ்"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Paraguay"
 msgstr "பராகுவே"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "Qatar"
 msgstr "கத்தார்"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Réunion"
 msgstr "ரியூனியன்"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Romania"
 msgstr "ரோமானியா"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "Serbia"
 msgstr "செர்பியா"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Russian Federation"
 msgstr "ரஷ்யன் கூட்டமைப்பு"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "Rwanda"
 msgstr "ருவாண்டா"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Saudi Arabia"
 msgstr "சவுதி அரேபியா"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Solomon Islands"
 msgstr "சாலமன் தீவுகள்"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Seychelles"
 msgstr "சேஷல்ஸ்"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Sudan"
 msgstr "சூடான்"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Sweden"
 msgstr "ஸ்வீடன்"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Singapore"
 msgstr "சிங்கப்பூர்"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Saint Helena"
 msgstr "செயின்ட் ஹெலினா"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Slovenia"
 msgstr "ஸ்லோவேனியா"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "Svalbard and Jan Mayen"
 msgstr "ஸ்வால்பார்ட் அண்ட் ஜன் மேயன்"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Slovakia"
 msgstr "ஸ்லோவாக்கியா"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Sierra Leone"
 msgstr "சியரா லியோன்"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "San Marino"
 msgstr "சான் மெரினோ"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Senegal"
 msgstr "செனெகல்"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Somalia"
 msgstr "சோமாலியா"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Suriname"
 msgstr "சுரினேம்"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Sao Tome and Principe"
 msgstr "சாவோ டோம் அண்ட் பிரின்சிபி"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "El Salvador"
 msgstr "எல் சால்வடார்"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Syrian Arab Republic"
 msgstr "சிரியன் அரபு குடியரசு"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Swaziland"
 msgstr "ஸ்வாசிலாந்து"
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Turks and Caicos Islands"
 msgstr "டர்க்ஸ் மற்றும் கைகாஸ் தீவு"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Chad"
 msgstr "சாட்"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "French Southern Territories"
 msgstr "ஃப்ரென்ச் தெற்கு  பிரதேசங்கள்"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Togo"
 msgstr "டோகோ"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Thailand"
 msgstr "தாய்லாந்து"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Tajikistan"
 msgstr "தஜிகிஸ்தான்"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Tokelau"
 msgstr "டொகேலா"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "East Timor"
 msgstr "கிழக்கு தைமோர்"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Turkmenistan"
 msgstr "துருக்மேனிஸ்தான்"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Tunisia"
 msgstr "துனீசியா"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Tonga"
 msgstr "டோங்கா"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Turkey"
 msgstr "துருக்கி"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Trinidad and Tobago"
 msgstr "ட்ரினிடாட் மற்றும் டோபாகோ"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Tuvalu"
 msgstr "துவாலு"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "Taiwan"
 msgstr "தாய்வான்"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Tanzania"
 msgstr "தான்சானியா"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Ukraine"
 msgstr "உக்ரெய்ன்"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Uganda"
 msgstr "உகாண்டா"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "United States Minor Outlying Islands"
 msgstr "அமெரிக்க ஐக்கிய மைனர் அவுட்லேயிங் தீவுகள்"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "United States"
 msgstr "ஐக்கிய அமெரிக்கா"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Uruguay"
 msgstr "உருகுவே"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Uzbekistan"
 msgstr "உஸ்பெகிஸ்தான்"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Vatican City State"
 msgstr "வேடிக்கன் நகர மாநிலம்"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "Saint Vincent and the Grenadines"
 msgstr "செய்ன்ட் வின்சென்ட் மற்றும் க்ரினடின்ஸ்"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Venezuela"
 msgstr "வெனிசூலா"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "British Virgin Islands"
 msgstr "ப்ரிடீஷ் விர்ஜின் தீவுகள்"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "United States Virgin Islands"
 msgstr "யுனைட்டட் ஸ்டேட்ஸ்  வெர்ஜின் தீவுகள்"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Viet Nam"
 msgstr "வியட்நாம்"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "Vanuatu"
 msgstr "வனாட்டு"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Wallis and Futuna"
 msgstr "வாலிஸ் அண்ட் ஃபுடுனா"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "Samoa"
 msgstr "சமோ"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Yemen"
 msgstr "யேமன்"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "Mayotte"
 msgstr "மயோட்டி"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Yugoslavia"
 msgstr "யுகோஸ்லோவிவா"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "South Africa"
 msgstr "தென் ஆப்ரிக்கா"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Zambia"
 msgstr "ஜாம்பியா"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Zimbabwe"
 msgstr "ஜிம்பாபே"
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
-#: src/translations.h:518 src/ui_dateTimeDialogGui.h:298
+#: src/translations.h:519 src/ui_dateTimeDialogGui.h:298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Date and Time"
 msgstr "நாள் மற்றும் நேரம்"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "Add 1 sidereal day"
 msgstr "ஒரு மீன்வழி நாளை கூட்டு"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "Add 1 sidereal month"
 msgstr ""
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "Add 1 sidereal week"
 msgstr "ஒரு மீன்வழி வாரத்தை கூட்டு"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Add 1 sidereal year"
 msgstr ""
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Add 1 sidereal century"
 msgstr ""
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Add 1 solar day"
 msgstr "ஒரு சூரிய தினத்தை கூட்டவும்"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Add 1 solar hour"
 msgstr "ஒரு சூரிய மணி நேரத்தை கூட்டு"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "Add 1 solar week"
 msgstr "ஒரு சூரிய வரத்தை கூட்டவும்"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "Add 1 synodic month"
 msgstr ""
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "Add 1 draconic month"
 msgstr ""
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Add 1 anomalistic month"
 msgstr ""
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Add 1 mean tropical month"
 msgstr ""
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Add 1 draconic year"
 msgstr ""
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Add 1 mean tropical year"
 msgstr ""
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "Add 1 mean tropical century"
 msgstr ""
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "Decrease time speed"
 msgstr "நேர வேகத்தை குறைக்கவும்"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Decrease time speed (a little)"
 msgstr "நேர வேகத்தை குறைக்கவும் (கொஞ்சமாக)"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Speed up the script execution rate"
 msgstr ""
 
-#: src/translations.h:538
+#: src/translations.h:539
 msgid "Increase time speed"
 msgstr "நேர வேகத்தை அதிகரிக்கவும்"
 
-#: src/translations.h:539
+#: src/translations.h:540
 msgid "Increase time speed (a little)"
 msgstr "நேர வேகத்தை கூட்டவும் (கொஞ்சமாக)"
 
-#: src/translations.h:540
+#: src/translations.h:541
 msgid "Pause script execution"
 msgstr ""
 
-#: src/translations.h:541
+#: src/translations.h:542
 msgid "Resume script execution"
 msgstr ""
 
-#: src/translations.h:542
+#: src/translations.h:543
 msgid "Set time to now"
 msgstr "இப்போதைய நேரத்திற்கு அமை"
 
-#: src/translations.h:543
+#: src/translations.h:544
 msgid "Set the normal script execution rate"
 msgstr ""
 
-#: src/translations.h:544
+#: src/translations.h:545
 msgid "Set normal time rate"
 msgstr "வழக்கமான நேர வேகத்திற்கு அமை"
 
-#: src/translations.h:545
+#: src/translations.h:546
 msgid "Set time rate to zero"
 msgstr "நேர வேகத்தை பூஜ்ஜியத்திற்கு வைக்கவும்"
 
-#: src/translations.h:546
+#: src/translations.h:547
 msgid "Stop script execution"
 msgstr ""
 
-#: src/translations.h:547
+#: src/translations.h:548
 msgid "Subtract 1 sidereal day"
 msgstr "ஒரு மீன்வழி நாளை கழி"
 
-#: src/translations.h:548
+#: src/translations.h:549
 msgid "Subtract 1 sidereal month"
 msgstr ""
 
-#: src/translations.h:549
+#: src/translations.h:550
 msgid "Subtract 1 sidereal week"
 msgstr "ஒரு மீன்வழி வாரத்தை கழி"
 
-#: src/translations.h:550
+#: src/translations.h:551
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
-#: src/translations.h:551
+#: src/translations.h:552
 msgid "Subtract 1 sidereal century"
 msgstr ""
 
-#: src/translations.h:552
+#: src/translations.h:553
 msgid "Subtract 1 solar day"
 msgstr "ஒரு சூரிய தினத்தை கழிக்கவும்"
 
-#: src/translations.h:553
+#: src/translations.h:554
 msgid "Subtract 1 solar hour"
 msgstr "ஒரு சூரிய மணி நேரத்தை கழி"
 
-#: src/translations.h:554
+#: src/translations.h:555
 msgid "Subtract 1 solar week"
 msgstr "ஒரு சூரிய வாரத்தை  கழிக்கவும்"
 
-#: src/translations.h:555
+#: src/translations.h:556
 msgid "Subtract 1 synodic month"
 msgstr ""
 
-#: src/translations.h:556
+#: src/translations.h:557
 msgid "Subtract 1 draconic month"
 msgstr ""
 
-#: src/translations.h:557
+#: src/translations.h:558
 msgid "Subtract 1 anomalistic month"
 msgstr ""
 
-#: src/translations.h:558
+#: src/translations.h:559
 msgid "Subtract 1 mean tropical month"
 msgstr ""
 
-#: src/translations.h:559
+#: src/translations.h:560
 msgid "Subtract 1 draconic year"
 msgstr ""
 
-#: src/translations.h:560
+#: src/translations.h:561
 msgid "Subtract 1 mean tropical year"
 msgstr ""
 
-#: src/translations.h:561
+#: src/translations.h:562
 msgid "Subtract 1 mean tropical century"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:564
+#: src/translations.h:565
 msgid "Display Options"
 msgstr "காட்சி குணங்கள்"
 
-#: src/translations.h:565
+#: src/translations.h:566
 msgid "Flip scene horizontally"
 msgstr "கிடைமட்டமாக காட்சியை திருப்பு"
 
-#: src/translations.h:566
+#: src/translations.h:567
 msgid "Full-screen mode"
 msgstr "முழுத்திரை நிலை"
 
-#: src/translations.h:567 src/ui_viewDialog.h:1206
+#: src/translations.h:568 src/ui_viewDialog.h:1206
 msgid "Atmosphere"
 msgstr "வளிமண்டலம்"
 
-#: src/translations.h:568 src/ui_viewDialog.h:1250
+#: src/translations.h:569 src/ui_viewDialog.h:1250
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "திசைவில் கட்டம்"
 
-#: src/translations.h:569 src/ui_viewDialog.h:1272
+#: src/translations.h:570 src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "சிறப்பியல்புப் புள்ளிகள்"
 
-#: src/translations.h:570
+#: src/translations.h:571
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation art"
 msgstr "விண்மீன் குழு கலை"
 
-#: src/translations.h:571
+#: src/translations.h:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation boundaries"
 msgstr "விண்மீன் குழு எல்லைகள்"
 
-#: src/translations.h:572
+#: src/translations.h:573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation labels"
 msgstr "விண்மீன் குழு விவரக்குறிப்புகள்"
 
-#: src/translations.h:573
+#: src/translations.h:574
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation lines"
 msgstr "நட்சத்திரக்கூட்ட கோடுகள்"
 
-#: src/translations.h:574
+#: src/translations.h:575
 msgid "Nebulas background images"
 msgstr "பின்னணி நெபுலா படங்கள்"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1249
+#: src/translations.h:576 src/ui_viewDialog.h:1249
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/translations.h:576
+#: src/translations.h:577
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Ecliptic line"
 msgstr "கிரகணத்திற்குரியகோடு"
 
-#: src/translations.h:577
+#: src/translations.h:578
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equator line"
 msgstr "பூமத்திய ரேகை"
 
-#: src/translations.h:578 src/ui_viewDialog.h:1248
+#: src/translations.h:579 src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "மத்தியகோட்டிற்குரிய கட்டம்"
 
-#: src/translations.h:579 src/ui_viewDialog.h:1247
+#: src/translations.h:580 src/ui_viewDialog.h:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "பூமத்திய ரேகை J2000 கட்டம்"
 
-#: src/translations.h:580
+#: src/translations.h:581
 msgid "Fog"
 msgstr "மூடு பனி"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1251
+#: src/translations.h:582 src/ui_viewDialog.h:1251
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "அண்ட கட்டம்"
 
-#: src/translations.h:582 src/ui_viewDialog.h:1271
+#: src/translations.h:583 src/ui_viewDialog.h:1271
 msgid "Galactic plane"
 msgstr ""
 
-#: src/translations.h:583
+#: src/translations.h:584
 msgid "Ground"
 msgstr "தரை"
 
-#: src/translations.h:584
+#: src/translations.h:585
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Horizon line"
 msgstr ""
 
-#: src/translations.h:585
+#: src/translations.h:586
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Meridian line"
 msgstr "உச்சநெடுங்கோடு"
 
-#: src/translations.h:586 src/ui_viewDialog.h:1199 src/ui_viewDialog.h:1239
+#: src/translations.h:587 src/ui_viewDialog.h:1199 src/ui_viewDialog.h:1239
 msgid "Nebulas"
 msgstr "நெபுளாக்கள்"
 
-#: src/translations.h:587
+#: src/translations.h:588
 msgid "Night mode"
 msgstr "இரவு நிலை"
 
-#: src/translations.h:588
+#: src/translations.h:589
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
 msgstr "கோள் விவரச்சீட்டு"
 
-#: src/translations.h:589
+#: src/translations.h:590
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet orbits"
 msgstr "கோள்களின் கோளப்பாதை"
 
-#: src/translations.h:590
+#: src/translations.h:591
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet trails"
 msgstr "கோள்களின் சுவடு"
 
-#: src/translations.h:591 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1213
+#: src/translations.h:592 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1213
 #: src/ui_viewDialog.h:1235
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "நட்சத்திரங்கள்"
 
-#: src/translations.h:592
+#: src/translations.h:593
 msgid "Stars labels"
 msgstr ""
 
-#: src/translations.h:593
+#: src/translations.h:594
 msgid "Flip scene vertically"
 msgstr "செங்குத்தாக காட்சியை திருப்பு"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:596
+#: src/translations.h:597
 msgid "Miscellaneous"
 msgstr "இதர வகை"
 
-#: src/translations.h:597
+#: src/translations.h:598
 msgid "Auto hide horizontal button bar"
 msgstr ""
 
-#: src/translations.h:598
+#: src/translations.h:599
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/translations.h:599
+#: src/translations.h:600
 msgid "Go to home"
 msgstr ""
 
-#: src/translations.h:600
+#: src/translations.h:601
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: src/translations.h:601
+#: src/translations.h:602
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/translations.h:602
+#: src/translations.h:603
 msgid "Save screenshot"
 msgstr "திரைப்பிடிப்பினை சேமி"
 
-#: src/translations.h:603
+#: src/translations.h:604
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
-#: src/translations.h:604
+#: src/translations.h:605
 msgid "Toggle visibility of GUI"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:607
+#: src/translations.h:608
 msgid "Movement and Selection"
 msgstr "அசைவு மற்றும் தேர்வு"
 
-#: src/translations.h:608
+#: src/translations.h:609
 msgid "Center on selected object"
 msgstr "தேர்தெடுத்த பொருளை மத்தியபடுது"
 
-#: src/translations.h:609
+#: src/translations.h:610
 msgid "Set home planet to selected planet"
 msgstr "தேர்தெடுத்த கோளை தொடக்க கோளாக அமை"
 
-#: src/translations.h:610
+#: src/translations.h:611
 msgid "Track object"
 msgstr "பொருளை பின்தொடர்"
 
-#: src/translations.h:611
+#: src/translations.h:612
 msgid "Zoom in on selected object"
 msgstr "தேர்வு செய்யப்பட்ட பொருளை பெரிதாக்கு"
 
-#: src/translations.h:612
+#: src/translations.h:613
 msgid "Zoom out"
 msgstr "பெரிதாக்கு"
 
-#: src/translations.h:615
+#: src/translations.h:616
 msgid "Angle measure"
 msgstr "கோண அளவு"
 
-#: src/translations.h:618
+#: src/translations.h:619
 msgid "Compass marks"
 msgstr "திசைக்காட்டி குறிகள்"
 
-#: src/translations.h:621
+#: src/translations.h:622
 msgid "Show exoplanets"
 msgstr ""
 
-#: src/translations.h:622
+#: src/translations.h:623
 msgid "Exoplanets configuration window"
 msgstr ""
 
-#: src/translations.h:625
+#: src/translations.h:626
 msgid "Observability"
 msgstr ""
 
-#: src/translations.h:626
+#: src/translations.h:627
 msgid "Observability configuration window"
 msgstr ""
 
-#: src/translations.h:629
+#: src/translations.h:630
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: src/translations.h:630 plugins/Oculars/src/ui_ocularDialog.h:1020
+#: src/translations.h:631 plugins/Oculars/src/ui_ocularDialog.h:1019
 msgid "Ocular view"
 msgstr ""
 
-#: src/translations.h:631
+#: src/translations.h:632
 msgid "Show crosshairs"
 msgstr ""
 
-#: src/translations.h:632
+#: src/translations.h:633
 msgid "Oculars popup menu"
 msgstr ""
 
-#: src/translations.h:633
+#: src/translations.h:634
 msgid "Image sensor frame"
 msgstr ""
 
-#: src/translations.h:634
+#: src/translations.h:635
 msgid "Telrad sight"
 msgstr ""
 
-#: src/translations.h:637
+#: src/translations.h:638
 msgid "Pulsars configuration window"
 msgstr ""
 
-#: src/translations.h:640
+#: src/translations.h:641
 msgid "Quasars configuration window"
 msgstr ""
 
-#: src/translations.h:643
+#: src/translations.h:644
 msgid "Satellites configuration window"
 msgstr "செயற்கைக்கோள் கட்டமைப்பு ஜன்னல்"
 
-#: src/translations.h:644
+#: src/translations.h:645
 msgid "Satellite hints"
 msgstr "செயற்கைக்கோள் குறிப்புகள்"
 
-#: src/translations.h:645
+#: src/translations.h:646
 msgid "Satellite labels"
 msgstr "செயற்கைக்கோள் விவரச்சீட்டுகள்"
 
-#: src/translations.h:648
+#: src/translations.h:649
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
-#: src/translations.h:651
+#: src/translations.h:652
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
-#: src/translations.h:654
+#: src/translations.h:655
 msgid "Show renderer statistics"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:657 src/ui_configurationDialog.h:1160
+#: src/translations.h:658 src/ui_configurationDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "ஸ்கிரிப்டுகள்"
 
-#: src/translations.h:658
+#: src/translations.h:659
 msgid "Run landscapes script from file"
 msgstr ""
 
-#: src/translations.h:659
+#: src/translations.h:660
 msgid "Show and zoom Moon"
 msgstr ""
 
-#: src/translations.h:663
+#: src/translations.h:664
 msgid "Configuration window"
 msgstr "வடிவமைபுச்சாளரம்"
 
-#: src/translations.h:664
+#: src/translations.h:665
 msgid "Date/time window"
 msgstr "தேதி/நேரம் சாளரம்"
 
-#: src/translations.h:665
+#: src/translations.h:666
 msgid "Help window"
 msgstr "உதவிச்சாளரம்"
 
-#: src/translations.h:666
+#: src/translations.h:667
 msgid "Location window"
 msgstr "இருப்பிடச்சாளரம்"
 
-#: src/translations.h:668
+#: src/translations.h:669
 msgid "Search window"
 msgstr "தேடுதல் சாளரம்"
 
-#: src/translations.h:669
+#: src/translations.h:670
 msgid "Shortcuts window"
 msgstr ""
 
-#: src/translations.h:670
+#: src/translations.h:671
 msgid "Sky and viewing options window"
 msgstr "வானம் மற்றும் பார்வை விருப்பங்கள் ஜன்னல்"
 
@@ -3397,10 +3401,10 @@ msgstr "இயல்பிருப்பாக பயன்படுத்த�
 msgid "Return to default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1033
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
-#: plugins/Oculars/src/ui_ocularDialog.h:1049
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
+#: src/ui_locationDialogGui.h:396 plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Delete"
 msgstr "நீக்கு"
 
@@ -3928,7 +3932,6 @@ msgid "Catalog number(s)"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1021
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "பெயர்"
@@ -4374,7 +4377,7 @@ msgid "Displays compass bearing marks along the horizon"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:81
-#: plugins/Oculars/src/ui_ocularDialog.h:1018
+#: plugins/Oculars/src/ui_ocularDialog.h:1017
 msgid "Oculars"
 msgstr ""
 
@@ -4731,146 +4734,147 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1021
+#: plugins/Oculars/src/ui_ocularDialog.h:1020
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1022
+#: plugins/Oculars/src/ui_ocularDialog.h:1021
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1023
+#: plugins/Oculars/src/ui_ocularDialog.h:1022
 msgid "Key mappings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1024
+#: plugins/Oculars/src/ui_ocularDialog.h:1023
 msgid "Toggle ocular view:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
+#: plugins/Oculars/src/ui_ocularDialog.h:1025
 msgid "Open pop-up navigation menu:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1027
+#: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Interface"
 msgstr "இடைமுகப்பு"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "General"
 msgstr "பொது"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1031
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Eyepieces"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
-#: plugins/Oculars/src/ui_ocularDialog.h:1048
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "சேர்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
-#: plugins/Oculars/src/ui_ocularDialog.h:1050
-#: plugins/Oculars/src/ui_ocularDialog.h:1061
+#: plugins/Oculars/src/ui_ocularDialog.h:1033
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
 msgstr "பெயர்:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1034
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1037
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Binoculars"
 msgstr "இருகண் நோக்கிகள்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
-#: plugins/Oculars/src/ui_ocularDialog.h:1046
-msgid "Lense"
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+msgid "Lenses"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
+msgid "Multiplicity:"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
-msgid "Multiplicity"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1047
-#: plugins/Oculars/src/ui_ocularDialog.h:1057
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Sensors"
 msgstr "உணரிகள்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1051
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1055
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1058
-#: plugins/Oculars/src/ui_ocularDialog.h:1066
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "தொலைநோக்கிகள்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Diameter:"
 msgstr "விட்டம்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Horizontal flip"
 msgstr "கிடைமட்டமாக திருப்பு"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Vertical flip"
 msgstr "செங்குத்தாக திருப்பு"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
