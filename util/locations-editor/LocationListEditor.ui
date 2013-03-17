@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>600</width>
+    <height>400</height>
    </rect>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -44,13 +44,6 @@
        <property name="margin">
         <number>0</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QLineEdit" name="lineEditFilter">
-         <property name="placeholderText">
-          <string>Search/filter...</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="1">
         <widget class="QComboBox" name="comboBoxFilteredColumn"/>
        </item>
@@ -58,6 +51,13 @@
         <widget class="QCheckBox" name="checkBoxCaseSensitive">
          <property name="text">
           <string>&amp;Case sensitive</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="lineEditFilter">
+         <property name="placeholderText">
+          <string>Search/filter...</string>
          </property>
         </widget>
        </item>
@@ -71,8 +71,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
-     <height>21</height>
+     <width>600</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLocations">
@@ -95,6 +95,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout"/>
+    <addaction name="actionAboutQt"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -114,6 +115,7 @@
      <string>&amp;Navigation</string>
     </property>
     <addaction name="actionGoToRow"/>
+    <addaction name="actionSearchFilter"/>
     <addaction name="separator"/>
     <addaction name="actionNextDuplicate"/>
     <addaction name="actionDuplicateWrapAround"/>
@@ -313,6 +315,19 @@
    </property>
    <property name="text">
     <string>&amp;Wrap around</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>About &amp;Qt...</string>
+   </property>
+  </action>
+  <action name="actionSearchFilter">
+   <property name="text">
+    <string>&amp;Search/filter...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
    </property>
   </action>
  </widget>

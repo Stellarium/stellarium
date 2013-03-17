@@ -28,6 +28,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QInputDialog>
+#include <QLabel>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include "kfilterdev.h" // For compressing binary lists
@@ -37,11 +38,16 @@
 LocationListEditor::LocationListEditor(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LocationListEditor),
+    filterIndicator(0),
     locations(0),
-    proxyModel(0)
+    proxyModel(0),
+    selectionModel(0)
 {
 	ui->setupUi(this);
 	setWindowIcon(QIcon(":/locationListEditor/icon.bmp"));
+	
+	filterIndicator = new QLabel();
+	ui->statusBar->addPermanentWidget(filterIndicator);
 	
 	connect(ui->actionOpenFile, SIGNAL(triggered()),
 	        this, SLOT(open()));
@@ -65,12 +71,16 @@ LocationListEditor::LocationListEditor(QWidget *parent) :
 	        this, SLOT(deleteSelected()));
 	connect(ui->actionGoToRow, SIGNAL(triggered()),
 	        this, SLOT(goToRow()));
+	connect(ui->actionSearchFilter, SIGNAL(triggered()),
+	        ui->lineEditFilter, SLOT(setFocus()));
 	connect(ui->actionNextDuplicate, SIGNAL(triggered()),
 	        this, SLOT(goToNextDuplicate()));
 	connect(ui->actionExit, SIGNAL(triggered()),
 	        this, SLOT(close()));
 	connect(ui->actionAbout, SIGNAL(triggered()),
 	        this, SLOT(showAboutWindow()));
+	connect(ui->actionAboutQt, SIGNAL(triggered()),
+	        qApp, SLOT(aboutQt()));
 	connect(ui->actionTest, SIGNAL(triggered()),
 	        this, SLOT(test()));
 	
@@ -229,11 +239,18 @@ bool LocationListEditor::loadFile(const QString& path)
 		delete proxyModel;
 	}
 	proxyModel = newProxy;
-	connect(ui->lineEditFilter, SIGNAL(textEdited(QString)),
-	        proxyModel, SLOT(setFilterWildcard(QString)));
+	connect(ui->lineEditFilter, SIGNAL(editingFinished()),
+	        this, SLOT(filter()));
 	setFilterCaseSensitivity(false);
 	connect(ui->checkBoxCaseSensitive, SIGNAL(toggled(bool)),
 	        this, SLOT(setFilterCaseSensitivity(bool)));
+	updateFilterIndicator();
+	
+	selectionModel = ui->tableView->selectionModel();
+	connect(selectionModel,
+	        SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+	        this,
+	        SLOT(updateSelectionCount()));
 	
 	if (checkIfFileIsLoaded())
 		ui->statusBar->showMessage("Loaded " + path);
@@ -372,8 +389,6 @@ bool LocationListEditor::saveBinary(const QString& path)
 QList<int> LocationListEditor::getIndexesOfSelection()
 {
 	QList<int> rows;
-	
-	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
 	if (!selectionModel->hasSelection())
 		return rows;
 	
@@ -387,7 +402,6 @@ QList<int> LocationListEditor::getIndexesOfSelection()
 
 int LocationListEditor::getIndexOfCurrentRow()
 {
-	QItemSelectionModel* selectionModel = ui->tableView->selectionModel();
 	QModelIndex index = selectionModel->currentIndex();
 	if (index.isValid())
 		return index.row();
@@ -416,6 +430,23 @@ void LocationListEditor::goToRow(int row)
 	QModelIndex proxyIndex = proxyModel->mapFromSource(index);
 	ui->tableView->setCurrentIndex(proxyIndex);
 	ui->tableView->scrollTo(proxyIndex, QTableView::PositionAtCenter);	
+}
+
+void LocationListEditor::updateFilterIndicator()
+{
+	Q_ASSERT(proxyModel);
+	
+	int originalCount = proxyModel->sourceModel()->rowCount();
+	int filteredCount = proxyModel->rowCount();
+	if (originalCount == filteredCount)
+	{
+		filterIndicator->setText(QString::number(originalCount));
+	}
+	else
+	{
+		QString s = QString("%1 / %2").arg(filteredCount).arg(originalCount);
+		filterIndicator->setText(s);
+	}
 }
 
 
@@ -588,4 +619,23 @@ void LocationListEditor::setFilterCaseSensitivity(bool sensitive)
 		else
 			proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	}
+}
+
+void LocationListEditor::filter()
+{
+	Q_ASSERT(proxyModel);
+	proxyModel->setFilterWildcard(ui->lineEditFilter->text());
+	updateFilterIndicator();
+}
+
+void LocationListEditor::updateSelectionCount()
+{
+	int rowCount = selectionModel->selectedRows().count();
+	if (rowCount < 1)
+		return;
+	
+	if (rowCount > 1)
+		ui->statusBar->showMessage(QString("%1 items selected.").arg(rowCount));
+	else
+		ui->statusBar->clearMessage();
 }
