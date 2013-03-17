@@ -182,6 +182,7 @@ private:
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);
 	NebulaP searchIC(unsigned int IC);
+	NebulaP searchC(unsigned int C);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
