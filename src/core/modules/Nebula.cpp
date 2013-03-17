@@ -73,7 +73,8 @@ void Nebula::NebulaHintTextures::lazyInit(StelRenderer* renderer)
 Nebula::Nebula() :
 		M_nb(0),
 		NGC_nb(0),
-		IC_nb(0)
+		IC_nb(0),
+		C_nb(0)
 {
 	nameI18 = "";
 	angularSize = -1;
@@ -108,6 +109,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
 			catIds << QString("IC %1").arg(IC_nb);
+		if ((C_nb > 0) && (C_nb < 110))
+			catIds << QString("C %1").arg(C_nb);
 		oss << catIds.join(" - ");
 
 		if (nameI18!="" && flags&Name)
@@ -249,6 +252,8 @@ void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float m
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
 			str = QString("IC %1").arg(IC_nb);
+		else if (C_nb > 0)
+			str = QString("C %1").arg(C_nb);
 	}                   
 
 	float size = getAngularSize(NULL) * M_PI / 180.0 * projector->getPixelPerRadAtCenter();
