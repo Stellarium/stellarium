@@ -242,18 +242,18 @@ void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float m
 	renderer->setGlobalColor(col[0], col[1], col[2], hintsBrightness);
 
 	QString str;
-	if (nameI18!="")
+	if (!nameI18.isEmpty())
 		str = getNameI18n();
 	else
 	{
 		if (M_nb > 0)
 			str = QString("M %1").arg(M_nb);
+		else if (C_nb > 0)
+			str = QString("C %1").arg(C_nb);
 		else if (NGC_nb > 0)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
-			str = QString("IC %1").arg(IC_nb);
-		else if (C_nb > 0)
-			str = QString("C %1").arg(C_nb);
+			str = QString("IC %1").arg(IC_nb);		
 	}                   
 
 	float size = getAngularSize(NULL) * M_PI / 180.0 * projector->getPixelPerRadAtCenter();
