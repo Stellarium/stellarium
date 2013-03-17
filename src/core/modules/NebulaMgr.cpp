@@ -484,24 +484,6 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 					e->englishName = name;
 				}
 			}
-			else if (name.left(2).toUpper() == "M " && name.left(2).toUpper() != "C ")
-			{
-				// If it's a messiernumber, we will call it a messier if there is no better name
-				name = name.mid(2); // remove "M "
-
-				// read the Messier number
-				QTextStream istr(&name);
-				int num;
-				istr >> num;
-				if (istr.status()!=QTextStream::Ok)
-				{
-					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << catNGCNames;
-					continue;
-				}
-
-				e->M_nb=(unsigned int)(num);
-				e->englishName = QString("M%1").arg(num);
-			}
 			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() == "C ")
 			{
 				// If it's a caldwellnumber, we will call it a caldwell if there is no better name
@@ -520,6 +502,25 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				e->C_nb=(unsigned int)(num);
 				e->englishName = QString("C%1").arg(num);
 			}
+			else if (name.left(2).toUpper() == "M " && name.left(2).toUpper() != "C ")
+			{
+				// If it's a messiernumber, we will call it a messier if there is no better name
+				name = name.mid(2); // remove "M "
+
+				// read the Messier number
+				QTextStream istr(&name);
+				int num;
+				istr >> num;
+				if (istr.status()!=QTextStream::Ok)
+				{
+					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << catNGCNames;
+					continue;
+				}
+
+				e->M_nb=(unsigned int)(num);
+				e->englishName = QString("M%1").arg(num);
+			}
+
 
 			readOk++;
 		}
