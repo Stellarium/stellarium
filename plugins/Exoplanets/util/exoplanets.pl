@@ -20,9 +20,18 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.1; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.2; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
+
+%detection_type = (
+	'detected by transit' => 1,
+	'detected by radial velocity' => 2,
+	'detected by imaging' => 3,
+	'pulsar' => 4,
+	'detected by astrometry' => 5,
+	'detected by microlensing' => 6,
+);
 
 if ($responce->is_success) {
 	open(OUT, ">$CSV");
@@ -128,7 +137,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered) VALUES (?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,detection_type) VALUES (?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered, $dtype);
 	}
 }
 
@@ -209,6 +218,9 @@ while (@stars = $sth->fetchrow_array()) {
 		}
 		if ($discovered ne '') {
 			$out .= "\t\t\t\t\"discovered\": ".$discovered.",\n";
+		}
+		if ($dtype ne '') {
+			$out .= "\t\t\t\t\"detectionType\": ".$detection_type{$dtype}.",\n";
 		}
 		if ($pname eq '') {
 			$pname = "a";
