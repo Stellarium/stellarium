@@ -36,11 +36,12 @@ typedef struct
 	float mass;		//! Exoplanet mass (Mjup)
 	float radius;		//! Exoplanet radius (Rjup)
 	float period;		//! Exoplanet period (days)
-	float semiAxis;	//! Exoplanet orbit semi-major axis (AU)
+	float semiAxis;		//! Exoplanet orbit semi-major axis (AU)
 	float eccentricity;	//! Exoplanet orbit eccentricity
 	float inclination;	//! Exoplanet orbit inclination
 	float angleDistance;	//! Exoplanet angle distance
 	int discovered;		//! Exoplanet discovered year
+	int detectionType;	//! Exoplanet detection type
 } exoplanetData;
 
 
