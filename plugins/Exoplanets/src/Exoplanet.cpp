@@ -99,6 +99,11 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 				p.discovered = exoplanetMap.value("discovered").toInt();
 			else
 				p.discovered = 0;
+			if (exoplanetMap.contains("detectionType"))
+				p.detectionType = exoplanetMap.value("detectionType").toInt();
+			else
+				p.detectionType = -1;
+
 			exoplanets.append(p);
 		}
 	}
@@ -137,6 +142,7 @@ QVariantMap Exoplanet::getMap(void)
 		if (p.eccentricity > -1.f) explMap["eccentricity"] = p.eccentricity;
 		if (p.angleDistance > -1.f) explMap["angleDistance"] = p.angleDistance;
 		if (p.discovered > 0) explMap["discovered"] = p.discovered;
+		if (p.detectionType > 0) explMap["detectionType"] = p.detectionType;
 		exoplanetList << explMap;
 	}
 	map["exoplanets"] = exoplanetList;
@@ -160,6 +166,19 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 {
 	QString str;
 	QTextStream oss(&str);
+
+	QStringList detectionTypeList;
+	// TRANSLATORS: Full phrase: Exoplanet detected by transit
+	detectionTypeList.append(q_("by transit"));
+	// TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
+	detectionTypeList.append(q_("by radial velocity"));
+	// TRANSLATORS: Full phrase: Exoplanet detected by imaging
+	detectionTypeList.append(q_("by imaging"));
+	detectionTypeList.append(q_("pulsar"));
+	// TRANSLATORS: Full phrase: Exoplanet detected by astrometry
+	detectionTypeList.append(q_("by astrometry"));
+	// TRANSLATORS: Full phrase: Exoplanet detected by microlensing
+	detectionTypeList.append(q_("by microlensing"));
 
 	if (flags&Name)
 	{
@@ -225,7 +244,10 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		QString eccentricityLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Eccentricity"));
 		QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));		
 		QString angleDistanceLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (\")</td>").arg(q_("Angle Distance"));
-		QString discoveredLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Discovered year"));
+		QString discoveredLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Discovered year"));		
+		QString detectedTypeLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>")
+				// TRANSLATORS: Exoplanet detected
+				.arg(q_("Detected"));
 		foreach(const exoplanetData &p, exoplanets)
 		{
 			if (!p.planetName.isEmpty())
@@ -300,6 +322,14 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			{
 				discoveredLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
 			}
+			if (p.detectionType >= 0)
+			{
+				detectedTypeLabel.append("<td style=\"padding:0 2px;\">").append(detectionTypeList[p.detectionType]).append("</td>");
+			}
+			else
+			{
+				detectedTypeLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
 		}
 		oss << "<table>";
 		oss << "<tr>" << planetNameLabel << "</tr>";
@@ -311,6 +341,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "<tr>" << inclinationLabel << "</tr>";
 		oss << "<tr>" << angleDistanceLabel << "</tr>";
 		oss << "<tr>" << discoveredLabel << "</tr>";
+		oss << "<tr>" << detectedTypeLabel << "</tr>";
 		oss << "</table>";
 	}
 

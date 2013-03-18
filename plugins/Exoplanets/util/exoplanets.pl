@@ -25,12 +25,12 @@ $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
 %detection_type = (
-	'detected by transit' => 1,
-	'detected by radial velocity' => 2,
-	'detected by imaging' => 3,
-	'pulsar' => 4,
-	'detected by astrometry' => 5,
-	'detected by microlensing' => 6,
+	'detected by transit' => 0,
+	'detected by radial velocity' => 1,
+	'detected by imaging' => 2,
+	'pulsar' => 3,
+	'detected by astrometry' => 4,
+	'detected by microlensing' => 5,
 );
 
 if ($responce->is_success) {
@@ -193,6 +193,7 @@ while (@stars = $sth->fetchrow_array()) {
 		$pinc		= $planets[8];
 		$angdist	= $planets[9];
 		$discovered	= $planets[10];
+		$dtype		= $planets[11];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
