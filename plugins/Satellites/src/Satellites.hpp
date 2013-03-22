@@ -57,10 +57,32 @@ struct TleData
 typedef QList<TleData> TleDataList;
 typedef QHash<QString, TleData> TleDataHash ;
 
+
+/*! @mainpage
+The %Satellites plugin displays the positions of artifical satellites in Earth
+orbit based on a catalog of orbital data.
+
+The Satellites class is the main class of the plug-in. It manages a collection
+of Satellite objects and takes care of loading, saving and updating the
+satellite catalog. It allows automatic updates from online sources and manages
+a list of update file URLs.
+
+To calculate satellite positions, the plugin uses an implementation of
+the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
+
+@section satcat Satellite Catalog
+The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
+format, in a file named "satellites.json". A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
+
+@section config Configuration
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file.
+*/
+
+
 //! @class Satellites
-//! Satellites in low Earth orbit require different orbital calculations from planets, the moon
-//! and so on.  This plugin implements the SGP4/SDP4 algorithms in Stellarium, allowing accurate
-//! prediction of the position of artificial satellites.
+//! Main class of the %Satellites plugin.
 class Satellites : public StelObjectModule
 {
 	Q_OBJECT
@@ -76,6 +98,7 @@ public:
 		OtherError            //!< Other error
 	};
 
+	//! Flags used to filter the satellites list according to their status.
 	enum Status
 	{
 		Visible,
@@ -146,12 +169,13 @@ public:
 	//! creates the default satellites.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);
 
-	//! Read (or re-read) settings from the main config file.  This will be called from init and also
-	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
+	//! Read (or re-read) the plugin's settings from the configuration file.
+	//! This will be called from init() and also when restoring defaults
+	//! (i.e. from the configuration dialog / restore defaults button).
+	void loadSettings();
 
-	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	//! Save the plugin's settings to the main configuration file.
+	void saveSettings();
 
 	//! Get a list of satellite group names.  A Satellite may be long to one or more group
 	//! e.g. "amateur" and "navigation".  Group names are arbitrary strings defined in the 
@@ -162,11 +186,11 @@ public:
 	//! group name, return all satallites
 	QHash<QString,QString> getSatellites(const QString& group=QString(), Status vis=Both);
 
-	//! get a satellite object by identifier
-	SatelliteP getByID(const QString& id);
+	//! Get a satellite object by its identifier (i.e. NORAD number).
+	SatelliteP getById(const QString& id);
 	
 	//! Returns a list of all satellite IDs.
-	QStringList getAllIDs();
+	QStringList listAllIds();
 	
 	//! Add the given satellites.
 	//! The changes are not saved to file.
@@ -207,6 +231,7 @@ public:
 	
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.
+	// TODO: Plugin-specific styles are no longer necessary?
 	const StelStyle getModuleStyleSheet(const StelStyle& style);
 
 	//! Reads update file(s) in celestrak's .txt format, and updates
@@ -232,10 +257,11 @@ signals:
 	//! @param state the new update state.
 	void updateStateChanged(Satellites::UpdateState state);
 
-	//! emitted after a TLE update has run.
+	//! Emitted after an update has run.
 	//! @param updates the number of satellites updated.
 	//! @param total the total number of satellites in the JSON data.
-	//! @param the number of satellites in the JSON data but not found in update data
+	//! @param missing the number of satellites in the JSON data but not found
+	//! in update data.
 	void tleUpdateComplete(int updates, int total, int missing);
 	
 
@@ -269,57 +295,75 @@ public slots:
 
 	void recalculateOrbitLines(void);
 
-	//! Display a message. This is used for plugin-specific warnings and such
+	//! Display a message on the screen for a few seconds.
+	//! This is used for plugin-specific warnings and such.
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
+	//! Hide all messages.
+	void hideMessages();
 
-	//! Save the current TLE data to the default json file location.
-	void saveTleData(QString path=QString());
+	//! Save the current satellite catalog to disk.
+	void saveCatalog(QString path=QString());
 
 private slots:
 	void setStelStyle(const QString& section);
 
 private:
-	//! if existing, delete Satellites section in main config.ini, then create with default values
-	void restoreDefaultConfigIni(void);
+	//! Delete Satellites section in main config.ini, then create with default values.
+	void restoreDefaultSettings();
 
-	//! replace the json file with the default from the compiled-in resource
-	void restoreDefaultJsonFile(void);
+	//! Replace the catalog file with the default one.
+	void restoreDefaultCatalog();
 
-	//! read the json file and create the satellites.  Removes existing satellites first if there are any
+	//! Load the satellites from the catalog file.
+	//! Removes existing satellites first if there are any.
 	//! this will be done once at init, and also if the defaults are reset.
-	void readJsonFile(void);
+	void loadCatalog();
 
 	//! Creates a backup of the satellites.json file called satellites.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
-	bool backupJsonFile(bool deleteOriginal=false);
+	bool backupCatalog(bool deleteOriginal=false);
 
-	//! Get the version from the "creator" value in the satellites.json file
+	//! Get the version from the "creator" value in the satellites.json file.
 	//! @return version string, e.g. "0.6.1"
-	const QString getJsonFileVersion(void);
+	const QString getCatalogVersion();
 
-	bool saveTleMap(const QVariantMap& map, QString path=QString());
-	QVariantMap loadTleMap(QString path=QString());
-	void setTleMap(const QVariantMap& map);
-	//! Generates a QMap that contains all the data on satellites.
-	QVariantMap getTleMap();
+	//! Save a structure representing a satellite catalog to a JSON file.
+	//! If no path is specified, catalogPath is used.
+	//! @see createDataMap()
+	bool saveDataMap(const QVariantMap& map, QString path=QString());
+	//! Load a structure representing a satellite catalog from a JSON file.
+	//! If no path is specified, catalogPath is used.
+	QVariantMap loadDataMap(QString path=QString());
+	//! Parse a satellite catalog structure into internal satellite data.
+	void setDataMap(const QVariantMap& map);
+	//! Make a satellite catalog structure from current satellite data.
+	//! @return a representation of a JSON file.
+	QVariantMap createDataMap();
 
-	QString satellitesJsonPath;
+	//! Path to the satellite catalog file.
+	QString catalogPath;
 	QList<SatelliteP> satellites;
+	
 	LinearFader hintFader;
 	class StelTextureNew* hintTexture;
 	class StelTextureNew* texPointer;
+	
+	//! @name Bottom toolbar button
+	//@{
 	QPixmap* pxmapGlow;
 	QPixmap* pxmapOnIcon;
 	QPixmap* pxmapOffIcon;
-	StelButton* toolbarButton;
+	StelButton* toolbarButton;	
+	//@}
+	// FIXME: Possible bug with the Solar System recreated by the SSEditor.
 	QSharedPointer<Planet> earth;
 	Vec3f defaultHintColor;
 	Vec3f defaultOrbitColor;
 	QFont labelFont;
 	
-	// variables and functions for the updater
+	//! @name Updater module
+	//@{
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	QStringList updateUrls;
@@ -333,6 +377,7 @@ private:
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
+	//@}
 
 	// GUI
 	SatellitesDialog* configDialog;
