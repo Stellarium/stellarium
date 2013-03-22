@@ -36,17 +36,18 @@
 
 class StelLocation;
 
+//! Radio communication channel properties.
 typedef struct
 {
-	double frequency;
-	QString modulation;
-	QString description;
-} commLink;
+	double frequency; //!< Channel frequency in MHz.
+	QString modulation; //!< Signal modulation mode.
+	QString description; //!< Channel description.
+} CommLink;
 
 //! @class Satellite
-//! A Satellite object represents one satellite in Earth orbit.
-//! Details about the satellite are passed using a QVariant which contains
-//! a map of data from the json file.
+//! A representation of a satellite in Earth orbit.
+//! Details about the satellite are passed with a JSON-representation structure
+//! that contains a @ref satcat "satellite catalog" entry.
 class Satellite : public StelObject
 {
 	friend class Satellites;
@@ -70,7 +71,7 @@ public:
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
-	//! @flags a set of flags with information types to include.
+	//! @param flags a set of flags with information types to include.
 	//! Supported types for Satellite objects:
 	//! - Name: designation in large type with the description underneath
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
@@ -126,8 +127,13 @@ private:
 
 private:
 	bool initialized;
+	//! Flag indicating whether the satellite should be displayed.
+	//! Should not be confused with the pedicted visibility of the 
+	//! actual satellite to the observer.
 	bool visible;
+	//! Flag indicating whether an orbit section should be displayed.
 	bool orbitVisible;  // draw orbit enabled/disabled
+	//! Flag indicating that the satellite was added during the current session.
 	bool newlyAdded;
 	bool orbitValid;
 
@@ -148,7 +154,7 @@ private:
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
 	double height, range, rangeRate;
-	QList<commLink> comms;
+	QList<CommLink> comms;
 	Vec3f hintColor;
 	QStringList groupIDs;
 	QDateTime lastUpdated;
