@@ -341,7 +341,7 @@ void SatellitesImportDialog::populateList()
 	qDeleteAll(sourceFiles);
 	sourceFiles.clear();
 	
-	QStringList existingIDs = satMgr->getAllIDs();
+	QStringList existingIDs = satMgr->listAllIds();
 	QHashIterator<QString,TleData> i(newSatellites);
 	while (i.hasNext())
 	{

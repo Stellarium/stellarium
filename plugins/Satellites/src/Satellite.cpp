@@ -113,7 +113,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		foreach(const QVariant &comm, map.value("comms").toList())
 		{
 			QVariantMap commMap = comm.toMap();
-			commLink c;
+			CommLink c;
 			if (commMap.contains("frequency")) c.frequency = commMap.value("frequency").toDouble();
 			if (commMap.contains("modulation")) c.modulation = commMap.value("modulation").toString();
 			if (commMap.contains("description")) c.description = commMap.value("description").toString();
@@ -181,7 +181,7 @@ QVariantMap Satellite::getMap(void)
 	map["hintColor"] = col;
 	map["orbitColor"] = orbitCol;
 	QVariantList commList;
-	foreach(const commLink &c, comms)
+	foreach(const CommLink &c, comms)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -308,7 +308,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags&Extra2 && comms.size() > 0)
 	{
-		foreach(const commLink &c, comms)
+		foreach(const CommLink &c, comms)
 		{
 			double dop = getDoppler(c.frequency);
 			double ddop = dop;

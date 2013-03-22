@@ -253,7 +253,7 @@ void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
 
 	satelliteModified = false;
 
-	SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
+	SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
 	if (sat.isNull())
 		return;
 
@@ -275,7 +275,7 @@ void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
 
 void SatellitesDialog::saveSatellites(void)
 {
-	GETSTELMODULE(Satellites)->saveTleData();
+	GETSTELMODULE(Satellites)->saveCatalog();
 }
 
 void SatellitesDialog::setAboutHtml(void)
@@ -456,7 +456,7 @@ void SatellitesDialog::restoreDefaults(void)
 {
 	qDebug() << "Satellites::restoreDefaults";
 	GETSTELMODULE(Satellites)->restoreDefaults();
-	GETSTELMODULE(Satellites)->readSettingsFromConfig();
+	GETSTELMODULE(Satellites)->loadSettings();
 	updateGuiFromSettings();
 }
 
@@ -495,8 +495,8 @@ void SatellitesDialog::populateGroupsList()
 
 void SatellitesDialog::saveSettings(void)
 {
-	GETSTELMODULE(Satellites)->saveSettingsToConfig();
-	GETSTELMODULE(Satellites)->saveTleData();
+	GETSTELMODULE(Satellites)->saveSettings();
+	GETSTELMODULE(Satellites)->saveCatalog();
 }
 
 void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
@@ -560,7 +560,7 @@ void SatellitesDialog::setDisplayFlag(bool display)
 	foreach (const QModelIndex& index, selectedIndexes)
 	{
 		QString id = index.data(Qt::UserRole).toString();
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
+		SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
 		if (sat)
 			sat->visible = display;
 	}
@@ -574,7 +574,7 @@ void SatellitesDialog::setOrbitFlag(bool display)
 	foreach (const QModelIndex& index, selectedIndexes)
 	{
 		QString id = index.data(Qt::UserRole).toString();
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
+		SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
 		if (sat)
 			sat->orbitVisible = display;
 	}
@@ -586,7 +586,7 @@ void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 	QString id = index.data(Qt::UserRole).toString();
-	SatelliteP sat = SatellitesMgr->getByID(id);
+	SatelliteP sat = SatellitesMgr->getById(id);
 	if (sat.isNull())
 		return;
 

@@ -123,13 +123,13 @@ void Satellites::init()
 		if (!conf->childGroups().contains("Satellites"))
 		{
 			qDebug() << "Stellites::init no Satellites section exists in main config file - creating with defaults";
-			restoreDefaultConfigIni();
+			restoreDefaultSettings();
 		}
 
 		// populate settings from main config file.
-		readSettingsFromConfig();
+		loadSettings();
 
-		satellitesJsonPath = StelFileMgr::findFile("modules/Satellites", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/satellites.json";
+		catalogPath = StelFileMgr::findFile("modules/Satellites", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/satellites.json";
 
 		// Load and find resources used in the plugin
 
@@ -162,27 +162,27 @@ void Satellites::init()
 	messageTimer->setSingleShot(true);   // recurring check for update
 	messageTimer->setInterval(9000);      // 6 seconds should be enough time
 	messageTimer->stop();
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
+	connect(messageTimer, SIGNAL(timeout()), this, SLOT(hideMessages()));
 
 	// If the json file does not already exist, create it from the resource in the QT resource
-	if(QFileInfo(satellitesJsonPath).exists())
+	if(QFileInfo(catalogPath).exists())
 	{
-		if (getJsonFileVersion() != SATELLITES_PLUGIN_VERSION)
+		if (getCatalogVersion() != SATELLITES_PLUGIN_VERSION)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
-			restoreDefaultJsonFile();
+			restoreDefaultCatalog();
 		}
 	}
 	else
 	{
-		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << satellitesJsonPath;
-		restoreDefaultJsonFile();
+		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << catalogPath;
+		restoreDefaultCatalog();
 	}
 
-	qDebug() << "Satellites::init using satellite.json file: " << satellitesJsonPath;
+	qDebug() << "Satellites::init using satellite.json file: " << catalogPath;
 
 	// create satellites according to content os satellites.json file
-	readJsonFile();
+	loadCatalog();
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
@@ -218,16 +218,16 @@ void Satellites::init()
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
-bool Satellites::backupJsonFile(bool deleteOriginal)
+bool Satellites::backupCatalog(bool deleteOriginal)
 {
-	QFile old(satellitesJsonPath);
+	QFile old(catalogPath);
 	if (!old.exists())
 	{
 		qWarning() << "Satellites::backupJsonFile no file to backup";
 		return false;
 	}
 
-	QString backupPath = satellitesJsonPath + ".old";
+	QString backupPath = catalogPath + ".old";
 	if (QFileInfo(backupPath).exists())
 		QFile(backupPath).remove();
 
@@ -498,13 +498,13 @@ bool Satellites::configureGui(bool show)
 
 void Satellites::restoreDefaults(void)
 {
-	restoreDefaultConfigIni();
-	restoreDefaultJsonFile();
-	readJsonFile();
-	readSettingsFromConfig();
+	restoreDefaultSettings();
+	restoreDefaultCatalog();
+	loadCatalog();
+	loadSettings();
 }
 
-void Satellites::restoreDefaultConfigIni(void)
+void Satellites::restoreDefaultSettings()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Satellites");
@@ -536,22 +536,22 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->endGroup();
 }
 
-void Satellites::restoreDefaultJsonFile(void)
+void Satellites::restoreDefaultCatalog()
 {
-	if (QFileInfo(satellitesJsonPath).exists())
-		backupJsonFile(true);
+	if (QFileInfo(catalogPath).exists())
+		backupCatalog(true);
 
 	QFile src(":/satellites/satellites.json");
-	if (!src.copy(satellitesJsonPath))
+	if (!src.copy(catalogPath))
 	{
-		qWarning() << "Satellites::restoreDefaultJsonFile cannot copy json resource to " + satellitesJsonPath;
+		qWarning() << "Satellites::restoreDefaultJsonFile cannot copy json resource to " + catalogPath;
 	}
 	else
 	{
-		qDebug() << "Satellites::init copied default satellites.json to " << satellitesJsonPath;
+		qDebug() << "Satellites::init copied default satellites.json to " << catalogPath;
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
-		QFile dest(satellitesJsonPath);
+		QFile dest(catalogPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 
 		// Make sure that in the case where an online update has previously been done, but
@@ -563,7 +563,7 @@ void Satellites::restoreDefaultJsonFile(void)
 	}
 }
 
-void Satellites::readSettingsFromConfig(void)
+void Satellites::loadSettings()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Satellites");
@@ -601,7 +601,7 @@ void Satellites::readSettingsFromConfig(void)
 	conf->endGroup();
 }
 
-void Satellites::saveSettingsToConfig(void)
+void Satellites::saveSettings()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Satellites");
@@ -641,18 +641,18 @@ void Satellites::saveSettingsToConfig(void)
 	conf->endGroup();
 }
 
-void Satellites::readJsonFile(void)
+void Satellites::loadCatalog()
 {
-	setTleMap(loadTleMap());
+	setDataMap(loadDataMap());
 }
 
-const QString Satellites::getJsonFileVersion(void)
+const QString Satellites::getCatalogVersion()
 {
 	QString jsonVersion("unknown");
-	QFile satelliteJsonFile(satellitesJsonPath);
+	QFile satelliteJsonFile(catalogPath);
 	if (!satelliteJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Satellites::init cannot open " << satellitesJsonPath;
+		qWarning() << "Satellites::init cannot open " << catalogPath;
 		return jsonVersion;
 	}
 
@@ -673,10 +673,10 @@ const QString Satellites::getJsonFileVersion(void)
 	return jsonVersion;
 }
 
-bool Satellites::saveTleMap(const QVariantMap& map, QString path)
+bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 {
 	if (path.isEmpty())
-		path = satellitesJsonPath;
+		path = catalogPath;
 
 	QFile jsonFile(path);
 	StelJsonParser parser;
@@ -698,10 +698,10 @@ bool Satellites::saveTleMap(const QVariantMap& map, QString path)
 	}
 }
 
-QVariantMap Satellites::loadTleMap(QString path)
+QVariantMap Satellites::loadDataMap(QString path)
 {
 	if (path.isEmpty())
-		path = satellitesJsonPath;
+		path = catalogPath;
 
 	QVariantMap map;
 	QFile jsonFile(path);
@@ -714,7 +714,7 @@ QVariantMap Satellites::loadTleMap(QString path)
 	return map;
 }
 
-void Satellites::setTleMap(const QVariantMap& map)
+void Satellites::setDataMap(const QVariantMap& map)
 {
 	int numReadOk = 0;
 	QVariantList defaultHintColorMap;
@@ -747,7 +747,7 @@ void Satellites::setTleMap(const QVariantMap& map)
 	}
 }
 
-QVariantMap Satellites::getTleMap(void)
+QVariantMap Satellites::createDataMap(void)
 {
 	QVariantMap map;
 	QVariantList defHintCol;
@@ -814,7 +814,7 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vi
 	return result;
 }
 
-SatelliteP Satellites::getByID(const QString& id)
+SatelliteP Satellites::getById(const QString& id)
 {
 	foreach(const SatelliteP& sat, satellites)
 	{
@@ -824,7 +824,7 @@ SatelliteP Satellites::getByID(const QString& id)
 	return SatelliteP();
 }
 
-QStringList Satellites::getAllIDs()
+QStringList Satellites::listAllIds()
 {
 	QStringList result;
 	foreach(const SatelliteP& sat, satellites)
@@ -960,6 +960,7 @@ void Satellites::updateTLEs(void)
 		qDebug() << "Satellites: starting update...";
 	}
 
+	// TODO: set the time on successful update.
 	lastUpdate = QDateTime::currentDateTime();
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("Satellites/last_update", lastUpdate.toString(Qt::ISODate));
@@ -1060,7 +1061,7 @@ void Satellites::displayMessage(const QString& message, const QString hexColor)
 	messageTimer->start();
 }
 
-void Satellites::messageTimeout(void)
+void Satellites::hideMessages()
 {
 	foreach(const int& id, messageIDs)
 	{
@@ -1068,9 +1069,9 @@ void Satellites::messageTimeout(void)
 	}
 }
 
-void Satellites::saveTleData(QString path)
+void Satellites::saveCatalog(QString path)
 {
-	saveTleMap(getTleMap(), path);
+	saveDataMap(createDataMap(), path);
 }
 
 void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
@@ -1140,7 +1141,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 
 	if (numUpdated>0)
 	{
-		saveTleMap(getTleMap());
+		saveDataMap(createDataMap());
 	}
 
 	delete progressBar;
