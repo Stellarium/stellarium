@@ -112,7 +112,8 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl,util\ISL\RussianCM.isl
 Name: "sr"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
 Name: "sl"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
-Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,util\ISL\Ukrainian.isl"
+Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,util\ISL\UkrainianCM.isl"
 ; Unofficial translations of GUI of Inno Setup
 Name: "gla"; MessagesFile: "util\ISL\ScotsGaelic.isl"
+Name: "bs"; MessagesFile: "util\ISL\Bosnian.isl,util\ISL\BosnianCM.isl"
 
