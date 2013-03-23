@@ -1,4 +1,4 @@
-; *** Inno Setup version 5.5.3+ Russian messages ***
+; *** Inno Setup version 5.5.3+ Russian messages for Stellarium ***
 ;
 ; Translated from English by Alexander Wolf
 ;
@@ -15,7 +15,7 @@ LanguageCodePage=1251
 [CustomMessages]
 ForAllUsers=Для всех пользователей
 ForCurrentUserOnly=Только для текущего пользователя
-RemoveFromPreviousInstallation=Удалить оставшиеся с предыдущей установки файлы:
+RemoveFromPreviousInstallation=Удалить оставшиеся от предыдущей установки файлы:
 RemoveMainConfig=Удалить основной конфигурационный файл
 RemovePluginsConfig=Удалить конфигурационные файлы плагинов
 RemoveSolarConfig=Удалить файл тел Солнечной системы
