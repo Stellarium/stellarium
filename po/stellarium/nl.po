@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-14 03:11+0700\n"
-"PO-Revision-Date: 2013-01-26 13:20+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2013-03-18 19:27+0700\n"
+"PO-Revision-Date: 2013-03-16 13:25+0000\n"
+"Last-Translator: Willem Sonke <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-14 04:37+0000\n"
+"X-Launchpad-Export-Date: 2013-03-19 05:22+0000\n"
 "X-Generator: Launchpad (build 16532)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -57,7 +57,7 @@ msgstr ", %1 m"
 msgid "Planet: "
 msgstr "Planeet: "
 
-#: src/core/modules/Nebula.cpp:121 src/core/modules/Planet.cpp:438
+#: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:120
 #: src/core/modules/StarWrapper.cpp:122
@@ -68,60 +68,60 @@ msgstr "Planeet: "
 msgid "Type: <b>%1</b>"
 msgstr "Type: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:126 src/core/modules/Planet.cpp:444
+#: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:444
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
 #: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
-#: plugins/Exoplanets/src/Exoplanet.cpp:175
+#: plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Helderheid: <b>%1</b> (verzwakt tot: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:447
+#: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
 #: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
-#: plugins/Exoplanets/src/Exoplanet.cpp:180
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Helderheid: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:134
+#: src/core/modules/Nebula.cpp:137
 #, qt-format
 msgid "Size: %1"
 msgstr "Grootte: %1"
 
-#: src/core/modules/Nebula.cpp:370
+#: src/core/modules/Nebula.cpp:375
 msgid "Galaxy"
 msgstr "Sterrenstelsel"
 
-#: src/core/modules/Nebula.cpp:373
+#: src/core/modules/Nebula.cpp:378
 msgid "Open cluster"
 msgstr "Open sterrenhoop"
 
-#: src/core/modules/Nebula.cpp:376
+#: src/core/modules/Nebula.cpp:381
 msgid "Globular cluster"
 msgstr "Bolvormige sterrenhoop"
 
-#: src/core/modules/Nebula.cpp:379
+#: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
 msgstr "Nevel"
 
-#: src/core/modules/Nebula.cpp:382
+#: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
 msgstr "Planetaire nevel"
 
-#: src/core/modules/Nebula.cpp:385
+#: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Donkere nevel"
 
-#: src/core/modules/Nebula.cpp:388
+#: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
 msgstr "sterrenhoop geassocieerd met neveligheid"
 
-#: src/core/modules/Nebula.cpp:391
+#: src/core/modules/Nebula.cpp:396
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: src/core/modules/Nebula.cpp:394
+#: src/core/modules/Nebula.cpp:399
 msgid "Undocumented type"
 msgstr "Ongedocumenteerd type"
 
@@ -224,7 +224,7 @@ msgstr "Schijnbare helderheid <b>%1</b> (door dimming)"
 
 #: src/core/modules/StarWrapper.cpp:120
 msgid "double star"
-msgstr ""
+msgstr "dubbelster"
 
 #: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -237,14 +237,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Helderheid: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:143
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:209
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spectraaltype: %1"
 
 #: src/core/modules/StarWrapper.cpp:147
 #: plugins/Supernovae/src/Supernova.cpp:115
-#: plugins/Exoplanets/src/Exoplanet.cpp:195
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Afstand: %1 lichtjaar"
@@ -261,6 +261,7 @@ msgstr "RuimteSchip"
 #: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"Correctie is uitgeschakeld. Gebruik dit alleen als je weet wat je doet!"
 
 #: src/core/StelCore.cpp:1422
 #, qt-format
@@ -269,6 +270,10 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Deze historische formule is verkregen door C. Schoch in 1931, en is gebruikt "
+"door G. Henriksson in zijn artikel <em>Einstein's Theory of Relativity "
+"Confirmed by Ancient Solar Eclipses</em> (%1). Kijk %2hier%3 voor meer "
+"informatie."
 
 #: src/core/StelCore.cpp:1425
 #, qt-format
@@ -276,6 +281,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Deze empirische vergelijking is gepubliceerd door G. M. Clemence in het "
+"artikel <em>On the system of astronomical constants</em> (%1)."
 
 #: src/core/StelCore.cpp:1428
 #, qt-format
@@ -285,6 +292,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Deze formule is gebaseerd op een studie van observaties na 1650 van de zon, "
+"de maan en de planeten door Spencer Jones (%1), en gebruikt door Jean Meeus "
+"in zijn <em>Astronomical Formulae for Calculators</em>. Deze formule is ook "
+"gebruikt in het PC-programma SunTracker Pro."
 
 #: src/core/StelCore.cpp:1432
 msgid ""
@@ -292,6 +303,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Dit is een enigszins aangepaste versie van de formule van de IAU (1952) die "
+"is gebruikt in de <em>Astronomical Ephemeris</em> en in de <em>Canon of "
+"Solar Eclipses</em> door Mucke en Meeus (1983)."
 
 #: src/core/StelCore.cpp:1436
 msgid ""
@@ -308,6 +322,9 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Deze vergelijking is gepubliceerd door P. M. Muller en F. R. Stephenson in "
+"het artikel <em>The accelerations of the earth and moon from early "
+"astronomical observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1443
 #, qt-format
@@ -315,6 +332,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Deze vergelijking is gepubliceerd door F. R. Stephenson in het artikel "
+"<em>Pre-Telescopic Astronomical Observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1446
 #, qt-format
@@ -324,6 +343,11 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Deze polynomiale vergelijking van de 12e orde (verouderd en verbeterd door "
+"Schmadel & Zech (1988) is gepubliceerd door L. D. Schmadel en G. Zech in het "
+"artikel <em>Polynomial approximations for the correction delta T E.T.-U.T. "
+"in the period 1800-1975</em> (%1), door gegevens te fitten die gepubliceerd "
+"waren door Brouwer (1952)."
 
 #: src/core/StelCore.cpp:1449
 msgid ""
@@ -331,6 +355,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Dit algoritme is bekendgemaakt in het artikel <em>Planetary Programs and "
+"Tables from -4000 to +2800</em> (1986) van P. Bretagnon en L. Simon, en "
+"gebruikt in het PC-planetariumprogramma RedShift."
 
 #: src/core/StelCore.cpp:1452
 #, qt-format
@@ -454,7 +481,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
-msgstr ""
+msgstr "Wordt standaard gebruikt."
 
 #: src/core/StelCore.cpp:1500
 #, qt-format
@@ -462,6 +489,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Dit is een kwadratische formule voor de berekening van %1T, waarvan de "
+"coëfficiënten bepaald zijn door de gebruiker."
 
 #: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -469,31 +498,35 @@ msgstr "Fout"
 
 #: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "met betekenisloze waarden buiten dit gebied"
 
 #: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"met een gemiddelde fout van minder dan één seconde, maximale fout 1.9s, en "
+"betekenisloze waarden buiten dit gebied"
 
 #: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "met nul-waarden buiten dit gebied"
 
 #: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"met een nauwkeurigheid van ongeveer 1 seconde, en nul-waarden buiten dit "
+"gebied"
 
 #: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "Geldig gebruiksinterval: tussen jaar %1 en %2, %3."
 
 #: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "Geldig gebruiksinterval: tussen jaar %1 en %2."
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -617,7 +650,7 @@ msgstr "RA/DE (van datum): %1/%2"
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Galactische lengte-/breedtegraad: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -641,15 +674,15 @@ msgstr "Az/Hgte: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Netwerkfout"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Fout tijdens lezen van positie"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Opvragen"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
@@ -766,116 +799,116 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritme van"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
-msgstr ""
+msgstr "Zonder correctie"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "Astronomical Ephemeris (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) en Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller en Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel en Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison en Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson en Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson en Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel en Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze en Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson en Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (met Chapront, Chapront-Touze en Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus en Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck en Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold en Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison en Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak en Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Aangepaste vergelijking voor %1T"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -1205,7 +1238,7 @@ msgstr "Harvard Universiteit (VS)"
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "Actie"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
@@ -1218,27 +1251,29 @@ msgstr ""
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Aangepaste vergelijking voor %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr ""
+"Een gebruikelijke vergelijking voor het berekenen van %1T ziet er als volgt "
+"uit:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
-msgstr ""
+msgstr "waarin"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
-msgstr ""
+msgstr "jaar"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
 msgstr "Dit systeem heeft geen ondersteuning voor OpenGL."
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:206
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Sun"
 msgstr "Zon"
 
@@ -1628,12 +1663,12 @@ msgstr "asteroïde"
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "maan"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "dwergplaneet"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -1788,17 +1823,17 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:231
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "Zonnestelsel-schermbeveiliging"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:233
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Tour langs sterrenstelsels"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:235
 msgid "Sun from different planets"
-msgstr ""
+msgstr "Zon vanaf verschillende planeten"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:237
@@ -6725,7 +6760,7 @@ msgid ""
 "about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:125
+#: plugins/Pulsars/src/Pulsar.cpp:125 plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "pulsar"
 msgstr ""
 
@@ -6917,64 +6952,94 @@ msgid ""
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#. TRANSLATORS: Full phrase: Exoplanet detected by transit
+#: plugins/Exoplanets/src/Exoplanet.cpp:172
+msgid "by transit"
+msgstr ""
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
+#: plugins/Exoplanets/src/Exoplanet.cpp:174
+msgid "by radial velocity"
+msgstr ""
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by imaging
+#: plugins/Exoplanets/src/Exoplanet.cpp:176
+msgid "by imaging"
+msgstr ""
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by astrometry
+#: plugins/Exoplanets/src/Exoplanet.cpp:179
+msgid "by astrometry"
+msgstr ""
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by microlensing
+#: plugins/Exoplanets/src/Exoplanet.cpp:181
+msgid "by microlensing"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Metallicity"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "Mass"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
-#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Radius"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: plugins/Exoplanets/src/Exoplanet.cpp:239
 msgid "Exoplanet"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Period"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "days"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
-#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Jup"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Semi-Major Axis"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "AU"
 msgstr "AE"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:244
 msgid "Eccentricity"
 msgstr "Excentriciteit"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:226
+#: plugins/Exoplanets/src/Exoplanet.cpp:245
 msgid "Inclination"
 msgstr "Inclinatie"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:227
+#: plugins/Exoplanets/src/Exoplanet.cpp:246
 msgid "Angle Distance"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:228
+#: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Discovered year"
+msgstr ""
+
+#. TRANSLATORS: Exoplanet detected
+#: plugins/Exoplanets/src/Exoplanet.cpp:250
+msgid "Detected"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
