@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-14 03:11+0700\n"
-"PO-Revision-Date: 2013-03-09 10:14+0000\n"
+"POT-Creation-Date: 2013-03-18 19:27+0700\n"
+"PO-Revision-Date: 2013-03-19 15:12+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-14 04:42+0000\n"
+"X-Launchpad-Export-Date: 2013-03-20 04:40+0000\n"
 "X-Generator: Launchpad (build 16532)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -54,7 +54,7 @@ msgstr ", %1 m"
 msgid "Planet: "
 msgstr "Planeta: "
 
-#: src/core/modules/Nebula.cpp:121 src/core/modules/Planet.cpp:438
+#: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:120
 #: src/core/modules/StarWrapper.cpp:122
@@ -65,60 +65,60 @@ msgstr "Planeta: "
 msgid "Type: <b>%1</b>"
 msgstr "Tipo: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:126 src/core/modules/Planet.cpp:444
+#: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:444
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
 #: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
-#: plugins/Exoplanets/src/Exoplanet.cpp:175
+#: plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitude: <b>%1</b> (extincto para: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:447
+#: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
 #: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
-#: plugins/Exoplanets/src/Exoplanet.cpp:180
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitude: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:134
+#: src/core/modules/Nebula.cpp:137
 #, qt-format
 msgid "Size: %1"
 msgstr "Tamanho: %1"
 
-#: src/core/modules/Nebula.cpp:370
+#: src/core/modules/Nebula.cpp:375
 msgid "Galaxy"
 msgstr "Galáxia"
 
-#: src/core/modules/Nebula.cpp:373
+#: src/core/modules/Nebula.cpp:378
 msgid "Open cluster"
 msgstr "Enxame aberto"
 
-#: src/core/modules/Nebula.cpp:376
+#: src/core/modules/Nebula.cpp:381
 msgid "Globular cluster"
 msgstr "Enxame globular"
 
-#: src/core/modules/Nebula.cpp:379
+#: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
 msgstr "Nebulosa"
 
-#: src/core/modules/Nebula.cpp:382
+#: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
 msgstr "Nebulosa Planetária"
 
-#: src/core/modules/Nebula.cpp:385
+#: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
 msgstr "Nebulosa Escura"
 
-#: src/core/modules/Nebula.cpp:388
+#: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
 msgstr "Enxame associado a nebulosidade"
 
-#: src/core/modules/Nebula.cpp:391
+#: src/core/modules/Nebula.cpp:396
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: src/core/modules/Nebula.cpp:394
+#: src/core/modules/Nebula.cpp:399
 msgid "Undocumented type"
 msgstr "Tipo não documentado"
 
@@ -234,14 +234,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:143
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:209
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tipo Espectral: %1"
 
 #: src/core/modules/StarWrapper.cpp:147
 #: plugins/Supernovae/src/Supernova.cpp:115
-#: plugins/Exoplanets/src/Exoplanet.cpp:195
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distância: %1 Anos-Luz"
@@ -1327,8 +1327,8 @@ msgstr "ano"
 msgid "This system does not support OpenGL."
 msgstr "Este sistema não suporta OpenGL."
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:206
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Sun"
 msgstr "Sol"
 
@@ -6994,7 +6994,7 @@ msgstr ""
 "Este complemento mostra a posição de vários pulsares e apresenta informações "
 "objectivas sobre cada um deles."
 
-#: plugins/Pulsars/src/Pulsar.cpp:125
+#: plugins/Pulsars/src/Pulsar.cpp:125 plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "pulsar"
 msgstr "pulsar"
 
@@ -7200,65 +7200,95 @@ msgstr ""
 "sobre os exoplanetas provêm da “Extrasolar Planets Encyclopaedia”, "
 "disponível no sítio exoplanet.eu."
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#. TRANSLATORS: Full phrase: Exoplanet detected by transit
+#: plugins/Exoplanets/src/Exoplanet.cpp:172
+msgid "by transit"
+msgstr "pelo trânsito"
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
+#: plugins/Exoplanets/src/Exoplanet.cpp:174
+msgid "by radial velocity"
+msgstr "pela velocidade radial"
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by imaging
+#: plugins/Exoplanets/src/Exoplanet.cpp:176
+msgid "by imaging"
+msgstr "por imagem"
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by astrometry
+#: plugins/Exoplanets/src/Exoplanet.cpp:179
+msgid "by astrometry"
+msgstr "por astrometria"
+
+#. TRANSLATORS: Full phrase: Exoplanet detected by microlensing
+#: plugins/Exoplanets/src/Exoplanet.cpp:181
+msgid "by microlensing"
+msgstr "por microlente"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Metallicity"
 msgstr "Metalicidade"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "Mass"
 msgstr "Massa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
-#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Radius"
 msgstr "Raio"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Temperatura efectiva: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: plugins/Exoplanets/src/Exoplanet.cpp:239
 msgid "Exoplanet"
 msgstr "Exoplaneta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Period"
 msgstr "Período"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "days"
 msgstr "dias"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
-#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Semi-Major Axis"
 msgstr "Semi-Eixo Maior"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:244
 msgid "Eccentricity"
 msgstr "Excentricidade"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:226
+#: plugins/Exoplanets/src/Exoplanet.cpp:245
 msgid "Inclination"
 msgstr "Inclinação"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:227
+#: plugins/Exoplanets/src/Exoplanet.cpp:246
 msgid "Angle Distance"
 msgstr "Distância angular"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:228
+#: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Discovered year"
 msgstr "Ano de descoberta"
+
+#. TRANSLATORS: Exoplanet detected
+#: plugins/Exoplanets/src/Exoplanet.cpp:250
+msgid "Detected"
+msgstr "Detectado"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
