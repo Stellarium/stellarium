@@ -53,7 +53,7 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-		: initialized(false), visible(true), newlyAdded(false), orbitValid(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+		: initialized(false), displayed(true), newlyAdded(false), orbitValid(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -69,8 +69,8 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		return;
 	
 	if (map.contains("description")) description = map.value("description").toString();
-	if (map.contains("visible")) visible = map.value("visible").toBool();
-	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
+	if (map.contains("visible")) displayed = map.value("visible").toBool();
+	if (map.contains("orbitVisible")) orbitDisplayed = map.value("orbitVisible").toBool();
 
 	if (map.contains("hintColor"))
 	{
@@ -173,8 +173,8 @@ QVariantMap Satellite::getMap(void)
 	if (!description.isEmpty() && description!="")
 		map["description"] = description;
 
-	map["visible"] = visible;
-	map["orbitVisible"] = orbitVisible;
+	map["visible"] = displayed;
+	map["orbitVisible"] = orbitDisplayed;
 	QVariantList col, orbitCol;
 	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
 	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
@@ -416,7 +416,7 @@ void Satellite::update(double)
 		visibility = pSatWrapper->getVisibilityPredict();
 
 		// Compute orbit points to draw orbit line.
-		if (orbitVisible) computeOrbitPoints();
+		if (orbitDisplayed) computeOrbitPoints();
 	}
 }
 
@@ -504,7 +504,7 @@ void Satellite::draw(const StelCore* core, StelRenderer* renderer,
 		}
 		renderer->drawTexturedRect(xy[0] - 11, xy[1] - 11, 22, 22);
 
-		if (orbitVisible && Satellite::orbitLinesFlag) {drawOrbit(renderer, projector);}
+		if (orbitDisplayed && Satellite::orbitLinesFlag) {drawOrbit(renderer, projector);}
 	}
 }
 

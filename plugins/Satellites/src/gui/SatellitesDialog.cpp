@@ -267,8 +267,8 @@ void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
 	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
 	QString tleStr = QString("%1\n%2").arg(sat->tleElements.first.data()).arg(sat->tleElements.second.data());
 	ui->tleTextEdit->setText(tleStr);
-	ui->visibleCheckbox->setChecked(sat->visible);
-	ui->orbitCheckbox->setChecked(sat->orbitVisible);
+	ui->visibleCheckbox->setChecked(sat->displayed);
+	ui->orbitCheckbox->setChecked(sat->orbitDisplayed);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
 	connectSatelliteGuiForm();
 }
@@ -562,7 +562,7 @@ void SatellitesDialog::setDisplayFlag(bool display)
 		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
 		if (sat)
-			sat->visible = display;
+			sat->displayed = display;
 	}
 	reloadSatellitesList();
 }
@@ -576,7 +576,7 @@ void SatellitesDialog::setOrbitFlag(bool display)
 		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
 		if (sat)
-			sat->orbitVisible = display;
+			sat->orbitDisplayed = display;
 	}
 	reloadSatellitesList();
 }
@@ -594,7 +594,7 @@ void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
 		return;
 
 	// Turn on Satellite rendering if it is not already on
-	sat->visible = true;
+	sat->displayed = true;
 
 	// If Satellites are not currently displayed, make them visible.
 	if (!SatellitesMgr->getFlagHints())
