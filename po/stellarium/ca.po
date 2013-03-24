@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-18 19:27+0700\n"
-"PO-Revision-Date: 2013-01-26 15:20+0000\n"
+"PO-Revision-Date: 2013-03-23 23:57+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-19 05:21+0000\n"
-"X-Generator: Launchpad (build 16532)\n"
+"X-Launchpad-Export-Date: 2013-03-24 04:42+0000\n"
+"X-Generator: Launchpad (build 16540)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -111,7 +111,7 @@ msgstr "Nebulosa planetària"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Nebulosa fosca"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
@@ -261,6 +261,7 @@ msgstr "Nau espaial"
 #: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"La correcció està desactivada. Fer servir només si saps que estas fent!"
 
 #: src/core/StelCore.cpp:1422
 #, qt-format
@@ -269,6 +270,10 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Aquesta fórmula històrica va ser obtinguda  per C. Schoch al 1931 i va ser "
+"usada per G. Henriksson en el seu article <em>Einstein's Theory of "
+"Relativity Confirmed by Ancient Solar Eclipses</em> (%1). Veure més "
+"informació %2aquí%3"
 
 #: src/core/StelCore.cpp:1425
 #, qt-format
@@ -276,6 +281,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Aquesta equació empírica va ser publicada per G. M . Clemente a l'article "
+"<em>On the system of astronomical constants</em> (%1)."
 
 #: src/core/StelCore.cpp:1428
 #, qt-format
@@ -285,6 +292,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Aquesta formula està basada en un estudi posterior al 1650 d'observacions "
+"del Sol, la Lluna i els planetes per Spencer Jones (%1) i feta servir per "
+"Jean Meeus al seu <em>Astronomical Formulae for Calculators</em>. També va "
+"ser adoptada per el programari de PC SunTracker Pro."
 
 #: src/core/StelCore.cpp:1432
 msgid ""
@@ -292,6 +303,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Aquesta es una lleugera modificació de la versió de la fórmula de l'UAI "
+"(1952) que va ser adoptada a <em>Astronomical Ephemeris</em> i a <em>Canon "
+"of Solar Eclipses</em> per Mucke i Meeus (1983)."
 
 #: src/core/StelCore.cpp:1436
 msgid ""
@@ -300,6 +314,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Les taules de Tuckerman (1962, 1964) llista les posicions del Sol, la LLuna "
+"i els plantes en intervals de 5 i 10 dies des de 601 aC fins 1649 dC. La "
+"mateixa relació va ser adoptada de manera implícita a les taules syzygy de "
+"Goldstine (1973)."
 
 #: src/core/StelCore.cpp:1440
 #, qt-format
@@ -308,6 +326,9 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Aquesta equació va ser publicada per P. M. Muller i F. R. Stephenson a "
+"l'article <em>The accelerations of the earth and moon from early "
+"astronomical observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1443
 #, qt-format
@@ -315,6 +336,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Aquesta equació va ser publicada per F. R. Stephenson a l'article <em>Pre-"
+"Telescopic Astronomical Observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1446
 #, qt-format
@@ -324,6 +347,11 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Aquesta equació polinòmica de 12è ordre (obsoleta i substituïda per Schmadel "
+"i Zech ()1988)) va ser publicada per L. D. Schamel i G. Zech a l'article  "
+"<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
+"period 1800-1975</em> (%1) tal com es pot comprovar a les dades publicades "
+"per Brouwer (1952)."
 
 #: src/core/StelCore.cpp:1449
 msgid ""
@@ -331,6 +359,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Aquest algoritme va ser adoptat a <em>Planetary Programs and Tables from -"
+"4000 to +2800</em>  de P. Breetagnon i L. Simon (1986) i per el programari "
+"de PC RedShift."
 
 #: src/core/StelCore.cpp:1452
 #, qt-format
@@ -339,10 +370,14 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"Aquesta fórmula va ser publicada per F. R. Stephenson i L . V. Morrison al "
+"ser article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
+"A.D. 1980</em> (%1)."
 
 #: src/core/StelCore.cpp:1455
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
+"Aquest aalgoritme es fa servir al programari de planetari de PC Guide 7."
 
 #: src/core/StelCore.cpp:1458
 msgid ""
@@ -350,6 +385,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Aquest algoritme va ser proporcionat per F. Espenak al seu <em>Fifty Year "
+"Canon of Solar Eclipses: 1986-2035</em> (1987) i en el seu <em>Fifty Year "
+"Canon of Lunar Eclipses: 1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:1461
 #, qt-format
@@ -357,6 +395,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"Aquesta fórmula va ser obtinguda per K.M. Borkowski (%1) del anàlisi de les "
+"dades recavades de 31 eclipsis solars datats entre el 2137 aC i el 1751 dC."
 
 #: src/core/StelCore.cpp:1464
 #, qt-format
@@ -388,6 +428,8 @@ msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
+"F. R. Stepenson va publicar aquesta fórmula al seu llibre <em>Historical "
+"Eclipses and Earth's Rotation</em> (%1)."
 
 #: src/core/StelCore.cpp:1476
 msgid ""
@@ -454,7 +496,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
-msgstr ""
+msgstr "Fet servir per omissió."
 
 #: src/core/StelCore.cpp:1500
 #, qt-format
@@ -462,6 +504,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Aquesta es una fórmula quadràtica per el càlcul de %1T amb coeficients "
+"definits per l'usuari."
 
 #: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -469,31 +513,34 @@ msgstr "Error"
 
 #: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "amb valors sense sentit fora d'aquest rang"
 
 #: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"amb una mitjana d'error de menys d'un segon, màx. 1.9s d'error, i els valors "
+"sense sentit fora d'aquest rang"
 
 #: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "amb valors zero fora d'aquest rang"
 
 #: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"amb un típic 1-segon de precisió i els valors zero fora d'aquest rang"
 
 #: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "El rang vàlid d'ús: entre anys %1 i %2, %3."
 
 #: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "El rang vàlid d'ús: entre els anys %1 i %2."
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -619,7 +666,7 @@ msgstr "AR/DE (de data): %1/%2"
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Longitud/latitud galàctica: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -768,83 +815,83 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritme de"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
-msgstr ""
+msgstr "Sense correció"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
-msgstr ""
+msgstr "UAI (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "Efemèrides astronòmiques (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) i Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller i Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel i Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel i Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze i Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson i Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (aamb Chapront, Chapront-Touze i Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
@@ -852,32 +899,32 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus i Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck i Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold i Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison i Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak i Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Equació personalitzada per %1T"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -1017,7 +1064,7 @@ msgstr "Desenvolupador: %1"
 #: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Integració contínua: %1"
 
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
@@ -1224,20 +1271,20 @@ msgstr "Drecera alternativa"
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Equació personalitzada per %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "Una equació típica per al càlcul del %1T es veu així:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
-msgstr ""
+msgstr "on"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
-msgstr ""
+msgstr "any"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
@@ -1695,7 +1742,7 @@ msgstr "Tupi-Guarani"
 
 #: src/translations.h:178
 msgid "Tongan"
-msgstr ""
+msgstr "Tongà"
 
 #: src/translations.h:179
 msgid "Western"
@@ -3378,7 +3425,7 @@ msgstr "Moure telescopi al grup de coordenades donades"
 
 #: src/translations.h:655
 msgid "Show renderer statistics"
-msgstr ""
+msgstr "Mostrar estadístiques de la renderització"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:658 src/ui_configurationDialog.h:1160
@@ -3749,7 +3796,7 @@ msgstr "Escala relativa:"
 
 #: src/ui_viewDialog.h:1216
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Brillantor de la Via Làctia"
 
 #: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -3778,19 +3825,19 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
-msgstr ""
+msgstr "Magnituds límit (sense ajut/observadors amb binocular)"
 
 #: src/ui_viewDialog.h:1231
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Magnituds Límit"
 
 #: src/ui_viewDialog.h:1233
 msgid "Stars to magnitude"
-msgstr ""
+msgstr "Estrelles fins magnitud"
 
 #: src/ui_viewDialog.h:1237
 msgid "Nebulas to magitude"
-msgstr ""
+msgstr "Nebuloses fins magnitud"
 
 #: src/ui_viewDialog.h:1240
 msgid "Constellations"
@@ -4084,7 +4131,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
-msgstr ""
+msgstr "segons"
 
 #: src/ui_configurationDialog.h:1065
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
@@ -4125,11 +4172,11 @@ msgstr "Data del sistema:"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Time correction"
-msgstr ""
+msgstr "Correciò temporal"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
-msgstr ""
+msgstr "Editar equació"
 
 #: src/ui_configurationDialog.h:1084
 msgid "Planetarium options"
@@ -4554,17 +4601,17 @@ msgstr "CDVa de l'ocular: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Lents #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Lents #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Lens: none"
-msgstr ""
+msgstr "Lents: cap"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4611,15 +4658,15 @@ msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Lens"
-msgstr ""
+msgstr "&Lents"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous lens"
-msgstr ""
+msgstr "Lents %prèvies"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next lens"
-msgstr ""
+msgstr "Lents &següents"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4643,11 +4690,11 @@ msgstr "Ocular següent"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "Lent anterior"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "Lent següent"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4704,19 +4751,19 @@ msgstr "Camp de visió aparent de l'ocular"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Multiplicitat: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
-msgstr ""
+msgstr "Lent: Cap"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Multiplicitat: N/D"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of lens"
-msgstr ""
+msgstr "Multiplicitat de la lent"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4733,7 +4780,7 @@ msgstr "Camp de visió real proporcionat per aquests binoculars"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Augment previst per aquesta combinació ocular/lent/telescopi"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
@@ -4919,11 +4966,11 @@ msgstr "Binoculars"
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 #: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid "Lenses"
-msgstr ""
+msgstr "Lents"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplicity:"
-msgstr ""
+msgstr "Multiplicitat:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
@@ -7092,27 +7139,27 @@ msgstr ""
 #. TRANSLATORS: Full phrase: Exoplanet detected by transit
 #: plugins/Exoplanets/src/Exoplanet.cpp:172
 msgid "by transit"
-msgstr ""
+msgstr "per trànsit"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
 #: plugins/Exoplanets/src/Exoplanet.cpp:174
 msgid "by radial velocity"
-msgstr ""
+msgstr "mitjançant velocitat radial"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by imaging
 #: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "by imaging"
-msgstr ""
+msgstr "mitjançant formació d'imatges"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by astrometry
 #: plugins/Exoplanets/src/Exoplanet.cpp:179
 msgid "by astrometry"
-msgstr ""
+msgstr "mitjançant astrometria"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by microlensing
 #: plugins/Exoplanets/src/Exoplanet.cpp:181
 msgid "by microlensing"
-msgstr ""
+msgstr "mitjançant microlents"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Metallicity"
@@ -7177,7 +7224,7 @@ msgstr "Any del descobriment"
 #. TRANSLATORS: Exoplanet detected
 #: plugins/Exoplanets/src/Exoplanet.cpp:250
 msgid "Detected"
-msgstr ""
+msgstr "Detectat"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
