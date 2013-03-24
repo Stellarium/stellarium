@@ -58,7 +58,9 @@ typedef QList<TleData> TleDataList;
 typedef QHash<QString, TleData> TleDataHash ;
 
 
-/*! @mainpage
+/*! @mainpage notitle
+@section overview Plugin Overview
+
 The %Satellites plugin displays the positions of artifical satellites in Earth
 orbit based on a catalog of orbital data.
 
@@ -69,6 +71,21 @@ a list of update file URLs.
 
 To calculate satellite positions, the plugin uses an implementation of
 the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
+
+@section satprop Satellite Properties
+
+@subsection ident Name and identifiers
+Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
+for presentation purposes.
+
+In the @ref satcat satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
+
+@subsection groups Grouping
+A satellite can belong to one or more groups such as "amateur", "geostationary" or "navigation". They have no other function but to help the user organize the satellite collection.
+
+Group names are arbitrary strings defined in the @ref satcat for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
+
+By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
 
 @section satcat Satellite Catalog
 The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
@@ -177,10 +194,12 @@ public:
 	//! Save the plugin's settings to the main configuration file.
 	void saveSettings();
 
-	//! Get a list of satellite group names.  A Satellite may be long to one or more group
-	//! e.g. "amateur" and "navigation".  Group names are arbitrary strings defined in the 
-	//! json file.  Think of them like tags.  A satellite may not belong to any group at all.
-	QStringList getGroups(void) const;
+	//! Get the groups used in the currently loaded satellite collection.
+	//! See @ref groups for details. Use getGroupIdList() if you need a list.
+	QSet<QString> getGroups() const;
+	//! Get a sorted list of group names.
+	//! See @ref groups for details. Use getGroups() if you don't need a list.
+	QStringList getGroupIdList() const;
 
 	//! get satellite objects filtered by group.  If an empty string is used for the
 	//! group name, return all satallites
@@ -344,6 +363,8 @@ private:
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	QList<SatelliteP> satellites;
+	
+	QSet<QString> groups;
 	
 	LinearFader hintFader;
 	class StelTextureNew* hintTexture;
