@@ -130,9 +130,9 @@ private:
 	//! Flag indicating whether the satellite should be displayed.
 	//! Should not be confused with the pedicted visibility of the 
 	//! actual satellite to the observer.
-	bool visible;
+	bool displayed;
 	//! Flag indicating whether an orbit section should be displayed.
-	bool orbitVisible;  // draw orbit enabled/disabled
+	bool orbitDisplayed;  // draw orbit enabled/disabled
 	//! Flag indicating that the satellite was added during the current session.
 	bool newlyAdded;
 	bool orbitValid;

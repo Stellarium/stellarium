@@ -298,7 +298,7 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->visible)
+		if (sat->initialized && sat->displayed)
 		{
 			equPos = sat->XYZ;
 			equPos.normalize();
@@ -324,7 +324,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->visible)
+		if (sat->initialized && sat->displayed)
 		{
 			if (sat->getNameI18n().toUpper() == nameI18n)
 				return qSharedPointerCast<StelObject>(sat);
@@ -347,7 +347,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->visible)
+		if (sat->initialized && sat->displayed)
 		{
 			if (sat->getEnglishName().toUpper() == englishName)
 				return qSharedPointerCast<StelObject>(sat);
@@ -374,7 +374,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 		
 		foreach(const SatelliteP& sat, satellites)
 		{
-			if (sat->initialized && sat->visible)
+			if (sat->initialized && sat->displayed)
 			{
 				if (sat->getCatalogNumberString() == numberString)
 					return qSharedPointerCast<StelObject>(sat);
@@ -406,7 +406,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	}
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->visible)
+		if (sat->initialized && sat->displayed)
 		{
 			if (sat->getNameI18n().toUpper().left(objw.length()) == objw)
 			{
@@ -446,7 +446,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->visible)
+		if (sat->initialized && sat->displayed)
 		{
 			if (sat->getEnglishName().toUpper().left(objw.length()) == objw)
 			{
@@ -803,8 +803,8 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vi
 			if ((group.isEmpty() || sat->groupIDs.contains(group)) && ! result.contains(sat->id))
 			{
 				if (vis==Both ||
-						(vis==Visible && sat->visible) ||
-						(vis==NotVisible && !sat->visible) ||
+						(vis==Visible && sat->displayed) ||
+						(vis==NotVisible && !sat->displayed) ||
 						(vis==OrbitError && !sat->orbitValid) ||
 						(vis==NewlyAdded && sat->isNew()))
 					result.insert(sat->id, sat->name);
@@ -1050,7 +1050,7 @@ void Satellites::recalculateOrbitLines(void)
 {
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->visible && sat->orbitVisible)
+		if (sat->initialized && sat->displayed && sat->orbitDisplayed)
 			sat->recalculateOrbitLines();
 	}
 }
@@ -1221,7 +1221,7 @@ void Satellites::update(double deltaTime)
 
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->visible)
+		if (sat->initialized && sat->displayed)
 			sat->update(deltaTime);
 	}
 }
@@ -1247,7 +1247,7 @@ void Satellites::draw(StelCore* core, StelRenderer* renderer)
 	Satellite::viewportHalfspace = prj->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
-		if (sat && sat->initialized && sat->visible)
+		if (sat && sat->initialized && sat->displayed)
 		{
 			sat->draw(core, renderer, prj, hintTexture);
 		}
