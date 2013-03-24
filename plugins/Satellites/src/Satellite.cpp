@@ -123,11 +123,9 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 	if (map.contains("groups"))
 	{
-		foreach(const QVariant &group, map.value("groups").toList())
-		{
-			if (!groupIDs.contains(group.toString()))
-				groupIDs << group.toString();
-		}
+		QVariantList groupList =  map.value("groups").toList();
+		foreach(const QVariant& group, groupList)
+			groups.insert(group.toString());
 	}
 
 	QString line1 = map.value("tle1").toString();
@@ -191,7 +189,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	foreach(const QString &g, groupIDs)
+	foreach(const QString &g, groups)
 	{
 		groupList << g;
 	}

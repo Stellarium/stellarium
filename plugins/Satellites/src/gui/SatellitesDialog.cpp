@@ -264,7 +264,7 @@ void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
 	ui->idLineEdit->setText(sat->name);
 	ui->lineEditCatalogNumber->setText(sat->id);
 	ui->descriptionTextEdit->setText(sat->description);
-	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
+	ui->groupsTextEdit->setText(QStringList(sat->groups.values()).join(", "));
 	QString tleStr = QString("%1\n%2").arg(sat->tleElements.first.data()).arg(sat->tleElements.second.data());
 	ui->tleTextEdit->setText(tleStr);
 	ui->visibleCheckbox->setChecked(sat->displayed);
@@ -485,7 +485,7 @@ void SatellitesDialog::updateGuiFromSettings(void)
 void SatellitesDialog::populateGroupsList()
 {
 	ui->groupsCombo->clear();
-	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
+	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroupIdList());
 	ui->groupsCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("orbiterror"));
 	ui->groupsCombo->insertItem(0, q_("[all newly added]"), QVariant("newlyadded"));
 	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("notvisible"));

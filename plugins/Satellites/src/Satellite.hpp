@@ -156,7 +156,9 @@ private:
 	double height, range, rangeRate;
 	QList<CommLink> comms;
 	Vec3f hintColor;
-	QStringList groupIDs;
+	//! Identifiers of the groups to which the satellite belongs.
+	//! See @ref groups.
+	QSet<QString> groups;
 	QDateTime lastUpdated;
 
 	static SphericalCap  viewportHalfspace;
