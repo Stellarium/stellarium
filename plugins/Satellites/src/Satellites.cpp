@@ -727,6 +727,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 	}
 
 	satellites.clear();
+	groups.clear();
 	QVariantMap satMap = map.value("satellites").toMap();
 	foreach(const QString& satId, satMap.keys())
 	{
@@ -742,6 +743,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (sat->initialized)
 		{
 			satellites.append(sat);
+			groups.unite(sat->groups);
 			numReadOk++;
 		}
 	}
@@ -775,21 +777,16 @@ QVariantMap Satellites::createDataMap(void)
 	return map;
 }
 
-QStringList Satellites::getGroups(void) const
+QSet<QString> Satellites::getGroups() const
 {
-	QStringList groups;
-	foreach (const SatelliteP& sat, satellites)
-	{
-		if (sat->initialized)
-		{
-			foreach(const QString& group, sat->groupIDs)
-			{
-				if (!groups.contains(group))
-					groups << group;
-			}
-		}
-	}
 	return groups;
+}
+
+QStringList Satellites::getGroupIdList() const
+{
+	QStringList groupList(groups.values());
+	groupList.sort();
+	return groupList;
 }
 
 QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis)
@@ -800,7 +797,7 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vi
 	{
 		if (sat->initialized)
 		{
-			if ((group.isEmpty() || sat->groupIDs.contains(group)) && ! result.contains(sat->id))
+			if ((group.isEmpty() || sat->groups.contains(group)) && ! result.contains(sat->id))
 			{
 				if (vis==Both ||
 						(vis==Visible && sat->displayed) ||
