@@ -28,6 +28,8 @@ SET(Satellites_SRCS
   Satellite.cpp
   Satellites.hpp
   Satellites.cpp
+  SatellitesListModel.hpp
+  SatellitesListModel.cpp
   gui/SatellitesDialog.hpp
   gui/SatellitesDialog.cpp
   gui/SatellitesImportDialog.hpp

@@ -29,6 +29,7 @@
 #include "StelIniParser.hpp"
 #include "Satellites.hpp"
 #include "Satellite.hpp"
+#include "SatellitesListModel.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
 #include "StelJsonParser.hpp"
@@ -71,7 +72,8 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
 
 Satellites::Satellites()
-	: hintTexture(NULL)
+    : satelliteListModel(0),
+      hintTexture(NULL)
 	, texPointer(NULL)
 	, pxmapGlow(NULL)
 	, pxmapOnIcon(NULL)
@@ -809,6 +811,13 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vi
 		}
 	}
 	return result;
+}
+
+SatellitesListModel* Satellites::getSatellitesListModel()
+{
+	if (!satelliteListModel)
+		satelliteListModel = new SatellitesListModel(&satellites, this);
+	return satelliteListModel;
 }
 
 SatelliteP Satellites::getById(const QString& id)
