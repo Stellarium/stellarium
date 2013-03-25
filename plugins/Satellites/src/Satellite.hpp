@@ -52,6 +52,7 @@ class Satellite : public StelObject
 {
 	friend class Satellites;
 	friend class SatellitesDialog;
+	friend class SatellitesListModel;
 public:
 	//! \param identifier unique identifier (currently the Catalog Number)
 	//! \param data a QMap which contains the details of the satellite
