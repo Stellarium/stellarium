@@ -30,6 +30,7 @@
 #include "ui_satellitesDialog.h"
 #include "SatellitesDialog.hpp"
 #include "SatellitesImportDialog.hpp"
+#include "SatellitesListModel.hpp"
 #include "Satellites.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -48,7 +49,8 @@ SatellitesDialog::SatellitesDialog() :
 {
 	ui = new Ui_satellitesDialog;
 	
-	satellitesModel = new QStandardItemModel(this);
+	// FIXME: Cleanup.
+	// satellitesModel = new QStandardItemModel(this);
 }
 
 SatellitesDialog::~SatellitesDialog()
@@ -128,7 +130,7 @@ void SatellitesDialog::createDialogContent()
 
 	// Satellites tab
 	filterProxyModel = new QSortFilterProxyModel(this);
-	filterProxyModel->setSourceModel(satellitesModel);
+	filterProxyModel->setSourceModel(GETSTELMODULE(Satellites)->getSatellitesListModel());
 	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->satellitesList->setModel(filterProxyModel);
 	connect(ui->lineEditSearch, SIGNAL(textEdited(QString)),
@@ -139,7 +141,8 @@ void SatellitesDialog::createDialogContent()
 	        this, SLOT(updateSelectedInfo(QModelIndex,QModelIndex)));
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
 	        this, SLOT(handleDoubleClick(QModelIndex)));
-	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(listSatelliteGroup(int)));
+	// TODO: Re-enable after finishing the model.
+	//connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(listSatelliteGroup(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 	connectSatelliteGuiForm();

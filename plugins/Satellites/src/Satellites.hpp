@@ -39,7 +39,9 @@ class QPixmap;
 class QProgressBar;
 class QSettings;
 class QTimer;
+
 class SatellitesDialog;
+class SatellitesListModel;
 
 typedef QSharedPointer<Satellite> SatelliteP;
 
@@ -204,6 +206,8 @@ public:
 	//! get satellite objects filtered by group.  If an empty string is used for the
 	//! group name, return all satallites
 	QHash<QString,QString> getSatellites(const QString& group=QString(), Status vis=Both);
+	//! Get a model representing the list of satellites.
+	SatellitesListModel* getSatellitesListModel();
 
 	//! Get a satellite object by its identifier (i.e. NORAD number).
 	SatelliteP getById(const QString& id);
@@ -363,6 +367,7 @@ private:
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	QList<SatelliteP> satellites;
+	SatellitesListModel* satelliteListModel;
 	
 	QSet<QString> groups;
 	
