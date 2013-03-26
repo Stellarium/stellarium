@@ -51,11 +51,12 @@ typedef QSet<QString> GroupSet;
 //! Flag type reflecting internal flags of Satellite.
 enum SatFlag
 {
-	SatHasNoFlags = 0x0,
-	SatIsDisplayed = 0x1,
-	SatOrbitIsDisplayed = 0x2,
-	SatIsNewlyAdded = 0x4,
-	SatHasValidOrbit = 0x8
+	SatNoFlags = 0x0,
+	SatDisplayed = 0x1,
+	SatNotDisplayed = 0x2,
+	SatOrbit = 0x4,
+	SatNew = 0x8,
+	SatError = 0x10
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
