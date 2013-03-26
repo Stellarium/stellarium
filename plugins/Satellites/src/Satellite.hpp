@@ -45,6 +45,25 @@ typedef struct
 	QString description; //!< Channel description.
 } CommLink;
 
+//! Type for sets of satellite group IDs.
+typedef QSet<QString> GroupSet;
+
+//! Flag type reflecting internal flags of Satellite.
+enum SatFlag
+{
+	SatHasNoFlags = 0x0,
+	SatIsDisplayed = 0x1,
+	SatOrbitIsDisplayed = 0x2,
+	SatIsNewlyAdded = 0x4,
+	SatHasValidOrbit = 0x8
+};
+typedef QFlags<SatFlag> SatFlags;
+Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
+
+// Allows the type to be used by QVariant
+Q_DECLARE_METATYPE(GroupSet)
+Q_DECLARE_METATYPE(SatFlags)
+
 //! @class Satellite
 //! A representation of a satellite in Earth orbit.
 //! Details about the satellite are passed with a JSON-representation structure
@@ -116,21 +135,10 @@ public:
 	void setNew() {newlyAdded = true;}
 	bool isNew() const {return newlyAdded;}
 	
-	//! Flag type reflecting internal flag structure.
-	enum Flag
-	{
-		NoFlags = 0x0,
-		IsDisplayed = 0x1,
-		IsOrbitDisplayed = 0x2,
-		IsNewlyAdded = 0x4,
-		HasValidOrbit = 0x8
-	};
-	Q_DECLARE_FLAGS(Flags, Flag)
-	
 	//! Get internal flags as a single value.
-	Flags getFlags();
+	SatFlags getFlags();
 	//! Sets the internal flags in one operation (only display flags)!
-	void setFlags(const Flags& flags);
+	void setFlags(const SatFlags& flags);
 	
 	//! Parse TLE line to extract International Designator and launch year.
 	//! Sets #internationalDesignator and #jdLaunchYearJan1.
@@ -185,7 +193,7 @@ private:
 	Vec3f hintColor;
 	//! Identifiers of the groups to which the satellite belongs.
 	//! See @ref groups.
-	QSet<QString> groups;
+	GroupSet groups;
 	QDateTime lastUpdated;
 
 	static SphericalCap  viewportHalfspace;
@@ -219,9 +227,6 @@ private:
 
 typedef QSharedPointer<Satellite> SatelliteP;
 bool operator<(const SatelliteP& left, const SatelliteP& right);
-
-// Allows the type to be used by QVariant
-Q_DECLARE_OPERATORS_FOR_FLAGS(Satellite::Flags)
 
 #endif // _SATELLITE_HPP_ 
 

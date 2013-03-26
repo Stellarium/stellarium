@@ -41,11 +41,11 @@ public:
 	
 	void setSatelliteList(QList<SatelliteP>* satellites);
 	
-	//! Description of the model columns.
-	enum Column {
-		ColumnNameId = 0,
-		ColumnDisplayed,
-		ColumnOrbit
+	//! Description of the data roles.
+	enum DataRole {
+		IdRole = Qt::UserRole,
+		FlagsRole,
+		GroupsRole
 	};
 	
 	//! @name Reimplemented model handling methods.
