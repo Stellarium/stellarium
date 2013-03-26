@@ -749,6 +749,9 @@ void Satellites::setDataMap(const QVariantMap& map)
 			numReadOk++;
 		}
 	}
+	
+	// TODO: Remove: Testing operator<()
+	qSort(satellites);
 }
 
 QVariantMap Satellites::createDataMap(void)

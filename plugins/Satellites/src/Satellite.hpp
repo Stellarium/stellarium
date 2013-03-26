@@ -20,12 +20,13 @@
 #ifndef _SATELLITE_HPP_
 #define _SATELLITE_HPP_ 1
 
-#include <QVariant>
-#include <QString>
-#include <QStringList>
+#include <QDateTime>
 #include <QFont>
 #include <QList>
-#include <QDateTime>
+#include <QSharedPointer>
+#include <QString>
+#include <QStringList>
+#include <QVariant>
 
 #include "StelObject.hpp"
 #include "StelSphereGeometry.hpp"
@@ -48,11 +49,15 @@ typedef struct
 //! A representation of a satellite in Earth orbit.
 //! Details about the satellite are passed with a JSON-representation structure
 //! that contains a @ref satcat "satellite catalog" entry.
+//! 
+//! Thanks to operator<() overloading, container classes (QList, QMap, etc)
+//! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
 class Satellite : public StelObject
 {
 	friend class Satellites;
 	friend class SatellitesDialog;
 	friend class SatellitesListModel;
+	
 public:
 	//! \param identifier unique identifier (currently the Catalog Number)
 	//! \param data a QMap which contains the details of the satellite
@@ -111,11 +116,29 @@ public:
 	void setNew() {newlyAdded = true;}
 	bool isNew() const {return newlyAdded;}
 	
-	static QString extractInternationalDesignator(const QString& tle1);
-	static int extractLaunchYear(const QString& tle1);
-
-public:
-	void enableDrawOrbit(bool b);
+	//! Flag type reflecting internal flag structure.
+	enum Flag
+	{
+		NoFlags = 0x0,
+		IsDisplayed = 0x1,
+		IsOrbitDisplayed = 0x2,
+		IsNewlyAdded = 0x4,
+		HasValidOrbit = 0x8
+	};
+	Q_DECLARE_FLAGS(Flags, Flag)
+	
+	//! Get internal flags as a single value.
+	Flags getFlags();
+	//! Sets the internal flags in one operation (only display flags)!
+	void setFlags(const Flags& flags);
+	
+	//! Parse TLE line to extract International Designator and launch year.
+	//! Sets #internationalDesignator and #jdLaunchYearJan1.
+	void parseInternationalDesignator(const QString& tle1);
+	
+	//! Needed for sorting lists (if this ever happens...).
+	//! Compares #name fields. If equal, #id fields, which can't be.
+	bool operator<(const Satellite& another) const;
 
 private:
 	//draw orbits methods
@@ -139,19 +162,22 @@ private:
 	bool orbitValid;
 
 	//! Identifier of the satellite, must be unique within the list.
-	//! Currently, the Satellite Catalog Number is used. It is contained in both
-	//! numbered lines of TLE sets.
+	//! Currently, the Satellite Catalog Number/NORAD Number is used,
+	//! as it is unique and it is contained in both lines of TLE sets.
 	QString id;
 	//! Human-readable name of the satellite.
 	//! Usually the string in the "Title line" of TLE sets.
 	QString name;
 	//! Longer description of the satellite.
 	QString description;
-	//! International Designator / COSPAR designation / NSSDC ID
+	//! International Designator / COSPAR designation / NSSDC ID.
 	QString internationalDesignator;
-	//! JD for Jan 1st of launch year, extracted from TLE (will be for 1957-1-1 if extraction fails). Used to hide objects before launch year.
+	//! Julian date of Jan 1st of the launch year.
+	//! Used to hide satellites before their launch date.
+	//! Extracted from TLE set with parseInternationalDesignator().
+	//! It defaults to 1 Jan 1957 if extraction fails.
 	double jdLaunchYearJan1;
-	//! Contains the J2000 position 
+	//! Contains the J2000 position.
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
 	double height, range, rangeRate;
@@ -189,8 +215,13 @@ private:
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
-
 };
+
+typedef QSharedPointer<Satellite> SatelliteP;
+bool operator<(const SatelliteP& left, const SatelliteP& right);
+
+// Allows the type to be used by QVariant
+Q_DECLARE_OPERATORS_FOR_FLAGS(Satellite::Flags)
 
 #endif // _SATELLITE_HPP_ 
 
