@@ -31,7 +31,9 @@ class QListWidgetItem;
 class QSortFilterProxyModel;
 class QStandardItemModel;
 class QTimer;
+
 class SatellitesImportDialog;
+class SatellitesListFilterModel;
 
 class SatellitesDialog : public StelDialog
 {
@@ -50,10 +52,9 @@ public slots:
 	void refreshUpdateValues(void);
 
 private slots:
-	//! Populates the satellites list, filtering it according to group.
+	//! Filter the satellites list according to the selected (pseudo)group.
 	//! @param index selection index of the groups drop-down list.
-	//! @todo Rework to use a proper model and filtering via a proxy model?
-	void listSatelliteGroup(int index);
+	void filterListByGroup(int index);
 	//! Populates the satellites list with the currently selected group.
 	void reloadSatellitesList();
 	void updateSelectedInfo(const QModelIndex& cur, const QModelIndex& prev);
@@ -89,8 +90,7 @@ private:
 	
 	SatellitesImportDialog* importWindow;
 	
-	QStandardItemModel* satellitesModel;
-	QSortFilterProxyModel* filterProxyModel;
+	SatellitesListFilterModel* filterModel;
 };
 
 #endif // _SATELLITESDIALOG_HPP_

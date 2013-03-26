@@ -31,6 +31,7 @@
 #include "SatellitesDialog.hpp"
 #include "SatellitesImportDialog.hpp"
 #include "SatellitesListModel.hpp"
+#include "SatellitesListFilterModel.hpp"
 #include "Satellites.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -44,8 +45,7 @@
 SatellitesDialog::SatellitesDialog() :
     updateTimer(0),
     importWindow(0),
-    satellitesModel(0),
-    filterProxyModel(0)
+    filterModel(0)
 {
 	ui = new Ui_satellitesDialog;
 	
@@ -129,20 +129,20 @@ void SatellitesDialog::createDialogContent()
 
 
 	// Satellites tab
-	filterProxyModel = new QSortFilterProxyModel(this);
-	filterProxyModel->setSourceModel(GETSTELMODULE(Satellites)->getSatellitesListModel());
-	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-	ui->satellitesList->setModel(filterProxyModel);
+	filterModel = new SatellitesListFilterModel(this);
+	filterModel->setSourceModel(GETSTELMODULE(Satellites)->getSatellitesListModel());
+	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->satellitesList->setModel(filterModel);
 	connect(ui->lineEditSearch, SIGNAL(textEdited(QString)),
-	        filterProxyModel, SLOT(setFilterWildcard(QString)));
+	        filterModel, SLOT(setFilterWildcard(QString)));
 	
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
 	connect(selectionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
 	        this, SLOT(updateSelectedInfo(QModelIndex,QModelIndex)));
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
 	        this, SLOT(handleDoubleClick(QModelIndex)));
-	// TODO: Re-enable after finishing the model.
-	//connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(listSatelliteGroup(int)));
+
+	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 	connectSatelliteGuiForm();
@@ -166,81 +166,49 @@ void SatellitesDialog::createDialogContent()
 
 }
 
-void SatellitesDialog::listSatelliteGroup(int index)
+void SatellitesDialog::filterListByGroup(int index)
 {
-	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	QModelIndexList selectedIndexes = selectionModel->selectedRows();
-	QVariantList prevMultiSelection;
-	foreach (const QModelIndex& index, selectedIndexes)
-	{
-		prevMultiSelection << index.data(Qt::UserRole);
-	}
-
-	satellitesModel->clear();
-	
-	QHash<QString,QString> satellites;
-	Satellites* plugin = GETSTELMODULE(Satellites);
+	// TODO: Make sure no user groups duplicate these.
+	QString group;
 	QString selectedGroup = ui->groupsCombo->itemData(index).toString();
 	if (selectedGroup == "all")
-		satellites = plugin->getSatellites();
+		filterModel->setSecondaryFilters(group, SatNoFlags);
 	else if (selectedGroup == "visible")
-		satellites = plugin->getSatellites(QString(), Satellites::Visible);
+		filterModel->setSecondaryFilters(group, SatDisplayed);
 	else if (selectedGroup == "notvisible")
-		satellites = plugin->getSatellites(QString(), Satellites::NotVisible);
+		filterModel->setSecondaryFilters(group, SatNotDisplayed);
 	else if (selectedGroup == "newlyadded")
-		satellites = plugin->getSatellites(QString(), Satellites::NewlyAdded);
+		filterModel->setSecondaryFilters(group, SatNew);
 	else if (selectedGroup == "orbiterror")
-		satellites = plugin->getSatellites(QString(), Satellites::OrbitError);
+		filterModel->setSecondaryFilters(group, SatError);
 	else
-		satellites = plugin->getSatellites(ui->groupsCombo->currentText());
-	
-	//satellitesModel->->setSortingEnabled(false);
-	QHashIterator<QString,QString> i(satellites);
-	while (i.hasNext())
 	{
-		i.next();
-		QStandardItem* item = new QStandardItem(i.value());
-		item->setData(i.key(), Qt::UserRole);
-		item->setEditable(false);
-		satellitesModel->appendRow(item);
-		
-		// If a previously selected item is still in the list after the update, select it
-		if (prevMultiSelection.contains(i.key()))
-		{
-			QModelIndex index = filterProxyModel->mapFromSource(item->index());
-			//QModelIndex index = item->index();
-			selectionModel->select(index, QItemSelectionModel::SelectCurrent);
-		}
+		// TODO: Use the data field after translating the group names
+		group = ui->groupsCombo->currentText();
+		filterModel->setSecondaryFilters(group, SatNoFlags);
 	}
-	// Sort the main list (don't sort the filter model directly,
-	// or the displayed list will be scrambled on emptying the filter).
-	satellitesModel->sort(0);
-
+	
+	if (ui->satellitesList->model()->rowCount() <= 0)
+		return;
+	
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	QModelIndex first;
 	if (selectionModel->hasSelection())
 	{
-		//TODO: This is stupid...
-		for (int row = 0; row < ui->satellitesList->model()->rowCount(); row++)
-		{
-			QModelIndex index = ui->satellitesList->model()->index(row, 0);
-			if (selectionModel->isSelected(index))
-			{
-				ui->satellitesList->scrollTo(index, QAbstractItemView::PositionAtTop);
-				break;
-			}
-		}
+		first = selectionModel->selectedRows().first();
 	}
-	else if (ui->satellitesList->model()->rowCount() > 0)
+	else
 	{
-		// If there are any items in the listbox, scroll to the top
-		QModelIndex index = ui->satellitesList->model()->index(0, 0);
-		selectionModel->setCurrentIndex(index, QItemSelectionModel::NoUpdate);
-		ui->satellitesList->scrollTo(index, QAbstractItemView::PositionAtTop);
+		// Scroll to the top
+		first = ui->satellitesList->model()->index(0, 0);
 	}
+	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
+	ui->satellitesList->scrollTo(first);
 }
 
 void SatellitesDialog::reloadSatellitesList()
 {
-	listSatelliteGroup(ui->groupsCombo->currentIndex());
+	filterListByGroup(ui->groupsCombo->currentIndex());
 }
 
 void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
@@ -510,7 +478,7 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 	// Trigger re-loading the list to display the new satellites
 	int index = ui->groupsCombo->findData(QVariant("newlyadded"));
 	if (ui->groupsCombo->currentIndex() == index)
-		listSatelliteGroup(index);
+		filterListByGroup(index);
 	else
 		ui->groupsCombo->setCurrentIndex(index); //Triggers the same operation
 	
@@ -551,6 +519,7 @@ void SatellitesDialog::removeSatellites()
 	if (!idList.isEmpty())
 	{
 		GETSTELMODULE(Satellites)->remove(idList);
+		// TODO: Remove this after implementing model invalidation.
 		reloadSatellitesList();
 		saveSatellites();
 	}
@@ -567,7 +536,6 @@ void SatellitesDialog::setDisplayFlag(bool display)
 		if (sat)
 			sat->displayed = display;
 	}
-	reloadSatellitesList();
 }
 
 void SatellitesDialog::setOrbitFlag(bool display)
@@ -581,7 +549,6 @@ void SatellitesDialog::setOrbitFlag(bool display)
 		if (sat)
 			sat->orbitDisplayed = display;
 	}
-	reloadSatellitesList();
 }
 
 void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
