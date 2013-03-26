@@ -25,8 +25,6 @@
 
 #include "Satellite.hpp"
 
-typedef QSharedPointer<Satellite> SatelliteP;
-
 //! A model encapsulating a satellite list.
 //! Used for GUI presentation purposes.
 //! 

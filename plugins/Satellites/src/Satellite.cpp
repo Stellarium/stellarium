@@ -128,11 +128,11 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 			groups.insert(group.toString());
 	}
 
+	// TODO: Somewhere here - some kind of TLE validation.
 	QString line1 = map.value("tle1").toString();
 	QString line2 = map.value("tle2").toString();
 	setNewTleElements(line1, line2);
-	internationalDesignator = extractInternationalDesignator(line1);
-	StelUtils::getJDFromDate(&jdLaunchYearJan1, extractLaunchYear(line1), 1, 1, 0, 0, 0);
+	parseInternationalDesignator(line1);
 
 	if (map.contains("lastUpdated"))
 	{
@@ -431,54 +431,67 @@ void Satellite::recalculateOrbitLines(void)
 	orbitPoints.clear();
 }
 
-QString Satellite::extractInternationalDesignator(const QString& tle1)
+Satellite::Flags Satellite::getFlags()
 {
-	QString result;
-	if (tle1.isEmpty())
-		return result;
-	
-	// The designator is encoded as the 3rd group on the first line
-	QString rawString = tle1.split(' ').at(2);
-	if (rawString.isEmpty())
-		return result;
-	
-	//TODO: Use a regular expression?
-	bool ok;
-	int year = rawString.left(2).toInt(&ok);
-	if (!ok)
-		return result;
-	
-	// Y2K bug :) I wonder what NORAD will do in 2057. :)
-	if (year < 57)
-		year += 2000;
-	else
-		year += 1900;
-	
-	result = QString::number(year) + "-" + rawString.right(4);
-	return result;
+	// There's also a faster, but less readable way: treating them as uint.
+	Flags flags;
+	if (displayed)
+		flags |= IsDisplayed;
+	if (orbitDisplayed)
+		flags |= IsOrbitDisplayed;
+	if (newlyAdded)
+		flags |= IsNewlyAdded;
+	if (orbitValid)
+		flags |= HasValidOrbit;
+	return flags;
 }
 
-int Satellite::extractLaunchYear(const QString& tle1)
+void Satellite::setFlags(const Flags& flags)
 {
-	if (tle1.isEmpty())
-		return 1957;
+	displayed = flags.testFlag(IsDisplayed);
+	orbitDisplayed = flags.testFlag(IsOrbitDisplayed);
+}
 
-	// The designator is encoded as the 3rd group on the first line
-	QString rawString = tle1.split(' ').at(2);
-	if (rawString.isEmpty())
-		return 1957;
 
+void Satellite::parseInternationalDesignator(const QString& tle1)
+{
+	Q_ASSERT(!tle1.isEmpty());
+	
+	// The designator is encoded as columns 10-17 on the first line.
+	QString rawString = tle1.mid(9, 8);
 	//TODO: Use a regular expression?
 	bool ok;
 	int year = rawString.left(2).toInt(&ok);
-	if (!ok)
-		return 1957;
-
-	// Y2K bug :) I wonder what NORAD will do in 2057. :)
-	if (year < 57)
-		return year + 2000;
+	if (!rawString.isEmpty() && ok)
+	{
+		// Y2K bug :) I wonder what NORAD will do in 2057. :)
+		if (year < 57)
+			year += 2000;
+		else
+			year += 1900;
+		internationalDesignator = QString::number(year) + "-" + rawString.right(4);
+	}
 	else
-		return year + 1900;
+		year = 1957;
+	
+	StelUtils::getJDFromDate(&jdLaunchYearJan1, year, 1, 1, 0, 0, 0);
+	//qDebug() << rawString << internationalDesignator << year;
+}
+
+bool Satellite::operator <(const Satellite& another) const
+{
+	// If interface strings are used, you'll need QString::localeAwareCompare()
+	int comp = name.compare(another.name);
+	if (comp < 0)
+		return true;
+	if (comp > 0)
+		return false;
+	
+	// If the names are the same, compare IDs, i.e. NORAD numbers.
+	if (id < another.id)
+		return true;
+	else
+		return false;
 }
 
 void Satellite::draw(const StelCore* core, StelRenderer* renderer, 
@@ -657,3 +670,18 @@ void Satellite::computeOrbitPoints()
 	}
 }
 
+
+bool operator <(const SatelliteP& left, const SatelliteP& right)
+{
+	if (left.isNull())
+	{
+		if (right.isNull())
+			return false;
+		else
+			return true;
+	}
+	if (right.isNull())
+		return false; // No sense to check the left one now
+	
+	return ((*left) < (*right));
+}
