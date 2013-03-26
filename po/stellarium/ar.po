@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-18 19:27+0700\n"
-"PO-Revision-Date: 2013-01-21 18:16+0000\n"
+"PO-Revision-Date: 2013-03-25 13:27+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-19 05:20+0000\n"
-"X-Generator: Launchpad (build 16532)\n"
+"X-Launchpad-Export-Date: 2013-03-26 04:42+0000\n"
+"X-Generator: Launchpad (build 16540)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -108,7 +108,7 @@ msgstr "سديم كوكبي"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
-msgstr ""
+msgstr "سديم معتم"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
@@ -143,13 +143,13 @@ msgstr "‎زاوية الميل على المدار‎(الحالية للأر�
 #: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr "‎المسافة: ‎%1 وحدة فلكية (‎%2 كم‎)"
+msgstr "‎‎المسافة‎: ‎%1 وحدة فلكية (‎%2 كم‎)"
 
 #: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:252
 #: src/core/modules/Comet.cpp:156
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "المسافة‎: %1 وحدة فلكية"
+msgstr "‎المسافة‎‎: %1 وحدة فلكية"
 
 #: src/core/modules/Planet.cpp:492
 #, qt-format
@@ -244,7 +244,7 @@ msgstr "‎النوع الطيفي:‎ %1"
 #: plugins/Exoplanets/src/Exoplanet.cpp:214
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "سنة ضوئية %1 :المسافة"
+msgstr "‎المسافة‎: %1 سنة ضوئية"
 
 #: src/core/modules/StarWrapper.cpp:150
 #, qt-format
@@ -258,6 +258,7 @@ msgstr "السفينة الفضائية"
 #: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"التصحيح غير مفعّل. لاتستخدم هذا الخيار إلا عندما تعلم معنى إلغاء التصحيح."
 
 #: src/core/StelCore.cpp:1422
 #, qt-format
@@ -266,6 +267,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"هذه الصيغة الرياضية تحصل عليها C. Schoch عام 1931 م واستخدمها G. Henriksson "
+"في مقالته \"نظرية آينشتاين النسبية تؤكدها الكسوفات التاريخية القديمة\" (%1). "
+"لمزيد من المعلومات انظر %2هنـــــا%3."
 
 #: src/core/StelCore.cpp:1425
 #, qt-format
@@ -273,6 +277,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"هذه المعادلة المبنية على الملاحظات نشرها G. M. Clemence في مقالته  \"عن نظام "
+"الثوابت الفلكية\" (%1)."
 
 #: src/core/StelCore.cpp:1428
 #, qt-format
@@ -282,6 +288,9 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"هذه الصيغة مبنية على دراسة لرصد الشمس والقمر والكواكب في الفترة مابعد 1650 م "
+"من قبل Spencer Jones ـ (%1) ـ واستخدمها  Jean Meeus في كتابه \" الصيغ "
+"الفلكية للآلات الحاسبة\". واستعملت في برنامج الحاسب  SunTracker Pro."
 
 #: src/core/StelCore.cpp:1432
 msgid ""
@@ -289,6 +298,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"<P DIR=RTL>هذه صيغة معدّلة تعديلاً طفيفاً من صيغة (1952) IAU وتبنّاها Mucke "
+"& Meeuse سنة (1983) في <em>Astronomical Ephemeris</em> وفي <em>Canon of "
+"Solar Eclipses</em>"
 
 #: src/core/StelCore.cpp:1436
 msgid ""
@@ -297,6 +309,9 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"جداول (1962، 1964)  Tuckerman تحوي قائمة بمواقع الشمس والقمر والكواكب من عام "
+"601 قبل الميلاد حتى 1649 م في فترات يفصل بينها 5 و 10 أيام. نفس العلاقات "
+"تضمنتها جداول سيزيجي (1973) لـ Goldstine ."
 
 #: src/core/StelCore.cpp:1440
 #, qt-format
@@ -305,6 +320,9 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"هذه المعادلة نشرها P. M. Muller و F. R. Stephenson في المقالة <em>The "
+"accelerations of the earth and moon from early astronomical "
+"observations</em> ـ (%1)."
 
 #: src/core/StelCore.cpp:1443
 #, qt-format
@@ -312,6 +330,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"هذه المعادلة نشرها F. R. Stephenson في المقالة <em>Pre-Telescopic "
+"Astronomical Observations</em> ـ (%1)."
 
 #: src/core/StelCore.cpp:1446
 #, qt-format
@@ -321,6 +341,10 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"متعددة الحدود من الترتيب الأثني عشر حل محلها مانشره L. D. Schmadel و G. Zech "
+" في المقالة <em>Polynomial approximations for the correction delta T E.T.-"
+"U.T. in the period 1800-1975</em> ـ (%1) كما توافق مع البيانات التي نشرها "
+"Brouwer سنة (1952)."
 
 #: src/core/StelCore.cpp:1449
 msgid ""
@@ -328,6 +352,8 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"هذه الخوارزمية تبناها P. Bretagnon & L. Simon's في \"برامج حسابات الكواكب من "
+"-4000 حتى +2800\" ـ(1986) وفي برنامج القبة الفلكية  RedShift."
 
 #: src/core/StelCore.cpp:1452
 #, qt-format
@@ -336,10 +362,12 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"هذه الصيغة نشرها F. R. Stephenson و L. V. Morrison في المقالة \"التغيرات "
+"طويلة المدى في دوران الأرض - 700 قبل الميلاد حتى 1980 م\" (%1)."
 
 #: src/core/StelCore.cpp:1455
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "هذه الخوارزمية مستخدمة في البرنامج الحاسوبي Guide 7."
 
 #: src/core/StelCore.cpp:1458
 msgid ""
@@ -347,6 +375,8 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"هذه الخوارزمية نشرها F. Espenak في \"لائحة بالكسوفات الشمسية من 1986 إلى "
+"2035\" وفي \"لائحة بالخسوفات القمرية من 1986 إلى 2035\" (1989)."
 
 #: src/core/StelCore.cpp:1461
 #, qt-format
@@ -354,6 +384,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"هذه الصيغة تحصّل عليها (%1) K.M. Borkowski من تحليل سجلات 31 كسوفا شمسياً "
+"بين سنة 2137 قبل الميلاد وسنة 1715 م."
 
 #: src/core/StelCore.cpp:1464
 #, qt-format
@@ -363,6 +395,9 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"متعددة الحدود من الترتيب الثاني عشر نشرها  L. D. Schmadel و G. Zech في "
+"مقالتهما \"Empirical Transformations from U.T. to E.T. for the Period 1800-"
+"1988\" ـ(%1) كتوفيق للبيانات المعطاة من قبل Stephenson & Morrison ـ(1984)."
 
 #: src/core/StelCore.cpp:1467
 msgid ""
@@ -370,6 +405,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"هذه الصيغة تبنّاها M. Chapront-Touze & J. Chapront في النسخة المختصرة من "
+"نظرية ELP 2000-85 القمرية في \"جداول وبرامج القمر من 4000 قبل الميلاد حتى "
+"8000 م\" (1991)."
 
 #: src/core/StelCore.cpp:1470
 #, qt-format
@@ -378,6 +416,8 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"هذه المعادلة نشرها F. R. Stephenson و L. V. Morrison في المقالة \" التذبذبات "
+"طويلة المدى في دوران الأرض: 700 قبل الميلاد حتى 1900 م\" (%1)."
 
 #: src/core/StelCore.cpp:1473
 #, qt-format
@@ -385,6 +425,8 @@ msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
+"نشر F. R. Stephenson هذه الصيغة في كتابه \"الكسوفات التاريخية ودوران الأرض\" "
+"(%1)."
 
 #: src/core/StelCore.cpp:1476
 msgid ""
@@ -392,6 +434,9 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"من \"خوارزميات فلكية\" (الطبعة الثانية، 1998) لـ  J. Meeus . جدول منتشر "
+"الاستخدام للسنين 1620 - 2000 ويتضمن نسخة معدلة من (1997) Chapront, Chapront-"
+"Touze & Francou للتواريخ خارج نطاق 1620..2000."
 
 #: src/core/StelCore.cpp:1479
 #, qt-format
@@ -399,6 +444,8 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"مجموعة  JPL Solar System Dynamics Group التابعة لناسا تستخدم هذه الصيغة في "
+"موقعها التفاعلي %1JPL Horizons%2."
 
 #: src/core/StelCore.cpp:1482
 #, qt-format
@@ -406,6 +453,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"متعددة الحدود هذه نشرها  J. Meeus and L. Simons في مقالتهما \"متعددة حدود "
+"تقريبية لدلتا تي، 1620 - 2000 م\" (%1)."
 
 #: src/core/StelCore.cpp:1485
 msgid ""
@@ -413,6 +462,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"الطبعة الرابعة من كتاب O. Montenbruck & T. Pfleger \"الفلك على الحاسب "
+"الشخصي\" (2000) تحوي متعددة حدود بسيطة من الترتيب الثالث لتوفيق البيانات من "
+"الماضي القريب."
 
 #: src/core/StelCore.cpp:1488
 msgid ""
@@ -421,6 +473,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"متعددة الحدود هذه الناتجة من توفيق البيانات عرضها E. M. Reingold & N. "
+"Dershowitz في \" حسابات التقويم\" (الطبعة الثالثة 2007) وفي \"جدولة "
+"التقاويم\" (2002). وهي مبنية على \"خوارزميات فلكية\" (طبعة 1991) لـ   Jean "
+"Meeus."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -429,6 +485,8 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"هذا الحل المهم نشره L. V. Morrison and F. R. Stephenson في المقالة \"القيم "
+"التاريخية لخطأ الساعة الأرضية %1T وحسابات الكسوفات\" (%2) مع زيادات في (%3)."
 
 #: src/core/StelCore.cpp:1494
 #, qt-format
@@ -438,6 +496,9 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"من طول اليوم الذي حدّده Stephenson & Morrison في (%2)، استنتج Victor Reijs "
+"صيغة لـ  %1T  باستخدام استمثال مبسط مع دالة تربيعية وجيب تمامية. ينبني هذا "
+"على دورة محتملة كما وصفها Stephenson في (%2). للاستزادة %3هنـــــا%4."
 
 #: src/core/StelCore.cpp:1497
 #, qt-format
@@ -448,17 +509,22 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"هذا الحل وضعه F. Espenak and J. Meeus بناءاً على (2004)  Morrison & "
+"Stephenson وعلى توفيق جدول بيانات للسنين 1600 - 2000 للخروج بمتعددة حدود، "
+"ويستخدم في موقع %1NASA Eclipse Web Site%2 وفي \"لائحة للكسوفات الشمسية لمدة "
+"5000 سنة: من -1900 حتى +3000\" (2006). وهذه الصيغة مستخدمة أيضاً في برنامج "
+"التقويم الفلكي للشمس والقمر والكواكب SOLEX."
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
-msgstr ""
+msgstr "مستخدم افتراضياً"
 
 #: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
-msgstr ""
+msgstr "هذه صيغة رباعية لحساب %1T بمعاملات معرّفة من قبل المستخدم."
 
 #: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -466,31 +532,33 @@ msgstr "خطأ"
 
 #: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "القيم خارج نطاق هذه الحقبة ليس لها معنى"
 
 #: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"متوسط الخطأ أقل من ثانية واحدة، والحد الأقصى للخطأ 1.9 ثانية والقيم خارج "
+"نطاق هذه الحقبة لامعنى لها"
 
 #: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "هذا الحل يعطي أصفاراً للقيم خارج نطاق الحقبة الزمنية."
 
 #: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
-msgstr ""
+msgstr "بدقة نموذجية تساوي ثانية واحدة وبقيم صفرية خارج نطاق الحقبة"
 
 #: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "صالح للاستخدام في الحقبة بين  سنة %1 و %2، %3."
 
 #: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "صالح للاستخدام في الحقبة بين سنة %1 و %2."
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -611,7 +679,7 @@ msgstr "‎الميل / المطلع المستقيم ‎(‎الحالي‎):�
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "‎العرض/الطول المجرّي‎: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -760,116 +828,116 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Algorithm of"
-msgstr ""
+msgstr "خوارزمية حساب"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
-msgstr ""
+msgstr "بدون تصحيح"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "Astronomical Ephemeris (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller & Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel & Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel & Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus & Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "%1T معادلة مخصّصة لـ"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -1009,7 +1077,7 @@ msgstr "المطور :%1"
 #: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "تكامل مستمر: %1"
 
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
@@ -1217,20 +1285,20 @@ msgstr "الختصار البديل"
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "معادلة مخصّصة لـ %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "مثال لمعادلة حساب %1T تبدو كالتالي:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
-msgstr ""
+msgstr "where"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "year"
-msgstr ""
+msgstr "السنة"
 
 #: src/main.cpp:367
 msgid "This system does not support OpenGL."
@@ -1688,7 +1756,7 @@ msgstr "توبي - جواراني"
 
 #: src/translations.h:178
 msgid "Tongan"
-msgstr ""
+msgstr "تونغان"
 
 #: src/translations.h:179
 msgid "Western"
@@ -3361,7 +3429,7 @@ msgstr "حرِّك التلسكوب إلى إحداثيات معيَّنة"
 
 #: src/translations.h:655
 msgid "Show renderer statistics"
-msgstr ""
+msgstr "أظهر إحصائيات مولِّد الرسومات"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:658 src/ui_configurationDialog.h:1160
@@ -3732,7 +3800,7 @@ msgstr "المقياس النسبي"
 
 #: src/ui_viewDialog.h:1216
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "سطوع درب التبّانة"
 
 #: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -3753,27 +3821,27 @@ msgstr "وابل الشهب"
 
 #: src/ui_viewDialog.h:1224
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "معدل عدد الشهب السمتي كل ساعة"
 
 #: src/ui_viewDialog.h:1226
 msgid "ZHR:"
-msgstr ""
+msgstr "شهاب/ساعة"
 
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
-msgstr ""
+msgstr "حد القدر (للعين المجردة أو بالمنظار الثنائي)"
 
 #: src/ui_viewDialog.h:1231
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "تحديد قدر السطوع"
 
 #: src/ui_viewDialog.h:1233
 msgid "Stars to magnitude"
-msgstr ""
+msgstr "النجوم حتى قدر سطوع"
 
 #: src/ui_viewDialog.h:1237
 msgid "Nebulas to magitude"
-msgstr ""
+msgstr "السدم حتى قدر سطوع"
 
 #: src/ui_viewDialog.h:1240
 msgid "Constellations"
@@ -4063,11 +4131,11 @@ msgstr "يخفي مؤشر الفأرة في حالة عدم النشاط"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "مهلة إخفاء مؤشر الفأرة (بالثواني)‏"
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
-msgstr ""
+msgstr "ثوانٍ"
 
 #: src/ui_configurationDialog.h:1065
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
@@ -4106,11 +4174,11 @@ msgstr "تاريخ النظام عند:"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Time correction"
-msgstr ""
+msgstr "تصحيح الوقت"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
-msgstr ""
+msgstr "حرِّر المعادلة"
 
 #: src/ui_configurationDialog.h:1084
 msgid "Planetarium options"
@@ -4533,17 +4601,17 @@ msgstr "حقل الرؤية الظاهري للعدسة: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "العدسة #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "العدسة #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Lens: none"
-msgstr ""
+msgstr "العدسة: لايوجد"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4590,15 +4658,15 @@ msgstr "المستشعر #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Lens"
-msgstr ""
+msgstr "&العدسة"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous lens"
-msgstr ""
+msgstr "&العدسة السابقة"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next lens"
-msgstr ""
+msgstr "&العدسة التالية"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4622,11 +4690,11 @@ msgstr "العدسة التالية"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "العدسة السابقة"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "العدسة التالية"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4683,19 +4751,19 @@ msgstr "حقل الرؤية الظاهري للعدسة"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "التكبير: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
-msgstr ""
+msgstr "العدسة: لايوجد"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "التكبير: لاينطبق"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of lens"
-msgstr ""
+msgstr "تكبير العدسة"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4712,12 +4780,13 @@ msgstr "حقل الرؤية الفعلي المتاح بواسطة هذا الم
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "التكبير الذي تعطيه هذه العدسة مع العدسة العينية وهذا التلسكوب"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
+"حقل الرؤية الحقيقي الذي تعطيه هذه العدسة مع العدسة العينية وهذا التلسكوب"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4858,7 +4927,7 @@ msgstr "عام"
 #: plugins/Oculars/src/ui_ocularDialog.h:1030
 #: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Eyepieces"
-msgstr "العدسات"
+msgstr "العدسات العينية"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1031
 #: plugins/Oculars/src/ui_ocularDialog.h:1040
@@ -4898,17 +4967,19 @@ msgstr "المنظار الثنائي"
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 #: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid "Lenses"
-msgstr ""
+msgstr "العدسات"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplicity:"
-msgstr ""
+msgstr "التكبير:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
+"قيمة التكبير أكبر من 1 تزيد الطول البؤري (عدسات بارلو)، وقيمة التكبير أقل من "
+"1 تنقص من الطول البؤري (عدسات شابلي)."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1046
 #: plugins/Oculars/src/ui_ocularDialog.h:1056
@@ -7046,27 +7117,27 @@ msgstr ""
 #. TRANSLATORS: Full phrase: Exoplanet detected by transit
 #: plugins/Exoplanets/src/Exoplanet.cpp:172
 msgid "by transit"
-msgstr ""
+msgstr "بالعبور"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
 #: plugins/Exoplanets/src/Exoplanet.cpp:174
 msgid "by radial velocity"
-msgstr ""
+msgstr "بالسرعة الإشعاعية"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by imaging
 #: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "by imaging"
-msgstr ""
+msgstr "بالتصوير"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by astrometry
 #: plugins/Exoplanets/src/Exoplanet.cpp:179
 msgid "by astrometry"
-msgstr ""
+msgstr "بالقياسات الفلكية"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by microlensing
 #: plugins/Exoplanets/src/Exoplanet.cpp:181
 msgid "by microlensing"
-msgstr ""
+msgstr "بواسطة عدسة الجاذبية الدقيقة"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Metallicity"
@@ -7131,7 +7202,7 @@ msgstr "سنة الاكتشاف"
 #. TRANSLATORS: Exoplanet detected
 #: plugins/Exoplanets/src/Exoplanet.cpp:250
 msgid "Detected"
-msgstr ""
+msgstr "باستشعارها"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"

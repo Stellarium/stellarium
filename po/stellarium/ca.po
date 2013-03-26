@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-18 19:27+0700\n"
-"PO-Revision-Date: 2013-03-23 23:57+0000\n"
+"PO-Revision-Date: 2013-03-25 08:31+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-25 04:35+0000\n"
+"X-Launchpad-Export-Date: 2013-03-26 04:42+0000\n"
 "X-Generator: Launchpad (build 16540)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -406,6 +406,10 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"Aquesta equació polinòmica de 12è ordre va ser publicada per L. D. Schmadel "
+"i G. Zech a l'article <em>Empirical Transformations from U.T. to E.T. for "
+"the Period 1800-1988</em> (%1) i les dades s'ajusten als valors "
+"proporcionats per Stephenson i Morrison (1984)."
 
 #: src/core/StelCore.cpp:1467
 msgid ""
@@ -413,6 +417,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"Aquesta fórmula va ser adoptada per M. Chapront-Touze i J. Chapront a la "
+"versió curta del la teoria lunar ELP 2000-85 al seu <em>Lunar Tables and "
+"Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
 #: src/core/StelCore.cpp:1470
 #, qt-format
@@ -421,6 +428,9 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"Aquesta equació va ser publicada per F. R. Stephenson i L. V. Morrison a "
+"l'article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
+"1990</em> (%1)."
 
 #: src/core/StelCore.cpp:1473
 #, qt-format
@@ -437,6 +447,9 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"De J. Meeus, <em>Astronomical Algorithms</em> (2a ed., 1998), i ampliament "
+"utilitzat. Taula per 1620..2000, i inclou una variant de Chapront, Chapront-"
+"Touze i Francou (1997) per dades fora de 1620..2000."
 
 #: src/core/StelCore.cpp:1479
 #, qt-format
@@ -444,6 +457,9 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"El Grup de Sistemes Dinàmics del Sistema Solar del JPL (Jet Propulsion "
+"Laboratory) de la NASA fa servir aquesta fórmula al seu web interactiu %1JPL "
+"Horizons%2."
 
 #: src/core/StelCore.cpp:1482
 #, qt-format
@@ -451,6 +467,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"Aquest polinomi va ser publicat per J. Meeus i L. Simon al seu article "
+"<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
 #: src/core/StelCore.cpp:1485
 msgid ""
@@ -458,6 +476,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"La quarta edició de O. Montenbruck i T. Pfleger <em>Astronomy on the "
+"Personal Computer</em> (2000) proporciona polinòmics simples de 3è ordre "
+"quadrant les dades del passat recent."
 
 #: src/core/StelCore.cpp:1488
 msgid ""
@@ -466,6 +487,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold i N. Dershowitz presenten aquesta aproximació polinòmica a "
+"<em>Calendrical Calculations</em> (3è ed. 2007) i al seu <em>Calendrical "
+"Tabulations</em> (2002). Es basat en <em>Astronomical Algorithms</em> (1991) "
+"de Jean Meeus."
 
 #: src/core/StelCore.cpp:1491
 #, qt-format
@@ -474,6 +499,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Aquesta solució important va ser publicada per L. V. Morrison i F. R. "
+"Stephenson al seu article <em>Historical values of the Earth's clock error "
+"%1T and the calculation of eclipses</em> (%2) amb apèndix a (%3)."
 
 #: src/core/StelCore.cpp:1494
 #, qt-format
@@ -483,6 +511,10 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Des de la Llargada del Dia (LdD; definit per Stephenson i Morrison (%2)), "
+"Victor Reijs va derivar una fórmula %1T mitjançant una optimització simple "
+"amb un cosinus i la funció quadrada. Això es basa en una periodicitat "
+"possible descrit per Stephenson (%2). Veure més informació %3aquí%4."
 
 #: src/core/StelCore.cpp:1497
 #, qt-format
@@ -493,6 +525,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Aquesta solució de F. Espenak i Meeus J., basada en Morrison i Stephenson "
+"(2004) i un ajust polinòmic a través dels valors tabulats per 1600-2000, "
+"s'utilitza per la %1web d'eclipsi de la NASA%2 i en el seu <em>Five "
+"Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). Aquesta "
+"fórmula s'utilitza també a les efemèrides solar, lunar i planetària del "
+"programari SOLEX."
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
@@ -855,15 +893,15 @@ msgstr "Schmadel i Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr "Morrison & Stephenson (1982)"
+msgstr "Morrison i Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr "Stephenson & Morrison (1984)"
+msgstr "Stephenson i Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr "Stephenson & Houlden (1986)"
+msgstr "Stephenson i Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
@@ -895,7 +933,7 @@ msgstr "Meeus (1998) (aamb Chapront, Chapront-Touze i Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
@@ -3817,11 +3855,11 @@ msgstr "Estels fugaços"
 
 #: src/ui_viewDialog.h:1224
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Tasa horari zenital"
 
 #: src/ui_viewDialog.h:1226
 msgid "ZHR:"
-msgstr ""
+msgstr "THZ:"
 
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4127,7 +4165,7 @@ msgstr "Amaga el cursor del ratoli quan estigui inactiu"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "Temps d'espera del cursor del ratolí:"
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
@@ -4786,6 +4824,8 @@ msgstr "Augment previst per aquesta combinació ocular/lent/telescopi"
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
+"Camp de visió actual proporcionat per aquest combinació de "
+"ocular/lent/telescopi"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4977,6 +5017,8 @@ msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
+"Valors de multiplicador >1 amplia la llargada focal (lent Barlow). Valors de "
+"multiplicador <1 redueix la llargada focal (lent Shapley)."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1046
 #: plugins/Oculars/src/ui_ocularDialog.h:1056
