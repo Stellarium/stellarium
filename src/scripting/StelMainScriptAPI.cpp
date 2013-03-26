@@ -131,12 +131,21 @@ double StelMainScriptAPI::getMJDay() const
 	return StelApp::getInstance().getCore()->getMJDay();
 }
 
-void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
+void StelMainScriptAPI::setDate(const QString& dt, const QString& spec, const bool &enableDeltaT)
 {
 	double JD = jdFromDateString(dt, spec);
 	StelCore* core = StelApp::getInstance().getCore();
-	// add Delta-T correction for date
-	core->setJDay(JD + core->getDeltaT(JD)/86400);
+	if (enableDeltaT)
+	{
+		// add Delta-T correction for date
+		core->setJDay(JD + core->getDeltaT(JD)/86400);
+	}
+	else
+	{
+		// set date without Delta-T correction
+		// compatible with 0.11
+		core->setJDay(JD);
+	}
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
