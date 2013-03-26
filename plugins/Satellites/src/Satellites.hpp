@@ -28,7 +28,6 @@
 
 #include <QDateTime>
 #include <QFile>
-#include <QSharedPointer>
 #include <QVariantMap>
 
 class StelButton;
@@ -42,8 +41,6 @@ class QTimer;
 
 class SatellitesDialog;
 class SatellitesListModel;
-
-typedef QSharedPointer<Satellite> SatelliteP;
 
 //! Data structure containing unvalidated TLE set as read from a TLE list file.
 struct TleData
