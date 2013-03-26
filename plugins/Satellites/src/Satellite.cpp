@@ -431,25 +431,25 @@ void Satellite::recalculateOrbitLines(void)
 	orbitPoints.clear();
 }
 
-Satellite::Flags Satellite::getFlags()
+SatFlags Satellite::getFlags()
 {
 	// There's also a faster, but less readable way: treating them as uint.
-	Flags flags;
+	SatFlags flags;
 	if (displayed)
-		flags |= IsDisplayed;
+		flags |= SatIsDisplayed;
 	if (orbitDisplayed)
-		flags |= IsOrbitDisplayed;
+		flags |= SatOrbitIsDisplayed;
 	if (newlyAdded)
-		flags |= IsNewlyAdded;
+		flags |= SatIsNewlyAdded;
 	if (orbitValid)
-		flags |= HasValidOrbit;
+		flags |= SatHasValidOrbit;
 	return flags;
 }
 
-void Satellite::setFlags(const Flags& flags)
+void Satellite::setFlags(const SatFlags& flags)
 {
-	displayed = flags.testFlag(IsDisplayed);
-	orbitDisplayed = flags.testFlag(IsOrbitDisplayed);
+	displayed = flags.testFlag(SatIsDisplayed);
+	orbitDisplayed = flags.testFlag(SatOrbitIsDisplayed);
 }
 
 
