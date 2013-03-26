@@ -436,20 +436,22 @@ SatFlags Satellite::getFlags()
 	// There's also a faster, but less readable way: treating them as uint.
 	SatFlags flags;
 	if (displayed)
-		flags |= SatIsDisplayed;
+		flags |= SatDisplayed;
+	else
+		flags |= SatNotDisplayed;
 	if (orbitDisplayed)
-		flags |= SatOrbitIsDisplayed;
+		flags |= SatOrbit;
 	if (newlyAdded)
-		flags |= SatIsNewlyAdded;
-	if (orbitValid)
-		flags |= SatHasValidOrbit;
+		flags |= SatNew;
+	if (!orbitValid)
+		flags |= SatError;
 	return flags;
 }
 
 void Satellite::setFlags(const SatFlags& flags)
 {
-	displayed = flags.testFlag(SatIsDisplayed);
-	orbitDisplayed = flags.testFlag(SatOrbitIsDisplayed);
+	displayed = flags.testFlag(SatDisplayed);
+	orbitDisplayed = flags.testFlag(SatOrbit);
 }
 
 

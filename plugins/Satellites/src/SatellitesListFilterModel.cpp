@@ -20,7 +20,7 @@
 
 SatellitesListFilterModel::SatellitesListFilterModel(QObject *parent) :
     QSortFilterProxyModel(parent),
-    filterFlag(SatHasNoFlags)
+    filterFlag(SatNoFlags)
 {
 }
 
@@ -53,7 +53,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	// TODO: find out if the NoFlags trick actually works
 	QVariant data = index.data(Qt::UserRole + 1);
 	SatFlags flags = data.value<SatFlags>();
-	if (!flags.testFlag(filterFlag))
+	if (!(flags & filterFlag).testFlag(filterFlag))
 		return false;
 	
 	// Check group
