@@ -25,7 +25,7 @@ SatellitesListModel::SatellitesListModel(QList<SatelliteP>* satellites,
                                          QObject* parent) :
     QAbstractTableModel(parent),
     satelliteList(0),
-    coloredNames(false)
+    coloredNames(true)
 {
 	Q_ASSERT(satellites);
 	
@@ -64,7 +64,7 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 			return (sat->name);
 			
 		case Qt::ForegroundRole:
-			if (!coloredNames)
+			if (coloredNames)
 			{
 				const Vec3f& c = sat->hintColor;
 				return QBrush(QColor::fromRgbF(c[0],c[1],c[2]));
