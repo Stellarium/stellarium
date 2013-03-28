@@ -203,10 +203,20 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		sign = -1;
 		input = input.mid(negativePrefix(prefix).length());
 	}
-	else
+	else if (input.startsWith(positivePrefix(prefix), Qt::CaseInsensitive)) 
 	{
 		sign = 1;
 		input = input.mid(positivePrefix(prefix).length());
+	}
+	else if (input.startsWith("-", Qt::CaseInsensitive))
+	{
+		sign = -1;
+		input = input.mid(1);
+	}
+	else if (input.startsWith("+", Qt::CaseInsensitive))
+	{
+		sign = 1;
+		input = input.mid(1);
 	}
 
 	QRegExp dmsRx("^\\s*(\\d+)\\s*[d\\x00b0](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", 
