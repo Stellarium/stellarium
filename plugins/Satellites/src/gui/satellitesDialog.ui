@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
+    <width>530</width>
     <height>494</height>
    </rect>
   </property>
@@ -120,7 +120,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -443,205 +443,28 @@
          </item>
          <item>
           <widget class="QListView" name="satellitesList">
+           <property name="toolTip">
+            <string>Double-click a satellite to start tracking it.</string>
+           </property>
            <property name="selectionMode">
             <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QCheckBox" name="visibleCheckbox">
-             <property name="toolTip">
-              <string>Display the selected satellite(s)</string>
-             </property>
-             <property name="text">
-              <string>Displayed</string>
-             </property>
-             <property name="tristate">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="orbitCheckbox">
-             <property name="toolTip">
-              <string>Display orbit line(s) for the selected satellite(s)</string>
-             </property>
-             <property name="text">
-              <string>Orbit</string>
-             </property>
-             <property name="tristate">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Name:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="idLineEdit">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayoutCatalogNumber">
-           <item>
-            <widget class="QLabel" name="labelCatalogNumber">
-             <property name="text">
-              <string>Catalog number:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="lineEditCatalogNumber">
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_6">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Description:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTextEdit" name="descriptionTextEdit">
-             <property name="font">
-              <font>
-               <family>Bitstream Vera Sans</family>
-              </font>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Groups:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTextEdit" name="groupsTextEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>20</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Bitstream Vera Sans</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Comma separated list of groups</string>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>TLE data:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTextEdit" name="tleTextEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>20</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Bitstream Vera Sans Mono</family>
-               <pointsize>8</pointsize>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>NORAD two line element orbit data</string>
-             </property>
-             <property name="horizontalScrollBarPolicy">
-              <enum>Qt::ScrollBarAlwaysOn</enum>
-             </property>
-             <property name="lineWrapMode">
-              <enum>QTextEdit::NoWrap</enum>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+            <widget class="QPushButton" name="addSatellitesButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
+             <property name="toolTip">
+              <string>Add more satellites</string>
              </property>
-            </spacer>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="removeSatellitesButton">
@@ -653,19 +476,6 @@
              </property>
              <property name="toolTip">
               <string>Remove the selected satellites</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="addSatellitesButton">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="toolTip">
-              <string>Add more satellites</string>
              </property>
             </widget>
            </item>
@@ -704,6 +514,186 @@
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+             <property name="buddy">
+              <cstring>idLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="idLineEdit">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutCatalogNumber">
+           <item>
+            <widget class="QLabel" name="labelCatalogNumber">
+             <property name="text">
+              <string>Catalog number:</string>
+             </property>
+             <property name="buddy">
+              <cstring>lineEditCatalogNumber</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditCatalogNumber">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QCheckBox" name="visibleCheckbox">
+             <property name="toolTip">
+              <string>Display the selected satellite(s)</string>
+             </property>
+             <property name="text">
+              <string>Displayed</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="orbitCheckbox">
+             <property name="toolTip">
+              <string>Display orbit line(s) for the selected satellite(s)</string>
+             </property>
+             <property name="text">
+              <string>Orbit</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Description:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTextEdit" name="descriptionTextEdit">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Groups:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTextEdit" name="groupsTextEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>20</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Comma separated list of groups</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelTle">
+             <property name="text">
+              <string>TLE set:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="tleFirstLineEdit">
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="tleSecondLineEdit">
+             <property name="frame">
+              <bool>false</bool>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -813,15 +803,16 @@
   <tabstop>groupsCombo</tabstop>
   <tabstop>lineEditSearch</tabstop>
   <tabstop>satellitesList</tabstop>
-  <tabstop>visibleCheckbox</tabstop>
-  <tabstop>orbitCheckbox</tabstop>
   <tabstop>idLineEdit</tabstop>
   <tabstop>lineEditCatalogNumber</tabstop>
+  <tabstop>visibleCheckbox</tabstop>
+  <tabstop>orbitCheckbox</tabstop>
   <tabstop>descriptionTextEdit</tabstop>
   <tabstop>groupsTextEdit</tabstop>
-  <tabstop>tleTextEdit</tabstop>
-  <tabstop>removeSatellitesButton</tabstop>
+  <tabstop>tleFirstLineEdit</tabstop>
+  <tabstop>tleSecondLineEdit</tabstop>
   <tabstop>addSatellitesButton</tabstop>
+  <tabstop>removeSatellitesButton</tabstop>
   <tabstop>commsButton</tabstop>
   <tabstop>saveSatellitesButton</tabstop>
   <tabstop>sourceList</tabstop>
