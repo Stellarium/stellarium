@@ -91,7 +91,7 @@ Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: 
 [Languages]
 ; Official translations of GUI of Inno Setup + translation Stellarium specific lines
 Name: "en"; MessagesFile: "compiler:Default.isl,util\ISL\EnglishCM.isl"
-Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl"
+Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl,util\ISL\CatalanCM.isl"
 Name: "co"; MessagesFile: "compiler:Languages\Corsican.isl"
 Name: "cs"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "da"; MessagesFile: "compiler:Languages\Danish.isl"
