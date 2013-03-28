@@ -49,6 +49,7 @@ protected:
 
 public slots:
 	void retranslate();
+	//! Get update settings from the Satellites plug-in.
 	void refreshUpdateValues(void);
 
 private slots:
@@ -60,7 +61,8 @@ private slots:
 	void updateSelectedInfo(const QModelIndex& cur, const QModelIndex& prev);
 	void saveSatellites(void);
 	void setUpdateValues(int hours);
-	void setUpdatesEnabled(int checkState);
+	//! Enables/disables secondary controls and calls refreshUpdateValues().
+	void enableInternetUpdates(bool enabled = true);
 	void updateStateReceiver(Satellites::UpdateState state);
 	void updateCompleteReceiver(int numUpdated, int total, int missing);
 	void sourceEditingDone(void);

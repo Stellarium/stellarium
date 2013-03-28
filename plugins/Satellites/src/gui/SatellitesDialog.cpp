@@ -93,16 +93,20 @@ void SatellitesDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 					this, SLOT(retranslate()));
+	Satellites* plugin = GETSTELMODULE(Satellites);
 
 	// Settings tab / updates group
-	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
+	connect(ui->internetUpdatesCheckbox, SIGNAL(clicked(bool)),
+	        this, SLOT(enableInternetUpdates(bool)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateTLEs()));
-	connect(GETSTELMODULE(Satellites), SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(updateStateReceiver(Satellites::UpdateState)));
-	connect(GETSTELMODULE(Satellites), SIGNAL(tleUpdateComplete(int, int, int)), this, SLOT(updateCompleteReceiver(int, int, int)));
-	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
-	refreshUpdateValues(); // fetch values for last updated and so on
-	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
-	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
+	connect(plugin, SIGNAL(updateStateChanged(Satellites::UpdateState)),
+	        this, SLOT(updateStateReceiver(Satellites::UpdateState)));
+	connect(plugin, SIGNAL(tleUpdateComplete(int, int, int)),
+	        this, SLOT(updateCompleteReceiver(int, int, int)));
+	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)),
+	        this, SLOT(setUpdateValues(int)));
+	// This also calls refreshUpdateValues(), which checks the checkbox.
+	enableInternetUpdates(plugin->getUpdatesEnabled());
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -111,8 +115,13 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	// Settings tab / General settings group
-	connect(ui->labelsGroup, SIGNAL(toggled(bool)), dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Satellite_Labels"), SLOT(setChecked(bool)));
-	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(Satellites), SLOT(setLabelFontSize(int)));
+	QAction* action = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Satellite_Labels");
+	connect(ui->labelsGroup, SIGNAL(clicked(bool)),
+	        action, SLOT(setChecked(bool)));
+	connect(action, SIGNAL(toggled(bool)),
+	        ui->labelsGroup, SLOT(setChecked(bool)));
+	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)),
+	        plugin, SLOT(setLabelFontSize(int)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
@@ -236,8 +245,10 @@ void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
 	ui->lineEditCatalogNumber->setText(sat->id);
 	ui->descriptionTextEdit->setText(sat->description);
 	ui->groupsTextEdit->setText(QStringList(sat->groups.values()).join(", "));
-	QString tleStr = QString("%1\n%2").arg(sat->tleElements.first.data()).arg(sat->tleElements.second.data());
-	ui->tleTextEdit->setText(tleStr);
+	ui->tleFirstLineEdit->setText(sat->tleElements.first.data());
+	ui->tleFirstLineEdit->setCursorPosition(0);
+	ui->tleSecondLineEdit->setText(sat->tleElements.second.data());
+	ui->tleSecondLineEdit->setCursorPosition(0);
 	ui->visibleCheckbox->setChecked(sat->displayed);
 	ui->orbitCheckbox->setChecked(sat->orbitDisplayed);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
@@ -312,13 +323,17 @@ void SatellitesDialog::setAboutHtml(void)
 
 void SatellitesDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Satellites)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Satellites)->getUpdateFrequencyHours());
-	int secondsToUpdate = GETSTELMODULE(Satellites)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
-	if (!GETSTELMODULE(Satellites)->getUpdatesEnabled())
+	Satellites* plugin = GETSTELMODULE(Satellites);
+	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
+	int secondsToUpdate = plugin->getSecondsToUpdate();
+	
+	bool updatesEnabled = plugin->getUpdatesEnabled();
+	ui->internetUpdatesCheckbox->setChecked(updatesEnabled);
+	
+	if (!updatesEnabled)
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(Satellites)->getUpdateState() == Satellites::Updating)
+	else if (plugin->getUpdateState() == Satellites::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
@@ -334,12 +349,11 @@ void SatellitesDialog::setUpdateValues(int hours)
 	refreshUpdateValues();
 }
 
-void SatellitesDialog::setUpdatesEnabled(int checkState)
+void SatellitesDialog::enableInternetUpdates(bool enabled)
 {
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Satellites)->setUpdatesEnabled(b);
-	ui->updateFrequencySpinBox->setEnabled(b);
-	if(b)
+	GETSTELMODULE(Satellites)->setUpdatesEnabled(enabled);
+	ui->updateFrequencySpinBox->setEnabled(enabled);
+	if(enabled)
 		ui->updateButton->setText(q_("Update now"));
 	else
 		ui->updateButton->setText(q_("Update from files"));
