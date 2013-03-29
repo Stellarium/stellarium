@@ -102,6 +102,10 @@ file.
 class Satellites : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool autoRemoveEnabled
+	           READ isAutoRemoveEnabled
+	           WRITE enableAutoRemove)
+	
 public:
 	//! @enum UpdateState
 	//! Used for keeping track of the download/update status
@@ -247,6 +251,8 @@ public:
 	QStringList getTleSources(void) {return updateUrls;}
 
 	//! Set the list of URLs which are sources of TLE data.
+	//! In addition to replacing the current list of sources, it also
+	//! saves them to the configuration file.
 	void setTleSources(QStringList tleSources);
 	
 	//! Returns the module-specific style sheet.
@@ -268,6 +274,15 @@ public:
 	//! \param openFile a reference to an \b open file.
 	//! \param tleList a hash with satellite IDs (catalog numbers) as keys.
 	static void parseTleFile(QFile& openFile, TleDataHash& tleList);
+	
+	bool getFlagHints() {return hintFader;}
+	//! get the label font size.
+	//! @return the pixel size of the font
+	int getLabelFontSize() {return labelFont.pixelSize();}
+	bool getFlagLabels();
+	//! Get the current status of the orbit line rendering flag.
+	bool getOrbitLinesFlag();
+	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
 
 signals:
 	//! emitted when the update status changes, e.g. when 
@@ -283,14 +298,6 @@ signals:
 	//! @param missing the number of satellites in the JSON data but not found
 	//! in update data.
 	void tleUpdateComplete(int updates, int total, int missing);
-	
-	bool getFlagHints() {return hintFader;}
-	//! get the label font size.
-	//! @return the pixel size of the font
-	int getLabelFontSize() {return labelFont.pixelSize();}
-	bool getFlagLabels();
-	//! Get the current status of the orbit line rendering flag.
-	bool getOrbitLinesFlag();
 
 public slots:
 	// REMINDER: All slots must return void! --BM
@@ -301,11 +308,13 @@ public slots:
 	void setLabelFontSize(int size) {labelFont.setPixelSize(size);}
 
 	void setFlagLabels(bool b);
-
+	
 	//! Download TLEs from web recources described in the module section of the
 	//! module.ini file and update the TLE values for any satellites for which
 	//! there is new TLE data.
 	void updateTLEs(void);
+		
+	void enableAutoRemove(bool enable = true) { autoRemoveEnabled = enable; }
 
 	//! Choose whether or not to draw orbit lines.  Each satellite has its own setting
 	//! as well, but this can be used to turn on/off all those satellites which elect to
@@ -394,16 +403,23 @@ private:
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	QStringList updateUrls;
+	//! List of file paths - either downloaded or selected by the user.
 	QStringList updateFiles;
 	QProgressBar* progressBar;
-	int currentUpdateUrlIdx;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
-	QTimer* messageTimer;
-	QList<int> messageIDs;
+	//! Flag enabling automatic Internet updates.
 	bool updatesEnabled;
+	//! Flag enabling the automatic removal of missing satellites on update.
+	bool autoRemoveEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
+	//@}
+	
+	//! @name Screen message infrastructure
+	//@{
+	QTimer* messageTimer;
+	QList<int> messageIDs;
 	//@}
 
 	// GUI
