@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#define ALIGN_UNIFORM_SIZE(x) (((x) + (sizeof(StelQGLGLSLShader::uniformStorage[0])-1)) / sizeof(StelQGLGLSLShader::uniformStorage[0]))
+#define ALIGN_UNIFORM_SIZE(x) (((x) + (sizeof ((StelQGLGLSLShader *)0)->uniformStorage[0]-1)) / sizeof ((StelQGLGLSLShader *)0)->uniformStorage[0])
 
 int StelQGLGLSLShader::UNIFORM_SIZES[UniformType_max] =
 	{0,
