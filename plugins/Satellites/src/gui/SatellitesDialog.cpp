@@ -78,11 +78,7 @@ void SatellitesDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateSettingsPage(); // For the button; also calls updateCountdown()
 		setAboutHtml();
-		// This may be a problem if we add group name translations, as the
-		// sorting order may be different. --BM
-		int index = ui->groupsCombo->currentIndex();
 		populateGroupsList();
-		ui->groupsCombo->setCurrentIndex(index);
 	}
 }
 
@@ -175,24 +171,23 @@ void SatellitesDialog::createDialogContent()
 
 void SatellitesDialog::filterListByGroup(int index)
 {
-	// TODO: Make sure no user groups duplicate these.
-	QString group;
-	QString selectedGroup = ui->groupsCombo->itemData(index).toString();
-	if (selectedGroup == "all")
-		filterModel->setSecondaryFilters(group, SatNoFlags);
-	else if (selectedGroup == "visible")
-		filterModel->setSecondaryFilters(group, SatDisplayed);
-	else if (selectedGroup == "notvisible")
-		filterModel->setSecondaryFilters(group, SatNotDisplayed);
-	else if (selectedGroup == "newlyadded")
-		filterModel->setSecondaryFilters(group, SatNew);
-	else if (selectedGroup == "orbiterror")
-		filterModel->setSecondaryFilters(group, SatError);
+	if (index < 0)
+		return;
+	
+	QString groupId = ui->groupsCombo->itemData(index).toString();
+	if (groupId == "all")
+		filterModel->setSecondaryFilters(QString(), SatNoFlags);
+	else if (groupId == "[displayed]")
+		filterModel->setSecondaryFilters(QString(), SatDisplayed);
+	else if (groupId == "[undisplayed]")
+		filterModel->setSecondaryFilters(QString(), SatNotDisplayed);
+	else if (groupId == "[newlyadded]")
+		filterModel->setSecondaryFilters(QString(), SatNew);
+	else if (groupId == "[orbiterror]")
+		filterModel->setSecondaryFilters(QString(), SatError);
 	else
 	{
-		// TODO: Use the data field after translating the group names
-		group = ui->groupsCombo->currentText();
-		filterModel->setSecondaryFilters(group, SatNoFlags);
+		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 	}
 	
 	if (ui->satellitesList->model()->rowCount() <= 0)
@@ -241,12 +236,24 @@ void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
 	disconnectSatelliteGuiForm();
 	ui->idLineEdit->setText(sat->name);
 	ui->lineEditCatalogNumber->setText(sat->id);
+	// Deliberately the untranslated description!
 	ui->descriptionTextEdit->setText(sat->description);
-	ui->groupsTextEdit->setText(QStringList(sat->groups.values()).join(", "));
+	
+	// Groups
+	QStringList groups;
+	foreach (const QString& group, sat->groups)
+	{
+		groups.append(q_(group));
+	}
+	groups.sort();
+	ui->groupsTextEdit->setText(groups.join(", "));
+	
+	// TLE set
 	ui->tleFirstLineEdit->setText(sat->tleElements.first.data());
 	ui->tleFirstLineEdit->setCursorPosition(0);
 	ui->tleSecondLineEdit->setText(sat->tleElements.second.data());
 	ui->tleSecondLineEdit->setCursorPosition(0);
+	
 	ui->visibleCheckbox->setChecked(sat->displayed);
 	ui->orbitCheckbox->setChecked(sat->orbitDisplayed);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
@@ -455,14 +462,41 @@ void SatellitesDialog::updateSettingsPage()
 
 void SatellitesDialog::populateGroupsList()
 {
-	// TODO: Preserve selection! --BM
+	// Save current selection, if any...
+	QString selectedId;
+	int index = ui->groupsCombo->currentIndex();
+	if (ui->groupsCombo->count() > 0 && index >= 0)
+	{
+		selectedId = ui->groupsCombo->itemData(index).toString();
+	}
+	
+	// Populate with group names/IDs
 	ui->groupsCombo->clear();
-	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroupIdList());
-	ui->groupsCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("orbiterror"));
-	ui->groupsCombo->insertItem(0, q_("[all newly added]"), QVariant("newlyadded"));
-	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("notvisible"));
-	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("visible"));
+	foreach (const QString& group, GETSTELMODULE(Satellites)->getGroupIdList())
+	{
+		ui->groupsCombo->addItem(q_(group), group);
+	}
+	ui->groupsCombo->model()->sort(0);
+	
+	// Add special groups - their IDs deliberately use JSON-incompatible chars.
+	ui->groupsCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("[orbiterror]"));
+	ui->groupsCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
+	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
+	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
 	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
+	
+	// Restore current selection
+	// Nothing is supposed to be changed, so prevent the list from re-filtering
+	ui->groupsCombo->blockSignals(true);
+	index = 0;
+	if (!selectedId.isEmpty())
+	{
+		index = ui->groupsCombo->findData(selectedId);
+		if (index < 0)
+			index = 0;
+	}
+	ui->groupsCombo->setCurrentIndex(index);
+	ui->groupsCombo->blockSignals(false);
 }
 
 void SatellitesDialog::populateSourcesList()
@@ -484,7 +518,8 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 	saveSatellites();
 	
 	// Trigger re-loading the list to display the new satellites
-	int index = ui->groupsCombo->findData(QVariant("newlyadded"));
+	int index = ui->groupsCombo->findData(QVariant("[newlyadded]"));
+	// TODO: Unnecessary once the model can handle changes? --BM
 	if (ui->groupsCombo->currentIndex() == index)
 		filterListByGroup(index);
 	else
