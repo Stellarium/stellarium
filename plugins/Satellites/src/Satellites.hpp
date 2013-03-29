@@ -369,6 +369,9 @@ private:
 	//! Make a satellite catalog structure from current satellite data.
 	//! @return a representation of a JSON file.
 	QVariantMap createDataMap();
+	
+	//! Sets lastUpdate to the current date/time and saves it to the settings.
+	void markLastUpdate();
 
 	//! Path to the satellite catalog file.
 	QString catalogPath;
@@ -402,8 +405,10 @@ private:
 	//@{
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
+	//! List of TLE source lists for automatic updates.
+	//! See also setTleSources().
 	QStringList updateUrls;
-	//! List of file paths - either downloaded or selected by the user.
+	//! File paths to - either downloaded or selected by the user.
 	QStringList updateFiles;
 	QProgressBar* progressBar;
 	int numberDownloadsComplete;

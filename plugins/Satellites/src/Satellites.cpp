@@ -521,6 +521,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("show_satellite_hints", false);
 	conf->setValue("show_satellite_labels", true);
 	conf->setValue("updates_enabled", true);
+	conf->setValue("auto_remove_enabled", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
 	conf->setValue("hint_font_size", 10);
 	conf->setValue("tle_url0", "http://celestrak.com/NORAD/elements/noaa.txt");
@@ -594,6 +595,7 @@ void Satellites::loadSettings()
 	setFlagHints(conf->value("show_satellite_hints", false).toBool());
 	Satellite::showLabels = conf->value("show_satellite_labels", true).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
+	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
 
 	// Get a font for labels
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
@@ -634,6 +636,7 @@ void Satellites::saveSettings()
 	conf->setValue("show_satellite_hints", getFlagHints());
 	conf->setValue("show_satellite_labels", Satellite::showLabels);
 	conf->setValue("updates_enabled", updatesEnabled );
+	conf->setValue("auto_remove_enabled", autoRemoveEnabled);
 
 	// Get a font for labels
 	conf->setValue("hint_font_size", labelFont.pixelSize());
@@ -784,6 +787,14 @@ QVariantMap Satellites::createDataMap(void)
 	}
 	map["satellites"] = sats;
 	return map;
+}
+
+void Satellites::markLastUpdate()
+{
+	lastUpdate = QDateTime::currentDateTime();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->setValue("Satellites/last_update",
+	               lastUpdate.toString(Qt::ISODate));
 }
 
 QSet<QString> Satellites::getGroups() const
@@ -957,7 +968,8 @@ void Satellites::setFlagLabels(bool b)
 
 void Satellites::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+	if (updatesEnabled && updateState != Updating
+	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
 		updateTLEs();
 }
 
@@ -965,22 +977,27 @@ void Satellites::updateTLEs(void)
 {
 	if (updateState==Satellites::Updating)
 	{
-		qWarning() << "Satellites: already updating...  will not start again current update is complete.";
+		qWarning() << "Satellites: Internet update already in progress!";
 		return;
 	}
 	else
 	{
-		qDebug() << "Satellites: starting update...";
+		qDebug() << "Satellites: starting Internet update...";
 	}
 
-	// TODO: set the time on successful update.
-	lastUpdate = QDateTime::currentDateTime();
-	QSettings* conf = StelApp::getInstance().getSettings();
-	conf->setValue("Satellites/last_update", lastUpdate.toString(Qt::ISODate));
+	// Setting lastUpdate should be done only when the update is finished. -BM
 
-	if (updateUrls.size() == 0)
+	// TODO: Perhaps tie the emptyness of updateUrls to updatesEnabled... --BM
+	if (updateUrls.isEmpty())
 	{
-		qWarning() << "Satellites::updateTLEs no update URLs are defined... nothing to do.";
+		qWarning() << "Satellites: update failed."
+		           << "No update sources are defined!";
+		
+		// Prevent from re-entering this method on the next check:
+		markLastUpdate();
+		// TODO: Do something saner, such as disabling internet updates,
+		// or stopping the timer. --BM
+		
 		emit(tleUpdateComplete(0,satellites.count(),satellites.count()));
 		return;
 	}
@@ -1109,27 +1126,39 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 
 			if (deleteFiles)
 				tleFile.remove();
-
-			if (progressBar)
-				progressBar->setValue(progressBar->value() + 1);
 		}
+		if (progressBar)
+			progressBar->setValue(progressBar->value() + 1);
+	}
+	
+	// Save the update time.
+	// One of the reasons it's here is that lastUpdate is used below.
+	markLastUpdate();
+	
+	if (newTleSets.isEmpty())
+	{
+		qWarning() << "Satellites: update files contain no TLE sets!";
+		updateState = OtherError;
+		emit(updateStateChanged(updateState));
+		return;
 	}
 
 	// Right, we should now have a map of all the elements we downloaded.  For each satellite
 	// which this module is managing, see if it exists with an updated element, and update it if so...
-	int numUpdated = 0;
-	int totalSats = 0;
-	int numMissing = 0;
+	int updatedCount = 0;
+	int totalCount = 0;
+	int missingCount = 0;
+	QStringList toBeRemoved;
 	foreach(const SatelliteP& sat, satellites)
 	{
-		totalSats++;
+		totalCount++;
 		QString id = sat->id;
 		if (newTleSets.contains(id))
 		{
 			TleData newTle = newTleSets.value(id);
-			if (sat->tleElements.first  != newTle.first ||
-					sat->tleElements.second != newTle.second ||
-					sat->name != newTle.name)
+			if (sat->tleElements.first != newTle.first ||
+			    sat->tleElements.second != newTle.second ||
+			    sat->name != newTle.name)
 			{
 				// We have updated TLE elements for this satellite
 				sat->setNewTleElements(newTle.first, newTle.second);
@@ -1139,38 +1168,48 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
-				numUpdated++;
+				updatedCount++;
 			}
 		}
 		else
 		{
-			qWarning() << "Satellites: could not update orbital elements for"
-								 << sat->name
-								 << sat->id
-								 << ": no entry found in the source TLE lists.";
-			numMissing++;
+			if (autoRemoveEnabled)
+				toBeRemoved.append(sat->id);
+			else
+				qWarning() << "Satellites:" << sat->id << sat->name
+				           << "is missing in the update lists.";
+			missingCount++;
 		}
 	}
-
-	if (numUpdated>0)
+	
+	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
+	{
+		qWarning() << "Satellites: purging objects that were not updated...";
+		remove(toBeRemoved);
+	}
+	
+	if (updatedCount > 0 ||
+	        (autoRemoveEnabled && missingCount > 0))
 	{
 		saveDataMap(createDataMap());
+		updateState = CompleteUpdates;
 	}
+	else
+		updateState = CompleteNoUpdates;
+	
+	//TODO: Update the model structure somewhere here. --BM
 
 	delete progressBar;
 	progressBar = NULL;
 
-	qDebug() << "Satellites: updated" << numUpdated << "/" << totalSats
-					 << "satellites.  Update URLs contained" << newTleSets.size() << "objects. "
-					 << "There were" << numMissing << "satellies missing from the update URLs";
-
-	if (numUpdated==0)
-		updateState = CompleteNoUpdates;
-	else
-		updateState = CompleteUpdates;
+	qDebug() << "Satellites: updated" << updatedCount << "/" << totalCount
+	         << "satellites. Update source contained"
+	         << newTleSets.size() << "objects. "
+	         << missingCount
+	         << "satellies were not in the update sources.";
 
 	emit(updateStateChanged(updateState));
-	emit(tleUpdateComplete(numUpdated, totalSats, numMissing));
+	emit(tleUpdateComplete(updatedCount, totalCount, missingCount));
 }
 
 void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList)
@@ -1197,6 +1236,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList)
 		}
 		else
 		{
+			// TODO: Yet another place suitable for a standard TLE regex. --BM
 			if (QRegExp("^1 .*").exactMatch(line))
 				lastData.first = line;
 			else if (QRegExp("^2 .*").exactMatch(line))
