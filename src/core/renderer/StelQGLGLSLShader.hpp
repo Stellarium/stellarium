@@ -429,7 +429,7 @@ protected:
 		Q_ASSERT_X(bound, Q_FUNC_INFO,
 		           "Trying to set a uniform value with an unbound shader");
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
-		Q_ASSERT_X((uniformStorageUsed + UNIFORM_SIZES[kind]) < (UNIFORM_STORAGE / sizeof uniformStorage[0]), Q_FUNC_INFO,
+		Q_ASSERT_X((unsigned)(uniformStorageUsed + UNIFORM_SIZES[kind]) < (UNIFORM_STORAGE / sizeof uniformStorage[0]), Q_FUNC_INFO,
 		           "Uniform storage exceeded");
 		void* ret = static_cast<void*>(&uniformStorage[uniformStorageUsed]);
 		uniformNames[uniformCount] = name;
