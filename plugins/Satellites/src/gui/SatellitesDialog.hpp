@@ -49,10 +49,10 @@ protected:
 
 public slots:
 	void retranslate();
-	//! Get update settings from the Satellites plug-in.
-	void refreshUpdateValues(void);
 
 private slots:
+	//! Update the countdown to the next update.
+	void updateCountdown();
 	//! Filter the satellites list according to the selected (pseudo)group.
 	//! @param index selection index of the groups drop-down list.
 	void filterListByGroup(int index);
@@ -60,9 +60,6 @@ private slots:
 	void reloadSatellitesList();
 	void updateSelectedInfo(const QModelIndex& cur, const QModelIndex& prev);
 	void saveSatellites(void);
-	void setUpdateValues(int hours);
-	//! Enables/disables secondary controls and calls refreshUpdateValues().
-	void enableInternetUpdates(bool enabled = true);
 	void updateStateReceiver(Satellites::UpdateState state);
 	void updateCompleteReceiver(int numUpdated, int total, int missing);
 	void sourceEditingDone(void);
@@ -82,12 +79,18 @@ private slots:
 private:
 	void connectSatelliteGuiForm(void);
 	void disconnectSatelliteGuiForm(void);
-
+	void setAboutHtml();
+	//! Update the Settings tab with values from the plug-in.
+	//! Calls updateCountdown(). Connected to Satellites::settingsChanged().
+	void updateSettingsPage();
+	//! Populates the list of satellite groups on the %Satellites tab.
+	void populateGroupsList();
+	//! Populates the list of sources on the Sources tab.
+	void populateSourcesList();
+	
 	Ui_satellitesDialog* ui;
 	bool satelliteModified;
-	void setAboutHtml(void);
-	void updateGuiFromSettings(void);
-	void populateGroupsList();
+	
 	QTimer* updateTimer;
 	
 	SatellitesImportDialog* importWindow;
