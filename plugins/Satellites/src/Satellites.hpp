@@ -227,16 +227,12 @@ public:
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
 	bool getUpdatesEnabled(void) {return updatesEnabled;}
-	//! set whether or not the plugin will try to update TLE data from the internet
-	//! @param b if true, updates will be enabled, else they will be disabled
-	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
 	//! get the update frequency in hours
 	int getUpdateFrequencyHours(void) {return updateFrequencyHours;}
-	void setUpdateFrequencyHours(int hours) {updateFrequencyHours = hours;}
 
 	//! get the number of seconds till the next update
 	int getSecondsToUpdate(void);
@@ -285,6 +281,10 @@ public:
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
 
 signals:
+	//! Emitted when some of the plugin settings have been changed.
+	//! Used to communicate with the configuration window.
+	void settingsChanged();
+	
 	//! emitted when the update status changes, e.g. when 
 	//! an update starts, completes and so on.  Note that
 	//! on completion of an update, tleUpdateComplete is also
@@ -301,20 +301,38 @@ signals:
 
 public slots:
 	// REMINDER: All slots must return void! --BM
-	void setFlagHints(bool b) {hintFader=b;}
 	
-	//! set the label font size
-	//! @param size the pixel size of the font
-	void setLabelFontSize(int size) {labelFont.setPixelSize(size);}
-
+	//! Set whether the plugin will try to download updates from the Internet.
+	//! Emits settingsChanged() if the value changes.
+	//! @param b if true, updates will be enabled, else they will be disabled.
+	void enableInternetUpdates(bool enabled = true);
+	
+	//! Emits settingsChanged() if the value changes.
+	void enableAutoRemove(bool enabled = true);
+	
+	//! Set whether satellite position hints (icons) should be displayed.
+	//! Note that hint visibility also applies to satellite labels.
+	//! Emits settingsChanged() if the value changes.
+	void setFlagHints(bool b);
+	
+	//! Set whether text labels should be displayed next to satellite hints.
+	//! Emits settingsChanged() if the value changes.
+	//! @todo Decide how to sync with "actionShow_Satellite_Labels".
 	void setFlagLabels(bool b);
+	
+	//! set the label font size.
+	//! @param size the pixel size of the font
+	//! Emits settingsChanged() if the value changes.
+	void setLabelFontSize(int size);
+	
+	//! Set the Internet update frequency.
+	//! Emits settingsChanged() if the value changes.
+	void setUpdateFrequencyHours(int hours);
 	
 	//! Download TLEs from web recources described in the module section of the
 	//! module.ini file and update the TLE values for any satellites for which
 	//! there is new TLE data.
 	void updateTLEs(void);
-		
-	void enableAutoRemove(bool enable = true) { autoRemoveEnabled = enable; }
 
 	//! Choose whether or not to draw orbit lines.  Each satellite has its own setting
 	//! as well, but this can be used to turn on/off all those satellites which elect to

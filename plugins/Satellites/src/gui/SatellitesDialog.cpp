@@ -76,7 +76,7 @@ void SatellitesDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		refreshUpdateValues();
+		updateSettingsPage(); // For the button; also calls updateCountdown()
 		setAboutHtml();
 		// This may be a problem if we add group name translations, as the
 		// sorting order may be different. --BM
@@ -91,54 +91,49 @@ void SatellitesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-					this, SLOT(retranslate()));
+	        this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(clicked(bool)),
-	        this, SLOT(enableInternetUpdates(bool)));
+	        plugin, SLOT(enableInternetUpdates(bool)));
+	connect(ui->checkBoxAutoRemove, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableAutoRemove(bool)));
+	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)),
+	        plugin, SLOT(setUpdateFrequencyHours(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateTLEs()));
 	connect(plugin, SIGNAL(updateStateChanged(Satellites::UpdateState)),
 	        this, SLOT(updateStateReceiver(Satellites::UpdateState)));
 	connect(plugin, SIGNAL(tleUpdateComplete(int, int, int)),
 	        this, SLOT(updateCompleteReceiver(int, int, int)));
-	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)),
-	        this, SLOT(setUpdateValues(int)));
-	// This also calls refreshUpdateValues(), which checks the checkbox.
-	enableInternetUpdates(plugin->getUpdatesEnabled());
-	connect(ui->checkBoxAutoRemove, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableAutoRemove(bool)));
-	ui->checkBoxAutoRemove->setChecked(plugin->isAutoRemoveEnabled());
 
 	updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 	updateTimer->start(7000);
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-
 	// Settings tab / General settings group
+	// This does call Satellites::setFlagLabels() indirectly.
 	QAction* action = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Satellite_Labels");
 	connect(ui->labelsGroup, SIGNAL(clicked(bool)),
 	        action, SLOT(setChecked(bool)));
-	connect(action, SIGNAL(toggled(bool)),
-	        ui->labelsGroup, SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)),
 	        plugin, SLOT(setLabelFontSize(int)));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
+	        this, SLOT(restoreDefaults()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()),
+	        this, SLOT(saveSettings()));
 
 	// Settings tab / orbit lines group
-	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
-	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
-	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
-	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
-
-	connect(ui->orbitLinesGroup, SIGNAL(toggled(bool)), GETSTELMODULE(Satellites), SLOT(setOrbitLinesFlag(bool)));
+	connect(ui->orbitLinesGroup, SIGNAL(clicked(bool)),
+	        plugin, SLOT(setOrbitLinesFlag(bool)));
 	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
-
+	
+	// Settings tab - populate all values
+	updateSettingsPage();
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);
@@ -174,8 +169,8 @@ void SatellitesDialog::createDialogContent()
 	// About tab
 	setAboutHtml();
 
-	updateGuiFromSettings();
-
+	populateGroupsList();
+	populateSourcesList();
 }
 
 void SatellitesDialog::filterListByGroup(int index)
@@ -263,7 +258,7 @@ void SatellitesDialog::saveSatellites(void)
 	GETSTELMODULE(Satellites)->saveCatalog();
 }
 
-void SatellitesDialog::setAboutHtml(void)
+void SatellitesDialog::setAboutHtml()
 {
 	QString jsonFileName("<tt>satellites.json</tt>");
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
@@ -324,46 +319,25 @@ void SatellitesDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-void SatellitesDialog::refreshUpdateValues(void)
+void SatellitesDialog::updateCountdown()
 {
 	Satellites* plugin = GETSTELMODULE(Satellites);
-	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
-	int secondsToUpdate = plugin->getSecondsToUpdate();
-	
 	bool updatesEnabled = plugin->getUpdatesEnabled();
-	ui->internetUpdatesCheckbox->setChecked(updatesEnabled);
 	
 	if (!updatesEnabled)
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
 	else if (plugin->getUpdateState() == Satellites::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
-	else if (secondsToUpdate <= 60)
-		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
-	else if (secondsToUpdate < 3600)
-		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
 	else
-		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
-}
-
-void SatellitesDialog::setUpdateValues(int hours)
-{
-	GETSTELMODULE(Satellites)->setUpdateFrequencyHours(hours);
-	refreshUpdateValues();
-}
-
-void SatellitesDialog::enableInternetUpdates(bool enabled)
-{
-	GETSTELMODULE(Satellites)->setUpdatesEnabled(enabled);
-	ui->updateFrequencySpinBox->setEnabled(enabled);
-	if(enabled)
-		ui->updateButton->setText(q_("Update now"));
-	else
-		ui->updateButton->setText(q_("Update from files"));
-	ui->updateFrequencyLabel->setEnabled(enabled);
-	ui->updateFrequencySpinBox->setEnabled(enabled);
-
-	refreshUpdateValues();
+	{
+		int secondsToUpdate = plugin->getSecondsToUpdate();
+		if (secondsToUpdate <= 60)
+			ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
+		else if (secondsToUpdate < 3600)
+			ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
+		else
+			ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
+	}
 }
 
 void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)
@@ -385,7 +359,7 @@ void SatellitesDialog::updateCompleteReceiver(int numUpdated, int total, int mis
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Satellites)->getLastUpdate());
 	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 }
 
 void SatellitesDialog::sourceEditingDone(void)
@@ -447,33 +421,41 @@ void SatellitesDialog::restoreDefaults(void)
 	qDebug() << "Satellites::restoreDefaults";
 	GETSTELMODULE(Satellites)->restoreDefaults();
 	GETSTELMODULE(Satellites)->loadSettings();
-	updateGuiFromSettings();
+	updateSettingsPage();
+	populateGroupsList();
+	populateSourcesList();
 }
 
-void SatellitesDialog::updateGuiFromSettings(void)
+void SatellitesDialog::updateSettingsPage()
 {
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Satellites)->getUpdatesEnabled());
-	refreshUpdateValues();
+	Satellites* plugin = GETSTELMODULE(Satellites);
+	
+	// Update stuff
+	bool updatesEnabled = plugin->getUpdatesEnabled();
+	ui->internetUpdatesCheckbox->setChecked(updatesEnabled);
+	if(updatesEnabled)
+		ui->updateButton->setText(q_("Update now"));
+	else
+		ui->updateButton->setText(q_("Update from files"));
+	ui->checkBoxAutoRemove->setChecked(plugin->isAutoRemoveEnabled());
+	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
+	
+	updateCountdown();
+	
+	// Presentation stuff
+	ui->labelsGroup->setChecked(plugin->getFlagLabels());
+	ui->fontSizeSpinBox->setValue(plugin->getLabelFontSize());
 
-	ui->labelsGroup->setChecked(GETSTELMODULE(Satellites)->getFlagLabels());
-	ui->fontSizeSpinBox->setValue(GETSTELMODULE(Satellites)->getLabelFontSize());
-
-	ui->orbitLinesGroup->setChecked(GETSTELMODULE(Satellites)->getOrbitLinesFlag());
+	ui->orbitLinesGroup->setChecked(plugin->getOrbitLinesFlag());
 	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
 	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
 	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
-
-	populateGroupsList();
-	ui->satellitesList->clearSelection();
-	ui->groupsCombo->setCurrentIndex(0);
-
-	ui->sourceList->clear();
-	ui->sourceList->addItems(GETSTELMODULE(Satellites)->getTleSources());
-	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
 }
 
 void SatellitesDialog::populateGroupsList()
 {
+	// TODO: Preserve selection! --BM
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroupIdList());
 	ui->groupsCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("orbiterror"));
@@ -481,6 +463,13 @@ void SatellitesDialog::populateGroupsList()
 	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("visible"));
 	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
+}
+
+void SatellitesDialog::populateSourcesList()
+{
+	ui->sourceList->clear();
+	ui->sourceList->addItems(GETSTELMODULE(Satellites)->getTleSources());
+	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
 }
 
 void SatellitesDialog::saveSettings(void)
