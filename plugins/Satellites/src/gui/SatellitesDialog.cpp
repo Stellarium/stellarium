@@ -107,6 +107,9 @@ void SatellitesDialog::createDialogContent()
 	        this, SLOT(setUpdateValues(int)));
 	// This also calls refreshUpdateValues(), which checks the checkbox.
 	enableInternetUpdates(plugin->getUpdatesEnabled());
+	connect(ui->checkBoxAutoRemove, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableAutoRemove(bool)));
+	ui->checkBoxAutoRemove->setChecked(plugin->isAutoRemoveEnabled());
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -357,6 +360,8 @@ void SatellitesDialog::enableInternetUpdates(bool enabled)
 		ui->updateButton->setText(q_("Update now"));
 	else
 		ui->updateButton->setText(q_("Update from files"));
+	ui->updateFrequencyLabel->setEnabled(enabled);
+	ui->updateFrequencySpinBox->setEnabled(enabled);
 
 	refreshUpdateValues();
 }
