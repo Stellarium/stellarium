@@ -284,19 +284,22 @@ signals:
 	//! in update data.
 	void tleUpdateComplete(int updates, int total, int missing);
 	
+	bool getFlagHints() {return hintFader;}
+	//! get the label font size.
+	//! @return the pixel size of the font
+	int getLabelFontSize() {return labelFont.pixelSize();}
+	bool getFlagLabels();
+	//! Get the current status of the orbit line rendering flag.
+	bool getOrbitLinesFlag();
 
 public slots:
+	// REMINDER: All slots must return void! --BM
 	void setFlagHints(bool b) {hintFader=b;}
-	bool getFlagHints(void) {return hintFader;}
-
-	//! get the label font size
-	//! @return the pixel size of the font
-	int getLabelFontSize(void) {return labelFont.pixelSize();}
+	
 	//! set the label font size
 	//! @param size the pixel size of the font
 	void setLabelFontSize(int size) {labelFont.setPixelSize(size);}
 
-	bool getFlagLabels(void);
 	void setFlagLabels(bool b);
 
 	//! Download TLEs from web recources described in the module section of the
@@ -309,9 +312,6 @@ public slots:
 	//! have orbit lines all in one go.
 	//! @param b - true to turn on orbit lines, false to turn off
 	void setOrbitLinesFlag(bool b);
-
-	//! Get the current status of the orbit line rendering flag
-	bool getOrbitLinesFlag(void);
 
 	void recalculateOrbitLines(void);
 
@@ -344,9 +344,9 @@ private:
 	//! @return true on OK, false on failure
 	bool backupCatalog(bool deleteOriginal=false);
 
-	//! Get the version from the "creator" value in the satellites.json file.
+	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
-	const QString getCatalogVersion();
+	const QString readCatalogVersion();
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.
@@ -366,6 +366,10 @@ private:
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
 	
+	//! All possible groups used by all loaded satellites - see @ref groups.
+	//! For simplicity, it can only grow until the plug-in is unloaded -
+	//! a group is not removed even if there are no more satellites tagged with
+	//! it.
 	QSet<QString> groups;
 	
 	LinearFader hintFader;
@@ -412,8 +416,8 @@ private slots:
 	//! if the last update was longer than updateFrequencyHours ago then the update is
 	//! done.
 	void checkForUpdate(void);
-	void updateDownloadComplete(QNetworkReply* reply);
-	void observerLocationChanged(StelLocation loc);
+	void saveDownloadedUpdate(QNetworkReply* reply);
+	void updateObserverLocation(StelLocation loc);
 
 };
 
