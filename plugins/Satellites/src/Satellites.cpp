@@ -1404,4 +1404,38 @@ void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
 	}
 }
 
-
+void Satellites::translations()
+{
+	// Satellite groups
+	// TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
+	N_("visual");
+	// TRANSLATORS: Satellite group: Scientific satellites
+	N_("scientific");
+	// TRANSLATORS: Satellite group: Communication satellites
+	N_("communications");
+	// TRANSLATORS: Satellite group: Navigation satellites
+	N_("navigation");
+	// TRANSLATORS: Satellite group: Amateur radio (ham) satellites
+	N_("amateur");
+	// TRANSLATORS: Satellite group: Weather (meteorological) satellites
+	N_("weather");
+	// TRANSLATORS: Satellite group: Satellites in geostationary orbit
+	N_("geostationary");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
+	N_("gps");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
+	N_("iridium");
+	
+	/* For copy/paste:
+	// TRANSLATORS: Satellite group: 
+	N_("");
+	*/
+	
+	
+	// Satellite descriptions - bright and/or famous objects
+	// Just A FEW objects please! (I'm looking at you, Alex!)
+	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
+	N_("The Hubble Space Telescope");
+	// TRANSLATORS: Satellite description.
+	N_("The International Space Station");
+}

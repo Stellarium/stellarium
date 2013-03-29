@@ -218,7 +218,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		oss << "<h2>" << name << "</h2>";
 		if (!description.isEmpty())
-			oss << description << "<br/>";
+			oss << q_(description) << "<br/>";
 	}
 	
 	if (flags & CatalogNumber)
