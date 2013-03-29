@@ -961,9 +961,58 @@ bool Satellites::getFlagLabels()
 	return Satellite::showLabels;
 }
 
+void Satellites::enableInternetUpdates(bool enabled)
+{
+	if (enabled != updatesEnabled)
+	{
+		updatesEnabled = enabled;
+		emit settingsChanged();
+	}
+}
+
+void Satellites::enableAutoRemove(bool enabled)
+{
+	if (autoRemoveEnabled != enabled)
+	{
+		autoRemoveEnabled = enabled;
+		emit settingsChanged();
+	}
+}
+
+void Satellites::setFlagHints(bool b)
+{
+	if (hintFader != b)
+	{
+		hintFader = b;
+		emit settingsChanged();
+	}
+}
+
 void Satellites::setFlagLabels(bool b)
 {
-	Satellite::showLabels = b;
+	if (Satellite::showLabels != b)
+	{
+		Satellite::showLabels = b;
+		emit settingsChanged();
+	}
+}
+
+void Satellites::setLabelFontSize(int size)
+{
+	if (labelFont.pixelSize() != size)
+	{
+		labelFont.setPixelSize(size);
+		emit settingsChanged();
+	}
+}
+
+void Satellites::setUpdateFrequencyHours(int hours)
+{
+	if (updateFrequencyHours != hours)
+	{
+		updateFrequencyHours = hours;
+		emit settingsChanged();
+	}
 }
 
 void Satellites::checkForUpdate(void)
