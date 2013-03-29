@@ -124,7 +124,7 @@ void Satellites::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
 		{
-			qDebug() << "Stellites::init no Satellites section exists in main config file - creating with defaults";
+			qDebug() << "Stellites: no Satellites section exists in main config file - creating with defaults";
 			restoreDefaultSettings();
 		}
 
@@ -169,7 +169,7 @@ void Satellites::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if(QFileInfo(catalogPath).exists())
 	{
-		if (getCatalogVersion() != SATELLITES_PLUGIN_VERSION)
+		if (readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultCatalog();
@@ -181,14 +181,15 @@ void Satellites::init()
 		restoreDefaultCatalog();
 	}
 
-	qDebug() << "Satellites::init using satellite.json file: " << catalogPath;
+	qDebug() << "Satellites: loading catalog file:" << catalogPath;
 
 	// create satellites according to content os satellites.json file
 	loadCatalog();
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
-	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
+	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)),
+	        this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -200,7 +201,10 @@ void Satellites::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location:
-	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(observerLocationChanged(StelLocation)));
+	connect(StelApp::getInstance().getCore(),
+	        SIGNAL(locationChanged(StelLocation)),
+	        this,
+	        SLOT(updateObserverLocation(StelLocation)));
 	
 	//Load the module's custom style sheets
 	QFile styleSheetFile;
@@ -648,7 +652,7 @@ void Satellites::loadCatalog()
 	setDataMap(loadDataMap());
 }
 
-const QString Satellites::getCatalogVersion()
+const QString Satellites::readCatalogVersion()
 {
 	QString jsonVersion("unknown");
 	QFile satelliteJsonFile(catalogPath);
@@ -671,7 +675,7 @@ const QString Satellites::getCatalogVersion()
 	}
 
 	satelliteJsonFile.close();
-	qDebug() << "Satellites::getJsonFileVersion() version from file:" << jsonVersion;
+	//qDebug() << "Satellites: catalog version from file:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -941,7 +945,7 @@ void Satellites::setTleSources(QStringList tleSources)
 	conf->endGroup();
 }
 
-bool Satellites::getFlagLabels(void)
+bool Satellites::getFlagLabels()
 {
 	return Satellite::showLabels;
 }
@@ -1001,7 +1005,7 @@ void Satellites::updateTLEs(void)
 	}
 }
 
-void Satellites::updateDownloadComplete(QNetworkReply* reply)
+void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
@@ -1040,7 +1044,7 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 	}
 }
 
-void Satellites::observerLocationChanged(StelLocation)
+void Satellites::updateObserverLocation(StelLocation)
 {
 	recalculateOrbitLines();
 }
@@ -1050,7 +1054,7 @@ void Satellites::setOrbitLinesFlag(bool b)
 	Satellite::orbitLinesFlag = b;
 }
 
-bool Satellites::getOrbitLinesFlag(void)
+bool Satellites::getOrbitLinesFlag()
 {
 	return Satellite::orbitLinesFlag;
 }
