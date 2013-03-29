@@ -8,6 +8,10 @@
 # The other part of keeping satellites.json up to date - removing satellites
 # that no longer exist in the lists - you will have to do manually, too.
 
+# TRANSLATION WARNING: Group names are translatable. The strings are marked for
+# translation in Satellites::translations(), so if you change a group name here,
+# you need to also change it in that function.
+
 rm -f new.json
 
 GET "http://celestrak.com/NORAD/elements/goes.txt"    | ./add_new_from_tle_file.pl scientific >> new.json

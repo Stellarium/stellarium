@@ -390,6 +390,12 @@ private:
 	
 	//! Sets lastUpdate to the current date/time and saves it to the settings.
 	void markLastUpdate();
+	
+	//! A fake method for strings marked for translation.
+	//! Use it instead of translations.h for N_() strings, except perhaps for
+	//! keyboard action descriptions. (It's better for them to be in a single
+	//! place.)
+	static void translations();
 
 	//! Path to the satellite catalog file.
 	QString catalogPath;
