@@ -1406,6 +1406,7 @@ void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
 
 void Satellites::translations()
 {
+#if 0
 	// Satellite groups
 	// TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 	N_("visual");
@@ -1421,6 +1422,8 @@ void Satellites::translations()
 	N_("weather");
 	// TRANSLATORS: Satellite group: Satellites in geostationary orbit
 	N_("geostationary");
+	// TRANSLATORS: Satellite group: Satellites that are no longer functioning
+	N_("non-operational");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 	N_("gps");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
@@ -1438,4 +1441,5 @@ void Satellites::translations()
 	N_("The Hubble Space Telescope");
 	// TRANSLATORS: Satellite description.
 	N_("The International Space Station");
+#endif
 }
