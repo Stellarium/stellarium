@@ -124,7 +124,7 @@ void Satellites::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
 		{
-			qDebug() << "Stellites: no Satellites section exists in main config file - creating with defaults";
+			//qDebug() << "Stellites: created section in config file.";
 			restoreDefaultSettings();
 		}
 
@@ -524,23 +524,27 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("auto_remove_enabled", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
 	conf->setValue("hint_font_size", 10);
-	conf->setValue("tle_url0", "http://celestrak.com/NORAD/elements/noaa.txt");
-	conf->setValue("tle_url1", "http://celestrak.com/NORAD/elements/goes.txt");
-	conf->setValue("tle_url2", "http://celestrak.com/NORAD/elements/gps-ops.txt");
-	conf->setValue("tle_url3", "http://celestrak.com/NORAD/elements/galileo.txt");
-	conf->setValue("tle_url4", "http://celestrak.com/NORAD/elements/visual.txt");
-	conf->setValue("tle_url5", "http://celestrak.com/NORAD/elements/amateur.txt");
-	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
-	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/geo.txt");
-	conf->setValue("tle_url8", "http://celestrak.com/NORAD/elements/tle-new.txt");
-	conf->setValue("tle_url9", "http://celestrak.com/NORAD/elements/science.txt");
-	//TODO: Better? See http://doc.qt.nokia.com/4.7/qsettings.html#beginWriteArray --BM
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", true);
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
-	conf->endGroup();
+	
+	conf->endGroup(); // saveTleSources() opens it for itself
+	
+	// TLE update sources
+	QStringList urls;
+	urls << "http://celestrak.com/NORAD/elements/visual.txt"
+	     << "http://celestrak.com/NORAD/elements/tle-new.txt"
+	     << "http://celestrak.com/NORAD/elements/science.txt"
+	     << "http://celestrak.com/NORAD/elements/noaa.txt"
+	     << "http://celestrak.com/NORAD/elements/goes.txt"
+	     << "http://celestrak.com/NORAD/elements/amateur.txt"
+	     << "http://celestrak.com/NORAD/elements/gps-ops.txt"
+	     << "http://celestrak.com/NORAD/elements/galileo.txt"
+	     << "http://celestrak.com/NORAD/elements/iridium.txt"
+	     << "http://celestrak.com/NORAD/elements/geo.txt";
+	saveTleSources(urls);
 }
 
 void Satellites::restoreDefaultCatalog()
@@ -575,19 +579,44 @@ void Satellites::loadSettings()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Satellites");
 
-	// populate updateUrls from tle_url? keys
-	QRegExp keyRE("^tle_url\\d+$");
+	// Load update sources list...
 	updateUrls.clear();
+	
+	// Backward compatibility: try to detect and read an old-stlye array.
+	// TODO: Assume that the user hasn't modified their conf in a stupid way?
+//	if (conf->contains("tle_url0")) // This can skip some operations...
+	QRegExp keyRE("^tle_url\\d+$");
+	QStringList urls;
 	foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 		{
 			QString s = conf->value(key, "").toString();
 			if (!s.isEmpty() && s!="")
-				updateUrls << s;
+				urls << s;
+			conf->remove(key); // Delete old-style keys
 		}
 	}
-
+	// If any have been read, save them in the new format.
+	if (!urls.isEmpty())
+	{
+		conf->endGroup();
+		setTleSources(urls);
+		conf->beginGroup("Satellites");
+	}
+	else
+	{
+		int size = conf->beginReadArray("tle_sources");
+		for (int i = 0; i < size; i++)
+		{
+			conf->setArrayIndex(i);
+			QString url = conf->value("url").toString();
+			if (!url.isEmpty())
+				updateUrls.append(url);
+		}
+		conf->endArray();
+	}
+	
 	// updater related settings...
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	// last update default is the first Towell Day.  <3 DA
@@ -614,23 +643,6 @@ void Satellites::saveSettings()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Satellites");
 
-	// update tle urls... first clear the existing ones in the file
-	QRegExp keyRE("^tle_url\\d+$");
-	foreach(const QString& key, conf->childKeys())
-	{
-		if (keyRE.exactMatch(key))
-			conf->remove(key);
-	}
-
-
-	// populate updateUrls from tle_url? keys
-	int n=0;
-	foreach(const QString& url, updateUrls)
-	{
-		QString key = QString("tle_url%1").arg(n++);
-		conf->setValue(key, url);
-	}
-
 	// updater related settings...
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("show_satellite_hints", getFlagHints());
@@ -648,6 +660,9 @@ void Satellites::saveSettings()
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
 
 	conf->endGroup();
+	
+	// Update sources...
+	saveTleSources(updateUrls);
 }
 
 void Satellites::loadCatalog()
@@ -935,23 +950,25 @@ int Satellites::getSecondsToUpdate(void)
 void Satellites::setTleSources(QStringList tleSources)
 {
 	updateUrls = tleSources;
+	saveTleSources(updateUrls);
+}
+
+void Satellites::saveTleSources(const QStringList& urls)
+{
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Satellites");
 
 	// clear old source list
-	QRegExp keyRE("^tle_url\\d+$");
-	foreach(const QString& key, conf->childKeys())
-	{
-		if (keyRE.exactMatch(key))
-			conf->remove(key);
-	}
+	conf->remove("tle_sources");
 
-	// set the new sources list
-	int i=0;
-	foreach (const QString& url, updateUrls)
+	int index = 0;
+	conf->beginWriteArray("tle_sources");
+	foreach (const QString& url, urls)
 	{
-		conf->setValue(QString("tle_url%1").arg(i++), url);
+		conf->setArrayIndex(index++);
+		conf->setValue("url", url);
 	}
+	conf->endArray();
 
 	conf->endGroup();
 }

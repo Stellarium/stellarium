@@ -79,7 +79,7 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 {
 	int maxKeyWidth = 30;
-	QRegExp reKeyXt("^(.+)/(.+)$");  // for extracting keys/values
+	QRegExp reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
 
 	// first go over map and find longest key length
 	for(int i=0; i<map.keys().size(); i++)

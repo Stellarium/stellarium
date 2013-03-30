@@ -251,6 +251,9 @@ public:
 	//! saves them to the configuration file.
 	void setTleSources(QStringList tleSources);
 	
+	//! Saves the current list of update URLs to the configuration file.
+	void saveTleSources(const QStringList& urls);
+	
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.
 	// TODO: Plugin-specific styles are no longer necessary?
