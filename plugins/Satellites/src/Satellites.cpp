@@ -759,6 +759,9 @@ void Satellites::setDataMap(const QVariantMap& map)
 		defaultHintColor.set(defaultHintColorMap.at(0).toDouble(), defaultHintColorMap.at(1).toDouble(), defaultHintColorMap.at(2).toDouble());
 	}
 
+	if (satelliteListModel)
+		satelliteListModel->beginSatellitesChange();
+	
 	satellites.clear();
 	groups.clear();
 	QVariantMap satMap = map.value("satellites").toMap();
@@ -780,9 +783,10 @@ void Satellites::setDataMap(const QVariantMap& map)
 			numReadOk++;
 		}
 	}
-	
-	// TODO: Remove: Testing operator<()
 	qSort(satellites);
+	
+	if (satelliteListModel)
+		satelliteListModel->endSatellitesChange();
 }
 
 QVariantMap Satellites::createDataMap(void)
@@ -921,6 +925,9 @@ bool Satellites::add(const TleData& tleData)
 
 void Satellites::add(const TleDataList& newSatellites)
 {
+	if (satelliteListModel)
+		satelliteListModel->beginSatellitesChange();
+	
 	int numAdded = 0;
 	foreach (const TleData& tleSet, newSatellites)
 	{
@@ -929,6 +936,12 @@ void Satellites::add(const TleDataList& newSatellites)
 			numAdded++;
 		}
 	}
+	if (numAdded > 0)
+		qSort(satellites);
+	
+	if (satelliteListModel)
+		satelliteListModel->endSatellitesChange();
+	
 	qDebug() << "Satellites: "
 					 << newSatellites.count() << "satellites proposed for addition, "
 					 << numAdded << " added, "
@@ -937,6 +950,9 @@ void Satellites::add(const TleDataList& newSatellites)
 
 void Satellites::remove(const QStringList& idList)
 {
+	if (satelliteListModel)
+		satelliteListModel->beginSatellitesChange();
+	
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	int numRemoved = 0;
 	for (int i = 0; i < satellites.size(); i++)
@@ -954,6 +970,10 @@ void Satellites::remove(const QStringList& idList)
 			numRemoved++;
 		}
 	}
+	// As the satellite list is kept sorted, no need for re-sorting.
+	
+	if (satelliteListModel)
+		satelliteListModel->endSatellitesChange();
 
 	qDebug() << "Satellites: "
 					 << idList.count() << "satellites proposed for removal, "
@@ -1293,8 +1313,12 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		return;
 	}
 	
+	if (satelliteListModel)
+		satelliteListModel->beginSatellitesChange();
+	
 	// Right, we should now have a map of all the elements we downloaded.  For each satellite
 	// which this module is managing, see if it exists with an updated element, and update it if so...
+	int sourceCount = newTleSets.count(); // newTleSets is modified below
 	int updatedCount = 0;
 	int totalCount = 0;
 	int addedCount = 0;
@@ -1345,6 +1369,8 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				addedCount++;
 		}
 	}
+	if (addedCount)
+		qSort(satellites);
 	
 	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
 	{
@@ -1361,19 +1387,20 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	else
 		updateState = CompleteNoUpdates;
 	
-	//TODO: Update the model structure somewhere here. --BM
-
+	if (satelliteListModel)
+		satelliteListModel->endSatellitesChange();
+	
 	if (progressBar)
 	{
 		delete progressBar;
 		progressBar = 0;
 	}
 
-	qDebug() << "Satellites: updated" << updatedCount << "/" << totalCount
-	         << "satellites. Update source contained"
-	         << newTleSets.size() << "objects. "
-	         << missingCount
-	         << "satellies were not in the update sources.";
+	qDebug() << "Satellites: update finished."
+	         << updatedCount << "/" << totalCount << "updated,"
+	         << addedCount << "added,"
+	         << missingCount << "missing or removed."
+	         << sourceCount << "source entries parsed.";
 
 	emit(updateStateChanged(updateState));
 	emit(tleUpdateComplete(updatedCount, totalCount, missingCount));

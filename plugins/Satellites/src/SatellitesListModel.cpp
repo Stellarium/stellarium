@@ -100,6 +100,16 @@ int SatellitesListModel::columnCount(const QModelIndex& parent) const
 	//TODO: For now...
 }
 
+void SatellitesListModel::beginSatellitesChange()
+{
+	beginResetModel();
+}
+
+void SatellitesListModel::endSatellitesChange()
+{
+	endResetModel();
+}
+
 void SatellitesListModel::enableColoredNames(bool enable)
 {
 	coloredNames = enable;
