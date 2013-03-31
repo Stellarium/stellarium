@@ -883,38 +883,49 @@ QStringList Satellites::listAllIds()
 	return result;
 }
 
+bool Satellites::add(const TleData& tleData)
+{
+	//TODO: Duplicates check!!! --BM
+	
+	// More validation?
+	if (tleData.id.isEmpty() ||
+	        tleData.name.isEmpty() ||
+	        tleData.first.isEmpty() ||
+	        tleData.second.isEmpty())
+		return false;
+	
+	QVariantList hintColor;
+	hintColor << defaultHintColor[0]
+	          << defaultHintColor[1]
+	          << defaultHintColor[2];
+	
+	QVariantMap satProperties;
+	satProperties.insert("name", tleData.name);
+	satProperties.insert("tle1", tleData.first);
+	satProperties.insert("tle2", tleData.second);
+	satProperties.insert("hintColor", hintColor);
+	//TODO: Decide if newly added satellites are visible by default --BM
+	satProperties.insert("visible", true);
+	satProperties.insert("orbitVisible", false);
+	
+	SatelliteP sat(new Satellite(tleData.id, satProperties));
+	if (sat->initialized)
+	{
+		qDebug() << "Satellites: added" << tleData.id << tleData.name;
+		satellites.append(sat);
+		sat->setNew();
+		return true;
+	}
+	return false;
+}
+
 void Satellites::add(const TleDataList& newSatellites)
 {
 	int numAdded = 0;
-	QVariantList defaultHintColorMap;
-	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1]
-											<< defaultHintColor[2];
-	
 	foreach (const TleData& tleSet, newSatellites)
 	{
-		//TODO: Duplicates check? --BM
-		
-		if (tleSet.id.isEmpty() ||
-				tleSet.name.isEmpty() ||
-				tleSet.first.isEmpty() ||
-				tleSet.second.isEmpty())
-			continue;
-		
-		QVariantMap satProperties;
-		satProperties.insert("name", tleSet.name);
-		satProperties.insert("tle1", tleSet.first);
-		satProperties.insert("tle2", tleSet.second);
-		satProperties.insert("hintColor", defaultHintColorMap);
-		//TODO: Decide if newly added satellites are visible by default --BM
-		satProperties.insert("visible", true);
-		satProperties.insert("orbitVisible", false);
-		
-		SatelliteP sat(new Satellite(tleSet.id, satProperties));
-		if (sat->initialized)
+		if (add(tleSet))
 		{
-			qDebug() << "Satellites: added" << tleSet.id << tleSet.name;
-			satellites.append(sat);
-			sat->setNew();
 			numAdded++;
 		}
 	}
@@ -1286,15 +1297,16 @@ void Satellites::updateSatellites(const TleDataHash& newTleSets)
 	// which this module is managing, see if it exists with an updated element, and update it if so...
 	int updatedCount = 0;
 	int totalCount = 0;
-	int missingCount = 0;
+	int addedCount = 0;
+	int missingCount = 0; // Also the number of removed sats, if any.
 	QStringList toBeRemoved;
 	foreach(const SatelliteP& sat, satellites)
 	{
 		totalCount++;
 		QString id = sat->id;
-		if (newTleSets.contains(id))
+		TleData newTle = newTleSets.take(id);
+		if (!newTle.name.isEmpty())
 		{
-			TleData newTle = newTleSets.value(id);
 			if (sat->tleElements.first != newTle.first ||
 			    sat->tleElements.second != newTle.second ||
 			    sat->name != newTle.name)
@@ -1318,6 +1330,19 @@ void Satellites::updateSatellites(const TleDataHash& newTleSets)
 				qWarning() << "Satellites:" << sat->id << sat->name
 				           << "is missing in the update lists.";
 			missingCount++;
+		}
+	}
+	
+	// Only those not in the loaded collection have remained
+	// (autoAddEnabled is not checked, because it's already in the flags)
+	QHash<QString, TleData>::const_iterator i;
+	for (i = newTleSets.begin(); i != newTleSets.end(); ++i)
+	{
+		if (i.value().addThis)
+		{
+			// Add the satellite...
+			if (add(i.value()))
+				addedCount++;
 		}
 	}
 	
@@ -1401,8 +1426,14 @@ void Satellites::parseTleFile(QFile& openFile,
 				if (!lastData.name.isEmpty() &&
 						!lastData.first.isEmpty())
 				{
-					//TODO: This overwrites duplicates. Display warning? --BM
-					tleList.insert(id, lastData);
+					// Some satellites can be listed in multiple files,
+					// and only some of those files may be marked for adding,
+					// so try to preserve the flag - if it's set,
+					// feel free to overwrite the existing value.
+					// If not, overwrite only if it's not in the list already.
+					// NOTE: Second case overwrite may need to check which TLE set is newer. 
+					if (lastData.addThis || !tleList.contains(id))
+						tleList.insert(id, lastData); // Overwrite if necessary
 				}
 				//TODO: Error warnings? --BM
 			}

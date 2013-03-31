@@ -242,8 +242,16 @@ public:
 	//! Returns a list of all satellite IDs.
 	QStringList listAllIds();
 	
-	//! Add the given satellites.
+	//! Add to the current collection the satellite described by the data.
+	//! @todo This probably could be done easier if Satellite had a constructor
+	//! accepting TleData... --BM
+	//! @todo Probably shouldn't be a public method... --BM
+	//! @returns true if the addition was successful.
+	bool add(const TleData& tleData);
+	
+	//! Add to the current collection the satellites described by the data list.
 	//! The changes are not saved to file.
+	//! Calls add(TleData).
 	void add(const TleDataList& newSatellites);
 	
 	//! Remove the selected satellites.
