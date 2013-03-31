@@ -145,7 +145,17 @@
           <property name="margin">
            <number>0</number>
           </property>
-          <item row="3" column="2">
+          <item row="5" column="0" colspan="5">
+           <widget class="QLabel" name="nextUpdateLabel">
+            <property name="text">
+             <string notr="true">[next update info]</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
            <widget class="QSpinBox" name="updateFrequencySpinBox">
             <property name="minimum">
              <number>1</number>
@@ -158,23 +168,6 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0" colspan="5">
-           <widget class="QLabel" name="nextUpdateLabel">
-            <property name="text">
-             <string notr="true">[next update info]</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_7">
-            <property name="text">
-             <string>Last update:</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0" colspan="4">
            <widget class="QCheckBox" name="internetUpdatesCheckbox">
             <property name="text">
@@ -182,7 +175,14 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1" rowspan="2">
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Last update:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" rowspan="2">
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -195,20 +195,7 @@
             </property>
            </spacer>
           </item>
-          <item row="2" column="3" rowspan="2">
-           <widget class="QPushButton" name="updateButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Update now</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
+          <item row="3" column="2">
            <widget class="QDateTimeEdit" name="lastUpdateDateTimeEdit">
             <property name="enabled">
              <bool>false</bool>
@@ -221,17 +208,57 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="updateFrequencyLabel">
+          <item row="1" column="0" colspan="4">
+           <layout class="QHBoxLayout" name="horizontalLayoutAutoAdd">
+            <item>
+             <widget class="QCheckBox" name="checkBoxAutoAdd">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>On update, add all new satellites from the selected source(s)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="jumpToSourcesButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string notr="true">...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="3" rowspan="2">
+           <widget class="QPushButton" name="updateButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
-             <string>Update frequency (hours):</string>
+             <string>Update now</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="4">
+          <item row="2" column="0" colspan="4">
            <widget class="QCheckBox" name="checkBoxAutoRemove">
             <property name="text">
              <string>On update, remove the satellites that are no longer listed in the update sources</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="updateFrequencyLabel">
+            <property name="text">
+             <string>Update frequency (hours):</string>
             </property>
            </widget>
           </item>
@@ -725,6 +752,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="labelAutoAdd">
+         <property name="text">
+          <string>Satellites in the marked source lists will be automatically added on the next update if they are not already in the collection.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLineEdit" name="sourceEdit">
@@ -795,6 +832,8 @@
  <tabstops>
   <tabstop>tabs</tabstop>
   <tabstop>internetUpdatesCheckbox</tabstop>
+  <tabstop>checkBoxAutoAdd</tabstop>
+  <tabstop>jumpToSourcesButton</tabstop>
   <tabstop>checkBoxAutoRemove</tabstop>
   <tabstop>updateButton</tabstop>
   <tabstop>lastUpdateDateTimeEdit</tabstop>
@@ -829,5 +868,38 @@
   <tabstop>aboutTextBrowser</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>checkBoxAutoAdd</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>jumpToSourcesButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>458</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxAutoAdd</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>labelAutoAdd</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>263</x>
+     <y>436</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
