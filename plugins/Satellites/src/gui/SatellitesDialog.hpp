@@ -35,6 +35,8 @@ class QTimer;
 class SatellitesImportDialog;
 class SatellitesListFilterModel;
 
+//! Main configuration window of the %Satellites plugin.
+//! @todo Save sources list on check/uncheck.
 class SatellitesDialog : public StelDialog
 {
 	Q_OBJECT
@@ -51,21 +53,28 @@ public slots:
 	void retranslate();
 
 private slots:
+	void jumpToSourcesTab();
 	//! Update the countdown to the next update.
 	void updateCountdown();
 	//! Filter the satellites list according to the selected (pseudo)group.
 	//! @param index selection index of the groups drop-down list.
 	void filterListByGroup(int index);
-	//! Populates the satellites list with the currently selected group.
-	void reloadSatellitesList();
 	void updateSelectedInfo(const QModelIndex& cur, const QModelIndex& prev);
 	void saveSatellites(void);
-	void updateStateReceiver(Satellites::UpdateState state);
-	void updateCompleteReceiver(int numUpdated, int total, int missing);
-	void sourceEditingDone(void);
+	void showUpdateState(Satellites::UpdateState state);
+	void showUpdateCompleted(int updated, int total, int added, int missing);
+	
+	//! @name Sources Tab 
+	//@{
+	void saveEditedSource();
 	void saveSourceList(void);
 	void deleteSourceRow(void);
 	void addSourceRow(void);
+	//! Toggle between modes in the Sources list.
+	//! If automatic adding is enabled, items in the list become checkable.
+	void toggleCheckableSources();
+	//@}
+	
 	void restoreDefaults(void);
 	void saveSettings(void);
 	void addSatellites(const TleDataList& newSatellites);
@@ -96,6 +105,9 @@ private:
 	SatellitesImportDialog* importWindow;
 	
 	SatellitesListFilterModel* filterModel;
+	
+	//! Makes sure that newly added source lines are as checkable as the rest.
+	Qt::ItemDataRole checkStateRole;
 };
 
 #endif // _SATELLITESDIALOG_HPP_

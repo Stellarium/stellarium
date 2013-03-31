@@ -45,7 +45,8 @@
 SatellitesDialog::SatellitesDialog() :
     updateTimer(0),
     importWindow(0),
-    filterModel(0)
+    filterModel(0),
+    checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
 	
@@ -87,23 +88,31 @@ void SatellitesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
+	ui->labelAutoAdd->setVisible(false);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
 	// Settings tab / updates group
+	// These controls are refreshed by updateSettingsPage(), which in
+	// turn is triggered by setting any of these values. Because 
+	// clicked() is issued only by user input, there's no endless loop.
 	connect(ui->internetUpdatesCheckbox, SIGNAL(clicked(bool)),
 	        plugin, SLOT(enableInternetUpdates(bool)));
+	connect(ui->checkBoxAutoAdd, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableAutoAdd(bool)));
 	connect(ui->checkBoxAutoRemove, SIGNAL(clicked(bool)),
 	        plugin, SLOT(enableAutoRemove(bool)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)),
 	        plugin, SLOT(setUpdateFrequencyHours(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateTLEs()));
+	connect(ui->jumpToSourcesButton, SIGNAL(clicked()),
+	        this, SLOT(jumpToSourcesTab()));
 	connect(plugin, SIGNAL(updateStateChanged(Satellites::UpdateState)),
-	        this, SLOT(updateStateReceiver(Satellites::UpdateState)));
-	connect(plugin, SIGNAL(tleUpdateComplete(int, int, int)),
-	        this, SLOT(updateCompleteReceiver(int, int, int)));
+	        this, SLOT(showUpdateState(Satellites::UpdateState)));
+	connect(plugin, SIGNAL(tleUpdateComplete(int, int, int, int)),
+	        this, SLOT(showUpdateCompleted(int, int, int, int)));
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
@@ -158,9 +167,12 @@ void SatellitesDialog::createDialogContent()
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
-	connect(ui->sourceEdit, SIGNAL(editingFinished()), this, SLOT(sourceEditingDone()));
+	connect(ui->sourceEdit, SIGNAL(editingFinished()),
+	        this, SLOT(saveEditedSource()));
 	connect(ui->deleteSourceButton, SIGNAL(clicked()), this, SLOT(deleteSourceRow()));
 	connect(ui->addSourceButton, SIGNAL(clicked()), this, SLOT(addSourceRow()));
+	connect(plugin, SIGNAL(settingsChanged()),
+	        this, SLOT(toggleCheckableSources()));
 
 	// About tab
 	setAboutHtml();
@@ -206,11 +218,6 @@ void SatellitesDialog::filterListByGroup(int index)
 	}
 	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
 	ui->satellitesList->scrollTo(first);
-}
-
-void SatellitesDialog::reloadSatellitesList()
-{
-	filterListByGroup(ui->groupsCombo->currentIndex());
 }
 
 void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
@@ -326,6 +333,11 @@ void SatellitesDialog::setAboutHtml()
 	ui->aboutTextBrowser->setHtml(html);
 }
 
+void SatellitesDialog::jumpToSourcesTab()
+{
+	ui->tabs->setCurrentWidget(ui->sourcesTab);
+}
+
 void SatellitesDialog::updateCountdown()
 {
 	Satellites* plugin = GETSTELMODULE(Satellites);
@@ -347,9 +359,8 @@ void SatellitesDialog::updateCountdown()
 	}
 }
 
-void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)
+void SatellitesDialog::showUpdateState(Satellites::UpdateState state)
 {
-	//qDebug() << "SatellitesDialog::updateStateReceiver got a signal";
 	if (state==Satellites::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (state==Satellites::DownloadError || state==Satellites::OtherError)
@@ -359,17 +370,26 @@ void SatellitesDialog::updateStateReceiver(Satellites::UpdateState state)
 	}
 }
 
-void SatellitesDialog::updateCompleteReceiver(int numUpdated, int total, int missing)
+void SatellitesDialog::showUpdateCompleted(int updated,
+                                           int total,
+                                           int added,
+                                           int missing)
 {
-	ui->nextUpdateLabel->setText(QString(q_("Updated %1/%2 satellite(s); %3 missing")).arg(numUpdated).arg(total).arg(missing));
+	Satellites* plugin = GETSTELMODULE(Satellites);
+	QString message;
+	if (plugin->isAutoRemoveEnabled())
+		message = q_("Updated %1/%2 satellite(s); %3 added; %4 removed");
+	else
+		message = q_("Updated %1/%2 satellite(s); %3 added; %4 missing");
+	ui->nextUpdateLabel->setText(message.arg(updated).arg(total).arg(added).arg(missing));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Satellites)->getLastUpdate());
-	QTimer *timer = new QTimer(this);
+	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
+	QTimer *timer = new QTimer(this); // FIXME: What's the point of this? --BM
 	connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 }
 
-void SatellitesDialog::sourceEditingDone(void)
+void SatellitesDialog::saveEditedSource()
 {
 	// don't update the currently selected item in the source list if the text is empty or not a valid URL.
 	QString u = ui->sourceEdit->text();
@@ -389,7 +409,8 @@ void SatellitesDialog::sourceEditingDone(void)
 		ui->sourceList->currentItem()->setText(u);
 	else if (ui->sourceList->findItems(u, Qt::MatchExactly).count() <= 0)
 	{
-		QListWidgetItem* i = new QListWidgetItem(u, ui->sourceList);
+		QListWidgetItem* i = new QListWidgetItem(u, ui->sourceList);;
+		i->setData(checkStateRole, Qt::Unchecked);
 		i->setSelected(true);
 	}
 
@@ -401,7 +422,10 @@ void SatellitesDialog::saveSourceList(void)
 	QStringList allSources;
 	for(int i=0; i<ui->sourceList->count(); i++)
 	{
-		allSources << ui->sourceList->item(i)->text();
+		QString url = ui->sourceList->item(i)->text();
+		if (ui->sourceList->item(i)->data(checkStateRole) == Qt::Checked)
+			url.prepend("1,");
+		allSources << url;
 	}
 	GETSTELMODULE(Satellites)->setTleSources(allSources);
 }
@@ -421,6 +445,34 @@ void SatellitesDialog::addSourceRow(void)
 	ui->sourceEdit->setText(q_("[new source]"));
 	ui->sourceEdit->selectAll();
 	ui->sourceEdit->setFocus();
+}
+
+void SatellitesDialog::toggleCheckableSources()
+{
+	qDebug() << "toggleCheckableSources() entered";
+	QListWidget* list = ui->sourceList;
+	if (list->count() < 1)
+		return; // Saves effort checking it on every step
+	
+	bool enabled = ui->checkBoxAutoAdd->isChecked(); // proxy :)
+	if (!enabled == list->item(0)->data(Qt::CheckStateRole).isNull())
+		return; // Nothing to do
+	
+	for (int row = 0; row < list->count(); row++)
+	{
+		QListWidgetItem* item = list->item(row);
+		if (enabled)
+		{
+			item->setData(Qt::CheckStateRole, item->data(Qt::UserRole));
+		}
+		else
+		{
+			item->setData(Qt::UserRole, item->data(Qt::CheckStateRole));
+			item->setData(Qt::CheckStateRole, QVariant());
+		}
+	}
+	checkStateRole = enabled ? Qt::CheckStateRole : Qt::UserRole;
+	qDebug() << "toggleCheckableSources() exited";
 }
 
 void SatellitesDialog::restoreDefaults(void)
@@ -444,6 +496,7 @@ void SatellitesDialog::updateSettingsPage()
 		ui->updateButton->setText(q_("Update now"));
 	else
 		ui->updateButton->setText(q_("Update from files"));
+	ui->checkBoxAutoAdd->setChecked(plugin->isAutoAddEnabled());
 	ui->checkBoxAutoRemove->setChecked(plugin->isAutoRemoveEnabled());
 	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
 	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
@@ -502,7 +555,24 @@ void SatellitesDialog::populateGroupsList()
 void SatellitesDialog::populateSourcesList()
 {
 	ui->sourceList->clear();
-	ui->sourceList->addItems(GETSTELMODULE(Satellites)->getTleSources());
+	
+	Satellites* plugin = GETSTELMODULE(Satellites);
+	QStringList urls = plugin->getTleSources();
+	checkStateRole = plugin->isAutoAddEnabled() ? Qt::CheckStateRole 
+	                                            : Qt::UserRole;
+	foreach (QString url, urls)
+	{
+		bool checked = false;
+		if (url.startsWith("1,"))
+		{
+			checked = true;
+			url.remove(0, 2);
+		}
+		else if (url.startsWith("0,"))
+			url.remove(0, 2);
+		QListWidgetItem* item = new QListWidgetItem(url, ui->sourceList);
+		item->setData(checkStateRole, checked ? Qt::Checked : Qt::Unchecked);
+	}
 	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
 }
 
@@ -562,8 +632,6 @@ void SatellitesDialog::removeSatellites()
 	if (!idList.isEmpty())
 	{
 		GETSTELMODULE(Satellites)->remove(idList);
-		// TODO: Remove this after implementing model invalidation.
-		reloadSatellitesList();
 		saveSatellites();
 	}
 }
