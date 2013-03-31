@@ -351,11 +351,12 @@ signals:
 	void updateStateChanged(Satellites::UpdateState state);
 
 	//! Emitted after an update has run.
-	//! @param updates the number of satellites updated.
-	//! @param total the total number of satellites in the JSON data.
-	//! @param missing the number of satellites in the JSON data but not found
-	//! in update data.
-	void tleUpdateComplete(int updates, int total, int missing);
+	//! @param updated the number of updated satellites;
+	//! @param total the total number of satellites in the catalog;
+	//! @param added the number of newly added satellites;
+	//! @param missing the number of satellites that were not found in the
+	//! update source(s) (and were removed, if autoRemoveEnabled is set).
+	void tleUpdateComplete(int updated, int total, int added, int missing);
 
 public slots:
 	// FIXME: Put back the getter functions - for scripts? --BM

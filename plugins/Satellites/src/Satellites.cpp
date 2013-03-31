@@ -1119,8 +1119,8 @@ void Satellites::updateFromOnlineSources()
 		markLastUpdate();
 		// TODO: Do something saner, such as disabling internet updates,
 		// or stopping the timer. --BM
-		
-		emit(tleUpdateComplete(0,satellites.count(),satellites.count()));
+		emit updateStateChanged(OtherError);
+		emit tleUpdateComplete(0, satellites.count(), 0, 0);
 		return;
 	}
 
@@ -1403,7 +1403,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	         << sourceCount << "source entries parsed.";
 
 	emit(updateStateChanged(updateState));
-	emit(tleUpdateComplete(updatedCount, totalCount, missingCount));
+	emit(tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount));
 }
 
 void Satellites::parseTleFile(QFile& openFile,
