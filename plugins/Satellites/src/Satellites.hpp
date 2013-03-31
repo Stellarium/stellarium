@@ -242,13 +242,6 @@ public:
 	//! Returns a list of all satellite IDs.
 	QStringList listAllIds();
 	
-	//! Add to the current collection the satellite described by the data.
-	//! @todo This probably could be done easier if Satellite had a constructor
-	//! accepting TleData... --BM
-	//! @todo Probably shouldn't be a public method... --BM
-	//! @returns true if the addition was successful.
-	bool add(const TleData& tleData);
-	
 	//! Add to the current collection the satellites described by the data list.
 	//! The changes are not saved to file.
 	//! Calls add(TleData).
@@ -433,22 +426,25 @@ private slots:
 	void setStelStyle(const QString& section);
 
 private:
+	//! Add to the current collection the satellite described by the data.
+	//! @warning Use only in other methods! Does not update satelliteListModel!
+	//! @todo This probably could be done easier if Satellite had a constructor
+	//! accepting TleData... --BM
+	//! @returns true if the addition was successful.
+	bool add(const TleData& tleData);
+	
 	//! Delete Satellites section in main config.ini, then create with default values.
 	void restoreDefaultSettings();
-
 	//! Replace the catalog file with the default one.
 	void restoreDefaultCatalog();
-
 	//! Load the satellites from the catalog file.
 	//! Removes existing satellites first if there are any.
 	//! this will be done once at init, and also if the defaults are reset.
 	void loadCatalog();
-
 	//! Creates a backup of the satellites.json file called satellites.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupCatalog(bool deleteOriginal=false);
-
 	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
