@@ -1279,7 +1279,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	updateSatellites(newTleSets);
 }
 
-void Satellites::updateSatellites(const TleDataHash& newTleSets)
+void Satellites::updateSatellites(TleDataHash& newTleSets)
 {
 	// Save the update time.
 	// One of the reasons it's here is that lastUpdate is used below.

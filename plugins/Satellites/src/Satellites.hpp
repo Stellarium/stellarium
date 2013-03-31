@@ -319,8 +319,9 @@ public:
 	//! modify updateFromFiles to use the same prefix trick (adding "1,"
 	//! to file paths). I decided against it because I thought it would be more
 	//! complex. :) --BM
-	//! @param newTleSets a hash with satellite IDs as keys.
-	void updateSatellites(const TleDataHash& newTleSets);
+	//! @param[in,out] newTleSets a hash with satellite IDs as keys; it's
+	//! modified by the method!
+	void updateSatellites(TleDataHash& newTleSets);
 	
 	//! Reads a TLE list from a file to the supplied hash.
 	//! If an entry with the same ID exists in the given hash, its contents
