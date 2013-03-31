@@ -521,6 +521,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("show_satellite_hints", false);
 	conf->setValue("show_satellite_labels", true);
 	conf->setValue("updates_enabled", true);
+	conf->setValue("auto_add_enabled", true);
 	conf->setValue("auto_remove_enabled", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
 	conf->setValue("hint_font_size", 10);
@@ -534,7 +535,7 @@ void Satellites::restoreDefaultSettings()
 	
 	// TLE update sources
 	QStringList urls;
-	urls << "http://celestrak.com/NORAD/elements/visual.txt"
+	urls << "1,http://celestrak.com/NORAD/elements/visual.txt" // Auto-add ON!
 	     << "http://celestrak.com/NORAD/elements/tle-new.txt"
 	     << "http://celestrak.com/NORAD/elements/science.txt"
 	     << "http://celestrak.com/NORAD/elements/noaa.txt"
@@ -612,10 +613,16 @@ void Satellites::loadSettings()
 			conf->setArrayIndex(i);
 			QString url = conf->value("url").toString();
 			if (!url.isEmpty())
+			{
+				if (conf->value("add_new").toBool())
+					url.prepend("1,");
 				updateUrls.append(url);
+			}
 		}
 		conf->endArray();
 	}
+	
+	// NOTE: Providing default values AND using restoreDefaultSettings() to create the section seems redundant. --BM 
 	
 	// updater related settings...
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
@@ -624,6 +631,7 @@ void Satellites::loadSettings()
 	setFlagHints(conf->value("show_satellite_hints", false).toBool());
 	Satellite::showLabels = conf->value("show_satellite_labels", true).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
+	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
 
 	// Get a font for labels
@@ -648,6 +656,7 @@ void Satellites::saveSettings()
 	conf->setValue("show_satellite_hints", getFlagHints());
 	conf->setValue("show_satellite_labels", Satellite::showLabels);
 	conf->setValue("updates_enabled", updatesEnabled );
+	conf->setValue("auto_add_enabled", autoAddEnabled);
 	conf->setValue("auto_remove_enabled", autoRemoveEnabled);
 
 	// Get a font for labels
@@ -963,9 +972,16 @@ void Satellites::saveTleSources(const QStringList& urls)
 
 	int index = 0;
 	conf->beginWriteArray("tle_sources");
-	foreach (const QString& url, urls)
+	foreach (QString url, urls)
 	{
 		conf->setArrayIndex(index++);
+		if (url.startsWith("1,"))
+		{
+			conf->setValue("add_new", true);
+			url.remove(0, 2);
+		}
+		else if (url.startsWith("0,"))
+			url.remove(0, 2);
 		conf->setValue("url", url);
 	}
 	conf->endArray();
@@ -983,6 +999,15 @@ void Satellites::enableInternetUpdates(bool enabled)
 	if (enabled != updatesEnabled)
 	{
 		updatesEnabled = enabled;
+		emit settingsChanged();
+	}
+}
+
+void Satellites::enableAutoAdd(bool enabled)
+{
+	if (autoAddEnabled != enabled)
+	{
+		autoAddEnabled = enabled;
 		emit settingsChanged();
 	}
 }
@@ -1036,10 +1061,10 @@ void Satellites::checkForUpdate(void)
 {
 	if (updatesEnabled && updateState != Updating
 	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
-		updateTLEs();
+		updateFromOnlineSources();
 }
 
-void Satellites::updateTLEs(void)
+void Satellites::updateFromOnlineSources()
 {
 	if (updateState==Satellites::Updating)
 	{
@@ -1070,7 +1095,7 @@ void Satellites::updateTLEs(void)
 
 	updateState = Satellites::Updating;
 	emit(updateStateChanged(updateState));
-	updateFiles.clear();
+	updateSources.clear();
 	numberDownloadsComplete = 0;
 
 	if (progressBar==NULL)
@@ -1081,10 +1106,27 @@ void Satellites::updateTLEs(void)
 	progressBar->setVisible(true);
 	progressBar->setFormat("TLE download %v/%m");
 
-	// set off the downloads
-	for(int i=0; i<updateUrls.size(); i++)
+	foreach (QString url, updateUrls)
 	{
-		downloadMgr->get(QNetworkRequest(QUrl(updateUrls.at(i))));
+		TleSource source;
+		source.file = 0;
+		source.addNew = false;
+		if (url.startsWith("1,"))
+		{
+			// Also prevents inconsistent behavior if the user toggles the flag
+			// while an update is in progress.
+			source.addNew = autoAddEnabled;
+			url.remove(0, 2);
+		}
+		else if (url.startsWith("0,"))
+			url.remove(0, 2);
+		
+		source.url.setUrl(url);
+		if (source.url.isValid())
+		{
+			updateSources.append(source);
+			downloadMgr->get(QNetworkRequest(source.url));
+		}
 	}
 }
 
@@ -1093,23 +1135,41 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Satellites::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "Satellites: FAILED to download" << reply->url()
+		           << "Error: " << reply->errorString();
 	}
 	else
 	{
 		// download completed successfully.
 		try
 		{
-			QString partialName = QString("tle%1.txt").arg(numberDownloadsComplete);
-			QString tleTmpFilePath = StelFileMgr::findFile("modules/Satellites", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/" + partialName;
-			QFile tmpFile(tleTmpFilePath);
-			if (tmpFile.exists())
-				tmpFile.remove();
+			// TODO: Keep plugin dir in a member to avoid repeating this? --BM
+			QString name = QString("tle%1.txt").arg(numberDownloadsComplete);
+			QString path = StelFileMgr::findFile("modules/Satellites", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/" + name;
+			// QFile as a child object to the plugin to ease memory management
+			QFile* tmpFile = new QFile(path, this);
+			if (tmpFile->exists())
+				tmpFile->remove();
 
-			tmpFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			tmpFile.write(reply->readAll());
-			tmpFile.close();
-			updateFiles << tleTmpFilePath;
+			if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text))
+			{
+				tmpFile->write(reply->readAll());
+				tmpFile->close();
+				
+				// The reply URL can be different form the requested one...
+				QUrl url = reply->request().url();
+				for (int i = 0; i < updateSources.count(); i++)
+				{
+					if (updateSources[i].url == url)
+					{
+						updateSources[i].file = tmpFile;
+						tmpFile = 0;
+						break;
+					}
+				}
+				if (tmpFile) // Something strange just happened...
+					delete tmpFile; // ...so we have to clean.
+			}
 		}
 		catch (std::runtime_error &e)
 		{
@@ -1120,11 +1180,29 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	if (progressBar)
 		progressBar->setValue(numberDownloadsComplete);
 
-	// all downloads are complete...  do the update.
-	if (numberDownloadsComplete >= updateUrls.size())
+	// Check if all files have been downloaded.
+	// TODO: It's better to keep track of the network requests themselves. --BM 
+	if (numberDownloadsComplete < updateSources.size())
+		return;
+	
+	// All files have been downloaded, finish the update
+	TleDataHash newData;
+	for (int i = 0; i < updateSources.count(); i++)
 	{
-		updateFromFiles(updateFiles, true);
+		if (!updateSources[i].file)
+			continue;
+		if (updateSources[i].file->open(QFile::ReadOnly|QFile::Text))
+		{
+			parseTleFile(*updateSources[i].file,
+			             newData,
+			             updateSources[i].addNew);
+			updateSources[i].file->close();
+			delete updateSources[i].file;
+			updateSources[i].file = 0;
+		}
 	}
+	updateSources.clear();
+	updateSatellites(newData);
 }
 
 void Satellites::updateObserverLocation(StelLocation)
@@ -1174,14 +1252,6 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 {
 	// Container for the new data.
 	TleDataHash newTleSets;
-
-	if (progressBar)
-	{
-		progressBar->setValue(0);
-		progressBar->setMaximum(paths.size() + 1);
-		progressBar->setFormat("TLE updating %v/%m");
-	}
-
 	foreach(const QString& tleFilePath, paths)
 	{
 		QFile tleFile(tleFilePath);
@@ -1193,10 +1263,13 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 			if (deleteFiles)
 				tleFile.remove();
 		}
-		if (progressBar)
-			progressBar->setValue(progressBar->value() + 1);
 	}
-	
+
+	updateSatellites(newTleSets);
+}
+
+void Satellites::updateSatellites(const TleDataHash& newTleSets)
+{
 	// Save the update time.
 	// One of the reasons it's here is that lastUpdate is used below.
 	markLastUpdate();
@@ -1208,7 +1281,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		emit(updateStateChanged(updateState));
 		return;
 	}
-
+	
 	// Right, we should now have a map of all the elements we downloaded.  For each satellite
 	// which this module is managing, see if it exists with an updated element, and update it if so...
 	int updatedCount = 0;
@@ -1265,8 +1338,11 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	
 	//TODO: Update the model structure somewhere here. --BM
 
-	delete progressBar;
-	progressBar = NULL;
+	if (progressBar)
+	{
+		delete progressBar;
+		progressBar = 0;
+	}
 
 	qDebug() << "Satellites: updated" << updatedCount << "/" << totalCount
 	         << "satellites. Update source contained"
@@ -1278,7 +1354,9 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	emit(tleUpdateComplete(updatedCount, totalCount, missingCount));
 }
 
-void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList)
+void Satellites::parseTleFile(QFile& openFile,
+                              TleDataHash& tleList,
+                              bool addFlagValue)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
 		return;
@@ -1294,9 +1372,12 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList)
 		{
 			// New entry in the list, so reset all fields
 			lastData = TleData();
+			lastData.addThis = addFlagValue;
 			
 			//TODO: We need to think of some kind of ecaping these
 			//characters in the JSON parser. --BM
+			// The thing in square brackets after the name is actually
+			// Celestrak's "status code". Parse automatically? --BM
 			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
 			lastData.name = line;
 		}
