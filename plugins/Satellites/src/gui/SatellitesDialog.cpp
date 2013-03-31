@@ -639,7 +639,7 @@ void SatellitesDialog::updateTLEs(void)
 {
 	if(GETSTELMODULE(Satellites)->getUpdatesEnabled())
 	{
-		GETSTELMODULE(Satellites)->updateTLEs();
+		GETSTELMODULE(Satellites)->updateFromOnlineSources();
 	}
 	else
 	{

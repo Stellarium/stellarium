@@ -28,6 +28,7 @@
 
 #include <QDateTime>
 #include <QFile>
+#include <QUrl>
 #include <QVariantMap>
 
 class StelButton;
@@ -51,10 +52,28 @@ struct TleData
 	QString name;
 	QString first;
 	QString second;
+	//! Flag indicating whether this satellite should be added.
+	//! See Satellites::autoAddEnabled.
+	bool addThis;
 };
 
 typedef QList<TleData> TleDataList;
 typedef QHash<QString, TleData> TleDataHash ;
+
+//! TLE update source, used only internally for now.
+struct TleSource
+{
+	//! URL from where the source list should be downloaded.
+	QUrl url;
+	//! The downloaded file, location set after finishing download.
+	//! In the future may be a QTemporaryFile object.
+	QFile* file;
+	//! Flag indicating whether new satellites in this list should be added.
+	//! See Satellites::autoAddEnabled.
+	bool addNew;
+};
+
+typedef QList<TleSource> TleSourceList;
 
 
 /*! @mainpage notitle
@@ -99,12 +118,19 @@ file.
 
 //! @class Satellites
 //! Main class of the %Satellites plugin.
+//! @author Matthew Gates
+//! @author Bogdan Marinov
 class Satellites : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool autoAddEnabled
+	           READ isAutoAddEnabled
+	           WRITE enableAutoAdd
+	           NOTIFY settingsChanged)
 	Q_PROPERTY(bool autoRemoveEnabled
 	           READ isAutoRemoveEnabled
-	           WRITE enableAutoRemove)
+	           WRITE enableAutoRemove
+	           NOTIFY settingsChanged)
 	
 public:
 	//! @enum UpdateState
@@ -244,11 +270,17 @@ public:
 	UpdateState getUpdateState(void) {return updateState;}
 
 	//! Get a list of URLs which are sources of TLE data.
+	//! @returns a list of URL strings, some with prefixes - see #updateUrls
+	//! for details.
 	QStringList getTleSources(void) {return updateUrls;}
 
 	//! Set the list of URLs which are sources of TLE data.
 	//! In addition to replacing the current list of sources, it also
-	//! saves them to the configuration file.
+	//! saves them to the configuration file. Allows marking sources for
+	//! auto-addition by adding a prefix to the URL string.
+	//! @see updateUrls
+	//! @param tleSources a list of valid URLs (http://, ftp://, file://),
+	//! allowed prefixes are "0,", "1," or no prefix.
 	void setTleSources(QStringList tleSources);
 	
 	//! Saves the current list of update URLs to the configuration file.
@@ -261,18 +293,38 @@ public:
 
 	//! Reads update file(s) in celestrak's .txt format, and updates
 	//! the TLE elements for exisiting satellites from them.
-	//! emits signals updateStateChanged and tleUpdateComplete
+	//! Indirectly emits signals updateStateChanged() and tleUpdateComplete(),
+	//! as it calls updateSatellites().
+	//! See updateFromOnlineSources() for the other kind of update operation.
 	//! @param paths a list of paths to update files
 	//! @param deleteFiles if set, the update files are deleted after
 	//!        they are used, else they are left alone
 	void updateFromFiles(QStringList paths, bool deleteFiles=false);
 	
+	//! Updates the loaded satellite collection from the provided data.
+	//! Worker function called by updateFromFiles() and saveDownloadedUpdate().
+	//! (Respecitvely, user-initiated update from file(s) and user- or auto-
+	//! initiated update from online source(s).)
+	//! Emits updateStateChanged() and tleUpdateComplete().
+	//! @note Instead of splitting this method off updateFromFiles() and passing
+	//! the auto-add flag through data structures, another possiblity was to
+	//! modify updateFromFiles to use the same prefix trick (adding "1,"
+	//! to file paths). I decided against it because I thought it would be more
+	//! complex. :) --BM
+	//! @param newTleSets a hash with satellite IDs as keys.
+	void updateSatellites(const TleDataHash& newTleSets);
+	
 	//! Reads a TLE list from a file to the supplied hash.
 	//! If an entry with the same ID exists in the given hash, its contents
 	//! are overwritten with the new values.
 	//! \param openFile a reference to an \b open file.
-	//! \param tleList a hash with satellite IDs (catalog numbers) as keys.
-	static void parseTleFile(QFile& openFile, TleDataHash& tleList);
+	//! @param[in,out] tleList a hash with satellite IDs as keys.
+	//! @param[in] addFlagValue value to be set to TleData::addThis for all.
+	//! @todo If this can accept a QIODevice, it will be able to read directly
+	//! QNetworkReply-s... --BM
+	static void parseTleFile(QFile& openFile,
+	                         TleDataHash& tleList,
+	                         bool addFlagValue = false);
 	
 	bool getFlagHints() {return hintFader;}
 	//! get the label font size.
@@ -281,6 +333,7 @@ public:
 	bool getFlagLabels();
 	//! Get the current status of the orbit line rendering flag.
 	bool getOrbitLinesFlag();
+	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
 
 signals:
@@ -303,12 +356,15 @@ signals:
 	void tleUpdateComplete(int updates, int total, int missing);
 
 public slots:
-	// REMINDER: All slots must return void! --BM
+	// FIXME: Put back the getter functions - for scripts? --BM
 	
 	//! Set whether the plugin will try to download updates from the Internet.
 	//! Emits settingsChanged() if the value changes.
 	//! @param b if true, updates will be enabled, else they will be disabled.
 	void enableInternetUpdates(bool enabled = true);
+	
+	//! Emits settingsChanged() if the value changes.
+	void enableAutoAdd(bool enabled = true);
 	
 	//! Emits settingsChanged() if the value changes.
 	void enableAutoRemove(bool enabled = true);
@@ -332,10 +388,20 @@ public slots:
 	//! Emits settingsChanged() if the value changes.
 	void setUpdateFrequencyHours(int hours);
 	
-	//! Download TLEs from web recources described in the module section of the
-	//! module.ini file and update the TLE values for any satellites for which
-	//! there is new TLE data.
-	void updateTLEs(void);
+	//! Start an Internet update.
+	//! This method starts the process of an Internet update: it tries to
+	//! download TLE lists from online recources and then use them to 
+	//! update the orbital data (and names, etc.) of the included satellites.
+	//! This only initialized the download. The rest of the work is done by
+	//! saveDownloadedUpdate() and updateSatellites().
+	//! Update sources are described in updateUrls (see for accessor details).
+	//! If autoAddEnabled is true when this function is called, new satellites
+	//! in the chosen update sources will be added during the update. 
+	//! If autoRemoveEnabled is true when this function is called, any existing
+	//! satellite that can't be found in the downloaded update lists will be
+	//! removed.
+	//! See updateFromFiles() for the other type of update operation.
+	void updateFromOnlineSources();
 
 	//! Choose whether or not to draw orbit lines.  Each satellite has its own setting
 	//! as well, but this can be used to turn on/off all those satellites which elect to
@@ -405,7 +471,7 @@ private:
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
 	
-	//! All possible groups used by all loaded satellites - see @ref groups.
+	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
 	//! a group is not removed even if there are no more satellites tagged with
 	//! it.
@@ -433,15 +499,28 @@ private:
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	//! List of TLE source lists for automatic updates.
-	//! See also setTleSources().
+	//! Use getTleSources() to get the value, setTleSources() to set it (and
+	//! save it to configuration).
+	//! URLs prefixed with "1," indicate that satellites from this source will
+	//! be auto-added if autoAddEnabled is true. URLs prefixed with "0," or
+	//! without a prefix are used only to update existing satellites. This
+	//! system was introduced to avoid using a custom type as a parameter in
+	//! setTleSources(), which in turn allows it to be used in scripts.
 	QStringList updateUrls;
-	//! File paths to - either downloaded or selected by the user.
-	QStringList updateFiles;
+	//! Temporary stores update URLs and files during an online update.
+	//! In use only between updateFromOnlineSources() and the final call to
+	//! saveDownloadedUpdate(). @b DO @b NOT use elsewhere!
+	//! As a side effect it prevents problems if the user calls
+	//! setTleSources() while an update is in progress.
+	TleSourceList updateSources;
 	QProgressBar* progressBar;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
 	//! Flag enabling automatic Internet updates.
 	bool updatesEnabled;
+	//! Flag enabling the automatic addition of new satellites on update.
+	//! This will apply only for the selected update sources.
+	bool autoAddEnabled;
 	//! Flag enabling the automatic removal of missing satellites on update.
 	bool autoRemoveEnabled;
 	QDateTime lastUpdate;
@@ -464,6 +543,14 @@ private slots:
 	//! if the last update was longer than updateFrequencyHours ago then the update is
 	//! done.
 	void checkForUpdate(void);
+	//! Save the downloaded file and finish the update if it's the last one.
+	//! Calls updateSatellites() and indirectly emits updateStateChanged()
+	//! and updateFinished().
+	//! Ends the update process started with updateFromOnlineSources().
+	//! @todo I've kept the previous behaviour, which was to save the update to
+	//! temporary files and then read them. If we give up on the idea to
+	//! re-use them later when adding manually satellites, parseTleFile()
+	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
 	void updateObserverLocation(StelLocation loc);
 
