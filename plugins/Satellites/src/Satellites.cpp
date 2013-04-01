@@ -592,10 +592,14 @@ void Satellites::loadSettings()
 	{
 		if (keyRE.exactMatch(key))
 		{
-			QString s = conf->value(key, "").toString();
-			if (!s.isEmpty() && s!="")
-				urls << s;
+			QString url = conf->value(key).toString();
 			conf->remove(key); // Delete old-style keys
+			if (url.isEmpty())
+				continue;
+			// NOTE: This URL is also hardcoded in restoreDefaultSettings().
+			if (url == "http://celestrak.com/NORAD/elements/visual.txt")
+				url.prepend("1,"); // Same as in the new default configuration
+			urls << url;
 		}
 	}
 	// If any have been read, save them in the new format.
