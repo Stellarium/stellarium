@@ -167,6 +167,8 @@ void SatellitesDialog::createDialogContent()
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
+	connect(ui->sourceList, SIGNAL(itemChanged(QListWidgetItem*)),
+	        this, SLOT(saveSourceList()));
 	connect(ui->sourceEdit, SIGNAL(editingFinished()),
 	        this, SLOT(saveEditedSource()));
 	connect(ui->deleteSourceButton, SIGNAL(clicked()), this, SLOT(deleteSourceRow()));
@@ -405,6 +407,8 @@ void SatellitesDialog::saveEditedSource()
 		return;
 	}
 
+	// Changes to item data (text or check state) are connected to
+	// saveSourceList(), so there's no need to call it explicitly.
 	if (ui->sourceList->currentItem()!=NULL)
 		ui->sourceList->currentItem()->setText(u);
 	else if (ui->sourceList->findItems(u, Qt::MatchExactly).count() <= 0)
@@ -413,8 +417,6 @@ void SatellitesDialog::saveEditedSource()
 		i->setData(checkStateRole, Qt::Unchecked);
 		i->setSelected(true);
 	}
-
-	saveSourceList();
 }
 
 void SatellitesDialog::saveSourceList(void)
@@ -449,7 +451,6 @@ void SatellitesDialog::addSourceRow(void)
 
 void SatellitesDialog::toggleCheckableSources()
 {
-	qDebug() << "toggleCheckableSources() entered";
 	QListWidget* list = ui->sourceList;
 	if (list->count() < 1)
 		return; // Saves effort checking it on every step
@@ -458,6 +459,7 @@ void SatellitesDialog::toggleCheckableSources()
 	if (!enabled == list->item(0)->data(Qt::CheckStateRole).isNull())
 		return; // Nothing to do
 	
+	ui->sourceList->blockSignals(true); // Prevents saving the list...
 	for (int row = 0; row < list->count(); row++)
 	{
 		QListWidgetItem* item = list->item(row);
@@ -471,8 +473,9 @@ void SatellitesDialog::toggleCheckableSources()
 			item->setData(Qt::CheckStateRole, QVariant());
 		}
 	}
+	ui->sourceList->blockSignals(false);
+	
 	checkStateRole = enabled ? Qt::CheckStateRole : Qt::UserRole;
-	qDebug() << "toggleCheckableSources() exited";
 }
 
 void SatellitesDialog::restoreDefaults(void)
@@ -554,6 +557,7 @@ void SatellitesDialog::populateGroupsList()
 
 void SatellitesDialog::populateSourcesList()
 {
+	ui->sourceList->blockSignals(true);
 	ui->sourceList->clear();
 	
 	Satellites* plugin = GETSTELMODULE(Satellites);
@@ -573,6 +577,8 @@ void SatellitesDialog::populateSourcesList()
 		QListWidgetItem* item = new QListWidgetItem(url, ui->sourceList);
 		item->setData(checkStateRole, checked ? Qt::Checked : Qt::Unchecked);
 	}
+	ui->sourceList->blockSignals(false);
+	
 	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
 }
 
