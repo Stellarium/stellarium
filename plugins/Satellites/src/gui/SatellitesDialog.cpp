@@ -281,8 +281,9 @@ void SatellitesDialog::setAboutHtml()
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
-	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
+	html += "<tr><td rowspan=3><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
+	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
 
