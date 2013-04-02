@@ -47,13 +47,6 @@ public:
 	
 	void setSatelliteList(QList<SatelliteP>* satellites);
 	
-	//! Description of the data roles.
-	enum DataRole {
-		IdRole = Qt::UserRole,
-		FlagsRole,
-		GroupsRole
-	};
-	
 	//! @name Reimplemented model handling methods.
 	//@{
 	Qt::ItemFlags flags(const QModelIndex& index) const;

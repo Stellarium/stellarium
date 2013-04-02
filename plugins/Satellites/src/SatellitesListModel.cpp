@@ -75,11 +75,20 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 		case Qt::UserRole:
 			return (sat->id);
 			
-		case FlagsRole:
+		case SatDescriptionRole:
+			return (sat->description);
+			
+		case SatFlagsRole:
 			return (QVariant::fromValue<SatFlags>(sat->getFlags()));
 			
-		case GroupsRole:
+		case SatGroupsRole:
 			return (QVariant::fromValue<GroupSet>(sat->groups));
+			
+		case FirstLineRole:
+			return (sat->tleElements.first);
+			
+		case SecondLineRole:
+			return (sat->tleElements.second);
 			
 		default:
 			break;
