@@ -322,6 +322,11 @@ void StelMainScriptAPI::setSkyCulture(const QString& id)
 	emit(requestSetSkyCulture(id));
 }
 
+QString StelMainScriptAPI::getSkyCultureName()
+{
+	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18();
+}
+
 bool StelMainScriptAPI::getFlagGravityLabels()
 {
 	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getFlagGravityLabels();
