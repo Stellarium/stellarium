@@ -79,7 +79,7 @@ void SatellitesDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateSettingsPage(); // For the button; also calls updateCountdown()
 		setAboutHtml();
-		populateGroupsList();
+		populateFilterMenu();
 	}
 }
 
@@ -161,8 +161,12 @@ void SatellitesDialog::createDialogContent()
 	        ui->displayedCheckbox, SLOT(setChecked(bool)));
 	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)),
 	        ui->orbitCheckbox, SLOT(setChecked(bool)));
+	
+	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
+	        this, SLOT(handleGroupChanges(QListWidgetItem*)));
 
-	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
+	connect(ui->groupFilterCombo, SIGNAL(currentIndexChanged(int)),
+	        this, SLOT(filterListByGroup(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 	connectSatelliteGuiForm();
@@ -187,7 +191,7 @@ void SatellitesDialog::createDialogContent()
 	// About tab
 	setAboutHtml();
 
-	populateGroupsList();
+	populateFilterMenu();
 	populateSourcesList();
 }
 
@@ -196,7 +200,7 @@ void SatellitesDialog::filterListByGroup(int index)
 	if (index < 0)
 		return;
 	
-	QString groupId = ui->groupsCombo->itemData(index).toString();
+	QString groupId = ui->groupFilterCombo->itemData(index).toString();
 	if (groupId == "all")
 		filterModel->setSecondaryFilters(QString(), SatNoFlags);
 	else if (groupId == "[displayed]")
@@ -232,6 +236,7 @@ void SatellitesDialog::filterListByGroup(int index)
 
 void SatellitesDialog::updateSatelliteData()
 {
+	// NOTE: This was probably going to be used for editing satellites?
 	satelliteModified = false;
 
 	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
@@ -265,8 +270,9 @@ void SatellitesDialog::updateSatelliteData()
 //	ui->commsButton->setEnabled(sat->comms.count()>0);
 	
 	// Things that are cumulative in a multi-selection
-	GroupSet partialGroups;
-	GroupSet allGroups = GETSTELMODULE(Satellites)->getGroups();
+	GroupSet globalGroups = GETSTELMODULE(Satellites)->getGroups();
+	GroupSet groupsUsedBySome;
+	GroupSet groupsUsedByAll = globalGroups;
 	ui->displayedCheckbox->setChecked(false);
 	ui->orbitCheckbox->setChecked(false);
 	
@@ -274,7 +280,7 @@ void SatellitesDialog::updateSatelliteData()
 	{
 		const QModelIndex& index = selection.at(i);
 		
-		// "Display" flag
+		// "Displayed" checkbox
 		SatFlags flags = index.data(SatFlagsRole).value<SatFlags>();
 		if (flags.testFlag(SatDisplayed))
 		{
@@ -289,24 +295,47 @@ void SatellitesDialog::updateSatelliteData()
 		else
 			if (ui->displayedCheckbox->isChecked())
 				ui->displayedCheckbox->setCheckState(Qt::PartiallyChecked);
-			
-		// TODO: "Display Orbit" flag!
-		// ui->orbitCheckbox->setChecked(sat->orbitDisplayed);
+		
+		// "Orbit" box 
+		if (flags.testFlag(SatOrbit))
+		{
+			if (!ui->orbitCheckbox->isChecked())
+			{
+				if (i == 0)
+					ui->orbitCheckbox->setChecked(true);
+				else
+					ui->orbitCheckbox->setCheckState(Qt::PartiallyChecked);
+			}
+		}
+		else
+			if (ui->orbitCheckbox->isChecked())
+				ui->orbitCheckbox->setCheckState(Qt::PartiallyChecked);
 		
 		// Accumulating groups
 		GroupSet groups = index.data(SatGroupsRole).value<GroupSet>();
-		partialGroups.unite(groups);
-		allGroups.intersect(groups);
+		groupsUsedBySome.unite(groups);
+		groupsUsedByAll.intersect(groups);
 	}
 	
-	// TODO: Proper groups control
-	QStringList translatedGroups;
-	foreach (const QString& group, partialGroups)
+	// Repopulate the group selector
+	// Nice list of checkable, translated groups that allows adding new groups
+	ui->groupsListWidget->blockSignals(true);
+	ui->groupsListWidget->clear();
+	foreach (const QString& group, globalGroups)
 	{
-		translatedGroups.append(q_(group));
+		QListWidgetItem* item = new QListWidgetItem(q_(group),
+		                                            ui->groupsListWidget);
+		item->setData(Qt::UserRole, group);
+		Qt::CheckState state = Qt::Unchecked;
+		if (groupsUsedByAll.contains(group))
+			state = Qt::Checked;
+		else if (groupsUsedBySome.contains(group))
+			state = Qt::PartiallyChecked;
+		item->setData(Qt::CheckStateRole, state);
 	}
-	translatedGroups.sort();
-	ui->groupsTextEdit->setText(translatedGroups.join(", "));
+	ui->groupsListWidget->sortItems();
+	addSpecialGroupItem(); // Add the "Add new..." line
+	ui->groupsListWidget->blockSignals(false);
 	
 	connectSatelliteGuiForm();
 }
@@ -527,7 +556,7 @@ void SatellitesDialog::restoreDefaults(void)
 	GETSTELMODULE(Satellites)->restoreDefaults();
 	GETSTELMODULE(Satellites)->loadSettings();
 	updateSettingsPage();
-	populateGroupsList();
+	populateFilterMenu();
 	populateSourcesList();
 }
 
@@ -559,43 +588,43 @@ void SatellitesDialog::updateSettingsPage()
 	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
 }
 
-void SatellitesDialog::populateGroupsList()
+void SatellitesDialog::populateFilterMenu()
 {
 	// Save current selection, if any...
 	QString selectedId;
-	int index = ui->groupsCombo->currentIndex();
-	if (ui->groupsCombo->count() > 0 && index >= 0)
+	int index = ui->groupFilterCombo->currentIndex();
+	if (ui->groupFilterCombo->count() > 0 && index >= 0)
 	{
-		selectedId = ui->groupsCombo->itemData(index).toString();
+		selectedId = ui->groupFilterCombo->itemData(index).toString();
 	}
 	
 	// Populate with group names/IDs
-	ui->groupsCombo->clear();
+	ui->groupFilterCombo->clear();
 	foreach (const QString& group, GETSTELMODULE(Satellites)->getGroupIdList())
 	{
-		ui->groupsCombo->addItem(q_(group), group);
+		ui->groupFilterCombo->addItem(q_(group), group);
 	}
-	ui->groupsCombo->model()->sort(0);
+	ui->groupFilterCombo->model()->sort(0);
 	
 	// Add special groups - their IDs deliberately use JSON-incompatible chars.
-	ui->groupsCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("[orbiterror]"));
-	ui->groupsCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
-	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
-	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
-	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
+	ui->groupFilterCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("[orbiterror]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 	
 	// Restore current selection
 	// Nothing is supposed to be changed, so prevent the list from re-filtering
-	ui->groupsCombo->blockSignals(true);
+	ui->groupFilterCombo->blockSignals(true);
 	index = 0;
 	if (!selectedId.isEmpty())
 	{
-		index = ui->groupsCombo->findData(selectedId);
+		index = ui->groupFilterCombo->findData(selectedId);
 		if (index < 0)
 			index = 0;
 	}
-	ui->groupsCombo->setCurrentIndex(index);
-	ui->groupsCombo->blockSignals(false);
+	ui->groupFilterCombo->setCurrentIndex(index);
+	ui->groupFilterCombo->blockSignals(false);
 }
 
 void SatellitesDialog::populateSourcesList()
@@ -625,6 +654,65 @@ void SatellitesDialog::populateSourcesList()
 	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
 }
 
+void SatellitesDialog::updateDisplayBox(const SatFlags& flags,
+                                        const SatFlag& flag,
+                                        QCheckBox* checkBox)
+{
+	Q_ASSERT(checkBox);
+	
+	
+}
+
+void SatellitesDialog::addSpecialGroupItem()
+{
+	if (ui->groupsListWidget->count() == 0)
+		return;
+	
+	// TRANSLATORS: Displayed in the satellite group selection box.
+	QListWidgetItem* item = new QListWidgetItem(q_("New group..."));
+	item->setFlags(Qt::ItemIsEnabled|Qt::ItemIsEditable|Qt::ItemIsSelectable);
+	QFont font = ui->groupsListWidget->item(0)->font();
+	font.setItalic(true);
+	item->setFont(font);
+	ui->groupsListWidget->insertItem(0, item);
+}
+
+void SatellitesDialog::setGroups()
+{
+	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
+	if (selection.isEmpty())
+		return;
+	
+	// Let's determine what to add or remove 
+	// (partially checked groups are not modified)
+	GroupSet groupsToAdd;
+	GroupSet groupsToRemove;
+	for (int row = 0; row < ui->groupsListWidget->count(); row++)
+	{
+		QListWidgetItem* item = ui->groupsListWidget->item(row);
+		if (item->flags().testFlag(Qt::ItemIsEditable))
+			continue;
+		if (item->checkState() == Qt::Checked)
+			groupsToAdd.insert(item->data(Qt::UserRole).toString());
+		else if (item->checkState() == Qt::Unchecked)
+			groupsToRemove.insert(item->data(Qt::UserRole).toString());
+	}
+	for (int i = 0; i < selection.count(); i++)
+	{
+		const QModelIndex& index = selection.at(i);
+		GroupSet groups = index.data(SatGroupsRole).value<GroupSet>();
+		groups.subtract(groupsToRemove);
+		groups.unite(groupsToAdd);
+		QVariant newGroups = QVariant::fromValue<GroupSet>(groups);
+		// FIXME: Let's see if the proxy will pass it...
+		ui->satellitesList->model()->setData(index, newGroups, SatGroupsRole);
+	}
+	
+	// TODO: Somehow update the global group list...
+	// TODO: And update the group filter
+	// FIXME: Find out why the group filter is "amateur" on first shown.
+}
+
 void SatellitesDialog::saveSettings(void)
 {
 	GETSTELMODULE(Satellites)->saveSettings();
@@ -637,12 +725,12 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 	saveSatellites();
 	
 	// Trigger re-loading the list to display the new satellites
-	int index = ui->groupsCombo->findData(QVariant("[newlyadded]"));
+	int index = ui->groupFilterCombo->findData(QVariant("[newlyadded]"));
 	// TODO: Unnecessary once the model can handle changes? --BM
-	if (ui->groupsCombo->currentIndex() == index)
+	if (ui->groupFilterCombo->currentIndex() == index)
 		filterListByGroup(index);
 	else
-		ui->groupsCombo->setCurrentIndex(index); //Triggers the same operation
+		ui->groupFilterCombo->setCurrentIndex(index); //Triggers the same operation
 	
 	// Select the satellites that were added just now
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
@@ -709,6 +797,28 @@ void SatellitesDialog::setOrbitFlag(bool display)
 		if (sat)
 			sat->orbitDisplayed = display;
 	}
+}
+
+void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
+{
+	ui->groupsListWidget->blockSignals(true);
+	Qt::ItemFlags flags = item->flags();
+	if (flags.testFlag(Qt::ItemIsEditable))
+	{
+		// Harmonize the item with the rest...
+		flags ^= Qt::ItemIsEditable;
+		item->setFlags(flags | Qt::ItemIsUserCheckable | Qt::ItemIsTristate);
+		item->setCheckState(Qt::Checked);
+		item->setData(Qt::UserRole, item->text());
+		QFont font = item->font();
+		font.setItalic(false);
+		item->setFont(font);
+		
+		// ...and add a new one in its place.
+		addSpecialGroupItem();
+	}
+	ui->groupsListWidget->blockSignals(false);
+	setGroups();
 }
 
 void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
