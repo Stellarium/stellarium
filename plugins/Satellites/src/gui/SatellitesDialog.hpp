@@ -59,7 +59,12 @@ private slots:
 	//! Filter the satellites list according to the selected (pseudo)group.
 	//! @param index selection index of the groups drop-down list.
 	void filterListByGroup(int index);
-	void updateSelectedInfo(const QModelIndex& cur, const QModelIndex& prev);
+	//! Populate the satellite data fields from the selected satellite(s).
+	//! @note The previous version used data only from the @em current item
+	//! in the list, not the whole selection. (Qt makes a difference between
+	//! "@em the current" and "@em a selected" item - a selection can contain
+	//! multiple items.)
+	void updateSatelliteData();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
 	void showUpdateCompleted(int updated, int total, int added, int missing);

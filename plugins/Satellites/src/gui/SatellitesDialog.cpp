@@ -149,10 +149,18 @@ void SatellitesDialog::createDialogContent()
 	        filterModel, SLOT(setFilterWildcard(QString)));
 	
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	connect(selectionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-	        this, SLOT(updateSelectedInfo(QModelIndex,QModelIndex)));
+	connect(selectionModel,
+	        SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+	        this,
+	        SLOT(updateSatelliteData()));
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
 	        this, SLOT(handleDoubleClick(QModelIndex)));
+	
+	// Two-state input, three-state display
+	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)),
+	        ui->displayedCheckbox, SLOT(setChecked(bool)));
+	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)),
+	        ui->orbitCheckbox, SLOT(setChecked(bool)));
 
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
@@ -222,50 +230,84 @@ void SatellitesDialog::filterListByGroup(int index)
 	ui->satellitesList->scrollTo(first);
 }
 
-void SatellitesDialog::updateSelectedInfo(const QModelIndex& curItem,
-                                          const QModelIndex& prevItem)
+void SatellitesDialog::updateSatelliteData()
 {
-	Q_UNUSED(prevItem);
-	if (!curItem.isValid())
-		return;
-	
-	QString id = curItem.data(Qt::UserRole).toString();
-	if (id.isEmpty())
-		return;
-
 	satelliteModified = false;
 
-	SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
-	if (sat.isNull())
-		return;
-
-	if (!sat->initialized)
-		return;
+	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
+	if (selection.isEmpty())
+		return; // TODO: Clear the fields?
 
 	disconnectSatelliteGuiForm();
-	ui->idLineEdit->setText(sat->name);
-	ui->lineEditCatalogNumber->setText(sat->id);
-	// Deliberately the untranslated description!
-	ui->descriptionTextEdit->setText(sat->description);
 	
-	// Groups
-	QStringList groups;
-	foreach (const QString& group, sat->groups)
+	if (selection.count() > 1)
 	{
-		groups.append(q_(group));
+		ui->nameEdit->clear();
+		ui->noradNumberEdit->clear();
+		ui->descriptionTextEdit->clear();
+		ui->tleFirstLineEdit->clear();
+		ui->tleSecondLineEdit->clear();
 	}
-	groups.sort();
-	ui->groupsTextEdit->setText(groups.join(", "));
+	else
+	{
+		QModelIndex& index = selection.first();
+		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
+		ui->noradNumberEdit->setText(index.data(Qt::UserRole).toString());
+		// NOTE: Description is deliberately displayed untranslated!
+		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
+		ui->tleFirstLineEdit->setText(index.data(FirstLineRole).toString());
+		ui->tleFirstLineEdit->setCursorPosition(0);
+		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
+		ui->tleSecondLineEdit->setCursorPosition(0);
+	}
 	
-	// TLE set
-	ui->tleFirstLineEdit->setText(sat->tleElements.first.data());
-	ui->tleFirstLineEdit->setCursorPosition(0);
-	ui->tleSecondLineEdit->setText(sat->tleElements.second.data());
-	ui->tleSecondLineEdit->setCursorPosition(0);
+	// TODO: Fix the comms button...
+//	ui->commsButton->setEnabled(sat->comms.count()>0);
 	
-	ui->visibleCheckbox->setChecked(sat->displayed);
-	ui->orbitCheckbox->setChecked(sat->orbitDisplayed);
-	ui->commsButton->setEnabled(sat->comms.count()>0);
+	// Things that are cumulative in a multi-selection
+	GroupSet partialGroups;
+	GroupSet allGroups = GETSTELMODULE(Satellites)->getGroups();
+	ui->displayedCheckbox->setChecked(false);
+	ui->orbitCheckbox->setChecked(false);
+	
+	for (int i = 0; i < selection.size(); i++)
+	{
+		const QModelIndex& index = selection.at(i);
+		
+		// "Display" flag
+		SatFlags flags = index.data(SatFlagsRole).value<SatFlags>();
+		if (flags.testFlag(SatDisplayed))
+		{
+			if (!ui->displayedCheckbox->isChecked())
+			{
+				if (i == 0)
+					ui->displayedCheckbox->setChecked(true);
+				else
+					ui->displayedCheckbox->setCheckState(Qt::PartiallyChecked);
+			}
+		}
+		else
+			if (ui->displayedCheckbox->isChecked())
+				ui->displayedCheckbox->setCheckState(Qt::PartiallyChecked);
+			
+		// TODO: "Display Orbit" flag!
+		// ui->orbitCheckbox->setChecked(sat->orbitDisplayed);
+		
+		// Accumulating groups
+		GroupSet groups = index.data(SatGroupsRole).value<GroupSet>();
+		partialGroups.unite(groups);
+		allGroups.intersect(groups);
+	}
+	
+	// TODO: Proper groups control
+	QStringList translatedGroups;
+	foreach (const QString& group, partialGroups)
+	{
+		translatedGroups.append(q_(group));
+	}
+	translatedGroups.sort();
+	ui->groupsTextEdit->setText(translatedGroups.join(", "));
+	
 	connectSatelliteGuiForm();
 }
 
@@ -730,12 +772,12 @@ void SatellitesDialog::connectSatelliteGuiForm(void)
 {
 	// make sure we don't connect more than once
 	disconnectSatelliteGuiForm();
-	connect(ui->visibleCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
+	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
 	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(setOrbitFlag(bool)));
 }
 
 void SatellitesDialog::disconnectSatelliteGuiForm(void)
 {
-	disconnect(ui->visibleCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
+	disconnect(ui->displayedCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
 	disconnect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(setOrbitFlag(bool)));
 }

@@ -51,7 +51,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	
 	// Check flag
 	// TODO: find out if the NoFlags trick actually works
-	QVariant data = index.data(Qt::UserRole + 1);
+	QVariant data = index.data(SatFlagsRole);
 	SatFlags flags = data.value<SatFlags>();
 	if (!(flags & filterFlag).testFlag(filterFlag))
 		return false;
@@ -59,7 +59,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	// Check group
 	if (!filterGroup.isEmpty())
 	{
-		data = index.data(Qt::UserRole + 2);
+		data = index.data(SatGroupsRole);
 		QSet<QString> groups = data.value<GroupSet>();
 		if (!groups.contains(filterGroup))
 			return false;

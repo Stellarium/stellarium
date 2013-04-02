@@ -45,6 +45,16 @@ typedef struct
 	QString description; //!< Channel description.
 } CommLink;
 
+//! Description of the data roles used in SatellitesListModel.
+enum SatelliteDataRole {
+	SatIdRole = Qt::UserRole,
+	SatDescriptionRole,
+	SatFlagsRole,
+	SatGroupsRole,
+	FirstLineRole,
+	SecondLineRole
+};
+
 //! Type for sets of satellite group IDs.
 typedef QSet<QString> GroupSet;
 

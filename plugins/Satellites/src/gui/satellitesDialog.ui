@@ -577,12 +577,12 @@
               <string>Name:</string>
              </property>
              <property name="buddy">
-              <cstring>idLineEdit</cstring>
+              <cstring>nameEdit</cstring>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="idLineEdit">
+            <widget class="QLineEdit" name="nameEdit">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -601,12 +601,12 @@
               <string>Catalog number:</string>
              </property>
              <property name="buddy">
-              <cstring>lineEditCatalogNumber</cstring>
+              <cstring>noradNumberEdit</cstring>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEditCatalogNumber">
+            <widget class="QLineEdit" name="noradNumberEdit">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -620,7 +620,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QCheckBox" name="visibleCheckbox">
+            <widget class="QCheckBox" name="displayedCheckbox">
              <property name="toolTip">
               <string>Display the selected satellite(s)</string>
              </property>
@@ -849,9 +849,9 @@
   <tabstop>groupsCombo</tabstop>
   <tabstop>lineEditSearch</tabstop>
   <tabstop>satellitesList</tabstop>
-  <tabstop>idLineEdit</tabstop>
-  <tabstop>lineEditCatalogNumber</tabstop>
-  <tabstop>visibleCheckbox</tabstop>
+  <tabstop>nameEdit</tabstop>
+  <tabstop>noradNumberEdit</tabstop>
+  <tabstop>displayedCheckbox</tabstop>
   <tabstop>orbitCheckbox</tabstop>
   <tabstop>descriptionTextEdit</tabstop>
   <tabstop>groupsTextEdit</tabstop>
