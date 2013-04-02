@@ -2,7 +2,7 @@
 // Name: Sky Culture Tour
 // License: Public Domain
 // Author: Matthew Gates
-// Description: Look round each installed landscape.
+// Description: Look round each installed sky culture.
 //
 
 alt = 0;
@@ -28,7 +28,8 @@ for(i=0; i<allIDs.length; i++)
 	core.debug("setting sky culture: " + id);
 	core.setSkyCulture(id);
 	core.wait(2);
-	lab = LabelMgr.labelScreen(id, 100, 100, false, 25, "#ff2200");
+	name = core.getSkyCultureName();
+	lab = LabelMgr.labelScreen(name, 100, 100, false, 25, "#ff2200");
 	LabelMgr.setLabelShow(lab, true);
 	core.wait(2);
 	LabelMgr.deleteLabel(lab);

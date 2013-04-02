@@ -335,6 +335,10 @@ public slots:
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
 
+	//! Find out the current sky culture and get it name
+	//! @return the name of the current sky culture
+	QString getSkyCultureName();
+
 	//! Get the current status of the gravity labels option
 	//! @return true if gravity labels are enabled, else false
 	bool getFlagGravityLabels();
