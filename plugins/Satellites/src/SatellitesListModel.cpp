@@ -96,6 +96,24 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 	return QVariant();
 }
 
+bool SatellitesListModel::setData(const QModelIndex& index,
+                                  const QVariant& value,
+                                  int role)
+{
+	if (!index.isValid() || index.row() < 0 ||
+	        index.row() >= satelliteList->size())
+		return false;
+	
+	SatelliteP sat = satelliteList->at(index.row());
+	if (role == SatGroupsRole)
+	{
+		sat->groups = value.value<GroupSet>();
+		return true;
+	}
+	
+	return false;
+}
+
 int SatellitesListModel::rowCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent);
