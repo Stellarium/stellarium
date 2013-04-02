@@ -27,6 +27,7 @@
 #include "Satellites.hpp"
 
 class Ui_satellitesDialog;
+class QCheckBox;
 class QListWidgetItem;
 class QSortFilterProxyModel;
 class QStandardItemModel;
@@ -86,6 +87,8 @@ private slots:
 	void removeSatellites();
 	void setDisplayFlag(bool display);
 	void setOrbitFlag(bool display);
+	//! Find out if a group is added or toggled in the group selector.
+	void handleGroupChanges(QListWidgetItem* item);
 	void handleDoubleClick(const QModelIndex & index);
 	void setOrbitParams(void);
 	void updateTLEs(void);
@@ -97,10 +100,23 @@ private:
 	//! Update the Settings tab with values from the plug-in.
 	//! Calls updateCountdown(). Connected to Satellites::settingsChanged().
 	void updateSettingsPage();
-	//! Populates the list of satellite groups on the %Satellites tab.
-	void populateGroupsList();
+	//! Populates the satellite groups filtering menu on the %Satellites tab.
+	void populateFilterMenu();
 	//! Populates the list of sources on the Sources tab.
 	void populateSourcesList();
+	//! Update the check state of one of the "display" boxes.
+	//! Takes code reuse to new heights... or lows. :)
+	void updateDisplayBox(const SatFlags& flags,
+	                      const SatFlag& flag,
+	                      QCheckBox* checkBox);
+	//! Add the special "New group..." item to the group selector.
+	//! Unlike the other items, which can only be checked/unchecked, this one
+	//! can be edited. Saving the edit will add a new group with the specified
+	//! name.
+	//! Called by updateSatelliteData() and handleGroupChanges().
+	void addSpecialGroupItem();
+	//! Applies the changes in the group selector to the selected satellites.
+	void setGroups();
 	
 	Ui_satellitesDialog* ui;
 	bool satelliteModified;
