@@ -324,6 +324,11 @@ void StelMainScriptAPI::setSkyCulture(const QString& id)
 
 QString StelMainScriptAPI::getSkyCultureName()
 {
+	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureEnglishName();
+}
+
+QString StelMainScriptAPI::getSkyCultureNameI18n()
+{
 	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18();
 }
 
