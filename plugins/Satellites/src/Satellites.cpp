@@ -841,6 +841,13 @@ QStringList Satellites::getGroupIdList() const
 	return groupList;
 }
 
+void Satellites::addGroup(const QString& groupId)
+{
+	if (groupId.isEmpty())
+		return;
+	groups.insert(groupId);
+}
+
 QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis)
 {
 	QHash<QString,QString> result;

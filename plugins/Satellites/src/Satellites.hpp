@@ -229,6 +229,8 @@ public:
 	//! Get a sorted list of group names.
 	//! See @ref groups for details. Use getGroups() if you don't need a list.
 	QStringList getGroupIdList() const;
+	//! Add this group to the global list.
+	void addGroup(const QString& groupId);
 
 	//! get satellite objects filtered by group.  If an empty string is used for the
 	//! group name, return all satallites

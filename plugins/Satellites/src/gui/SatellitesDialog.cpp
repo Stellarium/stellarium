@@ -705,13 +705,8 @@ void SatellitesDialog::setGroups()
 		groups.subtract(groupsToRemove);
 		groups.unite(groupsToAdd);
 		QVariant newGroups = QVariant::fromValue<GroupSet>(groups);
-		// FIXME: Let's see if the proxy will pass it...
 		ui->satellitesList->model()->setData(index, newGroups, SatGroupsRole);
 	}
-	
-	// TODO: Somehow update the global group list...
-	// TODO: And update the group filter
-	// FIXME: Find out why the group filter is "amateur" on first shown.
 }
 
 void SatellitesDialog::saveSettings(void)
@@ -810,13 +805,17 @@ void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
 		flags ^= Qt::ItemIsEditable;
 		item->setFlags(flags | Qt::ItemIsUserCheckable | Qt::ItemIsTristate);
 		item->setCheckState(Qt::Checked);
-		item->setData(Qt::UserRole, item->text());
+		QString groupId = item->text().trimmed();
+		item->setData(Qt::UserRole, groupId);
 		QFont font = item->font();
 		font.setItalic(false);
 		item->setFont(font);
 		
 		// ...and add a new one in its place.
 		addSpecialGroupItem();
+		
+		GETSTELMODULE(Satellites)->addGroup(groupId);
+		populateFilterMenu();
 	}
 	ui->groupsListWidget->blockSignals(false);
 	setGroups();
