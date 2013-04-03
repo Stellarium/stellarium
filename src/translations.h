@@ -249,7 +249,7 @@ class Translations
 		// TRANSLATORS: Description of the landscape tour script.
 		N_("Look around each installed landscape.");
 		// TRANSLATORS: Description of the sky culture tour script.
-		N_("Look round each installed sky culture.");
+		N_("Look at each installed sky culture.");
 		N_("Script to demonstrate a partial lunar eclipse.");
 		N_("Script to demonstrate a total lunar eclipse.");
 		N_("A slow, infinite tour of the sky, looking at random objects.");
