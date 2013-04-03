@@ -598,6 +598,9 @@ void SatellitesDialog::populateFilterMenu()
 		selectedId = ui->groupFilterCombo->itemData(index).toString();
 	}
 	
+	// Prevent the list from re-filtering
+	ui->groupFilterCombo->blockSignals(true);
+	
 	// Populate with group names/IDs
 	ui->groupFilterCombo->clear();
 	foreach (const QString& group, GETSTELMODULE(Satellites)->getGroupIdList())
@@ -614,8 +617,6 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 	
 	// Restore current selection
-	// Nothing is supposed to be changed, so prevent the list from re-filtering
-	ui->groupFilterCombo->blockSignals(true);
 	index = 0;
 	if (!selectedId.isEmpty())
 	{
