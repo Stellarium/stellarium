@@ -85,8 +85,8 @@ private slots:
 	void saveSettings(void);
 	void addSatellites(const TleDataList& newSatellites);
 	void removeSatellites();
-	void setDisplayFlag(bool display);
-	void setOrbitFlag(bool display);
+	//! Apply the "Displayed" and "Orbit" boxes to the selected satellite(s).
+	void setFlags();
 	//! Find out if a group is added or toggled in the group selector.
 	void handleGroupChanges(QListWidgetItem* item);
 	//! Display, select and start tracking the double clicked satellite.
@@ -95,8 +95,8 @@ private slots:
 	void updateTLEs(void);
 
 private:
-	void connectSatelliteGuiForm(void);
-	void disconnectSatelliteGuiForm(void);
+	//! @todo find out if this is really necessary... --BM
+	void enableSatelliteDataForm(bool enabled);
 	void populateAboutPage();
 	//! Update the Settings tab with values from the plug-in.
 	//! Calls updateCountdown(). Connected to Satellites::settingsChanged().

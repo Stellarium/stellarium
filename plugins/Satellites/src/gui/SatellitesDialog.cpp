@@ -159,6 +159,11 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)),
 	        ui->orbitCheckbox, SLOT(setChecked(bool)));
 	
+	connect(ui->displayedCheckbox, SIGNAL(clicked()),
+	        this, SLOT(setFlags()));
+	connect(ui->orbitCheckbox, SIGNAL(clicked()),
+	        this, SLOT(setFlags()));
+	
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 	        this, SLOT(handleGroupChanges(QListWidgetItem*)));
 
@@ -166,7 +171,6 @@ void SatellitesDialog::createDialogContent()
 	        this, SLOT(filterListByGroup(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
-	connectSatelliteGuiForm();
 	
 	importWindow = new SatellitesImportDialog();
 	connect(ui->addSatellitesButton, SIGNAL(clicked()),
@@ -240,7 +244,7 @@ void SatellitesDialog::updateSatelliteData()
 	if (selection.isEmpty())
 		return; // TODO: Clear the fields?
 
-	disconnectSatelliteGuiForm();
+	enableSatelliteDataForm(false);
 	
 	if (selection.count() > 1)
 	{
@@ -334,7 +338,7 @@ void SatellitesDialog::updateSatelliteData()
 	addSpecialGroupItem(); // Add the "Add new..." line
 	ui->groupsListWidget->blockSignals(false);
 	
-	connectSatelliteGuiForm();
+	enableSatelliteDataForm(true);
 }
 
 void SatellitesDialog::saveSatellites(void)
@@ -757,29 +761,29 @@ void SatellitesDialog::removeSatellites()
 	}
 }
 
-void SatellitesDialog::setDisplayFlag(bool display)
+void SatellitesDialog::setFlags()
 {
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	QModelIndexList selectedIndexes = selectionModel->selectedRows();
-	foreach (const QModelIndex& index, selectedIndexes)
+	QModelIndexList selection = selectionModel->selectedIndexes();
+	for (int row = 0; row < selection.count(); row++)
 	{
-		QString id = index.data(Qt::UserRole).toString();
-		SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
-		if (sat)
-			sat->displayed = display;
-	}
-}
-
-void SatellitesDialog::setOrbitFlag(bool display)
-{
-	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	QModelIndexList selectedIndexes = selectionModel->selectedRows();
-	foreach (const QModelIndex& index, selectedIndexes)
-	{
-		QString id = index.data(Qt::UserRole).toString();
-		SatelliteP sat = GETSTELMODULE(Satellites)->getById(id);
-		if (sat)
-			sat->orbitDisplayed = display;
+		const QModelIndex& index = selection.at(row);
+		SatFlags flags = index.data(SatFlagsRole).value<SatFlags>();
+		
+		// If a checkbox is partially checked, the respective flag is not
+		// changed.		
+		if (ui->displayedCheckbox->isChecked())
+			flags |= SatDisplayed;
+		else if (ui->displayedCheckbox->checkState() == Qt::Unchecked)
+			flags &= ~SatDisplayed;
+		
+		if (ui->orbitCheckbox->isChecked())
+			flags |= SatOrbit;
+		else if (ui->orbitCheckbox->checkState() == Qt::Unchecked)
+			flags &= ~SatOrbit;
+	
+		QVariant value = QVariant::fromValue<SatFlags>(flags);
+		ui->satellitesList->model()->setData(index, value, SatFlagsRole);
 	}
 }
 
@@ -866,16 +870,9 @@ void SatellitesDialog::updateTLEs(void)
 	}
 }
 
-void SatellitesDialog::connectSatelliteGuiForm(void)
+void SatellitesDialog::enableSatelliteDataForm(bool enabled)
 {
-	// make sure we don't connect more than once
-	disconnectSatelliteGuiForm();
-	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
-	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(setOrbitFlag(bool)));
-}
-
-void SatellitesDialog::disconnectSatelliteGuiForm(void)
-{
-	disconnect(ui->displayedCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
-	disconnect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(setOrbitFlag(bool)));
+	// NOTE: I'm still not sure if this is necessary, if the right signals are used to trigger changes...
+	ui->displayedCheckbox->blockSignals(!enabled);
+	ui->orbitCheckbox->blockSignals(!enabled);
 }

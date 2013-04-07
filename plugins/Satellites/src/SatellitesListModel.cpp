@@ -105,10 +105,18 @@ bool SatellitesListModel::setData(const QModelIndex& index,
 		return false;
 	
 	SatelliteP sat = satelliteList->at(index.row());
-	if (role == SatGroupsRole)
+	switch (role)
 	{
-		sat->groups = value.value<GroupSet>();
-		return true;
+		case SatGroupsRole:
+			sat->groups = value.value<GroupSet>();
+			return true;
+			
+		case SatFlagsRole:
+			sat->setFlags(value.value<SatFlags>());
+			return true;
+			
+		default:
+			return false;
 	}
 	
 	return false;
