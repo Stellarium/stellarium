@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-03 17:54+0700\n"
-"PO-Revision-Date: 2013-03-09 03:43+0000\n"
+"PO-Revision-Date: 2013-04-07 01:09+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-04 05:21+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-07 05:11+0000\n"
+"X-Generator: Launchpad (build 16550)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -520,21 +520,24 @@ msgstr "Błąd"
 
 #: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "z bezsensownymi wartościami poza tym zakresem"
 
 #: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"ze średnim błędem poniżej jednej sekundy, maks. błędem 1,9 s i bezsensownymi "
+"wartościami poza tym zakresem"
 
 #: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "z wartościami zerowymi poza tym zakresem"
 
 #: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"z typową dokładnością do 1 sekundy i wartościami zerowymi poza tym zakresem"
 
 #: src/core/StelCore.cpp:1639
 #, qt-format
@@ -1882,7 +1885,7 @@ msgstr "Analemma"
 #. TRANSLATORS: Name of script
 #: src/translations.h:243
 msgid "Sky Culture Tour"
-msgstr ""
+msgstr "Wycieczka przedstawiająca kultury nieba"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:250
@@ -1892,7 +1895,7 @@ msgstr "Przegląd wszystkich zainstalowanych krajobrazów."
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:252
 msgid "Look at each installed sky culture."
-msgstr ""
+msgstr "Spojrzenie na wszystkie kultury nieba."
 
 #: src/translations.h:253
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -3846,18 +3849,20 @@ msgstr ""
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
+"Graniczne wielkości gwiazdowe (dla obserwacji nieuzbrojonym okiem/przez "
+"lornetkę)"
 
 #: src/ui_viewDialog.h:1231
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Graniczne wielkości gwiazdowe"
 
 #: src/ui_viewDialog.h:1233
 msgid "Stars to magnitude"
-msgstr ""
+msgstr "Gwiazdy do wielkości gwiazdowej"
 
 #: src/ui_viewDialog.h:1237
 msgid "Nebulas to magitude"
-msgstr ""
+msgstr "Mgławice do wielkości gwiazdowej"
 
 #: src/ui_viewDialog.h:1240
 msgid "Constellations"
