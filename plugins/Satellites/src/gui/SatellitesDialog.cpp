@@ -49,9 +49,6 @@ SatellitesDialog::SatellitesDialog() :
     checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
-	
-	// FIXME: Cleanup.
-	// satellitesModel = new QStandardItemModel(this);
 }
 
 SatellitesDialog::~SatellitesDialog()
@@ -78,7 +75,7 @@ void SatellitesDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		updateSettingsPage(); // For the button; also calls updateCountdown()
-		setAboutHtml();
+		populateAboutPage();
 		populateFilterMenu();
 	}
 }
@@ -154,7 +151,7 @@ void SatellitesDialog::createDialogContent()
 	        this,
 	        SLOT(updateSatelliteData()));
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
-	        this, SLOT(handleDoubleClick(QModelIndex)));
+	        this, SLOT(trackSatellite(QModelIndex)));
 	
 	// Two-state input, three-state display
 	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)),
@@ -189,7 +186,7 @@ void SatellitesDialog::createDialogContent()
 	        this, SLOT(toggleCheckableSources()));
 
 	// About tab
-	setAboutHtml();
+	populateAboutPage();
 
 	populateFilterMenu();
 	populateSourcesList();
@@ -345,7 +342,7 @@ void SatellitesDialog::saveSatellites(void)
 	GETSTELMODULE(Satellites)->saveCatalog();
 }
 
-void SatellitesDialog::setAboutHtml()
+void SatellitesDialog::populateAboutPage()
 {
 	QString jsonFileName("<tt>satellites.json</tt>");
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
@@ -655,15 +652,6 @@ void SatellitesDialog::populateSourcesList()
 	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
 }
 
-void SatellitesDialog::updateDisplayBox(const SatFlags& flags,
-                                        const SatFlag& flag,
-                                        QCheckBox* checkBox)
-{
-	Q_ASSERT(checkBox);
-	
-	
-}
-
 void SatellitesDialog::addSpecialGroupItem()
 {
 	if (ui->groupsListWidget->count() == 0)
@@ -821,7 +809,7 @@ void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
 	setGroups();
 }
 
-void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
+void SatellitesDialog::trackSatellite(const QModelIndex& index)
 {
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
