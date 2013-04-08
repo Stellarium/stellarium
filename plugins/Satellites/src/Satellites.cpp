@@ -926,7 +926,7 @@ bool Satellites::add(const TleData& tleData)
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
 	{
-		qDebug() << "Satellites: added" << tleData.id << tleData.name;
+		qDebug() << "Satellite added:" << tleData.id << tleData.name;
 		satellites.append(sat);
 		sat->setNew();
 		return true;
@@ -1338,6 +1338,16 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	foreach(const SatelliteP& sat, satellites)
 	{
 		totalCount++;
+		
+		// Satellites marked as "user-defined" are protected from updates and
+		// removal.
+		if (sat->userDefined)
+		{
+			qDebug() << "Satellite ignored (user-protected):"
+			         << sat->id << sat->name;
+			continue;
+		}
+		
 		QString id = sat->id;
 		TleData newTle = newTleSets.take(id);
 		if (!newTle.name.isEmpty())
