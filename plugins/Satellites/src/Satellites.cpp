@@ -1177,8 +1177,9 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Satellites: FAILED to download" << reply->url()
-		           << "Error: " << reply->errorString();
+		qWarning() << "Satellites: FAILED to download"
+		           << reply->url().toString(QUrl::RemoveUserInfo)
+		           << "Error:" << reply->errorString();
 	}
 	else
 	{
@@ -1215,7 +1216,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 		catch (std::runtime_error &e)
 		{
-			qWarning() << "Satellites::updateDownloadComplete: cannot write TLE data to file:" << e.what();
+			qWarning() << "Satellites: cannot save update file:" << e.what();
 		}
 	}
 	numberDownloadsComplete++;
@@ -1226,6 +1227,12 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	// TODO: It's better to keep track of the network requests themselves. --BM 
 	if (numberDownloadsComplete < updateSources.size())
 		return;
+	
+	if (progressBar)
+	{
+		delete progressBar;
+		progressBar = 0;
+	}
 	
 	// All files have been downloaded, finish the update
 	TleDataHash newData;
@@ -1242,7 +1249,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			delete updateSources[i].file;
 			updateSources[i].file = 0;
 		}
-	}
+	}	
 	updateSources.clear();
 	updateSatellites(newData);
 }
@@ -1410,12 +1417,6 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
-	
-	if (progressBar)
-	{
-		delete progressBar;
-		progressBar = 0;
-	}
 
 	qDebug() << "Satellites: update finished."
 	         << updatedCount << "/" << totalCount << "updated,"
