@@ -64,9 +64,10 @@ enum SatFlag
 	SatNoFlags = 0x0,
 	SatDisplayed = 0x1,
 	SatNotDisplayed = 0x2,
-	SatOrbit = 0x4,
-	SatNew = 0x8,
-	SatError = 0x10
+	SatUser = 0x4,
+	SatOrbit = 0x8,
+	SatNew = 0x10,
+	SatError = 0x20
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -176,6 +177,10 @@ private:
 	bool displayed;
 	//! Flag indicating whether an orbit section should be displayed.
 	bool orbitDisplayed;  // draw orbit enabled/disabled
+	//! Flag indicating that the satellite is user-defined.
+	//! This means that its TLE set shouldn't be updated and the satellite
+	//! itself shouldn't be removed if auto-remove is enabled.
+	bool userDefined;
 	//! Flag indicating that the satellite was added during the current session.
 	bool newlyAdded;
 	bool orbitValid;

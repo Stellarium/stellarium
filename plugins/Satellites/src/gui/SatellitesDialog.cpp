@@ -158,10 +158,16 @@ void SatellitesDialog::createDialogContent()
 	        ui->displayedCheckbox, SLOT(setChecked(bool)));
 	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)),
 	        ui->orbitCheckbox, SLOT(setChecked(bool)));
+	connect(ui->userCheckBox, SIGNAL(clicked(bool)),
+	        ui->userCheckBox, SLOT(setChecked(bool)));
 	
+	// Because the previous signals and slots were connected first,
+	// they will be executed before these.
 	connect(ui->displayedCheckbox, SIGNAL(clicked()),
 	        this, SLOT(setFlags()));
 	connect(ui->orbitCheckbox, SIGNAL(clicked()),
+	        this, SLOT(setFlags()));
+	connect(ui->userCheckBox, SIGNAL(clicked()),
 	        this, SLOT(setFlags()));
 	
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
@@ -276,6 +282,7 @@ void SatellitesDialog::updateSatelliteData()
 	GroupSet groupsUsedByAll = globalGroups;
 	ui->displayedCheckbox->setChecked(false);
 	ui->orbitCheckbox->setChecked(false);
+	ui->userCheckBox->setChecked(false);
 	
 	for (int i = 0; i < selection.size(); i++)
 	{
@@ -311,6 +318,22 @@ void SatellitesDialog::updateSatelliteData()
 		else
 			if (ui->orbitCheckbox->isChecked())
 				ui->orbitCheckbox->setCheckState(Qt::PartiallyChecked);
+		
+		// User ("do not update") box
+		if (flags.testFlag(SatUser))
+		{
+			if (!ui->userCheckBox->isChecked())
+			{
+				if (i == 0)
+					ui->userCheckBox->setChecked(true);
+				else
+					ui->userCheckBox->setCheckState(Qt::PartiallyChecked);
+			}
+		}
+		else
+			if (ui->userCheckBox->isChecked())
+				ui->userCheckBox->setCheckState(Qt::PartiallyChecked);
+		
 		
 		// Accumulating groups
 		GroupSet groups = index.data(SatGroupsRole).value<GroupSet>();
@@ -781,6 +804,11 @@ void SatellitesDialog::setFlags()
 			flags |= SatOrbit;
 		else if (ui->orbitCheckbox->checkState() == Qt::Unchecked)
 			flags &= ~SatOrbit;
+		
+		if (ui->userCheckBox->isChecked())
+			flags |= SatUser;
+		else if (ui->userCheckBox->checkState() == Qt::Unchecked)
+			flags &= ~SatUser;
 	
 		QVariant value = QVariant::fromValue<SatFlags>(flags);
 		ui->satellitesList->model()->setData(index, value, SatFlagsRole);
@@ -872,7 +900,8 @@ void SatellitesDialog::updateTLEs(void)
 
 void SatellitesDialog::enableSatelliteDataForm(bool enabled)
 {
-	// NOTE: I'm still not sure if this is necessary, if the right signals are used to trigger changes...
+	// NOTE: I'm still not sure if this is necessary, if the right signals are used to trigger changes...--BM
 	ui->displayedCheckbox->blockSignals(!enabled);
 	ui->orbitCheckbox->blockSignals(!enabled);
+	ui->userCheckBox->blockSignals(!enabled);
 }
