@@ -53,7 +53,14 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-		: initialized(false), displayed(true), newlyAdded(false), orbitValid(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+    : initialized(false),
+      displayed(true),
+      userDefined(false),
+      newlyAdded(false),
+      orbitValid(false),
+      hintColor(0.0,0.0,0.0),
+      lastUpdated(),
+      pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -71,6 +78,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) displayed = map.value("visible").toBool();
 	if (map.contains("orbitVisible")) orbitDisplayed = map.value("orbitVisible").toBool();
+	userDefined = map.value("userDefined", userDefined).toBool(); // Faster?
 
 	if (map.contains("hintColor"))
 	{
@@ -173,6 +181,8 @@ QVariantMap Satellite::getMap(void)
 
 	map["visible"] = displayed;
 	map["orbitVisible"] = orbitDisplayed;
+	if (userDefined)
+		map.insert("userDefined", userDefined);
 	QVariantList col, orbitCol;
 	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
 	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
@@ -441,6 +451,8 @@ SatFlags Satellite::getFlags()
 		flags |= SatNotDisplayed;
 	if (orbitDisplayed)
 		flags |= SatOrbit;
+	if (userDefined)
+		flags |= SatUser;
 	if (newlyAdded)
 		flags |= SatNew;
 	if (!orbitValid)
@@ -452,6 +464,7 @@ void Satellite::setFlags(const SatFlags& flags)
 {
 	displayed = flags.testFlag(SatDisplayed);
 	orbitDisplayed = flags.testFlag(SatOrbit);
+	userDefined = flags.testFlag(SatUser);
 }
 
 
