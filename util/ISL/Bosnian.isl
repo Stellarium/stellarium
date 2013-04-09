@@ -6,7 +6,7 @@
 [LangOptions]
 LanguageName=Bosanski
 LanguageID=$141a
-LanguageCodePage=0
+LanguageCodePage=1250
 ; If the language you are translating to requires special font faces or
 ; sizes, uncomment any of the following entries and change them accordingly.
 ;DialogFontName=
