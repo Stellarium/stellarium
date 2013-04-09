@@ -9,7 +9,7 @@
 [LangOptions]
 LanguageName=Bosanski
 LanguageID=$141a
-LanguageCodePage=0
+LanguageCodePage=1250
 
 [CustomMessages]
 ForAllUsers=Za sve korisnike
