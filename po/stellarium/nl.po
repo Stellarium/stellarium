@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-03 17:54+0700\n"
-"PO-Revision-Date: 2013-03-16 13:25+0000\n"
-"Last-Translator: Willem Sonke <Unknown>\n"
+"PO-Revision-Date: 2013-04-09 17:04+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-04 05:16+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-10 05:10+0000\n"
+"X-Generator: Launchpad (build 16550)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -415,6 +415,8 @@ msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
+"F. R. Stephenson publiceerde deze formule in zijn boek <em>Historische "
+"eclipsen en rotatie van de aarde</em> (%1)."
 
 #: src/core/StelCore.cpp:1476
 msgid ""
@@ -3029,11 +3031,11 @@ msgstr "Verhoog tijd snelheid (een beetje)"
 
 #: src/translations.h:545
 msgid "Pause script execution"
-msgstr ""
+msgstr "Pauzeer uitvoeren van script"
 
 #: src/translations.h:546
 msgid "Resume script execution"
-msgstr ""
+msgstr "Hervat uitvoeren van script"
 
 #: src/translations.h:547
 msgid "Set time to now"
@@ -3053,7 +3055,7 @@ msgstr "Zet tijdsverloop op nul"
 
 #: src/translations.h:551
 msgid "Stop script execution"
-msgstr ""
+msgstr "Stop uitvoeren van script"
 
 #: src/translations.h:552
 msgid "Subtract 1 sidereal day"
@@ -3680,7 +3682,7 @@ msgstr ""
 #: src/ui_searchDialogGui.h:629
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
-msgstr ""
+msgstr "Lijsten"
 
 #: src/ui_viewDialog.h:1181
 msgid "View"
@@ -3979,7 +3981,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1008
 msgid "Customized"
-msgstr ""
+msgstr "Aangepast"
 
 #: src/ui_configurationDialog.h:1009
 msgid "Displayed fields"
@@ -4016,7 +4018,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -4044,7 +4046,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1034
 msgid "Distance"
-msgstr ""
+msgstr "Aftsand"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
@@ -4052,7 +4054,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1038
 msgid "Size"
-msgstr ""
+msgstr "Grootte"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
@@ -4100,7 +4102,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
-msgstr ""
+msgstr "seconden"
 
 #: src/ui_configurationDialog.h:1065
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
@@ -4337,15 +4339,15 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Sneltoetsen"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Beginwaarden terugzetten"
 
 #: src/ui_shortcutsDialog.h:201
 msgid "Apply"
-msgstr ""
+msgstr "Pas toe"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
@@ -4768,7 +4770,7 @@ msgstr "Versie"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
 msgid "Overview"
-msgstr ""
+msgstr "Overzicht"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:497
 msgid ""
@@ -4910,7 +4912,7 @@ msgstr "Verrekijker"
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 #: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid "Lenses"
-msgstr ""
+msgstr "Lenzen"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplicity:"
@@ -5059,15 +5061,15 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is visible."
-msgstr ""
+msgstr "De satelliet is zichtbaar."
 
 #: plugins/Satellites/src/Satellite.cpp:299
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "De satelliet is verduisterd."
 
 #: plugins/Satellites/src/Satellite.cpp:302
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "De satelliet is niet zichtbaar"
 
 #: plugins/Satellites/src/Satellite.cpp:328
 #, qt-format
@@ -5187,7 +5189,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 msgid "Links"
-msgstr ""
+msgstr "Links"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
@@ -5208,7 +5210,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Indien u een vraag heeft kunt u %1hier een antwoord krijgen%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
@@ -5237,7 +5239,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Internet updates zijn uitgeschakeld"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:351
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
@@ -5289,7 +5291,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:259
 msgid "Update now"
-msgstr ""
+msgstr "Nu updaten"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:374
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
@@ -5363,7 +5365,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "Er kon geen data gedownload worden. Probeer het later opnieuw."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:359
 #, qt-format
@@ -5393,7 +5395,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:251
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:256
 msgid "Last update:"
-msgstr ""
+msgstr "Laatste update:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:257
@@ -5402,7 +5404,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Labels"
-msgstr ""
+msgstr "Labels"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:642
 msgid "Label font size (pixels):"
@@ -5446,7 +5448,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
 #: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
-msgstr ""
+msgstr "Standaardwaarden herstellen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
@@ -5472,7 +5474,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Displayed"
-msgstr ""
+msgstr "Zichtbaar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -5480,7 +5482,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Orbit"
-msgstr ""
+msgstr "Baan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
@@ -5488,7 +5490,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
-msgstr ""
+msgstr "Omschrijving:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Groups:"
@@ -5516,7 +5518,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Save changes"
-msgstr ""
+msgstr "Wijzigingen opslaan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid ""
