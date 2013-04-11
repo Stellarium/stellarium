@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-03 17:54+0700\n"
-"PO-Revision-Date: 2013-04-03 09:52+0000\n"
+"PO-Revision-Date: 2013-04-10 09:39+0000\n"
 "Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-04 05:24+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-11 05:08+0000\n"
+"X-Generator: Launchpad (build 16550)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -1822,7 +1822,7 @@ msgstr "搜索已安装地景"
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:252
 msgid "Look at each installed sky culture."
-msgstr ""
+msgstr "逐一浏览已安装的星空文化。"
 
 #: src/translations.h:253
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -4680,12 +4680,12 @@ msgstr "双目镜的实际视场"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr "此目镜/镜头/望远镜可达到的放大倍率"
+msgstr "此目镜、镜头和望远镜组合的放大倍率"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "此目镜、镜头和望远镜组合的实际视场"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Oculars Plug-in"
@@ -4859,7 +4859,7 @@ msgstr "镜头重数："
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
-msgstr ""
+msgstr "倍率值大于1会延长焦距（巴洛透镜）。倍率值小于1会缩短焦距（夏普利透镜）。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1046
 #: plugins/Oculars/src/ui_ocularDialog.h:1056
@@ -5527,7 +5527,7 @@ msgstr "将天文望远镜 %1 移至选中对象"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1671
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "将天文望远镜%1对准当前屏幕的中心"
+msgstr "将天文望远镜 %1 对准当前屏幕的中心"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
@@ -6317,7 +6317,7 @@ msgstr "关闭"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr "错误，未知的颜色部分“%1%%”"
+msgstr "错误，未知的颜色部分“%1”"
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
