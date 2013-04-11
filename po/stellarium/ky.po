@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-04-03 17:54+0700\n"
-"PO-Revision-Date: 2013-02-06 11:10+0000\n"
+"PO-Revision-Date: 2013-04-10 13:40+0000\n"
 "Last-Translator: Chynggyz Jumaliev <translatorky@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-04 05:19+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-11 05:08+0000\n"
+"X-Generator: Launchpad (build 16550)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -52,7 +52,7 @@ msgstr ", %1 м"
 
 #: src/core/modules/LandscapeMgr.cpp:520
 msgid "Planet: "
-msgstr "Планета: "
+msgstr "Планетасы: "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
@@ -657,7 +657,7 @@ msgstr "Табылды"
 
 #: src/gui/ConfigurationDialog.cpp:435 src/gui/ConfigurationDialog.cpp:437
 msgid "Select screenshot directory"
-msgstr "Экран сүрөттөрү үчүн каталогду тандаңыз"
+msgstr "Экран сүрөттөрүнүн каталогун тандаңыз"
 
 #: src/gui/ConfigurationDialog.cpp:657
 #, qt-format
@@ -1065,7 +1065,7 @@ msgstr "Метеорлорсуз"
 
 #: src/gui/ViewDialog.cpp:619
 msgid "Normal rate"
-msgstr "Нормалдуу жүрүш"
+msgstr "Кадимкидей жүрүш"
 
 #: src/gui/ViewDialog.cpp:622
 msgid "Standard Perseids rate"
@@ -3000,11 +3000,11 @@ msgstr "Кезектеги убакыт"
 
 #: src/translations.h:548
 msgid "Set the normal script execution rate"
-msgstr "Сценарийдин аткарылуусу үчүн нормалдуу ылдамдыкты коюу"
+msgstr "Сценарийдин аткарылуусу үчүн кадимкидей ылдамдыкты коюу"
 
 #: src/translations.h:549
 msgid "Set normal time rate"
-msgstr "Убакыттын нормалдуу жүрүшү"
+msgstr "Убакыттын кадимкидей жүрүшү"
 
 #: src/translations.h:550
 msgid "Set time rate to zero"
@@ -3305,7 +3305,7 @@ msgstr "Плагиндин конфигурациясы"
 
 #: src/translations.h:635 plugins/Oculars/src/ui_ocularDialog.h:1019
 msgid "Ocular view"
-msgstr "Окулярдын көрүнүшү"
+msgstr "Окуляр көрүнүшү"
 
 #: src/translations.h:636
 msgid "Show crosshairs"
@@ -3383,7 +3383,7 @@ msgstr "Жардам терезеси"
 
 #: src/translations.h:671
 msgid "Location window"
-msgstr "Жайгашкан жердин терезеси"
+msgstr "Жайгашкан жеринин терезеси"
 
 #: src/translations.h:673
 msgid "Search window"
@@ -3421,15 +3421,15 @@ msgstr "Жаңыртуу"
 #: src/ui_locationDialogGui.h:389
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Location"
-msgstr "Орун"
+msgstr "Жайгашкан жери"
 
 #: src/ui_locationDialogGui.h:393
 msgid "Current location information"
-msgstr "Кезектеги жайгашкан жер жөнүндөгү маалымат"
+msgstr "Кезектеги жайгашкан жери жөнүндөгү маалымат"
 
 #: src/ui_locationDialogGui.h:394
 msgid "Use as default"
-msgstr "Жарыяланбасча колдонуу"
+msgstr "Жарыяланбас түрүндө колдонуу"
 
 #: src/ui_locationDialogGui.h:395
 msgid "Return to default"
@@ -3449,7 +3449,7 @@ msgstr "Тизмеге кошуу"
 #: src/ui_locationDialogGui.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:142
 msgid "Latitude:"
-msgstr "Кеңдик:"
+msgstr "Кеңдиги:"
 
 #: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
 msgid ""
@@ -3462,12 +3462,12 @@ msgstr ""
 #: src/ui_locationDialogGui.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Longitude:"
-msgstr "Узундук:"
+msgstr "Узундугу:"
 
 #: src/ui_locationDialogGui.h:406
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:148
 msgid "Altitude:"
-msgstr "Бийиктик:"
+msgstr "Бийиктиги:"
 
 #: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
@@ -3479,15 +3479,15 @@ msgstr " м"
 
 #: src/ui_locationDialogGui.h:411
 msgid "Name/City:"
-msgstr "Орун:"
+msgstr "Аты/шаары:"
 
 #: src/ui_locationDialogGui.h:412
 msgid "Country:"
-msgstr "Өлкө:"
+msgstr "Өлкөсү:"
 
 #: src/ui_locationDialogGui.h:413
 msgid "Planet:"
-msgstr "Планета:"
+msgstr "Планетасы:"
 
 #: src/ui_searchDialogGui.h:541
 msgid "Find Object"
@@ -3839,11 +3839,11 @@ msgstr "Туура келүүчү планетаны жана турган же�
 
 #: src/ui_viewDialog.h:1279
 msgid "Use this landscape as default"
-msgstr "Бул ландшафтты жарыяланбасча колдонуу"
+msgstr "Бул ландшафтты жарыяланбас түрүндө колдонуу"
 
 #: src/ui_viewDialog.h:1281
 msgid "Use this sky culture as default"
-msgstr "Бул асман маданиятын жарыяланбасча колдонуу"
+msgstr "Бул асман маданиятын жарыяланбас түрүндө колдонуу"
 
 #: src/ui_viewDialog.h:1283
 msgid "Visible"
@@ -3855,11 +3855,11 @@ msgstr "Ырастоо"
 
 #: src/ui_configurationDialog.h:975
 msgid "Program language"
-msgstr "Программанын тили"
+msgstr "Программа тили"
 
 #: src/ui_configurationDialog.h:976
 msgid "Default options"
-msgstr "Жарыяланбасча опциялар"
+msgstr "Жарыяланбас опциялары"
 
 #: src/ui_configurationDialog.h:978
 msgid ""
@@ -3878,7 +3878,7 @@ msgstr "Баштапкы ырастоолор"
 
 #: src/ui_configurationDialog.h:984
 msgid "Restore defaults"
-msgstr "Жарыяланбастарды калыбына келтирүү"
+msgstr "Жарыяланбас калыбына келтирүү"
 
 #: src/ui_configurationDialog.h:985
 msgid ""
@@ -3973,7 +3973,7 @@ msgstr "Каталог номер(лер)и"
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr "Ат"
+msgstr "Аты"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -4422,7 +4422,7 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:81
 #: plugins/Oculars/src/ui_ocularDialog.h:1017
 msgid "Oculars"
-msgstr "Окулярлар"
+msgstr "Окулярдар"
 
 #: plugins/Oculars/src/Oculars.cpp:84
 msgid ""
@@ -4437,7 +4437,7 @@ msgstr "Окуляр көрүнүшүнө которуу алдында объе
 
 #: plugins/Oculars/src/Oculars.cpp:877
 msgid "&Previous ocular"
-msgstr "&Абалкы окуляр"
+msgstr "&Мурунку окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:878
 msgid "&Next ocular"
@@ -4453,7 +4453,7 @@ msgstr "&Айкашманы которуу"
 
 #: plugins/Oculars/src/Oculars.cpp:935
 msgid "Configure &Oculars"
-msgstr "&Окулярларды ырастоо"
+msgstr "&Окулярдарды ырастоо"
 
 #: plugins/Oculars/src/Oculars.cpp:944
 msgid "Toggle &CCD"
@@ -4594,7 +4594,7 @@ msgstr "&Кийинки телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
 msgid "Previous ocular"
-msgstr "Абалкы окуляр"
+msgstr "Мурунку окуляр"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
 msgid "Next ocular"
@@ -4684,7 +4684,7 @@ msgstr "Айлануу: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Magnification provided by these binoculars"
-msgstr "Чоңойтуу ушу бинокль менен камсыз кылынган"
+msgstr "Чоңойтуу бул дүрбү менен камсыз кылынган"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 msgid "Actual field of view provided by these binoculars"
@@ -4836,7 +4836,7 @@ msgstr "Кошуу"
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
-msgstr "Ат:"
+msgstr "Аты:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1034
 msgid "aFOV:"
@@ -4853,7 +4853,7 @@ msgstr "Мейкин диафрагмасы:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Binoculars"
-msgstr "Бинокль"
+msgstr "Дүрбү"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 #: plugins/Oculars/src/ui_ocularDialog.h:1045
@@ -5800,7 +5800,7 @@ msgstr "Башында жүргүзүү/туташуу"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr "Орнотмо ырастоолору"
+msgstr "Түзмөк ырастоолору"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
@@ -6054,7 +6054,7 @@ msgstr "Жайкы убакыт"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr "ЖУ сааттык алкагынын аты:"
+msgstr "ЖУ саат алкагынын аты:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
@@ -6276,7 +6276,7 @@ msgstr "Курсор күтүү убагы:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Setting landscape sets location"
-msgstr "Жайгашкан жерди ландшафттан коюу"
+msgstr "Жайгашкан жерин ландшафттан коюу"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Run local script"
