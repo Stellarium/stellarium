@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-03 17:54+0700\n"
-"PO-Revision-Date: 2013-04-10 11:40+0000\n"
-"Last-Translator: Michaël Bauwens <mich.bauwens@hotmail.com>\n"
+"PO-Revision-Date: 2013-04-11 08:58+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-11 05:08+0000\n"
-"X-Generator: Launchpad (build 16550)\n"
+"X-Launchpad-Export-Date: 2013-04-12 05:13+0000\n"
+"X-Generator: Launchpad (build 16564)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -3328,19 +3328,19 @@ msgstr "Kompasstreken"
 
 #: src/translations.h:626
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Toon exoplaneten"
 
 #: src/translations.h:627
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Configuratiescherm exoplaneten"
 
 #: src/translations.h:630
 msgid "Observability"
-msgstr ""
+msgstr "Waarneembaarheid"
 
 #: src/translations.h:631
 msgid "Observability configuration window"
-msgstr ""
+msgstr "Configuratiescherm waarneembaarheid"
 
 #: src/translations.h:634
 msgid "Oculars plugin configuration"
@@ -3677,7 +3677,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:628
 msgid "Search in list..."
-msgstr ""
+msgstr "Zoek in lijst..."
 
 #: src/ui_searchDialogGui.h:629
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
@@ -3767,7 +3767,7 @@ msgstr "Relatieve schaal:"
 
 #: src/ui_viewDialog.h:1216
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Helderheid Melkweg:"
 
 #: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -5344,7 +5344,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid "Downloading data..."
-msgstr ""
+msgstr "Downloaden van data..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid ""
@@ -5466,7 +5466,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
-msgstr ""
+msgstr "Voorkeuren"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Display the selected satellite(s)"
@@ -5494,7 +5494,7 @@ msgstr "Omschrijving:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Groups:"
-msgstr ""
+msgstr "Groepen:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid "Comma separated list of groups"
@@ -5514,7 +5514,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Add more satellites"
-msgstr ""
+msgstr "Voeg meer satellieten toe"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Save changes"
@@ -5604,7 +5604,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
@@ -5612,11 +5612,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Bezig met verbinding maken"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "Verbonden"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
@@ -5624,7 +5624,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Gestopt"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
@@ -5712,7 +5712,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "Verbinden"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
@@ -5720,7 +5720,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "Verbreek verbinding"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
@@ -5728,7 +5728,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr ""
+msgstr "Selecteer een map"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to"
@@ -5857,7 +5857,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr ""
+msgstr "Apparaatinstellingen"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
@@ -5869,11 +5869,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
-msgstr ""
+msgstr "Verbindingsinstellingen"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
-msgstr ""
+msgstr "Hostnaam:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
@@ -5918,7 +5918,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
-msgstr ""
+msgstr "Configureren"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
@@ -5930,7 +5930,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
@@ -5946,7 +5946,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
-msgstr ""
+msgstr "Bestanden"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
@@ -5978,62 +5978,62 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "January"
-msgstr ""
+msgstr "Januari"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "February"
-msgstr ""
+msgstr "Februari"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "March"
-msgstr ""
+msgstr "Maart"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "May"
-msgstr ""
+msgstr "Mei"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "August"
-msgstr ""
+msgstr "Augustus"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:659
 msgid "December"
-msgstr ""
+msgstr "December"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
@@ -6053,35 +6053,35 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "Afgelopen week"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "Zondag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "Maandag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "Dinsdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "Woensdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "Donderdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "Vrijdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "Zaterdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
@@ -6096,7 +6096,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Time zone"
-msgstr ""
+msgstr "Tijdzone"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
@@ -6126,7 +6126,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "Dag:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
@@ -6136,7 +6136,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Datum:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
@@ -6366,7 +6366,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Shut down"
-msgstr ""
+msgstr "Afsluiten"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:553
 msgid "[no TUI node]"
@@ -6374,11 +6374,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr ""
+msgstr "Aan"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
-msgstr ""
+msgstr "Uit"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -6466,7 +6466,7 @@ msgstr "Kometen"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Select the source"
-msgstr ""
+msgstr "De bron selecteren"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Download a list of objects from the Internet"
@@ -6537,7 +6537,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
@@ -6553,7 +6553,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Standaardinstellingen herstellen"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
@@ -6794,12 +6794,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:151
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:157
 #, qt-format
@@ -6842,7 +6842,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
 #: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
@@ -6996,12 +6996,12 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 #: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "Mass"
-msgstr ""
+msgstr "Massa"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:229
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Radius"
-msgstr ""
+msgstr "Straal"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:233
 #, qt-format
