@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-03 17:54+0700\n"
-"PO-Revision-Date: 2013-04-11 01:56+0000\n"
+"PO-Revision-Date: 2013-04-11 14:09+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-11 05:08+0000\n"
-"X-Generator: Launchpad (build 16550)\n"
+"X-Launchpad-Export-Date: 2013-04-12 05:13+0000\n"
+"X-Generator: Launchpad (build 16564)\n"
 "Language: bn\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -471,6 +471,7 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"এটি ব্যবহারকারী দ্বারা প্রদত্ত সহগ যুক্ত %1T নির্ণয় করার দ্বিঘাত সমীকরন"
 
 #: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -478,31 +479,33 @@ msgstr "ত্রুটি"
 
 #: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "এই সীমার বাইরে অর্থহীন মান সমেত"
 
 #: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"গড়ে সর্বনিম্ন এক সেকেন্ড ও সর্বোচ্চ ১.৯ সেকেন্ড ত্রুটি এবং এই সীমার বাইরে "
+"অর্থহীন মান সমেত"
 
 #: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "এই সীমার বাইরে ০ মান যুক্ত"
 
 #: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
-msgstr ""
+msgstr "এই সীমার বাইরে সুবিধাজনক ১ সেকেন্ড নির্ভূলতা এবং ০ মান যুক্ত"
 
 #: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "ব্যবহারিক সীমা : %1 থেকে %2, %3 বছরের মধ্যে ।"
 
 #: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -771,116 +774,116 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Algorithm of"
-msgstr ""
+msgstr "এর কার্যপ্রনালী"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
-msgstr ""
+msgstr "সংশোধন ছাড়া"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (১৯৩১)"
 
 #: src/gui/ConfigurationDialog.cpp:1133
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (১৯৪৮)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (১৯৫২)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "জ্যোতির্বৈজ্ঞানিক পঞ্জিকা (১৯৬০)"
 
 #: src/gui/ConfigurationDialog.cpp:1136
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (১৯৬২, ১৯৬৪) এবং Goldstine (১৯৭৩)"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller এবং Stephenson (১৯৭৫)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (১৯৭৮)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel এবং Zech (১৯৭৯)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison এবং Stephenson (১৯৮২)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson এবং Morrison (১৯৮৪)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson এবং Houlden (১৯৮৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (১৯৮৭, ১৯৮৯)"
 
 #: src/gui/ConfigurationDialog.cpp:1144
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (১৯৮৮)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel এবং Zech (১৯৮৮)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze এবং Chapront (১৯৯১)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson এবং Morrison (১৯৯৫)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (১৯৯৭)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (১৯৯৮) (Chapront, Chapront-Touze এবং Francou (১৯৯৭) সহ)"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus এবং Simons (২০০০)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck এবং Pfleger (২০০০)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold এবং Dershowitz (২০০২, ২০০৭)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison এবং Stephenson (২০০৪, ২০০৫)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak এবং Meeus (২০০৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (২০০৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -940,6 +943,7 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"নীচে ব্যবহৃত সহজ পন্থাগুলি দেওয়া আছে । নতুন কিছুর জন্য \"%1\" এ যান ।"
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1017,7 +1021,7 @@ msgstr "প্রস্তুতকারক : %1"
 #: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "নিরবিচ্ছিন্ন একত্রীকরন: %1"
 
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
@@ -1223,12 +1227,12 @@ msgstr "সহজ পন্থাটির বিকল্প"
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "%1T নির্ণয়ের একটি সহজ সরল সমীকরনের রূপ:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:129
 msgid "where"
@@ -1823,7 +1827,7 @@ msgstr "সূর্যায়ণ"
 #. TRANSLATORS: Name of script
 #: src/translations.h:243
 msgid "Sky Culture Tour"
-msgstr ""
+msgstr "মহাকাশ সম্পর্কিত নানা সংস্কৃতিগুলি ঘুরে ঘুরে দেখা"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:250
@@ -1833,7 +1837,7 @@ msgstr "সবকটি ভূমিরূপ ঘুরে দেখুন ।"
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:252
 msgid "Look at each installed sky culture."
-msgstr ""
+msgstr "সমস্ত মহাকাশ সম্পর্কিত সংস্কৃতিগুলি ঘুরে দেখুন ।"
 
 #: src/translations.h:253
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -3379,7 +3383,7 @@ msgstr "দূরবীনে প্রদত্ত স্থানাঙ্ক�
 
 #: src/translations.h:659
 msgid "Show renderer statistics"
-msgstr ""
+msgstr "বিভিন্ন উপস্থাপন পরিসংখ্যানর পরিসংখ্যান প্রদর্শন"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:662 src/ui_configurationDialog.h:1160
@@ -4706,7 +4710,7 @@ msgstr "দূরবীন দর্শন বিন্যাসের আপা
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "বিবর্ধকতা: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
@@ -4714,11 +4718,11 @@ msgstr "লেন্স: কিছু নেই"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "বিবর্ধকতা: নেই"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of lens"
-msgstr ""
+msgstr "লেন্সের বিবর্ধকতা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4919,13 +4923,15 @@ msgstr "লেন্স সমূহ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplicity:"
-msgstr ""
+msgstr "বিবর্ধকতা:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
+"বিবর্ধকতার মান >১ হলে (Barlow লেন্স) ফোকাস দূরত্ব বাড়ে এবং বিবর্ধকতার মান "
+"<১হলে (Shapley লেন্স) ফোকাস দূরত্ব কমে ।"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1046
 #: plugins/Oculars/src/ui_ocularDialog.h:1056
@@ -6457,7 +6463,7 @@ msgid ""
 "its online database. Still a work in progress."
 msgstr ""
 "Stellarium-এ উল্কা এবং ধূমকেতু যোগ করার জন্য এই ইন্টারফেস । আপনি জ্যোতিষ্কের "
-"তালিকা'অপ্রধান গ্রহ এবং ধূমকেতু এফিমেরিস সার্ভিস (MPES)' থেকে অনুসন্ধান বা "
+"তালিকা'অপ্রধান গ্রহ এবং ধূমকেতু পঞ্জিকা সার্ভিস (MPES)' থেকে অনুসন্ধান বা "
 "সংগ্রহ করতে পারেন । এখনও বিশদ কাজ চলছে ।"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
@@ -6507,8 +6513,8 @@ msgid ""
 msgstr ""
 "আপনি ধূমকেতু এবং উল্কার তথ্য আমদানি করতে পারেন IAU's Minor Planet Center "
 "ফর্ম্যাটে (%1) । আপনি জ্যোতিষ্কর তালিকা সম্বলিত ফাইলও আমদানি করতে পারেন, অার "
-"এই রকম ফাইল 'অপ্রধান গ্রহ এবং ধূমকেতু এফিমেরিস সার্ভিস (MPES)' থেকে সংগ্রহ "
-"করতে পারেন ।"
+"এই রকম ফাইল 'অপ্রধান গ্রহ এবং ধূমকেতু পঞ্জিকা (MPES)' থেকে সংগ্রহ করতে পারেন "
+"।"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
@@ -7072,22 +7078,22 @@ msgstr "সরণ দ্বারা"
 #. TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
 #: plugins/Exoplanets/src/Exoplanet.cpp:174
 msgid "by radial velocity"
-msgstr ""
+msgstr "দোলন গতি দ্বারা"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by imaging
 #: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "by imaging"
-msgstr ""
+msgstr "ছবি দ্বারা"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by astrometry
 #: plugins/Exoplanets/src/Exoplanet.cpp:179
 msgid "by astrometry"
-msgstr ""
+msgstr "জ্যোতির্মিতি দ্বারা"
 
 #. TRANSLATORS: Full phrase: Exoplanet detected by microlensing
 #: plugins/Exoplanets/src/Exoplanet.cpp:181
 msgid "by microlensing"
-msgstr ""
+msgstr "মাইক্রোলেন্সিং দ্বারা"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Metallicity"
@@ -7123,7 +7129,7 @@ msgstr "দিন"
 #: plugins/Exoplanets/src/Exoplanet.cpp:241
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Jup"
-msgstr "জুপ"
+msgstr "বৃহস্পতি"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Semi-Major Axis"
@@ -7198,7 +7204,7 @@ msgstr "বহির গ্রহ প্রদর্শন মোড"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "নাম না দেখিয়ে সমস্ত বহির গ্রহগুলি দেখান"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
 msgid "Enable display of distribution for exoplanets"
@@ -7206,11 +7212,11 @@ msgstr "বহির গ্রহদের বণ্টন প্রদর্শ
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "আবিস্কারের সময়ের পরে বহির গ্রহগুলি দেখান"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "বহির গ্রহ আবিস্কারের সময়সূচি সক্রিয় করুন"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
@@ -7471,6 +7477,7 @@ msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"দৃশ্যমানতার জন্য সর্বনিম্ন উচ্চতা (পাহাড়, ঘর-বাড়ি, দূরবীনের সীমাবদ্ধতা জনিত)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
@@ -7483,6 +7490,9 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
+"দেখেই বোঝা যায় যে এটি উদয়, অস্ত, সরণ এইসব প্রদর্শন কে । পঞ্জিকার তথ্য দুই "
+"রকম ভাবে দেওয়া যায় - সময়কাল (বর্তমান সময় ধরে) এবং ঘড়ির সময় (স্থানীয় সময় ধরে) "
+"হিসাবে ।"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
@@ -7614,7 +7624,7 @@ msgstr "হরফের আকার"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "পর্যবেক্ষনের পরিবেশ"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
