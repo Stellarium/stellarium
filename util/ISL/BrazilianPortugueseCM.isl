@@ -1,4 +1,4 @@
-﻿; *** Inno Setup version 5.5.3+ Brazilian Portuguese messages for Stellarium ***
+; *** Inno Setup version 5.5.3+ Brazilian Portuguese messages for Stellarium ***
 ;
 ; Brazilian Portuguese Translation by Adriano Steffler (adrianosteffler@live.com)
 ;
