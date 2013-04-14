@@ -243,7 +243,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 			StelTextureNew* screenTexture = getViewportTexture();
 			const QSize size = screenTexture->getDimensions();
 
-			glDisable(GL_BLEND);
+			glDisable(GL_BLEND);			
 			setGlobalColor(Vec4f(1.0f, 1.0f, 1.0f, 1.0f));
 			screenTexture->bind();
 			drawTexturedRect(0, 0, size.width(), size.height());
