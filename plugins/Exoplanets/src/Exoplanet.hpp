@@ -40,8 +40,7 @@ typedef struct
 	float eccentricity;	//! Exoplanet orbit eccentricity
 	float inclination;	//! Exoplanet orbit inclination
 	float angleDistance;	//! Exoplanet angle distance
-	int discovered;		//! Exoplanet discovered year
-	int detectionType;	//! Exoplanet detection type
+	int discovered;		//! Exoplanet discovered year	
 } exoplanetData;
 
 

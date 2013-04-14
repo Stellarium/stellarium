@@ -24,15 +24,6 @@ $UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.2; http://stell
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
-%detection_type = (
-	'detected by transit' => 0,
-	'detected by radial velocity' => 1,
-	'detected by imaging' => 2,
-	'pulsar' => 3,
-	'detected by astrometry' => 4,
-	'detected by microlensing' => 5,
-);
-
 if ($responce->is_success) {
 	open(OUT, ">$CSV");
 	$data = $responce->content;
@@ -137,7 +128,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,detection_type) VALUES (?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered, $dtype);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered) VALUES (?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered);
 	}
 }
 
@@ -193,7 +184,6 @@ while (@stars = $sth->fetchrow_array()) {
 		$pinc		= $planets[8];
 		$angdist	= $planets[9];
 		$discovered	= $planets[10];
-		$dtype		= $planets[11];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
@@ -219,9 +209,6 @@ while (@stars = $sth->fetchrow_array()) {
 		}
 		if ($discovered ne '') {
 			$out .= "\t\t\t\t\"discovered\": ".$discovered.",\n";
-		}
-		if ($dtype ne '') {
-			$out .= "\t\t\t\t\"detectionType\": ".$detection_type{$dtype}.",\n";
 		}
 		if ($pname eq '') {
 			$pname = "a";
