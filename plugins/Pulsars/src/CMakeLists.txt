@@ -37,7 +37,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
 	ENDIF()
 
 	IF(WIN32)
-		SET_TARGET_PROPERTIES(Pulsars PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
+                SET_TARGET_PROPERTIES(Pulsars PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
 		SET(StelMain stelMain)
 	ELSE(WIN32)
 		SET(StelMain )
