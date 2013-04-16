@@ -343,6 +343,9 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 			matches += objectMgr->listMatchingObjects(trimmedText, 5);
 		}
 
+		// remove possible duplicates from completion list
+		matches.removeDuplicates();
+
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
 
