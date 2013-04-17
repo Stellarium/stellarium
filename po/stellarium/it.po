@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-14 15:21+0700\n"
-"PO-Revision-Date: 2013-03-24 19:08+0000\n"
+"PO-Revision-Date: 2013-04-16 11:06+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-15 05:15+0000\n"
-"X-Generator: Launchpad (build 16564)\n"
+"X-Launchpad-Export-Date: 2013-04-17 05:14+0000\n"
+"X-Generator: Launchpad (build 16567)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -257,7 +257,7 @@ msgstr "Veicolo Spaziale"
 
 #: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "La correzione è disabilitata. Usala solo se sai cosa stai facendo!"
 
 #: src/core/StelCore.cpp:1422
 #, qt-format
@@ -765,11 +765,11 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritmo di"
 
 #: src/gui/ConfigurationDialog.cpp:1131
 msgid "Without correction"
-msgstr ""
+msgstr "Senza correzione"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Schoch (1931)"
@@ -781,7 +781,7 @@ msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1134
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1135
 msgid "Astronomical Ephemeris (1960)"
@@ -793,7 +793,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller & Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Stephenson (1978)"
@@ -801,19 +801,19 @@ msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel & Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1140
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1141
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1142
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1143
 msgid "Espenak (1987, 1989)"
@@ -825,15 +825,15 @@ msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel & Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1146
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson (1997)"
@@ -841,31 +841,31 @@ msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (con Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1151
 msgid "JPL Horizons"
-msgstr ""
+msgstr "Orizzonti JPL"
 
 #: src/gui/ConfigurationDialog.cpp:1152
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus & Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Reijs (2006)"
@@ -874,7 +874,7 @@ msgstr "Reijs (2006)"
 #: src/gui/ConfigurationDialog.cpp:1159
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Equazione personalizzata di %1T"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Stellarium Help"
@@ -1014,7 +1014,7 @@ msgstr "Sviluppatore: %1"
 #: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Integrazione continua: %1"
 
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
@@ -1222,7 +1222,7 @@ msgstr "Scorciatoia alternativa"
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Equazione personalizzata per %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:127
 #, qt-format
@@ -1693,7 +1693,7 @@ msgstr "Tupi-Guarani"
 
 #: src/translations.h:178
 msgid "Tongan"
-msgstr ""
+msgstr "Tongan"
 
 #: src/translations.h:179
 msgid "Western"
@@ -3060,7 +3060,7 @@ msgstr "Sottrai 1 anno siderale"
 
 #: src/translations.h:556
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Sottrai 1 secolo siderale"
 
 #: src/translations.h:557
 msgid "Subtract 1 solar day"
@@ -3777,7 +3777,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1226
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -3785,7 +3785,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1231
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Magnitudini limite"
 
 #: src/ui_viewDialog.h:1233
 msgid "Stars to magnitude"
@@ -4130,11 +4130,11 @@ msgstr "Data di sistema a:"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Time correction"
-msgstr ""
+msgstr "Correzione temporale"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
-msgstr ""
+msgstr "Modifica equazione"
 
 #: src/ui_configurationDialog.h:1084
 msgid "Planetarium options"
@@ -4560,17 +4560,17 @@ msgstr "Campo app. oc.: %1 mm"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Lente #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Lente #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1568
 msgid "Lens: none"
-msgstr ""
+msgstr "Lente: nessuna"
 
 #: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
@@ -4617,15 +4617,15 @@ msgstr "Sensore #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1840
 msgid "&Lens"
-msgstr ""
+msgstr "&Lente"
 
 #: plugins/Oculars/src/Oculars.cpp:1841
 msgid "&Previous lens"
-msgstr ""
+msgstr "Lente &precedente"
 
 #: plugins/Oculars/src/Oculars.cpp:1842
 msgid "&Next lens"
-msgstr ""
+msgstr "Lente &successiva"
 
 #: plugins/Oculars/src/Oculars.cpp:1872
 msgid "&Telescope"
@@ -4649,11 +4649,11 @@ msgstr "Oculare successivo"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "Lente precedente"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "Lente successiva"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4710,19 +4710,19 @@ msgstr "Campo visivo apparente dell'oculare"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Molteplicità: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Lens: None"
-msgstr ""
+msgstr "Lente: nessuna"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Molteplicità: N/D"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
 msgid "Multiplicity of lens"
-msgstr ""
+msgstr "Molteplicità di lenti"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
@@ -4924,7 +4924,7 @@ msgstr "Binocoli"
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 #: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid "Lenses"
-msgstr ""
+msgstr "Lenti"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplicity:"
