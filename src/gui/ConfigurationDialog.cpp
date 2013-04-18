@@ -494,10 +494,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
-	conf->setValue("astro/flag_clamp_stellar_mag", skyd->getFlagClampStellarMagnitude());
-	conf->setValue("astro/clamp_stellar_mag", skyd->getClampStellarMagnitude());
-	conf->setValue("astro/flag_clamp_dso_mag", skyd->getFlagClampDSOMagnitude());
-	conf->setValue("astro/clamp_dso_mag", skyd->getClampDSOMagnitude());
+	conf->setValue("astro/flag_star_magnitude_limit",
+	               skyd->getFlagStarMagnitudeLimit());
+	conf->setValue("astro/star_magnitude_limit",
+	               skyd->getCustomStarMagnitudeLimit());
+	conf->setValue("astro/flag_nebula_magnitude_limit",
+	               skyd->getFlagNebulaMagnitudeLimit());
+	conf->setValue("astro/nebula_magnitude_limit",
+	               skyd->getCustomNebulaMagnitudeLimit());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());

@@ -193,23 +193,31 @@ public slots:
 	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
 
-	//! set true to draw stars only downto clampStellarMagnitude
-	void setFlagClampStellarMagnitude(bool flagClamp) {flagClampStellarMagnitude = flagClamp;}
-	//! set true to draw deep-sky objects only downto clampDSOMagnitude
-	void setFlagClampDSOMagnitude(bool flagClamp)     {flagClampDSOMagnitude = flagClamp;}
-	//! @return true if user wants to draw only upto clampStellarMagnitude
-	bool getFlagClampStellarMagnitude() const {return flagClampStellarMagnitude;}
-	//! @return true if user wants to draw only upto clampDSOMagnitude
-	bool getFlagClampDSOMagnitude()     const {return flagClampDSOMagnitude;}
+	//! Toggle the application of user-defined star magnitude limit.
+	//! If enabled, stars fainter than the magnitude set with
+	//! setCustomStarMagnitudeLimit() will not be displayed.
+	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
+	void setFlagStarMagnitudeLimit(bool b) {flagStarMagnitudeLimit = b;}
+	//! Toggle the application of user-defined deep-sky object magnitude limit.
+	//! If enabled, deep-sky objects fainter than the magnitude set with
+	//! setCustomNebulaMagnitudeLimit() will not be displayed.
+	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
+	void setFlagNebulaMagnitudeLimit(bool b) {flagNebulaMagnitudeLimit = b;}
+	//! @return true if the user-defined star magnitude limit is in force.
+	bool getFlagStarMagnitudeLimit() const {return flagStarMagnitudeLimit;}
+	//! @return true if the user-defined nebula magnitude limit is in force.
+	bool getFlagNebulaMagnitudeLimit() const {return flagNebulaMagnitudeLimit;}
 
-	//! Get the artificially set limit for point sources, to limit drawing e.g. for naked-eye display
-	float getClampStellarMagnitude() const {return clampStellarMagnitude;}
-	//! Set the artificially set limit for point sources, to limit drawing e.g. for naked-eye display
-	void setClampStellarMagnitude(double clampMag) {clampStellarMagnitude=clampMag;}
-	//! Get the artificially set limit for deep-sky sources, to limit drawing e.g. for naked-eye display
-	float getClampDSOMagnitude() const {return clampDSOMagnitude;}
-	//! Set the artificially set limit for deep-sky sources, to limit drawing e.g. for naked-eye display
-	void setClampDSOMagnitude(double clampMag) {clampDSOMagnitude=clampMag;}
+	//! Get the value used for forced star magnitude limiting.
+	float getCustomStarMagnitudeLimit() const {return customStarMagLimit;}
+	//! Sets a lower limit for star magnitudes (anything fainter is ignored).
+	//! In force only if flagStarMagnitudeLimit is set.
+	void setCustomStarMagnitudeLimit(double limit) {customStarMagLimit=limit;}
+	//! Get the value used for forced nebula magnitude limiting.
+	float getCustomNebulaMagnitudeLimit() const {return customNebulaMagLimit;}
+	//! Sets a lower limit for nebula magnitudes (anything fainter is ignored).
+	//! In force only if flagNebulaMagnitudeLimit is set.
+	void setCustomNebulaMagnitudeLimit(double limit) {customNebulaMagLimit=limit;}
 
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
@@ -318,10 +326,12 @@ private:
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	bool flagHasAtmosphere;
 
-	//! if true, only draw stars downto clampStellarMagnitude
-	bool flagClampStellarMagnitude;
-	//! if true, only draw Deep-sky objects downto clampDSOMagnitude
-	bool flagClampDSOMagnitude;
+	//! Controls the application of the user-defined star magnitude limit.
+	//! @see customStarMagnitudeLimit
+	bool flagStarMagnitudeLimit;
+	//! Controls the application of the user-defined nebula magnitude limit.
+	//! @see customNebulaMagnitudeLimit
+	bool flagNebulaMagnitudeLimit;
 
 	float starRelativeScale;
 	float starAbsoluteScaleF;
@@ -334,10 +344,17 @@ private:
 	//! Current magnitude luminance
 	float limitLuminance;
 
-	//! Magnitude limit, e.g. to display naked-eye stars only
-	float clampStellarMagnitude;
-	//! Magnitude limit, e.g. to display naked-eye or binocular deep-sky objects only
-	float clampDSOMagnitude;
+	//! User-defined magnitude limit for stars.
+	//! Interpreted as a lower limit - stars fainter than this value will not
+	//! be displayed.
+	//! Used if flagStarMagnitudeLimit is true.
+	float customStarMagLimit;
+	//! User-defined magnitude limit for deep-sky objects.
+	//! Interpreted as a lower limit - nebulae fainter than this value will not
+	//! be displayed.
+	//! Used if flagNebulaMagnitudeLimit is true.
+	//! @todo Why the asterisks this is not in NebulaMgr? --BM
+	float customNebulaMagLimit;
 
 	//! Little halo texture
 	class StelTextureNew* texHalo;
