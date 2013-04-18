@@ -156,17 +156,22 @@ void ViewDialog::createDialogContent()
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
 
 	// Limit Magnitudes
-	ui->starLimitMagnitudeCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagClampStellarMagnitude());
-	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagClampStellarMagnitude(bool)));
-
-	ui->starLimitMagnitudeDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getClampStellarMagnitude());
-	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setClampStellarMagnitude(double)));
-
-	ui->nebulaLimitMagnitudeCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagClampDSOMagnitude());
-	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagClampDSOMagnitude(bool)));
-
-	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getClampDSOMagnitude());
-	connect(ui->nebulaLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setClampDSOMagnitude(double)));
+	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
+	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
+	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
+	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
+	
+	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
+	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
+	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
+	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
+	connect(ui->nebulaLimitMagnitudeDoubleSpinBox,
+	        SIGNAL(valueChanged(double)),
+	        drawer,
+	        SLOT(setCustomNebulaMagnitudeLimit(double)));
 
 	// Planets section
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
