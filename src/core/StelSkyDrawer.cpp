@@ -79,10 +79,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
-	setFlagClampStellarMagnitude((conf->value("astro/flag_clamp_stellar_mag", false).toBool()));
-	setClampStellarMagnitude(conf->value("astro/clamp_stellar_mag", 6.5).toFloat());
-	setFlagClampDSOMagnitude((conf->value("astro/flag_clamp_dso_mag", false).toBool()));
-	setClampDSOMagnitude(conf->value("astro/clamp_dso_mag", 8.5).toFloat());
+	setFlagStarMagnitudeLimit((conf->value("astro/flag_star_magnitude_limit", false).toBool()));
+	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toFloat());
+	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
+	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toFloat());
 	// qDebug() << "drawer: clampStellarMag: " << clampStellarMagnitude << " , clampDSOmagnitude: " << clampDSOMagnitude;
 
 	bool ok=true;
@@ -476,7 +476,7 @@ void StelSkyDrawer::postDrawSky3dModel
 	 float mag, const Vec3f& color)
 {
 	// GZ: Only draw if we did not clamp this object away.
-	if (flagClampStellarMagnitude && (mag > clampStellarMagnitude)) return;
+	if (flagStarMagnitudeLimit && (mag > customStarMagLimit)) return;
 
 	const float pixPerRad = projector->getPixelPerRadAtCenter();
 	// Assume a disk shape

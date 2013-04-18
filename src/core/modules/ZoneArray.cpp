@@ -491,9 +491,9 @@ void SpecialZoneArray<Star>::draw
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
 	const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
 	// GZ: allow artificial cutoff:
-	const int clampStellarMagnitude_mmag = (int) floor(drawer->getClampStellarMagnitude() * 1000.0f);
+	const int clampStellarMagnitude_mmag = (int) floor(drawer->getCustomStarMagnitudeLimit() * 1000.0f);
 	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.
-	int cutoffMagStep=(drawer->getFlagClampStellarMagnitude() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
+	int cutoffMagStep=(drawer->getFlagStarMagnitudeLimit() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
 
 	// go through all stars, which are sorted by magnitude (bright stars first)
 	for (const Star *s=z->getStars();s<end;++s)
