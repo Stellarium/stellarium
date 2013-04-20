@@ -278,8 +278,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                       pOn,
 	                                       pOff,
 	                                       pHover,
-	                                       defaultAction,
-                                           true);
+					       defaultAction,
+					       true);
 	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
 
 	degrees = QString("-1%1").arg(QChar(0x00B0));
@@ -288,11 +288,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdMinus1Button = new StelButton(ccdControls,
-	                                       pOn,
-                                           pOff,
+					       pOn,
+					       pOff,
 	                                       pHover,
-	                                       defaultAction,
-                                           true);
+					       defaultAction,
+					       true);
 	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
 
 	degrees = QString("0%1").arg(QChar(0x00B0));
@@ -304,8 +304,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                        pOn,
 	                                        pOff,
 	                                        pHover,
-	                                        defaultAction,
-                                            true);
+						defaultAction,
+						true);
 	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
 
 	degrees = QString("+1%1").arg(QChar(0x00B0));
@@ -314,11 +314,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus1Button = new StelButton(ccdControls,
-	                                      pOn,
-                                          pOff,
-	                                      pHover,
-                                          defaultAction,
-                                          true);
+					      pOn,
+					      pOff,
+					      pHover,
+					      defaultAction,
+					      true);
 	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
 
 	degrees = QString("+5%1").arg(QChar(0x00B0));
@@ -327,11 +327,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus5Button = new StelButton(ccdControls,
-	                                      pOn,
-                                          pOff,
-	                                      pHover,
-                                          defaultAction,
-                                          true);
+					      pOn,
+					      pOff,
+					      pHover,
+					      defaultAction,
+					      true);
 	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
 
 	degrees = QString("+15%1").arg(QChar(0x00B0));
@@ -340,11 +340,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus15Button = new StelButton(ccdControls,
-	                                       pOn,
-                                           pOff,
+					       pOn,
+					       pOff,
 	                                       pHover,
-	                                       defaultAction,
-                                           true);
+					       defaultAction,
+					       true);
 	rotateCcdPlus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees clockwise"));
 
 	QSignalMapper* sm = ocularsPlugin->ccdRotationSignalMapper;
