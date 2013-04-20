@@ -46,24 +46,27 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
 	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds),
-											ccdModel,
-											ccdModel->propertyMap());
+			    ccdModel,
+			    ccdModel->propertyMap());
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
 	Ocular* ocularModel = Ocular::ocularModel();
 	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars),
-												 ocularModel, ocularModel->propertyMap());
+			       ocularModel,
+			       ocularModel->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
 	Telescope* telescopeModel = Telescope::telescopeModel();
 	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
-														telescopeModel,
-														telescopeModel->propertyMap());
+				  telescopeModel,
+				  telescopeModel->propertyMap());
 	
 	this->lense = lense;
 	lensTableModel = new PropertyBasedTableModel(this);
 	Lens* lensModel = Lens::lensModel();
-	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lense), lensModel, lensModel->propertyMap());
+	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lense),
+			     lensModel,
+			     lensModel->propertyMap());
 
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
