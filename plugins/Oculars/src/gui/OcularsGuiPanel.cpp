@@ -958,8 +958,7 @@ void OcularsGuiPanel::setTelescopeControlsVisible(bool show)
 void OcularsGuiPanel::updateMainButtonsPositions()
 {
 	Q_ASSERT(buttonOcular);
-	Q_ASSERT(buttonCrosshairs);
-	Q_ASSERT(buttonCrosshairs);
+	Q_ASSERT(buttonCrosshairs);	
 	Q_ASSERT(buttonCcd);
 	Q_ASSERT(buttonTelrad);
 	Q_ASSERT(buttonConfiguration);
