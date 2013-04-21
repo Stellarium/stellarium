@@ -83,6 +83,11 @@ Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
 Quasars::Quasars()
 	: texPointer(NULL)
 	, markerTexture(NULL)
+	, flagShowQuasars(false)
+	, OnIcon(NULL)
+	, OffIcon(NULL)
+	, GlowIcon(NULL)
+	, toolbarButton(NULL)
 	, progressBar(NULL)
 {
 	setObjectName("Quasars");
@@ -97,6 +102,13 @@ Quasars::Quasars()
 Quasars::~Quasars()
 {
 	delete configDialog;
+
+	if (GlowIcon)
+		delete GlowIcon;
+	if (OnIcon)
+		delete OnIcon;
+	if (OffIcon)
+		delete OffIcon;
 }
 
 void Quasars::deinit()
@@ -142,8 +154,17 @@ void Quasars::init()
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
+		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
+		OffIcon = new QPixmap(":/Quasars/btQuasars-off.png");
+
+		gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
+		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+
 		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -194,6 +215,9 @@ void Quasars::init()
 */
 void Quasars::draw(StelCore* core, class StelRenderer* renderer)
 {
+	if (!flagShowQuasars)
+		return;
+
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	renderer->setFont(font);
 
@@ -248,6 +272,9 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 {
 	QList<StelObjectP> result;
 
+	if (!flagShowQuasars)
+		return result;
+
 	Vec3d v(av);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
@@ -271,6 +298,9 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 
 StelObjectP Quasars::searchByName(const QString& englishName) const
 {
+	if (!flagShowQuasars)
+		return NULL;
+
 	QString objw = englishName.toUpper();
 	foreach(const QuasarP& quasar, QSO)
 	{
@@ -283,7 +313,8 @@ StelObjectP Quasars::searchByName(const QString& englishName) const
 
 StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+	if (!flagShowQuasars)
+		return NULL;
 
 	foreach(const QuasarP& quasar, QSO)
 	{
@@ -297,6 +328,9 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
+	if (!flagShowQuasars)
+		return result;
+
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
@@ -318,6 +352,9 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
+	if (!flagShowQuasars)
+		return result;
+
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
@@ -529,6 +566,7 @@ void Quasars::restoreDefaultConfigIni(void)
 
 	conf->setValue("distribution_enabled", false);
 	conf->setValue("updates_enabled", true);
+	conf->setValue("flag_show_quasars", false);
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
@@ -543,6 +581,7 @@ void Quasars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
+	flagShowQuasars = conf->value("flag_show_quasars", false).toBool();
 
 	conf->endGroup();
 }
@@ -555,6 +594,7 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
+	conf->setValue("flag_show_quasars", flagShowQuasars);
 
 	conf->endGroup();
 }
