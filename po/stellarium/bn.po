@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-03 17:54+0700\n"
+"POT-Creation-Date: 2013-04-14 15:21+0700\n"
 "PO-Revision-Date: 2013-04-13 04:14+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-14 05:10+0000\n"
+"X-Launchpad-Export-Date: 2013-04-15 05:11+0000\n"
 "X-Generator: Launchpad (build 16564)\n"
 "Language: bn\n"
 
@@ -69,7 +69,7 @@ msgstr "ধরন: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:444
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
 #: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
-#: plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্য: <b>%1</b> (extincted to: <b>%2</b>)"
@@ -77,7 +77,7 @@ msgstr "ঔজ্জ্বল্য: <b>%1</b> (extincted to: <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
 #: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:181
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "ঔজ্জ্বল্য: <b>%1</b>"
@@ -235,14 +235,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্য : <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:143
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "বর্ণালীর প্রকৃতি : %1"
 
 #: src/core/modules/StarWrapper.cpp:147
 #: plugins/Supernovae/src/Supernova.cpp:115
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:196
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "দূরত্ব : %1 আলোকবর্ষ"
@@ -1310,8 +1310,8 @@ msgstr "বছর"
 msgid "This system does not support OpenGL."
 msgstr "এই সিস্টেম OpenGL সমর্থন করে না ।"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:225
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "Sun"
 msgstr "সূর্য"
 
@@ -3583,154 +3583,154 @@ msgstr "দেশ :"
 msgid "Planet:"
 msgstr "গ্রহ :"
 
-#: src/ui_searchDialogGui.h:541
+#: src/ui_searchDialogGui.h:542
 msgid "Find Object"
 msgstr "জ্যোতিষ্ক অনুসন্ধান করুন"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:543
 msgid "Find Object or Position"
 msgstr "জ্যোতিষ্ক বা তার অবস্থান অনুসন্ধান করুন"
 
-#: src/ui_searchDialogGui.h:548
+#: src/ui_searchDialogGui.h:549
 msgid "iota"
 msgstr "আয়োটা (iota)"
 
-#: src/ui_searchDialogGui.h:551
+#: src/ui_searchDialogGui.h:552
 msgid "alpha"
 msgstr "আলফা (α)"
 
-#: src/ui_searchDialogGui.h:554
+#: src/ui_searchDialogGui.h:555
 msgid "beta"
 msgstr "বিটা (β)"
 
-#: src/ui_searchDialogGui.h:557
+#: src/ui_searchDialogGui.h:558
 msgid "gamma"
 msgstr "গামা (γ)"
 
-#: src/ui_searchDialogGui.h:560
+#: src/ui_searchDialogGui.h:561
 msgid "delta"
 msgstr "ডেল্টা (δ)"
 
-#: src/ui_searchDialogGui.h:563
+#: src/ui_searchDialogGui.h:564
 msgid "epsilon"
 msgstr "এপসাইলন (δ)"
 
-#: src/ui_searchDialogGui.h:566
+#: src/ui_searchDialogGui.h:567
 msgid "zeta"
 msgstr "জিটা (ζ)"
 
-#: src/ui_searchDialogGui.h:569
+#: src/ui_searchDialogGui.h:570
 msgid "eta"
 msgstr "ইটা (η)"
 
-#: src/ui_searchDialogGui.h:572
+#: src/ui_searchDialogGui.h:573
 msgid "theta"
 msgstr "থিটা (θ)"
 
-#: src/ui_searchDialogGui.h:575
+#: src/ui_searchDialogGui.h:576
 msgid "kappa"
 msgstr "কাপ্পা (κ)"
 
-#: src/ui_searchDialogGui.h:578
+#: src/ui_searchDialogGui.h:579
 msgid "lambda"
 msgstr "ল্যাম্বডা (λ)"
 
-#: src/ui_searchDialogGui.h:581
+#: src/ui_searchDialogGui.h:582
 msgid "mu"
 msgstr "মিউ (μ)"
 
-#: src/ui_searchDialogGui.h:584
+#: src/ui_searchDialogGui.h:585
 msgid "nu"
 msgstr "নিউ (ν)"
 
-#: src/ui_searchDialogGui.h:587
+#: src/ui_searchDialogGui.h:588
 msgid "xi"
 msgstr "জাই (ξ)"
 
-#: src/ui_searchDialogGui.h:590
+#: src/ui_searchDialogGui.h:591
 msgid "omicron"
 msgstr "ওমিক্রন (ο)"
 
-#: src/ui_searchDialogGui.h:593
+#: src/ui_searchDialogGui.h:594
 msgid "pi"
 msgstr "পাই (π)"
 
-#: src/ui_searchDialogGui.h:596
+#: src/ui_searchDialogGui.h:597
 msgid "rho"
 msgstr "রো (ρ)"
 
-#: src/ui_searchDialogGui.h:599
+#: src/ui_searchDialogGui.h:600
 msgid "sigma"
 msgstr "সিগমা (σ)"
 
-#: src/ui_searchDialogGui.h:602
+#: src/ui_searchDialogGui.h:603
 msgid "tau"
 msgstr "টাও (τ)"
 
-#: src/ui_searchDialogGui.h:605
+#: src/ui_searchDialogGui.h:606
 msgid "upsilon"
 msgstr "এপসাইলন (ς)"
 
-#: src/ui_searchDialogGui.h:608
+#: src/ui_searchDialogGui.h:609
 msgid "phi"
 msgstr "ফাই (φ)"
 
-#: src/ui_searchDialogGui.h:611
+#: src/ui_searchDialogGui.h:612
 msgid "chi"
 msgstr "কাই (χ)"
 
-#: src/ui_searchDialogGui.h:614
+#: src/ui_searchDialogGui.h:615
 msgid "psi"
 msgstr "শাই (ψ)"
 
-#: src/ui_searchDialogGui.h:617
+#: src/ui_searchDialogGui.h:618
 msgid "omega"
 msgstr "ওমেগা (ω)"
 
-#: src/ui_searchDialogGui.h:619
+#: src/ui_searchDialogGui.h:620
 msgid "Greek letters for Bayer designations"
 msgstr "নামের জন্য গ্রীক অক্ষর"
 
-#: src/ui_searchDialogGui.h:620
+#: src/ui_searchDialogGui.h:621
 msgid "Object"
 msgstr "লক্ষ্যবস্তু"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:622
 msgid "RA/Dec (J2000):"
 msgstr "বিষুবাংশ / বিষুবলম্ব (J2000):"
 
-#: src/ui_searchDialogGui.h:622
+#: src/ui_searchDialogGui.h:623
 msgid "Position"
 msgstr "অবস্থান"
 
-#: src/ui_searchDialogGui.h:623
+#: src/ui_searchDialogGui.h:624
 msgid "On-line astronomical database SIMBAD"
 msgstr "অন ​​লাইন SIMBAD জ্যোতির্বিদ্যা ডাটাবেস"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:625
 msgid "Extend search with SIMBAD"
 msgstr "SIMBAD-এ বিস্তৃত অনুসন্ধান"
 
-#: src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:626
 msgid "Server:"
 msgstr "সার্ভার :"
 
-#: src/ui_searchDialogGui.h:626 src/ui_viewDialog.h:1275
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1275
 #: src/ui_viewDialog.h:1280 src/ui_viewDialog.h:1282
 #: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "বিকল্পসমূহ"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:628
 msgid "names in English"
 msgstr "ইংরাজী নাম"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:629
 msgid "Search in list..."
 msgstr "তালিকায় খোঁজা হচ্ছে..."
 
-#: src/ui_searchDialogGui.h:629
+#: src/ui_searchDialogGui.h:630
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr "তালিকা"
@@ -6933,7 +6933,7 @@ msgid ""
 msgstr ""
 "এই প্লাগইন বিভিন্ন পালসারের তাদের নিজস্ব তথ্য সহ অবস্থান নির্দেশ করে ।"
 
-#: plugins/Pulsars/src/Pulsar.cpp:125 plugins/Exoplanets/src/Exoplanet.cpp:177
+#: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
 msgstr "পালসার"
 
@@ -7134,95 +7134,65 @@ msgstr ""
 "এই প্লাগইন বহির্গ্রহ যুক্ত তারাদের অবস্থান নির্দেশ করে । বহির্গ্রহ সম্পর্কে "
 "সমস্ত তথ্য exoplanet.eu -এ প্রাপ্ত 'বহির্গ্রহ বিশ্বকোষ' থেকে নেওয়া হয়েছে ।"
 
-#. TRANSLATORS: Full phrase: Exoplanet detected by transit
-#: plugins/Exoplanets/src/Exoplanet.cpp:172
-msgid "by transit"
-msgstr "সরণ দ্বারা"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
-#: plugins/Exoplanets/src/Exoplanet.cpp:174
-msgid "by radial velocity"
-msgstr "দোলন গতি দ্বারা"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by imaging
-#: plugins/Exoplanets/src/Exoplanet.cpp:176
-msgid "by imaging"
-msgstr "ছবি দ্বারা"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by astrometry
-#: plugins/Exoplanets/src/Exoplanet.cpp:179
-msgid "by astrometry"
-msgstr "জ্যোতির্মিতি দ্বারা"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by microlensing
-#: plugins/Exoplanets/src/Exoplanet.cpp:181
-msgid "by microlensing"
-msgstr "মাইক্রোলেন্সিং দ্বারা"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
 msgid "Metallicity"
 msgstr "ধাতুময়তা"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Mass"
 msgstr "ভর"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Radius"
 msgstr "ব্যাসার্ধ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "কার্যকর তাপমাত্রা : %1 কেলভিন"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:239
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Exoplanet"
 msgstr "বহির্গ্রহ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Period"
 msgstr "পর্যায়কাল"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "days"
 msgstr "দিন"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Jup"
 msgstr "বৃহস্পতি"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:243
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Semi-Major Axis"
 msgstr "প্রধান অক্ষ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:243
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "AU"
 msgstr "জ্যোতির্বৈজ্ঞানিক একক"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:244
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Eccentricity"
 msgstr "উত্কেন্দ্রতা"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:245
+#: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Inclination"
 msgstr "তীর্যকতা"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:246
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "Angle Distance"
 msgstr "কৌনিক দূরত্ব"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:247
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Discovered year"
 msgstr "আবিষ্কারের সাল"
-
-#. TRANSLATORS: Exoplanet detected
-#: plugins/Exoplanets/src/Exoplanet.cpp:250
-msgid "Detected"
-msgstr "খুঁজে পাওয়া গেছে"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
