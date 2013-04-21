@@ -21,6 +21,7 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
+#include "CustomDeltaTEquationDialog.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
@@ -60,10 +61,12 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QComboBox>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
+	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
@@ -72,7 +75,9 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), star
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
-	ui = 0;
+	ui = NULL;
+	delete customDeltaTEquationDialog;
+	customDeltaTEquationDialog = NULL;
 }
 
 void ConfigurationDialog::retranslate()
@@ -99,6 +104,8 @@ void ConfigurationDialog::retranslate()
 
 		//Plug-in information
 		populatePluginsList();
+
+		populateDeltaTAlgorithmsList();		
 	}
 }
 
@@ -220,6 +227,18 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()),
 	        this,
 	        SLOT(showShortcutsWindow()));
+
+	// Delta-T
+	populateDeltaTAlgorithmsList();	
+	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use Espenak & Meeus (2006) as default
+		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeus"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
+	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
+	connect(ui->pushButtonCustomDeltaTEquationDialog, SIGNAL(clicked()), this, SLOT(showCustomDeltaTEquationDialog()));
 
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
@@ -475,6 +494,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
+	conf->setValue("astro/flag_star_magnitude_limit",
+	               skyd->getFlagStarMagnitudeLimit());
+	conf->setValue("astro/star_magnitude_limit",
+	               skyd->getCustomStarMagnitudeLimit());
+	conf->setValue("astro/flag_nebula_magnitude_limit",
+	               skyd->getFlagNebulaMagnitudeLimit());
+	conf->setValue("astro/nebula_magnitude_limit",
+	               skyd->getCustomNebulaMagnitudeLimit());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
@@ -591,6 +618,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/startup_time_mode", core->getStartupTimeMode());
 	conf->setValue("navigation/today_time", core->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", core->getPresetSkyTime());
+	conf->setValue("navigation/time_correction_algorithm", core->getCurrentDeltaTAlgorithmKey());
 	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
@@ -1086,4 +1114,84 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 	// ... and allow manual resize later.
 	ui->stackListWidget->setMinimumWidth(0);
 	*/
+}
+
+void ConfigurationDialog::populateDeltaTAlgorithmsList()
+{
+	Q_ASSERT(ui->deltaTAlgorithmComboBox);
+
+	// TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
+
+	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
+
+	//Save the current selection to be restored later
+	algorithms->blockSignals(true);
+	int index = algorithms->currentIndex();
+	QVariant selectedAlgorithmId = algorithms->itemData(index);
+	algorithms->clear();
+	//For each algorithm, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	algorithms->addItem(q_("Without correction"), "WithoutCorrection");
+	algorithms->addItem(q_("Schoch (1931)"), "Schoch");
+	algorithms->addItem(q_("Clemence (1948)"), "Clemence");
+	algorithms->addItem(q_("IAU (1952)"), "IAU");
+	algorithms->addItem(q_("Astronomical Ephemeris (1960)"), "AstronomicalEphemeris");
+	algorithms->addItem(q_("Tuckerman (1962, 1964) & Goldstine (1973)"), "TuckermanGoldstine");
+	algorithms->addItem(q_("Muller & Stephenson (1975)"), "MullerStephenson");
+	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson1978");
+	algorithms->addItem(q_("Schmadel & Zech (1979)"), "SchmadelZech1979");
+	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson1982");
+	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "StephensonMorrison1984");
+	algorithms->addItem(q_("Stephenson & Houlden (1986)"), "StephensonHoulden");
+	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
+	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
+	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
+	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
+	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
+	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
+	// The dropdown label is too long for the string, and Meeus 1998 is very popular, this should be in the beginning of the tag.
+	algorithms->addItem(q_("Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"), "ChaprontMeeus");
+	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
+	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
+	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
+	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
+	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
+	// Espenak & Meeus (2006) used by default
+	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
+	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
+	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
+
+	//Restore the selection
+	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
+	algorithms->setCurrentIndex(index);
+	//algorithms->model()->sort(0);
+	algorithms->blockSignals(false);
+	setDeltaTAlgorithmDescription();
+}
+
+void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	QString currentAlgorithm = ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString();
+	core->setCurrentDeltaTAlgorithmKey(currentAlgorithm);
+	setDeltaTAlgorithmDescription();
+	if (currentAlgorithm.contains("Custom"))
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
+	else
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(false);
+}
+
+void ConfigurationDialog::setDeltaTAlgorithmDescription()
+{
+	ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->deltaTAlgorithmDescription->setHtml(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
+}
+
+void ConfigurationDialog::showCustomDeltaTEquationDialog()
+{
+	if (customDeltaTEquationDialog == NULL)
+		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
+
+	customDeltaTEquationDialog->setVisible(true);
 }

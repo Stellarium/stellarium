@@ -387,7 +387,9 @@ void Satellite::update(double)
 {
 	if (pSatWrapper && orbitValid)
 	{
-		epochTime = StelApp::getInstance().getCore()->getJDay();
+		StelCore* core = StelApp::getInstance().getCore();
+		double JD = core->getJDay();
+		epochTime = JD - core->getDeltaT(JD)/86400; // Delta T anti-correction for artificial satellites
 
 		pSatWrapper->setEpoch(epochTime);
 		position                 = pSatWrapper->getTEMEPos();

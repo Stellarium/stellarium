@@ -36,6 +36,7 @@
 #include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "MeteorMgr.hpp"
+#include "MilkyWay.hpp"
 #include "GridLinesMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
@@ -144,11 +145,33 @@ void ViewDialog::createDialogContent()
 	ui->starRelativeScaleDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getRelativeStarScale());
 	connect(ui->starRelativeScaleDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setRelativeStarScale(double)));
 
+	MilkyWay* mw = GETSTELMODULE(MilkyWay);
+	ui->milkyWayBrightnessDoubleSpinBox->setValue(mw->getIntensity());
+	connect(ui->milkyWayBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), mw, SLOT(setIntensity(double)));
+
 	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
 	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
 
 	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
+
+	// Limit Magnitudes
+	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
+	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
+	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
+	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
+	
+	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
+	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
+	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
+	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
+	connect(ui->nebulaLimitMagnitudeDoubleSpinBox,
+	        SIGNAL(valueChanged(double)),
+	        drawer,
+	        SLOT(setCustomNebulaMagnitudeLimit(double)));
 
 	// Planets section
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -355,7 +378,9 @@ void ViewDialog::populateLists()
 	l->blockSignals(false);
 	updateSkyCultureText();
 
-	const StelCore* core = StelApp::getInstance().getCore();
+	const StelCore* core = StelApp::getInstance().getCore();	
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
 
 	// Fill the projection list
 	l = ui->projectionListWidget;
@@ -368,6 +393,7 @@ void ViewDialog::populateLists()
 	}
 	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
+	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 
 	// Fill the landscape list
@@ -392,7 +418,8 @@ void ViewDialog::populateLists()
 			break;
 		}
 	}
-	l->blockSignals(false);
+	l->blockSignals(false);	
+	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());

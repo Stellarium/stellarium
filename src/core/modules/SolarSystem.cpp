@@ -713,7 +713,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// Create the Solar System body and add it to the list
 		QString type = pd.value(secname+"/type").toString();
 		PlanetP p;
-		if (type == "asteroid")
+		// New class objects, named "plutoid", has properties similar asteroids and we should calculate their
+		// positions like for asteroids. Plutoids having one exception - Pluto - we should use special
+		// function for calculation of orbit of Pluto.
+		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
 			               pd.value(secname+"/lighting").toBool(),
@@ -1032,7 +1035,7 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 
 	sharedPlanetGraphics.lazyInit(renderer);
 
-	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader)
+	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader && renderer->areFloatTexturesSupported())
 	{
 		StelTextureNew* shadowInfo = computeShadowInfo(renderer);
 
@@ -1380,6 +1383,26 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 		if (constw==objw)
 		{
 			result << p->getNameI18n();
+			if (result.size()==maxNbItem)
+				return result;
+		}
+	}
+	return result;
+}
+
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
+QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0)
+		return result;
+	QString objw = objPrefix.toUpper();
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		QString constw = p->getEnglishName().mid(0, objw.size()).toUpper();
+		if (constw==objw)
+		{
+			result << p->getEnglishName();
 			if (result.size()==maxNbItem)
 				return result;
 		}

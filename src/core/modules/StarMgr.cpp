@@ -64,13 +64,14 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 2;
+static const int StarCatalogFormatVersion = 3;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
 QHash<int,QString> StarMgr::commonNamesMap;
 QHash<int,QString> StarMgr::commonNamesMapI18n;
 QMap<QString,int> StarMgr::commonNamesIndexI18n;
+QMap<QString,int> StarMgr::commonNamesIndex;
 QHash<int,QString> StarMgr::sciNamesMapI18n;
 QMap<QString,int> StarMgr::sciNamesIndexI18n;
 
@@ -479,6 +480,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	commonNamesMap.clear();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
+	commonNamesIndex.clear();
 
 	qDebug() << "Loading star names from" << commonNameFile;
 	QFile cnFile(commonNameFile);
@@ -541,6 +543,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 			commonNamesMap[hip] = englishCommonName;
 			commonNamesMapI18n[hip] = commonNameI18n;
 			commonNamesIndexI18n[commonNameI18n_cap] = hip;
+			commonNamesIndex[englishCommonName.toUpper()] = hip;
 			readOk++;
 		}
 	}
@@ -882,6 +885,73 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 
 	// Search for common names
 	for (QMap<QString,int>::const_iterator it(commonNamesIndexI18n.lowerBound(objw)); it!=commonNamesIndexI18n.end(); ++it)
+	{
+		if (it.key().startsWith(objw))
+		{
+			if (maxNbItem==0)
+				break;
+			result << getCommonName(it.value());
+			--maxNbItem;
+		}
+		else
+			break;
+	}
+
+	// Search for sci names
+	QString bayerPattern = objw;
+	QRegExp bayerRegEx(bayerPattern);
+
+	// if the first character is a Greek letter, check if there's an index
+	// after it, such as "alpha1 Cen".
+	if (objw.at(0).unicode() >= 0x0391 && objw.at(0).unicode() <= 0x03A9)
+		bayerRegEx.setPattern(bayerPattern.insert(1,"\\d?"));
+
+	for (QMap<QString,int>::const_iterator it(sciNamesIndexI18n.lowerBound(objw)); it!=sciNamesIndexI18n.end(); ++it)
+	{
+		if (it.key().indexOf(bayerRegEx)==0)
+		{
+			if (maxNbItem==0)
+				break;
+			result << getSciName(it.value());
+			--maxNbItem;
+		}
+		else if (it.key().at(0) != objw.at(0))
+			break;
+	}
+
+	// Add exact Hp catalogue numbers
+	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$");
+	hpRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (hpRx.exactMatch(objw))
+	{
+		bool ok;
+		int hpNum = hpRx.capturedTexts().at(2).toInt(&ok);
+		if (ok)
+		{
+			StelObjectP s = searchHP(hpNum);
+			if (s && maxNbItem>0)
+			{
+				result << QString("HIP%1").arg(hpNum);
+				maxNbItem--;
+			}
+		}
+	}
+
+	result.sort();
+	return result;
+}
+
+//! Find and return the list of at most maxNbItem objects auto-completing
+//! the passed object English name.
+QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+
+	// Search for common names
+	for (QMap<QString,int>::const_iterator it(commonNamesIndex.lowerBound(objw)); it!=commonNamesIndex.end(); ++it)
 	{
 		if (it.key().startsWith(objw))
 		{

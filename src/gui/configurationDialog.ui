@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>521</width>
-    <height>483</height>
+    <width>483</width>
+    <height>446</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -130,7 +130,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -310,11 +310,8 @@
             <property name="title">
              <string>Selected object information</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
               <widget class="QRadioButton" name="allSelectedInfoRadio">
                <property name="toolTip">
                 <string>Display all information available</string>
@@ -324,17 +321,7 @@
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QRadioButton" name="briefSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display less information</string>
-               </property>
-               <property name="text">
-                <string>Short</string>
-               </property>
-              </widget>
-             </item>
-             <item>
+             <item row="0" column="1">
               <widget class="QRadioButton" name="noSelectedInfoRadio">
                <property name="toolTip">
                 <string>Display no information</string>
@@ -344,7 +331,17 @@
                </property>
               </widget>
              </item>
-             <item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="briefSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display less information</string>
+               </property>
+               <property name="text">
+                <string>Short</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
               <widget class="QRadioButton" name="customSelectedInfoRadio">
                <property name="toolTip">
                 <string>Display user settings information</string>
@@ -385,19 +382,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBoxHourAngle">
-               <property name="toolTip">
-                <string>Topocentric equatorial coordinates</string>
-               </property>
-               <property name="text">
-                <string>Hour angle/Declination</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="4" column="1">
               <widget class="QCheckBox" name="checkBoxAltAz">
                <property name="toolTip">
@@ -421,56 +405,10 @@
                </attribute>
               </widget>
              </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="checkBoxSize">
-               <property name="toolTip">
-                <string>Angular or physical size</string>
-               </property>
-               <property name="text">
-                <string>Size</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="7" column="0" colspan="2">
-              <widget class="QCheckBox" name="checkBoxExtra3">
-               <property name="text">
-                <string>Additional information 3</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxExtra2">
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="text">
-                <string>Additional information 2</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="1" column="1">
               <widget class="QCheckBox" name="checkBoxAbsoluteMag">
                <property name="text">
                 <string>Absolute magnitude</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBoxDistance">
-               <property name="text">
-                <string>Distance</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -491,19 +429,6 @@
               <widget class="QCheckBox" name="checkBoxName">
                <property name="text">
                 <string>Name</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxExtra1">
-               <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
-               </property>
-               <property name="text">
-                <string>Additional information 1</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -533,6 +458,78 @@
                </property>
               </widget>
              </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBoxHourAngle">
+               <property name="toolTip">
+                <string>Topocentric equatorial coordinates</string>
+               </property>
+               <property name="text">
+                <string>Hour angle/Declination</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxDistance">
+               <property name="text">
+                <string>Distance</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxSize">
+               <property name="toolTip">
+                <string>Angular or physical size</string>
+               </property>
+               <property name="text">
+                <string>Size</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra1">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string>Additional information 1</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxExtra2">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Additional information 2</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra3">
+               <property name="text">
+                <string>Additional information 3</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -551,7 +548,7 @@
             <property name="title">
              <string>Control</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout">
+            <layout class="QGridLayout" name="gridLayoutStartup">
              <property name="margin">
               <number>0</number>
              </property>
@@ -565,7 +562,7 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0" colspan="2">
+             <item row="1" column="0">
               <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
                <property name="toolTip">
                 <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
@@ -582,6 +579,58 @@
                </property>
               </widget>
              </item>
+             <item row="1" column="1">
+              <layout class="QHBoxLayout" name="_8">
+               <item>
+                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
+                 <property name="toolTip">
+                  <string>Hides the mouse cursor when inactive</string>
+                 </property>
+                 <property name="text">
+                  <string>Mouse cursor timeout:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>seconds</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>3600.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
           </item>
@@ -594,6 +643,60 @@
              <property name="margin">
               <number>0</number>
              </property>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="_4">
+               <item>
+                <widget class="QRadioButton" name="fixedTimeRadio">
+                 <property name="toolTip">
+                  <string>Use a specific date and time when Stellarium starts up</string>
+                 </property>
+                 <property name="text">
+                  <string>Other:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="date">
+                  <date>
+                   <year>1952</year>
+                   <month>5</month>
+                   <day>11</day>
+                  </date>
+                 </property>
+                 <property name="time">
+                  <time>
+                   <hour>0</hour>
+                   <minute>42</minute>
+                   <second>0</second>
+                  </time>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="text">
+                <string>use current</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="systemTimeRadio">
                <property name="toolTip">
@@ -604,7 +707,7 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="0" column="1">
               <layout class="QHBoxLayout" name="_3">
                <property name="spacing">
                 <number>6</number>
@@ -662,165 +765,93 @@
                </item>
               </layout>
              </item>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="_4">
-               <item>
-                <widget class="QRadioButton" name="fixedTimeRadio">
-                 <property name="toolTip">
-                  <string>Use a specific date and time when Stellarium starts up</string>
-                 </property>
-                 <property name="text">
-                  <string>Other:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="date">
-                  <date>
-                   <year>1952</year>
-                   <month>5</month>
-                   <day>11</day>
-                  </date>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>0</hour>
-                   <minute>42</minute>
-                   <second>0</second>
-                  </time>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="1">
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>123</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="2" column="1">
-              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
-               <property name="text">
-                <string>use current</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
             </layout>
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_9">
+           <widget class="QGroupBox" name="deltaTGroupBox">
             <property name="title">
-             <string>Other</string>
+             <string>Time correction</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout">
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
              <property name="margin">
               <number>0</number>
              </property>
              <item>
-              <layout class="QHBoxLayout" name="_8">
-               <item>
-                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
-                 <property name="toolTip">
-                  <string>Hides the mouse cursor when inactive</string>
-                 </property>
-                 <property name="text">
-                  <string>Mouse cursor timeout (seconds):</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>3600.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>10.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showFlipButtonsCheckbox">
-               <property name="toolTip">
-                <string>Toggle vertical and horizontal image flip buttons.</string>
+              <widget class="QFrame" name="frame">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
                </property>
-               <property name="text">
-                <string>Show flip buttons</string>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
                </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
-               <property name="toolTip">
-                <string>Toggle display backgrounds of the nebulae.</string>
-               </property>
-               <property name="text">
-                <string>Show nebula background button</string>
-               </property>
+               <layout class="QVBoxLayout" name="verticalLayout">
+                <property name="margin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_12">
+                  <property name="leftMargin">
+                   <number>6</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="deltaTLabel">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="deltaTAlgorithmComboBox"/>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButtonCustomDeltaTEquationDialog">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                    <property name="toolTip">
+                     <string>Edit equation</string>
+                    </property>
+                    <property name="text">
+                     <string notr="true">...</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QTextBrowser" name="deltaTAlgorithmDescription">
+                  <property name="autoFillBackground">
+                   <bool>true</bool>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOff</enum>
+                  </property>
+                  <property name="openExternalLinks">
+                   <bool>true</bool>
+                  </property>
+                  <property name="openLinks">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>
@@ -838,23 +869,16 @@
           </property>
           <item>
            <widget class="QGroupBox" name="groupBox_7">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="title">
              <string>Planetarium options</string>
             </property>
-            <layout class="QGridLayout" name="gridLayoutx">
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="diskViewportCheckbox">
-               <property name="toolTip">
-                <string>Mask out everything outside a central circle in the main view</string>
-               </property>
-               <property name="text">
-                <string>Disc viewport</string>
-               </property>
-              </widget>
-             </item>
+            <layout class="QGridLayout" name="gridLayoutOptions">
              <item row="0" column="0">
               <widget class="QCheckBox" name="sphericMirrorCheckbox">
                <property name="toolTip">
@@ -865,17 +889,17 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="gravityLabelCheckbox">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="diskViewportCheckbox">
                <property name="toolTip">
-                <string>Align labels with the horizon</string>
+                <string>Mask out everything outside a central circle in the main view</string>
                </property>
                <property name="text">
-                <string>Gravity labels</string>
+                <string>Disc viewport</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="1" column="0">
               <widget class="QCheckBox" name="selectSingleConstellationButton">
                <property name="statusTip">
                 <string>Hide other constellations when you click one</string>
@@ -885,20 +909,50 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="renderSolarShadowsCheckbox">
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="gravityLabelCheckbox">
+               <property name="toolTip">
+                <string>Align labels with the horizon</string>
+               </property>
                <property name="text">
-                <string>Render Solar Shadows</string>
+                <string>Gravity labels</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
+               <property name="toolTip">
+                <string>Toggle display backgrounds of the nebulae.</string>
+               </property>
+               <property name="text">
+                <string>Show nebula background button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="showFlipButtonsCheckbox">
+               <property name="toolTip">
+                <string>Toggle vertical and horizontal image flip buttons.</string>
+               </property>
+               <property name="text">
+                <string>Show flip buttons</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
               <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
                <property name="toolTip">
                 <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
                </property>
                <property name="text">
                 <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="renderSolarShadowsCheckbox">
+               <property name="text">
+                <string>Render Solar Shadows</string>
                </property>
               </widget>
              </item>
@@ -1344,10 +1398,6 @@
   <tabstop>programLanguageComboBox</tabstop>
   <tabstop>setViewingOptionAsDefaultPushButton</tabstop>
   <tabstop>restoreDefaultsButton</tabstop>
-  <tabstop>allSelectedInfoRadio</tabstop>
-  <tabstop>briefSelectedInfoRadio</tabstop>
-  <tabstop>noSelectedInfoRadio</tabstop>
-  <tabstop>customSelectedInfoRadio</tabstop>
   <tabstop>checkBoxName</tabstop>
   <tabstop>checkBoxCatalogNumbers</tabstop>
   <tabstop>checkBoxVisualMag</tabstop>
@@ -1355,15 +1405,8 @@
   <tabstop>checkBoxRaDecJ2000</tabstop>
   <tabstop>checkBoxRaDecOfDate</tabstop>
   <tabstop>checkBoxGalacticCoordJ2000</tabstop>
-  <tabstop>checkBoxHourAngle</tabstop>
   <tabstop>checkBoxAltAz</tabstop>
-  <tabstop>checkBoxDistance</tabstop>
-  <tabstop>checkBoxSize</tabstop>
-  <tabstop>checkBoxExtra1</tabstop>
-  <tabstop>checkBoxExtra2</tabstop>
-  <tabstop>checkBoxExtra3</tabstop>
   <tabstop>enableKeysNavigationCheckBox</tabstop>
-  <tabstop>enableMouseNavigationCheckBox</tabstop>
   <tabstop>editShortcutsPushButton</tabstop>
   <tabstop>systemTimeRadio</tabstop>
   <tabstop>todayRadio</tabstop>
@@ -1373,8 +1416,6 @@
   <tabstop>fixedDateTimeCurrentButton</tabstop>
   <tabstop>mouseTimeoutCheckbox</tabstop>
   <tabstop>mouseTimeoutSpinBox</tabstop>
-  <tabstop>showFlipButtonsCheckbox</tabstop>
-  <tabstop>showNebulaBgButtonCheckbox</tabstop>
   <tabstop>sphericMirrorCheckbox</tabstop>
   <tabstop>diskViewportCheckbox</tabstop>
   <tabstop>gravityLabelCheckbox</tabstop>

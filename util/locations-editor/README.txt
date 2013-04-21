@@ -12,6 +12,7 @@ If you wish to translate an entry, please clone it and edit the new copy. This
 way, the original string will be still available. Another posibility is to
 aggregate all translations at the end of the file.
 
+
 Building
 --------
 
@@ -23,6 +24,7 @@ Alternatively, from the command line, run:
  make
  make clean
  ./locations-editor
+
 
 Usage
 -----
@@ -42,11 +44,13 @@ binary saving function in StelLocationMgr.
 Due to the way drag-and-drop is implemented, it's possible to move rows from one instance of the app to another,
 or to drop rows into a text editor or a spreadsheet.
 
+
 Known Issues
 ------------
 
 The .bin.gz file saved by the app is not an actual archive, as it can't be
 opened with an archive manager. Nevertheless, Stellarium can read it.
+
 
 TODO
 ----
@@ -58,3 +62,12 @@ Better verification and auto-completion/auto-suggestion of values with
 item delegates.
 
 In the long term: Support for adding time zone information.
+
+
+Change Log
+----------
+1.3.0:
+- Added selected rows count.
+- Added status bar indicator for filtered/total row count.
+- Searching/filtering now is initiated on pressing Enter, not on any change.
+- Added search/filter shortcut (Ctrl+F).

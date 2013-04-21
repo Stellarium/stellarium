@@ -327,6 +327,9 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	flagNightVision=!tmp;  // fool caching
 	setVisionModeNight(tmp);
 
+	// Initialisation of the render of solar shadows
+	setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
+
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();

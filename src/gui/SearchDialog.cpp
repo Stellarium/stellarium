@@ -336,10 +336,15 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QStringList matches;
 		if(greekText != trimmedText) {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));
+			matches += objectMgr->listMatchingObjects(trimmedText, 3);
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));			
 		} else {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
+			matches += objectMgr->listMatchingObjects(trimmedText, 5);
 		}
+
+		// remove possible duplicates from completion list
+		matches.removeDuplicates();
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -426,7 +431,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
-	else if (objectMgr->findAndSelectI18n(nameI18n))
+	else if (objectMgr->findAndSelectI18n(nameI18n) or objectMgr->findAndSelect(nameI18n))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())

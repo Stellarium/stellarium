@@ -306,6 +306,11 @@ private slots:
 	//! Translate labels to new language settings.
 	void updateI18n();	
 
+	//! Return the value of the initial brightness of landscape
+	float getInitialLandscapeBrightness() const {return initialLandscapeBrightness;}
+	//! Set the value of the initial brightness of landscape.
+	void setInitialLandscapeBrightness(float b) {initialLandscapeBrightness=b;}
+
 private:
 	//! Get light pollution luminance level.
 	float getAtmosphereLightPollutionLuminance() const;
@@ -345,6 +350,8 @@ private:
 	//! manually on changes.
 	//! @todo Find a way to update it automatically.
 	QStringList packagedLandscapeIDs;
+
+	float initialLandscapeBrightness;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

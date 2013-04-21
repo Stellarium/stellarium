@@ -413,9 +413,9 @@ void TextUserInterface::init()
 	                                m6, m6_2);
 	TuiNode* m6_4 = new TuiNode(N_("Magnitude scaling multiplier"),
 	                                    m6, m6_3);
-	TuiNode* m6_5 = new TuiNodeFloat(N_("Milky Way intensity:"),
+	TuiNode* m6_5 = new TuiNodeDouble(N_("Milky Way intensity:"),
 	                                 GETSTELMODULE(MilkyWay),
-	                                 SLOT(setIntensity(float)),
+					 SLOT(setIntensity(double)),
 	                                 GETSTELMODULE(MilkyWay)->getIntensity(),
 	                                 0, 10.0, 0.1, 
 	                                 m6, m6_4);

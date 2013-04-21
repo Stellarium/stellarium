@@ -175,6 +175,7 @@ class Translations
 		N_("Polynesian");
 		N_("Sami");
 		N_("Tupi-Guarani");
+		N_("Tongan");
 		N_("Western");
 
 		
@@ -238,6 +239,8 @@ class Translations
 		N_("Transit of Venus");
 		// TRANSLATORS: Name of script
 		N_("Analemma");
+		// TRANSLATORS: Name of script
+		N_("Sky Culture Tour");
 
 		
 		// =====================================================================
@@ -245,6 +248,8 @@ class Translations
 		
 		// TRANSLATORS: Description of the landscape tour script.
 		N_("Look around each installed landscape.");
+		// TRANSLATORS: Description of the sky culture tour script.
+		N_("Look at each installed sky culture.");
 		N_("Script to demonstrate a partial lunar eclipse.");
 		N_("Script to demonstrate a total lunar eclipse.");
 		N_("A slow, infinite tour of the sky, looking at random objects.");
@@ -649,6 +654,9 @@ class Translations
 		
 		// Telescope Control Plugin
 		N_("Move a telescope to a given set of coordinates");
+		
+		// Renderer Statistics Plugin
+		N_("Show renderer statistics");
 		
 		// TRANSLATORS: Keyboard action group name
 		N_("Scripts");

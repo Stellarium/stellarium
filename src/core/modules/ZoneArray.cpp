@@ -444,6 +444,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				file->close();
 			}
 		}
+		// GZ: Some diagnostics to understand the undocumented vars around mag.
+		// qDebug() << "SpecialZoneArray: mag_min=" << mag_min << ", mag_steps=" << mag_steps << ", mag_range=" << mag_range ;
 	}
 }
 
@@ -485,22 +487,24 @@ void SpecialZoneArray<Star>::draw
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
 	const float* tmpRcmag; // will point to precomputed rC in table
-	// GZ, added for extinction
 	Extinction extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
 	const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
-
+	// GZ: allow artificial cutoff:
+	const int clampStellarMagnitude_mmag = (int) floor(drawer->getCustomStarMagnitudeLimit() * 1000.0f);
+	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.
+	int cutoffMagStep=(drawer->getFlagStarMagnitudeLimit() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
 
 	// go through all stars, which are sorted by magnitude (bright stars first)
 	for (const Star *s=z->getStars();s<end;++s)
 	{
+		if (s->mag > cutoffMagStep) break; // e.g. naked-eye stars only.
 		tmpRcmag = rcmag_table+2*s->mag;
 		if (*tmpRcmag<=0.f) break; // no size for this and following (even dimmer, unextincted) stars? --> early exit
 		s->getJ2000Pos(z,movementFactor, vf);
 
 		const Vec3d vd(vf[0], vf[1], vf[2]);
 
-		// GZ new:
 		if (withExtinction)
 		{
 			//GZ: We must compute position first, then shift magnitude.
@@ -509,7 +513,14 @@ void SpecialZoneArray<Star>::draw
 			extinction.forward(&altAz, &extMagShift);
 			const int extMagShiftStep = 
 				qMin((int)floor(extMagShift / k), RCMAG_TABLE_SIZE-mag_steps); 
-			tmpRcmag = rcmag_table + 2 * (s->mag+extMagShiftStep);
+			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove [draw with hopefully zero size].
+			{
+				tmpRcmag = rcmag_table + 2 * (RCMAG_TABLE_SIZE-1);
+			}
+			else
+			{
+				tmpRcmag = rcmag_table + 2 * (s->mag+extMagShiftStep);
+			}
 		}
 
 		Vec3f win;

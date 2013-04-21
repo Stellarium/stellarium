@@ -9,6 +9,8 @@ LINK_DIRECTORIES(/src)
 SET(Oculars_SRCS
   CCD.hpp
   CCD.cpp
+  Lens.hpp
+  Lens.cpp
   Ocular.hpp
   Ocular.cpp
   Oculars.hpp
@@ -52,7 +54,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
 
 	IF(WIN32)
 		SET_TARGET_PROPERTIES(Oculars
-			PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
+                        PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
 		)
 		SET(StelMain stelMain)
 	ELSE(WIN32)
@@ -73,4 +75,3 @@ IF(BUILD_STATIC_PLUGINS)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
 ENDIF()
-

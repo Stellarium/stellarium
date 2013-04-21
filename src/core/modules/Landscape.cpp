@@ -555,7 +555,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelRenderer* renderer)
 
 	const Vec4f color = StelApp::getInstance().getVisionModeNight()
 	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
-	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+			  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 	renderer->setGlobalColor(color);
 
 	groundTex->bind();
