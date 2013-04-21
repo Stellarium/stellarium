@@ -71,5 +71,9 @@ void StelLoadingBar::draw(StelRenderer* renderer)
 	                              splashy + extraTextPos[1] - fontMetrics.height() - 1, 
 	                              extraText));
 
-	renderer->swapBuffers();
+	// FIXME: Buffer swap disabled to fix the disappearing splash screen issue:
+	// https://bugs.launchpad.net/stellarium/+bug/1131942
+	// It was probably left over from the time this class displayed an actual
+	// loading bar anyway. --BM
+	//renderer->swapBuffers();
 }

@@ -74,14 +74,20 @@ private:
 	//! Textures used to draw nebula hints.
 	struct NebulaHintTextures
 	{
-		//! The symbolic circle texture.
+		//! The symbolic circle texture. (default)
 		class StelTextureNew* texCircle;  
-		//! The open cluster marker texture.
+		//! The symbolic galaxy texture. (Type 0)
+		class StelTextureNew* texGalaxy;
+		//! The open cluster marker texture. (Type 1)
 		class StelTextureNew* texOpenCluster;
-		//! The globular cluster marker texture.
+		//! The globular cluster marker texture. (Type 2)
 		class StelTextureNew* texGlobularCluster;
-		//! The planetary nebula marker texture.
+		//! The diffuse nebula marker texture. (Type 3)
+		class StelTextureNew* texDiffuseNebula;
+		//! The planetary nebula marker texture. (type 4)
 		class StelTextureNew* texPlanetaryNebula;
+		//! The "Open cluster with Nebulosity" nebula marker texture. (Type 7)
+		class StelTextureNew* texOpenClusterWithNebulosity;
 		//! Are we initialized yet?
 		bool initialized;
 
@@ -101,10 +107,10 @@ private:
 		NebGc=2,     //!< Globular star cluster, usually in the Milky Way Galaxy
 		NebN=3,      //!< Bright emission or reflection nebula
 		NebPn=4,     //!< Planetary nebula
-		NebDn=5,     //!< ??? 
-		NebIg=6,     //!< ??? 
+		NebDn=5,     //!< ??? Dark Nebula?      Does not exist in current catalog
+		NebIg=6,     //!< ??? Irregular Galaxy? Does not exist in current catalog
 		NebCn=7,     //!< Cluster associated with nebulosity
-		NebUnknown=8 //!< Unknown type
+		NebUnknown=8 //!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
@@ -119,6 +125,7 @@ private:
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
 	unsigned int IC_nb;             // Index Catalog number
+	unsigned int C_nb;              // Caldwell Catalog number
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude

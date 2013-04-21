@@ -21,6 +21,7 @@
 
 #include "StelQGLRenderer.hpp"
 #include "StelLocaleMgr.hpp"
+#include "QSettings"
 
 void StelQGLRenderer::bindTextureBackend
 	(StelTextureBackend* const textureBackend, const int textureUnit)
@@ -30,6 +31,8 @@ void StelQGLRenderer::bindTextureBackend
 		dynamic_cast<StelQGLTextureBackend*>(textureBackend);
 	Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
 	           "Trying to bind a texture created by a different renderer backend");
+
+	QSettings* conf = StelApp::getInstance().getSettings();
 
 	const TextureStatus status = qglTextureBackend->getStatus();
 	if(status == TextureStatus_Uninitialized)
@@ -53,8 +56,12 @@ void StelQGLRenderer::bindTextureBackend
 	}
 	else
 	{
-		getPlaceholderTexture()->bind(textureUnit);
-		currentlyBoundTextures[textureUnit] = getPlaceholderTexture();
+		// by default placeholder is hide but its can be enabled for debugging
+		if (conf->value("debug/texture_placeholder_flag", false).toBool())
+		{
+			getPlaceholderTexture()->bind(textureUnit);
+			currentlyBoundTextures[textureUnit] = getPlaceholderTexture();
+		}
 	}
 	invariant();
 }
@@ -236,7 +243,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 			StelTextureNew* screenTexture = getViewportTexture();
 			const QSize size = screenTexture->getDimensions();
 
-			glDisable(GL_BLEND);
+			glDisable(GL_BLEND);			
 			setGlobalColor(Vec4f(1.0f, 1.0f, 1.0f, 1.0f));
 			screenTexture->bind();
 			drawTexturedRect(0, 0, size.width(), size.height());

@@ -117,9 +117,35 @@ double StelMainScriptAPI::getJDay() const
 	return StelApp::getInstance().getCore()->getJDay();
 }
 
-void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
+//! Set the current date in Modified Julian Day
+//! @param MJD the Modified Julian Date
+void StelMainScriptAPI::setMJDay(double MJD)
 {
-	StelApp::getInstance().getCore()->setJDay(jdFromDateString(dt, spec));
+	StelApp::getInstance().getCore()->setMJDay(MJD);
+}
+
+//! Get the current date in Modified Julian Day
+//! @return the Modified Julian Date
+double StelMainScriptAPI::getMJDay() const
+{
+	return StelApp::getInstance().getCore()->getMJDay();
+}
+
+void StelMainScriptAPI::setDate(const QString& dt, const QString& spec, const bool &enableDeltaT)
+{
+	double JD = jdFromDateString(dt, spec);
+	StelCore* core = StelApp::getInstance().getCore();
+	if (enableDeltaT)
+	{
+		// add Delta-T correction for date
+		core->setJDay(JD + core->getDeltaT(JD)/86400);
+	}
+	else
+	{
+		// set date without Delta-T correction
+		// compatible with 0.11
+		core->setJDay(JD);
+	}
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
@@ -132,7 +158,7 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 
 QString StelMainScriptAPI::getDeltaT() const
 {
-	return StelUtils::hoursToHmsStr(StelUtils::getDeltaT(getJDay())/3600.);
+	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT(getJDay())/3600.);
 }
 
 //! Set time speed in JDay/sec
@@ -197,15 +223,7 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	const PlanetP& planet = core->getCurrentPlanet();
-	double siderealDay = planet->getSiderealDay();
-	double siderealPeriod = planet->getSiderealPeriod();
-	double solarDay;
 	QString planetName = core->getCurrentLocation().planetName;
-	if ((planetName == "Venus") || (planetName == "Uranus"))
-		solarDay = StelUtils::calculateSolarDay(siderealPeriod, siderealDay, false);
-	else
-		solarDay = StelUtils::calculateSolarDay(siderealPeriod, siderealDay, true);
-
 	QVariantMap map;
 	map.insert("longitude", core->getCurrentLocation().longitude);
 	map.insert("latitude", core->getCurrentLocation().latitude);
@@ -213,9 +231,9 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	map.insert("altitude", core->getCurrentLocation().altitude);
 	map.insert("location", core->getCurrentLocation().getID());
 	// extra data
-	map.insert("sidereal-year", siderealPeriod);
-	map.insert("sidereal-day", siderealDay*24.);
-	map.insert("solar-day", solarDay*24.);
+	map.insert("sidereal-year", planet->getSiderealPeriod());
+	map.insert("sidereal-day", planet->getSiderealDay()*24.);
+	map.insert("solar-day", planet->getMeanSolarDay()*24.);
 
 	return map;
 }
@@ -302,6 +320,16 @@ QString StelMainScriptAPI::getSkyCulture()
 void StelMainScriptAPI::setSkyCulture(const QString& id)
 {
 	emit(requestSetSkyCulture(id));
+}
+
+QString StelMainScriptAPI::getSkyCultureName()
+{
+	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureEnglishName();
+}
+
+QString StelMainScriptAPI::getSkyCultureNameI18n()
+{
+	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18();
 }
 
 bool StelMainScriptAPI::getFlagGravityLabels()
@@ -981,12 +1009,12 @@ void StelMainScriptAPI::setMilkyWayVisible(bool b)
 	GETSTELMODULE(MilkyWay)->setFlagShow(b);
 }
 
-void StelMainScriptAPI::setMilkyWayIntensity(float i)
+void StelMainScriptAPI::setMilkyWayIntensity(double i)
 {
 	GETSTELMODULE(MilkyWay)->setIntensity(i);
 }
 
-float StelMainScriptAPI::getMilkyWayIntensity()
+double StelMainScriptAPI::getMilkyWayIntensity()
 {
 	return GETSTELMODULE(MilkyWay)->getIntensity();
 }

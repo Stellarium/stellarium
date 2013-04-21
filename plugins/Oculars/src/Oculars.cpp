@@ -119,14 +119,18 @@ Oculars::Oculars():
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
 	telescopes = QList<Telescope *>();
+	lense = QList<Lens *> ();
+
 	ccdRotationSignalMapper = new QSignalMapper(this);
 	ccdsSignalMapper = new QSignalMapper(this);
 	ocularsSignalMapper = new QSignalMapper(this);
 	telescopesSignalMapper = new QSignalMapper(this);
+	lenseSignalMapper = new QSignalMapper(this);
 	
 	selectedCCDIndex = -1;
 	selectedOcularIndex = -1;
 	selectedTelescopeIndex = -1;
+	selectedLensIndex = -1;
 	
 	usageMessageLabelID = -1;
 
@@ -157,6 +161,8 @@ Oculars::~Oculars()
 	telescopes.clear();
 	qDeleteAll(oculars);
 	oculars.clear();
+	qDeleteAll(lense);
+	lense.clear();
 }
 
 QSettings* Oculars::appSettings()
@@ -186,6 +192,7 @@ void Oculars::deinit()
 	settings->remove("ccd");
 	settings->remove("ocular");
 	settings->remove("telescope");
+	settings->remove("lens");
 	int index = 0;
 	foreach(CCD* ccd, ccds) {
 		QString prefix = "ccd/" + QVariant(index).toString() + "/";
@@ -218,9 +225,18 @@ void Oculars::deinit()
 		settings->setValue(prefix + "vFlip", telescope->isVFlipped());
 		index++;
 	}
+	index = 0;
+	foreach(Lens* lens, lense) {
+		QString prefix = "lens/" + QVariant(index).toString() + "/";
+		settings->setValue(prefix + "name", lens->name());
+		settings->setValue(prefix + "multipler", lens->multipler());
+		index++;
+	}
+        
 	settings->setValue("ocular_count", oculars.count());
 	settings->setValue("telescope_count", telescopes.count());
 	settings->setValue("ccd_count", ccds.count());
+	settings->setValue("lens_count", lense.count());
 	settings->sync();
 }
 
@@ -495,7 +511,23 @@ void Oculars::init()
 			selectedTelescopeIndex = 0;
 		}
 
-		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes);
+		int lensCount = settings->value("lens_count", 0).toInt();
+		int actualLensCount = lensCount;
+		for (int index = 0; index<lensCount; index++) {
+			Lens *newLens = Lens::lensFromSettings(settings, index);
+			if (newLens != NULL) {
+				lense.append(newLens);
+			}
+			else {
+				actualLensCount--;
+			}
+		}
+		if (lensCount > 0 && actualLensCount < lensCount)
+		{
+			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+		}
+
+		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lense);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 		
@@ -822,6 +854,15 @@ void Oculars::decrementTelescopeIndex()
 	emit(selectedTelescopeChanged());
 }
 
+void Oculars::decrementLensIndex()
+{
+	selectedLensIndex++;
+	if (selectedLensIndex == lense.count()) {
+		selectedLensIndex = -1;
+	}
+	emit(selectedLensChanged());
+}
+
 void Oculars::displayPopupMenu()
 {
 	QMenu* popup = new QMenu(&StelMainWindow::getInstance());
@@ -876,6 +917,8 @@ void Oculars::displayPopupMenu()
 		if (telescopes.count() > 1 && (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars()))
 		{
 			QMenu* submenu = addTelescopeSubmenu(popup);
+			popup->addMenu(submenu);
+			submenu = addLensSubmenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
@@ -1029,6 +1072,21 @@ void Oculars::incrementTelescopeIndex()
 	emit(selectedTelescopeChanged());
 }
 
+void Oculars::incrementLensIndex()
+{
+	selectedLensIndex++;
+	if (selectedLensIndex == lense.count()) {
+		selectedLensIndex = -1;
+	}
+	emit(selectedLensChanged());
+}
+
+void Oculars::disableLens()
+{
+	selectedLensIndex = -1;
+	emit(selectedLensChanged());
+}
+
 void Oculars::rotateCCD(QString amount)
 {
 	ccdRotationAngle += amount.toInt();
@@ -1074,6 +1132,15 @@ void Oculars::selectTelescopeAtIndex(QString indexString)
 	if (index > -2 && index < telescopes.count()) {
 		selectedTelescopeIndex = index;
 		emit(selectedTelescopeChanged());
+	}
+}
+
+void Oculars::selectLensAtIndex(QString indexString)
+{
+	int index = indexString.toInt();
+	if (index > -2 && index < lense.count()) {
+		selectedLensIndex = index;
+		emit(selectedLensChanged());
 	}
 }
 
@@ -1239,6 +1306,7 @@ void Oculars::initializeActivationActions()
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(setScreenFOVForCCD()));
+	connect(this, SIGNAL(selectedLensChanged()), this, SLOT(instrumentChanged()));
 	connect(ocularDialog, SIGNAL(requireSelectionChanged(bool)), this, SLOT(setRequireSelection(bool)));
 	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
 
@@ -1248,6 +1316,7 @@ void Oculars::initializeActivationActions()
 	connect(ocularsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectOcularAtIndex(QString)));
 	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectTelescopeAtIndex(QString)));
 	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(setScreenFOVForCCD()));
+	connect(lenseSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectLensAtIndex(QString)));
 }
 
 bool Oculars::isBinocularDefined()
@@ -1422,6 +1491,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	}
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	// set up drawing
 	if (StelApp::getInstance().getVisionModeNight())
@@ -1478,7 +1548,28 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 			                         .arg(ocularFov);
 			renderer->drawText(TextParams(xPosition, yPosition, ocularFOVLabel));
 			yPosition-=lineHeight;
-			
+	
+			QString lensNumberLabel;
+			// Barlow and Shapley lens
+			if (lens != NULL) // it's null if lens is not selected (lens index = -1)
+			{
+				QString lensName = lens->name();
+				if (lensName.isEmpty())
+				{
+					lensNumberLabel = QString(q_("Lens #%1")).arg(selectedLensIndex);
+				}
+				else
+				{
+					lensNumberLabel = QString (q_("Lens #%1: %2")).arg(selectedLensIndex).arg(lensName);
+				}
+			}
+			else
+			{
+				lensNumberLabel = QString (q_("Lens: none")); //FIXME
+			}
+			renderer->drawText(TextParams(xPosition, yPosition, lensNumberLabel));
+			yPosition-=lineHeight;
+		
 			// The telescope
 			QString telescopeNumberLabel;
 			QString telescopeName = telescope->name();
@@ -1497,7 +1588,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 			yPosition-=lineHeight;
 			
 			// General info
-			double magnification = ((int)(ocular->magnification(telescope) * 10.0)) / 10.0;
+			double magnification = ((int)(ocular->magnification(telescope, lens) * 10.0)) / 10.0;
 			QString magString = QString::number(magnification);
 			magString.append(QChar(0x00D7));//Multiplication sign
 			QString magnificationLabel = QString(q_("Magnification: %1"))
@@ -1505,7 +1596,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 			renderer->drawText(TextParams(xPosition, yPosition, magnificationLabel));
 			yPosition-=lineHeight;
 			
-			double fov = ((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0;
+			double fov = ((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0;
 			QString fovString = QString::number(fov);
 			fovString.append(QChar(0x00B0));//Degree sign
 			QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
@@ -1700,6 +1791,7 @@ void Oculars::zoomOcular()
 	// core->setMaskType(StelProjector::MaskDisk);
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = NULL;
+	Lens *lens = NULL;
 	// Only consider flip is we're not binoculars
 	if (ocular->isBinoculars())
 	{
@@ -1708,12 +1800,14 @@ void Oculars::zoomOcular()
 	}
 	else
 	{
+	if (selectedLensIndex >= 0)
+		lens = lense[selectedLensIndex];
 		telescope = telescopes[selectedTelescopeIndex];
 		core->setFlipHorz(telescope->isHFlipped());
 		core->setFlipVert(telescope->isVFlipped());
 	}
 
-	double actualFOV = ocular->actualFOV(telescope);
+	double actualFOV = ocular->actualFOV(telescope, lens);
 	// See if the mask was scaled; if so, correct the actualFOV.
 	if (useMaxEyepieceAngle && ocular->appearentFOV() > 0.0 && !ocular->isBinoculars()) {
 		actualFOV = maxEyepieceAngle * actualFOV / ocular->appearentFOV();
@@ -1730,6 +1824,45 @@ void Oculars::hideUsageMessageIfDisplayed()
 		labelManager->deleteLabel(usageMessageLabelID);
 		usageMessageLabelID = -1;
 	}
+}
+
+Lens* Oculars::selectedLens()
+{
+    if (selectedLensIndex >= 0 && selectedLensIndex < lense.count())
+	return lense[selectedLensIndex];
+    return NULL;
+}
+
+QMenu* Oculars::addLensSubmenu(QMenu* parent)
+{
+	Q_ASSERT(parent);
+    
+	QMenu *submenu = new QMenu(q_("&Lens"), parent);
+	submenu->addAction(q_("&Previous lens"), this, SLOT(decrementLensIndex()));
+	submenu->addAction(q_("&Next lens"), this, SLOT(incrementLensIndex()));
+	submenu->addSeparator();
+	submenu->addAction(q_("None"), this, SLOT(disableLens()));
+
+	for (int index = 0; index < lense.count(); ++index)
+	{
+		QString label;
+		if (index < 10)
+		{
+			label = QString("&%1: %2").arg(index).arg(lense[index]->name());
+		}
+		else
+		{
+			label = lense[index]->name();
+		}
+		QAction* action = submenu->addAction(label, lenseSignalMapper, SLOT(map()));
+		if (index == selectedLensIndex)
+		{
+			action->setCheckable(true);
+			action->setChecked(true);
+		}
+		lenseSignalMapper->setMapping(action, QString("%1").arg(index));
+	}
+	return submenu;
 }
 
 QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)

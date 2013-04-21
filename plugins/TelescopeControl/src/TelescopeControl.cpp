@@ -413,6 +413,28 @@ QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, 
 	return result;
 }
 
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+	foreach (const TelescopeClientP& telescope, telescopeClients)
+	{
+		QString constw = telescope->getEnglishName().mid(0, objw.size()).toUpper();
+		if (constw==objw)
+		{
+			result << telescope->getEnglishName();
+		}
+	}
+	result.sort();
+	if (result.size()>maxNbItem)
+	{
+		result.erase(result.begin() + maxNbItem, result.end());
+	}
+	return result;
+}
+
 bool TelescopeControl::configureGui(bool show)
 {
 	if(show)

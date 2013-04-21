@@ -135,6 +135,12 @@
        </property>
        <item>
         <widget class="QGroupBox" name="groupBoxTimeZone">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>400</height>
+          </size>
+         </property>
          <property name="title">
           <string>Time zone</string>
          </property>

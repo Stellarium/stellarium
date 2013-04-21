@@ -1150,6 +1150,27 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 	return result;
 }
 
+QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		QString constw = (*iter)->getEnglishName().mid(0, objw.size()).toUpper();
+		if (constw==objw)
+		{
+			result << (*iter)->getEnglishName();
+			if (result.size()==maxNbItem)
+				return result;
+		}
+	}
+	return result;
+}
+
 QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

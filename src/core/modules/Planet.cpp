@@ -501,17 +501,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	double siderealPeriod = getSiderealPeriod();
+	double siderealDay = getSiderealDay();
 	if ((flags&Extra1) && (siderealPeriod>0))
 	{
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
-		if (std::abs(getSiderealDay())>0)
-		{
-			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getSiderealDay()*24))) << "<br>";
-			bool fwddir = true;
-			if (englishName.compare("Venus") || englishName.compare("Uranus"))
-				fwddir = false;
-			oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(StelUtils::calculateSolarDay(siderealPeriod, getSiderealDay(), fwddir)*24))) << "<br>";
+		if (std::abs(siderealDay)>0)
+		{			
+			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";			
+			oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
 		}
 	}
 
@@ -816,6 +814,28 @@ double Planet::getSiderealTime(double jd) const
 		return remainder * 360. + re.offset;
 }
 
+double Planet::getMeanSolarDay() const
+{
+	double msd = 0.;
+	double sday = getSiderealDay();	
+	double coeff = std::abs(sday/getSiderealPeriod());
+	float sign = 1;
+	// planets with retrograde rotation
+	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
+		sign = -1;
+
+	if (pType.contains("moon"))
+	{
+		// duration of mean solar day on moon are same as synodic month on this moon
+		double a = parent->getSiderealPeriod()/sday;
+		msd = sday*(a/(a-1));
+	}
+	else
+		msd = sign*sday/(1 - sign*coeff);
+
+	return msd;
+}
+
 // Get the Planet position in the parent Planet ecliptic coordinate in AU
 Vec3d Planet::getEclipticPos() const
 {
@@ -1030,7 +1050,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 		*/
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are two solutions:
-		// (1) G. Mller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		// (1) G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
 		// (2) Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
 		// The structure is almost identical, just the numbers are different!
 		// I activate (1) for now, because we want to simulate the eye's impression. (Esp. Venus!)
@@ -1048,7 +1068,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 			return -8.93 + d + extinctionMag;
 		if (englishName=="Saturn")
 		{
-			// TODO re-add rings computation
+			// add rings computation
 			// GZ: implemented from Meeus, Astr.Alg.1992
 			const double jd=core->getJDay();
 			const double T=(jd-2451545.0)/36525.0;
@@ -1080,7 +1100,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 			return -9.40 + d + 0.005*phaseDeg + extinctionMag;
 		if (englishName=="Saturn")
 		{
-			// TODO re-add rings computation
+			// add rings computation
 			// GZ: implemented from Meeus, Astr.Alg.1992
 			const double jd=core->getJDay();
 			const double T=(jd-2451545.0)/36525.0;

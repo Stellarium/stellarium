@@ -80,6 +80,9 @@ bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core, class StelRenderer* renderer)
 {
+	if (!getFlagShow())
+		return;
+
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(Mat4d::xrotation(M_PI/180.*23.)*
 	                 Mat4d::yrotation(M_PI/180.*120.)*

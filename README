@@ -152,18 +152,70 @@ for more details on the location of the user data directory for your OS.
 		1998 _Sky & Telescope_,	"To the Visual Limits". The basic
 		sources are available on the Sky and Telescope web site.
 		(code "offered as-is and without support.")
+	1.4 The Delta-T calculations
+		For implementation of calculate values of Delta-T we used next sources:
+		[1] Delta-T webpage by Rob van Gent: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
+		[2] "Five Millennium Canon of Solar Eclipses", Espenak and Meeus
+		    http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+		[3] "On the system of astronomical constants", Clemence, G. M.,
+		    Astronomical Journal, Vol. 53, p. 169
+		    http://adsabs.harvard.edu/abs/1948AJ.....53..169C
+		[4] "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
+		    Spencer Jones, Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+		    http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
+		[5] "Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975",
+		    Schmadel, L. D.; Zech, G., Acta Astronomica, vol. 29, no. 1, 1979, p. 101-104.
+		    http://adsabs.harvard.edu/abs/1979AcA....29..101S
+		[6] "ELP 2000-85 and the dynamic time-universal time relation", Borkowski, K. M.,
+		    Astronomy and Astrophysics (ISSN 0004-6361), vol. 205, no. 1-2, Oct. 1988, p. L8-L10.
+		    http://adsabs.harvard.edu/abs/1988A&A...205L...8B
+		[7] "Empirical Transformations from U.T. to E.T. for the Period 1800-1988", 
+		    Schmadel, L. D.; Zech, G., Astronomische Nachrichten 309, 219-221
+		    http://adsabs.harvard.edu/abs/1988AN....309..219S
+		[8] "Historical values of the Earth's clock error DeltaT and the calculation of eclipses",
+		    Morrison, L. V.; Stephenson, F. R., Journal for the History of Astronomy (ISSN 0021-8286), 
+		    Vol. 35, Part 3, No. 120, p. 327 - 336 (2004)
+		    http://adsabs.harvard.edu/abs/2004JHA....35..327M
+		[9] "Addendum: Historical values of the Earth's clock error", Morrison, L. V.; Stephenson, F. R.,
+		    Journal for the History of Astronomy (ISSN 0021-8286), Vol. 36, Part 3, No. 124, p. 339 (2005)
+		    http://adsabs.harvard.edu/abs/2005JHA....36..339M
+		[10] "Polynomial approximations to Delta T, 1620-2000 AD", Meeus, J.; Simons, L.,
+		    Journal of the British Astronomical Association, vol.110, no.6, 323
+		    http://adsabs.harvard.edu/abs/2000JBAA..110..323M
+		[11] "Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses", Henriksson G.,
+		    http://adsabs.harvard.edu/abs/2009ASPC..409..166H
+		[12] "Canon of Solar Eclipses" by Mucke & Meeus (1983)
+		[13] "The accelerations of the earth and moon from early astronomical observations", 
+		     Muller P. M., Stephenson F. R.,
+		     http://adsabs.harvard.edu/abs/1975grhe.conf..459M
+		[14] "Pre-Telescopic Astronomical Observations", Stephenson F. R.,
+		    http://adsabs.harvard.edu/abs/1978tfer.conf....5S
+		[15] "Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980", 
+		     Stephenson F. R., Morrison L. V., 
+		     Philosophical Transactions, Series A (ISSN 0080-4614), vol. 313, no. 1524, Nov. 27, 1984, p. 47-70.
+		     http://adsabs.harvard.edu/abs/1984RSPTA.313...47S
+		[16] "Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990",
+		    Stephenson F. R., Morrison L. V., 
+		    Philosophical Transactions: Physical Sciences and Engineering, Volume 351, Issue 1695, pp. 165-202
+		    http://adsabs.harvard.edu/abs/1995RSPTA.351..165S
+		[17] "Historical Eclipses and Earth's Rotation" by F. R. Stephenson (1997)
+		    http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
+		[18] "Astronomical Algorithms" by J. Meeus (2nd ed., 1998)
+		[19] "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4nd ed., 2000)
+		[20] "Calendrical Calculations" by E. M. Reingold & N. Dershowitz (2nd ed., 2001)
+		[21] DeltaT webpage by V. Reijs: http://www.iol.ie/~geniet/eng/DeltaTeval.htm
 
 2. Included source code
 	2.1 Some computation of the sideral time (sideral_time.h/c) and pluto
-        orbit contains code from the libnova library (LGPL) by Liam Girdwood.
+		orbit contains code from the libnova library (LGPL) by Liam Girdwood.
 	2.2 The orbit.cpp/h and solve.h files are directly borrowed from
 		Celestia (Chris Laurel). (GPL license)
 	2.3 Several implementations of IMCCE theories for planet and satellite
 		movement by Johannes Gajdosik (MIT-style license,
 		see the corresponding files for the license text)
-    2.4 The tesselation algorithms were originally extracted from the glues 
-        library version 1.4 Mike Gorchak <mike@malva.ua> (SGI FREE SOFTWARE
-        LICENSE B).
+	2.4 The tesselation algorithms were originally extracted from the glues 
+		library version 1.4 Mike Gorchak <mike@malva.ua> (SGI FREE SOFTWARE
+		LICENSE B).
 
 3. Data
 	3.1 The Hipparcos star catalog
@@ -252,7 +304,7 @@ for more details on the location of the user data directory for your OS.
 		http://home.att.net/~hermperez/default.htm
 		License: "Feel free to use these images, if you use them in a
 		commercial setting please attribute the source."
-	4.9 Images of M8, M20, M33, NGC253, NGC1499, NGC2244, IC343 from
+	4.9 Images of M8, M33, NGC253, NGC1499, NGC2244, IC343 from
 		Jean-Pierre Bousquet
 	4.10 Images of M1, M15, M16, M27, M42, M57, M97, NGC6946 from Stephane Dumont	
 	4.11 Images of M17, M44, NGC856, NGC884 from Maxime Spano
@@ -273,8 +325,8 @@ for more details on the location of the user data directory for your OS.
 	4.14 The folder icon derived from the Tango Desktop Project, used under
 		the terms of the Creative Commons Attribution Share-Alike
 		license.
-	4.15 Images of NGC104, NGC281, NGC5139, NGC6543, NGC6960, NGC7023, NGC7317, 
-                NGC7318, NGC7319, NGC7320, NGC7331, IC4592 
+	4.15 Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7023, NGC7317, NGC7318, 
+		NGC7319, NGC7320, NGC7331, IC4601, IC4592
 		from Andrey Kuznetsov, Kepler Observatory
 		http://kepler-observatorium.ru
 		License: Creative Commons Attribution 3.0 Unported
@@ -283,6 +335,25 @@ for more details on the location of the user data directory for your OS.
 		from Oleg Bryzgalov 
 		http://olegbr.astroclub.kiev.ua/
 		License: Creative Commons Attribution 3.0 Unported
+	4.17 Image of eta Carinae 
+		from Georg Zotti
+		http://www.waa.at/
+		License: Creative Commons Attribution 3.0 Unported
+	4.18 Images of IC1805, IC1848, NGC6888
+		from Steve Tuttle
+		http://www.stuttle1.com/
+	4.19 Images of IC2944, IC4628, M20, M21, M47
+		from Trevor Gerdes
+		http://sarcasmogerdes.dyndns.org/
+	4.20 Images of IC2118, NGC1532
+		from users of Ice In Space
+		http://www.iceinspace.com.au/
+	4.21 Image of IC5146 from James A Weier
+	4.22 Images of SMC, LMC (Magellanic Clouds) and rho Oph from Albert Van Donkelaar
+	4.23 Images of NGC55, NGC300, NGC1365, NGC3628, NGC4945, NGC5128, NGC6726,
+		NGC6744, NGC6752, NGC6822, NGC7293
+		from Philip Montgomery
+		http://www.kenthurst.bigpondhosting.com/
 
 --------------------------------------------------------------------------------
 9. LICENSE

@@ -46,7 +46,7 @@ enum BlendMode
 	//! Colors of each channel are added up, clamping at maximum value 
 	//! (255 for 8bit channels, 1.0 for floating-point colors)
 	BlendMode_Add,
-	//! Use alpha value of the front color for blending (0 is fully transparent, 255 or 1.0 fully opague).
+	//! Use alpha value of the front color for blending (0 is fully transparent, 255 or 1.0 fully opaque).
 	BlendMode_Alpha,
 	//! Multiply the color channels of the back and front colors.
 	BlendMode_Multiply

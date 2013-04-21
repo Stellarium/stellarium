@@ -122,13 +122,13 @@ public:
 	//! Level in StelGeodesicGrid.
 	const int level;
 
-	//! Lower bound of magnitudes in this catalog.
+	//! Lower bound of magnitudes in this catalog. Units: millimag. May be negative for brightest stars.
 	const int mag_min;
 
-	//! Range of magnitudes in this catalog.
+	//! Range of magnitudes in this catalog. Units: millimags
 	const int mag_range;
 
-	//! Number of steps used to describe values in @em mag_range.
+	//! Number of steps used to describe values in @em mag_range. Always positive. Individual stars have their mag entries from 0..mag_steps.
 	const int mag_steps;
 
 	float star_position_scale;

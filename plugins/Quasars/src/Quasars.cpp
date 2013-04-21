@@ -315,6 +315,28 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
+QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+
+	foreach(const QuasarP& quasar, QSO)
+	{
+		if (quasar->getEnglishName().toUpper().left(objw.length()) == objw)
+		{
+				result << quasar->getEnglishName().toUpper();
+		}
+	}
+
+	result.sort();
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+
+	return result;
+}
+
+
 QStringList Quasars::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

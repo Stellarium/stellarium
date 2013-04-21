@@ -38,7 +38,7 @@
 #include <QStandardItemModel>
 #include <limits>
 
-OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes) :
+OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *> *lense) :
 	plugin(pluginPtr)
 {
 	ui = new Ui_ocularDialogForm;
@@ -46,26 +46,35 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
 	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds),
-											ccdModel,
-											ccdModel->propertyMap());
+			    ccdModel,
+			    ccdModel->propertyMap());
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
 	Ocular* ocularModel = Ocular::ocularModel();
 	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars),
-												 ocularModel, ocularModel->propertyMap());
+			       ocularModel,
+			       ocularModel->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
 	Telescope* telescopeModel = Telescope::telescopeModel();
 	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
-														telescopeModel,
-														telescopeModel->propertyMap());
+				  telescopeModel,
+				  telescopeModel->propertyMap());
 	
+	this->lense = lense;
+	lensTableModel = new PropertyBasedTableModel(this);
+	Lens* lensModel = Lens::lensModel();
+	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lense),
+			     lensModel,
+			     lensModel->propertyMap());
+
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
-	validatorOcularAFOV = new QDoubleValidator(1.0, 120.0, 1, this);
-	validatorOcularEFL = new QDoubleValidator(1.0, 60.0, 1, this);
+	validatorOcularAFOV = new QDoubleValidator(1.0, 120.0, 3, this);
+	validatorOcularEFL = new QDoubleValidator(1.0, 60.0, 3, this);
 	validatorTelescopeDiameter = new QDoubleValidator(1.0, 1000.0, 1, this);
 	validatorTelescopeFL = new QDoubleValidator(1.0, 10000.0, 1, this);
+	validatorLensMultipler = new QDoubleValidator(1.0, 6.0, 4, this);
 	QRegExp nameExp("^\\S.*");
 	validatorName = new QRegExpValidator(nameExp, this);
 }
@@ -75,6 +84,7 @@ OcularDialog::~OcularDialog()
 	ocularTableModel->disconnect();
 	telescopeTableModel->disconnect();
 	ccdTableModel->disconnect();
+	lensTableModel->disconnect();
 
 	delete ui;
 	ui = NULL;
@@ -150,6 +160,17 @@ void OcularDialog::deleteSelectedTelescope()
 	}
 }
 
+void OcularDialog::deleteSelectedLens()
+{
+    if (lensTableModel->rowCount() > 0) {
+	lensTableModel->removeRows(ui->lensListView->currentIndex().row(), 1);
+	if (lensTableModel->rowCount() > 0) {
+	    ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
+        }
+        plugin->updateLists();
+    }
+}
+
 void OcularDialog::insertNewCCD()
 {
 	ccdTableModel->insertRows(ccdTableModel->rowCount(), 1);
@@ -166,6 +187,12 @@ void OcularDialog::insertNewTelescope()
 {
 	telescopeTableModel->insertRows(telescopeTableModel->rowCount(), 1);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(telescopeTableModel->rowCount() - 1, 1));
+}
+
+void OcularDialog::insertNewLens()
+{
+	lensTableModel->insertRows(lensTableModel->rowCount(), 1);
+	ui->lensListView->setCurrentIndex(lensTableModel->index(lensTableModel->rowCount() - 1, 1));
 }
 
 void OcularDialog::moveUpSelectedSensor()
@@ -198,6 +225,16 @@ void OcularDialog::moveUpSelectedTelescope()
 	}
 }
 
+void OcularDialog::moveUpSelectedLens()
+{
+	int index = ui->lensListView->currentIndex().row();
+	if (index > 0)
+	{
+		lensTableModel->moveRowUp(index);
+		plugin->updateLists();
+	}
+}
+
 void OcularDialog::moveDownSelectedSensor()
 {
 	int index = ui->ccdListView->currentIndex().row();
@@ -224,6 +261,16 @@ void OcularDialog::moveDownSelectedTelescope()
 	if (index >= 0 && index < telescopeTableModel->rowCount() - 1)
 	{
 		telescopeTableModel->moveRowDown(index);
+		plugin->updateLists();
+	}
+}
+
+void OcularDialog::moveDownSelectedLens()
+{
+	int index = ui->lensListView->currentIndex().row();
+	if (index >= 0 && index < lensTableModel->rowCount() - 1)
+	{
+		lensTableModel->moveRowDown(index);
 		plugin->updateLists();
 	}
 }
@@ -292,6 +339,7 @@ void OcularDialog::createDialogContent()
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
+	ui->lensListView->setModel(lensTableModel);
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -305,6 +353,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->deleteCCD, SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
 	connect(ui->addOcular, SIGNAL(clicked()), this, SLOT(insertNewOcular()));
 	connect(ui->deleteOcular, SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
+	connect(ui->addLens, SIGNAL(clicked()), this, SLOT(insertNewLens()));
+	connect(ui->deleteLens, SIGNAL(clicked()), this, SLOT(deleteSelectedLens()));
 	connect(ui->addTelescope, SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
 
@@ -323,6 +373,8 @@ void OcularDialog::createDialogContent()
 	ui->telescopeDiameter->setValidator(validatorTelescopeDiameter);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
+	ui->lensName->setValidator(validatorName);
+	ui->lensMultipler->setValidator(validatorLensMultipler);
 	
 	// The key bindings
 	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
@@ -352,6 +404,10 @@ void OcularDialog::createDialogContent()
 					this, SLOT(moveUpSelectedTelescope()));
 	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()),
 					this, SLOT(moveDownSelectedTelescope()));
+	connect(ui->pushButtonMoveLensUp, SIGNAL(pressed()),
+					this, SLOT(moveUpSelectedLens()));
+	connect(ui->pushButtonMoveLensDown, SIGNAL(pressed()),
+					this, SLOT(moveDownSelectedLens()));
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -382,6 +438,17 @@ void OcularDialog::createDialogContent()
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+
+	// The lens mapper
+	lensMapper = new QDataWidgetMapper();
+	lensMapper->setModel(lensTableModel);
+	lensMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+	lensMapper->addMapping(ui->lensName, 0);
+	lensMapper->addMapping(ui->lensMultipler, 1);
+	lensMapper->toFirst();
+	connect(ui->lensListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
+			lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();

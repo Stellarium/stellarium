@@ -51,6 +51,13 @@ public slots:
 	//! @return the Julian Date
 	double getJDay() const;
 
+	//! Set the current date in Modified Julian Day
+	//! @param MJD the Modified Julian Date
+	void setMJDay(double MJD);
+	//! Get the current date in Modified Julian Day
+	//! @return the Modified Julian Date
+	double getMJDay() const;
+
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
 	//! @param dt the date string to use.  Formats:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
@@ -68,7 +75,8 @@ public slots:
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used.
-	void setDate(const QString& dt, const QString& spec="utc");
+	//! @param enableDeltaT true or false - enable Delta-T correction or not
+	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
@@ -327,6 +335,14 @@ public slots:
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
 
+	//! Find out the current sky culture and get it English name
+	//! @return the English name of the current sky culture
+	QString getSkyCultureName();
+
+	//! Find out the current sky culture and get it localized name
+	//! @return the translated name of the current sky culture
+	QString getSkyCultureNameI18n();
+
 	//! Get the current status of the gravity labels option
 	//! @return true if gravity labels are enabled, else false
 	bool getFlagGravityLabels();
@@ -343,13 +359,13 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra0 The right ascension of the first corner of the image in degrees
-	//! @param dec0 The declenation of the first corner of the image in degrees
+	//! @param dec0 The declination of the first corner of the image in degrees
 	//! @param ra1 The right ascension of the second corner of the image in degrees
-	//! @param dec1 The declenation of the second corner of the image in degrees
+	//! @param dec1 The declination of the second corner of the image in degrees
 	//! @param ra2 The right ascension of the third corner of the image in degrees
-	//! @param dec2 The declenation of the third corner of the image in degrees
+	//! @param dec2 The declination of the third corner of the image in degrees
 	//! @param ra3 The right ascension of the fourth corner of the image in degrees
-	//! @param dec3 The declenation of the fourth corner of the image in degrees
+	//! @param dec3 The declination of the fourth corner of the image in degrees
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
@@ -586,11 +602,11 @@ public slots:
 
 	//! Set Milky Way intensity.
 	//! @param i value of intensity for the Milky Way
-	void setMilkyWayIntensity(float i);
+	void setMilkyWayIntensity(double i);
 
 	//! Get Milky Way intensity.
 	//! @return value of Milky Way intensity, e.g. "1.2"
-	float getMilkyWayIntensity();
+	double getMilkyWayIntensity();
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
