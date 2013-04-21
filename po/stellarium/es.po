@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-03 17:54+0700\n"
-"PO-Revision-Date: 2013-03-20 23:44+0000\n"
+"POT-Creation-Date: 2013-04-14 15:21+0700\n"
+"PO-Revision-Date: 2013-04-18 13:47+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-04 05:22+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-19 05:13+0000\n"
+"X-Generator: Launchpad (build 16567)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -232,7 +232,7 @@ msgstr "Tipo: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:444
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
 #: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
-#: plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (extinto a: <b>%2</b>)"
@@ -240,7 +240,7 @@ msgstr "Magnitud: <b>%1</b> (extinto a: <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
 #: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
-#: plugins/Exoplanets/src/Exoplanet.cpp:199
+#: plugins/Exoplanets/src/Exoplanet.cpp:181
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
@@ -398,14 +398,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:143
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tipo espectral: %1"
 
 #: src/core/modules/StarWrapper.cpp:147
 #: plugins/Supernovae/src/Supernova.cpp:115
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:196
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distancia: %1 años luz"
@@ -669,6 +669,11 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Desde La Longitud del Día (LDD; como fue determinada por Stephenson & "
+"Morrison (%2)), Victor Reijs derivó una fórmula de %1T al usar una "
+"optimización Simplex con una función cuadrada y coseno. Esto está basado en "
+"una posible periodicidad descrita por Stephenson (%2). Véa más información "
+"%3aquí%4."
 
 #: src/core/StelCore.cpp:1497
 #, qt-format
@@ -679,6 +684,11 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Esta solución por F. Espenak y J. Meeus, basados en Morrison & Stephenson "
+"(2004) y un ajuste polinomial a través de valores tabulados para 1600-2000, "
+"es usado para %1Sitio Web Eclipse de la NASA%2 y en su <em>Canon de Eclipses "
+"Solares de Cinco Milenios: -1900 a +3000</em> (2006). Esta fórmula también "
+"es usada en el programa SOLEX de efemérides solares y lunares."
 
 #: src/core/StelCore.cpp:1497
 msgid "Used by default."
@@ -973,8 +983,8 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 "Tamaño de la descarga: %1MB\n"
-"Cuenta de Estrellas: %2 Million\n"
-"Rango de Magnitud: %3 - %4"
+"Conteo de estrellas: %2 millón\n"
+"Rango de magnitud: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:955 src/gui/ConfigurationDialog.cpp:991
 #, qt-format
@@ -1446,8 +1456,8 @@ msgstr "año"
 msgid "This system does not support OpenGL."
 msgstr "Este sistema no soporta OpenGL."
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:225
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "Sun"
 msgstr "Sol"
 
@@ -2011,7 +2021,7 @@ msgstr "Analema"
 #. TRANSLATORS: Name of script
 #: src/translations.h:243
 msgid "Sky Culture Tour"
-msgstr ""
+msgstr "Paseo de Culturas Estelares"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:250
@@ -2021,7 +2031,7 @@ msgstr "Mira alrededor cada paisaje instalado."
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:252
 msgid "Look at each installed sky culture."
-msgstr ""
+msgstr "Mira cada cultura estelar instalada."
 
 #: src/translations.h:253
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -2085,6 +2095,12 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Fobos encarrera delante de Marte y transita el sol, pasa a través de el y "
+"luego retrocede hacia el sol y parcialmente lo transita de nuevo (solo visto "
+"en el hemisferio sur de Deimos), después Marte eclipsa totalmente el sol "
+"mientras Fobos transita en la obscuridad entre Marte y Deimos. Cuando Fobos "
+"emerge desde Marte aún está eclipsado y desvanecido en la sombra,  sólo para "
+"iluminarse después."
 
 #: src/translations.h:265
 msgid ""
@@ -3290,7 +3306,7 @@ msgstr "Atmósfera"
 #: src/translations.h:573 src/ui_viewDialog.h:1250
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
-msgstr "Cuadrícula Azimutal"
+msgstr "Cuadrícula azimutal"
 
 #: src/translations.h:574 src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
@@ -3338,12 +3354,12 @@ msgstr "Línea del Ecuador"
 #: src/translations.h:583 src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
-msgstr "Cuadrícula Ecuatorial"
+msgstr "Cuadrícula ecuatorial"
 
 #: src/translations.h:584 src/ui_viewDialog.h:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
-msgstr "Cuadrícula Ecuatorial J2000"
+msgstr "Cuadrícula ecuatorial J2000"
 
 #: src/translations.h:585
 msgid "Fog"
@@ -3680,154 +3696,154 @@ msgstr "País:"
 msgid "Planet:"
 msgstr "Planeta:"
 
-#: src/ui_searchDialogGui.h:541
+#: src/ui_searchDialogGui.h:542
 msgid "Find Object"
 msgstr "Encontrar Objeto"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:543
 msgid "Find Object or Position"
 msgstr "Encontrar el objeto o la posición"
 
-#: src/ui_searchDialogGui.h:548
+#: src/ui_searchDialogGui.h:549
 msgid "iota"
 msgstr "iota"
 
-#: src/ui_searchDialogGui.h:551
+#: src/ui_searchDialogGui.h:552
 msgid "alpha"
 msgstr "alpha"
 
-#: src/ui_searchDialogGui.h:554
+#: src/ui_searchDialogGui.h:555
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:557
+#: src/ui_searchDialogGui.h:558
 msgid "gamma"
 msgstr "gamma"
 
-#: src/ui_searchDialogGui.h:560
+#: src/ui_searchDialogGui.h:561
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:563
+#: src/ui_searchDialogGui.h:564
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:566
+#: src/ui_searchDialogGui.h:567
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:569
+#: src/ui_searchDialogGui.h:570
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:572
+#: src/ui_searchDialogGui.h:573
 msgid "theta"
 msgstr "teta"
 
-#: src/ui_searchDialogGui.h:575
+#: src/ui_searchDialogGui.h:576
 msgid "kappa"
 msgstr "kappa"
 
-#: src/ui_searchDialogGui.h:578
+#: src/ui_searchDialogGui.h:579
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:581
+#: src/ui_searchDialogGui.h:582
 msgid "mu"
 msgstr "mu"
 
-#: src/ui_searchDialogGui.h:584
+#: src/ui_searchDialogGui.h:585
 msgid "nu"
 msgstr "nu"
 
-#: src/ui_searchDialogGui.h:587
+#: src/ui_searchDialogGui.h:588
 msgid "xi"
 msgstr "xi"
 
-#: src/ui_searchDialogGui.h:590
+#: src/ui_searchDialogGui.h:591
 msgid "omicron"
 msgstr "omicron"
 
-#: src/ui_searchDialogGui.h:593
+#: src/ui_searchDialogGui.h:594
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:596
+#: src/ui_searchDialogGui.h:597
 msgid "rho"
 msgstr "ro"
 
-#: src/ui_searchDialogGui.h:599
+#: src/ui_searchDialogGui.h:600
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:602
+#: src/ui_searchDialogGui.h:603
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:605
+#: src/ui_searchDialogGui.h:606
 msgid "upsilon"
 msgstr "upsilon"
 
-#: src/ui_searchDialogGui.h:608
+#: src/ui_searchDialogGui.h:609
 msgid "phi"
 msgstr "phi"
 
-#: src/ui_searchDialogGui.h:611
+#: src/ui_searchDialogGui.h:612
 msgid "chi"
 msgstr "chi"
 
-#: src/ui_searchDialogGui.h:614
+#: src/ui_searchDialogGui.h:615
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:617
+#: src/ui_searchDialogGui.h:618
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:619
+#: src/ui_searchDialogGui.h:620
 msgid "Greek letters for Bayer designations"
 msgstr "Letras griegas para las designaciones de Bayer"
 
-#: src/ui_searchDialogGui.h:620
+#: src/ui_searchDialogGui.h:621
 msgid "Object"
 msgstr "Objeto"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:622
 msgid "RA/Dec (J2000):"
 msgstr "AR/Dec (J2000):"
 
-#: src/ui_searchDialogGui.h:622
+#: src/ui_searchDialogGui.h:623
 msgid "Position"
 msgstr "Posición"
 
-#: src/ui_searchDialogGui.h:623
+#: src/ui_searchDialogGui.h:624
 msgid "On-line astronomical database SIMBAD"
 msgstr "Base de datos astronómica en línea SIMBAD"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:625
 msgid "Extend search with SIMBAD"
 msgstr "Extender búsqueda con SIMBAD"
 
-#: src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:626
 msgid "Server:"
 msgstr "Servidor:"
 
-#: src/ui_searchDialogGui.h:626 src/ui_viewDialog.h:1275
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1275
 #: src/ui_viewDialog.h:1280 src/ui_viewDialog.h:1282
 #: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Opciones"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:628
 msgid "names in English"
 msgstr "nombres en inglés"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:629
 msgid "Search in list..."
 msgstr "Buscar en lista..."
 
-#: src/ui_searchDialogGui.h:629
+#: src/ui_searchDialogGui.h:630
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr "Listas"
@@ -3925,7 +3941,7 @@ msgstr "Centelleo:"
 #: src/ui_viewDialog.h:1219
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
-"Oscurecer las estrellas débiles cuando un objeto muy brillantes está visible"
+"Oscurecer las estrellas débiles cuando un objeto muy brillante está visible"
 
 #: src/ui_viewDialog.h:1221
 msgid "Dynamic eye adaptation"
@@ -3945,19 +3961,19 @@ msgstr "THZ"
 
 #: src/ui_viewDialog.h:1229
 msgid "Limit Magnitudes (for unaided/binocular observers)"
-msgstr "Limitar Magnitudes (para observadores de binoculares/sin ayuda)"
+msgstr "Limitar magnitudes (para observadores de binoculares/simple vista)"
 
 #: src/ui_viewDialog.h:1231
 msgid "Limit Magnitudes"
-msgstr "Limitar Magnitudes"
+msgstr "Limitar magnitudes"
 
 #: src/ui_viewDialog.h:1233
 msgid "Stars to magnitude"
-msgstr "Estrellas a magnitud"
+msgstr "Magnitud de estrellas hasta"
 
 #: src/ui_viewDialog.h:1237
 msgid "Nebulas to magitude"
-msgstr "Magnitud de nebulosas a"
+msgstr "Magnitud de nebulosas hasta"
 
 #: src/ui_viewDialog.h:1240
 msgid "Constellations"
@@ -4252,7 +4268,7 @@ msgstr "Fecha y hora al inicio"
 
 #: src/ui_configurationDialog.h:1067
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Utilizar hora y fecha especifica cuando se inicia Stellarium"
+msgstr "Utilizar una hora y fecha específica cuando se inicia Stellarium"
 
 #: src/ui_configurationDialog.h:1069
 msgid "Other:"
@@ -4734,7 +4750,7 @@ msgstr "CDV: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
 #, qt-format
 msgid "Dimensions: %1"
-msgstr "Dimenciones: %1"
+msgstr "Dimensiones: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1617
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
@@ -5621,7 +5637,7 @@ msgstr "Número de segmentos utilizados para trazar cada fin de la línea"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Fade length:"
-msgstr "Longitun de desvanecimiento:"
+msgstr "Longitud del desvanecimiento:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -5668,7 +5684,7 @@ msgstr "Órbita"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Catalog number:"
-msgstr "Número de catalogo:"
+msgstr "Número de catálogo:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Description:"
@@ -6132,7 +6148,7 @@ msgstr "Archivos"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
-msgstr "Registrar en archivos los mensajes del controlados de telescopio"
+msgstr "Registrar en archivos los mensajes del controlador de telescopio"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
@@ -6804,7 +6820,7 @@ msgstr "Sistema Solar"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
-msgstr "Sopernovas Históricas"
+msgstr "Supernovas Históricas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid ""
@@ -7005,7 +7021,7 @@ msgstr ""
 "Este complemento traza la posición de varios púlsares, con información de "
 "objeto acerca de cada uno."
 
-#: plugins/Pulsars/src/Pulsar.cpp:125 plugins/Exoplanets/src/Exoplanet.cpp:177
+#: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
 msgstr "púlsar"
 
@@ -7208,95 +7224,65 @@ msgstr ""
 "de los exoplanetas derivan de 'Extrasolar Planets Encyclopaedia' en "
 "exoplanet.eu"
 
-#. TRANSLATORS: Full phrase: Exoplanet detected by transit
-#: plugins/Exoplanets/src/Exoplanet.cpp:172
-msgid "by transit"
-msgstr "por tránsito"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by radial velocity
-#: plugins/Exoplanets/src/Exoplanet.cpp:174
-msgid "by radial velocity"
-msgstr "por velocidad radial"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by imaging
-#: plugins/Exoplanets/src/Exoplanet.cpp:176
-msgid "by imaging"
-msgstr "por imagen"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by astrometry
-#: plugins/Exoplanets/src/Exoplanet.cpp:179
-msgid "by astrometry"
-msgstr "por astrometría"
-
-#. TRANSLATORS: Full phrase: Exoplanet detected by microlensing
-#: plugins/Exoplanets/src/Exoplanet.cpp:181
-msgid "by microlensing"
-msgstr "por microlente"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
 msgid "Metallicity"
 msgstr "Metalicidad"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Mass"
 msgstr "Masa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Radius"
 msgstr "Radio"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Temperatura efectiva: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:239
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Exoplanet"
 msgstr "Exoplaneta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Period"
 msgstr "Periodo"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "days"
 msgstr "días"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Jup"
 msgstr "Júp"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:243
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Semi-Major Axis"
 msgstr "Eje Semi-Mayor"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:243
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "AU"
 msgstr "UA"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:244
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Eccentricity"
 msgstr "Excentricidad"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:245
+#: plugins/Exoplanets/src/Exoplanet.cpp:227
 msgid "Inclination"
 msgstr "Inclinación"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:246
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "Angle Distance"
 msgstr "Distancia Angular"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:247
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Discovered year"
 msgstr "Año de descubrimiento"
-
-#. TRANSLATORS: Exoplanet detected
-#: plugins/Exoplanets/src/Exoplanet.cpp:250
-msgid "Detected"
-msgstr "Detectado"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 msgid "Exoplanets Plug-in"
