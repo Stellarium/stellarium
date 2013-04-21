@@ -1,3 +1,41 @@
+0.12.1 [2013-04-21]
+Bugfix release with few new features.
+Added:
+- Use different formulae for DeltaT calculations (LP: #1106658)
+- Show/hide starts at magnitude > X feature (LP: #880256, #1132010)
+- Added translations for Inno Setup installer (LP: #1159080)
+- Added Caldwell catalog
+- New skyculture: Tongan
+- New feature for Oculars plugin: support Barlow/Shapley lenses
+- Control brightness of the milky way (LP: #1106755)
+- Satellites plugin: New Galileo satellites (LP: #1169252)
+- Control brightness of the landscapes at startup (LP: #1149882, #603376)
+Changed:
+- Repacked default star catalogs (LP: #1124221)
+- Repacked locations catalog (LP: #1131036)
+- Refactored GUI
+- Update textures for DSO (LP: #1126959, #1114645)
+- Improved accuracy for NEO (LP: #1100766, #1080154)
+Fixed:
+- Sidereal day & sunrise/sunset (LP: #1106754)
+- Wrong solar day (LP: #1113249)
+- Pluto and Charon are not tidally locked in Stellarium (LP: #968738)
+- Search problem in different language (LP: #1131034)
+- Bortle light pollution scale setting not working (LP: #1121630)
+- The preference of "Render Solar Shadow" cannot be saved (LP: #1114279)
+- Background color of the night sky (LP: #1085375)
+- Time is slightly off (from system time) (LP: #1113222)
+- Dynamic plugins don't load on windows (LP: #1168958)
+- Cursor jumps out of altitude input box (LP: #1156112)
+- Missing splash screen on Windows and Mac OS X (LP: #1131942)
+- Satellite event times differ (LP: #1114644)
+- Plugin "Time Zone" display problem on Mac OSX (LP: #1114330)
+- Yellow/Black Checkered Flag while Object Picture is Loading (LP: #1113064)
+- Omega Centauri strange appearance on Mac (LP: #1114645)
+- Planet display bug (LP: #1114036)
+- Star on meridian has wrong hour angle (LP: #1131206)
+- Location window spin box up/down behavior (LP: #1093229)
+
 0.12.0 [2013-01-31]
 New rendering engine, editable keybindings, bug fixes and improvements.
 
