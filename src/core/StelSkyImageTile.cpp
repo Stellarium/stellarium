@@ -239,6 +239,10 @@ void StelSkyImageTile::getTilesToDraw
 // Draw the image on the screen.
 bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
+	StelSkyDrawer* drawer = core->getSkyDrawer();
+	Extinction extinction=core->getSkyDrawer()->getExtinction();
+	const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
+
 	tex->bind();
 
 	if (!texFader)
@@ -274,9 +278,26 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 	color[1] = std::min(color[1], 1.0f);
 	color[2] = std::min(color[2], 1.0f);
 	color[3] = std::min(color[3], 1.0f);
-	renderer->setGlobalColor(color);
+	// color is the pre-extinction color
+
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
+		Vec4f extinctedColor=color;
+
+		if (withExtinction)
+		{
+			Vec3d bary= poly->getPointInside(); // This is a J000.0 vector that points "somewhere" in the first triangle.
+			Vec3d altAz = core->j2000ToAltAz(bary, StelCore::RefractionOn);
+			float extinctionMagnitude=0.0f;
+			extinction.forward(&(altAz[2]), &extinctionMagnitude);
+			// compute a simple factor from magnitude loss.
+			float extinctionFactor=pow(0.4, extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
+			extinctedColor[0]*=fabs(extinctionFactor);
+			extinctedColor[1]*=fabs(extinctionFactor);
+			extinctedColor[2]*=fabs(extinctionFactor);
+		}
+		renderer->setGlobalColor(extinctedColor);
+		// GZ: this was the original code now.
 		poly->drawFill(renderer, SphericalRegion::DrawParams(&(*projector)));
 	}
 
@@ -290,7 +311,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 		projector->project(bary, win);
 		renderer->drawText(TextParams(win[0], win[1], getAbsoluteImageURI()));
 
-		poly->drawOutline(renderer, SphericalRegion::DrawParams(&(projector)));
+		poly->drawOutline(renderer, SphericalRegion::DrawParams(&(*projector)));
 	}
 #endif
 	if (!alphaBlend)

@@ -40,6 +40,8 @@ typedef QSharedPointer<Nebula> NebulaP;
 //! @class NebulaMgr
 //! Manage a collection of nebulae. This class is used
 //! to display the NGC catalog with information, and textures for some of them.
+// GZ: This doc seems outdated/misleading - photo textures are not mamaged here but in StelSkyImageTile
+
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
@@ -91,6 +93,11 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5) const;
 	// empty for now
 	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Nebulae"; }
@@ -98,7 +105,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	//! Set the color used to draw the nebula circles.
+	//! Set the color used to draw the nebula symbols (circles, boxes. etc).
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
@@ -109,6 +116,7 @@ public slots:
 	float getCircleScale(void) const;
 
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
+	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
@@ -174,6 +182,7 @@ private:
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);
 	NebulaP searchIC(unsigned int IC);
+	NebulaP searchC(unsigned int C);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);

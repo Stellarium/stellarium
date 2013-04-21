@@ -2513,7 +2513,7 @@
 			"RA": "03h13m45.0s",
 			"DE": "+25d11m51s"
 		},
-		"HAT-P-27/WASP-4":
+		"HAT-P-27-WASP-4":
 		{
 			"exoplanets":
 			[
@@ -2617,7 +2617,7 @@
 			"RA": "13h44m23.0s",
 			"DE": "+48d01m43s"
 		},
-		"HAT-P-30/WASP-5":
+		"HAT-P-30-WASP-5":
 		{
 			"exoplanets":
 			[
@@ -11161,39 +11161,6 @@
 			"RA": "11h28m30.0s",
 			"DE": "+43d58m00s"
 		},
-		"HIP 11952":
-		{
-			"exoplanets":
-			[
-			{
-				"mass": 2.93,
-				"period": 290.0,
-				"semiAxis": 0.81,
-				"eccentricity": 0.27,
-				"angleDistance": 0.007297,
-				"discovered": 2012,
-				"planetName": "b"
-			},
-			{
-				"mass": 0.78,
-				"period": 6.95,
-				"semiAxis": 0.07,
-				"eccentricity": 0.35,
-				"angleDistance": 0.000631,
-				"discovered": 2012,
-				"planetName": "c"
-			}
-			],
-			"distance": 111.0,
-			"stype": "F2V",
-			"smass": 0.83,
-			"smetal": -1.9,
-			"Vmag": 9.78,
-			"sradius": 1.6,
-			"effectiveTemp": 6040.0,
-			"RA": "02h34m11.0s",
-			"DE": "-12d23m03s"
-		},
 		"HIP 12961":
 		{
 			"exoplanets":
@@ -13498,6 +13465,46 @@
 			"RA": "19h15m51.0s",
 			"DE": "+42d15m54s"
 		},
+		"Kepler-68":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.026,
+				"radius": 0.196,
+				"period": 5.398763,
+				"semiAxis": 0.0617,
+				"eccentricity": 0.0,
+				"inclination": 87.6,
+				"discovered": 2013,
+				"planetName": "b"
+			},
+			{
+				"mass": 0.015,
+				"radius": 0.081,
+				"period": 9.605065,
+				"semiAxis": 0.09059,
+				"inclination": 86.93,
+				"discovered": 2013,
+				"planetName": "c"
+			},
+			{
+				"mass": 0.947,
+				"period": 580.0,
+				"semiAxis": 1.4,
+				"eccentricity": 0.18,
+				"discovered": 2013,
+				"planetName": "d"
+			}
+			],
+			"distance": 135.0,
+			"smass": 1.079,
+			"smetal": 0.12,
+			"sradius": 1.243,
+			"effectiveTemp": 5793.0,
+			"RA": "14h24m08.0s",
+			"DE": "+49d02m25s"
+		},
 		"Kepler-7":
 		{
 			"exoplanets":
@@ -13833,34 +13840,6 @@
 			"Vmag": 16.6,
 			"RA": "15h52m56.0s",
 			"DE": "+12d54m47s"
-		},
-		"NSVS 1425 (AB)":
-		{
-			"exoplanets":
-			[
-			{
-				"mass": 2.8,
-				"period": 1276.0,
-				"semiAxis": 1.9,
-				"eccentricity": 0.0,
-				"discovered": 2012,
-				"planetName": "b"
-			},
-			{
-				"mass": 8.0,
-				"period": 2506.0,
-				"semiAxis": 2.9,
-				"eccentricity": 0.52,
-				"discovered": 2012,
-				"planetName": "c"
-			}
-			],
-			"stype": "sdOB+dM",
-			"smass": 0.528,
-			"Vmag": 13.2,
-			"effectiveTemp": 42000.0,
-			"RA": "20h20m00.0s",
-			"DE": "+04d37m57s"
 		},
 		"NY Vir":
 		{
@@ -14731,7 +14710,7 @@
 			"RA": "23h15m58.0s",
 			"DE": "+31d27m46s"
 		},
-		"WASP-11/HAT-P-1":
+		"WASP-11-HAT-P-1":
 		{
 			"exoplanets":
 			[
@@ -15847,7 +15826,7 @@
 				"mass": 0.38,
 				"radius": 1.43,
 				"period": 4.37809,
-				"semiAxis": 0.574,
+				"semiAxis": 0.0574,
 				"eccentricity": 0.0,
 				"inclination": 87.8,
 				"angleDistance": 0.001739,
@@ -16021,12 +16000,12 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.89,
+				"mass": 0.9,
 				"radius": 1.7,
-				"period": 2.17517632,
-				"semiAxis": 0.0362,
+				"period": 3.6623817,
+				"semiAxis": 0.0539,
 				"eccentricity": 0.0,
-				"inclination": 83.2,
+				"inclination": 85.4,
 				"angleDistance": 0.000151,
 				"discovered": 2012,
 				"planetName": "b"
@@ -16605,7 +16584,7 @@
 			"RA": "17h59m02.0s",
 			"DE": "-09d46m25s"
 		},
-		"omi  CrB":
+		"ο  CrB":
 		{
 			"exoplanets":
 			[
@@ -16628,7 +16607,7 @@
 			"RA": "15h34m42.0s",
 			"DE": "+26d42m53s"
 		},
-		"omi UMa":
+		"ο UMa":
 		{
 			"exoplanets":
 			[

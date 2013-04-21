@@ -131,7 +131,8 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 
 	// Hack to avoid the coord spinbox receiving the focus and triggering
 	// "new location" editing mode.
-	ui->citySearchLineEdit->setFocus();
+	// Disable hack below because it change behaviour of spinboxes and added difficulties of changes for this spinboxes --AW
+	// ui->citySearchLineEdit->setFocus();
 
 	isEditingNew = false;
 	

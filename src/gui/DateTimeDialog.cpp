@@ -55,7 +55,7 @@ void DateTimeDialog::createDialogContent()
 	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
 	double deltaT = 0.;
 	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
-		deltaT = StelUtils::getDeltaT(jd)/86400.;
+		deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/86400.;
 	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0)-deltaT);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -177,7 +177,7 @@ double DateTimeDialog::newJd()
   // Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
   double deltaT = 0.;
   if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
-	  deltaT = StelUtils::getDeltaT(jd)/86400.;
+	  deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/86400.;
   jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0-deltaT); // local tz -> UTC
   return jd;
 }
@@ -211,7 +211,7 @@ void DateTimeDialog::setDateTime(double newJd)
 		// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
 		double deltaT = 0.;
 		if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
-			deltaT = StelUtils::getDeltaT(newJd)/86400.;
+			deltaT = StelApp::getInstance().getCore()->getDeltaT(newJd)/86400.;
 		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0-deltaT); // UTC -> local tz
 		StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
 		StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);

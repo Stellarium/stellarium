@@ -44,3 +44,15 @@ QTabWidget::pane {
 	margin-top: 0px;
 	border-top: none;
 }
+
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp, QPushButton#pushButtonMoveLensUp {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown, QPushButton#pushButtonMoveLensDown {
+        image: url(:/graphicGui/spindown.png);
+}
+
+QLabel#lensNote {
+        margin-left: 5px;
+}

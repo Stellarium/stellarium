@@ -241,11 +241,12 @@ void LandscapeMgr::update(double deltaTime)
 
 	// We define the brigthness zero when the sun is 8 degrees below the horizon.
 	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+	float initBrightness = getInitialLandscapeBrightness();
 
 	if(sinSunAngleRad < -0.1/1.5 )
-		landscapeBrightness = 0.01;
+		landscapeBrightness = initBrightness;
 	else
-		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+		landscapeBrightness = (initBrightness + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
 		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core, true),0.)*moonPos[2];
 
@@ -258,7 +259,13 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
-	landscape->setBrightness(landscapeBrightness+0.05);
+	if (core->getCurrentLocation().planetName.contains("Sun"))
+	{
+		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
+		landscape->setBrightness(1.f);
+	}
+	else
+		landscape->setBrightness(landscapeBrightness+0.05);
 }
 
 void LandscapeMgr::draw(StelCore* core, class StelRenderer* renderer)
@@ -290,12 +297,14 @@ void LandscapeMgr::init()
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
+	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
+	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
 
 	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("landscape/init_bortle_scale",3).toInt(&ok));
+	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
 	{
-		conf->setValue("landscape/init_bortle_scale",3);
+		conf->setValue("stars/init_bortle_scale",3);
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
@@ -351,36 +360,35 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
-		  {
+		{
 			setFlagFog((bool) landscape->getDefaultFogSetting());
 			landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
-		  }
+		}
 		if (landscape->getDefaultBortleIndex() > 0)
-		  {
-		    setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-		    // TODO: HOWTO make the GUI aware of the new value? 
-		    // conf->setValue("landscape/init_bortle_scale", landscape->getDefaultBortleIndex());
-		  }
+		{
+			setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
+			drawer->setBortleScale(landscape->getDefaultBortleIndex());
+		}
 		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
-		  {
-		    drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
-		  }
+		{
+			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
+		}
 		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
-		  {
-		    drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
-		  }
+		{
+			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
+		}
 		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
-		  {
-		    drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
-		  }
+		{
+			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
+		}
 		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
-		  {
-		    // compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
-		    // International altitude formula found in Wikipedia.
-		    double alt=landscape->getLocation().altitude;
-		    double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
-		    drawer->setAtmospherePressure(p);
-		  }
+		{
+			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
+			// International altitude formula found in Wikipedia.
+			double alt=landscape->getLocation().altitude;
+			double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
+			drawer->setAtmospherePressure(p);
+		}
 	}
 	return true;
 }

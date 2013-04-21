@@ -20,7 +20,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.1; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.2; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -98,7 +98,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^nu/ν/gi;
 	$sname =~ s/^xi/ξ/gi;
 	$sname =~ s/^ksi/ξ/gi;
-	$sname =~ s/^omicron/ο/gi;
+	$sname =~ s/^(omicron|omi)/ο/gi;
 	$sname =~ s/^pi/π/gi;
 	$sname =~ s/^rho/ρ/gi;
 	$sname =~ s/^sigma/σ/gi;

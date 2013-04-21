@@ -114,6 +114,16 @@ StelQGLTextureBackend::~StelQGLTextureBackend()
 	}
 }
 
+// Texture creation requires a texture bind.
+//
+// If the user has bound a StelTextureNew _and_ tries to create a new texture,
+// the new texture is bound during creation and we must rebind the "officially"
+// bound texture so the user can continue to use their bound texture.
+//
+// During texture creation, we bind the texture to texture unit 0, so we only need
+// to keep track of the texture currently bound to this texture unit.
+static GLuint textureBoundToTextureUnit0_ = 0;
+
 void StelQGLTextureBackend::bind(const int textureUnit)
 {
 	invariant();
@@ -124,6 +134,10 @@ void StelQGLTextureBackend::bind(const int textureUnit)
 	QGLFunctions& gl = renderer->getGLFunctions();
 	gl.glActiveTexture(GL_TEXTURE0 + textureUnit);
 	glBindTexture(GL_TEXTURE_2D, glTextureID);
+	if(textureUnit == 0)
+	{
+		textureBoundToTextureUnit0_ = glTextureID;
+	}
 	invariant();
 }
 
@@ -322,6 +336,9 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	GLuint glTextureID;
 	// According to GL docs, this always succeeds.
 	glGenTextures(1, &glTextureID);
+	// Creating textures always on texture unit 0.
+	QGLFunctions& gl = renderer->getGLFunctions();
+	gl.glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, glTextureID);
 
 	// Set texture parameters.
@@ -375,6 +392,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	if(glError == GL_INVALID_VALUE)
 	{
 		glDeleteTextures(1, &glTextureID);
+		glBindTexture(GL_TEXTURE_2D, textureBoundToTextureUnit0_);
 		result->errorOccured("fromRawData(): Failed with GL_INVALID_VALUE, "
 		                     "maybe the texture is too big?");
 		return result;
@@ -382,6 +400,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	if(glError != GL_NO_ERROR)
 	{
 		glDeleteTextures(1, &glTextureID);
+		glBindTexture(GL_TEXTURE_2D, textureBoundToTextureUnit0_);
 		result->errorOccured("fromRawData(): Failed with an unknown error. "
 		                     "NOTE: THIS IS EITHER A BUG IN CODE (FORMAT MISMATCH?) "
 		                     "THAT NEEDS TO BE FIXED OR A NEW ERROR CONDITION THAT "
@@ -396,6 +415,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 	result->glTextureID = glTextureID;
 	result->deleteManually = true;
 	result->finishedLoading(size);
+	glBindTexture(GL_TEXTURE_2D, textureBoundToTextureUnit0_);
 
 	return result;
 }

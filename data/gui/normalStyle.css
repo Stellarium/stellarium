@@ -166,6 +166,12 @@ QTextBrowser#helpBrowser,QTextBrowser#aboutBrowser {
 	padding-left:11px;
 }
 
+QTextBrowser#deltaTAlgorithmDescription, QTextBrowser#projectionTextBrowser {
+        background: transparent;
+        padding: 0px;
+        margin: 0px;
+}
+
 /***************************************************SearchDialog********************************************************/
 
 QFrame#horizontalSearchLayout {
@@ -241,14 +247,6 @@ QPushButton#pushButtonGotoSearchSkyObject {
 
 QPushButton:hover#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton-hover.png);
-}
-
-QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {
-        image: url(:/graphicGui/spinup.png);
-}
-
-QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown {
-        image: url(:/graphicGui/spindown.png);
 }
 
 QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {

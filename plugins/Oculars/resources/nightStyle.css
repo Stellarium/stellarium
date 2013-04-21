@@ -45,3 +45,11 @@ QTabWidget::pane {
 	border-top: none;
 }
 
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp, QPushButton#pushButtonMoveLensUp {
+        image: url(:/graphicGui/nv_spinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown, QPushButton#pushButtonMoveLensDown {
+        image: url(:/graphicGui/nv_spindown.png);
+}
+

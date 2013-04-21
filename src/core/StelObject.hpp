@@ -56,7 +56,7 @@ public:
 		PlainText     = 0x00000800, //!< Strip HTML tags from output
 		HourAngle     = 0x00001000,  //!< The hour angle + DE (of date)
 		AbsoluteMagnitude = 0x00002000,  //!< The absolute magnitude
-		GalCoordJ2000 = 0x00004000	//!< The galactic position (J2000 ref)
+		GalCoordJ2000 = 0x00004000	//!< The galactic position (J2000 ref) GZ: HEY STOP! GalCoords are DEFINED in B1950 coordinates! What we have here is a transformation matrix preconfigured to do precession J2000->B1950 and Equ.B1950->Gal. But "GalCoord for J2000" does not make sense.
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)

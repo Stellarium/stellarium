@@ -33,7 +33,7 @@ work, and backend classes either derived from or used by the interface classes.
 
 This allows to change underlying implementation without rewriting drawing code.
 For example, we now have two sets of backend classes: GL1 and GL2.  Which one
-us used is decided at startup without affecting drawing code.
+is used is decided at startup without affecting drawing code.
 
 
 

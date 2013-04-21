@@ -309,6 +309,27 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
+QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+
+	foreach(const SupernovaP& sn, snstar)
+	{
+		if (sn->getEnglishName().toUpper().left(objw.length()) == objw)
+		{
+				result << sn->getEnglishName().toUpper();
+		}
+	}
+
+	result.sort();
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+
+	return result;
+}
+
 QStringList Supernovae::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

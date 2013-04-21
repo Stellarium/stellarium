@@ -30,6 +30,8 @@ namespace Ui {
 class LocationListEditor;
 }
 class LocationListModel;
+class QLabel;
+class QItemSelectionModel;
 class QSortFilterProxyModel;
 
 //! Main class of the %Location List Editor.
@@ -48,8 +50,11 @@ protected:
 	
 private:
 	Ui::LocationListEditor *ui;
+	//! Status bar indicator showing the number of rows and filtered rows.
+	QLabel* filterIndicator;
 	LocationListModel* locations;
 	QSortFilterProxyModel* proxyModel;
+	QItemSelectionModel* selectionModel;
 	
 	//! Path to the currently opened list.
 	QString openFilePath;
@@ -93,6 +98,9 @@ private:
 	//! Set the current row and scroll to the item.
 	void goToRow(int row);
 	
+	//! Show the number of filtered rows and rows total in the status bar.
+	void updateFilterIndicator();
+	
 private slots:
 	//! Prompts for file location and opens that file.
 	void open();
@@ -133,6 +141,13 @@ private slots:
 	void setFilteredColumn(int column);
 	//! 
 	void setFilterCaseSensitivity(bool sensitive);
+	//! Filters the view according to the current filter text and column.
+	void filter();
+	//! Resets the current filtering and empties the search/filter field.
+	//void clearFilter();
+	
+	//! Show the number of selected rows in the status bar.
+	void updateSelectionCount();
 };
 
 #endif // LOCATIONLISTEDITOR_HPP
