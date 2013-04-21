@@ -34,6 +34,8 @@ class QNetworkReply;
 class QProgressBar;
 class QSettings;
 class QTimer;
+class QPixmap;
+class StelButton;
 class PulsarsDialog;
 
 
@@ -150,6 +152,9 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+	void setFlagShowPulsars(bool b) { flagShowPulsars=b; }
+	bool getFlagShowPulsars(void) { return flagShowPulsars; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
@@ -192,8 +197,7 @@ private:
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;
-	QString updateFile;
-	QProgressBar* progressBar;
+	QString updateFile;	
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
@@ -206,6 +210,13 @@ private:
 
 	// GUI
 	PulsarsDialog* configDialog;
+	bool flagShowPulsars;
+	QPixmap* OnIcon;
+	QPixmap* OffIcon;
+	QPixmap* GlowIcon;
+	StelButton* toolbarButton;
+	QProgressBar* progressBar;
+
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

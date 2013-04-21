@@ -639,9 +639,11 @@ class Translations
 		N_("Telrad sight");
 		
 		// Pulsars Plugin
+		N_("Show pulsars");
 		N_("Pulsars configuration window");
 		
 		// Quasars Plugin
+		N_("Show quasars");
 		N_("Quasars configuration window");
 		
 		// Satellites Plugin
