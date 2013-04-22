@@ -49,6 +49,10 @@ UpdateUninstallLogAppName=no
 Source: "@CMAKE_INSTALL_PREFIX@/bin/stellarium.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@CMAKE_INSTALL_PREFIX@/lib/libstelMain.dll"; DestDir: "{app}"; Flags: ignoreversion
 
+; Thanks to the clever and competent design of the keyboard shortcut system,
+; if your executable or changes/introduces StelAction names, you'll need this:
+;Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\data\default_shortcuts.json"; DestDir: "{app}\data"
+
 ; Possibly the same file as the InfoBeforeFile; also uncomment in [Icons] below
 ; Note that if you uncomment the README line below, you need to decide which one
 ; will have the "isreadme" flag.
