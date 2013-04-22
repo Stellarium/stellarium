@@ -72,8 +72,10 @@ private:
 	const int screenHeight;
 	const StelProjector::StelProjectorParams originalProjectorParams;
 	StelProjector::StelProjectorParams newProjectorParams;
-	int viewportTextureOffset[2];
-	int texture_wh;
+	// Dimensions of the auxiliary mirror texture (used to be texture_wh,
+	// because the texture used to be square); now used for convenience. --BM 
+	int texture_w;
+	int texture_h;
 
 	//! Maximum texture coordinates.
 	//!
