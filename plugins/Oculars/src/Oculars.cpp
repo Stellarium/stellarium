@@ -857,9 +857,12 @@ void Oculars::decrementTelescopeIndex()
 
 void Oculars::decrementLensIndex()
 {
-	selectedLensIndex++;
+	selectedLensIndex--;
 	if (selectedLensIndex == lense.count()) {
 		selectedLensIndex = -1;
+	}
+	if (selectedLensIndex == -2) {
+		selectedLensIndex = lense.count() - 1;
 	}
 	emit(selectedLensChanged());
 }
