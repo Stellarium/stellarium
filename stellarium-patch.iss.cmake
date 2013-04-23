@@ -25,7 +25,7 @@ AppVersion=@PACKAGE_VERSION@
 AppVerName=Stellarium @PACKAGE_VERSION@
 AppPublisher=Stellarium team
 AppPublisherURL=http://www.stellarium.org/
-OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
+OutputBaseFilename=stellarium-patch-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
 OutputDir=installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},
 ; see http://www.jrsoftware.org/ishelp/index.php?topic=32vs64bitinstalls
