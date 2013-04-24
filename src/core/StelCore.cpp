@@ -59,6 +59,8 @@ StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionT
 {
 	toneConverter = new StelToneReproducer();
 
+	upgradeConfigSettings();
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Create and initialize the default projector params
 	QString tmpstr = conf->value("projection/viewport").toString();
@@ -1646,4 +1648,36 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		*marker = "?";
 
 	return QString(" %1").arg(validRange);
+}
+
+void StelCore::upgradeConfigSettings()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+
+	// Upgrade settings for Exoplanets plugin
+	if (conf->contains("Exoplanets/flag_show_exoplanets"))
+	{
+		bool b = conf->value("Exoplanets/flag_show_exoplanets", false).toBool();
+		if (!conf->contains("Exoplanets/enable_at_startup"))
+			conf->setValue("Exoplanets/enable_at_startup", b);
+		conf->remove("Exoplanets/flag_show_exoplanets");
+	}
+
+	// Upgrade settings for Pulsars plugin
+	if (conf->contains("Pulsars/flag_show_pulsars"))
+	{
+		bool b = conf->value("Pulsars/flag_show_pulsars", false).toBool();
+		if (!conf->contains("Pulsars/enable_at_startup"))
+			conf->setValue("Pulsars/enable_at_startup", b);
+		conf->remove("Pulsars/flag_show_pulsars");
+	}
+
+	// Upgrade settings for Quasars plugin
+	if (conf->contains("Quasars/flag_show_quasars"))
+	{
+		bool b = conf->value("Quasars/flag_show_quasars", false).toBool();
+		if (!conf->contains("Quasars/enable_at_startup"))
+			conf->setValue("Quasars/enable_at_startup", b);
+		conf->remove("Quasars/flag_show_quasars");
+	}
 }

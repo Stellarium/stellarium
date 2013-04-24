@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>537</width>
-    <height>465</height>
+    <width>533</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -242,6 +242,13 @@
             </property>
             <property name="text">
              <string>Enable display of distribution for quasars</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayAtStartupCheckBox">
+            <property name="text">
+             <string>Enable display at startup</string>
             </property>
            </widget>
           </item>

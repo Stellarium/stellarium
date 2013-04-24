@@ -163,6 +163,8 @@ void Pulsars::init()
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
 		OffIcon = new QPixmap(":/Pulsars/btPulsars-off.png");
 
+		setFlagShowPulsars(getEnableAtStartup());
+
 		gui->getGuiAction("actionShow_Pulsars")->setChecked(flagShowPulsars);
 		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Pulsars"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -567,8 +569,8 @@ void Pulsars::restoreDefaultConfigIni(void)
 	conf->remove("");
 
 	conf->setValue("distribution_enabled", false);
-	conf->setValue("updates_enabled", true);
-	conf->setValue("flag_show_pulsars", false);
+	conf->setValue("enable_at_startup", false);
+	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/pulsars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
@@ -583,7 +585,7 @@ void Pulsars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
-	flagShowPulsars = conf->value("flag_show_pulsars", false).toBool();
+	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 
 	conf->endGroup();
 }
@@ -596,7 +598,7 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
-	conf->setValue("flag_show_pulsars", flagShowPulsars);
+	conf->setValue("enable_at_startup", enableAtStartup);
 
 	conf->endGroup();
 }
