@@ -158,6 +158,8 @@ void Quasars::init()
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
 		OffIcon = new QPixmap(":/Quasars/btQuasars-off.png");
 
+		setFlagShowQuasars(getEnableAtStartup());
+
 		gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
 		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -565,8 +567,8 @@ void Quasars::restoreDefaultConfigIni(void)
 	conf->remove("");
 
 	conf->setValue("distribution_enabled", false);
-	conf->setValue("updates_enabled", true);
-	conf->setValue("flag_show_quasars", false);
+	conf->setValue("enable_at_startup", false);
+	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
@@ -581,7 +583,7 @@ void Quasars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
-	flagShowQuasars = conf->value("flag_show_quasars", false).toBool();
+	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 
 	conf->endGroup();
 }
@@ -594,7 +596,7 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
-	conf->setValue("flag_show_quasars", flagShowQuasars);
+	conf->setValue("enable_at_startup", enableAtStartup);
 
 	conf->endGroup();
 }

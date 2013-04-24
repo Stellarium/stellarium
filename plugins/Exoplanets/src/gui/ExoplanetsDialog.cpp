@@ -72,6 +72,8 @@ void ExoplanetsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
+	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getEnableAtStartup());
+	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getDisplayMode());
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	ui->timelineModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getTimelineMode());
@@ -167,6 +169,12 @@ void ExoplanetsDialog::setTimelineEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Exoplanets)->setTimelineMode(b);
+}
+
+void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Exoplanets)->setEnableAtStartup(b);
 }
 
 void ExoplanetsDialog::setUpdatesEnabled(int checkState)

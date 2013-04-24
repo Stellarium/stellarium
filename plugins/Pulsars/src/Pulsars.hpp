@@ -126,6 +126,8 @@ public:
 
 	bool getDisplayMode(void) {return distributionEnabled;}
 	void setDisplayMode(bool b) {distributionEnabled=b;}
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
+	bool getEnableAtStartup(void) { return enableAtStartup; }
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
@@ -205,6 +207,7 @@ private:
 	QDateTime lastUpdate;
 	int updateFrequencyDays;
 	bool distributionEnabled;
+	bool enableAtStartup;
 
 	QSettings* conf;
 

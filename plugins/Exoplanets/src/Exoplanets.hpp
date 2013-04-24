@@ -131,6 +131,8 @@ public:
 	void setDisplayMode(bool b) {distributionEnabled=b;}
 	bool getTimelineMode(void) {return timelineEnabled;}
 	void setTimelineMode(bool b) {timelineEnabled=b;}
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
+	bool getEnableAtStartup(void) { return enableAtStartup; }
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
@@ -211,6 +213,7 @@ private:
 	int updateFrequencyHours;
 	bool distributionEnabled;
 	bool timelineEnabled;
+	bool enableAtStartup;
 
 	QSettings* conf;
 
