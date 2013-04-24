@@ -9,4 +9,5 @@ INSTALL(FILES ngc2000.dat ngc2000names.dat DESTINATION share/${PACKAGE}/nebulae/
 
 # install textures of DSO
 INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/nebulae/default 
-	FILES_MATCHING PATTERN "*.png" )
+	FILES_MATCHING PATTERN "*.png" 
+	PATTERN "CMakeFiles" EXCLUDE )
