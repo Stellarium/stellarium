@@ -165,6 +165,8 @@ void Exoplanets::init()
 		OnIcon = new QPixmap(":/Exoplanets/btExoplanets-on.png");
 		OffIcon = new QPixmap(":/Exoplanets/btExoplanets-off.png");
 
+		setFlagShowExoplanets(getEnableAtStartup());
+
 		gui->getGuiAction("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
 		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Exoplanets"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -564,8 +566,8 @@ void Exoplanets::restoreDefaultConfigIni(void)
 
 	conf->setValue("distribution_enabled", false);
 	conf->setValue("timeline_enabled", false);
-	conf->setValue("updates_enabled", true);
-	conf->setValue("flag_show_exoplanets", false);
+	conf->setValue("enable_at_startup", false);
+	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/exoplanets.json");
 	conf->setValue("update_frequency_hours", 72);
 	conf->endGroup();
@@ -580,8 +582,8 @@ void Exoplanets::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
-	timelineEnabled = conf->value("timeline_enabled", false).toBool();
-	flagShowExoplanets = conf->value("flag_show_exoplanets", false).toBool();
+	timelineEnabled = conf->value("timeline_enabled", false).toBool();	
+	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 
 	conf->endGroup();
 }
@@ -595,7 +597,7 @@ void Exoplanets::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
 	conf->setValue("timeline_enabled", timelineEnabled);
-	conf->setValue("flag_show_exoplanets", flagShowExoplanets);
+	conf->setValue("enable_at_startup", enableAtStartup);
 
 	conf->endGroup();
 }
