@@ -618,8 +618,8 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
+          <layout class="QGridLayout" name="flagsCheckBoxesLayout">
+           <item row="0" column="0">
             <widget class="QCheckBox" name="displayedCheckbox">
              <property name="toolTip">
               <string>Display the selected satellite(s)</string>
@@ -632,7 +632,7 @@
              </property>
             </widget>
            </item>
-           <item>
+           <item row="0" column="1">
             <widget class="QCheckBox" name="orbitCheckbox">
              <property name="toolTip">
               <string>Display orbit line(s) for the selected satellite(s)</string>
@@ -642,6 +642,16 @@
              </property>
              <property name="tristate">
               <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QCheckBox" name="userCheckBox">
+             <property name="toolTip">
+              <string>Do not update (or remove on update) the selected satellite(s)</string>
+             </property>
+             <property name="text">
+              <string>Do not update</string>
              </property>
             </widget>
            </item>
@@ -847,6 +857,7 @@
   <tabstop>noradNumberEdit</tabstop>
   <tabstop>displayedCheckbox</tabstop>
   <tabstop>orbitCheckbox</tabstop>
+  <tabstop>userCheckBox</tabstop>
   <tabstop>descriptionTextEdit</tabstop>
   <tabstop>groupsListWidget</tabstop>
   <tabstop>tleFirstLineEdit</tabstop>
