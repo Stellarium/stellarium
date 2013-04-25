@@ -748,9 +748,13 @@ private:
 		(const TextParams& params, QPainter& painter, const int baseX, const int baseY, StelProjectorP projector);
 
 	//! Get the placeholder texture, lazily loading if it's not loaded yet.
-	StelQGLTextureBackend* getPlaceholderTexture()
+	StelQGLTextureBackend* getPlaceholderTexture(bool debug=false)
 	{
 		if(NULL != placeholderTexture) {return placeholderTexture;}
+
+		int color = 0;
+		if (debug)
+			color = 0x00FFFF00;
 
 		const int placeholderSize = 512;
 		const int cellSize = 16;
@@ -759,7 +763,7 @@ private:
 		{
 			for (int x = 0; x < placeholderSize; x++) 
 			{
-				image.setPixel(x, y, (x / cellSize) % 2 == (y / cellSize) % 2 ? 0 : 0x00FFFF00);
+				image.setPixel(x, y, (x / cellSize) % 2 == (y / cellSize) % 2 ? 0 : color);
 			}
 		}
 		placeholderTexture = 
