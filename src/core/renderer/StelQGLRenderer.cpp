@@ -57,11 +57,13 @@ void StelQGLRenderer::bindTextureBackend
 	else
 	{
 		// by default placeholder is hide but its can be enabled for debugging
+		bool debugMode = false;
 		if (conf->value("debug/texture_placeholder_flag", false).toBool())
-		{
-			getPlaceholderTexture()->bind(textureUnit);
-			currentlyBoundTextures[textureUnit] = getPlaceholderTexture();
-		}
+			debugMode = true;
+
+		getPlaceholderTexture(debugMode)->bind(textureUnit);
+		currentlyBoundTextures[textureUnit] = getPlaceholderTexture(debugMode);
+
 	}
 	invariant();
 }
