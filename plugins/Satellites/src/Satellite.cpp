@@ -53,7 +53,15 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-		: initialized(false), displayed(true), newlyAdded(false), orbitValid(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+    : initialized(false),
+      displayed(true),
+      orbitDisplayed(false),
+      userDefined(false),
+      newlyAdded(false),
+      orbitValid(false),
+      hintColor(0.0,0.0,0.0),
+      lastUpdated(),
+      pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -68,28 +76,29 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	if (name.isEmpty())
 		return;
 	
-	if (map.contains("description")) description = map.value("description").toString();
-	if (map.contains("visible")) displayed = map.value("visible").toBool();
-	if (map.contains("orbitVisible")) orbitDisplayed = map.value("orbitVisible").toBool();
+	// If there are no such keys, these will be initialized with the default
+	// values given them above.
+	description = map.value("description", description).toString().trimmed();
+	displayed = map.value("visible", displayed).toBool();
+	orbitDisplayed = map.value("orbitVisible", orbitDisplayed).toBool();
+	userDefined = map.value("userDefined", userDefined).toBool();
 
-	if (map.contains("hintColor"))
+	// Satellite hint color
+	QVariantList list = map.value("hintColor", QVariantList()).toList();
+	if (list.count() == 3)
 	{
-		if (map.value("hintColor").toList().count() == 3)
-		{
-			hintColor[0] = map.value("hintColor").toList().at(0).toDouble();
-			hintColor[1] = map.value("hintColor").toList().at(1).toDouble();
-			hintColor[2] = map.value("hintColor").toList().at(2).toDouble();
-		}
+		hintColor[0] = list.at(0).toDouble();
+		hintColor[1] = list.at(1).toDouble();
+		hintColor[2] = list.at(2).toDouble();
 	}
-
-	if (map.contains("orbitColor"))
+	
+	// Satellite orbit section color
+	list = map.value("orbitColor", QVariantList()).toList();
+	if (list.count() == 3)
 	{
-		if (map.value("orbitColor").toList().count() == 3)
-		{
-			orbitColorNormal[0] = map.value("orbitColor").toList().at(0).toDouble();
-			orbitColorNormal[1] = map.value("orbitColor").toList().at(1).toDouble();
-			orbitColorNormal[2] = map.value("orbitColor").toList().at(2).toDouble();
-		}
+		orbitColorNormal[0] = list.at(0).toDouble();
+		orbitColorNormal[1] = list.at(1).toDouble();
+		orbitColorNormal[2] = list.at(2).toDouble();
 	}
 	else
 	{
@@ -121,9 +130,9 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		}
 	}
 
-	if (map.contains("groups"))
+	QVariantList groupList =  map.value("groups", QVariantList()).toList();
+	if (!groupList.isEmpty())
 	{
-		QVariantList groupList =  map.value("groups").toList();
 		foreach(const QVariant& group, groupList)
 			groups.insert(group.toString());
 	}
@@ -134,11 +143,10 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	setNewTleElements(line1, line2);
 	parseInternationalDesignator(line1);
 
-	if (map.contains("lastUpdated"))
-	{
-		lastUpdated = QDateTime::fromString(map.value("lastUpdated").toString(),
-		                                    Qt::ISODate);
-	}
+	QString dateString = map.value("lastUpdated").toString();
+	if (!dateString.isEmpty())
+		lastUpdated = QDateTime::fromString(dateString, Qt::ISODate);
+
 	orbitValid = true;
 	initialized = true;
 
@@ -168,11 +176,13 @@ QVariantMap Satellite::getMap(void)
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
-	if (!description.isEmpty() && description!="")
+	if (!description.isEmpty())
 		map["description"] = description;
 
 	map["visible"] = displayed;
 	map["orbitVisible"] = orbitDisplayed;
+	if (userDefined)
+		map.insert("userDefined", userDefined);
 	QVariantList col, orbitCol;
 	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
 	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
@@ -441,6 +451,8 @@ SatFlags Satellite::getFlags()
 		flags |= SatNotDisplayed;
 	if (orbitDisplayed)
 		flags |= SatOrbit;
+	if (userDefined)
+		flags |= SatUser;
 	if (newlyAdded)
 		flags |= SatNew;
 	if (!orbitValid)
@@ -452,6 +464,7 @@ void Satellite::setFlags(const SatFlags& flags)
 {
 	displayed = flags.testFlag(SatDisplayed);
 	orbitDisplayed = flags.testFlag(SatOrbit);
+	userDefined = flags.testFlag(SatUser);
 }
 
 
