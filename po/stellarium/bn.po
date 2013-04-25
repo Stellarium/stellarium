@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-21 22:32+0700\n"
+"POT-Creation-Date: 2013-04-24 22:33+0700\n"
 "PO-Revision-Date: 2013-04-13 04:14+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-22 05:12+0000\n"
-"X-Generator: Launchpad (build 16567)\n"
+"X-Launchpad-Export-Date: 2013-04-25 05:09+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 "Language: bn\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -256,11 +256,11 @@ msgstr "লম্বণ : %1\""
 msgid "SpaceShip"
 msgstr "মহাকাশ যান"
 
-#: src/core/StelCore.cpp:1419
+#: src/core/StelCore.cpp:1421
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "সংশোধন নিস্ক্রিয় করা আছে । সম্যক ধারণা থাকলে তবেই সক্রিয় করুন ।"
 
-#: src/core/StelCore.cpp:1422
+#: src/core/StelCore.cpp:1424
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -271,7 +271,7 @@ msgstr ""
 "প্রবন্ধ <em>Einstein's Theory of Relativity Confirmed by Ancient Solar "
 "Eclipses</em> (%1) ব্যবহার করেছেন । বিস্তারিত তথ্য %2এখানে%3 দেখুন ।"
 
-#: src/core/StelCore.cpp:1425
+#: src/core/StelCore.cpp:1427
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -280,7 +280,7 @@ msgstr ""
 "এই বিখ্যাত সূত্রটি G. M. Clemence তাঁর প্রবন্ধ <em>On the system of "
 "astronomical constants</em> (%1) এ প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1428
+#: src/core/StelCore.cpp:1430
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -292,7 +292,7 @@ msgstr ""
 "পরবর্তী পর্যবেক্ষণের উপর ভিত্তি করে তৈরী এবং Jean Meeus তাঁর প্রবন্ধ "
 "<em>Astronomical Formulae for Calculators</em> এ এটি ব্যবহার করেছেন ।"
 
-#: src/core/StelCore.cpp:1432
+#: src/core/StelCore.cpp:1434
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -302,7 +302,7 @@ msgstr ""
 "দ্বারা <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> ও <em>Canon of Solar Eclipses</em> "
 "এ গৃহীত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1436
+#: src/core/StelCore.cpp:1438
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -314,7 +314,7 @@ msgstr ""
 "ছকে দেওয়া আছে । এই একই সম্পর্ক Goldstine (১৯৭৩) সৃষ্ট syzygy ছকেও গৃহিত "
 "হয়েছে ।"
 
-#: src/core/StelCore.cpp:1440
+#: src/core/StelCore.cpp:1442
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -325,7 +325,7 @@ msgstr ""
 "moon from early astronomical observations</em> (%1) নামক প্রবন্ধে এই "
 "সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1443
+#: src/core/StelCore.cpp:1445
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -334,7 +334,7 @@ msgstr ""
 "P. M. Muller এবং F. R. Stephenson <em>Pre-Telescopic Astronomical "
 "Observations</em> (%1) নামক প্রবন্ধে এই সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1446
+#: src/core/StelCore.cpp:1448
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -347,7 +347,7 @@ msgstr ""
 "correction delta T E.T.-U.T. in the period 1800-1975</em> (%1) নামক প্রবন্ধে "
 "প্রকাশ করেন এবং Brouwer (১৯৫২) কর্তৃক যথোপযুক্ত একটি তালিকা প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:1449
+#: src/core/StelCore.cpp:1451
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -357,7 +357,7 @@ msgstr ""
 "Tables from -4000 to +2800</em> (১৯৮৬) ও RedShift নামক কম্পিউটার প্রোগ্রামে "
 "গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1452
+#: src/core/StelCore.cpp:1454
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -368,12 +368,12 @@ msgstr ""
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) নামক প্রবন্ধে এই "
 "সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1455
+#: src/core/StelCore.cpp:1457
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "গ্রহমণ্ডলীর নকশা প্রোগ্রামের সাহায্য ৭ এ এই কার্যপ্রনালীটি ব্যবহৃত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1458
+#: src/core/StelCore.cpp:1460
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -383,7 +383,7 @@ msgstr ""
 "Year Canon of Lunar Eclipses: 1986-2035</em> (১৯৮৯) য় F. Espenak এই "
 "কার্যপ্রনালীটির  উদ্ভাবন করে যান ।"
 
-#: src/core/StelCore.cpp:1461
+#: src/core/StelCore.cpp:1463
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -392,7 +392,7 @@ msgstr ""
 "এই সূত্রটি K.M. Borkowski (%1) ২১৩৭ খ্রীষ্টপূর্বাব্দ থেকে ১৭১৫ খ্রীষ্টাব্দ "
 "পর্যন্ত ঘটা সূর্যগ্রহণগুলির মধ্যের ৩১টির সংগৃহিত তথ্য থেকে তৈরী করেছেন ।"
 
-#: src/core/StelCore.cpp:1464
+#: src/core/StelCore.cpp:1466
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -405,7 +405,7 @@ msgstr ""
 "প্রবন্ধে প্রকাশ করেন এবং Stephenson এবং Morrison (১৯৮৪) কর্তৃক যথোপযুক্ত "
 "একটি তালিকা প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:1467
+#: src/core/StelCore.cpp:1469
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -415,7 +415,7 @@ msgstr ""
 "Programs from 4000 B.C. to A.D. 8000</em> (১৯৯১) এর চন্দ্র সংক্রান্ত ELP "
 "2000-85 উপপাদ্যের ক্ষুদ্র সংস্করণে গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1470
+#: src/core/StelCore.cpp:1472
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -426,7 +426,7 @@ msgstr ""
 "the Earth's Rotation: 700 BC to AD 1990</em> (%1) নামক প্রবন্ধে এই সূত্রটি "
 "প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1473
+#: src/core/StelCore.cpp:1475
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -435,7 +435,7 @@ msgstr ""
 "F. R. Stephenson তাঁর বই <em>Historical Eclipses and Earth's Rotation</em> "
 "(%1) য় এই সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1476
+#: src/core/StelCore.cpp:1478
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -446,7 +446,7 @@ msgstr ""
 "Chapront, Chapront-Touze এবং Francou (১৯৯৭) এর অপেক্ষক অন্তর্ভূক্ত করা হয়ে "
 "থাকে ।"
 
-#: src/core/StelCore.cpp:1479
+#: src/core/StelCore.cpp:1481
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -455,7 +455,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "তার ওয়েবসাইট %1JPL Horizons%2 এ এই সূত্র ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:1482
+#: src/core/StelCore.cpp:1484
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -464,7 +464,7 @@ msgstr ""
 "এই বহুপদী সমীকরনটি J. Meeus এবং L. Simons তাঁদের প্রবন্ধ <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1) এ প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1485
+#: src/core/StelCore.cpp:1487
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -474,7 +474,7 @@ msgstr ""
 "Computer</em> (২০০০) এর ৪র্থ সংস্করণ নিকট অতীত সংক্রান্ত তথ্যোপযোগী ৩য় ঘাতের "
 "বহুপদী সমীকরনটি প্রদান করেন ।"
 
-#: src/core/StelCore.cpp:1488
+#: src/core/StelCore.cpp:1490
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -486,7 +486,7 @@ msgstr ""
 "Tabulations</em> (২০০২) এ প্রকাশ করেন । যদিও এটির ভিত্তি Jean Meeus এর "
 "<em>Astronomical Algorithms</em> (১৯৯১) ।"
 
-#: src/core/StelCore.cpp:1491
+#: src/core/StelCore.cpp:1493
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -497,7 +497,7 @@ msgstr ""
 "the Earth's clock error %1T and the calculation of eclipses</em> (%2) এ এই "
 "গুরুত্বপূর্ণ সমাধানটি প্রকাশ করেন (%3) এ একটি সংযোজন সমেত ।"
 
-#: src/core/StelCore.cpp:1494
+#: src/core/StelCore.cpp:1496
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -510,7 +510,7 @@ msgstr ""
 "করেন । এটি Stephenson (%2) বিবৃত একটি সম্ভাব্য পর্যায়বৃত্তির উপর ভিত্তি করে "
 "নির্মিত । আরও তথ্যের জন্য %3এখানে%4 দেখুন ।"
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1499
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -525,11 +525,11 @@ msgstr ""
 "প্রাপ্ত মানের ছকের সাহায্যে নির্ণিত । এছাড়াও এটি SOLEX নামক সৌরজগত এবং তার "
 "গ্রহ উপগ্রহের পঞ্জিকা নির্ণয়ের প্রোগ্রামে ব্যবহার করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1499
 msgid "Used by default."
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:1500
+#: src/core/StelCore.cpp:1502
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -537,15 +537,15 @@ msgid ""
 msgstr ""
 "এটি ব্যবহারকারী দ্বারা প্রদত্ত সহগ যুক্ত %1T নির্ণয় করার দ্বিঘাত সমীকরন"
 
-#: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1505 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1554
 msgid "with meaningless values outside this range"
 msgstr "এই সীমার বাইরে অর্থহীন মান সমেত"
 
-#: src/core/StelCore.cpp:1578
+#: src/core/StelCore.cpp:1580
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -553,20 +553,20 @@ msgstr ""
 "গড়ে সর্বনিম্ন এক সেকেন্ড ও সর্বোচ্চ ১.৯ সেকেন্ড ত্রুটি এবং এই সীমার বাইরে "
 "অর্থহীন মান সমেত"
 
-#: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1604 src/core/StelCore.cpp:1609
 msgid "with zero values outside this range"
 msgstr "এই সীমার বাইরে ০ মান যুক্ত"
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1614
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "এই সীমার বাইরে সুবিধাজনক ১ সেকেন্ড নির্ভূলতা এবং ০ মান যুক্ত"
 
-#: src/core/StelCore.cpp:1639
+#: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2, %3 বছরের মধ্যে ।"
 
-#: src/core/StelCore.cpp:1641
+#: src/core/StelCore.cpp:1643
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"
@@ -757,9 +757,9 @@ msgstr "যোগাযোগ"
 
 #: src/gui/ConfigurationDialog.cpp:795
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:112
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:112
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
 msgstr "লেখক"
@@ -4020,7 +4020,7 @@ msgstr "সমস্ত উপলব্ধ"
 msgid "Display no information"
 msgstr "কোন তথ্য দেখাবেন না"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1844
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1851
 #: plugins/Observability/src/Observability.cpp:628
 #: plugins/Observability/src/Observability.cpp:629
 #: plugins/Observability/src/Observability.cpp:631
@@ -4550,164 +4550,164 @@ msgstr ""
 "এবং দৃষ্টিক্ষেত্র পরিবর্তন করা যায় ।)তাছাড়া এটি একটি সংবেদক ফ্রেম এবং একটি "
 "দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র প্রদর্শন করতে পারে ।"
 
-#: plugins/Oculars/src/Oculars.cpp:784
+#: plugins/Oculars/src/Oculars.cpp:785
 msgid "Please select an object before switching to ocular view."
 msgstr "দূরবীন দর্শন করতে আগে কোন একটি জ্যোতিষ্ক নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:877
+#: plugins/Oculars/src/Oculars.cpp:881
 msgid "&Previous ocular"
 msgstr "&পূর্ববর্তী দূরবীন দর্শন বিন্যাস"
 
-#: plugins/Oculars/src/Oculars.cpp:878
+#: plugins/Oculars/src/Oculars.cpp:882
 msgid "&Next ocular"
 msgstr "&পরবর্তী দূরবীন দর্শন বিন্যাস"
 
-#: plugins/Oculars/src/Oculars.cpp:879
+#: plugins/Oculars/src/Oculars.cpp:883
 msgid "Select &ocular"
 msgstr "&দূরবীন দর্শন বিন্যাস নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:926
+#: plugins/Oculars/src/Oculars.cpp:930
 msgid "Toggle &crosshair"
 msgstr "&লক্ষ স্থির করার ক্রসটি অদলবদল করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:935
+#: plugins/Oculars/src/Oculars.cpp:939
 msgid "Configure &Oculars"
 msgstr "'দূরবীন দর্শন বিন্যাস' বিন্যাস করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:944
+#: plugins/Oculars/src/Oculars.cpp:948
 msgid "Toggle &CCD"
 msgstr "অদলবদল &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:952
+#: plugins/Oculars/src/Oculars.cpp:956
 msgid "Toggle &Telrad"
 msgstr "অদলবদল &দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/Oculars.cpp:962
+#: plugins/Oculars/src/Oculars.cpp:966
 msgid "&Previous CCD"
 msgstr "&পূর্ববর্তী CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:963
+#: plugins/Oculars/src/Oculars.cpp:967
 msgid "&Next CCD"
 msgstr "&পরবর্তী CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:964
+#: plugins/Oculars/src/Oculars.cpp:968
 msgid "&Select CCD"
 msgstr "CCD &নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:986
+#: plugins/Oculars/src/Oculars.cpp:990
 msgid "&Rotate CCD"
 msgstr "CCD &ঘোরান"
 
-#: plugins/Oculars/src/Oculars.cpp:1018
+#: plugins/Oculars/src/Oculars.cpp:1022
 msgid "&Reset rotation"
 msgstr "&ঘূর্ণন পুনঃস্থাপন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1521
+#: plugins/Oculars/src/Oculars.cpp:1528
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
 #, qt-format
 msgid "Ocular #%1"
 msgstr "দূরবীন দর্শন বিন্যাস #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1526
+#: plugins/Oculars/src/Oculars.cpp:1533
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "দূরবীন দর্শন বিন্যাস #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1540
+#: plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "দূরবীন দর্শন বিন্যাস FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1547
+#: plugins/Oculars/src/Oculars.cpp:1554
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "দূরবীন দর্শন বিন্যাস aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1559
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
+#: plugins/Oculars/src/Oculars.cpp:1566
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 #, qt-format
 msgid "Lens #%1"
 msgstr "লেন্স #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1563
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
+#: plugins/Oculars/src/Oculars.cpp:1570
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "লেন্স #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1568
+#: plugins/Oculars/src/Oculars.cpp:1575
 msgid "Lens: none"
 msgstr "লেন্স: কিছু নেই"
 
-#: plugins/Oculars/src/Oculars.cpp:1578 plugins/Oculars/src/Oculars.cpp:1635
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
+#: plugins/Oculars/src/Oculars.cpp:1585 plugins/Oculars/src/Oculars.cpp:1642
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 #, qt-format
 msgid "Telescope #%1"
 msgstr "দূরবীন #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1583 plugins/Oculars/src/Oculars.cpp:1640
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:757
+#: plugins/Oculars/src/Oculars.cpp:1590 plugins/Oculars/src/Oculars.cpp:1647
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "দূরবীন #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1594
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
+#: plugins/Oculars/src/Oculars.cpp:1601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
 #, qt-format
 msgid "Magnification: %1"
 msgstr "বর্ধিতকরণ: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1602
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
+#: plugins/Oculars/src/Oculars.cpp:1609
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "FOV: %1"
 msgstr "দৃষ্টিসীমা: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1612
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
+#: plugins/Oculars/src/Oculars.cpp:1619
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "মাত্রা: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1617
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
 #, qt-format
 msgid "Sensor #%1"
 msgstr "সংবেদক #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1621
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:664
+#: plugins/Oculars/src/Oculars.cpp:1628
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:659
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "সংবেদক #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1840
+#: plugins/Oculars/src/Oculars.cpp:1847
 msgid "&Lens"
 msgstr "&লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1841
+#: plugins/Oculars/src/Oculars.cpp:1848
 msgid "&Previous lens"
 msgstr "&পূর্ববর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1842
+#: plugins/Oculars/src/Oculars.cpp:1849
 msgid "&Next lens"
 msgstr "&পরবর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1872
+#: plugins/Oculars/src/Oculars.cpp:1879
 msgid "&Telescope"
 msgstr "&দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1873
+#: plugins/Oculars/src/Oculars.cpp:1880
 msgid "&Previous telescope"
 msgstr "&পূর্ববর্তী দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1874
+#: plugins/Oculars/src/Oculars.cpp:1881
 msgid "&Next telescope"
 msgstr "&পরবর্তী দূরবীন"
 
@@ -4779,41 +4779,41 @@ msgstr "দূরবীন দর্শন বিন্যাসের কার
 msgid "Apparent field of view of the ocular"
 msgstr "দূরবীন দর্শন বিন্যাসের আপাত দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "বিবর্ধকতা: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 msgid "Lens: None"
 msgstr "লেন্স: কিছু নেই"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:610
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:605
 msgid "Multiplicity: N/A"
 msgstr "বিবর্ধকতা: নেই"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:614
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Multiplicity of lens"
 msgstr "লেন্সের বিবর্ধকতা"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
 msgid "Rotation: %1"
 msgstr "ঘূর্ণন: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:813
 msgid "Magnification provided by these binoculars"
 msgstr "এই দূরবীন দ্বারা প্রাপ্ত বর্ধিতকরন"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Actual field of view provided by these binoculars"
 msgstr "এই দূরবীন দ্বারা প্রাপ্ত আসল দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "এই দূরবীন, লেন্স বা দূরবীন দর্শন বিন্যাস দ্বারা প্রাপ্ত বর্ধিতকরন"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
@@ -4826,9 +4826,9 @@ msgstr "দূরবীন দর্শন বিন্যাস প্লাগ
 #: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:111
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:111
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:111
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:113
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "সংস্করণ"
@@ -5059,9 +5059,9 @@ msgstr "উল্লম্বভাবে উল্টানো"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
+#: plugins/Quasars/src/ui_quasarsDialog.h:270
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:270
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:279
 #: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -5294,17 +5294,17 @@ msgstr "বিশদ জানতে %1এই নথি%2 দেখুন ।"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:134
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 msgid "Links"
 msgstr "সংযোগগুলি"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:117
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:119
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5316,9 +5316,9 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "এ ব্যাপারে আপনার সব প্রশ্নের %1উত্তর এখানে পাবেন%2 ।"
@@ -5326,9 +5326,9 @@ msgstr "এ ব্যাপারে আপনার সব প্রশ্ন�
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "বাগ প্রতিবেদন %1এখানে%2 করা যাবে ।"
@@ -5336,9 +5336,9 @@ msgstr "বাগ প্রতিবেদন %1এখানে%2 করা য�
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:331
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:126
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -5348,9 +5348,9 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:148
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 msgid "Internet updates disabled"
 msgstr "ইন্টারনেটের মাধ্যমে সংশোধন ব্যবস্থা নিষ্ক্রিয় করা আছে"
 
@@ -5358,37 +5358,37 @@ msgstr "ইন্টারনেটের মাধ্যমে সংশোধ�
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:189
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:148
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:196
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Updating now..."
 msgstr "এখনই সংশোধন করুন..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 msgid "Next update: < 1 minute"
 msgstr "পরবর্তী সংশোধন: < ১ মিনিট"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "পরবর্তী সংশোধন: %1 মিনিট"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:357
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "পরবর্তী সংশোধন: %1 ঘন্টা"
@@ -5397,28 +5397,28 @@ msgstr "পরবর্তী সংশোধন: %1 ঘন্টা"
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Quasars/src/ui_quasarsDialog.h:254
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:259
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:265
 msgid "Update now"
 msgstr "এখনই সংশোধন করুন"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:374
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid "Update from files"
 msgstr "ফাইলগুলি থেকে সংশোধন করুন"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:386
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:199
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Update error"
 msgstr "সংশোধনে ত্রুটি"
 
@@ -5498,22 +5498,22 @@ msgstr "ইন্টারনেট উত্সগুলি থেকে TLE �
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:637
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
-#: plugins/Quasars/src/ui_quasarsDialog.h:250
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:255
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:261
 msgid "Update from Internet sources"
 msgstr "ইন্টারনেট উত্সগুলি থেকে সংশোধন করুন ।"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
-#: plugins/Quasars/src/ui_quasarsDialog.h:251
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:251
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:256
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
 msgid "Last update:"
 msgstr "সর্বশেষ সংশোধন :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:639
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:257
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:263
 msgid "Update frequency (hours):"
 msgstr "পুনঃসংশোধন (ঘন্টা):"
 
@@ -5558,27 +5558,27 @@ msgstr "বিলীন হত্তয়ার সময় :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:665
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
-#: plugins/Quasars/src/ui_quasarsDialog.h:260
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
+#: plugins/Quasars/src/ui_quasarsDialog.h:267
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:267
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:276
 #: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
 msgstr "প্রারম্ভিক সূচনার বৈশিষ্ট বিন্যাস পুনঃস্থাপন করুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Quasars/src/ui_quasarsDialog.h:261
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
+#: plugins/Quasars/src/ui_quasarsDialog.h:268
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:268
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:277
 #: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Save settings as default"
 msgstr "বৈশিষ্ট বিন্যাস প্রারম্ভিক সূচনা বিন্যাস হিসাবে সংরক্ষন করুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:667
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
+#: plugins/Quasars/src/ui_quasarsDialog.h:269
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:269
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:278
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
 msgstr "বিন্যাস"
@@ -6797,7 +6797,7 @@ msgid "Acknowledgments"
 msgstr "কৃতজ্ঞতা স্বীকার"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
@@ -6812,14 +6812,14 @@ msgid "Institute for Theoretical and Experimental Physics"
 msgstr "ইনস্টিটিউট ফর থিওরিটিক্যাল অ্যান্ড এক্সপেরিমেন্টাল ফিজিক্স"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "in Russia"
 msgstr ", রাশিয়া"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -6827,8 +6827,8 @@ msgid ""
 msgstr "এই প্লাগইন সম্বন্ধে পুরো তথ্যের জন্য %1এখানে%2 যান ।"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
 #, qt-format
 msgid "Next update: %1 days"
 msgstr "পরবর্তী সংশোধন : %1 দিন"
@@ -6846,21 +6846,21 @@ msgid "Historical Supernovae Plug-in Configuration"
 msgstr "ঐতিহাসিক অতিনোভা প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
-#: plugins/Quasars/src/ui_quasarsDialog.h:249
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
+#: plugins/Quasars/src/ui_quasarsDialog.h:255
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update catalog from Internet"
 msgstr "ইন্টারনেট থেকে তালিকা সংশোধন"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
-#: plugins/Quasars/src/ui_quasarsDialog.h:252
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
 msgstr "সংশোধনের হার (দিন):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Quasars/src/ui_quasarsDialog.h:253
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:258
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
 msgid "[next update info]"
 msgstr "[পরবর্তী সংশোধন তথ্য]"
 
@@ -6887,11 +6887,11 @@ msgstr "কোয়াসার"
 msgid "Z (redshift): %1"
 msgstr "Z (লোহিত সরন): %1"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 msgid "Quasars Plug-in"
 msgstr "কোয়াসার প্লাগইন"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than 16 "
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
@@ -6901,40 +6901,46 @@ msgstr ""
 "করে ।একটি তালিকা 'Quasars and Active Galactic Nuclei' (13th Ed.) থেকে নেওয়া "
 "হয়েছে ।"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Veron+ 2010"
 msgstr "ভেরন+ ২০১০"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:206
 msgid "Quasars is updated"
 msgstr "কোয়াসার তথ্য সংশোধিত করা হয়েছে"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:246
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
 msgid "Quasars Configuration"
 msgstr "কোয়াসার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:247
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
 msgid "Quasars Plug-in Configuration"
 msgstr "কোয়াসার প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:255
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
 msgid "Display mode for quasars"
 msgstr "কোয়াসার প্রদর্শন মোড"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
 msgid "Plot all quasars without labels"
 msgstr "নাম না দেখিয়ে সমস্ত কোয়াসার গুলি দেখান"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Quasars/src/ui_quasarsDialog.h:265
 msgid "Enable display of distribution for quasars"
 msgstr "কোয়াসারদের বণ্টন প্রদর্শন সক্রিয় করুন"
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:266
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:275
+msgid "Enable display at startup"
+msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
 msgstr "পালসার"
 
 #: plugins/Pulsars/src/Pulsars.cpp:73
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:115
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -7059,11 +7065,11 @@ msgstr ""
 "উষ্ণতা জনিত সৃষ্ট স্পন্দিত এক্স-রশ্মি বিচ্ছুরণ সহ কোন এক নিঃসঙ্গ নিউট্রন "
 "নক্ষত্র যার কোন বেতার তরঙ্গে স্পন্দিত বিচ্ছুরণ দেখা যায় না ।"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Pulsars Plug-in"
 msgstr "পালসার প্লাগইন"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:116
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
@@ -7074,59 +7080,59 @@ msgstr ""
 "B., Teoh, A. & Hobbs, M., Astron. J., ১২৯, ১৯৯৩-২০০৬ (২০০৫) (%1astro-"
 "ph/0412641%2)) থেকে নেওয়া হয়েছে ।"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Note"
 msgstr "টোটকা"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "পালসারদের অাগে অবশ্যই  ' PSR' শব্দটি থাকতে হবে"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:122
 msgid "Acknowledgment"
 msgstr "কৃতজ্ঞতা স্বীকার"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Vladimir Samodourov"
 msgstr "ভ্লাদিমির সামোডাউরভ"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "পুসচিনো বেতার জ্যোতির্বিজ্ঞান মানমন্দির"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Maciej Serylak"
 msgstr "মাসিএজ সেরিল্যাক"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Nancay Radioastronomical Observatory"
 msgstr "ন্যান্সি বেতার জ্যোতির্বিজ্ঞান মানমন্দির"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 msgid "in France"
 msgstr ", ফ্রান্স"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:221
 msgid "Pulsars is updated"
 msgstr "পালসার তথ্য সংশোধিত করা হয়েছে"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:246
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Pulsars Configuration"
 msgstr "পালসার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:247
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 msgid "Pulsars Plug-in Configuration"
 msgstr "পালসার প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 msgid "Display mode for pulsars"
 msgstr "পালসার প্রদর্শন মোড"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Plot all pulsars without labels"
 msgstr "নাম না দেখিয়ে সমস্ত পালসার গুলি দেখান"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 msgid "Enable display of distribution for pulsars"
 msgstr "পলসারদের বণ্টন প্রদর্শন সক্রিয় করুন"
 
@@ -7202,11 +7208,11 @@ msgstr "কৌনিক দূরত্ব"
 msgid "Discovered year"
 msgstr "আবিষ্কারের সাল"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 msgid "Exoplanets Plug-in"
 msgstr "বহির্গ্রহ প্লাগইন"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -7216,7 +7222,7 @@ msgstr ""
 "সমস্ত তথ্য %1বহির্গ্রহ বিশ্বকোষ%2 থেকে নেওয়া হয়েছে ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:126
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
 msgid ""
 "If you want read full information about plugin, his history and format of "
@@ -7224,39 +7230,39 @@ msgid ""
 msgstr ""
 "এই প্লাগইন, তার ইতিহাস ও তালিকার format সম্বন্ধে বিশদ তথ্য %1এখানে%2 পাবেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Exoplanets is updated"
 msgstr "বহির্গ্রহগুলির তথ্য সংশোধিত হয়েছে"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:251
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:257
 msgid "Exoplanets Configuration"
 msgstr "বহির্গ্রহ বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:252
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:258
 msgid "Exoplanets Plug-in Configuration"
 msgstr "বহির্গ্রহ প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:254
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
 msgid "Update exoplanets data from Internet"
 msgstr "বহির্গ্রহগুলির তথ্য ইন্টারনেট থেকে সংশোধন করুন"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
 msgid "Display mode for exoplanets"
 msgstr "বহির গ্রহ প্রদর্শন মোড"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:262
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
 msgid "Plot all systems with exoplanets without labels"
 msgstr "নাম না দেখিয়ে সমস্ত বহির গ্রহগুলি দেখান"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
 msgid "Enable display of distribution for exoplanets"
 msgstr "বহির গ্রহদের বণ্টন প্রদর্শন সক্রিয় করুন"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 msgid "Display exoplanets since their discovery"
 msgstr "আবিস্কারের সময়ের পরে বহির গ্রহগুলি দেখান"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
 msgid "Enable timeline discovery of exoplanets"
 msgstr "বহির গ্রহ আবিস্কারের সময়সূচি সক্রিয় করুন"
 
