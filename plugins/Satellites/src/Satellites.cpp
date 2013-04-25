@@ -119,7 +119,12 @@ void Satellites::init()
 
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Satellites");
+		// TODO: Compatibility with installation-dir modules? --BM
+		// It seems that the original code couldn't handle them either.
+		QString dirPath = StelFileMgr::getUserDir() + "/modules/Satellites";
+		// TODO: Ideally, this should return a QDir object
+		StelFileMgr::makeSureDirExistsAndIsWritable(dirPath);
+		dataDir.setPath(dirPath);
 
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
@@ -131,7 +136,7 @@ void Satellites::init()
 		// populate settings from main config file.
 		loadSettings();
 
-		catalogPath = StelFileMgr::findFile("modules/Satellites", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/satellites.json";
+		catalogPath = dataDir.absoluteFilePath("satellites.json");
 
 		// Load and find resources used in the plugin
 
@@ -243,14 +248,15 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Satellites::backupJsonFile WARNING - could not remove old satellites.json file";
+				qWarning() << "Satellites: WARNING: unable to remove old catalog file!";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Satellites::backupJsonFile WARNING - failed to copy satellites.json to satellites.json.old";
+		qWarning() << "Satellites: WARNING: failed to back up catalog file as" 
+		           << backupPath;
 		return false;
 	}
 
@@ -926,7 +932,7 @@ bool Satellites::add(const TleData& tleData)
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
 	{
-		qDebug() << "Satellites: added" << tleData.id << tleData.name;
+		qDebug() << "Satellite added:" << tleData.id << tleData.name;
 		satellites.append(sat);
 		sat->setNew();
 		return true;
@@ -1177,45 +1183,44 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Satellites: FAILED to download" << reply->url()
-		           << "Error: " << reply->errorString();
+		qWarning() << "Satellites: FAILED to download"
+		           << reply->url().toString(QUrl::RemoveUserInfo)
+		           << "Error:" << reply->errorString();
 	}
 	else
 	{
 		// download completed successfully.
-		try
+		QString name = QString("tle%1.txt").arg(numberDownloadsComplete);
+		QString path = dataDir.absoluteFilePath(name);
+		// QFile as a child object to the plugin to ease memory management
+		QFile* tmpFile = new QFile(path, this);
+		if (tmpFile->exists())
+			tmpFile->remove();
+		
+		if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text))
 		{
-			// TODO: Keep plugin dir in a member to avoid repeating this? --BM
-			QString name = QString("tle%1.txt").arg(numberDownloadsComplete);
-			QString path = StelFileMgr::findFile("modules/Satellites", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/" + name;
-			// QFile as a child object to the plugin to ease memory management
-			QFile* tmpFile = new QFile(path, this);
-			if (tmpFile->exists())
-				tmpFile->remove();
-
-			if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text))
+			tmpFile->write(reply->readAll());
+			tmpFile->close();
+			
+			// The reply URL can be different form the requested one...
+			QUrl url = reply->request().url();
+			for (int i = 0; i < updateSources.count(); i++)
 			{
-				tmpFile->write(reply->readAll());
-				tmpFile->close();
-				
-				// The reply URL can be different form the requested one...
-				QUrl url = reply->request().url();
-				for (int i = 0; i < updateSources.count(); i++)
+				if (updateSources[i].url == url)
 				{
-					if (updateSources[i].url == url)
-					{
-						updateSources[i].file = tmpFile;
-						tmpFile = 0;
-						break;
-					}
+					updateSources[i].file = tmpFile;
+					tmpFile = 0;
+					break;
 				}
-				if (tmpFile) // Something strange just happened...
-					delete tmpFile; // ...so we have to clean.
 			}
+			if (tmpFile) // Something strange just happened...
+				delete tmpFile; // ...so we have to clean.
 		}
-		catch (std::runtime_error &e)
+		else
 		{
-			qWarning() << "Satellites::updateDownloadComplete: cannot write TLE data to file:" << e.what();
+			qWarning() << "Satellites: cannot save update file:"
+			           << tmpFile->error()
+			           << tmpFile->errorString();
 		}
 	}
 	numberDownloadsComplete++;
@@ -1226,6 +1231,12 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	// TODO: It's better to keep track of the network requests themselves. --BM 
 	if (numberDownloadsComplete < updateSources.size())
 		return;
+	
+	if (progressBar)
+	{
+		delete progressBar;
+		progressBar = 0;
+	}
 	
 	// All files have been downloaded, finish the update
 	TleDataHash newData;
@@ -1242,7 +1253,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			delete updateSources[i].file;
 			updateSources[i].file = 0;
 		}
-	}
+	}	
 	updateSources.clear();
 	updateSatellites(newData);
 }
@@ -1338,6 +1349,16 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	foreach(const SatelliteP& sat, satellites)
 	{
 		totalCount++;
+		
+		// Satellites marked as "user-defined" are protected from updates and
+		// removal.
+		if (sat->userDefined)
+		{
+			qDebug() << "Satellite ignored (user-protected):"
+			         << sat->id << sat->name;
+			continue;
+		}
+		
 		QString id = sat->id;
 		TleData newTle = newTleSets.take(id);
 		if (!newTle.name.isEmpty())
@@ -1400,12 +1421,6 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
-	
-	if (progressBar)
-	{
-		delete progressBar;
-		progressBar = 0;
-	}
 
 	qDebug() << "Satellites: update finished."
 	         << updatedCount << "/" << totalCount << "updated,"
