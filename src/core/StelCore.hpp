@@ -525,9 +525,6 @@ private:
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
 
-	// Upgrade config.ini: rename old key settings to new
-	void upgradeConfigSettings(void);
-
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
 	Mat4d matAltAzToHeliocentricEcliptic;	   // Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic (Vsop87)
