@@ -382,7 +382,11 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 			ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
 
 	}
-	stelCore->moveObserverTo(loc, 0.);	
+	// Planet transition time also set to null to prevent uglyness when
+	// "use landscape location" is enabled for that planet's landscape. --BM
+	// NOTE: I think it also makes sense in the other cases. --BM
+	// FIXME: Avoid the unnecessary change of the location anyway. --BM
+	stelCore->moveObserverTo(loc, 0., 0.);
 }
 
 void LocationDialog::setPositionFromCoords(int )
