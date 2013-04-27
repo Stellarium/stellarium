@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-24 22:33+0700\n"
+"POT-Creation-Date: 2013-04-26 22:39+0300\n"
 "PO-Revision-Date: 2013-04-14 21:33+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-25 05:09+0000\n"
+"X-Launchpad-Export-Date: 2013-04-27 05:12+0000\n"
 "X-Generator: Launchpad (build 16580)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -89,39 +89,39 @@ msgstr "Magnitud: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Mida: %1"
 
-#: src/core/modules/Nebula.cpp:375
+#: src/core/modules/Nebula.cpp:380
 msgid "Galaxy"
 msgstr "Galàxia"
 
-#: src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:383
 msgid "Open cluster"
 msgstr "Cúmul obert"
 
-#: src/core/modules/Nebula.cpp:381
+#: src/core/modules/Nebula.cpp:386
 msgid "Globular cluster"
 msgstr "Cúmul globular"
 
-#: src/core/modules/Nebula.cpp:384
+#: src/core/modules/Nebula.cpp:389
 msgid "Nebula"
 msgstr "Nebulosa"
 
-#: src/core/modules/Nebula.cpp:387
+#: src/core/modules/Nebula.cpp:392
 msgid "Planetary nebula"
 msgstr "Nebulosa planetària"
 
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:395
 msgid "Dark Nebula"
 msgstr "Nebulosa fosca"
 
-#: src/core/modules/Nebula.cpp:393
+#: src/core/modules/Nebula.cpp:398
 msgid "Cluster associated with nebulosity"
 msgstr "Cúmul associat amb nebulosa"
 
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:401
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:404
 msgid "Undocumented type"
 msgstr "Tipus no documentat"
 
@@ -254,16 +254,17 @@ msgstr "Distància: %1 anys llum"
 msgid "Parallax: %1\""
 msgstr "Paral·laxi %1\""
 
-#: src/core/StelObserver.cpp:271
+#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+#: src/core/StelObserver.cpp:272
 msgid "SpaceShip"
 msgstr "Nau espaial"
 
-#: src/core/StelCore.cpp:1421
+#: src/core/StelCore.cpp:1419
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "La correcció està desactivada. Fer servir només si saps que estas fent!"
 
-#: src/core/StelCore.cpp:1424
+#: src/core/StelCore.cpp:1422
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -275,7 +276,7 @@ msgstr ""
 "Relativity Confirmed by Ancient Solar Eclipses</em> (%1). Veure més "
 "informació %2aquí%3"
 
-#: src/core/StelCore.cpp:1427
+#: src/core/StelCore.cpp:1425
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -284,7 +285,7 @@ msgstr ""
 "Aquesta equació empírica va ser publicada per G. M . Clemente a l'article "
 "<em>On the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:1430
+#: src/core/StelCore.cpp:1428
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -297,7 +298,7 @@ msgstr ""
 "Jean Meeus al seu <em>Astronomical Formulae for Calculators</em>. També va "
 "ser adoptada per el programari de PC SunTracker Pro."
 
-#: src/core/StelCore.cpp:1434
+#: src/core/StelCore.cpp:1432
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -307,7 +308,7 @@ msgstr ""
 "(1952) que va ser adoptada a <em>Astronomical Ephemeris</em> i a <em>Canon "
 "of Solar Eclipses</em> per Mucke i Meeus (1983)."
 
-#: src/core/StelCore.cpp:1438
+#: src/core/StelCore.cpp:1436
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -319,7 +320,7 @@ msgstr ""
 "mateixa relació va ser adoptada de manera implícita a les taules syzygy de "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1442
+#: src/core/StelCore.cpp:1440
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -330,7 +331,7 @@ msgstr ""
 "l'article <em>The accelerations of the earth and moon from early "
 "astronomical observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1445
+#: src/core/StelCore.cpp:1443
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -339,7 +340,7 @@ msgstr ""
 "Aquesta equació va ser publicada per F. R. Stephenson a l'article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1448
+#: src/core/StelCore.cpp:1446
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -353,7 +354,7 @@ msgstr ""
 "period 1800-1975</em> (%1) tal com es pot comprovar a les dades publicades "
 "per Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1451
+#: src/core/StelCore.cpp:1449
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -363,7 +364,7 @@ msgstr ""
 "4000 to +2800</em>  de P. Breetagnon i L. Simon (1986) i per el programari "
 "de PC RedShift."
 
-#: src/core/StelCore.cpp:1454
+#: src/core/StelCore.cpp:1452
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -374,12 +375,12 @@ msgstr ""
 "ser article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1457
+#: src/core/StelCore.cpp:1455
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Aquest aalgoritme es fa servir al programari de planetari de PC Guide 7."
 
-#: src/core/StelCore.cpp:1460
+#: src/core/StelCore.cpp:1458
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -389,7 +390,7 @@ msgstr ""
 "Canon of Solar Eclipses: 1986-2035</em> (1987) i en el seu <em>Fifty Year "
 "Canon of Lunar Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1463
+#: src/core/StelCore.cpp:1461
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -398,7 +399,7 @@ msgstr ""
 "Aquesta fórmula va ser obtinguda per K.M. Borkowski (%1) del anàlisi de les "
 "dades recavades de 31 eclipsis solars datats entre el 2137 aC i el 1751 dC."
 
-#: src/core/StelCore.cpp:1466
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -411,7 +412,7 @@ msgstr ""
 "the Period 1800-1988</em> (%1) i les dades s'ajusten als valors "
 "proporcionats per Stephenson i Morrison (1984)."
 
-#: src/core/StelCore.cpp:1469
+#: src/core/StelCore.cpp:1467
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -421,7 +422,7 @@ msgstr ""
 "versió curta del la teoria lunar ELP 2000-85 al seu <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1472
+#: src/core/StelCore.cpp:1470
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -432,7 +433,7 @@ msgstr ""
 "l'article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:1475
+#: src/core/StelCore.cpp:1473
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -441,7 +442,7 @@ msgstr ""
 "F. R. Stepenson va publicar aquesta fórmula al seu llibre <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1478
+#: src/core/StelCore.cpp:1476
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -451,7 +452,7 @@ msgstr ""
 "utilitzat. Taula per 1620..2000, i inclou una variant de Chapront, Chapront-"
 "Touze i Francou (1997) per dades fora de 1620..2000."
 
-#: src/core/StelCore.cpp:1481
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -461,7 +462,7 @@ msgstr ""
 "Laboratory) de la NASA fa servir aquesta fórmula al seu web interactiu %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:1484
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -470,7 +471,7 @@ msgstr ""
 "Aquest polinomi va ser publicat per J. Meeus i L. Simon al seu article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1487
+#: src/core/StelCore.cpp:1485
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -480,7 +481,7 @@ msgstr ""
 "Personal Computer</em> (2000) proporciona polinòmics simples de 3è ordre "
 "quadrant les dades del passat recent."
 
-#: src/core/StelCore.cpp:1490
+#: src/core/StelCore.cpp:1488
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -492,7 +493,7 @@ msgstr ""
 "Tabulations</em> (2002). Es basat en <em>Astronomical Algorithms</em> (1991) "
 "de Jean Meeus."
 
-#: src/core/StelCore.cpp:1493
+#: src/core/StelCore.cpp:1491
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -503,7 +504,7 @@ msgstr ""
 "Stephenson al seu article <em>Historical values of the Earth's clock error "
 "%1T and the calculation of eclipses</em> (%2) amb apèndix a (%3)."
 
-#: src/core/StelCore.cpp:1496
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -516,7 +517,7 @@ msgstr ""
 "amb un cosinus i la funció quadrada. Això es basa en una periodicitat "
 "possible descrit per Stephenson (%2). Veure més informació %3aquí%4."
 
-#: src/core/StelCore.cpp:1499
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -532,11 +533,11 @@ msgstr ""
 "fórmula s'utilitza també a les efemèrides solar, lunar i planetària del "
 "programari SOLEX."
 
-#: src/core/StelCore.cpp:1499
+#: src/core/StelCore.cpp:1497
 msgid "Used by default."
 msgstr "Fet servir per omissió."
 
-#: src/core/StelCore.cpp:1502
+#: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -545,15 +546,15 @@ msgstr ""
 "Aquesta es una fórmula quadràtica per el càlcul de %1T amb coeficients "
 "definits per l'usuari."
 
-#: src/core/StelCore.cpp:1505 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "Error"
 
-#: src/core/StelCore.cpp:1554
+#: src/core/StelCore.cpp:1552
 msgid "with meaningless values outside this range"
 msgstr "amb valors sense sentit fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1580
+#: src/core/StelCore.cpp:1578
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -561,21 +562,21 @@ msgstr ""
 "amb una mitjana d'error de menys d'un segon, màx. 1.9s d'error, i els valors "
 "sense sentit fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1604 src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
 msgid "with zero values outside this range"
 msgstr "amb valors zero fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1614
+#: src/core/StelCore.cpp:1612
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "amb un típic 1-segon de precisió i els valors zero fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1641
+#: src/core/StelCore.cpp:1639
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "El rang vàlid d'ús: entre anys %1 i %2, %3."
 
-#: src/core/StelCore.cpp:1643
+#: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "El rang vàlid d'ús: entre els anys %1 i %2."
@@ -1173,7 +1174,7 @@ msgstr "Ràtio de Leònides excepcional"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Ràtio mes gran (Leònides del 1966)"
 
-#: src/gui/LocationDialog.cpp:410
+#: src/gui/LocationDialog.cpp:424
 msgid "New Location"
 msgstr "Nova localització"
 
