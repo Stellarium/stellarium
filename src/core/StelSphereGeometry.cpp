@@ -759,7 +759,8 @@ bool triangleIntersectsDiscontinuity(StelProjector* projector, const Triplet<Vec
 
 void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
 {
-	const QVector<Vec3d>& vertices = getOctahedronPolygon().fillVertices();
+	const OctahedronPolygon &octahedron = getOctahedronPolygon();
+	const QVector<Vec3d>& vertices = octahedron.fillVertices();
 	StelProjector* projector = params.projector_;
 
 	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
