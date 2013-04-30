@@ -74,9 +74,24 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	($hour,$min,$sec) = split(":",$sRA);
 	# fixed bug in raw data
 	$sec =~ s/-//gi;
+	# fixed bug for Kepler-68
+	if ($starname =~ m/kepler-68/gi) {
+		$hour = 19;
+	}
+	# fixed bug for omi CrB
+	if ($starname =~ m/omi\s CrB/gi) {
+		$hour = 15; $min = 20; $sec = 8.4;
+	}
+	
 	$outRA = $hour."h".$min."m".$sec."s";
 
 	($deg,$min,$sec) = split(":",$sDec);
+	
+	# fixed bug for omi CrB
+	if ($starname =~ m/omi\s CrB/gi) {
+		$deg = 29; $min = 36; $sec = 57.9;
+	}
+	
 	$outDE = $deg."d".$min."m".$sec."s";
 	
 	$sname = $starname;
