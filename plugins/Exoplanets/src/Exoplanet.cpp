@@ -169,7 +169,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Magnitude)
 	{
-		if (Vmag<99)
+		if (Vmag<99 && !GETSTELMODULE(Exoplanets)->getDisplayMode())
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			{
