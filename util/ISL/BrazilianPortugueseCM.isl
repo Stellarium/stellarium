@@ -8,19 +8,19 @@
 ; two periods being displayed).
 
 [LangOptions]
-LanguageName=Portugu<00EA>s (Brasil)
+LanguageName=Português brasileiro
 LanguageID=$0416
 LanguageCodePage=1252
 
 [CustomMessages]
-ForAllUsers=Para todos os usu<00E1>rios
-ForCurrentUserOnly=Apenas para o usu<00E1>rio atual
-RemoveFromPreviousInstallation=Remover os arquivos deixados por uma instala<00E7><00E3>o anterior:
-RemoveMainConfig=Remover o arquivo de configura<00E7><00E3>o principal
-RemovePluginsConfig=Remover os arquivos de configura<00E7><00E3>o dos complementos
+ForAllUsers=Para todos os usuários
+ForCurrentUserOnly=Apenas para o usuário atual
+RemoveFromPreviousInstallation=Remover os arquivos deixados por uma instalação anterior:
+RemoveMainConfig=Remover o arquivo de configuração principal
+RemovePluginsConfig=Remover os arquivos de configuração dos complementos
 RemoveSolarConfig=Remover o arquivo do Sistema Solar
-RemoveUILandscapes=Remover as paisagens instaladas pelo usu<00E1>rio
-RemoveShortcutsConfig=Remover o arquivo de configura<00E7><00E3>o de atalhos
-LastRunLog=Registro da <00FA>ltima execu<00E7><00E3>o
-ChangeLog=Registro de altera<00E7><00F5>es
+RemoveUILandscapes=Remover as paisagens instaladas pelo usuário
+RemoveShortcutsConfig=Remover o arquivo de configuração de atalhos
+LastRunLog=Registro da última execução
+ChangeLog=Registro de alterações
 FallbackMode=(modo de compatibilidade)
