@@ -167,6 +167,7 @@ class Translations
 		N_("Chinese");
 		N_("Egyptian");
 		N_("Inuit");
+		N_("Indian Vedic");
 		N_("Korean");
 		N_("Lakota");
 		N_("Maori");
