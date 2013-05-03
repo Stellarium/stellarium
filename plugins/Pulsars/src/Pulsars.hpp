@@ -168,6 +168,9 @@ private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
+	// Upgrade config.ini: rename old key settings to new
+	void upgradeConfigIni(void);
+
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 

@@ -142,6 +142,8 @@ double Exoplanets::getCallOrder(StelModuleActionName actionName) const
 */
 void Exoplanets::init()
 {
+	upgradeConfigIni();
+
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Exoplanets");
@@ -702,5 +704,17 @@ void Exoplanets::messageTimeout(void)
 	foreach(int i, messageIDs)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
+	}
+}
+
+void Exoplanets::upgradeConfigIni(void)
+{
+	// Upgrade settings for Exoplanets plugin
+	if (conf->contains("Exoplanets/flag_show_exoplanets"))
+	{
+		bool b = conf->value("Exoplanets/flag_show_exoplanets", false).toBool();
+		if (!conf->contains("Exoplanets/enable_at_startup"))
+			conf->setValue("Exoplanets/enable_at_startup", b);
+		conf->remove("Exoplanets/flag_show_exoplanets");
 	}
 }

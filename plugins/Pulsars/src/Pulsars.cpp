@@ -140,6 +140,8 @@ double Pulsars::getCallOrder(StelModuleActionName actionName) const
 */
 void Pulsars::init()
 {
+	upgradeConfigIni();
+
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Pulsars");
@@ -705,3 +707,16 @@ void Pulsars::messageTimeout(void)
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
 }
+
+void Pulsars::upgradeConfigIni(void)
+{
+	// Upgrade settings for Pulsars plugin
+	if (conf->contains("Pulsars/flag_show_pulsars"))
+	{
+		bool b = conf->value("Pulsars/flag_show_pulsars", false).toBool();
+		if (!conf->contains("Pulsars/enable_at_startup"))
+			conf->setValue("Pulsars/enable_at_startup", b);
+		conf->remove("Pulsars/flag_show_pulsars");
+	}
+}
+
