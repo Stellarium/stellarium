@@ -135,6 +135,8 @@ double Quasars::getCallOrder(StelModuleActionName actionName) const
 */
 void Quasars::init()
 {
+	upgradeConfigIni();
+
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Quasars");
@@ -701,5 +703,17 @@ void Quasars::messageTimeout(void)
 	foreach(int i, messageIDs)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
+	}
+}
+
+void Quasars::upgradeConfigIni(void)
+{
+	// Upgrade settings for Quasars plugin
+	if (conf->contains("Quasars/flag_show_quasars"))
+	{
+		bool b = conf->value("Quasars/flag_show_quasars", false).toBool();
+		if (!conf->contains("Quasars/enable_at_startup"))
+			conf->setValue("Quasars/enable_at_startup", b);
+		conf->remove("Quasars/flag_show_quasars");
 	}
 }
