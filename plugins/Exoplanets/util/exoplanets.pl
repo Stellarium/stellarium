@@ -79,7 +79,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$hour = 19;
 	}
 	# fixed bug for omi CrB
-	if ($starname =~ m/omi\s CrB/gi) {
+	if ($starname =~ m/omi\s+CrB/gi) {
 		$hour = 15; $min = 20; $sec = 8.4;
 	}
 	
@@ -88,7 +88,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	($deg,$min,$sec) = split(":",$sDec);
 	
 	# fixed bug for omi CrB
-	if ($starname =~ m/omi\s CrB/gi) {
+	if ($starname =~ m/omi\s+CrB/gi) {
 		$deg = 29; $min = 36; $sec = 57.9;
 	}
 	
