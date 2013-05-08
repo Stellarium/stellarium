@@ -85,6 +85,9 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$deg = 29; $min = 36; $sec = 57.9;
 	}
 	
+	$sec =~ s/-//gi;
+	$sect =~ s/-//gi;
+	
 	$outRA = $hour."h".$mint."m".$sect."s";
 	$outDE = $deg."d".$min."m".$sec."s";
 	
