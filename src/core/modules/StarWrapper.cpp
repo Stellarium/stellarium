@@ -80,6 +80,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	QString str;
 
 	QTextStream oss(&str);
+	const QString varType = StarMgr::getGCVSVariabilityType(s->hip);
+	const float maxVMag = StarMgr::getGCVSMaxMagnitude(s->hip);
+	const float magFlag = StarMgr::getGCVSMagnitudeFlag(s->hip);
+	const float minVMag = StarMgr::getGCVSMinMagnitude(s->hip);
+	const QString photoVSys = StarMgr::getGCVSPhotometricSystem(s->hip);
+	const double vEpoch = StarMgr::getGCVSEpoch(s->hip);
+	const double vPeriod = StarMgr::getGCVSPeriod(s->hip);
+	const int vMm = StarMgr::getGCVSMM(s->hip);
 	if (s->hip)
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -87,17 +95,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
 		const QString sciName = StarMgr::getSciName(s->hip);
+		const QString varSciName = StarMgr::getGCVSName(s->hip);
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
-			if (commonNameI18!="" || sciName!="")
+			if (commonNameI18!="" || sciName!="" || varSciName!="")
 			{
 				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
 				if (commonNameI18!="" && sciName!="")
 					oss << "(";
 				oss << (sciName=="" ? "" : sciName);
-				if (commonNameI18!="" && sciName!="")
+				if (varSciName!="" && varSciName!=sciName)
+					oss << varSciName;
+				if (commonNameI18!="" && sciName!="" && varSciName!="")
 					oss << ")";
 				nameWasEmpty=false;
 			}
@@ -114,12 +125,33 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << "</h2>";
 	}
 
+	bool ebsFlag = false;
 	if (flags&Extra1)
 	{
 		if (s->componentIds)
 			oss << q_("Type: <b>%1</b>").arg(q_("double star")) << "<br />";
+		else if(!varType.isEmpty())
+		{
+			if (QString("FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+				oss << q_("Type: <b>%1</b>").arg(q_("eruptive variable star")) << "<br />";
+			else if (QString("ACYG BCEP BCEPS CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB").contains(varType))
+				oss << q_("Type: <b>%1</b>").arg(q_("pulsating variable star")) << "<br />";
+			else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
+				oss << q_("Type: <b>%1</b>").arg(q_("rotating variable star")) << "<br />";
+			else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
+				oss << q_("Type: <b>%1</b>").arg(q_("cataclysmic variable star")) << "<br />";
+			else if (QString("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD").contains(varType))
+			{
+				oss << q_("Type: <b>%1</b>").arg(q_("eclipsing binary system")) << "<br />";
+				ebsFlag = true;
+			}
+			else
+				oss << q_("Type: <b>%1</b>").arg(q_("variable star")) << "<br />";
+			oss << q_("Type of variability: %1").arg(varType) << "<br />";
+		}
 		else
 			oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
+
 	}
 
 	if (flags&Magnitude)
@@ -136,18 +168,44 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core, false)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
 
+	if (flags&Magnitude)
+	{
+		if (!varType.isEmpty())
+		{
+			if (magFlag==2)
+				oss << q_("Amplitude: %1").arg(minVMag) << "<br />";
+			else
+				oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(maxVMag).arg(QChar(0x00F7)).arg(minVMag).arg(photoVSys) << "<br />";
+		}
+	}
+
 	oss << getPositionInfoString(core, flags);
 
 	if (s->spInt && flags&Extra1)
 	{
-		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br>";
+		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br />";
 	}
 
 	if ((flags&Distance) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
 
 	if (s->plx && flags&Extra2)
-		oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
+		oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br />";
+
+	if (vEpoch>0 && flags&Extra1)
+		oss << q_("Epoch for maximum light: %1 JD").arg(vEpoch) << "<br />";
+
+	if (vPeriod>0 && flags&Extra1)
+		oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
+
+	if (vMm>0 && flags&Extra1)
+	{
+		if (ebsFlag)
+			oss << q_("Duration of eclipse: %1%").arg(vMm) << "<br />";
+		else
+			oss << q_("Rising time: %1%").arg(vMm) << "<br />";
+	}
+
 
 	StelObject::postProcessInfoString(str, flags);
 
