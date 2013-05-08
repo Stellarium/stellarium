@@ -2,17 +2,8 @@
 
 $SC = "./vcat-hip.dat"; 	# Source
 $OC = "./gcvs_hip_part.dat"; 	# Destination
-$Hdr = "./header.txt";
-
-open(HDR, "$Hdr");
-@bf = <HDR>;
-close HDR;
 
 open (OC, ">$OC");
-for ($i=0;$i<scalar(@bf);$i++) {
-    print OC $bf[$i];
-}
-
 open (SC, "$SC");
 while (<SC>) {
     $rawstring = $_;
@@ -37,6 +28,7 @@ while (<SC>) {
     $periodstr =~ s/(\s+)//gi;
     $mmstr =~ s/(\s+)//gi;
     $sclassstr =~ s/(\s+)//gi;
+    $flagstr =~ s/(\s+)//gi; 
     
     $designationstr =~ s/alf/α/;
     $designationstr =~ s/bet/β/;
@@ -74,30 +66,7 @@ while (<SC>) {
 	$ampflag = 3;
     }
     
-    if ($flagstr eq 'V' || $flagstr eq 'V ') {
-	$flag = 0;
-    }
-    if ($flagstr eq 'Hp') {
-	$flag = 1;
-    }
-    if ($flagstr eq 'B' || $flagstr eq 'B ') {
-	$flag = 2;
-    }
-    if ($flagstr eq 'U' || $flagstr eq 'U ') {
-	$flag = 3;
-    }
-    if ($flagstr eq 'p' || $flagstr eq 'p ') {
-	$flag = 4;
-    }
-    if ($flagstr eq 'K' || $flagstr eq 'K ') {
-	$flag = 5;
-    }
-    if ($flagstr eq 'Y' || $flagstr eq 'Y ') {
-	$flag = 6;
-    }
-
-    
-    print OC $hipstr."\t".$designationstr."\t".$vclassstr."\t".$maxmagstr."\t".$ampflag."\t".$minmagstr."\t".$flag."\t".$epochstr."\t".$periodstr."\t".$mmstr."\t".$sclassstr."\n";
+    print OC $hipstr."\t".$designationstr."\t".$vclassstr."\t".$maxmagstr."\t".$ampflag."\t".$minmagstr."\t".$flagstr."\t".$epochstr."\t".$periodstr."\t".$mmstr."\t".$sclassstr."\n";
 }
 close SC;
 close OC;
