@@ -695,7 +695,7 @@ template<class T> void Vector4<T>::operator+=(const Vector4<T>& a)
 
 template<class T> void Vector4<T>::operator-=(const Vector4<T>& a)
 {
-	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a/v[3];
+	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a.v[3];
 }
 
 template<class T> void Vector4<T>::operator*=(T s)
