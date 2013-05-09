@@ -51,6 +51,7 @@ while (<SC>) {
     $designationstr =~ s/tau/τ/;
     $designationstr =~ s/ups/υ/;
     $designationstr =~ s/phi/φ/;
+    $designationstr =~ s/ksi/χ/;
     $designationstr =~ s/khi/χ/;
     $designationstr =~ s/psi/ψ/;
     $designationstr =~ s/ome/ω/;
