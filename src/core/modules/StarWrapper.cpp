@@ -108,7 +108,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << (sciName=="" ? "" : sciName);
 				if (varSciName!="" && varSciName!=sciName)
 					oss << varSciName;
-				if (commonNameI18!="" && sciName!="" && varSciName!="")
+				if (commonNameI18!="" && sciName!="")
 					oss << ")";
 				nameWasEmpty=false;
 			}
