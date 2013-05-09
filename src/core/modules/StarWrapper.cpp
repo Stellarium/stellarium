@@ -107,7 +107,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 					oss << "(";
 				oss << (sciName=="" ? "" : sciName);
 				if (varSciName!="" && varSciName!=sciName)
-					oss << varSciName;
+					oss << (sciName=="" ? "" : " - ") << varSciName;
 				if (commonNameI18!="" && sciName!="")
 					oss << ")";
 				nameWasEmpty=false;
@@ -128,29 +128,41 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	bool ebsFlag = false;
 	if (flags&Extra1)
 	{
-		if (s->componentIds)
-			oss << q_("Type: <b>%1</b>").arg(q_("double star")) << "<br />";
-		else if(!varType.isEmpty())
+		QString varstartype = "";
+		QString startype = "";
+		if(!varType.isEmpty())
 		{
 			if (QString("FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
-				oss << q_("Type: <b>%1</b>").arg(q_("eruptive variable star")) << "<br />";
+				varstartype = q_("eruptive variable star");
 			else if (QString("ACYG BCEP BCEPS CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB").contains(varType))
-				oss << q_("Type: <b>%1</b>").arg(q_("pulsating variable star")) << "<br />";
+				varstartype = q_("pulsating variable star");
 			else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
-				oss << q_("Type: <b>%1</b>").arg(q_("rotating variable star")) << "<br />";
+				varstartype = q_("rotating variable star");
 			else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
-				oss << q_("Type: <b>%1</b>").arg(q_("cataclysmic variable star")) << "<br />";
+				varstartype = q_("cataclysmic variable star");
 			else if (QString("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD").contains(varType))
 			{
-				oss << q_("Type: <b>%1</b>").arg(q_("eclipsing binary system")) << "<br />";
+				varstartype = q_("eclipsing binary system");
 				ebsFlag = true;
 			}
 			else
-				oss << q_("Type: <b>%1</b>").arg(q_("variable star")) << "<br />";
-			oss << q_("Type of variability: %1").arg(varType) << "<br />";
+				varstartype = q_("variable star");
 		}
+
+		if (s->componentIds)
+			startype = q_("double star");
 		else
-			oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
+			startype = q_("star");
+
+		if (!varType.isEmpty())
+		{
+			if (s->componentIds)
+				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype) << "<br />";
+			else
+				oss << q_("Type: <b>%1</b>").arg(varstartype) << "<br />";
+			oss << q_("Type of variability: %1").arg(varType) << "<br />";
+		} else
+			oss << q_("Type: <b>%1</b>").arg(startype) << "<br />";
 
 	}
 
