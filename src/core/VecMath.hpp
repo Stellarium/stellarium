@@ -356,6 +356,11 @@ template<class T> void Vector2<T>::operator*=(T s)
 	v[0] *= s; v[1] *= s;
 }
 
+template<class T> void Vector2<T>::operator/=(T s)
+{
+	v[0] /= s; v[1] /= s;
+}
+
 template<class T> Vector2<T> Vector2<T>::operator-() const
 {
 	return Vector2<T>(-v[0], -v[1]);
@@ -701,6 +706,11 @@ template<class T> void Vector4<T>::operator-=(const Vector4<T>& a)
 template<class T> void Vector4<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s; v[3] *= s;
+}
+
+template<class T> void Vector4<T>::operator/=(T s)
+{
+	v[0] /= s; v[1] /= s; v[2] /= s; v[3] /= s;
 }
 
 template<class T> Vector4<T> Vector4<T>::operator-() const
