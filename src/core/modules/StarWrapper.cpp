@@ -168,13 +168,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-                oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-											      QString::number(getVMagnitude(core, true), 'f', 2),
-											      QString::number(s->getBV(), 'f', 2)) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-								       QString::number(s->getBV(), 'f', 2)) << "<br>";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+													QString::number(getVMagnitude(core, true), 'f', 2),
+													QString::number(s->getBV(), 'f', 2)) << "<br>";
+		else
+			oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+									       QString::number(s->getBV(), 'f', 2)) << "<br>";
 	}
 
 	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
@@ -205,10 +205,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br />";
 
 	if (vEpoch>0 && flags&Extra1)
+	{
+		double vsEpoch = 2400000+vEpoch;
 		if (ebsFlag)
-			oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(2400000+vEpoch, 'f', 5)) << "<br />";
+			oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
 		else
-			oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(2400000+vEpoch, 'f', 5)) << "<br />";
+			oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
+	}
 
 	if (vPeriod>0 && flags&Extra1)
 		oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
