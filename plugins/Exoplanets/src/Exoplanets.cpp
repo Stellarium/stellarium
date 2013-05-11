@@ -117,8 +117,7 @@ void Exoplanets::deinit()
 {
 	ep.clear();
 	if(NULL != texPointer)    {delete texPointer;}
-	if(NULL != markerTexture) {delete markerTexture;}
-	texPointer = markerTexture = NULL;
+	if(NULL != markerTexture) {delete markerTexture;}	
 }
 
 void Exoplanets::update(double) //deltaTime
