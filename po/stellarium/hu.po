@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-03 12:52+0700\n"
-"PO-Revision-Date: 2013-04-21 11:32+0000\n"
+"POT-Creation-Date: 2013-05-05 16:53+0700\n"
+"PO-Revision-Date: 2013-05-06 20:28+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-04 05:19+0000\n"
+"X-Launchpad-Export-Date: 2013-05-07 05:17+0000\n"
 "X-Generator: Launchpad (build 16598)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -494,7 +494,7 @@ msgstr ""
 #: src/core/StelCore.cpp:1641
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "Érvényességi időszak: %1 és %2 év között"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -1654,7 +1654,7 @@ msgstr "Inuit"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr ""
+msgstr "Indiai védikus"
 
 #: src/translations.h:171
 msgid "Korean"
@@ -3349,7 +3349,7 @@ msgstr "Telrad nézet"
 
 #: src/translations.h:643
 msgid "Show pulsars"
-msgstr ""
+msgstr "Pulzárok mutatása"
 
 #: src/translations.h:644
 msgid "Pulsars configuration window"
@@ -3357,7 +3357,7 @@ msgstr "Pulzár beállító ablak"
 
 #: src/translations.h:647
 msgid "Show quasars"
-msgstr ""
+msgstr "Kvazárok mutatása"
 
 #: src/translations.h:648
 msgid "Quasars configuration window"
@@ -4135,7 +4135,7 @@ msgstr "Időkorrekció"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
-msgstr ""
+msgstr "A képlet szerkesztése"
 
 #: src/ui_configurationDialog.h:1084
 msgid "Planetarium options"
@@ -4567,7 +4567,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1575
 msgid "Lens: none"
-msgstr ""
+msgstr "Lencse: nincs"
 
 #: plugins/Oculars/src/Oculars.cpp:1585 plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
@@ -4614,7 +4614,7 @@ msgstr "Szenzor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1847
 msgid "&Lens"
-msgstr ""
+msgstr "&Lencsék"
 
 #: plugins/Oculars/src/Oculars.cpp:1848
 msgid "&Previous lens"
@@ -4646,11 +4646,11 @@ msgstr "Következő okulár"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "Előző lencsék"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "Következő lencsék"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4707,11 +4707,11 @@ msgstr "Okulár látszólagos látómezeje"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Szorzó: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 msgid "Lens: None"
-msgstr ""
+msgstr "Lencse: nincs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:605
 msgid "Multiplicity: N/A"
@@ -4719,7 +4719,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Multiplicity of lens"
-msgstr ""
+msgstr "Lencsék szorzója"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -4917,7 +4917,7 @@ msgstr "Lencsék"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplier:"
-msgstr ""
+msgstr "Szorzó:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
