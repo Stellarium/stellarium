@@ -74,6 +74,8 @@ QMap<QString,int> StarMgr::commonNamesIndexI18n;
 QMap<QString,int> StarMgr::commonNamesIndex;
 QHash<int,QString> StarMgr::sciNamesMapI18n;
 QMap<QString,int> StarMgr::sciNamesIndexI18n;
+QHash<int, varstar> StarMgr::varStarsMapI18n;
+QMap<QString, int> StarMgr::varStarsIndexI18n;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -180,6 +182,79 @@ QString StarMgr::getSciName(int hip)
 	if (it!=sciNamesMapI18n.end())
 		return it.value();
 	return QString();
+}
+
+QString StarMgr::getGCVSName(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().designation;
+	return QString();
+}
+
+QString StarMgr::getGCVSVariabilityType(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().vtype;
+	return QString();
+}
+
+float StarMgr::getGCVSMaxMagnitude(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().maxmag;
+	return -99.f;
+}
+
+int StarMgr::getGCVSMagnitudeFlag(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().mflag;
+	return 0;
+}
+
+
+float StarMgr::getGCVSMinMagnitude(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().minmag;
+	return -99.f;
+}
+
+QString StarMgr::getGCVSPhotometricSystem(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().photosys;
+	return QString();
+}
+
+double StarMgr::getGCVSEpoch(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().epoch;
+	return -99.f;
+}
+
+double StarMgr::getGCVSPeriod(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().period;
+	return -99.f;
+}
+
+int StarMgr::getGCVSMM(int hip)
+{
+	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	if (it!=varStarsMapI18n.end())
+		return it.value().Mm;
+	return -99;
 }
 
 void StarMgr::copyDefaultConfigFile()
@@ -624,6 +699,70 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
 }
 
+// Load GCVS from file
+void StarMgr::loadGCVS(const QString& GCVSFile)
+{
+	varStarsMapI18n.clear();
+	varStarsIndexI18n.clear();
+
+	qDebug() << "Loading variable stars from" << GCVSFile;
+	QFile vsFile(GCVSFile);
+	if (!vsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << GCVSFile;
+		return;
+	}
+	const QStringList& allRecords = QString::fromUtf8(vsFile.readAll()).split('\n');
+	vsFile.close();
+
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+
+	// record structure is delimited with a tab character.
+	foreach(const QString& record, allRecords)
+	{
+		++lineNumber;
+		if (record.isEmpty())
+			continue;
+
+		++totalRecords;
+		const QStringList& fields = record.split('\t');
+
+		bool ok;
+		unsigned int hip = fields.at(0).toUInt(&ok);
+		if (!ok)
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << GCVSFile
+				   << " - failed to convert " << fields.at(0) << "to a number";
+			continue;
+		}
+
+		// Don't set the star if it's already set
+		if (varStarsMapI18n.find(hip)!=varStarsMapI18n.end())
+			continue;
+
+		varstar variableStar;
+
+		variableStar.designation = fields.at(1).trimmed();
+		variableStar.vtype = fields.at(2).trimmed();
+		variableStar.maxmag = fields.at(3).toFloat();
+		variableStar.mflag = fields.at(4).toInt();
+		variableStar.minmag = fields.at(5).toFloat();
+		variableStar.photosys = fields.at(6).trimmed();
+		variableStar.epoch = fields.at(7).toDouble();
+		variableStar.period = fields.at(8).toDouble();
+		variableStar.Mm = fields.at(9).toInt();
+		variableStar.stype = fields.at(10).trimmed();
+
+		varStarsMapI18n[hip] = variableStar;
+		varStarsIndexI18n[variableStar.designation.toUpper()] = hip;
+		++readOk;
+	}
+
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "variable stars";
+}
+
 
 int StarMgr::getMaxSearchLevel() const
 {
@@ -849,6 +988,13 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it2.value());
 	}
 
+	// Search by GCVS name
+	QMap<QString,int>::const_iterator it3 = varStarsIndexI18n.find(objw);
+	if (it3!=varStarsIndexI18n.end())
+	{
+		return searchHP(it3.value());
+	}
+
 	return StelObjectP();
 }
 
@@ -919,6 +1065,19 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 			break;
 	}
 
+	for (QMap<QString,int>::const_iterator it(varStarsIndexI18n.lowerBound(objw)); it!=varStarsIndexI18n.end(); ++it)
+	{
+		if (it.key().startsWith(objw))
+		{
+			if (maxNbItem==0)
+				break;
+			result << getGCVSName(it.value());
+			--maxNbItem;
+		}
+		else
+			break;
+	}
+
 	// Add exact Hp catalogue numbers
 	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$");
 	hpRx.setCaseSensitivity(Qt::CaseInsensitive);
@@ -986,6 +1145,20 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
+	// Search for sci names for var stars
+	for (QMap<QString,int>::const_iterator it(varStarsIndexI18n.lowerBound(objw)); it!=varStarsIndexI18n.end(); ++it)
+	{
+		if (it.key().startsWith(objw))
+		{
+			if (maxNbItem==0)
+				break;
+			result << getGCVSName(it.value());
+			--maxNbItem;
+		}
+		else
+			break;
+	}
+
 	// Add exact Hp catalogue numbers
 	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$");
 	hpRx.setCaseSensitivity(Qt::CaseInsensitive);
@@ -1034,6 +1207,15 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: could not load scientific star names file: " << e.what();
+	}
+
+	try
+	{
+		loadGCVS(StelFileMgr::findFile("stars/default/gcvs_hip_part.dat"));
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: could not load variable stars file: " << e.what();
 	}
 
 	// Turn on sci names/catalog names for western culture only
