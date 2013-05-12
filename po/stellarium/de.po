@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-05 16:53+0700\n"
-"PO-Revision-Date: 2013-04-14 17:44+0000\n"
-"Last-Translator: wschmidt <Unknown>\n"
+"POT-Creation-Date: 2013-05-11 23:41+0700\n"
+"PO-Revision-Date: 2013-05-11 11:08+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-06 05:20+0000\n"
+"X-Launchpad-Export-Date: 2013-05-12 05:17+0000\n"
 "X-Generator: Launchpad (build 16598)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
@@ -58,8 +58,8 @@ msgstr "Planet: "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:120
-#: src/core/modules/StarWrapper.cpp:122
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:162
+#: src/core/modules/StarWrapper.cpp:165
 #: plugins/Satellites/src/Satellite.cpp:244
 #: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
@@ -126,7 +126,7 @@ msgstr "Undokumentierter Typ"
 
 #: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
-#: src/core/modules/StarWrapper.cpp:137 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:181 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolute Helligkeit: %1"
@@ -206,7 +206,7 @@ msgid "Provisional designation: %1"
 msgstr "Vorläufige Bezeichnung: %1"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:155
 #: src/translations.h:151
 msgid "star"
 msgstr "Stern"
@@ -221,37 +221,106 @@ msgstr "Helligkeit: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Scheinbare Helligkeit: <b>%1</b> (durch Extinktion)"
 
-#: src/core/modules/StarWrapper.cpp:120
+#: src/core/modules/StarWrapper.cpp:136
+msgid "eruptive variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:138
+msgid "pulsating variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:140
+msgid "rotating variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:142
+msgid "cataclysmic variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:145
+msgid "eclipsing binary system"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:149
+msgid "variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
 msgstr "Doppelstern"
 
-#: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:160
+#, qt-format
+msgid "Type: <b>%1, %2</b>"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:163
+#, qt-format
+msgid "Type of variability: %1"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "Helligkeit: <b>%1</b> (durch Extinktion: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:132 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:176 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Helligkeit: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:143
+#: src/core/modules/StarWrapper.cpp:188
+#, qt-format
+msgid "Amplitude: %1"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:190
+#, qt-format
+msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektraltyp: %1"
 
-#: src/core/modules/StarWrapper.cpp:147
+#: src/core/modules/StarWrapper.cpp:202
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:196
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Entfernung: %1 Lichtjahre"
 
-#: src/core/modules/StarWrapper.cpp:150
+#: src/core/modules/StarWrapper.cpp:205
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Parallaxe: %1\""
+
+#: src/core/modules/StarWrapper.cpp:211
+#, qt-format
+msgid "Epoch for minimum light: %1 JD"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:213
+#, qt-format
+msgid "Epoch for maximum light: %1 JD"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:217
+#, qt-format
+msgid "Period: %1 days"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:222
+#, qt-format
+msgid "Duration of eclipse: %1%"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:224
+#, qt-format
+msgid "Rising time: %1%"
+msgstr ""
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -1752,7 +1821,7 @@ msgstr "Inuit"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr ""
+msgstr "Indisch-Vedisch"
 
 #: src/translations.h:171
 msgid "Korean"
@@ -3456,7 +3525,7 @@ msgstr "Telrad-Sucher"
 
 #: src/translations.h:643
 msgid "Show pulsars"
-msgstr ""
+msgstr "Pulsare anzeigen"
 
 #: src/translations.h:644
 msgid "Pulsars configuration window"
@@ -3464,7 +3533,7 @@ msgstr "Pulsare-Konfigurationsfenster"
 
 #: src/translations.h:647
 msgid "Show quasars"
-msgstr ""
+msgstr "Quasare anzeigen"
 
 #: src/translations.h:648
 msgid "Quasars configuration window"
@@ -5036,7 +5105,7 @@ msgstr "Objektive"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplier:"
-msgstr ""
+msgstr "Multiplikator:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
@@ -6990,7 +7059,7 @@ msgstr "Aktiviert Anzeige der Quasar-Verteilung"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:275
 msgid "Enable display at startup"
-msgstr ""
+msgstr "Beim Programmstart anzeigen"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
