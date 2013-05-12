@@ -1546,13 +1546,13 @@ double getDeltaTByMeeusSimons(const double jDay)
 	{
 		u = 2.05 + ub;
 		//deltaT = +14.7 - 18.8*u - 22.0*std::pow(u,2) + 173.0*std::pow(u,3) + 6.0*std::pow(u,4);
-		deltaT = (((6.0*u -173.0)*u -22.0)*u -18.8)*u +14.7;
+		deltaT = (((6.0*u +173.0)*u -22.0)*u -18.8)*u +14.7;
 	}
 	else if (year < 1870)
 	{
 		u = 1.55 + ub;
-		//deltaT = +5.7 + 12.7*u + 111.0*std::pow(u,2) - 534.0*std::pow(u,3) + 1654.0*std::pow(u,4);
-		deltaT = (((1654.0*u -534.0)*u +111)*u +12.7)*u +5.7;
+		//deltaT = +5.7 + 12.7*u + 111.0*std::pow(u,2) - 534.0*std::pow(u,3) - 1654.0*std::pow(u,4);
+		deltaT = (((-1654.0*u -534.0)*u +111)*u +12.7)*u +5.7;
 	}
 	else if (year < 1900)
 	{
@@ -1563,8 +1563,8 @@ double getDeltaTByMeeusSimons(const double jDay)
 	else if (year < 1940)
 	{
 		u = 0.80 + ub;
-		//deltaT = +21.4 + 67.0*u + 443.0*std::pow(u,2) + 19.0*std::pow(u,3) + 4441.0*std::pow(u,4);
-		deltaT = (((4441.0*u + 19.0)*u +443.0)*u +67.0)*u +21.4;
+		//deltaT = +21.4 + 67.0*u - 443.0*std::pow(u,2) + 19.0*std::pow(u,3) + 4441.0*std::pow(u,4);
+		deltaT = (((4441.0*u + 19.0)*u -443.0)*u +67.0)*u +21.4;
 	}
 	else if (year < 1990)
 	{
@@ -1575,8 +1575,8 @@ double getDeltaTByMeeusSimons(const double jDay)
 	else if (year <= 2000)
 	{
 		u = 0.05 + ub;
-		//deltaT = +60.8 + 82.0*u + 188.0*std::pow(u,2) - 5034.0*std::pow(u,3);
-		deltaT = ((-5034.0*u +188.0)*u +82.0)*u +60.8;
+		//deltaT = +60.8 + 82.0*u - 188.0*std::pow(u,2) - 5034.0*std::pow(u,3);
+		deltaT = ((-5034.0*u -188.0)*u +82.0)*u +60.8;
 	}
 
 	return deltaT;
