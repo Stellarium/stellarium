@@ -525,6 +525,16 @@ namespace StelUtils
 	//! @return Delta-T in seconds
 	double getDeltaTByReingoldDershowitz(const double jDay);
 
+	//! Get Delta-T estimation for a given date.
+	//! Implementation of algorithm by Banjevic (2006) for DeltaT computation.
+	//! Source: Ancient eclipses and dating the fall of Babylon
+	//! Banjevic, B.
+	//! Publications of the Astronomical Observatory of Belgrade, Vol. 80, p. 251-257 (2006)
+	//! 2006POBeo..80..251B [http://adsabs.harvard.edu/abs/2006POBeo..80..251B]
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByBanjevic(const double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
 	//! For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
