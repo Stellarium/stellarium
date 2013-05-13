@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-11 23:41+0700\n"
-"PO-Revision-Date: 2013-05-03 06:20+0000\n"
+"PO-Revision-Date: 2013-05-12 07:51+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-12 05:16+0000\n"
-"X-Generator: Launchpad (build 16598)\n"
+"X-Launchpad-Export-Date: 2013-05-13 05:15+0000\n"
+"X-Generator: Launchpad (build 16614)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
 msgid "Meridian"
@@ -221,27 +221,27 @@ msgstr "Näennäinen magnitudi: <b>%1</b> (ekstinktiokorjattu)"
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "purkautuva muuttuja"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "sykkivä muuttuja"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "pyörivä muuttuja"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "kataklysminen muuttuja"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "pimennysmuuttuja"
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "muuttuva tähti"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -250,12 +250,12 @@ msgstr "kaksoistähti"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Tyyppi: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type of variability: %1"
-msgstr ""
+msgstr "Muuttujan tyyppi: %1"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -270,12 +270,12 @@ msgstr "Magnitudi: <b>%1</b> (B–V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:188
 #, qt-format
 msgid "Amplitude: %1"
-msgstr ""
+msgstr "Amplitudi: %1"
 
 #: src/core/modules/StarWrapper.cpp:190
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Magnitudiväli: <b>%1</b>%2<b>%3</b> (Fotometrinen systeemi: %4)"
 
 #: src/core/modules/StarWrapper.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -298,27 +298,27 @@ msgstr "Parallaksi: %1\""
 #: src/core/modules/StarWrapper.cpp:211
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Vähimmäisvalon epookki: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:213
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Enimmäisvalon epookki: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Jakso: %1 päivää"
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Pimennyksen kesto: %1%"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Nousuaika: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
