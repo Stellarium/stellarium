@@ -1639,6 +1639,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 	case Banjevic:
 		start	= -2020;
 		finish	= 1620;
+		validRangeAppendix = q_("with zero values outside this range");
 		break;
 	case Custom:
 		// Valid range unknown
