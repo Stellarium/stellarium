@@ -1160,6 +1160,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
+	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
 
 	//Restore the selection

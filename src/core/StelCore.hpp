@@ -116,6 +116,7 @@ public:
 		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
 		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
+		Banjevic,			//!< Banjevic (2006) algorithm for DeltaT
 		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 

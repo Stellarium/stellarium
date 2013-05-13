@@ -1633,6 +1633,33 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	return deltaT;
 }
 
+// Implementation of algorithm by Banjevic (2006) for DeltaT computation.
+double getDeltaTByBanjevic(const double jDay)
+{
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	double u, c;
+
+	if (year>=-2020 && year<=-700)
+	{
+		u = (jDay-2378496.0)/36525.0; // 1800.0=1800-jan-0.5=2378496.0
+		c = 30.86;
+	}
+	else if (year>-700 && year<=1620)
+	{
+		u = (jDay-2385800.0)/36525.0; // 1820.0=1820-jan-0.5=2385800.0
+		c = 31;
+	}
+	else
+	{
+		u = 0.;
+		c = 0.;
+	}
+
+	return c*u*u;
+}
+
 double getMoonSecularAcceleration(const double jDay, const double nd)
 {
 	int year, month, day;
