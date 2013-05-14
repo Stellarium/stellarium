@@ -1117,14 +1117,20 @@ long double secondsSinceStart()
 //  1625.0=1625-jan-0.5=2314579.0
 */
 
-double decYear2DeltaT(const double y)
+// Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
+double getDeltaTByEspenakMeeus(const double jDay)
 {
+	int year, month, day;	
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
 	// Note: the method here is adapted from
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
 	// GZ: I replaced the std::pow() calls by Horner's scheme with reversed factors, it's more accurate and efficient.
 	//     Old code left for readability, but can also be deleted.
+
+	double y = year+((month-1)*30.5+day/31*30.5)/366;
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
@@ -1217,20 +1223,9 @@ double decYear2DeltaT(const double y)
 		//r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
 		// r has been precomputed before, just add the term patching the discontinuity
 		r -= 0.5628*(2150.0-y);
-	}	
+	}
 
 	return r;
-}
-
-// Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
-double getDeltaTByEspenakMeeus(const double jDay)
-{
-	int year, month, day;	
-	getDateFromJulianDay(jDay, &year, &month, &day);
-
-	// approximate "decimal year" = year + (month - 0.5)/12
-	//return decYear2DeltaT(year + (month - 0.5)/12);
-	return decYear2DeltaT(year+((month-1)*30.5+day/31*30.5)/366);
 }
 
 // Implementation of algorithm by Schoch (1931) for DeltaT computation
@@ -1252,7 +1247,7 @@ double getDeltaTByIAU(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
 	// TODO: Calculate Moon's longitude fluctuation
-	return (29.949*u +72.3165)*u +24.349 /* + 1.821*b*/ ;
+	return (29.950*u +72.318)*u +24.349 /* + 1.82144*b */ ;
 }
 
 // Implementation of algorithm by Astronomical Ephemeris (1960) for DeltaT computation, also used by Mucke&Meeus, Canon of Solar Eclipses, Vienna 1983
@@ -1261,7 +1256,7 @@ double getDeltaTByAstronomicalEphemeris(const double jDay)
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
 	// TODO: Calculate Moon's longitude fluctuation
 	// Note: also Mucke&Meeus 1983 ignore b
-	return (29.950*u +72.318)*u +24.349 /* + 1.82144*b */ ;
+	return (29.949*u +72.3165)*u +24.349 /* + 1.821*b*/ ;
 }
 
 // Implementation of algorithm by Tuckerman (1962, 1964) & Goldstine (1973) for DeltaT computation
@@ -1346,12 +1341,12 @@ double getDeltaTByStephensonHoulden(const double jDay)
 	if (year <= 948)
 	{
 		u = (yeardec-948)/100;
-		deltaT = (46.5*u -405.0)*u + 1830.0; // GZ: TODO: merge conflict, did I mess orig -405->+405? Or AW?
+		deltaT = (46.5*u -405.0)*u + 1830.0;
 	}
 	if (948 < year and year <= 1600)
 	{
 		u = (yeardec-1850)/100;
-		deltaT = 25.5*u*u;
+		deltaT = 22.5*u*u;
 	}
 
 	return deltaT;
@@ -1390,7 +1385,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
 	if (-391 < year and year <= 948)
-		deltaT = (42.4*u -495.0)*u + 2177.0;
+		deltaT = (42.4*u +495.0)*u + 2177.0;
 	if (948 < year and year <= 1600)
 		deltaT = (23.6*u +100.0)*u + 102.0;
 
