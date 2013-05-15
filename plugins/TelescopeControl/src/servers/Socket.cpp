@@ -23,6 +23,9 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "Socket.hpp"
+#include "StelCore.hpp"
+#include "StelApp.hpp"
+#include "StelUtils.hpp"
 
 #ifdef Q_OS_WIN32
   #include <windows.h> // GetSystemTimeAsFileTime
@@ -32,6 +35,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 long long int GetNow(void)
 {
+	long long int t;
+	StelCore *core = StelApp::getInstance().getCore();
 #ifdef Q_OS_WIN32
 	union
 	{
@@ -39,12 +44,13 @@ long long int GetNow(void)
 		__int64 t;
 	} tmp;
 	GetSystemTimeAsFileTime(&tmp.file_time);
-	return (tmp.t/10) - 86400000000LL*(369*365+89);
+	t = (tmp.t/10) - 86400000000LL*(369*365+89);
 #else
 	struct timeval tv;
 	gettimeofday(&tv, 0);
-	return tv.tv_sec * 1000000LL + tv.tv_usec;
+	t = tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
+	return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
 }
 
 void Socket::hangup(void)
