@@ -145,15 +145,18 @@ qint64 getNow(void)
 {
 // At the moment this can't be done in a platform-independent way with Qt
 // (QDateTime and QTime don't support microsecond precision)
+	qint64 t;
+	StelCore *core = StelApp::getInstance().getCore();
 #ifdef Q_OS_WIN32
 	FILETIME file_time;
 	GetSystemTimeAsFileTime(&file_time);
-	return (*((__int64*)(&file_time))/10) - 86400000000LL*134774;
+	t = (*((__int64*)(&file_time))/10) - 86400000000LL*134774;
 #else
 	struct timeval tv;
 	gettimeofday(&tv,0);
-	return tv.tv_sec * 1000000LL + tv.tv_usec;
+	t = tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
+	return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
 }
 
 TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox eq) :
