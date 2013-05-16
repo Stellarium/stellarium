@@ -183,9 +183,9 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the catalog.json file
-	//! @return version string, e.g. "0.2.1"
-	int getJsonFileVersion(void);
+	//! Get the version from the "version of the format" value in the catalog.json file
+	//! @return version string, e.g. "1"
+	int getJsonFileFormatVersion(void);
 
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());

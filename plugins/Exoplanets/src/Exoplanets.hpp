@@ -187,9 +187,9 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version of catalog format from the "version" value in the exoplanets.json file
+	//! Get the version of catalog format from the "version of the format" value in the exoplanets.json file
 	//! @return version string, e.g. "1"
-	int getJsonFileVersion(void);
+	int getJsonFileFormatVersion(void);
 
 	//! parse JSON file and load exoplanets to map
 	QVariantMap loadEPMap(QString path=QString());
