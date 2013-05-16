@@ -182,9 +182,9 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the pulsars.json file
+	//! Get the version from the "version of the format" value in the pulsars.json file
 	//! @return version string, e.g. "2"
-	int getJsonFileVersion(void);
+	int getJsonFileFormatVersion(void);
 
 	//! parse JSON file and load pulsars to map
 	QVariantMap loadPSRMap(QString path=QString());
