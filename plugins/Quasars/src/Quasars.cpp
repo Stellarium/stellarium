@@ -186,7 +186,7 @@ void Quasars::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogJsonPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -510,7 +510,7 @@ void Quasars::setQSOMap(const QVariantMap& map)
 	}
 }
 
-int Quasars::getJsonFileVersion(void)
+int Quasars::getJsonFileFormatVersion(void)
 {
 	int jsonVersion = -1;
 	QFile catalogJsonFile(catalogJsonPath);
@@ -528,7 +528,7 @@ int Quasars::getJsonFileVersion(void)
 	}
 
 	catalogJsonFile.close();
-	qDebug() << "Quasars::getJsonFileVersion() version from file:" << jsonVersion;
+	qDebug() << "Quasars::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
 	return jsonVersion;
 }
 

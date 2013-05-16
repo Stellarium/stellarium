@@ -192,7 +192,7 @@ void Exoplanets::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -507,7 +507,7 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 	}
 }
 
-int Exoplanets::getJsonFileVersion(void)
+int Exoplanets::getJsonFileFormatVersion(void)
 {
 	int jsonVersion = -1;
 	QFile jsonEPCatalogFile(jsonCatalogPath);
@@ -525,7 +525,7 @@ int Exoplanets::getJsonFileVersion(void)
 	}
 
 	jsonEPCatalogFile.close();
-	qDebug() << "Exoplanets::getJsonFileVersion() version from file:" << jsonVersion;
+	qDebug() << "Exoplanets::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
 	return jsonVersion;
 }
 
