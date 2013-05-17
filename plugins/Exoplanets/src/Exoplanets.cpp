@@ -306,7 +306,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getEnglishName().toUpper() == englishName)
+		if (eps->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(eps);
 	}
 
@@ -320,7 +320,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getNameI18n().toUpper() == nameI18n)
+		if (eps->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(eps);
 	}
 
@@ -341,7 +341,7 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	{
 		if (eps->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << eps->getNameI18n().toUpper();
+				result << eps->getNameI18n();
 		}
 	}
 
@@ -365,7 +365,7 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 	{
 		if (eps->getEnglishName().toUpper().left(objw.length()) == objw)
 		{
-				result << eps->getEnglishName().toUpper();
+				result << eps->getEnglishName();
 		}
 	}
 

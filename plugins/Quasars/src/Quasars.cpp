@@ -305,10 +305,9 @@ StelObjectP Quasars::searchByName(const QString& englishName) const
 	if (!flagShowQuasars)
 		return NULL;
 
-	QString objw = englishName.toUpper();
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getEnglishName().toUpper() == englishName)
+		if (quasar->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(quasar);
 	}
 
@@ -322,7 +321,7 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getNameI18n().toUpper() == nameI18n)
+		if (quasar->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(quasar);
 	}
 
@@ -343,7 +342,7 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	{
 		if (quasar->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << quasar->getNameI18n().toUpper();
+				result << quasar->getNameI18n();
 		}
 	}
 
@@ -367,7 +366,7 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		if (quasar->getEnglishName().toUpper().left(objw.length()) == objw)
 		{
-				result << quasar->getEnglishName().toUpper();
+				result << quasar->getEnglishName();
 		}
 	}
 
