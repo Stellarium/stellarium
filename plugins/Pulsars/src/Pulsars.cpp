@@ -309,10 +309,9 @@ StelObjectP Pulsars::searchByName(const QString& englishName) const
 	if (!flagShowPulsars)
 		return NULL;
 
-	QString objw = englishName.toUpper();
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getEnglishName().toUpper() == englishName)
+		if (pulsar->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -326,7 +325,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getNameI18n().toUpper() == nameI18n)
+		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -347,7 +346,7 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	{
 		if (pulsar->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << pulsar->getNameI18n().toUpper();
+				result << pulsar->getNameI18n();
 		}
 	}
 
@@ -371,7 +370,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		if (pulsar->getEnglishName().toUpper().left(objw.length()) == objw)
 		{
-				result << pulsar->getEnglishName().toUpper();
+				result << pulsar->getEnglishName();
 		}
 	}
 
