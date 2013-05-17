@@ -371,15 +371,15 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 			discovery.append(p.discovered);
 		}
 	}
-	qSort(discovery.begin(),discovery.end());	
-	if (discovery.at(0)<=year && discovery.at(0)>0)
+	qSort(discovery.begin(),discovery.end());
+	if (!discovery.isEmpty()) 
 	{
-		return true;
+		if (discovery.at(0)<=year && discovery.at(0)>0)
+		{
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 void Exoplanet::update(double deltaTime)
