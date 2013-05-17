@@ -121,6 +121,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^chi/χ/gi;
 	$sname =~ s/^psi/ψ/gi;
 	$sname =~ s/^omega/ω/gi;
+	$sname =~ s/^ome/ω/gi;
 	
 	if (($sRA ne '00:00:00.0') && ($sDec ne '+00:00:00.0')) {
 		# check star
