@@ -7,31 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-13 19:52+0700\n"
-"PO-Revision-Date: 2013-05-04 02:06+0000\n"
+"POT-Creation-Date: 2013-05-16 20:09+0700\n"
+"PO-Revision-Date: 2013-05-17 03:31+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-14 05:26+0000\n"
-"X-Generator: Launchpad (build 16617)\n"
+"X-Launchpad-Export-Date: 2013-05-17 05:28+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
 msgstr "เมริเดียน"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1267
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1270
 msgid "Ecliptic"
 msgstr "สุริยวิถี"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1255
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1258
 msgid "Equator"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1263
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1266
 msgid "Horizon"
 msgstr "ขอบฟ้า"
 
@@ -223,27 +223,27 @@ msgstr "โชติมาตรปรากฏ: <b>%1</b> (โดยการ�
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "ดาวแปรแสงปะทุ"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "ดาวแปรแสงเหตุกระเพื่อม"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "ดาวแปรแสงเหตุการหมุน"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "ดาวแปรแสงรุนแรง"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "ระบบดาวคู่อุปราคา"
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "ดาวแปรแสง"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -252,12 +252,12 @@ msgstr "ดาวคู่"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "ชนิด : <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type of variability: %1"
-msgstr ""
+msgstr "ชนิดของการแปรแสง : %1"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -272,12 +272,12 @@ msgstr "โชติมาตร : <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:188
 #, qt-format
 msgid "Amplitude: %1"
-msgstr ""
+msgstr "แอมพลิจูด : %1"
 
 #: src/core/modules/StarWrapper.cpp:190
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "พิสัยโชติมาตร: <b>%1</b>%2<b>%3</b> (ระบบการวัดแสง : %4)"
 
 #: src/core/modules/StarWrapper.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -310,17 +310,17 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "คาบ: %1 วัน"
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "ช่วงเวลาของอุปราคา : %1%"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "เวลาขึ้น : %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -730,7 +730,7 @@ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "ลองจิจูด/ละติจูดดาราจักร : %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -956,6 +956,7 @@ msgstr "Stephenson (1997)"
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
+"Meeus (ค.ศ. 1998) (กับ Chapront, Chapront-Touze & Francou (ค.ศ. 1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "JPL Horizons"
@@ -3238,16 +3239,16 @@ msgstr "กลับภาพในแนวนอน"
 msgid "Full-screen mode"
 msgstr "โหมดเต็มจอ"
 
-#: src/translations.h:573 src/ui_viewDialog.h:1206
+#: src/translations.h:573 src/ui_viewDialog.h:1209
 msgid "Atmosphere"
 msgstr "บรรยากาศ"
 
-#: src/translations.h:574 src/ui_viewDialog.h:1250
+#: src/translations.h:574 src/ui_viewDialog.h:1253
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "เส้นพิกัดภาคทิศ"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1272
+#: src/translations.h:575 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "ทิศทั้งสี่"
@@ -3276,7 +3277,7 @@ msgstr "เส้นกลุ่มดาว"
 msgid "Nebulas background images"
 msgstr "ภาพพื้นหลังของเนบิวลา"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1249
+#: src/translations.h:581 src/ui_viewDialog.h:1252
 msgid "Ecliptic J2000 grid"
 msgstr "กริดสุริยวิถี J2000"
 
@@ -3290,12 +3291,12 @@ msgstr "เส้นสุริยวิถี"
 msgid "Equator line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1248
+#: src/translations.h:584 src/ui_viewDialog.h:1251
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "กริดศูนย์สูตร"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1247
+#: src/translations.h:585 src/ui_viewDialog.h:1250
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "กริดศูนย์สูตร J2000"
@@ -3304,12 +3305,12 @@ msgstr "กริดศูนย์สูตร J2000"
 msgid "Fog"
 msgstr "หมอก"
 
-#: src/translations.h:587 src/ui_viewDialog.h:1251
+#: src/translations.h:587 src/ui_viewDialog.h:1254
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "กริดกาแล็กซี"
 
-#: src/translations.h:588 src/ui_viewDialog.h:1271
+#: src/translations.h:588 src/ui_viewDialog.h:1274
 msgid "Galactic plane"
 msgstr "ระนาบดาราจักร"
 
@@ -3327,7 +3328,7 @@ msgstr "เส้นขอบฟ้า"
 msgid "Meridian line"
 msgstr "เส้นเมริเดียน"
 
-#: src/translations.h:592 src/ui_viewDialog.h:1199 src/ui_viewDialog.h:1239
+#: src/translations.h:592
 msgid "Nebulas"
 msgstr "เนบิวลา"
 
@@ -3350,8 +3351,8 @@ msgstr "วงโคจรดาวเคราะห์"
 msgid "Planet trails"
 msgstr "รอยการเคลื่อนที่ของดาวเคราะห์"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1213
-#: src/ui_viewDialog.h:1235
+#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "ดาวฤกษ์"
@@ -3476,7 +3477,7 @@ msgstr "วง Telrad"
 
 #: src/translations.h:643
 msgid "Show pulsars"
-msgstr ""
+msgstr "แสดงพัลซาร์"
 
 #: src/translations.h:644
 msgid "Pulsars configuration window"
@@ -3512,7 +3513,7 @@ msgstr "หันกล้องโทรทรรศน์ไปยังพิ
 
 #: src/translations.h:662
 msgid "Show renderer statistics"
-msgstr ""
+msgstr "แสดงสถิติการเรนเดอร์"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:665 src/ui_configurationDialog.h:1160
@@ -3780,8 +3781,8 @@ msgstr "ครอบคลุมการค้นหาใน SIMBAD"
 msgid "Server:"
 msgstr "เซิร์ฟเวอร์:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1275
-#: src/ui_viewDialog.h:1280 src/ui_viewDialog.h:1282
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1283 src/ui_viewDialog.h:1285
 #: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3831,180 +3832,191 @@ msgid "Planets"
 msgstr "ดาวเคราะห์"
 
 #: src/ui_viewDialog.h:1200
+msgid ""
+"Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
+msgid "DSO"
+msgstr "DSO"
+
+#: src/ui_viewDialog.h:1203
 msgid "Planets and satellites"
 msgstr "ดาวเคราะห์และบริวาร"
 
-#: src/ui_viewDialog.h:1201
+#: src/ui_viewDialog.h:1204
 msgid "Show planets"
 msgstr "แสดงดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1205
 msgid "Show planet markers"
 msgstr "แสดงตัวบ่งชี้ดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1203
+#: src/ui_viewDialog.h:1206
 msgid "Show planet orbits"
 msgstr "แสดงวงโคจรของดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1207
 msgid "Simulate light speed"
 msgstr "จำลองตามความเร็วแสง"
 
-#: src/ui_viewDialog.h:1205
+#: src/ui_viewDialog.h:1208
 msgid "Scale Moon"
 msgstr "ขยายขนาดดวงจันทร์"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1210
 msgid "Show atmosphere"
 msgstr "แสดงบรรยากาศ"
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "มลพิษทางแสง:"
 
-#: src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1213
 msgid "pressure, temperature, extinction coefficient"
 msgstr "ความกดอากาศ, อุณหภูมิ, สัมประสิทธิ์การสูญหาย"
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1215
 msgid "Refraction/Extinction settings..."
 msgstr "การตั้งค่าการหักเห/การสูญหาย..."
 
-#: src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "อัตราส่วนจริง:"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "อัตราส่วนสัมพัทธ์"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1219
 msgid "Milky Way brightness:"
 msgstr "ความสว่างของทางช้างเผือก:"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "กะพริบแสง:"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1222
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "ลดแสงของดาวที่สว่างน้อย เมื่อมีวัตถุที่สว่างมากอยู่ในเขตการมองเห็น"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1224
 msgid "Dynamic eye adaptation"
 msgstr "ปรับดวงตาตามสภาพของท้องฟ้า"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1225
 msgid "Shooting Stars"
 msgstr "ดาวตก"
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1227
 msgid "Hourly zenith rate"
-msgstr ""
-
-#: src/ui_viewDialog.h:1226
-msgid "ZHR:"
-msgstr ""
+msgstr "อัตราตกรายชั่วโมงที่จุดเหนือศีรษะ"
 
 #: src/ui_viewDialog.h:1229
+msgid "ZHR:"
+msgstr "ZHR :"
+
+#: src/ui_viewDialog.h:1232
 msgid "Limit Magnitudes (for unaided/binocular observers)"
-msgstr ""
+msgstr "ขอบเขตโชติมาตร (สำหรับผู้ที่สังเกตด้วยตาเปล่า/กล้องสองตา)"
 
-#: src/ui_viewDialog.h:1231
+#: src/ui_viewDialog.h:1234
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "ขอบเขตโชติมาตร"
 
-#: src/ui_viewDialog.h:1233
-msgid "Stars to magnitude"
-msgstr ""
-
-#: src/ui_viewDialog.h:1237
-msgid "Nebulas to magitude"
-msgstr ""
+#: src/ui_viewDialog.h:1236
+msgid "Limit the magnitude of stars"
+msgstr "ขอบเขตโชติมาตรของดาวฤกษ์"
 
 #: src/ui_viewDialog.h:1240
+msgid ""
+"Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+"ขอบเขตโชติมาตรของวัตถุท้องฟ้าห้วงลึก (กระจุกดาว, ดาราจักร และเนบิวลา)"
+
+#: src/ui_viewDialog.h:1243
 msgid "Constellations"
 msgstr "กลุ่มดาว"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1244
 msgid "Show lines"
 msgstr "แสดงเส้น"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1245
 msgid "Show labels"
 msgstr "แสดงป้ายชื่อ"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1246
 msgid "Show boundaries"
 msgstr "แสดงขอบเขต"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1247
 msgid "Show art"
 msgstr "แสดงภาพวาด"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "ความสว่างของภาพกลุ่มดาว:"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1249
 msgid "Celestial Sphere"
 msgstr "ทรงกลมท้องฟ้า"
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1256
 msgid "Show equator line"
 msgstr "แสดงเส้นศูนย์สูตร"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1260
 msgid "Show meridian line"
 msgstr "แสดงเส้นเมริเดียน"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1264
 msgid "Show horizon line"
 msgstr "แสดงเส้นขอบฟ้า"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1268
 msgid "Show ecliptic line"
 msgstr "แสดงเส้นสุริยวิถี"
 
-#: src/ui_viewDialog.h:1269
+#: src/ui_viewDialog.h:1272
 msgid "Show Galactic plane line"
 msgstr "แสดงเส้นระนาบดาราจักร"
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1276
 msgid "Projection"
 msgstr "การฉายภาพ"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1277
 msgid "Add/remove landscapes..."
 msgstr "เพิ่มหรือลบภูมิทัศน์"
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1279
 msgid "Show ground"
 msgstr "แสดงพื้นดิน"
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1280
 msgid "Show fog"
 msgstr "แสดงหมอก"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1281
 msgid "Use associated planet and position"
 msgstr "ใช้ดาวเคราะห์ที่เกี่ยวข้องและตำแหน่ง"
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1282
 msgid "Use this landscape as default"
 msgstr "ใช้ภูมิทัศน์นี้เป็นค่าเริ่มต้น"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1284
 msgid "Use this sky culture as default"
 msgstr "ใช้คุณลักษณะท้องฟ้านี้เป็นค่าเริ่มต้น"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1286
 msgid "Visible"
 msgstr "มองเห็นได้"
 
@@ -4257,7 +4269,7 @@ msgstr "เวลาของระบบ:"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Time correction"
-msgstr ""
+msgstr "ค่าตรวจแก้เวลา"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Edit equation"
@@ -4685,17 +4697,17 @@ msgstr "ขอบเขตภาพปรากฏของเลนส์ใก
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "เลนส์ #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1570
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "เลนส์ #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1575
 msgid "Lens: none"
-msgstr ""
+msgstr "เลนส์ : ไม่มี"
 
 #: plugins/Oculars/src/Oculars.cpp:1585 plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
@@ -4742,7 +4754,7 @@ msgstr "เซนเซอร์ #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1847
 msgid "&Lens"
-msgstr ""
+msgstr "เ&ลนส์"
 
 #: plugins/Oculars/src/Oculars.cpp:1848
 msgid "&Previous lens"
@@ -5037,7 +5049,7 @@ msgstr "เลนส์"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplier:"
-msgstr ""
+msgstr "ตัวคูณ :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""

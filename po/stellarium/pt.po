@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-13 19:52+0700\n"
-"PO-Revision-Date: 2013-05-05 16:42+0000\n"
-"Last-Translator: Falconet <gustavogomes4@hotmail.com>\n"
+"POT-Creation-Date: 2013-05-16 20:09+0700\n"
+"PO-Revision-Date: 2013-05-16 22:18+0000\n"
+"Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-14 05:24+0000\n"
-"X-Generator: Launchpad (build 16617)\n"
+"X-Launchpad-Export-Date: 2013-05-17 05:26+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
 msgstr "Meridiano"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1267
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1270
 msgid "Ecliptic"
 msgstr "Eclíptica"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1255
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1258
 msgid "Equator"
 msgstr "Equador"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1263
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1266
 msgid "Horizon"
 msgstr "Horizonte"
 
@@ -221,27 +221,27 @@ msgstr "Magnitude aparente: <b>%1</b> (por extincção)"
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "estrela variável eruptiva"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "estrela variável pulsante"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "estrela variável rotativa"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "estrela variável cataclísmica"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "sistema binário eclipsante"
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "estrela variável"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -250,12 +250,12 @@ msgstr "estrela dupla"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Tipo: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type of variability: %1"
-msgstr ""
+msgstr "Tipo de variabilidade: %1"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -270,12 +270,12 @@ msgstr "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:188
 #, qt-format
 msgid "Amplitude: %1"
-msgstr ""
+msgstr "Amplitude: %1"
 
 #: src/core/modules/StarWrapper.cpp:190
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Alcance da magnitude: <b>%1</b>%2<b>%3</b> (sistema fotométrico: %4)"
 
 #: src/core/modules/StarWrapper.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -298,27 +298,27 @@ msgstr "Paralaxe: %1\""
 #: src/core/modules/StarWrapper.cpp:211
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Época de luminosidade mínima: %1 dias julianos"
 
 #: src/core/modules/StarWrapper.cpp:213
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Época de luminosidade máxima: %1 dias julianos"
 
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Período: %1 dias"
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Duração do eclipse: %1%"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Tempo de ascensão: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -613,6 +613,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"<p align=\"justify\">Esta solução de B. Banjevic, baseada em Stephenson e "
+"Morrison (1984), foi publicada no artigo <em>Ancient eclipses and dating the "
+"fall of Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1508
 #, qt-format
@@ -1039,7 +1042,7 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1163
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1164
 #, qt-format
@@ -1995,7 +1998,7 @@ msgstr "Analema"
 #. TRANSLATORS: Name of script
 #: src/translations.h:244
 msgid "Sky Culture Tour"
-msgstr ""
+msgstr "Excursão pelas culturas do céu"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:251
@@ -2005,7 +2008,7 @@ msgstr "Visualizar cada uma das paisagens instaladas."
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:253
 msgid "Look at each installed sky culture."
-msgstr ""
+msgstr "Observar cada cultura do céu instalada"
 
 #: src/translations.h:254
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -3298,16 +3301,16 @@ msgstr "Inverter horizontalmente"
 msgid "Full-screen mode"
 msgstr "Modo de ecrã completo"
 
-#: src/translations.h:573 src/ui_viewDialog.h:1206
+#: src/translations.h:573 src/ui_viewDialog.h:1209
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/translations.h:574 src/ui_viewDialog.h:1250
+#: src/translations.h:574 src/ui_viewDialog.h:1253
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Grelha azimutal"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1272
+#: src/translations.h:575 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Pontos cardeais"
@@ -3336,7 +3339,7 @@ msgstr "Linhas da constelação"
 msgid "Nebulas background images"
 msgstr "Imagens de fundo das nebulas"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1249
+#: src/translations.h:581 src/ui_viewDialog.h:1252
 msgid "Ecliptic J2000 grid"
 msgstr "Grade eclíptica J2000"
 
@@ -3350,12 +3353,12 @@ msgstr "Linha eclítica"
 msgid "Equator line"
 msgstr "Linha do equador"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1248
+#: src/translations.h:584 src/ui_viewDialog.h:1251
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Grelha Equatorial"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1247
+#: src/translations.h:585 src/ui_viewDialog.h:1250
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Grelha equatorial J2000"
@@ -3364,12 +3367,12 @@ msgstr "Grelha equatorial J2000"
 msgid "Fog"
 msgstr "Nevoeiro"
 
-#: src/translations.h:587 src/ui_viewDialog.h:1251
+#: src/translations.h:587 src/ui_viewDialog.h:1254
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Grelha galáctica"
 
-#: src/translations.h:588 src/ui_viewDialog.h:1271
+#: src/translations.h:588 src/ui_viewDialog.h:1274
 msgid "Galactic plane"
 msgstr "Plano galáctico"
 
@@ -3387,7 +3390,7 @@ msgstr "Linha do horizonte"
 msgid "Meridian line"
 msgstr "Linha do meridiano"
 
-#: src/translations.h:592 src/ui_viewDialog.h:1199 src/ui_viewDialog.h:1239
+#: src/translations.h:592
 msgid "Nebulas"
 msgstr "Nebulas"
 
@@ -3410,8 +3413,8 @@ msgstr "Órbitas planetárias"
 msgid "Planet trails"
 msgstr "Rastos dos planetas"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1213
-#: src/ui_viewDialog.h:1235
+#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Estrelas"
@@ -3841,8 +3844,8 @@ msgstr "Ampliar a pesquisa com o SIMBAD"
 msgid "Server:"
 msgstr "Servidor:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1275
-#: src/ui_viewDialog.h:1280 src/ui_viewDialog.h:1282
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1283 src/ui_viewDialog.h:1285
 #: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3892,182 +3895,196 @@ msgid "Planets"
 msgstr "Planetas"
 
 #: src/ui_viewDialog.h:1200
+msgid ""
+"Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+"Rótulos e marcadores de objetos do céu profundo (aglomerados estelares, "
+"galáxias e nebulosas)"
+
+#: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
+msgid "DSO"
+msgstr "Objetos do céu profundo"
+
+#: src/ui_viewDialog.h:1203
 msgid "Planets and satellites"
 msgstr "Planetas e satélites"
 
-#: src/ui_viewDialog.h:1201
+#: src/ui_viewDialog.h:1204
 msgid "Show planets"
 msgstr "Mostrar planetas"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1205
 msgid "Show planet markers"
 msgstr "Mostrar marcadores dos planetas"
 
-#: src/ui_viewDialog.h:1203
+#: src/ui_viewDialog.h:1206
 msgid "Show planet orbits"
 msgstr "Mostrar órbitas dos planetas"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1207
 msgid "Simulate light speed"
 msgstr "Simular velocidade luz"
 
-#: src/ui_viewDialog.h:1205
+#: src/ui_viewDialog.h:1208
 msgid "Scale Moon"
 msgstr "Ver a Lua à escala"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1210
 msgid "Show atmosphere"
 msgstr "Mostrar a atmosfera"
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "Poluição luminosa:"
 
-#: src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1213
 msgid "pressure, temperature, extinction coefficient"
 msgstr "Pressão, temperatura, coeficiente de extinção"
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1215
 msgid "Refraction/Extinction settings..."
 msgstr "Configurações de refração/extinção..."
 
-#: src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "Escala absoluta:"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "Escala relativa:"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1219
 msgid "Milky Way brightness:"
 msgstr "Brilho da Via Láctea:"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "Cintilação:"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1222
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "Diminuir intensidade das estrelas quando um objecto muito brilhante está "
 "visível"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1224
 msgid "Dynamic eye adaptation"
 msgstr "Adaptação dinâmica do olho"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1225
 msgid "Shooting Stars"
 msgstr "Estrelas Cadentes"
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1227
 msgid "Hourly zenith rate"
 msgstr "Taxa horária zenital"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1229
 msgid "ZHR:"
 msgstr "THZ:"
 
-#: src/ui_viewDialog.h:1229
+#: src/ui_viewDialog.h:1232
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr "Limitar as magnitudes (para observadores a olho nú/com binóculo)"
 
-#: src/ui_viewDialog.h:1231
+#: src/ui_viewDialog.h:1234
 msgid "Limit Magnitudes"
 msgstr "Limitar as Magnitudes"
 
-#: src/ui_viewDialog.h:1233
-msgid "Stars to magnitude"
-msgstr "Estrelas para a magnitude"
-
-#: src/ui_viewDialog.h:1237
-msgid "Nebulas to magitude"
-msgstr "Nebulosas para a magnitude"
+#: src/ui_viewDialog.h:1236
+msgid "Limit the magnitude of stars"
+msgstr "Limita a magnitude das estrelas"
 
 #: src/ui_viewDialog.h:1240
+msgid ""
+"Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+"Limita a magnitude dos objetos do céu profundo (aglomerados estelares, "
+"galáxias e nebulosas)"
+
+#: src/ui_viewDialog.h:1243
 msgid "Constellations"
 msgstr "Constelações"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1244
 msgid "Show lines"
 msgstr "Mostrar linhas"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1245
 msgid "Show labels"
 msgstr "Mostrar o texto"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1246
 msgid "Show boundaries"
 msgstr "Mostrar limites"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1247
 msgid "Show art"
 msgstr "Mostrar arte"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "Brilho das imagens:"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1249
 msgid "Celestial Sphere"
 msgstr "Esfera Celestial"
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1256
 msgid "Show equator line"
 msgstr "Mostrar linha do Equador"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1260
 msgid "Show meridian line"
 msgstr "Mostrar linha meridiana"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1264
 msgid "Show horizon line"
 msgstr "Mostrar linha do horizonte"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1268
 msgid "Show ecliptic line"
 msgstr "Mostrar linha eclíptica"
 
-#: src/ui_viewDialog.h:1269
+#: src/ui_viewDialog.h:1272
 msgid "Show Galactic plane line"
 msgstr "Mostrar linha do plano galáctico"
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1276
 msgid "Projection"
 msgstr "Projecção"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1277
 msgid "Add/remove landscapes..."
 msgstr "Adicionar/remover paisagens..."
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1279
 msgid "Show ground"
 msgstr "Mostrar superfície"
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1280
 msgid "Show fog"
 msgstr "Mostrar neoeiro"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1281
 msgid "Use associated planet and position"
 msgstr "Utilizar o planeta e posição associados"
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1282
 msgid "Use this landscape as default"
 msgstr "Utilizar esta paisagem como padrão"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1284
 msgid "Use this sky culture as default"
 msgstr "Utilizar esta cultura como padrão"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1286
 msgid "Visible"
 msgstr "Visível"
 
