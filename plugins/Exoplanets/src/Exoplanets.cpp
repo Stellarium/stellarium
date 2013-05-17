@@ -341,14 +341,15 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	{
 		if (eps->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << eps->getNameI18n();
+			result << eps->getNameI18n();
 		}
 	}
 
 	result.sort();
+
 	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
 
-		return result;
+	return result;
 }
 
 QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
@@ -365,14 +366,15 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 	{
 		if (eps->getEnglishName().toUpper().left(objw.length()) == objw)
 		{
-				result << eps->getEnglishName();
+			result << eps->getEnglishName();
 		}
 	}
 
 	result.sort();
+
 	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
 
-		return result;
+	return result;
 }
 
 
