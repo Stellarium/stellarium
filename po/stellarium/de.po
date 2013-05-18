@@ -9,29 +9,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-05 16:53+0700\n"
-"PO-Revision-Date: 2013-04-14 17:44+0000\n"
-"Last-Translator: wschmidt <Unknown>\n"
+"POT-Creation-Date: 2013-05-16 20:09+0700\n"
+"PO-Revision-Date: 2013-05-15 20:59+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-06 05:20+0000\n"
-"X-Generator: Launchpad (build 16598)\n"
+"X-Launchpad-Export-Date: 2013-05-17 05:22+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1267
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1270
 msgid "Ecliptic"
 msgstr "Ekliptik"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1255
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1258
 msgid "Equator"
 msgstr "Äquator"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1263
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1266
 msgid "Horizon"
 msgstr "Horizont"
 
@@ -58,8 +58,8 @@ msgstr "Planet: "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:120
-#: src/core/modules/StarWrapper.cpp:122
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:162
+#: src/core/modules/StarWrapper.cpp:165
 #: plugins/Satellites/src/Satellite.cpp:244
 #: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
@@ -126,7 +126,7 @@ msgstr "Undokumentierter Typ"
 
 #: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
-#: src/core/modules/StarWrapper.cpp:137 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:181 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolute Helligkeit: %1"
@@ -206,7 +206,7 @@ msgid "Provisional designation: %1"
 msgstr "Vorläufige Bezeichnung: %1"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:155
 #: src/translations.h:151
 msgid "star"
 msgstr "Stern"
@@ -221,49 +221,119 @@ msgstr "Helligkeit: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Scheinbare Helligkeit: <b>%1</b> (durch Extinktion)"
 
-#: src/core/modules/StarWrapper.cpp:120
+#: src/core/modules/StarWrapper.cpp:136
+msgid "eruptive variable star"
+msgstr "Eruptiver Veränderlicher"
+
+#: src/core/modules/StarWrapper.cpp:138
+msgid "pulsating variable star"
+msgstr "Pulsierender Veränderlicher"
+
+#: src/core/modules/StarWrapper.cpp:140
+msgid "rotating variable star"
+msgstr "Rotationsveränderlicher"
+
+#: src/core/modules/StarWrapper.cpp:142
+msgid "cataclysmic variable star"
+msgstr "Kataklysmischer Veränderlicher"
+
+#: src/core/modules/StarWrapper.cpp:145
+msgid "eclipsing binary system"
+msgstr "Bedeckungsveränderlicher"
+
+#: src/core/modules/StarWrapper.cpp:149
+msgid "variable star"
+msgstr "Veränderlicher Stern"
+
+#: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
 msgstr "Doppelstern"
 
-#: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:160
+#, qt-format
+msgid "Type: <b>%1, %2</b>"
+msgstr "Typ: <b>%1, %2</b>"
+
+#: src/core/modules/StarWrapper.cpp:163
+#, qt-format
+msgid "Type of variability: %1"
+msgstr "Art der Veränderlichkeit: %1"
+
+#: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "Helligkeit: <b>%1</b> (durch Extinktion: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:132 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:176 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Helligkeit: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:143
+#: src/core/modules/StarWrapper.cpp:188
+#, qt-format
+msgid "Amplitude: %1"
+msgstr "Amplitude: %1"
+
+#: src/core/modules/StarWrapper.cpp:190
+#, qt-format
+msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
+msgstr ""
+"Größenklassenbereich: <b>%1</b>%2<b>%3</b> (Photometrisches System: %4)"
+
+#: src/core/modules/StarWrapper.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektraltyp: %1"
 
-#: src/core/modules/StarWrapper.cpp:147
+#: src/core/modules/StarWrapper.cpp:202
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:196
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Entfernung: %1 Lichtjahre"
 
-#: src/core/modules/StarWrapper.cpp:150
+#: src/core/modules/StarWrapper.cpp:205
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Parallaxe: %1\""
+
+#: src/core/modules/StarWrapper.cpp:211
+#, qt-format
+msgid "Epoch for minimum light: %1 JD"
+msgstr "Epoche für Minimalhelligkeit: JD %1"
+
+#: src/core/modules/StarWrapper.cpp:213
+#, qt-format
+msgid "Epoch for maximum light: %1 JD"
+msgstr "Epoche für Maximalhelligkeit: JD %1"
+
+#: src/core/modules/StarWrapper.cpp:217
+#, qt-format
+msgid "Period: %1 days"
+msgstr "Periode: %1 Tage"
+
+#: src/core/modules/StarWrapper.cpp:222
+#, qt-format
+msgid "Duration of eclipse: %1%"
+msgstr "Verfinsterungsdauer: %1%"
+
+#: src/core/modules/StarWrapper.cpp:224
+#, qt-format
+msgid "Rising time: %1%"
+msgstr "Anstiegszeit: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
 msgid "SpaceShip"
 msgstr "Raumschiff"
 
-#: src/core/StelCore.cpp:1419
+#: src/core/StelCore.cpp:1424
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korrektur ist ausgeschaltet. Nur verwenden, wenn Sie wissen, was Sie tun!"
 
-#: src/core/StelCore.cpp:1422
+#: src/core/StelCore.cpp:1427
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -274,7 +344,7 @@ msgstr ""
 "seinen Artikel <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1) verwendet. Mehr dazu %2hier%3."
 
-#: src/core/StelCore.cpp:1425
+#: src/core/StelCore.cpp:1430
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -283,7 +353,7 @@ msgstr ""
 "Diese empirische Gleichung wurde von G. M. Clemence im Artikel <em>On the "
 "system of astronomical constants</em> veröffentlicht (%1)."
 
-#: src/core/StelCore.cpp:1428
+#: src/core/StelCore.cpp:1433
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -296,7 +366,7 @@ msgstr ""
 "in seinen <em>Astronomical Formulae for Calculators</em> verwendet. Sie "
 "wurde auch im PC-Programm SunTracker Pro eingesetzt."
 
-#: src/core/StelCore.cpp:1432
+#: src/core/StelCore.cpp:1437
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -306,7 +376,7 @@ msgstr ""
 "der <em>Astronomical Ephemeris</em> und im <em>Canon of Solar Eclipses</em> "
 "von Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:1436
+#: src/core/StelCore.cpp:1441
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -317,7 +387,7 @@ msgstr ""
 "und Planeten in 5- und 10-Tagesintervallen von 601 v. Chr. bis 1649 n. Chr. "
 "Auf denselben Grundlagen beruhen die Syzygientafeln von Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1440
+#: src/core/StelCore.cpp:1445
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -328,7 +398,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> publiziert (%1)."
 
-#: src/core/StelCore.cpp:1443
+#: src/core/StelCore.cpp:1448
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -337,7 +407,7 @@ msgstr ""
 "Diese Gleichung wurde von F. R. Stephenson im Artikel <em>Pre-Telescopic "
 "Astronomical Observations</em> publiziert (%1)."
 
-#: src/core/StelCore.cpp:1446
+#: src/core/StelCore.cpp:1451
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -350,7 +420,7 @@ msgstr ""
 "approximations for the correction delta T E.T.-U.T. in the period 1800-"
 "1975</em> (%1) als Anpassungskurve durch Daten von Brouwer (1952) publiziert."
 
-#: src/core/StelCore.cpp:1449
+#: src/core/StelCore.cpp:1454
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -360,7 +430,7 @@ msgstr ""
 "to +2800</em> (P. Bretagnon & L. Simon 1986) und im PC Planetariumsprogramm "
 "RedShift übernommen."
 
-#: src/core/StelCore.cpp:1452
+#: src/core/StelCore.cpp:1457
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -371,12 +441,12 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> veröffentlicht (%1)."
 
-#: src/core/StelCore.cpp:1455
+#: src/core/StelCore.cpp:1460
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Dieser Algorithmus wird im PC-Planetariumsprogramm Guide 7 verwendet."
 
-#: src/core/StelCore.cpp:1458
+#: src/core/StelCore.cpp:1463
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -386,7 +456,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) und in seinem <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989) beschrieben."
 
-#: src/core/StelCore.cpp:1461
+#: src/core/StelCore.cpp:1466
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -395,7 +465,7 @@ msgstr ""
 "Die Formel  wurde von K.M. Borkowski (%1) aus einer Analyse von 31 "
 "Sonnenfinsternisberichten aus der Zeit 2137 v. Chr. und 1715 n.Chr. erstellt."
 
-#: src/core/StelCore.cpp:1464
+#: src/core/StelCore.cpp:1469
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -408,7 +478,7 @@ msgstr ""
 "1988</em> (%1) als Anpassungskurve durch Werte von Stephenson & Morrison "
 "(1984) veröffentlicht."
 
-#: src/core/StelCore.cpp:1467
+#: src/core/StelCore.cpp:1472
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -418,7 +488,7 @@ msgstr ""
 "Version der Mondbahntheorie ELP 2000-85 in ihren <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991) verwendet."
 
-#: src/core/StelCore.cpp:1470
+#: src/core/StelCore.cpp:1475
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -429,7 +499,7 @@ msgstr ""
 "Artikel <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> veröffentlicht (%1)."
 
-#: src/core/StelCore.cpp:1473
+#: src/core/StelCore.cpp:1478
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -438,7 +508,7 @@ msgstr ""
 "F. R. Stephenson veröffentlichte diese Formel in seinem Buch <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1476
+#: src/core/StelCore.cpp:1481
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -449,7 +519,7 @@ msgstr ""
 "verwendet eine Variante von Chapront, Chapront-Touze & Francou (1997) für "
 "Daten außerhalb 1620..2000."
 
-#: src/core/StelCore.cpp:1479
+#: src/core/StelCore.cpp:1484
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -459,7 +529,7 @@ msgstr ""
 "verwenden diese Formel für historische Angaben auf ihrer interaktiven "
 "Website %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1482
+#: src/core/StelCore.cpp:1487
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -469,7 +539,7 @@ msgstr ""
 "Artikel <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1) "
 "veröffentlicht."
 
-#: src/core/StelCore.cpp:1485
+#: src/core/StelCore.cpp:1490
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -479,7 +549,7 @@ msgstr ""
 "Personal Computer</em> (2000) enthält einfache Polynome dritten Grades für "
 "die nahe Vergangenheit."
 
-#: src/core/StelCore.cpp:1488
+#: src/core/StelCore.cpp:1493
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -491,7 +561,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Sie basiert auf Werten aus Jean "
 "Meeus' <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:1491
+#: src/core/StelCore.cpp:1496
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -502,7 +572,7 @@ msgstr ""
 "Artikel <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> veröffentlicht (%2), mit einem Zusatz in (%3)."
 
-#: src/core/StelCore.cpp:1494
+#: src/core/StelCore.cpp:1499
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -516,7 +586,7 @@ msgstr ""
 "Parabelfunktion. Sie basiert auf einer möglichen Periodizität wie von "
 "Stephenson beschrieben (%2). Näheres dazu %3hier%4."
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1502
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -531,11 +601,22 @@ msgstr ""
 "Millennium Canon of Solar Eclipses: -1999 to +3000</em> (2006) verwendet, "
 "ebenso auch im Sonnen- Mond- und PLaneten-Ephemeridenprogramm SOLEX."
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1502
 msgid "Used by default."
 msgstr "Als Vorgabe verwendet."
 
-#: src/core/StelCore.cpp:1500
+#: src/core/StelCore.cpp:1505
+#, qt-format
+msgid ""
+"This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
+"published in article <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
+msgstr ""
+"Diese Lösung von B. Banjevic, basierend auf Stephenson & Morrison (1984), "
+"wurde im Artikel <em>Ancient eclipses and dating the fall of Babylon</em> "
+"publiziert (%1)."
+
+#: src/core/StelCore.cpp:1508
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -544,15 +625,15 @@ msgstr ""
 "Platz für Ihre frei programmierbare quadratische Formel für %1T mit "
 "benutzerdefinerten Koeffizienten!"
 
-#: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1511 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "Fehler"
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1560
 msgid "with meaningless values outside this range"
 msgstr "mit sinnlosen Werten außerhalb dieses Bereichs"
 
-#: src/core/StelCore.cpp:1578
+#: src/core/StelCore.cpp:1586
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -560,22 +641,23 @@ msgstr ""
 "mit einem mittleren Fehler unter einer Sekunde, max. Fehler 1.9s, und "
 "sinnlosen Werten außerhalb des Bereichs"
 
-#: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1610 src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1642
 msgid "with zero values outside this range"
 msgstr "mit Nullwerten außerhalb dieses Bereichs"
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1620
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "mit typischer Genauigkeit von 1 Sekunde und Nullwerten außerhalb dieses "
 "Bereichs"
 
-#: src/core/StelCore.cpp:1639
+#: src/core/StelCore.cpp:1652
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Gültigkeitsbereich: Jahre %1 bis %2, %3."
 
-#: src/core/StelCore.cpp:1641
+#: src/core/StelCore.cpp:1654
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Gültigkeitsbereich: Jahre %1 bis %2."
@@ -959,6 +1041,10 @@ msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1163
+msgid "Banjevic (2006)"
+msgstr "Banjevic (2006)"
+
+#: src/gui/ConfigurationDialog.cpp:1164
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Benutzerdefinierte Gleichung für %1T"
@@ -1752,7 +1838,7 @@ msgstr "Inuit"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr ""
+msgstr "Indisch-Vedisch"
 
 #: src/translations.h:171
 msgid "Korean"
@@ -3218,16 +3304,16 @@ msgstr "Horizontal spiegeln"
 msgid "Full-screen mode"
 msgstr "Vollbildmodus"
 
-#: src/translations.h:573 src/ui_viewDialog.h:1206
+#: src/translations.h:573 src/ui_viewDialog.h:1209
 msgid "Atmosphere"
 msgstr "Atmosphäre"
 
-#: src/translations.h:574 src/ui_viewDialog.h:1250
+#: src/translations.h:574 src/ui_viewDialog.h:1253
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Azimutales Koordinatennetz"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1272
+#: src/translations.h:575 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Himmelsrichtungen"
@@ -3256,7 +3342,7 @@ msgstr "Sternbildlinien"
 msgid "Nebulas background images"
 msgstr "Hintergrundbilder der Nebel"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1249
+#: src/translations.h:581 src/ui_viewDialog.h:1252
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptikales Gradnetz (J2000)"
 
@@ -3270,12 +3356,12 @@ msgstr "Ekliptik"
 msgid "Equator line"
 msgstr "Himmelsäquator"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1248
+#: src/translations.h:584 src/ui_viewDialog.h:1251
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Äquatoriales Koordinatennetz"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1247
+#: src/translations.h:585 src/ui_viewDialog.h:1250
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Äquatoriales Koordinatennetz (J2000)"
@@ -3284,12 +3370,12 @@ msgstr "Äquatoriales Koordinatennetz (J2000)"
 msgid "Fog"
 msgstr "Bodennebel"
 
-#: src/translations.h:587 src/ui_viewDialog.h:1251
+#: src/translations.h:587 src/ui_viewDialog.h:1254
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Galaktisches Koordinatennetz"
 
-#: src/translations.h:588 src/ui_viewDialog.h:1271
+#: src/translations.h:588 src/ui_viewDialog.h:1274
 msgid "Galactic plane"
 msgstr "Galaktische Ebene"
 
@@ -3307,7 +3393,7 @@ msgstr "Horizontlinie"
 msgid "Meridian line"
 msgstr "Meridian"
 
-#: src/translations.h:592 src/ui_viewDialog.h:1199 src/ui_viewDialog.h:1239
+#: src/translations.h:592
 msgid "Nebulas"
 msgstr "Nebel"
 
@@ -3330,8 +3416,8 @@ msgstr "Planetenbahnen"
 msgid "Planet trails"
 msgstr "Planetenspuren"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1213
-#: src/ui_viewDialog.h:1235
+#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Sterne"
@@ -3456,7 +3542,7 @@ msgstr "Telrad-Sucher"
 
 #: src/translations.h:643
 msgid "Show pulsars"
-msgstr ""
+msgstr "Pulsare anzeigen"
 
 #: src/translations.h:644
 msgid "Pulsars configuration window"
@@ -3464,7 +3550,7 @@ msgstr "Pulsare-Konfigurationsfenster"
 
 #: src/translations.h:647
 msgid "Show quasars"
-msgstr ""
+msgstr "Quasare anzeigen"
 
 #: src/translations.h:648
 msgid "Quasars configuration window"
@@ -3760,8 +3846,8 @@ msgstr "Erweiterte Suche mit SIMBAD"
 msgid "Server:"
 msgstr "Server:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1275
-#: src/ui_viewDialog.h:1280 src/ui_viewDialog.h:1282
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1283 src/ui_viewDialog.h:1285
 #: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3811,181 +3897,191 @@ msgid "Planets"
 msgstr "Planeten"
 
 #: src/ui_viewDialog.h:1200
+msgid ""
+"Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
+msgid "DSO"
+msgstr ""
+
+#: src/ui_viewDialog.h:1203
 msgid "Planets and satellites"
 msgstr "Planeten und Satelliten"
 
-#: src/ui_viewDialog.h:1201
+#: src/ui_viewDialog.h:1204
 msgid "Show planets"
 msgstr "Planeten anzeigen"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1205
 msgid "Show planet markers"
 msgstr "Planetenmarkierungen anzeigen"
 
-#: src/ui_viewDialog.h:1203
+#: src/ui_viewDialog.h:1206
 msgid "Show planet orbits"
 msgstr "Planetenbahnen anzeigen"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1207
 msgid "Simulate light speed"
 msgstr "Lichtlaufzeiten berücksichtigen"
 
-#: src/ui_viewDialog.h:1205
+#: src/ui_viewDialog.h:1208
 msgid "Scale Moon"
 msgstr "Mond vergrößern"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1210
 msgid "Show atmosphere"
 msgstr "Atmosphäre anzeigen"
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "Lichtverschmutzung:"
 
-#: src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1213
 msgid "pressure, temperature, extinction coefficient"
 msgstr "Druck, Temperatur, Extinktionskoeffizient"
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1215
 msgid "Refraction/Extinction settings..."
 msgstr "Refraktions-/Extinktionseinstellungen"
 
-#: src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "Absolute Größe:"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "Relative Größe:"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1219
 msgid "Milky Way brightness:"
 msgstr "Milchstraßenhelligkeit:"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "Funkeln (Szintillation):"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1222
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "Lichtschwache Sterne dimmen, falls ein sehr helles Objekt sichtbar ist"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1224
 msgid "Dynamic eye adaptation"
 msgstr "Dynamische Augenadaption"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1225
 msgid "Shooting Stars"
 msgstr "Sternschnuppen"
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1227
 msgid "Hourly zenith rate"
 msgstr "Stündliche Zenitalrate"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1229
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1229
+#: src/ui_viewDialog.h:1232
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr "Grenzgrößenbeschränkung (für freisichtige oder Fernglasbeobachter)"
 
-#: src/ui_viewDialog.h:1231
+#: src/ui_viewDialog.h:1234
 msgid "Limit Magnitudes"
 msgstr "Minimale Helligkeit"
 
-#: src/ui_viewDialog.h:1233
-msgid "Stars to magnitude"
-msgstr "Sterne bis mag"
-
-#: src/ui_viewDialog.h:1237
-msgid "Nebulas to magitude"
-msgstr "Nebelartige bis mag"
+#: src/ui_viewDialog.h:1236
+msgid "Limit the magnitude of stars"
+msgstr ""
 
 #: src/ui_viewDialog.h:1240
+msgid ""
+"Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1243
 msgid "Constellations"
 msgstr "Sternbilder"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1244
 msgid "Show lines"
 msgstr "Linien anzeigen"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1245
 msgid "Show labels"
 msgstr "Beschriftungen anzeigen"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1246
 msgid "Show boundaries"
 msgstr "Sternbildgrenzen anzeigen"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1247
 msgid "Show art"
 msgstr "Sternbildfiguren anzeigen"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "Figurenhelligkeit:"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1249
 msgid "Celestial Sphere"
 msgstr "Himmelskugel"
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1256
 msgid "Show equator line"
 msgstr "Äquator anzeigen"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1260
 msgid "Show meridian line"
 msgstr "Meridian anzeigen"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1264
 msgid "Show horizon line"
 msgstr "Horizont anzeigen"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1268
 msgid "Show ecliptic line"
 msgstr "Ekliptik anzeigen"
 
-#: src/ui_viewDialog.h:1269
+#: src/ui_viewDialog.h:1272
 msgid "Show Galactic plane line"
 msgstr "Galaktischen Äquator anzeigen"
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1276
 msgid "Projection"
 msgstr "Projektion"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1277
 msgid "Add/remove landscapes..."
 msgstr "Ergänze/Entferne Landschaften..."
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1279
 msgid "Show ground"
 msgstr "Boden anzeigen"
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1280
 msgid "Show fog"
 msgstr "Bodennebel darstellen"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1281
 msgid "Use associated planet and position"
 msgstr "Verwende dazugehörigen Planeten und Position"
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1282
 msgid "Use this landscape as default"
 msgstr "Benutze die momentane Landschaft als Standard"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1284
 msgid "Use this sky culture as default"
 msgstr "Benutze diese Sternbilddarstellung als Standardvorgabe"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1286
 msgid "Visible"
 msgstr "Sichtbar"
 
@@ -5036,7 +5132,7 @@ msgstr "Objektive"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplier:"
-msgstr ""
+msgstr "Multiplikator:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
@@ -6990,7 +7086,7 @@ msgstr "Aktiviert Anzeige der Quasar-Verteilung"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:275
 msgid "Enable display at startup"
-msgstr ""
+msgstr "Beim Programmstart anzeigen"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
