@@ -1329,7 +1329,7 @@ double StelCore::getDeltaT(double jDay) const
 		break;
 	case ChaprontMeeus:
 		// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
-		ndot = -26.0; // n.dot = -26.0 "/cy/cy
+		ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByChaprontMeeus(jDay);
 		break;
 	case JPLHorizons:
