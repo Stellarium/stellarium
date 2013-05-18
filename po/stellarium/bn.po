@@ -7,30 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-05 16:53+0700\n"
+"POT-Creation-Date: 2013-05-16 20:09+0700\n"
 "PO-Revision-Date: 2013-05-03 09:46+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-06 05:18+0000\n"
-"X-Generator: Launchpad (build 16598)\n"
+"X-Launchpad-Export-Date: 2013-05-17 05:19+0000\n"
+"X-Generator: Launchpad (build 16626)\n"
 "Language: bn\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1259
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
 msgstr "মূলমধ্য রেখা"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1267
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1270
 msgid "Ecliptic"
 msgstr "সৌরপথ"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1255
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1258
 msgid "Equator"
 msgstr "নিরক্ষরেখা"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1263
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1266
 msgid "Horizon"
 msgstr "দিগন্ত"
 
@@ -57,8 +57,8 @@ msgstr "গ্রহ "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:120
-#: src/core/modules/StarWrapper.cpp:122
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:162
+#: src/core/modules/StarWrapper.cpp:165
 #: plugins/Satellites/src/Satellite.cpp:244
 #: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
@@ -125,7 +125,7 @@ msgstr "নথিভুক্ত না করা জ্যোতিষ্কস
 
 #: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
-#: src/core/modules/StarWrapper.cpp:137 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:181 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "পরম ঔজ্জ্বল্য: %1"
@@ -205,7 +205,7 @@ msgid "Provisional designation: %1"
 msgstr "প্রারম্ভিক অস্থায়ী নাম: %1"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:122
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:155
 #: src/translations.h:151
 msgid "star"
 msgstr "তারা"
@@ -220,48 +220,117 @@ msgstr "ঔজ্জ্বল্য : <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "অাপাত ঔজ্জ্বল্য : <b>%1</b> (by extinction)"
 
-#: src/core/modules/StarWrapper.cpp:120
+#: src/core/modules/StarWrapper.cpp:136
+msgid "eruptive variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:138
+msgid "pulsating variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:140
+msgid "rotating variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:142
+msgid "cataclysmic variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:145
+msgid "eclipsing binary system"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:149
+msgid "variable star"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
 msgstr "দ্বৈত নক্ষত্র"
 
-#: src/core/modules/StarWrapper.cpp:128 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:160
+#, qt-format
+msgid "Type: <b>%1, %2</b>"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:163
+#, qt-format
+msgid "Type of variability: %1"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "ঔজ্জ্বল্য : <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:132 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:176 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্য : <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:143
+#: src/core/modules/StarWrapper.cpp:188
+#, qt-format
+msgid "Amplitude: %1"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:190
+#, qt-format
+msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "বর্ণালীর প্রকৃতি : %1"
 
-#: src/core/modules/StarWrapper.cpp:147
+#: src/core/modules/StarWrapper.cpp:202
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:196
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "দূরত্ব : %1 আলোকবর্ষ"
 
-#: src/core/modules/StarWrapper.cpp:150
+#: src/core/modules/StarWrapper.cpp:205
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "লম্বণ : %1\""
+
+#: src/core/modules/StarWrapper.cpp:211
+#, qt-format
+msgid "Epoch for minimum light: %1 JD"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:213
+#, qt-format
+msgid "Epoch for maximum light: %1 JD"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:217
+#, qt-format
+msgid "Period: %1 days"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:222
+#, qt-format
+msgid "Duration of eclipse: %1%"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:224
+#, qt-format
+msgid "Rising time: %1%"
+msgstr ""
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
 msgid "SpaceShip"
 msgstr "মহাকাশ যান"
 
-#: src/core/StelCore.cpp:1419
+#: src/core/StelCore.cpp:1424
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "সংশোধন নিস্ক্রিয় করা আছে । সম্যক ধারণা থাকলে তবেই সক্রিয় করুন ।"
 
-#: src/core/StelCore.cpp:1422
+#: src/core/StelCore.cpp:1427
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -272,7 +341,7 @@ msgstr ""
 "প্রবন্ধ <em>Einstein's Theory of Relativity Confirmed by Ancient Solar "
 "Eclipses</em> (%1) ব্যবহার করেছেন । বিস্তারিত তথ্য %2এখানে%3 দেখুন ।"
 
-#: src/core/StelCore.cpp:1425
+#: src/core/StelCore.cpp:1430
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -281,7 +350,7 @@ msgstr ""
 "এই বিখ্যাত সূত্রটি G. M. Clemence তাঁর প্রবন্ধ <em>On the system of "
 "astronomical constants</em> (%1) এ প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1428
+#: src/core/StelCore.cpp:1433
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -293,7 +362,7 @@ msgstr ""
 "পরবর্তী পর্যবেক্ষণের উপর ভিত্তি করে তৈরী এবং Jean Meeus তাঁর প্রবন্ধ "
 "<em>Astronomical Formulae for Calculators</em> এ এটি ব্যবহার করেছেন ।"
 
-#: src/core/StelCore.cpp:1432
+#: src/core/StelCore.cpp:1437
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -303,7 +372,7 @@ msgstr ""
 "দ্বারা <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> ও <em>Canon of Solar Eclipses</em> "
 "এ গৃহীত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1436
+#: src/core/StelCore.cpp:1441
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -315,7 +384,7 @@ msgstr ""
 "ছকে দেওয়া আছে । এই একই সম্পর্ক Goldstine (১৯৭৩) সৃষ্ট syzygy ছকেও গৃহিত "
 "হয়েছে ।"
 
-#: src/core/StelCore.cpp:1440
+#: src/core/StelCore.cpp:1445
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -326,7 +395,7 @@ msgstr ""
 "moon from early astronomical observations</em> (%1) নামক প্রবন্ধে এই "
 "সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1443
+#: src/core/StelCore.cpp:1448
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -335,7 +404,7 @@ msgstr ""
 "P. M. Muller এবং F. R. Stephenson <em>Pre-Telescopic Astronomical "
 "Observations</em> (%1) নামক প্রবন্ধে এই সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1446
+#: src/core/StelCore.cpp:1451
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -348,7 +417,7 @@ msgstr ""
 "correction delta T E.T.-U.T. in the period 1800-1975</em> (%1) নামক প্রবন্ধে "
 "প্রকাশ করেন এবং Brouwer (১৯৫২) কর্তৃক যথোপযুক্ত একটি তালিকা প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:1449
+#: src/core/StelCore.cpp:1454
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -358,7 +427,7 @@ msgstr ""
 "Tables from -4000 to +2800</em> (১৯৮৬) ও RedShift নামক কম্পিউটার প্রোগ্রামে "
 "গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1452
+#: src/core/StelCore.cpp:1457
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -369,12 +438,12 @@ msgstr ""
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) নামক প্রবন্ধে এই "
 "সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1455
+#: src/core/StelCore.cpp:1460
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "গ্রহমণ্ডলীর নকশা প্রোগ্রামের সাহায্য ৭ এ এই কার্যপ্রনালীটি ব্যবহৃত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1458
+#: src/core/StelCore.cpp:1463
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -384,7 +453,7 @@ msgstr ""
 "Year Canon of Lunar Eclipses: 1986-2035</em> (১৯৮৯) য় F. Espenak এই "
 "কার্যপ্রনালীটির  উদ্ভাবন করে যান ।"
 
-#: src/core/StelCore.cpp:1461
+#: src/core/StelCore.cpp:1466
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -393,7 +462,7 @@ msgstr ""
 "এই সূত্রটি K.M. Borkowski (%1) ২১৩৭ খ্রীষ্টপূর্বাব্দ থেকে ১৭১৫ খ্রীষ্টাব্দ "
 "পর্যন্ত ঘটা সূর্যগ্রহণগুলির মধ্যের ৩১টির সংগৃহিত তথ্য থেকে তৈরী করেছেন ।"
 
-#: src/core/StelCore.cpp:1464
+#: src/core/StelCore.cpp:1469
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -406,7 +475,7 @@ msgstr ""
 "প্রবন্ধে প্রকাশ করেন এবং Stephenson এবং Morrison (১৯৮৪) কর্তৃক যথোপযুক্ত "
 "একটি তালিকা প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:1467
+#: src/core/StelCore.cpp:1472
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -416,7 +485,7 @@ msgstr ""
 "Programs from 4000 B.C. to A.D. 8000</em> (১৯৯১) এর চন্দ্র সংক্রান্ত ELP "
 "2000-85 উপপাদ্যের ক্ষুদ্র সংস্করণে গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1470
+#: src/core/StelCore.cpp:1475
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -427,7 +496,7 @@ msgstr ""
 "the Earth's Rotation: 700 BC to AD 1990</em> (%1) নামক প্রবন্ধে এই সূত্রটি "
 "প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1473
+#: src/core/StelCore.cpp:1478
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -436,7 +505,7 @@ msgstr ""
 "F. R. Stephenson তাঁর বই <em>Historical Eclipses and Earth's Rotation</em> "
 "(%1) য় এই সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1476
+#: src/core/StelCore.cpp:1481
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -447,7 +516,7 @@ msgstr ""
 "Chapront, Chapront-Touze এবং Francou (১৯৯৭) এর অপেক্ষক অন্তর্ভূক্ত করা হয়ে "
 "থাকে ।"
 
-#: src/core/StelCore.cpp:1479
+#: src/core/StelCore.cpp:1484
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -456,7 +525,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "তার ওয়েবসাইট %1JPL Horizons%2 এ এই সূত্র ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:1482
+#: src/core/StelCore.cpp:1487
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -465,7 +534,7 @@ msgstr ""
 "এই বহুপদী সমীকরনটি J. Meeus এবং L. Simons তাঁদের প্রবন্ধ <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1) এ প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1485
+#: src/core/StelCore.cpp:1490
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -475,7 +544,7 @@ msgstr ""
 "Computer</em> (২০০০) এর ৪র্থ সংস্করণ নিকট অতীত সংক্রান্ত তথ্যোপযোগী ৩য় ঘাতের "
 "বহুপদী সমীকরনটি প্রদান করেন ।"
 
-#: src/core/StelCore.cpp:1488
+#: src/core/StelCore.cpp:1493
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -487,7 +556,7 @@ msgstr ""
 "Tabulations</em> (২০০২) এ প্রকাশ করেন । যদিও এটির ভিত্তি Jean Meeus এর "
 "<em>Astronomical Algorithms</em> (১৯৯১) ।"
 
-#: src/core/StelCore.cpp:1491
+#: src/core/StelCore.cpp:1496
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -498,7 +567,7 @@ msgstr ""
 "the Earth's clock error %1T and the calculation of eclipses</em> (%2) এ এই "
 "গুরুত্বপূর্ণ সমাধানটি প্রকাশ করেন (%3) এ একটি সংযোজন সমেত ।"
 
-#: src/core/StelCore.cpp:1494
+#: src/core/StelCore.cpp:1499
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -511,7 +580,7 @@ msgstr ""
 "করেন । এটি Stephenson (%2) বিবৃত একটি সম্ভাব্য পর্যায়বৃত্তির উপর ভিত্তি করে "
 "নির্মিত । আরও তথ্যের জন্য %3এখানে%4 দেখুন ।"
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1502
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -526,11 +595,19 @@ msgstr ""
 "প্রাপ্ত মানের ছকের সাহায্যে নির্ণিত । এছাড়াও এটি SOLEX নামক সৌরজগত এবং তার "
 "গ্রহ উপগ্রহের পঞ্জিকা নির্ণয়ের প্রোগ্রামে ব্যবহার করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1502
 msgid "Used by default."
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:1500
+#: src/core/StelCore.cpp:1505
+#, qt-format
+msgid ""
+"This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
+"published in article <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
+msgstr ""
+
+#: src/core/StelCore.cpp:1508
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -538,15 +615,15 @@ msgid ""
 msgstr ""
 "এটি ব্যবহারকারী দ্বারা প্রদত্ত সহগ যুক্ত %1T নির্ণয় করার দ্বিঘাত সমীকরন"
 
-#: src/core/StelCore.cpp:1503 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1511 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1560
 msgid "with meaningless values outside this range"
 msgstr "এই সীমার বাইরে অর্থহীন মান সমেত"
 
-#: src/core/StelCore.cpp:1578
+#: src/core/StelCore.cpp:1586
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -554,20 +631,21 @@ msgstr ""
 "গড়ে সর্বনিম্ন এক সেকেন্ড ও সর্বোচ্চ ১.৯ সেকেন্ড ত্রুটি এবং এই সীমার বাইরে "
 "অর্থহীন মান সমেত"
 
-#: src/core/StelCore.cpp:1602 src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1610 src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1642
 msgid "with zero values outside this range"
 msgstr "এই সীমার বাইরে ০ মান যুক্ত"
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1620
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "এই সীমার বাইরে সুবিধাজনক ১ সেকেন্ড নির্ভূলতা এবং ০ মান যুক্ত"
 
-#: src/core/StelCore.cpp:1639
+#: src/core/StelCore.cpp:1652
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2, %3 বছরের মধ্যে ।"
 
-#: src/core/StelCore.cpp:1641
+#: src/core/StelCore.cpp:1654
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"
@@ -946,6 +1024,10 @@ msgid "Reijs (2006)"
 msgstr "Reijs (২০০৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1163
+msgid "Banjevic (2006)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1164
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
@@ -3186,16 +3268,16 @@ msgstr "অনুভূমিকভাবে স্ক্রিন ঘোরা�
 msgid "Full-screen mode"
 msgstr "স্ক্রিন জুড়ে প্রদর্শন মোড"
 
-#: src/translations.h:573 src/ui_viewDialog.h:1206
+#: src/translations.h:573 src/ui_viewDialog.h:1209
 msgid "Atmosphere"
 msgstr "বায়ুমন্ডল প্রদর্শন"
 
-#: src/translations.h:574 src/ui_viewDialog.h:1250
+#: src/translations.h:574 src/ui_viewDialog.h:1253
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "দিগংশিক ছক প্রদর্শন"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1272
+#: src/translations.h:575 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "দিকচিহ্ন প্রদর্শন"
@@ -3224,7 +3306,7 @@ msgstr "নক্ষত্রমন্ডলীর রেখাসমূহ প�
 msgid "Nebulas background images"
 msgstr "নীহারিকার পশ্চাদ্পট প্রদর্শন"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1249
+#: src/translations.h:581 src/ui_viewDialog.h:1252
 msgid "Ecliptic J2000 grid"
 msgstr "সৌরপথীয় J2000 ছক"
 
@@ -3238,12 +3320,12 @@ msgstr "সৌরপথ প্রদর্শন"
 msgid "Equator line"
 msgstr "নিরক্ষরেখা প্রদর্শন"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1248
+#: src/translations.h:584 src/ui_viewDialog.h:1251
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "নিরক্ষীয় ছক প্রদর্শন"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1247
+#: src/translations.h:585 src/ui_viewDialog.h:1250
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "ইকুয়েটোরিয়াল J2000 ছক প্রদর্শন"
@@ -3252,12 +3334,12 @@ msgstr "ইকুয়েটোরিয়াল J2000 ছক প্রদর�
 msgid "Fog"
 msgstr "কুয়াশা প্রদর্শন"
 
-#: src/translations.h:587 src/ui_viewDialog.h:1251
+#: src/translations.h:587 src/ui_viewDialog.h:1254
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "নক্ষত্রলৌকিক ছক প্রদর্শন"
 
-#: src/translations.h:588 src/ui_viewDialog.h:1271
+#: src/translations.h:588 src/ui_viewDialog.h:1274
 msgid "Galactic plane"
 msgstr "নক্ষত্রলৌকিক সমতল প্রদর্শন"
 
@@ -3275,7 +3357,7 @@ msgstr "দিগন্তরেখা প্রদর্শন"
 msgid "Meridian line"
 msgstr "মূলমধ্যরেখা প্রদর্শন"
 
-#: src/translations.h:592 src/ui_viewDialog.h:1199 src/ui_viewDialog.h:1239
+#: src/translations.h:592
 msgid "Nebulas"
 msgstr "নীহারিকা প্রদর্শন"
 
@@ -3298,8 +3380,8 @@ msgstr "গ্রহের কক্ষপথ প্রদর্শন"
 msgid "Planet trails"
 msgstr "গ্রহের গমনপথ প্রদর্শন"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1213
-#: src/ui_viewDialog.h:1235
+#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "নক্ষত্র প্রদর্শন"
@@ -3728,8 +3810,8 @@ msgstr "SIMBAD-এ বিস্তৃত অনুসন্ধান"
 msgid "Server:"
 msgstr "সার্ভার :"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1275
-#: src/ui_viewDialog.h:1280 src/ui_viewDialog.h:1282
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1283 src/ui_viewDialog.h:1285
 #: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3779,180 +3861,190 @@ msgid "Planets"
 msgstr "গ্রহ"
 
 #: src/ui_viewDialog.h:1200
+msgid ""
+"Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
+msgid "DSO"
+msgstr ""
+
+#: src/ui_viewDialog.h:1203
 msgid "Planets and satellites"
 msgstr "গ্রহ এবং উপগ্রহ"
 
-#: src/ui_viewDialog.h:1201
+#: src/ui_viewDialog.h:1204
 msgid "Show planets"
 msgstr "গ্রহগুলি প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1205
 msgid "Show planet markers"
 msgstr "গ্রহের অবস্থান চিহ্নিত করুন"
 
-#: src/ui_viewDialog.h:1203
+#: src/ui_viewDialog.h:1206
 msgid "Show planet orbits"
 msgstr "গ্রহের কক্ষপথ প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1207
 msgid "Simulate light speed"
 msgstr "আলোর গতি অনুকরণ করুন"
 
-#: src/ui_viewDialog.h:1205
+#: src/ui_viewDialog.h:1208
 msgid "Scale Moon"
 msgstr "চাঁদের মাপ"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1210
 msgid "Show atmosphere"
 msgstr "বায়ুমন্ডল প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "আলোক দূষন :"
 
-#: src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1213
 msgid "pressure, temperature, extinction coefficient"
 msgstr "চাপ, তাপমাত্রা, বিলুপ্তির গুণাঙ্ক"
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1215
 msgid "Refraction/Extinction settings..."
 msgstr "প্রতিসরণ / বিলুপ্তি প্রদর্শিত হওয়ার বিন্য়াস ..."
 
-#: src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "পরম মান :"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "আপেক্ষিক মান :"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1219
 msgid "Milky Way brightness:"
 msgstr "ছায়াপথের ঔজ্জ্বলতা:"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "তারার ঝিকমিক:"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1222
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "খুবই উজ্জ্বল জ্যোতিষ্কর সান্যিধ্যে নিস্প্রভ তারার অস্পষ্ট হওয়া"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1224
 msgid "Dynamic eye adaptation"
 msgstr "ডাইনামিক চক্ষু অভিযোজন"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1225
 msgid "Shooting Stars"
 msgstr "উল্কা"
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1227
 msgid "Hourly zenith rate"
 msgstr "প্রতি ঘণ্টায় পরমোন্নতির হার"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1229
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1229
+#: src/ui_viewDialog.h:1232
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr "ঔজ্জ্বলতার সীমা (বাইনাকুলার রা খালি চোখে দেখার জন্য)"
 
-#: src/ui_viewDialog.h:1231
+#: src/ui_viewDialog.h:1234
 msgid "Limit Magnitudes"
 msgstr "সীমিত ঔজ্জ্বলতা"
 
-#: src/ui_viewDialog.h:1233
-msgid "Stars to magnitude"
-msgstr "তারার ঔজ্জ্বলতার মান"
-
-#: src/ui_viewDialog.h:1237
-msgid "Nebulas to magitude"
-msgstr "নিহারীকার ঔজ্জ্বলতার মান"
+#: src/ui_viewDialog.h:1236
+msgid "Limit the magnitude of stars"
+msgstr ""
 
 #: src/ui_viewDialog.h:1240
+msgid ""
+"Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1243
 msgid "Constellations"
 msgstr "তারামণ্ডল"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1244
 msgid "Show lines"
 msgstr "রেখাগুলি প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1245
 msgid "Show labels"
 msgstr "নাম প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1246
 msgid "Show boundaries"
 msgstr "সীমানাগুলি প্রদর্শন করুন"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1247
 msgid "Show art"
 msgstr "তারামণ্ডলের কাল্পনিক চিত্রগুলি প্রদর্শন করুন"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "চিত্রগুলির উজ্জ্বলতা:"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1249
 msgid "Celestial Sphere"
 msgstr "খগোল"
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1256
 msgid "Show equator line"
 msgstr "নিরক্ষরেখা প্রদর্শণ"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1260
 msgid "Show meridian line"
 msgstr "বিষুবরেখা প্রদর্শণ"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1264
 msgid "Show horizon line"
 msgstr "দিগন্তরেখা প্রদর্শণ"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1268
 msgid "Show ecliptic line"
 msgstr "সৌরপথ প্রদর্শণ"
 
-#: src/ui_viewDialog.h:1269
+#: src/ui_viewDialog.h:1272
 msgid "Show Galactic plane line"
 msgstr "মহাজাগতিক সমতল রেখা প্রদর্শণ"
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1276
 msgid "Projection"
 msgstr "অভিক্ষেপন"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1277
 msgid "Add/remove landscapes..."
 msgstr "ভূমিরূপ যোগ/মুছে ফেলুন"
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1279
 msgid "Show ground"
 msgstr "ভূমি প্রদর্শণ করুন"
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1280
 msgid "Show fog"
 msgstr "কুয়াশা প্রদর্শণ করুন"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1281
 msgid "Use associated planet and position"
 msgstr "ভূমিরূপের সাথে যুক্ত গ্রহ এবং অবস্থান ব্যবহার করুন"
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1282
 msgid "Use this landscape as default"
 msgstr "প্রারম্ভিক সূচনা হিসেবে এই ভূমিরূপ ব্যবহার করুন"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1284
 msgid "Use this sky culture as default"
 msgstr "প্রারম্ভিক সূচনা হিসেবে এই মহাকাশ সংস্কৃতির ব্যবহার করুন"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1286
 msgid "Visible"
 msgstr "দৃশ্যমান"
 
