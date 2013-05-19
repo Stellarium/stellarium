@@ -126,6 +126,7 @@ public:
 
 	bool getDisplayMode(void) {return distributionEnabled;}
 	void setDisplayMode(bool b) {distributionEnabled=b;}
+
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -160,6 +161,11 @@ public slots:
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
+
+	//! Define whether the button toggling pulsars should be visible
+	void setFlagShowPulsarsButton(bool b);
+	bool getFlagShowPulsarsButton(void) { return flagShowPulsarsButton; }
+
 
 private:
 	// Font used for displaying our text
@@ -217,6 +223,7 @@ private:
 	// GUI
 	PulsarsDialog* configDialog;
 	bool flagShowPulsars;
+	bool flagShowPulsarsButton;
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;

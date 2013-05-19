@@ -167,14 +167,14 @@ void Exoplanets::init()
 		OffIcon = new QPixmap(":/Exoplanets/btExoplanets-off.png");
 
 		setFlagShowExoplanets(getEnableAtStartup());
-
-		gui->getGuiAction("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Exoplanets"));
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		setFlagShowExoplanetsButton(flagShowExoplanetsButton);
 
 		connect(gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
 		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
+		if (flagShowExoplanetsButton)
+		{
+			connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
+		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -573,6 +573,7 @@ void Exoplanets::restoreDefaultConfigIni(void)
 	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/exoplanets.json");
 	conf->setValue("update_frequency_hours", 72);
+	conf->setValue("flag_show_exoplanets_button", true);
 	conf->endGroup();
 }
 
@@ -587,6 +588,7 @@ void Exoplanets::readSettingsFromConfig(void)
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
 	timelineEnabled = conf->value("timeline_enabled", false).toBool();	
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
 
 	conf->endGroup();
 }
@@ -601,6 +603,7 @@ void Exoplanets::saveSettingsToConfig(void)
 	conf->setValue("distribution_enabled", distributionEnabled);
 	conf->setValue("timeline_enabled", timelineEnabled);
 	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
 
 	conf->endGroup();
 }
@@ -718,4 +721,21 @@ void Exoplanets::upgradeConfigIni(void)
 			conf->setValue("Exoplanets/enable_at_startup", b);
 		conf->remove("Exoplanets/flag_show_exoplanets");
 	}
+}
+
+// Define whether the button toggling exoplanets should be visible
+void Exoplanets::setFlagShowExoplanetsButton(bool b)
+{
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (b==true) {
+		if (toolbarButton==NULL) {
+			// Create the exoplanets button
+			gui->getGuiAction("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Exoplanets"));
+		}
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	} else {
+		gui->getButtonBar()->hideButton("actionShow_Exoplanets");
+	}
+	flagShowExoplanetsButton = b;
 }

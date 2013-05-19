@@ -49,6 +49,7 @@ private slots:
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
+	void setDisplayShowQuasarsButton(int checkState);
 	void updateStateReceiver(Quasars::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);

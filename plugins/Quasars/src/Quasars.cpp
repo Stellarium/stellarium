@@ -161,14 +161,14 @@ void Quasars::init()
 		OffIcon = new QPixmap(":/Quasars/btQuasars-off.png");
 
 		setFlagShowQuasars(getEnableAtStartup());
-
-		gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		setFlagShowQuasarsButton(flagShowQuasarsButton);
 
 		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
+		if (flagShowQuasarsButton)
+		{
+			connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
+		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -572,6 +572,7 @@ void Quasars::restoreDefaultConfigIni(void)
 	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
+	conf->setValue("flag_show_quasars_button", true);
 	conf->endGroup();
 }
 
@@ -585,6 +586,7 @@ void Quasars::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 
 	conf->endGroup();
 }
@@ -598,6 +600,7 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
 	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("flag_show_quasars_button", flagShowQuasarsButton);
 
 	conf->endGroup();
 }
@@ -715,4 +718,21 @@ void Quasars::upgradeConfigIni(void)
 			conf->setValue("Quasars/enable_at_startup", b);
 		conf->remove("Quasars/flag_show_quasars");
 	}
+}
+
+// Define whether the button toggling quasars should be visible
+void Quasars::setFlagShowQuasarsButton(bool b)
+{
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (b==true) {
+		if (toolbarButton==NULL) {
+			// Create the quasars button
+			gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
+		}
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	} else {
+		gui->getButtonBar()->hideButton("actionShow_Quasars");
+	}
+	flagShowQuasarsButton = b;
 }

@@ -166,14 +166,14 @@ void Pulsars::init()
 		OffIcon = new QPixmap(":/Pulsars/btPulsars-off.png");
 
 		setFlagShowPulsars(getEnableAtStartup());
-
-		gui->getGuiAction("actionShow_Pulsars")->setChecked(flagShowPulsars);
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Pulsars"));
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		setFlagShowPulsarsButton(flagShowPulsarsButton);
 
 		connect(gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Pulsars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowPulsars(bool)));
+		if (flagShowPulsarsButton)
+		{
+			connect(gui->getGuiAction("actionShow_Pulsars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowPulsars(bool)));
+		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -574,6 +574,7 @@ void Pulsars::restoreDefaultConfigIni(void)
 	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/pulsars.json");
 	conf->setValue("update_frequency_days", 100);
+	conf->setValue("flag_show_pulsars_button", true);
 	conf->endGroup();
 }
 
@@ -587,6 +588,7 @@ void Pulsars::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
 	conf->endGroup();
 }
@@ -600,6 +602,7 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
 	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
 
 	conf->endGroup();
 }
@@ -719,3 +722,19 @@ void Pulsars::upgradeConfigIni(void)
 	}
 }
 
+// Define whether the button toggling pulsars should be visible
+void Pulsars::setFlagShowPulsarsButton(bool b)
+{
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (b==true) {
+		if (toolbarButton==NULL) {
+			// Create the pulsars button
+			gui->getGuiAction("actionShow_Pulsars")->setChecked(flagShowPulsars);
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Pulsars"));
+		}
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	} else {
+		gui->getButtonBar()->hideButton("actionShow_Pulsars");
+	}
+	flagShowPulsarsButton = b;
+}

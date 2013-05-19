@@ -162,6 +162,10 @@ public slots:
 	void setFlagShowExoplanets(bool b) { flagShowExoplanets=b; }
 	bool getFlagShowExoplanets(void) { return flagShowExoplanets; }
 
+	//! Define whether the button toggling exoplanets should be visible
+	void setFlagShowExoplanetsButton(bool b);
+	bool getFlagShowExoplanetsButton(void) { return flagShowExoplanetsButton; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
@@ -223,6 +227,7 @@ private:
 	// GUI
 	ExoplanetsDialog* exoplanetsConfigDialog;
 	bool flagShowExoplanets;
+	bool flagShowExoplanetsButton;
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;

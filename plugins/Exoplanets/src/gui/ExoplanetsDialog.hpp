@@ -50,6 +50,7 @@ private slots:
 	void setDistributionEnabled(int checkState);
 	void setTimelineEnabled(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
+	void setDisplayShowExoplanetsButton(int checkState);
 	void updateStateReceiver(Exoplanets::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
