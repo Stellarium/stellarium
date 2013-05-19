@@ -103,6 +103,8 @@ Exoplanets::Exoplanets()
 */
 Exoplanets::~Exoplanets()
 {
+	StelApp::getInstance().getStelObjectMgr().unSelect();
+
 	delete exoplanetsConfigDialog;
 
 	if (GlowIcon)
