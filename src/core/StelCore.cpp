@@ -893,11 +893,11 @@ bool StelCore::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
 	static double lastJD = getJDay();
-	static bool previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
+	static bool previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 	if (fabs(lastJD-getJDay())>JD_SECOND/4)
 	{
 		lastJD = getJDay();
-		previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
+		previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 	}
 	return previousResult;
 }
