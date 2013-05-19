@@ -1723,6 +1723,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagMeridianLine(flagMeridianLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
+	core->getSkyDrawer()->setFlagLuminanceAdaptation(flagAdaptation);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -1756,6 +1757,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
+			flagAdaptation = StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation();
 		}
 
 		// set new state
@@ -1783,6 +1785,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagMeridianLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticPlaneLine(false);
+	core->getSkyDrawer()->setFlagLuminanceAdaptation(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
