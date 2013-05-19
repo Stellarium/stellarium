@@ -76,6 +76,8 @@ void QuasarsDialog::createDialogContent()
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(Quasars)->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	ui->displayShowQuasarsButton->setChecked(GETSTELMODULE(Quasars)->getFlagShowQuasarsButton());
+	connect(ui->displayShowQuasarsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowQuasarsButton(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(GETSTELMODULE(Quasars), SIGNAL(updateStateChanged(Quasars::UpdateState)), this, SLOT(updateStateReceiver(Quasars::UpdateState)));
@@ -187,6 +189,12 @@ void QuasarsDialog::setDisplayAtStartupEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Quasars)->setEnableAtStartup(b);
+}
+
+void QuasarsDialog::setDisplayShowQuasarsButton(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Quasars)->setFlagShowQuasarsButton(b);
 }
 
 void QuasarsDialog::updateStateReceiver(Quasars::UpdateState state)

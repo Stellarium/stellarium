@@ -76,6 +76,8 @@ void ExoplanetsDialog::createDialogContent()
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getDisplayMode());
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
+	ui->displayShowExoplanetsButton->setChecked(GETSTELMODULE(Exoplanets)->getFlagShowExoplanetsButton());
+	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
 	ui->timelineModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getTimelineMode());
 	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
@@ -175,6 +177,12 @@ void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Exoplanets)->setEnableAtStartup(b);
+}
+
+void ExoplanetsDialog::setDisplayShowExoplanetsButton(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Exoplanets)->setFlagShowExoplanetsButton(b);
 }
 
 void ExoplanetsDialog::setUpdatesEnabled(int checkState)

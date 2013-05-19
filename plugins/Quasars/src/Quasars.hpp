@@ -158,6 +158,10 @@ public slots:
 	void setFlagShowQuasars(bool b) { flagShowQuasars=b; }
 	bool getFlagShowQuasars(void) { return flagShowQuasars; }
 
+	//! Define whether the button toggling quasars should be visible
+	void setFlagShowQuasarsButton(bool b);
+	bool getFlagShowQuasarsButton(void) { return flagShowQuasarsButton; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
@@ -218,6 +222,7 @@ private:
 	// GUI
 	QuasarsDialog* configDialog;
 	bool flagShowQuasars;
+	bool flagShowQuasarsButton;
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
