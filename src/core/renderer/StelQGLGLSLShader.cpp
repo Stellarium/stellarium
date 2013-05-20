@@ -22,9 +22,17 @@
 
 #include <stdint.h>
 
+#define ALIGN_UNIFORM_SIZE(x) (((x) + (sizeof ((StelQGLGLSLShader *)0)->uniformStorage[0]-1)) / sizeof ((StelQGLGLSLShader *)0)->uniformStorage[0])
+
 int StelQGLGLSLShader::UNIFORM_SIZES[UniformType_max] =
-	{0, sizeof(float), sizeof(Vec2f), sizeof(Vec3f),
-	 sizeof(Vec4f), sizeof(Mat4f), sizeof(bool), sizeof(int)};
+	{0,
+	ALIGN_UNIFORM_SIZE(sizeof(float)),
+	ALIGN_UNIFORM_SIZE(sizeof(Vec2f)),
+	ALIGN_UNIFORM_SIZE(sizeof(Vec3f)),
+	ALIGN_UNIFORM_SIZE(sizeof(Vec4f)),
+	ALIGN_UNIFORM_SIZE(sizeof(Mat4f)),
+	ALIGN_UNIFORM_SIZE(sizeof(bool)),
+	ALIGN_UNIFORM_SIZE(sizeof(int))};
 
 StelQGLGLSLShader::StelQGLGLSLShader(StelQGL2Renderer* renderer, bool internal) 
 	: StelGLSLShader()
@@ -34,7 +42,6 @@ StelQGLGLSLShader::StelQGLGLSLShader(StelQGL2Renderer* renderer, bool internal)
 	, bound(false)
 	, useUnprojectedPosition_(false)
 	, internal(internal)
-	, uniformStoragePointer(uniformStorage)
 	, uniformStorageUsed(0)
 	, uniformCount(0)
 	, uniformStorageStackSize(0)
