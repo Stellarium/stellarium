@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-19 22:18+0700\n"
-"PO-Revision-Date: 2013-05-13 20:41+0000\n"
+"PO-Revision-Date: 2013-05-20 06:12+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-20 05:24+0000\n"
+"X-Launchpad-Export-Date: 2013-05-21 04:40+0000\n"
 "X-Generator: Launchpad (build 16626)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -252,7 +252,7 @@ msgstr "kettős csillag"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Típus: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
@@ -310,12 +310,12 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Periódus: %1 nap"
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Fogyatkozás hossza: %1%"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
@@ -4649,13 +4649,13 @@ msgstr "Okulár aFOV: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Lencse #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1570
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Lencse #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1575
 msgid "Lens: none"
@@ -4710,11 +4710,11 @@ msgstr "&Lencsék"
 
 #: plugins/Oculars/src/Oculars.cpp:1848
 msgid "&Previous lens"
-msgstr ""
+msgstr "&Előző lencse"
 
 #: plugins/Oculars/src/Oculars.cpp:1849
 msgid "&Next lens"
-msgstr ""
+msgstr "&Következő lencse"
 
 #: plugins/Oculars/src/Oculars.cpp:1879
 msgid "&Telescope"
