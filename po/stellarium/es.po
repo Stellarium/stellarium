@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-19 22:18+0700\n"
-"PO-Revision-Date: 2013-05-05 14:01+0000\n"
+"PO-Revision-Date: 2013-05-22 01:59+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-20 05:29+0000\n"
+"X-Launchpad-Export-Date: 2013-05-22 04:36+0000\n"
 "X-Generator: Launchpad (build 16626)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -385,27 +385,27 @@ msgstr "Magnitud aparente: <b>%1</b> (por extinción)"
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "estrella variable eruptiva"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "estrella pulsante variable"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "estrella variable rotante"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "estrella variable cataclísmica"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "sistema binario eclipsando"
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "estrella variable"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -414,12 +414,12 @@ msgstr "estrella doble"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Tipo: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type of variability: %1"
-msgstr ""
+msgstr "Tipo de variabilidad: %1"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -434,12 +434,12 @@ msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:188
 #, qt-format
 msgid "Amplitude: %1"
-msgstr ""
+msgstr "Amplitud: %1"
 
 #: src/core/modules/StarWrapper.cpp:190
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Rango de magnitud: <b>%1</b>%2<b>%3</b> (Sistema Fotometrico: %4)"
 
 #: src/core/modules/StarWrapper.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -462,27 +462,27 @@ msgstr "Paralaje: %1\""
 #: src/core/modules/StarWrapper.cpp:211
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Época para luz mímima: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:213
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Época para luz máxima: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Período: %1 días"
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Duración del eclipse: %1%"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Tiempo de ascenso: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -771,6 +771,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Solución por B. Banjevic, basada en Stephenson & Morrison (1984), fué "
+"publicado en el artículo <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1508
 #, qt-format
@@ -1198,7 +1201,7 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1163
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1164
 #, qt-format
@@ -3977,6 +3980,8 @@ msgstr "Planetas"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Etiquetas y marcadores para objetos lejanos (cumulos de estrellas, galaxias "
+"y nebulosas)"
 
 #: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
 msgid "DSO"
@@ -4073,12 +4078,14 @@ msgstr "Limitar magnitudes"
 
 #: src/ui_viewDialog.h:1236
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Limitar la magnitud de las estrellas"
 
 #: src/ui_viewDialog.h:1240
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Limitar la magnitud de objetos lejanos (cúmulos de estrellas, galaxias y "
+"nebulosas)"
 
 #: src/ui_viewDialog.h:1243
 msgid "Constellations"
@@ -7103,7 +7110,7 @@ msgstr "Configuración del Complemento de Cuásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:267
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Ajustes para cuásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Plot all quasars without labels"
@@ -7121,7 +7128,7 @@ msgstr "Habilitar muestra al inicio"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "Mostrar el botón de cuásares en la barra de herramientas"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -7316,7 +7323,7 @@ msgstr "Configuración del Complemento de Púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Ajustes para púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Plot all pulsars without labels"
@@ -7328,7 +7335,7 @@ msgstr "Activar la vista de dispersión de púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:273
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Mostrar el botón de púlsares en la barra de herramientas"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:72
 msgid "Exoplanets"
@@ -7444,7 +7451,7 @@ msgstr "Actualizar datos de exoplanetas desde Internet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Configuración para exoplanetas"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
 msgid "Plot all systems with exoplanets without labels"
@@ -7464,7 +7471,7 @@ msgstr "Activar la línea del tiempo de descubrimiento de exoplanetas"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "Mostrar botón de exoplanetas en la barra de herramientas"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
