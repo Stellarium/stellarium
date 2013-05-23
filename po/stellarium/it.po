@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-19 22:18+0700\n"
-"PO-Revision-Date: 2013-05-09 19:41+0000\n"
-"Last-Translator: Andrea Savio <Unknown>\n"
+"PO-Revision-Date: 2013-05-22 15:38+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-20 05:25+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-05-23 05:18+0000\n"
+"X-Generator: Launchpad (build 16640)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
@@ -225,11 +225,11 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "stella variabile pulsante"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "stella variabile rotante"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
@@ -241,7 +241,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "stella variabile"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -250,12 +250,12 @@ msgstr "stella doppia"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Tipo: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type of variability: %1"
-msgstr ""
+msgstr "Tipo di variabilità: %1"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -318,7 +318,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Tempo di salita: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -365,6 +365,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Versione leggermente modificata della formula IAU (1952) utilizzata in "
+"<em>Astronomical Ephemeris</em> e in <em>Canon of Solar Eclipses</em> di "
+"Mucke e Meeus (1983)."
 
 #: src/core/StelCore.cpp:1441
 msgid ""
@@ -373,6 +376,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Le tabelle di Tuckerman (1962, 1964) indicano la posizione del Sole, della "
+"Luna e dei pianeti a intervalli di 5 e 10 giorni dall'anno 601 AC al 1649 "
+"DC. La stessa relazione è usata implicitamente nelle sizigie di Goldstine "
+"(1973)."
 
 #: src/core/StelCore.cpp:1445
 #, qt-format
@@ -457,6 +464,10 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"Equazione polinomiale di dodicesimo grado pubblicata da L. D. Schmadel e G. "
+"Zech in <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
+"1988</em> (%1) e basata sull'interpolazione di valori pubblicati da "
+"Stephenson e Morrison (1984)."
 
 #: src/core/StelCore.cpp:1472
 msgid ""
