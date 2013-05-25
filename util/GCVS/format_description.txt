@@ -8,8 +8,9 @@ Format:
   - GCVS designation
   - Type of variability
   - Magnitude at maximum brightness
-  - Magnitude flag code (0=No flag, 1="<" if magMax is a bright limit, 
-                         2="(" if magMax is an amplitude,
+  - Magnitude flag code (0=No flag, 
+			 1="(" if magMax is an amplitude,
+			 2="<" if magMax is a bright limit, 
                          3=">" if magMax is a faint limit)
   - Minimum magnitude or amplitude
   - The photometric system for magnitudes
