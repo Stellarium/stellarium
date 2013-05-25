@@ -2,8 +2,8 @@
 
 use LWP::UserAgent;
 
-$GCVS   = "/home/aw/varstar/varcat-hip.dat"; 	# GCVS part
-$HIPV	= "/home/aw/varstar/vcat-hip.dat";
+$GCVS   = "./varcat-hip.dat"; 	# GCVS part
+$HIPV	= "./vcat-hip.dat";
 $fpart 	= "http://simbad.u-strasbg.fr/simbad/sim-id?Ident=";
 $lpart 	= "&NbIdent=1&Radius=2&Radius.unit=arcmin&submit=submit+id";
 

@@ -13,11 +13,11 @@ while (<SC>) {
     $maxmagstr = substr($rawstring,55,7);
     $ampflagstr = substr($rawstring,65,1);
     $minmagstr = substr($rawstring,66,6);
-    $flagstr = substr($rawstring,78,2);
-    $epochstr = substr($rawstring,81,10);
-    $periodstr = substr($rawstring,100,16);
-    $mmstr = substr($rawstring,121,2);
-    $sclassstr = substr($rawstring,127,16);
+    $flagstr = substr($rawstring,91,2);
+    $epochstr = substr($rawstring,94,10);
+    $periodstr = substr($rawstring,114,16);
+    $mmstr = substr($rawstring,134,2);
+    $sclassstr = substr($rawstring,140,16);
     
     $hipstr =~ s/(\s+)//gi;
     $designationstr =~ s/(\s+)/ /gi;
