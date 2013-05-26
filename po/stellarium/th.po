@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-19 22:18+0700\n"
+"POT-Creation-Date: 2013-05-25 18:58+0700\n"
 "PO-Revision-Date: 2013-05-17 03:31+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-20 05:29+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-05-26 04:48+0000\n"
+"X-Generator: Launchpad (build 16640)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -271,8 +271,8 @@ msgstr "โชติมาตร : <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:188
 #, qt-format
-msgid "Amplitude: %1"
-msgstr "แอมพลิจูด : %1"
+msgid "Amplitude: <b>%1</b>"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:190
 #, qt-format
@@ -4087,7 +4087,7 @@ msgstr "ทั้งหมดที่มี"
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1851
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1854
 #: plugins/Observability/src/Observability.cpp:628
 #: plugins/Observability/src/Observability.cpp:629
 #: plugins/Observability/src/Observability.cpp:631
@@ -4752,27 +4752,27 @@ msgstr "เซนเซอร์ #%1"
 msgid "Sensor #%1: %2"
 msgstr "เซนเซอร์ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1847
+#: plugins/Oculars/src/Oculars.cpp:1850
 msgid "&Lens"
 msgstr "เ&ลนส์"
 
-#: plugins/Oculars/src/Oculars.cpp:1848
+#: plugins/Oculars/src/Oculars.cpp:1851
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1849
+#: plugins/Oculars/src/Oculars.cpp:1852
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1879
+#: plugins/Oculars/src/Oculars.cpp:1882
 msgid "&Telescope"
 msgstr "&กล้องโทรทรรศน์"
 
-#: plugins/Oculars/src/Oculars.cpp:1880
+#: plugins/Oculars/src/Oculars.cpp:1883
 msgid "&Previous telescope"
 msgstr "กล้องโทรทรรศน์&ก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:1881
+#: plugins/Oculars/src/Oculars.cpp:1884
 msgid "&Next telescope"
 msgstr "กล้องโทรทรรศน์&ถัดไป"
 

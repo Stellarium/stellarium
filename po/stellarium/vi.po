@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-19 22:18+0700\n"
-"PO-Revision-Date: 2013-05-10 11:18+0000\n"
-"Last-Translator: thanbang <thanbang00@gmail.com>\n"
+"POT-Creation-Date: 2013-05-25 18:58+0700\n"
+"PO-Revision-Date: 2013-05-25 18:46+0000\n"
+"Last-Translator: Bui Ngoc Lam <kiem.si.zero@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-20 05:30+0000\n"
-"X-Generator: Launchpad (build 16626)\n"
+"X-Launchpad-Export-Date: 2013-05-26 04:49+0000\n"
+"X-Generator: Launchpad (build 16640)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
@@ -71,7 +71,7 @@ msgstr "Loại: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Độ sáng: <b>%1</b> (extincted to: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
@@ -79,7 +79,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:181
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Độ lớn: <b>%1</b>"
+msgstr "Độ sáng: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:137
 #, qt-format
@@ -108,11 +108,11 @@ msgstr "Tinh vân hành tinh"
 
 #: src/core/modules/Nebula.cpp:400
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Tinh vân tối"
 
 #: src/core/modules/Nebula.cpp:403
 msgid "Cluster associated with nebulosity"
-msgstr "Chùm sao có mây mù"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:406
 msgid "Unknown"
@@ -154,24 +154,24 @@ msgstr "Khoảng cách: %1AU"
 #: src/core/modules/Planet.cpp:492
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "đường kính biểu kiến: %1, with rings: %2"
 
 #: src/core/modules/Planet.cpp:498 src/core/modules/MinorPlanet.cpp:258
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "Đường kính bên ngoài: %1"
+msgstr "đường kính biểu kiến: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:508 src/core/modules/MinorPlanet.cpp:265
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Chu kỳ thiên văn: %1 ngày (%2a)"
 
 #: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Ngày thiên văn: %1"
 
 #: src/core/modules/Planet.cpp:512
 #, qt-format
@@ -217,23 +217,23 @@ msgstr "Độ sáng: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:60
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Độ sáng biểu kiến: <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "Sao biến quang bùng phát"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "Sao biến quang co dãn"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "Sao biến quang luân phiên"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "Sao biến quang biến động lớn"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
@@ -241,7 +241,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "sao biến quang"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -250,27 +250,27 @@ msgstr "Sao đôi"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Loại: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type of variability: %1"
-msgstr ""
+msgstr "Loại biến: %1"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Độ sáng: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:176 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr "Độ phóng đại: <b>%1</b> (B-V: <b>%2</b>)"
+msgstr "Độ sáng: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:188
 #, qt-format
-msgid "Amplitude: %1"
-msgstr ""
+msgid "Amplitude: <b>%1</b>"
+msgstr "Biên độ: <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:190
 #, qt-format
@@ -308,7 +308,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Chu kỳ: %1 ngày"
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
@@ -4008,7 +4008,7 @@ msgstr ""
 msgid "Display no information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1851
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1854
 #: plugins/Observability/src/Observability.cpp:628
 #: plugins/Observability/src/Observability.cpp:629
 #: plugins/Observability/src/Observability.cpp:631
@@ -4658,27 +4658,27 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1847
+#: plugins/Oculars/src/Oculars.cpp:1850
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1848
+#: plugins/Oculars/src/Oculars.cpp:1851
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1849
+#: plugins/Oculars/src/Oculars.cpp:1852
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1879
+#: plugins/Oculars/src/Oculars.cpp:1882
 msgid "&Telescope"
 msgstr "&Kính thiên văn"
 
-#: plugins/Oculars/src/Oculars.cpp:1880
+#: plugins/Oculars/src/Oculars.cpp:1883
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1881
+#: plugins/Oculars/src/Oculars.cpp:1884
 msgid "&Next telescope"
 msgstr ""
 
