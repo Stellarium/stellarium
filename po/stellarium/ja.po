@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 18:58+0700\n"
-"PO-Revision-Date: 2013-02-28 17:23+0000\n"
-"Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
+"PO-Revision-Date: 2013-05-27 16:19+0000\n"
+"Last-Translator: Kaori YOKOZAWA <yokozawa@tree.so-net.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2013-05-28 05:14+0000\n"
 "X-Generator: Launchpad (build 16640)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
@@ -681,7 +681,7 @@ msgstr "赤経/赤緯（日付）: %1/%2"
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "銀経/銀緯: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -1718,7 +1718,7 @@ msgstr "イヌイット"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr ""
+msgstr "ヴェーダ"
 
 #: src/translations.h:171
 msgid "Korean"
@@ -1750,11 +1750,11 @@ msgstr "サーミ"
 
 #: src/translations.h:178
 msgid "Tupi-Guarani"
-msgstr "トゥピ・グアラニー語"
+msgstr "トゥピ・グアラニー"
 
 #: src/translations.h:179
 msgid "Tongan"
-msgstr ""
+msgstr "トンガ"
 
 #: src/translations.h:180
 msgid "Western"
@@ -3252,7 +3252,7 @@ msgstr "夜間照明"
 #: src/translations.h:594
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet labels"
-msgstr ""
+msgstr "惑星名"
 
 #: src/translations.h:595
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -3880,15 +3880,15 @@ msgstr "天球"
 
 #: src/ui_viewDialog.h:1256
 msgid "Show equator line"
-msgstr ""
+msgstr "天の赤道を表示"
 
 #: src/ui_viewDialog.h:1260
 msgid "Show meridian line"
-msgstr ""
+msgstr "子午線を表示"
 
 #: src/ui_viewDialog.h:1264
 msgid "Show horizon line"
-msgstr ""
+msgstr "地平線を表示"
 
 #: src/ui_viewDialog.h:1268
 msgid "Show ecliptic line"
@@ -4007,11 +4007,11 @@ msgstr "一部の情報を表示"
 
 #: src/ui_configurationDialog.h:1004
 msgid "Short"
-msgstr "短い"
+msgstr "簡潔に"
 
 #: src/ui_configurationDialog.h:1006
 msgid "Display user settings information"
-msgstr ""
+msgstr "ユーザーが設定した情報を表示"
 
 #: src/ui_configurationDialog.h:1008
 msgid "Customized"
@@ -4019,7 +4019,7 @@ msgstr "カスタム"
 
 #: src/ui_configurationDialog.h:1009
 msgid "Displayed fields"
-msgstr ""
+msgstr "表示する項目"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -4027,7 +4027,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "赤経/赤緯 (J2000)"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
@@ -4039,15 +4039,15 @@ msgstr "高度/方位角"
 
 #: src/ui_configurationDialog.h:1018
 msgid "Visual magnitude"
-msgstr ""
+msgstr "実視等級"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "絶対等級"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "カタログ番号"
 
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
@@ -4096,15 +4096,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
-msgstr ""
+msgstr "追加情報1"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Additional information 2"
-msgstr ""
+msgstr "追加情報2"
 
 #: src/ui_configurationDialog.h:1047
 msgid "Additional information 3"
-msgstr ""
+msgstr "追加情報3"
 
 #: src/ui_configurationDialog.h:1048
 msgid "Control"
