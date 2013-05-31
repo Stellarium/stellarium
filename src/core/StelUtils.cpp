@@ -1618,7 +1618,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	else if (year >= 1700)
 	{ // This term was added in the third edition (2007), its omission was a fault of the authors!
 		double yDiff1700 = year-1700.0;
-		deltaT = ((-0.0000266484*yDiff1700 +0.003336121)*yDiff1700 + 0.005092142)*yDiff1700 + 8.118780842;
+		deltaT = ((-0.0000266484*yDiff1700 +0.003336121)*yDiff1700 - 0.005092142)*yDiff1700 + 8.118780842;
 	}
 	else if (year >= 1620)
 	{
