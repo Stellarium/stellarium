@@ -184,10 +184,11 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	{
 		if (!varType.isEmpty())
 		{
+			float minimumM = minVMag;
 			if (magFlag==1)
-				oss << q_("Amplitude: <b>%1</b>").arg(QString::number(minVMag, 'f', 2)) << "<br />";
-			else
-				oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minVMag, 'f', 2)).arg(photoVSys) << "<br />";
+				minimumM += maxVMag; // Amplitude
+			
+			oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM, 'f', 2)).arg(photoVSys) << "<br />";
 		}
 	}
 
