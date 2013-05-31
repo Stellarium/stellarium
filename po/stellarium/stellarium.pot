@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-25 18:58+0700\n"
+"POT-Creation-Date: 2013-05-31 17:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3404,7 +3404,7 @@ msgid "Show renderer statistics"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:665 src/ui_configurationDialog.h:1160
+#: src/translations.h:665 src/ui_configurationDialog.h:1163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr ""
@@ -3669,7 +3669,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1278
 #: src/ui_viewDialog.h:1283 src/ui_viewDialog.h:1285
-#: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1134 src/ui_configurationDialog.h:1145
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr ""
@@ -3951,7 +3951,7 @@ msgstr ""
 msgid "The direction you're looking when Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1156
 msgid "Selected object information"
 msgstr ""
 
@@ -4219,88 +4219,94 @@ msgstr ""
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1114
+msgid ""
+"Display solar shadows on planets and moons (For that feature needed OpenGL "
+"version 2 or higher)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1116
 msgid "Render Solar Shadows"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1117
 msgid "Screenshots"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1115
+#: src/ui_configurationDialog.h:1118
 msgid "Screenshot Directory"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1117
+#: src/ui_configurationDialog.h:1120
 msgid "Invert colors"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1121
 msgid "Star catalog updates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1123
 msgid "Click here to start downloading"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1125
 msgid "Download this file to view even more stars"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1127
 msgid "Restart the download"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1129
 msgid "Retry"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1131
 msgid "Stop the download. You can always restart it later"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1133
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1136
 msgid "Close window when script runs"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1135
+#: src/ui_configurationDialog.h:1138
 msgid "Run the selected script"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1139
+#: src/ui_configurationDialog.h:1142
 msgid "Stop a running script"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1143
+#: src/ui_configurationDialog.h:1146
 msgid "Load at startup"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1147
 msgid "configure"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1152
 msgid "Main"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1154
 msgid "Information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1159
 msgid "Navigation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1161
 msgid "Tools"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1165
 msgid "Plugins"
 msgstr ""
 
