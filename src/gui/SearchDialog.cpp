@@ -335,9 +335,9 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);			
 			matches += objectMgr->listMatchingObjects(trimmedText, 3);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));			
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()));
 		} else {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
 			matches += objectMgr->listMatchingObjects(trimmedText, 5);
