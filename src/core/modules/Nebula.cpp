@@ -184,6 +184,11 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintText
 {
 	float lim = mag;
 	if (lim > 50) lim = 15.f;
+
+	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
+	if (getEnglishName().contains("Pleiades"))
+		lim = 5.f;
+
 	if (lim>maxMagHints)
 		return;
 	renderer->setBlendMode(BlendMode_Add);
@@ -233,6 +238,11 @@ void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float m
 {
 	float lim = mag;
 	if (lim > 50) lim = 15.f;
+
+	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
+	if (getEnglishName().contains("Pleiades"))
+		lim = 5.f;
+
 	if (lim>maxMagLabel)
 		return;
 

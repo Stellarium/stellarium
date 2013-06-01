@@ -74,6 +74,10 @@ void PulsarsDialog::createDialogContent()
 	// Settings tab / updates group
 	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Pulsars)->getDisplayMode());
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
+	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(Pulsars)->getEnableAtStartup());
+	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	ui->displayShowPulsarsButton->setChecked(GETSTELMODULE(Pulsars)->getFlagShowPulsarsButton());
+	connect(ui->displayShowPulsarsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowPulsarsButton(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(GETSTELMODULE(Pulsars), SIGNAL(updateStateChanged(Pulsars::UpdateState)), this, SLOT(updateStateReceiver(Pulsars::UpdateState)));
@@ -193,6 +197,18 @@ void PulsarsDialog::setDistributionEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Pulsars)->setDisplayMode(b);
+}
+
+void PulsarsDialog::setDisplayAtStartupEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Pulsars)->setEnableAtStartup(b);
+}
+
+void PulsarsDialog::setDisplayShowPulsarsButton(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Pulsars)->setFlagShowPulsarsButton(b);
 }
 
 void PulsarsDialog::updateStateReceiver(Pulsars::UpdateState state)

@@ -75,7 +75,8 @@ public slots:
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used.
-	void setDate(const QString& dt, const QString& spec="utc");
+	//! @param enableDeltaT true or false - enable Delta-T correction or not
+	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
@@ -333,6 +334,14 @@ public slots:
 	//! Set the current sky culture
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
+
+	//! Find out the current sky culture and get it English name
+	//! @return the English name of the current sky culture
+	QString getSkyCultureName();
+
+	//! Find out the current sky culture and get it localized name
+	//! @return the translated name of the current sky culture
+	QString getSkyCultureNameI18n();
 
 	//! Get the current status of the gravity labels option
 	//! @return true if gravity labels are enabled, else false

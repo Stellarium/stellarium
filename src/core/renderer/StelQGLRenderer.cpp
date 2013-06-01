@@ -57,11 +57,13 @@ void StelQGLRenderer::bindTextureBackend
 	else
 	{
 		// by default placeholder is hide but its can be enabled for debugging
+		bool debugMode = false;
 		if (conf->value("debug/texture_placeholder_flag", false).toBool())
-		{
-			getPlaceholderTexture()->bind(textureUnit);
-			currentlyBoundTextures[textureUnit] = getPlaceholderTexture();
-		}
+			debugMode = true;
+
+		getPlaceholderTexture(debugMode)->bind(textureUnit);
+		currentlyBoundTextures[textureUnit] = getPlaceholderTexture(debugMode);
+
 	}
 	invariant();
 }
@@ -243,7 +245,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 			StelTextureNew* screenTexture = getViewportTexture();
 			const QSize size = screenTexture->getDimensions();
 
-			glDisable(GL_BLEND);
+			glDisable(GL_BLEND);			
 			setGlobalColor(Vec4f(1.0f, 1.0f, 1.0f, 1.0f));
 			screenTexture->bind();
 			drawTexturedRect(0, 0, size.width(), size.height());

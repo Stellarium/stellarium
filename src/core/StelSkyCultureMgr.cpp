@@ -105,6 +105,8 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
 
+QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const {return currentSkyCulture.englishName;}
+
 //! returns newline delimited list of human readable culture names in english
 QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
 {
