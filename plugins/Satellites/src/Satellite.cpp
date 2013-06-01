@@ -141,7 +141,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QString line1 = map.value("tle1").toString();
 	QString line2 = map.value("tle2").toString();
 	setNewTleElements(line1, line2);
-	parseInternationalDesignator(line1);
+	// This also sets the international designator and launch year.
 
 	QString dateString = map.value("lastUpdated").toString();
 	if (!dateString.isEmpty())
@@ -389,6 +389,8 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
+	
+	parseInternationalDesignator(tle1);
 }
 
 void Satellite::update(double)
