@@ -83,6 +83,11 @@ Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
 Quasars::Quasars()
 	: texPointer(NULL)
 	, markerTexture(NULL)
+	, flagShowQuasars(false)
+	, OnIcon(NULL)
+	, OffIcon(NULL)
+	, GlowIcon(NULL)
+	, toolbarButton(NULL)
 	, progressBar(NULL)
 {
 	setObjectName("Quasars");
@@ -97,6 +102,13 @@ Quasars::Quasars()
 Quasars::~Quasars()
 {
 	delete configDialog;
+
+	if (GlowIcon)
+		delete GlowIcon;
+	if (OnIcon)
+		delete OnIcon;
+	if (OffIcon)
+		delete OffIcon;
 }
 
 void Quasars::deinit()
@@ -123,6 +135,8 @@ double Quasars::getCallOrder(StelModuleActionName actionName) const
 */
 void Quasars::init()
 {
+	upgradeConfigIni();
+
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Quasars");
@@ -142,8 +156,19 @@ void Quasars::init()
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
+		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
+		OffIcon = new QPixmap(":/Quasars/btQuasars-off.png");
+
+		setFlagShowQuasars(getEnableAtStartup());
+		setFlagShowQuasarsButton(flagShowQuasarsButton);
+
 		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
+		if (flagShowQuasarsButton)
+		{
+			connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
+		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -161,7 +186,7 @@ void Quasars::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogJsonPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -194,6 +219,9 @@ void Quasars::init()
 */
 void Quasars::draw(StelCore* core, class StelRenderer* renderer)
 {
+	if (!flagShowQuasars)
+		return;
+
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	renderer->setFont(font);
 
@@ -248,6 +276,9 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 {
 	QList<StelObjectP> result;
 
+	if (!flagShowQuasars)
+		return result;
+
 	Vec3d v(av);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
@@ -271,10 +302,12 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 
 StelObjectP Quasars::searchByName(const QString& englishName) const
 {
-	QString objw = englishName.toUpper();
+	if (!flagShowQuasars)
+		return NULL;
+
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getEnglishName().toUpper() == englishName)
+		if (quasar->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(quasar);
 	}
 
@@ -283,11 +316,12 @@ StelObjectP Quasars::searchByName(const QString& englishName) const
 
 StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+	if (!flagShowQuasars)
+		return NULL;
 
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getNameI18n().toUpper() == nameI18n)
+		if (quasar->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(quasar);
 	}
 
@@ -297,6 +331,9 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
+	if (!flagShowQuasars)
+		return result;
+
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
@@ -305,7 +342,7 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	{
 		if (quasar->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << quasar->getNameI18n().toUpper();
+				result << quasar->getNameI18n();
 		}
 	}
 
@@ -318,6 +355,9 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
+	if (!flagShowQuasars)
+		return result;
+
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
@@ -326,7 +366,7 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		if (quasar->getEnglishName().toUpper().left(objw.length()) == objw)
 		{
-				result << quasar->getEnglishName().toUpper();
+				result << quasar->getEnglishName();
 		}
 	}
 
@@ -469,7 +509,7 @@ void Quasars::setQSOMap(const QVariantMap& map)
 	}
 }
 
-int Quasars::getJsonFileVersion(void)
+int Quasars::getJsonFileFormatVersion(void)
 {
 	int jsonVersion = -1;
 	QFile catalogJsonFile(catalogJsonPath);
@@ -487,7 +527,7 @@ int Quasars::getJsonFileVersion(void)
 	}
 
 	catalogJsonFile.close();
-	qDebug() << "Quasars::getJsonFileVersion() version from file:" << jsonVersion;
+	qDebug() << "Quasars::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -528,9 +568,11 @@ void Quasars::restoreDefaultConfigIni(void)
 	conf->remove("");
 
 	conf->setValue("distribution_enabled", false);
-	conf->setValue("updates_enabled", true);
+	conf->setValue("enable_at_startup", false);
+	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
+	conf->setValue("flag_show_quasars_button", true);
 	conf->endGroup();
 }
 
@@ -543,6 +585,8 @@ void Quasars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
+	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 
 	conf->endGroup();
 }
@@ -555,6 +599,8 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
+	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("flag_show_quasars_button", flagShowQuasarsButton);
 
 	conf->endGroup();
 }
@@ -660,4 +706,33 @@ void Quasars::messageTimeout(void)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
+}
+
+void Quasars::upgradeConfigIni(void)
+{
+	// Upgrade settings for Quasars plugin
+	if (conf->contains("Quasars/flag_show_quasars"))
+	{
+		bool b = conf->value("Quasars/flag_show_quasars", false).toBool();
+		if (!conf->contains("Quasars/enable_at_startup"))
+			conf->setValue("Quasars/enable_at_startup", b);
+		conf->remove("Quasars/flag_show_quasars");
+	}
+}
+
+// Define whether the button toggling quasars should be visible
+void Quasars::setFlagShowQuasarsButton(bool b)
+{
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (b==true) {
+		if (toolbarButton==NULL) {
+			// Create the quasars button
+			gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
+		}
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	} else {
+		gui->getButtonBar()->hideButton("actionShow_Quasars");
+	}
+	flagShowQuasarsButton = b;
 }

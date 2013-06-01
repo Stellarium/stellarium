@@ -278,8 +278,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                       pOn,
 	                                       pOff,
 	                                       pHover,
-	                                       defaultAction,
-                                           true);
+					       defaultAction,
+					       true);
 	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
 
 	degrees = QString("-1%1").arg(QChar(0x00B0));
@@ -288,11 +288,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdMinus1Button = new StelButton(ccdControls,
-	                                       pOn,
-                                           pOff,
+					       pOn,
+					       pOff,
 	                                       pHover,
-	                                       defaultAction,
-                                           true);
+					       defaultAction,
+					       true);
 	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
 
 	degrees = QString("0%1").arg(QChar(0x00B0));
@@ -304,8 +304,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                        pOn,
 	                                        pOff,
 	                                        pHover,
-	                                        defaultAction,
-                                            true);
+						defaultAction,
+						true);
 	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
 
 	degrees = QString("+1%1").arg(QChar(0x00B0));
@@ -314,11 +314,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus1Button = new StelButton(ccdControls,
-	                                      pOn,
-                                          pOff,
-	                                      pHover,
-                                          defaultAction,
-                                          true);
+					      pOn,
+					      pOff,
+					      pHover,
+					      defaultAction,
+					      true);
 	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
 
 	degrees = QString("+5%1").arg(QChar(0x00B0));
@@ -327,11 +327,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus5Button = new StelButton(ccdControls,
-	                                      pOn,
-                                          pOff,
-	                                      pHover,
-                                          defaultAction,
-                                          true);
+					      pOn,
+					      pOff,
+					      pHover,
+					      defaultAction,
+					      true);
 	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
 
 	degrees = QString("+15%1").arg(QChar(0x00B0));
@@ -340,11 +340,11 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus15Button = new StelButton(ccdControls,
-	                                       pOn,
-                                           pOff,
+					       pOn,
+					       pOff,
 	                                       pHover,
-	                                       defaultAction,
-                                           true);
+					       defaultAction,
+					       true);
 	rotateCcdPlus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees clockwise"));
 
 	QSignalMapper* sm = ocularsPlugin->ccdRotationSignalMapper;
@@ -577,11 +577,6 @@ void OcularsGuiPanel::updateOcularControls()
 
 void OcularsGuiPanel::updateLensControls()
 {
-	if (ocularsPlugin->flagShowCCD)
-	{
-		setLensControlsVisible(false);
-		return;
-	}
 	int index = ocularsPlugin->selectedOcularIndex;
 	//Ocular* ocular = ocularsPlugin->oculars[index];
 
@@ -651,7 +646,7 @@ void OcularsGuiPanel::updateCcdControls()
 
 	//Get the name
 	int index = ocularsPlugin->selectedCCDIndex;
-	CCD* ccd = ocularsPlugin->ccds[index];
+	CCD* ccd = ocularsPlugin->ccds[index];	
 	Q_ASSERT(ccd);
 	QString name = ccd->name();
 	QString fullName;
@@ -664,6 +659,8 @@ void OcularsGuiPanel::updateCcdControls()
 		fullName = QString(q_("Sensor #%1: %2")).arg(index).arg(name);
 	}
 	fieldCcdName->setPlainText(fullName);
+
+	Lens *lens = ocularsPlugin->selectedLens();
 
 	qreal posX = 0.;
 	qreal posY = 0.;
@@ -693,8 +690,8 @@ void OcularsGuiPanel::updateCcdControls()
 	index = ocularsPlugin->selectedTelescopeIndex;
 	Telescope* telescope = ocularsPlugin->telescopes[index];
 	Q_ASSERT(telescope);
-	double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-	double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;	
+	double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+	double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 	QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 	fieldCcdDimensions->setPlainText(dimensionsLabel);
 	fieldCcdDimensions->setPos(posX, posY);
@@ -782,14 +779,16 @@ void OcularsGuiPanel::updateTelescopeControls()
 	posY += fieldTelescopeName->boundingRect().height();
 	widgetHeight += fieldTelescopeName->boundingRect().height();
 
+	Lens *lens = ocularsPlugin->selectedLens();
+
 	if (ocularsPlugin->flagShowCCD)
 	{
 		int index = ocularsPlugin->selectedCCDIndex;
 		CCD* ccd = ocularsPlugin->ccds[index];
 		Q_ASSERT(ccd);
 
-		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
+		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 		QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 		fieldCcdDimensions->setPlainText(dimensionsLabel);
 
@@ -802,8 +801,6 @@ void OcularsGuiPanel::updateTelescopeControls()
 		int index = ocularsPlugin->selectedOcularIndex;
 		Ocular* ocular = ocularsPlugin->oculars[index];
 		Q_ASSERT(ocular);
-                
-		Lens *lens = ocularsPlugin->selectedLens();
 
 		if (ocular->isBinoculars())
 		{
@@ -958,8 +955,7 @@ void OcularsGuiPanel::setTelescopeControlsVisible(bool show)
 void OcularsGuiPanel::updateMainButtonsPositions()
 {
 	Q_ASSERT(buttonOcular);
-	Q_ASSERT(buttonCrosshairs);
-	Q_ASSERT(buttonCrosshairs);
+	Q_ASSERT(buttonCrosshairs);	
 	Q_ASSERT(buttonCcd);
 	Q_ASSERT(buttonTelrad);
 	Q_ASSERT(buttonConfiguration);

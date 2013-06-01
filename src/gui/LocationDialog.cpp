@@ -131,7 +131,8 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 
 	// Hack to avoid the coord spinbox receiving the focus and triggering
 	// "new location" editing mode.
-	ui->citySearchLineEdit->setFocus();
+	// Disable hack below because it change behaviour of spinboxes and added difficulties of changes for this spinboxes --AW
+	// ui->citySearchLineEdit->setFocus();
 
 	isEditingNew = false;
 	
@@ -369,9 +370,23 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelCore* stelCore = StelApp::getInstance().getCore();
+	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
+	{
 		setFieldsFromLocation(loc);
-	stelCore->moveObserverTo(loc, 0.);
+		// If we have a landscape for selected planet then set it, otherwise use default landscape
+		// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
+		if (ls->getAllLandscapeNames().indexOf(loc.planetName)>0)
+			ls->setCurrentLandscapeName(loc.planetName);
+		else
+			ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+
+	}
+	// Planet transition time also set to null to prevent uglyness when
+	// "use landscape location" is enabled for that planet's landscape. --BM
+	// NOTE: I think it also makes sense in the other cases. --BM
+	// FIXME: Avoid the unnecessary change of the location anyway. --BM
+	stelCore->moveObserverTo(loc, 0., 0.);
 }
 
 void LocationDialog::setPositionFromCoords(int )

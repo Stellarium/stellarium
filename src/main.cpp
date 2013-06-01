@@ -312,7 +312,7 @@ int main(int argc, char **argv)
 		try
 		{
 			const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
-			if (!afName.isEmpty())
+			if (!afName.isEmpty() && !afName.contains("file not found"))
 				QFontDatabase::addApplicationFont(afName);
 		}
 		catch (std::runtime_error& e)

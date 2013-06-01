@@ -294,13 +294,13 @@ void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP proje
 			{
 				const Vec3f v(-cosSinTheta[1] * cosSinRho1,
 				              cosSinTheta[0] * cosSinRho1, 
-				              nsign * cosSinRho0 * oneMinusOblateness);
+					      nsign * cosSinRho0 * oneMinusOblateness);
 				if(lit)
 				{
-					const float c = 
+					const float c =
 						std::max(0.0, nsign * (lightPos[0] * v[0] * oneMinusOblateness +
-						                       lightPos[1] * v[1] * oneMinusOblateness +
-						                       lightPos[2] * v[2] / oneMinusOblateness));
+								       lightPos[1] * v[1] * oneMinusOblateness +
+								       lightPos[2] * v[2] / oneMinusOblateness));
 					const Vec4f color = std::min(c, 0.5f) * diffuseLight + ambientLight;
 					litVertices->addVertex(VertexP3T2C4(v * radius, Vec2f(s, t), color));
 				}

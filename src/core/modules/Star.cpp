@@ -35,6 +35,8 @@ QString Star1::getNameI18n(void) const {
     if (StarMgr::getFlagSciNames()) {
       const QString sciName = StarMgr::getSciName(hip);
       if (!sciName.isEmpty()) return sciName;
+      const QString varSciName = StarMgr::getGCVSName(hip);
+      if (!varSciName.isEmpty() && varSciName!=sciName) return varSciName;
       return QString("HIP %1").arg(hip);
     }
   }

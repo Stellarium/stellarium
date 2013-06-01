@@ -54,7 +54,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
 
 	IF(WIN32)
 		SET_TARGET_PROPERTIES(Oculars
-			PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
+                        PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
 		)
 		SET(StelMain stelMain)
 	ELSE(WIN32)
