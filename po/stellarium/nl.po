@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-25 18:58+0700\n"
+"POT-Creation-Date: 2013-05-31 19:29+0700\n"
 "PO-Revision-Date: 2013-04-11 08:58+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-26 04:41+0000\n"
-"X-Generator: Launchpad (build 16640)\n"
+"X-Launchpad-Export-Date: 2013-06-01 04:40+0000\n"
+"X-Generator: Launchpad (build 16660)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -270,55 +270,50 @@ msgstr "Helderheid: <b>%1</b> (gedimd tot: <b>%2</b>. B-V: <b>%3</b>)"
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Helderheid: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:188
-#, qt-format
-msgid "Amplitude: <b>%1</b>"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:190
+#: src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:198
+#: src/core/modules/StarWrapper.cpp:199
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spectraaltype: %1"
 
-#: src/core/modules/StarWrapper.cpp:202
+#: src/core/modules/StarWrapper.cpp:203
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:196
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Afstand: %1 lichtjaar"
 
-#: src/core/modules/StarWrapper.cpp:205
+#: src/core/modules/StarWrapper.cpp:206
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Parallax: %1\""
 
-#: src/core/modules/StarWrapper.cpp:211
+#: src/core/modules/StarWrapper.cpp:212
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:213
+#: src/core/modules/StarWrapper.cpp:214
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:217
+#: src/core/modules/StarWrapper.cpp:218
 #, qt-format
 msgid "Period: %1 days"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:222
+#: src/core/modules/StarWrapper.cpp:223
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:224
+#: src/core/modules/StarWrapper.cpp:225
 #, qt-format
 msgid "Rising time: %1%"
 msgstr ""
@@ -3494,7 +3489,7 @@ msgid "Show renderer statistics"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:665 src/ui_configurationDialog.h:1160
+#: src/translations.h:665 src/ui_configurationDialog.h:1163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Scripts"
@@ -3761,7 +3756,7 @@ msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1278
 #: src/ui_viewDialog.h:1283 src/ui_viewDialog.h:1285
-#: src/ui_configurationDialog.h:1131 src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1134 src/ui_configurationDialog.h:1145
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Opties"
@@ -4048,7 +4043,7 @@ msgstr "De breedte van uw zicht als u Stelllarium opstart"
 msgid "The direction you're looking when Stellarium starts"
 msgstr "De richting waar u naar kijkt als Stellarium opstart"
 
-#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1156
 msgid "Selected object information"
 msgstr "Informatie over geselecteerde object"
 
@@ -4323,88 +4318,94 @@ msgstr ""
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automatisch uitzoomen keert terug naar de initiële kijkrichting"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1114
+msgid ""
+"Display solar shadows on planets and moons (For that feature needed OpenGL "
+"version 2 or higher)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1116
 msgid "Render Solar Shadows"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1117
 msgid "Screenshots"
 msgstr "Screenshots"
 
-#: src/ui_configurationDialog.h:1115
+#: src/ui_configurationDialog.h:1118
 msgid "Screenshot Directory"
 msgstr "Screenshot Folder"
 
-#: src/ui_configurationDialog.h:1117
+#: src/ui_configurationDialog.h:1120
 msgid "Invert colors"
 msgstr "Inverteer kleuren"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1121
 msgid "Star catalog updates"
 msgstr "Ster catalogi updates"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1123
 msgid "Click here to start downloading"
 msgstr "Klik hier om het downloaden te starten"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1125
 msgid "Download this file to view even more stars"
 msgstr "Download dit bestand om zelfs meer sterren te zien"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1127
 msgid "Restart the download"
 msgstr "Herstart de download"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1129
 msgid "Retry"
 msgstr "Opnieuw proberen"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1131
 msgid "Stop the download. You can always restart it later"
 msgstr "Stop de download. U kunt het altijd later herstarten"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1133
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1136
 msgid "Close window when script runs"
 msgstr "Sluit venster wanneer het script draait"
 
-#: src/ui_configurationDialog.h:1135
+#: src/ui_configurationDialog.h:1138
 msgid "Run the selected script"
 msgstr "Draai het geselecteerd script"
 
-#: src/ui_configurationDialog.h:1139
+#: src/ui_configurationDialog.h:1142
 msgid "Stop a running script"
 msgstr "Stop een draaiend script"
 
-#: src/ui_configurationDialog.h:1143
+#: src/ui_configurationDialog.h:1146
 msgid "Load at startup"
 msgstr "Laden bij opstarten"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1147
 msgid "configure"
 msgstr "instellen"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1152
 msgid "Main"
 msgstr "Algemeen"
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1154
 msgid "Information"
 msgstr "Informatie"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1159
 msgid "Navigation"
 msgstr "Navigatie"
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1161
 msgid "Tools"
 msgstr "Tools"
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1165
 msgid "Plugins"
 msgstr "Plug-ins"
 
