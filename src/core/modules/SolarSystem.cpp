@@ -1035,7 +1035,7 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 
 	sharedPlanetGraphics.lazyInit(renderer);
 
-	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader)
+	if(StelApp::getInstance().getRenderSolarShadows() && sharedPlanetGraphics.shadowPlanetShader && renderer->areFloatTexturesSupported())
 	{
 		StelTextureNew* shadowInfo = computeShadowInfo(renderer);
 

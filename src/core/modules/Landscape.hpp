@@ -1,4 +1,4 @@
-/*                             class 
+/*
  * Stellarium
  * Copyright (C) 2003 Fabien Chereau
  *

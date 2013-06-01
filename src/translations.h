@@ -167,6 +167,7 @@ class Translations
 		N_("Chinese");
 		N_("Egyptian");
 		N_("Inuit");
+		N_("Indian Vedic");
 		N_("Korean");
 		N_("Lakota");
 		N_("Maori");
@@ -239,6 +240,8 @@ class Translations
 		N_("Transit of Venus");
 		// TRANSLATORS: Name of script
 		N_("Analemma");
+		// TRANSLATORS: Name of script
+		N_("Sky Culture Tour");
 
 		
 		// =====================================================================
@@ -246,6 +249,8 @@ class Translations
 		
 		// TRANSLATORS: Description of the landscape tour script.
 		N_("Look around each installed landscape.");
+		// TRANSLATORS: Description of the sky culture tour script.
+		N_("Look at each installed sky culture.");
 		N_("Script to demonstrate a partial lunar eclipse.");
 		N_("Script to demonstrate a total lunar eclipse.");
 		N_("A slow, infinite tour of the sky, looking at random objects.");
@@ -635,9 +640,11 @@ class Translations
 		N_("Telrad sight");
 		
 		// Pulsars Plugin
+		N_("Show pulsars");
 		N_("Pulsars configuration window");
 		
 		// Quasars Plugin
+		N_("Show quasars");
 		N_("Quasars configuration window");
 		
 		// Satellites Plugin

@@ -83,6 +83,11 @@ Q_EXPORT_PLUGIN2(Pulsars, PulsarsStelPluginInterface)
 Pulsars::Pulsars()
 	: texPointer(NULL)
 	, markerTexture(NULL)
+	, flagShowPulsars(false)
+	, OnIcon(NULL)
+	, OffIcon(NULL)
+	, GlowIcon(NULL)
+	, toolbarButton(NULL)
 	, progressBar(NULL)
 {
 	setObjectName("Pulsars");
@@ -97,6 +102,13 @@ Pulsars::Pulsars()
 Pulsars::~Pulsars()
 {
 	delete configDialog;
+
+	if (GlowIcon)
+		delete GlowIcon;
+	if (OnIcon)
+		delete OnIcon;
+	if (OffIcon)
+		delete OffIcon;
 }
 
 void Pulsars::deinit()
@@ -128,6 +140,8 @@ double Pulsars::getCallOrder(StelModuleActionName actionName) const
 */
 void Pulsars::init()
 {
+	upgradeConfigIni();
+
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Pulsars");
@@ -147,8 +161,19 @@ void Pulsars::init()
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
+		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
+		OffIcon = new QPixmap(":/Pulsars/btPulsars-off.png");
+
+		setFlagShowPulsars(getEnableAtStartup());
+		setFlagShowPulsarsButton(flagShowPulsarsButton);
+
 		connect(gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SLOT(setChecked(bool)));
+		if (flagShowPulsarsButton)
+		{
+			connect(gui->getGuiAction("actionShow_Pulsars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowPulsars(bool)));
+		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -166,7 +191,7 @@ void Pulsars::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -199,6 +224,9 @@ void Pulsars::init()
 */
 void Pulsars::draw(StelCore* core, StelRenderer* renderer)
 {
+	if (!flagShowPulsars)
+		return;
+
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	renderer->setFont(font);
 	
@@ -252,6 +280,9 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 {
 	QList<StelObjectP> result;
 
+	if (!flagShowPulsars)
+		return result;
+
 	Vec3d v(av);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
@@ -275,10 +306,12 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 
 StelObjectP Pulsars::searchByName(const QString& englishName) const
 {
-	QString objw = englishName.toUpper();
+	if (!flagShowPulsars)
+		return NULL;
+
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getEnglishName().toUpper() == englishName)
+		if (pulsar->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -287,11 +320,12 @@ StelObjectP Pulsars::searchByName(const QString& englishName) const
 
 StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+	if (!flagShowPulsars)
+		return NULL;
 
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getNameI18n().toUpper() == nameI18n)
+		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -301,6 +335,9 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
+	if (!flagShowPulsars)
+		return result;
+
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
@@ -309,7 +346,7 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	{
 		if (pulsar->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << pulsar->getNameI18n().toUpper();
+				result << pulsar->getNameI18n();
 		}
 	}
 
@@ -322,6 +359,9 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
+	if (!flagShowPulsars)
+		return result;
+
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
@@ -330,7 +370,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		if (pulsar->getEnglishName().toUpper().left(objw.length()) == objw)
 		{
-				result << pulsar->getEnglishName().toUpper();
+				result << pulsar->getEnglishName();
 		}
 	}
 
@@ -471,7 +511,7 @@ void Pulsars::setPSRMap(const QVariantMap& map)
 	}
 }
 
-int Pulsars::getJsonFileVersion(void)
+int Pulsars::getJsonFileFormatVersion(void)
 {
 	int jsonVersion = -1;
 	QFile jsonPSRCatalogFile(jsonCatalogPath);
@@ -489,7 +529,7 @@ int Pulsars::getJsonFileVersion(void)
 	}
 
 	jsonPSRCatalogFile.close();
-	qDebug() << "Pulsars::getJsonFileVersion() version from file:" << jsonVersion;
+	qDebug() << "Pulsars::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -530,9 +570,11 @@ void Pulsars::restoreDefaultConfigIni(void)
 	conf->remove("");
 
 	conf->setValue("distribution_enabled", false);
-	conf->setValue("updates_enabled", true);
+	conf->setValue("enable_at_startup", false);
+	conf->setValue("updates_enabled", true);	
 	conf->setValue("url", "http://stellarium.org/json/pulsars.json");
 	conf->setValue("update_frequency_days", 100);
+	conf->setValue("flag_show_pulsars_button", true);
 	conf->endGroup();
 }
 
@@ -545,6 +587,8 @@ void Pulsars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
+	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
 	conf->endGroup();
 }
@@ -557,6 +601,8 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
+	conf->setValue("enable_at_startup", enableAtStartup);
+	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
 
 	conf->endGroup();
 }
@@ -662,4 +708,33 @@ void Pulsars::messageTimeout(void)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
+}
+
+void Pulsars::upgradeConfigIni(void)
+{
+	// Upgrade settings for Pulsars plugin
+	if (conf->contains("Pulsars/flag_show_pulsars"))
+	{
+		bool b = conf->value("Pulsars/flag_show_pulsars", false).toBool();
+		if (!conf->contains("Pulsars/enable_at_startup"))
+			conf->setValue("Pulsars/enable_at_startup", b);
+		conf->remove("Pulsars/flag_show_pulsars");
+	}
+}
+
+// Define whether the button toggling pulsars should be visible
+void Pulsars::setFlagShowPulsarsButton(bool b)
+{
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (b==true) {
+		if (toolbarButton==NULL) {
+			// Create the pulsars button
+			gui->getGuiAction("actionShow_Pulsars")->setChecked(flagShowPulsars);
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Pulsars"));
+		}
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	} else {
+		gui->getButtonBar()->hideButton("actionShow_Pulsars");
+	}
+	flagShowPulsarsButton = b;
 }

@@ -36,11 +36,11 @@ typedef struct
 	float mass;		//! Exoplanet mass (Mjup)
 	float radius;		//! Exoplanet radius (Rjup)
 	float period;		//! Exoplanet period (days)
-	float semiAxis;	//! Exoplanet orbit semi-major axis (AU)
+	float semiAxis;		//! Exoplanet orbit semi-major axis (AU)
 	float eccentricity;	//! Exoplanet orbit eccentricity
 	float inclination;	//! Exoplanet orbit inclination
 	float angleDistance;	//! Exoplanet angle distance
-	int discovered;		//! Exoplanet discovered year
+	int discovered;		//! Exoplanet discovered year	
 } exoplanetData;
 
 
@@ -82,10 +82,7 @@ public:
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
-	virtual QString getNameI18n(void) const
-	{
-		return designation;
-	}
+	virtual QString getNameI18n(void) const;
 	//! Get the english name
 	virtual QString getEnglishName(void) const
 	{

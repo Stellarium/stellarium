@@ -18,6 +18,7 @@
 
 #include "CCD.hpp"
 #include "Telescope.hpp"
+#include "Lens.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -140,15 +141,17 @@ void CCD::setPixelHeight(double height)
 	m_pixelHeight = height;
 }
 
-double CCD::getActualFOVx(Telescope *telescope) const
+double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
-	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / telescope->focalLength();
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / (telescope->focalLength() * lens_multipler);
 	return FOVx;
 }
 
-double CCD::getActualFOVy(Telescope *telescope) const
+double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 {
-	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / telescope->focalLength();
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / (telescope->focalLength() * lens_multipler);
 	return FOVy;
 }
 

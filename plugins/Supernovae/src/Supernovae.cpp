@@ -265,10 +265,9 @@ QList<StelObjectP> Supernovae::searchAround(const Vec3d& av, double limitFov, co
 
 StelObjectP Supernovae::searchByName(const QString& englishName) const
 {
-	QString objw = englishName.toUpper();
 	foreach(const SupernovaP& sn, snstar)
 	{
-		if (sn->getEnglishName().toUpper() == englishName)
+		if (sn->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(sn);
 	}
 
@@ -277,11 +276,9 @@ StelObjectP Supernovae::searchByName(const QString& englishName) const
 
 StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
-
 	foreach(const SupernovaP& sn, snstar)
 	{
-		if (sn->getNameI18n().toUpper() == nameI18n)
+		if (sn->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(sn);
 	}
 
@@ -299,7 +296,7 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	{
 		if (sn->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
-				result << sn->getNameI18n().toUpper();
+				result << sn->getNameI18n();
 		}
 	}
 
@@ -320,7 +317,7 @@ QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbI
 	{
 		if (sn->getEnglishName().toUpper().left(objw.length()) == objw)
 		{
-				result << sn->getEnglishName().toUpper();
+				result << sn->getEnglishName();
 		}
 	}
 

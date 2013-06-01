@@ -463,7 +463,7 @@ void projectSphericalTriangle
 			ta.b=(texCoords->a+texCoords->b)*0.5;
 			ta.c=texCoords->c;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, true, false);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, true, true, false);
 
 		//va.a=vertices->a+vertices->b;
 		//va.a.normalize();
@@ -476,7 +476,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->b;
 			ta.c=texCoords->c;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, false, true);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, true, false, true);
 		return;
 	}
 
@@ -492,7 +492,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->b;
 			ta.c=(texCoords->b+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, false, true, true);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, false, true, true);
 
 		va.a=vertices->a;
 		//va.b=vertices->b+vertices->c;
@@ -505,7 +505,7 @@ void projectSphericalTriangle
 			ta.b=(texCoords->b+texCoords->c)*0.5;
 			ta.c=texCoords->c;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, true, false);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, true, true, false);
 		return;
 	}
 
@@ -521,7 +521,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->b;
 			ta.c=(texCoords->a+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, false, true, true);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, false, true, true);
 
 		//va.a=vertices->a+vertices->c;
 		//va.a.normalize();
@@ -534,7 +534,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->b;
 			ta.c=texCoords->c;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, false, true);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, true, false, true);
 		return;
 	}
 
@@ -552,7 +552,7 @@ void projectSphericalTriangle
 			ta.b=(texCoords->a+texCoords->b)*0.5;
 			ta.c=(texCoords->b+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 		//va.a=vertices->a+vertices->b;
 		//va.a.normalize();
@@ -566,7 +566,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->b;
 			ta.c=(texCoords->b+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 		va.a=vertices->a;
 		//va.b=vertices->b+vertices->c;
@@ -579,7 +579,7 @@ void projectSphericalTriangle
 			ta.b=(texCoords->b+texCoords->c)*0.5;
 			ta.c=texCoords->c;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, true, false);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, true, true, false);
 		return;
 	}
 	if (cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
@@ -595,7 +595,7 @@ void projectSphericalTriangle
 			ta.b=(texCoords->a+texCoords->b)*0.5;
 			ta.c=(texCoords->a+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 		//va.a=vertices->a+vertices->b;
 		//va.a.normalize();
@@ -609,7 +609,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->c;
 			ta.c=(texCoords->a+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 
 		//va.a=vertices->a+vertices->b;
@@ -622,7 +622,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->b;
 			ta.c=texCoords->c;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, true, false, true);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, true, false, true);
 
 		return;
 	}
@@ -638,7 +638,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->b;
 			ta.c=(texCoords->b+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1, false, true, true);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1, false, true, true);
 
 		//va.a=vertices->b+vertices->c;
 		//va.a.normalize();
@@ -652,7 +652,7 @@ void projectSphericalTriangle
 			ta.b=texCoords->c;
 			ta.c=(texCoords->a+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 		va.b=va.a;
 		va.a=vertices->a;
@@ -666,7 +666,7 @@ void projectSphericalTriangle
 			ta.b=(texCoords->b+texCoords->c)*0.5;
 			ta.c=(texCoords->a+texCoords->c)*0.5;
 		}
-		projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+		projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 		return;
 	}
 
@@ -683,7 +683,7 @@ void projectSphericalTriangle
 		ta.b=(texCoords->b+texCoords->c)*0.5;
 		ta.c=(texCoords->a+texCoords->c)*0.5;
 	}
-	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+	projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 	va.b=va.a;
 	va.a=vertices->a;
@@ -697,7 +697,7 @@ void projectSphericalTriangle
 		ta.b=(texCoords->a+texCoords->b)*0.5;
 		ta.c=(texCoords->a+texCoords->c)*0.5;
 	}
-	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+	projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 	//va.a=vertices->a+vertices->b;
 	//va.a.normalize();
@@ -711,7 +711,7 @@ void projectSphericalTriangle
 		ta.b=texCoords->b;
 		ta.c=(texCoords->b+texCoords->c)*0.5;
 	}
-	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+	projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 	va.a=vertices->a;va.a+=vertices->c;
 	va.a.normalize();
@@ -725,7 +725,7 @@ void projectSphericalTriangle
 		ta.b=(texCoords->b+texCoords->c)*0.5;
 		ta.c=texCoords->c;
 	}
-	projectSphericalTriangle(projector, clippingCap, &va, &ta, buffer, maxSqDistortion, nbI+1);
+	projectSphericalTriangle(projector, clippingCap, &va, texCoords ? &ta : 0, buffer, maxSqDistortion, nbI+1);
 
 	return;
 }
@@ -759,7 +759,8 @@ bool triangleIntersectsDiscontinuity(StelProjector* projector, const Triplet<Vec
 
 void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
 {
-	const QVector<Vec3d>& vertices = getOctahedronPolygon().fillVertices();
+	const OctahedronPolygon &octahedron = getOctahedronPolygon();
+	const QVector<Vec3d>& vertices = octahedron.fillVertices();
 	StelProjector* projector = params.projector_;
 
 	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);

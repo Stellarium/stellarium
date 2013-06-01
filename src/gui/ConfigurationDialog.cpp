@@ -494,10 +494,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
-	conf->setValue("astro/flag_clamp_stellar_mag", skyd->getFlagClampStellarMagnitude());
-	conf->setValue("astro/clamp_stellar_mag", skyd->getClampStellarMagnitude());
-	conf->setValue("astro/flag_clamp_dso_mag", skyd->getFlagClampDSOMagnitude());
-	conf->setValue("astro/clamp_dso_mag", skyd->getClampDSOMagnitude());
+	conf->setValue("astro/flag_star_magnitude_limit",
+	               skyd->getFlagStarMagnitudeLimit());
+	conf->setValue("astro/star_magnitude_limit",
+	               skyd->getCustomStarMagnitudeLimit());
+	conf->setValue("astro/flag_nebula_magnitude_limit",
+	               skyd->getFlagNebulaMagnitudeLimit());
+	conf->setValue("astro/nebula_magnitude_limit",
+	               skyd->getCustomNebulaMagnitudeLimit());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
@@ -1156,6 +1160,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
+	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
 
 	//Restore the selection

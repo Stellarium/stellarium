@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>537</width>
-    <height>465</height>
+    <width>529</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -229,7 +229,7 @@
        <item>
         <widget class="QGroupBox" name="displayBox">
          <property name="title">
-          <string>Display mode for quasars</string>
+          <string>Settings for quasars</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -242,6 +242,20 @@
             </property>
             <property name="text">
              <string>Enable display of distribution for quasars</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayAtStartupCheckBox">
+            <property name="text">
+             <string>Enable display at startup</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayShowQuasarsButton">
+            <property name="text">
+             <string>Show quasars button on toolbar</string>
             </property>
            </widget>
           </item>

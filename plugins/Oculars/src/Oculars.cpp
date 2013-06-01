@@ -610,11 +610,12 @@ void Oculars::setScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
 		StelCore *core = StelApp::getInstance().getCore();
 		StelMovementMgr *movementManager = core->getMovementMgr();
-		double actualFOVx = ccds[selectedCCDIndex]->getActualFOVx(telescopes[selectedTelescopeIndex]);
-		double actualFOVy = ccds[selectedCCDIndex]->getActualFOVy(telescopes[selectedTelescopeIndex]);
+		double actualFOVx = ccds[selectedCCDIndex]->getActualFOVx(telescopes[selectedTelescopeIndex], lens);
+		double actualFOVy = ccds[selectedCCDIndex]->getActualFOVy(telescopes[selectedTelescopeIndex], lens);
 		if (actualFOVx < actualFOVy) {
 			actualFOVx = actualFOVy;
 		}
@@ -856,9 +857,12 @@ void Oculars::decrementTelescopeIndex()
 
 void Oculars::decrementLensIndex()
 {
-	selectedLensIndex++;
+	selectedLensIndex--;
 	if (selectedLensIndex == lense.count()) {
 		selectedLensIndex = -1;
+	}
+	if (selectedLensIndex == -2) {
+		selectedLensIndex = lense.count() - 1;
 	}
 	emit(selectedLensChanged());
 }
@@ -1023,6 +1027,8 @@ void Oculars::displayPopupMenu()
 		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
 		{
 			QMenu* submenu = addTelescopeSubmenu(popup);
+			popup->addMenu(submenu);
+			submenu = addLensSubmenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
@@ -1335,6 +1341,7 @@ void Oculars::paintCCDBounds(StelRenderer* renderer)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	renderer->setBlendMode(BlendMode_None);
 
@@ -1350,8 +1357,8 @@ void Oculars::paintCCDBounds(StelRenderer* renderer)
 		if (ccd) {
 			renderer->setGlobalColor(0.77f, 0.14f, 0.16f, 0.5f);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
-			const double ccdXRatio = ccd->getActualFOVx(telescope) / screenFOV;
-			const double ccdYRatio = ccd->getActualFOVy(telescope) / screenFOV;
+			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
+			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
 			int aspectIndex = 2;
@@ -1607,8 +1614,8 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	// The CCD
 	if (flagShowCCD) {
 		QString ccdSensorLabel, ccdInfoLabel;
-		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;		
+		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
 		QString name = ccd->name();
@@ -1716,6 +1723,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagMeridianLine(flagMeridianLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
+	core->getSkyDrawer()->setFlagLuminanceAdaptation(flagAdaptation);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -1749,6 +1757,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
+			flagAdaptation = StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation();
 		}
 
 		// set new state
@@ -1776,6 +1785,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagMeridianLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticPlaneLine(false);
+	core->getSkyDrawer()->setFlagLuminanceAdaptation(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);

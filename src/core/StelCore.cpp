@@ -893,11 +893,11 @@ bool StelCore::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
 	static double lastJD = getJDay();
-	static bool previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
+	static bool previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 	if (fabs(lastJD-getJDay())>JD_SECOND/4)
 	{
 		lastJD = getJDay();
-		previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
+		previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 	}
 	return previousResult;
 }
@@ -1329,7 +1329,7 @@ double StelCore::getDeltaT(double jDay) const
 		break;
 	case ChaprontMeeus:
 		// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
-		ndot = -26.0; // n.dot = -26.0 "/cy/cy
+		ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByChaprontMeeus(jDay);
 		break;
 	case JPLHorizons:
@@ -1369,6 +1369,11 @@ double StelCore::getDeltaT(double jDay) const
 		// Espenak & Meeus (2006) algorithm for DeltaT
 		ndot = -25.858; // n.dot = -25.858 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
+		break;
+	case Banjevic:
+		// Banjevic (2006) algorithm for DeltaT
+		ndot = -26.0; // n.dot = -26.0 "/cy/cy
+		DeltaT = StelUtils::getDeltaTByBanjevic(jDay);
 		break;
 	case Custom:
 		// User defined coefficients for quadratic equation for DeltaT
@@ -1495,6 +1500,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		break;
 	case EspenakMeeus: // GENERAL SOLUTION
 		description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
+		break;
+	case Banjevic:
+		description = q_("This solution by B. Banjevic, based on Stephenson & Morrison (1984), was published in article <em>Ancient eclipses and dating the fall of Babylon</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2006POBeo..80..251B'>2006</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Custom:
 		description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
@@ -1627,6 +1635,11 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 	case EspenakMeeus: // the default, range stated in the Canon, p. 14.
 		start	= -1999;
 		finish	= 3000;
+		break;
+	case Banjevic:
+		start	= -2020;
+		finish	= 1620;
+		validRangeAppendix = q_("with zero values outside this range");
 		break;
 	case Custom:
 		// Valid range unknown
