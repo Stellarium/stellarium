@@ -157,10 +157,10 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!varType.isEmpty())
 		{
 			if (s->componentIds)
-				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype) << "<br />";
+				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype);
 			else
-				oss << q_("Type: <b>%1</b>").arg(varstartype) << "<br />";
-			oss << q_("Type of variability: %1").arg(varType) << "<br />";
+				oss << q_("Type: <b>%1</b>").arg(varstartype);
+			oss << " (" << varType << ")<br />";
 		} else
 			oss << q_("Type: <b>%1</b>").arg(startype) << "<br />";
 
@@ -216,6 +216,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (vPeriod>0 && flags&Extra1)
 		oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
+
+	if (vEpoch>0 && vPeriod>0 && flags&Extra1)
+	{
+		// Calculate next minimum or maximum light
+		double vsEpoch = 2400000+vEpoch;
+		int npDelta = (core->getJDay()-vsEpoch)/vPeriod;
+		double npDate = vsEpoch + ((npDelta+1)*vPeriod);
+		QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+		if (ebsFlag)
+			oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
+		else
+			oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
+	}
 
 	if (vMm>0 && flags&Extra1)
 	{
