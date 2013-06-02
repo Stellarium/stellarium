@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-31 19:29+0700\n"
+"POT-Creation-Date: 2013-06-01 15:24+0700\n"
 "PO-Revision-Date: 2013-05-25 19:04+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-01 04:39+0000\n"
+"X-Launchpad-Export-Date: 2013-06-02 04:46+0000\n"
 "X-Generator: Launchpad (build 16660)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
@@ -71,7 +71,7 @@ msgstr "Tipus <b>%1</b>"
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:444
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
 #: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
-#: plugins/Exoplanets/src/Exoplanet.cpp:176
+#: plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (extincted to: <b>%2</b>)"
@@ -79,7 +79,7 @@ msgstr "Magnitud: <b>%1</b> (extincted to: <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
 #: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
-#: plugins/Exoplanets/src/Exoplanet.cpp:181
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
@@ -255,11 +255,6 @@ msgstr "estel doble"
 msgid "Type: <b>%1, %2</b>"
 msgstr "Tipus <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:163
-#, qt-format
-msgid "Type of variability: %1"
-msgstr "Tipus de variabilitat: %1"
-
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
@@ -276,14 +271,14 @@ msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "Rang de la magnitud: <b>%1</b>%2<b>%3</b> (Sistema fotomètric: %4)"
 
 #: src/core/modules/StarWrapper.cpp:199
-#: plugins/Exoplanets/src/Exoplanet.cpp:191
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tipus espectral: %1"
 
 #: src/core/modules/StarWrapper.cpp:203
 #: plugins/Supernovae/src/Supernova.cpp:115
-#: plugins/Exoplanets/src/Exoplanet.cpp:196
+#: plugins/Exoplanets/src/Exoplanet.cpp:205
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distància: %1 anys llum"
@@ -308,12 +303,22 @@ msgstr "Època de llum màxima: %1 JD"
 msgid "Period: %1 days"
 msgstr "Període: %1 dies"
 
-#: src/core/modules/StarWrapper.cpp:223
+#: src/core/modules/StarWrapper.cpp:228
+#, qt-format
+msgid "Next minimum light: %1 UTC"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:230
+#, qt-format
+msgid "Next maximum light: %1 UTC"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:236
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Duració de l'eclipsi: %1%"
 
-#: src/core/modules/StarWrapper.cpp:225
+#: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Hora de sortida: %1%"
@@ -1409,8 +1414,8 @@ msgstr "any"
 msgid "This system does not support OpenGL."
 msgstr "Aquest sistema no suporta OpenGL"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:207
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Sun"
 msgstr "Sol"
 
@@ -7315,63 +7320,63 @@ msgstr ""
 "dades dels exoplanetes es deriven de la 'Extrasolar Planets Encyclopaedia' a "
 "exoplanet.eu"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Metallicity"
 msgstr "Metal·licitat"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
-#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Mass"
 msgstr "Massa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Radius"
 msgstr "Radi"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Temperatura efectiva: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Exoplanet"
 msgstr "Exoplaneta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Period"
 msgstr "Període"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "days"
 msgstr "dies"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:223
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Jup"
 msgstr "Júp"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Semi-Major Axis"
 msgstr "Eix semimajor"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "AU"
 msgstr "UA"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:226
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Eccentricity"
 msgstr "Excentricitat"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:227
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Inclination"
 msgstr "Inclinació"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:228
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Angle Distance"
 msgstr "Distància Angular"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Discovered year"
 msgstr "Any del descobriment"
 
