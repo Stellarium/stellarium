@@ -491,7 +491,7 @@ void OcularDialog::initAboutText()
 
 	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov</td></tr>";
+	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lense feature") + ")</td></tr>";
 	html += "</table>";
 
 	//Overview
