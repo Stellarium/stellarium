@@ -63,7 +63,7 @@ Constellation::~Constellation()
 void Constellation::generateArtVertices(StelRenderer* renderer, const int resolution)
 {
 	// Texture not yet loaded.
-	if (NULL == artTexture || !artTexture->getStatus() == TextureStatus_Loaded)
+	if (NULL == artTexture || !(artTexture->getStatus() == TextureStatus_Loaded))
 	{
 		// artVertices will be still NULL, and it will be generated in a future 
 		// call once the texture is loaded

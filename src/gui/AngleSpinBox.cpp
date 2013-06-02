@@ -357,7 +357,7 @@ void AngleSpinBox::formatText(void)
 			s = (angle-d)*3600-60*m;
 
 			// we may have seconds as 60 and one less minute...
-			if (s > 60.0 - ::pow(10, -1 * (decimalPlaces+1)))
+			if (s > 60.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
 			{
 				m+=1;
 				s-=60.0;
@@ -371,9 +371,9 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10, -1 * (decimalPlaces+1)))
+			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10, -1 * (decimalPlaces+1)))
+			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			QString signInd = positivePrefix(currentPrefixType);
@@ -403,7 +403,7 @@ void AngleSpinBox::formatText(void)
 			s = (angle-h)*3600.-60.*m;
 
 			// we may have seconds as 60 and one less minute...
-			if (s > 60.0 - ::pow(10, -1 * (decimalPlaces+1)))
+			if (s > 60.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
 			{
 				m+=1;
 				s-=60.0;
@@ -417,9 +417,9 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10, -1 * (decimalPlaces+1)))
+			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10, -1 * (decimalPlaces+1)))
+			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			if (angleSpinBoxFormat == HMSLetters)

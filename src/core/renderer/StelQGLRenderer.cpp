@@ -19,6 +19,10 @@
 
 #include <cmath>
 
+#if (_MSC_VER >= 1600)
+#define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
+#endif
+
 #include "StelQGLRenderer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "QSettings"
@@ -340,8 +344,8 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		return;
 	}
 
-	const int x = win[0];
-	const int y = win[1];
+	const int x = round(win[0]);
+	const int y = round(win[1]);
 
 	// Avoid drawing if outside viewport.
 	// We do a worst-case approximation as getting exact text dimensions is expensive.
@@ -412,7 +416,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		textTexture = StelQGLTextureBackend::constructFromImage
 			(this, QString(), TextureParams().filtering(TextureFiltering_Linear), image);
 		const QSize size = textTexture->getDimensions();
-		if(!textTexture->getStatus() == TextureStatus_Loaded)
+		if (!(textTexture->getStatus() == TextureStatus_Loaded))
 		{
 			qWarning() << "Texture error: " << textTexture->getErrorMessage();
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to construct a text texture");
