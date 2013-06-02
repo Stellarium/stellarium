@@ -217,11 +217,20 @@ int StarMgr::getGCVSMagnitudeFlag(int hip)
 }
 
 
-float StarMgr::getGCVSMinMagnitude(int hip)
+float StarMgr::getGCVSMinMagnitude(int hip, bool firstMinimumFlag)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
-		return it.value().minmag;
+	{
+		if (firstMinimumFlag)
+		{
+			return it.value().min1mag;
+		}
+		else
+		{
+			return it.value().min2mag;
+		}
+	}
 	return -99.f;
 }
 
@@ -748,12 +757,13 @@ void StarMgr::loadGCVS(const QString& GCVSFile)
 		variableStar.vtype = fields.at(2).trimmed();
 		variableStar.maxmag = fields.at(3).toFloat();
 		variableStar.mflag = fields.at(4).toInt();
-		variableStar.minmag = fields.at(5).toFloat();
-		variableStar.photosys = fields.at(6).trimmed();
-		variableStar.epoch = fields.at(7).toDouble();
-		variableStar.period = fields.at(8).toDouble();
-		variableStar.Mm = fields.at(9).toInt();
-		variableStar.stype = fields.at(10).trimmed();
+		variableStar.min1mag = fields.at(5).toFloat();
+		variableStar.min2mag = fields.at(6).toFloat();
+		variableStar.photosys = fields.at(7).trimmed();
+		variableStar.epoch = fields.at(8).toDouble();
+		variableStar.period = fields.at(9).toDouble();
+		variableStar.Mm = fields.at(10).toInt();
+		variableStar.stype = fields.at(11).trimmed();
 
 		varStarsMapI18n[hip] = variableStar;
 		varStarsIndexI18n[variableStar.designation.toUpper()] = hip;
