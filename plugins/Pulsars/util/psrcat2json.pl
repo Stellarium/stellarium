@@ -9,7 +9,7 @@ $PSRCAT	= "./psrcat.db";
 $JSON	= "./pulsars.json";
 
 $FORMAT = 2;
-$CATVER = 1.44;
+$CATVER = 1.46;
 
 open (PSRCAT, "<$PSRCAT");
 @catalog = <PSRCAT>;
@@ -66,13 +66,19 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 
 		if ($lines[$j] =~ /^RAJ(\s+)([\d\-\+\:\.]+)/) {
 			($hour,$min,$sec) = split(":",$2);
+			$min += 0;
+			if ($min<10) { $min = "0".$min; }
 			$sec += 0;
+			if ($sec<10) { $sec = "0".$sec; }
 			$outRA = $hour."h".$min."m".$sec."s";
 		}
 
 		if ($lines[$j] =~ /^DECJ(\s+)([\d\-\+\:\.]+)/) {
 			($deg,$min,$sec) = split(":",$2);
+			$min += 0;
+			if ($min<10) { $min = "0".$min; }
 			$sec += 0;
+			if ($sec<10) { $sec = "0".$sec; }
 			$outDE = $deg."d".$min."m".$sec."s";
 		}
 
