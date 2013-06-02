@@ -44,7 +44,8 @@ typedef struct
 	QString vtype;		//! Type of variability
 	float maxmag;		//! Magnitude at maximum brightness
 	int mflag;		//! Magnitude flag code
-	float minmag;		//! Minimum magnitude or amplitude
+	float min1mag;		//! First minimum magnitude or amplitude
+	float min2mag;		//! Second minimum magnitude or amplitude
 	QString photosys;	//! The photometric system for magnitudes
 	double epoch;		//! Epoch for maximum light (Julian days)
 	double period;		//! Period of the variable star (days)
@@ -200,7 +201,7 @@ public:
 
 	//! Get the minimum magnitude or amplitude for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static float getGCVSMinMagnitude(int hip);
+	static float getGCVSMinMagnitude(int hip, bool firstMinimumFlag=true);
 
 	//! Get the photometric system for a variable star with a specified
 	//! Hipparcos catalogue number.
