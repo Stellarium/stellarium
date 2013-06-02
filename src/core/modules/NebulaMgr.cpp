@@ -711,8 +711,10 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
-
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	}
 	return result;
 }
 
@@ -790,7 +792,10 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }

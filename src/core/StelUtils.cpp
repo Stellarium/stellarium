@@ -1313,9 +1313,9 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
 	double u = (yeardec-1800)/100;
 
-	if (-391 < year and year <= 948)
+	if (-391 < year && year <= 948)
 		deltaT = (44.3*u +320.0)*u +1360.0;
-	if (948 < year and year <= 1600)
+	if (948 < year && year <= 1600)
 		deltaT = 25.5*u*u;
 
 	return deltaT;
@@ -1343,7 +1343,7 @@ double getDeltaTByStephensonHoulden(const double jDay)
 		u = (yeardec-948)/100;
 		deltaT = (46.5*u -405.0)*u + 1830.0;
 	}
-	if (948 < year and year <= 1600)
+	if (948 < year && year <= 1600)
 	{
 		u = (yeardec-1850)/100;
 		deltaT = 22.5*u*u;
@@ -1384,9 +1384,9 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
-	if (-391 < year and year <= 948)
+	if (-391 < year && year <= 948)
 		deltaT = (42.4*u +495.0)*u + 2177.0;
-	if (948 < year and year <= 1600)
+	if (948 < year && year <= 1600)
 		deltaT = (23.6*u +100.0)*u + 102.0;
 
 	return deltaT;
@@ -1400,12 +1400,12 @@ double getDeltaTByJPLHorizons(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	if (-2999 < year and year < 948)
+	if (-2999 < year && year < 948)
 	{
 		u=(jDay-2385800.0)/36525.0; // (1820-jan-1.5)
 		deltaT = 31.0*u*u;
 	}
-	if (948 < year and year <= 1620)
+	if (948 < year && year <= 1620)
 	{
 		u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 		deltaT = (22.5*u +67.5)*u + 50.6;
@@ -1675,7 +1675,7 @@ double getDeltaTStandardError(const double jDay)
 	//double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
 	double sigma = -1.;
 
-	if (-1000 <= year and year <= 1600)
+	if (-1000 <= year && year <= 1600)
 	{
 		double cDiff1820= (jDay-2385800.0)/36525.0; //    1820.0=1820-jan-0.5=2385800.0
 		// sigma = std::pow((yeardec-1820.0)/100,2); // sigma(DeltaT) = 0.8*u^2

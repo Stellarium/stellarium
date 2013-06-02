@@ -1652,7 +1652,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 			validRange = q_("Valid range of usage: between years %1 and %2, %3.").arg(start).arg(finish).arg(validRangeAppendix);
 		else
 			validRange = q_("Valid range of usage: between years %1 and %2.").arg(start).arg(finish);
-		if (start > year or year > finish)
+		if (start > year || year > finish)
 			*marker = "*";
 	}
 	else

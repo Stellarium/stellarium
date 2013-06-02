@@ -301,9 +301,14 @@ void StelViewportDistorterFisheyeToSphericMirror::loadGenerationParameters
 		qDebug() << "spheric_mirror/texture_triangle_base_length too low : setting to 2.0";
 		triangleBaseLength = 2.f;
 	}
+#if (_MSC_VER >= 1600)// MSVC does not have a trunc function
+	maxGridX = (int)floor(0.5 + screenWidth / triangleBaseLength);
+	maxGridY = (int)floor(screenHeight / (triangleBaseLength * 0.5 * sqrt(3.0)));
+#else
 	maxGridX = (int)trunc(0.5 + screenWidth / triangleBaseLength);
-	stepX = screenWidth / (double)(maxGridX - 0.5);
 	maxGridY = (int)trunc(screenHeight / (triangleBaseLength * 0.5 * sqrt(3.0)));
+#endif
+	stepX = screenWidth / (double)(maxGridX - 0.5);
 	stepY = screenHeight / (double)maxGridY;
 
 	gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
