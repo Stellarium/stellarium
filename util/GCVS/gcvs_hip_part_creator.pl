@@ -12,7 +12,8 @@ while (<SC>) {
     $vclassstr = substr($rawstring,44,9);
     $maxmagstr = substr($rawstring,55,7);
     $ampflagstr = substr($rawstring,65,1);
-    $minmagstr = substr($rawstring,66,6);
+    $min1magstr = substr($rawstring,66,6);
+    $min2magstr = substr($rawstring,79,6);
     $flagstr = substr($rawstring,91,2);
     $epochstr = substr($rawstring,94,10);
     $periodstr = substr($rawstring,114,16);
@@ -23,7 +24,8 @@ while (<SC>) {
     $designationstr =~ s/(\s+)/ /gi;
     $vclassstr =~ s/(\s+)//gi;
     $maxmagstr =~ s/(\s+)//gi;
-    $minmagstr =~ s/(\s+)//gi;
+    $min1magstr =~ s/(\s+)//gi;
+    $min2magstr =~ s/(\s+)//gi;
     $epochstr =~ s/(\s+)//gi;
     $periodstr =~ s/(\s+)//gi;
     $mmstr =~ s/(\s+)//gi;
@@ -67,7 +69,7 @@ while (<SC>) {
 	$ampflag = 3;
     }
     
-    print OC $hipstr."\t".$designationstr."\t".$vclassstr."\t".$maxmagstr."\t".$ampflag."\t".$minmagstr."\t".$flagstr."\t".$epochstr."\t".$periodstr."\t".$mmstr."\t".$sclassstr."\n";
+    print OC $hipstr."\t".$designationstr."\t".$vclassstr."\t".$maxmagstr."\t".$ampflag."\t".$min1magstr."\t".$min2magstr."\t".$flagstr."\t".$epochstr."\t".$periodstr."\t".$mmstr."\t".$sclassstr."\n";
 }
 close SC;
 close OC;
