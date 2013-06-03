@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-01 15:24+0700\n"
-"PO-Revision-Date: 2013-05-08 16:39+0000\n"
+"POT-Creation-Date: 2013-06-02 17:23+0700\n"
+"PO-Revision-Date: 2013-06-02 10:15+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-02 04:45+0000\n"
+"X-Launchpad-Export-Date: 2013-06-03 05:16+0000\n"
 "X-Generator: Launchpad (build 16660)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -223,27 +223,27 @@ msgstr "Бачная велічыня: <b>%1</b> (паводле згаслас�
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "эруптыўная зьменная зорка"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "пульсуючая зьменная зорка"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "аварачальная зьменная зорка"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "катаклізьмічная зьменная зорка"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "зацьменная падвойная сыстэма"
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "зьменная зорка"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -252,7 +252,7 @@ msgstr "падвойная зорка"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Тып: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -267,7 +267,7 @@ msgstr "Велічыня: <b>%1</b> (Б-Б: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Прамежак велічынь: <b>%1</b>%2<b>%3</b> (Фотамэтрычная сыстэма: %4)"
 
 #: src/core/modules/StarWrapper.cpp:199
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -290,37 +290,37 @@ msgstr "Паралякс: %1\""
 #: src/core/modules/StarWrapper.cpp:212
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Эпоха мінімуму: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:214
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Эпоха максымуму: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:218
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Пэрыяд: %1 дзён"
 
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Наступны мінімум бляску: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:230
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Наступны максымум бляску: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Працягласьць зацьменьня: %1%"
 
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Час узыходжаньня: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -607,6 +607,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Рашэньне Б. Баньевіча, заснаванае на рашэньні Стэфэнсана й Морысана (1984), "
+"было апублікаванае ў артыкуле em>Старажытныя зацьменьні й датаваньне "
+"падзеньня Бабілёну</em> (%1)."
 
 #: src/core/StelCore.cpp:1508
 #, qt-format
@@ -1034,7 +1037,7 @@ msgstr "Р'ейс (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1163
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Баньевіч (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1164
 #, qt-format
@@ -3884,10 +3887,12 @@ msgstr "Плянэты"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Надпісы й пазнакі для аб'ектаў глыбокага космасу (скопішчы зорак, ґаляктыкі "
+"й туманнасьці)"
 
 #: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
 msgid "DSO"
-msgstr ""
+msgstr "АГК"
 
 #: src/ui_viewDialog.h:1203
 msgid "Planets and satellites"
@@ -3979,12 +3984,14 @@ msgstr "Абмежаваць велічыні"
 
 #: src/ui_viewDialog.h:1236
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Абмежаваньне велічыні зорак"
 
 #: src/ui_viewDialog.h:1240
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Абмежаваньне  велічыні аб'ектаў глыбокага космасу (скопішчаў зорак, ґаляктык "
+"і туманнасьцяў)"
 
 #: src/ui_viewDialog.h:1243
 msgid "Constellations"
@@ -4399,6 +4406,8 @@ msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr ""
+"Паказваць сонечныя цені на плянэтах і месяцах (гэтая функцыя патрабуе OpenGL "
+"вэрсіі 2 ці большай)"
 
 #: src/ui_configurationDialog.h:1116
 msgid "Render Solar Shadows"
@@ -4955,6 +4964,10 @@ msgstr "Дадатак «Акуляр»"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "Вэрсія"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+msgid "Barlow lense feature"
+msgstr "Асаблівасьці лінзы Барлоў"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid "Overview"
@@ -7054,7 +7067,7 @@ msgstr "Настаўленьні дадатку «Квазары»"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:267
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Настройкі квазараў"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Plot all quasars without labels"
@@ -7072,7 +7085,7 @@ msgstr "Паказваць на пачатку працы"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "Паказваць ґузік квазараў на панэлі прылад"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -7270,7 +7283,7 @@ msgstr "Настаўленьні дадатку «Пульсары»"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Настройкі пульсараў"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Plot all pulsars without labels"
@@ -7282,7 +7295,7 @@ msgstr "Задзейнічаць паказ разьмеркаваньня пу�
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:273
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Паказваць ґузік пульсараў на панэлі прылад"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:72
 msgid "Exoplanets"
@@ -7398,7 +7411,7 @@ msgstr "Абнавіць зьвесткі пра экзаплянэты зь С�
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Настройкі экзаплянэт"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
 msgid "Plot all systems with exoplanets without labels"
@@ -7418,7 +7431,7 @@ msgstr "Паказваць час адкрыцьця экзаплянэт"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "Паказваць ґузік экзаплянэт на панэлі прылад"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
