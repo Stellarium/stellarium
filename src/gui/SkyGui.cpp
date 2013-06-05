@@ -30,7 +30,7 @@
 #include <QSettings>
 #include <QTextDocument>
 
-#if (_MSC_VER >= 1600)
+#ifdef _MSC_BUILD
 #define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
 #endif
 
