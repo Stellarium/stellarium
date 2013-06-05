@@ -83,7 +83,9 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 }
 
 #if (!defined(__GNUC__))
+#ifndef _MSC_BUILD
 #warning Star catalogue loading has only been tested with gcc
+#endif
 #endif
 
 ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
@@ -142,8 +144,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		if (use_mmap)
 		{
 			// mmap only with gcc:
-			dbStr += "warning - you must convert catalogue "
-				  += "to native format before mmap loading";
+			dbStr += "warning - you must convert catalogue to native format before mmap loading";
 			qDebug(qPrintable(dbStr));
 
 			return 0;
