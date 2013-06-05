@@ -21,6 +21,14 @@
 #include <windows.h>
 
 #include <direct.h>
+#ifdef _MSC_BUILD
+#include <errno.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "kdewin32/unistd.h"
+#else
 #include "kdewin32/errno.h"
 #include "kdewin32/fcntl.h"
 #include "kdewin32/stdio.h"
@@ -29,7 +37,9 @@
 #include "kdewin32/sys/socket.h"
 #include "kdewin32/sys/stat.h"
 #include "kdewin32/unistd.h"
+#endif
 
+#ifndef _MSC_BUILD
 // BEGIN stat.c
 int lstat(const char *path, struct stat *sb)
 {
@@ -41,6 +51,7 @@ int fchmod(int __fd, mode_t __mode)
   return 0;
 }
 // END stat.c
+#endif
 
 int getgroups(int size, gid_t list[])
 {
@@ -48,6 +59,7 @@ int getgroups(int size, gid_t list[])
 	return 0;
 }
 
+#ifndef _MSC_BUILD
 int readlink(const char *__path, char *__buf, int __buflen)
 {
     if (!__path) {
@@ -68,6 +80,7 @@ int readlink(const char *__path, char *__buf, int __buflen)
     errno = ENOENT;
     return -1;
 }
+#endif
 
 int symlink(const char *__name1, const char *__name2)
 {
@@ -423,7 +436,7 @@ int getopt(int argc, char **argv, const char *optstring)
 	}
 
 	c = *next++;
-	cp = strchr(optstring, c);
+	cp = (char*) strchr(optstring, c);
 
 	if (cp == NULL || c == ':')
 		return '?';
@@ -452,7 +465,7 @@ int getopt(int argc, char **argv, const char *optstring)
 #endif  // __MINGW32__
 
 
-int truncate(const char *path, off_t length)
+int truncate(const char *path, int length)
 {
     HANDLE hFile;
     LARGE_INTEGER fileSize;
@@ -500,7 +513,7 @@ int truncate(const char *path, off_t length)
 
 #ifndef __MINGW32__
 // TODO (js) consider using _chsize_s
-int ftruncate(int fd, off_t length)
+int ftruncate(int fd, int length)
 {
   return _chsize (fd, length);
 }
