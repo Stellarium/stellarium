@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-02 17:23+0700\n"
-"PO-Revision-Date: 2013-05-03 09:46+0000\n"
+"POT-Creation-Date: 2013-06-04 17:07+0700\n"
+"PO-Revision-Date: 2013-06-04 06:44+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-03 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-06-05 05:20+0000\n"
 "X-Generator: Launchpad (build 16660)\n"
 "Language: bn\n"
 
@@ -222,27 +222,27 @@ msgstr "অাপাত ঔজ্জ্বল্য : <b>%1</b> (by extinction)"
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "উত্ক্ষেপজাত বিষম ঔজ্জ্বল্যের নক্ষত্র"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "স্পন্দনজাত বিষম ঔজ্জ্বল্যের নক্ষত্র"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "আবর্তনজনিত বিষম ঔজ্জ্বল্যের নক্ষত্র"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "বিস্ফোরণ যোগ্য বিষম ঔজ্জ্বল্যের নক্ষত্র"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "গ্রহণ যোগ্য দ্বৈত নক্ষত্র"
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "বিষম ঔজ্জ্বল্যের নক্ষত্র"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -251,7 +251,7 @@ msgstr "দ্বৈত নক্ষত্র"
 #: src/core/modules/StarWrapper.cpp:160
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "ধরন : <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -266,7 +266,7 @@ msgstr "ঔজ্জ্বল্য : <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "ঔজ্জ্বল্যতার সীমা : <b>%1</b>%2<b>%3</b> (আলোকমিতি ব্যবস্থায় : %4)"
 
 #: src/core/modules/StarWrapper.cpp:199
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -289,37 +289,37 @@ msgstr "লম্বণ : %1\""
 #: src/core/modules/StarWrapper.cpp:212
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "সর্বনিম্ন ঔজ্জ্বল্যের দশা : %1 জুলিয়ান দিন"
 
 #: src/core/modules/StarWrapper.cpp:214
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "সর্বোচ্চ ঔজ্জ্বল্যের দশা : %1 জুলিয়ান দিন"
 
 #: src/core/modules/StarWrapper.cpp:218
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "পর্যায়কাল : %1 দিন"
 
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "পরবর্তী সর্বনিম্ন ঔজ্জ্বল্য : %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:230
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "পরবর্তী সর্বোচ্চ ঔজ্জ্বল্য : %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "গ্রহণের সময়কাল : %1%"
 
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "উদয় : %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -606,6 +606,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Stephenson এবং Morrison (১৯৮৪) এর উপর ভিত্তি করে B. Banjevic এর এই সমাধানটি "
+"<em>Ancient eclipses and dating the fall of Babylon</em> (%1) প্রবন্ধে "
+"প্রকাশিত হয় ।"
 
 #: src/core/StelCore.cpp:1508
 #, qt-format
@@ -1025,7 +1028,7 @@ msgstr "Reijs (২০০৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1163
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (২০০৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1164
 #, qt-format
@@ -3864,10 +3867,12 @@ msgstr "গ্রহ"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"গভীর আকাশের জ্যোতিষ্কসমূহ (তারকাগুচ্ছ, নক্ষত্রলোক এবং নীহারিকা) এর নাম "
+"প্রদর্শণ"
 
 #: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
 msgid "DSO"
-msgstr ""
+msgstr "গভীর আকাশের জ্যোতিষ্কসমূহ প্রদর্শণ"
 
 #: src/ui_viewDialog.h:1203
 msgid "Planets and satellites"
@@ -3959,12 +3964,14 @@ msgstr "সীমিত ঔজ্জ্বলতা"
 
 #: src/ui_viewDialog.h:1236
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "নক্ষত্র সমূহের ঔজ্জ্বল্যতার সীমা নিয়ন্ত্রণ"
 
 #: src/ui_viewDialog.h:1240
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"গভীর আকাশের জ্যোতিষ্ক (তারকাগুচ্ছ, নক্ষত্রলোক, নীহারিকা) সমূহের "
+"ঔ্জ্জ্বল্যতার সীমা নিয়ন্ত্রণ"
 
 #: src/ui_viewDialog.h:1243
 msgid "Constellations"
@@ -4379,6 +4386,8 @@ msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr ""
+"গ্রহ ও উপগ্রহ সমূহের উপর সৌরছায়া প্রদর্শণ (এর জন্য OpenGL সংস্করণ ২ বা তার "
+"বেশি প্রয়োজন)"
 
 #: src/ui_configurationDialog.h:1116
 msgid "Render Solar Shadows"
@@ -4937,7 +4946,7 @@ msgid "Version"
 msgstr "সংস্করণ"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
-msgid "Barlow lense feature"
+msgid "Barlow lens feature"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
@@ -7026,7 +7035,7 @@ msgstr "কোয়াসার প্লাগইনের বৈশিষ্ট�
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:267
 msgid "Settings for quasars"
-msgstr ""
+msgstr "কোয়াসার সমূহের বৈশিষ্টাবলী বিন্যাস"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Plot all quasars without labels"
@@ -7044,7 +7053,7 @@ msgstr "শুরু থেকেই প্রদর্শন চালু"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "টুলবারে কোয়াসার বিকল্প প্রদর্শণ"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -7237,7 +7246,7 @@ msgstr "পালসার প্লাগইনের বৈশিষ্ট্�
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "পালসার সমূহের বৈশিষ্টাবলী বিন্যাস"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Plot all pulsars without labels"
@@ -7249,7 +7258,7 @@ msgstr "পলসারদের বণ্টন প্রদর্শন সক
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:273
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "টুলবারে পালসার বিকল্প প্রদর্শণ"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:72
 msgid "Exoplanets"
@@ -7363,7 +7372,7 @@ msgstr "বহির্গ্রহগুলির তথ্য ইন্টা�
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "বহির গ্রহ সমূহের বৈশিষ্টাবলী বিন্যাস"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
 msgid "Plot all systems with exoplanets without labels"
@@ -7383,7 +7392,7 @@ msgstr "বহির গ্রহ আবিস্কারের সময়সূ
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "টুলবারে বহির গ্রহ বিকল্প প্রদর্শণ"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
