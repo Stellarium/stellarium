@@ -17,7 +17,11 @@
 * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#ifdef _MSC_BUILD 
+#include "kdewin32/dirent.h"
+#else
 #include <dirent.h>
+#endif
 #include <cstdio>
 #include <algorithm>
 #include <fstream>
