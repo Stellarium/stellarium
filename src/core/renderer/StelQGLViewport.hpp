@@ -105,6 +105,11 @@ public:
 		// Forces glWidget to initialize GL.
 		glWidget->updateGL();
 
+#ifdef _MSC_BUILD
+		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_LINE_SMOOTH);
+#endif
+
 		// Qt GL2 paint engine does some FBO magic depending 
 		// on glBlendFunc having a particular value. I wasn't able 
 		// to figure out what value it was, so another workaround 
