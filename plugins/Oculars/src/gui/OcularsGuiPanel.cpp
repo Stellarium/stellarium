@@ -606,7 +606,7 @@ void OcularsGuiPanel::updateLensControls()
 	}
 	fieldLensName->setPlainText(fullName);
 	fieldLensMultipler->setPlainText(multiplerString);
-	fieldOcularFl->setToolTip(q_("Multiplicity of lens"));
+	fieldOcularFl->setToolTip(q_("Focal length of eyepiece"));
 	
 	qreal posX = 0.;
 	qreal posY = 0.;
