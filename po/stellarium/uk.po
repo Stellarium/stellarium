@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-01 15:24+0700\n"
-"PO-Revision-Date: 2013-06-01 09:46+0000\n"
+"POT-Creation-Date: 2013-06-07 18:16+0700\n"
+"PO-Revision-Date: 2013-06-07 17:33+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-02 04:55+0000\n"
-"X-Generator: Launchpad (build 16660)\n"
+"X-Launchpad-Export-Date: 2013-06-08 05:25+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -4943,8 +4943,8 @@ msgid "Multiplicity: N/A"
 msgstr "Кратність: недоступна"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
-msgid "Multiplicity of lens"
-msgstr "Кратність лінзи"
+msgid "Focal length of eyepiece"
+msgstr "Фокусна відстань окуляра"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -4984,6 +4984,10 @@ msgstr "Додаток окулярів"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "Версія"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+msgid "Barlow lens feature"
+msgstr "Функція лінзи Барлоу"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid "Overview"
@@ -5153,7 +5157,7 @@ msgstr "Лінзи"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplier:"
-msgstr "Множник:"
+msgstr "Кратність:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
