@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-01 15:24+0700\n"
-"PO-Revision-Date: 2013-06-01 09:45+0000\n"
+"POT-Creation-Date: 2013-06-07 18:16+0700\n"
+"PO-Revision-Date: 2013-06-08 16:49+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-02 04:48+0000\n"
-"X-Generator: Launchpad (build 16660)\n"
+"X-Launchpad-Export-Date: 2013-06-09 05:21+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
@@ -4950,8 +4950,8 @@ msgid "Multiplicity: N/A"
 msgstr "Coeff. multiplicateur : non disp."
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
-msgid "Multiplicity of lens"
-msgstr "Coeff. multiplicateur de la lentille"
+msgid "Focal length of eyepiece"
+msgstr "Distance focale de l'oculaire"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -4990,6 +4990,10 @@ msgstr "Plugin pour les oculaires"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "Version"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+msgid "Barlow lens feature"
+msgstr "Lentille de Barlow"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid "Overview"
