@@ -1274,10 +1274,10 @@ void Oculars::initializeActivationActions()
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 		toolbarButton = new StelButton(NULL,
-																	 *pxmapOnIcon,
-																	 *pxmapOffIcon,
-																	 *pxmapGlow,
-																	 actionShowOcular);
+					       *pxmapOnIcon,
+					       *pxmapOffIcon,
+					       *pxmapGlow,
+					       actionShowOcular);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
