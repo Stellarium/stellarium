@@ -1,4 +1,5 @@
 
+# Minimal version of cmake for using with Qt5 is 2.8.9
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7)
 
 # Avoid repeating the IF statement in the ENDIF and ELSE
