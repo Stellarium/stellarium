@@ -1,3 +1,21 @@
+0.8.0 [2013-05-31]
+Some class interface cleanup.
+Satellites list management:
+- improved multiple selection handling and operations (toggling display and
+orbit flags, etc.)
+- editable satellite groups; adding custom groups
+- localization of default satellite group names and satellite descriptions
+- list entry indicates hint color
+Update management:
+- automatic adding of new satellites on update from selected update sources;
+by default, only new naked-eye satellites are auto-added
+- automatic removal of satellites if they are no longer listed in the update
+sources
+- "user-defined" flag protecting satellites from update/removal
+
+WARNING! There have been changes to the config.ini section format, but they are
+backwards-compatible.
+
 0.7.3
 Use editable keybindings
 
