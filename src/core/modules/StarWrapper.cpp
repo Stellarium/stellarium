@@ -95,17 +95,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
 		const QString sciName = StarMgr::getSciName(s->hip);
+		const QString addSciName = StarMgr::getSciAdditionalName(s->hip);
 		const QString varSciName = StarMgr::getGCVSName(s->hip);
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
-			if (commonNameI18!="" || sciName!="" || varSciName!="")
+			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
 			{
 				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
 				if (commonNameI18!="" && sciName!="")
 					oss << "(";
 				oss << (sciName=="" ? "" : sciName);
+				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
 				if (varSciName!="" && varSciName!=sciName)
 					oss << (sciName=="" ? "" : " - ") << varSciName;
 				if (commonNameI18!="" && sciName!="")
