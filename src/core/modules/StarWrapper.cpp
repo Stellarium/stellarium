@@ -54,11 +54,11 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	if (flags&Magnitude)
 	{
-	    oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
-            if (core->getSkyDrawer()->getFlagHasAtmosphere())
-            {
-                oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
-            }
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
+			oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		}
         }
         oss << getPositionInfoString(core, flags);
 
