@@ -6,15 +6,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-10 23:30+0300\n"
-"PO-Revision-Date: 2012-01-26 05:28+0000\n"
-"Last-Translator: Ajju Bengalooru <ajju.blr@gmail.com>\n"
+"PO-Revision-Date: 2013-06-13 18:04+0000\n"
+"Last-Translator: N.SHANKARAPPA <shankarappa.toranagallu@gmail.com>\n"
 "Language-Team: Kannada <kn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-11 05:22+0000\n"
+"X-Launchpad-Export-Date: 2013-06-14 05:14+0000\n"
 "X-Generator: Launchpad (build 16667)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
@@ -39,11 +39,11 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:508
 msgid "Author: "
-msgstr "ಕೃತಿಕಾರ: "
+msgstr "ಕೃತಿಕಾರ : "
 
 #: src/core/modules/LandscapeMgr.cpp:511
 msgid "Location: "
-msgstr "ಸ್ಥಳ "
+msgstr "ಸ್ಥಳ : "
 
 #: src/core/modules/LandscapeMgr.cpp:516
 #, qt-format
@@ -52,7 +52,7 @@ msgstr ",%1 ಮೀ"
 
 #: src/core/modules/LandscapeMgr.cpp:520
 msgid "Planet: "
-msgstr "ಗ್ರಹ: "
+msgstr "ಗ್ರಹ : "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
@@ -1347,7 +1347,7 @@ msgstr "ಯುರೋಪ"
 
 #: src/translations.h:48
 msgid "Ganymede"
-msgstr "ಗ್ಯನಿಮೆಡ್"
+msgstr "ಗ್ಯಾನಿಮೆಡ್"
 
 #: src/translations.h:49
 msgid "Callisto"
@@ -1417,7 +1417,7 @@ msgstr "ಎನ್ಸೆಲಾಡಸ್"
 
 #: src/translations.h:65
 msgid "Tethys"
-msgstr "ಟೆತಿಸ್"
+msgstr "ತೆಥಿಸ್"
 
 #: src/translations.h:66
 msgid "Dione"
@@ -1425,11 +1425,11 @@ msgstr "ಡಿಯೊನ್"
 
 #: src/translations.h:67
 msgid "Rhea"
-msgstr "ರ್ಹಿಯ"
+msgstr "ರಿಯಾ"
 
 #: src/translations.h:68
 msgid "Titan"
-msgstr "ಟೈಟನ್"
+msgstr "ಟೈಟಾನ್"
 
 #: src/translations.h:69
 msgid "Hyperion"
@@ -1473,7 +1473,7 @@ msgstr "ಒಬೆರೋನ್"
 
 #: src/translations.h:79
 msgid "Pluto"
-msgstr "ಪ್ಲುಟೊ"
+msgstr "ಪ್ಲುಟೋ"
 
 #: src/translations.h:80
 msgid "Charon"
@@ -1641,19 +1641,19 @@ msgstr ""
 
 #: src/translations.h:143
 msgid "N"
-msgstr "ಉ"
+msgstr "ಬಡಗಣ (ಉತ್ತರ)"
 
 #: src/translations.h:144
 msgid "S"
-msgstr "ದ"
+msgstr "ತೆಂಕಣ (ದಕ್ಷಿಣ)"
 
 #: src/translations.h:145
 msgid "E"
-msgstr "ಪೂ"
+msgstr "ಮೂಡಣ (ಪೂರ್ವ)"
 
 #: src/translations.h:146
 msgid "W"
-msgstr "ಪ"
+msgstr "ಪಡುವಣ (ಪಶ್ಚಿಮ)"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
@@ -1706,7 +1706,7 @@ msgstr ""
 
 #: src/translations.h:171
 msgid "Korean"
-msgstr "ಕೋರಿಯನ್"
+msgstr "ಕೊರಿಯನ್"
 
 #: src/translations.h:172
 msgid "Lakota"
@@ -1726,7 +1726,7 @@ msgstr "ನೋರ್ಸ್"
 
 #: src/translations.h:176
 msgid "Polynesian"
-msgstr "ಪೋಲಿನೇಸಿಯ"
+msgstr "ಪಾಲಿನೇಸಿಯ"
 
 #: src/translations.h:177
 msgid "Sami"
@@ -1742,7 +1742,7 @@ msgstr ""
 
 #: src/translations.h:180
 msgid "Western"
-msgstr "ವೆಸ್ಟರ್ನ್"
+msgstr "ಪಾಶ್ಚಾತ್ಯ"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:186
@@ -3138,7 +3138,7 @@ msgstr "ಪೂರ್ಣ ಪರದೆ"
 
 #: src/translations.h:573 src/ui_viewDialog.h:1209
 msgid "Atmosphere"
-msgstr "ವಾತಾವರಣ"
+msgstr "ವಾಯುಮಂಡಲ"
 
 #: src/translations.h:574 src/ui_viewDialog.h:1253
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -3200,7 +3200,7 @@ msgstr ""
 
 #: src/translations.h:586
 msgid "Fog"
-msgstr "ಮಂಜು"
+msgstr "ಮಂಜು/ಕಾವಳ"
 
 #: src/translations.h:587 src/ui_viewDialog.h:1254
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
@@ -3252,7 +3252,7 @@ msgstr "ಗ್ರಹ ಜಾಡು"
 #: src/ui_viewDialog.h:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
-msgstr "ನಕ್ಷತ್ರಗಳು"
+msgstr "ತಾರೆಗಳು"
 
 #: src/translations.h:598
 msgid "Stars labels"
@@ -3916,7 +3916,7 @@ msgstr "ಗೋಚರ"
 
 #: src/ui_configurationDialog.h:973
 msgid "Configuration"
-msgstr "ಸಂರಚನೆ"
+msgstr "ಸಂವಿನ್ಯಾಸ (ಕಾನ್'ಫಿಗರೇಷನ್)"
 
 #: src/ui_configurationDialog.h:975
 msgid "Program language"
@@ -5997,7 +5997,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
-msgstr ""
+msgstr "ಓ.ಕೆ/ಸರಿ"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
@@ -7112,7 +7112,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "AU"
-msgstr ""
+msgstr "ಖಗೋಳ ಮಾನ (AU)"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Eccentricity"
@@ -7274,7 +7274,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:500
 #: plugins/Observability/src/Observability.cpp:542
 msgid "m"
-msgstr ""
+msgstr "ಎಂ"
 
 #: plugins/Observability/src/Observability.cpp:499
 #: plugins/Observability/src/Observability.cpp:500
@@ -7586,9 +7586,6 @@ msgstr ""
 #~ msgid "Date & Time"
 #~ msgstr "ದಿನಾಂಕ ಹಾಗು ಸಮಯ"
 
-#~ msgid "Stars "
-#~ msgstr "ನಕ್ಷತ್ರಗಳು "
-
 #~ msgid "Colors "
 #~ msgstr "ಬಣ್ಣಗಳು "
 
@@ -7598,20 +7595,11 @@ msgstr ""
 #~ msgid "Set Time "
 #~ msgstr "ವೇಳೆಯನ್ನು ನಿಗದಿಗೊಳಿಸು "
 
-#~ msgid "Effects "
-#~ msgstr "ಪರಿಣಾಮ "
-
-#~ msgid "Administration "
-#~ msgstr "ಕಾರ್ಯ ನಿರ್ವಹಣೆ "
-
 #~ msgid "Latitude: "
 #~ msgstr "ಅಕ್ಷಾಂಶ: "
 
 #~ msgid "Longitude: "
 #~ msgstr "ರೇಖಾಂಶ: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "ಸೌರವ್ಯೂಹದ ಕಾಯಕ: "
 
 #~ msgid "Sky Time: "
 #~ msgstr "ಆಕಾಶ ವೇಳೆ: "
@@ -7634,23 +7622,8 @@ msgstr ""
 #~ msgid "Twinkling: "
 #~ msgstr "ಮಿನುಗುವಿಕೆ: "
 
-#~ msgid "Constellation Lines"
-#~ msgstr "ತಾರಾಗಣ ರೇಖೆ"
-
-#~ msgid "Constellation Names"
-#~ msgstr "ತಾರಾಗಣದ ಹೆಸರುಗಳು"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "ತಾರಾಗಣದ ಚಿತ್ರಕಲೆಯ ತೀಕ್ಷ್ಣತೆ"
-
 #~ msgid "Planet Names"
 #~ msgstr "ಗ್ರಹದ ಹೆಸರುಗಳು"
-
-#~ msgid "Planet Trails"
-#~ msgstr "ಗ್ರಹದ ಜಾಡು"
-
-#~ msgid "Equator Line"
-#~ msgstr "ಭೂಮಧ್ಯ ರೇಖೆ"
 
 #~ msgid "Nebula Circles"
 #~ msgstr "ನೀಹಾರಿಕಾ ವೃತ್ತಗಳು"
@@ -7673,12 +7646,6 @@ msgstr ""
 #~ msgid "Set UI Locale: "
 #~ msgstr "ಭಾಷಾ ಆಯ್ಕೆ: "
 
-#~ msgid "Meridian Line"
-#~ msgstr "ಮಧ್ಯ ರೇಖೆ"
-
-#~ msgid "Scripts "
-#~ msgstr "ಲಿಪಿ "
-
 #~ msgid "Set Time Zone: "
 #~ msgstr "ವಲಯದ ವೇಳೆ ನಿಯಮಿಸಿ: "
 
@@ -7700,18 +7667,6 @@ msgstr ""
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "ಪರಿಮಾಣದ ಸೀಮೆ: "
 
-#~ msgid "Cardinal Points"
-#~ msgstr "ಮೂಲಾಂಕ ಬಿಂದುಗಳು"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "ದೊಡ್ಡದಾಗಿ ಇರಬೇಕಾದ ವೇಳೆ: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "ಸಿಡಿ/ಡಿವಿಡಿ ಲಿಪಿ: "
-
-#~ msgid "Local Script: "
-#~ msgstr "ಸ್ಥಳೀಯ ಲಿಪಿ: "
-
 #~ msgid "Select and exit to run."
 #~ msgstr "ನಿರ್ವಹಿಸಲು ಅಯ್ಕೆ ಮಾಡಿ ನಿರ್ಗಮಿಸಿ."
 
@@ -7721,23 +7676,11 @@ msgstr ""
 #~ msgid "Altitude (m): "
 #~ msgstr "ಎತ್ತರ (ಮೀ): "
 
-#~ msgid "Constellation Boundaries"
-#~ msgstr "ತಾರಾಗಣದ ಗಡಿ"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "ಗ್ರಹಕಕ್ಷೆಗಳು"
-
 #~ msgid "Nebula Names"
 #~ msgstr "ನೀಹಾರಿಕೆಯ ಹೆಸರುಗಳು"
 
 #~ msgid "Object Sizing Rule: "
 #~ msgstr "ವಸ್ತುವಿನ ಗಾತ್ರ ನಿಯಮ: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "ಪರಿಮಾಣ ಗುಣಿತಾಂಕ "
-
-#~ msgid "USB Script: "
-#~ msgstr "ಯು.ಎಸ್.ಬಿ. ಲಿಪಿ: "
 
 #~ msgid "Correct for light travel time: "
 #~ msgstr "ಜ್ಯೋತಿರ್ ಪ್ರಯಾಣದ ಸಮಯಕ್ಕೆ ವಜಾ: "
@@ -7751,23 +7694,11 @@ msgstr ""
 #~ msgid "Planets labels"
 #~ msgstr "ಗ್ರಹಗಳ ಹೆಸರು"
 
-#~ msgid "Day keys: "
-#~ msgstr "ದಿನದ ಕೀಲಿ: "
-
 #~ msgid ":"
 #~ msgstr ":"
 
 #~ msgid "/"
 #~ msgstr "/"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "ಗ್ರಹಣ ರೇಖೆ"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "ಸಮಭಾಜಕ ಜಾಲ"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "ದಿಗಂಶ ಜಾಲ"
 
 #~ msgid "Light pollution: "
 #~ msgstr "ಬೆಳಕಿನ ಮಾಲಿನ್ಯ: "
@@ -7793,5 +7724,97 @@ msgstr ""
 #~ msgid "Other"
 #~ msgstr "ಇತರೆ"
 
+#~ msgid "Equatorial Grid"
+#~ msgstr "ಸಮಭಾಜಕ ರೇಖಾಪಟ್ಟಿ"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "ಅಝಿಮಥಲ್ ರೇಖಾಪಟ್ಟಿ"
+
+#~ msgid "Equator Line"
+#~ msgstr "ಸಮಭಾಜಕ ರೇಖೆ"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "ಕ್ರಾಂತಿ ರೇಖೆ (ವೃತ್ತ)"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "ದಿಶಾ ಬಿಂದುಗಳು"
+
+#~ msgid "Stars "
+#~ msgstr "ತಾರೆಗಳು "
+
+#~ msgid "Effects "
+#~ msgstr "ಪರಿಣಾಮಗಳು "
+
+#~ msgid "Scripts "
+#~ msgstr "ಕ್ರಿಯಾಬರಹ (ಸ್ಕ್ರಿಪ್ಟ್) "
+
+#~ msgid "Administration "
+#~ msgstr "ಆಡಳಿತ "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "ಸೌರವ್ಯೂಹದ ಕಾಯ : "
+
+#~ msgid "Day keys: "
+#~ msgstr "ದಿನದ ಕೀಲಿಗಳು: "
+
 #~ msgid "Sidereal"
-#~ msgstr "ಸ್ಥಿರ ನಕ್ಷತ್ರ ಪುಂಜ"
+#~ msgstr "ನಾಕ್ಷತ್ರಿಕ"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "ತಾರಾ ಮೌಲ್ಯ ಗುಣಕ "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "ಗರಿಷ್ತ ಕಾಂತಿಮಾನ ಪಟ್ಟಿ (ಲೇಬಲ್) "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "ತಾರಾಪುಂಜ ರೇಖೆ"
+
+#~ msgid "Constellation Names"
+#~ msgstr "ತಾರಾಪುಂಜ ಹೆಸರುಗಳು"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "ತಾರಾಪುಂಜದ ಚಿತ್ರಕಲೆಯ ತೀಕ್ಷ್ಣತೆ"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "ತಾರಾಪುಂಜದ ಮೇರೆಗಳು"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "ಗ್ರಹ ಕಕ್ಷೆಗಳು"
+
+#~ msgid "Planet Trails"
+#~ msgstr "ಗ್ರಹದ ಜಾಡುಗಳು"
+
+#~ msgid "Meridian Line"
+#~ msgstr "ಅಹ್ನಿಕ ರೇಖೆ (ಮೆರಿಡಿಯನ್)"
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "ಕಾಂತಿಮಾನ ಮಾಪನ ಗುಣಕ "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "ಗರಿಷ್ಟ ನೀಹಾರಿಕ ಕಾಂತಿಮಾನ -ಪಟ್ಟಿ (ಲೇಬಲ್) ಮಾಡಲು "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "ಝೂಮಿಸುವ ಕಾಲ : "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "ಮಿಣುಕ (ಕರ್ಸರ್) ಕಾಲಾಂತ "
+
+#~ msgid "Local Script: "
+#~ msgstr "ಸ್ಥಳೀಯ ಕ್ರಿಯಾ ಬರಹ : "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "ಸಿಡಿ/ಡಿವಿಡಿ ಕ್ರಿಯಾಬರಹ "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "ಚಾಲ್ತಿಸ್ಥಿತಿ ಸಂವಿನ್ಯಾಸ ಪೂರಣಗೊಳಿಸು ( ಲೋಡ್ ಡಿಪಾಲ್ಟ್ ಕಾನ್'ಫಿಗರೇಷನ್) "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr ""
+#~ "ಚಾಲ್ತಿ ಸಂವಿನ್ಯಾಸವನ್ನು ( ಕರೆಂಟ್ ಕಾನ್'ಫ಼ಿಗರೇಷನ್)  ಚಾಲ್ತಿಸ್ಥಿತಿಯಾಗಿ (ಡಿಫಾಲ್ಟ್)  "
+#~ "ಉಳಿಸು "
+
+#~ msgid "Hydra"
+#~ msgstr "ಅಜಗರ (ಹೈಡ್ರಾ)"
+
+#~ msgid "USB Script: "
+#~ msgstr "ಯು.ಎಸ್.ಬಿ. ಕ್ರಿಯಾಬರಹ (ಸ್ಕ್ರಿಪ್ಟ್): "
