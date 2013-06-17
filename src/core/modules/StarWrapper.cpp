@@ -54,11 +54,11 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	if (flags&Magnitude)
 	{
-	    oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
-            if (core->getSkyDrawer()->getFlagHasAtmosphere())
-            {
-                oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
-            }
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
+			oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		}
         }
         oss << getPositionInfoString(core, flags);
 
@@ -95,17 +95,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
 		const QString sciName = StarMgr::getSciName(s->hip);
+		const QString addSciName = StarMgr::getSciAdditionalName(s->hip);
 		const QString varSciName = StarMgr::getGCVSName(s->hip);
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
-			if (commonNameI18!="" || sciName!="" || varSciName!="")
+			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
 			{
 				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
 				if (commonNameI18!="" && sciName!="")
 					oss << "(";
 				oss << (sciName=="" ? "" : sciName);
+				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
 				if (varSciName!="" && varSciName!=sciName)
 					oss << (sciName=="" ? "" : " - ") << varSciName;
 				if (commonNameI18!="" && sciName!="")
