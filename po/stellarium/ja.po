@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-10 23:30+0300\n"
-"PO-Revision-Date: 2013-06-15 05:37+0000\n"
+"PO-Revision-Date: 2013-06-16 20:55+0000\n"
 "Last-Translator: Kaori YOKOZAWA <yokozawa@tree.so-net.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-16 04:36+0000\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:20+0000\n"
 "X-Generator: Launchpad (build 16667)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
@@ -171,12 +171,12 @@ msgstr ""
 #: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "恒星日: %1"
 
 #: src/core/modules/Planet.cpp:512
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "平均太陽日: %1"
 
 #: src/core/modules/Planet.cpp:519
 #, qt-format
@@ -207,7 +207,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:155
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "恒星"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -221,27 +221,27 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:136
 msgid "eruptive variable star"
-msgstr ""
+msgstr "爆発変光星"
 
 #: src/core/modules/StarWrapper.cpp:138
 msgid "pulsating variable star"
-msgstr ""
+msgstr "脈動変光星"
 
 #: src/core/modules/StarWrapper.cpp:140
 msgid "rotating variable star"
-msgstr ""
+msgstr "回転変光星"
 
 #: src/core/modules/StarWrapper.cpp:142
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "激変星"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "食変光星"
 
 #: src/core/modules/StarWrapper.cpp:149
 msgid "variable star"
-msgstr ""
+msgstr "変光星"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "double star"
@@ -298,7 +298,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:218
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "変光周期: %1 日"
 
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
@@ -2969,27 +2969,27 @@ msgstr "日付と時刻"
 
 #: src/translations.h:525
 msgid "Add 1 sidereal day"
-msgstr "恒星時で一日進む"
+msgstr "恒星時で1日進む"
 
 #: src/translations.h:526
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "恒星時で1ヶ月進む"
 
 #: src/translations.h:527
 msgid "Add 1 sidereal week"
-msgstr "恒星時で一週間進む"
+msgstr "恒星時で1週間進む"
 
 #: src/translations.h:528
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "恒星時で1年進む"
 
 #: src/translations.h:529
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "恒星時で1世紀進む"
 
 #: src/translations.h:530
 msgid "Add 1 solar day"
-msgstr "太陽時で一日進む"
+msgstr "太陽時で1日進む"
 
 #: src/translations.h:531
 msgid "Add 1 solar hour"
@@ -2997,7 +2997,7 @@ msgstr "太陽時で一時間進む"
 
 #: src/translations.h:532
 msgid "Add 1 solar week"
-msgstr "太陽時で一週間進む"
+msgstr "太陽時で1週間進む"
 
 #: src/translations.h:533
 msgid "Add 1 synodic month"
@@ -3053,11 +3053,11 @@ msgstr "時間を進める (少し)"
 
 #: src/translations.h:546
 msgid "Pause script execution"
-msgstr ""
+msgstr "スクリプトの実行を休止する"
 
 #: src/translations.h:547
 msgid "Resume script execution"
-msgstr ""
+msgstr "スクリプトの実行を再開する"
 
 #: src/translations.h:548
 msgid "Set time to now"
@@ -3077,39 +3077,39 @@ msgstr "時間の進みを止める"
 
 #: src/translations.h:552
 msgid "Stop script execution"
-msgstr ""
+msgstr "スクリプトの実行を停止する"
 
 #: src/translations.h:553
 msgid "Subtract 1 sidereal day"
-msgstr "恒星時で一日戻る"
+msgstr "恒星時で1日戻る"
 
 #: src/translations.h:554
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "恒星時で1ヶ月戻る"
 
 #: src/translations.h:555
 msgid "Subtract 1 sidereal week"
-msgstr "恒星時で一週間戻る"
+msgstr "恒星時で1週間戻る"
 
 #: src/translations.h:556
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "恒星時で1年戻る"
 
 #: src/translations.h:557
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "恒星時で1世紀戻る"
 
 #: src/translations.h:558
 msgid "Subtract 1 solar day"
-msgstr "太陽時で一日戻る"
+msgstr "太陽時で1日戻る"
 
 #: src/translations.h:559
 msgid "Subtract 1 solar hour"
-msgstr "太陽時で一時間戻る"
+msgstr "太陽時で1時間戻る"
 
 #: src/translations.h:560
 msgid "Subtract 1 solar week"
-msgstr "太陽時で一週間戻る"
+msgstr "太陽時で1週間戻る"
 
 #: src/translations.h:561
 msgid "Subtract 1 synodic month"
@@ -3159,7 +3159,7 @@ msgstr "大気"
 #: src/translations.h:574 src/ui_viewDialog.h:1253
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
-msgstr "方位角の表示"
+msgstr "方位角"
 
 #: src/translations.h:575 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
@@ -3272,7 +3272,7 @@ msgstr "恒星"
 
 #: src/translations.h:598
 msgid "Stars labels"
-msgstr ""
+msgstr "恒星名"
 
 #: src/translations.h:599
 msgid "Flip scene vertically"
@@ -3804,7 +3804,7 @@ msgstr "相対値:"
 
 #: src/ui_viewDialog.h:1219
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "天の川の明るさ:"
 
 #: src/ui_viewDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
@@ -3837,7 +3837,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1234
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "等級の制限"
 
 #: src/ui_viewDialog.h:1236
 msgid "Limit the magnitude of stars"
@@ -4023,7 +4023,7 @@ msgstr "表示する項目"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "J2000.0分点による赤道座標"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
@@ -4031,7 +4031,7 @@ msgstr "赤経/赤緯 (J2000)"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "地平座標"
 
 #: src/ui_configurationDialog.h:1017
 msgid "Altitude/Azimuth"
@@ -4056,7 +4056,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "瞬時分点による赤道座標"
 
 #: src/ui_configurationDialog.h:1025
 msgid "Right ascension/Declination (of date)"
@@ -4064,7 +4064,7 @@ msgstr "赤経/赤緯 (瞬時)"
 
 #: src/ui_configurationDialog.h:1027
 msgid "Galactic coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "J2000.0分点による銀河座標"
 
 #: src/ui_configurationDialog.h:1029
 msgid "Longitude/Latitude (J2000)"
@@ -4092,7 +4092,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "スペクトル型, 星雲の種類など"
 
 #: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
@@ -4132,7 +4132,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "カーソルを消すまでの時間:"
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
