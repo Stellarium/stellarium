@@ -78,6 +78,8 @@ QMap<QString,int> StarMgr::commonNamesIndexI18n;
 QMap<QString,int> StarMgr::commonNamesIndex;
 QHash<int,QString> StarMgr::sciNamesMapI18n;
 QMap<QString,int> StarMgr::sciNamesIndexI18n;
+QHash<int,QString> StarMgr::sciAdditionalNamesMapI18n;
+QMap<QString,int> StarMgr::sciAdditionalNamesIndexI18n;
 QHash<int, varstar> StarMgr::varStarsMapI18n;
 QMap<QString, int> StarMgr::varStarsIndexI18n;
 
@@ -187,6 +189,15 @@ QString StarMgr::getSciName(int hip)
 		return it.value();
 	return QString();
 }
+
+QString StarMgr::getSciAdditionalName(int hip)
+{
+	QHash<int,QString>::const_iterator it(sciAdditionalNamesMapI18n.find(hip));
+	if (it!=sciAdditionalNamesMapI18n.end())
+		return it.value();
+	return QString();
+}
+
 
 QString StarMgr::getGCVSName(int hip)
 {
@@ -648,6 +659,8 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 {
 	sciNamesMapI18n.clear();
 	sciNamesIndexI18n.clear();
+	sciAdditionalNamesMapI18n.clear();
+	sciAdditionalNamesIndexI18n.clear();
 
 	qDebug() << "Loading star names from" << sciNameFile;
 	QFile snFile(sciNameFile);
@@ -691,10 +704,6 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 				continue;
 			}
 
-			// Don't set the sci name if it's already set
-			if (sciNamesMapI18n.find(hip)!=sciNamesMapI18n.end())
-				continue;
-
 			QString sci_name_i18n = fields.at(1).trimmed();
 			if (sci_name_i18n.isEmpty())
 			{
@@ -704,8 +713,17 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			}
 
 			sci_name_i18n.replace('_',' ');
-			sciNamesMapI18n[hip] = sci_name_i18n;
-			sciNamesIndexI18n[sci_name_i18n.toUpper()] = hip;
+			// Don't set the main sci name if it's already set - it's additional sci name
+			if (sciNamesMapI18n.find(hip)!=sciNamesMapI18n.end())
+			{
+				sciAdditionalNamesMapI18n[hip] = sci_name_i18n;
+				sciAdditionalNamesIndexI18n[sci_name_i18n.toUpper()] = hip;
+			}
+			else
+			{
+				sciNamesMapI18n[hip] = sci_name_i18n;
+				sciNamesIndexI18n[sci_name_i18n.toUpper()] = hip;
+			}
 			++readOk;
 		}
 	}
@@ -1003,11 +1021,19 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it2.value());
 	}
 
-	// Search by GCVS name
-	QMap<QString,int>::const_iterator it3 = varStarsIndexI18n.find(objw);
-	if (it3!=varStarsIndexI18n.end())
+
+	// Search by additional sci name
+	QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
+	if (it3!=sciAdditionalNamesIndexI18n.end())
 	{
 		return searchHP(it3.value());
+	}
+
+	// Search by GCVS name
+	QMap<QString,int>::const_iterator it4 = varStarsIndexI18n.find(objw);
+	if (it4!=varStarsIndexI18n.end())
+	{
+		return searchHP(it4.value());
 	}
 
 	return StelObjectP();
@@ -1030,6 +1056,13 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	if (it!=sciNamesIndexI18n.end())
 	{
 		return searchHP(it.value());
+	}
+
+	// Search by additional sci name
+	QMap<QString,int>::const_iterator it2 = sciAdditionalNamesIndexI18n.find(objw);
+	if (it2!=sciAdditionalNamesIndexI18n.end())
+	{
+		return searchHP(it2.value());
 	}
 
 	return StelObjectP();
@@ -1074,6 +1107,19 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 			if (maxNbItem==0)
 				break;
 			result << getSciName(it.value());
+			--maxNbItem;
+		}
+		else if (it.key().at(0) != objw.at(0))
+			break;
+	}
+
+	for (QMap<QString,int>::const_iterator it(sciAdditionalNamesIndexI18n.lowerBound(objw)); it!=sciAdditionalNamesIndexI18n.end(); ++it)
+	{
+		if (it.key().indexOf(bayerRegEx)==0)
+		{
+			if (maxNbItem==0)
+				break;
+			result << getSciAdditionalName(it.value());
 			--maxNbItem;
 		}
 		else if (it.key().at(0) != objw.at(0))
@@ -1154,6 +1200,19 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem==0)
 				break;
 			result << getSciName(it.value());
+			--maxNbItem;
+		}
+		else if (it.key().at(0) != objw.at(0))
+			break;
+	}
+
+	for (QMap<QString,int>::const_iterator it(sciAdditionalNamesIndexI18n.lowerBound(objw)); it!=sciAdditionalNamesIndexI18n.end(); ++it)
+	{
+		if (it.key().indexOf(bayerRegEx)==0)
+		{
+			if (maxNbItem==0)
+				break;
+			result << getSciAdditionalName(it.value());
 			--maxNbItem;
 		}
 		else if (it.key().at(0) != objw.at(0))
