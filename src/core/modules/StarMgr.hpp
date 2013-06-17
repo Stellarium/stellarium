@@ -183,6 +183,10 @@ public:
 	//! Hipparcos catalogue number.
 	static QString getSciName(int hip);
 
+	//! Get the (translated) additional scientific name for a star with a
+	//! specified Hipparcos catalogue number.
+	static QString getSciAdditionalName(int hip);
+
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos catalogue number.
 	static QString getGCVSName(int hip);
@@ -303,6 +307,9 @@ private:
 
 	static QHash<int, QString> sciNamesMapI18n;	
 	static QMap<QString, int> sciNamesIndexI18n;
+
+	static QHash<int, QString> sciAdditionalNamesMapI18n;
+	static QMap<QString, int> sciAdditionalNamesIndexI18n;
 
 	static QHash<int, varstar> varStarsMapI18n;
 	static QMap<QString, int> varStarsIndexI18n;
