@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-10 23:30+0300\n"
-"PO-Revision-Date: 2013-06-18 08:13+0000\n"
-"Last-Translator: Kaori YOKOZAWA <yokozawa@tree.so-net.jp>\n"
+"PO-Revision-Date: 2013-06-19 16:48+0000\n"
+"Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-19 05:21+0000\n"
+"X-Launchpad-Export-Date: 2013-06-20 05:15+0000\n"
 "X-Generator: Launchpad (build 16673)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
@@ -1114,7 +1114,7 @@ msgstr "ウィンドウ"
 
 #: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:752
 msgid "Space"
-msgstr "宇宙"
+msgstr "Space"
 
 #: src/gui/StelGuiItems.cpp:621
 #, no-c-format, qt-format
@@ -3029,7 +3029,7 @@ msgstr ""
 
 #: src/translations.h:540
 msgid "Slow down the script execution rate"
-msgstr "スクリプトの実行レートを遅める"
+msgstr "スクリプトの実行速度を遅くする"
 
 #: src/translations.h:541
 msgid "Decrease time speed"
@@ -3041,7 +3041,7 @@ msgstr "時間を戻す (少し)"
 
 #: src/translations.h:543
 msgid "Speed up the script execution rate"
-msgstr "スクリプトのギロチンレートを早める"
+msgstr "スクリプトの実行速度を速める"
 
 #: src/translations.h:544
 msgid "Increase time speed"
@@ -3065,7 +3065,7 @@ msgstr "現在時刻に設定"
 
 #: src/translations.h:549
 msgid "Set the normal script execution rate"
-msgstr "スクリプトのギロチンレートにする"
+msgstr "標準のスクリプト実行速度を設定する"
 
 #: src/translations.h:550
 msgid "Set normal time rate"
@@ -3825,7 +3825,7 @@ msgstr "流れ星"
 
 #: src/ui_viewDialog.h:1227
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "天頂出現数"
 
 #: src/ui_viewDialog.h:1229
 msgid "ZHR:"
@@ -4023,7 +4023,7 @@ msgstr "表示する項目"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr "J2000.0分点の赤道座標"
+msgstr "J2000.0分点による赤道座標"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
@@ -4056,7 +4056,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr "瞬時分点の赤道座標"
+msgstr "瞬時分点による赤道座標"
 
 #: src/ui_configurationDialog.h:1025
 msgid "Right ascension/Declination (of date)"
@@ -4451,7 +4451,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "スクリプト"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
