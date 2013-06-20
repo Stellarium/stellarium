@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-10 23:30+0300\n"
-"PO-Revision-Date: 2013-05-25 19:04+0000\n"
+"PO-Revision-Date: 2013-06-19 20:48+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-11 05:18+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-06-20 05:15+0000\n"
+"X-Generator: Launchpad (build 16673)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
 msgid "Meridian"
@@ -306,12 +306,12 @@ msgstr "Període: %1 dies"
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Següent mínim de llum: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:230
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Següent màxim de llum: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
@@ -4411,6 +4411,8 @@ msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr ""
+"Mostrar ombres solars als planetes i llunes (Per aquesta funcionalitat "
+"necesites OpenGL versió 2 o superior)"
 
 #: src/ui_configurationDialog.h:1116
 msgid "Render Solar Shadows"
@@ -4929,7 +4931,7 @@ msgstr "Multiplicitat: N/D"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "Longitud focal de l'ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -4971,7 +4973,7 @@ msgstr "Versió"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 msgid "Barlow lens feature"
-msgstr ""
+msgstr "Característiques de la lent Barlow"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid "Overview"
@@ -5236,62 +5238,62 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1594
 msgid "visual"
-msgstr ""
+msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1596
 msgid "scientific"
-msgstr ""
+msgstr "científic"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1598
 msgid "communications"
-msgstr ""
+msgstr "comunicacions"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1600
 msgid "navigation"
-msgstr ""
+msgstr "navegació"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1602
 msgid "amateur"
-msgstr ""
+msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1604
 msgid "weather"
-msgstr ""
+msgstr "meteo"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1606
 msgid "geostationary"
-msgstr ""
+msgstr "geostacionaris"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1608
 msgid "non-operational"
-msgstr ""
+msgstr "no operatius"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1610
 msgid "gps"
-msgstr ""
+msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1612
 msgid "iridium"
-msgstr ""
+msgstr "iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1623
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "Telescopi Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1625
 msgid "The International Space Station"
-msgstr ""
+msgstr "La Estació Espacial Internacional"
 
 #: plugins/Satellites/src/Satellite.cpp:239
 #: plugins/Satellites/src/Satellite.cpp:243
@@ -5616,12 +5618,12 @@ msgstr "Error en l'actualització"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:479
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "Actualitzat %1/%2 satèl·lit(s); %3 afegits; %4 eliminats"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Actualitzat %1/%2 satèl·lit(s); %3 afegits; %4 desapareguts"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
 msgid "[new source]"
@@ -5671,7 +5673,7 @@ msgstr "[tots]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "New group..."
-msgstr ""
+msgstr "Grup nou..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 msgid "Select TLE Update File"
@@ -5716,11 +5718,11 @@ msgstr "Configuració de satèl·lits"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Updates"
-msgstr ""
+msgstr "Actualitzacions"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Actualitza les dades dels satèl·lits fent servir fonts d'Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -5733,12 +5735,16 @@ msgstr "Última actualització:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
+"En l'actualització, afegiu tots els nous satèl·lits de la font "
+"seleccionada(s)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"En l'actualització, tregui els satèl·lits que ja no apareixen en les fonts "
+"d'actualització"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
@@ -5813,7 +5819,7 @@ msgstr "Configuració"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Feu doble clic a un satèl·lit per iniciar el seguiment."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
@@ -5850,10 +5856,11 @@ msgstr "Òrbita"
 #: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr ""
+"No actualitzar (o eliminar en l'actualització) del satèl·lit seleccionat(s)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:737
 msgid "Do not update"
-msgstr ""
+msgstr "No actualitzar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Description:"
@@ -5865,13 +5872,15 @@ msgstr "Grups:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "TLE set:"
-msgstr ""
+msgstr "Estableix TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
+"Els satèl·lits en les llistes de la font seleccionada s'afegiran "
+"automàticament a la propera actualització si no es troben en la col·lecció."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid ""
