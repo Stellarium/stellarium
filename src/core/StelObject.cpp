@@ -36,7 +36,7 @@ Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
 }
 
-// Get observer local sideral coordinate
+// Get observer local sidereal coordinate
 Vec3d StelObject::getSideralPosGeometric(const StelCore* core) const
 {
 	// Hour Angle corrected to Delta-T value

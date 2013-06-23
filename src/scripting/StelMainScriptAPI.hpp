@@ -124,9 +124,9 @@ public slots:
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
 	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
 	//! @deprecated Use getObjectInfo()
 	QVariantMap getObjectPosition(const QString& name);
 
@@ -139,9 +139,9 @@ public slots:
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
 	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
 	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
@@ -395,7 +395,7 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra The right ascension of the center of the image in J2000 frame degrees
-	//! @param dec The declenation of the center of the image in J2000 frame degrees
+	//! @param dec The declination of the center of the image in J2000 frame degrees
 	//! @param angSize The angular size of the image in arc minutes
 	//! @param rotation The clockwise rotation angle of the image in degrees
 	//! @param minRes The minimum resolution setting for the image

@@ -1114,13 +1114,13 @@ void StelCore::addSiderealDays(double d)
 	setJDay(getJDay() + d);
 }
 
-// Get the sideral time shifted by the observer longitude
+// Get the sidereal time shifted by the observer longitude
 double StelCore::getLocalSideralTime() const
 {
 	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
-//! Get the duration of a sideral day for the current observer in day.
+//! Get the duration of a sidereal day for the current observer in day.
 double StelCore::getLocalSideralDayLength() const
 {
 	return position->getHomePlanet()->getSiderealDay();
