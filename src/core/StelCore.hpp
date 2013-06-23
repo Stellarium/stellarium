@@ -254,11 +254,11 @@ public:
 	static const double JD_HOUR;
 	static const double JD_DAY;
 
-	//! Get the sideral time shifted by the observer longitude
-	//! @return the locale sideral time in radian
+	//! Get the sidereal time shifted by the observer longitude
+	//! @return the local sidereal time in radian
 	double getLocalSideralTime() const;
 
-	//! Get the duration of a sideral day for the current observer in day.
+	//! Get the duration of a sidereal day for the current observer in day.
 	double getLocalSideralDayLength() const;
 
 	//! Return the startup mode, can be preset|Preset or anything else
