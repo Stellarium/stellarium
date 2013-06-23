@@ -85,13 +85,13 @@ public slots:
 	//! @param filename the name of the image file to load.  Will be
 	//! searched for using StelFileMgr, so partial names are fine.
 	//! @param ra0 right ascention of corner 0 in degrees
-	//! @param dec0 declenation of corner 0 in degrees
+	//! @param dec0 declination of corner 0 in degrees
 	//! @param ra1 right ascention of corner 1 in degrees
-	//! @param dec1 declenation of corner 1 in degrees
+	//! @param dec1 declination of corner 1 in degrees
 	//! @param ra2 right ascention of corner 2 in degrees
-	//! @param dec2 declenation of corner 2 in degrees
+	//! @param dec2 declination of corner 2 in degrees
 	//! @param ra3 right ascention of corner 3 in degrees
-	//! @param dec3 declenation of corner 3 in degrees
+	//! @param dec3 declination of corner 3 in degrees
 	//! @param minRes the minimum resolution setting for the image
 	//! @param maxBright the maximum brightness setting for the image
 	//! @param visible initial visibility setting
