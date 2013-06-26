@@ -363,23 +363,27 @@ int main(int argc, char **argv)
 	app.installTranslator(&trans);
 
 	if (!QGLFormat::hasOpenGL())
-	{
+	{		
+		qWarning() << "Oops... This system does not support OpenGL.";
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+		app.quit();
 	}
+	else
+	{
+		StelMainWindow mainWin;
+		mainWin.init(confSettings);
+		app.exec();
+		mainWin.deinit();
 
-	StelMainWindow mainWin;
-	mainWin.init(confSettings);
-	app.exec();
-	mainWin.deinit();
+		delete confSettings;
+		StelLogger::deinit();
 
-	delete confSettings;
-	StelLogger::deinit();
+		#ifdef Q_OS_WIN
+		if(timerGrain)
+			timeEndPeriod(timerGrain);
+		#endif //Q_OS_WIN
 
-	#ifdef Q_OS_WIN
-	if(timerGrain)
-		timeEndPeriod(timerGrain);
-	#endif //Q_OS_WIN
-
-	return 0;
+		return 0;
+	}
 }
 
