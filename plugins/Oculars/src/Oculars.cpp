@@ -1307,6 +1307,22 @@ void Oculars::initializeActivationActions()
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)),
 					actionConfiguration, SLOT(setChecked(bool)));
 
+	// Select next telescope via keyboard
+	actionTelescopeIncrement = shMgr->getGuiAction("actionShow_Telescope_Increment");
+	connect(actionTelescopeIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementTelescopeIndex()));
+
+	// Select previous telescope via keyboard
+	actionTelescopeDecrement = shMgr->getGuiAction("actionShow_Telescope_Decrement");
+	connect(actionTelescopeDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementTelescopeIndex()));
+
+	// Select next ocular via keyboard
+	actionOcularIncrement = shMgr->getGuiAction("actionShow_Ocular_Increment");
+	connect(actionOcularIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementOcularIndex()));
+
+	// Select previous ocular via keyboard
+	actionOcularDecrement = shMgr->getGuiAction("actionShow_Ocular_Decrement");
+	connect(actionOcularDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementOcularIndex()));
+
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
