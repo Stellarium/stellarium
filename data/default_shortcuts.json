@@ -942,6 +942,30 @@
 					"primaryKey": "Ctrl+B",
 					"checkable": true
 				},
+				"actionShow_Telescope_Increment":
+				{
+					"text": "Select next telescope",
+					"primaryKey": "PgUp",
+					"checkable": true
+				},
+				"actionShow_Telescope_Decrement":
+				{
+					"text": "Select previous telescope",
+					"primaryKey": "PgDown",
+					"checkable": true
+				},
+				"actionShow_Ocular_Increment":
+				{
+					"text": "Select next ocular",
+					"primaryKey": "Ctrl+PgUp",
+					"checkable": true
+				},
+				"actionShow_Ocular_Decrement":
+				{
+					"text": "Select previous ocular",
+					"primaryKey": "Ctrl+PgDown",
+					"checkable": true
+				},
 				"actionOpen_Oculars_Configuration":
 				{
 					"text": "Oculars plugin configuration",
