@@ -638,6 +638,10 @@ class Translations
 		N_("Oculars popup menu");
 		N_("Image sensor frame");
 		N_("Telrad sight");
+		N_("Select next telescope");
+		N_("Select next ocular");
+		N_("Select previous telescope");
+		N_("Select previous ocular");
 		
 		// Pulsars Plugin
 		N_("Show pulsars");
