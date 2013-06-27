@@ -9,31 +9,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-10 23:30+0300\n"
+"POT-Creation-Date: 2013-06-26 22:35+0700\n"
 "PO-Revision-Date: 2013-06-16 01:03+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:20+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-06-27 05:20+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1262
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
 msgid "Meridian"
 msgstr "Południk niebieski"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1270
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1271
 msgid "Ecliptic"
 msgstr "Ekliptyka"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1258
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1259
 msgid "Equator"
 msgstr "Równik"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1266
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1267
 msgid "Horizon"
 msgstr "Horyzont"
 
@@ -60,8 +60,8 @@ msgstr "Planeta: "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:162
-#: src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:164
+#: src/core/modules/StarWrapper.cpp:167
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
@@ -129,7 +129,7 @@ msgstr "Typ nieudokumentowany"
 
 #: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
-#: src/core/modules/StarWrapper.cpp:181 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:183 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolutna  wielkość gwiazdowa: %1"
@@ -209,7 +209,7 @@ msgid "Provisional designation: %1"
 msgstr "Oznaczenie tymczasowe: %1"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:155
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:157
 #: src/translations.h:151
 msgid "star"
 msgstr "gwiazda"
@@ -225,106 +225,106 @@ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr ""
 "Obserwowana wielkość gwiazdowa: <b>%1</b> (po uwzględnieniu ekstynkcji)"
 
-#: src/core/modules/StarWrapper.cpp:136
+#: src/core/modules/StarWrapper.cpp:138
 msgid "eruptive variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:138
+#: src/core/modules/StarWrapper.cpp:140
 msgid "pulsating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:140
+#: src/core/modules/StarWrapper.cpp:142
 msgid "rotating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:142
+#: src/core/modules/StarWrapper.cpp:144
 msgid "cataclysmic variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:145
+#: src/core/modules/StarWrapper.cpp:147
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:149
+#: src/core/modules/StarWrapper.cpp:151
 msgid "variable star"
 msgstr "gwiazda zmienna"
 
-#: src/core/modules/StarWrapper.cpp:153
+#: src/core/modules/StarWrapper.cpp:155
 msgid "double star"
 msgstr "gwiazda podwójna"
 
-#: src/core/modules/StarWrapper.cpp:160
+#: src/core/modules/StarWrapper.cpp:162
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "Typ: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:172 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:174 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr ""
 "Wielkość gwiazdowa: <b>%1</b> (po uwzględnieniu ekstynkcji: <b>%2</b>. B-V: "
 "<b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:176 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:178 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Wielkość gwiazdowa: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:193
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
 "Zakres wielkości gwiazdowej: <b>%1</b>%2<b>%3</b> (system fotometryczny: %4)"
 
-#: src/core/modules/StarWrapper.cpp:199
+#: src/core/modules/StarWrapper.cpp:201
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Typ widmowy: %1"
 
-#: src/core/modules/StarWrapper.cpp:203
+#: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Odległość: %1 lat świetlnych"
 
-#: src/core/modules/StarWrapper.cpp:206
+#: src/core/modules/StarWrapper.cpp:208
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaksa: %1\""
 
-#: src/core/modules/StarWrapper.cpp:212
+#: src/core/modules/StarWrapper.cpp:214
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:214
+#: src/core/modules/StarWrapper.cpp:216
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:218
+#: src/core/modules/StarWrapper.cpp:220
 #, qt-format
 msgid "Period: %1 days"
 msgstr "Okres: %1 dni"
 
-#: src/core/modules/StarWrapper.cpp:228
+#: src/core/modules/StarWrapper.cpp:230
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:230
+#: src/core/modules/StarWrapper.cpp:232
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:236
+#: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Duration of eclipse: %1%"
 
-#: src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Rising time: %1%"
 msgstr ""
@@ -1187,12 +1187,12 @@ msgstr "Projekt grafiki/innych elementów: %1"
 msgid "OSX Developer: %1"
 msgstr "Programista OSX: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:675
+#: src/gui/StelGui.cpp:178 src/translations.h:679
 msgid "Script console window"
 msgstr "Okno konsoli skryptu"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:670
+#: src/gui/StelGui.cpp:178 src/translations.h:674
 msgid "Windows"
 msgstr "Okna"
 
@@ -1381,7 +1381,7 @@ msgstr "gdzie"
 msgid "year"
 msgstr "rok"
 
-#: src/main.cpp:367
+#: src/main.cpp:368
 msgid "This system does not support OpenGL."
 msgstr "Ten system nie obsługuje OpenGL."
 
@@ -3270,16 +3270,16 @@ msgstr "Obróć obraz w poziomie"
 msgid "Full-screen mode"
 msgstr "Tryb pełnoekranowy"
 
-#: src/translations.h:573 src/ui_viewDialog.h:1209
+#: src/translations.h:573 src/ui_viewDialog.h:1210
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/translations.h:574 src/ui_viewDialog.h:1253
+#: src/translations.h:574 src/ui_viewDialog.h:1254
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Azimuthal grid"
 msgstr "Siatka azymutalna"
 
-#: src/translations.h:575 src/ui_viewDialog.h:1275
+#: src/translations.h:575 src/ui_viewDialog.h:1276
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Cardinal points"
 msgstr "Punkty kardynalne"
@@ -3308,7 +3308,7 @@ msgstr "Linie gwiazdozbiorów"
 msgid "Nebulas background images"
 msgstr "Zdjęcia mgławic"
 
-#: src/translations.h:581 src/ui_viewDialog.h:1252
+#: src/translations.h:581 src/ui_viewDialog.h:1253
 msgid "Ecliptic J2000 grid"
 msgstr "Siatka ekliptyki J2000"
 
@@ -3322,12 +3322,12 @@ msgstr "Ekliptyka"
 msgid "Equator line"
 msgstr "Równik niebieski"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1251
+#: src/translations.h:584 src/ui_viewDialog.h:1252
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equatorial grid"
 msgstr "Siatka równikowa"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1250
+#: src/translations.h:585 src/ui_viewDialog.h:1251
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial J2000 grid"
 msgstr "Siatka równikowa J2000"
@@ -3336,12 +3336,12 @@ msgstr "Siatka równikowa J2000"
 msgid "Fog"
 msgstr "Mgła"
 
-#: src/translations.h:587 src/ui_viewDialog.h:1254
+#: src/translations.h:587 src/ui_viewDialog.h:1255
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galactic grid"
 msgstr "Siatka współrzędnych galaktycznych"
 
-#: src/translations.h:588 src/ui_viewDialog.h:1274
+#: src/translations.h:588 src/ui_viewDialog.h:1275
 msgid "Galactic plane"
 msgstr "Płaszczyzna Galaktyki"
 
@@ -3382,8 +3382,8 @@ msgstr "Orbity planet"
 msgid "Planet trails"
 msgstr "Ślady planet"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1197 src/ui_viewDialog.h:1216
-#: src/ui_viewDialog.h:1238
+#: src/translations.h:597 src/ui_viewDialog.h:1198 src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Stars"
 msgstr "Gwiazdy"
@@ -3506,85 +3506,101 @@ msgstr "Ramka czujnika obrazu"
 msgid "Telrad sight"
 msgstr "Celownik Telrad"
 
+#: src/translations.h:641
+msgid "Select next telescope"
+msgstr ""
+
+#: src/translations.h:642
+msgid "Select next ocular"
+msgstr ""
+
 #: src/translations.h:643
+msgid "Select previous telescope"
+msgstr ""
+
+#: src/translations.h:644
+msgid "Select previous ocular"
+msgstr ""
+
+#: src/translations.h:647
 msgid "Show pulsars"
 msgstr "Pokaż pulsary"
 
-#: src/translations.h:644
+#: src/translations.h:648
 msgid "Pulsars configuration window"
 msgstr "Okno konfiguracji wtyczki Pulsary"
 
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Show quasars"
 msgstr "Pokaż kwazary"
 
-#: src/translations.h:648
+#: src/translations.h:652
 msgid "Quasars configuration window"
 msgstr "Okno konfiguracji wtyczki Kwazary"
 
-#: src/translations.h:651
+#: src/translations.h:655
 msgid "Satellites configuration window"
 msgstr "Okno konfiguracji wtyczki Satelity"
 
-#: src/translations.h:652
+#: src/translations.h:656
 msgid "Satellite hints"
 msgstr "Oznaczenia satelitów"
 
-#: src/translations.h:653
+#: src/translations.h:657
 msgid "Satellite labels"
 msgstr "Oznaczenia satelitów"
 
-#: src/translations.h:656
+#: src/translations.h:660
 msgid "Historical Supernovae configuration window"
 msgstr "Okno konfiguracji wtyczki Historyczne supernowe"
 
-#: src/translations.h:659
+#: src/translations.h:663
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Ustaw teleskop na punkt o określonych współrzędnych"
 
-#: src/translations.h:662
+#: src/translations.h:666
 msgid "Show renderer statistics"
 msgstr "Pokaż statystyki renderowania."
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:665 src/ui_configurationDialog.h:1163
+#: src/translations.h:669 src/ui_configurationDialog.h:1163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "Skrypty"
 
-#: src/translations.h:666
+#: src/translations.h:670
 msgid "Run landscapes script from file"
 msgstr "Uruchom skrypt krajobrazów z pliku"
 
-#: src/translations.h:667
+#: src/translations.h:671
 msgid "Show and zoom Moon"
 msgstr "Pokaż i przybliż Księżyc"
 
-#: src/translations.h:671
+#: src/translations.h:675
 msgid "Configuration window"
 msgstr "Okno konfiguracji"
 
-#: src/translations.h:672
+#: src/translations.h:676
 msgid "Date/time window"
 msgstr "Okno daty/czasu"
 
-#: src/translations.h:673
+#: src/translations.h:677
 msgid "Help window"
 msgstr "Okno pomocy"
 
-#: src/translations.h:674
+#: src/translations.h:678
 msgid "Location window"
 msgstr "Okno lokalizacji"
 
-#: src/translations.h:676
+#: src/translations.h:680
 msgid "Search window"
 msgstr "Okno wyszukiwania"
 
-#: src/translations.h:677
+#: src/translations.h:681
 msgid "Shortcuts window"
 msgstr "Okno skrótów"
 
-#: src/translations.h:678
+#: src/translations.h:682
 msgid "Sky and viewing options window"
 msgstr "Okno ustawień widoku i nieba"
 
@@ -3812,8 +3828,8 @@ msgstr "Rozszerz wyszukiwanie za pomocą SIMBAD"
 msgid "Server:"
 msgstr "Serwer:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1278
-#: src/ui_viewDialog.h:1283 src/ui_viewDialog.h:1285
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1284 src/ui_viewDialog.h:1286
 #: src/ui_configurationDialog.h:1134 src/ui_configurationDialog.h:1145
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3832,227 +3848,227 @@ msgstr "Szukaj na liście..."
 msgid "Lists"
 msgstr "Listy"
 
-#: src/ui_viewDialog.h:1181
+#: src/ui_viewDialog.h:1182
 msgid "View"
 msgstr "Widok"
 
-#: src/ui_viewDialog.h:1187
+#: src/ui_viewDialog.h:1188
 msgid "Sky"
 msgstr "Niebo"
 
-#: src/ui_viewDialog.h:1189
+#: src/ui_viewDialog.h:1190
 msgid "Markings"
 msgstr "Znaczniki"
 
-#: src/ui_viewDialog.h:1191
+#: src/ui_viewDialog.h:1192
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Landscape"
 msgstr "Krajobraz"
 
-#: src/ui_viewDialog.h:1193
+#: src/ui_viewDialog.h:1194
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:224
 msgid "Starlore"
 msgstr "Historie gwiazdozbiorów"
 
-#: src/ui_viewDialog.h:1196
+#: src/ui_viewDialog.h:1197
 msgid "Labels and Markers"
 msgstr "Etykiety i znaczniki"
 
-#: src/ui_viewDialog.h:1198
+#: src/ui_viewDialog.h:1199
 msgid "Planets"
 msgstr "Planety"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1201
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Etykiety i znaczniki obiektów głębokiego nieba (gromady gwiazd, galaktyki i "
 "mgławice)"
 
-#: src/ui_viewDialog.h:1202 src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgid "DSO"
 msgstr ""
 
-#: src/ui_viewDialog.h:1203
+#: src/ui_viewDialog.h:1204
 msgid "Planets and satellites"
 msgstr "Planety i satelity"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1205
 msgid "Show planets"
 msgstr "Pokaż planety"
 
-#: src/ui_viewDialog.h:1205
+#: src/ui_viewDialog.h:1206
 msgid "Show planet markers"
 msgstr "Pokaż znaczniki planet"
 
-#: src/ui_viewDialog.h:1206
+#: src/ui_viewDialog.h:1207
 msgid "Show planet orbits"
 msgstr "Pokaż orbity planet"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1208
 msgid "Simulate light speed"
 msgstr "Symuluj prędkość światła"
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1209
 msgid "Scale Moon"
 msgstr "Skaluj obraz Księżyca"
 
-#: src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1211
 msgid "Show atmosphere"
 msgstr "Pokaż atmosferę"
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1212
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Light pollution:"
 msgstr "Zaświetlenie nieba:"
 
-#: src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1214
 msgid "pressure, temperature, extinction coefficient"
 msgstr "ciśnienie, temperatura, współczynnik wygaszania"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1216
 msgid "Refraction/Extinction settings..."
 msgstr "Ustawienia refrakcji/ekstynkcji..."
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Absolute scale:"
 msgstr "Skala bezwzględna:"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1219
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Relative scale:"
 msgstr "Skala względna:"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1220
 msgid "Milky Way brightness:"
 msgstr "Jasność Drogi Mlecznej:"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1221
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Twinkle:"
 msgstr "Migotanie:"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1223
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Przygaszaj słabe gwiazdy, jeśli widać bardzo jasny obiekt"
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1225
 msgid "Dynamic eye adaptation"
 msgstr "Dynamiczna adaptacja oka"
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1226
 msgid "Shooting Stars"
 msgstr "Meteory"
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1228
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1229
+#: src/ui_viewDialog.h:1230
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1233
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 "Graniczne wielkości gwiazdowe (dla obserwacji nieuzbrojonym okiem/przez "
 "lornetkę)"
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1235
 msgid "Limit Magnitudes"
 msgstr "Graniczne wielkości gwiazdowe"
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1237
 msgid "Limit the magnitude of stars"
 msgstr "Ogranicz jasność gwiazd"
 
-#: src/ui_viewDialog.h:1240
+#: src/ui_viewDialog.h:1241
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Ogranicz jasność obiektów głębokiego nieba (gromad gwiazd, galaktyk i "
 "mgławic)"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1244
 msgid "Constellations"
 msgstr "Gwiazdozbiory"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1245
 msgid "Show lines"
 msgstr "Pokaż linie"
 
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1246
 msgid "Show labels"
 msgstr "Pokaż etykiety"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1247
 msgid "Show boundaries"
 msgstr "Pokaż granice gwiazdozbiorów"
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1248
 msgid "Show art"
 msgstr "Pokaż rysunki"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1248
+#: src/ui_viewDialog.h:1249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Art brightness:"
 msgstr "Jasność rysunków:"
 
-#: src/ui_viewDialog.h:1249
+#: src/ui_viewDialog.h:1250
 msgid "Celestial Sphere"
 msgstr "Sfera niebieska"
 
-#: src/ui_viewDialog.h:1256
+#: src/ui_viewDialog.h:1257
 msgid "Show equator line"
 msgstr "Pokaż równik niebieski"
 
-#: src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1261
 msgid "Show meridian line"
 msgstr "Pokaż południk niebieski"
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1265
 msgid "Show horizon line"
 msgstr "Pokaż linię horyzontu"
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1269
 msgid "Show ecliptic line"
 msgstr "Pokaż linię ekliptyki"
 
-#: src/ui_viewDialog.h:1272
+#: src/ui_viewDialog.h:1273
 msgid "Show Galactic plane line"
 msgstr "Pokaż linię płaszczyzny Galaktyki"
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1277
 msgid "Projection"
 msgstr "Odwzorowanie"
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1278
 msgid "Add/remove landscapes..."
 msgstr "Dodaj/usuń krajobrazy..."
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1280
 msgid "Show ground"
 msgstr "Pokaż ziemię"
 
-#: src/ui_viewDialog.h:1280
+#: src/ui_viewDialog.h:1281
 msgid "Show fog"
 msgstr "Pokaż mgłę"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1282
 msgid "Use associated planet and position"
 msgstr "Użyj powiązanej planety oraz pozycji"
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1283
 msgid "Use this landscape as default"
 msgstr "Użyj tego krajobrazu jako domyślnego"
 
-#: src/ui_viewDialog.h:1284
+#: src/ui_viewDialog.h:1285
 msgid "Use this sky culture as default"
 msgstr "Użyj tej kultury nieba jako domyślnej"
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1287
 msgid "Visible"
 msgstr "Widoczny"
 
@@ -4123,7 +4139,7 @@ msgstr "Wszystkie dostępne"
 msgid "Display no information"
 msgstr "Nie wyświetlaj informacji"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1854
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1870
 #: plugins/Observability/src/Observability.cpp:628
 #: plugins/Observability/src/Observability.cpp:629
 #: plugins/Observability/src/Observability.cpp:631
@@ -4719,112 +4735,112 @@ msgstr "&Obróć CCD"
 msgid "&Reset rotation"
 msgstr "&Przywróć pozycję sprzed obrotu"
 
-#: plugins/Oculars/src/Oculars.cpp:1528
+#: plugins/Oculars/src/Oculars.cpp:1544
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okular nr %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1533
+#: plugins/Oculars/src/Oculars.cpp:1549
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okular nr %1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1547
+#: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Ogniskowa okularu: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1554
+#: plugins/Oculars/src/Oculars.cpp:1570
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Pozorne pole widzenia okularu: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1566
+#: plugins/Oculars/src/Oculars.cpp:1582
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 #, qt-format
 msgid "Lens #%1"
 msgstr "Soczewka nr %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1570
+#: plugins/Oculars/src/Oculars.cpp:1586
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Soczewka nr %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1575
+#: plugins/Oculars/src/Oculars.cpp:1591
 msgid "Lens: none"
 msgstr "Soczewka: brak"
 
-#: plugins/Oculars/src/Oculars.cpp:1585 plugins/Oculars/src/Oculars.cpp:1642
+#: plugins/Oculars/src/Oculars.cpp:1601 plugins/Oculars/src/Oculars.cpp:1658
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop nr %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1590 plugins/Oculars/src/Oculars.cpp:1647
+#: plugins/Oculars/src/Oculars.cpp:1606 plugins/Oculars/src/Oculars.cpp:1663
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescope nr %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1601
+#: plugins/Oculars/src/Oculars.cpp:1617
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Powiększenie: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1609
+#: plugins/Oculars/src/Oculars.cpp:1625
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "FOV: %1"
 msgstr "Pole widzenia: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1619
+#: plugins/Oculars/src/Oculars.cpp:1635
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Wymiary: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/Oculars.cpp:1640
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Czujnik nr %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1628
+#: plugins/Oculars/src/Oculars.cpp:1644
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:659
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Czujnik nr %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1850
+#: plugins/Oculars/src/Oculars.cpp:1866
 msgid "&Lens"
 msgstr "S%oczewka"
 
-#: plugins/Oculars/src/Oculars.cpp:1851
+#: plugins/Oculars/src/Oculars.cpp:1867
 msgid "&Previous lens"
 msgstr "&Poprzednia soczewka"
 
-#: plugins/Oculars/src/Oculars.cpp:1852
+#: plugins/Oculars/src/Oculars.cpp:1868
 msgid "&Next lens"
 msgstr "&Następna soczewka"
 
-#: plugins/Oculars/src/Oculars.cpp:1882
+#: plugins/Oculars/src/Oculars.cpp:1898
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1883
+#: plugins/Oculars/src/Oculars.cpp:1899
 msgid "&Previous telescope"
 msgstr "&Poprzedni teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1884
+#: plugins/Oculars/src/Oculars.cpp:1900
 msgid "&Next telescope"
 msgstr "&Następny teleslop"
 
