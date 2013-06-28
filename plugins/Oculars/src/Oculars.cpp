@@ -1315,11 +1315,11 @@ void Oculars::initializeActivationActions()
 	actionTelescopeDecrement = shMgr->getGuiAction("actionShow_Telescope_Decrement");
 	connect(actionTelescopeDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementTelescopeIndex()));
 
-	// Select next ocular via keyboard
+	// Select next eyepiece via keyboard
 	actionOcularIncrement = shMgr->getGuiAction("actionShow_Ocular_Increment");
 	connect(actionOcularIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementOcularIndex()));
 
-	// Select previous ocular via keyboard
+	// Select previous eyepiece via keyboard
 	actionOcularDecrement = shMgr->getGuiAction("actionShow_Ocular_Decrement");
 	connect(actionOcularDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementOcularIndex()));
 
