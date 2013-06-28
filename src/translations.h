@@ -639,9 +639,9 @@ class Translations
 		N_("Image sensor frame");
 		N_("Telrad sight");
 		N_("Select next telescope");
-		N_("Select next ocular");
+		N_("Select next eyepiece");
 		N_("Select previous telescope");
-		N_("Select previous ocular");
+		N_("Select previous eyepiece");
 		
 		// Pulsars Plugin
 		N_("Show pulsars");
