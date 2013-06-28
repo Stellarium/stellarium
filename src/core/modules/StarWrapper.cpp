@@ -84,6 +84,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const float maxVMag = StarMgr::getGCVSMaxMagnitude(s->hip);
 	const float magFlag = StarMgr::getGCVSMagnitudeFlag(s->hip);
 	const float minVMag = StarMgr::getGCVSMinMagnitude(s->hip);
+	const float min2VMag = StarMgr::getGCVSMinMagnitude(s->hip, false);
 	const QString photoVSys = StarMgr::getGCVSPhotometricSystem(s->hip);
 	const double vEpoch = StarMgr::getGCVSEpoch(s->hip);
 	const double vPeriod = StarMgr::getGCVSPeriod(s->hip);
@@ -186,11 +187,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	{
 		if (!varType.isEmpty())
 		{
-			float minimumM = minVMag;
-			if (magFlag==1)
-				minimumM += maxVMag; // Amplitude
-			
-			oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM, 'f', 2)).arg(photoVSys) << "<br />";
+			float minimumM1 = minVMag;
+			float minimumM2 = min2VMag;
+			if (magFlag==1) // Amplitude
+			{
+				minimumM1 += maxVMag;
+				minimumM2 += maxVMag;
+			}
+
+			if (min2VMag==99.f)
+				oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(photoVSys) << "<br />";
+			else
+				oss << q_("Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2)).arg(photoVSys) << "<br />";
 		}
 	}
 

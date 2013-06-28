@@ -776,7 +776,10 @@ void StarMgr::loadGCVS(const QString& GCVSFile)
 		variableStar.maxmag = fields.at(3).toFloat();
 		variableStar.mflag = fields.at(4).toInt();
 		variableStar.min1mag = fields.at(5).toFloat();
-		variableStar.min2mag = fields.at(6).toFloat();
+		if (fields.at(6).isEmpty())
+			variableStar.min2mag = 99.f;
+		else
+			variableStar.min2mag = fields.at(6).toFloat();
 		variableStar.photosys = fields.at(7).trimmed();
 		variableStar.epoch = fields.at(8).toDouble();
 		variableStar.period = fields.at(9).toDouble();
