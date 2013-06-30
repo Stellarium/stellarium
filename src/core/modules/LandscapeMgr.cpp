@@ -258,6 +258,10 @@ void LandscapeMgr::update(double deltaTime)
 		landscapeBrightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
 	}
 
+	// Brightness can't be over 1.f (see https://bugs.launchpad.net/stellarium/+bug/1115364)
+	if (landscapeBrightness>0.95)
+		landscapeBrightness = 0.95;
+
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 	if (core->getCurrentLocation().planetName.contains("Sun"))
 	{
