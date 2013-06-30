@@ -242,6 +242,10 @@ private:
 	QAction* actionShowTelrad;
 	QAction* actionConfiguration;
 	QAction* actionMenu;
+	QAction* actionTelescopeIncrement;
+	QAction* actionTelescopeDecrement;
+	QAction* actionOcularIncrement;
+	QAction* actionOcularDecrement;
 
 	class OcularsGuiPanel* guiPanel;
 
