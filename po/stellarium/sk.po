@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 22:35+0700\n"
-"PO-Revision-Date: 2013-06-27 10:50+0000\n"
-"Last-Translator: Pavol Gajdoš <Unknown>\n"
+"POT-Creation-Date: 2013-06-28 22:24+0700\n"
+"PO-Revision-Date: 2013-06-28 16:14+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-28 05:18+0000\n"
-"X-Generator: Launchpad (build 16681)\n"
+"X-Launchpad-Export-Date: 2013-06-30 05:27+0000\n"
+"X-Generator: Launchpad (build 16692)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
 msgid "Meridian"
@@ -37,27 +37,27 @@ msgstr "Horizont"
 msgid "Galactic Plane"
 msgstr "Galaktická rovina"
 
-#: src/core/modules/LandscapeMgr.cpp:508
+#: src/core/modules/LandscapeMgr.cpp:512
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:511
+#: src/core/modules/LandscapeMgr.cpp:515
 msgid "Location: "
 msgstr "Umiestnenie: "
 
-#: src/core/modules/LandscapeMgr.cpp:516
+#: src/core/modules/LandscapeMgr.cpp:520
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:520
+#: src/core/modules/LandscapeMgr.cpp:524
 msgid "Planet: "
 msgstr "Planéta: "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:164
-#: src/core/modules/StarWrapper.cpp:167
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
@@ -124,7 +124,7 @@ msgstr "Nedokumentovaný typ"
 
 #: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
-#: src/core/modules/StarWrapper.cpp:183 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:184 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolútna magnitúda: %1"
@@ -204,7 +204,7 @@ msgid "Provisional designation: %1"
 msgstr "Predbežné označenie: %1"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:157
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:151
 msgid "star"
 msgstr "hviezda"
@@ -219,104 +219,111 @@ msgstr "Magnitúda: <b>%1 m</b> (B-V index: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Zdanlivá magnitúda: <b>%1</b> (s extinkciou)"
 
-#: src/core/modules/StarWrapper.cpp:138
+#: src/core/modules/StarWrapper.cpp:139
 msgid "eruptive variable star"
 msgstr "Eruptívna premenná hviezda"
 
-#: src/core/modules/StarWrapper.cpp:140
+#: src/core/modules/StarWrapper.cpp:141
 msgid "pulsating variable star"
 msgstr "Pulzujúca premenná hviezda"
 
-#: src/core/modules/StarWrapper.cpp:142
+#: src/core/modules/StarWrapper.cpp:143
 msgid "rotating variable star"
 msgstr "Rotujúca premenná hviezda"
 
-#: src/core/modules/StarWrapper.cpp:144
+#: src/core/modules/StarWrapper.cpp:145
 msgid "cataclysmic variable star"
 msgstr "Kataklizmatická premenná hviezda"
 
-#: src/core/modules/StarWrapper.cpp:147
+#: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
 msgstr "Zákrytová dvojhviezda"
 
-#: src/core/modules/StarWrapper.cpp:151
+#: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
 msgstr "Premenná hviezda"
 
-#: src/core/modules/StarWrapper.cpp:155
+#: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
 msgstr "dvojhviezda"
 
-#: src/core/modules/StarWrapper.cpp:162
+#: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "Typ: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:174 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "Magnitúda: <b>%1</b> (extinkcia: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:178 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:179 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitúda: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:193
+#: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
 "Rozsah jasnosti (magnitúdy): <b>%1</b>%2<b>%3</b> (Fotometrický systém: %4)"
 
 #: src/core/modules/StarWrapper.cpp:201
+#, qt-format
+msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
+msgstr ""
+"Rozsah jasnosti (magnitúdy): <b>%1</b>%2<b>%3/%4</b> (Fotometrický systém: "
+"%5)"
+
+#: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektrálny typ: %1"
 
-#: src/core/modules/StarWrapper.cpp:205
+#: src/core/modules/StarWrapper.cpp:213
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Vzdialenosť: %1 svetelných rokov"
 
-#: src/core/modules/StarWrapper.cpp:208
+#: src/core/modules/StarWrapper.cpp:216
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaxa: %1\""
 
-#: src/core/modules/StarWrapper.cpp:214
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr "Obdobie minima: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:216
+#: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr "Obdobie maxima: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:220
+#: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Period: %1 days"
 msgstr "Perióda: %1 dní"
 
-#: src/core/modules/StarWrapper.cpp:230
+#: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "Nasledujúce minimum: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "Nasledujúce maximum: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Trvanie zákrytu: %1%"
 
-#: src/core/modules/StarWrapper.cpp:240
+#: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Čas východu: %1%"
@@ -3519,16 +3526,16 @@ msgid "Select next telescope"
 msgstr "Vybrať ďalší teleskop"
 
 #: src/translations.h:642
-msgid "Select next ocular"
-msgstr "Vybrať ďalší okulár"
+msgid "Select next eyepiece"
+msgstr "Vyber ďalší okulár"
 
 #: src/translations.h:643
 msgid "Select previous telescope"
 msgstr "Vybrať predchádzajúci teleskop"
 
 #: src/translations.h:644
-msgid "Select previous ocular"
-msgstr "Vybrať predchádzajúci okulár"
+msgid "Select previous eyepiece"
+msgstr "Vyber predchádzajúci okulár"
 
 #: src/translations.h:647
 msgid "Show pulsars"
