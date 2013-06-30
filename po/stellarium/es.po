@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 22:35+0700\n"
-"PO-Revision-Date: 2013-06-15 16:08+0000\n"
+"POT-Creation-Date: 2013-06-28 22:24+0700\n"
+"PO-Revision-Date: 2013-06-28 22:36+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-27 05:21+0000\n"
-"X-Generator: Launchpad (build 16681)\n"
+"X-Launchpad-Export-Date: 2013-06-30 05:27+0000\n"
+"X-Generator: Launchpad (build 16692)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -201,27 +201,27 @@ msgstr "Horizonte"
 msgid "Galactic Plane"
 msgstr "Plano galáctico"
 
-#: src/core/modules/LandscapeMgr.cpp:508
+#: src/core/modules/LandscapeMgr.cpp:512
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:511
+#: src/core/modules/LandscapeMgr.cpp:515
 msgid "Location: "
 msgstr "Ubicación: "
 
-#: src/core/modules/LandscapeMgr.cpp:516
+#: src/core/modules/LandscapeMgr.cpp:520
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:520
+#: src/core/modules/LandscapeMgr.cpp:524
 msgid "Planet: "
 msgstr "Planeta: "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:164
-#: src/core/modules/StarWrapper.cpp:167
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
@@ -288,7 +288,7 @@ msgstr "Tipo no documentado"
 
 #: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
-#: src/core/modules/StarWrapper.cpp:183 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:184 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitud Absoluta: %1"
@@ -368,7 +368,7 @@ msgid "Provisional designation: %1"
 msgstr "Designación provisional: %1"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:157
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:151
 msgid "star"
 msgstr "estrella"
@@ -383,103 +383,108 @@ msgstr "Magnitud: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Magnitud aparente: <b>%1</b> (por extinción)"
 
-#: src/core/modules/StarWrapper.cpp:138
+#: src/core/modules/StarWrapper.cpp:139
 msgid "eruptive variable star"
 msgstr "estrella variable eruptiva"
 
-#: src/core/modules/StarWrapper.cpp:140
+#: src/core/modules/StarWrapper.cpp:141
 msgid "pulsating variable star"
 msgstr "estrella pulsante variable"
 
-#: src/core/modules/StarWrapper.cpp:142
+#: src/core/modules/StarWrapper.cpp:143
 msgid "rotating variable star"
 msgstr "estrella variable rotante"
 
-#: src/core/modules/StarWrapper.cpp:144
+#: src/core/modules/StarWrapper.cpp:145
 msgid "cataclysmic variable star"
 msgstr "estrella variable cataclísmica"
 
-#: src/core/modules/StarWrapper.cpp:147
+#: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
 msgstr "sistema binario eclipsando"
 
-#: src/core/modules/StarWrapper.cpp:151
+#: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
 msgstr "estrella variable"
 
-#: src/core/modules/StarWrapper.cpp:155
+#: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
 msgstr "estrella doble"
 
-#: src/core/modules/StarWrapper.cpp:162
+#: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "Tipo: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:174 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "Magnitud: <b>%1</b> (extintos a: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:178 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:179 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:193
+#: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "Rango de magnitud: <b>%1</b>%2<b>%3</b> (Sistema Fotometrico: %4)"
 
 #: src/core/modules/StarWrapper.cpp:201
+#, qt-format
+msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
+msgstr "Rango de magnitud: <b>%1</b>%2<b>%3/%4</b> (Sistema Fotometrico: %5)"
+
+#: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tipo espectral: %1"
 
-#: src/core/modules/StarWrapper.cpp:205
+#: src/core/modules/StarWrapper.cpp:213
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distancia: %1 años luz"
 
-#: src/core/modules/StarWrapper.cpp:208
+#: src/core/modules/StarWrapper.cpp:216
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaje: %1\""
 
-#: src/core/modules/StarWrapper.cpp:214
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr "Época para luz mímima: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:216
+#: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr "Época para luz máxima: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:220
+#: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Period: %1 days"
 msgstr "Período: %1 días"
 
-#: src/core/modules/StarWrapper.cpp:230
+#: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "Siguiente luz mínima: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "Siguiente luz máxima: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Duración del eclipse: %1%"
 
-#: src/core/modules/StarWrapper.cpp:240
+#: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Tiempo de ascenso: %1%"
@@ -3622,19 +3627,19 @@ msgstr "Mira telrad"
 
 #: src/translations.h:641
 msgid "Select next telescope"
-msgstr ""
+msgstr "Seleccionar telescopio siguiente"
 
 #: src/translations.h:642
-msgid "Select next ocular"
-msgstr ""
+msgid "Select next eyepiece"
+msgstr "Seleccionar ocular siguiente"
 
 #: src/translations.h:643
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Seleccionar telescopio previo"
 
 #: src/translations.h:644
-msgid "Select previous ocular"
-msgstr ""
+msgid "Select previous eyepiece"
+msgstr "Seleccionar ocular previo"
 
 #: src/translations.h:647
 msgid "Show pulsars"

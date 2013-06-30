@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 22:35+0700\n"
-"PO-Revision-Date: 2012-10-24 04:33+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2013-06-28 22:24+0700\n"
+"PO-Revision-Date: 2013-06-29 20:42+0000\n"
+"Last-Translator: Lisa Santika Onggrid <lisasantikaonggrid@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-27 05:17+0000\n"
-"X-Generator: Launchpad (build 16681)\n"
+"X-Launchpad-Export-Date: 2013-06-30 05:23+0000\n"
+"X-Generator: Launchpad (build 16692)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
 msgid "Meridian"
@@ -37,27 +37,27 @@ msgstr "Cakrawala"
 msgid "Galactic Plane"
 msgstr "Bidang Galaksi"
 
-#: src/core/modules/LandscapeMgr.cpp:508
+#: src/core/modules/LandscapeMgr.cpp:512
 msgid "Author: "
 msgstr "Pembuat: "
 
-#: src/core/modules/LandscapeMgr.cpp:511
+#: src/core/modules/LandscapeMgr.cpp:515
 msgid "Location: "
 msgstr "Lokasi: "
 
-#: src/core/modules/LandscapeMgr.cpp:516
+#: src/core/modules/LandscapeMgr.cpp:520
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:520
+#: src/core/modules/LandscapeMgr.cpp:524
 msgid "Planet: "
 msgstr "Planet: "
 
 #: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:164
-#: src/core/modules/StarWrapper.cpp:167
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
@@ -108,7 +108,7 @@ msgstr "Nebula planeter"
 
 #: src/core/modules/Nebula.cpp:400
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Nebula Gelap"
 
 #: src/core/modules/Nebula.cpp:403
 msgid "Cluster associated with nebulosity"
@@ -124,7 +124,7 @@ msgstr "Tipe tidak terdokumentasi"
 
 #: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
-#: src/core/modules/StarWrapper.cpp:183 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:184 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitudo Mutlak: %1"
@@ -204,10 +204,10 @@ msgid "Provisional designation: %1"
 msgstr "Nama sementara: %1"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:157
+#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "bintang"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -219,107 +219,112 @@ msgstr "Magnitudo: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Magnitudo Semu: <b>%1</b> (oleh ekstingsi)"
 
-#: src/core/modules/StarWrapper.cpp:138
+#: src/core/modules/StarWrapper.cpp:139
 msgid "eruptive variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:140
+#: src/core/modules/StarWrapper.cpp:141
 msgid "pulsating variable star"
-msgstr ""
+msgstr "Bintang variabel berdenyut"
 
-#: src/core/modules/StarWrapper.cpp:142
+#: src/core/modules/StarWrapper.cpp:143
 msgid "rotating variable star"
-msgstr ""
+msgstr "Bintang variabel berotasi"
 
-#: src/core/modules/StarWrapper.cpp:144
+#: src/core/modules/StarWrapper.cpp:145
 msgid "cataclysmic variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:147
+#: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:151
+#: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
-msgstr ""
+msgstr "Bintang variabel"
 
-#: src/core/modules/StarWrapper.cpp:155
+#: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
-msgstr ""
+msgstr "Bintang ganda"
 
-#: src/core/modules/StarWrapper.cpp:162
+#: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Ketik: <b>%1,%2</b>"
 
-#: src/core/modules/StarWrapper.cpp:174 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr ""
 "Magnitudo: <b>%1</b> (terekstingsi menjadi: <b>%2</b>, B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:178 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:179 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitudo: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:193
+#: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Jangjauan magnitudo: <b>%1</b>%2<b>%3</b> (Sistem fotometri: %4)"
 
 #: src/core/modules/StarWrapper.cpp:201
+#, qt-format
+msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
+msgstr "Jangjauan magnitudo: <b>%1</b>%2<b>%3/%4</b> (Sistem fotometri: %5)"
+
+#: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tipe Spektral: %1"
 
-#: src/core/modules/StarWrapper.cpp:205
+#: src/core/modules/StarWrapper.cpp:213
 #: plugins/Supernovae/src/Supernova.cpp:115
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Jarak: %1 Tahun Cahaya"
 
-#: src/core/modules/StarWrapper.cpp:208
+#: src/core/modules/StarWrapper.cpp:216
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaks: %1\""
 
-#: src/core/modules/StarWrapper.cpp:214
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:216
+#: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:220
+#: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:230
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:232
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Periode: %1 hari"
 
 #: src/core/modules/StarWrapper.cpp:238
+#, qt-format
+msgid "Next minimum light: %1 UTC"
+msgstr "Sinar minimal berikutnya : %1 UTC"
+
+#: src/core/modules/StarWrapper.cpp:240
+#, qt-format
+msgid "Next maximum light: %1 UTC"
+msgstr "Sinar maksimal berikutnya: %1 UTC"
+
+#: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:240
+#: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Waktu terbit: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -329,6 +334,8 @@ msgstr "Wahana antariksa"
 #: src/core/StelCore.cpp:1424
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"Pembetulan tidak dinyalakan. Gunakan hanya jika kamu mengerti apa yang kamu "
+"lakukan"
 
 #: src/core/StelCore.cpp:1427
 #, qt-format
@@ -337,6 +344,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Formula kuno ini ditemukan C. Schoch pada 1931 dan digunakan G. Henrikson "
+"pada artikelnya <em> Teori Einstein Dibuktikan oleh Gerhana Matahari "
+"Kuno</em> (%1). Lihat keterangan lebih lanjut %2disini%3."
 
 #: src/core/StelCore.cpp:1430
 #, qt-format
@@ -344,6 +354,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Persamaan empiris ini diterbitkan oleh G.M. Clemence dalam artikel "
+"<em>Mengenai sistem konstanta astronomi</em> (%1)"
 
 #: src/core/StelCore.cpp:1433
 #, qt-format
@@ -353,6 +365,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Formula ini didasarkan pada penelitian pengamatan Matahari, Bulan, dan "
+"planet-planet oleh Spencer Jones (%1) selewat tahun 1950 dan digunakan oleh "
+"Jean Meeus dalam <em> Formula Astronomi untuk Kalkulator</em>. Itu juga "
+"digunakan dalam program PC SunTracker Pro"
 
 #: src/core/StelCore.cpp:1437
 msgid ""
@@ -360,6 +376,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Ini adalah formula yang sudah sedikit dimodifikasi dari versi IAU (1952), "
+"yang digunakan dalam <em> Astronomical Ephemeris</em> dan <em> Canon of "
+"Solar Eclipses</em> oleh Mucke & Meeus (1983)."
 
 #: src/core/StelCore.cpp:1441
 msgid ""
@@ -368,6 +387,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Tabel Tuckerman (1962,1964) mendaftarkan posisi-posisi Matahari, Bulan, dan "
+"planet-planet dalam selang waktu lima dan sepuluh hari dari tahun 601 SM "
+"sampai tahun 1649 M. Hubungan yang sama juga digunakan secara implisit pada "
+"tabel syzygy Goldstine (1973)."
 
 #: src/core/StelCore.cpp:1445
 #, qt-format
@@ -376,6 +399,8 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Persamaan ini diterbitkan oleh P.M. Muller dan F.R. Stephenson dalam artikel "
+"<em> Percepatan Bumi dan Bulan dari pengamatan Astronomi kuno</em> (%1)"
 
 #: src/core/StelCore.cpp:1448
 #, qt-format
@@ -3419,7 +3444,7 @@ msgid "Select next telescope"
 msgstr ""
 
 #: src/translations.h:642
-msgid "Select next ocular"
+msgid "Select next eyepiece"
 msgstr ""
 
 #: src/translations.h:643
@@ -3427,7 +3452,7 @@ msgid "Select previous telescope"
 msgstr ""
 
 #: src/translations.h:644
-msgid "Select previous ocular"
+msgid "Select previous eyepiece"
 msgstr ""
 
 #: src/translations.h:647
