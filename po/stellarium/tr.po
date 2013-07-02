@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-28 22:24+0700\n"
-"PO-Revision-Date: 2012-10-24 04:49+0000\n"
-"Last-Translator: Hüsamettin Ertürk <hsmertk@gmail.com>\n"
+"PO-Revision-Date: 2013-07-02 00:17+0000\n"
+"Last-Translator: aydın <bestworst@msn.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-30 05:28+0000\n"
+"X-Launchpad-Export-Date: 2013-07-02 05:13+0000\n"
 "X-Generator: Launchpad (build 16692)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -108,7 +108,7 @@ msgstr "Gezegenimsi bulutsu"
 
 #: src/core/modules/Nebula.cpp:400
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Kara Bulutsu"
 
 #: src/core/modules/Nebula.cpp:403
 msgid "Cluster associated with nebulosity"
@@ -137,7 +137,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:464
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Sapma (of date, for Earth): %1"
 
 #: src/core/modules/Planet.cpp:474 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:149
@@ -154,7 +154,7 @@ msgstr "Uzaklık: %1 AU (1 AU = 149,597,870.691 kilometre)"
 #: src/core/modules/Planet.cpp:492
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Görünür çap: %1, halkayla beraber: %2"
 
 #: src/core/modules/Planet.cpp:498 src/core/modules/MinorPlanet.cpp:258
 #, qt-format
@@ -176,7 +176,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:512
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Ortalama güneş günü: %1"
 
 #: src/core/modules/Planet.cpp:519
 #, qt-format
@@ -207,7 +207,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "yıldız"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -245,7 +245,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
-msgstr ""
+msgstr "çift yıldız"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
@@ -308,17 +308,17 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Sonraki minimum ışık: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Sonraki maximum ışık: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Tutulma süresi: %1%"
 
 #: src/core/modules/StarWrapper.cpp:248
 #, qt-format
@@ -333,6 +333,7 @@ msgstr "Uzay Aracı"
 #: src/core/StelCore.cpp:1424
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"Düzeltme devre dışı bırakıldı. Sadece ne yaptığınızı biliyorsanız kullanın!"
 
 #: src/core/StelCore.cpp:1427
 #, qt-format
@@ -4362,7 +4363,7 @@ msgstr "Çalışan bir betiği durdur"
 
 #: src/ui_configurationDialog.h:1146
 msgid "Load at startup"
-msgstr "Başlangıçta Aşırı Yüklenme"
+msgstr "Başlangıçta çalıştır"
 
 #: src/ui_configurationDialog.h:1147
 msgid "configure"
