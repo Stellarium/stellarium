@@ -1647,7 +1647,7 @@ void Planet::drawOrbit(const StelCore* core, StelRenderer* renderer)
 
 	renderer->setBlendMode(BlendMode_Alpha);
 	renderer->setGlobalColor(orbitColor[0], orbitColor[1], 
-	                         orbitColor[2], orbitFader.getInterstate());
+				 orbitColor[2], orbitFader.getInterstate());
 
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
