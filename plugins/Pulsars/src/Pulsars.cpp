@@ -638,8 +638,7 @@ void Pulsars::updateJSON(void)
 
 	updateState = Pulsars::Updating;
 
-	emit(updateStateChanged(updateState));
-	updateFile.clear();
+	emit(updateStateChanged(updateState));	
 
 	if (progressBar==NULL)
 		progressBar = StelApp::getInstance().getGui()->addProgressBar();
