@@ -251,13 +251,13 @@ void StelLogger::init(const QString& logFilePath)
 	int i;
 	for(i = 0; lRet == ERROR_SUCCESS; i++)
 	{
-		lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-					TEXT(qPrintable(QString("%1\\%2").arg(procKey).arg(i))),
+		lRet = RegOpenKeyExA(HKEY_LOCAL_MACHINE,
+					qPrintable(QString("%1\\%2").arg(procKey).arg(i)),
 					0, KEY_QUERY_VALUE, &hKey);
 
 		if(lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueEx(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+			if(RegQueryValueExA(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
 			else
 				writeLog("Could not get processor speed.");
@@ -270,7 +270,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if (lRet == ERROR_SUCCESS)
 		{
-			if (RegQueryValueEx(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueExA(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");

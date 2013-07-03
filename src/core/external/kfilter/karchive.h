@@ -21,7 +21,11 @@
 #ifndef KARCHIVE_H
 #define KARCHIVE_H
 
+#ifdef _MSC_BUILD
+#include "kdewin32/sys/types.h"
+#else
 #include <sys/types.h>
+#endif
 
 #include <QtCore/QDate>
 #include <QtCore/QString>

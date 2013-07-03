@@ -45,6 +45,10 @@
 #include <QGraphicsLinearLayout>
 #include <QSettings>
 
+#ifdef _MSC_BUILD
+#define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
+#endif
+
 StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,

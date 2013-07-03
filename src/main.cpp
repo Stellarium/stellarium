@@ -35,6 +35,10 @@
 #include <QFontDatabase>
 #ifdef Q_OS_WIN
 #include <windows.h>
+#ifdef _MSC_BUILD
+	#include <MMSystem.h>
+	#pragma comment(lib,"Winmm.lib")
+#endif
 #endif //Q_OS_WIN
 
 //! @class GettextStelTranslator

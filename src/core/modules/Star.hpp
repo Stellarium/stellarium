@@ -55,8 +55,13 @@ static inline float IndexToBV(unsigned char bV) {
 #pragma pack(1)
 #endif
 struct Star1 { // 28 byte
+#ifdef _MSC_BUILD
+  unsigned int hip:24;         // 17 bits needed
+  unsigned int componentIds:8; //  5 bits needed
+#else
   int hip:24;                  // 17 bits needed
   unsigned char componentIds;  //  5 bits needed
+#endif
   Int32 x0;                    // 32 bits needed
   Int32 x1;                    // 32 bits needed
   unsigned char bV;            //  7 bits needed
