@@ -291,7 +291,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 			float extinctionMagnitude=0.0f;
 			extinction.forward(&(altAz[2]), &extinctionMagnitude);
 			// compute a simple factor from magnitude loss.
-			float extinctionFactor=pow(0.4, extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
+			float extinctionFactor=pow(0.4f , extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
 			extinctedColor[0]*=fabs(extinctionFactor);
 			extinctedColor[1]*=fabs(extinctionFactor);
 			extinctedColor[2]*=fabs(extinctionFactor);
