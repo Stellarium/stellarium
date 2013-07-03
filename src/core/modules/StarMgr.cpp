@@ -54,7 +54,11 @@
 #include "RefractionExtinction.hpp"
 
 #include <errno.h>
+#ifndef Q_OS_WIN
 #include <unistd.h>
+#else
+#include "kdewin32/unistd.h"
+#endif
 
 using namespace BigStarCatalogExtension;
 
@@ -466,7 +470,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		{
 			maxGeodesicGridLevel = z->level;
 		}
-		ZoneArray *&pos(zoneArrays[z->level]);
+		ZoneArray *pos(zoneArrays[z->level]);
 		if (pos)
 		{
 			qWarning() << catalogFileName << ", " << z->level << ": duplicate level";
@@ -474,6 +478,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		}
 		else
 		{
+			zoneArrays[z->level] = z;
 			pos = z;
 		}
 	}
