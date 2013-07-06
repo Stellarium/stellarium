@@ -117,6 +117,7 @@ public:
 		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
 		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
 		Banjevic,			//!< Banjevic (2006) algorithm for DeltaT
+		IslamSadiqQureshi,		//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 
