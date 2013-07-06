@@ -1655,6 +1655,50 @@ double getDeltaTByBanjevic(const double jDay)
 	return c*u*u;
 }
 
+// Implementation of algorithm by Islam, Sadiq & Qureshi (2008 + revisited 2013) for DeltaT computation.
+double getDeltaTByIslamSadiqQureshi(const double jDay)
+{
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	double deltaT = 0.0; // Return deltaT = 0 outside valid range.
+	double u;
+	const double ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
+	if (year >= 1620 && year <= 1698)
+	{
+		u = 3.48 + ub;
+		deltaT = (((1162.805 * u - 273.116) * u + 14.523) * u - 105.262) * u + 38.067;
+	}
+	else if (year <= 1806)
+	{
+		u = 2.545 + ub;
+		deltaT = (((-71.724 * u - 39.048) * u + 7.591) * u + 13.893) * u + 13.759;
+	}
+	else if (year <= 1872)
+	{
+		u = 1.675 + ub;
+		deltaT = (((-1612.55 * u - 157.977) * u + 161.524) * u - 3.654) * u + 5.859;
+	}
+	else if (year <= 1906)
+	{
+		u = 1.175 + ub;
+		deltaT = (((6250.501 * u + 1006.463) * u + 139.921) * u - 2.732) * u - 6.203;
+	}
+	else if (year <= 1953)
+	{
+		// revised 2013 per email
+		u = 0.77 + ub;
+		deltaT = (((-390.785 * u + 901.514) * u - 88.044) * u + 8.997) * u + 24.006;
+	}
+	else if (year <= 2007)
+	{
+		// revised 2013 per email
+		u = 0.265 + ub;
+		deltaT = (((1314.759 * u - 296.018) * u - 101.898) * u + 88.659) * u + 49.997;
+	}
+
+	return deltaT;
+}
+
 double getMoonSecularAcceleration(const double jDay, const double nd)
 {
 	int year, month, day;
