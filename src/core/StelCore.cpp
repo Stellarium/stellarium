@@ -1510,7 +1510,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		description = q_("This solution by B. Banjevic, based on Stephenson & Morrison (1984), was published in article <em>Ancient eclipses and dating the fall of Babylon</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2006POBeo..80..251B'>2006</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case IslamSadiqQureshi:
-		description = q_("This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & Simons (2000), was published in article <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) and revisited in 2013.").arg("<a href='http://www.ias.ac.in/jaa/dec2008/JAA610.pdf'>2008</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+		description = q_("This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & Simons (2000), was published in article <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013.").arg("<a href='http://www.ias.ac.in/jaa/dec2008/JAA610.pdf'>2008</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 		break;
 	case Custom:
 		description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
