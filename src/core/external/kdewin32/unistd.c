@@ -464,8 +464,10 @@ int getopt(int argc, char **argv, const char *optstring)
 }
 #endif  // __MINGW32__
 
-
-int truncate(const char *path, int length)
+#ifdef _MSC_BUILD
+typedef long int off_t;
+#endif
+int truncate(const char *path, off_t length)
 {
     HANDLE hFile;
     LARGE_INTEGER fileSize;
@@ -513,7 +515,7 @@ int truncate(const char *path, int length)
 
 #ifndef __MINGW32__
 // TODO (js) consider using _chsize_s
-int ftruncate(int fd, int length)
+int ftruncate(int fd, off_t length)
 {
   return _chsize (fd, length);
 }
