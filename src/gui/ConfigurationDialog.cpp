@@ -836,7 +836,9 @@ void ConfigurationDialog::aScriptHasStopped(void)
 
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDay()));
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDay();
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }

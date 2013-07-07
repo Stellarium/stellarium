@@ -692,8 +692,11 @@
              </item>
              <item row="2" column="1">
               <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="toolTip">
+                <string>Use current local date and time</string>
+               </property>
                <property name="text">
-                <string>set current date and time</string>
+                <string>use current</string>
                </property>
               </widget>
              </item>
