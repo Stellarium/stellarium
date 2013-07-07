@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 19:15+0700\n"
+"POT-Creation-Date: 2013-07-07 14:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -565,21 +565,21 @@ msgid ""
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1618 src/core/StelCore.cpp:1623
-#: src/core/StelCore.cpp:1650 src/core/StelCore.cpp:1655
+#: src/core/StelCore.cpp:1616 src/core/StelCore.cpp:1621
+#: src/core/StelCore.cpp:1648 src/core/StelCore.cpp:1653
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1628
+#: src/core/StelCore.cpp:1626
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1665
+#: src/core/StelCore.cpp:1663
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1667
+#: src/core/StelCore.cpp:1665
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -4159,7 +4159,7 @@ msgid "Other:"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1070
-msgid "use current"
+msgid "set current date and time"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1072
