@@ -634,31 +634,23 @@ void Pulsars::updateJSON(void)
 	lastUpdate = QDateTime::currentDateTime();
 	conf->setValue("Pulsars/last_update", lastUpdate.toString(Qt::ISODate));
 
-	emit(jsonUpdateComplete());
-
 	updateState = Pulsars::Updating;
-
 	emit(updateStateChanged(updateState));	
 
 	if (progressBar==NULL)
 		progressBar = StelApp::getInstance().getGui()->addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(updateUrl.size());
-	progressBar->setVisible(true);
+	progressBar->setMaximum(100);
 	progressBar->setFormat("Update pulsars");
+	progressBar->setVisible(true);
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Pulsars Plugin %1; http://stellarium.org/)").arg(PULSARS_PLUGIN_VERSION).toUtf8());
 	downloadMgr->get(request);
 
-	progressBar->setValue(100);
-	delete progressBar;
-	progressBar = NULL;
-
-	updateState = CompleteUpdates;
-
+	updateState = Pulsars::CompleteUpdates;
 	emit(updateStateChanged(updateState));
 	emit(jsonUpdateComplete());
 }
@@ -692,7 +684,11 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 	}
 
 	if (progressBar)
+	{
 		progressBar->setValue(100);
+		delete progressBar;
+		progressBar = NULL;
+	}
 }
 
 void Pulsars::displayMessage(const QString& message, const QString hexColor)
