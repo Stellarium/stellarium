@@ -55,7 +55,6 @@ IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  STRING(REGEX REPLACE "^.*[ ]([0-9]+)\\.[0-9].*$" "\\1" CLANG_MAJOR "${_clang_version_info}")
  STRING(REGEX REPLACE "^.*[ ][0-9]+\\.([0-9]).*$" "\\1" CLANG_MINOR "${_clang_version_info}")
  MESSAGE(STATUS "Found Clang ${CLANG_MAJOR}.${CLANG_MINOR}")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual")
 ELSE()
  SET(CLANG_MAJOR 0)
  SET(CLANG_MINOR 0)
@@ -87,7 +86,7 @@ SET(GCC_VERSION "${GCC_MAJOR}.${GCC_MINOR}")
 
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")     # additional CPP compile flags
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter")     # additional CPP compile flags
 ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
@@ -96,6 +95,11 @@ ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  # --enable-runtime-pseudo-reloc --verbose
+ENDIF()
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized")
 ENDIF()
 
 SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
