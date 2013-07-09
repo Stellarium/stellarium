@@ -124,7 +124,7 @@ ENDIF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
 
 # best way to get to APPLE?
 IF(APPLE)
- SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-private-field")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
 
  # uncomment one of the following, depending on minimum OS level you want
