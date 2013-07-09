@@ -179,9 +179,8 @@ StelProjectorP StelCore::getProjection2d() const
 
 StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType) const
 {
-//	this condition always false --AW
-//	if (projType==1000)
-//		projType = currentProjectionType;
+	if (projType==1000)
+		projType = currentProjectionType;
 
 	StelProjectorP prj;
 	switch (projType)
