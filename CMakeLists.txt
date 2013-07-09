@@ -98,7 +98,6 @@ ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
 ENDIF()
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized")
 ENDIF()
 
