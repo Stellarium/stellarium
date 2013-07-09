@@ -119,6 +119,9 @@ ENDIF()
 IF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   # Use -pthread compilation option to properly link to threading library
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+  IF(${GCC_VERSION} STRGREATER "4.7")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
+  ENDIF()
 ENDIF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
 
 # best way to get to APPLE?
