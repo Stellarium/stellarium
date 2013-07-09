@@ -637,32 +637,23 @@ void Exoplanets::updateJSON(void)
 	lastUpdate = QDateTime::currentDateTime();
 	conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
 
-	emit(jsonUpdateComplete());
-
 	updateState = Exoplanets::Updating;
-
 	emit(updateStateChanged(updateState));
-	updateFile.clear();
 
 	if (progressBar==NULL)
 		progressBar = StelApp::getInstance().getGui()->addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(updateUrl.size());
-	progressBar->setVisible(true);
+	progressBar->setMaximum(100);
 	progressBar->setFormat("Update exoplanets");
+	progressBar->setVisible(true);
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Exoplanets Plugin %1; http://stellarium.org/)").arg(EXOPLANETS_PLUGIN_VERSION).toUtf8());
 	downloadMgr->get(request);
 
-	progressBar->setValue(100);
-	delete progressBar;
-	progressBar = NULL;
-
-	updateState = CompleteUpdates;
-
+	updateState = Exoplanets::CompleteUpdates;
 	emit(updateStateChanged(updateState));
 	emit(jsonUpdateComplete());
 }
@@ -696,7 +687,11 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 	}
 
 	if (progressBar)
+	{
 		progressBar->setValue(100);
+		delete progressBar;
+		progressBar = NULL;
+	}
 }
 
 void Exoplanets::displayMessage(const QString& message, const QString hexColor)

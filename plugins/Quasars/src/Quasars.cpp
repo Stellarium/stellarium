@@ -632,32 +632,23 @@ void Quasars::updateJSON(void)
 	lastUpdate = QDateTime::currentDateTime();
 	conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
 
-	emit(jsonUpdateComplete());
-
 	updateState = Quasars::Updating;
-
-	emit(updateStateChanged(updateState));
-	updateFile.clear();
+	emit(updateStateChanged(updateState));	
 
 	if (progressBar==NULL)
 		progressBar = StelApp::getInstance().getGui()->addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(updateUrl.size());
-	progressBar->setVisible(true);
+	progressBar->setMaximum(100);
 	progressBar->setFormat("Update quasars");
+	progressBar->setVisible(true);
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Quasars Plugin %1; http://stellarium.org/)").arg(QUASARS_PLUGIN_VERSION).toUtf8());
 	downloadMgr->get(request);
 
-	progressBar->setValue(100);
-	delete progressBar;
-	progressBar = NULL;
-
-	updateState = CompleteUpdates;
-
+	updateState = Quasars::CompleteUpdates;
 	emit(updateStateChanged(updateState));
 	emit(jsonUpdateComplete());
 }
@@ -691,7 +682,11 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	}
 
 	if (progressBar)
+	{
 		progressBar->setValue(100);
+		delete progressBar;
+		progressBar = NULL;
+	}
 }
 
 void Quasars::displayMessage(const QString& message, const QString hexColor)

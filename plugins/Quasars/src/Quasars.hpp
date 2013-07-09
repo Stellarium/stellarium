@@ -206,8 +206,7 @@ private:
 	// variables and functions for the updater
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
-	QString updateUrl;
-	QString updateFile;	
+	QString updateUrl;	
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
