@@ -24,6 +24,7 @@
 *       ----------------------------------------------------------------      */
 
 #include "sgp4ext.h"
+#include "StelUtils.hpp"
 
 
 double  sgn
@@ -184,38 +185,6 @@ double  angle
          return undefined;
    }  // end angle
 
-
-/* -----------------------------------------------------------------------------
-*
-*                           function asinh
-*
-*  this function evaluates the inverse hyperbolic sine function.
-*
-*  author        : david vallado                  719-573-2600    1 mar 2001
-*
-*  inputs          description                    range / units
-*    xval        - angle value                                  any real
-*
-*  outputs       :
-*    arcsinh     - result                                       any real
-*
-*  locals        :
-*    none.
-*
-*  coupling      :
-*    none.
-*
-* --------------------------------------------------------------------------- */
-
-double  asinh
-        (
-          double xval
-        )
-   {
-     return log( xval + sqrt( xval*xval + 1.0 ) );
-   }  // end asinh
-
-
 /* -----------------------------------------------------------------------------
 *
 *                           function newtonnu
@@ -286,7 +255,7 @@ void newtonnu
                  if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < M_PI-acos(1.0 /ecc)))
                    {
                      sine= ( sqrt( ecc*ecc-1.0  ) * sin(nu) ) / ( 1.0  + ecc*cos(nu) );
-                     e0  = asinh( sine );
+		     e0  = StelUtils::asinh( sine );
                      m   = ecc*sinh(e0) - e0;
                    }
                 }
