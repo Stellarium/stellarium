@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-07 15:17+0700\n"
-"PO-Revision-Date: 2013-05-03 11:14+0000\n"
+"PO-Revision-Date: 2013-07-11 00:40+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 05:20+0000\n"
+"X-Launchpad-Export-Date: 2013-07-11 05:13+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -221,27 +221,27 @@ msgstr "Magnitude Ketara: <b>%1</b> (oleh kepupusan)"
 
 #: src/core/modules/StarWrapper.cpp:139
 msgid "eruptive variable star"
-msgstr ""
+msgstr "bintang berubah letusan"
 
 #: src/core/modules/StarWrapper.cpp:141
 msgid "pulsating variable star"
-msgstr ""
+msgstr "bintang berubah berpulsar"
 
 #: src/core/modules/StarWrapper.cpp:143
 msgid "rotating variable star"
-msgstr ""
+msgstr "bintang berubah berputar"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "bintang berubah kataklismik"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "sistem dedua gerhana"
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
-msgstr ""
+msgstr "bintang berubah"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
@@ -250,7 +250,7 @@ msgstr "bintang dubel"
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Jenis: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -265,12 +265,12 @@ msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Julat magnitud: <b>%1</b>%2<b>%3</b> (Sistem fotometrik: %4)"
 
 #: src/core/modules/StarWrapper.cpp:201
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Julat magnitud: <b>%1</b>%2<b>%3/%4</b> (Sistem fotometrik: %5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -293,37 +293,37 @@ msgstr "Paralaks: %1\""
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Epok untuk cahaya minimum: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Epok untuk cahaya maksimum: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Tempoh: %1 hari"
 
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Cahaya minimum berikutnya: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Cahaya maksimum berikutnya: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Tempoh masa gerhana: %1%"
 
 #: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Masa terbit: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -617,6 +617,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Penyelesaian ini oleh B. Banjevic, berdasarkan Stephenson & Morrison (1984), "
+"telah diterbitkan dalam artikel <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1513
 #, qt-format
@@ -625,6 +628,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Penyelesaian ini oleh S. Islam, M. Sadiq dan M. S. Qureshi, berdasarkan pada "
+"Meeus & Simons (2000), telah diterbitkan dalam artikel <em>Error "
+"Minimization of Polynomial Approximation of DeltaT</em> (%1) dan "
+"diperbaharui oleh Sana Islam pada 2013."
 
 #: src/core/StelCore.cpp:1516
 #, qt-format
@@ -1049,11 +1056,11 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1165
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
@@ -3548,19 +3555,19 @@ msgstr "Pandangan telrad"
 
 #: src/translations.h:641
 msgid "Select next telescope"
-msgstr ""
+msgstr "Pilih teleskop berikutnya"
 
 #: src/translations.h:642
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Pilih kanta mata berikutnya"
 
 #: src/translations.h:643
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Pilih teleskop terdahulu"
 
 #: src/translations.h:644
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Pilih kanta mata terdahulu"
 
 #: src/translations.h:647
 msgid "Show pulsars"
@@ -3922,10 +3929,11 @@ msgstr "Planet"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Label dan penanda untuk objek samawi (gugusan bintang, bima sakti dan nebula)"
 
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgid "DSO"
-msgstr ""
+msgstr "DSO"
 
 #: src/ui_viewDialog.h:1204
 msgid "Planets and satellites"
@@ -4017,12 +4025,12 @@ msgstr "Had Magnitud"
 
 #: src/ui_viewDialog.h:1237
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Had magnitud bintang"
 
 #: src/ui_viewDialog.h:1241
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr ""
+msgstr "Had magnitud objek samawi (gugusan bintang, bima sakti dan nebula)"
 
 #: src/ui_viewDialog.h:1244
 msgid "Constellations"
@@ -4334,7 +4342,7 @@ msgstr "Lain-lain:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Guna tarikh dan masa setempat"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -4441,6 +4449,8 @@ msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr ""
+"Papar bayang suria pada planet dan bulan (Bagi fitur yang memerlukan OpenGL "
+"versi 2 atau lebih tinggi)"
 
 #: src/ui_configurationDialog.h:1119
 msgid "Render Solar Shadows"
@@ -4957,7 +4967,7 @@ msgstr "Kegandaan: T/B"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "Jarak fokus kanta mata"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -4999,7 +5009,7 @@ msgstr "Versi"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 msgid "Barlow lens feature"
-msgstr ""
+msgstr "Fitur kanta Barlow"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid "Overview"
@@ -5260,62 +5270,62 @@ msgstr "Fail satelit.json lama tidak lagi serasi - menggunakan fail lalai"
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1594
 msgid "visual"
-msgstr ""
+msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1596
 msgid "scientific"
-msgstr ""
+msgstr "saintifik"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1598
 msgid "communications"
-msgstr ""
+msgstr "komunikasi"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1600
 msgid "navigation"
-msgstr ""
+msgstr "navigasi"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1602
 msgid "amateur"
-msgstr ""
+msgstr "amatur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1604
 msgid "weather"
-msgstr ""
+msgstr "cuaca"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1606
 msgid "geostationary"
-msgstr ""
+msgstr "geopegun"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1608
 msgid "non-operational"
-msgstr ""
+msgstr "tidak-berfungsi"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1610
 msgid "gps"
-msgstr ""
+msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1612
 msgid "iridium"
-msgstr ""
+msgstr "iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1623
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "Teleskop Angkasa Hubble"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1625
 msgid "The International Space Station"
-msgstr ""
+msgstr "Stesen Angkasa Antarabangsa"
 
 #: plugins/Satellites/src/Satellite.cpp:239
 #: plugins/Satellites/src/Satellite.cpp:243
@@ -5634,12 +5644,12 @@ msgstr "Ralat kemaskini"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:479
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "%1/%2 satelit dikemaskini; %3 ditambah; %4 dibuang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "%1/%2 satelit dikemaskini; %3 ditambah; %4 hilang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
 msgid "[new source]"
@@ -5689,7 +5699,7 @@ msgstr "[semua]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "New group..."
-msgstr ""
+msgstr "Kumpulan baru..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 msgid "Select TLE Update File"
@@ -5734,11 +5744,11 @@ msgstr "Konfigurasi Satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Updates"
-msgstr ""
+msgstr "Kemaskini"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Kemaskini data satelit dari sumber Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -5750,13 +5760,14 @@ msgstr "Terakhir dikemaskini:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr ""
+msgstr "Semasa kemaskini, tambah semua satelit dari sumber terpilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Semasa kemaskini, satelit yang tiada lagi tersenarai dalam sumber kemaskini"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
@@ -5831,7 +5842,7 @@ msgstr "Tetapan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Dwi-klik satelit untuk mula menjejaknya."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
@@ -5867,11 +5878,11 @@ msgstr "Orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr ""
+msgstr "Jangan kemaskini (atau buang semasa kemaskini) satelit terpilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:737
 msgid "Do not update"
-msgstr ""
+msgstr "Jangan kemaskini"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Description:"
@@ -5883,13 +5894,15 @@ msgstr "Kumpulan:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "TLE set:"
-msgstr ""
+msgstr "Set TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
+"Satelit dalam senarai sumber bertanda akan ditambah secara automatik semasa "
+"kemaskini berikutnya jika ia tiada dalam koleksi."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid ""
@@ -7191,7 +7204,7 @@ msgstr "Konfigurasi Pemalam Kuasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:267
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Tetapan untuk kuasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Plot all quasars without labels"
@@ -7209,7 +7222,7 @@ msgstr "Benarkan paparan semasa permulaan"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "Papar butang kuasa pada palang alat"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -7406,7 +7419,7 @@ msgstr "Konfigurasi Pemalam Pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Tetapan untuk pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Plot all pulsars without labels"
@@ -7418,7 +7431,7 @@ msgstr "Benarkan paparan distribusi untuk pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:273
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Papar butang pulsar pada palang alat"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:72
 msgid "Exoplanets"
@@ -7533,7 +7546,7 @@ msgstr "Kemaskini data eksoplanet dari Internet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Tetapan untuk exoplanet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
 msgid "Plot all systems with exoplanets without labels"
@@ -7553,7 +7566,7 @@ msgstr "Benarkan  penemuan garis masa exoplanet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "Tunjuk butang exoplanet pada palang alat"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
