@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-07 15:17+0700\n"
-"PO-Revision-Date: 2013-07-07 04:25+0000\n"
-"Last-Translator: Kaori YOKOZAWA <yokozawa@tree.so-net.jp>\n"
+"PO-Revision-Date: 2013-07-11 15:02+0000\n"
+"Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 05:18+0000\n"
+"X-Launchpad-Export-Date: 2013-07-12 05:32+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -71,7 +71,7 @@ msgstr "種類: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "等級: <b>%1</b> (大気減光時: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
@@ -166,7 +166,7 @@ msgstr "見かけの直径: %1"
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "恒星周期: %1日 (%2ユリウス年)"
 
 #: src/core/modules/Planet.cpp:511
 #, qt-format
@@ -245,12 +245,12 @@ msgstr "変光星"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
-msgstr ""
+msgstr "二重星"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "種類: <b>%1、%2</b>"
 
 #: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -700,7 +700,7 @@ msgstr "銀経/銀緯: %1/%2"
 #: src/core/StelObject.cpp:127
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "時角: %1/%2"
+msgstr "時角/赤緯: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
@@ -847,7 +847,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Without correction"
-msgstr ""
+msgstr "補正なし"
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Schoch (1931)"
@@ -1520,7 +1520,7 @@ msgstr "ニクス"
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "ヒドラ (衛星)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1590,17 +1590,17 @@ msgstr ""
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "クワオアー"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "オルクス"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "ハウメア"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1655,12 +1655,12 @@ msgstr "ヘクトール"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "ヴァルナ"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "マケマケ"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1830,7 +1830,7 @@ msgstr "2009年の日食"
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
 msgid "Startup Script"
-msgstr ""
+msgstr "スタートアップスクリプト"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
@@ -2060,7 +2060,7 @@ msgstr "アルゼンチン"
 
 #: src/translations.h:288
 msgid "American Samoa"
-msgstr "米国領サモア"
+msgstr "アメリカ領サモア"
 
 #: src/translations.h:289
 msgid "Austria"
@@ -2072,7 +2072,7 @@ msgstr "オーストラリア"
 
 #: src/translations.h:291
 msgid "Aruba"
-msgstr ""
+msgstr "アルバ"
 
 #: src/translations.h:292
 msgid "Azerbaijan"
@@ -2160,7 +2160,7 @@ msgstr "カナダ"
 
 #: src/translations.h:313
 msgid "Cocos Islands"
-msgstr ""
+msgstr "ココス諸島"
 
 #: src/translations.h:314
 msgid "Democratic Republic of the Congo"
@@ -2180,7 +2180,7 @@ msgstr "スイス"
 
 #: src/translations.h:318
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "コートジボワール"
 
 #: src/translations.h:319
 msgid "Cook Islands"
@@ -2324,7 +2324,7 @@ msgstr "ジョージア州"
 
 #: src/translations.h:354
 msgid "French Guiana"
-msgstr "仏領ギアナ"
+msgstr "フランス領ギアナ"
 
 #: src/translations.h:355
 msgid "Ghana"
@@ -2360,7 +2360,7 @@ msgstr "ギリシャ"
 
 #: src/translations.h:363
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "サウスジョージア・サウスサンドウィッチ諸島"
 
 #: src/translations.h:364
 msgid "Guatemala"
@@ -2372,7 +2372,7 @@ msgstr "グアム"
 
 #: src/translations.h:366
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "ギニアビサウ"
 
 #: src/translations.h:367
 msgid "Guyana"
@@ -2420,7 +2420,7 @@ msgstr "インド"
 
 #: src/translations.h:378
 msgid "British Indian Ocean Territory"
-msgstr "英国領インド洋地域"
+msgstr "イギリス領インド洋地域"
 
 #: src/translations.h:379
 msgid "Iraq"
@@ -2496,7 +2496,7 @@ msgstr "カザフスタン"
 
 #: src/translations.h:397
 msgid "Lao"
-msgstr ""
+msgstr "ラオス"
 
 #: src/translations.h:398
 msgid "Lebanon"
@@ -2548,7 +2548,7 @@ msgstr "モナコ"
 
 #: src/translations.h:410
 msgid "Moldova"
-msgstr ""
+msgstr "モルドバ"
 
 #: src/translations.h:411
 msgid "Madagascar"
@@ -2576,11 +2576,11 @@ msgstr "モンゴル"
 
 #: src/translations.h:417
 msgid "Macau"
-msgstr ""
+msgstr "マカオ"
 
 #: src/translations.h:418
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "北マリアナ諸島"
 
 #: src/translations.h:419
 msgid "Martinique"
@@ -2716,7 +2716,7 @@ msgstr "プエルトリコ"
 
 #: src/translations.h:452
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "パレスチナ自治区"
 
 #: src/translations.h:453
 msgid "Portugal"
@@ -2736,7 +2736,7 @@ msgstr "カタール"
 
 #: src/translations.h:457
 msgid "Réunion"
-msgstr ""
+msgstr "レユニオン"
 
 #: src/translations.h:458
 msgid "Romania"
@@ -2744,7 +2744,7 @@ msgstr "ルーマニア"
 
 #: src/translations.h:459
 msgid "Serbia"
-msgstr ""
+msgstr "セルビア"
 
 #: src/translations.h:460
 msgid "Russian Federation"
@@ -2856,7 +2856,7 @@ msgstr "タジキスタン共和国"
 
 #: src/translations.h:487
 msgid "Tokelau"
-msgstr ""
+msgstr "トケラウ"
 
 #: src/translations.h:488
 msgid "East Timor"
@@ -2908,7 +2908,7 @@ msgstr "アメリカ合衆国外諸島"
 
 #: src/translations.h:500
 msgid "United States"
-msgstr ""
+msgstr "アメリカ合衆国"
 
 #: src/translations.h:501
 msgid "Uruguay"
@@ -2920,7 +2920,7 @@ msgstr "ウズベキスタン"
 
 #: src/translations.h:503
 msgid "Vatican City State"
-msgstr ""
+msgstr "バチカン市国"
 
 #: src/translations.h:504
 msgid "Saint Vincent and the Grenadines"
@@ -2932,11 +2932,11 @@ msgstr "ベネズエラ"
 
 #: src/translations.h:506
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "イギリス領ヴァージン諸島"
 
 #: src/translations.h:507
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "アメリカ領ヴァージン諸島"
 
 #: src/translations.h:508
 msgid "Viet Nam"
@@ -3778,7 +3778,7 @@ msgstr "惑星"
 #: src/ui_viewDialog.h:1201
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr ""
+msgstr "深宇宙天体 (星団、銀河、星雲) の名前とマーカー"
 
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgid "DSO"
@@ -3879,7 +3879,7 @@ msgstr "恒星の等級を制限する"
 #: src/ui_viewDialog.h:1241
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr ""
+msgstr "深宇宙天体 (星団、銀河、星雲) の等級を制限する"
 
 #: src/ui_viewDialog.h:1244
 msgid "Constellations"
@@ -4085,7 +4085,7 @@ msgstr "カタログ番号"
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -4109,7 +4109,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1033
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "時角/赤緯"
 
 #: src/ui_configurationDialog.h:1034
 msgid "Distance"
@@ -4117,15 +4117,15 @@ msgstr "距離"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
-msgstr ""
+msgstr "角度または実際の大きさ"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Size"
-msgstr ""
+msgstr "大きさ"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
-msgstr "スペクトル型, 星雲の種類など"
+msgstr "スペクトル型、星雲の種類など"
 
 #: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
@@ -4161,7 +4161,7 @@ msgstr "マウス操作を有効にする"
 
 #: src/ui_configurationDialog.h:1059
 msgid "Hides the mouse cursor when inactive"
-msgstr ""
+msgstr "操作がない時マウスカーソルを消すまでの秒数"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
@@ -4212,7 +4212,7 @@ msgstr "システムの日付:"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Time correction"
-msgstr ""
+msgstr "自転速度補正"
 
 #: src/ui_configurationDialog.h:1085
 msgid "Edit equation"
@@ -4258,7 +4258,7 @@ msgstr "重力表示"
 
 #: src/ui_configurationDialog.h:1105
 msgid "Toggle display backgrounds of the nebulae."
-msgstr ""
+msgstr "星雲の背景の表示を切り替える"
 
 #: src/ui_configurationDialog.h:1107
 msgid "Show nebula background button"
@@ -4286,7 +4286,7 @@ msgstr "自動視点、元の方位に戻す"
 msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
-msgstr ""
+msgstr "惑星と月に太陽の影を描く (OpenGLバージョン2以降が必要)"
 
 #: src/ui_configurationDialog.h:1119
 msgid "Render Solar Shadows"
@@ -4452,15 +4452,15 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "スクリプトコンソール"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "ファイルからスクリプトを読み込む"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "ファイルにスクリプトを保存する"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
@@ -4480,11 +4480,11 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "スクリプトを実行する"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "スクリプトを停止する"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
@@ -6460,7 +6460,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "天の川の明るさ:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
@@ -6484,11 +6484,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
-msgstr ""
+msgstr "実行中のスクリプトを停止"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
-msgstr ""
+msgstr "CD/DVDスクリプト"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:472
