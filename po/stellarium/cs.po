@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-07 15:17+0700\n"
-"PO-Revision-Date: 2013-06-30 20:35+0000\n"
+"PO-Revision-Date: 2013-07-12 21:24+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-13 05:27+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -590,7 +590,7 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
-"Toto řešení od . Espenaka and J. Meeuse, založené na výzkumu Morrisona a "
+"Toto řešení od F. Espenaka and J. Meeuse, založené na výzkumu Morrisona a "
 "Stephensona (2004) a polynomické regresi tabulkových hodnot pro období 1600-"
 "2000, je použito pro %1Stránku o zatměních od NASA%2 a v jejich knize "
 "<em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). "
@@ -619,6 +619,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Toto řešení od S. Islama, M. Sadiqa a M. S. Qureshiho, založeném na řešení "
+"od Meeuse & Simonse (2000), bylo publikováno v článku  <em>Error "
+"Minimization of Polynomial Approximation of DeltaT</em> (%1) a revidováno S. "
+"Islamem v roce 2013."
 
 #: src/core/StelCore.cpp:1516
 #, qt-format
@@ -1047,7 +1051,7 @@ msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq a Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
@@ -4317,7 +4321,7 @@ msgstr "Jiné:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Použít současný místní čas a datum"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
