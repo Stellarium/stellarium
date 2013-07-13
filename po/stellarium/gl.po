@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-07 15:17+0700\n"
-"PO-Revision-Date: 2013-06-28 16:13+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2013-07-12 14:03+0000\n"
+"Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-07-13 05:28+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -623,6 +623,9 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Esta solución de S. Islam, M. Sadiq e M. S. Qureshi, baseada en Meeus & "
+"Simons (2000), foi publicada no artigo <em>Error Minimization of Polynomial "
+"Approximation of DeltaT</em> (%1) e revisado por Sana Islam en 2013."
 
 #: src/core/StelCore.cpp:1516
 #, qt-format
@@ -1052,7 +1055,7 @@ msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
@@ -3542,19 +3545,19 @@ msgstr "Vista Telrad"
 
 #: src/translations.h:641
 msgid "Select next telescope"
-msgstr ""
+msgstr "Seleccionar o seguinte telescopio"
 
 #: src/translations.h:642
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Seleccionar o seguinte ocular"
 
 #: src/translations.h:643
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Seleccionar o anterior telescopio"
 
 #: src/translations.h:644
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Seleccionar o anterior ocular"
 
 #: src/translations.h:647
 msgid "Show pulsars"
@@ -4330,7 +4333,7 @@ msgstr "Outra:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Usar data e hora local actuais"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
