@@ -238,8 +238,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
-		this, SLOT(enableSimbadSearch(bool)));
+	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
 
 	populateSimbadServerList();
@@ -250,8 +249,7 @@ void SearchDialog::createDialogContent()
 		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->serverListComboBox->setCurrentIndex(idx);
-	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
-	        this, SLOT(selectSimbadServer(int)));
+	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
 
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
@@ -586,8 +584,7 @@ void SearchDialog::updateListTab()
 	{
 		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
 		{
-			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ?
-															it.value(): q_(it.value()));
+			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ? it.value(): q_(it.value()));
 			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
 		}
 	}
