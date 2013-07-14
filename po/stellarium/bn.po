@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 15:17+0700\n"
+"POT-Creation-Date: 2013-07-13 20:43+0700\n"
 "PO-Revision-Date: 2013-06-04 06:44+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:29+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "Language: bn\n"
 
@@ -1363,19 +1363,19 @@ msgstr "স্বাভাবিক"
 msgid "starchart"
 msgstr "নক্ষত্র তালিকা"
 
-#: src/gui/SearchDialog.cpp:364
+#: src/gui/SearchDialog.cpp:362
 msgid "Simbad Lookup Error"
 msgstr "সিমবাড-এ অনুসন্ধানে ত্রুটি"
 
-#: src/gui/SearchDialog.cpp:372
+#: src/gui/SearchDialog.cpp:370
 msgid "Simbad Lookup"
 msgstr "সিমবাডে অনুসন্ধান"
 
-#: src/gui/SearchDialog.cpp:540
+#: src/gui/SearchDialog.cpp:538
 msgid "University of Strasbourg (France)"
 msgstr "স্ট্রসবুর্গ বিশ্ববিদ্যালয় (ফ্রান্স)"
 
-#: src/gui/SearchDialog.cpp:541
+#: src/gui/SearchDialog.cpp:539
 msgid "Harvard University (USA)"
 msgstr "হার্ভাড বিশ্ববিদ্যালয় (আমেরিকা)"
 
@@ -3853,15 +3853,19 @@ msgstr "সার্ভার :"
 msgid "Options"
 msgstr "বিকল্পসমূহ"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:629
+msgid "Some objects may be found after activation respective plug-ins"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:631
 msgid "names in English"
 msgstr "ইংরাজী নাম"
 
-#: src/ui_searchDialogGui.h:629
+#: src/ui_searchDialogGui.h:632
 msgid "Search in list..."
 msgstr "তালিকায় খোঁজা হচ্ছে..."
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:633
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr "তালিকা"
@@ -6347,62 +6351,62 @@ msgstr ""
 "প্রাদেশিক সময় অঞ্চলের পরিবর্তন মঞ্জুর করে ।"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "January"
 msgstr "জানুয়ারী"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "February"
 msgstr "ফেব্রুয়ারী"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "March"
 msgstr "মার্চ"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "April"
 msgstr "এপ্রিল"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "May"
 msgstr "মে"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "June"
 msgstr "জুন"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "July"
 msgstr "জুলাই"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "August"
 msgstr "আগষ্ট"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "September"
 msgstr "সেপ্টেম্বর"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "October"
 msgstr "অক্টোবর"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "November"
 msgstr "নভেম্বর"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "December"
 msgstr "ডিসেম্বর"
 
