@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 15:17+0700\n"
-"PO-Revision-Date: 2013-06-08 18:05+0000\n"
+"POT-Creation-Date: 2013-07-13 20:43+0700\n"
+"PO-Revision-Date: 2013-07-13 09:56+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:33+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -961,7 +961,7 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1165
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
@@ -1283,19 +1283,19 @@ msgstr "természet"
 msgid "starchart"
 msgstr "csillagtérkép"
 
-#: src/gui/SearchDialog.cpp:364
+#: src/gui/SearchDialog.cpp:362
 msgid "Simbad Lookup Error"
 msgstr "Simbad keresési hiba"
 
-#: src/gui/SearchDialog.cpp:372
+#: src/gui/SearchDialog.cpp:370
 msgid "Simbad Lookup"
 msgstr "Simbad keresés"
 
-#: src/gui/SearchDialog.cpp:540
+#: src/gui/SearchDialog.cpp:538
 msgid "University of Strasbourg (France)"
 msgstr "Strasbourgi Egyetem (Franciaország)"
 
-#: src/gui/SearchDialog.cpp:541
+#: src/gui/SearchDialog.cpp:539
 msgid "Harvard University (USA)"
 msgstr "Harvard University (USA)"
 
@@ -3775,15 +3775,19 @@ msgstr "Szerver:"
 msgid "Options"
 msgstr "Beállítások"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:629
+msgid "Some objects may be found after activation respective plug-ins"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:631
 msgid "names in English"
 msgstr "Rövidítések"
 
-#: src/ui_searchDialogGui.h:629
+#: src/ui_searchDialogGui.h:632
 msgid "Search in list..."
 msgstr "Keresés a listában..."
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:633
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr "Listák"
@@ -4232,7 +4236,7 @@ msgstr "Egyéb:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Helyi dátum és idő használata"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -5146,62 +5150,62 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1594
 msgid "visual"
-msgstr ""
+msgstr "vizuális"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1596
 msgid "scientific"
-msgstr ""
+msgstr "tudományos"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1598
 msgid "communications"
-msgstr ""
+msgstr "hírközlési"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1600
 msgid "navigation"
-msgstr ""
+msgstr "navigációs"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1602
 msgid "amateur"
-msgstr ""
+msgstr "amatőr"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1604
 msgid "weather"
-msgstr ""
+msgstr "időjárási"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1606
 msgid "geostationary"
-msgstr ""
+msgstr "geostacionárius"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1608
 msgid "non-operational"
-msgstr ""
+msgstr "üzemen kívül"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1610
 msgid "gps"
-msgstr ""
+msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1612
 msgid "iridium"
-msgstr ""
+msgstr "Iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1623
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "Hubble űrteleszkóp"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1625
 msgid "The International Space Station"
-msgstr ""
+msgstr "Nemzetközi Űrállomás"
 
 #: plugins/Satellites/src/Satellite.cpp:239
 #: plugins/Satellites/src/Satellite.cpp:243
@@ -5569,7 +5573,7 @@ msgstr "[mind]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "New group..."
-msgstr ""
+msgstr "Új csoport..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 msgid "Select TLE Update File"
@@ -5612,11 +5616,11 @@ msgstr "Műholdak beállítása"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Updates"
-msgstr ""
+msgstr "frissítés"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "A műholdak adatainak frissítése internetről"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -6233,62 +6237,62 @@ msgstr ""
 "hogy hogyan jelenjen meg a dátum és idő az alsó sorban."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "January"
 msgstr "január"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "February"
 msgstr "február"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "March"
 msgstr "március"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "April"
 msgstr "április"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "May"
 msgstr "május"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "June"
 msgstr "június"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "July"
 msgstr "július"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "August"
 msgstr "augusztus"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "September"
 msgstr "szeptember"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "October"
 msgstr "október"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "November"
 msgstr "november"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "December"
 msgstr "december"
 
@@ -7045,7 +7049,7 @@ msgstr "Kvazár bővítmény beállítása"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:267
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Beállítások kvazárokhoz"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Plot all quasars without labels"
@@ -7253,7 +7257,7 @@ msgstr "Pulzár bővítmény beállítása"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Beállítások pulzárokhoz"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Plot all pulsars without labels"
@@ -7379,7 +7383,7 @@ msgstr "Exobolygók adatainak frissítése az internetről"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Beállítások exobolygókhoz"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
 msgid "Plot all systems with exoplanets without labels"
