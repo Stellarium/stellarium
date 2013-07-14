@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 22:24+0700\n"
-"PO-Revision-Date: 2013-07-04 14:21+0000\n"
+"POT-Creation-Date: 2013-07-13 20:43+0700\n"
+"PO-Revision-Date: 2013-07-13 01:31+0000\n"
 "Last-Translator: Kaori YOKOZAWA <yokozawa@tree.so-net.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-05 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -71,7 +71,7 @@ msgstr "種類: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "等級: <b>%1</b> (大気減光時: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
@@ -166,7 +166,7 @@ msgstr "見かけの直径: %1"
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "恒星周期: %1日 (%2ユリウス年)"
 
 #: src/core/modules/Planet.cpp:511
 #, qt-format
@@ -245,12 +245,12 @@ msgstr "変光星"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
-msgstr ""
+msgstr "二重星"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "種類: <b>%1、%2</b>"
 
 #: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -330,11 +330,11 @@ msgstr ""
 msgid "SpaceShip"
 msgstr "宇宙船"
 
-#: src/core/StelCore.cpp:1424
+#: src/core/StelCore.cpp:1429
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:1427
+#: src/core/StelCore.cpp:1432
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -342,14 +342,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1430
+#: src/core/StelCore.cpp:1435
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1433
+#: src/core/StelCore.cpp:1438
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -358,14 +358,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1437
+#: src/core/StelCore.cpp:1442
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1441
+#: src/core/StelCore.cpp:1446
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -373,7 +373,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1445
+#: src/core/StelCore.cpp:1450
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -381,14 +381,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1448
+#: src/core/StelCore.cpp:1453
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1451
+#: src/core/StelCore.cpp:1456
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -397,14 +397,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1454
+#: src/core/StelCore.cpp:1459
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1457
+#: src/core/StelCore.cpp:1462
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -412,25 +412,25 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1460
+#: src/core/StelCore.cpp:1465
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1463
+#: src/core/StelCore.cpp:1468
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1466
+#: src/core/StelCore.cpp:1471
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1469
+#: src/core/StelCore.cpp:1474
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -439,14 +439,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1472
+#: src/core/StelCore.cpp:1477
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1475
+#: src/core/StelCore.cpp:1480
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -454,42 +454,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1478
+#: src/core/StelCore.cpp:1483
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1481
+#: src/core/StelCore.cpp:1486
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1484
+#: src/core/StelCore.cpp:1489
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1487
+#: src/core/StelCore.cpp:1492
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1490
+#: src/core/StelCore.cpp:1495
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1493
+#: src/core/StelCore.cpp:1498
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -497,7 +497,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1496
+#: src/core/StelCore.cpp:1501
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -505,7 +505,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1499
+#: src/core/StelCore.cpp:1504
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -514,7 +514,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1502
+#: src/core/StelCore.cpp:1507
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -524,11 +524,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1502
+#: src/core/StelCore.cpp:1507
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:1505
+#: src/core/StelCore.cpp:1510
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -536,42 +536,50 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1508
+#: src/core/StelCore.cpp:1513
+#, qt-format
+msgid ""
+"This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
+"Simons (2000), was published in article <em>Error Minimization of Polynomial "
+"Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
+msgstr ""
+
+#: src/core/StelCore.cpp:1516
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1511 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1519 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "エラー"
 
-#: src/core/StelCore.cpp:1560
+#: src/core/StelCore.cpp:1568
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1594
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1610 src/core/StelCore.cpp:1615
-#: src/core/StelCore.cpp:1642
+#: src/core/StelCore.cpp:1616 src/core/StelCore.cpp:1621
+#: src/core/StelCore.cpp:1648 src/core/StelCore.cpp:1653
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1620
+#: src/core/StelCore.cpp:1626
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1652
+#: src/core/StelCore.cpp:1663
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1654
+#: src/core/StelCore.cpp:1665
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -692,7 +700,7 @@ msgstr "銀経/銀緯: %1/%2"
 #: src/core/StelObject.cpp:127
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "時角: %1/%2"
+msgstr "時角/赤緯: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:140
 msgid "(geometric)"
@@ -773,7 +781,7 @@ msgstr "実行中のスクリプト: "
 msgid "Running script: [none]"
 msgstr "実行中のスクリプト: [なし]"
 
-#: src/gui/ConfigurationDialog.cpp:893
+#: src/gui/ConfigurationDialog.cpp:895
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -781,16 +789,16 @@ msgstr ""
 "新しい星表のダウンロードが終了しました！\n"
 "表示するには Stellarium を再起動してください。"
 
-#: src/gui/ConfigurationDialog.cpp:897
+#: src/gui/ConfigurationDialog.cpp:899
 msgid "All available star catalogs have been installed."
 msgstr "利用可能なすべての星表がインストールされました。"
 
-#: src/gui/ConfigurationDialog.cpp:902
+#: src/gui/ConfigurationDialog.cpp:904
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "カタログの取得 %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:909
+#: src/gui/ConfigurationDialog.cpp:911
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -799,7 +807,7 @@ msgstr ""
 "ダウンロード中 %1...\n"
 "(このウィンドウを閉じても構いません)"
 
-#: src/gui/ConfigurationDialog.cpp:916
+#: src/gui/ConfigurationDialog.cpp:918
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -810,7 +818,7 @@ msgstr ""
 "星の数: %2 Million\n"
 "等級: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:959 src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:961 src/gui/ConfigurationDialog.cpp:997
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -819,11 +827,11 @@ msgstr ""
 "ダウンロード中にエラーが発生しました %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1047
+#: src/gui/ConfigurationDialog.cpp:1049
 msgid "Verifying file integrity..."
 msgstr "ファイルの整合性を確認しています..."
 
-#: src/gui/ConfigurationDialog.cpp:1051
+#: src/gui/ConfigurationDialog.cpp:1053
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -833,119 +841,123 @@ msgstr ""
 "ファイルが破損しています。"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1124
+#: src/gui/ConfigurationDialog.cpp:1126
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1135
+#: src/gui/ConfigurationDialog.cpp:1137
 msgid "Without correction"
-msgstr ""
+msgstr "補正なし"
 
-#: src/gui/ConfigurationDialog.cpp:1136
+#: src/gui/ConfigurationDialog.cpp:1138
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1137
+#: src/gui/ConfigurationDialog.cpp:1139
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1138
+#: src/gui/ConfigurationDialog.cpp:1140
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1139
+#: src/gui/ConfigurationDialog.cpp:1141
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1142
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1149
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1150
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1151
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1150
+#: src/gui/ConfigurationDialog.cpp:1152
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1151
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1156
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1158
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1161
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1166
+msgid "Islam, Sadiq & Qureshi (2008, 2013)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -1117,11 +1129,11 @@ msgstr "スクリプトコンソール画面"
 msgid "Windows"
 msgstr "ウィンドウ"
 
-#: src/gui/StelGuiItems.cpp:329 src/gui/StelGuiItems.cpp:752
+#: src/gui/StelGuiItems.cpp:333 src/gui/StelGuiItems.cpp:756
 msgid "Space"
 msgstr "Space"
 
-#: src/gui/StelGuiItems.cpp:621
+#: src/gui/StelGuiItems.cpp:625
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -1253,19 +1265,19 @@ msgstr ""
 msgid "starchart"
 msgstr "星座表"
 
-#: src/gui/SearchDialog.cpp:364
+#: src/gui/SearchDialog.cpp:362
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:372
+#: src/gui/SearchDialog.cpp:370
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:540
+#: src/gui/SearchDialog.cpp:538
 msgid "University of Strasbourg (France)"
 msgstr "ストラスブール大学(フランス)"
 
-#: src/gui/SearchDialog.cpp:541
+#: src/gui/SearchDialog.cpp:539
 msgid "Harvard University (USA)"
 msgstr "ハーバード大学(アメリカ)"
 
@@ -1299,7 +1311,7 @@ msgstr ""
 msgid "year"
 msgstr ""
 
-#: src/main.cpp:368
+#: src/main.cpp:372
 msgid "This system does not support OpenGL."
 msgstr "このシステムは Open GL に対応していません."
 
@@ -1508,7 +1520,7 @@ msgstr "ニクス"
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "ヒドラ (衛星)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1578,17 +1590,17 @@ msgstr ""
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "クワオアー"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "オルクス"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "ハウメア"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1643,12 +1655,12 @@ msgstr "ヘクトール"
 #. TRANSLATORS: Asteroid (20000) Varuna
 #: src/translations.h:133
 msgid "Varuna"
-msgstr ""
+msgstr "ヴァルナ"
 
 #. TRANSLATORS: Asteroid (136472) Makemake
 #: src/translations.h:135
 msgid "Makemake"
-msgstr ""
+msgstr "マケマケ"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:138
@@ -1818,7 +1830,7 @@ msgstr "2009年の日食"
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
 msgid "Startup Script"
-msgstr ""
+msgstr "スタートアップスクリプト"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:218
@@ -2048,7 +2060,7 @@ msgstr "アルゼンチン"
 
 #: src/translations.h:288
 msgid "American Samoa"
-msgstr "米国領サモア"
+msgstr "アメリカ領サモア"
 
 #: src/translations.h:289
 msgid "Austria"
@@ -2060,7 +2072,7 @@ msgstr "オーストラリア"
 
 #: src/translations.h:291
 msgid "Aruba"
-msgstr ""
+msgstr "アルバ"
 
 #: src/translations.h:292
 msgid "Azerbaijan"
@@ -2148,7 +2160,7 @@ msgstr "カナダ"
 
 #: src/translations.h:313
 msgid "Cocos Islands"
-msgstr ""
+msgstr "ココス諸島"
 
 #: src/translations.h:314
 msgid "Democratic Republic of the Congo"
@@ -2168,7 +2180,7 @@ msgstr "スイス"
 
 #: src/translations.h:318
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "コートジボワール"
 
 #: src/translations.h:319
 msgid "Cook Islands"
@@ -2312,7 +2324,7 @@ msgstr "ジョージア州"
 
 #: src/translations.h:354
 msgid "French Guiana"
-msgstr "仏領ギアナ"
+msgstr "フランス領ギアナ"
 
 #: src/translations.h:355
 msgid "Ghana"
@@ -2348,7 +2360,7 @@ msgstr "ギリシャ"
 
 #: src/translations.h:363
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "サウスジョージア・サウスサンドウィッチ諸島"
 
 #: src/translations.h:364
 msgid "Guatemala"
@@ -2360,7 +2372,7 @@ msgstr "グアム"
 
 #: src/translations.h:366
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "ギニアビサウ"
 
 #: src/translations.h:367
 msgid "Guyana"
@@ -2408,7 +2420,7 @@ msgstr "インド"
 
 #: src/translations.h:378
 msgid "British Indian Ocean Territory"
-msgstr "英国領インド洋地域"
+msgstr "イギリス領インド洋地域"
 
 #: src/translations.h:379
 msgid "Iraq"
@@ -2484,7 +2496,7 @@ msgstr "カザフスタン"
 
 #: src/translations.h:397
 msgid "Lao"
-msgstr ""
+msgstr "ラオス"
 
 #: src/translations.h:398
 msgid "Lebanon"
@@ -2536,7 +2548,7 @@ msgstr "モナコ"
 
 #: src/translations.h:410
 msgid "Moldova"
-msgstr ""
+msgstr "モルドバ"
 
 #: src/translations.h:411
 msgid "Madagascar"
@@ -2564,11 +2576,11 @@ msgstr "モンゴル"
 
 #: src/translations.h:417
 msgid "Macau"
-msgstr ""
+msgstr "マカオ"
 
 #: src/translations.h:418
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "北マリアナ諸島"
 
 #: src/translations.h:419
 msgid "Martinique"
@@ -2704,7 +2716,7 @@ msgstr "プエルトリコ"
 
 #: src/translations.h:452
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "パレスチナ自治区"
 
 #: src/translations.h:453
 msgid "Portugal"
@@ -2724,7 +2736,7 @@ msgstr "カタール"
 
 #: src/translations.h:457
 msgid "Réunion"
-msgstr ""
+msgstr "レユニオン"
 
 #: src/translations.h:458
 msgid "Romania"
@@ -2732,7 +2744,7 @@ msgstr "ルーマニア"
 
 #: src/translations.h:459
 msgid "Serbia"
-msgstr ""
+msgstr "セルビア"
 
 #: src/translations.h:460
 msgid "Russian Federation"
@@ -2844,7 +2856,7 @@ msgstr "タジキスタン共和国"
 
 #: src/translations.h:487
 msgid "Tokelau"
-msgstr ""
+msgstr "トケラウ"
 
 #: src/translations.h:488
 msgid "East Timor"
@@ -2896,7 +2908,7 @@ msgstr "アメリカ合衆国外諸島"
 
 #: src/translations.h:500
 msgid "United States"
-msgstr ""
+msgstr "アメリカ合衆国"
 
 #: src/translations.h:501
 msgid "Uruguay"
@@ -2908,7 +2920,7 @@ msgstr "ウズベキスタン"
 
 #: src/translations.h:503
 msgid "Vatican City State"
-msgstr ""
+msgstr "バチカン市国"
 
 #: src/translations.h:504
 msgid "Saint Vincent and the Grenadines"
@@ -2920,11 +2932,11 @@ msgstr "ベネズエラ"
 
 #: src/translations.h:506
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "イギリス領ヴァージン諸島"
 
 #: src/translations.h:507
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "アメリカ領ヴァージン諸島"
 
 #: src/translations.h:508
 msgid "Viet Nam"
@@ -3355,7 +3367,7 @@ msgstr "方位磁針のマーク"
 
 #: src/translations.h:627
 msgid "Show exoplanets"
-msgstr ""
+msgstr "太陽系外惑星を表示"
 
 #: src/translations.h:628
 msgid "Exoplanets configuration window"
@@ -3411,7 +3423,7 @@ msgstr ""
 
 #: src/translations.h:647
 msgid "Show pulsars"
-msgstr ""
+msgstr "パルサーを表示"
 
 #: src/translations.h:648
 msgid "Pulsars configuration window"
@@ -3419,7 +3431,7 @@ msgstr ""
 
 #: src/translations.h:651
 msgid "Show quasars"
-msgstr ""
+msgstr "クエーサーを表示"
 
 #: src/translations.h:652
 msgid "Quasars configuration window"
@@ -3450,7 +3462,7 @@ msgid "Show renderer statistics"
 msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:669 src/ui_configurationDialog.h:1163
+#: src/translations.h:669 src/ui_configurationDialog.h:1166
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:448
 msgid "Scripts"
 msgstr "スクリプト"
@@ -3715,20 +3727,24 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1279
 #: src/ui_viewDialog.h:1284 src/ui_viewDialog.h:1286
-#: src/ui_configurationDialog.h:1134 src/ui_configurationDialog.h:1145
+#: src/ui_configurationDialog.h:1137 src/ui_configurationDialog.h:1148
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "オプション"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:629
+msgid "Some objects may be found after activation respective plug-ins"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:631
 msgid "names in English"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:629
+#: src/ui_searchDialogGui.h:632
 msgid "Search in list..."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:633
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr ""
@@ -3766,7 +3782,7 @@ msgstr "惑星"
 #: src/ui_viewDialog.h:1201
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr ""
+msgstr "深宇宙天体 (星団、銀河、星雲) の名前とマーカー"
 
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgid "DSO"
@@ -3867,7 +3883,7 @@ msgstr "恒星の等級を制限する"
 #: src/ui_viewDialog.h:1241
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr ""
+msgstr "深宇宙天体 (星団、銀河、星雲) の等級を制限する"
 
 #: src/ui_viewDialog.h:1244
 msgid "Constellations"
@@ -3998,7 +4014,7 @@ msgstr "Stellarium 起動時の視界の幅"
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium 起動時の視点の方向"
 
-#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1159
 msgid "Selected object information"
 msgstr "選択された天体の情報"
 
@@ -4073,7 +4089,7 @@ msgstr "カタログ番号"
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -4097,7 +4113,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1033
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "時角/赤緯"
 
 #: src/ui_configurationDialog.h:1034
 msgid "Distance"
@@ -4105,15 +4121,15 @@ msgstr "距離"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
-msgstr ""
+msgstr "角度または実際の大きさ"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Size"
-msgstr ""
+msgstr "大きさ"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
-msgstr "スペクトル型, 星雲の種類など"
+msgstr "スペクトル型、星雲の種類など"
 
 #: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
@@ -4149,7 +4165,7 @@ msgstr "マウス操作を有効にする"
 
 #: src/ui_configurationDialog.h:1059
 msgid "Hides the mouse cursor when inactive"
-msgstr ""
+msgstr "操作がない時マウスカーソルを消すまでの秒数"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
@@ -4172,188 +4188,192 @@ msgstr "起動時の日付と時刻を固定する"
 msgid "Other:"
 msgstr "その他:"
 
-#: src/ui_configurationDialog.h:1070
+#: src/ui_configurationDialog.h:1071
+msgid "Use current local date and time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1073
 msgid "use current"
 msgstr "現在の設定を使用"
 
-#: src/ui_configurationDialog.h:1072
+#: src/ui_configurationDialog.h:1075
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Stellarium をシステム時計の日付と時刻で起動する"
 
-#: src/ui_configurationDialog.h:1074
+#: src/ui_configurationDialog.h:1077
 msgid "System date and time"
 msgstr "システムの日付と時刻"
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1079
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "次の起動からこの時間で固定して表示を開始する。"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1081
 msgid "System date at:"
 msgstr "システムの日付:"
 
-#: src/ui_configurationDialog.h:1079
-msgid "Time correction"
-msgstr ""
-
 #: src/ui_configurationDialog.h:1082
+msgid "Time correction"
+msgstr "自転速度補正"
+
+#: src/ui_configurationDialog.h:1085
 msgid "Edit equation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1087
 msgid "Planetarium options"
 msgstr "プラネタリウム設定"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1089
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "球面へ投影する時に球面効果を出す。"
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1091
 msgid "Spheric mirror distortion"
 msgstr "球面鏡効果"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1093
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "望遠鏡などで覗いたときのように円形の縁を表示する"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1095
 msgid "Disc viewport"
 msgstr "表示領域を円形に"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1097
 msgid "Hide other constellations when you click one"
 msgstr "星座の選択時に他を隠す"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1099
 msgid "Select single constellation"
 msgstr "一つの星座を選択"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1101
 msgid "Align labels with the horizon"
 msgstr "表示を地平線と平行にする"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1103
 msgid "Gravity labels"
 msgstr "重力表示"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1105
 msgid "Toggle display backgrounds of the nebulae."
-msgstr ""
+msgstr "星雲の背景の表示を切り替える"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1107
 msgid "Show nebula background button"
 msgstr "星雲の背景ボタンを表示"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1109
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "上下左右切り替えボタンを下のメニューへ表示する"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1111
 msgid "Show flip buttons"
 msgstr "上下左右切り替えボタンを表示"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1113
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "\"自動ズームアウト\"ボタンを押すと、起動時の視野と方位へ戻ります"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1115
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "自動視点、元の方位に戻す"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1117
 msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
-msgstr ""
+msgstr "惑星と月に太陽の影を描く (OpenGLバージョン2以降が必要)"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1119
 msgid "Render Solar Shadows"
 msgstr "太陽の影を描画"
 
-#: src/ui_configurationDialog.h:1117
+#: src/ui_configurationDialog.h:1120
 msgid "Screenshots"
 msgstr "スクリーンショット"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1121
 msgid "Screenshot Directory"
 msgstr "保存先"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1123
 msgid "Invert colors"
 msgstr "色の反転"
 
-#: src/ui_configurationDialog.h:1121
+#: src/ui_configurationDialog.h:1124
 msgid "Star catalog updates"
 msgstr "星表のアップデート"
 
-#: src/ui_configurationDialog.h:1123
+#: src/ui_configurationDialog.h:1126
 msgid "Click here to start downloading"
 msgstr "クリックするとダウンロードを開始します"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1128
 msgid "Download this file to view even more stars"
 msgstr "多くの星を表示するためファイルをダウンロード"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1130
 msgid "Restart the download"
 msgstr "ダウンロードを再開"
 
-#: src/ui_configurationDialog.h:1129
+#: src/ui_configurationDialog.h:1132
 msgid "Retry"
 msgstr "再試行"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1134
 msgid "Stop the download. You can always restart it later"
 msgstr "ダウンロードを停止します。後でいつでも再開できます。"
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1136
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1139
 msgid "Close window when script runs"
 msgstr "スクリプトの実行時にウィンドウを閉じる"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1141
 msgid "Run the selected script"
 msgstr "選択したスクリプトを実行"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1145
 msgid "Stop a running script"
 msgstr "実行中のスクリプトを停止"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1149
 msgid "Load at startup"
 msgstr "起動時に実行"
 
-#: src/ui_configurationDialog.h:1147
+#: src/ui_configurationDialog.h:1150
 msgid "configure"
 msgstr "設定"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1155
 msgid "Main"
 msgstr "メイン"
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1157
 msgid "Information"
 msgstr "情報"
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1162
 msgid "Navigation"
 msgstr "ナビゲーション"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1164
 msgid "Tools"
 msgstr "ツール"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1168
 msgid "Plugins"
 msgstr "プラグイン"
 
@@ -4436,15 +4456,15 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "スクリプトコンソール"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "ファイルからスクリプトを読み込む"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "ファイルにスクリプトを保存する"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
@@ -4464,11 +4484,11 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "スクリプトを実行する"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "スクリプトを停止する"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
@@ -6101,62 +6121,62 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "January"
 msgstr "1 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "February"
 msgstr "2 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "March"
 msgstr "3 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "April"
 msgstr "4 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "May"
 msgstr "5 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "June"
 msgstr "6 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "July"
 msgstr "7 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "August"
 msgstr "8 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "September"
 msgstr "9 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "October"
 msgstr "10 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "November"
 msgstr "11 月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "December"
 msgstr "12 月"
 
@@ -6444,7 +6464,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "天の川の明るさ:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
@@ -6468,11 +6488,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Stop running script"
-msgstr ""
+msgstr "実行中のスクリプトを停止"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "CD/DVD script"
-msgstr ""
+msgstr "CD/DVDスクリプト"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:472
