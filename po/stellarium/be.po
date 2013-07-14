@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 15:17+0700\n"
+"POT-Creation-Date: 2013-07-13 20:43+0700\n"
 "PO-Revision-Date: 2013-06-28 18:01+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:29+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1377,19 +1377,19 @@ msgstr "прыродны"
 msgid "starchart"
 msgstr "зорная карта"
 
-#: src/gui/SearchDialog.cpp:364
+#: src/gui/SearchDialog.cpp:362
 msgid "Simbad Lookup Error"
 msgstr "Памылка пошуку Simbad"
 
-#: src/gui/SearchDialog.cpp:372
+#: src/gui/SearchDialog.cpp:370
 msgid "Simbad Lookup"
 msgstr "Пошук Simbad"
 
-#: src/gui/SearchDialog.cpp:540
+#: src/gui/SearchDialog.cpp:538
 msgid "University of Strasbourg (France)"
 msgstr "Унівэрсытэт Страсбуру (Францыя)"
 
-#: src/gui/SearchDialog.cpp:541
+#: src/gui/SearchDialog.cpp:539
 msgid "Harvard University (USA)"
 msgstr "Гарвардзкі ўнівэрсытэт (ЗША)"
 
@@ -3874,15 +3874,19 @@ msgstr "Сэрвэр:"
 msgid "Options"
 msgstr "Настройкі"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:629
+msgid "Some objects may be found after activation respective plug-ins"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:631
 msgid "names in English"
 msgstr "назвы ангельскай"
 
-#: src/ui_searchDialogGui.h:629
+#: src/ui_searchDialogGui.h:632
 msgid "Search in list..."
 msgstr "Шукаць у сьпісе…"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:633
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
 msgstr "Сьпісы"
@@ -6378,62 +6382,62 @@ msgstr ""
 "паказваць час і дату ў ніжняй панэлі."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "January"
 msgstr "Студзень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "February"
 msgstr "Люты"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "March"
 msgstr "Сакавік"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "April"
 msgstr "Красавік"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "May"
 msgstr "Травень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "June"
 msgstr "Чэрвень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "July"
 msgstr "Ліпень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "August"
 msgstr "Жнівень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "September"
 msgstr "Верасень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "October"
 msgstr "Кастрычнік"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "November"
 msgstr "Лістапад"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "December"
 msgstr "Сьнежань"
 
