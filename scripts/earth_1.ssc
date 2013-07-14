@@ -1,6 +1,5 @@
-//
 // Author: Qam1
-// Version: 4.1
+// Version: 5.1
 // License: Public Domain
 // Name: Earth best views from other bodies
 // Description: Best views of Earth from other Solar System bodies in the 21st Century.
@@ -77,6 +76,11 @@ while (q == 0)
 		StelMovementMgr.zoomTo(90, 1);
 
 		SolarSystem.setFlagOrbits(false);
+
+		sd = 176 
+		sw = 1232;
+
+
 	}
 
 	if (i == 2) 
@@ -90,10 +94,16 @@ while (q == 0)
 		StelMovementMgr.zoomTo(90, 1);
 
 		SolarSystem.setFlagOrbits(false);
+
+		sd = 116;
+		sw = 1709;
 	}
 
 	if (i == 3) 
 	{
+		
+		i = 4;
+
 		LandscapeMgr.setFlagAtmosphere(false);
 		LandscapeMgr.setFlagFog(false);
 		LandscapeMgr.setCurrentLandscapeID("moon");
@@ -103,6 +113,9 @@ while (q == 0)
 		StelMovementMgr.zoomTo(12, 1);
 
 		SolarSystem.setFlagOrbits(false);
+
+		sd = 1;
+		sw = 7;
 	}
 
 	if (i == 4) 
@@ -116,6 +129,18 @@ while (q == 0)
 		LandscapeMgr.setFlagAtmosphere(true);
 
 		StelMovementMgr.zoomTo(62, 1);
+
+SolarSystem.setFlagOrbits(true);
+
+
+		sd = 1;
+		sw = 7;
+
+
+
+
+
+
 	}
 
 	if (i == 5) 
@@ -127,6 +152,9 @@ while (q == 0)
 		core.setDate("2082-10-19T21:08:21", "utc");
 		core.setObserverLocation(-73.71, 44.24, 17, 1, "", "Ceres");
 		StelMovementMgr.zoomTo(42, 1);
+
+		sd = 1;
+		sw = 7;
 	}
 
 	if (i == 6) 
@@ -136,10 +164,10 @@ while (q == 0)
 		LandscapeMgr.setCurrentLandscapeID("saturn");
 
 		core.setDate("2058-07-15T11:52:00", "utc");
-		core.setObserverLocation(-73.71, 44.24, 71492000, 1, "", "Jupiter");
+		core.setObserverLocation(134.71, 27.24, 71492000, 1, "", "Jupiter");
 		StelMovementMgr.zoomTo(34, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 11.849 degrees", 150, 10, false, 15, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 11.849 degrees", 500, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
 	}
 
@@ -154,7 +182,7 @@ while (q == 0)
 		core.wait(0.1);
 		StelMovementMgr.zoomTo(28, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 6.343 degrees", 150, 10, false, 15, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 6.390 degrees", 500, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
 	}
 
@@ -168,8 +196,12 @@ while (q == 0)
 		core.setObserverLocation(-76.73, 76.92, 30268000, 1, "", "Uranus");
 		StelMovementMgr.zoomTo(15.6, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 3.185 degrees", 150, 10, false, 15, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 3.186 degrees", 500, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
+
+
+		sd = 1;
+		sw = 7;
 	}
 
 	if (i == 9) 
@@ -179,11 +211,14 @@ while (q == 0)
 		LandscapeMgr.setCurrentLandscapeID("saturn");
 
 		core.setDate("2035-07-17T15:00:00", "utc");
-		core.setObserverLocation(76.71, 41.24, 24764000, 1, "", "Neptune");
+		core.setObserverLocation(76.71, 1.24, 24764000, 1, "", "Neptune");
 		StelMovementMgr.zoomTo(10.6, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 1.952 degrees", 150, 10, false, 15, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 1.952 degrees", 500, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
+
+		sd = 1;
+		sw = 7;
 	}
 
 	if (i == 10) 
@@ -196,12 +231,16 @@ while (q == 0)
 		core.setObserverLocation(113.49, 31.04, 76, 1, "", "Pluto");
 		StelMovementMgr.zoomTo(25, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 0.952 degrees", 150, 10, false, 15, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 1.908 degrees", 500, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
+
+
+	
 	}
 
 	var d = Math.floor(core.getJDay());
-	var r = d;
+
+var r = d;
 	var pak = 0;
 
 	if (ss ==1)
@@ -215,26 +254,199 @@ while (q == 0)
 			if (Math.abs(r-d) > 0)
 			{
 				pak = spd + 1;
-				core.setDate("+100 days");
+				core.setDate("+2000 days");
 			} 
 		}
 		r = Math.floor(core.getJDay()) + 1;
+	
+
+if (i < 3) // why??
+{
+i = i + 1;
+}
+
+if (i == 10) // Why??
+{
+i = i + 1;
+}
+
+
+}
+
+
+
+if (i == 90)
+{
+
+var d = Math.floor(core.getJDay()*10);
+var r = d;
+
+
+
+while (d  == r) 
+{
+r = Math.floor(core.getJDay()*10);
+}
+
+if (r > d)
+{
+d = d / 10;
+r = d + 1;
+}
+else
+{
+d = d / 10;
+r = d - 1;
+}
+
+
+txt1 = LabelMgr.labelScreen(r, 400, 20, false, 25, "#F6A101");
+LabelMgr.setLabelShow(txt1, true);
+
+txt1 = LabelMgr.labelScreen(d, 400, 60, false, 25, "#F6A101");
+LabelMgr.setLabelShow(txt1, true)
+
+core.wait(3);
+
+
+}
+
+else
+{
+
+while (d == r) 
+{
+r = Math.floor(core.getJDay());
+}
+}
+
+
+
+
+
+			
+
+
+if (i < 3) // Merc & venus
+
+{
+
+sw = 1000
+
+
+	if ( r - d > 10)  
+	{
+	if (r - d < 1000)
+	{
+	i = i + 1;
+	}
 	}
 
-	while (d == r) 
+	if (r - d < - 10)  
 	{
-		r = Math.floor(core.getJDay());
+	if (r - d > -1000)
+	{
+	i = i - 1;
+	}
 	}
 
-	if (r - d == 1) 
+
+
+	if (r - d < -1000)
 	{
-		i = i + 1;
+		o = o * -1;
 	}
 
-	if (r - d == -1) 
+
+}
+
+else
+
+{ // Mars - Neptune
+
+
+sw = 2;
+
+
+if (i > 2)
+{
+
+if (i < 10)
+{
+
+
+
+	if ( r - d == 1)  
 	{
-		i = i - 1;
+	i = i + 1;
 	}
+
+	if ( r - d == -1)  
+	{
+
+	if (i == 4)
+	{
+	i = 2
+	}
+	else
+	{
+	i = i - 1;
+	}
+
+
+	}
+
+	
+if (r - d < -2)
+	{
+		o = o * -1;
+	}
+
+
+
+}
+
+
+else // pluto
+
+{
+
+// swap
+
+
+sw = 20
+
+	if ( r - d > 1)  
+	{
+	if (r - d < 20)
+	{
+	i = i + 1;
+	}
+	}
+
+	if (r - d < - 1)  
+	{
+	if (r - d > -20)
+	{
+	i = i - 1;
+	}
+	}
+
+if (r - d < -20)
+	{
+	o = o * -1;
+	}
+
+
+}
+
+}
+
+}
+
+
+
+
 
 	if (i < 1) 
 	{
@@ -246,13 +458,9 @@ while (q == 0)
 		i = 1;
 	}
 
-	if (r - d == -7)
-	{
-		o = o * -1;
-	}
-
+	
 	//toggle screen saver
-	if (r - d > 6) 
+	if (r - d > sw) 
 	{
 		ss = ss + 1;
 

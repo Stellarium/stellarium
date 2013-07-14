@@ -249,7 +249,9 @@ class Translations
 		// TRANSLATORS: Name and description of script
 		N_("Earth Events from Mars");
 		// TRANSLATORS: Name of script
-		N_("Earth greatest elongations and brilliance from Mars");
+		N_("Earth Greatest Elongations and Brilliancies from Mars");
+		// TRANSLATORS: Name of script
+		N_("Earth Greatest Elongations from Jupiter");
 		
 		// =====================================================================
 		// Script descriptions
@@ -277,7 +279,8 @@ class Translations
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
-		N_("Earth greatest elongations and brilliance from Mars 1970-2112");
+		N_("Earth Greatest Elongations and Brilliancies from Mars 2000-3000");
+		N_("Earth Greatest Elongations from Jupiter 2000-3000");
 		
 		// =====================================================================
 		// List of countries
