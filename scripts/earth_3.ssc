@@ -1,10 +1,10 @@
 // Author: Qam1
-// Version: 5.0-1.0
 // Name: Earth Events from Venus
 // License: Public Domain
+// Version: 5.1-1.1
 // Description: Earth Events from Venus
 
-// Made on Stellarium 0.12.0
+// Made on Stellarium 0.12.1
 
 
 spd = 3; // speed for screen saver mode in seconds
@@ -20,9 +20,12 @@ pi = 3.14159265358979323846264338327950288419716939937510;
 rad = pi/180;
 deg = 180/pi;
 root = Math.pow(100,0.2); 
+c = Math.log(10);
+
 
 
 degstring = "\u00B0";
+
 
 
 
@@ -80946,22 +80949,59 @@ ra  = Math.atan2(yy, xx ) * deg;
 dec = Math.atan2(zz, Math.sqrt(xx*xx+yy*yy) )* deg;
 r = Math.sqrt( xx*xx + yy*yy + zz*zz );
 
+
+
+ltravel = r * 499.02;
+jlight = ltravel / 86400;
+d = d - jlight;     
+
+
+lhrs = Math.floor(ltravel / 3600);
+
+lmin = (ltravel - (lhrs * 3600))/60  
+
+lsec = (lmin - Math.floor(lmin)) * 60  
+
+lmin = Math.floor(lmin);
+lsec = Math.floor(lsec);
+
+
+
+hstring = " hours ";
+if (lhrs == 1)
+{
+hstring = " hour ";
+} 
+ 
+
+mstring = " minutes "
+if (lmin == 1)
+{
+mstring = " minute ";
+} 
+
+
+sstring = " seconds "
+if (lsec == 1)
+{
+sstring = " second ";
+} 
+
+
+
+txt1 = LabelMgr.labelScreen("Light Travel Time: " + lmin + mstring + lsec + sstring, 700*x, 670*y, false, 15, "#AAFFAA");
+LabelMgr.setLabelShow(txt1, true);
+
+
+
+
 stardec = dec;
 
 dd = (dec + 50) - dd;
 
 dd = dd.toFixed(3)
 
-// Rides
 
-//if (dd >0)
-//{
-//rides[i] = "Rides High:   +" + dd + "°";
-//}
-//else
-//{
-//rides[i] = "Runs Low:     " + dd + "°";
-//}
 
 
 if (ra<0)
@@ -81001,6 +81041,13 @@ efv[i] = root * efv[i];
 mfv[i] = +0.21 + efv[i];
 emag[i] = -3.88 + efv[i]; 
 
+tmag = Math.pow(root, -emag[i]) + Math.pow(root, -mfv[i])
+
+tmag = Math.log(tmag) / Math.log(10)
+
+
+tmag = -2.5 * tmag 
+
 
 
 
@@ -81030,12 +81077,12 @@ elong[i] = Math.acos(elong[i]) * deg ;
 
 
 
-txt1 = LabelMgr.labelScreen("Elongation:", 10*x, 560*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Elongation:", 10*x, 530*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 if (fv[i] < 10)
 {
-txt1 = LabelMgr.labelScreen(fv[i].toFixed(3) + degstring + woes[i], 205*x, 560*y, false, 20,"#AAFFAA");
+txt1 = LabelMgr.labelScreen(fv[i].toFixed(3) + degstring + woes[i], 205*x, 530*y, false, 20,"#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -81043,14 +81090,14 @@ else
 
 if (fv[i] < 100)
 {
-txt1 = LabelMgr.labelScreen(fv[i].toFixed(3) + degstring + woes[i], 195*x, 560*y, false, 20,"#AAFFAA");
+txt1 = LabelMgr.labelScreen(fv[i].toFixed(3) + degstring + woes[i], 195*x, 530*y, false, 20,"#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 
 else
 
 {
-txt1 = LabelMgr.labelScreen(fv[i].toFixed(3) + degstring + woes[i], 185*x, 560*y, false, 20,"#AAFFAA");
+txt1 = LabelMgr.labelScreen(fv[i].toFixed(3) + degstring + woes[i], 185*x, 530*y, false, 20,"#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -81059,14 +81106,19 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen(fvp[i].toFixed(3)+"%", 195*x, 585*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen(fvp[i].toFixed(3)+"%", 195*x, 555*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Illumination:", 10*x, 585*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Illumination:", 10*x, 555*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
+txt1 = LabelMgr.labelScreen("Total Magnitude:", 10*x, 580*y, false, 20, "#AAFFAA");
+LabelMgr.setLabelShow(txt1, true);
+
+txt1 = LabelMgr.labelScreen(tmag.toFixed(3), 200*x, 580*y, false, 20, "#AAFFAA");
+LabelMgr.setLabelShow(txt1, true);
 
 
 
@@ -81095,13 +81147,16 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 
-
-
 txt1 = LabelMgr.labelScreen("Moon Elongation:", 10*x, 665*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 txt1 = LabelMgr.labelScreen(im[i].toFixed(3) + degstring, 205*x, 665*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
+
+
+
+
+
 
 
 if (il[i] > 0)
@@ -81118,7 +81173,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Cycle: "+ cycle[i], 10*x, 535*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Cycle: "+ cycle[i], 10*x, 505*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -81306,7 +81361,7 @@ ename = "Conjunction - Neptune "+ik[i].toFixed(3) + degstring ;
 txt1 = LabelMgr.labelScreen(ename, 450*x, 0*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen(ename, 10*x, 505*y, false, 20, "#00FF71");
+txt1 = LabelMgr.labelScreen(ename, 10*x, 475*y, false, 20, "#00FF71");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -81315,11 +81370,7 @@ LabelMgr.setLabelShow(txt1, true);
 txt1 = LabelMgr.labelScreen("Julian Date:", 700*x, 635*y, false, 15, "#00FF71");
 LabelMgr.setLabelShow(txt1, true);
 
-
-txt1 = LabelMgr.labelScreen("Now:", 700*x, 655*y, false, 15, "#00FF71");
-LabelMgr.setLabelShow(txt1, true);
-
-txt1 = LabelMgr.labelScreen(core.getJDay().toFixed(3), 800*x, 655*y, false, 15, "#00FF71");
+txt1 = LabelMgr.labelScreen(core.getJDay().toFixed(3), 775*x, 635*y, false, 15, "#00FF71");
 LabelMgr.setLabelShow(txt1, true);
 
 
