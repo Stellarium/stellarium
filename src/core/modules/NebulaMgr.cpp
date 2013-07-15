@@ -565,6 +565,17 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(n);
 	}
 
+	// Search by IC numbers (possible formats are "IC466" or "IC 466")
+	if (objw.mid(0, 2) == "IC")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("IC%1").arg(n->IC_nb) == objw || QString("IC %1").arg(n->IC_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.mid(0, 1) == "M")
 	{
@@ -613,6 +624,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 			return qSharedPointerCast<StelObject>(n);
 	}
 
+	// Search by IC numbers (possible formats are "IC466" or "IC 466")
+	if (objw.mid(0, 2) == "IC")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("IC%1").arg(n->IC_nb) == objw || QString("IC %1").arg(n->IC_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.mid(0, 1) == "M")
 	{
@@ -645,7 +666,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 
 	QString objw = objPrefix.toUpper();
 
-	// Search by messier objects number (possible formats are "M31" or "M 31")
+	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw[0]=='M')
 	{
 		foreach (const NebulaP& n, nebArray)
@@ -659,6 +680,26 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("M %1").arg(n->M_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by IC objects number (possible formats are "IC466" or "IC 466")
+	if (objw.size()>=1 && objw[0]=='I')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->IC_nb==0) continue;
+			QString constw = QString("IC%1").arg(n->IC_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constw;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("IC %1").arg(n->IC_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
@@ -726,7 +767,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 
 	QString objw = objPrefix.toUpper();
 
-	// Search by messier objects number (possible formats are "M31" or "M 31")
+	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw[0]=='M')
 	{
 		foreach (const NebulaP& n, nebArray)
@@ -740,6 +781,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("M %1").arg(n->M_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by IC objects number (possible formats are "IC466" or "IC 466")
+	if (objw.size()>=1 && objw[0]=='I')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->IC_nb==0) continue;
+			QString constw = QString("IC%1").arg(n->IC_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constw;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("IC %1").arg(n->IC_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
