@@ -587,7 +587,7 @@ class Translations
 		N_("Constellation boundaries");
 		N_("Constellation labels");
 		N_("Constellation lines");
-		N_("Nebulas background images");
+		N_("Deep-sky objects background images");
 		N_("Ecliptic J2000 grid");
 		N_("Ecliptic line");
 		N_("Equator line");
@@ -599,7 +599,7 @@ class Translations
 		N_("Ground");
 		N_("Horizon line");
 		N_("Meridian line");
-		N_("Nebulas");
+		N_("Deep-sky objects");
 		N_("Night mode");
 		N_("Planet labels");
 		N_("Planet orbits");
