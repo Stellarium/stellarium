@@ -651,13 +651,14 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	if (ok)
 		return jd;
 	
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks|year|years))(\\s+(sidereal)?)?");
+	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
 	if (nowRe.exactMatch(dt))
 	{
 		double delta;
 		double unit;
 		double dayLength = 1.0;
-		double yearLength = 365.2421897; // mean tropical year duration for Earth
+		double yearLength = 365.242189; // duration of Earth's mean tropical year
+		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
 		if (nowRe.capturedTexts().at(1)=="now")
 			jd = StelUtils::getJDFromSystem();
@@ -668,6 +669,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		{
 			dayLength = core->getLocalSideralDayLength();
 			yearLength = core->getLocalSideralYearLength();
+			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
 		QString unitString = nowRe.capturedTexts().at(6);
@@ -681,6 +683,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = dayLength;
 		else if (unitString == "weeks" || unitString == "week")
 			unit = dayLength * 7.;
+		else if (unitString == "months" || unitString == "month")
+			unit = monthLength;
 		else if (unitString == "years" || unitString == "year")
 			unit = yearLength;
 		else

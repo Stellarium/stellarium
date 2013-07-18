@@ -74,7 +74,7 @@ public slots:
 	//! when sidereal timeis not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used.
+	//! the ISO date type is used (default value is "utc").
 	//! @param enableDeltaT true or false - enable Delta-T correction or not (default value is "false")
 	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
 
