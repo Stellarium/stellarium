@@ -672,7 +672,7 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT                  = @PROJECT_SOURCE_DIR@/src/ \
-                         @PROJECT_SOURCE_DIR@/doc/
+                         @PROJECT_SOURCE_DIR@/doc/ 
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -1564,7 +1564,7 @@ SKIP_FUNCTION_MACROS   = NO
 # NOT include the path). If a tag file is not located in the directory in which
 # doxygen is run, you must also specify the path to the tagfile here.
 
-TAGFILES               = "../../doc/qt.tag=http://doc.qt.nokia.com/stable/"
+TAGFILES               = "../../doc/qt.tag=http://qt-project.org/doc/qt-4.8/"
 # BM: A tag file for Qt can be found in KDE's API documentation tarbal:
 # http://api.kde.org/kdereview-api/kdereview.tar.gz 
 
