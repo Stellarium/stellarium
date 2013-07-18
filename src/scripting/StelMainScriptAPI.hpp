@@ -75,7 +75,11 @@ public slots:
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used (default value is "utc").
-	//! @param enableDeltaT true or false - enable Delta-T correction or not (default value is "false")
+	//! @param enableDeltaT true or false - enable Delta-T correction or not
+	//! (default value is "false").
+	//! @note for fully compatibles behavior of this function with the version 0.11.4
+	//! or earlier, you should call core.setDeltaTAlgorithm("WithoutCorrection");
+	//! before running core.setDate(); for disabling DeltaT correction.
 	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
 
 	//! get the simulation date and time as a string in ISO format,
