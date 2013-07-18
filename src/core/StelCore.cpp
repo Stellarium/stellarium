@@ -1126,6 +1126,12 @@ double StelCore::getLocalSideralDayLength() const
 	return position->getHomePlanet()->getSiderealDay();
 }
 
+//! Get the duration of a sidereal year for the current observer in days.
+double StelCore::getLocalSideralYearLength() const
+{
+	return position->getHomePlanet()->getSiderealPeriod();
+}
+
 QString StelCore::getStartupTimeMode()
 {
 	return startupTimeMode;
