@@ -67,19 +67,19 @@ public slots:
 	//!   You may also append " sidereal" to use sidereal days and so on.
 	//!   You can also use "now" at the start.  For example:
 	//!   "now + 3 hours sidereal"
-	//!   Note: you must use the plural all the time, even when the number
-	//!   of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
-	//! Note: when sidereal time is used, the length of time for
+	//! @note you must use the plural all the time, even when the number
+	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
+	//! @note when sidereal time is used, the length of time for
 	//! each unit is dependent on the current planet.  By contrast
 	//! when sidereal timeis not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used (default value is "utc").
-	//! @param enableDeltaT true or false - enable Delta-T correction or not
-	//! (default value is "false").
+	//! the ISO date type is used. Defaults to "utc".
+	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
+	//! Defaults to "false".
 	//! @note for fully compatibles behavior of this function with the version 0.11.4
-	//! or earlier, you should call core.setDeltaTAlgorithm("WithoutCorrection");
-	//! before running core.setDate(); for disabling DeltaT correction.
+	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
+	//! before running \b core.setDate(); for disabling DeltaT correction.
 	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
 
 	//! get the simulation date and time as a string in ISO format,
@@ -99,12 +99,13 @@ public slots:
 	QString getDeltaTAlgorithm() const;
 
 	//! set equation of the DeltaT for the simulation date and time
-	//! @param name of equation (e.g. "WithoutCorrection" or "EspenakMeeus")
-	//! @note list of possible names of equation: WithoutCorrection, Schoch, Clemence, IAU, AstronomicalEphemeris,
-	//! TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979, MorrisonStephenson1982,
-	//! StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski, SchmadelZech1988, ChaprontTouze,
-	//! StephensonMorrison1995, Stephenson1997, ChaprontMeeus, JPLHorizons, MeeusSimons, MontenbruckPfleger,
-	//! ReingoldDershowitz, MorrisonStephenson2004, EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Custom.
+	//! @param algorithmName is name of equation, e.g. "WithoutCorrection" or "EspenakMeeus"
+	//! @note list of possible names of equation for DeltaT: WithoutCorrection, Schoch, Clemence, IAU,
+	//! AstronomicalEphemeris, TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979,
+	//! MorrisonStephenson1982, StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski,
+	//! SchmadelZech1988, ChaprontTouze, StephensonMorrison1995, Stephenson1997, ChaprontMeeus,
+	//! JPLHorizons, MeeusSimons, MontenbruckPfleger, ReingoldDershowitz, MorrisonStephenson2004,
+	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Custom.
 	void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec
