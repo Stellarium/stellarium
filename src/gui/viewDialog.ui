@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>590</width>
-    <height>509</height>
+    <width>587</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="font">
@@ -433,7 +433,7 @@
                 <string>Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)</string>
                </property>
                <property name="text">
-                <string>DSOs</string>
+                <string comment="Deep-sky objects">DSOs</string>
                </property>
               </widget>
              </item>
@@ -933,7 +933,7 @@
                    <string>Hourly zenith rate</string>
                   </property>
                   <property name="text">
-                   <string>ZHR:</string>
+                   <string extracomment="Zenithal Hourly Rate">ZHR:</string>
                   </property>
                   <property name="textFormat">
                    <enum>Qt::PlainText</enum>
@@ -1133,7 +1133,7 @@
                 <string>Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)</string>
                </property>
                <property name="text">
-                <string>DSOs</string>
+                <string comment="Deep-sky objects">DSOs</string>
                </property>
               </widget>
              </item>
