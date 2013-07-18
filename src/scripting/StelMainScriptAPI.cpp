@@ -161,6 +161,16 @@ QString StelMainScriptAPI::getDeltaT() const
 	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT(getJDay())/3600.);
 }
 
+QString StelMainScriptAPI::getDeltaTAlgorithm() const
+{
+	return StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey();
+}
+
+void StelMainScriptAPI::setDeltaTAlgorithm(QString algorithmName)
+{
+	StelApp::getInstance().getCore()->setCurrentDeltaTAlgorithmKey(algorithmName);
+}
+
 //! Set time speed in JDay/sec
 //! @param ts time speed in JDay/sec
 void StelMainScriptAPI::setTimeRate(double ts)
@@ -624,6 +634,7 @@ void StelMainScriptAPI::debug(const QString& s)
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
+	StelCore *core = StelApp::getInstance().getCore();
 	if (dt == "now")
 		return StelUtils::getJDFromSystem();
 	
@@ -640,20 +651,24 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	if (ok)
 		return jd;
 	
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks))(\\s+(sidereal)?)?");
+	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks|year|years))(\\s+(sidereal)?)?");
 	if (nowRe.exactMatch(dt))
 	{
 		double delta;
 		double unit;
 		double dayLength = 1.0;
+		double yearLength = 365.2421897; // mean tropical year duration for Earth
 
 		if (nowRe.capturedTexts().at(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
-			jd = StelApp::getInstance().getCore()->getJDay();
+			jd = core->getJDay();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
-			dayLength = StelApp::getInstance().getCore()->getLocalSideralDayLength();
+		{
+			dayLength = core->getLocalSideralDayLength();
+			yearLength = core->getLocalSideralYearLength();
+		}
 
 		QString unitString = nowRe.capturedTexts().at(6);
 		if (unitString == "seconds" || unitString == "second")
@@ -666,6 +681,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = dayLength;
 		else if (unitString == "weeks" || unitString == "week")
 			unit = dayLength * 7.;
+		else if (unitString == "years" || unitString == "year")
+			unit = yearLength;
 		else
 		{
 			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.capturedTexts().at(4);

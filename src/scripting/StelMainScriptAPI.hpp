@@ -75,7 +75,7 @@ public slots:
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used.
-	//! @param enableDeltaT true or false - enable Delta-T correction or not
+	//! @param enableDeltaT true or false - enable Delta-T correction or not (default value is "false")
 	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
 
 	//! get the simulation date and time as a string in ISO format,
@@ -89,6 +89,19 @@ public slots:
 	//! in HMS format, e.g. "0h1m68.2s"
 	//! @return the DeltaT for current simulation time.
 	QString getDeltaT() const;
+
+	//! get the DeltaT equation name for the simulation date and time as a string
+	//! @return name of the DeltaT equation
+	QString getDeltaTAlgorithm() const;
+
+	//! set equation of the DeltaT for the simulation date and time
+	//! @param name of equation (e.g. "WithoutCorrection" or "EspenakMeeus")
+	//! @note list of possible names of equation: WithoutCorrection, Schoch, Clemence, IAU, AstronomicalEphemeris,
+	//! TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979, MorrisonStephenson1982,
+	//! StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski, SchmadelZech1988, ChaprontTouze,
+	//! StephensonMorrison1995, Stephenson1997, ChaprontMeeus, JPLHorizons, MeeusSimons, MontenbruckPfleger,
+	//! ReingoldDershowitz, MorrisonStephenson2004, EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Custom.
+	void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.

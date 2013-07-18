@@ -262,6 +262,9 @@ public:
 	//! Get the duration of a sidereal day for the current observer in day.
 	double getLocalSideralDayLength() const;
 
+	//! Get the duration of a sidereal year for the current observer in days.
+	double getLocalSideralYearLength() const;
+
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode();
 	void setStartupTimeMode(const QString& s);
