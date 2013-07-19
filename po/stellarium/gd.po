@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-16 16:20+0700\n"
-"PO-Revision-Date: 2013-02-16 19:50+0000\n"
+"POT-Creation-Date: 2013-07-19 01:17+0700\n"
+"PO-Revision-Date: 2013-07-18 12:18+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-17 05:48+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 05:27+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "Language: gd\n"
 
@@ -101,11 +101,11 @@ msgstr "Grioglachan cruinn"
 
 #: src/core/modules/Nebula.cpp:394
 msgid "Nebula"
-msgstr ""
+msgstr "Deargan-doireann"
 
 #: src/core/modules/Nebula.cpp:397
 msgid "Planetary nebula"
-msgstr ""
+msgstr "Deargan-doireann planaid"
 
 #: src/core/modules/Nebula.cpp:400
 msgid "Dark Nebula"
@@ -331,11 +331,11 @@ msgstr ""
 msgid "SpaceShip"
 msgstr "Soitheach fànais"
 
-#: src/core/StelCore.cpp:1429
+#: src/core/StelCore.cpp:1435
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:1432
+#: src/core/StelCore.cpp:1438
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -343,14 +343,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1435
+#: src/core/StelCore.cpp:1441
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1438
+#: src/core/StelCore.cpp:1444
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -359,14 +359,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1442
+#: src/core/StelCore.cpp:1448
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1446
+#: src/core/StelCore.cpp:1452
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -374,7 +374,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1450
+#: src/core/StelCore.cpp:1456
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -382,14 +382,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1453
+#: src/core/StelCore.cpp:1459
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1456
+#: src/core/StelCore.cpp:1462
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -398,14 +398,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1459
+#: src/core/StelCore.cpp:1465
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1462
+#: src/core/StelCore.cpp:1468
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -413,25 +413,25 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1465
+#: src/core/StelCore.cpp:1471
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1468
+#: src/core/StelCore.cpp:1474
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1471
+#: src/core/StelCore.cpp:1477
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1474
+#: src/core/StelCore.cpp:1480
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -440,14 +440,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1477
+#: src/core/StelCore.cpp:1483
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1480
+#: src/core/StelCore.cpp:1486
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -455,42 +455,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1483
+#: src/core/StelCore.cpp:1489
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1486
+#: src/core/StelCore.cpp:1492
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1489
+#: src/core/StelCore.cpp:1495
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1492
+#: src/core/StelCore.cpp:1498
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1501
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1504
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -498,7 +498,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1501
+#: src/core/StelCore.cpp:1507
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -506,7 +506,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1504
+#: src/core/StelCore.cpp:1510
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -515,7 +515,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1513
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -525,11 +525,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1513
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1516
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -537,7 +537,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1519
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -545,42 +545,42 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1522
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1519 src/core/SimbadSearcher.cpp:132
+#: src/core/StelCore.cpp:1525 src/core/SimbadSearcher.cpp:132
 msgid "Error"
 msgstr "Mearachd"
 
-#: src/core/StelCore.cpp:1568
+#: src/core/StelCore.cpp:1574
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1600
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1616 src/core/StelCore.cpp:1621
-#: src/core/StelCore.cpp:1648 src/core/StelCore.cpp:1653
+#: src/core/StelCore.cpp:1622 src/core/StelCore.cpp:1627
+#: src/core/StelCore.cpp:1654 src/core/StelCore.cpp:1659
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1626
+#: src/core/StelCore.cpp:1632
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1663
+#: src/core/StelCore.cpp:1669
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1665
+#: src/core/StelCore.cpp:1671
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -3830,6 +3830,7 @@ msgid ""
 msgstr ""
 
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
+msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr ""
 
@@ -3911,6 +3912,7 @@ msgid "Hourly zenith rate"
 msgstr ""
 
 #: src/ui_viewDialog.h:1230
+msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
@@ -4115,11 +4117,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Dìreadh deas/Dì-chlaonadh (J2000)"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Càraid àireimh còmhnard"
 
 #: src/ui_configurationDialog.h:1017
 msgid "Altitude/Azimuth"
@@ -4127,7 +4129,7 @@ msgstr "Àirde/Azimuth"
 
 #: src/ui_configurationDialog.h:1018
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Meudachd lèirsinneach"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Absolute magnitude"
@@ -4135,7 +4137,7 @@ msgstr "Meudachd absaloideach"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Àireamh(an) cataloig"
 
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
@@ -4148,7 +4150,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1025
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Dìreadh deas/Dì-chlaonadh (aig a' cheann-latha)"
 
 #: src/ui_configurationDialog.h:1027
 msgid "Galactic coordinates, equinox of J2000.0"
@@ -4164,7 +4166,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1033
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Ceàrn uarach/Dì-chlaonadh"
 
 #: src/ui_configurationDialog.h:1034
 msgid "Distance"
@@ -4172,7 +4174,7 @@ msgstr "Astar"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
-msgstr ""
+msgstr "Meud ceàrnach no fiosaigeach"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Size"
@@ -4180,7 +4182,7 @@ msgstr "Meud"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Seòrsa speictreach, seòrsa deargain-doireann is msaa."
 
 #: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
@@ -4319,11 +4321,11 @@ msgstr "Leubailean iom-tharraing"
 
 #: src/ui_configurationDialog.h:1105
 msgid "Toggle display backgrounds of the nebulae."
-msgstr ""
+msgstr "Toglaich cùlaibhean taisbeanaidh nan dearganan-doireann."
 
 #: src/ui_configurationDialog.h:1107
 msgid "Show nebula background button"
-msgstr ""
+msgstr "Seall putan cùlaibh nan dearganan-doireann"
 
 #: src/ui_configurationDialog.h:1109
 msgid "Toggle vertical and horizontal image flip buttons."
@@ -5960,7 +5962,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "Dì&readh deas (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "&Current object"
@@ -6186,173 +6188,173 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "January"
-msgstr ""
+msgstr "Am Faoilleach"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "February"
-msgstr ""
+msgstr "An Gearran"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "March"
-msgstr ""
+msgstr "Am Màrt"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "April"
-msgstr ""
+msgstr "An Giblean"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "May"
-msgstr ""
+msgstr "An Cèitean"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "June"
-msgstr ""
+msgstr "An t-Ògmhios"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "July"
-msgstr ""
+msgstr "An t-Iuchar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "August"
-msgstr ""
+msgstr "An Lùnastal"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "September"
-msgstr ""
+msgstr "An t-Sultain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "October"
-msgstr ""
+msgstr "An Dàmhair"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "November"
-msgstr ""
+msgstr "An t-Samhain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:651
 msgid "December"
-msgstr ""
+msgstr "An Dùbhlachd"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
-msgstr ""
+msgstr "A’ chiad seachdain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
 msgid "Second week"
-msgstr ""
+msgstr "An dàrna seachdain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "Third week"
-msgstr ""
+msgstr "An treas seachdain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Fourth week"
-msgstr ""
+msgstr "An ceathramh seachdain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "An t-seachdain mu dheireadh"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "DiDòmhnaich"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "DiLuain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "DiMàirt"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "DiCiadain"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "DiarDaoin"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "DihAoine"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "DiSathairne"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Plugan roinn-tìde"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Mìnich roinn-tìde"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Time zone"
-msgstr ""
+msgstr "Roinn-tìde"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Ainm na roinn-tìde:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Frith-àireamh o UTC (uairean):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
-msgstr ""
+msgstr "Tìde an t-samhraidh"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Ainm na roinn-tìde samhraidh:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "Frith-àireamh tìde an t-samhraidh o UTC (uairean):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Toiseach tìde an t-samhraidh"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "Latha:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Àm an atharrachaidh:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Ceann-latha:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Deireadh tìde an t-samhraidh"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "Cleachd an deifinisean seo"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid ""
@@ -6503,11 +6505,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Nebula names"
-msgstr ""
+msgstr "Ainmean dhearganan-doireann"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula hints"
-msgstr ""
+msgstr "Gliocasan dhearganan-doireann"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic plane line"
@@ -6531,7 +6533,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "Àireamh de leubailean deargain-doireann:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Zoom duration:"
@@ -7946,3 +7948,9 @@ msgstr ""
 #, qt-format
 #~ msgid "Galactic longitude/latitude (J2000): %1/%2"
 #~ msgstr "Domhan-fhad/domhan-leud reul-chriosa (J2000): %1/%2"
+
+#~ msgid "Nebulas background images"
+#~ msgstr "Dealbhan cùlaibh nan dearganan-doireann"
+
+#~ msgid "Nebulas"
+#~ msgstr "Dearganan-doireann"
