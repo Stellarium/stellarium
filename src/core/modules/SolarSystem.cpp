@@ -420,8 +420,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					meanMotion = (eccentricity == 1.0)
-								? 0.01720209895 * (1.5/pericenterDistance)
-												* sqrt(0.5/pericenterDistance)
+								? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
 								: (semi_major_axis > 0.0)
 								? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
 								: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
@@ -477,16 +476,16 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			// Create an elliptical orbit
 			EllipticalOrbit *orb = new EllipticalOrbit(pericenterDistance,
-													   eccentricity,
-													   inclination,
-													   ascending_node,
-													   arg_of_pericenter,
-													   mean_anomaly,
-													   period,
-													   epoch,
-													   parentRotObliquity,
-													   parent_rot_asc_node,
-													   parent_rot_j2000_longitude);
+								   eccentricity,
+								   inclination,
+								   ascending_node,
+								   arg_of_pericenter,
+								   mean_anomaly,
+								   period,
+								   epoch,
+								   parentRotObliquity,
+								   parent_rot_asc_node,
+								   parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 
 			userDataPtr = orb;
@@ -532,8 +531,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
 						meanMotion = (eccentricity == 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance)
-													* sqrt(0.5/pericenterDistance)
+									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
 									: (semi_major_axis > 0.0)
 									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
 									: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
@@ -562,36 +560,32 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
-			const double parentRotObliquity = parent->getParent()
-											  ? parent->getRotObliquity()
-											  : 0.0;
-			const double parent_rot_asc_node = parent->getParent()
-											  ? parent->getRotAscendingnode()
-											  : 0.0;
+			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity() : 0.0;
+			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingnode() : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 						if (parent->getParent()) {
-						   const double c_obl = cos(parentRotObliquity);
-						   const double s_obl = sin(parentRotObliquity);
-						   const double c_nod = cos(parent_rot_asc_node);
-						   const double s_nod = sin(parent_rot_asc_node);
-						   const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
-						   const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
-						   const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
-						   const Vec3d J2000Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
-						   Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
-						   J2000NodeOrigin.normalize();
-						   parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
+							const double c_obl = cos(parentRotObliquity);
+							const double s_obl = sin(parentRotObliquity);
+							const double c_nod = cos(parent_rot_asc_node);
+							const double s_nod = sin(parent_rot_asc_node);
+							const Vec3d OrbitAxis0( c_nod,       s_nod,        0.0);
+							const Vec3d OrbitAxis1(-s_nod*c_obl, c_nod*c_obl,s_obl);
+							const Vec3d OrbitPole(  s_nod*s_obl,-c_nod*s_obl,c_obl);
+							const Vec3d J2000Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(Vec3d(0,0,1)));
+							Vec3d J2000NodeOrigin(J2000Pole^OrbitPole);
+							J2000NodeOrigin.normalize();
+							parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 						}
 			CometOrbit *orb = new CometOrbit(pericenterDistance,
-											 eccentricity,
-											 inclination,
-											 ascending_node,
-											 arg_of_pericenter,
-											 time_at_pericenter,
-											 meanMotion,
-											 parentRotObliquity,
-											 parent_rot_asc_node,
-											 parent_rot_j2000_longitude);
+							 eccentricity,
+							 inclination,
+							 ascending_node,
+							 arg_of_pericenter,
+							 time_at_pericenter,
+							 meanMotion,
+							 parentRotObliquity,
+							 parent_rot_asc_node,
+							 parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 			userDataPtr = orb;
 			posfunc = &cometOrbitPosFunc;
