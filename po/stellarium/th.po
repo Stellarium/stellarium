@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-19 01:17+0700\n"
-"PO-Revision-Date: 2013-07-16 01:22+0000\n"
+"PO-Revision-Date: 2013-07-19 09:23+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:34+0000\n"
+"X-Launchpad-Export-Date: 2013-07-20 05:14+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -3336,7 +3336,7 @@ msgstr "เส้นกลุ่มดาว"
 
 #: src/translations.h:590
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "ภาพฉากหลังของวัตถุท้องฟ้าห้วงลึก"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1253
 msgid "Ecliptic J2000 grid"
@@ -3391,7 +3391,7 @@ msgstr "เส้นเมริเดียน"
 
 #: src/translations.h:602
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "วัตถุท้องฟ้าห้วงลึก"
 
 #: src/translations.h:603
 msgid "Night mode"
@@ -3538,19 +3538,19 @@ msgstr "วง Telrad"
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "เลือกกล้องโทรทรรศน์ถัดไป"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "เลือกเลนส์ใกล้ตาถัดไป"
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "เลือกกล้องโทรทรรศน์ก่อนหน้า"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "เลือกเลนส์ใกล้ตาก่อนหน้า"
 
 #: src/translations.h:657
 msgid "Show pulsars"
@@ -3562,7 +3562,7 @@ msgstr "หน้าต่างการตั้งค่าพัลซาร
 
 #: src/translations.h:661
 msgid "Show quasars"
-msgstr ""
+msgstr "แสดงเควซาร์"
 
 #: src/translations.h:662
 msgid "Quasars configuration window"
@@ -3867,7 +3867,7 @@ msgstr "ตัวเลือก"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Some objects may be found after activation respective plug-ins"
-msgstr ""
+msgstr "บางวัตถุจะค้นหาได้เมื่อเปิดใช้งานโปรแกรมเสริมนั้นแล้ว"
 
 #: src/ui_searchDialogGui.h:631
 msgid "names in English"
@@ -3916,11 +3916,12 @@ msgstr "ดาวเคราะห์"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"ป้ายชื่อและตัวบ่งชี้วัตถุท้องฟ้าห้วงลึก (กระจุกดาว, ดาราจักร และเนบิวลา)"
 
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "วัตถุท้องฟ้าห้วงลึก"
 
 #: src/ui_viewDialog.h:1204
 msgid "Planets and satellites"
@@ -4001,7 +4002,7 @@ msgstr "อัตราตกรายชั่วโมงที่จุดเ
 #: src/ui_viewDialog.h:1230
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1233
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4330,7 +4331,7 @@ msgstr "อื่น ๆ :"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "ใช้วันและเวลาท้องถิ่นในขณะนี้"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -4435,6 +4436,8 @@ msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr ""
+"แสดงเงาที่เกิดจากแสงอาทิตย์ตกกระทบบนดาวเคราะห์และดาวบริวาร "
+"(การ์ดแสดงผลจำเป็นต้องรองรับ OpenGL รุ่น 2 หรือสูงกว่า)"
 
 #: src/ui_configurationDialog.h:1119
 msgid "Render Solar Shadows"
@@ -4879,11 +4882,11 @@ msgstr "เลนส์ใกล้ตาถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Previous lens"
-msgstr ""
+msgstr "เลนส์ก่อนหน้า"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Next lens"
-msgstr ""
+msgstr "เลนส์ถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Previous CCD frame"
@@ -4940,19 +4943,19 @@ msgstr "ขอบเขตภาพปรากฏของเลนส์ใก
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "ตัวคูณ: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:604
 msgid "Lens: None"
-msgstr ""
+msgstr "เลนส์: ไม่มี"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:605
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "ตัวคูณ: ไม่มี"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "ความยาวโฟกัสของเลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -4969,12 +4972,12 @@ msgstr "ขอบเขตภาพจริงจากกล้องสอง
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "กำลังขยายที่ได้จากทัศนูปกรณ์นี้"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "ขอบเขตภาพที่ได้จากทัศนูปกรณ์นี้"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:492
 msgid "Oculars Plug-in"

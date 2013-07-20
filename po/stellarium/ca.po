@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-19 01:17+0700\n"
-"PO-Revision-Date: 2013-06-19 20:48+0000\n"
+"PO-Revision-Date: 2013-07-19 07:29+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:25+0000\n"
+"X-Launchpad-Export-Date: 2013-07-20 05:14+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -273,7 +273,7 @@ msgstr "Rang de la magnitud: <b>%1</b>%2<b>%3</b> (Sistema fotomètric: %4)"
 #: src/core/modules/StarWrapper.cpp:201
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Rang de magnitud: <b>%1</b>%2<b>%3/%4</b> (Sistema fotomètric: %5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -629,6 +629,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Aquesta solució de S. Islam, M- Sadiq i M. S. Qureshi, basada en Meeus i "
+"Simons (2000), va ser publicada a l'article <em>Error Minimization of "
+"Polynomial Approximation of DeltaT</em> (%1) i revisada per Sana Islam al "
+"2013."
 
 #: src/core/StelCore.cpp:1522
 #, qt-format
@@ -1060,7 +1064,7 @@ msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq i Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
@@ -2021,27 +2025,27 @@ msgstr "Volta per les Cultures del Cel"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:246
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Events de la Terra des de Mercuri"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:248
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Events de la Terra des de Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:250
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Events de la Terra des de Mart"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "Elongació més gran i Brillantor des de Mart"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
 msgid "Earth Greatest Elongations from Jupiter"
-msgstr ""
+msgstr "Elongació més gran i Brillantor des de Jupiter"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:260
@@ -2146,6 +2150,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 177 events in all!"
 msgstr ""
+"Protecto de pantalla de diversos esdeveniments al Sistema Solar. 177 events "
+"en total!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -2184,11 +2190,11 @@ msgstr ""
 
 #: src/translations.h:282
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr ""
+msgstr "Elongació més gran i Brillantor des de Mart 2000-3000"
 
 #: src/translations.h:283
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr ""
+msgstr "Elongació més gran i Brillantor des de Jupiter 2000-3000"
 
 #: src/translations.h:287
 msgid "Andorra"
@@ -3381,7 +3387,7 @@ msgstr "Línies de les constel·lacions"
 
 #: src/translations.h:590
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Imatges de fons de l'objectes de l'espai profund"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1253
 msgid "Ecliptic J2000 grid"
@@ -3436,7 +3442,7 @@ msgstr "Línia del meridià"
 
 #: src/translations.h:602
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Objectes de l'Espai Profund"
 
 #: src/translations.h:603
 msgid "Night mode"
@@ -3583,19 +3589,19 @@ msgstr "Punt de mira Telrad"
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "Selecciona el  telescopi següent"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Selecciona l'ocular següent"
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Selecciona el  telescopi previ"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Selecciona l'ocular previ"
 
 #: src/translations.h:657
 msgid "Show pulsars"
@@ -3913,6 +3919,8 @@ msgstr "Opcions"
 #: src/ui_searchDialogGui.h:629
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Alguns objectes podran ser trobats després de l'activació dels respectius "
+"connectors"
 
 #: src/ui_searchDialogGui.h:631
 msgid "names in English"
@@ -3967,7 +3975,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "OEP"
 
 #: src/ui_viewDialog.h:1204
 msgid "Planets and satellites"
@@ -4048,7 +4056,7 @@ msgstr "Tasa horari zenital"
 #: src/ui_viewDialog.h:1230
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "THZ:"
 
 #: src/ui_viewDialog.h:1233
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4378,7 +4386,7 @@ msgstr "Altres:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Utilitza data i hora local actual"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -8023,7 +8031,7 @@ msgstr "Configuració de observabilitat"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
-msgstr "Configuració del connector de observabilitat"
+msgstr "Configuració del Connector de observabilitat"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
