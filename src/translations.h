@@ -251,7 +251,7 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Earth Greatest Elongations and Brilliancies from Mars");
 		// TRANSLATORS: Name of script
-		N_("Earth Greatest Elongations from Jupiter");
+		N_("Earth and Mars Greatest Elongations from Jupiter");
 		
 		// =====================================================================
 		// Script descriptions
