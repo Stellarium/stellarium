@@ -372,6 +372,12 @@ int main(int argc, char **argv)
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 		app.quit();
 	}
+	else if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_2))
+	{
+		qWarning() << "Oops... This platform support only OpenGL 1.1.";
+		QMessageBox::warning(0, "Stellarium", q_("Your platform does not support minimal required OpenGL 1.2. Please upgrade drivers for graphics card."));
+		app.quit();
+	}
 	else
 	{
 		StelMainWindow mainWin;
