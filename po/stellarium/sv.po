@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-19 01:17+0700\n"
-"PO-Revision-Date: 2013-04-03 12:21+0000\n"
-"Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
+"POT-Creation-Date: 2013-07-21 18:55+0700\n"
+"PO-Revision-Date: 2013-07-21 15:57+0000\n"
+"Last-Translator: Jonas Persson <jonas.persson@physics.org>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:34+0000\n"
+"X-Launchpad-Export-Date: 2013-07-22 05:28+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -221,19 +221,19 @@ msgstr "Synbar magnitud:: <b>%1</b> (vid extinktion)"
 
 #: src/core/modules/StarWrapper.cpp:139
 msgid "eruptive variable star"
-msgstr ""
+msgstr "Eruptiv variabel stjärna"
 
 #: src/core/modules/StarWrapper.cpp:141
 msgid "pulsating variable star"
-msgstr ""
+msgstr "Pulserande variabel stjärna"
 
 #: src/core/modules/StarWrapper.cpp:143
 msgid "rotating variable star"
-msgstr ""
+msgstr "Roterande variabel stjärna"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "Kataklysmisk variabel stjärna"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
@@ -241,7 +241,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
-msgstr ""
+msgstr "Variabel stjärna"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
@@ -250,7 +250,7 @@ msgstr "dubbelstjärna"
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Typ: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -265,12 +265,12 @@ msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Magnitudintervall: <b>%1</b>%2<b>%3</b> (Fotometriskt system: %4)"
 
 #: src/core/modules/StarWrapper.cpp:201
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Magnitudintervall: <b>%1</b>%2<b>%3/%4</b> (Fotometriskt system: %5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -303,7 +303,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Period: %1 dagar"
 
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
@@ -611,6 +611,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Lösningen av B. Banjevic, baserad på Stephenson & Morrison (1984), "
+"publiserad i artikeln <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1519
 #, qt-format
@@ -619,6 +622,9 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Lösningen av S. Islam, M. Sadiq and M. S. Qureshi, baserad på Meeus & Simons "
+"(2000), publiserad i artikeln <em>Error Minimization of Polynomial "
+"Approximation of DeltaT</em> (%1) och uppdaterad av Sana Islam i 2013."
 
 #: src/core/StelCore.cpp:1522
 #, qt-format
@@ -1045,11 +1051,11 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1165
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
@@ -1838,7 +1844,7 @@ msgstr "Inuit"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr ""
+msgstr "Indisk vedisk"
 
 #: src/translations.h:171
 msgid "Korean"
@@ -2008,17 +2014,17 @@ msgstr "Stjärnbildsmytologisk rundtur"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:246
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Jord händelser sett från Merkurius"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:248
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Jord-händelser sett från Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:250
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Jord-händelser sett från Mars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
@@ -2027,7 +2033,7 @@ msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
-msgid "Earth Greatest Elongations from Jupiter"
+msgid "Earth and Mars Greatest Elongations from Jupiter"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
@@ -2167,7 +2173,7 @@ msgstr ""
 
 #: src/translations.h:283
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr ""
+msgstr "Jordens största elongation från Jupiter 2000-3000"
 
 #: src/translations.h:287
 msgid "Andorra"
@@ -3562,23 +3568,23 @@ msgstr "Telrad-sikte"
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "Välj nästa teleskop"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Välj nästa okular"
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Välj tidigare teleskop"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Välj tidigare okular"
 
 #: src/translations.h:657
 msgid "Show pulsars"
-msgstr ""
+msgstr "Visa pulsarer"
 
 #: src/translations.h:658
 msgid "Pulsars configuration window"
@@ -3586,7 +3592,7 @@ msgstr "Konfigurationsfönster för  pulsarer"
 
 #: src/translations.h:661
 msgid "Show quasars"
-msgstr ""
+msgstr "Visa kvasarer"
 
 #: src/translations.h:662
 msgid "Quasars configuration window"
@@ -3944,7 +3950,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "DSOs"
 
 #: src/ui_viewDialog.h:1204
 msgid "Planets and satellites"
@@ -4025,7 +4031,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1230
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1233
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4231,7 +4237,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Horisontella koordinater"
 
 #: src/ui_configurationDialog.h:1017
 msgid "Altitude/Azimuth"

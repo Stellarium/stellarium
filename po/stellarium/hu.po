@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-19 01:17+0700\n"
-"PO-Revision-Date: 2013-07-14 13:48+0000\n"
+"POT-Creation-Date: 2013-07-21 18:55+0700\n"
+"PO-Revision-Date: 2013-07-21 05:48+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:28+0000\n"
+"X-Launchpad-Export-Date: 2013-07-22 05:23+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -1032,7 +1032,7 @@ msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
@@ -1175,7 +1175,7 @@ msgstr "Fejlesztő: %1"
 #: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Folyamatos integrálás: %1"
 
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
 #, qt-format
@@ -1991,26 +1991,26 @@ msgstr "Égi kultúrák túrája"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:246
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Földi események a Merkúrról nézve"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:248
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Földi események a Vénuszról nézve"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:250
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Földi események a Marsról nézve"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "A Föld legnagyobb kitérése és fényessége a Marsról nézve"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
-msgid "Earth Greatest Elongations from Jupiter"
+msgid "Earth and Mars Greatest Elongations from Jupiter"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
@@ -2112,7 +2112,7 @@ msgstr ""
 #: src/translations.h:275
 msgid ""
 "Screensaver of various happenings in the Solar System. 177 events in all!"
-msgstr ""
+msgstr "A Naprendszer 177 eseményének képei (képernyőkímélő)."
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -2148,10 +2148,11 @@ msgstr ""
 #: src/translations.h:282
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
+"A Föld legnagyobb kitérése és fényessége a Marsról nézve 2000-3000 között"
 
 #: src/translations.h:283
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr ""
+msgstr "A Föld legnagyobb kitérése a Jupiterről nézve 2000-3000 között"
 
 #: src/translations.h:287
 msgid "Andorra"
@@ -3344,7 +3345,7 @@ msgstr "Csillagképek vonalai"
 
 #: src/translations.h:590
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Mélyég-objektumok háttérképei"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1253
 msgid "Ecliptic J2000 grid"
@@ -3399,7 +3400,7 @@ msgstr "Meridiánvonal"
 
 #: src/translations.h:602
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Mélyég-objektumok"
 
 #: src/translations.h:603
 msgid "Night mode"
@@ -3546,7 +3547,7 @@ msgstr "Telrad nézet"
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "Következő távcső"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
@@ -3554,7 +3555,7 @@ msgstr ""
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Előző távcső"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
@@ -3924,6 +3925,8 @@ msgstr "Bolygók"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Feliratok és jelölések a mélyég-objektumokhoz (csillaghalmazok, galaxisok és "
+"ködök)"
 
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgctxt "Deep-sky objects"
@@ -4958,7 +4961,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "Fókusztávolság"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -5618,12 +5621,12 @@ msgstr "Frissítési hiba"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:479
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "Frissítve: %1/%2 műhold; %3 hozzáadva; %4 eltávolítva"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Frissítve: %1/%2 műhold; %3 hozzáadva; %4 hiányzik"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
 msgid "[new source]"
@@ -5732,13 +5735,15 @@ msgstr "Utolsó frissítés:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr ""
+msgstr "Frissítéskor az összes új műhold hozzáadása a kiválasztott forrásból"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Frissítéskor azon műholdak eltávolítása, amik nincsenek benne a frissítési "
+"listában"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
@@ -5813,7 +5818,7 @@ msgstr "Beállítások"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Dupla kattintás a műholdra követést jelent."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
@@ -5849,11 +5854,11 @@ msgstr "Pálya"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr ""
+msgstr "Nem kell frissíteni a kiválasztott műholdakat"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:737
 msgid "Do not update"
-msgstr ""
+msgstr "Nem kell frissíteni"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Description:"
@@ -5865,13 +5870,15 @@ msgstr "Csoportok:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "TLE set:"
-msgstr ""
+msgstr "TLE adatok:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
+"A kiválasztott listában lévő műholdak hozzá lesznek adva a következő "
+"frissítéskor, ha még nincsenek a készletben."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid ""
