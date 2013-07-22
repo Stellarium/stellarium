@@ -366,14 +366,16 @@ int main(int argc, char **argv)
 	GettextStelTranslator trans;
 	app.installTranslator(&trans);
 
-	if (!QGLFormat::hasOpenGL())
+	if (!QGLFormat::hasOpenGL()) // Check support of OpenGL
 	{		
 		qWarning() << "Oops... This system does not support OpenGL.";
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 		app.quit();
 	}
-	else if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_2))
+	else if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_2)) // Check supported version of OpenGL
 	{
+		// OK, minimal required version of OpenGL is 1.2. If platform does not support this
+		// version then say to user about troubles and quit from application.
 		qWarning() << "Oops... This platform support only OpenGL 1.1.";
 		QMessageBox::warning(0, "Stellarium", q_("Your platform does not support minimal required OpenGL 1.2. Please upgrade drivers for graphics card."));
 		app.quit();
