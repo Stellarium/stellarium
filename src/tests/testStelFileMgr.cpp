@@ -92,7 +92,7 @@ void TestStelFileMgr::initTestCase()
 	path << "./"+partialPath1;
 	path << workingDir+"/"+partialPath2;
 	StelFileMgr::setSearchPaths(path);
-	qDebug() << "search paths are:  " << QDir::toNativeSeparators(StelFileMgr::getSearchPaths());
+	qDebug() << "search paths are:  " << StelFileMgr::getSearchPaths();
 }
 
 void TestStelFileMgr::cleanupTestCase()
