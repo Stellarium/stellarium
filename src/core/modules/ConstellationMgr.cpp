@@ -697,15 +697,14 @@ void ConstellationMgr::update(double deltaTime)
 void ConstellationMgr::setArtIntensity(const double intensity)
 {
 	if (artIntensity != intensity)
-	{
 		artIntensity = intensity;
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		{
-			(*iter)->artFader.setMaxValue(artIntensity);
-		}
-		emit artIntensityChanged(intensity);
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->artFader.setMaxValue(artIntensity);
 	}
+	emit artIntensityChanged(intensity);
 }
 
 double ConstellationMgr::getArtIntensity() const
@@ -715,16 +714,15 @@ double ConstellationMgr::getArtIntensity() const
 
 void ConstellationMgr::setArtFadeDuration(const float duration)
 {
-	if(artFadeDuration != duration)
-	{
+	if (artFadeDuration != duration)
 		artFadeDuration = duration;
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		{
-			(*iter)->artFader.setDuration((int) (duration * 1000.f));
-		}
-		emit artFadeDurationChanged(duration);
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->artFader.setDuration((int) (duration * 1000.f));
 	}
+	emit artFadeDurationChanged(duration);
 }
 
 float ConstellationMgr::getArtFadeDuration() const
