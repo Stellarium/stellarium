@@ -95,7 +95,7 @@ void SolarSystemEditor::init()
 	else
 	{
 		//TODO: Better error message
-		qDebug() << "Something is horribly wrong:" << StelFileMgr::getInstallationDir();
+		qDebug() << "Something is horribly wrong:" << QDir::toNativeSeparators(StelFileMgr::getInstallationDir());
 		return;
 	}
 
@@ -196,12 +196,12 @@ bool SolarSystemEditor::cloneSolarSystemConfigurationFile()
 	QDir userDataDirectory(StelFileMgr::getUserDir());
 	if (!userDataDirectory.exists())
 	{
-		qDebug() << "Unable to find user data directory:" << userDataDirectory.absolutePath();
+		qDebug() << "Unable to find user data directory:" << QDir::toNativeSeparators(userDataDirectory.absolutePath());
 		return false;
 	}
 	if (!userDataDirectory.exists("data") && !userDataDirectory.mkdir("data"))
 	{
-		qDebug() << "Unable to create a \"data\" subdirectory in" << userDataDirectory.absolutePath();
+		qDebug() << "Unable to create a \"data\" subdirectory in" << QDir::toNativeSeparators(userDataDirectory.absolutePath());
 		return false;
 	}
 
@@ -213,7 +213,7 @@ bool SolarSystemEditor::cloneSolarSystemConfigurationFile()
 
 	if (QFile::exists(defaultSolarSystemFilePath))
 	{
-		qDebug() << "Trying to copy ssystem.ini to" << customSolarSystemFilePath;
+		qDebug() << "Trying to copy ssystem.ini to" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return QFile::copy(defaultSolarSystemFilePath, customSolarSystemFilePath);
 	}
 	else
@@ -229,7 +229,7 @@ bool SolarSystemEditor::resetSolarSystemConfigurationFile()
 	{
 		if (!QFile::remove((customSolarSystemFilePath)))
 		{
-			qWarning() << "Unable to delete" << customSolarSystemFilePath
+			qWarning() << "Unable to delete" << QDir::toNativeSeparators(customSolarSystemFilePath)
 			         << endl << "Please remove the file manually.";
 			return false;
 		}
@@ -280,7 +280,7 @@ bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath
 	QSettings settings(filePath, QSettings::IniFormat);
 	if (settings.status() != QSettings::NoError)
 	{
-		qWarning() << filePath << "is not a valid configuration file.";
+		qWarning() << QDir::toNativeSeparators(filePath) << "is not a valid configuration file.";
 		return false;
 	}
 
@@ -370,7 +370,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	//Make sure that the file exists
 	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't remove" << name << "to ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		qDebug() << "Can't remove" << name << "to ssystem.ini: Unable to find" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
@@ -378,7 +378,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	QSettings settings(customSolarSystemFilePath, QSettings::IniFormat);
 	if (settings.status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
+		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
@@ -986,7 +986,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 
 	if (!QFile::exists(filePath))
 	{
-		qDebug() << "Can't find" << filePath;
+		qDebug() << "Can't find" << QDir::toNativeSeparators(filePath);
 		return objectList;
 	}
 
@@ -1026,7 +1026,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 	}
 	else
 	{
-		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "Unable to open for reading" << QDir::toNativeSeparators(filePath);
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
@@ -1040,7 +1040,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 
 	if (!QFile::exists(filePath))
 	{
-		qDebug() << "Can't find" << filePath;
+		qDebug() << "Can't find" << QDir::toNativeSeparators(filePath);
 		return objectList;
 	}
 
@@ -1080,7 +1080,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 	}
 	else
 	{
-		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "Unable to open for reading" << QDir::toNativeSeparators(filePath);
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
@@ -1094,7 +1094,7 @@ QList<SsoElements> SolarSystemEditor::readXEphemOneLineElementsFromFile(QString 
 
 	if (!QFile::exists(filePath))
 	{
-		qDebug() << "Can't find" << filePath;
+		qDebug() << "Can't find" << QDir::toNativeSeparators(filePath);
 		return objectList;
 	}
 
@@ -1139,7 +1139,7 @@ QList<SsoElements> SolarSystemEditor::readXEphemOneLineElementsFromFile(QString 
 	}
 	else
 	{
-		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "Unable to open for reading" << QDir::toNativeSeparators(filePath);
 		qDebug() << "File error:" << xEphemElementsFile.errorString();
 		return objectList;
 	}
@@ -1157,7 +1157,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	//Check if the configuration file exists
 	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
@@ -1168,7 +1168,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, QSettings::IniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
+		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 	foreach (SsoElements object, objectList)
@@ -1234,7 +1234,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	}
 	else
 	{
-		qDebug() << "Unable to open for writing" << customSolarSystemFilePath;
+		qDebug() << "Unable to open for writing" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 }
@@ -1264,14 +1264,14 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	//Check if the configuration file exists
 	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't update ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		qDebug() << "Can't update ssystem.ini: Unable to find" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
 	QSettings solarSystem(customSolarSystemFilePath, QSettings::IniFormat);
 	if (solarSystem.status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
+		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 	QStringList existingSections = solarSystem.childGroups();

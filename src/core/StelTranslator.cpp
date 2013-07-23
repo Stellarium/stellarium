@@ -32,6 +32,7 @@
 #include <QStringList>
 #include <QRegExp>
 #include <QLocale>
+#include <QDir>
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
@@ -219,7 +220,7 @@ QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir) 
 
 	if ((dp = opendir(QFile::encodeName(locDir).constData())) == NULL)
 	{
-		qWarning() << "Unable to find locale directory containing translations:" << localeDir;
+		qWarning() << "Unable to find locale directory containing translations:" << QDir::toNativeSeparators(localeDir);
 		return result;
 	}
 
@@ -249,7 +250,7 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 	QFile inf(fileName);
 	if (!inf.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Can't open ISO639 codes file " << fileName;
+		qWarning() << "Can't open ISO639 codes file " << QDir::toNativeSeparators(fileName);
 		Q_ASSERT(0);
 	}
 

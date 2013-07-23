@@ -18,6 +18,7 @@
  */
 
 #include <QDebug>
+#include <QDir>
 
 #include "StelFileMgr.hpp"
 #include "StelGLUtilityFunctions.hpp"
@@ -75,6 +76,6 @@ QString glFileSystemTexturePath(const QString& filename, const bool pvrSupported
 	if(findTextureFile("textures/" + filename, result, errorMessage)) {return result;}
 
 	qWarning() << "WARNING : Couldn't find texture file " 
-	           << filename << ": " << result;
+		   << QDir::toNativeSeparators(filename) << ": " << result;
 	return QString();
 }

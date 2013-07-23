@@ -32,6 +32,7 @@
 #include <QAction>
 #include <QDebug>
 #include <QFileInfo>
+#include <QDir>
 
 StelShortcutMgr::StelShortcutMgr()
 {
@@ -229,7 +230,7 @@ bool StelShortcutMgr::copyDefaultFile()
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/data/");
 		QString shortcutsFileFullPath = StelFileMgr::getUserDir() + "/data/shortcuts.json";
-		qDebug() << "Creating file" << shortcutsFileFullPath;
+		qDebug() << "Creating file" << QDir::toNativeSeparators(shortcutsFileFullPath);
 		QString defaultPath = StelFileMgr::findFile("data/default_shortcuts.json");
 		QFile::copy(defaultPath, shortcutsFileFullPath);
 	}
@@ -310,7 +311,7 @@ bool StelShortcutMgr::loadShortcuts(const QString& filePath, bool overload)
 				QString scriptFilePath = StelFileMgr::findFile(filePath);
 				if (!QFileInfo(scriptFilePath).exists())
 				{
-					qWarning() << "Couldn't find script file" << scriptFilePath
+					qWarning() << "Couldn't find script file" << QDir::toNativeSeparators(scriptFilePath)
 						   << "for shortcut" << actionId;
 				}
 				else
@@ -359,7 +360,7 @@ void StelShortcutMgr::restoreDefaultShortcuts()
 	QString defaultPath = StelFileMgr::getInstallationDir() + "/data/default_shortcuts.json";
 	if (!QFileInfo(defaultPath).exists())
 	{
-		qWarning() << "Default shortcuts file (" << defaultPath
+		qWarning() << "Default shortcuts file (" << QDir::toNativeSeparators(defaultPath)
 		           << ") doesn't exist, restore defaults failed.";
 		return;
 	}
@@ -388,7 +389,7 @@ void StelShortcutMgr::saveShortcuts()
 			if (!StelFileMgr::mkDir(userDataPath))
 			{
 				qWarning() << "ERROR - cannot create non-existent data directory"
-				           << userDataPath;
+					   << QDir::toNativeSeparators(userDataPath);
 				qWarning() << "Shortcuts aren't' saved";
 				return;
 			}
@@ -399,14 +400,14 @@ void StelShortcutMgr::saveShortcuts()
 	if (!shortcutsFile.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		qWarning() << "ERROR: Could not save shortcuts file"
-		           << shortcutsFilePath;
+			   << QDir::toNativeSeparators(shortcutsFilePath);
 		return;
 	}
 
 //	QTextStream stream(&shortcutsFile);
 	saveShortcuts(&shortcutsFile);
 	shortcutsFile.close();
-	qDebug() << "New shortcuts file saved to" << shortcutsFilePath;
+	qDebug() << "New shortcuts file saved to" << QDir::toNativeSeparators(shortcutsFilePath);
 }
 
 void StelShortcutMgr::saveShortcuts(QIODevice* output) const

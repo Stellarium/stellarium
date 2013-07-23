@@ -50,6 +50,7 @@
 #include <QStringList>
 #include <QVariant>
 #include <QVariantMap>
+#include <QDir>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -167,11 +168,11 @@ void Supernovae::init()
 	}
 	else
 	{
-		qDebug() << "Supernovae::init supernovae.json does not exist - copying default file to " << sneJsonPath;
+		qDebug() << "Supernovae::init supernovae.json does not exist - copying default file to " << QDir::toNativeSeparators(sneJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Supernovae::init using supernovae.json file: " << sneJsonPath;
+	qDebug() << "Supernovae::init using file: " << QDir::toNativeSeparators(sneJsonPath);
 
 	readJsonFile();
 
@@ -358,11 +359,11 @@ void Supernovae::restoreDefaultJsonFile(void)
 	QFile src(":/Supernovae/supernovae.json");
 	if (!src.copy(sneJsonPath))
 	{
-		qWarning() << "Supernovae::restoreDefaultJsonFile cannot copy json resource to " + sneJsonPath;
+		qWarning() << "Supernovae::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(sneJsonPath);
 	}
 	else
 	{
-		qDebug() << "Supernovae::init copied default supernovae.json to " << sneJsonPath;
+		qDebug() << "Supernovae::init copied default supernovae.json to " << QDir::toNativeSeparators(sneJsonPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(sneJsonPath);
@@ -431,7 +432,7 @@ QVariantMap Supernovae::loadSNeMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Supernovae::loadSNeMap cannot open " << path;
+	    qWarning() << "Supernovae::loadSNeMap cannot open " << QDir::toNativeSeparators(path);
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -467,7 +468,7 @@ int Supernovae::getJsonFileVersion(void)
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Supernovae::init cannot open " << sneJsonPath;
+		qWarning() << "Supernovae::init cannot open " << QDir::toNativeSeparators(sneJsonPath);
 		return jsonVersion;
 	}
 

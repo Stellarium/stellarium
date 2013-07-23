@@ -45,6 +45,7 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QUrl>
+#include <QDir>
 
 MpcImportWindow::MpcImportWindow() :
     downloadReply(0),
@@ -1033,12 +1034,12 @@ void MpcImportWindow::saveBookmarks()
 			StelJsonParser::write(jsonRoot, &bookmarksFile);
 			bookmarksFile.close();
 
-			qDebug() << "Bookmarks file saved to" << bookmarksFilePath;
+			qDebug() << "Bookmarks file saved to" << QDir::toNativeSeparators(bookmarksFilePath);
 			return;
 		}
 		else
 		{
-			qDebug() << "Unable to write bookmarks file to" << bookmarksFilePath;
+			qDebug() << "Unable to write bookmarks file to" << QDir::toNativeSeparators(bookmarksFilePath);
 		}
 	}
 	catch (std::exception & e)

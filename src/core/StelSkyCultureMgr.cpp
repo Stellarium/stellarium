@@ -30,6 +30,7 @@
 #include <QDebug>
 #include <QMap>
 #include <QMapIterator>
+#include <QDir>
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
@@ -54,7 +55,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << dir;
+			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << QDir::toNativeSeparators(dir);
 		}
 	}	
 }
@@ -78,7 +79,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
-		qWarning() << "Invalid sky culture directory: " << cultureDir;
+		qWarning() << "Invalid sky culture directory: " << QDir::toNativeSeparators(cultureDir);
 		return false;
 	}
 	currentSkyCultureDir = cultureDir;
@@ -149,7 +150,7 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 	if (culture=="")
 	{
 		qWarning() << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
-		           << directory << "\"): could not find directory";
+			   << QDir::toNativeSeparators(directory) << "\"): could not find directory";
 		return "";
 	}
 	return q_(culture);

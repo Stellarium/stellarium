@@ -44,7 +44,7 @@ void TestStelFileMgr::initTestCase()
 		QFAIL(qPrintable("could not set the working directory to: "+workingDir));
 	}
 
-	qDebug() << "working directory: " << QDir::currentPath();
+	qDebug() << "working directory: " << QDir::toNativeSeparators(QDir::currentPath());
 
 	StelFileMgr::init();
 
@@ -92,7 +92,7 @@ void TestStelFileMgr::initTestCase()
 	path << "./"+partialPath1;
 	path << workingDir+"/"+partialPath2;
 	StelFileMgr::setSearchPaths(path);
-	qDebug() << "search paths are:  " << StelFileMgr::getSearchPaths();
+	qDebug() << "search paths are:  " << QDir::toNativeSeparators(StelFileMgr::getSearchPaths());
 }
 
 void TestStelFileMgr::cleanupTestCase()
@@ -103,7 +103,7 @@ void TestStelFileMgr::cleanupTestCase()
 		QFile f(p);
 		if (!f.remove())
 		{
-			qWarning() << "could not clean up file:" << workingDir + "/" + p;
+			qWarning() << "could not clean up file:" << QDir::toNativeSeparators(workingDir + "/" + p);
 		}
 	}
 
@@ -113,7 +113,7 @@ void TestStelFileMgr::cleanupTestCase()
 	{
 		if (!QDir().rmdir(testDirs.at(i)))
 		{
-			qWarning() << "could not clean up directory:" << workingDir + "/" + testDirs.at(i);
+			qWarning() << "could not clean up directory:" << QDir::toNativeSeparators(workingDir + "/" + testDirs.at(i));
 		}
 	}
 }

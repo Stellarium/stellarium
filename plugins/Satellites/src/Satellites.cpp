@@ -49,6 +49,7 @@
 #include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
+#include <QDir>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -182,11 +183,11 @@ void Satellites::init()
 	}
 	else
 	{
-		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << catalogPath;
+		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
 	}
 
-	qDebug() << "Satellites: loading catalog file:" << catalogPath;
+	qDebug() << "Satellites: loading catalog file:" << QDir::toNativeSeparators(catalogPath);
 
 	// create satellites according to content os satellites.json file
 	loadCatalog();
@@ -256,7 +257,7 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 	else
 	{
 		qWarning() << "Satellites: WARNING: failed to back up catalog file as" 
-		           << backupPath;
+			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}
 
@@ -562,11 +563,11 @@ void Satellites::restoreDefaultCatalog()
 	QFile src(":/satellites/satellites.json");
 	if (!src.copy(catalogPath))
 	{
-		qWarning() << "Satellites::restoreDefaultJsonFile cannot copy json resource to " + catalogPath;
+		qWarning() << "Satellites::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(catalogPath);
 	}
 	else
 	{
-		qDebug() << "Satellites::init copied default satellites.json to " << catalogPath;
+		qDebug() << "Satellites::init copied default satellites.json to " << QDir::toNativeSeparators(catalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(catalogPath);
@@ -695,7 +696,7 @@ const QString Satellites::readCatalogVersion()
 	QFile satelliteJsonFile(catalogPath);
 	if (!satelliteJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Satellites::init cannot open " << catalogPath;
+		qWarning() << "Satellites::init cannot open " << QDir::toNativeSeparators(catalogPath);
 		return jsonVersion;
 	}
 
@@ -729,12 +730,12 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 
 	if (!jsonFile.open(QIODevice::WriteOnly))
 	{
-		qWarning() << "Satellites::saveTleMap() cannot open for writing:" << path;
+		qWarning() << "Satellites::saveTleMap() cannot open for writing:" << QDir::toNativeSeparators(path);
 		return false;
 	}
 	else
 	{
-		qDebug() << "Satellites::saveTleMap() writing to:" << path;
+		qDebug() << "Satellites::saveTleMap() writing to:" << QDir::toNativeSeparators(path);
 		parser.write(map, &jsonFile);
 		jsonFile.close();
 		return true;
@@ -749,7 +750,7 @@ QVariantMap Satellites::loadDataMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "Satellites::loadTleMap cannot open " << path;
+		qWarning() << "Satellites::loadTleMap cannot open " << QDir::toNativeSeparators(path);
 	else
 		map = StelJsonParser::parse(&jsonFile).toMap();
 
@@ -1491,7 +1492,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				//TODO: Error warnings? --BM
 			}
 			else
-				qDebug() << "Satellites: unprocessed line " << lineNumber <<  " in file " << openFile.fileName();
+				qDebug() << "Satellites: unprocessed line " << lineNumber <<  " in file " << QDir::toNativeSeparators(openFile.fileName());
 		}
 	}
 }

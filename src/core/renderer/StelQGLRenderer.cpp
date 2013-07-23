@@ -103,7 +103,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 		QImage image;
 		// Texture in error state will be returned (loaded from NULL image), and
 		// when bound, the placeholder texture will be used.
-		qWarning() << "createTextureBackend failed: file \"" << filename << "\" not found.";
+		qWarning() << "createTextureBackend failed: file \"" << QDir::toNativeSeparators(filename) << "\" not found.";
 		return StelQGLTextureBackend::constructFromImage(this, QString(), params, image);
 	}
 
@@ -126,7 +126,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 			{
 				// Texture in error state will be returned (loaded from NULL image), and
 				// when bound, the placeholder texture will be used.
-				qWarning() << "createTextureBackend failed: found image file \"" << fullPath
+				qWarning() << "createTextureBackend failed: found image file \"" << QDir::toNativeSeparators(fullPath)
 				           << "\" but failed to load image data. ";
 			}
 			//Uploads to GL

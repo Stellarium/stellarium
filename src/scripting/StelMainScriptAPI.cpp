@@ -491,7 +491,7 @@ void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "cannot play sound" << filename << ":" << e.what();
+		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename) << ":" << e.what();
 		return;
 	}
 
@@ -527,7 +527,7 @@ void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, fl
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "cannot play video" << filename << ":" << e.what();
+		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename) << ":" << e.what();
 		return;
 	}
 
