@@ -95,6 +95,9 @@ public slots:
 //! Set whether observability will execute or not:
 	void enableObservability(bool b);
 
+private slots:
+	void updateMessageText();
+
 private:
 
 
@@ -103,6 +106,8 @@ private:
 	QByteArray normalStyleSheet;
 	QByteArray nightStyleSheet;
 
+	void setDateFormat(bool b) { dmyFormat=b; }
+	bool getDateFormat(void) { return dmyFormat; }
 
 //! Computes the Hour Angle (culmination=0h) in absolute value (from 0h to 12h).
 //! @param latitude latitude of the observer (in radians).
@@ -243,6 +248,9 @@ private:
 //! Just the names of the months.
 	QString months[12];
 
+//! Using for storage date format [i18n]
+	bool dmyFormat;
+
 //! Equatorial and local coordinates of currently-selected source.
 	Vec3d EquPos, LocPos;
 
@@ -263,6 +271,9 @@ private:
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
 
+	QString msgSetsAt, msgRoseAt, msgSetAt, msgRisesAt, msgCircumpolar, msgNoRise, msgCulminatesAt, msgCulminatedAt, msgH, msgM, msgS;
+	QString msgSrcNotObs, msgNoACRise, msgGreatElong, msgLargSSep, msgAtDeg, msgNone, msgAcroRise, msgNoAcroRise, msgCosmRise, msgNoCosmRise;
+	QString msgWholeYear, msgNotObs, msgAboveHoriz, msgToday, msgThisYear, msgPrevFullMoon, msgNextFullMoon;
 
 };
 
