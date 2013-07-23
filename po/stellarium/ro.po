@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-21 18:55+0700\n"
-"PO-Revision-Date: 2013-07-20 03:54+0000\n"
+"POT-Creation-Date: 2013-07-22 19:06+0700\n"
+"PO-Revision-Date: 2013-07-22 13:50+0000\n"
 "Last-Translator: Gaman Gabriel <gamangabriel@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-22 05:27+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-07-23 04:56+0000\n"
+"X-Generator: Launchpad (build 16700)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -238,7 +238,7 @@ msgstr "steauă variabilă cataclismică"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "sistem binar eclipsat"
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
@@ -266,7 +266,7 @@ msgstr "Magnitudine: <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Câmp de magnitudine: <b>%1</b>%2<b>%3</b> (Sistem fotometric: %4)"
 
 #: src/core/modules/StarWrapper.cpp:201
 #, qt-format
@@ -294,7 +294,7 @@ msgstr "Paralaxa: %1\""
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Perioada de luminozitate minimă: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
@@ -309,12 +309,12 @@ msgstr "Perioada: %1 zile"
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Următorul minim al luminozităţii : %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Următorul maxim al luminozităţii : %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
@@ -324,7 +324,7 @@ msgstr "Durata eclipsei: %1%"
 #: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Timpul răsăritului: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:272
@@ -342,6 +342,10 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Această formulă istorică a fost obţinută de C. Schoch în 1931 şi a fost "
+"folosită de G. Henriksson în articolul său <em>Teoria Relativităţii "
+"Confirmată a lui Einstein de Eclipsele Solare Antice</em> (%1). Vezi pentru "
+"mai multe informaţii %2here%3."
 
 #: src/core/StelCore.cpp:1441
 #, qt-format
@@ -349,6 +353,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Această ecuaţie empirică a fost publicată de G. M. Clemence în articolul "
+"<em>Pe sistemul constantelor astronomice</em> (%1)."
 
 #: src/core/StelCore.cpp:1444
 #, qt-format
@@ -376,6 +382,9 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Tablele lui Tuckerman (1962, 1964) listează poziţiile Soarelui, Lunii şi "
+"planetelor la interval de 5 şi 10 zile de la 601 BCE spre 1649 CE. Acelaşi "
+"raport a fost adoptat în tablele syzygy ale lui Goldstine (1973)."
 
 #: src/core/StelCore.cpp:1456
 #, qt-format
@@ -384,6 +393,9 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Această ecuaţie a fost publicată de P. M. Muller şi F. R. Stephenson în "
+"articolul <em>Acceleraţiile Pământului şi ale Lunii din observaţiile "
+"astronomice timpurii</em> (%1)."
 
 #: src/core/StelCore.cpp:1459
 #, qt-format
@@ -391,6 +403,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Această ecuaţie a fost publicată de F. R. Stephenson în articolul "
+"<em>Observaţii Astronomice Pre-Telescopice</em> (%1)."
 
 #: src/core/StelCore.cpp:1462
 #, qt-format
@@ -415,10 +429,14 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"Această formulă a fost publicată de F. R. Stephenson şi L. V. Morrison în "
+"articolul <em>Schimbări pe termen lung în rotaţia Pământului - 700 B.C. to "
+"A.D. 1980</em> (%1)."
 
 #: src/core/StelCore.cpp:1471
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
+"Acest algoritm este folosit in programul de planetariu Guide 7 pentru PC."
 
 #: src/core/StelCore.cpp:1474
 msgid ""
@@ -464,6 +482,8 @@ msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
+"F. R. Stephenson a publicat această formulă în cartea sa <em>Eclipse "
+"Istorice şi Rotaţia Pământului</em> (%1)."
 
 #: src/core/StelCore.cpp:1492
 msgid ""
@@ -530,7 +550,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1513
 msgid "Used by default."
-msgstr ""
+msgstr "Folosit ca implicit."
 
 #: src/core/StelCore.cpp:1516
 #, qt-format
@@ -860,7 +880,7 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1126
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritmul"
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Without correction"
@@ -940,7 +960,7 @@ msgstr "Meeus (1998) (cu Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1158
 msgid "Meeus & Simons (2000)"
@@ -952,7 +972,7 @@ msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1160
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1161
 msgid "Morrison & Stephenson (2004, 2005)"
@@ -1152,7 +1172,7 @@ msgstr "Fereastra de consolă a scriptului"
 #. TRANSLATORS: Keyboard action group name
 #: src/gui/StelGui.cpp:178 src/translations.h:684
 msgid "Windows"
-msgstr "Ferestre"
+msgstr "Windows"
 
 #: src/gui/StelGuiItems.cpp:333 src/gui/StelGuiItems.cpp:756
 msgid "Space"
@@ -1340,6 +1360,12 @@ msgstr "an"
 #: src/main.cpp:372
 msgid "This system does not support OpenGL."
 msgstr "Acest sistem nu suportă OpenGL."
+
+#: src/main.cpp:378
+msgid ""
+"Your platform does not support minimal required OpenGL 1.2. Please upgrade "
+"drivers for graphics card."
+msgstr ""
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
@@ -3444,7 +3470,7 @@ msgstr "Fereastra de configurare a observabilităţii"
 
 #: src/translations.h:645
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Configuraţia plugin-ului Oculare"
 
 #: src/translations.h:646 plugins/Oculars/src/ui_ocularDialog.h:1019
 msgid "Ocular view"
@@ -3530,7 +3556,7 @@ msgstr "Scripturi"
 
 #: src/translations.h:680
 msgid "Run landscapes script from file"
-msgstr ""
+msgstr "Rulează scriptul peisajului din fişier"
 
 #: src/translations.h:681
 msgid "Show and zoom Moon"
@@ -3762,7 +3788,7 @@ msgstr "omega"
 
 #: src/ui_searchDialogGui.h:620
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Litere greceşti pentru denumirile Bayer"
 
 #: src/ui_searchDialogGui.h:621
 msgid "Object"
@@ -4534,6 +4560,8 @@ msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Utilizează 0.12 pentru munţi superbi, 0.2 pentru peisaje rurale frumoase, "
+"0.35 pentru condiţii întunecate."
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -4905,7 +4933,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:492
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "Plugin Oculare"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:378
@@ -5096,15 +5124,15 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "Înălţimea cipului (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Lăţimea pixelului (microni):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Înălţimea pixelului (microni):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1057
 #: plugins/Oculars/src/ui_ocularDialog.h:1065
@@ -5291,13 +5319,15 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:377
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Plugin Sateliţi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Plugin-ul Sateliţi prezice poziţiile sateliţilor artificiali în orbita "
+"Pământului."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:385
 msgid "Notes for users"
@@ -5307,6 +5337,8 @@ msgstr "Note pentru utilizatori"
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Sateliţii şi orbitele lor sunt afişate doar atunci când observatorul este pe "
+"Pământ."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:387
 msgid ""
@@ -5355,6 +5387,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Dacă dezactivezi actualizările prin Internet, poate ai vrea să actualizezi "
+"printr-un fişier de pe calcualtorul tău. Fişierul trebuie să fie în acelaşi "
+"format ca şi actualizările Celestrak (vezi %1 pentru un exemplu)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 msgid ""
@@ -8074,3 +8109,33 @@ msgstr ""
 
 #~ msgid "TLE data:"
 #~ msgstr "Date TLE:"
+
+#~ msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
+#~ msgstr ""
+#~ "Phobos eclipsând Soarele, aşa cum s-ar vedea de pe Olympus Mons , 10 Ian, "
+#~ "2068."
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 171 events in all!"
+#~ msgstr ""
+#~ "Protector de ecran cu diverse evenimente în Sistemul Solar. 171 evenimente "
+#~ "în total!"
+
+#~ msgid "A tour via western constellations."
+#~ msgstr "Un tur în constelaţiile vestice."
+
+#~ msgid ""
+#~ "Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
+#~ "need enable plugin for supernovae."
+#~ msgstr ""
+#~ "Strălucirea supernovei care a fost observată de Tycho Brahe în anul 1572. "
+#~ "Pentru demo-uri, pluginul pentru supernove necesită activat."
+
+#~ msgid "Quasars Plugin"
+#~ msgstr "Plugin Quasari"
+
+#~ msgid "Pulsars Plugin"
+#~ msgstr "Plugin Pulsari"
+
+#~ msgid "Actual field of view provided by this ocular/telescope combination"
+#~ msgstr "Câmpul de vedere actual asigurat de combinaţia ocular/telescop."
