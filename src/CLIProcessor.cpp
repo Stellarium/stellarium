@@ -27,6 +27,7 @@
 #include <iostream>
 
 #include <QApplication>
+#include <QDir>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
@@ -219,7 +220,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	{
 		try
 		{
-			QString newShotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
+			QString newShotDir = QDir::fromNativeSeparators(argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString());
 			if (!newShotDir.isEmpty())
 				StelFileMgr::setScreenshotDir(newShotDir);
 		}
@@ -230,7 +231,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	}
 	else
 	{
-		const QString& confScreenshotDir = confSettings->value("main/screenshot_dir", "").toString();
+		const QString& confScreenshotDir = QDir::fromNativeSeparators(confSettings->value("main/screenshot_dir", "").toString());
 		if (!confScreenshotDir.isEmpty())
 		{
 			try

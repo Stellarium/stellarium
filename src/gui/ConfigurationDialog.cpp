@@ -62,6 +62,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QComboBox>
+#include <QDir>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
@@ -955,7 +956,7 @@ void ConfigurationDialog::downloadStars()
 	currentDownloadFile = new QFile(path);
 	if (!currentDownloadFile->open(QIODevice::WriteOnly))
 	{
-		qWarning() << "Can't open a writable file for storing new star catalog: " << path;
+		qWarning() << "Can't open a writable file for storing new star catalog: " << QDir::toNativeSeparators(path);
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
 		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));

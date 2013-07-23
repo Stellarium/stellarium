@@ -49,6 +49,7 @@
 #include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
+#include <QDir>
 
 #define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 
@@ -198,11 +199,11 @@ void Pulsars::init()
 	}
 	else
 	{
-		qDebug() << "Pulsars::init pulsars.json does not exist - copying default file to " << jsonCatalogPath;
+		qDebug() << "Pulsars::init pulsars.json does not exist - copying default file to " << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Pulsars::init using pulsars.json file: " << jsonCatalogPath;
+	qDebug() << "Pulsars::init using file: " << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -411,11 +412,11 @@ void Pulsars::restoreDefaultJsonFile(void)
 	QFile src(":/Pulsars/pulsars.json");
 	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "Pulsars::restoreDefaultJsonFile cannot copy json resource to " + jsonCatalogPath;
+		qWarning() << "Pulsars::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(jsonCatalogPath);
 	}
 	else
 	{
-		qDebug() << "Pulsars::init copied default pulsars.json to " << jsonCatalogPath;
+		qDebug() << "Pulsars::init copied default pulsars.json to " << QDir::toNativeSeparators(jsonCatalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
@@ -484,7 +485,7 @@ QVariantMap Pulsars::loadPSRMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Pulsars::loadPSRMap cannot open " << path;
+	    qWarning() << "Pulsars::loadPSRMap cannot open " << QDir::toNativeSeparators(path);
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -517,7 +518,7 @@ int Pulsars::getJsonFileFormatVersion(void)
 	QFile jsonPSRCatalogFile(jsonCatalogPath);
 	if (!jsonPSRCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Pulsars::init cannot open " << jsonCatalogPath;
+		qWarning() << "Pulsars::init cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 

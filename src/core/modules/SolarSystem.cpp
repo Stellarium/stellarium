@@ -58,6 +58,7 @@
 #include <QStringList>
 #include <QTextStream>
 #include <QVariant>
+#include <QDir>
 
 SolarSystem::SolarSystem() 
 	: moonScale(1.)
@@ -253,10 +254,10 @@ void SolarSystem::loadPlanets()
 			{
 				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
 				if (QFile::rename(solarSystemFile, newName))
-					qWarning() << "Invalid Solar System file" << solarSystemFile << "has been renamed to" << newName;
+					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "has been renamed to" << QDir::toNativeSeparators(newName);
 				else
 				{
-					qWarning() << "Invalid Solar System file" << solarSystemFile << "cannot be removed!";
+					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "cannot be removed!";
 					qWarning() << "Please either delete it, rename it or move it elsewhere.";
 				}
 			}
@@ -275,7 +276,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
-		qWarning() << "ERROR while parsing" << filePath;
+		qWarning() << "ERROR while parsing" << QDir::toNativeSeparators(filePath);
 		return false;
 	}
 
@@ -874,11 +875,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 	if (systemPlanets.isEmpty())
 	{
-		qWarning() << "No Solar System objects loaded from" << filePath;
+		qWarning() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
 		return false;
 	}
 
-	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits from" << filePath;
+	qDebug() << "Loaded" << readOk << "/" << totalPlanets << "planet orbits from" << QDir::toNativeSeparators(filePath);
 	return true;
 }
 

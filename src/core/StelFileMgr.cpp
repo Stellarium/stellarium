@@ -59,7 +59,7 @@ void StelFileMgr::init()
 
 	if (!QFile(userDir).exists())
 	{
-		qWarning() << "User config directory does not exist: " << userDir;
+		qWarning() << "User config directory does not exist: " << QDir::toNativeSeparators(userDir);
 	}
 	try
 	{
@@ -411,7 +411,9 @@ QString StelFileMgr::getInstallationDir()
 	else
 	{
 		qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-			<< installLocation.filePath() << " (we checked for " << checkFile.filePath() << ").";
+			<< QDir::toNativeSeparators(installLocation.filePath())
+			<< " (we checked for " << QDir::toNativeSeparators(checkFile.filePath())
+			<< ").";
 		throw (std::runtime_error("NOT FOUND"));
 	}
 }
@@ -426,12 +428,12 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 	QFileInfo userDirFI(newDir);
 	if (!userDirFI.exists() || !userDirFI.isDir())
 	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: " << userDirFI.filePath();
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: " << QDir::toNativeSeparators(userDirFI.filePath());
 		throw std::runtime_error("NOT_VALID");
 	}
 	else if (!userDirFI.isWritable())
 	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: " << userDirFI.filePath();
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: " << QDir::toNativeSeparators(userDirFI.filePath());
 		throw std::runtime_error("NOT_VALID");
 	}
 	screenshotDir = userDirFI.filePath();
@@ -491,7 +493,7 @@ void StelFileMgr::makeSureDirExistsAndIsWritable(const QString& dirFullPath)
 	if (!uDir.exists())
 	{
 		// The modules directory doesn't exist, lets create it.
-		qDebug() << "Creating directory " << uDir.filePath();
+		qDebug() << "Creating directory " << QDir::toNativeSeparators(uDir.filePath());
 		if (!QDir("/").mkpath(uDir.filePath()))
 		{
 			throw std::runtime_error(QString("Could not create directory: " +uDir.filePath()).toStdString());

@@ -33,6 +33,7 @@
 #include <QPlastiqueStyle>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include <QDir>
 #ifdef Q_OS_WIN
 #include <windows.h>
 #ifdef _MSC_BUILD
@@ -173,12 +174,12 @@ int main(int argc, char **argv)
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug() << "Writing log file to:" << StelLogger::getLogFileName();
+	qDebug() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
 	qDebug() << "File search paths:";
 	int n=0;
 	foreach (QString i, StelFileMgr::getSearchPaths())
 	{
-		qDebug() << " " << n << ". " << i;
+		qDebug() << " " << n << ". " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
@@ -260,18 +261,18 @@ int main(int argc, char **argv)
 			QFile(configFileFullPath).rename(backupFile);
 			copyDefaultConfigFile(configFileFullPath);
 			confSettings = new QSettings(configFileFullPath, StelIniFormat);
-			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << backupFile;
+			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << QDir::toNativeSeparators(backupFile);
 		}
 	}
 	else
 	{
-		qDebug() << "Config file " << configFileFullPath << " does not exist. Copying the default file.";
+		qDebug() << "Config file " << QDir::toNativeSeparators(configFileFullPath) << " does not exist. Copying the default file.";
 		copyDefaultConfigFile(configFileFullPath);
 		confSettings = new QSettings(configFileFullPath, StelIniFormat);
 	}
 
 	Q_ASSERT(confSettings);
-	qDebug() << "Config file is: " << configFileFullPath;
+	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
@@ -321,7 +322,7 @@ int main(int argc, char **argv)
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "ERROR while loading custom font " << fileFont << " : " << e.what();
+			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont) << " : " << e.what();
 		}
 	}
 

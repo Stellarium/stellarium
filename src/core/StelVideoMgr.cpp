@@ -19,6 +19,7 @@
 #include "StelVideoMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include <QDebug>
+#include <QDir>
 
 
 StelVideoMgr::StelVideoMgr()
@@ -180,7 +181,7 @@ void StelVideoMgr::showVideo(const QString& id, bool show)
 #else  // HAVE_QT_PHONON
 void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
-	qWarning() << "[StelVideoMgr] This build of Stellarium does not support video - cannot load video" << filename << id << x << y << show << alpha;
+	qWarning() << "[StelVideoMgr] This build of Stellarium does not support video - cannot load video" << QDir::toNativeSeparators(filename) << id << x << y << show << alpha;
 }
 StelVideoMgr::~StelVideoMgr() {;}
 void StelVideoMgr::playVideo(const QString&) {;}
