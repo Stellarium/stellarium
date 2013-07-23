@@ -20,6 +20,7 @@
 #include <QDebug>
 #include <QPluginLoader>
 #include <QSettings>
+#include <QDir>
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -245,7 +246,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		QPluginLoader loader(moduleFullPath);
 		if (!loader.load())
 		{
-			qWarning() << "Couldn't load the dynamic library: " << moduleFullPath << ": " << loader.errorString();
+			qWarning() << "Couldn't load the dynamic library: " << QDir::toNativeSeparators(moduleFullPath) << ": " << loader.errorString();
 			qWarning() << "Plugin " << dir << " will not be loaded.";
 			continue;
 		}
@@ -253,7 +254,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		QObject* obj = loader.instance();
 		if (!obj)
 		{
-			qWarning() << "Couldn't open the dynamic library: " << moduleFullPath << ": " << loader.errorString();
+			qWarning() << "Couldn't open the dynamic library: " << QDir::toNativeSeparators(moduleFullPath) << ": " << loader.errorString();
 			qWarning() << "Plugin " << dir << " will not be open.";
 			continue;
 		}

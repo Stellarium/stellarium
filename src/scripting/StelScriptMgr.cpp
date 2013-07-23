@@ -196,7 +196,7 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 		QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(s);
+			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
 			emit(scriptDebug(msg));
 			qWarning() << msg;
 			return QString();
@@ -217,7 +217,7 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 	}
 	catch(std::runtime_error& e)
 	{
-		QString msg = QString("WARNING: script file %1 could not be found: %2").arg(s).arg(e.what());
+		QString msg = QString("WARNING: script file %1 could not be found: %2").arg(QDir::toNativeSeparators(s)).arg(e.what());
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 		return QString();
@@ -246,7 +246,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(s);
+			QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
 			emit(scriptDebug(msg));
 			qWarning() << msg;
 			return QString();
@@ -289,7 +289,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 	}
 	catch(std::runtime_error& e)
 	{
-		QString msg = QString("WARNING: script file %1 could not be found: %2").arg(s).arg(e.what());
+		QString msg = QString("WARNING: script file %1 could not be found: %2").arg(QDir::toNativeSeparators(s)).arg(e.what());
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 		return QString();
@@ -338,7 +338,7 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	}
 	catch (std::runtime_error& e)
 	{
-		QString msg = QString("WARNING: could not find script file %1: %2").arg(fileName).arg(e.what());
+		QString msg = QString("WARNING: could not find script file %1: %2").arg(QDir::toNativeSeparators(fileName)).arg(e.what());
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 		return false;
@@ -346,7 +346,7 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	QFile fic(absPath);
 	if (!fic.open(QIODevice::ReadOnly))
 	{
-		QString msg = QString("WARNING: cannot open script: %1").arg(fileName);
+		QString msg = QString("WARNING: cannot open script: %1").arg(QDir::toNativeSeparators(fileName));
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 		return false;
@@ -485,7 +485,7 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 				}
 				catch(std::runtime_error& e)
 				{
-					qWarning() << "WARNING: script include:" << fileName << e.what();
+					qWarning() << "WARNING: script include:" << QDir::toNativeSeparators(fileName) << e.what();
 					return false;
 				}
 			}
@@ -494,12 +494,12 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 			bool ok = fic.open(QIODevice::ReadOnly);
 			if (ok)
 			{
-				qDebug() << "script include: " << path;
+				qDebug() << "script include: " << QDir::toNativeSeparators(path);
 				preprocessScript(fic, output, scriptDir);
 			}
 			else
 			{
-				qWarning() << "WARNING: could not open script include file for reading:" << path;
+				qWarning() << "WARNING: could not open script include file for reading:" << QDir::toNativeSeparators(path);
 				return false;
 			}
 		}

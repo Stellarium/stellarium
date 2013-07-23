@@ -51,6 +51,7 @@
 #include <QSharedPointer>
 #include <QStringList>
 #include <QPixmap>
+#include <QDir>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -201,11 +202,11 @@ void Exoplanets::init()
 	}
 	else
 	{
-		qDebug() << "Exoplanets::init catalog.json does not exist - copying default file to " << jsonCatalogPath;
+		qDebug() << "Exoplanets::init exoplanets.json does not exist - copying default file to " << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Exoplanets::init using catalog.json file: " << jsonCatalogPath;
+	qDebug() << "Exoplanets::init using file: " << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -411,11 +412,11 @@ void Exoplanets::restoreDefaultJsonFile(void)
 	QFile src(":/Exoplanets/exoplanets.json");
 	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "Exoplanets::restoreDefaultJsonFile cannot copy json resource to " + jsonCatalogPath;
+		qWarning() << "Exoplanets::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(jsonCatalogPath);
 	}
 	else
 	{
-		qDebug() << "Exoplanets::init copied default exoplanets.json to " << jsonCatalogPath;
+		qDebug() << "Exoplanets::init copied default exoplanets.json to " << QDir::toNativeSeparators(jsonCatalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
@@ -484,7 +485,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Exoplanets::loadEPMap cannot open " << path;
+	    qWarning() << "Exoplanets::loadEPMap cannot open " << QDir::toNativeSeparators(path);
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -517,7 +518,7 @@ int Exoplanets::getJsonFileFormatVersion(void)
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Exoplanets::init cannot open " << jsonCatalogPath;
+		qWarning() << "Exoplanets::init cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 

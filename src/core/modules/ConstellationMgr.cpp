@@ -26,6 +26,7 @@
 #include <QRegExp>
 #include <QString>
 #include <QStringList>
+#include <QDir>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -128,7 +129,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "No constellationsart.fab file found for sky culture " << skyCultureDir;
+		qDebug() << "No constellationsart.fab file found for sky culture " << QDir::toNativeSeparators(skyCultureDir);
 	}
 
 	try
@@ -147,7 +148,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR: while loading new constellation data for sky culture "
-			<< skyCultureDir << ", reason: " << e.what() << endl;
+			<< QDir::toNativeSeparators(skyCultureDir) << ", reason: " << e.what() << endl;
 	}
 
 	// TODO: do we need to have an else { clearBoundaries(); } ?
@@ -302,7 +303,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QFile in(fileName);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation data file" << fileName  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation data file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
 		Q_ASSERT(0);
 	}
 
@@ -367,7 +368,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QFile fic(artfileName);
 	if (!fic.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation art file" << fileName  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation art file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
 		return;
 	}
 
@@ -435,7 +436,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			{
 				// if the texture isn't found in the skycultures/[culture] directory,
 				// try the central textures diectory.
-				qWarning() << "WARNING, could not locate texture file " << texfile
+				qWarning() << "WARNING, could not locate texture file " << QDir::toNativeSeparators(texfile)
 					 << " in the skycultures/" << cultureName
 					 << " directory...  looking in general textures/ directory...";
 				try
@@ -444,7 +445,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				}
 				catch(std::exception& e2)
 				{
-					qWarning() << "ERROR: could not find texture, " << texfile << ": " << e2.what();
+					qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile) << ": " << e2.what();
 				}
 			}
 
@@ -616,7 +617,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	QFile commonNameFile(namesFile);
 	if (!commonNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qDebug() << "Cannot open file" << namesFile;
+		qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
 		return;
 	}
 
@@ -649,7 +650,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 		if (!recRx.exactMatch(record))
 		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << namesFile;
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile);
 		}
 		else
 		{
@@ -1029,7 +1030,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	QFile dataFile(boundaryFile);
 	if (!dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Boundary file " << boundaryFile << " not found";
+		qWarning() << "Boundary file " << QDir::toNativeSeparators(boundaryFile) << " not found";
 		return false;
 	}
 

@@ -33,6 +33,7 @@
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <QTemporaryFile>
+#include <QDir>
 
 SatellitesImportDialog::SatellitesImportDialog() :
     downloadMgr(0),
@@ -195,7 +196,7 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 	// Then, see if there was an error...
 	if (networkReply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Satellites: failed to download" << url 
+		qWarning() << "Satellites: failed to download " << url
 		           << networkReply->errorString();
 		return;
 	}
@@ -334,7 +335,7 @@ void SatellitesImportDialog::populateList()
 		else
 		{
 			qDebug() << "Satellites: cannot open file"
-			         << sourceFiles[f]->fileName();
+				 << QDir::toNativeSeparators(sourceFiles[f]->fileName());
 		}
 	}
 	// Clear the disk...

@@ -31,6 +31,7 @@
 #include <QRegExp>
 #include <QString>
 #include <QVariant>
+#include <QDir>
 
 bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir)
 {
@@ -62,7 +63,7 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 					}
 					catch(std::runtime_error& e)
 					{
-						qWarning() << "WARNING: script include:" << fileName << e.what();
+						qWarning() << "WARNING: script include:" << QDir::toNativeSeparators(fileName) << e.what();
 						return false;
 					}
 				}
@@ -71,12 +72,12 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 				bool ok = fic.open(QIODevice::ReadOnly);
 				if (ok)
 				{
-					qDebug() << "script include: " << path;
+					qDebug() << "script include: " << QDir::toNativeSeparators(path);
 					preprocessScript(fic, output, scriptDir);
 				}
 				else
 				{
-					qWarning() << "WARNING: could not open script include file for reading:" << path;
+					qWarning() << "WARNING: could not open script include file for reading:" << QDir::toNativeSeparators(path);
 					return false;
 				}
 			}

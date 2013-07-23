@@ -28,6 +28,7 @@
 #include <QSettings>
 #include <QString>
 #include <QTextStream>
+#include <QDir>
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -287,7 +288,7 @@ void StarMgr::copyDefaultConfigFile()
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/default");
 		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
-		qDebug() << "Creates file " << starConfigFileFullPath;
+		qDebug() << "Creates file " << QDir::toNativeSeparators(starConfigFileFullPath);
 		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), starConfigFileFullPath);
 	}
 	catch (std::runtime_error& e)
@@ -411,7 +412,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		// The file is supposed to be checked, but we can't find it
 		if (checked)
 		{
-			qWarning() << QString("Warning: could not find star catalog %1").arg(catalogFileName);
+			qWarning() << QString("Warning: could not find star catalog %1").arg(QDir::toNativeSeparators(catalogFileName));
 			setCheckFlag(catDesc.value("id").toString(), false);
 		}
 		return false;
@@ -419,14 +420,14 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 	// Possibly fixes crash on Vista
 	if (!StelFileMgr::isReadable(catalogFilePath))
 	{
-		qWarning() << QString("Warning: User does not have permissions to read catalog %1").arg(catalogFilePath);
+		qWarning() << QString("Warning: User does not have permissions to read catalog %1").arg(QDir::toNativeSeparators(catalogFilePath));
 		return false;
 	}
 
 	if (!checked)
 	{
 		// The file is not checked but we found it, maybe from a previous download/version
-		qWarning() << "Found file " << catalogFilePath << ", checking md5sum..";
+		qWarning() << "Found file " << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum..";
 
 		QFile fic(catalogFilePath);
 		fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered);
@@ -455,7 +456,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		fic.close();
 		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 		{
-			qWarning() << "Error: File " << catalogFileName << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
+			qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
 			fic.remove();
 			return false;
 		}
@@ -473,7 +474,7 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		ZoneArray *pos(zoneArrays[z->level]);
 		if (pos)
 		{
-			qWarning() << catalogFileName << ", " << z->level << ": duplicate level";
+			qWarning() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
 			delete z;
 		}
 		else
@@ -547,7 +548,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR while loading data from "
-					   << ("stars/default/" + cat_hip_sp_file_name)
+					   << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name))
 					   << ": " << e.what();
 		}
 	}
@@ -566,7 +567,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		catch (std::runtime_error& e)
 		{
 			qWarning() << "ERROR while loading data from "
-					   << ("stars/default/" + cat_hip_cids_file_name) << ": " << e.what();
+					   << QDir::toNativeSeparators(("stars/default/" + cat_hip_cids_file_name)) << ": " << e.what();
 		}
 	}
 
@@ -582,11 +583,11 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	commonNamesIndexI18n.clear();
 	commonNamesIndex.clear();
 
-	qDebug() << "Loading star names from" << commonNameFile;
+	qDebug() << "Loading star names from" << QDir::toNativeSeparators(commonNameFile);
 	QFile cnFile(commonNameFile);
 	if (!cnFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "WARNING - could not open" << commonNameFile;
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(commonNameFile);
 		return 0;
 	}
 
@@ -612,7 +613,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 		totalRecords++;
 		if (!recordRx.exactMatch(record))
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
 				   << " - record does not match record pattern";
 			continue;
 		}
@@ -623,14 +624,14 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 			unsigned int hip = recordRx.capturedTexts().at(1).toUInt(&ok);
 			if (!ok)
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
 					   << " - failed to convert " << recordRx.capturedTexts().at(1) << "to a number";
 				continue;
 			}
 			QString englishCommonName = recordRx.capturedTexts().at(2).trimmed();
 			if (englishCommonName.isEmpty())
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << commonNameFile
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
 					   << " - empty name field";
 				continue;
 			}
@@ -662,11 +663,11 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	sciAdditionalNamesMapI18n.clear();
 	sciAdditionalNamesIndexI18n.clear();
 
-	qDebug() << "Loading star names from" << sciNameFile;
+	qDebug() << "Loading star names from" << QDir::toNativeSeparators(sciNameFile);
 	QFile snFile(sciNameFile);
 	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "WARNING - could not open" << sciNameFile;
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(sciNameFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(snFile.readAll()).split('\n');
@@ -688,7 +689,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 		const QStringList& fields = record.split('|');
 		if (fields.size()!=2)
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
 				   << " - record does not match record pattern";
 			continue;
 		}
@@ -699,7 +700,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			unsigned int hip = fields.at(0).toUInt(&ok);
 			if (!ok)
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
 					   << " - failed to convert " << fields.at(0) << "to a number";
 				continue;
 			}
@@ -707,7 +708,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			QString sci_name_i18n = fields.at(1).trimmed();
 			if (sci_name_i18n.isEmpty())
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << sciNameFile
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
 					   << " - empty name field";
 				continue;
 			}
@@ -737,11 +738,11 @@ void StarMgr::loadGCVS(const QString& GCVSFile)
 	varStarsMapI18n.clear();
 	varStarsIndexI18n.clear();
 
-	qDebug() << "Loading variable stars from" << GCVSFile;
+	qDebug() << "Loading variable stars from" << QDir::toNativeSeparators(GCVSFile);
 	QFile vsFile(GCVSFile);
 	if (!vsFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "WARNING - could not open" << GCVSFile;
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(GCVSFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(vsFile.readAll()).split('\n');
@@ -765,7 +766,7 @@ void StarMgr::loadGCVS(const QString& GCVSFile)
 		unsigned int hip = fields.at(0).toUInt(&ok);
 		if (!ok)
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << GCVSFile
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GCVSFile)
 				   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
 		}
@@ -1274,7 +1275,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 	catch(std::runtime_error& e)
 	{
-		qDebug() << "Could not load star_names.fab for sky culture " << skyCultureDir << ": " << e.what();
+		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir) << ": " << e.what();
 	}
 
 	try

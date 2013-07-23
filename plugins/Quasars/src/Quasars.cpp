@@ -49,6 +49,7 @@
 #include <QStringList>
 #include <QVariant>
 #include <QVariantMap>
+#include <QDir>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -193,11 +194,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "Quasars::init catalog.json does not exist - copying default file to " << catalogJsonPath;
+		qDebug() << "Quasars::init quasars.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Quasars::init using catalog.json file: " << catalogJsonPath;
+	qDebug() << "Quasars::init using file: " << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 
@@ -408,11 +409,11 @@ void Quasars::restoreDefaultJsonFile(void)
 	QFile src(":/Quasars/quasars.json");
 	if (!src.copy(catalogJsonPath))
 	{
-		qWarning() << "Quasars::restoreDefaultJsonFile cannot copy json resource to " + catalogJsonPath;
+		qWarning() << "Quasars::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(catalogJsonPath);
 	}
 	else
 	{
-		qDebug() << "Quasars::init copied default catalog.json to " << catalogJsonPath;
+		qDebug() << "Quasars::init copied default catalog.json to " << QDir::toNativeSeparators(catalogJsonPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(catalogJsonPath);
@@ -482,7 +483,7 @@ QVariantMap Quasars::loadQSOMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Quasars::loadQSOMap cannot open " << path;
+	    qWarning() << "Quasars::loadQSOMap cannot open " << QDir::toNativeSeparators(path);
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -515,7 +516,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars::init cannot open " << catalogJsonPath;
+		qWarning() << "Quasars::init cannot open " << QDir::toNativeSeparators(catalogJsonPath);
 		return jsonVersion;
 	}
 

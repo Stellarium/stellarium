@@ -28,6 +28,7 @@
 
 #include <QSettings>
 #include <QFile>
+#include <QDir>
 
 
 StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror
@@ -120,7 +121,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newProjectorParams);
 
 	const QString customDistortionFileName = 
-	    conf.value("spheric_mirror/custom_distortion_file","").toString();
+	    QDir::fromNativeSeparators(conf.value("spheric_mirror/custom_distortion_file","").toString());
 	
 	if (customDistortionFileName.isEmpty())
 	{
@@ -335,7 +336,7 @@ bool StelViewportDistorterFisheyeToSphericMirror::loadDistortionFromFile
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: could not open custom_distortion_file:" << fileName << e.what();
+		qWarning() << "WARNING: could not open custom_distortion_file:" << QDir::toNativeSeparators(fileName) << e.what();
 		return false;
 	}
 	Q_ASSERT(file.error() != QFile::NoError);

@@ -41,6 +41,7 @@
 #include <QtPlugin>
 #include <QThread>
 #include <QTimer>
+#include <QDir>
 
 #ifndef DISABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
@@ -421,12 +422,12 @@ void StelMainGraphicsView::doScreenshot(void)
 
 	if (!shotDir.isDir())
 	{
-		qWarning() << "ERROR requested screenshot directory is not a directory: " << shotDir.filePath();
+		qWarning() << "ERROR requested screenshot directory is not a directory: " << QDir::toNativeSeparators(shotDir.filePath());
 		return;
 	}
 	else if (!shotDir.isWritable())
 	{
-		qWarning() << "ERROR requested screenshot directory is not writable: " << shotDir.filePath();
+		qWarning() << "ERROR requested screenshot directory is not writable: " << QDir::toNativeSeparators(shotDir.filePath());
 		return;
 	}
 
@@ -438,8 +439,8 @@ void StelMainGraphicsView::doScreenshot(void)
 			break;
 	}
 
-	qDebug() << "INFO Saving screenshot in file: " << shotPath.filePath();
+	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
 	if (!im.save(shotPath.filePath())) {
-		qWarning() << "WARNING failed to write screenshot to: " << shotPath.filePath();
+		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }

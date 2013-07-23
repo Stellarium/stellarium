@@ -30,6 +30,7 @@
 #include <QFileInfo>
 #include <QHttp>
 #include <QUrl>
+#include <QDir>
 #include <QBuffer>
 #include <QThread>
 #include <QNetworkAccessManager>
@@ -146,7 +147,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		catch (std::runtime_error e)
 		{
-			qWarning() << "WARNING : Can't parse JSON description: " << fileName << ": " << e.what();
+			qWarning() << "WARNING : Can't parse JSON description: " << QDir::toNativeSeparators(fileName) << ": " << e.what();
 			errorOccured = true;
 			f.close();
 			return;

@@ -65,6 +65,7 @@
 #include <QSysInfo>
 #include <QTextStream>
 #include <QTimer>
+#include <QDir>
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -245,7 +246,7 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
 	QString cachePath = StelFileMgr::getCacheDir();
 
-	qDebug() << "Cache directory is: " << cachePath;
+	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));

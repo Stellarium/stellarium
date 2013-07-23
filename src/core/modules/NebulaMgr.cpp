@@ -436,7 +436,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	QFile ngcNameFile(catNGCNames);
 	if (!ngcNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "NGC name data file" << catNGCNames << "not found.";
+		qWarning() << "NGC name data file" << QDir::toNativeSeparators(catNGCNames) << "not found.";
 		return false;
 	}
 
@@ -495,7 +495,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				istr >> num;
 				if (istr.status()!=QTextStream::Ok)
 				{
-					qWarning() << "cannot read Caldwell number at line" << lineNumber << "of" << catNGCNames;
+					qWarning() << "cannot read Caldwell number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
 					continue;
 				}
 
@@ -513,7 +513,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				istr >> num;
 				if (istr.status()!=QTextStream::Ok)
 				{
-					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << catNGCNames;
+					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
 					continue;
 				}
 
@@ -525,7 +525,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 			readOk++;
 		}
 		else
-			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << catNGCNames;
+			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
 	}
 	ngcNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "NGC name records successfully";
