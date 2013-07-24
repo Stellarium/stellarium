@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 19:06+0700\n"
+"POT-Creation-Date: 2013-07-24 03:02+0700\n"
 "PO-Revision-Date: 2013-06-04 06:44+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-23 04:48+0000\n"
+"X-Launchpad-Export-Date: 2013-07-24 05:18+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 "Language: bn\n"
 
@@ -826,31 +826,31 @@ msgstr "খুঁজে পাওয়া যায়নি"
 msgid "Found"
 msgstr "খুঁজে পাওয়া গেছে"
 
-#: src/gui/ConfigurationDialog.cpp:435 src/gui/ConfigurationDialog.cpp:437
+#: src/gui/ConfigurationDialog.cpp:436 src/gui/ConfigurationDialog.cpp:438
 msgid "Select screenshot directory"
 msgstr "স্ক্রীনশট ডিরেক্টরি নির্বাচন করুন"
 
-#: src/gui/ConfigurationDialog.cpp:661
+#: src/gui/ConfigurationDialog.cpp:662
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "প্রারম্ভিক দৃষ্টিসীমা : %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:669
+#: src/gui/ConfigurationDialog.cpp:670
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "দিগংশ / উন্নতি-এর প্রারম্ভিক দিক : %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:711
+#: src/gui/ConfigurationDialog.cpp:712
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:379
 msgid "Authors"
 msgstr "লেখকবৃন্দ"
 
-#: src/gui/ConfigurationDialog.cpp:712 src/gui/ViewDialog.cpp:447
+#: src/gui/ConfigurationDialog.cpp:713 src/gui/ViewDialog.cpp:447
 msgid "Contact"
 msgstr "যোগাযোগ"
 
-#: src/gui/ConfigurationDialog.cpp:795
+#: src/gui/ConfigurationDialog.cpp:796
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
@@ -859,19 +859,19 @@ msgstr "যোগাযোগ"
 msgid "Author"
 msgstr "লেখক"
 
-#: src/gui/ConfigurationDialog.cpp:799
+#: src/gui/ConfigurationDialog.cpp:800
 msgid "License"
 msgstr "অনুমোদন"
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:824
 msgid "Running script: "
 msgstr "চলমান স্ক্রিপ্ট : "
 
-#: src/gui/ConfigurationDialog.cpp:830
+#: src/gui/ConfigurationDialog.cpp:831
 msgid "Running script: [none]"
 msgstr "চলমান স্ক্রিপ্ট : [কিছুই না]"
 
-#: src/gui/ConfigurationDialog.cpp:895
+#: src/gui/ConfigurationDialog.cpp:896
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -879,16 +879,16 @@ msgstr ""
 "নতুন তারকাসূচি সংগ্রহ করা সম্পূর্ণ হয়েছে !\n"
 "এদের দেখার জন্য Stellarium নতুন করে চালু করুন ।"
 
-#: src/gui/ConfigurationDialog.cpp:899
+#: src/gui/ConfigurationDialog.cpp:900
 msgid "All available star catalogs have been installed."
 msgstr "সমস্ত উপলব্ধ তারকাসূচি ইনস্টল করা হয়ে গেছে ।"
 
-#: src/gui/ConfigurationDialog.cpp:904
+#: src/gui/ConfigurationDialog.cpp:905
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 থেকে %2 সূচিগুলি সংগ্রহ করুন"
 
-#: src/gui/ConfigurationDialog.cpp:911
+#: src/gui/ConfigurationDialog.cpp:912
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -897,7 +897,7 @@ msgstr ""
 "সংগ্রহ করা হচ্ছে %1...\n"
 "(এই উইন্ডোটি বন্ধ করা যেতে পারে)"
 
-#: src/gui/ConfigurationDialog.cpp:918
+#: src/gui/ConfigurationDialog.cpp:919
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -908,7 +908,7 @@ msgstr ""
 "তারকা সংখ্যা : %2 মিলিয়ন\n"
 "ঔজ্জ্বল্যতার সীমা : %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:961 src/gui/ConfigurationDialog.cpp:997
+#: src/gui/ConfigurationDialog.cpp:962 src/gui/ConfigurationDialog.cpp:998
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -917,11 +917,11 @@ msgstr ""
 "ডাউনলোডে ত্রুটি হয়েছে %1 :\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1049
+#: src/gui/ConfigurationDialog.cpp:1050
 msgid "Verifying file integrity..."
 msgstr "ফাইলের অখণ্ডতা পরীক্ষা করা হচ্ছে..."
 
-#: src/gui/ConfigurationDialog.cpp:1053
+#: src/gui/ConfigurationDialog.cpp:1054
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -931,123 +931,123 @@ msgstr ""
 "ফাইলটি নষ্ট হয়ে গেছে ।"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1126
+#: src/gui/ConfigurationDialog.cpp:1127
 msgid "Algorithm of"
 msgstr "এর কার্যপ্রনালী"
 
-#: src/gui/ConfigurationDialog.cpp:1137
+#: src/gui/ConfigurationDialog.cpp:1138
 msgid "Without correction"
 msgstr "সংশোধন ছাড়া"
 
-#: src/gui/ConfigurationDialog.cpp:1138
+#: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schoch (1931)"
 msgstr "Schoch (১৯৩১)"
 
-#: src/gui/ConfigurationDialog.cpp:1139
+#: src/gui/ConfigurationDialog.cpp:1140
 msgid "Clemence (1948)"
 msgstr "Clemence (১৯৪৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1141
 msgid "IAU (1952)"
 msgstr "IAU (১৯৫২)"
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1142
 msgid "Astronomical Ephemeris (1960)"
 msgstr "জ্যোতির্বৈজ্ঞানিক পঞ্জিকা (১৯৬০)"
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (১৯৬২, ১৯৬৪) এবং Goldstine (১৯৭৩)"
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller এবং Stephenson (১৯৭৫)"
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Stephenson (1978)"
 msgstr "Stephenson (১৯৭৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel এবং Zech (১৯৭৯)"
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison এবং Stephenson (১৯৮২)"
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson এবং Morrison (১৯৮৪)"
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1149
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson এবং Houlden (১৯৮৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1150
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (১৯৮৭, ১৯৮৯)"
 
-#: src/gui/ConfigurationDialog.cpp:1150
+#: src/gui/ConfigurationDialog.cpp:1151
 msgid "Borkowski (1988)"
 msgstr "Borkowski (১৯৮৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1151
+#: src/gui/ConfigurationDialog.cpp:1152
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel এবং Zech (১৯৮৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze এবং Chapront (১৯৯১)"
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson এবং Morrison (১৯৯৫)"
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1155
 msgid "Stephenson (1997)"
 msgstr "Stephenson (১৯৯৭)"
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (১৯৯৮) (Chapront, Chapront-Touze এবং Francou (১৯৯৭) সহ)"
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1158
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus এবং Simons (২০০০)"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck এবং Pfleger (২০০০)"
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1161
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold এবং Dershowitz (২০০২, ২০০৭)"
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison এবং Stephenson (২০০৪, ২০০৫)"
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak এবং Meeus (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Reijs (2006)"
 msgstr "Reijs (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Banjevic (2006)"
 msgstr "Banjevic (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1168
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
@@ -1409,11 +1409,11 @@ msgstr "যেখানে"
 msgid "year"
 msgstr "বছর"
 
-#: src/main.cpp:372
+#: src/main.cpp:373
 msgid "This system does not support OpenGL."
 msgstr "এই সিস্টেম OpenGL সমর্থন করে না ।"
 
-#: src/main.cpp:378
+#: src/main.cpp:381
 msgid ""
 "Your platform does not support minimal required OpenGL 1.2. Please upgrade "
 "drivers for graphics card."
@@ -3138,7 +3138,7 @@ msgstr "জিম্বাবোয়ে"
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
 #: src/translations.h:534 src/ui_dateTimeDialogGui.h:298
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Date and Time"
 msgstr "তারিখ ও সময় ব্যবহারের সহজ ব্যবহারগুলি"
 
@@ -3332,32 +3332,32 @@ msgid "Atmosphere"
 msgstr "বায়ুমন্ডল প্রদর্শন"
 
 #: src/translations.h:584 src/ui_viewDialog.h:1254
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Azimuthal grid"
 msgstr "দিগংশিক ছক প্রদর্শন"
 
 #: src/translations.h:585 src/ui_viewDialog.h:1276
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Cardinal points"
 msgstr "দিকচিহ্ন প্রদর্শন"
 
 #: src/translations.h:586
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation art"
 msgstr "নক্ষত্রমন্ডলীর চিত্রাবলী প্রদর্শন"
 
 #: src/translations.h:587
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Constellation boundaries"
 msgstr "নক্ষত্রমন্ডলীর সীমারেখা প্রদর্শন"
 
 #: src/translations.h:588
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:281
 msgid "Constellation labels"
 msgstr "নক্ষত্রমন্ডলীর নামসমূহ প্রদর্শন"
 
 #: src/translations.h:589
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
 msgid "Constellation lines"
 msgstr "নক্ষত্রমন্ডলীর রেখাসমূহ প্রদর্শন"
 
@@ -3370,22 +3370,22 @@ msgid "Ecliptic J2000 grid"
 msgstr "সৌরপথীয় J2000 ছক"
 
 #: src/translations.h:592
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Ecliptic line"
 msgstr "সৌরপথ প্রদর্শন"
 
 #: src/translations.h:593
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Equator line"
 msgstr "নিরক্ষরেখা প্রদর্শন"
 
 #: src/translations.h:594 src/ui_viewDialog.h:1252
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial grid"
 msgstr "নিরক্ষীয় ছক প্রদর্শন"
 
 #: src/translations.h:595 src/ui_viewDialog.h:1251
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equatorial J2000 grid"
 msgstr "ইকুয়েটোরিয়াল J2000 ছক প্রদর্শন"
 
@@ -3394,7 +3394,7 @@ msgid "Fog"
 msgstr "কুয়াশা প্রদর্শন"
 
 #: src/translations.h:597 src/ui_viewDialog.h:1255
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic grid"
 msgstr "নক্ষত্রলৌকিক ছক প্রদর্শন"
 
@@ -3407,12 +3407,12 @@ msgid "Ground"
 msgstr "ভূমি প্রদর্শন"
 
 #: src/translations.h:600
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Horizon line"
 msgstr "দিগন্তরেখা প্রদর্শন"
 
 #: src/translations.h:601
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:318
 msgid "Meridian line"
 msgstr "মূলমধ্যরেখা প্রদর্শন"
 
@@ -3425,23 +3425,23 @@ msgid "Night mode"
 msgstr "নাইট মোড"
 
 #: src/translations.h:604
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet labels"
 msgstr "গ্রহের নাম প্রদর্শন"
 
 #: src/translations.h:605
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet orbits"
 msgstr "গ্রহের কক্ষপথ প্রদর্শন"
 
 #: src/translations.h:606
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet trails"
 msgstr "গ্রহের গমনপথ প্রদর্শন"
 
 #: src/translations.h:607 src/ui_viewDialog.h:1198 src/ui_viewDialog.h:1217
 #: src/ui_viewDialog.h:1239
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Stars"
 msgstr "নক্ষত্র প্রদর্শন"
 
@@ -3621,7 +3621,7 @@ msgstr "বিভিন্ন উপস্থাপন পরিসংখ্য�
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:679 src/ui_configurationDialog.h:1166
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:448
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Scripts"
 msgstr "স্ক্রিপ্টসমূহ"
 
@@ -3683,7 +3683,7 @@ msgid "Refresh"
 msgstr "সতেজ করন"
 
 #: src/ui_locationDialogGui.h:389
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
 msgid "Location"
 msgstr "অবস্থান"
 
@@ -3711,7 +3711,7 @@ msgid "Add to list"
 msgstr "তালিকায় যোগ করুন"
 
 #: src/ui_locationDialogGui.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:143
 msgid "Latitude:"
 msgstr "অক্ষাংশ:"
 
@@ -3724,12 +3724,12 @@ msgstr ""
 "উদাহরণ:+1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Longitude:"
 msgstr "দ্রাঘিমাংশ:"
 
 #: src/ui_locationDialogGui.h:406
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Altitude:"
 msgstr "উচ্চতা:"
 
@@ -3922,12 +3922,12 @@ msgid "Markings"
 msgstr "চিহ্ন"
 
 #: src/ui_viewDialog.h:1192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Landscape"
 msgstr "ভূমিরূপ"
 
 #: src/ui_viewDialog.h:1194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:224
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "Starlore"
 msgstr "মহাকাশ সম্পর্কীয় নানা সংস্কৃতি"
 
@@ -3980,7 +3980,7 @@ msgid "Show atmosphere"
 msgstr "বায়ুমন্ডল প্রদর্শন করুন"
 
 #: src/ui_viewDialog.h:1212
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Light pollution:"
 msgstr "আলোক দূষন :"
 
@@ -3993,12 +3993,12 @@ msgid "Refraction/Extinction settings..."
 msgstr "প্রতিসরণ / বিলুপ্তি প্রদর্শিত হওয়ার বিন্য়াস ..."
 
 #: src/ui_viewDialog.h:1218
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Absolute scale:"
 msgstr "পরম মান :"
 
 #: src/ui_viewDialog.h:1219
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Relative scale:"
 msgstr "আপেক্ষিক মান :"
 
@@ -4007,7 +4007,7 @@ msgid "Milky Way brightness:"
 msgstr "ছায়াপথের ঔজ্জ্বলতা:"
 
 #: src/ui_viewDialog.h:1221
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Twinkle:"
 msgstr "তারার ঝিকমিক:"
 
@@ -4073,7 +4073,7 @@ msgstr "তারামণ্ডলের কাল্পনিক চিত্�
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1249
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
 msgstr "চিত্রগুলির উজ্জ্বলতা:"
 
@@ -4202,11 +4202,8 @@ msgstr "সমস্ত উপলব্ধ"
 msgid "Display no information"
 msgstr "কোন তথ্য দেখাবেন না"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1870
-#: plugins/Observability/src/Observability.cpp:628
-#: plugins/Observability/src/Observability.cpp:629
-#: plugins/Observability/src/Observability.cpp:631
-#: plugins/Observability/src/Observability.cpp:632
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1871
+#: plugins/Observability/src/Observability.cpp:233
 msgid "None"
 msgstr "কোনটি না"
 
@@ -4349,7 +4346,7 @@ msgid "seconds"
 msgstr "সেকেন্ড"
 
 #: src/ui_configurationDialog.h:1065
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Startup date and time"
 msgstr "শুরুর তারিখ এবং সময়"
 
@@ -4729,12 +4726,12 @@ msgstr "দিক নির্দেশ"
 msgid "Displays compass bearing marks along the horizon"
 msgstr "দিগন্ত বরাবর কম্পাস ভারবহন চিহ্ন প্রদর্শন করে ।"
 
-#: plugins/Oculars/src/Oculars.cpp:81
+#: plugins/Oculars/src/Oculars.cpp:82
 #: plugins/Oculars/src/ui_ocularDialog.h:1017
 msgid "Oculars"
 msgstr "দূরবীন দর্শন বিন্যাস"
 
-#: plugins/Oculars/src/Oculars.cpp:84
+#: plugins/Oculars/src/Oculars.cpp:85
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
@@ -4744,164 +4741,164 @@ msgstr ""
 "এবং দৃষ্টিক্ষেত্র পরিবর্তন করা যায় ।)তাছাড়া এটি একটি সংবেদক ফ্রেম এবং একটি "
 "দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র প্রদর্শন করতে পারে ।"
 
-#: plugins/Oculars/src/Oculars.cpp:785
+#: plugins/Oculars/src/Oculars.cpp:786
 msgid "Please select an object before switching to ocular view."
 msgstr "দূরবীন দর্শন করতে আগে কোন একটি জ্যোতিষ্ক নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:881
+#: plugins/Oculars/src/Oculars.cpp:882
 msgid "&Previous ocular"
 msgstr "&পূর্ববর্তী দূরবীন দর্শন বিন্যাস"
 
-#: plugins/Oculars/src/Oculars.cpp:882
+#: plugins/Oculars/src/Oculars.cpp:883
 msgid "&Next ocular"
 msgstr "&পরবর্তী দূরবীন দর্শন বিন্যাস"
 
-#: plugins/Oculars/src/Oculars.cpp:883
+#: plugins/Oculars/src/Oculars.cpp:884
 msgid "Select &ocular"
 msgstr "&দূরবীন দর্শন বিন্যাস নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:930
+#: plugins/Oculars/src/Oculars.cpp:931
 msgid "Toggle &crosshair"
 msgstr "&লক্ষ স্থির করার ক্রসটি অদলবদল করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:939
+#: plugins/Oculars/src/Oculars.cpp:940
 msgid "Configure &Oculars"
 msgstr "'দূরবীন দর্শন বিন্যাস' বিন্যাস করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:948
+#: plugins/Oculars/src/Oculars.cpp:949
 msgid "Toggle &CCD"
 msgstr "অদলবদল &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:956
+#: plugins/Oculars/src/Oculars.cpp:957
 msgid "Toggle &Telrad"
 msgstr "অদলবদল &দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/Oculars.cpp:966
+#: plugins/Oculars/src/Oculars.cpp:967
 msgid "&Previous CCD"
 msgstr "&পূর্ববর্তী CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:967
+#: plugins/Oculars/src/Oculars.cpp:968
 msgid "&Next CCD"
 msgstr "&পরবর্তী CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:968
+#: plugins/Oculars/src/Oculars.cpp:969
 msgid "&Select CCD"
 msgstr "CCD &নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:990
+#: plugins/Oculars/src/Oculars.cpp:991
 msgid "&Rotate CCD"
 msgstr "CCD &ঘোরান"
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1023
 msgid "&Reset rotation"
 msgstr "&ঘূর্ণন পুনঃস্থাপন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1544
+#: plugins/Oculars/src/Oculars.cpp:1545
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
 #, qt-format
 msgid "Ocular #%1"
 msgstr "দূরবীন দর্শন বিন্যাস #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1549
+#: plugins/Oculars/src/Oculars.cpp:1550
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "দূরবীন দর্শন বিন্যাস #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1563
+#: plugins/Oculars/src/Oculars.cpp:1564
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "দূরবীন দর্শন বিন্যাস FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1570
+#: plugins/Oculars/src/Oculars.cpp:1571
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "দূরবীন দর্শন বিন্যাস aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1582
+#: plugins/Oculars/src/Oculars.cpp:1583
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 #, qt-format
 msgid "Lens #%1"
 msgstr "লেন্স #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1586
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "লেন্স #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1591
+#: plugins/Oculars/src/Oculars.cpp:1592
 msgid "Lens: none"
 msgstr "লেন্স: কিছু নেই"
 
-#: plugins/Oculars/src/Oculars.cpp:1601 plugins/Oculars/src/Oculars.cpp:1658
+#: plugins/Oculars/src/Oculars.cpp:1602 plugins/Oculars/src/Oculars.cpp:1659
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 #, qt-format
 msgid "Telescope #%1"
 msgstr "দূরবীন #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1606 plugins/Oculars/src/Oculars.cpp:1663
+#: plugins/Oculars/src/Oculars.cpp:1607 plugins/Oculars/src/Oculars.cpp:1664
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "দূরবীন #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1617
+#: plugins/Oculars/src/Oculars.cpp:1618
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
 #, qt-format
 msgid "Magnification: %1"
 msgstr "বর্ধিতকরণ: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1625
+#: plugins/Oculars/src/Oculars.cpp:1626
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "FOV: %1"
 msgstr "দৃষ্টিসীমা: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1635
+#: plugins/Oculars/src/Oculars.cpp:1636
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "মাত্রা: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/Oculars.cpp:1641
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
 #, qt-format
 msgid "Sensor #%1"
 msgstr "সংবেদক #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1644
+#: plugins/Oculars/src/Oculars.cpp:1645
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:659
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "সংবেদক #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1866
+#: plugins/Oculars/src/Oculars.cpp:1867
 msgid "&Lens"
 msgstr "&লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1867
+#: plugins/Oculars/src/Oculars.cpp:1868
 msgid "&Previous lens"
 msgstr "&পূর্ববর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1868
+#: plugins/Oculars/src/Oculars.cpp:1869
 msgid "&Next lens"
 msgstr "&পরবর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1898
+#: plugins/Oculars/src/Oculars.cpp:1899
 msgid "&Telescope"
 msgstr "&দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1899
+#: plugins/Oculars/src/Oculars.cpp:1900
 msgid "&Previous telescope"
 msgstr "&পূর্ববর্তী দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1900
+#: plugins/Oculars/src/Oculars.cpp:1901
 msgid "&Next telescope"
 msgstr "&পরবর্তী দূরবীন"
 
@@ -5142,7 +5139,7 @@ msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCD এর দৃষ্টিসীমা পরিমাপের একক হিসাবে ডিগ্রি ও মিনিট ব্যবহার করুন"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1029
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:222
 msgid "General"
 msgstr "সার্বজনীন"
 
@@ -5265,12 +5262,12 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "পরিচিতি"
 
-#: plugins/Satellites/src/Satellites.cpp:65
+#: plugins/Satellites/src/Satellites.cpp:66
 #: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Satellites"
 msgstr "উপগ্রহ"
 
-#: plugins/Satellites/src/Satellites.cpp:68
+#: plugins/Satellites/src/Satellites.cpp:69
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
@@ -5278,7 +5275,7 @@ msgstr ""
 "NORAD TLE তথ্যের উপর ভিত্তি করে পৃথিবীর কৃত্রিম উপগ্রহগুলির অবস্থানের "
 "ভবিষ্যদ্বাণী করে"
 
-#: plugins/Satellites/src/Satellites.cpp:179
+#: plugins/Satellites/src/Satellites.cpp:180
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -5286,62 +5283,62 @@ msgstr ""
 "সূচনা ফাইল ব্যবহার করুন"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1594
+#: plugins/Satellites/src/Satellites.cpp:1595
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1596
+#: plugins/Satellites/src/Satellites.cpp:1597
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1598
+#: plugins/Satellites/src/Satellites.cpp:1599
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1600
+#: plugins/Satellites/src/Satellites.cpp:1601
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1602
+#: plugins/Satellites/src/Satellites.cpp:1603
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1604
+#: plugins/Satellites/src/Satellites.cpp:1605
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1606
+#: plugins/Satellites/src/Satellites.cpp:1607
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1608
+#: plugins/Satellites/src/Satellites.cpp:1609
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1610
+#: plugins/Satellites/src/Satellites.cpp:1611
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1612
+#: plugins/Satellites/src/Satellites.cpp:1613
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1623
+#: plugins/Satellites/src/Satellites.cpp:1624
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1625
+#: plugins/Satellites/src/Satellites.cpp:1626
 msgid "The International Space Station"
 msgstr ""
 
@@ -5723,11 +5720,11 @@ msgstr ""
 msgid "Select TLE Update File"
 msgstr "TLE সংশোধন ফাইল নির্বাচণ করুন"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid "Downloading data..."
 msgstr "তথ্য সংগ্রহ করা হচ্ছে..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:142
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
@@ -5735,22 +5732,22 @@ msgstr ""
 "Stellarium সংশোধন উত্স থেকে উপগ্রহ সংক্রান্ত তথ্য সংগ্রহ করছে । তাই একটু "
 "অপেক্ষা করুন..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:157
 msgid "Select TLE source file(s)..."
 msgstr "TLE উত্স ফাইল (গুলি) নির্বাচণ করুন..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:173
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:232
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:233
 msgid "Processing data..."
 msgstr "তথ্য প্রক্রিয়াকরণ করা হচ্ছে..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "No data could be downloaded. Try again later."
 msgstr "কোন তথ্য সংগ্রহ করা যায় নি, পরে আবার চেষ্টা করুন ।"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:359
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:360
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "তালিকা সংখ্যা : %1"
@@ -5971,11 +5968,11 @@ msgstr "কিছু চিহ্নিত করবেন না"
 msgid "Discard"
 msgstr "বাতিল"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:77
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid "Telescope Control"
 msgstr "দূরবীন নিয়ন্ত্রণ"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:80
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:81
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
@@ -5983,12 +5980,12 @@ msgstr ""
 "এই প্লাগইন Stellarium কে একটি কম্পিউটারাইজড মাউন্ট (a \"GoTo "
 "telescope\")দূরবীনে \"ঘোরানোর আদেশ\" পাঠাতে মঞ্জুর করে ।"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1666
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1667
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "দূরবীন #%1 নির্বাচিত জ্যোতিষ্কর দিকে তাক করে"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1671
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1672
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "দূরবীন #%1 স্ক্রিনের কেন্দ্রের দিকে তাক করে"
@@ -6392,62 +6389,62 @@ msgstr ""
 "প্রাদেশিক সময় অঞ্চলের পরিবর্তন মঞ্জুর করে ।"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "January"
 msgstr "জানুয়ারী"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "February"
 msgstr "ফেব্রুয়ারী"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "March"
 msgstr "মার্চ"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "April"
 msgstr "এপ্রিল"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "May"
 msgstr "মে"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "June"
 msgstr "জুন"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "July"
 msgstr "জুলাই"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "August"
 msgstr "আগষ্ট"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "September"
 msgstr "সেপ্টেম্বর"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "October"
 msgstr "অক্টোবর"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "November"
 msgstr "নভেম্বর"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "December"
 msgstr "ডিসেম্বর"
 
@@ -6604,7 +6601,7 @@ msgid ""
 msgstr "সময় ও তারিখ নীচের বারে প্রদর্শিত হওয়ার বিন্য়াস"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:207
 msgid "Time display format"
 msgstr "সময় প্রদর্শনের বিন্যাস"
 
@@ -6622,7 +6619,7 @@ msgid "24-hour format"
 msgstr "২৪ ঘন্টার বিন্যাস"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:196
 msgid "Date display format"
 msgstr "তারিখ প্রদর্শনের বিন্যাস"
 
@@ -6638,11 +6635,11 @@ msgstr "দিন-মাস-বছর"
 msgid "mm-dd-yyyy"
 msgstr "মাস-দিন-বছর"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:89
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
 msgstr "টেক্সট ইউজার ইন্টারফেস"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:92
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:93
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -6650,144 +6647,144 @@ msgstr ""
 "0.9.x সিরিজে শুরু টেক্সট ইউজার ইন্টারফেস (TUI) প্লাগইন যা সাধারণত "
 "গ্রহমণ্ডলীর নকশা সিস্টেমে ব্যবহৃত হয় ।"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:157
 msgid "Solar System body"
 msgstr "সৌরমন্ডলীয় জ্যোতিষ্ক"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:171
 msgid "Current date/time"
 msgstr "বর্তমান তারিখ / সময়"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Set time zone"
 msgstr "সময় অঞ্চল নির্ধারণ করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Day keys"
 msgstr "দিন নির্দেশক"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:178
 msgid "Startup date/time preset"
 msgstr "প্রারম্ভকালে তারিখ /সময় পূর্বনির্ধারণ"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:185
 msgid "system"
 msgstr "সিস্টেম"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "preset"
 msgstr "পূর্বনির্ধারণ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "mmddyyyy"
 msgstr "mmddyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "ddmmyyyy"
 msgstr "ddmmyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "yyyymmdd"
 msgstr "yyyymmdd"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:203
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:204
 msgid "12h"
 msgstr "১২ ঘন্টা"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:205
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
 msgid "24h"
 msgstr "২৪ ঘন্টা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:231
 msgid "Language"
 msgstr "ভাষা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Show stars"
 msgstr "নক্ষত্র দেখান"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Colors"
 msgstr "রঙ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Nebula names"
 msgstr "নীহারিকার নাম"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
 msgid "Nebula hints"
 msgstr "নীহারিকার সূত্র সংকেত"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:367
 msgid "Galactic plane line"
 msgstr "মহাজাগতিক সমতল রেখা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:396
 msgid "Effects"
 msgstr "আরোপিত প্রভাব"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
 msgid "Manual zoom"
 msgstr "হাতেহাতে কাছেদূরে করা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Magnitude scaling multiplier"
 msgstr "ঔজ্জ্বল্যতার মাত্রার গুণক"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:417
 msgid "Milky Way intensity:"
 msgstr "ছায়াপথের তীব্রতা :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:422
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Nebula label frequency:"
 msgstr "নীহারিকার নাম প্রদর্শণের ঘনত্ব :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:424
 msgid "Zoom duration:"
 msgstr "কাছেদূরের সময়কাল :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:429
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Cursor timeout:"
 msgstr "কার্সারের সময়সীমা :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:431
 msgid "Setting landscape sets location"
 msgstr "ভূমিরূপ নির্ধারণ স্থান ঠিক করে দেয়"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Run local script"
 msgstr "স্থানীয় স্ক্রিপ্ট চালান"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:458
 msgid "Stop running script"
 msgstr "চলমান স্ক্রিপ্টটি বন্ধ করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "CD/DVD script"
 msgstr "CD / DVD প্রয়োগ স্ক্রিপ্ট"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:468
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Administration"
 msgstr "প্রশাসন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
 msgid "Load default configuration"
 msgstr "প্রারম্ভিক সূচনা বিন্যাস আমদানি করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:479
 msgid "Save current configuration"
 msgstr "বর্তমান বিন্যাস সংরক্ষণ করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:482
 msgid "Shut down"
 msgstr "কাজ বন্ধ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:553
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:554
 msgid "[no TUI node]"
 msgstr "[কোন TUI নোড নেই]"
 
@@ -6823,16 +6820,16 @@ msgstr ""
 "সংগ্রহ করতে পারেন । এখনও বিশদ কাজ চলছে ।"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:149
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "অনুসন্ধান করুন  MPCএর %1:"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid "Only one result will be returned if the query is successful."
 msgstr "কোন অনুসন্ধান সফল হলে শুধুমাত্র একটি ফলাফল দেখাবে ।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
@@ -6840,7 +6837,7 @@ msgstr ""
 "ধূমকেতু এবং গ্রহাণু উভয়কেই তাদের সংখ্যা, নাম (ইংরাজীতে) বা ডাক নাম দিয়ে "
 "চিহ্নিত করা  যাবে ।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:160
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -7027,11 +7024,11 @@ msgstr "MPC format-এ কক্ষে ঘূর্ণায়মান জ্য�
 msgid "Solar System"
 msgstr "সৌরজগত"
 
-#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:72
 msgid "Historical Supernovae"
 msgstr "ঐতিহাসিক অতিনোভা"
 
-#: plugins/Supernovae/src/Supernovae.cpp:74
+#: plugins/Supernovae/src/Supernovae.cpp:75
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
@@ -7155,11 +7152,11 @@ msgstr "সংশোধনের হার (দিন):"
 msgid "[next update info]"
 msgstr "[পরবর্তী সংশোধন তথ্য]"
 
-#: plugins/Quasars/src/Quasars.cpp:70
+#: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
 msgstr "কোয়াসার"
 
-#: plugins/Quasars/src/Quasars.cpp:73
+#: plugins/Quasars/src/Quasars.cpp:74
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
@@ -7230,11 +7227,11 @@ msgstr "শুরু থেকেই প্রদর্শন চালু"
 msgid "Show quasars button on toolbar"
 msgstr "টুলবারে কোয়াসার বিকল্প প্রদর্শণ"
 
-#: plugins/Pulsars/src/Pulsars.cpp:70
+#: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
 msgstr "পালসার"
 
-#: plugins/Pulsars/src/Pulsars.cpp:73
+#: plugins/Pulsars/src/Pulsars.cpp:74
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:117
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
@@ -7435,11 +7432,11 @@ msgstr "পলসারদের বণ্টন প্রদর্শন সক
 msgid "Show pulsars button on toolbar"
 msgstr "টুলবারে পালসার বিকল্প প্রদর্শণ"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:72
+#: plugins/Exoplanets/src/Exoplanets.cpp:73
 msgid "Exoplanets"
 msgstr "বহির্গ্রহ"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:75
+#: plugins/Exoplanets/src/Exoplanets.cpp:76
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
@@ -7590,186 +7587,180 @@ msgstr ""
 "অস্তের দিনক্ষনও এই প্লাগইন থেকে জানা যায় ।<br><br>এই সম্পর্কিত কিছু সংজ্ঞা "
 "বিন্যাস উইন্ডোর পরিচিতি বিভাগে পাবেন ।"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jan"
 msgstr "জানুয়ারি"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Feb"
 msgstr "ফেব্রুয়ারী"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Mar"
 msgstr "মার্চ"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Apr"
 msgstr "এপ্রিল"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "May"
 msgstr "মে"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jun"
 msgstr "জুন"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jul"
 msgstr "জুলাই"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Aug"
 msgstr "আগষ্ট"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Sep"
 msgstr "সেপ্টেম্বর"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Oct"
 msgstr "অক্টোবর"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Nov"
 msgstr "নভেম্বর"
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Dec"
 msgstr "ডিসেম্বর"
 
-#: plugins/Observability/src/Observability.cpp:499
-#: plugins/Observability/src/Observability.cpp:500
-#: plugins/Observability/src/Observability.cpp:542
+#: plugins/Observability/src/Observability.cpp:217
 msgid "h"
 msgstr "h"
 
-#: plugins/Observability/src/Observability.cpp:499
-#: plugins/Observability/src/Observability.cpp:500
-#: plugins/Observability/src/Observability.cpp:542
+#: plugins/Observability/src/Observability.cpp:218
 msgid "m"
 msgstr "m"
 
-#: plugins/Observability/src/Observability.cpp:499
-#: plugins/Observability/src/Observability.cpp:500
-#: plugins/Observability/src/Observability.cpp:542
+#: plugins/Observability/src/Observability.cpp:219
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:509
+#: plugins/Observability/src/Observability.cpp:220
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "অস্ত: %1 (%2 পরে)"
 
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "উদয়: %1 (%2 পরে)"
 
-#: plugins/Observability/src/Observability.cpp:520
+#: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "অস্ত: %1 (%2 আগে)"
 
-#: plugins/Observability/src/Observability.cpp:521
+#: plugins/Observability/src/Observability.cpp:223
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "উদয়: %1 (%2 পরে)"
 
-#: plugins/Observability/src/Observability.cpp:525
+#: plugins/Observability/src/Observability.cpp:224
 msgid "Circumpolar."
 msgstr "মেরু পরিবৃত্তে অবস্থিত"
 
-#: plugins/Observability/src/Observability.cpp:525
+#: plugins/Observability/src/Observability.cpp:225
 msgid "No rise."
 msgstr "উদিত হবে না ।"
 
-#: plugins/Observability/src/Observability.cpp:547
+#: plugins/Observability/src/Observability.cpp:226
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "%1 এর সময়ে (%2 পরে) %3 দিগংশে মধ্যগগনে থাকবে ।"
 
-#: plugins/Observability/src/Observability.cpp:551
+#: plugins/Observability/src/Observability.cpp:227
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "%1 এর সময়ে (%2 আগে) %3 দিগংশে মধ্যগগনে থাকবে ।"
 
-#: plugins/Observability/src/Observability.cpp:592
+#: plugins/Observability/src/Observability.cpp:228
 msgid "Source is not observable."
 msgstr "নির্বাচিত জ্যোতিষ্কটি পর্যবেক্ষণ যোগ্য নয় ।"
 
-#: plugins/Observability/src/Observability.cpp:593
+#: plugins/Observability/src/Observability.cpp:229
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr ""
 "সূর্যদয় বা সূর্যাস্তের সময় নির্বাচিত জ্যোতিষ্কটি উদিত বা অস্তমিত হবে না ।"
 
-#: plugins/Observability/src/Observability.cpp:610
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Greatest elongation: "
 msgstr "সর্বোচ্চ অবস্থান (দ্রাঘন) বা সূর্যের সাথে কৌনিক দূরত্ব: "
 
-#: plugins/Observability/src/Observability.cpp:613
+#: plugins/Observability/src/Observability.cpp:231
 msgid "Largest Sun separation: "
 msgstr "সূর্য থেকে সর্বোচ্চ চ্যূতি: "
 
-#: plugins/Observability/src/Observability.cpp:616
+#: plugins/Observability/src/Observability.cpp:232
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " (%1 ডিগ্রি)"
 
-#: plugins/Observability/src/Observability.cpp:634
+#: plugins/Observability/src/Observability.cpp:234
 msgid "Acronychal rise/set"
 msgstr "সূর্যাস্তে উদয়/সূর্যদয়ে অস্ত"
 
-#: plugins/Observability/src/Observability.cpp:634
+#: plugins/Observability/src/Observability.cpp:235
 msgid "No Acronychal rise/set."
 msgstr "সূর্যাস্তে উদিত বা সূর্যদয়ে অস্তমিত হবে না ।"
 
-#: plugins/Observability/src/Observability.cpp:635
+#: plugins/Observability/src/Observability.cpp:236
 msgid "Cosmical rise/set"
 msgstr "সূর্যোদয়ে উদয়/সূর্যাস্তে অস্ত"
 
-#: plugins/Observability/src/Observability.cpp:635
+#: plugins/Observability/src/Observability.cpp:237
 msgid "No Cosmical rise/set."
 msgstr "সূর্যদয়ে উদিত বা সূর্যাস্তে অস্তমিত হবে না ।"
 
-#: plugins/Observability/src/Observability.cpp:681
+#: plugins/Observability/src/Observability.cpp:238
 msgid "Observable during the whole year."
 msgstr "সারা বছর ধরে দৃশ্যমান ।"
 
-#: plugins/Observability/src/Observability.cpp:685
+#: plugins/Observability/src/Observability.cpp:239
 msgid "Not observable at dark night."
 msgstr "রাতে দৃশ্যমান নয় ।"
 
-#: plugins/Observability/src/Observability.cpp:690
+#: plugins/Observability/src/Observability.cpp:240
 msgid "Nights above horizon: "
 msgstr "দিগন্তের উপরে দৃশ্যমানতার রাতগুলি: "
 
-#: plugins/Observability/src/Observability.cpp:707
+#: plugins/Observability/src/Observability.cpp:241
 msgid "TODAY:"
 msgstr "আজ:"
 
-#: plugins/Observability/src/Observability.cpp:716
+#: plugins/Observability/src/Observability.cpp:242
 msgid "THIS YEAR:"
 msgstr "এই বছর:"
 
-#: plugins/Observability/src/Observability.cpp:1450
+#: plugins/Observability/src/Observability.cpp:243
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "পূর্ববর্তী পূর্ণিমা: %1 %2 at %3:%4 । "
 
-#: plugins/Observability/src/Observability.cpp:1455
+#: plugins/Observability/src/Observability.cpp:244
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "পরবর্তী পূর্ণিমা: %1 %2 at %3:%4 । "
