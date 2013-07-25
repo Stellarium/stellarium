@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-24 03:02+0700\n"
-"PO-Revision-Date: 2013-07-02 00:17+0000\n"
+"PO-Revision-Date: 2013-07-25 04:02+0000\n"
 "Last-Translator: aydın <bestworst@msn.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-24 05:27+0000\n"
+"X-Launchpad-Export-Date: 2013-07-25 05:12+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -23,7 +23,7 @@ msgstr "Meridyen"
 
 #: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1271
 msgid "Ecliptic"
-msgstr "Tutulum"
+msgstr "Ekliptik"
 
 #: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1259
 msgid "Equator"
@@ -71,7 +71,7 @@ msgstr "Türü: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Büyüklük: <b>%1</b> (Sönümlenen değer: <b>%2</b>)"
+msgstr "Parlaklık: <b>%1</b> (Sönümlenen değer: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
@@ -166,12 +166,12 @@ msgstr "Görünürdeki Çap: %1"
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Yörüngesindeki dolanım süresi: %1 gün (%2 a)"
 
 #: src/core/modules/Planet.cpp:511
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Kendi etrafındaki dönüş süresi: %1"
 
 #: src/core/modules/Planet.cpp:512
 #, qt-format
@@ -217,7 +217,7 @@ msgstr "Parlaklık: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:60
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr "Görünen büyüklük: <b>%1</b> (sönümlenme ile birlikte)"
+msgstr "Görünen parlaklık: <b>%1</b> (sönümlenme ile birlikte)"
 
 #: src/core/modules/StarWrapper.cpp:139
 msgid "eruptive variable star"
@@ -241,7 +241,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
-msgstr ""
+msgstr "değişken yıldız"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
@@ -255,12 +255,12 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr "Büyüklük: <b>%1</b> (Sönümlenen değer: <b>%2</b>. B-V: <b>%3</b>)"
+msgstr "Parlaklık: <b>%1</b> (Sönümlenen değer: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:179 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr "Büyüklük: <b>%1</b> (B-V: <b>%2</b>)"
+msgstr "Parlaklık: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:199
 #, qt-format
@@ -705,7 +705,7 @@ msgstr "SA/DA (tarihinden): %1/%2"
 #: src/core/StelObject.cpp:111
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Galaktik boylam/enlem: %1/%2"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:124
 #: src/core/StelObject.cpp:127
@@ -856,7 +856,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1138
 msgid "Without correction"
-msgstr ""
+msgstr "Düzeltmeden"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schoch (1931)"
@@ -3433,11 +3433,11 @@ msgstr ""
 
 #: src/translations.h:641
 msgid "Observability"
-msgstr ""
+msgstr "Gözlenebilirlik"
 
 #: src/translations.h:642
 msgid "Observability configuration window"
-msgstr ""
+msgstr "Gözlenebilirlik yapılandırma penceresi"
 
 #: src/translations.h:645
 msgid "Oculars plugin configuration"
@@ -3517,7 +3517,7 @@ msgstr "Teleskopu ayarlanan koordinatlara taşı"
 
 #: src/translations.h:676
 msgid "Show renderer statistics"
-msgstr ""
+msgstr "İşlenmiş istatistikleri göster"
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:679 src/ui_configurationDialog.h:1166
@@ -3576,7 +3576,7 @@ msgstr "Kayıtlar"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1057
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "Klavye kısayollarını değiştir"
 
 #: src/ui_helpDialogGui.h:292
 msgid "Refresh"
@@ -3902,7 +3902,7 @@ msgstr "Bagil olcek"
 
 #: src/ui_viewDialog.h:1220
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Samanyolu parlaklığı"
 
 #: src/ui_viewDialog.h:1221
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
@@ -3972,7 +3972,7 @@ msgstr "Gorselleri goster"
 #: src/ui_viewDialog.h:1249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
-msgstr ""
+msgstr "Görsellerin parlaklığı"
 
 #: src/ui_viewDialog.h:1250
 msgid "Celestial Sphere"
@@ -4119,7 +4119,7 @@ msgstr "Özelleştirilmiş"
 
 #: src/ui_configurationDialog.h:1009
 msgid "Displayed fields"
-msgstr ""
+msgstr "Görüntülenen alanlar"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -4127,7 +4127,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Sağ açıklık/sapma (J2000)"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
@@ -4135,7 +4135,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1017
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Yükseklik/Azimuth"
 
 #: src/ui_configurationDialog.h:1018
 msgid "Visual magnitude"
@@ -4147,7 +4147,7 @@ msgstr "Mutlak parlaklık"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Katalog numarası/numaraları"
 
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
@@ -4160,7 +4160,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1025
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Sağ açıklık/sapma (tarih)"
 
 #: src/ui_configurationDialog.h:1027
 msgid "Galactic coordinates, equinox of J2000.0"
@@ -4168,7 +4168,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1029
 msgid "Longitude/Latitude (J2000)"
-msgstr ""
+msgstr "Boylam/Enlem (J2000)"
 
 #: src/ui_configurationDialog.h:1031
 msgid "Topocentric equatorial coordinates"
@@ -4176,11 +4176,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1033
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Saat açısı/sapması"
 
 #: src/ui_configurationDialog.h:1034
 msgid "Distance"
-msgstr ""
+msgstr "Mesafe"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
@@ -4188,7 +4188,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1038
 msgid "Size"
-msgstr ""
+msgstr "Büyüklük"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
@@ -4196,15 +4196,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
-msgstr ""
+msgstr "Ek bilgi 1"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Additional information 2"
-msgstr ""
+msgstr "Ek bilgi 2"
 
 #: src/ui_configurationDialog.h:1047
 msgid "Additional information 3"
-msgstr ""
+msgstr "Ek bilgi 3"
 
 #: src/ui_configurationDialog.h:1048
 msgid "Control"
@@ -4233,7 +4233,7 @@ msgstr "Etkin degilken, fare ve isikli gostergeyi sakla"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "Fare imleci zaman aşımı"
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
@@ -4282,7 +4282,7 @@ msgstr "Sistem Tarihi:"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Time correction"
-msgstr ""
+msgstr "Zaman düzeltme"
 
 #: src/ui_configurationDialog.h:1085
 msgid "Edit equation"
@@ -4334,7 +4334,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1107
 msgid "Show nebula background button"
-msgstr ""
+msgstr "Bulutsu arka plan düğmesini göster"
 
 #: src/ui_configurationDialog.h:1109
 msgid "Toggle vertical and horizontal image flip buttons."
@@ -4364,7 +4364,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1119
 msgid "Render Solar Shadows"
-msgstr ""
+msgstr "Güneş gölgelerini işle"
 
 #: src/ui_configurationDialog.h:1120
 msgid "Screenshots"
@@ -5723,7 +5723,7 @@ msgstr "Seçili uydu(ları) görüntüle"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:729
 msgid "Displayed"
-msgstr ""
+msgstr "Gösterilen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -6552,7 +6552,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:417
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Samanyolu yoğunluğu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Nebula label frequency:"
@@ -6564,7 +6564,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "İmleç zaman aşımı"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:431
 msgid "Setting landscape sets location"
@@ -7266,7 +7266,7 @@ msgstr "Eğiklik"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Angle Distance"
-msgstr ""
+msgstr "Açı mesafesi"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Discovered year"
@@ -7333,7 +7333,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
-msgstr ""
+msgstr "Gözlenebilirlik analizi"
 
 #: plugins/Observability/src/Observability.cpp:69
 msgid ""
@@ -7525,7 +7525,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "Gözlenebilirlik aracı"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
@@ -7547,7 +7547,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "Alacakaranlıkta güneş yüksekliği"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -7657,11 +7657,11 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
-msgstr ""
+msgstr "Gözlenebilirlik yapılandırma"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "Gözlenebilirlik aracı yapılandırması"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:362
 msgid "Showing Options"
@@ -7689,7 +7689,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
-msgstr ""
+msgstr "Yazıtipi rengi ve büyüklüğü"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
@@ -7705,7 +7705,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
-msgstr ""
+msgstr "Yazıtipi büyüklüğü"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
