@@ -620,22 +620,19 @@ void Planet::computePosition(const double date)
 
 	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-date)>deltaOrbitJD || !orbitCached))
 	{
-
-		// calculate orbit first (for line drawing)
-		double date_increment = re.siderealPeriod/ORBIT_SEGMENTS;
 		double calc_date;
 		// int delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
 		int delta_points;
 
 		if( date > lastOrbitJD )
 		{
-			delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
+			delta_points = (int)(0.5 + (date - lastOrbitJD)/deltaOrbitJD);
 		}
 		else
 		{
-			delta_points = (int)(-0.5 + (date - lastOrbitJD)/date_increment);
+			delta_points = (int)(-0.5 + (date - lastOrbitJD)/deltaOrbitJD);
 		}
-		double new_date = lastOrbitJD + delta_points*date_increment;
+		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
 		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), deltaOrbitJD, delta_points);
 
@@ -647,7 +644,7 @@ void Planet::computePosition(const double date)
 				if(d + delta_points >= ORBIT_SEGMENTS )
 				{
 					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*date_increment;
+					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
 
 					// date increments between points will not be completely constant though
 					computeTransMatrix(calc_date);
@@ -679,7 +676,7 @@ void Planet::computePosition(const double date)
 				if(d + delta_points < 0 )
 				{
 					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*date_increment;
+					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
 
 					computeTransMatrix(calc_date);
 					if (osculatingFunc) {
@@ -708,7 +705,7 @@ void Planet::computePosition(const double date)
 			// update all points (less efficient)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
-				calc_date = date + (d-ORBIT_SEGMENTS/2)*date_increment;
+				calc_date = date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
 				computeTransMatrix(calc_date);
 				if (osculatingFunc)
 				{
