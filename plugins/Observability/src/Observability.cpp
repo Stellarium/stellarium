@@ -845,7 +845,6 @@ void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 	hfloat = std::abs(hfloat);
 	double ffrac = std::modf(hfloat,&f1);
 	double ffrac2 = std::modf(60.*ffrac,&f2);
-	//FIXME: ffrac2 is unused variable; need fix
 	ffrac2 = std::modf(3600.*(ffrac-f2/60.),&f3);
 	h1 = (int)f1 ; h2 = (int)std::abs(f2+0.0*ffrac2) ; h3 = (int)std::abs(f3);
 } 

@@ -1589,7 +1589,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 			}
 			else
 			{
-				lensNumberLabel = QString (q_("Lens: none")); //FIXME
+				lensNumberLabel = QString (q_("Lens: none"));
 			}
 			renderer->drawText(TextParams(xPosition, yPosition, lensNumberLabel));
 			yPosition-=lineHeight;
