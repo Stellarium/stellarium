@@ -790,8 +790,15 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-	StelObjectP obj = omgr->getSelectedObject()[0];
 	QVariantMap map;
+	if (omgr->getSelectedObject().isEmpty())
+	{
+		debug("getObjectData WARNING - object not selected");
+		map.insert("found", false);
+		return map;
+	}
+
+	StelObjectP obj = omgr->getSelectedObject()[0];
 
 	if (!obj)
 	{
