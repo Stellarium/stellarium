@@ -168,7 +168,7 @@ public slots:
 	//! - localized-name : localized name
 	QVariantMap getObjectInfo(const QString& name);
 
-	//! Fetch a map with data about an selected object's position, magnitude and so on
+	//! Fetch a map with data about an latest selected object's position, magnitude and so on
 	//! @return a map of object data.  Keys:
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
