@@ -795,7 +795,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 	if (!obj)
 	{
-		debug("getObjectData WARNING - object not found" + obj->getEnglishName());
+		debug("getObjectData WARNING - object not found");
 		map.insert("found", false);
 		return map;
 	}
@@ -804,51 +804,9 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		map.insert("found", true);
 	}
 
-
-	Vec3d pos;
-	double ra, dec, alt, azi, glong, glat;
-	StelCore* core = StelApp::getInstance().getCore();
-
-	// ra/dec
-	pos = obj->getEquinoxEquatorialPos(core);
-	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
-
-	// ra/dec in J2000
-	pos = obj->getJ2000EquatorialPos(core);
-	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
-
-	// apparent altitude/azimuth
-	pos = obj->getAltAzPosApparent(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
-	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", azi*180./M_PI);
-
-	// geometric altitude/azimuth
-	pos = obj->getAltAzPosGeometric(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
-	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", azi*180./M_PI);
-
-	// galactic long/lat in J2000
-	pos = obj->getJ2000GalacticPos(core);
-	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", alt*180./M_PI);
-	map.insert("glat", azi*180./M_PI);
-
-	// magnitude
-	map.insert("vmag", obj->getVMagnitude(core, false));
-	map.insert("vmage", obj->getVMagnitude(core, true));
-
-	// angular size
-	map.insert("size", obj->getAngularSize(core));
-
-	// name & localized name
+	map = getObjectInfo(obj->getEnglishName());
+	// english name or designation
 	map.insert("name", obj->getEnglishName());
-	map.insert("localized-name", obj->getNameI18n());
 
 	return map;
 }
