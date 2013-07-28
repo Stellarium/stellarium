@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-19 01:17+0700\n"
-"PO-Revision-Date: 2011-11-10 13:25+0000\n"
-"Last-Translator: Vaidotas <Unknown>\n"
+"POT-Creation-Date: 2013-07-24 03:02+0700\n"
+"PO-Revision-Date: 2013-07-24 23:42+0000\n"
+"Last-Translator: Mindaugas Pelionis <mindaugas.pelionis@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:30+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-07-26 05:13+0000\n"
+"X-Generator: Launchpad (build 16700)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "Horizontas"
 
 #: src/core/modules/GridLinesMgr.cpp:580
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Galaktikos plokštuma"
 
 #: src/core/modules/LandscapeMgr.cpp:512
 msgid "Author: "
@@ -108,7 +108,7 @@ msgstr "Planetiškasis ūkas"
 
 #: src/core/modules/Nebula.cpp:400
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Tamsusis ūkas"
 
 #: src/core/modules/Nebula.cpp:403
 msgid "Cluster associated with nebulosity"
@@ -143,7 +143,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Nuotolis: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:252
 #: src/core/modules/Comet.cpp:156
@@ -207,7 +207,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "žvaigždė"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -748,31 +748,31 @@ msgstr ""
 msgid "Found"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:435 src/gui/ConfigurationDialog.cpp:437
+#: src/gui/ConfigurationDialog.cpp:436 src/gui/ConfigurationDialog.cpp:438
 msgid "Select screenshot directory"
 msgstr "Nurodykite katalogą ekrano nuotraukoms"
 
-#: src/gui/ConfigurationDialog.cpp:661
+#: src/gui/ConfigurationDialog.cpp:662
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Pradinis apžvalgos laukas: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:669
+#: src/gui/ConfigurationDialog.cpp:670
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Pradinė Az/Alt vaizdo kryptis: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:711
+#: src/gui/ConfigurationDialog.cpp:712
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:379
 msgid "Authors"
 msgstr "Autoriai"
 
-#: src/gui/ConfigurationDialog.cpp:712 src/gui/ViewDialog.cpp:447
+#: src/gui/ConfigurationDialog.cpp:713 src/gui/ViewDialog.cpp:447
 msgid "Contact"
 msgstr "Susisiekite"
 
-#: src/gui/ConfigurationDialog.cpp:795
+#: src/gui/ConfigurationDialog.cpp:796
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
@@ -781,19 +781,19 @@ msgstr "Susisiekite"
 msgid "Author"
 msgstr "Autorius"
 
-#: src/gui/ConfigurationDialog.cpp:799
+#: src/gui/ConfigurationDialog.cpp:800
 msgid "License"
 msgstr "Licencija"
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:824
 msgid "Running script: "
 msgstr "Vykdomas scenarijus: "
 
-#: src/gui/ConfigurationDialog.cpp:830
+#: src/gui/ConfigurationDialog.cpp:831
 msgid "Running script: [none]"
 msgstr "Vykdomas scenarijus: [nėra]"
 
-#: src/gui/ConfigurationDialog.cpp:895
+#: src/gui/ConfigurationDialog.cpp:896
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -801,16 +801,16 @@ msgstr ""
 "Naujų žvaigždžių katalogų siuntimas baigtas.\n"
 "Norėdami juos pamatyti, paleiskite Stellarium iš naujo."
 
-#: src/gui/ConfigurationDialog.cpp:899
+#: src/gui/ConfigurationDialog.cpp:900
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:904
+#: src/gui/ConfigurationDialog.cpp:905
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Parsiųsti katalogą %1 iš %2"
 
-#: src/gui/ConfigurationDialog.cpp:911
+#: src/gui/ConfigurationDialog.cpp:912
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -819,7 +819,7 @@ msgstr ""
 "Siunčiama %1...\n"
 "(Jūs galite uždaryti šį langą.)"
 
-#: src/gui/ConfigurationDialog.cpp:918
+#: src/gui/ConfigurationDialog.cpp:919
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -830,7 +830,7 @@ msgstr ""
 "Žvaigždžių skaičius: %2 milijonai\n"
 "Ryškio intervalas: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:961 src/gui/ConfigurationDialog.cpp:997
+#: src/gui/ConfigurationDialog.cpp:962 src/gui/ConfigurationDialog.cpp:998
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -839,11 +839,11 @@ msgstr ""
 "Klaida siunčiant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1049
+#: src/gui/ConfigurationDialog.cpp:1050
 msgid "Verifying file integrity..."
 msgstr "Tikrinamas failų vientisumas..."
 
-#: src/gui/ConfigurationDialog.cpp:1053
+#: src/gui/ConfigurationDialog.cpp:1054
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -853,123 +853,123 @@ msgstr ""
 "Failas sugadintas."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1126
+#: src/gui/ConfigurationDialog.cpp:1127
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1137
+#: src/gui/ConfigurationDialog.cpp:1138
 msgid "Without correction"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1138
+#: src/gui/ConfigurationDialog.cpp:1139
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1139
+#: src/gui/ConfigurationDialog.cpp:1140
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1141
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1142
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1149
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1150
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1150
+#: src/gui/ConfigurationDialog.cpp:1151
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1151
+#: src/gui/ConfigurationDialog.cpp:1152
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1155
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1158
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1161
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1168
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -1004,7 +1004,7 @@ msgstr "Ankstesnio/tolesnio puslapio klavišas"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "CTRL + Up/Down"
-msgstr "Vald + aukštyn/žemyn"
+msgstr "Ctrl + aukštyn/žemyn"
 
 #: src/gui/HelpDialog.cpp:171
 msgid "Select object"
@@ -1024,7 +1024,7 @@ msgstr "Spragtelėti dešiniu pelės klavišu"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "CTRL + Left click"
-msgstr "Vald + kairiojo pelės klavišo spustelėjimas"
+msgstr "Ctrl + kairiojo pelės klavišo spustelėjimas"
 
 #: src/gui/HelpDialog.cpp:189
 #, qt-format
@@ -1032,6 +1032,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Žemiau išvardinti tik veiksmai su priskirtais sparčiaisiais klavišais. Kiti "
+"veiksmai gali būti pasiekiami klavišu \"%1\"."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1169,15 +1171,15 @@ msgstr "Normalus dažnis"
 
 #: src/gui/ViewDialog.cpp:627
 msgid "Standard Perseids rate"
-msgstr "Standartinis Perseido"
+msgstr "Standartinis Perseidų"
 
 #: src/gui/ViewDialog.cpp:630
 msgid "Exceptional Leonid rate"
-msgstr "Nepaprastas Leonido"
+msgstr "Nepaprastas Leonidų"
 
 #: src/gui/ViewDialog.cpp:633
 msgid "Highest rate ever (1966 Leonids)"
-msgstr "Didžiausias dažnis (1966 Leonido)"
+msgstr "Didžiausias dažnis (1966 m. Leonidų)"
 
 #: src/gui/LocationDialog.cpp:424
 msgid "New Location"
@@ -1301,15 +1303,15 @@ msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "Veiksmas"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
-msgstr ""
+msgstr "Pagrindinė kombinacija"
 
 #: src/gui/ShortcutsDialog.cpp:501 src/ui_shortcutsDialog.h:199
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "Alternatyvi kombinacija"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
@@ -1329,9 +1331,15 @@ msgstr ""
 msgid "year"
 msgstr ""
 
-#: src/main.cpp:372
+#: src/main.cpp:373
 msgid "This system does not support OpenGL."
 msgstr "Ši sistema nepalaiko OpenGL."
+
+#: src/main.cpp:381
+msgid ""
+"Your platform does not support minimal required OpenGL 1.2. Please upgrade "
+"drivers for graphics card."
+msgstr ""
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
@@ -1390,7 +1398,7 @@ msgstr "Jupiteris"
 
 #: src/translations.h:46
 msgid "Io"
-msgstr "Ija"
+msgstr "Ijo"
 
 #: src/translations.h:47
 msgid "Europa"
@@ -1709,31 +1717,31 @@ msgstr "V"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "planeta"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "kometa"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "asteroidas"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "palydovas"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoidas"
 
 #: src/translations.h:165
 msgid "Arabic"
-msgstr ""
+msgstr "Arabų"
 
 #: src/translations.h:166
 msgid "Aztec"
@@ -1741,27 +1749,27 @@ msgstr "Actekų"
 
 #: src/translations.h:167
 msgid "Chinese"
-msgstr "kiniečių"
+msgstr "Kinų"
 
 #: src/translations.h:168
 msgid "Egyptian"
-msgstr "egiptiečių"
+msgstr "Egiptiečių"
 
 #: src/translations.h:169
 msgid "Inuit"
-msgstr "inuitų"
+msgstr "Inuitų"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr ""
+msgstr "Indų Vedų"
 
 #: src/translations.h:171
 msgid "Korean"
-msgstr "korėjiečių"
+msgstr "Korėjiečių"
 
 #: src/translations.h:172
 msgid "Lakota"
-msgstr "lakotų"
+msgstr "Lakotų"
 
 #: src/translations.h:173
 msgid "Maori"
@@ -1769,15 +1777,15 @@ msgstr "Maorių"
 
 #: src/translations.h:174
 msgid "Navajo"
-msgstr "navajų"
+msgstr "Navahų"
 
 #: src/translations.h:175
 msgid "Norse"
-msgstr "Norvegijos"
+msgstr "Norvegų"
 
 #: src/translations.h:176
 msgid "Polynesian"
-msgstr "polineziečių"
+msgstr "Polineziečių"
 
 #: src/translations.h:177
 msgid "Sami"
@@ -1789,11 +1797,11 @@ msgstr "Tupi-Guarani"
 
 #: src/translations.h:179
 msgid "Tongan"
-msgstr ""
+msgstr "Tongiečių"
 
 #: src/translations.h:180
 msgid "Western"
-msgstr "vakariečių"
+msgstr "Vakariečių"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:186
@@ -1803,7 +1811,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:188
 msgid "Trees"
-msgstr ""
+msgstr "Medžiai"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:192
@@ -1813,7 +1821,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:194
 msgid "Ocean"
-msgstr ""
+msgstr "Vandenynas"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:196
@@ -1942,7 +1950,7 @@ msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
-msgid "Earth Greatest Elongations from Jupiter"
+msgid "Earth and Mars Greatest Elongations from Jupiter"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
@@ -3031,7 +3039,7 @@ msgstr ""
 
 #. TRANSLATORS: Keyboard action group name, also used elsewhere.
 #: src/translations.h:534 src/ui_dateTimeDialogGui.h:298
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Date and Time"
 msgstr "Data ir laikas"
 
@@ -3041,7 +3049,7 @@ msgstr "Pridėti 1 žvaigždinę dieną"
 
 #: src/translations.h:536
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Pridėti 1 žvaigždinį mėnesį"
 
 #: src/translations.h:537
 msgid "Add 1 sidereal week"
@@ -3049,11 +3057,11 @@ msgstr "Pridėti 1 žvaigždinę savaitę"
 
 #: src/translations.h:538
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Pridėti 1 žvaigždinius metus"
 
 #: src/translations.h:539
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Pridėti 1 žvaigždinį amžių"
 
 #: src/translations.h:540
 msgid "Add 1 solar day"
@@ -3153,7 +3161,7 @@ msgstr "Atimti 1 žvaigždinę dieną"
 
 #: src/translations.h:564
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Atimti 1 žvaigždinį mėnesį"
 
 #: src/translations.h:565
 msgid "Subtract 1 sidereal week"
@@ -3161,11 +3169,11 @@ msgstr "Atimti 1 žvaigždinę savaitę"
 
 #: src/translations.h:566
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Atimti 1 žvaigždinius metus"
 
 #: src/translations.h:567
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Atimti 1 žvaigždinį amžių"
 
 #: src/translations.h:568
 msgid "Subtract 1 solar day"
@@ -3225,32 +3233,32 @@ msgid "Atmosphere"
 msgstr "Atmosfera"
 
 #: src/translations.h:584 src/ui_viewDialog.h:1254
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Azimuthal grid"
 msgstr "Azimutinis tinklelis"
 
 #: src/translations.h:585 src/ui_viewDialog.h:1276
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Cardinal points"
 msgstr "Pasaulio kryptys"
 
 #: src/translations.h:586
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Constellation art"
 msgstr "Žvaigždynų piešiniai"
 
 #: src/translations.h:587
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:286
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Constellation boundaries"
 msgstr "Žvaigždynų ribos"
 
 #: src/translations.h:588
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:281
 msgid "Constellation labels"
 msgstr "Žvaigždynų pavadinimai"
 
 #: src/translations.h:589
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
 msgid "Constellation lines"
 msgstr "Žvaigždynų kontūrai"
 
@@ -3260,52 +3268,52 @@ msgstr ""
 
 #: src/translations.h:591 src/ui_viewDialog.h:1253
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptinis J2000 tinklelis"
 
 #: src/translations.h:592
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Ecliptic line"
 msgstr "Ekliptikos linija"
 
 #: src/translations.h:593
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Equator line"
 msgstr "Pusiaujo linija"
 
 #: src/translations.h:594 src/ui_viewDialog.h:1252
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial grid"
-msgstr "Ekvatorinis tinklelis"
+msgstr "Pusiaujinis tinklelis"
 
 #: src/translations.h:595 src/ui_viewDialog.h:1251
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equatorial J2000 grid"
-msgstr "Ekvatorinis J2000 tinklelis"
+msgstr "Pusiaujinis J2000 tinklelis"
 
 #: src/translations.h:596
 msgid "Fog"
-msgstr "Rūką"
+msgstr "Rūkas"
 
 #: src/translations.h:597 src/ui_viewDialog.h:1255
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic grid"
 msgstr "Galaktikos tinklelis"
 
 #: src/translations.h:598 src/ui_viewDialog.h:1275
 msgid "Galactic plane"
-msgstr ""
+msgstr "Galaktikos plokštuma"
 
 #: src/translations.h:599
 msgid "Ground"
 msgstr "Žemė"
 
 #: src/translations.h:600
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Horizon line"
 msgstr "Horizonto linija"
 
 #: src/translations.h:601
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:318
 msgid "Meridian line"
 msgstr "Dienovidinio linija"
 
@@ -3318,29 +3326,29 @@ msgid "Night mode"
 msgstr "Nakties režimas"
 
 #: src/translations.h:604
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet labels"
-msgstr ""
+msgstr "Planetų pavadinimai"
 
 #: src/translations.h:605
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet orbits"
 msgstr "Planetų orbitos"
 
 #: src/translations.h:606
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet trails"
 msgstr "Planetų pėdsakai"
 
 #: src/translations.h:607 src/ui_viewDialog.h:1198 src/ui_viewDialog.h:1217
 #: src/ui_viewDialog.h:1239
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Stars"
 msgstr "Žvaigždės"
 
 #: src/translations.h:608
 msgid "Stars labels"
-msgstr ""
+msgstr "Žvaigždžių pavadinimai"
 
 #: src/translations.h:609
 msgid "Flip scene vertically"
@@ -3361,7 +3369,7 @@ msgstr "Automatiškai slėpti vertikalią mygtukų juostą"
 
 #: src/translations.h:615
 msgid "Go to home"
-msgstr ""
+msgstr "Grįžti į pradžią"
 
 #: src/translations.h:616
 msgid "Quit"
@@ -3369,7 +3377,7 @@ msgstr "Išeiti"
 
 #: src/translations.h:617
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Nukopijuoti pažymėto objekto informaciją"
 
 #: src/translations.h:618
 msgid "Save screenshot"
@@ -3377,7 +3385,7 @@ msgstr "Išsaugoti ekrano nuotrauką"
 
 #: src/translations.h:619
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "Persijungti tarp ekvatorinio ir azimutinio pririšimo"
+msgstr "Persijungti tarp pusiaujinio ir azimutinio pririšimo"
 
 #: src/translations.h:620
 msgid "Toggle visibility of GUI"
@@ -3418,7 +3426,7 @@ msgstr "Kompaso žymos"
 
 #: src/translations.h:637
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Rodyti egzoplanetas"
 
 #: src/translations.h:638
 msgid "Exoplanets configuration window"
@@ -3442,11 +3450,11 @@ msgstr "Okuliaro vaizdas"
 
 #: src/translations.h:647
 msgid "Show crosshairs"
-msgstr ""
+msgstr "Rodyti taikiklio kryželį"
 
 #: src/translations.h:648
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Okuliarų meniu"
 
 #: src/translations.h:649
 msgid "Image sensor frame"
@@ -3454,7 +3462,7 @@ msgstr ""
 
 #: src/translations.h:650
 msgid "Telrad sight"
-msgstr ""
+msgstr "Telrad taikiklis"
 
 #: src/translations.h:651
 msgid "Select next telescope"
@@ -3474,7 +3482,7 @@ msgstr ""
 
 #: src/translations.h:657
 msgid "Show pulsars"
-msgstr ""
+msgstr "Rodyti pulsarus"
 
 #: src/translations.h:658
 msgid "Pulsars configuration window"
@@ -3482,7 +3490,7 @@ msgstr ""
 
 #: src/translations.h:661
 msgid "Show quasars"
-msgstr ""
+msgstr "Rodyti kvazarus"
 
 #: src/translations.h:662
 msgid "Quasars configuration window"
@@ -3514,7 +3522,7 @@ msgstr ""
 
 #. TRANSLATORS: Keyboard action group name
 #: src/translations.h:679 src/ui_configurationDialog.h:1166
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:448
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Scripts"
 msgstr "Scenarijai"
 
@@ -3548,7 +3556,7 @@ msgstr "Paieškos langas"
 
 #: src/translations.h:691
 msgid "Shortcuts window"
-msgstr ""
+msgstr "Sparčiųjų klavišų langas"
 
 #: src/translations.h:692
 msgid "Sky and viewing options window"
@@ -3569,14 +3577,14 @@ msgstr "Žurnalas"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1057
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "Redaguoti sparčiuosius klavišus..."
 
 #: src/ui_helpDialogGui.h:292
 msgid "Refresh"
 msgstr "Atnaujinti"
 
 #: src/ui_locationDialogGui.h:389
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
 msgid "Location"
 msgstr "Vietovė"
 
@@ -3604,7 +3612,7 @@ msgid "Add to list"
 msgstr "Pridėti į sąrašą"
 
 #: src/ui_locationDialogGui.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:142
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:143
 msgid "Latitude:"
 msgstr "Platuma:"
 
@@ -3617,12 +3625,12 @@ msgstr ""
 "12m 8s"
 
 #: src/ui_locationDialogGui.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Longitude:"
 msgstr "Ilguma:"
 
 #: src/ui_locationDialogGui.h:406
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Altitude:"
 msgstr "Aukštis:"
 
@@ -3652,111 +3660,111 @@ msgstr "Objekto paieška"
 
 #: src/ui_searchDialogGui.h:543
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Rasti objektą ar koordinates"
 
 #: src/ui_searchDialogGui.h:549
 msgid "iota"
-msgstr ""
+msgstr "jota"
 
 #: src/ui_searchDialogGui.h:552
 msgid "alpha"
-msgstr ""
+msgstr "alfa"
 
 #: src/ui_searchDialogGui.h:555
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 #: src/ui_searchDialogGui.h:558
 msgid "gamma"
-msgstr ""
+msgstr "gama"
 
 #: src/ui_searchDialogGui.h:561
 msgid "delta"
-msgstr ""
+msgstr "delta"
 
 #: src/ui_searchDialogGui.h:564
 msgid "epsilon"
-msgstr ""
+msgstr "epsilon"
 
 #: src/ui_searchDialogGui.h:567
 msgid "zeta"
-msgstr ""
+msgstr "dzeta"
 
 #: src/ui_searchDialogGui.h:570
 msgid "eta"
-msgstr ""
+msgstr "eta"
 
 #: src/ui_searchDialogGui.h:573
 msgid "theta"
-msgstr ""
+msgstr "teta"
 
 #: src/ui_searchDialogGui.h:576
 msgid "kappa"
-msgstr ""
+msgstr "kapa"
 
 #: src/ui_searchDialogGui.h:579
 msgid "lambda"
-msgstr ""
+msgstr "lambda"
 
 #: src/ui_searchDialogGui.h:582
 msgid "mu"
-msgstr ""
+msgstr "miu"
 
 #: src/ui_searchDialogGui.h:585
 msgid "nu"
-msgstr ""
+msgstr "niu"
 
 #: src/ui_searchDialogGui.h:588
 msgid "xi"
-msgstr ""
+msgstr "ksi"
 
 #: src/ui_searchDialogGui.h:591
 msgid "omicron"
-msgstr ""
+msgstr "omikron"
 
 #: src/ui_searchDialogGui.h:594
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:597
 msgid "rho"
-msgstr ""
+msgstr "ro"
 
 #: src/ui_searchDialogGui.h:600
 msgid "sigma"
-msgstr ""
+msgstr "sigma"
 
 #: src/ui_searchDialogGui.h:603
 msgid "tau"
-msgstr ""
+msgstr "tau"
 
 #: src/ui_searchDialogGui.h:606
 msgid "upsilon"
-msgstr ""
+msgstr "ipsilon"
 
 #: src/ui_searchDialogGui.h:609
 msgid "phi"
-msgstr ""
+msgstr "fi"
 
 #: src/ui_searchDialogGui.h:612
 msgid "chi"
-msgstr ""
+msgstr "chi"
 
 #: src/ui_searchDialogGui.h:615
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:618
 msgid "omega"
-msgstr ""
+msgstr "omega"
 
 #: src/ui_searchDialogGui.h:620
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Graikų abėcėlė Bajerio žymėjimui"
 
 #: src/ui_searchDialogGui.h:621
 msgid "Object"
-msgstr ""
+msgstr "Objektas"
 
 #: src/ui_searchDialogGui.h:622
 msgid "RA/Dec (J2000):"
@@ -3764,19 +3772,19 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:623
 msgid "Position"
-msgstr ""
+msgstr "Koordinatės"
 
 #: src/ui_searchDialogGui.h:624
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Internetinė astronominių duomenų bazė SIMBAD"
 
 #: src/ui_searchDialogGui.h:625
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Išplėsti paiešką su SIMBAD"
 
 #: src/ui_searchDialogGui.h:626
 msgid "Server:"
-msgstr ""
+msgstr "Serveris:"
 
 #: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1279
 #: src/ui_viewDialog.h:1284 src/ui_viewDialog.h:1286
@@ -3791,16 +3799,16 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:631
 msgid "names in English"
-msgstr ""
+msgstr "pavadinimai angliškai"
 
 #: src/ui_searchDialogGui.h:632
 msgid "Search in list..."
-msgstr ""
+msgstr "Ieškoti sąraše..."
 
 #: src/ui_searchDialogGui.h:633
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Lists"
-msgstr ""
+msgstr "Sąrašai"
 
 #: src/ui_viewDialog.h:1182
 msgid "View"
@@ -3815,12 +3823,12 @@ msgid "Markings"
 msgstr "Žymės"
 
 #: src/ui_viewDialog.h:1192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Landscape"
 msgstr "Kraštovaizdis"
 
 #: src/ui_viewDialog.h:1194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:224
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "Starlore"
 msgstr "Žvaigždynų folkloras"
 
@@ -3871,34 +3879,34 @@ msgid "Show atmosphere"
 msgstr "Rodyti atmosferą"
 
 #: src/ui_viewDialog.h:1212
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Light pollution:"
-msgstr ""
+msgstr "Šviesos tarša:"
 
 #: src/ui_viewDialog.h:1214
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "slėgis, temperatūra, ekstinkcijos koeficientas"
 
 #: src/ui_viewDialog.h:1216
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Refrakcijos/ekstinkcijos nustatymai..."
 
 #: src/ui_viewDialog.h:1218
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Absolute scale:"
 msgstr "Absoliutinis mastelis:"
 
 #: src/ui_viewDialog.h:1219
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Relative scale:"
 msgstr "Santykinis mastelis:"
 
 #: src/ui_viewDialog.h:1220
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Paukščių tako ryškumas:"
 
 #: src/ui_viewDialog.h:1221
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Twinkle:"
 msgstr "Mirgėjimas:"
 
@@ -3929,7 +3937,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1235
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Ribojimas pagal ryškį"
 
 #: src/ui_viewDialog.h:1237
 msgid "Limit the magnitude of stars"
@@ -3962,9 +3970,9 @@ msgstr "Rodyti piešinius"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1249
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
-msgstr ""
+msgstr "Piešinių ryškumas:"
 
 #: src/ui_viewDialog.h:1250
 msgid "Celestial Sphere"
@@ -4089,11 +4097,8 @@ msgstr "Viskas"
 msgid "Display no information"
 msgstr "Informacijos nerodyti"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1870
-#: plugins/Observability/src/Observability.cpp:628
-#: plugins/Observability/src/Observability.cpp:629
-#: plugins/Observability/src/Observability.cpp:631
-#: plugins/Observability/src/Observability.cpp:632
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1871
+#: plugins/Observability/src/Observability.cpp:233
 msgid "None"
 msgstr "Nieko"
 
@@ -4111,11 +4116,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1008
 msgid "Customized"
-msgstr ""
+msgstr "Kaip nurodyta"
 
 #: src/ui_configurationDialog.h:1009
 msgid "Displayed fields"
-msgstr ""
+msgstr "Rodoma informacija"
 
 #: src/ui_configurationDialog.h:1011
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -4123,32 +4128,32 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1013
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Rektascensija/Deklinacija (J2000)"
 
 #: src/ui_configurationDialog.h:1015
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Horizontinės koordinatės"
 
 #: src/ui_configurationDialog.h:1017
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Aukštis/Azimutas"
 
 #: src/ui_configurationDialog.h:1018
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Regimasis ryškis"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Absoliutinis ryškis"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Katalogo numeris(-iai)"
 
 #: src/ui_configurationDialog.h:1021
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Pavadinimas"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -4164,43 +4169,43 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1029
 msgid "Longitude/Latitude (J2000)"
-msgstr ""
+msgstr "Ilguma/Platuma (J2000)"
 
 #: src/ui_configurationDialog.h:1031
 msgid "Topocentric equatorial coordinates"
-msgstr ""
+msgstr "Topocentrinės pusiaujinės koordinatės"
 
 #: src/ui_configurationDialog.h:1033
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Valandinis kampas/Deklinacija"
 
 #: src/ui_configurationDialog.h:1034
 msgid "Distance"
-msgstr ""
+msgstr "Nuotolis"
 
 #: src/ui_configurationDialog.h:1036
 msgid "Angular or physical size"
-msgstr ""
+msgstr "Kampinis arba fizinis dydis"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Size"
-msgstr ""
+msgstr "Dydis"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Spektrinė klasė, ūko tipas ir t.t."
 
 #: src/ui_configurationDialog.h:1042
 msgid "Additional information 1"
-msgstr ""
+msgstr "Papildoma informacija 1"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Additional information 2"
-msgstr ""
+msgstr "Papildoma informacija 2"
 
 #: src/ui_configurationDialog.h:1047
 msgid "Additional information 3"
-msgstr ""
+msgstr "Papildoma informacija 3"
 
 #: src/ui_configurationDialog.h:1048
 msgid "Control"
@@ -4216,7 +4221,7 @@ msgstr "Įjungti navigaciją klaviatūra"
 
 #: src/ui_configurationDialog.h:1054
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Įjungti slinkimą ir mastelio keitima pele"
+msgstr "Įjungti slinkimą ir mastelio keitimą pele"
 
 #: src/ui_configurationDialog.h:1056
 msgid "Enable mouse navigation"
@@ -4228,14 +4233,14 @@ msgstr "Slėpti pelės žymeklį, kai jis nejuda"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "Paslėpti pelės žymeklį už:"
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1065
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Startup date and time"
 msgstr "Data ir laikas paleidus programą"
 
@@ -4277,7 +4282,7 @@ msgstr "Sistemos laikas nuo:"
 
 #: src/ui_configurationDialog.h:1082
 msgid "Time correction"
-msgstr ""
+msgstr "Laiko korekcija"
 
 #: src/ui_configurationDialog.h:1085
 msgid "Edit equation"
@@ -4329,7 +4334,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1107
 msgid "Show nebula background button"
-msgstr ""
+msgstr "Rodyti ūkų paveikslų mygtuką"
 
 #: src/ui_configurationDialog.h:1109
 msgid "Toggle vertical and horizontal image flip buttons."
@@ -4359,7 +4364,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1119
 msgid "Render Solar Shadows"
-msgstr ""
+msgstr "Rodyti šešėlius nuo Saulės"
 
 #: src/ui_configurationDialog.h:1120
 msgid "Screenshots"
@@ -4478,31 +4483,31 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:196
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Spartieji klavišai"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Atstatyti pradinius nustatymus"
 
 #: src/ui_shortcutsDialog.h:201
 msgid "Apply"
-msgstr ""
+msgstr "Taikyti"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Atmosferos nustatymai"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Refrakcijos nustatymai"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "Slėgis (mbar):"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Temperatūra (C):"
 
 #: src/ui_AtmosphereDialog.h:185
 msgid ""
@@ -4510,10 +4515,14 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Ekstinkcija (sugertis) yra šviesulio spindesio susilpnėjimas dėl Žemės "
+"atmosferos. Ji skaičiuojama ryškį dalinant iš oro masių, kur oro masės yra "
+"atmosferų skaičius, kurias tenka praeiti šviesai (zenite: 1, horizonte: apie "
+"40)."
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Ekstinkcijos koeficientas:"
 
 #: src/ui_AtmosphereDialog.h:189
 msgid ""
@@ -4608,176 +4617,179 @@ msgstr "Kompaso žymos"
 msgid "Displays compass bearing marks along the horizon"
 msgstr "Rodo kompaso žymas palei horizontą"
 
-#: plugins/Oculars/src/Oculars.cpp:81
+#: plugins/Oculars/src/Oculars.cpp:82
 #: plugins/Oculars/src/ui_ocularDialog.h:1017
 msgid "Oculars"
 msgstr "Okuliarai"
 
-#: plugins/Oculars/src/Oculars.cpp:84
+#: plugins/Oculars/src/Oculars.cpp:85
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Rodo dangų taip, kaip jis atrodytų pro teleskopo okuliarą (simuliuojamas tik "
+"didinimas ir regėjimo laukas). Taip pat gali rodyti sensoriaus rėmelį ir "
+"Telrad taikiklį."
 
-#: plugins/Oculars/src/Oculars.cpp:785
+#: plugins/Oculars/src/Oculars.cpp:786
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:881
+#: plugins/Oculars/src/Oculars.cpp:882
 msgid "&Previous ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:882
+#: plugins/Oculars/src/Oculars.cpp:883
 msgid "&Next ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:883
+#: plugins/Oculars/src/Oculars.cpp:884
 msgid "Select &ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:930
+#: plugins/Oculars/src/Oculars.cpp:931
 msgid "Toggle &crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:939
+#: plugins/Oculars/src/Oculars.cpp:940
 msgid "Configure &Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:948
+#: plugins/Oculars/src/Oculars.cpp:949
 msgid "Toggle &CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:956
+#: plugins/Oculars/src/Oculars.cpp:957
 msgid "Toggle &Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:966
+#: plugins/Oculars/src/Oculars.cpp:967
 msgid "&Previous CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:967
+#: plugins/Oculars/src/Oculars.cpp:968
 msgid "&Next CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:968
+#: plugins/Oculars/src/Oculars.cpp:969
 msgid "&Select CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:990
+#: plugins/Oculars/src/Oculars.cpp:991
 msgid "&Rotate CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1023
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1544
+#: plugins/Oculars/src/Oculars.cpp:1545
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
 #, qt-format
 msgid "Ocular #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1549
+#: plugins/Oculars/src/Oculars.cpp:1550
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1563
+#: plugins/Oculars/src/Oculars.cpp:1564
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1570
+#: plugins/Oculars/src/Oculars.cpp:1571
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1582
+#: plugins/Oculars/src/Oculars.cpp:1583
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1586
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1591
+#: plugins/Oculars/src/Oculars.cpp:1592
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1601 plugins/Oculars/src/Oculars.cpp:1658
+#: plugins/Oculars/src/Oculars.cpp:1602 plugins/Oculars/src/Oculars.cpp:1659
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1606 plugins/Oculars/src/Oculars.cpp:1663
+#: plugins/Oculars/src/Oculars.cpp:1607 plugins/Oculars/src/Oculars.cpp:1664
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1617
+#: plugins/Oculars/src/Oculars.cpp:1618
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1625
+#: plugins/Oculars/src/Oculars.cpp:1626
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1635
+#: plugins/Oculars/src/Oculars.cpp:1636
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/Oculars.cpp:1641
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1644
+#: plugins/Oculars/src/Oculars.cpp:1645
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:659
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1866
+#: plugins/Oculars/src/Oculars.cpp:1867
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1867
+#: plugins/Oculars/src/Oculars.cpp:1868
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1868
+#: plugins/Oculars/src/Oculars.cpp:1869
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1898
+#: plugins/Oculars/src/Oculars.cpp:1899
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1899
+#: plugins/Oculars/src/Oculars.cpp:1900
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1900
+#: plugins/Oculars/src/Oculars.cpp:1901
 msgid "&Next telescope"
 msgstr ""
 
@@ -5003,7 +5015,7 @@ msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1029
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:222
 msgid "General"
 msgstr ""
 
@@ -5124,12 +5136,12 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:65
+#: plugins/Satellites/src/Satellites.cpp:66
 #: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Satellites"
 msgstr "Palydovai"
 
-#: plugins/Satellites/src/Satellites.cpp:68
+#: plugins/Satellites/src/Satellites.cpp:69
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
@@ -5137,69 +5149,69 @@ msgstr ""
 "Dirbtinių palydovų padėties Žemės orbitoje prognozė pasitelkus NORAD TLE "
 "duomenis"
 
-#: plugins/Satellites/src/Satellites.cpp:179
+#: plugins/Satellites/src/Satellites.cpp:180
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 "Senas satellites.json failas nebesuderinamas - naudojame numatytąjį failą."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1594
+#: plugins/Satellites/src/Satellites.cpp:1595
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1596
+#: plugins/Satellites/src/Satellites.cpp:1597
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1598
+#: plugins/Satellites/src/Satellites.cpp:1599
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1600
+#: plugins/Satellites/src/Satellites.cpp:1601
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1602
+#: plugins/Satellites/src/Satellites.cpp:1603
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1604
+#: plugins/Satellites/src/Satellites.cpp:1605
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1606
+#: plugins/Satellites/src/Satellites.cpp:1607
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1608
+#: plugins/Satellites/src/Satellites.cpp:1609
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1610
+#: plugins/Satellites/src/Satellites.cpp:1611
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1612
+#: plugins/Satellites/src/Satellites.cpp:1613
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1623
+#: plugins/Satellites/src/Satellites.cpp:1624
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1625
+#: plugins/Satellites/src/Satellites.cpp:1626
 msgid "The International Space Station"
 msgstr ""
 
@@ -5549,32 +5561,32 @@ msgstr ""
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid "Downloading data..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:142
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:157
 msgid "Select TLE source file(s)..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:173
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:232
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:233
 msgid "Processing data..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "No data could be downloaded. Try again later."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:359
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:360
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr ""
@@ -5793,11 +5805,11 @@ msgstr ""
 msgid "Discard"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:77
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid "Telescope Control"
 msgstr "Teleskopo valdymas"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:80
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:81
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
@@ -5805,12 +5817,12 @@ msgstr ""
 "Šis papildinys leidžia Stellarium nusiųsti \"pasisukimo\" komandas "
 "teleskopui ant kompiuterizuoto stovo (\"Eiti į teleskopą\")."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1666
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1667
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Pasukti teleskopą #%1 į pasirinktą objektą"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1671
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1672
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "Pasukti teleskopą #%1 į centrinį ekrano tašką"
@@ -6196,62 +6208,62 @@ msgstr ""
 "juostoje."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "January"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "February"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "March"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "April"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "May"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "June"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "July"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "August"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "September"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "October"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "November"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:652
 msgid "December"
 msgstr ""
 
@@ -6405,7 +6417,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:207
 msgid "Time display format"
 msgstr ""
 
@@ -6423,7 +6435,7 @@ msgid "24-hour format"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:196
 msgid "Date display format"
 msgstr ""
 
@@ -6439,155 +6451,155 @@ msgstr ""
 msgid "mm-dd-yyyy"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:89
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
 msgstr "Tekstinė vartotojo sąsaja"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:92
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:93
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
 "0.9.x versijų Tekstinės vartotojo sąsajos (TUI) įgyvendinimas papildiniu."
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:157
 msgid "Solar System body"
-msgstr ""
+msgstr "Saulės sistemos kūnas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:171
 msgid "Current date/time"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Set time zone"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Day keys"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:178
 msgid "Startup date/time preset"
 msgstr ""
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:185
 msgid "system"
 msgstr ""
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "preset"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "mmddyyyy"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "ddmmyyyy"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "yyyymmdd"
 msgstr ""
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:203
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:204
 msgid "12h"
 msgstr ""
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:205
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:206
 msgid "24h"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:230
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:231
 msgid "Language"
 msgstr "Kalba"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Show stars"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Colors"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Nebula names"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
 msgid "Nebula hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:367
 msgid "Galactic plane line"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:396
 msgid "Effects"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
 msgid "Manual zoom"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Magnitude scaling multiplier"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:417
 msgid "Milky Way intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:422
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Nebula label frequency:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:424
 msgid "Zoom duration:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:429
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
 msgid "Cursor timeout:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:430
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:431
 msgid "Setting landscape sets location"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Run local script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:458
 msgid "Stop running script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "CD/DVD script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:468
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Administration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:477
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
 msgid "Load default configuration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:479
 msgid "Save current configuration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:482
 msgid "Shut down"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:553
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:554
 msgid "[no TUI node]"
 msgstr ""
 
@@ -6623,22 +6635,22 @@ msgstr ""
 "paiešką jos internetinėje duomenų bazėje. Vis dar kuriamas."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:149
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid "Only one result will be returned if the query is successful."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:160
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -6751,7 +6763,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:294
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Solar System objects"
-msgstr ""
+msgstr "Saulės sistemos objektai"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
@@ -6805,21 +6817,22 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
-msgstr ""
+msgstr "Saulės sistema"
 
-#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:72
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Istorinės supernovos"
 
-#: plugins/Supernovae/src/Supernovae.cpp:74
+#: plugins/Supernovae/src/Supernovae.cpp:75
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
+"Rodo kai kurias istorines supernovas, ryškesnes nei 10 regimojo ryškio."
 
 #: plugins/Supernovae/src/Supernova.cpp:97
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:113
 #, qt-format
@@ -6927,20 +6940,24 @@ msgstr ""
 msgid "[next update info]"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:70
+#: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
-msgstr ""
+msgstr "Kvazarai"
 
-#: plugins/Quasars/src/Quasars.cpp:73
+#: plugins/Quasars/src/Quasars.cpp:74
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Rodo kai kuriuos kvazarus, ryškesnius nei 16 regimojo ryškio. Kvazarų "
+"katalogas surinktas iš 'Kvazarai ir aktyvūs galaktikų branduoliai' ('Quasars "
+"and Active Galactic Nuclei' ) (13 leidimas) (Veron+ 2010) "
+"=2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "kvazaras"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
@@ -6996,20 +7013,20 @@ msgstr ""
 msgid "Show quasars button on toolbar"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:70
+#: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
-msgstr ""
+msgstr "Pulsarai"
 
-#: plugins/Pulsars/src/Pulsars.cpp:73
+#: plugins/Pulsars/src/Pulsars.cpp:74
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:117
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr ""
+msgstr "Rodo įvairius pulsarus, su informacija apie kiekvieną iš jų."
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
-msgstr ""
+msgstr "pulsaras"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:136
@@ -7193,15 +7210,18 @@ msgstr ""
 msgid "Show pulsars button on toolbar"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:72
+#: plugins/Exoplanets/src/Exoplanets.cpp:73
 msgid "Exoplanets"
-msgstr ""
+msgstr "Egzoplanetos"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:75
+#: plugins/Exoplanets/src/Exoplanets.cpp:76
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Rodo žvaigždžių su egzoplanetomis padėtis. Duomenys apie egzoplanetas paimti "
+"iš 'Egzoplanetų enciklopedijos' ('Extrasolar Planets Encyclopaedia') "
+"tinklapyje exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Metallicity"
@@ -7337,185 +7357,179 @@ msgid ""
 "configuration window"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jan"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Feb"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Mar"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Apr"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "May"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jun"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jul"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Aug"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Sep"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Oct"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Nov"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Dec"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:499
-#: plugins/Observability/src/Observability.cpp:500
-#: plugins/Observability/src/Observability.cpp:542
+#: plugins/Observability/src/Observability.cpp:217
 msgid "h"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:499
-#: plugins/Observability/src/Observability.cpp:500
-#: plugins/Observability/src/Observability.cpp:542
+#: plugins/Observability/src/Observability.cpp:218
 msgid "m"
 msgstr "m"
 
-#: plugins/Observability/src/Observability.cpp:499
-#: plugins/Observability/src/Observability.cpp:500
-#: plugins/Observability/src/Observability.cpp:542
+#: plugins/Observability/src/Observability.cpp:219
 msgid "s"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:509
+#: plugins/Observability/src/Observability.cpp:220
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:510
+#: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:520
+#: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:521
+#: plugins/Observability/src/Observability.cpp:223
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:525
+#: plugins/Observability/src/Observability.cpp:224
 msgid "Circumpolar."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:525
+#: plugins/Observability/src/Observability.cpp:225
 msgid "No rise."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:547
+#: plugins/Observability/src/Observability.cpp:226
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:551
+#: plugins/Observability/src/Observability.cpp:227
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:592
+#: plugins/Observability/src/Observability.cpp:228
 msgid "Source is not observable."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:593
+#: plugins/Observability/src/Observability.cpp:229
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:610
+#: plugins/Observability/src/Observability.cpp:230
 msgid "Greatest elongation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:613
+#: plugins/Observability/src/Observability.cpp:231
 msgid "Largest Sun separation: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:616
+#: plugins/Observability/src/Observability.cpp:232
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:634
+#: plugins/Observability/src/Observability.cpp:234
 msgid "Acronychal rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:634
+#: plugins/Observability/src/Observability.cpp:235
 msgid "No Acronychal rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:635
+#: plugins/Observability/src/Observability.cpp:236
 msgid "Cosmical rise/set"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:635
+#: plugins/Observability/src/Observability.cpp:237
 msgid "No Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:681
+#: plugins/Observability/src/Observability.cpp:238
 msgid "Observable during the whole year."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:685
+#: plugins/Observability/src/Observability.cpp:239
 msgid "Not observable at dark night."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:690
+#: plugins/Observability/src/Observability.cpp:240
 msgid "Nights above horizon: "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:707
+#: plugins/Observability/src/Observability.cpp:241
 msgid "TODAY:"
-msgstr ""
+msgstr "ŠIANDIEN:"
 
-#: plugins/Observability/src/Observability.cpp:716
+#: plugins/Observability/src/Observability.cpp:242
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "ŠIEMET:"
 
-#: plugins/Observability/src/Observability.cpp:1450
+#: plugins/Observability/src/Observability.cpp:243
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:1455
+#: plugins/Observability/src/Observability.cpp:244
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr ""
@@ -7686,23 +7700,23 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
-msgstr ""
+msgstr "Šrifto spalva ir dydis"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
-msgstr ""
+msgstr "Raudona"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:372
 msgid "Green"
-msgstr ""
+msgstr "Žalia"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:373
 msgid "Blue"
-msgstr ""
+msgstr "Mėlyna"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:374
 msgid "Font Size"
-msgstr ""
+msgstr "Šrifto dydis"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
