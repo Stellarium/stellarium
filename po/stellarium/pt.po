@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-24 03:02+0700\n"
-"PO-Revision-Date: 2013-05-25 16:41+0000\n"
+"PO-Revision-Date: 2013-07-28 19:16+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-24 05:25+0000\n"
+"X-Launchpad-Export-Date: 2013-07-29 05:23+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
@@ -271,6 +271,7 @@ msgstr "Alcance da magnitude: <b>%1</b>%2<b>%3</b> (sistema fotométrico: %4)"
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
+"Alcance da magnitude: <b>%1</b>%2<b>%3/%4</b> (sistema fotométrico: %5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -308,12 +309,12 @@ msgstr "Período: %1 dias"
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Próxima iluminação mínima: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Próxima iluminação máxima: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
@@ -629,6 +630,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"<p align=\"justify\">Esta solução de S. Islam, M. Sadiq e M. S. Qureshi, "
+"baseada em Meeus e Simons (2000), foi publicada no artigo <em>Error "
+"Minimization of Polynomial Approximation of DeltaT</em> (%1) e foi revistada "
+"por Sana Islam em 2013."
 
 #: src/core/StelCore.cpp:1522
 #, qt-format
@@ -1059,7 +1064,7 @@ msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq e Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1168
 #, qt-format
@@ -1435,6 +1440,8 @@ msgid ""
 "Your platform does not support minimal required OpenGL 1.2. Please upgrade "
 "drivers for graphics card."
 msgstr ""
+"A sua plataforma não suporta o requisito mínimo OpenGL 1.2. Por favor, "
+"actualize os drivers da placa de vídeo."
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
@@ -2026,27 +2033,27 @@ msgstr "Excursão pelas culturas do céu"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:246
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Eventos da Terra a partir de Mercúrio"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:248
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Eventos da Terra a partir de Vénus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:250
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Eventos da Terra a partir de Marte"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "Maiores elongações e brilhos da Terra a partir de Marte"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
 msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr ""
+msgstr "Maiores elongações da Terra e de Marte a partir de Júpiter"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:260
@@ -2154,6 +2161,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 177 events in all!"
 msgstr ""
+"Protecção de ecrâ de vários acontecimentos do sistema solar, 177 eventos ao "
+"todo!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -2195,10 +2204,13 @@ msgstr ""
 #: src/translations.h:282
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
+"Maiores elongações e brilhos da Terra a partir de Marte, do ano 2000 ao ano "
+"3000"
 
 #: src/translations.h:283
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
 msgstr ""
+"Maiores elongações da Terra a partir de Júpiter, do ano 2000 ao ano 3000"
 
 #: src/translations.h:287
 msgid "Andorra"
@@ -3391,7 +3403,7 @@ msgstr "Linhas da constelação"
 
 #: src/translations.h:590
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Imagens de fundo do céu profundo"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1253
 msgid "Ecliptic J2000 grid"
@@ -3446,7 +3458,7 @@ msgstr "Linha do meridiano"
 
 #: src/translations.h:602
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Objectos do céu profundo"
 
 #: src/translations.h:603
 msgid "Night mode"
@@ -3594,19 +3606,19 @@ msgstr "Mira Telrad"
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "Seleccionar o telescópio seguinte"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Seleccionar a ócular seguinte"
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Seleccionar o telescópio anterior"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Seleccionar a ócular anterior"
 
 #: src/translations.h:657
 msgid "Show pulsars"
@@ -3924,6 +3936,8 @@ msgstr "Opções"
 #: src/ui_searchDialogGui.h:629
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Alguns objetos podem ser encontrados após a activação dos respectivos "
+"complementos"
 
 #: src/ui_searchDialogGui.h:631
 msgid "names in English"
@@ -3978,7 +3992,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "OCPs"
 
 #: src/ui_viewDialog.h:1204
 msgid "Planets and satellites"
@@ -4061,7 +4075,7 @@ msgstr "Taxa horária zenital"
 #: src/ui_viewDialog.h:1230
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "THZ:"
 
 #: src/ui_viewDialog.h:1233
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4388,7 +4402,7 @@ msgstr "Outras:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Utiliza a data e a hora local actual"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -4497,6 +4511,8 @@ msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr ""
+"Exibe as sombras solares nos planetas e nas luas (o OpenGL versão 2 ou mais "
+"recente é necessário para este recurso)"
 
 #: src/ui_configurationDialog.h:1119
 msgid "Render Solar Shadows"
@@ -5017,7 +5033,7 @@ msgstr "Multiplicidade: nada disponível"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "Distância focal da ócular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #, qt-format
@@ -5058,7 +5074,7 @@ msgstr "Versão"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 msgid "Barlow lens feature"
-msgstr ""
+msgstr "Recurso lentes Barlow"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid "Overview"
@@ -5327,62 +5343,62 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1595
 msgid "visual"
-msgstr ""
+msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1597
 msgid "scientific"
-msgstr ""
+msgstr "científico"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1599
 msgid "communications"
-msgstr ""
+msgstr "de comunicação"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1601
 msgid "navigation"
-msgstr ""
+msgstr "navegação"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1603
 msgid "amateur"
-msgstr ""
+msgstr "amador"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1605
 msgid "weather"
-msgstr ""
+msgstr "meteorológico"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1607
 msgid "geostationary"
-msgstr ""
+msgstr "geoestacionário"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1609
 msgid "non-operational"
-msgstr ""
+msgstr "não operacional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1611
 msgid "gps"
-msgstr ""
+msgstr "de posicionamento global (GPS)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1613
 msgid "iridium"
-msgstr ""
+msgstr "Iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1624
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "O Telescópio Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1626
 msgid "The International Space Station"
-msgstr ""
+msgstr "A Estação Espacial Internacional"
 
 #: plugins/Satellites/src/Satellite.cpp:239
 #: plugins/Satellites/src/Satellite.cpp:243
@@ -5710,11 +5726,14 @@ msgstr "Erro de actualização"
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
+"Foram actualizados %1/%2 satélite(s); %3 foram adicionados; %4 foram "
+"removidos"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr ""
+"Foram actualizados %1/%2 satélite(s); %3 foram adicionados; %4 estão em falta"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
 msgid "[new source]"
@@ -5764,7 +5783,7 @@ msgstr "[todos]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "New group..."
-msgstr ""
+msgstr "Novo grupo..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 msgid "Select TLE Update File"
@@ -5809,11 +5828,11 @@ msgstr "Configuração de satélites"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Updates"
-msgstr ""
+msgstr "Actualizações"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Actualizar os dados dos satélites de fontes web"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -5826,12 +5845,16 @@ msgstr "Última actualização:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
+"Ao actualizar, adicionar todos os novos satélites da(s) fonte(s) "
+"seleccionada(s)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Ao actualizar, remover os satélites que não estão listados nas fontes de "
+"actualização"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
@@ -5906,7 +5929,7 @@ msgstr "Definições"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Faça um duplo click num satélite para começar a segui-lo."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
@@ -5944,10 +5967,11 @@ msgstr "Órbita"
 #: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr ""
+"Não actualizar (ou remover ao actualizar) o(s) satélite(s) seleccionado(s)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:737
 msgid "Do not update"
-msgstr ""
+msgstr "Não actualizar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Description:"
@@ -5959,13 +5983,15 @@ msgstr "Grupos:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "TLE set:"
-msgstr ""
+msgstr "Conjunto de elementos de duas linhas:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
+"Os satélites contidos nas listas da fonte marcada serão automaticamente "
+"adicionados na próxima actualização se eles ainda não estiverem na colecção."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid ""
