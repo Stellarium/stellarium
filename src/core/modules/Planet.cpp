@@ -255,7 +255,7 @@ bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
 	  "            float l = length(C - P3);\n"
 	  "            radius = l * tan(asin(radius / l));\n"
 	  "            float r = atan(radius / l); //radius / l;\n"
-	  "            float d = acos(dot(normalize(Lp - P3), normalize(C - P3))); //length( (Lp - P3) / L - (C - P3) / l );\n"
+	  "            float d = acos(min(1, dot(normalize(Lp - P3), normalize(C - P3)))); //length( (Lp - P3) / L - (C - P3) / l );\n"
 	  "\n"
 	  "            float illumination = 1.0;\n"
 	  "\n"
