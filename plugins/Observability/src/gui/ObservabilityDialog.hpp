@@ -54,10 +54,8 @@ private slots:
 //	void setCrescentMoonFlag(int);
 //	void setSuperMoonFlag(int);
 
-	// Color control
-	void setRed(int);
-	void setGreen(int);
-	void setBlue(int);
+	//! Read the color values from the sliders and set the font color.
+	void setColor();
 	
 	void updateAltitudeLabel(int altitude);
 	void updateHorizonLabel(int horizon);
