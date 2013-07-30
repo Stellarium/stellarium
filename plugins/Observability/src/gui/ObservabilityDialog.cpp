@@ -70,11 +70,17 @@ void ObservabilityDialog::createDialogContent()
 //	connect(ui->Crescent, SIGNAL(stateChanged(int)), this, SLOT(setCrescentMoonFlag(int)));
 //	connect(ui->SuperMoon, SIGNAL(stateChanged(int)), this, SLOT(setSuperMoonFlag(int)));
 
-	connect(ui->Red, SIGNAL(sliderMoved(int)), this, SLOT(setRed(int)));
-	connect(ui->Green, SIGNAL(sliderMoved(int)), this, SLOT(setGreen(int)));
-	connect(ui->Blue, SIGNAL(sliderMoved(int)), this, SLOT(setBlue(int)));
+	connect(ui->redSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(setColor()));
+	connect(ui->greenSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(setColor()));
+	connect(ui->blueSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(setColor()));
 	
 	Observability* plugin = GETSTELMODULE(Observability);
+	
+	// Isn't valueChanged() better? But then we'll have to block
+	// signlas when settting the slider values.
 	connect(ui->fontSize, SIGNAL(sliderMoved(int)),
 	        plugin, SLOT(setFontSize(int)));
 	connect(ui->SunAltitude, SIGNAL(sliderMoved(int)),
@@ -146,9 +152,9 @@ void ObservabilityDialog::updateControls()
 	int Rv = (int)(100.*currFont[0]);
 	int Gv = (int)(100.*currFont[1]);
 	int Bv = (int)(100.*currFont[2]);
-	ui->Red->setValue(Rv);
-	ui->Green->setValue(Gv);
-	ui->Blue->setValue(Bv);
+	ui->redSlider->setValue(Rv);
+	ui->greenSlider->setValue(Gv);
+	ui->blueSlider->setValue(Bv);
 	ui->fontSize->setValue(GETSTELMODULE(Observability)->getFontSize());
 	int SAlti = GETSTELMODULE(Observability)->getSunAltitude();
 	ui->SunAltitude->setValue(SAlti);
@@ -202,19 +208,18 @@ void ObservabilityDialog::setFullMoonFlag(int checkState)
 //	GETSTELMODULE(Observability)->setShow(7,b);
 //}
 
-void ObservabilityDialog::setRed(int Value)
+void ObservabilityDialog::setColor()
 {
-	GETSTELMODULE(Observability)->setFontColor(0,Value);
-}
+	int red = ui->redSlider->value();
+	int green = ui->greenSlider->value();
+	int blue = ui->blueSlider->value();
 
-void ObservabilityDialog::setGreen(int Value)
-{
-	GETSTELMODULE(Observability)->setFontColor(1,Value);
-}
-
-void ObservabilityDialog::setBlue(int Value)
-{
-	GETSTELMODULE(Observability)->setFontColor(2,Value);
+	float fRed = (float)(red) / 100.;
+	float fGreen = (float)(green) / 100.;
+	float fBlue = (float)(blue) / 100.;
+	
+	Vec3f color(fRed, fGreen, fBlue);
+	GETSTELMODULE(Observability)->setFontColor(color);
 }
 
 void ObservabilityDialog::updateAltitudeLabel(int altitude)

@@ -1709,15 +1709,14 @@ int Observability::getHorizAltitude(void)
 }
 
 
-void Observability::setFontColor(int color, int value)
+void Observability::setFontColor(const Vec3f& color)
 {
-	float fValue = (float)(value) / 100.; 
-	fontColor[color] = fValue;
+	fontColor = color; // Vector3::operator =() is overloaded. :)
 }
 
-void Observability::setFontSize(int value)
+void Observability::setFontSize(int size)
 {
-	fontSize = value;
+	fontSize = size;
 }
 
 void Observability::setSunAltitude(int value)
