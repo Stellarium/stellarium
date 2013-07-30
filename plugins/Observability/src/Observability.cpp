@@ -265,7 +265,7 @@ void Observability::init()
 		gui->getGuiAction("actionShow_Observability")->setChecked(flagShowObservability);
 		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Observability"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(gui->getGuiAction("actionShow_Observability"), SIGNAL(toggled(bool)), this, SLOT(enableObservability(bool)));
+		connect(gui->getGuiAction("actionShow_Observability"), SIGNAL(toggled(bool)), this, SLOT(showReport(bool)));
 		connect(gui->getGuiAction("actionShow_Observability_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Observability_ConfigDialog"), SLOT(setChecked(bool)));
 	}
@@ -1598,38 +1598,17 @@ bool Observability::configureGui(bool show)
 	return true;
 }
 
-void Observability::restoreDefaults(void)
+void Observability::resetConfiguration()
 {
-	restoreDefaultConfigIni();
-	readSettingsFromConfig();
-}
-
-void Observability::restoreDefaultConfigIni(void)
-{
+	// Remove the plug-in's group from the configuration,
+	// after that it will be loaded with default values.
 	QSettings* conf = StelApp::getInstance().getSettings();
-
-	conf->beginGroup("Observability");
-
-	// delete all existing settings...
-	conf->remove("");
-
-	// Set defaults
-	conf->setValue("font_size", 15);
-	conf->setValue("Sun_Altitude", 12);
-	conf->setValue("Horizon_Altitude", 0);
-	conf->setValue("font_color", "0,0.5,1");
-	conf->setValue("show_AcroCos", true);
-	conf->setValue("show_Good_Nights", true);
-	conf->setValue("show_Best_Night", true);
-	conf->setValue("show_Today", true);
-	conf->setValue("show_FullMoon", true);
-//	conf->setValue("show_Crescent", true);
-//	conf->setValue("show_SuperMoon", true);
-
-	conf->endGroup();
+	Q_ASSERT(conf);
+	conf->remove("Observability");
+	loadConfiguration();
 }
 
-void Observability::readSettingsFromConfig(void)
+void Observability::loadConfiguration()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
@@ -1653,11 +1632,10 @@ void Observability::readSettingsFromConfig(void)
 	iHorizAltitude = conf->value("Horizon_Altitude", 0).toInt();
 	HorizAlti = ((double)iHorizAltitude)/Rad2Deg ;
 	
-
 	conf->endGroup();
 }
 
-void Observability::saveSettingsToConfig(void)
+void Observability::saveConfiguration()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString fontColorStr = QString("%1,%2,%3").arg(fontColor[0],0,'f',2).arg(fontColor[1],0,'f',2).arg(fontColor[2],0,'f',2);
@@ -1764,7 +1742,7 @@ void Observability::setHorizAltitude(int value)
 
 
 // Enable the Observability:
-void Observability::enableObservability(bool b)
+void Observability::showReport(bool b)
 {
 	flagShowObservability = b;
 }
