@@ -29,7 +29,6 @@ class Ui_ObservabilityDialog;
 
 //! Configuration window of the %Observability Analysis plug-in.
 //! @see Observability
-//! @todo Connect signals directly to Observability slots.
 class ObservabilityDialog : public StelDialog
 {
 	Q_OBJECT
@@ -46,14 +45,6 @@ public slots:
 	void retranslate();
 
 private slots:
-	void setTodayFlag(int);
-	void setAcroCosFlag(int);
-	void setOppositionFlag(int);
-	void setGoodDatesFlag(int);
-	void setFullMoonFlag(int);
-//	void setCrescentMoonFlag(int);
-//	void setSuperMoonFlag(int);
-
 	//! Read the color values from the sliders and set the font color.
 	void setColor();
 	
