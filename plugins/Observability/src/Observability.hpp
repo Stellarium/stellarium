@@ -49,21 +49,14 @@ public:
 	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
-
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this plugin.
 	virtual bool configureGui(bool show=true);
 
 
-	//! Set up the plugin with default values.
-	void restoreDefaults(void);
-	void restoreDefaultConfigIni(void);
-
-	//! Read (or re-read) settings from the main config file.  This will be called from init and also
-	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
-
-	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	//! Read (or re-read) settings from the main config file.
+	//! Default values are provided for all settings.
+	//! Called in init() and resetConfiguration().
+	void loadConfiguration();
 
 	//! Set which output is shown.
 	//! @param output is the index of the output (e.g., 1 for today's ephemeris, 5 for Full Moon).
@@ -72,16 +65,6 @@ public:
 
 	//! Set the font colors. Color is (0,1,2) for (R,G,B):
 	void setFontColor(int Color, int Value);
-
-	//! Set the font size:
-	void setFontSize(int);
-
-	//! Set the Sun altitude at twilight:
-	void setSunAltitude(int);
-
-	//! Set the Sun altitude at twilight:
-	void setHorizAltitude(int);
-
 
 	//! get Show Flags from current configuration:
 	bool getShowFlags(int);
@@ -100,10 +83,23 @@ public:
 
 
 public slots:
-//! Set whether observability will execute or not:
-	void enableObservability(bool b);
-
+	//! Restore and reload the default plug-in settings.
+	void resetConfiguration();
+	//! Save the plug-in's configuration to the main configuration file.
+	void saveConfiguration();
 	
+	//! Set the font size:
+	void setFontSize(int);
+
+	//! Set the Sun altitude at twilight:
+	void setSunAltitude(int);
+
+	//! Set the Sun altitude at twilight:
+	void setHorizAltitude(int);
+	
+	//! Controls whether an observability report will be displayed.
+	void showReport(bool b);
+
 private slots:
 	//! Retranslates the user-visible strings when the language is changed. 
 	void updateMessageText();
@@ -112,8 +108,6 @@ private slots:
 private:
 	//! Stuff for the configuration GUI:
 	ObservabilityDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
 
 	void setDateFormat(bool b) { dmyFormat=b; }
 	bool getDateFormat(void) { return dmyFormat; }

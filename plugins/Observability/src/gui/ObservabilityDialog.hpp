@@ -54,20 +54,20 @@ private slots:
 //	void setCrescentMoonFlag(int);
 //	void setSuperMoonFlag(int);
 
-	void restoreDefaults(void);
-	void saveSettings(void);
+	// Color control
 	void setRed(int);
 	void setGreen(int);
 	void setBlue(int);
-	void setSize(int);
-	void setAltitude(int);
-	void setHorizon(int);
+	
+	void updateAltitudeLabel(int altitude);
+	void updateHorizonLabel(int horizon);
+	//! Updates the displayed values of controls from the plug-in.
+	//! Called when the configuration is changed.
+	void updateControls();
 
 private:
-        Ui_ObservabilityDialog* ui;
+	Ui_ObservabilityDialog* ui;
 	void setAboutHtml(void);
-	void updateGuiFromSettings(void);
-
 };
 
 #endif // _OBSERVABILITYDIALOG_HPP_

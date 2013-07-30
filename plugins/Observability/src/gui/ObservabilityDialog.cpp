@@ -58,7 +58,8 @@ void ObservabilityDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(),
+	        SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Settings:
 	connect(ui->Today, SIGNAL(stateChanged(int)), this, SLOT(setTodayFlag(int)));
@@ -72,13 +73,28 @@ void ObservabilityDialog::createDialogContent()
 	connect(ui->Red, SIGNAL(sliderMoved(int)), this, SLOT(setRed(int)));
 	connect(ui->Green, SIGNAL(sliderMoved(int)), this, SLOT(setGreen(int)));
 	connect(ui->Blue, SIGNAL(sliderMoved(int)), this, SLOT(setBlue(int)));
-	connect(ui->fontSize, SIGNAL(sliderMoved(int)), this, SLOT(setSize(int)));
-	connect(ui->SunAltitude, SIGNAL(sliderMoved(int)), this, SLOT(setAltitude(int)));
-	connect(ui->HorizAltitude, SIGNAL(sliderMoved(int)), this, SLOT(setHorizon(int)));
+	
+	Observability* plugin = GETSTELMODULE(Observability);
+	connect(ui->fontSize, SIGNAL(sliderMoved(int)),
+	        plugin, SLOT(setFontSize(int)));
+	connect(ui->SunAltitude, SIGNAL(sliderMoved(int)),
+	        plugin, SLOT(setSunAltitude(int)));
+	connect(ui->SunAltitude, SIGNAL(sliderMoved(int)),
+	        this, SLOT(updateAltitudeLabel(int)));
+	connect(ui->HorizAltitude, SIGNAL(sliderMoved(int)),
+	        plugin, SLOT(setHorizAltitude(int)));
+	connect(ui->HorizAltitude, SIGNAL(sliderMoved(int)),
+	        this, SLOT(updateHorizonLabel(int)));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
+	        plugin, SLOT(resetConfiguration()));
+	// TODO: The plug-in should emit a signal when settings are changed.
+	// This works, because slots are called in the order they were connected.
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
+	        this, SLOT(updateControls()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()),
+	        plugin, SLOT(saveConfiguration()));
 
 	// About tab
 	setAboutHtml();
@@ -86,7 +102,7 @@ void ObservabilityDialog::createDialogContent()
 	Q_ASSERT(gui);
 	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
-	updateGuiFromSettings();
+	updateControls();
 
 }
 
@@ -116,16 +132,7 @@ void ObservabilityDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-
-void ObservabilityDialog::restoreDefaults(void)
-{
-	qDebug() << "Observability::restoreDefaults";
-	GETSTELMODULE(Observability)->restoreDefaults();
-	GETSTELMODULE(Observability)->readSettingsFromConfig();
-	updateGuiFromSettings();
-}
-
-void ObservabilityDialog::updateGuiFromSettings(void)
+void ObservabilityDialog::updateControls()
 {
 	ui->Today->setChecked(GETSTELMODULE(Observability)->getShowFlags(1));
 	ui->AcroCos->setChecked(GETSTELMODULE(Observability)->getShowFlags(2));
@@ -151,11 +158,6 @@ void ObservabilityDialog::updateGuiFromSettings(void)
 	ui->HorizAltitude->setValue(SAlti);
 	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(SAlti).arg(q_("deg.")));
 
-}
-
-void ObservabilityDialog::saveSettings(void)
-{
-	GETSTELMODULE(Observability)->saveSettingsToConfig();
 }
 
 void ObservabilityDialog::setTodayFlag(int checkState)
@@ -215,22 +217,15 @@ void ObservabilityDialog::setBlue(int Value)
 	GETSTELMODULE(Observability)->setFontColor(2,Value);
 }
 
-void ObservabilityDialog::setSize(int Value)
+void ObservabilityDialog::updateAltitudeLabel(int altitude)
 {
-	GETSTELMODULE(Observability)->setFontSize(Value);
-}
-
-void ObservabilityDialog::setAltitude(int Value)
-{
-	ui->AltiText->setText(QString("%1 -%2 %3").arg(q_("Sun altitude at twilight:")).arg(Value).arg(q_("deg.")));
-	GETSTELMODULE(Observability)->setSunAltitude(Value);
+	ui->AltiText->setText(QString("%1 -%2 %3").arg(q_("Sun altitude at twilight:")).arg(altitude).arg(q_("deg.")));
 }
 
 
-void ObservabilityDialog::setHorizon(int Value)
+void ObservabilityDialog::updateHorizonLabel(int horizon)
 {
-	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(Value).arg(q_("deg.")));
-	GETSTELMODULE(Observability)->setHorizAltitude(Value);
+	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(horizon).arg(q_("deg.")));
 }
 
 
