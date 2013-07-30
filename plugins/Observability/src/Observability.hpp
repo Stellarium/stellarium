@@ -63,9 +63,6 @@ public:
 	//! @param show is a boolean (true to show the output; false to hide it).
 	void setShow(int output, bool show);
 
-	//! Set the font colors. Color is (0,1,2) for (R,G,B):
-	void setFontColor(int Color, int Value);
-
 	//! get Show Flags from current configuration:
 	bool getShowFlags(int);
 
@@ -88,8 +85,13 @@ public slots:
 	//! Save the plug-in's configuration to the main configuration file.
 	void saveConfiguration();
 	
-	//! Set the font size:
-	void setFontSize(int);
+	//! Set the color of the font used to display the report.
+	//! Applies only to what is drawn on the viewport.
+	//! @param color Color vector in Stellarium's RGB format.
+	void setFontColor(const Vec3f& color);
+	//! Set the size of the font used to display the report.
+	//! Applies only to what is drawn on the viewport.
+	void setFontSize(int size);
 
 	//! Set the Sun altitude at twilight:
 	void setSunAltitude(int);

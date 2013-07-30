@@ -240,7 +240,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="redLabel">
              <property name="text">
               <string>Red</string>
              </property>
@@ -250,7 +250,7 @@
             </widget>
            </item>
            <item alignment="Qt::AlignLeft">
-            <widget class="QSlider" name="Red">
+            <widget class="QSlider" name="redSlider">
              <property name="maximumSize">
               <size>
                <width>508</width>
@@ -267,7 +267,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="greenLabel">
              <property name="text">
               <string>Green</string>
              </property>
@@ -277,7 +277,7 @@
             </widget>
            </item>
            <item alignment="Qt::AlignLeft">
-            <widget class="QSlider" name="Green">
+            <widget class="QSlider" name="greenSlider">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -288,7 +288,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="blueLabel">
              <property name="text">
               <string>Blue</string>
              </property>
@@ -298,7 +298,7 @@
             </widget>
            </item>
            <item alignment="Qt::AlignLeft">
-            <widget class="QSlider" name="Blue">
+            <widget class="QSlider" name="blueSlider">
              <property name="maximum">
               <number>99</number>
              </property>
@@ -402,7 +402,6 @@
             </widget>
            </item>
           </layout>
-
          </item>
         </layout>
        </item>
