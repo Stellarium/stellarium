@@ -38,6 +38,8 @@ class ObservabilityDialog;
 //! @see ObservabilityDialog
 //! @todo Find a way to (optionally) put the report in the upper left corner
 //! infobox.
+//! @todo Decide whether to use flags or separate getters/setters to communicate
+//! with the configuration window; if using flags, implement them properly w Qt.
 class Observability : public StelModule
 {
 	Q_OBJECT
@@ -57,11 +59,6 @@ public:
 	//! Default values are provided for all settings.
 	//! Called in init() and resetConfiguration().
 	void loadConfiguration();
-
-	//! Set which output is shown.
-	//! @param output is the index of the output (e.g., 1 for today's ephemeris, 5 for Full Moon).
-	//! @param show is a boolean (true to show the output; false to hide it).
-	void setShow(int output, bool show);
 
 	//! get Show Flags from current configuration:
 	bool getShowFlags(int);
@@ -84,6 +81,23 @@ public slots:
 	void resetConfiguration();
 	//! Save the plug-in's configuration to the main configuration file.
 	void saveConfiguration();
+	
+	//! @name Fields displayed in the observability report.
+	//! @{
+	
+	//! Display today's events (rise, set and transit times).
+	void enableTodayField(bool enabled = true);
+	//! Display acronychal and cosmical rising/setting.
+	void enableAcroCosField(bool enabled = true);
+	//! Display nights when the object is above the horizon after darkness.
+	void enableGoodNightsField(bool enabled = true);
+	//! Display when selected object is in opposition.
+	void enableOppositionField(bool enabled = true);
+	//! Display date of the full moon.
+	//! Has any effect only if the Moon is selected.
+	void enableFullMoonField(bool enabled = true);
+	//! @}
+	
 	
 	//! Set the color of the font used to display the report.
 	//! Applies only to what is drawn on the viewport.

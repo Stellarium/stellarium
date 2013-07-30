@@ -1655,20 +1655,33 @@ void Observability::saveConfiguration()
 	conf->endGroup();
 }
 
-
-
-void Observability::setShow(int output, bool setVal)
+void Observability::enableTodayField(bool enabled)
 {
-	switch(output)
-	{
-		case 1: {show_Today = setVal; break;}
-		case 2: {show_AcroCos = setVal; break;}
-		case 3: {show_Good_Nights = setVal; break;}
-		case 4: {show_Best_Night = setVal; break;}
-		case 5: {show_FullMoon = setVal; nextFullMoon=0.0; prevFullMoon=0.0; break;}
-//		case 6: {show_Crescent = setVal; break;}
-//		case 7: {show_SuperMoon = setVal; break;}
-	};
+	show_Today = enabled;
+	configChanged = true;
+}
+
+void Observability::enableAcroCosField(bool enabled)
+{
+	show_AcroCos = enabled;
+	configChanged = true;
+}
+
+void Observability::enableGoodNightsField(bool enabled)
+{
+	show_Good_Nights = enabled;
+	configChanged = true;
+}
+
+void Observability::enableOppositionField(bool enabled)
+{
+	show_Best_Night = enabled;
+	configChanged = true;
+}
+
+void Observability::enableFullMoonField(bool enabled)
+{
+	show_FullMoon = enabled;
 	configChanged = true;
 }
 
@@ -1734,13 +1747,6 @@ void Observability::setHorizAltitude(int value)
 }
 
 
-///  END OF STUFF FOR THE GUI CONFIG.
-///////////////////////////////
-
-
-
-
-// Enable the Observability:
 void Observability::showReport(bool b)
 {
 	flagShowObservability = b;
