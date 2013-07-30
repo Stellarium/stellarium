@@ -27,6 +27,9 @@
 
 class Ui_ObservabilityDialog;
 
+//! Configuration window of the %Observability Analysis plug-in.
+//! @see Observability
+//! @todo Connect signals directly to Observability slots.
 class ObservabilityDialog : public StelDialog
 {
 	Q_OBJECT
