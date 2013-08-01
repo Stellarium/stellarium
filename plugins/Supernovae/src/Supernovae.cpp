@@ -289,20 +289,22 @@ StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString snn;
 	foreach(const SupernovaP& sn, snstar)
 	{
-		if (sn->getNameI18n().toUpper().left(objw.length()) == objw)
+		snn = sn->getNameI18n();
+		if (snn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-				result << sn->getNameI18n();
+				result << snn;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -310,20 +312,22 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString snn;
 	foreach(const SupernovaP& sn, snstar)
 	{
-		if (sn->getEnglishName().toUpper().left(objw.length()) == objw)
+		snn = sn->getEnglishName();
+		if (snn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-				result << sn->getEnglishName();
+				result << snn;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }

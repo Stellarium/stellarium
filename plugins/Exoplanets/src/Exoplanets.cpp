@@ -332,25 +332,27 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 
 QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
-	QStringList result;
+	QStringList result;	
 	if (!flagShowExoplanets)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString epsn;
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getNameI18n().toUpper().left(objw.length()) == objw)
+		epsn = eps->getNameI18n();
+		if (epsn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << eps->getNameI18n();
+			result << epsn;
 		}
 	}
 
 	result.sort();
 
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -361,21 +363,23 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 	if (!flagShowExoplanets)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString epsn;
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getEnglishName().toUpper().left(objw.length()) == objw)
+		epsn = eps->getNameI18n();
+		if (epsn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << eps->getEnglishName();
+			result << epsn;
 		}
 	}
 
 	result.sort();
 
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }

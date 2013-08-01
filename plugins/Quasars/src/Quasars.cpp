@@ -335,20 +335,22 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	if (!flagShowQuasars)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString qson;
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getNameI18n().toUpper().left(objw.length()) == objw)
+		qson = quasar->getNameI18n();
+		if (qson.contains(objPrefix, Qt::CaseInsensitive))
 		{
-				result << quasar->getNameI18n();
+				result << qson;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -359,20 +361,22 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (!flagShowQuasars)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString qson;
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getEnglishName().toUpper().left(objw.length()) == objw)
+		qson = quasar->getEnglishName();
+		if (qson.contains(objPrefix, Qt::CaseInsensitive))
 		{
-				result << quasar->getEnglishName();
+				result << qson;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
