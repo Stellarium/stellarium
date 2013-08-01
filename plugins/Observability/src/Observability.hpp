@@ -40,6 +40,9 @@ class ObservabilityDialog;
 //! infobox.
 //! @todo Decide whether to use flags or separate getters/setters to communicate
 //! with the configuration window; if using flags, implement them properly w Qt.
+//! @todo Handle re-loading of the Solar System at runtime.
+//! @todo For each suspicious member variable, check if it can't be actually
+//! a local variable.
 class Observability : public StelModule
 {
 	Q_OBJECT
@@ -132,26 +135,33 @@ private:
 //! @param latitude latitude of the observer (in radians).
 //! @param elevation elevation angle of the object (horizon=0) in radians.
 //! @param declination declination of the object in radians. 
-	double HourAngle(double latitude,double elevation,double declination);
+	double calculateHourAngle(double latitude,
+	                          double elevation,
+	                          double declination);
 
 //! Computes the Hour Angle for a given Right Ascension and Sidereal Time.
 //! @param RA right ascension (hours).
 //! @param ST sidereal time (degrees).
 	double HourAngle2(double RA, double ST);
 
-//! Solves Moon/Sun/Planet Rise/Set/Transit times for the current Julian day. This function updates the variables MoonRise, MoonSet, MoonCulm. Returns success status.
-//! @param Kind is 1 for Sun, 2 for Moon, 3 for Solar-System planet.
-	bool SolarSystemSolve(StelCore* core, int Kind);
+//! Solves Moon/Sun/Planet Rise/Set/Transit times for the current Julian day.
+//! This function updates the variables MoonRise, MoonSet, MoonCulm.
+//! Returns success status.
+//! @param bodyType is 1 for Sun, 2 for Moon, 3 for Solar System object.
+	bool SolarSystemSolve(StelCore* core, int bodyType);
 
 //! Finds the heliacal rise/set dates of the year for the currently-selected object.
-//! @param Rise day of year of the Acronycal rise.
-//! @param Set day of year of the Acronycal set.
-//! @param Rise2 day of year of the Cosmical rise.
-//! @param Set2 day of year of the Cosmical set.
-	int CheckAcro(int &Rise, int &Set, int &Rise2, int &Set2);
+//! @param[out] acroRise day of year of the Acronycal rise.
+//! @param[out] acroSet day of year of the Acronycal set.
+//! @param[out] cosRise day of year of the Cosmical rise.
+//! @param[out] cosSet day of year of the Cosmical set.
+//! @returns 0 if no dates found, 1 if acronycal dates exist,
+//! 2 if cosmical dates exist, and 3 if both are found.
+	int calculateAcroCos(int& acroRise, int& acroSet,
+	                     int& cosRise, int& cosSet);
 
 
-//! computes the Sun or Moon coordinates at a given Julian date.
+//! Computes the Sun or Moon coordinates at a given Julian date.
 //! @param core the stellarium core.
 //! @param JD double for the Julian date.
 //! @param RASun right ascension of the Sun (in hours).
@@ -160,7 +170,10 @@ private:
 //! @param DecMoon idem for the Moon.
 //! @param EclLon is the module of the vector product of Heliocentric Ecliptic Coordinates of Sun and Moon (projected over the Ecliptic plane). Useful to derive the dates of Full Moon.
 //! @param getBack controls whether Earth and Moon must be returned to their original positions after computation.
-	void getSunMoonCoords(StelCore* core, double JD, double &RASun, double &DecSun, double &RAMoon, double &DecMoon, double &EclLon, bool getBack);
+	void getSunMoonCoords(StelCore* core, double JD,
+	                      double &RASun, double &DecSun,
+	                      double &RAMoon, double &DecMoon,
+	                      double &EclLon, bool getBack);
 
 
 //! computes the selected-planet coordinates at a given Julian date.
@@ -191,29 +204,34 @@ private:
 //! Just returns the sign of a double;
 	double sign(double d);
 
-//! Returns a string of date (e.g. "25 Apr") from a Day of Year (integer).
-//! @param DoY Day of the year.
-	QString CalenDate(int DoY);
+//! Get a date string ("25 Apr") from an ordinal date (Xth day of the year).
+//! @param dayNumber The ordinal number of a day of the year. (For example,
+//! 25 April is the 115 or 116 day of the year.)
+//! @todo Determine the exact format - leap year handling, etc.
+	QString formatAsDate(int dayNumber);
 
-//! Returns a string of range dates (e.g. "25 Apr - 10 May") from a two Days of Year (integer).
-//! @param fDoY first Day of the year.
-//! @param sDoY second Day of the year.
-	QString RangeCalenDates(int fDoY, int sDoY);
+//! Get a date range string ("25 Apr - 10 May") from two ordinal dates.
+//! @see formatAsDate()
+//! @param startDay number of the first day in the period.
+//! @param endDay number of the last day in the period.
+	QString formatAsDateRange(int startDay, int endDay);
 
 //! Just subtracts/adds 24h to a RA (or HA), to make it fall within 0-24h.
 //! @param RA right ascension (in hours).
 	double toUnsignedRA(double RA);
 
-//! Computes the RA, Dec and Rise/Set Sid. times of the selected planet for each day of the current year.
+//! Prepare arrays with data for the selected object for each day of the year.
+//! Computes the RA, Dec and rise/set sidereal times of the selected planet
+//! for the current year.
 //! @param core the current Stellarium core.
-	void PlanetRADec(StelCore *core);
+	void preparePlanetData(StelCore *core);
 
 //! Computes the Sun's RA and Dec for each day of a given year.
 //! @param core current Stellarium core.
-	void SunRADec(StelCore* core);
+	void prepareSunData(StelCore* core);
 
 //! Computes the Sun's Sid. Times at astronomical twilight (for each year's day)
-	void SunHTwi();
+	void prepareSunH();
 
 //! Just convert the Vec3d named TempLoc into RA/Dec:
 	void toRADec(Vec3d TempLoc, double &RA, double &Dec);
@@ -226,16 +244,20 @@ private:
 	bool CheckRise(int i);
 
 //! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune,RefracHoriz,HorizAlti;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune;
+	
+	//! Geometric altitude at refraction-corrected horizon.
+	double refractedHorizonAlt;
+	double horizonAltitude;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
 
 //! Vectors to store Sun's RA, Dec, and Sid. Time at twilight and rise/set.
-	double SunRA[366], SunDec[366], SunSidT[4][366];
+	double sunRA[366], sunDec[366], sunSidT[4][366];
 
 //! Vectors to store planet's RA, Dec, and Sid. Time at rise/set.
-	double ObjectRA[366], ObjectDec[366], ObjectH0[366], ObjectSidT[2][366];
+	double objectRA[366], objectDec[366], objectH0[366], objectSidT[2][366];
 
 //! Rise/Set/Transit times for the Moon at current day:
 	double MoonRise, MoonSet, MoonCulm, lastJDMoon;
@@ -255,8 +277,12 @@ private:
 	Planet* myPlanet;
 
 
-//! Current simulation year and number of days in the year.;
-	int currYear, nDays, iAltitude, iHorizAltitude;
+	//! Current simulation year.
+	int curYear;
+	//! Days in the current year (366 on leap years).
+	int nDays;
+	
+	int iAltitude, iHorizAltitude;
 
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
 	QString selName, bestNight, ObsRange, objname, AcroCos;
@@ -264,10 +290,10 @@ private:
 //! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
 
-//! Just the names of the months.
-	QString months[12];
+	//! Just the names of the months.
+	QStringList monthNames;
 
-//! Using for storage date format [i18n]
+	//! Using for storage date format [i18n]
 	bool dmyFormat;
 
 //! Equatorial and local coordinates of currently-selected source.
@@ -283,11 +309,11 @@ private:
 //! Parameters for the graphics (i.e., font, icons, etc.):
 	QFont font;
 	Vec3f fontColor;
-	bool flagShowObservability;
+	bool flagShowReport;
 	int fontSize;
-	QPixmap* OnIcon;
-	QPixmap* OffIcon;
-	QPixmap* GlowIcon;
+	QPixmap* onPixmap;
+	QPixmap* offPixmap;
+	QPixmap* glowPixmap;
 	StelButton* toolbarButton;
 
 	QString msgSetsAt, msgRoseAt, msgSetAt, msgRisesAt, msgCircumpolar, msgNoRise, msgCulminatesAt, msgCulminatedAt, msgH, msgM, msgS;
