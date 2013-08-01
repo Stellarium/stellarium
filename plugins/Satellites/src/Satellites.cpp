@@ -421,7 +421,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getNameI18n().toUpper().left(objw.length()) == objw)
+			if (sat->getNameI18n().toUpper().contains(objw, Qt::CaseInsensitive))
 			{
 				result << sat->getNameI18n().toUpper();
 			}
@@ -461,7 +461,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getEnglishName().toUpper().left(objw.length()) == objw)
+			if (sat->getEnglishName().toUpper().contains(objw, Qt::CaseInsensitive))
 			{
 				result << sat->getEnglishName().toUpper();
 			}

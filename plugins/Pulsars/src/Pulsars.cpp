@@ -339,20 +339,22 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	if (!flagShowPulsars)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString psrn;
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getNameI18n().toUpper().left(objw.length()) == objw)
+		psrn = pulsar->getNameI18n();
+		if (psrn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-				result << pulsar->getNameI18n();
+				result << psrn;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -363,20 +365,22 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (!flagShowPulsars)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString psrn;
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getEnglishName().toUpper().left(objw.length()) == objw)
+		psrn = pulsar->getEnglishName();
+		if (psrn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-				result << pulsar->getEnglishName();
+				result << psrn;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }

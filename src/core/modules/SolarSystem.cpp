@@ -1371,13 +1371,14 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
-	QString objw = objPrefix.toUpper();
+
+	QString sson;
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		QString constw = p->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		sson = p->getNameI18n();
+		if (sson.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << p->getNameI18n();
+			result << sson;
 			if (result.size()==maxNbItem)
 				return result;
 		}
@@ -1391,13 +1392,14 @@ QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNb
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
-	QString objw = objPrefix.toUpper();
+
+	QString sson;
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		QString constw = p->getEnglishName().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		sson = p->getEnglishName();
+		if (sson.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << p->getEnglishName();
+			result << sson;
 			if (result.size()==maxNbItem)
 				return result;
 		}

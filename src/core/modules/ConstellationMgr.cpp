@@ -1133,15 +1133,14 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString cn;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		cn = (*iter)->getNameI18n();
+		if (cn.contains(objPrefix,Qt::CaseInsensitive))
 		{
-			result << (*iter)->getNameI18n();
+			result << cn;
 			if (result.size()==maxNbItem)
 				return result;
 		}
@@ -1154,15 +1153,14 @@ QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int 
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString cn;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		QString constw = (*iter)->getEnglishName().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		cn = (*iter)->getEnglishName();
+		if (cn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << (*iter)->getEnglishName();
+			result << cn;
 			if (result.size()==maxNbItem)
 				return result;
 		}
