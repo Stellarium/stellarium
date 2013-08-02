@@ -78,6 +78,24 @@ float Supernova::getSelectPriority(const StelCore* core) const
         return getVMagnitude(core, false);
 }
 
+QString Supernova::getNameI18n(void) const
+{
+	QString name = designation;
+	if (note.size()!=0)
+		name = QString("%1 (%2)").arg(name).arg(q_(note));
+
+	return name;
+}
+
+QString Supernova::getEnglishName(void) const
+{
+	QString name = designation;
+	if (note.size()!=0)
+		name = QString("%1 (%2)").arg(name).arg(note);
+
+	return name;
+}
+
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
