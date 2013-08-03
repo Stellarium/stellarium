@@ -999,7 +999,7 @@ void StelCore::addDraconicYear()
 
 void StelCore::addTropicalYear()
 {
-	addSolarDays(365.2421897);
+	addSolarDays(365.242190419);
 }
 
 void StelCore::addTropicalCentury()
@@ -1089,7 +1089,7 @@ void StelCore::subtractDraconicYear()
 
 void StelCore::subtractTropicalYear()
 {
-	addSolarDays(-365.2421897);
+	addSolarDays(-365.242190419);
 }
 
 void StelCore::subtractTropicalCentury()
