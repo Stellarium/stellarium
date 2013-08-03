@@ -657,7 +657,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		double delta;
 		double unit;
 		double dayLength = 1.0;
-		double yearLength = 365.242189; // duration of Earth's mean tropical year
+		double yearLength = 365.242190419; // duration of Earth's mean tropical year
 		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
 		if (nowRe.capturedTexts().at(1)=="now")
