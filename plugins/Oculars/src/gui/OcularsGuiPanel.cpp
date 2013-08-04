@@ -577,11 +577,6 @@ void OcularsGuiPanel::updateOcularControls()
 
 void OcularsGuiPanel::updateLensControls()
 {
-	if (ocularsPlugin->flagShowCCD)
-	{
-		setLensControlsVisible(false);
-		return;
-	}
 	int index = ocularsPlugin->selectedOcularIndex;
 	//Ocular* ocular = ocularsPlugin->oculars[index];
 
@@ -611,7 +606,7 @@ void OcularsGuiPanel::updateLensControls()
 	}
 	fieldLensName->setPlainText(fullName);
 	fieldLensMultipler->setPlainText(multiplerString);
-	fieldOcularFl->setToolTip(q_("Multiplicity of lens"));
+	fieldOcularFl->setToolTip(q_("Focal length of eyepiece"));
 	
 	qreal posX = 0.;
 	qreal posY = 0.;
@@ -651,7 +646,7 @@ void OcularsGuiPanel::updateCcdControls()
 
 	//Get the name
 	int index = ocularsPlugin->selectedCCDIndex;
-	CCD* ccd = ocularsPlugin->ccds[index];
+	CCD* ccd = ocularsPlugin->ccds[index];	
 	Q_ASSERT(ccd);
 	QString name = ccd->name();
 	QString fullName;
@@ -664,6 +659,8 @@ void OcularsGuiPanel::updateCcdControls()
 		fullName = QString(q_("Sensor #%1: %2")).arg(index).arg(name);
 	}
 	fieldCcdName->setPlainText(fullName);
+
+	Lens *lens = ocularsPlugin->selectedLens();
 
 	qreal posX = 0.;
 	qreal posY = 0.;
@@ -693,8 +690,8 @@ void OcularsGuiPanel::updateCcdControls()
 	index = ocularsPlugin->selectedTelescopeIndex;
 	Telescope* telescope = ocularsPlugin->telescopes[index];
 	Q_ASSERT(telescope);
-	double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-	double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;	
+	double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+	double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 	QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 	fieldCcdDimensions->setPlainText(dimensionsLabel);
 	fieldCcdDimensions->setPos(posX, posY);
@@ -782,14 +779,16 @@ void OcularsGuiPanel::updateTelescopeControls()
 	posY += fieldTelescopeName->boundingRect().height();
 	widgetHeight += fieldTelescopeName->boundingRect().height();
 
+	Lens *lens = ocularsPlugin->selectedLens();
+
 	if (ocularsPlugin->flagShowCCD)
 	{
 		int index = ocularsPlugin->selectedCCDIndex;
 		CCD* ccd = ocularsPlugin->ccds[index];
 		Q_ASSERT(ccd);
 
-		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
+		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 		QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 		fieldCcdDimensions->setPlainText(dimensionsLabel);
 
@@ -802,8 +801,6 @@ void OcularsGuiPanel::updateTelescopeControls()
 		int index = ocularsPlugin->selectedOcularIndex;
 		Ocular* ocular = ocularsPlugin->oculars[index];
 		Q_ASSERT(ocular);
-                
-		Lens *lens = ocularsPlugin->selectedLens();
 
 		if (ocular->isBinoculars())
 		{

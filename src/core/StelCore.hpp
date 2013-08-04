@@ -116,6 +116,8 @@ public:
 		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
 		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
+		Banjevic,			//!< Banjevic (2006) algorithm for DeltaT
+		IslamSadiqQureshi,		//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 
@@ -253,12 +255,15 @@ public:
 	static const double JD_HOUR;
 	static const double JD_DAY;
 
-	//! Get the sideral time shifted by the observer longitude
-	//! @return the locale sideral time in radian
+	//! Get the sidereal time shifted by the observer longitude
+	//! @return the local sidereal time in radian
 	double getLocalSideralTime() const;
 
-	//! Get the duration of a sideral day for the current observer in day.
+	//! Get the duration of a sidereal day for the current observer in day.
 	double getLocalSideralDayLength() const;
+
+	//! Get the duration of a sidereal year for the current observer in days.
+	double getLocalSideralYearLength() const;
 
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode();

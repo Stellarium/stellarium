@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>594</width>
-    <height>513</height>
+    <width>587</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="font">
@@ -429,8 +429,11 @@
              </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="nebulaLabelCheckBox">
+               <property name="toolTip">
+                <string>Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)</string>
+               </property>
                <property name="text">
-                <string>Nebulas</string>
+                <string comment="Deep-sky objects">DSOs</string>
                </property>
               </widget>
              </item>
@@ -819,6 +822,9 @@
                   <property name="maximum">
                    <double>10.000000000000000</double>
                   </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
                   <property name="value">
                    <double>1.000000000000000</double>
                   </property>
@@ -927,7 +933,7 @@
                    <string>Hourly zenith rate</string>
                   </property>
                   <property name="text">
-                   <string>ZHR:</string>
+                   <string comment="Zenithal Hourly Rate">ZHR:</string>
                   </property>
                   <property name="textFormat">
                    <enum>Qt::PlainText</enum>
@@ -1068,7 +1074,7 @@
              <item row="1" column="0">
               <widget class="QCheckBox" name="starLimitMagnitudeCheckBox">
                <property name="toolTip">
-                <string>Stars to magnitude</string>
+                <string>Limit the magnitude of stars</string>
                </property>
                <property name="text">
                 <string>Stars</string>
@@ -1124,10 +1130,10 @@
              <item row="2" column="0">
               <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
                <property name="toolTip">
-                <string>Nebulas to magitude</string>
+                <string>Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)</string>
                </property>
                <property name="text">
-                <string>Nebulas</string>
+                <string comment="Deep-sky objects">DSOs</string>
                </property>
               </widget>
              </item>

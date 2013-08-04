@@ -38,6 +38,21 @@ namespace BigStarCatalogExtension {
 
 static const int RCMAG_TABLE_SIZE = 4096;
 
+typedef struct
+{
+	QString designation;	//! GCVS designation
+	QString vtype;		//! Type of variability
+	float maxmag;		//! Magnitude at maximum brightness
+	int mflag;		//! Magnitude flag code
+	float min1mag;		//! First minimum magnitude or amplitude
+	float min2mag;		//! Second minimum magnitude or amplitude
+	QString photosys;	//! The photometric system for magnitudes
+	double epoch;		//! Epoch for maximum light (Julian days)
+	double period;		//! Period of the variable star (days)
+	int Mm;			//! Rising time or duration of eclipse (%)
+	QString stype;		//! Spectral type
+} varstar;
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
@@ -168,6 +183,46 @@ public:
 	//! Hipparcos catalogue number.
 	static QString getSciName(int hip);
 
+	//! Get the (translated) additional scientific name for a star with a
+	//! specified Hipparcos catalogue number.
+	static QString getSciAdditionalName(int hip);
+
+	//! Get the (translated) scientific name for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static QString getGCVSName(int hip);
+
+	//! Get the type of variability for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static QString getGCVSVariabilityType(int hip);
+
+	//! Get the magnitude at maximum brightness for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static float getGCVSMaxMagnitude(int hip);
+
+	//! Get the magnitude flag code for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static int getGCVSMagnitudeFlag(int hip);
+
+	//! Get the minimum magnitude or amplitude for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static float getGCVSMinMagnitude(int hip, bool firstMinimumFlag=true);
+
+	//! Get the photometric system for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static QString getGCVSPhotometricSystem(int hip);
+
+	//! Get Epoch for maximum light for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static double getGCVSEpoch(int hip);
+
+	//! Get the period for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static double getGCVSPeriod(int hip);
+
+	//! Get the rising time or duration of eclipse for a variable star with a
+	//! specified Hipparcos catalogue number.
+	static int getGCVSMM(int hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
@@ -203,6 +258,10 @@ private:
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the scientific names for bright stars.
 	void loadSciNames(const QString& sciNameFile);
+
+	//! Loads GCVS from a file.
+	//! @param the path to a file containing the GCVS.
+	void loadGCVS(const QString& GCVSFile);
 
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
@@ -249,6 +308,11 @@ private:
 	static QHash<int, QString> sciNamesMapI18n;	
 	static QMap<QString, int> sciNamesIndexI18n;
 
+	static QHash<int, QString> sciAdditionalNamesMapI18n;
+	static QMap<QString, int> sciAdditionalNamesIndexI18n;
+
+	static QHash<int, varstar> varStarsMapI18n;
+	static QMap<QString, int> varStarsIndexI18n;
 
 	QFont starFont;
 	static bool flagSciNames;

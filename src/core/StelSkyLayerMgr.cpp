@@ -302,7 +302,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "Could not find image" << filename << ":" << e.what();
+		qWarning() << "Could not find image" << QDir::toNativeSeparators(filename) << ":" << e.what();
 		return false;
 	}
 }
@@ -368,7 +368,7 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "Could not find image" << filename << ":" << e.what();
+		qWarning() << "Could not find image" << QDir::toNativeSeparators(filename) << ":" << e.what();
 		return false;
 	}
 }

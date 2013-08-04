@@ -146,7 +146,7 @@ public:
 			{
 				statistics[s] = 0.0f;
 			}
-			else if(!swapModes[s] == StatisticSwapMode_DoNothing)
+			else if(swapModes[s] != StatisticSwapMode_DoNothing)
 			{
 				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown statistic swap mode");
 			}

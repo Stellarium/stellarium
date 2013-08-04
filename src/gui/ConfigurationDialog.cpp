@@ -62,6 +62,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QComboBox>
+#include <QDir>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
@@ -836,7 +837,9 @@ void ConfigurationDialog::aScriptHasStopped(void)
 
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDay()));
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDay();
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }
@@ -953,7 +956,7 @@ void ConfigurationDialog::downloadStars()
 	currentDownloadFile = new QFile(path);
 	if (!currentDownloadFile->open(QIODevice::WriteOnly))
 	{
-		qWarning() << "Can't open a writable file for storing new star catalog: " << path;
+		qWarning() << "Can't open a writable file for storing new star catalog: " << QDir::toNativeSeparators(path);
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
 		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
@@ -1160,6 +1163,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
+	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
+	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
 
 	//Restore the selection

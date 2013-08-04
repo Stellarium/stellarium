@@ -141,7 +141,7 @@ void OcularDialog::deleteSelectedCCD()
 void OcularDialog::deleteSelectedOcular()
 {
 	if (ocularTableModel->rowCount() == 1) {
-		qDebug() << "Can not delete the last entry.";
+		qDebug() << "Cannot delete the last entry.";
 	} else {
 		ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
 		ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
@@ -152,7 +152,7 @@ void OcularDialog::deleteSelectedOcular()
 void OcularDialog::deleteSelectedTelescope()
 {
 	if (telescopeTableModel->rowCount() == 1) {
-		qDebug() << "Can not delete the last entry.";
+		qDebug() << "Cannot delete the last entry.";
 	} else {
 		telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
 		ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
@@ -491,7 +491,7 @@ void OcularDialog::initAboutText()
 
 	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov</td></tr>";
+	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")</td></tr>";
 	html += "</table>";
 
 	//Overview

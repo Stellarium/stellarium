@@ -45,6 +45,7 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QUrl>
+#include <QDir>
 
 MpcImportWindow::MpcImportWindow() :
     downloadReply(0),
@@ -970,9 +971,15 @@ void MpcImportWindow::loadBookmarks()
 
 	//Initialize with hard-coded values
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2011", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2011/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2013", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2013/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs", "http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", "http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "http://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
+	bookmarks[MpcComets].insert("MPCORB: comets", "http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
 
 	//Try to save them to a file
 	saveBookmarks();
@@ -1027,12 +1034,12 @@ void MpcImportWindow::saveBookmarks()
 			StelJsonParser::write(jsonRoot, &bookmarksFile);
 			bookmarksFile.close();
 
-			qDebug() << "Bookmarks file saved to" << bookmarksFilePath;
+			qDebug() << "Bookmarks file saved to" << QDir::toNativeSeparators(bookmarksFilePath);
 			return;
 		}
 		else
 		{
-			qDebug() << "Unable to write bookmarks file to" << bookmarksFilePath;
+			qDebug() << "Unable to write bookmarks file to" << QDir::toNativeSeparators(bookmarksFilePath);
 		}
 	}
 	catch (std::exception & e)

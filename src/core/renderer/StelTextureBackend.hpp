@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QSize>
 #include <QString>
+#include <QDir>
 
 
 //! Possible states of a texture.
@@ -201,12 +202,12 @@ protected:
 		invariant();
 		if(status != TextureStatus_Loading)
 		{
-			qWarning() << "Unexpected error - texture " << path;
+			qWarning() << "Unexpected error - texture " << QDir::toNativeSeparators(path);
 			qWarning() << "Texture status: " << textureStatusName(status);
 			Q_ASSERT_X(false, Q_FUNC_INFO,
 			           "The only time an error can occur with a texture is during loading");
 		}
-		qWarning() << "Error occured during loading of texture " << path << 
+		qWarning() << "Error occured during loading of texture " << QDir::toNativeSeparators(path) <<
 		              ": " << error;
 		errorMessage = error;
 		status = TextureStatus_Error;

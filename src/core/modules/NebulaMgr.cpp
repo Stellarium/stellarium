@@ -436,7 +436,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	QFile ngcNameFile(catNGCNames);
 	if (!ngcNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "NGC name data file" << catNGCNames << "not found.";
+		qWarning() << "NGC name data file" << QDir::toNativeSeparators(catNGCNames) << "not found.";
 		return false;
 	}
 
@@ -495,7 +495,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				istr >> num;
 				if (istr.status()!=QTextStream::Ok)
 				{
-					qWarning() << "cannot read Caldwell number at line" << lineNumber << "of" << catNGCNames;
+					qWarning() << "cannot read Caldwell number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
 					continue;
 				}
 
@@ -513,7 +513,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				istr >> num;
 				if (istr.status()!=QTextStream::Ok)
 				{
-					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << catNGCNames;
+					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
 					continue;
 				}
 
@@ -525,7 +525,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 			readOk++;
 		}
 		else
-			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << catNGCNames;
+			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
 	}
 	ngcNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "NGC name records successfully";
@@ -564,6 +564,17 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		if (objwcap==objw)
 			return qSharedPointerCast<StelObject>(n);
 	}
+
+	// Search by IC numbers (possible formats are "IC466" or "IC 466")
+	if (objw.mid(0, 2) == "IC")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("IC%1").arg(n->IC_nb) == objw || QString("IC %1").arg(n->IC_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.mid(0, 1) == "M")
@@ -613,6 +624,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 			return qSharedPointerCast<StelObject>(n);
 	}
 
+	// Search by IC numbers (possible formats are "IC466" or "IC 466")
+	if (objw.mid(0, 2) == "IC")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("IC%1").arg(n->IC_nb) == objw || QString("IC %1").arg(n->IC_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.mid(0, 1) == "M")
 	{
@@ -643,25 +664,40 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
-	// Search by messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw[0]=='M')
+	QString dson;
+	// Search by Messier objects number (possible formats are "M31" or "M 31")
+	if (objPrefix.size()>=1 && objPrefix[0]=='M')
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
 			if (n->M_nb==0) continue;
-			QString constw = QString("M%1").arg(n->M_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			dson = QString("M%1").arg(n->M_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
 			{
-				result << constw;
+				result << dson;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("M %1").arg(n->M_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
+			dson = QString("M %1").arg(n->M_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				result << dson;
+		}
+	}
+
+	// Search by IC objects number (possible formats are "IC466" or "IC 466")
+	if (objPrefix.size()>=1 && objPrefix[0]=='I')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->IC_nb==0) continue;
+			dson = QString("IC%1").arg(n->IC_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+			{
+				result << dson;
+				continue;	// Prevent adding both forms for name
+			}
+			dson = QString("IC %1").arg(n->IC_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				result << dson;
 		}
 	}
 
@@ -669,50 +705,48 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	foreach (const NebulaP& n, nebArray)
 	{
 		if (n->NGC_nb==0) continue;
-		QString constw = QString("NGC%1").arg(n->NGC_nb);
-		QString constws = constw.mid(0, objw.size());
-		if (constws==objw)
+		dson = QString("NGC%1").arg(n->NGC_nb);
+		if (dson.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << constw;
+			result << dson;
 			continue;
 		}
-		constw = QString("NGC %1").arg(n->NGC_nb);
-		constws = constw.mid(0, objw.size());
-		if (constws==objw)
-			result << constw;
+		dson = QString("NGC %1").arg(n->NGC_nb);
+		if (dson.contains(objPrefix, Qt::CaseInsensitive))
+			result << dson;
 	}
 
 	// Search by caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw[0]=='C')
+	if (objPrefix.size()>=1 && objPrefix[0]=='C')
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
 			if (n->C_nb==0) continue;
-			QString constw = QString("C%1").arg(n->C_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			dson = QString("C%1").arg(n->C_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
 			{
-				result << constw;
+				result << dson;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("C %1").arg(n->C_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
+			dson = QString("C %1").arg(n->C_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				result << dson;
 		}
 	}
 
 	// Search by common names
 	foreach (const NebulaP& n, nebArray)
 	{
-		QString constw = n->nameI18.mid(0, objw.size()).toUpper();
-		if (constw==objw)
-			result << n->nameI18;
+		dson = n->nameI18;
+		if (dson.contains(objPrefix, Qt::CaseInsensitive))
+			result << dson;
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
-
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	}
 	return result;
 }
 
@@ -722,25 +756,40 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
-	// Search by messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw[0]=='M')
+	QString dson;
+	// Search by Messier objects number (possible formats are "M31" or "M 31")
+	if (objPrefix.size()>=1 && objPrefix[0]=='M')
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
 			if (n->M_nb==0) continue;
-			QString constw = QString("M%1").arg(n->M_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			dson = QString("M%1").arg(n->M_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
 			{
-				result << constw;
+				result << dson;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("M %1").arg(n->M_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
+			dson = QString("M %1").arg(n->M_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				result << dson;
+		}
+	}
+
+	// Search by IC objects number (possible formats are "IC466" or "IC 466")
+	if (objPrefix.size()>=1 && objPrefix[0]=='I')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->IC_nb==0) continue;
+			dson = QString("IC%1").arg(n->IC_nb);
+			if (dson.contains(objPrefix,Qt::CaseInsensitive))
+			{
+				result << dson;
+				continue;	// Prevent adding both forms for name
+			}
+			dson = QString("IC %1").arg(n->IC_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				result << dson;
 		}
 	}
 
@@ -748,49 +797,48 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	foreach (const NebulaP& n, nebArray)
 	{
 		if (n->NGC_nb==0) continue;
-		QString constw = QString("NGC%1").arg(n->NGC_nb);
-		QString constws = constw.mid(0, objw.size());
-		if (constws==objw)
+		dson = QString("NGC%1").arg(n->NGC_nb);
+		if (dson.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << constw;
+			result << dson;
 			continue;
 		}
-		constw = QString("NGC %1").arg(n->NGC_nb);
-		constws = constw.mid(0, objw.size());
-		if (constws==objw)
-			result << constw;
+		dson = QString("NGC %1").arg(n->NGC_nb);
+		if (dson.contains(objPrefix, Qt::CaseInsensitive))
+			result << dson;
 	}
 
 	// Search by caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw[0]=='C')
+	if (objPrefix.size()>=1 && objPrefix[0]=='C')
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
 			if (n->C_nb==0) continue;
-			QString constw = QString("C%1").arg(n->C_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			dson = QString("C%1").arg(n->C_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
 			{
-				result << constw;
+				result << dson;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("C %1").arg(n->C_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
+			dson = QString("C %1").arg(n->C_nb);
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				result << dson;
 		}
 	}
 
 	// Search by common names
 	foreach (const NebulaP& n, nebArray)
 	{
-		QString constw = n->englishName.mid(0, objw.size()).toUpper();
-		if (constw==objw)
-			result << n->englishName;
+		dson = n->englishName;
+		if (dson.contains(objPrefix, Qt::CaseInsensitive))
+			result << dson;
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }

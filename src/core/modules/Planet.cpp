@@ -217,6 +217,10 @@ bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
 	  "        P3 = normalize(P) * data.w;\n"
 	  "    }\n"
 	  "\n"
+	  "    float L = length(Lp - P3);\n"
+	  "    RS = L * tan(asin(RS / L));\n"
+	  "    float R = atan(RS / L); //RS / L;\n"
+	  "\n"
 	  "    if((lambert > 0.0) || isRing)\n"
 	  "    {\n"
 	  "        if(ring && !isRing)\n"
@@ -248,12 +252,10 @@ bool Planet::SharedPlanetGraphics::loadPlanetShaders(StelRenderer* renderer)
 	  "            vec3 C = data.rgb;\n"
 	  "            float radius = data.a;\n"
 	  "\n"
-	  "            float L = length(Lp - P3);\n"
 	  "            float l = length(C - P3);\n"
-	  "\n"
-	  "            float R = RS / L;\n"
-	  "            float r = radius / l;\n"
-	  "            float d = length( (Lp - P3) / L - (C - P3) / l );\n"
+	  "            radius = l * tan(asin(radius / l));\n"
+	  "            float r = atan(radius / l); //radius / l;\n"
+	  "            float d = acos(min(1.0, dot(normalize(Lp - P3), normalize(C - P3)))); //length( (Lp - P3) / L - (C - P3) / l );\n"
 	  "\n"
 	  "            float illumination = 1.0;\n"
 	  "\n"
@@ -620,22 +622,19 @@ void Planet::computePosition(const double date)
 
 	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-date)>deltaOrbitJD || !orbitCached))
 	{
-
-		// calculate orbit first (for line drawing)
-		double date_increment = re.siderealPeriod/ORBIT_SEGMENTS;
 		double calc_date;
 		// int delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
 		int delta_points;
 
 		if( date > lastOrbitJD )
 		{
-			delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
+			delta_points = (int)(0.5 + (date - lastOrbitJD)/deltaOrbitJD);
 		}
 		else
 		{
-			delta_points = (int)(-0.5 + (date - lastOrbitJD)/date_increment);
+			delta_points = (int)(-0.5 + (date - lastOrbitJD)/deltaOrbitJD);
 		}
-		double new_date = lastOrbitJD + delta_points*date_increment;
+		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
 		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), deltaOrbitJD, delta_points);
 
@@ -647,7 +646,7 @@ void Planet::computePosition(const double date)
 				if(d + delta_points >= ORBIT_SEGMENTS )
 				{
 					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*date_increment;
+					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
 
 					// date increments between points will not be completely constant though
 					computeTransMatrix(calc_date);
@@ -679,7 +678,7 @@ void Planet::computePosition(const double date)
 				if(d + delta_points < 0 )
 				{
 					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*date_increment;
+					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
 
 					computeTransMatrix(calc_date);
 					if (osculatingFunc) {
@@ -708,7 +707,7 @@ void Planet::computePosition(const double date)
 			// update all points (less efficient)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
-				calc_date = date + (d-ORBIT_SEGMENTS/2)*date_increment;
+				calc_date = date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
 				computeTransMatrix(calc_date);
 				if (osculatingFunc)
 				{
@@ -1647,7 +1646,7 @@ void Planet::drawOrbit(const StelCore* core, StelRenderer* renderer)
 
 	renderer->setBlendMode(BlendMode_Alpha);
 	renderer->setGlobalColor(orbitColor[0], orbitColor[1], 
-	                         orbitColor[2], orbitFader.getInterstate());
+				 orbitColor[2], orbitFader.getInterstate());
 
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws

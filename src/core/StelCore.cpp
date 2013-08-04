@@ -893,11 +893,11 @@ bool StelCore::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
 	static double lastJD = getJDay();
-	static bool previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
+	static bool previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 	if (fabs(lastJD-getJDay())>JD_SECOND/4)
 	{
 		lastJD = getJDay();
-		previousResult = (fabs(getJDay()-StelUtils::getJDFromSystem())<JD_SECOND);
+		previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 	}
 	return previousResult;
 }
@@ -999,7 +999,7 @@ void StelCore::addDraconicYear()
 
 void StelCore::addTropicalYear()
 {
-	addSolarDays(365.2421897);
+	addSolarDays(365.242190419);
 }
 
 void StelCore::addTropicalCentury()
@@ -1089,7 +1089,7 @@ void StelCore::subtractDraconicYear()
 
 void StelCore::subtractTropicalYear()
 {
-	addSolarDays(-365.2421897);
+	addSolarDays(-365.242190419);
 }
 
 void StelCore::subtractTropicalCentury()
@@ -1114,16 +1114,22 @@ void StelCore::addSiderealDays(double d)
 	setJDay(getJDay() + d);
 }
 
-// Get the sideral time shifted by the observer longitude
+// Get the sidereal time shifted by the observer longitude
 double StelCore::getLocalSideralTime() const
 {
 	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
-//! Get the duration of a sideral day for the current observer in day.
+//! Get the duration of a sidereal day for the current observer in day.
 double StelCore::getLocalSideralDayLength() const
 {
 	return position->getHomePlanet()->getSiderealDay();
+}
+
+//! Get the duration of a sidereal year for the current observer in days.
+double StelCore::getLocalSideralYearLength() const
+{
+	return position->getHomePlanet()->getSiderealPeriod();
 }
 
 QString StelCore::getStartupTimeMode()
@@ -1329,7 +1335,7 @@ double StelCore::getDeltaT(double jDay) const
 		break;
 	case ChaprontMeeus:
 		// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
-		ndot = -26.0; // n.dot = -26.0 "/cy/cy
+		ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByChaprontMeeus(jDay);
 		break;
 	case JPLHorizons:
@@ -1369,6 +1375,16 @@ double StelCore::getDeltaT(double jDay) const
 		// Espenak & Meeus (2006) algorithm for DeltaT
 		ndot = -25.858; // n.dot = -25.858 "/cy/cy
 		DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
+		break;
+	case Banjevic:
+		// Banjevic (2006) algorithm for DeltaT
+		ndot = -26.0; // n.dot = -26.0 "/cy/cy
+		DeltaT = StelUtils::getDeltaTByBanjevic(jDay);
+		break;
+	case IslamSadiqQureshi:
+		// Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
+		ndot = -26.0; // n.dot = -26.0 "/cy/cy
+		DeltaT = StelUtils::getDeltaTByIslamSadiqQureshi(jDay);
 		break;
 	case Custom:
 		// User defined coefficients for quadratic equation for DeltaT
@@ -1496,6 +1512,12 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	case EspenakMeeus: // GENERAL SOLUTION
 		description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
 		break;
+	case Banjevic:
+		description = q_("This solution by B. Banjevic, based on Stephenson & Morrison (1984), was published in article <em>Ancient eclipses and dating the fall of Babylon</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2006POBeo..80..251B'>2006</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+		break;
+	case IslamSadiqQureshi:
+		description = q_("This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & Simons (2000), was published in article <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013.").arg("<a href='http://www.ias.ac.in/jaa/dec2008/JAA610.pdf'>2008</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+		break;
 	case Custom:
 		description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
 		break;
@@ -1578,7 +1600,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		validRangeAppendix = q_("with a mean error of less than one second, max. error 1.9s, and meaningless values outside this range");
 		break;
 	case ChaprontTouze:
-		// FIXME: This is valid range?
+		// FIXME: It's valid range?
 		start	= -4000;
 		finish	= 8000;
 		break;
@@ -1592,9 +1614,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		break;
 	case ChaprontMeeus:
 		start	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
-		finish	=  2150; // 1997;
-		//validRangeAppendix = q_("with a maximum error of 2.3 seconds"); // Wrong: This is only for the unused expression on p. 80!
-		//validRangeAppendix = q_("(estimated)");
+		finish	=  2150; // 1997;		
 		break;
 	case JPLHorizons:
 		start	= -2999;
@@ -1628,6 +1648,16 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		start	= -1999;
 		finish	= 3000;
 		break;
+	case Banjevic:
+		start	= -2020;
+		finish	= 1620;
+		validRangeAppendix = q_("with zero values outside this range");
+		break;
+	case IslamSadiqQureshi:
+		start	= 1620;
+		finish	= 2007;
+		validRangeAppendix = q_("with zero values outside this range");
+		break;
 	case Custom:
 		// Valid range unknown
 		break;
@@ -1639,7 +1669,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 			validRange = q_("Valid range of usage: between years %1 and %2, %3.").arg(start).arg(finish).arg(validRangeAppendix);
 		else
 			validRange = q_("Valid range of usage: between years %1 and %2.").arg(start).arg(finish);
-		if (start > year or year > finish)
+		if (start > year || year > finish)
 			*marker = "*";
 	}
 	else

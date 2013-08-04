@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELFILEMGR_HPP
+#ifndef _STELFILEMGR_HPP_
 #define _STELFILEMGR_HPP_
 
 #define CHECK_FILE "data/ssystem.ini"

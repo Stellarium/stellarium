@@ -525,6 +525,30 @@ namespace StelUtils
 	//! @return Delta-T in seconds
 	double getDeltaTByReingoldDershowitz(const double jDay);
 
+	//! Get Delta-T estimation for a given date.
+	//! Implementation of algorithm by Banjevic (2006) for DeltaT computation.
+	//! Source: Ancient eclipses and dating the fall of Babylon
+	//! Banjevic, B.
+	//! Publications of the Astronomical Observatory of Belgrade, Vol. 80, p. 251-257 (2006)
+	//! 2006POBeo..80..251B [http://adsabs.harvard.edu/abs/2006POBeo..80..251B]
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByBanjevic(const double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation of algorithm by Islam, Sadiq & Qureshi (2008 + revisited 2013) for DeltaT computation.
+	//! Source: Error Minimization of Polynomial Approximation of DeltaT
+	//! Islam, S. & Sadiq, M. & Qureshi, M. S.
+	//! Journal of Astrophysics & Astronomy, Vol. 29, p. 363–366 (2008)
+	//! http://www.ias.ac.in/jaa/dec2008/JAA610.pdf
+	//! Note: These polynomials are based on the uncorrected deltaT table from the Astronomical Almanac, thus
+	//! ndot = -26.0 arcsec/cy^2. Meeus & Simons (2000) corrected the deltaT table for years before 1955.5 using
+	//! ndot = -25.7376 arcsec/cy^2. Therefore the accuracies stated by Meeus & Simons are correct and cannot be
+	//! compared with accuracies from Islam & Sadiq & Qureshi.
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByIslamSadiqQureshi(const double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
 	//! For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224

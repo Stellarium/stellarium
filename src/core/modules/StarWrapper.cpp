@@ -54,11 +54,11 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	if (flags&Magnitude)
 	{
-	    oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
-            if (core->getSkyDrawer()->getFlagHasAtmosphere())
-            {
-                oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
-            }
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
+			oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		}
         }
         oss << getPositionInfoString(core, flags);
 
@@ -80,6 +80,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	QString str;
 
 	QTextStream oss(&str);
+	const QString varType = StarMgr::getGCVSVariabilityType(s->hip);
+	const float maxVMag = StarMgr::getGCVSMaxMagnitude(s->hip);
+	const float magFlag = StarMgr::getGCVSMagnitudeFlag(s->hip);
+	const float minVMag = StarMgr::getGCVSMinMagnitude(s->hip);
+	const float min2VMag = StarMgr::getGCVSMinMagnitude(s->hip, false);
+	const QString photoVSys = StarMgr::getGCVSPhotometricSystem(s->hip);
+	const double vEpoch = StarMgr::getGCVSEpoch(s->hip);
+	const double vPeriod = StarMgr::getGCVSPeriod(s->hip);
+	const int vMm = StarMgr::getGCVSMM(s->hip);
 	if (s->hip)
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -87,16 +96,21 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
 		const QString sciName = StarMgr::getSciName(s->hip);
+		const QString addSciName = StarMgr::getSciAdditionalName(s->hip);
+		const QString varSciName = StarMgr::getGCVSName(s->hip);
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
-			if (commonNameI18!="" || sciName!="")
+			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
 			{
 				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
 				if (commonNameI18!="" && sciName!="")
 					oss << "(";
 				oss << (sciName=="" ? "" : sciName);
+				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
+				if (varSciName!="" && varSciName!=sciName)
+					oss << (sciName=="" ? "" : " - ") << varSciName;
 				if (commonNameI18!="" && sciName!="")
 					oss << ")";
 				nameWasEmpty=false;
@@ -114,40 +128,126 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << "</h2>";
 	}
 
+	bool ebsFlag = false;
 	if (flags&Extra1)
 	{
+		QString varstartype = "";
+		QString startype = "";
+		if(!varType.isEmpty())
+		{
+			if (QString("FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+				varstartype = q_("eruptive variable star");
+			else if (QString("ACYG BCEP BCEPS CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB").contains(varType))
+				varstartype = q_("pulsating variable star");
+			else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
+				varstartype = q_("rotating variable star");
+			else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
+				varstartype = q_("cataclysmic variable star");
+			else if (QString("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
+			{
+				varstartype = q_("eclipsing binary system");
+				ebsFlag = true;
+			}
+			else
+				varstartype = q_("variable star");
+		}
+
 		if (s->componentIds)
-			oss << q_("Type: <b>%1</b>").arg(q_("double star")) << "<br />";
+			startype = q_("double star");
 		else
-			oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
+			startype = q_("star");
+
+		if (!varType.isEmpty())
+		{
+			if (s->componentIds)
+				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype);
+			else
+				oss << q_("Type: <b>%1</b>").arg(varstartype);
+			oss << " (" << varType << ")<br />";
+		} else
+			oss << q_("Type: <b>%1</b>").arg(startype) << "<br />";
+
 	}
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-                oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-											      QString::number(getVMagnitude(core, true), 'f', 2),
-											      QString::number(s->getBV(), 'f', 2)) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-								       QString::number(s->getBV(), 'f', 2)) << "<br>";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+													QString::number(getVMagnitude(core, true), 'f', 2),
+													QString::number(s->getBV(), 'f', 2)) << "<br>";
+		else
+			oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+									       QString::number(s->getBV(), 'f', 2)) << "<br>";
 	}
 
 	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core, false)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
 
+	if (flags&Magnitude)
+	{
+		if (!varType.isEmpty())
+		{
+			float minimumM1 = minVMag;
+			float minimumM2 = min2VMag;
+			if (magFlag==1) // Amplitude
+			{
+				minimumM1 += maxVMag;
+				minimumM2 += maxVMag;
+			}
+
+			if (min2VMag==99.f)
+				oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(photoVSys) << "<br />";
+			else
+				oss << q_("Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2)).arg(photoVSys) << "<br />";
+		}
+	}
+
 	oss << getPositionInfoString(core, flags);
 
 	if (s->spInt && flags&Extra1)
 	{
-		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br>";
+		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br />";
 	}
 
 	if ((flags&Distance) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
 
 	if (s->plx && flags&Extra2)
-		oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br>";
+		oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br />";
+
+	if (vEpoch>0 && flags&Extra1)
+	{
+		double vsEpoch = 2400000+vEpoch;
+		if (ebsFlag)
+			oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
+		else
+			oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
+	}
+
+	if (vPeriod>0 && flags&Extra1)
+		oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
+
+	if (vEpoch>0 && vPeriod>0 && flags&Extra1)
+	{
+		// Calculate next minimum or maximum light
+		double vsEpoch = 2400000+vEpoch;
+		int npDelta = (core->getJDay()-vsEpoch)/vPeriod;
+		double npDate = vsEpoch + ((npDelta+1)*vPeriod);
+		QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+		if (ebsFlag)
+			oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
+		else
+			oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
+	}
+
+	if (vMm>0 && flags&Extra1)
+	{
+		if (ebsFlag)
+			oss << q_("Duration of eclipse: %1%").arg(vMm) << "<br />";
+		else
+			oss << q_("Rising time: %1%").arg(vMm) << "<br />";
+	}
+
 
 	StelObject::postProcessInfoString(str, flags);
 

@@ -40,6 +40,9 @@
 #elif defined(QT_OPENGL_ES_2) || defined(USE_OPENGL_ES2)
 # include <GLES2/gl2.h>
 #else
+#ifdef _MSC_BUILD
+#include <windows.h>
+#endif
 # include <GL/gl.h>
 #endif
 

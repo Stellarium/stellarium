@@ -3,6 +3,7 @@ Version=1.0
 Type=Application
 Name=Stellarium
 GenericName=Desktop planetarium
+GenericName[es]=Planetario de escritorio
 GenericName[ru]=Настольный планетарий
 Exec=stellarium
 Icon=stellarium
@@ -10,8 +11,10 @@ StartupNotify=false
 Terminal=false
 Categories=Astronomy;Education;Science;
 Comment=Planetarium
+Comment[es]=Planetario
 Comment[fr]=Planétarium
 Comment[ru]=Планетарий
+Keywords=astronomy;planetarium;
 
 Actions=Window;Fullscreen;Safemode;
 

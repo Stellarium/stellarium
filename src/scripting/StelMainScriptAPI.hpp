@@ -67,16 +67,20 @@ public slots:
 	//!   You may also append " sidereal" to use sidereal days and so on.
 	//!   You can also use "now" at the start.  For example:
 	//!   "now + 3 hours sidereal"
-	//!   Note: you must use the plural all the time, even when the number
-	//!   of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
-	//! Note: when sidereal time is used, the length of time for
+	//! @note you must use the plural all the time, even when the number
+	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
+	//! @note when sidereal time is used, the length of time for
 	//! each unit is dependent on the current planet.  By contrast
 	//! when sidereal timeis not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used.
-	//! @param enableDeltaT true or false - enable Delta-T correction or not
-	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
+	//! the ISO date type is used. Defaults to "utc".
+	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
+	//! Defaults to "true".
+	//! @note for fully compatibles behavior of this function with the version 0.11.4
+	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
+	//! before running \b core.setDate(); for disabling DeltaT correction.
+	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
@@ -89,6 +93,20 @@ public slots:
 	//! in HMS format, e.g. "0h1m68.2s"
 	//! @return the DeltaT for current simulation time.
 	QString getDeltaT() const;
+
+	//! get the DeltaT equation name for the simulation date and time as a string
+	//! @return name of the DeltaT equation
+	QString getDeltaTAlgorithm() const;
+
+	//! set equation of the DeltaT for the simulation date and time
+	//! @param algorithmName is name of equation, e.g. "WithoutCorrection" or "EspenakMeeus"
+	//! @note list of possible names of equation for DeltaT: WithoutCorrection, Schoch, Clemence, IAU,
+	//! AstronomicalEphemeris, TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979,
+	//! MorrisonStephenson1982, StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski,
+	//! SchmadelZech1988, ChaprontTouze, StephensonMorrison1995, Stephenson1997, ChaprontMeeus,
+	//! JPLHorizons, MeeusSimons, MontenbruckPfleger, ReingoldDershowitz, MorrisonStephenson2004,
+	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Custom.
+	void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
@@ -124,9 +142,9 @@ public slots:
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
 	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
 	//! @deprecated Use getObjectInfo()
 	QVariantMap getObjectPosition(const QString& name);
 
@@ -139,9 +157,9 @@ public slots:
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
 	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
 	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
@@ -149,6 +167,25 @@ public slots:
 	//! - size : angular size in decimal degrees
 	//! - localized-name : localized name
 	QVariantMap getObjectInfo(const QString& name);
+
+	//! Fetch a map with data about an latest selected object's position, magnitude and so on
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
+	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (extincted)
+	//! - size : angular size in decimal degrees
+	//! - name : english name
+	//! - localized-name : localized name
+	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
@@ -395,7 +432,7 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra The right ascension of the center of the image in J2000 frame degrees
-	//! @param dec The declenation of the center of the image in J2000 frame degrees
+	//! @param dec The declination of the center of the image in J2000 frame degrees
 	//! @param angSize The angular size of the image in arc minutes
 	//! @param rotation The clockwise rotation angle of the image in degrees
 	//! @param minRes The minimum resolution setting for the image

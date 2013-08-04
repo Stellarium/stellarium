@@ -25,6 +25,7 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelLocaleMgr.hpp"
 #include "renderer/StelRenderer.hpp"
 #include "renderer/StelTextureNew.hpp"
 
@@ -157,19 +158,27 @@ float Exoplanet::getSelectPriority(const StelCore* core) const
 	}
 }
 
+QString Exoplanet::getNameI18n(void) const
+{
+	// Use SkyTranslator for translation star names
+	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	return trans.qtranslate(designation);
+}
+
 QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{
-		oss << "<h2>" << designation << "</h2>";
+	{		
+
+		oss << "<h2>" << getNameI18n() << "</h2>";
 	}
 
 	if (flags&Magnitude)
 	{
-		if (Vmag<99)
+		if (Vmag<99 && !GETSTELMODULE(Exoplanets)->getDisplayMode())
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			{
@@ -371,15 +380,15 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 			discovery.append(p.discovered);
 		}
 	}
-	qSort(discovery.begin(),discovery.end());	
-	if (discovery.at(0)<=year && discovery.at(0)>0)
+	qSort(discovery.begin(),discovery.end());
+	if (!discovery.isEmpty()) 
 	{
-		return true;
+		if (discovery.at(0)<=year && discovery.at(0)>0)
+		{
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 void Exoplanet::update(double deltaTime)
@@ -429,7 +438,7 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 			else
 			{
 				renderer->drawTexturedRect(win[0] - 5, win[1] - 5, 10, 10);
-				renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+				renderer->drawText(TextParams(XYZ, projector, getNameI18n()).shift(shift, shift).useGravity());
 			}
 		}
 	}

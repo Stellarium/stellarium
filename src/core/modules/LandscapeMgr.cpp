@@ -258,6 +258,10 @@ void LandscapeMgr::update(double deltaTime)
 		landscapeBrightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
 	}
 
+	// Brightness can't be over 1.f (see https://bugs.launchpad.net/stellarium/+bug/1115364)
+	if (landscapeBrightness>0.95)
+		landscapeBrightness = 0.95;
+
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 	if (core->getCurrentLocation().planetName.contains("Sun"))
 	{
@@ -623,7 +627,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	QString s;
 	if (landscapeIni.status() != QSettings::NoError)
 	{
-		qWarning() << "ERROR parsing landscape.ini file: " << landscapeFile;
+		qWarning() << "ERROR parsing landscape.ini file: " << QDir::toNativeSeparators(landscapeFile);
 		s = "";
 	}
 	else
@@ -703,7 +707,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	Q_UNUSED(toMainDirectory);
 	if (!QFile::exists(sourceFilePath))
 	{
-		qDebug() << "LandscapeMgr: File does not exist:" << sourceFilePath;
+		qDebug() << "LandscapeMgr: File does not exist:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorUnableToOpen(sourceFilePath);
 		return QString();
 	}
@@ -717,7 +721,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 		//qDebug() << "LandscapeMgr: No 'landscapes' subdirectory exists in" << parentDestinationDir.absolutePath();
 		if (!parentDestinationDir.mkdir("landscapes"))
 		{
-			qWarning() << "LandscapeMgr: Unable to install landscape: Unable to create sub-directory 'landscapes' in" << parentDestinationDir.absolutePath();
+			qWarning() << "LandscapeMgr: Unable to install landscape: Unable to create sub-directory 'landscapes' in" << QDir::toNativeSeparators(parentDestinationDir.absolutePath());
 			emit errorUnableToOpen(QDir::cleanPath(parentDestinationDir.filePath("landscapes")));//parentDestinationDir.absolutePath()
 			return QString();
 		}
@@ -727,7 +731,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	KZip sourceArchive(sourceFilePath);
 	if(!sourceArchive.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << sourceFilePath;
+		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorNotArchive();
 		return QString();
 	}
@@ -819,11 +823,11 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	//This case already has been handled - and commented out - above. :)
 	if(destinationDir.exists(landscapeID))
 	{
-		qWarning() << "LandscapeMgr: A subdirectory" << landscapeID << "already exists in" << destinationDir.absolutePath() << "Its contents may be overwritten.";
+		qWarning() << "LandscapeMgr: A subdirectory" << landscapeID << "already exists in" << QDir::toNativeSeparators(destinationDir.absolutePath()) << "Its contents may be overwritten.";
 	}
 	else if(!destinationDir.mkdir(landscapeID))
 	{
-		qWarning() << "LandscapeMgr: Unable to install landscape. Unable to create" << landscapeID << "directory in" << destinationDir.absolutePath();
+		qWarning() << "LandscapeMgr: Unable to install landscape. Unable to create" << landscapeID << "directory in" << QDir::toNativeSeparators(destinationDir.absolutePath());
 		emit errorUnableToOpen(QDir::cleanPath(destinationDir.filePath(landscapeID)));
 		return QString();
 	}
@@ -850,7 +854,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	//Make sure that everyone knows that the list of available landscapes has changed
 	emit landscapesChanged();
 
-	qDebug() << "LandscapeMgr: Successfully installed landscape directory" << landscapeID << "to" << destinationDir.absolutePath();
+	qDebug() << "LandscapeMgr: Successfully installed landscape directory" << landscapeID << "to" << QDir::toNativeSeparators(destinationDir.absolutePath());
 	return landscapeID;
 }
 
@@ -879,7 +883,7 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 	{
 		if(!landscapeDir.remove(fileName))
 		{
-			qWarning() << "LandscapeMgr: Unable to remove" << fileName;
+			qWarning() << "LandscapeMgr: Unable to remove" << QDir::toNativeSeparators(fileName);
 			emit errorRemoveManually(landscapeDir.absolutePath());
 			return false;
 		}
@@ -896,7 +900,7 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 		return false;
 	}
 
-	qDebug() << "LandscapeMgr: Successfully removed" << landscapePath;
+	qDebug() << "LandscapeMgr: Successfully removed" << QDir::toNativeSeparators(landscapePath);
 
 	//If the landscape has been selected, revert to the default one
 	//TODO: Make this optional?
@@ -959,7 +963,7 @@ QString LandscapeMgr::loadLandscapeName(QString landscapeID)
 	}
 	else
 	{
-		qWarning() << "LandscapeMgr: Error! Landscape directory" << landscapePath << "does not contain a 'landscape.ini' file";
+		qWarning() << "LandscapeMgr: Error! Landscape directory" << QDir::toNativeSeparators(landscapePath) << "does not contain a 'landscape.ini' file";
 	}
 
 	return landscapeName;

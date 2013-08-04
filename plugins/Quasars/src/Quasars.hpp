@@ -34,6 +34,8 @@ class QNetworkReply;
 class QProgressBar;
 class QSettings;
 class QTimer;
+class QPixmap;
+class StelButton;
 class QuasarsDialog;
 
 typedef QSharedPointer<Quasar> QuasarP;
@@ -125,6 +127,8 @@ public:
 
 	bool getDisplayMode(void) {return distributionEnabled;}
 	void setDisplayMode(bool b) {distributionEnabled=b;}
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
+	bool getEnableAtStartup(void) { return enableAtStartup; }
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
@@ -151,6 +155,13 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+	void setFlagShowQuasars(bool b) { flagShowQuasars=b; }
+	bool getFlagShowQuasars(void) { return flagShowQuasars; }
+
+	//! Define whether the button toggling quasars should be visible
+	void setFlagShowQuasarsButton(bool b);
+	bool getFlagShowQuasarsButton(void) { return flagShowQuasarsButton; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
@@ -161,6 +172,9 @@ private:
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
+
+	// Upgrade config.ini: rename old key settings to new
+	void upgradeConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -173,9 +187,9 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the catalog.json file
-	//! @return version string, e.g. "0.2.1"
-	int getJsonFileVersion(void);
+	//! Get the version from the "version of the format" value in the catalog.json file
+	//! @return version string, e.g. "1"
+	int getJsonFileFormatVersion(void);
 
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());
@@ -192,9 +206,7 @@ private:
 	// variables and functions for the updater
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
-	QString updateUrl;
-	QString updateFile;
-	QProgressBar* progressBar;
+	QString updateUrl;	
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
@@ -202,11 +214,19 @@ private:
 	QDateTime lastUpdate;
 	int updateFrequencyDays;
 	bool distributionEnabled;
+	bool enableAtStartup;
 
 	QSettings* conf;
 
 	// GUI
 	QuasarsDialog* configDialog;
+	bool flagShowQuasars;
+	bool flagShowQuasarsButton;
+	QPixmap* OnIcon;
+	QPixmap* OffIcon;
+	QPixmap* GlowIcon;
+	StelButton* toolbarButton;
+	QProgressBar* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

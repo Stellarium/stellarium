@@ -26,6 +26,7 @@
 #include <QRegExp>
 #include <QString>
 #include <QStringList>
+#include <QDir>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -128,7 +129,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "No constellationsart.fab file found for sky culture " << skyCultureDir;
+		qDebug() << "No constellationsart.fab file found for sky culture " << QDir::toNativeSeparators(skyCultureDir);
 	}
 
 	try
@@ -147,7 +148,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "ERROR: while loading new constellation data for sky culture "
-			<< skyCultureDir << ", reason: " << e.what() << endl;
+			<< QDir::toNativeSeparators(skyCultureDir) << ", reason: " << e.what() << endl;
 	}
 
 	// TODO: do we need to have an else { clearBoundaries(); } ?
@@ -302,7 +303,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QFile in(fileName);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation data file" << fileName  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation data file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
 		Q_ASSERT(0);
 	}
 
@@ -367,7 +368,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QFile fic(artfileName);
 	if (!fic.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation art file" << fileName  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation art file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
 		return;
 	}
 
@@ -435,7 +436,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			{
 				// if the texture isn't found in the skycultures/[culture] directory,
 				// try the central textures diectory.
-				qWarning() << "WARNING, could not locate texture file " << texfile
+				qWarning() << "WARNING, could not locate texture file " << QDir::toNativeSeparators(texfile)
 					 << " in the skycultures/" << cultureName
 					 << " directory...  looking in general textures/ directory...";
 				try
@@ -444,7 +445,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				}
 				catch(std::exception& e2)
 				{
-					qWarning() << "ERROR: could not find texture, " << texfile << ": " << e2.what();
+					qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile) << ": " << e2.what();
 				}
 			}
 
@@ -616,7 +617,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	QFile commonNameFile(namesFile);
 	if (!commonNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qDebug() << "Cannot open file" << namesFile;
+		qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
 		return;
 	}
 
@@ -649,7 +650,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 		if (!recRx.exactMatch(record))
 		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << namesFile;
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile);
 		}
 		else
 		{
@@ -696,15 +697,14 @@ void ConstellationMgr::update(double deltaTime)
 void ConstellationMgr::setArtIntensity(const double intensity)
 {
 	if (artIntensity != intensity)
-	{
 		artIntensity = intensity;
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		{
-			(*iter)->artFader.setMaxValue(artIntensity);
-		}
-		emit artIntensityChanged(intensity);
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->artFader.setMaxValue(artIntensity);
 	}
+	emit artIntensityChanged(intensity);
 }
 
 double ConstellationMgr::getArtIntensity() const
@@ -714,16 +714,15 @@ double ConstellationMgr::getArtIntensity() const
 
 void ConstellationMgr::setArtFadeDuration(const float duration)
 {
-	if(artFadeDuration != duration)
-	{
+	if (artFadeDuration != duration)
 		artFadeDuration = duration;
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		{
-			(*iter)->artFader.setDuration((int) (duration * 1000.f));
-		}
-		emit artFadeDurationChanged(duration);
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->artFader.setDuration((int) (duration * 1000.f));
 	}
+	emit artFadeDurationChanged(duration);
 }
 
 float ConstellationMgr::getArtFadeDuration() const
@@ -1029,7 +1028,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	QFile dataFile(boundaryFile);
 	if (!dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Boundary file " << boundaryFile << " not found";
+		qWarning() << "Boundary file " << QDir::toNativeSeparators(boundaryFile) << " not found";
 		return false;
 	}
 
@@ -1134,15 +1133,14 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString cn;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		cn = (*iter)->getNameI18n();
+		if (cn.contains(objPrefix,Qt::CaseInsensitive))
 		{
-			result << (*iter)->getNameI18n();
+			result << cn;
 			if (result.size()==maxNbItem)
 				return result;
 		}
@@ -1155,15 +1153,14 @@ QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int 
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString cn;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		QString constw = (*iter)->getEnglishName().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		cn = (*iter)->getEnglishName();
+		if (cn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << (*iter)->getEnglishName();
+			result << cn;
 			if (result.size()==maxNbItem)
 				return result;
 		}

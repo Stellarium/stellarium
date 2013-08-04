@@ -45,6 +45,10 @@
 #include <QGraphicsLinearLayout>
 #include <QSettings>
 
+#ifdef _MSC_BUILD
+#define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
+#endif
+
 StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,
@@ -607,9 +611,9 @@ void BottomStelBar::updateText(bool updatePos)
 				sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
 			if (std::abs(deltaT)>60.)
-				datetime->setToolTip(QString("%1T = %2 (%3s)%8 [%4 @ -23.8946%5/cy%6%7]").arg(QChar(0x0394)).arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(QChar(0x1e45)).arg(QChar(0x2033)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(validRangeInfo));
+				datetime->setToolTip(QString("%1T = %2 (%3s)%6 [n-dot @ -23.8946\"/cy%4%5]").arg(QChar(0x0394)).arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(QChar(0x00B2)).arg(sigmaInfo).arg(validRangeInfo));
 			else
-				datetime->setToolTip(QString("%1T = %2s%7 [%3 @ -23.8946%4/cy%5%6]").arg(QChar(0x0394)).arg(deltaT, 3, 'f', 3).arg(QChar(0x1e45)).arg(QChar(0x2033)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(validRangeInfo));
+				datetime->setToolTip(QString("%1T = %2s%5 [n-dot @ -23.8946\"/cy%3%4]").arg(QChar(0x0394)).arg(deltaT, 3, 'f', 3).arg(QChar(0x00B2)).arg(sigmaInfo).arg(validRangeInfo));
 		}
 		else
 			datetime->setToolTip("");

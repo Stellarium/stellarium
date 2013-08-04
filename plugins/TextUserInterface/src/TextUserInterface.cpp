@@ -60,6 +60,7 @@
 #include <QLabel>
 #include <QTime>
 #include <QProcess>
+#include <QDir>
 #ifdef DISABLE_SCRIPTING
 #include "QSettings" // WTF?
 #endif
@@ -825,7 +826,7 @@ void TextUserInterface::saveDefaultSettings(void)
 void TextUserInterface::shutDown()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString shutdownCmd = conf->value("tui/admin_shutdown_cmd", "").toString();
+	QString shutdownCmd = QDir::fromNativeSeparators(conf->value("tui/admin_shutdown_cmd", "").toString());
 	int err; 
 	if (!(err = QProcess::execute(shutdownCmd))) {
 		qDebug() << "[TextUserInterface] shutdown error, QProcess::execute():" << err;

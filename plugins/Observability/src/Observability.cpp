@@ -156,7 +156,11 @@ Observability::Observability()
 	conf->endGroup();
 /////////////////////////////////
 
-
+	// Apply format for date from main settings
+	if (conf->value("localization/date_display_format", "system_default").toString() == "ddmmyyyy")
+		setDateFormat(true);
+	else
+		setDateFormat(false);
 
 	// Dummy initial values for parameters and data vectors:
 	mylat = 1000.; mylon = 1000.;
@@ -188,14 +192,6 @@ Observability::Observability()
 		yearJD[i] = 0.0;
 	};
 
-
-	// Set names of the months:
-	QString mons[12]={qc_("Jan", "short month name"), qc_("Feb", "short month name"), qc_("Mar", "short month name"), qc_("Apr", "short month name"), qc_("May", "short month name"), qc_("Jun", "short month name"), qc_("Jul", "short month name"), qc_("Aug", "short month name"), qc_("Sep", "short month name"), qc_("Oct", "short month name"), qc_("Nov", "short month name"), qc_("Dec", "short month name")};
-
-	for (int i=0;i<12;i++) {
-		months[i]=mons[i];
-	};
-
 }
 
 Observability::~Observability()
@@ -207,6 +203,45 @@ Observability::~Observability()
 	if (OffIcon!=NULL)
 		delete OffIcon;
 	delete configDialog;
+}
+
+void Observability::updateMessageText()
+{
+	// Set names of the months:
+	QString mons[12]={qc_("Jan", "short month name"), qc_("Feb", "short month name"), qc_("Mar", "short month name"), qc_("Apr", "short month name"), qc_("May", "short month name"), qc_("Jun", "short month name"), qc_("Jul", "short month name"), qc_("Aug", "short month name"), qc_("Sep", "short month name"), qc_("Oct", "short month name"), qc_("Nov", "short month name"), qc_("Dec", "short month name")};
+
+	for (int i=0;i<12;i++) {
+		months[i]=mons[i];
+	};
+
+	msgH		= q_("h");
+	msgM		= q_("m");
+	msgS		= q_("s");
+	msgSetsAt	= q_("Sets at %1 (in %2)");
+	msgRoseAt	= q_("Rose at %1 (%2 ago)");
+	msgSetAt	= q_("Set at %1 (%2 ago)");
+	msgRisesAt	= q_("Rises at %1 (in %2)");
+	msgCircumpolar	= q_("Circumpolar.");
+	msgNoRise	= q_("No rise.");
+	msgCulminatesAt	= q_("Culminates at %1 (in %2) at %3 deg.");
+	msgCulminatedAt	= q_("Culminated at %1 (%2 ago) at %3 deg.");
+	msgSrcNotObs	= q_("Source is not observable.");
+	msgNoACRise	= q_("No Acronychal nor Cosmical rise/set.");
+	msgGreatElong	= q_("Greatest elongation: ");
+	msgLargSSep	= q_("Largest Sun separation: ");
+	msgAtDeg	= q_(" (at %1 deg.)");
+	msgNone		= q_("None");
+	msgAcroRise	= q_("Acronychal rise/set");
+	msgNoAcroRise	= q_("No Acronychal rise/set.");
+	msgCosmRise	= q_("Cosmical rise/set");
+	msgNoCosmRise	= q_("No Cosmical rise/set.");
+	msgWholeYear	= q_("Observable during the whole year.");
+	msgNotObs	= q_("Not observable at dark night.");
+	msgAboveHoriz	= q_("Nights above horizon: ");
+	msgToday	= q_("TODAY:");
+	msgThisYear	= q_("THIS YEAR:");
+	msgPrevFullMoon	= q_("Previous Full Moon: %1 %2 at %3:%4. ");
+	msgNextFullMoon	= q_("Next Full Moon: %1 %2 at %3:%4. ");
 }
 
 double Observability::getCallOrder(StelModuleActionName actionName) const
@@ -238,6 +273,9 @@ void Observability::init()
 	{
 		qWarning() << "WARNING: unable create toolbar button for Observability plugin (or load gonfig GUI). " << e.what();
 	};
+
+       updateMessageText();
+       connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
 }
 
 /////////////////////////////////////////////
@@ -496,8 +534,8 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			double2hms(TFrac*Rise,d2,m2,s2);
 
 //		Strings with time spans for rise/set/transit:
-			RS1 = (d1==0)?"":QString("%1%2 ").arg(d1).arg(q_("h")); RS1 += (m1==0)?"":QString("%1%2 ").arg(m1).arg(q_("m")); RS1 += QString("%1%2").arg(s1).arg(q_("s"));
-			RS2 = (d2==0)?"":QString("%1%2 ").arg(d2).arg(q_("h")); RS2 += (m2==0)?"":QString("%1%2 ").arg(m2).arg(q_("m")); RS2 += QString("%1%2").arg(s2).arg(q_("s"));
+			RS1 = (d1==0)?"":QString("%1%2 ").arg(d1).arg(msgH); RS1 += (m1==0)?"":QString("%1%2 ").arg(m1).arg(msgM); RS1 += QString("%1%2").arg(s1).arg(msgS);
+			RS2 = (d2==0)?"":QString("%1%2 ").arg(d2).arg(msgH); RS2 += (m2==0)?"":QString("%1%2 ").arg(m2).arg(msgM); RS2 += QString("%1%2").arg(s2).arg(msgS);
 			if (raised) 
 			{
                                 double2hms(toUnsignedRA(currLocalT+TFrac*Set+12.),ephHour,ephMinute,ephSecond);
@@ -506,8 +544,10 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
                                 double2hms(toUnsignedRA(currLocalT-TFrac*Rise+12.),ephHour,ephMinute,ephSecond); // Local time for rise.
 				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 
-				RS1 = q_("Sets at %1 (in %2)").arg(SetTime).arg(RS1);
-				RS2 = q_("Rose at %1 (%2 ago)").arg(RiseTime).arg(RS2);
+				//RS1 = q_("Sets at %1 (in %2)").arg(SetTime).arg(RS1);
+				//RS2 = q_("Rose at %1 (%2 ago)").arg(RiseTime).arg(RS2);
+				RS1 = msgSetsAt.arg(SetTime).arg(RS1);
+				RS2 = msgRoseAt.arg(RiseTime).arg(RS2);
 			}
 			else 
 			{
@@ -517,12 +557,14 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
                                 double2hms(toUnsignedRA(currLocalT+TFrac*Rise+12.),ephHour,ephMinute,ephSecond);
 				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
 
-				RS1 = q_("Set at %1 (%2 ago)").arg(SetTime).arg(RS1);
-				RS2 = q_("Rises at %1 (in %2)").arg(RiseTime).arg(RS2);
+				//RS1 = q_("Set at %1 (%2 ago)").arg(SetTime).arg(RS1);
+				//RS2 = q_("Rises at %1 (in %2)").arg(RiseTime).arg(RS2);
+				RS1 = msgSetAt.arg(SetTime).arg(RS1);
+				RS2 = msgRisesAt.arg(RiseTime).arg(RS2);
 			};				
 		}
 		else { // The source is either circumpolar or never rises:
-			(alti>RefracHoriz)? RS1 = q_("Circumpolar."): RS1 = q_("No rise.");
+			(alti>RefracHoriz)? RS1 = msgCircumpolar: RS1 = msgNoRise;
 			RS2 = "";
 		};
 
@@ -539,16 +581,20 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		double2hms(TFrac*currH,dc,mc,sc);
 
 //		String with the time span for culmination:	
-		Cul = (dc==0)?"":QString("%1%2 ").arg(dc).arg(q_("h")); Cul += (mc==0)?"":QString("%1%2 ").arg(mc).arg(q_("m")); Cul += QString("%1%2").arg(sc).arg(q_("s"));
+		Cul = (dc==0)?"":QString("%1%2 ").arg(dc).arg(msgH); Cul += (mc==0)?"":QString("%1%2 ").arg(mc).arg(msgM); Cul += QString("%1%2").arg(sc).arg(msgS);
 		if (transit==false) { 
 
                         double2hms(toUnsignedRA(currLocalT+TFrac*currH+12.),ephHour,ephMinute,ephSecond); // Local time at transit.
 			CulmTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
-			Cul = q_("Culminates at %1 (in %2) at %3 deg.").arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);}
-		else {
+			//Cul = q_("Culminates at %1 (in %2) at %3 deg.").arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);
+			Cul = msgCulminatesAt.arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);
+		}
+		else
+		{
                         double2hms(toUnsignedRA(currLocalT-TFrac*currH+12.),ephHour,ephMinute,ephSecond);
 			CulmTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
-			Cul = q_("Culminated at %1 (%2 ago) at %3 deg.").arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);
+			//Cul = q_("Culminated at %1 (%2 ago) at %3 deg.").arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);
+			Cul = msgCulminatedAt.arg(CulmTime).arg(Cul).arg(altiAtCulmi,0,'f',1);
 		};
 	};
 
@@ -589,8 +635,10 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			bestNight=""; ObsRange = "";
 
 			if (culmAlt>=halfpi-RefracHoriz) { // Source cannot be seen.
-				ObsRange = q_("Source is not observable.");
-				AcroCos = q_("No Acronychal nor Cosmical rise/set.");
+				//ObsRange = q_("Source is not observable.");
+				//AcroCos = q_("No Acronychal nor Cosmical rise/set.");
+				ObsRange = msgSrcNotObs;
+				AcroCos = msgNoACRise;
 			}
 			else { // Source can be seen.
 
@@ -607,13 +655,16 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 
 					if (selName=="Mercury" || selName=="Venus")
 					{
-						bestNight = q_("Greatest elongation: ");
+						//bestNight = q_("Greatest elongation: ");
+						bestNight = msgGreatElong;
 					} else 
 					{
-						bestNight = q_("Largest Sun separation: ");
+						//bestNight = q_("Largest Sun separation: ");
+						bestNight = msgLargSSep;
 					};
 
-					bestNight = bestNight + CalenDate(selday) + q_(" (at %1 deg.)").arg(deltaPhs*Rad2Deg,0,'f',1);
+					//bestNight = bestNight + CalenDate(selday) + q_(" (at %1 deg.)").arg(deltaPhs*Rad2Deg,0,'f',1);
+					bestNight = bestNight + CalenDate(selday) + msgAtDeg.arg(deltaPhs*Rad2Deg,0,'f',1);
 				};
 
 ///////////////////////////////
@@ -625,14 +676,16 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 					QString AcroRiseStr, AcroSetStr;
 					QString CosmRiseStr, CosmSetStr;
 
-					AcroRiseStr = (selRise>0)?CalenDate(selRise):q_("None");
-					AcroSetStr = (selSet>0)?CalenDate(selSet):q_("None");
+					AcroRiseStr = (selRise>0)?CalenDate(selRise):msgNone;
+					AcroSetStr = (selSet>0)?CalenDate(selSet):msgNone;
 
-					CosmRiseStr = (selRise2>0)?CalenDate(selRise2):q_("None");
-					CosmSetStr = (selSet2>0)?CalenDate(selSet2):q_("None");
+					CosmRiseStr = (selRise2>0)?CalenDate(selRise2):msgNone;
+					CosmSetStr = (selSet2>0)?CalenDate(selSet2):msgNone;
 
-					AcroCos = (Acro==3 || Acro==1)?QString("%1: %2/%3.").arg(q_("Acronychal rise/set")).arg(AcroRiseStr).arg(AcroSetStr):q_("No Acronychal rise/set.");
-					AcroCos += (Acro==3 || Acro==2)?QString(" %1: %2/%3.").arg(q_("Cosmical rise/set")).arg(CosmRiseStr).arg(CosmSetStr):QString(" %1").arg(q_("No Cosmical rise/set."));
+					//AcroCos = (Acro==3 || Acro==1)?QString("%1: %2/%3.").arg(q_("Acronychal rise/set")).arg(AcroRiseStr).arg(AcroSetStr):q_("No Acronychal rise/set.");
+					//AcroCos += (Acro==3 || Acro==2)?QString(" %1: %2/%3.").arg(q_("Cosmical rise/set")).arg(CosmRiseStr).arg(CosmSetStr):QString(" %1").arg(q_("No Cosmical rise/set."));
+					AcroCos = (Acro==3 || Acro==1)?QString("%1: %2/%3.").arg(msgAcroRise).arg(AcroRiseStr).arg(AcroSetStr):msgNoAcroRise;
+					AcroCos += (Acro==3 || Acro==2)?QString(" %1: %2/%3.").arg(msgCosmRise).arg(CosmRiseStr).arg(CosmSetStr):QString(" %1").arg(msgNoCosmRise);
 
 				};
 
@@ -678,16 +731,19 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 					{ 
 						if (atLeastOne) 
 						{ // The whole year is good.
-							ObsRange = q_("Observable during the whole year.");
+							//ObsRange = q_("Observable during the whole year.");
+							ObsRange = msgWholeYear;
 						}
 						else
 						{
-							ObsRange = q_("Not observable at dark night.");
+							//ObsRange = q_("Not observable at dark night.");
+							ObsRange = msgNotObs;
 						};
 					}
 					else
 					{
-						ObsRange = QString("%1 %2").arg(q_("Nights above horizon: ")).arg(dateRange);
+						//ObsRange = QString("%1 %2").arg(q_("Nights above horizon: ")).arg(dateRange);
+						ObsRange = QString("%1 %2").arg(msgAboveHoriz).arg(dateRange);
 					};
 
 				}; // Comes from show_Good_Nights==True"
@@ -704,7 +760,8 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 
 	if (show_Today) 
 	{
-		renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
+		//renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
+		renderer->drawText(TextParams(xLine, yLine,msgToday));
 		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing, RS2));
 		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*2, RS1));
 		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*3, Cul));
@@ -713,7 +770,8 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{
-		renderer->drawText(TextParams(xLine,yLine,q_("THIS YEAR:")));
+		//renderer->drawText(TextParams(xLine,yLine,q_("THIS YEAR:")));
+		renderer->drawText(TextParams(xLine,yLine,msgThisYear));
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= spacing;
@@ -787,7 +845,6 @@ void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 	hfloat = std::abs(hfloat);
 	double ffrac = std::modf(hfloat,&f1);
 	double ffrac2 = std::modf(60.*ffrac,&f2);
-	//FIXME: ffrac2 is unused variable; need fix
 	ffrac2 = std::modf(3600.*(ffrac-f2/60.),&f3);
 	h1 = (int)f1 ; h2 = (int)std::abs(f2+0.0*ffrac2) ; h3 = (int)std::abs(f3);
 } 
@@ -814,7 +871,14 @@ QString Observability::CalenDate(int selday)
 {
 	int day,month,year;
 	StelUtils::getDateFromJulianDay(yearJD[selday],&year,&month,&day);
-	return QString("%1 %2").arg(day).arg(months[month-1]);
+
+	QString r;
+	if (getDateFormat())
+		r = QString("%1 %2").arg(day).arg(months[month-1]);
+	else
+		r = QString("%1 %2").arg(months[month-1]).arg(day);
+
+	return r;
 }
 //////////////////////////////////////////////
 
@@ -838,11 +902,17 @@ QString Observability::RangeCalenDates(int fDoY, int sDoY)
 	}
 	if (month1==month2)
 	{
-		range = QString("%1 - %2 %3").arg(day1).arg(day2).arg(months[month1-1]);
+		if (getDateFormat())
+			range = QString("%1 - %2 %3").arg(day1).arg(day2).arg(months[month1-1]);
+		else
+			range = QString("%3 %1 - %2").arg(day1).arg(day2).arg(months[month1-1]);
 	}
 	else
 	{
-		range = QString("%1 %2 - %3 %4").arg(day1).arg(months[month1-1]).arg(day2).arg(months[month2-1]);
+		if (getDateFormat())
+			range = QString("%1 %2 - %3 %4").arg(day1).arg(months[month1-1]).arg(day2).arg(months[month2-1]);
+		else
+			range = QString("%1 %2 - %3 %4").arg(months[month1-1]).arg(day1).arg(months[month2-1]).arg(day2);
 	}
 
 	return range;
@@ -1447,12 +1517,18 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 			double LocalTMoon = 24.*modf(LocalPrev,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
-			bestNight = q_("Previous Full Moon: %1 %2 at %3:%4. ").arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			if (getDateFormat())
+				bestNight = msgPrevFullMoon.arg(fullDay).arg(months[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			else
+				bestNight = msgPrevFullMoon.arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			LocalTMoon = 24.*modf(LocalNext,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);			
-			bestNight += q_("Next Full Moon: %1 %2 at %3:%4. ").arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			if (getDateFormat())
+				bestNight += msgNextFullMoon.arg(fullDay).arg(months[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+			else
+				bestNight += msgNextFullMoon.arg(months[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			ObsRange = ""; 
 			AcroCos = "";

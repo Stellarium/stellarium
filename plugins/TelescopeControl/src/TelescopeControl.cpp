@@ -57,6 +57,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QDir>
 
 #include <QDebug>
 
@@ -394,15 +395,15 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
-		QString constw = telescope->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		QString tn = telescope->getNameI18n();
+		if (tn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << telescope->getNameI18n();
+			result << tn;
 		}
 	}
 	result.sort();
@@ -416,15 +417,15 @@ QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, 
 QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
-		QString constw = telescope->getEnglishName().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		QString tn = telescope->getEnglishName();
+		if (tn.contains(objPrefix, Qt::CaseInsensitive))
 		{
-			result << telescope->getEnglishName();
+			result << tn;
 		}
 	}
 	result.sort();
@@ -704,7 +705,7 @@ void TelescopeControl::saveTelescopes()
 		QFile telescopesJsonFile(telescopesJsonPath);
 		if(!telescopesJsonFile.open(QFile::WriteOnly|QFile::Text))
 		{
-			qWarning() << "TelescopeControl: Telescopes can not be saved. A file can not be open for writing:" << telescopesJsonPath;
+			qWarning() << "TelescopeControl: Telescopes can not be saved. A file can not be open for writing:" << QDir::toNativeSeparators(telescopesJsonPath);
 			return;
 		}
 
@@ -732,7 +733,7 @@ void TelescopeControl::loadTelescopes()
 
 		if(!QFileInfo(telescopesJsonPath).exists())
 		{
-			qWarning() << "TelescopeControl::loadTelescopes(): No telescopes loaded. File is missing:" << telescopesJsonPath;
+			qWarning() << "TelescopeControl::loadTelescopes(): No telescopes loaded. File is missing:" << QDir::toNativeSeparators(telescopesJsonPath);
 			telescopeDescriptions = result;
 			return;
 		}
@@ -743,7 +744,7 @@ void TelescopeControl::loadTelescopes()
 
 		if(!telescopesJsonFile.open(QFile::ReadOnly))
 		{
-			qWarning() << "TelescopeControl: No telescopes loaded. Can't open for reading" << telescopesJsonPath;
+			qWarning() << "TelescopeControl: No telescopes loaded. Can't open for reading" << QDir::toNativeSeparators(telescopesJsonPath);
 			telescopeDescriptions = result;
 			return;
 		}
@@ -766,7 +767,7 @@ void TelescopeControl::loadTelescopes()
 			QString newName = telescopesJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 			if(telescopesJsonFile.rename(newName))
 			{
-				qWarning() << "TelescopeControl: The existing version of telescopes.json is obsolete. Backing it up as" << newName;
+				qWarning() << "TelescopeControl: The existing version of telescopes.json is obsolete. Backing it up as " << QDir::toNativeSeparators(newName);
 				qWarning() << "TelescopeControl: A blank telescopes.json file will have to be created.";
 				telescopeDescriptions = result;
 				return;
@@ -1244,7 +1245,7 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		}
 		catch (std::runtime_error& e)
 		{
-			qDebug() << "TelescopeControl: Error starting telescope server: Can't find executable:" << serverExecutablePath;
+			qDebug() << "TelescopeControl: Error starting telescope server: Can't find executable:" << QDir::toNativeSeparators(serverExecutablePath);
 			return false;
 		}
 
@@ -1262,7 +1263,7 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		if(useTelescopeServerLogs)
 			serverArguments << QString(StelFileMgr::getUserDir() + "/log_TelescopeServer" + slotName + ".txt");
 
-		qDebug() << "TelescopeControl: Starting tellescope server at slot" << slotName << "with path" << serverExecutablePath << "and arguments" << serverArguments.join(" ");
+		qDebug() << "TelescopeControl: Starting tellescope server at slot" << slotName << "with path" << QDir::toNativeSeparators(serverExecutablePath) << "and arguments" << serverArguments.join(" ");
 
 		//Starting the new process
 		telescopeServerProcess.insert(slotNumber, new QProcess());
@@ -1391,7 +1392,7 @@ void TelescopeControl::loadDeviceModels()
 	{
 		if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 		{
-			qWarning() << "TelescopeControl: Unable to find" << deviceModelsJsonPath;
+			qWarning() << "TelescopeControl: Unable to find " << QDir::toNativeSeparators(deviceModelsJsonPath);
 			useDefaultList = true;
 		}
 	}
@@ -1400,7 +1401,7 @@ void TelescopeControl::loadDeviceModels()
 		QFile deviceModelsJsonFile(deviceModelsJsonPath);
 		if(!deviceModelsJsonFile.open(QFile::ReadOnly))
 		{
-			qWarning() << "TelescopeControl: Can't open for reading" << deviceModelsJsonPath;
+			qWarning() << "TelescopeControl: Can't open for reading " << QDir::toNativeSeparators(deviceModelsJsonPath);
 			useDefaultList = true;
 		}
 		else
@@ -1415,7 +1416,7 @@ void TelescopeControl::loadDeviceModels()
 				QString newName = deviceModelsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 				if(deviceModelsJsonFile.rename(newName))
 				{
-					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Backing it up as" << newName;
+					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Backing it up as " << QDir::toNativeSeparators(newName);
 					if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 					{
 						useDefaultList = true;
@@ -1558,13 +1559,13 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 	QFile defaultFile(":/telescopeControl/device_models.json");
 	if (!defaultFile.copy(deviceModelsListPath))
 	{
-		qWarning() << "TelescopeControl: Unable to copy the default device models list to" << deviceModelsListPath;
+		qWarning() << "TelescopeControl: Unable to copy the default device models list to" << QDir::toNativeSeparators(deviceModelsListPath);
 		return false;
 	}
 	QFile newCopy(deviceModelsListPath);
 	newCopy.setPermissions(newCopy.permissions() | QFile::WriteOwner);
 
-	qDebug() << "TelescopeControl: The default device models list has been copied to" << deviceModelsListPath;
+	qDebug() << "TelescopeControl: The default device models list has been copied to" << QDir::toNativeSeparators(deviceModelsListPath);
 	return true;
 }
 
@@ -1579,14 +1580,14 @@ bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 	QDir newServerDirectory(newPath);
 	if(!newServerDirectory.exists())
 	{
-		qWarning() << "TelescopeControl: Can't find such a directory:" << newPath;
+		qWarning() << "TelescopeControl: Can't find such a directory: " << QDir::toNativeSeparators(newPath);
 		return false;
 	}
 	QList<QFileInfo> telescopeServerExecutables = newServerDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
 	if(telescopeServerExecutables.isEmpty())
 	{
 		qWarning() << "TelescopeControl: No telescope server executables found in"
-							 << serverExecutablesDirectoryPath;
+							 << QDir::toNativeSeparators(serverExecutablesDirectoryPath);
 		return false;
 	}
 
@@ -1626,7 +1627,7 @@ void TelescopeControl::addLogAtSlot(int slot)
 		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
 		{
 			qWarning() << "TelescopeControl: Unable to create a log file for slot"
-								 << slot << ":" << filePath;
+								 << slot << ":" << QDir::toNativeSeparators(filePath);
 			telescopeServerLogFiles.insert(slot, logFile);
 			telescopeServerLogStreams.insert(slot, new QTextStream(new QFile()));
 		}

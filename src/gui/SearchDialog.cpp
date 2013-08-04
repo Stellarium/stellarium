@@ -238,8 +238,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
-		this, SLOT(enableSimbadSearch(bool)));
+	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
 
 	populateSimbadServerList();
@@ -250,8 +249,7 @@ void SearchDialog::createDialogContent()
 		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->serverListComboBox->setCurrentIndex(idx);
-	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
-	        this, SLOT(selectSimbadServer(int)));
+	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
 
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
@@ -335,9 +333,9 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);			
 			matches += objectMgr->listMatchingObjects(trimmedText, 3);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));			
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()));
 		} else {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
 			matches += objectMgr->listMatchingObjects(trimmedText, 5);
@@ -431,7 +429,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
-	else if (objectMgr->findAndSelectI18n(nameI18n) or objectMgr->findAndSelect(nameI18n))
+	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -586,8 +584,7 @@ void SearchDialog::updateListTab()
 	{
 		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
 		{
-			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ?
-															it.value(): q_(it.value()));
+			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ? it.value(): q_(it.value()));
 			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
 		}
 	}

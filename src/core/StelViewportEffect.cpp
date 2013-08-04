@@ -28,6 +28,7 @@
 
 #include <QSettings>
 #include <QFile>
+#include <QDir>
 
 
 StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror
@@ -103,23 +104,24 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	               qMin(newProjectorParams.viewportXywh[2],
 	                    newProjectorParams.viewportXywh[3])).toFloat();
 
-	texture_wh = 1;
-	while (texture_wh < newProjectorParams.viewportXywh[2] || 
-	       texture_wh < newProjectorParams.viewportXywh[3])
-	{
-		texture_wh <<= 1;
-	}
-	
-	viewportTextureOffset[0] = (texture_wh-newProjectorParams.viewportXywh[2])>>1;
-	viewportTextureOffset[1] = (texture_wh-newProjectorParams.viewportXywh[3])>>1;
+	// Vestigial mirror texture dimensions: used to be a single value,
+	// the closest power of 2 higher or equal to the larger screen dimension.
+	texture_w = newProjectorParams.viewportXywh[2];
+	texture_h = newProjectorParams.viewportXywh[3];
+//	while (texture_wh < newProjectorParams.viewportXywh[2] || 
+//	       texture_wh < newProjectorParams.viewportXywh[3])
+//	{
+//		texture_wh <<= 1;
+//	}
 
+	// TODO: Given the above, is there any point in this? --BM
 	newProjectorParams.viewportXywh[0] = (screenWidth-newProjectorParams.viewportXywh[2]) >> 1;
 	newProjectorParams.viewportXywh[1] = (screenHeight-newProjectorParams.viewportXywh[3]) >> 1;
 
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newProjectorParams);
 
 	const QString customDistortionFileName = 
-	    conf.value("spheric_mirror/custom_distortion_file","").toString();
+	    QDir::fromNativeSeparators(conf.value("spheric_mirror/custom_distortion_file","").toString());
 	
 	if (customDistortionFileName.isEmpty())
 	{
@@ -208,8 +210,8 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 			//      else if (y > newProjectorParams.viewportXywh[3])
 			//          {y=newProjectorParams.viewportXywh[3];height=0;}
 
-			vertex.texCoord[0] = (viewportTextureOffset[0] + x) / texture_wh;
-			vertex.texCoord[1] = (viewportTextureOffset[1] + y) / texture_wh;
+			vertex.texCoord[0] = x / texture_w;
+			vertex.texCoord[1] = y / texture_h;
 
 			texCoordGrid[row * cols + col] = vertex.texCoord;
 
@@ -241,6 +243,47 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 	constructVertexBuffer(renderer);
 	
 	delete[] heightGrid;
+	
+	// FIXME: Comment out with /**/ after testing. --BM
+	qDebug() << "StelViewportDistorterFisheyeToSphericMirror():" 
+	         << "screen_w:" << this->screenWidth
+	         << "screen_h:" << this->screenHeight << endl
+	         << "originalProjectorParams.viewportXywh:" 
+	         << originalProjectorParams.viewportXywh[0] 
+	         << originalProjectorParams.viewportXywh[1] 
+	         << originalProjectorParams.viewportXywh[2] 
+	         << originalProjectorParams.viewportXywh[3] << endl
+	         << "newProjectorParams.viewportXywh:"
+	         << newProjectorParams.viewportXywh[0] 
+	         << newProjectorParams.viewportXywh[1] 
+	         << newProjectorParams.viewportXywh[2]
+	         << newProjectorParams.viewportXywh[3] << endl 
+	         << "originalProjectorParams.fov:"
+	         << originalProjectorParams.fov << endl 
+	         << "newProjectorParams.fov:" << newProjectorParams.fov << endl
+	         << "originalProjectorParams.viewportCenter:"
+	         << originalProjectorParams.viewportCenter[0] 
+	         << originalProjectorParams.viewportCenter[1] << endl
+	         << "newProjectorParams.viewportCenter:" 
+	         << newProjectorParams.viewportCenter[0] 
+	         << newProjectorParams.viewportCenter[1] << endl
+	         << "originalProjectorParams.viewportFovDiameter:" 
+	         << originalProjectorParams.viewportFovDiameter << endl
+	         << "newProjectorParams.viewportFovDiameter:"
+	         << newProjectorParams.viewportFovDiameter << endl
+	         << "originalProjectorParams.zNear,zFar:" 
+	         << originalProjectorParams.zNear 
+	         << originalProjectorParams.zFar << endl
+	         << "newProjectorParams.zNear,zFar:" 
+	         << newProjectorParams.zNear 
+	         << newProjectorParams.zFar << endl
+	         //<< "viewport_texture_offset:" 
+	         //<< viewport_texture_offset[0]
+	         //<< viewport_texture_offset[1] << endl
+	         << "texture_w:" << texture_w << endl
+	         << "texture_h:" << texture_h << endl
+	         << "max_x:" << maxGridX << endl
+	         << "max_y:" << maxGridY;
 }
 
 void StelViewportDistorterFisheyeToSphericMirror::loadGenerationParameters
@@ -259,9 +302,14 @@ void StelViewportDistorterFisheyeToSphericMirror::loadGenerationParameters
 		qDebug() << "spheric_mirror/texture_triangle_base_length too low : setting to 2.0";
 		triangleBaseLength = 2.f;
 	}
+#ifdef _MSC_BUILD // MSVC does not have a trunc function
+	maxGridX = (int)floor(0.5 + screenWidth / triangleBaseLength);
+	maxGridY = (int)floor(screenHeight / (triangleBaseLength * 0.5 * sqrt(3.0)));
+#else
 	maxGridX = (int)trunc(0.5 + screenWidth / triangleBaseLength);
-	stepX = screenWidth / (double)(maxGridX - 0.5);
 	maxGridY = (int)trunc(screenHeight / (triangleBaseLength * 0.5 * sqrt(3.0)));
+#endif
+	stepX = screenWidth / (double)(maxGridX - 0.5);
 	stepY = screenHeight / (double)maxGridY;
 
 	gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
@@ -288,7 +336,7 @@ bool StelViewportDistorterFisheyeToSphericMirror::loadDistortionFromFile
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: could not open custom_distortion_file:" << fileName << e.what();
+		qWarning() << "WARNING: could not open custom_distortion_file:" << QDir::toNativeSeparators(fileName) << e.what();
 		return false;
 	}
 	Q_ASSERT(file.error() != QFile::NoError);
@@ -317,8 +365,8 @@ bool StelViewportDistorterFisheyeToSphericMirror::loadDistortionFromFile
 			in >> x >> y >> vertex.color[0] >> vertex.color[1] >> vertex.color[2];
 			vertex.color[3] = 1.0f;
 			Q_ASSERT(in.status() != QTextStream::Ok);
-			vertex.texCoord[0] = (viewportTextureOffset[0] + x) / texture_wh;
-			vertex.texCoord[1] = (viewportTextureOffset[1] + y) / texture_wh;
+			vertex.texCoord[0] = x / texture_w;
+			vertex.texCoord[1] = y / texture_h;
 
 			texCoordGrid[row * cols + col] = vertex.texCoord;
 
@@ -448,8 +496,8 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 		}
 	}
 
-	x = texture_wh*textureX - viewportTextureOffset[0] + newProjectorParams.viewportXywh[0];
-	y = texture_wh*textureY - viewportTextureOffset[1] + newProjectorParams.viewportXywh[1];
+	x = texture_w*textureX + newProjectorParams.viewportXywh[0];
+	y = texture_h*textureY + newProjectorParams.viewportXywh[1];
 }
 
 

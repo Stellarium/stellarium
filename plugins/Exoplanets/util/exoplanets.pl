@@ -71,12 +71,24 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	
 	($aname,$pmass,$pradius,$pperiod,$psemiax,$pecc,$pincl,$angdist,$psl,$discovered,$updated,$pomega,$pt,$dtype,$mol,$starname,$sRA,$sDec,$sVmag,$sImag,$sHmag,$sJmag,$sKmag,$sdist,$smetal,$smass,$sradius,$sstype,$sage,$sefftemp) = split(",", $currdata);
 
-	($hour,$min,$sec) = split(":",$sRA);
+	($hour,$mint,$sect) = split(":",$sRA);
+	($deg,$min,$sec) = split(":",$sDec);
 	# fixed bug in raw data
 	$sec =~ s/-//gi;
-	$outRA = $hour."h".$min."m".$sec."s";
-
-	($deg,$min,$sec) = split(":",$sDec);
+	# fixed bug for Kepler-68
+	if ($starname =~ m/kepler-68/gi) {
+		$hour = 19;
+	}
+	# fixed bug for omi CrB
+	if ($starname =~ m/omi\s+CrB/gi) {
+		$hour = 15; $mint = 20; $sect = 8.4;
+		$deg = 29; $min = 36; $sec = 57.9;
+	}
+	
+	$sec =~ s/-//gi;
+	$sect =~ s/-//gi;
+	
+	$outRA = $hour."h".$mint."m".$sect."s";
 	$outDE = $deg."d".$min."m".$sec."s";
 	
 	$sname = $starname;
@@ -109,6 +121,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^chi/χ/gi;
 	$sname =~ s/^psi/ψ/gi;
 	$sname =~ s/^omega/ω/gi;
+	$sname =~ s/^ome/ω/gi;
 	
 	if (($sRA ne '00:00:00.0') && ($sDec ne '+00:00:00.0')) {
 		# check star

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>483</width>
-    <height>446</height>
+    <width>481</width>
+    <height>444</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -692,6 +692,9 @@
              </item>
              <item row="2" column="1">
               <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="toolTip">
+                <string>Use current local date and time</string>
+               </property>
                <property name="text">
                 <string>use current</string>
                </property>
@@ -951,6 +954,9 @@
              </item>
              <item row="4" column="0">
               <widget class="QCheckBox" name="renderSolarShadowsCheckbox">
+               <property name="toolTip">
+                <string>Display solar shadows on planets and moons (For that feature needed OpenGL version 2 or higher)</string>
+               </property>
                <property name="text">
                 <string>Render Solar Shadows</string>
                </property>

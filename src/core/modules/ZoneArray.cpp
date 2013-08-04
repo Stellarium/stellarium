@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QDir>
 #ifdef Q_OS_WIN
 #include <io.h>
 #include <windows.h>
@@ -83,7 +84,9 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 }
 
 #if (!defined(__GNUC__))
+#ifndef _MSC_BUILD
 #warning Star catalogue loading has only been tested with gcc
+#endif
 #endif
 
 ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
@@ -92,10 +95,10 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	QFile* file = new QFile(catalogFilePath);
 	if (!file->open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Error while loading " << catalogFilePath << ": failed to open file.";
+		qWarning() << "Error while loading " << QDir::toNativeSeparators(catalogFilePath) << ": failed to open file.";
 		return 0;
 	}
-	dbStr = "Loading \"" + catalogFilePath + "\": ";
+	dbStr = "Loading \"" + QDir::toNativeSeparators(catalogFilePath) + "\": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
@@ -138,12 +141,11 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	else if (magic == FILE_MAGIC)
 	{
 		// ok, FILE_MAGIC
-#if (!defined(__GNUC__))
+#if (!defined(__GNUC__) && !defined(_MSC_BUILD))
 		if (use_mmap)
 		{
 			// mmap only with gcc:
-			dbStr += "warning - you must convert catalogue "
-				  += "to native format before mmap loading";
+			dbStr += "warning - you must convert catalogue to native format before mmap loading";
 			qDebug(qPrintable(dbStr));
 
 			return 0;
@@ -195,7 +197,9 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			// for your compiler.
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
+#ifndef _MSC_BUILD
 			Q_ASSERT(sizeof(Star2) == 10);
+#endif
 			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
@@ -214,7 +218,9 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			// for your compiler.
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
+#ifndef _MSC_BUILD
 			Q_ASSERT(sizeof(Star3) == 6);
+#endif
 			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{

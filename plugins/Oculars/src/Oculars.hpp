@@ -211,6 +211,7 @@ private:
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticPlaneLine;	//!< Flag to track if GalacticPlaneLine was displayed at activation.
+	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
@@ -241,6 +242,10 @@ private:
 	QAction* actionShowTelrad;
 	QAction* actionConfiguration;
 	QAction* actionMenu;
+	QAction* actionTelescopeIncrement;
+	QAction* actionTelescopeDecrement;
+	QAction* actionOcularIncrement;
+	QAction* actionOcularDecrement;
 
 	class OcularsGuiPanel* guiPanel;
 

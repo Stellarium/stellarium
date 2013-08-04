@@ -49,6 +49,7 @@
 #include <QtNetwork>
 #include <QPixmap>
 #include <QSignalMapper>
+#include <QDir>
 
 #include <cmath>
 
@@ -79,7 +80,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
-	info.authors = "Timothy Reaves, Bogdan Marinov";
+	info.authors = "Timothy Reaves, Bogdan Marinov, Pawel Stolowski";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	return info;
@@ -610,11 +611,12 @@ void Oculars::setScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
 		StelCore *core = StelApp::getInstance().getCore();
 		StelMovementMgr *movementManager = core->getMovementMgr();
-		double actualFOVx = ccds[selectedCCDIndex]->getActualFOVx(telescopes[selectedTelescopeIndex]);
-		double actualFOVy = ccds[selectedCCDIndex]->getActualFOVy(telescopes[selectedTelescopeIndex]);
+		double actualFOVx = ccds[selectedCCDIndex]->getActualFOVx(telescopes[selectedTelescopeIndex], lens);
+		double actualFOVy = ccds[selectedCCDIndex]->getActualFOVy(telescopes[selectedTelescopeIndex], lens);
 		if (actualFOVx < actualFOVy) {
 			actualFOVx = actualFOVy;
 		}
@@ -856,9 +858,12 @@ void Oculars::decrementTelescopeIndex()
 
 void Oculars::decrementLensIndex()
 {
-	selectedLensIndex++;
+	selectedLensIndex--;
 	if (selectedLensIndex == lense.count()) {
 		selectedLensIndex = -1;
+	}
+	if (selectedLensIndex == -2) {
+		selectedLensIndex = lense.count() - 1;
 	}
 	emit(selectedLensChanged());
 }
@@ -1023,6 +1028,8 @@ void Oculars::displayPopupMenu()
 		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
 		{
 			QMenu* submenu = addTelescopeSubmenu(popup);
+			popup->addMenu(submenu);
+			submenu = addLensSubmenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
@@ -1268,10 +1275,10 @@ void Oculars::initializeActivationActions()
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 		toolbarButton = new StelButton(NULL,
-																	 *pxmapOnIcon,
-																	 *pxmapOffIcon,
-																	 *pxmapGlow,
-																	 actionShowOcular);
+					       *pxmapOnIcon,
+					       *pxmapOffIcon,
+					       *pxmapGlow,
+					       actionShowOcular);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
@@ -1300,6 +1307,22 @@ void Oculars::initializeActivationActions()
 					ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)),
 					actionConfiguration, SLOT(setChecked(bool)));
+
+	// Select next telescope via keyboard
+	actionTelescopeIncrement = shMgr->getGuiAction("actionShow_Telescope_Increment");
+	connect(actionTelescopeIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementTelescopeIndex()));
+
+	// Select previous telescope via keyboard
+	actionTelescopeDecrement = shMgr->getGuiAction("actionShow_Telescope_Decrement");
+	connect(actionTelescopeDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementTelescopeIndex()));
+
+	// Select next eyepiece via keyboard
+	actionOcularIncrement = shMgr->getGuiAction("actionShow_Ocular_Increment");
+	connect(actionOcularIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementOcularIndex()));
+
+	// Select previous eyepiece via keyboard
+	actionOcularDecrement = shMgr->getGuiAction("actionShow_Ocular_Decrement");
+	connect(actionOcularDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementOcularIndex()));
 
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
@@ -1335,6 +1358,7 @@ void Oculars::paintCCDBounds(StelRenderer* renderer)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	renderer->setBlendMode(BlendMode_None);
 
@@ -1350,8 +1374,8 @@ void Oculars::paintCCDBounds(StelRenderer* renderer)
 		if (ccd) {
 			renderer->setGlobalColor(0.77f, 0.14f, 0.16f, 0.5f);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
-			const double ccdXRatio = ccd->getActualFOVx(telescope) / screenFOV;
-			const double ccdYRatio = ccd->getActualFOVy(telescope) / screenFOV;
+			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
+			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
 			int aspectIndex = 2;
@@ -1565,7 +1589,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 			}
 			else
 			{
-				lensNumberLabel = QString (q_("Lens: none")); //FIXME
+				lensNumberLabel = QString (q_("Lens: none"));
 			}
 			renderer->drawText(TextParams(xPosition, yPosition, lensNumberLabel));
 			yPosition-=lineHeight;
@@ -1607,8 +1631,8 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	// The CCD
 	if (flagShowCCD) {
 		QString ccdSensorLabel, ccdInfoLabel;
-		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;		
+		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
 		QString name = ccd->name();
@@ -1660,13 +1684,13 @@ void Oculars::validateAndLoadIniFile()
 			qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] "
 										+ ocularIniPath;
 		} else {
-			qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
+			qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
 			// The resource is read only, and the new file inherits this, so set write-able.
 			QFile dest(ocularIniPath);
 			dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 		}
 	} else {
-		qDebug() << "Oculars::validateIniFile ocular.ini exists at: " << ocularIniPath << ". Checking version...";
+		qDebug() << "Oculars::validateIniFile ocular.ini exists at: " << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings settings(ocularIniPath, QSettings::IniFormat);
 		double ocularsVersion = settings.value("oculars_version", "0.0").toDouble();
 		qWarning() << "Oculars::validateIniFile found existing ini file version " << ocularsVersion;
@@ -1681,14 +1705,14 @@ void Oculars::validateAndLoadIniFile()
 			// Rename the old one, and copy over a new one
 			QFile oldFile(ocularIniPath);
 			if (!oldFile.rename(ocularIniPath + ".old")) {
-				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  " + ocularIniPath;
+				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
 			} else {
-				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  " + ocularIniPath;
+				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
 				QFile src(":/ocular/default_ocular.ini");
 				if (!src.copy(ocularIniPath)) {
-					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + ocularIniPath;
+					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + QDir::toNativeSeparators(ocularIniPath);
 				} else {
-					qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
+					qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
 					// The resource is read only, and the new file inherits this...  make sure the new file
 					// is writable by the Stellarium process so that updates can be done.
 					QFile dest(ocularIniPath);
@@ -1716,6 +1740,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagMeridianLine(flagMeridianLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
+	core->getSkyDrawer()->setFlagLuminanceAdaptation(flagAdaptation);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -1749,6 +1774,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
+			flagAdaptation = StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation();
 		}
 
 		// set new state
@@ -1776,6 +1802,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagMeridianLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticPlaneLine(false);
+	core->getSkyDrawer()->setFlagLuminanceAdaptation(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);

@@ -36,7 +36,11 @@
 #include <QGLWidget>
 
 #ifdef BUILD_FOR_MAEMO
+#if QT_VERSION<QT_VERSION_CHECK(5,0,0)
 #include <QtGui/QX11Info>
+#else
+#include <QtWidgets/QX11Info>
+#endif
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif

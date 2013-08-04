@@ -167,6 +167,7 @@ class Translations
 		N_("Chinese");
 		N_("Egyptian");
 		N_("Inuit");
+		N_("Indian Vedic");
 		N_("Korean");
 		N_("Lakota");
 		N_("Maori");
@@ -241,7 +242,16 @@ class Translations
 		N_("Analemma");
 		// TRANSLATORS: Name of script
 		N_("Sky Culture Tour");
-
+		// TRANSLATORS: Name and description of script
+		N_("Earth Events from Mercury");
+		// TRANSLATORS: Name and description of script
+		N_("Earth Events from Venus");
+		// TRANSLATORS: Name and description of script
+		N_("Earth Events from Mars");
+		// TRANSLATORS: Name of script
+		N_("Earth Greatest Elongations and Brilliancies from Mars");
+		// TRANSLATORS: Name of script
+		N_("Earth and Mars Greatest Elongations from Jupiter");
 		
 		// =====================================================================
 		// Script descriptions
@@ -262,14 +272,15 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 177 events in all!");
 		N_("A tour of the western constellations.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
-
+		N_("Earth Greatest Elongations and Brilliancies from Mars 2000-3000");
+		N_("Earth Greatest Elongations from Jupiter 2000-3000");
 		
 		// =====================================================================
 		// List of countries
@@ -576,7 +587,7 @@ class Translations
 		N_("Constellation boundaries");
 		N_("Constellation labels");
 		N_("Constellation lines");
-		N_("Nebulas background images");
+		N_("Deep-sky objects background images");
 		N_("Ecliptic J2000 grid");
 		N_("Ecliptic line");
 		N_("Equator line");
@@ -588,7 +599,7 @@ class Translations
 		N_("Ground");
 		N_("Horizon line");
 		N_("Meridian line");
-		N_("Nebulas");
+		N_("Deep-sky objects");
 		N_("Night mode");
 		N_("Planet labels");
 		N_("Planet orbits");
@@ -637,11 +648,17 @@ class Translations
 		N_("Oculars popup menu");
 		N_("Image sensor frame");
 		N_("Telrad sight");
+		N_("Select next telescope");
+		N_("Select next eyepiece");
+		N_("Select previous telescope");
+		N_("Select previous eyepiece");
 		
 		// Pulsars Plugin
+		N_("Show pulsars");
 		N_("Pulsars configuration window");
 		
 		// Quasars Plugin
+		N_("Show quasars");
 		N_("Quasars configuration window");
 		
 		// Satellites Plugin

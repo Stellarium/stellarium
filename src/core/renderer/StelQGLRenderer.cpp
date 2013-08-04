@@ -19,6 +19,10 @@
 
 #include <cmath>
 
+#ifdef _MSC_BUILD
+#define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
+#endif
+
 #include "StelQGLRenderer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "QSettings"
@@ -57,11 +61,13 @@ void StelQGLRenderer::bindTextureBackend
 	else
 	{
 		// by default placeholder is hide but its can be enabled for debugging
+		bool debugMode = false;
 		if (conf->value("debug/texture_placeholder_flag", false).toBool())
-		{
-			getPlaceholderTexture()->bind(textureUnit);
-			currentlyBoundTextures[textureUnit] = getPlaceholderTexture();
-		}
+			debugMode = true;
+
+		getPlaceholderTexture(debugMode)->bind(textureUnit);
+		currentlyBoundTextures[textureUnit] = getPlaceholderTexture(debugMode);
+
 	}
 	invariant();
 }
@@ -97,7 +103,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 		QImage image;
 		// Texture in error state will be returned (loaded from NULL image), and
 		// when bound, the placeholder texture will be used.
-		qWarning() << "createTextureBackend failed: file \"" << filename << "\" not found.";
+		qWarning() << "createTextureBackend failed: file \"" << QDir::toNativeSeparators(filename) << "\" not found.";
 		return StelQGLTextureBackend::constructFromImage(this, QString(), params, image);
 	}
 
@@ -120,7 +126,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend
 			{
 				// Texture in error state will be returned (loaded from NULL image), and
 				// when bound, the placeholder texture will be used.
-				qWarning() << "createTextureBackend failed: found image file \"" << fullPath
+				qWarning() << "createTextureBackend failed: found image file \"" << QDir::toNativeSeparators(fullPath)
 				           << "\" but failed to load image data. ";
 			}
 			//Uploads to GL
@@ -338,8 +344,8 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		return;
 	}
 
-	const int x = win[0];
-	const int y = win[1];
+	const int x = round(win[0]);
+	const int y = round(win[1]);
 
 	// Avoid drawing if outside viewport.
 	// We do a worst-case approximation as getting exact text dimensions is expensive.
@@ -410,7 +416,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		textTexture = StelQGLTextureBackend::constructFromImage
 			(this, QString(), TextureParams().filtering(TextureFiltering_Linear), image);
 		const QSize size = textTexture->getDimensions();
-		if(!textTexture->getStatus() == TextureStatus_Loaded)
+		if (!(textTexture->getStatus() == TextureStatus_Loaded))
 		{
 			qWarning() << "Texture error: " << textTexture->getErrorMessage();
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to construct a text texture");

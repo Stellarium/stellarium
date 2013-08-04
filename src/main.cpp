@@ -33,8 +33,13 @@
 #include <QPlastiqueStyle>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include <QDir>
 #ifdef Q_OS_WIN
 #include <windows.h>
+#ifdef _MSC_BUILD
+	#include <MMSystem.h>
+	#pragma comment(lib,"Winmm.lib")
+#endif
 #endif //Q_OS_WIN
 
 //! @class GettextStelTranslator
@@ -169,12 +174,12 @@ int main(int argc, char **argv)
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug() << "Writing log file to:" << StelLogger::getLogFileName();
+	qDebug() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
 	qDebug() << "File search paths:";
 	int n=0;
 	foreach (QString i, StelFileMgr::getSearchPaths())
 	{
-		qDebug() << " " << n << ". " << i;
+		qDebug() << " " << n << ". " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
@@ -256,18 +261,18 @@ int main(int argc, char **argv)
 			QFile(configFileFullPath).rename(backupFile);
 			copyDefaultConfigFile(configFileFullPath);
 			confSettings = new QSettings(configFileFullPath, StelIniFormat);
-			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << backupFile;
+			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << QDir::toNativeSeparators(backupFile);
 		}
 	}
 	else
 	{
-		qDebug() << "Config file " << configFileFullPath << " does not exist. Copying the default file.";
+		qDebug() << "Config file " << QDir::toNativeSeparators(configFileFullPath) << " does not exist. Copying the default file.";
 		copyDefaultConfigFile(configFileFullPath);
 		confSettings = new QSettings(configFileFullPath, StelIniFormat);
 	}
 
 	Q_ASSERT(confSettings);
-	qDebug() << "Config file is: " << configFileFullPath;
+	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
@@ -317,7 +322,7 @@ int main(int argc, char **argv)
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "ERROR while loading custom font " << fileFont << " : " << e.what();
+			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont) << " : " << e.what();
 		}
 	}
 
@@ -362,24 +367,36 @@ int main(int argc, char **argv)
 	GettextStelTranslator trans;
 	app.installTranslator(&trans);
 
-	if (!QGLFormat::hasOpenGL())
-	{
+	if (!QGLFormat::hasOpenGL()) // Check support of OpenGL
+	{		
+		qWarning() << "Oops... This system does not support OpenGL.";
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+		app.quit();
 	}
+	else if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_2)) // Check supported version of OpenGL
+	{
+		// OK, minimal required version of OpenGL is 1.2. If platform does not support this
+		// version then say to user about troubles and quit from application.
+		qWarning() << "Oops... This platform support only OpenGL 1.1.";
+		QMessageBox::warning(0, "Stellarium", q_("Your platform does not support minimal required OpenGL 1.2. Please upgrade drivers for graphics card."));
+		app.quit();
+	}
+	else
+	{
+		StelMainWindow mainWin;
+		mainWin.init(confSettings);
+		app.exec();
+		mainWin.deinit();
 
-	StelMainWindow mainWin;
-	mainWin.init(confSettings);
-	app.exec();
-	mainWin.deinit();
+		delete confSettings;
+		StelLogger::deinit();
 
-	delete confSettings;
-	StelLogger::deinit();
+		#ifdef Q_OS_WIN
+		if(timerGrain)
+			timeEndPeriod(timerGrain);
+		#endif //Q_OS_WIN
 
-	#ifdef Q_OS_WIN
-	if(timerGrain)
-		timeEndPeriod(timerGrain);
-	#endif //Q_OS_WIN
-
-	return 0;
+		return 0;
+	}
 }
 

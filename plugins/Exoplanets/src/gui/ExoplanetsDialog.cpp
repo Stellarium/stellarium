@@ -72,8 +72,12 @@ void ExoplanetsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
+	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getEnableAtStartup());
+	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getDisplayMode());
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
+	ui->displayShowExoplanetsButton->setChecked(GETSTELMODULE(Exoplanets)->getFlagShowExoplanetsButton());
+	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
 	ui->timelineModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getTimelineMode());
 	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
@@ -111,7 +115,7 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr></table>";
 
-	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + "</p>";
+	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + ".</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
@@ -167,6 +171,18 @@ void ExoplanetsDialog::setTimelineEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Exoplanets)->setTimelineMode(b);
+}
+
+void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Exoplanets)->setEnableAtStartup(b);
+}
+
+void ExoplanetsDialog::setDisplayShowExoplanetsButton(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Exoplanets)->setFlagShowExoplanetsButton(b);
 }
 
 void ExoplanetsDialog::setUpdatesEnabled(int checkState)

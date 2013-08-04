@@ -152,15 +152,16 @@
 				},
 				"actionShow_Nebulas":
 				{
-					"text": "Nebulas",
-					"primaryKey": "N",
+					"text": "Deep-sky objects",
+					"primaryKey": "D",
+					"altKey": "N",
 					"checkable": "1",
 					"autorepeat": "0",
 					"global": "1"
 				},
 				"actionShow_DSS":
 				{
-					"text": "Nebulas background images",
+					"text": "Deep-sky objects background images",
 					"primaryKey": "I",
 					"checkable": "1",
 					"autorepeat": "0",
@@ -843,7 +844,17 @@
 				{
 					"text" : "Pulsars configuration window",
 					"primaryKey" : "",
-					"checkable" : "1"
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"actionShow_Pulsars":
+				{
+					"text" : "Show pulsars",
+					"primaryKey" : "Ctrl+Alt+P",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
 				}
 			}
 		},
@@ -869,7 +880,17 @@
 				{
 					"text" : "Quasars configuration window",
 					"primaryKey" : "",
-					"checkable" : "1"
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"actionShow_Quasars":
+				{
+					"text" : "Show quasars",
+					"primaryKey" : "Ctrl+Alt+Q",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
 				}
 			}
 		},
@@ -920,6 +941,30 @@
 				{
 					"text": "Telrad sight",
 					"primaryKey": "Ctrl+B",
+					"checkable": true
+				},
+				"actionShow_Telescope_Increment":
+				{
+					"text": "Select next telescope",
+					"primaryKey": "Shift+PgUp",
+					"checkable": true
+				},
+				"actionShow_Telescope_Decrement":
+				{
+					"text": "Select previous telescope",
+					"primaryKey": "Shift+PgDown",
+					"checkable": true
+				},
+				"actionShow_Ocular_Increment":
+				{
+					"text": "Select next eyepiece",
+					"primaryKey": "Ctrl+PgUp",
+					"checkable": true
+				},
+				"actionShow_Ocular_Decrement":
+				{
+					"text": "Select previous eyepiece",
+					"primaryKey": "Ctrl+PgDown",
 					"checkable": true
 				},
 				"actionOpen_Oculars_Configuration":

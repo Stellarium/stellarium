@@ -161,6 +161,16 @@ QString StelMainScriptAPI::getDeltaT() const
 	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT(getJDay())/3600.);
 }
 
+QString StelMainScriptAPI::getDeltaTAlgorithm() const
+{
+	return StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey();
+}
+
+void StelMainScriptAPI::setDeltaTAlgorithm(QString algorithmName)
+{
+	StelApp::getInstance().getCore()->setCurrentDeltaTAlgorithmKey(algorithmName);
+}
+
 //! Set time speed in JDay/sec
 //! @param ts time speed in JDay/sec
 void StelMainScriptAPI::setTimeRate(double ts)
@@ -481,7 +491,7 @@ void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "cannot play sound" << filename << ":" << e.what();
+		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename) << ":" << e.what();
 		return;
 	}
 
@@ -517,7 +527,7 @@ void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, fl
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "cannot play video" << filename << ":" << e.what();
+		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename) << ":" << e.what();
 		return;
 	}
 
@@ -624,6 +634,7 @@ void StelMainScriptAPI::debug(const QString& s)
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
+	StelCore *core = StelApp::getInstance().getCore();
 	if (dt == "now")
 		return StelUtils::getJDFromSystem();
 	
@@ -640,20 +651,26 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	if (ok)
 		return jd;
 	
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks))(\\s+(sidereal)?)?");
+	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
 	if (nowRe.exactMatch(dt))
 	{
 		double delta;
 		double unit;
 		double dayLength = 1.0;
+		double yearLength = 365.242190419; // duration of Earth's mean tropical year
+		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
 		if (nowRe.capturedTexts().at(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
-			jd = StelApp::getInstance().getCore()->getJDay();
+			jd = core->getJDay();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
-			dayLength = StelApp::getInstance().getCore()->getLocalSideralDayLength();
+		{
+			dayLength = core->getLocalSideralDayLength();
+			yearLength = core->getLocalSideralYearLength();
+			monthLength = 27.321661; // duration of Earth's sidereal month
+		}
 
 		QString unitString = nowRe.capturedTexts().at(6);
 		if (unitString == "seconds" || unitString == "second")
@@ -666,6 +683,10 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = dayLength;
 		else if (unitString == "weeks" || unitString == "week")
 			unit = dayLength * 7.;
+		else if (unitString == "months" || unitString == "month")
+			unit = monthLength;
+		else if (unitString == "years" || unitString == "year")
+			unit = yearLength;
 		else
 		{
 			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.capturedTexts().at(4);
@@ -765,6 +786,80 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 
 	return map;
 }
+
+QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
+{
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	QVariantMap map;
+	if (omgr->getSelectedObject().isEmpty())
+	{
+		debug("getObjectData WARNING - object not selected");
+		map.insert("found", false);
+		return map;
+	}
+
+	StelObjectP obj = omgr->getSelectedObject()[0];
+
+	if (!obj)
+	{
+		debug("getObjectData WARNING - object not found");
+		map.insert("found", false);
+		return map;
+	}
+	else
+	{
+		map.insert("found", true);
+	}
+
+	// OK, object found. Let's go.
+	Vec3d pos;
+	double ra, dec, alt, azi, glong, glat;
+	StelCore* core = StelApp::getInstance().getCore();
+
+	// ra/dec
+	pos = obj->getEquinoxEquatorialPos(core);
+	StelUtils::rectToSphe(&ra, &dec, pos);
+	map.insert("ra", ra*180./M_PI);
+	map.insert("dec", dec*180./M_PI);
+
+	// ra/dec in J2000
+	pos = obj->getJ2000EquatorialPos(core);
+	StelUtils::rectToSphe(&ra, &dec, pos);
+	map.insert("raJ2000", ra*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);
+
+	// apparent altitude/azimuth
+	pos = obj->getAltAzPosApparent(core);
+	StelUtils::rectToSphe(&azi, &alt, pos);
+	map.insert("altitude", alt*180./M_PI);
+	map.insert("azimuth", azi*180./M_PI);
+
+	// geometric altitude/azimuth
+	pos = obj->getAltAzPosGeometric(core);
+	StelUtils::rectToSphe(&azi, &alt, pos);
+	map.insert("altitude-geometric", alt*180./M_PI);
+	map.insert("azimuth-geometric", azi*180./M_PI);
+
+	// galactic long/lat in J2000
+	pos = obj->getJ2000GalacticPos(core);
+	StelUtils::rectToSphe(&glong, &glat, pos);
+	map.insert("glong", alt*180./M_PI);
+	map.insert("glat", azi*180./M_PI);
+
+	// magnitude
+	map.insert("vmag", obj->getVMagnitude(core, false));
+	map.insert("vmage", obj->getVMagnitude(core, true));
+
+	// angular size
+	map.insert("size", obj->getAngularSize(core));
+
+	// english name or designation & localized name
+	map.insert("name", obj->getEnglishName());
+	map.insert("localized-name", obj->getNameI18n());
+
+	return map;
+}
+
 
 void StelMainScriptAPI::clear(const QString& state)
 {
