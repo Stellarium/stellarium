@@ -682,14 +682,15 @@ void ConfigurationDialog::populatePluginsList()
 {
 	int prevSel = ui->pluginsListWidget->currentRow();
 	ui->pluginsListWidget->clear();
-	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();	
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
 		QString label = q_(desc.info.displayedName);
 		QListWidgetItem* item = new QListWidgetItem(label);
 		item->setData(Qt::UserRole, desc.info.id);
-		ui->pluginsListWidget->addItem(item);
+		ui->pluginsListWidget->addItem(item);		
 	}
+	ui->pluginsListWidget->sortItems(Qt::AscendingOrder);
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
 	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
 		ui->pluginsListWidget->setCurrentRow(prevSel);
