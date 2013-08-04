@@ -24,28 +24,47 @@
 The increasing number of contributors require that we clearly define coding rules and guidelines. Although for historical reasons the current code of Stellarium does not always comply to these rules, they should now be respected for any addition or modification of the code.
 
 @section stylistic_conventions_sec Stylistic Conventions
-<ul>
- <li>Source code should use ASCII character set. Characters such as '&egrave;' or '&ouml;' are not portable when hard-coded. Gettext translated strings should be used for such characters. 
- <li>Variable names and comments should be in English.
- <li>Class names are nouns, in mixed-case, with an initial upper-case
-letter and the first letter of each subsequent word capitalized (e.g. CoreFactory).
- <li>Method names are verbs or nouns in mixed-case, starting with a lower-case letter (e.g. update() or addElement()).
- <li>Methods that return a value should take the form getSize().
- <li>The names of local variables should be in mixed case, starting with a lower-case letter (e.g. packetSize). This also applies to the formal parameters of methods. Do not use names starting with underscore.
- <li>The names of macro or static const should be all upper-case words, separated by underscore:
+ - Source code should use the ASCII character set. Characters such as '&egrave;'
+ or '&ouml;' are not portable when hard-coded. Gettext translated strings should
+ be used for text using such characters.
+ - Variable names and comments should be in English.
+ - Class names are nouns, in mixed-case, with an initial upper-case letter and
+ the first letter of each subsequent word capitalized (e.g. @c CoreFactory).
+ - Method names are verbs or nouns in mixed-case, starting with a lower-case
+ letter (e.g. @c update() or @c addElement()).
+ - Names of methods that return a value should start with a suitable verb,
+ such as @c getSize().
+ - For methods, only names of Qt signals should be in passive voice
+ (@c valueChanged()). Names of Qt slots should use active verbs to avoid
+ confusion with signals:
+    @code
+    // BAD:
+    void buttonBoomClicked(); // Causes an explosion.
+    // BETTER:
+    void handleButtonBoom();  // Connected to buttonBoom::clicked().
+    // EVEN BETTER:
+    void explode();           // Connected to buttonBoom::clicked().
+    @endcode
+ The only exception is names of slots that use Qt's automatic connections to
+ controls in .ui files. (See @c QMetaObject::connectSlotsByName().)
+ - The names of local variables should be in mixed case, starting with
+ a lower-case letter (e.g. @c packetSize). This also applies to the formal
+ parameters of methods. Do not use names starting with underscore.
+ - The names of macro or static const should be all upper-case words, separated by underscore:
  @code
 #define MIN_WIDTH 3
 static const QString VERSION = "0.10.1";
  @endcode
- <li>Indentation should be done with tabs, not spaces. This allows each developers to use his favorite indent size without changing the code. 
- <li>When wrapping lines from long function calls, where the wrapped line does not start at the same level of indentation as the start of the function call, tab up to the start of the function call, and then use spaces to the opening parenthesis.
-@verbatim
+ - Indentation should be done with tabs, not spaces. This allows developers
+ to use their favorite indent size without changing the code. 
+ - When wrapping lines from long function calls, where the wrapped line does not start at the same level of indentation as the start of the function call, tab up to the start of the function call, and then use spaces to the opening parenthesis.
+ @verbatim
  [--tab-][--tab-][--tab-]someFunction(param, ...
  [--tab-][--tab-][--tab-][  spaces   ]moreparams, ...);
-@endverbatim
-This method will handle different tab widths gracefully.
- <li>Use the following layout for braces:
- @code
+ @endverbatim
+ This method will handle different tab widths gracefully.
+ - Use the following layout for braces:
+ @verbatim
 void MyClass::myMethod(int x)
 {
 	if (x>10)
@@ -53,15 +72,13 @@ void MyClass::myMethod(int x)
 		cout << "You won." << endl;
 	}
 }
- @endcode
- <li>Use blank lines as follows:
- <ul>
-  <li>1 between methods, before (block or single line) comment
-  <li>1 between logical sections of a method
-  <li>2 between sections of a source file
- </ul>
- <li>@em enums should follow the %Qt conventions.  i.e. CamelCase with First letter capitalization for both enum type and enum values. Document with doxygen. The <b>//!\< </b>tag can be used to add descriptions on the same line as an enum value, e.g.
-@verbatim
+ @endverbatim
+ - Use blank lines as follows:
+   - 1 between methods, before (block or single line) comment
+   - 1 between logical sections of a method
+   - 2 between sections of a source file
+ - @c enums should follow the %Qt conventions.  i.e. CamelCase with First letter capitalization for both enum type and enum values. Document with doxygen. The <b>//!\< </b>tag can be used to add descriptions on the same line as an enum value, e.g.
+ @verbatim
 //! @enum EnumName Here is a description of the enum
 enum EnumName
 {
@@ -71,12 +88,14 @@ enum EnumName
 };
 @endverbatim
 
-<li>You can use the <a href='http://astyle.sourceforge.net/'>astyle</a> program to format your code according to these conventions. Use the following options:
+ - You can use the <a href='http://astyle.sourceforge.net/'>astyle</a> program
+ to format your code according to these conventions. Use the following options:
 @verbatim
  astyle --style=ansi -tU source.cpp
 @endverbatim
-Note that this command will replace the file source.cpp with the re-formatted one, and create a backup of the original with the .orig suffix.  Also note that the -U option (used to un-pad parenthesis) is only available recent version of astyle.
-</ul>
+Note that this command will replace the file source.cpp with the re-formatted one, and create a backup of the original with the .orig suffix.  Also note that the -U option (used to un-pad
+parenthesis) may not be available in older versions of @c astyle.
+
 
 @section file_names_sec File Names
 
@@ -115,24 +134,26 @@ QList<QString> listMatchingObjectsI18n(const QString& objPrefix, unsigned int ma
 @section cpp_code C/C++ Code
 
 Use C++ replacement for C functions and %Qt replacements for C++ functions/STL wherever possible.
-<ul>
- <li>Use <a href="http://qt-project.org/doc/qt-4.8/qstring.html">QString</a> instead of @c std::string or  <tt>char *</tt>
- <li>Use <a href="http://qt-project.org/doc/qt-4.8/qiodevice.html">QIODevice</a> instead of C file managment with @c fopen()
- <li>Pass objects as references when needed instead of using pointers.
- <li>Include standard headers the C++ way, it is more portable:
+ - Use <a href="http://qt-project.org/doc/qt-4.8/qstring.html">QString</a>
+ instead of @c std::string or <tt>char *</tt>
+ - Use <a href="http://qt-project.org/doc/qt-4.8/qiodevice.html">QIODevice</a>
+ instead of C file managment with @c fopen()
+ - Pass objects as references when needed instead of using pointers.
+ - Include standard headers the C++ way, it is more portable:
  @code
 #include <stdio.h> // Bad
 #include <cstdio>  // Good
 #include <QString> // Good
  @endcode
- <li>Use <a href='http://qt-project.org/doc/qt-4.8/containers.html'>Qt containers</a> instead of STL ones. They are easier to use, allow for the foreach keyword. Only if speed is really critical, use STL containers such as @c std::vector or @c std::map, they are extremely efficient. Documentation is <a href='http://www.sgi.com/tech/stl/'>there</a>.
- <li>Avoid public global function and variable. Encapsulate them in classes or namespaces as static members/variable.
- <li>Avoid using C macro, use static const variables instead. It is safer because it is type safe.
+ - Use <a href='http://qt-project.org/doc/qt-4.8/containers.html'>Qt containers</a> instead of STL ones. They are easier to use, allow for the foreach keyword. Only if speed is really critical, use STL containers such as @c std::vector or @c std::map, they are extremely efficient. Documentation is <a href='http://www.sgi.com/tech/stl/'>there</a>.
+ - Avoid public global functions and variables. Encapsulate them in classes or namespaces as static members/variables.
+ - Avoid using C macros, use <tt>static const</tt> variables instead.
+ It is safer because it is type safe.
  @code
 #define RADIUS 12 // Bad 
 static const int RADIUS = 12; // Good
  @endcode
- <li>Use stdc++ math functions instead of C ones. There are more portable and are also overrided for float, thus may be faster.
+ - Use stdc++ math functions instead of C ones. There are more portable and are also overrided for float, thus may be faster.
  @code
 double cosLat = cos(lat);     // Bad 
 double cosLat = std::cos(lat); // Good
@@ -141,15 +162,21 @@ double cosLat = std::cos(lat); // Good
 
 @section translation_sec Translatable Strings and Console Output
 
-Translatable strings are translated using the StelTranslator class, which is a C++ wrapper around gettext. A string literal can be marked for translation in with two different macros, <tt>q_()</tt> and <tt>N_()</tt>, and you need to pick one for the appropriate purpose:
- - The <tt>q_()</tt> macro takes a string in English and returns the translation as a QString using the current global language. This also allows calling <tt>q_()</tt> with a QString parameter to return a translation.
- - When a string literal needs to be marked for translation without returning a translation, use the <tt>N_()</tt> macro. It returns the original string.
+Translatable strings are translated using the StelTranslator class, which is
+a C++ wrapper around <a href="http://www.gnu.org/software/gettext/">gettext</a>.
+A string literal can be marked for translation in with two different macros,
+@c q_() or @c N_() , and you need to pick one for the appropriate purpose:
+ - The @c q_() macro takes a string in English and returns the translation as
+ a QString using the current global language. This also allows calling @c q_()
+ with a QString parameter to return a translation.
+ - When a string literal needs to be marked for translation without returning
+ a translation, use the @c N_() macro. It returns the original string.
 
 Several guidelines:
  - Translatable text in sources or data files should be written in English, encoded in ASCII or UTF-8 if needed.
  - Translatable strings should be modified only if really necessary. Any modification to one of them means that all the translators for all the langages will have to re-translate the new string.
  This also means that new strings should be chosen carefully, to avoid the need to modify them later.
- - Do not concatenate strings, use <tt>QString::arg()</tt> instead. Concatenated strings are very hard (or even impossible) to translate.
+ - Do not concatenate strings, use @c QString::arg() instead. Concatenated strings are very hard (or even impossible) to translate.
 @code
 text << q_("Distance: ") << distance << q_("AU");   // Bad
 text = q_("Distance: %1AU").arg(distance);          // Good
@@ -177,7 +204,7 @@ text = q_("Distance: %1AU").arg(distance);
 // TRANSLATORS: Message displayed when an error occurs.
 QString errorMessage(q_("Loading failed."));
 @endcode
- - User-visible strings in %Qt <tt>.ui</tt> files (used for GUI windows) are marked for translation, unless the "translate" flag is unchecked. Note that these strings are actually extracted from the files generated by the .ui file compiler (uic) during compilation, and not from the .ui files themselves, so translation comments in the .ui files will be ignored.
+ - User-visible strings in %Qt <tt>.ui</tt> files (used for GUI windows) are marked for translation, unless the "translate" flag is unchecked. Note that these strings are actually extracted from the files generated by the <tt>.ui</tt> file compiler (@c uic) during compilation, and not from the <tt>.ui</tt> files themselves, so translation comments in the <tt>.ui</tt> files will be ignored.
  - When creating a <tt>.ui</tt> file with a new QWidget, %Qt Designer/Qt Creator sets the widget's @c windowTitle property to "Form", which then appears in translation templates and puzzles translators. It needs to be manually reset to an empty string.
  - Stellarium also supports <a href='http://www.gnu.org/software/gettext/manual/gettext.html#Contexts'>gettext contexts</a> for the cases when identical English strings are used in different places with different meanings and therefore need to have different translations. Contexts are short strings used to indicate the difference both to the program and the people making the translations.
    - In <tt>.ui</tt> files, for every property that holds a user-visible string, there's a "disambiguation" sub-property that can be used to indicate the context. It will be extracted together with the message (see above).
