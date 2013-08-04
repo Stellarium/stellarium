@@ -189,39 +189,39 @@ public:
 
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static QString getGCVSName(int hip);
+	static QString getGcvsName(int hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static QString getGCVSVariabilityType(int hip);
+	static QString getGcvsVariabilityType(int hip);
 
 	//! Get the magnitude at maximum brightness for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static float getGCVSMaxMagnitude(int hip);
+	static float getGcvsMaxMagnitude(int hip);
 
 	//! Get the magnitude flag code for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static int getGCVSMagnitudeFlag(int hip);
+	static int getGcvsMagnitudeFlag(int hip);
 
 	//! Get the minimum magnitude or amplitude for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static float getGCVSMinMagnitude(int hip, bool firstMinimumFlag=true);
+	static float getGcvsMinMagnitude(int hip, bool firstMinimumFlag=true);
 
 	//! Get the photometric system for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static QString getGCVSPhotometricSystem(int hip);
+	static QString getGcvsPhotometricSystem(int hip);
 
 	//! Get Epoch for maximum light for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static double getGCVSEpoch(int hip);
+	static double getGcvsEpoch(int hip);
 
 	//! Get the period for a variable star with a specified
 	//! Hipparcos catalogue number.
-	static double getGCVSPeriod(int hip);
+	static double getGcvsPeriod(int hip);
 
 	//! Get the rising time or duration of eclipse for a variable star with a
 	//! specified Hipparcos catalogue number.
-	static int getGCVSMM(int hip);
+	static int getGcvsMM(int hip);
 
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
@@ -261,7 +261,7 @@ private:
 
 	//! Loads GCVS from a file.
 	//! @param the path to a file containing the GCVS.
-	void loadGCVS(const QString& GCVSFile);
+	void loadGcvs(const QString& GcvsFile);
 
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?

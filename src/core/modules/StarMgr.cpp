@@ -200,7 +200,7 @@ QString StarMgr::getSciAdditionalName(int hip)
 }
 
 
-QString StarMgr::getGCVSName(int hip)
+QString StarMgr::getGcvsName(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -208,7 +208,7 @@ QString StarMgr::getGCVSName(int hip)
 	return QString();
 }
 
-QString StarMgr::getGCVSVariabilityType(int hip)
+QString StarMgr::getGcvsVariabilityType(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -216,7 +216,7 @@ QString StarMgr::getGCVSVariabilityType(int hip)
 	return QString();
 }
 
-float StarMgr::getGCVSMaxMagnitude(int hip)
+float StarMgr::getGcvsMaxMagnitude(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -224,7 +224,7 @@ float StarMgr::getGCVSMaxMagnitude(int hip)
 	return -99.f;
 }
 
-int StarMgr::getGCVSMagnitudeFlag(int hip)
+int StarMgr::getGcvsMagnitudeFlag(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -233,7 +233,7 @@ int StarMgr::getGCVSMagnitudeFlag(int hip)
 }
 
 
-float StarMgr::getGCVSMinMagnitude(int hip, bool firstMinimumFlag)
+float StarMgr::getGcvsMinMagnitude(int hip, bool firstMinimumFlag)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -250,7 +250,7 @@ float StarMgr::getGCVSMinMagnitude(int hip, bool firstMinimumFlag)
 	return -99.f;
 }
 
-QString StarMgr::getGCVSPhotometricSystem(int hip)
+QString StarMgr::getGcvsPhotometricSystem(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -258,7 +258,7 @@ QString StarMgr::getGCVSPhotometricSystem(int hip)
 	return QString();
 }
 
-double StarMgr::getGCVSEpoch(int hip)
+double StarMgr::getGcvsEpoch(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -266,7 +266,7 @@ double StarMgr::getGCVSEpoch(int hip)
 	return -99.f;
 }
 
-double StarMgr::getGCVSPeriod(int hip)
+double StarMgr::getGcvsPeriod(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -274,7 +274,7 @@ double StarMgr::getGCVSPeriod(int hip)
 	return -99.f;
 }
 
-int StarMgr::getGCVSMM(int hip)
+int StarMgr::getGcvsMM(int hip)
 {
 	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
 	if (it!=varStarsMapI18n.end())
@@ -733,16 +733,16 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 }
 
 // Load GCVS from file
-void StarMgr::loadGCVS(const QString& GCVSFile)
+void StarMgr::loadGcvs(const QString& GcvsFile)
 {
 	varStarsMapI18n.clear();
 	varStarsIndexI18n.clear();
 
-	qDebug() << "Loading variable stars from" << QDir::toNativeSeparators(GCVSFile);
-	QFile vsFile(GCVSFile);
+	qDebug() << "Loading variable stars from" << QDir::toNativeSeparators(GcvsFile);
+	QFile vsFile(GcvsFile);
 	if (!vsFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(GCVSFile);
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(GcvsFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(vsFile.readAll()).split('\n');
@@ -766,7 +766,7 @@ void StarMgr::loadGCVS(const QString& GCVSFile)
 		unsigned int hip = fields.at(0).toUInt(&ok);
 		if (!ok)
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GCVSFile)
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GcvsFile)
 				   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
 		}
@@ -1136,7 +1136,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 		{
 			if (maxNbItem==0)
 				break;
-			result << getGCVSName(it.value());
+			result << getGcvsName(it.value());
 			--maxNbItem;
 		}
 		else
@@ -1230,7 +1230,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem==0)
 				break;
-			result << getGCVSName(it.value());
+			result << getGcvsName(it.value());
 			--maxNbItem;
 		}
 		else
@@ -1289,7 +1289,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	try
 	{
-		loadGCVS(StelFileMgr::findFile("stars/default/gcvs_hip_part.dat"));
+		loadGcvs(StelFileMgr::findFile("stars/default/gcvs_hip_part.dat"));
 	}
 	catch (std::runtime_error& e)
 	{
