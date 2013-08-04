@@ -1,5 +1,6 @@
-[next release]
-New version of the Satellites plug-in (0.8.0):
+0.12.2 [2013-08-04]
+Bugfix release with few new features.
+New version of the Satellites plug-in (0.8.1):
 - automatic adding of new satellites on update from selected update sources;
 by default, only new naked-eye satellites are auto-added
 - automatic removal of satellites if they are no longer listed in the update
@@ -8,6 +9,37 @@ sources
 - satellites can be added to/removed from satellite groups from the GUI
 - custom satellite groups can be defined
 - the default satellite group names and satellite descriptions are translatable
+Added:
+- Variable stars support (LP: #665014)
+- Automatic change of landscape on planet change (LP: #1173254)
+- Flamsteed designation for stars and search tool (LP: #1190503)
+Changed:
+- Repacked default star catalogs (LP: #926588)
+- Update DSO features (LP: #1115035, #1172402, #1180493)
+- Improved Quasars plugin (LP: #1169232, #1181688)
+- Improved Pulsars plugin (LP: #1169230, #1181688)
+- Improved Oculars plugin (LP: #1170239, #1188340)
+- Improved Historical Supernovae plugin (LP: #1180962)
+- Improved Observability analysis plugin (LP: #1171182)
+- Improved Exoplanets plugin (LP: #1177871)
+- Improved Satellites plugin (LP: #955780)
+- Improved search tool (LP: #1181534, #1184599, #1180962)
+- Improved scripting engine (LP: #1202637, #1091626)
+Fixed:
+- Satellites plugin cause crash when enabled in distant past (LP: #955780)
+- Landscape colour saturation at summer noon (LP: #1115364)
+- wrong rendering of Planet's shadow (LP: #1131847)
+- stellarium crashes (LP: #1157930, #1177871, #1194838, #1173355, #1184599)
+- mismatched malloc/delete (LP: #1172931)
+- error in template code (LP: #1178257)
+- undefined template function in vecmath (LP: #1178391)
+- Setting Startup date and time (Other:) sets time to UTC, not my local (EDT) time (LP: #1198570)
+- Debug messages don't completely convert paths to local directory separator (LP: #682633)
+- Garbled text hovering over time/date (LP: #1176424)
+- Set time to now (Icon not illuminated) (LP: #1178498)
+- Tongan translation discrepancies (LP: #1181945)
+- POD document (LP: #1184459)
+- No orbits displayed for some planets' satellites (LP: #834727)
 
 0.12.1 [2013-04-21]
 Bugfix release with few new features.
