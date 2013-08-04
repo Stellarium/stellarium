@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-24 03:02+0700\n"
-"PO-Revision-Date: 2013-07-29 01:25+0000\n"
+"PO-Revision-Date: 2013-08-03 11:04+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-30 04:38+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-04 05:17+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -2107,6 +2107,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 177 events in all!"
 msgstr ""
+"ภาพพักหน้าจอ แสดงเหตุการณ์ต่าง ๆ ที่เกิดขึ้นในระบบสุริยะ รวมทั้งหมด 177 "
+"เหตุการณ์!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -5053,7 +5055,7 @@ msgstr "หากคุณพบปัญหาใด ๆ กรุณาแจ�
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid "Hot Keys"
-msgstr ""
+msgstr "แป้นลัด"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "The plug-in's key bindings can be edited in the General Tab."
@@ -5719,7 +5721,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "ปรับปรุงข้อมูลดาวเทียมจากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -5732,12 +5734,14 @@ msgstr "ปรับปรุงล่าสุด:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
+"เพิ่มดาวเทียมใหม่ทุกดวงจากแหล่งข้อมูลที่เลือก เมื่อมีการปรับปรุงข้อมูล"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"ลบดาวเทียมที่ไม่มีอยู่ในรายการของแหล่งข้อมูลที่เลือก เมื่อมีการปรับปรุงข้อมูล"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
@@ -5812,7 +5816,7 @@ msgstr "ตั้งค่า"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "คลิกสองครั้งที่ดาวเทียมเพื่อเริ่มติดตามดาวเทียมดวงนั้น"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
@@ -5848,11 +5852,11 @@ msgstr "วงโคจร"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr ""
+msgstr "ไม่ต้องปรับปรุง (หรือลบ) ดาวเทียมที่เลือก เมื่อมีการปรับปรุงข้อมูล"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:737
 msgid "Do not update"
-msgstr ""
+msgstr "ไม่ต้องปรับปรุง"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Description:"
@@ -5864,7 +5868,7 @@ msgstr "กลุ่ม:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "TLE set:"
-msgstr ""
+msgstr "ชุดข้อมูล TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid ""
@@ -5898,7 +5902,7 @@ msgstr "ดาวเทียมดวงอื่น ๆ"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 msgid "Get data from update sources"
-msgstr "รับข้อมูลที่ทันสมัยจากแหล่งข้อมูล"
+msgstr "รับข้อมูลจากแหล่งข้อมูลที่มีการปรับปรุง"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
@@ -7159,7 +7163,7 @@ msgstr "การตั้งค่าโปรแกรมเสริมเค
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:267
 msgid "Settings for quasars"
-msgstr ""
+msgstr "การตั้งค่าสำหรับเควซาร์"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Plot all quasars without labels"
@@ -7173,7 +7177,7 @@ msgstr "แสดงการกระจายตัวสำหรับเค
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:281
 msgid "Enable display at startup"
-msgstr ""
+msgstr "เปิดใช้งานเมื่อเริ่มโปรแกรม"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 msgid "Show quasars button on toolbar"
@@ -7368,7 +7372,7 @@ msgstr "การตั้งค่าโปรแกรมเสริมพั
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "การตั้งค่าสำหรับพัลซาร์"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Plot all pulsars without labels"
@@ -7496,7 +7500,7 @@ msgstr "ปรับปรุงข้อมูลดาวเคราะห์
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "การตั้งค่าสำหรับดาวเคราะห์นอกระบบ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
 msgid "Plot all systems with exoplanets without labels"
