@@ -76,11 +76,11 @@ public slots:
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used. Defaults to "utc".
 	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
-	//! Defaults to "false".
+	//! Defaults to "true".
 	//! @note for fully compatibles behavior of this function with the version 0.11.4
 	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
-	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=false);
+	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
