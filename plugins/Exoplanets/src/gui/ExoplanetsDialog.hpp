@@ -60,6 +60,7 @@ private slots:
 private:
         Ui_exoplanetsDialog* ui;
 	void setAboutHtml(void);
+	void setInfoHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
 
