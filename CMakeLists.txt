@@ -165,7 +165,7 @@ ENDIF()
 SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
 
 # Activate sound support
-SET(ENABLE_SOUND 1 CACHE BOOL "Define whether sound support should be activated.")
+SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated.")
 
 SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
 IF(ENABLE_SCRIPTING)
