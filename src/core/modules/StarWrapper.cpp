@@ -105,13 +105,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
 			{
 				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-				if (commonNameI18!="" && sciName!="")
+				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
 					oss << "(";
 				oss << (sciName=="" ? "" : sciName);
 				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
 				if (varSciName!="" && varSciName!=sciName)
 					oss << (sciName=="" ? "" : " - ") << varSciName;
-				if (commonNameI18!="" && sciName!="")
+				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
 					oss << ")";
 				nameWasEmpty=false;
 			}
