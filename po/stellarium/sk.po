@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-24 03:02+0700\n"
-"PO-Revision-Date: 2013-07-06 14:31+0000\n"
-"Last-Translator: Pavol Gajdoš <Unknown>\n"
+"PO-Revision-Date: 2013-08-03 19:57+0000\n"
+"Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-24 05:26+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-04 05:17+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
 msgid "Meridian"
@@ -617,6 +617,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Toto riešenie od S. Islama, M. Sadiqa a M. S. Qureshiho, založenom na "
+"riešení od Meeuse & Simonsa (2000), bolo publikované v článku  <em>Error "
+"Minimization of Polynomial Approximation of DeltaT</em> (%1) a revidované S. "
+"Islamem v roku 2013."
 
 #: src/core/StelCore.cpp:1522
 #, qt-format
@@ -1419,6 +1423,8 @@ msgid ""
 "Your platform does not support minimal required OpenGL 1.2. Please upgrade "
 "drivers for graphics card."
 msgstr ""
+"Vaša platforma nepodporuje minimálnu požadovanú verziu OpenGL1.2. "
+"Aktualizujte, prosím, ovládač grafickej karty."
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
@@ -2010,27 +2016,27 @@ msgstr "Prehliadka nebeskej kultúry"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:246
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Úkazy Zeme z Merkúra"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:248
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Úkazy Zeme z Venuše"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:250
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Úkazy Zeme z Marsu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "Najväčšie elongácie a jasy Zeme z Marsu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
 msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr ""
+msgstr "Najväčšie elongácie Zeme a Marsu z Jupitera"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:260
@@ -2136,6 +2142,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 177 events in all!"
 msgstr ""
+"Prehliadka rozličných úkazov v Slnečnej sústave. Až 177 úkazov za sebou!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -2173,11 +2180,11 @@ msgstr ""
 
 #: src/translations.h:282
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr ""
+msgstr "Najväčšie elongácie a jasnosti Zeme z Marsu v rokoch 2000-3000"
 
 #: src/translations.h:283
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr ""
+msgstr "Najväčšie elongácie Zeme z Jupitera v rokoch 2000-3000"
 
 #: src/translations.h:287
 msgid "Andorra"
@@ -3370,7 +3377,7 @@ msgstr "Čiary súhvezdí"
 
 #: src/translations.h:590
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Obrázky pozadia objektov hlbokého vesmíru"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1253
 msgid "Ecliptic J2000 grid"
@@ -3425,7 +3432,7 @@ msgstr "MIestny poludník"
 
 #: src/translations.h:602
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Objekty hlbokého vesmíru"
 
 #: src/translations.h:603
 msgid "Night mode"
@@ -3900,7 +3907,7 @@ msgstr "Možnosti"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Some objects may be found after activation respective plug-ins"
-msgstr ""
+msgstr "Niektoré objekty budú nájdené až po aktivácií príslušného modulu"
 
 #: src/ui_searchDialogGui.h:631
 msgid "names in English"
@@ -3954,7 +3961,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "OHV"
 
 #: src/ui_viewDialog.h:1204
 msgid "Planets and satellites"
@@ -4035,7 +4042,7 @@ msgstr "Hodinová zenitová rýchlosť"
 #: src/ui_viewDialog.h:1230
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1233
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4360,7 +4367,7 @@ msgstr "Iný:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Použiť súčasný miestny čas a dátum"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
