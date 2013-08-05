@@ -166,10 +166,7 @@ void Quasars::init()
 
 		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
 		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
-		if (flagShowQuasarsButton)
-		{
-			connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
-		}
+		connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
 	}
 	catch (std::runtime_error &e)
 	{

@@ -174,10 +174,7 @@ void Exoplanets::init()
 
 		connect(gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
 		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
-		if (flagShowExoplanetsButton)
-		{
-			connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
-		}
+		connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
