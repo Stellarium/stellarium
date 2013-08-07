@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-04 19:41+0700\n"
-"PO-Revision-Date: 2013-08-03 09:42+0000\n"
+"PO-Revision-Date: 2013-08-06 22:30+0000\n"
 "Last-Translator: pg <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-05 05:19+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:45+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1270
 msgid "Meridian"
@@ -1277,17 +1277,17 @@ msgstr "Nové umístění"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "Vyberte archiv ZIP, který obsahuje terény pro Stellarium"
+msgstr "Vyberte archiv ZIP, který obsahuje krajiny pro Stellarium"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "ZIP archives"
-msgstr "ZIP archivy"
+msgstr "Archivy ZIP"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "Terén \"%1\" byl úspěšně nainstalován."
+msgstr "Krajina \"%1\" byla úspěšně nainstalována."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -1832,7 +1832,7 @@ msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
-msgstr "Arabština"
+msgstr "Arabská"
 
 #: src/translations.h:166
 msgid "Aztec"
@@ -1852,7 +1852,7 @@ msgstr "Inuitská"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr "Indickovédské"
+msgstr "Indickovédská"
 
 #: src/translations.h:171
 msgid "Korean"
@@ -2047,12 +2047,12 @@ msgstr "Největší elongace a jasy Země z Jupiteru"
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:260
 msgid "Look around each installed landscape."
-msgstr "Porozhlédnout se po každém nainstalovaném povrchu."
+msgstr "Rozhlédněte se po každé nainstalované krajině."
 
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:262
 msgid "Look at each installed sky culture."
-msgstr "Prohlédnout si každou nainstalovanou kulturu nebes."
+msgstr "Prohlédněte si každou nainstalovanou kulturu nebes."
 
 #: src/translations.h:263
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -2071,7 +2071,7 @@ msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
-"Skript pro ukázku úplného zatmění Měsíce, které se stalo v roce 2009 "
+"Skript pro ukázku úplného zatmění Měsíce, ke kterému došlo v roce 2009 "
 "(umístění=Rangpur, Bangladéš)."
 
 #: src/translations.h:267
@@ -2084,8 +2084,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
-"Tento skript zobrazuje postavení Zvěrokruhu. To znamená ta postavení, která "
-"leží podél čáry kterou Slunce sleduje po celé hvězdné obloze v průběhu roku."
+"Tento skript zobrazuje postavení Zvěrokruhu. To znamená postavení ležící "
+"podél čáry, kterou Slunce sleduje po celé hvězdné obloze v průběhu roku."
 
 #: src/translations.h:269
 msgid ""
@@ -2113,7 +2113,8 @@ msgstr ""
 
 #: src/translations.h:272
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr "Phobos zastiňující Slunce, zobrazené z Olympus Mons 10. ledna, 2068."
+msgstr ""
+"Phobos zastiňující Slunce, pozorováno z Olympus Mons 10. ledna, 2068."
 
 #: src/translations.h:273
 msgid ""
@@ -2121,7 +2122,7 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
-"Zakrytí Země měsícem Phobus jsou běžná, tak jako zakrytí Jupitera. Ale "
+"Zakrytí Země měsícem Phobos jsou běžná, stejně jako zakrytí Jupitera. Ale "
 "zakrytí obou ve stejný den jsou velmi vzácná. Zde jedno probíhá ve skutečné "
 "rychlosti 21. ledna 2048."
 
@@ -2151,12 +2152,13 @@ msgstr "Prohlídka západních souhvězdí."
 
 #: src/translations.h:277
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr "Pohled na Slunce z vlekých planet sluneční soustavy a Pluta."
+msgstr "Pohled na Slunce z velkých planet sluneční soustavy a Pluta."
 
 #: src/translations.h:278
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
-msgstr "Nejlepší pohledy na Zemi z jiných těles sluneční soustavy"
+msgstr ""
+"Nejlepší pohledy na Zemi z jiných těles sluneční soustavy ve 21. století."
 
 #: src/translations.h:279
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
@@ -2174,8 +2176,8 @@ msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
-"Záblesk supernovy, jenž zpozoroval Tycho Brahe v roce 1572. Musí být povolen "
-"zásuvný modul Supernov."
+"Záblesk supernovy, který zpozoroval Tycho Brahe v roce 1572. Musí být "
+"povolen zásuvný modul Supernov."
 
 #: src/translations.h:282
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
