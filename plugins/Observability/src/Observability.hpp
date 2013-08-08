@@ -110,28 +110,33 @@ public slots:
 	//! Applies only to what is drawn on the viewport.
 	void setFontSize(int size);
 
-	//! Set the Sun altitude at twilight:
-	void setSunAltitude(int);
+	//! Set the angular altitude below the horizon of the Sun at twilight.
+	//! This determines the boundaries of day/night for observation purposes.
+	//! @param altitude A @b positive angle in degrees.
+	void setTwilightAltitude(int altitude);
 
-	//! Set the Sun altitude at twilight:
-	void setHorizAltitude(int);
+	//! Set the angular altitude of the visible horizon.
+	//! @param altitude An angle in degrees.
+	void setHorizAltitude(int altitude);
 	
 	//! Controls whether an observability report will be displayed.
 	void showReport(bool b);
 
+	
 private slots:
 	//! Retranslates the user-visible strings when the language is changed. 
 	void updateMessageText();
 
 	
 private:
-	//! Stuff for the configuration GUI:
+	//! Configuration window.
 	ObservabilityDialog* configDialog;
 
 	void setDateFormat(bool b) { dmyFormat=b; }
 	bool getDateFormat(void) { return dmyFormat; }
 
 //! Computes the Hour Angle (culmination=0h) in absolute value (from 0h to 12h).
+//! @todo The hour angle of what, exactly? --BM
 //! @param latitude latitude of the observer (in radians).
 //! @param elevation elevation angle of the object (horizon=0) in radians.
 //! @param declination declination of the object in radians. 
@@ -148,7 +153,7 @@ private:
 //! This function updates the variables MoonRise, MoonSet, MoonCulm.
 //! Returns success status.
 //! @param bodyType is 1 for Sun, 2 for Moon, 3 for Solar System object.
-	bool SolarSystemSolve(StelCore* core, int bodyType);
+	bool calculateSolarSystemEvents(StelCore* core, int bodyType);
 
 //! Finds the heliacal rise/set dates of the year for the currently-selected object.
 //! @param[out] acroRise day of year of the Acronycal rise.
@@ -170,10 +175,10 @@ private:
 //! @param DecMoon idem for the Moon.
 //! @param EclLon is the module of the vector product of Heliocentric Ecliptic Coordinates of Sun and Moon (projected over the Ecliptic plane). Useful to derive the dates of Full Moon.
 //! @param getBack controls whether Earth and Moon must be returned to their original positions after computation.
-	void getSunMoonCoords(StelCore* core, double JD,
-	                      double &RASun, double &DecSun,
-	                      double &RAMoon, double &DecMoon,
-	                      double &EclLon, bool getBack);
+	void getSunMoonCoords(StelCore* core, double jd,
+	                      double& raSun, double& decSun,
+	                      double& raMoon, double& decMoon,
+	                      double& eclLon, bool getBack);
 
 
 //! computes the selected-planet coordinates at a given Julian date.
@@ -184,8 +189,12 @@ private:
 //! @param getBack controls whether the planet must be returned to its original positions after computation.
 	void getPlanetCoords(StelCore* core, double JD, double &RA, double &Dec, bool getBack);
 
-//! Comptues the Earth-Moon distance (in AU) at a given Julian date. The parameters are similar to those of getSunMoonCoords or getPlanetCoords.
-	void getMoonDistance(StelCore* core, double JD, double &Distance, bool getBack);
+//! Comptues the Earth-Moon distance (in AU) at a given Julian date.
+//! The parameters are similar to those of getSunMoonCoords or getPlanetCoords.
+	void getMoonDistance(StelCore* core,
+	                     double jd,
+	                     double& distance,
+	                     bool getBack);
 
 //! Returns the angular separation (in radians) between two points.
 //! @param RA1 right ascension of point 1 (in hours)
@@ -222,29 +231,32 @@ private:
 
 //! Prepare arrays with data for the selected object for each day of the year.
 //! Computes the RA, Dec and rise/set sidereal times of the selected planet
-//! for the current year.
+//! for each day of the current year.
 //! @param core the current Stellarium core.
-	void preparePlanetData(StelCore *core);
+	void updatePlanetData(StelCore* core);
 
 //! Computes the Sun's RA and Dec for each day of a given year.
 //! @param core current Stellarium core.
-	void prepareSunData(StelCore* core);
+	void updateSunData(StelCore* core);
 
 //! Computes the Sun's Sid. Times at astronomical twilight (for each year's day)
-	void prepareSunH();
+	void updateSunH();
 
-//! Just convert the Vec3d named TempLoc into RA/Dec:
-	void toRADec(Vec3d TempLoc, double &RA, double &Dec);
+	//! Convert an equatorial position vector to RA/Dec.
+	void toRADec(Vec3d vec3d, double& ra, double& dec);
 
-//! Vector to store the Julian Dates for the current year:
+	//! Table containing the Julian Dates of the days of the current year.
 	double yearJD[366];
 
-//! Check if a source is observable during a given date:
-//! @aparm i the day of the year.
-	bool CheckRise(int i);
+//! Check if a source is observable during a given date.
+//! @param i the day of the year.
+	bool CheckRise(int day);
 
 //! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune;
+	double Rad2Deg, Rad2Hr, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune;
+	//! Angular altitude of astronomical twilight?
+	//! @todo Verify meaning.
+	double AstroTwiAlti;
 	
 	//! Geometric altitude at refraction-corrected horizon.
 	double refractedHorizonAlt;
@@ -254,10 +266,17 @@ private:
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
 
 //! Vectors to store Sun's RA, Dec, and Sid. Time at twilight and rise/set.
-	double sunRA[366], sunDec[366], sunSidT[4][366];
+	double sunRA[366];
+	double sunDec[366];
+	//! Sidereal time of the Sun at twilight and rise/set through the year.
+	double sunSidT[4][366];
 
 //! Vectors to store planet's RA, Dec, and Sid. Time at rise/set.
-	double objectRA[366], objectDec[366], objectH0[366], objectSidT[2][366];
+	double objectRA[366]; 
+	double objectDec[366];
+	double objectH0[366];
+	//! Table of the sidereal time of the object's rising/setting. 
+	double objectSidT[2][366];
 
 //! Rise/Set/Transit times for the Moon at current day:
 	double MoonRise, MoonSet, MoonCulm, lastJDMoon;
@@ -266,7 +285,7 @@ private:
 	Vec3d EarthPos[366];
 
 //! Position of the observer relative to the Earth Center or other coordinates:
-	Vec3d ObserverLoc, Pos0, Pos1, Pos2, RotObserver; //, Pos3;
+	Vec3d ObserverLoc, Pos1, Pos2, RotObserver; //, Pos3;
 
 //! Matrix to transform coordinates for Sun/Moon ephemeris:
 	Mat4d LocTrans;
@@ -285,7 +304,7 @@ private:
 	int iAltitude, iHorizAltitude;
 
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
-	QString selName, bestNight, ObsRange, objname, AcroCos;
+	QString selName, bestNightStr, obsRangeStr, acroCosStr;
 
 //! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
@@ -300,13 +319,20 @@ private:
 	Vec3d EquPos, LocPos;
 
 //! Some booleans to check the kind of source selected and the kind of output to produce.
-	bool isStar,isMoon,isSun,isScreen, raised, configChanged, souChanged;
-	int LastObject;
-
-//! Some booleans to select the kind of output.
+	bool isStar, isMoon, isSun, isScreen;
+	bool configChanged;
+	bool souChanged;
+	//! The last object type for which calculateSolarSystemEvents() was called.
+	int lastType;
+	
+	//! @name Flags controlling report contents.
+	//! @{
 	bool show_AcroCos, show_Good_Nights, show_Best_Night, show_Today, show_FullMoon; //, show_Crescent, show_SuperMoon;
+	//! @}
 
-//! Parameters for the graphics (i.e., font, icons, etc.):
+	//! @name GUI elements
+	//! @{
+	//! Parameters for the graphics.
 	QFont font;
 	Vec3f fontColor;
 	bool flagShowReport;
@@ -315,10 +341,15 @@ private:
 	QPixmap* offPixmap;
 	QPixmap* glowPixmap;
 	StelButton* toolbarButton;
+	//! @}
 
+	//! @name Cached translated GUI strings.
+	//! @todo Decide whether to keep translation caching.
+	//! @{
 	QString msgSetsAt, msgRoseAt, msgSetAt, msgRisesAt, msgCircumpolar, msgNoRise, msgCulminatesAt, msgCulminatedAt, msgH, msgM, msgS;
 	QString msgSrcNotObs, msgNoACRise, msgGreatElong, msgLargSSep, msgAtDeg, msgNone, msgAcroRise, msgNoAcroRise, msgCosmRise, msgNoCosmRise;
 	QString msgWholeYear, msgNotObs, msgAboveHoriz, msgToday, msgThisYear, msgPrevFullMoon, msgNextFullMoon;
+	//! @}
 
 };
 
