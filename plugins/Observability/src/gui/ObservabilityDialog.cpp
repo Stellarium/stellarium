@@ -91,11 +91,11 @@ void ObservabilityDialog::createDialogContent()
 	connect(ui->fontSize, SIGNAL(sliderMoved(int)),
 	        plugin, SLOT(setFontSize(int)));
 	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        plugin, SLOT(setSunAltitude(int)));
+	        plugin, SLOT(setTwilightAltitude(int)));
 	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
 	        this, SLOT(updateAltitudeLabel(int)));
 	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        plugin, SLOT(setHorizAltitude(int)));
+	        plugin, SLOT(setHorizonAltitude(int)));
 	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
 	        this, SLOT(updateHorizonLabel(int)));
 
