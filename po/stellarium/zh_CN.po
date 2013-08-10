@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-24 03:02+0700\n"
+"POT-Creation-Date: 2013-08-04 19:41+0700\n"
 "PO-Revision-Date: 2013-07-21 13:00+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-24 05:29+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-05 05:28+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1263
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1270
 msgid "Meridian"
 msgstr "子午线"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1271
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1278
 msgid "Ecliptic"
 msgstr "黄道"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1259
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1266
 msgid "Equator"
 msgstr "赤道"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1267
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1274
 msgid "Horizon"
 msgstr "地平线"
 
@@ -54,28 +54,28 @@ msgstr ", %1 米"
 msgid "Planet: "
 msgstr "行星： "
 
-#: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:438
+#: src/core/modules/Nebula.cpp:124 src/core/modules/Planet.cpp:440
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:119
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
 #: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
-#: plugins/Supernovae/src/Supernova.cpp:97 plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Supernovae/src/Supernova.cpp:115 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "类型：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:444
+#: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
-#: plugins/Supernovae/src/Supernova.cpp:102 plugins/Quasars/src/Quasar.cpp:106
+#: plugins/Supernovae/src/Supernova.cpp:120 plugins/Quasars/src/Quasar.cpp:106
 #: plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
 
-#: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:447
+#: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:449
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
-#: plugins/Supernovae/src/Supernova.cpp:105 plugins/Quasars/src/Quasar.cpp:118
+#: plugins/Supernovae/src/Supernova.cpp:123 plugins/Quasars/src/Quasar.cpp:118
 #: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -122,78 +122,78 @@ msgstr "未知"
 msgid "Undocumented type"
 msgstr "未收录类型"
 
-#: src/core/modules/Planet.cpp:450 src/core/modules/MinorPlanet.cpp:228
+#: src/core/modules/Planet.cpp:452 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:137
 #: src/core/modules/StarWrapper.cpp:184 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "绝对星等: %1"
 
-#: src/core/modules/Planet.cpp:463
+#: src/core/modules/Planet.cpp:465
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
 msgstr "站心黄道坐标(当前日期纪元): %1/%2"
 
-#: src/core/modules/Planet.cpp:464
+#: src/core/modules/Planet.cpp:466
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "自转轴倾角(当前日期，相对于地球轨道面): %1"
 
-#: src/core/modules/Planet.cpp:474 src/core/modules/MinorPlanet.cpp:245
+#: src/core/modules/Planet.cpp:476 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:149
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "距离: %1 天文单位(%2 千米)"
 
-#: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:252
+#: src/core/modules/Planet.cpp:483 src/core/modules/MinorPlanet.cpp:252
 #: src/core/modules/Comet.cpp:156
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "距离: %1 天文单位"
 
-#: src/core/modules/Planet.cpp:492
+#: src/core/modules/Planet.cpp:494
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "视直径: %1, 包括环: %2"
 
-#: src/core/modules/Planet.cpp:498 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Planet.cpp:500 src/core/modules/MinorPlanet.cpp:258
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "视直径: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:508 src/core/modules/MinorPlanet.cpp:265
+#: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:265
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "公转轨道周期：%1天 (%2儒略年)"
 
-#: src/core/modules/Planet.cpp:511
+#: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "恒星日: %1"
 
-#: src/core/modules/Planet.cpp:512
+#: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "平太阳日: %1"
 
-#: src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:521
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "位相角: %1"
 
-#: src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:522
 #, qt-format
 msgid "Elongation: %1"
 msgstr "距角: %1"
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:523
 #, qt-format
 msgid "Phase: %1"
 msgstr "相: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:524
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "被照亮的部分: %1%"
@@ -279,7 +279,7 @@ msgid "Spectral Type: %1"
 msgstr "光谱类型: %1"
 
 #: src/core/modules/StarWrapper.cpp:213
-#: plugins/Supernovae/src/Supernova.cpp:115
+#: plugins/Supernovae/src/Supernova.cpp:133
 #: plugins/Exoplanets/src/Exoplanet.cpp:205
 #, qt-format
 msgid "Distance: %1 Light Years"
@@ -776,7 +776,7 @@ msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:713 src/gui/ViewDialog.cpp:447
+#: src/gui/ConfigurationDialog.cpp:713 src/gui/ViewDialog.cpp:448
 msgid "Contact"
 msgstr "联系信息"
 
@@ -784,7 +784,7 @@ msgstr "联系信息"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:119
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
 msgstr "作者"
@@ -1154,27 +1154,31 @@ msgstr "空格键"
 msgid "%1m"
 msgstr "%1 米"
 
-#: src/gui/ViewDialog.cpp:508
+#: src/gui/ViewDialog.cpp:509
 msgid "No description"
 msgstr "没有描述"
 
-#: src/gui/ViewDialog.cpp:621
+#: src/gui/ViewDialog.cpp:625
 msgid "No shooting stars"
 msgstr "无流星"
 
-#: src/gui/ViewDialog.cpp:624
+#: src/gui/ViewDialog.cpp:628
 msgid "Normal rate"
 msgstr "日常频率"
 
-#: src/gui/ViewDialog.cpp:627
+#: src/gui/ViewDialog.cpp:631
 msgid "Standard Perseids rate"
 msgstr "标准英仙座流星雨频率"
 
-#: src/gui/ViewDialog.cpp:630
+#: src/gui/ViewDialog.cpp:634
+msgid "Meteor storm rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:637
 msgid "Exceptional Leonid rate"
 msgstr "超量狮子座流星雨"
 
-#: src/gui/ViewDialog.cpp:633
+#: src/gui/ViewDialog.cpp:640
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高频率 (1966 狮子座流星雨)"
 
@@ -3225,16 +3229,16 @@ msgstr "水平翻转"
 msgid "Full-screen mode"
 msgstr "全屏模式"
 
-#: src/translations.h:583 src/ui_viewDialog.h:1210
+#: src/translations.h:583 src/ui_viewDialog.h:1216
 msgid "Atmosphere"
 msgstr "大气层"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1254
+#: src/translations.h:584 src/ui_viewDialog.h:1261
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Azimuthal grid"
 msgstr "地平坐标网格"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1276
+#: src/translations.h:585 src/ui_viewDialog.h:1283
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Cardinal points"
 msgstr "基点"
@@ -3263,7 +3267,7 @@ msgstr "星座连线"
 msgid "Deep-sky objects background images"
 msgstr "深空天体背景图像"
 
-#: src/translations.h:591 src/ui_viewDialog.h:1253
+#: src/translations.h:591 src/ui_viewDialog.h:1260
 msgid "Ecliptic J2000 grid"
 msgstr "黄道坐标（J2000）"
 
@@ -3277,12 +3281,12 @@ msgstr "黄道"
 msgid "Equator line"
 msgstr "赤道"
 
-#: src/translations.h:594 src/ui_viewDialog.h:1252
+#: src/translations.h:594 src/ui_viewDialog.h:1259
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial grid"
 msgstr "赤道坐标网格"
 
-#: src/translations.h:595 src/ui_viewDialog.h:1251
+#: src/translations.h:595 src/ui_viewDialog.h:1258
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equatorial J2000 grid"
 msgstr "赤道坐标网格 (J2000)"
@@ -3291,12 +3295,12 @@ msgstr "赤道坐标网格 (J2000)"
 msgid "Fog"
 msgstr "雾"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1255
+#: src/translations.h:597 src/ui_viewDialog.h:1262
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic grid"
 msgstr "银道坐标网格"
 
-#: src/translations.h:598 src/ui_viewDialog.h:1275
+#: src/translations.h:598 src/ui_viewDialog.h:1282
 msgid "Galactic plane"
 msgstr "银道面"
 
@@ -3337,8 +3341,8 @@ msgstr "行星轨道"
 msgid "Planet trails"
 msgstr "行星轨迹"
 
-#: src/translations.h:607 src/ui_viewDialog.h:1198 src/ui_viewDialog.h:1217
-#: src/ui_viewDialog.h:1239
+#: src/translations.h:607 src/ui_viewDialog.h:1204 src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1246
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Stars"
 msgstr "天体"
@@ -3781,8 +3785,8 @@ msgstr "使用 SIMBAD 深度搜索"
 msgid "Server:"
 msgstr "服务器："
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1279
-#: src/ui_viewDialog.h:1284 src/ui_viewDialog.h:1286
+#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1291 src/ui_viewDialog.h:1293
 #: src/ui_configurationDialog.h:1137 src/ui_configurationDialog.h:1148
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -3805,223 +3809,227 @@ msgstr "在列表中搜索..."
 msgid "Lists"
 msgstr "列表"
 
-#: src/ui_viewDialog.h:1182
+#: src/ui_viewDialog.h:1188
 msgid "View"
 msgstr "显示"
 
-#: src/ui_viewDialog.h:1188
+#: src/ui_viewDialog.h:1194
 msgid "Sky"
 msgstr "天空"
 
-#: src/ui_viewDialog.h:1190
+#: src/ui_viewDialog.h:1196
 msgid "Markings"
 msgstr "标示"
 
-#: src/ui_viewDialog.h:1192
+#: src/ui_viewDialog.h:1198
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Landscape"
 msgstr "地景"
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1200
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "Starlore"
 msgstr "星空术语"
 
-#: src/ui_viewDialog.h:1197
+#: src/ui_viewDialog.h:1203
 msgid "Labels and Markers"
 msgstr "名称及标记"
 
-#: src/ui_viewDialog.h:1199
+#: src/ui_viewDialog.h:1205
 msgid "Planets"
 msgstr "行星"
 
-#: src/ui_viewDialog.h:1201
+#: src/ui_viewDialog.h:1207
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr "深空天体（星团、星系和星云）的标签和标记"
 
-#: src/ui_viewDialog.h:1203 src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1209 src/ui_viewDialog.h:1250
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr "深空天体"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1210
 msgid "Planets and satellites"
 msgstr "行星及卫星"
 
-#: src/ui_viewDialog.h:1205
+#: src/ui_viewDialog.h:1211
 msgid "Show planets"
 msgstr "显示行星"
 
-#: src/ui_viewDialog.h:1206
+#: src/ui_viewDialog.h:1212
 msgid "Show planet markers"
 msgstr "显示行星标记"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1213
 msgid "Show planet orbits"
 msgstr "显示行星轨道"
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1214
 msgid "Simulate light speed"
 msgstr "模拟光速"
 
-#: src/ui_viewDialog.h:1209
+#: src/ui_viewDialog.h:1215
 msgid "Scale Moon"
 msgstr "放大月球"
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1217
 msgid "Show atmosphere"
 msgstr "显示大气层"
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Light pollution:"
 msgstr "光污染："
 
-#: src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1220
 msgid "pressure, temperature, extinction coefficient"
 msgstr "压力，温度，消光系数"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1222
 msgid "Refraction/Extinction settings..."
 msgstr "折射/光吸收设置..."
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1224
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Absolute scale:"
 msgstr "绝对大小:"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1225
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Relative scale:"
 msgstr "相对大小:"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1226
 msgid "Milky Way brightness:"
 msgstr "银河亮度:"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Twinkle:"
 msgstr "闪烁:"
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1229
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "降低明亮天体附近其馀天体的亮度"
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1231
 msgid "Dynamic eye adaptation"
 msgstr "人眼动态视觉调适"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1232
 msgid "Shooting Stars"
 msgstr "流星"
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1234
 msgid "Hourly zenith rate"
 msgstr "天顶小时率"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1236
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ZHR(每小时天顶流星数)："
 
-#: src/ui_viewDialog.h:1233
+#: src/ui_viewDialog.h:1237
+msgid "1000"
+msgstr ""
+
+#: src/ui_viewDialog.h:1240
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr "限制星等（适用于裸眼、双筒望远镜观测者）"
 
-#: src/ui_viewDialog.h:1235
+#: src/ui_viewDialog.h:1242
 msgid "Limit Magnitudes"
 msgstr "限制星等"
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1244
 msgid "Limit the magnitude of stars"
 msgstr "恒星的星等限制"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1248
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr "深空天体（星团、星系和星云）的星等限制"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1251
 msgid "Constellations"
 msgstr "星座"
 
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1252
 msgid "Show lines"
 msgstr "显示星座连线"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1253
 msgid "Show labels"
 msgstr "显示星座名称"
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1254
 msgid "Show boundaries"
 msgstr "显示星座界线"
 
-#: src/ui_viewDialog.h:1248
+#: src/ui_viewDialog.h:1255
 msgid "Show art"
 msgstr "显示星座图绘"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1249
+#: src/ui_viewDialog.h:1256
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
 msgstr "图绘亮度："
 
-#: src/ui_viewDialog.h:1250
+#: src/ui_viewDialog.h:1257
 msgid "Celestial Sphere"
 msgstr "天球"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1264
 msgid "Show equator line"
 msgstr "显示天球赤道"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1268
 msgid "Show meridian line"
 msgstr "显示子午线"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1272
 msgid "Show horizon line"
 msgstr "显示地平线"
 
-#: src/ui_viewDialog.h:1269
+#: src/ui_viewDialog.h:1276
 msgid "Show ecliptic line"
 msgstr "显示黄道线"
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1280
 msgid "Show Galactic plane line"
 msgstr "显示银道平面"
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1284
 msgid "Projection"
 msgstr "投影方式"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1285
 msgid "Add/remove landscapes..."
 msgstr "添加或移除地景..."
 
-#: src/ui_viewDialog.h:1280
+#: src/ui_viewDialog.h:1287
 msgid "Show ground"
 msgstr "显示地面"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1288
 msgid "Show fog"
 msgstr "显示雾气"
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1289
 msgid "Use associated planet and position"
 msgstr "使用与此地景关联的位置与行星"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1290
 msgid "Use this landscape as default"
 msgstr "将此背景设定为预设值"
 
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1292
 msgid "Use this sky culture as default"
 msgstr "将此星空述语设为预设值"
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1294
 msgid "Visible"
 msgstr "可见"
 
@@ -4886,7 +4894,7 @@ msgstr "目镜插件"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:113
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:115
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "版本"
@@ -5111,7 +5119,7 @@ msgstr "竖直翻转"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:277
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:286
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 #: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -5380,7 +5388,7 @@ msgstr "您可以参阅%1此文档%2来获取详情。"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:123
 msgid "Links"
 msgstr "链接"
 
@@ -5388,7 +5396,7 @@ msgstr "链接"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:121
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5400,7 +5408,7 @@ msgstr "您可在 Launchpad 网站获得我们的技术支持。提交报告时�
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:127
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "如果您仍存在问题，可以%1从此处得到回答%2。"
@@ -5410,7 +5418,7 @@ msgstr "如果您仍存在问题，可以%1从此处得到回答%2。"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:126
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "如果有 Bug 需要报告，请点击%1这里%2。"
@@ -5420,7 +5428,7 @@ msgstr "如果有 Bug 需要报告，请点击%1这里%2。"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -5430,7 +5438,7 @@ msgstr "如果您需要其他功能，则可以创建一个错误报告，并将
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "Internet updates disabled"
 msgstr "Internet 更新已禁用"
 
@@ -5442,8 +5450,8 @@ msgstr "Internet 更新已禁用"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:218
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Updating now..."
 msgstr "正在更新……"
 
@@ -5451,7 +5459,7 @@ msgstr "正在更新……"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Next update: < 1 minute"
 msgstr "下次更新：一分钟内"
 
@@ -5459,7 +5467,7 @@ msgstr "下次更新：一分钟内"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "下次更新：%1 分钟后"
@@ -5468,7 +5476,7 @@ msgstr "下次更新：%1 分钟后"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "下次更新：%1 小时后"
@@ -5477,7 +5485,7 @@ msgstr "下次更新：%1 小时后"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:207
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:221
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Update error"
 msgstr "更新错误"
 
@@ -5503,8 +5511,8 @@ msgstr "[新源]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:287
 msgid "Update now"
 msgstr "立即更新"
 
@@ -5512,7 +5520,7 @@ msgstr "立即更新"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:177
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid "Update from files"
 msgstr "从文件更新"
 
@@ -5592,7 +5600,7 @@ msgstr "从互联网来源更新卫星数据"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:268
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:284
 msgid "Last update:"
 msgstr "最后更新："
 
@@ -5607,7 +5615,7 @@ msgid ""
 msgstr "更新时，删除不再列入来源中的卫星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:269
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:285
 msgid "Update frequency (hours):"
 msgstr "更新频率（小时）："
 
@@ -5654,7 +5662,7 @@ msgstr "淡出长度："
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:283
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:299
 #: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
 msgstr "恢复默认设置"
@@ -5663,7 +5671,7 @@ msgstr "恢复默认设置"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:275
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:284
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
 #: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Save settings as default"
 msgstr "存为默认设置"
@@ -5672,7 +5680,7 @@ msgstr "存为默认设置"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:285
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
 msgstr "设置"
@@ -6190,62 +6198,62 @@ msgid ""
 msgstr "这是一个为一些 Stellarium 配置文件中的杂项设置提供便捷访问的界面。您可以设置时区或是改变屏幕下方显示时间和日期的方式。"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "January"
 msgstr "一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "February"
 msgstr "二月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "March"
 msgstr "三月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "April"
 msgstr "四月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "May"
 msgstr "五月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "June"
 msgstr "六月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "July"
 msgstr "七月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "August"
 msgstr "八月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "September"
 msgstr "九月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "October"
 msgstr "十月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "November"
 msgstr "十一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:652
+#: plugins/Supernovae/src/Supernovae.cpp:656
 msgid "December"
 msgstr "十二月"
 
@@ -6817,11 +6825,11 @@ msgid ""
 "magnitude."
 msgstr "此插件用于展示一些历史上视星等超过10等的超新星。"
 
-#: plugins/Supernovae/src/Supernova.cpp:97
+#: plugins/Supernovae/src/Supernova.cpp:115
 msgid "supernova"
 msgstr "超新星"
 
-#: plugins/Supernovae/src/Supernova.cpp:113
+#: plugins/Supernovae/src/Supernova.cpp:131
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr "超新星类型：%1"
@@ -6911,7 +6919,7 @@ msgstr "通过网络更新星表"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:267
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:283
 msgid "Update from Internet sources"
 msgstr "从网络更新"
 
@@ -6924,7 +6932,7 @@ msgstr "更新频率（天）："
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:265
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:270
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:286
 msgid "[next update info]"
 msgstr "[下次更新的信息]"
 
@@ -6993,7 +7001,7 @@ msgstr "显示类星体分布"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:281
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
 msgid "Enable display at startup"
 msgstr "启动时显示"
 
@@ -7270,11 +7278,11 @@ msgstr "角距离"
 msgid "Discovered year"
 msgstr "发现年份"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:114
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:117
 msgid "Exoplanets Plug-in"
 msgstr "系外行星插件"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:121
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -7282,52 +7290,137 @@ msgid ""
 msgstr "此插件可以显示含有系外行星的恒星的位置。系外行星数据来自“%1系外行星百科%2”。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
 #, qt-format
 msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr "如果您想了解此插件的全部信息、历史以及编录格式，请%1点击此处%2。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
+msgid "General professional Web sites relevant to extrasolar planets"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+msgid "Exoplanets: an interactive version of XKCD 1071"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
+msgid "HEK (The Hunt for Exomoons with Kepler)"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
+msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
+msgid "Naming exoplanets (IAU)"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+msgid "Some Astronomers and Groups active in extrasolar planets studies"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+msgid "update: 16 April 2012"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+msgid "The Exoplanet Data Explorer"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+msgid "The Anglo-Australian Planet Search"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+msgid "Geneva Extrasolar Planet Search Programmes"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
+msgid "OLBIN (Optical Long-Baseline Interferometry News)"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
+msgid "NASA's Exoplanet Exploration Program"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
+msgid "Pulsar planets"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
+msgid "The NASA Exoplanet Archive"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
+msgid "IAU Comission 53: Extrasolar Planets"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+msgid "ExoMol"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
+msgid "The Habitable Zone Gallery"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+msgid "PlanetQuest - The Search for Another Earth"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+msgid "Open Exoplanet Catalogue"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+msgid "The Habitable Exoplanets Catalog"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid "Exoplanets is updated"
 msgstr "系外行星已更新"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:263
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:279
 msgid "Exoplanets Configuration"
 msgstr "系外行星设置"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:264
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:280
 msgid "Exoplanets Plug-in Configuration"
 msgstr "系外行星插件设置"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:266
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
 msgid "Update exoplanets data from Internet"
 msgstr "从互联网更新系外新星数据"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:272
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:288
 msgid "Settings for exoplanets"
 msgstr "系外行星设置"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:274
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:290
 msgid "Plot all systems with exoplanets without labels"
 msgstr "不带标签地显示系外行星系"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:276
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:292
 msgid "Enable display of distribution for exoplanets"
 msgstr "显示太阳系外行星的分布"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:278
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:294
 msgid "Display exoplanets since their discovery"
 msgstr "在该太阳系外行星被发现之后显示"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:280
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:296
 msgid "Enable timeline discovery of exoplanets"
 msgstr "启用太阳系外行星发现的时间线"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
 msgid "Show exoplanets button on toolbar"
 msgstr "在工具栏中显示系外行星按钮"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
+msgctxt "tab in plugin windows"
+msgid "Info"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
