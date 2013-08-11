@@ -314,8 +314,15 @@ private:
 	//! Days in the current year (366 on leap years).
 	int nDays;
 
-//! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
-	QString selName, bestNightStr, obsRangeStr, acroCosStr;
+	//! Untranslated name of the currently selected object.
+	//! Used to check if the selection has changed.
+	QString selName;
+	//! Cached copy of the "best night" line in the report.
+	QString lineBestNight;
+	//! Cached copy of the line reporting when the target is observable.
+	QString lineObservableRange;
+	//! Cached copy of the line reporting the acronical/cosmical rise and set.
+	QString lineAcroCos;
 
 //! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
@@ -358,7 +365,7 @@ private:
 	//! @todo Decide whether to keep translation caching.
 	//! @{
 	QString msgSetsAt, msgRoseAt, msgSetAt, msgRisesAt, msgCircumpolar, msgNoRise, msgCulminatesAt, msgCulminatedAt, msgH, msgM, msgS;
-	QString msgSrcNotObs, msgNoACRise, msgGreatElong, msgLargSSep, msgAtDeg, msgNone, msgAcroRise, msgNoAcroRise, msgCosmRise, msgNoCosmRise;
+	QString msgSrcNotObs, msgNoACRise, msgGreatElong, msgLargSSep, msgNone, msgAcroRise, msgNoAcroRise, msgCosmRise, msgNoCosmRise;
 	QString msgWholeYear, msgNotObs, msgAboveHoriz, msgToday, msgThisYear, msgPrevFullMoon, msgNextFullMoon;
 	//! @}
 
