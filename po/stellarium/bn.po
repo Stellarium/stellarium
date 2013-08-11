@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-04 19:41+0700\n"
-"PO-Revision-Date: 2013-06-04 06:44+0000\n"
-"Last-Translator: Tanmoy Saha <Unknown>\n"
+"PO-Revision-Date: 2013-08-10 12:16+0000\n"
+"Last-Translator: অনির্বাণ আইন <anirbanain@gmail.com>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-05 05:18+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-11 04:40+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 "Language: bn\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1270
@@ -271,7 +271,7 @@ msgstr "ঔজ্জ্বল্যতার সীমা : <b>%1</b>%2<b>%3</b>
 #: src/core/modules/StarWrapper.cpp:201
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "ঔজ্বল্যের পরিসীমা:<b>%1</b>%2<b>%3/%4</b> (ফটোমেট্রিক সিস্টেম: %5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -1045,7 +1045,7 @@ msgstr "Banjevic (২০০৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "ইসলাম, সাদিক এবং কোরেশী (২০০৮, ২০১৩)"
 
 #: src/gui/ConfigurationDialog.cpp:1168
 #, qt-format
@@ -1253,7 +1253,7 @@ msgstr "প্রমাণ হার"
 
 #: src/gui/ViewDialog.cpp:634
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "উল্কা ঝড়ের হার"
 
 #: src/gui/ViewDialog.cpp:637
 msgid "Exceptional Leonid rate"
@@ -1422,6 +1422,8 @@ msgid ""
 "Your platform does not support minimal required OpenGL 1.2. Please upgrade "
 "drivers for graphics card."
 msgstr ""
+"আপনার প্ল্যাটফর্ম ন্যূনতম প্রয়োজনীয় OpenGL 1.2 সমর্থন করে না. গ্রাফিক্স "
+"কার্ডের জন্য ড্রাইভার আপগ্রেড করুন."
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
@@ -2013,17 +2015,17 @@ msgstr "মহাকাশ সম্পর্কিত নানা সংস্
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:246
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "বুধ থেকে পৃথিবীর ঘটনাবলী"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:248
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "শুক্র থেকে পৃথিবীর ঘটনাবলী"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:250
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "মঙ্গল থেকে পৃথিবীর ঘটনাবলী"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
@@ -2133,7 +2135,7 @@ msgstr ""
 #: src/translations.h:275
 msgid ""
 "Screensaver of various happenings in the Solar System. 177 events in all!"
-msgstr ""
+msgstr "সৌর জগতের বিভিন্ন ঘটনা | মোট ১১৭ টি !"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -3569,19 +3571,19 @@ msgstr "দূরবীনের জন্য প্রতিফলক দৃষ
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "পরবর্তী দূরবীন নির্বাচন করুন"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "পরবর্তী লেন্স নির্বাচন করুন"
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "পূর্ববর্তী দূরবীন নির্বাচন করুন"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "পূর্ববর্তী লেন্স নির্বাচন করুন"
 
 #: src/translations.h:657
 msgid "Show pulsars"
@@ -3898,7 +3900,7 @@ msgstr "বিকল্পসমূহ"
 
 #: src/ui_searchDialogGui.h:629
 msgid "Some objects may be found after activation respective plug-ins"
-msgstr ""
+msgstr "কিছু কিছু বস্তু তার প্লাগইন সক্রিয় করার পর পাওয়া যাবে"
 
 #: src/ui_searchDialogGui.h:631
 msgid "names in English"
@@ -4038,7 +4040,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1237
 msgid "1000"
-msgstr ""
+msgstr "১০০০"
 
 #: src/ui_viewDialog.h:1240
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4368,7 +4370,7 @@ msgstr "অন্যান্য :"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "বর্তমান স্থানীয় তারিখ এবং সময় ব্যবহার করুন"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -5293,62 +5295,62 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1595
 msgid "visual"
-msgstr ""
+msgstr "দৃষি্টগোচর"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1597
 msgid "scientific"
-msgstr ""
+msgstr "বিজ্ঞানসংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1599
 msgid "communications"
-msgstr ""
+msgstr "যোগাযোগসংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1601
 msgid "navigation"
-msgstr ""
+msgstr "মার্গদর্শী"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1603
 msgid "amateur"
-msgstr ""
+msgstr "রেডিও"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1605
 msgid "weather"
-msgstr ""
+msgstr "আবহাওয়া"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1607
 msgid "geostationary"
-msgstr ""
+msgstr "ভুসমলয়"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1609
 msgid "non-operational"
-msgstr ""
+msgstr "অকেজো"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1611
 msgid "gps"
-msgstr ""
+msgstr "জিপিএস"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1613
 msgid "iridium"
-msgstr ""
+msgstr "ইরিডিয়াম"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1624
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "হাবল স্পেস টেলিস্কোপ"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1626
 msgid "The International Space Station"
-msgstr ""
+msgstr "আন্তর্জাতিক মহাকাশ কেন্দ্র"
 
 #: plugins/Satellites/src/Satellite.cpp:239
 #: plugins/Satellites/src/Satellite.cpp:243
@@ -5722,7 +5724,7 @@ msgstr "[সব]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "New group..."
-msgstr ""
+msgstr "নতুন গ্রুপ"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 msgid "Select TLE Update File"
@@ -5767,7 +5769,7 @@ msgstr "উপগ্রহ বিন্যাস"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Updates"
-msgstr ""
+msgstr "আপডেট"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
@@ -5864,7 +5866,7 @@ msgstr "বিন্যাস"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "ট্র্যাকিং শুরু করতে একটি স্যাটেলাইট এ দুইবার ক্লিক করুন."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
@@ -7536,7 +7538,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "অসৌর গ্রহ প্রাসঙ্গিক সাধারণ পেশাদার ওয়েব সাইট"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 msgid "Exoplanets: an interactive version of XKCD 1071"
@@ -7556,7 +7558,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
-msgstr ""
+msgstr "অসৌর গ্রহ গবেষণায় কিছু জ্যোতির্বিজ্ঞানীরা এবং সক্রিয় গোষ্ঠী"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "update: 16 April 2012"
@@ -7568,7 +7570,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "The Anglo-Australian Planet Search"
-msgstr ""
+msgstr "এংলো-অস্ট্রেলিয়ান গ্রহ অনুসন্ধান"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Geneva Extrasolar Planet Search Programmes"
@@ -7657,7 +7659,7 @@ msgstr "টুলবারে বহির গ্রহ বিকল্প প�
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "তথ্য"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
