@@ -983,7 +983,7 @@ void Observability::updateSunH()
 
 	for (int i=0; i<nDays; i++)
 	{
-		tempH = calculateHourAngle(mylat, AstroTwiAlti, sunDec[i]);
+		tempH = calculateHourAngle(mylat, twilightAltRad, sunDec[i]);
 		tempH00 = calculateHourAngle(mylat, refractedHorizonAlt, sunDec[i]);
 		if (tempH > 0.0)
 		{
@@ -1645,11 +1645,14 @@ void Observability::loadConfiguration()
 //	show_Crescent = conf->value("show_Crescent", true).toBool();
 //	show_SuperMoon = conf->value("show_SuperMoon", true).toBool();
 
-	iAltitude = conf->value("Sun_Altitude", 12).toInt();
-	AstroTwiAlti  = -((double)iAltitude)/Rad2Deg ;
+	// For backwards compatibility, the value of this key is stored with
+	// inverted sign.
+	// TODO: Skip the sign inversion when the key is changed.
+	int altitude = -(conf->value("Sun_Altitude", 12).toInt());
+	setTwilightAltitude(altitude); 
 
-	iHorizAltitude = conf->value("Horizon_Altitude", 0).toInt();
-	horizonAltitude = ((double)iHorizAltitude)/Rad2Deg ;
+	altitude = conf->value("Horizon_Altitude", 0).toInt();
+	setHorizonAltitude(altitude);
 	
 	conf->endGroup();
 	
@@ -1668,8 +1671,11 @@ void Observability::saveConfiguration()
 	// Set updated values
 	conf->beginGroup("Observability");
 	conf->setValue("font_size", fontSize);
-	conf->setValue("Sun_Altitude", iAltitude);
-	conf->setValue("Horizon_Altitude", iHorizAltitude);
+	// For backwards compatibility, the value of this key is stored with
+	// inverted sign.
+	// TODO: Skip the sign inversion when the key is changed.
+	conf->setValue("Sun_Altitude", -twilightAltDeg);
+	conf->setValue("Horizon_Altitude", horizonAltDeg);
 	conf->setValue("font_color", fontColorStr);
 	conf->setValue("show_AcroCos", show_AcroCos);
 	conf->setValue("show_Good_Nights", show_Good_Nights);
@@ -1737,14 +1743,14 @@ int Observability::getFontSize(void)
 	return fontSize;
 }
 
-int Observability::getSunAltitude(void)
+int Observability::getTwilightAltitude()
 {
-	return iAltitude;
+	return twilightAltDeg;
 }
 
-int Observability::getHorizAltitude(void)
+int Observability::getHorizonAltitude()
 {
-	return iHorizAltitude;
+	return horizonAltDeg;
 }
 
 
@@ -1760,15 +1766,15 @@ void Observability::setFontSize(int size)
 
 void Observability::setTwilightAltitude(int altitude)
 {
-	AstroTwiAlti  = -((double) altitude)/Rad2Deg ;
-	iAltitude = altitude;
+	twilightAltRad  = ((double) altitude)/Rad2Deg ;
+	twilightAltDeg = altitude;
 	configChanged = true;
 }
 
 void Observability::setHorizonAltitude(int altitude)
 {
 	horizonAltitude = ((double) altitude)/Rad2Deg ;
-	iHorizAltitude = altitude;
+	horizonAltDeg = altitude;
 	configChanged = true;
 }
 
