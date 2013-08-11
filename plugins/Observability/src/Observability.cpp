@@ -157,8 +157,11 @@ void Observability::updateMessageText()
 	           << qc_("Nov", "short month name")
 	           << qc_("Dec", "short month name");
 
+	// TRANSLATORS: Short for "hours".
 	msgH		= q_("h");
+	// TRANSLATORS: Short for "minutes".
 	msgM		= q_("m");
+	// TRANSLATORS: Short for "seconds".
 	msgS		= q_("s");
 	msgSetsAt	= q_("Sets at %1 (in %2)");
 	msgRoseAt	= q_("Rose at %1 (%2 ago)");
@@ -169,20 +172,22 @@ void Observability::updateMessageText()
 	msgCulminatesAt	= q_("Culminates at %1 (in %2) at %3 deg.");
 	msgCulminatedAt	= q_("Culminated at %1 (%2 ago) at %3 deg.");
 	msgSrcNotObs	= q_("Source is not observable.");
-	msgNoACRise	= q_("No Acronychal nor Cosmical rise/set.");
-	msgGreatElong	= q_("Greatest elongation: ");
-	msgLargSSep	= q_("Largest Sun separation: ");
-	msgAtDeg	= q_(" (at %1 deg.)");
+	msgNoACRise	= q_("No acronychal or cosmical rise/set.");
+	msgGreatElong	= q_("Greatest elongation: %1 (at %2 deg.)");
+	msgLargSSep	= q_("Largest Sun separation: %1 (at %2 deg.)");
 	msgNone		= q_("None");
-	msgAcroRise	= q_("Acronychal rise/set");
-	msgNoAcroRise	= q_("No Acronychal rise/set.");
-	msgCosmRise	= q_("Cosmical rise/set");
-	msgNoCosmRise	= q_("No Cosmical rise/set.");
+	// TRANSLATORS: The space at the end is significant - another sentence may follow.
+	msgAcroRise	= q_("Acronychal rise/set: %1/%2. ");
+	// TRANSLATORS: The space at the end is significant - another sentence may follow.
+	msgNoAcroRise	= q_("No acronychal rise/set. ");
+	msgCosmRise	= q_("Cosmical rise/set: %1/%2.");
+	msgNoCosmRise	= q_("No cosmical rise/set.");
 	msgWholeYear	= q_("Observable during the whole year.");
 	msgNotObs	= q_("Not observable at dark night.");
-	msgAboveHoriz	= q_("Nights above horizon: ");
+	msgAboveHoriz	= q_("Nights above horizon: %1");
 	msgToday	= q_("TODAY:");
 	msgThisYear	= q_("THIS YEAR:");
+	// TRANSLATORS: The space at the end is significant - another sentence may follow.
 	msgPrevFullMoon	= q_("Previous Full Moon: %1 %2 at %3:%4. ");
 	msgNextFullMoon	= q_("Next Full Moon: %1 %2 at %3:%4. ");
 }
@@ -609,8 +614,8 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 
 	if (isSun) 
 	{
-		bestNightStr.clear();
-		obsRangeStr.clear();
+		lineBestNight.clear();
+		lineObservableRange.clear();
 	}
 	else if (!isMoon && show_Year)
 	{
@@ -632,122 +637,152 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		};
 
 // Determine source observability (only if something changed):
-		if ((souChanged || locChanged || yearChanged)) {
-			bestNightStr=""; obsRangeStr = "";
+		if ((souChanged || locChanged || yearChanged))
+		{
+			lineBestNight.clear();
+			lineObservableRange.clear();
 
-			if (culmAlt>=halfpi-refractedHorizonAlt) { // Source cannot be seen.
+			// Check if the target cannot be seen.
+			if (culmAlt >= (halfpi - refractedHorizonAlt))
+			{
 				//ObsRange = q_("Source is not observable.");
 				//AcroCos = q_("No Acronychal nor Cosmical rise/set.");
-				obsRangeStr = msgSrcNotObs;
-				acroCosStr = msgNoACRise;
+				lineObservableRange = msgSrcNotObs;
+				lineAcroCos = msgNoACRise;
 			}
-			else { // Source can be seen.
+			else
+			{ // Source can be seen.
 
 ///////////////////////////
 // - Part 1. Determine the best observing night (i.e., opposition to the Sun):
-				if (show_Best_Night) {
+				if (show_Best_Night)
+				{
 					int selday = 0;
 					double deltaPhs = -1.0; // Initial dummy value
 					double tempPhs; 	
-					for (int i=0;i<nDays;i++) { // Maximize the Sun-object separation.
-						tempPhs = Lambda(objectRA[i],objectDec[i],sunRA[i],sunDec[i]);
-						if (tempPhs>deltaPhs) {selday=i;deltaPhs=tempPhs;};
-					};
+					for (int i=0; i<nDays; i++) // Maximize the Sun-object separation.
+					{
+						tempPhs = Lambda(objectRA[i], objectDec[i],
+						                 sunRA[i], sunDec[i]);
+						if (tempPhs > deltaPhs)
+						{
+							selday = i;
+							deltaPhs = tempPhs;
+						}
+					}
 
 					if (selName=="Mercury" || selName=="Venus")
 					{
-						//bestNight = q_("Greatest elongation: ");
-						bestNightStr = msgGreatElong;
+						lineBestNight = msgGreatElong;
 					}
 					else 
 					{
-						//bestNight = q_("Largest Sun separation: ");
-						bestNightStr = msgLargSSep;
-					};
-
-					//bestNight = bestNight + CalenDate(selday) + q_(" (at %1 deg.)").arg(deltaPhs*Rad2Deg,0,'f',1);
-					bestNightStr = bestNightStr + formatAsDate(selday) + msgAtDeg.arg(deltaPhs*Rad2Deg,0,'f',1);
-				};
+						lineBestNight = msgLargSSep;
+					}
+					
+					lineBestNight = lineBestNight
+					                .arg(formatAsDate(selday))
+					                .arg(deltaPhs*Rad2Deg, 0, 'f', 1);
+				}
 
 ///////////////////////////////
 // - Part 2. Determine Acronychal and Cosmical rise and set:
 
 				if (show_AcroCos)
 				{
-					int selRise, selSet, selRise2, selSet2; // days of year for Acronical and Cosmical rise/set.
-					int result = calculateAcroCos(selRise, selSet,
-					                              selRise2, selSet2);
-					QString AcroRiseStr, AcroSetStr;
-					QString CosmRiseStr, CosmSetStr;
+					int acroRise, acroSet, cosRise, cosSet;
+					int result = calculateAcroCos(acroRise, acroSet,
+					                              cosRise, cosSet);
+					QString acroRiseStr, acroSetStr;
+					QString cosRiseStr, cosSetStr;
+					// TODO: Possible error? Day 0 is 1 Jan.
+					acroRiseStr = (acroRise>0)?formatAsDate(acroRise):msgNone;
+					acroSetStr = (acroSet>0)?formatAsDate(acroSet):msgNone;
+					cosRiseStr = (cosRise>0)?formatAsDate(cosRise):msgNone;
+					cosSetStr = (cosSet>0)?formatAsDate(cosSet):msgNone;
 
-					AcroRiseStr = (selRise>0)?formatAsDate(selRise):msgNone;
-					AcroSetStr = (selSet>0)?formatAsDate(selSet):msgNone;
-
-					CosmRiseStr = (selRise2>0)?formatAsDate(selRise2):msgNone;
-					CosmSetStr = (selSet2>0)?formatAsDate(selSet2):msgNone;
-
-					//AcroCos = (Acro==3 || Acro==1)?QString("%1: %2/%3.").arg(q_("Acronychal rise/set")).arg(AcroRiseStr).arg(AcroSetStr):q_("No Acronychal rise/set.");
-					//AcroCos += (Acro==3 || Acro==2)?QString(" %1: %2/%3.").arg(q_("Cosmical rise/set")).arg(CosmRiseStr).arg(CosmSetStr):QString(" %1").arg(q_("No Cosmical rise/set."));
-					acroCosStr = (result==3 || result==1)?QString("%1: %2/%3.").arg(msgAcroRise).arg(AcroRiseStr).arg(AcroSetStr):msgNoAcroRise;
-					acroCosStr += (result==3 || result==2)?QString(" %1: %2/%3.").arg(msgCosmRise).arg(CosmRiseStr).arg(CosmSetStr):QString(" %1").arg(msgNoCosmRise);
-
-				};
+					if (result==3 || result==1)
+						lineAcroCos =  msgAcroRise
+						               .arg(acroRiseStr)
+						               .arg(acroSetStr);
+					else
+						lineAcroCos =  msgNoAcroRise;
+					
+					if (result==3 || result==2)
+						lineAcroCos += msgCosmRise
+						               .arg(cosRiseStr)
+						               .arg(cosSetStr);
+					else
+						lineAcroCos += msgNoCosmRise;
+				}
 
 
 ////////////////////////////
 // - Part 3. Determine range of good nights 
 // (i.e., above horizon before/after twilight):
 
-				if (show_Good_Nights) {
+				if (show_Good_Nights)
+				{
 					int selday = 0;
 					int selday2 = 0;
 					bool bestBegun = false; // Are we inside a good time range?
 					bool atLeastOne = false;
-					QString dateRange = "";
-					bool PoleNight, twiGood;
+					QString dateRange;
+					bool poleNight, twiGood;
 
-					for (int i=0;i<nDays;i++) {
+					for (int i=0; i<nDays; i++)
+					{
 
-						PoleNight = sunSidT[0][i]<0.0 && std::abs(sunDec[i]-mylat)>=halfpi; // Is it night during 24h?
-						twiGood = (PoleNight && std::abs(objectDec[i]-mylat)<halfpi)?true:CheckRise(i);
-						if (twiGood && bestBegun == false) {
+						poleNight = sunSidT[0][i]<0.0 && std::abs(sunDec[i]-mylat)>=halfpi; // Is it night during 24h?
+						twiGood = (poleNight && std::abs(objectDec[i]-mylat)<halfpi)?true:CheckRise(i);
+						
+						if (twiGood && bestBegun == false)
+						{
 							selday = i;
 							bestBegun = true;
 							atLeastOne = true;
 						};
 
-						if (!twiGood && bestBegun == true) {
+						if (!twiGood && bestBegun == true)
+						{
 							selday2 = i;
 							bestBegun = false;
-							if (selday2 > selday) {
-								if (dateRange!="") { dateRange += ", ";};
+							if (selday2 > selday)
+							{
+								// FIXME: This kind of concatenation is bad for i18n.
+								if (!dateRange.isEmpty())
+									dateRange += ", ";
 								dateRange += QString("%1").arg(formatAsDateRange(selday, selday2));
 							};
 						};
 					};
 
-					if (bestBegun) { // There were good dates till the end of the year.
-						 if (dateRange!="") { dateRange += ", ";};
+					// Check if there were good dates till the end of the year.
+					if (bestBegun)
+					{
+						// FIXME: This kind of concatenation is bad for i18n.
+						 if (!dateRange.isEmpty())
+							 dateRange += ", ";
 						dateRange += formatAsDateRange(selday, 0);
 					};
 					
-					if (dateRange == "") 
+					if (dateRange.isEmpty()) 
 					{ 
 						if (atLeastOne) 
-						{ // The whole year is good.
+						{
 							//ObsRange = q_("Observable during the whole year.");
-							obsRangeStr = msgWholeYear;
+							lineObservableRange = msgWholeYear;
 						}
 						else
 						{
 							//ObsRange = q_("Not observable at dark night.");
-							obsRangeStr = msgNotObs;
+							lineObservableRange = msgNotObs;
 						};
 					}
 					else
 					{
-						//ObsRange = QString("%1 %2").arg(q_("Nights above horizon: ")).arg(dateRange);
-						obsRangeStr = QString("%1 %2").arg(msgAboveHoriz).arg(dateRange);
+						// Nights when the target is above the horizon
+						lineObservableRange = msgAboveHoriz.arg(dateRange);
 					};
 
 				}; // Comes from show_Good_Nights==True"
@@ -778,17 +813,20 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= lineSpacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine, bestNightStr));
+			renderer->drawText(TextParams(xLine+fontSize, yLine,
+			                              lineBestNight));
 		};
 		if (show_Good_Nights) 
 		{
 			yLine -= lineSpacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine, obsRangeStr));
+			renderer->drawText(TextParams(xLine+fontSize, yLine,
+			                              lineObservableRange));
 		};
 		if (show_AcroCos) 
 		{
 			yLine -= lineSpacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine, acroCosStr));
+			renderer->drawText(TextParams(xLine+fontSize, yLine,
+			                              lineAcroCos));
 		};
 
 	};
@@ -1537,20 +1575,20 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			StelUtils::getDateFromJulianDay(intMoon, &fullYear, &fullMonth, &fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
 			if (getDateFormat())
-				bestNightStr = msgPrevFullMoon.arg(fullDay).arg(monthNames[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight = msgPrevFullMoon.arg(fullDay).arg(monthNames[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 			else
-				bestNightStr = msgPrevFullMoon.arg(monthNames[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight = msgPrevFullMoon.arg(monthNames[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			LocalTMoon = 24.*modf(LocalNext,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);			
 			if (getDateFormat())
-				bestNightStr += msgNextFullMoon.arg(fullDay).arg(monthNames[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight += msgNextFullMoon.arg(fullDay).arg(monthNames[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 			else
-				bestNightStr += msgNextFullMoon.arg(monthNames[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight += msgNextFullMoon.arg(monthNames[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
-			obsRangeStr.clear(); 
-			acroCosStr.clear();
+			lineObservableRange.clear(); 
+			lineAcroCos.clear();
 
 
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
@@ -1580,9 +1618,9 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	} 
 	else if (bodyType <3)
 	{
-		bestNightStr = "";
-		obsRangeStr = ""; 
-		acroCosStr = "";
+		lineBestNight.clear();
+		lineObservableRange.clear(); 
+		lineAcroCos.clear();
 	}; 
 
 
