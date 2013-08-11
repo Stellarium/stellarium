@@ -1765,7 +1765,7 @@ void Observability::setTwilightAltitude(int altitude)
 	configChanged = true;
 }
 
-void Observability::setHorizAltitude(int altitude)
+void Observability::setHorizonAltitude(int altitude)
 {
 	horizonAltitude = ((double) altitude)/Rad2Deg ;
 	iHorizAltitude = altitude;

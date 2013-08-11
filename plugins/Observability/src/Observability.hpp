@@ -117,7 +117,7 @@ public slots:
 
 	//! Set the angular altitude of the visible horizon.
 	//! @param altitude An angle in degrees.
-	void setHorizAltitude(int altitude);
+	void setHorizonAltitude(int altitude);
 	
 	//! Controls whether an observability report will be displayed.
 	void showReport(bool b);
