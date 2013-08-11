@@ -72,11 +72,12 @@ public:
 	//! get current font size:
 	int getFontSize(void);
 
-	//! get current Sun altitude at twilight:
-	int getSunAltitude(void);
+	//! Get the user-defined Sun altitude at twilight.
+	//! @returns A value in degrees.
+	int getTwilightAltitude();
 
-	//! get current Horizon altitude:
-	int getHorizAltitude(void);
+	//! Get the user-defined altitude of the visual horizon.
+	int getHorizonAltitude();
 
 
 public slots:
@@ -112,11 +113,16 @@ public slots:
 
 	//! Set the angular altitude below the horizon of the Sun at twilight.
 	//! This determines the boundaries of day/night for observation purposes.
-	//! @param altitude A @b positive angle in degrees.
+	//! @param altitude An angle in degrees; as this is altitude below
+	//! the horizon, it should be negative.
+	//! @note If you want the slider in the configuration dialog to be inverted,
+	//! you can use the @c invertedAppearance property of QSlider.
+	//! @todo Check if parameter is in the acceptable range?
 	void setTwilightAltitude(int altitude);
 
-	//! Set the angular altitude of the visible horizon.
+	//! Set the angular altitude of the visual horizon.
 	//! @param altitude An angle in degrees.
+	//! @todo Check if parameter is in the acceptable range?
 	void setHorizonAltitude(int altitude);
 	
 	//! Controls whether an observability report will be displayed.
@@ -254,13 +260,20 @@ private:
 
 //! Some useful constants and variables(almost self-explanatory).
 	double Rad2Deg, Rad2Hr, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune;
-	//! Angular altitude of astronomical twilight?
-	//! @todo Verify meaning.
-	double AstroTwiAlti;
+	
+	//! User-defined angular altitude of astronomical twilight in radians.
+	//! See setTwilightAltitude() and getTwilightAltitude().
+	double twilightAltRad;
+	//! User-defined angular altitude of astronomical twilight in degrees.
+	//! See setTwilightAltitude() and getTwilightAltitude().
+	int twilightAltDeg;
 	
 	//! Geometric altitude at refraction-corrected horizon.
 	double refractedHorizonAlt;
+	//! User-defined angular altitude of the visual horizon in radians.
 	double horizonAltitude;
+	//! User-defined angular altitude of the visual horizon in degrees.
+	int horizonAltDeg;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
 	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
@@ -300,8 +313,6 @@ private:
 	int curYear;
 	//! Days in the current year (366 on leap years).
 	int nDays;
-	
-	int iAltitude, iHorizAltitude;
 
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
 	QString selName, bestNightStr, obsRangeStr, acroCosStr;

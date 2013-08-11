@@ -165,10 +165,10 @@ void ObservabilityDialog::updateControls()
 	ui->blueSlider->setValue(blue);
 
 	ui->fontSize->setValue(plugin->getFontSize());
-	int sunAltitude = plugin->getSunAltitude();
+	int sunAltitude = plugin->getTwilightAltitude();
 	ui->sunAltitudeSlider->setValue(sunAltitude);
 	updateAltitudeLabel(sunAltitude);
-	int horizonAltitude = plugin->getHorizAltitude();
+	int horizonAltitude = plugin->getHorizonAltitude();
 	ui->horizonAltitudeSlider->setValue(horizonAltitude);
 	updateHorizonLabel(horizonAltitude);
 }
@@ -189,12 +189,14 @@ void ObservabilityDialog::setColor()
 
 void ObservabilityDialog::updateAltitudeLabel(int altitude)
 {
-	ui->sunAltitudeLabel->setText(QString("%1 -%2 %3").arg(q_("Sun altitude at twilight:")).arg(altitude).arg(q_("deg.")));
+	// This allows translators to use their own conventions for degree signs.
+	ui->sunAltitudeLabel->setText(q_("Sun altitude at twilight: %1 deg.").arg(altitude));
 }
 
 void ObservabilityDialog::updateHorizonLabel(int horizon)
 {
-	ui->horizonAltitudeLabel->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(horizon).arg(q_("deg.")));
+	// This allows translators to use their own conventions for degree signs.
+	ui->horizonAltitudeLabel->setText(q_("Horizon altitude: %1 deg.").arg(horizon));
 }
 
 
