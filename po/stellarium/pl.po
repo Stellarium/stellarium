@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-04 19:41+0700\n"
-"PO-Revision-Date: 2013-06-16 01:03+0000\n"
+"PO-Revision-Date: 2013-08-11 23:12+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-05 05:25+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-12 04:37+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -423,6 +423,11 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"To równanie wielomianowe 12. stopnia (przestarzałe i zastąpione przez "
+"Schmadela i Zecha (1988)) zostało przedstawione przez L. D. Schmadela i G. "
+"Zecha w artykule <em>Polynomial approximations for the correction delta T "
+"E.T.-U.T. in the period 1800-1975</em> (%1) jako dopasowanie do danych "
+"przedstawionych przez Brouwera (1952)."
 
 #: src/core/StelCore.cpp:1465
 msgid ""
@@ -478,6 +483,10 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"To równanie wielomianowe 12. stopnia zostało przedstawione przez L. D. "
+"Schmadela i G. Zecha w artykule <em>Empirical Transformations from U.T. to "
+"E.T. for the Period 1800-1988</em> (%1) jako dopasowanie do wartości "
+"podanych przez Stephensona i Morrisona (1984)."
 
 #: src/core/StelCore.cpp:1483
 msgid ""
@@ -525,6 +534,9 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"JPL Solar System Dynamics Group, będąca częścią NASA Jet Propulsion "
+"Laboratory, używa tego wzoru na swojej interaktywnej stronie WWW %1JPL "
+"Horizons%2."
 
 #: src/core/StelCore.cpp:1498
 #, qt-format
@@ -541,6 +553,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"Czwarte wydanie książki O. Montenbrucka i T. Pflegera <em>Astronomy on the "
+"Personal Computer</em> (2000) podaje proste wielomiany 3. stopnia dopasowane "
+"do danych z niedawnej przeszłości."
 
 #: src/core/StelCore.cpp:1504
 msgid ""
@@ -549,6 +564,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold i N. Dershowitz przedstawiają to dopasowanie wielomianowe w "
+"<em>Calendrical Calculations</em> (wyd. 3, 2007) oraz w <em>Calendrical "
+"Tabulations</em> (2002). Jest ono oparte na <em>Astronomical Algorithms</em> "
+"Jeana Meeusa (1991)."
 
 #: src/core/StelCore.cpp:1507
 #, qt-format
@@ -557,6 +576,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"To istotne rozwiązanie zostało przedstawione przez L. V. Morrisona i F. R. "
+"Stephensona w artykule <em>Historical values of the Earth's clock error %1T "
+"and the calculation of eclipses</em> (%2) z suplementem w (%3)."
 
 #: src/core/StelCore.cpp:1510
 #, qt-format
@@ -588,6 +610,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"To rozwiązanie B. Banjevicia, oparte na pracy Stephensona i Morrisona "
+"(1984), zostało przedstawione w artykule <em>Ancient eclipses and dating the "
+"fall of Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1519
 #, qt-format
@@ -596,6 +621,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"To rozwiązanie S. Islama, M. Sadiqa i M. S. Qureshi'ego, oparte na pracy "
+"Meeusa & Simonsa (2000), zostało przedstawione w artykule <em>Error "
+"Minimization of Polynomial Approximation of DeltaT</em> (%1) i zrewidowane "
+"przez Sanę Islama w 2013."
 
 #: src/core/StelCore.cpp:1522
 #, qt-format
