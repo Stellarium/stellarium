@@ -162,6 +162,7 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 }
 
@@ -251,6 +252,9 @@ void SearchDialog::createDialogContent()
 	ui->serverListComboBox->setCurrentIndex(idx);
 	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
 
+	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
+	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
@@ -271,6 +275,16 @@ void SearchDialog::enableSimbadSearch(bool enable)
 	Q_ASSERT(conf);
 	conf->setValue("search/flag_search_online", useSimbad);	
 }
+
+void SearchDialog::enableStartOfWordsAutofill(bool enable)
+{
+	useStartOfWords = enable;
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/flag_start_words", useStartOfWords);
+}
+
 
 void SearchDialog::setVisible(bool v)
 {
@@ -333,12 +347,12 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);			
-			matches += objectMgr->listMatchingObjects(trimmedText, 3);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()));
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()), useStartOfWords);
 		} else {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
-			matches += objectMgr->listMatchingObjects(trimmedText, 5);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords);
 		}
 
 		// remove possible duplicates from completion list

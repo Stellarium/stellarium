@@ -286,17 +286,29 @@ StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
 
 	QString snn;
+	bool find;
 	foreach(const SupernovaP& sn, snstar)
 	{
 		snn = sn->getNameI18n();
-		if (snn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==snn.toUpper().left(objPrefix.length()))
+				find = true;
+		}
+		else
+		{
+			if (snn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 				result << snn;
 		}
@@ -309,17 +321,29 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
-QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
 
 	QString snn;
+	bool find;
 	foreach(const SupernovaP& sn, snstar)
 	{
 		snn = sn->getEnglishName();
-		if (snn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==snn.toUpper().left(objPrefix.length()))
+				find = true;
+		}
+		else
+		{
+			if (snn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 				result << snn;
 		}

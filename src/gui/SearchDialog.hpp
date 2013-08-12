@@ -105,6 +105,9 @@ private slots:
 	//! Whether to use SIMBAD for searches or not.
 	void enableSimbadSearch(bool enable);
 
+	//! Whether to use autofill for start of words or not.
+	void enableStartOfWordsAutofill(bool enable);
+
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
@@ -129,6 +132,7 @@ private:
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
 	
+	bool useStartOfWords;
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;

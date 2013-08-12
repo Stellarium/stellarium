@@ -330,7 +330,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowPulsars)
@@ -340,12 +340,24 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 		return result;
 
 	QString psrn;
+	bool find;
 	foreach(const PulsarP& pulsar, psr)
 	{
 		psrn = pulsar->getNameI18n();
-		if (psrn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
 		{
-				result << psrn;
+			if (psrn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (psrn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << psrn;
 		}
 	}
 
@@ -356,7 +368,7 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
-QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowPulsars)
@@ -366,12 +378,24 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		return result;
 
 	QString psrn;
+	bool find;
 	foreach(const PulsarP& pulsar, psr)
 	{
 		psrn = pulsar->getEnglishName();
-		if (psrn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
 		{
-				result << psrn;
+			if (psrn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (psrn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << psrn;
 		}
 	}
 

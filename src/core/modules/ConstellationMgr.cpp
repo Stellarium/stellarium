@@ -1128,17 +1128,29 @@ StelObjectP ConstellationMgr::searchByName(const QString& name) const
 	return NULL;
 }
 
-QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
 
 	QString cn;
+	bool find;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		cn = (*iter)->getNameI18n();
-		if (cn.contains(objPrefix,Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (cn.contains(objPrefix,Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 			result << cn;
 			if (result.size()==maxNbItem)
@@ -1148,17 +1160,29 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 	return result;
 }
 
-QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
 
 	QString cn;
+	bool find;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		cn = (*iter)->getEnglishName();
-		if (cn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (cn.contains(objPrefix,Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 			result << cn;
 			if (result.size()==maxNbItem)
