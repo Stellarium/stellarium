@@ -1074,7 +1074,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 //! Find and return the list of at most maxNbItem objects auto-completing
 //! the passed object I18n name.
-QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
@@ -1167,7 +1167,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 
 //! Find and return the list of at most maxNbItem objects auto-completing
 //! the passed object English name.
-QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;

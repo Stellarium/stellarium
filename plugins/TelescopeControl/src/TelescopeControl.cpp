@@ -392,16 +392,29 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 	return 0;
 }
 
-QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
 
+	QString tn;
+	bool find;
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
-		QString tn = telescope->getNameI18n();
-		if (tn.contains(objPrefix, Qt::CaseInsensitive))
+		tn = telescope->getNameI18n();
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 			result << tn;
 		}
@@ -414,16 +427,29 @@ QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, 
 	return result;
 }
 
-QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
 
+	QString tn;
+	bool find;
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		QString tn = telescope->getEnglishName();
-		if (tn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 			result << tn;
 		}

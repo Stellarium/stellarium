@@ -326,7 +326,7 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowQuasars)
@@ -336,12 +336,24 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 		return result;
 
 	QString qson;
+	bool find;
 	foreach(const QuasarP& quasar, QSO)
 	{
 		qson = quasar->getNameI18n();
-		if (qson.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
 		{
-				result << qson;
+			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (qson.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << qson;
 		}
 	}
 
@@ -352,7 +364,7 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
-QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowQuasars)
@@ -362,12 +374,24 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		return result;
 
 	QString qson;
+	bool find;
 	foreach(const QuasarP& quasar, QSO)
 	{
 		qson = quasar->getEnglishName();
-		if (qson.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
 		{
-				result << qson;
+			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (qson.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << qson;
 		}
 	}
 

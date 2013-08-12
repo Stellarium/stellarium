@@ -80,14 +80,16 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names.
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem=5) const;
+	QStringList listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem=5, bool useStartOfWords=false) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names.
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem=5) const;
+	QStringList listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem=5, bool useStartOfWords=false) const;
 
 	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
 	QMap<QString, QString> objectModulesMap() const;
