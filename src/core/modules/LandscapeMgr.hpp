@@ -268,6 +268,11 @@ public slots:
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	quint64 loadLandscapeSize(QString landscapeID);
 
+	//! Get flag for autoselect of landscapes for planets.
+	bool getFlagLandscapeAutoSelection() const;
+	//! Set flag for autoselect of landscapes for planets.
+	void setFlagLandscapeAutoSelection(bool enableAutoSelect);
+
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
@@ -337,6 +342,8 @@ private:
 
 	// Define whether the observer location is to be updated when the landscape is updated.
 	bool flagLandscapeSetsLocation;
+
+	bool flagLandscapeAutoSelection;
 
 	// The ID of the currently loaded landscape
 	QString currentLandscapeID;
