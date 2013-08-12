@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-04 19:41+0700\n"
-"PO-Revision-Date: 2013-08-06 09:59+0000\n"
-"Last-Translator: LEE E. S. <Unknown>\n"
+"PO-Revision-Date: 2013-08-11 18:25+0000\n"
+"Last-Translator: Juho Kim <juo6442@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:45+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-12 04:36+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1270
 msgid "Meridian"
@@ -823,7 +823,7 @@ msgstr "사용할 수 있는 모든 별 카탈로그가 설치되었습니다."
 #: src/gui/ConfigurationDialog.cpp:905
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "%2 중 %1의 목록을 받음"
+msgstr "%2개 중 %1번 목록 받기"
 
 #: src/gui/ConfigurationDialog.cpp:912
 #, qt-format
@@ -1046,7 +1046,7 @@ msgstr "CTRL + 마우스 왼쪽 클릭"
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
-msgstr ""
+msgstr "아래는 키가 지정된 동작만 표시됩니다. 더 많은 동작은 \"%1\" 버튼을 눌러 사용할 수 있습니다."
 
 #: src/gui/HelpDialog.cpp:245
 msgid ""
@@ -1990,11 +1990,11 @@ msgstr "하늘의 느리고, 무한한 여행, 임의의 천체를 찾고 있습
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
-msgstr ""
+msgstr "2009년에 일어난 개기일식을 설명하는 스크립트 (위치=Rangpur, Bangladesh)"
 
 #: src/translations.h:267
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "프로그램을 시작할 때 자동으로 실행하는 스크립트"
 
 #: src/translations.h:268
 msgid ""
@@ -3588,7 +3588,7 @@ msgstr "로그"
 
 #: src/ui_helpDialogGui.h:291 src/ui_configurationDialog.h:1057
 msgid "Edit keyboard shortcuts..."
-msgstr "키보드 단축키 편집하기"
+msgstr "키보드 단축키 편집..."
 
 #: src/ui_helpDialogGui.h:292
 msgid "Refresh"
@@ -3912,7 +3912,7 @@ msgstr "상대 크기:"
 
 #: src/ui_viewDialog.h:1226
 msgid "Milky Way brightness:"
-msgstr "은하수 밝기"
+msgstr "은하수 밝기:"
 
 #: src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
@@ -4080,8 +4080,7 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"기본값 복원 설정은 스텔라리움을 재시작해야 합니다. 다음번에 시작시 사용하기 위해 현재의 화각과 시야 방향을 포함한 모든 현재 설정을 "
-"저장하세요."
+"기본값 복원 설정은 스텔라리움을 재시작해야 합니다. 모든 설정 저장은 화각과 시야 방향을 포함하여 다음에 프로그램을 시작할 때 반영합니다."
 
 #: src/ui_configurationDialog.h:987
 msgid "The width of your view when Stellarium starts"
@@ -4243,7 +4242,7 @@ msgstr "멈췄을 때 마우스 커서 숨기기"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Mouse cursor timeout:"
-msgstr "마우스 커서 제한:"
+msgstr "마우스 커서 타임아웃:"
 
 #: src/ui_configurationDialog.h:1063
 msgid "seconds"
@@ -4268,7 +4267,7 @@ msgstr "현재 지방일과 지방시 사용하기"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
-msgstr "현재 설정을 유지"
+msgstr "현재 설정 유지"
 
 #: src/ui_configurationDialog.h:1075
 msgid "Starts Stellarium at system clock date and time"
@@ -6516,11 +6515,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Nebula names"
-msgstr ""
+msgstr "성운 이름"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:353
 msgid "Nebula hints"
-msgstr ""
+msgstr "성운 힌트"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:367
 msgid "Galactic plane line"
