@@ -659,7 +659,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
@@ -743,11 +743,24 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	QString dson;
+	bool find;
 	// Search by common names
 	foreach (const NebulaP& n, nebArray)
 	{
 		dson = n->nameI18;
-		if (dson.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (dson.mid(0, objw.size()).toUpper()==objw)
+				find = true;
+
+		}
+		else
+		{
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 			result << dson;
 	}
 
@@ -760,7 +773,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
-QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
@@ -844,11 +857,24 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	QString dson;
+	bool find;
 	// Search by common names
 	foreach (const NebulaP& n, nebArray)
 	{
 		dson = n->englishName;
-		if (dson.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (dson.mid(0, objw.size()).toUpper()==objw)
+				find = true;
+
+		}
+		else
+		{
+			if (dson.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 			result << dson;
 	}
 
