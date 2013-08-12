@@ -301,6 +301,7 @@ void LandscapeMgr::init()
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
+	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
 	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
 	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
 
@@ -455,6 +456,16 @@ void LandscapeMgr::setFlagFog(const bool displayed)
 bool LandscapeMgr::getFlagFog() const
 {
 	return landscape->getFlagShowFog();
+}
+
+void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
+{
+	flagLandscapeAutoSelection = enableAutoSelect;
+}
+
+bool LandscapeMgr::getFlagLandscapeAutoSelection() const
+{
+	return flagLandscapeAutoSelection;
 }
 
 /*********************************************************************

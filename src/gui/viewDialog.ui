@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
-    <height>507</height>
+    <width>648</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="font">
@@ -522,6 +522,16 @@
               <widget class="QCheckBox" name="planetScaleMoonCheckBox">
                <property name="text">
                 <string>Scale Moon</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+               <property name="toolTip">
+                <string>Automatic change of landscape when planet is changed</string>
+               </property>
+               <property name="text">
+                <string>Auto select landscapes</string>
                </property>
               </widget>
              </item>

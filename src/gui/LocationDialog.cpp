@@ -374,12 +374,15 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
 	{
 		setFieldsFromLocation(loc);
-		// If we have a landscape for selected planet then set it, otherwise use default landscape
-		// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
-		if (ls->getAllLandscapeNames().indexOf(loc.planetName)>0)
-			ls->setCurrentLandscapeName(loc.planetName);
-		else
-			ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+		if (ls->getFlagLandscapeAutoSelection())
+		{
+			// If we have a landscape for selected planet then set it, otherwise use default landscape
+			// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
+			if (ls->getAllLandscapeNames().indexOf(loc.planetName)>0)
+				ls->setCurrentLandscapeName(loc.planetName);
+			else
+				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+		}
 
 	}
 	// Planet transition time also set to null to prevent uglyness when

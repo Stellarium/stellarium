@@ -27,6 +27,7 @@
 
 #include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -261,6 +262,15 @@ void SpaceShipObserver::update(double deltaTime)
 	{
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
+		LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+		if (ls->getFlagLandscapeAutoSelection())
+		{
+			// If we have a landscape for target planet then set it, otherwise use default landscape
+			if (ls->getAllLandscapeNames().indexOf(currentLocation.planetName)>0)
+				ls->setCurrentLandscapeName(currentLocation.planetName);
+			else
+				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+		}
 	}
 	else
 	{
