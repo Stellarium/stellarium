@@ -438,15 +438,14 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 				}
 			}
 
-			if (find==false && !numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
-			{
-				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
-			}
-			else
+			if (find)
 			{
 				result << sat->getNameI18n().toUpper();
 			}
-
+			else if (!numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
+			{
+				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
+			}
 		}
 	}
 
@@ -495,13 +494,13 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 					find = true;
 				}
 			}
-			if (find==false && !numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
-			{
-				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
-			}
-			else
+			if (find)
 			{
 				result << sat->getEnglishName().toUpper();
+			}
+			else if (find==false && !numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
+			{
+				result << QString("NORAD %1").arg(sat->getCatalogNumberString());			
 			}
 		}
 	}
