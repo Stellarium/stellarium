@@ -274,6 +274,30 @@ int gSatWrapper::getVisibilityPredict()
 	return visibility; //TODO: put correct return
 }
 
+double gSatWrapper::getPhaseAngle()
+{
+	// All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
+	Vec3d observerECIPos;
+	Vec3d observerECIVel;
+	Vec3d satECIPos;
+	Vec3d sunECIPos;
+	Vec3d sunEquinoxEqPos;
+	Vec3d sunAltAzPos;
+
+	calcObserverECIPosition(observerECIPos, observerECIVel);
+
+	satECIPos = getTEMEPos();
+	SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+	sunAltAzPos        = solsystem->getSun()->getAltAzPosGeometric(StelApp::getInstance().getCore());
+
+	//sunEquinoxEqPos is measured in AU. we need meassure it in Km
+	sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
+	sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
+
+	return sunECIPos.angle(satECIPos);
+}
+
 
 
 

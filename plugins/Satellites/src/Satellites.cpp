@@ -856,6 +856,9 @@ QVariantMap Satellites::createDataMap(void)
 		if (satMap["hintColor"].toList() == defHintCol)
 			satMap.remove("hintColor");
 
+		if (satMap["stdmag"].toFloat() == 99.f)
+			satMap.remove("stdmag");
+
 		sats[sat->id] = satMap;
 	}
 	map["satellites"] = sats;
