@@ -82,6 +82,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	displayed = map.value("visible", displayed).toBool();
 	orbitDisplayed = map.value("orbitVisible", orbitDisplayed).toBool();
 	userDefined = map.value("userDefined", userDefined).toBool();
+	stdmag = map.value("stdmag", 99.f).toFloat();
 
 	// Satellite hint color
 	QVariantList list = map.value("hintColor", QVariantList()).toList();
@@ -173,6 +174,7 @@ QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
 	map["name"] = name;
+	map["stdmag"] = stdmag;
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
@@ -252,6 +254,19 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
 	}
 	
+	if ((flags & Magnitude) && (stdmag!=99.f))
+	{
+		if (visibility==VISIBLE)
+		{
+			oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core, false), 'f', 2));
+		}
+		else
+		{
+			oss << q_("Approx. magnitude: <b>%1</b>").arg(q_("too faint"));
+		}
+		oss  << "<br/>";
+	}
+
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 	
@@ -357,15 +372,31 @@ Vec3f Satellite::getInfoColor(void) const
 
 float Satellite::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
-    float extinctionMag=0.0; // track magnitude loss
-    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-    {
-	Vec3d altAz=getAltAzPosApparent(core);
-	altAz.normalize();
-	core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-    }
+	float extinctionMag=0.0; // track magnitude loss
+	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		Vec3d altAz=getAltAzPosApparent(core);
+		altAz.normalize();
+		core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+	}
 
-    return 5.0 + extinctionMag;
+	float vmag = 5.0;
+	if (stdmag!=99.f)
+	{
+		// Calculation of approx. visual magnitude for artifical satellites
+		// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+		double fracil = calculateIlluminatedFraction();		
+		if (fracil==0)
+			fracil = 0.000001;
+		vmag = stdmag - 15.75 + 2.5 * std::log10(range * range / fracil);
+	}
+	return vmag + extinctionMag;
+}
+
+// Calculate illumination fraction of artifical satellite
+float Satellite::calculateIlluminatedFraction() const
+{
+	return (1 + cos(phaseAngle))/2;
 }
 
 double Satellite::getAngularSize(const StelCore*) const
@@ -424,6 +455,7 @@ void Satellite::update(double)
 
 		pSatWrapper->getSlantRange(range, rangeRate);
 		visibility = pSatWrapper->getVisibilityPredict();
+		phaseAngle = pSatWrapper->getPhaseAngle();
 
 		// Compute orbit points to draw orbit line.
 		if (orbitDisplayed) computeOrbitPoints();

@@ -160,6 +160,8 @@ public:
 	//! Compares #name fields. If equal, #id fields, which can't be.
 	bool operator<(const Satellite& another) const;
 
+	float calculateIlluminatedFraction() const;
+
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
@@ -232,6 +234,8 @@ private:
 	Vec3d latLongSubPointPosition;
 	Vec3d elAzPosition;
 	int   visibility;
+	double phaseAngle;
+	float stdmag;
 
 	//Satellite Orbit Draw
 	QFont     font;
