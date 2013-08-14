@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-13 01:10+0700\n"
-"PO-Revision-Date: 2013-07-24 04:50+0000\n"
+"PO-Revision-Date: 2013-08-14 00:47+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-13 04:50+0000\n"
+"X-Launchpad-Export-Date: 2013-08-14 04:39+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -1263,7 +1263,7 @@ msgstr "Ratio de Perseidas estándar"
 
 #: src/gui/ViewDialog.cpp:637
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Ratio de meteoritos"
 
 #: src/gui/ViewDialog.cpp:640
 msgid "Exceptional Leonid rate"
@@ -3789,7 +3789,7 @@ msgstr "Buscar un obxecto ou posición"
 
 #: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Usar a tecla tab para seleccionar os items atopados"
 
 #: src/ui_searchDialogGui.h:571
 msgid "iota"
@@ -3935,11 +3935,11 @@ msgstr "Servidor:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "Opcións de busca"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Usar autocompletar xa dende o inicio das palabras"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
 #: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
@@ -4016,11 +4016,11 @@ msgstr "Escala da Lúa"
 
 #: src/ui_viewDialog.h:1223
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Cambio automático de paisaxe cando cambia o planeta"
 
 #: src/ui_viewDialog.h:1225
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Autoseleccionar paisaxes"
 
 #: src/ui_viewDialog.h:1227
 msgid "Show atmosphere"
@@ -4081,7 +4081,7 @@ msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1247
 msgid "1000"
-msgstr ""
+msgstr "1000"
 
 #: src/ui_viewDialog.h:1250
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -7616,82 +7616,84 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
+"Webs xerais profesionais de sitios relevantes para planetas extrasolares"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Exoplanetas: unha versión interactiva de XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "HEK (O cazador de Exolúas con Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "Exoplanetas en sistemas binarios e múltiples (Richard Schwarz)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Nomeando exoplanetas (IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
+"Algúns astrónomos e grupos activos en estudos de planetas extrasolares"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "actualización: 16 Abril 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "The Exoplanet Data Explorer"
-msgstr ""
+msgstr "O Explorador de Datos de Exoplanetas"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "The Anglo-Australian Planet Search"
-msgstr ""
+msgstr "O Buscador de Planetas anglo-australiano"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "Programas de busca de planetas extrasolares Geneva"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "Programa de Exploración de Exoplanetas da NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Planetas púlsar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "Arquivo de Exoplanetas da NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 msgid "IAU Comission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU Comission 53: Planetas Extrasolares"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "Galería da Zona Habitable"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr ""
+msgstr "Busca de planetas-A busca doutra Terra"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Abrir catálogo de exoplanetas"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Catálogo de exoplanetas habitables"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid "Exoplanets is updated"
@@ -7736,7 +7738,7 @@ msgstr "Amosar botón de exoplanetas na barra de ferramentas"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Información"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"

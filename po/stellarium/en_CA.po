@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-13 01:10+0700\n"
-"PO-Revision-Date: 2012-10-24 04:23+0000\n"
+"PO-Revision-Date: 2013-08-13 15:24+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: English (Canada) <en_CA@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-13 04:58+0000\n"
+"X-Launchpad-Export-Date: 2013-08-14 04:40+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -108,7 +108,7 @@ msgstr "Planetary nebula"
 
 #: src/core/modules/Nebula.cpp:400
 msgid "Dark Nebula"
-msgstr ""
+msgstr "Dark Nebula"
 
 #: src/core/modules/Nebula.cpp:403
 msgid "Cluster associated with nebulosity"
@@ -132,12 +132,12 @@ msgstr "Absolute Magnitude: %1"
 #: src/core/modules/Planet.cpp:465
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ecliptic Topocentric (of date): %1/%2"
 
 #: src/core/modules/Planet.cpp:466
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Obliquity (of date, for Earth): %1"
 
 #: src/core/modules/Planet.cpp:476 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:149
@@ -166,17 +166,17 @@ msgstr "Apparent diameter: %1"
 #: src/core/modules/Comet.cpp:171
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Sidereal period: %1 days (%2 a)"
 
 #: src/core/modules/Planet.cpp:513
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Sidereal day: %1"
 
 #: src/core/modules/Planet.cpp:514
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Mean solar day: %1"
 
 #: src/core/modules/Planet.cpp:521
 #, qt-format
@@ -207,7 +207,7 @@ msgstr "Provisional designation: %1"
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "star"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -221,36 +221,36 @@ msgstr "Apparent Magnitude: <b>%1</b> (by extinction)"
 
 #: src/core/modules/StarWrapper.cpp:139
 msgid "eruptive variable star"
-msgstr ""
+msgstr "eruptive variable star"
 
 #: src/core/modules/StarWrapper.cpp:141
 msgid "pulsating variable star"
-msgstr ""
+msgstr "pulsating variable star"
 
 #: src/core/modules/StarWrapper.cpp:143
 msgid "rotating variable star"
-msgstr ""
+msgstr "rotating variable star"
 
 #: src/core/modules/StarWrapper.cpp:145
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "cataclysmic variable star"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "eclipsing binary system"
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
-msgstr ""
+msgstr "variable star"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "double star"
-msgstr ""
+msgstr "double star"
 
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Type: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
@@ -265,12 +265,12 @@ msgstr "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 
 #: src/core/modules/StarWrapper.cpp:201
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -293,37 +293,37 @@ msgstr "Parallax: %1\""
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Epoch for minimum light: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Epoch for maximum light: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Period: %1 days"
 
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Next minimum light: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Next maximum light: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Duration of eclipse: %1%"
 
 #: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Rising time: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:282
@@ -332,7 +332,7 @@ msgstr "SpaceShip"
 
 #: src/core/StelCore.cpp:1435
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "Correction is disabled. Use only if you know what you are doing!"
 
 #: src/core/StelCore.cpp:1438
 #, qt-format
@@ -526,7 +526,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1513
 msgid "Used by default."
-msgstr ""
+msgstr "Used by default."
 
 #: src/core/StelCore.cpp:1516
 #, qt-format
@@ -550,6 +550,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"This is a quadratic formula for calculation of %1T with coefficients defined "
+"by the user."
 
 #: src/core/StelCore.cpp:1525 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -557,32 +559,34 @@ msgstr "Error"
 
 #: src/core/StelCore.cpp:1574
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "with meaningless values outside this range"
 
 #: src/core/StelCore.cpp:1600
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"with a mean error of less than one second, max. error 1.9s, and meaningless "
+"values outside this range"
 
 #: src/core/StelCore.cpp:1622 src/core/StelCore.cpp:1627
 #: src/core/StelCore.cpp:1654 src/core/StelCore.cpp:1659
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "with zero values outside this range"
 
 #: src/core/StelCore.cpp:1632
 msgid "with a typical 1-second accuracy and zero values outside this range"
-msgstr ""
+msgstr "with a typical 1-second accuracy and zero values outside this range"
 
 #: src/core/StelCore.cpp:1669
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "Valid range of usage: between years %1 and %2, %3."
 
 #: src/core/StelCore.cpp:1671
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "Valid range of usage: between years %1 and %2."
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
