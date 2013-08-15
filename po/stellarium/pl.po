@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-13 01:10+0700\n"
-"PO-Revision-Date: 2013-08-11 23:12+0000\n"
+"PO-Revision-Date: 2013-08-15 02:50+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-13 04:54+0000\n"
+"X-Launchpad-Export-Date: 2013-08-15 04:37+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -598,6 +598,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Rozwiązanie F. Espenaka i J. Meeusa, na podstawie: Morrison & Stephenson "
+"(2004) oraz wartości tabelarycznych dopasowania wielomianowego dla lat 1600-"
+"2000, używane na stronie %1NASA Eclipse Web Site%2 oraz w <em>Five "
+"Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). Ta formuła "
+"jest również używana w programie SOLEX, wyliczającym czas zaćmień Słońca, "
+"Księżyca i planet."
 
 #: src/core/StelCore.cpp:1513
 msgid "Used by default."
@@ -1421,7 +1427,7 @@ msgstr "Własne równanie dla %1T"
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "Typowe równanie służące do obliczania %1T wygląda następująco:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
@@ -1440,6 +1446,8 @@ msgid ""
 "Your platform does not support minimal required OpenGL 1.2. Please upgrade "
 "drivers for graphics card."
 msgstr ""
+"Twoja platforma nie obsługuje OpenGL (wymagana jest obsługa wersji 1.2 lub "
+"nowszej). Proszę zaktualizować sterowniki karty graficznej."
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
 #: plugins/Exoplanets/src/Exoplanet.cpp:220
@@ -1864,7 +1872,7 @@ msgstr "eskimoska"
 
 #: src/translations.h:170
 msgid "Indian Vedic"
-msgstr ""
+msgstr "wedyjska (Indie)"
 
 #: src/translations.h:171
 msgid "Korean"
@@ -2161,6 +2169,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 177 events in all!"
 msgstr ""
+"Wygaszacz ekranu pokazujący zdarzenia w Układzie Słonecznym. Łącznie 177 "
+"różnych zdarzeń!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -3595,19 +3605,19 @@ msgstr "Celownik Telrad"
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "Wybierz następny teleskop"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Wybierz następny okular"
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Wybierz poprzedni teleskop"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Wybierz poprzedni okular"
 
 #: src/translations.h:657
 msgid "Show pulsars"
@@ -3793,7 +3803,7 @@ msgstr "Znajdź obiekt lub położenie"
 
 #: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Używaj klawisza Tab do wybierania spośród znalezionych pozycji"
 
 #: src/ui_searchDialogGui.h:571
 msgid "iota"
@@ -3910,6 +3920,8 @@ msgstr "Położenie"
 #: src/ui_searchDialogGui.h:647
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Niektóre obiekty mogą zostać znalezione dopiero po uaktywnieniu odpowiednich "
+"wtyczek."
 
 #: src/ui_searchDialogGui.h:649
 msgid "names in English"
@@ -3938,11 +3950,11 @@ msgstr "Serwer:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "Opcje wyszukiwania"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Używaj autouzupełniania tylko od początku słów"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
 #: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
@@ -4019,11 +4031,11 @@ msgstr "Skaluj obraz Księżyca"
 
 #: src/ui_viewDialog.h:1223
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Automatyczna zmiana krajobrazu po zmianie planety"
 
 #: src/ui_viewDialog.h:1225
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Automatyczny wybór krajobrazów"
 
 #: src/ui_viewDialog.h:1227
 msgid "Show atmosphere"
@@ -4084,7 +4096,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1247
 msgid "1000"
-msgstr ""
+msgstr "1000"
 
 #: src/ui_viewDialog.h:1250
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4416,7 +4428,7 @@ msgstr "Inne:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Używaj bieżącej lokalnej daty i czasu"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -5748,7 +5760,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Zaktualizowano %1/%2 satelitów; dodano %3; brak %4"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
 msgid "[new source]"
@@ -5845,7 +5857,7 @@ msgstr "Aktualizacje"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Aktualizuj dane satelitów z Internetu"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -5858,12 +5870,14 @@ msgstr "Ostatnia aktualizacja:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
+"Podczas aktualizacji dodawaj wszystkie nowe satelity z wybranych źródeł"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Podczas aktualizacji usuwaj satelity, które nie są już wymienione w źródłach"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:288
@@ -5938,7 +5952,7 @@ msgstr "Ustawienia"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Dwukrotnie kliknij satelitę, aby rozpocząć śledzenie go."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
@@ -5975,10 +5989,11 @@ msgstr "Orbita"
 #: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr ""
+"Nie aktualizuj (ani nie usuwaj podczas aktualizacji) wybranych satelitów."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:737
 msgid "Do not update"
-msgstr ""
+msgstr "Nie aktualizuj"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Description:"
@@ -5997,6 +6012,9 @@ msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
+"Satelity wymienione na wybranych listach źródłowych będą automatycznie "
+"dodawane przy kolejnej aktualizacji jeśli jeszcze nie znajdują się w "
+"kolekcji."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid ""
@@ -7626,11 +7644,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "Ogólne profesjonalne strony WWW na temat planet pozasłonecznych"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Egzoplanety: interaktywna wersja XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
 msgid "HEK (The Hunt for Exomoons with Kepler)"
@@ -7638,7 +7656,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "Egzoplanety w układach podwójnych i wielokrotnych (Richard Schwarz)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Naming exoplanets (IAU)"
@@ -7650,7 +7668,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "aktualizacji: 16 kwietnia 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "The Exoplanet Data Explorer"
