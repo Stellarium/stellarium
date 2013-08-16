@@ -1562,7 +1562,7 @@ void Satellites::parseMcNamesFile(QString mcNameFile)
 		QString id   = line.mid(0,5).trimmed();
 		QString smag = line.mid(37,4).trimmed();
 		if (!smag.isEmpty())
-			mcNamesList.insert(id, smag.toFloat());
+			mcNamesList.insert(id, smag.toDouble());
 	}
 	mcnFile.close();
 }
