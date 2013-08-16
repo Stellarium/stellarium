@@ -74,16 +74,16 @@ Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
 
 Satellites::Satellites()
     : satelliteListModel(0),
-      hintTexture(NULL)
-	, texPointer(NULL)
-	, pxmapGlow(NULL)
-	, pxmapOnIcon(NULL)
-	, pxmapOffIcon(NULL)
-	, toolbarButton(NULL)
-	, earth(NULL)
-	, defaultHintColor(0.0, 0.4, 0.6)
-	, defaultOrbitColor(0.0, 0.3, 0.6)
-    , progressBar(NULL)
+      hintTexture(NULL),
+      texPointer(NULL), 
+      pxmapGlow(NULL), 
+      pxmapOnIcon(NULL), 
+      pxmapOffIcon(NULL), 
+      toolbarButton(NULL), 
+      earth(NULL), 
+      defaultHintColor(0.0, 0.4, 0.6), 
+      defaultOrbitColor(0.0, 0.3, 0.6), 
+      progressBar(NULL)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -138,6 +138,7 @@ void Satellites::init()
 		loadSettings();
 
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
+		mcNameFilePath = dataDir.absoluteFilePath("mcnames");
 
 		// Load and find resources used in the plugin
 
@@ -819,6 +820,9 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("orbitColor"))
 			satData["orbitColor"] = satData["hintColor"];
 
+		if (!satData.contains("stdMag") && mcNamesList.contains(satId))
+			satData["stdMag"] = mcNamesList[satId];
+
 		SatelliteP sat(new Satellite(satId, satData));
 		if (sat->initialized)
 		{
@@ -855,10 +859,10 @@ QVariantMap Satellites::createDataMap(void)
 		if (satMap["hintColor"].toList() == defHintCol)
 			satMap.remove("hintColor");
 
-		if (satMap["stdmag"].toFloat() == 99.f)
-			satMap.remove("stdmag");
+		if (satMap["stdMag"].toFloat() == 99.f)
+			satMap.remove("stdMag");
 
-		sats[sat->id] = satMap;
+		sats[sat->id] = satMap;		
 	}
 	map["satellites"] = sats;
 	return map;
@@ -965,6 +969,8 @@ bool Satellites::add(const TleData& tleData)
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
 	satProperties.insert("orbitVisible", false);
+	if (mcNamesList.contains(tleData.id))
+		satProperties.insert("stdMag", mcNamesList[tleData.id]);
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
@@ -1290,8 +1296,9 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			delete updateSources[i].file;
 			updateSources[i].file = 0;
 		}
-	}	
-	updateSources.clear();
+	}
+	updateSources.clear();	
+	parseMcNamesFile(mcNameFilePath);
 	updateSatellites(newData);
 }
 
@@ -1354,7 +1361,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 				tleFile.remove();
 		}
 	}
-
+	parseMcNamesFile(mcNameFilePath);
 	updateSatellites(newTleSets);
 }
 
@@ -1414,6 +1421,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				sat->lastUpdated = lastUpdate;
 				updatedCount++;
 			}
+			if (mcNamesList.contains(id))
+				sat->stdMag = mcNamesList[id];
+
 		}
 		else
 		{
@@ -1531,6 +1541,30 @@ void Satellites::parseTleFile(QFile& openFile,
 				qDebug() << "Satellites: unprocessed line " << lineNumber <<  " in file " << QDir::toNativeSeparators(openFile.fileName());
 		}
 	}
+}
+
+void Satellites::parseMcNamesFile(QString mcNameFile)
+{
+	if (mcNameFile.isEmpty())
+		return;
+
+	QFile mcnFile(mcNameFile);
+	if (!mcnFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Satellites: oops... cannot open " << QDir::toNativeSeparators(mcNameFile);
+		return;
+	}
+
+	mcNamesList.clear();
+	while (!mcnFile.atEnd())
+	{
+		QString line = QString(mcnFile.readLine());
+		QString id   = line.mid(0,5).trimmed();
+		QString smag = line.mid(37,4).trimmed();
+		if (!smag.isEmpty())
+			mcNamesList.insert(id, smag.toFloat());
+	}
+	mcnFile.close();
 }
 
 void Satellites::update(double deltaTime)
