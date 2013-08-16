@@ -491,7 +491,7 @@ private:
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
 
-	QHash<QString, float> mcNamesList;
+	QHash<QString, double> mcNamesList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
