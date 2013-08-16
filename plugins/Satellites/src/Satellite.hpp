@@ -203,6 +203,8 @@ private:
 	//! Extracted from TLE set with parseInternationalDesignator().
 	//! It defaults to 1 Jan 1957 if extraction fails.
 	double jdLaunchYearJan1;
+	//! Standard visual magnitude of the satellite.
+	double stdMag;
 	//! Contains the J2000 position.
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
@@ -229,13 +231,12 @@ private:
 
 	//Satellite Orbit Position calculation
 	gSatWrapper *pSatWrapper;
-	Vec3d position;
-	Vec3d velocity;
-	Vec3d latLongSubPointPosition;
-	Vec3d elAzPosition;
-	int   visibility;
-	double phaseAngle;
-	float stdmag;
+	Vec3d	position;
+	Vec3d	velocity;
+	Vec3d	latLongSubPointPosition;
+	Vec3d	elAzPosition;
+	int	visibility;
+	double	phaseAngle;
 
 	//Satellite Orbit Draw
 	QFont     font;

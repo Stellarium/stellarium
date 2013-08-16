@@ -76,7 +76,6 @@ struct TleSource
 
 typedef QList<TleSource> TleSourceList;
 
-
 /*! @mainpage notitle
 @section overview Plugin Overview
 
@@ -332,6 +331,8 @@ public:
 	static void parseTleFile(QFile& openFile,
 	                         TleDataHash& tleList,
 	                         bool addFlagValue = false);
+
+	void parseMcNamesFile(QString mcNameFile);
 	
 	bool getFlagHints() {return hintFader;}
 	//! get the label font size.
@@ -477,6 +478,8 @@ private:
 	//! place.)
 	static void translations();
 
+	//! Path to the mcname file.
+	QString mcNameFilePath;
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -487,6 +490,8 @@ private:
 	
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
+
+	QHash<QString, float> mcNamesList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
