@@ -332,6 +332,9 @@ public:
 	                         TleDataHash& tleList,
 	                         bool addFlagValue = false);
 
+	//! Reads mcnames file and its parsing for getting id and standard magnitude
+	//! for satellites.
+	//! @param name of file
 	void parseMcNamesFile(QString mcNameFile);
 	
 	bool getFlagHints() {return hintFader;}
@@ -478,8 +481,8 @@ private:
 	//! place.)
 	static void translations();
 
-	//! Path to the mcname file.
-	QString mcNameFilePath;
+	//! Path to the mcnames file.
+	QString mcNamesFilePath;
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
