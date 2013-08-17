@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-13 01:10+0700\n"
-"PO-Revision-Date: 2013-08-11 18:25+0000\n"
-"Last-Translator: Juho Kim <juo6442@gmail.com>\n"
+"POT-Creation-Date: 2013-08-16 23:33+0700\n"
+"PO-Revision-Date: 2013-08-16 10:45+0000\n"
+"Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-13 04:52+0000\n"
+"X-Launchpad-Export-Date: 2013-08-17 04:42+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -2049,11 +2049,11 @@ msgstr ""
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "서양별자리의 여행"
 
 #: src/translations.h:277
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "태양계의 거대행성과 명왕성에서 태양을 바라보세요"
 
 #: src/translations.h:278
 msgid ""
@@ -2150,7 +2150,7 @@ msgstr "아제르바이잔"
 
 #: src/translations.h:303
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "보스니아와 헤르체고비나"
 
 #: src/translations.h:304
 msgid "Barbados"
@@ -3673,7 +3673,7 @@ msgstr "천체 또는 위치 찾기"
 
 #: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "발견된 아이템의 선택을 위해 Tab 키를 사용하세요"
 
 #: src/ui_searchDialogGui.h:571
 msgid "iota"
@@ -3818,7 +3818,7 @@ msgstr "서버:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "검색 옵션"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
@@ -3897,11 +3897,11 @@ msgstr "달 확대"
 
 #: src/ui_viewDialog.h:1223
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "행성이 변화될 때 자동으로 풍경이 변합니다"
 
 #: src/ui_viewDialog.h:1225
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "자동 선택된 풍경"
 
 #: src/ui_viewDialog.h:1227
 msgid "Show atmosphere"
@@ -5020,7 +5020,7 @@ msgstr "팝업 탐색 메뉴 열기:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Interface"
-msgstr ""
+msgstr "인터페이스"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "On-screen control panel"
@@ -5033,12 +5033,12 @@ msgstr "CCD  FOV(시야각)을 위한 각도/각분 이용하기"
 #: plugins/Oculars/src/ui_ocularDialog.h:1029
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:222
 msgid "General"
-msgstr ""
+msgstr "일반 사항"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1030
 #: plugins/Oculars/src/ui_ocularDialog.h:1038
 msgid "Eyepieces"
-msgstr ""
+msgstr "접안렌즈"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1031
 #: plugins/Oculars/src/ui_ocularDialog.h:1040
@@ -5047,7 +5047,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
-msgstr ""
+msgstr "추가"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1033
 #: plugins/Oculars/src/ui_ocularDialog.h:1042
@@ -5056,33 +5056,33 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:724
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Name:"
-msgstr ""
+msgstr "이름:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1034
 msgid "aFOV:"
-msgstr ""
+msgstr "aFOV:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1035
 #: plugins/Oculars/src/ui_ocularDialog.h:1061
 msgid "Focal length:"
-msgstr ""
+msgstr "초점 거리:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1036
 msgid "Field stop:"
-msgstr ""
+msgstr "시야 조리개:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Binoculars"
-msgstr ""
+msgstr "쌍안경"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 #: plugins/Oculars/src/ui_ocularDialog.h:1045
 msgid "Lenses"
-msgstr ""
+msgstr "렌즈"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1043
 msgid "Multiplier:"
-msgstr ""
+msgstr "배율기:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid ""
@@ -5093,50 +5093,50 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:1046
 #: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Sensors"
-msgstr ""
+msgstr "센서"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "해상도 x (픽셀):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "해상도 y (픽셀):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "칩 폭(mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "칩 높이 (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "픽셀 폭 (마이크론):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "픽셀 높이 (마이크론):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1057
 #: plugins/Oculars/src/ui_ocularDialog.h:1065
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
-msgstr ""
+msgstr "천체망원경"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1062
 msgid "Diameter:"
-msgstr ""
+msgstr "직경:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Horizontal flip"
-msgstr ""
+msgstr "수평 뒤집기"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Vertical flip"
-msgstr ""
+msgstr "수직 뒤집기"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1066
 #: plugins/Satellites/src/ui_satellitesDialog.h:755
@@ -5150,12 +5150,12 @@ msgstr ""
 #: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "정보"
 
 #: plugins/Satellites/src/Satellites.cpp:66
 #: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Satellites"
-msgstr ""
+msgstr "인공위성"
 
 #: plugins/Satellites/src/Satellites.cpp:69
 msgid ""
@@ -5169,138 +5169,138 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1629
+#: plugins/Satellites/src/Satellites.cpp:1628
 msgid "visual"
-msgstr ""
+msgstr "보이는"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1631
+#: plugins/Satellites/src/Satellites.cpp:1630
 msgid "scientific"
-msgstr ""
+msgstr "과학"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1633
+#: plugins/Satellites/src/Satellites.cpp:1632
 msgid "communications"
-msgstr ""
+msgstr "통신"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1635
+#: plugins/Satellites/src/Satellites.cpp:1634
 msgid "navigation"
-msgstr ""
+msgstr "해양"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1637
+#: plugins/Satellites/src/Satellites.cpp:1636
 msgid "amateur"
-msgstr ""
+msgstr "아마츄어"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1639
+#: plugins/Satellites/src/Satellites.cpp:1638
 msgid "weather"
-msgstr ""
+msgstr "기상"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1641
+#: plugins/Satellites/src/Satellites.cpp:1640
 msgid "geostationary"
-msgstr ""
+msgstr "정지"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1643
+#: plugins/Satellites/src/Satellites.cpp:1642
 msgid "non-operational"
-msgstr ""
+msgstr "비작동"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1645
+#: plugins/Satellites/src/Satellites.cpp:1644
 msgid "gps"
-msgstr ""
+msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1647
+#: plugins/Satellites/src/Satellites.cpp:1646
 msgid "iridium"
-msgstr ""
+msgstr "이리듐"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1658
+#: plugins/Satellites/src/Satellites.cpp:1657
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "허블우주망원경"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1660
+#: plugins/Satellites/src/Satellites.cpp:1659
 msgid "The International Space Station"
-msgstr ""
+msgstr "국제우주정거장"
 
 #: plugins/Satellites/src/Satellite.cpp:239
 #: plugins/Satellites/src/Satellite.cpp:243
 msgid "Catalog #"
-msgstr ""
+msgstr "카달로그 #"
 
 #: plugins/Satellites/src/Satellite.cpp:245
 msgid "International Designator"
-msgstr ""
+msgstr "국제식별부호"
 
 #: plugins/Satellites/src/Satellite.cpp:252
 msgid "artificial satellite"
-msgstr ""
+msgstr "인공위성"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:262
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "범위 (km):%1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:265
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr ""
+msgstr "범위 비율 (km/s):%1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:268
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "고도 (km):%1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr ""
+msgstr "서브포인트(위도/경도):%1%2%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:285
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "지구중심관성좌표계 좌표 (km):%1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:293
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr ""
+msgstr "지구중심관성좌표계 속도 (km/s):%1"
 
 #: plugins/Satellites/src/Satellite.cpp:301
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "인공위성과 관측자가 태양빛에 있습니다."
 
 #: plugins/Satellites/src/Satellite.cpp:304
 msgid "The satellite is visible."
-msgstr ""
+msgstr "인공위성이 관측됩니다."
 
 #: plugins/Satellites/src/Satellite.cpp:307
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "인공위성이 가려졌습니다."
 
 #: plugins/Satellites/src/Satellite.cpp:310
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "인공위성이 보이지 않습니다."
 
 #: plugins/Satellites/src/Satellite.cpp:336
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:377
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Stellarium 인공위성 플러그인"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
 msgid ""
@@ -5310,7 +5310,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:385
 msgid "Notes for users"
-msgstr ""
+msgstr "사용자를 위한 주의사항"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:386
 msgid ""
@@ -5348,7 +5348,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:400
 msgid "TLE data updates"
-msgstr ""
+msgstr "TLE 데이터 업데이트"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:401
 msgid ""
@@ -5373,7 +5373,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 msgid "Adding new satellites"
-msgstr ""
+msgstr "새로운 인공위성 추가하기"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid ""
@@ -5385,7 +5385,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "Technical notes"
-msgstr ""
+msgstr "기술노트"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid ""
@@ -5403,7 +5403,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:413
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "세부사항을 위해 %2 이 문서를 %1 보세요"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
@@ -5411,7 +5411,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:123
 msgid "Links"
-msgstr ""
+msgstr "링크"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
@@ -5461,7 +5461,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "인터넷 업데이트를 할 수 없습니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
@@ -5474,7 +5474,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Updating now..."
-msgstr ""
+msgstr "지금 업데이트중입니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
@@ -5482,7 +5482,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "다음 업데이트: 1분 미만"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
@@ -5491,7 +5491,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "다음 업데이트:%1 분"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
@@ -5500,7 +5500,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "다음 업데이트 :%1 시간"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:466
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
@@ -5508,21 +5508,21 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:221
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Update error"
-msgstr ""
+msgstr "업데이트 에러"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:479
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "%1%2 인공위성이 업데이트되었습니다;%3 추가되었습니다;%4 제거되었습니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "%1%2 인공위성이 업데이트되었습니다; %3추가되었습니다; %4 사라졌습니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
 msgid "[new source]"
-msgstr ""
+msgstr "[새로운 소스]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:595
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
@@ -5535,7 +5535,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:290
 msgid "Update now"
-msgstr ""
+msgstr "지금 업데이트"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
@@ -5543,79 +5543,79 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid "Update from files"
-msgstr ""
+msgstr "파일에서 업데이트"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:637
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[궤도 계산 에러]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:638
 msgid "[all newly added]"
-msgstr ""
+msgstr "[새로 추가]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:639
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[모두 표시되지 않았습니다]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:640
 msgid "[all displayed]"
-msgstr ""
+msgstr "[모두 표시되었습니다]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:641
 msgid "[all]"
-msgstr ""
+msgstr "[전부]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "New group..."
-msgstr ""
+msgstr "새 그룹..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "TLE 업데이트 파일을 선택하세요"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid "Downloading data..."
-msgstr ""
+msgstr "데이터를 다운로드중입니다"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:142
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
-msgstr ""
+msgstr "Stellarium이 업데이트 소스로부터 인공위성 데이터를 다운로드중입니다. 잠시만 기다려주세요..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:157
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "TLE 소스파일을 선택하세요."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:173
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:232
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:233
 msgid "Processing data..."
-msgstr ""
+msgstr "데이터 처리..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "데이터를 다운로드할 수 없습니다. 나중에 다시 시도하세요."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:360
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "카탈로그 번호:%1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "인공위성 배치"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Updates"
-msgstr ""
+msgstr "업데이트"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "인터넷 소스로부터 인공위성 데이터를 업데이트"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
@@ -5623,43 +5623,43 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:287
 msgid "Last update:"
-msgstr ""
+msgstr "마지막 업데이트:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr ""
+msgstr "업데이트 중에 선택한 소스에서 새로운 위성을 추가하세요."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
-msgstr ""
+msgstr "업데이트 중에 더이상 업데이트 소스에 나열되지 않은 인공위성을 제거하세요."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:288
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "주파수 업데이트(시간)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Labels"
-msgstr ""
+msgstr "이름표"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "이름 폰트 크기(픽셀):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Orbit lines"
-msgstr ""
+msgstr "궤도선"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:687
 #: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "선을 그리는데 사용하는 세그먼트 수"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:689
 msgid "Number of  segments:"
-msgstr ""
+msgstr "세그먼트 수:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:694
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
@@ -5704,7 +5704,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Double-click a satellite to start tracking it."
@@ -5712,35 +5712,35 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Add more satellites"
-msgstr ""
+msgstr "인공위성을 더 추가하세요."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "선택된 위성을 제거하세요."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid "Save changes"
-msgstr ""
+msgstr "변경사항 저장"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:725
 msgid "Catalog number:"
-msgstr ""
+msgstr "카달로그 번호:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:727
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "선택된 위성을 표시하기"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:729
 msgid "Displayed"
-msgstr ""
+msgstr "표시"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "선택된 위성의 궤도선 보기"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Orbit"
-msgstr ""
+msgstr "궤도"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Do not update (or remove on update) the selected satellite(s)"
@@ -5748,19 +5748,19 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:737
 msgid "Do not update"
-msgstr ""
+msgstr "업데이트 하지 마세요"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Description:"
-msgstr ""
+msgstr "설명:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:739
 msgid "Groups:"
-msgstr ""
+msgstr "그룹:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "TLE set:"
-msgstr ""
+msgstr "TLE set:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid ""
@@ -5776,32 +5776,32 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Add new source"
-msgstr ""
+msgstr "새로운 소스 추가하기"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:751
 msgid "Remove selected source"
-msgstr ""
+msgstr "선택된 소스 제거하기"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:754
 msgid "Sources"
-msgstr ""
+msgstr "소스"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 msgid "More Satellites"
-msgstr ""
+msgstr "더 많은 위성"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 msgid "Get data from update sources"
-msgstr ""
+msgstr "업데이트 소스로부터 얻은 데이터"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Abort download"
-msgstr ""
+msgstr "다운로드 포기"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 msgid "New satellites"
-msgstr ""
+msgstr "새로운 인공위성"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:217
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
