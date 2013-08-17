@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-04 19:41+0700\n"
+"POT-Creation-Date: 2013-08-16 23:33+0700\n"
 "PO-Revision-Date: 2013-06-21 07:55+0000\n"
 "Last-Translator: Emin Mastizada <emin25@ovi.com>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-05 05:17+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-17 04:37+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1270
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1278
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1288
 msgid "Ecliptic"
 msgstr "Ekliptik"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1266
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1276
 msgid "Equator"
 msgstr "Ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1274
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1284
 msgid "Horizon"
 msgstr "Üfüq"
 
@@ -37,20 +37,20 @@ msgstr "Üfüq"
 msgid "Galactic Plane"
 msgstr "Qalaktik Dairə"
 
-#: src/core/modules/LandscapeMgr.cpp:512
+#: src/core/modules/LandscapeMgr.cpp:523
 msgid "Author: "
 msgstr "Müəllif: "
 
-#: src/core/modules/LandscapeMgr.cpp:515
+#: src/core/modules/LandscapeMgr.cpp:526
 msgid "Location: "
 msgstr "Mövqe: "
 
-#: src/core/modules/LandscapeMgr.cpp:520
+#: src/core/modules/LandscapeMgr.cpp:531
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:524
+#: src/core/modules/LandscapeMgr.cpp:535
 msgid "Planet: "
 msgstr "Planet: "
 
@@ -326,7 +326,7 @@ msgid "Rising time: %1%"
 msgstr ""
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:272
+#: src/core/StelObserver.cpp:282
 msgid "SpaceShip"
 msgstr "Kosmik Gəmi"
 
@@ -733,27 +733,27 @@ msgstr "Tapıldı"
 msgid "Select screenshot directory"
 msgstr "Ekran görüntülərinin qovluğunu seçin"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:663
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Başlanğıc görünüş sahəsi: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:670
+#: src/gui/ConfigurationDialog.cpp:671
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Başlanğıc görmə istiqaməti Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:712
+#: src/gui/ConfigurationDialog.cpp:714
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:379
 msgid "Authors"
 msgstr "Müəlliflər"
 
-#: src/gui/ConfigurationDialog.cpp:713 src/gui/ViewDialog.cpp:448
+#: src/gui/ConfigurationDialog.cpp:715 src/gui/ViewDialog.cpp:451
 msgid "Contact"
 msgstr "Əlaqə"
 
-#: src/gui/ConfigurationDialog.cpp:796
+#: src/gui/ConfigurationDialog.cpp:798
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
@@ -762,19 +762,19 @@ msgstr "Əlaqə"
 msgid "Author"
 msgstr "Müəllif"
 
-#: src/gui/ConfigurationDialog.cpp:800
+#: src/gui/ConfigurationDialog.cpp:802
 msgid "License"
 msgstr "Lisenziya"
 
-#: src/gui/ConfigurationDialog.cpp:824
+#: src/gui/ConfigurationDialog.cpp:826
 msgid "Running script: "
 msgstr "İşləyən script: "
 
-#: src/gui/ConfigurationDialog.cpp:831
+#: src/gui/ConfigurationDialog.cpp:833
 msgid "Running script: [none]"
 msgstr "İşləyən script: [yox]"
 
-#: src/gui/ConfigurationDialog.cpp:896
+#: src/gui/ConfigurationDialog.cpp:898
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -782,16 +782,16 @@ msgstr ""
 "Yeni ulduz kataloqların yüklənməsı bitdi!\n"
 "Stellariumu yenidən açın."
 
-#: src/gui/ConfigurationDialog.cpp:900
+#: src/gui/ConfigurationDialog.cpp:902
 msgid "All available star catalogs have been installed."
 msgstr "Bütün mövcud ulduz kataloqları yüklənib."
 
-#: src/gui/ConfigurationDialog.cpp:905
+#: src/gui/ConfigurationDialog.cpp:907
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2-dən %1 kataloqu yüklə."
 
-#: src/gui/ConfigurationDialog.cpp:912
+#: src/gui/ConfigurationDialog.cpp:914
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -800,7 +800,7 @@ msgstr ""
 "Yüklənir %1...\n"
 "(Bu pəncərəni bağlaya bilərsiniz.)"
 
-#: src/gui/ConfigurationDialog.cpp:919
+#: src/gui/ConfigurationDialog.cpp:921
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -811,7 +811,7 @@ msgstr ""
 "Ulduzların sayı: %2 Million\n"
 "Ulduz ölçüsü: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:962 src/gui/ConfigurationDialog.cpp:998
+#: src/gui/ConfigurationDialog.cpp:964 src/gui/ConfigurationDialog.cpp:1000
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -820,11 +820,11 @@ msgstr ""
 "Endirmədə səhv %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1050
+#: src/gui/ConfigurationDialog.cpp:1052
 msgid "Verifying file integrity..."
 msgstr "Faylların bütövlüyünün yoxlanması..."
 
-#: src/gui/ConfigurationDialog.cpp:1054
+#: src/gui/ConfigurationDialog.cpp:1056
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -834,123 +834,123 @@ msgstr ""
 "Fayl pozqundu."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1127
+#: src/gui/ConfigurationDialog.cpp:1129
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1138
+#: src/gui/ConfigurationDialog.cpp:1140
 msgid "Without correction"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1139
+#: src/gui/ConfigurationDialog.cpp:1141
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1142
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1149
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1150
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1151
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1150
+#: src/gui/ConfigurationDialog.cpp:1152
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1151
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1155
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1156
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1158
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1161
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1168
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1170
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -1127,35 +1127,35 @@ msgstr "Boşluq"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:509
+#: src/gui/ViewDialog.cpp:512
 msgid "No description"
 msgstr "Təsvir yoxtu"
 
-#: src/gui/ViewDialog.cpp:625
+#: src/gui/ViewDialog.cpp:628
 msgid "No shooting stars"
 msgstr "Meteorsuz"
 
-#: src/gui/ViewDialog.cpp:628
+#: src/gui/ViewDialog.cpp:631
 msgid "Normal rate"
 msgstr "Normal temp"
 
-#: src/gui/ViewDialog.cpp:631
+#: src/gui/ViewDialog.cpp:634
 msgid "Standard Perseids rate"
 msgstr "Perseidlərin standart tempi"
 
-#: src/gui/ViewDialog.cpp:634
+#: src/gui/ViewDialog.cpp:637
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:637
+#: src/gui/ViewDialog.cpp:640
 msgid "Exceptional Leonid rate"
 msgstr "Leonidlərin xüsusi tempi"
 
-#: src/gui/ViewDialog.cpp:640
+#: src/gui/ViewDialog.cpp:643
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Maksimal (1966 Leonidlər)"
 
-#: src/gui/LocationDialog.cpp:424
+#: src/gui/LocationDialog.cpp:427
 msgid "New Location"
 msgstr "Yeni mövqe"
 
@@ -1258,19 +1258,19 @@ msgstr "adi"
 msgid "starchart"
 msgstr "ulduz xəritəsi"
 
-#: src/gui/SearchDialog.cpp:362
+#: src/gui/SearchDialog.cpp:376
 msgid "Simbad Lookup Error"
 msgstr "Simbad axtarış xətası"
 
-#: src/gui/SearchDialog.cpp:370
+#: src/gui/SearchDialog.cpp:384
 msgid "Simbad Lookup"
 msgstr "Simbad axtarış"
 
-#: src/gui/SearchDialog.cpp:538
+#: src/gui/SearchDialog.cpp:552
 msgid "University of Strasbourg (France)"
 msgstr "Strasburq Universiteti (Fransa)"
 
-#: src/gui/SearchDialog.cpp:539
+#: src/gui/SearchDialog.cpp:553
 msgid "Harvard University (USA)"
 msgstr "Harvard Universiteti (ABŞ)"
 
@@ -1286,21 +1286,21 @@ msgstr "Əsas qısa yol"
 msgid "Alternative shortcut"
 msgstr "Laternativ qısa yol"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:126
+#: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:127
+#: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:129
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:129
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
 msgstr ""
 
@@ -3201,16 +3201,16 @@ msgstr "Üfqiyə çevir"
 msgid "Full-screen mode"
 msgstr "Bütün ekrana"
 
-#: src/translations.h:583 src/ui_viewDialog.h:1216
+#: src/translations.h:583 src/ui_viewDialog.h:1226
 msgid "Atmosphere"
 msgstr "Atmosfer"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1261
+#: src/translations.h:584 src/ui_viewDialog.h:1271
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Azimuthal grid"
 msgstr "Azimutal şəbəkə"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1283
+#: src/translations.h:585 src/ui_viewDialog.h:1293
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Cardinal points"
 msgstr "Dünyanın cəhətləri"
@@ -3239,7 +3239,7 @@ msgstr "Bürclərin xətləri"
 msgid "Deep-sky objects background images"
 msgstr ""
 
-#: src/translations.h:591 src/ui_viewDialog.h:1260
+#: src/translations.h:591 src/ui_viewDialog.h:1270
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptik J2000 şəbəkə"
 
@@ -3253,12 +3253,12 @@ msgstr "Ekliptika xətti"
 msgid "Equator line"
 msgstr "Ekvator xətti"
 
-#: src/translations.h:594 src/ui_viewDialog.h:1259
+#: src/translations.h:594 src/ui_viewDialog.h:1269
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial grid"
 msgstr "Ekvatorial şəbəkə"
 
-#: src/translations.h:595 src/ui_viewDialog.h:1258
+#: src/translations.h:595 src/ui_viewDialog.h:1268
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatorial J2000 şəbəkə"
@@ -3267,12 +3267,12 @@ msgstr "Ekvatorial J2000 şəbəkə"
 msgid "Fog"
 msgstr "Duman"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1262
+#: src/translations.h:597 src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic grid"
 msgstr "Qalaktik şəbəkə"
 
-#: src/translations.h:598 src/ui_viewDialog.h:1282
+#: src/translations.h:598 src/ui_viewDialog.h:1292
 msgid "Galactic plane"
 msgstr "Qalaktik sahə"
 
@@ -3313,8 +3313,8 @@ msgstr "Planetlərin orbitləri"
 msgid "Planet trails"
 msgstr "Planetlərin izləri"
 
-#: src/translations.h:607 src/ui_viewDialog.h:1204 src/ui_viewDialog.h:1223
-#: src/ui_viewDialog.h:1246
+#: src/translations.h:607 src/ui_viewDialog.h:1210 src/ui_viewDialog.h:1233
+#: src/ui_viewDialog.h:1256
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Stars"
 msgstr "Ulduzlar"
@@ -3625,383 +3625,403 @@ msgstr "Ölkə:"
 msgid "Planet:"
 msgstr "Planet:"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:558
 msgid "Find Object"
 msgstr "Obyekti tap"
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:559
 msgid "Find Object or Position"
 msgstr "Obyekti ya mövqeni tap"
 
-#: src/ui_searchDialogGui.h:549
+#: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
+msgid "Use tab key for select of found items"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:571
 msgid "iota"
 msgstr "yota"
 
-#: src/ui_searchDialogGui.h:552
+#: src/ui_searchDialogGui.h:574
 msgid "alpha"
 msgstr "alpha"
 
-#: src/ui_searchDialogGui.h:555
+#: src/ui_searchDialogGui.h:577
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:558
+#: src/ui_searchDialogGui.h:580
 msgid "gamma"
 msgstr "qamma"
 
-#: src/ui_searchDialogGui.h:561
+#: src/ui_searchDialogGui.h:583
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:564
+#: src/ui_searchDialogGui.h:586
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:567
+#: src/ui_searchDialogGui.h:589
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:570
+#: src/ui_searchDialogGui.h:592
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:595
 msgid "theta"
 msgstr "teta"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:598
 msgid "kappa"
 msgstr "kappa"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:601
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:604
 msgid "mu"
 msgstr "mü"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:607
 msgid "nu"
 msgstr "nü"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:610
 msgid "xi"
 msgstr "ksi"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:613
 msgid "omicron"
 msgstr "omikron"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:616
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:619
 msgid "rho"
 msgstr "ro"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:622
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:625
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:628
 msgid "upsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:631
 msgid "phi"
 msgstr "fi"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:634
 msgid "chi"
 msgstr "xi"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:637
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:640
 msgid "omega"
 msgstr "omeqa"
 
-#: src/ui_searchDialogGui.h:620
+#: src/ui_searchDialogGui.h:642
 msgid "Greek letters for Bayer designations"
 msgstr "Bayer işarələri üçün yunan hərfləri"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:643
 msgid "Object"
 msgstr "Obyekt"
 
-#: src/ui_searchDialogGui.h:622
+#: src/ui_searchDialogGui.h:644
 msgid "RA/Dec (J2000):"
 msgstr "Qalxma/Enmə (J2000):"
 
-#: src/ui_searchDialogGui.h:623
+#: src/ui_searchDialogGui.h:645
 msgid "Position"
 msgstr "Mövqe"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:647
+msgid "Some objects may be found after activation respective plug-ins"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:649
+msgid "names in English"
+msgstr "İngiliscə adlar"
+
+#: src/ui_searchDialogGui.h:650
+msgid "Search in list..."
+msgstr "Siyahıda axtar..."
+
+#: src/ui_searchDialogGui.h:651
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+msgid "Lists"
+msgstr "Siyahılar"
+
+#: src/ui_searchDialogGui.h:652
 msgid "On-line astronomical database SIMBAD"
 msgstr "SİMBAD onlayn astronomik bazası"
 
-#: src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:653
 msgid "Extend search with SIMBAD"
 msgstr "Axtarışı SİMBAD ilə genişləndirmək"
 
-#: src/ui_searchDialogGui.h:626
+#: src/ui_searchDialogGui.h:654
 msgid "Server:"
 msgstr "Server:"
 
-#: src/ui_searchDialogGui.h:627 src/ui_viewDialog.h:1286
-#: src/ui_viewDialog.h:1291 src/ui_viewDialog.h:1293
+#: src/ui_searchDialogGui.h:655
+msgid "Search options"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:656
+msgid "Use autofill only from the beginning of words"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
+#: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
 #: src/ui_configurationDialog.h:1137 src/ui_configurationDialog.h:1148
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Seçənəklər"
 
-#: src/ui_searchDialogGui.h:629
-msgid "Some objects may be found after activation respective plug-ins"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:631
-msgid "names in English"
-msgstr "İngiliscə adlar"
-
-#: src/ui_searchDialogGui.h:632
-msgid "Search in list..."
-msgstr "Siyahıda axtar..."
-
-#: src/ui_searchDialogGui.h:633
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
-msgid "Lists"
-msgstr "Siyahılar"
-
-#: src/ui_viewDialog.h:1188
+#: src/ui_viewDialog.h:1194
 msgid "View"
 msgstr "Göstər"
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1200
 msgid "Sky"
 msgstr "Səma"
 
-#: src/ui_viewDialog.h:1196
+#: src/ui_viewDialog.h:1202
 msgid "Markings"
 msgstr "İşarələr"
 
-#: src/ui_viewDialog.h:1198
+#: src/ui_viewDialog.h:1204
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Landscape"
 msgstr "Mənzərə"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "Starlore"
 msgstr "Ulduzlar barədə məlumatlar"
 
-#: src/ui_viewDialog.h:1203
+#: src/ui_viewDialog.h:1209
 msgid "Labels and Markers"
 msgstr "Adlar və markerlər"
 
-#: src/ui_viewDialog.h:1205
+#: src/ui_viewDialog.h:1211
 msgid "Planets"
 msgstr "Planetler"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1213
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1209 src/ui_viewDialog.h:1250
+#: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1260
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1216
 msgid "Planets and satellites"
 msgstr "Planetlər və peyklər"
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1217
 msgid "Show planets"
 msgstr "Planetləri göstər"
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1218
 msgid "Show planet markers"
 msgstr "Planetlərin adlarını göstər"
 
-#: src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1219
 msgid "Show planet orbits"
 msgstr "Planetlərin orbitlərini göstər"
 
-#: src/ui_viewDialog.h:1214
+#: src/ui_viewDialog.h:1220
 msgid "Simulate light speed"
 msgstr "İşıq sürətini modelləşdir"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1221
 msgid "Scale Moon"
 msgstr "Ayın miqyasdırılması"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1223
+msgid "Automatic change of landscape when planet is changed"
+msgstr ""
+
+#: src/ui_viewDialog.h:1225
+msgid "Auto select landscapes"
+msgstr ""
+
+#: src/ui_viewDialog.h:1227
 msgid "Show atmosphere"
 msgstr "Atmosferi göstər"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1228
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Light pollution:"
 msgstr "İşıq çirkləndirməsi:"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1230
 msgid "pressure, temperature, extinction coefficient"
 msgstr "təzyiq, temperatur, itmə koeffisienti"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1232
 msgid "Refraction/Extinction settings..."
 msgstr "Refraksiya/İtmə seçənəkləri..."
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Absolute scale:"
 msgstr "Absolyut böyüdülmə:"
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1235
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Relative scale:"
 msgstr "Nisbi böyüdülmə:"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1236
 msgid "Milky Way brightness:"
 msgstr "Süd Yolun parlaqlığı"
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1237
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Twinkle:"
 msgstr "Parıldama:"
 
-#: src/ui_viewDialog.h:1229
+#: src/ui_viewDialog.h:1239
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Çox parlaq obyektin fonunda zəif ulduzları gizlətmək"
 
-#: src/ui_viewDialog.h:1231
+#: src/ui_viewDialog.h:1241
 msgid "Dynamic eye adaptation"
 msgstr "Gözün dinamik adaptasiyası"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1242
 msgid "Shooting Stars"
 msgstr "Meteorlar"
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1244
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1246
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1247
 msgid "1000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1240
+#: src/ui_viewDialog.h:1250
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1252
 msgid "Limit Magnitudes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1254
 msgid "Limit the magnitude of stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1248
+#: src/ui_viewDialog.h:1258
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1261
 msgid "Constellations"
 msgstr "Bürclər"
 
-#: src/ui_viewDialog.h:1252
+#: src/ui_viewDialog.h:1262
 msgid "Show lines"
 msgstr "Xətləri göstər"
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1263
 msgid "Show labels"
 msgstr "Adları göstər"
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1264
 msgid "Show boundaries"
 msgstr "Sərhədləri göstər"
 
-#: src/ui_viewDialog.h:1255
+#: src/ui_viewDialog.h:1265
 msgid "Show art"
 msgstr "Şəkilləri göstər"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1256
+#: src/ui_viewDialog.h:1266
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
 msgstr "Şəkillərin parlaqlığı:"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1267
 msgid "Celestial Sphere"
 msgstr "Səma kürəsi"
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1274
 msgid "Show equator line"
 msgstr "Ekvatorial xətti göstər"
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1278
 msgid "Show meridian line"
 msgstr "Meridian xətti göstər"
 
-#: src/ui_viewDialog.h:1272
+#: src/ui_viewDialog.h:1282
 msgid "Show horizon line"
 msgstr "Üfüq xəttini göstər"
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1286
 msgid "Show ecliptic line"
 msgstr "Ekliptika xəttini göstər"
 
-#: src/ui_viewDialog.h:1280
+#: src/ui_viewDialog.h:1290
 msgid "Show Galactic plane line"
 msgstr "Qalaktik dairənin xəttini göstər"
 
-#: src/ui_viewDialog.h:1284
+#: src/ui_viewDialog.h:1294
 msgid "Projection"
 msgstr "Proyeksiya"
 
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1295
 msgid "Add/remove landscapes..."
 msgstr "Mənzərələri əlavə et/sil..."
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1297
 msgid "Show ground"
 msgstr "Yeri göstər"
 
-#: src/ui_viewDialog.h:1288
+#: src/ui_viewDialog.h:1298
 msgid "Show fog"
 msgstr "Dumanı göstər"
 
-#: src/ui_viewDialog.h:1289
+#: src/ui_viewDialog.h:1299
 msgid "Use associated planet and position"
 msgstr "Bağlı planeti və mövüeni işlət"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1300
 msgid "Use this landscape as default"
 msgstr "Bu mənzərəni əsas kimi işlət"
 
-#: src/ui_viewDialog.h:1292
+#: src/ui_viewDialog.h:1302
 msgid "Use this sky culture as default"
 msgstr "Bu ulduzlar barədə məlumatı əsas kimi işlət"
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1304
 msgid "Visible"
 msgstr "Görünən"
 
@@ -5090,7 +5110,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:277
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 #: plugins/Observability/src/ui_ObservabilityDialog.h:379
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -5113,62 +5133,62 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1595
+#: plugins/Satellites/src/Satellites.cpp:1628
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1597
+#: plugins/Satellites/src/Satellites.cpp:1630
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1599
+#: plugins/Satellites/src/Satellites.cpp:1632
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1601
+#: plugins/Satellites/src/Satellites.cpp:1634
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1603
+#: plugins/Satellites/src/Satellites.cpp:1636
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1605
+#: plugins/Satellites/src/Satellites.cpp:1638
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1607
+#: plugins/Satellites/src/Satellites.cpp:1640
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1609
+#: plugins/Satellites/src/Satellites.cpp:1642
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1611
+#: plugins/Satellites/src/Satellites.cpp:1644
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1613
+#: plugins/Satellites/src/Satellites.cpp:1646
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1624
+#: plugins/Satellites/src/Satellites.cpp:1657
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1626
+#: plugins/Satellites/src/Satellites.cpp:1659
 msgid "The International Space Station"
 msgstr ""
 
@@ -5477,7 +5497,7 @@ msgstr "[yeni mənbə]"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:287
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:290
 msgid "Update now"
 msgstr "Yenilə"
 
@@ -5565,7 +5585,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:284
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:287
 msgid "Last update:"
 msgstr "Son yeniləmə:"
 
@@ -5580,7 +5600,7 @@ msgid ""
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:285
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:288
 msgid "Update frequency (hours):"
 msgstr ""
 
@@ -5627,7 +5647,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:299
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
 #: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Restore default settings"
 msgstr ""
@@ -5636,7 +5656,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:275
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 #: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Save settings as default"
 msgstr ""
@@ -5645,7 +5665,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgid "Settings"
 msgstr "Nizamlamalar"
@@ -5772,12 +5792,12 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr "Bu plaqin Stellariumdan teleskopa komandalar yollamaq imkan verir"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1667
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1693
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1672
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1698
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
@@ -6160,62 +6180,62 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "January"
 msgstr "Yanvar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "February"
 msgstr "Fevral"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "March"
 msgstr "Mart"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "April"
 msgstr "Aprel"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "May"
 msgstr "May"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "June"
 msgstr "İyun"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "July"
 msgstr "İyul"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "August"
 msgstr "Avqust"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "September"
 msgstr "Sentyabr"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "October"
 msgstr "Oktyabr"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "November"
 msgstr "Noyabr"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:656
+#: plugins/Supernovae/src/Supernovae.cpp:680
 msgid "December"
 msgstr "Dekabr"
 
@@ -6870,7 +6890,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:283
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:286
 msgid "Update from Internet sources"
 msgstr ""
 
@@ -6883,7 +6903,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:265
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:286
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:289
 msgid "[next update info]"
 msgstr ""
 
@@ -6948,7 +6968,7 @@ msgstr ""
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
 msgid "Enable display at startup"
 msgstr ""
 
@@ -7326,43 +7346,43 @@ msgstr ""
 msgid "Exoplanets is updated"
 msgstr "Ekzoplanetlər yenilənir"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:279
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
 msgid "Exoplanets Configuration"
 msgstr "Ekzoplanetlərin konfiqurasiyası"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:280
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:283
 msgid "Exoplanets Plug-in Configuration"
 msgstr "Ekzoplanetlər əlavəsinin seçənəkləri"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:285
 msgid "Update exoplanets data from Internet"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:288
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:291
 msgid "Settings for exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:290
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:293
 msgid "Plot all systems with exoplanets without labels"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:292
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:295
 msgid "Enable display of distribution for exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:294
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
 msgid "Display exoplanets since their discovery"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:296
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:299
 msgid "Enable timeline discovery of exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
 msgid "Show exoplanets button on toolbar"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgctxt "tab in plugin windows"
 msgid "Info"
 msgstr ""
