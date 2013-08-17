@@ -160,6 +160,7 @@ public:
 	//! Compares #name fields. If equal, #id fields, which can't be.
 	bool operator<(const Satellite& another) const;
 
+	//! Calculation of illuminated fraction of the satellite.
 	float calculateIlluminatedFraction() const;
 
 private:
@@ -236,7 +237,7 @@ private:
 	Vec3d	latLongSubPointPosition;
 	Vec3d	elAzPosition;
 	int	visibility;
-	double	phaseAngle;
+	double	phaseAngle; // phase angle for the satellite
 
 	//Satellite Orbit Draw
 	QFont     font;
