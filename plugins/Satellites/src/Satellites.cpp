@@ -137,8 +137,10 @@ void Satellites::init()
 		// populate settings from main config file.
 		loadSettings();
 
+		// absolute file name for inner catalog of the satellites
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
-		mcNameFilePath = dataDir.absoluteFilePath("mcnames");
+		// absolute file name for mcnames file
+		mcNamesFilePath = dataDir.absoluteFilePath("mcnames");
 
 		// Load and find resources used in the plugin
 
@@ -1298,7 +1300,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 	}
 	updateSources.clear();	
-	parseMcNamesFile(mcNameFilePath);
+	parseMcNamesFile(mcNamesFilePath);
 	updateSatellites(newData);
 }
 
@@ -1361,7 +1363,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 				tleFile.remove();
 		}
 	}
-	parseMcNamesFile(mcNameFilePath);
+	parseMcNamesFile(mcNamesFilePath);
 	updateSatellites(newTleSets);
 }
 
