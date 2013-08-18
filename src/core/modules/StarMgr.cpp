@@ -1082,17 +1082,34 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (QMap<QString,int>::const_iterator it(commonNamesIndexI18n.lowerBound(objw)); it!=commonNamesIndexI18n.end(); ++it)
-	{
-		if (it.key().startsWith(objw))
+	if (useStartOfWords) {
+		for (QMap<QString,int>::const_iterator it(commonNamesIndexI18n.lowerBound(objw)); it!=commonNamesIndexI18n.end(); ++it)
 		{
-			if (maxNbItem==0)
+			if (it.key().startsWith(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(it.value());
+				--maxNbItem;
+			}
+			else
 				break;
-			result << getCommonName(it.value());
-			--maxNbItem;
 		}
-		else
-			break;
+	}
+	else
+	{
+		QMapIterator<QString, int> i(commonNamesIndexI18n);
+		while (i.hasNext())
+		{
+			i.next();
+			if (i.key().contains(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(i.value());
+				--maxNbItem;
+			}
+		}
 	}
 
 	// Search for sci names
@@ -1175,17 +1192,35 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (QMap<QString,int>::const_iterator it(commonNamesIndex.lowerBound(objw)); it!=commonNamesIndex.end(); ++it)
+	if (useStartOfWords)
 	{
-		if (it.key().startsWith(objw))
+		for (QMap<QString,int>::const_iterator it(commonNamesIndex.lowerBound(objw)); it!=commonNamesIndex.end(); ++it)
 		{
-			if (maxNbItem==0)
+			if (it.key().startsWith(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(it.value());
+				--maxNbItem;
+			}
+			else
 				break;
-			result << getCommonName(it.value());
-			--maxNbItem;
 		}
-		else
-			break;
+	}
+	else
+	{
+		QMapIterator<QString, int> i(commonNamesIndex);
+		while (i.hasNext())
+		{
+			i.next();
+			if (i.key().contains(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(i.value());
+				--maxNbItem;
+			}
+		}
 	}
 
 	// Search for sci names
