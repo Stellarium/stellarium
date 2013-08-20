@@ -112,6 +112,7 @@ private:
 	float Vmag;				//! Visual magnitude of star
 	float sradius;				//! Radius of star in Rsun
 	int effectiveTemp;			//! Effective temperature of star in K
+	bool hasHabitableExoplanets;		//! Has potential habitable exoplanets
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
 	LinearFader labelsFader;
