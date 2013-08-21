@@ -116,6 +116,9 @@ public slots:
 	void setFlagDecimalDegrees(const bool b);
 	bool getFlagDecimalDegrees(void) const;
 
+	void setFlagLimitMagnitude(const bool b);
+	bool getFlagLimitMagnitude(void) const;
+
 signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
@@ -127,7 +130,7 @@ private slots:
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
 	void setRequireSelection(bool state);
-	void setScaleImageCircle(bool state);
+	void setScaleImageCircle(bool state);	
 	void setScreenFOVForCCD();
 	void retranslateGui();
 	void setStelStyle(const QString& style);
@@ -221,6 +224,7 @@ private:
 	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
+	bool flagLimitMagnitude;	//!< Read from the ini file, whether a magnitude is required to be limited.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 	//! Display the GUI control panel
 	bool guiPanelEnabled;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>655</width>
-    <height>381</height>
+    <width>653</width>
+    <height>383</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -171,6 +171,16 @@
               <widget class="QCheckBox" name="scaleImageCircleCheckBox">
                <property name="text">
                 <string>Scale image circle</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
+               <property name="toolTip">
+                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+               </property>
+               <property name="text">
+                <string>Limit stellar magnitude</string>
                </property>
               </widget>
              </item>
