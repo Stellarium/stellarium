@@ -536,6 +536,7 @@ void Oculars::init()
 		enableGuiPanel(guiPanelEnabled);
 
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
+		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -1849,14 +1850,18 @@ void Oculars::zoomOcular()
 		core->setFlipVert(telescope->isVFlipped());		
 	}
 
-	// Simplified calculation of the penetrating power of the telescope
-	// TODO: need improvements?
-	double limitMag = 2.1 + 5*std::log10(telescope->diameter());
-	// Limit stars and DSOs
-	skyManager->setFlagStarMagnitudeLimit(true);
-	skyManager->setFlagNebulaMagnitudeLimit(true);
-	skyManager->setCustomStarMagnitudeLimit(limitMag);
-	skyManager->setCustomNebulaMagnitudeLimit(limitMag);
+	// Limit stars and DSOs	if it enable
+	if (getFlagLimitMagnitude())
+	{
+		// Simplified calculation of the penetrating power of the telescope
+		// TODO: need improvements?
+		double limitMag = 2.1 + 5*std::log10(telescope->diameter());
+
+		skyManager->setFlagStarMagnitudeLimit(true);
+		skyManager->setFlagNebulaMagnitudeLimit(true);
+		skyManager->setCustomStarMagnitudeLimit(limitMag);
+		skyManager->setCustomNebulaMagnitudeLimit(limitMag);
+	}
 
 	double actualFOV = ocular->actualFOV(telescope, lens);
 	// See if the mask was scaled; if so, correct the actualFOV.
@@ -1957,6 +1962,18 @@ void Oculars::setFlagDecimalDegrees(const bool b)
 bool Oculars::getFlagDecimalDegrees() const
 {
 	return flagDecimalDegrees;
+}
+
+void Oculars::setFlagLimitMagnitude(const bool b)
+{
+	flagLimitMagnitude = b;
+	settings->setValue("limit_stellar_magnitude", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagLimitMagnitude() const
+{
+	return flagLimitMagnitude;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const
