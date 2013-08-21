@@ -194,11 +194,11 @@ private:
 	int selectedTelescopeIndex; //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 	int selectedLensIndex; //!<  index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
 
-	QFont font;					//!< The font used for drawing labels.
-	bool flagShowCCD;				//!< flag used to track f we are in CCD mode.
+	QFont font;			//!< The font used for drawing labels.
+	bool flagShowCCD;		//!< flag used to track f we are in CCD mode.
 	bool flagShowOculars;		//!< flag used to track if we are in ocular mode.
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
-	bool flagShowTelrad;			//!< If true, display the Telrad overlay.
+	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
@@ -212,6 +212,11 @@ private:
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticPlaneLine;	//!< Flag to track if GalacticPlaneLine was displayed at activation.
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
+
+	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
+	float magLimitStars;		//!< Value of limited magnitude for stars
+	bool flagLimitDSOs;		//!< Flag to track limit magnitude for DSOs
+	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
 
 	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
