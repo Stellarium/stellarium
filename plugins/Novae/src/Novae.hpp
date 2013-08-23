@@ -42,6 +42,9 @@ typedef QSharedPointer<Nova> NovaP;
 /*! @mainpage notitle
 @section overview Plugin Overview
 
+The %Bright Novae plugin displays the positions some bright
+novae in the Milky Way galaxy.
+
 @section ncat Bright Novae Catalog
 The novae catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "novae.json". A default copy is embedded in the
