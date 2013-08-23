@@ -668,6 +668,9 @@ class Translations
 		
 		// Historical Supernovae Plugin
 		N_("Historical Supernovae configuration window");
+
+		// Bright Novae Plugin
+		N_("Bright Novae configuration window");
 		
 		// Telescope Control Plugin
 		N_("Move a telescope to a given set of coordinates");
