@@ -108,14 +108,17 @@ void NovaeDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>";
-	html += ".</p>";
+	html += "<p>" + q_("A plugin that shows some bright novae in the Milky Way galaxy.");
+	html += " " + q_("You can find novae via search tool by entering designation of nova or its common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg').") + "</p>";
 
 	html += "<h3>" + q_("Light curves") + "</h3>";
+	html += q_("This plugin has very simple model for calculation of light curves for novae stars.") + " ";
+	html += q_("This model based on time for decline by %1 magnitudes from maximum values, where %1 is 2, 3, 6 and 9. ").arg("<em>N</em>") + " ";
+	html += q_("If nova have no values for decline of magnitude then this plugin will be use a generalized values for it.");
 	html += "<p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Novae plugin") + "</p>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Bright Novae plugin") + "</p>";
 	html += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
@@ -124,7 +127,7 @@ void NovaeDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Novae_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Bright_Novae_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
