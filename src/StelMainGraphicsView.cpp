@@ -92,6 +92,10 @@ Q_IMPORT_PLUGIN(TextUserInterface)
 Q_IMPORT_PLUGIN(LogBook)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_NOVAE
+Q_IMPORT_PLUGIN(Novae)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_OCULARS
 Q_IMPORT_PLUGIN(Oculars)
 #endif
