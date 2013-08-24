@@ -195,9 +195,8 @@ void ScreenImageMgr::init()
 {
 }
 
-void ScreenImageMgr::draw(StelCore* core, class StelRenderer* renderer)
+void ScreenImageMgr::draw(StelCore* core)
 {
-	Q_UNUSED(renderer);
 	foreach(ScreenImage* m, allScreenImages)
 		if (m!=NULL)
 			m->draw(core);

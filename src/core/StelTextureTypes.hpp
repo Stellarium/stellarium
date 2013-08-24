@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2012 Ferdinand Majerech
+ * Copyright (C) 2007 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,15 +17,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelRenderer.hpp"
-#include "StelTextureNew.hpp"
+#ifndef _STELTEXTURETYPES_HPP_
+#define _STELTEXTURETYPES_HPP_
 
-StelTextureNew::~StelTextureNew()
-{
-	renderer->destroyTextureBackend(backend);
-}
+#include <QSharedPointer>
 
-void StelTextureNew::bind(const int textureUnit)
-{
-	renderer->bindTextureBackend(backend, textureUnit);
-}
+//! @file StelTextureTypes.hpp
+//! Define the StelTextureSP type.
+
+class StelTexture;
+
+//! @typedef StelTextureSP
+//! Use shared pointer to simplify memory managment.
+typedef QSharedPointer<StelTexture> StelTextureSP;
+
+#endif // _STELTEXTURETYPES_HPP_

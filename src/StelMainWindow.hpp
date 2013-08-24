@@ -55,7 +55,7 @@ public slots:
 	void setFullScreen(bool);
 
 protected:
-	//! Reimplemented to delete textures before the renderer disappears
+	//! Reimplemented to delete openGL textures before the GLContext disappears
 	virtual void closeEvent(QCloseEvent* event);
 
 private:

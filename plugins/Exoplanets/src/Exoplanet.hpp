@@ -27,7 +27,8 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelProjectorType.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
 typedef struct
@@ -43,6 +44,7 @@ typedef struct
 	int discovered;		//! Exoplanet discovered year	
 } exoplanetData;
 
+class StelPainter;
 
 //! @class Exoplanet
 //! A exoplanet object represents one pulsar on the sky.
@@ -98,8 +100,10 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, 
-	          class StelTextureNew* markerTexture);
+	static StelTextureSP hintTexture;
+	static StelTextureSP markerTexture;
+
+	void draw(StelCore* core, StelPainter& painter);
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star

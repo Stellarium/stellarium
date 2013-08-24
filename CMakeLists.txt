@@ -220,7 +220,6 @@ SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plug
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
 SET(USE_PLUGIN_PULSARS 1 CACHE BOOL "Define whether the Pulsars plugin should be created.")
 SET(USE_PLUGIN_QUASARS 1 CACHE BOOL "Define whether the Quasars plugin should be created.")
-SET(USE_PLUGIN_RENDERERSTATISTICS 0 CACHE BOOL "Define whether the RendererStatistics plugin should be created.")
 SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
 SET(USE_PLUGIN_SOLARSYSTEMEDITOR 1 CACHE BOOL "Define whether the Solar System Editor should be built.")
 SET(USE_PLUGIN_SUPERNOVAE 1 CACHE BOOL "Define whether the Historical Supernova plugin should be created.")
@@ -458,7 +457,6 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_BINARY_DIR}
 	${CMAKE_SOURCE_DIR}/src
 	${CMAKE_SOURCE_DIR}/src/core
-	${CMAKE_SOURCE_DIR}/src/core/renderer
 	${CMAKE_SOURCE_DIR}/src/core/modules
 	${CMAKE_SOURCE_DIR}/src/core/planetsephems
 	${CMAKE_SOURCE_DIR}/src/core/external

@@ -63,7 +63,7 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual bool configureGui(bool show=true);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.
@@ -143,18 +143,18 @@ private:
 	bool isBinocularDefined();
 
 	//! Reneders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
-	void paintCCDBounds(class StelRenderer* renderer);
+	void paintCCDBounds();
 	//! Renders crosshairs into the viewport.
-	void paintCrosshairs(class StelRenderer* renderer);
+	void paintCrosshairs();
 	//! Paint the mask into the viewport.
-	void paintOcularMask(class StelRenderer* renderer);
+	void paintOcularMask();
 	//! Renders the three Telrad circles, but only if not in ocular mode.
-	void paintTelrad(class StelRenderer* renderer);
+	void paintTelrad();
 
 
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
-	void paintText(const StelCore* core, StelRenderer* renderer);
+	void paintText(const StelCore* core);
 
 	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
 	void unzoomOcular();

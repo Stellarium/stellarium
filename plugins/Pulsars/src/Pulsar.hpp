@@ -27,10 +27,11 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelProjectorType.hpp"
-
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
+class StelPainter;
 
 //! @class Pulsar
 //! A Pulsar object represents one pulsar on the sky.
@@ -87,8 +88,10 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	void draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector,
-	          class StelTextureNew* markerTexture);
+	static StelTextureSP hintTexture;
+	static StelTextureSP markerTexture;
+
+	void draw(StelCore* core, StelPainter& painter);
 
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)

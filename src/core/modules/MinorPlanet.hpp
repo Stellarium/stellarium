@@ -48,8 +48,7 @@ public:
 		void* userDataPtr,
 		OsculatingFunctType *osculatingFunc,
 		bool closeOrbit,
-		bool hidden,
-		const QString &pType);
+		bool hidden);
 
 	~MinorPlanet();
 

@@ -27,8 +27,8 @@ QString StelModule::getModuleVersion() const
 	return PACKAGE_VERSION;
 }
 
-bool StelModule::drawPartial(StelCore* core, class StelRenderer* renderer)
+bool StelModule::drawPartial(StelCore* core)
 {
-	draw(core, renderer);
+	draw(core);
 	return false;
 }

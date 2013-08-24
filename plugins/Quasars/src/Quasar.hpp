@@ -27,9 +27,11 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "StelFader.hpp"
-#include "StelProjectorType.hpp"
 
+class StelPainter;
 
 //! @class Quasar
 //! A Quasar object represents one Quasar on the sky.
@@ -81,9 +83,10 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position
 
-	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, 
-	          class StelTextureNew* markerTexture);
+	static StelTextureSP hintTexture;
+	static StelTextureSP markerTexture;
 
+	void draw(StelCore* core, StelPainter& painter);
 	//! Calculate a color of quasar
 	//! @param b_v value of B-V color index
 	unsigned char BvToColorIndex(float b_v);

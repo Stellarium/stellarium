@@ -22,6 +22,8 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Supernova.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -36,6 +38,8 @@ class QProgressBar;
 class QSettings;
 class QTimer;
 class SupernovaeDialog;
+
+class StelPainter;
 
 typedef QSharedPointer<Supernova> SupernovaP;
 
@@ -80,8 +84,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -206,7 +210,7 @@ private:
 
 	QString sneJsonPath;
 
-	class StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	QList<SupernovaP> snstar;
 	QHash<QString, double> snlist;
 

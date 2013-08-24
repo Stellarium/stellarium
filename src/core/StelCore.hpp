@@ -125,7 +125,7 @@ public:
 	virtual ~StelCore();
 
 	//! Init and load all main core components.
-	void init(class StelRenderer* renderer);
+	void init();
 
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in sec.
@@ -138,7 +138,7 @@ public:
 	void preDraw();
 
 	//! Update core state after drawing modules.
-	void postDraw(StelRenderer* renderer);
+	void postDraw();
 
 	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
 	//! only for 2d painting

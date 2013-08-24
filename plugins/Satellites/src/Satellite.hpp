@@ -29,12 +29,14 @@
 #include <QVariant>
 
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
-#include "StelProjectorType.hpp"
 
+#include "StelPainter.hpp"
 #include "gSatWrapper.hpp"
 
 
+class StelPainter;
 class StelLocation;
 
 //! Radio communication channel properties.
@@ -163,7 +165,7 @@ public:
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
-	void drawOrbit(class StelRenderer* renderer, StelProjectorP projector);
+	void drawOrbit(StelPainter& painter);
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
@@ -212,6 +214,7 @@ private:
 	GroupSet groups;
 	QDateTime lastUpdated;
 
+	static StelTextureSP hintTexture;
 	static SphericalCap  viewportHalfspace;
 	static float hintBrightness;
 	static float hintScale;
@@ -222,16 +225,15 @@ private:
 	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
 
-	void draw(const StelCore* core, class StelRenderer* renderer, 
-	          StelProjectorP projector, class StelTextureNew* hintTexture);
+	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 
-	//Satellite Orbit Position calculation
-	gSatWrapper *pSatWrapper;
-	Vec3d position;
-	Vec3d velocity;
-	Vec3d latLongSubPointPosition;
-	Vec3d elAzPosition;
-	int   visibility;
+        //Satellite Orbit Position calculation
+        gSatWrapper *pSatWrapper;
+        Vec3d position;
+        Vec3d velocity;
+        Vec3d latLongSubPointPosition;
+        Vec3d elAzPosition;
+        int   visibility;
 
 	//Satellite Orbit Draw
 	QFont     font;
