@@ -563,6 +563,7 @@ namespace StelUtils
 	//! @param jDay the JD
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
+
 }
 
 #endif // _STELUTILS_HPP_
