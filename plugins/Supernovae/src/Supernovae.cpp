@@ -72,7 +72,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("A plugin that shows some historical supernovae brighter than 10 visual magnitude.");
+	info.description = N_("A plugin that shows some bright historical supernovae.");
 	return info;
 }
 
