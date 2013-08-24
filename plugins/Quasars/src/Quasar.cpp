@@ -179,7 +179,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	if (StelApp::getInstance().getVisionModeNight())
 		dcolor = StelUtils::getNightColor(dcolor);
 
-	float rcMag[2], size, shift;
+	float rcMag[2], size, shift=0;
 	double mag;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);

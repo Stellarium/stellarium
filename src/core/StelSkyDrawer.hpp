@@ -329,7 +329,7 @@ private:
 
 	// Variables used for GL optimization when displaying point sources
 	//! Buffer for storing the vertex array data
-	Vec2f* verticesGrid;
+	Vec3f* verticesGrid;
 	//! Buffer for storing the color array data
 	Vec3f* colorGrid;
 	//! Buffer for storing the texture coordinate array data
@@ -350,9 +350,6 @@ private:
 
 	bool flagLuminanceAdaptation;
 
-	bool useShader;
-	class QGLShaderProgram* starsShaderProgram;
-	
 	float big3dModelHaloRadius;
 };
 

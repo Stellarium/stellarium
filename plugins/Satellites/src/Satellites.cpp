@@ -369,10 +369,6 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	if (regExp.exactMatch(noradNumber))
 	{
 		QString numberString = regExp.capturedTexts().at(2);
-		bool ok;
-		int number = numberString.toInt(&ok);
-		if (!ok)
-			return StelObjectP();
 		
 		foreach(const SatelliteP& sat, satellites)
 		{
@@ -401,10 +397,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	if (regExp.exactMatch(objw))
 	{
 		QString numberString = regExp.capturedTexts().at(2);
-		bool ok;
-		int number = numberString.toInt(&ok);
-		if (ok)
-			numberPrefix = numberString;
+		numberPrefix = numberString;
 	}
 	bool find;
 	foreach(const SatelliteP& sat, satellites)

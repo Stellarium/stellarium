@@ -491,9 +491,9 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
     const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
     const float* tmpRcmag; // will point to precomputed rC in table
     // GZ, added for extinction
-    Extinction extinction=core->getSkyDrawer()->getExtinction();
-    const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
-    const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
+    //Extinction extinction=core->getSkyDrawer()->getExtinction();
+    //const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
+    //const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
 	// GZ: allow artificial cutoff:
 	const int clampStellarMagnitude_mmag = (int) floor(drawer->getCustomStarMagnitudeLimit() * 1000.0f);
 	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.

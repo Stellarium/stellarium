@@ -27,14 +27,7 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
-#ifdef USE_OPENGL_ES2
- #define STELPAINTER_GL2 1
-#endif
-
-#ifdef STELPAINTER_GL2
 class QGLShaderProgram;
-#endif
-
 class QPainter;
 class QGLContext;
 
@@ -110,13 +103,6 @@ public:
 		SphericalPolygonDrawModeFill=0,			//!< Draw the interior of the polygon
 		SphericalPolygonDrawModeBoundary=1,		//!< Draw the boundary of the polygon
 		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
-	};
-
-	//! Define the shade model when interpolating polygons
-	enum ShadeModel
-	{
-		ShadeModelFlat=0x1D00,		//!< GL_FLAT
-		ShadeModelSmooth=0x1D01	//!< GL_SMOOTH
 	};
 
 	//! Define the drawing mode when drawing vertex
@@ -283,14 +269,6 @@ public:
 
 	// The following methods try to reflect the API of the incoming QGLPainter class
 
-	//! Sets the point size to use with draw().
-	//! This function has no effect if a shader program is in use, or on OpenGL/ES 2.0. Shader programs must set the
-	//! point size in the vertex shader.
-	void setPointSize(qreal size);
-
-	//! Define the current shade model used when interpolating between vertex.
-	void setShadeModel(ShadeModel m);
-
 	//! Set whether texturing is enabled.
 	void enableTexture2d(bool b);
 
@@ -324,6 +302,7 @@ public:
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
 	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
+	void setArrays(const Vec3f* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
 
 	//! Draws primitives using vertices from the arrays specified by setVertexArray().
 	//! The type of primitive to draw is specified by mode.
@@ -386,7 +365,7 @@ private:
 	//! Whether ARB_texture_non_power_of_two is supported on this card
 	static bool isNoPowerOfTwoAllowed;
 
-#ifdef STELPAINTER_GL2
+
 	Vec4f currentColor;
 	bool texture2dEnabled;
 	static QGLShaderProgram* basicShaderProgram;
@@ -396,7 +375,7 @@ private:
 		int vertex;
 	};
 	static BasicShaderVars basicShaderVars;
-	static QGLShaderProgram* colorShaderProgram;
+	
 	static QGLShaderProgram* texturesShaderProgram;
 	struct TexturesShaderVars {
 		int projectionMatrix;
@@ -415,7 +394,7 @@ private:
 		int texture;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
-#endif
+
 
 	//! The descriptor for the current opengl vertex array
 	ArrayDesc vertexArray;
