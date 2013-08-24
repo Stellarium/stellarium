@@ -860,35 +860,14 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 // Return heliocentric coordinate of p
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
-	// Optimization:
-	//
-	// This code used about 8% of runtime before,
-	// this is an optimized version - avoiding smart pointer checks 
-	// (this function doesn't own any of the parents - planets 
-	// and solar system do, so we're OK)
-	//
-	// This is the equivalent (previous) unoptimized code:
-	// (update this if you make any functionality changes)
-	// PlanetP pp = parent;
-	// if (pp)
-	// {
-	// 	while (pp->parent)
-	// 	{
-	// 		pos += pp->eclipticPos;
-	// 		pp = pp->parent;
-	// 	}
-	// }
 	Vec3d pos = p;
-	const Planet* ourParent = &(*parent);
-	const Planet* parentsParent;
-	// int i = 0;
-	if (NULL != ourParent)
+	PlanetP pp = parent;
+	if (pp)
 	{
-		// const Planet* const parentsParent = &(*(ourParent->parent));
-		while (NULL != (parentsParent = &(*(ourParent->parent))))
+		while (pp->parent)
 		{
-			pos += ourParent->eclipticPos;
-			ourParent = parentsParent;
+			pos += pp->eclipticPos;
+			pp = pp->parent;
 		}
 	}
 	return pos;

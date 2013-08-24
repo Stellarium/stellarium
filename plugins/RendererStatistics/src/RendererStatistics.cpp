@@ -130,7 +130,7 @@ void RendererStatistics::draw(class StelCore* core, StelRenderer* renderer)
 		statistics = renderer->getStatistics();
 		lastUpdateTime.start();
 	}
-	QMapIterator<const char*, double> stats(statistics);
+	QMapIterator<QString, double> stats(statistics);
 	while (stats.hasNext()) 
 	{
 		stats.next();
