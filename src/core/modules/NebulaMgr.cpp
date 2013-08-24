@@ -123,12 +123,9 @@ struct DrawNebulaFuncObject
 	{
 		angularSizeLimit = 5.0f / projector->getPixelPerRadAtCenter() * 180.0f / M_PI;
 	}
-
-	// Optimization: Smart pointer is intentionally not used.
-	// This is safe as long as we don't save it (the caller owns the pointer).
-	void operator()(StelRegionObject* obj)
+	void operator()(StelRegionObjectP obj)
 	{
-		Nebula* n = static_cast<Nebula*>(obj);
+		Nebula* n = obj.staticCast<Nebula>().data();
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->mag > drawer->getCustomNebulaMagnitudeLimit())) return;
