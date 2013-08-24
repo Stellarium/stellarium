@@ -163,8 +163,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -495,8 +495,7 @@ private:
 	QSet<QString> groups;
 	
 	LinearFader hintFader;
-	class StelTextureNew* hintTexture;
-	class StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	
 	//! @name Bottom toolbar button
 	//@{

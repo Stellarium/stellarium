@@ -27,6 +27,12 @@
 #include <QFile>
 #include <QTemporaryFile>
 
+#ifdef USE_OPENGL_ES2
+ #include "GLES2/gl2.h"
+#else
+ #include <QtOpenGL>
+#endif
+
 #include <stdexcept>
 
 #include "LandscapeMgr.hpp"
@@ -41,7 +47,7 @@
 #include "Planet.hpp"
 #include "StelIniParser.hpp"
 #include "StelSkyDrawer.hpp"
-#include "renderer/StelRenderer.hpp"
+#include "StelPainter.hpp"
 #include "karchive.h"
 #include "kzip.h"
 
@@ -51,7 +57,7 @@ class Cardinals
 public:
 	Cardinals(float _radius = 1.);
 	virtual ~Cardinals();
-	void draw(const StelCore* core, StelRenderer* renderer, double latitude) const;
+	void draw(const StelCore* core, double latitude) const;
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
 	void updateI18n();
@@ -85,10 +91,11 @@ Cardinals::~Cardinals()
 
 // Draw the cardinals points : N S E W
 // handles special cases at poles
-void Cardinals::draw(const StelCore* core, StelRenderer* renderer, double latitude) const
+void Cardinals::draw(const StelCore* core, double latitude) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	renderer->setFont(font);
+	StelPainter sPainter(prj);
+	sPainter.setFont(font);
 
 	if (!fader.getInterstate()) return;
 
@@ -104,47 +111,35 @@ void Cardinals::draw(const StelCore* core, StelRenderer* renderer, double latitu
 	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
 	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
-	renderer->setGlobalColor(color[0], color[1], color[2], fader.getInterstate());
-	renderer->setBlendMode(BlendMode_Alpha);
+	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
+	glEnable(GL_BLEND);
+	sPainter.enableTexture2d(true);
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	Vec3f pos;
 	Vec3f xy;
 
-	float shift = QFontMetrics(font).width(sNorth)/2;
+	float shift = sPainter.getFontMetrics().width(sNorth)/2;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
 		shift = 0;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[0])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[0], 0., -shift, -shift, false);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[1])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[1], 0., -shift, -shift, false);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[2])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[2], 0., -shift, -shift, false);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[3])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[3], 0., -shift, -shift, false);
+
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
@@ -203,7 +198,7 @@ void LandscapeMgr::update(double deltaTime)
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
 	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
 		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
-		core, ssystem->getEclipseFactor(core), core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
+		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
@@ -272,16 +267,16 @@ void LandscapeMgr::update(double deltaTime)
 		landscape->setBrightness(landscapeBrightness+0.05);
 }
 
-void LandscapeMgr::draw(StelCore* core, class StelRenderer* renderer)
+void LandscapeMgr::draw(StelCore* core)
 {
 	// Draw the atmosphere
-	atmosphere->draw(core, renderer);
+	atmosphere->draw(core);
 
 	// Draw the landscape
-	landscape->draw(core, renderer);
+	landscape->draw(core);
 
 	// Draw the cardinal points
-	cardinalsPoints->draw(core, renderer, StelApp::getInstance().getCore()->getCurrentLocation().latitude);
+	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getCurrentLocation().latitude);
 }
 
 void LandscapeMgr::init()

@@ -17,15 +17,16 @@
  */
 
 
-#include "renderer/StelRenderer.hpp"
 #include "StelSkyPolygon.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelCore.hpp"
 
 #include <stdexcept>
 #include <QDebug>
+#include <QtOpenGL>
 
 void StelSkyPolygon::initCtor()
 {
@@ -52,18 +53,21 @@ StelSkyPolygon::~StelSkyPolygon()
 {
 }
 
-void StelSkyPolygon::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, float)
+void StelSkyPolygon::draw(StelCore* core, StelPainter& sPainter, float)
 {
-	QMultiMap<double, StelSkyPolygon*> result;
-	getTilesToDraw(result, core, projector->getViewportConvexPolygon(0, 0), true);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	// Draw in the right order
-	renderer->setBlendMode(BlendMode_Add);
+	QMultiMap<double, StelSkyPolygon*> result;
+	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
+
+	// Draw in the good order
+	sPainter.enableTexture2d(false);
+	glBlendFunc(GL_ONE, GL_ONE);
 	QMap<double, StelSkyPolygon*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(renderer, projector);
+		i.value()->drawTile(core);
 	}
 
 	deleteUnusedSubTiles();
@@ -156,7 +160,7 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
-bool StelSkyPolygon::drawTile(StelRenderer* renderer, StelProjectorP projector)
+bool StelSkyPolygon::drawTile(StelCore* core)
 {
 	if (!texFader)
 	{
@@ -164,10 +168,10 @@ bool StelSkyPolygon::drawTile(StelRenderer* renderer, StelProjectorP projector)
 		texFader->start();
 	}
 
-	for(int poly = 0; poly < skyConvexPolygons.size(); ++poly)
-	{
-		skyConvexPolygons[poly].drawFill(renderer, SphericalRegion::DrawParams(&(*projector)));
-	}
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+
+	foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
+		sPainter.drawSphericalRegion(&poly);
 
 	return true;
 }

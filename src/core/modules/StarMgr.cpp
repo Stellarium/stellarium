@@ -20,21 +20,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QCryptographicHash>
-#include <QDebug>
+#include <QTextStream>
 #include <QFile>
-#include <QFileInfo>
-#include <QRegExp>
 #include <QSettings>
 #include <QString>
-#include <QTextStream>
-#include <QDir>
+#include <QRegExp>
+#include <QDebug>
+#include <QFileInfo>
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
+#include "StelTexture.hpp"
 
 #include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
@@ -42,6 +39,7 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -49,6 +47,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelIniParser.hpp"
+#include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
@@ -130,9 +129,7 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 }
 
 
-StarMgr::StarMgr(void) 
-	: hipIndex(new HipIndexStruct[NR_OF_HIP+1])
-	, texPointer(NULL)
+StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
@@ -169,10 +166,6 @@ StarMgr::~StarMgr(void)
 	zoneArrays.clear();
 	if (hipIndex)
 		delete[] hipIndex;
-	if(NULL != texPointer)
-	{
-		delete texPointer;
-	}
 }
 
 QString StarMgr::getCommonName(int hip)
@@ -338,6 +331,7 @@ void StarMgr::init()
 	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
 
 	objectMgr->registerStelObjectMgr(this);
+	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
 	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
@@ -351,7 +345,7 @@ void StarMgr::init()
 }
 
 
-void StarMgr::drawPointer(StelRenderer* renderer, StelProjectorP projector, const StelCore* core)
+void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 {
 	const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Star");
 	if (!newSelected.empty())
@@ -359,28 +353,21 @@ void StarMgr::drawPointer(StelRenderer* renderer, StelProjectorP projector, cons
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d win;
+		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, win))
-		{
+		if (!sPainter.getProjector()->project(pos, screenpos))
 			return;
-		}
-
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur2.png");   // Load pointer texture
-		}
 
 		Vec3f c(obj->getInfoColor());
 		if (StelApp::getInstance().getVisionModeNight())
 			c = StelUtils::getNightColor(c);
 
-		renderer->setGlobalColor(c[0], c[1], c[2]);
-
+		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
-		renderer->setBlendMode(BlendMode_Alpha);
-		const float angle = StelApp::getInstance().getTotalRunTime() * 40.0f;
-		renderer->drawTexturedRect(win[0] - 13.0f, win[1] - 13.0f, 26.0f, 26.0f, angle);
+		sPainter.enableTexture2d(true);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -817,7 +804,7 @@ int StarMgr::getMaxSearchLevel() const
 
 
 // Draw all the stars
-void StarMgr::draw(StelCore* core, StelRenderer* renderer)
+void StarMgr::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
@@ -832,15 +819,16 @@ void StarMgr::draw(StelCore* core, StelRenderer* renderer)
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
-	// Prepare for drawing many stars
-	renderer->setFont(starFont);
-	skyDrawer->preDrawPointSource();
+	// Prepare openGL for drawing many stars
+	StelPainter sPainter(prj);
+	sPainter.setFont(starFont);
+	skyDrawer->preDrawPointSource(&sPainter);
 
 	// draw all the stars of all the selected zones
-	// GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
+        // GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
 	//float rcmag_table[2*256];
-	//float rcmag_table[2*16384];
-	float rcmag_table[2 * RCMAG_TABLE_SIZE];
+        //float rcmag_table[2*16384];
+        float rcmag_table[2*4096];
 
 	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
 	{
@@ -848,14 +836,14 @@ void StarMgr::draw(StelCore* core, StelRenderer* renderer)
 		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps; // MagStepIncrement
 		// GZ: add a huge number of entries to rcMag
 		//for (int i=it.value()->mag_steps-1;i>=0;--i)
-		for (int i=RCMAG_TABLE_SIZE-1;i>=0;--i)
+                for (int i=4096-1;i>=0;--i)
 		{
 			const float mag = mag_min+k*i;
 			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
 			{
 				if (i==0) goto exit_loop;
 			}
-			if (skyDrawer->getDrawStarsAsPoints())
+			if (skyDrawer->getFlagPointStar())
 			{
 				rcmag_table[2*i+1] *= starsFader.getInterstate();
 			}
@@ -877,16 +865,16 @@ void StarMgr::draw(StelCore* core, StelRenderer* renderer)
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(prj, renderer, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+			it.value()->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(prj, renderer, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+			it.value()->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
-	skyDrawer->postDrawPointSource(prj);
+	skyDrawer->postDrawPointSource(&sPainter);
 
 	if (objectMgr->getFlagSelectedObjectPointer())
-		drawPointer(renderer, prj, core);
+		drawPointer(sPainter, core);
 }
 
 

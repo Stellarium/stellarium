@@ -24,19 +24,19 @@
 #include <QVariantMap>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
+#include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
 class StelObject;
 class StelToneReproducer;
 class StelProjector;
+class StelPainter;
 class QSettings;
 
 namespace BigStarCatalogExtension {
   class ZoneArray;
   class HipIndexStruct;
 }
-
-static const int RCMAG_TABLE_SIZE = 4096;
 
 typedef struct
 {
@@ -96,7 +96,7 @@ public:
 	virtual void init();
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
@@ -273,7 +273,7 @@ private:
 	void loadData(QVariantMap starsConfigFile);
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(class StelRenderer* renderer, StelProjectorP projector, const StelCore* core);
+	void drawPointer(StelPainter& sPainter, const StelCore* core);
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
@@ -320,7 +320,7 @@ private:
 	static bool flagSciNames;
 	Vec3f labelColor;
 
-	class StelTextureNew* texPointer;		// The selection pointer texture
+	StelTextureSP texPointer;		// The selection pointer texture
 
 	class StelObjectMgr* objectMgr;
 

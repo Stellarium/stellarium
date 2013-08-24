@@ -20,6 +20,7 @@
 #ifndef _STELLOADINGBAR_HPP_
 #define _STELLOADINGBAR_HPP_
 
+#include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 
@@ -56,17 +57,17 @@ public:
 	virtual ~StelLoadingBar();
 	
 	//! Draw the splashscreen.
-	void draw(class StelRenderer* renderer);
+	void draw();
 
 private:
 	QString message;
 	int splashx, splashy, width, height;
 	QFont extraTextFont;
-	class StelTextureNew* splash;
+	StelTextureSP splash;
 	QString extraText;
-	QString splashName;
-	Vec4i viewportXywh;
 	Vec2f extraTextPos;
+
+	class StelPainter* sPainter;
 };
 
 #endif // _STELLOADINGBAR_HPP_
