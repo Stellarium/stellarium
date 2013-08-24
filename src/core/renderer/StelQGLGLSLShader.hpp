@@ -216,7 +216,7 @@ public:
 	{
 		Q_ASSERT_X(bound && state == State_Built, Q_FUNC_INFO, 
 		           "uploadUniforms called on a shader that is not bound");
-		void * const * data = uniformStorage;
+		const unsigned char* data = uniformStorage;
 		for (int u = 0; u < uniformCount; u++) 
 		{
 			const UniformType type = static_cast<UniformType>(uniformTypes[u]);
@@ -310,6 +310,7 @@ public:
 		           "Too many uniform storage stack pops (nothing left to pop)");
 		--uniformStorageStackSize;
 		uniformStorageUsed    = uniformStorageUsedStack[uniformStorageStackSize];
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 		uniformCount       = uniformCountStack[uniformStorageStackSize];
 	}
 
@@ -322,6 +323,7 @@ public:
 		           "clearUniforms() called when the shader is not bound");
 		// We don't zero out the storage - we'll overwrite it as we add new uniforms.
 		uniformStorageUsed = uniformCount = uniformStorageStackSize = 0;
+		uniformStoragePointer = uniformStorage;
 	}
 
 protected:
@@ -392,7 +394,10 @@ protected:
 	//! The data is then uploaded by uploadUniforms().
 	//!
 	//! @see uploadUniforms, clearUniforms, pushUniformStorage
-	void* uniformStorage [UNIFORM_STORAGE / sizeof(void*)];
+	unsigned char uniformStorage [UNIFORM_STORAGE];
+
+	//! Pointer to uniformStorage[uniformStorageUsed]. Avoids breaking strict aliasing.
+	void* uniformStoragePointer;
 
 	//! Types of consecutive uniforms in uniformStorage.
 	//!
@@ -405,7 +410,7 @@ protected:
 	//! This means the user code needs to preserve the string until release() is called.
 	const char* uniformNames [MAX_UNIFORMS];
 
-	//! Elements in uniformStorage used up at this moment.
+	//! Bytes in uniformStorage used up at this moment.
 	int uniformStorageUsed;
 
 	//! Number of uniforms in uniformStorage at this moment.
@@ -424,53 +429,108 @@ protected:
 	//! Number of items in uniformStorageUsedStack and uniformCountStack.
 	int uniformStorageStackSize;
 
-	void* setUniformValue_helper(const char* const name, const enum UniformType kind)
+	virtual void setUniformValue_(const char* const name, const float value)
 	{
 		Q_ASSERT_X(bound, Q_FUNC_INFO,
 		           "Trying to set a uniform value with an unbound shader");
 		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
-		Q_ASSERT_X((unsigned)(uniformStorageUsed + UNIFORM_SIZES[kind]) < (UNIFORM_STORAGE / sizeof uniformStorage[0]), Q_FUNC_INFO,
+		Q_ASSERT_X((uniformStorageUsed + sizeof(float)) < UNIFORM_STORAGE, Q_FUNC_INFO,
 		           "Uniform storage exceeded");
-		void* ret = static_cast<void*>(&uniformStorage[uniformStorageUsed]);
+		*static_cast<float*>(uniformStoragePointer) = value;
 		uniformNames[uniformCount] = name;
-		uniformTypes[uniformCount++] = kind;
-		uniformStorageUsed += UNIFORM_SIZES[kind];
-		return ret;
-	}
-
-	virtual void setUniformValue_(const char* const name, const float value)
-	{
-		*static_cast<float*>(setUniformValue_helper(name, UniformType_float)) = value;
+		uniformTypes[uniformCount++] = UniformType_float;
+		uniformStorageUsed += sizeof(float);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec2f value)
 	{
-		*static_cast<Vec2f*>(setUniformValue_helper(name, UniformType_vec2)) = value;
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec2f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*static_cast<Vec2f*>(uniformStoragePointer) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_vec2;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Vec2f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec3f& value)
 	{
-		*static_cast<Vec3f*>(setUniformValue_helper(name, UniformType_vec3)) = value;
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec3f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*static_cast<Vec3f*>(uniformStoragePointer) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_vec3;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Vec3f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Vec4f& value)
 	{
-		*static_cast<Vec4f*>(setUniformValue_helper(name, UniformType_vec4)) = value;
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		*static_cast<Vec4f*>(uniformStoragePointer) = value;
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Vec4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_vec4;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Vec4f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const Mat4f& m)
 	{
-		*static_cast<Mat4f*>(setUniformValue_helper(name, UniformType_mat4)) = m;
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(Mat4f)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*static_cast<Mat4f*>(uniformStoragePointer) = m;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_mat4;
+		++uniformCount;
+		uniformStorageUsed += sizeof(Mat4f);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const bool value)
 	{
-		*static_cast<bool*>(setUniformValue_helper(name, UniformType_bool)) = value;
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(bool)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*static_cast<bool*>(uniformStoragePointer) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_bool;
+		++uniformCount;
+		uniformStorageUsed += sizeof(bool);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 	virtual void setUniformValue_(const char* const name, const int value)
 	{
-		*static_cast<int*>(setUniformValue_helper(name, UniformType_int)) = value;
+		Q_ASSERT_X(bound, Q_FUNC_INFO,
+		           "Trying to set a uniform value with an unbound shader");
+		Q_ASSERT_X(uniformCount < MAX_UNIFORMS, Q_FUNC_INFO, "Too many uniforms");
+		Q_ASSERT_X((uniformStorageUsed + sizeof(int)) < UNIFORM_STORAGE, Q_FUNC_INFO,
+		           "Uniform storage exceeded");
+		*static_cast<int*>(uniformStoragePointer) = value;
+		uniformNames[uniformCount] = name;
+		uniformTypes[uniformCount] = UniformType_int;
+		++uniformCount;
+		uniformStorageUsed += sizeof(int);
+		uniformStoragePointer = &(uniformStorage[uniformStorageUsed]);
 	}
 
 private:
