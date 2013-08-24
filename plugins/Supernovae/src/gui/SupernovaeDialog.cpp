@@ -108,7 +108,7 @@ void SupernovaeDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("A plugin that shows some bright historical supernovae: ");
+	html += "<p>" + q_("This plugin allows you to see some bright historical supernovae: ");
 	html += GETSTELMODULE(Supernovae)->getSupernovaeList();
 	html += ".</p>";
 
