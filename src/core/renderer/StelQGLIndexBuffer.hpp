@@ -40,7 +40,6 @@ class StelQGLIndexBuffer : public StelIndexBuffer
 friend class StelQGLRenderer;
 // For optimized projection code.
 friend class StelQGLArrayVertexBufferBackend;
-friend class StelQGLInterleavedArrayVertexBufferBackend;
 public:
 
 	// Member functions used by the QGL backends

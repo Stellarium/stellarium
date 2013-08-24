@@ -546,7 +546,7 @@ public:
 	// Contain and intersect	
 	bool contains(const Vec3d &v) const 
 	{
-		Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.00000021);
+		Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);
 		return (v*n>=d);
 	}
 	virtual bool contains(const SphericalConvexPolygon& r) const;

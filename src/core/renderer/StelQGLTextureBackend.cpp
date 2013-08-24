@@ -70,7 +70,7 @@ StelQGLTextureBackend::StelQGLTextureBackend
 	, loader(NULL)
 	, pixelBytes(0.0f)
 {
-	renderer->getStatisticsWritable()[TEXTURES_CREATED] += 1.0;
+	renderer->getStatisticsWritable()["textures_created"] += 1.0;
 	invariant();
 }
 
@@ -82,7 +82,7 @@ StelQGLTextureBackend::~StelQGLTextureBackend()
 	if (getStatus() == TextureStatus_Loaded)
 	{
 		const QSize size = getDimensions();
-		renderer->getStatisticsWritable()[ESTIMATED_TEXTURE_MEMORY] -= 
+		renderer->getStatisticsWritable()["estimated_texture_memory"] -= 
 			size.width() * size.height() * pixelBytes;
 		renderer->makeGLContextCurrent();
 		if (glIsTexture(glTextureID) == GL_FALSE)
@@ -224,7 +224,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromFBO
 	// To simplify code, we assume 4 bytes per fixel (32bit RGBA) - this 
 	// is most common, but might not always be the case.
 	result->pixelBytes = 4.0f;
-	renderer->getStatisticsWritable()[ESTIMATED_TEXTURE_MEMORY]
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
 		+= fbo->size().width() * fbo->size().height() * result->pixelBytes;
 
 	result->finishedLoading(fbo->size());
@@ -296,7 +296,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 	glViewport(0, 0, viewportSize.width(), viewportSize.height());
 
 	// Will need change if different screen bit depths are ever supported
-	renderer->getStatisticsWritable()[ESTIMATED_TEXTURE_MEMORY]
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
 		+= size.width() * size.height() * result->pixelBytes;
 
 	result->startedLoading();
@@ -408,7 +408,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromRawData
 		return result;
 	}
 
-	renderer->getStatisticsWritable()[ESTIMATED_TEXTURE_MEMORY]
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
 		+= size.width() * size.height() * result->pixelBytes;
 	// Finish constructing the texture.
 	result->setTextureWrapping();
@@ -543,7 +543,7 @@ void StelQGLTextureBackend::completeLoading()
 	{
 		qWarning() << "Zero-area texture: " << width << "x" << height;
 	}
-	renderer->getStatisticsWritable()[ESTIMATED_TEXTURE_MEMORY]
+	renderer->getStatisticsWritable()["estimated_texture_memory"]
 		+= width * height * pixelBytes;
 	finishedLoading(QSize(width, height));
 }
