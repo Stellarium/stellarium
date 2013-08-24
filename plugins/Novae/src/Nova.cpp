@@ -239,31 +239,30 @@ float Nova::getVMagnitude(const StelCore* core, bool withExtinction) const
 		float step;
 		float d2 = maxMagnitude+2.f;
 		float d3 = maxMagnitude+3.f;
-		float d6 = maxMagnitude+6.f;
-		float d9 = maxMagnitude+9.f;
+		float d6 = maxMagnitude+6.f;		
 
 		if (deltaJD>0 && deltaJD<=t2)
 		{
-			step = d2/t2;
+			step = 2.f/t2;
 			vmag = maxMagnitude + step*deltaJD;
 		}
 
 		if (deltaJD>t2 && deltaJD<=t3)
 		{
-			step = d3/t3;
-			vmag = maxMagnitude + step*deltaJD + d2;
+			step = 3.f/t3;
+			vmag = d2 + step*(deltaJD-t2);
 		}
 
 		if (deltaJD>t3 && deltaJD<=t6)
 		{
-			step = d6/t6;
-			vmag = maxMagnitude + step*deltaJD + d3;
+			step = 6.f/t6;
+			vmag = d3 + step*(deltaJD-t3);
 		}
 
 		if (deltaJD>t6 && deltaJD<=t9)
 		{
-			step = d9/t9;
-			vmag = maxMagnitude + step*deltaJD + d6;
+			step = 9.f/t9;
+			vmag = d6 + step*(deltaJD-t6);
 		}
 
 		if (deltaJD>t9)
