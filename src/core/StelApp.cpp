@@ -222,16 +222,7 @@ void StelApp::init(QSettings* conf)
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
-#ifndef USE_OPENGL_ES2
-	// Avoid using GL Shaders by default since it causes so many problems with broken drivers.
-	useGLShaders = confSettings->value("main/use_glshaders", false).toBool();
-	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms() && !qApp->property("onetime_safe_mode").isValid();
-
-	// We use OpenGL 2.1 features in our shaders
-	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
-#else
-	useGLShaders = true;
-#endif
+	Q_ASSERT(QGLShaderProgram::hasOpenGLShaderPrograms());
 
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();

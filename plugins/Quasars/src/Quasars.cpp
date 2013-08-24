@@ -82,12 +82,12 @@ Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
  Constructor
 */
 Quasars::Quasars()
-	: progressBar(NULL)
-	, flagShowQuasars(false)
+	: flagShowQuasars(false)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
 	, toolbarButton(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Quasars");
 	configDialog = new QuasarsDialog();

@@ -82,12 +82,12 @@ Q_EXPORT_PLUGIN2(Pulsars, PulsarsStelPluginInterface)
  Constructor
 */
 Pulsars::Pulsars()
-	: progressBar(NULL)
-	, flagShowPulsars(false)
+	: flagShowPulsars(false)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
 	, toolbarButton(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
