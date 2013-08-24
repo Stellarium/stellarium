@@ -195,6 +195,7 @@ protected:
 		// Called at initialization, so can't call invariant
 		if(!gl.hasOpenGLFeature(QGLFunctions::Multitexture))
 		{
+			invariant();
 			return 1;
 		}
 		int textureUnitCount;
