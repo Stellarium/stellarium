@@ -32,7 +32,6 @@
 #include <QDebug>
 #include <QLocale>
 #include <QRegExp>
-#include <QtGlobal>
 
 namespace StelUtils
 {
@@ -1062,6 +1061,7 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 	return period/86400; // return period in days
 }
 
+
 QString hoursToHmsStr(const double hours)
 {
 	int h = (int)hours;
@@ -1069,41 +1069,6 @@ QString hoursToHmsStr(const double hours)
 	float s = (((std::abs(hours)-std::abs(h))*60)-m)*60;
 
 	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
-}
-
-#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-#include <sys/time.h>
-#else
-#include <time.h>
-#endif
-
-//! Get current time in seconds (relative to some arbitrary beginning in the past)
-//!
-//! Currently we only have a high-precision implementation for Mac, Linux and 
-//! FreeBSD. A Windows implementation would be good as well (clock_t, 
-//! which we use right now, might be faster/slower than wall clock time 
-//! and usually supports milliseconds at best).
-static long double getTime()
-{
-#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-	struct timeval timeVal;
-	if(gettimeofday(&timeVal, NULL) != 0)
-	{
-		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to get time");
-	}
-	return static_cast<long double>(timeVal.tv_sec) + 0.000001L * timeVal.tv_usec;
-#else
-	clock_t cpuTime = clock();
-	return static_cast<long double>(cpuTime) / CLOCKS_PER_SEC;
-#endif
-}
-
-//! Time when the program execution started.
-long double startTime = getTime();
-
-long double secondsSinceStart()
-{
-	return getTime() - startTime;
 }
 
 /* /////////////////// DELTA T VARIANTS
