@@ -25,7 +25,6 @@
 #include <QMap>
 #include <QTime>
 
-#include "renderer/StelRenderer.hpp"
 
 //! Displays statistics about the running renderer (e.g. draws, texture memory usage, etc.).
 class RendererStatistics : public StelModule
@@ -58,7 +57,7 @@ private:
 	class StelButton* toolbarButton;
 
 	//! Renderer statistics from the last update.
-	StelRendererStatistics statistics;
+	QMap<const char*, double> statistics;
 
 	//! Last time the statistics were updated.
 	QTime lastUpdateTime;
