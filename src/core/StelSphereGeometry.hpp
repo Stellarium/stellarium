@@ -332,11 +332,7 @@ public:
 	//! @return a list of vertices which define the contours of the polygon.
 	virtual const QVector<Vec3d>& getOutlineVertexPositions() const 
 	{
-		// This is a workaround around a compiler bug with Clang (as of Clang 3.2).
-		// Returning the reference directly results in an uninitialized
-		// reference which breaks calling code.
-		const QVector<Vec3d>& result(getOctahedronPolygon().outlineVertices());
-		return result;
+		return getOctahedronPolygon().outlineVertices();
 	}
 
 	//! Get primitive type determining how vertices in vector returned by
@@ -544,11 +540,8 @@ public:
 	virtual SphericalCap getBoundingCap() const {return *this;}
 
 	// Contain and intersect	
-	bool contains(const Vec3d &v) const 
-	{
-		Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);
-		return (v*n>=d);
-	}
+	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);return (v*n>=d);}
+	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000002f);return (v[0]*n[0]+v[1]*n[1]+v[2]*n[2]>=d);}
 	virtual bool contains(const SphericalConvexPolygon& r) const;
 	virtual bool contains(const SphericalCap& h) const
 	{
