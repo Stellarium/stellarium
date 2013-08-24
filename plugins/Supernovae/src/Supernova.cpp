@@ -24,6 +24,7 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StarMgr.hpp"
 #include "StelRenderer.hpp"
 
 #include <QTextStream>
@@ -221,6 +222,7 @@ void Supernova::update(double deltaTime)
 void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
+	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
 	if (StelApp::getInstance().getVisionModeNight())
@@ -245,7 +247,7 @@ void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 		renderer->setGlobalColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
-		if (labelsFader.getInterstate()<=0.f)
+		if (labelsFader.getInterstate()<=0.f && smgr->getFlagLabels())
 		{
 			renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
 		}
