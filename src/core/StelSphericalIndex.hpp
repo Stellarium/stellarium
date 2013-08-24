@@ -75,7 +75,7 @@ private:
 	struct CountFunc
 	{
 		CountFunc() : nb(0) {;}
-		void operator()(const StelRegionObject*)
+		void operator()(const StelRegionObjectP&)
 		{
 			++nb;
 		}
@@ -239,11 +239,8 @@ private:
 			{
 				foreach (const NodeElem& el, node.elements)
 				{
-					// Optimization: We pass a plain pointer here, not smart pointer.
-					// As long as the FuncObject does not need to store the pointer,
-					// this isn't a problem.
 					if (region->intersects(el.obj->getRegion().data()))
-						func(&(*el.obj));
+						func(el.obj);
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -258,11 +255,8 @@ private:
 			{
 				foreach (const NodeElem& el, node.elements)
 				{
-					// Optimization: We pass a plain pointer here, not smart pointer.
-					// As long as the FuncObject does not need to store the pointer,
-					// this isn't a problem.
 					if (cap.intersects(el.cap))
-						func(&(*el.obj));
+						func(el.obj);
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -278,11 +272,8 @@ private:
 			{
 				foreach (const NodeElem& el, node.elements)
 				{
-					// Optimization: We pass a plain pointer here, not smart pointer.
-					// As long as the FuncObject does not need to store the pointer,
-					// this isn't a problem.
 					if (region->contains(el.obj->getRegion().data()))
-						func(&(*el.obj));
+						func(el.obj);
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -296,11 +287,8 @@ private:
 			//! Process all the objects intersecting the given region using the passed function object.
 			template<class FuncObject> void processAll(const Node& node, FuncObject& func) const
 			{
-				// Optimization: We pass a plain pointer here, not smart pointer.
-				// As long as the FuncObject does not need to store the pointer,
-				// this isn't a problem.
 				foreach (const NodeElem& el, node.elements)
-					func(&(*el.obj));
+					func(el.obj);
 				foreach (const Node& child, node.children)
 					processAll(child, func);
 			}
