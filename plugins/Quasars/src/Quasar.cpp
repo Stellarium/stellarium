@@ -203,12 +203,7 @@ void Quasar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP project
 		if (mag <= sd->getLimitMagnitude())
 		{
 			sd->computeRCMag(mag, rcMag);
-			const Vec3f XYZf(XYZ[0], XYZ[1], XYZ[2]);
-			Vec3f win;
-			if(sd->pointSourceVisible(&(*projector), XYZf, rcMag, false, win))
-			{
-				sd->drawPointSource(win, rcMag, sd->indexToColor(BvToColorIndex(bV)));
-			}
+			sd->drawPointSource(projector, XYZ, rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
 			renderer->setGlobalColor(color[0], color[1], color[2], 1.0f);
 			size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 			shift = 6.f + size/1.8f;

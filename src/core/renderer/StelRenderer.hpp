@@ -28,7 +28,6 @@
 #include "StelCore.hpp"
 #include "StelGLSLShader.hpp"
 #include "StelIndexBuffer.hpp"
-#include "StelRendererStatistics.hpp"
 #include "StelVertexAttribute.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
@@ -662,7 +661,7 @@ public:
 	//!
 	//! Contents are backend specific - 
 	//! might include thing like vertices per frame, estimated texture memory, etc. .
-	virtual StelRendererStatistics& getStatistics() = 0;
+	virtual const QMap<const char*, double>& getStatistics() const = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.

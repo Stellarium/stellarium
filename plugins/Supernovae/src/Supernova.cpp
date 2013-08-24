@@ -235,13 +235,8 @@ void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 	
 	if (mag <= sd->getLimitMagnitude())
 	{
-		sd->computeRCMag(mag, rcMag);
-		const Vec3f XYZf(XYZ[0], XYZ[1], XYZ[2]);
-		Vec3f win;
-		if(sd->pointSourceVisible(&(*projector), XYZf, rcMag, false, win))
-		{
-			sd->drawPointSource(win, rcMag, color);
-		}
+		sd->computeRCMag(mag, rcMag);		
+		sd->drawPointSource(projector, XYZ, rcMag, color, false);
 		renderer->setGlobalColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
