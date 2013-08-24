@@ -324,7 +324,7 @@ void Nova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector
 		renderer->setGlobalColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
-		if (labelsFader.getInterstate()<=0.f && (mag+2.f)<mlimit && smgr->getFlagLabels())
+		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
 			QString name = novaName.isEmpty() ? designation : novaName;
 			renderer->drawText(TextParams(XYZ, projector, name).shift(shift, shift).useGravity());
