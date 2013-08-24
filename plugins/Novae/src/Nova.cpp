@@ -24,6 +24,7 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StarMgr.hpp"
 #include "StelRenderer.hpp"
 #include "StelLocaleMgr.hpp"
 
@@ -298,6 +299,7 @@ void Nova::update(double deltaTime)
 void Nova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
+	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
 	if (StelApp::getInstance().getVisionModeNight())
@@ -323,7 +325,7 @@ void Nova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector
 		renderer->setGlobalColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
-		if (labelsFader.getInterstate()<=0.f && (mag+2.f)<mlimit)
+		if (labelsFader.getInterstate()<=0.f && (mag+2.f)<mlimit && smgr->getFlagLabels())
 		{
 			QString name = novaName.isEmpty() ? designation : novaName;
 			renderer->drawText(TextParams(XYZ, projector, name).shift(shift, shift).useGravity());
