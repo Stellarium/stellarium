@@ -150,7 +150,7 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 
-	Vec3f pos;
+	Vec3d pos;
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.yy
 
 	renderer->setFont(font);
@@ -160,6 +160,7 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 	renderer->setGlobalColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
 	renderer->setBlendMode(BlendMode_Alpha);
 
+	StelCircleArcRenderer circleArcRenderer(renderer, prj);
 	const QFontMetrics fontMetrics(font);
 	
 	for(int i=0; i<360; i++)
@@ -181,11 +182,7 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
-		Vec3f win1, win2;
-		if(prj->project(pos, win1) && prj->project(Vec3f(pos[0], pos[1], h), win2))
-		{
-			renderer->drawLine(win1[0], win1[1], win2[0], win2[1]);
-		}
+		circleArcRenderer.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h));
 	}
 }
 
