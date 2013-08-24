@@ -28,16 +28,16 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "renderer/GenericVertexTypes.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 
+#include <QtOpenGL>
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>
@@ -91,7 +91,7 @@ StelCore::~StelCore()
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
-void StelCore::init(class StelRenderer* renderer)
+void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
@@ -146,7 +146,7 @@ void StelCore::init(class StelRenderer* renderer)
 	currentProjectorParams.fov = movementMgr->getInitFov();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
-	skyDrawer = new StelSkyDrawer(this, renderer);
+	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
@@ -317,72 +317,26 @@ void StelCore::update(double deltaTime)
 *************************************************************************/
 void StelCore::preDraw()
 {
+	// Init openGL viewing with fov, screen size and clip planes
 	currentProjectorParams.zNear = 0.000001;
 	currentProjectorParams.zFar = 50.;
+
 	skyDrawer->preDraw();
+
+	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	StelPainter sPainter(getProjection2d());
+	glClearColor(0,0,0,0);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-//! Fill with black around viewport disc shape.
-static void drawViewportShape(StelRenderer* renderer, StelProjectorP projector)
-{
-	if (projector->getMaskType() != StelProjector::MaskDisk)
-	{
-		return;
-	}
-
-	renderer->setBlendMode(BlendMode_None);
-	renderer->setGlobalColor(0.0f, 0.0f, 0.0f);
-
-	const float innerRadius = 0.5 * projector->getViewportFovDiameter();
-	const float outerRadius = projector->getViewportWidth() + projector->getViewportHeight();
-	Q_ASSERT_X(innerRadius >= 0.0f && outerRadius > innerRadius,
-	           Q_FUNC_INFO, "Inner radius must be at least zero and outer radius must be greater");
-
-	const float sweepAngle = 360.0f;
-
-	static const int resolution = 192;
-
-	float sinCache[resolution];
-	float cosCache[resolution];
-
-	const float deltaRadius = outerRadius - innerRadius;
-	const int slices = resolution - 1;
-	// Cache is the vertex locations cache
-	for (int s = 0; s <= slices; s++)
-	{
-		const float angle = (M_PI * sweepAngle) / 180.0f * s / slices;
-		sinCache[s] = std::sin(angle);
-		cosCache[s] = std::cos(angle);
-	}
-	sinCache[slices] = sinCache[0];
-	cosCache[slices] = cosCache[0];
-
-	const float radiusHigh = outerRadius - deltaRadius;
-
-	StelVertexBuffer<VertexP2>* vertices = 
-		renderer->createVertexBuffer<VertexP2>(PrimitiveType_TriangleStrip);
-
-	const Vec2f center = projector->getViewportCenterAbsolute();
-	for (int i = 0; i <= slices; i++)
-	{
-		vertices->addVertex(VertexP2(center[0] + outerRadius * sinCache[i],
-		                             center[1] + outerRadius * cosCache[i]));
-		vertices->addVertex(VertexP2(center[0] + radiusHigh * sinCache[i],
-		                             center[1] + radiusHigh * cosCache[i]));
-	}
-
-	vertices->lock();
-	renderer->setCulledFaces(CullFace_None);
-	renderer->drawVertexBuffer(vertices);
-	delete vertices;
-}
 
 /*************************************************************************
  Update core state after drawing modules
 *************************************************************************/
-void StelCore::postDraw(StelRenderer* renderer)
+void StelCore::postDraw()
 {
-	drawViewportShape(renderer, getProjection(StelCore::FrameJ2000));
+	StelPainter sPainter(getProjection(StelCore::FrameJ2000));
+	sPainter.drawViewportShape();
 }
 
 void StelCore::setCurrentProjectionType(ProjectionType type)

@@ -18,57 +18,32 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "Nebula.hpp"
-#include "NebulaMgr.hpp"
-
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
-#include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelUtils.hpp"
-
-#include <QBuffer>
-#include <QDebug>
+#include <QTextStream>
 #include <QFile>
 #include <QString>
-#include <QTextStream>
 
+#include "Nebula.hpp"
+#include "NebulaMgr.hpp"
+#include "StelTexture.hpp"
+
+#include "StelUtils.hpp"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelCore.hpp"
+#include "StelPainter.hpp"
+
+#include <QDebug>
+#include <QBuffer>
+
+StelTextureSP Nebula::texCircle;
+StelTextureSP Nebula::texOpenCluster;
+StelTextureSP Nebula::texGlobularCluster;
+StelTextureSP Nebula::texPlanetNebula;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
-
-Nebula::NebulaHintTextures::~NebulaHintTextures()
-{
-	if(!initialized){return;}
-
-	delete texCircle; 
-	delete texGalaxy;
-	delete texOpenCluster;    
-	delete texGlobularCluster;
-	delete texPlanetaryNebula;   
-	delete texDiffuseNebula;
-	delete texOpenClusterWithNebulosity;
-	
-	initialized = false;
-}
-
-void Nebula::NebulaHintTextures::lazyInit(StelRenderer* renderer)
-{
-	if(initialized){return;}
-
-	texCircle          = renderer->createTexture("textures/neb.png");      // Load circle texture
-	texGalaxy          = renderer->createTexture("textures/neb_gal.png");  // Load ellipse texture
-	texOpenCluster     = renderer->createTexture("textures/neb_ocl.png");  // Load open cluster marker texture
-	texGlobularCluster = renderer->createTexture("textures/neb_gcl.png");  // Load globular cluster marker texture
-	texPlanetaryNebula = renderer->createTexture("textures/neb_pnb.png");  // Load planetary nebula marker texture
-	texDiffuseNebula   = renderer->createTexture("textures/neb_dif.png");  // Load diffuse nebula marker texture
-	texOpenClusterWithNebulosity = renderer->createTexture("textures/neb_ocln.png");  // Load Ocl/Nebula marker texture
-
-	initialized = true;
-}
-
 
 Nebula::Nebula() :
 		M_nb(0),
@@ -180,7 +155,7 @@ double Nebula::getCloseViewFov(const StelCore*) const
 	return angularSize>0 ? angularSize * 4 : 1;
 }
 
-void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintTextures& hintTextures)
+void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
 	float lim = mag;
 	if (lim > 50) lim = 15.f;
@@ -191,50 +166,20 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintText
 
 	if (lim>maxMagHints)
 		return;
-	renderer->setBlendMode(BlendMode_Add);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 	if (StelApp::getInstance().getVisionModeNight())
 		col = StelUtils::getNightColor(col);
 
-	renderer->setGlobalColor(col[0], col[1], col[2], 1);
-/*
-	if (nType == NebGx)		 hintTextures.texGalaxy->bind();
-	else if (nType == NebOc) hintTextures.texOpenCluster->bind();
-	else if (nType == NebGc) hintTextures.texGlobularCluster->bind();
-	else if (nType == NebN)  hintTextures.texDiffuseNebula->bind();
-	else if (nType == NebPn) hintTextures.texPlanetaryNebula->bind();
-	else if (nType == NebCn) hintTextures.texOpenClusterWithNebulosity->bind();
-	else hintTextures.texCircle->bind();
-*/
-	switch (nType) {
-		case NebGx:
-			hintTextures.texGalaxy->bind();
-			break;
-		case NebOc:
-			hintTextures.texOpenCluster->bind();
-			break;
-		case NebGc:
-			hintTextures.texGlobularCluster->bind();
-			break;
-		case NebN:
-			hintTextures.texDiffuseNebula->bind();
-			break;
-		case NebPn:
-			hintTextures.texPlanetaryNebula->bind();
-			break;
-		case NebCn:
-			hintTextures.texOpenClusterWithNebulosity->bind();
-			break;
-		default:
-			hintTextures.texCircle->bind();
-	}
+	sPainter.setColor(col[0], col[1], col[2], 1);
+		Nebula::texCircle->bind();
 
-	renderer->drawTexturedRect(XY[0] - 6, XY[1] - 6, 12, 12);
+	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
 }
 
-
-void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float maxMagLabel)
+void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
 	float lim = mag;
 	if (lim > 50) lim = 15.f;
@@ -249,8 +194,10 @@ void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float m
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
 	if (StelApp::getInstance().getVisionModeNight())
 		col = StelUtils::getNightColor(col);
-	renderer->setGlobalColor(col[0], col[1], col[2], hintsBrightness);
 
+	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
+	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+	float shift = 4.f + size/1.8f;
 	QString str;
 	if (!nameI18.isEmpty())
 		str = getNameI18n();
@@ -264,12 +211,9 @@ void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float m
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
 			str = QString("IC %1").arg(IC_nb);		
-	}                   
+	}
 
-	float size = getAngularSize(NULL) * M_PI / 180.0 * projector->getPixelPerRadAtCenter();
-	float shift = 4.f + size / 1.8f;
-
-	renderer->drawText(TextParams(XY[0] + shift, XY[1] + shift, str).useGravity().projector(projector));
+	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
 

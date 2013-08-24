@@ -17,6 +17,7 @@
  */
 
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -24,6 +25,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -31,8 +33,6 @@
 #include "LabelMgr.hpp"
 #include "Supernova.hpp"
 #include "Supernovae.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
 #include "SupernovaeDialog.hpp"
 
 #include <QNetworkAccessManager>
@@ -41,15 +41,14 @@
 #include <QAction>
 #include <QProgressBar>
 #include <QDebug>
-#include <QFile>
 #include <QFileInfo>
+#include <QFile>
 #include <QTimer>
+#include <QVariantMap>
+#include <QVariant>
 #include <QList>
-#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
-#include <QVariant>
-#include <QVariantMap>
 #include <QDir>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
@@ -83,8 +82,7 @@ Q_EXPORT_PLUGIN2(Supernovae, SupernovaeStelPluginInterface)
  Constructor
 */
 Supernovae::Supernovae()
-	: texPointer(NULL)
-	, progressBar(NULL)
+	: progressBar(NULL)
 {
 	setObjectName("Supernovae");
 	configDialog = new SupernovaeDialog();
@@ -102,10 +100,7 @@ Supernovae::~Supernovae()
 
 void Supernovae::deinit()
 {
-	if(NULL != texPointer)
-	{
-		delete texPointer;
-	}
+	texPointer.clear();
 }
 
 /*
@@ -139,6 +134,9 @@ void Supernovae::init()
 		readSettingsFromConfig();
 
 		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
+
+		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
@@ -192,27 +190,27 @@ void Supernovae::init()
 /*
  Draw our module. This should print name of first SNe in the main window
 */
-void Supernovae::draw(StelCore* core, StelRenderer* renderer)
+void Supernovae::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	renderer->setFont(font);
+	StelPainter painter(prj);
+	painter.setFont(font);
 	
 	foreach (const SupernovaP& sn, snstar)
 	{
 		if (sn && sn->initialized)
-		{
-			sn->draw(core, renderer, prj);
-		}
+			sn->draw(core, painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-	{
-		drawPointer(core, renderer, prj);
-	}
+		drawPointer(core, painter);
+
 }
 
-void Supernovae::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
 {
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Supernova");
 	if (!newSelected.empty())
 	{
@@ -221,21 +219,16 @@ void Supernovae::drawPointer(StelCore* core, StelRenderer* renderer, StelProject
 
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, screenpos))
-		{
+		if (!painter.getProjector()->project(pos, screenpos))
 			return;
-		}
 
 		const Vec3f& c(obj->getInfoColor());
-		renderer->setGlobalColor(c[0],c[1],c[2]);
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur2.png");
-		}
+		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		renderer->setBlendMode(BlendMode_Alpha);
-		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 26.0f,
-		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
+		painter.enableTexture2d(true);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 

@@ -21,6 +21,8 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Quasar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -28,6 +30,7 @@
 #include <QList>
 #include <QSharedPointer>
 
+class StelPainter;
 
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -63,8 +66,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -201,8 +204,7 @@ private:
 
 	QString catalogJsonPath;
 
-	class StelTextureNew* texPointer;
-	class StelTextureNew* markerTexture;
+	StelTextureSP texPointer;
 	QList<QuasarP> QSO;
 
 	// variables and functions for the updater

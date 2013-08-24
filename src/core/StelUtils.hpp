@@ -24,7 +24,6 @@
 
 #include <QVariantMap>
 #include <QDateTime>
-#include <QSize>
 #include <QString>
 
 // astonomical unit (km)
@@ -95,7 +94,7 @@ namespace StelUtils
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
-	//! @param s The input string
+	//! @param dsm The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
@@ -174,11 +173,8 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(const int value);
 
-	//! Return the first power of two greater or equal to the given value.
-	int smallestPowerOfTwoGreaterOrEqualTo(const int value);
-
-	//! Return the smallest size with power-of two dimensions at least as large as given size.
-	QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base);
+	//! Return the first power of two bigger than the given value.
+	int getBiggerPowerOfTwo(int value);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(const double z);

@@ -24,11 +24,12 @@
 #include "StelProjector.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
 #include "MilkyWay.hpp"
 #include "StelGuiBase.hpp"
 #include "StelSkyDrawer.hpp"
-#include "renderer/StelRenderer.hpp"
 
+#include <QtOpenGL>
 #include <QNetworkAccessManager>
 #include <stdexcept>
 #include <QDebug>
@@ -38,8 +39,7 @@
 #include <QVariantList>
 #include <QSettings>
 
-StelSkyLayerMgr::StelSkyLayerMgr() 
-	: flagShow(true)
+StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
 {
 	setObjectName("StelSkyLayerMgr");
 }
@@ -152,26 +152,29 @@ void StelSkyLayerMgr::removeSkyLayer(StelSkyLayerP l)
 }
 
 // Draw all the multi-res images collection
-void StelSkyLayerMgr::draw(StelCore* core, StelRenderer* renderer)
+void StelSkyLayerMgr::draw(StelCore* core)
 {
 	if (!flagShow)
 		return;
 
-	renderer->setBlendMode(BlendMode_Add);
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+	glBlendFunc(GL_ONE, GL_ONE);
+	glEnable(GL_BLEND);
 	foreach (SkyLayerElem* s, allSkyLayers)
 	{
 		if (s->show) 
 		{
 			if (s->layer->getFrameType() == StelCore::FrameAltAz) 
 			{
-				s->layer->draw(core, renderer, core->getProjection(StelCore::FrameAltAz), 1.);
+				sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
 			} 
 			else
 			{
 				// TODO : Use the respective reference frames, once every SkyLayer
 				// object sets their frame type. Defaulting to Equatorial frame now.
-				s->layer->draw(core, renderer, core->getProjection(StelCore::FrameJ2000), 1.);
+				sPainter.setProjector(core->getProjection(StelCore::FrameJ2000));
 			}
+			s->layer->draw(core, sPainter, 1.);
 		}
 	}
 }
