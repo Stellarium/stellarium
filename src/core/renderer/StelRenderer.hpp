@@ -658,12 +658,10 @@ public:
 	//! e.g. during loading at startup.
 	virtual void swapBuffers() = 0;
 
-	//! Access statistics data.
+	//! Get collected statistics data.
 	//!
 	//! Contents are backend specific - 
 	//! might include thing like vertices per frame, estimated texture memory, etc. .
-	//!
-	//! User code might add its own statistics as well (e.g. StelSkyDrawer).
 	virtual StelRendererStatistics& getStatistics() = 0;
 
 protected:
