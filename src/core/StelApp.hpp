@@ -161,9 +161,6 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
-	//! Get flag for using opengl shaders
-	bool getUseGLShaders() const {return useGLShaders;}
-
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -252,9 +249,6 @@ private:
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
-
-	//! Define whether we use opengl shaders
-	bool useGLShaders;
 
 	QSettings* confSettings;
 

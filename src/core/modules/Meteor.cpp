@@ -256,7 +256,6 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	}
 	else
 	{
-		sPainter.setPointSize(1.f);
 		Vec3d start;
 		proj->project(spos, start);
 		sPainter.drawPoint2d(start[0],start[1]);

@@ -95,9 +95,6 @@ private:
 	LinearFader fader;
 	float lightPollutionLuminance;
 
-	//! Whether vertex shader should be used
-	bool useShader;
-
 	//! Vertex shader used for xyYToRGB computation
 	class QGLShaderProgram* atmoShaderProgram;
 	struct {

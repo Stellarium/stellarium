@@ -715,7 +715,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 			const double T=(jd-2451545.0)/36525.0;
 			const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 			const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 			const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 			double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
@@ -982,13 +982,11 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
 	if (nb_facet<10) nb_facet = 10;
 	if (nb_facet>40) nb_facet = 40;
-	painter->setShadeModel(StelPainter::ShadeModelSmooth);
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
 
 	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-	painter->setShadeModel(StelPainter::ShadeModelFlat);
 	glDisable(GL_CULL_FACE);
 }
 
