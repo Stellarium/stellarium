@@ -49,7 +49,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 	QGLShader* vShader = new QGLShader(QGLShader::Vertex);
 	if (!vShader->compileSourceFile(":/shaders/xyYToRGB.glsl"))
 	{
-		qFatal("Error while compiling atmosphere vertex shader: %s", vShader->log().toAscii().constData());
+		qFatal("Error while compiling atmosphere vertex shader: %s", vShader->log().toLatin1().constData());
 	}
 	if (!vShader->log().isEmpty())
 	{
@@ -63,7 +63,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 					 "   gl_FragColor = resultSkyColor;\n"
 					 "}"))
 	{
-		qFatal("Error while compiling atmosphere fragment shader: %s", fShader->log().toAscii().constData());
+		qFatal("Error while compiling atmosphere fragment shader: %s", fShader->log().toLatin1().constData());
 	}
 	if (!fShader->log().isEmpty())
 	{
@@ -74,7 +74,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 	atmoShaderProgram->addShader(fShader);
 	if (!atmoShaderProgram->link())
 	{
-		qFatal("Error while linking atmosphere shader program: %s", atmoShaderProgram->log().toAscii().constData());
+		qFatal("Error while linking atmosphere shader program: %s", atmoShaderProgram->log().toLatin1().constData());
 	}
 	if (!atmoShaderProgram->log().isEmpty())
 	{

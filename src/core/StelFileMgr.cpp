@@ -84,7 +84,8 @@ void StelFileMgr::init()
 		qWarning() << "WARNING: could not locate installation directory";
 	}
 
-	screenshotDir = QDesktopServices::storageLocation(QDesktopServices::PicturesLocation);
+	if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0];
 }
 
 
@@ -355,7 +356,11 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 
 QString StelFileMgr::getDesktopDir()
 {
-	QString result = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+
+	if (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).isEmpty())
+		throw std::runtime_error("Can't find Desktop directory");
+
+	QString result = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
 
 	if (!QFileInfo(result).isDir())
 	{
@@ -477,12 +482,7 @@ QString StelFileMgr::getLocaleDir()
 // Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
 QString StelFileMgr::getCacheDir()
 {
-	const QString& cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-	if (cachePath.isEmpty())
-	{
-		return getUserDir()+"/cache";
-	}
-	return cachePath;
+	return (QStandardPaths::standardLocations(QStandardPaths::CacheLocation) << getUserDir() + "/cache")[0];
 }
 
 

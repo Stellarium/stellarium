@@ -20,10 +20,10 @@ SET(SupernovaeDialog_UIS
     gui/supernovaeDialog.ui
 )
 
-QT4_WRAP_UI(SupernovaeDialog_UIS_H ${SupernovaeDialog_UIS})
+QT5_WRAP_UI(SupernovaeDialog_UIS_H ${SupernovaeDialog_UIS})
 
 SET(Supernovae_RES ../resources/Supernovae.qrc)
-QT4_ADD_RESOURCES(Supernovae_RES_CXX ${Supernovae_RES})
+QT5_ADD_RESOURCES(Supernovae_RES_CXX ${Supernovae_RES})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 

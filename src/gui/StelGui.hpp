@@ -235,6 +235,7 @@ private:
 class StelStandardGuiPluginInterface : public QObject, public StelGuiPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelGuiPluginInterface)
 public:
 	virtual class StelGuiBase* getStelGuiBase() const;

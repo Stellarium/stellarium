@@ -94,8 +94,6 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(TextUserInterface, TextUserInterfaceStelPluginInterface)
-
 
 /*************************************************************************
  Constructor

@@ -75,9 +75,6 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Pulsars, PulsarsStelPluginInterface)
-
-
 /*
  Constructor
 */

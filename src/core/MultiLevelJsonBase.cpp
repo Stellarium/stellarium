@@ -28,7 +28,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QHttp>
 #include <QUrl>
 #include <QDir>
 #include <QBuffer>
@@ -171,7 +170,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		Q_ASSERT(httpReply==NULL);
 		QNetworkRequest req(qurl);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 		httpReply = getNetworkAccessManager().get(req);
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);

@@ -19,11 +19,11 @@ SET(Observability_SRCS
 SET(ObservabilityDialog_UIS
   gui/ObservabilityDialog.ui
 )
-QT4_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
+QT5_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
 
 
 SET(Observability_RES ../Observability.qrc)
-QT4_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
+QT5_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
 
 
 SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})

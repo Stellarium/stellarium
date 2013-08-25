@@ -115,7 +115,7 @@ StelApp::StelApp(QObject* parent)
 
 	wheelEventTimer = new QTimer(this);
 	wheelEventTimer->setInterval(25);
-	wheelEventTimer->setSingleShot(TRUE);
+	wheelEventTimer->setSingleShot(true);
 }
 
 /*************************************************************************
@@ -466,7 +466,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 
 		wheelEventTimer->start();
 		QWheelEvent deltaEvent(event->pos(), event->globalPos(), delta, event->buttons(), event->modifiers(), event->orientation());
-		deltaEvent.setAccepted(FALSE);
+		deltaEvent.setAccepted(false);
 		// Send the event to every StelModule
 		foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
 			i->handleMouseWheel(&deltaEvent);

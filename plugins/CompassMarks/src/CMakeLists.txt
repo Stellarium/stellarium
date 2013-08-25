@@ -6,7 +6,7 @@ SET(CompassMarks_SRCS
   CompassMarks.cpp)
 
 SET(CompassMarks_RES ../CompassMarks.qrc)
-QT4_ADD_RESOURCES(CompassMarks_RES_CXX ${CompassMarks_RES})
+QT5_ADD_RESOURCES(CompassMarks_RES_CXX ${CompassMarks_RES})
 
 
 SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})

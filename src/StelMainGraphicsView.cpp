@@ -52,78 +52,78 @@
 
 // The static plugins need to be imported here so that they belong to the
 // libStelMain required on win32.
-Q_IMPORT_PLUGIN(StelGui)
+Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_VIRGO
-Q_IMPORT_PLUGIN(VirGO)
+Q_IMPORT_PLUGIN(VirGOStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SVMT
-Q_IMPORT_PLUGIN(SVMT)
+Q_IMPORT_PLUGIN(SVMTStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
-Q_IMPORT_PLUGIN(HelloStelModule)
+Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SIMPLEDRAWLINE
-Q_IMPORT_PLUGIN(SimpleDrawLine)
+Q_IMPORT_PLUGIN(SimpleDrawLineStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_ANGLEMEASURE
-Q_IMPORT_PLUGIN(AngleMeasure)
+Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_COMPASSMARKS
-Q_IMPORT_PLUGIN(CompassMarks)
+Q_IMPORT_PLUGIN(CompassMarksStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
-Q_IMPORT_PLUGIN(Satellites)
+Q_IMPORT_PLUGIN(SatellitesStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_TEXTUSERINTERFACE
-Q_IMPORT_PLUGIN(TextUserInterface)
+Q_IMPORT_PLUGIN(TextUserInterfaceStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_LOGBOOK
-Q_IMPORT_PLUGIN(LogBook)
+Q_IMPORT_PLUGIN(LogBookStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_OCULARS
-Q_IMPORT_PLUGIN(Oculars)
+Q_IMPORT_PLUGIN(OcularsStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_TELESCOPECONTROL
-Q_IMPORT_PLUGIN(TelescopeControl)
+Q_IMPORT_PLUGIN(TelescopeControlStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SOLARSYSTEMEDITOR
-Q_IMPORT_PLUGIN(SolarSystemEditor)
+Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_TIMEZONECONFIGURATION
-Q_IMPORT_PLUGIN(TimeZoneConfiguration)
+Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SUPERNOVAE
-Q_IMPORT_PLUGIN(Supernovae)
+Q_IMPORT_PLUGIN(SupernovaeStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_QUASARS
-Q_IMPORT_PLUGIN(Quasars)
+Q_IMPORT_PLUGIN(QuasarsStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_PULSARS
-Q_IMPORT_PLUGIN(Pulsars)
+Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_EXOPLANETS
-Q_IMPORT_PLUGIN(Exoplanets)
+Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
-Q_IMPORT_PLUGIN(Observability)
+Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
 
 // Initialize static variables
