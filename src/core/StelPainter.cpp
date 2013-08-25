@@ -18,7 +18,6 @@
  */
 
 #include "StelPainter.hpp"
-#include <QtOpenGL>
 
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
@@ -34,6 +33,11 @@
 #include <QMutex>
 #include <QVarLengthArray>
 #include <QPaintEngine>
+#include <QGLWidget>
+#include <QGLContext>
+#include <QCache>
+#include <QOpenGLPaintDevice>
+#include <QOpenGLShader>
 
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
@@ -43,36 +47,14 @@
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
-QPainter* StelPainter::qPainter = NULL;
 QGLContext* StelPainter::glContext = NULL;
 
-bool StelPainter::isNoPowerOfTwoAllowed;
-
- QGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
- QGLShaderProgram* StelPainter::basicShaderProgram=NULL;
- QGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
+ QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
+ QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
+ QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
  StelPainter::BasicShaderVars StelPainter::basicShaderVars;
  StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
  StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
-
-void StelPainter::setQPainter(QPainter* p)
-{
-	qPainter=p;
-	if (p==NULL)
-		return;
-
-	if (p->paintEngine()->type() != QPaintEngine::OpenGL && p->paintEngine()->type() != QPaintEngine::OpenGL2)
-	{
-		qCritical("StelPainter::setQPainter(): StelPainter needs a QGLWidget to be set as viewport on the graphics view");
-		return;
-	}
-	QGLWidget* glwidget = dynamic_cast<QGLWidget*>(p->device());
-	if (glwidget && glwidget->context()!=glContext)
-	{
-		qCritical("StelPainter::setQPainter(): StelPainter needs to paint on a GLWidget with the same GL context as the one used for initialization.");
-		return;
-	}
-}
 
 void StelPainter::makeMainGLContextCurrent()
 {
@@ -94,6 +76,9 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 
 #ifndef NDEBUG
 	Q_ASSERT(globalMutex);
+	
+	initializeOpenGLFunctions();
+	
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
 	{
@@ -108,6 +93,8 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	}
 #endif
 
+	qPainter = new QPainter(new QOpenGLPaintDevice());
+			
 	Q_ASSERT(qPainter);
 	qPainter->beginNativePainting();
 
@@ -142,7 +129,8 @@ StelPainter::~StelPainter()
 	}
 #endif
 	qPainter->endNativePainting();
-
+	delete qPainter;
+	
 #ifndef NDEBUG
 	// We are done with this StelPainter
 	globalMutex->unlock();
@@ -656,7 +644,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			newTex->subTexWidth = strRect.width()+1+(int)(0.02f*strRect.width());
 			newTex->subTexHeight = strRect.height();
 			QPixmap strImage;
-			if (isNoPowerOfTwoAllowed)
+			if (openGLFeatures() & QOpenGLFunctions::NPOTTextures)
 				strImage = QPixmap(newTex->subTexWidth, newTex->subTexHeight);
 			else
 				strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(newTex->subTexWidth), StelUtils::getBiggerPowerOfTwo(newTex->subTexHeight));
@@ -721,7 +709,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setVertexPointer(2, GL_FLOAT, vertexData);
 
 		float* texCoords = NULL;
-		if (isNoPowerOfTwoAllowed)
+		if (openGLFeatures() & QOpenGLFunctions::NPOTTextures)
 			setTexCoordPointer(2, GL_FLOAT, texCoordData);
 		else
 		{
@@ -737,7 +725,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		drawFromArray(TriangleStrip, 4, 0, false);
 		enableClientStates(false);
 
-		if (!isNoPowerOfTwoAllowed)
+		if (!(openGLFeatures() & QOpenGLFunctions::NPOTTextures))
 			delete[] texCoords;
 	}
 }
@@ -1761,10 +1749,9 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	glContext = ctx;
 
 	makeMainGLContextCurrent();
-	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
 
 	// Basic shader: just vertex filled with plain color
-	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
+	QOpenGLShader *vshader3 = new QOpenGLShader(QOpenGLShader::Vertex);
 	const char *vsrc3 =
 		"attribute mediump vec3 vertex;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
@@ -1773,7 +1760,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
 		"}\n";
 	vshader3->compileSourceCode(vsrc3);
-	QGLShader *fshader3 = new QGLShader(QGLShader::Fragment);
+	QOpenGLShader *fshader3 = new QOpenGLShader(QOpenGLShader::Fragment);
 	const char *fsrc3 =
 		"uniform mediump vec4 color;\n"
 		"void main(void)\n"
@@ -1781,7 +1768,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    gl_FragColor = color;\n"
 		"}\n";
 	fshader3->compileSourceCode(fsrc3);
-	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	basicShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	basicShaderProgram->addShader(vshader3);
 	basicShaderProgram->addShader(fshader3);
 	basicShaderProgram->link();
@@ -1790,7 +1777,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
 	
 	// Basic texture shader program
-	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
+	QOpenGLShader *vshader2 = new QOpenGLShader(QOpenGLShader::Vertex);
 	const char *vsrc2 =
 		"attribute highp vec3 vertex;\n"
 		"attribute mediump vec2 texCoord;\n"
@@ -1802,7 +1789,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    texc = texCoord;\n"
 		"}\n";
 	vshader2->compileSourceCode(vsrc2);
-	QGLShader *fshader2 = new QGLShader(QGLShader::Fragment);
+	QOpenGLShader *fshader2 = new QOpenGLShader(QOpenGLShader::Fragment);
 	const char *fsrc2 =
 		"varying mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
@@ -1812,7 +1799,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
 		"}\n";
 	fshader2->compileSourceCode(fsrc2);
-	texturesShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	texturesShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesShaderProgram->addShader(vshader2);
 	texturesShaderProgram->addShader(fshader2);
 	texturesShaderProgram->link();
@@ -1823,7 +1810,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
 
 	// Texture shader program + interpolated color per vertex
-	QGLShader *vshader4 = new QGLShader(QGLShader::Vertex);
+	QOpenGLShader *vshader4 = new QOpenGLShader(QOpenGLShader::Vertex);
 	const char *vsrc4 =
 		"attribute highp vec3 vertex;\n"
 		"attribute mediump vec2 texCoord;\n"
@@ -1838,7 +1825,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    outColor = color;\n"
 		"}\n";
 	vshader4->compileSourceCode(vsrc4);
-	QGLShader *fshader4 = new QGLShader(QGLShader::Fragment);
+	QOpenGLShader *fshader4 = new QOpenGLShader(QOpenGLShader::Fragment);
 	const char *fsrc4 =
 		"varying mediump vec2 texc;\n"
 		"varying mediump vec4 outColor;\n"
@@ -1848,7 +1835,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    gl_FragColor = texture2D(tex, texc)*outColor;\n"
 		"}\n";
 	fshader4->compileSourceCode(fsrc4);
-	texturesColorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
+	texturesColorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesColorShaderProgram->addShader(vshader4);
 	texturesColorShaderProgram->addShader(fshader4);
 	texturesColorShaderProgram->link();
@@ -1897,7 +1884,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
 	}
 
-	QGLShaderProgram* pr=NULL;
+	QOpenGLShaderProgram* pr=NULL;
 
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);

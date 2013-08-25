@@ -51,6 +51,7 @@
 #include <QStringList>
 #include <QPixmap>
 #include <QDir>
+#include <QSettings>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 

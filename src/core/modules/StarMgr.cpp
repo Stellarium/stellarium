@@ -27,6 +27,8 @@
 #include <QRegExp>
 #include <QDebug>
 #include <QFileInfo>
+#include <QDir>
+#include <QCryptographicHash>
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"

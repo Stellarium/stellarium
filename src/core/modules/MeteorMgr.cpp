@@ -20,7 +20,6 @@
 #include <functional>
 #include <cstdlib>
 #include <QSettings>
-#include <QtOpenGL>
 
 #include "StelProjector.hpp"
 

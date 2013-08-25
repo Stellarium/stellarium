@@ -37,7 +37,6 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 
-#include <QtOpenGL>
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>

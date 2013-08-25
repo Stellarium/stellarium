@@ -54,7 +54,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
 
-#include <QtOpenGL>
 #include <QKeyEvent>
 #include <QDebug>
 #include <QLabel>

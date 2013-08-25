@@ -27,12 +27,6 @@
 #include <QFile>
 #include <QTemporaryFile>
 
-#ifdef USE_OPENGL_ES2
- #include "GLES2/gl2.h"
-#else
- #include <QtOpenGL>
-#endif
-
 #include <stdexcept>
 
 #include "LandscapeMgr.hpp"
