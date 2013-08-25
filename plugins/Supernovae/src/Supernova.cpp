@@ -234,8 +234,9 @@ void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 	StelUtils::spheToRect(snra, snde, XYZ);
 	mag = getVMagnitude(core, true);
 	sd->preDrawPointSource();
+	float mlimit = sd->getLimitMagnitude();
 	
-	if (mag <= sd->getLimitMagnitude())
+	if (mag <= mlimit)
 	{
 		sd->computeRCMag(mag, rcMag);
 		const Vec3f XYZf(XYZ[0], XYZ[1], XYZ[2]);
@@ -247,7 +248,7 @@ void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 		renderer->setGlobalColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
-		if (labelsFader.getInterstate()<=0.f && smgr->getFlagLabels())
+		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
 			renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
 		}
