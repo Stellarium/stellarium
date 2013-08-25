@@ -973,7 +973,7 @@ void ConfigurationDialog::downloadStars()
 	QNetworkRequest req(nextStarCatalogToDownload.value("url").toString());
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
@@ -1028,7 +1028,7 @@ void ConfigurationDialog::downloadFinished()
 		starCatalogDownloadReply->deleteLater();
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 		connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
