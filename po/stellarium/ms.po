@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 22:29+0700\n"
+"POT-Creation-Date: 2013-08-25 02:35+0700\n"
 "PO-Revision-Date: 2013-08-08 18:30+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-22 04:50+0000\n"
-"X-Generator: Launchpad (build 16734)\n"
+"X-Launchpad-Export-Date: 2013-08-25 04:45+0000\n"
+"X-Generator: Launchpad (build 16738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
 msgid "Meridian"
@@ -59,7 +59,7 @@ msgstr "Planet "
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
 #: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
-#: plugins/Supernovae/src/Supernova.cpp:115 plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Supernovae/src/Supernova.cpp:116 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
 #, qt-format
 msgid "Type: <b>%1</b>"
@@ -67,16 +67,16 @@ msgstr "Jenis: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
-#: plugins/Supernovae/src/Supernova.cpp:120 plugins/Quasars/src/Quasar.cpp:106
-#: plugins/Exoplanets/src/Exoplanet.cpp:155
+#: plugins/Supernovae/src/Supernova.cpp:121 plugins/Novae/src/Nova.cpp:131
+#: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:155
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:449
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
-#: plugins/Supernovae/src/Supernova.cpp:123 plugins/Quasars/src/Quasar.cpp:118
-#: plugins/Exoplanets/src/Exoplanet.cpp:160
+#: plugins/Supernovae/src/Supernova.cpp:124 plugins/Novae/src/Nova.cpp:134
+#: plugins/Quasars/src/Quasar.cpp:118 plugins/Exoplanets/src/Exoplanet.cpp:160
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
@@ -279,7 +279,7 @@ msgid "Spectral Type: %1"
 msgstr "Jenis Spektrum: %1"
 
 #: src/core/modules/StarWrapper.cpp:213
-#: plugins/Supernovae/src/Supernova.cpp:133
+#: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:144
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Distance: %1 Light Years"
@@ -867,6 +867,7 @@ msgstr "Hubungi"
 
 #: src/gui/ConfigurationDialog.cpp:798
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
+#: plugins/Novae/src/gui/NovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:119
@@ -1235,12 +1236,12 @@ msgstr "Pereka grafik/lain: %1"
 msgid "OSX Developer: %1"
 msgstr "Pembangun OSX: %1"
 
-#: src/gui/StelGui.cpp:178 src/translations.h:689
+#: src/gui/StelGui.cpp:178 src/translations.h:692
 msgid "Script console window"
 msgstr "Tetingkap konsol skrip"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/gui/StelGui.cpp:178 src/translations.h:684
+#: src/gui/StelGui.cpp:178 src/translations.h:687
 msgid "Windows"
 msgstr "Tetingkap"
 
@@ -3647,52 +3648,56 @@ msgid "Historical Supernovae configuration window"
 msgstr "Tetingkap konfigurasi Supernova bersejarah"
 
 #: src/translations.h:673
+msgid "Bright Novae configuration window"
+msgstr ""
+
+#: src/translations.h:676
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Alih teleskop ke kedudukan koordinat yang diberikan"
 
-#: src/translations.h:676
+#: src/translations.h:679
 msgid "Show renderer statistics"
 msgstr "Papar statistik penerap"
 
 #. TRANSLATORS: Keyboard action group name
-#: src/translations.h:679 src/ui_configurationDialog.h:1166
+#: src/translations.h:682 src/ui_configurationDialog.h:1166
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Scripts"
 msgstr "Skrip"
 
-#: src/translations.h:680
+#: src/translations.h:683
 msgid "Run landscapes script from file"
 msgstr "Jalankan skrip landskap dari fail"
 
-#: src/translations.h:681
+#: src/translations.h:684
 msgid "Show and zoom Moon"
 msgstr "Papar dan zum Bulan"
 
-#: src/translations.h:685
+#: src/translations.h:688
 msgid "Configuration window"
 msgstr "Tetingkap Konfigurasi"
 
-#: src/translations.h:686
+#: src/translations.h:689
 msgid "Date/time window"
 msgstr "Tetingkap tarikh/masa"
 
-#: src/translations.h:687
+#: src/translations.h:690
 msgid "Help window"
 msgstr "Tetingkap Bantuan"
 
-#: src/translations.h:688
+#: src/translations.h:691
 msgid "Location window"
 msgstr "Tetingkap lokasi"
 
-#: src/translations.h:690
+#: src/translations.h:693
 msgid "Search window"
 msgstr "Tetingkap Gelintar"
 
-#: src/translations.h:691
+#: src/translations.h:694
 msgid "Shortcuts window"
 msgstr "Tetingkap pintasan"
 
-#: src/translations.h:692
+#: src/translations.h:695
 msgid "Sky and viewing options window"
 msgstr "Tetingkap pilihan pandangan dan langit"
 
@@ -5072,6 +5077,7 @@ msgstr "Pemalam Okular"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:499
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:378
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
+#: plugins/Novae/src/gui/NovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:113
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
@@ -5321,6 +5327,7 @@ msgstr "Kalih menegak"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Novae/src/ui_novaeDialog.h:245
 #: plugins/Quasars/src/ui_quasarsDialog.h:277
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
@@ -5614,6 +5621,7 @@ msgstr "Rujuk %1 dokumen ini %2 untuk perincian."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
+#: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:123
@@ -5622,6 +5630,7 @@ msgstr "Pautan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:121
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
@@ -5636,6 +5645,7 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Novae/src/gui/NovaeDialog.cpp:124
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:127
@@ -5646,6 +5656,7 @@ msgstr "Jika anda mempunyai soalan, anda boleh %1dapatkan jawapan disini%2"
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
@@ -5656,6 +5667,7 @@ msgstr "Laporan boleh dibuat %1disini%2."
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:423
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
@@ -5668,6 +5680,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:445
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
+#: plugins/Novae/src/gui/NovaeDialog.cpp:148
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
@@ -5678,6 +5691,8 @@ msgstr "Kemaskini Internet dilumpuhkan"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:189
+#: plugins/Novae/src/gui/NovaeDialog.cpp:150
+#: plugins/Novae/src/gui/NovaeDialog.cpp:184
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
@@ -5689,6 +5704,7 @@ msgstr "Mengemaskini sekarang..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
+#: plugins/Novae/src/gui/NovaeDialog.cpp:152
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
@@ -5697,6 +5713,7 @@ msgstr "Kemaskini Berikutnya: < 1 minit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
+#: plugins/Novae/src/gui/NovaeDialog.cpp:154
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
@@ -5706,6 +5723,7 @@ msgstr "Kemaskini Berikutnya: %1 minit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
+#: plugins/Novae/src/gui/NovaeDialog.cpp:156
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
@@ -5715,6 +5733,7 @@ msgstr "Kemaskini Berikutnya: %1 jam"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:466
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
+#: plugins/Novae/src/gui/NovaeDialog.cpp:187
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:207
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:221
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
@@ -5739,6 +5758,8 @@ msgstr "[sumber baru]"
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
+#: plugins/Novae/src/gui/NovaeDialog.cpp:173
+#: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
@@ -5750,6 +5771,7 @@ msgstr "Kemaskini sekarang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
+#: plugins/Novae/src/gui/NovaeDialog.cpp:175
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:177
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
@@ -5832,6 +5854,7 @@ msgstr "Kemaskini data satelit dari sumber Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
+#: plugins/Novae/src/ui_novaeDialog.h:238
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:287
@@ -5895,6 +5918,7 @@ msgstr "Panjang lenyap:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:707
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
@@ -5904,6 +5928,7 @@ msgstr "Pulih tetapan lalai"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:708
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:275
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
@@ -5913,6 +5938,7 @@ msgstr "Simpan tetapan  sebagai lalai"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:709
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
@@ -7104,18 +7130,14 @@ msgid "Historical Supernovae"
 msgstr "Supernova Bersejarah"
 
 #: plugins/Supernovae/src/Supernovae.cpp:75
-msgid ""
-"A plugin that shows some historical supernovae brighter than 10 visual "
-"magnitude."
+msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
-"Pemalam yang memaparkan beberapa supernova bersejarah yang mana kecerahannya "
-"lebih dari magnitud visual 10."
 
-#: plugins/Supernovae/src/Supernova.cpp:115
+#: plugins/Supernovae/src/Supernova.cpp:116
 msgid "supernova"
 msgstr "supernova"
 
-#: plugins/Supernovae/src/Supernova.cpp:131
+#: plugins/Supernovae/src/Supernova.cpp:132
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr "Jenis supernova: %1"
@@ -7125,14 +7147,11 @@ msgid "Historical Supernovae Plug-in"
 msgstr "Pemalam Supernova Bersejarah"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
-msgid ""
-"A plugin that shows some historical supernovae brighter than visual "
-"magnitude 10: "
+msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
-"Merupakan pemalam yang memaparkan beberapa supernova bersejarah yang lebih "
-"terang dari magnitud visual 10: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
+#: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "Light curves"
 msgstr "Lengkung Cahaya"
 
@@ -7185,6 +7204,7 @@ msgstr ""
 "format katalog, anda boleh %1dapatkan maklumat disini%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
+#: plugins/Novae/src/gui/NovaeDialog.cpp:158
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #, qt-format
@@ -7204,12 +7224,14 @@ msgid "Historical Supernovae Plug-in Configuration"
 msgstr "Konfigurasi Pemalam Supernova Bersejarah"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
+#: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 msgid "Update catalog from Internet"
 msgstr "Kemaskini katalog dari Internet"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
+#: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:286
@@ -7217,17 +7239,90 @@ msgid "Update from Internet sources"
 msgstr "Kemaskini dari sumber Internet"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Update frequency (days):"
 msgstr "Kekerapan kemaskini (hari):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Novae/src/ui_novaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:289
 msgid "[next update info]"
 msgstr "[maklumat kemaskini berikutnya]"
+
+#: plugins/Novae/src/Novae.cpp:72
+msgid "Bright Novae"
+msgstr ""
+
+#: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
+msgid "A plugin that shows some bright novae in the Milky Way galaxy."
+msgstr ""
+
+#: plugins/Novae/src/Nova.cpp:126
+#, qt-format
+msgid "Type: <b>%1</b> (%2)"
+msgstr ""
+
+#: plugins/Novae/src/Nova.cpp:126
+msgid "nova"
+msgstr ""
+
+#: plugins/Novae/src/Nova.cpp:142
+#, qt-format
+msgid "Maximum brightness: %1"
+msgstr ""
+
+#: plugins/Novae/src/gui/NovaeDialog.cpp:106
+msgid "Bright Novae Plug-in"
+msgstr ""
+
+#: plugins/Novae/src/gui/NovaeDialog.cpp:112
+msgid ""
+"You can find novae via search tool by entering designation of nova or its "
+"common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
+msgstr ""
+
+#: plugins/Novae/src/gui/NovaeDialog.cpp:115
+msgid ""
+"This plugin uses a very simple model for calculation of light curves for "
+"novae stars."
+msgstr ""
+
+#: plugins/Novae/src/gui/NovaeDialog.cpp:116
+#, qt-format
+msgid ""
+"This model is based on time for decay by %1 magnitudes from the maximum "
+"value, where %1 is 2, 3, 6 and 9."
+msgstr ""
+
+#: plugins/Novae/src/gui/NovaeDialog.cpp:117
+msgid ""
+"If a nova has no values for decay of magnitude then this plugin will use "
+"generalized values for it."
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin, its history and "
+"catalog format, you can %1get info here%2."
+msgstr ""
+
+#: plugins/Novae/src/gui/NovaeDialog.cpp:194
+msgid "Novae is updated"
+msgstr ""
+
+#: plugins/Novae/src/ui_novaeDialog.h:233
+msgid "Bright Novae Configuration"
+msgstr ""
+
+#: plugins/Novae/src/ui_novaeDialog.h:234
+msgid "Bright Novae Plug-in Configuration"
+msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
@@ -8629,6 +8724,13 @@ msgstr "Altitud matahari pada senjakala: 0 darj."
 #~ msgid "Display mode for pulsars"
 #~ msgstr "Mod paparan untuk pulsar"
 
+#~ msgid ""
+#~ "A plugin that shows some historical supernovae brighter than 10 visual "
+#~ "magnitude."
+#~ msgstr ""
+#~ "Pemalam yang memaparkan beberapa supernova bersejarah yang mana kecerahannya "
+#~ "lebih dari magnitud visual 10."
+
 #~ msgid "Display mode for quasars"
 #~ msgstr "Mod paparan untuk kuasar"
 
@@ -8693,6 +8795,13 @@ msgstr "Altitud matahari pada senjakala: 0 darj."
 #~ msgstr ""
 #~ "Ledakan supernova yang telah diperhati oleh Tycho Brahe pada tahun 1572. "
 #~ "Demo perlu benarkan pemalam untuk supernovae."
+
+#~ msgid ""
+#~ "A plugin that shows some historical supernovae brighter than visual "
+#~ "magnitude 10: "
+#~ msgstr ""
+#~ "Merupakan pemalam yang memaparkan beberapa supernova bersejarah yang lebih "
+#~ "terang dari magnitud visual 10: "
 
 #~ msgid "0 deg."
 #~ msgstr "0 darj."
