@@ -88,6 +88,8 @@ private:
 	double distance;		   //! Distance to supernova (10^3 ly)
 
 	LinearFader labelsFader;
+
+	QString getMaxBrightnessDate(const double JD) const;
 };
 
 #endif // _SUPERNOVA_HPP_
