@@ -61,9 +61,6 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(AngleMeasure, AngleMeasureStelPluginInterface)
-
-
 AngleMeasure::AngleMeasure()
 	: flagShowAngleMeasure(false), dragging(false),
 		angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)

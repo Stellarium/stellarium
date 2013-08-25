@@ -23,7 +23,6 @@
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 
-#include <QHttp>
 #include <QFileInfo>
 #include <QFile>
 #include <QDebug>

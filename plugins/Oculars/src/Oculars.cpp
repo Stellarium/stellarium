@@ -88,8 +88,6 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
-
 
 /* ********************************************************************* */
 #if 0
@@ -1450,6 +1448,9 @@ void Oculars::paintTelrad()
 
 void Oculars::paintOcularMask()
 {
+	// XXX: for some reason I cannot get to make the glu functions work when
+	// compiling with Qt5!
+	/*
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
@@ -1474,6 +1475,7 @@ void Oculars::paintOcularMask()
 	gluDisk(quadric, inner - 1.0, inner, 256, 1);
 	gluDeleteQuadric(quadric);
 	glPopMatrix();
+	*/
 }
 
 void Oculars::paintText(const StelCore* core)

@@ -84,7 +84,6 @@ StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 
 	return new StelGui();
 }
-Q_EXPORT_PLUGIN2(StelGui, StelStandardGuiPluginInterface)
 
 StelGui::StelGui() :
 	topLevelGraphicsWidget(NULL),

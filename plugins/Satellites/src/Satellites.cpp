@@ -71,8 +71,6 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
-
 Satellites::Satellites()
 	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
 	  earth(NULL), defaultHintColor(0.0, 0.4, 0.6), defaultOrbitColor(0.0, 0.3, 0.6),
