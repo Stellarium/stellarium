@@ -56,6 +56,7 @@
 #include <QMultiMap>
 #include <QMapIterator>
 #include <QDebug>
+#include <QDir>
 
 SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
 {

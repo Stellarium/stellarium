@@ -21,7 +21,6 @@
 #include <QSettings>
 #include <QDebug>
 #include <QFontMetrics>
-#include <QtOpenGL>
 
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"

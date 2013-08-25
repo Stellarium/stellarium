@@ -28,7 +28,6 @@
 #include "StelGuiBase.hpp"
 #include "StelMainWindow.hpp"
 
-#include <QGLFormat>
 #include <QPaintEngine>
 #include <QGraphicsView>
 #include <QGLWidget>
@@ -154,20 +153,6 @@ protected:
 			qWarning("Could not get depth buffer; results will be suboptimal");
 		if (!format().doubleBuffer())
 			qWarning("Could not get double buffer; results will be suboptimal");
-
-		QString paintEngineStr;
-		switch (paintEngine()->type())
-		{
-		case QPaintEngine::OpenGL:
-			paintEngineStr = "OpenGL";
-			break;
-		case QPaintEngine::OpenGL2:
-			paintEngineStr = "OpenGL2";
-			break;
-		default:
-			paintEngineStr = "Other";
-		}
-		qDebug() << "Qt GL paint engine is: " << paintEngineStr;
 	}
 };
 
@@ -268,9 +253,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 
 	StelPainter::initSystemGLInfo(glContext);
 
-	QPainter qPainter(glWidget);
-	StelPainter::setQPainter(&qPainter);
-
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
 	// Prevent flickering on mac Leopard/Snow Leopard
@@ -319,7 +301,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 #endif
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
-        StelPainter::setQPainter(NULL);
 	startMainLoop();
 }
 

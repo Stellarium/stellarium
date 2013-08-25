@@ -29,7 +29,6 @@
 #include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
 
-#include <QtOpenGL>
 #include <QDebug>
 #include <QTimer>
 #include <QAction>

@@ -37,7 +37,8 @@
 #include <QUrl>
 #include <QImage>
 #include <QNetworkReply>
-#include <QGLWidget>
+#include <QTimer>
+#include <QGLContext>
 
 ImageLoader::ImageLoader(const QString& path, int delay)
 	: QObject(), path(path), networkReply(NULL)
@@ -99,11 +100,9 @@ void ImageLoader::directLoad() {
 StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f)
 {
-	#if QT_VERSION>=0x040800
-	initializeGLFunctions();
-	#endif
 	width = -1;
 	height = -1;
+	initializeOpenGLFunctions();
 }
 
 StelTexture::~StelTexture()
@@ -117,7 +116,7 @@ StelTexture::~StelTexture()
 		}
 		else
 		{
-			StelPainter::glContext->deleteTexture(id);
+			glDeleteTextures(1, &id);
 		}
 		id = 0;
 	}
@@ -213,6 +212,7 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
+
 // Actually load the texture to openGL memory
 bool StelTexture::glLoad()
 {
@@ -223,33 +223,96 @@ bool StelTexture::glLoad()
 		return false;
 	}
 
-	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
-	if (loadParams.filtering==GL_LINEAR)
-		opt |= QGLContext::LinearFilteringBindOption;
-
-	// Mipmap seems to be pretty buggy on windows..
-#ifndef Q_OS_WIN
-	if (loadParams.generateMipmaps==true)
-		opt |= QGLContext::MipmapBindOption;
-#endif
-
-	GLint glformat;
+	GLint internalFormat;
 	if (qImage.isGrayscale())
 	{
-		glformat = qImage.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
+		internalFormat = qImage.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
 	}
 	else if (qImage.hasAlphaChannel())
 	{
-		glformat = GL_RGBA;
+		internalFormat = GL_RGBA;
 	}
 	else
-		glformat = GL_RGB;
+		internalFormat = GL_RGB;
 
 	Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
-#ifdef USE_OPENGL_ES2
 	glActiveTexture(GL_TEXTURE0);
-#endif
-	id = StelPainter::glContext->bindTexture(qImage, GL_TEXTURE_2D, glformat, opt);
+	
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+	
+	bool genMipmap = false;
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);	
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
+	
+	QImage::Format target_format = qImage.format();
+	GLenum externalFormat;
+	GLuint pixel_type;
+	
+	externalFormat = GL_RGBA;
+	pixel_type = GL_UNSIGNED_BYTE;
+	
+	switch (target_format) {
+	case QImage::Format_ARGB32:
+		break;
+	case QImage::Format_ARGB32_Premultiplied:
+			qImage = qImage.convertToFormat(target_format = QImage::Format_ARGB32);
+		break;
+	case QImage::Format_RGB16:
+		pixel_type = GL_UNSIGNED_SHORT_5_6_5;
+		externalFormat = GL_RGB;
+		internalFormat = GL_RGB;
+		break;
+	case QImage::Format_RGB32:
+		break;
+	default:
+		if (qImage.hasAlphaChannel()) {
+			qImage = qImage.convertToFormat(QImage::Format_ARGB32);
+		} else {
+			qImage = qImage.convertToFormat(QImage::Format_RGB32);
+		}
+	}
+	
+	// flips bits over y
+	int ipl = qImage.bytesPerLine() / 4;
+	int h = qImage.height();
+	for (int y=0; y<h/2; ++y) {
+		int *a = (int *) qImage.scanLine(y);
+		int *b = (int *) qImage.scanLine(h - y - 1);
+		for (int x=0; x<ipl; ++x)
+			qSwap(a[x], b[x]);
+	}
+	
+	if (externalFormat == GL_RGBA) {
+		// The only case where we end up with a depth different from
+		// 32 in the switch above is for the RGB16 case, where we set
+		// the format to GL_RGB
+		Q_ASSERT(qImage.depth() == 32);
+		const int width = qImage.width();
+		const int height = qImage.height();
+	
+		if (pixel_type == GL_UNSIGNED_INT_8_8_8_8_REV
+			|| (pixel_type == GL_UNSIGNED_BYTE && QSysInfo::ByteOrder == QSysInfo::LittleEndian)) {
+			for (int i=0; i < height; ++i) {
+				uint *p = (uint *) qImage.scanLine(i);
+				for (int x=0; x<width; ++x)
+					p[x] = ((p[x] << 16) & 0xff0000) | ((p[x] >> 16) & 0xff) | (p[x] & 0xff00ff00);
+			}
+		} else {
+			for (int i=0; i < height; ++i) {
+				uint *p = (uint *) qImage.scanLine(i);
+				for (int x=0; x<width; ++x)
+					p[x] = (p[x] << 8) | ((p[x] >> 24) & 0xff);
+			}
+		}
+	}
+	
+	const QImage &constRef = qImage; // to avoid detach in bits()...
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, qImage.width(), qImage.height(), 0, externalFormat,
+				 pixel_type, constRef.bits());
+	if (genMipmap)
+		glGenerateMipmap(GL_TEXTURE_2D);
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
 

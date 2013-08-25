@@ -130,8 +130,6 @@ SET(stellarium_lib_SRCS
 	core/TrailGroup.cpp
 	core/RefractionExtinction.hpp
 	core/RefractionExtinction.cpp
-	core/StelLoadingBar.cpp
-	core/StelLoadingBar.hpp
 	core/StelShortcutMgr.hpp
 	core/StelShortcutMgr.cpp
 	core/StelShortcutGroup.cpp

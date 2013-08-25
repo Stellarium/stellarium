@@ -33,7 +33,6 @@
 #include <QCoreApplication>
 #include <QApplication>
 #include <QHBoxLayout>
-#include <QGLWidget>
 
 #ifdef BUILD_FOR_MAEMO
 #if QT_VERSION<QT_VERSION_CHECK(5,0,0)

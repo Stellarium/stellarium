@@ -27,6 +27,7 @@
 #include <QString>
 #include <QStringList>
 #include <QRegExp>
+#include <QDir>
 
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"

@@ -28,8 +28,7 @@
  #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
 #endif
 
-#include <QGLShaderProgram>
-#include <QtOpenGL>
+#include <QOpenGLShaderProgram>
 
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"

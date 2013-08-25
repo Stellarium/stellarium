@@ -29,8 +29,8 @@
 #include <QNetworkRequest>
 #include <QThread>
 #include <QSettings>
-#include <QGLFormat>
 #include <cstdlib>
+#include <QOpenGLContext>
 
 
 StelTextureMgr::StelTextureMgr()
@@ -80,7 +80,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	}
 
 	StelPainter::makeMainGLContextCurrent();
-	if (tex->fullPath.endsWith(".pvr"))
+/*	if (tex->fullPath.endsWith(".pvr"))
 	{
 		// Load compressed textures using Qt wrapper.
 		tex->loadParams = params;
@@ -95,7 +95,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return tex;
 	}
 	else
-	{
+	{*/
 		tex->qImage = QImage(tex->fullPath);
 		if (tex->qImage.isNull())
 			return StelTextureSP();
@@ -107,7 +107,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 			return tex;
 		else
 			return StelTextureSP();
-	}
+//	}
 }
 
 

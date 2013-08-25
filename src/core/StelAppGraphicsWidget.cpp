@@ -28,7 +28,7 @@
 #include <QPaintEngine>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
-#include <QGLFramebufferObject>
+#include <QOpenGLFramebufferObject>
 #include <QSettings>
 
 StelAppGraphicsWidget::StelAppGraphicsWidget()
@@ -81,7 +81,7 @@ void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 		useBuffers = false;
 		return;
 	}
-	if (!QGLFramebufferObject::hasOpenGLFramebufferObjects())
+	if (!QOpenGLFramebufferObject::hasOpenGLFramebufferObjects())
 	{
 		qWarning() << "Don't support OpenGL framebuffer objects, can't use Viewport effect: " << name;
 		useBuffers = false;
@@ -160,16 +160,11 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	if (!stelApp || !stelApp->getCore() || !doPaint)
 		return;
 	
-	StelPainter::setQPainter(painter);
-
 	if (useBuffers)
 	{
 		StelPainter::makeMainGLContextCurrent();
 		initBuffers();
 		backgroundBuffer->bind();
-		QPainter* pa = new QPainter(backgroundBuffer);
-		StelPainter::setQPainter(pa);
-
 		// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
 		int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
 		while (true)
@@ -177,7 +172,6 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 			bool keep = paintPartial();
 			if (!keep) // The paint is done
 			{
-				delete pa;
 				backgroundBuffer->release();
 				swapBuffers();
 				break;
@@ -186,7 +180,6 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 			if (1. / spentTime <= minFps) // we spent too much time
 			{
 				// We stop the painting operation for now
-				delete pa;
 				backgroundBuffer->release();
 				break;
 			}
@@ -194,14 +187,12 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 		Q_ASSERT(!backgroundBuffer->isBound());
 		Q_ASSERT(!foregroundBuffer->isBound());
 		// Paint the last completed painted buffer
-		StelPainter::setQPainter(painter);
 		viewportEffect->paintViewportBuffer(foregroundBuffer);
 	}
 	else
 	{
 		while (paintPartial()) {;}
 	}
-	StelPainter::setQPainter(NULL);
 	previousPaintFrameTime = StelApp::getTotalRunTime();
 }
 
@@ -210,7 +201,7 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 void StelAppGraphicsWidget::swapBuffers()
 {
 	Q_ASSERT(useBuffers);
-	QGLFramebufferObject* tmp = backgroundBuffer;
+	QOpenGLFramebufferObject* tmp = backgroundBuffer;
 	backgroundBuffer = foregroundBuffer;
 	foregroundBuffer = tmp;
 }
@@ -219,11 +210,11 @@ void StelAppGraphicsWidget::swapBuffers()
 void StelAppGraphicsWidget::initBuffers()
 {
 	Q_ASSERT(useBuffers);
-	Q_ASSERT(QGLFramebufferObject::hasOpenGLFramebufferObjects());
+	Q_ASSERT(QOpenGLFramebufferObject::hasOpenGLFramebufferObjects());
 	if (!backgroundBuffer)
 	{
-		backgroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
-		foregroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
+		backgroundBuffer = new QOpenGLFramebufferObject(scene()->sceneRect().size().toSize(), QOpenGLFramebufferObject::CombinedDepthStencil);
+		foregroundBuffer = new QOpenGLFramebufferObject(scene()->sceneRect().size().toSize(), QOpenGLFramebufferObject::CombinedDepthStencil);
 		Q_ASSERT(backgroundBuffer->isValid());
 		Q_ASSERT(foregroundBuffer->isValid());
 	}

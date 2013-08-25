@@ -18,14 +18,8 @@
  */
 
 #include <QDebug>
-
-#ifdef USE_OPENGL_ES2
- #include "GLES2/gl2.h"
-#endif
-
-#include <QGLShaderProgram>
-#include <QtOpenGL>
-
+#include <QSettings>
+#include <QOpenGLShaderProgram>
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
@@ -46,7 +40,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 	setFadeDuration(1.5f);
 
 	qDebug() << "Use vertex shader for atmosphere rendering.";
-	QGLShader* vShader = new QGLShader(QGLShader::Vertex);
+	QOpenGLShader* vShader = new QOpenGLShader(QOpenGLShader::Vertex);
 	if (!vShader->compileSourceFile(":/shaders/xyYToRGB.glsl"))
 	{
 		qFatal("Error while compiling atmosphere vertex shader: %s", vShader->log().toLatin1().constData());
@@ -55,7 +49,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 	{
 		qWarning() << "Warnings while compiling atmosphere vertex shader: " << vShader->log();
 	}
-	QGLShader* fShader = new QGLShader(QGLShader::Fragment);
+	QOpenGLShader* fShader = new QOpenGLShader(QOpenGLShader::Fragment);
 	if (!fShader->compileSourceCode(
 					"varying mediump vec4 resultSkyColor;\n"
 					"void main()\n"
@@ -69,7 +63,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 	{
 		qWarning() << "Warnings while compiling atmosphere fragment shader: " << vShader->log();
 	}
-	atmoShaderProgram = new QGLShaderProgram();
+	atmoShaderProgram = new QOpenGLShaderProgram();
 	atmoShaderProgram->addShader(vShader);
 	atmoShaderProgram->addShader(fShader);
 	if (!atmoShaderProgram->link())
