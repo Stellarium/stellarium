@@ -284,7 +284,7 @@ private:
 
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
-	typedef QHash<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
+	typedef QMap<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
 	ZoneArrayMap zoneArrays; // index is the grid level
 	static void initTriangleFunc(int lev, int index,
 								 const Vec3f &c0,
