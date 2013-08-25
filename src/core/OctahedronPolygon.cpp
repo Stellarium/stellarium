@@ -320,7 +320,7 @@ struct OctTessTrianglesCallbackData
 
 void errorCallback(GLenum errno)
 {
-	qWarning() << "Tesselator error:" << QString::fromAscii((char*)gluesErrorString(errno));
+	qWarning() << "Tesselator error:" << QString::fromLatin1((char*)gluesErrorString(errno));
 	Q_ASSERT(0);
 }
 
