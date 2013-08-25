@@ -76,9 +76,6 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Exoplanets, ExoplanetsStelPluginInterface)
-
-
 /*
  Constructor
 */

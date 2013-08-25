@@ -60,8 +60,6 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(SolarSystemEditor, SolarSystemEditorStelPluginInterface)
-
 SolarSystemEditor::SolarSystemEditor()
 {
 	setObjectName("SolarSystemEditor");

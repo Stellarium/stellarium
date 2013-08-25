@@ -21,7 +21,7 @@ SET(TimeZoneConfiguration_UIS
   gui/defineTimeZone.ui
 )
 
-QT4_WRAP_UI(TimeZoneConfiguration_UIS_H ${TimeZoneConfiguration_UIS})
+QT5_WRAP_UI(TimeZoneConfiguration_UIS_H ${TimeZoneConfiguration_UIS})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 

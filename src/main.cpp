@@ -28,9 +28,9 @@
 #include <QDebug>
 #include <QApplication>
 #include <QMessageBox>
+#include <QStyleFactory>
 #include <QTranslator>
 #include <QGLFormat>
-#include <QPlastiqueStyle>
 #include <QFileInfo>
 #include <QFontDatabase>
 #include <QDir>
@@ -113,30 +113,7 @@ int main(int argc, char **argv)
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
-
-#ifndef BUILD_FOR_MAEMO
-	QApplication::setStyle(new QPlastiqueStyle());
-#endif
-
-	// Handle command line options for alternative Qt graphics system types.
-	// DEFAULT_GRAPHICS_SYSTEM is defined per platform in the main CMakeLists.txt file.
-	// Avoid overriding if the user already specified the mode on the CLI.
-	bool doSetDefaultGraphicsSystem=true;
-	for (int i = 1; i < argc; ++i)
-	{
-		//QApplication accepts -graphicssystem only if
-		//its value is a separate argument (the next value in argv)
-		if (QString(argv[i]) == "-graphicssystem")
-		{
-			doSetDefaultGraphicsSystem = false;
-		}
-	}
-	// If the user didn't set the graphics-system on the command line, use the one provided at compile time.
-	if (doSetDefaultGraphicsSystem)
-	{
-		qDebug() << "Using default graphics system specified at build time: " << DEFAULT_GRAPHICS_SYSTEM;
-		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
-	}
+	QApplication::setStyle(QStyleFactory::create("Fusion"));
 
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
@@ -280,10 +257,7 @@ int main(int argc, char **argv)
 #ifdef Q_OS_WIN
 	bool safeMode = false; // used in Q_OS_WIN, but need the QGL::setPreferredPaintEngine() call here.
 #endif
-	if (!confSettings->value("main/use_qpaintenginegl2", true).toBool()
-		|| qApp->property("onetime_safe_mode").isValid()) {
-		// The user explicitely request to use the older paint engine.
-		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+	if (qApp->property("onetime_safe_mode").isValid()) {
 #ifdef Q_OS_WIN
 		safeMode = true;
 #endif

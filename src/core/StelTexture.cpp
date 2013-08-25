@@ -33,7 +33,6 @@
 #include <QFile>
 #include <QTemporaryFile>
 #include <QSize>
-#include <QHttp>
 #include <QDebug>
 #include <QUrl>
 #include <QImage>

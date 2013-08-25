@@ -26,15 +26,15 @@ SET(Oculars_SRCS
 )
 
 SET(Oculars_RES ../resources/Oculars.qrc)
-QT4_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
+QT5_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 
 ################# compiles .ui files ############
 SET(Oculars_UIS
   gui/ocularDialog.ui
 )
-QT4_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
-INCLUDE(${QT_USE_FILE})
+INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 

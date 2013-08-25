@@ -149,7 +149,7 @@ bool ShortcutsDialog::prefixMatchKeySequence(const QKeySequence& ks1,
 	{
 		return false;
 	}
-	for (uint i = 0; i < qMin(ks1.count(), ks2.count()); ++i)
+	for (int i = 0; i < qMin(ks1.count(), ks2.count()); ++i)
 	{
 		if (ks1[i] != ks2[i])
 		{
@@ -290,7 +290,7 @@ void ShortcutsDialog::createDialogContent()
 	filterModel->setDynamicSortFilter(true);
 	filterModel->setSortLocaleAware(true);
 	ui->shortcutsTreeView->setModel(filterModel);
-	ui->shortcutsTreeView->header()->setMovable(false);
+	ui->shortcutsTreeView->header()->setSectionsMovable(false);
 	ui->shortcutsTreeView->sortByColumn(0, Qt::AscendingOrder);
 	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
