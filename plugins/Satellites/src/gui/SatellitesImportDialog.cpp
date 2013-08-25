@@ -151,7 +151,8 @@ void SatellitesImportDialog::getData()
 	else
 	{
 		QStringList sourceFilePaths;
-		QString homeDirPath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+		// XXX: we should check that there is at least one home location.
+		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation)[0];
 		sourceFilePaths = QFileDialog::getOpenFileNames(
 		                      &StelMainGraphicsView::getInstance(),
 		                      q_("Select TLE source file(s)..."),

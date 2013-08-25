@@ -28,7 +28,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QHttp>
 #include <QUrl>
 #include <QDir>
 #include <QBuffer>
