@@ -81,9 +81,6 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(TelescopeControl, TelescopeControlStelPluginInterface)
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()

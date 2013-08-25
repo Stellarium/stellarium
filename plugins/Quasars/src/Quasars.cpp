@@ -75,9 +75,6 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
-
-
 /*
  Constructor
 */

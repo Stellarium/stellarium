@@ -334,7 +334,7 @@ SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
-QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
+QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 
 
 #############################################################################################
@@ -403,11 +403,11 @@ IF (GUI_MODE STREQUAL "Standard")
 			gui/scriptConsole.ui)
 	ENDIF(ENABLE_SCRIPT_CONSOLE)
 
-	QT4_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+	QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
 	# compiles resources files
 	SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
-	QT4_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+	QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
 	SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
 
@@ -588,7 +588,12 @@ IF(GENERATE_STELMAINLIB)
  TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
 ELSE()
  ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
- TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+ TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES}
+                                  ${Qt5Core_LIBRARIES}
+                                  ${Qt5Widgets_LIBRARIES}
+                                  ${Qt5Network_LIBRARIES}
+                                  ${Qt5OpenGL_LIBRARIES}
+                                  ${Qt5Script_LIBRARIES})
  IF(APPLE)
 # SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/works/OpenGL.framework/Versions/A/Libraries/libGL.dylib -framework Cocoa -framework QtDeclarative")
 SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
@@ -686,7 +691,7 @@ SET(tests_testStelVertexArray_SRCS
   tests/testStelVertexArray.hpp
   tests/testStelVertexArray.cpp
   core/StelVertexArray.hpp)
-QT4_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
+QT5_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)

@@ -42,10 +42,10 @@ SET(SatellitesDialog_UIS
   gui/satellitesDialog.ui
   gui/satellitesImportDialog.ui
 )
-QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
 SET(Satellites_RES ../resources/Satellites.qrc)
-QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
 SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
