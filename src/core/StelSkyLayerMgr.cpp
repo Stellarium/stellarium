@@ -29,7 +29,6 @@
 #include "StelGuiBase.hpp"
 #include "StelSkyDrawer.hpp"
 
-#include <QtOpenGL>
 #include <QNetworkAccessManager>
 #include <stdexcept>
 #include <QDebug>
@@ -37,6 +36,7 @@
 #include <QProgressBar>
 #include <QVariantMap>
 #include <QVariantList>
+#include <QDir>
 #include <QSettings>
 
 StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)

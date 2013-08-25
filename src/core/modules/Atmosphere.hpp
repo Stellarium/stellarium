@@ -27,12 +27,6 @@
 #include "Skybright.hpp"
 #include "StelFader.hpp"
 
-#ifdef USE_OPENGL_ES2
- #include "GLES2/gl2.h"
-#else
- #include <QtOpenGL>
-#endif
-
 class StelProjector;
 class StelToneReproducer;
 class StelCore;
@@ -96,7 +90,7 @@ private:
 	float lightPollutionLuminance;
 
 	//! Vertex shader used for xyYToRGB computation
-	class QGLShaderProgram* atmoShaderProgram;
+	class QOpenGLShaderProgram* atmoShaderProgram;
 	struct {
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;

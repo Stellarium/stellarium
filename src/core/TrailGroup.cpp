@@ -23,7 +23,6 @@
 #include "StelPainter.hpp"
 #include "StelObject.hpp"
 #include "Planet.hpp"
-#include <QtOpenGL>
 
 TrailGroup::TrailGroup(float te) : timeExtent(te), opacity(1.f)
 {

@@ -74,9 +74,9 @@ private:
 	//! set to true to use buffers
 	bool useBuffers;
 	//! The framebuffer where we are currently drawing the scene
-	class QGLFramebufferObject* backgroundBuffer;
+	class QOpenGLFramebufferObject* backgroundBuffer;
 	//! The framebuffer that we use while waiting for the drawing to be done
-	class QGLFramebufferObject* foregroundBuffer;
+	class QOpenGLFramebufferObject* foregroundBuffer;
 
 	//! Initialize the opengl buffer objects.
 	void initBuffers();

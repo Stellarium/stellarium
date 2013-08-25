@@ -31,7 +31,6 @@
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
 
-#include <QtOpenGL>
 #include <QAction>
 #include <QDebug>
 #include <QPixmap>

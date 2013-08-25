@@ -50,6 +50,7 @@
 #include <QSharedPointer>
 #include <QStringList>
 #include <QDir>
+#include <QSettings>
 
 #define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 

@@ -32,7 +32,6 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>

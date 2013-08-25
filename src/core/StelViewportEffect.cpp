@@ -25,12 +25,12 @@
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
 
-#include <QGLFramebufferObject>
+#include <QOpenGLFramebufferObject>
 #include <QSettings>
 #include <QFile>
 #include <QDir>
 
-void StelViewportEffect::paintViewportBuffer(const QGLFramebufferObject* buf) const
+void StelViewportEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
@@ -378,7 +378,7 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 }
 
 
-void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QGLFramebufferObject* buf) const
+void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.enableTexture2d(true);

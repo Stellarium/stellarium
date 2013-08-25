@@ -19,7 +19,6 @@
 #include <QSettings>
 #include <QPixmap>
 #include <QTimer>
-#include <QtOpenGL>
 #include <QString>
 #include <QDebug>
 #include <QAction>
