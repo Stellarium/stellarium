@@ -78,7 +78,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 		pixBackgroundRed = StelButton::makeRed(pixBackground);
 
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
-	setAcceptsHoverEvents(true);
+	setAcceptHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
@@ -138,7 +138,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 		pixBackgroundRed = StelButton::makeRed(pixBackground);
 
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
-	setAcceptsHoverEvents(true);
+	setAcceptHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)),
@@ -279,7 +279,7 @@ LeftStelBar::~LeftStelBar()
 void LeftStelBar::addButton(StelButton* button)
 {
 	double posY = 0;
-	if (QGraphicsItem::children().size()!=0)
+	if (QGraphicsItem::childItems().size()!=0)
 	{
 		const QRectF& r = childrenBoundingRect();
 		posY += r.bottom()-1;
@@ -304,7 +304,7 @@ QRectF LeftStelBar::boundingRectNoHelpLabel() const
 {
 	// Re-use original Qt code, just remove the help label
 	QRectF childRect;
-	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
 		if (child==helpLabel)
 			continue;
@@ -352,7 +352,7 @@ void LeftStelBar::setColor(const QColor& c)
 // Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
 void LeftStelBar::setRedMode(bool b)
 {
-	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
 		StelButton* bt = qgraphicsitem_cast<StelButton*>(child);
 		if (bt==0)
@@ -499,7 +499,7 @@ QRectF BottomStelBar::getButtonsBoundingRect() const
 	// Re-use original Qt code, just remove the help label
 	QRectF childRect;
 	bool hasBtn = false;
-	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
 		if (qgraphicsitem_cast<StelButton*>(child)==0)
 			continue;
@@ -695,7 +695,7 @@ void BottomStelBar::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
 
 QRectF BottomStelBar::boundingRect() const
 {
-	if (QGraphicsItem::children().size()==0)
+	if (QGraphicsItem::childItems().size()==0)
 		return QRectF();
 	const QRectF& r = childrenBoundingRect();
 	return QRectF(0, 0, r.width()-1, r.height()-1);
@@ -705,7 +705,7 @@ QRectF BottomStelBar::boundingRectNoHelpLabel() const
 {
 	// Re-use original Qt code, just remove the help label
 	QRectF childRect;
-	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
 		if (child==helpLabel)
 			continue;
@@ -729,7 +729,7 @@ void BottomStelBar::setColor(const QColor& c)
 // Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
 void BottomStelBar::setRedMode(bool b)
 {
-	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
 		StelButton* bt = qgraphicsitem_cast<StelButton*>(child);
 		if (bt==0)
@@ -839,7 +839,7 @@ void CornerButtons::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
 
 QRectF CornerButtons::boundingRect() const
 {
-	if (QGraphicsItem::children().size()==0)
+	if (QGraphicsItem::childItems().size()==0)
 		return QRectF();
 	const QRectF& r = childrenBoundingRect();
 	return QRectF(0, 0, r.width()-1, r.height()-1);
@@ -850,9 +850,9 @@ void CornerButtons::setOpacity(double opacity)
 	if (opacity<=0. && lastOpacity<=0.)
 		return;
 	lastOpacity = opacity;
-	if (QGraphicsItem::children().size()==0)
+	if (QGraphicsItem::childItems().size()==0)
 		return;
-	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
 		StelButton* sb = qgraphicsitem_cast<StelButton*>(child);
 		Q_ASSERT(sb!=NULL);
