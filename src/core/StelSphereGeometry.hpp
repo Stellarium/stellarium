@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QSharedPointer>
 #include <QVarLengthArray>
+#include <QDataStream>
 #include "VecMath.hpp"
 #include "OctahedronPolygon.hpp"
 #include "StelVertexArray.hpp"
