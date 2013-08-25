@@ -26,6 +26,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StarMgr.hpp"
 #include "StelRenderer.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -97,6 +98,11 @@ QString Supernova::getEnglishName(void) const
 	return name;
 }
 
+QString Supernova::getMaxBrightnessDate(const double JD) const
+{
+	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD);
+}
+
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -130,6 +136,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&Extra1)
 	{
 		oss << q_("Type of supernova: %1").arg(sntype) << "<br>";
+		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
 		if (distance>0)
 			oss << q_("Distance: %1 Light Years").arg(distance*1000) << "<br>";
 	}
