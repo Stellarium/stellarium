@@ -75,9 +75,6 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Supernovae, SupernovaeStelPluginInterface)
-
-
 /*
  Constructor
 */

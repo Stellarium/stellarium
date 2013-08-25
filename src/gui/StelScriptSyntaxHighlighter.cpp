@@ -116,7 +116,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 		{
 			if (metaObject->method(i).methodType() == QMetaMethod::Slot && metaObject->method(i).access() == QMetaMethod::Public)
 			{
-				QString fn = metaObject->method(i).signature();
+				QString fn = metaObject->method(i).methodSignature();
 				fn.replace(QRegExp("\\(.*$"), ""); 
 				fn = m->objectName() + "\\." + fn;
 				knownFunctionNames << fn;

@@ -61,9 +61,6 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(CompassMarks, CompassMarksStelPluginInterface)
-
-
 CompassMarks::CompassMarks()
 	: markColor(1,1,1), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
 {

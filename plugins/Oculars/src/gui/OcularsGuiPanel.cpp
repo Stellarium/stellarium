@@ -1050,9 +1050,9 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 void OcularsGuiPanel::setButtonsNightMode(bool nightMode)
 {
 	//Reused from SkyGui, with modifications
-	foreach (QGraphicsItem *child, QGraphicsItem::children())
+	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
-		foreach (QGraphicsItem *grandchild, child->children())
+		foreach (QGraphicsItem *grandchild, child->childItems())
 		{
 			StelButton* button = qgraphicsitem_cast<StelButton*>(grandchild);
 			if (button)

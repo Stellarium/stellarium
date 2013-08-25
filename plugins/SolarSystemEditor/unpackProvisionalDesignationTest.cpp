@@ -67,9 +67,9 @@ int TestClass::unpackAlphanumericNumber (QChar prefix, int lastDigit)
 	if (prefix.isDigit())
 		cycleCount += prefix.digitValue() * 10;
 	else if (prefix.isLetter() && prefix.isUpper())
-		cycleCount += (10 + prefix.toAscii() - QChar('A').toAscii()) * 10;
+		cycleCount += (10 + prefix.toLatin1() - QChar('A').toLatin1()) * 10;
 	else if (prefix.isLetter() && prefix.isLower())
-		cycleCount += (10 + prefix.toAscii() - QChar('a').toAscii()) * 10 + 26*10;
+		cycleCount += (10 + prefix.toLatin1() - QChar('a').toLatin1()) * 10 + 26*10;
 	else
 		cycleCount = 0; //Error
 

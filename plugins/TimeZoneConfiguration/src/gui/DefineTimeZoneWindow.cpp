@@ -369,7 +369,7 @@ bool DefineTimeZoneWindow::readDstEndpoint(const QString& string,
 	if (!endPointFormat.exactMatch(string))
 		return false;
 
-	if (endPointFormat.numCaptures() == 2)
+	if (endPointFormat.captureCount() == 2)
 	{
 		QString timeString = endPointFormat.cap(2).trimmed();
 		if (!timeString.isEmpty())

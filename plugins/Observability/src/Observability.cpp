@@ -72,8 +72,6 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
         return info;
 }
 
-Q_EXPORT_PLUGIN2(Observability, ObservabilityStelPluginInterface)
-
 Observability::Observability()
 	: flagShowObservability(false), OnIcon(NULL), OffIcon(NULL), GlowIcon(NULL),toolbarButton(NULL)
 {

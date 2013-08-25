@@ -45,6 +45,7 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QUrl>
+#include <QUrlQuery>
 #include <QDir>
 
 MpcImportWindow::MpcImportWindow() :
@@ -317,10 +318,9 @@ void MpcImportWindow::pasteClipboardURL()
 
 void MpcImportWindow::selectFile()
 {
-	QString directory = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
-	if (directory.isEmpty())
-		directory = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
-        QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
+	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
+							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
+	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directories[0]);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -715,42 +715,43 @@ void MpcImportWindow::sendQuery()
 
 void MpcImportWindow::sendQueryToUrl(QUrl url)
 {
-	//QUrl url;
-	url.addQueryItem("ty","e");//Type: ephemerides
-	url.addQueryItem("TextArea", query);//Object name query
-	//url.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	QUrlQuery q(url);
+	q.addQueryItem("ty","e");//Type: ephemerides
+	q.addQueryItem("TextArea", query);//Object name query
+	//q.addQueryItem("e", "-1");//Elements format: MPC 1-line
 	//XEphem's format is used instead because it doesn't truncate object names.
-	url.addQueryItem("e", "3");//Elements format: XEphem
+	q.addQueryItem("e", "3");//Elements format: XEphem
 	//Yes, all of the rest are necessary
-	url.addQueryItem("d","");
-	url.addQueryItem("l","");
-	url.addQueryItem("i","");
-	url.addQueryItem("u","d");
-	url.addQueryItem("uto", "0");
-	url.addQueryItem("c", "");
-	url.addQueryItem("long", "");
-	url.addQueryItem("lat", "");
-	url.addQueryItem("alt", "");
-	url.addQueryItem("raty", "a");
-	url.addQueryItem("s", "t");
-	url.addQueryItem("m", "m");
-	url.addQueryItem("adir", "S");
-	url.addQueryItem("oed", "");
-	url.addQueryItem("resoc", "");
-	url.addQueryItem("tit", "");
-	url.addQueryItem("bu", "");
-	url.addQueryItem("ch", "c");
-	url.addQueryItem("ce", "f");
-	url.addQueryItem("js", "f");
+	q.addQueryItem("d","");
+	q.addQueryItem("l","");
+	q.addQueryItem("i","");
+	q.addQueryItem("u","d");
+	q.addQueryItem("uto", "0");
+	q.addQueryItem("c", "");
+	q.addQueryItem("long", "");
+	q.addQueryItem("lat", "");
+	q.addQueryItem("alt", "");
+	q.addQueryItem("raty", "a");
+	q.addQueryItem("s", "t");
+	q.addQueryItem("m", "m");
+	q.addQueryItem("adir", "S");
+	q.addQueryItem("oed", "");
+	q.addQueryItem("resoc", "");
+	q.addQueryItem("tit", "");
+	q.addQueryItem("bu", "");
+	q.addQueryItem("ch", "c");
+	q.addQueryItem("ce", "f");
+	q.addQueryItem("js", "f");
+	url.setQuery(q);
 
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader,
 	                  "application/x-www-form-urlencoded");//Is this really necessary?
 	request.setHeader(QNetworkRequest::ContentLengthHeader,
-	                  url.encodedQuery().length());
+	                  url.query(QUrl::FullyEncoded).length());
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
-	queryReply = networkManager->post(request, url.encodedQuery());
+	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());
 	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
 }
 
