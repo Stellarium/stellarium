@@ -150,10 +150,7 @@ bool StelTexture::bind()
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-#ifdef USE_OPENGL_ES2
 		glActiveTexture(GL_TEXTURE0);
-#endif
-
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
