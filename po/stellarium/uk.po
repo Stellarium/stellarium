@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-25 02:35+0700\n"
-"PO-Revision-Date: 2013-08-24 17:55+0000\n"
+"PO-Revision-Date: 2013-08-25 07:57+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-25 04:49+0000\n"
+"X-Launchpad-Export-Date: 2013-08-26 04:39+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -3662,7 +3662,7 @@ msgstr "Вікно налаштовування показу відомих з �
 
 #: src/translations.h:673
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Вікно налаштування показу яскравих нових"
 
 #: src/translations.h:676
 msgid "Move a telescope to a given set of coordinates"
@@ -7299,41 +7299,47 @@ msgstr "[дані щодо наступного оновлення]"
 
 #: plugins/Novae/src/Novae.cpp:72
 msgid "Bright Novae"
-msgstr ""
+msgstr "Яскраві нові"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
+"Додаток, за допомогою якого можна побачити яскраві нові зірки у галактиці "
+"Молочний Шлях."
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Тип: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
+msgstr "нова"
 
 #: plugins/Novae/src/Nova.cpp:142
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Максимальна яскравість: %1"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Додаток яскравих нових"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:112
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"Знайти нову можна за допомогою інструмента пошуку, просто введіть позначення "
+"або поширену назву нової (наприклад «Nova Cygni 1975» або «V1500 Cyg»)."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"У цьому додатку використано дуже просту модель обчислення кривих світності "
+"для нових зірок."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
@@ -7341,12 +7347,16 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"Цю модель засновано на значенні часу зменшення яскравості на %1 величин, де "
+"%1 може приймати значення 2, 3, 6 і 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Якщо для нової немає значення зменшення величини, додаток використовує "
+"типові значення."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -7355,18 +7365,20 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Якщо вам хочеться дізнатися більше про цей додаток, його історію та формат "
+"каталогу, можете %1відвідати цю сторінку%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
 msgid "Novae is updated"
-msgstr ""
+msgstr "Дані нових оновлено"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Налаштування показу яскравих нових"
 
 #: plugins/Novae/src/ui_novaeDialog.h:234
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Налаштування додатка яскравих нових"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
