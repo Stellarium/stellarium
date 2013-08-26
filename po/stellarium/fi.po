@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-25 02:35+0700\n"
-"PO-Revision-Date: 2013-08-25 00:56+0000\n"
+"PO-Revision-Date: 2013-08-25 12:02+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-25 04:40+0000\n"
+"X-Launchpad-Export-Date: 2013-08-26 04:38+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -7250,7 +7250,7 @@ msgstr "Tyyppi: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
+msgstr "nova"
 
 #: plugins/Novae/src/Nova.cpp:142
 #, qt-format
@@ -7283,12 +7283,16 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"Tämä malli perustuu aikaan jona magnitudi himmenee %1 magnitudia "
+"enimmäisarvosta, jossa %1 on 2, 3, 6 ja 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Jos novalla ei ole magnitudin himmentymisarvoa, laajennos käyttää sille "
+"yleisiä arvoja."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -7297,18 +7301,20 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Jos haluat lukea enemmän tästä laajennuksesta, sen historiasta ja luettelon "
+"muodosta, katso %1lisätietoja%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
 msgid "Novae is updated"
-msgstr ""
+msgstr "Novat on päivitetty"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Kirkkaiden novien asetukset"
 
 #: plugins/Novae/src/ui_novaeDialog.h:234
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Kirkkaat novat -laajennuksen asetukset"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
