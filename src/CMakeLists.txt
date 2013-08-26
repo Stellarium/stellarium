@@ -28,13 +28,6 @@ SET(glues_lib_SRCS
 	core/external/glues_stel/source/libtess/tessmono.h
 	)
 
-IF (OPENGL_MODE STREQUAL "Desktop")
-  SET(gl_lib_SRCS core/external/GLee.c core/external/GLee.h)
-ENDIF()
-IF(OPENGL_MODE STREQUAL "ES2")
-  SET(gl_lib_SRCS core/external/GLee.h)
-ENDIF()
-
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
@@ -136,7 +129,6 @@ SET(stellarium_lib_SRCS
 	core/StelShortcutGroup.hpp
 
 	${gl_lib_SRCS}
-	core/external/fixx11h.h
 	core/external/gettext.h
 
 	core/external/kfilter/kfilterdev.h
@@ -586,12 +578,9 @@ IF(GENERATE_STELMAINLIB)
  TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
 ELSE()
  ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
- TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES}
-                                  ${Qt5Core_LIBRARIES}
-                                  ${Qt5Widgets_LIBRARIES}
-                                  ${Qt5Network_LIBRARIES}
-                                  ${Qt5OpenGL_LIBRARIES}
-                                  ${Qt5Script_LIBRARIES})
+ TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+ QT5_USE_MODULES(stellarium Core Gui Widgets OpenGL Network Script)
+
  IF(APPLE)
 # SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/works/OpenGL.framework/Versions/A/Libraries/libGL.dylib -framework Cocoa -framework QtDeclarative")
 SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
