@@ -244,7 +244,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 

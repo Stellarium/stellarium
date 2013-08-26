@@ -281,27 +281,23 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
-# As moc files are generated in the binary dir, tell CMake
-# to always look for includes there:
+# As moc files are generated in the binary dir, tell CMake to always look for includes there:
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-SET(QT_USE_QTOPENGL TRUE)
 IF(ENABLE_SCRIPTING)
   SET(QT_USE_QTSCRIPT TRUE)
 ENDIF()
-SET(QT_USE_QTNETWORK TRUE)
-SET(QT_USE_QTTEST TRUE)
 IF(ENABLE_SOUND)
   ADD_DEFINITIONS(-DHAVE_QT_PHONON)
   SET(QT_USE_PHONON TRUE)
 ENDIF()
+FIND_PACKAGE(OpenGL REQUIRED)
 
 # Get rid of the QtTest dependency for the main binary. It is re-added manually when compiling tests.
 STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
 # Get rid of the GLU dependency, it's not needed in stellarium.
 STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 
-FIND_PACKAGE(OpenGL) # Introduced in revision 5284, may cause problems when compiling in OpenGL ES mode - see lines 248-255 below. --BM
 FIND_PACKAGE(ZLIB)
 
 IF(ENABLE_NLS)
@@ -318,16 +314,6 @@ IF(ENABLE_NLS)
 	/usr/local/lib) # NO_DEFAULT_PATH
   FIND_PACKAGE(Gettext REQUIRED)
   FIND_PACKAGE(XGettext REQUIRED)
-ENDIF()
-
-
-IF (OPENGL_MODE STREQUAL "Desktop")
-  FIND_PACKAGE(OpenGL REQUIRED)
-ENDIF()
-IF(OPENGL_MODE STREQUAL "ES2")
-  ADD_DEFINITIONS(-DUSE_OPENGL_ES2 -DQT_OPENGL_LIB -D_REENTRANT -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED)
-  # Make sure that no desktop OpenGL libraries are linked when OpenGLES is used
-  STRING(REPLACE "-lGL" "-lGLESv2" QT_LIBRARIES "${QT_LIBRARIES}")
 ENDIF()
 
 ########### Set some global variables ###########

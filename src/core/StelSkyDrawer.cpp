@@ -17,10 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifdef USE_OPENGL_ES2
- #include "GLES2/gl2.h"
-#endif
-
 #ifndef GL_POINT_SPRITE
  #define GL_POINT_SPRITE 0x8861
 #endif

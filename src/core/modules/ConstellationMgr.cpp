@@ -1093,18 +1093,11 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	sPainter.enableTexture2d(false);
 	glDisable(GL_BLEND);
-#ifndef USE_OPENGL_ES2
-	glLineStipple(2, 0x3333);
-	glEnable(GL_LINE_STIPPLE);
-#endif
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawBoundaryOptim(sPainter);
 	}
-#ifndef USE_OPENGL_ES2
-	glDisable(GL_LINE_STIPPLE);
-#endif
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const

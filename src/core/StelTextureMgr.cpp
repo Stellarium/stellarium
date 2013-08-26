@@ -64,7 +64,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	}
 	catch (std::runtime_error er)
 	{
-#ifdef USE_OPENGL_ES2
+#if 0
 		// Allow to replace the texures by compressed .pvr versions using GPU decompression.
 		// This saves memory and increases rendering speed.
 		if (!afilename.endsWith(".pvr"))
