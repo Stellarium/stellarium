@@ -601,13 +601,13 @@ float LandscapeMgr::getAtmosphereLightPollutionLuminance() const
 void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
 {
 	// This is an empirical formula
-	setAtmosphereLightPollutionLuminance(qMax(0.,0.0020*std::pow(bIndex-1, 2.1)));
+	setAtmosphereLightPollutionLuminance(qMax(0.,0.0007*std::pow(bIndex-1, 2.1)));
 }
 
 //! Get the light pollution following the Bortle Scale
 int LandscapeMgr::getAtmosphereBortleLightPollution()
 {
-	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0020, 1./2.1) + 1;
+	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0007, 1./2.1) + 1;
 }
 
 void LandscapeMgr::setZRotation(float d)

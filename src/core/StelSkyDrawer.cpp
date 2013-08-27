@@ -312,7 +312,7 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	rcMag[0]*=starLinearScale;
 
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
-	if (rcMag[0] < 0.5f)
+	if (rcMag[0] < 0.01f)
 	{
 		rcMag[0] = rcMag[1] = 0.f;
 		return false;
@@ -322,8 +322,8 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	// And we compensate the difference of brighteness with cmag
 	if (rcMag[0]<1.2f)
 	{
-		rcMag[1] = rcMag[0] * rcMag[0] / 1.44f;
-		if (rcMag[1] < 0.07f)
+		rcMag[1] = rcMag[0] * rcMag[0] * rcMag[0] / 1.728f;
+		if (rcMag[1] < 0.01f)
 		{
 			rcMag[0] = rcMag[1] = 0.f;
 			return false;
