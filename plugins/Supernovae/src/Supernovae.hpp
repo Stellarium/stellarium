@@ -158,6 +158,9 @@ public:
 	//! Get list of supernovae
 	QString getSupernovaeList();
 
+	//! Get lower limit of  brightness for displayed supernovae
+	float getLowerLimitBrightness();
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Supernovae::UpdateState state);
@@ -226,6 +229,8 @@ private:
 
 	// GUI
 	SupernovaeDialog* configDialog;	
+
+	float lowerLimit;
 
 private slots:
 	//! Check to see if an update is required.  This is called periodically by a timer

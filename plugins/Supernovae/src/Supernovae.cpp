@@ -506,10 +506,16 @@ int Supernovae::getJsonFileVersion(void)
 	{
 		jsonVersion = map.value("version").toInt();
 	}
+	lowerLimit = map.value("limit", 10.f).toFloat();
 
 	sneJsonFile.close();
 	qDebug() << "Supernovae::getJsonFileVersion() version from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+float Supernovae::getLowerLimitBrightness()
+{
+	return lowerLimit;
 }
 
 SupernovaP Supernovae::getByID(const QString& id)
