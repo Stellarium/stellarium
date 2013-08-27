@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-25 02:35+0700\n"
-"PO-Revision-Date: 2013-08-08 18:30+0000\n"
+"PO-Revision-Date: 2013-08-26 15:21+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-25 04:45+0000\n"
+"X-Launchpad-Export-Date: 2013-08-27 04:36+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -3649,7 +3649,7 @@ msgstr "Tetingkap konfigurasi Supernova bersejarah"
 
 #: src/translations.h:673
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Tetingkap konfigurasi Nova cerah"
 
 #: src/translations.h:676
 msgid "Move a telescope to a given set of coordinates"
@@ -3803,7 +3803,7 @@ msgstr "Cari Objek atau Kedudukan"
 
 #: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Guna kekunci tab untuk pilih item yang ditemui"
 
 #: src/ui_searchDialogGui.h:571
 msgid "iota"
@@ -3948,11 +3948,11 @@ msgstr "Pelayan:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "Pilihan gelintar"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Guna isian-sendiri hanya dari permulaan perkataan"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
 #: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
@@ -4028,11 +4028,11 @@ msgstr "Skalakan Bulan"
 
 #: src/ui_viewDialog.h:1223
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Ubah lanskap secara automatik bila planet berubah"
 
 #: src/ui_viewDialog.h:1225
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Pilih lanskap secara automatik"
 
 #: src/ui_viewDialog.h:1227
 msgid "Show atmosphere"
@@ -7132,6 +7132,7 @@ msgstr "Supernova Bersejarah"
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
+"Pemalam ini membolehkan anda lihat beberapa supernova bersejarah yang terang."
 
 #: plugins/Supernovae/src/Supernova.cpp:116
 msgid "supernova"
@@ -7149,6 +7150,8 @@ msgstr "Pemalam Supernova Bersejarah"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
+"Pemalam ini membolehkan anda melihat beberapa supernova bersejarah yang "
+"terang: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
@@ -7255,29 +7258,29 @@ msgstr "[maklumat kemaskini berikutnya]"
 
 #: plugins/Novae/src/Novae.cpp:72
 msgid "Bright Novae"
-msgstr ""
+msgstr "Nova Terang"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "Pemalam yang menunjukkan beberapa nova terang dalam bima Sakti."
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Jenis: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
+msgstr "nova"
 
 #: plugins/Novae/src/Nova.cpp:142
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Kecerahan maksimum: %1"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Pemalam Nova Terang"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:112
 msgid ""
