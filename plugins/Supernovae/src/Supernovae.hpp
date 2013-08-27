@@ -230,8 +230,6 @@ private:
 	// GUI
 	SupernovaeDialog* configDialog;	
 
-	float lowerLimit;
-
 private slots:
 	//! Check to see if an update is required.  This is called periodically by a timer
 	//! if the last update was longer than updateFrequencyHours ago then the update is
