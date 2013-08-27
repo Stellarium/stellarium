@@ -254,23 +254,6 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-#ifdef Q_OS_WIN
-	bool safeMode = false; // used in Q_OS_WIN, but need the QGL::setPreferredPaintEngine() call here.
-#endif
-	if (qApp->property("onetime_safe_mode").isValid()) {
-#ifdef Q_OS_WIN
-		safeMode = true;
-#endif
-	}
-
-#ifdef Q_OS_MAC
-	// On Leopard (10.5) + ppc architecture, text display is buggy if OpenGL2 Qt paint engine is used.
-	if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian))
-		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-#endif
-
-// On maemo we'll use the standard OS font
-#ifndef BUILD_FOR_MAEMO
 	// Add the DejaVu font that we use everywhere in the program
 	try
 	{
@@ -301,32 +284,17 @@ int main(int argc, char **argv)
 	}
 
 	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
-	QString safeFont = confSettings->value("gui/safe_font_name", "Verdana").toString();
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
 #ifdef Q_OS_WIN
-
-	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
-	// See Launchpad question #111823 for more info
-	QFont tmpFont(safeMode ? safeFont : baseFont);
+	QFont tmpFont(baseFont);
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
-
-	// Activate verdana by defaut for all win32 builds to see if it improves things.
-	// -> this seems to bring crippled arabic fonts with OpenGL2 paint engine..
-	// QFont tmpFont("Verdana");
-#else
-#ifdef Q_OS_MAC
-	QFont tmpFont(safeFont);
 #else
 	QFont tmpFont(baseFont);
 #endif
-#endif
 	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
-//tmpFont.setFamily("Verdana");
-//tmpFont.setBold(true);
 	QApplication::setFont(tmpFont);
-#endif
 
 	// Initialize translator feature
 	try
@@ -341,36 +309,19 @@ int main(int argc, char **argv)
 	GettextStelTranslator trans;
 	app.installTranslator(&trans);
 
-	if (!QGLFormat::hasOpenGL()) // Check support of OpenGL
-	{		
-		qWarning() << "Oops... This system does not support OpenGL.";
-		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
-		app.quit();
-	}
-	else if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_2)) // Check supported version of OpenGL
-	{
-		// OK, minimal required version of OpenGL is 1.2. If platform does not support this
-		// version then say to user about troubles and quit from application.
-		qWarning() << "Oops... This platform support only OpenGL 1.1.";
-		QMessageBox::warning(0, "Stellarium", q_("Your platform does not support minimal required OpenGL 1.2. Please upgrade drivers for graphics card."));
-		app.quit();
-	}
-	else
-	{
-		StelMainWindow mainWin;
-		mainWin.init(confSettings);
-		app.exec();
-		mainWin.deinit();
+	StelMainWindow mainWin;
+	mainWin.init(confSettings);
+	app.exec();
+	mainWin.deinit();
 
-		delete confSettings;
-		StelLogger::deinit();
+	delete confSettings;
+	StelLogger::deinit();
 
-		#ifdef Q_OS_WIN
-		if(timerGrain)
-			timeEndPeriod(timerGrain);
-		#endif //Q_OS_WIN
+	#ifdef Q_OS_WIN
+	if(timerGrain)
+		timeEndPeriod(timerGrain);
+	#endif //Q_OS_WIN
 
-		return 0;
-	}
+	return 0;
 }
 
