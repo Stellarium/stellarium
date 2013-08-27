@@ -506,7 +506,6 @@ int Supernovae::getJsonFileVersion(void)
 	{
 		jsonVersion = map.value("version").toInt();
 	}
-	lowerLimit = map.value("limit", 10.f).toFloat();
 
 	sneJsonFile.close();
 	qDebug() << "Supernovae::getJsonFileVersion() version from file:" << jsonVersion;
@@ -515,6 +514,22 @@ int Supernovae::getJsonFileVersion(void)
 
 float Supernovae::getLowerLimitBrightness()
 {
+	float lowerLimit = 10.f;
+	QFile sneJsonFile(sneJsonPath);
+	if (!sneJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Supernovae::init cannot open " << QDir::toNativeSeparators(sneJsonPath);
+		return lowerLimit;
+	}
+
+	QVariantMap map;
+	map = StelJsonParser::parse(&sneJsonFile).toMap();
+	if (map.contains("limit"))
+	{
+		lowerLimit = map.value("limit").toFloat();
+	}
+
+	sneJsonFile.close();
 	return lowerLimit;
 }
 
