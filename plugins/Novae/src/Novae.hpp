@@ -114,7 +114,7 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QString getName() const { return "Novae"; }
+	virtual QString getName() const { return "Bright Novae"; }
 
 	//! get a nova object by identifier
 	NovaP getByID(const QString& id);
