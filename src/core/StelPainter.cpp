@@ -77,8 +77,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #ifndef NDEBUG
 	Q_ASSERT(globalMutex);
 	
-	initializeOpenGLFunctions();
-	
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
 	{
@@ -94,9 +92,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 #endif
 
 	qPainter = new QPainter(new QOpenGLPaintDevice());
-			
-	Q_ASSERT(qPainter);
-	qPainter->beginNativePainting();
 
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
@@ -128,7 +123,6 @@ StelPainter::~StelPainter()
 			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
 #endif
-	qPainter->endNativePainting();
 	delete qPainter;
 	
 #ifndef NDEBUG

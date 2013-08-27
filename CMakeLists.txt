@@ -107,13 +107,6 @@ IF(OPTIMIZE_INTEL_ATOM)
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
 ENDIF()
 
-SET(BUILD_FOR_MAEMO 0 CACHE BOOL "Set to 1 or true if you want to build for maemo target")
-IF(BUILD_FOR_MAEMO)
-  # Optimize for N900 ARM processor
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DBUILD_FOR_MAEMO")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DBUILD_FOR_MAEMO")
-ENDIF()
-
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
 IF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
@@ -138,11 +131,7 @@ IF(APPLE)
  #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6")
  #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.6.sdk/")
 
- # uncomment one of the following, depending on what platforms you want.
- # NOTE: Qt build for Cocoa is Intel only.  Qt with Carbon is both, but does not seem
- # to handle 64bit well.
- #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64;ppc;ppc64")
- #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
+ # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
@@ -181,7 +170,6 @@ ENDIF()
 
 
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
-SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
 
@@ -191,16 +179,6 @@ IF(WIN32)
   SET(GENERATE_STELMAINLIB 1)
 ELSE()
   SET(GENERATE_STELMAINLIB 0)
-ENDIF()
-
-# For Windows, the default back end for the graphics system should be "native", as "raster"
-# causes problems for many ATI users.  However, for other platforms we should use raster
-# as the default as it is faster.
-# Mac 10.6 requires native as well.
-IF(WIN32 OR APPLE)
-  ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="native")
-ELSE()
-  ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="raster")
 ENDIF()
 
 ########### Plugin setup #############
