@@ -37,8 +37,6 @@ class StelShortcutMgr : public QObject
 public:
 	StelShortcutMgr();
 
-	void init();
-
 	//! Load shortcuts from an existing file.
 	//! @param filePath full path to the file.
 	//! @param overload if true, if a shortcut in the file already exists,
@@ -125,9 +123,6 @@ private:
 	void addGroup(const QString& id,
 	              QString text,
 	              const QString& pluginId = QString());
-
-	//! Used for obtaining actions by their object names.
-	StelAppGraphicsWidget* stelAppGraphicsWidget;
 	//! Map of shortcut groups by ID.
 	QMap<QString, StelShortcutGroup*> shGroups;
 };
