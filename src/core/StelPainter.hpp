@@ -29,8 +29,6 @@
 #include <QOpenGLFunctions>
 
 class QOpenGLShaderProgram;
-class QPainter;
-class QGLContext;
 
 class StelPainterLight
 {
@@ -257,13 +255,7 @@ public:
 
 	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
 	//! This method needs to be called once at init.
-	static void initSystemGLInfo(QGLContext *ctx);
-
-	//! Swap the OpenGL buffers. You normally don't need to do that.
-	static void swapBuffer();
-
-	//! Make sure that our GL context is current and valid.
-	static void makeMainGLContextCurrent();
+	static void initSystemGLInfo(class QGLContext *ctx);
 
 	//! Set whether texturing is enabled.
 	void enableTexture2d(bool b);
@@ -352,11 +344,8 @@ private:
 	static class QMutex* globalMutex;
 #endif
 
-	//! The QPainter to use for some drawing operations.
-	QPainter* qPainter;
-
-	//! The main GL Context used by Stellarium.
-	static QGLContext* glContext;
+	//! The used for text drawing
+	QFont currentFont;
 
 	Vec4f currentColor;
 	bool texture2dEnabled;
