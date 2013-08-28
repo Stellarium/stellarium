@@ -352,7 +352,6 @@ void StelApp::init(QSettings* conf)
 	shortcutMgr = new StelShortcutMgr();
 
 	localeMgr->init();
-	shortcutMgr->init();
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
