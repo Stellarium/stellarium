@@ -82,7 +82,7 @@ StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 	Q_UNUSED(parent);
 	setFlag(QGraphicsItem::ItemHasNoContents, false);
 	setAcceptHoverEvents(true);
-	setAcceptedMouseButtons(Qt::LeftButton);
+	setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
 	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
 	previousPaintTime = StelApp::getTotalRunTime();
@@ -186,8 +186,6 @@ public:
 		setAttribute(Qt::WA_PaintOnScreen);
 		setAttribute(Qt::WA_NoSystemBackground);
 		setAttribute(Qt::WA_OpaquePaintEvent);
-		//setAutoFillBackground(false);
-		setBackgroundRole(QPalette::Window);
 	}
 
 protected:
@@ -224,16 +222,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	initTitleI18n();
 	setObjectName("Mainview");
 
-	// Avoid white background at init
-	setAttribute(Qt::WA_PaintOnScreen);
-	setAttribute(Qt::WA_NoSystemBackground);
-	setAttribute(Qt::WA_OpaquePaintEvent);
-	setAutoFillBackground(true);
-	setBackgroundRole(QPalette::Window);
-	QPalette pal;
-	pal.setColor(QPalette::Window, Qt::black);
-	setPalette(pal);
-
 	// Allows for precise FPS control
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	setFrameShape(QFrame::NoFrame);
@@ -246,13 +234,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
-	glContext = new QGLContext(glFormat);
-	glWidget = new StelQGLWidget(glContext, this);
-	glWidget->updateGL();
+	glWidget = new StelQGLWidget(new QGLContext(glFormat), this);
 	setViewport(glWidget);
-
-	// This line seems to cause font aliasing troubles on win32
-	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
 
 	// Workaround (see Bug #940638) Although we have already explicitly set
 	// LC_NUMERIC to "C" in main.cpp there seems to be a bug in OpenGL where
@@ -269,20 +252,6 @@ StelMainGraphicsView::~StelMainGraphicsView()
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
-	int width = conf->value("video/screen_w", 800).toInt();
-	int height = conf->value("video/screen_h", 600).toInt();
-	if (conf->value("video/fullscreen", true).toBool())
-	{
-		setFullScreen(true);
-	}
-	else
-	{
-		setFullScreen(false);
-		int x = conf->value("video/screen_x", 0).toInt();
-		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);
-	}
-
 	// Look for a static GUI plugins.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
 	{
@@ -309,7 +278,21 @@ void StelMainGraphicsView::init(QSettings* conf)
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
-	resize(width, height);
+	
+	int width = conf->value("video/screen_w", 800).toInt();
+	int height = conf->value("video/screen_h", 600).toInt();
+	if (conf->value("video/fullscreen", true).toBool())
+	{
+		setFullScreen(true);
+	}
+	else
+	{
+		setFullScreen(false);
+		int x = conf->value("video/screen_x", 0).toInt();
+		int y = conf->value("video/screen_y", 0).toInt();
+		move(x, y);
+		resize(width, height);
+	}
 	show();
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();

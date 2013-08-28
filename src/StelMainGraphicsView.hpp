@@ -133,7 +133,6 @@ private:
 
 	//! The openGL window
 	StelQGLWidget* glWidget;
-	class QGLContext* glContext;
 
 	StelGuiBase* gui;
 
