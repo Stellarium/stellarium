@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-25 02:35+0700\n"
+"POT-Creation-Date: 2013-08-27 19:18+0700\n"
 "PO-Revision-Date: 2013-05-02 19:50+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-25 04:38+0000\n"
+"X-Launchpad-Export-Date: 2013-08-28 04:38+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -59,7 +59,7 @@ msgstr "Planeta: "
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
 #: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
-#: plugins/Supernovae/src/Supernova.cpp:116 plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
 #, qt-format
 msgid "Type: <b>%1</b>"
@@ -67,7 +67,7 @@ msgstr "Mota: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
-#: plugins/Supernovae/src/Supernova.cpp:121 plugins/Novae/src/Nova.cpp:131
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:131
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:155
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:449
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
-#: plugins/Supernovae/src/Supernova.cpp:124 plugins/Novae/src/Nova.cpp:134
+#: plugins/Supernovae/src/Supernova.cpp:130 plugins/Novae/src/Nova.cpp:134
 #: plugins/Quasars/src/Quasar.cpp:118 plugins/Exoplanets/src/Exoplanet.cpp:160
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -279,7 +279,7 @@ msgid "Spectral Type: %1"
 msgstr "Mota espektrala: %1"
 
 #: src/core/modules/StarWrapper.cpp:213
-#: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:144
+#: plugins/Supernovae/src/Supernova.cpp:141 plugins/Novae/src/Nova.cpp:144
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Distance: %1 Light Years"
@@ -6319,62 +6319,62 @@ msgstr ""
 "modua aldatzea ahalbideratzen du."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "January"
 msgstr "Urtarrila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "February"
 msgstr "Otsaila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "March"
 msgstr "Martxoa"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "April"
 msgstr "Apirila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "May"
 msgstr "Maiatza"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "June"
 msgstr "Ekaina"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "July"
 msgstr "Uztaila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "August"
 msgstr "Abuztua"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "September"
 msgstr "Iraila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "October"
 msgstr "Urria"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "November"
 msgstr "Azaroa"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "December"
 msgstr "Abendua"
 
@@ -6958,14 +6958,19 @@ msgstr "Supernoba historikoak"
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:116
+#: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
 msgstr "supernoba"
 
-#: plugins/Supernovae/src/Supernova.cpp:132
+#: plugins/Supernovae/src/Supernova.cpp:138
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr "Supernoba mota: %1"
+
+#: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:142
+#, qt-format
+msgid "Maximum brightness: %1"
+msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -6973,6 +6978,11 @@ msgstr "Supernoba historikoak plugina"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid "This plugin allows you to see some bright historical supernovae: "
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+#, qt-format
+msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
@@ -7089,11 +7099,6 @@ msgstr ""
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
-
-#: plugins/Novae/src/Nova.cpp:142
-#, qt-format
-msgid "Maximum brightness: %1"
 msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
