@@ -74,7 +74,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 Satellites::Satellites()
 	: pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
 	  earth(NULL), defaultHintColor(0.0, 0.4, 0.6), defaultOrbitColor(0.0, 0.3, 0.6),
-	  progressBar(NULL)
+	  progressBar(NULL), satelliteListModel(NULL)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
