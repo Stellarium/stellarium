@@ -36,11 +36,16 @@ class StelMainGraphicsView : public QDeclarativeView
 {
 Q_OBJECT
 public:
-	StelMainGraphicsView(QWidget* parent);
+	StelMainGraphicsView(QWidget* parent = NULL);
 	virtual ~StelMainGraphicsView();
 
 	//! Start the main initialization of Stellarium
 	void init(class QSettings* conf);
+	void deinit();
+
+	//! Set the application title for the current language.
+	//! This is useful for e.g. chinese.
+	void initTitleI18n();
 
 	//! Get the StelMainGraphicsView singleton instance.
 	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
@@ -57,6 +62,9 @@ public:
 	QGraphicsWidget* getTopLevelGraphicsWidget() {return backItem;}
 
 public slots:
+
+	//!	Set whether fullscreen is activated or not
+	void setFullScreen(bool);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods

@@ -23,7 +23,6 @@
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
 #include "StelAppGraphicsWidget.hpp"
 #include "StelApp.hpp"
@@ -309,7 +308,7 @@ void ConfigurationDialog::selectLanguage(const QString& langName)
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
-	StelMainWindow::getInstance().initTitleI18n();
+	StelMainGraphicsView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -639,10 +638,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
 
 	// full screen and window size
-	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
-	if (!StelMainWindow::getInstance().getFullScreen())
+	conf->setValue("video/fullscreen", StelMainGraphicsView::getInstance().isFullScreen());
+	if (!StelMainGraphicsView::getInstance().isFullScreen())
 	{
-		StelMainWindow& mainWindow = StelMainWindow::getInstance();
+		QWidget& mainWindow = StelMainGraphicsView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
 		conf->setValue("video/screen_x", mainWindow.x());
