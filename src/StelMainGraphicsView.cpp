@@ -29,7 +29,6 @@
 #include "StelMainWindow.hpp"
 
 #include <QPaintEngine>
-#include <QGraphicsView>
 #include <QGLWidget>
 #include <QResizeEvent>
 #include <QSettings>
@@ -157,7 +156,7 @@ protected:
 };
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
-	: QGraphicsView(parent), backItem(NULL), gui(NULL),
+	: QDeclarativeView(parent), backItem(NULL), gui(NULL),
 #ifndef DISABLE_SCRIPTING
 	scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
@@ -360,45 +359,45 @@ void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
 {
 	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
 	backItem->setGeometry(0,0,event->size().width(),event->size().height());
-	QGraphicsView::resizeEvent(event);
+	QDeclarativeView::resizeEvent(event);
 
 }
 
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::mouseMoveEvent(event);
+	QDeclarativeView::mouseMoveEvent(event);
 }
 
 
 void StelMainGraphicsView::mousePressEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::mousePressEvent(event);
+	QDeclarativeView::mousePressEvent(event);
 }
 
 void StelMainGraphicsView::mouseReleaseEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::mouseReleaseEvent(event);
+	QDeclarativeView::mouseReleaseEvent(event);
 }
 
 void StelMainGraphicsView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::wheelEvent(event);
+	QDeclarativeView::wheelEvent(event);
 }
 
 void StelMainGraphicsView::keyPressEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::keyPressEvent(event);
+	QDeclarativeView::keyPressEvent(event);
 }
 
 void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::keyReleaseEvent(event);
+	QDeclarativeView::keyReleaseEvent(event);
 }
 
 //! Delete openGL textures (to call before the GLContext disappears)

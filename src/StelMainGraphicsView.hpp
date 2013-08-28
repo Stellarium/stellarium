@@ -20,7 +20,7 @@
 #ifndef _STELMAINGRAPHICSVIEW_HPP_
 #define _STELMAINGRAPHICSVIEW_HPP_
 
-#include <QGraphicsView>
+#include <QDeclarativeView>
 #include <QCoreApplication>
 #include <QEventLoop>
 
@@ -34,7 +34,7 @@ class StelQGLWidget;
 //! @class StelMainGraphicsView
 //! Reimplement a QGraphicsView for Stellarium.
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
-class StelMainGraphicsView : public QGraphicsView
+class StelMainGraphicsView : public QDeclarativeView
 {
 Q_OBJECT
 public:
