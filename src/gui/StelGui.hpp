@@ -59,7 +59,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the StelGui object.
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, StelAppGraphicsWidget* stelAppGraphicsWidget);
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget);
 	void update();
 
 	StelStyle getStelStyle() const {return currentStelStyle;}

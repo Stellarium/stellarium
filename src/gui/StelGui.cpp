@@ -52,7 +52,6 @@
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
-#include "StelAppGraphicsWidget.hpp"
 
 #include "ConfigurationDialog.hpp"
 #include "DateTimeDialog.hpp"
@@ -149,12 +148,11 @@ StelGui::~StelGui()
 #endif
 }
 
-void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
+void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
 	qDebug() << "Creating GUI ...";
 
-	StelGuiBase::init(atopLevelGraphicsWidget, astelAppGraphicsWidget);
-
+	StelGuiBase::init(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
 	locationDialog = new LocationDialog();
 	helpDialog = new HelpDialog();
@@ -497,11 +495,11 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
 	l->addItem(skyGui, 0, 0);
-	stelAppGraphicsWidget->setLayout(l);
+	atopLevelGraphicsWidget->setLayout(l);
 
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 
-	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
+	skyGui->setGeometry(atopLevelGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
 
 	// The disabled text for checkboxes is embossed with the QPalette::Light setting for the ColorGroup Disabled.
