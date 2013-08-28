@@ -19,7 +19,6 @@
 
 #include "StelApp.hpp"
 #include "StelShortcutGroup.hpp"
-#include "StelAppGraphicsWidget.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
 #ifndef DISABLE_SCRIPTING
@@ -38,13 +37,10 @@ StelShortcut::StelShortcut(const QString &id,
                            bool checkable,
                            bool autoRepeat,
                            bool global,
-                           QGraphicsWidget *parent) :
+                           QWidget *parent) :
     m_id(id), m_temporary(false)
 {
-	if (parent == NULL)
-	{
-		parent = StelMainGraphicsView::getInstance().getStelAppGraphicsWidget();
-	}
+	parent = parent ?: &StelMainGraphicsView::getInstance();
 	m_action = new QAction(parent);
 	m_action->setObjectName(id);
 	m_group = group;
@@ -192,7 +188,7 @@ StelShortcutGroup::~StelShortcutGroup()
 }
 
 QAction* StelShortcutGroup::registerAction(const QString &actionId, bool temporary, const QString &text, const QString &primaryKey,
-																					 const QString &altKey, bool checkable, bool autoRepeat, bool global, QGraphicsWidget *parent)
+											const QString &altKey, bool checkable, bool autoRepeat, bool global, QWidget *parent)
 {
 	if (m_shortcuts.contains(actionId))
 	{

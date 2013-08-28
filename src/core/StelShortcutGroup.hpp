@@ -32,7 +32,7 @@ class StelShortcut : public QObject
 public:
 	StelShortcut(const QString& id, StelShortcutGroup* group, const QString& text,
 							 const QString& primaryKey, const QString& altKey,
-							 bool checkable, bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = NULL);
+							 bool checkable, bool autoRepeat = true, bool global = false, QWidget *parent = NULL);
 
 	~StelShortcut();
 
@@ -98,8 +98,8 @@ public:
 	~StelShortcutGroup();
 
 	QAction* registerAction(const QString& actionId, bool temporary, const QString& text, const QString& primaryKey,
-													const QString& altKey, bool checkable, bool autoRepeat = true,
-                                                    bool global = false, QGraphicsWidget *parent = 0);
+							const QString& altKey, bool checkable, bool autoRepeat = true,
+							bool global = false, QWidget *parent = 0);
 
 	QAction* getAction(const QString &actionId);
 	StelShortcut* getShortcut(const QString& id);

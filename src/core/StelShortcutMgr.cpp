@@ -21,7 +21,6 @@
 #include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelApp.hpp"
-#include "StelAppGraphicsWidget.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -36,11 +35,6 @@
 
 StelShortcutMgr::StelShortcutMgr()
 {
-}
-
-void StelShortcutMgr::init()
-{
-	stelAppGraphicsWidget = StelMainGraphicsView::getInstance().getStelAppGraphicsWidget();
 }
 
 QAction* StelShortcutMgr::addGuiAction(const QString& actionId,
@@ -67,7 +61,7 @@ QAction* StelShortcutMgr::addGuiAction(const QString& actionId,
 	                                         checkable,
 	                                         autoRepeat,
 	                                         global,
-	                                         stelAppGraphicsWidget);
+	                                         NULL);
 }
 
 void StelShortcutMgr::changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey)
@@ -93,7 +87,7 @@ void StelShortcutMgr::setShortcutText(const QString &actionId, const QString &gr
 
 QAction* StelShortcutMgr::getGuiAction(const QString& actionName)
 {
-	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);
+	QAction* a = StelMainGraphicsView::getInstance().findChild<QAction*>(actionName);
 	if (!a)
 	{
 		qWarning() << "Can't find action " << actionName;
