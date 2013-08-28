@@ -29,7 +29,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "StarMgr.hpp"
@@ -254,8 +253,8 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiAction("actionSet_Tracking"), SIGNAL(toggled(bool)), mmgr, SLOT(setFlagTracking(bool)));
 	getGuiAction("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 
-	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainWindow::getInstance().isFullScreen());
+	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFullScreen(bool)));
+	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainGraphicsView::getInstance().isFullScreen());
 
 	QAction* tempAction = getGuiAction("actionShow_Location_Window_Global");
 	connect(tempAction, SIGNAL(toggled(bool)),
@@ -847,7 +846,7 @@ void StelGui::update()
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getGuiAction("actionShow_Night_Mode")->isChecked() != flag)
 		getGuiAction("actionShow_Night_Mode")->setChecked(flag);
-	flag = StelMainWindow::getInstance().isFullScreen();
+	flag = StelMainGraphicsView::getInstance().isFullScreen();
 	if (getGuiAction("actionSet_Full_Screen_Global")->isChecked() != flag)
 		getGuiAction("actionSet_Full_Screen_Global")->setChecked(flag);
 
