@@ -18,7 +18,6 @@
  */
 
 #include "StelMainGraphicsView.hpp"
-#include "StelAppGraphicsWidget.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -43,10 +42,141 @@
 #include <QTimer>
 #include <QDir>
 #include <QIcon>
+#include <QDeclarativeItem>
+#include <QOpenGLFunctions>
 
 
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
+
+//! Render Stellarium sky. 
+class StelSkyItem : public QDeclarativeItem, protected QOpenGLFunctions
+{
+public:
+	StelSkyItem(QDeclarativeItem* parent = NULL);
+	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
+protected:
+	void mousePressEvent(QGraphicsSceneMouseEvent* event);
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+	void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+	void wheelEvent(QGraphicsSceneWheelEvent *event);
+	void keyPressEvent(QKeyEvent *event);
+	void keyReleaseEvent(QKeyEvent *event);
+private:
+	double previousPaintTime;
+	void onSizeChanged();
+};
+
+//! Initialize and render Stellarium gui.
+class StelGuiItem : public QDeclarativeItem
+{
+public:
+	StelGuiItem(QDeclarativeItem* parent = NULL);
+private:
+	QGraphicsWidget *widget;
+	void onSizeChanged();
+};
+
+StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
+{
+	Q_UNUSED(parent);
+	setFlag(QGraphicsItem::ItemHasNoContents, false);
+	setAcceptHoverEvents(true);
+	setAcceptedMouseButtons(Qt::LeftButton);
+	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
+	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
+	previousPaintTime = StelApp::getTotalRunTime();
+}
+
+void StelSkyItem::onSizeChanged()
+{
+	StelApp::getInstance().glWindowHasBeenResized(x(), y(), width(), height());
+}
+
+void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	Q_UNUSED(option);
+	Q_UNUSED(widget);
+
+	const double now = StelApp::getTotalRunTime();
+	double dt = now - previousPaintTime;
+	previousPaintTime = now;
+
+	painter->beginNativePainting();
+	glClearColor(0, 0, 0, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	StelApp::getInstance().update(dt);
+	StelApp::getInstance().draw();
+
+	painter->endNativePainting();
+	// update();
+}
+
+void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+	QPointF pos = event->scenePos();
+	// XXX: to reintroduce
+	//distortPos(&pos);
+	pos.setY(height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
+	StelApp::getInstance().handleClick(&newEvent);
+}
+
+void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
+{
+	QPointF pos = event->scenePos();
+	// XXX: to reintroduce
+	// distortPos(&pos);
+	pos.setY(height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
+	StelApp::getInstance().handleClick(&newEvent);
+}
+
+void StelSkyItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+{
+	QPointF pos = event->scenePos();
+	// XXX: to reintroduce
+	// distortPos(&pos);
+	pos.setY(height() - 1 - pos.y());
+	StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
+}
+
+void StelSkyItem::wheelEvent(QGraphicsSceneWheelEvent *event)
+{
+	QPointF pos = event->scenePos();
+	// XXX: to reintroduce
+	// distortPos(&pos);
+	pos.setY(height() - 1 - pos.y());
+	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+	StelApp::getInstance().handleWheel(&newEvent);
+}
+
+void StelSkyItem::keyPressEvent(QKeyEvent* event)
+{
+	StelApp::getInstance().handleKeys(event);
+}
+
+void StelSkyItem::keyReleaseEvent(QKeyEvent* event)
+{
+	StelApp::getInstance().handleKeys(event);
+}
+
+
+StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
+{
+	connect(this, &StelGuiItem::widthChanged, this, &StelGuiItem::onSizeChanged);
+	connect(this, &StelGuiItem::heightChanged, this, &StelGuiItem::onSizeChanged);
+	widget = new QGraphicsWidget(this);
+	StelApp::getInstance().getGui()->init(widget);
+}
+
+void StelGuiItem::onSizeChanged()
+{
+	// I whish I could find a way to let Qt automatically resize the widget
+	// when the QDeclarativeItem size changes.
+	widget->setGeometry(0, 0, width(), height());
+	StelApp::getInstance().getGui()->forceRefreshGui();
+}
 
 class StelQGLWidget : public QGLWidget
 {
@@ -77,7 +207,7 @@ protected:
 };
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
-	: QDeclarativeView(parent), backItem(NULL), gui(NULL),
+	: QDeclarativeView(parent), gui(NULL),
 	  wasDeinit(false),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
@@ -124,12 +254,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	// This line seems to cause font aliasing troubles on win32
 	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
 
-	setScene(new QGraphicsScene(this));
-	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
-
-	backItem = new QGraphicsWidget();
-	backItem->setFocusPolicy(Qt::NoFocus);
-
 	// Workaround (see Bug #940638) Although we have already explicitly set
 	// LC_NUMERIC to "C" in main.cpp there seems to be a bug in OpenGL where
 	// it will silently reset LC_NUMERIC to the value of LC_ALL during OpenGL
@@ -147,7 +271,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 {
 	int width = conf->value("video/screen_w", 800).toInt();
 	int height = conf->value("video/screen_h", 600).toInt();
-	resize(width, height);
 	if (conf->value("video/fullscreen", true).toBool())
 	{
 		setFullScreen(true);
@@ -159,39 +282,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
 	}
-	show();
-
-	Q_ASSERT(glWidget->isValid());
-	glWidget->makeCurrent();
-
-	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
-	mainSkyItem = new StelAppGraphicsWidget();
-	mainSkyItem->setZValue(-10);
-	mainSkyItem->setContentsMargins(0,0,0,0);
-	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);
-	l->setSpacing(0);
-	l->setContentsMargins(0,0,0,0);
-	l->addItem(mainSkyItem, 0, 0);
-	backItem->setLayout(l);
-	scene()->addItem(backItem);
-
-	// Activate the resizing caused by the layout
-	QCoreApplication::processEvents();
-
-	mainSkyItem->setFocus();
-
-	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
-	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
-	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
-	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
-	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
-
-	StelPainter::initSystemGLInfo(glContext);
-
-	// Initialize the core, including the StelApp instance.
-	mainSkyItem->init(conf);
-	// Prevent flickering on mac Leopard/Snow Leopard
-	glWidget->setAutoFillBackground (false);
 
 	// Look for a static GUI plugins.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
@@ -203,11 +293,30 @@ void StelMainGraphicsView::init(QSettings* conf)
 		}
 		break;
 	}
-	Q_ASSERT(gui);	// There was no GUI plugin found
-	gui->init(backItem, mainSkyItem);
-	StelApp::getInstance().setGui(gui);
-	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.
-	gui->forceRefreshGui();
+	Q_ASSERT(gui);
+
+	Q_ASSERT(glWidget->isValid());
+	glWidget->makeCurrent();
+	
+	StelApp *stelApp = new StelApp();
+	stelApp->setGui(gui);
+	StelApp::initStatic();
+	stelApp->init(conf);
+	StelPainter::initSystemGLInfo((QGLContext*)QGLContext::currentContext());
+
+	setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+	setResizeMode(QDeclarativeView::SizeRootObjectToView);
+	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
+	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
+	setSource(QUrl("qrc:/qml/qml/main.qml"));
+	resize(width, height);
+	show();
+
+	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
+	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
+	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
+	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
+	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
 	// plugins, because the gui create the QActions needed by some plugins.
@@ -289,20 +398,13 @@ void StelMainGraphicsView::minFpsChanged()
 	minFpsTimer->start((int)(1./getMinFps()*1000.));
 }
 
-void StelMainGraphicsView::resizeEvent(QResizeEvent* event)
-{
-	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
-	backItem->setGeometry(0,0,event->size().width(),event->size().height());
-	QDeclarativeView::resizeEvent(event);
 
-}
 
 void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseMoveEvent(event);
 }
-
 
 void StelMainGraphicsView::mousePressEvent(QMouseEvent* event)
 {
@@ -334,6 +436,7 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 	QDeclarativeView::keyReleaseEvent(event);
 }
 
+
 //! Delete openGL textures (to call before the GLContext disappears)
 void StelMainGraphicsView::deinitGL()
 {
@@ -343,7 +446,6 @@ void StelMainGraphicsView::deinitGL()
 	wasDeinit = true;
 	StelApp::getInstance().deinit();
 	delete gui;
-	delete mainSkyItem;
 }
 
 void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
