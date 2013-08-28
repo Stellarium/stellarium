@@ -109,7 +109,6 @@ StelTexture::~StelTexture()
 {
 	if (id != 0)
 	{
-		StelPainter::makeMainGLContextCurrent();
 		if (glIsTexture(id)==GL_FALSE)
 		{
 			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
