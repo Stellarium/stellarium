@@ -163,8 +163,6 @@ StelSkyDrawer::~StelSkyDrawer()
 // Init parameters from config file
 void StelSkyDrawer::init()
 {
-	StelPainter::makeMainGLContextCurrent();
-
 	// Load star texture no mipmap:
 	texHalo = StelApp::getInstance().getTextureManager().createTexture("textures/star16x16.png");
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture("textures/haloLune.png");

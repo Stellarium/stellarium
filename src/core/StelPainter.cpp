@@ -39,38 +39,18 @@
 #include <QOpenGLPaintDevice>
 #include <QOpenGLShader>
 
-#ifndef GL_MULTISAMPLE
-#define GL_MULTISAMPLE  0x809D
-#endif
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
-QGLContext* StelPainter::glContext = NULL;
+QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
+StelPainter::BasicShaderVars StelPainter::basicShaderVars;
+StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
- QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
- QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
- QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
- StelPainter::BasicShaderVars StelPainter::basicShaderVars;
- StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
- StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
-
-void StelPainter::makeMainGLContextCurrent()
-{
-	/*
-	Q_ASSERT(glContext!=NULL);
-	Q_ASSERT(glContext->isValid());
-	glContext->makeCurrent();
-	*/
-}
-
-void StelPainter::swapBuffer()
-{
-	Q_ASSERT(glContext!=NULL);
-	Q_ASSERT(glContext->isValid());
-	glContext->swapBuffers();
-}
 
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
@@ -93,8 +73,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	}
 #endif
 
-	qPainter = new QPainter(new QOpenGLPaintDevice());
-
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	// Fix some problem when using Qt OpenGL2 engine
@@ -115,8 +93,6 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
-	Q_ASSERT(qPainter);
-
 #ifndef NDEBUG
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
@@ -125,8 +101,7 @@ StelPainter::~StelPainter()
 			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
 #endif
-	delete qPainter;
-	
+
 #ifndef NDEBUG
 	// We are done with this StelPainter
 	globalMutex->unlock();
@@ -136,8 +111,7 @@ StelPainter::~StelPainter()
 
 void StelPainter::setFont(const QFont& font)
 {
-	Q_ASSERT(qPainter);
-	qPainter->setFont(font);
+	currentFont = font;
 }
 
 void StelPainter::setColor(float r, float g, float b, float a)
@@ -152,8 +126,7 @@ Vec4f StelPainter::getColor() const
 
 QFontMetrics StelPainter::getFontMetrics() const
 {
-	Q_ASSERT(qPainter);
-	return qPainter->fontMetrics();
+	return QFontMetrics(currentFont);
 }
 
 
@@ -554,12 +527,12 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
 		return;
 	theta = std::atan2(dy - 1, dx);
-	psi = std::atan2((float)qPainter->fontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
+	psi = std::atan2((float)getFontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
 	if (psi>5) {
 		psi = 5;
 	}
 
-	float cWidth = (float)qPainter->fontMetrics().width(ws)/ws.length();
+	float cWidth = (float)getFontMetrics().width(ws)/ws.length();
 	float xVc = prj->viewportCenter[0] + xshift;
 	float yVc = prj->viewportCenter[1] + yshift;
 
@@ -571,7 +544,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 			y = d * std::sin (theta) + yVc ; 
 			drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
 			// Compute how much the character contributes to the angle
-			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[i]) - cWidth)/ cWidth);
+			theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[i]) - cWidth)/ cWidth);
 		}
 	}
 	else
@@ -582,7 +555,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 			x = d * std::cos (theta) + xVc;
 			y = d * std::sin (theta) + yVc; 
 			drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
-			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
+			theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
 		}
 	}
 }
@@ -627,7 +600,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	{
 		static const int cacheLimitByte = 10000000;
 		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
-		int pixelSize = qPainter->font().pixelSize();
+		int pixelSize = currentFont.pixelSize();
 		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
 
 		const StringTexture* cachedTex = texCache.object(hash);
@@ -640,7 +613,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			newTex->subTexWidth = strRect.width()+1+(int)(0.02f*strRect.width());
 			newTex->subTexHeight = strRect.height();
 			QPixmap strImage;
-			if (openGLFeatures() & QOpenGLFunctions::NPOTTextures)
+			if (hasOpenGLFeature(QOpenGLFunctions::NPOTTextures))
 				strImage = QPixmap(newTex->subTexWidth, newTex->subTexHeight);
 			else
 				strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(newTex->subTexWidth), StelUtils::getBiggerPowerOfTwo(newTex->subTexHeight));
@@ -650,13 +623,13 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			strImage.fill(Qt::transparent);
 
 			QPainter painter(&strImage);
-			painter.setFont(qPainter->font());
+			painter.setFont(currentFont);
 			painter.setRenderHints(QPainter::TextAntialiasing, true);
 			painter.setPen(Qt::white);
 			painter.drawText(-strRect.x(), -strRect.y(), str);
 
 			// Create and bind texture, and add it to the list of cached textures
-			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
+			newTex->texture = const_cast<QGLContext*>(QGLContext::currentContext())->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
 			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
 			cachedTex=newTex;
 		}
@@ -705,7 +678,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setVertexPointer(2, GL_FLOAT, vertexData);
 
 		float* texCoords = NULL;
-		if (openGLFeatures() & QOpenGLFunctions::NPOTTextures)
+		if (hasOpenGLFeature(QOpenGLFunctions::NPOTTextures))
 			setTexCoordPointer(2, GL_FLOAT, texCoordData);
 		else
 		{
@@ -721,8 +694,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		drawFromArray(TriangleStrip, 4, 0, false);
 		enableClientStates(false);
 
-		if (!(openGLFeatures() & QOpenGLFunctions::NPOTTextures))
-			delete[] texCoords;
+		delete[] texCoords;
 	}
 }
 
@@ -1741,11 +1713,6 @@ void StelPainter::enableTexture2d(bool b)
 
 void StelPainter::initSystemGLInfo(QGLContext* ctx)
 {
-	Q_ASSERT(glContext==NULL);
-	glContext = ctx;
-
-	makeMainGLContextCurrent();
-
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader *vshader3 = new QOpenGLShader(QOpenGLShader::Vertex);
 	const char *vsrc3 =

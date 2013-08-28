@@ -79,7 +79,6 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 	}
 
-	StelPainter::makeMainGLContextCurrent();
 /*	if (tex->fullPath.endsWith(".pvr"))
 	{
 		// Load compressed textures using Qt wrapper.
@@ -155,7 +154,6 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 
 	if (!lazyLoading)
 	{
-		StelPainter::makeMainGLContextCurrent();
 		tex->bind();
 	}
 	return tex;
