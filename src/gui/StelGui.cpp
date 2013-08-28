@@ -345,9 +345,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	getGuiAction("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
 
 #ifndef DISABLE_SCRIPTING
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
-	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
-	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	connect(scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
+	connect(scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
 #endif
 
 	///////////////////////////////////////////////////////////////////////////
@@ -720,7 +720,7 @@ void StelGui::initLandscapeMgr()
 void StelGui::quit()
 {
 #ifndef DISABLE_SCRIPTING
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	StelApp::getInstance().getScriptMgr().stopScript();
 #endif
 	QCoreApplication::exit();
 }
@@ -894,32 +894,32 @@ void StelGui::setScriptKeys(bool b)
 
 void StelGui::increaseScriptSpeed()
 {
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()*2);
+	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()*2);
 }
 
 void StelGui::decreaseScriptSpeed()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()/2);
+	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()/2);
 }
 
 void StelGui::setRealScriptSpeed()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);
+	StelApp::getInstance().getScriptMgr().setScriptRate(1);
 }
 
 void StelGui::stopScript()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	StelApp::getInstance().getScriptMgr().stopScript();
 }
 
 void StelGui::pauseScript()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();
+	StelApp::getInstance().getScriptMgr().pauseScript();
 }
 
 void StelGui::resumeScript()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().resumeScript();
+	StelApp::getInstance().getScriptMgr().resumeScript();
 }
 #endif
 

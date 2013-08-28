@@ -43,10 +43,6 @@
 #include <QTimer>
 #include <QDir>
 
-#ifndef DISABLE_SCRIPTING
- #include "StelScriptMgr.hpp"
- #include "StelMainScriptAPIProxy.hpp"
-#endif
 
 // The static plugins need to be imported here so that they belong to the
 // libStelMain required on win32.
@@ -157,9 +153,6 @@ protected:
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	: QDeclarativeView(parent), backItem(NULL), gui(NULL),
-#ifndef DISABLE_SCRIPTING
-	scriptAPIProxy(NULL), scriptMgr(NULL),
-#endif
 	  wasDeinit(false),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
@@ -257,11 +250,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 	// Prevent flickering on mac Leopard/Snow Leopard
 	glWidget->setAutoFillBackground (false);
 
-#ifndef DISABLE_SCRIPTING
-	scriptAPIProxy = new StelMainScriptAPIProxy(this);
-	scriptMgr = new StelScriptMgr(this);
-#endif
-
 	// Look for a static GUI plugins.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
 	{
@@ -273,31 +261,14 @@ void StelMainGraphicsView::init(QSettings* conf)
 		break;
 	}
 	Q_ASSERT(gui);	// There was no GUI plugin found
-
-	StelApp::getInstance().setGui(gui);
 	gui->init(backItem, mainSkyItem);
-	StelApp::getInstance().initPlugIns();
-
+	StelApp::getInstance().setGui(gui);
 	// Force refreshing of button bars if plugins modified the GUI, e.g. added buttons.
 	gui->forceRefreshGui();
 
-#ifndef DISABLE_SCRIPTING
-	// Defer adding the StelModules into the script engine until the plugins are loaded.
-	scriptMgr->addModules();
-
-	QString startupScript;
-	if (qApp->property("onetime_startup_script").isValid())
-		startupScript = qApp->property("onetime_startup_script").toString();
-	else
-		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
-
-	// Use a queued slot call to start the script only once the main qApp event loop is running...
-	QMetaObject::invokeMethod(scriptMgr,
-				  "runScript",
-				  Qt::QueuedConnection,
-				  Q_ARG(QString, startupScript));
-
-#endif
+	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
+	// plugins, because the gui create the QActions needed by some plugins.
+	StelApp::getInstance().initPlugIns();
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
@@ -407,13 +378,7 @@ void StelMainGraphicsView::deinitGL()
 	if (wasDeinit==true)
 		return;
 	wasDeinit = true;
-#ifndef DISABLE_SCRIPTING
-	if (scriptMgr->scriptIsRunning())
-		scriptMgr->stopScript();
-#endif
-	QCoreApplication::processEvents();
-	StelApp::getInstance().getModuleMgr().unloadAllPlugins();
-	QCoreApplication::processEvents();
+	StelApp::getInstance().deinit();
 	delete gui;
 	delete mainSkyItem;
 }

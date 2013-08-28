@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelApp.hpp"
 #include "StelShortcutGroup.hpp"
 #include "StelAppGraphicsWidget.hpp"
 #include "StelMainGraphicsView.hpp"
@@ -145,7 +146,7 @@ void StelShortcut::setScript(const QString &scriptText)
 {
 	QString scriptsDir = StelFileMgr::findFile("scripts/", StelFileMgr::Directory);
 	QString preprocessedScript;
-	if (!StelMainGraphicsView::getInstance().getScriptMgr().preprocessScript(
+	if (!StelApp::getInstance().getScriptMgr().preprocessScript(
 				scriptText, preprocessedScript, scriptsDir))
 	{
 		qWarning() << "Failed to preprocess script " << m_script;
@@ -164,7 +165,7 @@ void StelShortcut::setScriptPath(const QString &scriptPath)
 
 void StelShortcut::runScript() const
 {
-	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(m_script);
+	StelApp::getInstance().getScriptMgr().runPreprocessedScript(m_script);
 }
 #endif
 
