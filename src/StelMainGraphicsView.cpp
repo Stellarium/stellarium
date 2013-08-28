@@ -26,7 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
-#include "StelMainWindow.hpp"
+#include "StelTranslator.hpp"
 
 #include <QPaintEngine>
 #include <QGLWidget>
@@ -42,6 +42,7 @@
 #include <QThread>
 #include <QTimer>
 #include <QDir>
+#include <QIcon>
 
 
 // Initialize static variables
@@ -89,6 +90,8 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	Q_ASSERT(!singleton);
 	singleton = this;
 
+	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
+	initTitleI18n();
 	setObjectName("Mainview");
 
 	// Avoid white background at init
@@ -142,6 +145,22 @@ StelMainGraphicsView::~StelMainGraphicsView()
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
+	int width = conf->value("video/screen_w", 800).toInt();
+	int height = conf->value("video/screen_h", 600).toInt();
+	resize(width, height);
+	if (conf->value("video/fullscreen", true).toBool())
+	{
+		setFullScreen(true);
+	}
+	else
+	{
+		setFullScreen(false);
+		int x = conf->value("video/screen_x", 0).toInt();
+		int y = conf->value("video/screen_y", 0).toInt();
+		move(x, y);
+	}
+	show();
+
 	Q_ASSERT(glWidget->isValid());
 	glWidget->makeCurrent();
 
@@ -196,6 +215,26 @@ void StelMainGraphicsView::init(QSettings* conf)
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
+}
+
+void StelMainGraphicsView::deinit()
+{
+	deinitGL();
+}
+
+// Update the translated title
+void StelMainGraphicsView::initTitleI18n()
+{
+	QString appNameI18n = q_("Stellarium %1").arg(StelUtils::getApplicationVersion());
+	setWindowTitle(appNameI18n);
+}
+
+void StelMainGraphicsView::setFullScreen(bool b)
+{
+	if (b)
+		setWindowState(windowState() | Qt::WindowFullScreen);
+	else
+		setWindowState(windowState() & ~Qt::WindowFullScreen);
 }
 
 void StelMainGraphicsView::thereWasAnEvent()

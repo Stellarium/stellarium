@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelMainWindow.hpp"
+#include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
 #include "StelFileMgr.hpp"
@@ -309,7 +309,7 @@ int main(int argc, char **argv)
 	GettextStelTranslator trans;
 	app.installTranslator(&trans);
 
-	StelMainWindow mainWin;
+	StelMainGraphicsView mainWin;
 	mainWin.init(confSettings);
 	app.exec();
 	mainWin.deinit();

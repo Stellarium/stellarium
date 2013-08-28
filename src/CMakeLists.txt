@@ -220,8 +220,6 @@ SET(stellarium_lib_SRCS
 
 	StelMainGraphicsView.hpp
 	StelMainGraphicsView.cpp
-	StelMainWindow.hpp
-	StelMainWindow.cpp
 	StelLogger.hpp
 	StelLogger.cpp
 	CLIProcessor.hpp
