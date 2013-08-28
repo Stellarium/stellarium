@@ -48,6 +48,11 @@
 #include "StelVideoMgr.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
+#ifndef DISABLE_SCRIPTING
+ #include "StelScriptMgr.hpp"
+ #include "StelMainScriptAPIProxy.hpp"
+#endif
+
 
 #include <cstdlib>
 #include <iostream>
@@ -87,9 +92,14 @@ void StelApp::deinitStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
-	: QObject(parent), core(NULL), stelGui(NULL), fps(0),
+	: QObject(parent), core(NULL),
+#ifndef DISABLE_SCRIPTING
+	  scriptAPIProxy(NULL), scriptMgr(NULL),
+#endif
+	  stelGui(NULL), fps(0),
 	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
+
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -214,6 +224,27 @@ void StelApp::setupHttpProxy()
 	}
 }
 
+#ifndef DISABLE_SCRIPTING
+void StelApp::initScriptMgr(QSettings *conf)
+{
+	scriptAPIProxy = new StelMainScriptAPIProxy(this);
+	scriptMgr = new StelScriptMgr(this);
+	scriptMgr->addModules();
+	QString startupScript;
+	if (qApp->property("onetime_startup_script").isValid())
+		startupScript = qApp->property("onetime_startup_script").toString();
+	else
+		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
+	// Use a queued slot call to start the script only once the main qApp event loop is running...
+	QMetaObject::invokeMethod(scriptMgr,
+				  "runScript",
+				  Qt::QueuedConnection,
+				  Q_ARG(QString, startupScript));
+}
+#else
+void StelApp::initScriptMgr() {}
+#endif
+
 void StelApp::init(QSettings* conf)
 {
 	confSettings = conf;
@@ -308,6 +339,8 @@ void StelApp::init(QSettings* conf)
 
 	skyCultureMgr->init();
 
+	initScriptMgr(conf);
+
 	// Initialisation of the color scheme
 	bool tmp = confSettings->value("viewing/flag_night").toBool();
 	flagNightVision=!tmp;  // fool caching
@@ -339,6 +372,17 @@ void StelApp::initPlugIns()
 			m->init();
 		}
 	}
+}
+
+void StelApp::deinit()
+{
+#ifndef DISABLE_SCRIPTING
+	if (scriptMgr->scriptIsRunning())
+		scriptMgr->stopScript();
+#endif
+	QCoreApplication::processEvents();
+	getModuleMgr().unloadAllPlugins();
+	QCoreApplication::processEvents();
 }
 
 void StelApp::update(double deltaTime)
