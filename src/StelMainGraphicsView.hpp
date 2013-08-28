@@ -27,8 +27,6 @@
 class QGLWidget;
 class QResizeEvent;
 class StelGuiBase;
-class StelMainScriptAPIProxy;
-class StelScriptMgr;
 class StelQGLWidget;
 
 //! @class StelMainGraphicsView
@@ -57,13 +55,6 @@ public:
 	//! Return the top level QGraphicsWidget which contains the layout containing the Stellarium main sky view.
 	//! Use its layout if you want to add widget on the side of the main sky view.
 	QGraphicsWidget* getTopLevelGraphicsWidget() {return backItem;}
-
-#ifndef DISABLE_SCRIPTING
-	//! Get the script API proxy (for signal handling)
-	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
-	//! Get the script manager
-	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
-#endif
 
 public slots:
 
@@ -148,14 +139,6 @@ private:
 	class QGLContext* glContext;
 
 	StelGuiBase* gui;
-
-#ifndef DISABLE_SCRIPTING
-	// The script API proxy object (for bridging threads)
-	StelMainScriptAPIProxy* scriptAPIProxy;
-
-	// The script manager based on Qt script engine
-	StelScriptMgr* scriptMgr;
-#endif
 
 	bool wasDeinit;
 

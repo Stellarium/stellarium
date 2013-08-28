@@ -84,11 +84,11 @@ void ScriptConsole::createDialogContent()
 	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonPressed()));
 	connect(ui->preprocessSSCButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
 	connect(ui->runButton, SIGNAL(clicked()), this, SLOT(runScript()));
-	connect(ui->stopButton, SIGNAL(clicked()), &StelMainGraphicsView::getInstance().getScriptMgr(), SLOT(stopScript()));
+	connect(ui->stopButton, SIGNAL(clicked()), &StelApp::getInstance().getScriptMgr(), SLOT(stopScript()));
 	connect(ui->includeBrowseButton, SIGNAL(clicked()), this, SLOT(includeBrowse()));
 	connect(ui->quickrunCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(quickRun(int)));
-	connect(&StelMainGraphicsView::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
-	connect(&StelMainGraphicsView::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
+	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
+	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
 #ifndef ENABLE_STRATOSCRIPT_COMPAT
 	ui->preprocessSTSButton->setHidden(true);
 #else
@@ -166,13 +166,13 @@ void ScriptConsole::preprocessScript()
 			if (sender() == ui->preprocessSSCButton)
 			{
 				qDebug() << "Preprocessing with SSC proprocessor";
-				StelMainGraphicsView::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
+				StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
 			}
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 			else if (sender() == ui->preprocessSTSButton)
 			{
 				qDebug() << "Preprocessing with STS proprocessor";
-				StelMainGraphicsView::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
+				StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
 			}
 #endif
 			else
@@ -207,7 +207,7 @@ void ScriptConsole::runScript()
 	ui->stopButton->setEnabled(true);
 
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
-	if (!StelMainGraphicsView::getInstance().getScriptMgr().runScript(fileName, ui->includeEdit->text()))
+	if (!StelApp::getInstance().getScriptMgr().runScript(fileName, ui->includeEdit->text()))
 	{
 		QString msg = QString("ERROR - cannot run script from temp file: \"%1\"").arg(fileName);
 		qWarning() << "ScriptConsole::runScript " + msg;
@@ -289,7 +289,7 @@ void ScriptConsole::quickRun(int idx)
 		out << scriptText;
 		file.close();
 		appendLogLine(QString("Running: %1").arg(scriptText));
-		StelMainGraphicsView::getInstance().getScriptMgr().runScript(fileName);
+		StelApp::getInstance().getScriptMgr().runScript(fileName);
 	}
 	else
 	{

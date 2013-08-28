@@ -95,7 +95,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
-	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelMainGraphicsView::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
+	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 }
 
@@ -176,14 +176,14 @@ void StelMainScriptAPI::setDeltaTAlgorithm(QString algorithmName)
 void StelMainScriptAPI::setTimeRate(double ts)
 {
 	// 1 second = .00001157407407407407 JDay
-	StelApp::getInstance().getCore()->setTimeRate(ts * 0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	StelApp::getInstance().getCore()->setTimeRate(ts * 0.00001157407407407407 * StelApp::getInstance().getScriptMgr().getScriptRate());
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
 double StelMainScriptAPI::getTimeRate() const
 {
-	return StelApp::getInstance().getCore()->getTimeRate() / (0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	return StelApp::getInstance().getCore()->getTimeRate() / (0.00001157407407407407 * StelApp::getInstance().getScriptMgr().getScriptRate());
 }
 
 bool StelMainScriptAPI::isRealTime()
@@ -591,17 +591,17 @@ int StelMainScriptAPI::getScreenHeight()
 
 double StelMainScriptAPI::getScriptRate()
 {
-        return StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate();
+        return StelApp::getInstance().getScriptMgr().getScriptRate();
 }
 
 void StelMainScriptAPI::setScriptRate(double r)
 {
-        return StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(r);
+        return StelApp::getInstance().getScriptMgr().setScriptRate(r);
 }
 
 void StelMainScriptAPI::pauseScript()
 {
-	return StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();
+	return StelApp::getInstance().getScriptMgr().pauseScript();
 }
 
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
@@ -629,7 +629,7 @@ void StelMainScriptAPI::quitStellarium()
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
-	StelMainGraphicsView::getInstance().getScriptMgr().debug(s);
+	StelApp::getInstance().getScriptMgr().debug(s);
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)

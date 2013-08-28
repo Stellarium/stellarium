@@ -42,6 +42,8 @@ class StelSkyLayerMgr;
 class StelAudioMgr;
 class StelVideoMgr;
 class StelGuiBase;
+class StelMainScriptAPIProxy;
+class StelScriptMgr;
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -71,8 +73,10 @@ public:
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
 
-	//! Initialize core and default modules.
+	//! Initialize core and all the modules.
 	void init(QSettings* conf);
+	//! Deinitialize core and all the modules.
+	void deinit();
 
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
@@ -158,6 +162,13 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
+#ifndef DISABLE_SCRIPTING
+	//! Get the script API proxy (for signal handling)
+	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
+	//! Get the script manager
+	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
+#endif
+
 	static void initStatic();
 	static void deinitStatic();
 
@@ -196,6 +207,8 @@ private:
 	void handleMove(int x, int y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
+
+	void initScriptMgr(QSettings* conf);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -237,6 +250,16 @@ private:
 	StelVideoMgr* videoMgr;
 
 	StelSkyLayerMgr* skyImageMgr;
+
+#ifndef DISABLE_SCRIPTING
+	// The script API proxy object (for bridging threads)
+	StelMainScriptAPIProxy* scriptAPIProxy;
+
+	// The script manager based on Qt script engine
+	StelScriptMgr* scriptMgr;
+#endif
+
+
 
 	StelGuiBase* stelGui;
 

@@ -279,7 +279,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
 	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
 	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
@@ -767,7 +767,7 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 void ConfigurationDialog::populateScriptsList(void)
 {
 	int prevSel = ui->scriptListWidget->currentRow();	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	ui->scriptListWidget->clear();	
 	ui->scriptListWidget->addItems(scriptMgr.getScriptList());	
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
@@ -781,7 +781,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty())
 		return;	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
@@ -806,7 +806,7 @@ void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
 		this->close();	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
@@ -815,12 +815,12 @@ void ConfigurationDialog::runScriptClicked(void)
 
 void ConfigurationDialog::stopScriptClicked(void)
 {
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	StelApp::getInstance().getScriptMgr().stopScript();
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)
 {	
-	ui->scriptStatusLabel->setText(q_("Running script: ") + StelMainGraphicsView::getInstance().getScriptMgr().runningScriptId());
+	ui->scriptStatusLabel->setText(q_("Running script: ") + StelApp::getInstance().getScriptMgr().runningScriptId());
 	ui->runScriptButton->setEnabled(false);
 	ui->stopScriptButton->setEnabled(true);	
 }
