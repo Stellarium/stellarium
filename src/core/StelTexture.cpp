@@ -232,7 +232,7 @@ bool StelTexture::glLoad()
 	else
 		internalFormat = GL_RGB;
 
-	Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
+	// Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
 	glActiveTexture(GL_TEXTURE0);
 	
 	glGenTextures(1, &id);

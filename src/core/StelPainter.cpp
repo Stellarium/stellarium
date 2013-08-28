@@ -58,9 +58,11 @@ QGLContext* StelPainter::glContext = NULL;
 
 void StelPainter::makeMainGLContextCurrent()
 {
+	/*
 	Q_ASSERT(glContext!=NULL);
 	Q_ASSERT(glContext->isValid());
 	glContext->makeCurrent();
+	*/
 }
 
 void StelPainter::swapBuffer()

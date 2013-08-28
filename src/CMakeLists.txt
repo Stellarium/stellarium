@@ -66,8 +66,6 @@ SET(stellarium_lib_SRCS
 	core/StelCore.hpp
 	core/StelFileMgr.cpp
 	core/StelFileMgr.hpp
-	core/StelAppGraphicsWidget.cpp
-	core/StelAppGraphicsWidget.hpp
 	core/StelLocaleMgr.cpp
 	core/StelLocaleMgr.hpp
 	core/StelModule.cpp

@@ -53,14 +53,6 @@ public:
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 
-	//! Return the QGraphicsWidget encapsulating the Stellarium main sky view.
-	//! Use its layout if you want to add widget on the top of the main sky view.
-	class StelAppGraphicsWidget* getStelAppGraphicsWidget() {return mainSkyItem;}
-
-	//! Return the top level QGraphicsWidget which contains the layout containing the Stellarium main sky view.
-	//! Use its layout if you want to add widget on the side of the main sky view.
-	QGraphicsWidget* getTopLevelGraphicsWidget() {return backItem;}
-
 public slots:
 
 	//!	Set whether fullscreen is activated or not
@@ -109,7 +101,6 @@ public slots:
 	}
 
 protected:
-	virtual void resizeEvent(QResizeEvent* event);
 	virtual void mouseMoveEvent(QMouseEvent* event);
 	virtual void mousePressEvent(QMouseEvent* event);
 	virtual void mouseReleaseEvent(QMouseEvent* event);
@@ -139,8 +130,6 @@ private:
 
 	//! The StelMainGraphicsView singleton
 	static StelMainGraphicsView* singleton;
-	QGraphicsWidget* backItem;
-	class StelAppGraphicsWidget* mainSkyItem;
 
 	//! The openGL window
 	StelQGLWidget* glWidget;
