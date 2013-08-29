@@ -30,7 +30,7 @@
 
 namespace BigStarCatalogExtension {
 
-template <class Star> struct SpecialZoneArray;
+template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
 
