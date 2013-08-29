@@ -24,6 +24,14 @@ ADD_CUSTOM_TARGET(translations)
 ADD_CUSTOM_TARGET(generate-pot)
 ADD_CUSTOM_TARGET(update-po)
 
+FIND_PACKAGE(Qt5LinguistTools)
+GET_TARGET_PROPERTY(lupdate_executable Qt5::lupdate IMPORTED_LOCATION)
+GET_FILENAME_COMPONENT(qtbindirectory ${lupdate_executable} PATH)
+SET(lconvert_executable "${qtbindirectory}/lconvert")
+
+# Creates translations directory if it doesn't exist
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations)
+
 # GETTEXT_CREATE_TRANSLATIONS(domain [DEFAULT_TARGET] lang1 ... langN)
 #
 # Creates custom build rules to create and install (G)MO files for the
@@ -38,6 +46,8 @@ ADD_CUSTOM_TARGET(update-po)
 # "update-po-${domain}" targets (see above for an explanation).
 #
 MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
+
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations/${_domain})
 
     SET(_gmoFiles)
     GET_FILENAME_COMPONENT(_absPotFile ${_domain}.pot ABSOLUTE)
@@ -59,12 +69,12 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
     FOREACH (_lang ${ARGN})
         GET_FILENAME_COMPONENT(_absFile ${_lang}.po ABSOLUTE)
         FILE(RELATIVE_PATH _relFile ${PROJECT_SOURCE_DIR} ${_absFile})
-        SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
+        SET(_gmoFile ${CMAKE_BINARY_DIR}/translations/${_domain}/${_lang}.qm)
 
-        # Convert a PO file into a GMO file.
+        # Convert a PO file into a qm file.
         ADD_CUSTOM_COMMAND(
             OUTPUT ${_gmoFile} 
-            COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
+            COMMAND ${lconvert_executable} -i ${_absFile} -o ${_gmoFile} 
             DEPENDS ${_absFile}
         )
 
@@ -82,7 +92,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
             VERBATIM
         )
 
-        INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_domain}.mo)
+        INSTALL(FILES ${_gmoFile} DESTINATION share/${PACKAGE}/translations/${_domain}/)
         SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 
    ENDFOREACH (_lang)
