@@ -70,7 +70,7 @@ StelDialog::~StelDialog()
 void StelDialog::close()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainGraphicsView::getInstance().focusSky();
 }
 
 bool StelDialog::visible() const

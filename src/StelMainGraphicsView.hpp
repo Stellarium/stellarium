@@ -52,6 +52,8 @@ public:
 
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
+	//! Return focus to the sky item.  To be used when we close a dialog.
+	void focusSky();
 
 public slots:
 

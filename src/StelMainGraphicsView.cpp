@@ -80,12 +80,14 @@ private:
 StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 {
 	Q_UNUSED(parent);
+	setObjectName("SkyItem");
 	setFlag(QGraphicsItem::ItemHasNoContents, false);
 	setAcceptHoverEvents(true);
 	setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
 	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
 	previousPaintTime = StelApp::getTotalRunTime();
+	setFocus(true);
 }
 
 void StelSkyItem::onSizeChanged()
@@ -244,6 +246,13 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	// circumstances, so here we set it again just to be on the safe side.
 	setlocale(LC_NUMERIC, "C");
 	// End workaround
+}
+
+void StelMainGraphicsView::focusSky() {
+	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	QGraphicsObject* skyItem = rootObject()->findChild<QGraphicsObject*>("SkyItem");
+	Q_ASSERT(skyItem);
+	skyItem->setFocus();
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
