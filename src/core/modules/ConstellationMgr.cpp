@@ -449,7 +449,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
 
-			int texSizeX, texSizeY;
+			int texSizeX = 0, texSizeY = 0;
 			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
 			{
 				qWarning() << "Texture dimension not available";

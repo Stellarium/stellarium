@@ -36,7 +36,7 @@ typedef short int Int16;
 typedef unsigned short int Uint16;
 
 
-template <class Star> struct SpecialZoneArray;
+template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
 
