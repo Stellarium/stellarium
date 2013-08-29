@@ -267,6 +267,7 @@ private:
 //! It is a disc on the sphere, a region above a circle on the unit sphere.
 class SphericalCap : public SphericalRegion
 {
+	using SphericalRegion::contains;
 public:
 	//! Construct a SphericalCap with a 90 deg aperture and an undefined direction.
 	SphericalCap() : d(0) {;}

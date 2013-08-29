@@ -46,6 +46,7 @@
 //! Provides i18n support through gettext.
 class GettextStelTranslator : public QTranslator
 {
+	using QTranslator::translate;
 public:
 	virtual bool isEmpty() const { return false; }
 

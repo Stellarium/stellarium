@@ -35,7 +35,7 @@ class QSettings;
 
 namespace BigStarCatalogExtension {
   class ZoneArray;
-  class HipIndexStruct;
+  struct HipIndexStruct;
 }
 
 typedef struct
