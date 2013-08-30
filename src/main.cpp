@@ -24,6 +24,7 @@
 #include "StelFileMgr.hpp"
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
+#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QApplication>
@@ -43,8 +44,8 @@
 #endif //Q_OS_WIN
 
 //! @class GettextStelTranslator
-//! Provides i18n support through gettext.
-class GettextStelTranslator : public QTranslator
+//! Provides custom i18n support.
+class CustomQTranslator : public QTranslator
 {
 	using QTranslator::translate;
 public:
@@ -52,21 +53,13 @@ public:
 
 	//! Overrides QTranslator::translate().
 	//! Calls StelTranslator::qtranslate().
-	//! Can handle the Qt disambiguation strings of translatable
-	//! widgets from compiled .ui files - they are interpreted as
-	//! gettext context strings. See http://www.gnu.org/software/gettext/manual/gettext.html#Contexts 
 	//! @param context Qt context string - IGNORED.
 	//! @param sourceText the source message.
-	//! @param comment optional parameter, Qt disambiguation
-	//! comment string is interpreted as a gettext context.
-	//! (msgctxt) string.
-	virtual QString translate(const char* context, const char* sourceText, const char* comment=0) const
+	//! @param comment optional parameter
+	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = 0, int n = -1) const
 	{
 		Q_UNUSED(context);
-		if (comment)
-			return StelTranslator::globalTranslator.qtranslate(sourceText, comment);
-		else
-			return q_(sourceText);
+		return StelTranslator::globalTranslator->qtranslate(sourceText, disambiguation);
 	}
 };
 
@@ -306,8 +299,8 @@ int main(int argc, char **argv)
 	{
 		qWarning() << "ERROR while loading translations: " << e.what() << endl;
 	}
-	// Use our gettext translator for Qt translations as well
-	GettextStelTranslator trans;
+	// Use our custom translator for Qt translations as well
+	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
 	StelMainGraphicsView mainWin;

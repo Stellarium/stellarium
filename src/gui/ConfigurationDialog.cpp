@@ -155,7 +155,7 @@ void ConfigurationDialog::createDialogContent()
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	cb->model()->sort(0);
 	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
 	int lt = cb->findText(l2, Qt::MatchExactly);

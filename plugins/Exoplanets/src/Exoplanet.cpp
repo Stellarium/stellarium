@@ -133,7 +133,7 @@ float Exoplanet::getSelectPriority(const StelCore* core) const
 QString Exoplanet::getNameI18n(void) const
 {
 	// Use SkyTranslator for translation star names
-	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	return trans.qtranslate(designation);
 }
 
