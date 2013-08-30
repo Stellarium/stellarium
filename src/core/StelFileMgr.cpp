@@ -448,31 +448,24 @@ QString StelFileMgr::getLocaleDir()
 {
 #ifdef ENABLE_NLS
 	QFileInfo localePath;
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-	// Windows and MacOS X have the locale dir in the installation folder
-	localePath = QFileInfo(getInstallationDir() + "/locale");
-	// or MacosxDirs::getApplicationResourcesDirectory().append( "/locale" );
-#else
-	// Linux, BSD etc, the locale dir is set in the config.h
-	// but first, if we are in the development tree, don't rely on an
-	// install having been done.
-	if (getInstallationDir() == ".")
-	{
-		localePath = QFileInfo("./locale");
-		if (!localePath.exists())
-			localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
-	}
-	else
-		localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
-#endif
+	localePath = QFileInfo(getInstallationDir() + "/translations");
 	if (localePath.exists())
 	{
 		return localePath.filePath();
 	}
 	else
 	{
-		qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
-		return "";
+		// If not found, try to look in the standard build directory (useful for developer)
+		localePath = QCoreApplication::applicationDirPath() + "/../translations";
+		if (localePath.exists())
+		{
+			return localePath.filePath();
+		}
+		else
+		{
+			qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
+			return "";
+		}
 	}
 #else
 	return QString();

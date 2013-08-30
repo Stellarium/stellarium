@@ -43,7 +43,7 @@ public:
 	//! Get the application language currently used for GUI etc.
 	//! This function has no permanent effect on the global locale.
 	//! @return the abbreviated name of the language (e.g "fr").
-	QString getAppLanguage() const { return StelTranslator::globalTranslator.getTrueLocaleName(); }
+	QString getAppLanguage() const { return StelTranslator::globalTranslator->getTrueLocaleName(); }
 	
 	//! Set the application language. 
 	//! This applies to GUI etc. This function has no permanent effect on the global locale.
@@ -51,7 +51,7 @@ public:
 	void setAppLanguage(const QString& newAppLangName);
 	
 	//! Get the StelTranslator object currently used for global application.
-	StelTranslator& getAppStelTranslator() const;
+	const StelTranslator& getAppStelTranslator() const;
 	
 	//! Get the language currently used for sky objects.
 	//! This function has no permanent effect on the global locale.
@@ -65,7 +65,7 @@ public:
 	void setSkyLanguage(const QString& newSkyLangName);
 	
 	//! Get a reference to the StelTranslator object currently used for sky objects.
-	StelTranslator& getSkyTranslator();
+	const StelTranslator &getSkyTranslator() const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// DATE & TIME LOCALIZATION
@@ -167,7 +167,7 @@ public:
 	
 private:
 	// The translator used for astronomical object naming
-	StelTranslator skyTranslator;
+	StelTranslator* skyTranslator;
 	
 	// Date and time variables
 	STimeFormat timeFormat;

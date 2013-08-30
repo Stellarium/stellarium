@@ -36,7 +36,7 @@ QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
 INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

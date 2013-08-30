@@ -132,7 +132,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
 	//! Translate planet name using the passed translator
-	virtual void translateName(StelTranslator& trans);
+	virtual void translateName(const StelTranslator &trans);
 
 	// Draw the Planet
 	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);

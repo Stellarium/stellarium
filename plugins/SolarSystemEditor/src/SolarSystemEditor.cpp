@@ -21,6 +21,7 @@
 #include "SolarSystemEditor.hpp"
 #include "SolarSystemManagerWindow.hpp"
 
+#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"

@@ -24,7 +24,7 @@
 
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"
-
+#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelProjector.hpp"
 #include "StelFader.hpp"
