@@ -26,6 +26,7 @@
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
 #include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 
 #include <QPaintEngine>
 #include <QGLWidget>

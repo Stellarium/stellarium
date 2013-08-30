@@ -35,6 +35,7 @@
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
 
+#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"

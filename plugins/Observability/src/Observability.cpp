@@ -480,7 +480,7 @@ void Observability::draw(StelCore* core)
 	double currH = HourAngle(mylat,alti,selDec);
 	horizH = HourAngle(mylat,RefracHoriz,selDec);
 	QString RS1, RS2, Cul; // strings with Rise/Set/Culmination times
-	double Rise, Set; // Actual Rise/Set times (in GMT).
+	double Rise=0, Set=0; // Actual Rise/Set times (in GMT).
 	int d1,m1,s1,d2,m2,s2,dc,mc,sc; // Integers for the time spans in hh:mm:ss.
 	bool solvedMoon = false; // Check if solutions were found for Sun, Moon, or planet.
 	bool transit = false; // Is the source above the horizon? Did it culminate?

@@ -87,7 +87,7 @@ private:
 	};
 
 	//! Translate nebula name using the passed translator
-	void translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
+	void translateName(const StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);

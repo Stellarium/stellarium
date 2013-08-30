@@ -87,11 +87,11 @@ SET(GCC_VERSION "${GCC_MAJOR}.${GCC_MINOR}")
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter")     # additional CPP compile flags
-ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  #  --large-address-aware --enable-runtime-pseudo-reloc --verbose
-ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  # --enable-runtime-pseudo-reloc --verbose
@@ -145,7 +145,7 @@ IF(HAVE_POW10)
 ENDIF()
 
 ########### Others ###########
-# Activate translation with gettext
+# Activate translation
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported.")
 IF(ENABLE_NLS)
   ADD_DEFINITIONS(-DENABLE_NLS)
@@ -245,7 +245,7 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 FIND_PACKAGE(Qt5Core REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
-#FIND_PACKAGE(Qt5OpenGL REQUIRED)
+FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Script REQUIRED)
 FIND_PACKAGE(Qt5Declarative REQUIRED)
@@ -253,7 +253,7 @@ FIND_PACKAGE(Qt5Declarative REQUIRED)
 INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Gui_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Widgets_INCLUDE_DIRS})
-#INCLUDE_DIRECTORIES(${Qt5OpenGL_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${Qt5OpenGL_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Script_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Declarative_INCLUDE_DIRS})
@@ -279,22 +279,6 @@ STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
 STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 
 FIND_PACKAGE(ZLIB)
-
-IF(ENABLE_NLS)
-  FIND_PACKAGE(Iconv REQUIRED)
-  FIND_PATH(INTL_INCLUDE_DIR libintl.h
-	PATHS
-	/usr/include
-	/sw/include
-	/usr/local/include)
-  FIND_LIBRARY(INTL_LIBRARIES intl c
-	PATHS
-	/usr/lib/
-	/sw/lib
-	/usr/local/lib) # NO_DEFAULT_PATH
-  FIND_PACKAGE(Gettext REQUIRED)
-  FIND_PACKAGE(XGettext REQUIRED)
-ENDIF()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)

@@ -328,7 +328,7 @@ float MinorPlanet::getVMagnitude(const StelCore* core, bool withExtinction) cons
 	return apparentMagnitude+extinctionMag;
 }
 
-void MinorPlanet::translateName(StelTranslator &translator)
+void MinorPlanet::translateName(const StelTranslator &translator)
 {
 	nameI18 = translator.qtranslate(properName);
 	if (englishName.endsWith('*'))

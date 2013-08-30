@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelUtils.hpp"
 
 #include "ui_dateTimeDialogGui.h"
 

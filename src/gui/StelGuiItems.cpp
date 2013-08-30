@@ -21,6 +21,7 @@
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
 
+#include "StelUtils.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"

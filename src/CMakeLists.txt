@@ -127,7 +127,6 @@ SET(stellarium_lib_SRCS
 	core/StelShortcutGroup.hpp
 
 	${gl_lib_SRCS}
-	core/external/gettext.h
 
 	core/external/kfilter/kfilterdev.h
 	core/external/kfilter/kfilterdev.cpp
@@ -395,7 +394,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
 	QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
-	SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} )
+	SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
 
 	# Compile the static library
 	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
@@ -549,7 +548,7 @@ ENDIF()
 ################################ Build main program #########################################
 #############################################################################################
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
 IF(ENABLE_SCRIPTING)
   SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY})
 ENDIF()
@@ -579,10 +578,9 @@ ELSE()
  QT5_USE_MODULES(stellarium Core Gui Widgets OpenGL Network Script Declarative)
 
  IF(APPLE)
-# SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/works/OpenGL.framework/Versions/A/Libraries/libGL.dylib -framework Cocoa -framework QtDeclarative")
-SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
-
+  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
  ENDIF()
+
 ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
@@ -595,7 +593,7 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ################################## Build unit tests #########################################
 #############################################################################################
 
-SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${ZLIB_LIBRARIES})
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -679,7 +677,6 @@ QT5_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)
-######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 SET(tests_testDeltaT_SRCS
   tests/testDeltaT.hpp
@@ -699,7 +696,6 @@ ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
 
-######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)

@@ -47,7 +47,7 @@ QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 SET(Satellites_RES ../resources/Satellites.qrc)
 QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

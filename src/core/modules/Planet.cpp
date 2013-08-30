@@ -94,7 +94,7 @@ Planet::~Planet()
 		delete rings;
 }
 
-void Planet::translateName(StelTranslator& trans)
+void Planet::translateName(const StelTranslator& trans)
 {
 	nameI18 = trans.qtranslate(englishName);
 }
