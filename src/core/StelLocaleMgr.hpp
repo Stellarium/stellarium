@@ -48,7 +48,7 @@ public:
 	//! Set the application language. 
 	//! This applies to GUI etc. This function has no permanent effect on the global locale.
 	//! @param newAppLangName the abbreviated name of the language (e.g fr).
-	void setAppLanguage(const QString& newAppLangName);
+	void setAppLanguage(const QString& newAppLangName, bool refreshAll=true);
 	
 	//! Get the StelTranslator object currently used for global application.
 	const StelTranslator& getAppStelTranslator() const;
@@ -62,7 +62,7 @@ public:
 	//! translation.  This function has no permanent effect on the global locale.
 	//! @param newSkyLangName The abbreviated name of the locale (e.g fr) to use 
 	//! for sky object labels.
-	void setSkyLanguage(const QString& newSkyLangName);
+	void setSkyLanguage(const QString& newSkyLangName, bool refreshAll=true);
 	
 	//! Get a reference to the StelTranslator object currently used for sky objects.
 	const StelTranslator &getSkyTranslator() const;
