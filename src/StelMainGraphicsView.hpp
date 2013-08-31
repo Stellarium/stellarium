@@ -138,8 +138,6 @@ private:
 	StelGuiBase* gui;
 	class StelApp* stelApp;
 
-	bool wasDeinit;
-
 	bool flagInvertScreenShotColors;
 
 	QString screenShotPrefix;

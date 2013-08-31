@@ -28,15 +28,11 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
-#include <QPaintEngine>
 #include <QGLWidget>
-#include <QResizeEvent>
 #include <QSettings>
 #include <QApplication>
 #include <QDebug>
 #include <QFileInfo>
-#include <QGraphicsGridLayout>
-#include <QGraphicsProxyWidget>
 #include <QPluginLoader>
 #include <QtPlugin>
 #include <QThread>
@@ -209,7 +205,6 @@ protected:
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	: QDeclarativeView(parent), gui(NULL),
-	  wasDeinit(false),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
@@ -281,7 +276,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
 	stelApp->init(conf);
-	StelPainter::initSystemGLInfo((QGLContext*)QGLContext::currentContext());
+	StelPainter::initGLShaders();
 
 	setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
@@ -435,12 +430,9 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 //! Delete openGL textures (to call before the GLContext disappears)
 void StelMainGraphicsView::deinitGL()
 {
-	// Can be called only once
-	if (wasDeinit==true)
-		return;
-	wasDeinit = true;
 	StelApp::getInstance().deinit();
 	delete gui;
+	gui = NULL;
 }
 
 void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
