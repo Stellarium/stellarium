@@ -71,6 +71,7 @@
 #include <QTextStream>
 #include <QTimer>
 #include <QDir>
+#include <QCoreApplication>
 
 Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
 
@@ -316,7 +317,7 @@ void StelApp::initScriptMgr(QSettings *conf)
 				  Q_ARG(QString, startupScript));
 }
 #else
-void StelApp::initScriptMgr() {}
+void StelApp::initScriptMgr(QSettings *conf) {}
 #endif
 
 void StelApp::init(QSettings* conf)
