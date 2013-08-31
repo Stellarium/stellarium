@@ -40,32 +40,32 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 	setFadeDuration(1.5f);
 
 	qDebug() << "Use vertex shader for atmosphere rendering.";
-	QOpenGLShader* vShader = new QOpenGLShader(QOpenGLShader::Vertex);
-	if (!vShader->compileSourceFile(":/shaders/xyYToRGB.glsl"))
+	QOpenGLShader vShader(QOpenGLShader::Vertex);
+	if (!vShader.compileSourceFile(":/shaders/xyYToRGB.glsl"))
 	{
-		qFatal("Error while compiling atmosphere vertex shader: %s", vShader->log().toLatin1().constData());
+		qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toLatin1().constData());
 	}
-	if (!vShader->log().isEmpty())
+	if (!vShader.log().isEmpty())
 	{
-		qWarning() << "Warnings while compiling atmosphere vertex shader: " << vShader->log();
+		qWarning() << "Warnings while compiling atmosphere vertex shader: " << vShader.log();
 	}
-	QOpenGLShader* fShader = new QOpenGLShader(QOpenGLShader::Fragment);
-	if (!fShader->compileSourceCode(
+	QOpenGLShader fShader(QOpenGLShader::Fragment);
+	if (!fShader.compileSourceCode(
 					"varying mediump vec4 resultSkyColor;\n"
 					"void main()\n"
 					"{\n"
 					 "   gl_FragColor = resultSkyColor;\n"
 					 "}"))
 	{
-		qFatal("Error while compiling atmosphere fragment shader: %s", fShader->log().toLatin1().constData());
+		qFatal("Error while compiling atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
 	}
-	if (!fShader->log().isEmpty())
+	if (!fShader.log().isEmpty())
 	{
-		qWarning() << "Warnings while compiling atmosphere fragment shader: " << vShader->log();
+		qWarning() << "Warnings while compiling atmosphere fragment shader: " << vShader.log();
 	}
 	atmoShaderProgram = new QOpenGLShaderProgram();
-	atmoShaderProgram->addShader(vShader);
-	atmoShaderProgram->addShader(fShader);
+	atmoShaderProgram->addShader(&vShader);
+	atmoShaderProgram->addShader(&fShader);
 	if (!atmoShaderProgram->link())
 	{
 		qFatal("Error while linking atmosphere shader program: %s", atmoShaderProgram->log().toLatin1().constData());
