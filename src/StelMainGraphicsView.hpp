@@ -135,8 +135,8 @@ private:
 
 	//! The openGL window
 	StelQGLWidget* glWidget;
-
 	StelGuiBase* gui;
+	class StelApp* stelApp;
 
 	bool wasDeinit;
 

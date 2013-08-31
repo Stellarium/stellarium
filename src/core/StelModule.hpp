@@ -49,6 +49,7 @@ class QSettings;
 //!	Load the given color style
 class StelModule : public QObject, protected QOpenGLFunctions 
 {
+	Q_OBJECT
 	// Do not add Q_OBJECT here!!
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.

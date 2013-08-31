@@ -44,7 +44,7 @@ Constellation::Constellation() : asterism(NULL)
 
 Constellation::~Constellation()
 {
-	if (asterism) delete[] asterism;
+	delete[] asterism;
 	asterism = NULL;
 }
 
