@@ -95,8 +95,8 @@ void StelLocaleMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
-	setAppLanguage(conf->value("localization/app_locale", "system").toString());
+	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
+	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
 
 	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
 	dateFormat = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
@@ -128,26 +128,28 @@ void StelLocaleMgr::init()
 /*************************************************************************
  Set the application locale. This apply to GUI, console messages etc..
 *************************************************************************/
-void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
+void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refreshAll)
 {
 	// Update the translator with new locale name
 	Q_ASSERT(StelTranslator::globalTranslator);
 	delete StelTranslator::globalTranslator;
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
 	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
-	StelApp::getInstance().updateI18n();
+	if (refreshAll)
+		StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
  Set the sky language.
 *************************************************************************/
-void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
+void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refreshAll)
 {
 	delete skyTranslator;
 	// Update the translator with new locale name
 	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
 	qDebug() << "Sky language is " << skyTranslator->getTrueLocaleName();
-	StelApp::getInstance().updateI18n();
+	if (refreshAll)
+		StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
