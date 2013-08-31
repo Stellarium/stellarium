@@ -37,6 +37,15 @@ StelShortcutMgr::StelShortcutMgr()
 {
 }
 
+StelShortcutMgr::~StelShortcutMgr()
+{
+	foreach (StelShortcutGroup* group, shGroups)
+	{
+		delete group;
+		group=NULL;
+	}
+}
+
 QAction* StelShortcutMgr::addGuiAction(const QString& actionId,
                                        bool temporary,
                                        const QString& text,

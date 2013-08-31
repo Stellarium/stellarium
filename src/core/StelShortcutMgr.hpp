@@ -36,6 +36,7 @@ class StelShortcutMgr : public QObject
 	Q_OBJECT
 public:
 	StelShortcutMgr();
+	~StelShortcutMgr();
 
 	//! Load shortcuts from an existing file.
 	//! @param filePath full path to the file.
