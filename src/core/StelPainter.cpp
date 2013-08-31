@@ -528,20 +528,20 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 		return;
 	theta = std::atan2(dy - 1, dx);
 	psi = std::atan2((float)getFontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
-	if (psi>5) {
+	if (psi>5)
 		psi = 5;
-	}
 
 	float cWidth = (float)getFontMetrics().width(ws)/ws.length();
 	float xVc = prj->viewportCenter[0] + xshift;
 	float yVc = prj->viewportCenter[1] + yshift;
 
 	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("ar fa ur he yi").contains(lang)) {
-        	for (int i=0; i<ws.length(); ++i)
-	        {
-			x = d * std::cos (theta) + xVc ;
-			y = d * std::sin (theta) + yVc ; 
+	if (!QString("ar fa ur he yi").contains(lang))
+	{
+		for (int i=0; i<ws.length(); ++i)
+		{
+			x = d * std::cos(theta) + xVc ;
+			y = d * std::sin(theta) + yVc ; 
 			drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
 			// Compute how much the character contributes to the angle
 			theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[i]) - cWidth)/ cWidth);
@@ -597,103 +597,34 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		static const int cacheLimitByte = 10000000;
-		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
-		int pixelSize = currentFont.pixelSize();
-		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
-
-		const StringTexture* cachedTex = texCache.object(hash);
-		if (cachedTex == NULL)	// need to create texture
-		{
-			StringTexture* newTex = new StringTexture();
-
-			// Create temp image and render text into it
-			QRect strRect = getFontMetrics().boundingRect(str);
-			newTex->subTexWidth = strRect.width()+1+(int)(0.02f*strRect.width());
-			newTex->subTexHeight = strRect.height();
-			QPixmap strImage;
-			if (hasOpenGLFeature(QOpenGLFunctions::NPOTTextures))
-				strImage = QPixmap(newTex->subTexWidth, newTex->subTexHeight);
-			else
-				strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(newTex->subTexWidth), StelUtils::getBiggerPowerOfTwo(newTex->subTexHeight));
-			newTex->width = strImage.width();
-			newTex->height = strImage.height();
-
-			strImage.fill(Qt::transparent);
-
-			QPainter painter(&strImage);
-			painter.setFont(currentFont);
-			painter.setRenderHints(QPainter::TextAntialiasing, true);
-			painter.setPen(Qt::white);
-			painter.drawText(-strRect.x(), -strRect.y(), str);
-
-			// Create and bind texture, and add it to the list of cached textures
-			newTex->texture = const_cast<QGLContext*>(QGLContext::currentContext())->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
-			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
-			cachedTex=newTex;
-		}
-		else
-		{
-			// The texture was found in the cache
-			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
-		}
+		QOpenGLPaintDevice device;
+		device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
+		QPainter painter(&device);
+		painter.beginNativePainting();
+		painter.setFont(currentFont);
+		painter.setPen(QColor(currentColor[0]*255, currentColor[1]*255, currentColor[2]*255, currentColor[3]*255));
+		
+		y = prj->getViewportHeight()-y;
+		yshift = -yshift;
 
 		// Translate/rotate
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
 
-		enableTexture2d(true);
-		static float vertexData[8];
-		static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
-		// compute the vertex coordinates applying the translation and the rotation
-		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
-		if (std::fabs(angleDeg)>1.f*M_PI/180.f)
+		if (std::fabs(angleDeg)>1.f)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			const float cosr = std::cos(angleDeg * M_PI/180.);
-			const float sinr = std::sin(angleDeg * M_PI/180.);
-			for (int i = 0; i < 8; i+=2)
-			{
-				vertexData[i] = int(x + (cachedTex->subTexWidth*vertexBase[i]+xshift) * cosr - (cachedTex->subTexHeight*vertexBase[i+1]+yshift) * sinr);
-				vertexData[i+1] = int(y  + (cachedTex->subTexWidth*vertexBase[i]+xshift) * sinr + (cachedTex->subTexHeight*vertexBase[i+1]+yshift) * cosr);
-			}
+			QTransform m;
+			m.translate(x, y);
+			m.rotate(-angleDeg);
+			painter.setTransform(m);
+			painter.drawText(xshift, yshift, str);
 		}
 		else
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			for (int i = 0; i < 8; i+=2)
-			{
-				vertexData[i] = int(x + cachedTex->subTexWidth*vertexBase[i]+xshift);
-				vertexData[i+1] = int(y  + cachedTex->subTexHeight*vertexBase[i+1]+yshift);
-			}
+			painter.drawText(x+xshift, y+yshift, str);
 		}
-
-
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		enableClientStates(true, true);
-		setVertexPointer(2, GL_FLOAT, vertexData);
-
-		float* texCoords = NULL;
-		if (hasOpenGLFeature(QOpenGLFunctions::NPOTTextures))
-			setTexCoordPointer(2, GL_FLOAT, texCoordData);
-		else
-		{
-			texCoords = new float[8];
-			for (int i=0;i<8;i+=2)
-			{
-				texCoords[i] = texCoordData[i]*(float)cachedTex->subTexWidth/cachedTex->width;
-				texCoords[i+1] = texCoordData[i+1]*(float)cachedTex->subTexHeight/cachedTex->height;
-			}
-			setTexCoordPointer(2, GL_FLOAT, texCoords);
-		}
-
-		drawFromArray(TriangleStrip, 4, 0, false);
-		enableClientStates(false);
-
-		delete[] texCoords;
+		
+		painter.endNativePainting();
 	}
 }
 
