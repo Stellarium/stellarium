@@ -38,7 +38,6 @@
 #include <QImage>
 #include <QNetworkReply>
 #include <QTimer>
-#include <QGLContext>
 
 ImageLoader::ImageLoader(const QString& path, int delay)
 	: QObject(), path(path), networkReply(NULL)
@@ -231,7 +230,6 @@ bool StelTexture::glLoad()
 	else
 		internalFormat = GL_RGB;
 
-	// Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
 	glActiveTexture(GL_TEXTURE0);
 	
 	glGenTextures(1, &id);
