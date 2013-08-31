@@ -233,7 +233,7 @@ public:
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(QVariantMap m);
+	bool checkAndLoadCatalog(const QVariantMap& m);
 
 private slots:
 	void setStelStyle(const QString& section);
@@ -284,8 +284,9 @@ private:
 
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
-	typedef QMap<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
-	ZoneArrayMap zoneArrays; // index is the grid level
+	
+	// A ZoneArray per grid level
+	QVector<BigStarCatalogExtension::ZoneArray*> gridLevels;
 	static void initTriangleFunc(int lev, int index,
 								 const Vec3f &c0,
 								 const Vec3f &c1,
