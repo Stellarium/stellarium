@@ -125,9 +125,7 @@ QString StarMgr::convertToComponentIds(int index)
 
 void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
-	ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
-	if (it!=zoneArrays.constEnd())
-		it.value()->initTriangle(index,c0,c1,c2);
+	gridLevels[lev]->initTriangle(index,c0,c1,c2);
 }
 
 
@@ -158,14 +156,9 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 StarMgr::~StarMgr(void)
 {
-	ZoneArrayMap::iterator it(zoneArrays.end());
-	while (it!=zoneArrays.begin())
-	{
-		--it;
-		delete it.value();
-		it.value() = NULL;
-	}
-	zoneArrays.clear();
+	foreach(ZoneArray* z, gridLevels)
+		delete z;
+	gridLevels.clear();
 	if (hipIndex)
 		delete[] hipIndex;
 }
@@ -336,10 +329,8 @@ void StarMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
-	{
-		it.value()->scaleAxis();
-	}
+	foreach(ZoneArray* z, gridLevels)
+		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
@@ -382,7 +373,7 @@ void StarMgr::setStelStyle(const QString& section)
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
-bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
+bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 {
 	const bool checked = catDesc.value("checked").toBool();
 	QString catalogFileName = catDesc.value("fileName").toString();
@@ -453,24 +444,19 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		setCheckFlag(catDesc.value("id").toString(), true);
 	}
 
-	ZoneArray* const z = ZoneArray::create(catalogFilePath, true);
+	ZoneArray* z = ZoneArray::create(catalogFilePath, true);
 	if (z)
 	{
-		if (maxGeodesicGridLevel < z->level)
-		{
-			maxGeodesicGridLevel = z->level;
-		}
-		ZoneArray *pos(zoneArrays[z->level]);
-		if (pos)
+		if (z->level<gridLevels.size())
 		{
 			qWarning() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
 			delete z;
+			return true;
 		}
-		else
-		{
-			zoneArrays[z->level] = z;
-			pos = z;
-		}
+		Q_ASSERT(z->level==maxGeodesicGridLevel+1);
+		Q_ASSERT(z->level==gridLevels.size());
+		++maxGeodesicGridLevel;
+		gridLevels.append(z);
 	}
 	return true;
 }
@@ -518,10 +504,8 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		hipIndex[i].z = 0;
 		hipIndex[i].s = 0;
 	}
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it != zoneArrays.constEnd();++it)
-	{
-		it.value()->updateHipIndex(hipIndex);
-	}
+	foreach(ZoneArray* z, gridLevels)
+		z->updateHipIndex(hipIndex);
 
 	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
 	if (cat_hip_sp_file_name.isEmpty())
@@ -793,13 +777,13 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin());it!=zoneArrays.constEnd();++it)
+	foreach(const ZoneArray* z, gridLevels)
 	{
-		const float mag_min = 0.001f*it.value()->mag_min;
+		const float mag_min = 0.001f*z->mag_min;
 		float rcmag[2];
 		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
 			break;
-		rval = it.key();
+		rval = z->level;
 	}
 	return rval;
 }
@@ -832,10 +816,10 @@ void StarMgr::draw(StelCore* core)
         //float rcmag_table[2*16384];
         float rcmag_table[2*4096];
 
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
+	foreach(const ZoneArray* z, gridLevels)
 	{
-		const float mag_min = 0.001f*it.value()->mag_min;
-		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps; // MagStepIncrement
+		const float mag_min = 0.001f*z->mag_min;
+		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
 		// GZ: add a huge number of entries to rcMag
 		//for (int i=it.value()->mag_steps-1;i>=0;--i)
                 for (int i=4096-1;i>=0;--i)
@@ -854,7 +838,7 @@ void StarMgr::draw(StelCore* core)
 				rcmag_table[2*i] *= starsFader.getInterstate();
 			}
 		}
-		lastMaxSearchLevel = it.key();
+		lastMaxSearchLevel = z->level;
 
 		unsigned int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
@@ -866,10 +850,10 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
-		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
-		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+			z->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+			z->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
@@ -934,19 +918,19 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin());it!=zoneArrays.constEnd();it++)
+	foreach(ZoneArray* z, gridLevels)
 	{
 		//qDebug() << "search inside(" << it->first << "):";
 		int zone;
-		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << endl << "search border(" << it->first << "):";
-		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key()); (zone = it1.next()) >= 0;)
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 	}
