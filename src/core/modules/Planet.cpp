@@ -883,11 +883,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
-
-			sPainter->getMaterial().setAmbient(ambient);
-			sPainter->getMaterial().setEmission(zero);
-			sPainter->getMaterial().setShininess(0.f);
-			sPainter->getMaterial().setSpecular(zero);
 		}
 		else
 		{

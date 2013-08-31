@@ -21,7 +21,6 @@
 #define _STELAPP_HPP_
 
 #include <QString>
-#include <QVariant>
 #include <QObject>
 
 // Predeclaration of some classes

@@ -33,8 +33,6 @@
 #include <QMutex>
 #include <QVarLengthArray>
 #include <QPaintEngine>
-#include <QGLWidget>
-#include <QGLContext>
 #include <QCache>
 #include <QOpenGLPaintDevice>
 #include <QOpenGLShader>
@@ -1641,7 +1639,7 @@ void StelPainter::enableTexture2d(bool b)
 	texture2dEnabled = b;
 }
 
-void StelPainter::initSystemGLInfo(QGLContext* ctx)
+void StelPainter::initGLShaders()
 {
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
@@ -1925,31 +1923,4 @@ void StelPainterLight::enable()
 void StelPainterLight::disable()
 {
 	enabled = false;
-}
-
-
-// material functions
-StelPainterMaterial::StelPainterMaterial()
-	: specular(0, 0, 0, 1), ambient(0.2, 0.2, 0.2, 1.0), emission(0, 0, 0, 1), shininess(0)
-{
-}
-
-void StelPainterMaterial::setSpecular(const Vec4f& v)
-{
-	specular = v;
-}
-
-void StelPainterMaterial::setAmbient(const Vec4f& v)
-{
-	ambient = v;
-}
-
-void StelPainterMaterial::setEmission(const Vec4f& v)
-{
-	emission = v;
-}
-
-void StelPainterMaterial::setShininess(float v)
-{
-	shininess = v;
 }
