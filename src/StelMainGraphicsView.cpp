@@ -216,7 +216,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL), maxfps(10000.f)
 {
 	StelApp::initStatic();
-
+	
 	// Can't create 2 StelMainGraphicsView instances
 	Q_ASSERT(!singleton);
 	singleton = this;
@@ -258,6 +258,7 @@ void StelMainGraphicsView::focusSky() {
 
 StelMainGraphicsView::~StelMainGraphicsView()
 {
+	StelApp::deinitStatic();
 }
 
 void StelMainGraphicsView::init(QSettings* conf)
@@ -277,9 +278,8 @@ void StelMainGraphicsView::init(QSettings* conf)
 	Q_ASSERT(glWidget->isValid());
 	glWidget->makeCurrent();
 	
-	StelApp *stelApp = new StelApp();
+	stelApp= new StelApp();
 	stelApp->setGui(gui);
-	StelApp::initStatic();
 	stelApp->init(conf);
 	StelPainter::initSystemGLInfo((QGLContext*)QGLContext::currentContext());
 
@@ -322,6 +322,8 @@ void StelMainGraphicsView::init(QSettings* conf)
 void StelMainGraphicsView::deinit()
 {
 	deinitGL();
+	delete stelApp;
+	stelApp = NULL;
 }
 
 // Update the translated title

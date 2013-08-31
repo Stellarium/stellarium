@@ -48,6 +48,8 @@ using namespace std;
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
+	  artFadeDuration(1.),
+	  artIntensity(0),
 	  artDisplayed(0),
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
