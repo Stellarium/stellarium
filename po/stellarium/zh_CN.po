@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-25 02:35+0700\n"
-"PO-Revision-Date: 2013-07-21 13:00+0000\n"
-"Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
+"POT-Creation-Date: 2013-08-27 19:18+0700\n"
+"PO-Revision-Date: 2013-08-26 12:20+0000\n"
+"Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-25 04:50+0000\n"
+"X-Launchpad-Export-Date: 2013-08-28 04:50+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -59,7 +59,7 @@ msgstr "行星： "
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
 #: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
-#: plugins/Supernovae/src/Supernova.cpp:116 plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
 #, qt-format
 msgid "Type: <b>%1</b>"
@@ -67,7 +67,7 @@ msgstr "类型：<b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
-#: plugins/Supernovae/src/Supernova.cpp:121 plugins/Novae/src/Nova.cpp:131
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:131
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:155
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
@@ -75,7 +75,7 @@ msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:449
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
-#: plugins/Supernovae/src/Supernova.cpp:124 plugins/Novae/src/Nova.cpp:134
+#: plugins/Supernovae/src/Supernova.cpp:130 plugins/Novae/src/Nova.cpp:134
 #: plugins/Quasars/src/Quasar.cpp:118 plugins/Exoplanets/src/Exoplanet.cpp:160
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -279,7 +279,7 @@ msgid "Spectral Type: %1"
 msgstr "光谱类型: %1"
 
 #: src/core/modules/StarWrapper.cpp:213
-#: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:144
+#: plugins/Supernovae/src/Supernova.cpp:141 plugins/Novae/src/Nova.cpp:144
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Distance: %1 Light Years"
@@ -323,7 +323,7 @@ msgstr "掩食时间：%1%"
 #: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "升起时间: %1%"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:282
@@ -435,6 +435,8 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"这一公式由 F. R. Stephenson 和 L. V. Morrison 在题为《地球自转的长周期变化 - 700 B.C. 到 A.D. "
+"1980》(%1)的论文中发表。"
 
 #: src/core/StelCore.cpp:1471
 msgid "This algorithm is used in the PC planetarium program Guide 7."
@@ -455,7 +457,7 @@ msgstr ""
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
-msgstr ""
+msgstr "这一公式由 K.M. Borkowski (%1) 在分析了 2137 BCE 到 1715 CE 之间的31次日食数据过后得出。"
 
 #: src/core/StelCore.cpp:1480
 #, qt-format
@@ -6252,62 +6254,62 @@ msgid ""
 msgstr "这是一个为一些 Stellarium 配置文件中的杂项设置提供便捷访问的界面。您可以设置时区或是改变屏幕下方显示时间和日期的方式。"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "January"
 msgstr "一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "February"
 msgstr "二月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "March"
 msgstr "三月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "April"
 msgstr "四月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "May"
 msgstr "五月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "June"
 msgstr "六月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "July"
 msgstr "七月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "August"
 msgstr "八月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "September"
 msgstr "九月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "October"
 msgstr "十月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "November"
 msgstr "十一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "December"
 msgstr "十二月"
 
@@ -6877,14 +6879,19 @@ msgstr "历史上的超新星"
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:116
+#: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
 msgstr "超新星"
 
-#: plugins/Supernovae/src/Supernova.cpp:132
+#: plugins/Supernovae/src/Supernova.cpp:138
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr "超新星类型：%1"
+
+#: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:142
+#, qt-format
+msgid "Maximum brightness: %1"
+msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -6892,6 +6899,11 @@ msgstr "历史超新星插件"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid "This plugin allows you to see some bright historical supernovae: "
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+#, qt-format
+msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
@@ -7007,11 +7019,6 @@ msgstr ""
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
-
-#: plugins/Novae/src/Nova.cpp:142
-#, qt-format
-msgid "Maximum brightness: %1"
 msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
