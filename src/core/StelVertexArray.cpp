@@ -30,7 +30,7 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 		{
 		case Triangles:
 		{
-			QVector<unsigned int> indicesOrig = ret.indices;
+			QVector<unsigned short> indicesOrig = ret.indices;
 			ret.indices.resize(0);
 			for (int i = 0; i < indicesOrig.size(); i += 3)
 			{

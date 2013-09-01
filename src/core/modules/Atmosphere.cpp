@@ -153,7 +153,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		}
 
 		// Generate the indices used to draw the quads
-		indices = new unsigned int[(skyResolutionX+1)*skyResolutionY*2];
+		indices = new unsigned short[(skyResolutionX+1)*skyResolutionY*2];
 		int i=0;
 		for (int y2=0; y2<skyResolutionY; ++y2)
 		{
@@ -336,10 +336,10 @@ void Atmosphere::draw(StelCore* core)
 	atmoShaderProgram->setAttributeArray(shaderAttribLocations.skyColor, (const GLfloat*)colorGrid, 4, 0);
 
 	// And draw everything at once
-	unsigned int* shift=indices;
+	unsigned short* shift=indices;
 	for (int y=0;y<skyResolutionY;++y)
 	{
-		glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_INT, shift);
+		glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
 		shift += (skyResolutionX+1)*2;
 	}
 	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex);

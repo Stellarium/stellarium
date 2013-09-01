@@ -271,7 +271,7 @@ public:
 	//! If indices is NULL, this operation will consume count values from the enabled arrays, starting at offset.
 	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
-	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
+	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned short *indices=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
@@ -292,7 +292,7 @@ private:
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned int* indices=NULL);
+	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.

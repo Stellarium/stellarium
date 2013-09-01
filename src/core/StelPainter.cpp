@@ -1484,7 +1484,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
-	static QVector<unsigned int> indiceArr;
+	static QVector<unsigned short> indiceArr;
 
 	texCoordArr.resize(0);
 	vertexArr.resize(0);
@@ -1763,7 +1763,7 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
-void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
+void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned short* indices)
 {
 	ArrayDesc projectedVertexArray = vertexArray;
 	if (doProj)
@@ -1822,7 +1822,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	}
 	
 	if (indices)
-		glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
+		glDrawElements(mode, count, GL_UNSIGNED_SHORT, indices + offset);
 	else
 		glDrawArrays(mode, offset, count);
 
@@ -1846,7 +1846,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 }
 
 
-StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned int* indices)
+StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned short* indices)
 {
 	// XXX: we should use a more generic way to test whether or not to do the projection.
 	if (dynamic_cast<StelProjector2d*>(prj.data()))
@@ -1868,7 +1868,7 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	} else
 	{
 		// we need to find the max value of the indices !
-		unsigned int max = 0;
+		unsigned short max = 0;
 		for (int i = offset; i < offset + count; ++i)
 		{
 			max = std::max(max, indices[i]);
