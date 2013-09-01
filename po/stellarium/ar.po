@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-25 02:35+0700\n"
-"PO-Revision-Date: 2013-08-25 01:01+0000\n"
+"POT-Creation-Date: 2013-08-27 19:18+0700\n"
+"PO-Revision-Date: 2013-08-28 14:25+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-25 04:37+0000\n"
+"X-Launchpad-Export-Date: 2013-08-29 04:40+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -59,7 +59,7 @@ msgstr "كوكب: "
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
 #: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:252
-#: plugins/Supernovae/src/Supernova.cpp:116 plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:92
 #: plugins/Pulsars/src/Pulsar.cpp:125
 #, qt-format
 msgid "Type: <b>%1</b>"
@@ -67,7 +67,7 @@ msgstr "‎النوع:‎ <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:129 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:125
-#: plugins/Supernovae/src/Supernova.cpp:121 plugins/Novae/src/Nova.cpp:131
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:131
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:155
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
@@ -75,7 +75,7 @@ msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:132 src/core/modules/Planet.cpp:449
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:128
-#: plugins/Supernovae/src/Supernova.cpp:124 plugins/Novae/src/Nova.cpp:134
+#: plugins/Supernovae/src/Supernova.cpp:130 plugins/Novae/src/Nova.cpp:134
 #: plugins/Quasars/src/Quasar.cpp:118 plugins/Exoplanets/src/Exoplanet.cpp:160
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -279,7 +279,7 @@ msgid "Spectral Type: %1"
 msgstr "‎النوع الطيفي:‎ %1"
 
 #: src/core/modules/StarWrapper.cpp:213
-#: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:144
+#: plugins/Supernovae/src/Supernova.cpp:141 plugins/Novae/src/Nova.cpp:144
 #: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Distance: %1 Light Years"
@@ -837,7 +837,7 @@ msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفا
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:379
 msgid "Authors"
-msgstr "<P DIR=RTL>المؤلفون"
+msgstr "<P DIR=RTL>المؤلفون<P DIR=RTL>"
 
 #: src/gui/ConfigurationDialog.cpp:715 src/gui/ViewDialog.cpp:451
 msgid "Contact"
@@ -5046,7 +5046,7 @@ msgstr "<P DIR=RTL>إضافة العدسة العينية"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
-msgstr "الإصدار"
+msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 msgid "Barlow lens feature"
@@ -6446,62 +6446,62 @@ msgstr ""
 "الشريط السفلي."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "January"
 msgstr "يناير"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "February"
 msgstr "فبراير"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "March"
 msgstr "مارس"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "April"
 msgstr "إبريل"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "May"
 msgstr "مايو"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "June"
 msgstr "يونية"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "July"
 msgstr "يولية"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "August"
 msgstr "أغسطس"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "September"
 msgstr "سبتمبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "October"
 msgstr "أكتوبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "November"
 msgstr "نوفمبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:680
+#: plugins/Supernovae/src/Supernovae.cpp:686
 msgid "December"
 msgstr "ديسمبر"
 
@@ -7084,17 +7084,22 @@ msgstr "المستعرات الموثقة تاريخياً"
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
-"هذه الإضافة تتيح لك الاطلاع على بعض المستعرات العظمى اللامعة الموثقة "
-"تاريخياً."
+"<P DIR=RTL>هذه الإضافة تتيح لك الاطلاع على بعض المستعرات العظمى اللامعة "
+"الموثقة تاريخياً."
 
-#: plugins/Supernovae/src/Supernova.cpp:116
+#: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
 msgstr "مستعر عظيم"
 
-#: plugins/Supernovae/src/Supernova.cpp:132
+#: plugins/Supernovae/src/Supernova.cpp:138
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr "نوع المستعر: %1"
+
+#: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:142
+#, qt-format
+msgid "Maximum brightness: %1"
+msgstr "‎تاريخ اللمعان الأقصى‎: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -7105,6 +7110,11 @@ msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
 "هذه الإضافة تتيح لك الاطلاع على بعض المستعرات العظمى اللامعة الموثقة "
 "تاريخياً: "
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+#, qt-format
+msgid "All those supernovae are brighter %1 at peak of brightness."
+msgstr "كل هذه المستعرات العظمى تكون أكثر لمعاناً بـ  %1 عند أقصى لمعان."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
@@ -7120,7 +7130,7 @@ msgid ""
 "plugin."
 msgstr ""
 "<P DIR=RTL>هذا التطبيق يستخدم نموذجاً مبسطاً لمنحنيات السطوع للمستعرات "
-"النختلفة. يمكن الاطلاع على النماذج المعتادة لمنحنيات السطوع %1على هذا "
+"المختلفة. يمكن الاطلاع على النماذج المعتادة لمنحنيات السطوع %1على هذا "
 "الرابط%2 (الإحداثي الأيمن بالأيام). هذا هو النموذج المستعمل في هذا التطبيق."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -7212,25 +7222,20 @@ msgstr "[معلومات التحديث القادم]"
 
 #: plugins/Novae/src/Novae.cpp:72
 msgid "Bright Novae"
-msgstr "مستعرات لامعة"
+msgstr "المستعرات اللامعة"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr "إضافة تعرض بعض المستعرات اللامعة في مجرة درب التبانة."
+msgstr "<P DIR=RTL>إضافة تعرض بعض المستعرات اللامعة في مجرة درب التبانة."
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr "النوع: <b>%1</b> (%2)"
+msgstr "‎النوع‎: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
 msgstr "مستعر"
-
-#: plugins/Novae/src/Nova.cpp:142
-#, qt-format
-msgid "Maximum brightness: %1"
-msgstr "قدر اللمعان الأقصى: %1"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 msgid "Bright Novae Plug-in"
@@ -7241,14 +7246,16 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
-"يمكنك البحث عن المستعرات بواسطة اسمها العام أو الاسم المخصص الرسمي مثلاً: "
-"Nova Cygni 1975 أو 'V1500 Cyg"
+"<P DIR=RTL>يمكنك البحث عن المستعرات بواسطة اسمها العام أو الاسم المخصص "
+"الرسمي مثلاً: Nova Cygni 1975 أو 'V1500 Cyg"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
-msgstr "هذه الإضافة تستخدم نموذجاً بسيطاً لحساب منحنى الضوء للنجوم المستعرة."
+msgstr ""
+"<P DIR=RTL>هذه الإضافة تستخدم نموذجاً بسيطاً لحساب منحنى الضوء للنجوم "
+"المستعرة."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
@@ -7256,16 +7263,16 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
-"هذا النموذج يعتمد على تناقص اللمعان بمقدار %1 من القيمة العظمى، حيث %1 تكون "
-"2، 3، 6 و 9."
+"<P DIR=RTL>هذا النموذج يعتمد على تناقص اللمعان بمقدار %1 من القيمة العظمى، "
+"حيث %1 تكون 2، 3، 6 و 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
-"إذا لم يكن هناك قيمة معروفة لتناقص اللمعان فإن هذه الإضافة تستخدم قيمة عامة "
-"لها."
+"<P DIR=RTL>إذا لم يكن هناك قيمة معروفة لتناقص اللمعان فإن هذه الإضافة تستخدم "
+"قيمة عامة لها."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -7274,8 +7281,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
-"إذا أردت معرفة المزيد عن هذه الإضافة وتاريخها وطريقة تنسيق الدليل فيها يمكنك "
-"%1 الحصول على المعلومات هنا %2."
+"<P DIR=RTL>إذا أردت معرفة المزيد عن هذه الإضافة وتاريخها وطريقة تنسيق الدليل "
+"فيها يمكنك %1 الحصول على المعلومات هنا %2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
 msgid "Novae is updated"
@@ -8780,6 +8787,3 @@ msgstr "ارتفاع الشمس وقت الشفق: 0 درجة"
 #, qt-format
 #~ msgid "Galactic longitude/latitude (J2000): %1/%2"
 #~ msgstr "‎خطالطول‎/خط العرض المجري‎(2000): %1/%2"
-
-#~ msgid "Novae Plug-in"
-#~ msgstr "إضافة المستعرات"
