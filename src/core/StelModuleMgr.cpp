@@ -33,6 +33,7 @@
 
 StelModuleMgr::StelModuleMgr() : callingListsToRegenerate(true), pluginDescriptorListLoaded(false)
 {
+	qRegisterMetaType<StelModule::StelModuleSelectAction>("StelModule::StelModuleSelectAction");
 	// Initialize empty call lists for each possible actions
 	callOrders[StelModule::ActionDraw]=QList<StelModule*>();
 	callOrders[StelModule::ActionUpdate]=QList<StelModule*>();
