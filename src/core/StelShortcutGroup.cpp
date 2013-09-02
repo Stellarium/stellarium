@@ -19,7 +19,7 @@
 
 #include "StelApp.hpp"
 #include "StelShortcutGroup.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
@@ -40,7 +40,7 @@ StelShortcut::StelShortcut(const QString &id,
                            QWidget *parent) :
     m_id(id), m_temporary(false)
 {
-	parent = parent ?: &StelMainGraphicsView::getInstance();
+	parent = parent ?: &StelMainView::getInstance();
 	m_action = new QAction(parent);
 	m_action->setObjectName(id);
 	m_group = group;

@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
 #include "StelFileMgr.hpp"
@@ -304,7 +304,7 @@ int main(int argc, char **argv)
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	StelMainGraphicsView mainWin;
+	StelMainView mainWin;
 	mainWin.init(confSettings);
 	app.exec();
 	mainWin.deinit();

@@ -18,7 +18,7 @@
  */
 
 #include "StelGuiBase.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include <QAction>
 
@@ -34,7 +34,7 @@ void StelGuiBase::init(QGraphicsWidget *atopLevelGraphicsWidget)
 void StelGuiBase::updateI18n()
 {
 	// Translate all action texts
-	foreach (QObject* obj, StelMainGraphicsView::getInstance().children())
+	foreach (QObject* obj, StelMainView::getInstance().children())
 	{
 		QAction* a = qobject_cast<QAction*>(obj);
 		if (a)

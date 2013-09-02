@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -44,7 +44,7 @@
 
 
 // Initialize static variables
-StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
+StelMainView* StelMainView::singleton = NULL;
 
 //! Render Stellarium sky. 
 class StelSkyItem : public QDeclarativeItem, protected QOpenGLFunctions
@@ -203,7 +203,7 @@ protected:
 	}
 };
 
-StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
+StelMainView::StelMainView(QWidget* parent)
 	: QDeclarativeView(parent), gui(NULL),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
@@ -212,7 +212,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 {
 	StelApp::initStatic();
 	
-	// Can't create 2 StelMainGraphicsView instances
+	// Can't create 2 StelMainView instances
 	Q_ASSERT(!singleton);
 	singleton = this;
 
@@ -244,19 +244,19 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	// End workaround
 }
 
-void StelMainGraphicsView::focusSky() {
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+void StelMainView::focusSky() {
+	StelMainView::getInstance().scene()->setActiveWindow(0);
 	QGraphicsObject* skyItem = rootObject()->findChild<QGraphicsObject*>("SkyItem");
 	Q_ASSERT(skyItem);
 	skyItem->setFocus();
 }
 
-StelMainGraphicsView::~StelMainGraphicsView()
+StelMainView::~StelMainView()
 {
 	StelApp::deinitStatic();
 }
 
-void StelMainGraphicsView::init(QSettings* conf)
+void StelMainView::init(QSettings* conf)
 {
 	// Look for a static GUI plugins.
 	foreach (QObject *plugin, QPluginLoader::staticInstances())
@@ -314,7 +314,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 	startMainLoop();
 }
 
-void StelMainGraphicsView::deinit()
+void StelMainView::deinit()
 {
 	deinitGL();
 	delete stelApp;
@@ -322,13 +322,13 @@ void StelMainGraphicsView::deinit()
 }
 
 // Update the translated title
-void StelMainGraphicsView::initTitleI18n()
+void StelMainView::initTitleI18n()
 {
 	QString appNameI18n = q_("Stellarium %1").arg(StelUtils::getApplicationVersion());
 	setWindowTitle(appNameI18n);
 }
 
-void StelMainGraphicsView::setFullScreen(bool b)
+void StelMainView::setFullScreen(bool b)
 {
 	if (b)
 		setWindowState(windowState() | Qt::WindowFullScreen);
@@ -336,12 +336,12 @@ void StelMainGraphicsView::setFullScreen(bool b)
 		setWindowState(windowState() & ~Qt::WindowFullScreen);
 }
 
-void StelMainGraphicsView::thereWasAnEvent()
+void StelMainView::thereWasAnEvent()
 {
 	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
-void StelMainGraphicsView::drawBackground(QPainter*, const QRectF&)
+void StelMainView::drawBackground(QPainter*, const QRectF&)
 {
 	const double now = StelApp::getTotalRunTime();
 
@@ -368,13 +368,13 @@ void StelMainGraphicsView::drawBackground(QPainter*, const QRectF&)
 	}
 }
 
-void StelMainGraphicsView::startMainLoop()
+void StelMainView::startMainLoop()
 {
 	// Set a timer refreshing for every minfps frames
 	minFpsChanged();
 }
 
-void StelMainGraphicsView::minFpsChanged()
+void StelMainView::minFpsChanged()
 {
 	if (minFpsTimer!=NULL)
 	{
@@ -390,37 +390,37 @@ void StelMainGraphicsView::minFpsChanged()
 
 
 
-void StelMainGraphicsView::mouseMoveEvent(QMouseEvent* event)
+void StelMainView::mouseMoveEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseMoveEvent(event);
 }
 
-void StelMainGraphicsView::mousePressEvent(QMouseEvent* event)
+void StelMainView::mousePressEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mousePressEvent(event);
 }
 
-void StelMainGraphicsView::mouseReleaseEvent(QMouseEvent* event)
+void StelMainView::mouseReleaseEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseReleaseEvent(event);
 }
 
-void StelMainGraphicsView::wheelEvent(QWheelEvent* event)
+void StelMainView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::wheelEvent(event);
 }
 
-void StelMainGraphicsView::keyPressEvent(QKeyEvent* event)
+void StelMainView::keyPressEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::keyPressEvent(event);
 }
 
-void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
+void StelMainView::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::keyReleaseEvent(event);
@@ -428,21 +428,21 @@ void StelMainGraphicsView::keyReleaseEvent(QKeyEvent* event)
 
 
 //! Delete openGL textures (to call before the GLContext disappears)
-void StelMainGraphicsView::deinitGL()
+void StelMainView::deinitGL()
 {
 	StelApp::getInstance().deinit();
 	delete gui;
 	gui = NULL;
 }
 
-void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
+void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
 {
 	screenShotPrefix = filePrefix;
 	screenShotDir = saveDir;
 	emit(screenshotRequested());
 }
 
-void StelMainGraphicsView::doScreenshot(void)
+void StelMainView::doScreenshot(void)
 {
 	QFileInfo shotDir;
 	QImage im = glWidget->grabFrameBuffer();

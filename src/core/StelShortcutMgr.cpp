@@ -23,7 +23,7 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "StelShortcutGroup.hpp"
 
@@ -96,7 +96,7 @@ void StelShortcutMgr::setShortcutText(const QString &actionId, const QString &gr
 
 QAction* StelShortcutMgr::getGuiAction(const QString& actionName)
 {
-	QAction* a = StelMainGraphicsView::getInstance().findChild<QAction*>(actionName);
+	QAction* a = StelMainView::getInstance().findChild<QAction*>(actionName);
 	if (!a)
 	{
 		qWarning() << "Can't find action " << actionName;
