@@ -38,7 +38,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
@@ -890,7 +890,7 @@ void SatellitesDialog::updateTLEs(void)
 	}
 	else
 	{
-		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainGraphicsView::getInstance(),
+		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainView::getInstance(),
 									q_("Select TLE Update File"),
 									StelFileMgr::getDesktopDir(),
 									"*.*");

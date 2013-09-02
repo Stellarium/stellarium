@@ -44,7 +44,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "StelLocation.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"

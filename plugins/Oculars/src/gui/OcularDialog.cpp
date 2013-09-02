@@ -25,7 +25,7 @@
 #include "StelGui.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 
 #include <QAbstractItemModel>
@@ -128,7 +128,7 @@ void OcularDialog::updateStyle()
 void OcularDialog::closeWindow()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(0);
 }
 
 void OcularDialog::deleteSelectedCCD()

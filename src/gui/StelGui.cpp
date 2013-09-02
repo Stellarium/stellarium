@@ -28,7 +28,7 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "StarMgr.hpp"
@@ -251,8 +251,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(getGuiAction("actionSet_Tracking"), SIGNAL(toggled(bool)), mmgr, SLOT(setFlagTracking(bool)));
 	getGuiAction("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 
-	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFullScreen(bool)));
-	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainGraphicsView::getInstance().isFullScreen());
+	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFullScreen(bool)));
+	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainView::getInstance().isFullScreen());
 
 	QAction* tempAction = getGuiAction("actionShow_Location_Window_Global");
 	connect(tempAction, SIGNAL(toggled(bool)),
@@ -304,7 +304,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(shortcutsDialog, SIGNAL(visibleChanged(bool)),
 		tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
+	connect(getGuiAction("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainView::getInstance(), SLOT(saveScreenShot()));
 	connect(getGuiAction("actionSave_Copy_Object_Information_Global"), SIGNAL(triggered()), this, SLOT(copySelectedObjectInfo()));
 
 	getGuiAction("actionToggle_GuiHidden_Global")->setChecked(true);
@@ -844,7 +844,7 @@ void StelGui::update()
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getGuiAction("actionShow_Night_Mode")->isChecked() != flag)
 		getGuiAction("actionShow_Night_Mode")->setChecked(flag);
-	flag = StelMainGraphicsView::getInstance().isFullScreen();
+	flag = StelMainView::getInstance().isFullScreen();
 	if (getGuiAction("actionSet_Full_Screen_Global")->isChecked() != flag)
 		getGuiAction("actionSet_Full_Screen_Global")->setChecked(flag);
 

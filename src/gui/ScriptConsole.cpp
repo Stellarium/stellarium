@@ -20,7 +20,7 @@
 
 #include "ScriptConsole.hpp"
 #include "ui_scriptConsole.h"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
@@ -100,7 +100,7 @@ void ScriptConsole::createDialogContent()
 
 void ScriptConsole::loadScript()
 {
-	QString fileName = QFileDialog::getOpenFileName(&StelMainGraphicsView::getInstance(), 
+	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), 
 	                                                tr("Load Script"), 
 	                                                StelFileMgr::getInstallationDir() + "/scripts", 
 	                                                tr("Script Files") + " " + getFileMask());
@@ -126,7 +126,7 @@ void ScriptConsole::saveScript()
 		saveDir = StelFileMgr::getUserDir();
 	}
 
-	QString fileName = QFileDialog::getSaveFileName(&StelMainGraphicsView::getInstance(), 
+	QString fileName = QFileDialog::getSaveFileName(&StelMainView::getInstance(), 
 	                                                tr("Save Script"), 
 	                                                saveDir,
 	                                                tr("Script Files") + " " + getFileMask());
@@ -247,7 +247,7 @@ void ScriptConsole::appendLogLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainGraphicsView::getInstance(), 
+	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainView::getInstance(), 
 	                                                           tr("Select Script Includ Directory"), 
 	                                                           StelFileMgr::getInstallationDir() + "/scripts"));
 }

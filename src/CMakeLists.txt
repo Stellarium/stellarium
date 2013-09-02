@@ -214,9 +214,8 @@ SET(stellarium_lib_SRCS
 	core/modules/ZoneArray.cpp
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
-
-	StelMainGraphicsView.hpp
-	StelMainGraphicsView.cpp
+	StelMainView.hpp
+	StelMainView.cpp
 	StelLogger.hpp
 	StelLogger.cpp
 	CLIProcessor.hpp
@@ -433,7 +432,7 @@ ENDIF()
 
 
 ###############################################################################################
-################## Static plugins need to be known by the file StelMainGraphicsView.cpp at compilation time
+################## Static plugins need to be known by the file StelMainView.cpp at compilation time
 ################## so add the definitions to the compilation.
 ################## Also add the full path to the .a libraries at compilation time.
 IF (BUILD_STATIC_PLUGINS)

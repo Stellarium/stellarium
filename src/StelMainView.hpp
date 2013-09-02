@@ -29,15 +29,15 @@ class QResizeEvent;
 class StelGuiBase;
 class StelQGLWidget;
 
-//! @class StelMainGraphicsView
+//! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
-class StelMainGraphicsView : public QDeclarativeView
+class StelMainView : public QDeclarativeView
 {
 Q_OBJECT
 public:
-	StelMainGraphicsView(QWidget* parent = NULL);
-	virtual ~StelMainGraphicsView();
+	StelMainView(QWidget* parent = NULL);
+	virtual ~StelMainView();
 
 	//! Start the main initialization of Stellarium
 	void init(class QSettings* conf);
@@ -47,8 +47,8 @@ public:
 	//! This is useful for e.g. chinese.
 	void initTitleI18n();
 
-	//! Get the StelMainGraphicsView singleton instance.
-	static StelMainGraphicsView& getInstance() {Q_ASSERT(singleton); return *singleton;}
+	//! Get the StelMainView singleton instance.
+	static StelMainView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
@@ -130,8 +130,8 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 
-	//! The StelMainGraphicsView singleton
-	static StelMainGraphicsView* singleton;
+	//! The StelMainView singleton
+	static StelMainView* singleton;
 
 	//! The openGL window
 	StelQGLWidget* glWidget;
