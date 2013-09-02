@@ -138,4 +138,6 @@ public:
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
 };
 
+Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)
+
 #endif // _STELMODULE_HPP_
