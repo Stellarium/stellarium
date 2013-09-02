@@ -22,6 +22,7 @@
 
 #include <QFont>
 #include <QVariantMap>
+#include <QVector>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
