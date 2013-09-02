@@ -21,7 +21,7 @@
 #include "ui_satellitesImportDialog.h"
 
 #include "StelApp.hpp"
-#include "StelMainGraphicsView.hpp" //for the QFileDialog? Why?
+#include "StelMainView.hpp" //for the QFileDialog? Why?
 #include "StelModuleMgr.hpp" // for the GETSTELMODULE macro :(
 #include "StelTranslator.hpp"
 
@@ -154,7 +154,7 @@ void SatellitesImportDialog::getData()
 		// XXX: we should check that there is at least one home location.
 		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation)[0];
 		sourceFilePaths = QFileDialog::getOpenFileNames(
-		                      &StelMainGraphicsView::getInstance(),
+		                      &StelMainView::getInstance(),
 		                      q_("Select TLE source file(s)..."),
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())

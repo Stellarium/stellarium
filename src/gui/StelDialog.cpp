@@ -19,7 +19,7 @@
 
 
 #include "StelDialog.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -70,7 +70,7 @@ StelDialog::~StelDialog()
 void StelDialog::close()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().focusSky();
+	StelMainView::getInstance().focusSky();
 }
 
 bool StelDialog::visible() const
@@ -82,11 +82,11 @@ void StelDialog::setVisible(bool v)
 {
 	if (v)
 	{
-		QSize screenSize = StelMainGraphicsView::getInstance().size();
+		QSize screenSize = StelMainView::getInstance().size();
 		if (dialog)
 		{
 			dialog->show();
-			StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
 			// will be off screen.  Check for this and move it to a visible
 			// position if necessary
@@ -117,7 +117,7 @@ void StelDialog::setVisible(bool v)
 		if (newY <-0)
 			newY = 0;
 		proxy->setPos(newX, newY);
-		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
+		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 		// (this also changes the bounding rectangle size)
 
@@ -125,7 +125,7 @@ void StelDialog::setVisible(bool v)
 		proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
 
 		proxy->setZValue(100);
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+		StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
 	}
 	else
@@ -133,6 +133,6 @@ void StelDialog::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().scene()->setActiveWindow(0);
 	}
 }

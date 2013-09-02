@@ -22,7 +22,7 @@
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "ui_configurationDialog.h"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -243,7 +243,7 @@ void ConfigurationDialog::createDialogContent()
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
 	// XXX: to reintroduce.
-	// ui->sphericMirrorCheckbox->setChecked(StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect() == "sphericMirrorDistorter");
+	// ui->sphericMirrorCheckbox->setChecked(StelMainView::getInstance().getStelAppGraphicsWidget()->getViewportEffect() == "sphericMirrorDistorter");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
@@ -260,8 +260,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->showNebulaBgButtonCheckbox->setChecked(gui->getFlagShowNebulaBackgroundButton());
 	connect(ui->showNebulaBgButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowNebulaBackgroundButton(bool)));
 
-	ui->mouseTimeoutCheckbox->setChecked(StelMainGraphicsView::getInstance().getFlagCursorTimeout());
-	ui->mouseTimeoutSpinBox->setValue(StelMainGraphicsView::getInstance().getCursorTimeout());
+	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
+	ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
@@ -273,8 +273,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 
-	ui->invertScreenShotColorsCheckBox->setChecked(StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
-	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
+	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
+	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
@@ -308,7 +308,7 @@ void ConfigurationDialog::selectLanguage(const QString& langName)
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
-	StelMainGraphicsView::getInstance().initTitleI18n();
+	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -351,13 +351,13 @@ void ConfigurationDialog::setSphericMirror(bool b)
 		savedProjectionType = core->getCurrentProjectionType();
 		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
 		// XXX: to reintroduce
-		// StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("sphericMirrorDistorter");
+		// StelMainView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("sphericMirrorDistorter");
 	}
 	else
 	{
 		core->setCurrentProjectionType((StelCore::ProjectionType)savedProjectionType);
 		// XXX: to reintroduce
-		// StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("none");
+		// StelMainView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("none");
 	}
 }
 
@@ -423,8 +423,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
-	StelMainGraphicsView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
-	StelMainGraphicsView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
+	StelMainView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
 }
 
 void ConfigurationDialog::browseForScreenshotDir()
@@ -630,21 +630,21 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
 	// XXX: to reintroduce.
-	// conf->setValue("video/viewport_effect", StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
+	// conf->setValue("video/viewport_effect", StelMainView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
-	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainGraphicsView::getInstance().getFlagCursorTimeout());
-	conf->setValue("gui/mouse_cursor_timeout", StelMainGraphicsView::getInstance().getCursorTimeout());
+	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainView::getInstance().getFlagCursorTimeout());
+	conf->setValue("gui/mouse_cursor_timeout", StelMainView::getInstance().getCursorTimeout());
 
 	conf->setValue("main/screenshot_dir", StelFileMgr::getScreenshotDir());
-	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
+	conf->setValue("main/invert_screenshots_colors", StelMainView::getInstance().getFlagInvertScreenShotColors());
 
 	// full screen and window size
-	conf->setValue("video/fullscreen", StelMainGraphicsView::getInstance().isFullScreen());
-	if (!StelMainGraphicsView::getInstance().isFullScreen())
+	conf->setValue("video/fullscreen", StelMainView::getInstance().isFullScreen());
+	if (!StelMainView::getInstance().isFullScreen())
 	{
-		QWidget& mainWindow = StelMainGraphicsView::getInstance();
+		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
 		conf->setValue("video/screen_x", mainWindow.x());

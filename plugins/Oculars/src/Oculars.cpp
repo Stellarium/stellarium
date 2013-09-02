@@ -34,7 +34,7 @@
 #include "StelProjector.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "SkyGui.hpp"
 
@@ -875,7 +875,7 @@ void Oculars::decrementLensIndex()
 
 void Oculars::displayPopupMenu()
 {
-	QMenu* popup = new QMenu(&StelMainGraphicsView::getInstance());
+	QMenu* popup = new QMenu(&StelMainView::getInstance());
 
 	if (flagShowOculars)
 	{

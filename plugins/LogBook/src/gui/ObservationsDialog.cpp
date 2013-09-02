@@ -24,7 +24,7 @@
 
 #include "StelApp.hpp"
 #include "StelGui.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelStyle.hpp"
 

@@ -38,7 +38,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 
@@ -250,10 +250,10 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
 {
-	bool oldInvertSetting = StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors();
-	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(invert);
-	StelMainGraphicsView::getInstance().saveScreenShot(prefix, dir);
-	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
+	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
+	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
+	StelMainView::getInstance().saveScreenShot(prefix, dir);
+	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
 void StelMainScriptAPI::setGuiVisible(bool b)
@@ -263,22 +263,22 @@ void StelMainScriptAPI::setGuiVisible(bool b)
 
 void StelMainScriptAPI::setMinFps(float m)
 {
-	StelMainGraphicsView::getInstance().setMinFps(m);
+	StelMainView::getInstance().setMinFps(m);
 }
 
 float StelMainScriptAPI::getMinFps()
 {
-	return StelMainGraphicsView::getInstance().getMinFps();
+	return StelMainView::getInstance().getMinFps();
 }
 
 void StelMainScriptAPI::setMaxFps(float m)
 {
-	StelMainGraphicsView::getInstance().setMaxFps(m);
+	StelMainView::getInstance().setMaxFps(m);
 }
 
 float StelMainScriptAPI::getMaxFps()
 {
-	return StelMainGraphicsView::getInstance().getMaxFps();
+	return StelMainView::getInstance().getMaxFps();
 }
 
 QString StelMainScriptAPI::getMountMode()
@@ -581,12 +581,12 @@ void StelMainScriptAPI::showVideo(const QString& id, bool show)
 
 int StelMainScriptAPI::getScreenWidth()
 {
-	return StelMainGraphicsView::getInstance().size().width();
+	return StelMainView::getInstance().size().width();
 }
 
 int StelMainScriptAPI::getScreenHeight()
 {
-	return StelMainGraphicsView::getInstance().size().height();
+	return StelMainView::getInstance().size().height();
 }
 
 double StelMainScriptAPI::getScriptRate()
