@@ -84,6 +84,7 @@ void copyDefaultConfigFile(const QString& newPath)
 		qFatal("ERROR copyDefaultConfigFile failed to copy file %s  to %s. You could try to copy it by hand.",
 			qPrintable(defaultConfigFilePath), qPrintable(newPath));
 	}
+	QFile::setPermissions(newPath, QFile::permissions(newPath) | QFileDevice::WriteOwner);
 }
 
 
