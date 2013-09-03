@@ -38,6 +38,7 @@
 #include <QImage>
 #include <QNetworkReply>
 #include <QTimer>
+#include <QtEndian>
 
 ImageLoader::ImageLoader(const QString& path, int delay)
 	: QObject(), path(path), networkReply(NULL)
@@ -207,6 +208,72 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
+QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GLint *type)
+{
+	QByteArray ret;
+	const int width = image.width();
+	const int height = image.height();
+	if (image.isGrayscale())
+	{
+		*format = image.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
+	}
+	else if (image.hasAlphaChannel())
+	{
+		*format = GL_RGBA;
+	}
+	else
+		*format = GL_RGB;
+	*type = GL_UNSIGNED_BYTE;
+	int bpp = *format == GL_LUMINANCE_ALPHA ? 2 :
+			  *format == GL_LUMINANCE ? 1 :
+			  *format == GL_RGBA ? 4 :
+			  3;
+
+	ret.reserve(width * height * bpp);
+	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
+
+	// flips bits over y
+	int ipl = tmp.bytesPerLine() / 4;
+	for (int y = 0; y < height / 2; ++y)
+	{
+		int *a = (int *) tmp.scanLine(y);
+		int *b = (int *) tmp.scanLine(height - y - 1);
+		for (int x = 0; x < ipl; ++x)
+			qSwap(a[x], b[x]);
+	}
+
+	// convert data
+	for (int i = 0; i < height; ++i)
+	{
+		uint *p = (uint *) tmp.scanLine(i);
+		for (int x = 0; x < width; ++x)
+		{
+			uint c = qToBigEndian(p[x]);
+			const char* ptr = (const char*)&c;
+			switch (*format)
+			{
+			case GL_RGBA:
+				ret.append(ptr + 1, 3);
+				ret.append(ptr, 1);
+				break;
+			case GL_RGB:
+				ret.append(ptr + 1, 3);
+				break;
+			case GL_LUMINANCE:
+				ret.append(ptr + 1, 1);
+				break;
+			case GL_LUMINANCE_ALPHA:
+				ret.append(ptr + 1, 1);
+				ret.append(ptr, 1);
+				break;
+			default:
+				Q_ASSERT(false);
+			}
+		}
+	}
+	return ret;
+}
+
 
 // Actually load the texture to openGL memory
 bool StelTexture::glLoad()
@@ -217,93 +284,17 @@ bool StelTexture::glLoad()
 		reportError("Unknown error");
 		return false;
 	}
-
-	GLint internalFormat;
-	if (qImage.isGrayscale())
-	{
-		internalFormat = qImage.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
-	}
-	else if (qImage.hasAlphaChannel())
-	{
-		internalFormat = GL_RGBA;
-	}
-	else
-		internalFormat = GL_RGB;
-
 	glActiveTexture(GL_TEXTURE0);
-	
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
-	
-	bool genMipmap = false;
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);	
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
-	
-	QImage::Format target_format = qImage.format();
-	GLenum externalFormat;
-	GLuint pixel_type;
-	
-	externalFormat = GL_RGBA;
-	pixel_type = GL_UNSIGNED_BYTE;
-	
-	switch (target_format) {
-	case QImage::Format_ARGB32:
-		break;
-	case QImage::Format_ARGB32_Premultiplied:
-			qImage = qImage.convertToFormat(target_format = QImage::Format_ARGB32);
-		break;
-	case QImage::Format_RGB16:
-		pixel_type = GL_UNSIGNED_SHORT_5_6_5;
-		externalFormat = GL_RGB;
-		internalFormat = GL_RGB;
-		break;
-	case QImage::Format_RGB32:
-		break;
-	default:
-		if (qImage.hasAlphaChannel()) {
-			qImage = qImage.convertToFormat(QImage::Format_ARGB32);
-		} else {
-			qImage = qImage.convertToFormat(QImage::Format_RGB32);
-		}
-	}
-	
-	// flips bits over y
-	int ipl = qImage.bytesPerLine() / 4;
-	int h = qImage.height();
-	for (int y=0; y<h/2; ++y) {
-		int *a = (int *) qImage.scanLine(y);
-		int *b = (int *) qImage.scanLine(h - y - 1);
-		for (int x=0; x<ipl; ++x)
-			qSwap(a[x], b[x]);
-	}
-	
-	if (externalFormat == GL_RGBA) {
-		// The only case where we end up with a depth different from
-		// 32 in the switch above is for the RGB16 case, where we set
-		// the format to GL_RGB
-		Q_ASSERT(qImage.depth() == 32);
-		const int width = qImage.width();
-		const int height = qImage.height();
-	
-		if (pixel_type == GL_UNSIGNED_INT_8_8_8_8_REV
-			|| (pixel_type == GL_UNSIGNED_BYTE && QSysInfo::ByteOrder == QSysInfo::LittleEndian)) {
-			for (int i=0; i < height; ++i) {
-				uint *p = (uint *) qImage.scanLine(i);
-				for (int x=0; x<width; ++x)
-					p[x] = ((p[x] << 16) & 0xff0000) | ((p[x] >> 16) & 0xff) | (p[x] & 0xff00ff00);
-			}
-		} else {
-			for (int i=0; i < height; ++i) {
-				uint *p = (uint *) qImage.scanLine(i);
-				for (int x=0; x<width; ++x)
-					p[x] = (p[x] << 8) | ((p[x] >> 24) & 0xff);
-			}
-		}
-	}
-	
-	const QImage &constRef = qImage; // to avoid detach in bits()...
-	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, qImage.width(), qImage.height(), 0, externalFormat,
-				 pixel_type, constRef.bits());
+
+	GLint format, type;
+	QByteArray data = convertToGLFormat(qImage, &format, &type);
+	glTexImage2D(GL_TEXTURE_2D, 0, format, qImage.width(), qImage.height(), 0, format,
+				 type, data.constData());
+	bool genMipmap = false;
 	if (genMipmap)
 		glGenerateMipmap(GL_TEXTURE_2D);
 	
