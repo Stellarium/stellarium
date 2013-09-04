@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-27 19:18+0700\n"
-"PO-Revision-Date: 2013-08-04 08:38+0000\n"
+"PO-Revision-Date: 2013-09-03 14:51+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-28 04:42+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-09-04 04:38+0000\n"
+"X-Generator: Launchpad (build 16753)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
@@ -1240,7 +1240,7 @@ msgstr "Szokásos Perzeida-gyakoriság"
 
 #: src/gui/ViewDialog.cpp:637
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Meteorzáporok gyakorisága"
 
 #: src/gui/ViewDialog.cpp:640
 msgid "Exceptional Leonid rate"
@@ -3879,6 +3879,7 @@ msgstr "Pozíció"
 #: src/ui_searchDialogGui.h:647
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Néhány objektum csak a megfelelő beépülő modul telepítése után látható."
 
 #: src/ui_searchDialogGui.h:649
 msgid "names in English"
@@ -3907,7 +3908,7 @@ msgstr "Szerver:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "Keresési opciók"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
@@ -3988,11 +3989,11 @@ msgstr "Hold nagyítása"
 
 #: src/ui_viewDialog.h:1223
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "A tájkép automatikus cseréje, ha a bolygó változik"
 
 #: src/ui_viewDialog.h:1225
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Tájkép automatikus kiválasztása"
 
 #: src/ui_viewDialog.h:1227
 msgid "Show atmosphere"
@@ -4053,7 +4054,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1247
 msgid "1000"
-msgstr ""
+msgstr "1000"
 
 #: src/ui_viewDialog.h:1250
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -7051,7 +7052,7 @@ msgstr "Történelmi szupernóvák"
 
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr ""
+msgstr "Ez a bővítmény néhány fényes, történelmi szupernóvát mutat."
 
 #: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
@@ -7065,7 +7066,7 @@ msgstr "A szupernóva típusa: %1"
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:142
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Legnagyobb fényesség : %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -7073,7 +7074,7 @@ msgstr "Történelmi szupernóvák bővítmény"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid "This plugin allows you to see some bright historical supernovae: "
-msgstr ""
+msgstr "Ez a bővítmény néhány fényes, történelmi szupernóvát mutat: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 #, qt-format
@@ -7183,24 +7184,24 @@ msgstr "[következő frissítés]"
 
 #: plugins/Novae/src/Novae.cpp:72
 msgid "Bright Novae"
-msgstr ""
+msgstr "Fényes nóvák"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "Ez a bővítmény néhány fényes nóvát mutat a Tejúton."
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Típus: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
+msgstr "nóva"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Fényes nóvák"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:112
 msgid ""
@@ -7237,15 +7238,15 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
 msgid "Novae is updated"
-msgstr ""
+msgstr "Nóvák listája frissítve"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Fényes nóvák beállításai"
 
 #: plugins/Novae/src/ui_novaeDialog.h:234
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Fényes nóvák bővítmény beállításai"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
@@ -7315,7 +7316,7 @@ msgstr "Kvazárok eloszlásának mutatása"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
 msgid "Enable display at startup"
-msgstr ""
+msgstr "Induláskor mutatja"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 msgid "Show quasars button on toolbar"
@@ -7635,7 +7636,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Exobolygók elnevezései (IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
@@ -7643,7 +7644,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "frissítve: 2012. április 16."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "The Exoplanet Data Explorer"
@@ -7683,7 +7684,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "Lakható zóna galéria"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "PlanetQuest - The Search for Another Earth"
@@ -7740,7 +7741,7 @@ msgstr "Exobolygó gomb az eszköztáron"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Infó"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
