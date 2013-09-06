@@ -163,7 +163,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</b>", "");
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
-		str.replace("<br>", "\n");
+		str.replace(QRegExp("<br(\\s*/)?>"), "\n");
 	}
 	else
 	{
