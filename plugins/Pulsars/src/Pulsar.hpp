@@ -67,7 +67,7 @@ public:
 		return XYZ;
 	}
 	//! Get the visual magnitude of pulsar
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar

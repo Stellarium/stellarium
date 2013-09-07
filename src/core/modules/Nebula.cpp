@@ -101,10 +101,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (mag < 50 && flags&Magnitude)
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-										QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
 	oss << getPositionInfoString(core, flags);
 
@@ -116,17 +116,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
-float Nebula::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Nebula::getVMagnitude(const StelCore* core) const
 {
-    float extinctionMag=0.0; // track magnitude loss
-    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-    {
-	Vec3d altAz=getAltAzPosApparent(core);
-	altAz.normalize();
-	core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-    }
-
-    return mag+extinctionMag;
+    return mag;
 }
 
 
@@ -139,8 +131,8 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	}
 	else
 	{
-		if (getVMagnitude(core, false)>20.f) return 20.f;
-		return getVMagnitude(core, false);
+		if (getVMagnitude(core)>20.f) return 20.f;
+		return getVMagnitude(core);
 	}
 }
 

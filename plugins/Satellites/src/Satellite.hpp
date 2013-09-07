@@ -119,7 +119,7 @@ public:
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
-	virtual float getVMagnitude(const StelCore* core=NULL, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core=NULL) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
