@@ -84,7 +84,7 @@ private:
 	float ext_coeff;
 	//! should be either 0.0 (stars visible in full brightness below horizon) or 40.0 (or 42? ;-) practically invisible)
 	//! Maybe make this a user-configurable option?
-	static float SUBHORIZONTAL_AIRMASS;
+	float subhorizontalAirmass;
 };
 
 //! @class Refraction

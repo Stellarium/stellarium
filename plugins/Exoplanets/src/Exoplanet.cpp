@@ -120,13 +120,13 @@ QVariantMap Exoplanet::getMap(void)
 
 float Exoplanet::getSelectPriority(const StelCore* core) const
 {
-	if (getVMagnitude(core, false)>20.f)
+	if (getVMagnitude(core)>20.f)
 	{
 		return 20.f;
 	}
 	else
 	{
-		return getVMagnitude(core, false) - 1.f;
+		return getVMagnitude(core) - 1.f;
 	}
 }
 
@@ -154,12 +154,12 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-												QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 			}
 			else
 			{
-				oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core, false), 'f', 2)) << "<br>";
+				oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
 			}
 		}
 	}
@@ -305,16 +305,8 @@ Vec3f Exoplanet::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Exoplanet::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Exoplanet::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
 	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
 	{
 		return 4.f;
@@ -323,11 +315,11 @@ float Exoplanet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	{
 		if (Vmag<99)
 		{
-			return Vmag + extinctionMag;
+			return Vmag;
 		}
 		else
 		{
-			return 6.f + extinctionMag;
+			return 6.f;
 		}
 	}
 }
@@ -377,7 +369,7 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 	if (StelApp::getInstance().getVisionModeNight())
 		color = StelUtils::getNightColor(color);
 
-	double mag = getVMagnitude(core, true);
+	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);
 	glEnable(GL_BLEND);

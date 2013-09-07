@@ -24,20 +24,17 @@
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
-
-// To be decided: The following should be either 0 or 40 (or 42? ;-)
-float Extinction::SUBHORIZONTAL_AIRMASS=0.0f;
-
-Extinction::Extinction()
+Extinction::Extinction() : subhorizontalAirmass(0.f)
 {
     QSettings* conf = StelApp::getInstance().getSettings();
-    SUBHORIZONTAL_AIRMASS = (conf->value("astro/flag_extinction_below_horizon", true).toBool()? 42.0f : 0.0f);
+    subhorizontalAirmass = (conf->value("astro/flag_extinction_below_horizon", true).toBool()? 42.0f : 0.0f);
     ext_coeff=conf->value("landscape/atmospheric_extinction_coefficient", 0.2f).toFloat();
 }
 
 //  altAzPos is the NORMALIZED (!!!) star position vector AFTER REFRACTION, and its z component sin(altitude).
 void Extinction::forward(const Vec3d *altAzPos, float *mag, const int num) const
 {
+	Q_ASSERT(fabs(altAzPos[i]->length()-1.f)<0.00001);
 	for (int i=0; i<num; ++i) mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
 }
 void Extinction::forward(const Vec3f *altAzPos, float *mag, const int num) const
@@ -84,7 +81,7 @@ void Extinction::backward(const float *sinAlt, float *mag, const int num) const
 float Extinction::airmass(const float cosZ, const bool apparent_z) const
 {
 	if (cosZ<-0.035f) // about -2 degrees. Here, RozenbergZ>574 and climbs fast!
-	    return Extinction::SUBHORIZONTAL_AIRMASS; // Safety: 0 or 40 for below -2 degrees.
+	    return Extinction::subhorizontalAirmass; // Safety: 0 or 40 for below -2 degrees.
 
 	float X;
 	if (apparent_z)

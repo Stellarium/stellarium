@@ -124,13 +124,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		    oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-										    QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		    oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+										    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 		else
-		    oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+		    oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
 	if (flags&AbsoluteMagnitude)
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core, false)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
 
@@ -230,11 +230,11 @@ float Planet::getSelectPriority(const StelCore* core) const
 	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
-		return getVMagnitude(core, false)-15.f;
+		return getVMagnitude(core)-15.f;
 	}
 	else
 	{
-		return getVMagnitude(core, false) - 8.f;
+		return getVMagnitude(core) - 8.f;
 	}
 }
 
@@ -597,22 +597,13 @@ double Planet::getElongation(const Vec3d& obsPos) const
 }
 
 // Computation of the visual magnitude (V band) of the planet.
-float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Planet::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
-
 	if (parent == 0)
 	{
 		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
-		return 4.83 + 5.*(std::log10(distParsec)-1.) + extinctionMag;
+		return 4.83 + 5.*(std::log10(distParsec)-1.);
 	}
 
 	// Compute the angular phase
@@ -668,26 +659,26 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 		if (englishName=="Mercury")
 		{
 			if ( phaseDeg > 150. ) f1 = 1.5;
-			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1 + extinctionMag;
+			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1;
 		}
 		if (englishName=="Venus")
-			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1 + extinctionMag;
+			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1;
 		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phaseDeg + extinctionMag;
+			return -1.52 + d + 0.016*phaseDeg;
 		if (englishName=="Jupiter")
-			return -9.25 + d + 0.005*phaseDeg + extinctionMag;
+			return -9.25 + d + 0.005*phaseDeg;
 		if (englishName=="Saturn")
 		{
 			// TODO re-add rings computation
 			// double rings = -2.6*sinx + 1.25*sinx*sinx;
-			return -8.88 + d + 0.044*phaseDeg + extinctionMag;// + rings;
+			return -8.88 + d + 0.044*phaseDeg;// + rings;
 		}
 		if (englishName=="Uranus")
-			return -7.19 + d + 0.0028*phaseDeg + extinctionMag;
+			return -7.19 + d + 0.0028*phaseDeg;
 		if (englishName=="Neptune")
-			return -6.87 + d + extinctionMag;
+			return -6.87 + d;
 		if (englishName=="Pluto")
-			return -1.01 + d + 0.041*phaseDeg + extinctionMag;
+			return -1.01 + d + 0.041*phaseDeg;
 		*/
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are two solutions:
@@ -699,14 +690,14 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 		if (englishName=="Mercury")
 		    {
 			double ph50=phaseDeg-50.0;
-			return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50 + extinctionMag;
+			return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50;
 		    }
 		if (englishName=="Venus")
-			return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg + extinctionMag;
+			return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg;
 		if (englishName=="Mars")
-			return -1.3 + d + 0.01486*phaseDeg + extinctionMag;
+			return -1.3 + d + 0.01486*phaseDeg;
 		if (englishName=="Jupiter")
-			return -8.93 + d + extinctionMag;
+			return -8.93 + d;
 		if (englishName=="Saturn")
 		{
 			// add rings computation
@@ -721,24 +712,24 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-			return -8.68 + d + 0.044*phaseDeg + rings + extinctionMag;
+			return -8.68 + d + 0.044*phaseDeg + rings;
 		}
 		if (englishName=="Uranus")
-			return -6.85 + d + extinctionMag;
+			return -6.85 + d;
 		if (englishName=="Neptune")
-			return -7.05 + d + extinctionMag;
+			return -7.05 + d;
 		if (englishName=="Pluto")
-			return -1.0 + d + extinctionMag;
+			return -1.0 + d;
 		/*
 		// (2)
 		if (englishName=="Mercury")
-			return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg + extinctionMag;
+			return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg;
 		if (englishName=="Venus")
-			return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg + extinctionMag;
+			return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg;
 		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phaseDeg + extinctionMag;
+			return -1.52 + d + 0.016*phaseDeg;
 		if (englishName=="Jupiter")
-			return -9.40 + d + 0.005*phaseDeg + extinctionMag;
+			return -9.40 + d + 0.005*phaseDeg;
 		if (englishName=="Saturn")
 		{
 			// add rings computation
@@ -753,14 +744,14 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-			return -8.88 + d + 0.044*phaseDeg + rings + extinctionMag;
+			return -8.88 + d + 0.044*phaseDeg + rings;
 		}
 		if (englishName=="Uranus")
-			return -7.19f + d + extinctionMag;
+			return -7.19f + d;
 		if (englishName=="Neptune")
-			return -6.87f + d + extinctionMag;
+			return -6.87f + d;
 		if (englishName=="Pluto")
-			return -1.00f + d + extinctionMag;
+			return -1.00f + d;
 	*/
 	// TODO: decide which set of formulae is best?
 	}
@@ -768,7 +759,7 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	// This formula seems to give wrong results
 	const double p = (1.0 - phase/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 	double F = 2.0 * albedo * radius * radius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
-	return -26.73 - 2.5 * std::log10(F) + extinctionMag;
+	return -26.73 - 2.5 * std::log10(F);
 }
 
 double Planet::getAngularSize(const StelCore* core) const
@@ -948,7 +939,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitude(core, true), color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitudeWithExtinction(core), color);
 }
 
 
