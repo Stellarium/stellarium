@@ -398,7 +398,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	return StelObjectP();
 }
 
-QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
@@ -417,11 +417,28 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 		if (ok)
 			numberPrefix = numberString;
 	}
+	bool find;
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getNameI18n().toUpper().contains(objw, Qt::CaseInsensitive))
+			find = false;
+			if (useStartOfWords)
+			{
+				if (sat->getNameI18n().toUpper().left(objw.length()) == objw)
+				{
+					find = true;
+				}
+			}
+			else
+			{
+				if (sat->getNameI18n().toUpper().contains(objw, Qt::CaseInsensitive))
+				{
+					find = true;
+				}
+			}
+
+			if (find)
 			{
 				result << sat->getNameI18n().toUpper();
 			}
@@ -438,7 +455,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
-QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
@@ -457,17 +474,33 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 		if (ok)
 			numberPrefix = numberString;
 	}
+	bool find;
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getEnglishName().toUpper().contains(objw, Qt::CaseInsensitive))
+			find = false;
+			if (useStartOfWords)
+			{
+				if (sat->getEnglishName().toUpper().left(objw.length()) == objw)
+				{
+					find = true;
+				}
+			}
+			else
+			{
+				if (sat->getEnglishName().toUpper().contains(objw, Qt::CaseInsensitive))
+				{
+					find = true;
+				}
+			}
+			if (find)
 			{
 				result << sat->getEnglishName().toUpper();
 			}
-			else if (!numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
+			else if (find==false && !numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
 			{
-				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
+				result << QString("NORAD %1").arg(sat->getCatalogNumberString());			
 			}
 		}
 	}

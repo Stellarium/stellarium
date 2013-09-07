@@ -50,16 +50,10 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	stype = map.value("stype").toString();
 	smass = map.value("smass").toFloat();
 	smetal = map.value("smetal").toFloat();
-	if (map.contains("Vmag"))
-	{
-		Vmag = map.value("Vmag").toFloat();
-	}
-	else
-	{
-		Vmag = 99;
-	}
+	Vmag = map.value("Vmag", 99.f).toFloat();
 	sradius = map.value("sradius").toFloat();
 	effectiveTemp = map.value("effectiveTemp").toInt();
+	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
 	if (map.contains("exoplanets"))
 	{
@@ -68,39 +62,14 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			QVariantMap exoplanetMap = expl.toMap();
 			exoplanetData p;
 			if (exoplanetMap.contains("planetName")) p.planetName = exoplanetMap.value("planetName").toString();
-			if (exoplanetMap.contains("period"))
-				p.period = exoplanetMap.value("period").toFloat();
-			else
-				p.period = -1.f;
-			if (exoplanetMap.contains("mass"))
-				p.mass = exoplanetMap.value("mass").toFloat();
-			else
-				p.mass = -1.f;
-			if (exoplanetMap.contains("radius"))
-				p.radius = exoplanetMap.value("radius").toFloat();
-			else
-				p.radius = -1.f;
-			if (exoplanetMap.contains("semiAxis"))
-				p.semiAxis = exoplanetMap.value("semiAxis").toFloat();
-			else
-				p.semiAxis = -1.f;
-			if (exoplanetMap.contains("eccentricity"))
-				p.eccentricity = exoplanetMap.value("eccentricity").toFloat();
-			else
-				p.eccentricity = -1.f;
-			if (exoplanetMap.contains("inclination"))
-				p.inclination = exoplanetMap.value("inclination").toFloat();
-			else
-				p.inclination = -1.f;
-			if (exoplanetMap.contains("angleDistance"))
-				p.angleDistance = exoplanetMap.value("angleDistance").toFloat();
-			else
-				p.angleDistance = -1.f;
-			if (exoplanetMap.contains("discovered"))
-				p.discovered = exoplanetMap.value("discovered").toInt();
-			else
-				p.discovered = 0;			
-
+			p.period = exoplanetMap.value("period", -1.f).toFloat();
+			p.mass = exoplanetMap.value("mass", -1.f).toFloat();
+			p.radius = exoplanetMap.value("radius", -1.f).toFloat();
+			p.semiAxis = exoplanetMap.value("semiAxis", -1.f).toFloat();
+			p.eccentricity = exoplanetMap.value("eccentricity", -1.f).toFloat();
+			p.inclination = exoplanetMap.value("inclination", -1.f).toFloat();
+			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toFloat();
+			p.discovered = exoplanetMap.value("discovered", 0).toInt();
 			exoplanets.append(p);
 		}
 	}
@@ -126,6 +95,7 @@ QVariantMap Exoplanet::getMap(void)
 	map["Vmag"] = Vmag;
 	map["sradius"] = sradius;
 	map["effectiveTemp"] = effectiveTemp;
+	map["hasHP"] = hasHabitableExoplanets;
 	QVariantList exoplanetList;
 	foreach(const exoplanetData &p, exoplanets)
 	{

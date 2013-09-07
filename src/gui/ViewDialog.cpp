@@ -199,6 +199,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+	connect(ui->zhr1000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 
@@ -245,6 +246,9 @@ void ViewDialog::createDialogContent()
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
+
+	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
+	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
 	
 	// GZ: changes for refraction
 	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
@@ -585,6 +589,8 @@ void ViewDialog::setZhrFromControls()
 		zhr = 10;
 	if (ui->zhr80->isChecked())
 		zhr = 80;
+	if (ui->zhr1000->isChecked())
+		zhr = 1000;
 	if (ui->zhr10000->isChecked())
 		zhr = 10000;
 	if (ui->zhr144000->isChecked())
@@ -605,6 +611,7 @@ void ViewDialog::updateZhrControls(int zhr)
 	{
 		case 0: ui->zhrNone->setChecked(true); break;
 		case 80: ui->zhr80->setChecked(true); break;
+		case 1000: ui->zhr1000->setChecked(true); break;
 		case 10000: ui->zhr10000->setChecked(true); break;
 		case 144000: ui->zhr144000->setChecked(true); break;
 		default: ui->zhr10->setChecked(true); break;
@@ -625,6 +632,9 @@ void ViewDialog::updateZhrDescription(int zhr)
 			break;
 		case 80:
 			ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
+			break;
+		case 1000:
+			ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
 			break;
 		case 10000:
 			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");

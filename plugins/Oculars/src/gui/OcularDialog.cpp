@@ -307,9 +307,10 @@ void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
 	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool();
-	if (requireSelection != requireSelectionToZoom) {
+	if (requireSelection != requireSelectionToZoom)
+	{
 		Oculars::appSettings()->setValue("require_selection_to_zoom", requireSelection);
-		Oculars::appSettings()->sync();\
+		Oculars::appSettings()->sync();
 		emit(requireSelectionChanged(requireSelection));
 	}
 }
@@ -318,7 +319,8 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
 	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle",01.0).toBool();
-	if (shouldScale != useMaxImageCircle) {
+	if (shouldScale != useMaxImageCircle)
+	{
 		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
 		Oculars::appSettings()->sync();
 		emit(scaleImageCircleChanged(shouldScale));
@@ -345,6 +347,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
+	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	
@@ -470,6 +473,9 @@ void OcularDialog::createDialogContent()
 	}
 	if (Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool()) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
+	}
+	if (Oculars::appSettings()->value("limit_stellar_magnitude", true).toBool()) {
+		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
 	}
 	if (Oculars::appSettings()->value("enable_control_panel", false).toBool())
 	{

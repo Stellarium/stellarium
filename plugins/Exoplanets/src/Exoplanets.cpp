@@ -174,10 +174,7 @@ void Exoplanets::init()
 
 		connect(gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
 		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
-		if (flagShowExoplanetsButton)
-		{
-			connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
-		}
+		connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -330,7 +327,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;	
 	if (!flagShowExoplanets)
@@ -340,10 +337,22 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 		return result;
 
 	QString epsn;
+	bool find;
 	foreach(const ExoplanetP& eps, ep)
 	{
 		epsn = eps->getNameI18n();
-		if (epsn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 			result << epsn;
 		}
@@ -357,7 +366,7 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowExoplanets)
@@ -367,10 +376,22 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		return result;
 
 	QString epsn;
+	bool find;
 	foreach(const ExoplanetP& eps, ep)
 	{
 		epsn = eps->getNameI18n();
-		if (epsn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 			result << epsn;
 		}

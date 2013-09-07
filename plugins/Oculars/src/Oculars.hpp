@@ -116,6 +116,9 @@ public slots:
 	void setFlagDecimalDegrees(const bool b);
 	bool getFlagDecimalDegrees(void) const;
 
+	void setFlagLimitMagnitude(const bool b);
+	bool getFlagLimitMagnitude(void) const;
+
 signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
@@ -127,7 +130,7 @@ private slots:
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
 	void setRequireSelection(bool state);
-	void setScaleImageCircle(bool state);
+	void setScaleImageCircle(bool state);	
 	void setScreenFOVForCCD();
 	void retranslateGui();
 	void setStelStyle(const QString& style);
@@ -194,11 +197,11 @@ private:
 	int selectedTelescopeIndex; //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 	int selectedLensIndex; //!<  index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
 
-	QFont font;					//!< The font used for drawing labels.
-	bool flagShowCCD;				//!< flag used to track f we are in CCD mode.
+	QFont font;			//!< The font used for drawing labels.
+	bool flagShowCCD;		//!< flag used to track f we are in CCD mode.
 	bool flagShowOculars;		//!< flag used to track if we are in ocular mode.
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
-	bool flagShowTelrad;			//!< If true, display the Telrad overlay.
+	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
@@ -213,9 +216,15 @@ private:
 	bool flagGalacticPlaneLine;	//!< Flag to track if GalacticPlaneLine was displayed at activation.
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
+	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
+	float magLimitStars;		//!< Value of limited magnitude for stars
+	bool flagLimitDSOs;		//!< Flag to track limit magnitude for DSOs
+	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
+
 	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
+	bool flagLimitMagnitude;	//!< Read from the ini file, whether a magnitude is required to be limited.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 	//! Display the GUI control panel
 	bool guiPanelEnabled;

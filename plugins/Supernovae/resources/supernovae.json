@@ -1,6 +1,7 @@
 {
 	"version": "1",
-	"shortName": "Historical supernovaes data with brightness over 10 magnitude",
+	"limit": 12.0,
+	"shortName": "Bright historical supernovae data",
 	"supernova":
 	{
 		"185A":
@@ -123,10 +124,178 @@
 		"2011fe":
 		{
 			"type": "Ia",
-			"maxMagnitude": 9.9,
+			"maxMagnitude": 10.06,
 			"peakJD": 2455817,
 			"alpha": "14h03m5.81s",
 			"delta": "+54d16m25.4s"
+		},
+		"1920A":
+		{
+			"type": "II",
+			"maxMagnitude": 11.7,
+			"peakJD": 2422676,
+			"alpha": "08h35m15.75s",
+			"delta": "+28d28m31.3s"
+		},
+		"1921C":
+		{
+			"type": "I",
+			"maxMagnitude": 11.0,
+			"peakJD": 2423035,
+			"alpha": "10h18m24.01s",
+			"delta": "+41d21m32.1s"
+		},
+		"1960F":
+		{
+			"type": "Ia",
+			"maxMagnitude": 11.6,
+			"peakJD": 2437046,
+			"alpha": "12h31m42.06s",
+			"delta": "+03d56m47.9s"
+		},
+		"1960R":
+		{
+			"type": "I",
+			"maxMagnitude": 12.0,
+			"peakJD": 2437288,
+			"alpha": "12h25m24.85s",
+			"delta": "+18d09m19.6s"
+		},
+		"1961H":
+		{
+			"type": "Ia",
+			"maxMagnitude": 11.8,
+			"peakJD": 2437428,
+			"alpha": "12h36m27.32s",
+			"delta": "+11d26m24.9s"
+		},
+		"1962M":
+		{
+			"type": "II",
+			"maxMagnitude": 11.5,
+			"peakJD": 2437995,
+			"alpha": "03h18m15.45s",
+			"delta": "-66d32m20.7s"
+		},
+		"1966J":
+		{
+			"type": "I",
+			"maxMagnitude": 11.3,
+			"peakJD": 2439462,
+			"alpha": "10h19m45.49s",
+			"delta": "+45d30m14.4s"
+		},
+		"1968L":
+		{
+			"type": "IIP",
+			"maxMagnitude": 11.9,
+			"peakJD": 2440050,
+			"alpha": "13h37m00.51s",
+			"delta": "-29d51m59.0s"
+		},
+		"1970G":
+		{
+			"type": "IIL",
+			"maxMagnitude": 11.4,
+			"peakJD": 2440798,
+			"alpha": "14h03m00.83s",
+			"delta": "+54d14m32.8s"
+		},
+		"1971I":
+		{
+			"type": "Ia",
+			"maxMagnitude": 11.9,
+			"peakJD": 2441101,
+			"alpha": "13h15m49.60s",
+			"delta": "+41d59m15.0s"
+		},
+		"1979C":
+		{
+			"type": "IIL",
+			"maxMagnitude": 11.6,
+			"peakJD": 2443979,
+			"alpha": "12h22m58.63s",
+			"delta": "+15d47m51.7s"
+		},
+		"1980K":
+		{
+			"type": "IIL",
+			"maxMagnitude": 11.6,
+			"peakJD": 2444544,
+			"alpha": "20h35m30.07s",
+			"delta": "+60d06m23.8s"
+		},
+		"1981B":
+		{
+			"type": "Ia",
+			"maxMagnitude": 12.0,
+			"peakJD": 2444673,
+			"alpha": "12h34m29.62s",
+			"delta": "+02d11m59.6s"
+		},
+		"1983N":
+		{
+			"type": "Ib",
+			"maxMagnitude": 11.4,
+			"peakJD": 2445533,
+			"alpha": "13h36m51.24s",
+			"delta": "-29d54m02.7s"
+		},
+		"1989B":
+		{
+			"type": "Ia",
+			"maxMagnitude": 11.9,
+			"peakJD": 2447564,
+			"alpha": "11h20m13.94s",
+			"delta": "-69d16m11.0s"
+		},
+		"1991T":
+		{
+			"type": "IaPec",
+			"maxMagnitude": 11.6,
+			"peakJD": 2448373,
+			"alpha": "12h34m10.21s",
+			"delta": "+02d39m56.6s"
+		},
+		"1993J":
+		{
+			"type": "IIb",
+			"maxMagnitude": 10.8,
+			"peakJD": 2449077,
+			"alpha": "09h55m25.00s",
+			"delta": "+69d01m12.9s"
+		},
+		"1994D":
+		{
+			"type": "Ia",
+			"maxMagnitude": 11.8,
+			"peakJD": 2449443,
+			"alpha": "12h34m02.45s",
+			"delta": "+07d42m04.7s"
+		},
+		"1998bu":
+		{
+			"type": "Ia",
+			"maxMagnitude": 11.9,
+			"peakJD": 2450955,
+			"alpha": "10h46m46.03s",
+			"delta": "+11d50m07.1s"
+		},
+		"2004dj":
+		{
+			"type": "IIP",
+			"maxMagnitude": 11.3,
+			"peakJD": 2453218,
+			"alpha": "07h37m17.02s",
+			"delta": "+65d35m57.8s"
+		},
+		"2013aa":
+		{
+			"type": "Ia",
+			"maxMagnitude": 11.9,
+			"peakJD": 2456337,
+			"alpha": "14h32m33.88s",
+			"delta": "-44d13m27.8s"
 		}
 	}
 }

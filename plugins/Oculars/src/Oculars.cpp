@@ -536,6 +536,7 @@ void Oculars::init()
 		enableGuiPanel(guiPanelEnabled);
 
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
+		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -1729,6 +1730,7 @@ void Oculars::unzoomOcular()
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	StelSkyDrawer *skyManager = core->getSkyDrawer();
 
 	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
 	gridManager->setFlagGalacticGrid(flagGalacticGrid);
@@ -1740,7 +1742,11 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagMeridianLine(flagMeridianLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
-	core->getSkyDrawer()->setFlagLuminanceAdaptation(flagAdaptation);
+	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
+	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
+	skyManager->setFlagNebulaMagnitudeLimit(flagLimitDSOs);
+	skyManager->setCustomStarMagnitudeLimit(magLimitStars);
+	skyManager->setCustomNebulaMagnitudeLimit(magLimitDSOs);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -1774,7 +1780,14 @@ void Oculars::zoom(bool zoomedIn)
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
-			flagAdaptation = StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation();
+
+			StelSkyDrawer *skyManager = StelApp::getInstance().getCore()->getSkyDrawer();
+			// Current state
+			flagAdaptation = skyManager->getFlagLuminanceAdaptation();
+			flagLimitStars = skyManager->getFlagStarMagnitudeLimit();
+			flagLimitDSOs = skyManager->getFlagNebulaMagnitudeLimit();
+			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
+			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
 		}
 
 		// set new state
@@ -1792,6 +1805,8 @@ void Oculars::zoomOcular()
 	GridLinesMgr *gridManager =
 			(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
+	StelSkyDrawer *skyManager = core->getSkyDrawer();
+
 	gridManager->setFlagAzimuthalGrid(false);
 	gridManager->setFlagGalacticGrid(false);
 	gridManager->setFlagEquatorGrid(false);
@@ -1802,7 +1817,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagMeridianLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticPlaneLine(false);
-	core->getSkyDrawer()->setFlagLuminanceAdaptation(false);
+	skyManager->setFlagLuminanceAdaptation(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
@@ -1827,11 +1842,25 @@ void Oculars::zoomOcular()
 	}
 	else
 	{
-	if (selectedLensIndex >= 0)
-		lens = lense[selectedLensIndex];
+		if (selectedLensIndex >= 0)
+			lens = lense[selectedLensIndex];
+
 		telescope = telescopes[selectedTelescopeIndex];
 		core->setFlipHorz(telescope->isHFlipped());
-		core->setFlipVert(telescope->isVFlipped());
+		core->setFlipVert(telescope->isVFlipped());		
+	}
+
+	// Limit stars and DSOs	if it enable
+	if (getFlagLimitMagnitude())
+	{
+		// Simplified calculation of the penetrating power of the telescope
+		// TODO: need improvements?
+		double limitMag = 2.1 + 5*std::log10(telescope->diameter());
+
+		skyManager->setFlagStarMagnitudeLimit(true);
+		skyManager->setFlagNebulaMagnitudeLimit(true);
+		skyManager->setCustomStarMagnitudeLimit(limitMag);
+		skyManager->setCustomNebulaMagnitudeLimit(limitMag);
 	}
 
 	double actualFOV = ocular->actualFOV(telescope, lens);
@@ -1933,6 +1962,18 @@ void Oculars::setFlagDecimalDegrees(const bool b)
 bool Oculars::getFlagDecimalDegrees() const
 {
 	return flagDecimalDegrees;
+}
+
+void Oculars::setFlagLimitMagnitude(const bool b)
+{
+	flagLimitMagnitude = b;
+	settings->setValue("limit_stellar_magnitude", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagLimitMagnitude() const
+{
+	return flagLimitMagnitude;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const

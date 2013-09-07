@@ -72,7 +72,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("A plugin that shows some historical supernovae brighter than 10 visual magnitude.");
+	info.description = N_("This plugin allows you to see some bright historical supernovae.");
 	return info;
 }
 
@@ -286,17 +286,29 @@ StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
 
 	QString snn;
+	bool find;
 	foreach(const SupernovaP& sn, snstar)
 	{
 		snn = sn->getNameI18n();
-		if (snn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==snn.toUpper().left(objPrefix.length()))
+				find = true;
+		}
+		else
+		{
+			if (snn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 				result << snn;
 		}
@@ -309,17 +321,29 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	return result;
 }
 
-QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0)
 		return result;
 
 	QString snn;
+	bool find;
 	foreach(const SupernovaP& sn, snstar)
 	{
 		snn = sn->getEnglishName();
-		if (snn.contains(objPrefix, Qt::CaseInsensitive))
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==snn.toUpper().left(objPrefix.length()))
+				find = true;
+		}
+		else
+		{
+			if (snn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
 		{
 				result << snn;
 		}
@@ -486,6 +510,27 @@ int Supernovae::getJsonFileVersion(void)
 	sneJsonFile.close();
 	qDebug() << "Supernovae::getJsonFileVersion() version from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+float Supernovae::getLowerLimitBrightness()
+{
+	float lowerLimit = 10.f;
+	QFile sneJsonFile(sneJsonPath);
+	if (!sneJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Supernovae::init cannot open " << QDir::toNativeSeparators(sneJsonPath);
+		return lowerLimit;
+	}
+
+	QVariantMap map;
+	map = StelJsonParser::parse(&sneJsonFile).toMap();
+	if (map.contains("limit"))
+	{
+		lowerLimit = map.value("limit").toFloat();
+	}
+
+	sneJsonFile.close();
+	return lowerLimit;
 }
 
 SupernovaP Supernovae::getByID(const QString& id)

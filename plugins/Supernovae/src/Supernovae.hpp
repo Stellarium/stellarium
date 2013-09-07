@@ -39,7 +39,25 @@ class SupernovaeDialog;
 
 typedef QSharedPointer<Supernova> SupernovaP;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+/*! @mainpage notitle
+@section overview Plugin Overview
+
+The %Supernovae plugin displays the positions some historical
+supernovae brighter than 10 visual magnitude.
+
+@section sncat Supernovae Catalog
+The supernovae catalog is stored on the disk in [JSON](http://www.json.org/)
+format, in a file named "supernovae.json". A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
+
+@section config Configuration
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file.
+*/
+
+//! @class Supernovae
+//! Main class of the %Historical Supernovae plugin.
+//! @author Alexander Wolf
 class Supernovae : public StelObjectModule
 {
 	Q_OBJECT
@@ -86,13 +104,15 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Historical Supernovae"; }
 
@@ -115,37 +135,42 @@ public:
 	//! Save the settings to the main configuration file.
 	void saveSettingsToConfig(void);
 
-	//! get whether or not the plugin will try to update catalog data from the internet
+	//! Get whether or not the plugin will try to update catalog data from the internet
 	//! @return true if updates are set to be done, false otherwise
 	bool getUpdatesEnabled(void) {return updatesEnabled;}
-	//! set whether or not the plugin will try to update catalog data from the internet
+	//! Set whether or not the plugin will try to update catalog data from the internet
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	//! get the date and time the supernovae were updated
+	//! Get the date and time the supernovae were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
-	//! get the update frequency in days
+	//! Get the update frequency in days
 	int getUpdateFrequencyDays(void) {return updateFrequencyDays;}
 	void setUpdateFrequencyDays(int days) {updateFrequencyDays = days;}
 
-	//! get the number of seconds till the next update
+	//! Get the number of seconds till the next update
 	int getSecondsToUpdate(void);
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
-	//! get list of supernovae
+	//! Get list of supernovae
 	QString getSupernovaeList();
+
+	//! Get lower limit of  brightness for displayed supernovae
+	float getLowerLimitBrightness();
 
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Supernovae::UpdateState state);
 
-	//! emitted after a JSON update has run.
+	//! Emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
 public slots:
+	// FIXME: Add functions for scripting support
+
 	//! Download JSON from web recources described in the module section of the
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
@@ -161,10 +186,10 @@ private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
-	//! replace the json file with the default from the compiled-in resource
+	//! Replace the JSON file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 
-	//! read the json file and create list of supernovae.
+	//! Read the JSON file and create list of supernovae.
 	void readJsonFile(void);
 
 	//! Creates a backup of the supernovae.json file called supernovae.json.old
@@ -176,10 +201,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileVersion(void);
 
-	//! parse JSON file and load supernovaes to map
+	//! Parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());
 
-	//! set items for list of struct from data map
+	//! Set items for list of struct from data map
 	void setSNeMap(const QVariantMap& map);
 
 	QString sneJsonPath;
@@ -206,7 +231,7 @@ private:
 	SupernovaeDialog* configDialog;	
 
 private slots:
-	//! check to see if an update is required.  This is called periodically by a timer
+	//! Check to see if an update is required.  This is called periodically by a timer
 	//! if the last update was longer than updateFrequencyHours ago then the update is
 	//! done.
 	void checkForUpdate(void);

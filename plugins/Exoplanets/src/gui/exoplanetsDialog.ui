@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>528</width>
-    <height>443</height>
+    <height>441</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,6 +125,9 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <property name="documentMode">
       <bool>false</bool>
      </property>
@@ -314,11 +317,31 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="infoTab">
+      <attribute name="title">
+       <string comment="tab in plugin windows">Info</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayoutInfoBox">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="infoTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
        <string comment="tab in plugin windows">About</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_11">
+      <layout class="QVBoxLayout" name="verticalLayoutAboutBox">
        <property name="spacing">
         <number>9</number>
        </property>

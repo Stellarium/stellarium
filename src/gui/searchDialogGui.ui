@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>519</width>
-    <height>221</height>
+    <width>507</width>
+    <height>213</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -180,6 +180,9 @@
             <property name="focusPolicy">
              <enum>Qt::StrongFocus</enum>
             </property>
+            <property name="toolTip">
+             <string>Use tab key for select of found items</string>
+            </property>
             <property name="autoFillBackground">
              <bool>false</bool>
             </property>
@@ -238,6 +241,9 @@
            <width>390</width>
            <height>0</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Use tab key for select of found items</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -673,6 +679,51 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabLists">
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+       </font>
+      </property>
+      <attribute name="title">
+       <string>Lists</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item row="0" column="0" colspan="2">
+        <widget class="QComboBox" name="objectTypeComboBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Some objects may be found after activation respective plug-ins</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <widget class="QListWidget" name="objectsListWidget"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="searchInEnglishCheckBox">
+         <property name="text">
+          <string>names in English</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QLineEdit" name="searchInListLineEdit">
+         <property name="placeholderText">
+          <string>Search in list...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tabOptions">
       <attribute name="title">
        <string>Options</string>
@@ -739,49 +790,23 @@
          </layout>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tabLists">
-      <property name="font">
-       <font>
-        <family>Ubuntu</family>
-       </font>
-      </property>
-      <attribute name="title">
-       <string>Lists</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
-       </property>
-       <item row="0" column="0" colspan="2">
-        <widget class="QComboBox" name="objectTypeComboBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+       <item>
+        <widget class="QGroupBox" name="searchOptions">
+         <property name="title">
+          <string>Search options</string>
          </property>
-         <property name="toolTip">
-          <string>Some objects may be found after activation respective plug-ins</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="3">
-        <widget class="QListWidget" name="objectsListWidget"/>
-       </item>
-       <item row="0" column="2">
-        <widget class="QCheckBox" name="searchInEnglishCheckBox">
-         <property name="text">
-          <string>names in English</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="3">
-        <widget class="QLineEdit" name="searchInListLineEdit">
-         <property name="placeholderText">
-          <string>Search in list...</string>
-         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBoxUseStartOfWords">
+            <property name="text">
+             <string>Use autofill only from the beginning of words</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>

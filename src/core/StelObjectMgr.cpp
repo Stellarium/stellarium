@@ -228,7 +228,7 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
  Find and return the list of at most maxNbItem objects auto-completing
  passed object I18 name
 *************************************************************************/
-QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem) const
+QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 
@@ -236,7 +236,7 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem);
+		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
@@ -249,7 +249,7 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
  Find and return the list of at most maxNbItem objects auto-completing
  passed object English name
 *************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem) const
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 
@@ -257,7 +257,7 @@ QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigne
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}

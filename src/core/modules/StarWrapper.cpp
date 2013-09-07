@@ -80,15 +80,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	QString str;
 
 	QTextStream oss(&str);
-	const QString varType = StarMgr::getGCVSVariabilityType(s->hip);
-	const float maxVMag = StarMgr::getGCVSMaxMagnitude(s->hip);
-	const float magFlag = StarMgr::getGCVSMagnitudeFlag(s->hip);
-	const float minVMag = StarMgr::getGCVSMinMagnitude(s->hip);
-	const float min2VMag = StarMgr::getGCVSMinMagnitude(s->hip, false);
-	const QString photoVSys = StarMgr::getGCVSPhotometricSystem(s->hip);
-	const double vEpoch = StarMgr::getGCVSEpoch(s->hip);
-	const double vPeriod = StarMgr::getGCVSPeriod(s->hip);
-	const int vMm = StarMgr::getGCVSMM(s->hip);
+	const QString varType = StarMgr::getGcvsVariabilityType(s->hip);
+	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->hip);
+	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->hip);
+	const float minVMag = StarMgr::getGcvsMinMagnitude(s->hip);
+	const float min2VMag = StarMgr::getGcvsMinMagnitude(s->hip, false);
+	const QString photoVSys = StarMgr::getGcvsPhotometricSystem(s->hip);
+	const double vEpoch = StarMgr::getGcvsEpoch(s->hip);
+	const double vPeriod = StarMgr::getGcvsPeriod(s->hip);
+	const int vMm = StarMgr::getGcvsMM(s->hip);
 	if (s->hip)
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -97,7 +97,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
 		const QString sciName = StarMgr::getSciName(s->hip);
 		const QString addSciName = StarMgr::getSciAdditionalName(s->hip);
-		const QString varSciName = StarMgr::getGCVSName(s->hip);
+		const QString varSciName = StarMgr::getGcvsName(s->hip);
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
@@ -105,13 +105,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
 			{
 				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-				if (commonNameI18!="" && sciName!="")
+				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
 					oss << "(";
 				oss << (sciName=="" ? "" : sciName);
 				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
 				if (varSciName!="" && varSciName!=sciName)
 					oss << (sciName=="" ? "" : " - ") << varSciName;
-				if (commonNameI18!="" && sciName!="")
+				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
 					oss << ")";
 				nameWasEmpty=false;
 			}
