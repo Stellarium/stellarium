@@ -45,6 +45,13 @@
 class Extinction
 {
 public:
+	//! Define the extinction strategy for rendering underground objects (usefull when ground is not rendered)
+	enum UndergroundExtinctionMode {
+		UndergroundExtinctionZero = 0,	//!< Zero extinction: stars visible in full brightness
+		UndergroundExtinctionMax = 1,   //!< Maximum extinction: coef 42, i.e practically invisible
+		UndergroundExtinctionMirror = 2 //!< Mirror the extinction for the same altutide above the ground.
+	};
+	
 	Extinction();
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
 	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
@@ -78,13 +85,13 @@ private:
 	//! A problem ist that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
 	//! So, it seems better to compute refraction first, and then use the Rozenberg formula here.
 	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS SUBHORIZONTAL_AIRMASS BELOW -2 DEGREES!
-	float airmass(const float cosZ, const bool apparent_z=true) const;
+	float airmass(float cosZ, const bool apparent_z=true) const;
 
 	//! k, magnitudes/airmass, in [0.00, ... 1.00], (default 0.20).
 	float ext_coeff;
-	//! should be either 0.0 (stars visible in full brightness below horizon) or 40.0 (or 42? ;-) practically invisible)
-	//! Maybe make this a user-configurable option?
-	float subhorizontalAirmass;
+
+	//! Define what we are going to do for underground stars when ground is not rendered
+	UndergroundExtinctionMode undergroundExtinctionMode;
 };
 
 //! @class Refraction
