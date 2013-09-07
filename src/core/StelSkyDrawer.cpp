@@ -83,52 +83,36 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 
 	bool ok=true;
 
-	setBortleScale(conf->value("stars/init_bortle_scale",3).toInt(&ok));
+	setBortleScale(conf->value("stars/init_bortle_scale",2).toInt(&ok));
 	if (!ok)
-	{
-		conf->setValue("stars/init_bortle_scale",3);
-		setBortleScale(3);
-		ok = true;
-	}
+		setBortleScale(2);
 
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
-	{
-		conf->setValue("stars/relative_scale",1.0);
 		setRelativeStarScale(1.0);
-		ok = true;
-	}
-
+	
 	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toFloat(&ok));
 	if (!ok)
-	{
-		conf->setValue("stars/absolute_scale",1.0);
 		setAbsoluteStarScale(1.0);
-		ok = true;
-	}
 
-	//GZ: load 3 values from config.
-	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.2).toDouble(&ok));
+	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.13).toDouble(&ok));
 	if (!ok)
-	{
-		conf->setValue("landscape/atmospheric_extinction_coefficient",0.2);
 		setExtinctionCoefficient(0.2);
-		ok = true;
-	}
+
+	const QString extinctionMode = conf->value("astro/extinction_mode_below_horizon", "zero").toString();
+	// zero by default
+	if (extinctionMode=="mirror")
+		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMirror);
+	else if (extinctionMode=="max")
+		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMax);
+	
 	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
 	if (!ok)
-	{
-		conf->setValue("landscape/temperature_C",15);
 		setAtmosphereTemperature(15.0);
-		ok = true;
-	}
+
 	setAtmospherePressure(conf->value("landscape/pressure_mbar",1013.0).toDouble(&ok));
 	if (!ok)
-	{
-		conf->setValue("landscape/pressure_mbar",1013.0);
 		setAtmospherePressure(1013.0);
-		ok = true;
-	}
 
 	// Initialize buffers for use by gl vertex array
 	nbPointSources = 0;
