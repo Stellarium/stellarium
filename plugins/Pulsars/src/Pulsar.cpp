@@ -110,7 +110,7 @@ QVariantMap Pulsar::getMap(void)
 float Pulsar::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core, false);
+        return getVMagnitude(core);
 }
 
 QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -231,16 +231,8 @@ Vec3f Pulsar::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Pulsar::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
 	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6
 	float vmag = distance + 6.f;
 
@@ -250,7 +242,7 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 	}
 	else
 	{
-		return vmag + extinctionMag;
+		return vmag;
 	}
 }
 
@@ -341,7 +333,7 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 	if (StelApp::getInstance().getVisionModeNight())
 		color = StelUtils::getNightColor(color);
 
-	double mag = getVMagnitude(core, true);
+	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
 	glEnable(GL_BLEND);

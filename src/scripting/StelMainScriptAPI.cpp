@@ -775,8 +775,8 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	map.insert("glat", azi*180./M_PI);
 
 	// magnitude
-	map.insert("vmag", obj->getVMagnitude(core, false));
-	map.insert("vmage", obj->getVMagnitude(core, true));
+	map.insert("vmag", obj->getVMagnitude(core));
+	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
 	map.insert("size", obj->getAngularSize(core));
@@ -847,8 +847,8 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	map.insert("glat", azi*180./M_PI);
 
 	// magnitude
-	map.insert("vmag", obj->getVMagnitude(core, false));
-	map.insert("vmage", obj->getVMagnitude(core, true));
+	map.insert("vmag", obj->getVMagnitude(core));
+	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
 	map.insert("size", obj->getAngularSize(core));

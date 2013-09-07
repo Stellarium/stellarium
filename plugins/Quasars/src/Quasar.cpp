@@ -77,14 +77,14 @@ QVariantMap Quasar::getMap(void)
 float Quasar::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core, false);
+        return getVMagnitude(core);
 }
 
 QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
-        double mag = getVMagnitude(core, false);
+        double mag = getVMagnitude(core);
 
 	if (flags&Name)
 	{
@@ -100,13 +100,13 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			if (bV!=0)
 			{
 				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(mag, 'f', 2),
-														QString::number(getVMagnitude(core, true),  'f', 2),
+														QString::number(getVMagnitudeWithExtinction(core),  'f', 2),
 														QString::number(bV, 'f', 2)) << "<br />";
 			}
 			else
 			{
 				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-												QString::number(getVMagnitude(core, true),  'f', 2)) << "<br />";
+												QString::number(getVMagnitudeWithExtinction(core),  'f', 2)) << "<br />";
 			}
 		}
 		else
@@ -146,17 +146,10 @@ Vec3f Quasar::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Quasar::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Quasar::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-		Vec3d altAz=getAltAzPosApparent(core);
-		altAz.normalize();
-		core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
-	return VMagnitude + extinctionMag;
+	Q_UNUSED(core);
+	return VMagnitude;
 }
 
 double Quasar::getAngularSize(const StelCore*) const
@@ -182,7 +175,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	double mag;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
-        mag = getVMagnitude(core, true);	
+        mag = getVMagnitudeWithExtinction(core);	
 
 	if (GETSTELMODULE(Quasars)->getDisplayMode())
 	{
