@@ -110,9 +110,9 @@ void StelCore::init()
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
-	setCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
-	setCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
-	setCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
+	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
+	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
+	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 
 	// Time stuff
 	setTimeNow();
@@ -1340,12 +1340,12 @@ double StelCore::getDeltaT(double jDay) const
 		break;
 	case Custom:
 		// User defined coefficients for quadratic equation for DeltaT
-		ndot = getCustomNDot(); // n.dot = custom value "/cy/cy
+		ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
 		int year, month, day;
-		Vec3f coeff = getCustomEquationCoefficients();
+		Vec3f coeff = getDeltaTCustomEquationCoefficients();
 		StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
 		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-		double u = (yeardec-getCustomYear())/100;
+		double u = (yeardec-getDeltaTCustomYear())/100;
 		DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
 		break;
 	}

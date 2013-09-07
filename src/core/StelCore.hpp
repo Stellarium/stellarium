@@ -489,20 +489,20 @@ public slots:
 
 	//! Set year for custom equation for calculation of Delta-T
 	//! @param y the year, e.g. 1820
-	void setCustomYear(float y) { customYear=y; }
+	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
 	//! Set n-dot for custom equation for calculation of Delta-T
 	//! @param y the n-dot value, e.g. -26.0
-	void setCustomNDot(float v) { customNDot=v; }
+	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
 	//! Set coefficients for custom equation for calculation of Delta-T
 	//! @param y the coefficients, e.g. -20,0,32
-	void setCustomEquationCoefficients(Vec3f c) { customEquationCoeff=c; }
+	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
 
 	//! Get year for custom equation for calculation of Delta-T
-	float getCustomYear() const { return customYear; }
+	float getDeltaTCustomYear() const { return deltaTCustomYear; }
 	//! Get n-dot for custom equation for calculation of Delta-T
-	float getCustomNDot() const { return customNDot; }
+	float getDeltaTCustomNDot() const { return deltaTCustomNDot; }
 	//! Get coefficients for custom equation for calculation of Delta-T
-	Vec3f getCustomEquationCoefficients() const { return customEquationCoeff; }
+	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
 signals:
 	//! This signal is emitted when the observer location has changed.
@@ -556,9 +556,9 @@ private:
 	QString startupTimeMode;
 
 	// Variables for custom equation of Delta-T
-	Vec3f customEquationCoeff;
-	float customNDot;
-	float customYear;
+	Vec3f deltaTCustomEquationCoeff;
+	float deltaTCustomNDot;
+	float deltaTCustomYear;
 
 };
 
