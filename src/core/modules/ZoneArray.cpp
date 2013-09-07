@@ -522,6 +522,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			//GZ: We must compute position first, then shift magnitude.
 			Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOff);
 			float extMagShift=0.0f;
+			altAz.normalize();
 			extinction.forward(&altAz, &extMagShift);
 			int extMagShiftStep=qMin((int)(extMagShift/k), 4096-mag_steps); // this number must be equal StarMgr.cpp line 649
 			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove

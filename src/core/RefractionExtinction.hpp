@@ -53,30 +53,28 @@ public:
 	};
 	
 	Extinction();
+	
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
 	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! This call must therefore be done after application of Refraction, and only if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(const Vec3d *altAzPos, float *mag, const int num=1) const;
 	void forward(const Vec3f *altAzPos, float *mag, const int num=1) const;
-	void forward(const double *sinAlt,  float *mag, const int num) const;
-	void forward(const float  *sinAlt,  float *mag, const int num) const;
-	void forward(const double *sinAlt,  float *mag) const;
-	void forward(const float  *sinAlt,  float *mag) const;
 
 	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
 	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(const Vec3d *altAzPos, float *mag, const int num=1) const;
 	void backward(const Vec3f *altAzPos, float *mag, const int num=1) const;
-	void backward(const double *sinAlt,  float *mag, const int num=1) const;
-	void backward(const float  *sinAlt,  float *mag, const int num=1) const;
 
 	//! Set visual extinction coefficient (mag/airmass), influences extinction computation.
 	//! @param k= 0.1 for highest mountains, 0.2 for very good lowland locations, 0.35 for typical lowland, 0.5 in humid climates.
 	void setExtinctionCoefficient(float k) { ext_coeff=k; }
 	float getExtinctionCoefficient() const {return ext_coeff;}
 
+	void setUndergroundExtinctionMode(UndergroundExtinctionMode mode) {undergroundExtinctionMode=mode;}
+	UndergroundExtinctionMode getUndergroundExtinctionMode() const {return undergroundExtinctionMode;}
+	
 private:
 	//! airmass computation for @param cosZ = cosine of zenith angle z (=sin(altitude)!).
 	//! The default (@param apparent_z = true) is computing airmass from observed altitude, following Rozenberg (1966) [X(90)~40].

@@ -1818,6 +1818,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
 		qDebug() << "Light: " << light.isEnabled();
+		Q_ASSERT(0);
 		return;
 	}
 	
