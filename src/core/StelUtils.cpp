@@ -438,7 +438,7 @@ double asinh(const double z)
 *************************************************************************/
 double qDateTimeToJd(const QDateTime& dateTime)
 {
-	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime().msecsTo(dateTime.time())-0.5;
+	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
 }
 
 QDateTime jdToQDateTime(const double& jd)
@@ -690,7 +690,7 @@ double getJDFromSystem()
 
 double qTimeToJDFraction(const QTime& time)
 {
-	return (double)1./(24*60*60*1000)*QTime().msecsTo(time)-0.5;
+	return (double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time)-0.5;
 }
 
 QTime jdFractionToQTime(const double jd)
