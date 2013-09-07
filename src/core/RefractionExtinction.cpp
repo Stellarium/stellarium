@@ -24,10 +24,15 @@
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
-Extinction::Extinction() : subhorizontalAirmass(0.f)
+Extinction::Extinction() : undergroundExtinctionMode(UndergroundExtinctionMirror)
 {
     QSettings* conf = StelApp::getInstance().getSettings();
-    subhorizontalAirmass = (conf->value("astro/flag_extinction_below_horizon", true).toBool()? 42.0f : 0.0f);
+    QString extinctionMode = conf->value("astro/extinction_mode_below_horizon", "zero").toString();
+	// zero by default
+	if (extinctionMode=="mirror")
+		undergroundExtinctionMode = UndergroundExtinctionMirror;
+	else if (extinctionMode=="max")
+		undergroundExtinctionMode = UndergroundExtinctionMax;
     ext_coeff=conf->value("landscape/atmospheric_extinction_coefficient", 0.2f).toFloat();
 }
 
@@ -78,25 +83,33 @@ void Extinction::backward(const float *sinAlt, float *mag, const int num) const
 }
 
 // airmass computation for cosine of zenith angle z
-float Extinction::airmass(const float cosZ, const bool apparent_z) const
+float Extinction::airmass(float cosZ, const bool apparent_z) const
 {
 	if (cosZ<-0.035f) // about -2 degrees. Here, RozenbergZ>574 and climbs fast!
-	    return Extinction::subhorizontalAirmass; // Safety: 0 or 40 for below -2 degrees.
+	{
+		switch (undergroundExtinctionMode)
+		{
+			case UndergroundExtinctionZero:
+				return 0.f;
+			case UndergroundExtinctionMax:
+				return 42.f;
+			case UndergroundExtinctionMirror:
+				cosZ = std::min(1.f, -0.035f - (cosZ+0.035f));
+		}
+	}
 
-	float X;
 	if (apparent_z)
 	{
 		// Rozenberg 1966, reported by Schaefer (1993-2000).
-		X=1.0f/(cosZ+0.025f*std::exp(-11.f*cosZ));
+		return 1.0f/(cosZ+0.025f*std::exp(-11.f*cosZ));
 	}
 	else
 	{
 		//Young 1994
 		float nom=(1.002432f*cosZ+0.148386f)*cosZ+0.0096467f;
 		float denum=((cosZ+0.149864f)*cosZ+0.0102963f)*cosZ+0.000303978f;
-		X=nom/denum;
+		return nom/denum;
 	}
-	return X;
 }
 
 /* ***************************************************************************************************** */
