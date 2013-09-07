@@ -20,49 +20,32 @@
  * Principal implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
-#include <qsettings.h>
+#include <QSettings>
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
-Extinction::Extinction() : undergroundExtinctionMode(UndergroundExtinctionMirror)
+Extinction::Extinction() : ext_coeff(50), undergroundExtinctionMode(UndergroundExtinctionMirror)
 {
-    QSettings* conf = StelApp::getInstance().getSettings();
-    QString extinctionMode = conf->value("astro/extinction_mode_below_horizon", "zero").toString();
-	// zero by default
-	if (extinctionMode=="mirror")
-		undergroundExtinctionMode = UndergroundExtinctionMirror;
-	else if (extinctionMode=="max")
-		undergroundExtinctionMode = UndergroundExtinctionMax;
-    ext_coeff=conf->value("landscape/atmospheric_extinction_coefficient", 0.2f).toFloat();
 }
 
 //  altAzPos is the NORMALIZED (!!!) star position vector AFTER REFRACTION, and its z component sin(altitude).
 void Extinction::forward(const Vec3d *altAzPos, float *mag, const int num) const
 {
-	Q_ASSERT(fabs(altAzPos[i]->length()-1.f)<0.00001);
-	for (int i=0; i<num; ++i) mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
+	for (int i=0; i<num; ++i)
+	{
+		Q_ASSERT(fabs(altAzPos[i].length()-1.f)<0.001f);
+		mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
+	}
 }
 void Extinction::forward(const Vec3f *altAzPos, float *mag, const int num) const
 {
-	for (int i=0; i<num; ++i) mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
+	for (int i=0; i<num; ++i)
+	{
+		Q_ASSERT(fabs(altAzPos[i].length()-1.f)<0.001f);
+		mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
+	}
 }
-// If only sin(altitude) is available:
-void Extinction::forward(const double *sinAlt, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i) mag[i] += airmass(sinAlt[i], true) * ext_coeff;
-}
-void Extinction::forward(const float *sinAlt, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i) mag[i] += airmass(sinAlt[i], true) * ext_coeff;
-}
-void Extinction::forward(const double *sinAlt, float *mag) const
-{
-	*mag += airmass(*sinAlt, true) * ext_coeff;
-}
-void Extinction::forward(const float *sinAlt, float *mag) const
-{
-	*mag += airmass(*sinAlt, true) * ext_coeff;
-}
+
 // from observed magnitude in apparent (observed) altitude to atmosphere-free mag, still in apparent, refracted altitude.
 void Extinction::backward(const Vec3d *altAzPos, float *mag, const int num) const
 {
@@ -71,15 +54,6 @@ void Extinction::backward(const Vec3d *altAzPos, float *mag, const int num) cons
 void Extinction::backward(const Vec3f *altAzPos, float *mag, const int num) const
 {
 	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], true) * ext_coeff;
-}
-// If only sin(altitude) is available:
-void Extinction::backward(const double *sinAlt, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i) mag[i] -= airmass(sinAlt[i], true) * ext_coeff;
-}
-void Extinction::backward(const float *sinAlt, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i) mag[i] -= airmass(sinAlt[i], true) * ext_coeff;
 }
 
 // airmass computation for cosine of zenith angle z
