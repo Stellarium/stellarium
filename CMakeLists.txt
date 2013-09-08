@@ -7,6 +7,9 @@ SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 IF(COMMAND cmake_policy)
   CMAKE_POLICY(SET CMP0003 NEW)
+  IF(WIN32)
+    CMAKE_POLICY(SET CMP0020 NEW)
+  ENDIF(WIN32)
 ENDIF()
 
 ########### Project name ###########
