@@ -37,9 +37,12 @@
 #include <QBuffer>
 
 StelTextureSP Nebula::texCircle;
+StelTextureSP Nebula::texGalaxy;
 StelTextureSP Nebula::texOpenCluster;
 StelTextureSP Nebula::texGlobularCluster;
-StelTextureSP Nebula::texPlanetNebula;
+StelTextureSP Nebula::texPlanetaryNebula;
+StelTextureSP Nebula::texDiffuseNebula;
+StelTextureSP Nebula::texOpenClusterWithNebulosity;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
@@ -166,7 +169,28 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		col = StelUtils::getNightColor(col);
 
 	sPainter.setColor(col[0], col[1], col[2], 1);
-		Nebula::texCircle->bind();
+	switch (nType) {
+		case NebGx:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebOc:
+			Nebula::texOpenCluster->bind();
+			break;
+		case NebGc:
+			Nebula::texGlobularCluster->bind();
+			break;
+		case NebN:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebPn:
+			Nebula::texPlanetaryNebula->bind();
+			break;
+		case NebCn:
+			Nebula::texOpenClusterWithNebulosity->bind();
+			break;
+		default:
+			Nebula::texCircle->bind();
+	}
 
 	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
 }
