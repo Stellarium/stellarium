@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-27 19:18+0700\n"
-"PO-Revision-Date: 2013-08-10 12:23+0000\n"
-"Last-Translator: অনির্বাণ আইন <anirbanain@gmail.com>\n"
+"PO-Revision-Date: 2013-09-03 09:00+0000\n"
+"Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-28 04:49+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-09-04 04:38+0000\n"
+"X-Generator: Launchpad (build 16753)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
 msgid "Meridian"
@@ -3633,7 +3633,7 @@ msgstr "Historical Supernovae configuration window"
 
 #: src/translations.h:673
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Bright Novae configuration window"
 
 #: src/translations.h:676
 msgid "Move a telescope to a given set of coordinates"
@@ -3787,7 +3787,7 @@ msgstr "Find Object or Position"
 
 #: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Use tab key for select of found items"
 
 #: src/ui_searchDialogGui.h:571
 msgid "iota"
@@ -3932,11 +3932,11 @@ msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "Search options"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Use autofill only from the beginning of words"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
 #: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
@@ -4012,11 +4012,11 @@ msgstr "Scale Moon"
 
 #: src/ui_viewDialog.h:1223
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Automatic change of landscape when planet is changed"
 
 #: src/ui_viewDialog.h:1225
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Auto select landscapes"
 
 #: src/ui_viewDialog.h:1227
 msgid "Show atmosphere"
@@ -5164,11 +5164,11 @@ msgstr "Scale image circle"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr ""
+msgstr "Apply limits stellar magnitude for different apertures of telescopes"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1031
 msgid "Limit stellar magnitude"
-msgstr ""
+msgstr "Limit stellar magnitude"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1032
 msgid "Key mappings"
@@ -7113,7 +7113,7 @@ msgstr "Historical Supernovae"
 
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr ""
+msgstr "This plug-in allows you to see some bright historical supernovae."
 
 #: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
@@ -7127,7 +7127,7 @@ msgstr "Type of supernova: %1"
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:142
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Maximum brightness: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -7135,12 +7135,12 @@ msgstr "Historical Supernovae Plug-in"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid "This plugin allows you to see some bright historical supernovae: "
-msgstr ""
+msgstr "This plug-in allows you to see some bright historical supernovae: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
-msgstr ""
+msgstr "All those supernovae are brighter %1 at peak of brightness."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
@@ -7248,36 +7248,40 @@ msgstr "[next update info]"
 
 #: plugins/Novae/src/Novae.cpp:72
 msgid "Bright Novae"
-msgstr ""
+msgstr "Bright Novae"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "A plug-in that shows some bright novae in the Milky Way galaxy."
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Type: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
+msgstr "nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Bright Novae Plug-in"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:112
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"You can find novae via search tool by entering designation of nova or its "
+"common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"This plug-in uses a very simple model for calculation of light curves for "
+"novae stars."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
@@ -7285,12 +7289,16 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"This model is based on time for decay by %1 magnitudes from the maximum "
+"value, where %1 is 2, 3, 6 and 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"If a nova has no values for decay of magnitude then this plug-in will use "
+"generalised values for it."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -7299,18 +7307,20 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"If you want to read full information about this plug-in, its history and "
+"catalogue format, you can %1get info here%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
 msgid "Novae is updated"
-msgstr ""
+msgstr "Novae is updated"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Bright Novae Configuration"
 
 #: plugins/Novae/src/ui_novaeDialog.h:234
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Bright Novae Plug-in Configuration"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
@@ -7721,51 +7731,51 @@ msgstr "The Exoplanet Data Explorer"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "The Anglo-Australian Planet Search"
-msgstr ""
+msgstr "The Anglo-Australian Planet Search"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "Geneva Extrasolar Planet Search Programmes"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "NASA's Exoplanet Exploration Programme"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Pulsar planets"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "The NASA Exoplanet Archive"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 msgid "IAU Comission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU Comission 53: Extrasolar Planets"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "The Habitable Zone Gallery"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr ""
+msgstr "PlanetQuest - The Search for Another Earth"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Open Exoplanet Catalogue"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "The Habitable Exoplanets Catalogue"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid "Exoplanets is updated"
@@ -7810,7 +7820,7 @@ msgstr "Show exoplanets button on toolbar"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
