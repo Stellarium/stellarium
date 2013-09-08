@@ -110,9 +110,12 @@ private:
 	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
+	static StelTextureSP texGalaxy;
 	static StelTextureSP texOpenCluster;
 	static StelTextureSP texGlobularCluster;
-	static StelTextureSP texPlanetNebula;
+	static StelTextureSP texPlanetaryNebula;
+	static StelTextureSP texDiffuseNebula;
+	static StelTextureSP texOpenClusterWithNebulosity;
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;
