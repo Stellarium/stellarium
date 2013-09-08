@@ -508,6 +508,8 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 {
 	// This function is implemented using code from QSettings implementation in QT
 	// (GPL edition, version 4.3).
+	
+	/* FIXME: This code is not working with Qt5/Windows and should be rewritten --AW
 	QLibrary library(QLatin1String("shell32"));
 	QT_WA( {
 		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
@@ -528,6 +530,7 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 			return QString::fromLocal8Bit(cpath);
 		}
 	} );
+	*/
 
 	return QString();
 }
