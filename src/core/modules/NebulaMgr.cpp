@@ -63,9 +63,12 @@ NebulaMgr::NebulaMgr(void) : nebGrid(200)
 NebulaMgr::~NebulaMgr()
 {
 	Nebula::texCircle = StelTextureSP();
+	Nebula::texGalaxy = StelTextureSP();
 	Nebula::texOpenCluster = StelTextureSP();
 	Nebula::texGlobularCluster = StelTextureSP();
-	Nebula::texPlanetNebula = StelTextureSP();
+	Nebula::texPlanetaryNebula = StelTextureSP();
+	Nebula::texDiffuseNebula = StelTextureSP();
+	Nebula::texOpenClusterWithNebulosity = StelTextureSP();
 }
 
 /*************************************************************************
@@ -94,10 +97,13 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
-	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");   // Load circle texture
-	//Nebula::texOpenCluster = StelApp::getInstance().getTextureManager().createTexture("textures/ocl.png");   // Load open clister marker texture
-	//Nebula::texGlobularCluster = StelApp::getInstance().getTextureManager().createTexture("textures/gcl.png");   // Load globular clister marker texture
-	//Nebula::texPlanetNebula = StelApp::getInstance().getTextureManager().createTexture("textures/pnb.png");   // Load planetary nebula marker texture
+	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");		// Load circle texture
+	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture("textures/neb_gal.png");	// Load ellipse texture
+	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture("textures/neb_ocl.png");	// Load open cluster marker texture
+	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_gcl.png");	// Load globular cluster marker texture
+	Nebula::texPlanetaryNebula		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_pnb.png");	// Load planetary nebula marker texture
+	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_dif.png");	// Load diffuse nebula marker texture
+	Nebula::texOpenClusterWithNebulosity	= StelApp::getInstance().getTextureManager().createTexture("textures/neb_ocln.png");	// Load Ocl/Nebula marker texture
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
