@@ -34,12 +34,12 @@
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
 #include "ExoplanetsDialog.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
 #include <QAction>
-#include <QProgressBar>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -655,12 +655,11 @@ void Exoplanets::updateJSON(void)
 	emit(updateStateChanged(updateState));
 
 	if (progressBar==NULL)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(100);
+	progressBar->setRange(0, 100);
 	progressBar->setFormat("Update exoplanets");
-	progressBar->setVisible(true);
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
@@ -703,7 +702,7 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 	if (progressBar)
 	{
 		progressBar->setValue(100);
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
 }

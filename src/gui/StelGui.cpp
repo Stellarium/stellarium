@@ -860,12 +860,6 @@ void StelGui::update()
 	dateTimeDialog->setDateTime(core->getJDay());
 }
 
-// Add a new progress bar in the lower right corner of the screen.
-QProgressBar* StelGui::addProgressBar()
-{
-	return skyGui->progressBarMgr->addProgressBar();
-}
-
 #ifndef DISABLE_SCRIPTING
 void StelGui::setScriptKeys(bool b)
 {
