@@ -29,6 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
+#include "StelProgressController.hpp"
 
 #include <QApplication>
 #include <QClipboard>
@@ -80,9 +81,9 @@ MpcImportWindow::~MpcImportWindow()
 	if (queryReply)
 		queryReply->deleteLater();
 	if (downloadProgressBar)
-		downloadProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(downloadProgressBar);
 	if (queryProgressBar)
-		queryProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(queryProgressBar);
 }
 
 void MpcImportWindow::createDialogContent()
@@ -536,7 +537,7 @@ void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesT
 	}
 
 	downloadProgressBar->setValue(currentValue);
-	downloadProgressBar->setMaximum(endValue);
+	downloadProgressBar->setRange(0, endValue);
 }
 
 void MpcImportWindow::updateQueryProgress(qint64, qint64)
@@ -546,7 +547,7 @@ void MpcImportWindow::updateQueryProgress(qint64, qint64)
 
 	//Just show activity
 	queryProgressBar->setValue(0);
-	queryProgressBar->setMaximum(0);
+	queryProgressBar->setRange(0, 0);
 }
 
 void MpcImportWindow::startDownload(QString urlString)
@@ -568,11 +569,9 @@ void MpcImportWindow::startDownload(QString urlString)
 
 	//TODO: Interface changes!
 
-	downloadProgressBar = StelApp::getInstance().getGui()->addProgressBar();
+	downloadProgressBar = StelApp::getInstance().addProgressBar();
 	downloadProgressBar->setValue(0);
-	downloadProgressBar->setMaximum(0);
-	//downloadProgressBar->setFormat("%v/%m");
-	downloadProgressBar->setVisible(true);
+	downloadProgressBar->setRange(0, 0);
 
 	//TODO: Better handling of the interface
 	//dialog->setVisible(false);
@@ -680,8 +679,7 @@ void MpcImportWindow::deleteDownloadProgressBar()
 
 	if (downloadProgressBar)
 	{
-		downloadProgressBar->setVisible(false);
-		downloadProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(downloadProgressBar);
 		downloadProgressBar = NULL;
 	}
 }
@@ -696,11 +694,10 @@ void MpcImportWindow::sendQuery()
 		return;
 
 	//Progress bar
-	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
+	queryProgressBar = StelApp::getInstance().addProgressBar();
 	queryProgressBar->setValue(0);
-	queryProgressBar->setMaximum(0);
-        queryProgressBar->setFormat("Searching...");
-	queryProgressBar->setVisible(true);
+	queryProgressBar->setRange(0, 0);
+	queryProgressBar->setFormat("Searching...");
 
 	//TODO: Better handling of the interface
 	enableInterface(false);
@@ -885,8 +882,7 @@ void MpcImportWindow::deleteQueryProgressBar()
 	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
 	if (queryProgressBar)
 	{
-		queryProgressBar->setVisible(false);
-		queryProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(queryProgressBar);
 		queryProgressBar = NULL;
 	}
 }

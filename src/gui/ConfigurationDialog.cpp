@@ -30,6 +30,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelProgressController.hpp"
 
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
@@ -941,7 +942,7 @@ void ConfigurationDialog::newStarCatalogData()
 	Q_ASSERT(progressBar);
 
 	int size = starCatalogDownloadReply->bytesAvailable();
-	progressBar->setValue((float)progressBar->value()+(float)size/1024);
+	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
 }
 
@@ -982,10 +983,9 @@ void ConfigurationDialog::downloadStars()
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
-	progressBar = StelApp::getInstance().getGui()->addProgressBar();
+	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
-	progressBar->setMaximum(nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
-	progressBar->setVisible(true);
+	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
@@ -1016,7 +1016,7 @@ void ConfigurationDialog::downloadFinished()
 		currentDownloadFile->close();
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
-		progressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar=NULL;
 		return;
 	}
@@ -1045,7 +1045,7 @@ void ConfigurationDialog::downloadFinished()
 	currentDownloadFile = NULL;
 	starCatalogDownloadReply->deleteLater();
 	starCatalogDownloadReply = NULL;
-	progressBar->deleteLater();
+	StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar=NULL;
 
 	ui->downloadLabel->setText(q_("Verifying file integrity..."));

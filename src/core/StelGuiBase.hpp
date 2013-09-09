@@ -44,11 +44,6 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) =0;
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const =0;
 
-	//! Add a new progress bar in the lower right corner of the screen.
-	//! When the progress bar is deleted  the layout is automatically rearranged.
-	//! @return a pointer to the progress bar.
-	virtual class QProgressBar* addProgressBar() =0;
-
 	virtual void forceRefreshGui() {;}
 
 	//! Show whether the GUI is visible.

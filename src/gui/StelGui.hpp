@@ -69,11 +69,6 @@ public:
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
 	
-	//! Add a new progress bar in the lower right corner of the screen.
-	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
-	//! @return a pointer to the progress bar
-	class QProgressBar* addProgressBar();
-	
 	//! Get the button bar at the bottom of the screensetDateTime
 	BottomStelBar* getButtonBar() const;
 	
