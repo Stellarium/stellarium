@@ -37,7 +37,6 @@ class Planet;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QPixmap;
-class QProgressBar;
 class QSettings;
 class QTimer;
 
@@ -529,7 +528,7 @@ private:
 	//! As a side effect it prevents problems if the user calls
 	//! setTleSources() while an update is in progress.
 	TleSourceList updateSources;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
 	//! Flag enabling automatic Internet updates.

@@ -34,7 +34,6 @@ class StelPainter;
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class QPixmap;
@@ -230,7 +229,7 @@ private:
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

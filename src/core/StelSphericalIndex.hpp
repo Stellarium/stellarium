@@ -147,6 +147,8 @@ private:
 			{
 			}
 
+			virtual ~RootNode() {}
+			
 			//! Create the 8 triangles of the octahedron.
 			virtual void split()
 			{

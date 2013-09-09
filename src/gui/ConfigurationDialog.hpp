@@ -21,7 +21,6 @@
 #define _CONFIGURATIONDIALOG_HPP_
 
 #include <QObject>
-#include <QProgressBar>
 #include <QNetworkReply>
 #include <QFile>
 #include "StelDialog.hpp"
@@ -72,7 +71,7 @@ private:
 	bool hasDownloadedStarCatalog;
 	QNetworkReply* starCatalogDownloadReply;
 	QFile* currentDownloadFile;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	void setNoSelectedInfo();

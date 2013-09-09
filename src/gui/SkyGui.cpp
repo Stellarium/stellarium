@@ -124,6 +124,8 @@ SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
 	progressBarMgr = new StelProgressBarMgr(this);
+	connect(&StelApp::getInstance(), SIGNAL(progressBarAdded(const StelProgressController*)), progressBarMgr, SLOT(addProgressBar(const StelProgressController*)));
+	connect(&StelApp::getInstance(), SIGNAL(progressBarRemoved(const StelProgressController*)), progressBarMgr, SLOT(removeProgressBar(const StelProgressController*)));
 
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(this);
@@ -305,9 +307,9 @@ void SkyGui::setStelStyle(const QString& style)
 }
 
 // Add a new progress bar in the lower right corner of the screen.
-QProgressBar* SkyGui::addProgressBar()
+void SkyGui::addProgressBar(StelProgressController* p)
 {
-	return progressBarMgr->addProgressBar();
+	return progressBarMgr->addProgressBar(p);
 }
 
 void SkyGui::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
