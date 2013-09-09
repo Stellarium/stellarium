@@ -1850,8 +1850,8 @@ void Oculars::zoomOcular()
 		core->setFlipVert(telescope->isVFlipped());		
 	}
 
-	// Limit stars and DSOs	if it enable
-	if (getFlagLimitMagnitude())
+	// Limit stars and DSOs	if it enable and it's telescope + eyepiece combination
+	if (getFlagLimitMagnitude() && !ocular->isBinoculars())
 	{
 		// Simplified calculation of the penetrating power of the telescope
 		// TODO: need improvements?
