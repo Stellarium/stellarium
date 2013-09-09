@@ -59,6 +59,7 @@ public:
 	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = 0, int n = -1) const
 	{
 		Q_UNUSED(context);
+		Q_UNUSED(n);
 		return StelTranslator::globalTranslator->qtranslate(sourceText, disambiguation);
 	}
 };
