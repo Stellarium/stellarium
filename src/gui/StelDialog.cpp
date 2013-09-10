@@ -20,6 +20,8 @@
 
 #include "StelDialog.hpp"
 #include "StelMainView.hpp"
+#include "StelGui.hpp"
+#include "StelApp.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -101,10 +103,14 @@ void StelDialog::setVisible(bool v)
 			proxy->setFocus();
 			return;
 		}
+		
 		dialog = new QDialog(NULL);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
 		//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
+		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 
 		proxy = new CustomProxy(NULL, Qt::Tool);
 		proxy->setWidget(dialog);
