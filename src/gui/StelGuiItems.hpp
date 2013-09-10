@@ -70,6 +70,10 @@ public:
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 			   const QPixmap& pixHover=QPixmap(),
 			   QAction* action=NULL, bool noBackground=false);
+	
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
+			   const QPixmap& pixHover=QPixmap(),
+			   const QString& actionId=QString(), bool noBackground=false);
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
@@ -82,6 +86,11 @@ public:
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
 			   const QPixmap& pixHover=QPixmap(),
 			   QAction* action=NULL, bool noBackground=false, bool isTristate=true);
+
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
+			   const QPixmap& pixHover=QPixmap(),
+			   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
+	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
 
@@ -146,7 +155,8 @@ private:
 	int checked;
 
 	QTimeLine* timeLine;
-	QAction* action;
+	QAction* action; // Deprecated!
+	class StelAction* stelAction;
 	bool noBckground;
 	bool isTristate_;
 	double opacity;

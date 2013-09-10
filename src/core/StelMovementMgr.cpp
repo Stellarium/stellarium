@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "StelTranslator.hpp"
 
 #include <QString>
 #include <QTextStream>
@@ -100,6 +101,12 @@ void StelMovementMgr::init()
 			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		}
 	}
+
+	addAction("actionSwitch_Equatorial_Mount", "Miscellaneous", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", "equatorialMount");
+	addAction("actionGoto_Selected_Object", "MovementAndSelection", N_("Center on selected object"), "Space", "setFlagTracking()");
+	addAction("actionZoom_In_Auto", "MovementAndSelection", N_("Zoom in on selected object"), "/", "autoZoomIn()");
+	addAction("actionZoom_Out_Auto", "MovementAndSelection", N_("Zoom out"), "\\", "autoZoomOut()");
+	addAction("actionSet_Tracking", "MovementAndSelection", N_("Track object"), "T", "tracking");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)

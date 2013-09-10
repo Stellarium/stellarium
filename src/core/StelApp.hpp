@@ -43,6 +43,7 @@ class StelVideoMgr;
 class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
+class StelActionMgr;
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -116,6 +117,9 @@ public:
 
 	//! Get the shortcuts manager to use for managing and editing shortcuts
 	StelShortcutMgr* getStelShortcutManager() {return shortcutMgr;}
+
+	//! Get the actions manager to use for managing and editing actions
+	StelActionMgr* getStelActionManager() {return actionMgr;}
 
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
@@ -227,6 +231,9 @@ private:
 
 	//Shortcuts manager for the application
 	StelShortcutMgr* shortcutMgr;
+
+	//Actions manager fot the application.  Will replace shortcutMgr.
+	StelActionMgr* actionMgr;
 
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;

@@ -27,6 +27,7 @@
 #include "StelGuiBase.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QGLWidget>
 #include <QSettings>
@@ -276,6 +277,9 @@ void StelMainView::init(QSettings* conf)
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
 	stelApp->init(conf);
+	stelApp->getStelActionManager()->addAction("actionSave_Screenshot_Global", "Miscellaneous",
+											   N_("Save screenshot"), "Ctrl+S", this, "saveScreenShot()");
+
 	StelPainter::initGLShaders();
 
 	setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
