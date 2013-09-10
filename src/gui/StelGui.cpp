@@ -177,14 +177,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiAction("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
 
-	initConstellationMgr();
-	initGrindLineMgr();
-	initLandscapeMgr();
-
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	connect(getGuiAction("actionShow_Nebulas"), SIGNAL(toggled(bool)), nmgr, SLOT(setFlagHints(bool)));
-	getGuiAction("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
-
 	StelSkyLayerMgr* imgr = GETSTELMODULE(StelSkyLayerMgr);
 	connect(getGuiAction("actionShow_DSS"), SIGNAL(toggled(bool)), imgr, SLOT(setFlagShow(bool)));
 	getGuiAction("actionShow_DSS")->setChecked(imgr->getFlagShow());
@@ -198,15 +190,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(getGuiAction("actionStop_Script"), SIGNAL(triggered()), this, SLOT(stopScript()));
 	connect(getGuiAction("actionPause_Script"), SIGNAL(triggered()), this, SLOT(pauseScript()));
 	connect(getGuiAction("actionResume_Script"), SIGNAL(triggered()), this, SLOT(resumeScript()));
-	connect(getGuiAction("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
-	connect(getGuiAction("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
-	connect(getGuiAction("actionIncrease_Time_Speed_Less"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeedLess()));
-	connect(getGuiAction("actionDecrease_Time_Speed_Less"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeedLess()));
-	connect(getGuiAction("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
-	connect(getGuiAction("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), core, SLOT(setZeroTimeSpeed()));
-	connect(getGuiAction("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
-	connect(getGuiAction("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), mmgr, SLOT(setEquatorialMount(bool)));
-	getGuiAction("actionSwitch_Equatorial_Mount")->setChecked(mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal);
 	connect(getGuiAction("actionAdd_Solar_Hour"), SIGNAL(triggered()), core, SLOT(addHour()));
 	connect(getGuiAction("actionAdd_Solar_Day"), SIGNAL(triggered()), core, SLOT(addDay()));
 	connect(getGuiAction("actionAdd_Solar_Week"), SIGNAL(triggered()), core, SLOT(addWeek()));
@@ -244,12 +227,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// StelApp::init() already set flagNightMode for us, don't do it twice!
 	getGuiAction("actionShow_Night_Mode")->setChecked(StelApp::getInstance().getVisionModeNight());
 	connect(getGuiAction("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
-
-	connect(getGuiAction("actionGoto_Selected_Object"), SIGNAL(triggered()), mmgr, SLOT(setFlagTracking()));
-	connect(getGuiAction("actionZoom_In_Auto"), SIGNAL(triggered()), mmgr, SLOT(autoZoomIn()));
-	connect(getGuiAction("actionZoom_Out_Auto"), SIGNAL(triggered()), mmgr, SLOT(autoZoomOut()));
-	connect(getGuiAction("actionSet_Tracking"), SIGNAL(toggled(bool)), mmgr, SLOT(setFlagTracking(bool)));
-	getGuiAction("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 
 	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFullScreen(bool)));
 	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainView::getInstance().isFullScreen());
@@ -304,7 +281,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(shortcutsDialog, SIGNAL(visibleChanged(bool)),
 		tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainView::getInstance(), SLOT(saveScreenShot()));
 	connect(getGuiAction("actionSave_Copy_Object_Information_Global"), SIGNAL(triggered()), this, SLOT(copySelectedObjectInfo()));
 
 	getGuiAction("actionToggle_GuiHidden_Global")->setChecked(true);
@@ -314,23 +290,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	getGuiAction("actionHorizontal_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipHorz());
 	connect(getGuiAction("actionVertical_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipVert(bool)));
 	getGuiAction("actionVertical_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipVert());
-
-	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	connect(getGuiAction("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
-	getGuiAction("actionShow_Stars")->setChecked(smgr->getFlagStars());
-
-	connect(getGuiAction("actionShow_Stars_Labels"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
-	getGuiAction("actionShow_Stars_Labels")->setChecked(smgr->getFlagLabels());
-
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	connect(getGuiAction("actionShow_Planets_Labels"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
-	getGuiAction("actionShow_Planets_Labels")->setChecked(ssmgr->getFlagLabels());
-
-	connect(getGuiAction("actionShow_Planets_Orbits"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
-	getGuiAction("actionShow_Planets_Orbits")->setChecked(ssmgr->getFlagOrbits());
-
-	connect(getGuiAction("actionShow_Planets_Trails"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagTrails(bool)));
-	getGuiAction("actionShow_Planets_Trails")->setChecked(ssmgr->getFlagTrails());
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -381,70 +340,70 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/9-on-help.png");
 	pxmapOff = QPixmap(":/graphicGui/9-off-help.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiAction("actionShow_Help_Window_Global"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Help_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 
 	pxmapOn = QPixmap(":/graphicGui/btConstellationLines-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btConstellationLines-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Constellation_Lines"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Constellation_Lines");
 	skyGui->buttonBar->addButton(b, "010-constellationsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btConstellationLabels-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btConstellationLabels-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Constellation_Labels"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Constellation_Labels");
 	skyGui->buttonBar->addButton(b, "010-constellationsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btConstellationArt-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btConstellationArt-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Constellation_Art"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Constellation_Art");
 	skyGui->buttonBar->addButton(b, "010-constellationsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btEquatorialGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btEquatorialGrid-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Equatorial_Grid"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Equatorial_Grid");
 	skyGui->buttonBar->addButton(b, "020-gridsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btAzimuthalGrid-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btAzimuthalGrid-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Azimuthal_Grid"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Azimuthal_Grid");
 	skyGui->buttonBar->addButton(b, "020-gridsGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btGround-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btGround-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Ground"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Ground");
 	skyGui->buttonBar->addButton(b, "030-landscapeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btCardinalPoints-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btCardinalPoints-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Cardinal_Points"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Cardinal_Points");
 	skyGui->buttonBar->addButton(b, "030-landscapeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btAtmosphere-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btAtmosphere-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Atmosphere"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Atmosphere");
 	skyGui->buttonBar->addButton(b, "030-landscapeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btNebula-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btNebula-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Nebulas"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Nebulas");
 	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btPlanets-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btPlanets-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Planets_Labels"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Planets_Labels");
 	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btEquatorialMount-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionSwitch_Equatorial_Mount"));
-	b->setChecked(getGuiAction("actionSwitch_Equatorial_Mount")->isChecked());
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSwitch_Equatorial_Mount");
+	// b->setChecked(getGuiAction("actionSwitch_Equatorial_Mount")->isChecked());
 	skyGui->buttonBar->addButton(b, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btGotoSelectedObject-off.png");
-	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionGoto_Selected_Object"));
+	buttonGotoSelectedObject = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionGoto_Selected_Object");
 	skyGui->buttonBar->addButton(buttonGotoSelectedObject, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btNightView-on.png");
@@ -459,23 +418,23 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeRewind-off.png");
-	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionDecrease_Time_Speed"));
+	buttonTimeRewind = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionDecrease_Time_Speed");
 	skyGui->buttonBar->addButton(buttonTimeRewind, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeRealtime-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeRealtime-off.png");
 	pxmapDefault = QPixmap(":/graphicGui/btTimePause-on.png");
-	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapDefault, pxmapGlow32x32, getGuiAction("actionSet_Real_Time_Speed"));
+	buttonTimeRealTimeSpeed = new StelButton(NULL, pxmapOn, pxmapOff, pxmapDefault, pxmapGlow32x32, "actionSet_Real_Time_Speed");
 	skyGui->buttonBar->addButton(buttonTimeRealTimeSpeed, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeNow-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeNow-off.png");
-	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionReturn_To_Current_Time"));
+	buttonTimeCurrent = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionReturn_To_Current_Time");
 	skyGui->buttonBar->addButton(buttonTimeCurrent, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeForward-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeForward-off.png");
-	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionIncrease_Time_Speed"));
+	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionIncrease_Time_Speed");
 	skyGui->buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
 	skyGui->buttonBar->setGroupMargin("070-timeGroup", 32, 0);
@@ -519,199 +478,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	initDone = true;
-}
-
-void StelGui::initConstellationMgr()
-{
-	ConstellationMgr* constellationMgr = GETSTELMODULE(ConstellationMgr);
-	getGuiAction("actionShow_Constellation_Lines")->setChecked(constellationMgr->getFlagLines());
-	connect(getGuiAction("actionShow_Constellation_Lines"),
-					SIGNAL(toggled(bool)),
-					constellationMgr,
-					SLOT(setFlagLines(bool)));
-	connect(constellationMgr,
-					SIGNAL(linesDisplayedChanged(const bool)),
-					this,
-					SLOT(linesDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Constellation_Art")->setChecked(constellationMgr->getFlagArt());
-	connect(getGuiAction("actionShow_Constellation_Art"),
-					SIGNAL(toggled(bool)),
-					constellationMgr,
-					SLOT(setFlagArt(bool)));
-	connect(constellationMgr,
-					SIGNAL(artDisplayedChanged(const bool)),
-					this,
-					SLOT(artDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Constellation_Labels")->setChecked(constellationMgr->getFlagLabels());
-	connect(getGuiAction("actionShow_Constellation_Labels"),
-					SIGNAL(toggled(bool)),
-					constellationMgr,
-					SLOT(setFlagLabels(bool)));
-	connect(constellationMgr,
-					SIGNAL(namesDisplayedChanged(const bool)),
-					this,
-					SLOT(namesDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Constellation_Boundaries")->setChecked(constellationMgr->getFlagBoundaries());
-	connect(getGuiAction("actionShow_Constellation_Boundaries"),
-					SIGNAL(toggled(bool)),
-					constellationMgr,
-					SLOT(setFlagBoundaries(bool)));
-	connect(constellationMgr,
-					SIGNAL(boundariesDisplayedChanged(const bool)),
-					this,
-					SLOT(boundariesDisplayedUpdated(const bool)));
-}
-
-void StelGui::initGrindLineMgr()
-{
-	GridLinesMgr* gridLineManager = GETSTELMODULE(GridLinesMgr);
-	getGuiAction("actionShow_Equatorial_Grid")->setChecked(gridLineManager->getFlagEquatorGrid());
-	connect(getGuiAction("actionShow_Equatorial_Grid"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagEquatorGrid(bool)));
-	connect(gridLineManager,
-					SIGNAL(equatorGridDisplayedChanged(const bool)),
-					this,
-					SLOT(equatorGridDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Azimuthal_Grid")->setChecked(gridLineManager->getFlagAzimuthalGrid());
-	connect(getGuiAction("actionShow_Azimuthal_Grid"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagAzimuthalGrid(bool)));
-	connect(gridLineManager,
-					SIGNAL(azimuthalGridDisplayedChanged(const bool)),
-					this,
-					SLOT(azimuthalGridDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Ecliptic_Line")->setChecked(gridLineManager->getFlagEclipticLine());
-	connect(getGuiAction("actionShow_Ecliptic_Line"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagEclipticLine(bool)));
-	connect(gridLineManager,
-					SIGNAL(eclipticLineDisplayedChanged(const bool)),
-					this,
-					SLOT(eclipticLineDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Equator_Line")->setChecked(gridLineManager->getFlagEquatorLine());
-	connect(getGuiAction("actionShow_Equator_Line"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagEquatorLine(bool)));
-	connect(gridLineManager,
-					SIGNAL(equatorLineDisplayedChanged(const bool)),
-					this,
-					SLOT(equatorLineDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Meridian_Line")->setChecked(gridLineManager->getFlagMeridianLine());
-	connect(getGuiAction("actionShow_Meridian_Line"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagMeridianLine(bool)));
-	connect(gridLineManager,
-					SIGNAL(meridianLineDisplayedChanged(const bool)),
-					this,
-					SLOT(meridianLineDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Horizon_Line")->setChecked(gridLineManager->getFlagHorizonLine());
-	connect(getGuiAction("actionShow_Horizon_Line"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagHorizonLine(bool)));
-	connect(gridLineManager,
-					SIGNAL(horizonLineDisplayedChanged(const bool)),
-					this,
-					SLOT(horizonLineDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Equatorial_J2000_Grid")->setChecked(gridLineManager->getFlagEquatorJ2000Grid());
-	connect(getGuiAction("actionShow_Equatorial_J2000_Grid"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagEquatorJ2000Grid(bool)));
-	connect(gridLineManager,
-					SIGNAL(equatorJ2000GridDisplayedChanged(const bool)),
-					this,
-					SLOT(equatorJ2000GridDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Ecliptic_J2000_Grid")->setChecked(gridLineManager->getFlagEclipticJ2000Grid());
-	connect(getGuiAction("actionShow_Ecliptic_J2000_Grid"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagEclipticJ2000Grid(bool)));
-	connect(gridLineManager,
-					SIGNAL(eclipticJ2000GridDisplayedChanged(const bool)),
-					this,
-					SLOT(eclipticJ2000GridDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Galactic_Grid")->setChecked(gridLineManager->getFlagGalacticGrid());
-	connect(getGuiAction("actionShow_Galactic_Grid"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagGalacticGrid(bool)));
-	connect(gridLineManager,
-					SIGNAL(galacticGridDisplayedChanged(const bool)),
-					this,
-					SLOT(galacticGridDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Galactic_Plane_Line")->setChecked(gridLineManager->getFlagGalacticPlaneLine());
-	connect(getGuiAction("actionShow_Galactic_Plane_Line"),
-					SIGNAL(toggled(bool)),
-					gridLineManager,
-					SLOT(setFlagGalacticPlaneLine(bool)));
-	connect(gridLineManager,
-					SIGNAL(galacticPlaneLineDisplayedChanged(const bool)),
-					this,
-					SLOT(galacticPlaneLineDisplayedUpdated(const bool)));
-
-}
-
-void StelGui::initLandscapeMgr()
-{
-	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-	getGuiAction("actionShow_Ground")->setChecked(landscapeMgr->getFlagLandscape());
-	connect(getGuiAction("actionShow_Ground"),
-					SIGNAL(toggled(bool)),
-					landscapeMgr,
-					SLOT(setFlagLandscape(bool)));
-	connect(landscapeMgr,
-					SIGNAL(landscapeDisplayedChanged(const bool)),
-					this,
-					SLOT(landscapeDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Cardinal_Points")->setChecked(landscapeMgr->getFlagCardinalsPoints());
-	connect(getGuiAction("actionShow_Cardinal_Points"),
-					SIGNAL(toggled(bool)),
-					landscapeMgr,
-					SLOT(setFlagCardinalsPoints(bool)));
-	connect(landscapeMgr,
-					SIGNAL(cardinalsPointsDisplayedChanged(const bool)),
-					this,
-					SLOT(cardinalsPointsDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Atmosphere")->setChecked(landscapeMgr->getFlagAtmosphere());
-	connect(getGuiAction("actionShow_Atmosphere"),
-					SIGNAL(toggled(bool)),
-					landscapeMgr,
-					SLOT(setFlagAtmosphere(bool)));
-	connect(landscapeMgr,
-					SIGNAL(atmosphereDisplayedChanged(const bool)),
-					this,
-					SLOT(atmosphereDisplayedUpdated(const bool)));
-
-	getGuiAction("actionShow_Fog")->setChecked(landscapeMgr->getFlagFog());
-	connect(getGuiAction("actionShow_Fog"),
-					SIGNAL(toggled(bool)),
-					landscapeMgr,
-					SLOT(setFlagFog(bool)));
-	connect(landscapeMgr,
-					SIGNAL(fogDisplayedChanged(const bool)),
-					this,
-					SLOT(fogDisplayedUpdated(const bool)));
 }
 
 void StelGui::quit()
@@ -814,33 +580,12 @@ void StelGui::update()
 		buttonGotoSelectedObject->setChecked(b);
 	}
 
-	bool flag = GETSTELMODULE(StarMgr)->getFlagStars();
-	if (getGuiAction("actionShow_Stars")->isChecked() != flag) {
-		getGuiAction("actionShow_Stars")->setChecked(flag);
-	}
-
-	flag = GETSTELMODULE(NebulaMgr)->getFlagHints();
-	if (getGuiAction("actionShow_Nebulas")->isChecked() != flag)
-		getGuiAction("actionShow_Nebulas")->setChecked(flag);
+	bool flag;
 
 	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
 	if (getGuiAction("actionShow_DSS")->isChecked() != flag)
 		getGuiAction("actionShow_DSS")->setChecked(flag);
 
-	flag = mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal;
-	if (getGuiAction("actionSwitch_Equatorial_Mount")->isChecked() != flag)
-		getGuiAction("actionSwitch_Equatorial_Mount")->setChecked(flag);
-
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	flag = ssmgr->getFlagLabels();
-	if (getGuiAction("actionShow_Planets_Labels")->isChecked() != flag)
-		getGuiAction("actionShow_Planets_Labels")->setChecked(flag);
-	flag = ssmgr->getFlagOrbits();
-	if (getGuiAction("actionShow_Planets_Orbits")->isChecked() != flag)
-		getGuiAction("actionShow_Planets_Orbits")->setChecked(flag);
-	flag = ssmgr->getFlagTrails();
-	if (getGuiAction("actionShow_Planets_Trails")->isChecked() != flag)
-		getGuiAction("actionShow_Planets_Trails")->setChecked(flag);
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getGuiAction("actionShow_Night_Mode")->isChecked() != flag)
 		getGuiAction("actionShow_Night_Mode")->setChecked(flag);
@@ -1086,107 +831,6 @@ QAction *StelGui::getGuiAction(const QString &actionName)
 #pragma mark Process changes from the ConstellationMgr
 #endif
 /* ****************************************************************************************************************** */
-void StelGui::artDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Constellation_Art")->isChecked() != displayed) {
-		getGuiAction("actionShow_Constellation_Art")->setChecked(displayed);
-	}
-}
-void StelGui::boundariesDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Constellation_Boundaries")->isChecked() != displayed) {
-		getGuiAction("actionShow_Constellation_Boundaries")->setChecked(displayed);
-	}
-}
-void StelGui::linesDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Constellation_Lines")->isChecked() != displayed) {
-		getGuiAction("actionShow_Constellation_Lines")->setChecked(displayed);
-	}
-}
-void StelGui::namesDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Constellation_Labels")->isChecked() != displayed) {
-		getGuiAction("actionShow_Constellation_Labels")->setChecked(displayed);
-	}
-}
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from the GridLinesMgr
-#endif
-/* ****************************************************************************************************************** */
-void StelGui::azimuthalGridDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Azimuthal_Grid")->isChecked() != displayed) {
-		getGuiAction("actionShow_Azimuthal_Grid")->setChecked(displayed);
-	}
-}
-
-void StelGui::equatorGridDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Equatorial_Grid")->isChecked() != displayed) {
-		getGuiAction("actionShow_Equatorial_Grid")->setChecked(displayed);
-	}
-}
-
-void StelGui::equatorJ2000GridDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Equatorial_J2000_Grid")->isChecked() != displayed) {
-		getGuiAction("actionShow_Equatorial_J2000_Grid")->setChecked(displayed);
-	}
-}
-
-void StelGui::eclipticJ2000GridDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Ecliptic_J2000_Grid")->isChecked() != displayed) {
-		getGuiAction("actionShow_Ecliptic_J2000_Grid")->setChecked(displayed);
-	}
-}
-
-
-void StelGui::galacticGridDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Galactic_Grid")->isChecked() != displayed) {
-		getGuiAction("actionShow_Galactic_Grid")->setChecked(displayed);
-	}
-}
-
-void StelGui::equatorLineDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Equator_Line")->isChecked() != displayed) {
-		getGuiAction("actionShow_Equator_Line")->setChecked(displayed);
-	}
-}
-
-void StelGui::eclipticLineDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Ecliptic_Line")->isChecked() != displayed) {
-		getGuiAction("actionShow_Ecliptic_Line")->setChecked(displayed);
-	}
-}
-
-void StelGui::meridianLineDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Meridian_Line")->isChecked() != displayed) {
-		getGuiAction("actionShow_Meridian_Line")->setChecked(displayed);
-	}
-}
-
-void StelGui::horizonLineDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Horizon_Line")->isChecked() != displayed) {
-		getGuiAction("actionShow_Horizon_Line")->setChecked(displayed);
-	}
-}
-
-void StelGui::galacticPlaneLineDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Galactic_Plane_Line")->isChecked() != displayed) {
-		getGuiAction("actionShow_Galactic_Plane_Line")->setChecked(displayed);
-	}
-
-}
 
 /* ****************************************************************************************************************** */
 #if 0
@@ -1194,33 +838,14 @@ void StelGui::galacticPlaneLineDisplayedUpdated(const bool displayed)
 #pragma mark Process changes from the GridLinesMgr
 #endif
 /* ****************************************************************************************************************** */
-void StelGui::atmosphereDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Atmosphere")->isChecked() != displayed) {
-		getGuiAction("actionShow_Atmosphere")->setChecked(displayed);
-	}
-}
 
-void StelGui::cardinalsPointsDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Cardinal_Points")->isChecked() != displayed) {
-		getGuiAction("actionShow_Cardinal_Points")->setChecked(displayed);
-	}
-}
+/* ****************************************************************************************************************** */
+#if 0
+#pragma mark -
+#pragma mark Process changes from the GridLinesMgr
+#endif
+/* ****************************************************************************************************************** */
 
-void StelGui::fogDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Fog")->isChecked() != displayed) {
-		getGuiAction("actionShow_Fog")->setChecked(displayed);
-	}
-}
-
-void StelGui::landscapeDisplayedUpdated(const bool displayed)
-{
-	if (getGuiAction("actionShow_Ground")->isChecked() != displayed) {
-		getGuiAction("actionShow_Ground")->setChecked(displayed);
-	}
-}
 
 void StelGui::copySelectedObjectInfo(void)
 {

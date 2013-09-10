@@ -36,6 +36,7 @@
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
+#include "StelActionMgr.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -191,6 +192,7 @@ StelApp::StelApp(QObject* parent)
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
 	shortcutMgr = NULL;
+	actionMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -227,6 +229,7 @@ StelApp::~StelApp()
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
 	delete shortcutMgr; shortcutMgr = NULL;
+	delete actionMgr; actionMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -351,6 +354,7 @@ void StelApp::init(QSettings* conf)
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
 	shortcutMgr = new StelShortcutMgr();
+	actionMgr = new StelActionMgr();
 
 	localeMgr->init();
 
@@ -596,6 +600,17 @@ void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 void StelApp::handleKeys(QKeyEvent* event)
 {
 	event->setAccepted(false);
+	// First try to trigger a shortcut.
+	if (event->type() == QEvent::KeyPress)
+	{
+		StelAction* action = getStelActionManager()->pushKey(event->key() + event->modifiers());
+		if (action)
+		{
+			action->trigger();
+			event->setAccepted(true);
+			return;
+		}
+	}
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleKeys))
 	{

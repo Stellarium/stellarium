@@ -125,6 +125,9 @@ SET(stellarium_lib_SRCS
 	core/StelShortcutMgr.cpp
 	core/StelShortcutGroup.cpp
 	core/StelShortcutGroup.hpp
+	core/StelActionMgr.hpp
+	core/StelActionMgr.cpp
+
 
 	${gl_lib_SRCS}
 
