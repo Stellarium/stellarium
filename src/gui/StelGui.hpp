@@ -160,27 +160,6 @@ private slots:
 	void setStelStyle(const QString& section);
 	void quit();	
 	void updateI18n();
-	//! Process changes from the ConstellationMgr
-	void artDisplayedUpdated(const bool displayed);
-	void boundariesDisplayedUpdated(const bool displayed);
-	void linesDisplayedUpdated(const bool displayed);
-	void namesDisplayedUpdated(const bool displayed);
-	//! Process changes from the GridLinesMgr
-	void azimuthalGridDisplayedUpdated(const bool displayed);
-	void equatorGridDisplayedUpdated(const bool displayed);
-	void equatorJ2000GridDisplayedUpdated(const bool displayed);
-	void eclipticJ2000GridDisplayedUpdated(const bool displayed);
-	void galacticGridDisplayedUpdated(const bool displayed);
-	void equatorLineDisplayedUpdated(const bool displayed);
-	void eclipticLineDisplayedUpdated(const bool displayed);
-	void meridianLineDisplayedUpdated(const bool displayed);
-	void horizonLineDisplayedUpdated(const bool displayed);
-	void galacticPlaneLineDisplayedUpdated(const bool displayed);
-	//! Process changes from the LandscapeMgr
-	void atmosphereDisplayedUpdated(const bool displayed);
-	void cardinalsPointsDisplayedUpdated(const bool displayed);
-	void fogDisplayedUpdated(const bool displayed);
-	void landscapeDisplayedUpdated(const bool displayed);
 	void copySelectedObjectInfo(void);
 
 private:
@@ -220,15 +199,6 @@ private:
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
-
-	// This method is used by init() to initialize the ConstellationMgr instance.
-	void initConstellationMgr();
-
-	// This method is used by init() to initialize the GridLineMgr instance.
-	void initGrindLineMgr();
-
-	// This method is used by init() to initialize the LandscapeMgr instance.
-	void initLandscapeMgr();
 };
 
 //! Allow to load the GUI as a static plugin

@@ -136,6 +136,10 @@ public:
 	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
+
+protected:
+	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+								const QString& shortcut, const char* property);
 };
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)

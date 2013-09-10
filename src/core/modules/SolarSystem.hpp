@@ -45,6 +45,15 @@ typedef QSharedPointer<Planet> PlanetP;
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool labelsDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels)
+	Q_PROPERTY(bool orbitsDisplayed
+			   READ getFlagOrbits
+			   WRITE setFlagOrbits)
+	Q_PROPERTY(bool trailsDisplayed
+			   READ getFlagTrails
+			   WRITE setFlagTrails)
 
 public:
 	SolarSystem();

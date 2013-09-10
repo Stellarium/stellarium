@@ -52,7 +52,7 @@ StelShortcut::StelShortcut(const QString &id,
 	setAutoRepeat(autoRepeat);
 	setGlobal(global);
 
-	parent->addAction(m_action);
+	// parent->addAction(m_action);
 }
 
 StelShortcut::~StelShortcut()

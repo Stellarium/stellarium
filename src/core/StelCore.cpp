@@ -36,6 +36,7 @@
 #include "SolarSystem.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -150,6 +151,16 @@ void StelCore::init()
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
+
+	// Register all the core actions.
+	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	actionsMgr->addAction("actionIncrease_Time_Speed", "DateAndTime", N_("Increase time speed"), "L", this, "increaseTimeSpeed()");
+	actionsMgr->addAction("actionDecrease_Time_Speed", "DateAndTime", N_("Decrease time speed"), "J", this, "decreaseTimeSpeed()");
+	actionsMgr->addAction("actionIncrease_Time_Speed_Less", "DateAndTime", N_("Increase time speed (a little)"), "Shift+L", this, "increaseTimeSpeedLess()");
+	actionsMgr->addAction("actionDecrease_Time_Speed_Less", "DateAndTime", N_("Decrease time speed (a little)"), "Shift+J", this, "decreaseTimeSpeedLess()");
+	actionsMgr->addAction("actionSet_Real_Time_Speed", "DateAndTime", N_("Set normal time rate"), "K", this, "toggleRealTimeSpeed()");
+	actionsMgr->addAction("actionSet_Time_Rate_Zero", "DateAndTime", N_("Set time rate to zero"), "7", this, "setZeroTimeSpeed()");
+	actionsMgr->addAction("actionReturn_To_Current_Time", "DateAndTime", N_("Set time to now"), "8", this, "setTimeNow()");
 }
 
 

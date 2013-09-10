@@ -26,6 +26,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -67,6 +68,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	opacity(1.),
 	hoverOpacity(0.)
 {
+	qWarning() << "Creating StelButton from QAction is deprecated."
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
@@ -102,6 +104,58 @@ StelButton::StelButton(QGraphicsItem* parent,
 	}
 }
 
+
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixHover,
+                       const QString& aactionId,
+                       bool noBackground) :
+	QGraphicsPixmapItem(apixOff, parent),
+	pixOn(apixOn),
+	pixOff(apixOff),
+	pixHover(apixHover),
+	checked(ButtonStateOff),
+	action(NULL),
+	noBckground(noBackground),
+	isTristate_(false),
+	opacity(1.),
+	hoverOpacity(0.)
+{
+	Q_ASSERT(!pixOn.isNull());
+	Q_ASSERT(!pixOff.isNull());
+
+	redMode = StelApp::getInstance().getVisionModeNight();
+	pixOnRed = StelButton::makeRed(pixOn);
+	pixOffRed = StelButton::makeRed(pixOff);
+	if (!pixHover.isNull())
+		pixHoverRed = StelButton::makeRed(pixHover);
+	if (!pixBackground.isNull())
+		pixBackgroundRed = StelButton::makeRed(pixBackground);
+
+	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+	setAcceptHoverEvents(true);
+	timeLine = new QTimeLine(250, this);
+	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
+	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
+	
+	stelAction = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
+	if (stelAction!=NULL)
+	{
+		if (stelAction->isCheckable())
+		{
+			setChecked(stelAction->isChecked());
+			connect(stelAction, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
+			connect(this, SIGNAL(toggled(bool)), stelAction, SLOT(setChecked(bool)));
+		}
+		else
+		{
+			QObject::connect(this, SIGNAL(triggered()), stelAction, SLOT(trigger()));
+		}
+	}
+}
+
+
 StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,
@@ -122,6 +176,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	opacity(1.),
 	hoverOpacity(0.)
 {
+	qWarning() << "Creating StelButton from QAction is deprecated."
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
@@ -162,6 +217,66 @@ StelButton::StelButton(QGraphicsItem* parent,
 		}
 	}
 }
+
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixNoChange,
+                       const QPixmap& apixHover,
+                       const QString& aactionId,
+                       bool noBackground,
+                       bool isTristate) :
+	QGraphicsPixmapItem(apixOff, parent),
+	pixOn(apixOn),
+	pixOff(apixOff),
+	pixNoChange(apixNoChange),
+	pixHover(apixHover),
+	checked(ButtonStateOff),
+	action(NULL),
+	noBckground(noBackground),
+	isTristate_(isTristate),
+	opacity(1.),
+	hoverOpacity(0.)
+{
+	Q_ASSERT(!pixOn.isNull());
+	Q_ASSERT(!pixOff.isNull());
+
+	redMode = StelApp::getInstance().getVisionModeNight();
+	pixOnRed = StelButton::makeRed(pixOn);
+	pixOffRed = StelButton::makeRed(pixOff);
+	if (isTristate_)
+	{
+		Q_ASSERT(!pixNoChange.isNull());
+		pixNoChangeRed = StelButton::makeRed(pixNoChange);
+	}
+	if (!pixHover.isNull())
+		pixHoverRed = StelButton::makeRed(pixHover);
+	if (!pixBackground.isNull())
+		pixBackgroundRed = StelButton::makeRed(pixBackground);
+
+	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+	setAcceptHoverEvents(true);
+	timeLine = new QTimeLine(250, this);
+	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
+	connect(timeLine, SIGNAL(valueChanged(qreal)),
+	        this, SLOT(animValueChanged(qreal)));
+
+	stelAction = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
+	if (stelAction!=NULL)
+	{
+		if (stelAction->isCheckable())
+		{
+			setChecked(stelAction->isChecked());
+			connect(stelAction, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
+			connect(this, SIGNAL(toggled(bool)), stelAction, SLOT(setChecked(bool)));
+		}
+		else
+		{
+			QObject::connect(this, SIGNAL(triggered()), stelAction, SLOT(trigger()));
+		}
+	}
+}
+
 
 int StelButton::toggleChecked(int checked)
 {
@@ -324,6 +439,7 @@ void LeftStelBar::buttonHoverChanged(bool b)
 	Q_ASSERT(button);
 	if (b==true)
 	{
+		// XXX: use stelAction.
 		if (button->action)
 		{
 			QString tip(button->action->toolTip());
