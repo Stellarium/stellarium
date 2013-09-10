@@ -66,7 +66,7 @@
 #include <QFontDatabase>
 #include <QMouseEvent>
 #include <QAction>
-#include <QApplication>
+#include <QGuiApplication>
 #include <QFile>
 #include <QTextBrowser>
 #include <QGraphicsWidget>
@@ -505,12 +505,12 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// The disabled text for checkboxes is embossed with the QPalette::Light setting for the ColorGroup Disabled.
 	// It doesn't appear to be possible to set this from the stylesheet.  Instead we'll make it 100% transparent
 	// and set the text color for disabled in the stylesheets.
-	QPalette p = QApplication::palette();
+	QPalette p = QGuiApplication::palette();
 	p.setColor(QPalette::Disabled, QPalette::Light, QColor(0,0,0,0));
 
 	// And this is for the focus...  apparently the focus indicator is the inverted value for Active/Button.
 	p.setColor(QPalette::Active, QPalette::Button, QColor(255,255,255));
-	QApplication::setPalette(p);
+	QGuiApplication::setPalette(p);
 	
 	// FIXME: Workaround for set UI language when app is started --AW
 	updateI18n();
@@ -759,8 +759,7 @@ void StelGui::setStelStyle(const QString& section)
 		htmlStyleFile.open(QIODevice::ReadOnly);
 		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
 	}
-	qApp->setStyleSheet(currentStelStyle.qtStyleSheet);
-
+	
 	locationDialog->styleChanged();
 	dateTimeDialog->styleChanged();
 	configurationDialog->styleChanged();
@@ -1218,5 +1217,5 @@ void StelGui::landscapeDisplayedUpdated(const bool displayed)
 
 void StelGui::copySelectedObjectInfo(void)
 {
-	QApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
+	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
 }

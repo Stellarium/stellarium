@@ -29,8 +29,8 @@
 #include "StelUtils.hpp"
 
 #include <QGLWidget>
+#include <QGuiApplication>
 #include <QSettings>
-#include <QApplication>
 #include <QDebug>
 #include <QFileInfo>
 #include <QPluginLoader>
@@ -358,13 +358,13 @@ void StelMainView::drawBackground(QPainter*, const QRectF&)
 	// Manage cursor timeout
 	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
 	{
-		if (QApplication::overrideCursor()==0)
-			QApplication::setOverrideCursor(Qt::BlankCursor);
+		if (QGuiApplication::overrideCursor()==0)
+			QGuiApplication::setOverrideCursor(Qt::BlankCursor);
 	}
 	else
 	{
-		if (QApplication::overrideCursor()!=0)
-			QApplication::restoreOverrideCursor();
+		if (QGuiApplication::overrideCursor()!=0)
+			QGuiApplication::restoreOverrideCursor();
 	}
 }
 
