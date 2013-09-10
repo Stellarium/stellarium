@@ -242,6 +242,9 @@ void LandscapeMgr::update(double deltaTime)
 	// We define the brigthness zero when the sun is 8 degrees below the horizon.
 	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
 	float initBrightness = getInitialLandscapeBrightness();
+	// Setting for landscapes has priority if it enabled
+	if (landscape->getLandscapeNightBrightness()>0 && getFlagLandscapeNightBrightness())
+		initBrightness = landscape->getLandscapeNightBrightness();
 
 	if(sinSunAngleRad < -0.1/1.5 )
 		landscapeBrightness = initBrightness;
@@ -304,6 +307,7 @@ void LandscapeMgr::init()
 	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
 	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
 	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
+	setFlagLandscapeNightBrightness(conf->value("landscape/flag_brightness",false).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
