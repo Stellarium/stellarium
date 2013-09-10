@@ -31,7 +31,7 @@
 #include "SolarSystem.hpp"
 #include "StelProgressController.hpp"
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QClipboard>
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -314,7 +314,7 @@ void MpcImportWindow::discardObjects()
 
 void MpcImportWindow::pasteClipboardURL()
 {
-	ui->lineEditURL->setText(QApplication::clipboard()->text());
+	ui->lineEditURL->setText(QGuiApplication::clipboard()->text());
 }
 
 void MpcImportWindow::selectFile()

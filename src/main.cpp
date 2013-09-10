@@ -27,7 +27,12 @@
 #include "StelUtils.hpp"
 
 #include <QDebug>
-#include <QApplication>
+
+#ifndef Q_OS_ANDROID
+	#include <QApplication>
+#else
+	#include <QGuiApplication>
+#endif
 #include <QMessageBox>
 #include <QStyleFactory>
 #include <QTranslator>
@@ -109,10 +114,17 @@ int main(int argc, char **argv)
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
+	
+	QGuiApplication::setDesktopSettingsAware(false);
+	
+#ifndef Q_OS_ANDROID
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
-
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
+#else
+	QGuiApplication::setDesktopSettingsAware(false);
+	QGuiApplication app(argc, argv);
+#endif
 
 	// QApplication sets current locale, but
 	// we need scanf()/printf() and friends to always work in the C locale,
@@ -290,7 +302,7 @@ int main(int argc, char **argv)
 	QFont tmpFont(baseFont);
 #endif
 	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
-	QApplication::setFont(tmpFont);
+	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
 	try
