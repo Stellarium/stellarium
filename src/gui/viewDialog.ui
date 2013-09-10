@@ -328,7 +328,7 @@
       <item alignment="Qt::AlignTop">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1636,6 +1636,13 @@
               <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
                <property name="text">
                 <string>Use this landscape as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="landscapeBrightnessCheckBox">
+               <property name="text">
+                <string>Use brightness settings for landscapes</string>
                </property>
               </widget>
              </item>
