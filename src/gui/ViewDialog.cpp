@@ -243,6 +243,9 @@ void ViewDialog::createDialogContent()
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
 
+	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeNightBrightness());
+	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeNightBrightness(bool)));
+
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
