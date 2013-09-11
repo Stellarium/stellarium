@@ -12,6 +12,7 @@ StelAction::StelAction(const QString& actionId,
 					   bool global):
 	checkable(false),
 	checked(false),
+	text(text),
 	global(global),
 	target(NULL),
 	property(NULL)

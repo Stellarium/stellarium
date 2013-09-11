@@ -21,6 +21,8 @@ public:
 	void setShortcut(const QString& key);
 	void setAltShortcut(const QString& key);
 	QKeySequence::SequenceMatch matches(const QKeySequence& seq) const;
+	const QKeySequence getShortcut() const {return keySequence;}
+	const QString& getText() const {return text;}
 signals:
 	void toggled(bool);
 	void triggered();
@@ -33,6 +35,7 @@ private slots:
 private:
 	bool checkable;
 	bool checked;
+	QString text;
 	bool global;
 	QKeySequence keySequence;
 	QKeySequence altKeySequence;
