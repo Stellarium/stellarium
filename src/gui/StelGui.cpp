@@ -190,38 +190,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(getGuiAction("actionStop_Script"), SIGNAL(triggered()), this, SLOT(stopScript()));
 	connect(getGuiAction("actionPause_Script"), SIGNAL(triggered()), this, SLOT(pauseScript()));
 	connect(getGuiAction("actionResume_Script"), SIGNAL(triggered()), this, SLOT(resumeScript()));
-	connect(getGuiAction("actionAdd_Solar_Hour"), SIGNAL(triggered()), core, SLOT(addHour()));
-	connect(getGuiAction("actionAdd_Solar_Day"), SIGNAL(triggered()), core, SLOT(addDay()));
-	connect(getGuiAction("actionAdd_Solar_Week"), SIGNAL(triggered()), core, SLOT(addWeek()));
-	connect(getGuiAction("actionSubtract_Solar_Hour"), SIGNAL(triggered()), core, SLOT(subtractHour()));
-	connect(getGuiAction("actionSubtract_Solar_Day"), SIGNAL(triggered()), core, SLOT(subtractDay()));
-	connect(getGuiAction("actionSubtract_Solar_Week"), SIGNAL(triggered()), core, SLOT(subtractWeek()));
-	connect(getGuiAction("actionAdd_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(addSiderealDay()));
-	connect(getGuiAction("actionAdd_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(addSiderealWeek()));
-	connect(getGuiAction("actionAdd_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(addSiderealMonth()));
-	connect(getGuiAction("actionAdd_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(addSiderealYear()));
-	connect(getGuiAction("actionAdd_Sidereal_Century"), SIGNAL(triggered()), core, SLOT(addSiderealCentury()));
-	connect(getGuiAction("actionAdd_Synodic_Month"), SIGNAL(triggered()), core, SLOT(addSynodicMonth()));
-	connect(getGuiAction("actionAdd_Draconic_Month"), SIGNAL(triggered()), core, SLOT(addDraconicMonth()));
-	connect(getGuiAction("actionAdd_Draconic_Year"), SIGNAL(triggered()), core, SLOT(addDraconicYear()));
-	connect(getGuiAction("actionAdd_Anomalistic_Month"), SIGNAL(triggered()), core, SLOT(addAnomalisticMonth()));
-	connect(getGuiAction("actionAdd_Tropical_Month"), SIGNAL(triggered()), core, SLOT(addTropicalMonth()));
-	connect(getGuiAction("actionAdd_Tropical_Year"), SIGNAL(triggered()), core, SLOT(addTropicalYear()));
-	connect(getGuiAction("actionAdd_Tropical_Century"), SIGNAL(triggered()), core, SLOT(addTropicalCentury()));
-	connect(getGuiAction("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(subtractSiderealDay()));
-	connect(getGuiAction("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(subtractSiderealWeek()));
-	connect(getGuiAction("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
-	connect(getGuiAction("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
-	connect(getGuiAction("actionSubtract_Sidereal_Century"), SIGNAL(triggered()), core, SLOT(subtractSiderealCentury()));
-	connect(getGuiAction("actionSubtract_Synodic_Month"), SIGNAL(triggered()), core, SLOT(subtractSynodicMonth()));
-	connect(getGuiAction("actionSubtract_Draconic_Month"), SIGNAL(triggered()), core, SLOT(subtractDraconicMonth()));
-	connect(getGuiAction("actionSubtract_Draconic_Year"), SIGNAL(triggered()), core, SLOT(subtractDraconicYear()));
-	connect(getGuiAction("actionSubtract_Anomalistic_Month"), SIGNAL(triggered()), core, SLOT(subtractAnomalisticMonth()));
-	connect(getGuiAction("actionSubtract_Tropical_Month"), SIGNAL(triggered()), core, SLOT(subtractTropicalMonth()));
-	connect(getGuiAction("actionSubtract_Tropical_Year"), SIGNAL(triggered()), core, SLOT(subtractTropicalYear()));
-	connect(getGuiAction("actionSubtract_Tropical_Century"), SIGNAL(triggered()), core, SLOT(subtractTropicalCentury()));
-	connect(getGuiAction("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
-	connect(getGuiAction("actionGo_Home_Global"), SIGNAL(triggered()), core, SLOT(returnToHome()));
 
 	// connect the actor after setting the nightmode.
 	// StelApp::init() already set flagNightMode for us, don't do it twice!
