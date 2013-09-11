@@ -603,10 +603,8 @@ void StelApp::handleKeys(QKeyEvent* event)
 	// First try to trigger a shortcut.
 	if (event->type() == QEvent::KeyPress)
 	{
-		StelAction* action = getStelActionManager()->pushKey(event->key() + event->modifiers());
-		if (action)
+		if (getStelActionManager()->pushKey(event->key() + event->modifiers()))
 		{
-			action->trigger();
 			event->setAccepted(true);
 			return;
 		}

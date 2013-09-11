@@ -9,14 +9,20 @@ StelAction::StelAction(const QString& actionId,
 					   const QString& groupId,
 					   const QString& text,
 					   const QString& primaryKey,
-					   const QString& altKey,
-					   bool checkable,
-					   bool autoRepeat,
-					   bool global)
-	:checkable(false), checked(false), target(NULL), property(NULL)
+					   bool global):
+	checkable(false),
+	checked(false),
+	global(global),
+	target(NULL),
+	property(NULL)
 {
 	setObjectName(actionId);
 	keySequence = QKeySequence(primaryKey);
+}
+
+void StelAction::setAltKey(const QString& key)
+{
+	altKeySequence = QKeySequence(key);
 }
 
 void StelAction::setChecked(bool value)
@@ -45,6 +51,7 @@ void StelAction::trigger()
 
 void StelAction::connectToObject(QObject* obj, const char* slot)
 {
+	
 	QVariant prop = obj->property(slot);
 	if (prop.isValid())
 	{
@@ -76,6 +83,14 @@ void StelAction::propertyChanged(bool value)
 	emit toggled(checked);
 }
 
+QKeySequence::SequenceMatch StelAction::matches(const QKeySequence& seq) const
+{
+	Q_ASSERT(QKeySequence::PartialMatch > QKeySequence::NoMatch);
+	Q_ASSERT(QKeySequence::ExactMatch > QKeySequence::PartialMatch);
+	return qMax((!keySequence.isEmpty() ? keySequence.matches(seq) : QKeySequence::NoMatch),
+				(!altKeySequence.isEmpty() ? altKeySequence.matches(seq) : QKeySequence::NoMatch));
+}
+
 StelActionMgr::StelActionMgr()
 {
 }
@@ -86,9 +101,9 @@ StelActionMgr::~StelActionMgr()
 }
 
 StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
-					  const QString& shortcut, QObject* target, const char* slot)
+					  const QString& shortcut, QObject* target, const char* slot, bool global)
 {
-	StelAction* action = new StelAction(id, groupId, text, shortcut);
+	StelAction* action = new StelAction(id, groupId, text, shortcut, global);
 	action->connectToObject(target, slot);
 	action->setParent(this);
 	return action;
@@ -99,7 +114,7 @@ StelAction* StelActionMgr::findAction(const QString& id)
 	return findChild<StelAction*>(id);
 }
 
-StelAction* StelActionMgr::pushKey(int key)
+bool StelActionMgr::pushKey(int key, bool global)
 {
 	keySequence << key;
 	QKeySequence sequence(keySequence.size() > 0 ? keySequence[0] : 0,
@@ -109,16 +124,17 @@ StelAction* StelActionMgr::pushKey(int key)
 	bool hasPartialMatch = false;
 	foreach(StelAction* action, findChildren<StelAction*>())
 	{
-		if (action->keySequence.isEmpty()) continue;
-		QKeySequence::SequenceMatch match = action->keySequence.matches(sequence);
+		if (global && !action->global) continue;
+		QKeySequence::SequenceMatch match = action->matches(sequence);
 		if (match == QKeySequence::ExactMatch)
 		{
 			keySequence.clear();
-			return action;
+			action->trigger();
+			return true;
 		}
 		hasPartialMatch = hasPartialMatch || match == QKeySequence::PartialMatch;
 	}
 	if (!hasPartialMatch)
 		keySequence.clear();
-	return NULL;
+	return false;
 }

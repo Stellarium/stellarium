@@ -14,13 +14,12 @@ public:
 			   const QString& groupId,
 			   const QString& text,
 			   const QString& primaryKey,
-			   const QString& altKey = QString(),
-			   bool checkable = true,
-			   bool autoRepeat = false,
 			   bool global = false);
 	void connectToObject(QObject* obj, const char* slot);
 	bool isCheckable() const {return checkable;}
 	bool isChecked() const {return checked;}
+	void setAltKey(const QString& key);
+	QKeySequence::SequenceMatch matches(const QKeySequence& seq) const;
 signals:
 	void toggled(bool);
 	void triggered();
@@ -33,7 +32,9 @@ private slots:
 private:
 	bool checkable;
 	bool checked;
+	bool global;
 	QKeySequence keySequence;
+	QKeySequence altKeySequence;
 	QObject* target;
 	const char* property;
 };
@@ -53,9 +54,10 @@ public:
 	//! @param slot Either a slot name, in that case the action is not checkable,
 	//! either a property name, in that case the action is checkable.
 	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
-						  const QString& shortcut, QObject* target, const char* slot);
+						  const QString& shortcut, QObject* target, const char* slot,
+						  bool global=false);
 	StelAction* findAction(const QString& id);
-	StelAction* pushKey(int key);
+	bool pushKey(int key, bool global=false);
 private:
 	QList<int> keySequence;
 };

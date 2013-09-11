@@ -37,6 +37,7 @@
 #include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelShortcutMgr.hpp"
+#include "StelActionMgr.hpp"
 
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
@@ -231,11 +232,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(helpDialog, SIGNAL(visibleChanged(bool)),
 	        tempAction, SLOT(setChecked(bool)));
 
-	tempAction = getGuiAction("actionShow_DateTime_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-	        dateTimeDialog, SLOT(setVisible(bool)));
-	connect(dateTimeDialog, SIGNAL(visibleChanged(bool)),
-	        tempAction, SLOT(setChecked(bool)));
+	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	actionsMgr->addAction("actionShow_DateTime_Window_Global", "Windows", N_("Date/time window"), "F5", dateTimeDialog, "visible", true);
+	actionsMgr->addAction("actionShow_Search_Window_Global", "Windows", N_("Search window"), "F3", dateTimeDialog, "visible", true)->setAltKey("Ctrl+F");
 
 	tempAction = getGuiAction("actionShow_Search_Window_Global");
 	connect(tempAction, SIGNAL(toggled(bool)),
@@ -288,7 +287,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/1-on-time.png");
 	pxmapOff = QPixmap(":/graphicGui/1-off-time.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiAction("actionShow_DateTime_Window_Global"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_DateTime_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/5-on-labels.png");

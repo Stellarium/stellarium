@@ -46,6 +46,7 @@
 #include "StelSkyImageTile.hpp"
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelActionMgr.hpp"
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -119,7 +120,7 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
-	addAction("actionShow_Nebulas", "Display Options", N_("Deep-sky objects"), "D", "flagHintDisplayed");
+	addAction("actionShow_Nebulas", "Display Options", N_("Deep-sky objects"), "D", "flagHintDisplayed")->setAltKey("N");
 }
 
 struct DrawNebulaFuncObject
