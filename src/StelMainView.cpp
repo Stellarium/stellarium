@@ -277,8 +277,10 @@ void StelMainView::init(QSettings* conf)
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
 	stelApp->init(conf);
-	stelApp->getStelActionManager()->addAction("actionSave_Screenshot_Global", "Miscellaneous",
-											   N_("Save screenshot"), "Ctrl+S", this, "saveScreenShot()");
+	StelActionMgr *actionMgr = stelApp->getStelActionManager();
+	actionMgr->addAction("actionSave_Screenshot_Global", "Miscellaneous", N_("Save screenshot"), "Ctrl+S", this, "saveScreenShot()");
+	actionMgr->addAction("actionSet_Full_Screen_Global", "Display Options", N_("Full-screen mode"), "F11", this, "fullScreen");
+	
 
 	StelPainter::initGLShaders();
 

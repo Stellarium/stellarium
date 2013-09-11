@@ -353,7 +353,7 @@ void StelApp::init(QSettings* conf)
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-	shortcutMgr = new StelShortcutMgr();
+	shortcutMgr = new StelShortcutMgr(); // XXX: to be removed.
 	actionMgr = new StelActionMgr();
 
 	localeMgr->init();
@@ -430,6 +430,9 @@ void StelApp::init(QSettings* conf)
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
+
+	// Init actions.
+	actionMgr->addAction("actionShow_Night_Mode", "Display Options", "Night mode", "", this, "nightMode");
 
 	initialized = true;
 }

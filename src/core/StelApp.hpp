@@ -59,6 +59,7 @@ class StelActionMgr;
 class StelApp : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight)
 
 public:
 	friend class StelAppGraphicsWidget;
