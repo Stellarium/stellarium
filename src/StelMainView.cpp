@@ -421,6 +421,12 @@ void StelMainView::wheelEvent(QWheelEvent* event)
 void StelMainView::keyPressEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
+	// Try to trigger a gobal shortcut.
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	if (actionMgr->pushKey(event->key() + event->modifiers(), true)) {
+		event->setAccepted(true);
+		return;
+	}
 	QDeclarativeView::keyPressEvent(event);
 }
 

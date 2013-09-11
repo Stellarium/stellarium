@@ -70,7 +70,6 @@ StelDialog::~StelDialog()
 void StelDialog::close()
 {
 	setVisible(false);
-	StelMainView::getInstance().focusSky();
 }
 
 bool StelDialog::visible() const
@@ -133,6 +132,6 @@ void StelDialog::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().focusSky();
 	}
 }
