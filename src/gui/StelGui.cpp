@@ -168,90 +168,37 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
+	// XXX: this should be done only after we created all the StelActions.
 	StelApp::getInstance().getStelShortcutManager()->loadShortcuts();
 
-#ifdef ENABLE_SCRIPT_CONSOLE
-	StelApp::getInstance().getStelShortcutManager()->
-			addGuiAction("actionShow_ScriptConsole_Window_Global", true, N_("Script console window"), "F12", "", N_("Windows"), true, false, true);
-#endif
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
-	connect(getGuiAction("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
+	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 
-	StelSkyLayerMgr* imgr = GETSTELMODULE(StelSkyLayerMgr);
-	connect(getGuiAction("actionShow_DSS"), SIGNAL(toggled(bool)), imgr, SLOT(setFlagShow(bool)));
-	getGuiAction("actionShow_DSS")->setChecked(imgr->getFlagShow());
-
-
-	StelCore* core = StelApp::getInstance().getCore();
-	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
-	connect(getGuiAction("actionIncrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(increaseScriptSpeed()));
-	connect(getGuiAction("actionDecrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(decreaseScriptSpeed()));
-	connect(getGuiAction("actionSet_Real_Script_Speed"), SIGNAL(triggered()), this, SLOT(setRealScriptSpeed()));
-	connect(getGuiAction("actionStop_Script"), SIGNAL(triggered()), this, SLOT(stopScript()));
-	connect(getGuiAction("actionPause_Script"), SIGNAL(triggered()), this, SLOT(pauseScript()));
-	connect(getGuiAction("actionResume_Script"), SIGNAL(triggered()), this, SLOT(resumeScript()));
-
-	// connect the actor after setting the nightmode.
-	// StelApp::init() already set flagNightMode for us, don't do it twice!
-	getGuiAction("actionShow_Night_Mode")->setChecked(StelApp::getInstance().getVisionModeNight());
-	connect(getGuiAction("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
-
-	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFullScreen(bool)));
-	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainView::getInstance().isFullScreen());
-
-	QAction* tempAction = getGuiAction("actionShow_Location_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-	        locationDialog, SLOT(setVisible(bool)));
-	connect(locationDialog, SIGNAL(visibleChanged(bool)),
-	        tempAction, SLOT(setChecked(bool)));
+	// XXX: this should probably go into the script manager.
+	actionsMgr->addAction("actionQuit_Global", "Miscellaneous", N_("Quit"), "Ctrl+Q", this, "quit()");
+	actionsMgr->addAction("actionIncrease_Script_Speed", "Date and Time", N_("Speed up the script execution rate"), "", this, "increaseScriptSpeed()");
+	actionsMgr->addAction("actionDecrease_Script_Speed", "Date and Time", N_("Slow down the script execution rate"), "", this, "decreaseScriptSpeed()");
+	actionsMgr->addAction("actionSet_Real_Script_Speed", "Date and Time", N_("Set the normal script execution rate"), "", this, "setRealScriptSpeed()");
+	actionsMgr->addAction("actionStop_Script", "Date and Time", N_("Stop script execution"), "Ctrl+D, S", this, "stopScript()");
+	actionsMgr->addAction("actionPause_Script", "Date and Time", N_("Pause script execution"), "Ctrl+D, P", this, "pauseScript()");
+	actionsMgr->addAction("actionResume_Script", "Date and Time", N_("Resume script execution"), "Ctrl+D, R", this, "resumeScript()");
 
 #ifdef ENABLE_SCRIPT_CONSOLE
-	tempAction = getGuiAction("actionShow_ScriptConsole_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-	        scriptConsole, SLOT(setVisible(bool)));
-	connect(scriptConsole, SIGNAL(visibleChanged(bool)),
-					tempAction, SLOT(setChecked(bool)));
+	actionsMgr->addAction("actionShow_ScriptConsole_Window_Global", "Windows", N_("Script console window"), "F12", scriptConsole, "visible", true);
 #endif
 
-	tempAction = getGuiAction("actionShow_Configuration_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-	        configurationDialog, SLOT(setVisible(bool)));
-	connect(configurationDialog, SIGNAL(visibleChanged(bool)),
-	        tempAction, SLOT(setChecked(bool)));
-
-	tempAction = getGuiAction("actionShow_SkyView_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-	        viewDialog, SLOT(setVisible(bool)));
-	connect(viewDialog, SIGNAL(visibleChanged(bool)),
-	        tempAction, SLOT(setChecked(bool)));
-
-	tempAction = getGuiAction("actionShow_Help_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-	        helpDialog, SLOT(setVisible(bool)));
-	connect(helpDialog, SIGNAL(visibleChanged(bool)),
-	        tempAction, SLOT(setChecked(bool)));
-
-	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	actionsMgr->addAction("actionShow_Help_Window_Global", "Windows", N_("Help window"), "F1", helpDialog, "visible", true);
+	actionsMgr->addAction("actionShow_Configuration_Window_Global", "Windows", N_("Configuration window"), "F2", configurationDialog, "visible", true);
+	actionsMgr->addAction("actionShow_Search_Window_Global", "Windows", N_("Search window"), "F3", searchDialog, "visible", true)->setAltKey("Ctrl+F");
+	actionsMgr->addAction("actionShow_SkyView_Window_Global", "Windows", N_("Sky and viewing options window"), "F4", viewDialog, "visible", true);
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", "Windows", N_("Date/time window"), "F5", dateTimeDialog, "visible", true);
-	actionsMgr->addAction("actionShow_Search_Window_Global", "Windows", N_("Search window"), "F3", dateTimeDialog, "visible", true)->setAltKey("Ctrl+F");
-
-	tempAction = getGuiAction("actionShow_Search_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-	        searchDialog, SLOT(setVisible(bool)));
-	connect(searchDialog, SIGNAL(visibleChanged(bool)),
-	        tempAction, SLOT(setChecked(bool)));
-
-	tempAction = getGuiAction("actionShow_Shortcuts_Window_Global");
-	connect(tempAction, SIGNAL(toggled(bool)),
-		shortcutsDialog, SLOT(setVisible(bool)));
-	connect(shortcutsDialog, SIGNAL(visibleChanged(bool)),
-		tempAction, SLOT(setChecked(bool)));
+	actionsMgr->addAction("actionShow_Location_Window_Global", "Windows", N_("Location window"), "F6", locationDialog, "visible", true);
+	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", "Windows", N_("Shortcuts window"), "F7", shortcutsDialog, "visible", true);
 
 	connect(getGuiAction("actionSave_Copy_Object_Information_Global"), SIGNAL(triggered()), this, SLOT(copySelectedObjectInfo()));
 
-	getGuiAction("actionToggle_GuiHidden_Global")->setChecked(true);
-	connect(getGuiAction("actionToggle_GuiHidden_Global"), SIGNAL(toggled(bool)), this, SLOT(setGuiVisible(bool)));
+	actionsMgr->addAction("actionToggle_GuiHidden_Global", "Miscellaneous", N_("Toggle visibility of GUI"), "Ctrl+T", this, "visible", true);
 
 	connect(getGuiAction("actionHorizontal_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipHorz(bool)));
 	getGuiAction("actionHorizontal_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipHorz());
@@ -365,7 +312,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	pxmapOn = QPixmap(":/graphicGui/btEquatorialMount-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btEquatorialMount-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSwitch_Equatorial_Mount");
-	// b->setChecked(getGuiAction("actionSwitch_Equatorial_Mount")->isChecked());
 	skyGui->buttonBar->addButton(b, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btGotoSelectedObject-on.png");
@@ -375,12 +321,12 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btNightView-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionShow_Night_Mode"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Night_Mode");
 	skyGui->buttonBar->addButton(b, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btFullScreen-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, getGuiAction("actionSet_Full_Screen_Global"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
 	skyGui->buttonBar->addButton(b, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeRewind-on.png");
@@ -549,16 +495,18 @@ void StelGui::update()
 
 	bool flag;
 
+	// XXX: this should probably be removed, we can use property NOTIFY instead.
 	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
-	if (getGuiAction("actionShow_DSS")->isChecked() != flag)
-		getGuiAction("actionShow_DSS")->setChecked(flag);
+	if (getAction("actionShow_DSS")->isChecked() != flag)
+		getAction("actionShow_DSS")->setChecked(flag);
 
 	flag = StelApp::getInstance().getVisionModeNight();
-	if (getGuiAction("actionShow_Night_Mode")->isChecked() != flag)
-		getGuiAction("actionShow_Night_Mode")->setChecked(flag);
+	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
+		getAction("actionShow_Night_Mode")->setChecked(flag);
+
 	flag = StelMainView::getInstance().isFullScreen();
-	if (getGuiAction("actionSet_Full_Screen_Global")->isChecked() != flag)
-		getGuiAction("actionSet_Full_Screen_Global")->setChecked(flag);
+	if (getAction("actionSet_Full_Screen_Global")->isChecked() != flag)
+		getAction("actionSet_Full_Screen_Global")->setChecked(flag);
 
 	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
 
@@ -790,6 +738,11 @@ QAction *StelGui::getGuiAction(const QString &actionName)
 {
 	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
 	return shortcutMgr->getGuiAction(actionName);
+}
+
+StelAction* StelGui::getAction(const QString& actionName)
+{
+	return StelApp::getInstance().getStelActionManager()->findAction(actionName);
 }
 
 /* ****************************************************************************************************************** */
