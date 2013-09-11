@@ -194,6 +194,8 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", "MovementAndSelection", N_("Set home planet to selected planet"), "Ctrl+G", this, "moveObserverToSelected()");
 	actionsMgr->addAction("actionGo_Home_Global", "MovementAndSelection", N_("Go to home"), "Ctrl+H", this, "returnToHome()");
+	actionsMgr->addAction("actionHorizontal_Flip", "Display Options", N_("Flip scene horizontally"), "Ctrl+Shift+H", this, "flipHorz", true);
+	actionsMgr->addAction("actionVertical_Flip", "Display Options", N_("Flip scene vertically"), "Ctrl+Shift+V", this, "flipVert", true);
 	
 }
 

@@ -20,7 +20,12 @@ StelAction::StelAction(const QString& actionId,
 	keySequence = QKeySequence(primaryKey);
 }
 
-void StelAction::setAltKey(const QString& key)
+void StelAction::setShortcut(const QString& key)
+{
+	keySequence = QKeySequence(key);
+}
+
+void StelAction::setAltShortcut(const QString& key)
 {
 	altKeySequence = QKeySequence(key);
 }

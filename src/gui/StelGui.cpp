@@ -190,29 +190,20 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	actionsMgr->addAction("actionShow_Help_Window_Global", "Windows", N_("Help window"), "F1", helpDialog, "visible", true);
 	actionsMgr->addAction("actionShow_Configuration_Window_Global", "Windows", N_("Configuration window"), "F2", configurationDialog, "visible", true);
-	actionsMgr->addAction("actionShow_Search_Window_Global", "Windows", N_("Search window"), "F3", searchDialog, "visible", true)->setAltKey("Ctrl+F");
+	actionsMgr->addAction("actionShow_Search_Window_Global", "Windows", N_("Search window"), "F3", searchDialog, "visible", true)->setAltShortcut("Ctrl+F");
 	actionsMgr->addAction("actionShow_SkyView_Window_Global", "Windows", N_("Sky and viewing options window"), "F4", viewDialog, "visible", true);
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", "Windows", N_("Date/time window"), "F5", dateTimeDialog, "visible", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", "Windows", N_("Location window"), "F6", locationDialog, "visible", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", "Windows", N_("Shortcuts window"), "F7", shortcutsDialog, "visible", true);
-
-	connect(getGuiAction("actionSave_Copy_Object_Information_Global"), SIGNAL(triggered()), this, SLOT(copySelectedObjectInfo()));
-
+	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", "Miscellaneous", N_("Copy selected object information to clipboard"), "Ctrl+C", this, "copySelectedObjectInfo()", true);
 	actionsMgr->addAction("actionToggle_GuiHidden_Global", "Miscellaneous", N_("Toggle visibility of GUI"), "Ctrl+T", this, "visible", true);
-
-	connect(getGuiAction("actionHorizontal_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipHorz(bool)));
-	getGuiAction("actionHorizontal_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipHorz());
-	connect(getGuiAction("actionVertical_Flip"), SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlipVert(bool)));
-	getGuiAction("actionVertical_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipVert());
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setAutoHideHorizontalButtonBar(conf->value("gui/auto_hide_horizontal_toolbar", true).toBool());
 	setAutoHideVerticalButtonBar(conf->value("gui/auto_hide_vertical_toolbar", true).toBool());
-	connect(getGuiAction("actionAutoHideHorizontalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideHorizontalButtonBar(bool)));
-	getGuiAction("actionAutoHideHorizontalButtonBar")->setChecked(getAutoHideHorizontalButtonBar());
-	connect(getGuiAction("actionAutoHideVerticalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideVerticalButtonBar(bool)));
-	getGuiAction("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
+	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", "Miscellaneous", N_("Auto hide horizontal button bar"), "", this, "autoHideHorizontalButtonBar");
+	actionsMgr->addAction("actionAutoHideVerticalButtonBar", "Miscellaneous", N_("Auto hide vertical button bar"), "", this, "autoHideVerticalButtonBar");
 
 #ifndef DISABLE_SCRIPTING
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
@@ -229,7 +220,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	QPixmap pxmapGlow(":/graphicGui/glow.png");
 	QPixmap pxmapOn(":/graphicGui/2-on-location.png");
 	QPixmap pxmapOff(":/graphicGui/2-off-location.png");
-	StelButton*  b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiAction("actionShow_Location_Window_Global"));
+	StelButton*  b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Location_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/1-on-time.png");
@@ -239,17 +230,17 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/5-on-labels.png");
 	pxmapOff = QPixmap(":/graphicGui/5-off-labels.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiAction("actionShow_SkyView_Window_Global"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_SkyView_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/6-on-search.png");
 	pxmapOff = QPixmap(":/graphicGui/6-off-search.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiAction("actionShow_Search_Window_Global"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Search_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/8-off-settings.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, getGuiAction("actionShow_Configuration_Window_Global"));
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Configuration_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/9-on-help.png");
@@ -353,7 +344,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	skyGui->buttonBar->setGroupMargin("070-timeGroup", 32, 0);
 
 	pxmapOn = QPixmap(":/graphicGui/btQuit.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, getGuiAction("actionQuit_Global"));
+	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
 	skyGui->buttonBar->addButton(b, "080-quitGroup");
 
 	// add the flip buttons if requested in the config
@@ -531,21 +522,21 @@ void StelGui::setScriptKeys(bool b)
 {
 	if (b)
 	{
-		getGuiAction("actionDecrease_Time_Speed")->setShortcut(QKeySequence());
-		getGuiAction("actionIncrease_Time_Speed")->setShortcut(QKeySequence());
-		getGuiAction("actionSet_Real_Time_Speed")->setShortcut(QKeySequence());
-		getGuiAction("actionDecrease_Script_Speed")->setShortcut(QKeySequence("J"));
-		getGuiAction("actionIncrease_Script_Speed")->setShortcut(QKeySequence("L"));
-		getGuiAction("actionSet_Real_Script_Speed")->setShortcut(QKeySequence("K"));
+		getAction("actionDecrease_Time_Speed")->setShortcut("");
+		getAction("actionIncrease_Time_Speed")->setShortcut("");
+		getAction("actionSet_Real_Time_Speed")->setShortcut("");
+		getAction("actionDecrease_Script_Speed")->setShortcut("J");
+		getAction("actionIncrease_Script_Speed")->setShortcut("L");
+		getAction("actionSet_Real_Script_Speed")->setShortcut("K");
 	}
 	else
 	{
-		getGuiAction("actionDecrease_Script_Speed")->setShortcut(QKeySequence());
-		getGuiAction("actionIncrease_Script_Speed")->setShortcut(QKeySequence());
-		getGuiAction("actionSet_Real_Script_Speed")->setShortcut(QKeySequence());
-		getGuiAction("actionDecrease_Time_Speed")->setShortcut(QKeySequence("J"));
-		getGuiAction("actionIncrease_Time_Speed")->setShortcut(QKeySequence("L"));
-		getGuiAction("actionSet_Real_Time_Speed")->setShortcut(QKeySequence("K"));
+		getAction("actionDecrease_Script_Speed")->setShortcut("");
+		getAction("actionIncrease_Script_Speed")->setShortcut("");
+		getAction("actionSet_Real_Script_Speed")->setShortcut("");
+		getAction("actionDecrease_Time_Speed")->setShortcut("J");
+		getAction("actionIncrease_Time_Speed")->setShortcut("L");
+		getAction("actionSet_Real_Time_Speed")->setShortcut("K");
 	}
 }
 
@@ -590,7 +581,7 @@ void StelGui::setFlagShowFlipButtons(bool b)
 																QPixmap(":/graphicGui/btFlipVertical-on.png"),
 																QPixmap(":/graphicGui/btFlipVertical-off.png"),
 																pxmapGlow32x32,
-																getGuiAction("actionVertical_Flip"));
+																"actionVertical_Flip");
 		}
 		if (flipHoriz==NULL) {
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
@@ -598,7 +589,7 @@ void StelGui::setFlagShowFlipButtons(bool b)
 																 QPixmap(":/graphicGui/btFlipHorizontal-on.png"),
 																 QPixmap(":/graphicGui/btFlipHorizontal-off.png"),
 																 pxmapGlow32x32,
-																 getGuiAction("actionHorizontal_Flip"));
+																 "actionHorizontal_Flip");
 		}
 		getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit_Global");
 		getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
@@ -620,7 +611,7 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 		if (btShowNebulaeBackground==NULL) {
 			// Create the nebulae background button
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			btShowNebulaeBackground = new StelButton(NULL, QPixmap(":/graphicGui/btDSS-on.png"), QPixmap(":/graphicGui/btDSS-off.png"), pxmapGlow32x32, getGuiAction("actionShow_DSS"));
+			btShowNebulaeBackground = new StelButton(NULL, QPixmap(":/graphicGui/btDSS-on.png"), QPixmap(":/graphicGui/btDSS-off.png"), pxmapGlow32x32, "actionShow_DSS");
 		}
 		getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
 	} else {
@@ -736,6 +727,7 @@ void StelGui::setGuiVisible(bool b)
 
 QAction *StelGui::getGuiAction(const QString &actionName)
 {
+	qWarning() << "getGuiAction is deprecated";
 	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
 	return shortcutMgr->getGuiAction(actionName);
 }
