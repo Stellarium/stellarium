@@ -63,6 +63,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	pixHover(apixHover),
 	checked(ButtonStateOff),
 	action(aaction),
+	stelAction(NULL),
 	noBckground(noBackground),
 	isTristate_(false),
 	opacity(1.),
@@ -117,6 +118,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	pixHover(apixHover),
 	checked(ButtonStateOff),
 	action(NULL),
+	stelAction(NULL),
 	noBckground(noBackground),
 	isTristate_(false),
 	opacity(1.),
@@ -439,13 +441,13 @@ void LeftStelBar::buttonHoverChanged(bool b)
 	Q_ASSERT(button);
 	if (b==true)
 	{
-		// XXX: use stelAction.
-		if (button->action)
+		if (button->stelAction)
 		{
-			QString tip(button->action->toolTip());
-			QString shortcut(button->action->shortcut().toString());
+			QString tip(button->stelAction->getText());
+			QString shortcut(button->stelAction->getShortcut().toString(QKeySequence::NativeText));
 			if (!shortcut.isEmpty())
 			{
+				//XXX: this should be unnecessary since we used NativeText.
 				if (shortcut == "Space")
 					shortcut = q_("Space");
 				tip += "  [" + shortcut + "]";
@@ -862,13 +864,14 @@ void BottomStelBar::buttonHoverChanged(bool b)
 	Q_ASSERT(button);
 	if (b==true)
 	{
-		QAction* action = button->action;
+		StelAction* action = button->stelAction;
 		if (action)
 		{
-			QString tip(action->toolTip());
-			QString shortcut(action->shortcut().toString(QKeySequence::NativeText));
+			QString tip(action->getText());
+			QString shortcut(action->getShortcut().toString(QKeySequence::NativeText));
 			if (!shortcut.isEmpty())
 			{
+				//XXX: this should be unnecessary since we used NativeText.
 				if (shortcut == "Space")
 					shortcut = q_("Space");
 				tip += "  [" + shortcut + "]";
