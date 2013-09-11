@@ -142,6 +142,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
 	
 	stelAction = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
+	Q_ASSERT(stelAction);
 	if (stelAction!=NULL)
 	{
 		if (stelAction->isCheckable())

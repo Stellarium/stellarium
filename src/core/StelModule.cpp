@@ -36,8 +36,9 @@ bool StelModule::drawPartial(StelCore* core)
 }
 
 class StelAction* StelModule::addAction(const QString& id, const QString& groupId, const QString& text,
-										const QString& shortcut, const char* slot)
+										const QString& shortcut, QObject* target, const char* slot)
 {
 	StelActionMgr* mgr = StelApp::getInstance().getStelActionManager();
-	return mgr->addAction(id, groupId, text, shortcut, this, slot);
+	return mgr->addAction(id, groupId, text, shortcut, target, slot);
 }
+

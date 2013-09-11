@@ -47,7 +47,8 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-public:	
+	Q_PROPERTY(bool quasarsVisible READ getFlagShowQuasars WRITE setFlagShowQuasars)
+public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
