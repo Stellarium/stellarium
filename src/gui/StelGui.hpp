@@ -51,6 +51,9 @@ class StelGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
 	Q_PROPERTY(bool visible READ getVisible WRITE setVisible)
+	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar)
+	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar)
+
 public:
 	friend class ViewDialog;
 	
@@ -111,7 +114,6 @@ public:
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 
 	virtual QAction* getGuiAction(const QString& actionName); // XXX: deprecated.
-	StelAction* getAction(const QString& actionName);
 
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
@@ -165,6 +167,9 @@ private slots:
 	void copySelectedObjectInfo(void);
 
 private:
+	//! convenience method to find an action in the StelActionMgr.
+	StelAction* getAction(const QString& actionName);
+
 	QGraphicsWidget* topLevelGraphicsWidget;
 
 	class SkyGui* skyGui;

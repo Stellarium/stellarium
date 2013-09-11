@@ -18,7 +18,8 @@ public:
 	void connectToObject(QObject* obj, const char* slot);
 	bool isCheckable() const {return checkable;}
 	bool isChecked() const {return checked;}
-	void setAltKey(const QString& key);
+	void setShortcut(const QString& key);
+	void setAltShortcut(const QString& key);
 	QKeySequence::SequenceMatch matches(const QKeySequence& seq) const;
 signals:
 	void toggled(bool);
