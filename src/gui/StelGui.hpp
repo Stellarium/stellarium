@@ -50,6 +50,7 @@ class ScriptConsole;
 class StelGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
+	Q_PROPERTY(bool visible READ getVisible WRITE setVisible)
 public:
 	friend class ViewDialog;
 	
@@ -109,7 +110,8 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 
-	virtual QAction* getGuiAction(const QString& actionName);
+	virtual QAction* getGuiAction(const QString& actionName); // XXX: deprecated.
+	StelAction* getAction(const QString& actionName);
 
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
