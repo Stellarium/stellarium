@@ -38,6 +38,7 @@
 #include "StelLocationMgr.hpp"
 #include "StelActionMgr.hpp"
 
+#include "StelProgressController.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -320,7 +321,7 @@ void StelApp::initScriptMgr(QSettings *conf)
 				  Q_ARG(QString, startupScript));
 }
 #else
-void StelApp::initScriptMgr(QSettings *conf) {}
+void StelApp::initScriptMgr(QSettings *conf) {Q_UNUSED(conf);}
 #endif
 
 void StelApp::init(QSettings* conf)
@@ -465,6 +466,23 @@ void StelApp::deinit()
 	getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
 }
+
+
+StelProgressController* StelApp::addProgressBar()
+{
+	StelProgressController* p = new StelProgressController();
+	progressControllers.append(p);
+	emit(progressBarAdded(p));
+	return p;
+}
+
+void StelApp::removeProgressBar(StelProgressController* p)
+{
+	progressControllers.removeOne(p);
+	delete p;
+	emit(progressBarRemoved(p));
+}
+
 
 void StelApp::update(double deltaTime)
 {

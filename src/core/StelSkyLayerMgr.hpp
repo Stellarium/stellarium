@@ -28,7 +28,6 @@
 
 class StelCore;
 class StelSkyImageTile;
-class QProgressBar;
 
 //! Manage the sky background images, including DSS and deep sky objects images
 class StelSkyLayerMgr : public StelModule
@@ -181,7 +180,7 @@ private:
 		SkyLayerElem(StelSkyLayerP t, bool show=true);
 		~SkyLayerElem();
 		StelSkyLayerP layer;
-		QProgressBar* progressBar;
+		class StelProgressController* progressBar;
 		bool show;
 	};
 

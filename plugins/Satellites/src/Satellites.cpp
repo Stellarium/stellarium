@@ -38,12 +38,12 @@
 #include "SatellitesDialog.hpp"
 #include "LabelMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
 #include <QAction>
-#include <QProgressBar>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -1152,11 +1152,10 @@ void Satellites::updateFromOnlineSources()
 	numberDownloadsComplete = 0;
 
 	if (progressBar==NULL)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(updateUrls.size());
-	progressBar->setVisible(true);
+	progressBar->setRange(0, updateUrls.size());
 	progressBar->setFormat("TLE download %v/%m");
 
 	foreach (QString url, updateUrls)
@@ -1239,7 +1238,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	
 	if (progressBar)
 	{
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = 0;
 	}
 	
