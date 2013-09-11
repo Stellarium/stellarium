@@ -138,8 +138,16 @@ public:
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
 
 protected:
+
+	//! convenience methods to add an action to the StelActionMgr object.
 	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
-								const QString& shortcut, const char* property);
+								const QString& shortcut, QObject* target, const char* slot);
+
+	//! convenience methods to add an action to the StelActionMgr object.
+	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+								const QString& shortcut, const char* slot) {
+		return addAction(id, groupId, text, shortcut, this, slot);
+	}
 };
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)

@@ -153,7 +153,8 @@ void Quasars::init()
 		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		addAction("actionShow_Quasars", "Quasars", N_("Show quasars"), "Ctrl+Alt+Q", "quasarsVisible");
+		addAction("actionShow_Quasars_ConfigDialog", "Quasars", N_("Quasars configuration window"), "", configDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
@@ -161,10 +162,6 @@ void Quasars::init()
 
 		setFlagShowQuasars(getEnableAtStartup());
 		setFlagShowQuasarsButton(flagShowQuasarsButton);
-
-		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -558,11 +555,7 @@ QuasarP Quasars::getByID(const QString& id)
 bool Quasars::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Quasars_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
@@ -736,8 +729,7 @@ void Quasars::setFlagShowQuasarsButton(bool b)
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the quasars button
-			gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {
