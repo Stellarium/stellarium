@@ -48,6 +48,7 @@ typedef QSharedPointer<Pulsar> PulsarP;
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool pulsarsVisible READ getFlagShowPulsars WRITE setFlagShowPulsars)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status

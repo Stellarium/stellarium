@@ -45,6 +45,7 @@
 #include "StelShortcutGroup.hpp"
 #include "StelShortcutMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelActionMgr.hpp"
 
 HelpDialog::HelpDialog() : keyMgr(0)
 {
@@ -121,14 +122,9 @@ void HelpDialog::createDialogContent()
 
 void HelpDialog::showShortcutsWindow()
 {
-	QAction* action =
-	        keyMgr->getGuiAction("actionShow_Shortcuts_Window_Global");
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
 	if (action)
-	{
-		if (action->isChecked())
-			action->setChecked(false);
 		action->setChecked(true);
-	}
 }
 
 void HelpDialog::updateLog(int)

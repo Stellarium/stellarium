@@ -34,6 +34,7 @@
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
 #include "ExoplanetsDialog.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -156,7 +157,8 @@ void Exoplanets::init()
 		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		addAction("actionShow_Exoplanets", "PluginExoplanets", N_("Show exoplanets"), "Ctrl+Alt+E", "showExoplanets");
+		addAction("actionShow_Exoplanets_ConfigDialog", "PluginExoplanets", N_("Exoplanets configuration window"),"", exoplanetsConfigDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Exoplanets/btExoplanets-on.png");
@@ -164,10 +166,6 @@ void Exoplanets::init()
 
 		setFlagShowExoplanets(getEnableAtStartup());
 		setFlagShowExoplanetsButton(flagShowExoplanetsButton);
-
-		connect(gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
-		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -560,11 +558,7 @@ ExoplanetP Exoplanets::getByID(const QString& id)
 bool Exoplanets::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Exoplanets_ConfigDialog")->setChecked(true);
-	}
-
+		exoplanetsConfigDialog->setVisible(true);
 	return true;
 }
 
@@ -741,8 +735,7 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the exoplanets button
-			gui->getGuiAction("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Exoplanets"));
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Exoplanets");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {

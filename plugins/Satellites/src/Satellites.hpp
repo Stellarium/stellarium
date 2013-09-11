@@ -124,6 +124,12 @@ file.
 class Satellites : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool hintsVisible
+	           READ getFlagHints
+	           WRITE setFlagHints)
+	Q_PROPERTY(bool labelsVisible
+	           READ getFlagLabels
+	           WRITE setFlagLabels)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd

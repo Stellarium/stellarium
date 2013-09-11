@@ -30,6 +30,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelActionMgr.hpp"
 
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
@@ -326,13 +327,9 @@ void ConfigurationDialog::setStartupTimeMode()
 
 void ConfigurationDialog::showShortcutsWindow()
 {
-	QAction* action = gui->getGuiAction("actionShow_Shortcuts_Window_Global");
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
 	if (action)
-	{
-		if (action->isChecked())
-			action->setChecked(false);
 		action->setChecked(true);
-	}
 }
 
 void ConfigurationDialog::setDiskViewport(bool b)
