@@ -161,6 +161,40 @@ void StelCore::init()
 	actionsMgr->addAction("actionSet_Real_Time_Speed", "DateAndTime", N_("Set normal time rate"), "K", this, "toggleRealTimeSpeed()");
 	actionsMgr->addAction("actionSet_Time_Rate_Zero", "DateAndTime", N_("Set time rate to zero"), "7", this, "setZeroTimeSpeed()");
 	actionsMgr->addAction("actionReturn_To_Current_Time", "DateAndTime", N_("Set time to now"), "8", this, "setTimeNow()");
+	actionsMgr->addAction("actionAdd_Solar_Hour", "DateAndTime", N_("Add 1 solar hour"), "Ctrl+=", this, "addHour()");
+	actionsMgr->addAction("actionAdd_Solar_Day", "DateAndTime", N_("Add 1 solar day"), "=", this, "addDay()");
+	actionsMgr->addAction("actionAdd_Solar_Week", "DateAndTime", N_("Add 1 solar week"), "]", this, "addWeek()");
+	actionsMgr->addAction("actionSubtract_Solar_Hour", "DateAndTime", N_("Subtract 1 solar hour"), "Ctrl+-", this, "subtractHour()");
+	actionsMgr->addAction("actionSubtract_Solar_Day", "DateAndTime", N_("Subtract 1 solar day"), "-", this, "subtractDay()");
+	actionsMgr->addAction("actionSubtract_Solar_Week", "DateAndTime", N_("Subtract 1 solar week"), "[", this, "subtractWeek()");
+	actionsMgr->addAction("actionAdd_Sidereal_Day", "DateAndTime", N_("Add 1 sidereal day"), "Alt+=", this, "addSiderealDay()");
+	actionsMgr->addAction("actionAdd_Sidereal_Week", "DateAndTime", N_("Add 1 sidereal week"), "Alt+]", this, "addSiderealWeek()");
+	actionsMgr->addAction("actionAdd_Sidereal_Month", "DateAndTime", N_("Add 1 sidereal month"), "Alt+Shift+]", this, "addSiderealMonth()");
+	actionsMgr->addAction("actionAdd_Sidereal_Year", "DateAndTime", N_("Add 1 sidereal year"), "Ctrl+Alt+Shift+]", this, "addSiderealYear()");
+	actionsMgr->addAction("actionAdd_Sidereal_Century", "DateAndTime", N_("Add 1 sidereal century"), "", this, "addSiderealCentury()");
+	actionsMgr->addAction("actionAdd_Synodic_Month", "DateAndTime", N_("Add 1 synodic month"), "", this, "addSynodicMonth()");
+	actionsMgr->addAction("actionAdd_Draconic_Month", "DateAndTime", N_("Add 1 draconic month"), "", this, "addDraconicMonth()");
+	actionsMgr->addAction("actionAdd_Draconic_Year", "DateAndTime", N_("Add 1 draconic year"), "", this, "addDraconicYear()");
+	actionsMgr->addAction("actionAdd_Anomalistic_Month", "DateAndTime", N_("Add 1 anomalistic month"), "", this, "addAnomalisticMonth()");
+	actionsMgr->addAction("actionAdd_Tropical_Month", "DateAndTime", N_("Add 1 mean tropical month"), "", this, "addTropicalMonth()");
+	actionsMgr->addAction("actionAdd_Tropical_Year", "DateAndTime", N_("Add 1 mean tropical year"), "", this, "addTropicalYear()");
+	actionsMgr->addAction("actionAdd_Tropical_Century", "DateAndTime", N_("Add 1 mean tropical century"), "", this, "addTropicalCentury()");
+	actionsMgr->addAction("actionSubtract_Sidereal_Day", "DateAndTime", N_("Subtract 1 sidereal day"), "Alt+-", this, "subtractSiderealDay()");
+	actionsMgr->addAction("actionSubtract_Sidereal_Week", "DateAndTime", N_("Subtract 1 sidereal week"), "Alt+[", this, "subtractSiderealWeek()");
+	actionsMgr->addAction("actionSubtract_Sidereal_Month", "DateAndTime", N_("Subtract 1 sidereal month"), "Alt+Shift+[", this, "subtractSiderealMonth()");
+	actionsMgr->addAction("actionSubtract_Sidereal_Year", "DateAndTime", N_("Subtract 1 sidereal year"), "Ctrl+Alt+Shift+[", this, "subtractSiderealYear()");
+	actionsMgr->addAction("actionSubtract_Sidereal_Century", "DateAndTime", N_("Subtract 1 sidereal century"), "", this, "subtractSiderealCentury()");
+	actionsMgr->addAction("actionSubtract_Synodic_Month", "DateAndTime", N_("Subtract 1 synodic month"), "", this, "subtractSynodicMonth()");
+	actionsMgr->addAction("actionSubtract_Draconic_Month", "DateAndTime", N_("Subtract 1 draconic month"), "", this, "subtractDraconicMonth()");
+	actionsMgr->addAction("actionSubtract_Draconic_Year", "DateAndTime", N_("Subtract 1 draconic year"), "", this, "subtractDraconicYear()");
+	actionsMgr->addAction("actionSubtract_Anomalistic_Month", "DateAndTime", N_("Subtract 1 anomalistic month"), "", this, "subtractAnomalisticMonth()");
+	actionsMgr->addAction("actionSubtract_Tropical_Month", "DateAndTime", N_("Subtract 1 mean tropical month"), "", this, "subtractTropicalMonth()");
+	actionsMgr->addAction("actionSubtract_Tropical_Year", "DateAndTime", N_("Subtract 1 mean tropical year"), "", this, "subtractTropicalYear()");
+	actionsMgr->addAction("actionSubtract_Tropical_Century", "DateAndTime", N_("Subtract 1 mean tropical century"), "", this, "subtractTropicalCentury()");
+
+	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", "MovementAndSelection", N_("Set home planet to selected planet"), "Ctrl+G", this, "moveObserverToSelected()");
+	actionsMgr->addAction("actionGo_Home_Global", "MovementAndSelection", N_("Go to home"), "Ctrl+H", this, "returnToHome()");
+	
 }
 
 
