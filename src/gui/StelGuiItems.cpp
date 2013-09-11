@@ -68,7 +68,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	opacity(1.),
 	hoverOpacity(0.)
 {
-	qWarning() << "Creating StelButton from QAction is deprecated."
+	qWarning() << "Creating StelButton from QAction is deprecated.";
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
@@ -176,7 +176,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	opacity(1.),
 	hoverOpacity(0.)
 {
-	qWarning() << "Creating StelButton from QAction is deprecated."
+	qWarning() << "Creating StelButton from QAction is deprecated.";
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
