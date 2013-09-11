@@ -27,6 +27,7 @@
 #include "StelLocation.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelActionMgr.hpp"
+#include "StelProgressController.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -934,19 +935,42 @@ QRectF StelProgressBarMgr::boundingRect() const
 	return QRectF(0, 0, r.width()-1, r.height()-1);
 }*/
 
-QProgressBar* StelProgressBarMgr::addProgressBar()
+void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 {
 	QProgressBar* pb = new QProgressBar();
 	pb->setFixedHeight(25);
 	pb->setFixedWidth(200);
 	pb->setTextVisible(true);
-	pb->setValue(66);
+	pb->setValue(p->getValue());
+	pb->setMinimum(p->getMin());
+	pb->setMaximum(p->getMax());
+	pb->setFormat(p->getFormat());
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
 	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 	pbProxy->setZValue(150);
 	static_cast<QGraphicsLinearLayout*>(layout())->addItem(pbProxy);
-	return pb;
+	allBars.insert(p, pb);
+	pb->setVisible(true);
+	
+	connect(p, SIGNAL(changed()), this, SLOT(oneBarChanged()));
+}
+
+void StelProgressBarMgr::removeProgressBar(const StelProgressController *p)
+{
+	QProgressBar* pb = allBars[p];
+	pb->deleteLater();
+	allBars.remove(p);
+}
+
+void StelProgressBarMgr::oneBarChanged()
+{
+	const StelProgressController *p = static_cast<StelProgressController*>(QObject::sender());
+	QProgressBar* pb = allBars[p];
+	pb->setValue(p->getValue());
+	pb->setMinimum(p->getMin());
+	pb->setMaximum(p->getMax());
+	pb->setFormat(p->getFormat());
 }
 
 CornerButtons::CornerButtons(QGraphicsItem*) : lastOpacity(10)

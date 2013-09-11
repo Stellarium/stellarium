@@ -29,12 +29,12 @@
 #include "StelGuiBase.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <stdexcept>
 #include <QDebug>
 #include <QString>
-#include <QProgressBar>
 #include <QVariantMap>
 #include <QVariantList>
 #include <QDir>
@@ -194,7 +194,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 	if (b)
 	{
 		Q_ASSERT(elem->progressBar==NULL);
-		elem->progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		elem->progressBar = StelApp::getInstance().addProgressBar();
 		QString serverStr = elem->layer->getShortServerCredits();
 		if (!serverStr.isEmpty())
 			serverStr = " from "+serverStr;
@@ -204,7 +204,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 	else
 	{
 		Q_ASSERT(elem->progressBar!=NULL);
-		elem->progressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(elem->progressBar);
 		elem->progressBar = NULL;
 	}
 }
@@ -243,7 +243,7 @@ StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer
 StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
 {
 	if (progressBar)
-		progressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar = NULL;
 }
 

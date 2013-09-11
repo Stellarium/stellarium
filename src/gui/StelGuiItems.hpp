@@ -23,12 +23,15 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsWidget>
 #include <QDebug>
+#include <QMap>
 
 class QGraphicsSceneMouseEvent;
 class QTimeLine;
 class QAction;
 class QGraphicsTextItem;
 class QTimer;
+class StelProgressController;
+class QProgressBar;
 
 // Progess bars in the lower right corner
 class StelProgressBarMgr : public QGraphicsWidget
@@ -36,14 +39,20 @@ class StelProgressBarMgr : public QGraphicsWidget
 	Q_OBJECT
 public:
 	StelProgressBarMgr(QGraphicsItem* parent);
-	class QProgressBar* addProgressBar();
+	
+public slots:
+	void addProgressBar(const StelProgressController *p);
+	void removeProgressBar(const StelProgressController *p);
+	void oneBarChanged();
+private:
+	QMap<const StelProgressController*, QProgressBar*> allBars;
 };
 
 // Buttons in the bottom left corner
 class CornerButtons : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-	Q_INTERFACES(QGraphicsItem);
+	Q_INTERFACES(QGraphicsItem)
 public:
 	CornerButtons(QGraphicsItem* parent=NULL);
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

@@ -24,6 +24,7 @@
 #include "StelMainView.hpp" //for the QFileDialog? Why?
 #include "StelModuleMgr.hpp" // for the GETSTELMODULE macro :(
 #include "StelTranslator.hpp"
+#include "StelProgressController.hpp"
 
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -50,7 +51,7 @@ SatellitesImportDialog::~SatellitesImportDialog()
 	// Do I need to explicitly delete this?
 	if (progressBar)
 	{
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = 0;
 	}
 	
@@ -130,10 +131,9 @@ void SatellitesImportDialog::getData()
 		
 		// Reusing some code from Satellites::updateTLEs()
 		if (progressBar == 0)
-			progressBar = StelApp::getInstance().getGui()->addProgressBar();
+			progressBar = StelApp::getInstance().addProgressBar();
 		progressBar->setValue(0);
-		progressBar->setMaximum(sourceUrls.size());
-		progressBar->setVisible(true);
+		progressBar->setRange(0, sourceUrls.size());
 		progressBar->setFormat("TLE download %v/%m");
 		
 		ui->pushButtonGetData->setVisible(false);
@@ -218,7 +218,7 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 	{
 		if (progressBar)
 		{
-			delete progressBar;
+			StelApp::getInstance().removeProgressBar(progressBar);
 			progressBar = 0;
 		}
 		
@@ -308,7 +308,7 @@ void SatellitesImportDialog::reset()
 	numberDownloadsComplete = 0;
 	if (progressBar)
 	{
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = 0;
 	}
 }
