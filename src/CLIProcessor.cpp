@@ -26,7 +26,7 @@
 #include <QDebug>
 #include <iostream>
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QDir>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)

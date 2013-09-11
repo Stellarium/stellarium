@@ -127,7 +127,7 @@ SET(stellarium_lib_SRCS
 	core/StelShortcutGroup.hpp
 	core/StelActionMgr.hpp
 	core/StelActionMgr.cpp
-
+	core/StelProgressController.hpp
 
 	${gl_lib_SRCS}
 

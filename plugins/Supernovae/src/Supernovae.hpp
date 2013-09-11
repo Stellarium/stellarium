@@ -34,7 +34,6 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class SupernovaeDialog;
@@ -218,7 +217,7 @@ private:
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;	
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;

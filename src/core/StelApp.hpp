@@ -44,6 +44,7 @@ class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
 class StelActionMgr;
+class StelProgressController;
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -177,6 +178,12 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
+	//! Add a progression indicator to the GUI (if applicable).
+	//! @return a controller which can be used to indicate the current status.
+	//! The StelApp instance remains the owner of the controller.
+	StelProgressController* addProgressBar();
+	void removeProgressBar(StelProgressController* p);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -201,6 +208,11 @@ signals:
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void skyCultureChanged(const QString&);
+
+	//! Called just after a progress bar is added.
+	void progressBarAdded(const StelProgressController*);
+	//! Called just before a progress bar is removed.
+	void progressBarRemoved(const StelProgressController*);
 
 private:
 
@@ -305,6 +317,8 @@ private:
 
 	//! The state of the drawing sequence
 	int drawState;
+	
+	QList<StelProgressController*> progressControllers;
 };
 
 #endif // _STELAPP_HPP_
