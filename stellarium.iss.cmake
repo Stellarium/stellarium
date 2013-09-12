@@ -43,8 +43,6 @@ Source: "@QT_BINARY_DIR@\Qt5Script.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\Qt5Widgets.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\Qt5Declarative.dll"; DestDir: "{app}";
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
-; Locales
-Source: "@CMAKE_INSTALL_PREFIX@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
