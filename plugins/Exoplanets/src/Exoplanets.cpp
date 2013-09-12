@@ -192,7 +192,7 @@ void Exoplanets::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
 	{
-		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -543,20 +543,45 @@ int Exoplanets::getJsonFileFormatVersion(void)
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Exoplanets::init cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "Exoplanets::getJsonFileFormatVersion() cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 
 	QVariantMap map;
 	map = StelJsonParser::parse(&jsonEPCatalogFile).toMap();
+	jsonEPCatalogFile.close();
 	if (map.contains("version"))
 	{
 		jsonVersion = map.value("version").toInt();
 	}
 
-	jsonEPCatalogFile.close();
 	qDebug() << "Exoplanets::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+bool Exoplanets::checkJsonFileFormat()
+{
+	QFile jsonEPCatalogFile(jsonCatalogPath);
+	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Exoplanets::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonEPCatalogFile).toMap();
+		jsonEPCatalogFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Exoplanets::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Exoplanets::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
 }
 
 ExoplanetP Exoplanets::getByID(const QString& id)

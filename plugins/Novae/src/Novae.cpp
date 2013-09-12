@@ -161,7 +161,7 @@ void Novae::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(novaeJsonPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -527,6 +527,31 @@ int Novae::getJsonFileVersion(void)
 	novaeJsonFile.close();
 	qDebug() << "Novae::getJsonFileVersion() version from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+bool Novae::checkJsonFileFormat()
+{
+	QFile novaeJsonFile(novaeJsonPath);
+	if (!novaeJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Novae::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(novaeJsonPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&novaeJsonFile).toMap();
+		novaeJsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Novae::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Novae::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
 }
 
 NovaP Novae::getByID(const QString& id)

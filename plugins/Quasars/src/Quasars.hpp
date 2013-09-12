@@ -193,6 +193,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileFormatVersion(void);
 
+	//! Check format of the catalog of quasars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());
 

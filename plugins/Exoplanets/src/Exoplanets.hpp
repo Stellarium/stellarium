@@ -199,6 +199,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileFormatVersion(void);
 
+	//! Check format of the catalog of exoplanets
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! parse JSON file and load exoplanets to map
 	QVariantMap loadEPMap(QString path=QString());
 

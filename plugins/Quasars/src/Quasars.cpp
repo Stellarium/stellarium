@@ -184,7 +184,7 @@ void Quasars::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogJsonPath).exists())
 	{
-		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -555,6 +555,31 @@ int Quasars::getJsonFileFormatVersion(void)
 	catalogJsonFile.close();
 	qDebug() << "Quasars::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+bool Quasars::checkJsonFileFormat()
+{
+	QFile catalogJsonFile(catalogJsonPath);
+	if (!catalogJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Quasars::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogJsonPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&catalogJsonFile).toMap();
+		catalogJsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Quasars::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Quasars::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
 }
 
 QuasarP Quasars::getByID(const QString& id)
