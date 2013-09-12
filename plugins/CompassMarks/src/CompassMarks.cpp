@@ -128,8 +128,6 @@ void CompassMarks::init()
 
 		QSettings* conf = StelApp::getInstance().getSettings();
 		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
-		// GZ: This must go here, else button may show wrong state
-		gui->getGuiAction("actionShow_Compass_Marks")->setChecked(markFader);
 	}
 	catch (std::runtime_error& e)
 	{
