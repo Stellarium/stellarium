@@ -157,7 +157,7 @@ void CompassMarks::draw(StelCore* core)
 	else
 		mColor = markColor;
 
-	glColor4f(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
+	painter.setColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
