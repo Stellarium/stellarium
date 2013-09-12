@@ -49,6 +49,29 @@ StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
+StelPainter::GLState::GLState()
+{
+	initializeOpenGLFunctions();
+	blend = glIsEnabled(GL_BLEND);
+	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
+	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);
+	glGetIntegerv(GL_BLEND_SRC_ALPHA, &blendSrcAlpha);
+	glGetIntegerv(GL_BLEND_DST_ALPHA, &blendDstAlpha);
+}
+
+StelPainter::GLState::~GLState()
+{
+	if (blend)
+	{
+		glEnable(GL_BLEND);
+		glBlendFuncSeparate(blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha);
+	}
+	else
+	{
+		glDisable(GL_BLEND);
+	}
+}
+
 
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
@@ -586,9 +609,9 @@ struct StringTexture
 	}
 };
 
-
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
+	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);

@@ -281,6 +281,19 @@ private:
 
 	friend class StelTextureMgr;
 	friend class StelTexture;
+
+	//! RAII class used to store and restore the opengl state.
+	//! to use it we just need to instanciate it at the beginning of a method that might change the state.
+	class GLState : protected QOpenGLFunctions
+	{
+	public:
+		GLState();
+		~GLState();
+	private:
+		bool blend;
+		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
+	};
+
 	//! Struct describing one opengl array
 	typedef struct
 	{
