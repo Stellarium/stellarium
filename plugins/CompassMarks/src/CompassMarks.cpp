@@ -120,12 +120,10 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		QAction *showCompassAction = gui->getGuiAction("actionShow_Compass_Marks");
-		//showCompassAction->setChecked(markFader);
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, showCompassAction);
+		addAction("actionShow_Compass_Marks", "CompassMarks", N_("actionShow_Compass_Marks"), "", "marksVisible");
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(showCompassAction, SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
-		connect(gui->getGuiAction("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
+		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
 
 		QSettings* conf = StelApp::getInstance().getSettings();
@@ -200,34 +198,25 @@ void CompassMarks::update(double deltaTime)
 
 void CompassMarks::setCompassMarks(bool b)
 {
-	markFader = b;
-	if (markFader)
+	if (b == markFader)
+		return;
+	if (b)
 	{
-		// Save the display state of the cardinal points
+		// Save the display state of the cardinal points and hide them.
 		cardinalPointsState = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+	} else {
+		// Restore the cardinal points state.
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(cardinalPointsState);
 	}
-	else
-	{
-	}
-
-	if(cardinalPointsState)
-	{
-		// Using QActions instead of directly calling
-		// setFlagCardinalsPoints() in order to sync with the buttons
-		dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Cardinal_Points")->trigger();
-	}
+	markFader = b;
+	emit compassMarksChanged(b);
 }
 
 void CompassMarks::cardinalPointsChanged(bool b)
 {
-	if(b)
-	{
-		// If the compass marks are displayed when cardinal points
-		// are about to be shown, hide the compass marks
-		if(markFader)
-		{
-			cardinalPointsState = false; // actionShow_Cardinal_Points should not be triggered again
-			dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Compass_Marks")->trigger();
-		}
+	if (b && getCompassMarks()) {
+		cardinalPointsState = true;
+		setCompassMarks(false);
 	}
 }
