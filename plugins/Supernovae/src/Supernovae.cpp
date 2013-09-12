@@ -161,7 +161,7 @@ void Supernovae::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(sneJsonPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -510,6 +510,31 @@ int Supernovae::getJsonFileVersion(void)
 	sneJsonFile.close();
 	qDebug() << "Supernovae::getJsonFileVersion() version from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+bool Supernovae::checkJsonFileFormat()
+{
+	QFile sneJsonFile(sneJsonPath);
+	if (!sneJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Supernovae::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(sneJsonPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&sneJsonFile).toMap();
+		sneJsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Supernovae::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Supernovae::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
 }
 
 float Supernovae::getLowerLimitBrightness()

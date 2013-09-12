@@ -195,6 +195,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileVersion(void);
 
+	//! Check format of the catalog of novae
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! Parse JSON file and load novae to map
 	QVariantMap loadNovaeMap(QString path=QString());
 
