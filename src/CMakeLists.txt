@@ -568,6 +568,7 @@ ENDIF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
  TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+ QT5_USE_MODULES(stelMain Core Gui Widgets OpenGL Script Declarative)
  INSTALL(TARGETS stelMain DESTINATION lib)
  ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
  #stelMain should be after the plug-ins, otherwise the build crashes
