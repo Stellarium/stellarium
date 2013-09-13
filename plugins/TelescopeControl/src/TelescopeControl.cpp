@@ -146,7 +146,6 @@ void TelescopeControl::init()
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
 
 		//Create telescope key bindings
 		/* QAction-s with these key bindings existed in Stellarium prior to
@@ -156,16 +155,15 @@ void TelescopeControl::init()
 			// "Slew to object" commands
 			QString name = moveToSelectedActionId.arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			StelAction* action;
 			QString text;
 			text = q_("Move telescope #%1 to selected object").arg(i);
-			action = addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToSelectedObject()");
+			addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToSelectedObject()");
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			action = addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToViewDirection()");
+			addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToViewDirection()");
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
