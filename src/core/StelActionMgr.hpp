@@ -45,6 +45,7 @@ private slots:
 private:
 	bool checkable;
 	bool checked;
+	QString group;
 	QString text;
 	bool global;
 	QKeySequence keySequence;
@@ -72,6 +73,9 @@ public:
 						  bool global=false);
 	StelAction* findAction(const QString& id);
 	bool pushKey(int key, bool global=false);
+
+	QStringList getGroupList() const;
+	QList<StelAction*> getActionList(const QString& group) const;
 private:
 	QList<int> keySequence;
 };
