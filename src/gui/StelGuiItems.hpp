@@ -27,7 +27,6 @@
 
 class QGraphicsSceneMouseEvent;
 class QTimeLine;
-class QAction;
 class QGraphicsTextItem;
 class QTimer;
 class StelProgressController;
@@ -78,10 +77,6 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 			   const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, bool noBackground=false);
-
-	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
-			   const QPixmap& pixHover=QPixmap(),
 			   class StelAction* action=NULL, bool noBackground=false);
 	
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
@@ -93,13 +88,9 @@ public:
 	//! @param pixOff the pixmap to display when the button is not toggled
 	//! @param pixNoChange the pixmap to display when the button state of a tristate is not changed
 	//! @param pixHover a pixmap slowly blended when mouse is over the button
-	//! @param action the associated action. Connections are automatically done with the signals if relevant.
+	//! @param actionId the associated action. Connections are automatically done with the signals if relevant.
 	//! @param noBackground define whether the button background image have to be used
 	//! @param isTristate define whether the button is a tristate or an on/off button
-	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
-			   const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, bool noBackground=false, bool isTristate=true);
-
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
 			   const QPixmap& pixHover=QPixmap(),
 			   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
@@ -168,8 +159,7 @@ private:
 	int checked;
 
 	QTimeLine* timeLine;
-	QAction* action; // Deprecated!
-	class StelAction* stelAction;
+	class StelAction* action;
 	bool noBckground;
 	bool isTristate_;
 	double opacity;
