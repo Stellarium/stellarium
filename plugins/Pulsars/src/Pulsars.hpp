@@ -194,6 +194,10 @@ private:
 	//! @return version string, e.g. "2"
 	int getJsonFileFormatVersion(void);
 
+	//! Check format of the catalog of pulsars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! parse JSON file and load pulsars to map
 	QVariantMap loadPSRMap(QString path=QString());
 

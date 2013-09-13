@@ -201,6 +201,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileVersion(void);
 
+	//! Check format of the catalog of supernovae
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! Parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());
 

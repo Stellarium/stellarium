@@ -97,18 +97,14 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	else defaultBortleIndex=-1; // mark "invalid/no change".
 	if (defaultBortleIndex<=0) defaultBortleIndex=-1; // also allow neg. values in ini file, signalling "no change".
 	if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
-	if (landscapeIni.contains("location/display_fog"))
-		defaultFogSetting = landscapeIni.value("location/display_fog").toInt();
-	else defaultFogSetting=-1;
-	if (landscapeIni.contains("location/atmospheric_extinction_coefficient"))
-		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient").toDouble();
-	else defaultExtinctionCoefficient=-1.0;
-	if (landscapeIni.contains("location/atmospheric_temperature"))
-		defaultTemperature = landscapeIni.value("location/atmospheric_temperature").toDouble();
-	else defaultTemperature=-1000.0;
-	if (landscapeIni.contains("location/atmospheric_pressure"))
-		defaultPressure = landscapeIni.value("location/atmospheric_pressure").toDouble();
-	else defaultPressure=-2.0; // "no change"
+
+
+	defaultFogSetting = landscapeIni.value("location/display_fog", -1).toInt();
+	defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
+	defaultTemperature = landscapeIni.value("location/atmospheric_temperature", -1000.0).toDouble();
+	defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble();
+	// Set night brightness for landscape
+	defaultBrightness = landscapeIni.value("landscape/initial_brightness", -1.0).toDouble();
 }
 
 #include <iostream>
