@@ -718,13 +718,6 @@ void StelGui::setGuiVisible(bool b)
 	setVisible(b);
 }
 
-QAction *StelGui::getGuiAction(const QString &actionName)
-{
-	qWarning() << "getGuiAction is deprecated";
-	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
-	return shortcutMgr->getGuiAction(actionName);
-}
-
 StelAction* StelGui::getAction(const QString& actionName)
 {
 	return StelApp::getInstance().getStelActionManager()->findAction(actionName);
