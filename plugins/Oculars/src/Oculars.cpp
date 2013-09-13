@@ -1266,8 +1266,6 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-
 	actionShowOcular = addAction("actionShow_Ocular", "Oculars", N_("Ocular view"), "Ctrl+O", "enableOcular(bool)");
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
