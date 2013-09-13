@@ -57,9 +57,8 @@ void StelAction::trigger()
 
 void StelAction::connectToObject(QObject* obj, const char* slot)
 {
-	
 	QVariant prop = obj->property(slot);
-	if (prop.isValid())
+	if (prop.isValid()) // Connect to a property.
 	{
 		checkable = true;
 		target = obj;
@@ -71,12 +70,23 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 		int slotIndex = metaObject()->indexOfMethod("propertyChanged(bool)");
 		if (metaProp.hasNotifySignal())
 			connect(obj, metaProp.notifySignal(), this, metaObject()->method(slotIndex));
+		return;
+	}
+	int slotIndex = obj->metaObject()->indexOfMethod(slot);
+	if (obj->metaObject()->method(slotIndex).parameterCount() == 1)
+	{
+		// connect to a boolean slot.
+		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterType(0) == QMetaType::Bool);
+		checkable = true;
+		int signalIndex = metaObject()->indexOfMethod("toggled(bool)");
+		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
 	}
 	else
 	{
+		// connect to a slot.
+		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterCount() == 0);
 		checkable = false;
 		int signalIndex = metaObject()->indexOfMethod("triggered()");
-		int slotIndex = obj->metaObject()->indexOfMethod(slot);
 		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
 	}
 }
