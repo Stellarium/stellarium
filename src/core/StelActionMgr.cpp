@@ -4,6 +4,7 @@
 #include <QVariant>
 #include <QDebug>
 #include <QMetaProperty>
+#include <QStringList>
 
 StelAction::StelAction(const QString& actionId,
 					   const QString& groupId,
@@ -12,6 +13,7 @@ StelAction::StelAction(const QString& actionId,
 					   bool global):
 	checkable(false),
 	checked(false),
+	group(groupId),
 	text(text),
 	global(global),
 	target(NULL),
@@ -153,4 +155,26 @@ bool StelActionMgr::pushKey(int key, bool global)
 	if (!hasPartialMatch)
 		keySequence.clear();
 	return false;
+}
+
+QStringList StelActionMgr::getGroupList() const
+{
+	QStringList ret;
+	foreach(StelAction* action, findChildren<StelAction*>())
+	{
+		if (!ret.contains(action->group))
+			ret.append(action->group);
+	}
+	return ret;
+}
+
+QList<StelAction*> StelActionMgr::getActionList(const QString& group) const
+{
+	QList<StelAction*> ret;
+	foreach(StelAction* action, findChildren<StelAction*>())
+	{
+		if (action->group == group)
+			ret.append(action);
+	}
+	return ret;
 }

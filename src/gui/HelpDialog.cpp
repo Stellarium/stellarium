@@ -42,16 +42,12 @@
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLogger.hpp"
-#include "StelShortcutGroup.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
 
-HelpDialog::HelpDialog() : keyMgr(0)
+HelpDialog::HelpDialog()
 {
 	ui = new Ui_helpDialogForm;
-	keyMgr = StelApp::getInstance().getStelShortcutManager();
-	Q_ASSERT(keyMgr);
 }
 
 HelpDialog::~HelpDialog()
@@ -186,39 +182,23 @@ QString HelpDialog::getHelpText(void)
 	                q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
 	                .arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
 	            "</p><table cellpadding=\"10%\">\n";
-	
-	QList<StelShortcutGroup*> groups = keyMgr->getGroupList();
-	foreach (const StelShortcutGroup* group, groups)
+
+	// Append all StelAction shortcuts.
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	typedef QPair<QString, QString> KeyDescription;
+	foreach (QString group, actionMgr->getGroupList())
 	{
-		QString groupName= group->getText();
-		if (groupName.isEmpty())
-			groupName = group->getId();
-		
-		QList< KeyDescription > descriptions;
-		QList<StelShortcut*> shortcuts = group->getActionList();
-		if (shortcuts.isEmpty())
-			continue;
-		
-		foreach (const StelShortcut* shortcut, shortcuts)
+		QList<KeyDescription> descriptions;
+		foreach (StelAction* action, actionMgr->getActionList(group))
 		{
-			QString text = q_(shortcut->getText());
-			QKeySequence primary = shortcut->getPrimaryKey();
-			if (primary.isEmpty())
-			{
-				// TODO: Decide whether to display undefined actions.
+			if (action->getShortcut().isEmpty())
 				continue;
-			}
-			QString keyString = primary.toString(QKeySequence::NativeText);
-			descriptions.append(KeyDescription(text, keyString));
+			QString text = action->getText();
+			QString key =  action->getShortcut().toString(QKeySequence::NativeText);
+			descriptions.append(KeyDescription(text, key));
 		}
-		if (descriptions.isEmpty())
-			continue;
-		// Sort by translated description:
-		// - on one hand, pre-determined order is lost
-		// - on the other, easier for the users
 		qSort(descriptions);
-		
-		htmlText += "<tr></tr><tr><td><b><u>" + E(groupName) +
+		htmlText += "<tr></tr><tr><td><b><u>" + E(group) +
 		            ":</u></b></td></tr>\n";
 		foreach (const KeyDescription& desc, descriptions)
 		{
@@ -227,7 +207,7 @@ QString HelpDialog::getHelpText(void)
 			            "</b></td></tr>\n";
 		}
 	}
-	
+
 	// edit shortcuts
 //	htmlText += "<tr><td><b>" + Qt::escape(q_("F7")) + "</b></td>";
 //	htmlText += "<td>" + Qt::escape(q_("Show and edit all keyboard shortcuts")) + "</td></tr>\n";
