@@ -109,7 +109,8 @@ QKeySequence::SequenceMatch StelAction::matches(const QKeySequence& seq) const
 				(!altKeySequence.isEmpty() ? altKeySequence.matches(seq) : QKeySequence::NoMatch));
 }
 
-StelActionMgr::StelActionMgr()
+StelActionMgr::StelActionMgr() :
+	actionsEnabled(true)
 {
 }
 
@@ -134,6 +135,8 @@ StelAction* StelActionMgr::findAction(const QString& id)
 
 bool StelActionMgr::pushKey(int key, bool global)
 {
+	if (!actionsEnabled)
+		return false;
 	keySequence << key;
 	QKeySequence sequence(keySequence.size() > 0 ? keySequence[0] : 0,
 						  keySequence.size() > 1 ? keySequence[1] : 0,
@@ -177,4 +180,14 @@ QList<StelAction*> StelActionMgr::getActionList(const QString& group) const
 			ret.append(action);
 	}
 	return ret;
+}
+
+void StelActionMgr::saveShortcuts()
+{
+	qWarning() << "saving shortcuts not implemented yet!";
+}
+
+void StelActionMgr::restoreDefaultShortcuts()
+{
+	qWarning() << "restoring shortcuts not implemented yet!";
 }

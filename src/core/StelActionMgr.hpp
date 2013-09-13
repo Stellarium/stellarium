@@ -31,7 +31,11 @@ public:
 	void setShortcut(const QString& key);
 	void setAltShortcut(const QString& key);
 	QKeySequence::SequenceMatch matches(const QKeySequence& seq) const;
+
+	QString getId() const {return objectName();}
+	QString getGroup() const {return group;}
 	const QKeySequence getShortcut() const {return keySequence;}
+	const QKeySequence getAltShortcut() const {return altKeySequence;}
 	const QString& getText() const {return text;}
 signals:
 	void toggled(bool);
@@ -76,6 +80,18 @@ public:
 
 	QStringList getGroupList() const;
 	QList<StelAction*> getActionList(const QString& group) const;
+
+	//! Save current shortcuts to file.
+	void saveShortcuts();
+	//! Restore the default shortcuts combinations
+	void restoreDefaultShortcuts();
+
+public slots:
+	//! Enable/disable all actions of application.
+	//! need for editing shortcuts without trigging any actions
+	//! @todo find out if this is really necessary and why.
+	void setAllActionsEnabled(bool value) {actionsEnabled = value;}
 private:
+	bool actionsEnabled;
 	QList<int> keySequence;
 };
