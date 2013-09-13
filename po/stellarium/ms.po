@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-10 20:03+0700\n"
-"PO-Revision-Date: 2013-08-26 15:21+0000\n"
+"PO-Revision-Date: 2013-09-13 02:51+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-11 04:51+0000\n"
+"X-Launchpad-Export-Date: 2013-09-13 04:49+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1286
@@ -2050,12 +2050,12 @@ msgstr "Peristiwa Bumi menerusi Marikh"
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "Pemanjangan dan Penonjolan Terhebat Bumi dari Marikh"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
 msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr ""
+msgstr "Pemanjangan Terhebat Bumi dan Marikh dari Musytari"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:260
@@ -2163,6 +2163,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
+"Penyelamat skrin pelbagai peristiwa yang berlaku dalam Sistem Suria. 187 "
+"peristiwa kesemuanya!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -2200,11 +2202,11 @@ msgstr ""
 
 #: src/translations.h:282
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr ""
+msgstr "Pemanjangan dan Penonjolan Terhebat Bumi dari Marikh 2000-3000"
 
 #: src/translations.h:283
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr ""
+msgstr "Pemanjangan Terhebat Bumi dari Musytari 2000-3000"
 
 #: src/translations.h:287
 msgid "Andorra"
@@ -3397,7 +3399,7 @@ msgstr "Garis Buruj"
 
 #: src/translations.h:590
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Imej latar belakang objek samawi"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1276
 msgid "Ecliptic J2000 grid"
@@ -3452,7 +3454,7 @@ msgstr "Garis Meridian"
 
 #: src/translations.h:602
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Objek samawi"
 
 #: src/translations.h:603
 msgid "Night mode"
@@ -4186,7 +4188,7 @@ msgstr "Guna lanskap ini sebagai lalai"
 
 #: src/ui_viewDialog.h:1307
 msgid "Use brightness settings for landscapes"
-msgstr ""
+msgstr "Guna tetapan kecerahan untuk lanskap"
 
 #: src/ui_viewDialog.h:1309
 msgid "Use this sky culture as default"
@@ -5183,11 +5185,11 @@ msgstr "Skalakan bulatan imej"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr ""
+msgstr "Laksana had magnitud najam untuk bukaan teleskop yang berbeza"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1031
 msgid "Limit stellar magnitude"
-msgstr ""
+msgstr "Had magnitud najam"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1032
 msgid "Key mappings"
@@ -7164,6 +7166,7 @@ msgstr ""
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr ""
+"Semua supernova tersebut adalah lebih cerah %1 pada puncak kecerahan."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
@@ -7294,12 +7297,16 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"Anda boleh cari nova melalui alat gelintar dengan memasukkan julukan nova "
+"atau nama umumnya (cth. 'Nova Cygni 1975' atau 'V1500 Cyg')."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"Pemalam ini gunakan model sangat ringkas untuk pengiraan lengkuk cahaya bagi "
+"bintang nova."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
@@ -7307,12 +7314,16 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"Modil ini berasaskan masa untuk susut sebanyak %1 magnitud dari nilai "
+"maksimum, yang mana %1 adalah 2, 3, 6 dan 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Jika nova tidak mempunyai nilai untuk susutan magnitud maka pemalam ini akan "
+"gunakan nilai diperumum baginya."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -7321,18 +7332,20 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Jika anda mahu baca maklumat lengkap mengenai pemalam ini, sejarahnya dan "
+"format katalog, anda boleh %1dapatkan maklumat disini%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
 msgid "Novae is updated"
-msgstr ""
+msgstr "Nova telah dikemaskini"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Konfigurasi Nova Cerah"
 
 #: plugins/Novae/src/ui_novaeDialog.h:234
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurasi Pemalam Nova Cerah"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
@@ -7720,23 +7733,24 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Exoplanet: merupakan versi interaktif XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "Exolanet dalam sistem binari dan berbilang (Richard Schwarz)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Exoplanet bernama (IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
+"Sesetengah Ahli Astronomi dan Kumpulan aktif dalam kajian planet luar suria"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "update: 16 April 2012"
@@ -7744,7 +7758,7 @@ msgstr "kemaskini: 16 April 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "The Exoplanet Data Explorer"
-msgstr ""
+msgstr "Penjelajah Data Exoplanet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "The Anglo-Australian Planet Search"
@@ -7752,15 +7766,15 @@ msgstr "Pencarian Planet Anglo-Australia"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "Program Pencarian Planet Luar Suria Geneva"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "Program Penjelajahan Exoplanet NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 msgid "Pulsar planets"
@@ -7768,11 +7782,11 @@ msgstr "Planet pulsar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "Arkib Exoplanet NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 msgid "IAU Comission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU Comission 53: Planet Luar Suria"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
 msgid "ExoMol"
@@ -7780,7 +7794,7 @@ msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "Galeri Zon Sesuai Didiami"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "PlanetQuest - The Search for Another Earth"
@@ -7788,11 +7802,11 @@ msgstr "PlanetQuest - Pencarian Bumi Lain"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Buka Katalog Exoplanet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Katalog Exoplanet Boleh Didiami"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid "Exoplanets is updated"
