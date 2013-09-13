@@ -36,7 +36,6 @@
 #include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelActionMgr.hpp"
 
 #include "StelObjectType.hpp"
@@ -168,8 +167,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
-	// XXX: this should be done only after we created all the StelActions.
-	StelApp::getInstance().getStelShortcutManager()->loadShortcuts();
 
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
