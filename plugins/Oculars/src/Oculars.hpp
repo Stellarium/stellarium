@@ -34,7 +34,6 @@
 #define MIN_OCULARS_INI_VERSION 0.12
 
 QT_BEGIN_NAMESPACE
-class QAction;
 class QKeyEvent;
 class QMenu;
 class QMouseEvent;
@@ -44,6 +43,7 @@ class QSignalMapper;
 QT_END_NAMESPACE
 
 class StelButton;
+class StelAction;
 
 //! Main class of the Oculars plug-in.
 class Oculars : public StelModule
@@ -245,16 +245,16 @@ private:
 	OcularDialog *ocularDialog;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 
-	QAction* actionShowOcular;
-	QAction* actionShowCrosshairs;
-	QAction* actionShowSensor;
-	QAction* actionShowTelrad;
-	QAction* actionConfiguration;
-	QAction* actionMenu;
-	QAction* actionTelescopeIncrement;
-	QAction* actionTelescopeDecrement;
-	QAction* actionOcularIncrement;
-	QAction* actionOcularDecrement;
+	StelAction* actionShowOcular;
+	StelAction* actionShowCrosshairs;
+	StelAction* actionShowSensor;
+	StelAction* actionShowTelrad;
+	StelAction* actionConfiguration;
+	StelAction* actionMenu;
+	StelAction* actionTelescopeIncrement;
+	StelAction* actionTelescopeDecrement;
+	StelAction* actionOcularIncrement;
+	StelAction* actionOcularDecrement;
 
 	class OcularsGuiPanel* guiPanel;
 
