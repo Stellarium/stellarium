@@ -10,12 +10,22 @@ public:
 	friend class StelActionMgr;
 	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
 
+	//! Don't use this constructor, this is just there to ease the migration from QAction.
+	StelAction(QObject *parent): QObject(parent) {}
+
 	StelAction(const QString& actionId,
 			   const QString& groupId,
 			   const QString& text,
 			   const QString& primaryKey,
 			   bool global = false);
+	//! Connect the action to an object property or slot.
+	//! @param slot A property or a slot name.  The slot can either have the signature `func()`, and in that
+	//! case the action is made not checkable, either have the signature `func(bool)` and in that case the action
+	//! is made checkable.  When linked to a property the action is always made checkable.
 	void connectToObject(QObject* obj, const char* slot);
+	//! Don't use setCheckable, connectToObject can automatically determine if the action is checkable or not.
+	//! This is just there to ease the migration from QAction.
+	void setCheckable(bool value) {checkable = value;}
 	bool isCheckable() const {return checkable;}
 	bool isChecked() const {return checked;}
 	void setShortcut(const QString& key);
