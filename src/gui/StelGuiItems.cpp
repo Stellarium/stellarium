@@ -106,12 +106,23 @@ StelButton::StelButton(QGraphicsItem* parent,
 	}
 }
 
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixHover,
+                       const QString& aaction,
+                       bool noBackground)
+	:StelButton::StelButton(parent, apixOn, apixOff, apixHover,
+							StelApp::getInstance().getStelActionManager()->findAction(aaction), noBackground)
+{
+	
+}
 
 StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,
                        const QPixmap& apixHover,
-                       const QString& aactionId,
+                       StelAction *aaction,
                        bool noBackground) :
 	QGraphicsPixmapItem(apixOff, parent),
 	pixOn(apixOn),
@@ -141,8 +152,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	timeLine = new QTimeLine(250, this);
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
-	
-	stelAction = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
+	stelAction = aaction;
 	Q_ASSERT(stelAction);
 	if (stelAction!=NULL)
 	{

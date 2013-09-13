@@ -79,6 +79,10 @@ public:
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 			   const QPixmap& pixHover=QPixmap(),
 			   QAction* action=NULL, bool noBackground=false);
+
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
+			   const QPixmap& pixHover=QPixmap(),
+			   class StelAction* action=NULL, bool noBackground=false);
 	
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 			   const QPixmap& pixHover=QPixmap(),
