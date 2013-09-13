@@ -45,9 +45,9 @@
 #include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -58,6 +58,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
+#include <QSignalMapper>
 
 #include <QDebug>
 
@@ -155,23 +156,17 @@ void TelescopeControl::init()
 			// "Slew to object" commands
 			QString name = moveToSelectedActionId.arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			QAction* action = shMgr->addGuiAction(name, true, "",
-			                                      shortcut, "", actionGroupId,
-			                                      false);
-			connect(action, SIGNAL(triggered()),
-			        this, SLOT(slewTelescopeToSelectedObject()));
+			StelAction* action;
+			QString text;
+			text = q_("Move telescope #%1 to selected object").arg(i);
+			action = addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToSelectedObject()");
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
-			action = shMgr->addGuiAction(name, true, "",
-			                             shortcut, "", actionGroupId,
-			                             false, false);
-			connect(action, SIGNAL(triggered()), this,
-			        SLOT(slewTelescopeToViewDirection()));
+			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+			action = addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToViewDirection()");
 		}
-		// Also updates descriptions if the actions have been loaded from file
-		translateActionDescriptions();
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
 	
@@ -469,6 +464,7 @@ void TelescopeControl::slewTelescopeToViewDirection()
 	// Find out for which telescope is the command
 	if (sender() == NULL)
 		return;
+	// XXX: we could use a QSignalMapper instead of this trick.
 	int slotNumber = sender()->objectName().right(1).toInt();
 
 	// Find out the coordinates of the target
@@ -1644,22 +1640,3 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
-
-void TelescopeControl::translateActionDescriptions()
-{
-	StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
-	if (!shMgr)
-		return;
-	
-	for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
-	{
-		QString name = moveToSelectedActionId.arg(i);
-		QString description = q_("Move telescope #%1 to selected object")
-		                      .arg(i);
-		shMgr->setShortcutText(name, actionGroupId, description);
-		
-		name = moveToCenterActionId.arg(i);
-		description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-		shMgr->setShortcutText(name, actionGroupId, description);
-	}
-}
