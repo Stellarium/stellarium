@@ -117,9 +117,6 @@ public:
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 
-	//! Get the shortcuts manager to use for managing and editing shortcuts
-	StelShortcutMgr* getStelShortcutManager() {return shortcutMgr;}
-
 	//! Get the actions manager to use for managing and editing actions
 	StelActionMgr* getStelActionManager() {return actionMgr;}
 
@@ -241,9 +238,6 @@ private:
 
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
-
-	//Shortcuts manager for the application
-	StelShortcutMgr* shortcutMgr;
 
 	//Actions manager fot the application.  Will replace shortcutMgr.
 	StelActionMgr* actionMgr;

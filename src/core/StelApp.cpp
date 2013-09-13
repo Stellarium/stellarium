@@ -43,7 +43,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
@@ -192,7 +191,6 @@ StelApp::StelApp(QObject* parent)
 	textureMgr=NULL;
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
-	shortcutMgr = NULL;
 	actionMgr = NULL;
 
 	// Can't create 2 StelApp instances
@@ -229,7 +227,6 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
-	delete shortcutMgr; shortcutMgr = NULL;
 	delete actionMgr; actionMgr = NULL;
 
 	Q_ASSERT(singleton);
@@ -354,7 +351,6 @@ void StelApp::init(QSettings* conf)
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-	shortcutMgr = new StelShortcutMgr(); // XXX: to be removed.
 	actionMgr = new StelActionMgr();
 
 	localeMgr->init();
