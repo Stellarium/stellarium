@@ -80,7 +80,7 @@ AngleMeasure::AngleMeasure()
 	if (!conf->contains("AngleMeasure/angle_format_dms"))
 	{
 		// Create the "AngleMeasure" section and set default parameters
-		conf->setValue("AngleMeasure/angle_format_dms", true);
+		conf->setValue("AngleMeasure/angle_format_dms", false);
 		conf->setValue("AngleMeasure/text_color", "0,0.5,1");
 		conf->setValue("AngleMeasure/line_color", "0,0.5,1");
 	}
