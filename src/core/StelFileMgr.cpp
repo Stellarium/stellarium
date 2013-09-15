@@ -23,7 +23,7 @@
 #include <QDir>
 #include <QString>
 #include <QDebug>
-#include <QDesktopServices>
+#include <QStandardPaths>
 
 #include "StelUtils.hpp"
 
@@ -509,28 +509,17 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 	// This function is implemented using code from QSettings implementation in QT
 	// (GPL edition, version 4.3).
 	
-	/* FIXME: This code is not working with Qt5/Windows and should be rewritten --AW
+	// Stellarium works only on wide-character versions of Windows anyway,
+	// therefore it's using only the wide-char version of the code. --BM
 	QLibrary library(QLatin1String("shell32"));
-	QT_WA( {
-		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
-		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
-		if (SHGetSpecialFolderPath)
-		{
-			TCHAR tpath[MAX_PATH];
-			SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
-			return QString::fromUtf16((ushort*)tpath);
-		}
-	} , {
-		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, char*, int, BOOL);
-		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathA");
-		if (SHGetSpecialFolderPath)
-		{
-			char cpath[MAX_PATH];
-			SHGetSpecialFolderPath(0, cpath, csidlId, FALSE);
-			return QString::fromLocal8Bit(cpath);
-		}
-	} );
-	*/
+	typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
+	GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
+	if (SHGetSpecialFolderPath)
+	{
+		TCHAR tpath[MAX_PATH];
+		SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
+		return QString::fromUtf16((ushort*)tpath);
+	}
 
 	return QString();
 }
