@@ -44,9 +44,11 @@ QMutex* StelPainter::globalMutex = new QMutex();
 
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
 StelPainter::GLState::GLState()
@@ -1690,6 +1692,37 @@ void StelPainter::initGLShaders()
 	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
 	
+
+	// Basic shader: vertex filled with interpolated color
+	QOpenGLShader vshaderInterpolatedColor(QOpenGLShader::Vertex);
+	const char *vshaderInterpolatedColorSrc =
+		"attribute mediump vec3 vertex;\n"
+		"attribute mediump vec4 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec4 fragcolor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+		"    fragcolor = color;\n"
+		"}\n";
+	vshaderInterpolatedColor.compileSourceCode(vshaderInterpolatedColorSrc);
+	QOpenGLShader fshaderInterpolatedColor(QOpenGLShader::Fragment);
+	const char *fshaderInterpolatedColorSrc =
+		"varying mediump vec4 fragcolor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = fragcolor;\n"
+		"}\n";
+	fshaderInterpolatedColor.compileSourceCode(fshaderInterpolatedColorSrc);
+	colorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	colorShaderProgram->addShader(&vshaderInterpolatedColor);
+	colorShaderProgram->addShader(&fshaderInterpolatedColor);
+	colorShaderProgram->link();
+	colorShaderVars.projectionMatrix = colorShaderProgram->uniformLocation("projectionMatrix");
+	colorShaderVars.color = colorShaderProgram->attributeLocation("color");
+	colorShaderVars.vertex = colorShaderProgram->attributeLocation("vertex");
+	
+	
 	// Basic texture shader program
 	QOpenGLShader vshader2(QOpenGLShader::Vertex);
 	const char *vsrc2 =
@@ -1759,6 +1792,20 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
 }
+
+
+void StelPainter::deinitGLShaders()
+{
+	delete basicShaderProgram;
+	basicShaderProgram = NULL;
+	delete colorShaderProgram;
+	colorShaderProgram = NULL;
+	delete texturesShaderProgram;
+	texturesShaderProgram = NULL;
+	delete texturesColorShaderProgram;
+	texturesColorShaderProgram = NULL;
+}
+
 
 void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
@@ -1837,6 +1884,16 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}
+	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
+	{
+		pr = colorShaderProgram;
+		pr->bind();
+		pr->setAttributeArray(colorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+		pr->enableAttributeArray(colorShaderVars.vertex);
+		pr->setUniformValue(colorShaderVars.projectionMatrix, qMat);
+		pr->setAttributeArray(colorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size);
+		pr->enableAttributeArray(colorShaderVars.color);
+	}
 	else
 	{
 		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
@@ -1861,9 +1918,14 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->disableAttributeArray(texturesShaderVars.texCoord);
 		pr->disableAttributeArray(texturesShaderVars.vertex);
 	}
-	else if (pr == texturesShaderProgram)
+	else if (pr == basicShaderProgram)
 	{
 		pr->disableAttributeArray(basicShaderVars.vertex);
+	}
+	else if (pr == colorShaderProgram)
+	{
+		pr->disableAttributeArray(colorShaderVars.vertex);
+		pr->disableAttributeArray(colorShaderVars.color);
 	}
 	if (pr)
 		pr->release();

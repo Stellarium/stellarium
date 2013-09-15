@@ -458,6 +458,8 @@ void StelApp::deinit()
 	QCoreApplication::processEvents();
 	getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
+	
+	StelPainter::deinitGLShaders();
 }
 
 
