@@ -227,9 +227,13 @@ public:
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
-	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
+	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
 	static void initGLShaders();
+	
+	//! Delete the OpenGL shaders objects.
+	//! This method needs to be called once before exit.
+	static void deinitGLShaders();
 
 	//! Set whether texturing is enabled.
 	void enableTexture2d(bool b);
@@ -336,6 +340,7 @@ private:
 
 	Vec4f currentColor;
 	bool texture2dEnabled;
+	
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {
 		int projectionMatrix;
@@ -343,6 +348,9 @@ private:
 		int vertex;
 	};
 	static BasicShaderVars basicShaderVars;
+	
+	static QOpenGLShaderProgram* colorShaderProgram;
+	static BasicShaderVars colorShaderVars;
 	
 	static QOpenGLShaderProgram* texturesShaderProgram;
 	struct TexturesShaderVars {
