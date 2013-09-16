@@ -331,9 +331,9 @@ void StelMainView::initTitleI18n()
 void StelMainView::setFullScreen(bool b)
 {
 	if (b)
-		setWindowState(windowState() | Qt::WindowFullScreen);
+		showFullScreen();//setWindowState(windowState() | Qt::WindowFullScreen);
 	else
-		setWindowState(windowState() & ~Qt::WindowFullScreen);
+		showNormal();//setWindowState(windowState() & ~Qt::WindowFullScreen);
 }
 
 void StelMainView::thereWasAnEvent()
