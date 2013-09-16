@@ -18,6 +18,7 @@
 
 #include "StelAudioMgr.hpp"
 #include <QDebug>
+#include <QDir>
 
 StelAudioMgr::StelAudioMgr()
 {
@@ -87,7 +88,7 @@ void StelAudioMgr::dropSound(const QString& id)
 #else  // HAVE_QT_PHONON
 void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
-	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << filename << id;
+	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << QDir::toNativeSeparators(filename) << id;
 }
 StelAudioMgr::~StelAudioMgr() {;}
 void StelAudioMgr::playSound(const QString&) {;}

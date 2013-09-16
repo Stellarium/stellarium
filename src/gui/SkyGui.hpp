@@ -32,12 +32,14 @@ class QGraphicsTextItem;
 class QTimeLine;
 class StelButton;
 class BottomStelBar;
-
+class StelProgressController;
 
 //! The informations about the currently selected object
 class InfoPanel : public QGraphicsTextItem
 {
 	public:
+		//! Reads "gui/selected_object_info", etc from the configuration file.
+		//! @todo Bad idea to read from the configuration file in a constructor? --BM
 		InfoPanel(QGraphicsItem* parent);
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
@@ -60,7 +62,7 @@ public:
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
 	//! @return a pointer to the progress bar
-	class QProgressBar* addProgressBar();
+	void addProgressBar(StelProgressController*);
 	
 	void init(class StelGui* stelGui);
 	

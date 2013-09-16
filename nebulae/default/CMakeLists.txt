@@ -1,4 +1,13 @@
 
 ########### install files ###############
 
-INSTALL(FILES textures.json nebula_textures.fab ngc2000.dat ngc2000names.dat ic434bousquet.png m100.png m101.png m102.png m103.png m104.png m105.png m106.png m108.png m109.png m10.png m110.png m11.png m12.png m13.png m14.png m15dumont.png m16dumont.png m17spano.png m18.png m1dumont.png m20bousquet.png m22.png m27dumont.png m2.png m31.png m33bousquet.png m34.png m36.png m37.png m38.png m3.png m42dumont.png m44spano.png m46.png m49.png m4.png m51.png m53.png m54.png m57dumont.png m58.png m59.png m5.png m60.png m61.png m63.png m64.png m65.png m66.png m6.png m74.png m76.png m78.png m7.png m81.png m82.png m83.png m84.png m85.png m86.png m87.png m89.png m8bousquet.png m90.png m91.png m92.png m94.png m95.png m96.png m97dumont.png m98.png m99.png m9.png n1499bousquet.png n2244bousquet.png n253bousquet.png n6946dumont.png n869-884spano.png pleiades.png m93.png m80.png m79.png m75.png m73.png m72.png m71.png m70.png m69.png m68.png m67.png m62.png m56.png m55.png m52.png m50.png m48.png m41.png m35.png m30.png m29.png m28.png m26.png m25.png m24.png m23.png m21.png m19.png m107.png DESTINATION share/${PACKAGE}/nebulae/default)
+# install textures info (JSON and FAB)
+INSTALL(FILES textures.json nebula_textures.fab DESTINATION share/${PACKAGE}/nebulae/default )
+
+# install DSO catalog
+INSTALL(FILES ngc2000.dat ngc2000names.dat DESTINATION share/${PACKAGE}/nebulae/default )
+
+# install textures of DSO
+INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/nebulae/default 
+	FILES_MATCHING PATTERN "*.png" 
+	PATTERN "CMakeFiles" EXCLUDE )

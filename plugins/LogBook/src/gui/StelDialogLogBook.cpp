@@ -14,12 +14,12 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 
 #include "StelDialogLogBook.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelMainWindow.hpp"
 
 #include <QDebug>
@@ -66,8 +66,8 @@ StelDialogLogBook::~StelDialogLogBook()
 void StelDialogLogBook::close()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
-	((QGraphicsWidget*)StelMainGraphicsView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
+	StelMainView::getInstance().scene()->setActiveWindow(0);
+	((QGraphicsWidget*)StelMainView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
 	emit(dialogClosed(this));
 }
 
@@ -79,7 +79,7 @@ void StelDialogLogBook::setVisible(bool v)
 		if (dialog)
 		{
 			dialog->show();
-			StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
 			// will be off screen.  Check for this and move it to a visible
 			// position if necessary
@@ -104,7 +104,7 @@ void StelDialogLogBook::setVisible(bool v)
 		
 		// centre with dialog according to current window size.
 		proxy->setPos((int)((screenSize.width()-bound.width())/2), (int)((screenSize.height()-bound.height())/2));
-		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
+		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 
 		// The caching is buggy on all plateforms with Qt 4.5.2
@@ -116,7 +116,7 @@ void StelDialogLogBook::setVisible(bool v)
 #endif
 
 		proxy->setZValue(100);
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+		StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
 	}
 	else
@@ -124,6 +124,6 @@ void StelDialogLogBook::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().scene()->setActiveWindow(0);
 	}
 }

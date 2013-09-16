@@ -25,9 +25,6 @@
     <height>480</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <layout class="QVBoxLayout" name="_2">
    <property name="spacing">
     <number>0</number>
@@ -152,12 +149,12 @@
       </property>
       <item>
        <widget class="QRadioButton" name="radioButtonTelescopeLocal">
-	<property name="sizePolicy">
-	 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-	  <horstretch>0</horstretch>
-	  <verstretch>0</verstretch>
-	 </sizepolicy>
-	</property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -177,12 +174,12 @@
       </item>
       <item>
        <widget class="QRadioButton" name="radioButtonTelescopeConnection">
-	<property name="sizePolicy">
-	 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-	  <horstretch>0</horstretch>
-	  <verstretch>0</verstretch>
-	 </sizepolicy>
-	</property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -199,12 +196,12 @@
       </item>
       <item>
        <widget class="QRadioButton" name="radioButtonTelescopeVirtual">
-	<property name="sizePolicy">
-	 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-	  <horstretch>0</horstretch>
-	  <verstretch>0</verstretch>
-	 </sizepolicy>
-	</property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -251,12 +248,12 @@
           </property>
           <item>
            <widget class="QLabel" name="labelTelescopeName">
-	    <property name="sizePolicy">
-	     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-	      <horstretch>0</horstretch>
-	      <verstretch>0</verstretch>
-	     </sizepolicy>
-	    </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -291,12 +288,12 @@
            <layout class="QHBoxLayout" name="horizontalLayoutDelay">
             <item>
              <widget class="QLabel" name="labelConnectionDelay">
-	      <property name="sizePolicy">
-	       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-		<horstretch>0</horstretch>
-		<verstretch>0</verstretch>
-	       </sizepolicy>
-	      </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -310,12 +307,12 @@
             </item>
             <item>
              <widget class="QDoubleSpinBox" name="doubleSpinBoxTelescopeDelay">
-	      <property name="sizePolicy">
-	       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-		<horstretch>0</horstretch>
-		<verstretch>0</verstretch>
-	       </sizepolicy>
-	      </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -410,12 +407,12 @@ Increase this value if the reticle is skipping.</string>
            <layout class="QHBoxLayout" name="horizontalLayoutSerialPort">
             <item>
              <widget class="QLabel" name="labelSerialPort">
-	      <property name="sizePolicy">
-	       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-		<horstretch>0</horstretch>
-		<verstretch>0</verstretch>
-	       </sizepolicy>
-	      </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -454,12 +451,12 @@ Increase this value if the reticle is skipping.</string>
           </item>
           <item>
            <widget class="QLabel" name="labelDeviceModel">
-	    <property name="sizePolicy">
-	     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-	      <horstretch>0</horstretch>
-	      <verstretch>0</verstretch>
-	     </sizepolicy>
-	    </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -473,12 +470,12 @@ Increase this value if the reticle is skipping.</string>
           </item>
           <item>
            <widget class="QComboBox" name="comboBoxDeviceModel">
-	    <property name="sizePolicy">
-	     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-	      <horstretch>0</horstretch>
-	      <verstretch>0</verstretch>
-	     </sizepolicy>
-	    </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -489,12 +486,12 @@ Increase this value if the reticle is skipping.</string>
           </item>
           <item>
            <widget class="QLabel" name="labelDeviceModelDescription">
-	    <property name="sizePolicy">
-	     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-	      <horstretch>0</horstretch>
-	      <verstretch>0</verstretch>
-	     </sizepolicy>
-	    </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -568,12 +565,12 @@ Increase this value if the reticle is skipping.</string>
           </item>
           <item row="1" column="2">
            <widget class="QSpinBox" name="spinBoxTCPPort">
-	    <property name="sizePolicy">
-	     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-	      <horstretch>0</horstretch>
-	      <verstretch>0</verstretch>
-	     </sizepolicy>
-	    </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimum">
              <number>1024</number>
             </property>

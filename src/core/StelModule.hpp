@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include <QOpenGLFunctions>
 
 // Predeclaration
 class StelCore;
@@ -46,8 +47,9 @@ class QSettings;
 //!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 //! colorSchemeChanged(const QString&)
 //!	Load the given color style
-class StelModule : public QObject
+class StelModule : public QObject, protected QOpenGLFunctions 
 {
+	Q_OBJECT
 	// Do not add Q_OBJECT here!!
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.
@@ -135,5 +137,7 @@ public:
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
 };
+
+Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)
 
 #endif // _STELMODULE_HPP_

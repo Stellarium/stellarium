@@ -9,6 +9,8 @@ LINK_DIRECTORIES(/src)
 SET(Oculars_SRCS
   CCD.hpp
   CCD.cpp
+  Lens.hpp
+  Lens.cpp
   Ocular.hpp
   Ocular.cpp
   Oculars.hpp
@@ -24,37 +26,22 @@ SET(Oculars_SRCS
 )
 
 SET(Oculars_RES ../resources/Oculars.qrc)
-QT4_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
+QT5_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 
 ################# compiles .ui files ############
 SET(Oculars_UIS
   gui/ocularDialog.ui
 )
-QT4_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
-# Add here all the files which require moc compilation
-# that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
-SET(Oculars_MOC_HDRS
-  CCD.hpp
-  Ocular.hpp
-  Oculars.hpp
-  Telescope.hpp
-  gui/OcularDialog.hpp
-  gui/PropertyBasedTableModel.hpp
-  gui/OcularsGuiPanel.hpp
-)
+INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 
-# After this call, Oculars_MOC_SRCS = moc_Oculars.cxx
-QT4_WRAP_CPP(Oculars_MOC_SRCS ${Oculars_MOC_HDRS})
-
-INCLUDE(${QT_USE_FILE})
-
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
 	ADD_LIBRARY(Oculars
-		MODULE ${Oculars_SRCS} ${Oculars_MOC_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
+		MODULE ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
 	)
 
 	IF(APPLE)
@@ -67,7 +54,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
 
 	IF(WIN32)
 		SET_TARGET_PROPERTIES(Oculars
-			PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
+                        PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
 		)
 		SET(StelMain stelMain)
 	ELSE(WIN32)
@@ -81,11 +68,10 @@ ENDIF()
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Oculars-static
-		STATIC ${Oculars_SRCS} ${Oculars_MOC_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
+		STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
 	)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
 	TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
 ENDIF()
-

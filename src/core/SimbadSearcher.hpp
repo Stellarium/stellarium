@@ -32,7 +32,7 @@ class QNetworkAccessManager;
 class SimbadLookupReply : public QObject
 {
 	Q_OBJECT
-	Q_ENUMS(SimbadLookupStatus);
+	Q_ENUMS(SimbadLookupStatus)
 
 public:
 	friend class SimbadSearcher;

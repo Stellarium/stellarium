@@ -17,21 +17,21 @@ core.wait(2);
 
 status("loading image...");
 core.loadSkyImage("image", "../textures/earthmap.png", 
-                  "41d 0m 0s", "11d 30m 0s",     // ra, dec first corner
-                  "41d 10m 12s", "11d 30m 0s",  // ra, dec second corner
-                  "41d 10m 12s", "11d 45m 0s", // ra, dec third corner
-                  "41d 0m 0s", "11d 45m 0s",    // ra, dec fourth corner
+                  "11d 30m 0s", "41d 0m 0s",      // ra, dec first corner
+                  "11d 30m 0s", "41d 10m 12s",  // ra, dec second corner
+                  "11d 45m 0s", "41d 10m 12s", // ra, dec third corner
+                  "11d 45m 0s", "41d 0m 0s",     // ra, dec fourth corner
                   2.5, 14,      // minRes, maxBright
                   false);       // visible on load?
 
 core.wait(1.5);
 
 status("showing image (should fade in)");
-ScreenImageMgr.showImage("image", true); 
+StelSkyLayerMgr.showLayer("image", true); 
 core.wait(1.5);
 
 status("hiding image (should fade out)");
-ScreenImageMgr.showImage("image", false); 
+StelSkyLayerMgr.showLayer("image", false); 
 core.wait(1.5);
 
 status("removing image, kthxbye");

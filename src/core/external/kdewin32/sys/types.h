@@ -20,6 +20,17 @@
 #ifndef KDEWIN_SYS_TYPES_H
 #define KDEWIN_SYS_TYPES_H
 
+#ifdef _MSC_BUILD
+
+typedef unsigned int uid_t;
+typedef unsigned int gid_t;
+typedef unsigned int pid_t;
+typedef unsigned short mode_t;
+typedef int caddr_t;
+typedef unsigned int nlink_t;
+
+#else
+
 #include <../include/sys/types.h>
 
 typedef unsigned int uid_t;
@@ -27,6 +38,8 @@ typedef unsigned int gid_t;
 typedef int caddr_t;
 
 typedef unsigned int nlink_t;
+
+#endif
 
 // uint32
 #include <stdint.h>

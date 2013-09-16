@@ -37,15 +37,16 @@
 #ifndef __glues_h__
 #define __glues_h__
 
-#ifdef USE_OPENGL_ES2
-# include <GLES2/gl2.h>
-#elif defined(Q_OS_MAC) || defined(__APPLE__) || defined(__APPLE_CC__)
+#if defined(Q_OS_MAC) || defined(__APPLE__) || defined(__APPLE_CC__)
 # include <OpenGL/gl.h>
 #elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
 # include <GLES/gl.h>
 #elif defined(QT_OPENGL_ES_2)
 # include <GLES2/gl2.h>
 #else
+#ifdef _MSC_BUILD
+#include <windows.h>
+#endif
 # include <GL/gl.h>
 #endif
 

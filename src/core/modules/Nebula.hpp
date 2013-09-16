@@ -53,7 +53,7 @@ public:
 	virtual QString getType() const {return "Nebula";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
 	virtual double getCloseViewFov(const StelCore* core = NULL) const;
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor() const;
 	virtual QString getNameI18n() const {return nameI18;}
@@ -80,14 +80,14 @@ private:
 		NebGc=2,     //!< Globular star cluster, usually in the Milky Way Galaxy
 		NebN=3,      //!< Bright emission or reflection nebula
 		NebPn=4,     //!< Planetary nebula
-		NebDn=5,     //!< ??? 
-		NebIg=6,     //!< ??? 
+		NebDn=5,     //!< ??? Dark Nebula?      Does not exist in current catalog
+		NebIg=6,     //!< ??? Irregular Galaxy? Does not exist in current catalog
 		NebCn=7,     //!< Cluster associated with nebulosity
-		NebUnknown=8 //!< Unknown type
+		NebUnknown=8 //!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
-	void translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
+	void translateName(const StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);
@@ -98,6 +98,7 @@ private:
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
 	unsigned int IC_nb;             // Index Catalog number
+	unsigned int C_nb;              // Caldwell Catalog number
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude
@@ -109,9 +110,12 @@ private:
 	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
+	static StelTextureSP texGalaxy;
 	static StelTextureSP texOpenCluster;
 	static StelTextureSP texGlobularCluster;
-	static StelTextureSP texPlanetNebula;
+	static StelTextureSP texPlanetaryNebula;
+	static StelTextureSP texDiffuseNebula;
+	static StelTextureSP texOpenClusterWithNebulosity;
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;

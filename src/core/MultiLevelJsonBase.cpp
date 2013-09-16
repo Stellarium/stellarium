@@ -28,8 +28,8 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QHttp>
 #include <QUrl>
+#include <QDir>
 #include <QBuffer>
 #include <QThread>
 #include <QNetworkAccessManager>
@@ -146,7 +146,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		catch (std::runtime_error e)
 		{
-			qWarning() << "WARNING : Can't parse JSON description: " << fileName << ": " << e.what();
+			qWarning() << "WARNING : Can't parse JSON description: " << QDir::toNativeSeparators(fileName) << ": " << e.what();
 			errorOccured = true;
 			f.close();
 			return;
@@ -170,7 +170,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		Q_ASSERT(httpReply==NULL);
 		QNetworkRequest req(qurl);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 		httpReply = getNetworkAccessManager().get(req);
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);

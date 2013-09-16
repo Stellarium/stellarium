@@ -1,0 +1,38 @@
+//
+// Author: Qam1
+// Name: Eclipse from Olympus Mons Jan 10 2068
+// Version: 2.1
+// License: Public Domain
+// Description: Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.
+//
+
+LandscapeMgr.setCurrentLandscapeID("mars");
+
+core.setTimeRate(1);
+core.setDate("2068-01-10T10:36:00", "utc");
+core.setObserverLocation(-132.94, 18.2, 27012, 0, "Olympus Mons", "Mars");
+core.selectObjectByName("Sun", pointer = true);
+
+StelMovementMgr.setFlagTracking(true);
+
+core.selectObjectByName("Phobos", pointer = true);
+
+StelMovementMgr.zoomTo(1.8, 1);
+
+core.setTimeRate(1);
+core.wait(10);
+
+StelMovementMgr.zoomTo(1.2, 1);
+
+core.wait(5);
+
+StelMovementMgr.zoomTo(0.8, 1);
+
+core.waitr(60);
+
+StelMovementMgr.zoomTo(1.8, 1);
+
+core.waitFor(5);
+
+StelMovementMgr.zoomTo(4.8, 1);
+

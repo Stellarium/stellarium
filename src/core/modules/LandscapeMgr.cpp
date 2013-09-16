@@ -27,12 +27,6 @@
 #include <QFile>
 #include <QTemporaryFile>
 
-#ifdef USE_OPENGL_ES2
- #include "GLES2/gl2.h"
-#else
- #include <QtOpenGL>
-#endif
-
 #include <stdexcept>
 
 #include "LandscapeMgr.hpp"
@@ -121,6 +115,8 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	Vec3f xy;
 
 	float shift = sPainter.getFontMetrics().width(sNorth)/2;
+	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
+		shift = 0;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
@@ -143,7 +139,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 // Translate cardinal labels with gettext to current sky language and update font for the language
 void Cardinals::updateI18n()
 {
-	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
 	sNorth = trans.qtranslate("N");
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");
@@ -195,7 +191,7 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
 	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
-		ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
+		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
@@ -234,13 +230,14 @@ void LandscapeMgr::update(double deltaTime)
 
 	// We define the brigthness zero when the sun is 8 degrees below the horizon.
 	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+	float initBrightness = getInitialLandscapeBrightness();
 
 	if(sinSunAngleRad < -0.1/1.5 )
-		landscapeBrightness = 0.01;
+		landscapeBrightness = initBrightness;
 	else
-		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+		landscapeBrightness = (initBrightness + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core, true),0.)*moonPos[2];
+		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.)*moonPos[2];
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
@@ -250,8 +247,18 @@ void LandscapeMgr::update(double deltaTime)
 		landscapeBrightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
 	}
 
+	// Brightness can't be over 1.f (see https://bugs.launchpad.net/stellarium/+bug/1115364)
+	if (landscapeBrightness>0.95)
+		landscapeBrightness = 0.95;
+
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
-	landscape->setBrightness(landscapeBrightness+0.05);
+	if (core->getCurrentLocation().planetName.contains("Sun"))
+	{
+		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
+		landscape->setBrightness(1.f);
+	}
+	else
+		landscape->setBrightness(landscapeBrightness+0.05);
 }
 
 void LandscapeMgr::draw(StelCore* core)
@@ -277,18 +284,21 @@ void LandscapeMgr::init()
 	setCurrentLandscapeID(defaultLandscapeID);
 	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
-	setFlagAtmosphere(conf->value("landscape/flag_atmosphere").toBool());
+	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
 	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
+	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
+	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
+	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
 
 	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("landscape/init_bortle_scale",3).toInt(&ok));
+	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
 	{
-		conf->setValue("landscape/init_bortle_scale",3);
+		conf->setValue("stars/init_bortle_scale",3);
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
@@ -344,36 +354,35 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
-		  {
+		{
 			setFlagFog((bool) landscape->getDefaultFogSetting());
 			landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
-		  }
+		}
 		if (landscape->getDefaultBortleIndex() > 0)
-		  {
-		    setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-		    // TODO: HOWTO make the GUI aware of the new value? 
-		    // conf->setValue("landscape/init_bortle_scale", landscape->getDefaultBortleIndex());
-		  }
+		{
+			setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
+			drawer->setBortleScale(landscape->getDefaultBortleIndex());
+		}
 		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
-		  {
-		    drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
-		  }
+		{
+			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
+		}
 		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
-		  {
-		    drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
-		  }
+		{
+			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
+		}
 		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
-		  {
-		    drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
-		  }
+		{
+			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
+		}
 		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
-		  {
-		    // compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
-		    // International altitude formula found in Wikipedia.
-		    double alt=landscape->getLocation().altitude;
-		    double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
-		    drawer->setAtmospherePressure(p);
-		  }
+		{
+			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
+			// International altitude formula found in Wikipedia.
+			double alt=landscape->getLocation().altitude;
+			double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
+			drawer->setAtmospherePressure(p);
+		}
 	}
 	return true;
 }
@@ -436,6 +445,16 @@ void LandscapeMgr::setFlagFog(const bool displayed)
 bool LandscapeMgr::getFlagFog() const
 {
 	return landscape->getFlagShowFog();
+}
+
+void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
+{
+	flagLandscapeAutoSelection = enableAutoSelect;
+}
+
+bool LandscapeMgr::getFlagLandscapeAutoSelection() const
+{
+	return flagLandscapeAutoSelection;
 }
 
 /*********************************************************************
@@ -582,13 +601,13 @@ float LandscapeMgr::getAtmosphereLightPollutionLuminance() const
 void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
 {
 	// This is an empirical formula
-	setAtmosphereLightPollutionLuminance(qMax(0.,0.0020*std::pow(bIndex-1, 2.1)));
+	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
 }
 
 //! Get the light pollution following the Bortle Scale
 int LandscapeMgr::getAtmosphereBortleLightPollution()
 {
-	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0020, 1./2.1) + 1;
+	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0004, 1./2.1) + 1;
 }
 
 void LandscapeMgr::setZRotation(float d)
@@ -608,7 +627,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	QString s;
 	if (landscapeIni.status() != QSettings::NoError)
 	{
-		qWarning() << "ERROR parsing landscape.ini file: " << landscapeFile;
+		qWarning() << "ERROR parsing landscape.ini file: " << QDir::toNativeSeparators(landscapeFile);
 		s = "";
 	}
 	else
@@ -688,7 +707,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	Q_UNUSED(toMainDirectory);
 	if (!QFile::exists(sourceFilePath))
 	{
-		qDebug() << "LandscapeMgr: File does not exist:" << sourceFilePath;
+		qDebug() << "LandscapeMgr: File does not exist:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorUnableToOpen(sourceFilePath);
 		return QString();
 	}
@@ -702,7 +721,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 		//qDebug() << "LandscapeMgr: No 'landscapes' subdirectory exists in" << parentDestinationDir.absolutePath();
 		if (!parentDestinationDir.mkdir("landscapes"))
 		{
-			qWarning() << "LandscapeMgr: Unable to install landscape: Unable to create sub-directory 'landscapes' in" << parentDestinationDir.absolutePath();
+			qWarning() << "LandscapeMgr: Unable to install landscape: Unable to create sub-directory 'landscapes' in" << QDir::toNativeSeparators(parentDestinationDir.absolutePath());
 			emit errorUnableToOpen(QDir::cleanPath(parentDestinationDir.filePath("landscapes")));//parentDestinationDir.absolutePath()
 			return QString();
 		}
@@ -712,7 +731,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	KZip sourceArchive(sourceFilePath);
 	if(!sourceArchive.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << sourceFilePath;
+		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorNotArchive();
 		return QString();
 	}
@@ -804,11 +823,11 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	//This case already has been handled - and commented out - above. :)
 	if(destinationDir.exists(landscapeID))
 	{
-		qWarning() << "LandscapeMgr: A subdirectory" << landscapeID << "already exists in" << destinationDir.absolutePath() << "Its contents may be overwritten.";
+		qWarning() << "LandscapeMgr: A subdirectory" << landscapeID << "already exists in" << QDir::toNativeSeparators(destinationDir.absolutePath()) << "Its contents may be overwritten.";
 	}
 	else if(!destinationDir.mkdir(landscapeID))
 	{
-		qWarning() << "LandscapeMgr: Unable to install landscape. Unable to create" << landscapeID << "directory in" << destinationDir.absolutePath();
+		qWarning() << "LandscapeMgr: Unable to install landscape. Unable to create" << landscapeID << "directory in" << QDir::toNativeSeparators(destinationDir.absolutePath());
 		emit errorUnableToOpen(QDir::cleanPath(destinationDir.filePath(landscapeID)));
 		return QString();
 	}
@@ -835,7 +854,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	//Make sure that everyone knows that the list of available landscapes has changed
 	emit landscapesChanged();
 
-	qDebug() << "LandscapeMgr: Successfully installed landscape directory" << landscapeID << "to" << destinationDir.absolutePath();
+	qDebug() << "LandscapeMgr: Successfully installed landscape directory" << landscapeID << "to" << QDir::toNativeSeparators(destinationDir.absolutePath());
 	return landscapeID;
 }
 
@@ -864,7 +883,7 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 	{
 		if(!landscapeDir.remove(fileName))
 		{
-			qWarning() << "LandscapeMgr: Unable to remove" << fileName;
+			qWarning() << "LandscapeMgr: Unable to remove" << QDir::toNativeSeparators(fileName);
 			emit errorRemoveManually(landscapeDir.absolutePath());
 			return false;
 		}
@@ -881,7 +900,7 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 		return false;
 	}
 
-	qDebug() << "LandscapeMgr: Successfully removed" << landscapePath;
+	qDebug() << "LandscapeMgr: Successfully removed" << QDir::toNativeSeparators(landscapePath);
 
 	//If the landscape has been selected, revert to the default one
 	//TODO: Make this optional?
@@ -944,7 +963,7 @@ QString LandscapeMgr::loadLandscapeName(QString landscapeID)
 	}
 	else
 	{
-		qWarning() << "LandscapeMgr: Error! Landscape directory" << landscapePath << "does not contain a 'landscape.ini' file";
+		qWarning() << "LandscapeMgr: Error! Landscape directory" << QDir::toNativeSeparators(landscapePath) << "does not contain a 'landscape.ini' file";
 	}
 
 	return landscapeName;

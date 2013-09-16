@@ -16,18 +16,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
-#include <iomanip>
-#include <QtCore/QtCore>
-#include <QtGui/QtGui>
-#include <QTextStream>
-#include <QString>
-#include <QDebug>
-#include <QObject>
-#include <QVariant>
-#include <QVarLengthArray>
-
-#include <GLee.h>
-
 #include <cstdlib>
 #include "StelTextureMgr.hpp"
 #include "StelTexture.hpp"
@@ -45,12 +33,12 @@
 #include <QFile>
 #include <QTemporaryFile>
 #include <QSize>
-#include <QHttp>
 #include <QDebug>
 #include <QUrl>
 #include <QImage>
 #include <QNetworkReply>
-#include <QGLWidget>
+#include <QTimer>
+#include <QtEndian>
 
 ImageLoader::ImageLoader(const QString& path, int delay)
 	: QObject(), path(path), networkReply(NULL)
@@ -73,7 +61,7 @@ void ImageLoader::start()
 		QNetworkRequest req = QNetworkRequest(QUrl(path));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
 	} else {
@@ -109,30 +97,25 @@ void ImageLoader::directLoad() {
 	emit finished(image);
 }
 
-void StelTexture::setImage(QImage* img)
-{
-        qImage = *img;
-}
-
 StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f)
 {
 	width = -1;
 	height = -1;
+	initializeOpenGLFunctions();
 }
 
 StelTexture::~StelTexture()
 {
 	if (id != 0)
 	{
-		StelPainter::makeMainGLContextCurrent();
 		if (glIsTexture(id)==GL_FALSE)
 		{
 			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
 		}
 		else
 		{
-			StelPainter::glContext->deleteTexture(id);
+			glDeleteTextures(1, &id);
 		}
 		id = 0;
 	}
@@ -160,29 +143,18 @@ void StelTexture::reportError(const QString& aerrorMessage)
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
 
-//minor change by Eleni Maria Stea:
-//added texture unit (useful when multiple textures are used)
-//this change doesn't affect the previous calls of the function!
-
-bool StelTexture::bind(int texunit)
+bool StelTexture::bind()
 {
 	// qDebug() << "TEST bind" << fullPath;
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-#ifndef USE_OPENGL_ES2
-		if(GLEE_ARB_multitexture)
-#endif
-			glActiveTexture(GL_TEXTURE0 + texunit);
-
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
 	if (errorOccured)
-	{
-	Q_ASSERT(errorOccured);
 		return false;
-    }
 
 	if (!isLoadingImage && loader == NULL) {
 		isLoadingImage = true;
@@ -236,6 +208,73 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
+QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GLint *type)
+{
+	QByteArray ret;
+	const int width = image.width();
+	const int height = image.height();
+	if (image.isGrayscale())
+	{
+		*format = image.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
+	}
+	else if (image.hasAlphaChannel())
+	{
+		*format = GL_RGBA;
+	}
+	else
+		*format = GL_RGB;
+	*type = GL_UNSIGNED_BYTE;
+	int bpp = *format == GL_LUMINANCE_ALPHA ? 2 :
+			  *format == GL_LUMINANCE ? 1 :
+			  *format == GL_RGBA ? 4 :
+			  3;
+
+	ret.reserve(width * height * bpp);
+	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
+
+	// flips bits over y
+	int ipl = tmp.bytesPerLine() / 4;
+	for (int y = 0; y < height / 2; ++y)
+	{
+		int *a = (int *) tmp.scanLine(y);
+		int *b = (int *) tmp.scanLine(height - y - 1);
+		for (int x = 0; x < ipl; ++x)
+			qSwap(a[x], b[x]);
+	}
+
+	// convert data
+	for (int i = 0; i < height; ++i)
+	{
+		uint *p = (uint *) tmp.scanLine(i);
+		for (int x = 0; x < width; ++x)
+		{
+			uint c = qToBigEndian(p[x]);
+			const char* ptr = (const char*)&c;
+			switch (*format)
+			{
+			case GL_RGBA:
+				ret.append(ptr + 1, 3);
+				ret.append(ptr, 1);
+				break;
+			case GL_RGB:
+				ret.append(ptr + 1, 3);
+				break;
+			case GL_LUMINANCE:
+				ret.append(ptr + 1, 1);
+				break;
+			case GL_LUMINANCE_ALPHA:
+				ret.append(ptr + 1, 1);
+				ret.append(ptr, 1);
+				break;
+			default:
+				Q_ASSERT(false);
+			}
+		}
+	}
+	return ret;
+}
+
+
 // Actually load the texture to openGL memory
 bool StelTexture::glLoad()
 {
@@ -245,49 +284,20 @@ bool StelTexture::glLoad()
 		reportError("Unknown error");
 		return false;
 	}
-
-	//hikiko - case that max texture unit supported < qImage size
-	int size;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-
-	if (size < qImage.width())
-	{
-			qImage = qImage.scaledToWidth(size, Qt::FastTransformation);
-	}
-	if (size < qImage.height())
-	{
-			qImage = qImage.scaledToHeight(size, Qt::FastTransformation);
-	}
-
-	//end hikiko
-
-	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
-	if (loadParams.filtering==GL_LINEAR)
-		opt |= QGLContext::LinearFilteringBindOption;
-
-	// Mipmap seems to be pretty buggy on windows..
-#ifndef Q_OS_WIN
-	if (loadParams.generateMipmaps==true)
-		opt |= QGLContext::MipmapBindOption;
-#endif
-
-	GLint glformat;
-	if (qImage.isGrayscale())
-	{
-		glformat = qImage.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
-	}
-	else if (qImage.hasAlphaChannel())
-	{
-		glformat = GL_RGBA;
-	}
-	else
-		glformat = GL_RGB;
-
-	Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
-#ifdef USE_OPENGL_ES2
 	glActiveTexture(GL_TEXTURE0);
-#endif
-	id = StelPainter::glContext->bindTexture(qImage, GL_TEXTURE_2D, glformat, opt);
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
+
+	GLint format, type;
+	QByteArray data = convertToGLFormat(qImage, &format, &type);
+	glTexImage2D(GL_TEXTURE_2D, 0, format, qImage.width(), qImage.height(), 0, format,
+				 type, data.constData());
+	bool genMipmap = false;
+	if (genMipmap)
+		glGenerateMipmap(GL_TEXTURE_2D);
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
 

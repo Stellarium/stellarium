@@ -269,6 +269,9 @@ template<class T> class Matrix4
 	Matrix4<T> transpose() const;
 	Matrix4<T> inverse() const;
 
+	inline Vector4<T> getRow(const int row) const;
+	inline Vector4<T> getColumn(const int column) const;
+
 	inline void print(void) const;
 
 	T r[16];
@@ -353,6 +356,12 @@ template<class T> Vector2<T>& Vector2<T>::operator-=(const Vector2<T>& a)
 template<class T> Vector2<T>& Vector2<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s;
+	return *this;
+}
+
+template<class T> Vector2<T>& Vector2<T>::operator/=(T s)
+{
+	v[0] /= s; v[1] /= s;
 	return *this;
 }
 
@@ -700,13 +709,19 @@ template<class T> Vector4<T>& Vector4<T>::operator+=(const Vector4<T>& a)
 
 template<class T> Vector4<T>& Vector4<T>::operator-=(const Vector4<T>& a)
 {
-	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a/v[3];
+	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a.v[3];
 	return *this;
 }
 
 template<class T> Vector4<T>& Vector4<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s; v[3] *= s;
+	return *this;
+}
+
+template<class T> Vector4<T>& Vector4<T>::operator/=(T s)
+{
+	v[0] /= s; v[1] /= s; v[2] /= s; v[3] /= s;
 	return *this;
 }
 
@@ -1163,6 +1178,15 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 #undef SWAP_ROWS
 }
 
+template<class T> Vector4<T> Matrix4<T>::getRow(const int row) const
+{
+	return Vector4<T>(r[0 + row], r[4 + row], r[8 + row], r[12 + row]);
+}
+
+template<class T> Vector4<T> Matrix4<T>::getColumn(const int column) const
+{
+	return Vector4<T>(r[0 + column * 4], r[1 + column * 4], r[2 + column * 4], r[3 + column * 4]);
+}
 
 template<class T> void Matrix4<T>::print(void) const
 {

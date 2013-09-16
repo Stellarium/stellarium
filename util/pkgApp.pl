@@ -13,7 +13,7 @@ my $appdir = shift(@ARGV);
 chdir $appdir;
 my $main_executable = shift(@ARGV);
 my $frameworks_dir = shift(@ARGV);
-my $current_arch = `/usr/bin/arch`;
+my $current_arch = `/usr/bin/uname -m`;
 chomp($current_arch);
 
 if ( ! -e "$frameworks_dir/$current_arch" ) {
@@ -63,13 +63,16 @@ sub recurse {
 		if ( ! -e $fwPath ) {
 		    my $c = "cp -RP -p $absname $frameworks_dir/$fwname";
 		    `$c`;
+		    system('chmod', '-R', '755', "$frameworks_dir/$fwname");
 		} else {
 		    $not_existed = 0;
 		}
 
 		my $c = sprintf($id_inmt, $relPath, $fwPath);
+		print "$c\n";
 		`$c`;
 		$c = sprintf($ch_inmt, $name, $relPath, $main_executable);
+		print "$c\n";
 		`$c`;
 
 		if ( $not_existed ) {
@@ -97,13 +100,16 @@ sub recurse {
 		if ( ! -e $fwPath ) {
 		    my $c = "cp -RP -p $absname $frameworks_dir/$fwname";
 		    `$c`;
+		    system('chmod', '-R', '755', "$frameworks_dir/$fwname");
 		} else {
 		    $not_existed = 0;
 		}
 
 		my $c = sprintf($id_inmt, $relPath, $fwPath);
+		print "$c\n";
 		`$c`;
 		$c = sprintf($ch_inmt, $name, $relPath, $main_executable);
+		print "$c\n";
 		`$c`;
 
 		if ( $not_existed ) {
@@ -130,13 +136,16 @@ sub recurse {
 		if ( ! -e $fwPath ) {
 		    my $c = "cp -P $absname $frameworks_dir/$current_arch";
 		    `$c`;
+		    system('chmod', '-R', '755', "$frameworks_dir/$current_arch");
 		} else {
 		    $not_existed = 0;
 		}
 
 		my $c = sprintf($id_inmt, $relPath, $fwPath);
+		print "$c\n";
 		`$c`;
 		$c = sprintf($ch_inmt, $absname, $relPath, $main_executable);
+		print "$c\n";
 		`$c`;
 
 		if ( $not_existed ) {
@@ -166,8 +175,10 @@ sub recurse {
 		my $relPath = "\@executable_path/$basename";
 
 		my $c = sprintf($id_inmt, $relPath, $absname);
+		print "$c\n";
 		`$c`;
 		$c = sprintf($ch_inmt, $name, $relPath, $main_executable);
+		print "$c\n";
 		`$c`;
 
 		&recurse($absname, $frameworks_dir, $current_arch);
@@ -214,6 +225,9 @@ sub architecture {
     elsif ( grep(m/i386/, @output) ) {
 	$retval =  'i386';
     }
+    elsif ( grep(m/x86_64/, @output) ) {
+	$retval =  'x86_64';
+    }
     # warn qq{$0: $file isa '$retval' arch\n};
     return $retval;
 }
@@ -221,7 +235,7 @@ sub architecture {
 sub locateFramework {
     my $fname = shift;
     my $lib;
-    foreach $lib ( '~/Library/Frameworks', '/Library/Frameworks', '/usr/local/Trolltech/Qt-4.7.1/lib' ) {
+    foreach $lib ( '/opt/local/Library/Frameworks', '~/Library/Frameworks', '/Library/Frameworks', '/usr/local/Trolltech/Qt-4.7.1/lib' ) {
 	if ( -e "$lib/$fname" ) {
 	    return "$lib/$fname";
 	}

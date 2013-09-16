@@ -36,6 +36,10 @@
 
 #include "StelPainter.hpp"
 
+#ifdef __OpenBSD__
+#include <unistd.h>
+#endif
+
 // Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
 #ifndef MAP_NORESERVE
 #  ifdef MAP_AUTORESRV
@@ -118,13 +122,13 @@ public:
 	//! Level in StelGeodesicGrid.
 	const int level;
 
-	//! Lower bound of magnitudes in this catalog.
+	//! Lower bound of magnitudes in this level. Units: millimag. May be negative for brightest stars.
 	const int mag_min;
 
-	//! Range of magnitudes in this catalog.
+	//! Range of magnitudes in this level. Units: millimags
 	const int mag_range;
 
-	//! Number of steps used to describe values in @em mag_range.
+	//! Number of steps used to describe values in @em mag_range. Always positive. Individual stars have their mag entries from 0..mag_steps.
 	const int mag_steps;
 
 	float star_position_scale;
@@ -172,14 +176,14 @@ protected:
 	//! Draw stars and their names onto the viewport.
 	//! @param sPainter the painter to use 
 	//! @param index zone index to draw
-	//! @param is_inside whether the zone is inside the current viewport
+	//! @param isInsideViewport whether the zone is inside the current viewport
 	//! @param rcmag_table table of magnitudes
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
-	void draw(StelPainter* sPainter, int index,bool is_inside,
+	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			  const float *rcmag_table, StelCore* core,
-			  unsigned int maxMagStarName,float names_brightness) const;
+			  unsigned int maxMagStarName, float names_brightness) const;
 
 	void scaleAxis(void);
 	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,

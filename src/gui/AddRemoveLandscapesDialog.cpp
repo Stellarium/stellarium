@@ -114,10 +114,10 @@ void AddRemoveLandscapesDialog::browseForArchiveClicked()
 	QString filter = q_("ZIP archives");
 	filter += " (*.zip)";
 	#ifdef Q_OS_MAC
-	//work-around for Qt bug - http://bugreports.qt.nokia.com/browse/QTBUG-16722
-	QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter, 0, QFileDialog::DontUseNativeDialog);
+		//work-around for Qt bug - http://bugreports.qt.nokia.com/browse/QTBUG-16722
+		QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter, 0, QFileDialog::DontUseNativeDialog);
 	#else
-	QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter);
+		QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter);
 	#endif
 	bool useLandscape = ui->checkBoxUseLandscape->isChecked();
 	if (!sourceArchivePath.isEmpty() && QFile::exists(sourceArchivePath))

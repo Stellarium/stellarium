@@ -37,9 +37,12 @@
 #include <QBuffer>
 
 StelTextureSP Nebula::texCircle;
+StelTextureSP Nebula::texGalaxy;
 StelTextureSP Nebula::texOpenCluster;
 StelTextureSP Nebula::texGlobularCluster;
-StelTextureSP Nebula::texPlanetNebula;
+StelTextureSP Nebula::texPlanetaryNebula;
+StelTextureSP Nebula::texDiffuseNebula;
+StelTextureSP Nebula::texOpenClusterWithNebulosity;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
@@ -48,7 +51,8 @@ Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
 Nebula::Nebula() :
 		M_nb(0),
 		NGC_nb(0),
-		IC_nb(0)
+		IC_nb(0),
+		C_nb(0)
 {
 	nameI18 = "";
 	angularSize = -1;
@@ -83,6 +87,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
 			catIds << QString("IC %1").arg(IC_nb);
+		if ((C_nb > 0) && (C_nb < 110))
+			catIds << QString("C %1").arg(C_nb);
 		oss << catIds.join(" - ");
 
 		if (nameI18!="" && flags&Name)
@@ -98,10 +104,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (mag < 50 && flags&Magnitude)
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-										QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
 	oss << getPositionInfoString(core, flags);
 
@@ -113,17 +119,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
-float Nebula::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Nebula::getVMagnitude(const StelCore* core) const
 {
-    float extinctionMag=0.0; // track magnitude loss
-    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-    {
-	Vec3d altAz=getAltAzPosApparent(core);
-	altAz.normalize();
-	core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-    }
-
-    return mag+extinctionMag;
+    return mag;
 }
 
 
@@ -136,14 +134,15 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	}
 	else
 	{
-		if (getVMagnitude(core, false)>20.f) return 20.f;
-		return getVMagnitude(core, false);
+		if (getVMagnitude(core)>20.f) return 20.f;
+		return getVMagnitude(core);
 	}
 }
 
 Vec3f Nebula::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.4) : ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
+	Vec3f col = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
+	return StelApp::getInstance().getVisionModeNight() ? StelUtils::getNightColor(col) : col;
 }
 
 double Nebula::getCloseViewFov(const StelCore*) const
@@ -153,45 +152,81 @@ double Nebula::getCloseViewFov(const StelCore*) const
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
-	if (mag>maxMagHints)
+	float lim = mag;
+	if (lim > 50) lim = 15.f;
+
+	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
+	if (getEnglishName().contains("Pleiades"))
+		lim = 5.f;
+
+	if (lim>maxMagHints)
 		return;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
-	sPainter.setColor(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness, 1);
-	if (nType == 1)
-		Nebula::texOpenCluster->bind();
+	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
+	if (StelApp::getInstance().getVisionModeNight())
+		col = StelUtils::getNightColor(col);
 
-	if (nType == 2)
-		Nebula::texGlobularCluster->bind();
-
-	if (nType == 4)
-		Nebula::texPlanetNebula->bind();
-
-	if (nType != 1 && nType != 2 && nType != 4)
-		Nebula::texCircle->bind();
+	sPainter.setColor(col[0], col[1], col[2], 1);
+	switch (nType) {
+		case NebGx:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebOc:
+			Nebula::texOpenCluster->bind();
+			break;
+		case NebGc:
+			Nebula::texGlobularCluster->bind();
+			break;
+		case NebN:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebPn:
+			Nebula::texPlanetaryNebula->bind();
+			break;
+		case NebCn:
+			Nebula::texOpenClusterWithNebulosity->bind();
+			break;
+		default:
+			Nebula::texCircle->bind();
+	}
 
 	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
-	if (mag>maxMagLabel)
+	float lim = mag;
+	if (lim > 50) lim = 15.f;
+
+	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
+	if (getEnglishName().contains("Pleiades"))
+		lim = 5.f;
+
+	if (lim>maxMagLabel)
 		return;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
+
+	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
+	if (StelApp::getInstance().getVisionModeNight())
+		col = StelUtils::getNightColor(col);
+
+	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	float shift = 4.f + size/1.8f;
 	QString str;
-	if (nameI18!="")
+	if (!nameI18.isEmpty())
 		str = getNameI18n();
 	else
 	{
 		if (M_nb > 0)
 			str = QString("M %1").arg(M_nb);
+		else if (C_nb > 0)
+			str = QString("C %1").arg(C_nb);
 		else if (NGC_nb > 0)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
-			str = QString("IC %1").arg(IC_nb);
+			str = QString("IC %1").arg(IC_nb);		
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
@@ -216,6 +251,13 @@ void Nebula::readNGC(QDataStream& in)
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)type;
+	// GZ: Trace the undefined entries...
+	//if (type >= 5) {
+	//	qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
+	//}
+	if (type == 5) {
+		qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
+	}
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
 
@@ -313,6 +355,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebPn:
 			wsType = q_("Planetary nebula");
+			break;
+		case NebDn:
+			wsType = q_("Dark Nebula");
 			break;
 		case NebCn:
 			wsType = q_("Cluster associated with nebulosity");

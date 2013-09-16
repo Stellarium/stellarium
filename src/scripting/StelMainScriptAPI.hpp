@@ -51,6 +51,13 @@ public slots:
 	//! @return the Julian Date
 	double getJDay() const;
 
+	//! Set the current date in Modified Julian Day
+	//! @param MJD the Modified Julian Date
+	void setMJDay(double MJD);
+	//! Get the current date in Modified Julian Day
+	//! @return the Modified Julian Date
+	double getMJDay() const;
+
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
 	//! @param dt the date string to use.  Formats:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
@@ -60,15 +67,20 @@ public slots:
 	//!   You may also append " sidereal" to use sidereal days and so on.
 	//!   You can also use "now" at the start.  For example:
 	//!   "now + 3 hours sidereal"
-	//!   Note: you must use the plural all the time, even when the number
-	//!   of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
-	//! Note: when sidereal time is used, the length of time for
+	//! @note you must use the plural all the time, even when the number
+	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
+	//! @note when sidereal time is used, the length of time for
 	//! each unit is dependent on the current planet.  By contrast
 	//! when sidereal timeis not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used.
-	void setDate(const QString& dt, const QString& spec="utc");
+	//! the ISO date type is used. Defaults to "utc".
+	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
+	//! Defaults to "true".
+	//! @note for fully compatibles behavior of this function with the version 0.11.4
+	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
+	//! before running \b core.setDate(); for disabling DeltaT correction.
+	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
@@ -76,6 +88,25 @@ public slots:
 	//! else it is local time.
 	//! @return the current simulation time.
 	QString getDate(const QString& spec="utc");
+
+	//! get the DeltaT for the simulation date and time as a string
+	//! in HMS format, e.g. "0h1m68.2s"
+	//! @return the DeltaT for current simulation time.
+	QString getDeltaT() const;
+
+	//! get the DeltaT equation name for the simulation date and time as a string
+	//! @return name of the DeltaT equation
+	QString getDeltaTAlgorithm() const;
+
+	//! set equation of the DeltaT for the simulation date and time
+	//! @param algorithmName is name of equation, e.g. "WithoutCorrection" or "EspenakMeeus"
+	//! @note list of possible names of equation for DeltaT: WithoutCorrection, Schoch, Clemence, IAU,
+	//! AstronomicalEphemeris, TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979,
+	//! MorrisonStephenson1982, StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski,
+	//! SchmadelZech1988, ChaprontTouze, StephensonMorrison1995, Stephenson1997, ChaprontMeeus,
+	//! JPLHorizons, MeeusSimons, MontenbruckPfleger, ReingoldDershowitz, MorrisonStephenson2004,
+	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Custom.
+	void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
@@ -106,13 +137,55 @@ public slots:
 	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data.  Keys:
-	//! - altitude : altitude angle in decimal degrees
-	//! - azimuth : azimuth angle in decimal degrees
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! @deprecated Use getObjectInfo()
 	QVariantMap getObjectPosition(const QString& name);
+
+	//! Fetch a map with data about an object's position, magnitude and so on
+	//! @param name is the English name of the object for which data will be
+	//! returned.
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
+	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (extincted)
+	//! - size : angular size in decimal degrees
+	//! - localized-name : localized name
+	QVariantMap getObjectInfo(const QString& name);
+
+	//! Fetch a map with data about an latest selected object's position, magnitude and so on
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
+	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (extincted)
+	//! - size : angular size in decimal degrees
+	//! - name : english name
+	//! - localized-name : localized name
+	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
@@ -201,6 +274,18 @@ public slots:
 	//! Get the ID of the current observer location.
 	QString getObserverLocation();
 
+	//! Get the info of the current observer location.
+	//! @return a map of object data.  Keys:
+	//! - altitude : altitude in meters
+	//! - longitude : longitude in decimal degrees
+	//! - latitude : latitude in decimal degrees
+	//! - planet : name of planet
+	//! - location : city and country
+	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
+	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
+	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
+	QVariantMap getObserverLocationInfo();
+
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If
@@ -287,6 +372,14 @@ public slots:
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
 
+	//! Find out the current sky culture and get it English name
+	//! @return the English name of the current sky culture
+	QString getSkyCultureName();
+
+	//! Find out the current sky culture and get it localized name
+	//! @return the translated name of the current sky culture
+	QString getSkyCultureNameI18n();
+
 	//! Get the current status of the gravity labels option
 	//! @return true if gravity labels are enabled, else false
 	bool getFlagGravityLabels();
@@ -303,13 +396,13 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra0 The right ascension of the first corner of the image in degrees
-	//! @param dec0 The declenation of the first corner of the image in degrees
+	//! @param dec0 The declination of the first corner of the image in degrees
 	//! @param ra1 The right ascension of the second corner of the image in degrees
-	//! @param dec1 The declenation of the second corner of the image in degrees
+	//! @param dec1 The declination of the second corner of the image in degrees
 	//! @param ra2 The right ascension of the third corner of the image in degrees
-	//! @param dec2 The declenation of the third corner of the image in degrees
+	//! @param dec2 The declination of the third corner of the image in degrees
 	//! @param ra3 The right ascension of the fourth corner of the image in degrees
-	//! @param dec3 The declenation of the fourth corner of the image in degrees
+	//! @param dec3 The declination of the fourth corner of the image in degrees
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
@@ -319,6 +412,7 @@ public slots:
 					  double ra2, double dec2,
 					  double ra3, double dec3,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
+
 
 	//! Convenience function which allows the user to provide RA and DEC angles
 	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by
@@ -338,7 +432,7 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra The right ascension of the center of the image in J2000 frame degrees
-	//! @param dec The declenation of the center of the image in J2000 frame degrees
+	//! @param dec The declination of the center of the image in J2000 frame degrees
 	//! @param angSize The angular size of the image in arc minutes
 	//! @param rotation The clockwise rotation angle of the image in degrees
 	//! @param minRes The minimum resolution setting for the image
@@ -354,6 +448,49 @@ public slots:
 	//! ra and dec, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  const QString& ra, const QString& dec, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
+
+	//! Load an image which will have sky coordinates.
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting
+	//! it.
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param alt0 The altitude angle of the first corner of the image in degrees
+	//! @param azi0 The azimuth angle of the first corner of the image in degrees
+	//! @param alt1 The altitude angle of the second corner of the image in degrees
+	//! @param azi1 The azimuth angle of the second corner of the image in degrees
+	//! @param alt2 The altitude angle of the third corner of the image in degrees
+	//! @param azi2 The azimuth angle of the third corner of the image in degrees
+	//! @param alt3 The altitude angle of the fourth corner of the image in degrees
+	//! @param azi3 The azimuth angle of the fourth corner of the image in degrees
+	//! @param minRes The minimum resolution setting for the image
+	//! @param maxBright The maximum brightness setting for the image
+	//! @param visible The initial visibility of the image
+	void loadSkyImageAltAz(const QString& id, const QString& filename,
+					  double alt0, double azi0,
+					  double alt1, double azi1,
+					  double alt2, double azi2,
+					  double alt3, double azi3,
+					  double minRes=2.5, double maxBright=14, bool visible=true);
+
+	//! Convenience function which allows loading of a sky image based on a
+	//! central coordinate, angular size and rotation.
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting it.
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param alt The altitude angle of the center of the image in degrees
+	//! @param azi The azimuth angle of the center of the image in degrees
+	//! @param angSize The angular size of the image in arc minutes
+	//! @param rotation The clockwise rotation angle of the image in degrees
+	//! @param minRes The minimum resolution setting for the image
+	//! @param maxBright The maximum brightness setting for the image
+	//! @param visible The initial visibility of the image
+	void loadSkyImageAltAz(const QString& id, const QString& filename,
+					  double alt, double azi, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Remove a SkyImage.
@@ -386,6 +523,63 @@ public slots:
 	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
 
+	//! Load a video from a file.
+	//! @param filename the name of the file to load.
+	//! @param id the identifier which will be used to refer to the video
+	//! when calling playVideo, pauseVideo, stopVideo and dropVideo.
+	//! @param x  the x-coordinate for the video widget.
+	//! @param y  the y-coordinate for the video widget.
+	//! @param show  the visibility state for the video.
+	//! @param alpha the initial alpha value of the video.
+	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
+
+	//! Play a video which has previously been loaded with loadVideo
+	//! @param id the identifier used when loadVideo was called
+	void playVideo(const QString& id);
+
+	//! Pause a video which is playing.  Subsequent playVideo calls will
+	//! resume playing from the position in the file when it was paused.
+	//! @param id the identifier used when loadVideo was called
+	void pauseVideo(const QString& id);
+
+	//! Stop a video from playing.  This resets the position in the
+	//! video to the start so that subsequent playVideo calls will
+	//! start from the beginning.
+	//! @param id the identifier used when loadVideo was called
+	void stopVideo(const QString& id);
+
+	//! Drop a video from memory.  You should do this before the end
+	//! of your script.
+	//! @param id the identifier used when loadVideo was called
+	void dropVideo(const QString& id);
+
+	//! Seeks a video to the requested time.
+	//! @param id the identifier used when loadVideo was called
+	//! @param ms the time in milliseconds from the start of the media.
+        void seekVideo(const QString& id, qint64 ms);                                   
+
+	//! Sets the position of the video widget.
+	//! @param id the identifier used when loadVideo was called
+	//! @param x the new x-coordinate for the video. 
+	//! @param y the new y-coordinate for the video. 
+        void setVideoXY(const QString& id, float x, float y);                           
+
+	//! Set the alpha value of a video when visible.
+	//! @param id the identifier used when loadVideo was called
+	//! @param alpha the new alpha value to set.
+        void setVideoAlpha(const QString& id, float alpha);                             
+
+	//! Resize the video widget to the specified width, height. 
+	//! @param id the identifier used when loadVideo was called
+	//! @param w the new width for the widget.
+	//! @param h the new height for the widget.
+        void resizeVideo(const QString& id, float w, float h);
+
+	//! Set the visibility state of a video.
+	//! @param id the identifier used when loadVideo was called
+	//! @param show the new visible state of the video.
+        void showVideo(const QString& id, bool show);
+
 	//! Get the screen width in pixels.
 	//! @return The screen width in pixels
 	int getScreenWidth();
@@ -401,6 +595,10 @@ public slots:
 	//! if 5 is passed the script will execute 5 times faster than it would
 	//! if the script rate was 1.
 	void setScriptRate(double r);
+
+	//! Pause the currently running script. Note that you may need to use 
+	//! the key '6' or the GUI to resume script execution.
+	void pauseScript();
 
 	//! Set the amount of selected object information to display
 	//! @param level can be "AllInfo", "ShortInfo", "None"
@@ -432,6 +630,21 @@ public slots:
 	//! @param langCode two letter language code, e.g. "en", or "de".
 	void setSkyLanguage(QString langCode);
 
+	//! Go to defaults position and direction of view
+	void goHome();
+
+	//! Show or hide the Milky Way.
+	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
+	void setMilkyWayVisible(bool b);
+
+	//! Set Milky Way intensity.
+	//! @param i value of intensity for the Milky Way
+	void setMilkyWayIntensity(double i);
+
+	//! Get Milky Way intensity.
+	//! @return value of Milky Way intensity, e.g. "1.2"
+	double getMilkyWayIntensity();
+
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
@@ -444,6 +657,13 @@ signals:
 							 double c5, double c6,
 							 double c7, double c8,
 							 double minRes, double maxBright, bool visible);
+	void requestLoadSkyImageAltAz(const QString& id, const QString& filename,
+							 double c1, double c2,
+							 double c3, double c4,
+							 double c5, double c6,
+							 double c7, double c8,
+							 double minRes, double maxBright, bool visible);
+
 
 	void requestRemoveSkyImage(const QString& id);
 
@@ -452,11 +672,23 @@ signals:
 	void requestPauseSound(const QString& id);
 	void requestStopSound(const QString& id);
 	void requestDropSound(const QString& id);
+	void requestLoadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
+	void requestPlayVideo(const QString& id);
+	void requestPauseVideo(const QString& id);
+	void requestStopVideo(const QString& id);
+	void requestDropVideo(const QString& id);
+	void requestSeekVideo(const QString& id, qint64 ms);
+	void requestSetVideoXY(const QString& id, float x, float y);
+	void requestSetVideoAlpha(const QString& id, float alpha);
+	void requestResizeVideo(const QString& id, float w, float h);
+	void requestShowVideo(const QString& id, bool show);
+	
 	void requestSetNightMode(bool b);
 	void requestSetProjectionMode(QString id);
 	void requestSetSkyCulture(QString id);
 	void requestSetDiskViewport(bool b);
 	void requestExit();
+	void requestSetHomePosition();
 };
 
 #endif // _STELMAINSCRIPTAPI_HPP_

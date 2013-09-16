@@ -20,6 +20,7 @@
 #ifndef _STELOBJECT_HPP_
 #define _STELOBJECT_HPP_
 
+#include <QFlags>
 #include <QString>
 #include "VecMath.hpp"
 #include "StelObjectType.hpp"
@@ -38,7 +39,8 @@ public:
 	//! filter results of getInfoString. The precise definition of these should
 	//! be documented in the getInfoString documentation for the derived classes
 	//! for all specifiers which are defined in that derivative.
-	enum InfoStringGroup
+	//! Use InfoStringGroup instead.
+	enum InfoStringGroupFlags
 	{
 		Name          = 0x00000001, //!< An object's name
 		CatalogNumber = 0x00000002, //!< Catalog numbers
@@ -53,13 +55,16 @@ public:
 		Extra3        = 0x00000400, //!< Derived class-specific extra fields
 		PlainText     = 0x00000800, //!< Strip HTML tags from output
 		HourAngle     = 0x00001000,  //!< The hour angle + DE (of date)
-		AbsoluteMagnitude = 0x00002000  //!< The absolute magnitude
+		AbsoluteMagnitude = 0x00002000,  //!< The absolute magnitude
+		GalCoordJ2000 = 0x00004000	//!< The galactic position (J2000 ref) GZ: HEY STOP! GalCoords are DEFINED in B1950 coordinates! What we have here is a transformation matrix preconfigured to do precession J2000->B1950 and Equ.B1950->Gal. But "GalCoord for J2000" does not make sense.
 	};
+	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
+	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup AllInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude|GalCoordJ2000);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroup ShortInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000);
+	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() {}
 
@@ -92,6 +97,9 @@ public:
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
 
+	//! Get observer-centered galactic coordinates at equinox J2000
+	Vec3d getJ2000GalacticPos(const StelCore* core) const;
+
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
@@ -117,8 +125,11 @@ public:
 	//! The frame has it's Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
-	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	//! Return object's apparent V magnitude as seen from observer, without including extinction.
+	virtual float getVMagnitude(const StelCore* core) const;
+	
+	//! Return object's apparent V magnitude as seen from observer including extinction.
+	float getVMagnitudeWithExtinction(const StelCore* core) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
@@ -147,5 +158,7 @@ protected:
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(StelObject::InfoStringGroup)
 
 #endif // _STELOBJECT_HPP_

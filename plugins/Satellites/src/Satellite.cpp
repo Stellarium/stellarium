@@ -32,7 +32,6 @@
 #include <QRegExp>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QSettings>
 #include <QByteArray>
 
@@ -53,7 +52,15 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-		: initialized(false), visible(true), newlyAdded(false), orbitValid(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+    : initialized(false),
+      displayed(true),
+      orbitDisplayed(false),
+      userDefined(false),
+      newlyAdded(false),
+      orbitValid(false),
+      hintColor(0.0,0.0,0.0),
+      lastUpdated(),
+      pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -68,28 +75,29 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	if (name.isEmpty())
 		return;
 	
-	if (map.contains("description")) description = map.value("description").toString();
-	if (map.contains("visible")) visible = map.value("visible").toBool();
-	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
+	// If there are no such keys, these will be initialized with the default
+	// values given them above.
+	description = map.value("description", description).toString().trimmed();
+	displayed = map.value("visible", displayed).toBool();
+	orbitDisplayed = map.value("orbitVisible", orbitDisplayed).toBool();
+	userDefined = map.value("userDefined", userDefined).toBool();
 
-	if (map.contains("hintColor"))
+	// Satellite hint color
+	QVariantList list = map.value("hintColor", QVariantList()).toList();
+	if (list.count() == 3)
 	{
-		if (map.value("hintColor").toList().count() == 3)
-		{
-			hintColor[0] = map.value("hintColor").toList().at(0).toDouble();
-			hintColor[1] = map.value("hintColor").toList().at(1).toDouble();
-			hintColor[2] = map.value("hintColor").toList().at(2).toDouble();
-		}
+		hintColor[0] = list.at(0).toDouble();
+		hintColor[1] = list.at(1).toDouble();
+		hintColor[2] = list.at(2).toDouble();
 	}
-
-	if (map.contains("orbitColor"))
+	
+	// Satellite orbit section color
+	list = map.value("orbitColor", QVariantList()).toList();
+	if (list.count() == 3)
 	{
-		if (map.value("orbitColor").toList().count() == 3)
-		{
-			orbitColorNormal[0] = map.value("orbitColor").toList().at(0).toDouble();
-			orbitColorNormal[1] = map.value("orbitColor").toList().at(1).toDouble();
-			orbitColorNormal[2] = map.value("orbitColor").toList().at(2).toDouble();
-		}
+		orbitColorNormal[0] = list.at(0).toDouble();
+		orbitColorNormal[1] = list.at(1).toDouble();
+		orbitColorNormal[2] = list.at(2).toDouble();
 	}
 	else
 	{
@@ -113,7 +121,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		foreach(const QVariant &comm, map.value("comms").toList())
 		{
 			QVariantMap commMap = comm.toMap();
-			commLink c;
+			CommLink c;
 			if (commMap.contains("frequency")) c.frequency = commMap.value("frequency").toDouble();
 			if (commMap.contains("modulation")) c.modulation = commMap.value("modulation").toString();
 			if (commMap.contains("description")) c.description = commMap.value("description").toString();
@@ -121,27 +129,27 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		}
 	}
 
-	if (map.contains("groups"))
+	QVariantList groupList =  map.value("groups", QVariantList()).toList();
+	if (!groupList.isEmpty())
 	{
-		foreach(const QVariant &group, map.value("groups").toList())
-		{
-			if (!groupIDs.contains(group.toString()))
-				groupIDs << group.toString();
-		}
+		foreach(const QVariant& group, groupList)
+			groups.insert(group.toString());
 	}
 
+	// TODO: Somewhere here - some kind of TLE validation.
 	QString line1 = map.value("tle1").toString();
 	QString line2 = map.value("tle2").toString();
 	setNewTleElements(line1, line2);
-	internationalDesignator = extractInternationalDesignator(line1);
+	// This also sets the international designator and launch year.
 
-	if (map.contains("lastUpdated"))
-	{
-		lastUpdated = QDateTime::fromString(map.value("lastUpdated").toString(),
-		                                    Qt::ISODate);
-	}
+	QString dateString = map.value("lastUpdated").toString();
+	if (!dateString.isEmpty())
+		lastUpdated = QDateTime::fromString(dateString, Qt::ISODate);
+
 	orbitValid = true;
 	initialized = true;
+
+	update(0.);
 }
 
 Satellite::~Satellite()
@@ -167,18 +175,20 @@ QVariantMap Satellite::getMap(void)
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
-	if (!description.isEmpty() && description!="")
+	if (!description.isEmpty())
 		map["description"] = description;
 
-	map["visible"] = visible;
-	map["orbitVisible"] = orbitVisible;
+	map["visible"] = displayed;
+	map["orbitVisible"] = orbitDisplayed;
+	if (userDefined)
+		map.insert("userDefined", userDefined);
 	QVariantList col, orbitCol;
 	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
 	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
 	map["hintColor"] = col;
 	map["orbitColor"] = orbitCol;
 	QVariantList commList;
-	foreach(const commLink &c, comms)
+	foreach(const CommLink &c, comms)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -188,7 +198,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	foreach(const QString &g, groupIDs)
+	foreach(const QString &g, groups)
 	{
 		groupList << g;
 	}
@@ -217,7 +227,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		oss << "<h2>" << name << "</h2>";
 		if (!description.isEmpty())
-			oss << description << "<br/>";
+			oss << q_(description) << "<br/>";
 	}
 	
 	if (flags & CatalogNumber)
@@ -234,6 +244,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 					 .arg(q_("International Designator"))
 			                 .arg(internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
+	}
+
+	if (flags & Extra1)
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
 	}
 	
 	// Ra/Dec etc.
@@ -300,7 +315,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags&Extra2 && comms.size() > 0)
 	{
-		foreach(const commLink &c, comms)
+		foreach(const CommLink &c, comms)
 		{
 			double dop = getDoppler(c.frequency);
 			double ddop = dop;
@@ -329,22 +344,19 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
+Vec3d Satellite::getJ2000EquatorialPos(const StelCore* core) const
+{
+	return core->altAzToJ2000(elAzPosition);;
+}
+
 Vec3f Satellite::getInfoColor(void) const
 {
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
 }
 
-float Satellite::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Satellite::getVMagnitude(const StelCore* core) const
 {
-    float extinctionMag=0.0; // track magnitude loss
-    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-    {
-	Vec3d altAz=getAltAzPosApparent(core);
-	altAz.normalize();
-	core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-    }
-
-    return 5.0 + extinctionMag;
+    return 5.0;
 }
 
 double Satellite::getAngularSize(const StelCore*) const
@@ -368,13 +380,17 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
+	
+	parseInternationalDesignator(tle1);
 }
 
 void Satellite::update(double)
 {
 	if (pSatWrapper && orbitValid)
 	{
-		epochTime = StelApp::getInstance().getCore()->getJDay();
+		StelCore* core = StelApp::getInstance().getCore();
+		double JD = core->getJDay();
+		epochTime = JD - core->getDeltaT(JD)/86400; // Delta T anti-correction for artificial satellites
 
 		pSatWrapper->setEpoch(epochTime);
 		position                 = pSatWrapper->getTEMEPos();
@@ -389,7 +405,7 @@ void Satellite::update(double)
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
 			// the satellite.
-			qWarning() << "Satellite has invalid orbit:" << name;
+			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
 			return;
 		}
@@ -401,7 +417,7 @@ void Satellite::update(double)
 		visibility = pSatWrapper->getVisibilityPredict();
 
 		// Compute orbit points to draw orbit line.
-		if (orbitVisible) computeOrbitPoints();
+		if (orbitDisplayed) computeOrbitPoints();
 	}
 }
 
@@ -418,37 +434,79 @@ void Satellite::recalculateOrbitLines(void)
 	orbitPoints.clear();
 }
 
-QString Satellite::extractInternationalDesignator(const QString& tle1)
+SatFlags Satellite::getFlags()
 {
-	QString result;
-	if (tle1.isEmpty())
-		return result;
-	
-	// The designator is encoded as the 3rd group on the first line
-	QString rawString = tle1.split(' ').at(2);
-	if (rawString.isEmpty())
-		return result;
-	
-	//TODO: Use a regular expression?
-	bool ok;
-	int year = rawString.left(2).toInt(&ok);
-	if (!ok)
-		return result;
-	
-	// Y2K bug :) I wonder what NORAD will do in 2057. :)
-	if (year < 57)
-		year += 2000;
+	// There's also a faster, but less readable way: treating them as uint.
+	SatFlags flags;
+	if (displayed)
+		flags |= SatDisplayed;
 	else
-		year += 1900;
-	
-	result = QString::number(year) + "-" + rawString.right(4);
-	return result;
+		flags |= SatNotDisplayed;
+	if (orbitDisplayed)
+		flags |= SatOrbit;
+	if (userDefined)
+		flags |= SatUser;
+	if (newlyAdded)
+		flags |= SatNew;
+	if (!orbitValid)
+		flags |= SatError;
+	return flags;
+}
+
+void Satellite::setFlags(const SatFlags& flags)
+{
+	displayed = flags.testFlag(SatDisplayed);
+	orbitDisplayed = flags.testFlag(SatOrbit);
+	userDefined = flags.testFlag(SatUser);
 }
 
 
+void Satellite::parseInternationalDesignator(const QString& tle1)
+{
+	Q_ASSERT(!tle1.isEmpty());
+	
+	// The designator is encoded as columns 10-17 on the first line.
+	QString rawString = tle1.mid(9, 8);
+	//TODO: Use a regular expression?
+	bool ok;
+	int year = rawString.left(2).toInt(&ok);
+	if (!rawString.isEmpty() && ok)
+	{
+		// Y2K bug :) I wonder what NORAD will do in 2057. :)
+		if (year < 57)
+			year += 2000;
+		else
+			year += 1900;
+		internationalDesignator = QString::number(year) + "-" + rawString.right(4);
+	}
+	else
+		year = 1957;
+	
+	StelUtils::getJDFromDate(&jdLaunchYearJan1, year, 1, 1, 0, 0, 0);
+	//qDebug() << rawString << internationalDesignator << year;
+}
+
+bool Satellite::operator <(const Satellite& another) const
+{
+	// If interface strings are used, you'll need QString::localeAwareCompare()
+	int comp = name.compare(another.name);
+	if (comp < 0)
+		return true;
+	if (comp > 0)
+		return false;
+	
+	// If the names are the same, compare IDs, i.e. NORAD numbers.
+	if (id < another.id)
+		return true;
+	else
+		return false;
+}
+
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
-	XYZ = core->altAzToJ2000(elAzPosition);
+	if (core->getJDay() < jdLaunchYearJan1) return;
+
+	XYZ = getJ2000EquatorialPos(core);
 	Vec3f drawColor;
 	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
 	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
@@ -465,7 +523,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
 
-		if (orbitVisible && Satellite::orbitLinesFlag) drawOrbit(painter);
+		if (orbitDisplayed && Satellite::orbitLinesFlag) drawOrbit(painter);
 	}
 }
 
@@ -622,3 +680,18 @@ void Satellite::computeOrbitPoints()
 	}
 }
 
+
+bool operator <(const SatelliteP& left, const SatelliteP& right)
+{
+	if (left.isNull())
+	{
+		if (right.isNull())
+			return false;
+		else
+			return true;
+	}
+	if (right.isNull())
+		return false; // No sense to check the left one now
+	
+	return ((*left) < (*right));
+}

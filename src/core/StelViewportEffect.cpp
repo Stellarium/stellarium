@@ -25,11 +25,12 @@
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
 
-#include <QGLFramebufferObject>
+#include <QOpenGLFramebufferObject>
 #include <QSettings>
 #include <QFile>
+#include <QDir>
 
-void StelViewportEffect::paintViewportBuffer(const QGLFramebufferObject* buf) const
+void StelViewportEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
@@ -96,7 +97,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	// diameter of the FOV-disk in pixels
 	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toFloat();
 
-	texture_wh = 1;
+	// Vestigial mirror texture dimensions: used to be a single value,
 	while (texture_wh < newProjectorParams.viewportXywh[2] || texture_wh < newProjectorParams.viewportXywh[3])
 		texture_wh <<= 1;
 	viewport_texture_offset[0] = (texture_wh-newProjectorParams.viewportXywh[2])>>1;
@@ -167,6 +168,47 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 			}
 		}
 		for (int j=0;j<=max_y;j++)
+	
+	// FIXME: Comment out with /**/ after testing. --BM
+	/*qDebug() << "StelViewportDistorterFisheyeToSphericMirror():" 
+	         << "screen_w:" << this->screenWidth
+	         << "screen_h:" << this->screenHeight << endl
+	         << "originalProjectorParams.viewportXywh:" 
+	         << originalProjectorParams.viewportXywh[0] 
+	         << originalProjectorParams.viewportXywh[1] 
+	         << originalProjectorParams.viewportXywh[2] 
+	         << originalProjectorParams.viewportXywh[3] << endl
+	         << "newProjectorParams.viewportXywh:"
+	         << newProjectorParams.viewportXywh[0] 
+	         << newProjectorParams.viewportXywh[1] 
+	         << newProjectorParams.viewportXywh[2]
+	         << newProjectorParams.viewportXywh[3] << endl 
+	         << "originalProjectorParams.fov:"
+	         << originalProjectorParams.fov << endl 
+	         << "newProjectorParams.fov:" << newProjectorParams.fov << endl
+	         << "originalProjectorParams.viewportCenter:"
+	         << originalProjectorParams.viewportCenter[0] 
+	         << originalProjectorParams.viewportCenter[1] << endl
+	         << "newProjectorParams.viewportCenter:" 
+	         << newProjectorParams.viewportCenter[0] 
+	         << newProjectorParams.viewportCenter[1] << endl
+	         << "originalProjectorParams.viewportFovDiameter:" 
+	         << originalProjectorParams.viewportFovDiameter << endl
+	         << "newProjectorParams.viewportFovDiameter:"
+	         << newProjectorParams.viewportFovDiameter << endl
+	         << "originalProjectorParams.zNear,zFar:" 
+	         << originalProjectorParams.zNear 
+	         << originalProjectorParams.zFar << endl
+	         << "newProjectorParams.zNear,zFar:" 
+	         << newProjectorParams.zNear 
+	         << newProjectorParams.zFar << endl
+	         //<< "viewport_texture_offset:" 
+	         //<< viewport_texture_offset[0]
+	         //<< viewport_texture_offset[1] << endl
+	         << "texture_w:" << texture_w << endl
+	         << "texture_h:" << texture_h << endl
+	         << "max_x:" << maxGridX << endl
+	         << "max_y:" << maxGridY;*/
 		{
 			for (int i=0;i<=max_x;i++)
 			{
@@ -175,6 +217,12 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 											(vertex_point.h<=0.0) ? 0.0 : exp(gamma*log(vertex_point.h/max_h));
 				vertex_point.color[3] = 1.0f;
 			}
+#ifdef _MSC_BUILD // MSVC does not have a trunc function
+	maxGridX = (int)floor(0.5 + screenWidth / triangleBaseLength);
+	maxGridY = (int)floor(screenHeight / (triangleBaseLength * 0.5 * sqrt(3.0)));
+#else
+#endif
+//	stepX = screenWidth / (double)(maxGridX - 0.5);
 		}
 	}
 	else
@@ -195,7 +243,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
-        Q_ASSERT(in.status()==QTextStream::Ok && max_x>0 && max_y>0);
+		Q_ASSERT(in.status()==QTextStream::Ok && max_x>0 && max_y>0);
 		step_x = screen_w / (double)(max_x-0.5);
 		step_y = screen_h/ (double)max_y;
 		texture_point_array = new Vec2f[(max_x+1)*(max_y+1)];
@@ -211,7 +259,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				float x,y;
 				in >> x >> y >> vertex_point.color[0] >> vertex_point.color[1] >> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
-                Q_ASSERT(in.status()!=QTextStream::Ok);
+				Q_ASSERT(in.status()!=QTextStream::Ok);
 				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
 				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
 			}
@@ -330,7 +378,7 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 }
 
 
-void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QGLFramebufferObject* buf) const
+void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.enableTexture2d(true);

@@ -1,8 +1,6 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * Copyright (C) 2011 Eleni Maria Stea (planet rendering using normal mapping
- * and clouds)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,24 +20,15 @@
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
 #include "VecMath.hpp"
-#include "SolarSystem.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
 #include "StelProjector.hpp"
 #include <QString>
 #include <QVarLengthArray>
 #include <QFontMetrics>
+#include <QOpenGLFunctions>
 
-#ifdef USE_OPENGL_ES2
- #define STELPAINTER_GL2 1
-#endif
-
-#ifdef STELPAINTER_GL2
-class QGLShaderProgram;
-#endif
-
-class QPainter;
-class QGLContext;
+class QOpenGLShaderProgram;
 
 class StelPainterLight
 {
@@ -73,36 +62,13 @@ private:
 };
 
 
-class StelPainterMaterial
-{
-public:
-	StelPainterMaterial();
-
-	void setSpecular(const Vec4f& v);
-	Vec4f& getSpecular() {return specular;}
-
-	void setAmbient(const Vec4f& v);
-	Vec4f& getAmbient() {return ambient;}
-
-	void setEmission(const Vec4f& v);
-	Vec4f& getEmission() {return emission;}
-
-	void setShininess(float v);
-	float getShininess() {return shininess;}
-private:
-	Vec4f specular;
-	Vec4f ambient;
-	Vec4f emission;
-	float shininess;
-};
-
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
 //! All coordinates are converted using the StelProjector instance passed at construction.
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
-class StelPainter
+class StelPainter: protected QOpenGLFunctions
 {
 public:
 	friend class VertexArrayProjector;
@@ -113,13 +79,6 @@ public:
 		SphericalPolygonDrawModeFill=0,			//!< Draw the interior of the polygon
 		SphericalPolygonDrawModeBoundary=1,		//!< Draw the boundary of the polygon
 		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
-	};
-
-	//! Define the shade model when interpolating polygons
-	enum ShadeModel
-	{
-		ShadeModelFlat=0x1D00,		//!< GL_FLAT
-		ShadeModelSmooth=0x1D01	//!< GL_SMOOTH
 	};
 
 	//! Define the drawing mode when drawing vertex
@@ -153,6 +112,7 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
+	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
 	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
 			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
 	void drawText(const Vec3d& v, const QString& str, float angleDeg=0.f,
@@ -194,6 +154,7 @@ public:
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
+	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
 	void drawSprite2dMode(float x, float y, float radius);
 	void drawSprite2dMode(const Vec3d& v, float radius);
 
@@ -228,7 +189,6 @@ public:
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
-	void nmSphere(float radius, float oneMinusOblateness, int slices, int stacks,  SolarSystem* ssm, int orientInside = 0, bool flipTexture = false);
 
 	//! Generate a StelVertexArray for a sphere.
 	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
@@ -264,37 +224,19 @@ public:
 	//! Get the light
 	StelPainterLight& getLight() {return light;}
 
-	//! Get the material
-	StelPainterMaterial& getMaterial() {return material;}
-
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
-	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
+	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
-	static void initSystemGLInfo(QGLContext* ctx);
-
-	//! Set the QPainter to use for performing some drawing operations.
-	static void setQPainter(QPainter* qPainter);
-
-	//! Swap the OpenGL buffers. You normally don't need to do that.
-	static void swapBuffer();
-
-	//! Make sure that our GL context is current and valid.
-	static void makeMainGLContextCurrent();
-
-	// The following methods try to reflect the API of the incoming QGLPainter class
-
-	//! Sets the point size to use with draw().
-	//! This function has no effect if a shader program is in use, or on OpenGL/ES 2.0. Shader programs must set the
-	//! point size in the vertex shader.
-	void setPointSize(qreal size);
-
-	//! Define the current shade model used when interpolating between vertex.
-	void setShadeModel(ShadeModel m);
+	static void initGLShaders();
+	
+	//! Delete the OpenGL shaders objects.
+	//! This method needs to be called once before exit.
+	static void deinitGLShaders();
 
 	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b, int texunit = 0);
+	void enableTexture2d(bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -320,30 +262,20 @@ public:
 		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
 	}
 
-	// tangent
-	void setTangentPointer(int type, const void* pointer)
-	{
-        tangentArray.size = 3; tangentArray.type = type; tangentArray.pointer = pointer;
-    }
-
 	//! use instead of glEnableClient
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
-        void enableNMapClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false, bool tangent=false);
 
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
 	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
-
-	// there are conflicts if we name the function setArrays
-	void setNMapArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL, const Vec3f* tangentArray=NULL);
+	void setArrays(const Vec3f* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
 
 	//! Draws primitives using vertices from the arrays specified by setVertexArray().
 	//! The type of primitive to draw is specified by mode.
 	//! If indices is NULL, this operation will consume count values from the enabled arrays, starting at offset.
 	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
-	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
-	void drawFromArrayNMap(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
+	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned short *indices=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
@@ -353,6 +285,19 @@ private:
 
 	friend class StelTextureMgr;
 	friend class StelTexture;
+
+	//! RAII class used to store and restore the opengl state.
+	//! to use it we just need to instanciate it at the beginning of a method that might change the state.
+	class GLState : protected QOpenGLFunctions
+	{
+	public:
+		GLState();
+		~GLState();
+	private:
+		bool blend;
+		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
+	};
+
 	//! Struct describing one opengl array
 	typedef struct
 	{
@@ -364,7 +309,7 @@ private:
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned int* indices=NULL);
+	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
@@ -390,27 +335,24 @@ private:
 	static class QMutex* globalMutex;
 #endif
 
-	//! The QPainter to use for some drawing operations.
-	static QPainter* qPainter;
+	//! The used for text drawing
+	QFont currentFont;
 
-	//! The main GL Context used by Stellarium.
-	static QGLContext* glContext;
-
-	//! Whether ARB_texture_non_power_of_two is supported on this card
-	static bool isNoPowerOfTwoAllowed;
-
-#ifdef STELPAINTER_GL2
 	Vec4f currentColor;
 	bool texture2dEnabled;
-	static QGLShaderProgram* basicShaderProgram;
+	
+	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {
 		int projectionMatrix;
 		int color;
 		int vertex;
 	};
 	static BasicShaderVars basicShaderVars;
-	static QGLShaderProgram* colorShaderProgram;
-	static QGLShaderProgram* texturesShaderProgram;
+	
+	static QOpenGLShaderProgram* colorShaderProgram;
+	static BasicShaderVars colorShaderVars;
+	
+	static QOpenGLShaderProgram* texturesShaderProgram;
 	struct TexturesShaderVars {
 		int projectionMatrix;
 		int texCoord;
@@ -419,7 +361,7 @@ private:
 		int texture;
 	};
 	static TexturesShaderVars texturesShaderVars;
-	static QGLShaderProgram* texturesColorShaderProgram;
+	static QOpenGLShaderProgram* texturesColorShaderProgram;
 	struct TexturesColorShaderVars {
 		int projectionMatrix;
 		int texCoord;
@@ -428,7 +370,7 @@ private:
 		int texture;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
-#endif
+
 
 	//! The descriptor for the current opengl vertex array
 	ArrayDesc vertexArray;
@@ -438,14 +380,9 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
-        //! The descriptor for the current opengl tangent array
-        ArrayDesc tangentArray;
 
 	//! the single light used by the painter
 	StelPainterLight light;
-
-	//! The material used by the painter
-	StelPainterMaterial material;
 };
 
 #endif // _STELPAINTER_HPP_

@@ -22,17 +22,15 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
-#include <QtOpenGL>
 
-#include <QHttp>
 #include <QFileInfo>
 #include <QFile>
 #include <QDebug>
 #include <QNetworkRequest>
 #include <QThread>
 #include <QSettings>
-#include <QGLFormat>
 #include <cstdlib>
+#include <QOpenGLContext>
 
 
 StelTextureMgr::StelTextureMgr()
@@ -66,7 +64,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	}
 	catch (std::runtime_error er)
 	{
-#ifdef USE_OPENGL_ES2
+#if 0
 		// Allow to replace the texures by compressed .pvr versions using GPU decompression.
 		// This saves memory and increases rendering speed.
 		if (!afilename.endsWith(".pvr"))
@@ -81,8 +79,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 	}
 
-	StelPainter::makeMainGLContextCurrent();
-	if (tex->fullPath.endsWith(".pvr"))
+/*	if (tex->fullPath.endsWith(".pvr"))
 	{
 		// Load compressed textures using Qt wrapper.
 		tex->loadParams = params;
@@ -97,7 +94,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return tex;
 	}
 	else
-	{
+	{*/
 		tex->qImage = QImage(tex->fullPath);
 		if (tex->qImage.isNull())
 			return StelTextureSP();
@@ -109,7 +106,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 			return tex;
 		else
 			return StelTextureSP();
-	}
+//	}
 }
 
 
@@ -157,7 +154,6 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 
 	if (!lazyLoading)
 	{
-		StelPainter::makeMainGLContextCurrent();
 		tex->bind();
 	}
 	return tex;

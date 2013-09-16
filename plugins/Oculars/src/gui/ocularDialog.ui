@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>513</width>
-    <height>400</height>
+    <width>653</width>
+    <height>383</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,12 +15,6 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>300</width>
-    <height>400</height>
-   </size>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -66,7 +60,7 @@
        <number>0</number>
       </property>
       <item>
-       <spacer name="spacer_2">
+       <spacer name="leftSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -86,7 +80,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="spacer">
+       <spacer name="rightSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -131,12 +125,6 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <property name="spacing">
        <number>0</number>
@@ -149,7 +137,10 @@
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="General">
+        <property name="usesScrollButtons">
+         <bool>false</bool>
+        </property>
+        <widget class="QWidget" name="generalTab">
          <attribute name="title">
           <string>General</string>
          </attribute>
@@ -180,6 +171,16 @@
               <widget class="QCheckBox" name="scaleImageCircleCheckBox">
                <property name="text">
                 <string>Scale image circle</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
+               <property name="toolTip">
+                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+               </property>
+               <property name="text">
+                <string>Limit stellar magnitude</string>
                </property>
               </widget>
              </item>
@@ -275,6 +276,13 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
+               <property name="text">
+                <string>Use degrees and minutes for FOV of CCD</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -293,7 +301,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="Eyepieces">
+        <widget class="QWidget" name="ocularsTab">
          <attribute name="title">
           <string>Eyepieces</string>
          </attribute>
@@ -314,7 +322,7 @@
            <number>12</number>
           </property>
           <item>
-           <widget class="QFrame" name="frame">
+           <widget class="QFrame" name="ocularListFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -335,7 +343,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="ocularListLabel">
                <property name="text">
                 <string>Eyepieces</string>
                </property>
@@ -349,6 +357,9 @@
                <property name="isWrapping" stdset="0">
                 <bool>false</bool>
                </property>
+               <property name="resizeMode">
+                <enum>QListView::Fixed</enum>
+               </property>
                <property name="viewMode">
                 <enum>QListView::ListMode</enum>
                </property>
@@ -358,7 +369,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="frame_4">
+              <widget class="QFrame" name="ocularButtonsFrame">
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
                </property>
@@ -405,10 +416,6 @@
                     <height>24</height>
                    </size>
                   </property>
-                  <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
-                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
-                  </property>
                  </widget>
                 </item>
                 <item>
@@ -424,10 +431,6 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
-                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -597,7 +600,263 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="CCD">
+        <widget class="QWidget" name="lensesTab">
+         <attribute name="title">
+          <string>Lenses</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>12</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>12</number>
+          </property>
+          <property name="bottomMargin">
+           <number>12</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="lensListFrame">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lensListLabel">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string>Lenses</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QListView" name="lensListView">
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="isWrapping" stdset="0">
+                <bool>false</bool>
+               </property>
+               <property name="resizeMode">
+                <enum>QListView::Fixed</enum>
+               </property>
+               <property name="viewMode">
+                <enum>QListView::ListMode</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="lensButtonsFrame">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="addLens">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Add</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveLensUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveLensDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="deleteLens">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="LensData">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QFrame" name="frame_2">
+               <layout class="QFormLayout" name="formLayout_4">
+                <property name="fieldGrowthPolicy">
+                 <enum>QFormLayout::FieldsStayAtSizeHint</enum>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string>Name:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="lensName">
+                  <property name="baseSize">
+                   <size>
+                    <width>100</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="maxLength">
+                   <number>50</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_13">
+                  <property name="text">
+                   <string>Multiplier:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="lensMultipler">
+                  <property name="baseSize">
+                   <size>
+                    <width>100</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="inputMethodHints">
+                   <set>Qt::ImhDigitsOnly</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lensNote">
+               <property name="toolTip">
+                <string notr="true"/>
+               </property>
+               <property name="statusTip">
+                <string notr="true"/>
+               </property>
+               <property name="accessibleName">
+                <string notr="true"/>
+               </property>
+               <property name="accessibleDescription">
+                <string notr="true"/>
+               </property>
+               <property name="text">
+                <string>Values of multiplicity &gt;1 expand the focal length (Barlow lens). Values of multiplicity &lt;1 reduce the focal length (Shapley lens).</string>
+               </property>
+               <property name="textFormat">
+                <enum>Qt::AutoText</enum>
+               </property>
+               <property name="scaledContents">
+                <bool>false</bool>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sensorsTab">
          <attribute name="title">
           <string>Sensors</string>
          </attribute>
@@ -618,7 +877,7 @@
            <number>12</number>
           </property>
           <item>
-           <widget class="QFrame" name="CCDListFrame">
+           <widget class="QFrame" name="sensorListFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -639,7 +898,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="CCDlabel">
+              <widget class="QLabel" name="sensorListLabel">
                <property name="text">
                 <string>Sensors</string>
                </property>
@@ -662,7 +921,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="CCDframe_add_remove">
+              <widget class="QFrame" name="sensorsButtonFrame">
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
                </property>
@@ -709,10 +968,6 @@
                     <height>24</height>
                    </size>
                   </property>
-                  <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
-                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
-                  </property>
                  </widget>
                 </item>
                 <item>
@@ -728,10 +983,6 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
-                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -984,7 +1235,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="Telescopes">
+        <widget class="QWidget" name="telescopesTab">
          <attribute name="title">
           <string>Telescopes</string>
          </attribute>
@@ -1005,7 +1256,7 @@
            <number>12</number>
           </property>
           <item>
-           <widget class="QFrame" name="ScopeListFrame">
+           <widget class="QFrame" name="telescopeListFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -1026,7 +1277,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="telescopeListLabel">
                <property name="text">
                 <string>Telescopes</string>
                </property>
@@ -1043,7 +1294,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="frame_3">
+              <widget class="QFrame" name="telescopeButtonsFrame">
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <property name="leftMargin">
                  <number>0</number>
@@ -1084,10 +1335,6 @@
                     <height>24</height>
                    </size>
                   </property>
-                  <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
-                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
-                  </property>
                  </widget>
                 </item>
                 <item>
@@ -1103,10 +1350,6 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../../../../data/gui/guiRes.qrc">
-                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1224,9 +1467,9 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="About">
+        <widget class="QWidget" name="aboutTab">
          <attribute name="title">
-          <string>About</string>
+          <string comment="tab in plugin windows">About</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout">
           <property name="margin">
@@ -1296,8 +1539,6 @@
   <tabstop>telescopeVFlip</tabstop>
   <tabstop>textBrowser</tabstop>
  </tabstops>
- <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

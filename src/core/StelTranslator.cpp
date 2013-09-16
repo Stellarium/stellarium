@@ -17,46 +17,75 @@
 * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include <dirent.h>
+
 #include <cstdio>
 #include <algorithm>
 #include <fstream>
 #include <clocale>
 #include <cstdlib>
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 #include <QFile>
 #include <QDebug>
 #include <QStringList>
 #include <QRegExp>
 #include <QLocale>
+#include <QDir>
+#include <QTranslator>
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelFileMgr.hpp"
 
 // Init static members
-StelTranslator* StelTranslator::lastUsed = NULL;
 QMap<QString, QString> StelTranslator::iso639codes;
 QString StelTranslator::systemLangName;
 
 // Use system locale language by default
-StelTranslator StelTranslator::globalTranslator = StelTranslator("stellarium", "./locale/", "system");
+StelTranslator* StelTranslator::globalTranslator = NULL;
 
-#ifdef Q_OS_WIN
-# include <windows.h>
-# include <winnls.h>
-#define putenv(x) _putenv((x))
-#endif
+StelTranslator::StelTranslator(const QString& adomain, const QString& alangName) :
+		domain(adomain), langName(alangName)
+{
+	translator = new QTranslator();
+	bool res = translator->load(StelFileMgr::getLocaleDir()+"/"+adomain+"/"+getTrueLocaleName()+".qm");
+	if (!res)
+		qWarning() << "Couldn't load translations for language " << alangName;
+	if (translator->isEmpty())
+		qWarning() << "Empty translation file for language " << alangName;
+}
 
+StelTranslator::~StelTranslator()
+{
+	delete translator;
+	translator = 0;
+}
+
+QString StelTranslator::qtranslate(const QString& s, const QString& c) const
+{
+	if (s.isEmpty())
+		return "";
+	QString res = translator->translate("", s.toUtf8().constData(), c.toUtf8().constData());
+	if (res.isEmpty())
+		return s;
+	return res;
+}
+	
 //! Initialize Translation
 //! @param fileName file containing the list of language codes
 void StelTranslator::init(const QString& fileName)
 {
 	StelTranslator::initSystemLanguage();
 	StelTranslator::initIso639_1LanguageCodes(fileName);
+	
+	Q_ASSERT(StelTranslator::globalTranslator==NULL);
+	StelTranslator::globalTranslator = new StelTranslator("stellarium", "system");
 }
 
 //! Try to determine system language from system configuration
-void StelTranslator::initSystemLanguage(void)
+void StelTranslator::initSystemLanguage()
 {
 	char* lang = getenv("LANGUAGE");
 	if (lang) systemLangName = lang;
@@ -67,11 +96,19 @@ void StelTranslator::initSystemLanguage(void)
 		else
 		{
 #ifdef Q_OS_WIN
-			char cc[3];
-			if (GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, cc, 3))
+			char ulng[3], ctry[3];
+			if (GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, ulng, 3))
 			{
-				cc[2] = '\0';
-				systemLangName = cc;
+				ulng[2] = '\0';
+				if (GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_SISO3166CTRYNAME, ctry, 3))
+				{
+					ctry[2] = '\0';
+					systemLangName = QString("%1_%2").arg(ulng).arg(ctry);
+				}
+				else
+				{
+					systemLangName = ulng;
+				}
 			}
 			else
 			{
@@ -93,73 +130,21 @@ void StelTranslator::initSystemLanguage(void)
 	if (pos != -1) systemLangName.resize(pos);
 }
 
-void StelTranslator::reload()
-{
-	if (StelTranslator::lastUsed == this)
-		return;
 
-	// Find out what the system language is if not defined yet
-	if (systemLangName.isEmpty())
-		initSystemLanguage();
-
-	// Apply that
-	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
-	static char envstr[128];
-	if (langName=="system" || langName=="system_default")
-#ifdef Q_OS_MAC
-	{
-		qsnprintf(envstr, 128, "LANG=%s", StelTranslator::systemLangName.toUtf8().constData());
-	}
-	else
-	{
-		qsnprintf(envstr, 128, "LANG=%s", langName.toUtf8().constData());
-	}
-#elif defined (Q_OS_WIN) //MSCVER
-	{
-		qsnprintf(envstr, 128, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
-	}
-	else
-	{
-		qsnprintf(envstr, 128, "LANGUAGE=%s", langName.toUtf8().constData());
-	}
-#else // UNIX
-	{
-		qsnprintf(envstr, 128, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
-	}
-	else
-	{
-		qsnprintf(envstr, 128, "LANGUAGE=%s", langName.toUtf8().constData());
-	}
-#endif
-
-	putenv(envstr);
-#ifndef Q_OS_WIN
-	setlocale(LC_MESSAGES, "");
-#else
-	setlocale(LC_CTYPE,"");
-#endif
-	QString result = bind_textdomain_codeset(domain.toUtf8().constData(), "UTF-8");
-	Q_ASSERT(result=="UTF-8");
-	bindtextdomain (domain.toUtf8().constData(), QFile::encodeName(moDirectory).constData());
-	textdomain (domain.toUtf8().constData());
-	StelTranslator::lastUsed = this;
-}
-
-
-//! Convert from ISO639-1 2 letters langage code to native language name
+//! Convert from ISO639-1 2(+3) letters langage code to native language name
 QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	if (languageCode=="C")
 		return "English";
 
-	QLocale loc(languageCode);
-	QString l = loc.name();
+	//QLocale loc(languageCode);
+	//QString l = loc.name();
 	// There is a QLocale for this code.  This should be the case for most
 	// language codes, but there are a few without QLocales, e.g. Interlingua
-	if (l.contains('_'))
-		l.truncate(l.indexOf('_'));
-	if (iso639codes.find(l)!=iso639codes.end())
-		return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
+	//if (l.contains('_'))
+	//	l.truncate(l.indexOf('_'));
+	//if (iso639codes.find(l)!=iso639codes.end())
+	//	return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
 
 	// For codes which return the locale C, use the language code to do the lookup
 	if (iso639codes.contains(languageCode))
@@ -172,7 +157,7 @@ QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 //! Convert from native language name to ISO639-1 2(+3) letters langage code
 QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 {
-	QMap<QString, QString>::iterator iter;
+	QMap<QString, QString>::ConstIterator iter;
 	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
 		if (iter.value() == languageName)
 			return iter.key();
@@ -184,11 +169,9 @@ QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& localeDir) const
 {
 	QString tmpDir = localeDir;
-	if (tmpDir.isEmpty())
-		tmpDir = moDirectory;
 	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
 	QStringList output;
-	foreach (QString lang, codeList)
+	foreach (const QString& lang, codeList)
 	{
 		output += iso639_1CodeToNativeName(lang);
 	}
@@ -198,35 +181,22 @@ QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& loca
 //! Get available language codes from directory tree
 QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir) const
 {
-	QString locDir = localeDir;
-	if (locDir.isEmpty())
-		locDir = moDirectory;
-	struct dirent *entryp;
-	DIR *dp;
+	QDir dir(localeDir+"/stellarium/");
+
+	if (!dir.exists())
+	{
+		qWarning() << "Unable to find locale directory containing translations:" << QDir::toNativeSeparators(localeDir);
+		return QStringList();
+	}
+
 	QStringList result;
-
-	if ((dp = opendir(QFile::encodeName(locDir).constData())) == NULL)
+	foreach (QString path, dir.entryList(QDir::Files, QDir::Name))
 	{
-		qWarning() << "Unable to find locale directory containing translations:" << localeDir;
-		return result;
+		if (!path.endsWith(".qm"))
+			continue;
+		path.chop(3);
+		result.append(path);
 	}
-
-	while ((entryp = readdir(dp)) != NULL)
-	{
-		QString tmp = entryp->d_name;
-		QString tmpdir = locDir+"/"+tmp+"/LC_MESSAGES/stellarium.mo";
-		FILE* fic = fopen(QFile::encodeName(tmpdir).constData(), "r");
-		if (fic)
-		{
-			result.push_back(tmp);
-			fclose(fic);
-		}
-	}
-	closedir(dp);
-
-	// Sort the language names by alphabetic order
-	result.sort();
-
 	return result;
 }
 
@@ -237,7 +207,7 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 	QFile inf(fileName);
 	if (!inf.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Can't open ISO639 codes file " << fileName;
+		qWarning() << "Can't open ISO639 codes file " << QDir::toNativeSeparators(fileName);
 		Q_ASSERT(0);
 	}
 

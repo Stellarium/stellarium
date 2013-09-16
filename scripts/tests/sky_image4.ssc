@@ -19,25 +19,25 @@ core.wait(2);
 
 status("loading images...");
 core.loadSkyImage("image1", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   60.0, 0,        // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?
 
 core.loadSkyImage("image2", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   40.0, 90,       // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?
 
 core.loadSkyImage("image3", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   20.0, 180,      // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?
 
 core.loadSkyImage("image4", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   10.0, 270,      // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?
@@ -45,24 +45,24 @@ core.loadSkyImage("image4", "../textures/earthmap.png",
 core.wait(1.5);
 
 status("showing image (should fade in)");
-ScreenImageMgr.showImage("image1", true); 
+StelSkyLayerMgr.showLayer("image1", true); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image2", true); 
+StelSkyLayerMgr.showLayer("image2", true); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image3", true); 
+StelSkyLayerMgr.showLayer("image3", true); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image4", true); 
+StelSkyLayerMgr.showLayer("image4", true); 
 
 core.wait(4.5);
 
 status("hiding image (should fade out)");
-ScreenImageMgr.showImage("image1", false); 
+StelSkyLayerMgr.showLayer("image1", false); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image2", false); 
+StelSkyLayerMgr.showLayer("image2", false); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image3", false); 
+StelSkyLayerMgr.showLayer("image3", false); 
 core.wait(0.5);
-ScreenImageMgr.showImage("image4", false); 
+StelSkyLayerMgr.showLayer("image4", false); 
 
 core.wait(1.5);
 

@@ -54,7 +54,7 @@ public:
 	//! @param x the x coordinate of the tile.
 	//! @param y the y coordinate of the tile.
 	//! @param resolution the resolution of the returned array.
-	QVector<unsigned int> getTrianglesIndex(int level, int x, int y, int resolution) const;
+	QVector<unsigned short> getTrianglesIndex(int level, int x, int y, int resolution) const;
 	//! Returns the polygon contouring a given tile.
 	//! @param level the level of the tile.
 	//! @param x the x coordinate of the tile.

@@ -30,10 +30,11 @@
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "SkyGui.hpp"
 
@@ -46,18 +47,17 @@
 #include <QtNetwork>
 #include <QPixmap>
 #include <QSignalMapper>
+#include <QDir>
 
 #include <cmath>
 
-#if defined(__APPLE__) && defined(__MACH__)
+#ifdef Q_OS_MAC
 #include <OpenGL/glu.h>	/* Header File For The GLU Library */
 #else
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
-#ifdef Q_WS_MAC
 extern void qt_set_sequence_auto_mnemonic(bool b);
-#endif
 
 static QSettings *settings; //!< The settings as read in from the ini file.
 
@@ -82,13 +82,11 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
-	info.authors = "Timothy Reaves, Bogdan Marinov";
+	info.authors = "Timothy Reaves, Bogdan Marinov, Pawel Stolowski";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
 
 
 /* ********************************************************************* */
@@ -122,20 +120,24 @@ Oculars::Oculars():
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
 	telescopes = QList<Telescope *>();
+	lense = QList<Lens *> ();
+
 	ccdRotationSignalMapper = new QSignalMapper(this);
 	ccdsSignalMapper = new QSignalMapper(this);
 	ocularsSignalMapper = new QSignalMapper(this);
 	telescopesSignalMapper = new QSignalMapper(this);
+	lenseSignalMapper = new QSignalMapper(this);
 	
 	selectedCCDIndex = -1;
 	selectedOcularIndex = -1;
 	selectedTelescopeIndex = -1;
+	selectedLensIndex = -1;
 	
 	usageMessageLabelID = -1;
 
 	setObjectName("Oculars");
 
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
 	qt_set_sequence_auto_mnemonic(true);
 #endif
 }
@@ -160,6 +162,8 @@ Oculars::~Oculars()
 	telescopes.clear();
 	qDeleteAll(oculars);
 	oculars.clear();
+	qDeleteAll(lense);
+	lense.clear();
 }
 
 QSettings* Oculars::appSettings()
@@ -189,6 +193,7 @@ void Oculars::deinit()
 	settings->remove("ccd");
 	settings->remove("ocular");
 	settings->remove("telescope");
+	settings->remove("lens");
 	int index = 0;
 	foreach(CCD* ccd, ccds) {
 		QString prefix = "ccd/" + QVariant(index).toString() + "/";
@@ -221,9 +226,18 @@ void Oculars::deinit()
 		settings->setValue(prefix + "vFlip", telescope->isVFlipped());
 		index++;
 	}
+	index = 0;
+	foreach(Lens* lens, lense) {
+		QString prefix = "lens/" + QVariant(index).toString() + "/";
+		settings->setValue(prefix + "name", lens->name());
+		settings->setValue(prefix + "multipler", lens->multipler());
+		index++;
+	}
+        
 	settings->setValue("ocular_count", oculars.count());
 	settings->setValue("telescope_count", telescopes.count());
 	settings->setValue("ccd_count", ccds.count());
+	settings->setValue("lens_count", lense.count());
 	settings->sync();
 }
 
@@ -236,20 +250,20 @@ void Oculars::draw(StelCore* core)
 		// Ensure there is a selected ocular & telescope
 		if (selectedCCDIndex > ccds.count()) {
 			qWarning() << "Oculars: the selected sensor index of "
-						  << selectedCCDIndex << " is greater than the sensor count of "
-			<< ccds.count() << ". Module disabled!";
+								 << selectedCCDIndex << " is greater than the sensor count of "
+								 << ccds.count() << ". Module disabled!";
 			ready = false;
 		}
 		if (selectedOcularIndex > oculars.count()) {
 			qWarning() << "Oculars: the selected ocular index of "
-						  << selectedOcularIndex << " is greater than the ocular count of "
-			<< oculars.count() << ". Module disabled!";
+								 << selectedOcularIndex << " is greater than the ocular count of "
+								 << oculars.count() << ". Module disabled!";
 			ready = false;
 		}
 		else if (selectedTelescopeIndex > telescopes.count()) {
 			qWarning() << "Oculars: the selected telescope index of "
-						  << selectedTelescopeIndex << " is greater than the telescope count of "
-			<< telescopes.count() << ". Module disabled!";
+								 << selectedTelescopeIndex << " is greater than the telescope count of "
+								 << telescopes.count() << ". Module disabled!";
 			ready = false;
 		}
 		
@@ -502,12 +516,31 @@ void Oculars::init()
 			selectedTelescopeIndex = 0;
 		}
 
-		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes);
+		int lensCount = settings->value("lens_count", 0).toInt();
+		int actualLensCount = lensCount;
+		for (int index = 0; index<lensCount; index++) {
+			Lens *newLens = Lens::lensFromSettings(settings, index);
+			if (newLens != NULL) {
+				lense.append(newLens);
+			}
+			else {
+				actualLensCount--;
+			}
+		}
+		if (lensCount > 0 && actualLensCount < lensCount)
+		{
+			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+		}
+
+		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lense);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 		
 		guiPanelEnabled = settings->value("enable_control_panel", false).toBool();
 		enableGuiPanel(guiPanelEnabled);
+
+		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
+		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -526,10 +559,10 @@ void Oculars::init()
 	}
 	styleSheetFile.close();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)),
-			  this, SLOT(setStelStyle(const QString&)));
+					this, SLOT(setStelStyle(const QString&)));
 	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslateGui()));
+					this, SLOT(retranslateGui()));
 }
 
 void Oculars::setStelStyle(const QString&)
@@ -583,11 +616,12 @@ void Oculars::setScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
 		StelCore *core = StelApp::getInstance().getCore();
 		StelMovementMgr *movementManager = core->getMovementMgr();
-		double actualFOVx = ccds[selectedCCDIndex]->getActualFOVx(telescopes[selectedTelescopeIndex]);
-		double actualFOVy = ccds[selectedCCDIndex]->getActualFOVy(telescopes[selectedTelescopeIndex]);
+		double actualFOVx = ccds[selectedCCDIndex]->getActualFOVx(telescopes[selectedTelescopeIndex], lens);
+		double actualFOVy = ccds[selectedCCDIndex]->getActualFOVy(telescopes[selectedTelescopeIndex], lens);
 		if (actualFOVx < actualFOVy) {
 			actualFOVx = actualFOVy;
 		}
@@ -623,7 +657,7 @@ void Oculars::enableGuiPanel(bool enable)
 		}
 	}
 	guiPanelEnabled = enable;
-	settings->setValue("enable_control_panel", enable);
+	settings->setValue("enable_control_panel", enable);	
 	settings->sync();
 }
 
@@ -633,7 +667,7 @@ void Oculars::retranslateGui()
 	{
 		// TODO: Fix this hack!
 		
-		// Delete and re-create the panel to retranslate its trings 
+		// Delete and re-create the panel to retranslate its trings
 		guiPanel->hide();
 		delete guiPanel;
 		guiPanel = 0;
@@ -760,15 +794,20 @@ void Oculars::enableOcular(bool enableOcularMode)
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
 			int yPosition = projectorParams.viewportCenter[1];
 			yPosition = yPosition - 0.5 * (metrics.height());
+			const char *tcolor;
+			if (StelApp::getInstance().getVisionModeNight())
+				tcolor = "#C40303";
+			else
+				tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
-																			true, font.pixelSize(), "#99FF99");
+									true, font.pixelSize(), tcolor);
 		}
 		// we didn't accept the new status - make sure the toolbar button reflects this
 		disconnect(actionShowOcular, SIGNAL(toggled(bool)),
-		           this, SLOT(enableOcular(bool)));
+							 this, SLOT(enableOcular(bool)));
 		actionShowOcular->setChecked(false);
 		connect(actionShowOcular, SIGNAL(toggled(bool)),
-		        this, SLOT(enableOcular(bool)));
+						this, SLOT(enableOcular(bool)));
 	} else {
 		if (selectedOcularIndex != -1) {
 			// remove the usage label if it is being displayed.
@@ -822,9 +861,21 @@ void Oculars::decrementTelescopeIndex()
 	emit(selectedTelescopeChanged());
 }
 
+void Oculars::decrementLensIndex()
+{
+	selectedLensIndex--;
+	if (selectedLensIndex == lense.count()) {
+		selectedLensIndex = -1;
+	}
+	if (selectedLensIndex == -2) {
+		selectedLensIndex = lense.count() - 1;
+	}
+	emit(selectedLensChanged());
+}
+
 void Oculars::displayPopupMenu()
 {
-	QMenu* popup = new QMenu(&StelMainWindow::getInstance());
+	QMenu* popup = new QMenu(&StelMainView::getInstance());
 
 	if (flagShowOculars)
 	{
@@ -877,6 +928,8 @@ void Oculars::displayPopupMenu()
 		{
 			QMenu* submenu = addTelescopeSubmenu(popup);
 			popup->addMenu(submenu);
+			submenu = addLensSubmenu(popup);
+			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
 
@@ -884,7 +937,7 @@ void Oculars::displayPopupMenu()
 		action->setCheckable(true);
 		action->setChecked(flagShowCrosshairs);
 		connect(action, SIGNAL(toggled(bool)),
-		        actionShowCrosshairs, SLOT(setChecked(bool))); 
+						actionShowCrosshairs, SLOT(setChecked(bool)));
 	} else {
 		// We are not in ocular mode
 		// We want to show the CCD's, and if a CCD is selected, the telescopes
@@ -893,7 +946,7 @@ void Oculars::displayPopupMenu()
 		action->setCheckable(true);
 		action->setChecked(ocularDialog->visible());
 		connect(action, SIGNAL(triggered(bool)),
-		        ocularDialog, SLOT(setVisible(bool)));
+						ocularDialog, SLOT(setVisible(bool)));
 		popup->addAction(action);
 		popup->addSeparator();
 
@@ -902,7 +955,7 @@ void Oculars::displayPopupMenu()
 			action->setCheckable(true);
 			action->setChecked(flagShowCCD);
 			connect(action, SIGNAL(toggled(bool)),
-			        actionShowSensor, SLOT(setChecked(bool)));
+							actionShowSensor, SLOT(setChecked(bool)));
 		}
 		
 		if (!flagShowCCD) {
@@ -910,7 +963,7 @@ void Oculars::displayPopupMenu()
 			action->setCheckable(true);
 			action->setChecked(flagShowTelrad);
 			connect(action, SIGNAL(toggled(bool)),
-			        actionShowTelrad, SLOT(setChecked(bool)));
+							actionShowTelrad, SLOT(setChecked(bool)));
 		}
 		
 		popup->addSeparator();
@@ -943,34 +996,34 @@ void Oculars::displayPopupMenu()
 			submenu = new QMenu(q_("&Rotate CCD"), popup);
 			QAction* rotateAction = NULL;
 			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-90"));
 			rotateAction = submenu->addAction(QString("&2: -45") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-45"));
 			rotateAction = submenu->addAction(QString("&3: -15") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-15"));
 			rotateAction = submenu->addAction(QString("&4: -5") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-5"));
 			rotateAction = submenu->addAction(QString("&5: -1") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-1"));
 			rotateAction = submenu->addAction(QString("&6: +1") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("1"));
 			rotateAction = submenu->addAction(QString("&7: +5") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("5"));
 			rotateAction = submenu->addAction(QString("&8: +15") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("15"));
 			rotateAction = submenu->addAction(QString("&9: +45") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
 			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
 			rotateAction = submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);
@@ -980,6 +1033,8 @@ void Oculars::displayPopupMenu()
 		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
 		{
 			QMenu* submenu = addTelescopeSubmenu(popup);
+			popup->addMenu(submenu);
+			submenu = addLensSubmenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
@@ -1027,6 +1082,21 @@ void Oculars::incrementTelescopeIndex()
 		selectedTelescopeIndex = 0;
 	}
 	emit(selectedTelescopeChanged());
+}
+
+void Oculars::incrementLensIndex()
+{
+	selectedLensIndex++;
+	if (selectedLensIndex == lense.count()) {
+		selectedLensIndex = -1;
+	}
+	emit(selectedLensChanged());
+}
+
+void Oculars::disableLens()
+{
+	selectedLensIndex = -1;
+	emit(selectedLensChanged());
 }
 
 void Oculars::rotateCCD(QString amount)
@@ -1077,6 +1147,15 @@ void Oculars::selectTelescopeAtIndex(QString indexString)
 	}
 }
 
+void Oculars::selectLensAtIndex(QString indexString)
+{
+	int index = indexString.toInt();
+	if (index > -2 && index < lense.count()) {
+		selectedLensIndex = index;
+		emit(selectedLensChanged());
+	}
+}
+
 void Oculars::toggleCCD(bool show)
 {
 	//If there are no sensors...
@@ -1086,7 +1165,7 @@ void Oculars::toggleCCD(bool show)
 		//if there are no sensors.
 		if (show)
 			qWarning() << "Oculars plugin: Unable to display a sensor boundary:"
-			           << "No sensors or telescopes are defined.";
+								 << "No sensors or telescopes are defined.";
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
@@ -1184,24 +1263,16 @@ void Oculars::toggleTelrad()
 /* ********************************************************************* */
 void Oculars::initializeActivationActions()
 {
-	// TRANSLATORS: Title of a group of key bindings in the Help window
-	QString group = N_("Plugin Key Bindings");
-	//Bogdan: Temporary, for consistency and to avoid confusing the translators
-	//TODO: Fix this when the key bindings feature is implemented
-	//QString group = N_("Oculars Plugin");
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
+
+	StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
 
 	//This action needs to be connected to the enableOcular() slot after
 	//the necessary button is created to prevent the button from being checked
 	//the first time this action is checked. See:
 	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
-	QString shortcutStr = settings->value("bindings/toggle_oculars", "Ctrl+O").toString();
-	actionShowOcular = gui->addGuiActions("actionShow_Ocular",
-	                                      N_("Ocular view"),
-	                                      shortcutStr,
-	                                      group,
-	                                      true);
+	actionShowOcular = shMgr->getGuiAction("actionShow_Ocular");
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
@@ -1209,65 +1280,61 @@ void Oculars::initializeActivationActions()
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 		toolbarButton = new StelButton(NULL,
-										*pxmapOnIcon,
-										*pxmapOffIcon,
-										*pxmapGlow,
-										actionShowOcular);
+					       *pxmapOnIcon,
+					       *pxmapOffIcon,
+					       *pxmapGlow,
+					       actionShowOcular);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
 	connect(actionShowOcular, SIGNAL(toggled(bool)),
-	        this, SLOT(enableOcular(bool)));
+					this, SLOT(enableOcular(bool)));
 
-	shortcutStr = settings->value("bindings/popup_navigator", "Alt+O").toString();
-	actionMenu = gui->addGuiActions("actionShow_Ocular_Menu",
-	                                N_("Oculars popup menu"),
-	                                shortcutStr,
-	                                group,
-	                                true);
+	actionMenu = shMgr->getGuiAction("actionShow_Ocular_Menu");
 	connect(actionMenu, SIGNAL(toggled(bool)),
-	        this, SLOT(displayPopupMenu()));
+					this, SLOT(displayPopupMenu()));
 
-	actionShowCrosshairs = gui->addGuiActions("actionShow_Ocular_Crosshairs",
-	                                          N_("Crosshairs"),
-	                                          QString(),
-	                                          group,
-	                                          true);
+	actionShowCrosshairs = shMgr->getGuiAction("actionShow_Ocular_Crosshairs");
 	connect(actionShowCrosshairs, SIGNAL(toggled(bool)),
-	        this, SLOT(toggleCrosshairs(bool)));
+					this, SLOT(toggleCrosshairs(bool)));
 
-	actionShowSensor = gui->addGuiActions("actionShow_Sensor",
-	                                      N_("Image sensor frame"),
-	                                      QString(),
-	                                      group,
-	                                      true);
+	actionShowSensor = shMgr->getGuiAction("actionShow_Sensor");
 	connect(actionShowSensor, SIGNAL(toggled(bool)),
-			this, SLOT(toggleCCD(bool)));
+					this, SLOT(toggleCCD(bool)));
 
-	actionShowTelrad = gui->addGuiActions("actionShow_Telrad",
-	                                      N_("Telrad sight"),
-	                                      QString(),
-	                                      group,
-	                                      true);
+	actionShowTelrad = shMgr->getGuiAction("actionShow_Telrad");
 	connect(actionShowTelrad, SIGNAL(toggled(bool)),
-	        this, SLOT(toggleTelrad(bool)));
+					this, SLOT(toggleTelrad(bool)));
 
-	actionConfiguration = gui->addGuiActions("actionOpen_Oculars_Configuration",
-	                                         N_("Oculars plugin configuration"),
-	                                         QString(),
-	                                         group,
-	                                         true);
+	actionConfiguration = shMgr->getGuiAction("actionOpen_Oculars_Configuration");
 	connect(actionConfiguration, SIGNAL(toggled(bool)),
-	        ocularDialog, SLOT(setVisible(bool)));
+					ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)),
-	        actionConfiguration, SLOT(setChecked(bool)));
+					actionConfiguration, SLOT(setChecked(bool)));
+
+	// Select next telescope via keyboard
+	actionTelescopeIncrement = shMgr->getGuiAction("actionShow_Telescope_Increment");
+	connect(actionTelescopeIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementTelescopeIndex()));
+
+	// Select previous telescope via keyboard
+	actionTelescopeDecrement = shMgr->getGuiAction("actionShow_Telescope_Decrement");
+	connect(actionTelescopeDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementTelescopeIndex()));
+
+	// Select next eyepiece via keyboard
+	actionOcularIncrement = shMgr->getGuiAction("actionShow_Ocular_Increment");
+	connect(actionOcularIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementOcularIndex()));
+
+	// Select previous eyepiece via keyboard
+	actionOcularDecrement = shMgr->getGuiAction("actionShow_Ocular_Decrement");
+	connect(actionOcularDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementOcularIndex()));
 
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged()), this, SLOT(setScreenFOVForCCD()));
+	connect(this, SIGNAL(selectedLensChanged()), this, SLOT(instrumentChanged()));
 	connect(ocularDialog, SIGNAL(requireSelectionChanged(bool)), this, SLOT(setRequireSelection(bool)));
 	connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
 
@@ -1277,6 +1344,7 @@ void Oculars::initializeActivationActions()
 	connect(ocularsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectOcularAtIndex(QString)));
 	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectTelescopeAtIndex(QString)));
 	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(setScreenFOVForCCD()));
+	connect(lenseSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectLensAtIndex(QString)));
 }
 
 bool Oculars::isBinocularDefined()
@@ -1295,6 +1363,7 @@ void Oculars::paintCCDBounds()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
@@ -1309,8 +1378,8 @@ void Oculars::paintCCDBounds()
 		if (ccd) {
 			glColor4f(0.77, 0.14, 0.16, 0.5);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
-			double ccdXRatio = ccd->getActualFOVx(telescope) / screenFOV;
-			double ccdYRatio = ccd->getActualFOVy(telescope) / screenFOV;
+			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
+			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
 			int aspectIndex = 2;
@@ -1379,6 +1448,9 @@ void Oculars::paintTelrad()
 
 void Oculars::paintOcularMask()
 {
+	// XXX: for some reason I cannot get to make the glu functions work when
+	// compiling with Qt5!
+	/*
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
@@ -1403,6 +1475,7 @@ void Oculars::paintOcularMask()
 	gluDisk(quadric, inner - 1.0, inner, 256, 1);
 	gluDeleteQuadric(quadric);
 	glPopMatrix();
+	*/
 }
 
 void Oculars::paintText(const StelCore* core)
@@ -1417,6 +1490,7 @@ void Oculars::paintText(const StelCore* core)
 	}
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
+	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	// set up the color and the GL state
 	painter.setColor(0.8, 0.48, 0.0, 1);
@@ -1443,13 +1517,13 @@ void Oculars::paintText(const StelCore* core)
 		if (name.isEmpty())
 		{
 			ocularNumberLabel = QString(q_("Ocular #%1"))
-		                            .arg(selectedOcularIndex);
+					.arg(selectedOcularIndex);
 		}
 		else
 		{
 			ocularNumberLabel = QString(q_("Ocular #%1: %2"))
-			                    .arg(selectedOcularIndex)
-			                    .arg(name);
+					.arg(selectedOcularIndex)
+					.arg(name);
 		}
 		// The name of the ocular could be really long.
 		if (name.length() > widthString.length()) {
@@ -1469,29 +1543,50 @@ void Oculars::paintText(const StelCore* core)
 			ocularFov.append(QChar(0x00B0));//Degree sign
 			// TRANSLATORS: aFOV = apparent field of view
 			QString ocularFOVLabel = QString(q_("Ocular aFOV: %1"))
-			                         .arg(ocularFov);
+						 .arg(ocularFov);
 			painter.drawText(xPosition, yPosition, ocularFOVLabel);
 			yPosition-=lineHeight;
-			
+	
+			QString lensNumberLabel;
+			// Barlow and Shapley lens
+			if (lens != NULL) // it's null if lens is not selected (lens index = -1)
+			{
+				QString lensName = lens->name();
+				if (lensName.isEmpty())
+				{
+					lensNumberLabel = QString(q_("Lens #%1")).arg(selectedLensIndex);
+				}
+				else
+				{
+					lensNumberLabel = QString (q_("Lens #%1: %2")).arg(selectedLensIndex).arg(lensName);
+				}
+			}
+			else
+			{
+				lensNumberLabel = QString (q_("Lens: none"));
+			}
+			painter.drawText(xPosition, yPosition, lensNumberLabel);
+			yPosition-=lineHeight;
+		
 			// The telescope
 			QString telescopeNumberLabel;
 			QString telescopeName = telescope->name();
 			if (telescopeName.isEmpty())
 			{
 				telescopeNumberLabel = QString(q_("Telescope #%1"))
-				                       .arg(selectedTelescopeIndex);
+						.arg(selectedTelescopeIndex);
 			}
 			else
 			{
 				telescopeNumberLabel = QString(q_("Telescope #%1: %2"))
-				                       .arg(selectedTelescopeIndex)
-				                       .arg(telescopeName);
+						.arg(selectedTelescopeIndex)
+						.arg(telescopeName);
 			}
 			painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 			yPosition-=lineHeight;
 			
 			// General info
-			double magnification = ((int)(ocular->magnification(telescope) * 10.0)) / 10.0;
+			double magnification = ((int)(ocular->magnification(telescope, lens) * 10.0)) / 10.0;
 			QString magString = QString::number(magnification);
 			magString.append(QChar(0x00D7));//Multiplication sign
 			QString magnificationLabel = QString(q_("Magnification: %1"))
@@ -1499,7 +1594,7 @@ void Oculars::paintText(const StelCore* core)
 			painter.drawText(xPosition, yPosition, magnificationLabel);
 			yPosition-=lineHeight;
 			
-			double fov = ((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0;
+			double fov = ((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0;
 			QString fovString = QString::number(fov);
 			fovString.append(QChar(0x00B0));//Degree sign
 			QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
@@ -1510,14 +1605,9 @@ void Oculars::paintText(const StelCore* core)
 	// The CCD
 	if (flagShowCCD) {
 		QString ccdSensorLabel, ccdInfoLabel;
-		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
-		QString stringFovX = QString::number(fovX);
-		stringFovX.append(QChar(0x00B0));//Degree sign
-		QString stringFovY = QString::number(fovY);
-		stringFovY.append(QChar(0x00B0));//Degree sign
-		QString fovDimensions = stringFovX + QChar(0x00D7) + stringFovY;
-		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(fovDimensions);
+		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
 		QString name = ccd->name();
 		if (name.isEmpty())
@@ -1527,8 +1617,8 @@ void Oculars::paintText(const StelCore* core)
 		else
 		{
 			ccdSensorLabel = QString(q_("Sensor #%1: %2"))
-			                 .arg(selectedCCDIndex)
-			                 .arg(name);
+					.arg(selectedCCDIndex)
+					.arg(name);
 		}
 		painter.drawText(xPosition, yPosition, ccdSensorLabel);
 		yPosition-=lineHeight;
@@ -1541,13 +1631,13 @@ void Oculars::paintText(const StelCore* core)
 		if (telescopeName.isEmpty())
 		{
 			telescopeNumberLabel = QString(q_("Telescope #%1"))
-			                       .arg(selectedTelescopeIndex);
+					.arg(selectedTelescopeIndex);
 		}
 		else
 		{
 			telescopeNumberLabel = QString(q_("Telescope #%1: %2"))
-			                       .arg(selectedTelescopeIndex)
-			                       .arg(telescopeName);
+					.arg(selectedTelescopeIndex)
+					.arg(telescopeName);
 		}
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
@@ -1566,22 +1656,22 @@ void Oculars::validateAndLoadIniFile()
 		QFile src(":/ocular/default_ocular.ini");
 		if (!src.copy(ocularIniPath)) {
 			qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] "
-					+ ocularIniPath;
+										+ ocularIniPath;
 		} else {
-			qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
+			qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
 			// The resource is read only, and the new file inherits this, so set write-able.
 			QFile dest(ocularIniPath);
 			dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 		}
 	} else {
-		qDebug() << "Oculars::validateIniFile ocular.ini exists at: " << ocularIniPath << ". Checking version...";
+		qDebug() << "Oculars::validateIniFile ocular.ini exists at: " << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings settings(ocularIniPath, QSettings::IniFormat);
 		double ocularsVersion = settings.value("oculars_version", "0.0").toDouble();
 		qWarning() << "Oculars::validateIniFile found existing ini file version " << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION) {
 			qWarning() << "Oculars::validateIniFile existing ini file version " << ocularsVersion
-						<< " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
+								 << " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
 			// delete last "old" file, if it exists
 			QFile deleteFile(ocularIniPath + ".old");
 			deleteFile.remove();
@@ -1589,14 +1679,14 @@ void Oculars::validateAndLoadIniFile()
 			// Rename the old one, and copy over a new one
 			QFile oldFile(ocularIniPath);
 			if (!oldFile.rename(ocularIniPath + ".old")) {
-				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  " + ocularIniPath;
+				qWarning() << "Oculars::validateIniFile cannot move ocular.ini resource to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
 			} else {
-				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  " + ocularIniPath;
+				qWarning() << "Oculars::validateIniFile ocular.ini resource renamed to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
 				QFile src(":/ocular/default_ocular.ini");
 				if (!src.copy(ocularIniPath)) {
-					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + ocularIniPath;
+					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + QDir::toNativeSeparators(ocularIniPath);
 				} else {
-					qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
+					qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
 					// The resource is read only, and the new file inherits this...  make sure the new file
 					// is writable by the Stellarium process so that updates can be done.
 					QFile dest(ocularIniPath);
@@ -1613,6 +1703,7 @@ void Oculars::unzoomOcular()
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	StelSkyDrawer *skyManager = core->getSkyDrawer();
 
 	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
 	gridManager->setFlagGalacticGrid(flagGalacticGrid);
@@ -1620,9 +1711,15 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
 	gridManager->setFlagEquatorLine(flagEquatorLine);
 	gridManager->setFlagEclipticLine(flagEclipticLine);
+	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
+	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
+	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
+	skyManager->setFlagNebulaMagnitudeLimit(flagLimitDSOs);
+	skyManager->setCustomStarMagnitudeLimit(magLimitStars);
+	skyManager->setCustomNebulaMagnitudeLimit(magLimitDSOs);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -1652,9 +1749,18 @@ void Oculars::zoom(bool zoomedIn)
 			flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
 			flagEquatorLine = gridManager->getFlagEquatorLine();
 			flagEclipticLine = gridManager->getFlagEclipticLine();
+			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
+
+			StelSkyDrawer *skyManager = StelApp::getInstance().getCore()->getSkyDrawer();
+			// Current state
+			flagAdaptation = skyManager->getFlagLuminanceAdaptation();
+			flagLimitStars = skyManager->getFlagStarMagnitudeLimit();
+			flagLimitDSOs = skyManager->getFlagNebulaMagnitudeLimit();
+			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
+			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
 		}
 
 		// set new state
@@ -1670,7 +1776,9 @@ void Oculars::zoomOcular()
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	GridLinesMgr *gridManager =
-		(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+			(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+
+	StelSkyDrawer *skyManager = core->getSkyDrawer();
 
 	gridManager->setFlagAzimuthalGrid(false);
 	gridManager->setFlagGalacticGrid(false);
@@ -1678,9 +1786,11 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEquatorJ2000Grid(false);
 	gridManager->setFlagEquatorLine(false);
 	gridManager->setFlagEclipticLine(false);
+	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticPlaneLine(false);
+	skyManager->setFlagLuminanceAdaptation(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
@@ -1696,6 +1806,7 @@ void Oculars::zoomOcular()
 	// core->setMaskType(StelProjector::MaskDisk);
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = NULL;
+	Lens *lens = NULL;
 	// Only consider flip is we're not binoculars
 	if (ocular->isBinoculars())
 	{
@@ -1704,12 +1815,28 @@ void Oculars::zoomOcular()
 	}
 	else
 	{
+		if (selectedLensIndex >= 0)
+			lens = lense[selectedLensIndex];
+
 		telescope = telescopes[selectedTelescopeIndex];
 		core->setFlipHorz(telescope->isHFlipped());
-		core->setFlipVert(telescope->isVFlipped());
+		core->setFlipVert(telescope->isVFlipped());		
 	}
 
-	double actualFOV = ocular->actualFOV(telescope);
+	// Limit stars and DSOs	if it enable
+	if (getFlagLimitMagnitude())
+	{
+		// Simplified calculation of the penetrating power of the telescope
+		// TODO: need improvements?
+		double limitMag = 2.1 + 5*std::log10(telescope->diameter());
+
+		skyManager->setFlagStarMagnitudeLimit(true);
+		skyManager->setFlagNebulaMagnitudeLimit(true);
+		skyManager->setCustomStarMagnitudeLimit(limitMag);
+		skyManager->setCustomNebulaMagnitudeLimit(limitMag);
+	}
+
+	double actualFOV = ocular->actualFOV(telescope, lens);
 	// See if the mask was scaled; if so, correct the actualFOV.
 	if (useMaxEyepieceAngle && ocular->appearentFOV() > 0.0 && !ocular->isBinoculars()) {
 		actualFOV = maxEyepieceAngle * actualFOV / ocular->appearentFOV();
@@ -1726,6 +1853,45 @@ void Oculars::hideUsageMessageIfDisplayed()
 		labelManager->deleteLabel(usageMessageLabelID);
 		usageMessageLabelID = -1;
 	}
+}
+
+Lens* Oculars::selectedLens()
+{
+    if (selectedLensIndex >= 0 && selectedLensIndex < lense.count())
+	return lense[selectedLensIndex];
+    return NULL;
+}
+
+QMenu* Oculars::addLensSubmenu(QMenu* parent)
+{
+	Q_ASSERT(parent);
+    
+	QMenu *submenu = new QMenu(q_("&Lens"), parent);
+	submenu->addAction(q_("&Previous lens"), this, SLOT(decrementLensIndex()));
+	submenu->addAction(q_("&Next lens"), this, SLOT(incrementLensIndex()));
+	submenu->addSeparator();
+	submenu->addAction(q_("None"), this, SLOT(disableLens()));
+
+	for (int index = 0; index < lense.count(); ++index)
+	{
+		QString label;
+		if (index < 10)
+		{
+			label = QString("&%1: %2").arg(index).arg(lense[index]->name());
+		}
+		else
+		{
+			label = lense[index]->name();
+		}
+		QAction* action = submenu->addAction(label, lenseSignalMapper, SLOT(map()));
+		if (index == selectedLensIndex)
+		{
+			action->setCheckable(true);
+			action->setChecked(true);
+		}
+		lenseSignalMapper->setMapping(action, QString("%1").arg(index));
+	}
+	return submenu;
 }
 
 QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
@@ -1757,4 +1923,66 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 	}
 
 	return submenu;
+}
+
+void Oculars::setFlagDecimalDegrees(const bool b)
+{
+	flagDecimalDegrees = b;
+	settings->setValue("use_decimal_degrees", b);	
+	settings->sync();
+}
+
+bool Oculars::getFlagDecimalDegrees() const
+{
+	return flagDecimalDegrees;
+}
+
+void Oculars::setFlagLimitMagnitude(const bool b)
+{
+	flagLimitMagnitude = b;
+	settings->setValue("limit_stellar_magnitude", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagLimitMagnitude() const
+{
+	return flagLimitMagnitude;
+}
+
+QString Oculars::getDimensionsString(double fovX, double fovY) const
+{
+	QString stringFovX, stringFovY;
+	if (getFlagDecimalDegrees())
+	{
+		if (fovX >= 1.0)
+		{
+			int degrees = (int)fovX;
+			int minutes = (int)((fovX - degrees) * 60);
+			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+		}
+		else
+		{
+			int minutes = (int)(fovX * 60);
+			stringFovX = QString::number(minutes) + QChar(0x2032);
+		}
+
+		if (fovY >= 1.0)
+		{
+			int degrees = (int)fovY;
+			int minutes = (int)((fovY - degrees) * 60);
+			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+		}
+		else
+		{
+			int minutes = (int)(fovY * 60);
+			stringFovY = QString::number(minutes) + QChar(0x2032);
+		}
+	}
+	else
+	{
+		stringFovX = QString::number(fovX) + QChar(0x00B0);
+		stringFovY = QString::number(fovY) + QChar(0x00B0);
+	}
+
+	return stringFovX + QChar(0x00D7) + stringFovY;
 }

@@ -38,17 +38,17 @@ class MinorPlanet : public Planet
 {
 public:
 	MinorPlanet(const QString& englishName,
-	       int flagLighting,
-	       double radius,
-	       double oblateness,
-	       Vec3f color,
-	       float albedo,
-	       const QString& texMapName,
-	       posFuncType _coordFunc,
-	       void* userDataPtr,
-	       OsculatingFunctType *osculatingFunc,
-	       bool closeOrbit,
-	       bool hidden);
+		int flagLighting,
+		double radius,
+		double oblateness,
+		Vec3f color,
+		float albedo,
+		const QString& texMapName,
+		posFuncType _coordFunc,
+		void* userDataPtr,
+		OsculatingFunctType *osculatingFunc,
+		bool closeOrbit,
+		bool hidden);
 
 	~MinorPlanet();
 
@@ -70,10 +70,10 @@ public:
 	//was not designed to handle different types of objects.
 	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
 	//virtual QString getType() const {return "MinorPlanet";}
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overriden to handle the problem with name conflicts.
-	virtual void translateName(StelTranslator& trans);
+	virtual void translateName(const StelTranslator& trans);
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -101,11 +101,17 @@ public:
 	//! designation.
 	static QString renderProvisionalDesignationinHtml(QString plainText);
 
+	//! set value for semi-major axis in AU
+	void setSemiMajorAxis(double value);
+
+	//! get sidereal period for minor planet
+	double getSiderealPeriod() const;
 
 private:
 	int minorPlanetNumber;
 	double absoluteMagnitude;
 	double slopeParameter;
+	double semiMajorAxis;
 
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;

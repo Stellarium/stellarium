@@ -26,7 +26,6 @@
 #include "StelCore.hpp"
 
 #include <QDebug>
-#include <QtOpenGL>
 
 StelLoadingBar::StelLoadingBar(const QString& splashTex,
 	const QString& extraTextString, float extraTextSize,
