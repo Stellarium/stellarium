@@ -19,10 +19,17 @@
 
 #include <windows.h>
 
+#ifdef _MSC_BUILD 
+#include <stdlib.h>
+#include "kdewin32/pwd.h"
+#include <stdio.h>
+#include <errno.h>
+#else
 #include "kdewin32/stdlib.h"
 #include "kdewin32/pwd.h"
 #include "kdewin32/stdio.h"
 #include "kdewin32/errno.h"
+#endif
 
 /* these functions always fail for win32 */
 

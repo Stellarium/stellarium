@@ -59,6 +59,8 @@ public:
 	StelSkyCulture getSkyCulture() const {return currentSkyCulture;}
 	
 public slots:
+	//! Get the current sky culture English name.
+	QString getCurrentSkyCultureEnglishName() const;
 	//! Get the current sky culture translated name.
 	QString getCurrentSkyCultureNameI18() const;
 	//! Set the sky culture from i18n name.

@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 
 #include "StelObjectMgr.hpp"
@@ -161,6 +162,7 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 }
 
@@ -182,6 +184,7 @@ void SearchDialog::retranslate()
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
 		populateSimbadServerList();
+		updateListTab();
 	}
 }
 
@@ -236,8 +239,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
-		this, SLOT(enableSimbadSearch(bool)));
+	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
 
 	populateSimbadServerList();
@@ -248,8 +250,16 @@ void SearchDialog::createDialogContent()
 		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->serverListComboBox->setCurrentIndex(idx);
-	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
-	        this, SLOT(selectSimbadServer(int)));
+	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
+
+	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
+	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+
+	// list views initialization
+	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
+	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
+	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	updateListTab();
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -265,6 +275,16 @@ void SearchDialog::enableSimbadSearch(bool enable)
 	Q_ASSERT(conf);
 	conf->setValue("search/flag_search_online", useSimbad);	
 }
+
+void SearchDialog::enableStartOfWordsAutofill(bool enable)
+{
+	useStartOfWords = enable;
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/flag_start_words", useStartOfWords);
+}
+
 
 void SearchDialog::setVisible(bool v)
 {
@@ -327,11 +347,16 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()), useStartOfWords);
 		} else {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords);
 		}
+
+		// remove possible duplicates from completion list
+		matches.removeDuplicates();
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -347,13 +372,17 @@ void SearchDialog::onSimbadStatusChanged()
 	Q_ASSERT(simbadReply);
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
 	{
-		ui->simbadStatusLabel->setText(QString("Simbad Lookup Error: ")+simbadReply->getErrorString());
+		ui->simbadStatusLabel->setText(QString("%1: %2")
+					       .arg(q_("Simbad Lookup Error"))
+					       .arg(simbadReply->getErrorString()));
 		if (ui->completionLabel->isEmpty())
 			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	}
 	else
 	{
-		ui->simbadStatusLabel->setText(QString("Simbad Lookup: ")+simbadReply->getCurrentStatusString());
+		ui->simbadStatusLabel->setText(QString("%1: %2")
+					       .arg(q_("Simbad Lookup"))
+					       .arg(simbadReply->getCurrentStatusString()));
 		// Query not over, don't disable button
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
@@ -396,21 +425,25 @@ void SearchDialog::greekLetterClicked()
 void SearchDialog::gotoObject()
 {
 	QString name = ui->completionLabel->getSelected();
+	gotoObject(name);
+}
 
-	if (name.isEmpty())
+void SearchDialog::gotoObject(const QString &nameI18n)
+{
+	if (nameI18n.isEmpty())
 		return;
 
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	if (simbadResults.contains(name))
+	if (simbadResults.contains(nameI18n))
 	{
 		close();
-		Vec3d pos = simbadResults[name];
+		Vec3d pos = simbadResults[nameI18n];
 		objectMgr->unSelect();
 		mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
-	else if (objectMgr->findAndSelectI18n(name))
+	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -419,7 +452,7 @@ void SearchDialog::gotoObject()
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
 			// Can't point to home planet
-			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().name)
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 			{
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);
@@ -431,6 +464,23 @@ void SearchDialog::gotoObject()
 		}
 	}
 	simbadResults.clear();
+}
+
+void SearchDialog::gotoObject(QListWidgetItem *item)
+{
+	QString objName = item->text();
+	gotoObject(objName);
+}
+
+void SearchDialog::searchListChanged(const QString &newText)
+{
+	QList<QListWidgetItem*> items = ui->objectsListWidget->findItems(newText, Qt::MatchStartsWith);
+	ui->objectsListWidget->clearSelection();
+	if (!items.isEmpty())
+	{
+		items.at(0)->setSelected(true);
+		ui->objectsListWidget->scrollToItem(items.at(0));
+	}
 }
 
 bool SearchDialog::eventFilter(QObject*, QEvent *event)
@@ -490,7 +540,6 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 
 void SearchDialog::populateSimbadServerList()
 {
-	Q_ASSERT(ui);
 	Q_ASSERT(ui->serverListComboBox);
 
 	QComboBox* servers = ui->serverListComboBox;
@@ -520,4 +569,38 @@ void SearchDialog::selectSimbadServer(int index)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("search/simbad_server_url", simbadServerUrl);
+}
+
+void SearchDialog::updateListWidget(int index)
+{
+	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
+	ui->objectsListWidget->clear();
+	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
+	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
+	ui->objectsListWidget->sortItems(Qt::AscendingOrder);
+	connect(ui->objectsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+}
+
+void SearchDialog::updateListTab()
+{
+	if (StelApp::getInstance().getLocaleMgr().getAppLanguage() == "en")
+	{
+		// hide "names in English" checkbox
+		ui->searchInEnglishCheckBox->hide();
+	}
+	else
+	{
+		ui->searchInEnglishCheckBox->show();
+	}
+	ui->objectTypeComboBox->clear();
+	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
+	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
+	{
+		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
+		{
+			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ? it.value(): q_(it.value()));
+			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
+		}
+	}
+	updateListWidget(ui->objectTypeComboBox->currentIndex());
 }

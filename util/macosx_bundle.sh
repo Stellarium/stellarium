@@ -5,6 +5,14 @@ shift;
 PROJECT_SOURCE_DIR=$1
 shift;
 
+QTPLUGIN_DIR=""
+for d in /Developer/Applications/Qt/plugins /opt/local/share/qt4/plugins; do
+    if [ -e "$d" ]; then
+        QTPLUGIN_DIR="$d"
+        break
+    fi
+done
+
 mv ${CMAKE_INSTALL_PREFIX}/bin ${CMAKE_INSTALL_PREFIX}/MacOS
 
 if [ -e "${CMAKE_INSTALL_PREFIX}/MacOS/stellarium.app/Contents/MacOS/stellarium" ] ; then
@@ -19,8 +27,10 @@ rmdir ${CMAKE_INSTALL_PREFIX}/Resources/stellarium
 
 mkdir ${CMAKE_INSTALL_PREFIX}/Frameworks
 /usr/bin/perl util/pkgApp.pl ${CMAKE_INSTALL_PREFIX} MacOS/stellarium Frameworks 
-cp -pr /Developer/Applications/Qt/plugins/{imageformats,iconengines} ${CMAKE_INSTALL_PREFIX}/MacOS
-for f in ${CMAKE_INSTALL_PREFIX}/MacOS/{imageformats,iconengines}/*.dylib; do
+mkdir ${CMAKE_INSTALL_PREFIX}/plugins
+
+cp -pr "$QTPLUGIN_DIR/"{imageformats,iconengines}/* ${CMAKE_INSTALL_PREFIX}/plugins
+for f in ${CMAKE_INSTALL_PREFIX}/plugins/*.dylib; do
     fdir=`dirname $f`
     dir=`basename $fdir`
     base=`basename $f`

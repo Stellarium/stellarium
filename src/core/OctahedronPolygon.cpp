@@ -243,7 +243,7 @@ double OctahedronPolygon::getArea() const
 	return area;
 }
 
-// Return a point located inside the polygon.
+// Return a point located inside the polygon. Actually, inside the first triangle in this case.
 Vec3d OctahedronPolygon::getPointInside() const
 {
 	const QVector<Vec3d>& trianglesArray = getFillVertexArray().vertex;
@@ -320,7 +320,7 @@ struct OctTessTrianglesCallbackData
 
 void errorCallback(GLenum errno)
 {
-	qWarning() << "Tesselator error:" << QString::fromAscii((char*)gluesErrorString(errno));
+	qWarning() << "Tesselator error:" << QString::fromLatin1((char*)gluesErrorString(errno));
 	Q_ASSERT(0);
 }
 

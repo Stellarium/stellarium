@@ -55,9 +55,6 @@ private:
 	//! True if the user is currently editing a new location
 	bool isEditingNew;
 	
-	//! To be called when user edits any field
-	void reportEdit();
-	
 	void disconnectEditSignals();
 	void connectEditSignals();
 	
@@ -77,35 +74,39 @@ private:
 	void populateCountryList();
 	
 private slots:
+	//! To be called when user edits any field
+	void reportEdit();
+	
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
-	void updateFromProgram();
+	void updateFromProgram(const StelLocation& location);
 	
-	//! Called when the map is clicked
+	//! Called when the map is clicked.
 	void setPositionFromMap(double longitude, double latitude);
 	
-	//! Called when the user activates an item from the list
-	void listItemActivated(const QModelIndex&);
+	//! Called when the user activates an item from the locations list.
+	void setPositionFromList(const QModelIndex& index);
 	
-	//! Called when the planet/country name is manually changed
-	void comboBoxChanged(const QString& text);
+	//! Called when the planet is manually changed.
+	void moveToAnotherPlanet(const QString& text);
 	//! Called when latitude/longitude/altitude is modified
-	void spinBoxChanged(int i=0);
-	//! Called when the location name is manually changed
-	void locationNameChanged(const QString&);
+	void setPositionFromCoords(int i=0);
 	
-	//! Called when the user clic on the add to list button
+	//! Called when the user clicks on the add to list button
 	void addCurrentLocationToList();
 	
-	//! Called when the user clic on the delete button
+	//! Called when the user clicks on the delete button
 	void deleteCurrentLocationFromList();
 	
 	//! Called when the user wants to use the current location as default
-	void useAsDefaultClicked();
+	void setDefaultLocation();
 	
 private:
 	QString lastPlanet;	
 	bool lastVisionMode;
+	
+	//! Updates the check state and the enabled/disabled status.
+	void updateDefaultLocationControls(bool currentIsDefault);
 };
 
 #endif // _LOCATIONDIALOG_HPP_

@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QDir>
 #ifdef Q_OS_WIN
 #include <io.h>
 #include <windows.h>
@@ -82,7 +83,9 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 }
 
 #if (!defined(__GNUC__))
+#ifndef _MSC_BUILD
 #warning Star catalogue loading has only been tested with gcc
+#endif
 #endif
 
 ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
@@ -91,10 +94,10 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	QFile* file = new QFile(catalogFilePath);
 	if (!file->open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Error while loading " << catalogFilePath << ": failed to open file.";
+		qWarning() << "Error while loading " << QDir::toNativeSeparators(catalogFilePath) << ": failed to open file.";
 		return 0;
 	}
-	dbStr = "Loading \"" + catalogFilePath + "\": ";
+	dbStr = "Loading \"" + QDir::toNativeSeparators(catalogFilePath) + "\": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
@@ -137,12 +140,11 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	else if (magic == FILE_MAGIC)
 	{
 		// ok, FILE_MAGIC
-#if (!defined(__GNUC__))
+#if (!defined(__GNUC__) && !defined(_MSC_BUILD))
 		if (use_mmap)
 		{
 			// mmap only with gcc:
-			dbStr += "warning - you must convert catalogue "
-				  += "to native format before mmap loading";
+			dbStr += "warning - you must convert catalogue to native format before mmap loading";
 			qDebug(qPrintable(dbStr));
 
 			return 0;
@@ -194,7 +196,9 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			// for your compiler.
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
+#ifndef _MSC_BUILD
 			Q_ASSERT(sizeof(Star2) == 10);
+#endif
 			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
@@ -213,7 +217,9 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			// for your compiler.
 			// Because your compiler does not pack the data,
 			// which is crucial for this application.
+#ifndef _MSC_BUILD
 			Q_ASSERT(sizeof(Star3) == 6);
+#endif
 			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 			if (rval == 0)
 			{
@@ -443,6 +449,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				file->close();
 			}
 		}
+		// GZ: Some diagnostics to understand the undocumented vars around mag.
+		// qDebug() << "SpecialZoneArray: mag_min=" << mag_min << ", mag_steps=" << mag_steps << ", mag_range=" << mag_range ;
 	}
 }
 
@@ -472,46 +480,68 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_inside, const float *rcmag_table, StelCore* core, unsigned int maxMagStarName,
-				  float names_brightness) const
+void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const float *rcmag_table,
+	StelCore* core, unsigned int maxMagStarName, float names_brightness) const
 {
     StelSkyDrawer* drawer = core->getSkyDrawer();
-    SpecialZoneData<Star> *const z = getZones() + index;
     Vec3f vf;
-    const Star *const end = z->getStars() + z->size;
     static const double d2000 = 2451545.0;
     const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
-    const float* tmpRcmag; // will point to precomputed rC in table
+    
     // GZ, added for extinction
-    Extinction extinction=core->getSkyDrawer()->getExtinction();
-    const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
-    const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
-
-    // go through all stars, which are sorted by magnitude (bright stars first)
-    for (const Star *s=z->getStars();s<end;++s)
+    const Extinction& extinction=core->getSkyDrawer()->getExtinction();
+    const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
+    const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
+	
+	// GZ: allow artificial cutoff:
+	const int clampStellarMagnitude_mmag = (int) floor(drawer->getCustomStarMagnitudeLimit() * 1000.0f);
+	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.
+	int cutoffMagStep=(drawer->getFlagStarMagnitudeLimit() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
+    
+	// Go through all stars, which are sorted by magnitude (bright stars first)
+	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
+	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
+    for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
     {
-	tmpRcmag = rcmag_table+2*s->mag;
-	if (*tmpRcmag<=0.f) break; // no size for this and following (even dimmer, unextincted) stars? --> early exit
-	s->getJ2000Pos(z,movementFactor, vf);
+		// Artifical cutoff per magnitude
+		if (s->mag > cutoffMagStep)
+			break;
+    
+		// Array of 2 numbers containing radius and magnitude
+		const float* tmpRcmag = rcmag_table+2*s->mag;
+		
+		// The radius of the star is <=0, following stars will be dimmer --> early exit
+		if (*tmpRcmag<=0.f)
+			break;
+		
+		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
 
-	// GZ new:
-	if (withExtinction)
-	{
-	    //GZ: We must compute position first, then shift magnitude.
-	    Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOn);
-	    float extMagShift=0.0f;
-	    extinction.forward(&altAz, &extMagShift);
-            int extMagShiftStep=qMin((int)floor(extMagShift/k), 4096-mag_steps); // this number muist be equal StarMgr.cpp line 649
-	    tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
-	}
-
-	if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
-	{
-	    const float offset = *tmpRcmag*0.7f;
-	    const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
-	    sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
-	    sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
-	}
+		// GZ new:
+		if (withExtinction)
+		{
+			//GZ: We must compute position first, then shift magnitude.
+			Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOff);
+			float extMagShift=0.0f;
+			altAz.normalize();
+			extinction.forward(&altAz, &extMagShift);
+			int extMagShiftStep=qMin((int)(extMagShift/k), 4096-mag_steps); // this number must be equal StarMgr.cpp line 649
+			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
+			{
+				continue;
+			}
+			else
+			{
+				tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
+			}
+		}
+	
+		if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
+		{
+			const float offset = *tmpRcmag*0.7f;
+			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
+			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
+			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
+		}
     }
 }
 

@@ -24,7 +24,11 @@
 #include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
 
+#if QT_VERSION<QT_VERSION_CHECK(5,0,0)
 #include <QtGui>
+#else
+#include <QtWidgets>
+#endif
 #include <QString>
 #include <QColor>
 #include <QSettings>
@@ -112,7 +116,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 		{
 			if (metaObject->method(i).methodType() == QMetaMethod::Slot && metaObject->method(i).access() == QMetaMethod::Public)
 			{
-				QString fn = metaObject->method(i).signature();
+				QString fn = metaObject->method(i).methodSignature();
 				fn.replace(QRegExp("\\(.*$"), ""); 
 				fn = m->objectName() + "\\." + fn;
 				knownFunctionNames << fn;

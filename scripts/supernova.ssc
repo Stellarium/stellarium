@@ -1,0 +1,142 @@
+//
+// Author: Alexander Wolf
+// Version: 1.0
+// License: Public Domain
+// Name: Tycho's Supernova
+// Description: Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.
+//
+
+var color = "#9999FF";
+
+core.goHome();
+core.wait(1);
+core.setGuiVisible(false);
+core.clear("natural");
+
+LabelMgr.deleteAllLabels();
+SolarSystem.setFlagLabels(false);
+
+var label = LabelMgr.labelScreen("Europe, Uraniborg.", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.setObserverLocation("Uraniborg, Denmark", 2);
+core.wait(4);
+
+LabelMgr.setLabelShow(label, false);
+core.wait(1);
+
+label = LabelMgr.labelScreen("Evening of 20 October 1572", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.setDate("1572-10-20T17:00:00", "utc");
+core.wait(3);
+
+StelMovementMgr.zoomTo(200, 4);
+core.wait(5);
+
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("Constellation Cassiopeia", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+
+ConstellationMgr.setFlagIsolateSelected(true);
+ConstellationMgr.setFlagArt(false);
+ConstellationMgr.setFlagLabels(false);
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagBoundaries(false);
+
+core.selectObjectByName("Cassiopeia", false);
+core.wait(1);
+
+core.setMountMode("equatorial");
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(60, 2);
+core.wait(3);
+
+ConstellationMgr.setFlagLines(false);
+core.wait(.1);
+
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("5 days later...", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.setDate("+5 days");
+core.wait(2);
+
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("Next 3 days...", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.setDate("+3 days");
+core.wait(2);
+
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("New star! But people have not seen it yet...", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.wait(2);
+
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("Evening of 31 October 1572", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.setDate("1572-10-31T17:00:00", "utc");
+core.wait(2);
+
+for (i=1; i<12; i++)
+{
+	LabelMgr.deleteAllLabels();
+	label = LabelMgr.labelScreen("Evening of " + i + " November 1572", 20, 20, false, 20, color);
+	LabelMgr.setLabelShow(label, true);
+	core.setDate("+1 day");
+
+	if (i==6)
+	{
+		core.wait(.5);
+		label = LabelMgr.labelScreen("Hooray! First observations in Korea and Europe.", 20, 50, false, 20, color);
+		LabelMgr.setLabelShow(label, true);
+		core.wait(.5);
+	}
+
+	if (i==8)
+	{
+		core.wait(.5);
+		label = LabelMgr.labelScreen("First observations in China.", 20, 50, false, 20, color);
+		LabelMgr.setLabelShow(label, true);
+		core.wait(.5);
+	}
+
+	if (i==11)
+	{
+		core.wait(.5);
+		label = LabelMgr.labelScreen("The clouds are gone and Tycho Brahe the first time watching a new star!", 20, 50, false, 20, color);
+		LabelMgr.setLabelShow(label, true);
+		core.wait(1);
+	}
+
+	core.wait(2);
+}
+
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("Next 60 days...", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.wait(.1);
+
+for(i=0; i<60; i++)
+{
+	core.setDate("+1 day");
+	core.wait(.1);
+}
+
+LabelMgr.deleteAllLabels();
+label = LabelMgr.labelScreen("Next other 40 days...", 20, 20, false, 20, color);
+LabelMgr.setLabelShow(label, true);
+core.wait(.1);
+
+for(i=0; i<40; i++)
+{
+	core.setDate("+1 day");
+	core.wait(.1);
+}
+
+LabelMgr.deleteAllLabels();
+core.setMountMode("azimuthal");
+core.wait(.1);
+core.clear("natural");
+core.wait(.1);
+core.goHome();
+core.wait(1);
+core.setGuiVisible(true);

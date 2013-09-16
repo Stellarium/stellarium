@@ -236,6 +236,8 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 {
 	if (!tex->bind())
 		return false;
+//	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
+
 
 	if (!texFader)
 	{
@@ -264,6 +266,21 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
+/*
+		if (withExtinction)
+		{
+			Vec3d bary= poly->getPointInside(); // This is a J000.0 vector that points "somewhere" in the first triangle.
+			Vec3d altAz = core->j2000ToAltAz(bary, StelCore::RefractionOn);
+			float extinctionMagnitude=0.0f;
+			extinction.forward(&(altAz[2]), &extinctionMagnitude);
+			// compute a simple factor from magnitude loss.
+			float extinctionFactor=pow(0.4f , extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
+			extinctedColor[0]*=fabs(extinctionFactor);
+			extinctedColor[1]*=fabs(extinctionFactor);
+			extinctedColor[2]*=fabs(extinctionFactor);
+		}
+		renderer->setGlobalColor(extinctedColor);*/
+		// GZ: this was the original code now.
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE

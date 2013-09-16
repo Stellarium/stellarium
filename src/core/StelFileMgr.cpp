@@ -23,7 +23,7 @@
 #include <QDir>
 #include <QString>
 #include <QDebug>
-#include <QDesktopServices>
+#include <QStandardPaths>
 
 #include "StelUtils.hpp"
 
@@ -59,7 +59,7 @@ void StelFileMgr::init()
 
 	if (!QFile(userDir).exists())
 	{
-		qWarning() << "User config directory does not exist: " << userDir;
+		qWarning() << "User config directory does not exist: " << QDir::toNativeSeparators(userDir);
 	}
 	try
 	{
@@ -84,15 +84,8 @@ void StelFileMgr::init()
 		qWarning() << "WARNING: could not locate installation directory";
 	}
 
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-	screenshotDir = getDesktopDir();
-#else
-	screenshotDir = QDir::homePath();
-#endif
-
-#ifdef Q_OS_MAC
-	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
-#endif
+	if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0];
 }
 
 
@@ -363,16 +356,12 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 
 QString StelFileMgr::getDesktopDir()
 {
-	QString result;
-#ifdef Q_OS_WIN
-	result = getWin32SpecialDirPath(CSIDL_DESKTOPDIRECTORY);
-#else
-	// TODO: this is not going to work for machines which are non-English...
-	// For Linux and perhaps some BSDs, we can call the external program
-	// "xdg-user-dir DESKTOP" if it exists, but I'm not sure about OSX.
-	result = QFile::decodeName(getenv("HOME"));
-	result += "/Desktop";
-#endif
+
+	if (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).isEmpty())
+		throw std::runtime_error("Can't find Desktop directory");
+
+	QString result = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
+
 	if (!QFileInfo(result).isDir())
 	{
 		throw std::runtime_error("Can't find Desktop directory");
@@ -427,7 +416,9 @@ QString StelFileMgr::getInstallationDir()
 	else
 	{
 		qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-			<< installLocation.filePath() << " (we checked for " << checkFile.filePath() << ").";
+			<< QDir::toNativeSeparators(installLocation.filePath())
+			<< " (we checked for " << QDir::toNativeSeparators(checkFile.filePath())
+			<< ").";
 		throw (std::runtime_error("NOT FOUND"));
 	}
 }
@@ -442,12 +433,12 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 	QFileInfo userDirFI(newDir);
 	if (!userDirFI.exists() || !userDirFI.isDir())
 	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: " << userDirFI.filePath();
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: " << QDir::toNativeSeparators(userDirFI.filePath());
 		throw std::runtime_error("NOT_VALID");
 	}
 	else if (!userDirFI.isWritable())
 	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: " << userDirFI.filePath();
+		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: " << QDir::toNativeSeparators(userDirFI.filePath());
 		throw std::runtime_error("NOT_VALID");
 	}
 	screenshotDir = userDirFI.filePath();
@@ -457,31 +448,24 @@ QString StelFileMgr::getLocaleDir()
 {
 #ifdef ENABLE_NLS
 	QFileInfo localePath;
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-	// Windows and MacOS X have the locale dir in the installation folder
-	localePath = QFileInfo(getInstallationDir() + "/locale");
-	// or MacosxDirs::getApplicationResourcesDirectory().append( "/locale" );
-#else
-	// Linux, BSD etc, the locale dir is set in the config.h
-	// but first, if we are in the development tree, don't rely on an
-	// install having been done.
-	if (getInstallationDir() == ".")
-	{
-		localePath = QFileInfo("./locale");
-		if (!localePath.exists())
-			localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
-	}
-	else
-		localePath = QFileInfo(QFile::decodeName(INSTALL_LOCALEDIR));
-#endif
+	localePath = QFileInfo(getInstallationDir() + "/translations");
 	if (localePath.exists())
 	{
 		return localePath.filePath();
 	}
 	else
 	{
-		qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
-		return "";
+		// If not found, try to look in the standard build directory (useful for developer)
+		localePath = QCoreApplication::applicationDirPath() + "/../translations";
+		if (localePath.exists())
+		{
+			return localePath.filePath();
+		}
+		else
+		{
+			qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
+			return "";
+		}
 	}
 #else
 	return QString();
@@ -491,12 +475,7 @@ QString StelFileMgr::getLocaleDir()
 // Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
 QString StelFileMgr::getCacheDir()
 {
-	const QString& cachePath = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-	if (cachePath.isEmpty())
-	{
-		return getUserDir()+"/cache";
-	}
-	return cachePath;
+	return (QStandardPaths::standardLocations(QStandardPaths::CacheLocation) << getUserDir() + "/cache")[0];
 }
 
 
@@ -507,7 +486,7 @@ void StelFileMgr::makeSureDirExistsAndIsWritable(const QString& dirFullPath)
 	if (!uDir.exists())
 	{
 		// The modules directory doesn't exist, lets create it.
-		qDebug() << "Creating directory " << uDir.filePath();
+		qDebug() << "Creating directory " << QDir::toNativeSeparators(uDir.filePath());
 		if (!QDir("/").mkpath(uDir.filePath()))
 		{
 			throw std::runtime_error(QString("Could not create directory: " +uDir.filePath()).toStdString());
@@ -529,26 +508,18 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 {
 	// This function is implemented using code from QSettings implementation in QT
 	// (GPL edition, version 4.3).
+	
+	// Stellarium works only on wide-character versions of Windows anyway,
+	// therefore it's using only the wide-char version of the code. --BM
 	QLibrary library(QLatin1String("shell32"));
-	QT_WA( {
-		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
-		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
-		if (SHGetSpecialFolderPath)
-		{
-			TCHAR tpath[MAX_PATH];
-			SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
-			return QString::fromUtf16((ushort*)tpath);
-		}
-	} , {
-		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, char*, int, BOOL);
-		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathA");
-		if (SHGetSpecialFolderPath)
-		{
-			char cpath[MAX_PATH];
-			SHGetSpecialFolderPath(0, cpath, csidlId, FALSE);
-			return QString::fromLocal8Bit(cpath);
-		}
-	} );
+	typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
+	GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
+	if (SHGetSpecialFolderPath)
+	{
+		TCHAR tpath[MAX_PATH];
+		SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
+		return QString::fromUtf16((ushort*)tpath);
+	}
 
 	return QString();
 }

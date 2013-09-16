@@ -22,6 +22,7 @@
 
 #include <QFont>
 #include <QVariantMap>
+#include <QVector>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
@@ -35,8 +36,23 @@ class QSettings;
 
 namespace BigStarCatalogExtension {
   class ZoneArray;
-  class HipIndexStruct;
+  struct HipIndexStruct;
 }
+
+typedef struct
+{
+	QString designation;	//! GCVS designation
+	QString vtype;		//! Type of variability
+	float maxmag;		//! Magnitude at maximum brightness
+	int mflag;		//! Magnitude flag code
+	float min1mag;		//! First minimum magnitude or amplitude
+	float min2mag;		//! Second minimum magnitude or amplitude
+	QString photosys;	//! The photometric system for magnitudes
+	double epoch;		//! Epoch for maximum light (Julian days)
+	double period;		//! Period of the variable star (days)
+	int Mm;			//! Rising time or duration of eclipse (%)
+	QString stype;		//! Spectral type
+} varstar;
 
 //! @class StarMgr
 //! Stores the star catalogue data.
@@ -107,8 +123,18 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	// empty, as there's too much stars for displaying at once
+	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QString getName() const { return "Stars"; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -160,6 +186,46 @@ public:
 	//! Hipparcos catalogue number.
 	static QString getSciName(int hip);
 
+	//! Get the (translated) additional scientific name for a star with a
+	//! specified Hipparcos catalogue number.
+	static QString getSciAdditionalName(int hip);
+
+	//! Get the (translated) scientific name for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static QString getGcvsName(int hip);
+
+	//! Get the type of variability for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static QString getGcvsVariabilityType(int hip);
+
+	//! Get the magnitude at maximum brightness for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static float getGcvsMaxMagnitude(int hip);
+
+	//! Get the magnitude flag code for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static int getGcvsMagnitudeFlag(int hip);
+
+	//! Get the minimum magnitude or amplitude for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static float getGcvsMinMagnitude(int hip, bool firstMinimumFlag=true);
+
+	//! Get the photometric system for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static QString getGcvsPhotometricSystem(int hip);
+
+	//! Get Epoch for maximum light for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static double getGcvsEpoch(int hip);
+
+	//! Get the period for a variable star with a specified
+	//! Hipparcos catalogue number.
+	static double getGcvsPeriod(int hip);
+
+	//! Get the rising time or duration of eclipse for a variable star with a
+	//! specified Hipparcos catalogue number.
+	static int getGcvsMM(int hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
@@ -168,7 +234,7 @@ public:
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(QVariantMap m);
+	bool checkAndLoadCatalog(const QVariantMap& m);
 
 private slots:
 	void setStelStyle(const QString& section);
@@ -196,6 +262,10 @@ private:
 	//! @param the path to a file containing the scientific names for bright stars.
 	void loadSciNames(const QString& sciNameFile);
 
+	//! Loads GCVS from a file.
+	//! @param the path to a file containing the GCVS.
+	void loadGcvs(const QString& GcvsFile);
+
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
 	int getMaxSearchLevel() const;
@@ -215,8 +285,9 @@ private:
 
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
-	typedef QHash<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
-	ZoneArrayMap zoneArrays; // index is the grid level
+	
+	// A ZoneArray per grid level
+	QVector<BigStarCatalogExtension::ZoneArray*> gridLevels;
 	static void initTriangleFunc(int lev, int index,
 								 const Vec3f &c0,
 								 const Vec3f &c1,
@@ -236,9 +307,16 @@ private:
 	static QHash<int, QString> commonNamesMap;
 	static QHash<int, QString> commonNamesMapI18n;
 	static QMap<QString, int> commonNamesIndexI18n;
+	static QMap<QString, int> commonNamesIndex;
 
-	static QHash<int, QString> sciNamesMapI18n;
+	static QHash<int, QString> sciNamesMapI18n;	
 	static QMap<QString, int> sciNamesIndexI18n;
+
+	static QHash<int, QString> sciAdditionalNamesMapI18n;
+	static QMap<QString, int> sciAdditionalNamesIndexI18n;
+
+	static QHash<int, varstar> varStarsMapI18n;
+	static QMap<QString, int> varStarsIndexI18n;
 
 	QFont starFont;
 	static bool flagSciNames;

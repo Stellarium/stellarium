@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>450</height>
+    <height>446</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,9 +27,6 @@
     <width>800</width>
     <height>600</height>
    </size>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayoutTelescopeDialog">
    <property name="spacing">
@@ -153,7 +150,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabTelescopes">
       <property name="sizePolicy">
@@ -566,10 +563,6 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <property name="icon">
-                <iconset resource="../../../../data/gui/guiRes.qrc">
-                 <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
-               </property>
               </widget>
              </item>
             </layout>
@@ -609,7 +602,7 @@
      </widget>
      <widget class="QWidget" name="tabAbout">
       <attribute name="title">
-       <string>About</string>
+       <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
@@ -629,8 +622,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

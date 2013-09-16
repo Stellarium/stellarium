@@ -58,6 +58,8 @@ private:
 	QStringList values;
 };
 
+QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
+
 //! @class SearchDialog
 //! The sky object search dialog.
 class SearchDialog : public StelDialog
@@ -91,6 +93,11 @@ private slots:
 	void onSearchTextChanged(const QString& text);
 	
 	void gotoObject();
+	void gotoObject(const QString& nameI18n);
+	// for going from list views
+	void gotoObject(QListWidgetItem* item);
+
+	void searchListChanged(const QString& newText);
 	
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
@@ -98,11 +105,20 @@ private slots:
 	//! Whether to use SIMBAD for searches or not.
 	void enableSimbadSearch(bool enable);
 
+	//! Whether to use autofill for start of words or not.
+	void enableStartOfWordsAutofill(bool enable);
+
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
 	//! Called when a SIMBAD server is selected in the list.
 	void selectSimbadServer(int index);
+
+	//! Called when new type of objects selected in list view tab
+	void updateListWidget(int index);
+
+	// retranslate/recreate tab
+	void updateListTab();
 
 private:
 	class SimbadSearcher* simbadSearcher;
@@ -116,6 +132,7 @@ private:
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
 	
+	bool useStartOfWords;
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;

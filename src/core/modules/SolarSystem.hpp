@@ -26,7 +26,6 @@
 #endif
 
 #include <QFont>
-#include "StelShader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
@@ -100,8 +99,19 @@ public:
 	//! the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object.
 	//! @param maxNbItem the maximum number of returned object names.
+	//! @param useStartOfWords the autofill mode for returned objects names.
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! Find objects by translated name prefix.
+	//! Find and return the list of at most maxNbItem objects auto-completing
+	//! the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object.
+	//! @param maxNbItem the maximum number of returned object names.
+	//! @param useStartOfWords the autofill mode for returned objects names.
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QString getName() const { return "Solar System"; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -177,6 +187,32 @@ public slots:
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
+	//! Get the V magnitude for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
+	//! @return a magnitude
+	float getPlanetVMagnitude(QString planetName) const;
+
+	//! Get distance to Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a distance (in AU)
+	double getDistanceToPlanet(QString planetName) const;
+
+	//! Get elongation for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a elongation (in radians)
+	double getElongationForPlanet(QString planetName) const;
+
+	//! Get phase angle for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase angle (in radians)
+	double getPhaseAngleForPlanet(QString planetName) const;
+
+	//! Get phase for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase
+	float getPhaseForPlanet(QString planetName) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -223,9 +259,7 @@ public:
 
 	//! Get the list of all the bodies of the solar system.
 	//! \deprecated Used in LandscapeMgr::update(), but commented out.
-	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
-
-	StelShader* nMapShader;
+	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}	
 
 private slots:
 	//! Called when a new object is selected.
@@ -261,6 +295,9 @@ private:
 
 	void recreateTrails();
 
+
+	//! Used to count how many planets actually need shadow information
+	int shadowPlanetCount;
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;

@@ -21,7 +21,6 @@
 #define _STELAPP_HPP_
 
 #include <QString>
-#include <QVariant>
 #include <QObject>
 
 // Predeclaration of some classes
@@ -31,14 +30,20 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
+class StelShortcutMgr;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QTime;
+class QTimer;
 class StelLocationMgr;
 class StelSkyLayerMgr;
 class StelAudioMgr;
+class StelVideoMgr;
 class StelGuiBase;
+class StelMainScriptAPIProxy;
+class StelScriptMgr;
+class StelProgressController;
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -57,6 +62,7 @@ class StelApp : public QObject
 
 public:
 	friend class StelAppGraphicsWidget;
+	friend class StelSkyItem;
 
 	//! Create and initialize the main Stellarium application.
 	//! @param parent the QObject parent
@@ -68,8 +74,10 @@ public:
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
 
-	//! Initialize core and default modules.
+	//! Initialize core and all the modules.
 	void init(QSettings* conf);
+	//! Deinitialize core and all the modules.
+	void deinit();
 
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
@@ -102,12 +110,16 @@ public:
 	//! @return the StelObject manager to use for querying from all stellarium objects 	.
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
 
-	//! Get the StelObject manager to use for querying from all stellarium objects.
-	//! @return the StelObject manager to use for querying from all stellarium objects 	.
 	StelSkyLayerMgr& getSkyImageMgr() {return *skyImageMgr;}
 
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
+
+	//! Get the shortcuts manager to use for managing and editing shortcuts
+	StelShortcutMgr* getStelShortcutManager() {return shortcutMgr;}
+
+	//! Get the video manager
+	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
 
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
@@ -151,12 +163,22 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
+#ifndef DISABLE_SCRIPTING
+	//! Get the script API proxy (for signal handling)
+	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
+	//! Get the script manager
+	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
+#endif
+
 	static void initStatic();
 	static void deinitStatic();
 
-	//! Get flag for using opengl shaders
-	bool getUseGLShaders() const {return useGLShaders;}
-
+	//! Add a progression indicator to the GUI (if applicable).
+	//! @return a controller which can be used to indicate the current status.
+	//! The StelApp instance remains the owner of the controller.
+	StelProgressController* addProgressBar();
+	void removeProgressBar(StelProgressController* p);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -182,6 +204,11 @@ signals:
 	void languageChanged();
 	void skyCultureChanged(const QString&);
 
+	//! Called just after a progress bar is added.
+	void progressBarAdded(const StelProgressController*);
+	//! Called just before a progress bar is removed.
+	void progressBarRemoved(const StelProgressController*);
+
 private:
 
 	//! Handle mouse clics.
@@ -192,6 +219,8 @@ private:
 	void handleMove(int x, int y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
+
+	void initScriptMgr(QSettings* conf);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -207,6 +236,9 @@ private:
 
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
+
+	//Shortcuts manager for the application
+	StelShortcutMgr* shortcutMgr;
 
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;
@@ -226,9 +258,25 @@ private:
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
 
+	// The video manager.  Must execute in the main thread.
+	StelVideoMgr* videoMgr;
+
 	StelSkyLayerMgr* skyImageMgr;
 
+#ifndef DISABLE_SCRIPTING
+	// The script API proxy object (for bridging threads)
+	StelMainScriptAPIProxy* scriptAPIProxy;
+
+	// The script manager based on Qt script engine
+	StelScriptMgr* scriptMgr;
+#endif
+
+
+
 	StelGuiBase* stelGui;
+
+	// Used to collect wheel events
+	QTimer * wheelEventTimer;
 
 	float fps;
 	int frame;
@@ -236,9 +284,6 @@ private:
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
-
-	//! Define whether we use opengl shaders
-	bool useGLShaders;
 
 	QSettings* confSettings;
 
@@ -264,6 +309,8 @@ private:
 
 	//! The state of the drawing sequence
 	int drawState;
+	
+	QList<StelProgressController*> progressControllers;
 };
 
 #endif // _STELAPP_HPP_

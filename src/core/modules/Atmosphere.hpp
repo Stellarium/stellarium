@@ -27,12 +27,6 @@
 #include "Skybright.hpp"
 #include "StelFader.hpp"
 
-#ifdef USE_OPENGL_ES2
- #include "GLES2/gl2.h"
-#else
- #include <QtOpenGL>
-#endif
-
 class StelProjector;
 class StelToneReproducer;
 class StelCore;
@@ -87,7 +81,7 @@ private:
 
 	Vec2f* posGrid;
 	Vec4f* colorGrid;
-	unsigned int* indices;
+	unsigned short* indices;
 
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;
@@ -95,11 +89,8 @@ private:
 	LinearFader fader;
 	float lightPollutionLuminance;
 
-	//! Whether vertex shader should be used
-	bool useShader;
-
 	//! Vertex shader used for xyYToRGB computation
-	class QGLShaderProgram* atmoShaderProgram;
+	class QOpenGLShaderProgram* atmoShaderProgram;
 	struct {
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;

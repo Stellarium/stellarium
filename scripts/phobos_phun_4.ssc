@@ -1,0 +1,59 @@
+//
+// Author: Qam1
+// Name: Occultation of Earth and Jupiter 2048
+// Version: 2.1
+// License: Public Domain
+// Description: Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.
+//
+
+core.setObserverLocation(-31.59, -43.52, 17, 1, "The place to be", "Mars");
+
+LandscapeMgr.setCurrentLandscapeID("mars");
+
+core.selectObjectByName("Phobos", pointer = true);
+
+StelMovementMgr.setFlagTracking(true);
+
+core.setDate("2048-01-23T09:54:10", "utc");
+
+StelMovementMgr.zoomTo(18, 1);
+
+core.setTimeRate(1);
+core.wait(5);
+
+StelMovementMgr.zoomTo(8, 1);
+
+core.setTimeRate(1);
+core.wait(5);
+
+StelMovementMgr.zoomTo(1, 1);
+
+core.setTimeRate(1);
+core.wait(5);
+
+StelMovementMgr.zoomTo(0.4, 1);
+
+core.setTimeRate(1);
+core.wait(20);
+
+StelMovementMgr.zoomTo(1, 1);
+
+core.setTimeRate(1);
+core.wait(30);
+
+StelMovementMgr.zoomTo(0.4, 1);
+
+core.setTimeRate(1);
+core.wait(30);
+
+StelMovementMgr.zoomTo(1, 1);
+
+core.setTimeRate(1);
+core.wait(10);
+
+StelMovementMgr.zoomTo(8, 1);
+
+core.setTimeRate(1);
+core.wait(5);
+
+StelMovementMgr.zoomTo(18, 1);

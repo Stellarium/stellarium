@@ -130,7 +130,9 @@ CometOrbit::CometOrbit(double pericenterDistance,
 void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD,double *v) const {
   JD -= t0;
   double a1,a2;
-  if (e < 1.0) InitEll(q,n,e,JD,a1,a2);
+  // temporary solve freezes for near-parabolic comets - using (e < 0.9999) for elliptical orbits
+  // TODO: improve calculations orbits for near-parabolic comets --AW
+  if (e < 0.9999) InitEll(q,n,e,JD,a1,a2);
   else if (e > 1.0) InitHyp(q,n,e,JD,a1,a2);
   else InitPar(q,n,JD,a1,a2);
   double p0,p1,p2;

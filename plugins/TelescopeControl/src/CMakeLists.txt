@@ -50,32 +50,17 @@ SET(TelescopeControl_UIS
   gui/telescopeDialog.ui
   gui/telescopeConfigurationDialog.ui)
 
-QT4_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
+QT5_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
 
 # Compile the resource files
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
-QT4_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
-# Add here all the files which require moc compilation
-# that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
-SET(TelescopeControl_MOC_HDRS
-  gui/TelescopeConfigurationDialog.hpp
-  gui/TelescopeDialog.hpp
-  gui/SlewDialog.hpp
-  TelescopeControl.hpp
-  clients/TelescopeClient.hpp
-  clients/TelescopeClientDirectLx200.hpp
-  clients/TelescopeClientDirectNexStar.hpp
-  )
-
-# After this call, TelescopeControl_MOC_SRCS = moc_TelescopeControl.cxx
-QT4_WRAP_CPP(TelescopeControl_MOC_SRCS ${TelescopeControl_MOC_HDRS})
-
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
- ADD_LIBRARY(TelescopeControl MODULE ${TelescopeControl_SRCS} ${TelescopeControl_MOC_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
+ ADD_LIBRARY(TelescopeControl MODULE ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
 
  IF(APPLE)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
@@ -84,7 +69,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
  ENDIF(APPLE)
 
  IF(WIN32)
-  SET_TARGET_PROPERTIES(TelescopeControl PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
+  SET_TARGET_PROPERTIES(TelescopeControl PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
   SET(StelMain stelMain)
  ELSE(WIN32)
   SET(StelMain )
@@ -97,7 +82,7 @@ ENDIF()
 
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
- ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_MOC_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
+ ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
  SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
  TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
  SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

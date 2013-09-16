@@ -1,0 +1,39 @@
+//
+// Name: Constellations Tour
+// License: Public Domain
+// Author: Alexander Wolf
+// Description:  A tour of the western constellations.
+//
+
+include("common_objects.inc");
+
+core.clear("starchart");
+GridLinesMgr.setFlagEquatorGrid(false);
+ConstellationMgr.setFlagArt(false);
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(false);
+ConstellationMgr.setFlagLabels(false);
+core.setGuiVisible(false);
+var id = LabelMgr.labelScreen("Press Ctrl+T to un-hide the toolbar", 100,100, false, 20);
+LabelMgr.setLabelShow(id, true);
+core.wait(4);
+LabelMgr.setLabelShow(id, false);
+LabelMgr.deleteLabel(id);
+ConstellationMgr.setFlagBoundaries(true);
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagLabels(true);
+ConstellationMgr.setFlagIsolateSelected(true);
+
+for (i=0; i<constellations.length; i++)
+{
+	objName = constellations[i];
+	core.selectObjectByName(objName, true);
+	StelMovementMgr.autoZoomIn(6);
+	core.wait(1);
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(1);
+	ConstellationMgr.setFlagArt(true);
+	core.wait(10);
+	ConstellationMgr.setFlagArt(false);
+}
+

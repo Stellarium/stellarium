@@ -65,7 +65,7 @@ public:
 	{
 		return XYZ;
 	}
-        virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+        virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
@@ -84,6 +84,7 @@ private:
 	Vec3d XYZ;                         // holds J2000 position
 
 	static StelTextureSP hintTexture;
+	static StelTextureSP markerTexture;
 
 	void draw(StelCore* core, StelPainter& painter);
 	//! Calculate a color of quasar

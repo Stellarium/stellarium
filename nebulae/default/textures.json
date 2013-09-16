@@ -133,17 +133,17 @@
 		"maxBrightness" : 12.4
 	},
 	{
-		"imageCredits": {"short" : "Jean-Pierre Bousquet"},
-		"imageUrl" : "nebulae/default/m20bousquet.png",
-		"worldCoords" : [[[-89.0449, -23.3777], [-89.8153, -23.2538], [-89.6791, -22.5467], [-88.9127, -22.6699]]],
+		"imageCredits": {"short" : "Trevor Gerdes","infoUrl":"http://sarcasmogerdes.dyndns.org"},
+		"imageUrl" : "nebulae/default/m20-trev.png",
+		"worldCoords": [[[270.9495, -23.1976], [270.3624, -23.2150], [270.3455, -22.6744], [270.9305, -22.6583]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.7181253423,
-		"maxBrightness" : 14.0
+		"minResolution" :  .23456 ,
+		"maxBrightness" :  14.0 
 	},
 	{
-		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
-		"imageUrl" : "nebulae/default/m21.png",
-		"worldCoords" : [[[-88.7500289, -22.572925], [-88.98877395, -22.581436], [-88.99778481, -22.36098], [-88.75941877, -22.352483]]],
+		"imageCredits": {"short" : "Trevor Gerdes", "infoUrl": "http://sracasmogerdes.dyndns.org/"},
+		"imageUrl" : "nebulae/default/m21-trev.png",
+		"worldCoords": [[[271.1613, -22.59535], [270.9408, -22.60232], [270.9337, -22.39865], [271.1542, -22.39168]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2206731001,
 		"maxBrightness" : 13.2
@@ -871,9 +871,442 @@
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
 		"imageUrl" : "nebulae/default/m105.png",
+ 
 		"worldCoords" : [[[162.1267, 12.5719], [162.0142, 12.5614], [162.0117, 12.6772], [162.1258, 12.6828]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.075167886,
 		"maxBrightness" : 13.1
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n7023kepler.png",
+		"worldCoords" : [[[316.3, 67.8162], [314.461, 67.8162], [314.461, 68.5007], [316.3, 68.5007]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n7331kepler.png",
+		"worldCoords" : [[[339.454, 34.28], [339.144, 34.28], [339.144, 34.54], [339.454, 34.54]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n7318kepler.png",
+		"worldCoords" : [[[339.076, 33.895], [338.926, 33.895], [338.926, 34.035], [339.076, 34.035]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n5139kepler.png",
+		"worldCoords" : [[[203.75, -48.84], [199.75, -48.84], [199.75, -46.16], [203.55, -46.16]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n6543kepler.png",
+		"worldCoords" : [[[269.86, 66.55], [269.42, 66.55], [269.42, 66.72], [269.86, 66.72]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n281kepler.png",
+		"worldCoords" : [[[13.835, 56.275], [12.59, 56.275], [12.59, 56.95], [13.835, 56.95]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1.1216,
+		"maxBrightness" : 15.0
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/n6960kepler.png",
+		"worldCoords" : [[[314.85, 28.997], [310.90, 28.999], [310.86, 32.434], [314.85, 32.43]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imagecredits" : {"Short": "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/ic4592kepler-part.png",
+		"worldCoords" : [[[ 244.060, -20.5800], [ 241.6300, -20.5750], [ 241.6630, -18.2660], [ 244.070, -18.3000]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 15.0
+	},
+	{
+		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
+		"imageUrl" : "nebulae/default/ic4601kepler.png",
+		"worldCoords" : [[[246.49, -20.955], [244.065, -20.955], [244.070, -18.680], [246.49, -18.680]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 15.0
+	},
+	{
+		"imageCredits": {"short" : "Marc Aragnou", "infoUrl": "http://www.Multiweb.com.au/"},
+		"imageUrl" : "nebulae/default/n104.png",
+		"worldCoords" : [[[9.8008, -72.9603], [2.7542, -73.1711], [2.4210, -71.1100], [8.7550, -70.9150]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.0
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n7129oleg.png",
+		"worldCoords" : [[[326.13, 65.95], [325.34, 65.95], [325.34, 66.27], [326.13, 66.27]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n4490oleg.png",
+		"worldCoords" : [[[187.768, 41.568], [187.524, 41.568], [187.524, 41.751], [187.771, 41.751]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 14.0
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n1333oleg.png",
+		"worldCoords" : [[[52.463, 31.308], [52.202, 31.308], [52.202, 31.528], [52.463, 31.528]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1.1216,
+		"maxBrightness" : 15.0
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n3718oleg.png",
+		"worldCoords" : [[[173.64, 52.85], [172.914, 52.85], [172.914, 53.289], [173.64, 53.289]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 15.5
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n2903oleg.png",
+		"worldCoords" : [[[143.297, 21.26], [142.78, 21.262], [142.79, 21.745], [143.302, 21.74]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n3190oleg.png",
+		"worldCoords" : [[[154.691, 21.65], [154.341, 21.65], [154.341, 21.974], [154.691, 21.974]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 16.0
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n5982oleg.png",
+		"worldCoords" : [[[235.113, 59.125], [234.209, 59.125], [234.209, 59.585], [235.123, 59.585]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
+		"imageUrl" : "nebulae/default/n891oleg.png",
+		"worldCoords" : [[[35.77, 42.215], [35.5, 42.215], [35.5, 42.458], [35.77, 42.458]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Steve Tuttle", "infoUrl": "http://www.stuttle1.com/"},
+		"imageUrl" : "nebulae/default/ic1805.png",
+		"worldCoords" : [[[41.5649, 60.1643], [35.9507, 60.3037], [35.9855, 63.0893], [42.1310, 62.9298]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.261,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Steve Tuttle", "infoUrl": "http://www.stuttle1.com/"},
+		"imageUrl" : "nebulae/default/ic1848.png",
+		"worldCoords" : [[[46.26444, 59.14108], [40.85385, 58.9954], [40.31464, 61.77492], [46.21107, 61.92059]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.261,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imagecredits" : {"short" : "wikipedia","infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/ic2118.png",
+		"worldCoords" : [[[79.2442, -10.6044], [74.2742, -10.6489], [74.2629, -5.7788], [79.1758, -5.7414]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Trevor Gerdes","infoUrl": "http://sarcasmogerdes.dyndns.org/"},
+		"imageUrl" : "nebulae/default/ic2944-trev.png",
+		"worldCoords" :  [[[175.9600, -63.8900], [173.6690, -63.8658], [173.7540, -62.8580], [175.9750, -62.8805]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.5
+	},
+	{
+		"imagecredits" : {"short" : "Trevor Gerdes","infoUrl": "http://sarcasmogerdes.dyndns.org/"},
+		"imageUrl" : "nebulae/default/ic4628-trev.png",
+		"worldCoords" : [[[254.9290, -40.8620], [253.5530, -40.8492], [253.5771, -39.8054], [254.9340, -39.8200]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imageCredits": {"short" : "James A Weier"},
+		"imageUrl" : "nebulae/default/ic5146.png",
+		"worldCoords" : [[[328.5895, 47.1150], [328.2020, 47.1170], [328.2010, 47.3680], [328.5935, 47.3670]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 13.8
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/lmc_moshdr-4.png",
+		"worldCoords" : [[[90.4375, -72.0950], [80.9480, -72.3300], [80.9250, -69.4220], [89.1900, -69.2253]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.9
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/lmc_moshdr-3.png",
+		"worldCoords" : [[[80.9480, -72.3300], [71.4700, -72.0800], [72.6650, -69.2220], [80.9250, -69.4220]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.9
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/lmc_moshdr-2.png",
+		"worldCoords" : [[[80.9250, -69.4220], [72.6650, -69.2220], [73.6700, -66.3550], [80.9180, -66.5080]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.9
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/lmc_moshdr-1.png",
+		"worldCoords" : [[[89.1900, -69.2253], [80.9250, -69.4220], [80.9180, -66.5080], [88.1917, -66.3333]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.9
+	},
+	{
+		"imageCredits": {"short" : "DSS"},
+		"imageUrl" : "nebulae/default/m39-dss.png",
+		"worldCoords" : [[[323.4337, 48.1821], [322.6879, 48.1772], [322.6667, 48.6745], [323.4217, 48.6889]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits": {"short" : "Trevor Gerdes", "infoUrl": "http://sarcasmogerdes.dyndns.org/"},
+		"imageUrl" : "nebulae/default/m47-trev.png",
+		"worldCoords" : [[[114.3190, -14.7170], [113.8940, -14.7240], [113.8875, -14.3108], [114.3125, -14.3050]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits": {"short" : "DSS"},
+		"imageUrl" : "nebulae/default/m88-dss.png",
+		"worldCoords" : [[[188.1230, 14.2880], [187.8515, 14.2940], [187.8525, 14.5510], [188.1258, 14.5460]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.1265305884,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n55.png",
+		"worldCoords" : [[[4.0800, -39.4439], [3.5067, -39.4520], [3.4940, -39.0120], [4.0654, -39.0012]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n300.png",
+		"worldCoords" : [[[13.8900, -37.8290], [13.5605, -37.8195], [13.5730, -37.5575], [13.9035, -37.5670]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n1365.png",
+		"worldCoords" : [[[53.5530, -36.2480], [53.2780, -36.2530], [53.2720, -36.0300], [53.5470, -36.0250]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits": {"short" : "marc4darkskies", "infoUrl": "http://www.pbase.com/gailmarc/bellsobservatory/"},
+		"imageUrl" : "nebulae/default/n1532-darkskies.png",
+		"worldCoords" : [[[63.19600, -33.03700], [62.8100, -33.04490], [62.8025, -32.7210], [63.1860, -32.7140]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 14.5
+	},	
+	{
+		"imageCredits": {"short" : "Philip montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com.au/"},
+		"imageUrl" : "nebulae/default/n3628.png",
+		"worldCoords" : [[[170.2160, 13.4589], [169.9300, 13.4449], [169.9154, 13.7210], [170.1980, 13.7360]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.0
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n4945.png",
+		"worldCoords" : [[[196.5595, -49.5694], [196.1875, -49.5770], [196.1770, -49.3345], [196.5480, -49.3270]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 14.6
+	},
+	{
+		"imageCredits": {"short" : "Philip_Mongomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n5128.png",
+		"worldCoords" : [[[-158.4875, -43.1153], [-158.7850, -43.1267], [-158.8000, -42.9083], [-158.5040, -42.8990]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n6726.png",
+		"worldCoords" : [[[286.2670, -37.7690], [284.4917, -37.7775], [284.4940, -36.3786], [286.236, -36.3690]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n6744.png",
+		"worldCoords" : [[[287.7735, -64.0020], [287.0925, -64.0088], [287.0850, -63.7110], [287.7540, -63.70500]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.0
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n6752.png",
+		"worldCoords" : [[[288.1130, -60.1895], [287.2863, -60.1970], [287.2821, -59.7861], [288.0946, -59.7803]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits": {"short" : "Philip_Mongomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n6822.png",
+		"worldCoords" : [[[-63.6413, -14.9286], [-63.8887, -14.9291], [-63.8860, -14.6840], [-63.6413, -14.6855]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 14.6
+	},
+	{
+		"imageCredits": {"short" : "Steve Tuttle", "infoUrl": "http://www.stuttle1.com/"},
+		"imageUrl" : "nebulae/default/n6888_dn.png",
+		"worldCoords" : [[[303.5030, 38.1059], [302.6636, 38.1085], [302.6652, 38.7695], [303.5104, 38.7660]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 4.65,
+		"maxBrightness" : 10.0
+	},
+	{
+		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageUrl" : "nebulae/default/n7293.png",
+		"worldCoords" : [[[337.587, -21.016], [337.2000, -21.02200], [337.1948, -20.6600], [337.580, -20.6560]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 13.4
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donklaar","infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/rho-a00.png",
+		"worldCoords" : [[[249.0446, -27.3750], [246.3467, -27.4150], [246.3400, -25.0200], [248.9900, -24.9835]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donklaar","infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/rho-a10.png",
+		"worldCoords" : [[[246.3465, -27.4150], [243.6500, -27.3990], [243.6885, -25.0050], [246.3400, -25.0200]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donklaar","infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/rho-a11.png",
+		"worldCoords" : [[[246.3390, -25.0195], [243.6885, -25.0050], [243.7250, -22.6010], [246.3300, -22.6120]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imagecredits" : {"short" : "Albert Van Donklaar","infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/rho-a01.png",
+		"worldCoords" : [[[248.9900, -24.9835], [246.3390, -25.0195], [246.3300, -22.6120], [248.9320, -22.5870]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 13.0
+	},
+	{
+		"imageCredits": {"short" : "Albert van Donklaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/smc29-1.png",
+		"worldCoords" : [[[21.4200, -72.6990], [12.5000, -72.8150], [12.7450, -70.1850], [20.4679, -70.0966]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.8
+	},
+	{
+		"imageCredits": {"short" : "Albert van Donklaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/smc29-2.png",
+		"worldCoords" : [[[12.5000, -72.8150], [3.7100, -72.5400], [5.0850, -69.9600], [12.7450, -70.1850]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.8
+	},
+	{
+		"imageCredits": {"short" : "Albert van Donklaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/smc29-3.png",
+		"worldCoords" : [[[12.2000, -75.4550], [1.9000, -75.1100], [3.7100, -72.5400], [12.5000, -72.8150]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.8
+	},
+	{
+		"imageCredits": {"short" : "Albert van Donklaar", "infoUrl": "http://www.iceinspace.com.au/"},
+		"imageUrl" : "nebulae/default/smc29-4.png",
+		"worldCoords" : [[[22.6390, -75.3160], [12.2000, -75.4550], [12.5000, -72.8150], [21.4200, -72.6990]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.8
+	},
+	{
+		"imageCredits": {"short" : "DSS"},
+		"imageUrl" : "nebulae/default/m77-dss.png",
+		"worldCoords" : [[[40.7580, -0.0990], [40.5910, -0.0990], [40.5910, 0.0660], [40.7580, 0.0660]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.161899429,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imageCredits": {"short" : "Georg Zotti", "infoUrl": "http://www.waa.at/"},
+		"imageUrl" : "nebulae/default/etaCarinae_gzotti.png",
+		"worldCoords" : [[[163.6600, -61.2670], [158.5250, -61.0900], [159.1100, -58.2400], [163.840, -58.3950]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.5,
+		"maxBrightness" : 13.0
 	}]
 }

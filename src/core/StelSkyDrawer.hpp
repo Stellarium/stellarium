@@ -33,7 +33,7 @@ class StelPainter;
 
 //! @class StelSkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
-//! eyes adaptation, zoom level and instrument model
+//! eyes adaptation, zoom level, instrument model and artificially set magnitude limits
 class StelSkyDrawer : public QObject
 {
 	Q_OBJECT
@@ -67,7 +67,7 @@ public:
 	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
 		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}
 
-	bool drawPointSource(StelPainter* sPainter,const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
+	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen=false);
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation
@@ -151,6 +151,32 @@ public slots:
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
 	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
+
+	//! Toggle the application of user-defined star magnitude limit.
+	//! If enabled, stars fainter than the magnitude set with
+	//! setCustomStarMagnitudeLimit() will not be displayed.
+	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
+	void setFlagStarMagnitudeLimit(bool b) {flagStarMagnitudeLimit = b;}
+	//! Toggle the application of user-defined deep-sky object magnitude limit.
+	//! If enabled, deep-sky objects fainter than the magnitude set with
+	//! setCustomNebulaMagnitudeLimit() will not be displayed.
+	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
+	void setFlagNebulaMagnitudeLimit(bool b) {flagNebulaMagnitudeLimit = b;}
+	//! @return true if the user-defined star magnitude limit is in force.
+	bool getFlagStarMagnitudeLimit() const {return flagStarMagnitudeLimit;}
+	//! @return true if the user-defined nebula magnitude limit is in force.
+	bool getFlagNebulaMagnitudeLimit() const {return flagNebulaMagnitudeLimit;}
+
+	//! Get the value used for forced star magnitude limiting.
+	float getCustomStarMagnitudeLimit() const {return customStarMagLimit;}
+	//! Sets a lower limit for star magnitudes (anything fainter is ignored).
+	//! In force only if flagStarMagnitudeLimit is set.
+	void setCustomStarMagnitudeLimit(double limit) {customStarMagLimit=limit;}
+	//! Get the value used for forced nebula magnitude limiting.
+	float getCustomNebulaMagnitudeLimit() const {return customNebulaMagLimit;}
+	//! Sets a lower limit for nebula magnitudes (anything fainter is ignored).
+	//! In force only if flagNebulaMagnitudeLimit is set.
+	void setCustomNebulaMagnitudeLimit(double limit) {customNebulaMagLimit=limit;}
 
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
@@ -256,6 +282,12 @@ private:
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	bool flagHasAtmosphere;
 
+	//! Controls the application of the user-defined star magnitude limit.
+	//! @see customStarMagnitudeLimit
+	bool flagStarMagnitudeLimit;
+	//! Controls the application of the user-defined nebula magnitude limit.
+	//! @see customNebulaMagnitudeLimit
+	bool flagNebulaMagnitudeLimit;
 
 	float starRelativeScale;
 	float starAbsoluteScaleF;
@@ -267,6 +299,18 @@ private:
 
 	//! Current magnitude luminance
 	float limitLuminance;
+
+	//! User-defined magnitude limit for stars.
+	//! Interpreted as a lower limit - stars fainter than this value will not
+	//! be displayed.
+	//! Used if flagStarMagnitudeLimit is true.
+	float customStarMagLimit;
+	//! User-defined magnitude limit for deep-sky objects.
+	//! Interpreted as a lower limit - nebulae fainter than this value will not
+	//! be displayed.
+	//! Used if flagNebulaMagnitudeLimit is true.
+	//! @todo Why the asterisks this is not in NebulaMgr? --BM
+	float customNebulaMagLimit;
 
 	//! Little halo texture
 	StelTextureSP texHalo;
@@ -285,7 +329,7 @@ private:
 
 	// Variables used for GL optimization when displaying point sources
 	//! Buffer for storing the vertex array data
-	Vec2f* verticesGrid;
+	Vec3f* verticesGrid;
 	//! Buffer for storing the color array data
 	Vec3f* colorGrid;
 	//! Buffer for storing the texture coordinate array data
@@ -306,9 +350,6 @@ private:
 
 	bool flagLuminanceAdaptation;
 
-	bool useShader;
-	class QGLShaderProgram* starsShaderProgram;
-	
 	float big3dModelHaloRadius;
 };
 
