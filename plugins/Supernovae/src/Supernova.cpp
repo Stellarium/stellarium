@@ -30,7 +30,6 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QVariant>
-#include <QtOpenGL>
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
@@ -77,14 +76,32 @@ QVariantMap Supernova::getMap(void)
 float Supernova::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core, false);
+        return getVMagnitude(core);
+}
+
+QString Supernova::getNameI18n(void) const
+{
+	QString name = designation;
+	if (note.size()!=0)
+		name = QString("%1 (%2)").arg(name).arg(q_(note));
+
+	return name;
+}
+
+QString Supernova::getEnglishName(void) const
+{
+	QString name = designation;
+	if (note.size()!=0)
+		name = QString("%1 (%2)").arg(name).arg(note);
+
+	return name;
 }
 
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core, false);
+	double mag = getVMagnitude(core);
 
 	if (flags&Name)
 	{
@@ -101,8 +118,8 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-									       QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+									       QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 	}
@@ -126,16 +143,8 @@ Vec3f Supernova::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Supernova::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Supernova::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
 	double vmag = 20;
 	double currentJD = core->getJDay();
 	double deltaJD = std::abs(peakJD-currentJD);
@@ -189,7 +198,7 @@ float Supernova::getVMagnitude(const StelCore* core, bool withExtinction) const
 	if (vmag<maxMagnitude)
 		vmag = maxMagnitude;
 
-	return vmag + extinctionMag;
+	return vmag;
 }
 
 double Supernova::getAngularSize(const StelCore*) const
@@ -207,11 +216,14 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
+	if (StelApp::getInstance().getVisionModeNight())
+		color = StelUtils::getNightColor(color);
+
 	float rcMag[2], size, shift;
 	double mag;
 
 	StelUtils::spheToRect(snra, snde, XYZ);
-	mag = getVMagnitude(core, true);
+	mag = getVMagnitudeWithExtinction(core);
 	sd->preDrawPointSource(&painter);
 	
 	if (mag <= sd->getLimitMagnitude())

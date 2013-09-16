@@ -22,15 +22,6 @@
 
 #include "StelModule.hpp"
 #include "StelObject.hpp"
-#include "LocationDialog.hpp"
-#include "ViewDialog.hpp"
-#include "HelpDialog.hpp"
-#include "DateTimeDialog.hpp"
-#include "SearchDialog.hpp"
-#include "ConfigurationDialog.hpp"
-#ifdef ENABLE_SCRIPT_CONSOLE
-#include "ScriptConsole.hpp"
-#endif
 #include "StelGuiBase.hpp"
 #include "StelStyle.hpp"
 
@@ -42,6 +33,16 @@ class QTimeLine;
 class StelButton;
 class BottomStelBar;
 class InfoPanel;
+class ConfigurationDialog;
+class DateTimeDialog;
+class HelpDialog;
+class LocationDialog;
+class SearchDialog;
+class ViewDialog;
+class ShortcutsDialog;
+#ifdef ENABLE_SCRIPT_CONSOLE
+class ScriptConsole;
+#endif
 
 //! @class StelGui
 //! Main class for the GUI based on QGraphicView.
@@ -58,7 +59,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the StelGui object.
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, StelAppGraphicsWidget* stelAppGraphicsWidget);
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget);
 	void update();
 
 	StelStyle getStelStyle() const {return currentStelStyle;}
@@ -67,11 +68,6 @@ public:
 	// Methods specific to the StelGui class
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
-	
-	//! Add a new progress bar in the lower right corner of the screen.
-	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
-	//! @return a pointer to the progress bar
-	class QProgressBar* addProgressBar();
 	
 	//! Get the button bar at the bottom of the screensetDateTime
 	BottomStelBar* getButtonBar() const;
@@ -93,7 +89,7 @@ public:
 	bool initComplete(void) const;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
-	ScriptConsole* getScriptConsole() {return &scriptConsole;}
+	ScriptConsole* getScriptConsole() {return scriptConsole;}
 #endif
 
 	//! Used to force a refreshing of the GUI elements such as the button bars.
@@ -107,15 +103,9 @@ public:
 	
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
-	
-	virtual QAction* addGuiActions(const QString& actionName,
-									 const QString& text,
-									 const QString& shortCut,
-									 const QString& helpGroup,
-									 bool checkable=true,
-									 bool autoRepeat=false,
-									 bool global = false);
-	
+
+	virtual QAction* getGuiAction(const QString& actionName);
+
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
@@ -141,26 +131,29 @@ public slots:
 	//! @param b to hide or not to hide
 	void setAutoHideVerticalButtonBar(bool b);
 
-	#ifndef DISABLE_SCRIPTING
+#ifndef DISABLE_SCRIPTING
 	//! change keys when a script is running / not running
 	void setScriptKeys(bool b);
 	void increaseScriptSpeed();
 	void decreaseScriptSpeed();
 	void setRealScriptSpeed();
-	#endif
+	void stopScript();
+	void pauseScript();
+	void resumeScript();
+#endif
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
-	void setGuiVisible(bool);
+	void setGuiVisible(bool);	
 
 private slots:
 	void reloadStyle();
-	#ifndef DISABLE_SCRIPTING
+#ifndef DISABLE_SCRIPTING
 	void scriptStarted();
 	void scriptStopped();
-	#endif
+#endif
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const QString& section);
-	void quit();
+	void quit();	
 	void updateI18n();
 	//! Process changes from the ConstellationMgr
 	void artDisplayedUpdated(const bool displayed);
@@ -171,6 +164,7 @@ private slots:
 	void azimuthalGridDisplayedUpdated(const bool displayed);
 	void equatorGridDisplayedUpdated(const bool displayed);
 	void equatorJ2000GridDisplayedUpdated(const bool displayed);
+	void eclipticJ2000GridDisplayedUpdated(const bool displayed);
 	void galacticGridDisplayedUpdated(const bool displayed);
 	void equatorLineDisplayedUpdated(const bool displayed);
 	void eclipticLineDisplayedUpdated(const bool displayed);
@@ -196,14 +190,15 @@ private:
 	
 	StelButton* buttonGotoSelectedObject;
 	
-	LocationDialog locationDialog;
-	HelpDialog helpDialog;
-	DateTimeDialog dateTimeDialog;
-	SearchDialog searchDialog;
-	ViewDialog viewDialog;
+	LocationDialog* locationDialog;
+	HelpDialog* helpDialog;
+	DateTimeDialog* dateTimeDialog;
+	SearchDialog* searchDialog;
+	ViewDialog* viewDialog;
+	ShortcutsDialog* shortcutsDialog;
 	ConfigurationDialog* configurationDialog;
 #ifdef ENABLE_SCRIPT_CONSOLE
-	ScriptConsole scriptConsole;
+	ScriptConsole* scriptConsole;
 #endif
 
 	bool flagShowFlipButtons;
@@ -235,6 +230,7 @@ private:
 class StelStandardGuiPluginInterface : public QObject, public StelGuiPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelGuiPluginInterface)
 public:
 	virtual class StelGuiBase* getStelGuiBase() const;

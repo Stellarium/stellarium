@@ -40,6 +40,7 @@ public:
 
 public slots:
 	void retranslate();
+	void updateIconsColor();
 
 protected:
 	Ui_viewDialogForm* ui;

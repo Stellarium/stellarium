@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QSharedPointer>
 #include <QVarLengthArray>
+#include <QDataStream>
 #include "VecMath.hpp"
 #include "OctahedronPolygon.hpp"
 #include "StelVertexArray.hpp"
@@ -266,6 +267,7 @@ private:
 //! It is a disc on the sphere, a region above a circle on the unit sphere.
 class SphericalCap : public SphericalRegion
 {
+	using SphericalRegion::contains;
 public:
 	//! Construct a SphericalCap with a 90 deg aperture and an undefined direction.
 	SphericalCap() : d(0) {;}
@@ -276,7 +278,17 @@ public:
 	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
-	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {//n.normalize();
+															 Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+	// TODO:FIXME! GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
+	// for efficiency n.normalize() should not be called at this point.
+	// However, when zooming in a bit in Hammer-Aitoff and Mercator projections, this Assertion fires.
+	// Atmosphere must be active
+	// It may have to do with DSO texture rendering.
+	// found at r5863.
+	// n.normalize() prevents this for now, but may cost performance.
+	// AARGH - activating n.normalize() inhibits mouse-identification/selection of stars!
+	// May be compiler dependent (seen on Win/MinGW), AW cannot confirm it on Linux.
 
 	//! Copy constructor.
 	SphericalCap(const SphericalCap& other) : SphericalRegion(), n(other.n), d(other.d) {;}
@@ -296,9 +308,9 @@ public:
 	//! Return itself.
 	virtual SphericalCap getBoundingCap() const {return *this;}
 
-	// Contain and intersect
-	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000001);return (v*n>=d);}
-	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000001f);return (v[0]*n[0]+v[1]*n[1]+v[2]*n[2]>=d);}
+	// Contain and intersect	
+	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);return (v*n>=d);}
+	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000002f);return (v[0]*n[0]+v[1]*n[1]+v[2]*n[2]>=d);}
 	virtual bool contains(const SphericalConvexPolygon& r) const;
 	virtual bool contains(const SphericalCap& h) const
 	{

@@ -44,7 +44,7 @@ Constellation::Constellation() : asterism(NULL)
 
 Constellation::~Constellation()
 {
-	if (asterism) delete[] asterism;
+	delete[] asterism;
 	asterism = NULL;
 }
 
@@ -128,7 +128,10 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 	const float intensity = artFader.getInterstate();
 	if (artTexture && intensity && region.intersects(boundingCap))
 	{
-		sPainter.setColor(intensity,intensity,intensity);
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(intensity, 0.0, 0.0);
+		else
+			sPainter.setColor(intensity,intensity,intensity);
 
 		// The texture is not fully loaded
 		if (artTexture->bind()==false)
@@ -221,7 +224,7 @@ StelObjectP Constellation::getBrightestStarInConstellation(void) const
 	// so check all segment endpoints:
 	for (int i=2*numberOfSegments-1;i>=0;i--)
 	{
-		const float Mag = asterism[i]->getVMagnitude(0, false);
+		const float Mag = asterism[i]->getVMagnitude(0);
 		if (Mag < maxMag)
 		{
 			brightest = asterism[i];

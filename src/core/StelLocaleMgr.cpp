@@ -34,7 +34,7 @@
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator("stellarium", StelFileMgr::getLocaleDir(), ""), GMTShift(0)
+StelLocaleMgr::StelLocaleMgr() : skyTranslator(NULL), GMTShift(0)
 {
 	//generateCountryList();
 
@@ -60,7 +60,10 @@ StelLocaleMgr::StelLocaleMgr() : skyTranslator("stellarium", StelFileMgr::getLoc
 
 
 StelLocaleMgr::~StelLocaleMgr()
-{}
+{
+	delete skyTranslator;
+	skyTranslator=0;
+}
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
 void StelLocaleMgr::generateCountryList()
@@ -92,8 +95,8 @@ void StelLocaleMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
-	setAppLanguage(conf->value("localization/app_locale", "system").toString());
+	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
+	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
 
 	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
 	dateFormat = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
@@ -125,23 +128,28 @@ void StelLocaleMgr::init()
 /*************************************************************************
  Set the application locale. This apply to GUI, console messages etc..
 *************************************************************************/
-void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
+void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refreshAll)
 {
 	// Update the translator with new locale name
-	StelTranslator::globalTranslator = StelTranslator("stellarium", StelFileMgr::getLocaleDir(), newAppLanguageName);
-	qDebug() << "Application language is " << StelTranslator::globalTranslator.getTrueLocaleName();
-	StelApp::getInstance().updateI18n();
+	Q_ASSERT(StelTranslator::globalTranslator);
+	delete StelTranslator::globalTranslator;
+	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
+	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
+	if (refreshAll)
+		StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
  Set the sky language.
 *************************************************************************/
-void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
+void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refreshAll)
 {
+	delete skyTranslator;
 	// Update the translator with new locale name
-	skyTranslator = StelTranslator("stellarium-skycultures", StelFileMgr::getLocaleDir(), newSkyLanguageName);
-	qDebug() << "Sky language is " << skyTranslator.getTrueLocaleName();
-	StelApp::getInstance().updateI18n();
+	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
+	qDebug() << "Sky language is " << skyTranslator->getTrueLocaleName();
+	if (refreshAll)
+		StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
@@ -149,18 +157,18 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 *************************************************************************/
 QString StelLocaleMgr::getSkyLanguage() const
 {
-	return skyTranslator.getTrueLocaleName();
+	return skyTranslator->getTrueLocaleName();
 }
 
 // Get the StelTranslator currently used for sky objects.
-StelTranslator& StelLocaleMgr::getSkyTranslator()
+const StelTranslator& StelLocaleMgr::getSkyTranslator() const
 {
-	return skyTranslator;
+	return *skyTranslator;
 }
 
-StelTranslator& StelLocaleMgr::getAppStelTranslator() const
+const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
 {
-	return StelTranslator::globalTranslator;
+	return *StelTranslator::globalTranslator;
 }
 
 

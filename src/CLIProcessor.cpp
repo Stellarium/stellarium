@@ -26,7 +26,8 @@
 #include <QDebug>
 #include <iostream>
 
-#include <QApplication>
+#include <QGuiApplication>
+#include <QDir>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
@@ -188,7 +189,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 				qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)";
 		}
 
-		if (skyTime.isEmpty())
+		if (!skyTime.isEmpty())
 		{
 			QRegExp timeRx("\\d{1,2}:\\d{2}:\\d{2}");
 			if (timeRx.exactMatch(skyTime))
@@ -219,7 +220,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	{
 		try
 		{
-			QString newShotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
+			QString newShotDir = QDir::fromNativeSeparators(argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString());
 			if (!newShotDir.isEmpty())
 				StelFileMgr::setScreenshotDir(newShotDir);
 		}
@@ -230,7 +231,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	}
 	else
 	{
-		const QString& confScreenshotDir = confSettings->value("main/screenshot_dir", "").toString();
+		const QString& confScreenshotDir = QDir::fromNativeSeparators(confSettings->value("main/screenshot_dir", "").toString());
 		if (!confScreenshotDir.isEmpty())
 		{
 			try

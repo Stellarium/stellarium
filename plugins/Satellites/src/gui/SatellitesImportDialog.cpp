@@ -21,17 +21,20 @@
 #include "ui_satellitesImportDialog.h"
 
 #include "StelApp.hpp"
-#include "StelMainGraphicsView.hpp" //for the QFileDialog? Why?
+#include "StelMainView.hpp" //for the QFileDialog? Why?
 #include "StelModuleMgr.hpp" // for the GETSTELMODULE macro :(
 #include "StelTranslator.hpp"
+#include "StelProgressController.hpp"
 
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QNetworkReply>
+#include <QProgressBar>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <QTemporaryFile>
+#include <QDir>
 
 SatellitesImportDialog::SatellitesImportDialog() :
     downloadMgr(0),
@@ -48,7 +51,7 @@ SatellitesImportDialog::~SatellitesImportDialog()
 	// Do I need to explicitly delete this?
 	if (progressBar)
 	{
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = 0;
 	}
 	
@@ -90,8 +93,12 @@ void SatellitesImportDialog::createDialogContent()
 	        this, SLOT(acceptNewSatellites()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()),
 	        this, SLOT(discardNewSatellites()));
+	connect(ui->pushButtonMarkAll, SIGNAL(clicked()),
+	        this, SLOT(markAll()));
+	connect(ui->pushButtonMarkNone, SIGNAL(clicked()),
+	        this, SLOT(markNone()));
 	
-	QSortFilterProxyModel * filterProxyModel = new QSortFilterProxyModel(this);
+	filterProxyModel = new QSortFilterProxyModel(this);
 	filterProxyModel->setSourceModel(newSatellitesModel);
 	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->listView->setModel(filterProxyModel);
@@ -124,10 +131,9 @@ void SatellitesImportDialog::getData()
 		
 		// Reusing some code from Satellites::updateTLEs()
 		if (progressBar == 0)
-			progressBar = StelApp::getInstance().getGui()->addProgressBar();
+			progressBar = StelApp::getInstance().addProgressBar();
 		progressBar->setValue(0);
-		progressBar->setMaximum(sourceUrls.size());
-		progressBar->setVisible(true);
+		progressBar->setRange(0, sourceUrls.size());
 		progressBar->setFormat("TLE download %v/%m");
 		
 		ui->pushButtonGetData->setVisible(false);
@@ -145,9 +151,10 @@ void SatellitesImportDialog::getData()
 	else
 	{
 		QStringList sourceFilePaths;
-		QString homeDirPath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+		// XXX: we should check that there is at least one home location.
+		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation)[0];
 		sourceFilePaths = QFileDialog::getOpenFileNames(
-		                      &StelMainGraphicsView::getInstance(),
+		                      &StelMainView::getInstance(),
 		                      q_("Select TLE source file(s)..."),
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())
@@ -190,7 +197,7 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 	// Then, see if there was an error...
 	if (networkReply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Satellites: failed to download" << url 
+		qWarning() << "Satellites: failed to download " << url
 		           << networkReply->errorString();
 		return;
 	}
@@ -211,7 +218,7 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 	{
 		if (progressBar)
 		{
-			delete progressBar;
+			StelApp::getInstance().removeProgressBar(progressBar);
 			progressBar = 0;
 		}
 		
@@ -266,6 +273,16 @@ void SatellitesImportDialog::discardNewSatellites()
 	close();
 }
 
+void SatellitesImportDialog::markAll()
+{
+	setCheckState(Qt::Checked);
+}
+
+void SatellitesImportDialog::markNone()
+{
+	setCheckState(Qt::Unchecked);
+}
+
 void SatellitesImportDialog::reset()
 {
 	// Assuming that everything that needs to be stopped is stopped
@@ -291,7 +308,7 @@ void SatellitesImportDialog::reset()
 	numberDownloadsComplete = 0;
 	if (progressBar)
 	{
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = 0;
 	}
 }
@@ -319,14 +336,14 @@ void SatellitesImportDialog::populateList()
 		else
 		{
 			qDebug() << "Satellites: cannot open file"
-			         << sourceFiles[f]->fileName();
+				 << QDir::toNativeSeparators(sourceFiles[f]->fileName());
 		}
 	}
 	// Clear the disk...
 	qDeleteAll(sourceFiles);
 	sourceFiles.clear();
 	
-	QStringList existingIDs = satMgr->getAllIDs();
+	QStringList existingIDs = satMgr->listAllIds();
 	QHashIterator<QString,TleData> i(newSatellites);
 	while (i.hasNext())
 	{
@@ -358,4 +375,24 @@ void SatellitesImportDialog::displayMessage(const QString& message)
 	
 	ui->labelMessage->setText(message);
 	ui->labelMessage->setVisible(true);
+}
+
+void SatellitesImportDialog::setCheckState(Qt::CheckState state)
+{
+	Q_ASSERT(filterProxyModel);
+	
+	int rowCount = filterProxyModel->rowCount();
+	if (rowCount < 1)
+		return;
+
+	for (int row = 0; row < rowCount; row++)
+	{
+		QModelIndex proxyIndex = filterProxyModel->index(row, 0);
+		QModelIndex index = filterProxyModel->mapToSource(proxyIndex);
+		QStandardItem * item = newSatellitesModel->itemFromIndex(index);
+		if (item)
+		{
+			item->setCheckState(state);
+		}
+	}
 }

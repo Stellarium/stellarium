@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>400</height>
+    <width>448</width>
+    <height>398</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -122,9 +122,6 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
      <widget class="QWidget" name="tabTimeZone">
       <attribute name="title">
        <string>Time zone</string>
@@ -138,6 +135,12 @@
        </property>
        <item>
         <widget class="QGroupBox" name="groupBoxTimeZone">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>400</height>
+          </size>
+         </property>
          <property name="title">
           <string>Time zone</string>
          </property>
@@ -398,7 +401,7 @@
      </widget>
      <widget class="QWidget" name="tabAbout">
       <attribute name="title">
-       <string>About</string>
+       <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>

@@ -36,12 +36,14 @@
 #include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
 #include "MeteorMgr.hpp"
+#include "MilkyWay.hpp"
 #include "GridLinesMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -55,7 +57,7 @@ ViewDialog::ViewDialog()
 {
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
-        atmosphereDialog=NULL;
+	atmosphereDialog=NULL;
 }
 
 ViewDialog::~ViewDialog()
@@ -64,8 +66,8 @@ ViewDialog::~ViewDialog()
 	ui=NULL;
 	delete addRemoveLandscapesDialog;
 	addRemoveLandscapesDialog = NULL;
-        delete atmosphereDialog;
-        atmosphereDialog = NULL;
+	delete atmosphereDialog;
+	atmosphereDialog = NULL;
 }
 
 void ViewDialog::retranslate()
@@ -90,13 +92,34 @@ void ViewDialog::styleChanged()
 	}
 }
 
+void ViewDialog::updateIconsColor()
+{
+	QPixmap pixmap(50, 50);
+	QStringList icons;
+	icons << "sky" << "markings" << "landscape" << "starlore";
+	bool redIcon = false;
+	if (StelApp::getInstance().getVisionModeNight())
+		redIcon = true;
+
+	foreach(const QString &iconName, icons)
+	{
+		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
+		if (redIcon)
+			pixmap = StelButton::makeRed(pixmap);
+
+		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
+	}
+}
+
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);
+	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 
 	//ui->viewTabWidget->removeTab(4);
@@ -122,11 +145,33 @@ void ViewDialog::createDialogContent()
 	ui->starRelativeScaleDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getRelativeStarScale());
 	connect(ui->starRelativeScaleDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setRelativeStarScale(double)));
 
+	MilkyWay* mw = GETSTELMODULE(MilkyWay);
+	ui->milkyWayBrightnessDoubleSpinBox->setValue(mw->getIntensity());
+	connect(ui->milkyWayBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), mw, SLOT(setIntensity(double)));
+
 	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
 	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
 
 	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
 	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
+
+	// Limit Magnitudes
+	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
+	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
+	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
+	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
+	
+	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
+	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
+	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
+	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
+	connect(ui->nebulaLimitMagnitudeDoubleSpinBox,
+	        SIGNAL(valueChanged(double)),
+	        drawer,
+	        SLOT(setCustomNebulaMagnitudeLimit(double)));
 
 	// Planets section
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -150,10 +195,11 @@ void ViewDialog::createDialogContent()
 	Q_ASSERT(mmgr);
 	updateZhrControls(mmgr->getZHR());
 	connect(mmgr, SIGNAL(zhrChanged(int)),
-	        this, SLOT(updateZhrControls(int)));
+					this, SLOT(updateZhrControls(int)));
 	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+	connect(ui->zhr1000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 
@@ -162,10 +208,10 @@ void ViewDialog::createDialogContent()
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
 	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
 
-	StelGuiBase* gui = StelApp::getInstance().getGui();
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
-	a = gui->getGuiActions("actionShow_Nebulas");
+	a = gui->getGuiAction("actionShow_Nebulas");
 	connect(a, SIGNAL(toggled(bool)), ui->nebulaLabelCheckBox, SLOT(setChecked(bool)));
 	connect(ui->nebulaLabelCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -182,7 +228,7 @@ void ViewDialog::createDialogContent()
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	ui->showGroundCheckBox->setChecked(lmgr->getFlagLandscape());
-	a = gui->getGuiActions("actionShow_Ground");
+	a = gui->getGuiAction("actionShow_Ground");
 	connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGroundCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -190,7 +236,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
 
 	ui->showAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphere());
-	a = gui->getGuiActions("actionShow_Atmosphere");
+	a = gui->getGuiAction("actionShow_Atmosphere");
 	connect(a, SIGNAL(toggled(bool)), ui->showAtmosphereCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAtmosphereCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -200,17 +246,20 @@ void ViewDialog::createDialogContent()
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
+
+	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
+	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
 	
 	// GZ: changes for refraction
-        //ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
-        //connect(ui->pressureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmospherePressure(double)));
-        //ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-        //connect(ui->temperatureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmosphereTemperature(double)));
-        //ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-        //connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setExtinctionCoefficient(double)));
-        //// instead
-        connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
-        // GZ: Done
+	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
+	//connect(ui->pressureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmospherePressure(double)));
+	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
+	//connect(ui->temperatureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmosphereTemperature(double)));
+	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
+	//connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setExtinctionCoefficient(double)));
+	//// instead
+	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
+	// GZ: Done
 
 
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
@@ -223,52 +272,57 @@ void ViewDialog::createDialogContent()
 	// Grid and lines
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	ui->showEquatorLineCheckBox->setChecked(glmgr->getFlagEquatorLine());
-	a = gui->getGuiActions("actionShow_Equator_Line");
+	a = gui->getGuiAction("actionShow_Equator_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showEclipticLineCheckBox->setChecked(glmgr->getFlagEclipticLine());
-	a = gui->getGuiActions("actionShow_Ecliptic_Line");
+	a = gui->getGuiAction("actionShow_Ecliptic_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEclipticLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEclipticLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showMeridianLineCheckBox->setChecked(glmgr->getFlagMeridianLine());
-	a = gui->getGuiActions("actionShow_Meridian_Line");
+	a = gui->getGuiAction("actionShow_Meridian_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showMeridianLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showMeridianLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showHorizonLineCheckBox->setChecked(glmgr->getFlagHorizonLine());
-	a = gui->getGuiActions("actionShow_Horizon_Line");
+	a = gui->getGuiAction("actionShow_Horizon_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showHorizonLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showHorizonLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showEquatorialGridCheckBox->setChecked(glmgr->getFlagEquatorGrid());
-	a = gui->getGuiActions("actionShow_Equatorial_Grid");
+	a = gui->getGuiAction("actionShow_Equatorial_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showGalacticGridCheckBox->setChecked(glmgr->getFlagGalacticGrid());
-	a = gui->getGuiActions("actionShow_Galactic_Grid");
+	a = gui->getGuiAction("actionShow_Galactic_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showGalacticGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGalacticGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showGalacticPlaneLineCheckBox->setChecked(glmgr->getFlagGalacticPlaneLine());
-	a = gui->getGuiActions("actionShow_Galactic_Plane_Line");
+	a = gui->getGuiAction("actionShow_Galactic_Plane_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showGalacticPlaneLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGalacticPlaneLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showAzimuthalGridCheckBox->setChecked(glmgr->getFlagAzimuthalGrid());
-	a = gui->getGuiActions("actionShow_Azimuthal_Grid");
+	a = gui->getGuiAction("actionShow_Azimuthal_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showAzimuthalGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAzimuthalGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showEquatorialJ2000GridCheckBox->setChecked(glmgr->getFlagEquatorJ2000Grid());
-	a = gui->getGuiActions("actionShow_Equatorial_J2000_Grid");
+	a = gui->getGuiAction("actionShow_Equatorial_J2000_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
+	ui->showEclipticGridJ2000CheckBox->setChecked(glmgr->getFlagEclipticJ2000Grid());
+	a = gui->getGuiAction("actionShow_Ecliptic_J2000_Grid");
+	connect(a, SIGNAL(toggled(bool)), ui->showEclipticGridJ2000CheckBox, SLOT(setChecked(bool)));
+	connect(ui->showEclipticGridJ2000CheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+
 	ui->showCardinalPointsCheckBox->setChecked(lmgr->getFlagCardinalsPoints());
-	a = gui->getGuiActions("actionShow_Cardinal_Points");
+	a = gui->getGuiAction("actionShow_Cardinal_Points");
 	connect(a, SIGNAL(toggled(bool)), ui->showCardinalPointsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -276,22 +330,22 @@ void ViewDialog::createDialogContent()
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 
 	ui->showConstellationLinesCheckBox->setChecked(cmgr->getFlagLines());
-	a = gui->getGuiActions("actionShow_Constellation_Lines");
+	a = gui->getGuiAction("actionShow_Constellation_Lines");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLinesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLinesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showConstellationLabelsCheckBox->setChecked(cmgr->getFlagLabels());
-	a = gui->getGuiActions("actionShow_Constellation_Labels");
+	a = gui->getGuiAction("actionShow_Constellation_Labels");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLabelsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLabelsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showConstellationBoundariesCheckBox->setChecked(cmgr->getFlagBoundaries());
-	a = gui->getGuiActions("actionShow_Constellation_Boundaries");
+	a = gui->getGuiAction("actionShow_Constellation_Boundaries");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationBoundariesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationBoundariesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
 	ui->showConstellationArtCheckBox->setChecked(cmgr->getFlagArt());
-	a = gui->getGuiActions("actionShow_Constellation_Art");
+	a = gui->getGuiAction("actionShow_Constellation_Art");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationArtCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationArtCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
@@ -328,7 +382,9 @@ void ViewDialog::populateLists()
 	l->blockSignals(false);
 	updateSkyCultureText();
 
-	const StelCore* core = StelApp::getInstance().getCore();
+	const StelCore* core = StelApp::getInstance().getCore();	
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
 
 	// Fill the projection list
 	l = ui->projectionListWidget;
@@ -341,6 +397,7 @@ void ViewDialog::populateLists()
 	}
 	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
+	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 
 	// Fill the landscape list
@@ -365,7 +422,8 @@ void ViewDialog::populateLists()
 			break;
 		}
 	}
-	l->blockSignals(false);
+	l->blockSignals(false);	
+	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
@@ -419,7 +477,7 @@ void ViewDialog::updateSkyCultureText()
 	try
 	{
 		QString lang = app.getLocaleMgr().getAppLanguage();
-		if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang)) 
+		if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
 		{
 			lang = lang.split("_").at(0);
 		}
@@ -504,13 +562,13 @@ void ViewDialog::showAddRemoveLandscapesDialog()
 
 void ViewDialog::showAtmosphereDialog()
 {
-        if(atmosphereDialog == NULL)
-                atmosphereDialog = new AtmosphereDialog();
-        //ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-        //ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-        //ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
+	if(atmosphereDialog == NULL)
+		atmosphereDialog = new AtmosphereDialog();
+	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
+	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
+	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
 
-        atmosphereDialog->setVisible(true);
+	atmosphereDialog->setVisible(true);
 }
 
 
@@ -531,6 +589,8 @@ void ViewDialog::setZhrFromControls()
 		zhr = 10;
 	if (ui->zhr80->isChecked())
 		zhr = 80;
+	if (ui->zhr1000->isChecked())
+		zhr = 1000;
 	if (ui->zhr10000->isChecked())
 		zhr = 10000;
 	if (ui->zhr144000->isChecked())
@@ -551,6 +611,7 @@ void ViewDialog::updateZhrControls(int zhr)
 	{
 		case 0: ui->zhrNone->setChecked(true); break;
 		case 80: ui->zhr80->setChecked(true); break;
+		case 1000: ui->zhr1000->setChecked(true); break;
 		case 10000: ui->zhr10000->setChecked(true); break;
 		case 144000: ui->zhr144000->setChecked(true); break;
 		default: ui->zhr10->setChecked(true); break;
@@ -571,6 +632,9 @@ void ViewDialog::updateZhrDescription(int zhr)
 			break;
 		case 80:
 			ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
+			break;
+		case 1000:
+			ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
 			break;
 		case 10000:
 			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");

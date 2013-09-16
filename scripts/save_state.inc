@@ -35,6 +35,7 @@ function saveState(stateName)
 	savedStates[stateName]["GridLinesMgrFlagEclipticLine"] = GridLinesMgr.getFlagEclipticLine();
 	savedStates[stateName]["GridLinesMgrFlagMeridianLine"] = GridLinesMgr.getFlagMeridianLine();
 	savedStates[stateName]["GridLinesMgrFlagEquatorJ2000Grid"] = GridLinesMgr.getFlagEquatorJ2000Grid();
+	savedStates[stateName]["GridLinesMgrFlagEclipticJ2000Grid"] = GridLinesMgr.getFlagEclipticJ2000Grid();
 	savedStates[stateName]["GridLinesMgrFlagGalacticGrid"] = GridLinesMgr.getFlagGalacticGrid();
 	savedStates[stateName]["GridLinesMgrFlagGalacticPlaneLine"] = GridLinesMgr.getFlagGalacticPlaneLine();
 	savedStates[stateName]["ConstellationMgrFlagLines"] = ConstellationMgr.getFlagLines();
@@ -136,6 +137,7 @@ function restoreState(stateName, options)
 	GridLinesMgr.setFlagEclipticLine(savedStates[stateName]["GridLinesMgrFlagEclipticLine"]);
 	GridLinesMgr.setFlagMeridianLine(savedStates[stateName]["GridLinesMgrFlagMeridianLine"]);
 	GridLinesMgr.setFlagEquatorJ2000Grid(savedStates[stateName]["GridLinesMgrFlagEquatorJ2000Grid"]);
+	GridLinesMgr.setFlagEclipticJ2000Grid(savedStates[stateName]["GridLinesMgrFlagEclipticJ2000Grid"]);
 	GridLinesMgr.setFlagGalacticGrid(savedStates[stateName]["GridLinesMgrFlagGalacticGrid"]);
 	GridLinesMgr.setFlagGalacticPlaneLine(savedStates[stateName]["GridLinesMgrFlagGalacticPlaneLine"]);
 	ConstellationMgr.setFlagLines(savedStates[stateName]["ConstellationMgrFlagLines"]);

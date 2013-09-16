@@ -20,7 +20,6 @@
 #include <functional>
 #include <cstdlib>
 #include <QSettings>
-#include <QtOpenGL>
 
 #include "StelProjector.hpp"
 
@@ -90,6 +89,9 @@ void MeteorMgr::setMaxVelocity(int maxv)
 
 void MeteorMgr::update(double deltaTime)
 {
+#ifdef _MSC_BUILD
+	return;
+#endif
 	if (!flagShow)
 		return;
 	
@@ -159,7 +161,7 @@ void MeteorMgr::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	sPainter.setShadeModel(StelPainter::ShadeModelSmooth);
+	sPainter.enableTexture2d(false);
 
 	// step through and draw all active meteors
 	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)

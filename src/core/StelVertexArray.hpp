@@ -39,7 +39,7 @@ struct StelVertexArray
 	};
 
 	StelVertexArray(StelPrimitiveType pType=StelVertexArray::Triangles) : primitiveType(pType) {;}
-	StelVertexArray(const QVector<Vec3d>& v, StelPrimitiveType pType=StelVertexArray::Triangles,const QVector<Vec2f>& t=QVector<Vec2f>(), const QVector<unsigned int> i=QVector<unsigned int>()) :
+	StelVertexArray(const QVector<Vec3d>& v, StelPrimitiveType pType=StelVertexArray::Triangles,const QVector<Vec2f>& t=QVector<Vec2f>(), const QVector<unsigned short> i=QVector<unsigned short>()) :
 		vertex(v), texCoords(t), indices(i), primitiveType(pType) {;}
 
 	//! OpenGL compatible array of 3D vertex to be displayed using vertex arrays.
@@ -49,7 +49,7 @@ struct StelVertexArray
 	//! OpenGL compatible array of edge flags to be displayed using vertex arrays.
 	QVector<Vec2f> texCoords;
 	//! OpenGL compatible array of indices for the vertex and the textures
-	QVector<unsigned int> indices;
+	QVector<unsigned short> indices;
 
 	StelPrimitiveType primitiveType;
 

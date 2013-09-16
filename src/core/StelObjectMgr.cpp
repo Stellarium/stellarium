@@ -228,7 +228,7 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
  Find and return the list of at most maxNbItem objects auto-completing
  passed object I18 name
 *************************************************************************/
-QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem) const
+QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 
@@ -236,11 +236,62 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem);
+		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
 
 	result.sort();
+	return result;
+}
+
+/*************************************************************************
+ Find and return the list of at most maxNbItem objects auto-completing
+ passed object English name
+*************************************************************************/
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
+{
+	QStringList result;
+
+	// For all StelObjectmodules..
+	foreach (const StelObjectModule* m, objectsModule)
+	{
+		// Get matching object for this module
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+		result += matchingObj;
+		maxNbItem-=matchingObj.size();
+	}
+
+	result.sort();
+	return result;
+}
+
+QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
+{
+	// search for module
+	StelObjectModule* module = NULL;
+	foreach(StelObjectModule* m, objectsModule)
+	{
+		if (m->objectName() == moduleId)
+		{
+			module = m;
+			break;
+		}
+	}
+	if (module == NULL)
+	{
+		qWarning() << "Can't find module with id " << moduleId;
+		return QStringList();
+	}
+	return module->listAllObjects(inEnglish);
+}
+
+QMap<QString, QString> StelObjectMgr::objectModulesMap() const
+{
+	QMap<QString, QString> result;
+	foreach(const StelObjectModule* m, objectsModule)
+	{
+		result[m->objectName()] = m->getName();
+	}
 	return result;
 }

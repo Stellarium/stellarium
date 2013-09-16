@@ -1,0 +1,211 @@
+//
+// Name: Transit of Venus
+// License: Public Domain
+// Author: Peter Hickey
+// With thanks to Barrykgerdes and daggerstab for their contributions
+// Description: Transit of Venus as seen from Sydney Australia, 6th June 2012.
+//
+//
+
+// The following two functions were copied from a script by Schdefon
+
+function blockText(textArray)
+{
+	var fontSize = 30;
+	var lineSep = fontSize * 1.5;
+	y = 250 + (lineSep*textArray.length);
+	ids = new Array();
+	for(i=0; i<textArray.length; i++)
+	{
+		ids[i] = LabelMgr.labelScreen(textArray[i], 30, y, false, fontSize, "#ff0000");
+		y = y - lineSep;
+	}
+
+	for(i=0; i<ids.length; i++)
+	{
+		LabelMgr.setLabelShow(ids[i], true);
+		core.wait(0.15);
+	}
+	return ids;
+}
+
+function clearLabels(ids)
+{
+	for(i=0; i<ids.length; i++)
+	{
+		LabelMgr.setLabelShow(ids[i], false);
+		core.wait(0.15);
+	}
+	core.wait(1);
+	for(i=0; i<ids.length; i++)
+	{
+		LabelMgr.deleteLabel(ids[i]);
+	}
+}
+
+// Save the current location, if it's from the default list 
+location = core.getObserverLocation();
+
+// Set up the display and the location to Sydney, Australia 
+core.moveToAltAzi(10, 90, 3);
+
+StelMovementMgr.zoomTo(180, 5);
+
+core.setDate("2012:06:05T21:06:50","utc");
+core.setObserverLocation("Sydney, Australia");
+
+ids = blockText(Array("NEVER look directly at the Sun!"));
+core.wait(5);
+clearLabels(ids);
+
+core.clear("natural");
+core.selectObjectByName("Sun", false);
+
+ids = blockText(Array("Sydney Australia",
+                      "2012-06-06", "Sunrise"));
+core.wait(5);
+
+//Advance an hour
+core.setDate("2012:06:05T22:08:00","utc");
+
+// Select Venus and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Venus", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(1.04, 5);
+clearLabels(ids);
+ids = blockText(Array("just below the Sun.",
+                      "The planet Venus"));
+core.wait(5);
+
+//Turn off Landscape, Atmosphere and Fog
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagFog(false);
+clearLabels(ids);
+
+ids = blockText(Array("Dobsonian Telescope","as seen through a","Sydney Australia",
+                      "2012-06-06", "Transit of Venus"));
+// Set display to a suitable size for viewing the Sun
+StelMovementMgr.zoomTo(0.875, 5);
+core.selectObjectByName("Sun", false);
+StelMovementMgr.setFlagTracking(true);
+core.wait(5);
+
+// Quicken up the display 60 times
+core.setTimeRate(60);
+core.waitFor("2012:06:05T22:10:00", "utc");
+clearLabels(ids);
+ids = blockText(Array("First Contact approx 8:12 a.m."));
+core.wait(15);
+core.waitFor("2012:06:05T22:30:00", "utc");
+clearLabels(ids);
+
+ids = blockText(Array("Second Contact approx 8:30 a.m."));
+core.wait(15);
+
+//Speed up for remainder of Transit until third contact
+clearLabels(ids);
+ids = blockText(Array("for approximately 6 hours.",
+	"across the face of the Sun","Venus continues to transit"));
+core.setTimeRate(800);
+core.wait(25);
+core.setTimeRate(60);
+
+//Prepare for third contact
+core.waitFor("2012:06:06T4:24:00","utc");
+clearLabels(ids);
+ids = blockText(Array("Third Contact approx 2:20 p.m."));
+core.wait(10);
+core.waitFor("2012:06:06T4:44:00", "utc");
+
+clearLabels(ids);
+ids = blockText(Array("Fourth Contact approx 2:39 p.m."));
+core.wait(5);
+clearLabels(ids);
+
+ids = blockText(Array("than a century away. ",
+		"The next Transit of Venus is more "));
+core.wait(5);
+clearLabels(ids);
+
+// View Transit in Equatorial Mode 
+core.setDate("2012:06:05T21:06:50","utc");
+core.setObserverLocation("Sydney, Australia");
+core.setMountMode("equatorial");
+ids = blockText(Array("NEVER look directly at the Sun!"));
+core.wait(5);
+
+clearLabels(ids);
+ids = blockText(Array("just above the Sun.",
+                      "The planet Venus"));
+core.wait(5);
+clearLabels(ids);
+
+ids = blockText(Array("Equatorial Telescope","as seen through an","Sydney Australia",
+                      "2012-06-06", "Transit of Venus"));
+core.selectObjectByName("Sun",false);
+core.wait(5);
+clearLabels(ids);
+
+//Advance an hour
+core.setDate("2012:06:05T22:08:00","utc");
+core.setMountMode("equatorial");
+
+// Set display to a suitable size for viewing the Sun
+StelMovementMgr.zoomTo(0.875, 5);
+core.selectObjectByName("Sun", false);
+StelMovementMgr.setFlagTracking(true);
+core.wait(3);
+
+// Quicken up the display 60 times
+core.setTimeRate(60);
+core.waitFor("2012:06:05T22:10:00", "utc");
+core.setMountMode("equatorial");
+clearLabels(ids);
+ids = blockText(Array("First Contact approx 8:12 a.m."));
+core.wait(15);
+core.waitFor("2012:06:05T22:30:00", "utc");
+core.setMountMode("equatorial");
+clearLabels(ids);
+ids = blockText(Array("Second Contact approx 8:30 a.m."));
+core.wait(15);
+
+//Speed up for remainder of Transit until third contact
+clearLabels(ids);
+ids = blockText(Array("for approximately 6 hours.",
+	"across the face of the Sun","Venus continues to transit"));
+core.setTimeRate(800);
+core.wait(25);
+core.setTimeRate(60);
+
+//Prepare for third contact
+core.waitFor("2012:06:06T4:24:00","utc");
+core.setMountMode("equatorial");
+clearLabels(ids);
+ids = blockText(Array("Third Contact approx 2:20 p.m."));
+core.wait(15);
+core.waitFor("2012:06:06T4:44:00", "utc");
+core.setMountMode("equatorial");
+clearLabels(ids);
+ids = blockText(Array("Fourth Contact approx 2:39 p.m."));
+core.wait(10);
+clearLabels(ids);
+ids = blockText(Array("than a century away. ",
+		"The next Transit of Venus is more "));
+core.wait(5);
+clearLabels(ids);
+ids = blockText(Array("Returning to current time and date."));
+core.setTimeRate(1);
+StelMovementMgr.setFlagTracking(false);
+StelMovementMgr.zoomTo(180, 5);
+core.moveToAltAzi(10, 180, 3);
+core.wait(3);
+
+//Restore the original location
+core.setObserverLocation(location); 
+core.setDate("now");
+core.clear("natural");
+LandscapeMgr.setFlagLandscape(true);
+LandscapeMgr.setFlagAtmosphere(true);
+clearLabels(ids);

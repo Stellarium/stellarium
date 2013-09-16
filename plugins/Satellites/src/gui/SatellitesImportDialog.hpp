@@ -24,7 +24,9 @@
 #include "Satellites.hpp"
 
 class Ui_satellitesImportDialog;
+class QSortFilterProxyModel;
 class QStandardItemModel;
+class QFile;
 class QTemporaryFile;
 class QNetworkReply;
 
@@ -49,6 +51,8 @@ private slots:
 	void abortDownloads();
 	void acceptNewSatellites();
 	void discardNewSatellites();
+	void markAll();
+	void markNone();
 	
 private:
 	void createDialogContent();
@@ -58,6 +62,11 @@ private:
 	void populateList();
 	void displayMessage(const QString& message);
 	
+	//! Set the check state of the currently displayed items.
+	//! Note that depending on the search/filter string, these may be
+	//! not all available items.
+	void setCheckState(Qt::CheckState state);
+	
 	TleDataHash newSatellites;
 	bool isGettingData;
 	int numberDownloadsComplete;
@@ -65,9 +74,10 @@ private:
 	QList<QNetworkReply*> activeDownloads;
 	QStringList sourceUrls;
 	QList<QFile*> sourceFiles;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	
 	QStandardItemModel* newSatellitesModel;
+	QSortFilterProxyModel * filterProxyModel;
 };
 
 #endif // IMPORTSATELLITESWINDOW_HPP

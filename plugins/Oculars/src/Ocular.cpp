@@ -18,6 +18,7 @@
 
 #include "Ocular.hpp"
 #include "Telescope.hpp"
+#include "Lens.hpp"
 
 Ocular::Ocular()
 {
@@ -57,27 +58,29 @@ QMap<int, QString> Ocular::propertyMap()
 #pragma mark Instance Methods
 #endif
 /* ********************************************************************* */
-double Ocular::actualFOV(Telescope *telescope) const
+double Ocular::actualFOV(Telescope *telescope, Lens *lens) const
 {
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
 	double actualFOV = 0.0;
 	if (m_binoculars) {
 		actualFOV = appearentFOV();
 	} else if (fieldStop() > 0.0) {
-		actualFOV =  fieldStop() / telescope->focalLength() * 57.3;
+		actualFOV =  fieldStop() / (telescope->focalLength() * lens_multipler) * 57.3;
 	} else {
 		//actualFOV = apparent / mag
-		actualFOV = appearentFOV() / (telescope->focalLength() / effectiveFocalLength());
+		actualFOV = appearentFOV() / (telescope->focalLength() * lens_multipler / effectiveFocalLength());
 	}
 	return actualFOV;
 }
 
-double Ocular::magnification(Telescope *telescope) const
+double Ocular::magnification(Telescope *telescope, Lens *lens) const
 {
 	double magnifiction = 0.0;
 	if (m_binoculars) {
 		magnifiction = effectiveFocalLength();
 	} else {
-		magnifiction = telescope->focalLength() / effectiveFocalLength();
+		const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+		magnifiction = telescope->focalLength() * lens_multipler / effectiveFocalLength();
 	}
 	return magnifiction;
 }

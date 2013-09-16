@@ -25,10 +25,11 @@
 #include <QStringListModel>
 #include <QDebug>
 #include <QFile>
+#include <QDir>
 
 StelLocationMgr::StelLocationMgr()
 {
-	// The line below allows to re-generate the location file, you still need to gunzip manually it afterward.
+	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
 	// generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
@@ -68,7 +69,7 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
+		qWarning() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
 		return res;
 	}
 
@@ -105,14 +106,14 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 	{
 		// Note it is quite normal to nor have a user locations file (e.g. first run)
 		if (!isUserLocation)
-			qWarning() << "WARNING: Failed to locate location data file: " << fileName << e.what();
+			qWarning() << "WARNING: Failed to locate location data file: " << QDir::toNativeSeparators(fileName) << e.what();
 		return locations;
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
+		qWarning() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
 		return locations;
 	}
 
@@ -124,7 +125,7 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 	while (!sourcestream.atEnd())
 	{
 		const QString& rawline=sourcestream.readLine();
-		if (rawline.isEmpty() || rawline.startsWith('#'))
+		if (rawline.isEmpty() || rawline.startsWith('#') || (rawline.split("\t").count() < 8))
 			continue;
 		loc = StelLocation::createFromLine(rawline);
 		loc.isUserLocation = isUserLocation;
@@ -232,20 +233,20 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 		{
 			if (!StelFileMgr::mkDir(StelFileMgr::getUserDir()+"/data"))
 			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << StelFileMgr::getUserDir()+"/data";
+				qWarning() << "ERROR - cannot create non-existent data directory" << QDir::toNativeSeparators(StelFileMgr::getUserDir()+"/data");
 				qWarning() << "Location cannot be saved";
 				return false;
 			}
 		}
 
 		cityDataPath = StelFileMgr::getUserDir()+"/data/user_locations.txt";
-		qWarning() << "Will create a new user location file: " << cityDataPath;
+		qWarning() << "Will create a new user location file: " << QDir::toNativeSeparators(cityDataPath);
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
 	{
-		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
+		qWarning() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
 		return false;
 	}
 
@@ -293,20 +294,20 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 		{
 			if (!StelFileMgr::mkDir(StelFileMgr::getUserDir()+"/data"))
 			{
-				qWarning() << "ERROR - cannot create non-existent data directory" << StelFileMgr::getUserDir()+"/data";
+				qWarning() << "ERROR - cannot create non-existent data directory" << QDir::toNativeSeparators(StelFileMgr::getUserDir()+"/data");
 				qWarning() << "Location cannot be saved";
 				return false;
 			}
 		}
 
 		cityDataPath = StelFileMgr::getUserDir()+"/data/user_locations.txt";
-		qWarning() << "Will create a new user location file: " << cityDataPath;
+		qWarning() << "Will create a new user location file: " << QDir::toNativeSeparators(cityDataPath);
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
-		qWarning() << "ERROR: Could not open location data file: " << cityDataPath;
+		qWarning() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
 		return false;
 	}
 

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>shortcutsDialogForm</class>
+ <widget class="QWidget" name="shortcutsDialogForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>654</width>
+    <height>436</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="BarFrame" name="TitleBar">
+     <property name="minimumSize">
+      <size>
+       <width>16</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="stelWindowTitle">
+        <property name="text">
+         <string>Keyboard Shortcuts</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="closeStelWindow">
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="mainFrame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTreeView" name="shortcutsTreeView">
+        <property name="uniformRowHeights">
+         <bool>true</bool>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="allColumnsShowFocus">
+         <bool>true</bool>
+        </property>
+        <attribute name="headerDefaultSectionSize">
+         <number>200</number>
+        </attribute>
+        <attribute name="headerMinimumSectionSize">
+         <number>100</number>
+        </attribute>
+        <attribute name="headerShowSortIndicator" stdset="0">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="headerStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEditSearch"/>
+      </item>
+      <item>
+       <widget class="QFrame" name="editFrame">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMaximumSize</enum>
+         </property>
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>9</number>
+         </property>
+         <property name="bottomMargin">
+          <number>9</number>
+         </property>
+         <item row="1" column="0">
+          <widget class="QLabel" name="primaryLabel">
+           <property name="text">
+            <string extracomment="Reused from the view widget!">Primary shortcut</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="ShortcutLineEdit" name="primaryShortcutEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="altLabel">
+           <property name="text">
+            <string extracomment="Reused from the view widget!">Alternative shortcut</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="ShortcutLineEdit" name="altShortcutEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QPushButton" name="altBackspaceButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="primaryBackspaceButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QPushButton" name="restoreDefaultsButton">
+           <property name="text">
+            <string>Restore Defaults</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QPushButton" name="applyButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Apply</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BarFrame</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ShortcutLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>ShortcutsDialog.hpp</header>
+   <slots>
+    <slot>backspace()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>closeStelWindow</sender>
+   <signal>clicked()</signal>
+   <receiver>shortcutsDialogForm</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>493</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>151</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>primaryBackspaceButton</sender>
+   <signal>clicked()</signal>
+   <receiver>primaryShortcutEdit</receiver>
+   <slot>backspace()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>altBackspaceButton</sender>
+   <signal>clicked()</signal>
+   <receiver>altShortcutEdit</receiver>
+   <slot>backspace()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>413</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>primaryBackspaceButton</sender>
+   <signal>clicked()</signal>
+   <receiver>primaryShortcutEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>altBackspaceButton</sender>
+   <signal>clicked()</signal>
+   <receiver>altShortcutEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>413</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

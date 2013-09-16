@@ -43,7 +43,8 @@ public:
 	       void* userDataPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
-	       bool hidden);
+	       bool hidden,
+	       const QString &pType);
 
 	~Comet();
 
@@ -65,7 +66,7 @@ public:
 	//was not designed to handle different types of objects.
 	//virtual QString getType() const {return "Comet";}
 	//! \todo Find better sources for the g,k system
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 
 	//! \brief sets absolute magnitude and slope parameter.
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -74,9 +75,16 @@ public:
 	//! as the same parameters in MinorPlanet.
 	void setAbsoluteMagnitudeAndSlope(double magnitude, double slope);
 
+	//! set value for semi-major axis in AU
+	void setSemiMajorAxis(double value);
+
+	//! get sidereal period for minor planet
+	double getSiderealPeriod() const;
+
 private:
 	double absoluteMagnitude;
 	double slopeParameter;
+	double semiMajorAxis;
 
 	bool isCometFragment;
 	bool nameIsProvisionalDesignation;

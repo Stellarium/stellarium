@@ -42,6 +42,7 @@
 #define  RADAR_NIGHT 3
 #define  NOT_VISIBLE 4
 
+//! Wrapper allowing compatibility between gsat and Stellarium/Qt.
 class gSatWrapper
 {
 
@@ -52,7 +53,6 @@ public:
 	// Operation updateEpoch
 	//! @brief This operation update Epoch timestamp for gSatTEME object
 	//! from Stellarium Julian Date.
-	//! @return void
 	void updateEpoch();
 
 	void setEpoch(double ai_julianDaysEpoch);
@@ -75,10 +75,10 @@ public:
         //!    Altitude:  Coord[2]  measured in Km.\n
 	Vec3d getSubPoint();
 
-        // Operation getAltAz
+	// Operation getAltAz
 	//! @brief This operation compute the coordinates in StelCore::FrameAltAz
-        //! @return Vect3d Vector with coordinates (Meassured in Km)
-        //! @ref
+	//! @return Vect3d Vector with coordinates (meassured in km)
+	//! @par References
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
 	//!   http://www.celestrak.com/columns/v02n02/
@@ -105,7 +105,7 @@ public:
         //!     2 if VISIBLE
         //!     3 if RADAR_NIGHt
         //!     3 if NOT_VISIBLE
-        //! @ref
+        //! @par References
         //!   Fundamentals of Astrodynamis and Applications (Third Edition) pg 898
         //!   David A. Vallado
         int getVisibilityPredict();
@@ -118,8 +118,7 @@ private:
         //! This position can be asumed as observer position in TEME framework without an appreciable error.
         //! ECI axis (IJK) are parallel to StelCore::EquinoxEQ Framework but centered in the earth centre
         //! instead the observer position.
-	//! @details
-	//! References:
+	//! @par References
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
 	//!   http://www.celestrak.com/columns/v02n02/

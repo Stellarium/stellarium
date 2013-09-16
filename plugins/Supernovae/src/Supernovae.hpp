@@ -21,6 +21,7 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
+#include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelPainter.hpp"
 #include "Supernova.hpp"
@@ -29,15 +30,51 @@
 #include <QDateTime>
 #include <QList>
 #include <QSharedPointer>
+#include <QHash>
+
+class QNetworkAccessManager;
+class QNetworkReply;
+class QSettings;
+class QTimer;
+class SupernovaeDialog;
 
 class StelPainter;
 
 typedef QSharedPointer<Supernova> SupernovaP;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+/*! @mainpage notitle
+@section overview Plugin Overview
+
+The %Supernovae plugin displays the positions some historical
+supernovae brighter than 10 visual magnitude.
+
+@section sncat Supernovae Catalog
+The supernovae catalog is stored on the disk in [JSON](http://www.json.org/)
+format, in a file named "supernovae.json". A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
+
+@section config Configuration
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file.
+*/
+
+//! @class Supernovae
+//! Main class of the %Historical Supernovae plugin.
+//! @author Alexander Wolf
 class Supernovae : public StelObjectModule
 {
+	Q_OBJECT
 public:	
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,		//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,	//!< Update completed, there were updates
+		DownloadError,		//!< Error during download phase
+		OtherError		//!< Other error
+	};
+
 	Supernovae();
 	virtual ~Supernovae();
 
@@ -70,20 +107,89 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QString getName() const { return "Historical Supernovae"; }
 
 	//! get a supernova object by identifier
 	SupernovaP getByID(const QString& id);
+
+	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
+	//! plugin.
+	virtual bool configureGui(bool show=true);
+
+	//! Set up the plugin with default values.  This means clearing out the Pulsars section in the
+	//! main config.ini (if one already exists), and populating it with default values.  It also
+	//! creates the default supernovae.json file from the resource embedded in the plugin lib/dll file.
+	void restoreDefaults(void);
+
+	//! Read (or re-read) settings from the main config file.  This will be called from init and also
+	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
+	void readSettingsFromConfig(void);
+
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
+
+	//! Get whether or not the plugin will try to update catalog data from the internet
+	//! @return true if updates are set to be done, false otherwise
+	bool getUpdatesEnabled(void) {return updatesEnabled;}
+	//! Set whether or not the plugin will try to update catalog data from the internet
+	//! @param b if true, updates will be enabled, else they will be disabled
+	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
+
+	//! Get the date and time the supernovae were updated
+	QDateTime getLastUpdate(void) {return lastUpdate;}
+
+	//! Get the update frequency in days
+	int getUpdateFrequencyDays(void) {return updateFrequencyDays;}
+	void setUpdateFrequencyDays(int days) {updateFrequencyDays = days;}
+
+	//! Get the number of seconds till the next update
+	int getSecondsToUpdate(void);
+
+	//! Get the current updateState
+	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get list of supernovae
+	QString getSupernovaeList();
+
+signals:
+	//! @param state the new update state.
+	void updateStateChanged(Supernovae::UpdateState state);
+
+	//! Emitted after a JSON update has run.
+	void jsonUpdateComplete(void);
+
+public slots:
+	// FIXME: Add functions for scripting support
+
+	//! Download JSON from web recources described in the module section of the
+	//! module.ini file and update the local JSON file.
+	void updateJSON(void);
+
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
 
 private:
 	// Font used for displaying our text
 	QFont font;
 
-	//! replace the json file with the default from the compiled-in resource
+	// if existing, delete Satellites section in main config.ini, then create with default values
+	void restoreDefaultConfigIni(void);
+
+	//! Replace the JSON file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 
-	//! read the json file and create list of supernovae.
+	//! Read the JSON file and create list of supernovae.
 	void readJsonFile(void);
 
 	//! Creates a backup of the supernovae.json file called supernovae.json.old
@@ -92,24 +198,49 @@ private:
 	bool backupJsonFile(bool deleteOriginal=false);
 
 	//! Get the version from the "version" value in the supernovas.json file
-	//! @return version string, e.g. "0.2"
-	const QString getJsonFileVersion(void);
+	//! @return version string, e.g. "1"
+	int getJsonFileVersion(void);
 
-	//! parse JSON file and load supernovaes to map
+	//! Parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());
 
-	//! set items for list of struct from data map
+	//! Set items for list of struct from data map
 	void setSNeMap(const QVariantMap& map);
 
 	QString sneJsonPath;
 
 	StelTextureSP texPointer;
 	QList<SupernovaP> snstar;
+	QHash<QString, double> snlist;
+
+	// variables and functions for the updater
+	UpdateState updateState;
+	QNetworkAccessManager* downloadMgr;
+	QString updateUrl;	
+	class StelProgressController* progressBar;
+	QTimer* updateTimer;
+	QTimer* messageTimer;
+	QList<int> messageIDs;
+	bool updatesEnabled;
+	QDateTime lastUpdate;
+	int updateFrequencyDays;
+
+	QSettings* conf;
+
+	// GUI
+	SupernovaeDialog* configDialog;	
+
+private slots:
+	//! Check to see if an update is required.  This is called periodically by a timer
+	//! if the last update was longer than updateFrequencyHours ago then the update is
+	//! done.
+	void checkForUpdate(void);
+	void updateDownloadComplete(QNetworkReply* reply);
 
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -117,6 +248,7 @@ private:
 class SupernovaeStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

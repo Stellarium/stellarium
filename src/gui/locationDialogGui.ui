@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
-    <height>434</height>
+    <width>700</width>
+    <height>452</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -332,9 +332,6 @@
          <property name="margin">
           <number>0</number>
          </property>
-         <property name="spacing">
-          <number>6</number>
-         </property>
          <item row="2" column="0" colspan="3">
           <widget class="QFrame" name="frame_3">
            <property name="minimumSize">
@@ -363,8 +360,12 @@
               <property name="text">
                <string>Use as default</string>
               </property>
-              <property name="tristate">
-               <bool>false</bool>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonReturnToDefault">
+              <property name="text">
+               <string>Return to default</string>
               </property>
              </widget>
             </item>
@@ -448,7 +449,7 @@
              <widget class="AngleSpinBox" name="latitudeSpinBox">
               <property name="minimumSize">
                <size>
-                <width>140</width>
+                <width>180</width>
                 <height>24</height>
                </size>
               </property>
@@ -668,8 +669,6 @@
    <header>MapLabel.hpp</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

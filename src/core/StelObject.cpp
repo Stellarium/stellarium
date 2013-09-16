@@ -31,16 +31,17 @@
 #include <QRegExp>
 #include <QDebug>
 
-
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
 	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
 }
 
-// Get observer local sideral coordinate
+// Get observer local sidereal coordinate
 Vec3d StelObject::getSideralPosGeometric(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getLocalSideralTime())* getEquinoxEquatorialPos(core);
+	// Hour Angle corrected to Delta-T value
+	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
+	return Mat4d::zrotation(-core->getLocalSideralTime()+dt)* getEquinoxEquatorialPos(core);
 }
 
 // Get observer local sidereal coordinates, deflected by refraction
@@ -48,7 +49,9 @@ Vec3d StelObject::getSideralPosApparent(const StelCore* core) const
 {
 	Vec3d v=getAltAzPosApparent(core);
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
-	return Mat4d::zrotation(-core->getLocalSideralTime())*v;
+	// Hour Angle corrected to Delta-T value
+	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
+	return Mat4d::zrotation(-core->getLocalSideralTime()+dt)*v;
 }
 
 Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
@@ -68,11 +71,25 @@ Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
 }
 
-float StelObject::getVMagnitude(const StelCore* core, bool withExtinction) const 
+// Get observer-centered galactic position
+Vec3d StelObject::getJ2000GalacticPos(const StelCore *core) const
+{
+	return core->j2000ToGalactic(getJ2000EquatorialPos(core));
+}
+
+float StelObject::getVMagnitude(const StelCore* core) const 
 {
 	Q_UNUSED(core);
-	Q_UNUSED(withExtinction);
 	return 99;
+}
+
+float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
+{
+	Vec3d altAzPos = getAltAzPosApparent(core);
+	altAzPos.normalize();
+	float vMag = getVMagnitude(core);
+	core->getSkyDrawer()->getExtinction().forward(&altAzPos, &vMag); 
+	return vMag;
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
@@ -92,6 +109,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
+	}
+
+	if (flags&GalCoordJ2000)
+	{
+		double glong, glat;
+		StelUtils::rectToSphe(&glong, &glat, getJ2000GalacticPos(core));
+		// Note that Gal. Coords are DEFINED in B1950 coordinates, and writing "J2000" to them does not make any sense.
+		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
 	}
 
 	if (flags&HourAngle)
@@ -146,7 +171,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</b>", "");
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
-		str.replace("<br>", "\n");
+		str.replace(QRegExp("<br(\\s*/)?>"), "\n");
 	}
 	else
 	{
@@ -154,3 +179,4 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.append(QString("</font>"));
 	}
 }
+

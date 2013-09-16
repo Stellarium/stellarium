@@ -26,8 +26,10 @@
 #include <QFile>
 #include <QTime>
 #include <QTimer>
+#include <QScriptEngineAgent>
 
 class StelMainScriptAPI;
+class StelScriptEngineAgent;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
@@ -55,7 +57,13 @@ public:
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
 	QString runningScriptId();
+
+	// Pre-processor functions
+	bool preprocessScript(const QString& input, QString& output, const QString& scriptDir);
+	bool preprocessScript(QFile &input, QString& output, const QString& scriptDir);
 	
+	//! Add all the StelModules into the script engine
+	void addModules();
 public slots:
 	//! Gets a single line name of the script. 
 	//! @param s the file name of the script whose name is to be returned.
@@ -90,6 +98,11 @@ public slots:
 	//! Empty string will be returned.
 	const QString getDescription(const QString& s);
 
+	//! Run the prprocessed script
+	//! @param preprocessedScript the string containing the preprocessed script.
+	//! @return false if the given script could not be run, true otherwise
+	bool runPreprocessedScript(const QString& preprocessedScript);
+
 	//! Run the script located at the given location
 	//! @param fileName the location of the file containing the script.
 	//! @param includePath the directory to use when searching for include files
@@ -119,10 +132,15 @@ public slots:
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
 	void debug(const QString& msg);
 
+	//! Pause a running script.
+	void pauseScript();
+
+	//! Resume a paused script.
+	void resumeScript();
+
 private slots:
 	//! Called at the end of the running threa
 	void scriptEnded();
-
 signals:
 	//! Notification when a script starts running
 	void scriptRunning();
@@ -135,8 +153,6 @@ private:
 	// Utility functions for preprocessor
 	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
-	// Pre-processor functions
-	bool preprocessScript(QFile& input, QString& output, const QString& scriptDir);
 
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 	bool preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir);
@@ -156,6 +172,25 @@ private:
 
 	QString scriptFileName;
 	
+	//Script engine agent
+	StelScriptEngineAgent *agent;
+	
+};
+
+class StelScriptEngineAgent : public QScriptEngineAgent
+{
+public:
+	explicit StelScriptEngineAgent(QScriptEngine *engine);
+	virtual ~StelScriptEngineAgent() {}
+
+	void setPauseScript(bool pause) { isPaused=pause; }
+	bool getPauseScript() { return isPaused; }
+
+	void positionChange(qint64 scriptId, int lineNumber, int columnNumber);
+	
+private:
+	bool isPaused;
+
 };
 
 #endif // _STELSCRIPTMGR_HPP_

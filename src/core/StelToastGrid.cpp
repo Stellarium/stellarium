@@ -135,7 +135,7 @@ QVector<Vec2f> ToastGrid::getTextureArray(int level, int x, int y, int resolutio
 }
 
 
-QVector<unsigned int> ToastGrid::getTrianglesIndex(int level, int x, int y, int resolution) const
+QVector<unsigned short> ToastGrid::getTrianglesIndex(int level, int x, int y, int resolution) const
 {
 	Q_ASSERT(resolution >= level);
 	Q_ASSERT(resolution <= maxLevel);
@@ -144,13 +144,13 @@ QVector<unsigned int> ToastGrid::getTrianglesIndex(int level, int x, int y, int 
 	// If we are in the top right or the bottom left quadran we invert the diagonal of the triangles.
 	int middleIndex = pow2(level) / 2;
 	bool invert = (x >= middleIndex) == (y >= middleIndex);
-	QVector<unsigned int> ret;
+	QVector<unsigned short> ret;
 	ret.reserve(nbTiles * 6);
 	for (int i = 0; i < size - 1; ++i)
 	{
 		for (int j = 0; j < size - 1; ++j)
 		{
-			Q_ASSERT(i * size + j <= std::numeric_limits<int>::max());
+			Q_ASSERT(i * size + j <= std::numeric_limits<short>::max());
 			unsigned int a = i * size + j;
 			unsigned int b = (i + 1) * size + j;
 			unsigned int c = (i + 1) * size + j + 1;

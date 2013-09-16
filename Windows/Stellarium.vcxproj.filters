@@ -1,0 +1,1919 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{0007c0cf-16fe-49d2-8d38-6240fb564260}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{0d61bc71-5e05-490c-81d7-8bcd34f2a241}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Header Files\Script">
+      <UniqueIdentifier>{dec61518-2295-4a7b-a3a3-9e4f2ef68d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Script">
+      <UniqueIdentifier>{4b7a118c-3fb0-40b9-b73b-5f926934e1cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{ced08f09-34b3-43d0-9fd1-dbb3817ae79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{01ab5880-56a5-4106-93eb-c2f03009446b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{e7746f92-92db-41ef-a6e3-150a9bb66a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{2ee6d612-225f-4504-920a-2df472327609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Plugins">
+      <UniqueIdentifier>{cdad4c17-8a70-4c5b-b56b-e53f79be8df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Plugins">
+      <UniqueIdentifier>{9e7f6b17-6381-41b4-a1ae-ce0f04b27896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Plugins">
+      <UniqueIdentifier>{93ef2d89-88db-4792-bf68-fed32105b4b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Modules">
+      <UniqueIdentifier>{3d01047b-a9af-4700-9a74-2b1babe6c559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Planetsephems">
+      <UniqueIdentifier>{f67f3d79-5739-4fa6-baa8-de9bd166824b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer">
+      <UniqueIdentifier>{d7559aa2-7382-4352-bdbf-847e657425aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\External">
+      <UniqueIdentifier>{c714bd14-f55d-4741-abf7-e3993e924b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\External\Glues">
+      <UniqueIdentifier>{5cf24a64-db46-4beb-8ab5-204973bae7b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\External\KdeWin32">
+      <UniqueIdentifier>{87b69dd5-3ad0-4cb1-a7b3-28133de14998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\External\kFilter">
+      <UniqueIdentifier>{e61613d9-2769-4a40-a19e-ed3eb996be64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer">
+      <UniqueIdentifier>{89d07fcf-8a15-4520-8e47-7ba7e80eff38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Planetsephems">
+      <UniqueIdentifier>{f1fc2d01-995b-43c9-b740-b1ae594835a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Modules">
+      <UniqueIdentifier>{98af64d7-34d7-4269-9949-0bd908e968da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\External">
+      <UniqueIdentifier>{1a60cda1-f2b0-444d-b271-feb0b7ac253b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\External\Glues">
+      <UniqueIdentifier>{11d230a0-b598-461d-9e17-59a1448a6907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\External\KdeWin32">
+      <UniqueIdentifier>{fe1bb9ac-75c7-4615-b78e-8fdfa0d2df41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\External\kFilter">
+      <UniqueIdentifier>{160e83c8-dc66-48e7-86d1-ca955bb9db37}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\src\core\modules\ConstellationMgr.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\GridLinesMgr.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\LabelMgr.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\LandscapeMgr.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\MeteorMgr.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\MilkyWay.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\NebulaMgr.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\SolarSystem.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\modules\StarMgr.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\scripting\StelMainScriptAPI.hpp">
+      <Filter>Header Files\Script</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\scripting\StelMainScriptAPIProxy.hpp">
+      <Filter>Header Files\Script</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\scripting\ScreenImageMgr.hpp">
+      <Filter>Header Files\Script</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\scripting\StelScriptMgr.hpp">
+      <Filter>Header Files\Script</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\renderer\StelQGLTextureBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\renderer\StelTextureBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\renderer\StelTextureLoader.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\MultiLevelJsonBase.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\SimbadSearcher.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelApp.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelAppGraphicsWidget.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelAudioMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelCore.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelLocationMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelModuleMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelMovementMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelObjectMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelObserver.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelShortcutGroup.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelShortcutMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelSkyCultureMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelSkyDrawer.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelSkyImageTile.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelSkyLayer.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelSkyLayerMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelSkyPolygon.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\core\StelVideoMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\StelMainGraphicsView.hpp">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\StelMainWindow.hpp">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\data\mainRes.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\addRemoveLandscapesDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\AtmosphereDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\configurationDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\CustomDeltaTEquationDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\dateTimeDialogGui.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\helpDialogGui.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\locationDialogGui.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\scriptConsole.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\searchDialogGui.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\shortcutsDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\viewDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\AddRemoveLandscapesDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\AngleSpinBox.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\AtmosphereDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\ConfigurationDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\CustomDeltaTEquationDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\DateTimeDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\Dialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\HelpDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\LocationDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\MapLabel.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\ScriptConsole.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\SearchDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\ShortcutLineEdit.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\ShortcutsDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\SkyGui.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\StelDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\StelGui.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\StelGuiItems.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\StelScriptSyntaxHighlighter.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\gui\ViewDialog.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\data\gui\guiRes.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MultiLevelJsonBase.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MultiLevelJsonBase.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SimbadSearcher.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SimbadSearcher.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelApp.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelApp.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelAppGraphicsWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelAppGraphicsWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelAudioMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelAudioMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelCore.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelCore.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelLocationMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelLocationMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelModuleMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelModuleMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelMovementMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelMovementMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelObjectMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelObjectMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelObserver.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelObserver.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelShortcutGroup.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelShortcutGroup.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelShortcutMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelShortcutMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelSkyCultureMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelSkyCultureMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelSkyDrawer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelSkyDrawer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelSkyImageTile.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelSkyImageTile.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelSkyLayer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelSkyLayer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelSkyLayerMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelSkyLayerMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelSkyPolygon.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelSkyPolygon.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelVideoMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelVideoMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kfilter\karchive.cpp">
+      <Filter>Source Files\Core\External\kFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kfilter\kfilterbase.cpp">
+      <Filter>Source Files\Core\External\kFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kfilter\kfilterdev.cpp">
+      <Filter>Source Files\Core\External\kFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kfilter\kgzipfilter.cpp">
+      <Filter>Source Files\Core\External\kFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kfilter\klimitediodevice.cpp">
+      <Filter>Source Files\Core\External\kFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kfilter\kzip.cpp">
+      <Filter>Source Files\Core\External\kFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ConstellationMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ConstellationMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GridLinesMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GridLinesMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LabelMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LabelMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LandscapeMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LandscapeMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MeteorMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MeteorMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MilkyWay.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MilkyWay.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_NebulaMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_NebulaMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SolarSystem.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SolarSystem.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StarMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StarMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Atmosphere.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Comet.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Constellation.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\ConstellationMgr.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\GridLinesMgr.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\LabelMgr.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Landscape.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\LandscapeMgr.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Meteor.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\MeteorMgr.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\MilkyWay.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\MinorPlanet.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Nebula.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\NebulaMgr.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Orbit.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Planet.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Skybright.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Skylight.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\SolarSystem.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\Star.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\StarMgr.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\StarWrapper.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenImageMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenImageMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelMainScriptAPI.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelMainScriptAPI.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelMainScriptAPIProxy.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelMainScriptAPIProxy.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelScriptMgr.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelScriptMgr.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\scripting\ScreenImageMgr.cpp">
+      <Filter>Source Files\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\scripting\StelMainScriptAPI.cpp">
+      <Filter>Source Files\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\scripting\StelMainScriptAPIProxy.cpp">
+      <Filter>Source Files\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\scripting\StelScriptMgr.cpp">
+      <Filter>Source Files\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\scripting\StratoscriptPreprocessor.cpp">
+      <Filter>Source Files\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelQGLTextureBackend.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelQGLTextureBackend.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelTextureBackend.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelTextureBackend.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelTextureLoader.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelTextureLoader.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelGLUtilityFunctions.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGL1ArrayVertexBufferBackend.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGL1InterleavedArrayVertexBufferBackend.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGL2ArrayVertexBufferBackend.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGL2InterleavedArrayVertexBufferBackend.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGLArrayVertexBufferBackend.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGLGLSLShader.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGLInterleavedArrayVertexBufferBackend.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGLRenderer.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGLTextureBackend.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelQGLViewport.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelRenderer.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelTextureNew.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\MultiLevelJsonBase.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\TrailGroup.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\OctahedronPolygon.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\RefractionExtinction.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\SimbadSearcher.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\SphericMirrorCalculator.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelApp.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelAppGraphicsWidget.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelAudioMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelCore.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelFileMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelGeodesicGrid.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelGuiBase.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelIniParser.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelJsonParser.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelLoadingBar.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelLocaleMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelLocation.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelLocationMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelModule.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelModuleMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelMovementMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelObject.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelObjectMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelObjectModule.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelObserver.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelProjector.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelProjectorClasses.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelShortcutGroup.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelShortcutMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSkyCultureMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSkyDrawer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSkyImageTile.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSkyLayer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSkyLayerMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSkyPolygon.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSphereGeometry.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSphericalIndex.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelSphericalIndexMultiRes.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelToneReproducer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelTranslator.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelUtils.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelVideoMgr.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\StelViewportEffect.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\modules\ZoneArray.cpp">
+      <Filter>Source Files\Core\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\dict.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\geom.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\memalloc.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\mesh.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\normal.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\priorityq.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\render.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\sweep.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\tess.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\libtess\tessmono.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\calc_interpolated_elements.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\elliptic_to_rectangular.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\elp82b.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\gust86.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\l1.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\marssat.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\pluto.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\sideral_time.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\stellplanet.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\tass17.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\planetsephems\vsop87.c">
+      <Filter>Source Files\Core\Planetsephems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kdewin32\dirent.c">
+      <Filter>Source Files\Core\External\KdeWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kdewin32\unistd.c">
+      <Filter>Source Files\Core\External\KdeWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kdewin32\pwd.c">
+      <Filter>Source Files\Core\External\KdeWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\kdewin32\grp.c">
+      <Filter>Source Files\Core\External\KdeWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CLIProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StelLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StelMainGraphicsView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelMainGraphicsView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelMainGraphicsView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StelMainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelMainWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelMainWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\renderer\StelGeometryBuilder.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\core\external\glues_stel\source\glues_error.c">
+      <Filter>Source Files\Core\External\Glues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_mainRes.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddRemoveLandscapesDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddRemoveLandscapesDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AngleSpinBox.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AngleSpinBox.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AtmosphereDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AtmosphereDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ConfigurationDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ConfigurationDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CustomDeltaTEquationDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CustomDeltaTEquationDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DateTimeDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DateTimeDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Dialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Dialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_HelpDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_HelpDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LocationDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LocationDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MapLabel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MapLabel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScriptConsole.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScriptConsole.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SearchDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SearchDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ShortcutLineEdit.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ShortcutLineEdit.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ShortcutsDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ShortcutsDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SkyGui.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SkyGui.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelGui.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelGui.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelGuiItems.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelGuiItems.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StelScriptSyntaxHighlighter.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StelScriptSyntaxHighlighter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ViewDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ViewDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\AddRemoveLandscapesDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\AngleSpinBox.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\AtmosphereDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\ConfigurationDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\CustomDeltaTEquationDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\DateTimeDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\Dialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\HelpDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\LocationDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\MapLabel.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\ScriptConsole.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\SearchDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\ShortcutLineEdit.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\ShortcutsDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\SkyGui.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\StelDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\StelGui.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\StelGuiItems.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\StelScriptSyntaxHighlighter.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gui\ViewDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_guiRes.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\core\external\kfilter\kzip.h">
+      <Filter>Header Files\Core\External\kFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kfilter\klimitediodevice.h">
+      <Filter>Header Files\Core\External\kFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kfilter\kgzipfilter.h">
+      <Filter>Header Files\Core\External\kFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kfilter\kfilterdev.h">
+      <Filter>Header Files\Core\External\kFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kfilter\kfilterbase.h">
+      <Filter>Header Files\Core\External\kFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kfilter\karchive.h">
+      <Filter>Header Files\Core\External\kFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Atmosphere.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\StarWrapper.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Comet.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Constellation.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Landscape.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Meteor.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\MinorPlanet.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Nebula.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Orbit.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Planet.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Skybright.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Skylight.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Solve.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\Star.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGL1ArrayVertexBufferBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\GenericVertexTypes.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelCircleArcRenderer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelGeometryBuilder.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelGLCompatibility.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelGLSLShader.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelGLUtilityFunctions.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelIndexBuffer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelLight.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGL1InterleavedArrayVertexBufferBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGL1Renderer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGL2ArrayVertexBufferBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGL2InterleavedArrayVertexBufferBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGL2Renderer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGLArrayVertexBufferBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGLGLSLShader.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGLIndexBuffer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGLInterleavedArrayVertexBufferBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGLRenderer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelQGLViewport.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelRenderer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelRendererStatistics.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelTextureCache.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelTextureNew.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelTextureParams.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelVertexAttribute.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelVertexBuffer.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\renderer\StelVertexBufferBackend.hpp">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\VecMath.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\OctahedronPolygon.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\RefractionExtinction.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\SphericMirrorCalculator.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelFader.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelFileMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelGeodesicGrid.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelGuiBase.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelIniParser.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelJsonParser.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelLoadingBar.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelLocaleMgr.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelLocation.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelModule.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelObject.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelObjectModule.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelObjectType.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelPluginInterface.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelProjector.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelProjectorClasses.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelProjectorType.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelRegionObject.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelSphereGeometry.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelSphericalIndex.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelSphericalIndexMultiRes.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelToneReproducer.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelTranslator.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelUtils.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\StelViewportEffect.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\TrailGroup.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\TriangleIterator.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\Triplet.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\ZoneArray.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\modules\ZoneData.hpp">
+      <Filter>Header Files\Core\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\dict.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\dict-list.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\geom.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\memalloc.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\mesh.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\normal.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\priorityq.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\priorityq-heap.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\priorityq-sort.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\render.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\sweep.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\tess.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\libtess\tessmono.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\calc_interpolated_elements.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\elliptic_to_rectangular.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\elp82b.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\gust86.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\l1.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\marssat.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\pluto.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\sideral_time.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\stellplanet.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\tass17.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\planetsephems\vsop87.h">
+      <Filter>Header Files\Core\Planetsephems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kdewin32\dirent.h">
+      <Filter>Header Files\Core\External\KdeWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kdewin32\unistd.h">
+      <Filter>Header Files\Core\External\KdeWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kdewin32\pwd.h">
+      <Filter>Header Files\Core\External\KdeWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\kdewin32\grp.h">
+      <Filter>Header Files\Core\External\KdeWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CLIProcessor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StelLogger.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\glues_error.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_addRemoveLandscapesDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AtmosphereDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_configurationDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CustomDeltaTEquationDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_dateTimeDialogGui.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_helpDialogGui.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_locationDialogGui.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_scriptConsole.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_searchDialogGui.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_shortcutsDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_viewDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gui\StelStyle.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\external\glues_stel\source\glues.h">
+      <Filter>Header Files\Core\External\Glues</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\data\icon.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\shaders\xyYToRGB.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\stellarium.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\splash.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\1-off-time.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\1-on-time.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\2-off-location.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\2-on-location.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\3-off-sky.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\3-on-sky.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\4-off-skylore.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\4-on-skylore.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\5-off-labels.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\5-on-labels.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\6-off-search.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\6-on-search.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\7-off-plugins.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\7-on-plugins.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\8-off-settings.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\8-on-settings.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\9-off-help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\9-on-help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\backspace.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\bt_planet.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btAtmosphere-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btAtmosphere-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btAzimuthalGrid-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btAzimuthalGrid-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btbg-left.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btbg-middle.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btbg-right.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btbg-single.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btCardinalPoints-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btCardinalPoints-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btConstellationArt-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btConstellationArt-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btConstellationLabels-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btConstellationLabels-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btConstellationLines-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btConstellationLines-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btDSS-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btDSS-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btEquatorialGrid-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btEquatorialGrid-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btEquatorialMount-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btEquatorialMount-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btFlipHorizontal-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btFlipHorizontal-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btFlipVertical-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btFlipVertical-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btFullScreen-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btFullScreen-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btGotoSelectedObject-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btGotoSelectedObject-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btGround-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btGround-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btNebula-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btNebula-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btNightView-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btNightView-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btPlanets-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btPlanets-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btQuit.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btScriptRun-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btScriptRun-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btScriptStop-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btScriptStop-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeForward-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeForward-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeNow-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeNow-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimePause-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeRealtime-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeRealtime-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeRewind-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\btTimeRewind-on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\checkbox-checked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\checkbox-unchecked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\closeButton.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\closeButton-hover.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\filesave.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\glow.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\glow32x32.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-scripts.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spindown-pressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spinleft-pressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spinright-pressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spinup-pressed.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-tools.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-navigation.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-main.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\map-pointeur.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-info.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-landscape-active.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-markings-active.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\searchBoxBackground.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_searchBoxBackground.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\searchButtonImage.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_searchButtonImage.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-sky-active.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-starlore-active.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-landscape.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-images.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-logs.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-starlore.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-sky.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-markings.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_checkbox-checked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_closeButton.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_closeButton-hover.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_checkbox-unchecked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_radio-checked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_radio-unchecked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_resize.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_spindown.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_spinleft.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_spinright.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_spinup.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_btTimeRealtime-off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\radio-checked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\radio-unchecked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\resize.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spindown.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spinup.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spinright.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\spinleft.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\VerticalAutoHideOff.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\HorizontalAutoHideOn.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\HorizontalAutoHideOff.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\VerticalAutoHideOn.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\world.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nightHtml.css">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nightStyle.css">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\normalHtml.css">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\normalStyle.css">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\tabicon-plugins.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\gui\nv_filesave.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Ascom\button_AscomPlugin_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Ascom\button_AscomPlugin_off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\data\stellarium.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -18,9 +18,11 @@
  */
 
 #include "SkyGui.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelGuiItems.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "StelCore.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
@@ -28,17 +30,60 @@
 #include <QSettings>
 #include <QTextDocument>
 
+#ifdef _MSC_BUILD
+#define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
+#endif
+
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
 	if (objectInfo == "all")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	}
 	else if (objectInfo == "short")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
+	}
 	else if (objectInfo == "none")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(0);
+	}
+	else if (objectInfo == "custom")
+	{
+		infoTextFilters = StelObject::InfoStringGroup(0);
+		
+		conf->beginGroup("custom_selected_info");
+		if (conf->value("flag_show_name", false).toBool())
+			infoTextFilters |= StelObject::Name;
+		if (conf->value("flag_show_catalognumber", false).toBool())
+			infoTextFilters |= StelObject::CatalogNumber;
+		if (conf->value("flag_show_magnitude", false).toBool())
+			infoTextFilters |= StelObject::Magnitude;
+		if (conf->value("flag_show_absolutemagnitude", false).toBool())
+			infoTextFilters |= StelObject::AbsoluteMagnitude;
+		if (conf->value("flag_show_radecj2000", false).toBool())
+			infoTextFilters |= StelObject::RaDecJ2000;
+		if (conf->value("flag_show_radecofdate", false).toBool())
+			infoTextFilters |= StelObject::RaDecOfDate;
+		if (conf->value("flag_show_hourangle", false).toBool())
+			infoTextFilters |= StelObject::HourAngle;
+		if (conf->value("flag_show_altaz", false).toBool())
+			infoTextFilters |= StelObject::AltAzi;
+		if (conf->value("flag_show_distance", false).toBool())
+			infoTextFilters |= StelObject::Distance;
+		if (conf->value("flag_show_size", false).toBool())
+			infoTextFilters |= StelObject::Size;
+		if (conf->value("flag_show_extra1", false).toBool())
+			infoTextFilters |= StelObject::Extra1;
+		if (conf->value("flag_show_extra2", false).toBool())
+			infoTextFilters |= StelObject::Extra2;
+		if (conf->value("flag_show_extra3", false).toBool())
+			infoTextFilters |= StelObject::Extra3;
+		conf->endGroup();
+	}
 	else
 	{
 		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
@@ -74,11 +119,13 @@ SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
 	winBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
 	buttonBar = new BottomStelBar(this, QPixmap(":/graphicGui/btbg-left.png"), QPixmap(":/graphicGui/btbg-right.png"),
-								  QPixmap(":/graphicGui/btbg-middle.png"), QPixmap(":/graphicGui/btbg-single.png"));
+																QPixmap(":/graphicGui/btbg-middle.png"), QPixmap(":/graphicGui/btbg-single.png"));
 	infoPanel = new InfoPanel(this);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
 	progressBarMgr = new StelProgressBarMgr(this);
+	connect(&StelApp::getInstance(), SIGNAL(progressBarAdded(const StelProgressController*)), progressBarMgr, SLOT(addProgressBar(const StelProgressController*)));
+	connect(&StelApp::getInstance(), SIGNAL(progressBarRemoved(const StelProgressController*)), progressBarMgr, SLOT(removeProgressBar(const StelProgressController*)));
 
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(this);
@@ -114,11 +161,11 @@ void SkyGui::init(StelGui* astelGui)
 	autoHidebts = new CornerButtons();
 	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
-	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiActions("actionAutoHideHorizontalButtonBar"), true);
+	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiAction("actionAutoHideHorizontalButtonBar"), true);
 	btHorizAutoHide->setChecked(autoHideHorizontalButtonBar);
 	pxmapOn = QPixmap(":/graphicGui/VerticalAutoHideOn.png");
 	pxmapOff = QPixmap(":/graphicGui/VerticalAutoHideOff.png");
-	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiActions("actionAutoHideVerticalButtonBar"), true);
+	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiAction("actionAutoHideVerticalButtonBar"), true);
 	btVertAutoHide->setChecked(autoHideVerticalButtonBar);
 
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
@@ -149,7 +196,7 @@ void SkyGui::init(StelGui* astelGui)
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
 	QGraphicsWidget::resizeEvent(event);
-		updateBarsPos();
+	updateBarsPos();
 }
 
 void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
@@ -210,13 +257,13 @@ void SkyGui::updateBarsPos()
 	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
 	{
 		buttonBar->setPos(round(newButtonBarX), round(newButtonBarY));
-				updatePath = true;
+		updatePath = true;
 	}
 
 	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
 	{
-				updatePath = true;
-				lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
+		updatePath = true;
+		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
 	}
 
 	if (updatePath)
@@ -237,10 +284,10 @@ void SkyGui::setStelStyle(const QString& style)
 {
 	if (style == "night_color")
 	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
+		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.0,0.0,0.5));
+		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.0, 0.00, 0.2));
+		buttonBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
+		winBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
 		winBar->setRedMode(true);
 		buttonBar->setRedMode(true);
 		btHorizAutoHide->setRedMode(true);
@@ -260,9 +307,9 @@ void SkyGui::setStelStyle(const QString& style)
 }
 
 // Add a new progress bar in the lower right corner of the screen.
-QProgressBar* SkyGui::addProgressBar()
+void SkyGui::addProgressBar(StelProgressController* p)
 {
-	return progressBarMgr->addProgressBar();
+	return progressBarMgr->addProgressBar(p);
 }
 
 void SkyGui::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)

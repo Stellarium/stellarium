@@ -34,7 +34,7 @@ void StelLogger::init(const QString& logFilePath)
 	logFile.setFileName(logFilePath);
 
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
-		qInstallMsgHandler(StelLogger::debugLogHandler);
+		qInstallMessageHandler(StelLogger::debugLogHandler);
 
 	// write timestamp
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
@@ -70,6 +70,11 @@ void StelLogger::init(const QString& logFilePath)
 		case QSysInfo::WV_WINDOWS7:
 			writeLog("Windows 7");
 			break;
+		#ifdef WV_WINDOWS8
+		case QSysInfo::WV_WINDOWS8:
+			writeLog("Windows 8");
+			break;
+		#endif
 		default:
 			writeLog("Unsupported Windows version");
 			break;
@@ -96,6 +101,11 @@ void StelLogger::init(const QString& logFilePath)
 			writeLog("Mac OS X 10.7");
 			break;
 		#endif
+		#ifdef MV_10_8
+		case QSysInfo::MV_10_8:
+			writeLog("Mac OS X 10.8");
+			break;
+		#endif
 		default:
 			writeLog("Unsupported Mac version");
 			break;
@@ -113,15 +123,30 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(version);
 		procVersion.close();
 	}
+#elif defined Q_OS_BSD4
+	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	QProcess uname;
+	uname.start("/usr/bin/uname -srm");
+	uname.waitForStarted();
+	uname.waitForFinished();
+	const QString BSDsystem = uname.readAllStandardOutput();
+	writeLog(BSDsystem.trimmed());
 #else
 	writeLog("Unknown operating system");
 #endif
 
 	// write GCC version
-#ifndef __GNUC__
-	writeLog("Non-GCC compiler");
+#if defined __GNUC__ && !defined __clang__
+	#ifdef __MINGW32__
+		#define COMPILER "MinGW GCC"
+	#else
+		#define COMPILER "GCC"
+	#endif
+	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
+#elif defined __clang__
+	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
 #else
-	writeLog(QString("Compiled with GCC %1.%2.%3").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
+	writeLog("Unknown compiler");
 #endif
 
 	// write Qt version
@@ -129,7 +154,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
 
 	// write addressing mode
-#ifdef __LP64__
+#if defined(__LP64__) || defined(_WIN64)
 	writeLog("Addressing mode: 64-bit");
 #else
 	writeLog("Addressing mode: 32-bit");
@@ -192,7 +217,7 @@ void StelLogger::init(const QString& logFilePath)
 	}
 #endif
 
-	// Aargh Windows API
+// Aargh Windows API
 #elif defined Q_OS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
 	// I'm gonna test it or anything.
@@ -226,13 +251,13 @@ void StelLogger::init(const QString& logFilePath)
 	int i;
 	for(i = 0; lRet == ERROR_SUCCESS; i++)
 	{
-		lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-					TEXT(qPrintable(QString("%1\\%2").arg(procKey).arg(i))),
+		lRet = RegOpenKeyExA(HKEY_LOCAL_MACHINE,
+					qPrintable(QString("%1\\%2").arg(procKey).arg(i)),
 					0, KEY_QUERY_VALUE, &hKey);
 
 		if(lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueEx(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+			if(RegQueryValueExA(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
 			else
 				writeLog("Could not get processor speed.");
@@ -245,7 +270,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if (lRet == ERROR_SUCCESS)
 		{
-			if (RegQueryValueEx(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueExA(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");
@@ -259,7 +284,7 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined Q_OS_MAC
 	QProcess systemProfiler;
 	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
-   systemProfiler.waitForStarted();
+	systemProfiler.waitForStarted();
 	systemProfiler.waitForFinished();
 	const QString systemData(systemProfiler.readAllStandardOutput());
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
@@ -286,20 +311,42 @@ void StelLogger::init(const QString& logFilePath)
 		}
 
 	}
-	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
+
+#elif defined Q_OS_BSD4
+	QProcess dmesg;
+	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
+	dmesg.waitForStarted();
+	dmesg.waitForFinished();
+	const QString dmesgData(dmesg.readAll());
+	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
+	for (int i = 0; i<dmesgLines.size(); i++)
+	{
+		if (dmesgLines.at(i).contains("memory"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("CPU"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("VGA"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+	}
 
 #endif
 }
 
 void StelLogger::deinit()
 {
-	qInstallMsgHandler(0);
+	qInstallMessageHandler(0);
 	logFile.close();
 }
 
-void StelLogger::debugLogHandler(QtMsgType, const char* msg)
+void StelLogger::debugLogHandler(QtMsgType, const QMessageLogContext&, const QString& msg)
 {
-	fprintf(stderr, "%s\n", msg);
+	fprintf(stderr, "%s\n", msg.toUtf8().constData());
 	writeLog(QString(msg));
 }
 

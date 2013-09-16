@@ -21,9 +21,11 @@
 #define _KDEWIN_UNISTD_H
 
 #include "kdewin32/sys/types.h"
+#ifndef _MSC_BUILD 
 #include <../include/unistd.h>
 
 #include <winsock2.h>
+#endif
 
 #define environ _environ
 

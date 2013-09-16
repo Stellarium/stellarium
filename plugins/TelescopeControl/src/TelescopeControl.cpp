@@ -25,6 +25,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelUtils.hpp"
 #include "TelescopeControl.hpp"
 #include "TelescopeClient.hpp"
 #include "TelescopeDialog.hpp"
@@ -44,6 +45,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelTextureMgr.hpp"
 
@@ -55,6 +57,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QDir>
 
 #include <QDebug>
 
@@ -79,12 +82,12 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(TelescopeControl, TelescopeControlStelPluginInterface)
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
+	: actionGroupId("PluginTelescopeControl")
+	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
+	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
 {
 	setObjectName("TelescopeControl");
 
@@ -96,7 +99,6 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
-
 }
 
 
@@ -129,11 +131,11 @@ void TelescopeControl::init()
 		//(not necessary since revision 6308; remains as an example)
 		//StelApp::getInstance().getModuleMgr().unloadModule("TelescopeMgr", false);
 		/*If the alsoDelete parameter is set to true, Stellarium crashes with a
-		  segmentation fault when an object is selected. TODO: Find out why.
-		  unloadModule() didn't work prior to revision 5058: the module unloaded
-		  normally, but Stellarium crashed later with a segmentation fault,
-		  because LandscapeMgr::getCallOrder() depended on the module's
-		  existence to return a value.*/
+			segmentation fault when an object is selected. TODO: Find out why.
+			unloadModule() didn't work prior to revision 5058: the module unloaded
+			normally, but Stellarium crashed later with a segmentation fault,
+			because LandscapeMgr::getCallOrder() depended on the module's
+			existence to return a value.*/
 		
 		//Load and start all telescope clients
 		loadTelescopes();
@@ -143,42 +145,48 @@ void TelescopeControl::init()
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		
+		StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
+
 		//Create telescope key bindings
-		 /* QAction-s with these key bindings existed in Stellarium prior to
+		/* QAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
-		QString group = N_("Telescope Control");
 		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 		{
 			// "Slew to object" commands
-			QString name = QString("actionMove_Telescope_To_Selection_%1").arg(i);
-			QString description = q_("Move telescope #%1 to selected object").arg(i);
+			QString name = moveToSelectedActionId.arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			gui->addGuiActions(name, description, shortcut, group, false, false);
-			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
+			QAction* action = shMgr->addGuiAction(name, true, "",
+			                                      shortcut, "", actionGroupId,
+			                                      false);
+			connect(action, SIGNAL(triggered()),
+			        this, SLOT(slewTelescopeToSelectedObject()));
 
 			// "Slew to the center of the screen" commands
-			name = QString("actionSlew_Telescope_To_Direction_%1").arg(i);
-			description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
-			gui->addGuiActions(name, description, shortcut, group, false, false);
-			connect(gui->getGuiActions(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
+			action = shMgr->addGuiAction(name, true, "",
+			                             shortcut, "", actionGroupId,
+			                             false, false);
+			connect(action, SIGNAL(triggered()), this,
+			        SLOT(slewTelescopeToViewDirection()));
 		}
+		// Also updates descriptions if the actions have been loaded from file
+		translateActionDescriptions();
+		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+		        this, SLOT(translateActionDescriptions()));
 	
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
 		
-		//TODO: Think of a better keyboard shortcut
-		gui->addGuiActions("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", group, true, false);
-		connect(gui->getGuiActions("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
-		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Slew_Window"), SLOT(setChecked(bool)));
+		connect(shMgr->getGuiAction("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
+		connect(slewDialog, SIGNAL(visibleChanged(bool)), shMgr->getGuiAction("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		
 		//Create toolbar button
 		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
 		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
 		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiActions("actionShow_Slew_Window"));
+		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiAction("actionShow_Slew_Window"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error &e)
@@ -204,11 +212,11 @@ void TelescopeControl::deinit()
 	while(iterator != telescopeServerProcess.constEnd())
 	{
 		int slotNumber = iterator.key();
-		#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 		telescopeServerProcess[slotNumber]->close();
-		#else
+#else
 		telescopeServerProcess[slotNumber]->terminate();
-		#endif
+#endif
 		telescopeServerProcess[slotNumber]->waitForFinished();
 		delete telescopeServerProcess[slotNumber];
 		qDebug() << "TelescopeControl::deinit(): Server process at slot" << slotNumber << "terminated successfully.";
@@ -343,23 +351,71 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->getEnglishName() == name)
-		return qSharedPointerCast<StelObject>(telescope);
+			return qSharedPointerCast<StelObject>(telescope);
 	}
 	return 0;
 }
 
-QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
+	QString tn;
+	bool find;
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
-		QString constw = telescope->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		tn = telescope->getNameI18n();
+		find = false;
+		if (useStartOfWords)
 		{
-			result << telescope->getNameI18n();
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << tn;
+		}
+	}
+	result.sort();
+	if (result.size()>maxNbItem)
+	{
+		result.erase(result.begin() + maxNbItem, result.end());
+	}
+	return result;
+}
+
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+{
+	QStringList result;
+	if (maxNbItem==0)
+		return result;
+
+	QString tn;
+	bool find;
+	foreach (const TelescopeClientP& telescope, telescopeClients)
+	{
+		QString tn = telescope->getEnglishName();
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << tn;
 		}
 	}
 	result.sort();
@@ -385,7 +441,7 @@ bool TelescopeControl::configureGui(bool show)
 // Misc methods (from TelescopeMgr; TODO: Better categorization)
 void TelescopeControl::setFontSize(int fontSize)
 {
-	 labelFont.setPixelSize(fontSize);
+	labelFont.setPixelSize(fontSize);
 }
 
 void TelescopeControl::slewTelescopeToSelectedObject()
@@ -424,7 +480,7 @@ void TelescopeControl::slewTelescopeToViewDirection()
 
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
 {
-	#ifndef COMPATIBILITY_001002
+#ifndef COMPATIBILITY_001002
 	//Leaves this whole routine empty if this is the backport version.
 	//Otherwise, there will be two concentric selection markers drawn around the telescope pointer.
 	//In 0.10.3, the plug-in unloads the module that draws the surplus marker.
@@ -446,7 +502,7 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
 	}
-	#endif //COMPATIBILITY_001002
+#endif //COMPATIBILITY_001002
 }
 
 void TelescopeControl::telescopeGoto(int slotNumber, const Vec3d &j2000Pos)
@@ -528,7 +584,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	else
 	{
 		qWarning() << "TelescopeControl: No telescope server executables found in"
-				   << serverExecutablesDirectoryPath;
+							 << serverExecutablesDirectoryPath;
 	}
 }
 
@@ -549,11 +605,11 @@ void TelescopeControl::loadConfiguration()
 	setFlagTelescopeCircles(settings->value("flag_telescope_circles", true).toBool());
 
 	//Load font size
-	#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 	setFontSize(settings->value("telescope_labels_font_size", 13).toInt()); //Windows Qt bug workaround
-	#else
+#else
 	setFontSize(settings->value("telescope_labels_font_size", 12).toInt());
-	#endif
+#endif
 
 	//Load colours
 	reticleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString());
@@ -640,7 +696,7 @@ void TelescopeControl::saveTelescopes()
 		QFile telescopesJsonFile(telescopesJsonPath);
 		if(!telescopesJsonFile.open(QFile::WriteOnly|QFile::Text))
 		{
-			qWarning() << "TelescopeControl: Telescopes can not be saved. A file can not be open for writing:" << telescopesJsonPath;
+			qWarning() << "TelescopeControl: Telescopes can not be saved. A file can not be open for writing:" << QDir::toNativeSeparators(telescopesJsonPath);
 			return;
 		}
 
@@ -668,7 +724,7 @@ void TelescopeControl::loadTelescopes()
 
 		if(!QFileInfo(telescopesJsonPath).exists())
 		{
-			qWarning() << "TelescopeControl::loadTelescopes(): No telescopes loaded. File is missing:" << telescopesJsonPath;
+			qWarning() << "TelescopeControl::loadTelescopes(): No telescopes loaded. File is missing:" << QDir::toNativeSeparators(telescopesJsonPath);
 			telescopeDescriptions = result;
 			return;
 		}
@@ -679,7 +735,7 @@ void TelescopeControl::loadTelescopes()
 
 		if(!telescopesJsonFile.open(QFile::ReadOnly))
 		{
-			qWarning() << "TelescopeControl: No telescopes loaded. Can't open for reading" << telescopesJsonPath;
+			qWarning() << "TelescopeControl: No telescopes loaded. Can't open for reading" << QDir::toNativeSeparators(telescopesJsonPath);
 			telescopeDescriptions = result;
 			return;
 		}
@@ -702,7 +758,7 @@ void TelescopeControl::loadTelescopes()
 			QString newName = telescopesJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 			if(telescopesJsonFile.rename(newName))
 			{
-				qWarning() << "TelescopeControl: The existing version of telescopes.json is obsolete. Backing it up as" << newName;
+				qWarning() << "TelescopeControl: The existing version of telescopes.json is obsolete. Backing it up as " << QDir::toNativeSeparators(newName);
 				qWarning() << "TelescopeControl: A blank telescopes.json file will have to be created.";
 				telescopeDescriptions = result;
 				return;
@@ -1180,25 +1236,25 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		}
 		catch (std::runtime_error& e)
 		{
-			qDebug() << "TelescopeControl: Error starting telescope server: Can't find executable:" << serverExecutablePath;
+			qDebug() << "TelescopeControl: Error starting telescope server: Can't find executable:" << QDir::toNativeSeparators(serverExecutablePath);
 			return false;
 		}
 
-		#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 		QString serialPortName;
 		if(portSerial.right(portSerial.size() - SERIAL_PORT_PREFIX.size()).toInt() > 9)
 			serialPortName = "\\\\.\\" + portSerial;//"\\.\COMxx", not sure if it will work
 		else
 			serialPortName = portSerial;
-		#else
+#else
 		QString serialPortName = portSerial;
-		#endif //Q_OS_WIN32
+#endif //Q_OS_WIN32
 		QStringList serverArguments;
 		serverArguments << QString::number(portTCP) << serialPortName;
 		if(useTelescopeServerLogs)
 			serverArguments << QString(StelFileMgr::getUserDir() + "/log_TelescopeServer" + slotName + ".txt");
 
-		qDebug() << "TelescopeControl: Starting tellescope server at slot" << slotName << "with path" << serverExecutablePath << "and arguments" << serverArguments.join(" ");
+		qDebug() << "TelescopeControl: Starting tellescope server at slot" << slotName << "with path" << QDir::toNativeSeparators(serverExecutablePath) << "and arguments" << serverArguments.join(" ");
 
 		//Starting the new process
 		telescopeServerProcess.insert(slotNumber, new QProcess());
@@ -1222,11 +1278,11 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 		return false;
 
 	//Stop/close the process
-	#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN32
 	telescopeServerProcess[slotNumber]->close();
-	#else
+#else
 	telescopeServerProcess[slotNumber]->terminate();
-	#endif //Q_OS_WIN32
+#endif //Q_OS_WIN32
 	telescopeServerProcess[slotNumber]->waitForFinished();
 
 	delete telescopeServerProcess[slotNumber];
@@ -1252,24 +1308,24 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 	QString initString;
 	switch (connectionType)
 	{
-	case ConnectionVirtual:
-		initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
-		break;
+		case ConnectionVirtual:
+			initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
+			break;
 
-	case ConnectionInternal:
-		if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
-			initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
-		break;
+		case ConnectionInternal:
+			if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
+				initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
+			break;
 
-	case ConnectionLocal:
-		if (isValidPort(portTCP))
-			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
-		break;
+		case ConnectionLocal:
+			if (isValidPort(portTCP))
+				initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
+			break;
 
-	case ConnectionRemote:
-	default:
-		if (isValidPort(portTCP) && !host.isEmpty())
-			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, host, QString::number(portTCP), QString::number(delay));
+		case ConnectionRemote:
+		default:
+			if (isValidPort(portTCP) && !host.isEmpty())
+				initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, host, QString::number(portTCP), QString::number(delay));
 	}
 
 	//qDebug() << "initString:" << initString;
@@ -1327,7 +1383,7 @@ void TelescopeControl::loadDeviceModels()
 	{
 		if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 		{
-			qWarning() << "TelescopeControl: Unable to find" << deviceModelsJsonPath;
+			qWarning() << "TelescopeControl: Unable to find " << QDir::toNativeSeparators(deviceModelsJsonPath);
 			useDefaultList = true;
 		}
 	}
@@ -1336,7 +1392,7 @@ void TelescopeControl::loadDeviceModels()
 		QFile deviceModelsJsonFile(deviceModelsJsonPath);
 		if(!deviceModelsJsonFile.open(QFile::ReadOnly))
 		{
-			qWarning() << "TelescopeControl: Can't open for reading" << deviceModelsJsonPath;
+			qWarning() << "TelescopeControl: Can't open for reading " << QDir::toNativeSeparators(deviceModelsJsonPath);
 			useDefaultList = true;
 		}
 		else
@@ -1351,7 +1407,7 @@ void TelescopeControl::loadDeviceModels()
 				QString newName = deviceModelsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 				if(deviceModelsJsonFile.rename(newName))
 				{
-					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Backing it up as" << newName;
+					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Backing it up as " << QDir::toNativeSeparators(newName);
 					if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 					{
 						useDefaultList = true;
@@ -1494,13 +1550,13 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 	QFile defaultFile(":/telescopeControl/device_models.json");
 	if (!defaultFile.copy(deviceModelsListPath))
 	{
-		qWarning() << "TelescopeControl: Unable to copy the default device models list to" << deviceModelsListPath;
+		qWarning() << "TelescopeControl: Unable to copy the default device models list to" << QDir::toNativeSeparators(deviceModelsListPath);
 		return false;
 	}
 	QFile newCopy(deviceModelsListPath);
 	newCopy.setPermissions(newCopy.permissions() | QFile::WriteOwner);
 
-	qDebug() << "TelescopeControl: The default device models list has been copied to" << deviceModelsListPath;
+	qDebug() << "TelescopeControl: The default device models list has been copied to" << QDir::toNativeSeparators(deviceModelsListPath);
 	return true;
 }
 
@@ -1515,14 +1571,14 @@ bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 	QDir newServerDirectory(newPath);
 	if(!newServerDirectory.exists())
 	{
-		qWarning() << "TelescopeControl: Can't find such a directory:" << newPath;
+		qWarning() << "TelescopeControl: Can't find such a directory: " << QDir::toNativeSeparators(newPath);
 		return false;
 	}
 	QList<QFileInfo> telescopeServerExecutables = newServerDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
 	if(telescopeServerExecutables.isEmpty())
 	{
 		qWarning() << "TelescopeControl: No telescope server executables found in"
-				   << serverExecutablesDirectoryPath;
+							 << QDir::toNativeSeparators(serverExecutablesDirectoryPath);
 		return false;
 	}
 
@@ -1562,7 +1618,7 @@ void TelescopeControl::addLogAtSlot(int slot)
 		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
 		{
 			qWarning() << "TelescopeControl: Unable to create a log file for slot"
-					   << slot << ":" << filePath;
+								 << slot << ":" << QDir::toNativeSeparators(filePath);
 			telescopeServerLogFiles.insert(slot, logFile);
 			telescopeServerLogStreams.insert(slot, new QTextStream(new QFile()));
 		}
@@ -1587,4 +1643,24 @@ void TelescopeControl::logAtSlot(int slot)
 {
 	if(telescopeServerLogStreams.contains(slot))
 		log_file = telescopeServerLogStreams.value(slot);
+}
+
+
+void TelescopeControl::translateActionDescriptions()
+{
+	StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
+	if (!shMgr)
+		return;
+	
+	for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
+	{
+		QString name = moveToSelectedActionId.arg(i);
+		QString description = q_("Move telescope #%1 to selected object")
+		                      .arg(i);
+		shMgr->setShortcutText(name, actionGroupId, description);
+		
+		name = moveToCenterActionId.arg(i);
+		description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+		shMgr->setShortcutText(name, actionGroupId, description);
+	}
 }

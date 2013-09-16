@@ -83,7 +83,7 @@ private:
 	//! OpenGl arrays
 	QVector<Vec3d> vertexArray;
 	QVector<Vec2f> textureArray;
-	QVector<unsigned int> indexArray;
+	QVector<unsigned short> indexArray;
 
 	// Used for smooth fade in
 	class QTimeLine* texFader;
