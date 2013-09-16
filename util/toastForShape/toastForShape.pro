@@ -10,6 +10,7 @@ DEFINES += PACKAGE_VERSION=\\\"0.10.6\\\"
 DEFINES += DEFAULT_GRAPHICS_SYSTEM=\\\"raster\\\"
 DEFINES += INSTALL_DATADIR=\\\"/usr/share/stellarium\\\"
 DEFINES += INSTALL_LOCALEDIR=\\\"/usr/share/locale\\\"
+DEFINES += NDEBUG=1
 
 TARGET = toastForShape
 CONFIG   += console
@@ -21,7 +22,7 @@ INCLUDEPATH += ../../src/core/ ../../src/core/external/glues_stel/source ../../s
 
 SOURCES += main.cpp \
     ../../src/core/StelSphereGeometry.cpp \
-	../../src/core/StelToastGrid.cpp \
+    ../../src/core/StelToastGrid.cpp \
     ../../src/core/StelJsonParser.cpp \
     ../../src/core/OctahedronPolygon.cpp \
     ../../src/core/StelUtils.cpp \
@@ -41,7 +42,7 @@ SOURCES += main.cpp \
 HEADERS += \
     ../../src/core/VecMath.hpp \
     ../../src/core/StelSphereGeometry.hpp \
-	../../src/core/StelToastGrid.hpp \
+    ../../src/core/StelToastGrid.hpp \
     ../../src/core/StelJsonParser.hpp \
     ../../src/core/OctahedronPolygon.hpp \
     ../../src/core/StelUtils.hpp \
