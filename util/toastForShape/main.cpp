@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 		for (int j=0;j<length;++j)
 		{
 			SphericalConvexPolygon poly(grid.getPolygon(level,i,j));
-			if (reg->contains(poly))
+			if (reg->intersects(poly))
 			{
 				QVariantMap m;
 				m["i"]=i;
