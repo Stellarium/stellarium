@@ -28,7 +28,7 @@
 
 #include <QDebug>
 
-#ifndef Q_OS_ANDROID
+#ifndef USE_QUICKVIEW
 	#include <QApplication>
 #else
 	#include <QGuiApplication>
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
 	
 	QGuiApplication::setDesktopSettingsAware(false);
 	
-#ifndef Q_OS_ANDROID
+#ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
