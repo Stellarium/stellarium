@@ -51,87 +51,24 @@
 #define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
 #endif
 
-StelButton::StelButton(QGraphicsItem* parent,
-                       const QPixmap& apixOn,
-                       const QPixmap& apixOff,
-                       const QPixmap& apixHover,
-                       const QString& aaction,
-                       bool noBackground)
-	:StelButton::StelButton(parent, apixOn, apixOff, apixHover,
-							StelApp::getInstance().getStelActionManager()->findAction(aaction), noBackground)
+void StelButton::initCtor(const QPixmap& apixOn,
+                          const QPixmap& apixOff,
+                          const QPixmap& apixNoChange,
+                          const QPixmap& apixHover,
+                          StelAction* aaction,
+                          bool noBackground,
+                          bool isTristate)
 {
-	
-}
-
-StelButton::StelButton(QGraphicsItem* parent,
-                       const QPixmap& apixOn,
-                       const QPixmap& apixOff,
-                       const QPixmap& apixHover,
-                       StelAction *aaction,
-                       bool noBackground) :
-	QGraphicsPixmapItem(apixOff, parent),
-	pixOn(apixOn),
-	pixOff(apixOff),
-	pixHover(apixHover),
-	checked(ButtonStateOff),
-	action(NULL),
-	noBckground(noBackground),
-	isTristate_(false),
-	opacity(1.),
-	hoverOpacity(0.)
-{
-	Q_ASSERT(!pixOn.isNull());
-	Q_ASSERT(!pixOff.isNull());
-
-	redMode = StelApp::getInstance().getVisionModeNight();
-	pixOnRed = StelButton::makeRed(pixOn);
-	pixOffRed = StelButton::makeRed(pixOff);
-	if (!pixHover.isNull())
-		pixHoverRed = StelButton::makeRed(pixHover);
-	if (!pixBackground.isNull())
-		pixBackgroundRed = StelButton::makeRed(pixBackground);
-
-	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
-	setAcceptHoverEvents(true);
-	timeLine = new QTimeLine(250, this);
-	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
-	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
+	pixOn = apixOn;
+	pixOff = apixOff;
+	pixHover = apixHover;
+	pixNoChange = apixNoChange;
+	noBckground = noBackground;
+	isTristate_ = false;
+	opacity = 1.;
+	hoverOpacity = 0.;
 	action = aaction;
-	Q_ASSERT(action);
-	if (action!=NULL)
-	{
-		if (action->isCheckable())
-		{
-			setChecked(action->isChecked());
-			connect(action, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
-			connect(this, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
-		}
-		else
-		{
-			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
-		}
-	}
-}
 
-StelButton::StelButton(QGraphicsItem* parent,
-                       const QPixmap& apixOn,
-                       const QPixmap& apixOff,
-                       const QPixmap& apixNoChange,
-                       const QPixmap& apixHover,
-                       const QString& aactionId,
-                       bool noBackground,
-                       bool isTristate) :
-	QGraphicsPixmapItem(apixOff, parent),
-	pixOn(apixOn),
-	pixOff(apixOff),
-	pixNoChange(apixNoChange),
-	pixHover(apixHover),
-	checked(ButtonStateOff),
-	noBckground(noBackground),
-	isTristate_(isTristate),
-	opacity(1.),
-	hoverOpacity(0.)
-{
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
@@ -155,7 +92,6 @@ StelButton::StelButton(QGraphicsItem* parent,
 	connect(timeLine, SIGNAL(valueChanged(qreal)),
 	        this, SLOT(animValueChanged(qreal)));
 
-	action = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
 	if (action!=NULL)
 	{
 		if (action->isCheckable())
@@ -169,6 +105,43 @@ StelButton::StelButton(QGraphicsItem* parent,
 			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
 		}
 	}
+}
+
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixHover,
+                       StelAction *aaction,
+                       bool noBackground) :
+	QGraphicsPixmapItem(apixOff, parent)
+{
+	initCtor(apixOn, apixOff, QPixmap(), apixHover, aaction, noBackground, false);
+}
+
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixNoChange,
+                       const QPixmap& apixHover,
+                       const QString& aactionId,
+                       bool noBackground,
+                       bool isTristate) :
+	QGraphicsPixmapItem(apixOff, parent)
+{
+	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
+	initCtor(apixOn, apixOff, apixNoChange, apixHover, action, noBackground, isTristate);
+}
+
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixHover,
+                       const QString& aactionId,
+                       bool noBackground)
+	:QGraphicsPixmapItem(apixOff, parent)
+{
+	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
+	initCtor(apixOn, apixOff, QPixmap(), apixHover, action, noBackground, false);
 }
 
 
