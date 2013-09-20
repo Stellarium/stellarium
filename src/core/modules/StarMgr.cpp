@@ -278,6 +278,7 @@ void StarMgr::copyDefaultConfigFile()
 		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
 		qDebug() << "Creates file " << QDir::toNativeSeparators(starConfigFileFullPath);
 		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), starConfigFileFullPath);
+		QFile::setPermissions(starConfigFileFullPath, QFile::permissions(starConfigFileFullPath) | QFileDevice::WriteOwner);
 	}
 	catch (std::runtime_error& e)
 	{
