@@ -93,6 +93,7 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 {
 	if (path.isEmpty())
 		throw std::runtime_error("Empty file path");
+	
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
@@ -106,6 +107,12 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 	if (path.startsWith(":/"))
 		return path;
 
+	foreach (const QString& i, fileLocations)
+	{
+		if (fileFlagsCheck(i + "/" + path, flags))
+			return i + "/" + path;
+	}
+
 	// explicitly specified absolute paths
 	if ( isAbsolute(path) )
 	{
@@ -114,13 +121,7 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 		else
 			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
 	}
-
-	foreach (QString i, fileLocations)
-	{
-		if (fileFlagsCheck(i + "/" + path, flags))
-			return i + "/" + path;
-	}
-
+	
 	throw std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData());
 }
 
@@ -238,11 +239,6 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 					if ((flags & File) && !fullPath.isFile())
 						returnThisOne = false;
 
-					// we only want to return "hidden" results if the Hidden flag is set
-					if (!(flags & Hidden))
-						if (fileIt.at(0) == '.')
-							returnThisOne = false;
-
 					// OK, add the ones we want to the result
 					if (returnThisOne)
 					{
@@ -254,11 +250,6 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	}
 
 	return result;
-}
-
-void StelFileMgr::setSearchPaths(const QStringList& paths)
-{
-	fileLocations = paths;
 }
 
 bool StelFileMgr::exists(const QString& path)
@@ -308,17 +299,6 @@ QString StelFileMgr::baseName(const QString& path)
 
 bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 {
-	if (!(flags & Hidden))
-	{
-		// Files are considered Hidden on POSIX systems if the file name begins with
-		// a "." character.  Unless we have the Hidden flag set, reject and path
-		// where the basename starts with a .
-		if (baseName(path).startsWith('.'))
-		{
-			return false;
-		}
-	}
-
 	QFileInfo thePath(path);
 	if (flags & New)
 	{
