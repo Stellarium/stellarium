@@ -10,176 +10,16 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-10 20:03+0700\n"
-"PO-Revision-Date: 2013-09-10 17:56+0000\n"
-"Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
+"PO-Revision-Date: 2013-09-19 08:48+0000\n"
+"Last-Translator: Ivan Marti-Vidal <i.martividal@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-11 04:54+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-20 05:13+0000\n"
+"X-Generator: Launchpad (build 16765)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
-
-#: src/gui/HelpDialog.cpp:183
-msgid "CTRL + Left click"
-msgstr "CTRL + Clic izq."
-
-#: src/gui/StelGui.cpp:178 src/translations.h:692
-msgid "Script console window"
-msgstr "Ventana de la consola de guiones"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:132
-#, qt-format
-msgid "Landscape \"%1\" has been installed successfully."
-msgstr "Paisaje \"%1\" ha sido instalado exitosamente."
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:146
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
-#: src/gui/AddRemoveLandscapesDialog.cpp:233
-msgid "No landscape was installed."
-msgstr "Ningún paisaje fue instalado."
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:159
-#, qt-format
-msgid "Landscape \"%1\" has been removed successfully."
-msgstr "Paisaje \"%1\" ha sido eliminado exitosamente."
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:170
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
-msgid "The selected landscape could not be (completely) removed."
-msgstr "El paisaje elegido podría no ser eliminado (completamente)."
-
-#. TRANSLATORS: Name of script
-#: src/translations.h:206
-msgid "Landscape Tour"
-msgstr "Recorrido por los paisajes"
-
-#. TRANSLATORS: Name of script
-#: src/translations.h:208
-msgid "Partial Lunar Eclipse"
-msgstr "Eclipse Parcial de Luna"
-
-#. TRANSLATORS: Name of script
-#: src/translations.h:210
-msgid "Total Lunar Eclipse"
-msgstr "Eclipse Total de Luna"
-
-#. TRANSLATORS: Name of script
-#: src/translations.h:214
-msgid "Solar Eclipse 2009"
-msgstr "Eclipse Solar 2009"
-
-#: src/translations.h:265
-msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
-"Un lento, e infinito recorrido por el cielo, mirando objetos aleatoriamente."
-
-#: src/translations.h:266
-msgid ""
-"Script to demonstrate a total solar eclipse which has happened in 2009 "
-"(location=Rangpur, Bangladesh)."
-msgstr ""
-"Guión para demostrar un eclipse total de Sol que ocurrió en 2009 (ubicación: "
-"Rangpur, Bangladés)."
-
-#: src/translations.h:268
-msgid ""
-"This script displays the constellations of the Zodiac. That means the "
-"constellations which lie along the line which the Sun traces across the "
-"celestial sphere over the course of a year."
-msgstr ""
-"Este guión muestra las constelaciones del Zodíaco. Eso significa que las "
-"constelaciones que se encuentran a lo largo de la línea que traza el Sol "
-"alrededor de la esfera celeste durante el curso del año."
-
-#: src/translations.h:600
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
-msgid "Horizon line"
-msgstr "Linea del horizonte"
-
-#: src/ui_configurationDialog.h:1054
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
-"Permitir desplazamiento (clic y arrastrar) y zoom (rueda de desplazamiento) "
-"con ratón"
-
-#: src/ui_configurationDialog.h:1056
-msgid "Enable mouse navigation"
-msgstr "Activar navegación mediante el ratón"
-
-#: src/ui_configurationDialog.h:1149
-msgid "Load at startup"
-msgstr "Cargar al inicio"
-
-#: src/ui_AtmosphereDialog.h:179
-msgid "Pressure (mbar):"
-msgstr "Presión (mbar):"
-
-#: src/ui_AtmosphereDialog.h:185
-msgid ""
-"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
-"given in mag/airmass, where airmass is number of atmospheres light has to "
-"pass. (zenith: 1; horizon: about 40)"
-msgstr ""
-"Extinción es la pérdida del brillo de estrella debido a la atmósfera de la "
-"Tierra. Está expresado en mag/masa de aire, en donde masa de aire es el "
-"número de atmósferas que la luz debe atravesar. (zenit:1; horizonte: cerca "
-"de 40)"
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:60
-msgid "Displays compass bearing marks along the horizon"
-msgstr "Muestra marcas de brújula a lo largo del horizonte"
-
-#: plugins/Satellites/src/Satellites.cpp:180
-msgid ""
-"The old satellites.json file is no longer compatible - using default file"
-msgstr ""
-"El archivo satellites.json viejo ya no es compatible - usando el archivo por "
-"defecto"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:81
-msgid ""
-"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
-"computerized mount (a \"GoTo telescope\")."
-msgstr ""
-"Este complemento permite a Stellarium enviar \"montones\" de mensajes a un "
-"telescopio en un montaje computarizado (un telescopio \"dirigible\")"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1693
-#, qt-format
-msgid "Move telescope #%1 to selected object"
-msgstr "Mover el telescopio #%1 a el objecto seleccionado"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1698
-#, qt-format
-msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "Mover el telescopio #%1 a el punto en el centro de la pantalla"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
-msgid "OK"
-msgstr "Aceptar"
-
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
-msgid ""
-"Happens when the angular separation between the Sun and the celestial object "
-"are maximum. In most cases, this is equivalent to say that the Equatorial "
-"longitudes of the Sun and the object differ by 180 degrees, so the Sun is in "
-"opposition to the object. When an object is at its maximum possible angular "
-"separation from the Sun (no matter if it is a planet or a star), it "
-"culminates roughly at midnight, and on the darkest possible area of the Sky "
-"at that declination. Hence, that is the 'best' night to observe a particular "
-"object."
-msgstr ""
-"Sucede cuando la distancia angular entre el Sol y el objeto celeste es "
-"máxima. En la mayoría de los casos, esto es equivalente a decir que la "
-"longitud ecuatorial del Sol difiere 180 grados de la del objeto, por lo que "
-"el Sol y el objeto están en oposición. Cuando el objeto está a su máxima "
-"distancia angular del Sol (no importa si el objeto está fijo o es un "
-"planeta), culmina aproximadamente a medianoche, y en la región más oscura "
-"del cielo. Por lo tanto, la noche cuando un objeto está en oposición es la "
-"\"mejor\" noche para observarlo."
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1286
 msgid "Meridian"
@@ -1278,6 +1118,10 @@ msgstr "Limpiar selección"
 msgid "Right click"
 msgstr "Clic derecho"
 
+#: src/gui/HelpDialog.cpp:183
+msgid "CTRL + Left click"
+msgstr "CTRL + Clic izq."
+
 #: src/gui/HelpDialog.cpp:189
 #, qt-format
 msgid ""
@@ -1393,6 +1237,10 @@ msgstr "Diseñador gráfico/otro: %1"
 msgid "OSX Developer: %1"
 msgstr "Desarrollador de OSX: %1"
 
+#: src/gui/StelGui.cpp:178 src/translations.h:692
+msgid "Script console window"
+msgstr "Ventana de la consola de guiones"
+
 #. TRANSLATORS: Keyboard action group name
 #: src/gui/StelGui.cpp:178 src/translations.h:687
 msgid "Windows"
@@ -1448,10 +1296,22 @@ msgstr "elija un archivo ZIP que contenga un paisaje de Stellarium"
 msgid "ZIP archives"
 msgstr "archivos ZIP"
 
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
+#, qt-format
+msgid "Landscape \"%1\" has been installed successfully."
+msgstr "Paisaje \"%1\" ha sido instalado exitosamente."
+
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Éxito"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
+msgid "No landscape was installed."
+msgstr "Ningún paisaje fue instalado."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:147
 #: src/gui/AddRemoveLandscapesDialog.cpp:171
@@ -1461,6 +1321,16 @@ msgstr "Éxito"
 #: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "¡Error!"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
+#, qt-format
+msgid "Landscape \"%1\" has been removed successfully."
+msgstr "Paisaje \"%1\" ha sido eliminado exitosamente."
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
+msgid "The selected landscape could not be (completely) removed."
+msgstr "El paisaje elegido podría no ser eliminado (completamente)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:193
@@ -2068,9 +1938,29 @@ msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of script
+#: src/translations.h:206
+msgid "Landscape Tour"
+msgstr "Recorrido por los paisajes"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:208
+msgid "Partial Lunar Eclipse"
+msgstr "Eclipse Parcial de Luna"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:210
+msgid "Total Lunar Eclipse"
+msgstr "Eclipse Total de Luna"
+
+#. TRANSLATORS: Name of script
 #: src/translations.h:212
 msgid "Screensaver"
 msgstr "Salvapantallas"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:214
+msgid "Solar Eclipse 2009"
+msgstr "Eclipse Solar 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
@@ -2175,12 +2065,12 @@ msgstr "Las Mejores Elongaciones de la Tierra y Marte desde Júpiter"
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:260
 msgid "Look around each installed landscape."
-msgstr "Mira alrededor cada paisaje instalado."
+msgstr "Visualiza alrededor cada paisaje instalado."
 
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:262
 msgid "Look at each installed sky culture."
-msgstr "Mira cada cultura estelar instalada."
+msgstr "Visualiza cada cultura estelar instalada."
 
 #: src/translations.h:263
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -2190,9 +2080,32 @@ msgstr "Guión para demostrar un eclipse parcial de luna"
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Guión para demostrar un eclipse total de luna"
 
+#: src/translations.h:265
+msgid "A slow, infinite tour of the sky, looking at random objects."
+msgstr ""
+"Un lento, e infinito recorrido por el cielo, mirando objetos aleatoriamente."
+
+#: src/translations.h:266
+msgid ""
+"Script to demonstrate a total solar eclipse which has happened in 2009 "
+"(location=Rangpur, Bangladesh)."
+msgstr ""
+"Guión para demostrar un eclipse total de Sol que ocurrió en 2009 "
+"(lugar=Rangpur, Bangladés)."
+
 #: src/translations.h:267
 msgid "Script which runs automatically at startup"
 msgstr "Guión que se ejecuta automáticamente al inicio"
+
+#: src/translations.h:268
+msgid ""
+"This script displays the constellations of the Zodiac. That means the "
+"constellations which lie along the line which the Sun traces across the "
+"celestial sphere over the course of a year."
+msgstr ""
+"Este guión muestra las constelaciones del Zodíaco. Eso significa que las "
+"constelaciones que se encuentran a lo largo de la línea que traza el Sol "
+"alrededor de la esfera celeste durante el curso del año."
 
 #: src/translations.h:269
 msgid ""
@@ -3537,6 +3450,11 @@ msgstr "Plano galáctico"
 msgid "Ground"
 msgstr "Suelo"
 
+#: src/translations.h:600
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+msgid "Horizon line"
+msgstr "Linea del horizonte"
+
 #: src/translations.h:601
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:318
 msgid "Meridian line"
@@ -4483,6 +4401,16 @@ msgstr "Permitir desplazamiento y zoom con teclado"
 msgid "Enable keyboard navigation"
 msgstr "Activar navegación mediante teclado"
 
+#: src/ui_configurationDialog.h:1054
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+"Permitir desplazamiento (clic y arrastrar) y zoom (rueda de desplazamiento) "
+"con ratón"
+
+#: src/ui_configurationDialog.h:1056
+msgid "Enable mouse navigation"
+msgstr "Activar navegación mediante el ratón"
+
 #: src/ui_configurationDialog.h:1059
 msgid "Hides the mouse cursor when inactive"
 msgstr "Ocultar el cursor del ratón cuando está inactivo"
@@ -4678,6 +4606,10 @@ msgstr "Ejecutar script seleccionado"
 msgid "Stop a running script"
 msgstr "Detener script en ejecución"
 
+#: src/ui_configurationDialog.h:1149
+msgid "Load at startup"
+msgstr "Cargar al inicio"
+
 #: src/ui_configurationDialog.h:1150
 msgid "configure"
 msgstr "configurar"
@@ -4756,9 +4688,24 @@ msgstr "Detalles de la Atmósfera"
 msgid "Refraction Settings"
 msgstr "Configuración de Refracción"
 
+#: src/ui_AtmosphereDialog.h:179
+msgid "Pressure (mbar):"
+msgstr "Presión (mbar):"
+
 #: src/ui_AtmosphereDialog.h:180
 msgid "Temperature (C):"
 msgstr "Temperatura (C):"
+
+#: src/ui_AtmosphereDialog.h:185
+msgid ""
+"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
+"given in mag/airmass, where airmass is number of atmospheres light has to "
+"pass. (zenith: 1; horizon: about 40)"
+msgstr ""
+"Extinción es la pérdida del brillo de estrella debido a la atmósfera de la "
+"Tierra. Está expresado en mag/masa de aire, en donde masa de aire es el "
+"número de atmósferas que la luz debe atravesar. (zenit:1; horizonte: cerca "
+"de 40)"
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
@@ -4856,6 +4803,10 @@ msgstr "Clic con el botón derecho sólo cambia el punto final."
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
 msgstr "Marcas de Brújula"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr "Muestra marcas de brújula a lo largo del horizonte"
 
 #: plugins/Oculars/src/Oculars.cpp:82
 #: plugins/Oculars/src/ui_ocularDialog.h:1023
@@ -5424,6 +5375,13 @@ msgid ""
 msgstr ""
 "Predicción de la posición de los satélites artificiales en órbita terrestre "
 "basado en la base de datos NORAD TLE"
+
+#: plugins/Satellites/src/Satellites.cpp:180
+msgid ""
+"The old satellites.json file is no longer compatible - using default file"
+msgstr ""
+"El archivo satellites.json viejo ya no es compatible - usando el archivo por "
+"defecto"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1628
@@ -6145,6 +6103,24 @@ msgstr "Descartar"
 msgid "Telescope Control"
 msgstr "Control de telescopio"
 
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:81
+msgid ""
+"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
+"computerized mount (a \"GoTo telescope\")."
+msgstr ""
+"Este complemento permite a Stellarium enviar \"montones\" de mensajes a un "
+"telescopio en un montaje computarizado (un telescopio \"dirigible\")"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1693
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr "Mover el telescopio #%1 a el objecto seleccionado"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1698
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr "Mover el telescopio #%1 a el punto en el centro de la pantalla"
+
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
 msgstr "Añadir nuevo telescopio"
@@ -6476,6 +6452,10 @@ msgstr "Tamaño de círculo(s):"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr "Hasta diez valores decimales en grados de arco, separados por comas"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
+msgid "OK"
+msgstr "Aceptar"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
@@ -8224,6 +8204,26 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
 msgid "Largest Sun separation:"
 msgstr "Máxima separación del Sol:"
+
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
+msgid ""
+"Happens when the angular separation between the Sun and the celestial object "
+"are maximum. In most cases, this is equivalent to say that the Equatorial "
+"longitudes of the Sun and the object differ by 180 degrees, so the Sun is in "
+"opposition to the object. When an object is at its maximum possible angular "
+"separation from the Sun (no matter if it is a planet or a star), it "
+"culminates roughly at midnight, and on the darkest possible area of the Sky "
+"at that declination. Hence, that is the 'best' night to observe a particular "
+"object."
+msgstr ""
+"Sucede cuando la distancia angular entre el Sol y el objeto celeste es "
+"máxima. En la mayoría de los casos, esto es equivalente a decir que la "
+"longitud ecuatorial del Sol difiere 180 grados de la del objeto, por lo que "
+"el Sol y el objeto están en oposición. Cuando el objeto está a su máxima "
+"distancia angular del Sol (no importa si el objeto está fijo o es un "
+"planeta), culmina aproximadamente a medianoche, y en la región más oscura "
+"del cielo. Por lo tanto, la noche cuando un objeto está en oposición es la "
+"\"mejor\" noche para observarlo."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
