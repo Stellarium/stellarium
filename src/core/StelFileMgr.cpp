@@ -41,6 +41,7 @@
 QStringList StelFileMgr::fileLocations;
 QString StelFileMgr::userDir;
 QString StelFileMgr::screenshotDir;
+QString StelFileMgr::installDir;
 
 void StelFileMgr::init()
 {
@@ -74,15 +75,51 @@ void StelFileMgr::init()
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 
+	
+	// Determine install data directory location
+
+	// If we are running from the build tree, we use the files from the current directory
+	if (QFileInfo(CHECK_FILE).exists())
+	{
+		installDir = ".";
+	}
+	else
+	{
+#ifdef Q_OS_MAC
+		QString relativePath = "/../Resources";
+		if (QCoreApplication::applicationDirPath().contains("src")) {
+			relativePath = "/../../../../..";
+		}
+		QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
+		
+		QDir ResourcesDir = MacOSdir.dir();
+		if (!QCoreApplication::applicationDirPath().contains("src")) {
+			ResourcesDir.cd(QString("Resources"));
+		}
+		QFileInfo installLocation(ResourcesDir.absolutePath());
+		QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
+#else
+		// Linux, BSD, Solaris etc.
+		// We use the value from the config.h filesystem
+		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
+		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
+#endif
+	
+		if (checkFile.exists())
+		{
+			installDir = installLocation.filePath();
+		}
+		else
+		{
+			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:" << 
+				QDir::toNativeSeparators(installLocation.filePath()) << " (we checked for " << 
+				QDir::toNativeSeparators(checkFile.filePath()) << ").";
+			qFatal("Couldn't find install directory location.");
+		}
+	}
+	
 	// Then add the installation directory to the search path
-	try
-	{
-		fileLocations.append(getInstallationDir());
-	}
-	catch (std::runtime_error &e)
-	{
-		qWarning() << "WARNING: could not locate installation directory";
-	}
+	fileLocations.append(installDir);
 
 	if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
 		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0];
@@ -364,43 +401,7 @@ void StelFileMgr::setUserDir(const QString& newDir)
 
 QString StelFileMgr::getInstallationDir()
 {
-	// If we are running from the build tree, we use the files from there...
-	if (QFileInfo(CHECK_FILE).exists()){
-		return ".";
-	}
-
-#ifdef Q_OS_MAC
-	QString relativePath = "/../Resources";
-	if (QCoreApplication::applicationDirPath().contains("src")) {
-		relativePath = "/../../../../..";
-	}
-	QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
-	
-	QDir ResourcesDir = MacOSdir.dir();
-	if (!QCoreApplication::applicationDirPath().contains("src")) {
-		ResourcesDir.cd(QString("Resources"));
-	}
-	QFileInfo installLocation(ResourcesDir.absolutePath());
-	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
-#else
-	// Linux, BSD, Solaris etc.
-	// We use the value from the config.h filesystem
-	QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
-	QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
-#endif
-
-	if (checkFile.exists())
-	{
-		return installLocation.filePath();
-	}
-	else
-	{
-		qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-			<< QDir::toNativeSeparators(installLocation.filePath())
-			<< " (we checked for " << QDir::toNativeSeparators(checkFile.filePath())
-			<< ").";
-		throw (std::runtime_error("NOT FOUND"));
-	}
+	return installDir;
 }
 
 QString StelFileMgr::getScreenshotDir()
@@ -427,8 +428,7 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 QString StelFileMgr::getLocaleDir()
 {
 #ifdef ENABLE_NLS
-	QFileInfo localePath;
-	localePath = QFileInfo(getInstallationDir() + "/translations");
+	QFileInfo localePath = QFileInfo(getInstallationDir() + "/translations");
 	if (localePath.exists())
 	{
 		return localePath.filePath();
@@ -443,7 +443,7 @@ QString StelFileMgr::getLocaleDir()
 		}
 		else
 		{
-			qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
+			qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory";
 			return "";
 		}
 	}
