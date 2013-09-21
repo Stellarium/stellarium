@@ -262,6 +262,9 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
+	// Support hi-dpi pixmaps
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+
 	// Add the DejaVu font that we use everywhere in the program
 	try
 	{

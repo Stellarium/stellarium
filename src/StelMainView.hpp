@@ -25,6 +25,7 @@
 #include <QEventLoop>
 
 class QGLWidget;
+class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
 class StelQGLWidget;
@@ -158,6 +159,7 @@ private:
 	float minfps;
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
+
 };
 
 
