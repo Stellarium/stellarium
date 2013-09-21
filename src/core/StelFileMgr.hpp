@@ -219,6 +219,9 @@ private:
 	//! Used to store the screenshot directory
 	static QString screenshotDir;
 
+	//! Used to store the screenshot directory
+	static QString installDir;
+	
 #ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.
 	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA
