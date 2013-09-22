@@ -128,7 +128,6 @@ void StelFileMgr::init()
 
 QString StelFileMgr::findFile(const QString& path, Flags flags)
 {
-	qDebug() << path;
 	if (path.isEmpty())
 		return "";
 	
