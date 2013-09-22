@@ -669,16 +669,8 @@ QString LandscapeMgr::nameToID(const QString& name)
  ****************************************************************************/
 QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 {
-	QSet<QString> landscapeDirs;
 	QMap<QString,QString> result;
-	try
-	{
-		landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
-	}
-	catch (std::runtime_error& e)
-	{
-		qDebug() << "ERROR while trying list landscapes:" << e.what();
-	}
+	QSet<QString> landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
 
 	foreach (const QString& dir, landscapeDirs)
 	{

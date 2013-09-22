@@ -32,9 +32,6 @@ IF(NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
-# The stars structs rely on gnu gcc packing of bit-fields.
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
-
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
 IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
@@ -63,6 +60,8 @@ IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  STRING(REGEX REPLACE "^.*[ ][0-9]+\\.([0-9]).*$" "\\1" CLANG_MINOR "${_clang_version_info}")
  MESSAGE(STATUS "Found Clang ${CLANG_MAJOR}.${CLANG_MINOR}")
 ELSE()
+ # The stars structs rely on gnu gcc packing of bit-fields. Not for clang.
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
  SET(CLANG_MAJOR 0)
  SET(CLANG_MINOR 0)
 ENDIF()

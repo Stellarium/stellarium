@@ -247,6 +247,9 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
+	// Support hi-dpi pixmaps
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+
 	// Add the DejaVu font that we use everywhere in the program
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
 	if (!fName.isEmpty())
@@ -283,6 +286,11 @@ int main(int argc, char **argv)
 	app.installTranslator(&trans);
 
 	StelMainView mainWin;
+	// some basic diagnostics
+	if (!QGLFormat::hasOpenGL()){
+	  QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+	}
+	qDebug() << "OpenGLVersionflags: " << QGLFormat::openGLVersionFlags();
 	mainWin.init(confSettings);
 	app.exec();
 	mainWin.deinit();
