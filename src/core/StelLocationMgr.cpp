@@ -71,7 +71,8 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 	{
 		QIODevice* d = KFilterDev::device(&sourcefile, "application/x-gzip", false);
 		d->open(QIODevice::ReadOnly);
-		QDataStream in(d);
+		QByteArray arr = d->readAll();
+		QDataStream in(&arr, QIODevice::ReadOnly);
 		in.setVersion(QDataStream::Qt_4_6);
 		in >> res;
 		d->close();
