@@ -1650,6 +1650,8 @@ void Oculars::validateAndLoadIniFile()
 	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Oculars");
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
+	if (ocularIniPath.isEmpty())
+		return;
 
 	// If the ini file does not already exist, create it from the resource in the QT resource
 	if(!QFileInfo(ocularIniPath).exists()) {

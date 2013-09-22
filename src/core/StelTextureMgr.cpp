@@ -58,11 +58,8 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 
 	StelTextureSP tex = StelTextureSP(new StelTexture());
-	try
-	{
-		tex->fullPath = StelFileMgr::findFile(afilename);
-	}
-	catch (std::runtime_error er)
+	tex->fullPath = StelFileMgr::findFile(afilename);
+	if (tex->fullPath.isEmpty())
 	{
 #if 0
 		// Allow to replace the texures by compressed .pvr versions using GPU decompression.
@@ -74,7 +71,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 			return createTexture(pvrVersion, params);
 		}
 #endif
-		qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
+		qWarning() << "WARNING : Can't find texture file " << afilename;
 		tex->errorOccured = true;
 		return StelTextureSP();
 	}
@@ -120,22 +117,12 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	if (!url.startsWith("http://"))
 	{
 		// Assume a local file
-		try
+		tex->fullPath = StelFileMgr::findFile(url);
+		if (tex->fullPath.isEmpty())
 		{
-			tex->fullPath = StelFileMgr::findFile(url);
-		}
-		catch (std::runtime_error e)
-		{
-			try
-			{
-				tex->fullPath = StelFileMgr::findFile("textures/" + url);
-			}
-			catch (std::runtime_error er)
-			{
-				qWarning() << "WARNING : Can't find texture file " << url << ": " << er.what() << endl;
-				tex->errorOccured = true;
-				return StelTextureSP();
-			}
+			qWarning() << "WARNING : Can't find texture file " << url;
+			tex->errorOccured = true;
+			return StelTextureSP();
 		}
 		tex->downloaded = true;
 	}

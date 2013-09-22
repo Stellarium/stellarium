@@ -116,15 +116,9 @@ void ScriptConsole::loadScript()
 
 void ScriptConsole::saveScript()
 {
-	QString saveDir;
-	try
-	{
-		saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
-	}
-	catch (std::runtime_error& e)
-	{
+	QString saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+	if (saveDir.isEmpty())
 		saveDir = StelFileMgr::getUserDir();
-	}
 
 	QString fileName = QFileDialog::getSaveFileName(&StelMainView::getInstance(), 
 	                                                tr("Save Script"), 

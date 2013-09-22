@@ -126,18 +126,19 @@ void StelFileMgr::init()
 }
 
 
-QString StelFileMgr::findFile(const QString& path, const Flags& flags)
+QString StelFileMgr::findFile(const QString& path, Flags flags)
 {
+	qDebug() << path;
 	if (path.isEmpty())
-		throw std::runtime_error("Empty file path");
+		return "";
 	
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
 		if (fileFlagsCheck(path, flags))
 			return path;
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
+		qWarning() << QString("file does not match flags: %1").arg(path);
+		return "";
 	}
 
 	// Qt resource files
@@ -155,11 +156,12 @@ QString StelFileMgr::findFile(const QString& path, const Flags& flags)
 	{
 		if (fileFlagsCheck(path, flags))
 			return path;
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
+		qWarning() << QString("file does not match flags: %1").arg(path);
+		return "";
 	}
 	
-	throw std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData());
+	qWarning() << QString("file not found: %1").arg(path);
+	return "";
 }
 
 QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &flags)
@@ -375,14 +377,12 @@ QString StelFileMgr::getDesktopDir()
 {
 
 	if (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).isEmpty())
-		throw std::runtime_error("Can't find Desktop directory");
+		return "";
 
 	QString result = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
-
 	if (!QFileInfo(result).isDir())
-	{
-		throw std::runtime_error("Can't find Desktop directory");
-	}
+		return "";
+	
 	return result;
 }
 

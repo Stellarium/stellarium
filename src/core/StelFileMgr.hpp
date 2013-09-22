@@ -62,7 +62,7 @@ public:
 	//! of the specified path.  By specifying a flags parameter it is possible to constrain
 	//! the results to those matching various criteria.
 	//! If the path argument is a complete path (is a full path on single root OSes, or
-	//! unanbigiously identifies one and only one file on multi-root OSes), it will
+	//! unambigiously identifies one and only one file on multi-root OSes), it will
 	//! be tested for compliance with other conditions - the regular search path will
 	//! not be tested.
 	//! If you wish to search for a non-exiting file which is not in the search path
@@ -71,11 +71,7 @@ public:
 	//! @param path the name of the file to search for, for example "textures/fog.png".
 	//! @param flags options which constrain the result.
 	//! @return returns a full path of the file if found, else return an empty path.
-	//! @exception std::runtime_error what() -> "file not found: [filename]"
-	//! @exception std::runtime_error what() -> "file does not match flags: [fullpath]".
-	//! 		This exception occurs if a full path is passes at the path argument, but
-	//!		that path does not match the flags specified.
-	static QString findFile(const QString& path, const Flags& flags=(Flags)0);
+	static QString findFile(const QString& path, Flags flags=(Flags)0);
 
 	//! List all paths witihin the search paths that match the argument.
 	//! Similar to findFile(), but unlike it this function doesn't stop
@@ -148,13 +144,8 @@ public:
 
 	//! Get the user's Desktop directory.
 	//! This is a portable way to retrieve the directory for the user's desktop.
-	//! On Linux and OSX this is $HOME/Desktop.  For Windows, the system is queried
-	//! using SHGetSpecialFolderLocation.  If that doesn't work, the USERPROFILE
-	//! environment variable is checked, and if set, \\Desktop is appended, else
-	//! C:\\Windows\\Desktop is used.
-	//! @return the path to the user's desktop directory
-	//! @exception NOT_FOUND when the directory cannot be determined, or the
-	//!            OS doesn't provide one.
+	//! On Linux and OSX this is $HOME/Desktop. For Windows, we rely on Qt.
+	//! @return the path to the user's desktop directory or empty string if it can't be found.
 	static QString getDesktopDir();
 
 	//! Returns the path to the user directory.
@@ -163,14 +154,12 @@ public:
 	//! It will be the first directory in the path which is used when
 	//! trying to find most data files
 	//! @return the path to the user private data directory
-	//! @exception NOT_FOUND if the directory could not be found
 	static QString getUserDir();
 
-	//! Returns the path to the installation directory
+	//! Returns the path to the installation directory.
 	//! This is the directory where we expect to find scripts, nebulae, stars,
 	//! skycultures etc, and will be added at the end of the search path
-	//! @return the path to the installation data directory
-	//! @exception NOT_FOUND if the directory could not be found
+	//! @return the full path to the installation data directory
 	static QString getInstallationDir();
 
 	//! Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
