@@ -132,32 +132,35 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 	if (path.isEmpty())
 		return "";
 	
-	// explicitly specified relative paths
-	if (path[0] == '.')
-	{
-		if (fileFlagsCheck(path, flags))
-			return path;
-		qWarning() << QString("file does not match flags: %1").arg(path);
-		return "";
-	}
-
 	// Qt resource files
 	if (path.startsWith(":/"))
 		return path;
-
-	foreach (const QString& i, fileLocations)
+	
+	const QFileInfo fileInfo(path);
+	
+	// explicitly specified relative paths
+	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(i + "/" + path, flags))
-			return i + "/" + path;
-	}
-
-	// explicitly specified absolute paths
-	if ( isAbsolute(path) )
-	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(fileInfo, flags))
 			return path;
 		qWarning() << QString("file does not match flags: %1").arg(path);
 		return "";
+	}
+
+	// explicitly specified absolute paths
+	if (fileInfo.isAbsolute())
+	{
+		if (fileFlagsCheck(fileInfo, flags))
+			return path;
+		qWarning() << QString("file does not match flags: %1").arg(path);
+		return "";
+	}
+	
+	foreach (const QString& i, fileLocations)
+	{
+		const QFileInfo finfo(i + "/" + path);
+		if (fileFlagsCheck(finfo, flags))
+			return i + "/" + path;
 	}
 	
 	qWarning() << QString("file not found: %1").arg(path);
@@ -166,22 +169,10 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 
 QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &flags)
 {
-	if (path.isEmpty())
-		throw std::runtime_error("Empty file path");
-
 	QStringList filePaths;
-
-	// explicitly specified relative paths
-	if (path[0] == '.')
-	{
-		if (fileFlagsCheck(path, flags))
-		{
-			filePaths.append(path);
-			return filePaths;
-		}
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
-	}
+	
+	if (path.isEmpty())
+		return filePaths;
 
 	// Qt resource files
 	if (path.startsWith(":/"))
@@ -189,31 +180,32 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 		filePaths.append(path);
 		return filePaths;
 	}
+	
+	const QFileInfo fileInfo(path);
+	// explicitly specified relative paths
+	if (path[0] == '.')
+	{
+		if (fileFlagsCheck(fileInfo, flags))
+			filePaths.append(path);
+		return filePaths;
+	}
 
 	// explicitly specified absolute paths
-	if ( isAbsolute(path) )
+	if ( fileInfo.isAbsolute() )
 	{
-		if (fileFlagsCheck(path, flags))
-		{
+		if (fileFlagsCheck(fileInfo, flags))
 			filePaths.append(path);
-			return filePaths;
-		}
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
-	}
-
-	foreach (QString locationPath, fileLocations)
-	{
-		if (fileFlagsCheck(locationPath + "/" + path, flags))
-		{
-			filePaths.append(locationPath + "/" + path);
-		}
-	}
-
-	if (filePaths.isEmpty())
-		throw std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData());
-	else
 		return filePaths;
+	}
+
+	foreach (const QString& locationPath, fileLocations)
+	{
+		const QFileInfo finfo(locationPath + "/" + path);
+		if (fileFlagsCheck(finfo, flags))
+			filePaths.append(locationPath + "/" + path);
+	}
+
+	return filePaths;
 }
 
 QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive)
@@ -336,13 +328,14 @@ QString StelFileMgr::baseName(const QString& path)
 	return QFileInfo(path).baseName();
 }
 
-bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
+bool StelFileMgr::fileFlagsCheck(const QFileInfo& thePath, const Flags& flags)
 {
-	QFileInfo thePath(path);
+	const bool exists = thePath.exists();
+	
 	if (flags & New)
 	{
 		// if the file already exists, it is not a new file
-		if (thePath.exists())
+		if (exists)
 			return false;
 
 		// To be able to create a new file, we need to have a
@@ -353,8 +346,11 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 			return false;
 		}
 	}
-	else if (thePath.exists())
+	else if (exists)
 	{
+		if (flags==0)
+			return true;
+		
 		if ((flags & Writable) && !thePath.isWritable())
 			return false;
 

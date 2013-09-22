@@ -27,6 +27,8 @@
 #include <QString>
 #include <QStringList>
 
+class QFileInfo;
+
 //! Provides utilities for locating and handling files.
 //! StelFileMgr provides functions for locating files.  It maintains a list of
 //! directories in which to look for files called the search path. Typcially this
@@ -198,7 +200,7 @@ private:
 	//! @param flags a set of StelFileMgr::Flags to test against path
 	//! @return true if path passes all flag tests, else false
 	//! @exception misc
-	static bool fileFlagsCheck(const QString& path, const Flags& flags=(Flags)0);
+	static bool fileFlagsCheck(const QFileInfo& thePath, const Flags& flags=(Flags)0);
 
 	static QStringList fileLocations;
 
