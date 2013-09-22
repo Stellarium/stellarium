@@ -56,15 +56,9 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileName) const
 {
 	QMap<QString, StelLocation> res;
-	QString cityDataPath;
-	try
-	{
-		cityDataPath = StelFileMgr::findFile(fileName);
-	}
-	catch (std::runtime_error& e)
-	{
+	QString cityDataPath = StelFileMgr::findFile(fileName);
+	if (cityDataPath.isEmpty())
 		return res;
-	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly))
@@ -97,16 +91,12 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 {
 	// Load the cities from data file
 	QMap<QString, StelLocation> locations;
-	QString cityDataPath;
-	try
+	QString cityDataPath = StelFileMgr::findFile(fileName);
+	if (cityDataPath.isEmpty())
 	{
-		cityDataPath = StelFileMgr::findFile(fileName);
-	}
-	catch (std::runtime_error& e)
-	{
-		// Note it is quite normal to nor have a user locations file (e.g. first run)
+		// Note it is quite normal not to have a user locations file (e.g. first run)
 		if (!isUserLocation)
-			qWarning() << "WARNING: Failed to locate location data file: " << QDir::toNativeSeparators(fileName) << e.what();
+			qWarning() << "WARNING: Failed to locate location data file: " << QDir::toNativeSeparators(fileName);
 		return locations;
 	}
 
@@ -222,12 +212,8 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	modelAllLocation->setStringList(locations.keys());
 
 	// Append to the user location file
-	QString cityDataPath;
-	try
-	{
-		cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	}
-	catch (std::runtime_error& e)
+	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (cityDataPath.isEmpty())
 	{
 		if (!StelFileMgr::exists(StelFileMgr::getUserDir()+"/data"))
 		{
@@ -283,12 +269,8 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	modelAllLocation->setStringList(locations.keys());
 
 	// Resave the whole remaining user locations file
-	QString cityDataPath;
-	try
-	{
-		cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
-	}
-	catch (std::runtime_error& e)
+	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
+	if (cityDataPath.isEmpty())
 	{
 		if (!StelFileMgr::exists(StelFileMgr::getUserDir()+"/data"))
 		{

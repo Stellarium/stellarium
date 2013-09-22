@@ -151,6 +151,8 @@ void Exoplanets::init()
 		readSettingsFromConfig();
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
+		if (jsonCatalogPath.isEmpty())
+			return;
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");

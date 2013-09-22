@@ -235,14 +235,9 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		moduleFullPath += ".so";
 #endif
 #endif
-		try
-		{
-			moduleFullPath = StelFileMgr::findFile(moduleFullPath, StelFileMgr::File);
-		}
-		catch (std::runtime_error& e)
-		{
+		moduleFullPath = StelFileMgr::findFile(moduleFullPath, StelFileMgr::File);
+		if (moduleFullPath.isEmpty())
 			continue;
-		}
 
 		QPluginLoader loader(moduleFullPath);
 		if (!loader.load())

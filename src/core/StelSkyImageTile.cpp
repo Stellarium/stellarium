@@ -441,11 +441,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		}
 		else
 		{
-			try
-			{
-				absoluteImageURI = StelFileMgr::findFile(baseUrl+imageUrl);
-			}
-			catch (std::runtime_error& er)
+			absoluteImageURI = StelFileMgr::findFile(baseUrl+imageUrl);
+			if (absoluteImageURI.isEmpty())
 			{
 				// Maybe the user meant a file in stellarium local files
 				absoluteImageURI = imageUrl;

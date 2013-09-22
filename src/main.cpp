@@ -75,15 +75,9 @@ public:
 //! name specified on the command line located in the user data directory.
 void copyDefaultConfigFile(const QString& newPath)
 {
-	QString defaultConfigFilePath;
-	try
-	{
-		defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
-	}
-	catch (std::runtime_error& e)
-	{
+	QString defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
+	if (defaultConfigFilePath.isEmpty())
 		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_config.ini. Please check your installation.");
-	}
 	QFile::copy(defaultConfigFilePath, newPath);
 	if (!StelFileMgr::exists(newPath))
 	{
@@ -180,21 +174,12 @@ int main(int argc, char **argv)
 		configName = "config.ini";
 	}
 
-	QString configFileFullPath;
-	try
+	QString configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (configFileFullPath.isEmpty())
 	{
-		configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	}
-	catch (std::runtime_error& e)
-	{
-		try
-		{
-			configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::New);
-		}
-		catch (std::runtime_error& e)
-		{
+		configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::New);
+		if (configFileFullPath.isEmpty())
 			qFatal("Could not create configuration file %s.", qPrintable(configName));
-		}
 	}
 
 	QSettings* confSettings = NULL;
@@ -263,32 +248,18 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
 	// Add the DejaVu font that we use everywhere in the program
-	try
-	{
-		const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
-		if (!fName.isEmpty())
-			QFontDatabase::addApplicationFont(fName);
-	}
-	catch (std::runtime_error& e)
-	{
-		// Removed this warning practically allowing to package the program without the font file.
-		// This is useful for distribution having already a package for DejaVu font.
-		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
-	}
-
+	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
+	if (!fName.isEmpty())
+		QFontDatabase::addApplicationFont(fName);
+	
 	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
 	if (!fileFont.isEmpty())
 	{
-		try
-		{
-			const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
-			if (!afName.isEmpty() && !afName.contains("file not found"))
-				QFontDatabase::addApplicationFont(afName);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont) << " : " << e.what();
-		}
+		const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
+		if (!afName.isEmpty() && !afName.contains("file not found"))
+			QFontDatabase::addApplicationFont(afName);
+		else
+			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont);
 	}
 
 	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
@@ -305,14 +276,8 @@ int main(int argc, char **argv)
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
-	try
-	{
-		StelTranslator::init(StelFileMgr::findFile("data/iso639-1.utf8"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading translations: " << e.what() << endl;
-	}
+	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/iso639-1.utf8");
+	
 	// Use our custom translator for Qt translations as well
 	CustomQTranslator trans;
 	app.installTranslator(&trans);

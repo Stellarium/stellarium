@@ -122,45 +122,37 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
-	QString conArtFile;
-	try
-	{
-		conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
-	}
-	catch (std::runtime_error& e)
+	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
+	if (conArtFile.isEmpty())
 	{
 		qDebug() << "No constellationsart.fab file found for sky culture " << QDir::toNativeSeparators(skyCultureDir);
 	}
 
-	try
-	{
-		// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
-		deselectConstellations();
+	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
+	deselectConstellations();
 
-		loadLinesAndArt(StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
+	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab");
+	if (fic.isEmpty())
+		qWarning() << "ERROR loading constellation lines and art from file: " << fic;
+	else
+		loadLinesAndArt(fic, conArtFile, skyCultureDir);
 
-		// load constellation names
-		loadNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab"));
+	// load constellation names
+	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab");
+	if (fic.isEmpty())
+		qWarning() << "ERROR loading constellation names from file: " << fic;
+	else
+		loadNames(fic);
 
-		// Translate constellation names for the new sky culture
-		updateI18n();
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR: while loading new constellation data for sky culture "
-			<< QDir::toNativeSeparators(skyCultureDir) << ", reason: " << e.what() << endl;
-	}
+	// Translate constellation names for the new sky culture
+	updateI18n();
 
-	// TODO: do we need to have an else { clearBoundaries(); } ?
 	// load constellation boundaries
-	try
-	{
-		loadBoundaries(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR loading constellation boundaries file: " << e.what();
-	}
+	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+	if (fic.isEmpty())
+		qWarning() << "ERROR loading constellation boundaries file: " << fic;
+	else
+		loadBoundaries(fic);
 
 	lastLoadedSkyCulture = skyCultureDir;
 }
@@ -427,26 +419,10 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 		else
 		{
-			QString texturePath(texfile);
-			try
+			QString texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
+			if (texturePath.isEmpty())
 			{
-				texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
-			}
-			catch (std::runtime_error& e)
-			{
-				// if the texture isn't found in the skycultures/[culture] directory,
-				// try the central textures diectory.
-				qWarning() << "WARNING, could not locate texture file " << QDir::toNativeSeparators(texfile)
-					 << " in the skycultures/" << cultureName
-					 << " directory...  looking in general textures/ directory...";
-				try
-				{
-					texturePath = StelFileMgr::findFile(QString("textures/")+texfile);
-				}
-				catch(std::exception& e2)
-				{
-					qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile) << ": " << e2.what();
-				}
+				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
 			}
 
 			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
