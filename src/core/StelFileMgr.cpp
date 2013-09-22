@@ -228,9 +228,11 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 		return result;
 	}
 
+	const bool isPathAbsolute = QFileInfo(path).isAbsolute();
+			
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
-	if (QFileInfo(path).isAbsolute())
+	if (isPathAbsolute)
 		listPaths.append("");
 	else
 		listPaths = fileLocations;
@@ -238,7 +240,7 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	foreach (const QString& li, listPaths)
 	{
 		QFileInfo thisPath;
-		if (QFileInfo(path).isAbsolute())
+		if (isPathAbsolute)
 			thisPath.setFile(path);
 		else
 			thisPath.setFile(li+"/"+path);
@@ -251,7 +253,7 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 				if (fileIt != ".." && fileIt != ".")
 				{
 					QFileInfo fullPath;
-					if (QFileInfo(path).isAbsolute())
+					if (isPathAbsolute)
 						fullPath.setFile(path+"/"+fileIt);
 					else
 						fullPath.setFile(li+"/"+path+"/"+fileIt);

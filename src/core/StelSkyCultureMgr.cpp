@@ -34,16 +34,7 @@
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
-	QSet<QString> cultureDirNames;
-	
-	try
-	{
-		cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while trying list sky cultures:" << e.what();	
-	}
+	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
 	
 	foreach (const QString& dir, cultureDirNames)
 	{
