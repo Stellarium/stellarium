@@ -250,15 +250,15 @@ NebulaP NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
-	try
+	QString ngcPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat");
+	QString ngcNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat");
+	if (ngcPath.isEmpty() || ngcNamesPath.isEmpty())
 	{
-		loadNGC(StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat"));
-		loadNGCNames(StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat"));
+		qWarning() << "ERROR while loading nebula data set " << setName;
+		return;
 	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
-	}
+	loadNGC(ngcPath);
+	loadNGCNames(ngcNamesPath);
 }
 
 // Look for a nebulae by XYZ coords

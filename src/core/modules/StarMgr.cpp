@@ -277,7 +277,7 @@ void StarMgr::copyDefaultConfigFile()
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/default");
 		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
 		qDebug() << "Creates file " << QDir::toNativeSeparators(starConfigFileFullPath);
-		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), starConfigFileFullPath);
+		QFile::copy(StelFileMgr::getInstallationDir()+"/stars/default/defaultStarsConfig.json", starConfigFileFullPath);
 		QFile::setPermissions(starConfigFileFullPath, QFile::permissions(starConfigFileFullPath) | QFileDevice::WriteOwner);
 	}
 	catch (std::runtime_error& e)
@@ -292,11 +292,8 @@ void StarMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	try
-	{
-		starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	}
-	catch (std::runtime_error& e)
+	starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (starConfigFileFullPath.isEmpty())
 	{
 		qWarning() << "Could not find the starsConfig.json file: will copy the default one.";
 		copyDefaultConfigFile();
@@ -383,12 +380,8 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	if (!(StelFileMgr::isAbsolute(catalogFileName)))
 		catalogFileName = "stars/default/"+catalogFileName;
 
-	QString catalogFilePath;
-	try
-	{
-		catalogFilePath = StelFileMgr::findFile(catalogFileName);
-	}
-	catch (std::runtime_error e)
+	QString catalogFilePath = StelFileMgr::findFile(catalogFileName);
+	if (catalogFilePath.isEmpty())
 	{
 		// The file is supposed to be checked, but we can't find it
 		if (checked)
@@ -515,16 +508,11 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	else
 	{
-		try
-		{
-			spectral_array = initStringListFromFile(StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name));
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR while loading data from "
-					   << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name))
-					   << ": " << e.what();
-		}
+		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name);
+		if (tmpFic.isEmpty())
+			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
+		else
+			spectral_array = initStringListFromFile(tmpFic);
 	}
 
 	const QString cat_hip_cids_file_name = starsConfig.value("hipComponentsIdsFile").toString();
@@ -534,15 +522,11 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	else
 	{
-		try
-		{
-			component_array = initStringListFromFile(StelFileMgr::findFile("stars/default/" + cat_hip_cids_file_name));
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR while loading data from "
-					   << QDir::toNativeSeparators(("stars/default/" + cat_hip_cids_file_name)) << ": " << e.what();
-		}
+		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_cids_file_name);
+		if (tmpFic.isEmpty())
+			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_cids_file_name));
+		else
+			component_array = initStringListFromFile(tmpFic);
 	}
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
@@ -1279,32 +1263,23 @@ void StarMgr::setFontSize(double newFontSize)
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 {
 	// Load culture star names in english
-	try
-	{
-		loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
-	}
-	catch(std::runtime_error& e)
-	{
-		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir) << ": " << e.what();
-	}
+	QString fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab");
+	if (fic.isEmpty())
+		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir);
+	else
+		loadCommonNames(fic);
 
-	try
-	{
-		loadSciNames(StelFileMgr::findFile("stars/default/name.fab"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: could not load scientific star names file: " << e.what();
-	}
-
-	try
-	{
-		loadGcvs(StelFileMgr::findFile("stars/default/gcvs_hip_part.dat"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: could not load variable stars file: " << e.what();
-	}
+	fic = StelFileMgr::findFile("stars/default/name.fab");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
+	else
+		loadSciNames(fic);
+	
+	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
+	else
+		loadGcvs(fic);
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));

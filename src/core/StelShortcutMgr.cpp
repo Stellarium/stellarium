@@ -235,6 +235,11 @@ bool StelShortcutMgr::copyDefaultFile()
 		QString shortcutsFileFullPath = StelFileMgr::getUserDir() + "/data/shortcuts.json";
 		qDebug() << "Creating file" << QDir::toNativeSeparators(shortcutsFileFullPath);
 		QString defaultPath = StelFileMgr::findFile("data/default_shortcuts.json");
+		if (defaultPath.isEmpty())
+		{
+			qWarning() << "Could not create shortcuts file data/shortcuts.json.";
+			return false;
+		}
 		QFile::copy(defaultPath, shortcutsFileFullPath);
 	}
 	catch (std::runtime_error& e)
@@ -258,8 +263,7 @@ bool StelShortcutMgr::loadShortcuts(const QString& filePath, bool overload)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "Error while parsing shortcuts file. Error: "
-		           << e.what();
+		qWarning() << "Error while parsing shortcuts file. Error: " << e.what();
 		return false;
 	}
 	// parsing shortcuts groups from file
@@ -377,13 +381,8 @@ void StelShortcutMgr::restoreDefaultShortcuts()
 
 void StelShortcutMgr::saveShortcuts()
 {
-	QString shortcutsFilePath = StelFileMgr::getUserDir() + "/data/shortcuts.json";
-	try
-	{
-		StelFileMgr::findFile(shortcutsFilePath,
-		                      StelFileMgr::Flags(StelFileMgr::File | StelFileMgr::Writable));
-	}
-	catch (std::runtime_error& e)
+	QString shortcutsFilePath = StelFileMgr::findFile(StelFileMgr::getUserDir() + "/data/shortcuts.json", StelFileMgr::Flags(StelFileMgr::File | StelFileMgr::Writable));
+	if (shortcutsFilePath.isEmpty())
 	{
 		qWarning() << "Creating a new shortcuts.json file...";
 		QString userDataPath = StelFileMgr::getUserDir() + "/data";
