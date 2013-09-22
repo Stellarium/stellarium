@@ -21,6 +21,7 @@
 #include "StelFader.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
+#include "StelFileMgr.hpp"
 
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
@@ -54,7 +55,7 @@ void MilkyWay::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	tex = StelApp::getInstance().getTextureManager().createTexture("textures/milkyway.png");
+	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
 

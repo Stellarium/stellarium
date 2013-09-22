@@ -142,7 +142,7 @@ void TelescopeControl::init()
 		
 		//Load OpenGL textures
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
-		selectionTexture = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
