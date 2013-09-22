@@ -135,7 +135,7 @@ void Supernovae::init()
 		if (sneJsonPath.isEmpty())
 			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());

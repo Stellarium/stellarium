@@ -25,6 +25,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
@@ -78,7 +79,7 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -1101,7 +1102,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
 	 :radiusMin(radiusMin),radiusMax(radiusMax)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture("textures/"+texname);
+	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
 }
 
 Ring::~Ring(void)

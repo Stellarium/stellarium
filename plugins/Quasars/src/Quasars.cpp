@@ -151,7 +151,7 @@ void Quasars::init()
 		if (catalogJsonPath.isEmpty())
 			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
