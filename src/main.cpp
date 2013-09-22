@@ -321,6 +321,11 @@ int main(int argc, char **argv)
 	app.installTranslator(&trans);
 
 	StelMainView mainWin;
+	// some basic diagnostics
+	if (!QGLFormat::hasOpenGL()){
+	  QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+	}
+	qDebug() << "OpenGLVersionflags: " << QGLFormat::openGLVersionFlags();
 	mainWin.init(confSettings);
 	app.exec();
 	mainWin.deinit();
