@@ -153,25 +153,17 @@ void StelScriptMgr::addModules()
 QStringList StelScriptMgr::getScriptList()
 {
 	QStringList scriptFiles;
-	try
-	{
-		QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
-		foreach(QString f, files)
-		{
+
+	QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
-			QRegExp fileRE("^.*\\.(ssc|sts)$");
+	QRegExp fileRE("^.*\\.(ssc|sts)$");
 #else // ENABLE_STRATOSCRIPT_COMPAT
-			QRegExp fileRE("^.*\\.ssc$");
+	QRegExp fileRE("^.*\\.ssc$");
 #endif // ENABLE_STRATOSCRIPT_COMPAT
-			if (fileRE.exactMatch(f))
-				scriptFiles << f;
-		}
-	}
-	catch (std::runtime_error& e)
+	foreach(const QString& f, files)
 	{
-		QString msg = QString("WARNING: could not list scripts: %1").arg(e.what());
-		qWarning() << msg;
-		emit(scriptDebug(msg));
+		if (fileRE.exactMatch(f))
+			scriptFiles << f;
 	}
 	return scriptFiles;
 }
