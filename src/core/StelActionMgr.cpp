@@ -11,6 +11,7 @@ StelAction::StelAction(const QString& actionId,
 					   const QString& groupId,
 					   const QString& text,
 					   const QString& primaryKey,
+					   const QString& altKey,
 					   bool global):
 	QObject(StelApp::getInstance().getStelActionManager()),
 	checkable(false),
@@ -18,11 +19,12 @@ StelAction::StelAction(const QString& actionId,
 	group(groupId),
 	text(text),
 	global(global),
+	keySequence(primaryKey),
+	altKeySequence(altKey),
 	target(NULL),
 	property(NULL)
 {
 	setObjectName(actionId);
-	keySequence = QKeySequence(primaryKey);
 }
 
 void StelAction::setShortcut(const QString& key)
@@ -122,9 +124,11 @@ StelActionMgr::~StelActionMgr()
 }
 
 StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
-					  const QString& shortcut, QObject* target, const char* slot, bool global)
+                                     QObject* target, const char* slot,
+                                     const QString& shortcut, const QString& altShortcut,
+                                     bool global)
 {
-	StelAction* action = new StelAction(id, groupId, text, shortcut, global);
+	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
 	action->connectToObject(target, slot);
 	return action;
 }

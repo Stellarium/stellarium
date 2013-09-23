@@ -173,34 +173,34 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 
 	// XXX: this should probably go into the script manager.
-	actionsMgr->addAction("actionQuit_Global", "Miscellaneous", N_("Quit"), "Ctrl+Q", this, "quit()");
-	actionsMgr->addAction("actionIncrease_Script_Speed", "Date and Time", N_("Speed up the script execution rate"), "", this, "increaseScriptSpeed()");
-	actionsMgr->addAction("actionDecrease_Script_Speed", "Date and Time", N_("Slow down the script execution rate"), "", this, "decreaseScriptSpeed()");
-	actionsMgr->addAction("actionSet_Real_Script_Speed", "Date and Time", N_("Set the normal script execution rate"), "", this, "setRealScriptSpeed()");
-	actionsMgr->addAction("actionStop_Script", "Date and Time", N_("Stop script execution"), "Ctrl+D, S", this, "stopScript()");
-	actionsMgr->addAction("actionPause_Script", "Date and Time", N_("Pause script execution"), "Ctrl+D, P", this, "pauseScript()");
-	actionsMgr->addAction("actionResume_Script", "Date and Time", N_("Resume script execution"), "Ctrl+D, R", this, "resumeScript()");
+	actionsMgr->addAction("actionQuit_Global", "Miscellaneous", N_("Quit"), this, "quit()", "Ctrl+Q");
+	actionsMgr->addAction("actionIncrease_Script_Speed", "Date and Time", N_("Speed up the script execution rate"), this, "increaseScriptSpeed()");
+	actionsMgr->addAction("actionDecrease_Script_Speed", "Date and Time", N_("Slow down the script execution rate"), this, "decreaseScriptSpeed()");
+	actionsMgr->addAction("actionSet_Real_Script_Speed", "Date and Time", N_("Set the normal script execution rate"), this, "setRealScriptSpeed()");
+	actionsMgr->addAction("actionStop_Script", "Date and Time", N_("Stop script execution"), this, "stopScript()", "Ctrl+D, S");
+	actionsMgr->addAction("actionPause_Script", "Date and Time", N_("Pause script execution"), this, "pauseScript()", "Ctrl+D, P");
+	actionsMgr->addAction("actionResume_Script", "Date and Time", N_("Resume script execution"), this, "resumeScript()", "Ctrl+D, R");
 
 #ifdef ENABLE_SCRIPT_CONSOLE
-	actionsMgr->addAction("actionShow_ScriptConsole_Window_Global", "Windows", N_("Script console window"), "F12", scriptConsole, "visible", true);
+	actionsMgr->addAction("actionShow_ScriptConsole_Window_Global", "Windows", N_("Script console window"), scriptConsole, "visible", "F12", "", true);
 #endif
 
-	actionsMgr->addAction("actionShow_Help_Window_Global", "Windows", N_("Help window"), "F1", helpDialog, "visible", true);
-	actionsMgr->addAction("actionShow_Configuration_Window_Global", "Windows", N_("Configuration window"), "F2", configurationDialog, "visible", true);
-	actionsMgr->addAction("actionShow_Search_Window_Global", "Windows", N_("Search window"), "F3", searchDialog, "visible", true)->setAltShortcut("Ctrl+F");
-	actionsMgr->addAction("actionShow_SkyView_Window_Global", "Windows", N_("Sky and viewing options window"), "F4", viewDialog, "visible", true);
-	actionsMgr->addAction("actionShow_DateTime_Window_Global", "Windows", N_("Date/time window"), "F5", dateTimeDialog, "visible", true);
-	actionsMgr->addAction("actionShow_Location_Window_Global", "Windows", N_("Location window"), "F6", locationDialog, "visible", true);
-	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", "Windows", N_("Shortcuts window"), "F7", shortcutsDialog, "visible", true);
-	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", "Miscellaneous", N_("Copy selected object information to clipboard"), "Ctrl+C", this, "copySelectedObjectInfo()", true);
-	actionsMgr->addAction("actionToggle_GuiHidden_Global", "Miscellaneous", N_("Toggle visibility of GUI"), "Ctrl+T", this, "visible", true);
+	actionsMgr->addAction("actionShow_Help_Window_Global", "Windows", N_("Help window"), helpDialog, "visible", "F1", "", true);
+	actionsMgr->addAction("actionShow_Configuration_Window_Global", "Windows", N_("Configuration window"), configurationDialog, "visible", "F2", "", true);
+	actionsMgr->addAction("actionShow_Search_Window_Global", "Windows", N_("Search window"), searchDialog, "visible", "F3", "Ctrl+F", true);
+	actionsMgr->addAction("actionShow_SkyView_Window_Global", "Windows", N_("Sky and viewing options window"), viewDialog, "visible", "F4", "", true);
+	actionsMgr->addAction("actionShow_DateTime_Window_Global", "Windows", N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
+	actionsMgr->addAction("actionShow_Location_Window_Global", "Windows", N_("Location window"), locationDialog, "visible", "F6", "", true);
+	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", "Windows", N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
+	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", "Miscellaneous", N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);
+	actionsMgr->addAction("actionToggle_GuiHidden_Global", "Miscellaneous", N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setAutoHideHorizontalButtonBar(conf->value("gui/auto_hide_horizontal_toolbar", true).toBool());
 	setAutoHideVerticalButtonBar(conf->value("gui/auto_hide_vertical_toolbar", true).toBool());
-	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", "Miscellaneous", N_("Auto hide horizontal button bar"), "", this, "autoHideHorizontalButtonBar");
-	actionsMgr->addAction("actionAutoHideVerticalButtonBar", "Miscellaneous", N_("Auto hide vertical button bar"), "", this, "autoHideVerticalButtonBar");
+	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", "Miscellaneous", N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
+	actionsMgr->addAction("actionAutoHideVerticalButtonBar", "Miscellaneous", N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
 
 #ifndef DISABLE_SCRIPTING
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();

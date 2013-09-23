@@ -145,7 +145,7 @@ void StelScriptMgr::initActions()
 	{
 		QString actionId = "actionScript/" + script;
 		StelAction* action = actionMgr->addAction(
-		            actionId, N_("Script"), getName(script), "", mapper, "map()");
+		            actionId, N_("Script"), getName(script), mapper, "map()");
 		mapper->setMapping(action, script);
 	}
 	connect(mapper, SIGNAL(mapped(QString)), this, SLOT(runScript(QString)));
