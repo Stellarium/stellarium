@@ -157,13 +157,13 @@ void TelescopeControl::init()
 			QString shortcut = QString("Ctrl+%1").arg(i);
 			QString text;
 			text = q_("Move telescope #%1 to selected object").arg(i);
-			addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToSelectedObject()");
+			addAction(name, "Telescope Control", text, "slewTelescopeToSelectedObject()", shortcut);
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			addAction(name, "Telescope Control", text, shortcut, "slewTelescopeToViewDirection()");
+			addAction(name, "Telescope Control", text, "slewTelescopeToViewDirection()", shortcut);
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
@@ -172,7 +172,7 @@ void TelescopeControl::init()
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
 
-		addAction("actionShow_Slew_Window", "TelescopeControl", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", slewDialog, "visible");
+		addAction("actionShow_Slew_Window", "TelescopeControl", N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
 
 		//Create toolbar button
 		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");

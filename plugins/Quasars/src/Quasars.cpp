@@ -155,8 +155,8 @@ void Quasars::init()
 		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Quasars", "Quasars", N_("Show quasars"), "Ctrl+Alt+Q", "quasarsVisible");
-		addAction("actionShow_Quasars_ConfigDialog", "Quasars", N_("Quasars configuration window"), "", configDialog, "visible");
+		addAction("actionShow_Quasars", "Quasars", N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
+		addAction("actionShow_Quasars_ConfigDialog", "Quasars", N_("Quasars configuration window"), configDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");

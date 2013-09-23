@@ -141,12 +141,14 @@ protected:
 
 	//! convenience methods to add an action to the StelActionMgr object.
 	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
-								const QString& shortcut, QObject* target, const char* slot);
+	                            QObject* target, const char* slot,
+	                            const QString& shortcut="", const QString& altShortcut="");
 
 	//! convenience methods to add an action to the StelActionMgr object.
 	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
-								const QString& shortcut, const char* slot) {
-		return addAction(id, groupId, text, shortcut, this, slot);
+	                            const char* slot,
+	                            const QString& shortcut="", const QString& altShortcut="") {
+		return addAction(id, groupId, text, this, slot, shortcut, altShortcut);
 	}
 };
 

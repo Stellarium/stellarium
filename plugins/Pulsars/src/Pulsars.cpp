@@ -155,8 +155,8 @@ void Pulsars::init()
 		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Pulsars", "Pulsars", N_("Show pulsars"), "Ctrl+Alt+P", "pulsarsVisible");
-		addAction("actionShow_Pulsars_ConfigDialog", "Pulsars", N_("Pulsars configuration window"), "", configDialog, "visible");
+		addAction("actionShow_Pulsars", "Pulsars", N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
+		addAction("actionShow_Pulsars_ConfigDialog", "Pulsars", N_("Pulsars configuration window"), configDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");

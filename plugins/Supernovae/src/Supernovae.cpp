@@ -138,7 +138,7 @@ void Supernovae::init()
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Supernovae_ConfigDialog", "Supernovae", N_("Historical Supernovae configuration window"), "", configDialog, "visible");
+		addAction("actionShow_Supernovae_ConfigDialog", "Supernovae", N_("Historical Supernovae configuration window"), configDialog, "visible");
 	}
 	catch (std::runtime_error &e)
 	{

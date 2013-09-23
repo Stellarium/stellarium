@@ -120,7 +120,7 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
-	addAction("actionShow_Nebulas", "Display Options", N_("Deep-sky objects"), "D", "flagHintDisplayed")->setAltShortcut("N");
+	addAction("actionShow_Nebulas", "Display Options", N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 }
 
 struct DrawNebulaFuncObject
