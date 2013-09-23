@@ -1,5 +1,6 @@
 
 #include "StelActionMgr.hpp"
+#include "StelApp.hpp"
 
 #include <QVariant>
 #include <QDebug>
@@ -11,6 +12,7 @@ StelAction::StelAction(const QString& actionId,
 					   const QString& text,
 					   const QString& primaryKey,
 					   bool global):
+	QObject(StelApp::getInstance().getStelActionManager()),
 	checkable(false),
 	checked(false),
 	group(groupId),
@@ -124,7 +126,6 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
 {
 	StelAction* action = new StelAction(id, groupId, text, shortcut, global);
 	action->connectToObject(target, slot);
-	action->setParent(this);
 	return action;
 }
 
