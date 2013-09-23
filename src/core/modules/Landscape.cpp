@@ -114,32 +114,10 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
-	QString path;
-	try
-	{
-		path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
-		return path;
-	}
-	catch (std::runtime_error& e)
-	{
-#ifdef BUILD_FOR_MAEMO
-		if (!basename.endsWith(".pvr"))
-		{
-			QString tmp = basename;
-			tmp.replace(".png", ".pvr");
-			try
-			{
-				tmp = getTexturePath(tmp, landscapeId);
-				tmp.replace(".pvr", ".png");
-				return tmp;
-			}
-			catch (std::runtime_error& e)
-			{;}
-		}
-#endif
+	QString path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
+	if (path.isEmpty())
 		path = StelFileMgr::findFile("textures/" + basename);
-		return path;
-	}
+	return path;
 }
 
 LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false), calibrated(false)

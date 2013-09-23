@@ -484,14 +484,10 @@ void StelMainScriptAPI::removeSkyImage(const QString& id)
 
 void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 {
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("scripts/" + filename);
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("scripts/" + filename);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename);
 		return;
 	}
 
@@ -520,14 +516,10 @@ void StelMainScriptAPI::dropSound(const QString& id)
 
 void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("scripts/" + filename);
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("scripts/" + filename);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename);
 		return;
 	}
 

@@ -20,7 +20,6 @@
  * Principal implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
-#include <QSettings>
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
@@ -114,13 +113,10 @@ const float Refraction::MIN_APP_ALTITUDE_SIN_F=(float)Refraction::MIN_APP_ALTITU
 const double Refraction::TRANSITION_WIDTH_GEO_DEG_F=(float)Refraction::TRANSITION_WIDTH_GEO_DEG;
 const double Refraction::TRANSITION_WIDTH_APP_DEG_F=(float)Refraction::TRANSITION_WIDTH_APP_DEG;
 
-Refraction::Refraction() : //pressure(1013.f), temperature(10.f),
+Refraction::Refraction() : pressure(1013.f), temperature(10.f),
 	preTransfoMat(Mat4d::identity()), invertPreTransfoMat(Mat4d::identity()), preTransfoMatf(Mat4f::identity()), invertPreTransfoMatf(Mat4f::identity()),
 	postTransfoMat(Mat4d::identity()), invertPostTransfoMat(Mat4d::identity()), postTransfoMatf(Mat4f::identity()), invertPostTransfoMatf(Mat4f::identity())
 {
-  QSettings* conf = StelApp::getInstance().getSettings();
-  pressure=conf->value("landscape/pressure_mbar", 1013.0f).toFloat();
-  temperature=conf->value("landscape/temperature_C", 15.0f).toFloat();
 	updatePrecomputed();
 }
 
