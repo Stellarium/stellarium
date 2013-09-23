@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-27 19:18+0700\n"
-"PO-Revision-Date: 2013-08-28 01:39+0000\n"
+"POT-Creation-Date: 2013-09-10 20:03+0700\n"
+"PO-Revision-Date: 2013-09-08 11:13+0000\n"
 "Last-Translator: Ardian Wardhana <Unknown>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-29 04:40+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-09-11 04:49+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1286
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1288
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1294
 msgid "Ecliptic"
 msgstr "Ekliptika"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1276
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1282
 msgid "Equator"
 msgstr "Ekuator"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1284
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1290
 msgid "Horizon"
 msgstr "Cakrawala"
 
@@ -37,20 +37,20 @@ msgstr "Cakrawala"
 msgid "Galactic Plane"
 msgstr "Bidang Galaksi"
 
-#: src/core/modules/LandscapeMgr.cpp:523
+#: src/core/modules/LandscapeMgr.cpp:527
 msgid "Author: "
 msgstr "Pembuat: "
 
-#: src/core/modules/LandscapeMgr.cpp:526
+#: src/core/modules/LandscapeMgr.cpp:530
 msgid "Location: "
 msgstr "Lokasi: "
 
-#: src/core/modules/LandscapeMgr.cpp:531
+#: src/core/modules/LandscapeMgr.cpp:535
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:535
+#: src/core/modules/LandscapeMgr.cpp:539
 msgid "Planet: "
 msgstr "Planet: "
 
@@ -768,31 +768,31 @@ msgstr "Tidak ditemukan"
 msgid "Found"
 msgstr "Ditemukan"
 
-#: src/gui/ConfigurationDialog.cpp:436 src/gui/ConfigurationDialog.cpp:438
+#: src/gui/ConfigurationDialog.cpp:437 src/gui/ConfigurationDialog.cpp:439
 msgid "Select screenshot directory"
 msgstr "Pilih direktori tangkapan layar"
 
-#: src/gui/ConfigurationDialog.cpp:663
+#: src/gui/ConfigurationDialog.cpp:666
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Medan pandang saat mulai: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:671
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Arah pandang saat mulai Azimut/Ketinggian: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:714
+#: src/gui/ConfigurationDialog.cpp:717
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:379
 msgid "Authors"
 msgstr "Pembuat"
 
-#: src/gui/ConfigurationDialog.cpp:715 src/gui/ViewDialog.cpp:451
+#: src/gui/ConfigurationDialog.cpp:718 src/gui/ViewDialog.cpp:454
 msgid "Contact"
 msgstr "Kontak"
 
-#: src/gui/ConfigurationDialog.cpp:798
+#: src/gui/ConfigurationDialog.cpp:801
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
@@ -802,19 +802,19 @@ msgstr "Kontak"
 msgid "Author"
 msgstr "Pembuat"
 
-#: src/gui/ConfigurationDialog.cpp:802
+#: src/gui/ConfigurationDialog.cpp:805
 msgid "License"
 msgstr "Lisensi"
 
-#: src/gui/ConfigurationDialog.cpp:826
+#: src/gui/ConfigurationDialog.cpp:829
 msgid "Running script: "
 msgstr "Skrip yang sedang berjalan: "
 
-#: src/gui/ConfigurationDialog.cpp:833
+#: src/gui/ConfigurationDialog.cpp:836
 msgid "Running script: [none]"
 msgstr "Skrip yang sedang berjalan: [tidak ada]"
 
-#: src/gui/ConfigurationDialog.cpp:898
+#: src/gui/ConfigurationDialog.cpp:901
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -822,16 +822,16 @@ msgstr ""
 "Telah selesai mengunduh katalog bintang baru!\n"
 "Jalankan ulang Stellarium untuk menampilkannya."
 
-#: src/gui/ConfigurationDialog.cpp:902
+#: src/gui/ConfigurationDialog.cpp:905
 msgid "All available star catalogs have been installed."
 msgstr "Seluruh katalog bintang yang tersedia telah dipasang."
 
-#: src/gui/ConfigurationDialog.cpp:907
+#: src/gui/ConfigurationDialog.cpp:910
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Ambil katalog %1 dari %2"
 
-#: src/gui/ConfigurationDialog.cpp:914
+#: src/gui/ConfigurationDialog.cpp:917
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -840,7 +840,7 @@ msgstr ""
 "Mengunduh %1...\n"
 "(Anda dapat menutup jendela ini.)"
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:924
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -851,7 +851,7 @@ msgstr ""
 "Jumlah bintang: %2 juta\n"
 "Kisaran magnitudo: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:964 src/gui/ConfigurationDialog.cpp:1000
+#: src/gui/ConfigurationDialog.cpp:967 src/gui/ConfigurationDialog.cpp:1003
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -860,11 +860,11 @@ msgstr ""
 "Kesalahan mengunduh %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1052
+#: src/gui/ConfigurationDialog.cpp:1055
 msgid "Verifying file integrity..."
 msgstr "Memverifikasi integritas berkas..."
 
-#: src/gui/ConfigurationDialog.cpp:1056
+#: src/gui/ConfigurationDialog.cpp:1059
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -874,123 +874,123 @@ msgstr ""
 "Berkas rusak."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1129
+#: src/gui/ConfigurationDialog.cpp:1132
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "Without correction"
-msgstr ""
+msgstr "Tanpa koreksi"
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1143
-msgid "IAU (1952)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1144
-msgid "Astronomical Ephemeris (1960)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1145
-msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
-
 #: src/gui/ConfigurationDialog.cpp:1146
-msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgid "IAU (1952)"
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1147
-msgid "Stephenson (1978)"
-msgstr ""
+msgid "Astronomical Ephemeris (1960)"
+msgstr "Astronomical Ephemeris (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1148
-msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
+msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1149
-msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgid "Muller & Stephenson (1975)"
+msgstr "Muller & Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1150
-msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgid "Stephenson (1978)"
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1151
-msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgid "Schmadel & Zech (1979)"
+msgstr "Schmadel & Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1152
-msgid "Espenak (1987, 1989)"
-msgstr ""
+msgid "Morrison & Stephenson (1982)"
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1153
-msgid "Borkowski (1988)"
-msgstr ""
+msgid "Stephenson & Morrison (1984)"
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1154
-msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgid "Stephenson & Houlden (1986)"
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1155
-msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgid "Espenak (1987, 1989)"
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1156
-msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgid "Borkowski (1988)"
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1157
-msgid "Stephenson (1997)"
-msgstr ""
+msgid "Schmadel & Zech (1988)"
+msgstr "Schmadel & Zech (1988)"
+
+#: src/gui/ConfigurationDialog.cpp:1158
+msgid "Chapront-Touze & Chapront (1991)"
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1159
-msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgid "Stephenson & Morrison (1995)"
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1160
-msgid "JPL Horizons"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1161
-msgid "Meeus & Simons (2000)"
-msgstr ""
+msgid "Stephenson (1997)"
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1162
-msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
+msgstr "Meeus (1998) (dengan Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1163
-msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgid "JPL Horizons"
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1164
-msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgid "Meeus & Simons (2000)"
+msgstr "Meeus & Simons (2000)"
+
+#: src/gui/ConfigurationDialog.cpp:1165
+msgid "Montenbruck & Pfleger (2000)"
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1166
-msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgid "Reingold & Dershowitz (2002, 2007)"
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1167
-msgid "Reijs (2006)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1168
-msgid "Banjevic (2006)"
-msgstr ""
+msgid "Morrison & Stephenson (2004, 2005)"
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1169
-msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgid "Espenak & Meeus (2006)"
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1170
+msgid "Reijs (2006)"
+msgstr "Reijs (2006)"
+
+#: src/gui/ConfigurationDialog.cpp:1171
+msgid "Banjevic (2006)"
+msgstr "Banjevic (2006)"
+
+#: src/gui/ConfigurationDialog.cpp:1172
+msgid "Islam, Sadiq & Qureshi (2008, 2013)"
+msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
+
+#: src/gui/ConfigurationDialog.cpp:1173
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -1180,31 +1180,31 @@ msgstr "Spasi"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:512
+#: src/gui/ViewDialog.cpp:515
 msgid "No description"
 msgstr "Tidak ada penjelasan"
 
-#: src/gui/ViewDialog.cpp:628
+#: src/gui/ViewDialog.cpp:631
 msgid "No shooting stars"
 msgstr "Tidak ada bintang jatuh"
 
-#: src/gui/ViewDialog.cpp:631
+#: src/gui/ViewDialog.cpp:634
 msgid "Normal rate"
 msgstr "Laju normal"
 
-#: src/gui/ViewDialog.cpp:634
+#: src/gui/ViewDialog.cpp:637
 msgid "Standard Perseids rate"
 msgstr "Laju Perseid standar"
 
-#: src/gui/ViewDialog.cpp:637
+#: src/gui/ViewDialog.cpp:640
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:640
+#: src/gui/ViewDialog.cpp:643
 msgid "Exceptional Leonid rate"
 msgstr "Laju Leonid tinggi"
 
-#: src/gui/ViewDialog.cpp:643
+#: src/gui/ViewDialog.cpp:646
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Laju tertinggi (Leonid 1966)"
 
@@ -1330,7 +1330,7 @@ msgstr "Universitas Harvard (USA)"
 
 #: src/gui/ShortcutsDialog.cpp:499
 msgid "Action"
-msgstr ""
+msgstr "Tindakan"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Primary shortcut"
@@ -1356,7 +1356,7 @@ msgstr ""
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
-msgstr ""
+msgstr "tahun"
 
 #: src/main.cpp:373
 msgid "This system does not support OpenGL."
@@ -1744,27 +1744,27 @@ msgstr "B"
 #. TRANSLATORS: Type of object
 #: src/translations.h:153
 msgid "planet"
-msgstr ""
+msgstr "planet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:155
 msgid "comet"
-msgstr ""
+msgstr "komet"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:157
 msgid "asteroid"
-msgstr ""
+msgstr "asteroid"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:159
 msgid "moon"
-msgstr ""
+msgstr "bulan"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:161
 msgid "plutoid"
-msgstr ""
+msgstr "plutoid"
 
 #: src/translations.h:165
 msgid "Arabic"
@@ -2064,7 +2064,7 @@ msgstr ""
 
 #: src/translations.h:275
 msgid ""
-"Screensaver of various happenings in the Solar System. 177 events in all!"
+"Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
 
 #: src/translations.h:276
@@ -3259,16 +3259,16 @@ msgstr "Balikkan pemandangan secara horizontal"
 msgid "Full-screen mode"
 msgstr "Modus layar-penuh"
 
-#: src/translations.h:583 src/ui_viewDialog.h:1226
+#: src/translations.h:583 src/ui_viewDialog.h:1232
 msgid "Atmosphere"
 msgstr "Atmosfer"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1271
+#: src/translations.h:584 src/ui_viewDialog.h:1277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Azimuthal grid"
 msgstr "Grid azimutal"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1293
+#: src/translations.h:585 src/ui_viewDialog.h:1299
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Cardinal points"
 msgstr "Titik mata angin"
@@ -3297,7 +3297,7 @@ msgstr "Garis rasi bintang"
 msgid "Deep-sky objects background images"
 msgstr ""
 
-#: src/translations.h:591 src/ui_viewDialog.h:1270
+#: src/translations.h:591 src/ui_viewDialog.h:1276
 msgid "Ecliptic J2000 grid"
 msgstr "Kisi ekliptik J2000"
 
@@ -3311,12 +3311,12 @@ msgstr "Garis ekliptika"
 msgid "Equator line"
 msgstr "Garis ekuator"
 
-#: src/translations.h:594 src/ui_viewDialog.h:1269
+#: src/translations.h:594 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial grid"
 msgstr "Grid ekuatorial"
 
-#: src/translations.h:595 src/ui_viewDialog.h:1268
+#: src/translations.h:595 src/ui_viewDialog.h:1274
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equatorial J2000 grid"
 msgstr "Grid ekuatorial J2000"
@@ -3325,12 +3325,12 @@ msgstr "Grid ekuatorial J2000"
 msgid "Fog"
 msgstr "Kabut"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1272
+#: src/translations.h:597 src/ui_viewDialog.h:1278
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic grid"
 msgstr "Grid galaksi"
 
-#: src/translations.h:598 src/ui_viewDialog.h:1292
+#: src/translations.h:598 src/ui_viewDialog.h:1298
 msgid "Galactic plane"
 msgstr "Bidang galaksi"
 
@@ -3371,8 +3371,8 @@ msgstr "Orbit planet"
 msgid "Planet trails"
 msgstr "Rute Planet"
 
-#: src/translations.h:607 src/ui_viewDialog.h:1210 src/ui_viewDialog.h:1233
-#: src/ui_viewDialog.h:1256
+#: src/translations.h:607 src/ui_viewDialog.h:1216 src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1262
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Stars"
 msgstr "Bintang"
@@ -3850,242 +3850,246 @@ msgstr ""
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
-#: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1308 src/ui_viewDialog.h:1310
 #: src/ui_configurationDialog.h:1137 src/ui_configurationDialog.h:1148
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Opsi"
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1200
 msgid "View"
 msgstr "Pandangan"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1206
 msgid "Sky"
 msgstr "Langit"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1208
 msgid "Markings"
 msgstr "Penanda"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1210
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Landscape"
 msgstr "Lanskap"
 
-#: src/ui_viewDialog.h:1206
+#: src/ui_viewDialog.h:1212
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "Starlore"
 msgstr "Budaya"
 
-#: src/ui_viewDialog.h:1209
+#: src/ui_viewDialog.h:1215
 msgid "Labels and Markers"
 msgstr "Label dan Penanda"
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1217
 msgid "Planets"
 msgstr "Planet"
 
-#: src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1219
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1221 src/ui_viewDialog.h:1266
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1222
 msgid "Planets and satellites"
 msgstr "Planet dan satelit"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1223
 msgid "Show planets"
 msgstr "Tampilkan planet"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1224
 msgid "Show planet markers"
 msgstr "Tampilkan penanda planet"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1225
 msgid "Show planet orbits"
 msgstr "Tampilkan orbit planet"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1226
 msgid "Simulate light speed"
 msgstr "Simulasikan kecepatan cahaya"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1227
 msgid "Scale Moon"
 msgstr "Sesuaikan skala Bulan"
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1229
 msgid "Automatic change of landscape when planet is changed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1231
 msgid "Auto select landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1233
 msgid "Show atmosphere"
 msgstr "Tampilkan atmosfer"
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Light pollution:"
 msgstr "Polusi udara:"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1236
 msgid "pressure, temperature, extinction coefficient"
 msgstr "tekanan, temperatur, koefisien pemadaman"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1238
 msgid "Refraction/Extinction settings..."
 msgstr "Pengaturan Pembiasan/Pemadaman..."
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Absolute scale:"
 msgstr "Skala mutlak:"
 
-#: src/ui_viewDialog.h:1235
+#: src/ui_viewDialog.h:1241
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Relative scale:"
 msgstr "Skala relatif:"
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1242
 msgid "Milky Way brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1243
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Twinkle:"
 msgstr "Kelipan:"
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1245
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Redupkan bintang lemah saat objek yang sangat terang terlihat"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1247
 msgid "Dynamic eye adaptation"
 msgstr "Adaptasi mata dinamis"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1248
 msgid "Shooting Stars"
 msgstr "Bintang Jatuh"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1250
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1252
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1253
 msgid "1000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1250
+#: src/ui_viewDialog.h:1256
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1252
+#: src/ui_viewDialog.h:1258
 msgid "Limit Magnitudes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1260
 msgid "Limit the magnitude of stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1264
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1267
 msgid "Constellations"
 msgstr "Rasi Bintang"
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1268
 msgid "Show lines"
 msgstr "Tampilkan garis"
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1269
 msgid "Show labels"
 msgstr "Tampilkan label"
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1270
 msgid "Show boundaries"
 msgstr "Tampilkan batas"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1271
 msgid "Show art"
 msgstr "Tampilkan seni"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
 msgstr "Kecerahan gambar:"
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1273
 msgid "Celestial Sphere"
 msgstr "Bola Langit"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1280
 msgid "Show equator line"
 msgstr "Tampilkan garis ekuator"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1284
 msgid "Show meridian line"
 msgstr "Tampilkan garis meridian"
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1288
 msgid "Show horizon line"
 msgstr "Tampilkan garis cakrawala"
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1292
 msgid "Show ecliptic line"
 msgstr "Tampilkan garis ekliptika"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1296
 msgid "Show Galactic plane line"
 msgstr "Tampilkan garis bidang galaksi"
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1300
 msgid "Projection"
 msgstr "Proyeksi"
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1301
 msgid "Add/remove landscapes..."
 msgstr "Pasang/hapus lanskap"
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1303
 msgid "Show ground"
 msgstr "Tampilkan tanah"
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1304
 msgid "Show fog"
 msgstr "Tampilkan kabut"
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1305
 msgid "Use associated planet and position"
 msgstr "Gunakan hubungan antara planet dan posisinya"
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1306
 msgid "Use this landscape as default"
 msgstr "Gunakan lanskap ini sebagai standar"
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1307
+msgid "Use brightness settings for landscapes"
+msgstr ""
+
+#: src/ui_viewDialog.h:1309
 msgid "Use this sky culture as default"
 msgstr "Gunakan budaya langit ini sebagai standar"
 
-#: src/ui_viewDialog.h:1304
+#: src/ui_viewDialog.h:1311
 msgid "Visible"
 msgstr "Tampak"
 
@@ -6300,62 +6304,62 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "January"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "February"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "March"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "April"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "May"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "June"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "July"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "August"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "September"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "October"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "November"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "December"
 msgstr ""
 
@@ -7894,7 +7898,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Full Moon:"
-msgstr ""
+msgstr "Bulan purnama:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid ""
@@ -7907,7 +7911,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:232
 msgid "deg."
-msgstr ""
+msgstr "derajat"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Configuration"
@@ -7943,7 +7947,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:370
 msgid "Font color and size"
-msgstr ""
+msgstr "Warna dan ukuran font"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:371
 msgid "Red"
@@ -7963,11 +7967,11 @@ msgstr "Ukuran Font"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:375
 msgid "Observing conditions"
-msgstr ""
+msgstr "Kondisi pengamatan"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Horizon altitude: 0 deg."
-msgstr ""
+msgstr "Ketinggian horizon: 0 derajat"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Sun altitude at twilight: 0 deg."

@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-27 19:18+0700\n"
+"POT-Creation-Date: 2013-09-10 20:03+0700\n"
 "PO-Revision-Date: 2013-08-28 04:14+0000\n"
 "Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-29 04:40+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-09-11 04:50+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1286
 msgid "Meridian"
 msgstr "자오선"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1288
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1294
 msgid "Ecliptic"
 msgstr "황도"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1276
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1282
 msgid "Equator"
 msgstr "적도"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1284
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1290
 msgid "Horizon"
 msgstr "지평선"
 
@@ -37,20 +37,20 @@ msgstr "지평선"
 msgid "Galactic Plane"
 msgstr "은하면"
 
-#: src/core/modules/LandscapeMgr.cpp:523
+#: src/core/modules/LandscapeMgr.cpp:527
 msgid "Author: "
 msgstr "저자: "
 
-#: src/core/modules/LandscapeMgr.cpp:526
+#: src/core/modules/LandscapeMgr.cpp:530
 msgid "Location: "
 msgstr "위치: "
 
-#: src/core/modules/LandscapeMgr.cpp:531
+#: src/core/modules/LandscapeMgr.cpp:535
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:535
+#: src/core/modules/LandscapeMgr.cpp:539
 msgid "Planet: "
 msgstr "행성: "
 
@@ -763,31 +763,31 @@ msgstr "찾을 수 없음"
 msgid "Found"
 msgstr "찾음"
 
-#: src/gui/ConfigurationDialog.cpp:436 src/gui/ConfigurationDialog.cpp:438
+#: src/gui/ConfigurationDialog.cpp:437 src/gui/ConfigurationDialog.cpp:439
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 선택"
 
-#: src/gui/ConfigurationDialog.cpp:663
+#: src/gui/ConfigurationDialog.cpp:666
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "시작시 화각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:671
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "시작시 시야 방향 방위/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:714
+#: src/gui/ConfigurationDialog.cpp:717
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:379
 msgid "Authors"
 msgstr "저작자"
 
-#: src/gui/ConfigurationDialog.cpp:715 src/gui/ViewDialog.cpp:451
+#: src/gui/ConfigurationDialog.cpp:718 src/gui/ViewDialog.cpp:454
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:798
+#: src/gui/ConfigurationDialog.cpp:801
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
@@ -797,19 +797,19 @@ msgstr "연락처"
 msgid "Author"
 msgstr "작성자"
 
-#: src/gui/ConfigurationDialog.cpp:802
+#: src/gui/ConfigurationDialog.cpp:805
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:826
+#: src/gui/ConfigurationDialog.cpp:829
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:833
+#: src/gui/ConfigurationDialog.cpp:836
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:898
+#: src/gui/ConfigurationDialog.cpp:901
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -817,16 +817,16 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "내려받은 별을 표시하려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:902
+#: src/gui/ConfigurationDialog.cpp:905
 msgid "All available star catalogs have been installed."
 msgstr "사용할 수 있는 모든 별 카탈로그가 설치되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:907
+#: src/gui/ConfigurationDialog.cpp:910
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2개 중 %1번 목록 받기"
 
-#: src/gui/ConfigurationDialog.cpp:914
+#: src/gui/ConfigurationDialog.cpp:917
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -835,7 +835,7 @@ msgstr ""
 "내려받는 중... %1\n"
 "(창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:924
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -846,7 +846,7 @@ msgstr ""
 "별 갯수: %2 100만\n"
 "광도 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:964 src/gui/ConfigurationDialog.cpp:1000
+#: src/gui/ConfigurationDialog.cpp:967 src/gui/ConfigurationDialog.cpp:1003
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -855,11 +855,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1052
+#: src/gui/ConfigurationDialog.cpp:1055
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:1056
+#: src/gui/ConfigurationDialog.cpp:1059
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -869,123 +869,123 @@ msgstr ""
 "파일이 손상되었습니다."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1129
+#: src/gui/ConfigurationDialog.cpp:1132
 msgid "Algorithm of"
 msgstr "알고리즘의"
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "Without correction"
 msgstr "보정 없이"
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "IAU (1952)"
 msgstr "국제천문연맹(1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Astronomical Ephemeris (1960)"
 msgstr "천문력(1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1149
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1150
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1151
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1152
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1150
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1151
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1155
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1156
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1173
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T의 사용자 정의 방정식"
@@ -1166,31 +1166,31 @@ msgstr "스페이스"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:512
+#: src/gui/ViewDialog.cpp:515
 msgid "No description"
 msgstr "설명 없음"
 
-#: src/gui/ViewDialog.cpp:628
+#: src/gui/ViewDialog.cpp:631
 msgid "No shooting stars"
 msgstr "유성 없음"
 
-#: src/gui/ViewDialog.cpp:631
+#: src/gui/ViewDialog.cpp:634
 msgid "Normal rate"
 msgstr "정상 속도"
 
-#: src/gui/ViewDialog.cpp:634
+#: src/gui/ViewDialog.cpp:637
 msgid "Standard Perseids rate"
 msgstr "표준 페르세우스 유성우 빈도수"
 
-#: src/gui/ViewDialog.cpp:637
+#: src/gui/ViewDialog.cpp:640
 msgid "Meteor storm rate"
 msgstr "유성폭풍 비율"
 
-#: src/gui/ViewDialog.cpp:640
+#: src/gui/ViewDialog.cpp:643
 msgid "Exceptional Leonid rate"
 msgstr "예외적인 사자자리 유성우 빈도수"
 
-#: src/gui/ViewDialog.cpp:643
+#: src/gui/ViewDialog.cpp:646
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "사상 최고 빈도수 (1996년 사자자리 유성우)"
 
@@ -2045,7 +2045,7 @@ msgstr ""
 
 #: src/translations.h:275
 msgid ""
-"Screensaver of various happenings in the Solar System. 177 events in all!"
+"Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
 
 #: src/translations.h:276
@@ -3240,16 +3240,16 @@ msgstr "수평 반전"
 msgid "Full-screen mode"
 msgstr "전체 화면 모드"
 
-#: src/translations.h:583 src/ui_viewDialog.h:1226
+#: src/translations.h:583 src/ui_viewDialog.h:1232
 msgid "Atmosphere"
 msgstr "대기"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1271
+#: src/translations.h:584 src/ui_viewDialog.h:1277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Azimuthal grid"
 msgstr "방위 격자"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1293
+#: src/translations.h:585 src/ui_viewDialog.h:1299
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Cardinal points"
 msgstr "방위기점"
@@ -3278,7 +3278,7 @@ msgstr "별자리 선"
 msgid "Deep-sky objects background images"
 msgstr "딥스카이 천체 배경이미지"
 
-#: src/translations.h:591 src/ui_viewDialog.h:1270
+#: src/translations.h:591 src/ui_viewDialog.h:1276
 msgid "Ecliptic J2000 grid"
 msgstr "황도 J2000 격자"
 
@@ -3292,12 +3292,12 @@ msgstr "황도"
 msgid "Equator line"
 msgstr "적도"
 
-#: src/translations.h:594 src/ui_viewDialog.h:1269
+#: src/translations.h:594 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial grid"
 msgstr "적위 격자"
 
-#: src/translations.h:595 src/ui_viewDialog.h:1268
+#: src/translations.h:595 src/ui_viewDialog.h:1274
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equatorial J2000 grid"
 msgstr "J2000 적위 격자"
@@ -3306,12 +3306,12 @@ msgstr "J2000 적위 격자"
 msgid "Fog"
 msgstr "안개"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1272
+#: src/translations.h:597 src/ui_viewDialog.h:1278
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic grid"
 msgstr "성운 눈금"
 
-#: src/translations.h:598 src/ui_viewDialog.h:1292
+#: src/translations.h:598 src/ui_viewDialog.h:1298
 msgid "Galactic plane"
 msgstr "은하면"
 
@@ -3352,8 +3352,8 @@ msgstr "행성 궤도"
 msgid "Planet trails"
 msgstr "행성 궤적"
 
-#: src/translations.h:607 src/ui_viewDialog.h:1210 src/ui_viewDialog.h:1233
-#: src/ui_viewDialog.h:1256
+#: src/translations.h:607 src/ui_viewDialog.h:1216 src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1262
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Stars"
 msgstr "별"
@@ -3829,242 +3829,246 @@ msgstr "검색 옵션"
 msgid "Use autofill only from the beginning of words"
 msgstr "단어의 처음부터 자동 완성 사용"
 
-#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
-#: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1308 src/ui_viewDialog.h:1310
 #: src/ui_configurationDialog.h:1137 src/ui_configurationDialog.h:1148
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "설정"
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1200
 msgid "View"
 msgstr "보기"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1206
 msgid "Sky"
 msgstr "하늘"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1208
 msgid "Markings"
 msgstr "표지"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1210
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Landscape"
 msgstr "풍경"
 
-#: src/ui_viewDialog.h:1206
+#: src/ui_viewDialog.h:1212
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "Starlore"
 msgstr "하늘 문화"
 
-#: src/ui_viewDialog.h:1209
+#: src/ui_viewDialog.h:1215
 msgid "Labels and Markers"
 msgstr "이름표와 표지"
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1217
 msgid "Planets"
 msgstr "행성"
 
-#: src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1219
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr "딥스카이(성단, 은하, 성운) 천체를 위한 이름표와 마커"
 
-#: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1221 src/ui_viewDialog.h:1266
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr "딥스카이 천체"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1222
 msgid "Planets and satellites"
 msgstr "행성과 위성"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1223
 msgid "Show planets"
 msgstr "행성 보기"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1224
 msgid "Show planet markers"
 msgstr "행성 표지 보기"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1225
 msgid "Show planet orbits"
 msgstr "행성 궤도 보기"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1226
 msgid "Simulate light speed"
 msgstr "광속 시뮬레이션"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1227
 msgid "Scale Moon"
 msgstr "달 확대"
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1229
 msgid "Automatic change of landscape when planet is changed"
 msgstr "행성이 변화될 때 자동으로 풍경이 변합니다"
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1231
 msgid "Auto select landscapes"
 msgstr "자동 선택된 풍경"
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1233
 msgid "Show atmosphere"
 msgstr "대기 보기"
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Light pollution:"
 msgstr "빛공해:"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1236
 msgid "pressure, temperature, extinction coefficient"
 msgstr "대기압, 온도, 소광계수"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1238
 msgid "Refraction/Extinction settings..."
 msgstr "굴절/소광 설정..."
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Absolute scale:"
 msgstr "절대 크기:"
 
-#: src/ui_viewDialog.h:1235
+#: src/ui_viewDialog.h:1241
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Relative scale:"
 msgstr "상대 크기:"
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1242
 msgid "Milky Way brightness:"
 msgstr "은하수 밝기:"
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1243
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Twinkle:"
 msgstr "깜박임:"
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1245
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "매우 밝은 천체가 보일 때 어두운 별을 희미하게 합니다"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1247
 msgid "Dynamic eye adaptation"
 msgstr "명암순응"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1248
 msgid "Shooting Stars"
 msgstr "유성"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1250
 msgid "Hourly zenith rate"
 msgstr "천정에서의 시간당 평균 유성 낙하개수"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1252
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "천정에서의 시간당 평균 유성 낙하개수"
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1253
 msgid "1000"
 msgstr "1000"
 
-#: src/ui_viewDialog.h:1250
+#: src/ui_viewDialog.h:1256
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr "한계등급(육안 관측자와 쌍안경 관측자를 위한)"
 
-#: src/ui_viewDialog.h:1252
+#: src/ui_viewDialog.h:1258
 msgid "Limit Magnitudes"
 msgstr "한계등급"
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1260
 msgid "Limit the magnitude of stars"
 msgstr "별의 한계등급"
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1264
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr "딥스카이(성단, 은하, 성운) 천체의 한계 등급"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1267
 msgid "Constellations"
 msgstr "별자리"
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1268
 msgid "Show lines"
 msgstr "선 보기"
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1269
 msgid "Show labels"
 msgstr "이름표 보기"
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1270
 msgid "Show boundaries"
 msgstr "경계선 보기"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1271
 msgid "Show art"
 msgstr "그림 보기"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
 msgstr "그림 밝기:"
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1273
 msgid "Celestial Sphere"
 msgstr "천구"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1280
 msgid "Show equator line"
 msgstr "적도 보기"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1284
 msgid "Show meridian line"
 msgstr "자오선 보기"
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1288
 msgid "Show horizon line"
 msgstr "지평선 보기"
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1292
 msgid "Show ecliptic line"
 msgstr "황도 보기"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1296
 msgid "Show Galactic plane line"
 msgstr "은하면 보기"
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1300
 msgid "Projection"
 msgstr "투영"
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1301
 msgid "Add/remove landscapes..."
 msgstr "풍경 추가/삭제..."
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1303
 msgid "Show ground"
 msgstr "지면 보기"
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1304
 msgid "Show fog"
 msgstr "안개 보기"
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1305
 msgid "Use associated planet and position"
 msgstr "관련된 행성과 위치로 이동"
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1306
 msgid "Use this landscape as default"
 msgstr "이 풍경을 기본값으로 사용"
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1307
+msgid "Use brightness settings for landscapes"
+msgstr ""
+
+#: src/ui_viewDialog.h:1309
 msgid "Use this sky culture as default"
 msgstr "이 하늘 문화를 기본값으로 사용"
 
-#: src/ui_viewDialog.h:1304
+#: src/ui_viewDialog.h:1311
 msgid "Visible"
 msgstr "표시하기"
 
@@ -6250,62 +6254,62 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "January"
 msgstr "1월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "February"
 msgstr "2월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "March"
 msgstr "3월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "April"
 msgstr "4월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "May"
 msgstr "5월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "June"
 msgstr "6월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "July"
 msgstr "7월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "August"
 msgstr "8월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "September"
 msgstr "9월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "October"
 msgstr "10월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "November"
 msgstr "11월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "December"
 msgstr "12월"
 
