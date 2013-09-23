@@ -55,6 +55,8 @@ private:
 	bool global;
 	QKeySequence keySequence;
 	QKeySequence altKeySequence;
+	const QKeySequence defaultKeySequence;
+	const QKeySequence defaultAltKeySequence;
 	QObject* target;
 	const char* property;
 };
