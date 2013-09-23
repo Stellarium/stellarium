@@ -58,55 +58,19 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 
 	StelTextureSP tex = StelTextureSP(new StelTexture());
-	try
-	{
-		tex->fullPath = StelFileMgr::findFile(afilename);
-	}
-	catch (std::runtime_error er)
-	{
-#if 0
-		// Allow to replace the texures by compressed .pvr versions using GPU decompression.
-		// This saves memory and increases rendering speed.
-		if (!afilename.endsWith(".pvr"))
-		{
-			QString pvrVersion = afilename;
-			pvrVersion.replace(".png", ".pvr");
-			return createTexture(pvrVersion, params);
-		}
-#endif
-		qWarning() << "WARNING : Can't find texture file " << afilename << ": " << er.what() << endl;
-		tex->errorOccured = true;
+	tex->fullPath = afilename;
+
+	tex->qImage = QImage(tex->fullPath);
+	if (tex->qImage.isNull())
 		return StelTextureSP();
-	}
 
-/*	if (tex->fullPath.endsWith(".pvr"))
-	{
-		// Load compressed textures using Qt wrapper.
-		tex->loadParams = params;
-		tex->downloaded = true;
+	tex->loadParams = params;
+	tex->downloaded = true;
 
-		tex->id = StelPainter::glContext->bindTexture(tex->fullPath);
-		// For some reasons only LINEAR seems to work
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->loadParams.wrapMode);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->loadParams.wrapMode);
+	if (tex->glLoad())
 		return tex;
-	}
 	else
-	{*/
-		tex->qImage = QImage(tex->fullPath);
-		if (tex->qImage.isNull())
-			return StelTextureSP();
-
-		tex->loadParams = params;
-		tex->downloaded = true;
-
-		if (tex->glLoad())
-			return tex;
-		else
-			return StelTextureSP();
-//	}
+		return StelTextureSP();
 }
 
 
@@ -120,23 +84,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	if (!url.startsWith("http://"))
 	{
 		// Assume a local file
-		try
-		{
-			tex->fullPath = StelFileMgr::findFile(url);
-		}
-		catch (std::runtime_error e)
-		{
-			try
-			{
-				tex->fullPath = StelFileMgr::findFile("textures/" + url);
-			}
-			catch (std::runtime_error er)
-			{
-				qWarning() << "WARNING : Can't find texture file " << url << ": " << er.what() << endl;
-				tex->errorOccured = true;
-				return StelTextureSP();
-			}
-		}
+		tex->fullPath = url;
 		tex->downloaded = true;
 	}
 	else

@@ -98,14 +98,14 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
-	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");		// Load circle texture
-	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture("textures/neb_gal.png");	// Load ellipse texture
-	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture("textures/neb_ocl.png");	// Load open cluster marker texture
-	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_gcl.png");	// Load globular cluster marker texture
-	Nebula::texPlanetaryNebula		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_pnb.png");	// Load planetary nebula marker texture
-	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_dif.png");	// Load diffuse nebula marker texture
-	Nebula::texOpenClusterWithNebulosity	= StelApp::getInstance().getTextureManager().createTexture("textures/neb_ocln.png");	// Load Ocl/Nebula marker texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
+	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");		// Load circle texture
+	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");	// Load ellipse texture
+	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");	// Load open cluster marker texture
+	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");	// Load globular cluster marker texture
+	Nebula::texPlanetaryNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");	// Load planetary nebula marker texture
+	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif.png");	// Load diffuse nebula marker texture
+	Nebula::texOpenClusterWithNebulosity	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");	// Load Ocl/Nebula marker texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
@@ -253,15 +253,15 @@ NebulaP NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
-	try
+	QString ngcPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat");
+	QString ngcNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat");
+	if (ngcPath.isEmpty() || ngcNamesPath.isEmpty())
 	{
-		loadNGC(StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat"));
-		loadNGCNames(StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat"));
+		qWarning() << "ERROR while loading nebula data set " << setName;
+		return;
 	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
-	}
+	loadNGC(ngcPath);
+	loadNGCNames(ngcNamesPath);
 }
 
 // Look for a nebulae by XYZ coords

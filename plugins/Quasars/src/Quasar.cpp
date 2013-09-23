@@ -184,11 +184,11 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		painter.setColor(dcolor[0], dcolor[1], dcolor[2], 1);
 
 		Quasar::markerTexture->bind();
-		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		//size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		if (labelsFader.getInterstate()<=0.f)
 		{
 			painter.drawSprite2dMode(XYZ, 4);
-			painter.drawText(XYZ, " ", 0, shift, shift, false);
+			//painter.drawText(XYZ, " ", 0, shift, shift, false);
 		}
 	}
 	else
