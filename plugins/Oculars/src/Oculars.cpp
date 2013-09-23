@@ -1266,7 +1266,7 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	actionShowOcular = addAction("actionShow_Ocular", "Oculars", N_("Ocular view"), "Ctrl+O", "enableOcular(bool)");
+	actionShowOcular = addAction("actionShow_Ocular", "Oculars", N_("Ocular view"), "enableOcular(bool)", "Ctrl+O");
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
@@ -1283,19 +1283,19 @@ void Oculars::initializeActivationActions()
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
 
-	actionMenu = addAction("actionShow_Ocular_Menu", "Oculars", N_("Oculars popup menu"), "Alt+O", "displayPopupMenu()");
-	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", "Oculars", N_("Show crosshairs"), "Alt+C", "toggleCrosshairs(bool)");
-	actionShowSensor = addAction("actionShow_Sensor", "Oculars", N_("Image sensor frame"), "", "toggleCCD(bool)");
-	actionShowTelrad = addAction("actionShow_Telrad", "Oculars", N_("Telrad sight"), "Ctrl+B", "toggleTelrad(bool)");
-	actionConfiguration = addAction("actionOpen_Oculars_Configuration", "Oculars", N_("Oculars plugin configuration"), "", ocularDialog, "visible");
+	actionMenu = addAction("actionShow_Ocular_Menu", "Oculars", N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
+	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", "Oculars", N_("Show crosshairs"), "toggleCrosshairs(bool)", "Alt+C");
+	actionShowSensor = addAction("actionShow_Sensor", "Oculars", N_("Image sensor frame"), "toggleCCD(bool)");
+	actionShowTelrad = addAction("actionShow_Telrad", "Oculars", N_("Telrad sight"), "toggleTelrad(bool)", "Ctrl+B");
+	actionConfiguration = addAction("actionOpen_Oculars_Configuration", "Oculars", N_("Oculars plugin configuration"), ocularDialog, "visible");
 	// Select next telescope via keyboard
-	addAction("actionShow_Telescope_Increment", "Oculars", N_("Select next telescope"), "Shift+PgUp", "incrementTelescopeIndex()");
+	addAction("actionShow_Telescope_Increment", "Oculars", N_("Select next telescope"), "incrementTelescopeIndex()", "Shift+PgUp");
 	// Select previous telescope via keyboard
-	addAction("actionShow_Telescope_Decrement", "Oculars", N_("Select previous telescope"), "Shift+PgDown", "decrementTelescopeIndex()");
+	addAction("actionShow_Telescope_Decrement", "Oculars", N_("Select previous telescope"), "decrementTelescopeIndex()", "Shift+PgDown");
 	// Select next eyepiece via keyboard
-	addAction("actionShow_Ocular_Increment", "Oculars", N_("Select next eyepiece"), "Ctrl+PgUp", "incrementOcularIndex()");
+	addAction("actionShow_Ocular_Increment", "Oculars", N_("Select next eyepiece"), "incrementOcularIndex()", "Ctrl+PgUp");
 	// Select previous eyepiece via keyboard
-	addAction("actionShow_Ocular_Decrement", "Oculars", N_("Select previous eyepiece"), "Ctrl+PgDown", "decrementOcularIndex()");
+	addAction("actionShow_Ocular_Decrement", "Oculars", N_("Select previous eyepiece"), "decrementOcularIndex()", "Ctrl+PgDown");
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));

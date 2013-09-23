@@ -14,10 +14,11 @@ public:
 	StelAction(QObject *parent): QObject(parent) {}
 
 	StelAction(const QString& actionId,
-			   const QString& groupId,
-			   const QString& text,
-			   const QString& primaryKey,
-			   bool global = false);
+	           const QString& groupId,
+	           const QString& text,
+	           const QString& primaryKey="",
+	           const QString& altKey="",
+	           bool global=false);
 	//! Connect the action to an object property or slot.
 	//! @param slot A property or a slot name.  The slot can either have the signature `func()`, and in that
 	//! case the action is made not checkable, either have the signature `func(bool)` and in that case the action
@@ -73,7 +74,8 @@ public:
 	//! @param slot Either a slot name, in that case the action is not checkable,
 	//! either a property name, in that case the action is checkable.
 	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
-						  const QString& shortcut, QObject* target, const char* slot,
+						  QObject* target, const char* slot,
+						  const QString& shortcut="", const QString& altShortcut="",
 						  bool global=false);
 	StelAction* findAction(const QString& id);
 	bool pushKey(int key, bool global=false);
