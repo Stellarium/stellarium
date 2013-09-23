@@ -24,6 +24,8 @@
 #include "StelModuleMgr.hpp"
 #include "LabelMgr.hpp"
 #include "ScreenImageMgr.hpp"
+#include "StelActionMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -131,6 +133,22 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 
 	agent = new StelScriptEngineAgent(&engine);
 	engine.setAgent(agent);
+
+	initActions();
+}
+
+void StelScriptMgr::initActions()
+{
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	QSignalMapper* mapper = new QSignalMapper(this);
+	foreach(const QString script, getScriptList())
+	{
+		QString actionId = "actionScript/" + script;
+		StelAction* action = actionMgr->addAction(
+		            actionId, N_("Script"), getName(script), "", mapper, "map()");
+		mapper->setMapping(action, script);
+	}
+	connect(mapper, SIGNAL(mapped(QString)), this, SLOT(runScript(QString)));
 }
 
 
