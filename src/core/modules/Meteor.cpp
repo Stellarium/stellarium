@@ -222,7 +222,7 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	spos/=1216;
 	epos/=1216;
 
-	//  qDebug("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
+	//qDebug("[%f %f %f]\n", position[0], position[1], position[2]);
 
 	if (train)
 	{
@@ -248,7 +248,6 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		vertexArray[2]=spos;
 		sPainter.setColorPointer(4, GL_FLOAT, colorArray);
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
-		// TODO the crash doesn't appear when the last true is set to false
 		sPainter.enableClientStates(true, false, true);
 		sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
 		sPainter.enableClientStates(false);

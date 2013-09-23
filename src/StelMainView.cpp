@@ -30,10 +30,12 @@
 #include "StelActionMgr.hpp"
 
 #include <QGLWidget>
+#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QSettings>
 #include <QDebug>
 #include <QFileInfo>
+#include <QMoveEvent>
 #include <QPluginLoader>
 #include <QtPlugin>
 #include <QThread>
@@ -42,6 +44,7 @@
 #include <QIcon>
 #include <QDeclarativeItem>
 #include <QOpenGLFunctions>
+#include <QWindow>
 
 
 // Initialize static variables
@@ -202,6 +205,7 @@ protected:
 		if (!format().doubleBuffer())
 			qWarning("Could not get double buffer; results will be suboptimal");
 	}
+
 };
 
 StelMainView::StelMainView(QWidget* parent)
@@ -290,10 +294,16 @@ void StelMainView::init(QSettings* conf)
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
 	
-	int width = conf->value("video/screen_w", 800).toInt();
-	int height = conf->value("video/screen_h", 600).toInt();
+	QDesktopWidget desktop;
+	QRect geometry = desktop.screenGeometry(); // Should be the default screen, if multipul
+	int width = conf->value("video/screen_w", geometry.width()).toInt();
+	int height = conf->value("video/screen_h", geometry.height()).toInt();
 	if (conf->value("video/fullscreen", true).toBool())
 	{
+#ifdef Q_OS_MAC
+		// Without this, the screen is not shown on a Mac.
+		resize(width, height);
+#endif
 		setFullScreen(true);
 	}
 	else
@@ -337,9 +347,9 @@ void StelMainView::initTitleI18n()
 void StelMainView::setFullScreen(bool b)
 {
 	if (b)
-		setWindowState(windowState() | Qt::WindowFullScreen);
+		showFullScreen();
 	else
-		setWindowState(windowState() & ~Qt::WindowFullScreen);
+		showNormal();
 }
 
 void StelMainView::thereWasAnEvent()

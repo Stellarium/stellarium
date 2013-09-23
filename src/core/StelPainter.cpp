@@ -44,9 +44,11 @@ QMutex* StelPainter::globalMutex = new QMutex();
 
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
 StelPainter::GLState::GLState()
@@ -1664,6 +1666,7 @@ void StelPainter::enableTexture2d(bool b)
 
 void StelPainter::initGLShaders()
 {
+	qWarning() << "StelPainter: initGLShaders()... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =
@@ -1674,6 +1677,7 @@ void StelPainter::initGLShaders()
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
 		"}\n";
 	vshader3.compileSourceCode(vsrc3);
+	if (!vshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader3: " << vshader3.log(); }
 	QOpenGLShader fshader3(QOpenGLShader::Fragment);
 	const char *fsrc3 =
 		"uniform mediump vec4 color;\n"
@@ -1682,13 +1686,57 @@ void StelPainter::initGLShaders()
 		"    gl_FragColor = color;\n"
 		"}\n";
 	fshader3.compileSourceCode(fsrc3);
+	if (!fshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader3: " << fshader3.log(); }
 	basicShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	basicShaderProgram->addShader(&vshader3);
 	basicShaderProgram->addShader(&fshader3);
 	basicShaderProgram->link();
+	if (!basicShaderProgram->log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while linking basicShaderProgram: " << basicShaderProgram->log();
+	}
+
 	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
 	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
+	
+
+	// Basic shader: vertex filled with interpolated color
+	QOpenGLShader vshaderInterpolatedColor(QOpenGLShader::Vertex);
+	const char *vshaderInterpolatedColorSrc =
+		"attribute mediump vec3 vertex;\n"
+		"attribute mediump vec4 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec4 fragcolor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+		"    fragcolor = color;\n"
+		"}\n";
+	vshaderInterpolatedColor.compileSourceCode(vshaderInterpolatedColorSrc);
+	if (!vshaderInterpolatedColor.log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while compiling vshaderInterpolatedColor: " << vshaderInterpolatedColor.log();
+	}
+	QOpenGLShader fshaderInterpolatedColor(QOpenGLShader::Fragment);
+	const char *fshaderInterpolatedColorSrc =
+		"varying mediump vec4 fragcolor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = fragcolor;\n"
+		"}\n";
+	fshaderInterpolatedColor.compileSourceCode(fshaderInterpolatedColorSrc);
+	if (!fshaderInterpolatedColor.log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while compiling fshaderInterpolatedColor: " << fshaderInterpolatedColor.log();
+	}
+	colorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	colorShaderProgram->addShader(&vshaderInterpolatedColor);
+	colorShaderProgram->addShader(&fshaderInterpolatedColor);
+	colorShaderProgram->link();
+	if (!colorShaderProgram->log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while linking colorShaderProgram: " << colorShaderProgram->log();
+	}
+	colorShaderVars.projectionMatrix = colorShaderProgram->uniformLocation("projectionMatrix");
+	colorShaderVars.color = colorShaderProgram->attributeLocation("color");
+	colorShaderVars.vertex = colorShaderProgram->attributeLocation("vertex");
 	
 	// Basic texture shader program
 	QOpenGLShader vshader2(QOpenGLShader::Vertex);
@@ -1703,6 +1751,8 @@ void StelPainter::initGLShaders()
 		"    texc = texCoord;\n"
 		"}\n";
 	vshader2.compileSourceCode(vsrc2);
+	if (!vshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader2: " << vshader2.log(); }
+
 	QOpenGLShader fshader2(QOpenGLShader::Fragment);
 	const char *fsrc2 =
 		"varying mediump vec2 texc;\n"
@@ -1713,10 +1763,15 @@ void StelPainter::initGLShaders()
 		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
 		"}\n";
 	fshader2.compileSourceCode(fsrc2);
+	if (!fshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader2: " << fshader2.log(); }
+
 	texturesShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesShaderProgram->addShader(&vshader2);
 	texturesShaderProgram->addShader(&fshader2);
 	texturesShaderProgram->link();
+	if (!texturesShaderProgram->log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while linking texturesShaderProgram: " << texturesShaderProgram->log();
+	}
 	texturesShaderVars.projectionMatrix = texturesShaderProgram->uniformLocation("projectionMatrix");
 	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
@@ -1739,6 +1794,8 @@ void StelPainter::initGLShaders()
 		"    outColor = color;\n"
 		"}\n";
 	vshader4.compileSourceCode(vsrc4);
+	if (!vshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader4: " << vshader4.log(); }
+
 	QOpenGLShader fshader4(QOpenGLShader::Fragment);
 	const char *fsrc4 =
 		"varying mediump vec2 texc;\n"
@@ -1749,16 +1806,39 @@ void StelPainter::initGLShaders()
 		"    gl_FragColor = texture2D(tex, texc)*outColor;\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
+	if (!fshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log(); }
+
 	texturesColorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesColorShaderProgram->addShader(&vshader4);
 	texturesColorShaderProgram->addShader(&fshader4);
 	texturesColorShaderProgram->link();
+	if (!texturesColorShaderProgram->log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while linking texturesColorShaderProgram: " << texturesColorShaderProgram->log();
+	}
+
 	texturesColorShaderVars.projectionMatrix = texturesColorShaderProgram->uniformLocation("projectionMatrix");
 	texturesColorShaderVars.texCoord = texturesColorShaderProgram->attributeLocation("texCoord");
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
+
+	qWarning() << "StelPainter: initGLShaders()... done";
+
 }
+
+
+void StelPainter::deinitGLShaders()
+{
+	delete basicShaderProgram;
+	basicShaderProgram = NULL;
+	delete colorShaderProgram;
+	colorShaderProgram = NULL;
+	delete texturesShaderProgram;
+	texturesShaderProgram = NULL;
+	delete texturesColorShaderProgram;
+	texturesColorShaderProgram = NULL;
+}
+
 
 void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
@@ -1837,6 +1917,16 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}
+	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
+	{
+		pr = colorShaderProgram;
+		pr->bind();
+		pr->setAttributeArray(colorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+		pr->enableAttributeArray(colorShaderVars.vertex);
+		pr->setUniformValue(colorShaderVars.projectionMatrix, qMat);
+		pr->setAttributeArray(colorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size);
+		pr->enableAttributeArray(colorShaderVars.color);
+	}
 	else
 	{
 		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
@@ -1861,9 +1951,14 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->disableAttributeArray(texturesShaderVars.texCoord);
 		pr->disableAttributeArray(texturesShaderVars.vertex);
 	}
-	else if (pr == texturesShaderProgram)
+	else if (pr == basicShaderProgram)
 	{
 		pr->disableAttributeArray(basicShaderVars.vertex);
+	}
+	else if (pr == colorShaderProgram)
+	{
+		pr->disableAttributeArray(colorShaderVars.vertex);
+		pr->disableAttributeArray(colorShaderVars.color);
 	}
 	if (pr)
 		pr->release();

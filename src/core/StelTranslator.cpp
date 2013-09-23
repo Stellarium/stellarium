@@ -23,6 +23,10 @@
 #include <fstream>
 #include <clocale>
 #include <cstdlib>
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 #include <QFile>
 #include <QDebug>
 #include <QStringList>
@@ -91,7 +95,6 @@ void StelTranslator::initSystemLanguage()
 		if (lang) systemLangName = lang;
 		else
 		{
-/* FIXME: This code is not working with Qt5/Windows and should be rewritten --AW
 #ifdef Q_OS_WIN
 			char ulng[3], ctry[3];
 			if (GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, ulng, 3))
@@ -112,9 +115,8 @@ void StelTranslator::initSystemLanguage()
 				systemLangName = "C";
 			}
 #else
-*/
 			systemLangName = "C";
-//#endif
+#endif
 		}
 	}
 

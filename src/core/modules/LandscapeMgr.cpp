@@ -328,18 +328,13 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		return false;
 
 	// We want to lookup the landscape ID (dir) from the name.
-	Landscape* newLandscape = NULL;
-	try
-	{
-		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")";
-	}
-
+	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+	
 	if (!newLandscape)
+	{
+		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini";
 		return false;
+	}
 
 	if (landscape)
 	{
@@ -680,28 +675,17 @@ QString LandscapeMgr::nameToID(const QString& name)
  ****************************************************************************/
 QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 {
-	QSet<QString> landscapeDirs;
 	QMap<QString,QString> result;
-	try
-	{
-		landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
-	}
-	catch (std::runtime_error& e)
-	{
-		qDebug() << "ERROR while trying list landscapes:" << e.what();
-	}
+	QSet<QString> landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
 
 	foreach (const QString& dir, landscapeDirs)
 	{
-		try
+		QString fName = StelFileMgr::findFile("landscapes/" + dir + "/landscape.ini");
+		if (!fName.isEmpty())
 		{
-			QSettings landscapeIni(StelFileMgr::findFile("landscapes/" + dir + "/landscape.ini"), StelIniFormat);
+			QSettings landscapeIni(fName, StelIniFormat);
 			QString k = landscapeIni.value("landscape/name").toString();
 			result[k] = dir;
-		}
-		catch (std::runtime_error& e)
-		{
-			//qDebug << "WARNING: unable to successfully read landscape.ini file from landscape " << dir;
 		}
 	}
 	return result;
@@ -934,13 +918,10 @@ QString LandscapeMgr::getLandscapePath(QString landscapeID)
 	if (landscapeID.isEmpty())
 		return result;
 
-	try
+	result = StelFileMgr::findFile("landscapes/" + landscapeID, StelFileMgr::Directory);
+	if (result.isEmpty())
 	{
-		result = StelFileMgr::findFile("landscapes/" + landscapeID, StelFileMgr::Directory);
-	}
-	catch (std::runtime_error &e)
-	{
-		qWarning() << "LandscapeMgr: Error! Unable to find" << landscapeID << ":" << e.what();
+		qWarning() << "LandscapeMgr: Error! Unable to find" << landscapeID;
 		return result;
 	}
 
@@ -1000,15 +981,15 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 
 QString LandscapeMgr::getDescription() const
 {
-        QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-        if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
-        {
-                lang = lang.split("_").at(0);
-        }
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+	{
+		lang = lang.split("_").at(0);
+	}
 	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	
 	QString desc;
-
-	if(QFileInfo(descriptionFile).exists())
+	if (!descriptionFile.isEmpty() && QFileInfo(descriptionFile).exists())
 	{
 		QFile file(descriptionFile);
 		file.open(QIODevice::ReadOnly | QIODevice::Text);

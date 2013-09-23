@@ -238,16 +238,12 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	{
 		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 		PlanetP p = ssm->searchByEnglishName(loc.planetName);
-		QString path;
 		if (p)
 		{
-			try
+			QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
+			if (path.isEmpty())
 			{
-				path = StelFileMgr::findFile("textures/"+p->getTextMapName());
-			}
-			catch (std::runtime_error& e)
-			{
-				qWarning() << "ERROR - could not find planet map for " << loc.planetName << e.what();
+				qWarning() << "ERROR - could not find planet map for " << loc.planetName;
 				return;
 			}
 			pixmap = QPixmap(path);

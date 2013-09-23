@@ -23,7 +23,7 @@
 #include <QDir>
 #include <QString>
 #include <QDebug>
-#include <QDesktopServices>
+#include <QStandardPaths>
 
 #include "StelUtils.hpp"
 
@@ -41,6 +41,7 @@
 QStringList StelFileMgr::fileLocations;
 QString StelFileMgr::userDir;
 QString StelFileMgr::screenshotDir;
+QString StelFileMgr::installDir;
 
 void StelFileMgr::init()
 {
@@ -74,74 +75,103 @@ void StelFileMgr::init()
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 
+	
+	// Determine install data directory location
+
+	// If we are running from the build tree, we use the files from the current directory
+	if (QFileInfo(CHECK_FILE).exists())
+	{
+		installDir = ".";
+	}
+	else
+	{
+#ifdef Q_OS_MAC
+		QString relativePath = "/../Resources";
+		if (QCoreApplication::applicationDirPath().contains("src")) {
+			relativePath = "/../../../../..";
+		}
+		QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
+		
+		QDir ResourcesDir = MacOSdir.dir();
+		if (!QCoreApplication::applicationDirPath().contains("src")) {
+			ResourcesDir.cd(QString("Resources"));
+		}
+		QFileInfo installLocation(ResourcesDir.absolutePath());
+		QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
+#else
+		// Linux, BSD, Solaris etc.
+		// We use the value from the config.h filesystem
+		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
+		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
+#endif
+	
+		if (checkFile.exists())
+		{
+			installDir = installLocation.filePath();
+		}
+		else
+		{
+			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:" << 
+				QDir::toNativeSeparators(installLocation.filePath()) << " (we checked for " << 
+				QDir::toNativeSeparators(checkFile.filePath()) << ").";
+			qFatal("Couldn't find install directory location.");
+		}
+	}
+	
 	// Then add the installation directory to the search path
-	try
-	{
-		fileLocations.append(getInstallationDir());
-	}
-	catch (std::runtime_error &e)
-	{
-		qWarning() << "WARNING: could not locate installation directory";
-	}
+	fileLocations.append(installDir);
 
 	if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
 		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0];
 }
 
 
-QString StelFileMgr::findFile(const QString& path, const Flags& flags)
+QString StelFileMgr::findFile(const QString& path, Flags flags)
 {
 	if (path.isEmpty())
-		throw std::runtime_error("Empty file path");
-	// explicitly specified relative paths
-	if (path[0] == '.')
-	{
-		if (fileFlagsCheck(path, flags))
-			return path;
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
-	}
-
+		return "";
+	
 	// Qt resource files
 	if (path.startsWith(":/"))
 		return path;
+	
+	const QFileInfo fileInfo(path);
+	
+	// explicitly specified relative paths
+	if (path[0] == '.')
+	{
+		if (fileFlagsCheck(fileInfo, flags))
+			return path;
+		qWarning() << QString("file does not match flags: %1").arg(path);
+		return "";
+	}
 
 	// explicitly specified absolute paths
-	if ( isAbsolute(path) )
+	if (fileInfo.isAbsolute())
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(fileInfo, flags))
 			return path;
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
+		qWarning() << QString("file does not match flags: %1").arg(path);
+		return "";
 	}
-
-	foreach (QString i, fileLocations)
+	
+	foreach (const QString& i, fileLocations)
 	{
-		if (fileFlagsCheck(i + "/" + path, flags))
+		const QFileInfo finfo(i + "/" + path);
+		if (fileFlagsCheck(finfo, flags))
 			return i + "/" + path;
 	}
-
-	throw std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData());
+	
+	qWarning() << QString("file not found: %1").arg(path);
+	return "";
 }
 
 QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &flags)
 {
-	if (path.isEmpty())
-		throw std::runtime_error("Empty file path");
-
 	QStringList filePaths;
-
-	// explicitly specified relative paths
-	if (path[0] == '.')
-	{
-		if (fileFlagsCheck(path, flags))
-		{
-			filePaths.append(path);
-			return filePaths;
-		}
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
-	}
+	
+	if (path.isEmpty())
+		return filePaths;
 
 	// Qt resource files
 	if (path.startsWith(":/"))
@@ -149,31 +179,32 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 		filePaths.append(path);
 		return filePaths;
 	}
+	
+	const QFileInfo fileInfo(path);
+	// explicitly specified relative paths
+	if (path[0] == '.')
+	{
+		if (fileFlagsCheck(fileInfo, flags))
+			filePaths.append(path);
+		return filePaths;
+	}
 
 	// explicitly specified absolute paths
-	if ( isAbsolute(path) )
+	if ( fileInfo.isAbsolute() )
 	{
-		if (fileFlagsCheck(path, flags))
-		{
+		if (fileFlagsCheck(fileInfo, flags))
 			filePaths.append(path);
-			return filePaths;
-		}
-		else
-			throw std::runtime_error(QString("file does not match flags: %1").arg(path).toLocal8Bit().constData());
-	}
-
-	foreach (QString locationPath, fileLocations)
-	{
-		if (fileFlagsCheck(locationPath + "/" + path, flags))
-		{
-			filePaths.append(locationPath + "/" + path);
-		}
-	}
-
-	if (filePaths.isEmpty())
-		throw std::runtime_error(QString("file not found: %1").arg(path).toLocal8Bit().constData());
-	else
 		return filePaths;
+	}
+
+	foreach (const QString& locationPath, fileLocations)
+	{
+		const QFileInfo finfo(locationPath + "/" + path);
+		if (fileFlagsCheck(finfo, flags))
+			filePaths.append(locationPath + "/" + path);
+	}
+
+	return filePaths;
 }
 
 QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive)
@@ -197,9 +228,11 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 		return result;
 	}
 
+	const bool isPathAbsolute = QFileInfo(path).isAbsolute();
+			
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
-	if (QFileInfo(path).isAbsolute())
+	if (isPathAbsolute)
 		listPaths.append("");
 	else
 		listPaths = fileLocations;
@@ -207,7 +240,7 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	foreach (const QString& li, listPaths)
 	{
 		QFileInfo thisPath;
-		if (QFileInfo(path).isAbsolute())
+		if (isPathAbsolute)
 			thisPath.setFile(path);
 		else
 			thisPath.setFile(li+"/"+path);
@@ -220,7 +253,7 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 				if (fileIt != ".." && fileIt != ".")
 				{
 					QFileInfo fullPath;
-					if (QFileInfo(path).isAbsolute())
+					if (isPathAbsolute)
 						fullPath.setFile(path+"/"+fileIt);
 					else
 						fullPath.setFile(li+"/"+path+"/"+fileIt);
@@ -238,11 +271,6 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 					if ((flags & File) && !fullPath.isFile())
 						returnThisOne = false;
 
-					// we only want to return "hidden" results if the Hidden flag is set
-					if (!(flags & Hidden))
-						if (fileIt.at(0) == '.')
-							returnThisOne = false;
-
 					// OK, add the ones we want to the result
 					if (returnThisOne)
 					{
@@ -254,11 +282,6 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	}
 
 	return result;
-}
-
-void StelFileMgr::setSearchPaths(const QStringList& paths)
-{
-	fileLocations = paths;
 }
 
 bool StelFileMgr::exists(const QString& path)
@@ -306,24 +329,14 @@ QString StelFileMgr::baseName(const QString& path)
 	return QFileInfo(path).baseName();
 }
 
-bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
+bool StelFileMgr::fileFlagsCheck(const QFileInfo& thePath, const Flags& flags)
 {
-	if (!(flags & Hidden))
-	{
-		// Files are considered Hidden on POSIX systems if the file name begins with
-		// a "." character.  Unless we have the Hidden flag set, reject and path
-		// where the basename starts with a .
-		if (baseName(path).startsWith('.'))
-		{
-			return false;
-		}
-	}
-
-	QFileInfo thePath(path);
+	const bool exists = thePath.exists();
+	
 	if (flags & New)
 	{
 		// if the file already exists, it is not a new file
-		if (thePath.exists())
+		if (exists)
 			return false;
 
 		// To be able to create a new file, we need to have a
@@ -334,8 +347,11 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 			return false;
 		}
 	}
-	else if (thePath.exists())
+	else if (exists)
 	{
+		if (flags==0)
+			return true;
+		
 		if ((flags & Writable) && !thePath.isWritable())
 			return false;
 
@@ -358,14 +374,12 @@ QString StelFileMgr::getDesktopDir()
 {
 
 	if (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).isEmpty())
-		throw std::runtime_error("Can't find Desktop directory");
+		return "";
 
 	QString result = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
-
 	if (!QFileInfo(result).isDir())
-	{
-		throw std::runtime_error("Can't find Desktop directory");
-	}
+		return "";
+	
 	return result;
 }
 
@@ -384,43 +398,7 @@ void StelFileMgr::setUserDir(const QString& newDir)
 
 QString StelFileMgr::getInstallationDir()
 {
-	// If we are running from the build tree, we use the files from there...
-	if (QFileInfo(CHECK_FILE).exists()){
-		return ".";
-	}
-
-#ifdef Q_OS_MAC
-	QString relativePath = "/../Resources";
-	if (QCoreApplication::applicationDirPath().contains("src")) {
-		relativePath = "/../../../../..";
-	}
-	QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
-	
-	QDir ResourcesDir = MacOSdir.dir();
-	if (!QCoreApplication::applicationDirPath().contains("src")) {
-		ResourcesDir.cd(QString("Resources"));
-	}
-	QFileInfo installLocation(ResourcesDir.absolutePath());
-	QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
-#else
-	// Linux, BSD, Solaris etc.
-	// We use the value from the config.h filesystem
-	QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
-	QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
-#endif
-
-	if (checkFile.exists())
-	{
-		return installLocation.filePath();
-	}
-	else
-	{
-		qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-			<< QDir::toNativeSeparators(installLocation.filePath())
-			<< " (we checked for " << QDir::toNativeSeparators(checkFile.filePath())
-			<< ").";
-		throw (std::runtime_error("NOT FOUND"));
-	}
+	return installDir;
 }
 
 QString StelFileMgr::getScreenshotDir()
@@ -447,8 +425,7 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 QString StelFileMgr::getLocaleDir()
 {
 #ifdef ENABLE_NLS
-	QFileInfo localePath;
-	localePath = QFileInfo(getInstallationDir() + "/translations");
+	QFileInfo localePath = QFileInfo(getInstallationDir() + "/translations");
 	if (localePath.exists())
 	{
 		return localePath.filePath();
@@ -463,7 +440,7 @@ QString StelFileMgr::getLocaleDir()
 		}
 		else
 		{
-			qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory, returning \"\"";
+			qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory";
 			return "";
 		}
 	}
@@ -509,28 +486,17 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 	// This function is implemented using code from QSettings implementation in QT
 	// (GPL edition, version 4.3).
 	
-	/* FIXME: This code is not working with Qt5/Windows and should be rewritten --AW
+	// Stellarium works only on wide-character versions of Windows anyway,
+	// therefore it's using only the wide-char version of the code. --BM
 	QLibrary library(QLatin1String("shell32"));
-	QT_WA( {
-		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
-		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
-		if (SHGetSpecialFolderPath)
-		{
-			TCHAR tpath[MAX_PATH];
-			SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
-			return QString::fromUtf16((ushort*)tpath);
-		}
-	} , {
-		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, char*, int, BOOL);
-		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathA");
-		if (SHGetSpecialFolderPath)
-		{
-			char cpath[MAX_PATH];
-			SHGetSpecialFolderPath(0, cpath, csidlId, FALSE);
-			return QString::fromLocal8Bit(cpath);
-		}
-	} );
-	*/
+	typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
+	GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
+	if (SHGetSpecialFolderPath)
+	{
+		TCHAR tpath[MAX_PATH];
+		SHGetSpecialFolderPath(0, tpath, csidlId, FALSE);
+		return QString::fromUtf16((ushort*)tpath);
+	}
 
 	return QString();
 }
