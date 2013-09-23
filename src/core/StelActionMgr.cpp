@@ -21,6 +21,8 @@ StelAction::StelAction(const QString& actionId,
 	global(global),
 	keySequence(primaryKey),
 	altKeySequence(altKey),
+	defaultKeySequence(primaryKey),
+	defaultAltKeySequence(altKey),
 	target(NULL),
 	property(NULL)
 {
@@ -194,5 +196,9 @@ void StelActionMgr::saveShortcuts()
 
 void StelActionMgr::restoreDefaultShortcuts()
 {
-	qWarning() << "restoring shortcuts not implemented yet!";
+	foreach(StelAction* action, findChildren<StelAction*>())
+	{
+		action->keySequence = action->defaultKeySequence;
+		action->altKeySequence = action->defaultAltKeySequence;
+	}
 }
