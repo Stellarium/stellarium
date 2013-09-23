@@ -28,13 +28,12 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "renderer/GenericVertexTypes.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 
@@ -91,7 +90,7 @@ StelCore::~StelCore()
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
-void StelCore::init(class StelRenderer* renderer)
+void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
@@ -111,9 +110,9 @@ void StelCore::init(class StelRenderer* renderer)
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
-	setCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
-	setCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
-	setCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
+	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
+	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
+	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 
 	// Time stuff
 	setTimeNow();
@@ -146,7 +145,7 @@ void StelCore::init(class StelRenderer* renderer)
 	currentProjectorParams.fov = movementMgr->getInitFov();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
-	skyDrawer = new StelSkyDrawer(this, renderer);
+	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
@@ -317,72 +316,25 @@ void StelCore::update(double deltaTime)
 *************************************************************************/
 void StelCore::preDraw()
 {
+	// Init openGL viewing with fov, screen size and clip planes
 	currentProjectorParams.zNear = 0.000001;
 	currentProjectorParams.zFar = 50.;
+
 	skyDrawer->preDraw();
+
+	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	glClearColor(0,0,0,0);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-//! Fill with black around viewport disc shape.
-static void drawViewportShape(StelRenderer* renderer, StelProjectorP projector)
-{
-	if (projector->getMaskType() != StelProjector::MaskDisk)
-	{
-		return;
-	}
-
-	renderer->setBlendMode(BlendMode_None);
-	renderer->setGlobalColor(0.0f, 0.0f, 0.0f);
-
-	const float innerRadius = 0.5 * projector->getViewportFovDiameter();
-	const float outerRadius = projector->getViewportWidth() + projector->getViewportHeight();
-	Q_ASSERT_X(innerRadius >= 0.0f && outerRadius > innerRadius,
-	           Q_FUNC_INFO, "Inner radius must be at least zero and outer radius must be greater");
-
-	const float sweepAngle = 360.0f;
-
-	static const int resolution = 192;
-
-	float sinCache[resolution];
-	float cosCache[resolution];
-
-	const float deltaRadius = outerRadius - innerRadius;
-	const int slices = resolution - 1;
-	// Cache is the vertex locations cache
-	for (int s = 0; s <= slices; s++)
-	{
-		const float angle = (M_PI * sweepAngle) / 180.0f * s / slices;
-		sinCache[s] = std::sin(angle);
-		cosCache[s] = std::cos(angle);
-	}
-	sinCache[slices] = sinCache[0];
-	cosCache[slices] = cosCache[0];
-
-	const float radiusHigh = outerRadius - deltaRadius;
-
-	StelVertexBuffer<VertexP2>* vertices = 
-		renderer->createVertexBuffer<VertexP2>(PrimitiveType_TriangleStrip);
-
-	const Vec2f center = projector->getViewportCenterAbsolute();
-	for (int i = 0; i <= slices; i++)
-	{
-		vertices->addVertex(VertexP2(center[0] + outerRadius * sinCache[i],
-		                             center[1] + outerRadius * cosCache[i]));
-		vertices->addVertex(VertexP2(center[0] + radiusHigh * sinCache[i],
-		                             center[1] + radiusHigh * cosCache[i]));
-	}
-
-	vertices->lock();
-	renderer->setCulledFaces(CullFace_None);
-	renderer->drawVertexBuffer(vertices);
-	delete vertices;
-}
 
 /*************************************************************************
  Update core state after drawing modules
 *************************************************************************/
-void StelCore::postDraw(StelRenderer* renderer)
+void StelCore::postDraw()
 {
-	drawViewportShape(renderer, getProjection(StelCore::FrameJ2000));
+	StelPainter sPainter(getProjection(StelCore::FrameJ2000));
+	sPainter.drawViewportShape();
 }
 
 void StelCore::setCurrentProjectionType(ProjectionType type)
@@ -404,7 +356,7 @@ StelCore::ProjectionType StelCore::getCurrentProjectionType() const
 void StelCore::setCurrentProjectionTypeKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	ProjectionType newType = (ProjectionType)en.keyToValue(key.toAscii().data());
+	ProjectionType newType = (ProjectionType)en.keyToValue(key.toLatin1().data());
 	if (newType<0)
 	{
 		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
@@ -472,7 +424,7 @@ QString StelCore::getDefaultLocationID() const
 QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)en.keyToValue(key.toAscii()))->getNameI18());
+	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)en.keyToValue(key.toLatin1()))->getNameI18());
 	return s;
 }
 
@@ -1388,12 +1340,12 @@ double StelCore::getDeltaT(double jDay) const
 		break;
 	case Custom:
 		// User defined coefficients for quadratic equation for DeltaT
-		ndot = getCustomNDot(); // n.dot = custom value "/cy/cy
+		ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
 		int year, month, day;
-		Vec3f coeff = getCustomEquationCoefficients();
+		Vec3f coeff = getDeltaTCustomEquationCoefficients();
 		StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
 		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-		double u = (yeardec-getCustomYear())/100;
+		double u = (yeardec-getDeltaTCustomYear())/100;
 		DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
 		break;
 	}
@@ -1408,7 +1360,7 @@ double StelCore::getDeltaT(double jDay) const
 void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm"));
-	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toAscii().data());
+	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toLatin1().data());
 	if (algo<0)
 	{
 		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"WithoutCorrection\" instead";

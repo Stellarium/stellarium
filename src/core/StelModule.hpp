@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include <QOpenGLFunctions>
 
 // Predeclaration
 class StelCore;
@@ -46,8 +47,9 @@ class QSettings;
 //!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 //! colorSchemeChanged(const QString&)
 //!	Load the given color style
-class StelModule : public QObject
+class StelModule : public QObject, protected QOpenGLFunctions 
 {
+	Q_OBJECT
 	// Do not add Q_OBJECT here!!
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.
@@ -60,24 +62,19 @@ public:
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
 	virtual void init() = 0;
 
-	//! Called before the module will be deleted, and before the renderer is destroyed.
-	//! Deinitialize all textures in this method.
+	//! Called before the module will be delete, and before the openGL context is suppressed.
+	//! Deinitialize all openGL texture in this method.
 	virtual void deinit() {;}
 
 	//! Execute all the drawing functions for this module.
-	//! @param core     the core to use for the drawing
-	//! @param renderer Renderer to draw with.
-	virtual void draw(StelCore* core, class StelRenderer* renderer) 
-	{
-		Q_UNUSED(core);
-		Q_UNUSED(renderer);
-	}
+	//! @param core the core to use for the drawing
+	virtual void draw(StelCore* core) {Q_UNUSED(core);}
 
 	//! Iterate through the drawing sequence.
 	//! This allow us to split the slow drawing operation into small parts,
 	//! we can then decide to pause the painting for this frame and used the cached image instead.
 	//! @return true if we should continue drawing (by calling the method again)
-	virtual bool drawPartial(StelCore* core, class StelRenderer* renderer);
+	virtual bool drawPartial(StelCore* core);
 
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
@@ -140,5 +137,7 @@ public:
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
 };
+
+Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)
 
 #endif // _STELMODULE_HPP_

@@ -24,7 +24,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelObjectType.hpp"
@@ -122,7 +122,7 @@ void TargetsDialog::catalogNumberChanged()
 void TargetsDialog::closeWindow()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(0);
 }
 
 void TargetsDialog::createTargetFromSelection()

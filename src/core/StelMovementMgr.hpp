@@ -53,7 +53,7 @@ public:
 	//! Update time-dependent things (does nothing).
 	virtual void update(double) {;}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*, class StelRenderer*) {;}
+	virtual void draw(StelCore*) {;}
 	//! Handle keyboard events.
 	virtual void handleKeys(QKeyEvent* event);
 	//! Handle mouse movement events.

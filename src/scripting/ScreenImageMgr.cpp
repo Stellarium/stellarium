@@ -19,7 +19,7 @@
 
 
 #include "ScreenImageMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
@@ -48,7 +48,7 @@ ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, f
 	{
 		QString path = StelFileMgr::findFile("scripts/" + filename);
 		QPixmap pm(path);
-		tex = StelMainGraphicsView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
+		tex = StelMainView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
 		tex->setPos(x, y);
 
 		anim = new QGraphicsItemAnimation();
@@ -195,9 +195,8 @@ void ScreenImageMgr::init()
 {
 }
 
-void ScreenImageMgr::draw(StelCore* core, class StelRenderer* renderer)
+void ScreenImageMgr::draw(StelCore* core)
 {
-	Q_UNUSED(renderer);
 	foreach(ScreenImage* m, allScreenImages)
 		if (m!=NULL)
 			m->draw(core);

@@ -24,8 +24,9 @@
 #include <QString>
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
-#include "StelProjectorType.hpp"
+#include "StelTextureTypes.hpp"
 
+class StelPainter;
 class QDataStream;
 
 class Nebula : public StelObject
@@ -52,7 +53,7 @@ public:
 	virtual QString getType() const {return "Nebula";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
 	virtual double getCloseViewFov(const StelCore* core = NULL) const;
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor() const;
 	virtual QString getNameI18n() const {return nameI18;}
@@ -70,34 +71,6 @@ public:
 
 private:
 	friend struct DrawNebulaFuncObject;
-
-	//! Textures used to draw nebula hints.
-	struct NebulaHintTextures
-	{
-		//! The symbolic circle texture. (default)
-		class StelTextureNew* texCircle;  
-		//! The symbolic galaxy texture. (Type 0)
-		class StelTextureNew* texGalaxy;
-		//! The open cluster marker texture. (Type 1)
-		class StelTextureNew* texOpenCluster;
-		//! The globular cluster marker texture. (Type 2)
-		class StelTextureNew* texGlobularCluster;
-		//! The diffuse nebula marker texture. (Type 3)
-		class StelTextureNew* texDiffuseNebula;
-		//! The planetary nebula marker texture. (type 4)
-		class StelTextureNew* texPlanetaryNebula;
-		//! The "Open cluster with Nebulosity" nebula marker texture. (Type 7)
-		class StelTextureNew* texOpenClusterWithNebulosity;
-		//! Are we initialized yet?
-		bool initialized;
-
-		//! Default constructor - construct uninitialized NebulaHintTextures.
-		NebulaHintTextures(): initialized(false){}
-		//! Destructor - frees resources if initialized.
-		~NebulaHintTextures();
-		//! Lazily initialize the data, using given renderer to create textures/shader.
-		void lazyInit(class StelRenderer* renderer);
-	};
 	
 	//! @enum NebulaType Nebula types
 	enum NebulaType
@@ -114,13 +87,13 @@ private:
 	};
 
 	//! Translate nebula name using the passed translator
-	void translateName(StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
+	void translateName(const StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);
 			
-	void drawHints(StelRenderer* renderer, float maxMagHints, NebulaHintTextures& hintTextures);
-	void drawLabel(StelRenderer* renderer, StelProjectorP projector, float maxMagLabel);
+	void drawLabel(StelPainter& sPainter, float maxMagLabel);
+	void drawHints(StelPainter& sPainter, float maxMagHints);
 
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
@@ -136,6 +109,13 @@ private:
 
 	SphericalRegionP pointRegion;
 
+	static StelTextureSP texCircle;   // The symbolic circle texture
+	static StelTextureSP texGalaxy;
+	static StelTextureSP texOpenCluster;
+	static StelTextureSP texGlobularCluster;
+	static StelTextureSP texPlanetaryNebula;
+	static StelTextureSP texDiffuseNebula;
+	static StelTextureSP texOpenClusterWithNebulosity;
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;

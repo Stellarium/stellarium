@@ -32,9 +32,9 @@ CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();
 
-	ndot = core->getCustomNDot();
-	year = core->getCustomYear();
-	coeff = core->getCustomEquationCoefficients();
+	ndot = core->getDeltaTCustomNDot();
+	year = core->getDeltaTCustomYear();
+	coeff = core->getDeltaTCustomEquationCoefficients();
 }
 
 CustomDeltaTEquationDialog::~CustomDeltaTEquationDialog()
@@ -97,35 +97,35 @@ void CustomDeltaTEquationDialog::saveSettings(void) const
 void CustomDeltaTEquationDialog::setNDot(const QString& v)
 {
 	ndot = v.toFloat();
-	core->setCustomNDot(ndot);
+	core->setDeltaTCustomNDot(ndot);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setYear(const QString& v)
 {
 	year = v.toFloat();
-	core->setCustomYear(year);
+	core->setDeltaTCustomYear(year);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffA(const QString& v)
 {
 	coeff[0] = v.toFloat();
-	core->setCustomEquationCoefficients(coeff);
+	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffB(const QString& v)
 {
 	coeff[1] = v.toFloat();
-	core->setCustomEquationCoefficients(coeff);
+	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffC(const QString& v)
 {
 	coeff[2] = v.toFloat();
-	core->setCustomEquationCoefficients(coeff);
+	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 

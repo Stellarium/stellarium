@@ -48,8 +48,7 @@ public:
 		void* userDataPtr,
 		OsculatingFunctType *osculatingFunc,
 		bool closeOrbit,
-		bool hidden,
-		const QString &pType);
+		bool hidden);
 
 	~MinorPlanet();
 
@@ -71,10 +70,10 @@ public:
 	//was not designed to handle different types of objects.
 	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
 	//virtual QString getType() const {return "MinorPlanet";}
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overriden to handle the problem with name conflicts.
-	virtual void translateName(StelTranslator& trans);
+	virtual void translateName(const StelTranslator& trans);
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as

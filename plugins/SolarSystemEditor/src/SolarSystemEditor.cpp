@@ -21,6 +21,7 @@
 #include "SolarSystemEditor.hpp"
 #include "SolarSystemManagerWindow.hpp"
 
+#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
@@ -59,8 +60,6 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.");
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(SolarSystemEditor, SolarSystemEditorStelPluginInterface)
 
 SolarSystemEditor::SolarSystemEditor()
 {
@@ -127,7 +126,7 @@ void SolarSystemEditor::update(double) //deltaTime
 	//
 }
 
-void SolarSystemEditor::draw(StelCore*, class StelRenderer*) //core
+void SolarSystemEditor::draw(StelCore*) //core
 {
 	//
 }
@@ -567,11 +566,11 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 			QChar prefix = packedMinorPlanetNumber.cap(1).at(0);
 			if (prefix.isUpper())
 			{
-				minorPlanetNumber += ((10 + prefix.toAscii() - 'A') * 10000);
+				minorPlanetNumber += ((10 + prefix.toLatin1() - 'A') * 10000);
 			}
 			else
 			{
-				minorPlanetNumber += ((10 + prefix.toAscii() - 'a' + 26) * 10000);
+				minorPlanetNumber += ((10 + prefix.toLatin1() - 'a' + 26) * 10000);
 			}
 		}
 		else
@@ -699,7 +698,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		return SsoElements();
 	}
 	int year = packedDateFormat.cap(2).toInt();
-	switch (packedDateFormat.cap(1).at(0).toAscii())
+	switch (packedDateFormat.cap(1).at(0).toLatin1())
 	{
 		case 'I':
 			year += 1800;
@@ -1432,7 +1431,7 @@ int SolarSystemEditor::unpackDayOrMonthNumber(QChar digit)
 
 	if (digit.isUpper())
 	{
-		char letter = digit.toAscii();
+		char letter = digit.toLatin1();
 		if (letter < 'A' || letter > 'V')
 			return 0;
 		return (10 + (letter - 'A'));
@@ -1466,9 +1465,9 @@ int SolarSystemEditor::unpackAlphanumericNumber (QChar prefix, int lastDigit)
 	if (prefix.isDigit())
 		cycleCount += prefix.digitValue() * 10;
 	else if (prefix.isLetter() && prefix.isUpper())
-		cycleCount += (10 + prefix.toAscii() - QChar('A').toAscii()) * 10;
+		cycleCount += (10 + prefix.toLatin1() - QChar('A').toLatin1()) * 10;
 	else if (prefix.isLetter() && prefix.isLower())
-		cycleCount += (10 + prefix.toAscii() - QChar('a').toAscii()) * 10 + 26*10;
+		cycleCount += (10 + prefix.toLatin1() - QChar('a').toLatin1()) * 10 + 26*10;
 	else
 		cycleCount = 0; //Error
 

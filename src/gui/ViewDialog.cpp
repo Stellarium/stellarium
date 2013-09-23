@@ -476,34 +476,21 @@ void ViewDialog::updateSkyCultureText()
 {
 	StelApp& app = StelApp::getInstance();
 	QString skyCultureId = app.getSkyCultureMgr().getCurrentSkyCultureID();
-	QString descPath;
-	try
+	QString lang = app.getLocaleMgr().getAppLanguage();
+	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
 	{
-		QString lang = app.getLocaleMgr().getAppLanguage();
-		if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
-		{
-			lang = lang.split("_").at(0);
-		}
-		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
+		lang = lang.split("_").at(0);
 	}
-	catch (std::runtime_error& e)
+	QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
+	if (descPath.isEmpty())
 	{
-		try
-		{
-			descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
-		}
-		catch (std::runtime_error& e)
-		{
+		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
+		if (descPath.isEmpty())
 			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
-		}
 	}
 
 	QStringList searchPaths;
-	try
-	{
-		searchPaths << StelFileMgr::findFile("skycultures/" + skyCultureId);
-	}
-	catch (std::runtime_error& e) {}
+	searchPaths << StelFileMgr::findFile("skycultures/" + skyCultureId);
 
 	ui->skyCultureTextBrowser->setSearchPaths(searchPaths);
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
@@ -519,12 +506,6 @@ void ViewDialog::updateSkyCultureText()
 		QFile f(descPath);
 		f.open(QIODevice::ReadOnly);
 		QString htmlFile = QString::fromUtf8(f.readAll());
-#if QT_VERSION == 0x040800
-		// Workaround for https://bugreports.qt-project.org/browse/QTBUG-24077
-		QString path = QFileInfo(f).path();
-		QString newtag = "<img src=\"" + path + "/\\1";
-		htmlFile.replace(QRegExp("<img src=\"(\\w)"), newtag);
-#endif
 		ui->skyCultureTextBrowser->setHtml(htmlFile);
 	}
 }

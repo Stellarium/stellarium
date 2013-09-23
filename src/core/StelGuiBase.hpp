@@ -35,7 +35,7 @@ public:
 	StelGuiBase();
 	virtual ~StelGuiBase() {;}
 
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget);
+	virtual void init(QGraphicsWidget *atopLevelGraphicsWidget);
 
 	//! Load color scheme matchin the section name.
 	virtual void setStelStyle(const QString& section) =0;
@@ -43,11 +43,6 @@ public:
 	//! Get a pointer on the info panel used to display selected object info
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) =0;
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const =0;
-
-	//! Add a new progress bar in the lower right corner of the screen.
-	//! When the progress bar is deleted  the layout is automatically rearranged.
-	//! @return a pointer to the progress bar.
-	virtual class QProgressBar* addProgressBar() =0;
 
 	virtual void forceRefreshGui() {;}
 
@@ -62,7 +57,6 @@ public:
 
 
 protected:
-	class StelAppGraphicsWidget* stelAppGraphicsWidget;
 	//! Translate all texts to the new Locale.
 	void updateI18n();
 	

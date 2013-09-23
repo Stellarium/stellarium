@@ -35,7 +35,7 @@ class StelCore;
 class StelObject : public StelRegionObject
 {
 public:
-	//! @enum InfoStringGroupFlags used as named bitfield flags as specifiers to
+	//! @enum InfoStringGroup used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
 	//! be documented in the getInfoString documentation for the derived classes
 	//! for all specifiers which are defined in that derivative.
@@ -125,8 +125,11 @@ public:
 	//! The frame has it's Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
-	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	//! Return object's apparent V magnitude as seen from observer, without including extinction.
+	virtual float getVMagnitude(const StelCore* core) const;
+	
+	//! Return object's apparent V magnitude as seen from observer including extinction.
+	float getVMagnitudeWithExtinction(const StelCore* core) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority

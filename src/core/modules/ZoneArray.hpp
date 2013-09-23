@@ -31,10 +31,10 @@
 #include "Star.hpp"
 
 #include "StelCore.hpp"
-#include "StarMgr.hpp"
-#include "StelProjector.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StarMgr.hpp"
 
+#include "StelPainter.hpp"
 
 #ifdef __OpenBSD__
 #include <unistd.h>
@@ -98,12 +98,12 @@ public:
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-	                          QList<StelObjectP> &result) = 0;
+							  QList<StelObjectP > &result) = 0;
 
 	//! Pure virtual method. See subclass implementation.
-	virtual void draw(StelProjectorP projector, class StelRenderer* renderer, int index,
-	                  bool is_inside, const float *rcmag_table, StelCore* core,
-	                  unsigned int maxMagStarName,float names_brightness) const = 0;
+	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
+					  const float *rcmag_table, StelCore* core,
+					  unsigned int maxMagStarName,float names_brightness) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
@@ -122,10 +122,10 @@ public:
 	//! Level in StelGeodesicGrid.
 	const int level;
 
-	//! Lower bound of magnitudes in this catalog. Units: millimag. May be negative for brightest stars.
+	//! Lower bound of magnitudes in this level. Units: millimag. May be negative for brightest stars.
 	const int mag_min;
 
-	//! Range of magnitudes in this catalog. Units: millimags
+	//! Range of magnitudes in this level. Units: millimags
 	const int mag_range;
 
 	//! Number of steps used to describe values in @em mag_range. Always positive. Individual stars have their mag entries from 0..mag_steps.
@@ -174,17 +174,16 @@ protected:
 	}
 
 	//! Draw stars and their names onto the viewport.
-	//! @param projector        Projector to project 3D coords to the viewport.
-	//! @param renderer         Renderer to use for drawing.
-	//! @param index            zone index to draw
-	//! @param is_inside        whether the zone is inside the current viewport
-	//! @param rcmag_table      table of magnitudes
-	//! @param core             core to use for drawing
-	//! @param maxMagStarName   magnitude limit of stars that display labels
+	//! @param sPainter the painter to use 
+	//! @param index zone index to draw
+	//! @param isInsideViewport whether the zone is inside the current viewport
+	//! @param rcmag_table table of magnitudes
+	//! @param core core to use for drawing
+	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
-	void draw(StelProjectorP projector, class StelRenderer* renderer, int index,
-	          bool is_inside, const float *rcmag_table, StelCore* core,
-	          unsigned int maxMagStarName,float names_brightness) const;
+	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
+			  const float *rcmag_table, StelCore* core,
+			  unsigned int maxMagStarName, float names_brightness) const;
 
 	void scaleAxis(void);
 	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,

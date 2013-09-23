@@ -19,16 +19,14 @@
 
 #include "Satellite.hpp"
 #include "StelObject.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelLocation.hpp"
 #include "StelCore.hpp"
+#include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "renderer/StelCircleArcRenderer.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
-
 
 #include <QTextStream>
 #include <QRegExp>
@@ -42,6 +40,7 @@
 #include <cmath>
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
+StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.0;
 float Satellite::hintScale = 1.f;
@@ -355,17 +354,9 @@ Vec3f Satellite::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
 }
 
-float Satellite::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Satellite::getVMagnitude(const StelCore* core) const
 {
-    float extinctionMag=0.0; // track magnitude loss
-    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-    {
-	Vec3d altAz=getAltAzPosApparent(core);
-	altAz.normalize();
-	core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-    }
-
-    return 5.0 + extinctionMag;
+    return 5.0;
 }
 
 double Satellite::getAngularSize(const StelCore*) const
@@ -511,35 +502,37 @@ bool Satellite::operator <(const Satellite& another) const
 		return false;
 }
 
-void Satellite::draw(const StelCore* core, StelRenderer* renderer, 
-                     StelProjectorP projector, StelTextureNew* hintTexture)
+void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
 	if (core->getJDay() < jdLaunchYearJan1) return;
 
 	XYZ = getJ2000EquatorialPos(core);
 	Vec3f drawColor;
 	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
-	StelApp::getInstance().getVisionModeNight() 
-		? renderer->setGlobalColor(0.6,0.0,0.0,1.0) 
-		: renderer->setGlobalColor(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
+	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
+
+	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	Vec3d xy;
-	if (core->getProjection(StelCore::FrameJ2000)->project(XYZ,xy))
+	if (prj->project(XYZ,xy))
 	{
 		if (Satellite::showLabels)
 		{
-			renderer->drawText(TextParams(xy[0], xy[1], name).shift(10, 10).useGravity());
+			painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
+			Satellite::hintTexture->bind();
 		}
-		renderer->drawTexturedRect(xy[0] - 11, xy[1] - 11, 22, 22);
+		painter.drawSprite2dMode(xy[0], xy[1], 11);
 
-		if (orbitDisplayed && Satellite::orbitLinesFlag) {drawOrbit(renderer, projector);}
+		if (orbitDisplayed && Satellite::orbitLinesFlag) drawOrbit(painter);
 	}
 }
 
 
-void Satellite::drawOrbit(StelRenderer* renderer, StelProjectorP projector)
+void Satellite::drawOrbit(StelPainter& painter)
 {
 	Vec3d position,previousPosition;
+
+	glDisable(GL_TEXTURE_2D);
 
 	QList<Vec3d>::iterator it= orbitPoints.begin();
 
@@ -547,9 +540,9 @@ void Satellite::drawOrbit(StelRenderer* renderer, StelProjectorP projector)
 	previousPosition.set(it->operator [](0), it->operator [](1), it->operator [](2));
 
 	it++;
+	StelVertexArray vertexArray;
+	vertexArray.primitiveType=StelVertexArray::Lines;
 
-	QVector<Vec3d> orbitArcPoints;
-	StelCircleArcRenderer circleArcRenderer(renderer, projector);
 	//Rest of points
 	for (int i=1; i<orbitPoints.size(); i++)
 	{
@@ -561,21 +554,21 @@ void Satellite::drawOrbit(StelRenderer* renderer, StelProjectorP projector)
 		// Draw end (fading) parts of orbit lines one segment at a time.
 		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
 		{
-			renderer->setGlobalColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2],
-			                         hintBrightness * calculateOrbitSegmentIntensity(i));
-			circleArcRenderer.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
+			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+			painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
 		}
 		else
 		{
-			orbitArcPoints << previousPosition << position;
+			vertexArray.vertex << previousPosition << position;
 		}
 		previousPosition = position;
 	}
 
 	// Draw center section of orbit in one go
-	renderer->setGlobalColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2],
-	                         hintBrightness);
-	circleArcRenderer.drawGreatCircleArcs(orbitArcPoints, PrimitiveType_Lines, &viewportHalfspace);
+	painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness);
+	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
+
+	glEnable(GL_TEXTURE_2D);
 }
 
 

@@ -25,7 +25,7 @@
 #include "StelGui.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 
 #include <QAbstractItemModel>
@@ -128,7 +128,7 @@ void OcularDialog::updateStyle()
 void OcularDialog::closeWindow()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(0);
 }
 
 void OcularDialog::deleteSelectedCCD()
@@ -521,12 +521,12 @@ void OcularDialog::initAboutText()
 	Q_ASSERT(actionMenu);
 	QKeySequence ocularShortcut = actionOcular->shortcut();
 	QString ocularString = ocularShortcut.toString(QKeySequence::NativeText);
-	ocularString = Qt::escape(ocularString);
+	ocularString = ocularString.toHtmlEscaped();
 	if (ocularString.isEmpty())
 		ocularString = q_("[no key defined]");
 	QKeySequence menuShortcut = actionMenu->shortcut();
 	QString menuString = menuShortcut.toString(QKeySequence::NativeText);
-	menuString = Qt::escape(menuString);
+	menuString = menuString.toHtmlEscaped();
 	if (menuString.isEmpty())
 		menuString = q_("[no key defined]");
 

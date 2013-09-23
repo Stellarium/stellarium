@@ -30,6 +30,7 @@
 #include "StelFader.hpp"
 #include "StelProjectorType.hpp"
 
+class StelPainter;
 
 //! @class Nova
 //! A Nova object represents one nova on the sky.
@@ -76,7 +77,7 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position
 
-	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	void draw(StelCore* core, StelPainter* painter);
 
 	// Nova
 	QString designation;		//! The ID of the nova

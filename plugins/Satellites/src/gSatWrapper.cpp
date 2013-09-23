@@ -48,7 +48,7 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 	// The TLE library actually modifies the TLE strings, which is annoying (because
 	// when we get updates, we want to check if there has been a change by using ==
 	// with the original.  Thus we make a copy to send to the TLE library.
-	QByteArray t1(tle1.toAscii().data()), t2(tle2.toAscii().data());
+	QByteArray t1(tle1.toLatin1().data()), t2(tle2.toLatin1().data());
 
 	// Also, the TLE library expects no more than 130 characters length input.  We
 	// shouldn't have sane input with a TLE longer than about 80, but just in case
@@ -56,7 +56,7 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 	t1.truncate(130);
 	t2.truncate(130);
 
-	pSatellite = new gSatTEME(designation.toAscii().data(),
+	pSatellite = new gSatTEME(designation.toLatin1().data(),
 	                          t1.data(),
 	                          t2.data());
 	updateEpoch();
