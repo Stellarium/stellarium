@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-27 19:18+0700\n"
+"POT-Creation-Date: 2013-09-10 20:03+0700\n"
 "PO-Revision-Date: 2013-05-28 11:40+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-28 04:43+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-09-11 04:50+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1280
+#: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1286
 msgid "Meridian"
 msgstr "Meridiano"
 
-#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1288
+#: src/core/modules/GridLinesMgr.cpp:568 src/ui_viewDialog.h:1294
 msgid "Ecliptic"
 msgstr "Eclittica"
 
-#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1276
+#: src/core/modules/GridLinesMgr.cpp:572 src/ui_viewDialog.h:1282
 msgid "Equator"
 msgstr "Equatore"
 
-#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1284
+#: src/core/modules/GridLinesMgr.cpp:576 src/ui_viewDialog.h:1290
 msgid "Horizon"
 msgstr "Orizzonte"
 
@@ -37,20 +37,20 @@ msgstr "Orizzonte"
 msgid "Galactic Plane"
 msgstr "Piano galattico"
 
-#: src/core/modules/LandscapeMgr.cpp:523
+#: src/core/modules/LandscapeMgr.cpp:527
 msgid "Author: "
 msgstr "Autore: "
 
-#: src/core/modules/LandscapeMgr.cpp:526
+#: src/core/modules/LandscapeMgr.cpp:530
 msgid "Location: "
 msgstr "Posizione: "
 
-#: src/core/modules/LandscapeMgr.cpp:531
+#: src/core/modules/LandscapeMgr.cpp:535
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:535
+#: src/core/modules/LandscapeMgr.cpp:539
 msgid "Planet: "
 msgstr "Pianeta: "
 
@@ -796,31 +796,31 @@ msgstr "Non trovato"
 msgid "Found"
 msgstr "Trovato"
 
-#: src/gui/ConfigurationDialog.cpp:436 src/gui/ConfigurationDialog.cpp:438
+#: src/gui/ConfigurationDialog.cpp:437 src/gui/ConfigurationDialog.cpp:439
 msgid "Select screenshot directory"
 msgstr "Selezionare la cartella delle schermate"
 
-#: src/gui/ConfigurationDialog.cpp:663
+#: src/gui/ConfigurationDialog.cpp:666
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "FOV di partenza: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:671
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direzione di partenza della visualizzazione Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:714
+#: src/gui/ConfigurationDialog.cpp:717
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:379
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:715 src/gui/ViewDialog.cpp:451
+#: src/gui/ConfigurationDialog.cpp:718 src/gui/ViewDialog.cpp:454
 msgid "Contact"
 msgstr "Contatto"
 
-#: src/gui/ConfigurationDialog.cpp:798
+#: src/gui/ConfigurationDialog.cpp:801
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
@@ -830,19 +830,19 @@ msgstr "Contatto"
 msgid "Author"
 msgstr "Autore"
 
-#: src/gui/ConfigurationDialog.cpp:802
+#: src/gui/ConfigurationDialog.cpp:805
 msgid "License"
 msgstr "Licenza"
 
-#: src/gui/ConfigurationDialog.cpp:826
+#: src/gui/ConfigurationDialog.cpp:829
 msgid "Running script: "
 msgstr "Script in esecuzione: "
 
-#: src/gui/ConfigurationDialog.cpp:833
+#: src/gui/ConfigurationDialog.cpp:836
 msgid "Running script: [none]"
 msgstr "Script in esecuzione: [nessuno]"
 
-#: src/gui/ConfigurationDialog.cpp:898
+#: src/gui/ConfigurationDialog.cpp:901
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -850,16 +850,16 @@ msgstr ""
 "Lo scaricamento dei nuovi cataloghi di stelle è completato!\n"
 "Riavviare Stellarium per visualizzarli."
 
-#: src/gui/ConfigurationDialog.cpp:902
+#: src/gui/ConfigurationDialog.cpp:905
 msgid "All available star catalogs have been installed."
 msgstr "Tutti i cataloghi stellari disponibili sono stati installati."
 
-#: src/gui/ConfigurationDialog.cpp:907
+#: src/gui/ConfigurationDialog.cpp:910
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Ricezione del catalogo %1 di %2"
 
-#: src/gui/ConfigurationDialog.cpp:914
+#: src/gui/ConfigurationDialog.cpp:917
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -868,7 +868,7 @@ msgstr ""
 "Scaricamento di %1 ...\n"
 "(È possibile chiudere questa finestra.)"
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:924
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -879,7 +879,7 @@ msgstr ""
 "Numero di stelle: %2 Million\n"
 "Intervallo di magnitudine: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:964 src/gui/ConfigurationDialog.cpp:1000
+#: src/gui/ConfigurationDialog.cpp:967 src/gui/ConfigurationDialog.cpp:1003
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -888,11 +888,11 @@ msgstr ""
 "Errore nello scaricamento di %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1052
+#: src/gui/ConfigurationDialog.cpp:1055
 msgid "Verifying file integrity..."
 msgstr "Verifica dell'integrità del file..."
 
-#: src/gui/ConfigurationDialog.cpp:1056
+#: src/gui/ConfigurationDialog.cpp:1059
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -902,123 +902,123 @@ msgstr ""
 "Il file è danneggiato."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1129
+#: src/gui/ConfigurationDialog.cpp:1132
 msgid "Algorithm of"
 msgstr "Algoritmo di"
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1143
 msgid "Without correction"
 msgstr "Senza correzione"
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1146
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1147
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1148
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) e Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1149
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1150
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1151
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1152
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1150
+#: src/gui/ConfigurationDialog.cpp:1153
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1151
+#: src/gui/ConfigurationDialog.cpp:1154
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1155
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1156
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (con Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "JPL Horizons"
 msgstr "Orizzonti JPL"
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1173
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Equazione personalizzata di %1T"
@@ -1208,31 +1208,31 @@ msgstr "Spazio"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:512
+#: src/gui/ViewDialog.cpp:515
 msgid "No description"
 msgstr "Nessuna descrizione"
 
-#: src/gui/ViewDialog.cpp:628
+#: src/gui/ViewDialog.cpp:631
 msgid "No shooting stars"
 msgstr "Nessuna stella cadente"
 
-#: src/gui/ViewDialog.cpp:631
+#: src/gui/ViewDialog.cpp:634
 msgid "Normal rate"
 msgstr "Frequenza normale"
 
-#: src/gui/ViewDialog.cpp:634
+#: src/gui/ViewDialog.cpp:637
 msgid "Standard Perseids rate"
 msgstr "Frequenza standard delle Perseidi"
 
-#: src/gui/ViewDialog.cpp:637
+#: src/gui/ViewDialog.cpp:640
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:640
+#: src/gui/ViewDialog.cpp:643
 msgid "Exceptional Leonid rate"
 msgstr "Frequenza eccezionale di Leonidi"
 
-#: src/gui/ViewDialog.cpp:643
+#: src/gui/ViewDialog.cpp:646
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Frequenza maggiore di sempre (Leonidi, 1966)"
 
@@ -2106,7 +2106,7 @@ msgstr ""
 
 #: src/translations.h:275
 msgid ""
-"Screensaver of various happenings in the Solar System. 177 events in all!"
+"Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
 
 #: src/translations.h:276
@@ -3307,16 +3307,16 @@ msgstr "Capovolgi la visuale orizzontalmente"
 msgid "Full-screen mode"
 msgstr "Modalità schermo intero"
 
-#: src/translations.h:583 src/ui_viewDialog.h:1226
+#: src/translations.h:583 src/ui_viewDialog.h:1232
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/translations.h:584 src/ui_viewDialog.h:1271
+#: src/translations.h:584 src/ui_viewDialog.h:1277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Azimuthal grid"
 msgstr "Griglia coordinate Azimuthali"
 
-#: src/translations.h:585 src/ui_viewDialog.h:1293
+#: src/translations.h:585 src/ui_viewDialog.h:1299
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Cardinal points"
 msgstr "Punti Cardinali"
@@ -3345,7 +3345,7 @@ msgstr "Linee delle costellazioni"
 msgid "Deep-sky objects background images"
 msgstr ""
 
-#: src/translations.h:591 src/ui_viewDialog.h:1270
+#: src/translations.h:591 src/ui_viewDialog.h:1276
 msgid "Ecliptic J2000 grid"
 msgstr "Griglia ellittica J2000"
 
@@ -3359,12 +3359,12 @@ msgstr "Eclittica"
 msgid "Equator line"
 msgstr "Equatore Celeste"
 
-#: src/translations.h:594 src/ui_viewDialog.h:1269
+#: src/translations.h:594 src/ui_viewDialog.h:1275
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:328
 msgid "Equatorial grid"
 msgstr "Griglia equatoriale"
 
-#: src/translations.h:595 src/ui_viewDialog.h:1268
+#: src/translations.h:595 src/ui_viewDialog.h:1274
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:333
 msgid "Equatorial J2000 grid"
 msgstr "Griglia equatoriale (J2000)"
@@ -3373,12 +3373,12 @@ msgstr "Griglia equatoriale (J2000)"
 msgid "Fog"
 msgstr "Nebbia"
 
-#: src/translations.h:597 src/ui_viewDialog.h:1272
+#: src/translations.h:597 src/ui_viewDialog.h:1278
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Galactic grid"
 msgstr "Griglia galattica"
 
-#: src/translations.h:598 src/ui_viewDialog.h:1292
+#: src/translations.h:598 src/ui_viewDialog.h:1298
 msgid "Galactic plane"
 msgstr "Piano galattico"
 
@@ -3419,8 +3419,8 @@ msgstr "Orbite pianeti"
 msgid "Planet trails"
 msgstr "Orbite dei pianeti"
 
-#: src/translations.h:607 src/ui_viewDialog.h:1210 src/ui_viewDialog.h:1233
-#: src/ui_viewDialog.h:1256
+#: src/translations.h:607 src/ui_viewDialog.h:1216 src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1262
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Stars"
 msgstr "Stelle"
@@ -3898,242 +3898,246 @@ msgstr ""
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1296
-#: src/ui_viewDialog.h:1301 src/ui_viewDialog.h:1303
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1308 src/ui_viewDialog.h:1310
 #: src/ui_configurationDialog.h:1137 src/ui_configurationDialog.h:1148
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Opzioni"
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1200
 msgid "View"
 msgstr "Visualizza"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1206
 msgid "Sky"
 msgstr "Cielo"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1208
 msgid "Markings"
 msgstr "Indicatori"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1210
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Landscape"
 msgstr "Paesaggio"
 
-#: src/ui_viewDialog.h:1206
+#: src/ui_viewDialog.h:1212
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "Starlore"
 msgstr "Tradizioni"
 
-#: src/ui_viewDialog.h:1209
+#: src/ui_viewDialog.h:1215
 msgid "Labels and Markers"
 msgstr "Etichette e Indicatori"
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1217
 msgid "Planets"
 msgstr "Pianeti"
 
-#: src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1219
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1221 src/ui_viewDialog.h:1266
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1222
 msgid "Planets and satellites"
 msgstr "Pianeti e satelliti"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1223
 msgid "Show planets"
 msgstr "Mostra pianeti"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1224
 msgid "Show planet markers"
 msgstr "Mostra indicatori dei pianeti"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1225
 msgid "Show planet orbits"
 msgstr "Mostra orbite dei pianeti"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1226
 msgid "Simulate light speed"
 msgstr "Simula la velocità della luce"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1227
 msgid "Scale Moon"
 msgstr "Mostra la Luna in scala"
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1229
 msgid "Automatic change of landscape when planet is changed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1231
 msgid "Auto select landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1233
 msgid "Show atmosphere"
 msgstr "Mostra atmosfera"
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Light pollution:"
 msgstr "Inquinamento luminoso:"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1236
 msgid "pressure, temperature, extinction coefficient"
 msgstr "pressione, temperatura, coefficiente di estinzione"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1238
 msgid "Refraction/Extinction settings..."
 msgstr "Impostazioni di Rifrazione e Estinzione"
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Absolute scale:"
 msgstr "Scala assoluta:"
 
-#: src/ui_viewDialog.h:1235
+#: src/ui_viewDialog.h:1241
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Relative scale:"
 msgstr "Scala relativa:"
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1242
 msgid "Milky Way brightness:"
 msgstr "Luminosità della Via Lattea:"
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1243
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Twinkle:"
 msgstr "Scintillìo:"
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1245
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Oscura le stelle deboli quando è visibile un oggetto molto luminoso"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1247
 msgid "Dynamic eye adaptation"
 msgstr "Adattamento dinamico dell'occhio"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1248
 msgid "Shooting Stars"
 msgstr "Stelle Cadenti"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1250
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1252
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1253
 msgid "1000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1250
+#: src/ui_viewDialog.h:1256
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1252
+#: src/ui_viewDialog.h:1258
 msgid "Limit Magnitudes"
 msgstr "Magnitudini limite"
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1260
 msgid "Limit the magnitude of stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1264
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1267
 msgid "Constellations"
 msgstr "Costellazioni"
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1268
 msgid "Show lines"
 msgstr "Mostra linee"
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1269
 msgid "Show labels"
 msgstr "Mostra etichette"
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1270
 msgid "Show boundaries"
 msgstr "Mostra confini"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1271
 msgid "Show art"
 msgstr "Mostra figure"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:293
 msgid "Art brightness:"
 msgstr "Luminosità dell'arte:"
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1273
 msgid "Celestial Sphere"
 msgstr "Sfera Celeste"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1280
 msgid "Show equator line"
 msgstr "Mostra la linea dell'equatore"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1284
 msgid "Show meridian line"
 msgstr "Mostra la linea del meridiano"
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1288
 msgid "Show horizon line"
 msgstr "Mostra la linea dell'orizzonte"
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1292
 msgid "Show ecliptic line"
 msgstr "Mostra l'eclittica"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1296
 msgid "Show Galactic plane line"
 msgstr "Mostra l'equatore galattico"
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1300
 msgid "Projection"
 msgstr "Proiezione"
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1301
 msgid "Add/remove landscapes..."
 msgstr "Aggiungi/Rimuovi panorami..."
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1303
 msgid "Show ground"
 msgstr "Mostra orizzonte"
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1304
 msgid "Show fog"
 msgstr "Mostra nebbia"
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1305
 msgid "Use associated planet and position"
 msgstr "Usa pianeta e posizione associati"
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1306
 msgid "Use this landscape as default"
 msgstr "Usa questo paesaggio come predefinito"
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1307
+msgid "Use brightness settings for landscapes"
+msgstr ""
+
+#: src/ui_viewDialog.h:1309
 msgid "Use this sky culture as default"
 msgstr "Utilizza questa cultura del cielo come predefinita"
 
-#: src/ui_viewDialog.h:1304
+#: src/ui_viewDialog.h:1311
 msgid "Visible"
 msgstr "Visibile"
 
@@ -6434,62 +6438,62 @@ msgstr ""
 "cambia il modo in cui ora e data sono indicati nella barra inferiore."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "January"
 msgstr "Gennaio"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "February"
 msgstr "Febbraio"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "March"
 msgstr "Marzo"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "April"
 msgstr "Aprile"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "May"
 msgstr "Maggio"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "June"
 msgstr "Giugno"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "July"
 msgstr "Luglio"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "August"
 msgstr "Agosto"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "September"
 msgstr "Settembre"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "October"
 msgstr "Ottobre"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "November"
 msgstr "Novembre"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:686
+#: plugins/Supernovae/src/Supernovae.cpp:701
 msgid "December"
 msgstr "Dicembre"
 
