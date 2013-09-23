@@ -165,8 +165,12 @@ void TelescopeControl::init()
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
 			addAction(name, "Telescope Control", text, "slewTelescopeToViewDirection()", shortcut);
 		}
+		// Temporary comment code for autotranslation GUI
+		// FIXME: Restore autotranslation for StelAction description --AW
+		/*
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
+		*/
 	
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
