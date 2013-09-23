@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QMetaProperty>
 #include <QStringList>
+#include <QSettings>
 
 StelAction::StelAction(const QString& actionId,
 					   const QString& groupId,
@@ -27,6 +28,18 @@ StelAction::StelAction(const QString& actionId,
 	property(NULL)
 {
 	setObjectName(actionId);
+	// Check the global conf for custom shortcuts.
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString confShortcut = conf->value("shortcuts/" + actionId).toString();
+	if (!confShortcut.isEmpty())
+	{
+		QStringList shortcuts = confShortcut.split(" ");
+		if (shortcuts.size() > 2)
+			qWarning() << actionId << ": does not support more than two shortcuts per action";
+		setShortcut(shortcuts[0]);
+		if (shortcuts.size() > 1)
+			setAltShortcut(shortcuts[1]);
+	}
 }
 
 void StelAction::setShortcut(const QString& key)
@@ -191,7 +204,20 @@ QList<StelAction*> StelActionMgr::getActionList(const QString& group) const
 
 void StelActionMgr::saveShortcuts()
 {
-	qWarning() << "saving shortcuts not implemented yet!";
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("shortcuts");
+	conf->remove("");
+	foreach(StelAction* action, findChildren<StelAction*>())
+	{
+		if (	action->keySequence == action->defaultKeySequence &&
+				action->altKeySequence == action->defaultAltKeySequence)
+			continue;
+		QString seq = action->keySequence.toString();
+		if (action->altKeySequence != action->defaultAltKeySequence)
+			seq += " " + action->altKeySequence.toString();
+		conf->setValue(action->objectName(), seq);
+	}
+	conf->endGroup();
 }
 
 void StelActionMgr::restoreDefaultShortcuts()
@@ -201,4 +227,5 @@ void StelActionMgr::restoreDefaultShortcuts()
 		action->keySequence = action->defaultKeySequence;
 		action->altKeySequence = action->defaultAltKeySequence;
 	}
+	saveShortcuts();
 }
