@@ -50,13 +50,13 @@ SET(TelescopeControl_UIS
   gui/telescopeDialog.ui
   gui/telescopeConfigurationDialog.ui)
 
-QT4_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
+QT5_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
 
 # Compile the resource files
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
-QT4_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

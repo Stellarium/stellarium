@@ -18,15 +18,16 @@
 
 #include "Supernova.hpp"
 #include "StelObject.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StarMgr.hpp"
-#include "StelRenderer.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StarMgr.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -77,7 +78,7 @@ QVariantMap Supernova::getMap(void)
 float Supernova::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core, false);
+        return getVMagnitude(core);
 }
 
 QString Supernova::getNameI18n(void) const
@@ -107,7 +108,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 {
 	QString str;
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core, false);
+	double mag = getVMagnitude(core);
 
 	if (flags&Name)
 	{
@@ -124,8 +125,8 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-									       QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+									       QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 	}
@@ -150,16 +151,8 @@ Vec3f Supernova::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Supernova::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Supernova::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
 	double vmag = 20;
 	double currentJD = core->getJDay();
 	double deltaJD = std::abs(peakJD-currentJD);
@@ -213,7 +206,7 @@ float Supernova::getVMagnitude(const StelCore* core, bool withExtinction) const
 	if (vmag<maxMagnitude)
 		vmag = maxMagnitude;
 
-	return vmag + extinctionMag;
+	return vmag;
 }
 
 double Supernova::getAngularSize(const StelCore*) const
@@ -226,7 +219,7 @@ void Supernova::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Supernova::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
@@ -239,27 +232,23 @@ void Supernova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 	double mag;
 
 	StelUtils::spheToRect(snra, snde, XYZ);
-	mag = getVMagnitude(core, true);
-	sd->preDrawPointSource();
+	mag = getVMagnitudeWithExtinction(core);
+	sd->preDrawPointSource(&painter);
 	float mlimit = sd->getLimitMagnitude();
 	
 	if (mag <= mlimit)
 	{
-		sd->computeRCMag(mag, rcMag);
-		const Vec3f XYZf(XYZ[0], XYZ[1], XYZ[2]);
-		Vec3f win;
-		if(sd->pointSourceVisible(&(*projector), XYZf, rcMag, false, win))
-		{
-			sd->drawPointSource(win, rcMag, color);
-		}
-		renderer->setGlobalColor(color[0], color[1], color[2], 1);
-		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
+		sd->computeRCMag(mag, rcMag);		
+//		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
+		sd->drawPointSource(&painter, XYZ, rcMag, color, false);
+		painter.setColor(color[0], color[1], color[2], 1);
+		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
-			renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 
-	sd->postDrawPointSource(projector);
+	sd->postDrawPointSource(&painter);
 }

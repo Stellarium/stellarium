@@ -45,8 +45,6 @@ StelPluginInfo TimeZoneConfigurationStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(TimeZoneConfiguration, TimeZoneConfigurationStelPluginInterface);
-
 TimeZoneConfiguration::TimeZoneConfiguration()
 {
 	setObjectName("TimeZoneConfiguration");

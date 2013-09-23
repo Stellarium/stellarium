@@ -77,11 +77,19 @@ Vec3d StelObject::getJ2000GalacticPos(const StelCore *core) const
 	return core->j2000ToGalactic(getJ2000EquatorialPos(core));
 }
 
-float StelObject::getVMagnitude(const StelCore* core, bool withExtinction) const 
+float StelObject::getVMagnitude(const StelCore* core) const 
 {
 	Q_UNUSED(core);
-	Q_UNUSED(withExtinction);
 	return 99;
+}
+
+float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
+{
+	Vec3d altAzPos = getAltAzPosApparent(core);
+	altAzPos.normalize();
+	float vMag = getVMagnitude(core);
+	core->getSkyDrawer()->getExtinction().forward(&altAzPos, &vMag); 
+	return vMag;
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
@@ -163,7 +171,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</b>", "");
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
-		str.replace("<br>", "\n");
+		str.replace(QRegExp("<br(\\s*/)?>"), "\n");
 	}
 	else
 	{

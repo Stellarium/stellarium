@@ -25,8 +25,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StarMgr.hpp"
-#include "StelRenderer.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelPainter.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -160,7 +160,7 @@ float Nova::getVMagnitude(const StelCore* core, bool withExtinction) const
 	{
 		Vec3d altAz=getAltAzPosApparent(core);
 		altAz.normalize();
-		core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+		core->getSkyDrawer()->getExtinction().forward(&altAz, &extinctionMag);
 	}
 
 	// OK, start from minimal brightness
@@ -295,7 +295,7 @@ void Nova::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Nova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Nova::draw(StelCore* core, StelPainter* painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
@@ -309,27 +309,22 @@ void Nova::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector
 
 	StelUtils::spheToRect(RA, Dec, XYZ);
 	mag = getVMagnitude(core, true);
-	sd->preDrawPointSource();
+	sd->preDrawPointSource(painter);
 	float mlimit = sd->getLimitMagnitude();
 
 	if (mag <= mlimit)
 	{
 		sd->computeRCMag(mag, rcMag);
-		const Vec3f XYZf(XYZ[0], XYZ[1], XYZ[2]);
-		Vec3f win;
-		if(sd->pointSourceVisible(&(*projector), XYZf, rcMag, false, win))
-		{
-			sd->drawPointSource(win, rcMag, color);
-		}
-		renderer->setGlobalColor(color[0], color[1], color[2], 1);
-		size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
+		sd->drawPointSource(painter, XYZ, rcMag, color, false);
+		painter->setColor(color[0], color[1], color[2], 1);
+		size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
 			QString name = novaName.isEmpty() ? designation : novaName;
-			renderer->drawText(TextParams(XYZ, projector, name).shift(shift, shift).useGravity());
+			painter->drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 
-	sd->postDrawPointSource(projector);
+	sd->postDrawPointSource(painter);
 }

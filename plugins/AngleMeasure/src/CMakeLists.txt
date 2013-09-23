@@ -7,9 +7,9 @@ SET(AngleMeasure_SRCS
 
 ################# compiles resources files ############
 SET(AngleMeasure_RES ../AngleMeasure.qrc)
-QT4_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
+QT5_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
 # 
-SET(extLinkerOption ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

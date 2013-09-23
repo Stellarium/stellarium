@@ -59,7 +59,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the StelGui object.
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, StelAppGraphicsWidget* stelAppGraphicsWidget);
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget);
 	void update();
 
 	StelStyle getStelStyle() const {return currentStelStyle;}
@@ -68,11 +68,6 @@ public:
 	// Methods specific to the StelGui class
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
-	
-	//! Add a new progress bar in the lower right corner of the screen.
-	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
-	//! @return a pointer to the progress bar
-	class QProgressBar* addProgressBar();
 	
 	//! Get the button bar at the bottom of the screensetDateTime
 	BottomStelBar* getButtonBar() const;
@@ -234,8 +229,9 @@ private:
 //! Allow to load the GUI as a static plugin
 class StelStandardGuiPluginInterface : public QObject, public StelGuiPluginInterface
 {
-	Q_OBJECT;
-	Q_INTERFACES(StelGuiPluginInterface);
+	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_INTERFACES(StelGuiPluginInterface)
 public:
 	virtual class StelGuiBase* getStelGuiBase() const;
 };

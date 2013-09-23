@@ -18,8 +18,8 @@
  */
 
 // Template vector and matrix library.
-// Use column-major matrices, and in vectors, order vertices like this:
-// x, y, z, w (or r, g, b, a), so they can be passed to Renderer.
+// Use OpenGL compatible ordering ie. you can pass a matrix or vector to
+// openGL functions without changes in the ordering
 
 #ifndef _VECMATH_H_
 #define _VECMATH_H_
@@ -37,36 +37,36 @@ typedef Vector2<float>	Vec2f;
 typedef Vector2<int>	Vec2i;
 
 //! @typedef Vec3d
-//! A 3d vector of doubles.
+//! A 3d vector of doubles compatible with openGL.
 typedef Vector3<double>	Vec3d;
 
 //! @typedef Vec3f
-//! A 3d vector of floats.
+//! A 3d vector of floats compatible with openGL.
 typedef Vector3<float>	Vec3f;
 
 //! @typedef Vec4d
-//! A 4d vector of doubles.
+//! A 4d vector of doubles compatible with openGL.
 typedef Vector4<double>	Vec4d;
 
 //! @typedef Vec4f
-//! A 4d vector of floats.
+//! A 4d vector of floats compatible with openGL.
 typedef Vector4<float>	Vec4f;
 
 //! @typedef Vec4i
-//! A 4d vector of ints.
+//! A 4d vector of ints compatible with openGL.
 typedef Vector4<int>	Vec4i;
 
 //! @typedef Mat4d
-//! A 4x4 matrix of doubles.
+//! A 4x4 matrix of doubles compatible with openGL.
 typedef Matrix4<double>	Mat4d;
 
 //! @typedef Mat4f
-//! A 4x4 matrix of floats.
+//! A 4x4 matrix of floats compatible with openGL.
 typedef Matrix4<float>	Mat4f;
 
 
 //! @class Vector2
-//! A templatized 2d vector.
+//! A templatized 2d vector compatible with openGL.
 //! Use Vec2d or Vec2f typdef for vectors of double and float respectively.
 template<class T> class Vector2
 {
@@ -85,10 +85,10 @@ public:
 	inline operator const T*() const;
 	inline operator T*();
 
-	inline void operator+=(const Vector2<T>&);
-	inline void operator-=(const Vector2<T>&);
-	inline void operator*=(T);
-	inline void operator/=(T);
+	inline Vector2& operator+=(const Vector2<T>&);
+	inline Vector2& operator-=(const Vector2<T>&);
+	inline Vector2& operator*=(T);
+	inline Vector2& operator/=(T);
 
 	inline Vector2 operator-(const Vector2<T>&) const;
 	inline Vector2 operator+(const Vector2<T>&) const;
@@ -111,7 +111,7 @@ public:
 
 
 //! @class Vector3
-//! A templatized 3d vector.
+//! A templatized 3d vector compatible with openGL.
 //! Use Vec3d or Vec3f typdef for vectors of double and float respectively.
 template<class T> class Vector3
 {
@@ -137,10 +137,10 @@ public:
 	inline const T* data() const {return v;}
 	inline T* data() {return v;}
 
-	inline void operator+=(const Vector3<T>&);
-	inline void operator-=(const Vector3<T>&);
-	inline void operator*=(T);
-	inline void operator/=(T);
+	inline Vector3& operator+=(const Vector3<T>&);
+	inline Vector3& operator-=(const Vector3<T>&);
+	inline Vector3& operator*=(T);
+	inline Vector3& operator/=(T);
 
 	inline Vector3 operator-(const Vector3<T>&) const;
 	inline Vector3 operator+(const Vector3<T>&) const;
@@ -178,7 +178,7 @@ public:
 
 
 //! @class Vector4
-//! A templatized 4d vector.
+//! A templatized 4d vector compatible with openGL.
 //! Use Vec4d or Vec4f typdef for vectors of double and float respectively.
 template<class T> class Vector4
 {
@@ -200,10 +200,10 @@ public:
 	inline operator T*();
 	inline operator const T*() const;
 
-	inline void operator+=(const Vector4<T>&);
-	inline void operator-=(const Vector4<T>&);
-	inline void operator*=(T);
-	inline void operator/=(T);
+	inline Vector4& operator+=(const Vector4<T>&);
+	inline Vector4& operator-=(const Vector4<T>&);
+	inline Vector4& operator*=(T);
+	inline Vector4& operator/=(T);
 
 	inline Vector4 operator-(const Vector4<T>&) const;
 	inline Vector4 operator+(const Vector4<T>&) const;
@@ -227,7 +227,7 @@ public:
 };
 
 //! @class Matrix4
-//! A templatized column-major 4x4 matrix.
+//! A templatized column-major 4x4 matrix compatible with openGL.
 //! Use Mat4d or Mat4f typdef for matrices of doubles and floats respectively.
 template<class T> class Matrix4
 {
@@ -341,24 +341,28 @@ template<class T> Vector2<T>::operator T*()
 }
 
 
-template<class T> void Vector2<T>::operator+=(const Vector2<T>& a)
+template<class T> Vector2<T>& Vector2<T>::operator+=(const Vector2<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1];
+	return *this;
 }
 
-template<class T> void Vector2<T>::operator-=(const Vector2<T>& a)
+template<class T> Vector2<T>& Vector2<T>::operator-=(const Vector2<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1];
+	return *this;
 }
 
-template<class T> void Vector2<T>::operator*=(T s)
+template<class T> Vector2<T>& Vector2<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s;
+	return *this;
 }
 
-template<class T> void Vector2<T>::operator/=(T s)
+template<class T> Vector2<T>& Vector2<T>::operator/=(T s)
 {
 	v[0] /= s; v[1] /= s;
+	return *this;
 }
 
 template<class T> Vector2<T> Vector2<T>::operator-() const
@@ -499,24 +503,28 @@ template<class T> Vector3<T>::operator T*()
 	return v;
 }
 
-template<class T> void Vector3<T>::operator+=(const Vector3<T>& a)
+template<class T> Vector3<T>& Vector3<T>::operator+=(const Vector3<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1]; v[2] += a.v[2];
+	return *this;
 }
 
-template<class T> void Vector3<T>::operator-=(const Vector3<T>& a)
+template<class T> Vector3<T>& Vector3<T>::operator-=(const Vector3<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2];
+	return *this;
 }
 
-template<class T> void Vector3<T>::operator*=(T s)
+template<class T> Vector3<T>& Vector3<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s;
+	return *this;
 }
 
-template<class T> void Vector3<T>::operator/=(T s)
+template<class T> Vector3<T>& Vector3<T>::operator/=(T s)
 {
 	v[0] /= s; v[1] /= s; v[2] /= s;
+	return *this;
 }
 
 template<class T> Vector3<T> Vector3<T>::operator-() const
@@ -693,24 +701,28 @@ template<class T> Vector4<T>::operator const T*() const
 	return v;
 }
 
-template<class T> void Vector4<T>::operator+=(const Vector4<T>& a)
+template<class T> Vector4<T>& Vector4<T>::operator+=(const Vector4<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1]; v[2] += a.v[2]; v[3] += a.v[3];
+	return *this;
 }
 
-template<class T> void Vector4<T>::operator-=(const Vector4<T>& a)
+template<class T> Vector4<T>& Vector4<T>::operator-=(const Vector4<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a.v[3];
+	return *this;
 }
 
-template<class T> void Vector4<T>::operator*=(T s)
+template<class T> Vector4<T>& Vector4<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s; v[3] *= s;
+	return *this;
 }
 
-template<class T> void Vector4<T>::operator/=(T s)
+template<class T> Vector4<T>& Vector4<T>::operator/=(T s)
 {
 	v[0] /= s; v[1] /= s; v[2] /= s; v[3] /= s;
+	return *this;
 }
 
 template<class T> Vector4<T> Vector4<T>::operator-() const
@@ -995,7 +1007,7 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 	const T * m = r;
 	T out[16];
 
-/* NB. Matrices used by StelRenderer are COLUMN major. */
+/* NB. OpenGL Matrices are COLUMN major. */
 #define SWAP_ROWS(a, b) { T *_tmp = a; (a)=(b); (b)=_tmp; }
 #define MAT(m,r,c) (m)[(c)*4+(r)]
 

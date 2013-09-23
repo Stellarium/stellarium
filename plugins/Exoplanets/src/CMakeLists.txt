@@ -19,12 +19,12 @@ SET(Exoplanets_SRCS
 SET(ExoplanetsDialog_UIS
   gui/exoplanetsDialog.ui
 )
-QT4_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
+QT5_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
 
 SET(Exoplanets_RES ../resources/Exoplanets.qrc)
-QT4_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
+QT5_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

@@ -24,22 +24,22 @@
 #include "StelProjector.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
 #include "MilkyWay.hpp"
 #include "StelGuiBase.hpp"
 #include "StelSkyDrawer.hpp"
-#include "renderer/StelRenderer.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <stdexcept>
 #include <QDebug>
 #include <QString>
-#include <QProgressBar>
 #include <QVariantMap>
 #include <QVariantList>
+#include <QDir>
 #include <QSettings>
 
-StelSkyLayerMgr::StelSkyLayerMgr() 
-	: flagShow(true)
+StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
 {
 	setObjectName("StelSkyLayerMgr");
 }
@@ -63,14 +63,11 @@ double StelSkyLayerMgr::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void StelSkyLayerMgr::init()
 {
-	try
-	{
-		insertSkyImage(StelFileMgr::findFile("nebulae/default/textures.json"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading nebula texture set " << "default" << ": " << e.what();
-	}
+	QString path = StelFileMgr::findFile("nebulae/default/textures.json");
+	if (path.isEmpty())
+		qWarning() << "ERROR while loading nebula texture set default";
+	else
+		insertSkyImage(path);
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("skylayers");
 	foreach (const QString& key, conf->childKeys())
@@ -152,26 +149,29 @@ void StelSkyLayerMgr::removeSkyLayer(StelSkyLayerP l)
 }
 
 // Draw all the multi-res images collection
-void StelSkyLayerMgr::draw(StelCore* core, StelRenderer* renderer)
+void StelSkyLayerMgr::draw(StelCore* core)
 {
 	if (!flagShow)
 		return;
 
-	renderer->setBlendMode(BlendMode_Add);
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+	glBlendFunc(GL_ONE, GL_ONE);
+	glEnable(GL_BLEND);
 	foreach (SkyLayerElem* s, allSkyLayers)
 	{
 		if (s->show) 
 		{
 			if (s->layer->getFrameType() == StelCore::FrameAltAz) 
 			{
-				s->layer->draw(core, renderer, core->getProjection(StelCore::FrameAltAz), 1.);
+				sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
 			} 
 			else
 			{
 				// TODO : Use the respective reference frames, once every SkyLayer
 				// object sets their frame type. Defaulting to Equatorial frame now.
-				s->layer->draw(core, renderer, core->getProjection(StelCore::FrameJ2000), 1.);
+				sPainter.setProjector(core->getProjection(StelCore::FrameJ2000));
 			}
+			s->layer->draw(core, sPainter, 1.);
 		}
 	}
 }
@@ -188,7 +188,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 	if (b)
 	{
 		Q_ASSERT(elem->progressBar==NULL);
-		elem->progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		elem->progressBar = StelApp::getInstance().addProgressBar();
 		QString serverStr = elem->layer->getShortServerCredits();
 		if (!serverStr.isEmpty())
 			serverStr = " from "+serverStr;
@@ -198,7 +198,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 	else
 	{
 		Q_ASSERT(elem->progressBar!=NULL);
-		elem->progressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(elem->progressBar);
 		elem->progressBar = NULL;
 	}
 }
@@ -237,7 +237,7 @@ StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer
 StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
 {
 	if (progressBar)
-		progressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar = NULL;
 }
 
@@ -254,46 +254,47 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		removeSkyLayer(id);
 	}
 
-	QString path;
-	// Possible exception sources:
-	// - StelFileMgr file not found
-	// - list index out of range in insertSkyImage
+	QString path = StelFileMgr::findFile(filename);
+	if (path.isEmpty())
+	{
+		qWarning() << "Could not find image" << QDir::toNativeSeparators(filename);
+		return false;
+	}
+	QVariantMap vm;
+	QVariantList l;
+	QVariantList cl; // coordinates list for adding worldCoords and textureCoords
+	QVariantList c;  // a list for a pair of coordinates
+	QVariantList ol; // outer list - we want a structure 3 levels deep...
+	vm["imageUrl"] = QVariant(path);
+	vm["maxBrightness"] = QVariant(maxBright);
+	vm["minResolution"] = QVariant(minRes);
+	vm["shortName"] = QVariant(id);
+
+	// textureCoords (define the ordering of worldCoords)
+	cl.clear();
+	ol.clear();
+	c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
+	c.clear(); c.append(1); c.append(0); cl.append(QVariant(c));
+	c.clear(); c.append(1); c.append(1); cl.append(QVariant(c));
+	c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
+	ol.append(QVariant(cl));
+	vm["textureCoords"] = ol;
+
+	// world coordinates
+	cl.clear();
+	ol.clear();
+	c.clear(); c.append(ra0); c.append(dec0); cl.append(QVariant(c));
+	c.clear(); c.append(ra1); c.append(dec1); cl.append(QVariant(c));
+	c.clear(); c.append(ra2); c.append(dec2); cl.append(QVariant(c));
+	c.clear(); c.append(ra3); c.append(dec3); cl.append(QVariant(c)); 
+	ol.append(QVariant(cl));
+	vm["worldCoords"] = ol;
+
+	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+	tile->setFrameType(StelCore::FrameJ2000);
+	
 	try
 	{
-		path = StelFileMgr::findFile(filename);
-
-		QVariantMap vm;
-		QVariantList l;
-		QVariantList cl; // coordinates list for adding worldCoords and textureCoords
-		QVariantList c;  // a list for a pair of coordinates
-		QVariantList ol; // outer list - we want a structure 3 levels deep...
-		vm["imageUrl"] = QVariant(path);
-		vm["maxBrightness"] = QVariant(maxBright);
-		vm["minResolution"] = QVariant(minRes);
-		vm["shortName"] = QVariant(id);
-
-		// textureCoords (define the ordering of worldCoords)
-		cl.clear();
-		ol.clear();
-		c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
-		c.clear(); c.append(1); c.append(0); cl.append(QVariant(c));
-		c.clear(); c.append(1); c.append(1); cl.append(QVariant(c));
-		c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
-		ol.append(QVariant(cl));
-		vm["textureCoords"] = ol;
-
-		// world coordinates
-		cl.clear();
-		ol.clear();
-		c.clear(); c.append(ra0); c.append(dec0); cl.append(QVariant(c));
-		c.clear(); c.append(ra1); c.append(dec1); cl.append(QVariant(c));
-		c.clear(); c.append(ra2); c.append(dec2); cl.append(QVariant(c));
-		c.clear(); c.append(ra3); c.append(dec3); cl.append(QVariant(c)); 
-		ol.append(QVariant(cl));
-		vm["worldCoords"] = ol;
-
-		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
-		tile->setFrameType(StelCore::FrameJ2000);
 		QString key = insertSkyLayer(tile, filename, visible);
 		if (key == id)
 			return true;
@@ -302,7 +303,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "Could not find image" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << e.what();
 		return false;
 	}
 }
@@ -320,46 +321,48 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 		removeSkyLayer(id);
 	}
 
-	QString path;
-	// Possible exception sources:
-	// - StelFileMgr file not found
-	// - list index out of range in insertSkyImage
+	QString path = StelFileMgr::findFile(filename);
+	if (path.isEmpty())
+	{
+		qWarning() << "Could not find image" << QDir::toNativeSeparators(filename);
+		return false;
+	}
+
+	QVariantMap vm;
+	QVariantList l;
+	QVariantList cl; // coordinates list for adding worldCoords and textureCoords
+	QVariantList c;  // a list for a pair of coordinates
+	QVariantList ol; // outer list - we want a structure 3 levels deep...
+	vm["imageUrl"] = QVariant(path);
+	vm["maxBrightness"] = QVariant(maxBright);
+	vm["minResolution"] = QVariant(minRes);
+	vm["shortName"] = QVariant(id);
+
+	// textureCoords (define the ordering of worldCoords)
+	cl.clear();
+	ol.clear();
+	c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
+	c.clear(); c.append(1); c.append(0); cl.append(QVariant(c));
+	c.clear(); c.append(1); c.append(1); cl.append(QVariant(c));
+	c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
+	ol.append(QVariant(cl));
+	vm["textureCoords"] = ol;
+
+	// world coordinates
+	cl.clear();
+	ol.clear();
+	c.clear(); c.append(alt0); c.append(azi0); cl.append(QVariant(c));
+	c.clear(); c.append(alt1); c.append(azi1); cl.append(QVariant(c));
+	c.clear(); c.append(alt2); c.append(azi2); cl.append(QVariant(c));
+	c.clear(); c.append(alt3); c.append(azi3); cl.append(QVariant(c)); 
+	ol.append(QVariant(cl));
+	vm["worldCoords"] = ol;
+
+	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+	tile->setFrameType(StelCore::FrameAltAz);
+	
 	try
 	{
-		path = StelFileMgr::findFile(filename);
-
-		QVariantMap vm;
-		QVariantList l;
-		QVariantList cl; // coordinates list for adding worldCoords and textureCoords
-		QVariantList c;  // a list for a pair of coordinates
-		QVariantList ol; // outer list - we want a structure 3 levels deep...
-		vm["imageUrl"] = QVariant(path);
-		vm["maxBrightness"] = QVariant(maxBright);
-		vm["minResolution"] = QVariant(minRes);
-		vm["shortName"] = QVariant(id);
-
-		// textureCoords (define the ordering of worldCoords)
-		cl.clear();
-		ol.clear();
-		c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
-		c.clear(); c.append(1); c.append(0); cl.append(QVariant(c));
-		c.clear(); c.append(1); c.append(1); cl.append(QVariant(c));
-		c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
-		ol.append(QVariant(cl));
-		vm["textureCoords"] = ol;
-
-		// world coordinates
-		cl.clear();
-		ol.clear();
-		c.clear(); c.append(alt0); c.append(azi0); cl.append(QVariant(c));
-		c.clear(); c.append(alt1); c.append(azi1); cl.append(QVariant(c));
-		c.clear(); c.append(alt2); c.append(azi2); cl.append(QVariant(c));
-		c.clear(); c.append(alt3); c.append(azi3); cl.append(QVariant(c)); 
-		ol.append(QVariant(cl));
-		vm["worldCoords"] = ol;
-
-		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
-		tile->setFrameType(StelCore::FrameAltAz);
 		QString key = insertSkyLayer(tile, filename, visible);
 		if (key == id)
 			return true;
@@ -368,7 +371,7 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "Could not find image" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << e.what();
 		return false;
 	}
 }
