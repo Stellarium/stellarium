@@ -37,7 +37,6 @@ class Planet;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QPixmap;
-class QProgressBar;
 class QSettings;
 class QTimer;
 
@@ -163,8 +162,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -495,8 +494,7 @@ private:
 	QSet<QString> groups;
 	
 	LinearFader hintFader;
-	class StelTextureNew* hintTexture;
-	class StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	
 	//! @name Bottom toolbar button
 	//@{
@@ -530,7 +528,7 @@ private:
 	//! As a side effect it prevents problems if the user calls
 	//! setTleSources() while an update is in progress.
 	TleSourceList updateSources;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
 	//! Flag enabling automatic Internet updates.
@@ -574,7 +572,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -582,6 +580,7 @@ private slots:
 class SatellitesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

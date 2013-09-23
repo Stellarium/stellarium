@@ -19,15 +19,15 @@
 #include "Exoplanet.hpp"
 #include "Exoplanets.hpp"
 #include "StelObject.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -35,6 +35,8 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+
+StelTextureSP Exoplanet::markerTexture;
 
 Exoplanet::Exoplanet(const QVariantMap& map)
 		: initialized(false)
@@ -118,20 +120,20 @@ QVariantMap Exoplanet::getMap(void)
 
 float Exoplanet::getSelectPriority(const StelCore* core) const
 {
-	if (getVMagnitude(core, false)>20.f)
+	if (getVMagnitude(core)>20.f)
 	{
 		return 20.f;
 	}
 	else
 	{
-		return getVMagnitude(core, false) - 1.f;
+		return getVMagnitude(core) - 1.f;
 	}
 }
 
 QString Exoplanet::getNameI18n(void) const
 {
 	// Use SkyTranslator for translation star names
-	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	return trans.qtranslate(designation);
 }
 
@@ -152,12 +154,12 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-												QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 			}
 			else
 			{
-				oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core, false), 'f', 2)) << "<br>";
+				oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
 			}
 		}
 	}
@@ -303,16 +305,8 @@ Vec3f Exoplanet::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Exoplanet::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Exoplanet::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
 	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
 	{
 		return 4.f;
@@ -321,11 +315,11 @@ float Exoplanet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	{
 		if (Vmag<99)
 		{
-			return Vmag + extinctionMag;
+			return Vmag;
 		}
 		else
 		{
-			return 6.f + extinctionMag;
+			return 6.f;
 		}
 	}
 }
@@ -366,8 +360,7 @@ void Exoplanet::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, 
-                     StelTextureNew* markerTexture)
+void Exoplanet::draw(StelCore* core, StelPainter& painter)
 {
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();	
@@ -375,11 +368,13 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 	Vec3f color = Vec3f(0.4f,1.2f,0.5f);
 	if (StelApp::getInstance().getVisionModeNight())
 		color = StelUtils::getNightColor(color);
-	const double mag = getVMagnitude(core, true);
+
+	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);
-	renderer->setBlendMode(BlendMode_Add);
-	renderer->setGlobalColor(color[0], color[1], color[2]);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	painter.setColor(color[0], color[1], color[2], 1);
 
 	if (GETSTELMODULE(Exoplanets)->getTimelineMode())
 	{
@@ -394,22 +389,14 @@ void Exoplanet::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proj
 
 	if (mag <= sd->getLimitMagnitude())
 	{
-		markerTexture->bind();
-		const float size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
-		const float shift = 5.f + size/1.6f;
+
+		Exoplanet::markerTexture->bind();
+		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float shift = 5.f + size/1.6f;
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			Vec3d win;
-			if(!projector->project(XYZ, win)){return;}			
-			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
-			{
-				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
-			}
-			else
-			{
-				renderer->drawTexturedRect(win[0] - 5, win[1] - 5, 10, 10);
-				renderer->drawText(TextParams(XYZ, projector, getNameI18n()).shift(shift, shift).useGravity());
-			}
+			painter.drawSprite2dMode(XYZ, 5);
+			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }

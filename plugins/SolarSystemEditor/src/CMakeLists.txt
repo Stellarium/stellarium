@@ -24,10 +24,10 @@ SET(SolarSystemEditor_UIS
   gui/manualImportWindow.ui
 )
 
-QT4_WRAP_UI(SolarSystemEditor_UIS_H ${SolarSystemEditor_UIS})
+QT5_WRAP_UI(SolarSystemEditor_UIS_H ${SolarSystemEditor_UIS})
 
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
 
 #Dynamic library
 IF(BUILD_DYNAMIC_PLUGINS)

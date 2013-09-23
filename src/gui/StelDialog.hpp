@@ -26,7 +26,7 @@
 //! Base class for all the GUI windows in Stellarium.
 //! 
 //! Windows in Stellarium are actually basic QWidgets that have to be wrapped in
-//! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainGraphicsView
+//! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainView
 //! (which is derived from QGraphicsView). See the Qt documentation for details.
 //! 
 //! The base widget needs to be populated with controls in the implementation

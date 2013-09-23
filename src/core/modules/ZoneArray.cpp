@@ -26,7 +26,6 @@
 #endif
 
 #include "ZoneArray.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
@@ -43,7 +42,7 @@ namespace BigStarCatalogExtension
 static const Vec3f north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
-                             const Vec3f &c2)
+							 const Vec3f &c2)
 {
 	// initialize center,axis0,axis1:
 	ZoneData &z(zones[index]);
@@ -251,10 +250,10 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 }
 
 ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
-                     int mag_range, int mag_steps)
-	: fname(fname), level(level), mag_min(mag_min),
-	  mag_range(mag_range), mag_steps(mag_steps),
-	  star_position_scale(0.0), zones(0), file(file)
+			 int mag_range, int mag_steps)
+			: fname(fname), level(level), mag_min(mag_min),
+			  mag_range(mag_range), mag_steps(mag_steps),
+			  star_position_scale(0.0), zones(0), file(file)
 {
 	nr_of_zones = StelGeodesicGrid::nrOfZones(level);
 	nr_of_stars = 0;
@@ -481,75 +480,74 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::draw 
-	(StelProjectorP projector, StelRenderer* renderer, int index, bool is_inside,
-	 const float *rcmag_table, StelCore* core, unsigned int maxMagStarName,
-	 float names_brightness) const
+void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const float *rcmag_table,
+	StelCore* core, unsigned int maxMagStarName, float names_brightness) const
 {
-	StelSkyDrawer* drawer = core->getSkyDrawer();
-	SpecialZoneData<Star> *const z = getZones() + index;
-	Vec3f vf;
-	const Star *const end = z->getStars() + z->size;
-	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
-	const float* tmpRcmag; // will point to precomputed rC in table
-	Extinction extinction=core->getSkyDrawer()->getExtinction();
-	const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
-	const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
+    StelSkyDrawer* drawer = core->getSkyDrawer();
+    Vec3f vf;
+    static const double d2000 = 2451545.0;
+    const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
+    
+    // GZ, added for extinction
+    const Extinction& extinction=core->getSkyDrawer()->getExtinction();
+    const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
+    const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
+	
 	// GZ: allow artificial cutoff:
 	const int clampStellarMagnitude_mmag = (int) floor(drawer->getCustomStarMagnitudeLimit() * 1000.0f);
 	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.
 	int cutoffMagStep=(drawer->getFlagStarMagnitudeLimit() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
+    
+	// Go through all stars, which are sorted by magnitude (bright stars first)
+	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
+	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
+    for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
+    {
+		// Artifical cutoff per magnitude
+		if (s->mag > cutoffMagStep)
+			break;
+    
+		// Array of 2 numbers containing radius and magnitude
+		const float* tmpRcmag = rcmag_table+2*s->mag;
+		
+		// The radius of the star is <=0, following stars will be dimmer --> early exit
+		if (*tmpRcmag<=0.f)
+			break;
+		
+		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
 
-	// go through all stars, which are sorted by magnitude (bright stars first)
-	for (const Star *s=z->getStars();s<end;++s)
-	{
-		if (s->mag > cutoffMagStep) break; // e.g. naked-eye stars only.
-		tmpRcmag = rcmag_table+2*s->mag;
-		if (*tmpRcmag<=0.f) break; // no size for this and following (even dimmer, unextincted) stars? --> early exit
-		s->getJ2000Pos(z,movementFactor, vf);
-
-		const Vec3d vd(vf[0], vf[1], vf[2]);
-
+		// GZ new:
 		if (withExtinction)
 		{
 			//GZ: We must compute position first, then shift magnitude.
-			Vec3d altAz = core->j2000ToAltAz(vd, StelCore::RefractionOn);
-			float extMagShift = 0.0f;
+			Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOff);
+			float extMagShift=0.0f;
+			altAz.normalize();
 			extinction.forward(&altAz, &extMagShift);
-			const int extMagShiftStep = 
-				qMin((int)floor(extMagShift / k), RCMAG_TABLE_SIZE-mag_steps); 
-			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove [draw with hopefully zero size].
+			int extMagShiftStep=qMin((int)(extMagShift/k), 4096-mag_steps); // this number must be equal StarMgr.cpp line 649
+			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 			{
-				tmpRcmag = rcmag_table + 2 * (RCMAG_TABLE_SIZE-1);
+				continue;
 			}
 			else
 			{
-				tmpRcmag = rcmag_table + 2 * (s->mag+extMagShiftStep);
+				tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
 			}
 		}
-
-		Vec3f win;
-		if(drawer->pointSourceVisible(&(*projector), vf, tmpRcmag, !is_inside, win))
+	
+		if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 		{
-			drawer->drawPointSource(win, tmpRcmag, s->bV);
-			if(s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
-			{
-				const float offset = *tmpRcmag*0.7f;
-				const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
-
-				renderer->setGlobalColor(colorr[0], colorr[1], colorr[2], names_brightness);
-				renderer->drawText(TextParams(vf, projector, s->getNameI18n())
-				                   .shift(offset, offset).useGravity());
-			}
+			const float offset = *tmpRcmag*0.7f;
+			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
+			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
+			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
 		}
-	}
+    }
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchAround
-	(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
-	 QList<StelObjectP > &result)
+void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
+					  QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25)/ star_position_scale;

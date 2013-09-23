@@ -17,9 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelApp.hpp"
 #include "StelShortcutGroup.hpp"
-#include "StelAppGraphicsWidget.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
@@ -37,13 +37,10 @@ StelShortcut::StelShortcut(const QString &id,
                            bool checkable,
                            bool autoRepeat,
                            bool global,
-                           QGraphicsWidget *parent) :
+                           QWidget *parent) :
     m_id(id), m_temporary(false)
 {
-	if (parent == NULL)
-	{
-		parent = StelMainGraphicsView::getInstance().getStelAppGraphicsWidget();
-	}
+	parent = parent ?: &StelMainView::getInstance();
 	m_action = new QAction(parent);
 	m_action->setObjectName(id);
 	m_group = group;
@@ -145,7 +142,7 @@ void StelShortcut::setScript(const QString &scriptText)
 {
 	QString scriptsDir = StelFileMgr::findFile("scripts/", StelFileMgr::Directory);
 	QString preprocessedScript;
-	if (!StelMainGraphicsView::getInstance().getScriptMgr().preprocessScript(
+	if (!StelApp::getInstance().getScriptMgr().preprocessScript(
 				scriptText, preprocessedScript, scriptsDir))
 	{
 		qWarning() << "Failed to preprocess script " << m_script;
@@ -164,7 +161,7 @@ void StelShortcut::setScriptPath(const QString &scriptPath)
 
 void StelShortcut::runScript() const
 {
-	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(m_script);
+	StelApp::getInstance().getScriptMgr().runPreprocessedScript(m_script);
 }
 #endif
 
@@ -191,7 +188,7 @@ StelShortcutGroup::~StelShortcutGroup()
 }
 
 QAction* StelShortcutGroup::registerAction(const QString &actionId, bool temporary, const QString &text, const QString &primaryKey,
-																					 const QString &altKey, bool checkable, bool autoRepeat, bool global, QGraphicsWidget *parent)
+											const QString &altKey, bool checkable, bool autoRepeat, bool global, QWidget *parent)
 {
 	if (m_shortcuts.contains(actionId))
 	{

@@ -20,13 +20,12 @@
 
 #include "Landscape.hpp"
 #include "StelApp.hpp"
-#include "renderer/StelGeometryBuilder.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelLocation.hpp"
 #include "StelCore.hpp"
+#include "StelPainter.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -111,105 +110,24 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
-	QString path;
-	try
-	{
-		path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
-		return path;
-	}
-	catch (std::runtime_error& e)
-	{
-#ifdef BUILD_FOR_MAEMO
-		if (!basename.endsWith(".pvr"))
-		{
-			QString tmp = basename;
-			tmp.replace(".png", ".pvr");
-			try
-			{
-				tmp = getTexturePath(tmp, landscapeId);
-				tmp.replace(".pvr", ".png");
-				return tmp;
-			}
-			catch (std::runtime_error& e)
-			{;}
-		}
-#endif
+	QString path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
+	if (path.isEmpty())
 		path = StelFileMgr::findFile("textures/" + basename);
-		return path;
-	}
+	return path;
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius)
-	: Landscape(_radius)
-	, sideTexs(NULL)
-	, texturesInitialized(false)
-	, sides(NULL)
-	, fogTex(NULL)
-	, groundTex(NULL)
-	, tanMode(false)
-	, calibrated(false)
-	, fogCylinderBuffer(NULL)
-	// Way off to ensure the height is detected as "changed" on the first drawFog() call.
-	, previousFogHeight(-1000.0f)
-	, groundFanDisk(NULL)
-	, groundFanDiskIndices(NULL)
+LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false), calibrated(false)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
 {
-	if (NULL != sideTexs)
+	if (sideTexs)
 	{
-		if(texturesInitialized)
-		{
-			for(int i = 0; i < nbSideTexs; ++i)
-			{
-				delete sideTexs[i].texture;
-			}
-		}
 		delete [] sideTexs;
 		sideTexs = NULL;
 	}
 
-	if(NULL != fogTex)
-	{
-		delete fogTex;
-		fogTex = NULL;
-	}
-
-	if(NULL != groundTex)
-	{
-		delete groundTex;
-		groundTex = NULL;
-	}
-
-	if (NULL != fogCylinderBuffer) 
-	{
-		delete fogCylinderBuffer;
-		fogCylinderBuffer = NULL;
-	}
-
-	if (NULL != groundFanDisk) 
-	{
-		Q_ASSERT_X(NULL != groundFanDiskIndices, Q_FUNC_INFO, 
-		           "Vertex buffer is generated but index buffer is not");
-		delete groundFanDisk;
-		groundFanDisk = NULL;
-		delete groundFanDiskIndices;
-		groundFanDiskIndices = NULL;
-	}
-
-	if (NULL != sides) 
-	{
-		delete [] sides;
-		sides = NULL;
-	}
-
-	for(int side = 0; side < precomputedSides.length(); ++side)
-	{
-		delete precomputedSides[side].vertices;
-		delete precomputedSides[side].indices;
-	}
-	precomputedSides.clear();
+	if (sides) delete [] sides;
 }
 
 void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -235,21 +153,20 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	// Load sides textures
 	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
-	sideTexs = new SideTexture[nbSideTexs];
+	sideTexs = new StelTextureSP[nbSideTexs];
 	for (int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);
 		QString textureName = landscapeIni.value(textureKey).toString();
-		sideTexs[i].path = getTexturePath(textureName, landscapeId);
-		// Will be lazily initialized
-		sideTexs[i].texture = NULL;
+		const QString texturePath = getTexturePath(textureName, landscapeId);
+		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
 	}
 
+	QMap<int, int> texToSide;
 	// Init sides parameters
 	nbSide = landscapeIni.value("landscape/nbside", 0).toInt();
 	sides = new landscapeTexCoord[nbSide];
 	int texnum;
-
 	for (int i=0;i<nbSide;++i)
 	{
 		QString key = QString("landscape/side%1").arg(i);
@@ -259,6 +176,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);
 		texnum = textureName.right(textureName.length() - 3).toInt();
+		sides[i].tex = sideTexs[texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
 		sides[i].texCoords[1] = parameters.at(2).toFloat();
 		sides[i].texCoords[2] = parameters.at(3).toFloat();
@@ -276,20 +194,24 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	nbDecorRepeat = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
 
 	QString groundTexName = landscapeIni.value("landscape/groundtex").toString();
-	groundTexPath = getTexturePath(groundTexName, landscapeId);
+	QString groundTexPath = getTexturePath(groundTexName, landscapeId);
+	groundTex = StelApp::getInstance().getTextureManager().createTexture(groundTexPath, StelTexture::StelTextureParams(true));
 	QString description = landscapeIni.value("landscape/ground").toString();
 	//sscanf(description.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	QStringList parameters = description.split(':');
+	groundTexCoord.tex = groundTex;
 	groundTexCoord.texCoords[0] = parameters.at(1).toFloat();
 	groundTexCoord.texCoords[1] = parameters.at(2).toFloat();
 	groundTexCoord.texCoords[2] = parameters.at(3).toFloat();
 	groundTexCoord.texCoords[3] = parameters.at(4).toFloat();
 
 	QString fogTexName = landscapeIni.value("landscape/fogtex").toString();
-	fogTexPath = getTexturePath(fogTexName, landscapeId);
+	QString fogTexPath = getTexturePath(fogTexName, landscapeId);
+	fogTex = StelApp::getInstance().getTextureManager().createTexture(fogTexPath, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	description = landscapeIni.value("landscape/fog").toString();
 	//sscanf(description.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	parameters = description.split(':');
+	fogTexCoord.tex = fogTex;
 	fogTexCoord.texCoords[0] = parameters.at(1).toFloat();
 	fogTexCoord.texCoords[1] = parameters.at(2).toFloat();
 	fogTexCoord.texCoords[2] = parameters.at(3).toFloat();
@@ -305,94 +227,25 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
-}
 
-void LandscapeOldStyle::draw(StelCore* core, StelRenderer* renderer)
-{
-	if (!validLandscape) {return;}
+	// Precompute the vertex arrays for ground display
+	// Make slices_per_side=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
+	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
+	if (slices_per_side<=0)
+		slices_per_side = 1;
 
-	lazyInitTextures(renderer);
-	renderer->setBlendMode(BlendMode_Alpha);
-	StelProjectorP projector =
-		core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-
-	renderer->setCulledFaces(CullFace_Back);
-	if (drawGroundFirst) {drawGround(core, renderer);}
-	drawDecor(core, renderer);
-	if (!drawGroundFirst) {drawGround(core, renderer);}
-	drawFog(core, renderer);
-	renderer->setCulledFaces(CullFace_None);
-}
-
-// Draw the horizon fog
-void LandscapeOldStyle::drawFog(StelCore* core, StelRenderer* renderer)
-{
-	if (!fogFader.getInterstate()) {return;}
-
-	const float vpos = radius * ((tanMode || calibrated) 
-	                          ? std::tan(fogAngleShift * M_PI / 180.0) 
-	                          : std::sin(fogAngleShift * M_PI / 180.0));
-
-	StelProjector::ModelViewTranformP transform =
-		core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transform->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
-
-	StelProjectorP projector = core->getProjection(transform);
-	renderer->setBlendMode(BlendMode_Add);
-
-	const float nightModeFilter = 
-		StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
-
-	const float intensity = fogFader.getInterstate() * (0.1f + 0.1f * skyBrightness);
-	const float filteredIntensity = intensity * nightModeFilter;
-	renderer->setGlobalColor(intensity, filteredIntensity, filteredIntensity);
-	fogTex->bind();
-	const float height = (tanMode || calibrated) 
-	                   ? radius * std::tan(fogAltAngle * M_PI / 180.f) 
-	                   : radius * std::sin(fogAltAngle * M_PI / 180.f);
-
-	if(std::fabs(height - previousFogHeight) > 0.01)
+	// draw a fan disk instead of a ordinary disk to that the inner slices
+	// are not so slender. When they are too slender, culling errors occur
+	// in cylinder projection mode.
+	int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
+	int level = 0;
+	while ((slices_inside&1)==0 && slices_inside > 4)
 	{
-		// Height has changed, need to regenerate the buffer.
-		delete fogCylinderBuffer;
-		fogCylinderBuffer = NULL;
-		previousFogHeight = height;
+		++level;
+		slices_inside>>=1;
 	}
+	StelPainter::computeFanDisk(radius, slices_inside, level, groundVertexArr, groundTexCoordArr);
 
-	if(NULL == fogCylinderBuffer)
-	{
-		fogCylinderBuffer = renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
-		StelGeometryBuilder().buildCylinder(fogCylinderBuffer, radius, height, 64, true);
-	}
-
-	renderer->drawVertexBuffer(fogCylinderBuffer, NULL, projector);
-
-	renderer->setBlendMode(BlendMode_Alpha);
-}
-
-void LandscapeOldStyle::lazyInitTextures(StelRenderer* renderer)
-{
-	if(texturesInitialized){return;}
-	for (int i = 0; i < nbSideTexs; ++i)
-	{
-		sideTexs[i].texture = renderer->createTexture(sideTexs[i].path);
-	}
-	for (int i=0;i<nbSide;++i)
-	{
-		sides[i].tex = sideTexs[i].texture;
-	}
-	fogTex = renderer->createTexture(fogTexPath, 
-		                              TextureParams().generateMipmaps().wrap(TextureWrap_Repeat));
-	fogTexCoord.tex = fogTex;
-	groundTex = renderer->createTexture(groundTexPath, TextureParams().generateMipmaps());
-	groundTexCoord.tex = groundTex;
-	texturesInitialized = true;
-}
-
-void LandscapeOldStyle::generatePrecomputedSides(StelRenderer* renderer)
-{
-	// Make slicesPerSide=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
-	const int slicesPerSide = std::max(1, 3 * 64 / (nbDecorRepeat * nbSide));
 
 	// Precompute the vertex arrays for side display
 	static const int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
@@ -404,78 +257,113 @@ void LandscapeOldStyle::generatePrecomputedSides(StelRenderer* renderer)
 	// Note that GZ fills this value with a different meaning!
 	const double d_z = calibrated ? decorAltAngle/stacks : (tanMode ? radius*std::tan(decorAltAngle*M_PI/180.f)/stacks : radius*std::sin(decorAltAngle*M_PI/180.0)/stacks);
 
-	const float alpha = 2.f * M_PI / (nbDecorRepeat * nbSide * slicesPerSide);
+	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
 	float y0 = radius*std::cos(angleRotateZ*M_PI/180.f);
 	float x0 = radius*std::sin(angleRotateZ*M_PI/180.f);
 
 	LOSSide precompSide;
-	for (int n = 0; n < nbDecorRepeat; n++)
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;
+	for (int n=0;n<nbDecorRepeat;n++)
 	{
-		for (int i = 0; i < nbSide; i++)
+		for (int i=0;i<nbSide;i++)
 		{
-			if (!texToSide.contains(i))
+			int ti;
+			if (texToSide.contains(i))
+				ti = texToSide[i];
+			else
 			{
 				qDebug() << QString("LandscapeOldStyle::load ERROR: found no corresponding tex value for side%1").arg(i);
 				break;
 			}
-
-			const int ti = texToSide[i];
-			precompSide.vertices = 
-				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_Triangles);
-			precompSide.indices = renderer->createIndexBuffer(IndexType_U16);
-			precompSide.tex = sideTexs[ti].texture;
+			precompSide.arr.vertex.resize(0);
+			precompSide.arr.texCoords.resize(0);
+			precompSide.arr.indices.resize(0);
+			precompSide.tex=sideTexs[ti];
 
 			float tx0 = sides[ti].texCoords[0];
-			const float d_tx0 = (sides[ti].texCoords[2] - sides[ti].texCoords[0]) / slicesPerSide;
-			const float d_ty  = (sides[ti].texCoords[3] - sides[ti].texCoords[1]) / stacks;
-			for (int j = 0; j < slicesPerSide; j++)
+			const float d_tx0 = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
+			for (int j=0;j<slices_per_side;j++)
 			{
-				const float y1  = y0 * ca - x0 * sa;
-				const float x1  = y0 * sa + x0 * ca;
+				const float y1 = y0*ca - x0*sa;
+				const float x1 = y0*sa + x0*ca;
 				const float tx1 = tx0 + d_tx0;
-
-				float z   = z0;
+				float z = z0;
 				float ty0 = sides[ti].texCoords[1];
-
-				for (int k = 0; k <= stacks * 2; k += 2)
+				for (int k=0;k<=stacks*2;k+=2)
 				{
-
-					const float calibratedZ =
-						calibrated ? radius * std::tan(z * M_PI / 180.0f) : z;
-					precompSide.vertices->addVertex
-						(VertexP3T2(Vec3f(x0, y0, calibratedZ), Vec2f(tx0, ty0)));
-					precompSide.vertices->addVertex
-						(VertexP3T2(Vec3f(x1, y1, calibratedZ), Vec2f(tx1, ty0)));
-					z   += d_z;
+					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
+					if (calibrated)
+					{
+						float tanZ=radius * std::tan(z*M_PI/180.f);
+						precompSide.arr.vertex << Vec3d(x0, y0, tanZ) << Vec3d(x1, y1, tanZ);
+					} else
+					{
+						precompSide.arr.vertex << Vec3d(x0, y0, z) << Vec3d(x1, y1, z);
+					}
+					z += d_z;
 					ty0 += d_ty;
 				}
-				const uint offset = j*(stacks+1)*2;
-				for (int k = 2; k < stacks * 2 + 2; k += 2)
+				unsigned int offset = j*(stacks+1)*2;
+				for (int k = 2;k<stacks*2+2;k+=2)
 				{
-					precompSide.indices->addIndex(offset + k - 2);
-					precompSide.indices->addIndex(offset + k - 1);
-					precompSide.indices->addIndex(offset + k);
-					precompSide.indices->addIndex(offset + k);
-					precompSide.indices->addIndex(offset + k - 1);
-					precompSide.indices->addIndex(offset + k + 1);
+					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
+					precompSide.arr.indices << offset+k << offset+k-1 << offset+k+1;
 				}
-				y0  = y1;
-				x0  = x1;
+				y0 = y1;
+				x0 = x1;
 				tx0 = tx1;
 			}
-			precompSide.vertices->lock();
-			precompSide.indices->lock();
 			precomputedSides.append(precompSide);
 		}
 	}
 }
 
-// Draw the mountains with a few pieces of texture
-void LandscapeOldStyle::drawDecor(StelCore* core, StelRenderer* renderer) 
+void LandscapeOldStyle::draw(StelCore* core)
 {
-	if (!landFader.getInterstate()) {return;}
+	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	painter.enableTexture2d(true);
+	glEnable(GL_CULL_FACE);
+
+	if (!validLandscape)
+		return;
+	if (drawGroundFirst)
+		drawGround(core, painter);
+	drawDecor(core, painter);
+	if (!drawGroundFirst)
+		drawGround(core, painter);
+	drawFog(core, painter);
+}
+
+
+// Draw the horizon fog
+void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
+{
+	if (!fogFader.getInterstate())
+		return;
+
+	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
+	sPainter.setProjector(core->getProjection(transfo));
+	glBlendFunc(GL_ONE, GL_ONE);
+	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
+	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter,
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
+	fogTex->bind();
+	const float height = (tanMode||calibrated) ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
+	sPainter.sCylinder(radius, height, 64, 1);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+// Draw the mountains with a few pieces of texture
+void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
+{
 
 	// Patched by Georg Zotti: I located an undocumented switch tan_mode, maybe tan_mode=true means cylindrical panorama projection.
 	// anyway, the old code makes unfortunately no sense.
@@ -484,106 +372,53 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelRenderer* renderer)
 	// and the texture in between is correctly stretched.
 	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
 	//       (2) Implement calibrated && tan_mode
-	StelProjector::ModelViewTranformP transform =
-		core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transform->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
-	StelProjectorP projector = core->getProjection(transform);
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
 
-	const Vec4f color = StelApp::getInstance().getVisionModeNight() 
-	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
-	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
-	renderer->setGlobalColor(color);
+	sPainter.setProjector(core->getProjection(transfo));
 
-	// Lazily generate decoration sides.
-	if(precomputedSides.empty())
-	{
-		generatePrecomputedSides(renderer);
-	}
+	if (!landFader.getInterstate())
+		return;
+	if (StelApp::getInstance().getVisionModeNight())
+		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
+	else
+		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
-	// Draw decoration sides.
 	foreach (const LOSSide& side, precomputedSides)
 	{
 		side.tex->bind();
-		renderer->drawVertexBuffer(side.vertices, side.indices, projector);
+		sPainter.drawSphericalTriangles(side.arr, true, NULL, false);
 	}
 }
 
-void LandscapeOldStyle::generateGroundFanDisk(StelRenderer* renderer)
-{
-	// Precompute the vertex buffer for ground display
-	// Make slicesPerSide = (3<<K) so that the 
-	// innermost polygon of the fandisk becomes a triangle:
-	int slicesPerSide = std::max(1, 3 * 64 / (nbDecorRepeat * nbSide));
-
-	// draw a fan disk instead of a ordinary disk so that the inner slices
-	// are not so slender. When they are too slender, culling errors occur
-	// in cylinder projection mode.
-	int slicesInside = nbSide * slicesPerSide * nbDecorRepeat;
-	int level = 0;
-	while ((slicesInside & 1) == 0 && slicesInside > 4)
-	{
-		++level;
-		slicesInside >>= 1;
-	}
-
-	groundFanDisk = renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_Triangles);
-	groundFanDiskIndices = renderer->createIndexBuffer(IndexType_U16);
-	StelGeometryBuilder()
-		.buildFanDisk(groundFanDisk, groundFanDiskIndices, radius, slicesInside, level);
-}
 
 // Draw the ground
-void LandscapeOldStyle::drawGround(StelCore* core, StelRenderer* renderer)
+void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 {
-	if (!landFader.getInterstate()) {return;}
+	if (!landFader.getInterstate())
+		return;
+	const float vshift = (tanMode || calibrated) ?
+	  radius*std::tan(groundAngleShift*M_PI/180.) :
+	  radius*std::sin(groundAngleShift*M_PI/180.);
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift)));
 
-	const float vshift = (tanMode || calibrated) 
-	                   ? radius * std::tan(groundAngleShift * M_PI / 180.0f) 
-	                   : radius * std::sin(groundAngleShift * M_PI / 180.0f);
-
-	StelProjector::ModelViewTranformP transform =
-		core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transform->combine
-		(Mat4d::zrotation((groundAngleRotateZ - angleRotateZOffset) * M_PI / 180.0f) *
-		 Mat4d::translation(Vec3d(0.0, 0.0, vshift)));
-
-	StelProjectorP projector = core->getProjection(transform);
-
-	const Vec4f color = StelApp::getInstance().getVisionModeNight()
-	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
-			  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
-	renderer->setGlobalColor(color);
+	sPainter.setProjector(core->getProjection(transfo));
+	if (StelApp::getInstance().getVisionModeNight())
+		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
+	else
+		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 	groundTex->bind();
-
-	// Lazily generate the ground fan disk.
-	if(NULL == groundFanDisk)
-	{
-		Q_ASSERT_X(NULL == groundFanDiskIndices, Q_FUNC_INFO, 
-		           "Vertex buffer is NULL but index buffer is already generated");
-		generateGroundFanDisk(renderer);
-	}
-
-	// Draw the ground.
-	renderer->drawVertexBuffer(groundFanDisk, groundFanDiskIndices, projector);
+	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
+	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
 }
 
-LandscapeFisheye::LandscapeFisheye(float _radius) 
-	: Landscape(_radius)
-	, mapTex(NULL)
-	, fisheyeSphere(NULL)
+LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
 {}
 
 LandscapeFisheye::~LandscapeFisheye()
 {
-	if(NULL != fisheyeSphere)
-	{
-		delete fisheyeSphere;
-	}
-	if(NULL != mapTex)
-	{
-		delete mapTex;
-	}
 }
 
 void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -609,60 +444,48 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	mapTexPath = _maptex;
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	texFov = atexturefov*M_PI/180.f;
 	angleRotateZ = aangleRotateZ*M_PI/180.f;
-
-	const SphereParams params = SphereParams(radius).resolution(cols, rows).orientInside();
-	fisheyeSphere = StelGeometryBuilder().buildSphereFisheye(params, texFov);
 }
 
-void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
+
+void LandscapeFisheye::draw(StelCore* core)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	if(NULL == mapTex)
-	{
-		mapTex = renderer->createTexture(mapTexPath, TextureParams().generateMipmaps());
-	}
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(transfo);
+	StelPainter sPainter(prj);
 
-	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
-	const StelProjectorP projector = core->getProjection(transform);
-	const Vec4f color = StelApp::getInstance().getVisionModeNight()
-	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
-	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
-	renderer->setGlobalColor(color);
-	renderer->setCulledFaces(CullFace_Back);
-	renderer->setBlendMode(BlendMode_Alpha);
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	if (StelApp::getInstance().getVisionModeNight())
+		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
+	else
+		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+
+
+	glEnable(GL_CULL_FACE);
+	sPainter.enableTexture2d(true);
+	glEnable(GL_BLEND);
 	mapTex->bind();
+	// Patch GZ: (40,20)->(cols,rows)
+	sPainter.sSphereMap(radius,cols,rows,texFov,1);
 
-	fisheyeSphere->draw(renderer, projector);
-
-	renderer->setCulledFaces(CullFace_None);
+	glDisable(GL_CULL_FACE);
 }
 
 
 // spherical panoramas
 
-LandscapeSpherical::LandscapeSpherical(float _radius) 
-	: Landscape(_radius)
-	, mapTex(NULL)
-{
-}
+LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius)
+{}
 
 LandscapeSpherical::~LandscapeSpherical()
 {
-	if(NULL != landscapeSphere)
-	{
-		delete landscapeSphere;
-		landscapeSphere = NULL;
-	}
-	if(NULL != mapTex)
-	{
-		delete mapTex;
-	}
 }
 
 void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -690,40 +513,39 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
-	mapTexPath = _maptex;
-
-	const SphereParams params 
-		= SphereParams(radius).resolution(64, 48).orientInside().flipTexture();
-	landscapeSphere = StelGeometryBuilder().buildSphereUnlit(params);
 }
 
 
-void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
+void LandscapeSpherical::draw(StelCore* core)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
-	if(NULL == mapTex)
-	{
-		mapTex = renderer->createTexture(mapTexPath, TextureParams().generateMipmaps());
-	}
 
-	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
-	const StelProjectorP projector = core->getProjection(transform);
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(transfo);
+	StelPainter sPainter(prj);
 
-	renderer->setBlendMode(BlendMode_Alpha);
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	if (StelApp::getInstance().getVisionModeNight())
+		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
+	else
+		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
-	const Vec4f color = StelApp::getInstance().getVisionModeNight()
-	                  ? Vec4f(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate())
-	                  : Vec4f(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
-	renderer->setGlobalColor(color);
-	renderer->setCulledFaces(CullFace_Back);
+
+	glEnable(GL_CULL_FACE);
+	sPainter.enableTexture2d(true);
+	glEnable(GL_BLEND);
 	mapTex->bind();
 
-	landscapeSphere->draw(renderer, projector);
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
+	//sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
 	// GZ: Want better angle resolution, optional!
-	renderer->setCulledFaces(CullFace_None);
+	sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
+
+	glDisable(GL_CULL_FACE);
 }

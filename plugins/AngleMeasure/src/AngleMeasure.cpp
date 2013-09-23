@@ -16,7 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelUtils.hpp"
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -25,9 +27,8 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
+#include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
-#include "renderer/StelCircleArcRenderer.hpp"
-#include "renderer/StelRenderer.hpp"
 
 #include <QDebug>
 #include <QTimer>
@@ -59,9 +60,6 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	info.description = N_("Provides an angle measurement tool");
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(AngleMeasure, AngleMeasureStelPluginInterface)
-
 
 AngleMeasure::AngleMeasure()
 	: flagShowAngleMeasure(false), dragging(false),
@@ -148,55 +146,63 @@ void AngleMeasure::update(double deltaTime)
 }
 
 //! Draw any parts on the screen which are for our module
-void AngleMeasure::draw(StelCore* core, StelRenderer* renderer)
+void AngleMeasure::draw(StelCore* core)
 {
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
 	
 	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
-
-	renderer->setFont(font);
-
-	const bool night = StelApp::getInstance().getVisionModeNight();
-	const Vec3f tColor = night ? StelUtils::getNightColor(textColor) : lineColor;
-	const Vec3f lColor = night ? StelUtils::getNightColor(lineColor) : lineColor;
+	StelPainter painter(prj);
+	painter.setFont(font);
+	Vec3f tColor, lColor;
+	if (StelApp::getInstance().getVisionModeNight())
+	{
+		tColor = StelUtils::getNightColor(textColor);
+		lColor = StelUtils::getNightColor(lineColor);
+	}
+	else
+	{
+		tColor = textColor;
+		lColor = lineColor;
+	}
 
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		renderer->setBlendMode(BlendMode_Alpha);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
 		
 		Vec3d xy;
 		if (prj->project(perp1EndPoint,xy))
 		{
-			renderer->setGlobalColor(tColor[0], tColor[1], tColor[2],
-			                         lineVisible.getInterstate());
-			renderer->drawText(TextParams(xy[0], xy[1], angleText).shift(15, 15));
+			painter.setColor(tColor[0], tColor[1], tColor[2], lineVisible.getInterstate());
+			painter.drawText(xy[0], xy[1], angleText, 0, 15, 15);
 		}
 
-		renderer->setGlobalColor(lColor[0], lColor[1], lColor[2],
-		                         lineVisible.getInterstate());
-
-		// main line is a great circle
-		StelCircleArcRenderer circleArcRenderer(renderer, prj);
-		circleArcRenderer.drawGreatCircleArc(startPoint, endPoint);
+		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_LINE_SMOOTH);
+		glEnable(GL_BLEND);
+		
+		// main line is a great circle		
+		painter.setColor(lColor[0], lColor[1], lColor[2], lineVisible.getInterstate());
+		painter.drawGreatCircleArc(startPoint, endPoint, NULL);
 
 		// End lines
-		circleArcRenderer.drawGreatCircleArc(perp1StartPoint, perp1EndPoint);
-		circleArcRenderer.drawGreatCircleArc(perp2StartPoint, perp2EndPoint);
+		painter.drawGreatCircleArc(perp1StartPoint, perp1EndPoint, NULL);
+		painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, NULL);
 	}
 
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-		renderer->setGlobalColor(tColor[0], tColor[1], tColor[2],
-		                         messageFader.getInterstate());
+		painter.setColor(tColor[0], tColor[1], tColor[2], messageFader.getInterstate());
 		int x = 83;
 		int y = 120;
-		const int ls = QFontMetrics(font).lineSpacing();
-		renderer->drawText(TextParams(x, y, messageEnabled));
+		int ls = painter.getFontMetrics().lineSpacing();
+		painter.drawText(x, y, messageEnabled);
 		y -= ls;
-		renderer->drawText(TextParams(x, y, messageLeftButton));
+		painter.drawText(x, y, messageLeftButton);
 		y -= ls;
-		renderer->drawText(TextParams(x, y, messageRightButton));
+		painter.drawText(x, y, messageRightButton);
 	}
 }
 

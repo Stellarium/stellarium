@@ -20,12 +20,12 @@ SET(PulsarsDialog_UIS
   gui/pulsarsDialog.ui
 )
 
-QT4_WRAP_UI(PulsarsDialog_UIS_H ${PulsarsDialog_UIS})
+QT5_WRAP_UI(PulsarsDialog_UIS_H ${PulsarsDialog_UIS})
 
 SET(Pulsars_RES ../resources/Pulsars.qrc)
-QT4_ADD_RESOURCES(Pulsars_RES_CXX ${Pulsars_RES})
+QT5_ADD_RESOURCES(Pulsars_RES_CXX ${Pulsars_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

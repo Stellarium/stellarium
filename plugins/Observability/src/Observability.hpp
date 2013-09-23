@@ -38,7 +38,7 @@ public:
 	virtual ~Observability();
 	virtual void init();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 
@@ -277,13 +277,14 @@ private:
 
 };
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
 class ObservabilityStelPluginInterface : public QObject, public StelPluginInterface
 {
        Q_OBJECT
+       Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
        Q_INTERFACES(StelPluginInterface)
 public:
        virtual StelModule* getStelModule() const;

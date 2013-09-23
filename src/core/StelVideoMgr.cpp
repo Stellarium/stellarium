@@ -17,7 +17,7 @@
  */
 
 #include "StelVideoMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include <QDebug>
 #include <QDir>
 
@@ -49,7 +49,7 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x
 
 	videoObjects[id]->player->load(Phonon::MediaSource(filename));
 	videoObjects[id]->pWidget = 
-		StelMainGraphicsView::getInstance().scene()->addWidget(videoObjects[id]->widget, Qt::FramelessWindowHint);
+		StelMainView::getInstance().scene()->addWidget(videoObjects[id]->widget, Qt::FramelessWindowHint);
 
 	videoObjects[id]->pWidget->setPos(x, y);
 	videoObjects[id]->pWidget->setOpacity(alpha);

@@ -28,8 +28,7 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
-#include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainView.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "StarMgr.hpp"
@@ -53,7 +52,6 @@
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
-#include "StelAppGraphicsWidget.hpp"
 
 #include "ConfigurationDialog.hpp"
 #include "DateTimeDialog.hpp"
@@ -68,7 +66,7 @@
 #include <QFontDatabase>
 #include <QMouseEvent>
 #include <QAction>
-#include <QApplication>
+#include <QGuiApplication>
 #include <QFile>
 #include <QTextBrowser>
 #include <QGraphicsWidget>
@@ -84,7 +82,6 @@ StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 
 	return new StelGui();
 }
-Q_EXPORT_PLUGIN2(StelGui, StelStandardGuiPluginInterface)
 
 StelGui::StelGui() :
 	topLevelGraphicsWidget(NULL),
@@ -151,12 +148,11 @@ StelGui::~StelGui()
 #endif
 }
 
-void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
+void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
 	qDebug() << "Creating GUI ...";
 
-	StelGuiBase::init(atopLevelGraphicsWidget, astelAppGraphicsWidget);
-
+	StelGuiBase::init(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
 	locationDialog = new LocationDialog();
 	helpDialog = new HelpDialog();
@@ -255,8 +251,8 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiAction("actionSet_Tracking"), SIGNAL(toggled(bool)), mmgr, SLOT(setFlagTracking(bool)));
 	getGuiAction("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 
-	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
-	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainWindow::getInstance().isFullScreen());
+	connect(getGuiAction("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFullScreen(bool)));
+	getGuiAction("actionSet_Full_Screen_Global")->setChecked(StelMainView::getInstance().isFullScreen());
 
 	QAction* tempAction = getGuiAction("actionShow_Location_Window_Global");
 	connect(tempAction, SIGNAL(toggled(bool)),
@@ -308,7 +304,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(shortcutsDialog, SIGNAL(visibleChanged(bool)),
 		tempAction, SLOT(setChecked(bool)));
 
-	connect(getGuiAction("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainGraphicsView::getInstance(), SLOT(saveScreenShot()));
+	connect(getGuiAction("actionSave_Screenshot_Global"), SIGNAL(triggered()), &StelMainView::getInstance(), SLOT(saveScreenShot()));
 	connect(getGuiAction("actionSave_Copy_Object_Information_Global"), SIGNAL(triggered()), this, SLOT(copySelectedObjectInfo()));
 
 	getGuiAction("actionToggle_GuiHidden_Global")->setChecked(true);
@@ -346,9 +342,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	getGuiAction("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
 
 #ifndef DISABLE_SCRIPTING
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
-	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
-	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	connect(scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
+	connect(scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
 #endif
 
 	///////////////////////////////////////////////////////////////////////////
@@ -499,22 +495,22 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	l->setContentsMargins(0,0,0,0);
 	l->setSpacing(0);
 	l->addItem(skyGui, 0, 0);
-	stelAppGraphicsWidget->setLayout(l);
+	atopLevelGraphicsWidget->setLayout(l);
 
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 
-	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
+	skyGui->setGeometry(atopLevelGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
 
 	// The disabled text for checkboxes is embossed with the QPalette::Light setting for the ColorGroup Disabled.
 	// It doesn't appear to be possible to set this from the stylesheet.  Instead we'll make it 100% transparent
 	// and set the text color for disabled in the stylesheets.
-	QPalette p = QApplication::palette();
+	QPalette p = QGuiApplication::palette();
 	p.setColor(QPalette::Disabled, QPalette::Light, QColor(0,0,0,0));
 
 	// And this is for the focus...  apparently the focus indicator is the inverted value for Active/Button.
 	p.setColor(QPalette::Active, QPalette::Button, QColor(255,255,255));
-	QApplication::setPalette(p);
+	QGuiApplication::setPalette(p);
 	
 	// FIXME: Workaround for set UI language when app is started --AW
 	updateI18n();
@@ -721,7 +717,7 @@ void StelGui::initLandscapeMgr()
 void StelGui::quit()
 {
 #ifndef DISABLE_SCRIPTING
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	StelApp::getInstance().getScriptMgr().stopScript();
 #endif
 	QCoreApplication::exit();
 }
@@ -763,8 +759,7 @@ void StelGui::setStelStyle(const QString& section)
 		htmlStyleFile.open(QIODevice::ReadOnly);
 		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
 	}
-	qApp->setStyleSheet(currentStelStyle.qtStyleSheet);
-
+	
 	locationDialog->styleChanged();
 	dateTimeDialog->styleChanged();
 	configurationDialog->styleChanged();
@@ -848,7 +843,7 @@ void StelGui::update()
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getGuiAction("actionShow_Night_Mode")->isChecked() != flag)
 		getGuiAction("actionShow_Night_Mode")->setChecked(flag);
-	flag = StelMainWindow::getInstance().isFullScreen();
+	flag = StelMainView::getInstance().isFullScreen();
 	if (getGuiAction("actionSet_Full_Screen_Global")->isChecked() != flag)
 		getGuiAction("actionSet_Full_Screen_Global")->setChecked(flag);
 
@@ -862,12 +857,6 @@ void StelGui::update()
 	}
 
 	dateTimeDialog->setDateTime(core->getJDay());
-}
-
-// Add a new progress bar in the lower right corner of the screen.
-QProgressBar* StelGui::addProgressBar()
-{
-	return skyGui->progressBarMgr->addProgressBar();
 }
 
 #ifndef DISABLE_SCRIPTING
@@ -895,32 +884,32 @@ void StelGui::setScriptKeys(bool b)
 
 void StelGui::increaseScriptSpeed()
 {
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()*2);
+	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()*2);
 }
 
 void StelGui::decreaseScriptSpeed()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()/2);
+	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()/2);
 }
 
 void StelGui::setRealScriptSpeed()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);
+	StelApp::getInstance().getScriptMgr().setScriptRate(1);
 }
 
 void StelGui::stopScript()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	StelApp::getInstance().getScriptMgr().stopScript();
 }
 
 void StelGui::pauseScript()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();
+	StelApp::getInstance().getScriptMgr().pauseScript();
 }
 
 void StelGui::resumeScript()
 {	
-	StelMainGraphicsView::getInstance().getScriptMgr().resumeScript();
+	StelApp::getInstance().getScriptMgr().resumeScript();
 }
 #endif
 
@@ -1228,5 +1217,5 @@ void StelGui::landscapeDisplayedUpdated(const bool displayed)
 
 void StelGui::copySelectedObjectInfo(void)
 {
-	QApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
+	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
 }

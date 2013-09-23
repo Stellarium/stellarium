@@ -27,7 +27,6 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 
-#include "renderer/StelRenderer.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -42,7 +41,9 @@
 #include "StelGuiItems.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelVertexArray.hpp"
 #include "StelCore.hpp"
+#include "StelPainter.hpp"
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
 #include "Observability.hpp"
@@ -69,8 +70,6 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
         info.description = N_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon during a fraction of the night. The plugin also gives the day for largest separation from the Sun and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of the quantities shown by this script is given in the 'About' tab of the configuration window");
         return info;
 }
-
-Q_EXPORT_PLUGIN2(Observability, ObservabilityStelPluginInterface)
 
 Observability::Observability()
 	: flagShowObservability(false), OnIcon(NULL), OffIcon(NULL), GlowIcon(NULL),toolbarButton(NULL)
@@ -280,7 +279,7 @@ void Observability::init()
 
 /////////////////////////////////////////////
 // MAIN CODE:
-void Observability::draw(StelCore* core, StelRenderer* renderer)
+void Observability::draw(StelCore* core)
 {
 
 	if (!flagShowObservability) return; // Button is off.
@@ -296,10 +295,10 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	if (core->getCurrentLocation().planetName != "Earth") {return;};
 
 // Set the painter:
-	StelProjectorP projector = core->getProjection2d();
-	renderer->setGlobalColor(fontColor[0],fontColor[1],fontColor[2],1);
+	StelPainter paintresult(core->getProjection2d());
+	paintresult.setColor(fontColor[0],fontColor[1],fontColor[2],1);
 	font.setPixelSize(fontSize);
-	renderer->setFont(font);
+	paintresult.setFont(font);
 
 
 // Get current date, location, and check if there is something selected.
@@ -481,7 +480,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	double currH = HourAngle(mylat,alti,selDec);
 	horizH = HourAngle(mylat,RefracHoriz,selDec);
 	QString RS1, RS2, Cul; // strings with Rise/Set/Culmination times
-	double Rise, Set; // Actual Rise/Set times (in GMT).
+	double Rise=0, Set=0; // Actual Rise/Set times (in GMT).
 	int d1,m1,s1,d2,m2,s2,dc,mc,sc; // Integers for the time spans in hh:mm:ss.
 	bool solvedMoon = false; // Check if solutions were found for Sun, Moon, or planet.
 	bool transit = false; // Is the source above the horizon? Did it culminate?
@@ -760,32 +759,30 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 
 	if (show_Today) 
 	{
-		//renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
-		renderer->drawText(TextParams(xLine, yLine,msgToday));
-		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing, RS2));
-		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*2, RS1));
-		renderer->drawText(TextParams(xLine+fontSize, yLine-spacing*3, Cul));
+		paintresult.drawText(xLine, yLine,q_("TODAY:"));
+		paintresult.drawText(xLine+fontSize, yLine-spacing, RS2);
+		paintresult.drawText(xLine+fontSize, yLine-spacing*2, RS1);
+		paintresult.drawText(xLine+fontSize, yLine-spacing*3, Cul);
 		yLine -= spacing2;
 	};
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{
-		//renderer->drawText(TextParams(xLine,yLine,q_("THIS YEAR:")));
-		renderer->drawText(TextParams(xLine,yLine,msgThisYear));
+		paintresult.drawText(xLine,yLine,q_("THIS YEAR:"));
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= spacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine, bestNight));
+			paintresult.drawText(xLine+fontSize, yLine, bestNight);
 		};
 		if (show_Good_Nights) 
 		{
 			yLine -= spacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine, ObsRange));
+			paintresult.drawText(xLine+fontSize, yLine, ObsRange);
 		};
 		if (show_AcroCos) 
 		{
 			yLine -= spacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine, AcroCos));
+			paintresult.drawText(xLine+fontSize, yLine, AcroCos);
 		};
 
 	};

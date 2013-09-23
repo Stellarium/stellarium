@@ -22,6 +22,8 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Exoplanet.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -31,10 +33,10 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class ExoplanetsDialog;
+class StelPainter;
 class QPixmap;
 class StelButton;
 
@@ -63,9 +65,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer,
-	                         StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -211,8 +212,7 @@ private:
 
 	QString jsonCatalogPath;
 
-	StelTextureNew* texPointer;
-	StelTextureNew* markerTexture;
+	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
 
 	// variables and functions for the updater
@@ -239,7 +239,7 @@ private:
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -251,7 +251,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -259,6 +259,7 @@ private slots:
 class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

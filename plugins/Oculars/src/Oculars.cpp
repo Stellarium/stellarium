@@ -29,16 +29,14 @@
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelShortcutMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "SkyGui.hpp"
-#include "renderer/GenericVertexTypes.hpp"
-#include "renderer/StelGeometryBuilder.hpp"
-#include "renderer/StelRenderer.hpp"
 
 #include <QAction>
 #include <QGraphicsWidget>
@@ -54,8 +52,12 @@
 #include <cmath>
 
 #ifdef Q_OS_MAC
-extern void qt_set_sequence_auto_mnemonic(bool b);
+#include <OpenGL/glu.h>	/* Header File For The GLU Library */
+#else
+#include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
+
+extern void qt_set_sequence_auto_mnemonic(bool b);
 
 static QSettings *settings; //!< The settings as read in from the ini file.
 
@@ -85,8 +87,6 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
 
 
 /* ********************************************************************* */
@@ -242,10 +242,10 @@ void Oculars::deinit()
 }
 
 //! Draw any parts on the screen which are for our module
-void Oculars::draw(StelCore* core, StelRenderer* renderer)
+void Oculars::draw(StelCore* core)
 {
 	if (flagShowTelrad) {
-		paintTelrad(renderer);
+		paintTelrad();
 	} else if (flagShowOculars){
 		// Ensure there is a selected ocular & telescope
 		if (selectedCCDIndex > ccds.count()) {
@@ -269,33 +269,37 @@ void Oculars::draw(StelCore* core, StelRenderer* renderer)
 		
 		if (ready) {
 			if (selectedOcularIndex > -1) {
-				paintOcularMask(renderer);
+				paintOcularMask();
 				if (flagShowCrosshairs)  {
-					paintCrosshairs(renderer);
+					paintCrosshairs();
 				}
 			}
 			if (guiPanelEnabled)
 			{
 				// Reset the state to allow the panel to be painted normally
-				renderer->setBlendMode(BlendMode_Alpha);
+				glDisable(GL_TEXTURE_2D);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glEnable(GL_BLEND);
 			}
 			else
 			{
 				// Paint the information in the upper-right hand corner
-				paintText(core, renderer);
+				paintText(core);
 			}
 		}
 	} else if (flagShowCCD) {
-		paintCCDBounds(renderer);
+		paintCCDBounds();
 		if (guiPanelEnabled)
 		{
 			// Reset the state to allow the panel to be painted normally
-			renderer->setBlendMode(BlendMode_Alpha);
+			glDisable(GL_TEXTURE_2D);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glEnable(GL_BLEND);
 		}
 		else
 		{
 			// Paint the information in the upper-right hand corner
-			paintText(core, renderer);
+			paintText(core);
 		}
 	}
 }
@@ -871,7 +875,7 @@ void Oculars::decrementLensIndex()
 
 void Oculars::displayPopupMenu()
 {
-	QMenu* popup = new QMenu(&StelMainWindow::getInstance());
+	QMenu* popup = new QMenu(&StelMainView::getInstance());
 
 	if (flagShowOculars)
 	{
@@ -1355,25 +1359,24 @@ bool Oculars::isBinocularDefined()
 	return binocularFound;
 }
 
-void Oculars::paintCCDBounds(StelRenderer* renderer)
+void Oculars::paintCCDBounds()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
-	renderer->setBlendMode(BlendMode_None);
-
-	StelVertexBuffer<VertexP2>* vertices =
-		renderer->createVertexBuffer<VertexP2>(PrimitiveType_LineStrip);
-
-	double screenFOV = params.fov;
-	const Vec2f offset = Vec2f(params.viewportCenter[0], params.viewportCenter[1]);
+	glDisable(GL_BLEND);
+	glColor3f(0.f,0.f,0.f);
+	glPushMatrix();
+	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	glRotated(ccdRotationAngle, 0.0, 0.0, 1.0);
+	GLdouble screenFOV = params.fov;
 
 	// draw sensor rectangle
 	if(selectedCCDIndex != -1) {
 		CCD *ccd = ccds[selectedCCDIndex];
 		if (ccd) {
-			renderer->setGlobalColor(0.77f, 0.14f, 0.16f, 0.5f);
+			glColor4f(0.77, 0.14, 0.16, 0.5);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
@@ -1383,69 +1386,47 @@ void Oculars::paintCCDBounds(StelRenderer* renderer)
 			if (params.viewportXywh[2] > params.viewportXywh[3]) {
 				aspectIndex = 3;
 			}
-			const float halfWidth  = 0.5f * (params.viewportXywh[aspectIndex] * ccdYRatio);
-			const float halfHeight = 0.5f * (params.viewportXywh[aspectIndex] * ccdXRatio);
+			float width = params.viewportXywh[aspectIndex] * ccdYRatio;
+			float height = params.viewportXywh[aspectIndex] * ccdXRatio;
 
-			if (halfWidth > 0.0 && halfHeight > 0.0) 
-			{
-				const float s = sin(-ccdRotationAngle * M_PI / 180.0f);
-				const float c = cos(-ccdRotationAngle * M_PI / 180.0f);
-				const float cosHalfWidth  = c * halfWidth;
-				const float sinHalfWidth  = s * halfWidth;
-				const float cosHalfHeight = c * halfHeight;
-				const float sinHalfHeight = s * halfHeight;
-				const Vec2f v1 = Vec2f(-cosHalfWidth - sinHalfHeight, -sinHalfWidth + cosHalfHeight);
-				const Vec2f v2 = Vec2f(cosHalfWidth  - sinHalfHeight, sinHalfWidth  + cosHalfHeight);
-				const Vec2f v3 = Vec2f(cosHalfWidth  + sinHalfHeight, sinHalfWidth  - cosHalfHeight);
-				const Vec2f v4 = Vec2f(-cosHalfWidth + sinHalfHeight, -sinHalfWidth - cosHalfHeight);
-				vertices->addVertex(VertexP2(offset + v1));
-				vertices->addVertex(VertexP2(offset + v2));
-				vertices->addVertex(VertexP2(offset + v3));
-				vertices->addVertex(VertexP2(offset + v4));
-				vertices->addVertex(VertexP2(offset + v1));
-				vertices->lock();
-
-				renderer->drawVertexBuffer(vertices);
+			if (width > 0.0 && height > 0.0) {
+				glBegin(GL_LINE_LOOP);
+				glVertex2f(-width / 2.0, height / 2.0);
+				glVertex2f(width / 2.0, height / 2.0);
+				glVertex2f(width / 2.0, -height / 2.0);
+				glVertex2f(-width / 2.0, -height / 2.0);
+				glEnd();
 			}
 		}
 	}
-	delete vertices;
+
+	glPopMatrix();
 }
 
-void Oculars::paintCrosshairs(StelRenderer* renderer)
+void Oculars::paintCrosshairs()
 {
 	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-                       projector->getViewportPosY()+projector->getViewportHeight()/2);
-	double length = 0.5 * params.viewportFovDiameter;
+					   projector->getViewportPosY()+projector->getViewportHeight()/2);
+	GLdouble length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
 	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
 		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
 	}
 
 	// Draw the lines
-	renderer->setGlobalColor(0.77f, 0.14f, 0.16f);
-	StelVertexBuffer<VertexP2>* vertices = 
-		renderer->createVertexBuffer<VertexP2>(PrimitiveType_Lines);
-	const VertexP2 center(centerScreen[0], centerScreen[1]);
-	vertices->addVertex(center);
-	vertices->addVertex(VertexP2(centerScreen[0], centerScreen[1] + length));
-	vertices->addVertex(center);
-	vertices->addVertex(VertexP2(centerScreen[0], centerScreen[1] - length));
-	vertices->addVertex(center);
-	vertices->addVertex(VertexP2(centerScreen[0] + length, centerScreen[1]));
-	vertices->addVertex(center);
-	vertices->addVertex(VertexP2(centerScreen[0] - length, centerScreen[1]));
-	vertices->lock();
-
-	renderer->drawVertexBuffer(vertices);
-	delete vertices;
+	StelPainter painter(projector);
+	painter.setColor(0.77, 0.14, 0.16, 1);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] + length);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] - length);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] + length, centerScreen[1]);
+	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
 }
 
-void Oculars::paintTelrad(StelRenderer* renderer)
+void Oculars::paintTelrad()
 {
 	if (!flagShowOculars) {
 		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
@@ -1453,61 +1434,54 @@ void Oculars::paintTelrad(StelRenderer* renderer)
 		// StelCore *core = StelApp::getInstance().getCore();
 		// StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
-		renderer->setGlobalColor(0.77f, 0.14f, 0.16f);
+		// StelPainter drawing
+		StelPainter painter(projector);
+		painter.setColor(0.77, 0.14, 0.16, 1.0);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-		                   projector->getViewportPosY()+projector->getViewportHeight()/2);
+						   projector->getViewportPosY()+projector->getViewportHeight()/2);
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
 
-		// Generate and draw the circles.
-		StelVertexBuffer<VertexP2>* circle =
-			renderer->createVertexBuffer<VertexP2>(PrimitiveType_LineStrip);
-		const float baseRadius = 0.5f * projector->getPixelPerRadAtCenter() * (M_PI / 180.0f);
-		StelGeometryBuilder().buildCircle(circle, centerScreen[0], centerScreen[1], baseRadius * 0.5f);
-		renderer->drawVertexBuffer(circle);
-	
-		circle->unlock();
-		circle->clear();
-		StelGeometryBuilder().buildCircle(circle, centerScreen[0], centerScreen[1], baseRadius * 2.0f);
-		renderer->drawVertexBuffer(circle);
-
-		circle->unlock();
-		circle->clear();
-		StelGeometryBuilder().buildCircle(circle, centerScreen[0], centerScreen[1], baseRadius * 4.0f);
-		renderer->drawVertexBuffer(circle);
-
-		delete circle;
 	}
 }
 
-
-void Oculars::paintOcularMask(StelRenderer* renderer)
+void Oculars::paintOcularMask()
 {
+	// XXX: for some reason I cannot get to make the glu functions work when
+	// compiling with Qt5!
+	/*
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
-	renderer->setBlendMode(BlendMode_None);
-	renderer->setGlobalColor(0.0f, 0.0f, 0.0f);
+	glDisable(GL_BLEND);
+	glColor3f(0.f,0.f,0.f);
+	glPushMatrix();
+	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	GLUquadricObj *quadric = gluNewQuadric();
 
-	float inner = 0.5f * params.viewportFovDiameter;
+	GLdouble inner = 0.5 * params.viewportFovDiameter;
+
 	// See if we need to scale the mask
 	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars()) {
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
-	const float outer = params.viewportXywh[2] + params.viewportXywh[3];
-	const Vec2f offset(params.viewportCenter[0], params.viewportCenter[1]);
 
-	StelGeometryRing* disc = 
-		StelGeometryBuilder().buildRing2D(RingParams(inner, outer).resolution(128, 1), offset);
-	disc->draw(renderer);
+	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
+	// Draw the mask
+	gluDisk(quadric, inner, outer, 256, 1);
 	// the gray circle
-	renderer->setGlobalColor(0.15f, 0.15f, 0.15f);
-	disc->setInnerOuterRadius(inner - 1.0f, inner);
-	disc->draw(renderer);
-	delete disc;
+	glColor3f(0.15f,0.15f,0.15f);
+	gluDisk(quadric, inner - 1.0, inner, 256, 1);
+	gluDeleteQuadric(quadric);
+	glPopMatrix();
+	*/
 }
 
-void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
+void Oculars::paintText(const StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelPainter painter(prj);	
 
 	// Get the current instruments
 	CCD *ccd = NULL;
@@ -1518,23 +1492,22 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
-	// set up drawing
-	if (StelApp::getInstance().getVisionModeNight())
-		renderer->setGlobalColor(0.8f, 0.0f, 0.0f);
-	else
-		renderer->setGlobalColor(0.8f, 0.48f, 0.0f);
-	renderer->setBlendMode(BlendMode_Alpha);
+	// set up the color and the GL state
+	painter.setColor(0.8, 0.48, 0.0, 1);
+	glDisable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 
 	// Get the X & Y positions, and the line height
-	renderer->setFont(font);
+	painter.setFont(font);
 	QString widthString = "MMMMMMMMMMMMMMMMMMM";
-	const float insetFromRHS = QFontMetrics(font).width(widthString);
+	float insetFromRHS = painter.getFontMetrics().width(widthString);
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 	int xPosition = projectorParams.viewportXywh[2];
 	xPosition -= insetFromRHS;
 	int yPosition = projectorParams.viewportXywh[3];
 	yPosition -= 40;
-	const int lineHeight = QFontMetrics(font).height();
+	const int lineHeight = painter.getFontMetrics().height();
 	
 	
 	// The Ocular
@@ -1556,22 +1529,22 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 		if (name.length() > widthString.length()) {
 			xPosition -= (insetFromRHS / 2.0);
 		}
-		renderer->drawText(TextParams(xPosition, yPosition, ocularNumberLabel));
+		painter.drawText(xPosition, yPosition, ocularNumberLabel);
 		yPosition-=lineHeight;
 		
 		if (!ocular->isBinoculars()) {
 			QString eFocalLength = QVariant(ocular->effectiveFocalLength()).toString();
 			// TRANSLATORS: FL = Focal length
 			QString eFocalLengthLabel = QString(q_("Ocular FL: %1 mm")).arg(eFocalLength);
-			renderer->drawText(TextParams(xPosition, yPosition, eFocalLengthLabel));
+			painter.drawText(xPosition, yPosition, eFocalLengthLabel);
 			yPosition-=lineHeight;
 			
 			QString ocularFov = QString::number(ocular->appearentFOV());
 			ocularFov.append(QChar(0x00B0));//Degree sign
 			// TRANSLATORS: aFOV = apparent field of view
 			QString ocularFOVLabel = QString(q_("Ocular aFOV: %1"))
-			                         .arg(ocularFov);
-			renderer->drawText(TextParams(xPosition, yPosition, ocularFOVLabel));
+						 .arg(ocularFov);
+			painter.drawText(xPosition, yPosition, ocularFOVLabel);
 			yPosition-=lineHeight;
 	
 			QString lensNumberLabel;
@@ -1592,7 +1565,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 			{
 				lensNumberLabel = QString (q_("Lens: none"));
 			}
-			renderer->drawText(TextParams(xPosition, yPosition, lensNumberLabel));
+			painter.drawText(xPosition, yPosition, lensNumberLabel);
 			yPosition-=lineHeight;
 		
 			// The telescope
@@ -1609,7 +1582,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 						.arg(selectedTelescopeIndex)
 						.arg(telescopeName);
 			}
-			renderer->drawText(TextParams(xPosition, yPosition, telescopeNumberLabel));
+			painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 			yPosition-=lineHeight;
 			
 			// General info
@@ -1618,14 +1591,14 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 			magString.append(QChar(0x00D7));//Multiplication sign
 			QString magnificationLabel = QString(q_("Magnification: %1"))
 			                             .arg(magString);
-			renderer->drawText(TextParams(xPosition, yPosition, magnificationLabel));
+			painter.drawText(xPosition, yPosition, magnificationLabel);
 			yPosition-=lineHeight;
 			
 			double fov = ((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0;
 			QString fovString = QString::number(fov);
 			fovString.append(QChar(0x00B0));//Degree sign
 			QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
-			renderer->drawText(TextParams(xPosition, yPosition, fovLabel));
+			painter.drawText(xPosition, yPosition, fovLabel);
 		}
 	}
 
@@ -1647,9 +1620,9 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 					.arg(selectedCCDIndex)
 					.arg(name);
 		}
-		renderer->drawText(TextParams(xPosition, yPosition, ccdSensorLabel));
+		painter.drawText(xPosition, yPosition, ccdSensorLabel);
 		yPosition-=lineHeight;
-		renderer->drawText(TextParams(xPosition, yPosition, ccdInfoLabel));
+		painter.drawText(xPosition, yPosition, ccdInfoLabel);
 		yPosition-=lineHeight;
 
 		// The telescope
@@ -1666,7 +1639,7 @@ void Oculars::paintText(const StelCore* core, StelRenderer* renderer)
 					.arg(selectedTelescopeIndex)
 					.arg(telescopeName);
 		}
-		renderer->drawText(TextParams(xPosition, yPosition, telescopeNumberLabel));
+		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
 	
 }
@@ -1677,6 +1650,8 @@ void Oculars::validateAndLoadIniFile()
 	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Oculars");
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
+	if (ocularIniPath.isEmpty())
+		return;
 
 	// If the ini file does not already exist, create it from the resource in the QT resource
 	if(!QFileInfo(ocularIniPath).exists()) {

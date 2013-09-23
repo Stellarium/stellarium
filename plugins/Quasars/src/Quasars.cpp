@@ -17,6 +17,7 @@
  */
 
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -24,6 +25,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -31,25 +33,24 @@
 #include "LabelMgr.hpp"
 #include "Quasar.hpp"
 #include "Quasars.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "QuasarsDialog.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
 #include <QAction>
-#include <QProgressBar>
 #include <QDebug>
-#include <QFile>
 #include <QFileInfo>
+#include <QFile>
 #include <QTimer>
+#include <QVariantMap>
+#include <QVariant>
 #include <QList>
-#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
-#include <QVariant>
-#include <QVariantMap>
 #include <QDir>
+#include <QSettings>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -75,16 +76,11 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
-
-
 /*
  Constructor
 */
 Quasars::Quasars()
-	: texPointer(NULL)
-	, markerTexture(NULL)
-	, flagShowQuasars(false)
+	: flagShowQuasars(false)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
@@ -114,10 +110,9 @@ Quasars::~Quasars()
 
 void Quasars::deinit()
 {
-	if(NULL != texPointer)    {delete texPointer;}
-	if(NULL != markerTexture) {delete markerTexture;}
-	texPointer = markerTexture = NULL;
 	QSO.clear();
+	Quasar::markerTexture.clear();
+	texPointer.clear();
 }
 
 /*
@@ -153,6 +148,11 @@ void Quasars::init()
 		readSettingsFromConfig();
 
 		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
+		if (catalogJsonPath.isEmpty())
+			return;
+
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -215,58 +215,48 @@ void Quasars::init()
 /*
  Draw our module. This should print name of first QSO in the main window
 */
-void Quasars::draw(StelCore* core, class StelRenderer* renderer)
+void Quasars::draw(StelCore* core)
 {
 	if (!flagShowQuasars)
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	renderer->setFont(font);
-
-	if(NULL == markerTexture)
-	{
-		markerTexture = renderer->createTexture(":/Quasars/quasar.png");
-	}
+	StelPainter painter(prj);
+	painter.setFont(font);
 	
 	foreach (const QuasarP& quasar, QSO)
 	{
 		if (quasar && quasar->initialized)
-		{
-			quasar->draw(core, renderer, prj, markerTexture);
-		}
+			quasar->draw(core, painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-	{
-		drawPointer(core, renderer, prj);
-	}
+		drawPointer(core, painter);
+
 }
 
-void Quasars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Quasars::drawPointer(StelCore* core, StelPainter& painter)
 {
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Quasar");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenPos;
+		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, screenPos))
-		{
+		if (!painter.getProjector()->project(pos, screenpos))
 			return;
-		}
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur2.png");
-		}
 
 		const Vec3f& c(obj->getInfoColor());
-		renderer->setGlobalColor(c[0], c[1], c[2]);
+		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		renderer->setBlendMode(BlendMode_Alpha);
-		renderer->drawTexturedRect(screenPos[0] - 13.0f, screenPos[1] - 13.0f, 26.0f, 26.0f, 
-		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
+		painter.enableTexture2d(true);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -687,12 +677,11 @@ void Quasars::updateJSON(void)
 	emit(updateStateChanged(updateState));	
 
 	if (progressBar==NULL)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(100);
+	progressBar->setRange(0, 100);
 	progressBar->setFormat("Update quasars");
-	progressBar->setVisible(true);
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
@@ -714,28 +703,25 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	else
 	{
 		// download completed successfully.
-		try
+		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
+		if (jsonFilePath.isEmpty())
 		{
-			QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
-			QFile jsonFile(jsonFilePath);
-			if (jsonFile.exists())
-				jsonFile.remove();
-
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file: modules/Quasars/quasars.json";
+			return;
 		}
-		catch (std::runtime_error &e)
-		{
-			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file:" << e.what();
-		}
+		QFile jsonFile(jsonFilePath);
+		if (jsonFile.exists())
+			jsonFile.remove();
 
+		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
+		jsonFile.write(reply->readAll());
+		jsonFile.close();
 	}
 
 	if (progressBar)
 	{
 		progressBar->setValue(100);
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
 }
