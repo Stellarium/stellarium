@@ -613,37 +613,39 @@ QT5_USE_MODULES(testDates Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 
-#SET(tests_testStelFileMgr_SRCS
-#	core/StelFileMgr.cpp
-#	core/StelFileMgr.hpp
-#	tests/testStelFileMgr.cpp)
-#ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
-#QT5_USE_MODULES(testStelFileMgr Core Gui Widgets OpenGL Script Declarative Test)
-#TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
-#ADD_DEPENDENCIES(buildTests testStelFileMgr)
+SET(tests_testStelFileMgr_SRCS
+	core/StelFileMgr.cpp
+	core/StelFileMgr.hpp
+	tests/testStelFileMgr.cpp)
+ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
+QT5_USE_MODULES(testStelFileMgr Core Gui Widgets OpenGL Script Declarative Test)
+TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testStelFileMgr)
 
-#SET(tests_testStelSphereGeometry_SRCS
-#	tests/testStelSphereGeometry.hpp
-#	tests/testStelSphereGeometry.cpp
-#	core/StelSphereGeometry.hpp
-#	core/StelSphereGeometry.cpp
-#	core/StelVertexArray.hpp
-#	core/StelVertexArray.cpp
-#	core/OctahedronPolygon.hpp
-#	core/OctahedronPolygon.cpp
-#	core/StelJsonParser.hpp
-#	core/StelJsonParser.cpp
-#	core/StelUtils.cpp
-#	core/StelUtils.hpp
-#	core/StelProjector.cpp
-#	core/StelProjector.hpp
-#	core/StelTranslator.cpp
-#	core/StelTranslator.hpp
-#	${glues_lib_SRCS})
-#ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
-#QT5_USE_MODULES(testStelSphereGeometry Core Gui Widgets OpenGL Script Declarative Test)
-#TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
-#ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
+SET(tests_testStelSphereGeometry_SRCS
+	tests/testStelSphereGeometry.hpp
+	tests/testStelSphereGeometry.cpp
+	core/StelSphereGeometry.hpp
+	core/StelSphereGeometry.cpp
+	core/StelVertexArray.hpp
+	core/StelVertexArray.cpp
+	core/OctahedronPolygon.hpp
+	core/OctahedronPolygon.cpp
+	core/StelJsonParser.hpp
+	core/StelJsonParser.cpp
+	core/StelUtils.cpp
+	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelFileMgr.cpp
+	core/StelFileMgr.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
+	${glues_lib_SRCS})
+ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
+QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
+TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
+ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 
 #SET(tests_testStelSphericalIndex_SRCS
 #	tests/testStelSphericalIndex.hpp
@@ -686,7 +688,7 @@ ADD_DEPENDENCIES(buildTests testStelJsonParser)
 #  core/StelVertexArray.hpp)
 #QT5_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
 #ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
-#QT5_USE_MODULES(testStelVertexArray Core Gui Widgets OpenGL Script Declarative Test)
+#QT5_USE_MODULES(testStelVertexArray Core Gui Test)
 #TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
 #ADD_DEPENDENCIES(buildTests testStelVertexArray)
 
