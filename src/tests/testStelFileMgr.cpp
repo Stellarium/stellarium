@@ -24,8 +24,8 @@
 #include <QString>
 #include <QStringList>
 
-#include <QtDebug>
-#include <QtTest>
+#include <QDebug>
+#include <QTest>
 #include <QRegExp>
 
 #include "StelFileMgr.hpp"
@@ -91,8 +91,8 @@ void TestStelFileMgr::initTestCase()
 	QStringList path;
 	path << "./"+partialPath1;
 	path << workingDir+"/"+partialPath2;
-	StelFileMgr::setSearchPaths(path);
-	qDebug() << "search paths are:  " << StelFileMgr::getSearchPaths();
+	//StelFileMgr::setSearchPaths(path);
+	qDebug() << "search paths are:  " << path;
 }
 
 void TestStelFileMgr::cleanupTestCase()

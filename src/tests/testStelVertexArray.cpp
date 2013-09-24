@@ -58,7 +58,6 @@ void TestStelVertexArray::benchmarkForeachTriangleNoOp()
 	}
 }
 
-
 struct VerticesVisitor
 {
 	VerticesVisitor(const VerticesVisitor& rst) : sum(rst.sum) {}
