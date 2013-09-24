@@ -24,7 +24,7 @@
 #include <QList>
 #include <QtGlobal>
 #include <QLocale>
-#include <QtDebug>
+#include <QDebug>
 #include "StelUtils.hpp"
 #include "tests/testDates.hpp"
 

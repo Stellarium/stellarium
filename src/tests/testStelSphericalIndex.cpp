@@ -18,8 +18,8 @@
  */
 
 #include <QObject>
-#include <QtDebug>
-#include <QtTest>
+#include <QDebug>
+#include <QTest>
 #include <stdexcept>
 
 #include "StelSphereGeometry.hpp"
