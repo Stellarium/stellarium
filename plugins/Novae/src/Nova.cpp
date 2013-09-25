@@ -87,7 +87,7 @@ QVariantMap Nova::getMap(void)
 float Nova::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core, false);
+	return getVMagnitude(core);
 }
 
 QString Nova::getEnglishName() const
@@ -114,7 +114,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 {
 	QString str;
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core, false);
+	double mag = getVMagnitude(core);
 
 	if (flags&Name)
 	{
@@ -128,8 +128,8 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	if (flags&Magnitude)
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-									       QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
+									       QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 	}
@@ -153,16 +153,8 @@ Vec3f Nova::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Nova::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Nova::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-		Vec3d altAz=getAltAzPosApparent(core);
-		altAz.normalize();
-		core->getSkyDrawer()->getExtinction().forward(&altAz, &extinctionMag);
-	}
-
 	// OK, start from minimal brightness
 	double vmag = minMagnitude;
 	double currentJD = core->getJDay();
@@ -282,7 +274,7 @@ float Nova::getVMagnitude(const StelCore* core, bool withExtinction) const
 	if (vmag>minMagnitude)
 		vmag = minMagnitude;
 
-	return vmag + extinctionMag;
+	return vmag;
 }
 
 double Nova::getAngularSize(const StelCore*) const
@@ -308,7 +300,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	double mag;
 
 	StelUtils::spheToRect(RA, Dec, XYZ);
-	mag = getVMagnitude(core, true);
+	mag = getVMagnitudeWithExtinction(core);
 	sd->preDrawPointSource(painter);
 	float mlimit = sd->getLimitMagnitude();
 
@@ -322,7 +314,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
 			QString name = novaName.isEmpty() ? designation : novaName;
-			painter->drawText(XYZ, designation, 0, shift, shift, false);
+			painter->drawText(XYZ, name, 0, shift, shift, false);
 		}
 	}
 
