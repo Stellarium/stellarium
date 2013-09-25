@@ -233,6 +233,7 @@ Vec3f Pulsar::getInfoColor(void) const
 
 float Pulsar::getVMagnitude(const StelCore* core) const
 {
+	Q_UNUSED(core);
 	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6
 	float vmag = distance + 6.f;
 

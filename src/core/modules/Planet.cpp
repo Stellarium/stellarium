@@ -46,18 +46,19 @@ Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 Planet::Planet(const QString& englishName,
-			   int flagLighting,
-			   double radius,
-			   double oblateness,
-			   Vec3f color,
-			   float albedo,
-			   const QString& atexMapName,
-			   posFuncType coordFunc,
-			   void* auserDataPtr,
-			   OsculatingFunctType *osculatingFunc,
-			   bool acloseOrbit,
-			   bool hidden,
-			   bool hasAtmosphere)
+	       int flagLighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& atexMapName,
+	       posFuncType coordFunc,
+	       void* auserDataPtr,
+	       OsculatingFunctType *osculatingFunc,
+	       bool acloseOrbit,
+	       bool hidden,
+	       bool hasAtmosphere,
+	       const QString& pType)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
@@ -69,7 +70,8 @@ Planet::Planet(const QString& englishName,
 	  osculatingFunc(osculatingFunc),
 	  parent(NULL),
 	  hidden(hidden),
-	  atmosphere(hasAtmosphere)
+	  atmosphere(hasAtmosphere),
+	  pType(pType)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
