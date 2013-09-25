@@ -33,19 +33,22 @@
 #else
 	#include <QGuiApplication>
 #endif
-#include <QMessageBox>
-#include <QStyleFactory>
-#include <QTranslator>
-#include <QGLFormat>
+#include <QDir>
 #include <QFileInfo>
 #include <QFontDatabase>
-#include <QDir>
+#include <QGLFormat>
+#include <QMessageBox>
+#include <QString>
+#include <QStringList>
+#include <QStyleFactory>
+#include <QTranslator>
+
 #ifdef Q_OS_WIN
-#include <windows.h>
-#ifdef _MSC_BUILD
-	#include <MMSystem.h>
-	#pragma comment(lib,"Winmm.lib")
-#endif
+	#include <windows.h>
+	#ifdef _MSC_BUILD
+		#include <MMSystem.h>
+		#pragma comment(lib,"Winmm.lib")
+	#endif
 #endif //Q_OS_WIN
 
 //! @class GettextStelTranslator
@@ -103,6 +106,22 @@ int main(int argc, char **argv)
 			timerGrain = 0;
 	}
 #endif
+#ifdef Q_OS_MAC
+	// This block does not currently work
+//	 QDir dir(argv[0]);
+//	 dir.cdUp();
+//	 dir.cdUp();
+//	 dir.cd("plugins");
+//	 qDebug() << dir.absolutePath();
+//	 QCoreApplication::setLibraryPaths(QStringList(dir.absolutePath()));
+
+	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
+	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
+	 newArgv[argc++] = "-platformpluginpath";
+	 newArgv[argc++] = "../plugins/platforms";
+	 argv = newArgv;
+
+#endif
 
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
@@ -110,7 +129,7 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 	
 	QGuiApplication::setDesktopSettingsAware(false);
-	
+
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
