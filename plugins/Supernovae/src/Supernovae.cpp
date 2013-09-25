@@ -209,8 +209,6 @@ void Supernovae::draw(StelCore* core)
 
 void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Supernova");
 	if (!newSelected.empty())
 	{
