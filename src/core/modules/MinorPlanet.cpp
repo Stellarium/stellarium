@@ -33,30 +33,32 @@
 #include <QDebug>
 
 MinorPlanet::MinorPlanet(const QString& englishName,
-						 int flagLighting,
-						 double radius,
-						 double oblateness,
-						 Vec3f color,
-						 float albedo,
-						 const QString& atexMapName,
-						 posFuncType coordFunc,
-						 void* auserDataPtr,
-						 OsculatingFunctType *osculatingFunc,
-						 bool acloseOrbit,
-						 bool hidden)
-						: Planet (englishName,
-								  flagLighting,
-								  radius,
-								  oblateness,
-								  color,
-								  albedo,
-								  atexMapName,
-								  coordFunc,
-								  auserDataPtr,
-								  osculatingFunc,
-								  acloseOrbit,
-								  hidden,
-								  false)
+			 int flagLighting,
+			 double radius,
+			 double oblateness,
+			 Vec3f color,
+			 float albedo,
+			 const QString& atexMapName,
+			 posFuncType coordFunc,
+			 void* auserDataPtr,
+			 OsculatingFunctType *osculatingFunc,
+			 bool acloseOrbit,
+			 bool hidden,
+			 const QString &pType)
+	: Planet (englishName,
+		  flagLighting,
+		  radius,
+		  oblateness,
+		  color,
+		  albedo,
+		  atexMapName,
+		  coordFunc,
+		  auserDataPtr,
+		  osculatingFunc,
+		  acloseOrbit,
+		  hidden,
+		  false, //No atmosphere
+		  pType)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;

@@ -84,18 +84,19 @@ class Planet : public StelObject
 public:
 	friend class SolarSystem;
 	Planet(const QString& englishName,
-		   int flagLighting,
-		   double radius,
-		   double oblateness,
-		   Vec3f color,
-		   float albedo,
-		   const QString& texMapName,
-		   posFuncType _coordFunc,
-		   void* userDataPtr,
-		   OsculatingFunctType *osculatingFunc,
-		   bool closeOrbit,
-		   bool hidden,
-		   bool hasAtmosphere);
+	       int flagLighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& texMapName,
+	       posFuncType _coordFunc,
+	       void* userDataPtr,
+	       OsculatingFunctType *osculatingFunc,
+	       bool closeOrbit,
+	       bool hidden,
+	       bool hasAtmosphere,
+	       const QString &pType);
 
 	~Planet();
 
