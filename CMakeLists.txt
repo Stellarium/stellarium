@@ -131,12 +131,6 @@ IF(APPLE)
  ENDIF()
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
 
- # uncomment one of the following, depending on minimum OS level you want
- #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.5")
- #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
- #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6")
- #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.6.sdk/")
-
  # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
@@ -400,14 +394,15 @@ ENDIF()
 
 ########### Macosx Bundling ###############
 IF(APPLE)
-ADD_CUSTOM_TARGET(
-  macosx_bundle
-  bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR}
-  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-  COMMENT "making the macosx bundle."
-  VERBATIM
-)
+	# ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
+	ADD_CUSTOM_TARGET(
+		mac_app
+		python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
+		DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+		COMMENT "making the macosx bundle."
+		VERBATIM
+	)
 ENDIF()
 
 
