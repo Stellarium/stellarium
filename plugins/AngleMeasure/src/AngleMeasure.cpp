@@ -117,7 +117,7 @@ void AngleMeasure::init()
 	// Create action for enable/disable & hook up signals
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
-	addAction("actionShow_Angle_Measure", "AngleMeasure", N_("Angle measure"), "enabled", "Ctrl+A");
+	addAction("actionShow_Angle_Measure", N_("Angle Measure"), N_("Angle measure"), "enabled", "Ctrl+A");
 
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.

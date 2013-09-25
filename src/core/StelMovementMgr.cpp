@@ -102,11 +102,11 @@ void StelMovementMgr::init()
 		}
 	}
 
-	addAction("actionSwitch_Equatorial_Mount", "Miscellaneous", N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
-	addAction("actionGoto_Selected_Object", "MovementAndSelection", N_("Center on selected object"), "setFlagTracking()", "Space");
-	addAction("actionZoom_In_Auto", "MovementAndSelection", N_("Zoom in on selected object"), "autoZoomIn()", "/");
-	addAction("actionZoom_Out_Auto", "MovementAndSelection", N_("Zoom out"), "autoZoomOut()", "\\");
-	addAction("actionSet_Tracking", "MovementAndSelection", N_("Track object"), "tracking", "T");
+	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
+	addAction("actionGoto_Selected_Object", N_("Movement and Selection"), N_("Center on selected object"), "setFlagTracking()", "Space");
+	addAction("actionZoom_In_Auto", N_("Movement and Selection"), N_("Zoom in on selected object"), "autoZoomIn()", "/");
+	addAction("actionZoom_Out_Auto", N_("Movement and Selection"), N_("Zoom out"), "autoZoomOut()", "\\");
+	addAction("actionSet_Tracking", N_("Movement and Selection"), N_("Track object"), "tracking", "T");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
