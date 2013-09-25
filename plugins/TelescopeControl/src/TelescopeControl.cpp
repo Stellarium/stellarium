@@ -157,7 +157,7 @@ void TelescopeControl::init()
 			QString shortcut = QString("Ctrl+%1").arg(i);
 			QString text;
 			text = q_("Move telescope #%1 to selected object").arg(i);
-			addAction(name, "Telescope Control", text, "slewTelescopeToSelectedObject()", shortcut);
+			addAction(name, N_("Telescope Control"), text, "slewTelescopeToSelectedObject()", shortcut);
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
@@ -165,18 +165,14 @@ void TelescopeControl::init()
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
 			addAction(name, "Telescope Control", text, "slewTelescopeToViewDirection()", shortcut);
 		}
-		// Temporary comment code for autotranslation GUI
-		// FIXME: Restore autotranslation for StelAction description --AW
-		/*
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
-		*/
 	
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
 
-		addAction("actionShow_Slew_Window", "TelescopeControl", N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
+		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
 
 		//Create toolbar button
 		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
@@ -198,6 +194,26 @@ void TelescopeControl::init()
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
+
+void TelescopeControl::translateActionDescriptions()
+{
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	
+	for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
+	{
+		QString name;
+		QString description;
+
+		name = moveToSelectedActionId.arg(i);
+		description = q_("Move telescope #%1 to selected object").arg(i);
+		actionMgr->findAction(name)->setText(description);
+		
+		name = moveToCenterActionId.arg(i);
+		description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+		actionMgr->findAction(name)->setText(description);
+	}
+}
+
 
 void TelescopeControl::deinit()
 {

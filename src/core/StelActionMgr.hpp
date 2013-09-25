@@ -56,6 +56,7 @@ public:
 	const QKeySequence getShortcut() const {return keySequence;}
 	const QKeySequence getAltShortcut() const {return altKeySequence;}
 	const QString& getText() const {return text;}
+	void setText(const QString& value) {text = value;}
 signals:
 	void toggled(bool);
 	void triggered();

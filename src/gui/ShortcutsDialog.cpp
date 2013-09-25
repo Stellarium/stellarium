@@ -434,7 +434,7 @@ void ShortcutsDialog::updateShortcutsItem(StelAction *action,
 		groupItem->setChild(shortcutItem->row(), 2, secondaryItem);
 	}
 	// setup properties of item
-	shortcutItem->setText(action->getText());
+	shortcutItem->setText(q_(action->getText()));
 	QModelIndex index = shortcutItem->index();
 	mainModel->setData(index.sibling(index.row(), 1),
 	                   action->getShortcut(), Qt::DisplayRole);

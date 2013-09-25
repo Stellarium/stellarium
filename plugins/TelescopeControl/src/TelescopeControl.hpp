@@ -214,6 +214,8 @@ signals:
 
 private slots:
 	void setStelStyle(const QString& section);
+	//! Set translated keyboard shortcut descriptions.
+	void translateActionDescriptions();
 
 private:
 	//! Draw a nice animated pointer around the object if it's selected
