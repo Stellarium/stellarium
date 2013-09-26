@@ -26,6 +26,9 @@
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
 
+#include <string.h>
+#include <stdlib.h>
+
 #include <QDebug>
 
 #ifndef USE_QUICKVIEW
@@ -33,14 +36,19 @@
 #else
 	#include <QGuiApplication>
 #endif
+#include <QCoreApplication>
 #include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QFontDatabase>
 #include <QGLFormat>
+#include <QGuiApplication>
 #include <QMessageBox>
+#include <QSettings>
 #include <QString>
 #include <QStringList>
 #include <QStyleFactory>
+#include <QTextStream>
 #include <QTranslator>
 
 #ifdef Q_OS_WIN
@@ -117,8 +125,12 @@ int main(int argc, char **argv)
 
 	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
 	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
-	 newArgv[argc++] = "-platformpluginpath";
-	 newArgv[argc++] = "../plugins/platforms";
+	 char * option = new char[20];
+	 char * value = new char[21];
+	 strcpy( option, "-platformpluginpath");
+	 strcpy( value, "../plugins/platforms");
+	 newArgv[argc++] = option;
+	 newArgv[argc++] = value;
 	 argv = newArgv;
 
 #endif
@@ -321,6 +333,11 @@ int main(int argc, char **argv)
 	if(timerGrain)
 		timeEndPeriod(timerGrain);
 	#endif //Q_OS_WIN
+#ifdef Q_OS_MAC
+	delete(newArgv);
+	delete(option);
+	delete(value);
+#endif
 
 	return 0;
 }
