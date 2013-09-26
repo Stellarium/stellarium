@@ -44,25 +44,16 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	parentWidget(parent),
 	borderPath(0)
 {
-	//setVisible(false);
-	//setMinimumSize(0, 0);
 	setMaximumSize(300, 400);
-	//setPreferredSize(230, 100);
 	setContentsMargins(0, 0, 0, 0);
 	//TODO: set font?
 
 	//First create the layout and populate it, then set it?
 	mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
-	//layout->setContentsMargins(0, 0, 0, 0);
-	//layout->setSpacing(0);
 
 	//Button bar
 	buttonBar = new QGraphicsWidget();
 	mainLayout->addItem(buttonBar);
-
-	//QPixmap leftBackground(":/graphicGui/btbg-left.png");
-	//QPixmap middleBackground(":/graphicGui/btbg-middle.png");
-	//QPixmap rightBackground(":/graphicGui/btbg-right.png");
 
 	StelApp& stelApp = StelApp::getInstance();
 	Q_ASSERT(ocularsPlugin->actionShowOcular);
@@ -73,7 +64,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                              ocularsPlugin->actionShowOcular,
 	                              true); //No background
 	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->text());
-	//buttonOcular->setBackgroundPixmap(leftBackground);
 	buttonOcular->setParentItem(buttonBar);
 
 	//Hack to avoid buttonOcular being left "checked" if it has been toggled
@@ -578,7 +568,6 @@ void OcularsGuiPanel::updateOcularControls()
 void OcularsGuiPanel::updateLensControls()
 {
 	int index = ocularsPlugin->selectedOcularIndex;
-	//Ocular* ocular = ocularsPlugin->oculars[index];
 
 	Lens* lens = ocularsPlugin->selectedLens();
 	index = ocularsPlugin->selectedLensIndex;
@@ -869,7 +858,7 @@ void OcularsGuiPanel::setLensControlsVisible(bool show)
 		if (!lensControls->isVisible())
 		{
 			lensControls->setVisible(true);
-			mainLayout->insertItem(2, lensControls);
+			mainLayout->insertItem(3, lensControls);
 		}
 	}
 	else
@@ -893,7 +882,7 @@ void OcularsGuiPanel::setOcularControlsVisible(bool show)
 		if (!ocularControls->isVisible())
 		{
 			ocularControls->setVisible(true);
-			mainLayout->insertItem(0, ocularControls);
+			mainLayout->insertItem(1, ocularControls);
 		}
 	}
 	else
@@ -915,7 +904,7 @@ void OcularsGuiPanel::setCcdControlsVisible(bool show)
 		if (!ccdControls->isVisible())
 		{
 			ccdControls->setVisible(true);
-			mainLayout->insertItem(0, ccdControls);
+			mainLayout->insertItem(1, ccdControls);
 		}
 	}
 	else
@@ -935,7 +924,7 @@ void OcularsGuiPanel::setTelescopeControlsVisible(bool show)
 		if (!telescopeControls->isVisible())
 		{
 			telescopeControls->setVisible(true);
-			mainLayout->insertItem(1, telescopeControls);
+			mainLayout->insertItem(2, telescopeControls);
 		}
 	}
 	else
@@ -976,7 +965,6 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	{
 		qreal parentWidth = buttonOcular->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
-		//posX = round((parentWidth-width)/2.0);//Centering, deprecated
 		spacing = round((parentWidth-width)/nGaps);
 	}
 	buttonOcular->setPos(posX, posY);
@@ -1086,14 +1074,16 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
                                               const QColor& textColor,
                                               const QColor& backgroundColor)
 {
-	if (width <= 0 || height <=0)
+	if (width <= 0 || height <=0) {
 		return QPixmap();
+	}
 
 	QPixmap pixmap(width, height);
 	pixmap.fill(backgroundColor);
 
-	if (text.isEmpty())
+	if (text.isEmpty()) {
 		return pixmap;
+	}
 
 	QPainter painter(&pixmap);
 	painter.setFont(font);
