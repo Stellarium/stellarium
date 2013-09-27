@@ -210,7 +210,6 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::Flags& flags, bool recursive)
 {
 	QSet<QString> result;
-	QStringList listPaths;
 
 	if (recursive)
 	{
@@ -228,56 +227,24 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 		return result;
 	}
 
-	const bool isPathAbsolute = QFileInfo(path).isAbsolute();
-			
 	// If path is "complete" (a full path), we just look in there, else
 	// we append relative paths to the search paths maintained by this class.
-	if (isPathAbsolute)
-		listPaths.append("");
-	else
-		listPaths = fileLocations;
+	QStringList listPaths = QFileInfo(path).isAbsolute() ? QStringList("/") : fileLocations;
 
 	foreach (const QString& li, listPaths)
 	{
-		QFileInfo thisPath;
-		if (isPathAbsolute)
-			thisPath.setFile(path);
-		else
-			thisPath.setFile(li+"/"+path);
+		QFileInfo thisPath(QDir(li).filePath(path));
+		if (!thisPath.isDir())
+			continue;
 
-		if (thisPath.isDir())
+		QDir thisDir(thisPath.absoluteFilePath());
+		foreach (const QString& fileIt, thisDir.entryList())
 		{
-			QDir thisDir(thisPath.absoluteFilePath());
-			foreach (const QString& fileIt, thisDir.entryList())
-			{
-				if (fileIt != ".." && fileIt != ".")
-				{
-					QFileInfo fullPath;
-					if (isPathAbsolute)
-						fullPath.setFile(path+"/"+fileIt);
-					else
-						fullPath.setFile(li+"/"+path+"/"+fileIt);
-
-					// default is to return all objects in this directory
-					bool returnThisOne = true;
-
-					// but if we have flags set, that will filter the result
-					if ((flags & Writable) && !fullPath.isWritable())
-						returnThisOne = false;
-
-					if ((flags & Directory) && !fullPath.isDir())
-						returnThisOne = false;
-
-					if ((flags & File) && !fullPath.isFile())
-						returnThisOne = false;
-
-					// OK, add the ones we want to the result
-					if (returnThisOne)
-					{
-						result.insert(fileIt);
-					}
-				}
-			}
+			if (fileIt == ".." || fileIt == ".")
+				continue;
+			QFileInfo fullPath(thisDir.filePath(fileIt));
+			if (fileFlagsCheck(fullPath, flags))
+				result.insert(fileIt);
 		}
 	}
 
