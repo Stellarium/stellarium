@@ -117,9 +117,7 @@ void AngleMeasure::init()
 	// Create action for enable/disable & hook up signals
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->getGuiAction("actionShow_Angle_Measure");
-	action->setChecked(flagShowAngleMeasure);
-	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
+	addAction("actionShow_Angle_Measure", N_("Angle Measure"), N_("Angle measure"), "enabled", "Ctrl+A");
 
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.
@@ -130,7 +128,7 @@ void AngleMeasure::init()
 	try
 	{
 		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
-																	 QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiAction("actionShow_Angle_Measure"));
+																	 QPixmap(":/graphicGui/glow32x32.png"), "actionShow_Angle_Measure");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)

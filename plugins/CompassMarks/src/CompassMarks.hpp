@@ -31,6 +31,7 @@ class StelButton;
 class CompassMarks : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool marksVisible READ getCompassMarks WRITE setCompassMarks NOTIFY compassMarksChanged)
 public:
 	CompassMarks();
 	virtual ~CompassMarks();
@@ -42,9 +43,11 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
+	bool getCompassMarks() const {return markFader;}
 public slots:
 	void setCompassMarks(bool b);
-	
+signals:
+	void compassMarksChanged(bool);
 private slots:
 	void cardinalPointsChanged(bool b);
 

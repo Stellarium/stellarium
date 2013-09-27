@@ -43,6 +43,7 @@ class StelVideoMgr;
 class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
+class StelActionMgr;
 class StelProgressController;
 
 //! @class StelApp
@@ -59,6 +60,7 @@ class StelProgressController;
 class StelApp : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -115,8 +117,8 @@ public:
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 
-	//! Get the shortcuts manager to use for managing and editing shortcuts
-	StelShortcutMgr* getStelShortcutManager() {return shortcutMgr;}
+	//! Get the actions manager to use for managing and editing actions
+	StelActionMgr* getStelActionManager() {return actionMgr;}
 
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
@@ -237,8 +239,8 @@ private:
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
 
-	//Shortcuts manager for the application
-	StelShortcutMgr* shortcutMgr;
+	//Actions manager fot the application.  Will replace shortcutMgr.
+	StelActionMgr* actionMgr;
 
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;

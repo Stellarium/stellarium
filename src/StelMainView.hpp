@@ -35,7 +35,9 @@ class StelQGLWidget;
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainView : public QDeclarativeView
 {
-Q_OBJECT
+	Q_OBJECT
+	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen)
+
 public:
 	StelMainView(QWidget* parent = NULL);
 	virtual ~StelMainView();

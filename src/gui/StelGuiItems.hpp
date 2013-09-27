@@ -27,7 +27,6 @@
 
 class QGraphicsSceneMouseEvent;
 class QTimeLine;
-class QAction;
 class QGraphicsTextItem;
 class QTimer;
 class StelProgressController;
@@ -78,19 +77,24 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 			   const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, bool noBackground=false);
+			   class StelAction* action=NULL, bool noBackground=false);
+	
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
+			   const QPixmap& pixHover=QPixmap(),
+			   const QString& actionId=QString(), bool noBackground=false);
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
 	//! @param pixOff the pixmap to display when the button is not toggled
 	//! @param pixNoChange the pixmap to display when the button state of a tristate is not changed
 	//! @param pixHover a pixmap slowly blended when mouse is over the button
-	//! @param action the associated action. Connections are automatically done with the signals if relevant.
+	//! @param actionId the associated action. Connections are automatically done with the signals if relevant.
 	//! @param noBackground define whether the button background image have to be used
 	//! @param isTristate define whether the button is a tristate or an on/off button
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
 			   const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, bool noBackground=false, bool isTristate=true);
+			   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
+	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
 
@@ -137,6 +141,13 @@ protected:
 private slots:
 	void animValueChanged(qreal value);
 private:
+	void initCtor(const QPixmap& apixOn,
+                  const QPixmap& apixOff,
+                  const QPixmap& apixNoChange,
+                  const QPixmap& apixHover,
+                  StelAction* aaction,
+                  bool noBackground,
+                  bool isTristate);
 	void updateIcon();
 	int toggleChecked(int);
 
@@ -155,7 +166,7 @@ private:
 	int checked;
 
 	QTimeLine* timeLine;
-	QAction* action;
+	class StelAction* action;
 	bool noBckground;
 	bool isTristate_;
 	double opacity;

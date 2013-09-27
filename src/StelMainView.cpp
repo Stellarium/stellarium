@@ -27,6 +27,7 @@
 #include "StelGuiBase.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QGLWidget>
 #include <QDesktopWidget>
@@ -280,6 +281,11 @@ void StelMainView::init(QSettings* conf)
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
 	stelApp->init(conf);
+	StelActionMgr *actionMgr = stelApp->getStelActionManager();
+	actionMgr->addAction("actionSave_Screenshot_Global", "Miscellaneous", N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
+	actionMgr->addAction("actionSet_Full_Screen_Global", "Display Options", N_("Full-screen mode"), this, "fullScreen", "F11");
+	
+
 	StelPainter::initGLShaders();
 
 	setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
@@ -427,6 +433,12 @@ void StelMainView::wheelEvent(QWheelEvent* event)
 void StelMainView::keyPressEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
+	// Try to trigger a gobal shortcut.
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	if (actionMgr->pushKey(event->key() + event->modifiers(), true)) {
+		event->setAccepted(true);
+		return;
+	}
 	QDeclarativeView::keyPressEvent(event);
 }
 

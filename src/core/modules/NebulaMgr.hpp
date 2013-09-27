@@ -46,6 +46,9 @@ typedef QSharedPointer<Nebula> NebulaP;
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagHintDisplayed
+			   READ getFlagHints
+			   WRITE setFlagHints)
 
 public:
 	NebulaMgr();

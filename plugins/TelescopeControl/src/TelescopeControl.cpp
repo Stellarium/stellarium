@@ -45,9 +45,9 @@
 #include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QAction>
 #include <QDateTime>
@@ -58,6 +58,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
+#include <QSignalMapper>
 
 #include <QDebug>
 
@@ -145,7 +146,6 @@ void TelescopeControl::init()
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 		
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
 
 		//Create telescope key bindings
 		/* QAction-s with these key bindings existed in Stellarium prior to
@@ -155,38 +155,30 @@ void TelescopeControl::init()
 			// "Slew to object" commands
 			QString name = moveToSelectedActionId.arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			QAction* action = shMgr->addGuiAction(name, true, "",
-			                                      shortcut, "", actionGroupId,
-			                                      false);
-			connect(action, SIGNAL(triggered()),
-			        this, SLOT(slewTelescopeToSelectedObject()));
+			QString text;
+			text = q_("Move telescope #%1 to selected object").arg(i);
+			addAction(name, N_("Telescope Control"), text, "slewTelescopeToSelectedObject()", shortcut);
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
-			action = shMgr->addGuiAction(name, true, "",
-			                             shortcut, "", actionGroupId,
-			                             false, false);
-			connect(action, SIGNAL(triggered()), this,
-			        SLOT(slewTelescopeToViewDirection()));
+			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+			addAction(name, "Telescope Control", text, "slewTelescopeToViewDirection()", shortcut);
 		}
-		// Also updates descriptions if the actions have been loaded from file
-		translateActionDescriptions();
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
 	
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
-		
-		connect(shMgr->getGuiAction("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
-		connect(slewDialog, SIGNAL(visibleChanged(bool)), shMgr->getGuiAction("actionShow_Slew_Window"), SLOT(setChecked(bool)));
-		
+
+		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
+
 		//Create toolbar button
 		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
 		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
 		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, gui->getGuiAction("actionShow_Slew_Window"));
+		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, "actionShow_Slew_Window");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error &e)
@@ -202,6 +194,26 @@ void TelescopeControl::init()
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
+
+void TelescopeControl::translateActionDescriptions()
+{
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	
+	for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
+	{
+		QString name;
+		QString description;
+
+		name = moveToSelectedActionId.arg(i);
+		description = q_("Move telescope #%1 to selected object").arg(i);
+		actionMgr->findAction(name)->setText(description);
+		
+		name = moveToCenterActionId.arg(i);
+		description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
+		actionMgr->findAction(name)->setText(description);
+	}
+}
+
 
 void TelescopeControl::deinit()
 {
@@ -470,6 +482,7 @@ void TelescopeControl::slewTelescopeToViewDirection()
 	// Find out for which telescope is the command
 	if (sender() == NULL)
 		return;
+	// XXX: we could use a QSignalMapper instead of this trick.
 	int slotNumber = sender()->objectName().right(1).toInt();
 
 	// Find out the coordinates of the target
@@ -1631,22 +1644,3 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
-
-void TelescopeControl::translateActionDescriptions()
-{
-	StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
-	if (!shMgr)
-		return;
-	
-	for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
-	{
-		QString name = moveToSelectedActionId.arg(i);
-		QString description = q_("Move telescope #%1 to selected object")
-		                      .arg(i);
-		shMgr->setShortcutText(name, actionGroupId, description);
-		
-		name = moveToCenterActionId.arg(i);
-		description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-		shMgr->setShortcutText(name, actionGroupId, description);
-	}
-}

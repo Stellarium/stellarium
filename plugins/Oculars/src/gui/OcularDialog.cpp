@@ -27,9 +27,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QAbstractItemModel>
-#include <QAction>
 #include <QDataWidgetMapper>
 #include <QDebug>
 #include <QFrame>
@@ -284,22 +284,20 @@ void OcularDialog::moveDownSelectedLens()
 void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QAction* action = gui->getGuiAction("actionShow_Ocular");
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* action = actionMgr->findAction("actionShow_Ocular");
 	if (action != NULL) {
-		action->setShortcut(QKeySequence(newString.trimmed()));
+		action->setShortcut(newString.trimmed());
 	}
 }
 
 void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QAction* action = gui->getGuiAction("actionShow_Ocular_Menu");
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* action = actionMgr->findAction("actionShow_Ocular_Menu");
 	if (action != NULL) {
-		action->setShortcut(QKeySequence(newString.trimmed()));
+		action->setShortcut(newString.trimmed());
 	}
 }
 
@@ -515,16 +513,18 @@ void OcularDialog::initAboutText()
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* actionOcular = gui->getGuiAction("actionShow_Ocular");
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	Q_ASSERT(actionMgr);
+	StelAction* actionOcular = actionMgr->findAction("actionShow_Ocular");
 	Q_ASSERT(actionOcular);
-	QAction* actionMenu = gui->getGuiAction("actionShow_Ocular_Menu");
+	StelAction* actionMenu = actionMgr->findAction("actionShow_Ocular_Menu");
 	Q_ASSERT(actionMenu);
-	QKeySequence ocularShortcut = actionOcular->shortcut();
+	QKeySequence ocularShortcut = actionOcular->getShortcut();
 	QString ocularString = ocularShortcut.toString(QKeySequence::NativeText);
 	ocularString = ocularString.toHtmlEscaped();
 	if (ocularString.isEmpty())
 		ocularString = q_("[no key defined]");
-	QKeySequence menuShortcut = actionMenu->shortcut();
+	QKeySequence menuShortcut = actionMenu->getShortcut();
 	QString menuString = menuShortcut.toString(QKeySequence::NativeText);
 	menuString = menuString.toHtmlEscaped();
 	if (menuString.isEmpty())

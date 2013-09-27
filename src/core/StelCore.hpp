@@ -48,6 +48,8 @@ class StelCore : public QObject
 	Q_OBJECT
 	Q_ENUMS(ProjectionType)
 	Q_ENUMS(DeltaTAlgorithm)
+	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz)
+	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 
 public:
 	//! @enum FrameType

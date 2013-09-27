@@ -136,6 +136,20 @@ public:
 	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
+
+protected:
+
+	//! convenience methods to add an action to the StelActionMgr object.
+	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+	                            QObject* target, const char* slot,
+	                            const QString& shortcut="", const QString& altShortcut="");
+
+	//! convenience methods to add an action to the StelActionMgr object.
+	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+	                            const char* slot,
+	                            const QString& shortcut="", const QString& altShortcut="") {
+		return addAction(id, groupId, text, this, slot, shortcut, altShortcut);
+	}
 };
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)
