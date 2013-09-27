@@ -133,11 +133,7 @@ void Novae::init()
 			return;
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
-		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-
-		connect(gui->getGuiAction("actionShow_Novae_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));		
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Novae_ConfigDialog"), SLOT(setChecked(bool)));
+		addAction("actionShow_Novae_ConfigDialog", N_("Novae"), N_("Bright Novae configuration window"), configDialog, "visible");
 	}
 	catch (std::runtime_error &e)
 	{
@@ -557,11 +553,7 @@ NovaP Novae::getByID(const QString& id)
 bool Novae::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Novae_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
