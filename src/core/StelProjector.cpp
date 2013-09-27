@@ -104,17 +104,23 @@ StelProjector::StelProjectorMaskType StelProjector::stringToMaskType(const QStri
 
 void StelProjector::init(const StelProjectorParams& params)
 {
+	devicePixelRatio = params.devicePixelRatio;
 	maskType = (StelProjectorMaskType)params.maskType;
 	zNear = params.zNear;
 	oneOverZNearMinusZFar = 1.f/(zNear-params.zFar);
 	viewportXywh = params.viewportXywh;
+	viewportXywh[2] *= devicePixelRatio;
+	viewportXywh[3] *= devicePixelRatio;
 	viewportCenter = params.viewportCenter;
+	viewportCenter *= devicePixelRatio;
 	gravityLabels = params.gravityLabels;
 	defautAngleForGravityText = params.defautAngleForGravityText;
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter;
+	viewportFovDiameter *= 2.0;
 	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.f));
+	pixelPerRad *= devicePixelRatio;
 	computeBoundingCap();
 }
 

@@ -307,8 +307,10 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			{
 				isDragging = true;
 				hasDragged = false;
-				previousX = event->x();
-				previousY = event->y();
+				// We do not want any devicePixelRatio for movement.
+				float ratio = core->getCurrentStelProjectorParams().devicePixelRatio;
+				previousX = event->x() / ratio;
+				previousY = event->y() / ratio;
 				beforeTimeDragTimeRate=core->getTimeRate();
 				if (dragTimeMode)
 				{
