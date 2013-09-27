@@ -36,13 +36,13 @@
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
+#include "StelActionMgr.hpp"
 
 #include "StelProgressController.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
@@ -195,7 +195,7 @@ StelApp::StelApp(QObject* parent)
 	textureMgr=NULL;
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
-	shortcutMgr = NULL;
+	actionMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -231,7 +231,7 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
-	delete shortcutMgr; shortcutMgr = NULL;
+	delete actionMgr; actionMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -355,7 +355,7 @@ void StelApp::init(QSettings* conf)
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-	shortcutMgr = new StelShortcutMgr();
+	actionMgr = new StelActionMgr();
 
 	localeMgr->init();
 
@@ -431,6 +431,9 @@ void StelApp::init(QSettings* conf)
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
+
+	// Init actions.
+	actionMgr->addAction("actionShow_Night_Mode", "Display Options", "Night mode", this, "nightMode");
 
 	initialized = true;
 }
@@ -620,6 +623,15 @@ void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 void StelApp::handleKeys(QKeyEvent* event)
 {
 	event->setAccepted(false);
+	// First try to trigger a shortcut.
+	if (event->type() == QEvent::KeyPress)
+	{
+		if (getStelActionManager()->pushKey(event->key() + event->modifiers()))
+		{
+			event->setAccepted(true);
+			return;
+		}
+	}
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleKeys))
 	{

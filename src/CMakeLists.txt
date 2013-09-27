@@ -121,10 +121,8 @@ SET(stellarium_lib_SRCS
 	core/TrailGroup.cpp
 	core/RefractionExtinction.hpp
 	core/RefractionExtinction.cpp
-	core/StelShortcutMgr.hpp
-	core/StelShortcutMgr.cpp
-	core/StelShortcutGroup.cpp
-	core/StelShortcutGroup.hpp
+	core/StelActionMgr.hpp
+	core/StelActionMgr.cpp
 	core/StelProgressController.hpp
 
 	${gl_lib_SRCS}

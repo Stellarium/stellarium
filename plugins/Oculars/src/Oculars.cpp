@@ -30,7 +30,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelShortcutMgr.hpp"
+#include "StelActionMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
@@ -1266,13 +1266,7 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	StelShortcutMgr* shMgr = StelApp::getInstance().getStelShortcutManager();
-
-	//This action needs to be connected to the enableOcular() slot after
-	//the necessary button is created to prevent the button from being checked
-	//the first time this action is checked. See:
-	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
-	actionShowOcular = shMgr->getGuiAction("actionShow_Ocular");
+	actionShowOcular = addAction("actionShow_Ocular", "Oculars", N_("Ocular view"), "enableOcular(bool)", "Ctrl+O");
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
@@ -1283,52 +1277,25 @@ void Oculars::initializeActivationActions()
 					       *pxmapOnIcon,
 					       *pxmapOffIcon,
 					       *pxmapGlow,
-					       actionShowOcular);
+							"actionShow_Ocular");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
-	connect(actionShowOcular, SIGNAL(toggled(bool)),
-					this, SLOT(enableOcular(bool)));
 
-	actionMenu = shMgr->getGuiAction("actionShow_Ocular_Menu");
-	connect(actionMenu, SIGNAL(toggled(bool)),
-					this, SLOT(displayPopupMenu()));
-
-	actionShowCrosshairs = shMgr->getGuiAction("actionShow_Ocular_Crosshairs");
-	connect(actionShowCrosshairs, SIGNAL(toggled(bool)),
-					this, SLOT(toggleCrosshairs(bool)));
-
-	actionShowSensor = shMgr->getGuiAction("actionShow_Sensor");
-	connect(actionShowSensor, SIGNAL(toggled(bool)),
-					this, SLOT(toggleCCD(bool)));
-
-	actionShowTelrad = shMgr->getGuiAction("actionShow_Telrad");
-	connect(actionShowTelrad, SIGNAL(toggled(bool)),
-					this, SLOT(toggleTelrad(bool)));
-
-	actionConfiguration = shMgr->getGuiAction("actionOpen_Oculars_Configuration");
-	connect(actionConfiguration, SIGNAL(toggled(bool)),
-					ocularDialog, SLOT(setVisible(bool)));
-	connect(ocularDialog, SIGNAL(visibleChanged(bool)),
-					actionConfiguration, SLOT(setChecked(bool)));
-
+	actionMenu = addAction("actionShow_Ocular_Menu", "Oculars", N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
+	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", "Oculars", N_("Show crosshairs"), "toggleCrosshairs(bool)", "Alt+C");
+	actionShowSensor = addAction("actionShow_Sensor", "Oculars", N_("Image sensor frame"), "toggleCCD(bool)");
+	actionShowTelrad = addAction("actionShow_Telrad", "Oculars", N_("Telrad sight"), "toggleTelrad(bool)", "Ctrl+B");
+	actionConfiguration = addAction("actionOpen_Oculars_Configuration", "Oculars", N_("Oculars plugin configuration"), ocularDialog, "visible");
 	// Select next telescope via keyboard
-	actionTelescopeIncrement = shMgr->getGuiAction("actionShow_Telescope_Increment");
-	connect(actionTelescopeIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementTelescopeIndex()));
-
+	addAction("actionShow_Telescope_Increment", "Oculars", N_("Select next telescope"), "incrementTelescopeIndex()", "Shift+PgUp");
 	// Select previous telescope via keyboard
-	actionTelescopeDecrement = shMgr->getGuiAction("actionShow_Telescope_Decrement");
-	connect(actionTelescopeDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementTelescopeIndex()));
-
+	addAction("actionShow_Telescope_Decrement", "Oculars", N_("Select previous telescope"), "decrementTelescopeIndex()", "Shift+PgDown");
 	// Select next eyepiece via keyboard
-	actionOcularIncrement = shMgr->getGuiAction("actionShow_Ocular_Increment");
-	connect(actionOcularIncrement, SIGNAL(toggled(bool)), this, SLOT(incrementOcularIndex()));
-
+	addAction("actionShow_Ocular_Increment", "Oculars", N_("Select next eyepiece"), "incrementOcularIndex()", "Ctrl+PgUp");
 	// Select previous eyepiece via keyboard
-	actionOcularDecrement = shMgr->getGuiAction("actionShow_Ocular_Decrement");
-	connect(actionOcularDecrement, SIGNAL(toggled(bool)), this, SLOT(decrementOcularIndex()));
-
+	addAction("actionShow_Ocular_Decrement", "Oculars", N_("Select previous eyepiece"), "decrementOcularIndex()", "Ctrl+PgDown");
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));

@@ -155,7 +155,8 @@ void Pulsars::init()
 		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
+		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
@@ -163,10 +164,6 @@ void Pulsars::init()
 
 		setFlagShowPulsars(getEnableAtStartup());
 		setFlagShowPulsarsButton(flagShowPulsarsButton);
-
-		connect(gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Pulsars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowPulsars(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -583,11 +580,7 @@ PulsarP Pulsars::getByID(const QString& id)
 bool Pulsars::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Pulsars_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
@@ -757,8 +750,7 @@ void Pulsars::setFlagShowPulsarsButton(bool b)
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the pulsars button
-			gui->getGuiAction("actionShow_Pulsars")->setChecked(flagShowPulsars);
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Pulsars"));
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {

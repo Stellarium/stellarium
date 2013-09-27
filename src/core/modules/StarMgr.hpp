@@ -80,6 +80,12 @@ typedef struct
 class StarMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagStarsDisplayed
+			   READ getFlagStars
+			   WRITE setFlagStars)
+	Q_PROPERTY(bool flagLabelsDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels)
 
 public:
 	StarMgr(void);

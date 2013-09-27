@@ -29,6 +29,7 @@
 
 #include <stdexcept>
 
+#include "StelActionMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "Atmosphere.hpp"
@@ -309,6 +310,11 @@ void LandscapeMgr::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	addAction("actionShow_Atmosphere", "Display Options", N_("Atmosphere"), "atmosphereDisplayed", "A");
+	addAction("actionShow_Fog", "Display Options", N_("Fog"), "fogDisplayed", "F");
+	addAction("actionShow_Cardinal_Points", "Display Options", N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
+	addAction("actionShow_Ground", "Display Options", N_("Ground"), "landscapeDisplayed", "G");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)

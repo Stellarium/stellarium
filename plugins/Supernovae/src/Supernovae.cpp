@@ -138,10 +138,7 @@ void Supernovae::init()
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-
-		connect(gui->getGuiAction("actionShow_Supernovae_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Supernovae_ConfigDialog"), SLOT(setChecked(bool)));
+		addAction("actionShow_Supernovae_ConfigDialog", N_("Historical Supernovae"), N_("Historical Supernovae configuration window"), configDialog, "visible");
 	}
 	catch (std::runtime_error &e)
 	{
@@ -562,11 +559,7 @@ SupernovaP Supernovae::getByID(const QString& id)
 bool Supernovae::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Supernovae_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 

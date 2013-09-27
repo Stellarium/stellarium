@@ -33,6 +33,7 @@ class StelSkyImageTile;
 class StelSkyLayerMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool visible READ getFlagShow WRITE setFlagShow)
 
 public:
 	StelSkyLayerMgr();
@@ -69,14 +70,14 @@ public:
 
 	StelSkyLayerP getSkyLayer(const QString& key) const;
 
+	//! Get whether Sky Background should be displayed
+	bool getFlagShow() const {return flagShow;}
+
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 	//! Set whether Sky Background should be displayed
 	void setFlagShow(bool b) {flagShow = b;}
-	//! Get whether Sky Background should be displayed
-	bool getFlagShow() const {return flagShow;}
-
 	//! Load an image from a file. This should not be called directly from
 	//! scripts because it is not thread safe.  Instead use the simiarly
 	//! named function in the core scripting object.

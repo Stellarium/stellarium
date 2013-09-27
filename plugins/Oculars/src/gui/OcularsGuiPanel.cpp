@@ -23,8 +23,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
-#include <QAction>
 #include <QGridLayout>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsPathItem>
@@ -63,7 +63,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowOcular,
 	                              true); //No background
-	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->text());
+	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->getText());
 	buttonOcular->setParentItem(buttonBar);
 
 	//Hack to avoid buttonOcular being left "checked" if it has been toggled
@@ -80,7 +80,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                  QPixmap(),
 	                                  ocularsPlugin->actionShowCrosshairs,
 	                                  true);
-	buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->text());
+	buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->getText());
 	buttonCrosshairs->setVisible(false);
 
 	Q_ASSERT(ocularsPlugin->actionShowSensor);
@@ -90,7 +90,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                           QPixmap(),
 	                           ocularsPlugin->actionShowSensor,
 	                           true);
-	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->text());
+	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->getText());
 
 	Q_ASSERT(ocularsPlugin->actionShowTelrad);
 	buttonTelrad = new StelButton(buttonBar,
@@ -99,7 +99,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowTelrad,
 	                              true);
-	buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->text());
+	buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->getText());
 
 	Q_ASSERT(ocularsPlugin->actionConfiguration);
 	buttonConfiguration = new StelButton(buttonBar,
@@ -108,7 +108,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                     QPixmap(),
 	                                     ocularsPlugin->actionConfiguration,
 	                                     true);
-	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->text());
+	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->getText());
 
 	qreal buttonHeight = buttonOcular->boundingRect().height();
 	buttonBar->setMinimumHeight(buttonHeight);
@@ -175,7 +175,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
 	QPixmap nextArrowOff = naOff.scaledToHeight(lineHeight, Qt::SmoothTransformation);
 
-	QAction* defaultAction = new QAction(this);
+	StelAction* defaultAction = new StelAction(this);
 	defaultAction->setCheckable(false);
 	prevOcularButton = new StelButton(ocularControls,
 	                                  prevArrow,

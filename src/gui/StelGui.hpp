@@ -50,6 +50,10 @@ class ScriptConsole;
 class StelGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
+	Q_PROPERTY(bool visible READ getVisible WRITE setVisible)
+	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar)
+	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar)
+
 public:
 	friend class ViewDialog;
 	
@@ -104,8 +108,6 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 
-	virtual QAction* getGuiAction(const QString& actionName);
-
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
@@ -155,30 +157,12 @@ private slots:
 	void setStelStyle(const QString& section);
 	void quit();	
 	void updateI18n();
-	//! Process changes from the ConstellationMgr
-	void artDisplayedUpdated(const bool displayed);
-	void boundariesDisplayedUpdated(const bool displayed);
-	void linesDisplayedUpdated(const bool displayed);
-	void namesDisplayedUpdated(const bool displayed);
-	//! Process changes from the GridLinesMgr
-	void azimuthalGridDisplayedUpdated(const bool displayed);
-	void equatorGridDisplayedUpdated(const bool displayed);
-	void equatorJ2000GridDisplayedUpdated(const bool displayed);
-	void eclipticJ2000GridDisplayedUpdated(const bool displayed);
-	void galacticGridDisplayedUpdated(const bool displayed);
-	void equatorLineDisplayedUpdated(const bool displayed);
-	void eclipticLineDisplayedUpdated(const bool displayed);
-	void meridianLineDisplayedUpdated(const bool displayed);
-	void horizonLineDisplayedUpdated(const bool displayed);
-	void galacticPlaneLineDisplayedUpdated(const bool displayed);
-	//! Process changes from the LandscapeMgr
-	void atmosphereDisplayedUpdated(const bool displayed);
-	void cardinalsPointsDisplayedUpdated(const bool displayed);
-	void fogDisplayedUpdated(const bool displayed);
-	void landscapeDisplayedUpdated(const bool displayed);
 	void copySelectedObjectInfo(void);
 
 private:
+	//! convenience method to find an action in the StelActionMgr.
+	StelAction* getAction(const QString& actionName);
+
 	QGraphicsWidget* topLevelGraphicsWidget;
 
 	class SkyGui* skyGui;
@@ -215,15 +199,6 @@ private:
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
-
-	// This method is used by init() to initialize the ConstellationMgr instance.
-	void initConstellationMgr();
-
-	// This method is used by init() to initialize the GridLineMgr instance.
-	void initGrindLineMgr();
-
-	// This method is used by init() to initialize the LandscapeMgr instance.
-	void initLandscapeMgr();
 };
 
 //! Allow to load the GUI as a static plugin

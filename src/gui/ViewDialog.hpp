@@ -72,6 +72,8 @@ private slots:
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 private:
+	//! convenience method to link a checkbox to a StelAction.
+	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
 	void updateSkyCultureText();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;

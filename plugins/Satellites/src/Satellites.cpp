@@ -130,21 +130,16 @@ void Satellites::init()
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Satellite_Hints")->setChecked(getFlagHints());
-		gui->getGuiAction("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
+		addAction("actionShow_Satellite_Hints", "Satellites", N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
+		addAction("actionShow_Satellite_Labels", "Satellites", N_("Satellite labels"), "labelsVisible", "Shift+Z");
+		addAction("actionShow_Satellite_ConfigDialog_Global", "Satellites", N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/satellites/bt_satellites_on.png");
 		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiAction("actionShow_Satellite_Hints"));
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Satellite_Hints");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-
-		connect(gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
-		connect(gui->getGuiAction("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
-
 	}
 	catch (std::runtime_error &e)
 	{
@@ -514,11 +509,7 @@ QStringList Satellites::listAllObjects(bool inEnglish) const
 bool Satellites::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 

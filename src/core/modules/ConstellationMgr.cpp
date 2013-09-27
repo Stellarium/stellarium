@@ -102,6 +102,11 @@ void ConstellationMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	addAction("actionShow_Constellation_Lines", "Display Options", N_("Constellation lines"), "linesDisplayed", "C");
+	addAction("actionShow_Constellation_Art", "Display Options", N_("Constellation art"), "artDisplayed", "R");
+	addAction("actionShow_Constellation_Labels", "Display Options", N_("Constellation labels"), "namesDisplayed", "V");
+	addAction("actionShow_Constellation_Boundaries", "Display Options", N_("Constellation boundaries"), "boundariesDisplayed", "B");
 }
 
 /*************************************************************************
