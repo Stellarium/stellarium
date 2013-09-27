@@ -361,8 +361,8 @@ void TestDates::testJulianDays()
 {
 	testJulianDaysRange( 400000000,  400001000);
 	testJulianDaysRange( 200000000,  200001000);
-	testJulianDaysRange(   2299200,    2299161);	
-	testJulianDaysRange(   2299160,    2299000);	
+	testJulianDaysRange(   2299200,    2299161);
+	testJulianDaysRange(   2299160,    2299000);
 	testJulianDaysRange(   2211000,    2210000);
 	testJulianDaysRange(   1721789,    1721788);
 	testJulianDaysRange(   1721424,    1721423);
@@ -378,7 +378,7 @@ void TestDates::testJulianDays()
 	testJulianDaysRange(  -2301000,   -2300000);
 	testJulianDaysRange( -99001000,  -99000000);
 	testJulianDaysRange(-200001000, -200000000);
-	testJulianDaysRange(-400001000, -400000000);	
+	testJulianDaysRange(-400001000, -400000000);
 }
 
 #define TJ1 (2450000)
