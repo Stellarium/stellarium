@@ -78,7 +78,7 @@ CompassMarks::CompassMarks()
 
 	// Load settings from main config file
 	markColor = StelUtils::strToVec3f(conf->value("CompassMarks/mark_color", "1,0,0").toString());
-	font.setPointSize(conf->value("CompassMarks/font_size", 10).toInt());
+	font.setPixelSize(conf->value("CompassMarks/font_size", 10).toInt());
 }
 
 CompassMarks::~CompassMarks()
