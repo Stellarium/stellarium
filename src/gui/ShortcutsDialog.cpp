@@ -360,7 +360,7 @@ QStandardItem* ShortcutsDialog::updateGroup(const QString& group)
 	// setup bold font for group lines
 	QFont rootFont = groupItem->font();
 	rootFont.setBold(true);
-	rootFont.setPixelSize(14);
+	rootFont.setPointSize(14);
 	groupItem->setFont(rootFont);
 	if (isNew)
 		mainModel->appendRow(groupItem);

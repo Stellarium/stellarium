@@ -650,7 +650,7 @@ void Satellites::loadSettings()
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
 
 	// Get a font for labels
-	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
+	labelFont.setPointSize(conf->value("hint_font_size", 10).toInt());
 
 	// orbit drawing params
 	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", true).toBool();
@@ -1096,7 +1096,7 @@ void Satellites::setLabelFontSize(int size)
 {
 	if (labelFont.pixelSize() != size)
 	{
-		labelFont.setPixelSize(size);
+		labelFont.setPointSize(size);
 		emit settingsChanged();
 	}
 }

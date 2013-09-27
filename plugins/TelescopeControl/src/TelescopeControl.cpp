@@ -453,7 +453,7 @@ bool TelescopeControl::configureGui(bool show)
 // Misc methods (from TelescopeMgr; TODO: Better categorization)
 void TelescopeControl::setFontSize(int fontSize)
 {
-	labelFont.setPixelSize(fontSize);
+	labelFont.setPointSize(fontSize);
 }
 
 void TelescopeControl::slewTelescopeToSelectedObject()

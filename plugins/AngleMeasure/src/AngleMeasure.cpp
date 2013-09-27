@@ -66,7 +66,7 @@ AngleMeasure::AngleMeasure()
 		angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
-	font.setPixelSize(16);
+	font.setPointSize(16);
 
 	messageTimer = new QTimer(this);
 	messageTimer->setInterval(7000);
