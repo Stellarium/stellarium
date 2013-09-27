@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#include <QtTest>
+#include <QTest>
 
 class StelFileMgr;
 

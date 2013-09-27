@@ -72,7 +72,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("A plugin that shows some historical supernovae brighter than 10 visual magnitude.");
+	info.description = N_("This plugin allows you to see some bright historical supernovae.");
 	return info;
 }
 
@@ -156,7 +156,7 @@ void Supernovae::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(sneJsonPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -206,8 +206,6 @@ void Supernovae::draw(StelCore* core)
 
 void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Supernova");
 	if (!newSelected.empty())
 	{
@@ -500,6 +498,52 @@ int Supernovae::getJsonFileVersion(void)
 	sneJsonFile.close();
 	qDebug() << "Supernovae::getJsonFileVersion() version from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+bool Supernovae::checkJsonFileFormat()
+{
+	QFile sneJsonFile(sneJsonPath);
+	if (!sneJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Supernovae::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(sneJsonPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&sneJsonFile).toMap();
+		sneJsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Supernovae::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Supernovae::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
+}
+
+float Supernovae::getLowerLimitBrightness()
+{
+	float lowerLimit = 10.f;
+	QFile sneJsonFile(sneJsonPath);
+	if (!sneJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Supernovae::init cannot open " << QDir::toNativeSeparators(sneJsonPath);
+		return lowerLimit;
+	}
+
+	QVariantMap map;
+	map = StelJsonParser::parse(&sneJsonFile).toMap();
+	if (map.contains("limit"))
+	{
+		lowerLimit = map.value("limit").toFloat();
+	}
+
+	sneJsonFile.close();
+	return lowerLimit;
 }
 
 SupernovaP Supernovae::getByID(const QString& id)

@@ -126,13 +126,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		ra_sidereal = 2.*M_PI-ra_sidereal;
 		if (withAtmosphere)
 		{
-		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + q_("(geometric)") + "<br>";
 		    StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSideralPosApparent(core));
 		    ra_sidereal = 2.*M_PI-ra_sidereal;
 		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
+		{
 		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + "<br>";
+		}
 	}
 
 	if (flags&AltAzi)
@@ -145,8 +146,6 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			az -= M_PI*2;
 		if (withAtmosphere)
 		{
-		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + q_("(geometric)") + "<br>";
-
 		    StelUtils::rectToSphe(&az,&alt,getAltAzPosApparent(core));
 		    az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 		    if (az > M_PI*2)
@@ -154,7 +153,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
+		{
 		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + "<br>";
+		}
 	}
 	return res;
 }

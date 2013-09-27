@@ -471,6 +471,11 @@ IF (BUILD_STATIC_PLUGINS)
 		SET(QT_USE_QTSQL TRUE)
 	ENDIF()
 
+	IF (USE_PLUGIN_NOVAE)
+		SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Novae/src/${CMAKE_CFG_INTDIR}/libNovae.a")
+		ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_NOVAE)
+	ENDIF()
+
 	IF (USE_PLUGIN_OBSERVABILITY)
 		SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Observability/src/${CMAKE_CFG_INTDIR}/libObservability.a")
 		ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OBSERVABILITY)
@@ -602,6 +607,7 @@ SET(tests_testDates_SRCS
 	core/StelUtils.hpp
 	tests/testDates.cpp)
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
+QT5_USE_MODULES(testDates Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 
@@ -610,6 +616,7 @@ SET(tests_testStelFileMgr_SRCS
 	core/StelFileMgr.hpp
 	tests/testStelFileMgr.cpp)
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
+QT5_USE_MODULES(testStelFileMgr Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 
@@ -628,36 +635,40 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelUtils.hpp
 	core/StelProjector.cpp
 	core/StelProjector.hpp
+	core/StelFileMgr.cpp
+	core/StelFileMgr.hpp
 	core/StelTranslator.cpp
 	core/StelTranslator.hpp
 	${glues_lib_SRCS})
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
+QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 
-SET(tests_testStelSphericalIndex_SRCS
-	tests/testStelSphericalIndex.hpp
-	tests/testStelSphericalIndex.cpp
-	core/StelSphericalIndex.hpp
-	core/StelSphericalIndex.cpp
-	core/StelSphereGeometry.hpp
-	core/StelSphereGeometry.cpp
-	core/StelVertexArray.hpp
-	core/StelVertexArray.cpp
-	core/OctahedronPolygon.hpp
-	core/OctahedronPolygon.cpp
-	core/StelJsonParser.hpp
-	core/StelJsonParser.cpp
-	core/StelUtils.cpp
-	core/StelUtils.hpp
-	core/StelProjector.cpp
-	core/StelProjector.hpp
-	core/StelTranslator.cpp
-	core/StelTranslator.hpp
-	${glues_lib_SRCS})
-ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
-ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+#SET(tests_testStelSphericalIndex_SRCS
+#	tests/testStelSphericalIndex.hpp
+#	tests/testStelSphericalIndex.cpp
+#	core/StelSphericalIndex.hpp
+#	core/StelSphericalIndex.cpp
+#	core/StelSphereGeometry.hpp
+#	core/StelSphereGeometry.cpp
+#	core/StelVertexArray.hpp
+#	core/StelVertexArray.cpp
+#	core/OctahedronPolygon.hpp
+#	core/OctahedronPolygon.cpp
+#	core/StelJsonParser.hpp
+#	core/StelJsonParser.cpp
+#	core/StelUtils.cpp
+#	core/StelUtils.hpp
+#	core/StelProjector.cpp
+#	core/StelProjector.hpp
+#	core/StelTranslator.cpp
+#	core/StelTranslator.hpp
+#	${glues_lib_SRCS})
+#ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
+#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Declarative Test)
+#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest} ${QT_QTOPENGL_LIBRARY})
+#ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
 
 SET(tests_testStelJsonParser_SRCS
 	tests/testStelJsonParser.hpp
@@ -665,17 +676,19 @@ SET(tests_testStelJsonParser_SRCS
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp)
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
+QT5_USE_MODULES(testStelJsonParser Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
-SET(tests_testStelVertexArray_SRCS
-  tests/testStelVertexArray.hpp
-  tests/testStelVertexArray.cpp
-  core/StelVertexArray.hpp)
-QT5_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
-ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
-TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
-ADD_DEPENDENCIES(buildTests testStelVertexArray)
+#SET(tests_testStelVertexArray_SRCS
+#  tests/testStelVertexArray.hpp
+#  tests/testStelVertexArray.cpp
+#  core/StelVertexArray.hpp)
+#QT5_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
+#ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
+#QT5_USE_MODULES(testStelVertexArray Core Gui Test)
+#TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
+#ADD_DEPENDENCIES(buildTests testStelVertexArray)
 
 SET(tests_testDeltaT_SRCS
   tests/testDeltaT.hpp
@@ -683,6 +696,7 @@ SET(tests_testDeltaT_SRCS
   core/StelUtils.cpp
   core/StelUtils.hpp)
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
+QT5_USE_MODULES(testDeltaT Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 
@@ -692,6 +706,7 @@ SET(tests_testConversions_SRCS
 	tests/testConversions.hpp
 	tests/testConversions.cpp)
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
+QT5_USE_MODULES(testConversions Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
 
@@ -700,10 +715,11 @@ ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexBuffer WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexBuffer WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDeltaT WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testConversions WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
 

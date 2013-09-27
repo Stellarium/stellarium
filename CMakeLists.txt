@@ -131,12 +131,6 @@ IF(APPLE)
  ENDIF()
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
 
- # uncomment one of the following, depending on minimum OS level you want
- #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.5")
- #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
- #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6")
- #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.6.sdk/")
-
  # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
@@ -200,6 +194,7 @@ SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin
 SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
 SET(USE_PLUGIN_EXOPLANETS 1 CACHE BOOL "Define whether the Exoplanets plugin should be created.")
 SET(USE_PLUGIN_LOGBOOK 0 CACHE BOOL "Define whether the LogBook plugin should be created.")
+SET(USE_PLUGIN_NOVAE 1 CACHE BOOL "Define whether the Novae plugin should be created.")
 SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plugin should be created.")
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
 SET(USE_PLUGIN_PULSARS 1 CACHE BOOL "Define whether the Pulsars plugin should be created.")
@@ -255,6 +250,7 @@ FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Script REQUIRED)
 FIND_PACKAGE(Qt5Declarative REQUIRED)
+FIND_PACKAGE(Qt5Test)
 
 INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Gui_INCLUDE_DIRS})
@@ -263,6 +259,7 @@ INCLUDE_DIRECTORIES(${Qt5OpenGL_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Script_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${Qt5Declarative_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
 
 # Tell CMake to run moc when necessary:
@@ -397,14 +394,15 @@ ENDIF()
 
 ########### Macosx Bundling ###############
 IF(APPLE)
-ADD_CUSTOM_TARGET(
-  macosx_bundle
-  bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR}
-  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-  COMMENT "making the macosx bundle."
-  VERBATIM
-)
+	# ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
+	ADD_CUSTOM_TARGET(
+		mac_app
+		python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
+		DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+		COMMENT "making the macosx bundle."
+		VERBATIM
+	)
 ENDIF()
 
 

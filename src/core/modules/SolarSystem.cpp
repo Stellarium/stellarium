@@ -706,17 +706,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
-			               pd.value(secname+"/lighting").toBool(),
-			               pd.value(secname+"/radius").toDouble()/AU,
-			               pd.value(secname+"/oblateness", 0.0).toDouble(),
-			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-			               pd.value(secname+"/albedo").toFloat(),
-			               pd.value(secname+"/tex_map").toString(),
-			               posfunc,
-			               userDataPtr,
-			               osculatingFunc,
-			               closeOrbit,
-				       pd.value(secname+"/hidden", 0).toBool()));
+						    pd.value(secname+"/lighting").toBool(),
+						    pd.value(secname+"/radius").toDouble()/AU,
+						    pd.value(secname+"/oblateness", 0.0).toDouble(),
+						    StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+						    pd.value(secname+"/albedo").toFloat(),
+						    pd.value(secname+"/tex_map").toString(),
+						    posfunc,
+						    userDataPtr,
+						    osculatingFunc,
+						    closeOrbit,
+						    pd.value(secname+"/hidden", 0).toBool(),
+						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
 
@@ -792,18 +793,19 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else
 		{
 			p = PlanetP(new Planet(englishName,
-			               pd.value(secname+"/lighting").toBool(),
-			               pd.value(secname+"/radius").toDouble()/AU,
-			               pd.value(secname+"/oblateness", 0.0).toDouble(),
-			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-				       pd.value(secname+"/albedo").toFloat(),
-			               pd.value(secname+"/tex_map").toString(),
-				       posfunc,
-			               userDataPtr,
-			               osculatingFunc,
-			               closeOrbit,
-			               pd.value(secname+"/hidden", 0).toBool(),
-				       pd.value(secname+"/atmosphere", false).toBool()));
+					       pd.value(secname+"/lighting").toBool(),
+					       pd.value(secname+"/radius").toDouble()/AU,
+					       pd.value(secname+"/oblateness", 0.0).toDouble(),
+					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+					       pd.value(secname+"/albedo").toFloat(),
+					       pd.value(secname+"/tex_map").toString(),
+					       posfunc,
+					       userDataPtr,
+					       osculatingFunc,
+					       closeOrbit,
+					       pd.value(secname+"/hidden", 0).toBool(),
+					       pd.value(secname+"/atmosphere", false).toBool(),
+					       type));
 		}
 
 
