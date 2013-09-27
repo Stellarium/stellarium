@@ -29,26 +29,27 @@
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
 
-#include <QGLWidget>
-#include <QDesktopWidget>
-#include <QGuiApplication>
-#include <QSettings>
+#include <QDeclarativeItem>
 #include <QDebug>
+#include <QDir>
+#include <QGLWidget>
+#include <QGuiApplication>
 #include <QFileInfo>
+#include <QIcon>
 #include <QMoveEvent>
+#include <QOpenGLFunctions>
 #include <QPluginLoader>
+#include <QScreen>
+#include <QSettings>
 #include <QtPlugin>
 #include <QThread>
 #include <QTimer>
-#include <QDir>
-
-#include <QIcon>
-#include <QDeclarativeItem>
-#include <QOpenGLFunctions>
+#include <QWidget>
 #include <QWindow>
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
+qreal StelMainView::devicePixelRatio = 1.0;
 
 //! Render Stellarium sky. 
 class StelSkyItem : public QDeclarativeItem, protected QOpenGLFunctions
@@ -121,7 +122,12 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	// XXX: to reintroduce
 	//distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
+	qreal ratio = StelMainView::getDevicePixelRatio();
+	QMouseEvent newEvent(QEvent::MouseButtonPress,
+								QPoint(pos.x() * ratio, pos.y() * ratio),
+								event->button(),
+								event->buttons(),
+								event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
 
@@ -131,7 +137,12 @@ void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	// XXX: to reintroduce
 	// distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
+	qreal ratio = StelMainView::getDevicePixelRatio();
+	QMouseEvent newEvent(QEvent::MouseButtonRelease,
+								QPoint(pos.x() * ratio, pos.y() * ratio),
+								event->button(),
+								event->buttons(),
+								event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
 
@@ -294,10 +305,9 @@ void StelMainView::init(QSettings* conf)
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
 	
-	QDesktopWidget desktop;
-	QRect geometry = desktop.screenGeometry(); // Should be the default screen, if multipul
-	int width = conf->value("video/screen_w", geometry.width()).toInt();
-	int height = conf->value("video/screen_h", geometry.height()).toInt();
+	QScreen * screen = glWidget->windowHandle()->screen();
+	int width = conf->value("video/screen_w", screen->size().width()).toInt();
+	int height = conf->value("video/screen_h", screen->size().height()).toInt();
 	if (conf->value("video/fullscreen", true).toBool())
 	{
 #ifdef Q_OS_MAC
@@ -428,6 +438,18 @@ void StelMainView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::wheelEvent(event);
+}
+
+void StelMainView::moveEvent (QMoveEvent * event)
+{
+	Q_UNUSED(event);
+
+	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
+	devicePixelRatio = glWidget->windowHandle()->devicePixelRatio();
+	StelCore * core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	params.devicePixelRatio = devicePixelRatio;
+	core->setCurrentStelProjectorParams(params);
 }
 
 void StelMainView::keyPressEvent(QKeyEvent* event)
