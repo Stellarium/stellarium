@@ -496,7 +496,7 @@ void TextUserInterface::loadConfiguration(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
+	font.setPointSize(conf->value("tui/tui_font_size", 15).toInt());
 	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
 	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
 	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
