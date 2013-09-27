@@ -360,7 +360,7 @@ int LabelMgr::labelObject(const QString& text,
                           const QString& style)
 {
 	QFont font;
-	font.setPixelSize(fontSize);
+	font.setPointSize(fontSize);
 	StelObjectP obj = GETSTELMODULE(StelObjectMgr)->searchByName(objectName);
 	if (!obj)
 	{
@@ -387,7 +387,7 @@ int LabelMgr::labelScreen(const QString& text,
                           const QString& fontColor)
 {
 	QFont font;
-	font.setPixelSize(fontSize);
+	font.setPointSize(fontSize);
 	ScreenLabel* l = new ScreenLabel(text, x, y, font, StelUtils::htmlColorToVec3f(fontColor));
 	if (l==NULL)
 		return -1;
