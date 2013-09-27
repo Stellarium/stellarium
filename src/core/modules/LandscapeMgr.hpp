@@ -163,6 +163,12 @@ public slots:
 	//! Set the value of the flag determining if a change of landscape will update the observer location.
 	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
 
+	//! Return the value of the flag determining if an using brightness for night landscape.
+	bool getFlagLandscapeNightBrightness() const {return flagLandscapeNightBrightness;}
+	//! Set the value of the flag determining if an using brightness for night landscape.
+	void setFlagLandscapeNightBrightness(bool b) {flagLandscapeNightBrightness=b;}
+
+
 	//! Get flag for displaying Cardinals Points.
 	bool getFlagCardinalsPoints() const;
 	//! Set flag for displaying Cardinals Points.
@@ -344,6 +350,8 @@ private:
 	bool flagLandscapeSetsLocation;
 
 	bool flagLandscapeAutoSelection;
+
+	bool flagLandscapeNightBrightness;
 
 	// The ID of the currently loaded landscape
 	QString currentLandscapeID;

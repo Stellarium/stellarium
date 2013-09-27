@@ -41,11 +41,11 @@
 #include <QThread>
 #include <QTimer>
 #include <QDir>
+
 #include <QIcon>
 #include <QDeclarativeItem>
 #include <QOpenGLFunctions>
 #include <QWindow>
-
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;

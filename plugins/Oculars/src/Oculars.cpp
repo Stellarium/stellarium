@@ -1343,7 +1343,7 @@ void Oculars::paintCCDBounds()
 	if(selectedCCDIndex != -1) {
 		CCD *ccd = ccds[selectedCCDIndex];
 		if (ccd) {
-			glColor4f(0.77, 0.14, 0.16, 0.5);
+			glColor4f(0.77f, 0.14f, 0.16f, 0.5f);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
@@ -1792,8 +1792,8 @@ void Oculars::zoomOcular()
 		core->setFlipVert(telescope->isVFlipped());		
 	}
 
-	// Limit stars and DSOs	if it enable
-	if (getFlagLimitMagnitude())
+	// Limit stars and DSOs	if it enable and it's telescope + eyepiece combination
+	if (getFlagLimitMagnitude() && !ocular->isBinoculars())
 	{
 		// Simplified calculation of the penetrating power of the telescope
 		// TODO: need improvements?

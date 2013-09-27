@@ -307,6 +307,7 @@ Vec3f Exoplanet::getInfoColor(void) const
 
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
+	Q_UNUSED(core);
 	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
 	{
 		return 4.f;

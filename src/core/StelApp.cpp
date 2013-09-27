@@ -128,6 +128,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_NOVAE
+Q_IMPORT_PLUGIN(NovaeStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_SUPERNOVAE
 Q_IMPORT_PLUGIN(SupernovaeStelPluginInterface)
 #endif
