@@ -114,7 +114,7 @@ Oculars::Oculars():
 	requireSelection = true;
 	useMaxEyepieceAngle = true;
 
-	font.setPixelSize(14);
+	font.setPointSize(14);
 	maxEyepieceAngle = 0.0;
 
 	ccds = QList<CCD *>();

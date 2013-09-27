@@ -71,7 +71,7 @@ private:
 
 Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2)
 {
-	font.setPixelSize(30);
+	font.setPointSize(30);
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
 	sNorth = "N";
