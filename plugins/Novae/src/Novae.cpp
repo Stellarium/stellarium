@@ -87,7 +87,7 @@ Novae::Novae()
 	setObjectName("Novae");
 	configDialog = new NovaeDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPointSize(conf->value("gui/base_font_size", 13).toInt());
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*

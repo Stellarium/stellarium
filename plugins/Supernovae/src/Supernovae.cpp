@@ -85,7 +85,7 @@ Supernovae::Supernovae()
 	setObjectName("Supernovae");
 	configDialog = new SupernovaeDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPointSize(conf->value("gui/base_font_size", 13).toInt());
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
