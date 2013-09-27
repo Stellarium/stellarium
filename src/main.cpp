@@ -306,7 +306,7 @@ int main(int argc, char **argv)
 #else
 	QFont tmpFont(baseFont);
 #endif
-	tmpFont.setPointSize(confSettings->value("gui/base_font_size", 13).toInt());
+	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
