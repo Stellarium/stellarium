@@ -48,6 +48,7 @@
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "MilkyWay.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -507,6 +508,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
+	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
@@ -541,6 +543,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeNightBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());

@@ -34,6 +34,7 @@ use LWP::UserAgent();
 
 $URL	= "http://exoplanet.eu/catalog/csv/";
 $CSV	= "./exoplanets.csv";
+$HCSV	= "./";
 $JSON	= "./exoplanets.json";
 
 $CATALOG_FORMAT_VERSION = 1;
@@ -44,7 +45,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.2; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.4; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -147,7 +148,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^omega/ω/gi;
 	$sname =~ s/^ome/ω/gi;
 	
-	if (($sRA ne '00:00:00.0') && ($sDec ne '+00:00:00.0')) {
+	if (($sRA ne '00:00:00.0') && ($sDec ne '+00:00:00.0') && ($sname ne '')) {
 		# check star
 		$sth = $dbh->prepare(q{SELECT sid FROM stars WHERE ra_coord=? AND dec_coord=?});
 		$sth->execute($outRA, $outDE);

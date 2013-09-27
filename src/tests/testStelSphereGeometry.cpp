@@ -19,7 +19,8 @@
 
 #include <QObject>
 #include <QtDebug>
-#include <QtTest>
+#include <QBuffer>
+#include <QTest>
 #include <stdexcept>
 
 #include "StelJsonParser.hpp"

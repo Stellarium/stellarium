@@ -121,7 +121,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 float Nebula::getVMagnitude(const StelCore* core) const
 {
-    return mag;
+	Q_UNUSED(core);
+	return mag;
 }
 
 

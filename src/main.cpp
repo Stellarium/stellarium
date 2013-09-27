@@ -26,6 +26,9 @@
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
 
+#include <string.h>
+#include <stdlib.h>
+
 #include <QDebug>
 
 #ifndef USE_QUICKVIEW
@@ -33,19 +36,27 @@
 #else
 	#include <QGuiApplication>
 #endif
-#include <QMessageBox>
-#include <QStyleFactory>
-#include <QTranslator>
-#include <QGLFormat>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QFontDatabase>
-#include <QDir>
+#include <QGLFormat>
+#include <QGuiApplication>
+#include <QMessageBox>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QStyleFactory>
+#include <QTextStream>
+#include <QTranslator>
+
 #ifdef Q_OS_WIN
-#include <windows.h>
-#ifdef _MSC_BUILD
-	#include <MMSystem.h>
-	#pragma comment(lib,"Winmm.lib")
-#endif
+	#include <windows.h>
+	#ifdef _MSC_BUILD
+		#include <MMSystem.h>
+		#pragma comment(lib,"Winmm.lib")
+	#endif
 #endif //Q_OS_WIN
 
 //! @class GettextStelTranslator
@@ -103,6 +114,26 @@ int main(int argc, char **argv)
 			timerGrain = 0;
 	}
 #endif
+#ifdef Q_OS_MAC
+	// This block does not currently work
+//	 QDir dir(argv[0]);
+//	 dir.cdUp();
+//	 dir.cdUp();
+//	 dir.cd("plugins");
+//	 qDebug() << dir.absolutePath();
+//	 QCoreApplication::setLibraryPaths(QStringList(dir.absolutePath()));
+
+	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
+	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
+	 char * option = new char[20];
+	 char * value = new char[21];
+	 strcpy( option, "-platformpluginpath");
+	 strcpy( value, "../plugins/platforms");
+	 newArgv[argc++] = option;
+	 newArgv[argc++] = value;
+	 argv = newArgv;
+
+#endif
 
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
@@ -110,7 +141,7 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 	
 	QGuiApplication::setDesktopSettingsAware(false);
-	
+
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
@@ -302,6 +333,11 @@ int main(int argc, char **argv)
 	if(timerGrain)
 		timeEndPeriod(timerGrain);
 	#endif //Q_OS_WIN
+#ifdef Q_OS_MAC
+	delete(newArgv);
+	delete(option);
+	delete(value);
+#endif
 
 	return 0;
 }
