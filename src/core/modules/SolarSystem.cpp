@@ -141,6 +141,10 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	addAction("actionShow_Planets_Labels", "Display Options", N_("Planet labels"), "labelsDisplayed", "P");
+	addAction("actionShow_Planets_Orbits", "Display Options", N_("Planet orbits"), "orbitsDisplayed", "O");
+	addAction("actionShow_Planets_Trails", "Display Options", N_("Planet trails"), "trailsDisplayed", "Shift+T");
 }
 
 void SolarSystem::recreateTrails()

@@ -333,6 +333,9 @@ void StarMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	addAction("actionShow_Stars", "Display Options", N_("Stars"), "flagStarsDisplayed", "S");
+	addAction("actionShow_Stars_Labels", "Display Options", N_("Stars labels"), "flagLabelsDisplayed", "Alt+S");
 }
 
 

@@ -28,6 +28,7 @@
 #include "MilkyWay.hpp"
 #include "StelGuiBase.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelTranslator.hpp"
 #include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
@@ -82,6 +83,8 @@ void StelSkyLayerMgr::init()
 		}
 	}
 	conf->endGroup();
+
+	addAction("actionShow_DSS", "Display Options", N_("Deep-sky objects background images"), "visible", "I");
 }
 
 QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)

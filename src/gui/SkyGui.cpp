@@ -161,12 +161,10 @@ void SkyGui::init(StelGui* astelGui)
 	autoHidebts = new CornerButtons();
 	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
-	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiAction("actionAutoHideHorizontalButtonBar"), true);
-	btHorizAutoHide->setChecked(autoHideHorizontalButtonBar);
+	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideHorizontalButtonBar", true);
 	pxmapOn = QPixmap(":/graphicGui/VerticalAutoHideOn.png");
 	pxmapOff = QPixmap(":/graphicGui/VerticalAutoHideOff.png");
-	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiAction("actionAutoHideVerticalButtonBar"), true);
-	btVertAutoHide->setChecked(autoHideVerticalButtonBar);
+	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideVerticalButtonBar", true);
 
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
 	btVertAutoHide->setPos(0,0);

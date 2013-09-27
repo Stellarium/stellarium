@@ -46,6 +46,7 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool showExoplanets READ getFlagShowExoplanets WRITE setFlagShowExoplanets)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status

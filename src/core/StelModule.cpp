@@ -18,6 +18,8 @@
  */
  
 #include "StelModule.hpp"
+#include "StelApp.hpp"
+#include "StelActionMgr.hpp"
 
 /*************************************************************************
  Get the version of the module, default is stellarium main version
@@ -32,3 +34,12 @@ bool StelModule::drawPartial(StelCore* core)
 	draw(core);
 	return false;
 }
+
+class StelAction* StelModule::addAction(const QString& id, const QString& groupId, const QString& text,
+                                        QObject* target, const char* slot,
+                                        const QString& shortcut, const QString& altShortcut)
+{
+	StelActionMgr* mgr = StelApp::getInstance().getStelActionManager();
+	return mgr->addAction(id, groupId, text, target, slot, shortcut, altShortcut);
+}
+
