@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-10 20:03+0700\n"
-"PO-Revision-Date: 2013-09-25 09:43+0000\n"
+"PO-Revision-Date: 2013-09-27 10:05+0000\n"
 "Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-26 05:13+0000\n"
-"X-Generator: Launchpad (build 16771)\n"
+"X-Launchpad-Export-Date: 2013-09-28 05:17+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:564 src/ui_viewDialog.h:1286
 msgid "Meridian"
@@ -510,6 +510,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"이 polynome는 <em>Polynomial approximations to Delta T, 1620-2000 AD(델타 T에 다항식 "
+"근사치, 서기 1620-2000년)</em>(%1) 논문에 J. Meeus와 L. 시몬스에 의해 발표되었습니다."
 
 #: src/core/StelCore.cpp:1501
 msgid ""
@@ -564,6 +566,8 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Stephenson & Morrison (1984)에 기초한 B. Banjevic의 이 해결책은 <em>Ancient eclipses "
+"and dating the fall of Babylon(고대 일식과 바빌론의 멸망 날짜)</em>(%1) 논문에 발표되었습니다."
 
 #: src/core/StelCore.cpp:1519
 #, qt-format
@@ -578,7 +582,7 @@ msgstr ""
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
-msgstr ""
+msgstr "이것은 사용자에 의해 정의된 상수를 가지고 %1T의 계산을 위한 2차 방정식입니다."
 
 #: src/core/StelCore.cpp:1525 src/core/SimbadSearcher.cpp:132
 msgid "Error"
@@ -592,7 +596,7 @@ msgstr "이 범위를 벗어나는 의미없는 값"
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
-msgstr ""
+msgstr "1초 미만, 최대의 평균오류,  오류 1.9초, 그리고 이 범위를 벗어나는 무의미한 값"
 
 #: src/core/StelCore.cpp:1622 src/core/StelCore.cpp:1627
 #: src/core/StelCore.cpp:1654 src/core/StelCore.cpp:1659
@@ -601,7 +605,7 @@ msgstr "이 범위를 벗어나는 0인 값"
 
 #: src/core/StelCore.cpp:1632
 msgid "with a typical 1-second accuracy and zero values outside this range"
-msgstr ""
+msgstr "일반적으로 1초 정확성과 0 범위를 벗어나는 값"
 
 #: src/core/StelCore.cpp:1669
 #, qt-format
@@ -1137,6 +1141,7 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"여러 사람들이 상당한 기여를 했지만, 더 이상 활성화되어 있지 않습니다. 그들의 작업은 프로젝트에 큰 차이를 만들었습니다 :"
 
 #: src/gui/HelpDialog.cpp:320
 #, qt-format
@@ -1333,7 +1338,7 @@ msgstr "%1T를 위한 사용자 방정식"
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "%1T의 계산을 위한 일반적인 방정식은 다음과 같습니다"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
@@ -1351,7 +1356,7 @@ msgstr "이 시스템은 OpenGL을 지원하지 않습니다."
 msgid ""
 "Your platform does not support minimal required OpenGL 1.2. Please upgrade "
 "drivers for graphics card."
-msgstr ""
+msgstr "당신의 플랫폼에서는 최소한의 사양인 OpenGL을 1.2을 지원하지 않습니다. 그래픽 카드를 업그레이드하십시오."
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:186
 #: plugins/Exoplanets/src/Exoplanet.cpp:190
@@ -2003,28 +2008,32 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"이 스크립트는 황도12궁의 별자리를 표시합니다. 이것은 1년 동안 천구에 태양이 가로지르는 가상의 길을 별자리로 표시한 것입니다."
 
 #: src/translations.h:269
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
-msgstr ""
+msgstr "특정 장소에서 수성의 궤도와 회전의 애매함으로 인해 태양이 1 수성일에 3번 다르게 설정되어 떠오르게 됩니다."
 
 #: src/translations.h:270
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
+"화성이 태양과 식이 발생하기 전에 포보스는 뒤에서 먼저 나타나고 가린다. 2017년 4월 26일 전갈자리와 궁수자리 사이에서 일어난다."
 
 #: src/translations.h:271
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
+"화성이 태양과 식이 일어나기 전, 포보스는 뒤에서 나타나고 먼저 식이 일어납니다. 2031년 7월 23일 황소자리와 쌍둥이자리에서 "
+"일어납니다."
 
 #: src/translations.h:272
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr ""
+msgstr "2068년 1월 10일에 화성의 올림푸스 산에서 포보스와 태양과의 식 현상을 볼 수 있습니다."
 
 #: src/translations.h:273
 msgid ""
@@ -2046,7 +2055,7 @@ msgstr ""
 #: src/translations.h:275
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
-msgstr ""
+msgstr "태양계에서 일어나는 여러개의 스크린세이버, 187개 전부!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -2059,7 +2068,7 @@ msgstr "태양계의 거대행성과 명왕성에서 태양을 바라보세요"
 #: src/translations.h:278
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
-msgstr ""
+msgstr "21세기에 다른 태양계 천체로부터 지구 최고의 모습을 제공합니다."
 
 #: src/translations.h:279
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
@@ -2069,13 +2078,13 @@ msgstr "2012년 6월 6일에 호주의 시드에서 금성식을 볼 수 있습�
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
-msgstr ""
+msgstr "analemma(아날렘마)의 정의 - 1 년 동안 하늘을 가로 지르는 8자 모양의 태양의 경로"
 
 #: src/translations.h:281
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
-msgstr ""
+msgstr "1572 티코 브라헤가 관측 한 초신성의 섬광. 초신성 플러그인을 활성화해야합니다."
 
 #: src/translations.h:282
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
@@ -4656,6 +4665,8 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"망원경 접안렌즈를 통해 보는 것처럼 하늘을 보여줍니다. (단순히 배율과 시야각을 시뮬레이트합니다.) 센서 프레임과 Telrad 시야를 "
+"표시 할 수 있습니다."
 
 #: plugins/Oculars/src/Oculars.cpp:787
 msgid "Please select an object before switching to ocular view."
@@ -4955,6 +4966,9 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"이 플러그인은 당신이 접안렌즈를 통해 볼 수 있는 것이 무엇인지를 표시하는데 의도를 가지고 있습니다.  이 구성 대화 상자는 접안렌즈와 "
+"망원경뿐만 아니라 CCD 센서를 추가, 수정 또는 삭제할 수 있습니다. 응용 프로그램을 실행하는 당신의 첫 번째 시간은 당신의 시작 "
+"시기를 얻기 위해 몇개의 샘플이 상주할 것입니다."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid ""
@@ -4973,6 +4987,8 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"당신은 시야에서 십자표시를 전환 할 수 있습니다.  이상적으로 나는 이것이 북쪽에 정렬되기를 원했습니다. 나는 그렇게 할 수 없었습니다. "
+" 그래서 현재는 화면의 상단에 정렬됩니다."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #, qt-format
@@ -5180,12 +5196,12 @@ msgstr "인공위성"
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
-msgstr ""
+msgstr "지구 궤도에서 인공위성의 위치예측은 NORAD TLE 데이터를 기반으로 합니다."
 
 #: plugins/Satellites/src/Satellites.cpp:180
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
-msgstr ""
+msgstr "The old satellites.json 파일은 더이상 호환이 되지 않습니다 - 기본 파일을 사용하여"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1628
@@ -5325,7 +5341,7 @@ msgstr "Stellarium 인공위성 플러그인"
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
-msgstr ""
+msgstr "인공위성 플러그인은 지구 궤도에서 인공위성의 위치를 ​​예측합니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:385
 msgid "Notes for users"
@@ -5334,7 +5350,7 @@ msgstr "사용자를 위한 주의사항"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:386
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
-msgstr ""
+msgstr "관측자가 지구에 있을 때 인공위성과 궤도에 표시합니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:387
 msgid ""
@@ -5342,12 +5358,16 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"예측 위치는 매우 짧은 시간(과거와 미래에서 일, 주 혹은 월의 순서로)에서만 좋다. 이 범위를 벗어나는 날짜를 볼 때는 높은 불확실성이 "
+"예측됩니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:388
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"궤도 요소는 자주 빨리(주마다 또는 나날이) 데이타가 올라갑니다. 유용한 데이터를 얻으려면, 당신은 정기적으로 TLE 데이터를 "
+"업데이트해야합니다."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:390
@@ -5362,7 +5382,7 @@ msgstr ""
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
-msgstr ""
+msgstr "인공위성 플러그인은 아직 개발중입니다. 일부 기능은 불완전하거나 버그가 발생할 수 있습니다."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:400
@@ -5375,6 +5395,8 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"인공위성 플러그인은 자동으로 인터넷 소스에서 TLE 데이터를 다운로드 할 수 있으며, 기존의 데이터보다 72 시간 이상 오래된 경우 "
+"기본적으로 플러그인이 작업을 수행합니다. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
 #, qt-format
@@ -5383,6 +5405,8 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"만일 당신이 인터넷 업데이트를 사용하지 않도록 설정하면, 당신은 당신의 컴퓨터에 있는 파일에서 업데이트 할 수 있습니다. 이 파일은 "
+"Celestrak 업데이트와 같은 형식이어야 합니다(예를 들어 %1을 참조)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 msgid ""
@@ -5401,6 +5425,8 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. 당신이 추가하고자하는 인공위성(들)의 인공위성 구성 대화 상자의 원본 탭에 나열된 URL 중 하나에 포함되어 있는지 확인합니다. "
+"2. 인공위성 탭으로 이동하여 '+'버튼을 클릭합니다. 당신이 \"추가\"버튼을 추가하고 선택하고자하는 인공위성(들)을 선택합니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "Technical notes"
@@ -5410,13 +5436,15 @@ msgstr "기술노트"
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
-msgstr ""
+msgstr "위치는 NORAD TLE 데이터를 입력을 이용하여 SGP4 & SDP4 방법을 아용하여 계산되어집니다. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"궤도 계산 코드는 수정된 Spacetrack 리포트 # 3(Spacetrack 리포트 #6을 포함해서)에 따라 호세 루이스 카날에 의해서 "
+"작성됩니다. "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:413
@@ -5443,7 +5471,7 @@ msgstr "링크"
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
-msgstr ""
+msgstr "기술지원은 Launchpad  웹사이트를 통해 제공됩니다. 게시 할 때 제목에 \"%1\"을 넣어야합니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
@@ -5477,7 +5505,7 @@ msgstr "버그 리포트를 %1 여기%2에서 만들 수 있습니다."
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
-msgstr ""
+msgstr "당신은 기능 요청을 하고자하는 경우, 당신은 버그 리포트를 작성하고, \"위시리스트\"에 심각도를 설정할 수 있습니다."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:445
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
@@ -5804,13 +5832,13 @@ msgstr "TLE set:"
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
-msgstr ""
+msgstr "만일 그들이 이미 선택되어지지 않았다면 표시된 소스 목록의 인공위성은 자동으로 다음 업데이트에 추가 될 것입니다."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
-msgstr ""
+msgstr "선택한 소스의 URL을 입력하거나 편집 할 수 있습니다. 변경 사항은 Enter 키를 누르면 저장됩니다."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Add new source"
@@ -5865,6 +5893,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
+"이 플러그인은 자동화 기능의 망원경 가대(자동화기능의 망원경)에 \"slew(이동)\" 명령을 보내기 위해 Stellarium을 "
+"승인합니다."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1693
 #, qt-format
@@ -5948,6 +5978,8 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"어떤 장치 모델 종류는 사용할 수 없습니다. Stellarium은 자신의 망원경을 제어 할 수 없습니다, ​​그러나 그것은 외부 응용 "
+"프로그램을 통해 그것을 제어하거나 원격 호스트에 연결할 수는 있습니다."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -6114,6 +6146,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Stellarium에 도달하기 위해 망원경으로부터의 걸리는 신호의 대략적인 시간\n"
+"십자선을 건너 뛰는 경우에는 값이 증가됩니다."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
@@ -6131,7 +6165,7 @@ msgstr "춘분날짜(JNow)"
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
-msgstr ""
+msgstr "자동적으로 이 천체망원경을 시작하려고 시도하거나 또는 Stellarium을 시작할때 연결을 설정합니다."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
@@ -6160,7 +6194,7 @@ msgstr "호스트:"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
-msgstr ""
+msgstr "호스트 이름 또는 망원경 서버를 호스팅하는 컴퓨터의 IPv4 주소"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "TCP port:"
@@ -6184,7 +6218,7 @@ msgstr "원 크기(s):"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:513
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "최대 쉼표로 구분된 arc의 각도는 10 진수"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "OK"
@@ -6252,6 +6286,8 @@ msgid ""
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
 msgstr ""
+"Stellarium의 구성 파일에 더 애매한(분명치 않은) 옵션 중 일부에 대한 편리한 인터페이스. 시간대를 설정하고 시간과 날짜가 하단 "
+"표시 줄에 표시되는 방식을 변경할 수 있습니다."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:701
@@ -6431,6 +6467,8 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"기본적으로, Stellarium에 표시되는 시간은 시스템의 표준 시간대로 현지 시간으로 해석됩니다. 표시된 위치의 지방시가 아닙니다. 이 "
+"작동은 Stellarium의 글로벌 표준 시간대 설정을 변경하여 변경할 수 있습니다."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Use system settings (default)"
@@ -6505,7 +6543,7 @@ msgstr "텍스트 사용자 인터페이스"
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
-msgstr ""
+msgstr "플라네타리움 시스템에서 사용되는 0.9.x 시리즈 텍스트 사용자 인터페이스(TUI)의 플러그인 구현"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:157
 msgid "Solar System body"
@@ -6675,6 +6713,8 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
+"Stellarium에 소행성과 혜성을 추가하기위한 인터페이스입니다. 이것은  Minor Planet Center(소규모 행성 센터)의 웹 "
+"사이트에서 천체 목록을 다운로드하고, 온라인 데이터베이스 검색을 수행 할 수 있습니다.  아직 작업이 진행중입니다."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:149
@@ -6690,7 +6730,7 @@ msgstr "쿼리가 성공하면 하나의 결과만이 반환됩니다."
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
-msgstr ""
+msgstr "두 혜성과 소행성들은 번호, 이름(영어로) 또는 임시 명칭으로 식별 할 수 있습니다."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:160
 #, qt-format
@@ -6817,6 +6857,8 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"이 플러그인은 사용자 태양계 구성화일을 사용합니다. 만약에 무엇인가 잘못되었거나 Stellaium과 충돌이 발생하고, 시작되지 않으면 "
+"당신은 이 파일을 수동으로 삭제할 수 있습니다."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid ""
@@ -6835,7 +6877,7 @@ msgstr "태양계 파일 복사/대체"
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
-msgstr ""
+msgstr "당신은 편리한 위치에서 사용자 지정의 태양계 구성 파일의 백업 복사본을 만들거나 그러한 사본으로 대체 할 수 있습니다."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Copy the Solar System file..."
@@ -6942,6 +6984,7 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
+"만일 당신은 이 플러그인에서 모든 정보를 읽기를 원한다면, 그것의 역사와 카달로그의 형식, 당신은 여기%2 정보를 %1얻을 수 있습니다."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Novae/src/gui/NovaeDialog.cpp:158
@@ -7031,13 +7074,13 @@ msgstr "이 플러그인은 신성의 빛 곡선 계산을 위해 매우 간단�
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
-msgstr ""
+msgstr "이 모델은 %1이 2, 3, 6, 9 %에서 최대값으로부터 %1 등급에 의해 감소되는 시간을 기초로 합니다."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
-msgstr ""
+msgstr "만일 신성이 등급의 감소에 대한 값이 없는 경우, 이 플러그인은 그것을 일반화 된 값을 사용합니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -7046,6 +7089,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"만일 당신이 이 플러그인,  이것의 역사와 카달로그 형태에 대한 모든 정보를 읽기를 원한다면 당신은 여기 %2 정보를 %1 얻을 수 "
+"있습니다."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
 msgid "Novae is updated"
@@ -7137,7 +7182,7 @@ msgstr "펄사"
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr ""
+msgstr "이 플러그는 다양한 펄사(각각의 천체 정보를 가진)의 위치를 나타냅니다."
 
 #: plugins/Pulsars/src/Pulsar.cpp:125
 msgid "pulsar"
@@ -7192,12 +7237,12 @@ msgstr "연간 시차:%1 mas"
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "거리는 전자 밀도 모델을 기초로 합니다 : %1 kpc(%2 ly)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "최대의 50%의 윤곽폭 : %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:184 plugins/Pulsars/src/Pulsar.cpp:196
@@ -7225,7 +7270,7 @@ msgstr "공지:%1"
 #: plugins/Pulsars/src/Pulsar.cpp:287
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
-msgstr ""
+msgstr "비정상적인 X-선 펄사 또는 발견된 맥동을 가진 SGR(저에너지 감마선의 섬광을 반복해서 방출하는 특이한 별)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "has one or more binary companions"
@@ -7251,7 +7296,7 @@ msgstr "간헐적 펄스 전파 방출을 가지고"
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
-msgstr ""
+msgstr "맥동된 열 X-선 방출을 가진 독립된 중성자별 그러나 전파방출은 감지할 수 없음"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:112
 msgid "Pulsars Plug-in"
@@ -7271,11 +7316,11 @@ msgstr "참고"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "펄서 식별자는 접두어로 'PSR'을 가지고 있습니다."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 msgid "Acknowledgment"
-msgstr ""
+msgstr "승인"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Vladimir Samodourov"
@@ -7319,7 +7364,7 @@ msgstr "이름표없이 전체 펄사를 도식"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "펄서에 대한 분포의 표시 활성화"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:273
 msgid "Show pulsars button on toolbar"
@@ -7416,7 +7461,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "외계 행성에 관련된 일반 전문 웹 사이트"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 msgid "Exoplanets: an interactive version of XKCD 1071"
@@ -7452,11 +7497,11 @@ msgstr "The Anglo-Australian 행성 연구소"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "제네바 외계 행성 검색 프로그램"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 msgid "NASA's Exoplanet Exploration Program"
@@ -7472,76 +7517,76 @@ msgstr "나사 외계행성 보관소"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 msgid "IAU Comission 53: Extrasolar Planets"
-msgstr ""
+msgstr "국제천문연맹(IAU) 위원회 53 : 외계태양계 행성들"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "The Habitable Zone Gallery (외계행성에 대한 소개 웹사이트)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr ""
+msgstr "PlanetQuest - 또 다른 지구를 위한 탐사"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "외계행성 카탈로그 열기"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Habitable 외계행성 카탈로그"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "외계행성이 업데이트되었습니다."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "외계행성 구성"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:283
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "외계행성 플로그인 구성"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:285
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "인터넷으로부터 외계행성 데이터가 업데이트 되었습니다."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:291
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "외계행성을 위한 세팅"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:293
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "이름표(라벨)없이 외계행성을 가지고 모든 시스템을 표시(플롯)하세요."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:295
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "외계 행성에 대한 분포의 표시 활성화"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "외계행성이 발견된 이후 표시하세요."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:299
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "외계행성의 타임 라인 검색을 사용"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "도구 모음(툴바)에서 외계행성 버튼 표시"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "정보"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
-msgstr ""
+msgstr "관측분석"
 
 #: plugins/Observability/src/Observability.cpp:69
 msgid ""
@@ -7557,66 +7602,66 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "1월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "2월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "3월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "4월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "5월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "6월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "7월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "8월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "9월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "10월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "11월"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "12월"
 
 #: plugins/Observability/src/Observability.cpp:217
 msgid "h"
-msgstr ""
+msgstr "시간"
 
 #: plugins/Observability/src/Observability.cpp:218
 msgid "m"
@@ -7624,116 +7669,116 @@ msgstr "M"
 
 #: plugins/Observability/src/Observability.cpp:219
 msgid "s"
-msgstr ""
+msgstr "초"
 
 #: plugins/Observability/src/Observability.cpp:220
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "%1에 설정(%2 안에)"
 
 #: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "%1에 상승됨(%2 전에)"
 
 #: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "%1에 설정(%2 전에)"
 
 #: plugins/Observability/src/Observability.cpp:223
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "%1에 상승(%2 안에)"
 
 #: plugins/Observability/src/Observability.cpp:224
 msgid "Circumpolar."
-msgstr ""
+msgstr "극지."
 
 #: plugins/Observability/src/Observability.cpp:225
 msgid "No rise."
-msgstr ""
+msgstr "더이상 상승하지 않습니다."
 
 #: plugins/Observability/src/Observability.cpp:226
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "%1(%2 안에서)에서 %3도에서 최고치에 도달함"
 
 #: plugins/Observability/src/Observability.cpp:227
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "%1(%2 전에)에서 %3도에서 최고치에 도달하였음"
 
 #: plugins/Observability/src/Observability.cpp:228
 msgid "Source is not observable."
-msgstr ""
+msgstr "광원이 관측되지 않습니다."
 
 #: plugins/Observability/src/Observability.cpp:229
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "별의 출몰 또는 우주의 출몰이 일어나지 않습니다."
 
 #: plugins/Observability/src/Observability.cpp:230
 msgid "Greatest elongation: "
-msgstr ""
+msgstr "최대이각: "
 
 #: plugins/Observability/src/Observability.cpp:231
 msgid "Largest Sun separation: "
-msgstr ""
+msgstr "태양과 가장 큰 간격: "
 
 #: plugins/Observability/src/Observability.cpp:232
 #, qt-format
 msgid " (at %1 deg.)"
-msgstr ""
+msgstr " (%1도. 에서)"
 
 #: plugins/Observability/src/Observability.cpp:234
 msgid "Acronychal rise/set"
-msgstr ""
+msgstr "별의 출몰"
 
 #: plugins/Observability/src/Observability.cpp:235
 msgid "No Acronychal rise/set."
-msgstr ""
+msgstr "별의 출몰이 없음"
 
 #: plugins/Observability/src/Observability.cpp:236
 msgid "Cosmical rise/set"
-msgstr ""
+msgstr "우주 출몰"
 
 #: plugins/Observability/src/Observability.cpp:237
 msgid "No Cosmical rise/set."
-msgstr ""
+msgstr "우주 출몰이 없음"
 
 #: plugins/Observability/src/Observability.cpp:238
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "1년 동안 관측할 수 있음"
 
 #: plugins/Observability/src/Observability.cpp:239
 msgid "Not observable at dark night."
-msgstr ""
+msgstr "어두운 밤하늘에서 관측할 수 없음"
 
 #: plugins/Observability/src/Observability.cpp:240
 msgid "Nights above horizon: "
-msgstr ""
+msgstr "지평선 위의 밤: "
 
 #: plugins/Observability/src/Observability.cpp:241
 msgid "TODAY:"
-msgstr ""
+msgstr "오늘:"
 
 #: plugins/Observability/src/Observability.cpp:242
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "금년:"
 
 #: plugins/Observability/src/Observability.cpp:243
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "이전 보름달: %3:%4에서 %1 %2 "
 
 #: plugins/Observability/src/Observability.cpp:244
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "다음 보름달: %3:%4에서 %1 %2 "
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:97
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "관측 플러그인"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
 msgid ""
@@ -7749,13 +7794,13 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "일부 매개 변수에 대한 설명"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:225
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "박명시 태양고도"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 msgid ""
@@ -7764,6 +7809,8 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"태양이 이 고도 아래에 위치할 때 어떤 천구의 천체는 볼수 있을겁니다. 천문박명의 고도는 약 -12도에서 -18도 범위입니다. 이 값은 "
+"관측할 수 있는 Epoch의 범위의 추정에 사용합니다(아래를 보세요)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
@@ -7775,7 +7822,7 @@ msgstr "수평선 고도:"
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
-msgstr ""
+msgstr "최소 관측가능한 고도 (산과 빌딩 또는 제한된 망원경 가대로 인해)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
 msgid "Today ephemeris:"
@@ -7821,6 +7868,9 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
+"태양과 천체 사이의 각도 분리가 최대일 때 발생합니다. 대부분의 경우 이것은 태양과 천체의 적경이 180도 차이가 남을 말합니다. 그래서 "
+"태양은 천체에 반대편에 위치합니다. 천체가 태양으로부터 가능한 최대 각도 분리(행성이나 별이면 상관없음)에 있을 때, 그것은 자정에 거의 "
+"최고점이고, 그 적경이 하늘의 가장 어두운 영역. 즉, 그 특정 천체를 관측할 수 있는 '최적의' 밤입니다."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
@@ -7881,7 +7931,7 @@ msgstr "오늘의 천체력(일출, 일몰, 자오선 통과 시간)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr ""
+msgstr "별의 출몰과 우주의 출몰 날짜"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Date of largest separation to the Sun"
