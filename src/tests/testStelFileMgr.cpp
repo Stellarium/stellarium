@@ -37,7 +37,7 @@ void TestStelFileMgr::initTestCase()
 {
 	partialPath1 = "testfilemgr/path1";
 	partialPath2 = "testfilemgr/path2";
-	workingDir = QDir::tempPath();
+	workingDir = tempDir.path();
 	workingDir.replace(QRegExp("/+$"), "");  // sometimes the temp path will have / on the end... zap it.
 	if (!QDir::setCurrent(workingDir))
 	{
@@ -95,29 +95,6 @@ void TestStelFileMgr::initTestCase()
 	StelFileMgr::init();
 	StelFileMgr::setSearchPaths(path);
 	qDebug() << "search paths are:  " << path;
-}
-
-void TestStelFileMgr::cleanupTestCase()
-{
-	// delete test files
-	foreach(QString p, testFiles)
-	{
-		QFile f(p);
-		if (!f.remove())
-		{
-			qWarning() << "could not clean up file:" << QDir::toNativeSeparators(workingDir + "/" + p);
-		}
-	}
-
-	// remove test directories
-	// go over dirs in reverse
-	for(int i=testDirs.size()-1; i>=0; i--)
-	{
-		if (!QDir().rmdir(testDirs.at(i)))
-		{
-			qWarning() << "could not clean up directory:" << QDir::toNativeSeparators(workingDir + "/" + testDirs.at(i));
-		}
-	}
 }
 
 void TestStelFileMgr::testFindFileVanilla()
