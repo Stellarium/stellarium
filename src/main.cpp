@@ -320,28 +320,26 @@ int main(int argc, char **argv)
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 		app.quit();
 	}
-	else
-	{
-		StelMainView mainWin;
 
-		qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
-		mainWin.init(confSettings);
-		app.exec();
-		mainWin.deinit();
+	StelMainView mainWin;
 
-		delete confSettings;
-		StelLogger::deinit();
+	qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
+	mainWin.init(confSettings);
+	app.exec();
+	mainWin.deinit();
 
-		#ifdef Q_OS_WIN
-		if(timerGrain)
-			timeEndPeriod(timerGrain);
-		#endif //Q_OS_WIN
-		#ifdef Q_OS_MAC
-		delete(newArgv);
-		delete(option);
-		delete(value);
-		#endif
-		return 0;
-	}
+	delete confSettings;
+	StelLogger::deinit();
+
+#ifdef Q_OS_WIN
+	if(timerGrain)
+		timeEndPeriod(timerGrain);
+#endif //Q_OS_WIN
+#ifdef Q_OS_MAC
+	delete(newArgv);
+	delete(option);
+	delete(value);
+#endif
+	return 0;
 }
 
