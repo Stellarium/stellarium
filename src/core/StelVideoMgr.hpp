@@ -19,12 +19,6 @@
 #ifndef _STELVIDEOMGR_HPP_
 #define _STELVIDEOMGR_HPP_
 
-#ifdef HAVE_QT_PHONON
-#include <phonon/videoplayer.h>
-#include <phonon/videowidget.h>
-#include <phonon/mediaobject.h>
-#endif
-
 #include <QObject>
 #include <QMap>
 #include <QString>
@@ -51,7 +45,7 @@ public slots:
 	void showVideo(const QString& id, bool show);
 
 private:
-#ifdef HAVE_QT_PHONON
+#if 0
 	typedef struct {
 		QWidget *widget;
 		Phonon::VideoPlayer *player;
