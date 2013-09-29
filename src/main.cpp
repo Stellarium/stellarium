@@ -286,7 +286,7 @@ int main(int argc, char **argv)
 	if (!fName.isEmpty())
 		QFontDatabase::addApplicationFont(fName);
 	
-	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
+	QString fileFont = confSettings->value("gui/font_file", "").toString();
 	if (!fileFont.isEmpty())
 	{
 		const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
@@ -296,7 +296,7 @@ int main(int argc, char **argv)
 			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont);
 	}
 
-	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
+	QString baseFont = confSettings->value("gui/font_name", "DejaVu Sans").toString();
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
@@ -306,7 +306,7 @@ int main(int argc, char **argv)
 #else
 	QFont tmpFont(baseFont);
 #endif
-	tmpFont.setPointSize(confSettings->value("gui/base_font_size", 13).toInt());
+	tmpFont.setPointSize(confSettings->value("gui/font_size", 9).toInt());
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
@@ -316,29 +316,35 @@ int main(int argc, char **argv)
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	StelMainView mainWin;
 	// some basic diagnostics
-	if (!QGLFormat::hasOpenGL()){
-	  QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+	if (!QGLFormat::hasOpenGL())
+	{
+		qWarning() << "Oops... This system does not support OpenGL.";
+		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+		app.quit();
 	}
-	qDebug() << "OpenGLVersionflags: " << QGLFormat::openGLVersionFlags();
-	mainWin.init(confSettings);
-	app.exec();
-	mainWin.deinit();
+	else
+	{
+		StelMainView mainWin;
 
-	delete confSettings;
-	StelLogger::deinit();
+		qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
+		mainWin.init(confSettings);
+		app.exec();
+		mainWin.deinit();
 
-	#ifdef Q_OS_WIN
-	if(timerGrain)
-		timeEndPeriod(timerGrain);
-	#endif //Q_OS_WIN
-#ifdef Q_OS_MAC
-	delete(newArgv);
-	delete(option);
-	delete(value);
-#endif
+		delete confSettings;
+		StelLogger::deinit();
 
-	return 0;
+		#ifdef Q_OS_WIN
+		if(timerGrain)
+			timeEndPeriod(timerGrain);
+		#endif //Q_OS_WIN
+		#ifdef Q_OS_MAC
+		delete(newArgv);
+		delete(option);
+		delete(value);
+		#endif
+		return 0;
+	}
 }
 

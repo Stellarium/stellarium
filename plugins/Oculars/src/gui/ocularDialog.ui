@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
-    <height>383</height>
+    <width>651</width>
+    <height>379</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -134,6 +134,11 @@
       </property>
       <item>
        <widget class="QTabWidget" name="Tabs">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -835,6 +840,9 @@
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
+               </property>
+               <property name="indent">
+                <number>9</number>
                </property>
               </widget>
              </item>
