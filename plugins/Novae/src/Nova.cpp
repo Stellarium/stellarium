@@ -161,7 +161,7 @@ float Nova::getVMagnitude(const StelCore* core) const
 	double deltaJD = std::abs(peakJD-currentJD);
     
 	// Fill "default" values for mX
-	int t2;
+	int t2 = m2;
 	if (m2 < 0)
 	{
 		// m2 is unset, check type of nova
@@ -173,11 +173,9 @@ float Nova::getVMagnitude(const StelCore* core) const
 
 		if (novaType.contains("NC", Qt::CaseSensitive))
 			t2 = 200; // Ok, "very slow" nova
-	}
-	else
-		t2 = m2;
+	}	
 
-	int t3;
+	int t3 = m3;
 	if (m3 < 0)
 	{
 		// m3 is unset, check type of nova
@@ -189,11 +187,9 @@ float Nova::getVMagnitude(const StelCore* core) const
 
 		if (novaType.contains("NC", Qt::CaseSensitive))
 			t3 = 300; // Ok, "very slow" nova
-	}
-	else
-		t3 = m3;
+	}	
 
-	int t6;
+	int t6 = m6;
 	if (m6 < 0)
 	{
 		// m3 is unset, check type of nova
@@ -205,11 +201,9 @@ float Nova::getVMagnitude(const StelCore* core) const
 
 		if (novaType.contains("NC", Qt::CaseSensitive))
 			t6 = 1200; // Ok, "very slow" nova
-	}
-	else
-		t6 = m6;
+	}	
 
-	int t9;
+	int t9 = m9;
 	if (m9 < 0)
 	{
 		// m3 is unset, check type of nova
@@ -221,9 +215,7 @@ float Nova::getVMagnitude(const StelCore* core) const
 
 		if (novaType.contains("NC", Qt::CaseSensitive))
 			t9 = 3000; // Ok, "very slow" nova
-	}
-	else
-		t9 = m9;
+	}	
 
 	// Calculate light curve
 	if (peakJD<=currentJD)
