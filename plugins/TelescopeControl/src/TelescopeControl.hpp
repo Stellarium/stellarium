@@ -196,13 +196,13 @@ public slots:
 	
 	//! slews a telescope to the selected object.
 	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the QAction which triggered the slot.
+	//! deduced from the name of the StelAction which triggered the slot.
 	void slewTelescopeToSelectedObject();
 
 	//! slews a telescope to the point of the celestial sphere currently
 	//! in the center of the screen.
 	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the QAction which triggered the slot.
+	//! deduced from the name of the StelAction which triggered the slot.
 	void slewTelescopeToViewDirection();
 	
 	//! Used in the GUI

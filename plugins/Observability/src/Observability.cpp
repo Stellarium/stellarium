@@ -21,7 +21,6 @@
 #include <QTimer>
 #include <QString>
 #include <QDebug>
-#include <QAction>
 #include <QKeyEvent>
 #include <QtNetwork>
 #include <QKeyEvent>

@@ -49,7 +49,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelActionMgr.hpp"
 
-#include <QAction>
 #include <QDateTime>
 #include <QDir>
 #include <QFileInfo>
@@ -148,7 +147,7 @@ void TelescopeControl::init()
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 		//Create telescope key bindings
-		/* QAction-s with these key bindings existed in Stellarium prior to
+		/* StelAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
 		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 		{

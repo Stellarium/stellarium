@@ -65,7 +65,6 @@
 #include <QTimeLine>
 #include <QFontDatabase>
 #include <QMouseEvent>
-#include <QAction>
 #include <QGuiApplication>
 #include <QFile>
 #include <QTextBrowser>
