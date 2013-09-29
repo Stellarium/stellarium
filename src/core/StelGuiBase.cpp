@@ -31,20 +31,3 @@ void StelGuiBase::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
 	Q_UNUSED(atopLevelGraphicsWidget);
 }
-
-void StelGuiBase::updateI18n()
-{
-	// Translate all action texts
-	foreach (QObject* obj, StelMainView::getInstance().children())
-	{
-		QAction* a = qobject_cast<QAction*>(obj);
-		if (a)
-		{
-			const QString& englishText = a->property("englishText").toString();
-			if (!englishText.isEmpty())
-			{
-				a->setText(q_(englishText));
-			}
-		}
-	}
-}

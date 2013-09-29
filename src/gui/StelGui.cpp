@@ -73,6 +73,7 @@
 #include <QClipboard>
 #include <QPalette>
 #include <QColor>
+#include <QAction>
 
 StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 {
@@ -439,7 +440,19 @@ void StelGui::setStelStyle(const QString& section)
 
 void StelGui::updateI18n()
 {
-	StelGuiBase::updateI18n();
+	// Translate all action texts
+	foreach (QObject* obj, StelMainView::getInstance().children())
+	{
+		QAction* a = qobject_cast<QAction*>(obj);
+		if (a)
+		{
+			const QString& englishText = a->property("englishText").toString();
+			if (!englishText.isEmpty())
+			{
+				a->setText(q_(englishText));
+			}
+		}
+	}
 }
 
 void StelGui::update()
