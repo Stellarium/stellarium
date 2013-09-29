@@ -46,10 +46,9 @@ void TestStelFileMgr::initTestCase()
 
 	qDebug() << "working directory: " << QDir::toNativeSeparators(QDir::currentPath());
 
-	StelFileMgr::init();
-
 	// set up a directory hierarchy to test on...
-	testDirs << "testfilemgr"
+	testDirs << "data"
+			 << "testfilemgr"
 			 << partialPath1
 			 << partialPath1+"/landscapes"
 			 << partialPath1+"/landscapes/ls1"
@@ -60,7 +59,8 @@ void TestStelFileMgr::initTestCase()
 			 << partialPath2+"/landscapes/ls1"
 			 << partialPath2+"/landscapes/ls3";
 
-	testFiles << partialPath1+"/landscapes/ls1/landscape.ini"
+	testFiles << "data/ssystem.ini"
+			  << partialPath1+"/landscapes/ls1/landscape.ini"
 			  << partialPath1+"/landscapes/ls2/landscape.ini"
 			  << partialPath1+"/config.ini"
 			  << partialPath1+"/inboth.txt"
@@ -91,7 +91,9 @@ void TestStelFileMgr::initTestCase()
 	QStringList path;
 	path << "./"+partialPath1;
 	path << workingDir+"/"+partialPath2;
-	//StelFileMgr::setSearchPaths(path);
+
+	StelFileMgr::init();
+	StelFileMgr::setSearchPaths(path);
 	qDebug() << "search paths are:  " << path;
 }
 
