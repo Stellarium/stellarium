@@ -251,6 +251,11 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	return result;
 }
 
+void StelFileMgr::setSearchPaths(const QStringList& paths)
+{
+	fileLocations = paths;
+}
+
 bool StelFileMgr::exists(const QString& path)
 {
 	return QFileInfo(path).exists();

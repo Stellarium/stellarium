@@ -95,6 +95,10 @@ public:
 	//! @return returns a vector of strings representing the current search paths.
 	static const QStringList& getSearchPaths(void) {return fileLocations;}
 
+	//! Set the search paths.
+	//! @param paths is a vector of strings which will become the new search paths
+	static void setSearchPaths(const QStringList& paths);
+
 	//! Make sure the passed directory path exist and is writable.
 	//! If it doesn't exist creates it. If it's not possible throws an error.
 	static void makeSureDirExistsAndIsWritable(const QString& dirFullPath);
