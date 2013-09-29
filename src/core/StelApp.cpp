@@ -329,6 +329,9 @@ void StelApp::init(QSettings* conf)
 {
 	confSettings = conf;
 
+	// Set base font size
+	setFontSize(conf->value("gui/font_size", 9).toInt());
+
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);

@@ -71,14 +71,14 @@ CompassMarks::CompassMarks()
 		conf->setValue("CompassMarks/mark_color", "1,0,0");
 
 	if (!conf->contains("CompassMarks/font_size"))
-		conf->setValue("CompassMarks/font_size", 10);
+		conf->setValue("CompassMarks/font_size", 8);
 
 	if (!conf->contains("CompassMarks/enable_at_startup"))
 		conf->setValue("CompassMarks/enable_at_startup", false);
 
 	// Load settings from main config file
 	markColor = StelUtils::strToVec3f(conf->value("CompassMarks/mark_color", "1,0,0").toString());
-	font.setPointSize(conf->value("CompassMarks/font_size", 10).toInt());
+	font.setPointSize(conf->value("CompassMarks/font_size", 8).toInt());
 }
 
 CompassMarks::~CompassMarks()

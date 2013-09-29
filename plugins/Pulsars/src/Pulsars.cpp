@@ -89,8 +89,9 @@ Pulsars::Pulsars()
 {
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
-	conf = StelApp::getInstance().getSettings();
-	font.setPointSize(conf->value("gui/font_size", 9).toInt());
+	StelApp &stelApp = StelApp::getInstance();
+	conf = stelApp.getSettings();
+	font.setPointSize(stelApp.getFontSize());
 }
 
 /*
