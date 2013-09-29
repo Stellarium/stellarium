@@ -98,7 +98,7 @@ private:
 // rms added color as parameter
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame)
 {
-	font.setPointSize(12);
+	font.setPointSize(floor(StelApp::getInstance().getFontSize()*0.92));
 }
 
 SkyGrid::~SkyGrid()
@@ -518,7 +518,7 @@ void SkyGrid::draw(const StelCore* core) const
 
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
 {
-	font.setPointSize(14);
+	font.setPointSize(floor(StelApp::getInstance().getFontSize()*1.08));
 	line_type = _line_type;
 
 	updateLabel();

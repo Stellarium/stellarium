@@ -619,9 +619,9 @@ void TelescopeControl::loadConfiguration()
 
 	//Load font size
 #ifdef Q_OS_WIN32
-	setFontSize(settings->value("telescope_labels_font_size", 13).toInt()); //Windows Qt bug workaround
+	setFontSize(settings->value("telescope_labels_font_size", 9).toInt()); //Windows Qt bug workaround
 #else
-	setFontSize(settings->value("telescope_labels_font_size", 12).toInt());
+	setFontSize(settings->value("telescope_labels_font_size", 8).toInt());
 #endif
 
 	//Load colours

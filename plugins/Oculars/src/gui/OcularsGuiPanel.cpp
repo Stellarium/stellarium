@@ -144,7 +144,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
 
 	QFont newFont = font();
-	newFont.setPointSize(9);
+	newFont.setPointSize(stelApp.getFontSize());
 	setControlsFont(newFont);
 	//setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 
