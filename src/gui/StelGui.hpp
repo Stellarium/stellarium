@@ -28,7 +28,6 @@
 #include <QGraphicsTextItem>
 
 class QGraphicsSceneMouseEvent;
-class QAction;
 class QTimeLine;
 class StelButton;
 class BottomStelBar;
@@ -46,7 +45,7 @@ class ScriptConsole;
 
 //! @class StelGui
 //! Main class for the GUI based on QGraphicView.
-//! It manages the various qt configuration windows, the buttons bars, the list of QAction/shortcuts.
+//! It manages the various qt configuration windows, the buttons bars, the list of shortcuts.
 class StelGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
