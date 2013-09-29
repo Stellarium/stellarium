@@ -22,7 +22,6 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
-#include <QGraphicsProxyWidget>
 
 class StelVideoMgr : public QObject
 {

@@ -60,7 +60,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QMessageBox>
 #include <QMouseEvent>
 #include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
