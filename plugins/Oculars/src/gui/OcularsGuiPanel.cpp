@@ -567,10 +567,8 @@ void OcularsGuiPanel::updateOcularControls()
 
 void OcularsGuiPanel::updateLensControls()
 {
-	int index = ocularsPlugin->selectedOcularIndex;
-
 	Lens* lens = ocularsPlugin->selectedLens();
-	index = ocularsPlugin->selectedLensIndex;
+	int index = ocularsPlugin->selectedLensIndex;
 
 	QString fullName;
 	QString multiplerString;
