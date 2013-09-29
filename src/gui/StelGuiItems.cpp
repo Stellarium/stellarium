@@ -64,7 +64,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
 	noBckground = noBackground;
-	isTristate_ = false;
+	isTristate_ = isTristate;
 	opacity = 1.;
 	hoverOpacity = 0.;
 	action = aaction;
@@ -307,7 +307,7 @@ void LeftStelBar::buttonHoverChanged(bool b)
 	{
 		if (button->action)
 		{
-			QString tip(button->action->getText());
+			QString tip(q_(button->action->getText()));
 			QString shortcut(button->action->getShortcut().toString(QKeySequence::NativeText));
 			if (!shortcut.isEmpty())
 			{
@@ -731,7 +731,7 @@ void BottomStelBar::buttonHoverChanged(bool b)
 		StelAction* action = button->action;
 		if (action)
 		{
-			QString tip(action->getText());
+			QString tip(q_(action->getText()));
 			QString shortcut(action->getShortcut().toString(QKeySequence::NativeText));
 			if (!shortcut.isEmpty())
 			{

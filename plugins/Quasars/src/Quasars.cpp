@@ -90,7 +90,7 @@ Quasars::Quasars()
 	setObjectName("Quasars");
 	configDialog = new QuasarsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPointSize(conf->value("gui/base_font_size", 13).toInt());
+	font.setPointSize(conf->value("gui/font_size", 9).toInt());
 }
 
 /*

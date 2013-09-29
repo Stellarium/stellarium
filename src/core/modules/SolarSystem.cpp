@@ -60,7 +60,7 @@
 
 SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
 {
-	planetNameFont.setPointSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	planetNameFont.setPointSize(StelApp::getInstance().getSettings()->value("gui/font_size", 9).toInt());
 	setObjectName("SolarSystem");
 }
 
