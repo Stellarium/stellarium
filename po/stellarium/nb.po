@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-10 20:03+0700\n"
-"PO-Revision-Date: 2013-06-12 12:23+0000\n"
+"PO-Revision-Date: 2013-09-28 15:46+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-11 04:52+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-29 05:17+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -273,7 +273,7 @@ msgstr "Magnitudeområde: <b>%1</b>%2<b>%3</b> (Fotometrisk system: %4)"
 #: src/core/modules/StarWrapper.cpp:201
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Magnitudeområde: <b>%1</b>%2<b>%3/%4</b> (Fotometrisk system: %5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:170
@@ -1186,7 +1186,7 @@ msgstr "Standard Perseiderate"
 
 #: src/gui/ViewDialog.cpp:640
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Meteorstormrate"
 
 #: src/gui/ViewDialog.cpp:643
 msgid "Exceptional Leonid rate"
@@ -1951,17 +1951,17 @@ msgstr "Himmelkultur-tur"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:246
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Jord-hendelser sett fra Merkur"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:248
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Jord-hendelser sett fra Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:250
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Jord-hendelser sett fra Mars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
@@ -2076,6 +2076,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
+"Skjermbeskytter med ulike hendelser i solsystemet. 187 hendelser i alt!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -3310,7 +3311,7 @@ msgstr "Stjernebildelinjer"
 
 #: src/translations.h:590
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Bakgrunnsbilder for deep-sky-objekter"
 
 #: src/translations.h:591 src/ui_viewDialog.h:1276
 msgid "Ecliptic J2000 grid"
@@ -3365,7 +3366,7 @@ msgstr "Meridianlinje"
 
 #: src/translations.h:602
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Deep-sky-objekter"
 
 #: src/translations.h:603
 msgid "Night mode"
@@ -3512,19 +3513,19 @@ msgstr "Telrad-sikte"
 
 #: src/translations.h:651
 msgid "Select next telescope"
-msgstr ""
+msgstr "Velg neste teleskop"
 
 #: src/translations.h:652
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Velg neste okular"
 
 #: src/translations.h:653
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Velg forrige teleskop"
 
 #: src/translations.h:654
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Velg forrige okular"
 
 #: src/translations.h:657
 msgid "Show pulsars"
@@ -3560,7 +3561,7 @@ msgstr "Innstillingsvindu for historiske supernovaer"
 
 #: src/translations.h:673
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Innstillingsvindu for lyse novaer"
 
 #: src/translations.h:676
 msgid "Move a telescope to a given set of coordinates"
@@ -3714,7 +3715,7 @@ msgstr "Finn objekt eller posisjon"
 
 #: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Bruk Tab-tasten for å velge funnede oppføringer"
 
 #: src/ui_searchDialogGui.h:571
 msgid "iota"
@@ -3831,6 +3832,7 @@ msgstr "Posisjon"
 #: src/ui_searchDialogGui.h:647
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Noen objekter kan bli funnet etter aktivering av respektive programtillegg"
 
 #: src/ui_searchDialogGui.h:649
 msgid "names in English"
@@ -3859,11 +3861,11 @@ msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "Søkealternativer"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Søk bare fra ordenes begynnelse"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1302
 #: src/ui_viewDialog.h:1308 src/ui_viewDialog.h:1310
@@ -3912,7 +3914,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1221 src/ui_viewDialog.h:1266
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "DSO"
 
 #: src/ui_viewDialog.h:1222
 msgid "Planets and satellites"
@@ -3940,11 +3942,11 @@ msgstr "Forstørr månen"
 
 #: src/ui_viewDialog.h:1229
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Automatisk endring av landskap når planet endres"
 
 #: src/ui_viewDialog.h:1231
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Velg automatisk landskaper"
 
 #: src/ui_viewDialog.h:1233
 msgid "Show atmosphere"
@@ -4001,11 +4003,11 @@ msgstr "Timerate i senit"
 #: src/ui_viewDialog.h:1252
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1253
 msgid "1000"
-msgstr ""
+msgstr "1000"
 
 #: src/ui_viewDialog.h:1256
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4104,7 +4106,7 @@ msgstr "Bruk dette landskapet som standard"
 
 #: src/ui_viewDialog.h:1307
 msgid "Use brightness settings for landscapes"
-msgstr ""
+msgstr "Bruk lysstyrkeinnstillinger for landskaper"
 
 #: src/ui_viewDialog.h:1309
 msgid "Use this sky culture as default"
@@ -4338,7 +4340,7 @@ msgstr "Annet:"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Bruk gjeldende lokale dato og klokkeslett"
 
 #: src/ui_configurationDialog.h:1073
 msgid "use current"
@@ -7043,6 +7045,7 @@ msgstr "Historiske supernovaer"
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
+"Dette programtillegget gjør det mulig å se noen lyse historiske supernovaer."
 
 #: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
@@ -7056,7 +7059,7 @@ msgstr "Supernovatype: %1"
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:142
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Maksimum lysstyrke: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -7065,6 +7068,7 @@ msgstr "Programtillegg for historiske supernovaer"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
+"Dette programtillegget gjør det mulig å se noen lyse historiske supernovaer: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 #, qt-format
@@ -7177,24 +7181,24 @@ msgstr "[informasjon om neste oppdatering]"
 
 #: plugins/Novae/src/Novae.cpp:72
 msgid "Bright Novae"
-msgstr ""
+msgstr "Lyse novaer"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "Et programtillegg som viser noen lyse novaer i Melkeveien."
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Type: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
+msgstr "Nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Programtillegg for lyse novaer"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:112
 msgid ""
@@ -7235,11 +7239,11 @@ msgstr ""
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Innstilling for lyse novaer"
 
 #: plugins/Novae/src/ui_novaeDialog.h:234
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Programtillegginnstilling for lyse novaer"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
@@ -7741,7 +7745,7 @@ msgstr "Vis eksoplaneter-knapp på verktøylinje"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
