@@ -58,7 +58,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
 	isolateSelected = false;
-	asterFont.setPointSize(floor(StelApp::getInstance().getFontSize()*1.15));
+	asterFont.setPointSize(round(StelApp::getInstance().getFontSize()*1.15));
 }
 
 ConstellationMgr::~ConstellationMgr()
