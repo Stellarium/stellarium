@@ -26,13 +26,12 @@
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
 
-#include <string.h>
-#include <stdlib.h>
-
 #include <QDebug>
 
 #ifndef USE_QUICKVIEW
 	#include <QApplication>
+	#include <QMessageBox>
+	#include <QStyleFactory>
 #else
 	#include <QGuiApplication>
 #endif
@@ -43,11 +42,9 @@
 #include <QFontDatabase>
 #include <QGLFormat>
 #include <QGuiApplication>
-#include <QMessageBox>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
-#include <QStyleFactory>
 #include <QTextStream>
 #include <QTranslator>
 
