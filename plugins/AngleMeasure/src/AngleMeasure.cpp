@@ -32,7 +32,6 @@
 
 #include <QDebug>
 #include <QTimer>
-#include <QAction>
 #include <QPixmap>
 #include <QtNetwork>
 #include <QSettings>

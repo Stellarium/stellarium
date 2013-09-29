@@ -31,7 +31,6 @@
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
 
-#include <QAction>
 #include <QDebug>
 #include <QPixmap>
 #include <QSettings>

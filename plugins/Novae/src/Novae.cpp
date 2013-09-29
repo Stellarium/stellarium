@@ -39,7 +39,6 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
-#include <QAction>
 #include <QProgressBar>
 #include <QDebug>
 #include <QFile>

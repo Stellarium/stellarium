@@ -36,7 +36,6 @@
 #include "StelSkyDrawer.hpp"
 #include "StelSkyLayerMgr.hpp"
 
-#include <QAction>
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
