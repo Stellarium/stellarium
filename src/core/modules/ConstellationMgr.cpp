@@ -58,7 +58,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
 	isolateSelected = false;
-	asterFont.setPointSize(15);
+	asterFont.setPointSize(floor(StelApp::getInstance().getFontSize()*1.15));
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -84,7 +84,7 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPointSize(conf->value("viewing/constellation_font_size", 16).toInt());
+	asterFont.setPointSize(conf->value("viewing/constellation_font_size", 12).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());

@@ -28,6 +28,8 @@
 #include "ShortcutsDialog.hpp"
 #include "ui_shortcutsDialog.h"
 
+#include <math.h>
+
 
 ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
     QSortFilterProxyModel(parent)
@@ -360,7 +362,7 @@ QStandardItem* ShortcutsDialog::updateGroup(const QString& group)
 	// setup bold font for group lines
 	QFont rootFont = groupItem->font();
 	rootFont.setBold(true);
-	rootFont.setPointSize(14);
+	rootFont.setPointSize(floor(StelApp::getInstance().getFontSize()*1.08));
 	groupItem->setFont(rootFont);
 	if (isNew)
 		mainModel->appendRow(groupItem);

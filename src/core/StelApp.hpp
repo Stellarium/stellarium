@@ -180,6 +180,11 @@ public:
 	//! The StelApp instance remains the owner of the controller.
 	StelProgressController* addProgressBar();
 	void removeProgressBar(StelProgressController* p);
+
+	//! Get size of base font
+	int getFontSize(void) const { return baseFontSize; }
+	//! Set size of base font
+	void setFontSize(int fontsize)  { baseFontSize=fontsize; }
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
@@ -313,6 +318,8 @@ private:
 	int drawState;
 	
 	QList<StelProgressController*> progressControllers;
+
+	int baseFontSize;
 };
 
 #endif // _STELAPP_HPP_

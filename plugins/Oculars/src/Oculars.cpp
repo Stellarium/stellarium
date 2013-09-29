@@ -114,7 +114,7 @@ Oculars::Oculars():
 	requireSelection = true;
 	useMaxEyepieceAngle = true;
 
-	font.setPointSize(9);
+	font.setPointSize(StelApp::getInstance().getFontSize());
 	maxEyepieceAngle = 0.0;
 
 	ccds = QList<CCD *>();

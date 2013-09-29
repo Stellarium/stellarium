@@ -83,9 +83,10 @@ Supernovae::Supernovae()
 	: progressBar(NULL)
 {
 	setObjectName("Supernovae");
-	configDialog = new SupernovaeDialog();
-	conf = StelApp::getInstance().getSettings();
-	font.setPointSize(conf->value("gui/font_size", 9).toInt());
+	configDialog = new SupernovaeDialog();	
+	StelApp &stelApp = StelApp::getInstance();
+	conf = stelApp.getSettings();
+	font.setPointSize(stelApp.getFontSize());
 }
 
 /*
