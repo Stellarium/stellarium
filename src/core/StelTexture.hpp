@@ -118,14 +118,8 @@ private:
 	//! The loader object
 	QFuture<QImage>* loader;
 
-	//! Define if the texture was already downloaded if it was a remote one
-	bool downloaded;
-
 	//! The URL where to download the file
 	QString fullPath;
-
-	//! Used ony when creating temporary file
-	QString fileExtension;
 
 	//! True when something when wrong in the loading process
 	bool errorOccured;
