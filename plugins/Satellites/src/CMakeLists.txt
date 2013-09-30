@@ -66,6 +66,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
 	ENDIF(WIN32)
 
 	TARGET_LINK_LIBRARIES(Satellites ${StelMain} ${extLinkerOption})
+	QT5_USE_MODULES(Satellites Core Gui Widgets OpenGL Network)
 	INSTALL(TARGETS Satellites DESTINATION "modules/Satellites")
 ENDIF()
 
@@ -75,7 +76,8 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-        SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
+	QT5_USE_MODULES(Satellites-static Core Gui Widgets OpenGL Network)
+	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
 	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 ENDIF()
 
