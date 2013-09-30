@@ -430,7 +430,8 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
 			}
 
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(
+			        texturePath, StelTexture::StelTextureParams(), QString(), false);
 
 			int texSizeX = 0, texSizeY = 0;
 			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
