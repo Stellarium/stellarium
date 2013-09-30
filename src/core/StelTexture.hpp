@@ -82,7 +82,7 @@ public:
 	const QString& getFullPath() const {return fullPath;}
 
 	//! Return whether the image is currently being loaded
-	bool isLoading() const {return loader && !canBind();}
+	bool isLoading() const {return (loader || networkReply) && !canBind();}
 
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
@@ -90,6 +90,9 @@ signals:
 	//! In case of error, you can query what the problem was by calling getErrorMessage()
 	//! @param error is equal to true if an error occured while loading the texture
 	void loadingProcessFinished(bool error);
+
+private slots:
+	void onNetworkReply();
 
 private:
 	friend class StelTextureMgr;
@@ -105,15 +108,15 @@ private:
 	//! @param errorMessage the human friendly error message
 	void reportError(const QString& errorMessage);
 
-	//! static method that is blocking, so should always run in a thread.
-	static QImage load(const QString &path);
-
 	//! Load the texture already in the RAM to the openGL memory
 	//! This function uses openGL routines and must be called in the main thread
 	//! @return false if an error occured
 	bool glLoad(const QImage& image);
 
 	StelTextureParams loadParams;
+
+	//! Used to handle the connection for remote textures.
+	QNetworkReply *networkReply;
 
 	//! The loader object
 	QFuture<QImage>* loader;
