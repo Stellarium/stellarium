@@ -33,9 +33,6 @@ class QThread;
 class StelTextureMgr : QObject
 {
 public:
-	StelTextureMgr();
-	virtual ~StelTextureMgr();
-
 	//! Initialize some variable from the openGL contex.
 	//! Must be called after the creation of the GLContext.
 	void init();
@@ -57,9 +54,6 @@ public:
 private:
 	friend class StelTexture;
 	friend class ImageLoader;
-
-	//! A thread that is used by the TextureLoader object to avoid pausing the main thread too long.
-	QThread* loaderThread;
 };
 
 
