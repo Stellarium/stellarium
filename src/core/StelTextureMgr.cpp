@@ -50,8 +50,6 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		return StelTextureSP();
 
 	tex->loadParams = params;
-	tex->downloaded = true;
-
 	if (tex->glLoad(image))
 		return tex;
 	else
@@ -59,32 +57,14 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 }
 
 
-StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTexture::StelTextureParams& params, const QString& fileExtension, bool lazyLoading)
+StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTexture::StelTextureParams& params, bool lazyLoading)
 {
 	if (url.isEmpty())
 		return StelTextureSP();
 
 	StelTextureSP tex = StelTextureSP(new StelTexture());
 	tex->loadParams = params;
-	if (!url.startsWith("http://"))
-	{
-		// Assume a local file
-		tex->fullPath = url;
-		tex->downloaded = true;
-	}
-	else
-	{
-		tex->fullPath = url;
-		if (fileExtension.isEmpty())
-		{
-			const int idx = url.lastIndexOf('.');
-			if (idx!=-1)
-				tex->fileExtension = url.right(url.size()-idx-1);
-		}
-	}
-	if (!fileExtension.isEmpty())
-		tex->fileExtension = fileExtension;
-
+	tex->fullPath = url;
 	if (!lazyLoading)
 	{
 		tex->bind();

@@ -42,8 +42,7 @@
 #include <QFuture>
 #include <QtConcurrent>
 
-StelTexture::StelTexture() : loader(NULL), downloaded(false),
-				   errorOccured(false), id(0), avgLuminance(-1.f)
+StelTexture::StelTexture() : loader(NULL), errorOccured(false), id(0), avgLuminance(-1.f)
 {
 	width = -1;
 	height = -1;
@@ -87,7 +86,6 @@ void StelTexture::reportError(const QString& aerrorMessage)
 
 bool StelTexture::bind()
 {
-	// qDebug() << "TEST bind" << fullPath;
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
