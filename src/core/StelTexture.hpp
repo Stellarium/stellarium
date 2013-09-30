@@ -29,38 +29,11 @@
 class QFile;
 class StelTextureMgr;
 class QNetworkReply;
+template <class T> class QFuture;
 
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F
 #endif
-
-// This class is just used internally to load the texture data.
-class ImageLoader : QObject
-{
-	Q_OBJECT
-
-private:
-	friend class StelTextureMgr;
-	friend class StelTexture;
-
-	ImageLoader(const QString& path, int delay);
-	void abort();
-
-signals:
-	void finished(QImage);
-	void error(const QString& errorMsg);
-
-public slots:
-	void start();
-
-private slots:
-	void onNetworkReply();
-	void directLoad();
-
-private:
-	QString path;
-	QNetworkReply* networkReply;
-};
 
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
@@ -109,12 +82,7 @@ public:
 	const QString& getFullPath() const {return fullPath;}
 
 	//! Return whether the image is currently being loaded
-	bool isLoading() const {return isLoadingImage && !canBind();}
-
-	//! Load the texture already in the RAM to the openGL memory
-	//! This function uses openGL routines and must be called in the main thread
-	//! @return false if an error occured
-	bool glLoad();
+	bool isLoading() const {return loader && !canBind();}
 
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
@@ -122,12 +90,6 @@ signals:
 	//! In case of error, you can query what the problem was by calling getErrorMessage()
 	//! @param error is equal to true if an error occured while loading the texture
 	void loadingProcessFinished(bool error);
-
-private slots:
-	//! Called by the loader when the data has finished loading
-	void onImageLoaded(QImage image);
-	//! Called by the loader in case of an error
-	void onLoadingError(const QString& errorMessage) {reportError(errorMessage);}
 
 private:
 	friend class StelTextureMgr;
@@ -143,21 +105,24 @@ private:
 	//! @param errorMessage the human friendly error message
 	void reportError(const QString& errorMessage);
 
+	//! static method that is blocking, so should always run in a thread.
+	static QImage load(const QString &path);
+
+	//! Load the texture already in the RAM to the openGL memory
+	//! This function uses openGL routines and must be called in the main thread
+	//! @return false if an error occured
+	bool glLoad(const QImage& image);
+
 	StelTextureParams loadParams;
 
 	//! The loader object
-	ImageLoader* loader;
+	QFuture<QImage>* loader;
 
 	//! Define if the texture was already downloaded if it was a remote one
 	bool downloaded;
-	//! Define whether the image is already loading
-	bool isLoadingImage;
 
 	//! The URL where to download the file
 	QString fullPath;
-
-	//! The data that was loaded from http
-	QImage qImage;
 
 	//! Used ony when creating temporary file
 	QString fileExtension;
