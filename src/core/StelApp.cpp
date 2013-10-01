@@ -72,6 +72,7 @@
 #include <QTimer>
 #include <QDir>
 #include <QCoreApplication>
+#include <QScreen>
 
 Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
 
@@ -175,7 +176,7 @@ StelApp::StelApp(QObject* parent)
 #ifndef DISABLE_SCRIPTING
 	  scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
-	  stelGui(NULL), fps(0),
+	  stelGui(NULL), devicePixelsPerPixel(1.f), fps(0),
 	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 
@@ -328,9 +329,8 @@ void StelApp::init(QSettings* conf)
 {
 	confSettings = conf;
 
-	// Set base font size
-	setFontSize(conf->value("gui/font_size", 9).toInt());
-
+	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
