@@ -77,6 +77,7 @@ Satellites::Satellites()
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
+	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 }
 
 void Satellites::deinit()

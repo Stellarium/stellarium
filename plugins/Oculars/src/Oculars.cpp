@@ -101,6 +101,8 @@ Oculars::Oculars():
 	actionShowTelrad(0),
 	guiPanel(0)
 {
+
+	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 	flagShowCCD = false;
 	flagShowOculars = false;
 	flagShowCrosshairs = false;
