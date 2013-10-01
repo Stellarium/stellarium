@@ -29,6 +29,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
+#include <QOpenGLFunctions_1_2>
 #include <QUrl>
 #include <QVariantMap>
 
@@ -120,7 +121,7 @@ file.
 //! Main class of the %Satellites plugin.
 //! @author Matthew Gates
 //! @author Bogdan Marinov
-class Satellites : public StelObjectModule
+class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
 	Q_PROPERTY(bool hintsVisible
