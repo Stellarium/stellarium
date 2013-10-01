@@ -29,6 +29,7 @@
 #include "Lens.hpp"
 
 #include <QFont>
+#include <QOpenGLFunctions_1_2>
 #include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 0.12
@@ -46,7 +47,7 @@ class StelButton;
 class StelAction;
 
 //! Main class of the Oculars plug-in.
-class Oculars : public StelModule
+class Oculars : public StelModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
 	//BM: Temporary, until the GUI is finalized and some other method of getting
