@@ -28,6 +28,8 @@
 //! @class StelProjector
 //! Provide the main interface to all operations of projecting coordinates from sky to screen.
 //! The StelProjector also defines the viewport size and position.
+//! All positions in pixels are in real device pixels, which is not the same as device independent pixels. On a mac with
+//! retina screen, there are 2 device pixels per pixels.
 //! All methods from this class are threadsafe. The usual usage is to create local instances of StelProjectorP using the
 //! getProjection() method from StelCore where needed.
 //! For performing drawing using a particular projection, refer to the StelPainter class.
@@ -99,7 +101,7 @@ public:
 										viewportCenter(128.f, 128.f),
 										flipHorz(false),
 										flipVert(false),
-										devicePixelRatio(1.0) {;}
+										devicePixelsPerPixel(1.f) {;}
 		Vector4<int> viewportXywh;      //! posX, posY, width, height
 		float fov;                      //! FOV in degrees
 		bool gravityLabels;             //! the flag to use gravity labels or not
@@ -109,7 +111,7 @@ public:
 		Vec2f viewportCenter;           //! Viewport center in screen pixel
 		float viewportFovDiameter;      //! diameter of the FOV disk in pixel
 		bool flipHorz, flipVert;        //! Whether to flip in horizontal or vertical directions
-		float devicePixelRatio;         //! The ratio of screen pixels to logical pixels.
+		float devicePixelsPerPixel;     //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
 	};
 
 	//! Destructor
@@ -168,6 +170,9 @@ public:
 	//! Get the viewport height in pixels.
 	int getViewportHeight() const;
 
+	//! Get the number of device pixels per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens).
+	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction.
 	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction.
@@ -298,7 +303,7 @@ protected:
 	bool gravityLabels;                 // should label text align with the horizon?
 	float defautAngleForGravityText;    // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
-	float devicePixelRatio;             // The ratio of screen pixels to logical pixels.
+	float devicePixelsPerPixel;         // The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
 
 private:
 	//! Initialise the StelProjector from a param instance.

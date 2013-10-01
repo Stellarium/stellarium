@@ -54,8 +54,6 @@ public:
 	//! Get the StelMainView singleton instance.
 	static StelMainView& getInstance() {Q_ASSERT(singleton); return *singleton;}
 
-	static qreal getDevicePixelRatio() { return devicePixelRatio;}
-
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
 	//! Return focus to the sky item.  To be used when we close a dialog.
@@ -114,7 +112,6 @@ protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
 	virtual void wheelEvent(QWheelEvent* wheelEvent);
-	virtual void moveEvent (QMoveEvent * event);
 
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
@@ -138,8 +135,6 @@ private:
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
-
-	static qreal devicePixelRatio;
 
 	//! The openGL window
 	StelQGLWidget* glWidget;

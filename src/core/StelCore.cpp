@@ -77,6 +77,8 @@ StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionT
 	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
 
 	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
+	
+	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 }
 
 

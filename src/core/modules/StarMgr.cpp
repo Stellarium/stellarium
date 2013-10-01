@@ -138,7 +138,7 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;
-	starFont.setPointSize(StelApp::getInstance().getFontSize());
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -317,7 +317,7 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
-	starFont.setPointSize(StelApp::getInstance().getFontSize());
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -1260,7 +1260,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 //! Define font file name and size to use for star names display
 void StarMgr::setFontSize(double newFontSize)
 {
-	starFont.setPointSize(newFontSize);
+	starFont.setPixelSize(newFontSize);
 }
 
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)

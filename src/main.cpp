@@ -283,7 +283,7 @@ int main(int argc, char **argv)
 	if (!fName.isEmpty())
 		QFontDatabase::addApplicationFont(fName);
 	
-	QString fileFont = confSettings->value("gui/font_file", "").toString();
+	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
 	if (!fileFont.isEmpty())
 	{
 		const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
@@ -293,7 +293,7 @@ int main(int argc, char **argv)
 			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont);
 	}
 
-	QString baseFont = confSettings->value("gui/font_name", "DejaVu Sans").toString();
+	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
@@ -303,7 +303,7 @@ int main(int argc, char **argv)
 #else
 	QFont tmpFont(baseFont);
 #endif
-	tmpFont.setPointSize(confSettings->value("gui/font_size", 9).toInt());
+	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
@@ -313,15 +313,11 @@ int main(int argc, char **argv)
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	// some basic diagnostics
-	if (!QGLFormat::hasOpenGL())
-	{
-		qWarning() << "Oops... This system does not support OpenGL.";
-		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
-		app.quit();
-	}
-
 	StelMainView mainWin;
+	// some basic diagnostics
+	if (!QGLFormat::hasOpenGL()){
+	  QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+	}
 
 	qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
 	mainWin.init(confSettings);
@@ -340,6 +336,7 @@ int main(int argc, char **argv)
 	delete(option);
 	delete(value);
 #endif
+
 	return 0;
 }
 
