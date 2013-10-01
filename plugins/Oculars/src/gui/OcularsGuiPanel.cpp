@@ -63,7 +63,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowOcular,
 	                              true); //No background
-	buttonOcular->setToolTip(q_(ocularsPlugin->actionShowOcular->getText()));
+	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->getText());
 	buttonOcular->setParentItem(buttonBar);
 
 	//Hack to avoid buttonOcular being left "checked" if it has been toggled
@@ -80,7 +80,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                  QPixmap(),
 	                                  ocularsPlugin->actionShowCrosshairs,
 	                                  true);
-	buttonCrosshairs->setToolTip(q_(ocularsPlugin->actionShowCrosshairs->getText()));
+	buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->getText());
 	buttonCrosshairs->setVisible(false);
 
 	Q_ASSERT(ocularsPlugin->actionShowSensor);
@@ -90,7 +90,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                           QPixmap(),
 	                           ocularsPlugin->actionShowSensor,
 	                           true);
-	buttonCcd->setToolTip(q_(ocularsPlugin->actionShowSensor->getText()));
+	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->getText());
 
 	Q_ASSERT(ocularsPlugin->actionShowTelrad);
 	buttonTelrad = new StelButton(buttonBar,
@@ -99,7 +99,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowTelrad,
 	                              true);
-	buttonTelrad->setToolTip(q_(ocularsPlugin->actionShowTelrad->getText()));
+	buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->getText());
 
 	Q_ASSERT(ocularsPlugin->actionConfiguration);
 	buttonConfiguration = new StelButton(buttonBar,
@@ -108,7 +108,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                     QPixmap(),
 	                                     ocularsPlugin->actionConfiguration,
 	                                     true);
-	buttonConfiguration->setToolTip(q_(ocularsPlugin->actionConfiguration->getText()));
+	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->getText());
 
 	qreal buttonHeight = buttonOcular->boundingRect().height();
 	buttonBar->setMinimumHeight(buttonHeight);
@@ -144,7 +144,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
 
 	QFont newFont = font();
-	newFont.setPointSize(stelApp.getFontSize());
+	newFont.setPixelSize(12);
 	setControlsFont(newFont);
 	//setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 

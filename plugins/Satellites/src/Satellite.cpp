@@ -69,7 +69,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		return;
 	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 
-	font.setPointSize(round(StelApp::getInstance().getFontSize()*1.23));
+	font.setPixelSize(16);
 
 	id = identifier;
 	name  = map.value("name").toString();
