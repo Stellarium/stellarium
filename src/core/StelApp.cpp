@@ -565,15 +565,22 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 }
 
 // Handle mouse clics
-void StelApp::handleClick(QMouseEvent* event)
+void StelApp::handleClick(QMouseEvent* inputEvent)
 {
-	event->setAccepted(false);
+	inputEvent->setAccepted(false);
+	
+	QMouseEvent event(inputEvent->type(), QPoint(inputEvent->pos().x()/devicePixelsPerPixel, inputEvent->pos().y()/devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	event.setAccepted(false);
+	
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
 	{
-		i->handleMouseClicks(event);
-		if (event->isAccepted())
+		i->handleMouseClicks(&event);
+		if (event.isAccepted())
+		{
+			inputEvent->setAccepted(true);
 			return;
+		}
 	}
 }
 
@@ -585,6 +592,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 	static int delta = 0;
 
 	event->setAccepted(false);
+	
 	if (wheelEventTimer->isActive()) {
 		// Collect the values; we only care about the fianl position values, but we want to accumalate the delta.
 		delta += event->delta();
@@ -595,7 +603,9 @@ void StelApp::handleWheel(QWheelEvent* event)
 		}
 
 		wheelEventTimer->start();
-		QWheelEvent deltaEvent(event->pos(), event->globalPos(), delta, event->buttons(), event->modifiers(), event->orientation());
+		QWheelEvent deltaEvent(QPoint(event->pos().x()/devicePixelsPerPixel, event->pos().y()/devicePixelsPerPixel),
+							   QPoint(event->globalPos().x()/devicePixelsPerPixel, event->globalPos().y()/devicePixelsPerPixel),
+							   delta, event->buttons(), event->modifiers(), event->orientation());
 		deltaEvent.setAccepted(false);
 		// Send the event to every StelModule
 		foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
@@ -616,7 +626,7 @@ void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
-		if (i->handleMouseMoves(x, y, b))
+		if (i->handleMouseMoves(x/devicePixelsPerPixel, y/devicePixelsPerPixel, b))
 			return;
 	}
 }
