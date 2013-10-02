@@ -337,6 +337,26 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="websitesTab">
+      <attribute name="title">
+       <string comment="tab in plugin windows">Websites</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayoutWebsitesBox">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="websitesTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
        <string comment="tab in plugin windows">About</string>
