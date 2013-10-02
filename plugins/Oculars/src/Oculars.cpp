@@ -45,17 +45,12 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QtNetwork>
+#include <QOpenGLFunctions>
 #include <QPixmap>
 #include <QSignalMapper>
 #include <QDir>
 
 #include <cmath>
-
-#ifdef Q_OS_MAC
-#include <OpenGL/glu.h>	/* Header File For The GLU Library */
-#else
-#include <GL/glu.h>	/* Header File For The GLU Library */
-#endif
 
 extern void qt_set_sequence_auto_mnemonic(bool b);
 
@@ -106,6 +101,8 @@ Oculars::Oculars():
 	actionShowTelrad(0),
 	guiPanel(0)
 {
+
+	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 	flagShowCCD = false;
 	flagShowOculars = false;
 	flagShowCrosshairs = false;
