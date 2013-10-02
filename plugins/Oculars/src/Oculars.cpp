@@ -1414,6 +1414,7 @@ void Oculars::paintOcularMask()
 {
 	// XXX: for some reason I cannot get to make the glu functions work when
 	// compiling with Qt5!
+	// XXX: GLU can't work with OpenGL ES --AW
 	/*
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
