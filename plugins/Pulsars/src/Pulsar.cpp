@@ -351,8 +351,7 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 		{
 			if (GETSTELMODULE(Pulsars)->getDisplayMode())
 			{
-				painter.drawSprite2dMode(XYZ, 4);
-				painter.drawText(XYZ, " ", 0, shift, shift, false);
+				painter.drawSprite2dMode(XYZ, 4);				
 			}
 			else
 			{

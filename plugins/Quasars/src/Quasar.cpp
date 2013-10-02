@@ -187,8 +187,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		//size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter.drawSprite2dMode(XYZ, 4);
-			//painter.drawText(XYZ, " ", 0, shift, shift, false);
+			painter.drawSprite2dMode(XYZ, 4);			
 		}
 	}
 	else
