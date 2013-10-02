@@ -503,6 +503,17 @@ void StelApp::update(double deltaTime)
 		timeBase+=1.;
 	}
 
+
+	// Check that the device-independent pixel size didn't change
+	float tmpRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	if (tmpRatio!=devicePixelsPerPixel)
+	{
+		devicePixelsPerPixel = tmpRatio;
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		params.devicePixelsPerPixel = devicePixelsPerPixel;
+		core->setCurrentStelProjectorParams(params);
+	}
+		
 	core->update(deltaTime);
 
 	moduleMgr->update();
