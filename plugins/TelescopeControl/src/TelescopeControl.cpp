@@ -90,6 +90,7 @@ TelescopeControl::TelescopeControl()
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
 {
 	setObjectName("TelescopeControl");
+	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 
 	connectionTypeNames.insert(ConnectionVirtual, "virtual");
 	connectionTypeNames.insert(ConnectionInternal, "internal");
