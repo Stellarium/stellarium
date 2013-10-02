@@ -522,3 +522,4 @@ void StelMainView::doScreenshot(void)
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }
+
