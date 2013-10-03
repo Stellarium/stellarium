@@ -162,6 +162,7 @@ public:
 	//! Get the ratio between real device pixel and "Device Independent Pixel".
 	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
 	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	float setDevicePixelsPerPixel(float dppp);
 	
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}

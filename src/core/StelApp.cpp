@@ -502,17 +502,6 @@ void StelApp::update(double deltaTime)
 		frame = 0;
 		timeBase+=1.;
 	}
-
-
-	// Check that the device-independent pixel size didn't change
-	float tmpRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
-	if (tmpRatio!=devicePixelsPerPixel)
-	{
-		devicePixelsPerPixel = tmpRatio;
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-		params.devicePixelsPerPixel = devicePixelsPerPixel;
-		core->setCurrentStelProjectorParams(params);
-	}
 		
 	core->update(deltaTime);
 
@@ -709,5 +698,17 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 	{
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
+	}
+}
+
+float StelApp::setDevicePixelsPerPixel(float dppp)
+{
+	// Check that the device-independent pixel size didn't change
+	if (devicePixelsPerPixel!=dppp)
+	{
+		devicePixelsPerPixel = dppp;
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		params.devicePixelsPerPixel = devicePixelsPerPixel;
+		core->setCurrentStelProjectorParams(params);
 	}
 }
