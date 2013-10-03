@@ -30,7 +30,6 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
-class StelShortcutMgr;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
