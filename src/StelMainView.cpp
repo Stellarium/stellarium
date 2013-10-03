@@ -302,7 +302,7 @@ void StelMainView::init(QSettings* conf)
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
 	
-	QScreen * screen = glWidget->windowHandle()->screen();
+	QScreen* screen = glWidget->windowHandle()->screen();
 	int width = conf->value("video/screen_w", screen->size().width()).toInt();
 	int height = conf->value("video/screen_h", screen->size().height()).toInt();
 	if (conf->value("video/fullscreen", true).toBool())
@@ -435,6 +435,14 @@ void StelMainView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::wheelEvent(event);
+}
+
+void StelMainView::moveEvent(QMoveEvent * event)
+{
+	Q_UNUSED(event);
+
+	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
+	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
 }
 
 void StelMainView::keyPressEvent(QKeyEvent* event)
