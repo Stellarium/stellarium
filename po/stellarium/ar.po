@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-29 19:43+0700\n"
+"POT-Creation-Date: 2013-10-02 22:16+0700\n"
 "PO-Revision-Date: 2013-09-11 11:51+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-30 04:43+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-03 05:16+0000\n"
+"X-Generator: Launchpad (build 16791)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
@@ -153,7 +153,7 @@ msgstr "كوكب: "
 #: src/core/modules/MinorPlanet.cpp:213 src/core/modules/Comet.cpp:123
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:165
 #: src/core/modules/StarWrapper.cpp:168
-#: plugins/Satellites/src/Satellite.cpp:251
+#: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:123 plugins/Quasars/src/Quasar.cpp:94
 #: plugins/Pulsars/src/Pulsar.cpp:128
 #, qt-format
@@ -163,7 +163,7 @@ msgstr "‎النوع:‎ <b>%1</b>"
 #: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:130
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:129
 #: plugins/Supernovae/src/Supernova.cpp:128 plugins/Novae/src/Nova.cpp:131
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:157
+#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:163
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
@@ -171,7 +171,7 @@ msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:133
 #: src/core/modules/MinorPlanet.cpp:222 src/core/modules/Comet.cpp:132
 #: plugins/Supernovae/src/Supernova.cpp:131 plugins/Novae/src/Nova.cpp:134
-#: plugins/Quasars/src/Quasar.cpp:120 plugins/Exoplanets/src/Exoplanet.cpp:162
+#: plugins/Quasars/src/Quasar.cpp:120 plugins/Exoplanets/src/Exoplanet.cpp:168
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "‎القدر:‎ <b>%1</b>"
@@ -387,14 +387,14 @@ msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "‎نطاق قدر اللمعان:‎ <b>%1</b>%2<b>%3/%4</b> (‎النظام الفوتومتري:‎%5)"
 
 #: src/core/modules/StarWrapper.cpp:209
-#: plugins/Exoplanets/src/Exoplanet.cpp:172
+#: plugins/Exoplanets/src/Exoplanet.cpp:178
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "‎النوع الطيفي:‎ %1"
 
 #: src/core/modules/StarWrapper.cpp:213
 #: plugins/Supernovae/src/Supernova.cpp:142 plugins/Novae/src/Nova.cpp:144
-#: plugins/Exoplanets/src/Exoplanet.cpp:177
+#: plugins/Exoplanets/src/Exoplanet.cpp:183
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "‎المسافة‎: %1 سنة ضوئية"
@@ -1133,7 +1133,7 @@ msgstr "<P DIR=RTL>للمراسلة"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:119
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
 msgstr "<P DIR=RTL><b>المؤلف</b>"
@@ -1660,12 +1660,12 @@ msgstr "where"
 msgid "year"
 msgstr "السنة"
 
-#: src/main.cpp:323
+#: src/main.cpp:320
 msgid "This system does not support OpenGL."
 msgstr "(OpenGL)هذا النظام لا يدعم مكتبة الرسومات المفتوحة"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:188
-#: plugins/Exoplanets/src/Exoplanet.cpp:192
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
 msgid "Sun"
 msgstr "الشمس"
 
@@ -3945,8 +3945,8 @@ msgstr "أظهر جميع المعلومات"
 msgid "Display no information"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:999 plugins/Oculars/src/Oculars.cpp:1842
-#: plugins/Observability/src/Observability.cpp:232
+#: src/ui_configurationDialog.h:999 plugins/Oculars/src/Oculars.cpp:1840
+#: plugins/Observability/src/Observability.cpp:231
 msgid "None"
 msgstr "لاتظهر أي معلومات"
 
@@ -4439,52 +4439,52 @@ msgstr "ضمِّن المسار"
 msgid "..."
 msgstr "..."
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:120
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:56
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:119
 msgid "Angle Measure"
 msgstr "قياس البعد الزاوي"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
 msgid "Provides an angle measurement tool"
 msgstr "<p dir=rtl>أداة لقياس البعد الزاوي"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:120
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:119
 msgid "Angle measure"
 msgstr "قياس البعد الزاوي"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:311
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "The Angle Measure is enabled:"
 msgstr "أداة قياس البعد الزاوي مفعّلة الآن:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:313
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "للقياس، اسحب بزر الفأرة الأيسر، وللمسح انقر الزر الأيسر"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:315
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:314
 msgid "Right-clicking changes the end point only."
 msgstr "النقر بالزر الأيمن يغيّر نقطة النهاية فقط."
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:56
+#: plugins/CompassMarks/src/CompassMarks.cpp:55
 msgid "Compass Marks"
 msgstr "درجات البوصلة"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:59
+#: plugins/CompassMarks/src/CompassMarks.cpp:58
 msgid "Displays compass bearing marks along the horizon"
 msgstr "<p dir=rtl>يعرض درجات البوصلة بموازاة الأفق"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:123
+#: plugins/CompassMarks/src/CompassMarks.cpp:122
 msgid "Compass marks"
 msgstr "درجات البوصلة"
 
-#: plugins/Oculars/src/Oculars.cpp:84
+#: plugins/Oculars/src/Oculars.cpp:79
 #: plugins/Oculars/src/ui_ocularDialog.h:1026
 msgid "Oculars"
 msgstr "العدسة العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:87
+#: plugins/Oculars/src/Oculars.cpp:82
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
@@ -4494,205 +4494,205 @@ msgstr ""
 "(المحاكاة هي للتكبير وحقل الرؤية فقط.) ويمكن أيضاً محاكاة إطار مستشعر "
 "الكاميرا ومنظر التوجيه من خلال أداة Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:791
+#: plugins/Oculars/src/Oculars.cpp:788
 msgid "Please select an object before switching to ocular view."
 msgstr "الرجاء اختيار جرم قبل التحول إلى المنظر عبر العدسة العينية."
 
-#: plugins/Oculars/src/Oculars.cpp:887
+#: plugins/Oculars/src/Oculars.cpp:884
 msgid "&Previous ocular"
 msgstr "&العدسة السابقة"
 
-#: plugins/Oculars/src/Oculars.cpp:888
+#: plugins/Oculars/src/Oculars.cpp:885
 msgid "&Next ocular"
 msgstr "&العدسة التالية"
 
-#: plugins/Oculars/src/Oculars.cpp:889
+#: plugins/Oculars/src/Oculars.cpp:886
 msgid "Select &ocular"
 msgstr "اختر &العدسة"
 
-#: plugins/Oculars/src/Oculars.cpp:936
+#: plugins/Oculars/src/Oculars.cpp:933
 msgid "Toggle &crosshair"
 msgstr "أظهار الشعرتين"
 
-#: plugins/Oculars/src/Oculars.cpp:945
+#: plugins/Oculars/src/Oculars.cpp:942
 msgid "Configure &Oculars"
 msgstr "إعدادات العدسات العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:954
+#: plugins/Oculars/src/Oculars.cpp:951
 msgid "Toggle &CCD"
 msgstr "إظهار إطار مستشعر الكاميرا"
 
-#: plugins/Oculars/src/Oculars.cpp:962
+#: plugins/Oculars/src/Oculars.cpp:959
 msgid "Toggle &Telrad"
 msgstr "إظهار دوائر التلراد"
 
-#: plugins/Oculars/src/Oculars.cpp:972
+#: plugins/Oculars/src/Oculars.cpp:969
 msgid "&Previous CCD"
 msgstr "&المستشعر السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:973
+#: plugins/Oculars/src/Oculars.cpp:970
 msgid "&Next CCD"
 msgstr "&المستشعر التالي"
 
-#: plugins/Oculars/src/Oculars.cpp:974
+#: plugins/Oculars/src/Oculars.cpp:971
 msgid "&Select CCD"
 msgstr "&اختر المستشعر"
 
-#: plugins/Oculars/src/Oculars.cpp:996
+#: plugins/Oculars/src/Oculars.cpp:993
 msgid "&Rotate CCD"
 msgstr "تدوير المستشعر"
 
-#: plugins/Oculars/src/Oculars.cpp:1028
+#: plugins/Oculars/src/Oculars.cpp:1025
 msgid "&Reset rotation"
 msgstr "&إعادة التدوير للوضع الأصلي"
 
-#: plugins/Oculars/src/Oculars.cpp:1269
+#: plugins/Oculars/src/Oculars.cpp:1266
 #: plugins/Oculars/src/ui_ocularDialog.h:1028
 msgid "Ocular view"
 msgstr "منظر العدسة العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:1286
+#: plugins/Oculars/src/Oculars.cpp:1283
 msgid "Oculars popup menu"
 msgstr "القائمة المنبثقة للعدسات"
 
-#: plugins/Oculars/src/Oculars.cpp:1287
+#: plugins/Oculars/src/Oculars.cpp:1284
 msgid "Show crosshairs"
 msgstr "أظهر الشعرتين المتقاطعتين"
 
-#: plugins/Oculars/src/Oculars.cpp:1288
+#: plugins/Oculars/src/Oculars.cpp:1285
 msgid "Image sensor frame"
 msgstr "إطار مستشعر الصورة"
 
-#: plugins/Oculars/src/Oculars.cpp:1289
+#: plugins/Oculars/src/Oculars.cpp:1286
 msgid "Telrad sight"
 msgstr "دوائر أداة تلراد للتوجيه"
 
-#: plugins/Oculars/src/Oculars.cpp:1290
+#: plugins/Oculars/src/Oculars.cpp:1287
 msgid "Oculars plugin configuration"
 msgstr "إعدادات ميزة العدسات العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:1292
+#: plugins/Oculars/src/Oculars.cpp:1289
 msgid "Select next telescope"
 msgstr "اختر التلسكوب التالي"
 
-#: plugins/Oculars/src/Oculars.cpp:1294
+#: plugins/Oculars/src/Oculars.cpp:1291
 msgid "Select previous telescope"
 msgstr "اختر التلسكوب السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:1296
+#: plugins/Oculars/src/Oculars.cpp:1293
 msgid "Select next eyepiece"
 msgstr "اختر العدسة العينية التالية"
 
-#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/Oculars.cpp:1295
 msgid "Select previous eyepiece"
 msgstr "اختر العدسة العينية السابقة"
 
-#: plugins/Oculars/src/Oculars.cpp:1486
+#: plugins/Oculars/src/Oculars.cpp:1484
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:499
 #, qt-format
 msgid "Ocular #%1"
 msgstr "العدسة العينية #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1491
+#: plugins/Oculars/src/Oculars.cpp:1489
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "العدسة العينية #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1505
+#: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:540
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "طول العدسة البؤري: %1 مم"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1512
+#: plugins/Oculars/src/Oculars.cpp:1510
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "حقل الرؤية الظاهري للعدسة: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/Oculars.cpp:1522
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
 #, qt-format
 msgid "Lens #%1"
 msgstr "العدسة #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1528
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "العدسة #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1533
+#: plugins/Oculars/src/Oculars.cpp:1531
 msgid "Lens: none"
 msgstr "العدسة: لايوجد"
 
-#: plugins/Oculars/src/Oculars.cpp:1543 plugins/Oculars/src/Oculars.cpp:1600
+#: plugins/Oculars/src/Oculars.cpp:1541 plugins/Oculars/src/Oculars.cpp:1598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Telescope #%1"
 msgstr "التلسكوب #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1548 plugins/Oculars/src/Oculars.cpp:1605
+#: plugins/Oculars/src/Oculars.cpp:1546 plugins/Oculars/src/Oculars.cpp:1603
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "التلسكوب #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1559
+#: plugins/Oculars/src/Oculars.cpp:1557
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 #, qt-format
 msgid "Magnification: %1"
 msgstr "التكبير: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1567
+#: plugins/Oculars/src/Oculars.cpp:1565
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 #, qt-format
 msgid "FOV: %1"
 msgstr "حقل الرؤية: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1577
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:779
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "الأبعاد: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1582
+#: plugins/Oculars/src/Oculars.cpp:1580
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:642
 #, qt-format
 msgid "Sensor #%1"
 msgstr "المستشعر #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1586
+#: plugins/Oculars/src/Oculars.cpp:1584
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "المستشعر #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1838
+#: plugins/Oculars/src/Oculars.cpp:1836
 msgid "&Lens"
 msgstr "&العدسة"
 
-#: plugins/Oculars/src/Oculars.cpp:1839
+#: plugins/Oculars/src/Oculars.cpp:1837
 msgid "&Previous lens"
 msgstr "&العدسة السابقة"
 
-#: plugins/Oculars/src/Oculars.cpp:1840
+#: plugins/Oculars/src/Oculars.cpp:1838
 msgid "&Next lens"
 msgstr "&العدسة التالية"
 
-#: plugins/Oculars/src/Oculars.cpp:1870
+#: plugins/Oculars/src/Oculars.cpp:1868
 msgid "&Telescope"
 msgstr "&التلسكوب"
 
-#: plugins/Oculars/src/Oculars.cpp:1871
+#: plugins/Oculars/src/Oculars.cpp:1869
 msgid "&Previous telescope"
 msgstr "&التلسكوب السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:1872
+#: plugins/Oculars/src/Oculars.cpp:1870
 msgid "&Next telescope"
 msgstr "&التلسكوب التالي"
 
@@ -4814,7 +4814,7 @@ msgstr "<P DIR=RTL>إضافة العدسة العينية"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:113
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:121
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
 msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
@@ -5067,18 +5067,18 @@ msgstr "قلب المشهد رأسياً"
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "عن"
 
-#: plugins/Satellites/src/Satellites.cpp:67
+#: plugins/Satellites/src/Satellites.cpp:66
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "Satellites"
 msgstr "الأقمار الصناعية"
 
-#: plugins/Satellites/src/Satellites.cpp:70
+#: plugins/Satellites/src/Satellites.cpp:69
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
@@ -5166,72 +5166,72 @@ msgstr "تلسكوب هابل"
 msgid "The International Space Station"
 msgstr "المحطة الفضائية الدولية"
 
-#: plugins/Satellites/src/Satellite.cpp:238
-#: plugins/Satellites/src/Satellite.cpp:242
+#: plugins/Satellites/src/Satellite.cpp:239
+#: plugins/Satellites/src/Satellite.cpp:243
 msgid "Catalog #"
 msgstr "‎رقم الدليل‎"
 
-#: plugins/Satellites/src/Satellite.cpp:244
+#: plugins/Satellites/src/Satellite.cpp:245
 msgid "International Designator"
 msgstr "‎التصنيف العالمي‎"
 
-#: plugins/Satellites/src/Satellite.cpp:251
+#: plugins/Satellites/src/Satellite.cpp:252
 msgid "artificial satellite"
 msgstr "قمر صناعي"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:261
+#: plugins/Satellites/src/Satellite.cpp:262
 #, qt-format
 msgid "Range (km): %1"
 msgstr "‎البعد عن الراصد بالكيلومترات: ‎%1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:264
+#: plugins/Satellites/src/Satellite.cpp:265
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "‎معدل تغير السرعة كم/ث: ‎%1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:267
+#: plugins/Satellites/src/Satellite.cpp:268
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "‎الارتفاع بالكيلومتر: ‎%1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "‎ إحداثيات الموقع الأرضي تحت القمر مباشرة - الطول/العرض: ‎%1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:284
+#: plugins/Satellites/src/Satellite.cpp:285
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "‎TEME الإحداثيات بالكيلومتر حسب: ‎%1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:292
+#: plugins/Satellites/src/Satellite.cpp:293
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "‎TEME السرعة كم/ث حسب:‎%1"
 
-#: plugins/Satellites/src/Satellite.cpp:300
+#: plugins/Satellites/src/Satellite.cpp:301
 msgid "The satellite and the observer are in sunlight."
 msgstr "القمر الصناعي والراصد في ضوء الشمس"
 
-#: plugins/Satellites/src/Satellite.cpp:303
+#: plugins/Satellites/src/Satellite.cpp:304
 msgid "The satellite is visible."
 msgstr "القمر الصناعي ممكن أن يرى"
 
-#: plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:307
 msgid "The satellite is eclipsed."
 msgstr "القمر الصناعي في ظل الأرض"
 
-#: plugins/Satellites/src/Satellite.cpp:309
+#: plugins/Satellites/src/Satellite.cpp:310
 msgid "The satellite is not visible"
 msgstr "القمر الصناعي لايمكن رؤيته"
 
-#: plugins/Satellites/src/Satellite.cpp:335
+#: plugins/Satellites/src/Satellite.cpp:336
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 ‎ميجا هرتز ‎(%2%3 ‎كيلوهرتز ‎)"
@@ -5378,7 +5378,7 @@ msgstr "<P DIR=RTL>انظر %1هذه الوثيقة%2 للتفاصيل."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:123
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:127
 msgid "Links"
 msgstr "<P DIR=RTL>روابط"
 
@@ -5387,7 +5387,7 @@ msgstr "<P DIR=RTL>روابط"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5402,7 +5402,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:127
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول على جواب هنا%2"
@@ -5413,7 +5413,7 @@ msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول ع�
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج %1هنا%2."
@@ -5424,7 +5424,7 @@ msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -5437,7 +5437,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Internet updates disabled"
 msgstr "التحديث عبر الإنترنت غير مفعَّل"
 
@@ -5451,8 +5451,8 @@ msgstr "التحديث عبر الإنترنت غير مفعَّل"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:218
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "Updating now..."
 msgstr "التحديث يتم حالياً..."
 
@@ -5461,7 +5461,7 @@ msgstr "التحديث يتم حالياً..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:151
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Next update: < 1 minute"
 msgstr "التحديث التالي: أقل من دقيقة"
 
@@ -5470,7 +5470,7 @@ msgstr "التحديث التالي: أقل من دقيقة"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "التحديث التالي: %1 دقيقة"
@@ -5480,7 +5480,7 @@ msgstr "التحديث التالي: %1 دقيقة"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:155
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "التحديث التالي: %1 ساعة"
@@ -5490,7 +5490,7 @@ msgstr "التحديث التالي: %1 ساعة"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:186
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:207
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:221
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "Update error"
 msgstr "حصل خطأ في التحديث"
 
@@ -5518,8 +5518,8 @@ msgstr "[مصدر جديد]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:265
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:289
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgid "Update now"
 msgstr "حدِّث البيانات الآن"
 
@@ -5528,7 +5528,7 @@ msgstr "حدِّث البيانات الآن"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:174
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:177
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid "Update from files"
 msgstr "حدِّث من الملفات"
 
@@ -5609,7 +5609,7 @@ msgstr "حدث بيانات الأقمار الصناعية من مصادر شب
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:286
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
 msgid "Last update:"
 msgstr "آخر تحديث"
 
@@ -5626,7 +5626,7 @@ msgstr ""
 "التحديث"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:681
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:287
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Update frequency (hours):"
 msgstr "حدِّث البيانات كل (ساعة)"
 
@@ -5674,7 +5674,7 @@ msgstr "طول نهاية الخط"
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:273
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
 #: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Restore default settings"
 msgstr "استرجع الإعدادات الأصلية"
@@ -5684,7 +5684,7 @@ msgstr "استرجع الإعدادات الأصلية"
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 #: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Save settings as default"
 msgstr "احفظ الإعدادات الحالية كإفتراضية"
@@ -5694,7 +5694,7 @@ msgstr "احفظ الإعدادات الحالية كإفتراضية"
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:275
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Settings"
 msgstr "الضبط"
@@ -5814,13 +5814,13 @@ msgstr "ألغ تحديد كل الأجرام"
 msgid "Discard"
 msgstr "أهمل هذه القائمة"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:79
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:160
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:175
 msgid "Telescope Control"
 msgstr "التحكم بالمقراب (التلسكوب)‏"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:82
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:81
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
@@ -6237,62 +6237,62 @@ msgstr ""
 "الشريط السفلي."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "January"
 msgstr "يناير"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "February"
 msgstr "فبراير"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "March"
 msgstr "مارس"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "April"
 msgstr "إبريل"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "May"
 msgstr "مايو"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "June"
 msgstr "يونية"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "July"
 msgstr "يولية"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "August"
 msgstr "أغسطس"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "September"
 msgstr "سبتمبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "October"
 msgstr "أكتوبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "November"
 msgstr "نوفمبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:706
 msgid "December"
 msgstr "ديسمبر"
 
@@ -6868,18 +6868,18 @@ msgstr "MPC استورد العناصر المدارية حسب تنسيق"
 msgid "Solar System"
 msgstr "النظام الشمسي"
 
-#: plugins/Supernovae/src/Supernovae.cpp:72
-#: plugins/Supernovae/src/Supernovae.cpp:142
+#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:141
 msgid "Historical Supernovae"
 msgstr "المستعرات الموثقة تاريخياً"
 
-#: plugins/Supernovae/src/Supernovae.cpp:75
+#: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
 "<P DIR=RTL>هذه الإضافة تتيح لك الاطلاع على بعض المستعرات العظمى اللامعة "
 "الموثقة تاريخياً."
 
-#: plugins/Supernovae/src/Supernovae.cpp:142
+#: plugins/Supernovae/src/Supernovae.cpp:141
 msgid "Historical Supernovae configuration window"
 msgstr "نافذة إعدادات المستعرات الموثقة تاريخياً"
 
@@ -6997,7 +6997,7 @@ msgstr "حدّث الدليل من الإنترنت"
 #: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:285
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
 msgid "Update from Internet sources"
 msgstr "حدِّث من مصادر الإنترنت"
 
@@ -7012,19 +7012,19 @@ msgstr "حدّث كل (بالأيام)"
 #: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:288
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "[next update info]"
 msgstr "[معلومات التحديث القادم]"
 
-#: plugins/Novae/src/Novae.cpp:73 plugins/Novae/src/Novae.cpp:137
+#: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:136
 msgid "Bright Novae"
 msgstr "المستعرات اللامعة"
 
-#: plugins/Novae/src/Novae.cpp:76 plugins/Novae/src/gui/NovaeDialog.cpp:110
+#: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:110
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "<P DIR=RTL>إضافة تعرض بعض المستعرات اللامعة في مجرة درب التبانة."
 
-#: plugins/Novae/src/Novae.cpp:137
+#: plugins/Novae/src/Novae.cpp:136
 msgid "Bright Novae configuration window"
 msgstr "نافذة إعدادات المستعرات اللامعة"
 
@@ -7096,12 +7096,12 @@ msgstr "إعدادات المستعرات اللامعة"
 msgid "Bright Novae Plug-in Configuration"
 msgstr "إعدادات إضافة المستعرات اللامعة"
 
-#: plugins/Quasars/src/Quasars.cpp:72 plugins/Quasars/src/Quasars.cpp:159
-#: plugins/Quasars/src/Quasars.cpp:160
+#: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:158
+#: plugins/Quasars/src/Quasars.cpp:159
 msgid "Quasars"
 msgstr "الكوازارات"
 
-#: plugins/Quasars/src/Quasars.cpp:75
+#: plugins/Quasars/src/Quasars.cpp:74
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
@@ -7111,11 +7111,11 @@ msgstr ""
 "ويحوي مجموعة من الكوزرات مصدرها الطبعة الثالثة عشرة من كتاب 'Quasars and "
 "Active Galactic Nuclei'' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:158
 msgid "Show quasars"
 msgstr "أظهر الكوازارات"
 
-#: plugins/Quasars/src/Quasars.cpp:160
+#: plugins/Quasars/src/Quasars.cpp:159
 msgid "Quasars configuration window"
 msgstr "نافذة إعدادات الكوازارات"
 
@@ -7172,7 +7172,7 @@ msgstr "فعِّل عرض توزيع الكوازارات"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:299
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
 msgid "Enable display at startup"
 msgstr "فعِّل العرض وقت بدء البرنامج"
 
@@ -7180,12 +7180,12 @@ msgstr "فعِّل العرض وقت بدء البرنامج"
 msgid "Show quasars button on toolbar"
 msgstr "أظهر زر الكوازارات على شريط المهام"
 
-#: plugins/Pulsars/src/Pulsars.cpp:72 plugins/Pulsars/src/Pulsars.cpp:159
-#: plugins/Pulsars/src/Pulsars.cpp:160
+#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:158
+#: plugins/Pulsars/src/Pulsars.cpp:159
 msgid "Pulsars"
 msgstr "النجوم النابضة"
 
-#: plugins/Pulsars/src/Pulsars.cpp:75
+#: plugins/Pulsars/src/Pulsars.cpp:74
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:117
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
@@ -7194,11 +7194,11 @@ msgstr ""
 "<P DIR=RTL>هذا التطبيق الإضافي يرسم مواقع العديد من النجوم النابضة "
 "(pulsars)، مع معلومات عن كل واحد منها."
 
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:158
 msgid "Show pulsars"
 msgstr "أظهر النجوم النابضة"
 
-#: plugins/Pulsars/src/Pulsars.cpp:160
+#: plugins/Pulsars/src/Pulsars.cpp:159
 msgid "Pulsars configuration window"
 msgstr "نافذة إعدادات النجوم النابضة"
 
@@ -7396,13 +7396,13 @@ msgstr "فعّل عرض توزيع النجوم النابضة"
 msgid "Show pulsars button on toolbar"
 msgstr "أظهر زر النجوم النابضة على شريط المهام"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:74
+#: plugins/Exoplanets/src/Exoplanets.cpp:73
+#: plugins/Exoplanets/src/Exoplanets.cpp:162
 #: plugins/Exoplanets/src/Exoplanets.cpp:163
-#: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets"
 msgstr "الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:77
+#: plugins/Exoplanets/src/Exoplanets.cpp:76
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
@@ -7411,79 +7411,93 @@ msgstr ""
 "بيانات الكواكب الخارجية مشتقة من موسوعة الكواكب خارج المجموعة الشمسية على "
 "موقع exoplanet.eu"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:162
 msgid "Show exoplanets"
 msgstr "أظهر الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:164
+#: plugins/Exoplanets/src/Exoplanets.cpp:163
 msgid "Exoplanets configuration window"
 msgstr "نافذة إعدادات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:184
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
 msgid "Metallicity"
 msgstr "مقدار المعدنية"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:188
-#: plugins/Exoplanets/src/Exoplanet.cpp:204
+#: plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Exoplanets/src/Exoplanet.cpp:210
 msgid "Mass"
 msgstr "الكتلة"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:192
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "Radius"
 msgstr "نصف القطر"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:196
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "‎الحرارة الفعلية: ‎%1‎ كلفن"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#: plugins/Exoplanets/src/Exoplanet.cpp:208
 msgid "Exoplanet"
 msgstr "كوكب خارجي"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:209
 msgid "Period"
 msgstr "الفترة"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:209
 msgid "days"
 msgstr "أيّام"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:204
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "Jup"
 msgstr "المشتري"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Semi-Major Axis"
 msgstr "نصف المحور الأكبر"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "AU"
 msgstr "وحدة فلكية"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Eccentricity"
 msgstr "الشذوذ المداري"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "Inclination"
 msgstr "الميل"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Angle Distance"
 msgstr "البعد الزاوي"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Discovered year"
 msgstr "سنة الاكتشاف"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:117
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+msgid "Habitable class"
+msgstr ""
+
+#. TRANSLATORS: Full phrase is "Mean Surface Temperature"
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
+msgid "Mean surface temp."
+msgstr ""
+
+#. TRANSLATORS: ESI = Earth Similarity Index
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
+msgid "ESI"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
 msgstr "<P DIR=RTL>تطبيق الكواكب الخارجية الإضافي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:121
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -7492,8 +7506,16 @@ msgstr ""
 "<P DIR=RTL>هذا التطبيق يرسم مواقع النجوم التي اكتشف لها كواكب. بيانات "
 "الكواكب الخارجية مشتقة من \"%1موسوعة الكواكب خارج المجموعة الشمسية%2\""
 
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:125
+#, qt-format
+msgid ""
+"List of potential habitable exoplanets and data about them were taken from "
+"\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
+"Laboratory%3."
+msgstr ""
+
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #, qt-format
 msgid ""
 "If you want read full information about plugin, his history and format of "
@@ -7502,143 +7524,195 @@ msgstr ""
 "<P DIR=RTL>تستطيع الحصول غلى معلومات كاملة عن هذا التطبيق الإضافي وتاريخه "
 "وتنسيق بيانات الدليل %1هنا%2."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
+msgid "Potential habitable exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+msgid ""
+"This plugin can display potential habitable exoplanets (orange marker) and "
+"some information about those planets - habitable class, mean surface "
+"temperature and Earth Similarity Index."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+msgid "Habitable Class"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+msgid ""
+"Classifies habitable planets based on temperature: hypopsychroplanets (O or "
+"hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
+"medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
+"or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
+"life, whereas class O or E would only support extremophilic life. Non-"
+"habitable planets are simply given the class X (or NH)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+msgid "Mean Surface Temperature"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+msgid ""
+"Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
+"ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
+"0.3 in all cases)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+msgid "Earth Similarity Index (ESI)"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+msgid ""
+"Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
+"like. ESI depends on the planet's radius, density, escape velocity, and "
+"surface temperature."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "مواقع الإنترنت المتخصصة ذات العلاقة بالكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanets: نسخة تفاعلية من XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
 "HEK  اختصار The Hunt for Exomoons with Kepler - اقتناص الأقمار الخارجية "
 "بواسطة كبلر"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
 "الكواكب الخارجية في النظم الشمسية الثنائية والمتعددة (ريتشارد شوارتز)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Naming exoplanets (IAU)"
 msgstr "تسمية الكواكب الخارجية (الاتحاد الفلكي العالمي)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "بعض الفلكيين والمجموعات النشطة في دراسات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "update: 16 April 2012"
 msgstr "التحديث: 16 إبريل 2012 م"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "The Exoplanet Data Explorer"
 msgstr "مستكشف بيانات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "The Anglo-Australian Planet Search"
 msgstr "عملية البحث الإنجليزية-الاسترالية عن الكواكب"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "برامج جنيف للبحث عن الكواكب خارج النظام الشمسي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN  اختصار Optical Long-Baseline Interferometry News"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "برنامج ناسا لاستكشاف الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Pulsar planets"
 msgstr "كواكب النجوم النابضة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "The NASA Exoplanet Archive"
 msgstr "أرشيف ناسا للكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "IAU Comission 53: Extrasolar Planets"
 msgstr ""
 "IAU Comission 53: لجنة عمل رقم 53 في الاتحاد العالمي الفلكي المتخصصة "
 "بالكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "ExoMol"
 msgstr ""
 "ExoMol - قاعدة بيانات للجزيئات الصالحة للتصنيف الطيفي ومحاكاة الغلاف الجوي "
 "للكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "The Habitable Zone Gallery"
 msgstr "معرض المنطقة القابلة للعيش"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest  - البحث عن كوكب مشابه للأرض"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Open Exoplanet Catalogue"
 msgstr "الدليل المفتوح للكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "The Habitable Exoplanets Catalog"
 msgstr "دليل الكواكب الخارجية القابلة للحياة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Exoplanets is updated"
 msgstr "الكواكب الخارجية تم تحديثها"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:281
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
 msgid "Exoplanets Configuration"
 msgstr "إعدادات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:282
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
 msgid "Exoplanets Plug-in Configuration"
 msgstr "إعدادات تطبيق الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:284
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
 msgid "Update exoplanets data from Internet"
 msgstr "حدّث بيانات الكواكب الخارجية من الإنترنت"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:290
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Settings for exoplanets"
 msgstr "إعدادات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:292
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
 msgid "Plot all systems with exoplanets without labels"
 msgstr "ارسم جميع النظم الشمسية من دون الأسماء"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:294
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
 msgid "Enable display of distribution for exoplanets"
 msgstr "فعِّل عرض توزيع الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:296
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Display exoplanets since their discovery"
 msgstr "اعرض الكواكب الخارجية من وقت اكتشافها"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Enable timeline discovery of exoplanets"
 msgstr "فعِّل التسلسل التاريخي لاكتشاف الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Show exoplanets button on toolbar"
 msgstr "أظهر زر الكواكب الخارجية على شريط المهام"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgctxt "tab in plugin windows"
 msgid "Info"
 msgstr "معلومات"
 
-#: plugins/Observability/src/Observability.cpp:67
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
+msgctxt "tab in plugin windows"
+msgid "Websites"
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
 msgstr "بيانات الرصد"
 
-#: plugins/Observability/src/Observability.cpp:70
+#: plugins/Observability/src/Observability.cpp:69
 msgid ""
 "Reports an analysis of source observability (rise, set, and transit times), "
 "as well as the epochs of year when the source is best observed. It assumes "
@@ -7656,190 +7730,190 @@ msgstr ""
 "الشمس. تجد شرحاً للمعلومات التي يظهرها هذا التطبيق تحت علامة التبويب - عن - "
 "في نافذة الإعدادات."
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Jan"
 msgstr "يناير"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Feb"
 msgstr "فبراير"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Mar"
 msgstr "مارس"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Apr"
 msgstr "إبريل"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "May"
 msgstr "مايو"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Jun"
 msgstr "يونيه"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Jul"
 msgstr "يوليه"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Aug"
 msgstr "أغسطس"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Sep"
 msgstr "سبتمبر"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Oct"
 msgstr "أكتوبر"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Nov"
 msgstr "نوفمبر"
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
 msgid "Dec"
 msgstr "ديسمبر"
 
-#: plugins/Observability/src/Observability.cpp:216
+#: plugins/Observability/src/Observability.cpp:215
 msgid "h"
 msgstr "س"
 
-#: plugins/Observability/src/Observability.cpp:217
+#: plugins/Observability/src/Observability.cpp:216
 msgid "m"
 msgstr "د"
 
-#: plugins/Observability/src/Observability.cpp:218
+#: plugins/Observability/src/Observability.cpp:217
 msgid "s"
 msgstr "ث"
 
-#: plugins/Observability/src/Observability.cpp:219
+#: plugins/Observability/src/Observability.cpp:218
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "يغيب الساعة %1 (بعد %2)"
 
-#: plugins/Observability/src/Observability.cpp:220
+#: plugins/Observability/src/Observability.cpp:219
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "طلع الساعة %1 (منذ %2)"
 
-#: plugins/Observability/src/Observability.cpp:221
+#: plugins/Observability/src/Observability.cpp:220
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "غاب الساعة %1 (منذ %2)"
 
-#: plugins/Observability/src/Observability.cpp:222
+#: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "يطلع الساعة %1 (بعد %2)"
 
-#: plugins/Observability/src/Observability.cpp:223
+#: plugins/Observability/src/Observability.cpp:222
 msgid "Circumpolar."
 msgstr "أبدي الظهور"
 
-#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:223
 msgid "No rise."
 msgstr "لايطلع أبداً"
 
-#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:224
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "يتوسط الساعة %1 (بعد %2) على ارتفاع %3 درجة"
 
-#: plugins/Observability/src/Observability.cpp:226
+#: plugins/Observability/src/Observability.cpp:225
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "توسط الساعة %1 (منذ %2) على ارتفاع %3 درجة"
 
-#: plugins/Observability/src/Observability.cpp:227
+#: plugins/Observability/src/Observability.cpp:226
 msgid "Source is not observable."
 msgstr "لايمكن رصد هذا الجرم"
 
-#: plugins/Observability/src/Observability.cpp:228
+#: plugins/Observability/src/Observability.cpp:227
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "لايوجد للجرم طلوع وغياب موافق للشمس ولا مقابل للشمس"
 
-#: plugins/Observability/src/Observability.cpp:229
+#: plugins/Observability/src/Observability.cpp:228
 msgid "Greatest elongation: "
 msgstr "‏الاستطالة العظمى:‏ "
 
-#: plugins/Observability/src/Observability.cpp:230
+#: plugins/Observability/src/Observability.cpp:229
 msgid "Largest Sun separation: "
 msgstr "‏البعد الزاوي الأعظم عن الشمس:‏ "
 
-#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:230
 #, qt-format
 msgid " (at %1 deg.)"
 msgstr " ‎(زاوية %1 درجة)"
 
-#: plugins/Observability/src/Observability.cpp:233
+#: plugins/Observability/src/Observability.cpp:232
 msgid "Acronychal rise/set"
 msgstr "‏الطلوع والغياب المقابل للشمس‏"
 
-#: plugins/Observability/src/Observability.cpp:234
+#: plugins/Observability/src/Observability.cpp:233
 msgid "No Acronychal rise/set."
 msgstr "لايوجد طلوع وغياب مقابل للشمس"
 
-#: plugins/Observability/src/Observability.cpp:235
+#: plugins/Observability/src/Observability.cpp:234
 msgid "Cosmical rise/set"
 msgstr "‏الطلوع والغياب الموافق للشمس‏"
 
-#: plugins/Observability/src/Observability.cpp:236
+#: plugins/Observability/src/Observability.cpp:235
 msgid "No Cosmical rise/set."
 msgstr "لايوجد طلوع أو غياب موافق للشمس"
 
-#: plugins/Observability/src/Observability.cpp:237
+#: plugins/Observability/src/Observability.cpp:236
 msgid "Observable during the whole year."
 msgstr "يمكن رصده طوال السنة"
 
-#: plugins/Observability/src/Observability.cpp:238
+#: plugins/Observability/src/Observability.cpp:237
 msgid "Not observable at dark night."
 msgstr "لايمكن رصده في الليالي المظلمة."
 
-#: plugins/Observability/src/Observability.cpp:239
+#: plugins/Observability/src/Observability.cpp:238
 msgid "Nights above horizon: "
 msgstr "‏الليالي التي يكون فيها الجرم فوق الأفق:‏ "
 
-#: plugins/Observability/src/Observability.cpp:240
-#: plugins/Observability/src/Observability.cpp:760
+#: plugins/Observability/src/Observability.cpp:239
+#: plugins/Observability/src/Observability.cpp:759
 msgid "TODAY:"
 msgstr "هذا اليوم:"
 
-#: plugins/Observability/src/Observability.cpp:241
-#: plugins/Observability/src/Observability.cpp:769
+#: plugins/Observability/src/Observability.cpp:240
+#: plugins/Observability/src/Observability.cpp:768
 msgid "THIS YEAR:"
 msgstr "هذه السنة:"
 
-#: plugins/Observability/src/Observability.cpp:242
+#: plugins/Observability/src/Observability.cpp:241
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "‏البدر التام السابق:‏ %1 %2 الساعة %3:%4. "
 
-#: plugins/Observability/src/Observability.cpp:243
+#: plugins/Observability/src/Observability.cpp:242
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "‏البدر التام اللاحق:‏ %1 %2 الساعة %3:%4. "
 
-#: plugins/Observability/src/Observability.cpp:264
+#: plugins/Observability/src/Observability.cpp:263
 msgid "Observability"
 msgstr "بيانات الرصد"
 
-#: plugins/Observability/src/Observability.cpp:265
+#: plugins/Observability/src/Observability.cpp:264
 msgid "Observability configuration window"
 msgstr "نافذة إعدادات تطبيق الرصد"
 
