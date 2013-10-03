@@ -96,7 +96,21 @@ private slots:
 
 private:
 	friend class StelTextureMgr;
-	friend class TextureLoader;
+
+	//! structure returned by the loader threads, containing all the
+	//! data and information to create the OpenGL texture.
+	struct GLData
+	{
+		QByteArray data;
+		int width;
+		int height;
+		GLint format;
+		GLint type;
+	};
+	//! Those static methods can be called by QtConcurrent::run
+	static GLData imageToGLData(const QImage &image);
+	static GLData loadFromPath(const QString &path);
+	static GLData loadFromData(const QByteArray& data);
 
 	//! Private constructor
 	StelTexture();
@@ -112,6 +126,8 @@ private:
 	//! This function uses openGL routines and must be called in the main thread
 	//! @return false if an error occured
 	bool glLoad(const QImage& image);
+	//! Same as glLoad(QImage), but with an image already in OpenGl format
+	bool glLoad(const GLData& data);
 
 	StelTextureParams loadParams;
 
@@ -119,7 +135,8 @@ private:
 	QNetworkReply *networkReply;
 
 	//! The loader object
-	QFuture<QImage>* loader;
+	QFuture<GLData>* loader;
+
 
 	//! The URL where to download the file
 	QString fullPath;

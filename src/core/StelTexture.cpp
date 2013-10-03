@@ -78,17 +78,28 @@ void StelTexture::reportError(const QString& aerrorMessage)
 	emit(loadingProcessFinished(true));
 }
 
+StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
+{
+	GLData ret;
+	if (image.isNull())
+		return ret;
+	ret.width = image.width();
+	ret.height = image.height();
+	ret.data = convertToGLFormat(image, &ret.format, &ret.type);
+	return ret;
+}
+
 /*************************************************************************
  Defined to be passed to QtConcurrent::run
  *************************************************************************/
-static QImage loadFromPath(const QString &path)
+StelTexture::GLData StelTexture::loadFromPath(const QString &path)
 {
-	return QImage(path);
+	return imageToGLData(QImage(path));
 }
 
-static QImage loadFromData(const QByteArray& data)
+StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
 {
-	return QImage::fromData(data);
+	return imageToGLData(QImage::fromData(data));
 }
 
 /*************************************************************************
@@ -123,7 +134,7 @@ bool StelTexture::bind()
 	// Not a remote file, start a loader from local file.
 	if (loader == NULL)
 	{
-		loader = new QFuture<QImage>(QtConcurrent::run(loadFromPath, fullPath));
+		loader = new QFuture<GLData>(QtConcurrent::run(loadFromPath, fullPath));
 		return false;
 	}
 	// Wait until the loader finish.
@@ -146,7 +157,7 @@ void StelTexture::onNetworkReply()
 	else
 	{
 		QByteArray data = networkReply->readAll();
-		loader = new QFuture<QImage>(QtConcurrent::run(loadFromData, data));
+		loader = new QFuture<GLData>(QtConcurrent::run(loadFromData, data));
 	}
 	networkReply->deleteLater();
 	networkReply = NULL;
@@ -240,35 +251,31 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	return ret;
 }
 
-
-// Actually load the texture to openGL memory
-bool StelTexture::glLoad(const QImage& image)
+bool StelTexture::glLoad(const GLData& data)
 {
-	if (image.isNull())
+	if (data.data.isEmpty())
 	{
 		reportError("Unknown error");
 		return false;
 	}
-	width = image.width();
-	height = image.height();
+	width = data.width;
+	height = data.height;
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
-
-	GLint format, type;
-	QByteArray data = convertToGLFormat(image, &format, &type);
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format,
-				 type, data.constData());
-	bool genMipmap = false;
-	if (genMipmap)
-		glGenerateMipmap(GL_TEXTURE_2D);
-	
+	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
+				 data.type, data.data.constData());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
-
 	// Report success of texture loading
 	emit(loadingProcessFinished(false));
 	return true;
+}
+
+// Actually load the texture to openGL memory
+bool StelTexture::glLoad(const QImage& image)
+{
+	return glLoad(imageToGLData(image));
 }
