@@ -420,6 +420,7 @@ void Planet::computePosition(const double date)
 	{
 		// calculate actual Planet position
 		coordFunc(date, eclipticPos, userDataPtr);
+		// XXX: do we need to do that even when the orbit is not visible?
 		for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJD = date;
@@ -533,14 +534,16 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 // Return heliocentric coordinate of p
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
+	// Note: using shared copies is too slow here.  So we use direct access
+	// instead.
 	Vec3d pos = p;
-	PlanetP pp = parent;
+	const Planet* pp = parent.data();
 	if (pp)
 	{
-		while (pp->parent)
+		while (pp->parent.data())
 		{
 			pos += pp->eclipticPos;
-			pp = pp->parent;
+			pp = pp->parent.data();
 		}
 	}
 	return pos;
