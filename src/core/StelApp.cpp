@@ -586,28 +586,31 @@ void StelApp::handleWheel(QWheelEvent* event)
 
 	event->setAccepted(false);
 	if (wheelEventTimer->isActive()) {
-		// Collect the values; we only care about the fianl position values, but we want to accumalate the delta.
+		// Collect the values. If delta is small enough we wait for more values or the end
+		// of the timer period to process them.
 		delta += event->delta();
-	} else {
-		// The first time in, the values will not have been set.
-		if (delta == 0) {
-			delta += event->delta();
-		}
-
-		wheelEventTimer->start();
-		QWheelEvent deltaEvent(event->pos(), event->globalPos(), delta, event->buttons(), event->modifiers(), event->orientation());
-		deltaEvent.setAccepted(false);
-		// Send the event to every StelModule
-		foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
-			i->handleMouseWheel(&deltaEvent);
-			if (deltaEvent.isAccepted()) {
-				event->accept();
-				break;
-			}
-		}
-		// Reset the collected values
-		delta = 0;
+		if (qAbs(delta) < 120)
+			return;
 	}
+
+	// The first time in, the values will not have been set.
+	if (delta == 0) {
+		delta += event->delta();
+	}
+
+	wheelEventTimer->start();
+	QWheelEvent deltaEvent(event->pos(), event->globalPos(), delta, event->buttons(), event->modifiers(), event->orientation());
+	deltaEvent.setAccepted(false);
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
+		i->handleMouseWheel(&deltaEvent);
+		if (deltaEvent.isAccepted()) {
+			event->accept();
+			break;
+		}
+	}
+	// Reset the collected values
+	delta = 0;
 }
 
 // Handle mouse move
