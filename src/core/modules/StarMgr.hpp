@@ -39,6 +39,8 @@ namespace BigStarCatalogExtension {
   struct HipIndexStruct;
 }
 
+static const int RCMAG_TABLE_SIZE = 4096;
+
 typedef struct
 {
 	QString designation;	//! GCVS designation

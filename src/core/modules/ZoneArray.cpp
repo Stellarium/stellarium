@@ -524,7 +524,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			float extMagShift=0.0f;
 			altAz.normalize();
 			extinction.forward(&altAz, &extMagShift);
-			int extMagShiftStep=qMin((int)(extMagShift/k), 4096-mag_steps); // this number must be equal StarMgr.cpp line 649
+			int extMagShiftStep=qMin((int)(extMagShift/k), RCMAG_TABLE_SIZE-mag_steps);
 			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 			{
 				continue;
