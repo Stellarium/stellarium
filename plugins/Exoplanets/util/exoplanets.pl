@@ -26,6 +26,7 @@
 
 use DBI();
 use LWP::UserAgent();
+use Text::CSV;
 
 #
 # Stage 1: connect to 'The Extrasolar Planets Encyclopaedia' at exoplanet.eu, fetch CSV data and store to MySQL
@@ -36,6 +37,7 @@ $URL	= "http://exoplanet.eu/catalog/csv/";
 $CSV	= "./exoplanets.csv";
 $HCSV	= "./";
 $JSON	= "./exoplanets.json";
+$HCSV	= "./habitable.csv";
 
 $CATALOG_FORMAT_VERSION = 1;
 
@@ -45,7 +47,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.4; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.5; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -62,6 +64,21 @@ if ($responce->is_success) {
 
 $dsn = "DBI:mysql:database=$dbname;host=$dbhost";
 
+$csvdata = Text::CSV->new();
+
+open (HCSV, "<$HCSV");
+@habitable = <HCSV>;
+close HCSV;
+
+%hs = ();
+%hp = ();
+for ($i=1;$i<scalar(@habitable);$i++) {
+	$status  = $csvdata->parse($habitable[$i]);
+	@hdata = $csvdata->fields();
+	%hs = (%hs, $hdata[0], 1);
+	%hp = (%hp, $hdata[0]." ".$hdata[1], $habitable[$i]);
+}
+
 open (CSV, "<$CSV");
 @catalog = <CSV>;
 close CSV;
@@ -73,9 +90,6 @@ $sth = $dbh->do(q{TRUNCATE planets});
 
 for ($i=1;$i<scalar(@catalog);$i++) {
 	$currdata = $catalog[$i];
-	$currdata =~ s/\".*?\"//gi;
-	$currdata =~ s/\r//gi;
-	$currdata =~ s/\n//gi;
 	
 	@cpname = ();
 	(@cpname) = split(",",$currdata);
@@ -94,7 +108,8 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$pname = $cfname[1];
 	}
 	
-	($aname,$pmass,$pradius,$pperiod,$psemiax,$pecc,$pincl,$angdist,$psl,$discovered,$updated,$pomega,$pt,$dtype,$mol,$starname,$sRA,$sDec,$sVmag,$sImag,$sHmag,$sJmag,$sKmag,$sdist,$smetal,$smass,$sradius,$sstype,$sage,$sefftemp) = split(",", $currdata);
+	$status  = $csvdata->parse($currdata);
+	($aname,$pmass,$pradius,$pperiod,$psemiax,$pecc,$pincl,$angdist,$psl,$discovered,$updated,$pomega,$ptperi,$ptconj,$ptzero_tr,$ptzero_tr_sec,$plambda_angle,$ptzero_vr,$ptemp_calculated,$ptemp_measured,$phot_point_lon,$plog_g,$dtype,$mol,$starname,$sRA,$sDec,$sVmag,$sImag,$sJmag,$sHmag,$sKmag,$sdist,$smetal,$smass,$sradius,$sstype,$sage,$sefftemp) = $csvdata->fields();
 
 	($hour,$mint,$sect) = split(":",$sRA);
 	($deg,$min,$sec) = split(":",$sDec);
@@ -150,23 +165,39 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	
 	if (($sRA ne '00:00:00.0') && ($sDec ne '+00:00:00.0') && ($sname ne '')) {
 		# check star
-		$sth = $dbh->prepare(q{SELECT sid FROM stars WHERE ra_coord=? AND dec_coord=?});
+		$sth = $dbh->prepare(q{SELECT sid,sname FROM stars WHERE ra_coord=? AND dec_coord=?});
 		$sth->execute($outRA, $outDE);
 		@starDATA = $sth->fetchrow_array();
 		# get star ID
 		if (scalar(@starDATA)!=0) {
-			$starID = @starDATA[0];
+			$starID   = @starDATA[0];
+			$starName = @starDATA[1];
 		} else {
+			$HPflag = 0;
+			if (exists($hs{$sname})) {
+				$HPflag = 1;
+			}
 			# insert star data
-			$sth = $dbh->do(q{INSERT INTO stars (ra_coord,dec_coord,sname,distance,stype,smass,smetal,vmag,sradius,sefftemp) VALUES (?,?,?,?,?,?,?,?,?,?)}, undef, $outRA, $outDE, $sname, $sdist, $sstype, $smass, $smetal, $sVmag, $sradius, $sefftemp);
-			$sth = $dbh->prepare(q{SELECT sid FROM stars ORDER BY sid DESC LIMIT 0,1});
+			$sth = $dbh->do(q{INSERT INTO stars (ra_coord,dec_coord,sname,distance,stype,smass,smetal,vmag,sradius,sefftemp,has_habit_planet) VALUES (?,?,?,?,?,?,?,?,?,?,?)}, undef, $outRA, $outDE, $sname, $sdist, $sstype, $smass, $smetal, $sVmag, $sradius, $sefftemp, $HPflag);
+			$sth = $dbh->prepare(q{SELECT sid,sname FROM stars ORDER BY sid DESC LIMIT 0,1});
 			$sth->execute();
 			@starDATA = $sth->fetchrow_array();
-			$starID = @starDATA[0];
+			$starID   = @starDATA[0];
+			$starName = @starDATA[1];
+		}
+		
+		$hclass = '';
+		$mstemp = -1;
+		$esi    = -1;
+		
+		$key = $starName." ".$pname;
+		if (exists($hp{$key})) {
+			$status  = $csvdata->parse($hp{$key});
+			($hsname,$hpname,$hclass,$mstemp,$esi) = $csvdata->fields();
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered) VALUES (?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hclass,mstemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered, $hclass, $mstemp, $esi);
 	}
 }
 
@@ -197,6 +228,7 @@ while (@stars = $sth->fetchrow_array()) {
 	$sVmag		= $stars[8];
 	$sradius	= $stars[9];
 	$sefftemp	= $stars[10];
+	$hasHabitPl	= $stars[11];
 	
 	$out  = "\t\t\"".$sname."\":\n";
 	$out .= "\t\t{\n";
@@ -222,6 +254,9 @@ while (@stars = $sth->fetchrow_array()) {
 		$pinc		= $planets[8];
 		$angdist	= $planets[9];
 		$discovered	= $planets[10];
+		$habitclass	= $planets[11];
+		$meanstemp	= $planets[12];
+		$esindex	= $planets[13];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
@@ -247,6 +282,15 @@ while (@stars = $sth->fetchrow_array()) {
 		}
 		if ($discovered ne '') {
 			$out .= "\t\t\t\t\"discovered\": ".$discovered.",\n";
+		}
+		if ($habitclass ne '') {
+			$out .= "\t\t\t\t\"hclass\": \"".$habitclass."\",\n";
+		}
+		if ($meanstemp > 0) {
+			$out .= "\t\t\t\t\"MSTemp\": ".$meanstemp.",\n";
+		}
+		if ($esindex > 0) {
+			$out .= "\t\t\t\t\"ESI\": ".$esindex.",\n";
 		}
 		if ($pname eq '') {
 			$pname = "a";
@@ -281,6 +325,9 @@ while (@stars = $sth->fetchrow_array()) {
 	}
 	if ($sefftemp ne '') {
 		$out .= "\t\t\t\"effectiveTemp\": ".$sefftemp.",\n";
+	}
+	if ($hasHabitPl > 0) {
+		$out .= "\t\t\t\"hasHP\": true,\n";
 	}
 	$out .= "\t\t\t\"RA\": \"".$RA."\",\n";
 	$out .= "\t\t\t\"DE\": \"".$DE."\"\n";
