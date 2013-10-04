@@ -48,7 +48,6 @@
 
 #include "sgp4unit.h"
 
-const char help = 'n';
 FILE *dbgfile;
 
 
