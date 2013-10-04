@@ -458,6 +458,9 @@ private:
 	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
+	//! Replace the mcnames file with the default one.
+	void restoreDefaultMcNamesFile();
+
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.

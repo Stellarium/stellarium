@@ -189,6 +189,11 @@ void Satellites::init()
 		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
 	}
+	
+	if(!QFileInfo(mcNamesFilePath).exists())
+	{
+		restoreDefaultMcNamesFile();
+	}
 
 	qDebug() << "Satellites: loading catalog file:" << QDir::toNativeSeparators(catalogPath);
 
@@ -549,6 +554,7 @@ void Satellites::restoreDefaults(void)
 {
 	restoreDefaultSettings();
 	restoreDefaultCatalog();
+	restoreDefaultMcNamesFile();
 	loadCatalog();
 	loadSettings();
 }
@@ -615,6 +621,23 @@ void Satellites::restoreDefaultCatalog()
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
 		lastUpdate = QDateTime::fromString("2001-05-25T12:00:00", Qt::ISODate);
 
+	}
+}
+
+void Satellites::restoreDefaultMcNamesFile()
+{
+	QFile src(":/satellites/mcnames");
+	if (!src.copy(mcNamesFilePath))
+	{
+		qWarning() << "Satellites::restoreDefaultMcNamesFile cannot copy mcnames resource to " + QDir::toNativeSeparators(mcNamesFilePath);
+	}
+	else
+	{
+		qDebug() << "Satellites::init copied default mcnames to " << QDir::toNativeSeparators(mcNamesFilePath);
+		// The resource is read only, and the new file inherits this...  make sure the new file
+		// is writable by the Stellarium process so that updates can be done.
+		QFile dest(mcNamesFilePath);
+		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 	}
 }
 
