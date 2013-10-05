@@ -72,6 +72,7 @@
 #include <QTimer>
 #include <QDir>
 #include <QCoreApplication>
+#include <QScreen>
 
 Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
 
@@ -175,7 +176,7 @@ StelApp::StelApp(QObject* parent)
 #ifndef DISABLE_SCRIPTING
 	  scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
-	  stelGui(NULL), fps(0),
+	  stelGui(NULL), devicePixelsPerPixel(1.f), fps(0),
 	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 
@@ -328,9 +329,8 @@ void StelApp::init(QSettings* conf)
 {
 	confSettings = conf;
 
-	// Set base font size
-	setFontSize(conf->value("gui/font_size", 9).toInt());
-
+	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
@@ -502,7 +502,7 @@ void StelApp::update(double deltaTime)
 		frame = 0;
 		timeBase+=1.;
 	}
-
+		
 	core->update(deltaTime);
 
 	moduleMgr->update();
@@ -565,15 +565,22 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 }
 
 // Handle mouse clics
-void StelApp::handleClick(QMouseEvent* event)
+void StelApp::handleClick(QMouseEvent* inputEvent)
 {
-	event->setAccepted(false);
+	inputEvent->setAccepted(false);
+	
+	QMouseEvent event(inputEvent->type(), QPoint(inputEvent->pos().x()*devicePixelsPerPixel, inputEvent->pos().y()*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	event.setAccepted(false);
+	
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
 	{
-		i->handleMouseClicks(event);
-		if (event->isAccepted())
+		i->handleMouseClicks(&event);
+		if (event.isAccepted())
+		{
+			inputEvent->setAccepted(true);
 			return;
+		}
 	}
 }
 
@@ -585,6 +592,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 	static int delta = 0;
 
 	event->setAccepted(false);
+	
 	if (wheelEventTimer->isActive()) {
 		// Collect the values. If delta is small enough we wait for more values or the end
 		// of the timer period to process them.
@@ -599,7 +607,9 @@ void StelApp::handleWheel(QWheelEvent* event)
 	}
 
 	wheelEventTimer->start();
-	QWheelEvent deltaEvent(event->pos(), event->globalPos(), delta, event->buttons(), event->modifiers(), event->orientation());
+	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
+						   QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+						   delta, event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
@@ -619,7 +629,7 @@ void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
-		if (i->handleMouseMoves(x, y, b))
+		if (i->handleMouseMoves(x*devicePixelsPerPixel, y*devicePixelsPerPixel, b))
 			return;
 	}
 }
@@ -691,5 +701,17 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 	{
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
+	}
+}
+
+float StelApp::setDevicePixelsPerPixel(float dppp)
+{
+	// Check that the device-independent pixel size didn't change
+	if (devicePixelsPerPixel!=dppp)
+	{
+		devicePixelsPerPixel = dppp;
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		params.devicePixelsPerPixel = devicePixelsPerPixel;
+		core->setCurrentStelProjectorParams(params);
 	}
 }

@@ -140,7 +140,7 @@ Observability::Observability()
 	iHorizAltitude = conf->value("Horizon_Altitude",0).toInt();
 	AstroTwiAlti = -((double) iAltitude)/Rad2Deg ;
 	HorizAlti = ((double) iHorizAltitude)/Rad2Deg ;
-	font.setPointSize(fontSize);
+	font.setPixelSize(fontSize);
 	QString fontColorStr = conf->value("font_color", "0,0.5,1").toString();
 	fontColor = StelUtils::strToVec3f(fontColorStr);
 	show_AcroCos = conf->value("show_AcroCos", true).toBool();
@@ -294,7 +294,7 @@ void Observability::draw(StelCore* core)
 // Set the painter:
 	StelPainter paintresult(core->getProjection2d());
 	paintresult.setColor(fontColor[0],fontColor[1],fontColor[2],1);
-	font.setPointSize(fontSize);
+	font.setPixelSize(fontSize);
 	paintresult.setFont(font);
 
 
@@ -1627,7 +1627,7 @@ void Observability::readSettingsFromConfig(void)
 
 	// Load settings from main config file
 	fontSize = conf->value("font_size",15).toInt();
-	font.setPointSize(fontSize);
+	font.setPixelSize(fontSize);
 	fontColor = StelUtils::strToVec3f(conf->value("font_color", "0,0.5,1").toString());
 	show_AcroCos = conf->value("show_AcroCos", true).toBool();
 	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
