@@ -41,8 +41,7 @@ namespace BigStarCatalogExtension
 
 static const Vec3f north(0,0,1);
 
-void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
-							 const Vec3f &c2)
+void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
 	// initialize center,axis0,axis1:
 	ZoneData &z(zones[index]);
@@ -51,28 +50,31 @@ void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
 	z.axis0 = north ^ z.center;
 	z.axis0.normalize();
 	z.axis1 = z.center ^ z.axis0;
-	// initialize star_position_scale:
-	double mu0,mu1,f,h;
+	
+	// Initialize star_position_scale. This scale is used to multiply stars position
+	// encoded as integers so that it optimize precision over the triangle.
+	// It has to be computed for each triangle because the relative orientation of the 2 axis is different for each triangle.
+	float mu0,mu1,f,h;
 	mu0 = (c0-z.center)*z.axis0;
 	mu1 = (c0-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 	mu0 = (c1-z.center)*z.axis0;
 	mu1 = (c1-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 	mu0 = (c2-z.center)*z.axis0;
 	mu1 = (c2-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 }
 
@@ -304,7 +306,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::scaleAxis(void)
+void SpecialZoneArray<Star>::scaleAxis()
 {
 	star_position_scale /= Star::MaxPosVal;
 	for (ZoneData *z=zones+(nr_of_zones-1);z>=zones;z--)
@@ -486,7 +488,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
     StelSkyDrawer* drawer = core->getSkyDrawer();
     Vec3f vf;
     static const double d2000 = 2451545.0;
-    const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
+    const float movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
     
     // GZ, added for extinction
     const Extinction& extinction=core->getSkyDrawer()->getExtinction();
@@ -520,7 +522,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (withExtinction)
 		{
 			//GZ: We must compute position first, then shift magnitude.
-			Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOff);
+			Vec3f altAz(vf);
+			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			altAz.normalize();
 			extinction.forward(&altAz, &extMagShift);
@@ -535,7 +538,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			}
 		}
 	
-		if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = *tmpRcmag*0.7f;
 			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;

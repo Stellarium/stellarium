@@ -110,11 +110,9 @@ public:
 	bool isInitialized(void) const { return (nr_of_zones>0); }
 
 	//! Initialize the ZoneData struct at the given index.
-	void initTriangle(int index,
-					  const Vec3f &c0,
-					  const Vec3f &c1,
-					  const Vec3f &c2);
-	virtual void scaleAxis(void) = 0;
+	void initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2);
+	
+	virtual void scaleAxis() = 0;
 
 	//! File path of the catalog.
 	const QString fname;
@@ -181,12 +179,12 @@ protected:
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
-	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
+	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			  const float *rcmag_table, StelCore* core,
 			  unsigned int maxMagStarName, float names_brightness) const;
 
-	void scaleAxis(void);
-	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
+	virtual void scaleAxis();
+	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 					  QList<StelObjectP > &result);
 
 	Star *stars;
