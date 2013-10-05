@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-02 22:16+0700\n"
-"PO-Revision-Date: 2013-09-16 15:49+0000\n"
+"PO-Revision-Date: 2013-10-04 19:54+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-03 05:20+0000\n"
+"X-Launchpad-Export-Date: 2013-10-05 05:13+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106
@@ -7543,17 +7543,17 @@ msgstr "Ano de descuberta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Habitable class"
-msgstr ""
+msgstr "Clase habitable"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Mean surface temp."
-msgstr ""
+msgstr "Temp. media da superficie"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "ESI"
-msgstr ""
+msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
@@ -7575,6 +7575,9 @@ msgid ""
 "\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Listaxe de exoplanetas potencialmente habitables e datos sobre eles tirados "
+"do \"%1Catálogo de Exoplanetas Habitables%3\" de %2Planetary Habitability "
+"Laboratory%3."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
@@ -7588,7 +7591,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Exoplanetas potencialmente habitables"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid ""
@@ -7596,10 +7599,13 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
+"Este plugin activa os exoplanetas potencialmente habitables (en cor laranxa) "
+"e dá información sobre os mesmos - clase habitable, temperatura media en "
+"superficie e ïndice de Similaridade coa Terra."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Habitable Class"
-msgstr ""
+msgstr "Clase Habitable"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid ""
@@ -7610,10 +7616,17 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
+"Clasifica os planetas habitables baseándose na temperatura: "
+"hypopsychroplanetas (O ou HP) = moi frío (menos -50 ° C); psychroplanetas "
+"(P) = fríos; mesoplanetas (M) = temperatura media (0-50 º C); thermoplanetas "
+"(T ) = quente; hyperthermoplanetas (E ou HT) = moi quente (por enriba de 100 "
+"° C). Os Mesoplanetas serían os ideais para a vida complexa, mentres que a "
+"clase A ou E só permitirían vida extremófila. Os planetas non habitables "
+"simplemente son de clase X (ou NH)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "Temperatura media da superficie"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7621,10 +7634,13 @@ msgid ""
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
 "0.3 in all cases)."
 msgstr ""
+"Temperatura en (ºC) baseada nunha atmosfera terrestre similar con respecto á "
+"masa do planeta e un efecto de invernadoiro debido ó 1 por cento de CO2 "
+"(asumindo un albedo de 0,3 en tódolos casos)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Índice de Semellanza Terrestre (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7632,6 +7648,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Similaridade coa Terra nunha escala de 0 a 1, sendo 1 o máis parecido á "
+"Terra. ESI depende do radio do planeta, a densidade, a velocidade de escape "
+"e a temperatura da superficie."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -7763,7 +7782,7 @@ msgstr "Información"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Sitios web"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
