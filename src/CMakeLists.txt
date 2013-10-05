@@ -376,7 +376,8 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/CustomDeltaTEquationDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
-	IF(ENABLE_SCRIPT_CONSOLE)
+        IF(ENABLE_SCRIPTING)
+            IF(ENABLE_SCRIPT_CONSOLE)
 		SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
 			gui/ScriptConsole.hpp
 			gui/ScriptConsole.cpp
@@ -384,7 +385,8 @@ IF (GUI_MODE STREQUAL "Standard")
 			gui/StelScriptSyntaxHighlighter.cpp)
 		SET(stellarium_UIS ${stellarium_UIS}
 			gui/scriptConsole.ui)
-	ENDIF(ENABLE_SCRIPT_CONSOLE)
+            ENDIF(ENABLE_SCRIPT_CONSOLE)
+        ENDIF(ENABLE_SCRIPTING)
 
 	QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
