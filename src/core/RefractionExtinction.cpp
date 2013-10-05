@@ -27,13 +27,13 @@ Extinction::Extinction() : ext_coeff(50), undergroundExtinctionMode(UndergroundE
 {
 }
 
-//  altAzPos is the NORMALIZED (!!!) star position vector AFTER REFRACTION, and its z component sin(altitude).
+//  altAzPos is the NORMALIZED (!!!) star position vector WITHOUT REFRACTION, and its z component sin(altitude).
 void Extinction::forward(const Vec3d *altAzPos, float *mag, const int num) const
 {
 	for (int i=0; i<num; ++i)
 	{
 		Q_ASSERT(fabs(altAzPos[i].length()-1.f)<0.001f);
-		mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
+		mag[i] += airmass(altAzPos[i][2], false) * ext_coeff;
 	}
 }
 void Extinction::forward(const Vec3f *altAzPos, float *mag, const int num) const
@@ -41,18 +41,18 @@ void Extinction::forward(const Vec3f *altAzPos, float *mag, const int num) const
 	for (int i=0; i<num; ++i)
 	{
 		Q_ASSERT(fabs(altAzPos[i].length()-1.f)<0.001f);
-		mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
+		mag[i] += airmass(altAzPos[i][2], false) * ext_coeff;
 	}
 }
 
 // from observed magnitude in apparent (observed) altitude to atmosphere-free mag, still in apparent, refracted altitude.
 void Extinction::backward(const Vec3d *altAzPos, float *mag, const int num) const
 {
-	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], true) * ext_coeff;
+	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], false) * ext_coeff;
 }
 void Extinction::backward(const Vec3f *altAzPos, float *mag, const int num) const
 {
-	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], true) * ext_coeff;
+	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], false) * ext_coeff;
 }
 
 // airmass computation for cosine of zenith angle z
@@ -79,8 +79,8 @@ float Extinction::airmass(float cosZ, const bool apparent_z) const
 	else
 	{
 		//Young 1994
-		float nom=(1.002432f*cosZ+0.148386f)*cosZ+0.0096467f;
-		float denum=((cosZ+0.149864f)*cosZ+0.0102963f)*cosZ+0.000303978f;
+		const float nom=(1.002432f*cosZ+0.148386f)*cosZ+0.0096467f;
+		const float denum=((cosZ+0.149864f)*cosZ+0.0102963f)*cosZ+0.000303978f;
 		return nom/denum;
 	}
 }
