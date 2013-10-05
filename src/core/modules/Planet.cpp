@@ -945,7 +945,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitudeWithExtinction(core), color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
 }
 
 

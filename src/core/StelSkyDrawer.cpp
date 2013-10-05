@@ -363,9 +363,8 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	nbPointSources = 0;
 }
 
-static Vec3d win;
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
 	Vec3f color(bcolor);
@@ -378,8 +377,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (rcMag[0]<=0.f)
 		return false;
 
-	// TODO: compute Vec3f v_refr (position including refraction) --> NO: This is done in ZoneArray!
-
+	Vec3f win;
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
@@ -434,7 +432,6 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		*cv = w; ++cv;
 		*cv = w; ++cv;
 		*cv = w; ++cv;
-		win = Vec3d(w[0],w[1],w[2]);
 	}
 
 	++nbPointSources;
@@ -448,7 +445,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color)
 {
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
@@ -468,6 +465,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		Vec3f win;
 		painter->getProjector()->project(v, win);
 		Vec3f c = color;
 		if (StelApp::getInstance().getVisionModeNight())
