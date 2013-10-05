@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>651</width>
-    <height>379</height>
+    <width>660</width>
+    <height>383</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -571,6 +571,9 @@
                     <width>100</width>
                     <height>22</height>
                    </size>
+                  </property>
+                  <property name="inputMethodHints">
+                   <set>Qt::ImhDigitsOnly</set>
                   </property>
                   <property name="maxLength">
                    <number>6</number>
