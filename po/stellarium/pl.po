@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-02 22:16+0700\n"
-"PO-Revision-Date: 2013-08-17 03:21+0000\n"
+"PO-Revision-Date: 2013-10-06 01:02+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-03 05:24+0000\n"
+"X-Launchpad-Export-Date: 2013-10-06 04:33+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -357,7 +357,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "układ podwójny zaćmieniowy"
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
@@ -394,6 +394,8 @@ msgstr ""
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
+"Zakres wielkości gwiazdowej: <b>%1</b>%2<b>%3/%4</b> (System fotometryczny: "
+"%5)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:178
@@ -431,12 +433,12 @@ msgstr "Okres: %1 dni"
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Następne minimalne światło: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Następne maksymalne światło: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
@@ -2408,6 +2410,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
+"Wygaszacz ekrany przedstawiający różne wydarzenia w Układzie Słonecznym. "
+"Łącznie 187 zdarzeń!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -3907,7 +3911,7 @@ msgstr "Użyj tego krajobrazu jako domyślnego"
 
 #: src/ui_viewDialog.h:1306
 msgid "Use brightness settings for landscapes"
-msgstr ""
+msgstr "Używaj ustawień jasności dla krajobrazów"
 
 #: src/ui_viewDialog.h:1308
 msgid "Use this sky culture as default"
@@ -7043,8 +7047,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
-"Jeśli chesz przeczytać dokładne informacje o tej wtyczce, jej historii i "
-"formacie katalogu, to %1znajdziesz je tutaj%2."
+"Pełne informacje na temat wtyczki, jej historii i formatu katalogu można "
+"znaleźć %1tutaj%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
@@ -7106,20 +7110,20 @@ msgstr ""
 
 #: plugins/Novae/src/Novae.cpp:136
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Okno konfiguracji Jasnych nowych"
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Typ: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:126
 msgid "nova"
-msgstr ""
+msgstr "nowa"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:105
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Wtyczka Jasne nowe"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid ""
@@ -7132,6 +7136,8 @@ msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"W tej wtyczce używany jest bardzo prosty model obliczania krzywych blasku "
+"gwiazd nowych."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #, qt-format
@@ -7153,10 +7159,12 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Jeśli chesz przeczytać dokładne informacje o tej wtyczce, jej historii i "
+"formacie katalogu, to %1znajdziesz je tutaj%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:193
 msgid "Novae is updated"
-msgstr ""
+msgstr "Gwiazdy nowe zostały zaktualizowane"
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
@@ -7218,7 +7226,7 @@ msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:214
 msgid "Quasars is updated"
-msgstr "Zaktualizowano kwazary"
+msgstr "Kwazary zostały zaktualizowane"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Quasars Configuration"
@@ -7441,7 +7449,7 @@ msgstr "we Francji"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:228
 msgid "Pulsars is updated"
-msgstr "Pulsary zaktualizowane"
+msgstr "Pulsary zostały zaktualizowane"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Pulsars Configuration"
@@ -7725,7 +7733,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Exoplanets is updated"
-msgstr "Zaktualizowano egzoplanety"
+msgstr "Egzoplanety zostały zaktualizowane"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
 msgid "Exoplanets Configuration"

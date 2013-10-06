@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-02 22:16+0700\n"
-"PO-Revision-Date: 2013-09-11 08:39+0000\n"
+"PO-Revision-Date: 2013-10-05 17:59+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-03 05:24+0000\n"
+"X-Launchpad-Export-Date: 2013-10-06 04:34+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106
@@ -7585,17 +7585,17 @@ msgstr "Ano de descoberta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Habitable class"
-msgstr ""
+msgstr "Classe habitável"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Mean surface temp."
-msgstr ""
+msgstr "Temperatura média da superfície"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "ESI"
-msgstr ""
+msgstr "IST"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
@@ -7617,6 +7617,9 @@ msgid ""
 "\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"A lista de exoplanetas potencialmente habitáveis e informações sobre eles "
+"foram retirados de “%1The Habitable Exoplanets Catalog%3” por %2Planetary "
+"Habitability Laboratory%3."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
@@ -7630,7 +7633,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Exoplanetas potencialmente habitáveis"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid ""
@@ -7638,10 +7641,14 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
+"Este complemento pode exibir exoplanetas potencialmente habitáveis "
+"(marcadores em laranja) e algumas informações sobre esses planetas - classe "
+"habitável, temperatura média da superfície e o Índice de Similaridade com a "
+"Terra."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Habitable Class"
-msgstr ""
+msgstr "Classe habitável"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid ""
@@ -7652,10 +7659,14 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
+"Classifica os planetas habitáveis com base na sua temperatura: "
+"hipopsicroplanetas (O ou hP) = muito frios (abaixo de −50°C); psicroplanetas "
+"(P) = frios; mesoplanetas (M) = temperatura média (0–50°C); termoplanetas "
+"(T) = quentes; hipertermoplanetas (E ou hT) = muito quentes (acima de 100°C)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "Temperatura média da superfície"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7663,10 +7674,13 @@ msgid ""
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
 "0.3 in all cases)."
 msgstr ""
+"Temperatura em (°C) com base numa atmosfera terrestre semelhante em relação "
+"à massa do planeta e efeito estufa, devido a 1 por cento de CO2 (assumindo "
+"um albedo de 0,3 em todos os casos)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Índice de Similaridade com a Terra (IST)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7674,6 +7688,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Similaridade à Terra numa escala de 0 a 1, sendo 1 o mais parecido com a "
+"Terra. O IST depende do raio do planeta, densidade, velocidade de escape e "
+"temperatura da superfície."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -7805,7 +7822,7 @@ msgstr "Informação"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Páginas Web"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
