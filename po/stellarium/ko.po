@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-02 22:16+0700\n"
+"POT-Creation-Date: 2013-10-07 02:11+0700\n"
 "PO-Revision-Date: 2013-10-03 03:04+0000\n"
 "Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-04 05:18+0000\n"
+"X-Launchpad-Export-Date: 2013-10-07 05:19+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106
@@ -444,188 +444,188 @@ msgstr "떠오르는 시간: %1%"
 msgid "SpaceShip"
 msgstr "우주선"
 
-#: src/core/StelCore.cpp:156 src/ui_dateTimeDialogGui.h:297
+#: src/core/StelCore.cpp:158 src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:166
 msgid "Date and Time"
 msgstr "날짜 및 시간"
 
-#: src/core/StelCore.cpp:158
+#: src/core/StelCore.cpp:160
 msgid "Increase time speed"
 msgstr "시간 빠르기 증가"
 
-#: src/core/StelCore.cpp:159
+#: src/core/StelCore.cpp:161
 msgid "Decrease time speed"
 msgstr "시간 빠르기 감소"
 
-#: src/core/StelCore.cpp:160
+#: src/core/StelCore.cpp:162
 msgid "Increase time speed (a little)"
 msgstr "시간 빠르기 증가 (약간)"
 
-#: src/core/StelCore.cpp:161
+#: src/core/StelCore.cpp:163
 msgid "Decrease time speed (a little)"
 msgstr "시간 빠르기 감소 (약간)"
 
-#: src/core/StelCore.cpp:162
+#: src/core/StelCore.cpp:164
 msgid "Set normal time rate"
 msgstr "정상 속도로"
 
-#: src/core/StelCore.cpp:163
+#: src/core/StelCore.cpp:165
 msgid "Set time rate to zero"
 msgstr "시간 멈춤"
 
-#: src/core/StelCore.cpp:164
+#: src/core/StelCore.cpp:166
 msgid "Set time to now"
 msgstr "현재 시각으로 설정"
 
-#: src/core/StelCore.cpp:165
+#: src/core/StelCore.cpp:167
 msgid "Add 1 solar hour"
 msgstr "1 태양시 더하기"
 
-#: src/core/StelCore.cpp:166
+#: src/core/StelCore.cpp:168
 msgid "Add 1 solar day"
 msgstr "1 태양일 더하기"
 
-#: src/core/StelCore.cpp:167
+#: src/core/StelCore.cpp:169
 msgid "Add 1 solar week"
 msgstr "1 태양주 더하기"
 
-#: src/core/StelCore.cpp:168
+#: src/core/StelCore.cpp:170
 msgid "Subtract 1 solar hour"
 msgstr "1 태양시 빼기"
 
-#: src/core/StelCore.cpp:169
+#: src/core/StelCore.cpp:171
 msgid "Subtract 1 solar day"
 msgstr "1 태양일 빼기"
 
-#: src/core/StelCore.cpp:170
+#: src/core/StelCore.cpp:172
 msgid "Subtract 1 solar week"
 msgstr "1 태양주 빼기"
 
-#: src/core/StelCore.cpp:171
+#: src/core/StelCore.cpp:173
 msgid "Add 1 sidereal day"
 msgstr "1 항성일 더하기"
 
-#: src/core/StelCore.cpp:172
+#: src/core/StelCore.cpp:174
 msgid "Add 1 sidereal week"
 msgstr "1 항성주 더하기"
 
-#: src/core/StelCore.cpp:173
+#: src/core/StelCore.cpp:175
 msgid "Add 1 sidereal month"
 msgstr "1 항성월 추가"
 
-#: src/core/StelCore.cpp:174
+#: src/core/StelCore.cpp:176
 msgid "Add 1 sidereal year"
 msgstr "1 항성년 추가"
 
-#: src/core/StelCore.cpp:175
+#: src/core/StelCore.cpp:177
 msgid "Add 1 sidereal century"
 msgstr "1 항성세기 추가"
 
-#: src/core/StelCore.cpp:176
+#: src/core/StelCore.cpp:178
 msgid "Add 1 synodic month"
 msgstr "1 삭망월 추가"
 
-#: src/core/StelCore.cpp:177
+#: src/core/StelCore.cpp:179
 msgid "Add 1 draconic month"
 msgstr "1 교점월 추가"
 
-#: src/core/StelCore.cpp:178
+#: src/core/StelCore.cpp:180
 msgid "Add 1 draconic year"
 msgstr "1 교점년 추가"
 
-#: src/core/StelCore.cpp:179
+#: src/core/StelCore.cpp:181
 msgid "Add 1 anomalistic month"
 msgstr "1 근점월 추가"
 
-#: src/core/StelCore.cpp:180
+#: src/core/StelCore.cpp:182
 msgid "Add 1 mean tropical month"
 msgstr "1 평균회기월 추가"
 
-#: src/core/StelCore.cpp:181
+#: src/core/StelCore.cpp:183
 msgid "Add 1 mean tropical year"
 msgstr "1 평균회기년 추가"
 
-#: src/core/StelCore.cpp:182
+#: src/core/StelCore.cpp:184
 msgid "Add 1 mean tropical century"
 msgstr "1 평균회기세기 추가"
 
-#: src/core/StelCore.cpp:183
+#: src/core/StelCore.cpp:185
 msgid "Subtract 1 sidereal day"
 msgstr "1 항성일 빼기"
 
-#: src/core/StelCore.cpp:184
+#: src/core/StelCore.cpp:186
 msgid "Subtract 1 sidereal week"
 msgstr "1 항성주 빼기"
 
-#: src/core/StelCore.cpp:185
+#: src/core/StelCore.cpp:187
 msgid "Subtract 1 sidereal month"
 msgstr "1 항성월 빼기"
 
-#: src/core/StelCore.cpp:186
+#: src/core/StelCore.cpp:188
 msgid "Subtract 1 sidereal year"
 msgstr "1 항성년 빼기"
 
-#: src/core/StelCore.cpp:187
+#: src/core/StelCore.cpp:189
 msgid "Subtract 1 sidereal century"
 msgstr "1 항성세기 빼기"
 
-#: src/core/StelCore.cpp:188
+#: src/core/StelCore.cpp:190
 msgid "Subtract 1 synodic month"
 msgstr "1 삭망월 빼기"
 
-#: src/core/StelCore.cpp:189
+#: src/core/StelCore.cpp:191
 msgid "Subtract 1 draconic month"
 msgstr "1 교점월 빼기"
 
-#: src/core/StelCore.cpp:190
+#: src/core/StelCore.cpp:192
 msgid "Subtract 1 draconic year"
 msgstr "1 교점년 빼기"
 
-#: src/core/StelCore.cpp:191
+#: src/core/StelCore.cpp:193
 msgid "Subtract 1 anomalistic month"
 msgstr "1 근점월 빼기"
 
-#: src/core/StelCore.cpp:192
+#: src/core/StelCore.cpp:194
 msgid "Subtract 1 mean tropical month"
 msgstr "1 평균분점월 빼기"
 
-#: src/core/StelCore.cpp:193
+#: src/core/StelCore.cpp:195
 msgid "Subtract 1 mean tropical year"
 msgstr "1 평균분점년 빼기"
 
-#: src/core/StelCore.cpp:194
+#: src/core/StelCore.cpp:196
 msgid "Subtract 1 mean tropical century"
 msgstr "1 평균분점세기 빼기"
 
-#: src/core/StelCore.cpp:196 src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:198 src/core/StelCore.cpp:199
 msgid "Movement and Selection"
 msgstr "이동 및 선택"
 
-#: src/core/StelCore.cpp:196
+#: src/core/StelCore.cpp:198
 msgid "Set home planet to selected planet"
 msgstr "선택된 행성을 모행성으로 설정"
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:199
 msgid "Go to home"
 msgstr "Home으로 감"
 
-#: src/core/StelCore.cpp:198 src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:200 src/core/StelCore.cpp:201
 msgid "Display Options"
 msgstr "화면 표시 설정"
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:200
 msgid "Flip scene horizontally"
 msgstr "수평 반전"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:201
 msgid "Flip scene vertically"
 msgstr "수직 반전"
 
-#: src/core/StelCore.cpp:1435
+#: src/core/StelCore.cpp:1437
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "보정(수정)이 비활성화됩니다. 당신이 무엇을하는지 알고있는 경우에만 사용하십시오!"
 
-#: src/core/StelCore.cpp:1438
+#: src/core/StelCore.cpp:1440
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -635,14 +635,14 @@ msgstr ""
 "이 역사적인 공식은 1931년  C. Schoch이 발견했으며 G. Henriksson 논문에 사용되었습니다. <em>아인슈타인의 상대성 "
 "이론이 고대 일식현상에 의해 증명되었습니다. </em>(%1). 더 많은 정보는 %2여기%3을 참고하십시오."
 
-#: src/core/StelCore.cpp:1441
+#: src/core/StelCore.cpp:1443
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr "경험방정식은 G. M. Clemence의 논문에 발표된것입니다 <em>천문상수 시스템</em>(%1)."
 
-#: src/core/StelCore.cpp:1444
+#: src/core/StelCore.cpp:1446
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -654,7 +654,7 @@ msgstr ""
 "Meeus가 그의 <em> 계산기를 위한 천문학적 공식</em>에 사용되었습니다. 이것은 또한 SunTracker Pro라는 컴퓨터 "
 "프로그램에 채택되었습니다."
 
-#: src/core/StelCore.cpp:1448
+#: src/core/StelCore.cpp:1450
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -663,7 +663,7 @@ msgstr ""
 "이것은 Mucke & Meeus (1983)에 의해 <em>천체력</em>과 <em>일식편람</em>에 채택된 공식으로 IAU (1952-"
 "국제천문연맹)에서 약간 수정한 버젼입니다."
 
-#: src/core/StelCore.cpp:1452
+#: src/core/StelCore.cpp:1454
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -673,7 +673,7 @@ msgstr ""
 "Tuckerman (1962, 1964) 표는 기원전 601년부터 서기 1649년까지 5년과 10년 간격으로 태양, 달, 행성의 위치를 "
 "목록화합니다. 동일관계는 Goldstine (1973)의 syzygy 표에 암묵적으로 채택되어졌습니다."
 
-#: src/core/StelCore.cpp:1456
+#: src/core/StelCore.cpp:1458
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -683,7 +683,7 @@ msgstr ""
 "이 방정식은 P. M. Muller 와 F. R. Stephenson의 <em>초기 천문학 관측으로부터 지구와 달의 "
 "가속도</em>(%1) 논문에 발표된것입니다."
 
-#: src/core/StelCore.cpp:1459
+#: src/core/StelCore.cpp:1461
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -691,7 +691,7 @@ msgid ""
 msgstr ""
 "이 방정식은  F. R. Stephenson 의 <em>Pre-Telescopic 천문학 관측</em>(%1) 논문에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1462
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -703,7 +703,7 @@ msgstr ""
 "L. D. Schmadel과 G. Zech이 <em>1800-1975 기간안에 보정 delta T E.T.-U.T. 를 위한 다항 근사치 "
 "논문에 발표되었습니다. <em>(%1)"
 
-#: src/core/StelCore.cpp:1465
+#: src/core/StelCore.cpp:1467
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -712,7 +712,7 @@ msgstr ""
 "이 알고리즘은 P. Bretagnon & L. Simon's의 <em>행성 프로그램과 -4000에서 +2800</em>까지 표 그리고 "
 "컴퓨터 플라네타리움 프로그램인 ResShift에 채택되었습니다."
 
-#: src/core/StelCore.cpp:1468
+#: src/core/StelCore.cpp:1470
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -722,11 +722,11 @@ msgstr ""
 "이 방정식은  F. R. Stephenson과 L. V. Morrison <em>기원전 700년부터 서기 1980까지 지구의 회전의 "
 "장주기 변화</em>(%1) 논문에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1471
+#: src/core/StelCore.cpp:1473
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "이 알고리즘은 컴퓨터 플라네타리움 프로그램 Guide 7에 사용되었습니다."
 
-#: src/core/StelCore.cpp:1474
+#: src/core/StelCore.cpp:1476
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -735,7 +735,7 @@ msgstr ""
 "이 알고리즘은  F. Espenak의  <em>50년 일식편람:1986-2035</em>와 50년 <em>월식편람:1986-"
 "2035</em>(1989)에 주어졌습니다."
 
-#: src/core/StelCore.cpp:1477
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -744,7 +744,7 @@ msgstr ""
 "이 방정식은 기원전 2137년부터 서기 1713년까지의 31개 일식기록 데이터를 분석한 K.M. Borkowski (%1)에 의해 "
 "통용되었습니다."
 
-#: src/core/StelCore.cpp:1480
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -755,7 +755,7 @@ msgstr ""
 "이 12차 다항방정식은 Stephenson & Morrison (1984)에 의해 주어진 데이터를 이용하여 L. D. Schmadel과 "
 "G. Zech가 <em>1800-1988년 기간동안 U.T에서 E.T.까지의 경험적 변환</em>(%1)의 논문에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1483
+#: src/core/StelCore.cpp:1485
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -764,7 +764,7 @@ msgstr ""
 "이 공식은 M. Chapront-Touze & J. Chapront의 <em>기원전 4000년부터 서기 8000년까지의 달의 표와 "
 "프로그램</em>(1991)의 ELP 2000-85 달의 이론의 요약버젼에 채택되었습니다."
 
-#: src/core/StelCore.cpp:1486
+#: src/core/StelCore.cpp:1488
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -774,28 +774,28 @@ msgstr ""
 "이 방정식은 F. R. Stephenson과 L. V. Morrison의 <em>기원전 700년부터 서기 1990년까지 지구의 회전안의 "
 "장주기 파동</em>(%1) 논문에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1489
+#: src/core/StelCore.cpp:1491
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr "F. R. Stephenson은 그의 책 <em>과거의 일식과 지구 회전</em>(%1)에 발표하였습니다."
 
-#: src/core/StelCore.cpp:1492
+#: src/core/StelCore.cpp:1494
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -804,14 +804,14 @@ msgstr ""
 "이 polynome는 <em>Polynomial approximations to Delta T, 1620-2000 AD(델타 T에 다항식 "
 "근사치, 서기 1620-2000년)</em>(%1) 논문에 J. Meeus와 L. 시몬스에 의해 발표되었습니다."
 
-#: src/core/StelCore.cpp:1501
+#: src/core/StelCore.cpp:1503
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1504
+#: src/core/StelCore.cpp:1506
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -819,7 +819,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1509
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -827,7 +827,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1512
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -836,7 +836,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1515
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -846,11 +846,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1515
 msgid "Used by default."
 msgstr "기본적으로 사용"
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1518
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -860,7 +860,7 @@ msgstr ""
 "Stephenson & Morrison (1984)에 기초한 B. Banjevic의 이 해결책은 <em>Ancient eclipses "
 "and dating the fall of Babylon(고대 일식과 바빌론의 멸망 날짜)</em>(%1) 논문에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1519
+#: src/core/StelCore.cpp:1521
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -868,47 +868,47 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "이것은 사용자에 의해 정의된 상수를 가지고 %1T의 계산을 위한 2차 방정식입니다."
 
-#: src/core/StelCore.cpp:1525 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1527 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "에러"
 
-#: src/core/StelCore.cpp:1574
+#: src/core/StelCore.cpp:1576
 msgid "with meaningless values outside this range"
 msgstr "이 범위를 벗어나는 의미없는 값"
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1602
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr "1초 미만, 최대의 평균오류,  오류 1.9초, 그리고 이 범위를 벗어나는 무의미한 값"
 
-#: src/core/StelCore.cpp:1622 src/core/StelCore.cpp:1627
-#: src/core/StelCore.cpp:1654 src/core/StelCore.cpp:1659
+#: src/core/StelCore.cpp:1624 src/core/StelCore.cpp:1629
+#: src/core/StelCore.cpp:1656 src/core/StelCore.cpp:1661
 msgid "with zero values outside this range"
 msgstr "이 범위를 벗어나는 0인 값"
 
-#: src/core/StelCore.cpp:1632
+#: src/core/StelCore.cpp:1634
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "일반적으로 1초 정확성과 0 범위를 벗어나는 값"
 
-#: src/core/StelCore.cpp:1669
+#: src/core/StelCore.cpp:1671
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "사용의 유효범위: 년 %1과 %2, %3 사이"
 
-#: src/core/StelCore.cpp:1671
+#: src/core/StelCore.cpp:1673
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "사용의 유효범위: 년 %1과 %2 사이"
 
-#: src/core/StelProjector.cpp:128
+#: src/core/StelProjector.cpp:129
 msgid "Maximum FOV: "
 msgstr "최대 화각: "
 
@@ -1416,11 +1416,11 @@ msgstr "수평 단추 막대 자동 숨기기"
 msgid "Auto hide vertical button bar"
 msgstr "수직 단추 막대 자동 숨기기"
 
-#: src/gui/StelGuiItems.cpp:316 src/gui/StelGuiItems.cpp:741
+#: src/gui/StelGuiItems.cpp:316 src/gui/StelGuiItems.cpp:740
 msgid "Space"
 msgstr "스페이스"
 
-#: src/gui/StelGuiItems.cpp:609
+#: src/gui/StelGuiItems.cpp:608
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -1572,15 +1572,15 @@ msgstr "스트라스부르 대학교 (프랑스)"
 msgid "Harvard University (USA)"
 msgstr "하버드 대학교 (미국)"
 
-#: src/gui/ShortcutsDialog.cpp:489
+#: src/gui/ShortcutsDialog.cpp:487
 msgid "Action"
 msgstr "작동"
 
-#: src/gui/ShortcutsDialog.cpp:490 src/ui_shortcutsDialog.h:197
+#: src/gui/ShortcutsDialog.cpp:488 src/ui_shortcutsDialog.h:197
 msgid "Primary shortcut"
 msgstr "초기 단축키"
 
-#: src/gui/ShortcutsDialog.cpp:491 src/ui_shortcutsDialog.h:198
+#: src/gui/ShortcutsDialog.cpp:489 src/ui_shortcutsDialog.h:198
 msgid "Alternative shortcut"
 msgstr "대안 단축키"
 
@@ -1602,7 +1602,7 @@ msgstr "어디서"
 msgid "year"
 msgstr "년"
 
-#: src/main.cpp:320
+#: src/main.cpp:319
 msgid "This system does not support OpenGL."
 msgstr "이 시스템은 OpenGL을 지원하지 않습니다."
 
@@ -3346,10 +3346,10 @@ msgstr "기본값으로 사용"
 msgid "Return to default"
 msgstr "기본값으로 이동"
 
-#: src/ui_locationDialogGui.h:395 plugins/Oculars/src/ui_ocularDialog.h:1045
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
-#: plugins/Oculars/src/ui_ocularDialog.h:1061
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: src/ui_locationDialogGui.h:395 plugins/Oculars/src/ui_ocularDialog.h:1046
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
 msgid "Delete"
 msgstr "삭제"
 
@@ -4390,7 +4390,7 @@ msgid "Compass marks"
 msgstr "나침반 표시"
 
 #: plugins/Oculars/src/Oculars.cpp:79
-#: plugins/Oculars/src/ui_ocularDialog.h:1026
+#: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Oculars"
 msgstr "접안부(접안경)"
 
@@ -4456,7 +4456,7 @@ msgid "&Reset rotation"
 msgstr "&회전 재설정"
 
 #: plugins/Oculars/src/Oculars.cpp:1266
-#: plugins/Oculars/src/ui_ocularDialog.h:1028
+#: plugins/Oculars/src/ui_ocularDialog.h:1029
 msgid "Ocular view"
 msgstr "접안부 시야"
 
@@ -4800,155 +4800,155 @@ msgstr "접안부 중첨 스위치 on/off"
 msgid "Opens the pop-up navigation menu."
 msgstr "팝업 탐색 메뉴 열기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1029
+#: plugins/Oculars/src/ui_ocularDialog.h:1030
 msgid "Enable only if an object is selected"
 msgstr "천체가 선택되어진 경우에만 사용"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1030
+#: plugins/Oculars/src/ui_ocularDialog.h:1031
 msgid "Scale image circle"
 msgstr "눈금 이미지 원"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1032
+#: plugins/Oculars/src/ui_ocularDialog.h:1033
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "망원경의 다른 구경을 위해 한계 성운 등급을 적용하세요."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1034
+#: plugins/Oculars/src/ui_ocularDialog.h:1035
 msgid "Limit stellar magnitude"
 msgstr "한계 성운 등급"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1035
+#: plugins/Oculars/src/ui_ocularDialog.h:1036
 msgid "Key mappings"
 msgstr "키 매핑"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1036
+#: plugins/Oculars/src/ui_ocularDialog.h:1037
 msgid "Toggle ocular view:"
 msgstr "On/Off 전환 접안부 시야:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1038
+#: plugins/Oculars/src/ui_ocularDialog.h:1039
 msgid "Open pop-up navigation menu:"
 msgstr "팝업 탐색 메뉴 열기:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/ui_ocularDialog.h:1040
 msgid "Interface"
 msgstr "인터페이스"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1040
+#: plugins/Oculars/src/ui_ocularDialog.h:1041
 msgid "On-screen control panel"
 msgstr "On-스크린 컨트롤 패널"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/ui_ocularDialog.h:1042
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCD  FOV(시야각)을 위한 각도/각분 이용하기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1043
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:219
 msgid "General"
 msgstr "일반 사항"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
-#: plugins/Oculars/src/ui_ocularDialog.h:1051
+#: plugins/Oculars/src/ui_ocularDialog.h:1044
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Eyepieces"
 msgstr "접안렌즈"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1044
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
+#: plugins/Oculars/src/ui_ocularDialog.h:1045
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Add"
 msgstr "추가"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1046
-#: plugins/Oculars/src/ui_ocularDialog.h:1055
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
-#: plugins/Oculars/src/ui_ocularDialog.h:1073
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Satellites/src/ui_satellitesDialog.h:723
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "이름:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1048
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid "Focal length:"
 msgstr "초점 거리:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Field stop:"
 msgstr "시야 조리개:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Binoculars"
 msgstr "쌍안경"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
-#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Lenses"
 msgstr "렌즈"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Multiplier:"
 msgstr "배율기:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1057
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
-#: plugins/Oculars/src/ui_ocularDialog.h:1069
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
+#: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Sensors"
 msgstr "센서"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Resolution x (pixels):"
 msgstr "해상도 x (픽셀):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "Resolution y (pixels):"
 msgstr "해상도 y (픽셀):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 msgid "Chip width (mm):"
 msgstr "칩 폭(mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1066
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
 msgid "Chip height (mm):"
 msgstr "칩 높이 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
+#: plugins/Oculars/src/ui_ocularDialog.h:1068
 msgid "Pixel width (micron):"
 msgstr "픽셀 폭 (마이크론):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1068
+#: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Pixel height (micron):"
 msgstr "픽셀 높이 (마이크론):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1070
-#: plugins/Oculars/src/ui_ocularDialog.h:1078
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:391
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Telescopes"
 msgstr "천체망원경"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1076
 msgid "Diameter:"
 msgstr "직경:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
 msgid "Horizontal flip"
 msgstr "수평 뒤집기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Vertical flip"
 msgstr "수직 뒤집기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
+#: plugins/Oculars/src/ui_ocularDialog.h:1080
 #: plugins/Satellites/src/ui_satellitesDialog.h:754
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -6086,62 +6086,62 @@ msgstr ""
 "표시 줄에 표시되는 방식을 변경할 수 있습니다."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "January"
 msgstr "1월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "February"
 msgstr "2월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "March"
 msgstr "3월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "April"
 msgstr "4월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "May"
 msgstr "5월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "June"
 msgstr "6월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "July"
 msgstr "7월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "August"
 msgstr "8월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "September"
 msgstr "9월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "October"
 msgstr "10월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "November"
 msgstr "11월"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:706
+#: plugins/Supernovae/src/Supernovae.cpp:705
 msgid "December"
 msgstr "12월"
 
@@ -6700,7 +6700,7 @@ msgid "Solar System"
 msgstr "태양계"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
-#: plugins/Supernovae/src/Supernovae.cpp:141
+#: plugins/Supernovae/src/Supernovae.cpp:140
 msgid "Historical Supernovae"
 msgstr "역사적인 초신성"
 
@@ -6708,7 +6708,7 @@ msgstr "역사적인 초신성"
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr "이 플러그인은 역사적으로 몇개의 밝은 초신성을 볼 수 있습니다."
 
-#: plugins/Supernovae/src/Supernovae.cpp:141
+#: plugins/Supernovae/src/Supernovae.cpp:140
 msgid "Historical Supernovae configuration window"
 msgstr "역대 초신성 구성창"
 
@@ -6837,7 +6837,7 @@ msgstr "업데이트 주기(일):"
 msgid "[next update info]"
 msgstr "[다음 업데이트 정보]"
 
-#: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:135
 msgid "Bright Novae"
 msgstr "신성 밝기"
 
@@ -6845,7 +6845,7 @@ msgstr "신성 밝기"
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "은하계의 일부 밝은 신성을 보기위해 플러그인."
 
-#: plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:135
 msgid "Bright Novae configuration window"
 msgstr "밝은 신성 구성창"
 
@@ -6909,8 +6909,8 @@ msgstr "밝은 신성 구성"
 msgid "Bright Novae Plug-in Configuration"
 msgstr "밝은 신성 플러그-인 구성"
 
-#: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:158
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:157
+#: plugins/Quasars/src/Quasars.cpp:158
 msgid "Quasars"
 msgstr "퀘이사"
 
@@ -6921,11 +6921,11 @@ msgid ""
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:158
+#: plugins/Quasars/src/Quasars.cpp:157
 msgid "Show quasars"
 msgstr "퀘이사 보여주기"
 
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:158
 msgid "Quasars configuration window"
 msgstr "퀘이사 구성창"
 
@@ -6987,8 +6987,8 @@ msgstr "시작시 표시 가능"
 msgid "Show quasars button on toolbar"
 msgstr "툴바에서 퀘이스 버튼 보기"
 
-#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:158
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:157
+#: plugins/Pulsars/src/Pulsars.cpp:158
 msgid "Pulsars"
 msgstr "펄사"
 
@@ -6999,11 +6999,11 @@ msgid ""
 "about each one."
 msgstr "이 플러그는 다양한 펄사(각각의 천체 정보를 가진)의 위치를 나타냅니다."
 
-#: plugins/Pulsars/src/Pulsars.cpp:158
+#: plugins/Pulsars/src/Pulsars.cpp:157
 msgid "Show pulsars"
 msgstr "펄사 보여주기"
 
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:158
 msgid "Pulsars configuration window"
 msgstr "펄사 구성창"
 
@@ -7194,8 +7194,8 @@ msgid "Show pulsars button on toolbar"
 msgstr "툴바 버튼을 켜서 펄사 보기"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:73
+#: plugins/Exoplanets/src/Exoplanets.cpp:161
 #: plugins/Exoplanets/src/Exoplanets.cpp:162
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
 msgid "Exoplanets"
 msgstr "외계행성"
 
@@ -7205,11 +7205,11 @@ msgid ""
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:162
+#: plugins/Exoplanets/src/Exoplanets.cpp:161
 msgid "Show exoplanets"
 msgstr "외계 행성 보기"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:162
 msgid "Exoplanets configuration window"
 msgstr "외계행성 구성창"
 
