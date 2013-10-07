@@ -18,6 +18,7 @@
  */
 
 #include "StelActionMgr.hpp"
+#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 
 #include <QVariant>
@@ -91,6 +92,11 @@ void StelAction::setAltShortcut(const QString& key)
 {
 	altKeySequence = QKeySequence(key);
 	emit changed();
+}
+
+QString StelAction::getText() const
+{
+	return q_(text);
 }
 
 void StelAction::setChecked(bool value)
