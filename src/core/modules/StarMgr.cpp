@@ -768,8 +768,8 @@ int StarMgr::getMaxSearchLevel() const
 	foreach(const ZoneArray* z, gridLevels)
 	{
 		const float mag_min = 0.001f*z->mag_min;
-		float rcmag[2];
-		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
+		RCMag rcmag;
+		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min, &rcmag)==false)
 			break;
 		rval = z->level;
 	}
@@ -799,28 +799,28 @@ void StarMgr::draw(StelCore* core)
 	skyDrawer->preDrawPointSource(&sPainter);
 
 	// draw all the stars of all the selected zones
-	float rcmag_table[2*RCMAG_TABLE_SIZE];
+	RCMag rcmag_table[RCMAG_TABLE_SIZE];
 
 	foreach(const ZoneArray* z, gridLevels)
 	{
 		const float mag_min = 0.001f*z->mag_min;
 		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
 		// GZ: add a huge number of entries to rcMag
-		//for (int i=it.value()->mag_steps-1;i>=0;--i)
+		//for (int i=z->mag_steps-1;i>=0;--i)
 		for (int i=RCMAG_TABLE_SIZE-1;i>=0;--i)
 		{
 			const float mag = mag_min+k*i;
-			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
+			if (skyDrawer->computeRCMag(mag, rcmag_table+i)==false)
 			{
 				if (i==0) goto exit_loop;
 			}
 			if (skyDrawer->getFlagPointStar())
 			{
-				rcmag_table[2*i+1] *= starsFader.getInterstate();
+				rcmag_table[i].luminance *= starsFader.getInterstate();
 			}
 			else
 			{
-				rcmag_table[2*i] *= starsFader.getInterstate();
+				rcmag_table[i].radius *= starsFader.getInterstate();
 			}
 		}
 		lastMaxSearchLevel = z->level;
