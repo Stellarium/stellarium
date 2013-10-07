@@ -704,7 +704,7 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 	}
 }
 
-float StelApp::setDevicePixelsPerPixel(float dppp)
+void StelApp::setDevicePixelsPerPixel(float dppp)
 {
 	// Check that the device-independent pixel size didn't change
 	if (devicePixelsPerPixel!=dppp)
