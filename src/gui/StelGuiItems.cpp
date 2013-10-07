@@ -64,7 +64,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
 	noBckground = noBackground;
-	isTristate_ = false;
+	isTristate_ = isTristate;
 	opacity = 1.;
 	hoverOpacity = 0.;
 	action = aaction;

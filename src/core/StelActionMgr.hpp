@@ -56,7 +56,7 @@ public:
 	QString getGroup() const {return group;}
 	const QKeySequence getShortcut() const {return keySequence;}
 	const QKeySequence getAltShortcut() const {return altKeySequence;}
-	const QString& getText() const {return text;}
+	QString getText() const;
 	void setText(const QString& value) {text = value; emit changed();}
 signals:
 	void toggled(bool);
