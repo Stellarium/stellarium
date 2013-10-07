@@ -204,13 +204,13 @@ float StelSkyDrawer::computeLimitMagnitude() const
 {
 	float a=-26.f;
 	float b=30.f;
-	float rcmag[2];
+	RCMag rcmag;
 	float lim = 0.f;
 	int safety=0;
-	while (std::fabs(lim-a)>0.05)
+	while (std::fabs(lim-a)>0.05f)
 	{
-		computeRCMag(lim, rcmag);
-		if (rcmag[0]<=0.f)
+		computeRCMag(lim, &rcmag);
+		if (rcmag.radius<=0.f)
 		{
 			float tmp = lim;
 			lim=(a+lim)*0.5;
@@ -289,37 +289,38 @@ float StelSkyDrawer::luminanceToSurfacebrightness(float lum)
 }
 
 // Compute RMag and CMag from magnitude for a point source.
-bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
+bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
-	rcMag[0] = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.40f/2.f);
-	rcMag[0]*=starLinearScale;
+	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.40f/2.f);
+	rcMag->radius *=starLinearScale;
 
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
-	if (rcMag[0] < 0.01f)
+	if (rcMag->radius < 0.01f)
 	{
-		rcMag[0] = rcMag[1] = 0.f;
+		rcMag->radius = 0.f;
+		rcMag->luminance = 0.f;
 		return false;
 	}
 
 	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
 	// And we compensate the difference of brighteness with cmag
-	if (rcMag[0]<1.2f)
+	if (rcMag->radius<1.2f)
 	{
-		rcMag[1] = rcMag[0] * rcMag[0] * rcMag[0] / 1.728f;
-		if (rcMag[1] < 0.01f)
+		rcMag->luminance= rcMag->radius * rcMag->radius * rcMag->radius / 1.728f;
+		if (rcMag->luminance < 0.01f)
 		{
-			rcMag[0] = rcMag[1] = 0.f;
+			rcMag->radius = rcMag->luminance = 0.f;
 			return false;
 		}
-		rcMag[0] = 1.2f;
+		rcMag->radius = 1.2f;
 	}
 	else
 	{
 		// cmag:
-		rcMag[1] = 1.0f;
-		if (rcMag[0]>MAX_LINEAR_RADIUS)
+		rcMag->luminance = 1.0f;
+		if (rcMag->radius>MAX_LINEAR_RADIUS)
 		{
-			rcMag[0]=MAX_LINEAR_RADIUS+std::sqrt(1.f+rcMag[0]-MAX_LINEAR_RADIUS)-1.f;
+			rcMag->radius=MAX_LINEAR_RADIUS+std::sqrt(1.f+rcMag->radius-MAX_LINEAR_RADIUS)-1.f;
 		}
 	}
 	return true;
@@ -364,7 +365,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 }
 
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag& rcMag, const Vec3f& bcolor, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
 	Vec3f color(bcolor);
@@ -374,21 +375,21 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		color[2] = 0;
 	}
 
-	if (rcMag[0]<=0.f)
+	if (rcMag.radius<=0.f)
 		return false;
 
 	Vec3f win;
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	const float radius = rcMag[0];
+	const float radius = rcMag.radius;
 	// Random coef for star twinkling
-	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag[1] : rcMag[1];
+	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
 
 	// If the rmag is big, draw a big halo
 	if (radius>MAX_LINEAR_RADIUS+5.f)
 	{
-		float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
+		float cmag = qMin(rcMag.luminance,(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
 		float rmag = 150.f;
 		if (cmag>1.f)
 			cmag = 1.f;
@@ -480,8 +481,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	bool save = flagStarTwinkle;
 	flagStarTwinkle = false;
 
-	float rcm[2];
-	computeRCMag(mag, rcm);
+	RCMag rcm;
+	computeRCMag(mag, &rcm);
 
 	// We now have the radius and luminosity of the small halo
 	// If the disk of the planet is big enough to be visible, we should adjust the eye adaptation luminance
@@ -492,25 +493,25 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	bool truncated=false;
 
 	float maxHaloRadius = qMax(tStart*3., pixRadius*3.);
-	if (rcm[0]>maxHaloRadius)
+	if (rcm.radius>maxHaloRadius)
 	{
 		truncated = true;
-		rcm[0]=maxHaloRadius+std::sqrt(rcm[0]-maxHaloRadius);
+		rcm.radius=maxHaloRadius+std::sqrt(rcm.radius-maxHaloRadius);
 	}
 
 	// Fade the halo away when the disk is too big
 	if (pixRadius>=tStop)
 	{
-		rcm[1]=0.f;
+		rcm.luminance=0.f;
 	}
 	if (pixRadius>tStart && pixRadius<tStop)
 	{
-		rcm[1]=(tStop-pixRadius)/(tStop-tStart);
+		rcm.luminance=(tStop-pixRadius)/(tStop-tStart);
 	}
 
 	if (truncated && flagLuminanceAdaptation)
 	{
-		float wl = findWorldLumForMag(mag, rcm[0]);
+		float wl = findWorldLumForMag(mag, rcm.radius);
 		if (wl>0)
 		{
 			const float f = core->getMovementMgr()->getCurrentFov();
@@ -521,7 +522,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	if (!noStarHalo)
 	{
 		preDrawPointSource(painter);
-		drawPointSource(painter, v,rcm,color);
+		drawPointSource(painter, v, rcm, color);
 		postDrawPointSource(painter);
 	}
 	flagStarTwinkle=save;
@@ -534,15 +535,15 @@ float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 	// Compute the luminance by dichotomy
 	float a=0.001f;
 	float b=500000.f;
-	float rcmag[2];
-	rcmag[0]=-99;
+	RCMag rcmag;
+	rcmag.radius=-99;
 	float curLum = 500.f;
 	int safety=0;
-	while (std::fabs(rcmag[0]-targetRadius)>0.1)
+	while (std::fabs(rcmag.radius-targetRadius)>0.1)
 	{
 		eye->setWorldAdaptationLuminance(curLum);
-		computeRCMag(mag, rcmag);
-		if (rcmag[0]<=targetRadius)
+		computeRCMag(mag, &rcmag);
+		if (rcmag.radius<=targetRadius)
 		{
 			float tmp = curLum;
 			curLum=(a+curLum)/2;
