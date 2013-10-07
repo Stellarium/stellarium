@@ -31,6 +31,14 @@ class StelToneReproducer;
 class StelCore;
 class StelPainter;
 
+//! Contains the 2 parameters necessary to draw a star on screen.
+//! the radius and luminance of the star halo texture.
+struct RCMag
+{
+	float radius;
+	float luminance;
+};
+
 //! @class StelSkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
 //! eyes adaptation, zoom level, instrument model and artificially set magnitude limits
@@ -64,10 +72,10 @@ public:
 	//! @param bV the source B-V index
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
+	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, unsigned int bV, bool checkInScreen=false)
 		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}
 
-	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], const Vec3f& bcolor, bool checkInScreen=false);
+	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false);
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation
@@ -81,7 +89,7 @@ public:
 	//! @param mag the object integrated V magnitude
 	//! @param rcMag array of 2 floats containing the radius and luminance
 	//! @return false if the object is too faint to be displayed
-	bool computeRCMag(float mag, float rcMag[2]) const;
+	bool computeRCMag(float mag, RCMag*) const;
 
 	//! Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
 	//! This information is used to determine the world adaptation luminance
