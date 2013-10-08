@@ -27,34 +27,6 @@ Extinction::Extinction() : ext_coeff(50), undergroundExtinctionMode(UndergroundE
 {
 }
 
-//  altAzPos is the NORMALIZED (!!!) star position vector WITHOUT REFRACTION, and its z component sin(altitude).
-void Extinction::forward(const Vec3d *altAzPos, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i)
-	{
-		Q_ASSERT(fabs(altAzPos[i].length()-1.f)<0.001f);
-		mag[i] += airmass(altAzPos[i][2], false) * ext_coeff;
-	}
-}
-void Extinction::forward(const Vec3f *altAzPos, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i)
-	{
-		Q_ASSERT(fabs(altAzPos[i].length()-1.f)<0.001f);
-		mag[i] += airmass(altAzPos[i][2], false) * ext_coeff;
-	}
-}
-
-// from observed magnitude in apparent (observed) altitude to atmosphere-free mag, still in apparent, refracted altitude.
-void Extinction::backward(const Vec3d *altAzPos, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], false) * ext_coeff;
-}
-void Extinction::backward(const Vec3f *altAzPos, float *mag, const int num) const
-{
-	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], false) * ext_coeff;
-}
-
 // airmass computation for cosine of zenith angle z
 float Extinction::airmass(float cosZ, const bool apparent_z) const
 {
