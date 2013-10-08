@@ -800,9 +800,10 @@ void StarMgr::draw(StelCore* core)
 
 	// draw all the stars of all the selected zones
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
-
+	
 	foreach(const ZoneArray* z, gridLevels)
 	{
+		int limitMagIndex=RCMAG_TABLE_SIZE;
 		const float mag_min = 0.001f*z->mag_min;
 		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
 		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
@@ -812,6 +813,9 @@ void StarMgr::draw(StelCore* core)
 			{
 				if (i==0)
 					goto exit_loop;
+				
+				// The last magnitude at which the star is visible
+				limitMagIndex = i-1;
 				
 				// We reached the point where stars are not visible anymore
 				// Fill the rest of the table with zero and leave.
@@ -843,9 +847,9 @@ void StarMgr::draw(StelCore* core)
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
