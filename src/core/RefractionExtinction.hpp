@@ -152,6 +152,9 @@ private:
 	//! Update precomputed variables.
 	void updatePrecomputed();
 
+	void innerRefractionForward(Vec3f& altAzPos) const;
+	void innerRefractionBackward(Vec3f& altAzPos) const;
+	
 	//! These 3 Atmosphere parameters can be controlled by GUI.
 	//! Pressure[mbar] (1013)
 	float pressure;
@@ -161,24 +164,6 @@ private:
 	float press_temp_corr_Saemundson;
 	//! Numerator of refraction formula, to be cached for speed.
 	float press_temp_corr_Bennett;
-
-	//! These constants are usable for experiments with the limits of refraction effects.
-	static const double MIN_GEO_ALTITUDE_DEG;
-	static const double MIN_GEO_ALTITUDE_RAD;
-	static const double MIN_GEO_ALTITUDE_SIN;
-	static const double MIN_APP_ALTITUDE_DEG;
-	static const double MIN_APP_ALTITUDE_RAD;
-	static const double MIN_APP_ALTITUDE_SIN;
-	static const float MIN_GEO_ALTITUDE_DEG_F;
-	static const float MIN_GEO_ALTITUDE_RAD_F;
-	static const float MIN_GEO_ALTITUDE_SIN_F;
-	static const float MIN_APP_ALTITUDE_DEG_F;
-	static const float MIN_APP_ALTITUDE_RAD_F;
-	static const float MIN_APP_ALTITUDE_SIN_F;
-	static const double TRANSITION_WIDTH_GEO_DEG;
-	static const double TRANSITION_WIDTH_GEO_DEG_F;
-	static const double TRANSITION_WIDTH_APP_DEG;
-	static const double TRANSITION_WIDTH_APP_DEG_F;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;
