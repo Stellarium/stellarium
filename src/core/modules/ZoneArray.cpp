@@ -513,7 +513,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		const RCMag* tmpRcmag = rcmag_table+s->mag;
 		
 		// The radius of the star is <=0, following stars will be dimmer --> early exit
-		if (tmpRcmag->radius<=0.f)
+		if (tmpRcmag->radius<=0.01f)
 			break;
 		
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
