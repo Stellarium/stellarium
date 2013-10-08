@@ -490,6 +490,10 @@ double Planet::getSiderealTime(double jd) const
 double Planet::getMeanSolarDay() const
 {
 	double msd = 0.;
+
+	if (englishName=="Sun")
+		return msd;
+
 	double sday = getSiderealDay();	
 	double coeff = std::abs(sday/getSiderealPeriod());
 	float sign = 1;
