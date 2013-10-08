@@ -453,18 +453,6 @@ QDateTime jdToQDateTime(const double& jd)
 
 void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 {
-	// Use Qt for convert Julian day to date
-	QDate d;
-	int year = d.fromJulianDay(jd).year();
-	*mm = d.fromJulianDay(jd).month();
-	*dd = d.fromJulianDay(jd).day();
-	// Qt use historical numeration of JD - add fix for astronomical numeration
-	// Details: http://qt-project.org/doc/qt-5.0/qtcore/qdatetime.html
-	if (year>0)
-		*yy = year;
-	else
-		*yy = year + 1;
-
 	//WARNING: Algorithm below give wrong data for dates before 1582 year (before Gregorian calendar) with Qt5 --AW
 
 	/*
@@ -475,8 +463,6 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	 * at http://www.nr.com/ , under "Obsolete Versions - Older
 	 * book and code versions.
 	 */
-
-	/*
 
 	static const long JD_GREG_CAL = 2299161;
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
@@ -527,8 +513,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	if (julian < 0)
 	{
 		*yy -= 100 * (1 - julian / 36525);
-	}
-	*/
+	}	
 }
 
 void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second)
