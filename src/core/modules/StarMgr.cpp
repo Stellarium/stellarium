@@ -807,12 +807,21 @@ void StarMgr::draw(StelCore* core)
 		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
 		// GZ: add a huge number of entries to rcMag
 		//for (int i=z->mag_steps-1;i>=0;--i)
-		for (int i=RCMAG_TABLE_SIZE-1;i>=0;--i)
+		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
 			const float mag = mag_min+k*i;
-			if (skyDrawer->computeRCMag(mag, rcmag_table+i)==false)
+			if (skyDrawer->computeRCMag(mag, &rcmag_table[i])==false)
 			{
-				if (i==0) goto exit_loop;
+				if (i==0)
+					goto exit_loop;
+				
+				// We reached the point where stars are not visible anymore
+				// Fill the rest of the table with zero and leave.
+				for (;i<RCMAG_TABLE_SIZE;++i)
+				{
+					rcmag_table[i].luminance=0;
+					rcmag_table[i].radius=0;
+				}
 			}
 			if (skyDrawer->getFlagPointStar())
 			{
