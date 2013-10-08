@@ -55,17 +55,33 @@ public:
 	Extinction();
 	
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
-	//! This call must therefore be done after application of Refraction, and only if atmospheric effects are on.
+	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(apparent_altitude).
+	//! This call must therefore be done before application of Refraction if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(const Vec3d *altAzPos, float *mag, const int num=1) const;
-	void forward(const Vec3f *altAzPos, float *mag, const int num=1) const;
+	void forward(const Vec3d& altAzPos, float* mag) const
+	{
+		Q_ASSERT(std::fabs(altAzPos.length()-1.f)<0.001f);
+		*mag += airmass(altAzPos[2], false) * ext_coeff;
+	}
+	
+	void forward(const Vec3f& altAzPos, float* mag) const
+	{
+		Q_ASSERT(std::fabs(altAzPos.length()-1.f)<0.001f);
+		*mag += airmass(altAzPos[2], false) * ext_coeff;
+	}
 
 	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(const Vec3d *altAzPos, float *mag, const int num=1) const;
-	void backward(const Vec3f *altAzPos, float *mag, const int num=1) const;
+	void backward(const Vec3d& altAzPos, float* mag) const
+	{
+		*mag -= airmass(altAzPos[2], false) * ext_coeff;
+	}
+	
+	void backward(const Vec3f& altAzPos, float* mag) const
+	{
+		*mag -= airmass(altAzPos[2], false) * ext_coeff;
+	}
 
 	//! Set visual extinction coefficient (mag/airmass), influences extinction computation.
 	//! @param k= 0.1 for highest mountains, 0.2 for very good lowland locations, 0.35 for typical lowland, 0.5 in humid climates.
