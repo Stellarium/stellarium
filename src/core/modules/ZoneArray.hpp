@@ -102,7 +102,7 @@ public:
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
-					  const RCMag* rcmag_table, StelCore* core,
+					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
 					  unsigned int maxMagStarName,float names_brightness) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
@@ -176,11 +176,12 @@ protected:
 	//! @param index zone index to draw
 	//! @param isInsideViewport whether the zone is inside the current viewport
 	//! @param rcmag_table table of magnitudes
+	//! @param limitMagIndex index from rcmag_table at which stars are not visible anymore
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
 	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
-			  const RCMag *rcmag_table, StelCore* core,
+			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
 			  unsigned int maxMagStarName, float names_brightness) const;
 
 	virtual void scaleAxis();

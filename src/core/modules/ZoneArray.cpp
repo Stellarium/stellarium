@@ -483,7 +483,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 
 template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
-	StelCore* core, unsigned int maxMagStarName, float names_brightness) const
+	int limitMagIndex, StelCore* core, unsigned int maxMagStarName, float names_brightness) const
 {
     StelSkyDrawer* drawer = core->getSkyDrawer();
     Vec3f vf;
@@ -495,10 +495,15 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
     const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
     const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
 	
-	// GZ: allow artificial cutoff:
-	const int clampStellarMagnitude_mmag = (int) floor(drawer->getCustomStarMagnitudeLimit() * 1000.0f);
-	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.
-	int cutoffMagStep=(drawer->getFlagStarMagnitudeLimit() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
+	// Allow artificial cutoff:
+	// find the (integer) mag at which is just bright enough to be drawn.
+	int cutoffMagStep=limitMagIndex;
+	if (drawer->getFlagStarMagnitudeLimit())
+	{
+		cutoffMagStep = ((int)(drawer->getCustomStarMagnitudeLimit()*1000.f) - mag_min)*mag_steps/mag_range;
+		if (cutoffMagStep>limitMagIndex)
+			cutoffMagStep = limitMagIndex;
+	}
     
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
@@ -509,24 +514,20 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (s->mag > cutoffMagStep)
 			break;
     
-		// Array of 2 numbers containing radius and magnitude
-		const RCMag* tmpRcmag = rcmag_table+s->mag;
+		// Because of the test above, the star should always be visible from this point.
 		
-		// The radius of the star is <=0, following stars will be dimmer --> early exit
-		if (tmpRcmag->radius<=0.01f)
-			break;
+		// Array of 2 numbers containing radius and magnitude
+		const RCMag* tmpRcmag = &rcmag_table[s->mag];
 		
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
 
-		// GZ new:
 		if (withExtinction)
 		{
-			//GZ: We must compute position first, then shift magnitude.
 			Vec3f altAz(vf);
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
-			float extMagShift=0.0f;
 			altAz.normalize();
-			extinction.forward(&altAz, &extMagShift);
+			float extMagShift=0.0f;
+			extinction.forward(altAz, &extMagShift);
 			int extMagShiftStep=qMin((int)(extMagShift/k), RCMAG_TABLE_SIZE-mag_steps);
 			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 			{
@@ -534,7 +535,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			}
 			else
 			{
-				tmpRcmag = rcmag_table+s->mag+extMagShiftStep;
+				tmpRcmag = &rcmag_table[s->mag+extMagShiftStep];
 			}
 		}
 	
