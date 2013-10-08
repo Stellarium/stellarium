@@ -274,7 +274,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 			Vec3d altAz = core->j2000ToAltAz(bary, StelCore::RefractionOff);
 			float extinctionMagnitude=0.0f;
 			altAz.normalize();
-			core->getSkyDrawer()->getExtinction().forward(&altAz, &extinctionMagnitude);
+			core->getSkyDrawer()->getExtinction().forward(altAz, &extinctionMagnitude);
 			// compute a simple factor from magnitude loss.
 			float extinctionFactor=std::pow(0.4f , extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
 			extinctedColor[0]*=fabs(extinctionFactor);
