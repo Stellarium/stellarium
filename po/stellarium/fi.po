@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 02:11+0700\n"
-"PO-Revision-Date: 2013-10-02 17:49+0000\n"
+"POT-Creation-Date: 2013-10-07 21:34+0700\n"
+"PO-Revision-Date: 2013-10-07 20:33+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-07 05:16+0000\n"
-"X-Generator: Launchpad (build 16791)\n"
+"X-Launchpad-Export-Date: 2013-10-08 05:21+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
@@ -6811,8 +6811,8 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 "Merkitse kohteet, jotka haluat tuoda. <i>Kursiivilla</i> on listattu jo "
-"haettujen kohteiden nimet. <b>Lihavoituna</b> on listattu kohteiden nimet, "
-"jotka ovat oletuksena sisällytetyy Stellariumin aurinkokunta-"
+"haettujen kohteiden nimet. <b>Lihavoituna</b> on listattu niiden kohteiden "
+"nimet, jotka ovat oletuksena sisällytetty Stellariumin aurinkokunta-"
 "asetuksiin.<br/>Huomaa, että suuren kohdemäärän lisääminen voi hidastaa "
 "Stellariumia."
 
@@ -7563,6 +7563,9 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
+"Tämä laajennus näyttää mahdollisesti elinkelpoiset eksoplaneetat (oranssi "
+"merkki) ja tietoja kyseisistä planeetoista - elinkelpoisuusluokka, pinnan "
+"keskilämpötila ja Maankaltaisuus-indeksi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Habitable Class"
@@ -7577,10 +7580,17 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
+"Luokittelee elinkelpoiset planeetat lämpötilaan perustuen: "
+"hypopsykroplaneetat (O tai hP) = hyvin kylmiä (alle −50°C); psykroplaneetat "
+"(P) = kylmiä; mesoplaneetat (M) = keskilämpöisiä (0-50°C); termoplaneetat "
+"(T) = kuumia; hypotermoplaneetat (E tai hT) = hyvin kuumia (yli 100°C). "
+"Mesoplaneetat ovat ideaalisia monimutkaiselle elämälle, kun taas luokan O ja "
+"E planeetat ylläpitävät vain ekstermofiilistä elämää. Ei-elinkepoisille "
+"planeetoille on annettu luokka X (tai NH)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "Pinnan keskilämpötila"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7588,10 +7598,13 @@ msgid ""
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
 "0.3 in all cases)."
 msgstr ""
+"Lämpötila (°C) perustuu samankaltaiseen ilmakehään ja planeetan "
+"massasuhteeseen, sekä 1% CO2 aiheuttamaan kasvihuoneilmiöön (olettaen että "
+"albedo on 0.3 kaikissa tapauksissa)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Maankaltaisuus -indeksi (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7599,6 +7612,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Samankaltaisuus Maahan asteikolla nollasta yhteen, jossa 1 on kaikkein "
+"maankaltaisin. ESI riippuu planeetan säteestä, tiheydestä, pakonopeudesta ja "
+"pintalämpötilasta."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -7730,7 +7746,7 @@ msgstr "Tietoja"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Verkkosivustot"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
