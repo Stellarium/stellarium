@@ -805,8 +805,6 @@ void StarMgr::draw(StelCore* core)
 	{
 		const float mag_min = 0.001f*z->mag_min;
 		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
-		// GZ: add a huge number of entries to rcMag
-		//for (int i=z->mag_steps-1;i>=0;--i)
 		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
 			const float mag = mag_min+k*i;
