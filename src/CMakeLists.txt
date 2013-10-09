@@ -399,7 +399,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	# Compile the static library
 	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
-	QT5_USE_MODULES(StelGuiLib Core Gui Widgets OpenGL Script Declarative)
+	QT5_USE_MODULES(StelGuiLib Core Gui Widgets Network OpenGL Script Declarative)
 	SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/${CMAKE_CFG_INTDIR}/libStelGuiLib.a)
 	ADD_DEPENDENCIES(AllStaticPlugins StelGuiLib)

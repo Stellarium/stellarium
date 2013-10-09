@@ -28,6 +28,7 @@ SET(extLinkerOption ${OPENGL_LIBRARIES})
 #Dynamic library
 IF(BUILD_DYNAMIC_PLUGINS)
  ADD_LIBRARY(TimeZoneConfiguration MODULE ${TimeZoneConfiguration_SRCS} ${TimeZoneConfiguration_RES_CXX} ${TimeZoneConfiguration_UIS_H})
+ QT5_USE_MODULES(TimeZoneConfiguration Core Declarative Network)
 
  IF(APPLE)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
@@ -50,6 +51,7 @@ ENDIF()
 #Static library
 IF(BUILD_STATIC_PLUGINS)
  ADD_LIBRARY(TimeZoneConfiguration-static STATIC ${TimeZoneConfiguration_SRCS} ${TimeZoneConfiguration_RES_CXX} ${TimeZoneConfiguration_UIS_H})
+ QT5_USE_MODULES(TimeZoneConfiguration-static Core Declarative Network)
  SET_TARGET_PROPERTIES(TimeZoneConfiguration-static PROPERTIES OUTPUT_NAME "TimeZoneConfiguration")
  TARGET_LINK_LIBRARIES(TimeZoneConfiguration-static ${extLinkerOption})
  SET_TARGET_PROPERTIES(TimeZoneConfiguration-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
