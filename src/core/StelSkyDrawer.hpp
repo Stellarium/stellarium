@@ -46,6 +46,7 @@ class StelSkyDrawer : public QObject
 {
 	Q_OBJECT
 public:
+
 	//! Constructor
 	StelSkyDrawer(StelCore* core);
 	//! Destructor
@@ -330,12 +331,29 @@ private:
 	float inScale;
 
 	// Variables used for GL optimization when displaying point sources
+	//! Vertex format for a point source.
+	//! Texture pos is stored in another separately.
+	struct StarVertex {
+		Vec2f pos;
+		unsigned char color[4];
+	};
+	
 	//! Buffer for storing the vertex array data
-	Vec3f* verticesGrid;
-	//! Buffer for storing the color array data
-	Vec3f* colorGrid;
-	//! Buffer for storing the texture coordinate array data
-	Vec2f* textureGrid;
+	StarVertex* vertexArray;
+
+	//! Buffer for storing the texture coordinate array data.
+	unsigned char* textureCoordArray;
+	
+	class QOpenGLShaderProgram* starShaderProgram;
+	struct StarShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int pos;
+		int color;
+		int texture;
+	};
+	StarShaderVars starShaderVars;
+	
 	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
 	//! Maximum number of sources which can be stored in the buffers

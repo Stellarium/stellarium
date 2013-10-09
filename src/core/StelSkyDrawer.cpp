@@ -117,31 +117,28 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 	// Initialize buffers for use by gl vertex array
 	nbPointSources = 0;
 	maxPointSources = 1000;
-	verticesGrid = new Vec3f[maxPointSources*6];
-	colorGrid = new Vec3f[maxPointSources*6];
-	textureGrid = new Vec2f[maxPointSources*6];
+	
+	
+	vertexArray = new StarVertex[maxPointSources*6];
+	
+	textureCoordArray = new unsigned char[maxPointSources*6*2];
 	for (unsigned int i=0;i<maxPointSources; ++i)
 	{
-		textureGrid[i*6].set(0,0);
-		textureGrid[i*6+1].set(1,0);
-		textureGrid[i*6+2].set(1,1);
-		textureGrid[i*6+3].set(0,0);
-		textureGrid[i*6+4].set(1,1);
-		textureGrid[i*6+5].set(0,1);
+		static const unsigned char texElems[] = {0, 0, 255, 0, 255, 255, 0, 0, 255, 255, 0, 255};
+		unsigned char* elem = &textureCoordArray[i*6*2];
+		memcpy(elem, texElems, 12);
 	}
 }
 
 StelSkyDrawer::~StelSkyDrawer()
 {
-	if (verticesGrid)
-		delete[] verticesGrid;
-	verticesGrid = NULL;
-	if (colorGrid)
-		delete[] colorGrid;
-	colorGrid = NULL;
-	if (textureGrid)
-		delete[] textureGrid;
-	textureGrid = NULL;
+	delete[] vertexArray;
+	vertexArray = NULL;
+	delete[] textureCoordArray;
+	textureCoordArray = NULL;
+	
+	delete starShaderProgram;
+	starShaderProgram = NULL;
 }
 
 // Init parameters from config file
@@ -152,6 +149,50 @@ void StelSkyDrawer::init()
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");
 
+	// Create shader program
+	QOpenGLShader vshader(QOpenGLShader::Vertex);
+	const char *vsrc =
+		"attribute mediump vec2 pos;\n"
+		"attribute mediump vec2 texCoord;\n"
+		"attribute mediump vec3 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec2 texc;\n"
+		"varying mediump vec3 outColor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix * vec4(pos.x, pos.y, 0, 1);\n"
+		"    texc = texCoord;\n"
+		"    outColor = color;\n"
+		"}\n";
+	vshader.compileSourceCode(vsrc);
+	if (!vshader.log().isEmpty()) { qWarning() << "StelSkyDrawer::init(): Warnings while compiling vshader: " << vshader.log(); }
+
+	QOpenGLShader fshader(QOpenGLShader::Fragment);
+	const char *fsrc =
+		"varying mediump vec2 texc;\n"
+		"varying mediump vec3 outColor;\n"
+		"uniform sampler2D tex;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = texture2D(tex, texc)*vec4(outColor, 1.);\n"
+		"}\n";
+	fshader.compileSourceCode(fsrc);
+	if (!fshader.log().isEmpty()) { qWarning() << "StelSkyDrawer::init(): Warnings while compiling fshader: " << fshader.log(); }
+
+	starShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	starShaderProgram->addShader(&vshader);
+	starShaderProgram->addShader(&fshader);
+	starShaderProgram->link();
+	if (!starShaderProgram->log().isEmpty()) {
+	  qWarning() << "StelSkyDrawer::init(): Warnings while linking starShaderProgram: " << starShaderProgram->log();
+	}
+
+	starShaderVars.projectionMatrix = starShaderProgram->uniformLocation("projectionMatrix");
+	starShaderVars.texCoord = starShaderProgram->attributeLocation("texCoord");
+	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
+	starShaderVars.color = starShaderProgram->attributeLocation("color");
+	starShaderVars.texture = starShaderProgram->uniformLocation("tex");
+			
 	update(0);
 }
 
@@ -349,8 +390,26 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
 
-	sPainter->setArrays(verticesGrid, textureGrid, colorGrid);
-	sPainter->drawFromArray(StelPainter::Triangles, nbPointSources*6, 0, false);
+	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
+	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
+	
+	Q_ASSERT(sizeof(StarVertex)==12);
+	
+	starShaderProgram->bind();
+	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, (GLfloat*)vertexArray, 2, 12);
+	starShaderProgram->enableAttributeArray(starShaderVars.pos);
+	starShaderProgram->setAttributeArray(starShaderVars.color, GL_UNSIGNED_BYTE, (GLubyte*)&(vertexArray[0].color), 3, 12);
+	starShaderProgram->enableAttributeArray(starShaderVars.color);
+	starShaderProgram->setUniformValue(starShaderVars.projectionMatrix, qMat);
+	starShaderProgram->setAttributeArray(starShaderVars.texCoord, GL_UNSIGNED_BYTE, (GLubyte*)textureCoordArray, 2, 0);
+	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
+	
+	glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
+	
+	starShaderProgram->disableAttributeArray(starShaderVars.pos);
+	starShaderProgram->disableAttributeArray(starShaderVars.color);
+	starShaderProgram->disableAttributeArray(starShaderVars.texCoord);
+	starShaderProgram->release();
 	
 	nbPointSources = 0;
 }
@@ -391,24 +450,22 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}
 
+	unsigned char starColor[3] = {0, 0, 0};
+	starColor[0] = (unsigned char)std::min((int)(color[0]*tw*255+0.5f), 255);
+	if (!StelApp::getInstance().getVisionModeNight())
+	{
+		starColor[1] = (unsigned char)std::min((int)(color[1]*tw*255+0.5f), 255);
+		starColor[2] = (unsigned char)std::min((int)(color[2]*tw*255+0.5f), 255);
+	}
+	
 	// Store the drawing instructions in the vertex arrays
-	Vec3f* vx = &(verticesGrid[nbPointSources*6]);
-	vx->set(win[0]-radius,win[1]-radius,0); ++vx;
-	vx->set(win[0]+radius,win[1]-radius,0); ++vx;
-	vx->set(win[0]+radius,win[1]+radius,0); ++vx;
-	vx->set(win[0]-radius,win[1]-radius,0); ++vx;
-	vx->set(win[0]+radius,win[1]+radius,0); ++vx;
-	vx->set(win[0]-radius,win[1]+radius,0); ++vx;
-
-	Vec3f w = StelApp::getInstance().getVisionModeNight() ? Vec3f(color[0], 0.f, 0.f) : color;
-	w*=tw;
-	Vec3f* cv = &(colorGrid[nbPointSources*6]);
-	*cv = w; ++cv;
-	*cv = w; ++cv;
-	*cv = w; ++cv;
-	*cv = w; ++cv;
-	*cv = w; ++cv;
-	*cv = w; ++cv;
+	StarVertex* vx = &(vertexArray[nbPointSources*6]);
+	vx->pos.set(win[0]-radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]+radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]+radius,win[1]+radius); memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]-radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]+radius,win[1]+radius); memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]-radius,win[1]+radius); memcpy(vx->color, starColor, 3); ++vx;
 
 	++nbPointSources;
 	if (nbPointSources>=maxPointSources)
