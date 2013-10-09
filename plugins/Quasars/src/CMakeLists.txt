@@ -25,7 +25,7 @@ QT5_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
 SET(Quasars_RES ../resources/Quasars.qrc)
 QT5_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
