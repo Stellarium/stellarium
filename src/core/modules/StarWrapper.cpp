@@ -40,8 +40,6 @@ template<typename T> inline bool isInf(T value)
 	return std::numeric_limits<T>::has_infinity && value == std::numeric_limits<T>::infinity();
 }
 
-namespace BigStarCatalogExtension {
-
 QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -268,7 +266,4 @@ StelObjectP Star3::createStelObject(const SpecialZoneArray<Star3> *a,
 									const SpecialZoneData<Star3> *z) const {
   return StelObjectP(new StarWrapper3(a,z,this), true);
 }
-
-
-} // namespace BigStarCatalogExtension
 

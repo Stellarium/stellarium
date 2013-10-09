@@ -36,9 +36,6 @@ static unsigned int stel_bswap_32(unsigned int val) {
 	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
-namespace BigStarCatalogExtension
-{
-
 static const Vec3f north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
@@ -570,4 +567,3 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	}
 }
 
-} // namespace BigStarCatalogExtension

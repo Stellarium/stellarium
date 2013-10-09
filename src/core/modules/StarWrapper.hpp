@@ -28,8 +28,6 @@
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
 
-namespace BigStarCatalogExtension {
-
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
@@ -143,6 +141,5 @@ public:
 			   const Star3 *s) : StarWrapper<Star3>(a,z,s) {;}
 };
 
-} // namespace BigStarCatalogExtension
 
 #endif // _STARWRAPPER_HPP_
