@@ -36,10 +36,11 @@ QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-#get_cmake_property(_variableNames VARIABLES)
-#foreach (_variableName ${_variableNames})
-# message(STATUS "${_variableName}=${${_variableName}}")
-#endforeach()
+
+get_cmake_property(_variableNames VARIABLES)
+foreach (_variableName ${_variableNames})
+ message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
@@ -72,8 +73,10 @@ IF(BUILD_STATIC_PLUGINS)
 		STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
 	)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
-	TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
 	QT5_USE_MODULES(Oculars-static Core Declarative Network OpenGL Svg Widgets)
+
+
+	TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
 ENDIF()

@@ -31,6 +31,7 @@
 #include <QFont>
 #include <QOpenGLFunctions_1_2>
 #include <QSettings>
+#include <QSvgRenderer>
 
 #define MIN_OCULARS_INI_VERSION 0.12
 
@@ -262,6 +263,9 @@ private:
 	//Styles
 	QByteArray normalStyleSheet;
 	QByteArray nightStyleSheet;
+
+	//Reticle
+//	QSvgRenderer * reticle;
 };
 
 
