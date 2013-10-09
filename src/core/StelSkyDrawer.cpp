@@ -72,7 +72,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 	setFlagHasAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
-	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -335,15 +334,7 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-
-	if (getFlagPointStar())
-	{
-		p->enableTexture2d(false);
-	}
-	else
-	{
-		p->enableTexture2d(true);
-	}
+	p->enableTexture2d(true);
 }
 
 // Finalize the drawing of point sources
@@ -365,15 +356,9 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 }
 
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag& rcMag, const Vec3f& bcolor, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag& rcMag, const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
-	Vec3f color(bcolor);
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		color[1] = 0;
-		color[2] = 0;
-	}
 
 	if (rcMag.radius<=0.f)
 		return false;
@@ -406,34 +391,24 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}
 
-	if (flagPointStar)
-	{
-		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
-		sPainter->drawPoint2d(win[0], win[1]);
-	}
-	else
-	{
-		// Store the drawing instructions in the vertex arrays
-		Vec3f* v = &(verticesGrid[nbPointSources*6]);
-		v->set(win[0]-radius,win[1]-radius,0); ++v;
-		v->set(win[0]+radius,win[1]-radius,0); ++v;
-		v->set(win[0]+radius,win[1]+radius,0); ++v;
-		v->set(win[0]-radius,win[1]-radius,0); ++v;
-		v->set(win[0]+radius,win[1]+radius,0); ++v;
-		v->set(win[0]-radius,win[1]+radius,0); ++v;
+	// Store the drawing instructions in the vertex arrays
+	Vec3f* vx = &(verticesGrid[nbPointSources*6]);
+	vx->set(win[0]-radius,win[1]-radius,0); ++vx;
+	vx->set(win[0]+radius,win[1]-radius,0); ++vx;
+	vx->set(win[0]+radius,win[1]+radius,0); ++vx;
+	vx->set(win[0]-radius,win[1]-radius,0); ++vx;
+	vx->set(win[0]+radius,win[1]+radius,0); ++vx;
+	vx->set(win[0]-radius,win[1]+radius,0); ++vx;
 
-		Vec3f w = color;
-		w = color;
-		w*=tw;
-		Vec3f* cv = &(colorGrid[nbPointSources*6]);
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-	}
+	Vec3f w = StelApp::getInstance().getVisionModeNight() ? Vec3f(color[0], 0.f, 0.f) : color;
+	w*=tw;
+	Vec3f* cv = &(colorGrid[nbPointSources*6]);
+	*cv = w; ++cv;
+	*cv = w; ++cv;
+	*cv = w; ++cv;
+	*cv = w; ++cv;
+	*cv = w; ++cv;
+	*cv = w; ++cv;
 
 	++nbPointSources;
 	if (nbPointSources>=maxPointSources)

@@ -796,9 +796,10 @@ void StarMgr::draw(StelCore* core)
 	sPainter.setFont(starFont);
 	skyDrawer->preDrawPointSource(&sPainter);
 
-	// draw all the stars of all the selected zones
+	// Prepare a table for storing precomputed RCMag for all ZoneArrays
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
 	
+	// Draw all the stars of all the selected zones
 	foreach(const ZoneArray* z, gridLevels)
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
@@ -823,14 +824,7 @@ void StarMgr::draw(StelCore* core)
 					rcmag_table[i].radius=0;
 				}
 			}
-			if (skyDrawer->getFlagPointStar())
-			{
-				rcmag_table[i].luminance *= starsFader.getInterstate();
-			}
-			else
-			{
-				rcmag_table[i].radius *= starsFader.getInterstate();
-			}
+			rcmag_table[i].radius *= starsFader.getInterstate();
 		}
 		lastMaxSearchLevel = z->level;
 
