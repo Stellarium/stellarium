@@ -32,6 +32,7 @@ SET(extLinkerOption ${OPENGL_LIBRARIES})
 #Dynamic library
 IF(BUILD_DYNAMIC_PLUGINS)
  ADD_LIBRARY(SolarSystemEditor MODULE ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
+ QT5_USE_MODULES(SolarSystemEditor Core Declarative Network)
 
  IF(APPLE)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
@@ -54,6 +55,7 @@ ENDIF()
 #Static library
 IF(BUILD_STATIC_PLUGINS)
  ADD_LIBRARY(SolarSystemEditor-static STATIC ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
+ QT5_USE_MODULES(SolarSystemEditor-static Core Declarative Network)
  SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES OUTPUT_NAME "SolarSystemEditor")
  TARGET_LINK_LIBRARIES(SolarSystemEditor-static ${extLinkerOption})
  SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
