@@ -143,11 +143,6 @@ public slots:
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
-	//! Set flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	void setFlagPointStar(bool b) {flagPointStar=b;}
-	//! Get flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	bool getFlagPointStar() const {return flagPointStar;}
-
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
 	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
@@ -282,7 +277,6 @@ private:
 	Refraction refraction;
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
-	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;
 
