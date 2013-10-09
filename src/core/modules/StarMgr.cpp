@@ -823,6 +823,7 @@ void StarMgr::draw(StelCore* core)
 					rcmag_table[i].luminance=0;
 					rcmag_table[i].radius=0;
 				}
+				break;
 			}
 			rcmag_table[i].radius *= starsFader.getInterstate();
 		}
