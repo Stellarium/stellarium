@@ -319,13 +319,13 @@ float StelSkyDrawer::pointSourceLuminanceToMag(float lum)
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
 float StelSkyDrawer::surfacebrightnessToLuminance(float sb)
 {
-	return 2.*2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1./60.*1./60.);
+	return 2.f*2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1.f/60.f*1.f/60.f);
 }
 
 // Compute the surface brightness from the luminance of an extended source
 float StelSkyDrawer::luminanceToSurfacebrightness(float lum)
 {
-	return std::log(lum*(1./60.*1./60.)/(2.*2025000.f))/-0.92103f - 12.12331f;
+	return std::log(lum*(1.f/60.f*1.f/60.f)/(2.f*2025000.f))/-0.92103f - 12.12331f;
 }
 
 // Compute RMag and CMag from magnitude for a point source.
@@ -335,7 +335,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 	rcMag->radius *=starLinearScale;
 
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
-	if (rcMag->radius < 0.01f)
+	if (rcMag->radius < 0.3f)
 	{
 		rcMag->radius = 0.f;
 		rcMag->luminance = 0.f;
@@ -347,7 +347,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 	if (rcMag->radius<1.2f)
 	{
 		rcMag->luminance= rcMag->radius * rcMag->radius * rcMag->radius / 1.728f;
-		if (rcMag->luminance < 0.01f)
+		if (rcMag->luminance < 0.05f)
 		{
 			rcMag->radius = rcMag->luminance = 0.f;
 			return false;
