@@ -51,8 +51,6 @@
 #  endif
 #endif
 
-namespace BigStarCatalogExtension
-{
 
 #define NR_OF_HIP 120416
 #define FILE_MAGIC 0x835f040a
@@ -208,7 +206,5 @@ public:
 	//! @param hipIndex array of Hipparcos info structs
 	void updateHipIndex(HipIndexStruct hipIndex[]) const;
 };
-
-} // namespace BigStarCatalogExtension
 
 #endif // _ZONEARRAY_HPP_

@@ -62,8 +62,6 @@
 #include "kdewin32/unistd.h"
 #endif
 
-using namespace BigStarCatalogExtension;
-
 static QStringList spectral_array;
 static QStringList component_array;
 

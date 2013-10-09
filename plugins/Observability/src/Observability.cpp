@@ -43,7 +43,6 @@
 #include "StelVertexArray.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
 #include "Observability.hpp"
 #include "ObservabilityDialog.hpp"

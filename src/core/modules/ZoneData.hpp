@@ -28,9 +28,6 @@
 
 class StelObject;
 
-namespace BigStarCatalogExtension
-{
-
 //! @struct ZoneData
 //! A single triangle. The stars are arranged in triangular zones according to
 //! StelGeodesicGrid. Bright stars (Star1) are stored in zones with small level,
@@ -69,7 +66,5 @@ struct SpecialZoneData : public ZoneData
 		return reinterpret_cast<Star*>(stars);
 	}
 };
-
-} // namespace BigStarCatalogExtension
 
 #endif // _ZONEDATA_HPP_
