@@ -554,9 +554,6 @@ ENDIF()
 #############################################################################################
 
 SET(extLinkerOption ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
-IF(ENABLE_SCRIPTING)
-  SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY})
-ENDIF()
 IF(WIN32)
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
 ENDIF()
