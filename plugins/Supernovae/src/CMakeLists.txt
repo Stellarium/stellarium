@@ -25,7 +25,7 @@ QT5_WRAP_UI(SupernovaeDialog_UIS_H ${SupernovaeDialog_UIS})
 SET(Supernovae_RES ../resources/Supernovae.qrc)
 QT5_ADD_RESOURCES(Supernovae_RES_CXX ${Supernovae_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

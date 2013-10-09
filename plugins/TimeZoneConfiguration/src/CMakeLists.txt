@@ -23,7 +23,7 @@ SET(TimeZoneConfiguration_UIS
 
 QT5_WRAP_UI(TimeZoneConfiguration_UIS_H ${TimeZoneConfiguration_UIS})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
 #Dynamic library
 IF(BUILD_DYNAMIC_PLUGINS)

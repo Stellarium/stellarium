@@ -25,7 +25,7 @@ QT5_WRAP_UI(NovaeDialog_UIS_H ${NovaeDialog_UIS})
 SET(Novae_RES ../resources/Novae.qrc)
 QT5_ADD_RESOURCES(Novae_RES_CXX ${Novae_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

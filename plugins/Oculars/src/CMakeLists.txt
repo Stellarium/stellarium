@@ -34,9 +34,12 @@ SET(Oculars_UIS
 )
 QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
-INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
+#get_cmake_property(_variableNames VARIABLES)
+#foreach (_variableName ${_variableNames})
+# message(STATUS "${_variableName}=${${_variableName}}")
+#endforeach()
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
@@ -45,8 +48,6 @@ IF(BUILD_DYNAMIC_PLUGINS)
 	)
 
 	IF(APPLE)
-		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-		MARK_AS_ADVANCED(OPENGL_LIBRARY)
 		SET_TARGET_PROPERTIES(Oculars
 			PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib"
 		)
@@ -61,7 +62,7 @@ IF(BUILD_DYNAMIC_PLUGINS)
 		SET(StelMain)
 	ENDIF(WIN32)
 	TARGET_LINK_LIBRARIES(Oculars ${StelMain} ${extLinkerOption})
-	QT5_USE_MODULES(Oculars Core Gui OpenGL Widgets)
+	QT5_USE_MODULES(Oculars Core Gui OpenGL Svg Widgets)
 	INSTALL(TARGETS Oculars DESTINATION "modules/${PACKAGE}")
 ENDIF()
 
@@ -72,7 +73,7 @@ IF(BUILD_STATIC_PLUGINS)
 	)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
 	TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
-	QT5_USE_MODULES(Oculars-static Core Gui OpenGL Widgets)
+	QT5_USE_MODULES(Oculars-static Core Gui OpenGL Svg Widgets)
 	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 	ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
 ENDIF()
