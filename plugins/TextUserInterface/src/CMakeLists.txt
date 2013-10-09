@@ -33,6 +33,7 @@ SET(extLinkerOption ${OPENGL_LIBRARIES})
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
 	ADD_LIBRARY(TextUserInterface MODULE ${TextUserInterface_SRCS})
+	QT5_USE_MODULES(TextUserInterface Core Declarative)
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
@@ -51,6 +52,7 @@ ENDIF()
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS})
+	QT5_USE_MODULES(TextUserInterface-static Core Declarative)
 	# The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
 	SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
 	TARGET_LINK_LIBRARIES(TextUserInterface-static ${extLinkerOption})
