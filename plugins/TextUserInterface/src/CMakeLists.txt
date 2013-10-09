@@ -28,7 +28,7 @@ SET(TextUserInterface_SRCS
 	TextUserInterface.hpp
 	TextUserInterface.cpp)
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

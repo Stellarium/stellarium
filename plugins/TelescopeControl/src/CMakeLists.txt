@@ -56,7 +56,7 @@ QT5_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
 QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)

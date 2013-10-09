@@ -26,7 +26,7 @@ SET(Observability_RES ../Observability.qrc)
 QT5_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
 
 
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 IF(BUILD_DYNAMIC_PLUGINS)
        ADD_LIBRARY(Observability MODULE ${Observability_SRCS} ${Observability_RES_CXX} ${ObservabilityDialog_UIS_H})

@@ -394,7 +394,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
 	QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
-	SET(extLinkerOption ${QT_LIBRARIES} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
+	SET(extLinkerOption ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
 
 	# Compile the static library
 	ADD_LIBRARY(StelGuiLib STATIC ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
@@ -553,7 +553,7 @@ ENDIF()
 ################################ Build main program #########################################
 #############################################################################################
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(extLinkerOption ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
 IF(ENABLE_SCRIPTING)
   SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY})
 ENDIF()
