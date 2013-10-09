@@ -39,16 +39,16 @@
 #include "SkyGui.hpp"
 
 #include <QAction>
+#include <QDebug>
+#include <QDir>
 #include <QGraphicsWidget>
 #include <QKeyEvent>
-#include <QDebug>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QtNetwork>
 #include <QOpenGLFunctions>
 #include <QPixmap>
 #include <QSignalMapper>
-#include <QDir>
 
 #include <cmath>
 
@@ -1412,6 +1412,10 @@ void Oculars::paintTelrad()
 
 void Oculars::paintOcularMask()
 {
+//	if (reticle == NULL){
+//		reticle = new QSvgRenderer(QString(":/ocular/CelestronMicroGuide.svg"), this);
+//	}
+
 	// XXX: for some reason I cannot get to make the glu functions work when
 	// compiling with Qt5!
 	// XXX: GLU can't work with OpenGL ES --AW
