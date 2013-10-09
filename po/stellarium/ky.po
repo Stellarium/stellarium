@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 21:34+0700\n"
-"PO-Revision-Date: 2013-04-10 13:40+0000\n"
+"PO-Revision-Date: 2013-10-09 02:29+0000\n"
 "Last-Translator: ballpen <Unknown>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 05:23+0000\n"
+"X-Launchpad-Export-Date: 2013-10-09 05:16+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106
@@ -65,51 +65,51 @@ msgstr "Горизонт"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr "Галактиканын тегиздиги"
+msgstr "Галактика тегиздиги"
 
 #: src/core/modules/GridLinesMgr.cpp:692 src/ui_viewDialog.h:1274
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial grid"
-msgstr "Экватордук тор"
+msgstr "Экватор тору"
 
 #: src/core/modules/GridLinesMgr.cpp:693 src/ui_viewDialog.h:1276
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Azimuthal grid"
-msgstr "Азимуттук тор"
+msgstr "Азимут тору"
 
 #: src/core/modules/GridLinesMgr.cpp:694
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Ecliptic line"
-msgstr "Эклиптиканын сызыгы"
+msgstr "Эклиптика сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:695
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Equator line"
-msgstr "Экватордун сызыгы"
+msgstr "Экватор сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:696
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Meridian line"
-msgstr "Меридиандын сызыгы"
+msgstr "Меридиан сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:697
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Horizon line"
-msgstr "Горизонттун сызыгы"
+msgstr "Горизонт сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:698 src/ui_viewDialog.h:1273
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equatorial J2000 grid"
-msgstr "Экватордук тор J2000"
+msgstr "Экватор тору J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1275
 msgid "Ecliptic J2000 grid"
-msgstr "Эклиптикалык тор J2000"
+msgstr "Эклиптика тору J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:700 src/ui_viewDialog.h:1277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic grid"
-msgstr "Галактикалык тор"
+msgstr "Галактика тору"
 
 #: src/core/modules/GridLinesMgr.cpp:701 src/ui_viewDialog.h:1297
 msgid "Galactic plane"
@@ -134,7 +134,7 @@ msgstr "Кыртыш"
 
 #: src/core/modules/LandscapeMgr.cpp:517
 msgid "Author: "
-msgstr "Автор: "
+msgstr "Автору: "
 
 #: src/core/modules/LandscapeMgr.cpp:520
 msgid "Location: "
@@ -158,7 +158,7 @@ msgstr "Планетасы: "
 #: plugins/Pulsars/src/Pulsar.cpp:128
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Түр: <b>%1</b>"
+msgstr "Түрү: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:130
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:129
@@ -179,7 +179,7 @@ msgstr "Жылдыздык чоңдук: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:115
 #, qt-format
 msgid "Size: %1"
-msgstr "Өлчөм: %1"
+msgstr "Өлчөмү: %1"
 
 #: src/core/modules/Nebula.cpp:346
 msgid "Galaxy"
@@ -226,7 +226,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:184 plugins/Quasars/src/Quasar.cpp:125
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Накта жылдыздык чоңдук: %1"
+msgstr "Жылдыздын накта чоңдугу: %1"
 
 #: src/core/modules/Planet.cpp:149
 #, qt-format
@@ -242,23 +242,23 @@ msgstr ""
 #: src/core/modules/Comet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr "Аралык: %1 а. б. (%2 км)"
+msgstr "Аралыгы: %1 а. б. (%2 км)"
 
 #: src/core/modules/Planet.cpp:167 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:160
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Аралык: %1 а.б."
+msgstr "Аралыгы: %1 а.б."
 
 #: src/core/modules/Planet.cpp:178
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr "Көрүнүүчү диаметр: %1, шакектери менен: %2"
+msgstr "Көрүнүүчү диаметри: %1, шакектери менен: %2"
 
 #: src/core/modules/Planet.cpp:184 src/core/modules/MinorPlanet.cpp:262
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "Көрүнүүчү диаметр: %1"
+msgstr "Көрүнүүчү диаметри: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:194 src/core/modules/MinorPlanet.cpp:269
@@ -290,7 +290,7 @@ msgstr "Элонгация: %1"
 #: src/core/modules/Planet.cpp:207
 #, qt-format
 msgid "Phase: %1"
-msgstr "Фаза: %1"
+msgstr "Фазасы: %1"
 
 #: src/core/modules/Planet.cpp:208
 #, qt-format
@@ -305,7 +305,7 @@ msgstr ""
 #: src/core/modules/SolarSystem.cpp:145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:302
 msgid "Planet labels"
-msgstr "Планеталардын аттары"
+msgstr "Планеталардын аталыштары"
 
 #: src/core/modules/SolarSystem.cpp:146
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:306
@@ -321,7 +321,7 @@ msgstr "Планеталардын издери"
 #: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:151
 msgid "star"
-msgstr ""
+msgstr "жылдыз"
 
 #: src/core/modules/StarWrapper.cpp:57
 #, qt-format
@@ -364,18 +364,18 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:163
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Түрү: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:175 plugins/Quasars/src/Quasar.cpp:102
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr ""
-"Жылдыздык чоңдук: <b>%1</b> (<b>%2</b>. B-V: <b>%3</b> чейин бошоңдогон)"
+"Жылдыз чоңдугу: <b>%1</b> (<b>%2</b>. B-V: <b>%3</b> чейин бошоңдогон)"
 
 #: src/core/modules/StarWrapper.cpp:179 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr "Жылдыздык чоңдук: <b>%1</b> (B-V: <b>%2</b>)"
+msgstr "Жылдыз чоңдугу: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:199
 #, qt-format
@@ -391,19 +391,19 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:178
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "Спектрдик түр: %1"
+msgstr "Спектр түрү: %1"
 
 #: src/core/modules/StarWrapper.cpp:213
 #: plugins/Supernovae/src/Supernova.cpp:142 plugins/Novae/src/Nova.cpp:144
 #: plugins/Exoplanets/src/Exoplanet.cpp:183
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "Аралык: %1 жарыктык жыл"
+msgstr "Аралыгы: %1 жарыктык жылы"
 
 #: src/core/modules/StarWrapper.cpp:216
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Параллакс:%1\""
+msgstr "Параллаксы:%1\""
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
