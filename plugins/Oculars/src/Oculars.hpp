@@ -20,18 +20,18 @@
 #ifndef _OCULARS_HPP_
 #define _OCULARS_HPP_
 
-#include "VecMath.hpp"
-#include "StelModule.hpp"
-#include "OcularDialog.hpp"
 #include "CCD.hpp"
-#include "Ocular.hpp"
-#include "Telescope.hpp"
 #include "Lens.hpp"
+#include "Ocular.hpp"
+#include "OcularDialog.hpp"
+#include "StelModule.hpp"
+#include "StelTexture.hpp"
+#include "Telescope.hpp"
+#include "VecMath.hpp"
 
 #include <QFont>
 #include <QOpenGLFunctions_1_2>
 #include <QSettings>
-#include <QSvgRenderer>
 
 #define MIN_OCULARS_INI_VERSION 0.12
 
@@ -265,7 +265,7 @@ private:
 	QByteArray nightStyleSheet;
 
 	//Reticle
-//	QSvgRenderer * reticle;
+	StelTextureSP reticleTexture;
 };
 
 
