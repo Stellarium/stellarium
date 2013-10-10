@@ -36,12 +36,6 @@ QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-
-get_cmake_property(_variableNames VARIABLES)
-foreach (_variableName ${_variableNames})
- message(STATUS "${_variableName}=${${_variableName}}")
-endforeach()
-
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
 	ADD_LIBRARY(Oculars
