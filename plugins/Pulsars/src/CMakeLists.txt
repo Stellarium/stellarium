@@ -27,27 +27,6 @@ QT5_ADD_RESOURCES(Pulsars_RES_CXX ${Pulsars_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Pulsars MODULE ${Pulsars_SRCS} ${Pulsars_RES_CXX} ${PulsarsDialog_UIS_H})
-	QT5_USE_MODULES(Pulsars Core Declarative Network)
-	IF(APPLE)
-		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-		MARK_AS_ADVANCED(OPENGL_LIBRARY)
-		SET_TARGET_PROPERTIES(Pulsars PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
-	ENDIF()
-
-	IF(WIN32)
-                SET_TARGET_PROPERTIES(Pulsars PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-		SET(StelMain stelMain)
-	ELSE(WIN32)
-		SET(StelMain )
-	ENDIF(WIN32)
-
-	TARGET_LINK_LIBRARIES(Pulsars ${StelMain} ${extLinkerOption})
-	INSTALL(TARGETS Pulsars DESTINATION "modules/Pulsars")
-ENDIF()
-
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Pulsars-static STATIC ${Pulsars_SRCS} ${Pulsars_RES_CXX} ${PulsarsDialog_UIS_H})
