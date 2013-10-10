@@ -22,21 +22,22 @@
 
 #include "GridLinesMgr.hpp"
 #include "LabelMgr.hpp"
+#include "SkyGui.hpp"
+#include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelActionMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelMainView.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
-#include "SkyGui.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -77,7 +78,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
-	info.authors = "Timothy Reaves, Bogdan Marinov, Pawel Stolowski";
+	info.authors = "Timothy Reaves, Bogdan Marinov";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	return info;
@@ -131,6 +132,12 @@ Oculars::Oculars():
 	selectedLensIndex = -1;
 	
 	usageMessageLabelID = -1;
+
+	//Load OpenGL textures
+	StelTexture::StelTextureParams params;
+	params.generateMipmaps = true;
+	StelTextureMgr& manager = StelApp::getInstance().getTextureManager();
+	reticleTexture = manager.createTexture(QString(":/ocular/CelestronMicroGuide.png"), params);
 
 	setObjectName("Oculars");
 
@@ -241,6 +248,17 @@ void Oculars::deinit()
 //! Draw any parts on the screen which are for our module
 void Oculars::draw(StelCore* core)
 {
+	if (!reticleTexture.isNull()){
+		StelCore *core = StelApp::getInstance().getCore();
+		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+		StelPainter sPainter(prj);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		reticleTexture->bind();
+//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.drawSprite2dMode(600, 600, 256);
+	}
+
 	if (flagShowTelrad) {
 		paintTelrad();
 	} else if (flagShowOculars){
@@ -1412,9 +1430,6 @@ void Oculars::paintTelrad()
 
 void Oculars::paintOcularMask()
 {
-//	if (reticle == NULL){
-//		reticle = new QSvgRenderer(QString(":/ocular/CelestronMicroGuide.svg"), this);
-//	}
 
 	// XXX: for some reason I cannot get to make the glu functions work when
 	// compiling with Qt5!

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%" viewBox="0 0 10000 10000">
-	<desc></desc>
+<svg xmlns="http://www.w3.org/2000/svg" 
+	xmlns:xlink="http://www.w3.org/1999/xlink" 
+	version="1.1" 
+	width="100%" 
+	height="100%" 
+	viewBox="0 0 10000 10000">
+	<desc>This is my interpretation oc the Celestron MicroGuide eyepiece.</desc>
 	<!-- 9.15 is the calculated diameter: D = FL*aFOV/57.4  91.5=12.5*42/57.4 -->
 	<g alignment-baseline="baseline"></g>
 	<!-- Fill a background rectangle black -->
-	<rect width="10000" height="10000" fill="black" />
+	<!-- <rect width="10000" height="10000" fill="black" /> -->
 	<!-- This is view through the eyepiece -->
-	<circle cx="5000" cy="5000" r="4575" fill="white"/>
+	<!-- <circle cx="5000" cy="5000" r="4575" fill="white"/> -->
 	
 	<!-- Linear scale -->
 	<g>
