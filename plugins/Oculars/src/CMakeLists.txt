@@ -36,16 +36,10 @@ QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Oculars-static
-		STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
-	)
-	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
-	QT5_USE_MODULES(Oculars-static Core Declarative Network OpenGL Svg Widgets)
+ADD_LIBRARY(Oculars-static STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H})
+SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
+QT5_USE_MODULES(Oculars-static Core Declarative Network OpenGL Svg Widgets)
 
-
-	TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
-	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
-ENDIF()
+TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
+SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)

@@ -26,12 +26,9 @@ QT5_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Exoplanets-static STATIC ${Exoplanets_SRCS} ${Exoplanets_RES_CXX} ${ExoplanetsDialog_UIS_H})
-	QT5_USE_MODULES(Exoplanets-static Core Declarative Network Widgets)
-	SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES OUTPUT_NAME "Exoplanets")
-	TARGET_LINK_LIBRARIES(Exoplanets-static ${extLinkerOption})
-	SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ADD_DEPENDENCIES(AllStaticPlugins Exoplanets-static)
-ENDIF()
+ADD_LIBRARY(Exoplanets-static STATIC ${Exoplanets_SRCS} ${Exoplanets_RES_CXX} ${ExoplanetsDialog_UIS_H})
+QT5_USE_MODULES(Exoplanets-static Core Declarative Network Widgets)
+SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES OUTPUT_NAME "Exoplanets")
+TARGET_LINK_LIBRARIES(Exoplanets-static ${extLinkerOption})
+SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins Exoplanets-static)

@@ -27,12 +27,9 @@ QT5_ADD_RESOURCES(Novae_RES_CXX ${Novae_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Novae-static STATIC ${Novae_SRCS} ${Novae_RES_CXX} ${NovaeDialog_UIS_H})
-	QT5_USE_MODULES(Novae-static Core Network OpenGL)
-	SET_TARGET_PROPERTIES(Novae-static PROPERTIES OUTPUT_NAME "Novae")
-	TARGET_LINK_LIBRARIES(Novae-static ${extLinkerOption})
-	SET_TARGET_PROPERTIES(Novae-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ADD_DEPENDENCIES(AllStaticPlugins Novae-static)
-ENDIF()
+ADD_LIBRARY(Novae-static STATIC ${Novae_SRCS} ${Novae_RES_CXX} ${NovaeDialog_UIS_H})
+QT5_USE_MODULES(Novae-static Core Network OpenGL)
+SET_TARGET_PROPERTIES(Novae-static PROPERTIES OUTPUT_NAME "Novae")
+TARGET_LINK_LIBRARIES(Novae-static ${extLinkerOption})
+SET_TARGET_PROPERTIES(Novae-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins Novae-static)

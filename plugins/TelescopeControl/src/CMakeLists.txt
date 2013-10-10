@@ -58,12 +58,9 @@ QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
- ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
- SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
- TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
- QT5_USE_MODULES(TelescopeControl-static Core Network Widgets)
- SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
- ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
-ENDIF()
+ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
+SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
+TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
+QT5_USE_MODULES(TelescopeControl-static Core Network Widgets Declarative OpenGL)
+SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)

@@ -29,12 +29,9 @@ QT5_WRAP_UI(SolarSystemEditor_UIS_H ${SolarSystemEditor_UIS})
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-#Static library
-IF(BUILD_STATIC_PLUGINS)
- ADD_LIBRARY(SolarSystemEditor-static STATIC ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
- QT5_USE_MODULES(SolarSystemEditor-static Core Declarative Network)
- SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES OUTPUT_NAME "SolarSystemEditor")
- TARGET_LINK_LIBRARIES(SolarSystemEditor-static ${extLinkerOption})
- SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
- ADD_DEPENDENCIES(AllStaticPlugins SolarSystemEditor-static)
-ENDIF()
+ADD_LIBRARY(SolarSystemEditor-static STATIC ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
+QT5_USE_MODULES(SolarSystemEditor-static Core Declarative Network)
+SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES OUTPUT_NAME "SolarSystemEditor")
+TARGET_LINK_LIBRARIES(SolarSystemEditor-static ${extLinkerOption})
+SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins SolarSystemEditor-static)
