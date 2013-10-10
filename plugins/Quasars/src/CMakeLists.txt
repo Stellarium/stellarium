@@ -27,27 +27,6 @@ QT5_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Quasars MODULE ${Quasars_SRCS} ${Quasars_RES_CXX} ${QuasarsDialog_UIS_H})
-	QT5_USE_MODULES(Quasars Core Declarative Network)
-	IF(APPLE)
-		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-		MARK_AS_ADVANCED(OPENGL_LIBRARY)
-		SET_TARGET_PROPERTIES(Quasars PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
-	ENDIF()
-
-	IF(WIN32)
-                SET_TARGET_PROPERTIES(Quasars PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-		SET(StelMain stelMain)
-	ELSE(WIN32)
-		SET(StelMain )
-	ENDIF(WIN32)
-
-	TARGET_LINK_LIBRARIES(Quasars ${StelMain} ${extLinkerOption})
-	INSTALL(TARGETS Quasars DESTINATION "modules/Quasars")
-ENDIF()
-
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Quasars-static STATIC ${Quasars_SRCS} ${Quasars_RES_CXX} ${QuasarsDialog_UIS_H})

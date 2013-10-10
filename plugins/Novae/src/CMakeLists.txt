@@ -27,27 +27,6 @@ QT5_ADD_RESOURCES(Novae_RES_CXX ${Novae_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Novae MODULE ${Novae_SRCS} ${Novae_RES_CXX} ${NovaeDialog_UIS_H})
-	QT5_USE_MODULES(Novae Core Network OpenGL)
-	IF(APPLE)
-		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-		MARK_AS_ADVANCED(OPENGL_LIBRARY)
-		SET_TARGET_PROPERTIES(Novae PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
-	ENDIF()
-
-	IF(WIN32)
-                SET_TARGET_PROPERTIES(Novae PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-		SET(StelMain stelMain)
-	ELSE(WIN32)
-		SET(StelMain )
-	ENDIF(WIN32)
-
-	TARGET_LINK_LIBRARIES(Novae ${StelMain} ${extLinkerOption})
-	INSTALL(TARGETS Novae DESTINATION "modules/Novae")
-ENDIF()
-
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Novae-static STATIC ${Novae_SRCS} ${Novae_RES_CXX} ${NovaeDialog_UIS_H})

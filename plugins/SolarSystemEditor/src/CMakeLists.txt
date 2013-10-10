@@ -29,29 +29,6 @@ QT5_WRAP_UI(SolarSystemEditor_UIS_H ${SolarSystemEditor_UIS})
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-#Dynamic library
-IF(BUILD_DYNAMIC_PLUGINS)
- ADD_LIBRARY(SolarSystemEditor MODULE ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
- QT5_USE_MODULES(SolarSystemEditor Core Declarative Network)
-
- IF(APPLE)
-  FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-  MARK_AS_ADVANCED(OPENGL_LIBRARY)
-  SET_TARGET_PROPERTIES(SolarSystemEditor PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
- ENDIF(APPLE)
-
- IF(WIN32)
-  SET_TARGET_PROPERTIES(SolarSystemEditor PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-  SET(StelMain stelMain)
- ELSE(WIN32)
-  SET(StelMain )
- ENDIF(WIN32)
-
- TARGET_LINK_LIBRARIES(SolarSystemEditor ${StelMain} ${extLinkerOption})
-
- INSTALL(TARGETS SolarSystemEditor DESTINATION "modules/SolarSystemEditor")
-ENDIF()
-
 #Static library
 IF(BUILD_STATIC_PLUGINS)
  ADD_LIBRARY(SolarSystemEditor-static STATIC ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})

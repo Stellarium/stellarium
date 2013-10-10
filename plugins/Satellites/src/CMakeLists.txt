@@ -49,28 +49,6 @@ QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Satellites MODULE ${Satellites_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
-	QT5_USE_MODULES(Satellites Core Declarative Network)
-	IF(APPLE)
-		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-		MARK_AS_ADVANCED(OPENGL_LIBRARY)
-		SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
-	ENDIF()
-
-	IF(WIN32)
-	  SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-	  SET(StelMain stelMain)
-	ELSE(WIN32)
-		SET(StelMain )
-	ENDIF(WIN32)
-
-	TARGET_LINK_LIBRARIES(Satellites ${StelMain} ${extLinkerOption})
-	QT5_USE_MODULES(Satellites-static Core Gui  Network OpenGL Widgets)
-	INSTALL(TARGETS Satellites DESTINATION "modules/Satellites")
-ENDIF()
-
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
