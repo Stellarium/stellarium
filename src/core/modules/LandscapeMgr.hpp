@@ -153,6 +153,9 @@ public slots:
 	//! Set flag for displaying Landscape.
 	void setFlagLandscape(const bool displayed);
 
+	//! Get whether the landscape is currently visible. If true, object below landscape must be rendered.
+	bool getIsLandscapeFullyVisible() const;
+	
 	//! Get flag for displaying Fog.
 	bool getFlagFog() const;
 	//! Set flag for displaying Fog.

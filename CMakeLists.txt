@@ -1,6 +1,10 @@
 # Minimal version of cmake for using with Qt5 is 2.8.9
 # Minimal version of cmake for using with Qt5 on Windows is 2.8.11
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+IF(WIN32)
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+ELSE(WIN32)
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
+ENDIF(WIN32)
 
 # Avoid repeating the IF statement in the ENDIF and ELSE
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)

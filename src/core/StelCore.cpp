@@ -321,6 +321,19 @@ const StelMovementMgr* StelCore::getMovementMgr() const
 	return movementMgr;
 }
 
+SphericalCap StelCore::getVisibleSkyArea() const
+{
+	const LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	Vec3d up(0, 0, 1);
+	up = altAzToJ2000(up, RefractionOff);
+	
+	if (landscapeMgr->getIsLandscapeFullyVisible())
+	{
+		return SphericalCap(up, -0.035f);
+	}
+	return SphericalCap(up, -1.f);
+}
+
 void StelCore::setClippingPlanes(double znear, double zfar)
 {
 	currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;

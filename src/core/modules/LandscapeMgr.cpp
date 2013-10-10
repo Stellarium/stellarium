@@ -439,6 +439,11 @@ bool LandscapeMgr::getFlagLandscape() const
 	return landscape->getFlagShow();
 }
 
+bool LandscapeMgr::getIsLandscapeFullyVisible() const
+{
+	return landscape->getIsFullyVisible();
+}
+
 void LandscapeMgr::setFlagFog(const bool displayed)
 {
 	if (landscape->getFlagShowFog() != displayed) {
