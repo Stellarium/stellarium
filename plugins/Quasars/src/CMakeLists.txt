@@ -27,12 +27,9 @@ QT5_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Quasars-static STATIC ${Quasars_SRCS} ${Quasars_RES_CXX} ${QuasarsDialog_UIS_H})
-	QT5_USE_MODULES(Quasars-static Core Declarative Network)
-	SET_TARGET_PROPERTIES(Quasars-static PROPERTIES OUTPUT_NAME "Quasars")
-	TARGET_LINK_LIBRARIES(Quasars-static ${extLinkerOption})
-	SET_TARGET_PROPERTIES(Quasars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ADD_DEPENDENCIES(AllStaticPlugins Quasars-static)
-ENDIF()
+ADD_LIBRARY(Quasars-static STATIC ${Quasars_SRCS} ${Quasars_RES_CXX} ${QuasarsDialog_UIS_H})
+QT5_USE_MODULES(Quasars-static Core Declarative Network)
+SET_TARGET_PROPERTIES(Quasars-static PROPERTIES OUTPUT_NAME "Quasars")
+TARGET_LINK_LIBRARIES(Quasars-static ${extLinkerOption})
+SET_TARGET_PROPERTIES(Quasars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins Quasars-static)

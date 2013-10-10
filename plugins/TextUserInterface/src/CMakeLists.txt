@@ -30,14 +30,10 @@ SET(TextUserInterface_SRCS
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS})
-	QT5_USE_MODULES(TextUserInterface-static Core Declarative)
-	# The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
-	SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
-	TARGET_LINK_LIBRARIES(TextUserInterface-static ${extLinkerOption})
-	SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ADD_DEPENDENCIES(AllStaticPlugins TextUserInterface-static)
-ENDIF()
-
+ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS})
+QT5_USE_MODULES(TextUserInterface-static Core Declarative)
+# The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
+SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
+TARGET_LINK_LIBRARIES(TextUserInterface-static ${extLinkerOption})
+SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins TextUserInterface-static)
