@@ -480,7 +480,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 
 template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
-	int limitMagIndex, StelCore* core, unsigned int maxMagStarName, float names_brightness) const
+	int limitMagIndex, StelCore* core, unsigned int maxMagStarName, float names_brightness, const QVector<SphericalCap> &boundingCaps) const
 {
     StelSkyDrawer* drawer = core->getSkyDrawer();
     Vec3f vf;
@@ -516,7 +516,25 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		// Array of 2 numbers containing radius and magnitude
 		const RCMag* tmpRcmag = &rcmag_table[s->mag];
 		
+		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+		
+		// If the star zone is not strictly contained inside the viewport, eliminate from the 
+		// beginning the stars actually outside viewport.
+		if (!isInsideViewport)
+		{
+			bool isVisible = true;
+			foreach (const SphericalCap& cap, boundingCaps)
+			{
+				if (!cap.contains(vf))
+				{
+					isVisible = false;
+					continue;
+				}
+			}
+			if (!isVisible)
+				continue;
+		}
 
 		if (withExtinction)
 		{
