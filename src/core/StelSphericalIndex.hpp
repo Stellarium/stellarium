@@ -75,7 +75,7 @@ private:
 	struct CountFunc
 	{
 		CountFunc() : nb(0) {;}
-		void operator()(const StelRegionObjectP&)
+		void operator()(const StelRegionObject*)
 		{
 			++nb;
 		}
@@ -242,7 +242,7 @@ private:
 				foreach (const NodeElem& el, node.elements)
 				{
 					if (region->intersects(el.obj->getRegion().data()))
-						func(el.obj);
+						func(&(*el.obj));
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -258,7 +258,7 @@ private:
 				foreach (const NodeElem& el, node.elements)
 				{
 					if (cap.intersects(el.cap))
-						func(el.obj);
+						func(&(*el.obj));
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -275,7 +275,7 @@ private:
 				foreach (const NodeElem& el, node.elements)
 				{
 					if (region->contains(el.obj->getRegion().data()))
-						func(el.obj);
+						func(&(*el.obj));
 				}
 				foreach (const Node& child, node.children)
 				{
@@ -290,7 +290,7 @@ private:
 			template<class FuncObject> void processAll(const Node& node, FuncObject& func) const
 			{
 				foreach (const NodeElem& el, node.elements)
-					func(el.obj);
+					func(&(*el.obj));
 				foreach (const Node& child, node.children)
 					processAll(child, func);
 			}
