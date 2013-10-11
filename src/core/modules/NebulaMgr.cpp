@@ -129,9 +129,9 @@ struct DrawNebulaFuncObject
 	{
 		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
-	void operator()(StelRegionObjectP obj)
+	void operator()(StelRegionObject* obj)
 	{
-		Nebula* n = obj.staticCast<Nebula>().data();
+		Nebula* n = static_cast<Nebula*>(obj);
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->mag > drawer->getCustomNebulaMagnitudeLimit())) return;
