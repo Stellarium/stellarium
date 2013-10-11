@@ -518,6 +518,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		
 		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+		vf.normalize();
 		
 		// If the star zone is not strictly contained inside the viewport, eliminate from the 
 		// beginning the stars actually outside viewport.
@@ -540,7 +541,6 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		{
 			Vec3f altAz(vf);
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
-			altAz.normalize();
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
 			int extMagShiftStep=qMin((int)(extMagShift/k), RCMAG_TABLE_SIZE-mag_steps);
