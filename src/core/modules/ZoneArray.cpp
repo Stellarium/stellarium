@@ -480,7 +480,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 
 template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
-	int limitMagIndex, StelCore* core, unsigned int maxMagStarName, float names_brightness, const QVector<SphericalCap> &boundingCaps) const
+	int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness, const QVector<SphericalCap> &boundingCaps) const
 {
     StelSkyDrawer* drawer = core->getSkyDrawer();
     Vec3f vf;
@@ -501,6 +501,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
+	Q_ASSERT(cutoffMagStep<RCMAG_TABLE_SIZE);
     
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
@@ -537,24 +538,20 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				continue;
 		}
 
+		int extinctedMagIndex = s->mag;
 		if (withExtinction)
 		{
 			Vec3f altAz(vf);
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			int extMagShiftStep=qMin((int)(extMagShift/k), RCMAG_TABLE_SIZE-mag_steps);
-			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
-			{
+			extinctedMagIndex = s->mag + (int)(extMagShift/k);
+			if (extinctedMagIndex >= cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 				continue;
-			}
-			else
-			{
-				tmpRcmag = &rcmag_table[s->mag+extMagShiftStep];
-			}
+			tmpRcmag = &rcmag_table[extinctedMagIndex];
 		}
 	
-		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
