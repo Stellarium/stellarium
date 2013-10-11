@@ -31,6 +31,9 @@ class StelRegionObject
 
 		//! Return the spatial region of the object.
 		virtual SphericalRegionP getRegion() const=0;
+	
+		//! Return the spatial region of the object.
+		virtual Vec3d getPointInRegion() const=0;
 };
 
 //! @typedef StelRegionObjectP
