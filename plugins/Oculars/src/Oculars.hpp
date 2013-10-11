@@ -268,6 +268,7 @@ private:
 	//Reticle
 	StelTextureSP reticleTexture;
 	double actualFOV; //!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double reticleRotation;
 };
 
 
