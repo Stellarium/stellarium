@@ -46,6 +46,7 @@
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
+#include <QDeclarativeContext>
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
@@ -112,7 +113,7 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	StelApp::getInstance().draw();
 
 	painter->endNativePainting();
-	// update();
+	update();
 }
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -300,6 +301,7 @@ void StelMainView::init(QSettings* conf)
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
+	rootContext()->setContextProperty("stelApp", stelApp);
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
 	
 	QScreen* screen = glWidget->windowHandle()->screen();
