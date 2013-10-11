@@ -100,7 +100,9 @@ Oculars::Oculars():
 	actionShowCrosshairs(0),
 	actionShowSensor(0),
 	actionShowTelrad(0),
-	guiPanel(0)
+	guiPanel(0),
+	actualFOV(0),
+	reticleRotation(0)
 {
 
 	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
@@ -388,6 +390,22 @@ void Oculars::handleKeys(QKeyEvent* event)
 				movementManager->moveSlow(true);
 				consumeEvent = true;
 				break;
+			case Qt::Key_M:
+				double multiplier = 1.0;
+				if (event->modifiers().testFlag(Qt::ControlModifier)) {
+					multiplier = 0.1;
+				}
+				if (event->modifiers().testFlag(Qt::AltModifier)) {
+					multiplier = 5.0;
+				}
+				if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+					reticleRotation += (1.0 * multiplier);
+				} else {
+					reticleRotation -= (1.0 * multiplier);
+				}
+				qDebug() << reticleRotation;
+				consumeEvent = true;
+				break;
 		}
 	} else {
 		// When a deplacement key is released stop mooving
@@ -673,6 +691,7 @@ void Oculars::retranslateGui()
 
 void Oculars::updateOcularReticle(void)
 {
+	reticleRotation = 0.0;
 	StelTextureMgr& manager = StelApp::getInstance().getTextureManager();
 	//Load OpenGL textures
 	StelTexture::StelTextureParams params;
@@ -1392,11 +1411,12 @@ void Oculars::paintTelrad()
 		// StelPainter drawing
 		StelPainter painter(projector);
 		painter.setColor(0.77, 0.14, 0.16, 1.0);
-		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-						   projector->getViewportPosY()+projector->getViewportHeight()/2);
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
+		Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
+								 projector->getViewportPosY() + projector->getViewportHeight() / 2);
+		float pixelsPerRad = projector->getPixelPerRadAtCenter();
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
 
 	}
 }
@@ -1408,7 +1428,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 	// Draw the ocular outline, as GLUT is not working
-	painter.setColor(0.77, 0.14, 0.16, 1.0);
+	painter.setColor(0.0, 0.5, 0.25, 1.0);
 
 	double inner = 0.5 * params.viewportFovDiameter * params.devicePixelsPerPixel;
 	// See if we need to scale the mask
@@ -1417,23 +1437,31 @@ void Oculars::paintOcularMask(const StelCore *core)
 		 && !oculars[selectedOcularIndex]->isBinoculars()) {
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
-	painter.drawCircle(params.viewportCenter[0]* params.devicePixelsPerPixel, params.viewportCenter[1]* params.devicePixelsPerPixel, inner);
+	painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							 params.viewportCenter[1]* params.devicePixelsPerPixel,
+							 inner);
 
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull()){
-		painter.setColor(1.0f,0.0f,0.0f, 1);
+		glPushMatrix(); //Save the current matrix.
+
+		painter.setColor(0.77, 0.14, 0.16, 1.0);
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		reticleTexture->bind();
 
 		int textureHeight;
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
 
-//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		painter.drawSprite2dMode(params.viewportXywh[2] / 2 * params.devicePixelsPerPixel,
-										  params.viewportXywh[3] / 2 * params.devicePixelsPerPixel,
-										  inner);
+										 params.viewportXywh[3] / 2 * params.devicePixelsPerPixel,
+										 inner,
+										 reticleRotation);
+
+		//Reset the current matrix to the one that was saved.
+		glPopMatrix();
 	}
 
 	// XXX: for some reason I cannot get to make the glu functions work when
