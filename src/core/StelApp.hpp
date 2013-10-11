@@ -59,7 +59,7 @@ class StelProgressController;
 class StelApp : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight)
+	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY colorSchemeChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
