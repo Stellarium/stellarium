@@ -519,7 +519,6 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		
 		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
-		vf.normalize();
 		
 		// If the star zone is not strictly contained inside the viewport, eliminate from the 
 		// beginning the stars actually outside viewport.
@@ -528,7 +527,9 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			bool isVisible = true;
 			foreach (const SphericalCap& cap, boundingCaps)
 			{
-				if (!cap.contains(vf))
+				// Don't use if (!cap.contains(vf)) here because we don't want to normalize the vector yet, but know
+				// that it's almost normalized, enough for manually computing the intersection avoiding the assert.
+				if (vf[0]*static_cast<float>(cap.n[0])+vf[1]*static_cast<float>(cap.n[1])+vf[2]*static_cast<float>(cap.n[2])<static_cast<float>(cap.d))
 				{
 					isVisible = false;
 					continue;
@@ -542,6 +543,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (withExtinction)
 		{
 			Vec3f altAz(vf);
+			altAz.normalize();
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);

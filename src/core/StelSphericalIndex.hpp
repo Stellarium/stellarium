@@ -34,11 +34,17 @@ public:
 	void insert(StelRegionObjectP obj);
 
 	//! Process all the objects intersecting the given region using the passed function object.
-	template<class FuncObject> void processIntersectingRegions(const SphericalRegionP& region, FuncObject& func) const
+	template<class FuncObject> void processIntersectingRegions(const SphericalRegion* region, FuncObject& func) const
 	{
 		rootNode->processIntersectingRegions(region, func);
 	}
 
+	//! Process all the objects intersecting the given region using the passed function object.
+	template<class FuncObject> void processIntersectingPointInRegions(const SphericalRegion* region, FuncObject& func) const
+	{
+		rootNode->processIntersectingPointInRegions(region, func);
+	}
+	
 	//! Process all the objects intersecting the given region using the passed function object.
 	template<class FuncObject> void processBoundingCapIntersectingRegions(const SphericalCap& cap, FuncObject& func) const
 	{
@@ -46,7 +52,7 @@ public:
 	}
 	
 	//! Process all the objects contained in the given region using the passed function object.
-	template<class FuncObject> void processContainedRegions(const SphericalRegionP& region, FuncObject& func) const
+	template<class FuncObject> void processContainedRegions(const SphericalRegion* region, FuncObject& func) const
 	{
 		rootNode->processContainedRegions(region, func);
 	}
@@ -179,9 +185,15 @@ private:
 			}
 
 			//! Process all the objects intersecting the given region using the passed function object.
-			template<class FuncObject> void processIntersectingRegions(const SphericalRegionP& region, FuncObject& func) const
+			template<class FuncObject> void processIntersectingRegions(const SphericalRegion* region, FuncObject& func) const
 			{
 				processIntersectingRegions(*this, region, func);
+			}
+			
+			//! Process all the objects intersecting the given region using the passed function object.
+			template<class FuncObject> void processIntersectingPointInRegions(const SphericalRegion* region, FuncObject& func) const
+			{
+				processIntersectingPointInRegions(*this, region, func);
 			}
 			
 			template<class FuncObject> void processBoundingCapIntersectingRegions(const SphericalCap& cap, FuncObject& func) const
@@ -190,7 +202,7 @@ private:
 			}
 
 			//! Process all the objects contained the given region using the passed function object.
-			template<class FuncObject> void processContainedRegions(const SphericalRegionP& region, FuncObject& func) const
+			template<class FuncObject> void processContainedRegions(const SphericalRegion* region, FuncObject& func) const
 			{
 				processContainedRegions(*this, region, func);
 			}
@@ -237,7 +249,7 @@ private:
 			}
 
 			//! Process all the objects intersecting the given region using the passed function object.
-			template<class FuncObject> void processIntersectingRegions(const Node& node, const SphericalRegionP& region, FuncObject& func) const
+			template<class FuncObject> void processIntersectingRegions(const Node& node, const SphericalRegion* region, FuncObject& func) const
 			{
 				foreach (const NodeElem& el, node.elements)
 				{
@@ -250,6 +262,23 @@ private:
 						processAll(child, func);
 					else if (region->intersects(child.triangle))
 						processIntersectingRegions(child, region, func);
+				}
+			}
+			
+			//! Process all the objects with point intersecting the given region using the passed function object.
+			template<class FuncObject> void processIntersectingPointInRegions(const Node& node, const SphericalRegion* region, FuncObject& func) const
+			{
+				foreach (const NodeElem& el, node.elements)
+				{
+					if (region->contains(el.obj->getPointInRegion()))
+						func(&(*el.obj));
+				}
+				foreach (const Node& child, node.children)
+				{
+					if (region->contains(child.triangle))
+						processAll(child, func);
+					else if (region->intersects(child.triangle))
+						processIntersectingPointInRegions(child, region, func);
 				}
 			}
 			
@@ -270,7 +299,7 @@ private:
 			}
 
 			//! Process all the objects contained the given region using the passed function object.
-			template<class FuncObject> void processContainedRegions(const Node& node, const SphericalRegionP& region, FuncObject& func) const
+			template<class FuncObject> void processContainedRegions(const Node& node, const SphericalRegion* region, FuncObject& func) const
 			{
 				foreach (const NodeElem& el, node.elements)
 				{
