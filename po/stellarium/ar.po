@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-07 21:34+0700\n"
-"PO-Revision-Date: 2013-09-11 11:51+0000\n"
+"PO-Revision-Date: 2013-10-10 23:15+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 05:18+0000\n"
+"X-Launchpad-Export-Date: 2013-10-11 04:36+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106
@@ -7481,17 +7481,17 @@ msgstr "سنة الاكتشاف"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Habitable class"
-msgstr ""
+msgstr "الفئة القابلة للسكنى"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Mean surface temp."
-msgstr ""
+msgstr "متوسط حرارة السطح"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "ESI"
-msgstr ""
+msgstr "مؤشر المشابهة للأرض"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
@@ -7526,7 +7526,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "الكواكب الخارجية المحتمل قابليتها للسكنى"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid ""
@@ -7534,10 +7534,13 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
+"هذه افضافة تعرض الكواكب الخارجية التي يمكن أن تكون قابلة للمعيشة (العلامة "
+"البرتقالية) وبعض المعلومات - الفئة القابلة للسكنى، متوسط درجة حرارة السطح "
+"ومؤشر مشابهتها للأرض."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Habitable Class"
-msgstr ""
+msgstr "الفئة القابلة للسكنى"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid ""
@@ -7551,7 +7554,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "متوسط درجة حرارة السطح"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7562,7 +7565,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "(ESI) مؤشر المشابهة للأرض"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7706,7 +7709,7 @@ msgstr "معلومات"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "مواقع الشبكة العنكبوتية"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability analysis"
