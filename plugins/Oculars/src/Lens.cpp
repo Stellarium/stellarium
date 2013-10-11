@@ -66,6 +66,13 @@ void Lens::setMultipler(double theValue)
     m_multipler = theValue;
 }
 
+void Lens::writeToSettings(QSettings * settings, const int index)
+{
+	QString prefix = "lens/" + QVariant(index).toString() + "/";
+	settings->setValue(prefix + "name", this->name());
+	settings->setValue(prefix + "multipler", this->multipler());
+}
+
 /* ********************************************************************* */
 #if 0
 #pragma mark -

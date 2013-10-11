@@ -108,6 +108,16 @@ void Telescope::setVFlipped(bool flipped)
 	m_vFlipped = flipped;
 }
 
+void Telescope::writeToSettings(QSettings * settings, const int index)
+{
+	QString prefix = "telescope/" + QVariant(index).toString() + "/";
+	settings->setValue(prefix + "name", this->name());
+	settings->setValue(prefix + "focalLength", this->focalLength());
+	settings->setValue(prefix + "diameter", this->diameter());
+	settings->setValue(prefix + "hFlip", this->isHFlipped());
+	settings->setValue(prefix + "vFlip", this->isVFlipped());
+}
+
 /* ********************************************************************* */
 #if 0
 #pragma mark -
