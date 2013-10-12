@@ -89,6 +89,9 @@ public:
 	//! Set the z-axis rotation (offset from original value when rotated
 	void setZRotation(float d) {angleRotateZOffset = d;}
 
+	//! Get whether the landscape is currently fully visible (i.e. opaque).
+	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
+	
 protected:
 	//! Load attributes common to all landscapes
 	//! @param landscapeIni A reference to an existant QSettings object which describes the landscape

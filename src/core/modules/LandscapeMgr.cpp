@@ -71,7 +71,7 @@ private:
 
 Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2)
 {
-	font.setPointSize(round(StelApp::getInstance().getFontSize()*2.3));
+	font.setPixelSize(30);
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
 	sNorth = "N";
@@ -437,6 +437,11 @@ void LandscapeMgr::setFlagLandscape(const bool displayed)
 bool LandscapeMgr::getFlagLandscape() const
 {
 	return landscape->getFlagShow();
+}
+
+bool LandscapeMgr::getIsLandscapeFullyVisible() const
+{
+	return landscape->getIsFullyVisible();
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)

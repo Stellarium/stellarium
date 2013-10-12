@@ -36,13 +36,9 @@ static unsigned int stel_bswap_32(unsigned int val) {
 	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
-namespace BigStarCatalogExtension
-{
-
 static const Vec3f north(0,0,1);
 
-void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
-							 const Vec3f &c2)
+void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
 	// initialize center,axis0,axis1:
 	ZoneData &z(zones[index]);
@@ -51,28 +47,31 @@ void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
 	z.axis0 = north ^ z.center;
 	z.axis0.normalize();
 	z.axis1 = z.center ^ z.axis0;
-	// initialize star_position_scale:
-	double mu0,mu1,f,h;
+	
+	// Initialize star_position_scale. This scale is used to multiply stars position
+	// encoded as integers so that it optimize precision over the triangle.
+	// It has to be computed for each triangle because the relative orientation of the 2 axis is different for each triangle.
+	float mu0,mu1,f,h;
 	mu0 = (c0-z.center)*z.axis0;
 	mu1 = (c0-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 	mu0 = (c1-z.center)*z.axis0;
 	mu1 = (c1-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 	mu0 = (c2-z.center)*z.axis0;
 	mu1 = (c2-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 }
 
@@ -304,7 +303,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::scaleAxis(void)
+void SpecialZoneArray<Star>::scaleAxis()
 {
 	star_position_scale /= Star::MaxPosVal;
 	for (ZoneData *z=zones+(nr_of_zones-1);z>=zones;z--)
@@ -480,23 +479,28 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const float *rcmag_table,
-	StelCore* core, unsigned int maxMagStarName, float names_brightness) const
+void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
+	int limitMagIndex, StelCore* core, unsigned int maxMagStarName, float names_brightness, const QVector<SphericalCap> &boundingCaps) const
 {
     StelSkyDrawer* drawer = core->getSkyDrawer();
     Vec3f vf;
     static const double d2000 = 2451545.0;
-    const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
+    const float movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
     
     // GZ, added for extinction
     const Extinction& extinction=core->getSkyDrawer()->getExtinction();
     const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
     const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
 	
-	// GZ: allow artificial cutoff:
-	const int clampStellarMagnitude_mmag = (int) floor(drawer->getCustomStarMagnitudeLimit() * 1000.0f);
-	// find s->mag, which is the step into the magnitudes which is just bright enough to be drawn.
-	int cutoffMagStep=(drawer->getFlagStarMagnitudeLimit() ? (clampStellarMagnitude_mmag - mag_min)*mag_steps/mag_range : mag_steps);
+	// Allow artificial cutoff:
+	// find the (integer) mag at which is just bright enough to be drawn.
+	int cutoffMagStep=limitMagIndex;
+	if (drawer->getFlagStarMagnitudeLimit())
+	{
+		cutoffMagStep = ((int)(drawer->getCustomStarMagnitudeLimit()*1000.f) - mag_min)*mag_steps/mag_range;
+		if (cutoffMagStep>limitMagIndex)
+			cutoffMagStep = limitMagIndex;
+	}
     
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
@@ -507,37 +511,52 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (s->mag > cutoffMagStep)
 			break;
     
+		// Because of the test above, the star should always be visible from this point.
+		
 		// Array of 2 numbers containing radius and magnitude
-		const float* tmpRcmag = rcmag_table+2*s->mag;
+		const RCMag* tmpRcmag = &rcmag_table[s->mag];
 		
-		// The radius of the star is <=0, following stars will be dimmer --> early exit
-		if (*tmpRcmag<=0.f)
-			break;
-		
+		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+		
+		// If the star zone is not strictly contained inside the viewport, eliminate from the 
+		// beginning the stars actually outside viewport.
+		if (!isInsideViewport)
+		{
+			bool isVisible = true;
+			foreach (const SphericalCap& cap, boundingCaps)
+			{
+				if (!cap.contains(vf))
+				{
+					isVisible = false;
+					continue;
+				}
+			}
+			if (!isVisible)
+				continue;
+		}
 
-		// GZ new:
 		if (withExtinction)
 		{
-			//GZ: We must compute position first, then shift magnitude.
-			Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOff);
-			float extMagShift=0.0f;
+			Vec3f altAz(vf);
+			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			altAz.normalize();
-			extinction.forward(&altAz, &extMagShift);
-			int extMagShiftStep=qMin((int)(extMagShift/k), 4096-mag_steps); // this number must be equal StarMgr.cpp line 649
+			float extMagShift=0.0f;
+			extinction.forward(altAz, &extMagShift);
+			int extMagShiftStep=qMin((int)(extMagShift/k), RCMAG_TABLE_SIZE-mag_steps);
 			if ((s->mag + extMagShiftStep) > cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 			{
 				continue;
 			}
 			else
 			{
-				tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
+				tmpRcmag = &rcmag_table[s->mag+extMagShiftStep];
 			}
 		}
 	
-		if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 		{
-			const float offset = *tmpRcmag*0.7f;
+			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
 			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
 			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
@@ -566,4 +585,3 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	}
 }
 
-} // namespace BigStarCatalogExtension

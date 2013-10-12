@@ -51,8 +51,6 @@
 #  endif
 #endif
 
-namespace BigStarCatalogExtension
-{
 
 #define NR_OF_HIP 120416
 #define FILE_MAGIC 0x835f040a
@@ -102,19 +100,18 @@ public:
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
-					  const float *rcmag_table, StelCore* core,
-					  unsigned int maxMagStarName,float names_brightness) const = 0;
+					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
+					  unsigned int maxMagStarName,float names_brightness,
+					  const QVector<SphericalCap>& boundingCaps) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
 	bool isInitialized(void) const { return (nr_of_zones>0); }
 
 	//! Initialize the ZoneData struct at the given index.
-	void initTriangle(int index,
-					  const Vec3f &c0,
-					  const Vec3f &c1,
-					  const Vec3f &c2);
-	virtual void scaleAxis(void) = 0;
+	void initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2);
+	
+	virtual void scaleAxis() = 0;
 
 	//! File path of the catalog.
 	const QString fname;
@@ -178,15 +175,17 @@ protected:
 	//! @param index zone index to draw
 	//! @param isInsideViewport whether the zone is inside the current viewport
 	//! @param rcmag_table table of magnitudes
+	//! @param limitMagIndex index from rcmag_table at which stars are not visible anymore
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
-	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
-			  const float *rcmag_table, StelCore* core,
-			  unsigned int maxMagStarName, float names_brightness) const;
+	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
+			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
+			  unsigned int maxMagStarName, float names_brightness,
+			  const QVector<SphericalCap>& boundingCaps) const;
 
-	void scaleAxis(void);
-	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
+	virtual void scaleAxis();
+	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 					  QList<StelObjectP > &result);
 
 	Star *stars;
@@ -209,7 +208,5 @@ public:
 	//! @param hipIndex array of Hipparcos info structs
 	void updateHipIndex(HipIndexStruct hipIndex[]) const;
 };
-
-} // namespace BigStarCatalogExtension
 
 #endif // _ZONEARRAY_HPP_

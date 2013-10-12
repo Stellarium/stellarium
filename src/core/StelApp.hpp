@@ -30,7 +30,6 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
-class StelShortcutMgr;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -159,6 +158,11 @@ public:
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
 
+	//! Get the ratio between real device pixel and "Device Independent Pixel".
+	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
+	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	void setDevicePixelsPerPixel(float dppp);
+	
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI si currently being used.
@@ -180,11 +184,6 @@ public:
 	//! The StelApp instance remains the owner of the controller.
 	StelProgressController* addProgressBar();
 	void removeProgressBar(StelProgressController* p);
-
-	//! Get size of base font
-	int getFontSize(void) const { return baseFontSize; }
-	//! Set size of base font
-	void setFontSize(int fontsize)  { baseFontSize=fontsize; }
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
@@ -281,6 +280,10 @@ private:
 
 
 	StelGuiBase* stelGui;
+	
+	// Store the ratio between real device pixel in "Device Independent Pixel"
+	// Usually this value is 1, but for a mac with retina screen this will be value 2.
+	float devicePixelsPerPixel;
 
 	// Used to collect wheel events
 	QTimer * wheelEventTimer;
@@ -318,8 +321,6 @@ private:
 	int drawState;
 	
 	QList<StelProgressController*> progressControllers;
-
-	int baseFontSize;
 };
 
 #endif // _STELAPP_HPP_

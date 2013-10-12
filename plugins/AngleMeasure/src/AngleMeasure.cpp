@@ -65,7 +65,7 @@ AngleMeasure::AngleMeasure()
 		angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
-	font.setPointSize(round(StelApp::getInstance().getFontSize()*1.23));
+	font.setPixelSize(16);
 
 	messageTimer = new QTimer(this);
 	messageTimer->setInterval(7000);
