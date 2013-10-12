@@ -67,7 +67,7 @@ class SearchDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	SearchDialog();
+	SearchDialog(QObject* parent);
 	virtual ~SearchDialog();
 	//! Notify that the application style changed
 	void styleChanged();

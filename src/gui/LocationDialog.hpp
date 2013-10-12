@@ -31,7 +31,7 @@ class LocationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	LocationDialog();
+	LocationDialog(QObject* parent);
 	virtual ~LocationDialog();
 	//! Notify that the application style changed
 	void styleChanged();
