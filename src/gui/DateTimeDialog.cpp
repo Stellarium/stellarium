@@ -31,7 +31,8 @@
 #include <QFrame>
 #include <QLineEdit>
 
-DateTimeDialog::DateTimeDialog() :
+DateTimeDialog::DateTimeDialog(QObject* parent) :
+  StelDialog(parent),
   year(0),
   month(0),
   day(0),

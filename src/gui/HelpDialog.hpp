@@ -32,7 +32,7 @@ class HelpDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	HelpDialog();
+	HelpDialog(QObject* parent);
 	~HelpDialog();
 
 	//! Notify that the application style changed

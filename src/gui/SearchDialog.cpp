@@ -121,7 +121,7 @@ void CompletionLabel::updateText()
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 
-SearchDialog::SearchDialog() : simbadReply(NULL)
+SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
