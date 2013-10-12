@@ -41,7 +41,7 @@
 #include <QTimer>
 #include <QStringListModel>
 
-LocationDialog::LocationDialog() : isEditingNew(false)
+LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
 	lastVisionMode = StelApp::getInstance().getVisionModeNight();

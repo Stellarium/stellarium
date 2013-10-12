@@ -53,7 +53,7 @@
 #include <QTimer>
 #include <QDialog>
 
-ViewDialog::ViewDialog()
+ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;

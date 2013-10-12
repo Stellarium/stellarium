@@ -55,7 +55,7 @@ class ShortcutsDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	ShortcutsDialog();
+	ShortcutsDialog(QObject* parent);
 	~ShortcutsDialog();
 
 	//! higlight items that have collisions with current lineEdits' state according to css.
