@@ -142,8 +142,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 
 Vec3f Nebula::getInfoColor(void) const
 {
-	Vec3f col = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
-	return StelApp::getInstance().getVisionModeNight() ? StelUtils::getNightColor(col) : col;
+	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
 }
 
 double Nebula::getCloseViewFov(const StelCore*) const
@@ -166,8 +165,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
-	if (StelApp::getInstance().getVisionModeNight())
-		col = StelUtils::getNightColor(col);
 
 	sPainter.setColor(col[0], col[1], col[2], 1);
 	switch (nType) {
@@ -209,8 +206,6 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		return;
 
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
-	if (StelApp::getInstance().getVisionModeNight())
-		col = StelUtils::getNightColor(col);
 
 	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();

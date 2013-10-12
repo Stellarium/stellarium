@@ -81,7 +81,7 @@ protected:
 	}
 	Vec3f getInfoColor(void) const
 	{
-		return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.0, 0.0) : StelSkyDrawer::indexToColor(s->bV);
+		return StelSkyDrawer::indexToColor(s->bV);
 	}
 	float getVMagnitude(const StelCore* core) const
 	{

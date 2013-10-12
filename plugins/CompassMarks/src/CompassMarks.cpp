@@ -146,13 +146,7 @@ void CompassMarks::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	Vec3f mColor;
-	if (StelApp::getInstance().getVisionModeNight())
-		mColor = StelUtils::getNightColor(markColor);
-	else
-		mColor = markColor;
-
-	painter.setColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
+	painter.setColor(markColor[0], markColor[1], markColor[2], markFader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);

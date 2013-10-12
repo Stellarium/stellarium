@@ -809,11 +809,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
 			int yPosition = projectorParams.viewportCenter[1];
 			yPosition = yPosition - 0.5 * (metrics.height());
-			const char *tcolor;
-			if (StelApp::getInstance().getVisionModeNight())
-				tcolor = "#C40303";
-			else
-				tcolor = "#99FF99";
+			const char *tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
 									true, font.pixelSize(), tcolor);
 		}
