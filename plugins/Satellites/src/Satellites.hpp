@@ -435,7 +435,6 @@ public slots:
 	void saveCatalog(QString path=QString());
 
 private slots:
-	void setStelStyle(const QString& section);
 
 private:
 	//! Add to the current collection the satellite described by the data.

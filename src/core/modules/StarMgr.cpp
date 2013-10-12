@@ -351,9 +351,6 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 			return;
 
 		Vec3f c(obj->getInfoColor());
-		if (StelApp::getInstance().getVisionModeNight())
-			c = StelUtils::getNightColor(c);
-
 		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
 		sPainter.enableTexture2d(true);

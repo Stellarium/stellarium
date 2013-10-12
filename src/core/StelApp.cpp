@@ -663,7 +663,7 @@ void StelApp::setVisionModeNight(bool b)
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		emit(colorSchemeChanged(b ? "night_color" : "color"));
+		emit(visionNightModeChanged(b));
 	}
 }
 
