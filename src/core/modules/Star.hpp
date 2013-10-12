@@ -20,7 +20,7 @@
  */
 
 #ifndef _STAR_HPP_
-#define _STAR_HPP_ 1
+#define _STAR_HPP_
 
 #include "ZoneData.hpp"
 #include "StelObjectType.hpp"
@@ -28,13 +28,10 @@
 
 class StelObject;
 
-namespace BigStarCatalogExtension {
-
 typedef int Int32;
 typedef unsigned int Uint32;
 typedef short int Int16;
 typedef unsigned short int Uint16;
-
 
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
@@ -44,7 +41,6 @@ template <class Star> struct SpecialZoneData;
 // to store much data for bright stars (Star1), but only little or even
 // very little data for faints stars (Star3). Using only 6 bytes for Star3
 // makes it feasable to store hundreds of millions of them in main memory.
-
 
 
 static inline float IndexToBV(unsigned char bV) {
@@ -137,20 +133,20 @@ struct Star3 {  // 6 byte
   unsigned int bV:7;
   unsigned int mag:5;
   enum {MaxPosVal=((1<<17)-1)};
-  StelObjectP createStelObject(const SpecialZoneArray<Star3> *a,
-					 const SpecialZoneData<Star3> *z) const;
-  void getJ2000Pos(const ZoneData *z,float, Vec3f& pos) const {
+  StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
+  void getJ2000Pos(const ZoneData *z,float, Vec3f& pos) const
+  {
 	  pos = z->axis0;
 	  pos*=(float)(x0);
 	  pos+=z->center;
 	  pos+=(float)(x1)*z->axis1;
   }
-  float getBV(void) const {return IndexToBV(bV);}
-  QString getNameI18n(void) const {return QString();}
-  int hasComponentID(void) const {return 0;}
+  float getBV() const {return IndexToBV(bV);}
+  QString getNameI18n() const {return QString();}
+  int hasComponentID() const {return 0;}
   bool hasName() const {return false;}
   void repack(bool fromBe);
-  void print(void);
+  void print();
 }
 #if defined(__GNUC__)
    __attribute__ ((__packed__))
@@ -159,7 +155,5 @@ struct Star3 {  // 6 byte
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(0)
 #endif
-
-} // namespace BigStarCatalogExtension
 
 #endif // _STAR_HPP_

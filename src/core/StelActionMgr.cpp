@@ -18,6 +18,7 @@
  */
 
 #include "StelActionMgr.hpp"
+#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 
 #include <QVariant>
@@ -25,6 +26,11 @@
 #include <QMetaProperty>
 #include <QStringList>
 #include <QSettings>
+
+#ifndef USE_QUICKVIEW
+#include <QAction>
+#include "StelMainView.hpp"
+#endif
 
 StelAction::StelAction(const QString& actionId,
 					   const QString& groupId,
@@ -58,16 +64,39 @@ StelAction::StelAction(const QString& actionId,
 		if (shortcuts.size() > 1)
 			setAltShortcut(shortcuts[1]);
 	}
+#ifndef USE_QUICKVIEW
+	QWidget* mainView = &StelMainView::getInstance();
+	qAction = new QAction(this);
+	onChanged();
+	mainView->addAction(qAction);
+	connect(qAction, SIGNAL(triggered()), this, SLOT(trigger()));
+	connect(this, SIGNAL(changed()), this, SLOT(onChanged()));
+#endif
 }
+
+#ifndef USE_QUICKVIEW
+void StelAction::onChanged()
+{
+	qAction->setShortcuts(QList<QKeySequence>() << keySequence << altKeySequence);
+	qAction->setShortcutContext(global ? Qt::ApplicationShortcut : Qt::WidgetShortcut);
+}
+#endif
 
 void StelAction::setShortcut(const QString& key)
 {
 	keySequence = QKeySequence(key);
+	emit changed();
 }
 
 void StelAction::setAltShortcut(const QString& key)
 {
 	altKeySequence = QKeySequence(key);
+	emit changed();
+}
+
+QString StelAction::getText() const
+{
+	return q_(text);
 }
 
 void StelAction::setChecked(bool value)
@@ -128,6 +157,7 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 		int signalIndex = metaObject()->indexOfMethod("triggered()");
 		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
 	}
+	emit changed();
 }
 
 void StelAction::propertyChanged(bool value)
@@ -244,6 +274,7 @@ void StelActionMgr::restoreDefaultShortcuts()
 	{
 		action->keySequence = action->defaultKeySequence;
 		action->altKeySequence = action->defaultAltKeySequence;
+		emit action->changed();
 	}
 	saveShortcuts();
 }

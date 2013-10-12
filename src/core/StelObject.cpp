@@ -85,10 +85,10 @@ float StelObject::getVMagnitude(const StelCore* core) const
 
 float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 {
-	Vec3d altAzPos = getAltAzPosApparent(core);
+	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
 	float vMag = getVMagnitude(core);
-	core->getSkyDrawer()->getExtinction().forward(&altAzPos, &vMag); 
+	core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag); 
 	return vMag;
 }
 
