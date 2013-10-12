@@ -62,8 +62,6 @@
 #include "kdewin32/unistd.h"
 #endif
 
-using namespace BigStarCatalogExtension;
-
 static QStringList spectral_array;
 static QStringList component_array;
 
@@ -138,7 +136,7 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;
-	starFont.setPointSize(StelApp::getInstance().getFontSize());
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -317,7 +315,7 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
-	starFont.setPointSize(StelApp::getInstance().getFontSize());
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -768,8 +766,8 @@ int StarMgr::getMaxSearchLevel() const
 	foreach(const ZoneArray* z, gridLevels)
 	{
 		const float mag_min = 0.001f*z->mag_min;
-		float rcmag[2];
-		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
+		RCMag rcmag;
+		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min, &rcmag)==false)
 			break;
 		rval = z->level;
 	}
@@ -788,7 +786,9 @@ void StarMgr::draw(StelCore* core)
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->getViewportConvexPolygon()->getBoundingSphericalCaps(),maxSearchLevel);
+	QVector<SphericalCap> viewportCaps = prj->getViewportConvexPolygon()->getBoundingSphericalCaps();
+	viewportCaps.append(core->getVisibleSkyArea());
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(viewportCaps,maxSearchLevel);
 
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
@@ -798,33 +798,36 @@ void StarMgr::draw(StelCore* core)
 	sPainter.setFont(starFont);
 	skyDrawer->preDrawPointSource(&sPainter);
 
-	// draw all the stars of all the selected zones
-        // GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
-	//float rcmag_table[2*256];
-        //float rcmag_table[2*16384];
-        float rcmag_table[2*4096];
-
+	// Prepare a table for storing precomputed RCMag for all ZoneArrays
+	RCMag rcmag_table[RCMAG_TABLE_SIZE];
+	
+	// Draw all the stars of all the selected zones
 	foreach(const ZoneArray* z, gridLevels)
 	{
+		int limitMagIndex=RCMAG_TABLE_SIZE;
 		const float mag_min = 0.001f*z->mag_min;
 		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
-		// GZ: add a huge number of entries to rcMag
-		//for (int i=it.value()->mag_steps-1;i>=0;--i)
-                for (int i=4096-1;i>=0;--i)
+		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
 			const float mag = mag_min+k*i;
-			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
+			if (skyDrawer->computeRCMag(mag, &rcmag_table[i])==false)
 			{
-				if (i==0) goto exit_loop;
+				if (i==0)
+					goto exit_loop;
+				
+				// The last magnitude at which the star is visible
+				limitMagIndex = i-1;
+				
+				// We reached the point where stars are not visible anymore
+				// Fill the rest of the table with zero and leave.
+				for (;i<RCMAG_TABLE_SIZE;++i)
+				{
+					rcmag_table[i].luminance=0;
+					rcmag_table[i].radius=0;
+				}
+				break;
 			}
-			if (skyDrawer->getFlagPointStar())
-			{
-				rcmag_table[2*i+1] *= starsFader.getInterstate();
-			}
-			else
-			{
-				rcmag_table[2*i] *= starsFader.getInterstate();
-			}
+			rcmag_table[i].radius *= starsFader.getInterstate();
 		}
 		lastMaxSearchLevel = z->level;
 
@@ -838,12 +841,14 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
+		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps);
 	}
 	exit_loop:
+
 	// Finish drawing many stars
 	skyDrawer->postDrawPointSource(&sPainter);
 
@@ -1260,7 +1265,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 //! Define font file name and size to use for star names display
 void StarMgr::setFontSize(double newFontSize)
 {
-	starFont.setPointSize(newFontSize);
+	starFont.setPixelSize(newFontSize);
 }
 
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)

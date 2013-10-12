@@ -307,7 +307,7 @@ void LeftStelBar::buttonHoverChanged(bool b)
 	{
 		if (button->action)
 		{
-			QString tip(q_(button->action->getText()));
+			QString tip(button->action->getText());
 			QString shortcut(button->action->getShortcut().toString(QKeySequence::NativeText));
 			if (!shortcut.isEmpty())
 			{
@@ -368,11 +368,10 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
 
-	int fontSize = floor(StelApp::getInstance().getFontSize()*0.92);
-	datetime->font().setPointSize(fontSize);
-	location->font().setPointSize(fontSize);
-	fov->font().setPointSize(fontSize);
-	fps->font().setPointSize(fontSize);
+	datetime->font().setPixelSize(12);
+	location->font().setPixelSize(12);
+	fov->font().setPixelSize(12);
+	fps->font().setPixelSize(12);
 
 	flagShowTime = true;
 	flagShowLocation = true;
@@ -732,7 +731,7 @@ void BottomStelBar::buttonHoverChanged(bool b)
 		StelAction* action = button->action;
 		if (action)
 		{
-			QString tip(q_(action->getText()));
+			QString tip(action->getText());
 			QString shortcut(action->getShortcut().toString(QKeySequence::NativeText));
 			if (!shortcut.isEmpty())
 			{

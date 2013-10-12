@@ -288,7 +288,8 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	if (StelApp::getInstance().getVisionModeNight())
 		color = StelUtils::getNightColor(color);
 
-	float rcMag[2], size, shift;
+	RCMag rcMag;
+	float size, shift;
 	double mag;
 
 	StelUtils::spheToRect(RA, Dec, XYZ);
@@ -298,8 +299,8 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 
 	if (mag <= mlimit)
 	{
-		sd->computeRCMag(mag, rcMag);
-		sd->drawPointSource(painter, XYZ, rcMag, color, false);
+		sd->computeRCMag(mag, &rcMag);
+		sd->drawPointSource(painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
 		painter->setColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;

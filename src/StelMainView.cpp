@@ -49,7 +49,6 @@
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
-qreal StelMainView::devicePixelRatio = 1.0;
 
 //! Render Stellarium sky. 
 class StelSkyItem : public QDeclarativeItem, protected QOpenGLFunctions
@@ -122,9 +121,8 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	// XXX: to reintroduce
 	//distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	qreal ratio = StelMainView::getDevicePixelRatio();
 	QMouseEvent newEvent(QEvent::MouseButtonPress,
-								QPoint(pos.x() * ratio, pos.y() * ratio),
+								QPoint(pos.x(), pos.y()),
 								event->button(),
 								event->buttons(),
 								event->modifiers());
@@ -137,9 +135,8 @@ void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	// XXX: to reintroduce
 	// distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	qreal ratio = StelMainView::getDevicePixelRatio();
 	QMouseEvent newEvent(QEvent::MouseButtonRelease,
-								QPoint(pos.x() * ratio, pos.y() * ratio),
+								QPoint(pos.x(), pos.y()),
 								event->button(),
 								event->buttons(),
 								event->modifiers());
@@ -305,7 +302,7 @@ void StelMainView::init(QSettings* conf)
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
 	
-	QScreen * screen = glWidget->windowHandle()->screen();
+	QScreen* screen = glWidget->windowHandle()->screen();
 	int width = conf->value("video/screen_w", screen->size().width()).toInt();
 	int height = conf->value("video/screen_h", screen->size().height()).toInt();
 	if (conf->value("video/fullscreen", true).toBool())
@@ -440,16 +437,12 @@ void StelMainView::wheelEvent(QWheelEvent* event)
 	QDeclarativeView::wheelEvent(event);
 }
 
-void StelMainView::moveEvent (QMoveEvent * event)
+void StelMainView::moveEvent(QMoveEvent * event)
 {
 	Q_UNUSED(event);
 
 	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
-	devicePixelRatio = glWidget->windowHandle()->devicePixelRatio();
-	StelCore * core = StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	params.devicePixelRatio = devicePixelRatio;
-	core->setCurrentStelProjectorParams(params);
+	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
 }
 
 void StelMainView::keyPressEvent(QKeyEvent* event)
@@ -522,3 +515,4 @@ void StelMainView::doScreenshot(void)
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }
+

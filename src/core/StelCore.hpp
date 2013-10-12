@@ -195,6 +195,7 @@ public:
 	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
 	Vec3d equinoxEquToJ2000(const Vec3d& v) const;
 	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const;
@@ -244,6 +245,8 @@ public:
 
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
+	SphericalCap getVisibleSkyArea() const;
+	
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
 	//! @param duration direction of view move duration in s

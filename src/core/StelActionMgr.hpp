@@ -44,9 +44,10 @@ public:
 	void connectToObject(QObject* obj, const char* slot);
 	//! Don't use setCheckable, connectToObject can automatically determine if the action is checkable or not.
 	//! This is just there to ease the migration from QAction.
-	void setCheckable(bool value) {checkable = value;}
+	void setCheckable(bool value) {checkable = value; emit changed();}
 	bool isCheckable() const {return checkable;}
 	bool isChecked() const {return checked;}
+	bool isGlobal() const {return global;}
 	void setShortcut(const QString& key);
 	void setAltShortcut(const QString& key);
 	QKeySequence::SequenceMatch matches(const QKeySequence& seq) const;
@@ -55,11 +56,12 @@ public:
 	QString getGroup() const {return group;}
 	const QKeySequence getShortcut() const {return keySequence;}
 	const QKeySequence getAltShortcut() const {return altKeySequence;}
-	const QString& getText() const {return text;}
-	void setText(const QString& value) {text = value;}
+	QString getText() const;
+	void setText(const QString& value) {text = value; emit changed();}
 signals:
 	void toggled(bool);
 	void triggered();
+	void changed();
 public slots:
 	void setChecked(bool);
 	void trigger();
@@ -78,6 +80,17 @@ private:
 	const QKeySequence defaultAltKeySequence;
 	QObject* target;
 	const char* property;
+
+	// Currently, there is no proper way to handle shortcuts with non latin
+	// keyboards layouts.  So for the moment, if we don't use QuickView, we
+	// create a QAction added to the main view that will trigger the
+	// StelAction when the shortcut is typed.
+#ifndef USE_QUICKVIEW
+private slots:
+	void onChanged();
+private:
+	class QAction* qAction;
+#endif
 };
 
 class StelActionMgr : public QObject

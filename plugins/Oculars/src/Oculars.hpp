@@ -20,13 +20,14 @@
 #ifndef _OCULARS_HPP_
 #define _OCULARS_HPP_
 
-#include "VecMath.hpp"
-#include "StelModule.hpp"
-#include "OcularDialog.hpp"
 #include "CCD.hpp"
-#include "Ocular.hpp"
-#include "Telescope.hpp"
 #include "Lens.hpp"
+#include "Ocular.hpp"
+#include "OcularDialog.hpp"
+#include "StelModule.hpp"
+#include "StelTexture.hpp"
+#include "Telescope.hpp"
+#include "VecMath.hpp"
 
 #include <QFont>
 #include <QOpenGLFunctions_1_2>
@@ -262,6 +263,9 @@ private:
 	//Styles
 	QByteArray normalStyleSheet;
 	QByteArray nightStyleSheet;
+
+	//Reticle
+	StelTextureSP reticleTexture;
 };
 
 

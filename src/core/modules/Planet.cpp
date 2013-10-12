@@ -420,6 +420,7 @@ void Planet::computePosition(const double date)
 	{
 		// calculate actual Planet position
 		coordFunc(date, eclipticPos, userDataPtr);
+		// XXX: do we need to do that even when the orbit is not visible?
 		for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJD = date;
@@ -489,6 +490,10 @@ double Planet::getSiderealTime(double jd) const
 double Planet::getMeanSolarDay() const
 {
 	double msd = 0.;
+
+	if (englishName=="Sun")
+		return msd;
+
 	double sday = getSiderealDay();	
 	double coeff = std::abs(sday/getSiderealPeriod());
 	float sign = 1;
@@ -533,14 +538,16 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 // Return heliocentric coordinate of p
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
+	// Note: using shared copies is too slow here.  So we use direct access
+	// instead.
 	Vec3d pos = p;
-	PlanetP pp = parent;
+	const Planet* pp = parent.data();
 	if (pp)
 	{
-		while (pp->parent)
+		while (pp->parent.data())
 		{
 			pos += pp->eclipticPos;
-			pp = pp->parent;
+			pp = pp->parent.data();
 		}
 	}
 	return pos;
@@ -942,7 +949,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitudeWithExtinction(core), color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
 }
 
 
