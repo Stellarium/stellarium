@@ -442,21 +442,14 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		sPainter->enableTexture2d(true);
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_BLEND);				
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter->setColor(color[0]*cmag, 0.0, 0.0);
-		else
-			sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-
+		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}
 
 	unsigned char starColor[3] = {0, 0, 0};
 	starColor[0] = (unsigned char)std::min((int)(color[0]*tw*255+0.5f), 255);
-	if (!StelApp::getInstance().getVisionModeNight())
-	{
-		starColor[1] = (unsigned char)std::min((int)(color[1]*tw*255+0.5f), 255);
-		starColor[2] = (unsigned char)std::min((int)(color[2]*tw*255+0.5f), 255);
-	}
+	starColor[1] = (unsigned char)std::min((int)(color[1]*tw*255+0.5f), 255);
+	starColor[2] = (unsigned char)std::min((int)(color[2]*tw*255+0.5f), 255);
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
@@ -500,11 +493,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
-		Vec3f c = color;
-		if (StelApp::getInstance().getVisionModeNight())
-			c = StelUtils::getNightColor(c);
-
-		painter->setColor(c[0]*cmag, c[1]*cmag, c[2]*cmag);
+		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		painter->drawSprite2dMode(win[0], win[1], rmag);
 		noStarHalo = true;
 	}

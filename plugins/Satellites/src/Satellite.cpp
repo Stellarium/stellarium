@@ -96,26 +96,14 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	list = map.value("orbitColor", QVariantList()).toList();
 	if (list.count() == 3)
 	{
-		orbitColorNormal[0] = list.at(0).toDouble();
-		orbitColorNormal[1] = list.at(1).toDouble();
-		orbitColorNormal[2] = list.at(2).toDouble();
+		orbitColor[0] = list.at(0).toDouble();
+		orbitColor[1] = list.at(1).toDouble();
+		orbitColor[2] = list.at(2).toDouble();
 	}
 	else
 	{
-		orbitColorNormal = hintColor;
+		orbitColor = hintColor;
 	}
-
-	// Set the night color of orbit lines to red with the
-	// intensity of the average of the RGB for the day color.
-	float orbitColorBrightness = (orbitColorNormal[0] + orbitColorNormal[1] + orbitColorNormal[2])/3;
-	orbitColorNight[0] = orbitColorBrightness;
-	orbitColorNight[1] = 0;
-	orbitColorNight[2] = 0;
-
-	if (StelApp::getInstance().getVisionModeNight())
-		orbitColor = &orbitColorNight;
-	else
-		orbitColor = &orbitColorNormal;
 
 	if (map.contains("comms"))
 	{
@@ -185,7 +173,7 @@ QVariantMap Satellite::getMap(void)
 		map.insert("userDefined", userDefined);
 	QVariantList col, orbitCol;
 	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
-	orbitCol << roundToDp(orbitColorNormal[0], 3) << roundToDp(orbitColorNormal[1], 3) << roundToDp(orbitColorNormal[2],3);
+	orbitCol << roundToDp(orbitColor[0], 3) << roundToDp(orbitColor[1], 3) << roundToDp(orbitColor[2],3);
 	map["hintColor"] = col;
 	map["orbitColor"] = orbitCol;
 	QVariantList commList;
@@ -352,7 +340,7 @@ Vec3d Satellite::getJ2000EquatorialPos(const StelCore* core) const
 
 Vec3f Satellite::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
+	return hintColor;
 }
 
 float Satellite::getVMagnitude(const StelCore* core) const
@@ -510,7 +498,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 	XYZ = getJ2000EquatorialPos(core);
 	Vec3f drawColor;
 	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
-	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
+	glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -555,7 +543,7 @@ void Satellite::drawOrbit(StelPainter& painter)
 		// Draw end (fading) parts of orbit lines one segment at a time.
 		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
 		{
-			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
 			painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
 		}
 		else
@@ -566,7 +554,7 @@ void Satellite::drawOrbit(StelPainter& painter)
 	}
 
 	// Draw center section of orbit in one go
-	painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness);
+	painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness);
 	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
 
 	glEnable(GL_TEXTURE_2D);
@@ -586,15 +574,6 @@ float Satellite::calculateOrbitSegmentIntensity(int segNum)
 		return (endDist  + 1) / (orbitLineFadeSegments + 1.0);
 	}
 }
-
-void Satellite::setNightColors(bool night)
-{
-	if (night)
-		orbitColor = &orbitColorNight;
-	else
-		orbitColor = &orbitColorNormal;
-}
-
 
 void Satellite::computeOrbitPoints()
 {

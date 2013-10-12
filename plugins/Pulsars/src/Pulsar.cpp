@@ -228,7 +228,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 Vec3f Pulsar::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Pulsar::getVMagnitude(const StelCore* core) const
@@ -331,9 +331,6 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
 	Vec3f color = Vec3f(0.4f,0.5f,1.2f);
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
-
 	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
