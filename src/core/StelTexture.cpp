@@ -25,80 +25,17 @@
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 
-#include <QThread>
-#include <QMutexLocker>
-#include <QSemaphore>
 #include <QImageReader>
-#include <QDir>
-#include <QFile>
-#include <QTemporaryFile>
 #include <QSize>
 #include <QDebug>
 #include <QUrl>
 #include <QImage>
 #include <QNetworkReply>
-#include <QTimer>
 #include <QtEndian>
+#include <QFuture>
+#include <QtConcurrent>
 
-ImageLoader::ImageLoader(const QString& path, int delay)
-	: QObject(), path(path), networkReply(NULL)
-{
-	QTimer::singleShot(delay, this, SLOT(start()));
-}
-
-void ImageLoader::abort()
-{
-	// XXX: Assert that we are in the main thread.
-	if (networkReply != NULL)
-	{
-		networkReply->abort();
-	}
-}
-
-void ImageLoader::start()
-{
-	if (path.startsWith("http://")) {
-		QNetworkRequest req = QNetworkRequest(QUrl(path));
-		// Define that preference should be given to cached files (no etag checks)
-		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
-		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
-	} else {
-		// At next loop iteration we start to load from the file.
-		QTimer::singleShot(0, this, SLOT(directLoad()));
-	}
-
-	// Move this object outside of the main thread.
-	StelTextureMgr* textureMgr = &StelApp::getInstance().getTextureManager();
-	moveToThread(textureMgr->loaderThread);
-}
-
-
-void ImageLoader::onNetworkReply()
-{
-	if (networkReply->error() != QNetworkReply::NoError) {
-		emit error(networkReply->errorString());
-	} else {
-		QByteArray data = networkReply->readAll();
-		QImage image = QImage::fromData(data);
-		if (image.isNull()) {
-			emit error("Unable to parse image data");
-		} else {
-			emit finished(image);
-		}
-	}
-	networkReply->deleteLater();
-	networkReply = NULL;
-}
-
-void ImageLoader::directLoad() {
-	QImage image = QImage(path);
-	emit finished(image);
-}
-
-StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
-				   errorOccured(false), id(0), avgLuminance(-1.f)
+StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), id(0), avgLuminance(-1.f)
 {
 	width = -1;
 	height = -1;
@@ -119,10 +56,13 @@ StelTexture::~StelTexture()
 		}
 		id = 0;
 	}
+	if (networkReply != NULL)
+	{
+		networkReply->abort();
+		networkReply->deleteLater();
+	}
 	if (loader != NULL) {
-		loader->abort();
-		// Don't forget that the loader has no parent.
-		loader->deleteLater();
+		delete loader;
 		loader = NULL;
 	}
 }
@@ -134,9 +74,32 @@ void StelTexture::reportError(const QString& aerrorMessage)
 {
 	errorOccured = true;
 	errorMessage = aerrorMessage;
-	isLoadingImage = false;
 	// Report failure of texture loading
 	emit(loadingProcessFinished(true));
+}
+
+StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
+{
+	GLData ret;
+	if (image.isNull())
+		return ret;
+	ret.width = image.width();
+	ret.height = image.height();
+	ret.data = convertToGLFormat(image, &ret.format, &ret.type);
+	return ret;
+}
+
+/*************************************************************************
+ Defined to be passed to QtConcurrent::run
+ *************************************************************************/
+StelTexture::GLData StelTexture::loadFromPath(const QString &path)
+{
+	return imageToGLData(QImage(path));
+}
+
+StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
+{
+	return imageToGLData(QImage::fromData(data));
 }
 
 /*************************************************************************
@@ -145,7 +108,6 @@ void StelTexture::reportError(const QString& aerrorMessage)
 
 bool StelTexture::bind()
 {
-	// qDebug() << "TEST bind" << fullPath;
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
@@ -156,24 +118,49 @@ bool StelTexture::bind()
 	if (errorOccured)
 		return false;
 
-	if (!isLoadingImage && loader == NULL) {
-		isLoadingImage = true;
-		loader = new ImageLoader(fullPath, 100);
-		connect(loader, SIGNAL(finished(QImage)), this, SLOT(onImageLoaded(QImage)));
-		connect(loader, SIGNAL(error(QString)), this, SLOT(onLoadingError(QString)));
+	// If the file is remote, start a network connection.
+	if (loader == NULL && networkReply == NULL && fullPath.startsWith("http://")) {
+		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
+		// Define that preference should be given to cached files (no etag checks)
+		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
+		return false;
 	}
-
-	return false;
+	// The network connection is still running.
+	if (networkReply != NULL)
+		return false;
+	// Not a remote file, start a loader from local file.
+	if (loader == NULL)
+	{
+		loader = new QFuture<GLData>(QtConcurrent::run(loadFromPath, fullPath));
+		return false;
+	}
+	// Wait until the loader finish.
+	if (!loader->isFinished())
+		return false;
+	// Finally load the data in the main thread.
+	glLoad(loader->result());
+	delete loader;
+	loader = NULL;
+	return true;
 }
 
-void StelTexture::onImageLoaded(QImage image)
+void StelTexture::onNetworkReply()
 {
-	qImage = image;
-	Q_ASSERT(!qImage.isNull());
-	glLoad();
-	isLoadingImage = false;
-	loader->deleteLater();
-	loader = NULL;
+	Q_ASSERT(loader == NULL);
+	if (networkReply->error() != QNetworkReply::NoError)
+	{
+		reportError(networkReply->errorString());
+	}
+	else
+	{
+		QByteArray data = networkReply->readAll();
+		loader = new QFuture<GLData>(QtConcurrent::run(loadFromData, data));
+	}
+	networkReply->deleteLater();
+	networkReply = NULL;
 }
 
 /*************************************************************************
@@ -183,25 +170,15 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 {
 	if (width<0 || height<0)
 	{
-
-		if (!qImage.isNull())
+		// Try to get the size from the file without loading data
+		QImageReader im(fullPath);
+		if (!im.canRead())
 		{
-			width = qImage.width();
-			height = qImage.height();
+			return false;
 		}
-		else
-		{
-			// Try to get the size from the file without loading data
-			QImageReader im(fullPath);
-			if (!im.canRead())
-			{
-				return false;
-			}
-			QSize size = im.size();
-			width = size.width();
-			height = size.height();
-		}
-
+		QSize size = im.size();
+		width = size.width();
+		height = size.height();
 	}
 	awidth = width;
 	aheight = height;
@@ -274,37 +251,33 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	return ret;
 }
 
-
-// Actually load the texture to openGL memory
-bool StelTexture::glLoad()
+bool StelTexture::glLoad(const GLData& data)
 {
-	if (qImage.isNull())
+	if (data.data.isEmpty())
 	{
-		errorOccured = true;
 		reportError("Unknown error");
 		return false;
 	}
+	width = data.width;
+	height = data.height;
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
-
-	GLint format, type;
-	QByteArray data = convertToGLFormat(qImage, &format, &type);
-	glTexImage2D(GL_TEXTURE_2D, 0, format, qImage.width(), qImage.height(), 0, format,
-				 type, data.constData());
-	bool genMipmap = false;
-	if (genMipmap)
-		glGenerateMipmap(GL_TEXTURE_2D);
-	
+	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
+				 data.type, data.data.constData());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
-
-	// Release shared memory
-	qImage = QImage();
-
+	if (loadParams.generateMipmaps)
+		glGenerateMipmap(GL_TEXTURE_2D);
 	// Report success of texture loading
 	emit(loadingProcessFinished(false));
 	return true;
+}
+
+// Actually load the texture to openGL memory
+bool StelTexture::glLoad(const QImage& image)
+{
+	return glLoad(imageToGLData(image));
 }
