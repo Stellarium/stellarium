@@ -176,7 +176,7 @@ StelApp::StelApp(QObject* parent)
 #ifndef DISABLE_SCRIPTING
 	  scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
-	  stelGui(NULL), devicePixelsPerPixel(1.f), fps(0),
+	  stelGui(NULL), devicePixelsPerPixel(1.f), globalScalingRatio(1.f), fps(0),
 	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 
