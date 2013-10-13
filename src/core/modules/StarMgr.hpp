@@ -169,7 +169,7 @@ public slots:
 	float getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Define font size to use for star names display.
-	void setFontSize(double newFontSize);
+	void setFontSize(float newFontSize);
 
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}

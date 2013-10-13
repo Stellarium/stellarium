@@ -1263,7 +1263,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 
 //! Define font file name and size to use for star names display
-void StarMgr::setFontSize(double newFontSize)
+void StarMgr::setFontSize(float newFontSize)
 {
 	starFont.setPixelSize(newFontSize);
 }
