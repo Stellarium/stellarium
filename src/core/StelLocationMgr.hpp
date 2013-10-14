@@ -49,9 +49,6 @@ public:
 	//! Can match location name, or coordinates
 	const StelLocation locationForString(const QString& s, bool* ok=NULL) const;
 
-	//! Return the StelLocation for the given row (match modelAllLocation index row)
-	const StelLocation locationForSmallString(const QString& s, bool* ok=NULL) const;
-
 	//! Return a valid location when no valid one was found.
 	const StelLocation& getLastResortLocation() const {return lastResortLocation;}
 	

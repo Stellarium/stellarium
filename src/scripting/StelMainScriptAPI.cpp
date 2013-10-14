@@ -217,7 +217,7 @@ void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	bool ok;
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(id, &ok);
 	if (!ok)
 		return;	// location find failed
 	core->moveObserverTo(loc, duration);

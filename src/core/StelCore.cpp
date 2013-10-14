@@ -722,7 +722,7 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 void StelCore::setDefaultLocationID(const QString& id)
 {
 	bool ok = false;
-	StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	StelApp::getInstance().getLocationMgr().locationForString(id, &ok);
 	if (!ok)
 		return;
 	defaultLocationID = id;
