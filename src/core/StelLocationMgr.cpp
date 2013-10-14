@@ -149,30 +149,26 @@ StelLocationMgr::~StelLocationMgr()
 {
 }
 
-const StelLocation StelLocationMgr::locationForString(const QString& s, bool* ok) const
+const StelLocation StelLocationMgr::locationForString(const QString& s) const
 {
-	bool myOk;
-	StelLocation ret;
-	ok = ok ?: &myOk;
 	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
 	if (iter!=locations.end())
 	{
-		*ok = true;
 		return iter.value();
 	}
+	StelLocation ret;
 	// Maybe it is a coordinate set ? (e.g. GPS +41d51'00" -51d00'00" )
 	QRegExp reg("(.*)([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\") ([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\")");
 	reg.setMinimal(true);
 	if (reg.exactMatch(s))
 	{
 		// We have a set of coordinates
-		*ok = true;
 		ret.name = reg.capturedTexts()[1].trimmed();
+		if (ret.name.isEmpty()) ret.name = "Manual";
 		ret.latitude = StelUtils::dmsStrToRad(reg.capturedTexts()[2]) * 180 / M_PI;
 		ret.longitude = StelUtils::dmsStrToRad(reg.capturedTexts()[3]) * 180 / M_PI;
 		return ret;
 	}
-	*ok = false;
 	return ret;
 }
 

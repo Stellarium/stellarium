@@ -37,6 +37,8 @@ public:
 			return name + ", " +country;
 	}
 
+	bool isValid() const {return !name.isEmpty();}
+
 	//! Output the location as a string ready to be stored in the user_location file
 	QString serializeToLine() const;
 
