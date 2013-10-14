@@ -31,7 +31,7 @@ public:
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
 
-	bool isValid() const {return !name.isEmpty();}
+	bool isValid() const {return role!='!';}
 
 	//! Output the location as a string ready to be stored in the user_location file
 	QString serializeToLine() const;
@@ -66,6 +66,7 @@ public:
 	//! - \p I is a spacecraft impact
 	//! - \p A is a spacecraft crash
 	//! - \p X is an unknown or user-defined location (the default value).
+	//! - \p ! is an invalid location.
 	QChar role;
 
 	//! Parse a location from a line serialization
