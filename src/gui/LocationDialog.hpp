@@ -102,9 +102,7 @@ private slots:
 	void setDefaultLocation();
 	
 private:
-	QString lastPlanet;	
-	bool lastVisionMode;
-	
+	QString lastPlanet;
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
 };

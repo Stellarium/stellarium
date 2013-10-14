@@ -121,16 +121,9 @@ void ConfigurationDialog::updateIconsColor()
 	QPixmap pixmap(50, 50);
 	QStringList icons;
 	icons << "main" << "info" << "navigation" << "tools" << "scripts" << "plugins";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
 	foreach(const QString &iconName, icons)
 	{
 		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
 		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
 	}
 }
