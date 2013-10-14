@@ -38,6 +38,14 @@ QString StelLocation::serializeToLine() const
 			.arg(landscapeKey);
 }
 
+QString StelLocation::getID() const
+{
+	QString ret = name;
+	if (!country.isEmpty())
+		ret += ", " + country;
+	return ret;
+}
+
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
 	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.planetName << loc.landscapeKey << loc.isUserLocation;

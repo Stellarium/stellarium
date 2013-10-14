@@ -418,7 +418,7 @@ void LocationDialog::reportEdit()
 		}
 		else
 		{
-			ui->cityNameLineEdit->setText(q_("New Location"));
+			ui->cityNameLineEdit->setText("");
 			ui->cityNameLineEdit->selectAll();
 			loc = locationFromFields();
 		}

@@ -29,13 +29,7 @@ public:
 	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), role('X'), isUserLocation(true) {;}
 
 	//! Return a short string which can be used in a list view.
-	QString getID() const
-	{
-		if (country.isEmpty())
-			return name;
-		else
-			return name + ", " +country;
-	}
+	QString getID() const;
 
 	bool isValid() const {return !name.isEmpty();}
 
