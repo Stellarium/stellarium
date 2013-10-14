@@ -723,7 +723,10 @@ void StelCore::setDefaultLocationID(const QString& id)
 {
 	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(id);
 	if (!location.isValid())
+	{
+		qWarning() << "Trying to set an invalid location" << id;
 		return;
+	}
 	defaultLocationID = id;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);

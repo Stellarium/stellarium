@@ -157,18 +157,21 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		return iter.value();
 	}
 	StelLocation ret;
-	// Maybe it is a coordinate set ? (e.g. GPS +41d51'00" -51d00'00" )
-	QRegExp reg("(.*)([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\") ([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\")");
-	reg.setMinimal(true);
+	// Maybe it is a coordinate set ? (e.g. GPS 25.107363,121.558807 )
+	QRegExp reg("(?:(.+)\\s+)?(.+),(.+)");
 	if (reg.exactMatch(s))
 	{
+		bool ok;
 		// We have a set of coordinates
+		ret.latitude = reg.capturedTexts()[2].toDouble(&ok);
+		if (!ok) ret.role = '!';
+		ret.longitude = reg.capturedTexts()[3].toDouble(&ok);
+		if (!ok) ret.role = '!';
 		ret.name = reg.capturedTexts()[1].trimmed();
-		if (ret.name.isEmpty()) ret.name = "Manual";
-		ret.latitude = StelUtils::dmsStrToRad(reg.capturedTexts()[2]) * 180 / M_PI;
-		ret.longitude = StelUtils::dmsStrToRad(reg.capturedTexts()[3]) * 180 / M_PI;
+		ret.planetName = "Earth";
 		return ret;
 	}
+	ret.role = '!';
 	return ret;
 }
 

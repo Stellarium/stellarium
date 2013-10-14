@@ -18,6 +18,7 @@
 
 #include "StelLocation.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelUtils.hpp"
 #include <QStringList>
 
 // Output the location as a string ready to be stored in the user_location file
@@ -40,6 +41,10 @@ QString StelLocation::serializeToLine() const
 
 QString StelLocation::getID() const
 {
+	if (name.isEmpty())
+	{
+		return QString("%1,%2").arg(latitude).arg(longitude);
+	}
 	QString ret = name;
 	if (!country.isEmpty())
 		ret += ", " + country;
