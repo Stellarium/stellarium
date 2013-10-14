@@ -151,17 +151,17 @@ StelLocationMgr::~StelLocationMgr()
 
 const StelLocation StelLocationMgr::locationForSmallString(const QString& s, bool* ok) const
 {
+	bool myOk;
+	ok = ok ?: &myOk;
 	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
 	if (iter==locations.end())
 	{
-		if (ok)
-			*ok=false;
+		*ok = false;
 		return lastResortLocation;
 	}
 	else
 	{
-		if (ok)
-			*ok = true;
+		*ok = true;
 		return locations.value(s);
 	}
 }
@@ -169,28 +169,23 @@ const StelLocation StelLocationMgr::locationForSmallString(const QString& s, boo
 const StelLocation StelLocationMgr::locationForString(const QString& s, bool* ok) const
 {
 	bool myOk;
-	StelLocation ret = locationForSmallString(s, &myOk);
-	if (myOk)
-	{
-		if (ok)
-			*ok=true;
+	ok = ok ?: &myOk;
+	StelLocation ret = locationForSmallString(s, ok);
+	if (*ok)
 		return ret;
-	}
 	// Maybe it is a coordinate set ? (e.g. GPS +41d51'00" -51d00'00" )
 	QRegExp reg("(.*)([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\") ([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\")");
 	reg.setMinimal(true);
 	if (!reg.exactMatch(s))
 	{
-		if (ok)
-			*ok=false;
+		*ok = false;
 		return ret;
 	}
 	// We have a set of coordinates
 	ret.name = reg.capturedTexts()[1].trimmed();
 	ret.latitude = StelUtils::dmsStrToRad(reg.capturedTexts()[2]) * 180 / M_PI;
 	ret.longitude = StelUtils::dmsStrToRad(reg.capturedTexts()[3]) * 180 / M_PI;
-	if (ok)
-		*ok=true;
+	*ok = true;
 	return ret;
 }
 
