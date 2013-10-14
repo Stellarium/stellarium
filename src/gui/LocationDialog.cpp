@@ -342,9 +342,7 @@ void LocationDialog::setPositionFromList(const QModelIndex& index)
 {
 	isEditingNew=false;
 	ui->addLocationToListPushButton->setEnabled(false);
-
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
-
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(index.data().toString());
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 	// This calls indirectly updateFromProgram()
