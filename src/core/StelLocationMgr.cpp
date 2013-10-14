@@ -175,7 +175,7 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 // Get whether a location can be permanently added to the list of user locations
 bool StelLocationMgr::canSaveUserLocation(const StelLocation& loc) const
 {
-	return locations.find(loc.getID())==locations.end();
+	return loc.isValid() && locations.find(loc.getID())==locations.end();
 }
 
 // Add permanently a location to the list of user locations
