@@ -47,7 +47,7 @@ public:
 
 	//! Return the StelLocation for a given string
 	//! Can match location name, or coordinates
-	const StelLocation locationForString(const QString& s, bool* ok=NULL) const;
+	const StelLocation locationForString(const QString& s) const;
 
 	//! Return a valid location when no valid one was found.
 	const StelLocation& getLastResortLocation() const {return lastResortLocation;}

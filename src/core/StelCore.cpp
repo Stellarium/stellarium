@@ -99,8 +99,8 @@ void StelCore::init()
 
 	defaultLocationID = conf->value("init_location/location","error").toString();
 	bool ok;
-	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(defaultLocationID, &ok);
-	if (!ok)
+	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(defaultLocationID);
+	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
 	}
@@ -721,9 +721,8 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
-	bool ok = false;
-	StelApp::getInstance().getLocationMgr().locationForString(id, &ok);
-	if (!ok)
+	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(id);
+	if (!location.isValid())
 		return;
 	defaultLocationID = id;
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -734,9 +733,8 @@ void StelCore::setDefaultLocationID(const QString& id)
 void StelCore::returnToDefaultLocation()
 {
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
-	bool ok = false;
-	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
-	if (ok)
+	StelLocation loc = locationMgr.locationForString(defaultLocationID);
+	if (loc.isValid())
 		moveObserverTo(loc, 0.);
 }
 
@@ -745,9 +743,8 @@ void StelCore::returnToHome()
 	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
 	// between planets using SpaceShip and second method give does not exist data
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
-	bool ok = false;
-	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
-	if (ok)
+	StelLocation loc = locationMgr.locationForString(defaultLocationID);
+	if (loc.isValid())
 		moveObserverTo(loc, 0.);
 
 	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
