@@ -97,16 +97,9 @@ void ViewDialog::updateIconsColor()
 	QPixmap pixmap(50, 50);
 	QStringList icons;
 	icons << "sky" << "markings" << "landscape" << "starlore";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
 	foreach(const QString &iconName, icons)
 	{
 		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
 		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
 	}
 }
