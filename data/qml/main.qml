@@ -30,9 +30,10 @@ Rectangle {
 		 uniform sampler2D source;
 		 void main(void)
 		 {
-			vec4 color = texture2D(source, qt_TexCoord0);
-			float luminance = dot(color, vec4(0.299, 0.587, 0.114, 0));
-			gl_FragColor = vec4(luminance, 0, 0, 1);
+			mediump vec4 color = texture2D(source, qt_TexCoord0);
+			mediump float luminance = dot(color, vec4(0.299, 0.587, 0.114, 0.0));
+			gl_FragColor = vec4(luminance, 0.0, 0.0, 1.0);
+
 		 }
 		 "
 	 }
