@@ -72,7 +72,7 @@ Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 }
 
 // Get observer-centered galactic position
-Vec3d StelObject::getJ2000GalacticPos(const StelCore *core) const
+Vec3d StelObject::getGalacticPos(const StelCore *core) const
 {
 	return core->j2000ToGalactic(getJ2000EquatorialPos(core));
 }
@@ -111,11 +111,10 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
 	}
 
-	if (flags&GalCoordJ2000)
+	if (flags&GalacticCoord)
 	{
 		double glong, glat;
-		StelUtils::rectToSphe(&glong, &glat, getJ2000GalacticPos(core));
-		// Note that Gal. Coords are DEFINED in B1950 coordinates, and writing "J2000" to them does not make any sense.
+		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
 		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
 	}
 
