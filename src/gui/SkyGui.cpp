@@ -76,12 +76,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 			infoTextFilters |= StelObject::Distance;
 		if (conf->value("flag_show_size", false).toBool())
 			infoTextFilters |= StelObject::Size;
-		if (conf->value("flag_show_extra1", false).toBool())
-			infoTextFilters |= StelObject::Extra1;
-		if (conf->value("flag_show_extra2", false).toBool())
-			infoTextFilters |= StelObject::Extra2;
-		if (conf->value("flag_show_extra3", false).toBool())
-			infoTextFilters |= StelObject::Extra3;
+		if (conf->value("flag_show_extra", false).toBool())
+			infoTextFilters |= StelObject::Extra;
 		if (conf->value("flag_show_galcoord", false).toBool())
 			infoTextFilters |= StelObject::GalacticCoord;
 		conf->endGroup();

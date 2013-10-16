@@ -119,7 +119,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "</h2>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 		oss << q_("Type: <b>%1</b>").arg(q_("supernova")) << "<br />";
 
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
@@ -134,7 +134,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		oss << q_("Type of supernova: %1").arg(sntype) << "<br>";
 		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";

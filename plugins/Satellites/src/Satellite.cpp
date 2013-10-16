@@ -247,7 +247,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
-	if (flags & Extra1)
+	if (flags & Extra)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
 	}
@@ -255,7 +255,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 	
-	if (flags & Extra1)
+	if (flags & Extra)
 	{
 		oss << "<br/>";
 		// TRANSLATORS: Slant range: distance between the satellite and the observer
@@ -312,32 +312,32 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		default:
 			break;
 		}
-	}
 
-	if (flags&Extra2 && comms.size() > 0)
-	{
-		foreach(const CommLink &c, comms)
+		if (comms.size() > 0)
 		{
-			double dop = getDoppler(c.frequency);
-			double ddop = dop;
-			char sign;
-			if (dop<0.)
+			foreach(const CommLink &c, comms)
 			{
-				sign='-';
-				ddop*=-1;
-			}
-			else
-				sign='+';
+				double dop = getDoppler(c.frequency);
+				double ddop = dop;
+				char sign;
+				if (dop<0.)
+				{
+					sign='-';
+					ddop*=-1;
+				}
+				else
+					sign='+';
 
-			oss << "<br/>";
-			if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
-			if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
-			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br/>";
-			oss << QString(q_("%1 MHz (%2%3 kHz)"))
-			       .arg(c.frequency, 8, 'f', 5)
-			       .arg(sign)
-			       .arg(ddop, 6, 'f', 3);
-			oss << "<br/>";
+				oss << "<br/>";
+				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
+				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
+				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br/>";
+				oss << QString(q_("%1 MHz (%2%3 kHz)"))
+				       .arg(c.frequency, 8, 'f', 5)
+				       .arg(sign)
+				       .arg(ddop, 6, 'f', 3);
+				oss << "<br/>";
+			}
 		}
 	}
 

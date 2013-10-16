@@ -90,7 +90,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
-	if (flags&Extra1)
+	if (flags&Extra)
 		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
 
 	if (flags&Magnitude)
@@ -129,7 +129,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (redshift>0)
 		{

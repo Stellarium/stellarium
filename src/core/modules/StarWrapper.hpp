@@ -114,9 +114,8 @@ public:
 	//! <li> RaDecJ2000
 	//! <li> RaDec
 	//! <li> AltAzi
-	//! <li> Extra1 (spectral type)
-	//! <li> Distance
-	//! <li> Extra2 (parallax)
+	//! <li> Extra (spectral type, parallax)
+	//! <li> Distance	
 	//! <li> PlainText </ul>
 	//! @param core the StelCore object.
 	//! @param flags a set of InfoStringGroup items to include in the return value.
