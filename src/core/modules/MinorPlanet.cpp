@@ -207,7 +207,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -263,7 +263,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra1) && (siderealPeriod>0))
+	if ((flags&Extra) && (siderealPeriod>0))
 	{
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
@@ -271,7 +271,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
 	/*
-	if (flags&Extra1)
+	if (flags&Extra)
 		oss << QString("<br><a href=\"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=%1\">JPL Small-Body Database Browser</a>").arg( (minorPlanetNumber) ? QString::number(minorPlanetNumber) : englishName );
 	*/
 

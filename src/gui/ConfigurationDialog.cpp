@@ -407,12 +407,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Distance;
 	if (ui->checkBoxSize->isChecked())
 		flags |= StelObject::Size;
-	if (ui->checkBoxExtra1->isChecked())
-		flags |= StelObject::Extra1;
-	if (ui->checkBoxExtra2->isChecked())
-		flags |= StelObject::Extra2;
-	if (ui->checkBoxExtra3->isChecked())
-		flags |= StelObject::Extra3;
+	if (ui->checkBoxExtra->isChecked())
+		flags |= StelObject::Extra;
 	if (ui->checkBoxGalacticCoordinates->isChecked())
 		flags |= StelObject::GalacticCoord;
 
@@ -594,12 +590,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Distance));
 		conf->setValue("flag_show_size",
 		               (bool) (flags & StelObject::Size));
-		conf->setValue("flag_show_extra1",
-		               (bool) (flags & StelObject::Extra1));
-		conf->setValue("flag_show_extra2",
-		               (bool) (flags & StelObject::Extra2));
-		conf->setValue("flag_show_extra3",
-			       (bool) (flags & StelObject::Extra3));
+		conf->setValue("flag_show_extra",
+			       (bool) (flags & StelObject::Extra));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
 		conf->endGroup();
@@ -1078,9 +1070,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxAltAz->setChecked(flags & StelObject::AltAzi);
 	ui->checkBoxDistance->setChecked(flags & StelObject::Distance);
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
-	ui->checkBoxExtra1->setChecked(flags & StelObject::Extra1);
-	ui->checkBoxExtra2->setChecked(flags & StelObject::Extra2);
-	ui->checkBoxExtra3->setChecked(flags & StelObject::Extra3);
+	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
 }
 

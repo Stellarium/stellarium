@@ -45,7 +45,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QString str;
 	QTextStream oss(&str);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
 	}
@@ -127,7 +127,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	bool ebsFlag = false;
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		QString varstartype = "";
 		QString startype = "";
@@ -202,50 +202,50 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getPositionInfoString(core, flags);
 
-	if (s->spInt && flags&Extra1)
-	{
-		oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br />";
-	}
-
 	if ((flags&Distance) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
 
-	if (s->plx && flags&Extra2)
-		oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br />";
-
-	if (vEpoch>0 && flags&Extra1)
+	if (flags&Extra)
 	{
-		double vsEpoch = 2400000+vEpoch;
-		if (ebsFlag)
-			oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
-		else
-			oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
+		if (s->spInt)
+			oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br />";
+
+		if (s->plx)
+			oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br />";
+
+		if (vEpoch>0)
+		{
+			double vsEpoch = 2400000+vEpoch;
+			if (ebsFlag)
+				oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
+			else
+				oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
+		}
+
+		if (vPeriod>0)
+			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
+
+		if (vEpoch>0 && vPeriod>0)
+		{
+			// Calculate next minimum or maximum light
+			double vsEpoch = 2400000+vEpoch;
+			int npDelta = (core->getJDay()-vsEpoch)/vPeriod;
+			double npDate = vsEpoch + ((npDelta+1)*vPeriod);
+			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+			if (ebsFlag)
+				oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
+			else
+				oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
+		}
+
+		if (vMm>0)
+		{
+			if (ebsFlag)
+				oss << q_("Duration of eclipse: %1%").arg(vMm) << "<br />";
+			else
+				oss << q_("Rising time: %1%").arg(vMm) << "<br />";
+		}
 	}
-
-	if (vPeriod>0 && flags&Extra1)
-		oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
-
-	if (vEpoch>0 && vPeriod>0 && flags&Extra1)
-	{
-		// Calculate next minimum or maximum light
-		double vsEpoch = 2400000+vEpoch;
-		int npDelta = (core->getJDay()-vsEpoch)/vPeriod;
-		double npDate = vsEpoch + ((npDelta+1)*vPeriod);
-		QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-		if (ebsFlag)
-			oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
-		else
-			oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
-	}
-
-	if (vMm>0 && flags&Extra1)
-	{
-		if (ebsFlag)
-			oss << q_("Duration of eclipse: %1%").arg(vMm) << "<br />";
-		else
-			oss << q_("Rising time: %1%").arg(vMm) << "<br />";
-	}
-
 
 	StelObject::postProcessInfoString(str, flags);
 

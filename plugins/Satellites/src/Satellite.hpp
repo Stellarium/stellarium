@@ -115,8 +115,7 @@ public:
 	//! Supported types for Satellite objects:
 	//! - Name: designation in large type with the description underneath
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
-	//! - Extra1: range, rage rate and altitude of satellite above the Earth
-	//! - Extra2: Comms frequencies, modulation types and so on.
+	//! - Extra: range, rage rate and altitude of satellite above the Earth, comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
