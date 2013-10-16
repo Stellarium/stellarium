@@ -42,27 +42,25 @@ public:
 	//! Use InfoStringGroup instead.
 	enum InfoStringGroupFlags
 	{
-		Name          = 0x00000001, //!< An object's name
-		CatalogNumber = 0x00000002, //!< Catalog numbers
-		Magnitude     = 0x00000004, //!< Magnitude related data
-		RaDecJ2000    = 0x00000008, //!< The equatorial position (J2000 ref)
-		RaDecOfDate   = 0x00000010, //!< The equatorial position (of date)
-		AltAzi        = 0x00000020, //!< The position (Altitude/Azimuth)
-		Distance      = 0x00000040, //!< Info about an object's distance
-		Size          = 0x00000080, //!< Info about an object's size
-		Extra1        = 0x00000100, //!< Derived class-specific extra fields
-		Extra2        = 0x00000200, //!< Derived class-specific extra fields
-		Extra3        = 0x00000400, //!< Derived class-specific extra fields
-		PlainText     = 0x00000800, //!< Strip HTML tags from output
-		HourAngle     = 0x00001000, //!< The hour angle + DE (of date)
-		AbsoluteMagnitude = 0x00002000,  //!< The absolute magnitude
-		GalacticCoord = 0x00004000  //!< The galactic position
+		Name			= 0x00000001, //!< An object's name
+		CatalogNumber		= 0x00000002, //!< Catalog numbers
+		Magnitude		= 0x00000004, //!< Magnitude related data
+		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
+		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
+		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
+		Distance		= 0x00000040, //!< Info about an object's distance
+		Size			= 0x00000080, //!< Info about an object's size
+		Extra			= 0x00000100, //!< Derived class-specific extra fields
+		PlainText		= 0x00000200, //!< Strip HTML tags from output
+		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
+		GalacticCoord		= 0x00001000  //!< The galactic position
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude|GalacticCoord);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 

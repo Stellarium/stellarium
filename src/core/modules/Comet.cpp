@@ -117,7 +117,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << "</h2>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -169,7 +169,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	// If semi-major axis not zero then calculate and display orbital period for comet in days
 	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra1) && (siderealPeriod>0))
+	if ((flags&Extra) && (siderealPeriod>0))
 	{
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
