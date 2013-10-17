@@ -130,9 +130,10 @@ void Satellites::init()
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		addAction("actionShow_Satellite_Hints", "Satellites", N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
-		addAction("actionShow_Satellite_Labels", "Satellites", N_("Satellite labels"), "labelsVisible", "Shift+Z");
-		addAction("actionShow_Satellite_ConfigDialog_Global", "Satellites", N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
+		QString satGroup = N_("Satellites");
+		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
+		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Shift+Z");
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");

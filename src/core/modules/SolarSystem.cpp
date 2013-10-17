@@ -142,9 +142,10 @@ void SolarSystem::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-	addAction("actionShow_Planets_Labels", "Display Options", N_("Planet labels"), "labelsDisplayed", "P");
-	addAction("actionShow_Planets_Orbits", "Display Options", N_("Planet orbits"), "orbitsDisplayed", "O");
-	addAction("actionShow_Planets_Trails", "Display Options", N_("Planet trails"), "trailsDisplayed", "Shift+T");
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "P");
+	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
+	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
 }
 
 void SolarSystem::recreateTrails()
