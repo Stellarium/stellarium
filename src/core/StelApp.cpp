@@ -435,7 +435,7 @@ void StelApp::init(QSettings* conf)
 	updateI18n();
 
 	// Init actions.
-	actionMgr->addAction("actionShow_Night_Mode", "Display Options", "Night mode", this, "nightMode");
+	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	initialized = true;
 }

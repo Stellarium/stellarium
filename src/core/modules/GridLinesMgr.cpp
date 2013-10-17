@@ -689,16 +689,17 @@ void GridLinesMgr::init()
 	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
 	
-	addAction("actionShow_Equatorial_Grid", "Display Options", N_("Equatorial grid"), "equatorGridDisplayed", "E");
-	addAction("actionShow_Azimuthal_Grid", "Display Options", N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
-	addAction("actionShow_Ecliptic_Line", "Display Options", N_("Ecliptic line"), "eclipticLineDisplayed", ",");
-	addAction("actionShow_Equator_Line", "Display Options", N_("Equator line"), "equatorLineDisplayed", ".");
-	addAction("actionShow_Meridian_Line", "Display Options", N_("Meridian line"), "meridianLineDisplayed", ";");
-	addAction("actionShow_Horizon_Line", "Display Options", N_("Horizon line"), "horizonLineDisplayed");
-	addAction("actionShow_Equatorial_J2000_Grid", "Display Options", N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
-	addAction("actionShow_Ecliptic_J2000_Grid", "Display Options", N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
-	addAction("actionShow_Galactic_Grid", "Display Options", N_("Galactic grid"), "galacticGridDisplayed");
-	addAction("actionShow_Galactic_Plane_Line", "Display Options", N_("Galactic plane"), "galacticPlaneLineDisplayed");
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
+	addAction("actionShow_Azimuthal_Grid", displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
+	addAction("actionShow_Ecliptic_Line", displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
+	addAction("actionShow_Equator_Line", displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
+	addAction("actionShow_Meridian_Line", displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
+	addAction("actionShow_Horizon_Line", displayGroup, N_("Horizon line"), "horizonLineDisplayed");
+	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
+	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
+	addAction("actionShow_Galactic_Plane_Line", displayGroup, N_("Galactic plane"), "galacticPlaneLineDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
