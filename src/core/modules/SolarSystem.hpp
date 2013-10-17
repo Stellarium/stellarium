@@ -183,6 +183,11 @@ public slots:
 	//! Get the current color used to draw planet trails lines.
 	Vec3f getTrailsColor() const {return trailColor;}
 
+	//! Set the color used to draw planet pointers.
+	void setPointersColor(const Vec3f& c) {pointerColor=c;}
+	//! Get the current color used to draw planet pointers.
+	Vec3f getPointersColor() const {return pointerColor;}
+
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
 	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
@@ -345,6 +350,7 @@ private:
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
 	Vec3f trailColor;
+	Vec3f pointerColor;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
