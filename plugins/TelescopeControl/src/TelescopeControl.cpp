@@ -163,7 +163,7 @@ void TelescopeControl::init()
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			addAction(name, "Telescope Control", text, "slewTelescopeToViewDirection()", shortcut);
+			addAction(name, N_("Telescope Control"), text, "slewTelescopeToViewDirection()", shortcut);
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
