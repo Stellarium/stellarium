@@ -7,43 +7,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-16 23:51+0700\n"
+"POT-Creation-Date: 2013-10-17 20:19+0700\n"
 "PO-Revision-Date: 2013-09-13 02:51+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-17 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-10-18 05:29+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106
+#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
+#: src/core/modules/GridLinesMgr.cpp:692 src/core/modules/LandscapeMgr.cpp:314
+#: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:145
+#: src/core/StelCore.cpp:160
+msgid "Display Options"
+msgstr "Pilihan Paparan"
+
+#: src/core/modules/ConstellationMgr.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation lines"
 msgstr "Garis Buruj"
 
-#: src/core/modules/ConstellationMgr.cpp:107
+#: src/core/modules/ConstellationMgr.cpp:108
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:283
 msgid "Constellation art"
 msgstr "Seni Buruj"
 
-#: src/core/modules/ConstellationMgr.cpp:108
+#: src/core/modules/ConstellationMgr.cpp:109
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation labels"
 msgstr "Label Buruj"
 
-#: src/core/modules/ConstellationMgr.cpp:109
+#: src/core/modules/ConstellationMgr.cpp:110
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Constellation boundaries"
 msgstr "Sempadan Buruj"
 
-#: src/core/modules/StarMgr.cpp:335 src/ui_viewDialog.h:1215
+#: src/core/modules/StarMgr.cpp:336 src/ui_viewDialog.h:1215
 #: src/ui_viewDialog.h:1238 src/ui_viewDialog.h:1261
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:239
 msgid "Stars"
 msgstr "Bintang"
 
-#: src/core/modules/StarMgr.cpp:336
+#: src/core/modules/StarMgr.cpp:337
 msgid "Stars labels"
 msgstr "Label bintang"
 
@@ -67,85 +74,85 @@ msgstr "Horizon"
 msgid "Galactic Plane"
 msgstr "Satah Galaksi"
 
-#: src/core/modules/GridLinesMgr.cpp:692 src/ui_viewDialog.h:1274
+#: src/core/modules/GridLinesMgr.cpp:693 src/ui_viewDialog.h:1274
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial grid"
 msgstr "Grid Khatulistiwa"
 
-#: src/core/modules/GridLinesMgr.cpp:693 src/ui_viewDialog.h:1276
+#: src/core/modules/GridLinesMgr.cpp:694 src/ui_viewDialog.h:1276
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Azimuthal grid"
 msgstr "Grid azimut"
 
-#: src/core/modules/GridLinesMgr.cpp:694
+#: src/core/modules/GridLinesMgr.cpp:695
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Ecliptic line"
 msgstr "Garis Ekliptik"
 
-#: src/core/modules/GridLinesMgr.cpp:695
+#: src/core/modules/GridLinesMgr.cpp:696
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Equator line"
 msgstr "Garis khatulistiwa"
 
-#: src/core/modules/GridLinesMgr.cpp:696
+#: src/core/modules/GridLinesMgr.cpp:697
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Meridian line"
 msgstr "Garis Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:697
+#: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Horizon line"
 msgstr "Garis horizon"
 
-#: src/core/modules/GridLinesMgr.cpp:698 src/ui_viewDialog.h:1273
+#: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1273
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equatorial J2000 grid"
 msgstr "Grid khatulistiwa J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1275
+#: src/core/modules/GridLinesMgr.cpp:700 src/ui_viewDialog.h:1275
 msgid "Ecliptic J2000 grid"
 msgstr "Grid Ekliptik J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:700 src/ui_viewDialog.h:1277
+#: src/core/modules/GridLinesMgr.cpp:701 src/ui_viewDialog.h:1277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic grid"
 msgstr "Grid Galaksi"
 
-#: src/core/modules/GridLinesMgr.cpp:701 src/ui_viewDialog.h:1297
+#: src/core/modules/GridLinesMgr.cpp:702 src/ui_viewDialog.h:1297
 msgid "Galactic plane"
 msgstr "Satah galaktik"
 
-#: src/core/modules/LandscapeMgr.cpp:314 src/ui_viewDialog.h:1231
+#: src/core/modules/LandscapeMgr.cpp:315 src/ui_viewDialog.h:1231
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/core/modules/LandscapeMgr.cpp:315
+#: src/core/modules/LandscapeMgr.cpp:316
 msgid "Fog"
 msgstr "Kabus"
 
-#: src/core/modules/LandscapeMgr.cpp:316 src/ui_viewDialog.h:1298
+#: src/core/modules/LandscapeMgr.cpp:317 src/ui_viewDialog.h:1298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Cardinal points"
 msgstr "Titil Kardinal"
 
-#: src/core/modules/LandscapeMgr.cpp:317
+#: src/core/modules/LandscapeMgr.cpp:318
 msgid "Ground"
 msgstr "Tanah"
 
-#: src/core/modules/LandscapeMgr.cpp:522
+#: src/core/modules/LandscapeMgr.cpp:523
 msgid "Author: "
 msgstr "Pengarang: "
 
-#: src/core/modules/LandscapeMgr.cpp:525
+#: src/core/modules/LandscapeMgr.cpp:526
 msgid "Location: "
 msgstr "Lokasi: "
 
-#: src/core/modules/LandscapeMgr.cpp:530
+#: src/core/modules/LandscapeMgr.cpp:531
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:534
+#: src/core/modules/LandscapeMgr.cpp:535
 msgid "Planet: "
 msgstr "Planet "
 
@@ -302,17 +309,17 @@ msgstr "Disinari: %1%"
 msgid "Provisional designation: %1"
 msgstr "Penentuan sementara: %1"
 
-#: src/core/modules/SolarSystem.cpp:145
+#: src/core/modules/SolarSystem.cpp:146
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:302
 msgid "Planet labels"
 msgstr "Label planet"
 
-#: src/core/modules/SolarSystem.cpp:146
+#: src/core/modules/SolarSystem.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:306
 msgid "Planet orbits"
 msgstr "Orbit planet"
 
-#: src/core/modules/SolarSystem.cpp:147
+#: src/core/modules/SolarSystem.cpp:148
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Planet trails"
 msgstr "Jejak planet"
@@ -444,189 +451,186 @@ msgstr "Masa terbit: %1%"
 msgid "SpaceShip"
 msgstr "Kapal Angkasa"
 
-#: src/core/StelCore.cpp:158 src/ui_dateTimeDialogGui.h:297
+#: src/core/StelCore.cpp:158 src/gui/StelGui.cpp:176
+#: src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:166
 msgid "Date and Time"
 msgstr "Tarikh dan Masa"
 
-#: src/core/StelCore.cpp:160
-msgid "Increase time speed"
-msgstr "Cepatkan kelajuan masa"
-
-#: src/core/StelCore.cpp:161
-msgid "Decrease time speed"
-msgstr "Kurangkan kelajuan masa"
-
-#: src/core/StelCore.cpp:162
-msgid "Increase time speed (a little)"
-msgstr "Tingkatkan kelajuan masa (sedikit)"
-
-#: src/core/StelCore.cpp:163
-msgid "Decrease time speed (a little)"
-msgstr "Kurangkan kelajuan masa (sedikit)"
-
-#: src/core/StelCore.cpp:164
-msgid "Set normal time rate"
-msgstr "Tetapkan kadar normal masa"
-
-#: src/core/StelCore.cpp:165
-msgid "Set time rate to zero"
-msgstr "Tetapkan kadar masa kepada kosong"
-
-#: src/core/StelCore.cpp:166
-msgid "Set time to now"
-msgstr "Tetapkan masa sekarang"
-
-#: src/core/StelCore.cpp:167
-msgid "Add 1 solar hour"
-msgstr "Tambah 1 jam solar"
-
-#: src/core/StelCore.cpp:168
-msgid "Add 1 solar day"
-msgstr "Tambah 1 hari solar"
-
-#: src/core/StelCore.cpp:169
-msgid "Add 1 solar week"
-msgstr "Tambah 1 minggu solar"
-
-#: src/core/StelCore.cpp:170
-msgid "Subtract 1 solar hour"
-msgstr "Tolak 1 jam solar"
-
-#: src/core/StelCore.cpp:171
-msgid "Subtract 1 solar day"
-msgstr "Tolak 1 hari solar"
-
-#: src/core/StelCore.cpp:172
-msgid "Subtract 1 solar week"
-msgstr "Tolah 1 minggu solar"
-
-#: src/core/StelCore.cpp:173
-msgid "Add 1 sidereal day"
-msgstr "Tambah 1 hari ikut bintang"
-
-#: src/core/StelCore.cpp:174
-msgid "Add 1 sidereal week"
-msgstr "Tambah 1 minggu ikut bintang"
-
-#: src/core/StelCore.cpp:175
-msgid "Add 1 sidereal month"
-msgstr "Tambah 1 bulan ikut bintang"
-
-#: src/core/StelCore.cpp:176
-msgid "Add 1 sidereal year"
-msgstr "Tambah 1 tahun ikut bintang"
-
-#: src/core/StelCore.cpp:177
-msgid "Add 1 sidereal century"
-msgstr "Tambah  1 abad ikut bintang"
-
-#: src/core/StelCore.cpp:178
-msgid "Add 1 synodic month"
-msgstr "Tambah 1 bulan qamari"
-
-#: src/core/StelCore.cpp:179
-msgid "Add 1 draconic month"
-msgstr "Tambah 1 bulan drakonik"
-
-#: src/core/StelCore.cpp:180
-msgid "Add 1 draconic year"
-msgstr "Tambah 1 tahun drakonik"
-
-#: src/core/StelCore.cpp:181
-msgid "Add 1 anomalistic month"
-msgstr "Tambah 1 bulan anomali"
-
-#: src/core/StelCore.cpp:182
-msgid "Add 1 mean tropical month"
-msgstr "Tambah 1 bulan min tropika"
-
-#: src/core/StelCore.cpp:183
-msgid "Add 1 mean tropical year"
-msgstr "Tambah 1 tahun min tropika"
-
-#: src/core/StelCore.cpp:184
-msgid "Add 1 mean tropical century"
-msgstr "Tambah 1 abad tropika min"
-
-#: src/core/StelCore.cpp:185
-msgid "Subtract 1 sidereal day"
-msgstr "Tolak 1 hari ikut bintang"
-
-#: src/core/StelCore.cpp:186
-msgid "Subtract 1 sidereal week"
-msgstr "Tolak 1 minggu ikut bintang"
-
-#: src/core/StelCore.cpp:187
-msgid "Subtract 1 sidereal month"
-msgstr "Tolak 1 bulan tolak bintang"
-
-#: src/core/StelCore.cpp:188
-msgid "Subtract 1 sidereal year"
-msgstr "Tolak 1 tahun ikut bintang"
-
-#: src/core/StelCore.cpp:189
-msgid "Subtract 1 sidereal century"
-msgstr "Tolak 1 abad ikut bintang"
-
-#: src/core/StelCore.cpp:190
-msgid "Subtract 1 synodic month"
-msgstr "Tolak 1 bulan qamari"
-
-#: src/core/StelCore.cpp:191
-msgid "Subtract 1 draconic month"
-msgstr "Tolak 1 bulan drakonik"
-
-#: src/core/StelCore.cpp:192
-msgid "Subtract 1 draconic year"
-msgstr "Tolak 1 tahun drakonik"
-
-#: src/core/StelCore.cpp:193
-msgid "Subtract 1 anomalistic month"
-msgstr "Tolak 1 bulan anomali"
-
-#: src/core/StelCore.cpp:194
-msgid "Subtract 1 mean tropical month"
-msgstr "Tolak 1 bulan min tropika"
-
-#: src/core/StelCore.cpp:195
-msgid "Subtract 1 mean tropical year"
-msgstr "Tolak 1 tahun min tropika"
-
-#: src/core/StelCore.cpp:196
-msgid "Subtract 1 mean tropical century"
-msgstr "Tolak 1 abad tropika min"
-
-#: src/core/StelCore.cpp:198 src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:159
 msgid "Movement and Selection"
 msgstr "Pergerakan dan Pilihan"
 
+#: src/core/StelCore.cpp:162
+msgid "Increase time speed"
+msgstr "Cepatkan kelajuan masa"
+
+#: src/core/StelCore.cpp:163
+msgid "Decrease time speed"
+msgstr "Kurangkan kelajuan masa"
+
+#: src/core/StelCore.cpp:164
+msgid "Increase time speed (a little)"
+msgstr "Tingkatkan kelajuan masa (sedikit)"
+
+#: src/core/StelCore.cpp:165
+msgid "Decrease time speed (a little)"
+msgstr "Kurangkan kelajuan masa (sedikit)"
+
+#: src/core/StelCore.cpp:166
+msgid "Set normal time rate"
+msgstr "Tetapkan kadar normal masa"
+
+#: src/core/StelCore.cpp:167
+msgid "Set time rate to zero"
+msgstr "Tetapkan kadar masa kepada kosong"
+
+#: src/core/StelCore.cpp:168
+msgid "Set time to now"
+msgstr "Tetapkan masa sekarang"
+
+#: src/core/StelCore.cpp:169
+msgid "Add 1 solar hour"
+msgstr "Tambah 1 jam solar"
+
+#: src/core/StelCore.cpp:170
+msgid "Add 1 solar day"
+msgstr "Tambah 1 hari solar"
+
+#: src/core/StelCore.cpp:171
+msgid "Add 1 solar week"
+msgstr "Tambah 1 minggu solar"
+
+#: src/core/StelCore.cpp:172
+msgid "Subtract 1 solar hour"
+msgstr "Tolak 1 jam solar"
+
+#: src/core/StelCore.cpp:173
+msgid "Subtract 1 solar day"
+msgstr "Tolak 1 hari solar"
+
+#: src/core/StelCore.cpp:174
+msgid "Subtract 1 solar week"
+msgstr "Tolah 1 minggu solar"
+
+#: src/core/StelCore.cpp:175
+msgid "Add 1 sidereal day"
+msgstr "Tambah 1 hari ikut bintang"
+
+#: src/core/StelCore.cpp:176
+msgid "Add 1 sidereal week"
+msgstr "Tambah 1 minggu ikut bintang"
+
+#: src/core/StelCore.cpp:177
+msgid "Add 1 sidereal month"
+msgstr "Tambah 1 bulan ikut bintang"
+
+#: src/core/StelCore.cpp:178
+msgid "Add 1 sidereal year"
+msgstr "Tambah 1 tahun ikut bintang"
+
+#: src/core/StelCore.cpp:179
+msgid "Add 1 sidereal century"
+msgstr "Tambah  1 abad ikut bintang"
+
+#: src/core/StelCore.cpp:180
+msgid "Add 1 synodic month"
+msgstr "Tambah 1 bulan qamari"
+
+#: src/core/StelCore.cpp:181
+msgid "Add 1 draconic month"
+msgstr "Tambah 1 bulan drakonik"
+
+#: src/core/StelCore.cpp:182
+msgid "Add 1 draconic year"
+msgstr "Tambah 1 tahun drakonik"
+
+#: src/core/StelCore.cpp:183
+msgid "Add 1 anomalistic month"
+msgstr "Tambah 1 bulan anomali"
+
+#: src/core/StelCore.cpp:184
+msgid "Add 1 mean tropical month"
+msgstr "Tambah 1 bulan min tropika"
+
+#: src/core/StelCore.cpp:185
+msgid "Add 1 mean tropical year"
+msgstr "Tambah 1 tahun min tropika"
+
+#: src/core/StelCore.cpp:186
+msgid "Add 1 mean tropical century"
+msgstr "Tambah 1 abad tropika min"
+
+#: src/core/StelCore.cpp:187
+msgid "Subtract 1 sidereal day"
+msgstr "Tolak 1 hari ikut bintang"
+
+#: src/core/StelCore.cpp:188
+msgid "Subtract 1 sidereal week"
+msgstr "Tolak 1 minggu ikut bintang"
+
+#: src/core/StelCore.cpp:189
+msgid "Subtract 1 sidereal month"
+msgstr "Tolak 1 bulan tolak bintang"
+
+#: src/core/StelCore.cpp:190
+msgid "Subtract 1 sidereal year"
+msgstr "Tolak 1 tahun ikut bintang"
+
+#: src/core/StelCore.cpp:191
+msgid "Subtract 1 sidereal century"
+msgstr "Tolak 1 abad ikut bintang"
+
+#: src/core/StelCore.cpp:192
+msgid "Subtract 1 synodic month"
+msgstr "Tolak 1 bulan qamari"
+
+#: src/core/StelCore.cpp:193
+msgid "Subtract 1 draconic month"
+msgstr "Tolak 1 bulan drakonik"
+
+#: src/core/StelCore.cpp:194
+msgid "Subtract 1 draconic year"
+msgstr "Tolak 1 tahun drakonik"
+
+#: src/core/StelCore.cpp:195
+msgid "Subtract 1 anomalistic month"
+msgstr "Tolak 1 bulan anomali"
+
+#: src/core/StelCore.cpp:196
+msgid "Subtract 1 mean tropical month"
+msgstr "Tolak 1 bulan min tropika"
+
+#: src/core/StelCore.cpp:197
+msgid "Subtract 1 mean tropical year"
+msgstr "Tolak 1 tahun min tropika"
+
 #: src/core/StelCore.cpp:198
+msgid "Subtract 1 mean tropical century"
+msgstr "Tolak 1 abad tropika min"
+
+#: src/core/StelCore.cpp:200
 msgid "Set home planet to selected planet"
 msgstr "Tetapkan planet rumah kepada planet pilihan"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:201
 msgid "Go to home"
 msgstr "Pergi ke rumah"
 
-#: src/core/StelCore.cpp:200 src/core/StelCore.cpp:201
-msgid "Display Options"
-msgstr "Pilihan Paparan"
-
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:202
 msgid "Flip scene horizontally"
 msgstr "Kalih pandangan secara mendatar"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:203
 msgid "Flip scene vertically"
 msgstr "Kalih pandangan secara menegak"
 
-#: src/core/StelCore.cpp:1450
+#: src/core/StelCore.cpp:1452
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Pembetulan dilumpuhkan. Hanya guna jika anda tahu apa yang anda buat!"
 
-#: src/core/StelCore.cpp:1453
+#: src/core/StelCore.cpp:1455
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -638,7 +642,7 @@ msgstr ""
 "Relativity Confirmed by Ancient Solar Eclipses</em> (%1). Untuk maklumat "
 "lanjut rujuk %2disini%3."
 
-#: src/core/StelCore.cpp:1456
+#: src/core/StelCore.cpp:1458
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -647,7 +651,7 @@ msgstr ""
 "Persamaan empirik ini telah diterbitkan oleh G.M. Clemence di dalam sebuah "
 "artikel <em>On the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:1459
+#: src/core/StelCore.cpp:1461
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -660,7 +664,7 @@ msgstr ""
 "Jean Meeus di dalam <em>Astronomical Formulae for Calculators</em>. ia juga "
 "telah digunapakai dalam Program PC SunTracker Pro."
 
-#: src/core/StelCore.cpp:1463
+#: src/core/StelCore.cpp:1465
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -670,7 +674,7 @@ msgstr ""
 "telah digunapakai di dalam <em>Astronomical Ephemeris</em> dan juga di dalam "
 "<em>Canon of Solar Eclipses</em> oleh Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:1467
+#: src/core/StelCore.cpp:1469
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -682,7 +686,7 @@ msgstr ""
 "Perkaitan yang serupa juga telah digunapakai di dalam jadual syzygy "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1471
+#: src/core/StelCore.cpp:1473
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -693,7 +697,7 @@ msgstr ""
 "dalam sebuah artikel <em>The accelerations of the earth and moon from early "
 "astronomical observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1474
+#: src/core/StelCore.cpp:1476
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -702,7 +706,7 @@ msgstr ""
 "Persamaan ini telah diterbitkan oleh F. R. Stephenson di dalam sebuah "
 "artikel <em>Pre-Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1477
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -716,7 +720,7 @@ msgstr ""
 "in the period 1800-1975</em> (%1) kerana ia sepadan dengan data yang "
 "diterbitkan oleh Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1480
+#: src/core/StelCore.cpp:1482
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -726,7 +730,7 @@ msgstr ""
 "from -4000 to +2800</em> oleh P. Bretagnon & L. Simon (1986) dan di dalam "
 "program planetrium PC RedShift."
 
-#: src/core/StelCore.cpp:1483
+#: src/core/StelCore.cpp:1485
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -737,12 +741,12 @@ msgstr ""
 "dalam sebuah artikel <em>Long-term changes in the rotation of the earth - "
 "700 B.C. to A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1486
+#: src/core/StelCore.cpp:1488
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Algoritma ini telah digunakan di dalam PC planetarium program Guide 7."
 
-#: src/core/StelCore.cpp:1489
+#: src/core/StelCore.cpp:1491
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -752,7 +756,7 @@ msgstr ""
 "of Solar Eclipses: 1986-2035</em> (1987) dan dalam <em>Fifty Year Canon of "
 "Lunar Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1492
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -761,7 +765,7 @@ msgstr ""
 "Formula ini telah diperoleh oleh K.M. Borkowski (%1) melalui satu analisis "
 "31 rekod gerhana matahari bermula dari  2137 SM sehingga 1715 M."
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -774,7 +778,7 @@ msgstr ""
 "to E.T. for the Period 1800-1988</em> (%1) kerana data tersebut sepadan "
 "dengan nilai yang disediakan oleh Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1500
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -784,7 +788,7 @@ msgstr ""
 "versi pendek teori bulan ELP 2000-85 di dalam <em>Lunar Tables and Programs "
 "from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1501
+#: src/core/StelCore.cpp:1503
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -795,7 +799,7 @@ msgstr ""
 "dalam sebuah artikel <em>Long-Term Fluctuations in the Earth's Rotation: 700 "
 "BC to AD 1990</em> (%1)."
 
-#: src/core/StelCore.cpp:1504
+#: src/core/StelCore.cpp:1506
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -804,7 +808,7 @@ msgstr ""
 "F. R. Stephenson telah menerbitkan formula ini di dalam bukunya "
 "<em>Historical Eclipses and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1509
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -815,7 +819,7 @@ msgstr ""
 "variasi Chapront, Chapront-Touze & Francou (1997) bagi tarikh diluar dari "
 "tahun 1620..2000."
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1512
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -825,7 +829,7 @@ msgstr ""
 "menggunakan formula ini di dalam laman sesawang interaktif mereka iaitu "
 "%1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1515
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -834,7 +838,7 @@ msgstr ""
 "Polinome ini telah diterbitkan oleh J. Meeus dan L. Simons di dalam sebuah "
 "artikel <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1518
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -844,7 +848,7 @@ msgstr ""
 "Montenbruck & T. Pfleger's (2000) menyediakan data polinomial tertib-ke3 "
 "yang sepadan dengan yang terdahulu."
 
-#: src/core/StelCore.cpp:1519
+#: src/core/StelCore.cpp:1521
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -856,7 +860,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002) mereka. Ia berasaskan "
 "pada<em>Astronomical Algorithms</em> oleh Jean Meeus (1991)."
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -868,7 +872,7 @@ msgstr ""
 "error %1T and the calculation of eclipses</em> (%2) dengan penambahan di "
 "dalamnya (%3)."
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1527
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -881,7 +885,7 @@ msgstr ""
 "dengan fungsi kosinus dan kuasa dua. Ia berasaskan kemungkinan berkala yang "
 "diterangkan oleh Stephenson (%2). Maklumat lanjut boleh dirujuk %3disini%4."
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1530
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -897,11 +901,11 @@ msgstr ""
 "mereka. Formula ini juga digunakan untuk program SOLEX efemeris suria, bulan "
 "dan planet."
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1530
 msgid "Used by default."
 msgstr "Digunakan sebagai lalai."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1533
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -912,7 +916,7 @@ msgstr ""
 "telah diterbitkan dalam artikel <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -924,7 +928,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1) dan "
 "diperbaharui oleh Sana Islam pada 2013."
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -933,15 +937,15 @@ msgstr ""
 "Ini merupakan formula kuadratik untuk pengiraan %1T dengan pemalar yang "
 "ditakrif oleh pengguna."
 
-#: src/core/StelCore.cpp:1540 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1542 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Ralat"
 
-#: src/core/StelCore.cpp:1589
+#: src/core/StelCore.cpp:1591
 msgid "with meaningless values outside this range"
 msgstr "dengan nilai tanpa makna diluar julat ini"
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1617
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -949,21 +953,21 @@ msgstr ""
 "dengan ralat min bagi kurang dari satu saat, ralat maksimum 1.9s, dan nilai "
 "tanpa makna diluar julat ini"
 
-#: src/core/StelCore.cpp:1637 src/core/StelCore.cpp:1642
-#: src/core/StelCore.cpp:1669 src/core/StelCore.cpp:1674
+#: src/core/StelCore.cpp:1639 src/core/StelCore.cpp:1644
+#: src/core/StelCore.cpp:1671 src/core/StelCore.cpp:1676
 msgid "with zero values outside this range"
 msgstr "dengan nilai sifar diluar julat ini"
 
-#: src/core/StelCore.cpp:1647
+#: src/core/StelCore.cpp:1649
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "dengan ketepatan biasa 1-saat dan nilai sifar diluar julat ini"
 
-#: src/core/StelCore.cpp:1684
+#: src/core/StelCore.cpp:1686
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Julat sah penggunaan: diantara tahun  %1 hingga %2, %3."
 
-#: src/core/StelCore.cpp:1686
+#: src/core/StelCore.cpp:1688
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Julat sah penggunaan: diantara tahun  %1 hingga %2."
@@ -1418,79 +1422,87 @@ msgstr "Pereka grafik/lain: %1"
 msgid "OSX Developer: %1"
 msgstr "Pembangun OSX: %1"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
+msgid "Windows"
+msgstr "Tetingkap"
+
+#: src/gui/StelGui.cpp:178
+msgid "Miscellaneous"
+msgstr "Pelbagai"
+
+#: src/gui/StelGui.cpp:179
 msgid "Quit"
 msgstr "Keluar"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:180
 msgid "Speed up the script execution rate"
 msgstr "Lajukan kadar perlakuan skrip"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:181
 msgid "Slow down the script execution rate"
 msgstr "Lambatkan kadar perlakuan skrip"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:182
 msgid "Set the normal script execution rate"
 msgstr "Tetapkan kadar perlakuan skrip normal"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:183
 msgid "Stop script execution"
 msgstr "Henti pelakuan skrip"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:184
 msgid "Pause script execution"
 msgstr "Jeda pelakuan skrip"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:185
 msgid "Resume script execution"
 msgstr "Sambung semula pelakuan skrip"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:188
 msgid "Script console window"
 msgstr "Tetingkap konsol skrip"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:191
 msgid "Help window"
 msgstr "Tetingkap Bantuan"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:192
 msgid "Configuration window"
 msgstr "Tetingkap Konfigurasi"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:193
 msgid "Search window"
 msgstr "Tetingkap Gelintar"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:194
 msgid "Sky and viewing options window"
 msgstr "Tetingkap pilihan pandangan dan langit"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:195
 msgid "Date/time window"
 msgstr "Tetingkap tarikh/masa"
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:196
 msgid "Location window"
 msgstr "Tetingkap lokasi"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:197
 msgid "Shortcuts window"
 msgstr "Tetingkap pintasan"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:198
 msgid "Copy selected object information to clipboard"
 msgstr "salin informasi objek"
 
-#: src/gui/StelGui.cpp:196
+#: src/gui/StelGui.cpp:199
 msgid "Toggle visibility of GUI"
 msgstr "Togol ketampakan GUI"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:205
 msgid "Auto hide horizontal button bar"
 msgstr "Sembunyi secara automatik butang palang melintang"
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:206
 msgid "Auto hide vertical button bar"
 msgstr "Sembunyi secara automatik butang palang menengak"
 
@@ -3977,7 +3989,7 @@ msgstr "Semua yang ada"
 msgid "Display no information"
 msgstr "Jangan paparkan maklumat"
 
-#: src/ui_configurationDialog.h:990 plugins/Oculars/src/Oculars.cpp:1891
+#: src/ui_configurationDialog.h:990 plugins/Oculars/src/Oculars.cpp:1892
 #: plugins/Observability/src/Observability.cpp:230
 msgid "None"
 msgstr "Tiada"
@@ -4492,6 +4504,7 @@ msgid "Right-clicking changes the end point only."
 msgstr "Klik-kanan hanya mengubah titik akhir."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:55
+#: plugins/CompassMarks/src/CompassMarks.cpp:122
 msgid "Compass Marks"
 msgstr "Tanda Kompas"
 
@@ -4503,7 +4516,7 @@ msgstr "Papar tanda bering kompas sepanjang ufuk"
 msgid "Compass marks"
 msgstr "Tanda kompas"
 
-#: plugins/Oculars/src/Oculars.cpp:80
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1297
 #: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Oculars"
 msgstr "Okular"
@@ -4575,148 +4588,148 @@ msgstr "T&etap semula putaran"
 msgid "Ocular view"
 msgstr "Paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/Oculars.cpp:1298
 msgid "Oculars popup menu"
 msgstr "Menu timbul okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/Oculars.cpp:1299
 msgid "Show crosshairs"
 msgstr "Papar rerambut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:1299
+#: plugins/Oculars/src/Oculars.cpp:1300
 msgid "Image sensor frame"
 msgstr "Bingkai penderia imej"
 
-#: plugins/Oculars/src/Oculars.cpp:1300
+#: plugins/Oculars/src/Oculars.cpp:1301
 msgid "Telrad sight"
 msgstr "Pandangan telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1301
+#: plugins/Oculars/src/Oculars.cpp:1302
 msgid "Oculars plugin configuration"
 msgstr "Konfigurasi pemalam okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1303
+#: plugins/Oculars/src/Oculars.cpp:1304
 msgid "Select next telescope"
 msgstr "Pilih teleskop berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1305
+#: plugins/Oculars/src/Oculars.cpp:1306
 msgid "Select previous telescope"
 msgstr "Pilih teleskop terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1307
+#: plugins/Oculars/src/Oculars.cpp:1308
 msgid "Select next eyepiece"
 msgstr "Pilih kanta mata berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1309
+#: plugins/Oculars/src/Oculars.cpp:1310
 msgid "Select previous eyepiece"
 msgstr "Pilih kanta mata terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1536
+#: plugins/Oculars/src/Oculars.cpp:1537
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:499
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1541
+#: plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/Oculars.cpp:1556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:540
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "JF Ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1562
+#: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV Ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1574
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
 #, qt-format
 msgid "Lens #%1"
 msgstr "Kanta #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/Oculars.cpp:1579
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Kanta #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1583
+#: plugins/Oculars/src/Oculars.cpp:1584
 msgid "Lens: none"
 msgstr "Kanta: tiada"
 
-#: plugins/Oculars/src/Oculars.cpp:1593 plugins/Oculars/src/Oculars.cpp:1650
+#: plugins/Oculars/src/Oculars.cpp:1594 plugins/Oculars/src/Oculars.cpp:1651
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1598 plugins/Oculars/src/Oculars.cpp:1655
+#: plugins/Oculars/src/Oculars.cpp:1599 plugins/Oculars/src/Oculars.cpp:1656
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1609
+#: plugins/Oculars/src/Oculars.cpp:1610
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Pembesaran: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1617
+#: plugins/Oculars/src/Oculars.cpp:1618
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1627
+#: plugins/Oculars/src/Oculars.cpp:1628
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:779
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensi: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1632
+#: plugins/Oculars/src/Oculars.cpp:1633
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:642
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Penderia #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1636
+#: plugins/Oculars/src/Oculars.cpp:1637
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Penderia #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1887
+#: plugins/Oculars/src/Oculars.cpp:1888
 msgid "&Lens"
 msgstr "K&anta"
 
-#: plugins/Oculars/src/Oculars.cpp:1888
+#: plugins/Oculars/src/Oculars.cpp:1889
 msgid "&Previous lens"
 msgstr "Kanta t&erdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1889
+#: plugins/Oculars/src/Oculars.cpp:1890
 msgid "&Next lens"
 msgstr "Kanta &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1920
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1920
+#: plugins/Oculars/src/Oculars.cpp:1921
 msgid "&Previous telescope"
 msgstr "Teleskop &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1921
+#: plugins/Oculars/src/Oculars.cpp:1922
 msgid "&Next telescope"
 msgstr "Teleskop &berikutnya"
 
@@ -5096,6 +5109,7 @@ msgid "About"
 msgstr "Perihal"
 
 #: plugins/Satellites/src/Satellites.cpp:66
+#: plugins/Satellites/src/Satellites.cpp:133
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "Satellites"
 msgstr "Satelit"
@@ -5108,80 +5122,80 @@ msgstr ""
 "Ramalan kedudukan satelit tiruan didalam orbit Bumi yang berpandukan data "
 "TLE NORAD"
 
-#: plugins/Satellites/src/Satellites.cpp:133
+#: plugins/Satellites/src/Satellites.cpp:134
 msgid "Satellite hints"
 msgstr "Pembayang satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:134
+#: plugins/Satellites/src/Satellites.cpp:135
 msgid "Satellite labels"
 msgstr "Label satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:135
+#: plugins/Satellites/src/Satellites.cpp:136
 msgid "Satellites configuration window"
 msgstr "Tetingkap konfigurasi satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:162
+#: plugins/Satellites/src/Satellites.cpp:163
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr "Fail satelit.json lama tidak lagi serasi - menggunakan fail lalai"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1584
+#: plugins/Satellites/src/Satellites.cpp:1585
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1586
+#: plugins/Satellites/src/Satellites.cpp:1587
 msgid "scientific"
 msgstr "saintifik"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1588
+#: plugins/Satellites/src/Satellites.cpp:1589
 msgid "communications"
 msgstr "komunikasi"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1590
+#: plugins/Satellites/src/Satellites.cpp:1591
 msgid "navigation"
 msgstr "navigasi"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1592
+#: plugins/Satellites/src/Satellites.cpp:1593
 msgid "amateur"
 msgstr "amatur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1594
+#: plugins/Satellites/src/Satellites.cpp:1595
 msgid "weather"
 msgstr "cuaca"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1596
+#: plugins/Satellites/src/Satellites.cpp:1597
 msgid "geostationary"
 msgstr "geopegun"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1598
+#: plugins/Satellites/src/Satellites.cpp:1599
 msgid "non-operational"
 msgstr "tidak-berfungsi"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1600
+#: plugins/Satellites/src/Satellites.cpp:1601
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1602
+#: plugins/Satellites/src/Satellites.cpp:1603
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1613
+#: plugins/Satellites/src/Satellites.cpp:1614
 msgid "The Hubble Space Telescope"
 msgstr "Teleskop Angkasa Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1615
+#: plugins/Satellites/src/Satellites.cpp:1616
 msgid "The International Space Station"
 msgstr "Stesen Angkasa Antarabangsa"
 
@@ -5835,6 +5849,7 @@ msgstr "Singkir"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:160
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:166
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:175
 msgid "Telescope Control"
 msgstr "Kawal Teleskop"
@@ -7941,6 +7956,7 @@ msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Bulan Purnama Berikutnya: %1 %2 pada %3: %4. "
 
 #: plugins/Observability/src/Observability.cpp:262
+#: plugins/Observability/src/Observability.cpp:263
 msgid "Observability"
 msgstr "Ketercerapan"
 
@@ -8337,9 +8353,6 @@ msgstr "Altitud matahari pada senjakala: 0 darj."
 #~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 #~ msgstr "{Soalan Pertanyaan Lazim} mengenai Stellarium. Jawapan disertakan."
 
-#~ msgid "Miscellaneous"
-#~ msgstr "Pelbagai"
-
 #~ msgid "Full-screen mode"
 #~ msgstr "Mod Skrin penuh"
 
@@ -8354,9 +8367,6 @@ msgstr "Altitud matahari pada senjakala: 0 darj."
 
 #~ msgid "Nebulas"
 #~ msgstr "Nebula"
-
-#~ msgid "Windows"
-#~ msgstr "Tetingkap"
 
 #~ msgid "Track object"
 #~ msgstr "Jejak objek"
