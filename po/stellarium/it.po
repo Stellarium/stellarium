@@ -7,43 +7,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-16 23:51+0700\n"
+"POT-Creation-Date: 2013-10-17 20:19+0700\n"
 "PO-Revision-Date: 2013-10-06 14:27+0000\n"
 "Last-Translator: Matthieu Ottaviani <matthieuottaviani@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-17 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-10-18 05:27+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106
+#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
+#: src/core/modules/GridLinesMgr.cpp:692 src/core/modules/LandscapeMgr.cpp:314
+#: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:145
+#: src/core/StelCore.cpp:160
+msgid "Display Options"
+msgstr "Mostra Opzioni"
+
+#: src/core/modules/ConstellationMgr.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation lines"
 msgstr "Linee delle costellazioni"
 
-#: src/core/modules/ConstellationMgr.cpp:107
+#: src/core/modules/ConstellationMgr.cpp:108
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:283
 msgid "Constellation art"
 msgstr "Figure delle costellazioni"
 
-#: src/core/modules/ConstellationMgr.cpp:108
+#: src/core/modules/ConstellationMgr.cpp:109
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation labels"
 msgstr "Nomi delle costellazioni"
 
-#: src/core/modules/ConstellationMgr.cpp:109
+#: src/core/modules/ConstellationMgr.cpp:110
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Constellation boundaries"
 msgstr "Confini delle costellazioni"
 
-#: src/core/modules/StarMgr.cpp:335 src/ui_viewDialog.h:1215
+#: src/core/modules/StarMgr.cpp:336 src/ui_viewDialog.h:1215
 #: src/ui_viewDialog.h:1238 src/ui_viewDialog.h:1261
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:239
 msgid "Stars"
 msgstr "Stelle"
 
-#: src/core/modules/StarMgr.cpp:336
+#: src/core/modules/StarMgr.cpp:337
 msgid "Stars labels"
 msgstr "Nomi delle stelle"
 
@@ -67,85 +74,85 @@ msgstr "Orizzonte"
 msgid "Galactic Plane"
 msgstr "Piano galattico"
 
-#: src/core/modules/GridLinesMgr.cpp:692 src/ui_viewDialog.h:1274
+#: src/core/modules/GridLinesMgr.cpp:693 src/ui_viewDialog.h:1274
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial grid"
 msgstr "Griglia equatoriale"
 
-#: src/core/modules/GridLinesMgr.cpp:693 src/ui_viewDialog.h:1276
+#: src/core/modules/GridLinesMgr.cpp:694 src/ui_viewDialog.h:1276
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Azimuthal grid"
 msgstr "Griglia coordinate Azimuthali"
 
-#: src/core/modules/GridLinesMgr.cpp:694
+#: src/core/modules/GridLinesMgr.cpp:695
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Ecliptic line"
 msgstr "Eclittica"
 
-#: src/core/modules/GridLinesMgr.cpp:695
+#: src/core/modules/GridLinesMgr.cpp:696
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Equator line"
 msgstr "Equatore Celeste"
 
-#: src/core/modules/GridLinesMgr.cpp:696
+#: src/core/modules/GridLinesMgr.cpp:697
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Meridian line"
 msgstr "Meridiano Locale"
 
-#: src/core/modules/GridLinesMgr.cpp:697
+#: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Horizon line"
 msgstr "Linea dell'orizzonte"
 
-#: src/core/modules/GridLinesMgr.cpp:698 src/ui_viewDialog.h:1273
+#: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1273
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equatorial J2000 grid"
 msgstr "Griglia equatoriale (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1275
+#: src/core/modules/GridLinesMgr.cpp:700 src/ui_viewDialog.h:1275
 msgid "Ecliptic J2000 grid"
 msgstr "Griglia ellittica J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:700 src/ui_viewDialog.h:1277
+#: src/core/modules/GridLinesMgr.cpp:701 src/ui_viewDialog.h:1277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic grid"
 msgstr "Griglia galattica"
 
-#: src/core/modules/GridLinesMgr.cpp:701 src/ui_viewDialog.h:1297
+#: src/core/modules/GridLinesMgr.cpp:702 src/ui_viewDialog.h:1297
 msgid "Galactic plane"
 msgstr "Piano galattico"
 
-#: src/core/modules/LandscapeMgr.cpp:314 src/ui_viewDialog.h:1231
+#: src/core/modules/LandscapeMgr.cpp:315 src/ui_viewDialog.h:1231
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/core/modules/LandscapeMgr.cpp:315
+#: src/core/modules/LandscapeMgr.cpp:316
 msgid "Fog"
 msgstr "Nebbia"
 
-#: src/core/modules/LandscapeMgr.cpp:316 src/ui_viewDialog.h:1298
+#: src/core/modules/LandscapeMgr.cpp:317 src/ui_viewDialog.h:1298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Cardinal points"
 msgstr "Punti Cardinali"
 
-#: src/core/modules/LandscapeMgr.cpp:317
+#: src/core/modules/LandscapeMgr.cpp:318
 msgid "Ground"
 msgstr "Orizzonte"
 
-#: src/core/modules/LandscapeMgr.cpp:522
+#: src/core/modules/LandscapeMgr.cpp:523
 msgid "Author: "
 msgstr "Autore: "
 
-#: src/core/modules/LandscapeMgr.cpp:525
+#: src/core/modules/LandscapeMgr.cpp:526
 msgid "Location: "
 msgstr "Posizione: "
 
-#: src/core/modules/LandscapeMgr.cpp:530
+#: src/core/modules/LandscapeMgr.cpp:531
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:534
+#: src/core/modules/LandscapeMgr.cpp:535
 msgid "Planet: "
 msgstr "Pianeta: "
 
@@ -302,17 +309,17 @@ msgstr "Illuminato: %1%"
 msgid "Provisional designation: %1"
 msgstr "Designazione provvisoria: %1"
 
-#: src/core/modules/SolarSystem.cpp:145
+#: src/core/modules/SolarSystem.cpp:146
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:302
 msgid "Planet labels"
 msgstr "Etichette del pianeta"
 
-#: src/core/modules/SolarSystem.cpp:146
+#: src/core/modules/SolarSystem.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:306
 msgid "Planet orbits"
 msgstr "Orbite pianeti"
 
-#: src/core/modules/SolarSystem.cpp:147
+#: src/core/modules/SolarSystem.cpp:148
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Planet trails"
 msgstr "Orbite dei pianeti"
@@ -444,188 +451,185 @@ msgstr "Tempo di salita: %1%"
 msgid "SpaceShip"
 msgstr "Veicolo Spaziale"
 
-#: src/core/StelCore.cpp:158 src/ui_dateTimeDialogGui.h:297
+#: src/core/StelCore.cpp:158 src/gui/StelGui.cpp:176
+#: src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:166
 msgid "Date and Time"
 msgstr "Data e ora"
 
-#: src/core/StelCore.cpp:160
-msgid "Increase time speed"
-msgstr "Aumenta la velocità del tempo"
-
-#: src/core/StelCore.cpp:161
-msgid "Decrease time speed"
-msgstr "Diminuisci la velocità del tempo"
-
-#: src/core/StelCore.cpp:162
-msgid "Increase time speed (a little)"
-msgstr "Aumenta la velocità del tempo (un po')"
-
-#: src/core/StelCore.cpp:163
-msgid "Decrease time speed (a little)"
-msgstr "Riduci la velocità del tempo (un po')"
-
-#: src/core/StelCore.cpp:164
-msgid "Set normal time rate"
-msgstr "Velocità del tempo normale"
-
-#: src/core/StelCore.cpp:165
-msgid "Set time rate to zero"
-msgstr "Impoasta la velocità del tempo a zero"
-
-#: src/core/StelCore.cpp:166
-msgid "Set time to now"
-msgstr "Imposta l'ora attuale"
-
-#: src/core/StelCore.cpp:167
-msgid "Add 1 solar hour"
-msgstr "Aggiungi 1 ora solare"
-
-#: src/core/StelCore.cpp:168
-msgid "Add 1 solar day"
-msgstr "Aggiungi 1 giorno solare"
-
-#: src/core/StelCore.cpp:169
-msgid "Add 1 solar week"
-msgstr "Aggiungi 1 settimana solare"
-
-#: src/core/StelCore.cpp:170
-msgid "Subtract 1 solar hour"
-msgstr "Sottrai 1 ora solare"
-
-#: src/core/StelCore.cpp:171
-msgid "Subtract 1 solar day"
-msgstr "Sottrai 1 giorno solare"
-
-#: src/core/StelCore.cpp:172
-msgid "Subtract 1 solar week"
-msgstr "Sottrai 1 settimana solare"
-
-#: src/core/StelCore.cpp:173
-msgid "Add 1 sidereal day"
-msgstr "Aggiungi 1 giorno siderale"
-
-#: src/core/StelCore.cpp:174
-msgid "Add 1 sidereal week"
-msgstr "Aggiungi 1 settimana siderale"
-
-#: src/core/StelCore.cpp:175
-msgid "Add 1 sidereal month"
-msgstr "Aggiungi 1 mese siderale"
-
-#: src/core/StelCore.cpp:176
-msgid "Add 1 sidereal year"
-msgstr "Aggiungi 1 anno siderale"
-
-#: src/core/StelCore.cpp:177
-msgid "Add 1 sidereal century"
-msgstr "Aggiungi 1 secolo siderale"
-
-#: src/core/StelCore.cpp:178
-msgid "Add 1 synodic month"
-msgstr "Aggiungi 1 mese sinodico"
-
-#: src/core/StelCore.cpp:179
-msgid "Add 1 draconic month"
-msgstr "Aggiungi 1 mese draconico"
-
-#: src/core/StelCore.cpp:180
-msgid "Add 1 draconic year"
-msgstr "Aggiungi un anno draconico"
-
-#: src/core/StelCore.cpp:181
-msgid "Add 1 anomalistic month"
-msgstr "Aggiungi 1 mese anomalistico"
-
-#: src/core/StelCore.cpp:182
-msgid "Add 1 mean tropical month"
-msgstr "Aggiungi 1 mese tropicale medio"
-
-#: src/core/StelCore.cpp:183
-msgid "Add 1 mean tropical year"
-msgstr "Aggiungi un anno tropicale medio"
-
-#: src/core/StelCore.cpp:184
-msgid "Add 1 mean tropical century"
-msgstr ""
-
-#: src/core/StelCore.cpp:185
-msgid "Subtract 1 sidereal day"
-msgstr "Sottrai 1 giorno siderale"
-
-#: src/core/StelCore.cpp:186
-msgid "Subtract 1 sidereal week"
-msgstr "Sottrai 1 settimana siderale"
-
-#: src/core/StelCore.cpp:187
-msgid "Subtract 1 sidereal month"
-msgstr "Sottrai 1 mese siderale"
-
-#: src/core/StelCore.cpp:188
-msgid "Subtract 1 sidereal year"
-msgstr "Sottrai 1 anno siderale"
-
-#: src/core/StelCore.cpp:189
-msgid "Subtract 1 sidereal century"
-msgstr "Sottrai 1 secolo siderale"
-
-#: src/core/StelCore.cpp:190
-msgid "Subtract 1 synodic month"
-msgstr "Sottrai 1 mese sinodico"
-
-#: src/core/StelCore.cpp:191
-msgid "Subtract 1 draconic month"
-msgstr "Sottrai 1 mese draconico"
-
-#: src/core/StelCore.cpp:192
-msgid "Subtract 1 draconic year"
-msgstr "Sottrai 1 anno draconico"
-
-#: src/core/StelCore.cpp:193
-msgid "Subtract 1 anomalistic month"
-msgstr "Sottrai 1 mese anomalistico"
-
-#: src/core/StelCore.cpp:194
-msgid "Subtract 1 mean tropical month"
-msgstr "Sottrai 1 mese tropicale medio"
-
-#: src/core/StelCore.cpp:195
-msgid "Subtract 1 mean tropical year"
-msgstr "Sottrai 1 anno tropicale medio"
-
-#: src/core/StelCore.cpp:196
-msgid "Subtract 1 mean tropical century"
-msgstr ""
-
-#: src/core/StelCore.cpp:198 src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:159
 msgid "Movement and Selection"
 msgstr "Movimento e Selezione"
 
+#: src/core/StelCore.cpp:162
+msgid "Increase time speed"
+msgstr "Aumenta la velocità del tempo"
+
+#: src/core/StelCore.cpp:163
+msgid "Decrease time speed"
+msgstr "Diminuisci la velocità del tempo"
+
+#: src/core/StelCore.cpp:164
+msgid "Increase time speed (a little)"
+msgstr "Aumenta la velocità del tempo (un po')"
+
+#: src/core/StelCore.cpp:165
+msgid "Decrease time speed (a little)"
+msgstr "Riduci la velocità del tempo (un po')"
+
+#: src/core/StelCore.cpp:166
+msgid "Set normal time rate"
+msgstr "Velocità del tempo normale"
+
+#: src/core/StelCore.cpp:167
+msgid "Set time rate to zero"
+msgstr "Impoasta la velocità del tempo a zero"
+
+#: src/core/StelCore.cpp:168
+msgid "Set time to now"
+msgstr "Imposta l'ora attuale"
+
+#: src/core/StelCore.cpp:169
+msgid "Add 1 solar hour"
+msgstr "Aggiungi 1 ora solare"
+
+#: src/core/StelCore.cpp:170
+msgid "Add 1 solar day"
+msgstr "Aggiungi 1 giorno solare"
+
+#: src/core/StelCore.cpp:171
+msgid "Add 1 solar week"
+msgstr "Aggiungi 1 settimana solare"
+
+#: src/core/StelCore.cpp:172
+msgid "Subtract 1 solar hour"
+msgstr "Sottrai 1 ora solare"
+
+#: src/core/StelCore.cpp:173
+msgid "Subtract 1 solar day"
+msgstr "Sottrai 1 giorno solare"
+
+#: src/core/StelCore.cpp:174
+msgid "Subtract 1 solar week"
+msgstr "Sottrai 1 settimana solare"
+
+#: src/core/StelCore.cpp:175
+msgid "Add 1 sidereal day"
+msgstr "Aggiungi 1 giorno siderale"
+
+#: src/core/StelCore.cpp:176
+msgid "Add 1 sidereal week"
+msgstr "Aggiungi 1 settimana siderale"
+
+#: src/core/StelCore.cpp:177
+msgid "Add 1 sidereal month"
+msgstr "Aggiungi 1 mese siderale"
+
+#: src/core/StelCore.cpp:178
+msgid "Add 1 sidereal year"
+msgstr "Aggiungi 1 anno siderale"
+
+#: src/core/StelCore.cpp:179
+msgid "Add 1 sidereal century"
+msgstr "Aggiungi 1 secolo siderale"
+
+#: src/core/StelCore.cpp:180
+msgid "Add 1 synodic month"
+msgstr "Aggiungi 1 mese sinodico"
+
+#: src/core/StelCore.cpp:181
+msgid "Add 1 draconic month"
+msgstr "Aggiungi 1 mese draconico"
+
+#: src/core/StelCore.cpp:182
+msgid "Add 1 draconic year"
+msgstr "Aggiungi un anno draconico"
+
+#: src/core/StelCore.cpp:183
+msgid "Add 1 anomalistic month"
+msgstr "Aggiungi 1 mese anomalistico"
+
+#: src/core/StelCore.cpp:184
+msgid "Add 1 mean tropical month"
+msgstr "Aggiungi 1 mese tropicale medio"
+
+#: src/core/StelCore.cpp:185
+msgid "Add 1 mean tropical year"
+msgstr "Aggiungi un anno tropicale medio"
+
+#: src/core/StelCore.cpp:186
+msgid "Add 1 mean tropical century"
+msgstr ""
+
+#: src/core/StelCore.cpp:187
+msgid "Subtract 1 sidereal day"
+msgstr "Sottrai 1 giorno siderale"
+
+#: src/core/StelCore.cpp:188
+msgid "Subtract 1 sidereal week"
+msgstr "Sottrai 1 settimana siderale"
+
+#: src/core/StelCore.cpp:189
+msgid "Subtract 1 sidereal month"
+msgstr "Sottrai 1 mese siderale"
+
+#: src/core/StelCore.cpp:190
+msgid "Subtract 1 sidereal year"
+msgstr "Sottrai 1 anno siderale"
+
+#: src/core/StelCore.cpp:191
+msgid "Subtract 1 sidereal century"
+msgstr "Sottrai 1 secolo siderale"
+
+#: src/core/StelCore.cpp:192
+msgid "Subtract 1 synodic month"
+msgstr "Sottrai 1 mese sinodico"
+
+#: src/core/StelCore.cpp:193
+msgid "Subtract 1 draconic month"
+msgstr "Sottrai 1 mese draconico"
+
+#: src/core/StelCore.cpp:194
+msgid "Subtract 1 draconic year"
+msgstr "Sottrai 1 anno draconico"
+
+#: src/core/StelCore.cpp:195
+msgid "Subtract 1 anomalistic month"
+msgstr "Sottrai 1 mese anomalistico"
+
+#: src/core/StelCore.cpp:196
+msgid "Subtract 1 mean tropical month"
+msgstr "Sottrai 1 mese tropicale medio"
+
+#: src/core/StelCore.cpp:197
+msgid "Subtract 1 mean tropical year"
+msgstr "Sottrai 1 anno tropicale medio"
+
 #: src/core/StelCore.cpp:198
+msgid "Subtract 1 mean tropical century"
+msgstr ""
+
+#: src/core/StelCore.cpp:200
 msgid "Set home planet to selected planet"
 msgstr "Imposta il pianeta selezionato come luogo di osservazione"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:201
 msgid "Go to home"
 msgstr "Torna a casa"
 
-#: src/core/StelCore.cpp:200 src/core/StelCore.cpp:201
-msgid "Display Options"
-msgstr "Mostra Opzioni"
-
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:202
 msgid "Flip scene horizontally"
 msgstr "Capovolgi la visuale orizzontalmente"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:203
 msgid "Flip scene vertically"
 msgstr "Capovolgi la visuale verticalmente"
 
-#: src/core/StelCore.cpp:1450
+#: src/core/StelCore.cpp:1452
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "La correzione è disabilitata. Usala solo se sai cosa stai facendo!"
 
-#: src/core/StelCore.cpp:1453
+#: src/core/StelCore.cpp:1455
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -633,7 +637,7 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1456
+#: src/core/StelCore.cpp:1458
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -642,7 +646,7 @@ msgstr ""
 "Formula empirica pubblicata da G. M. Clarence nell'articolo <em>On the "
 "system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:1459
+#: src/core/StelCore.cpp:1461
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -655,7 +659,7 @@ msgstr ""
 "applicata da Jean Meeus in <em>Astronomical Formulae for Calculators</em> ed "
 "è utilizzata nel simulatore spaziale SunTracker Pro."
 
-#: src/core/StelCore.cpp:1463
+#: src/core/StelCore.cpp:1465
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -665,7 +669,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> e in <em>Canon of Solar Eclipses</em> di "
 "Mucke e Meeus (1983)."
 
-#: src/core/StelCore.cpp:1467
+#: src/core/StelCore.cpp:1469
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -677,7 +681,7 @@ msgstr ""
 "DC. La stessa relazione è usata implicitamente nelle sizigie di Goldstine "
 "(1973)."
 
-#: src/core/StelCore.cpp:1471
+#: src/core/StelCore.cpp:1473
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -688,7 +692,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1474
+#: src/core/StelCore.cpp:1476
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -697,7 +701,7 @@ msgstr ""
 "Equazione pubblicata da F. R. Stephenson nell'articolo <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1477
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -711,7 +715,7 @@ msgstr ""
 "pubblicati da Brouwer (1952); resa in seguito obsoleta dagli stessi autori "
 "(1988)."
 
-#: src/core/StelCore.cpp:1480
+#: src/core/StelCore.cpp:1482
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -721,7 +725,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (1986) e nel simulatore spaziale "
 "RedShift."
 
-#: src/core/StelCore.cpp:1483
+#: src/core/StelCore.cpp:1485
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -732,18 +736,18 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1486
+#: src/core/StelCore.cpp:1488
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Algoritmo utilizzato nel simulatore spaziale Guide 7."
 
-#: src/core/StelCore.cpp:1489
+#: src/core/StelCore.cpp:1491
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1492
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -752,7 +756,7 @@ msgstr ""
 "Formula ricavata da K. M. Borkowski (%1) dall'analisi di 31 eclissi solari "
 "tra il 2137 AC e il 1715 DC."
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -765,14 +769,14 @@ msgstr ""
 "1988</em> (%1) e basata sull'interpolazione di valori pubblicati da "
 "Stephenson e Morrison (1984)."
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1500
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1501
+#: src/core/StelCore.cpp:1503
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -783,7 +787,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:1504
+#: src/core/StelCore.cpp:1506
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -792,21 +796,21 @@ msgstr ""
 "Formula pubblicata da F. R. Stephenson in <em>Historical Eclipses and "
 "Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1509
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1512
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1515
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -815,14 +819,14 @@ msgstr ""
 "Coefficienti polinomiali pubblicati da J. Meeus e L. Simons nell'articolo "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1518
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1519
+#: src/core/StelCore.cpp:1521
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -830,7 +834,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -838,7 +842,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1527
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -847,7 +851,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1530
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -857,11 +861,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1530
 msgid "Used by default."
 msgstr "Utilizzata come predefinita."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1533
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -869,7 +873,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -877,22 +881,22 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1540 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1542 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Errore"
 
-#: src/core/StelCore.cpp:1589
+#: src/core/StelCore.cpp:1591
 msgid "with meaningless values outside this range"
 msgstr "senza significato fisico al di fuori di questo intervallo"
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1617
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -900,23 +904,23 @@ msgstr ""
 "con un errore medio inferiore a 1 secondo d'arco, un errore massimo di 1.9s, "
 "e senza significato fisico al di fuori di questo invervallo"
 
-#: src/core/StelCore.cpp:1637 src/core/StelCore.cpp:1642
-#: src/core/StelCore.cpp:1669 src/core/StelCore.cpp:1674
+#: src/core/StelCore.cpp:1639 src/core/StelCore.cpp:1644
+#: src/core/StelCore.cpp:1671 src/core/StelCore.cpp:1676
 msgid "with zero values outside this range"
 msgstr "con valori nulli al di fuori di questo invervallo"
 
-#: src/core/StelCore.cpp:1647
+#: src/core/StelCore.cpp:1649
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "con un'incertezza tipica di 1 secondo d'arco e con valori nulli al di fuori "
 "di questo intervallo"
 
-#: src/core/StelCore.cpp:1684
+#: src/core/StelCore.cpp:1686
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1686
+#: src/core/StelCore.cpp:1688
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Intervallo di validità: dall'anno %1 al %2."
@@ -1372,79 +1376,87 @@ msgstr "Designer grafico/Altro: %1"
 msgid "OSX Developer: %1"
 msgstr "Sviluppatore OSX: %1"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
+msgid "Windows"
+msgstr "Finestre"
+
+#: src/gui/StelGui.cpp:178
+msgid "Miscellaneous"
+msgstr "Varie"
+
+#: src/gui/StelGui.cpp:179
 msgid "Quit"
 msgstr "Esci"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:180
 msgid "Speed up the script execution rate"
 msgstr "Aumenta la velocità di esecuzione dello script"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:181
 msgid "Slow down the script execution rate"
 msgstr "Rallenta la velocità di esecuzione dello script"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:182
 msgid "Set the normal script execution rate"
 msgstr "Imposta la normale velocità di esecuzione dello script"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:183
 msgid "Stop script execution"
 msgstr "Ferma l'esecuzione dello script"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:184
 msgid "Pause script execution"
 msgstr "Interrompi l'esecuzione dello script"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:185
 msgid "Resume script execution"
 msgstr "Riprendi l'esecuzione dello script"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:188
 msgid "Script console window"
 msgstr "Finestra dell'interfaccia a riga di comando dello script"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:191
 msgid "Help window"
 msgstr "Finestra di aiuto"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:192
 msgid "Configuration window"
 msgstr "Finestra di configurazione"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:193
 msgid "Search window"
 msgstr "Finestra di ricerca"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:194
 msgid "Sky and viewing options window"
 msgstr "Finestra delle opzioni del cielo e della visualizzazione"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:195
 msgid "Date/time window"
 msgstr "Finestra data/ora"
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:196
 msgid "Location window"
 msgstr "Finestra della posizione"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:197
 msgid "Shortcuts window"
 msgstr "Finestra scorciatoie"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:198
 msgid "Copy selected object information to clipboard"
 msgstr "Copia le informazioni selezionate sull'oggetto negli appunti"
 
-#: src/gui/StelGui.cpp:196
+#: src/gui/StelGui.cpp:199
 msgid "Toggle visibility of GUI"
 msgstr "Mostra/nascondi interfaccia utente"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:205
 msgid "Auto hide horizontal button bar"
 msgstr "Nascondi automaticamente la barra orizzontale dei comandi"
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:206
 msgid "Auto hide vertical button bar"
 msgstr "Nascondi automaticamente la barra verticale dei comandi"
 
@@ -3923,7 +3935,7 @@ msgstr "Tutte le disponibili"
 msgid "Display no information"
 msgstr "Non mostrare informazioni"
 
-#: src/ui_configurationDialog.h:990 plugins/Oculars/src/Oculars.cpp:1891
+#: src/ui_configurationDialog.h:990 plugins/Oculars/src/Oculars.cpp:1892
 #: plugins/Observability/src/Observability.cpp:230
 msgid "None"
 msgstr "Nessuna"
@@ -4440,6 +4452,7 @@ msgid "Right-clicking changes the end point only."
 msgstr "Il click col pulsante destro cambia solo il punto finale."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:55
+#: plugins/CompassMarks/src/CompassMarks.cpp:122
 msgid "Compass Marks"
 msgstr "Punti cardinali"
 
@@ -4451,7 +4464,7 @@ msgstr "Visualizza la bussola lungo l'orizzonte"
 msgid "Compass marks"
 msgstr "Punti cardinali"
 
-#: plugins/Oculars/src/Oculars.cpp:80
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1297
 #: plugins/Oculars/src/ui_ocularDialog.h:1027
 msgid "Oculars"
 msgstr "Oculari"
@@ -4523,148 +4536,148 @@ msgstr "&Azzera rotazione"
 msgid "Ocular view"
 msgstr "Visione oculare"
 
-#: plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/Oculars.cpp:1298
 msgid "Oculars popup menu"
 msgstr "Menù dell'oculare"
 
-#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/Oculars.cpp:1299
 msgid "Show crosshairs"
 msgstr "Visualizza mirino"
 
-#: plugins/Oculars/src/Oculars.cpp:1299
+#: plugins/Oculars/src/Oculars.cpp:1300
 msgid "Image sensor frame"
 msgstr "Area sensore d'immagine"
 
-#: plugins/Oculars/src/Oculars.cpp:1300
+#: plugins/Oculars/src/Oculars.cpp:1301
 msgid "Telrad sight"
 msgstr "Vista Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1301
+#: plugins/Oculars/src/Oculars.cpp:1302
 msgid "Oculars plugin configuration"
 msgstr "Configurazione del plugin Oculari"
 
-#: plugins/Oculars/src/Oculars.cpp:1303
+#: plugins/Oculars/src/Oculars.cpp:1304
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1305
+#: plugins/Oculars/src/Oculars.cpp:1306
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1307
+#: plugins/Oculars/src/Oculars.cpp:1308
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1309
+#: plugins/Oculars/src/Oculars.cpp:1310
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1536
+#: plugins/Oculars/src/Oculars.cpp:1537
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:499
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Oculare #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1541
+#: plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Oculare #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/Oculars.cpp:1556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:540
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Lungh. foc. oc.: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1562
+#: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Campo app. oc.: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:1574
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lente #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/Oculars.cpp:1579
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lente #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1583
+#: plugins/Oculars/src/Oculars.cpp:1584
 msgid "Lens: none"
 msgstr "Lente: nessuna"
 
-#: plugins/Oculars/src/Oculars.cpp:1593 plugins/Oculars/src/Oculars.cpp:1650
+#: plugins/Oculars/src/Oculars.cpp:1594 plugins/Oculars/src/Oculars.cpp:1651
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescopio #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1598 plugins/Oculars/src/Oculars.cpp:1655
+#: plugins/Oculars/src/Oculars.cpp:1599 plugins/Oculars/src/Oculars.cpp:1656
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescopio #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1609
+#: plugins/Oculars/src/Oculars.cpp:1610
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Magnificazione: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1617
+#: plugins/Oculars/src/Oculars.cpp:1618
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1627
+#: plugins/Oculars/src/Oculars.cpp:1628
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:779
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensioni: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1632
+#: plugins/Oculars/src/Oculars.cpp:1633
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:642
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensore #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1636
+#: plugins/Oculars/src/Oculars.cpp:1637
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensore #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1887
+#: plugins/Oculars/src/Oculars.cpp:1888
 msgid "&Lens"
 msgstr "&Lente"
 
-#: plugins/Oculars/src/Oculars.cpp:1888
+#: plugins/Oculars/src/Oculars.cpp:1889
 msgid "&Previous lens"
 msgstr "Lente &precedente"
 
-#: plugins/Oculars/src/Oculars.cpp:1889
+#: plugins/Oculars/src/Oculars.cpp:1890
 msgid "&Next lens"
 msgstr "Lente &successiva"
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1920
 msgid "&Telescope"
 msgstr "&Telescopio"
 
-#: plugins/Oculars/src/Oculars.cpp:1920
+#: plugins/Oculars/src/Oculars.cpp:1921
 msgid "&Previous telescope"
 msgstr "Telescopio &precedente"
 
-#: plugins/Oculars/src/Oculars.cpp:1921
+#: plugins/Oculars/src/Oculars.cpp:1922
 msgid "&Next telescope"
 msgstr "&Prossimo telescopio"
 
@@ -5042,6 +5055,7 @@ msgid "About"
 msgstr "Informazioni"
 
 #: plugins/Satellites/src/Satellites.cpp:66
+#: plugins/Satellites/src/Satellites.cpp:133
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "Satellites"
 msgstr "Satelliti"
@@ -5054,19 +5068,19 @@ msgstr ""
 "Predizione delle posizioni di un satellite artificiale basate sui dati NORAD "
 "TLE"
 
-#: plugins/Satellites/src/Satellites.cpp:133
+#: plugins/Satellites/src/Satellites.cpp:134
 msgid "Satellite hints"
 msgstr "Consigli satellite"
 
-#: plugins/Satellites/src/Satellites.cpp:134
+#: plugins/Satellites/src/Satellites.cpp:135
 msgid "Satellite labels"
 msgstr "Etichette satelliti"
 
-#: plugins/Satellites/src/Satellites.cpp:135
+#: plugins/Satellites/src/Satellites.cpp:136
 msgid "Satellites configuration window"
 msgstr "Finestra configurazione satelliti"
 
-#: plugins/Satellites/src/Satellites.cpp:162
+#: plugins/Satellites/src/Satellites.cpp:163
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -5074,62 +5088,62 @@ msgstr ""
 "default"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1584
+#: plugins/Satellites/src/Satellites.cpp:1585
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1586
+#: plugins/Satellites/src/Satellites.cpp:1587
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1588
+#: plugins/Satellites/src/Satellites.cpp:1589
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1590
+#: plugins/Satellites/src/Satellites.cpp:1591
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1592
+#: plugins/Satellites/src/Satellites.cpp:1593
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1594
+#: plugins/Satellites/src/Satellites.cpp:1595
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1596
+#: plugins/Satellites/src/Satellites.cpp:1597
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1598
+#: plugins/Satellites/src/Satellites.cpp:1599
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1600
+#: plugins/Satellites/src/Satellites.cpp:1601
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1602
+#: plugins/Satellites/src/Satellites.cpp:1603
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1613
+#: plugins/Satellites/src/Satellites.cpp:1614
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1615
+#: plugins/Satellites/src/Satellites.cpp:1616
 msgid "The International Space Station"
 msgstr ""
 
@@ -5785,6 +5799,7 @@ msgstr "Scarta"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:160
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:166
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:175
 msgid "Telescope Control"
 msgstr "Controllo telescopio"
@@ -7881,6 +7896,7 @@ msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Prossima Luna piena: %1 %2 at %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:262
+#: plugins/Observability/src/Observability.cpp:263
 msgid "Observability"
 msgstr "Osservabilità"
 
@@ -8276,12 +8292,6 @@ msgstr "Altitudine del sole al tramonto: 0 gradi."
 
 #~ msgid "Keys"
 #~ msgstr "Tasti"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Varie"
-
-#~ msgid "Windows"
-#~ msgstr "Finestre"
 
 #~ msgid "Full-screen mode"
 #~ msgstr "Modalità schermo intero"
