@@ -154,13 +154,13 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	StelGuiBase::init(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
-	locationDialog = new LocationDialog();
-	helpDialog = new HelpDialog();
-	dateTimeDialog = new DateTimeDialog();
-	searchDialog = new SearchDialog();
-	viewDialog = new ViewDialog();
-	shortcutsDialog = new ShortcutsDialog();
-	configurationDialog = new ConfigurationDialog(this);
+	locationDialog = new LocationDialog(atopLevelGraphicsWidget);
+	helpDialog = new HelpDialog(atopLevelGraphicsWidget);
+	dateTimeDialog = new DateTimeDialog(atopLevelGraphicsWidget);
+	searchDialog = new SearchDialog(atopLevelGraphicsWidget);
+	viewDialog = new ViewDialog(atopLevelGraphicsWidget);
+	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
+	configurationDialog = new ConfigurationDialog(this, atopLevelGraphicsWidget);
 #ifdef ENABLE_SCRIPT_CONSOLE
 	scriptConsole = new ScriptConsole();
 #endif

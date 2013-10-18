@@ -148,7 +148,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 Vec3f Supernova::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Supernova::getVMagnitude(const StelCore* core) const
@@ -225,9 +225,6 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
-
 	RCMag rcMag;
 	float size, shift;
 	double mag;

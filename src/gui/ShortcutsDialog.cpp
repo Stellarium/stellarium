@@ -59,7 +59,8 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 }
 
 
-ShortcutsDialog::ShortcutsDialog() :
+ShortcutsDialog::ShortcutsDialog(QObject* parent) :
+	StelDialog(parent),
 	ui(new Ui_shortcutsDialogForm),
 	filterModel(new ShortcutsFilterModel(this)),
 	mainModel(new QStandardItemModel(this))

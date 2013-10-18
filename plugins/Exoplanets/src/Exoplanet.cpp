@@ -342,7 +342,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 Vec3f Exoplanet::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Exoplanet::getVMagnitude(const StelCore* core) const
@@ -410,9 +410,6 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 	Vec3f color = Vec3f(0.4f,0.9f,0.5f);
 	if (hasHabitableExoplanets)
 		color = Vec3f(1.f,0.5f,0.f);
-
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
 
 	double mag = getVMagnitudeWithExtinction(core);
 

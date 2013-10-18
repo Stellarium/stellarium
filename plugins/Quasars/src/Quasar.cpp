@@ -143,7 +143,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 Vec3f Quasar::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Quasar::getVMagnitude(const StelCore* core) const
@@ -168,9 +168,6 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
 	Vec3f dcolor = Vec3f(1.0f,0.5f,0.4f);
-	if (StelApp::getInstance().getVisionModeNight())
-		dcolor = StelUtils::getNightColor(dcolor);
-
 	RCMag rcMag;
 	float size, shift=0;
 	double mag;
