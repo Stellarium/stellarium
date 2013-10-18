@@ -58,7 +58,11 @@
 #include <QDebug>
 #include <QDir>
 
-SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
+SolarSystem::SolarSystem()
+	: moonScale(1.),
+	  flagOrbits(false),
+	  flagLightTravelTime(false),
+	  allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");

@@ -298,11 +298,6 @@ public:
 	//! Saves the current list of update URLs to the configuration file.
 	void saveTleSources(const QStringList& urls);
 	
-	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	// TODO: Plugin-specific styles are no longer necessary?
-	const StelStyle getModuleStyleSheet(const StelStyle& style);
-
 	//! Reads update file(s) in celestrak's .txt format, and updates
 	//! the TLE elements for exisiting satellites from them.
 	//! Indirectly emits signals updateStateChanged() and tleUpdateComplete(),
@@ -555,9 +550,7 @@ private:
 	//@}
 
 	// GUI
-	SatellitesDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
+	SatellitesDialog* configDialog;	
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
