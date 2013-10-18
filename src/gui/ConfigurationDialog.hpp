@@ -37,14 +37,13 @@ class ConfigurationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	ConfigurationDialog(StelGui* agui);
+	ConfigurationDialog(StelGui* agui, QObject* parent);
 	virtual ~ConfigurationDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

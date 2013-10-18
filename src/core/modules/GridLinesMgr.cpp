@@ -311,19 +311,7 @@ void SkyGrid::draw(const StelCore* core) const
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	Vec4f textColor(color[0], color[1], color[2], 0);
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		// instead of a filter which just zeros G&B, set the red
-		// value to the mean brightness of RGB.
-		float red = (color[0] + color[1] + color[2]) / 3.0;
-		textColor[0] = red;
-		textColor[1] = 0.; textColor[2] = 0.;
-		sPainter.setColor(red, 0, 0, fader.getInterstate());
-	}
-	else
-	{
-		sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
-	}
+	sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
 
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
