@@ -278,6 +278,7 @@ void SkyGui::updateBarsPos()
 
 void SkyGui::setStelStyle(const QString& style)
 {
+	Q_UNUSED(style);
 	buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 	buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));

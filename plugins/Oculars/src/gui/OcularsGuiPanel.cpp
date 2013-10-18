@@ -415,7 +415,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)),
-	        this, SLOT(setColorScheme(const QString&)));
+		this, SLOT(setColorScheme(const QString&)));
 	setColorScheme(stelApp.getCurrentStelStyle());
 }
 
@@ -1035,6 +1035,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 
 void OcularsGuiPanel::setColorScheme(const QString &schemeName)
 {
+	Q_UNUSED(schemeName);
 	borderPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	borderPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 	setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
