@@ -71,8 +71,14 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 }
 
 Satellites::Satellites()
-	: satelliteListModel(NULL), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
-	  earth(NULL), defaultHintColor(0.0, 0.4, 0.6), defaultOrbitColor(0.0, 0.3, 0.6),
+	: satelliteListModel(NULL),
+	  pxmapGlow(NULL),
+	  pxmapOnIcon(NULL),
+	  pxmapOffIcon(NULL),
+	  toolbarButton(NULL),
+	  earth(NULL),
+	  defaultHintColor(0.0, 0.4, 0.6),
+	  defaultOrbitColor(0.0, 0.3, 0.6),
 	  progressBar(NULL)
 {
 	setObjectName("Satellites");
@@ -194,23 +200,6 @@ void Satellites::init()
 	        SIGNAL(locationChanged(StelLocation)),
 	        this,
 	        SLOT(updateObserverLocation(StelLocation)));
-	
-	//Load the module's custom style sheets
-	QFile styleSheetFile;
-	styleSheetFile.setFileName(":/satellites/normalStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		normalStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-	styleSheetFile.setFileName(":/satellites/nightStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		nightStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
@@ -246,22 +235,6 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 
 	return true;
 }
-
-const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
-{
-	StelStyle pluginStyle(style);
-	if (style.confSectionName == "color")
-	{
-		pluginStyle.qtStyleSheet.append(normalStyleSheet);
-	}
-	else
-	{
-		pluginStyle.qtStyleSheet.append(nightStyleSheet);
-	}
-	return pluginStyle;
-}
-
-
 
 double Satellites::getCallOrder(StelModuleActionName actionName) const
 {
