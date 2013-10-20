@@ -1065,8 +1065,8 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 QString hoursToHmsStr(const double hours)
 {
 	int h = (int)hours;
-	int m = (int)((std::abs(hours)-std::abs(h))*60);
-	float s = (((std::abs(hours)-std::abs(h))*60)-m)*60;
+	int m = (int)((std::abs(hours)-std::abs(double(h)))*60);
+	float s = (((std::abs(hours)-std::abs(double(h)))*60)-m)*60;
 
 	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
 }
