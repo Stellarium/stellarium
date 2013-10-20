@@ -43,6 +43,8 @@
 #include <QTimer>
 #include <QDir>
 
+#include <locale>
+
 #ifndef DISABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
  #include "StelMainScriptAPIProxy.hpp"
