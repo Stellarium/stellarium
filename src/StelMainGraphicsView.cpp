@@ -43,9 +43,7 @@
 #include <QTimer>
 #include <QDir>
 
-#ifdef Q_OS_FREEBSD
 #include <locale>
-#endif
 
 #ifndef DISABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
