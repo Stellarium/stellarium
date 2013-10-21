@@ -66,6 +66,8 @@ class CustomProxy : public QGraphicsProxyWidget
 
 StelDialog::StelDialog(QObject* parent) : QObject(parent), dialog(NULL)
 {
+	if (parent == NULL)
+		setParent(StelMainView::getInstance().getGuiWidget());
 }
 
 StelDialog::~StelDialog()
