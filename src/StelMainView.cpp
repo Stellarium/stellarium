@@ -179,6 +179,7 @@ StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
 	connect(this, &StelGuiItem::widthChanged, this, &StelGuiItem::onSizeChanged);
 	connect(this, &StelGuiItem::heightChanged, this, &StelGuiItem::onSizeChanged);
 	widget = new QGraphicsWidget(this);
+	StelMainView::getInstance().guiWidget = widget;
 	StelApp::getInstance().getGui()->init(widget);
 }
 
@@ -517,4 +518,3 @@ void StelMainView::doScreenshot(void)
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }
-
