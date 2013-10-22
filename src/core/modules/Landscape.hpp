@@ -103,8 +103,13 @@ public:
 	float getLandscapeNightBrightness() const {return defaultBrightness;}
 	// GZ: RENAME TO getLandscapeMinBrightness()?
 
-	//! Set the z-axis rotation (offset from original value when rotated
-	void setZRotation(float d) {angleRotateZOffset = d;}
+	//! Set an additional z-axis (azimuth) rotation after landscape has been loaded.
+	//! This is intended for special uses such as when the landscape consists of
+	//! a vehicle which might change orientation over time (e.g. a ship). It is called
+	//! e.g. by the LandscapeMgr. Contrary to that, the purpose of the azimuth rotation
+	//! (landscape/[decor_]angle_rotatez) in landscape.ini is to orient the pano.
+	//! @param d the rotation angle in degrees.
+	void setZRotation(float d) {angleRotateZOffset = d * M_PI/180.0f;}
 
 protected:
 	//! Load attributes common to all landscapes
@@ -145,8 +150,15 @@ protected:
 	// GZ: Maybe this can be used to configure upper border, and a texture CLAMP setting?
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
-	float angleRotateZ;    //! if pano does not have its left border in the east, rotate in azimuth.
-	float angleRotateZOffset; // TBD: WHAT IS THIS?
+	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]rotate
+	float angleRotateZOffset; //! [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
+							  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
+//	//QString lineFileName; //! GZ NEW: optional filename (within landscape dir) with a definition of line strips.
+	OctahedronPolygon *horizonPolygon; //! GZ New: Optional element describing the horizon line.
+									  //! Data shall be read from the file given as landscape.ini[landscape]horizon_poly_file
+									  //! For LandscapePolygonal, this is the only horizon data item.
+	Vec3f horizonPolygonColor ; //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
+								//! specified in landscape.ini[landscape]horizon_poly_file. TBD: Default?
 };
 
 //! @class LandscapeOldStyle
@@ -189,8 +201,8 @@ private:
 	float fogAngleShift;
 	float decorAltAngle; // vertical extent of the side panels
 	float decorAngleShift;
-	float groundAngleShift;
-	float groundAngleRotateZ;
+	float groundAngleShift; //! [radians]: altitude of the bottom plane. Usually negative and equal to decorAngleShift
+	float groundAngleRotateZ; //! [radians]
 	int drawGroundFirst;
 	bool tanMode;		// Whether the angles should be converted using tan instead of sin, i.e., for a cylindrical pano
 	bool calibrated;	// if true, the documented altitudes are indeed correct (the original code is buggy!)
@@ -203,6 +215,25 @@ private:
 	QList<LOSSide> precomputedSides;
 };
 
+/////////////////////////////////////////////////////////
+///
+//! @class LandscapePolygonal
+//! This uses the list of (usually measured) horizon altitudes to define the horizon. It will be colored
+// GZ TODO: Implement...
+class LandscapePolygonal : public Landscape
+{
+public:
+	LandscapePolygonal(float radius = 1.f);
+	virtual ~LandscapePolygonal();
+	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
+	virtual void draw(StelCore* core);
+	void create(const QString name, const QString& lineFileName);
+private:
+	Vec3f groundColor; //< the base color to use for filling the ground
+};
+
+///////////////////////////////////////////////////////////////
+///
 //! @class LandscapeFisheye
 //! This uses a single image in fisheye projection. The image is typically square, ...
 //! @param texFov:  DESCRIBE CLEARLY
@@ -215,6 +246,12 @@ public:
 	virtual ~LandscapeFisheye();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
+	//! create a fisheye landscape from basic parameters (no ini file needed).
+	//! @param name Landscape name
+	//! @param maptex the fisheye texture
+	//! @param maptexIllum the fisheye texture that is overlaid in the night (streetlights, skyglow, ...)
+	//! @param texturefov field of view for the photo, degrees
+	//! @param angleRotateZ azimuth rotation angle, degrees
 	void create(const QString name, const QString& maptex, float texturefov, float angleRotateZ);
 	void create(const QString name, const QString& maptex, const QString& maptexIllum, float texturefov, float angleRotateZ);
 private:
@@ -226,8 +263,9 @@ private:
 	float texFov;
 };
 
+//////////////////////////////////////////////////////////////////////////
 //! @class LandscapeSpherical
-//! This uses a single panorama image in spherical projection. A complete image is rectangular with the horizon forming a
+//! This uses a single panorama image in spherical (equirectangular) projection. A complete image is rectangular with the horizon forming a
 //! horizontal line centered vertically, and vertical altitude angles linearly mapped in image height.
 //! Since 0.13 and Qt5, large images of 8192x4096 pixels are available.
 //! If @param angleRotateZ==0, the left/right image border is due east.
@@ -239,6 +277,11 @@ public:
 	virtual ~LandscapeSpherical();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
+	//! create a spherical landscape from basic parameters (no ini file needed).
+	//! @param name Landscape name
+	//! @param maptex the equirectangular texture
+	//! @param maptexIllum the equirectangular texture that is overlaid in the night (streetlights, skyglow, ...)
+	//! @param angleRotateZ azimuth rotation angle, degrees
 	void create(const QString name, const QString& maptex, float angleRotateZ);
 	void create(const QString name, const QString& maptex, const QString& maptexIllum, float angleRotateZ);
 private:

@@ -248,6 +248,10 @@ static void ComputeCosSinTheta(float phi,int segments)
 	}
 }
 
+//! Compute cosines and sines around a circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian.
+//! GZ: change to allow leaving away a pole cap?
 static void ComputeCosSinRho(float phi, int segments)
 {
 	float *cos_sin = cos_sin_rho;
@@ -1463,7 +1467,7 @@ void StelPainter::drawLine2d(float x1, float y1, float x2, float y2)
 
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode
-void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture, float topAngle)
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1503,9 +1507,10 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		t=1.f;
 	}
 
-	const float drho = M_PI / stacks;
+	const float drho = (M_PI-topAngle) / stacks;
 	Q_ASSERT(stacks<=MAX_STACKS);
 	ComputeCosSinRho(drho,stacks);
+	// GZ: TODO: Add parameter or change this function, so that pole region may remain free.
 	float* cos_sin_rho_p;
 
 	const float dtheta = 2.f * M_PI / slices;
