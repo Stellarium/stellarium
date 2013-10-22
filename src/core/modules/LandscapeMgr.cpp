@@ -240,8 +240,16 @@ void LandscapeMgr::update(double deltaTime)
 		landscapeBrightness = initBrightness;
 	else
 		landscapeBrightness = (initBrightness + 1.5*(sinSunAngleRad+0.1/1.5));
+
+
+	// GZ: 2013-09-25 Take light pollution into account!
+	StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+	float pollutionBrightness=(drawer->getBortleScale()-1.0f)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
+	float lunarAddonBrightness;
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.)*moonPos[2];
+		lunarAddonBrightness = qMax(0.2/-12.*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.)*moonPos[2];
+
+	landscapeBrightness += qMax(lunarAddonBrightness, pollutionBrightness);
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
@@ -259,10 +267,15 @@ void LandscapeMgr::update(double deltaTime)
 	if (core->getCurrentLocation().planetName.contains("Sun"))
 	{
 		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
-		landscape->setBrightness(1.f);
+		landscape->setBrightness(1.f, 0.0f);
 	}
 	else
-		landscape->setBrightness(landscapeBrightness+0.05);
+	{   float lightscapeBrightness=0.0f;
+		// night pollution brightness is mixed in at -3...-8 degrees.
+		if (sunPos[2]<-0.14f) lightscapeBrightness=1.0f;
+		else if (sunPos[2]<-0.05f) lightscapeBrightness = 1.0f-(sunPos[2]+0.14)/(-0.05+0.14);
+		landscape->setBrightness(landscapeBrightness+0.025, lightscapeBrightness);
+	}
 }
 
 void LandscapeMgr::draw(StelCore* core)
@@ -986,6 +999,9 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 QString LandscapeMgr::getDescription() const
 {
 	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	// GZ found in 20130926: The next line seems very ad-hoc.
+	// TODO: Find a general solution for all locales, like en_CA, fr_CA, en_AU, de_AT, de_CH, etc.
+	// Optimally, description files may have all variants. Only if e.g. en_CA not found, fallback to en.
 	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
 	{
 		lang = lang.split("_").at(0);

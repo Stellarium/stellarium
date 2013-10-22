@@ -37,12 +37,27 @@ class StelPainter;
 
 //! @class Landscape
 //! Store and manages the displaying of the Landscape.
-//! Don't use this class direcly, use the LandscapeMgr.
+//! Don't use this class directly, use the LandscapeMgr.
+//! A landscape's most important element is a photo panorama.
+//! Optional components include:
+//!  - A fog texture that is displayed with the Fog [F] command.
+//!  - A location. It is possible to auto-move to the location when loading.
+//!  - Atmospheric conditions: temperature/pressure/extinction coefficient.
+//!  - Light pollution information (Bortle index)
+//!  - A night texture that gets blended over the dimmed daylight panorama. (Currently for Spherical and Fisheye only)
+//!  - You can set a minimum brightness level to prevent too dark landscape.
+//! We discern:
+//!   @param LandscapeId: The directory name of the landscape.
+//!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, UTF8, ...) GZ:VERIFY!
 class Landscape
 {
 public:
 	Landscape(float _radius = 2.f);
 	virtual ~Landscape();
+	//! Load landscape.
+	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
+	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
+	//         TBD: Is this really only last part of directory? Or fullPath?
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
 	virtual void draw(StelCore* core) = 0;
 	void update(double deltaTime)
@@ -51,8 +66,9 @@ public:
 		fogFader.update((int)(deltaTime*1000));
 	}
 
-	//! Set the brightness of the landscape
-	void setBrightness(const float b) {skyBrightness = b;}
+	//! Set the brightness of the landscape plus brightness of optional add-on night lightscape.
+	//! This is called in each draw().
+	void setBrightness(const float b, const float pollutionBrightness=0.0f) {skyBrightness = b; lightScapeBrightness=pollutionBrightness; }
 
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(const bool b) {landFader=b;}
@@ -77,21 +93,22 @@ public:
 	int getDefaultFogSetting() const {return defaultFogSetting;}
   	//! Return default atmosperic extinction, mag/airmass, or -1 (no change)
 	float getDefaultAtmosphericExtinction() const {return defaultExtinctionCoefficient;}
-	//! Return default atmospheric temperature, for refraction computation, or -1000 for "unknown/no change".
+	//! Return configured atmospheric temperature, for refraction computation, or -1000 for "unknown/no change".
 	float getDefaultAtmosphericTemperature() const {return defaultTemperature;}
-	//! Return default atmospheric temperature, for refraction computation.
-	//! returns -1 to signal "standard conditions", or -2 for "unknown/invalid/no change"
+	//! Return configured atmospheric pressure, for refraction computation.
+	//! returns -1 to signal "standard conditions" [compute from altitude], or -2 for "unknown/invalid/no change"
 	float getDefaultAtmosphericPressure() const {return defaultPressure;}
 	//! Return default brightness for landscape
 	//! returns -1 to signal "standard conditions" (use default value from config.ini)
 	float getLandscapeNightBrightness() const {return defaultBrightness;}
+	// GZ: RENAME TO getLandscapeMinBrightness()?
 
 	//! Set the z-axis rotation (offset from original value when rotated
 	void setZRotation(float d) {angleRotateZOffset = d;}
 
 protected:
 	//! Load attributes common to all landscapes
-	//! @param landscapeIni A reference to an existant QSettings object which describes the landscape
+	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
 	void loadCommon(const QSettings& landscapeIni, const QString& landscapeId);
 
@@ -101,36 +118,50 @@ protected:
 	//! @exception misc possibility of throwing "file not found" exceptions
 	const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	float radius;
-	QString name;
+	QString name;          //! GZ:  Given in landscape.ini:[landscape]name TBD: VERIFY
+	QString author;        //! GZ:  Given in landscape.ini:[landscape]author TBD: VERIFY
+	QString description;   //! GZ:  Given in landscape.ini:[landscape]description TBD: VERIFY
 	float skyBrightness;
 	float nightBrightness;
-	float defaultBrightness;
-	bool validLandscape;   // was a landscape loaded properly?
-	LinearFader landFader;
-	LinearFader fogFader;
-	QString author;
-	QString description;
+	float defaultBrightness; //! GZ: some small brightness, allows minimum visibility that cannot be underpowered. VERIFY
+	float lightScapeBrightness; //! can be used to draw nightscape texture (e.g. city light pollution), if available.
+	bool validLandscape;   //! was a landscape loaded properly?
+	LinearFader landFader; //! Used to slowly fade in/out landscape painting.
+	LinearFader fogFader;  //! Used to slowly fade in/out fog painting.
 	// GZ patched, these can now be set in landscape.ini:
-	int rows; // horizontal rows
-	int cols; // vertical columns
-        int defaultBortleIndex; // light pollution from landscape.ini, or -1(no change)
-        int defaultFogSetting; // fog flag setting from landscape.ini: -1(no change), 0(off), 1(on)
-        double defaultExtinctionCoefficient; // atmospheric_extinction_coefficient from landscape.ini or -1
-        double defaultTemperature; // atmospheric_temperature from landscape.ini or -1000.0
-        double defaultPressure; // atmospheric_pressure from landscape.ini or -1.0
+	int rows; //! horizontal rows.  May be given in landscape.ini. More indicates higher accuracy, but is slower.
+	int cols; //! vertical columns. May be given in landscape.ini. More indicates higher accuracy, but is slower.
+	int defaultBortleIndex; // light pollution from landscape.ini, or -1(no change). Default: -1
+	int defaultFogSetting; // fog flag setting from landscape.ini: -1(no change), 0(off), 1(on). Default: -1
+	double defaultExtinctionCoefficient; // atmospheric_extinction_coefficient from landscape.ini or -1 (no change; default).
+	double defaultTemperature; // atmospheric_temperature from landscape.ini or -1000.0 (no change; default)
+	double defaultPressure; // atmospheric_pressure from landscape.ini or -1.0 (compute from location.altitude). VERIFY!
 
 	typedef struct
 	{
 		StelTextureSP tex;
 		float texCoords[4];
 	} landscapeTexCoord;
+	// GZ: Maybe this can be used to configure upper border, and a texture CLAMP setting?
 
-	StelLocation location;
-	float angleRotateZ;
-	float angleRotateZOffset;
+	StelLocation location; //! OPTIONAL. If present, can be used to set location.
+	float angleRotateZ;    //! if pano does not have its left border in the east, rotate in azimuth.
+	float angleRotateZOffset; // TBD: WHAT IS THIS?
 };
 
-
+//! @class LandscapeOldStyle
+//! This was the original landscape, introduced for decorative purposes. It segments the horizon in several tiles
+//! (usually 4 or 8), therefore allowing very high resolution horizons also on limited hardware,
+//! and closes the ground with a separate bottom piece. (You may want to configure a map with pointers or a compass rose!)
+//! You can use panoramas created in equirectangular or cylindrical coordinates, for the latter case set
+//! [landscape]tan_mode=true.
+//! Until V0.10.5 there was an undetected bug involving vertical positioning. For historical reasons (many landscapes
+//! were already configured and published), it was decided to keep this bug as feature, but a fix for new landscapes is
+//! available: [landscape]calibrated=true. With this, vertical positioning is accurate.
+//! As of 0.10.6, the fix is only valid for equirectangular panoramas.
+//! TODO (still as of 0.12.*): implement [landscape]calibrated=true for [landscape]tan_mode=true
+//! It is more involved to configure, but may be required if you require the resolution, e.g. for alignment studies
+//! for archaeoastronomy. In this case, don't forget to set calibrated=true in landscape.ini.
 class LandscapeOldStyle : public Landscape
 {
 public:
@@ -156,13 +187,13 @@ private:
 	int nbDecorRepeat;
 	float fogAltAngle;
 	float fogAngleShift;
-	float decorAltAngle;
+	float decorAltAngle; // vertical extent of the side panels
 	float decorAngleShift;
 	float groundAngleShift;
 	float groundAngleRotateZ;
 	int drawGroundFirst;
-	bool tanMode;		// Whether the angles should be converted using tan instead of sin
-	bool calibrated;	// if true, the documented altitudes are inded correct (the original code is buggy!)
+	bool tanMode;		// Whether the angles should be converted using tan instead of sin, i.e., for a cylindrical pano
+	bool calibrated;	// if true, the documented altitudes are indeed correct (the original code is buggy!)
 	struct LOSSide
 	{
 		StelVertexArray arr;
@@ -172,6 +203,11 @@ private:
 	QList<LOSSide> precomputedSides;
 };
 
+//! @class LandscapeFisheye
+//! This uses a single image in fisheye projection. The image is typically square, ...
+//! @param texFov:  DESCRIBE CLEARLY
+//! If @param angleRotateZ==0, the top image border is due south.
+// GZ TODO: find out opening angle or details on projection?
 class LandscapeFisheye : public Landscape
 {
 public:
@@ -180,13 +216,22 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
 	void create(const QString name, const QString& maptex, float texturefov, float angleRotateZ);
+	void create(const QString name, const QString& maptex, const QString& maptexIllum, float texturefov, float angleRotateZ);
 private:
 
-	StelTextureSP mapTex;
+	StelTextureSP mapTex;      //!< The fisheye image, centered on the zenith.
+	StelTextureSP mapTexIllum; //!< Optional fisheye image of identical size (create as layer in your favorite image processor) or at least, proportions.
+							   //!< To simulate light pollution (skyglow), street lights, light in windows, ... at night
+
 	float texFov;
 };
 
-
+//! @class LandscapeSpherical
+//! This uses a single panorama image in spherical projection. A complete image is rectangular with the horizon forming a
+//! horizontal line centered vertically, and vertical altitude angles linearly mapped in image height.
+//! Since 0.13 and Qt5, large images of 8192x4096 pixels are available.
+//! If @param angleRotateZ==0, the left/right image border is due east.
+// GZ TODO: Allow sky portion to be cut away.?
 class LandscapeSpherical : public Landscape
 {
 public:
@@ -195,9 +240,12 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
 	void create(const QString name, const QString& maptex, float angleRotateZ);
+	void create(const QString name, const QString& maptex, const QString& maptexIllum, float angleRotateZ);
 private:
 
-	StelTextureSP mapTex;
+	StelTextureSP mapTex;      //!< The equirectangular panorama texture
+	StelTextureSP mapTexIllum; //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
+							   //!< To simulate light pollution (skyglow), street lights, light in windows, ... at night
 };
 
 #endif // _LANDSCAPE_HPP_
