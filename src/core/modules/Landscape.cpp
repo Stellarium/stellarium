@@ -31,13 +31,14 @@
 #include <QSettings>
 #include <QVarLengthArray>
 
-Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), nightBrightness(0.8), angleRotateZOffset(0.)
+Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), nightBrightness(0.8), angleRotateZOffset(0.), horizonPolygon(NULL)
 {
 	validLandscape = 0;
 }
 
 Landscape::~Landscape()
 {
+	if (horizonPolygon) delete horizonPolygon;
 }
 
 
@@ -51,7 +52,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	description = description.replace("\\n", " ");
 	if (name.isEmpty())
 	{
-		qWarning() << "No valid landscape definition found for landscape ID "
+		qWarning() << "No valid landscape definition (no name) found for landscape ID "
 			<< landscapeId << ". No landscape in use." << endl;
 		validLandscape = 0;
 		return;
@@ -62,14 +63,8 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	}
 
 	// Optional data
-	// Patch GZ:
-	if (landscapeIni.contains("landscape/tesselate_rows"))
-		rows = landscapeIni.value("landscape/tesselate_rows").toInt();
-	else rows=20;
-	if (landscapeIni.contains("landscape/tesselate_cols"))
-		cols = landscapeIni.value("landscape/tesselate_cols").toInt();
-	else cols=40;
-
+	rows = landscapeIni.value("landscape/tesselate_rows", 20).toInt();
+	cols = landscapeIni.value("landscape/tesselate_cols", 40).toInt();
 
 	if (landscapeIni.contains("location/planet"))
 		location.planetName = landscapeIni.value("location/planet").toString();
@@ -91,18 +86,15 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		location.name = name;
 	location.landscapeKey = name;
 	// New entries by GZ.
-	if (landscapeIni.contains("location/light_pollution"))
-		defaultBortleIndex = landscapeIni.value("location/light_pollution").toInt();
-	else defaultBortleIndex=-1; // mark "invalid/no change".
-	if (defaultBortleIndex<=0) defaultBortleIndex=-1; // also allow neg. values in ini file, signalling "no change".
+	defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
+	if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".
 	if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
-
 
 	defaultFogSetting = landscapeIni.value("location/display_fog", -1).toInt();
 	defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
 	defaultTemperature = landscapeIni.value("location/atmospheric_temperature", -1000.0).toDouble();
-	defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble();
-	// Set night brightness for landscape
+	defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble(); // -2=no change! [-1=computeFromAltitude]
+	// Set night (minimal) brightness for landscape
 	defaultBrightness = landscapeIni.value("landscape/initial_brightness", -1.0).toDouble();
 }
 
@@ -135,12 +127,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// TODO: put values into hash and call create method to consolidate code
 	loadCommon(landscapeIni, landscapeId);
 
-	if (landscapeIni.contains("landscape/tesselate_rows"))
-		rows = landscapeIni.value("landscape/tesselate_rows").toInt();
-	else rows=8;
-	if (landscapeIni.contains("landscape/tesselate_cols"))
-		cols = landscapeIni.value("landscape/tesselate_cols").toInt();
-	else cols=16;
+	rows = landscapeIni.value("landscape/tesselate_rows", 8).toInt();
+	cols = landscapeIni.value("landscape/tesselate_cols", 16).toInt();
 
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "old_style")
@@ -221,9 +209,9 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toFloat();
 	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toFloat();
 	decorAngleShift    = landscapeIni.value("landscape/decor_angle_shift", 0.).toFloat();
-	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toFloat();
-	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toFloat();
-	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toFloat();
+	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toFloat() * M_PI/180.f;
+	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toFloat() * M_PI/180.f;
+	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toFloat() * M_PI/180.f;
 	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
@@ -260,8 +248,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
-	float y0 = radius*std::cos(angleRotateZ*M_PI/180.f);
-	float x0 = radius*std::sin(angleRotateZ*M_PI/180.f);
+	float y0 = radius*std::cos(angleRotateZ);
+	float x0 = radius*std::sin(angleRotateZ);
 
 	LOSSide precompSide;
 	precompSide.arr.primitiveType=StelVertexArray::Triangles;
@@ -373,7 +361,8 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
 	//       (2) Implement calibrated && tan_mode
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
+	// note that angleRotateZOffset is always zero unless changed during runtime by LandscapeMgr::setZRotation().
+	transfo->combine(Mat4d::zrotation(-angleRotateZOffset));
 
 	sPainter.setProjector(core->getProjection(transfo));
 
@@ -398,10 +387,10 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	if (!landFader.getInterstate())
 		return;
 	const float vshift = (tanMode || calibrated) ?
-	  radius*std::tan(groundAngleShift*M_PI/180.) :
-	  radius*std::sin(groundAngleShift*M_PI/180.);
+	  radius*std::tan(groundAngleShift) :
+	  radius*std::sin(groundAngleShift);
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift)));
+	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset) * Mat4d::translation(Vec3d(0,0,vshift)));
 
 	sPainter.setProjector(core->getProjection(transfo));
 	if (StelApp::getInstance().getVisionModeNight())
@@ -452,19 +441,19 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 
 
 // create a fisheye landscape from basic parameters (no ini file needed)
-void LandscapeFisheye::create(const QString _name, const QString& _maptex, float atexturefov, float aangleRotateZ)
+void LandscapeFisheye::create(const QString _name, const QString& _maptex, float _texturefov, float _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
-	texFov = atexturefov*M_PI/180.f;
-	angleRotateZ = aangleRotateZ*M_PI/180.f;
+	texFov = _texturefov*M_PI/180.f;
+	angleRotateZ = _angleRotateZ*M_PI/180.f;
 }
-void LandscapeFisheye::create(const QString _name, const QString& _maptex, const QString& _maptexNight, float atexturefov, float aangleRotateZ)
+void LandscapeFisheye::create(const QString _name, const QString& _maptex, const QString& _maptexNight, float _texturefov, float _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
-	create(_name, _maptex, atexturefov, aangleRotateZ);
+	create(_name, _maptex, _texturefov, _angleRotateZ);
 	mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexNight, StelTexture::StelTextureParams(true));
 }
 
@@ -475,7 +464,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	if(!landFader.getInterstate()) return;
 
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	transfo->combine(Mat4d::zrotation(-(angleRotateZ+angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
 
@@ -549,7 +538,8 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 // create a spherical landscape from basic parameters (no ini file needed)
 void LandscapeSpherical::create(const QString _name, const QString& _maptex, float _angleRotateZ)
 {
-	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
+	//qDebug() << "LandscapeSpherical::create():"<< _name << " " << _fullpath << " " << _maptex << " " << _angleRotateZ;
+	qDebug() << "LandscapeSpherical::create():"<< _name << " " << _maptex << " " << _angleRotateZ;
 	validLandscape = 1;  // assume ok...
 	name = _name;
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
@@ -568,7 +558,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	if(!landFader.getInterstate()) return;
 
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	transfo->combine(Mat4d::zrotation(-(angleRotateZ+angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
 
