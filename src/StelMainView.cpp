@@ -46,6 +46,7 @@
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
+#include <QDeclarativeContext>
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
@@ -112,7 +113,7 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	StelApp::getInstance().draw();
 
 	painter->endNativePainting();
-	// update();
+	update();
 }
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -178,6 +179,7 @@ StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
 	connect(this, &StelGuiItem::widthChanged, this, &StelGuiItem::onSizeChanged);
 	connect(this, &StelGuiItem::heightChanged, this, &StelGuiItem::onSizeChanged);
 	widget = new QGraphicsWidget(this);
+	StelMainView::getInstance().guiWidget = widget;
 	StelApp::getInstance().getGui()->init(widget);
 }
 
@@ -290,8 +292,8 @@ void StelMainView::init(QSettings* conf)
 	stelApp->setGui(gui);
 	stelApp->init(conf);
 	StelActionMgr *actionMgr = stelApp->getStelActionManager();
-	actionMgr->addAction("actionSave_Screenshot_Global", "Miscellaneous", N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
-	actionMgr->addAction("actionSet_Full_Screen_Global", "Display Options", N_("Full-screen mode"), this, "fullScreen", "F11");
+	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
+	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
 	
 
 	StelPainter::initGLShaders();
@@ -300,6 +302,7 @@ void StelMainView::init(QSettings* conf)
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
+	rootContext()->setContextProperty("stelApp", stelApp);
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
 	
 	QScreen* screen = glWidget->windowHandle()->screen();
@@ -515,4 +518,3 @@ void StelMainView::doScreenshot(void)
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }
-

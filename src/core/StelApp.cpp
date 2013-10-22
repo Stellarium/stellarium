@@ -176,7 +176,7 @@ StelApp::StelApp(QObject* parent)
 #ifndef DISABLE_SCRIPTING
 	  scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
-	  stelGui(NULL), devicePixelsPerPixel(1.f), fps(0),
+	  stelGui(NULL), devicePixelsPerPixel(1.f), globalScalingRatio(1.f), fps(0),
 	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 
@@ -423,9 +423,8 @@ void StelApp::init(QSettings* conf)
 	initScriptMgr(conf);
 
 	// Initialisation of the color scheme
-	bool tmp = confSettings->value("viewing/flag_night").toBool();
-	flagNightVision=!tmp;  // fool caching
-	setVisionModeNight(tmp);
+	emit colorSchemeChanged("color");
+	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
 	// Initialisation of the render of solar shadows
 	//setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
@@ -435,7 +434,7 @@ void StelApp::init(QSettings* conf)
 	updateI18n();
 
 	// Init actions.
-	actionMgr->addAction("actionShow_Night_Mode", "Display Options", "Night mode", this, "nightMode");
+	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	initialized = true;
 }
@@ -663,7 +662,7 @@ void StelApp::setVisionModeNight(bool b)
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		emit(colorSchemeChanged(b ? "night_color" : "color"));
+		emit(visionNightModeChanged(b));
 	}
 }
 

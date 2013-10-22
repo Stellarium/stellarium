@@ -120,7 +120,7 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
-	addAction("actionShow_Nebulas", "Display Options", N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
+	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 }
 
 struct DrawNebulaFuncObject
@@ -129,9 +129,9 @@ struct DrawNebulaFuncObject
 	{
 		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
-	void operator()(StelRegionObjectP obj)
+	void operator()(StelRegionObject* obj)
 	{
-		Nebula* n = obj.staticCast<Nebula>().data();
+		Nebula* n = static_cast<Nebula*>(obj);
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->mag > drawer->getCustomNebulaMagnitudeLimit())) return;
@@ -175,7 +175,7 @@ void NebulaMgr::draw(StelCore* core)
 	float maxMagLabels = skyDrawer->getLimitMagnitude()     -2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
-	nebGrid.processIntersectingRegions(p, func);
+	nebGrid.processIntersectingPointInRegions(p.data(), func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
@@ -192,11 +192,8 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		// Compute 2D pos and return if outside screen
-		if (!prj->projectInPlace(pos)) return;		
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(0.8f,0.0f,0.0f);
-		else
-			sPainter.setColor(0.4f,0.5f,0.8f);
+		if (!prj->projectInPlace(pos)) return;
+		sPainter.setColor(0.4f,0.5f,0.8f);
 
 		texPointer->bind();
 

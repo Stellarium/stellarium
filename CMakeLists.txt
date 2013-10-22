@@ -1,7 +1,10 @@
-
 # Minimal version of cmake for using with Qt5 is 2.8.9
 # Minimal version of cmake for using with Qt5 on Windows is 2.8.11
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7)
+IF(WIN32)
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+ELSE(WIN32)
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
+ENDIF(WIN32)
 
 # Avoid repeating the IF statement in the ENDIF and ELSE
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
@@ -182,8 +185,6 @@ ELSE()
 ENDIF()
 
 ########### Plugin setup #############
-SET(BUILD_STATIC_PLUGINS 1 CACHE BOOL "Define whether plugins should be compiled statically and linked to the main program")
-SET(BUILD_DYNAMIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be compiled dynamically")
 
 #### demo plugins ####
 SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be created.")
@@ -210,32 +211,29 @@ SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be cre
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-IF (BUILD_STATIC_PLUGINS)
-  IF (USE_PLUGIN_SVMT)
-	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
-	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-	SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-  ENDIF()
+IF (USE_PLUGIN_SVMT)
+    SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
+    SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+    SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+ENDIF()
 
-  IF (USE_PLUGIN_VIRGO)
-	## Library for loading FITS image files
-	FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-	  /usr/include
-	  /usr/local/include
-	  DOC "Should point to the directory where the include files for libcfitsio are installed")
-	FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-	  PATHS
-	  /usr/lib/
-	  /usr/local/lib
-	  /opt/local/lib
-	  DOC "cfitsio link options")
-	SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-  ENDIF()
+IF (USE_PLUGIN_VIRGO)
+    ## Library for loading FITS image files
+    FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+        /usr/include
+        /usr/local/include
+        DOC "Should point to the directory where the include files for libcfitsio are installed")
+    FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+        PATHS
+        /usr/lib/
+        /usr/local/lib
+        /opt/local/lib
+        DOC "cfitsio link options")
+    SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
+ENDIF()
 
-  IF (USE_PLUGIN_LOGBOOK)
-	SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
-  ENDIF()
-
+IF (USE_PLUGIN_LOGBOOK)
+    SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
 ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
@@ -243,30 +241,17 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
+FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Core REQUIRED)
-FIND_PACKAGE(Qt5Gui REQUIRED)
-FIND_PACKAGE(Qt5Widgets REQUIRED)
-FIND_PACKAGE(Qt5OpenGL REQUIRED)
-FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Declarative REQUIRED)
-FIND_PACKAGE(Qt5Test)
+FIND_PACKAGE(Qt5Gui REQUIRED)
+FIND_PACKAGE(Qt5Network REQUIRED)
+FIND_PACKAGE(Qt5OpenGL REQUIRED)
+FIND_PACKAGE(Qt5Widgets REQUIRED)
 IF(WIN32)
-  # This modules need for Windows (WTF???)
-  FIND_PACKAGE(Qt5Sql REQUIRED)
-  FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
-ENDIF()
-
-INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${Qt5Gui_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${Qt5Widgets_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${Qt5OpenGL_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${Qt5Declarative_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(${Qt5Sql_INCLUDE_DIRS})
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
-IF(WIN32)
-  INCLUDE_DIRECTORIES(${Qt5XmlPatterns_INCLUDE_DIRS})
-  INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
+    # This modules need for Windows (WTF???)
+    FIND_PACKAGE(Qt5Sql REQUIRED)
+    FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 ENDIF()
 
 # Tell CMake to run moc when necessary:
@@ -275,117 +260,117 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 IF(ENABLE_SCRIPTING)
-  SET(QT_USE_QTSCRIPT TRUE)
-  FIND_PACKAGE(Qt5Script REQUIRED)
-  INCLUDE_DIRECTORIES(${Qt5Script_INCLUDE_DIRS})
+    SET(QT_USE_QTSCRIPT TRUE)
+    FIND_PACKAGE(Qt5Script REQUIRED)
+    INCLUDE_DIRECTORIES(${Qt5Script_INCLUDE_DIRS})
 ENDIF()
 IF(ENABLE_SOUND)
-  ADD_DEFINITIONS(-DENABLE_SOUND)
-  FIND_PACKAGE(Qt5Multimedia REQUIRED)
-  INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
+    ADD_DEFINITIONS(-DENABLE_SOUND)
+    FIND_PACKAGE(Qt5Multimedia REQUIRED)
+    INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
 ENDIF()
+
 FIND_PACKAGE(OpenGL REQUIRED)
-
-# Get rid of the QtTest dependency for the main binary. It is re-added manually when compiling tests.
-STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
-# Get rid of the GLU dependency, it's not needed in stellarium.
-STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
-
 FIND_PACKAGE(ZLIB)
+
+FIND_PACKAGE(Qt5Test)
+INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
 IF(APPLE)
-  SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
+    SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
 ELSE(APPLE)
-  ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
-  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
-  # Used in generating the documentation (doc/stellarium.pod.cmake):
-  SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
+    ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
+    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+    # Used in generating the documentation (doc/stellarium.pod.cmake):
+    SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
 ENDIF(APPLE)
 ELSE(UNIX AND NOT WIN32)
-  ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
-  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
+    ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
+    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
 ENDIF(UNIX AND NOT WIN32)
 
 ########### Get revision number for non-release builds ###########
 IF(NOT RELEASE_BUILD)
-  #Hack until CMake detection for Bazaar is finished
-  IF(BZR_REVISION)
-	SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
-	ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
-  ELSE()
-	FIND_PACKAGE(Subversion)
-	IF(Subversion_FOUND)
-	  Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
-	  SET(SVN_REVISION ${StelSvn_WC_REVISION})
-	  ADD_DEFINITIONS(-DSVN_REVISION="${SVN_REVISION}")
-	ENDIF()
-  ENDIF()
+    #Hack until CMake detection for Bazaar is finished
+    IF(BZR_REVISION)
+        SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
+        ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
+    ELSE()
+        FIND_PACKAGE(Subversion)
+        IF(Subversion_FOUND)
+            Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
+            SET(SVN_REVISION ${StelSvn_WC_REVISION})
+            ADD_DEFINITIONS(-DSVN_REVISION="${SVN_REVISION}")
+        ENDIF()
+    ENDIF()
 ENDIF()
 
 IF(ENABLE_STRATOSCRIPT_COMPAT)
-  ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
+    ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
 
 ### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
-  SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
-  IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-    #The mingGW snapshot distributed with the Qt SDK has it under this name.
-    SET(RC_COMPILER_FILENAME "windres.exe")
-	FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
-    IF (RC_COMPILER_PATH)
-     MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
-    ENDIF(RC_COMPILER_PATH)
-  ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+    SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
+    IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+        #The mingGW snapshot distributed with the Qt SDK has it under this name.
+        SET(RC_COMPILER_FILENAME "windres.exe")
+            FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
+        IF (RC_COMPILER_PATH)
+            MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
+        ENDIF(RC_COMPILER_PATH)
+    ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
 ENDIF(WIN32)
 
 ### Generate an Inno Setup project file ###
 IF(WIN32)
-  # Try to guess the MinGW /bin directory...
-  GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
-  IF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
-    SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
-    SET(ISS_PACKAGE_PLATFORM "win32")
-    SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
-  ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-    SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
-    SET(ISS_PACKAGE_PLATFORM "win64")
-    SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
-  ENDIF()
-  SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
-  # Try to guess the MinGW /bin directory...
-  GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
-  GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
-  GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
-  GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
-  GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
-  GET_TARGET_PROPERTY(QtDeclarative_location Qt5::Declarative LOCATION)
-  GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)
-  GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
-  IF(ENABLE_SCRIPTING)
-     GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
-     SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
-  ELSE()
-     SET(ISS_QT_SCRIPT "; QtScript don't used")
-  ENDIF()
-  IF(ENABLE_SOUND)
-     GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
-     SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";")
-  ELSE()
-     SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
-  ENDIF()
-  GET_FILENAME_COMPONENT(ICU_LIBS ${QtCore_location} PATH)
-  SET(ISS_ICU_LIBS "Source: \"${ICU_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    # Try to guess the MinGW /bin directory...
+    GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
+    IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+        SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
+        SET(ISS_PACKAGE_PLATFORM "win32")
+        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+    ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+        SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+        SET(ISS_PACKAGE_PLATFORM "win64")
+        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+    ENDIF()
+    SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
+    # Try to guess the MinGW /bin directory...
+    GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
+    GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
+    GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
+    GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
+    GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
+    GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
+    GET_TARGET_PROPERTY(QtDeclarative_location Qt5::Declarative LOCATION)
+    GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)
+    GET_TARGET_PROPERTY(QtSvg_location Qt5::Svg LOCATION)
+    GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
+    IF(ENABLE_SCRIPTING)
+        GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
+        SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_QT_SCRIPT "; QtScript don't used")
+    ENDIF()
+    IF(ENABLE_SOUND)
+        GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
+        SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
+    ENDIF()
+    GET_FILENAME_COMPONENT(ICU_LIBS ${QtCore_location} PATH)
+    SET(ISS_ICU_LIBS "Source: \"${ICU_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
   
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
 ENDIF(WIN32)
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  ADD_DEFINITIONS(-DQT_NO_DEBUG)
-  ADD_DEFINITIONS(-DNDEBUG)
+    ADD_DEFINITIONS(-DQT_NO_DEBUG)
+    ADD_DEFINITIONS(-DNDEBUG)
 ENDIF()
 
 ########### uninstall files ###############

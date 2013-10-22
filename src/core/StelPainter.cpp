@@ -634,17 +634,13 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		QPainter painter(&device);
 		painter.beginNativePainting();
 		
-		if (prj->getDevicePixelsPerPixel()==1.f)
-		{
-			painter.setFont(currentFont);
-		}
-		else
-		{
-			QFont tmpFont = currentFont;
-			tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel());
-			painter.setFont(tmpFont);
-		}
+		QFont tmpFont = currentFont;
+		tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
+		painter.setFont(tmpFont);
 		painter.setPen(QColor(currentColor[0]*255, currentColor[1]*255, currentColor[2]*255, currentColor[3]*255));
+		
+		xshift*=StelApp::getInstance().getGlobalScalingRatio();
+		yshift*=StelApp::getInstance().getGlobalScalingRatio();
 		
 		y = prj->getViewportHeight()-y;
 		yshift = -yshift;

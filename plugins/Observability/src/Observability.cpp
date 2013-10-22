@@ -43,7 +43,6 @@
 #include "StelVertexArray.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
 #include "Observability.hpp"
 #include "ObservabilityDialog.hpp"
@@ -260,8 +259,8 @@ void Observability::init()
 		OnIcon = new QPixmap(":/observability/bt_observab_on.png");
 		OffIcon = new QPixmap(":/observability/bt_observab_off.png");
 
-		addAction("actionShow_Observability", "Observability", N_("Observability"), "enabled");
-		addAction("actionShow_Observability_ConfigDialog", "Observability", N_("Observability configuration window"), configDialog, "visible");
+		addAction("actionShow_Observability", N_("Observability"), N_("Observability"), "enabled");
+		addAction("actionShow_Observability_ConfigDialog", N_("Observability"), N_("Observability configuration window"), configDialog, "visible");
 		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Observability");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}

@@ -33,14 +33,13 @@ class ViewDialog : public StelDialog
 {
 Q_OBJECT
 public:
-	ViewDialog();
+	ViewDialog(QObject* parent);
 	virtual ~ViewDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	Ui_viewDialogForm* ui;

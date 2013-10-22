@@ -53,7 +53,7 @@
 #include <QTimer>
 #include <QDialog>
 
-ViewDialog::ViewDialog()
+ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
@@ -92,25 +92,6 @@ void ViewDialog::styleChanged()
 	}
 }
 
-void ViewDialog::updateIconsColor()
-{
-	QPixmap pixmap(50, 50);
-	QStringList icons;
-	icons << "sky" << "markings" << "landscape" << "starlore";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
-	foreach(const QString &iconName, icons)
-	{
-		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
-		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
-	}
-}
-
 void ViewDialog::connectCheckBox(QCheckBox* checkBox, const QString& actionId)
 {
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
@@ -124,11 +105,9 @@ void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);
-	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 
 	//ui->viewTabWidget->removeTab(4);

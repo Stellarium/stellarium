@@ -22,33 +22,34 @@
 
 #include "GridLinesMgr.hpp"
 #include "LabelMgr.hpp"
+#include "SkyGui.hpp"
+#include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelActionMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelMainView.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
-#include "SkyGui.hpp"
 
 #include <QAction>
+#include <QDebug>
+#include <QDir>
 #include <QGraphicsWidget>
 #include <QKeyEvent>
-#include <QDebug>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QtNetwork>
 #include <QOpenGLFunctions>
 #include <QPixmap>
 #include <QSignalMapper>
-#include <QDir>
 
 #include <cmath>
 
@@ -56,12 +57,12 @@ extern void qt_set_sequence_auto_mnemonic(bool b);
 
 static QSettings *settings; //!< The settings as read in from the ini file.
 
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 #if 0
 #pragma mark -
 #pragma mark StelModuleMgr Methods
 #endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
 StelModule* OcularsStelPluginInterface::getStelModule() const
@@ -77,19 +78,19 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
-	info.authors = "Timothy Reaves, Bogdan Marinov, Pawel Stolowski";
+	info.authors = "Timothy Reaves, Bogdan Marinov";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	return info;
 }
 
 
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 #if 0
 #pragma mark -
 #pragma mark Instance Methods
 #endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 Oculars::Oculars():
 	pxmapGlow(NULL),
 	pxmapOnIcon(NULL),
@@ -99,7 +100,9 @@ Oculars::Oculars():
 	actionShowCrosshairs(0),
 	actionShowSensor(0),
 	actionShowTelrad(0),
-	guiPanel(0)
+	guiPanel(0),
+	actualFOV(0),
+	reticleRotation(0)
 {
 
 	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
@@ -169,12 +172,12 @@ QSettings* Oculars::appSettings()
 }
 
 
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 #if 0
 #pragma mark -
 #pragma mark StelModule Methods
 #endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 bool Oculars::configureGui(bool show)
 {
 	if (show) {
@@ -193,41 +196,22 @@ void Oculars::deinit()
 	settings->remove("lens");
 	int index = 0;
 	foreach(CCD* ccd, ccds) {
-		QString prefix = "ccd/" + QVariant(index).toString() + "/";
-		settings->setValue(prefix + "name", ccd->name());
-		settings->setValue(prefix + "resolutionX", ccd->resolutionX());
-		settings->setValue(prefix + "resolutionY", ccd->resolutionY());
-		settings->setValue(prefix + "chip_width", ccd->chipWidth());
-		settings->setValue(prefix + "chip_height", ccd->chipHeight());
-		settings->setValue(prefix + "pixel_width", ccd->pixelWidth());
-		settings->setValue(prefix + "pixel_height", ccd->pixelWidth());
+		ccd->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	foreach(Ocular* ocular, oculars) {
-		QString prefix = "ocular/" + QVariant(index).toString() + "/";
-		settings->setValue(prefix + "name", ocular->name());
-		settings->setValue(prefix + "afov", ocular->appearentFOV());
-		settings->setValue(prefix + "efl", ocular->effectiveFocalLength());
-		settings->setValue(prefix + "fieldStop", ocular->fieldStop());
-		settings->setValue(prefix + "binoculars", ocular->isBinoculars());
+	foreach(Ocular * ocular, oculars) {
+		ocular->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
 	foreach(Telescope* telescope, telescopes){
-		QString prefix = "telescope/" + QVariant(index).toString() + "/";
-		settings->setValue(prefix + "name", telescope->name());
-		settings->setValue(prefix + "focalLength", telescope->focalLength());
-		settings->setValue(prefix + "diameter", telescope->diameter());
-		settings->setValue(prefix + "hFlip", telescope->isHFlipped());
-		settings->setValue(prefix + "vFlip", telescope->isVFlipped());
+		telescope->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
 	foreach(Lens* lens, lense) {
-		QString prefix = "lens/" + QVariant(index).toString() + "/";
-		settings->setValue(prefix + "name", lens->name());
-		settings->setValue(prefix + "multipler", lens->multipler());
+		lens->writeToSettings(settings, index);
 		index++;
 	}
         
@@ -236,6 +220,13 @@ void Oculars::deinit()
 	settings->setValue("ccd_count", ccds.count());
 	settings->setValue("lens_count", lense.count());
 	settings->sync();
+
+	disconnect(this, SIGNAL(selectedOcularChanged()), this, SLOT(updateOcularReticle()));
+	disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)),
+					this, SLOT(setStelStyle(const QString&)));
+
+	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+					this, SLOT(retranslateGui()));
 }
 
 //! Draw any parts on the screen which are for our module
@@ -266,7 +257,7 @@ void Oculars::draw(StelCore* core)
 		
 		if (ready) {
 			if (selectedOcularIndex > -1) {
-				paintOcularMask();
+				paintOcularMask(core);
 				if (flagShowCrosshairs)  {
 					paintCrosshairs();
 				}
@@ -397,6 +388,22 @@ void Oculars::handleKeys(QKeyEvent* event)
 				break;
 			case Qt::Key_Shift:
 				movementManager->moveSlow(true);
+				consumeEvent = true;
+				break;
+			case Qt::Key_M:
+				double multiplier = 1.0;
+				if (event->modifiers().testFlag(Qt::ControlModifier)) {
+					multiplier = 0.1;
+				}
+				if (event->modifiers().testFlag(Qt::AltModifier)) {
+					multiplier = 5.0;
+				}
+				if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+					reticleRotation += (1.0 * multiplier);
+				} else {
+					reticleRotation -= (1.0 * multiplier);
+				}
+				qDebug() << reticleRotation;
 				consumeEvent = true;
 				break;
 		}
@@ -560,6 +567,7 @@ void Oculars::init()
 	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 					this, SLOT(retranslateGui()));
+	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(updateOcularReticle()));
 }
 
 void Oculars::setStelStyle(const QString&)
@@ -569,12 +577,12 @@ void Oculars::setStelStyle(const QString&)
 	}
 }
 
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 #if 0
 #pragma mark -
 #pragma mark Private slots Methods
 #endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready) {
@@ -681,12 +689,22 @@ void Oculars::retranslateGui()
 	}
 }
 
-/* ********************************************************************* */
+void Oculars::updateOcularReticle(void)
+{
+	reticleRotation = 0.0;
+	StelTextureMgr& manager = StelApp::getInstance().getTextureManager();
+	//Load OpenGL textures
+	StelTexture::StelTextureParams params;
+	params.generateMipmaps = true;
+	reticleTexture = manager.createTexture(oculars[selectedOcularIndex]->reticlePath(), params);
+}
+
+/* ****************************************************************************************************************** */
 #if 0
 #pragma mark -
 #pragma mark Slots Methods
 #endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 void Oculars::updateLists()
 {
 	if (oculars.isEmpty())
@@ -791,11 +809,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
 			int yPosition = projectorParams.viewportCenter[1];
 			yPosition = yPosition - 0.5 * (metrics.height());
-			const char *tcolor;
-			if (StelApp::getInstance().getVisionModeNight())
-				tcolor = "#C40303";
-			else
-				tcolor = "#99FF99";
+			const char *tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
 									true, font.pixelSize(), tcolor);
 		}
@@ -933,8 +947,7 @@ void Oculars::displayPopupMenu()
 		QAction* action = popup->addAction(q_("Toggle &crosshair"));
 		action->setCheckable(true);
 		action->setChecked(flagShowCrosshairs);
-		connect(action, SIGNAL(toggled(bool)),
-						actionShowCrosshairs, SLOT(setChecked(bool)));
+		connect(action, SIGNAL(toggled(bool)), actionShowCrosshairs, SLOT(setChecked(bool)));
 	} else {
 		// We are not in ocular mode
 		// We want to show the CCD's, and if a CCD is selected, the telescopes
@@ -942,8 +955,7 @@ void Oculars::displayPopupMenu()
 		QAction* action = new QAction(q_("Configure &Oculars"), popup);
 		action->setCheckable(true);
 		action->setChecked(ocularDialog->visible());
-		connect(action, SIGNAL(triggered(bool)),
-						ocularDialog, SLOT(setVisible(bool)));
+		connect(action, SIGNAL(triggered(bool)), ocularDialog, SLOT(setVisible(bool)));
 		popup->addAction(action);
 		popup->addSeparator();
 
@@ -951,16 +963,14 @@ void Oculars::displayPopupMenu()
 			QAction* action = popup->addAction(q_("Toggle &CCD"));
 			action->setCheckable(true);
 			action->setChecked(flagShowCCD);
-			connect(action, SIGNAL(toggled(bool)),
-							actionShowSensor, SLOT(setChecked(bool)));
+			connect(action, SIGNAL(toggled(bool)), actionShowSensor, SLOT(setChecked(bool)));
 		}
 		
 		if (!flagShowCCD) {
 			QAction* action = popup->addAction(q_("Toggle &Telrad"));
 			action->setCheckable(true);
 			action->setChecked(flagShowTelrad);
-			connect(action, SIGNAL(toggled(bool)),
-							actionShowTelrad, SLOT(setChecked(bool)));
+			connect(action, SIGNAL(toggled(bool)), actionShowTelrad, SLOT(setChecked(bool)));
 		}
 		
 		popup->addSeparator();
@@ -1252,12 +1262,12 @@ void Oculars::toggleTelrad()
 		toggleTelrad(true);
 }
 
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 #if 0
 #pragma mark -
 #pragma mark Private Methods
 #endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
 void Oculars::initializeActivationActions()
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -1280,19 +1290,20 @@ void Oculars::initializeActivationActions()
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
 
-	actionMenu = addAction("actionShow_Ocular_Menu", "Oculars", N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
-	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", "Oculars", N_("Show crosshairs"), "toggleCrosshairs(bool)", "Alt+C");
-	actionShowSensor = addAction("actionShow_Sensor", "Oculars", N_("Image sensor frame"), "toggleCCD(bool)");
-	actionShowTelrad = addAction("actionShow_Telrad", "Oculars", N_("Telrad sight"), "toggleTelrad(bool)", "Ctrl+B");
-	actionConfiguration = addAction("actionOpen_Oculars_Configuration", "Oculars", N_("Oculars plugin configuration"), ocularDialog, "visible");
+	QString ocularsGroup = N_("Oculars");
+	actionMenu = addAction("actionShow_Ocular_Menu", ocularsGroup, N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
+	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "toggleCrosshairs(bool)", "Alt+C");
+	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "toggleCCD(bool)");
+	actionShowTelrad = addAction("actionShow_Telrad", ocularsGroup, N_("Telrad sight"), "toggleTelrad(bool)", "Ctrl+B");
+	actionConfiguration = addAction("actionOpen_Oculars_Configuration", ocularsGroup, N_("Oculars plugin configuration"), ocularDialog, "visible");
 	// Select next telescope via keyboard
-	addAction("actionShow_Telescope_Increment", "Oculars", N_("Select next telescope"), "incrementTelescopeIndex()", "Shift+PgUp");
+	addAction("actionShow_Telescope_Increment", ocularsGroup, N_("Select next telescope"), "incrementTelescopeIndex()", "Shift+PgUp");
 	// Select previous telescope via keyboard
-	addAction("actionShow_Telescope_Decrement", "Oculars", N_("Select previous telescope"), "decrementTelescopeIndex()", "Shift+PgDown");
+	addAction("actionShow_Telescope_Decrement", ocularsGroup, N_("Select previous telescope"), "decrementTelescopeIndex()", "Shift+PgDown");
 	// Select next eyepiece via keyboard
-	addAction("actionShow_Ocular_Increment", "Oculars", N_("Select next eyepiece"), "incrementOcularIndex()", "Ctrl+PgUp");
+	addAction("actionShow_Ocular_Increment", ocularsGroup, N_("Select next eyepiece"), "incrementOcularIndex()", "Ctrl+PgUp");
 	// Select previous eyepiece via keyboard
-	addAction("actionShow_Ocular_Decrement", "Oculars", N_("Select previous eyepiece"), "decrementOcularIndex()", "Ctrl+PgDown");
+	addAction("actionShow_Ocular_Decrement", ocularsGroup, N_("Select previous eyepiece"), "decrementOcularIndex()", "Ctrl+PgDown");
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
@@ -1394,24 +1405,62 @@ void Oculars::paintTelrad()
 {
 	if (!flagShowOculars) {
 		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		// prevent unused warnings -MNG
-		// StelCore *core = StelApp::getInstance().getCore();
-		// StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-
 		// StelPainter drawing
 		StelPainter painter(projector);
 		painter.setColor(0.77, 0.14, 0.16, 1.0);
-		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-						   projector->getViewportPosY()+projector->getViewportHeight()/2);
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
+		Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
+								 projector->getViewportPosY() + projector->getViewportHeight() / 2);
+		float pixelsPerRad = projector->getPixelPerRadAtCenter();
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
 
 	}
 }
 
-void Oculars::paintOcularMask()
+void Oculars::paintOcularMask(const StelCore *core)
 {
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelPainter painter(prj);
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+
+	// Draw the ocular outline, as GLUT is not working
+	painter.setColor(0.0, 0.5, 0.25, 1.0);
+
+	double inner = 0.5 * params.viewportFovDiameter * params.devicePixelsPerPixel;
+	// See if we need to scale the mask
+	if (useMaxEyepieceAngle
+		 && oculars[selectedOcularIndex]->appearentFOV() > 0.0
+		 && !oculars[selectedOcularIndex]->isBinoculars()) {
+		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
+	}
+	painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							 params.viewportCenter[1]* params.devicePixelsPerPixel,
+							 inner);
+
+	// Paint the reticale, if needed
+	if (!reticleTexture.isNull()){
+		glPushMatrix(); //Save the current matrix.
+
+		painter.setColor(0.77, 0.14, 0.16, 1.0);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		reticleTexture->bind();
+
+		int textureHeight;
+		int textureWidth;
+		reticleTexture->getDimensions(textureWidth, textureHeight);
+
+		painter.drawSprite2dMode(params.viewportXywh[2] / 2 * params.devicePixelsPerPixel,
+										 params.viewportXywh[3] / 2 * params.devicePixelsPerPixel,
+										 inner,
+										 reticleRotation);
+
+		//Reset the current matrix to the one that was saved.
+		glPopMatrix();
+	}
+
 	// XXX: for some reason I cannot get to make the glu functions work when
 	// compiling with Qt5!
 	// XXX: GLU can't work with OpenGL ES --AW
@@ -1770,10 +1819,9 @@ void Oculars::zoomOcular()
 	}
 
 	// Set the screen display
-	// core->setMaskType(StelProjector::MaskDisk);
-	Ocular *ocular = oculars[selectedOcularIndex];
-	Telescope *telescope = NULL;
-	Lens *lens = NULL;
+	Ocular * ocular = oculars[selectedOcularIndex];
+	Telescope * telescope = NULL;
+	Lens * lens = NULL;
 	// Only consider flip is we're not binoculars
 	if (ocular->isBinoculars())
 	{
@@ -1782,9 +1830,9 @@ void Oculars::zoomOcular()
 	}
 	else
 	{
-		if (selectedLensIndex >= 0)
+		if (selectedLensIndex >= 0) {
 			lens = lense[selectedLensIndex];
-
+		}
 		telescope = telescopes[selectedTelescopeIndex];
 		core->setFlipHorz(telescope->isHFlipped());
 		core->setFlipVert(telescope->isVFlipped());		
@@ -1803,7 +1851,7 @@ void Oculars::zoomOcular()
 		skyManager->setCustomNebulaMagnitudeLimit(limitMag);
 	}
 
-	double actualFOV = ocular->actualFOV(telescope, lens);
+	actualFOV = ocular->actualFOV(telescope, lens);
 	// See if the mask was scaled; if so, correct the actualFOV.
 	if (useMaxEyepieceAngle && ocular->appearentFOV() > 0.0 && !ocular->isBinoculars()) {
 		actualFOV = maxEyepieceAngle * actualFOV / ocular->appearentFOV();

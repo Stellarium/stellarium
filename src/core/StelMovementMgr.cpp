@@ -102,11 +102,12 @@ void StelMovementMgr::init()
 		}
 	}
 
+	QString movementGroup = N_("Movement and Selection");
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
-	addAction("actionGoto_Selected_Object", N_("Movement and Selection"), N_("Center on selected object"), "setFlagTracking()", "Space");
-	addAction("actionZoom_In_Auto", N_("Movement and Selection"), N_("Zoom in on selected object"), "autoZoomIn()", "/");
-	addAction("actionZoom_Out_Auto", N_("Movement and Selection"), N_("Zoom out"), "autoZoomOut()", "\\");
-	addAction("actionSet_Tracking", N_("Movement and Selection"), N_("Track object"), "tracking", "T");
+	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "setFlagTracking()", "Space");
+	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
+	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
+	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
