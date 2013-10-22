@@ -188,7 +188,18 @@ public:
 	void drawRect2d(float x, float y, float width, float height, bool textured=true);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+	//! @param radius
+	//! @param oneMinusOblateness
+	//! @param slices: number of vertical segments ("meridian zones")
+	//! @param stacks: number of horizontal segments ("latitude zones")
+	//! @param orientInside: 1 to have normals point inside, e.g. for landscape horizons
+	//! @param flipTexture: if texture should be mapped to inside of shere, e.g. landscape horizons.
+	//! @param topAngle GZ: new parameter. An opening angle [radians] at top of the sphere. Useful if there is an empty
+	//!        region around the top pole, like a spherical equirectangular horizon panorama (SphericalLandscape class).
+	//!        Example: your horizon line (pano photo) goes up to 26 degrees altitude (highest mountains/trees):
+	//!        topAngle = 64 degrees = 64*M_PI/180.0f
+	// TBD GZ: topAngle is EXPERIMENTAL for Landscapes.
+	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false, float topAngle=0.0f);
 
 	//! Generate a StelVertexArray for a sphere.
 	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
