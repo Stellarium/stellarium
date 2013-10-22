@@ -76,12 +76,10 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 			infoTextFilters |= StelObject::Distance;
 		if (conf->value("flag_show_size", false).toBool())
 			infoTextFilters |= StelObject::Size;
-		if (conf->value("flag_show_extra1", false).toBool())
-			infoTextFilters |= StelObject::Extra1;
-		if (conf->value("flag_show_extra2", false).toBool())
-			infoTextFilters |= StelObject::Extra2;
-		if (conf->value("flag_show_extra3", false).toBool())
-			infoTextFilters |= StelObject::Extra3;
+		if (conf->value("flag_show_extra", false).toBool())
+			infoTextFilters |= StelObject::Extra;
+		if (conf->value("flag_show_galcoord", false).toBool())
+			infoTextFilters |= StelObject::GalacticCoord;
 		conf->endGroup();
 	}
 	else
@@ -280,28 +278,11 @@ void SkyGui::updateBarsPos()
 
 void SkyGui::setStelStyle(const QString& style)
 {
-	if (style == "night_color")
-	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.0,0.0,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.0, 0.00, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
-		winBar->setRedMode(true);
-		buttonBar->setRedMode(true);
-		btHorizAutoHide->setRedMode(true);
-		btVertAutoHide->setRedMode(true);
-	}
-	else
-	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		buttonBar->setRedMode(false);
-		winBar->setRedMode(false);
-		btHorizAutoHide->setRedMode(false);
-		btVertAutoHide->setRedMode(false);
-	}
+	Q_UNUSED(style);
+	buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
+	buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
+	winBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 }
 
 // Add a new progress bar in the lower right corner of the screen.

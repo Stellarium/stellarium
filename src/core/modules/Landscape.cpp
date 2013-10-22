@@ -339,10 +339,9 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
 	sPainter.setProjector(core->getProjection(transfo));
 	glBlendFunc(GL_ONE, GL_ONE);
-	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
-			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter,
-			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness));
 	fogTex->bind();
 	const float height = (tanMode||calibrated) ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
 	sPainter.sCylinder(radius, height, 64, 1);
@@ -368,10 +367,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 
 	if (!landFader.getInterstate())
 		return;
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 	foreach (const LOSSide& side, precomputedSides)
 	{
@@ -393,10 +389,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset) * Mat4d::translation(Vec3d(0,0,vshift)));
 
 	sPainter.setProjector(core->getProjection(transfo));
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 	groundTex->bind();
 	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
@@ -424,37 +417,29 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 		validLandscape = 0;
 		return;
 	}
-	if (landscapeIni.value("landscape/maptex_illum").isNull())
-	{
-		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-			landscapeIni.value("landscape/texturefov", 360).toFloat(),
-			landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
-	}
-	else
-	{
-		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+	create(name,
+		   landscapeIni.value("landscape/texturefov", 360).toFloat(),
+		   getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+			getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
 			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
-			landscapeIni.value("landscape/texturefov", 360).toFloat(),
-			landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
-	}
+			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
 }
 
 
-// create a fisheye landscape from basic parameters (no ini file needed)
-void LandscapeFisheye::create(const QString _name, const QString& _maptex, float _texturefov, float _angleRotateZ)
+void LandscapeFisheye::create(const QString _name, float _texturefov, const QString& _maptex, const QString &_maptexFog, const QString& _maptexIllum, const float _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	texFov = _texturefov*M_PI/180.f;
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
-}
-void LandscapeFisheye::create(const QString _name, const QString& _maptex, const QString& _maptexNight, float _texturefov, float _angleRotateZ)
-{
-	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
-	create(_name, _maptex, _texturefov, _angleRotateZ);
-	mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexNight, StelTexture::StelTextureParams(true));
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
+
+	if (_maptexIllum.length())
+		mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+	if (_maptexFog.length())
+		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
+
 }
 
 
@@ -470,26 +455,29 @@ void LandscapeFisheye::draw(StelCore* core)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
-
-
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 	glEnable(GL_CULL_FACE);
 	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	mapTex->bind();
-	// Patch GZ: (40,20)->(cols,rows)
 	sPainter.sSphereMap(radius,cols,rows,texFov,1);
+	// GZ: NEW PARTS: Fog also for fisheye...
+	if (mapTexFog)
+	{
+		//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
+		sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+						  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+						  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness), fogFader.getInterstate());
+		mapTexFog->bind();
+		sPainter.sSphereMap(radius,cols,rows,texFov,1);
+	}
+
 	// GZ experimental:
 	if (mapTexIllum && lightScapeBrightness>0.0f)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(lightScapeBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-		else
-			sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
 		mapTexIllum->bind();
 		sPainter.sSphereMap(radius, cols, rows, texFov, 1);
 	}
@@ -521,35 +509,27 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 		return;
 	}
 
-	if (landscapeIni.value("landscape/maptex_illum").isNull())
-	{
-		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
-	}
-	else
-	{
-		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+	create(name,
+		   getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+			getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
 			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
 			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
-	}
 }
 
 
-// create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const QString _name, const QString& _maptex, float _angleRotateZ)
+//// create a spherical landscape from basic parameters (no ini file needed)
+void LandscapeSpherical::create(const QString _name, const QString& _maptex, const QString& _maptexFog, const QString& _maptexIllum, const float _angleRotateZ)
 {
-	//qDebug() << "LandscapeSpherical::create():"<< _name << " " << _fullpath << " " << _maptex << " " << _angleRotateZ;
-	qDebug() << "LandscapeSpherical::create():"<< _name << " " << _maptex << " " << _angleRotateZ;
+	qDebug() << "LandscapeSpherical::create():"<< _name << " : " << _maptex << " : " << _maptexFog << " : " << _maptexIllum << " : " << _angleRotateZ;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
-}
-void LandscapeSpherical::create(const QString _name, const QString& _maptex, const QString& _maptexIllum, float _angleRotateZ)
-{
-	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
-	create(_name, _maptex, _angleRotateZ);
-	mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
+
+	if (_maptexIllum.length())
+		mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+	if (_maptexFog.length())
+		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
 }
 
 void LandscapeSpherical::draw(StelCore* core)
@@ -564,31 +544,33 @@ void LandscapeSpherical::draw(StelCore* core)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
-
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
 	sPainter.enableTexture2d(true);
 	glEnable(GL_BLEND);
 	mapTex->bind();
 
-	// TODO: verify that this works correctly for custom projections
+	// TODO: verify that this works correctly for custom projections [comment not by GZ]
 	// seam is at East, except angleRotateZ has been given.
-	//sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
-	// GZ: Want better angle resolution, optional!
 	sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
+	// GZ: NEW PARTS: Fog also for sphericals...
+	if (mapTexFog)
+	{
+		//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
+		sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+						  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+						  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness), fogFader.getInterstate());
+		mapTexFog->bind();
+		sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
+	}
 
-	// GZ experimental:
+	// GZ experimental. This looks striking!
 	if (mapTexIllum && lightScapeBrightness>0.0f)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(lightScapeBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-		else
-			sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
 		mapTexIllum->bind();
 		sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
 	}

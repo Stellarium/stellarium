@@ -31,6 +31,7 @@ Ocular::Ocular(const QObject& other)
 	this->m_fieldStop = other.property("fieldStop").toDouble();
 	this->m_name = other.property("name").toString();
 	this->m_binoculars = other.property("binoculars").toBool();
+	this->m_reticleFOV = other.property("reticleFOV").toDouble();
 }
 
 Ocular::~Ocular()
@@ -38,7 +39,7 @@ Ocular::~Ocular()
 }
 
 static QMap<int, QString> mapping;
-QMap<int, QString> Ocular::propertyMap()
+QMap<int, QString> Ocular::propertyMap(void)
 {
 	if(mapping.isEmpty()) {
 		mapping = QMap<int, QString>();
@@ -47,6 +48,7 @@ QMap<int, QString> Ocular::propertyMap()
 		mapping[2] = "effectiveFocalLength";
 		mapping[3] = "fieldStop";
 		mapping[4] = "binoculars";
+		mapping[5] = "reticlePath";
 	}
 	return mapping;
 }
@@ -58,7 +60,7 @@ QMap<int, QString> Ocular::propertyMap()
 #pragma mark Instance Methods
 #endif
 /* ********************************************************************* */
-double Ocular::actualFOV(Telescope *telescope, Lens *lens) const
+double Ocular::actualFOV(const Telescope * telescope, const Lens * lens) const
 {
 	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
 	double actualFOV = 0.0;
@@ -73,7 +75,7 @@ double Ocular::actualFOV(Telescope *telescope, Lens *lens) const
 	return actualFOV;
 }
 
-double Ocular::magnification(Telescope *telescope, Lens *lens) const
+double Ocular::magnification(const Telescope * telescope, const Lens * lens) const
 {
 	double magnifiction = 0.0;
 	if (m_binoculars) {
@@ -91,54 +93,63 @@ double Ocular::magnification(Telescope *telescope, Lens *lens) const
 #pragma mark Accessors & Mutators
 #endif
 /* ********************************************************************* */
-const QString Ocular::name() const
+QString Ocular::name(void) const
 {
 	return m_name;
 }
 
-void Ocular::setName(QString aName)
+void Ocular::setName(const QString aName)
 {
 	m_name = aName;
 }
 
-double Ocular::appearentFOV() const
+double Ocular::appearentFOV(void) const
 {
 	return m_appearentFOV;
 }
 
-void Ocular::setAppearentFOV(double fov)
+void Ocular::setAppearentFOV(const double fov)
 {
 	m_appearentFOV = fov;
 }
 
-double Ocular::effectiveFocalLength() const
+double Ocular::effectiveFocalLength(void) const
 {
 	return m_effectiveFocalLength;
 }
 
-void Ocular::setEffectiveFocalLength(double fl)
+void Ocular::setEffectiveFocalLength(const double fl)
 {
 	m_effectiveFocalLength = fl;
 }
 
-double Ocular::fieldStop() const
+double Ocular::fieldStop(void) const
 {
 	return m_fieldStop;
 }
 
-void Ocular::setFieldStop(double fs)
+void Ocular::setFieldStop(const double fs)
 {
 	m_fieldStop = fs;
 }
 
-bool Ocular::isBinoculars() const
+bool Ocular::isBinoculars(void) const
 {
 	return m_binoculars;
 }
 
-void Ocular::setBinoculars(bool flag)
+void Ocular::setBinoculars(const bool flag)
 {
 	m_binoculars = flag;
+}
+
+QString Ocular::reticlePath(void) const
+{
+	return m_reticlePath;
+}
+void Ocular::setReticlePath(const QString path)
+{
+	m_reticlePath = path;
 }
 
 /* ********************************************************************* */
@@ -148,7 +159,7 @@ void Ocular::setBinoculars(bool flag)
 #endif
 /* ********************************************************************* */
 
-Ocular* Ocular::ocularFromSettings(QSettings* theSettings, int ocularIndex)
+Ocular * Ocular::ocularFromSettings(const QSettings *theSettings, const int ocularIndex)
 {
 	Ocular* ocular = new Ocular();
 	QString prefix = "ocular/" + QVariant(ocularIndex).toString() + "/";
@@ -158,7 +169,8 @@ Ocular* Ocular::ocularFromSettings(QSettings* theSettings, int ocularIndex)
 	ocular->setEffectiveFocalLength(theSettings->value(prefix + "efl", "0.0").toDouble());
 	ocular->setFieldStop(theSettings->value(prefix + "fieldStop", "0.0").toDouble());
 	ocular->setBinoculars(theSettings->value(prefix + "binoculars", "false").toBool());
-	
+	ocular->setReticlePath(theSettings->value(prefix + "reticlePath", "").toString());
+
 	if (!(ocular->appearentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
 		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
 		<< "\tafov: " << ocular->appearentFOV() << "\n"
@@ -171,7 +183,18 @@ Ocular* Ocular::ocularFromSettings(QSettings* theSettings, int ocularIndex)
 	return ocular;
 }
 
-Ocular* Ocular::ocularModel()
+void Ocular::writeToSettings(QSettings * settings, const int index)
+{
+	QString prefix = "ocular/" + QVariant(index).toString() + "/";
+	settings->setValue(prefix + "name", this->name());
+	settings->setValue(prefix + "afov", this->appearentFOV());
+	settings->setValue(prefix + "efl", this->effectiveFocalLength());
+	settings->setValue(prefix + "fieldStop", this->fieldStop());
+	settings->setValue(prefix + "binoculars", this->isBinoculars());
+	settings->setValue(prefix + "reticlePath", this->reticlePath());
+}
+
+Ocular * Ocular::ocularModel(void)
 {
 	Ocular* model = new Ocular();
 	model->setName("My Ocular");
@@ -179,5 +202,6 @@ Ocular* Ocular::ocularModel()
 	model->setEffectiveFocalLength(32);
 	model->setFieldStop(0);
 	model->setBinoculars(false);
+	model->setReticlePath("");
 	return model;
 }

@@ -41,6 +41,7 @@ public:
 	Q_INVOKABLE CCD(const QObject& other);
 	virtual ~CCD();
 	static CCD* ccdFromSettings(QSettings* theSettings, int ccdIndex);
+	void writeToSettings(QSettings * settings, const int index);
 	static CCD* ccdModel();
 
 	QString name() const;

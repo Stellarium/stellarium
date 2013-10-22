@@ -122,7 +122,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 		oss << name;
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 		oss << q_("Type: <b>%1</b> (%2)").arg(q_("nova")).arg(novaType) << "<br />";
 
 	if (flags&Magnitude)
@@ -137,7 +137,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
 		if (distance>0)
@@ -150,7 +150,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 
 Vec3f Nova::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Nova::getVMagnitude(const StelCore* core) const
@@ -285,9 +285,6 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
-
 	RCMag rcMag;
 	float size, shift;
 	double mag;

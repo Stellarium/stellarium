@@ -207,7 +207,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -242,18 +242,20 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Distance)
 	{
 		double distanceAu = getJ2000EquatorialPos(core).length();
+		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			double distanceKm = AU * distanceAu;
 			// xgettext:no-c-format
 			oss << QString(q_("Distance: %1AU (%2 km)"))
-			       .arg(distanceAu, 0, 'f', 8)
-			       .arg(distanceKm, 0, 'f', 0);
+				   .arg(distanceAu, 0, 'f', 6)
+				   .arg(distanceKm, 0, 'f', 3);
 		}
 		else
 		{
 			// xgettext:no-c-format
-			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
+				   .arg(distanceAu, 0, 'f', 3)
+				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
 		}
 		oss << "<br>";
 	}
@@ -263,7 +265,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra1) && (siderealPeriod>0))
+	if ((flags&Extra) && (siderealPeriod>0))
 	{
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
@@ -271,7 +273,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
 	/*
-	if (flags&Extra1)
+	if (flags&Extra)
 		oss << QString("<br><a href=\"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=%1\">JPL Small-Body Database Browser</a>").arg( (minorPlanetNumber) ? QString::number(minorPlanetNumber) : englishName );
 	*/
 

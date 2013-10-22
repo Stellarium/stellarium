@@ -245,6 +245,8 @@ public:
 
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
+	SphericalCap getVisibleSkyArea() const;
+	
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
 	//! @param duration direction of view move duration in s

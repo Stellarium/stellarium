@@ -115,8 +115,7 @@ public:
 	//! Supported types for Satellite objects:
 	//! - Name: designation in large type with the description underneath
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
-	//! - Extra1: range, rage rate and altitude of satellite above the Earth
-	//! - Extra2: Comms frequencies, modulation types and so on.
+	//! - Extra: range, rage rate and altitude of satellite above the Earth, comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
@@ -170,7 +169,6 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
-	void setNightColors(bool night);
 
 private:
 	bool initialized;
@@ -238,9 +236,7 @@ private:
 
 	//Satellite Orbit Draw
 	QFont     font;
-	Vec3f     orbitColorNormal;
-	Vec3f     orbitColorNight;
-	Vec3f*    orbitColor;
+	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
