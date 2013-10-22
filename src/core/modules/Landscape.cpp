@@ -414,6 +414,9 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
 {}
 
@@ -432,9 +435,19 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 		validLandscape = 0;
 		return;
 	}
-	create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-		landscapeIni.value("landscape/texturefov", 360).toFloat(),
-		landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
+	if (landscapeIni.value("landscape/maptex_illum").isNull())
+	{
+		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+			landscapeIni.value("landscape/texturefov", 360).toFloat(),
+			landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
+	}
+	else
+	{
+		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
+			landscapeIni.value("landscape/texturefov", 360).toFloat(),
+			landscapeIni.value("landscape/angle_rotatez", 0.).toFloat());
+	}
 }
 
 
@@ -447,6 +460,12 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	texFov = atexturefov*M_PI/180.f;
 	angleRotateZ = aangleRotateZ*M_PI/180.f;
+}
+void LandscapeFisheye::create(const QString _name, const QString& _maptex, const QString& _maptexNight, float atexturefov, float aangleRotateZ)
+{
+	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
+	create(_name, _maptex, atexturefov, aangleRotateZ);
+	mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexNight, StelTexture::StelTextureParams(true));
 }
 
 
@@ -474,11 +493,22 @@ void LandscapeFisheye::draw(StelCore* core)
 	mapTex->bind();
 	// Patch GZ: (40,20)->(cols,rows)
 	sPainter.sSphereMap(radius,cols,rows,texFov,1);
+	// GZ experimental:
+	if (mapTexIllum && lightScapeBrightness>0.0f)
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(lightScapeBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
+		else
+			sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+		mapTexIllum->bind();
+		sPainter.sSphereMap(radius, cols, rows, texFov, 1);
+	}
 
 	glDisable(GL_CULL_FACE);
 }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 // spherical panoramas
 
 LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius)
@@ -502,8 +532,17 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 		return;
 	}
 
-	create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-		landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
+	if (landscapeIni.value("landscape/maptex_illum").isNull())
+	{
+		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
+	}
+	else
+	{
+		create(name, getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
+			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
+	}
 }
 
 
@@ -516,7 +555,12 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
 }
-
+void LandscapeSpherical::create(const QString _name, const QString& _maptex, const QString& _maptexIllum, float _angleRotateZ)
+{
+	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
+	create(_name, _maptex, _angleRotateZ);
+	mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+}
 
 void LandscapeSpherical::draw(StelCore* core)
 {
@@ -542,10 +586,21 @@ void LandscapeSpherical::draw(StelCore* core)
 	mapTex->bind();
 
 	// TODO: verify that this works correctly for custom projections
-	// seam is at East
+	// seam is at East, except angleRotateZ has been given.
 	//sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
 	// GZ: Want better angle resolution, optional!
 	sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
 
+	// GZ experimental:
+	if (mapTexIllum && lightScapeBrightness>0.0f)
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		if (StelApp::getInstance().getVisionModeNight())
+			sPainter.setColor(lightScapeBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
+		else
+			sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+		mapTexIllum->bind();
+		sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
+	}
 	glDisable(GL_CULL_FACE);
 }
