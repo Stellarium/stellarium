@@ -46,6 +46,7 @@ class StelSkyDrawer : public QObject
 {
 	Q_OBJECT
 public:
+
 	//! Constructor
 	StelSkyDrawer(StelCore* core);
 	//! Destructor
@@ -142,11 +143,6 @@ public slots:
 	void setFlagTwinkle(bool b) {flagStarTwinkle=b;}
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
-
-	//! Set flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	void setFlagPointStar(bool b) {flagPointStar=b;}
-	//! Get flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	bool getFlagPointStar() const {return flagPointStar;}
 
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
@@ -282,7 +278,6 @@ private:
 	Refraction refraction;
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
-	bool flagPointStar;
 	bool flagStarTwinkle;
 	float twinkleAmount;
 
@@ -336,12 +331,29 @@ private:
 	float inScale;
 
 	// Variables used for GL optimization when displaying point sources
+	//! Vertex format for a point source.
+	//! Texture pos is stored in another separately.
+	struct StarVertex {
+		Vec2f pos;
+		unsigned char color[4];
+	};
+	
 	//! Buffer for storing the vertex array data
-	Vec3f* verticesGrid;
-	//! Buffer for storing the color array data
-	Vec3f* colorGrid;
-	//! Buffer for storing the texture coordinate array data
-	Vec2f* textureGrid;
+	StarVertex* vertexArray;
+
+	//! Buffer for storing the texture coordinate array data.
+	unsigned char* textureCoordArray;
+	
+	class QOpenGLShaderProgram* starShaderProgram;
+	struct StarShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int pos;
+		int color;
+		int texture;
+	};
+	StarShaderVars starShaderVars;
+	
 	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
 	//! Maximum number of sources which can be stored in the buffers

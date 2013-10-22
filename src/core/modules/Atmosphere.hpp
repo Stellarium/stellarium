@@ -27,6 +27,8 @@
 #include "Skybright.hpp"
 #include "StelFader.hpp"
 
+#include <QOpenGLBuffer>
+
 class StelProjector;
 class StelToneReproducer;
 class StelCore;
@@ -37,8 +39,9 @@ class StelCore;
 class Atmosphere
 {
 public:
-	Atmosphere(void);
-	virtual ~Atmosphere(void);
+	Atmosphere();
+	virtual ~Atmosphere();
+	
 	void computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, StelCore* core,
 		float latitude = 45.f, float altitude = 200.f,
 		float temperature = 15.f, float relativeHumidity = 40.f);
@@ -57,16 +60,16 @@ public:
 
 	//! Get the actual atmosphere intensity due to eclipses + fader
 	//! @return the display intensity ranging from 0 to 1
-	float getRealDisplayIntensityFactor(void) const {return fader.getInterstate()*eclipseFactor;}
+	float getRealDisplayIntensityFactor() const {return fader.getInterstate()*eclipseFactor;}
 
 	// let's you know how far faded in or out the atm is (0-1)
-	float getFadeIntensity(void) const {return fader.getInterstate();}
+	float getFadeIntensity() const {return fader.getInterstate();}
 
 	//! Get the average luminance of the atmosphere in cd/m2
 	//! If atmosphere is off, the luminance includes the background starlight + light pollution.
 	//! Otherwise it includes the atmosphere + background starlight + eclipse factor + light pollution.
 	//! @return the last computed average luminance of the atmosphere in cd/m2.
-	float getAverageLuminance(void) const {return averageLuminance;}
+	float getAverageLuminance() const {return averageLuminance;}
 
 	//! Set the light pollution luminance in cd/m^2
 	void setLightPollutionLuminance(float f) { lightPollutionLuminance = f; }
@@ -80,8 +83,10 @@ private:
 	int skyResolutionY,skyResolutionX;
 
 	Vec2f* posGrid;
+	QOpenGLBuffer posGridBuffer;
+	QOpenGLBuffer indicesBuffer;
 	Vec4f* colorGrid;
-	unsigned short* indices;
+	QOpenGLBuffer colorGridBuffer;
 
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;

@@ -49,6 +49,7 @@ class StelPainter;
 //! We discern:
 //!   @param LandscapeId: The directory name of the landscape.
 //!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, UTF8, ...) GZ:VERIFY!
+//! TODO: ADD FOG TO SPHERICAL/FISHEYE!
 class Landscape
 {
 public:
@@ -111,6 +112,9 @@ public:
 	//! @param d the rotation angle in degrees.
 	void setZRotation(float d) {angleRotateZOffset = d * M_PI/180.0f;}
 
+	//! Get whether the landscape is currently fully visible (i.e. opaque).
+	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
+	
 protected:
 	//! Load attributes common to all landscapes
 	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
@@ -253,10 +257,12 @@ public:
 	//! @param texturefov field of view for the photo, degrees
 	//! @param angleRotateZ azimuth rotation angle, degrees
 	void create(const QString name, const QString& maptex, float texturefov, float angleRotateZ);
-	void create(const QString name, const QString& maptex, const QString& maptexIllum, float texturefov, float angleRotateZ);
+	void create(const QString name, float texturefov, const QString& maptex, const QString &_maptexFog="", const QString& _maptexIllum="", const float angleRotateZ=0.0f);
 private:
 
 	StelTextureSP mapTex;      //!< The fisheye image, centered on the zenith.
+	StelTextureSP mapTexFog;   //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
+							   //!< can also be smaller, just the texture is again mapped onto the same geometry.
 	StelTextureSP mapTexIllum; //!< Optional fisheye image of identical size (create as layer in your favorite image processor) or at least, proportions.
 							   //!< To simulate light pollution (skyglow), street lights, light in windows, ... at night
 
@@ -282,11 +288,13 @@ public:
 	//! @param maptex the equirectangular texture
 	//! @param maptexIllum the equirectangular texture that is overlaid in the night (streetlights, skyglow, ...)
 	//! @param angleRotateZ azimuth rotation angle, degrees
-	void create(const QString name, const QString& maptex, float angleRotateZ);
-	void create(const QString name, const QString& maptex, const QString& maptexIllum, float angleRotateZ);
+	//void create(const QString name, const QString& maptex, float angleRotateZ);
+	void create(const QString name, const QString& maptex, const QString &_maptexFog="", const QString& _maptexIllum="", const float _angleRotateZ=0.0f);
 private:
 
 	StelTextureSP mapTex;      //!< The equirectangular panorama texture
+	StelTextureSP mapTexFog;   //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
+							   //!< can also be smaller, just the texture is again mapped onto the same geometry.
 	StelTextureSP mapTexIllum; //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
 							   //!< To simulate light pollution (skyglow), street lights, light in windows, ... at night
 };

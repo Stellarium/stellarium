@@ -119,7 +119,7 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		addAction("actionShow_Compass_Marks", "CompassMarks", N_("Compass marks"), "marksVisible");
+		addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
@@ -146,13 +146,7 @@ void CompassMarks::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	Vec3f mColor;
-	if (StelApp::getInstance().getVisionModeNight())
-		mColor = StelUtils::getNightColor(markColor);
-	else
-		mColor = markColor;
-
-	painter.setColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
+	painter.setColor(markColor[0], markColor[1], markColor[2], markFader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);

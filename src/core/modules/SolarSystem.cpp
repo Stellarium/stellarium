@@ -58,7 +58,11 @@
 #include <QDebug>
 #include <QDir>
 
-SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
+SolarSystem::SolarSystem()
+	: moonScale(1.),
+	  flagOrbits(false),
+	  flagLightTravelTime(false),
+	  allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
@@ -142,9 +146,10 @@ void SolarSystem::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-	addAction("actionShow_Planets_Labels", "Display Options", N_("Planet labels"), "labelsDisplayed", "P");
-	addAction("actionShow_Planets_Orbits", "Display Options", N_("Planet orbits"), "orbitsDisplayed", "O");
-	addAction("actionShow_Planets_Trails", "Display Options", N_("Planet trails"), "trailsDisplayed", "Shift+T");
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "P");
+	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
+	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
 }
 
 void SolarSystem::recreateTrails()
@@ -176,10 +181,8 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(1.0f,0.0f,0.0f);
-		else
-			sPainter.setColor(1.0f,0.3f,0.3f);
+		Vec3f color = getPointersColor();
+		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
@@ -981,6 +984,7 @@ void SolarSystem::setStelStyle(const QString& section)
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
+	setPointersColor(StelUtils::strToVec3f(conf->value(section+"/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
 	// Recreate the trails to apply new colors
 	recreateTrails();

@@ -71,8 +71,14 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 }
 
 Satellites::Satellites()
-	: satelliteListModel(NULL), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL),
-	  earth(NULL), defaultHintColor(0.0, 0.4, 0.6), defaultOrbitColor(0.0, 0.3, 0.6),
+	: satelliteListModel(NULL),
+	  pxmapGlow(NULL),
+	  pxmapOnIcon(NULL),
+	  pxmapOffIcon(NULL),
+	  toolbarButton(NULL),
+	  earth(NULL),
+	  defaultHintColor(0.0, 0.4, 0.6),
+	  defaultOrbitColor(0.0, 0.3, 0.6),
 	  progressBar(NULL)
 {
 	setObjectName("Satellites");
@@ -130,9 +136,10 @@ void Satellites::init()
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		addAction("actionShow_Satellite_Hints", "Satellites", N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
-		addAction("actionShow_Satellite_Labels", "Satellites", N_("Satellite labels"), "labelsVisible", "Shift+Z");
-		addAction("actionShow_Satellite_ConfigDialog_Global", "Satellites", N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
+		QString satGroup = N_("Satellites");
+		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
+		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Shift+Z");
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
@@ -193,23 +200,6 @@ void Satellites::init()
 	        SIGNAL(locationChanged(StelLocation)),
 	        this,
 	        SLOT(updateObserverLocation(StelLocation)));
-	
-	//Load the module's custom style sheets
-	QFile styleSheetFile;
-	styleSheetFile.setFileName(":/satellites/normalStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		normalStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-	styleSheetFile.setFileName(":/satellites/nightStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		nightStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
@@ -245,33 +235,6 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 
 	return true;
 }
-
-void Satellites::setStelStyle(const QString& mode)
-{
-	foreach(const SatelliteP& sat, satellites)
-	{
-		if (sat->initialized)
-		{
-			sat->setNightColors(mode=="night_color");
-		}
-	}
-}
-
-const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
-{
-	StelStyle pluginStyle(style);
-	if (style.confSectionName == "color")
-	{
-		pluginStyle.qtStyleSheet.append(normalStyleSheet);
-	}
-	else
-	{
-		pluginStyle.qtStyleSheet.append(nightStyleSheet);
-	}
-	return pluginStyle;
-}
-
-
 
 double Satellites::getCallOrder(StelModuleActionName actionName) const
 {
@@ -1555,10 +1518,7 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
-		if (StelApp::getInstance().getVisionModeNight())
-			glColor3f(0.8f,0.0f,0.0f);
-		else
-			glColor3f(0.4f,0.5f,0.8f);
+		glColor3f(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
 		glEnable(GL_TEXTURE_2D);

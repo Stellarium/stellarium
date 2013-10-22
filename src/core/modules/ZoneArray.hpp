@@ -51,8 +51,6 @@
 #  endif
 #endif
 
-namespace BigStarCatalogExtension
-{
 
 #define NR_OF_HIP 120416
 #define FILE_MAGIC 0x835f040a
@@ -103,7 +101,8 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
 					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
-					  unsigned int maxMagStarName,float names_brightness) const = 0;
+					  int maxMagStarName, float names_brightness,
+					  const QVector<SphericalCap>& boundingCaps) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
@@ -182,7 +181,8 @@ protected:
 	//! @param names_brightness brightness of labels
 	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
-			  unsigned int maxMagStarName, float names_brightness) const;
+			  int maxMagStarName, float names_brightness,
+			  const QVector<SphericalCap>& boundingCaps) const;
 
 	virtual void scaleAxis();
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
@@ -208,7 +208,5 @@ public:
 	//! @param hipIndex array of Hipparcos info structs
 	void updateHipIndex(HipIndexStruct hipIndex[]) const;
 };
-
-} // namespace BigStarCatalogExtension
 
 #endif // _ZONEARRAY_HPP_

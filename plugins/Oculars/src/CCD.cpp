@@ -155,6 +155,17 @@ double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 	return FOVy;
 }
 
+void CCD::writeToSettings(QSettings * settings, const int index)
+{
+	QString prefix = "ccd/" + QVariant(index).toString() + "/";
+	settings->setValue(prefix + "name", this->name());
+	settings->setValue(prefix + "resolutionX", this->resolutionX());
+	settings->setValue(prefix + "resolutionY", this->resolutionY());
+	settings->setValue(prefix + "chip_width", this->chipWidth());
+	settings->setValue(prefix + "chip_height", this->chipHeight());
+	settings->setValue(prefix + "pixel_width", this->pixelWidth());
+	settings->setValue(prefix + "pixel_height", this->pixelWidth());
+}
 /* ********************************************************************* */
 #if 0
 #pragma mark -

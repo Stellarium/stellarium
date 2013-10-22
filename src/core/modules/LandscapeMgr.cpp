@@ -324,10 +324,11 @@ void LandscapeMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-	addAction("actionShow_Atmosphere", "Display Options", N_("Atmosphere"), "atmosphereDisplayed", "A");
-	addAction("actionShow_Fog", "Display Options", N_("Fog"), "fogDisplayed", "F");
-	addAction("actionShow_Cardinal_Points", "Display Options", N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
-	addAction("actionShow_Ground", "Display Options", N_("Ground"), "landscapeDisplayed", "G");
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");
+	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
+	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
+	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -450,6 +451,11 @@ void LandscapeMgr::setFlagLandscape(const bool displayed)
 bool LandscapeMgr::getFlagLandscape() const
 {
 	return landscape->getFlagShow();
+}
+
+bool LandscapeMgr::getIsLandscapeFullyVisible() const
+{
+	return landscape->getIsFullyVisible();
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)

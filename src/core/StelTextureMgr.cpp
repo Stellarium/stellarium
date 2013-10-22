@@ -33,24 +33,9 @@
 #include <QOpenGLContext>
 
 
-StelTextureMgr::StelTextureMgr()
-{
-	// This thread is doing nothing but will contains all the loader objects.
-	loaderThread = new QThread(this);
-	loaderThread->start(QThread::LowestPriority);
-}
-
-StelTextureMgr::~StelTextureMgr()
-{
-	// Hopefully this doesn't take much time.
-	loaderThread->quit();
-	loaderThread->wait();
-}
-
 void StelTextureMgr::init()
 {
 }
-
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
 {
@@ -60,46 +45,26 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	StelTextureSP tex = StelTextureSP(new StelTexture());
 	tex->fullPath = afilename;
 
-	tex->qImage = QImage(tex->fullPath);
-	if (tex->qImage.isNull())
+	QImage image(tex->fullPath);
+	if (image.isNull())
 		return StelTextureSP();
 
 	tex->loadParams = params;
-	tex->downloaded = true;
-
-	if (tex->glLoad())
+	if (tex->glLoad(image))
 		return tex;
 	else
 		return StelTextureSP();
 }
 
 
-StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTexture::StelTextureParams& params, const QString& fileExtension, bool lazyLoading)
+StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTexture::StelTextureParams& params, bool lazyLoading)
 {
 	if (url.isEmpty())
 		return StelTextureSP();
 
 	StelTextureSP tex = StelTextureSP(new StelTexture());
 	tex->loadParams = params;
-	if (!url.startsWith("http://"))
-	{
-		// Assume a local file
-		tex->fullPath = url;
-		tex->downloaded = true;
-	}
-	else
-	{
-		tex->fullPath = url;
-		if (fileExtension.isEmpty())
-		{
-			const int idx = url.lastIndexOf('.');
-			if (idx!=-1)
-				tex->fileExtension = url.right(url.size()-idx-1);
-		}
-	}
-	if (!fileExtension.isEmpty())
-		tex->fileExtension = fileExtension;
-
+	tex->fullPath = url;
 	if (!lazyLoading)
 	{
 		tex->bind();
