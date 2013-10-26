@@ -17,6 +17,8 @@ src/core/StelCore.cpp
 src/core/StelProjector.cpp
 src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
+src/core/StelSkyLayerMgr.cpp
+src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
@@ -30,6 +32,7 @@ src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/main.cpp
+src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h

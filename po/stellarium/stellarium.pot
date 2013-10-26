@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 16:09+0700\n"
+"POT-Creation-Date: 2013-10-26 16:16+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:314
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
 #: src/core/StelApp.cpp:437 src/core/StelCore.cpp:160
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:296
 msgid "Display Options"
 msgstr ""
 
@@ -461,7 +462,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr ""
 
-#: src/core/StelCore.cpp:159
+#: src/core/StelCore.cpp:159 src/core/StelMovementMgr.cpp:105
 msgid "Movement and Selection"
 msgstr ""
 
@@ -1000,6 +1001,35 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr ""
 
+#: src/core/StelSkyLayerMgr.cpp:87
+msgid "Deep-sky objects background images"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
+#: src/StelMainView.cpp:295
+msgid "Miscellaneous"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:106
+msgid "Switch between equatorial and azimuthal mount"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:107
+msgid "Center on selected object"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:108
+msgid "Zoom in on selected object"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:109
+msgid "Zoom out"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:110
+msgid "Track object"
+msgstr ""
+
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
 msgstr ""
@@ -1300,10 +1330,6 @@ msgstr ""
 msgid "Windows"
 msgstr ""
 
-#: src/gui/StelGui.cpp:178
-msgid "Miscellaneous"
-msgstr ""
-
 #: src/gui/StelGui.cpp:179
 msgid "Quit"
 msgstr ""
@@ -1568,6 +1594,19 @@ msgstr ""
 
 #: src/main.cpp:319
 msgid "This system does not support OpenGL."
+msgstr ""
+
+#: src/StelMainView.cpp:295
+msgid "Save screenshot"
+msgstr ""
+
+#: src/StelMainView.cpp:296
+msgid "Full-screen mode"
+msgstr ""
+
+#: src/StelMainView.cpp:353
+#, qt-format
+msgid "Stellarium %1"
 msgstr ""
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:194
