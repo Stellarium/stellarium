@@ -159,6 +159,11 @@ public slots:
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
 	bool getFlagOrbits() const {return flagOrbits;}
 
+	//! Set flag which determines if planet markers are drawn or hidden.
+	void setFlagMarkers(bool b) { flagMarker=b; }
+	//! Get the current value of the flag which determines if planet markers are drawn or hidden.
+	bool getFlagMarkers() const {return flagMarker;}
+
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b);
 	//! Get the current value of the flag which determines if light travel time
@@ -346,6 +351,7 @@ private:
 	StelTextureSP texPointer;
 
 	bool flagShow;
+	bool flagMarker;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
