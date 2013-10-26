@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 16:07+0700\n"
+"POT-Creation-Date: 2013-10-26 16:09+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:314
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
-#: src/core/StelCore.cpp:160
+#: src/core/StelApp.cpp:437 src/core/StelCore.cpp:160
 msgid "Display Options"
 msgstr ""
 
@@ -444,6 +444,10 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Rising time: %1%"
+msgstr ""
+
+#: src/core/StelApp.cpp:437
+msgid "Night mode"
 msgstr ""
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
