@@ -513,17 +513,32 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 		   getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
 			getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
 			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
-			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
+			landscapeIni.value("landscape/angle_rotatez"      ,   0.f).toFloat(),
+			landscapeIni.value("landscape/maptex_top"         ,  90.f).toFloat(),
+			landscapeIni.value("landscape/maptex_bottom"      , -90.f).toFloat(),
+			landscapeIni.value("landscape/maptex_fog_top"     ,  90.f).toFloat(),
+			landscapeIni.value("landscape/maptex_fog_bottom"  , -90.f).toFloat(),
+			landscapeIni.value("landscape/maptex_illum_top"   ,  90.f).toFloat(),
+			landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat());
 }
 
 
 //// create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const QString _name, const QString& _maptex, const QString& _maptexFog, const QString& _maptexIllum, const float _angleRotateZ)
+void LandscapeSpherical::create(const QString _name, const QString& _maptex, const QString& _maptexFog, const QString& _maptexIllum, const float _angleRotateZ,
+								const float _mapTexTop, const float _mapTexBottom,
+								const float _fogTexTop, const float _fogTexBottom,
+								const float _illumTexTop, const float _illumTexBottom)
 {
-	qDebug() << "LandscapeSpherical::create():"<< _name << " : " << _maptex << " : " << _maptexFog << " : " << _maptexIllum << " : " << _angleRotateZ;
+	//qDebug() << "LandscapeSpherical::create():"<< _name << " : " << _maptex << " : " << _maptexFog << " : " << _maptexIllum << " : " << _angleRotateZ;
 	validLandscape = 1;  // assume ok...
 	name = _name;
-	angleRotateZ = _angleRotateZ*M_PI/180.f;
+	angleRotateZ  = _angleRotateZ         *M_PI/180.f; // Defined in ini --> internal prg value
+	mapTexTop     = (90.f-_mapTexTop)     *M_PI/180.f; // top     90     -->   0
+	mapTexBottom  = (90.f-_mapTexBottom)  *M_PI/180.f; // bottom -90     --> 180
+	fogTexTop     = (90.f-_fogTexTop)     *M_PI/180.f;
+	fogTexBottom  = (90.f-_fogTexBottom)  *M_PI/180.f;
+	illumTexTop   = (90.f-_illumTexTop)   *M_PI/180.f;
+	illumTexBottom= (90.f-_illumTexBottom)*M_PI/180.f;
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 
 	if (_maptexIllum.length())
@@ -553,17 +568,17 @@ void LandscapeSpherical::draw(StelCore* core)
 
 	// TODO: verify that this works correctly for custom projections [comment not by GZ]
 	// seam is at East, except angleRotateZ has been given.
-	sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
+	sPainter.sSphere(radius, 1.0, cols, rows, 1, true, mapTexTop, mapTexBottom);
 	// GZ: NEW PARTS: Fog also for sphericals...
 	if (mapTexFog)
 	{
-		//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
+		//glBlendFunc(GL_ONE, GL_ONE); // GZ: blending mode as found in the old_style landscapes...
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
 		sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
 						  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
 						  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness), fogFader.getInterstate());
 		mapTexFog->bind();
-		sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
+		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom)), 1, true, fogTexTop, fogTexBottom);
 	}
 
 	// GZ experimental. This looks striking!
@@ -572,7 +587,7 @@ void LandscapeSpherical::draw(StelCore* core)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
 		mapTexIllum->bind();
-		sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
+		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom)), 1, true, illumTexTop, illumTexBottom);
 	}
 	glDisable(GL_CULL_FACE);
 }

@@ -49,7 +49,8 @@ class StelPainter;
 //! We discern:
 //!   @param LandscapeId: The directory name of the landscape.
 //!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, UTF8, ...) GZ:VERIFY!
-//! TODO: ADD FOG TO SPHERICAL/FISHEYE!
+//! TODO: 1) Add a way to "ask" a landscape if a certain point is transparent. Useful for accurate rise/set predictions!
+//!       2) Implement LandscapePolygonal
 class Landscape
 {
 public:
@@ -114,6 +115,9 @@ public:
 
 	//! Get whether the landscape is currently fully visible (i.e. opaque).
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
+
+	// GZ: NEW FUNCTION: USEFUL IF ALL SUBCLASSED IMPLEMENT THIS, TEXTURE LOOKUP.
+	virtual float getTransparency(Vec3f direction) const {return 0.0f; }
 	
 protected:
 	//! Load attributes common to all landscapes
@@ -273,9 +277,11 @@ private:
 //! @class LandscapeSpherical
 //! This uses a single panorama image in spherical (equirectangular) projection. A complete image is rectangular with the horizon forming a
 //! horizontal line centered vertically, and vertical altitude angles linearly mapped in image height.
-//! Since 0.13 and Qt5, large images of 8192x4096 pixels are available.
+//! Since 0.13 and Qt5, large images of 8192x4096 pixels are available, but they still may not work on every hardware.
 //! If @param angleRotateZ==0, the left/right image border is due east.
-// GZ TODO: Allow sky portion to be cut away.?
+//! It is possible to remove empty top or bottom parts of the textures (main texture: only top part should meaningfully be cut away!)
+//! The texture should still be power-of-two, so maybe 8192x1024 for the fog, or 8192x2048 for the light pollution.
+//! (It's OK to stretch the textures. They just have to fit, geometrically!)
 class LandscapeSpherical : public Landscape
 {
 public:
@@ -287,9 +293,17 @@ public:
 	//! @param name Landscape name
 	//! @param maptex the equirectangular texture
 	//! @param maptexIllum the equirectangular texture that is overlaid in the night (streetlights, skyglow, ...)
-	//! @param angleRotateZ azimuth rotation angle, degrees
-	//void create(const QString name, const QString& maptex, float angleRotateZ);
-	void create(const QString name, const QString& maptex, const QString &_maptexFog="", const QString& _maptexIllum="", const float _angleRotateZ=0.0f);
+	//! @param angleRotateZ azimuth rotation angle, degrees [0]
+	//! @param _mapTexTop altitude angle of top edge of texture, degrees [90]
+	//! @param _mapTexBottom altitude angle of bottom edge of texture, degrees [-90]
+	//! @param _fogTexTop altitude angle of top edge of fog texture, degrees [90]
+	//! @param _fogTexBottom altitude angle of bottom edge of fog texture, degrees [-90]
+	//! @param _illumTexTop altitude angle of top edge of light pollution texture, degrees [90]
+	//! @param _illumTexBottom altitude angle of bottom edge of light pollution texture, degrees [-90]
+	void create(const QString name, const QString& maptex, const QString &_maptexFog="", const QString& _maptexIllum="", const float _angleRotateZ=0.0f,
+				const float _mapTexTop=90.0f, const float _mapTexBottom=-90.0f,
+				const float _fogTexTop=90.0f, const float _fogTexBottom=-90.0f,
+				const float _illumTexTop=90.0f, const float _illumTexBottom=-90.0f);
 private:
 
 	StelTextureSP mapTex;      //!< The equirectangular panorama texture
@@ -297,6 +311,14 @@ private:
 							   //!< can also be smaller, just the texture is again mapped onto the same geometry.
 	StelTextureSP mapTexIllum; //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
 							   //!< To simulate light pollution (skyglow), street lights, light in windows, ... at night
+	// These vars are here to conserve texture memory. They must be allowed to be different: a landscape may have its highest elevations at 15°, fog may reach from -25 to +15°,
+	// light pollution may cover -5° (street lamps slightly below) plus parts of or even the whole sky. All have default values to simplify life.
+	float mapTexTop;           //!< zenithal top angle of the landscape texture, radians
+	float mapTexBottom;		   //!< zenithal bottom angle of the landscape texture, radians
+	float fogTexTop;		   //!< zenithal top angle of the fog texture, radians
+	float fogTexBottom;		   //!< zenithal bottom angle of the fog texture, radians
+	float illumTexTop;		   //!< zenithal top angle of the illumination texture, radians
+	float illumTexBottom;	   //!< zenithal bottom angle of the illumination texture, radians
 };
 
 #endif // _LANDSCAPE_HPP_
