@@ -219,17 +219,23 @@ void StelPainter::drawViewportShape(void)
 	enableClientStates(false);
 }
 
+// Arrays to keep cos/sin of angles and multiples of angles. rho and theta are delta angles, and these arrays
 #define MAX_STACKS 4096
 static float cos_sin_rho[2*(MAX_STACKS+1)];
 #define MAX_SLICES 4096
 static float cos_sin_theta[2*(MAX_SLICES+1)];
 
-static void ComputeCosSinTheta(float phi,int segments)
+//! Compute cosines and sines around a circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_theta.
+//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
+//! @param dTheta a difference angle between the stops. Always use 2*M_PI/segments!
+//! @param segments number of partitions (elsewhere called "slices") for the circle
+static void ComputeCosSinTheta(const float dTheta, const int segments)
 {
 	float *cos_sin = cos_sin_theta;
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
-	const float c = std::cos(phi);
-	const float s = std::sin(phi);
+	const float c = std::cos(dTheta);
+	const float s = std::sin(dTheta);
 	*cos_sin++ = 1.f;
 	*cos_sin++ = 0.f;
 	*--cos_sin_rev = -cos_sin[-1];
@@ -238,8 +244,9 @@ static void ComputeCosSinTheta(float phi,int segments)
 	*cos_sin++ = s;
 	*--cos_sin_rev = -cos_sin[-1];
 	*--cos_sin_rev =  cos_sin[-2];
-	while (cos_sin < cos_sin_rev)
+	while (cos_sin < cos_sin_rev)   // compares array address indices only!
 	{
+		// avoid expensive trig functions by use of the addition theorem.
 		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
 		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
 		cos_sin += 2;
@@ -248,16 +255,17 @@ static void ComputeCosSinTheta(float phi,int segments)
 	}
 }
 
-//! Compute cosines and sines around a circle which is split in "segments" parts.
+//! Compute cosines and sines around a half-circle which is split in "segments" parts.
 //! Values are stored in the global static array cos_sin_rho.
-//! Used for the sin/cos values along a meridian.
-//! GZ: change to allow leaving away a pole cap?
-static void ComputeCosSinRho(float phi, int segments)
+//! Used for the sin/cos values along a meridian for a spherical mesh.
+//! @param dRho a difference angle between the stops. Always use M_PI/segments!
+//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
+static void ComputeCosSinRho(const float dRho, const int segments)
 {
 	float *cos_sin = cos_sin_rho;
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
-	const float c = cos(phi);
-	const float s = sin(phi);
+	const float c = std::cos(dRho);
+	const float s = std::sin(dRho);
 	*cos_sin++ = 1.f;
 	*cos_sin++ = 0.f;
 	*--cos_sin_rev =  cos_sin[-1];
@@ -266,17 +274,39 @@ static void ComputeCosSinRho(float phi, int segments)
 	*cos_sin++ = s;
 	*--cos_sin_rev =  cos_sin[-1];
 	*--cos_sin_rev = -cos_sin[-2];
-	while (cos_sin < cos_sin_rev)
+	while (cos_sin < cos_sin_rev)    // compares array address indices only!
 	{
+		// avoid expensive trig functions by use of the addition theorem.
 		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
 		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
 		cos_sin += 2;
 		*--cos_sin_rev =  cos_sin[-1];
 		*--cos_sin_rev = -cos_sin[-2];
-		segments--;
+		// segments--;                       // GZ: WHAT'S THAT GOOD FOR?
 	}
 }
 
+//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian.
+//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+//! @param dRho a difference angle between the stops
+//! @param segments number of segments
+//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
+static void ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle)
+{
+	float *cos_sin = cos_sin_rho;
+	const float c = cos(dRho);
+	const float s = sin(dRho);
+	*cos_sin++ = cos(minAngle);
+	*cos_sin++ = sin(minAngle);
+	for (int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
+	{   // efficient computation, avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+	}
+}
 
 void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
@@ -382,7 +412,7 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 
 }
 
-void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orientInside)
+void StelPainter::sRing(const float rMin, const float rMax, int slices, const int stacks, const int orientInside)
 {
 	float x,y;
 	int j;
@@ -459,14 +489,14 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 	}
 }
 
-static void sSphereMapTexCoordFast(float rho_div_fov, float costheta, float sintheta, QVector<float>& out)
+static void sSphereMapTexCoordFast(float rho_div_fov, const float costheta, const float sintheta, QVector<float>& out)
 {
 	if (rho_div_fov>0.5f)
 		rho_div_fov=0.5f;
 	out << 0.5f + rho_div_fov * costheta << 0.5f + rho_div_fov * sintheta;
 }
 
-void StelPainter::sSphereMap(float radius, int slices, int stacks, float textureFov, int orientInside)
+void StelPainter::sSphereMap(const float radius, const int slices, const int stacks, const float textureFov, const int orientInside)
 {
 	float rho,x,y,z;
 	int i, j;
@@ -543,7 +573,7 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	}
 }
 
-void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
+void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const float xshift, const float yshift)
 {
 	float dx, dy, d, theta, psi;
 	dx = x - prj->viewportCenter[0];
@@ -587,7 +617,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	}
 }
 
-void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
+void StelPainter::drawText(const Vec3d& v, const QString& str, const float angleDeg, const float xshift, const float yshift, const bool noGravity)
 {
 	Vec3d win;
 	if (prj->project(v, win))
@@ -615,7 +645,7 @@ struct StringTexture
 	}
 };
 
-void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, const bool noGravity)
 {
 	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
@@ -803,7 +833,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
 		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos,
-		double maxSqDistortion, int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
+		const double maxSqDistortion, const int nbI, const bool checkDisc1, const bool checkDisc2, const bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
 	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
@@ -1242,7 +1272,7 @@ private:
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, const bool checkDiscontinuity)
 {
 	if (checkDiscontinuity && prj->hasDiscontinuity())
 	{
@@ -1269,7 +1299,7 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 	enableClientStates(false);
 }
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide, double maxSqDistortion)
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, const bool textured, const SphericalCap* clippingCap, const bool doSubDivide, const double maxSqDistortion)
 {
 	if (va.vertex.isEmpty())
 		return;
@@ -1296,7 +1326,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise, double maxSqDistortion)
+void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion)
 {
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
@@ -1329,7 +1359,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 /*************************************************************************
  draw a simple circle, 2d viewport coordinates in pixel
 *************************************************************************/
-void StelPainter::drawCircle(float x, float y, float r)
+void StelPainter::drawCircle(const float x, const float y, float r)
 {
 	if (r <= 1.0)
 		return;
@@ -1361,7 +1391,7 @@ void StelPainter::drawCircle(float x, float y, float r)
 }
 
 
-void StelPainter::drawSprite2dMode(float x, float y, float radius)
+void StelPainter::drawSprite2dMode(const float x, const float y, const float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1376,14 +1406,14 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 	enableClientStates(false);
 }
 
-void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
+void StelPainter::drawSprite2dMode(const Vec3d& v, const float radius)
 {
 	Vec3d win;
 	if (prj->project(v, win))
 		drawSprite2dMode(win[0], win[1], radius);
 }
 
-void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotation)
+void StelPainter::drawSprite2dMode(const float x, const float y, const float radius, const float rotation)
 {
 	static float vertexData[8];
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1405,7 +1435,7 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotatio
 	enableClientStates(false);
 }
 
-void StelPainter::drawRect2d(float x, float y, float width, float height, bool textured)
+void StelPainter::drawRect2d(const float x, const float y, const float width, const float height, const bool textured)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1431,7 +1461,7 @@ void StelPainter::drawRect2d(float x, float y, float width, float height, bool t
 /*************************************************************************
  Draw a GL_POINT at the given position
 *************************************************************************/
-void StelPainter::drawPoint2d(float x, float y)
+void StelPainter::drawPoint2d(const float x, const float y)
 {
 	static float vertexData[] = {0.,0.};
 	vertexData[0]=x;
@@ -1447,7 +1477,7 @@ void StelPainter::drawPoint2d(float x, float y)
 /*************************************************************************
  Draw a line between the 2 points.
 *************************************************************************/
-void StelPainter::drawLine2d(float x1, float y1, float x2, float y2)
+void StelPainter::drawLine2d(const float x1, const float y1, const float x2, const float y2)
 {
 	static float vertexData[] = {0.,0.,0.,0.};
 	vertexData[0]=x1;
@@ -1462,8 +1492,9 @@ void StelPainter::drawLine2d(float x1, float y1, float x2, float y2)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Drawing methods for general (non-linear) mode
-void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture, float topAngle)
+// Drawing methods for general (non-linear) mode.
+// GZ This used to draw a full sphere. Now it's possible to have a spherical zone only.
+void StelPainter::sSphere(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
@@ -1503,10 +1534,15 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		t=1.f;
 	}
 
-	const float drho = (M_PI-topAngle) / stacks;
+	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
+	const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
 	Q_ASSERT(stacks<=MAX_STACKS);
-	ComputeCosSinRho(drho,stacks);
-	// GZ: TODO: Add parameter or change this function, so that pole region may remain free.
+	//if ((bottomAngle==M_PI) && (topAngle==0))
+	if ((bottomAngle>3.1415) && (topAngle<0.0001)) // safety margin.
+		ComputeCosSinRho(drho, stacks);
+	else
+		ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
+	// GZ: Allow parameters so that pole regions may remain free.
 	float* cos_sin_rho_p;
 
 	const float dtheta = 2.f * M_PI / slices;
@@ -1578,7 +1614,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
-StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+StelVertexArray StelPainter::computeSphereNoLight(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside, const bool flipTexture)
 {
 	StelVertexArray result(StelVertexArray::Triangles);
 	GLfloat x, y, z;
@@ -1645,7 +1681,7 @@ StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOb
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(float radius, float height, int slices, int orientInside)
+void StelPainter::sCylinder(const float radius, const float height, const int slices, const int orientInside)
 {
 	if (orientInside)
 		glCullFace(GL_FRONT);
@@ -1675,7 +1711,7 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 		glCullFace(GL_BACK);
 }
 
-void StelPainter::enableTexture2d(bool b)
+void StelPainter::enableTexture2d(const bool b)
 {
 	texture2dEnabled = b;
 }
@@ -1856,25 +1892,25 @@ void StelPainter::deinitGLShaders()
 }
 
 
-void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
+void StelPainter::setArrays(const Vec3d* vertices, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
-	enableClientStates(vertice, texCoords, colorArray, normalArray);
-	setVertexPointer(3, GL_DOUBLE, vertice);
+	enableClientStates(vertices, texCoords, colorArray, normalArray);
+	setVertexPointer(3, GL_DOUBLE, vertices);
 	setTexCoordPointer(2, GL_FLOAT, texCoords);
 	setColorPointer(3, GL_FLOAT, colorArray);
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
-void StelPainter::setArrays(const Vec3f* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
+void StelPainter::setArrays(const Vec3f* vertices, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
-	enableClientStates(vertice, texCoords, colorArray, normalArray);
-	setVertexPointer(3, GL_FLOAT, vertice);
+	enableClientStates(vertices, texCoords, colorArray, normalArray);
+	setVertexPointer(3, GL_FLOAT, vertices);
 	setTexCoordPointer(2, GL_FLOAT, texCoords);
 	setColorPointer(3, GL_FLOAT, colorArray);
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
-void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
+void StelPainter::enableClientStates(const bool vertex, const bool texture, const bool color, const bool normal)
 {
 	vertexArray.enabled = vertex;
 	texCoordArray.enabled = texture;
@@ -1882,7 +1918,7 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
-void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned short* indices)
+void StelPainter::drawFromArray(const DrawingMode mode, const int count, const int offset, const bool doProj, const unsigned short* indices)
 {
 	ArrayDesc projectedVertexArray = vertexArray;
 	if (doProj)
