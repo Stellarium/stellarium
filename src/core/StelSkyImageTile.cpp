@@ -16,17 +16,17 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelTextureMgr.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureParams.hpp"
-#include "renderer/StelTextureNew.hpp"
+#include "StelTexture.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelPainter.hpp"
 
 #include <QDebug>
 
@@ -42,12 +42,10 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
-	tex = NULL;
 }
 
 // Constructor
-StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) 
-	: MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
 	if (parent!=NULL)
@@ -73,18 +71,15 @@ StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* par
 // Destructor
 StelSkyImageTile::~StelSkyImageTile()
 {
-	if(NULL != tex)
-	{
-		delete tex;
-		tex = NULL;
-	}
 }
 
-void StelSkyImageTile::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, float)
+void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 {
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, StelSkyImageTile*> result;
-	getTilesToDraw(result, core, renderer, projector->getViewportConvexPolygon(0, 0), limitLuminance, true);
+	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
 
 	int numToBeLoaded=0;
 	foreach (StelSkyImageTile* t, result)
@@ -92,22 +87,21 @@ void StelSkyImageTile::draw(StelCore* core, StelRenderer* renderer, StelProjecto
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
 
-	// Draw in the right order
+	// Draw in the good order
+	sPainter.enableTexture2d(true);
+	glBlendFunc(GL_ONE, GL_ONE);
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core, renderer, projector);
+		i.value()->drawTile(core, sPainter);
 	}
 
 	deleteUnusedSubTiles();
 }
 
 // Return the list of tiles which should be drawn.
-void StelSkyImageTile::getTilesToDraw
-	(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, 
-	 StelRenderer* renderer, const SphericalRegionP& viewPortPoly,
-	 float limitLuminance, bool recheckIntersect)
+void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
 
 #ifndef NDEBUG
@@ -186,12 +180,12 @@ void StelSkyImageTile::getTilesToDraw
 
 	if (noTexture==false)
 	{
-		if (NULL == tex)
+		if (!tex)
 		{
 			// The tile has an associated texture, but it is not yet loaded: load it now
-			tex = renderer->createTexture(absoluteImageURI, TextureParams().generateMipmaps(),
-			                              TextureLoadingMode_LazyAsynchronous);
-			if (tex->getStatus() == TextureStatus_Error)
+			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
+			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true));
+			if (!tex)
 			{
 				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;
 				errorOccured = true;
@@ -226,7 +220,7 @@ void StelSkyImageTile::getTilesToDraw
 		// Try to add the subtiles
 		foreach (MultiLevelJsonBase* tile, subTiles)
 		{
-			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, renderer, viewPortPoly, limitLuminance, !fullInScreen);
+			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
 		}
 	}
 	else
@@ -237,13 +231,11 @@ void StelSkyImageTile::getTilesToDraw
 }
 
 // Draw the image on the screen.
-bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+// Assume GL_TEXTURE_2D is enabled
+bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 {
-	StelSkyDrawer* drawer = core->getSkyDrawer();
-	Extinction extinction=core->getSkyDrawer()->getExtinction();
-	const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
-
-	tex->bind();
+	if (!tex->bind())
+		return false;
 
 	if (!texFader)
 	{
@@ -252,72 +244,65 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 	}
 
 	// Draw the real texture for this image
-	const float ad_lum =
-		(luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
+	float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
+	ad_lum=std::min(1.f, ad_lum);
 	Vec4f color;
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
-		// This is a bit weird, but rewritten to mirror pre-refactor code
-		if(!alphaBlend)
-		{
-			renderer->setBlendMode(BlendMode_Alpha);
-		}
+		if (!alphaBlend)
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		else
-		{
-			renderer->setBlendMode(BlendMode_Add);
-		}
+			glBlendFunc(GL_ONE, GL_ONE);
+		glEnable(GL_BLEND);
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
-		renderer->setBlendMode(BlendMode_None);
-		color.set(ad_lum,ad_lum,ad_lum, 1.);
+		glDisable(GL_BLEND);
+		color.set(ad_lum,ad_lum,ad_lum, 1.f);
 	}
 
-	color[0] = std::min(color[0], 1.0f);
-	color[1] = std::min(color[1], 1.0f);
-	color[2] = std::min(color[2], 1.0f);
-	color[3] = std::min(color[3], 1.0f);
-	// color is the pre-extinction color
-
+	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
+	
+	sPainter.enableTexture2d(true);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
-		Vec4f extinctedColor=color;
-
+		Vec4f extinctedColor = color;
 		if (withExtinction)
 		{
 			Vec3d bary= poly->getPointInside(); // This is a J000.0 vector that points "somewhere" in the first triangle.
-			Vec3d altAz = core->j2000ToAltAz(bary, StelCore::RefractionOn);
+			Vec3d altAz = core->j2000ToAltAz(bary, StelCore::RefractionOff);
 			float extinctionMagnitude=0.0f;
-			extinction.forward(&(altAz[2]), &extinctionMagnitude);
+			altAz.normalize();
+			core->getSkyDrawer()->getExtinction().forward(altAz, &extinctionMagnitude);
 			// compute a simple factor from magnitude loss.
-			float extinctionFactor=pow(0.4f , extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
+			float extinctionFactor=std::pow(0.4f , extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
 			extinctedColor[0]*=fabs(extinctionFactor);
 			extinctedColor[1]*=fabs(extinctionFactor);
 			extinctedColor[2]*=fabs(extinctionFactor);
 		}
-		renderer->setGlobalColor(extinctedColor);
-		// GZ: this was the original code now.
-		poly->drawFill(renderer, SphericalRegion::DrawParams(&(*projector)));
+		sPainter.setColor(extinctedColor[0], extinctedColor[1], extinctedColor[2], extinctedColor[3]);
+		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
+		
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
+	if (debugFont==NULL)
+	{
+		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
+	}
 	color.set(1.0,0.5,0.5,1.0);
-	renderer->setGlobalColor(color);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		Vec3d win;
 		Vec3d bary = poly->getPointInside();
-		projector->project(bary, win);
-		renderer->drawText(TextParams(win[0], win[1], getAbsoluteImageURI()));
-
-		poly->drawOutline(renderer, SphericalRegion::DrawParams(&(*projector)));
+		sPainter.getProjector()->project(bary,win);
+		sPainter.drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
+		sPainter.enableTexture2d(false);
+		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeBoundary, &color);
+		sPainter.enableTexture2d(true);
 	}
 #endif
-	if (!alphaBlend)
-	{
-		renderer->setBlendMode(BlendMode_Add); // Revert
-	}
 
 	return true;
 }
@@ -325,7 +310,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProj
 // Return true if the tile is fully loaded and can be displayed
 bool StelSkyImageTile::isReadyToDisplay() const
 {
-	return NULL != tex && tex->getStatus() == TextureStatus_Loaded;
+	return tex && tex->canBind();
 }
 
 // Load the tile from a valid QVariantMap
@@ -383,6 +368,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 
 	if (map.contains("maxBrightness"))
 	{
+		// maxBrightness is the maximum nebula brightness in Vmag/arcmin^2
 		luminance = map.value("maxBrightness").toFloat(&ok);
 		if (!ok)
 			throw std::runtime_error("maxBrightness expect a float value");
@@ -455,11 +441,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		}
 		else
 		{
-			try
-			{
-				absoluteImageURI = StelFileMgr::findFile(baseUrl+imageUrl);
-			}
-			catch (std::runtime_error& er)
+			absoluteImageURI = StelFileMgr::findFile(baseUrl+imageUrl);
+			if (absoluteImageURI.isEmpty())
 			{
 				// Maybe the user meant a file in stellarium local files
 				absoluteImageURI = imageUrl;

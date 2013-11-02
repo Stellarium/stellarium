@@ -17,6 +17,7 @@
  */
 
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -26,6 +27,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Satellites.hpp"
 #include "Satellite.hpp"
@@ -36,13 +38,11 @@
 #include "SatellitesDialog.hpp"
 #include "LabelMgr.hpp"
 #include "StelTranslator.hpp"
-#include "renderer/StelRenderer.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
-#include <QAction>
-#include <QProgressBar>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -70,35 +70,26 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
-
 Satellites::Satellites()
-    : satelliteListModel(0),
-      hintTexture(NULL)
-	, texPointer(NULL)
-	, pxmapGlow(NULL)
-	, pxmapOnIcon(NULL)
-	, pxmapOffIcon(NULL)
-	, toolbarButton(NULL)
-	, earth(NULL)
-	, defaultHintColor(0.0, 0.4, 0.6)
-	, defaultOrbitColor(0.0, 0.3, 0.6)
-    , progressBar(NULL)
+	: satelliteListModel(NULL),
+	  pxmapGlow(NULL),
+	  pxmapOnIcon(NULL),
+	  pxmapOffIcon(NULL),
+	  toolbarButton(NULL),
+	  earth(NULL),
+	  defaultHintColor(0.0, 0.4, 0.6),
+	  defaultOrbitColor(0.0, 0.3, 0.6),
+	  progressBar(NULL)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
+	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 }
 
 void Satellites::deinit()
 {
-	if(NULL != hintTexture)
-	{
-		delete hintTexture;
-	}
-	if(NULL != texPointer)
-	{
-		delete texPointer;
-	}
+	Satellite::hintTexture.clear();
+	texPointer.clear();
 }
 
 Satellites::~Satellites()
@@ -140,24 +131,22 @@ void Satellites::init()
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
 
 		// Load and find resources used in the plugin
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
+		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
 		// key bindings and other actions
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Satellite_Hints")->setChecked(getFlagHints());
-		gui->getGuiAction("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
+		QString satGroup = N_("Satellites");
+		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
+		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Shift+Z");
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/satellites/bt_satellites_on.png");
 		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiAction("actionShow_Satellite_Hints"));
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Satellite_Hints");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-
-		connect(gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
-		connect(gui->getGuiAction("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
-
 	}
 	catch (std::runtime_error &e)
 	{
@@ -211,23 +200,6 @@ void Satellites::init()
 	        SIGNAL(locationChanged(StelLocation)),
 	        this,
 	        SLOT(updateObserverLocation(StelLocation)));
-	
-	//Load the module's custom style sheets
-	QFile styleSheetFile;
-	styleSheetFile.setFileName(":/satellites/normalStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		normalStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-	styleSheetFile.setFileName(":/satellites/nightStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		nightStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
@@ -263,33 +235,6 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 
 	return true;
 }
-
-void Satellites::setStelStyle(const QString& mode)
-{
-	foreach(const SatelliteP& sat, satellites)
-	{
-		if (sat->initialized)
-		{
-			sat->setNightColors(mode=="night_color");
-		}
-	}
-}
-
-const StelStyle Satellites::getModuleStyleSheet(const StelStyle& style)
-{
-	StelStyle pluginStyle(style);
-	if (style.confSectionName == "color")
-	{
-		pluginStyle.qtStyleSheet.append(normalStyleSheet);
-	}
-	else
-	{
-		pluginStyle.qtStyleSheet.append(nightStyleSheet);
-	}
-	return pluginStyle;
-}
-
-
 
 double Satellites::getCallOrder(StelModuleActionName actionName) const
 {
@@ -380,10 +325,6 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	if (regExp.exactMatch(noradNumber))
 	{
 		QString numberString = regExp.capturedTexts().at(2);
-		bool ok;
-		/* int number = */ numberString.toInt(&ok);
-		if (!ok)
-			return StelObjectP();
 		
 		foreach(const SatelliteP& sat, satellites)
 		{
@@ -412,10 +353,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	if (regExp.exactMatch(objw))
 	{
 		QString numberString = regExp.capturedTexts().at(2);
-		bool ok;
-		/* int number = */ numberString.toInt(&ok);
-		if (ok)
-			numberPrefix = numberString;
+		numberPrefix = numberString;
 	}
 	bool find;
 	foreach(const SatelliteP& sat, satellites)
@@ -534,11 +472,7 @@ QStringList Satellites::listAllObjects(bool inEnglish) const
 bool Satellites::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Satellite_ConfigDialog_Global")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
@@ -1181,11 +1115,10 @@ void Satellites::updateFromOnlineSources()
 	numberDownloadsComplete = 0;
 
 	if (progressBar==NULL)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(updateUrls.size());
-	progressBar->setVisible(true);
+	progressBar->setRange(0, updateUrls.size());
 	progressBar->setFormat("TLE download %v/%m");
 
 	foreach (QString url, updateUrls)
@@ -1268,7 +1201,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	
 	if (progressBar)
 	{
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = 0;
 	}
 	
@@ -1544,7 +1477,7 @@ void Satellites::update(double deltaTime)
 	}
 }
 
-void Satellites::draw(StelCore* core, StelRenderer* renderer)
+void Satellites::draw(StelCore* core)
 {
 	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||
 			(core->getJDay()<2436116.3115)                               || // do not draw anything before Oct 4, 1957, 19:28:34GMT ;-)
@@ -1552,32 +1485,26 @@ void Satellites::draw(StelCore* core, StelRenderer* renderer)
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	renderer->setFont(labelFont);
+	StelPainter painter(prj);
+	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	renderer->setBlendMode(BlendMode_Alpha);
-
-	if(NULL == hintTexture)
-	{
-		hintTexture = renderer->createTexture(":/satellites/hint.png");
-	}
-	hintTexture->bind();
-	Satellite::viewportHalfspace = prj->getBoundingCap();
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+	Satellite::hintTexture->bind();
+	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->displayed)
-		{
-			sat->draw(core, renderer, prj, hintTexture);
-		}
+			sat->draw(core, painter, 1.0);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-	{
-		drawPointer(core, renderer);
-	}
+		drawPointer(core, painter);
 }
 
-void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
+void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -1590,33 +1517,22 @@ void Satellites::drawPointer(StelCore* core, StelRenderer* renderer)
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
-		{
 			return;
-		}
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur5.png");
-		}
-		if (StelApp::getInstance().getVisionModeNight())
-			renderer->setGlobalColor(0.8f,0.0f,0.0f);
-		else
-			renderer->setGlobalColor(0.4f,0.5f,0.8f);
+		glColor3f(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
-		renderer->setBlendMode(BlendMode_Alpha);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		// Size on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		const float halfSize = size * 0.5;
-		const float left   = screenpos[0] - halfSize - 20;
-		const float right  = screenpos[0] + halfSize - 20;
-		const float top    = screenpos[1] - halfSize - 20;
-		const float bottom = screenpos[1] + halfSize - 20;
-		renderer->drawTexturedRect(left,  top,    40, 40, 90);
-		renderer->drawTexturedRect(left,  bottom, 40, 40, 0);
-		renderer->drawTexturedRect(right, bottom, 40, 40, -90);
-		renderer->drawTexturedRect(right, top,    40, 40, -180);
+		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
+		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
+		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
+		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
 	}
 }
 

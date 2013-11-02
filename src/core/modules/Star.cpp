@@ -26,7 +26,6 @@
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
 
-namespace BigStarCatalogExtension {
 
 QString Star1::getNameI18n(void) const {
   if (hip) {
@@ -240,7 +239,4 @@ void Star3::print(void) {
            << ", bV: " << bV
            << ", mag: " << mag;
 }
-
-} // namespace BigStarCatalogExtension
-
 

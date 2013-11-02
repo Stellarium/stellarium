@@ -21,6 +21,8 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Quasar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -28,10 +30,10 @@
 #include <QList>
 #include <QSharedPointer>
 
+class StelPainter;
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class QPixmap;
@@ -44,7 +46,8 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-public:	
+	Q_PROPERTY(bool quasarsVisible READ getFlagShowQuasars WRITE setFlagShowQuasars)
+public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
@@ -63,8 +66,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -193,6 +196,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileFormatVersion(void);
 
+	//! Check format of the catalog of quasars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());
 
@@ -201,8 +208,7 @@ private:
 
 	QString catalogJsonPath;
 
-	class StelTextureNew* texPointer;
-	class StelTextureNew* markerTexture;
+	StelTextureSP texPointer;
 	QList<QuasarP> QSO;
 
 	// variables and functions for the updater
@@ -228,7 +234,7 @@ private:
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -240,7 +246,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -248,6 +254,7 @@ private slots:
 class QuasarsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

@@ -29,9 +29,6 @@
 
 class Ui_shortcutsDialogForm;
 class ShortcutLineEdit;
-class StelShortcut;
-class StelShortcutGroup;
-class StelShortcutMgr;
 
 class QStandardItemModel;
 class QStandardItem;
@@ -58,7 +55,7 @@ class ShortcutsDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	ShortcutsDialog();
+	ShortcutsDialog(QObject* parent);
 	~ShortcutsDialog();
 
 	//! higlight items that have collisions with current lineEdits' state according to css.
@@ -79,12 +76,12 @@ public slots:
 	//! called when editors' state changed.
 	void handleChanges();
 	//! called when apply button clicked.
-	void applyChanges() const;
+	void applyChanges();
 	//! called by doubleclick; if click is on editable item, switch to editors
 	void switchToEditors(const QModelIndex& index);
 	//! update shortcut representation in tree correspondingly to its actual contents.
 	//! if no item is specified, search for it in tree, if no items found, create new item
-	void updateShortcutsItem(StelShortcut* shortcut, QStandardItem* shortcutItem = NULL);
+	void updateShortcutsItem(class StelAction* action, QStandardItem* shortcutItem = NULL);
 	void restoreDefaultShortcuts();
 	void updateTreeData();
 
@@ -104,13 +101,13 @@ private:
 	//! See http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
 	void polish();
 
-	QStandardItem* updateGroup(StelShortcutGroup* group);
+	QStandardItem* updateGroup(const QString& group);
 
 	//! search for first appearence of item with requested data.
 	QStandardItem* findItemByData(QVariant value, int role, int column = 0);
 
 	//! pointer to mgr, for not getting it from stelapp every time.
-	StelShortcutMgr* shortcutMgr;
+	class StelActionMgr* actionMgr;
 
 	//! list for storing collisions items, so we can easy restore their colors.
 	QList<QStandardItem*> collisionItems;

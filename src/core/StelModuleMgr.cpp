@@ -33,6 +33,7 @@
 
 StelModuleMgr::StelModuleMgr() : callingListsToRegenerate(true), pluginDescriptorListLoaded(false)
 {
+	qRegisterMetaType<StelModule::StelModuleSelectAction>("StelModule::StelModuleSelectAction");
 	// Initialize empty call lists for each possible actions
 	callOrders[StelModule::ActionDraw]=QList<StelModule*>();
 	callOrders[StelModule::ActionUpdate]=QList<StelModule*>();
@@ -213,14 +214,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 
 	// Then list dynamic libraries from the modules/ directory
 	QSet<QString> moduleDirs;
-	try
-	{
-		moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "ERROR while trying list list modules:" << e.what();
-	}
+	moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
 
 	foreach (QString dir, moduleDirs)
 	{
@@ -234,14 +228,9 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		moduleFullPath += ".so";
 #endif
 #endif
-		try
-		{
-			moduleFullPath = StelFileMgr::findFile(moduleFullPath, StelFileMgr::File);
-		}
-		catch (std::runtime_error& e)
-		{
+		moduleFullPath = StelFileMgr::findFile(moduleFullPath, StelFileMgr::File);
+		if (moduleFullPath.isEmpty())
 			continue;
-		}
 
 		QPluginLoader loader(moduleFullPath);
 		if (!loader.load())

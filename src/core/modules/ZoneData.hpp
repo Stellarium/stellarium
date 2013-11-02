@@ -28,26 +28,23 @@
 
 class StelObject;
 
-namespace BigStarCatalogExtension
-{
-
 //! @struct ZoneData
 //! A single triangle. The stars are arranged in triangular zones according to
 //! StelGeodesicGrid. Bright stars (Star1) are stored in zones with small level,
-//! whereas fainter stars (Star2,Star3) are stored in zones with highter level.
+//! whereas fainter stars (Star2,Star3) are stored in zones with higher level.
 //! A ZoneData contains stars of a given type (Star1,Star2 or Star3) of
 //! a given triangle and level of the StelGeodesicGrid.
 struct ZoneData
 {
 	//! Get number of stars in this triangle.
-	int getNrOfStars(void) const
+	int getNrOfStars() const
 	{
 		return size;
 	}
-	Vec3f center;
-	Vec3f axis0;
-	Vec3f axis1;
-	int size;
+	Vec3f center;	// Normalized center of the triangle
+	Vec3f axis0;	// Normalized direction vector of axis 0 (use for storing stars position in 2D relative to this axis)
+	Vec3f axis1;	// Normalized direction vector of axis 0 (use for storing stars position in 2D relative to this axis)
+	int size;		// Number of stars in the stars array
 	void *stars;
 };
 
@@ -69,7 +66,5 @@ struct SpecialZoneData : public ZoneData
 		return reinterpret_cast<Star*>(stars);
 	}
 };
-
-} // namespace BigStarCatalogExtension
 
 #endif // _ZONEDATA_HPP_

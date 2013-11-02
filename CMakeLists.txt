@@ -1,19 +1,26 @@
-
 # Minimal version of cmake for using with Qt5 is 2.8.9
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7)
+# Minimal version of cmake for using with Qt5 on Windows is 2.8.11
+IF(WIN32)
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+ELSE(WIN32)
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
+ENDIF(WIN32)
 
 # Avoid repeating the IF statement in the ENDIF and ELSE
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 IF(COMMAND cmake_policy)
   CMAKE_POLICY(SET CMP0003 NEW)
+  IF(WIN32)
+    CMAKE_POLICY(SET CMP0020 NEW)
+  ENDIF(WIN32)
 ENDIF()
 
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
-SET(STELLARIUM_MINOR "12")
-SET(STELLARIUM_PATCH "3")
+SET(STELLARIUM_MINOR "13")
+SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
@@ -56,6 +63,8 @@ IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  STRING(REGEX REPLACE "^.*[ ][0-9]+\\.([0-9]).*$" "\\1" CLANG_MINOR "${_clang_version_info}")
  MESSAGE(STATUS "Found Clang ${CLANG_MAJOR}.${CLANG_MINOR}")
 ELSE()
+ # The stars structs rely on gnu gcc packing of bit-fields. Not for clang.
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
  SET(CLANG_MAJOR 0)
  SET(CLANG_MINOR 0)
 ENDIF()
@@ -87,11 +96,11 @@ SET(GCC_VERSION "${GCC_MAJOR}.${GCC_MINOR}")
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter")     # additional CPP compile flags
-ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  #  --large-address-aware --enable-runtime-pseudo-reloc --verbose
-ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  # --enable-runtime-pseudo-reloc --verbose
@@ -105,13 +114,6 @@ SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.
 IF(OPTIMIZE_INTEL_ATOM)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
-ENDIF()
-
-SET(BUILD_FOR_MAEMO 0 CACHE BOOL "Set to 1 or true if you want to build for maemo target")
-IF(BUILD_FOR_MAEMO)
-  # Optimize for N900 ARM processor
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DBUILD_FOR_MAEMO")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DBUILD_FOR_MAEMO")
 ENDIF()
 
 # FreeBSD-specific compiler flags
@@ -132,17 +134,7 @@ IF(APPLE)
  ENDIF()
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
 
- # uncomment one of the following, depending on minimum OS level you want
- #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.5")
- #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
- #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6")
- #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.6.sdk/")
-
- # uncomment one of the following, depending on what platforms you want.
- # NOTE: Qt build for Cocoa is Intel only.  Qt with Carbon is both, but does not seem
- # to handle 64bit well.
- #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64;ppc;ppc64")
- #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
+ # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
@@ -156,7 +148,7 @@ IF(HAVE_POW10)
 ENDIF()
 
 ########### Others ###########
-# Activate translation with gettext
+# Activate translation
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported.")
 IF(ENABLE_NLS)
   ADD_DEFINITIONS(-DENABLE_NLS)
@@ -181,7 +173,6 @@ ENDIF()
 
 
 SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
-SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
 
@@ -193,19 +184,7 @@ ELSE()
   SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
-# For Windows, the default back end for the graphics system should be "native", as "raster"
-# causes problems for many ATI users.  However, for other platforms we should use raster
-# as the default as it is faster.
-# Mac 10.6 requires native as well.
-IF(WIN32 OR APPLE)
-  ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="native")
-ELSE()
-  ADD_DEFINITIONS(-DDEFAULT_GRAPHICS_SYSTEM="raster")
-ENDIF()
-
 ########### Plugin setup #############
-SET(BUILD_STATIC_PLUGINS 1 CACHE BOOL "Define whether plugins should be compiled statically and linked to the main program")
-SET(BUILD_DYNAMIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be compiled dynamically")
 
 #### demo plugins ####
 SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be created.")
@@ -221,7 +200,6 @@ SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plug
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
 SET(USE_PLUGIN_PULSARS 1 CACHE BOOL "Define whether the Pulsars plugin should be created.")
 SET(USE_PLUGIN_QUASARS 1 CACHE BOOL "Define whether the Quasars plugin should be created.")
-SET(USE_PLUGIN_RENDERERSTATISTICS 0 CACHE BOOL "Define whether the RendererStatistics plugin should be created.")
 SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
 SET(USE_PLUGIN_SOLARSYSTEMEDITOR 1 CACHE BOOL "Define whether the Solar System Editor should be built.")
 SET(USE_PLUGIN_SUPERNOVAE 1 CACHE BOOL "Define whether the Historical Supernova plugin should be created.")
@@ -233,32 +211,29 @@ SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be cre
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-IF (BUILD_STATIC_PLUGINS)
-  IF (USE_PLUGIN_SVMT)
-	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
-	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-	SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-  ENDIF()
+IF (USE_PLUGIN_SVMT)
+    SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
+    SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+    SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+ENDIF()
 
-  IF (USE_PLUGIN_VIRGO)
-	## Library for loading FITS image files
-	FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-	  /usr/include
-	  /usr/local/include
-	  DOC "Should point to the directory where the include files for libcfitsio are installed")
-	FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-	  PATHS
-	  /usr/lib/
-	  /usr/local/lib
-	  /opt/local/lib
-	  DOC "cfitsio link options")
-	SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-  ENDIF()
+IF (USE_PLUGIN_VIRGO)
+    ## Library for loading FITS image files
+    FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
+        /usr/include
+        /usr/local/include
+        DOC "Should point to the directory where the include files for libcfitsio are installed")
+    FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
+        PATHS
+        /usr/lib/
+        /usr/local/lib
+        /opt/local/lib
+        DOC "cfitsio link options")
+    SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
+ENDIF()
 
-  IF (USE_PLUGIN_LOGBOOK)
-	SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
-  ENDIF()
-
+IF (USE_PLUGIN_LOGBOOK)
+    SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
 ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
@@ -266,164 +241,136 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-SET(QT_MIN_VERSION "4.8.0")
-FIND_PACKAGE(Qt4 REQUIRED)
+FIND_PACKAGE(Qt5Concurrent REQUIRED)
+FIND_PACKAGE(Qt5Core REQUIRED)
+FIND_PACKAGE(Qt5Declarative REQUIRED)
+FIND_PACKAGE(Qt5Gui REQUIRED)
+FIND_PACKAGE(Qt5Network REQUIRED)
+FIND_PACKAGE(Qt5OpenGL REQUIRED)
+FIND_PACKAGE(Qt5Widgets REQUIRED)
+IF(WIN32)
+    # This modules need for Windows (WTF???)
+    FIND_PACKAGE(Qt5Sql REQUIRED)
+    FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
+ENDIF()
+
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
-# As moc files are generated in the binary dir, tell CMake
-# to always look for includes there:
+# As moc files are generated in the binary dir, tell CMake to always look for includes there:
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-SET(QT_USE_QTOPENGL TRUE)
 IF(ENABLE_SCRIPTING)
-  SET(QT_USE_QTSCRIPT TRUE)
+    SET(QT_USE_QTSCRIPT TRUE)
+    FIND_PACKAGE(Qt5Script REQUIRED)
+    INCLUDE_DIRECTORIES(${Qt5Script_INCLUDE_DIRS})
 ENDIF()
-SET(QT_USE_QTNETWORK TRUE)
-SET(QT_USE_QTTEST TRUE)
 IF(ENABLE_SOUND)
-  ADD_DEFINITIONS(-DHAVE_QT_PHONON)
-  SET(QT_USE_PHONON TRUE)
+    ADD_DEFINITIONS(-DENABLE_SOUND)
+    FIND_PACKAGE(Qt5Multimedia REQUIRED)
+    INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
 ENDIF()
-INCLUDE(${QT_USE_FILE})
 
-# Get rid of the QtTest dependency for the main binary. It is re-added manually when compiling tests.
-STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
-# Get rid of the GLU dependency, it's not needed in stellarium.
-STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
-
-FIND_PACKAGE(OpenGL) # Introduced in revision 5284, may cause problems when compiling in OpenGL ES mode - see lines 248-255 below. --BM
+FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(ZLIB)
 
-IF(ENABLE_NLS)
-  FIND_PACKAGE(Iconv REQUIRED)
-  FIND_PATH(INTL_INCLUDE_DIR libintl.h
-	PATHS
-	/usr/include
-	/sw/include
-	/usr/local/include)
-  FIND_LIBRARY(INTL_LIBRARIES intl c
-	PATHS
-	/usr/lib/
-	/sw/lib
-	/usr/local/lib) # NO_DEFAULT_PATH
-  FIND_PACKAGE(Gettext REQUIRED)
-  FIND_PACKAGE(XGettext REQUIRED)
-ENDIF()
-
-
-IF (OPENGL_MODE STREQUAL "Desktop")
-  FIND_PACKAGE(OpenGL REQUIRED)
-ENDIF()
-IF(OPENGL_MODE STREQUAL "ES2")
-  ADD_DEFINITIONS(-DUSE_OPENGL_ES2 -DQT_OPENGL_LIB -D_REENTRANT -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED)
-  # Make sure that no desktop OpenGL libraries are linked when OpenGLES is used
-  STRING(REPLACE "-lGL" "-lGLESv2" QT_LIBRARIES "${QT_LIBRARIES}")
-ENDIF()
+FIND_PACKAGE(Qt5Test)
+INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
 IF(APPLE)
-  SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
+    SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
 ELSE(APPLE)
-  ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
-  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
-  # Used in generating the documentation (doc/stellarium.pod.cmake):
-  SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
+    ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
+    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+    # Used in generating the documentation (doc/stellarium.pod.cmake):
+    SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
 ENDIF(APPLE)
 ELSE(UNIX AND NOT WIN32)
-  ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
-  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
+    ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
+    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
 ENDIF(UNIX AND NOT WIN32)
 
 ########### Get revision number for non-release builds ###########
 IF(NOT RELEASE_BUILD)
-  #Hack until CMake detection for Bazaar is finished
-  IF(BZR_REVISION)
-	SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
-	ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
-  ELSE()
-	FIND_PACKAGE(Subversion)
-	IF(Subversion_FOUND)
-	  Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
-	  SET(SVN_REVISION ${StelSvn_WC_REVISION})
-	  ADD_DEFINITIONS(-DSVN_REVISION="${SVN_REVISION}")
-	ENDIF()
-  ENDIF()
+    #Hack until CMake detection for Bazaar is finished
+    IF(BZR_REVISION)
+        SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
+        ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
+    ELSE()
+        FIND_PACKAGE(Subversion)
+        IF(Subversion_FOUND)
+            Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
+            SET(SVN_REVISION ${StelSvn_WC_REVISION})
+            ADD_DEFINITIONS(-DSVN_REVISION="${SVN_REVISION}")
+        ENDIF()
+    ENDIF()
 ENDIF()
 
 IF(ENABLE_STRATOSCRIPT_COMPAT)
-  ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
+    ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
 
 ### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
-  SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
-  IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-    #The mingGW snapshot distributed with the Qt SDK has it under this name.
-    SET(RC_COMPILER_FILENAME "windres.exe")
-	FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
-    IF (RC_COMPILER_PATH)
-     MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
-    ENDIF(RC_COMPILER_PATH)
-  ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+    SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
+    IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+        #The mingGW snapshot distributed with the Qt SDK has it under this name.
+        SET(RC_COMPILER_FILENAME "windres.exe")
+            FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
+        IF (RC_COMPILER_PATH)
+            MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
+        ENDIF(RC_COMPILER_PATH)
+    ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
 ENDIF(WIN32)
 
 ### Generate an Inno Setup project file ###
 IF(WIN32)
-  # Try to guess the MinGW /bin directory...
-  GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
-  IF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
-    SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
-    SET(ISS_PACKAGE_PLATFORM "win32")
-    SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/mingwm10.dll\"; DestDir: \"{app}\";")
-  ELSEIF ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-    SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
-    SET(ISS_PACKAGE_PLATFORM "win64")
-    SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"@QT_BINARY_DIR@/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"@QT_BINARY_DIR@/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
-  ENDIF()
-  SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
-ENDIF(WIN32)
-
-########## Release build tweaks ###########
-
-#-O1 and -O2 break build (cause crash at startup) on Windows.
-#
-# However, setting all -O1 and -O2 options _except_ -fomit-frame-pointer works.
-# yet -O1 with -fno-omit-frame-pointer does not. So we use this workaround.
-#
-# Yes, it's ugly.
-#
-# (This happens with MinGW port of GCC 4.6/4.7 - 
-#  maybe it won't happen with newer versions so we only use this for 4.6/4.7)
-IF(WIN32)
-  IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
-    IF(GCC_VERSION VERSION_EQUAL 4.4)
-      SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O0 -fauto-inc-dec -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fmerge-constants -fsplit-wide-types -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-fre -ftree-sra -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -foptimize-sibling-calls -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O0 -fauto-inc-dec -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fmerge-constants -fsplit-wide-types -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-fre -ftree-sra -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -foptimize-sibling-calls -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -O0 -fauto-inc-dec -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fmerge-constants -fsplit-wide-types -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-fre -ftree-sra -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -foptimize-sibling-calls -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O0 -fauto-inc-dec -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fmerge-constants -fsplit-wide-types -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-fre -ftree-sra -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -foptimize-sibling-calls -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-    ELSEIF(GCC_VERSION VERSION_EQUAL 4.6 OR GCC_VERSION VERSION_EQUAL 4.7)
-      SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O0 -fauto-inc-dec -fcompare-elim -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fipa-profile -fmerge-constants -fsplit-wide-types -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre -ftree-phiprop -ftree-sra -ftree-pta -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fdevirtualize -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -fipa-sra -foptimize-sibling-calls -fpartial-inlining -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O0 -fauto-inc-dec -fcompare-elim -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fipa-profile -fmerge-constants -fsplit-wide-types -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre -ftree-phiprop -ftree-sra -ftree-pta -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fdevirtualize -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -fipa-sra -foptimize-sibling-calls -fpartial-inlining -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -fauto-inc-dec -fcompare-elim -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fipa-profile -fmerge-constants -fsplit-wide-types -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre -ftree-phiprop -ftree-sra -ftree-pta -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fdevirtualize -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -fipa-sra -foptimize-sibling-calls -fpartial-inlining -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -fauto-inc-dec -fcompare-elim -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fipa-profile -fmerge-constants -fsplit-wide-types -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre -ftree-phiprop -ftree-sra -ftree-pta -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fdevirtualize -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -fipa-sra -foptimize-sibling-calls -fpartial-inlining -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -O0 -fauto-inc-dec -fcompare-elim -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fipa-profile -fmerge-constants -fsplit-wide-types -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre -ftree-phiprop -ftree-sra -ftree-pta -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fdevirtualize -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -fipa-sra -foptimize-sibling-calls -fpartial-inlining -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
-      SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O0 -fauto-inc-dec -fcompare-elim -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fguess-branch-probability -fif-conversion2 -fif-conversion -fipa-pure-const -fipa-reference -fipa-profile -fmerge-constants -fsplit-wide-types -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-copyrename -ftree-dce -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre -ftree-phiprop -ftree-sra -ftree-pta -ftree-ter -funit-at-a-time -fthread-jumps -falign-functions -falign-jumps -falign-loops -falign-labels -fcaller-saves -fcrossjumping -fcse-follow-jumps -fcse-skip-blocks -fdelete-null-pointer-checks -fdevirtualize -fexpensive-optimizations -fgcse -fgcse-lm -finline-small-functions -findirect-inlining -fipa-sra -foptimize-sibling-calls -fpartial-inlining -fpeephole2 -fregmove -freorder-blocks -freorder-functions -frerun-cse-after-loop -fsched-interblock -fsched-spec -fschedule-insns -fschedule-insns2 -fstrict-aliasing -fstrict-overflow -ftree-switch-conversion -ftree-pre -ftree-vrp")
+    # Try to guess the MinGW /bin directory...
+    GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
+    IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+        SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
+        SET(ISS_PACKAGE_PLATFORM "win32")
+        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+    ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+        SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+        SET(ISS_PACKAGE_PLATFORM "win64")
+        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
     ENDIF()
-  ENDIF()
+    SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
+    # Try to guess the MinGW /bin directory...
+    GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
+    GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
+    GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
+    GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
+    GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
+    GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
+    GET_TARGET_PROPERTY(QtDeclarative_location Qt5::Declarative LOCATION)
+    GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)
+    GET_TARGET_PROPERTY(QtSvg_location Qt5::Svg LOCATION)
+    GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
+    IF(ENABLE_SCRIPTING)
+        GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
+        SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_QT_SCRIPT "; QtScript don't used")
+    ENDIF()
+    IF(ENABLE_SOUND)
+        GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
+        SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
+    ENDIF()
+    GET_FILENAME_COMPONENT(ICU_LIBS ${QtCore_location} PATH)
+    SET(ISS_ICU_LIBS "Source: \"${ICU_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+  
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
 ENDIF(WIN32)
-
-# Nothing's here right now
-SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
-SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
-SET(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO}")
-SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  ADD_DEFINITIONS(-DQT_NO_DEBUG)
-  ADD_DEFINITIONS(-DNDEBUG)
+    ADD_DEFINITIONS(-DQT_NO_DEBUG)
+    ADD_DEFINITIONS(-DNDEBUG)
 ENDIF()
 
 ########### uninstall files ###############
@@ -466,14 +413,15 @@ ENDIF()
 
 ########### Macosx Bundling ###############
 IF(APPLE)
-ADD_CUSTOM_TARGET(
-  macosx_bundle
-  bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR}
-  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-  COMMENT "making the macosx bundle."
-  VERBATIM
-)
+	# ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
+	ADD_CUSTOM_TARGET(
+		mac_app
+		python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
+		DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+		COMMENT "making the macosx bundle."
+		VERBATIM
+	)
 ENDIF()
 
 
@@ -494,7 +442,6 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_BINARY_DIR}
 	${CMAKE_SOURCE_DIR}/src
 	${CMAKE_SOURCE_DIR}/src/core
-	${CMAKE_SOURCE_DIR}/src/core/renderer
 	${CMAKE_SOURCE_DIR}/src/core/modules
 	${CMAKE_SOURCE_DIR}/src/core/planetsephems
 	${CMAKE_SOURCE_DIR}/src/core/external

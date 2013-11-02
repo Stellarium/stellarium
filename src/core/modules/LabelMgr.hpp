@@ -31,6 +31,7 @@
 #include <QString>
 
 class StelCore;
+class StelPainter;
 
 //! @class LabelMgr
 //! Allows for creation of custom labels on objects or coordinates.
@@ -55,7 +56,7 @@ public:
 	virtual void init();
 	
 	//! Draw user labels.
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	
 	//! Update time-dependent parts of the module.
 	virtual void update(double deltaTime);
@@ -76,8 +77,6 @@ public slots:
 	//! - "E" = to the right of the object on screen
 	//! - "W" = to the left of the object on screen
 	//! - "NE", "NW", "SE", "SW" work too.
-	//! @param labelDistance Distance of the label from the object
-	//! @param style Label style
 	//! @return a unique ID which can be used to refer to the label.
 	//! returns -1 if the label could not be created (e.g. object not found)
 	int labelObject(const QString& text, 

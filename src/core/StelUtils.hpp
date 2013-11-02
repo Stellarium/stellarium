@@ -24,7 +24,6 @@
 
 #include <QVariantMap>
 #include <QDateTime>
-#include <QSize>
 #include <QString>
 
 // astonomical unit (km)
@@ -95,7 +94,7 @@ namespace StelUtils
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
-	//! @param s The input string
+	//! @param dsm The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
@@ -174,11 +173,8 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(const int value);
 
-	//! Return the first power of two greater or equal to the given value.
-	int smallestPowerOfTwoGreaterOrEqualTo(const int value);
-
-	//! Return the smallest size with power-of two dimensions at least as large as given size.
-	QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base);
+	//! Return the first power of two bigger than the given value.
+	int getBiggerPowerOfTwo(int value);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(const double z);
@@ -264,7 +260,7 @@ namespace StelUtils
 	//! The taylor serie is not accurate around x=1 and x=-1
 	inline float fastAcos(const float x)
 	{
-		return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
+		return static_cast<float>(M_PI_2) - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
 	}
 
 	//! Compute exp(x) for small exponents x
@@ -563,6 +559,7 @@ namespace StelUtils
 	//! @param jDay the JD
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
+
 }
 
 #endif // _STELUTILS_HPP_

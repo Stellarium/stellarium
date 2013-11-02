@@ -27,18 +27,18 @@
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelPainter.hpp"
 #include "StelTranslator.hpp"
+#include "StelTextureMgr.hpp"
 #include "LabelMgr.hpp"
 #include "Nova.hpp"
 #include "Novae.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
 #include "NovaeDialog.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
-#include <QAction>
 #include <QProgressBar>
 #include <QDebug>
 #include <QFile>
@@ -76,9 +76,6 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Novae, NovaeStelPluginInterface)
-
-
 /*
  Constructor
 */
@@ -98,14 +95,6 @@ Novae::Novae()
 Novae::~Novae()
 {
 	delete configDialog;
-}
-
-void Novae::deinit()
-{
-	if(NULL != texPointer)
-	{
-		delete texPointer;
-	}
 }
 
 /*
@@ -139,11 +128,11 @@ void Novae::init()
 		readSettingsFromConfig();
 
 		novaeJsonPath = StelFileMgr::findFile("modules/Novae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/novae.json";
-		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (novaeJsonPath.isEmpty())
+			return;
 
-		connect(gui->getGuiAction("actionShow_Novae_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));		
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Novae_ConfigDialog"), SLOT(setChecked(bool)));
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+		addAction("actionShow_Novae_ConfigDialog", N_("Bright Novae"), N_("Bright Novae configuration window"), configDialog, "visible");
 	}
 	catch (std::runtime_error &e)
 	{
@@ -161,7 +150,7 @@ void Novae::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(novaeJsonPath).exists())
 	{
-		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -192,26 +181,27 @@ void Novae::init()
 /*
  Draw our module. This should print name of first Nova in the main window
 */
-void Novae::draw(StelCore* core, StelRenderer* renderer)
+void Novae::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	renderer->setFont(font);
+	StelPainter painter(prj);
+	painter.setFont(font);
 	
 	foreach (const NovaP& n, nova)
 	{
 		if (n && n->initialized)
 		{
-			n->draw(core, renderer, prj);
+			n->draw(core, &painter);
 		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 	{
-		drawPointer(core, renderer, prj);
+		drawPointer(core, painter);
 	}
 }
 
-void Novae::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Novae::drawPointer(StelCore* core, StelPainter &painter)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nova");
 	if (!newSelected.empty())
@@ -221,21 +211,16 @@ void Novae::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP p
 
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, screenpos))
-		{
+		if (!painter.getProjector()->project(pos, screenpos))
 			return;
-		}
 
 		const Vec3f& c(obj->getInfoColor());
-		renderer->setGlobalColor(c[0],c[1],c[2]);
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur2.png");
-		}
+		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		renderer->setBlendMode(BlendMode_Alpha);
-		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 26.0f,
-		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
+		painter.enableTexture2d(true);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -529,6 +514,31 @@ int Novae::getJsonFileVersion(void)
 	return jsonVersion;
 }
 
+bool Novae::checkJsonFileFormat()
+{
+	QFile novaeJsonFile(novaeJsonPath);
+	if (!novaeJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Novae::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(novaeJsonPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&novaeJsonFile).toMap();
+		novaeJsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Novae::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Novae::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
+}
+
 NovaP Novae::getByID(const QString& id)
 {
 	foreach(const NovaP& n, nova)
@@ -542,11 +552,7 @@ NovaP Novae::getByID(const QString& id)
 bool Novae::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Novae_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
@@ -625,12 +631,12 @@ void Novae::updateJSON(void)
 	emit(updateStateChanged(updateState));
 
 	if (progressBar==NULL)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(100);
+	progressBar->setRange(0, 100);
 	progressBar->setFormat("Update novae");
-	progressBar->setVisible(true);
+	
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
@@ -652,9 +658,13 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 	else
 	{
 		// download completed successfully.
-		try
+		QString jsonFilePath = StelFileMgr::findFile("modules/Novae", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/novae.json";
+		if (jsonFilePath.isEmpty())
 		{
-			QString jsonFilePath = StelFileMgr::findFile("modules/Novae", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/novae.json";
+			qWarning() << "Novae::updateDownloadComplete: cannot write JSON data to file";
+		}
+		else
+		{
 			QFile jsonFile(jsonFilePath);
 			if (jsonFile.exists())
 				jsonFile.remove();
@@ -663,17 +673,12 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 			jsonFile.write(reply->readAll());
 			jsonFile.close();
 		}
-		catch (std::runtime_error &e)
-		{
-			qWarning() << "Novae::updateDownloadComplete: cannot write JSON data to file:" << e.what();
-		}
-
 	}
 
 	if (progressBar)
 	{
 		progressBar->setValue(100);
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
 }

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" 
+	xmlns:xlink="http://www.w3.org/1999/xlink" 
+	version="1.1" 
+	width="100%" 
+	height="100%" 
+	viewBox="0 0 10000 10000">
+	<desc>This is my interpretation oc the Celestron MicroGuide eyepiece.</desc>
+	<!-- 9.15 is the calculated diameter: D = FL*aFOV/57.4  91.5=12.5*42/57.4 -->
+	<g alignment-baseline="baseline"></g>
+	<!-- Fill a background rectangle black -->
+	<!-- <rect width="10000" height="10000" fill="black" /> -->
+	<!-- This is view through the eyepiece -->
+	<!-- <circle cx="5000" cy="5000" r="4575" fill="white"/> -->
+	
+	<!-- Linear scale -->
+	<g>
+		<g>
+		    <g>
+		        <line stroke="red" stroke-width="15" x1="2000" y1="4975" x2="8000" y2="4975"/>
+		        <line stroke="red" stroke-width="15" x1="2000" y1="4975" x2="2000" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="2100" y1="4975" x2="2100" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="2200" y1="4975" x2="2200" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="2300" y1="4975" x2="2300" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="2400" y1="4975" x2="2400" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="2500" y1="4975" x2="2500" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="2600" y1="4975" x2="2600" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="2700" y1="4975" x2="2700" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="2800" y1="4975" x2="2800" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="2900" y1="4975" x2="2900" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3000" y1="4975" x2="3000" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="3100" y1="4975" x2="3100" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3200" y1="4975" x2="3200" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3300" y1="4975" x2="3300" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3400" y1="4975" x2="3400" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3500" y1="4975" x2="3500" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="3600" y1="4975" x2="3600" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3700" y1="4975" x2="3700" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3800" y1="4975" x2="3800" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="3900" y1="4975" x2="3900" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4000" y1="4975" x2="4000" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="4100" y1="4975" x2="4100" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4200" y1="4975" x2="4200" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4300" y1="4975" x2="4300" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4400" y1="4975" x2="4400" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4500" y1="4975" x2="4500" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="4600" y1="4975" x2="4600" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4700" y1="4975" x2="4700" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4800" y1="4975" x2="4800" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="4900" y1="4975" x2="4900" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5000" y1="4975" x2="5000" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="5100" y1="4975" x2="5100" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5200" y1="4975" x2="5200" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5300" y1="4975" x2="5300" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5400" y1="4975" x2="5400" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5500" y1="4975" x2="5500" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="5600" y1="4975" x2="5600" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5700" y1="4975" x2="5700" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5800" y1="4975" x2="5800" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="5900" y1="4975" x2="5900" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6000" y1="4975" x2="6000" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="6100" y1="4975" x2="6100" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6200" y1="4975" x2="6200" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6300" y1="4975" x2="6300" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6400" y1="4975" x2="6400" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6500" y1="4975" x2="6500" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="6600" y1="4975" x2="6600" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6700" y1="4975" x2="6700" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6800" y1="4975" x2="6800" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="6900" y1="4975" x2="6900" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7000" y1="4975" x2="7000" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="7100" y1="4975" x2="7100" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7200" y1="4975" x2="7200" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7300" y1="4975" x2="7300" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7400" y1="4975" x2="7400" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7500" y1="4975" x2="7500" y2="4775"/>
+		        <line stroke="red" stroke-width="15" x1="7600" y1="4975" x2="7600" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7700" y1="4975" x2="7700" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7800" y1="4975" x2="7800" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="7900" y1="4975" x2="7900" y2="4875"/>
+		        <line stroke="red" stroke-width="15" x1="8000" y1="4975" x2="8000" y2="4775"/>
+		    </g>
+		    <g>
+		        <text fill="red" font-size="100" transform="translate(2050, 4675) rotate(180)">60</text>
+		        <text fill="red" font-size="100" transform="translate(3050, 4675) rotate(180)">50</text>
+		        <text fill="red" font-size="100" transform="translate(4050, 4675) rotate(180)">40</text>
+		        <text fill="red" font-size="100" transform="translate(5050, 4675) rotate(180)">30</text>
+		        <text fill="red" font-size="100" transform="translate(6050, 4675) rotate(180)">20</text>
+		        <text fill="red" font-size="100" transform="translate(7050, 4675) rotate(180)">10</text>
+		        <text fill="red" font-size="100" transform="translate(8025, 4675) rotate(180)">0</text>
+		    </g>
+		    
+		</g>
+		<g>
+		    <g>
+		        <line stroke="red" stroke-width="15" x1="2000" y1="5025" x2="8000" y2="5025"/>
+		        <line stroke="red" stroke-width="15" x1="2000" y1="5025" x2="2000" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="2100" y1="5025" x2="2100" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="2200" y1="5025" x2="2200" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="2300" y1="5025" x2="2300" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="2400" y1="5025" x2="2400" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="2500" y1="5025" x2="2500" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="2600" y1="5025" x2="2600" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="2700" y1="5025" x2="2700" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="2800" y1="5025" x2="2800" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="2900" y1="5025" x2="2900" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3000" y1="5025" x2="3000" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="3100" y1="5025" x2="3100" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3200" y1="5025" x2="3200" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3300" y1="5025" x2="3300" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3400" y1="5025" x2="3400" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3500" y1="5025" x2="3500" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="3600" y1="5025" x2="3600" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3700" y1="5025" x2="3700" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3800" y1="5025" x2="3800" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="3900" y1="5025" x2="3900" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4000" y1="5025" x2="4000" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="4100" y1="5025" x2="4100" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4200" y1="5025" x2="4200" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4300" y1="5025" x2="4300" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4400" y1="5025" x2="4400" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4500" y1="5025" x2="4500" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="4600" y1="5025" x2="4600" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4700" y1="5025" x2="4700" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4800" y1="5025" x2="4800" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="4900" y1="5025" x2="4900" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5000" y1="5025" x2="5000" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="5100" y1="5025" x2="5100" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5200" y1="5025" x2="5200" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5300" y1="5025" x2="5300" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5400" y1="5025" x2="5400" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5500" y1="5025" x2="5500" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="5600" y1="5025" x2="5600" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5700" y1="5025" x2="5700" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5800" y1="5025" x2="5800" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="5900" y1="5025" x2="5900" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6000" y1="5025" x2="6000" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="6100" y1="5025" x2="6100" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6200" y1="5025" x2="6200" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6300" y1="5025" x2="6300" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6400" y1="5025" x2="6400" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6500" y1="5025" x2="6500" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="6600" y1="5025" x2="6600" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6700" y1="5025" x2="6700" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6800" y1="5025" x2="6800" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="6900" y1="5025" x2="6900" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7000" y1="5025" x2="7000" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="7100" y1="5025" x2="7100" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7200" y1="5025" x2="7200" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7300" y1="5025" x2="7300" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7400" y1="5025" x2="7400" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7500" y1="5025" x2="7500" y2="5225"/>
+		        <line stroke="red" stroke-width="15" x1="7600" y1="5025" x2="7600" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7700" y1="5025" x2="7700" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7800" y1="5025" x2="7800" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="7900" y1="5025" x2="7900" y2="5125"/>
+		        <line stroke="red" stroke-width="15" x1="8000" y1="5025" x2="8000" y2="5225"/>
+		    </g>
+		    <g>
+		        <text x="1950" y="5325" fill="red" font-size="100">60</text>
+		        <text x="2950" y="5325" fill="red" font-size="100">50</text>
+		        <text x="3950" y="5325" fill="red" font-size="100">40</text>
+		        <text x="4950" y="5325" fill="red" font-size="100">30</text>
+		        <text x="5950" y="5325" fill="red" font-size="100">20</text>
+		        <text x="6950" y="5325" fill="red" font-size="100">10</text>
+		        <text x="7975" y="5325" fill="red" font-size="100">0</text>
+		    </g>
+		</g>
+	</g>
+
+	<!-- Concentric circles -->
+	<g>
+		<circle cx="5000" cy="6800" r="62.5" stroke="red" stroke-width="15" fill="none"/>
+		<circle cx="5000" cy="6800" r="125" stroke="red" stroke-width="15" fill="none"/>
+		<circle cx="5000" cy="6800" r="250" stroke="red" stroke-width="15" fill="none"/>
+	    <circle cx="5000" cy="6800" r="500" stroke="red" stroke-width="15" fill="none"/>
+		<circle cx="5000" cy="6800" r="1000" stroke="red" stroke-width="15" fill="none"/>
+		<g> <!-- Horizontal crosshair -->
+		    <line stroke="red" stroke-width="15" x1="3800" y1="6800" x2="4875" y2="6800"/>
+		    <line stroke="red" stroke-width="15" x1="5125" y1="6800" x2="6200" y2="6800"/>
+		</g>
+		<g> <!-- Verticle crosshair -->
+			<line stroke="red" stroke-width="15" x1="5000" y1="5600" x2="5000" y2="6675"/>
+			<line stroke="red" stroke-width="15" x1="5000" y1="6925" x2="5000" y2="8000"/>
+		</g>
+	</g>
+	
+    <!-- Position Angle Scale -->
+	<g>
+		<circle cx="5000" cy="4300" r="50" stroke="red" stroke-width="15" fill="none"/>
+		<!-- Move to start point.  A rx,ry 0 1 1 endX,endY -->
+		<path d="M 2900,4300 A 2100,2100 0 1 1 7100,4300" stroke="red" stroke-width="15" fill="none" />
+		<path d="M 4700,4300 A 300,300 0 1 1 5300,4300" stroke="red" stroke-width="15" fill="none" />
+		<g> <!-- Angle fan -->
+		    <line stroke="red" stroke-width="15" x1="4950" y1="4300" x2="2800" y2="4300"/>
+		    <line stroke="red" stroke-width="15" x1="4704" y1="4247" x2="2931" y2="3935"/>
+		    <line stroke="red" stroke-width="15" x1="4718" y1="4197" x2="3026" y2="3581"/>
+		    <line stroke="red" stroke-width="15" x1="4956" y1="4275" x2="3094" y2="3200"/>
+		    <line stroke="red" stroke-width="15" x1="4770" y1="4107" x2="3391" y2="2950"/>
+		    <line stroke="red" stroke-width="15" x1="4807" y1="4070" x2="3650" y2="2691"/>
+		    <line stroke="red" stroke-width="15" x1="4975" y1="4256" x2="3899" y2="2394"/>
+		    <line stroke="red" stroke-width="15" x1="4897" y1="4018" x2="4281" y2="2326"/>
+		    <line stroke="red" stroke-width="15" x1="4947" y1="4004" x2="4635" y2="2231"/>
+		    <line stroke="red" stroke-width="15" x1="5000" y1="4250" x2="5000" y2="2100"/>
+		    <line stroke="red" stroke-width="15" x1="5052" y1="4004" x2="5364" y2="2231"/>
+		    <line stroke="red" stroke-width="15" x1="5102" y1="4018" x2="5718" y2="2326"/>
+		    <line stroke="red" stroke-width="15" x1="5025" y1="4256" x2="6100" y2="2394"/>
+		    <line stroke="red" stroke-width="15" x1="5192" y1="4070" x2="6349" y2="2691"/>
+		    <line stroke="red" stroke-width="15" x1="5229" y1="4107" x2="6608" y2="2950"/>
+		    <line stroke="red" stroke-width="15" x1="5043" y1="4275" x2="6905" y2="3199"/>
+		    <line stroke="red" stroke-width="15" x1="5281" y1="4197" x2="6973" y2="3581"/>
+		    <line stroke="red" stroke-width="15" x1="5295" y1="4247" x2="7068" y2="3935"/>
+		    <line stroke="red" stroke-width="15" x1="5050" y1="4300" x2="7200" y2="4299"/>
+		</g>
+	</g>
+	
+    <!-- Large Circular Scale -->
+	<g>
+		<!-- <path d="M 1750,5000 A 3075,3075 0 1 1 8250,5000" stroke="black" stroke-width="15" fill="none" /> -->
+		<defs>
+			<path id="innerTopTextPath" d="M 1750,5000 A 3075,3075 0 1 1 8250,5000"/>
+			<path id="innerBottomTextPath" d="M 1750,5000 A 3075,3075 0 1 0 8250,5000"/>
+			<path id="outerTopTextPath" d="M 1100,5000 A 3400,3400 0 1 1 8900,5000"/>
+			<path id="outerBottomTextPath" d="M 1100,5000 A 3400,3400 0 1 0 8900,5000"/>
+		</defs>
+		<circle cx="5000" cy="5000" r="3500" stroke="red" stroke-width="15" fill="none"/>
+		<circle cx="5000" cy="5000" r="3700" stroke="red" stroke-width="15" fill="none"/>
+		<g> <!-- Inner labels -->
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(8300, 5000) rotate(90)">0</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(7857, 6650) rotate(120)">330</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(6650, 7857) rotate(150)">300</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(5000, 8300) rotate(180)">270</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(3350, 7857) rotate(210)">240</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(2142, 6650) rotate(240)">210</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(1700, 5000) rotate(270)">180</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(2142, 3349) rotate(300)">150</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(3349, 2142) rotate(330)">120</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(4999, 1700) rotate(360)">90</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(6650, 2142) rotate(390)">60</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(7857, 3349) rotate(420)">30</text>
+		</g>
+		<g> <!-- Outer labels -->
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(1150, 5000) rotate(270)">0</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(1665, 3074) rotate(300)">30</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(3074, 1665) rotate(330)">60</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(4999, 1150) rotate(360)">90</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(6925, 1665) rotate(390)">120</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(8334, 3074) rotate(420)">150</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(8850, 4999) rotate(450)">180</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(8334, 6924) rotate(480)">210</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(6924, 8334) rotate(510)">240</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(5000, 8850) rotate(540)">270</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(3075, 8334) rotate(570)">300</text>
+			<text text-anchor="middle" fill="red" font-size="100" transform="translate(1665, 6924) rotate(600)">330</text>
+		</g>
+		<g>
+			<line stroke="red" stroke-width="15" x1="8400" y1="5000" x2="8800" y2="5000"/>
+			<line stroke="red" stroke-width="15" x1="8486" y1="5305" x2="8685" y2="5322"/>
+			<line stroke="red" stroke-width="15" x1="8348" y1="5590" x2="8742" y2="5659"/>
+			<line stroke="red" stroke-width="15" x1="8380" y1="5905" x2="8573" y2="5957"/>
+			<line stroke="red" stroke-width="15" x1="8194" y1="6162" x2="8570" y2="6299"/>
+			<line stroke="red" stroke-width="15" x1="8172" y1="6479" x2="8353" y2="6563"/>
+			<line stroke="red" stroke-width="15" x1="7944" y1="6700" x2="8290" y2="6900"/>
+			<line stroke="red" stroke-width="15" x1="7867" y1="7007" x2="8030" y2="7122"/>
+			<line stroke="red" stroke-width="15" x1="7604" y1="7185" x2="7910" y2="7442"/>
+			<line stroke="red" stroke-width="15" x1="7474" y1="7474" x2="7616" y2="7616"/>
+			<line stroke="red" stroke-width="15" x1="7185" y1="7604" x2="7442" y2="7910"/>
+			<line stroke="red" stroke-width="15" x1="7007" y1="7867" x2="7122" y2="8030"/>
+			<line stroke="red" stroke-width="15" x1="6700" y1="7944" x2="6900" y2="8290"/>
+			<line stroke="red" stroke-width="15" x1="6479" y1="8172" x2="6563" y2="8353"/>
+			<line stroke="red" stroke-width="15" x1="6162" y1="8194" x2="6299" y2="8570"/>
+			<line stroke="red" stroke-width="15" x1="5905" y1="8380" x2="5957" y2="8573"/>
+			<line stroke="red" stroke-width="15" x1="5590" y1="8348" x2="5659" y2="8742"/>
+			<line stroke="red" stroke-width="15" x1="5305" y1="8486" x2="5322" y2="8685"/>
+			<line stroke="red" stroke-width="15" x1="5000" y1="8400" x2="5000" y2="8800"/>
+			<line stroke="red" stroke-width="15" x1="4694" y1="8486" x2="4677" y2="8685"/>
+			<line stroke="red" stroke-width="15" x1="4409" y1="8348" x2="4340" y2="8742"/>
+			<line stroke="red" stroke-width="15" x1="4094" y1="8380" x2="4042" y2="8573"/>
+			<line stroke="red" stroke-width="15" x1="3837" y1="8194" x2="3700" y2="8570"/>
+			<line stroke="red" stroke-width="15" x1="3520" y1="8172" x2="3436" y2="8353"/>
+			<line stroke="red" stroke-width="15" x1="3300" y1="7944" x2="3100" y2="8290"/>
+			<line stroke="red" stroke-width="15" x1="2992" y1="7867" x2="2877" y2="8030"/>
+			<line stroke="red" stroke-width="15" x1="2814" y1="7604" x2="2557" y2="7910"/>
+			<line stroke="red" stroke-width="15" x1="2525" y1="7474" x2="2383" y2="7616"/>
+			<line stroke="red" stroke-width="15" x1="2395" y1="7185" x2="2089" y2="7442"/>
+			<line stroke="red" stroke-width="15" x1="2132" y1="7007" x2="1969" y2="7122"/>
+			<line stroke="red" stroke-width="15" x1="2055" y1="6700" x2="1709" y2="6900"/>
+			<line stroke="red" stroke-width="15" x1="1827" y1="6479" x2="1646" y2="6563"/>
+			<line stroke="red" stroke-width="15" x1="1805" y1="6162" x2="1429" y2="6299"/>
+			<line stroke="red" stroke-width="15" x1="1619" y1="5905" x2="1426" y2="5957"/>
+			<line stroke="red" stroke-width="15" x1="1651" y1="5590" x2="1257" y2="5659"/>
+			<line stroke="red" stroke-width="15" x1="1513" y1="5305" x2="1314" y2="5322"/>
+			<line stroke="red" stroke-width="15" x1="1600" y1="5000" x2="1200" y2="5000"/>
+			<line stroke="red" stroke-width="15" x1="1513" y1="4694" x2="1314" y2="4677"/>
+			<line stroke="red" stroke-width="15" x1="1651" y1="4409" x2="1257" y2="4340"/>
+			<line stroke="red" stroke-width="15" x1="1619" y1="4094" x2="1426" y2="4042"/>
+			<line stroke="red" stroke-width="15" x1="1805" y1="3837" x2="1429" y2="3700"/>
+			<line stroke="red" stroke-width="15" x1="1827" y1="3520" x2="1646" y2="3436"/>
+			<line stroke="red" stroke-width="15" x1="2055" y1="3299" x2="1709" y2="3099"/>
+			<line stroke="red" stroke-width="15" x1="2132" y1="2992" x2="1969" y2="2877"/>
+			<line stroke="red" stroke-width="15" x1="2395" y1="2814" x2="2089" y2="2557"/>
+			<line stroke="red" stroke-width="15" x1="2525" y1="2525" x2="2383" y2="2383"/>
+			<line stroke="red" stroke-width="15" x1="2814" y1="2395" x2="2557" y2="2089"/>
+			<line stroke="red" stroke-width="15" x1="2992" y1="2132" x2="2877" y2="1969"/>
+			<line stroke="red" stroke-width="15" x1="3299" y1="2055" x2="3099" y2="1709"/>
+			<line stroke="red" stroke-width="15" x1="3520" y1="1827" x2="3436" y2="1646"/>
+			<line stroke="red" stroke-width="15" x1="3837" y1="1805" x2="3700" y2="1429"/>
+			<line stroke="red" stroke-width="15" x1="4094" y1="1619" x2="4042" y2="1426"/>
+			<line stroke="red" stroke-width="15" x1="4409" y1="1651" x2="4340" y2="1257"/>
+			<line stroke="red" stroke-width="15" x1="4694" y1="1513" x2="4677" y2="1314"/>
+			<line stroke="red" stroke-width="15" x1="4999" y1="1600" x2="4999" y2="1200"/>
+			<line stroke="red" stroke-width="15" x1="5305" y1="1513" x2="5322" y2="1314"/>
+			<line stroke="red" stroke-width="15" x1="5590" y1="1651" x2="5659" y2="1257"/>
+			<line stroke="red" stroke-width="15" x1="5905" y1="1619" x2="5957" y2="1426"/>
+			<line stroke="red" stroke-width="15" x1="6162" y1="1805" x2="6299" y2="1429"/>
+			<line stroke="red" stroke-width="15" x1="6479" y1="1827" x2="6563" y2="1646"/>
+			<line stroke="red" stroke-width="15" x1="6700" y1="2055" x2="6900" y2="1709"/>
+			<line stroke="red" stroke-width="15" x1="7007" y1="2132" x2="7122" y2="1969"/>
+			<line stroke="red" stroke-width="15" x1="7185" y1="2395" x2="7442" y2="2089"/>
+			<line stroke="red" stroke-width="15" x1="7474" y1="2525" x2="7616" y2="2383"/>
+			<line stroke="red" stroke-width="15" x1="7604" y1="2814" x2="7910" y2="2557"/>
+			<line stroke="red" stroke-width="15" x1="7867" y1="2992" x2="8030" y2="2877"/>
+			<line stroke="red" stroke-width="15" x1="7944" y1="3299" x2="8290" y2="3099"/>
+			<line stroke="red" stroke-width="15" x1="8172" y1="3520" x2="8353" y2="3436"/>
+			<line stroke="red" stroke-width="15" x1="8194" y1="3837" x2="8570" y2="3700"/>
+			<line stroke="red" stroke-width="15" x1="8380" y1="4094" x2="8573" y2="4042"/>
+			<line stroke="red" stroke-width="15" x1="8348" y1="4409" x2="8742" y2="4340"/>
+			<line stroke="red" stroke-width="15" x1="8486" y1="4694" x2="8685" y2="4677"/>
+		</g>
+	</g>
+</svg>
