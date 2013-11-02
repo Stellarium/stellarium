@@ -23,6 +23,7 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "Nova.hpp"
+#include "StelTextureTypes.hpp"
 #include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
@@ -36,6 +37,8 @@ class QProgressBar;
 class QSettings;
 class QTimer;
 class NovaeDialog;
+class StelPainter;
+
 
 typedef QSharedPointer<Nova> NovaP;
 
@@ -78,10 +81,9 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
-	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -195,6 +197,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileVersion(void);
 
+	//! Check format of the catalog of novae
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! Parse JSON file and load novae to map
 	QVariantMap loadNovaeMap(QString path=QString());
 
@@ -203,7 +209,7 @@ private:
 
 	QString novaeJsonPath;
 
-	class StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	QList<NovaP> nova;
 	QHash<QString, double> novalist;
 
@@ -211,7 +217,7 @@ private:
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
@@ -234,7 +240,6 @@ private slots:
 };
 
 
-#include "fixx11h.h"
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -242,6 +247,7 @@ private slots:
 class NovaeStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

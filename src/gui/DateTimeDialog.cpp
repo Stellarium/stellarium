@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelUtils.hpp"
 
 #include "ui_dateTimeDialogGui.h"
 
@@ -30,7 +31,8 @@
 #include <QFrame>
 #include <QLineEdit>
 
-DateTimeDialog::DateTimeDialog() :
+DateTimeDialog::DateTimeDialog(QObject* parent) :
+  StelDialog(parent),
   year(0),
   month(0),
   day(0),

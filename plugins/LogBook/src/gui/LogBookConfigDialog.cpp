@@ -29,7 +29,7 @@
 
 #include "StelApp.hpp"
 #include "StelGui.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelTranslator.hpp"
@@ -119,7 +119,7 @@ void LogBookConfigDialog::updateStyle()
 void LogBookConfigDialog::closeWindow()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(0);
 }
 
 /* ********************************************************************* */

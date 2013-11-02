@@ -22,21 +22,17 @@
 
 #include <QString>
 #include <QObject>
-#include <QPair>
 
 #include "StelDialog.hpp"
 
 class Ui_helpDialogForm;
 class QListWidgetItem;
-class StelShortcutMgr;
-
-typedef QPair<QString, QString> KeyDescription;
 
 class HelpDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	HelpDialog();
+	HelpDialog(QObject* parent);
 	~HelpDialog();
 
 	//! Notify that the application style changed
@@ -44,7 +40,6 @@ public:
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -71,8 +66,6 @@ private:
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
-	
-	StelShortcutMgr* keyMgr;
 };
 
 #endif /*_HELPDIALOG_HPP_*/

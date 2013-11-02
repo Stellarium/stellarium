@@ -76,12 +76,10 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 			infoTextFilters |= StelObject::Distance;
 		if (conf->value("flag_show_size", false).toBool())
 			infoTextFilters |= StelObject::Size;
-		if (conf->value("flag_show_extra1", false).toBool())
-			infoTextFilters |= StelObject::Extra1;
-		if (conf->value("flag_show_extra2", false).toBool())
-			infoTextFilters |= StelObject::Extra2;
-		if (conf->value("flag_show_extra3", false).toBool())
-			infoTextFilters |= StelObject::Extra3;
+		if (conf->value("flag_show_extra", false).toBool())
+			infoTextFilters |= StelObject::Extra;
+		if (conf->value("flag_show_galcoord", false).toBool())
+			infoTextFilters |= StelObject::GalacticCoord;
 		conf->endGroup();
 	}
 	else
@@ -124,6 +122,8 @@ SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
 	progressBarMgr = new StelProgressBarMgr(this);
+	connect(&StelApp::getInstance(), SIGNAL(progressBarAdded(const StelProgressController*)), progressBarMgr, SLOT(addProgressBar(const StelProgressController*)));
+	connect(&StelApp::getInstance(), SIGNAL(progressBarRemoved(const StelProgressController*)), progressBarMgr, SLOT(removeProgressBar(const StelProgressController*)));
 
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(this);
@@ -159,12 +159,10 @@ void SkyGui::init(StelGui* astelGui)
 	autoHidebts = new CornerButtons();
 	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
-	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiAction("actionAutoHideHorizontalButtonBar"), true);
-	btHorizAutoHide->setChecked(autoHideHorizontalButtonBar);
+	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideHorizontalButtonBar", true);
 	pxmapOn = QPixmap(":/graphicGui/VerticalAutoHideOn.png");
 	pxmapOff = QPixmap(":/graphicGui/VerticalAutoHideOff.png");
-	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), stelGui->getGuiAction("actionAutoHideVerticalButtonBar"), true);
-	btVertAutoHide->setChecked(autoHideVerticalButtonBar);
+	btVertAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideVerticalButtonBar", true);
 
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
 	btVertAutoHide->setPos(0,0);
@@ -280,34 +278,17 @@ void SkyGui::updateBarsPos()
 
 void SkyGui::setStelStyle(const QString& style)
 {
-	if (style == "night_color")
-	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.0,0.0,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.0, 0.00, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.0, 0.0, 0.9));
-		winBar->setRedMode(true);
-		buttonBar->setRedMode(true);
-		btHorizAutoHide->setRedMode(true);
-		btVertAutoHide->setRedMode(true);
-	}
-	else
-	{
-		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-		buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
-		buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		winBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		buttonBar->setRedMode(false);
-		winBar->setRedMode(false);
-		btHorizAutoHide->setRedMode(false);
-		btVertAutoHide->setRedMode(false);
-	}
+	Q_UNUSED(style);
+	buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
+	buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
+	winBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 }
 
 // Add a new progress bar in the lower right corner of the screen.
-QProgressBar* SkyGui::addProgressBar()
+void SkyGui::addProgressBar(StelProgressController* p)
 {
-	return progressBarMgr->addProgressBar();
+	return progressBarMgr->addProgressBar(p);
 }
 
 void SkyGui::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)

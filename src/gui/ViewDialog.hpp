@@ -33,14 +33,13 @@ class ViewDialog : public StelDialog
 {
 Q_OBJECT
 public:
-	ViewDialog();
+	ViewDialog(QObject* parent);
 	virtual ~ViewDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	Ui_viewDialogForm* ui;
@@ -72,6 +71,8 @@ private slots:
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 private:
+	//! convenience method to link a checkbox to a StelAction.
+	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
 	void updateSkyCultureText();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;

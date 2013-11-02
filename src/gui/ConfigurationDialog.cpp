@@ -22,16 +22,16 @@
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
-#include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
+#include "StelMainView.hpp"
 #include "ui_configurationDialog.h"
-#include "StelAppGraphicsWidget.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelActionMgr.hpp"
+#include "StelProgressController.hpp"
 
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
@@ -65,7 +65,7 @@
 #include <QComboBox>
 #include <QDir>
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
+ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent) : StelDialog(parent), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
@@ -116,25 +116,6 @@ void ConfigurationDialog::styleChanged()
 	// Nothing for now
 }
 
-void ConfigurationDialog::updateIconsColor()
-{
-	QPixmap pixmap(50, 50);
-	QStringList icons;
-	icons << "main" << "info" << "navigation" << "tools" << "scripts" << "plugins";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
-	foreach(const QString &iconName, icons)
-	{
-		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
-		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
-	}
-}
-
 void ConfigurationDialog::createDialogContent()
 {
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
@@ -144,11 +125,9 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
-	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -158,7 +137,7 @@ void ConfigurationDialog::createDialogContent()
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	cb->model()->sort(0);
 	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
 	int lt = cb->findText(l2, Qt::MatchExactly);
@@ -245,7 +224,8 @@ void ConfigurationDialog::createDialogContent()
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
-	ui->sphericMirrorCheckbox->setChecked(StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect() == "sphericMirrorDistorter");
+	// XXX: to reintroduce.
+	// ui->sphericMirrorCheckbox->setChecked(StelMainView::getInstance().getStelAppGraphicsWidget()->getViewportEffect() == "sphericMirrorDistorter");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
@@ -255,8 +235,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
 	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
-	ui->renderSolarShadowsCheckbox->setChecked(StelApp::getInstance().getRenderSolarShadows());
-	connect(ui->renderSolarShadowsCheckbox, SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setRenderSolarShadows(bool)));
 
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
@@ -264,8 +242,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->showNebulaBgButtonCheckbox->setChecked(gui->getFlagShowNebulaBackgroundButton());
 	connect(ui->showNebulaBgButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowNebulaBackgroundButton(bool)));
 
-	ui->mouseTimeoutCheckbox->setChecked(StelMainGraphicsView::getInstance().getFlagCursorTimeout());
-	ui->mouseTimeoutSpinBox->setValue(StelMainGraphicsView::getInstance().getCursorTimeout());
+	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
+	ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
@@ -277,12 +255,12 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 
-	ui->invertScreenShotColorsCheckBox->setChecked(StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
-	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
+	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
+	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
 	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
 	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
@@ -312,7 +290,7 @@ void ConfigurationDialog::selectLanguage(const QString& langName)
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
-	StelMainWindow::getInstance().initTitleI18n();
+	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -330,13 +308,9 @@ void ConfigurationDialog::setStartupTimeMode()
 
 void ConfigurationDialog::showShortcutsWindow()
 {
-	QAction* action = gui->getGuiAction("actionShow_Shortcuts_Window_Global");
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
 	if (action)
-	{
-		if (action->isChecked())
-			action->setChecked(false);
 		action->setChecked(true);
-	}
 }
 
 void ConfigurationDialog::setDiskViewport(bool b)
@@ -354,12 +328,14 @@ void ConfigurationDialog::setSphericMirror(bool b)
 	{
 		savedProjectionType = core->getCurrentProjectionType();
 		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
-		StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("sphericMirrorDistorter");
+		// XXX: to reintroduce
+		// StelMainView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("sphericMirrorDistorter");
 	}
 	else
 	{
 		core->setCurrentProjectionType((StelCore::ProjectionType)savedProjectionType);
-		StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("none");
+		// XXX: to reintroduce
+		// StelMainView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("none");
 	}
 }
 
@@ -389,7 +365,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		ui->customSelectedInfoRadio->setChecked(true);
 	
 	StelObject::InfoStringGroup flags(0);
-	
+
 	if (ui->checkBoxName->isChecked())
 		flags |= StelObject::Name;
 	if (ui->checkBoxCatalogNumbers->isChecked())
@@ -410,23 +386,19 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Distance;
 	if (ui->checkBoxSize->isChecked())
 		flags |= StelObject::Size;
-	if (ui->checkBoxExtra1->isChecked())
-		flags |= StelObject::Extra1;
-	if (ui->checkBoxExtra2->isChecked())
-		flags |= StelObject::Extra2;
-	if (ui->checkBoxExtra3->isChecked())
-		flags |= StelObject::Extra3;	
-	if (ui->checkBoxGalacticCoordJ2000->isChecked())
-		flags |= StelObject::GalCoordJ2000;
-	
+	if (ui->checkBoxExtra->isChecked())
+		flags |= StelObject::Extra;
+	if (ui->checkBoxGalacticCoordinates->isChecked())
+		flags |= StelObject::GalacticCoord;
+
 	gui->setInfoTextFilters(flags);
 }
 
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
-	StelMainGraphicsView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
-	StelMainGraphicsView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
+	StelMainView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
 }
 
 void ConfigurationDialog::browseForScreenshotDir()
@@ -597,14 +569,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Distance));
 		conf->setValue("flag_show_size",
 		               (bool) (flags & StelObject::Size));
-		conf->setValue("flag_show_extra1",
-		               (bool) (flags & StelObject::Extra1));
-		conf->setValue("flag_show_extra2",
-		               (bool) (flags & StelObject::Extra2));
-		conf->setValue("flag_show_extra3",
-		               (bool) (flags & StelObject::Extra3));
-		conf->setValue("flag_show_galcoordj2000",
-			       (bool) (flags & StelObject::GalCoordJ2000));
+		conf->setValue("flag_show_extra",
+			       (bool) (flags & StelObject::Extra));
+		conf->setValue("flag_show_galcoord",
+			       (bool) (flags & StelObject::GalacticCoord));
 		conf->endGroup();
 	}
 
@@ -633,22 +601,22 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
-	conf->setValue("video/viewport_effect", StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
+	// XXX: to reintroduce.
+	// conf->setValue("video/viewport_effect", StelMainView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
-	conf->setValue("viewing/flag_render_solar_shadows", StelApp::getInstance().getRenderSolarShadows());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
-	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainGraphicsView::getInstance().getFlagCursorTimeout());
-	conf->setValue("gui/mouse_cursor_timeout", StelMainGraphicsView::getInstance().getCursorTimeout());
+	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainView::getInstance().getFlagCursorTimeout());
+	conf->setValue("gui/mouse_cursor_timeout", StelMainView::getInstance().getCursorTimeout());
 
 	conf->setValue("main/screenshot_dir", StelFileMgr::getScreenshotDir());
-	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
+	conf->setValue("main/invert_screenshots_colors", StelMainView::getInstance().getFlagInvertScreenShotColors());
 
 	// full screen and window size
-	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
-	if (!StelMainWindow::getInstance().getFullScreen())
+	conf->setValue("video/fullscreen", StelMainView::getInstance().isFullScreen());
+	if (!StelMainView::getInstance().isFullScreen())
 	{
-		StelMainWindow& mainWindow = StelMainWindow::getInstance();
+		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
 		conf->setValue("video/screen_x", mainWindow.x());
@@ -773,7 +741,7 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 void ConfigurationDialog::populateScriptsList(void)
 {
 	int prevSel = ui->scriptListWidget->currentRow();	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	ui->scriptListWidget->clear();	
 	ui->scriptListWidget->addItems(scriptMgr.getScriptList());	
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
@@ -787,7 +755,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty())
 		return;	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
@@ -812,7 +780,7 @@ void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
 		this->close();	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
@@ -821,12 +789,12 @@ void ConfigurationDialog::runScriptClicked(void)
 
 void ConfigurationDialog::stopScriptClicked(void)
 {
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	StelApp::getInstance().getScriptMgr().stopScript();
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)
 {	
-	ui->scriptStatusLabel->setText(q_("Running script: ") + StelMainGraphicsView::getInstance().getScriptMgr().runningScriptId());
+	ui->scriptStatusLabel->setText(q_("Running script: ") + StelApp::getInstance().getScriptMgr().runningScriptId());
 	ui->runScriptButton->setEnabled(false);
 	ui->stopScriptButton->setEnabled(true);	
 }
@@ -945,7 +913,7 @@ void ConfigurationDialog::newStarCatalogData()
 	Q_ASSERT(progressBar);
 
 	int size = starCatalogDownloadReply->bytesAvailable();
-	progressBar->setValue((float)progressBar->value()+(float)size/1024);
+	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
 }
 
@@ -979,17 +947,16 @@ void ConfigurationDialog::downloadStars()
 	QNetworkRequest req(nextStarCatalogToDownload.value("url").toString());
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
-	progressBar = StelApp::getInstance().getGui()->addProgressBar();
+	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
-	progressBar->setMaximum(nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
-	progressBar->setVisible(true);
+	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
@@ -1020,7 +987,7 @@ void ConfigurationDialog::downloadFinished()
 		currentDownloadFile->close();
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
-		progressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar=NULL;
 		return;
 	}
@@ -1034,7 +1001,7 @@ void ConfigurationDialog::downloadFinished()
 		starCatalogDownloadReply->deleteLater();
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 		connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
@@ -1049,7 +1016,7 @@ void ConfigurationDialog::downloadFinished()
 	currentDownloadFile = NULL;
 	starCatalogDownloadReply->deleteLater();
 	starCatalogDownloadReply = NULL;
-	progressBar->deleteLater();
+	StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar=NULL;
 
 	ui->downloadLabel->setText(q_("Verifying file integrity..."));
@@ -1082,10 +1049,8 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxAltAz->setChecked(flags & StelObject::AltAzi);
 	ui->checkBoxDistance->setChecked(flags & StelObject::Distance);
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
-	ui->checkBoxExtra1->setChecked(flags & StelObject::Extra1);
-	ui->checkBoxExtra2->setChecked(flags & StelObject::Extra2);
-	ui->checkBoxExtra3->setChecked(flags & StelObject::Extra3);
-	ui->checkBoxGalacticCoordJ2000->setChecked(flags & StelObject::GalCoordJ2000);
+	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
+	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()

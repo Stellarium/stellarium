@@ -38,7 +38,7 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	//virtual void draw(StelCore *core, class StelRenderer* renderer);
+	//virtual void draw(StelCore *core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual bool configureGui(bool show);
 
@@ -64,7 +64,7 @@ private:
 	TimeZoneConfigurationWindow * mainWindow;
 };
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -72,6 +72,7 @@ private:
 class TimeZoneConfigurationStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

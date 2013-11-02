@@ -64,7 +64,7 @@ void ShortcutLineEdit::setContents(QKeySequence ks)
 	
 	// Set the keys from the given key sequence
 	clear();
-	for (uint i = 0; i < ks.count(); ++i)
+	for (int i = 0; i < ks.count(); ++i)
 	{
 		keys.append(ks[i]);
 	}

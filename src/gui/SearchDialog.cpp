@@ -121,7 +121,7 @@ void CompletionLabel::updateText()
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 
-SearchDialog::SearchDialog() : simbadReply(NULL)
+SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
@@ -260,6 +260,10 @@ void SearchDialog::createDialogContent()
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
 	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
 	updateListTab();
+
+	// Set the focus directly on the line edit
+	if (ui->lineEditSearchSkyObject->isEnabled())
+		ui->lineEditSearchSkyObject->setFocus();
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -283,16 +287,6 @@ void SearchDialog::enableStartOfWordsAutofill(bool enable)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("search/flag_start_words", useStartOfWords);
-}
-
-
-void SearchDialog::setVisible(bool v)
-{
-	StelDialog::setVisible(v);
-
-	// Set the focus directly on the line edit
-	if (ui->lineEditSearchSkyObject->isVisible())
-		ui->lineEditSearchSkyObject->setFocus();
 }
 
 void SearchDialog::setSimpleStyle()

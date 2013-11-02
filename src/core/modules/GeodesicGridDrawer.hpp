@@ -27,8 +27,6 @@ class StelProjector;
 class StelNavigator;
 class ToneReproductor;
 
-//GL-REFACTOR: This class seems to be unmaintained - 
-//its interface does not match StelModule (e.g. draw() has different parameters)
 class StelGeodesicGridDrawer : public StelModule
 {
 public:
