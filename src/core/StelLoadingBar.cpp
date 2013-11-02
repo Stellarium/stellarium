@@ -20,60 +20,49 @@
 #include "StelProjector.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelCore.hpp"
-#include "renderer/StelRenderer.hpp"
 
 #include <QDebug>
 
 StelLoadingBar::StelLoadingBar(const QString& splashTex,
 	const QString& extraTextString, float extraTextSize,
-	float extraTextPosx, float extraTextPosy, int aWidth, int aHeight) 
-	: width(aWidth)
-	, height(aHeight)
-	, splash(NULL)
-	, extraText(extraTextString)
-	, splashName(splashTex)
-	, viewportXywh(StelApp::getInstance().getCore()->getProjection2d()->getViewportXywh())
+	float extraTextPosx, float extraTextPosy, int aWidth, int aHeight) :
+	width(aWidth), height(aHeight), extraText(extraTextString), sPainter(NULL)
 {
 	extraTextFont.setPixelSize(extraTextSize);
-	splashx = viewportXywh[0] + (viewportXywh[2] - width)/2;
-	splashy = viewportXywh[1] + (viewportXywh[3] - height)/2;
+	sPainter = new StelPainter(StelApp::getInstance().getCore()->getProjection2d());
+	int screenw = sPainter->getProjector()->getViewportWidth();
+	int screenh = sPainter->getProjector()->getViewportHeight();
+	splashx = sPainter->getProjector()->getViewportPosX() + (screenw - width)/2;
+	splashy = sPainter->getProjector()->getViewportPosY() + (screenh - height)/2;
+	if (!splashTex.isEmpty())
+		splash = StelApp::getInstance().getTextureManager().createTexture(splashTex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 }
 
 StelLoadingBar::~StelLoadingBar()
 {
-	if(NULL != splash) {delete splash;}
+	delete sPainter;
 }
 
-void StelLoadingBar::draw(StelRenderer* renderer)
+void StelLoadingBar::draw()
 {
-	if(NULL == splash)
+	sPainter->setColor(1.f, 1.f, 1.f);
+	sPainter->enableTexture2d(true);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// Draw the splash screen if available
+	if (splash)
 	{
-		splash = renderer->createTexture(splashName);
+		splash->bind();
+		sPainter->drawRect2d(splashx, splashy, width, height);
 	}
 
-	// Background.
-	renderer->setGlobalColor(0.0f, 0.0f, 0.0f);
-	renderer->drawRect(viewportXywh[0], viewportXywh[1], viewportXywh[2], viewportXywh[3]);
-
-	renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
-	renderer->setBlendMode(BlendMode_Alpha);
-
-	// Draw the splash screen.
-	splash->bind();
-	renderer->drawTexturedRect(splashx, splashy, width, height);
-
-	renderer->setFont(extraTextFont);
-	const QFontMetrics fontMetrics(extraTextFont);
-	renderer->drawText(TextParams(splashx + extraTextPos[0], 
-	                              splashy + extraTextPos[1] - fontMetrics.height() - 1, 
-	                              extraText));
-
-	// FIXME: Buffer swap disabled to fix the disappearing splash screen issue:
-	// https://bugs.launchpad.net/stellarium/+bug/1131942
-	// It was probably left over from the time this class displayed an actual
-	// loading bar anyway. --BM
-	//renderer->swapBuffers();
+	sPainter->setFont(extraTextFont);
+	sPainter->drawText(splashx + extraTextPos[0], splashy + extraTextPos[1]-sPainter->getFontMetrics().height()-1, extraText);
+	StelPainter::swapBuffer();	// And swap the buffers
 }

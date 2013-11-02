@@ -33,7 +33,6 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainGraphicsView.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 

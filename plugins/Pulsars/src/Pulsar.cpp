@@ -19,13 +19,14 @@
 #include "Pulsar.hpp"
 #include "Pulsars.hpp"
 #include "StelObject.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
-#include "renderer/StelRenderer.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -35,6 +36,8 @@
 #include <QList>
 
 #define PSR_INERTIA 1.0e45 /* Typical moment of inertia for a pulsar */
+
+StelTextureSP Pulsar::markerTexture;
 
 Pulsar::Pulsar(const QVariantMap& map)
 		: initialized(false)
@@ -107,7 +110,7 @@ QVariantMap Pulsar::getMap(void)
 float Pulsar::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core, false);
+        return getVMagnitude(core);
 }
 
 QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -120,7 +123,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << designation << "</h2>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
 	}
@@ -128,7 +131,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (period>0)
 		{
@@ -225,19 +228,12 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 Vec3f Pulsar::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
-float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
+float Pulsar::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
+	Q_UNUSED(core);
 	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6
 	float vmag = distance + 6.f;
 
@@ -247,7 +243,7 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 	}
 	else
 	{
-		return vmag + extinctionMag;
+		return vmag;
 	}
 }
 
@@ -330,38 +326,34 @@ void Pulsar::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Pulsar::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector,
-                  StelTextureNew* markerTexture)
+void Pulsar::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
-	Vec3f color = Vec3f(0.4f,0.5f,1.2f);
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
-
-	double mag = getVMagnitude(core, true);
+	Vec3f color = Vec3f(0.4f,0.5f,1.0f);
+	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
-	renderer->setBlendMode(BlendMode_Add);
-	renderer->setGlobalColor(color[0], color[1], color[2]);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	painter.setColor(color[0], color[1], color[2], 1);
 
 	if (mag <= sd->getLimitMagnitude())
 	{
-		markerTexture->bind();
-		const float size = getAngularSize(NULL)*M_PI/180.*projector->getPixelPerRadAtCenter();
-		const float shift = 5.f + size/1.6f;
+
+		Pulsar::markerTexture->bind();
+		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float shift = 5.f + size/1.6f;
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			Vec3d win;
-			if(!projector->project(XYZ, win)){return;}
 			if (GETSTELMODULE(Pulsars)->getDisplayMode())
 			{
-				renderer->drawTexturedRect(win[0] - 4, win[1] - 4, 8, 8);
+				painter.drawSprite2dMode(XYZ, 4);				
 			}
 			else
 			{
-				renderer->drawTexturedRect(win[0] - 5, win[1] - 5, 10, 10);
-				renderer->drawText(TextParams(XYZ, projector, designation).shift(shift, shift).useGravity());
+				painter.drawSprite2dMode(XYZ, 5);
+				painter.drawText(XYZ, designation, 0, shift, shift, false);
 			}
 		}
 	}

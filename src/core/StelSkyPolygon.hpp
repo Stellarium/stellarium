@@ -19,16 +19,16 @@
 #ifndef _STELSKYPOLYGON_HPP_
 #define _STELSKYPOLYGON_HPP_
 
-#include "MultiLevelJsonBase.hpp"
 #include "StelSphereGeometry.hpp"
+#include "MultiLevelJsonBase.hpp"
 #include "StelSkyImageTile.hpp"
-
 #include <QTimeLine>
+#include <QOpenGLFunctions>
 
 class StelCore;
 
 //! Base class for any polygon with a fixed position in the sky
-class StelSkyPolygon : public MultiLevelJsonBase
+class StelSkyPolygon : public MultiLevelJsonBase, protected QOpenGLFunctions
 {
 	Q_OBJECT
 
@@ -45,7 +45,7 @@ public:
 	~StelSkyPolygon();
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, float opacity=1.);
+	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.);
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
@@ -88,7 +88,7 @@ private:
 
 	//! Draw the polygon on the screen.
 	//! @return true if the tile was actually displayed
-	bool drawTile(class StelRenderer* renderer, StelProjectorP projector);
+	bool drawTile(StelCore* core);
 
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}

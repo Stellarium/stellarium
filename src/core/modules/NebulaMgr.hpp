@@ -24,16 +24,17 @@
 #include <QString>
 #include <QStringList>
 #include <QFont>
-#include "Nebula.hpp"
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
+#include "StelTextureTypes.hpp"
 
 class Nebula;
 class StelTranslator;
 class StelToneReproducer;
 class QSettings;
+class StelPainter;
 
 typedef QSharedPointer<Nebula> NebulaP;
 
@@ -45,6 +46,9 @@ typedef QSharedPointer<Nebula> NebulaP;
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagHintDisplayed
+			   READ getFlagHints
+			   WRITE setFlagHints)
 
 public:
 	NebulaMgr();
@@ -62,7 +66,7 @@ public:
 	virtual void init();
 
 	//! Draws all nebula objects.
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
@@ -179,7 +183,7 @@ private:
 	void loadNebulaSet(const QString& setName);
 
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const StelCore* core, class StelRenderer* renderer);
+	void drawPointer(const StelCore* core, StelPainter& sPainter);
 
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);
@@ -203,12 +207,9 @@ private:
 	float labelsAmount;
 
 	//! The selection pointer texture
-	StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	
 	QFont nebulaFont;      // Font used for names printing
-
-	//! Textures used to draw nebula hints.
-	Nebula::NebulaHintTextures nebulaHintTextures;
 };
 
 #endif // _NEBULAMGR_HPP_

@@ -42,7 +42,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init() {;}
-	virtual void draw(StelCore*, class StelRenderer*) {;}
+	virtual void draw(StelCore*) {;}
 	virtual void update(double) {;}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -140,7 +140,7 @@ public:
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
-	void selectedObjectChanged(StelModule::StelModuleSelectAction action);
+	void selectedObjectChanged(StelModule::StelModuleSelectAction);
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium

@@ -21,7 +21,6 @@
 #define _CONFIGURATIONDIALOG_HPP_
 
 #include <QObject>
-#include <QProgressBar>
 #include <QNetworkReply>
 #include <QFile>
 #include "StelDialog.hpp"
@@ -38,14 +37,13 @@ class ConfigurationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	ConfigurationDialog(StelGui* agui);
+	ConfigurationDialog(StelGui* agui, QObject* parent);
 	virtual ~ConfigurationDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -72,7 +70,7 @@ private:
 	bool hasDownloadedStarCatalog;
 	QNetworkReply* starCatalogDownloadReply;
 	QFile* currentDownloadFile;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	void setNoSelectedInfo();

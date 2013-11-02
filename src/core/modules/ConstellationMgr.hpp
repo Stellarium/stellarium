@@ -34,6 +34,7 @@ class StelToneReproducer;
 class StarMgr;
 class Constellation;
 class StelProjector;
+class StelPainter;
 
 //! @class ConstellationMgr
 //! Display and manage the constellations.
@@ -101,7 +102,7 @@ public:
 	virtual void init();
 
 	//! Draw constellation lines, art, names and boundaries.
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 
 	//! Updates time-varying state for each Constellation.
 	virtual void update(double deltaTime);
@@ -255,23 +256,13 @@ private:
 	//! @param conCatFile the path to the file which contains the constellation boundary data.
 	bool loadBoundaries(const QString& conCatFile);
         //! Draw the constellation lines at the epoch given by the StelCore.
-	void drawLines(class StelRenderer* renderer, StelProjectorP projector, const StelCore* core) const;
+	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the constellation art.
-	//!
-	//! @param renderer  Renderer to draw with.
-	//! @param projector Projector to project vertices to viewport.
-	void drawArt(class StelRenderer* renderer, StelProjectorP projector) const;
+	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation name labels.
-	//! 
-	//! @param renderer  Renderer to draw with.
-	//! @param projector Projector to project vertices to viewport.
-	//! @param font      Font to draw the names with.
-	void drawNames(class StelRenderer* renderer, StelProjectorP projector, QFont& font) const;
+	void drawNames(StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.
-	//! 
-	//! @param renderer  Renderer to draw with.
-	//! @param projector Projector to project vertices to viewport.
-	void drawBoundaries(StelRenderer* renderer, StelProjectorP projector) const;
+	void drawBoundaries(StelPainter& sPainter) const;
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.

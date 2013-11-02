@@ -41,10 +41,9 @@
 #include <QTimer>
 #include <QStringListModel>
 
-LocationDialog::LocationDialog() : isEditingNew(false)
+LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
-	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
 LocationDialog::~LocationDialog()
@@ -224,7 +223,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids usless processing
-	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
+	if (lastPlanet==loc.planetName)
 		return;
 
 	QPixmap pixmap;
@@ -238,34 +237,20 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	{
 		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 		PlanetP p = ssm->searchByEnglishName(loc.planetName);
-		QString path;
 		if (p)
 		{
-			try
+			QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
+			if (path.isEmpty())
 			{
-				path = StelFileMgr::findFile("textures/"+p->getTextMapName());
-			}
-			catch (std::runtime_error& e)
-			{
-				qWarning() << "ERROR - could not find planet map for " << loc.planetName << e.what();
+				qWarning() << "ERROR - could not find planet map for " << loc.planetName;
 				return;
 			}
 			pixmap = QPixmap(path);
 		}
 	}
-
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		ui->mapLabel->setPixmap(StelButton::makeRed(pixmap));
-	}
-	else
-	{
-		ui->mapLabel->setPixmap(pixmap);
-	}
-
+	ui->mapLabel->setPixmap(pixmap);
 	// For caching
 	lastPlanet = loc.planetName;
-	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
 void LocationDialog::populatePlanetList()
