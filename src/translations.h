@@ -119,6 +119,8 @@ class Translations
 		N_("Metis");
 		// TRANSLATORS: Asteroid (10) Hygiea
 		N_("Hygiea");
+		// TRANSLATORS: Asteroid (41) Daphne
+		N_("Daphne");
 		// TRANSLATORS: Asteroid (1221) Amor
 		N_("Amor");
 		// TRANSLATORS: Asteroid (99942) Apophis
