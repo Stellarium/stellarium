@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-26 16:16+0700\n"
-"PO-Revision-Date: 2013-10-27 17:51+0000\n"
-"Last-Translator: Pavol Gajdoš <Unknown>\n"
+"PO-Revision-Date: 2013-11-02 16:46+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-28 05:22+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-03 05:19+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:314
@@ -1105,7 +1105,7 @@ msgstr "Azimut/výška: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Obrázky na pozadí objektov hlbokého vesmíru"
 
 #: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
 #: src/StelMainView.cpp:295
@@ -2443,6 +2443,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
+"Šetrič obrazovky zobrazujúci rozličné udalosti v slnečnej sústave. Dokopy je "
+"ich 187!"
 
 #: src/translations.h:276
 msgid "A tour of the western constellations."
@@ -3551,7 +3553,7 @@ msgstr "Nájsť objekt alebo polohu"
 
 #: src/ui_searchDialogGui.h:561 src/ui_searchDialogGui.h:565
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Stlačte tabulátor na výber medzi nájdenými položkami"
 
 #: src/ui_searchDialogGui.h:570
 msgid "iota"
@@ -3700,7 +3702,7 @@ msgstr "Možnosti hľadania"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Automatické doplňovanie používať len od začiatku slov"
 
 #: src/ui_searchDialogGui.h:656 src/ui_viewDialog.h:1301
 #: src/ui_viewDialog.h:1307 src/ui_viewDialog.h:1309
@@ -4278,7 +4280,7 @@ msgstr "Zachytené obrazovky"
 
 #: src/ui_configurationDialog.h:1103
 msgid "Screenshot Directory"
-msgstr "Adresár snímkov obrazovky"
+msgstr "Priečinok so snímkami obrazovky"
 
 #: src/ui_configurationDialog.h:1105
 msgid "Invert colors"
@@ -4630,7 +4632,7 @@ msgstr "Zameriavač Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1298
 msgid "Oculars plugin configuration"
-msgstr "Nastavenie modulu okuláre"
+msgstr "Nastavenie modulu Okuláre"
 
 #: plugins/Oculars/src/Oculars.cpp:1300
 msgid "Select next telescope"
@@ -4791,15 +4793,17 @@ msgstr "Ďalší teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:260
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr "Otočiť rám snímača o 15 stupňov proti smeru hodinových ručičiek"
+msgstr ""
+"Otočiť rám snímača o 15 stupňov proti smeru pohybu hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:273
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr "Otočiť rám snímača o 5 stupňov proti smeru hodinových ručičiek"
+msgstr ""
+"Otočiť rám snímača o 5 stupňov proti smeru pohybu hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:286
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr "Otočiť rám snímača o 1 stupeň proti smeru hodinových ručičiek"
+msgstr "Otočiť rám snímača o 1 stupeň proti smeru pohybu hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
 msgid "Reset the sensor frame rotation"
@@ -4807,15 +4811,15 @@ msgstr "Obnoviť pôvodné otočenie rámu snímača"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:312
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr "Otočiť rám snímača o 1 stupeň v smere hodinových ručičiek"
+msgstr "Otočiť rám snímača o 1 stupeň v smere pohybu hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:325
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr "Otočiť rám snímača o 5 stupňov v smere hodinových ručičiek"
+msgstr "Otočiť rám snímača o 5 stupňov v smere pohybu hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:338
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr "Otočiť rám snímača o 15 stupňov v smere hodinových ručičiek"
+msgstr "Otočiť rám snímača o 15 stupňov v smere pohybu hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
 msgid "Effective focal length of the ocular"
@@ -6952,6 +6956,8 @@ msgstr "Historické supernovy"
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
+"Tento zásuvný modul vám umožňuje pozorovať niektoré jasné historické "
+"supernovy."
 
 #: plugins/Supernovae/src/Supernovae.cpp:140
 msgid "Historical Supernovae configuration window"
@@ -6969,7 +6975,7 @@ msgstr "Typ supernovy: %1"
 #: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:142
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Maximálny jas: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -6978,6 +6984,8 @@ msgstr "Modul historické supernovy"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
+"Tento zásuvný modul vám umožňuje pozorovať niektoré jasné historické "
+"supernovy: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 #, qt-format
@@ -7054,7 +7062,7 @@ msgstr "Nastavenia historických supernov"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Nastavenie modulu historické supernovy"
+msgstr "Nastavenie modulu Historické supernovy"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
@@ -7092,11 +7100,11 @@ msgstr "Jasné novy"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:110
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "Zásuvný modul ukazujúci niektoré jasné novy v Mliečnej ceste."
 
 #: plugins/Novae/src/Novae.cpp:135
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Okno nastavení jasných nov"
 
 #: plugins/Novae/src/Nova.cpp:126
 #, qt-format
@@ -7109,19 +7117,23 @@ msgstr "nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:105
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Zásuvný modul Jasné novy"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"Novy môžete nájsť pomocou nástroja na hľadanie zadaním označenia novy alebo "
+"jej bežného názvu (napr. 'Nova Cygni 1975' alebo 'V1500 Cyg')."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"Tento zásuvný modul používa veľmi jednoduchý model na výpočet svetelných "
+"kriviek nov."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #, qt-format
@@ -7143,18 +7155,20 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Ak si chcete prečítať všetky informácie o tomto zásuvnom module, jeho "
+"histórii a formáte katalógu, môžete ich %1získať tu%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:193
 msgid "Novae is updated"
-msgstr ""
+msgstr "Novy sú aktualizované"
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Nastavenie modulu Jasné novy"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Nastavenie modulu Jasné novy"
 
 #: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:157
 #: plugins/Quasars/src/Quasars.cpp:158
@@ -7538,17 +7552,17 @@ msgstr "Rok objavenia"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Habitable class"
-msgstr ""
+msgstr "Trieda obývateľnosti"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Mean surface temp."
-msgstr ""
+msgstr "Priem. teplota povrchu"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "ESI"
-msgstr ""
+msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
@@ -7570,6 +7584,9 @@ msgid ""
 "\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Zoznam potenciálne obývateľných exoplanét a údaje o nich boli prevzaté z "
+"\"%1Katalógu obývateľných exoplanét%3\" od %2Laboratória planetárnej "
+"obývateľnosti%3."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
@@ -7583,7 +7600,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Potenciálne obývateľné exoplanéty"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid ""
@@ -7591,10 +7608,13 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
+"Tento zásuvný modul dokáže zobraziť potenciálne obývateľné exoplanéty "
+"(oranžovým symbolom) a nejaké informácie o týchto planétach - triedu "
+"obývateľnosti, priemernú teplotu povrchu a index podobnosti so Zemou."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Habitable Class"
-msgstr ""
+msgstr "Trieda obývateľnosti"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid ""
@@ -7605,10 +7625,17 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
+"Klasifikuje obývateľné planéty na základe teploty: hypopsychroplanéty (O "
+"alebo hP) = veľmi studené (menej ako −50°C); psychroplanéty (P) = studené; "
+"mezoplanéty (M) = strednej teploty (0–50°C); termoplanéty (T) = teplé; "
+"hypertermoplanéty (E alebo hT) = veľmi teplé (nad 100°C). Mezoplanéty by "
+"boli ideálne pre komplexný život, zatiaľ čo trieda O alebo E by mohla "
+"podporiť len extrémofílny život. Neobývateľné planéty sú zaradené do triedy "
+"X (alebo NH)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "Priemerná teplota povrchu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7619,7 +7646,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Index podobnosti so Zemou (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7627,6 +7654,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Podobnosť so Zemou v rozpätí 0 až 1, kde 1 predstavuje najväčšiu podobnosť "
+"so Zemou. ESI závisí od polomeru, hustoty, únikovej rýchlosti a povrchovej "
+"teploty planéty."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
