@@ -527,7 +527,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
-						meanMotion = (eccentricity == 1.0)
+						meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
 									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
 									: (semi_major_axis > 0.0)
 									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
