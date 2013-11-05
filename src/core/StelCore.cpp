@@ -99,10 +99,12 @@ void StelCore::init()
 
 	defaultLocationID = conf->value("init_location/location","error").toString();
 	bool ok;
-	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(defaultLocationID);
+	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
+	StelLocation location = locationMgr->locationForString(defaultLocationID);
 	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
+		location = locationMgr->getLastResortLocation();
 	}
 	position = new StelObserver(location);
 
