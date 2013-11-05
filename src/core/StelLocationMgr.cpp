@@ -149,6 +149,27 @@ StelLocationMgr::~StelLocationMgr()
 {
 }
 
+static float parseAngle(const QString& s, bool* ok)
+{
+	float ret;
+	// First try normal decimal value.
+	ret = s.toFloat(ok);
+	if (*ok) return ret;
+	// Try GPS coordinate like +121°33'38.28"
+	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
+	if (reg.exactMatch(s))
+	{
+		float deg = reg.capturedTexts()[1].toFloat(ok);
+		if (!*ok) return 0;
+		float min = reg.capturedTexts()[2].isEmpty()? 0 : reg.capturedTexts()[2].toFloat(ok);
+		if (!*ok) return 0;
+		float sec = reg.capturedTexts()[3].isEmpty()? 0 : reg.capturedTexts()[3].toFloat(ok);
+		if (!*ok) return 0;
+		return deg + min / 60 + sec / 3600;
+	}
+	return 0;
+}
+
 const StelLocation StelLocationMgr::locationForString(const QString& s) const
 {
 	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
@@ -163,9 +184,9 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = reg.capturedTexts()[2].toDouble(&ok);
+		ret.latitude = parseAngle(reg.capturedTexts()[2].trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = reg.capturedTexts()[3].toDouble(&ok);
+		ret.longitude = parseAngle(reg.capturedTexts()[3].trimmed(), &ok);
 		if (!ok) ret.role = '!';
 		ret.name = reg.capturedTexts()[1].trimmed();
 		ret.planetName = "Earth";
