@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-03 18:05+0700\n"
-"PO-Revision-Date: 2013-10-03 03:04+0000\n"
+"PO-Revision-Date: 2013-11-05 08:29+0000\n"
 "Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-04 05:24+0000\n"
+"X-Launchpad-Export-Date: 2013-11-06 05:17+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
@@ -796,6 +796,8 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"J. Meeus에서 <em> 천문 알고리즘</em> (제 2 에디션., 1998), 널리 사용됩니다. 1620 ... 2000의 표는 "
+"1620...2000 이외의 날짜 Chapront, Chapront-Touze & Francou (1997)의 변형을 포함하고 있습니다."
 
 #: src/core/StelCore.cpp:1512
 #, qt-format
@@ -803,6 +805,7 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"NASA 제트 추진 연구소 JPL 태양계 역학 그룹은 대화 형 웹 사이트 %1 JPL 호라이즌 %2에서 이 수식을 사용합니다."
 
 #: src/core/StelCore.cpp:1515
 #, qt-format
@@ -1043,7 +1046,7 @@ msgstr "방위/고도: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "딥스카이 천체 배경이미지"
 
 #: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
 #: src/StelMainView.cpp:295
@@ -1659,7 +1662,7 @@ msgstr "전체 화면 모드"
 #: src/StelMainView.cpp:353
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "스텔라리움 %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:194
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
@@ -1976,7 +1979,7 @@ msgstr "휴기에아"
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
 msgid "Daphne"
-msgstr ""
+msgstr "다프네"
 
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
@@ -2016,7 +2019,7 @@ msgstr "마케마케"
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:140
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "1680년의 거대혜성(C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:143
@@ -3961,7 +3964,7 @@ msgstr "스펙트럼 등급, 성운 형태, etc."
 
 #: src/ui_configurationDialog.h:1003
 msgid "Additional information"
-msgstr ""
+msgstr "추가 정보"
 
 #: src/ui_configurationDialog.h:1004
 msgid "Distance"
@@ -3989,7 +3992,7 @@ msgstr "적경/적위(J2000)"
 
 #: src/ui_configurationDialog.h:1014
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "은하좌표계"
 
 #: src/ui_configurationDialog.h:1016
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -6923,6 +6926,8 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"당신은 신성 또는 일반적인 이름(예 : 'Nova Cygni 1975' 또는 'V1500 Cyg')을 입력하여 검색 도구를 통해 신성을 "
+"찾을 수 있습니다."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid ""
@@ -6976,6 +6981,8 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"플러그인은 16안시등급보다 더 밝은 몇개의 퀘이사를 보여줍니다. 퀘이사의 카탈로그는  'Quasars and Active Galactic "
+"Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V에서 컴파일되었습니다."
 
 #: plugins/Quasars/src/Quasars.cpp:157
 msgid "Show quasars"
@@ -7331,17 +7338,17 @@ msgstr "발견된 년도"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Habitable class"
-msgstr ""
+msgstr "생명체 거주 등급"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Mean surface temp."
-msgstr ""
+msgstr "평균 표면 온도"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "ESI"
-msgstr ""
+msgstr "지구유사성지수(ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
@@ -7361,6 +7368,7 @@ msgid ""
 "\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"잠재적 거주가능한 외계행성의 리스트와 데이터는 %2 행성의 생명체 연구소의 \"%1 거주가능 외계행성 카탈로그%3'에 있습니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
@@ -7372,7 +7380,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "잠재적 생명체 거주가능한 외계행성들"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid ""
@@ -7383,7 +7391,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Habitable Class"
-msgstr ""
+msgstr "생명체 거주 등급"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid ""
@@ -7397,7 +7405,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "평균 표면 온도"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7408,7 +7416,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "지구 유사성 지수(ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7416,6 +7424,8 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"단순히 지구 크기를 0에서 1로 했을 때, 지구와 가장 같은 크기가 1입니다. ESI 지수는 행성의 반경, 밀도, 탈출속도, 표면온도에 "
+"좌우됩니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -7545,7 +7555,7 @@ msgstr "정보"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "웹사이트"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability analysis"
