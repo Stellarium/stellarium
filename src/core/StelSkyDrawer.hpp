@@ -211,9 +211,9 @@ public slots:
 	//! Get atmospheric (ground) pressure in mbar (for refraction).
 	double getAtmospherePressure() const {return refraction.getPressure();}
 
-	//! Get the current valid extinction computation class.
+	//! Get the current valid extinction computation object.
 	const Extinction& getExtinction() const {return extinction;}
-	//! Get the current valid fefraction computation class.
+	//! Get the current valid refraction computation object.
 	const Refraction& getRefraction() const {return refraction;}
 
 	//! Get the radius of the big halo texture used when a 3d model is very bright.
