@@ -154,7 +154,7 @@ LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscap
 
 	//TODO: Find a way to obtain this list automatically.
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
-	packagedLandscapeIDs = (QStringList() << "guereins" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
+	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -598,7 +598,7 @@ bool LandscapeMgr::getFlagAtmosphere() const
 }
 
 //! Set atmosphere fade duration in s
-void LandscapeMgr::setAtmosphereFadeDuration(float f)
+void LandscapeMgr::setAtmosphereFadeDuration(const float f)
 {
 	atmosphere->setFadeDuration(f);
 }
@@ -610,7 +610,7 @@ float LandscapeMgr::getAtmosphereFadeDuration() const
 }
 
 //! Set light pollution luminance level
-void LandscapeMgr::setAtmosphereLightPollutionLuminance(float f)
+void LandscapeMgr::setAtmosphereLightPollutionLuminance(const float f)
 {
 	atmosphere->setLightPollutionLuminance(f);
 }
@@ -622,25 +622,25 @@ float LandscapeMgr::getAtmosphereLightPollutionLuminance() const
 }
 
 //! Set the light pollution following the Bortle Scale
-void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
+void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
 }
 
 //! Get the light pollution following the Bortle Scale
-int LandscapeMgr::getAtmosphereBortleLightPollution()
+int LandscapeMgr::getAtmosphereBortleLightPollution() const
 {
 	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0004, 1./2.1) + 1;
 }
 
-void LandscapeMgr::setZRotation(float d)
+void LandscapeMgr::setZRotation(const float d)
 {
 	if (landscape)
 		landscape->setZRotation(d);
 }
 
-float LandscapeMgr::getLuminance()
+float LandscapeMgr::getLuminance() const
 {
 	return atmosphere->getRealDisplayIntensityFactor();
 }
@@ -678,7 +678,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 }
 
 
-QString LandscapeMgr::nameToID(const QString& name)
+QString LandscapeMgr::nameToID(const QString& name) const
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 
@@ -715,7 +715,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 }
 
 
-QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool display, bool toMainDirectory)
+QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const bool display, const bool toMainDirectory)
 {
 	Q_UNUSED(toMainDirectory);
 	if (!QFile::exists(sourceFilePath))
@@ -847,7 +847,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	destinationDir.cd(landscapeID);
 	QString destinationDirPath = destinationDir.absolutePath();
 	QStringList landscapeFileEntries = archiveTopDirectory->entries();
-	foreach (QString entry, landscapeFileEntries)
+	foreach (const QString entry, landscapeFileEntries)
 	{
 		const KArchiveEntry * archEntry = archiveTopDirectory->entry(entry);
 		if(archEntry->isFile())
@@ -871,7 +871,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	return landscapeID;
 }
 
-bool LandscapeMgr::removeLandscape(QString landscapeID)
+bool LandscapeMgr::removeLandscape(const QString landscapeID)
 {
 	if (landscapeID.isEmpty())
 	{
@@ -934,7 +934,7 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 	return true;
 }
 
-QString LandscapeMgr::getLandscapePath(QString landscapeID)
+QString LandscapeMgr::getLandscapePath(const QString landscapeID) const
 {
 	QString result;
 	//Is this necessary? This function is private.
@@ -951,7 +951,7 @@ QString LandscapeMgr::getLandscapePath(QString landscapeID)
 	return result;
 }
 
-QString LandscapeMgr::loadLandscapeName(QString landscapeID)
+QString LandscapeMgr::loadLandscapeName(const QString landscapeID)
 {
 	QString landscapeName;
 	if (landscapeID.isEmpty())
@@ -979,7 +979,7 @@ QString LandscapeMgr::loadLandscapeName(QString landscapeID)
 	return landscapeName;
 }
 
-quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
+quint64 LandscapeMgr::loadLandscapeSize(const QString landscapeID) const
 {
 	quint64 landscapeSize = 0;
 	if (landscapeID.isEmpty())
