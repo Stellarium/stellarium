@@ -493,8 +493,8 @@ public:
 	static const SphericalRegionP staticInstance;
 };
 
-//! @class AllSkySphericalRegion
-//! Special SphericalRegion for the whole sphere.
+//! @class EmptySphericalRegion
+//! Special SphericalRegion for --- UMM, WHAT EXACTLY?
 class EmptySphericalRegion : public SphericalRegion
 {
 public:
@@ -536,8 +536,8 @@ public:
 };
 
 
-//! @class SphericalPolygonBase
-//! Abstract class defining default implementations for some spherical geometry methods.
+//! @class SphericalPolygon
+//! Class defining default implementations for some spherical geometry methods.
 //! All methods are reentrant.
 class SphericalPolygon : public SphericalRegion
 {
@@ -732,8 +732,8 @@ protected:
 };
 
 
-//! @class SphericalConvexPolygonSet
-//! A special case of SphericalPolygon for which the polygon is composed of disjoint convex polygons.
+// ! @class SphericalConvexPolygonSet
+// ! A special case of SphericalPolygon for which the polygon is composed of disjoint convex polygons.
 //class SphericalConvexPolygonSet : public SphericalRegion
 //{
 //public:
