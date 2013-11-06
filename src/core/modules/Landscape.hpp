@@ -280,8 +280,9 @@ private:
 //! Since 0.13 and Qt5, large images of 8192x4096 pixels are available, but they still may not work on every hardware.
 //! If @param angleRotateZ==0, the left/right image border is due east.
 //! It is possible to remove empty top or bottom parts of the textures (main texture: only top part should meaningfully be cut away!)
-//! The texture should still be power-of-two, so maybe 8192x1024 for the fog, or 8192x2048 for the light pollution.
+//! The textures should still be power-of-two, so maybe 8192x1024 for the fog, or 8192x2048 for the light pollution.
 //! (It's OK to stretch the textures. They just have to fit, geometrically!)
+//! TODO: Allow a horizontal split for 2 or even 4 parts, i.e. super-large, super-accurate panos.
 class LandscapeSpherical : public Landscape
 {
 public:
