@@ -30,6 +30,8 @@
 #include <QDebug>
 #include <QSettings>
 #include <QVarLengthArray>
+#include <QFile>
+#include <QDir>
 
 Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), nightBrightness(0.8), angleRotateZOffset(0.), horizonPolygon(NULL)
 {
@@ -396,14 +398,142 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
 }
 
+float LandscapeOldStyle::getOpacity(const Vec3d azalt) const
+{
+	const float alt_rad = std::asin(azalt[2]);  // sampled altitude, radians
+	if (alt_rad < decorAngleShift*M_PI/180.0f) return 1.0f; // below decor, i.e. certainly soil.
+	if (alt_rad > (decorAltAngle+decorAngleShift)*M_PI/180.0f) return 0.0f; // above decor, i.e. certainly sky.
+
+	// GZ TODO: Implement properly...
+
+	if (alt_rad < 0) return 1.0f; else return 0.0f; // signal for now: better use math. horizon.
+
+//	float az=atan2(azalt[0], azalt[1]) + M_PI/2; // -pi/2..+3pi/2, real azimuth. NESW
+
+
+
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+LandscapePolygonal::LandscapePolygonal(float _radius) : Landscape(_radius)
+{}
+
+LandscapePolygonal::~LandscapePolygonal()
+{
+	if (horizonPolygon) delete horizonPolygon;
+}
+
+void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& landscapeId)
+{
+	loadCommon(landscapeIni, landscapeId);
+	groundColor=StelUtils::strToVec3f( landscapeIni.value("landscape/ground_color", "0,0,0" ).toString() );
+
+	QString type = landscapeIni.value("landscape/type").toString();
+	if(type != "polygonal")
+	{
+		qWarning() << "Landscape type mismatch for landscape "<< landscapeId << ", expected polygonal, found " << type << ".  No landscape in use.\n";
+		validLandscape = 0;
+		return;
+	}
+	create(name,
+		   StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/horizon_list").toString()),
+			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
+}
+
+
+void LandscapePolygonal::create(const QString _name, const QString& _lineFileName, const float _angleRotateZ)
+{
+	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
+	validLandscape = 1;  // assume ok...
+	name = _name;
+	angleRotateZ = _angleRotateZ*M_PI/180.f;
+	// TODO: Load&parse _linefilename, create SphericalPolygon. Note that loading the polygon may be moved to Landscape::loadCommon()!
+	Q_UNUSED(_lineFileName); // FOR NOW...
+
+
+	QVector<Vec3d> horiPoints(0);
+	QFile file(_lineFileName);
+
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "Landscape Horizon line data file" << QDir::toNativeSeparators(_lineFileName) << "not found.";
+		return;
+	}
+	QRegExp emptyLine("^\\s*$");
+	QTextStream in(&file);
+	while (!in.atEnd())
+	{
+		// Build list of vertices. The checks can certainly become more robust.
+		QString line = in.readLine();
+		//line=line.trimmed(); // crash?
+		if (line.at(0)=='#') continue; // skip comment lines.
+		//if (line.isEmpty()) continue;
+		if (emptyLine.exactMatch((line))) continue;
+		QStringList list = line.split(QRegExp("\\b\\s+\\b"));
+		if (list.count() != 2)
+		{
+			qWarning() << "Landscape Horizon data file" << QDir::toNativeSeparators(_lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";
+			continue;
+		}
+		Vec3d point;
+		qDebug() << "Creating point for az=" << list.at(0) << " alt=" << list.at(1);
+		// It is possible that the azimuths have to be subtracted from 360! (or some other rotation)
+		StelUtils::spheToRect(list.at(0).toFloat()*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
+		horiPoints.append(point);
+	}
+	file.close();
+	qDebug() << "created horipoints with " << horiPoints.count() << "points";
+	horizonPolygon = new SphericalPolygon(horiPoints);
+
+
+}
+
+
+void LandscapePolygonal::draw(StelCore* core)
+{
+	if(!validLandscape) return;
+	if(!landFader.getInterstate()) return;
+
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-(angleRotateZ+angleRotateZOffset)));
+	const StelProjectorP prj = core->getProjection(transfo);
+	StelPainter sPainter(prj);
+
+	// Normal transparency mode
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setColor(skyBrightness*groundColor[0], skyBrightness*groundColor[1], skyBrightness*groundColor[2], landFader.getInterstate());
+	glEnable(GL_CULL_FACE);
+	//sPainter.enableTexture2d(true);
+	//glEnable(GL_BLEND);
+	//mapTex->bind();
+	//sPainter.sSphereMap(radius,cols,rows,texFov,1);
+	// TODO: DRAW POLYGON HERE
+
+	glDisable(GL_CULL_FACE);
+}
+
+float LandscapePolygonal::getOpacity(const Vec3d azalt) const
+{
+	//	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
+	//			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
+	//			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
+	// TODO: Make sure azalt is oriented properly...
+	if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+// LandscapeFisheye
+//
 
 LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
 {}
 
 LandscapeFisheye::~LandscapeFisheye()
 {
+	if (mapImage) delete mapImage;
 }
 
 void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -433,6 +563,7 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 	name = _name;
 	texFov = _texturefov*M_PI/180.f;
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
+	mapImage = new QImage(_maptex);
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 
 	if (_maptexIllum.length())
@@ -473,7 +604,7 @@ void LandscapeFisheye::draw(StelCore* core)
 		sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	}
 
-	// GZ experimental:
+	// GZ new:
 	if (mapTexIllum && lightScapeBrightness>0.0f)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -485,6 +616,29 @@ void LandscapeFisheye::draw(StelCore* core)
 	glDisable(GL_CULL_FACE);
 }
 
+float LandscapeFisheye::getOpacity(const Vec3d azalt) const
+{
+	// QImage has pixel 0/0 in top left corner.
+	// The texture is taken from the center circle in the square texture.
+	// It is possible that sample position is outside. in this case, assume full opacity and exit early.
+	const float alt_rad = std::asin(azalt[2]);  // sampled altitude, radians
+	if (M_PI/2-alt_rad > texFov/2.0 ) return 1.0; // outside fov, in the clamped texture zone: always opaque.
+
+	float radius=(M_PI/2-alt_rad)*2.0f/texFov; // radius in units of mapImage.height/2
+
+	float az=atan2(azalt[0], azalt[1]) + M_PI/2 - angleRotateZ; // -pi/2..+3pi/2, real azimuth. NESW
+	//  The texture map has south on top, east at right (if anglerotateZ=0)
+	int x= mapImage->height()/2*(1 + radius*std::sin(az));
+	int y= mapImage->height()/2*(1 + radius*std::cos(az));
+
+	QRgb pixVal=mapImage->pixel(x, y);
+	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
+			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
+			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
+	return qAlpha(pixVal)/255.0f;
+
+
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // spherical panoramas
 
@@ -493,6 +647,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius)
 
 LandscapeSpherical::~LandscapeSpherical()
 {
+	if (mapImage) delete mapImage;
 }
 
 void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -534,11 +689,12 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	name = _name;
 	angleRotateZ  = _angleRotateZ         *M_PI/180.f; // Defined in ini --> internal prg value
 	mapTexTop     = (90.f-_mapTexTop)     *M_PI/180.f; // top     90     -->   0
-	mapTexBottom  = (90.f-_mapTexBottom)  *M_PI/180.f; // bottom -90     --> 180
+	mapTexBottom  = (90.f-_mapTexBottom)  *M_PI/180.f; // bottom -90     -->  pi
 	fogTexTop     = (90.f-_fogTexTop)     *M_PI/180.f;
 	fogTexBottom  = (90.f-_fogTexBottom)  *M_PI/180.f;
 	illumTexTop   = (90.f-_illumTexTop)   *M_PI/180.f;
 	illumTexBottom= (90.f-_illumTexBottom)*M_PI/180.f;
+	mapImage = new QImage(_maptex);
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 
 	if (_maptexIllum.length())
@@ -581,7 +737,7 @@ void LandscapeSpherical::draw(StelCore* core)
 		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom)), 1, true, fogTexTop, fogTexBottom);
 	}
 
-	// GZ experimental. This looks striking!
+	// GZ new feature. This looks striking!
 	if (mapTexIllum && lightScapeBrightness>0.0f)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -590,4 +746,40 @@ void LandscapeSpherical::draw(StelCore* core)
 		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom)), 1, true, illumTexTop, illumTexBottom);
 	}
 	glDisable(GL_CULL_FACE);
+}
+
+//! Sample landscape texture for transparency. May be used for advanced visibility, sunrise on the visible horizon etc.
+//! @param azalt: normalized direction in alt-az frame
+//! @retval alpha (0..1), where 0=fully transparent.
+float LandscapeSpherical::getOpacity(const Vec3d azalt) const
+{
+	// QImage has pixel 0/0 in top left corner. We must first find image Y for optionally cropped images.
+	// It is possible that sample position is outside cropped texture. in this case, assume full transparency and exit early.
+	const float alt_pm1 = 2.0f * std::asin(azalt[2])  / M_PI;  // sampled altitude, -1...+1 linear in altitude angle
+	const float img_top_pm1 = 1.0f-2.0f*(mapTexTop    / M_PI); // the top    line in -1..+1
+	if (alt_pm1>img_top_pm1) return 0.0f;
+	const float img_bot_pm1 = 1.0f-2.0f*(mapTexBottom / M_PI); // the bottom line in -1..+1
+	if (alt_pm1<img_bot_pm1) return 0.0f;
+
+	float y_img_1=(alt_pm1-img_bot_pm1)/(img_top_pm1-img_bot_pm1); // the sampled altitude in 0..1 image height from bottom
+
+	int y=(1.0-y_img_1)*mapImage->height();           // pixel Y from top.
+
+	float az=atan2(azalt[0], azalt[1]) / M_PI + 0.5f;  // -0.5..+1.5
+	if (az<0) az+=2.0f;                                //  0..2 = N.E.S.W.N
+
+	const float xShift=angleRotateZ /M_PI; // shift value in -2..2
+	float az_phot=az - 0.5f - xShift;      // The 0.5 is caused by regular pano left edge being East. The xShift compensates any configured angleRotateZ
+	az_phot=fmodf(az_phot, 2.0f);
+	if (az_phot<0) az_phot+=2.0f;                                //  0..2 = image-X
+
+	int x=(az_phot/2.0f) * mapImage->width(); // pixel X from left.
+
+	QRgb pixVal=mapImage->pixel(x, y);
+	qDebug() << "Landscape sampling: az=" << az*180.0 << "° alt=" << alt_pm1*90.0f
+			 << "°, xShift[-2..+2]=" << xShift << " az_phot[0..2]=" << az_phot
+			 << ", w=" << mapImage->width() << " h=" << mapImage->height()
+			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
+	return qAlpha(pixVal)/255.0f;
+
 }

@@ -104,6 +104,10 @@ public:
 	//! @return A pointer to the newly created landscape object.
 	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
 
+	// GZ: implement StelModule's method. For test purposes only, we implement a manual transparency sampler.
+	// TODO: comment this away for final builds
+	virtual void handleMouseClicks(class QMouseEvent*);
+
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI

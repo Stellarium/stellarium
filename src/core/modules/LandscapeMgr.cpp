@@ -26,6 +26,7 @@
 #include <QDir>
 #include <QFile>
 #include <QTemporaryFile>
+#include <QMouseEvent>
 
 #include <stdexcept>
 
@@ -154,7 +155,7 @@ LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscap
 
 	//TODO: Find a way to obtain this list automatically.
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
-	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
+	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "geneve" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -174,6 +175,9 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+20;
 	if (actionName==StelModule::ActionUpdate)
 		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
+	// GZ The next 2 lines are only required to test landscape transparency. They should be commented away for releases.
+	if (actionName==StelModule::ActionHandleMouseClicks)
+		return StelApp::getInstance().getModuleMgr().getModule("StelMovementMgr")->getCallOrder(actionName)-1;
 	return 0;
 }
 
@@ -664,6 +668,8 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 		ldscp = new LandscapeSpherical();
 	else if (s=="fisheye")
 		ldscp = new LandscapeFisheye();
+	else if (s=="polygonal")
+		ldscp = new LandscapePolygonal();
 	else
 	{
 		qDebug() << "Unknown landscape type: \"" << s << "\"";
@@ -1031,4 +1037,27 @@ QString LandscapeMgr::getDescription() const
 	}
 
 	return desc;
+}
+
+// GZ: Addition to identify landscape transparency. Used for development and debugging only, should be commented out in release builds.
+// Also, StelMovementMgr l.382 event->accept() must be commented out for this here to work!
+void LandscapeMgr::handleMouseClicks(QMouseEvent *event)
+{
+	switch (event->button())
+	{
+	case Qt::LeftButton :
+		if (event->type()==QEvent::MouseButtonRelease)
+		{
+			Vec3d v;
+			StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff)->unProject(event->x(),event->y(),v);
+			v.normalize();
+			float trans=landscape->getOpacity(v);
+			qDebug() << "Landscape opacity at screen X=" << event->x() << ", Y=" << event->y() << ": " << trans;
+		}
+		break;
+	default: break;
+
+	}
+	// do not event->accept(), so that it is forwarded to other modules.
+	return;
 }
