@@ -493,12 +493,31 @@ void LandscapePolygonal::create(const QString _name, const QString& _lineFileNam
 		Vec3d point;
 		qDebug() << "Creating point for az=" << list.at(0) << " alt=" << list.at(1);
 		// It is possible that the azimuths have to be subtracted from 360! (or some other rotation)
-		StelUtils::spheToRect(list.at(0).toFloat()*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
+		//StelUtils::spheToRect((90.0f-list.at(0).toFloat())*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
+		//StelUtils::spheToRect(list.at(0).toFloat()*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
+		float az_enws= 180.0f - list.at(0).toFloat();
+		//az_enws=fmodf(az_enws, 360.0f); if (az_enws<0.0f) az_enws+=360.0f;
+		StelUtils::spheToRect(az_enws*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
+
 		horiPoints.append(point);
 	}
 	file.close();
-	qDebug() << "created horipoints with " << horiPoints.count() << "points";
+	//horiPoints.append(horiPoints.at(0)); // close loop. Is this necessary?
+	horiPoints.append(horiPoints.at(0)); // close loop. Is this necessary?
+
+	qDebug() << "created horiPoints with " << horiPoints.count() << "points:";
+	for (int i=0; i<horiPoints.count(); ++i)
+		qDebug() << horiPoints.at(i)[0] << "/" << horiPoints.at(i)[1] << "/" << horiPoints.at(i)[2] ;
+	//horiPoints.
 	horizonPolygon = new SphericalPolygon(horiPoints);
+
+//	QVector<Vec3d> cpole(4);
+//	StelUtils::spheToRect(0.1,M_PI/2.-0.1, cpole[3]);
+//	StelUtils::spheToRect(0.1+M_PI/2., M_PI/2.-0.1, cpole[2]);
+//	StelUtils::spheToRect(0.1+M_PI, M_PI/2.-0.1, cpole[1]);
+//	StelUtils::spheToRect(0.1+M_PI+M_PI/2.,M_PI/2.-0.1, cpole[0]);
+//	//northPoleSquare.setContour(cpole);
+//	horizonPolygon=new SphericalPolygon(cpole);
 
 
 }
@@ -514,17 +533,26 @@ void LandscapePolygonal::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
 
-	// Normal transparency mode
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter.setColor(skyBrightness*groundColor[0], skyBrightness*groundColor[1], skyBrightness*groundColor[2], landFader.getInterstate());
-	glEnable(GL_CULL_FACE);
+	// Normal transparency mode for the transition blending
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_CULL_FACE);
 	//sPainter.enableTexture2d(true);
-	//glEnable(GL_BLEND);
+	glEnable(GL_BLEND);
 	//mapTex->bind();
 	//sPainter.sSphereMap(radius,cols,rows,texFov,1);
-	// TODO: DRAW POLYGON HERE
+	// TODO: DRAW POLYGON HERE. What has to be done here?
 
-	glDisable(GL_CULL_FACE);
+	//StelVertexArray vertices=horizonPolygon->getOctahedronPolygon().getFillVertexArray();
+	// TODO: Draw landscape BELOW, not above...
+	sPainter.setColor(skyBrightness*groundColor[0], skyBrightness*groundColor[1], skyBrightness*groundColor[2], landFader.getInterstate());
+	sPainter.drawSphericalRegion(horizonPolygon, StelPainter::SphericalPolygonDrawModeFill);
+
+	// This line may be available in all landscape types if horizonPolygon is present. Currently only here:
+	// TODO: remove spurious line towards zenith.
+	sPainter.setColor(skyBrightness*horizonLineColor[0], skyBrightness*horizonLineColor[1], skyBrightness*horizonLineColor[2], landFader.getInterstate());
+	sPainter.drawSphericalRegion(horizonPolygon, StelPainter::SphericalPolygonDrawModeBoundary);
+
+	//glDisable(GL_CULL_FACE);
 }
 
 float LandscapePolygonal::getOpacity(const Vec3d azalt) const
