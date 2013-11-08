@@ -21,6 +21,7 @@
 #define _LANDSCAPE_HPP_
 
 #include <QMap>
+#include <QImage>
 #include "VecMath.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelProjector.hpp"
@@ -116,8 +117,11 @@ public:
 	//! Get whether the landscape is currently fully visible (i.e. opaque).
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
 
-	// GZ: NEW FUNCTION: USEFUL IF ALL SUBCLASSED IMPLEMENT THIS, TEXTURE LOOKUP.
-	virtual float getTransparency(Vec3f direction) const {return 0.0f; }
+	// GZ: NEW FUNCTION: USEFUL IF ALL SUBCLASSES IMPLEMENT THIS TEXTURE LOOKUP.
+	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
+	//! Default implementation indicated the horizon never blocks view, i.e. sunrise etc.
+	//! can be computed on the math horizon without interfering.
+	virtual float getOpacity(const Vec3d azalt) const {Q_UNUSED(azalt); return 0.0f; }
 	
 protected:
 	//! Load attributes common to all landscapes
@@ -161,12 +165,13 @@ protected:
 	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]rotate
 	float angleRotateZOffset; //! [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
 							  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
-//	//QString lineFileName; //! GZ NEW: optional filename (within landscape dir) with a definition of line strips.
-	OctahedronPolygon *horizonPolygon; //! GZ New: Optional element describing the horizon line.
-									  //! Data shall be read from the file given as landscape.ini[landscape]horizon_poly_file
+	// GZ NEW: Optional elements which, if present, describe a horizon polygon. They can be used to render a line or a filled region, esp. in LandscapePolygonal
+	QString horizonFileName; //! GZ NEW: optional filename (within landscape dir) with a definition of the horizon line.
+	SphericalPolygon *horizonPolygon; //! Optional element describing the horizon line.
+									  //! Data shall be read from the file given as landscape.ini[landscape]horizon_list
 									  //! For LandscapePolygonal, this is the only horizon data item.
-	Vec3f horizonPolygonColor ; //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
-								//! specified in landscape.ini[landscape]horizon_poly_file. TBD: Default?
+	Vec3f horizonLineColor ;    //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
+								//! specified in landscape.ini[landscape]horizon_line_color. TBD: Default?
 };
 
 //! @class LandscapeOldStyle
@@ -190,6 +195,7 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
 	void create(bool _fullpath, QMap<QString, QString> param);
+	virtual float getOpacity(const Vec3d azalt) const;
 private:
 	void drawFog(StelCore* core, StelPainter&) const;
 	void drawDecor(StelCore* core, StelPainter&) const;
@@ -235,16 +241,18 @@ public:
 	virtual ~LandscapePolygonal();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
-	void create(const QString name, const QString& lineFileName);
+	void create(const QString _name, const QString& _lineFileName, const float _angleRotateZ=0.0f);
+	virtual float getOpacity(const Vec3d azalt) const;
 private:
-	Vec3f groundColor; //< the base color to use for filling the ground
+	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonColor
+	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.
 };
 
 ///////////////////////////////////////////////////////////////
 ///
 //! @class LandscapeFisheye
 //! This uses a single image in fisheye projection. The image is typically square, ...
-//! @param texFov:  DESCRIBE CLEARLY
+//! @param texFov:  field of view (opening angle) of the square texture, radians.
 //! If @param angleRotateZ==0, the top image border is due south.
 // GZ TODO: find out opening angle or details on projection?
 class LandscapeFisheye : public Landscape
@@ -254,6 +262,9 @@ public:
 	virtual ~LandscapeFisheye();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
+	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
+	//! @param azalt normalized direction in alt-az frame
+	virtual float getOpacity(const Vec3d azalt) const;
 	//! create a fisheye landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the fisheye texture
@@ -269,6 +280,7 @@ private:
 							   //!< can also be smaller, just the texture is again mapped onto the same geometry.
 	StelTextureSP mapTexIllum; //!< Optional fisheye image of identical size (create as layer in your favorite image processor) or at least, proportions.
 							   //!< To simulate light pollution (skyglow), street lights, light in windows, ... at night
+	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for sampling.
 
 	float texFov;
 };
@@ -290,6 +302,10 @@ public:
 	virtual ~LandscapeSpherical();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
+	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
+	//! @param azalt normalized direction in alt-az frame
+	//! @retval alpha (0=fully transparent, 1=fully opaque. Trees, leaves, glass etc may have intermediate values.)
+	virtual float getOpacity(const Vec3d azalt) const;
 	//! create a spherical landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the equirectangular texture
@@ -320,6 +336,7 @@ private:
 	float fogTexBottom;		   //!< zenithal bottom angle of the fog texture, radians
 	float illumTexTop;		   //!< zenithal top angle of the illumination texture, radians
 	float illumTexBottom;	   //!< zenithal bottom angle of the illumination texture, radians
+	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for opacity sampling.
 };
 
 #endif // _LANDSCAPE_HPP_
