@@ -40,7 +40,12 @@ Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), nightB
 
 Landscape::~Landscape()
 {
-	if (horizonPolygon) delete horizonPolygon;
+	if (horizonPolygon)
+	{
+		delete horizonPolygon;
+		horizonPolygon=NULL;
+	}
+
 }
 
 
@@ -98,6 +103,11 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble(); // -2=no change! [-1=computeFromAltitude]
 	// Set night (minimal) brightness for landscape
 	defaultBrightness = landscapeIni.value("landscape/initial_brightness", -1.0).toDouble();
+
+	//TODO: If a list of horizon altitudes is present, we must load this also here.
+	// This line can then be drawn in all classes with the color specified here:
+	horizonLineColor=StelUtils::strToVec3f( landscapeIni.value("landscape/horizon_line_color", "0.5,0,0" ).toString() );
+
 }
 
 #include <iostream>
@@ -421,7 +431,11 @@ LandscapePolygonal::LandscapePolygonal(float _radius) : Landscape(_radius)
 
 LandscapePolygonal::~LandscapePolygonal()
 {
-	if (horizonPolygon) delete horizonPolygon;
+	if (horizonPolygon)
+	{
+		delete horizonPolygon;
+		horizonPolygon=NULL;
+	}
 }
 
 void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& landscapeId)
