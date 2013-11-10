@@ -10,6 +10,8 @@
 	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.stellarium.Stellarium</string>
+	<key>CFBundleName</key>
+	<string>Stellarium</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -17,9 +19,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.13.0</string>
+	<string>@PACKAGE_VERSION@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.13.0</string>
+	<string>@PACKAGE_VERSION@</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.6.0</string>
 	<key>NSPrincipalClass</key>
