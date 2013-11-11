@@ -29,8 +29,6 @@
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
 
-#include <locale>
-
 #include <QDeclarativeItem>
 #include <QDebug>
 #include <QDir>

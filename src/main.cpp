@@ -27,7 +27,6 @@
 #include "StelUtils.hpp"
 
 #include <QDebug>
-#include <locale>
 
 #ifndef USE_QUICKVIEW
 	#include <QApplication>
