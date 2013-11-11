@@ -21,6 +21,7 @@
 #include <QBuffer>
 #include <QDateTime>
 #include <stdexcept>
+#include <stdio.h>
 
 class StelJsonParserInstance
 {

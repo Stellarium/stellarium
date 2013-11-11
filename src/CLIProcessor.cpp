@@ -29,6 +29,8 @@
 #include <QGuiApplication>
 #include <QDir>
 
+#include <stdio.h>
+
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
 	if (argsGetOption(argList, "-v", "--version"))
