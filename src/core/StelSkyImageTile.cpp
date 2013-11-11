@@ -30,6 +30,8 @@
 
 #include <QDebug>
 
+#include <stdio.h>
+
 StelSkyImageTile::StelSkyImageTile()
 {
 	initCtor();

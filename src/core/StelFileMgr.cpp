@@ -27,6 +27,8 @@
 
 #include "StelUtils.hpp"
 
+#include <stdio.h>
+
 #ifdef Q_OS_WIN
 # include <windows.h>
 # ifndef _SHOBJ_H

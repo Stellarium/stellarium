@@ -49,6 +49,8 @@
 #include <QTextStream>
 #include <QTranslator>
 
+#include <clocale>
+
 #ifdef Q_OS_WIN
 	#include <windows.h>
 	#ifdef _MSC_BUILD
