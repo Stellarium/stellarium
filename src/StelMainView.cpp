@@ -50,6 +50,8 @@
 #include <QWindow>
 #include <QDeclarativeContext>
 
+#include <clocale>
+
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
 
