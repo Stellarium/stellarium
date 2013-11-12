@@ -1,20 +1,5 @@
-# Minimal version of cmake for using with Qt5 is 2.8.9
-# Minimal version of cmake for using with Qt5 on Windows is 2.8.11
-IF(WIN32)
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
-ELSE(WIN32)
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
-ENDIF(WIN32)
 
-# Avoid repeating the IF statement in the ENDIF and ELSE
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
-
-IF(COMMAND cmake_policy)
-  CMAKE_POLICY(SET CMP0003 NEW)
-  IF(WIN32)
-    CMAKE_POLICY(SET CMP0020 NEW)
-  ENDIF(WIN32)
-ENDIF()
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 ########### Project name ###########
 PROJECT(Stellarium)
@@ -118,13 +103,13 @@ ENDIF()
 
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
-IF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   # Use -pthread compilation option to properly link to threading library
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
   IF(${GCC_VERSION} STRGREATER "4.7")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
   ENDIF()
-ENDIF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+ENDIF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
 
 # best way to get to APPLE?
 IF(APPLE)
@@ -211,13 +196,13 @@ SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be cre
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-IF (USE_PLUGIN_SVMT)
+IF(USE_PLUGIN_SVMT)
     SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
     SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
     SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
 ENDIF()
 
-IF (USE_PLUGIN_VIRGO)
+IF(USE_PLUGIN_VIRGO)
     ## Library for loading FITS image files
     FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
         /usr/include
@@ -232,7 +217,7 @@ IF (USE_PLUGIN_VIRGO)
     SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
 ENDIF()
 
-IF (USE_PLUGIN_LOGBOOK)
+IF(USE_PLUGIN_LOGBOOK)
     SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
 ENDIF()
 
@@ -278,18 +263,18 @@ INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
-IF(APPLE)
-    SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
-ELSE(APPLE)
-    ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
-    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
-    # Used in generating the documentation (doc/stellarium.pod.cmake):
-    SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
-ENDIF(APPLE)
-ELSE(UNIX AND NOT WIN32)
+    IF(APPLE)
+        SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
+    ELSE()
+        ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
+        ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+        # Used in generating the documentation (doc/stellarium.pod.cmake):
+        SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
+    ENDIF()
+ELSE()
     ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
     ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
-ENDIF(UNIX AND NOT WIN32)
+ENDIF()
 
 ########### Get revision number for non-release builds ###########
 IF(NOT RELEASE_BUILD)
@@ -318,11 +303,11 @@ IF(WIN32)
         #The mingGW snapshot distributed with the Qt SDK has it under this name.
         SET(RC_COMPILER_FILENAME "windres.exe")
             FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
-        IF (RC_COMPILER_PATH)
+        IF(RC_COMPILER_PATH)
             MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
         ENDIF(RC_COMPILER_PATH)
     ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-ENDIF(WIN32)
+ENDIF()
 
 ### Generate an Inno Setup project file ###
 IF(WIN32)
@@ -366,11 +351,11 @@ IF(WIN32)
   
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
-ENDIF(WIN32)
+ENDIF()
 
 IF(APPLE)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
-ENDIF(APPLE)
+ENDIF()
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     ADD_DEFINITIONS(-DQT_NO_DEBUG)
@@ -434,11 +419,11 @@ CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
 
 ##################### Generate translation copying script ######################
-IF (WIN32)
+IF(WIN32)
  STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
  STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
  CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/util/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
-ENDIF(WIN32)
+ENDIF()
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
