@@ -33,6 +33,11 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
 ENDIF()
 
+IF(NOT STELLARIUM_SPLASH)
+ SET(STELLARIUM_SPLASH Development CACHE STRING "Choose the type of Stellarium's splash image, options are: Release Development ReleaseCandidate." FORCE)
+ENDIF()
+ADD_DEFINITIONS(-DSTELLARIUM_SPLASH="${STELLARIUM_SPLASH}")
+
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(APPLE 1)
 ENDIF()
