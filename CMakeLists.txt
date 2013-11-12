@@ -1,5 +1,11 @@
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+# Because 2.8.11 is not available yet on ubuntu, but we need it to fix some
+# bugs on windows.
+IF(WIN32)
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+ELSE()
+  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
+ENDIF()
 
 ########### Project name ###########
 PROJECT(Stellarium)
