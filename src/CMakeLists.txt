@@ -244,7 +244,7 @@ IF(WIN32)
 		core/external/kdewin32/pwd.c
 		core/external/kdewin32/unistd.c
 	)
-ENDIF(WIN32)
+ENDIF()
 
 SET(stellarium_exe_SRCS main.cpp)
 
@@ -256,7 +256,7 @@ QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
-IF (GUI_MODE STREQUAL "Standard")
+IF(GUI_MODE STREQUAL "Standard")
 	SET(stellarium_gui_SRCS
 		gui/StelGui.hpp
 		gui/StelGui.cpp
@@ -318,8 +318,8 @@ IF (GUI_MODE STREQUAL "Standard")
 			gui/StelScriptSyntaxHighlighter.cpp)
 		SET(stellarium_UIS ${stellarium_UIS}
 			gui/scriptConsole.ui)
-            ENDIF(ENABLE_SCRIPT_CONSOLE)
-        ENDIF(ENABLE_SCRIPTING)
+            ENDIF()
+        ENDIF()
 
 	QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
@@ -493,8 +493,8 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
                        COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
     SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
-  ENDIF(RC_COMPILER_PATH)
-ENDIF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
+  ENDIF()
+ENDIF()
 
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
