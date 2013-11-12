@@ -38,40 +38,15 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF()
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
- EXEC_PROGRAM(${CMAKE_C_COMPILER} ARGS "-v" OUTPUT_VARIABLE _clang_version_info)
- STRING(REGEX REPLACE "^.*[ ]([0-9]+)\\.[0-9].*$" "\\1" CLANG_MAJOR "${_clang_version_info}")
- STRING(REGEX REPLACE "^.*[ ][0-9]+\\.([0-9]).*$" "\\1" CLANG_MINOR "${_clang_version_info}")
- MESSAGE(STATUS "Found Clang ${CLANG_MAJOR}.${CLANG_MINOR}")
-ELSE()
- # The stars structs rely on gnu gcc packing of bit-fields. Not for clang.
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
- SET(CLANG_MAJOR 0)
- SET(CLANG_MINOR 0)
+ MESSAGE(STATUS "Found Clang ${CMAKE_CXX_COMPILER_VERSION}")
 ENDIF()
-SET(CLANG_VERSION "${CLANG_MAJOR}.${CLANG_MINOR}")
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
- EXEC_PROGRAM(${CMAKE_C_COMPILER} ARGS "-dumpversion" OUTPUT_VARIABLE _gcc_version_info)
- STRING(REGEX REPLACE "^([0-9]+).*$"                   "\\1" GCC_MAJOR ${_gcc_version_info})
- STRING(REGEX REPLACE "^[0-9]+\\.([0-9]+).*$"          "\\1" GCC_MINOR ${_gcc_version_info})
- STRING(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*$" "\\1" GCC_PATCH ${_gcc_version_info})
-
- IF(GCC_PATCH MATCHES "\\.+")
-  SET(GCC_PATCH "")
- ENDIF()
- IF(GCC_MINOR MATCHES "\\.+")
-  SET(GCC_MINOR "")
- ENDIF()
- IF(GCC_MAJOR MATCHES "\\.+")
-  SET(GCC_MAJOR "")
- ENDIF()
- MESSAGE(STATUS "Found GCC ${GCC_MAJOR}.${GCC_MINOR}")
- SET(COMPILER_VERSION gcc${GCC_MAJOR}${GCC_MINOR}${GCC_PATCH})
-ELSE()
- SET(GCC_MAJOR 0)
- SET(GCC_MINOR 0)
+  MESSAGE(STATUS "Found GCC ${CMAKE_CXX_COMPILER_VERSION}")
+  # The stars structs rely on gnu gcc packing of bit-fields.
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
 ENDIF()
-SET(GCC_VERSION "${GCC_MAJOR}.${GCC_MINOR}")
+
 
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
@@ -101,10 +76,10 @@ ENDIF()
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   # Use -pthread compilation option to properly link to threading library
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-  IF(${GCC_VERSION} STRGREATER "4.7")
+  IF(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.7)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
   ENDIF()
-ENDIF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
