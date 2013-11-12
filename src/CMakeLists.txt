@@ -237,78 +237,11 @@ ENDIF()
 
 IF(WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-		core/external/kdewin32/basetyps.h
-		core/external/kdewin32/byteswap.h
-		core/external/kdewin32/comcat.h
-		core/external/kdewin32/dirent.h
-		core/external/kdewin32/docobj.h
-		core/external/kdewin32/errno.h
-		core/external/kdewin32/fcntl.h
 		core/external/kdewin32/grp.h
-		core/external/kdewin32/ifaddrs.h
-		core/external/kdewin32/langinfo.h
-		core/external/kdewin32/mshtml.h
-		core/external/kdewin32/netdb.h
-		core/external/kdewin32/nl_types.h
-		core/external/kdewin32/oaidl.h
-		core/external/kdewin32/objfwd.h
-		core/external/kdewin32/objidl.h
-		core/external/kdewin32/ocidl.h
-		core/external/kdewin32/olectl.h
-		core/external/kdewin32/oleidl.h
 		core/external/kdewin32/pwd.h
-		core/external/kdewin32/signal.h
-		core/external/kdewin32/stdio.h
-		core/external/kdewin32/stdlib.h
-		core/external/kdewin32/string.h
-		core/external/kdewin32/strings.h
-		core/external/kdewin32/syslog.h
-		core/external/kdewin32/time.h
 		core/external/kdewin32/unistd.h
-		core/external/kdewin32/unknwn.h
-		core/external/kdewin32/wchar.h
-		core/external/kdewin32/arpa/inet.h
-		core/external/kdewin32/asm/byteorder.h
-		core/external/kdewin32/net/if.h
-		core/external/kdewin32/netinet/in.h
-		core/external/kdewin32/netinet/tcp.h
-		core/external/kdewin32/sys/ioctl.h
-		core/external/kdewin32/sys/mman.h
-		core/external/kdewin32/sys/resource.h
-		core/external/kdewin32/sys/select.h
-		core/external/kdewin32/sys/signal.h
-		core/external/kdewin32/sys/socket.h
-		core/external/kdewin32/sys/stat.h
-		core/external/kdewin32/sys/time.h
-		core/external/kdewin32/sys/times.h
-		core/external/kdewin32/sys/types.h
-		core/external/kdewin32/sys/uio.h
-		core/external/kdewin32/sys/un.h
-		core/external/kdewin32/sys/unistd.h
-		core/external/kdewin32/sys/utsname.h
-		core/external/kdewin32/sys/wait.h
-
-		core/external/kdewin32/bind/inet_ntop.c
-		core/external/kdewin32/bind/inet_pton.c
-		core/external/kdewin32/dirent.c
-		core/external/kdewin32/errno.c
-		core/external/kdewin32/fsync.c
-		core/external/kdewin32/getenv.c
 		core/external/kdewin32/grp.c
-		core/external/kdewin32/inet.c
-		core/external/kdewin32/mmap.c
-		core/external/kdewin32/nl_langinfo.c
-		core/external/kdewin32/net.c
 		core/external/kdewin32/pwd.c
-		core/external/kdewin32/realpath.c
-		core/external/kdewin32/resource.c
-		core/external/kdewin32/signal.c
-		core/external/kdewin32/stdlib.c
-		core/external/kdewin32/string.c
-		core/external/kdewin32/strptime.c
-		core/external/kdewin32/syslog.c
-		core/external/kdewin32/time.c
-		core/external/kdewin32/uname.c
 		core/external/kdewin32/unistd.c
 	)
 ENDIF(WIN32)
