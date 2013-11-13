@@ -26,7 +26,7 @@
 
 ToastMgr::ToastMgr()
 {
-	survey = new ToastSurvey("http://localhost/dss-test7/{level}/{x}_{y}.jpg", 11);
+	survey = new ToastSurvey("/home/fabien/projects/DSSToStellarium/results/{level}/{x}_{y}.jpg", 11);
 	survey->setParent(this);
 }
 
