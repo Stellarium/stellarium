@@ -29,6 +29,7 @@
 
 #include <stdexcept>
 
+#include "StelActionMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "Atmosphere.hpp"
@@ -231,6 +232,9 @@ void LandscapeMgr::update(double deltaTime)
 	// We define the brigthness zero when the sun is 8 degrees below the horizon.
 	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
 	float initBrightness = getInitialLandscapeBrightness();
+	// Setting for landscapes has priority if it enabled
+	if (landscape->getLandscapeNightBrightness()>0 && getFlagLandscapeNightBrightness())
+		initBrightness = landscape->getLandscapeNightBrightness();
 
 	if(sinSunAngleRad < -0.1/1.5 )
 		landscapeBrightness = initBrightness;
@@ -293,6 +297,7 @@ void LandscapeMgr::init()
 	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
 	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
 	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
+	setFlagLandscapeNightBrightness(conf->value("landscape/flag_brightness",false).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -305,6 +310,12 @@ void LandscapeMgr::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");
+	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
+	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
+	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -322,18 +333,13 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		return false;
 
 	// We want to lookup the landscape ID (dir) from the name.
-	Landscape* newLandscape = NULL;
-	try
-	{
-		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")";
-	}
-
+	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+	
 	if (!newLandscape)
+	{
+		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini";
 		return false;
+	}
 
 	if (landscape)
 	{
@@ -432,6 +438,11 @@ void LandscapeMgr::setFlagLandscape(const bool displayed)
 bool LandscapeMgr::getFlagLandscape() const
 {
 	return landscape->getFlagShow();
+}
+
+bool LandscapeMgr::getIsLandscapeFullyVisible() const
+{
+	return landscape->getIsFullyVisible();
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
@@ -674,28 +685,17 @@ QString LandscapeMgr::nameToID(const QString& name)
  ****************************************************************************/
 QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 {
-	QSet<QString> landscapeDirs;
 	QMap<QString,QString> result;
-	try
-	{
-		landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
-	}
-	catch (std::runtime_error& e)
-	{
-		qDebug() << "ERROR while trying list landscapes:" << e.what();
-	}
+	QSet<QString> landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
 
 	foreach (const QString& dir, landscapeDirs)
 	{
-		try
+		QString fName = StelFileMgr::findFile("landscapes/" + dir + "/landscape.ini");
+		if (!fName.isEmpty())
 		{
-			QSettings landscapeIni(StelFileMgr::findFile("landscapes/" + dir + "/landscape.ini"), StelIniFormat);
+			QSettings landscapeIni(fName, StelIniFormat);
 			QString k = landscapeIni.value("landscape/name").toString();
 			result[k] = dir;
-		}
-		catch (std::runtime_error& e)
-		{
-			//qDebug << "WARNING: unable to successfully read landscape.ini file from landscape " << dir;
 		}
 	}
 	return result;
@@ -928,13 +928,10 @@ QString LandscapeMgr::getLandscapePath(QString landscapeID)
 	if (landscapeID.isEmpty())
 		return result;
 
-	try
+	result = StelFileMgr::findFile("landscapes/" + landscapeID, StelFileMgr::Directory);
+	if (result.isEmpty())
 	{
-		result = StelFileMgr::findFile("landscapes/" + landscapeID, StelFileMgr::Directory);
-	}
-	catch (std::runtime_error &e)
-	{
-		qWarning() << "LandscapeMgr: Error! Unable to find" << landscapeID << ":" << e.what();
+		qWarning() << "LandscapeMgr: Error! Unable to find" << landscapeID;
 		return result;
 	}
 
@@ -994,15 +991,15 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 
 QString LandscapeMgr::getDescription() const
 {
-        QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-        if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
-        {
-                lang = lang.split("_").at(0);
-        }
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+	{
+		lang = lang.split("_").at(0);
+	}
 	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	
 	QString desc;
-
-	if(QFileInfo(descriptionFile).exists())
+	if (!descriptionFile.isEmpty() && QFileInfo(descriptionFile).exists())
 	{
 		QFile file(descriptionFile);
 		file.open(QIODevice::ReadOnly | QIODevice::Text);

@@ -82,10 +82,16 @@ public:
 	//! Return default atmospheric temperature, for refraction computation.
 	//! returns -1 to signal "standard conditions", or -2 for "unknown/invalid/no change"
 	float getDefaultAtmosphericPressure() const {return defaultPressure;}
+	//! Return default brightness for landscape
+	//! returns -1 to signal "standard conditions" (use default value from config.ini)
+	float getLandscapeNightBrightness() const {return defaultBrightness;}
 
 	//! Set the z-axis rotation (offset from original value when rotated
 	void setZRotation(float d) {angleRotateZOffset = d;}
 
+	//! Get whether the landscape is currently fully visible (i.e. opaque).
+	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
+	
 protected:
 	//! Load attributes common to all landscapes
 	//! @param landscapeIni A reference to an existant QSettings object which describes the landscape
@@ -101,6 +107,7 @@ protected:
 	QString name;
 	float skyBrightness;
 	float nightBrightness;
+	float defaultBrightness;
 	bool validLandscape;   // was a landscape loaded properly?
 	LinearFader landFader;
 	LinearFader fogFader;

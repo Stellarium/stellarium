@@ -42,15 +42,12 @@
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLogger.hpp"
-#include "StelShortcutGroup.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelActionMgr.hpp"
 
-HelpDialog::HelpDialog() : keyMgr(0)
+HelpDialog::HelpDialog(QObject* parent) : StelDialog(parent)
 {
 	ui = new Ui_helpDialogForm;
-	keyMgr = StelApp::getInstance().getStelShortcutManager();
-	Q_ASSERT(keyMgr);
 }
 
 HelpDialog::~HelpDialog()
@@ -76,32 +73,11 @@ void HelpDialog::styleChanged()
 	}
 }
 
-void HelpDialog::updateIconsColor()
-{
-	QPixmap pixmap(50, 50);
-	QStringList icons;
-	icons << "help" << "info" << "logs";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
-	foreach(const QString &iconName, icons)
-	{
-		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
-		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
-	}
-}
-
 void HelpDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 	ui->stackedWidget->setCurrentIndex(0);
-	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -121,14 +97,9 @@ void HelpDialog::createDialogContent()
 
 void HelpDialog::showShortcutsWindow()
 {
-	QAction* action =
-	        keyMgr->getGuiAction("actionShow_Shortcuts_Window_Global");
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
 	if (action)
-	{
-		if (action->isChecked())
-			action->setChecked(false);
 		action->setChecked(true);
-	}
 }
 
 void HelpDialog::updateLog(int)
@@ -190,39 +161,23 @@ QString HelpDialog::getHelpText(void)
 	                q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
 	                .arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
 	            "</p><table cellpadding=\"10%\">\n";
-	
-	QList<StelShortcutGroup*> groups = keyMgr->getGroupList();
-	foreach (const StelShortcutGroup* group, groups)
+
+	// Append all StelAction shortcuts.
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	typedef QPair<QString, QString> KeyDescription;
+	foreach (QString group, actionMgr->getGroupList())
 	{
-		QString groupName= group->getText();
-		if (groupName.isEmpty())
-			groupName = group->getId();
-		
-		QList< KeyDescription > descriptions;
-		QList<StelShortcut*> shortcuts = group->getActionList();
-		if (shortcuts.isEmpty())
-			continue;
-		
-		foreach (const StelShortcut* shortcut, shortcuts)
+		QList<KeyDescription> descriptions;
+		foreach (StelAction* action, actionMgr->getActionList(group))
 		{
-			QString text = q_(shortcut->getText());
-			QKeySequence primary = shortcut->getPrimaryKey();
-			if (primary.isEmpty())
-			{
-				// TODO: Decide whether to display undefined actions.
+			if (action->getShortcut().isEmpty())
 				continue;
-			}
-			QString keyString = primary.toString(QKeySequence::NativeText);
-			descriptions.append(KeyDescription(text, keyString));
+			QString text = action->getText();
+			QString key =  action->getShortcut().toString(QKeySequence::NativeText);
+			descriptions.append(KeyDescription(text, key));
 		}
-		if (descriptions.isEmpty())
-			continue;
-		// Sort by translated description:
-		// - on one hand, pre-determined order is lost
-		// - on the other, easier for the users
 		qSort(descriptions);
-		
-		htmlText += "<tr></tr><tr><td><b><u>" + E(groupName) +
+		htmlText += "<tr></tr><tr><td><b><u>" + E(group) +
 		            ":</u></b></td></tr>\n";
 		foreach (const KeyDescription& desc, descriptions)
 		{
@@ -231,7 +186,7 @@ QString HelpDialog::getHelpText(void)
 			            "</b></td></tr>\n";
 		}
 	}
-	
+
 	// edit shortcuts
 //	htmlText += "<tr><td><b>" + Qt::escape(q_("F7")) + "</b></td>";
 //	htmlText += "<td>" + Qt::escape(q_("Show and edit all keyboard shortcuts")) + "</td></tr>\n";

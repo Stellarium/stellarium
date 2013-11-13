@@ -34,10 +34,10 @@ class StelProjector;
 class StelPainter;
 class QSettings;
 
-namespace BigStarCatalogExtension {
-  class ZoneArray;
-  struct HipIndexStruct;
-}
+class ZoneArray;
+struct HipIndexStruct;
+
+static const int RCMAG_TABLE_SIZE = 4096;
 
 typedef struct
 {
@@ -80,6 +80,12 @@ typedef struct
 class StarMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagStarsDisplayed
+			   READ getFlagStars
+			   WRITE setFlagStars)
+	Q_PROPERTY(bool flagLabelsDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels)
 
 public:
 	StarMgr(void);
@@ -163,7 +169,7 @@ public slots:
 	float getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Define font size to use for star names display.
-	void setFontSize(double newFontSize);
+	void setFontSize(float newFontSize);
 
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}
@@ -287,7 +293,7 @@ private:
 	int lastMaxSearchLevel;
 	
 	// A ZoneArray per grid level
-	QVector<BigStarCatalogExtension::ZoneArray*> gridLevels;
+	QVector<ZoneArray*> gridLevels;
 	static void initTriangleFunc(int lev, int index,
 								 const Vec3f &c0,
 								 const Vec3f &c1,
@@ -302,7 +308,7 @@ private:
 					  const Vec3f &c1,
 					  const Vec3f &c2);
 
-	BigStarCatalogExtension::HipIndexStruct *hipIndex; // array of hiparcos stars
+	HipIndexStruct *hipIndex; // array of hiparcos stars
 
 	static QHash<int, QString> commonNamesMap;
 	static QHash<int, QString> commonNamesMapI18n;

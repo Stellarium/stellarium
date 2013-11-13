@@ -44,7 +44,7 @@ public:
 	//! - AltAzi
 	//! - Distance
 	//! - Size
-	//! - Extra1 (contains the Nebula type, which might be "Galaxy", "Cluster" or similar)
+	//! - Extra (contains the Nebula type, which might be "Galaxy", "Cluster" or similar)
 	//! - PlainText
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.

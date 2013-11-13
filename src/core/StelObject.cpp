@@ -72,7 +72,7 @@ Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 }
 
 // Get observer-centered galactic position
-Vec3d StelObject::getJ2000GalacticPos(const StelCore *core) const
+Vec3d StelObject::getGalacticPos(const StelCore *core) const
 {
 	return core->j2000ToGalactic(getJ2000EquatorialPos(core));
 }
@@ -85,10 +85,10 @@ float StelObject::getVMagnitude(const StelCore* core) const
 
 float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 {
-	Vec3d altAzPos = getAltAzPosApparent(core);
+	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
 	float vMag = getVMagnitude(core);
-	core->getSkyDrawer()->getExtinction().forward(&altAzPos, &vMag); 
+	core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag); 
 	return vMag;
 }
 
@@ -111,11 +111,10 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
 	}
 
-	if (flags&GalCoordJ2000)
+	if (flags&GalacticCoord)
 	{
 		double glong, glat;
-		StelUtils::rectToSphe(&glong, &glat, getJ2000GalacticPos(core));
-		// Note that Gal. Coords are DEFINED in B1950 coordinates, and writing "J2000" to them does not make any sense.
+		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
 		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
 	}
 
@@ -126,13 +125,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		ra_sidereal = 2.*M_PI-ra_sidereal;
 		if (withAtmosphere)
 		{
-		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + q_("(geometric)") + "<br>";
 		    StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSideralPosApparent(core));
 		    ra_sidereal = 2.*M_PI-ra_sidereal;
 		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
+		{
 		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + "<br>";
+		}
 	}
 
 	if (flags&AltAzi)
@@ -145,8 +145,6 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			az -= M_PI*2;
 		if (withAtmosphere)
 		{
-		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + q_("(geometric)") + "<br>";
-
 		    StelUtils::rectToSphe(&az,&alt,getAltAzPosApparent(core));
 		    az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 		    if (az > M_PI*2)
@@ -154,7 +152,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
+		{
 		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + "<br>";
+		}
 	}
 	return res;
 }

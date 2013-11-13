@@ -11,11 +11,14 @@ src/core/modules/MinorPlanet.cpp
 src/core/modules/Comet.cpp
 src/core/modules/SolarSystem.cpp
 src/core/modules/StarWrapper.cpp
+src/core/StelApp.cpp
 src/core/StelObserver.cpp
 src/core/StelCore.cpp
 src/core/StelProjector.cpp
 src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
+src/core/StelSkyLayerMgr.cpp
+src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
@@ -29,6 +32,7 @@ src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/main.cpp
+src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h
@@ -84,6 +88,10 @@ plugins/Supernovae/src/Supernovae.cpp
 plugins/Supernovae/src/Supernova.cpp
 plugins/Supernovae/src/gui/SupernovaeDialog.cpp
 plugins/Supernovae/src/ui_supernovaeDialog.h
+plugins/Novae/src/Novae.cpp
+plugins/Novae/src/Nova.cpp
+plugins/Novae/src/gui/NovaeDialog.cpp
+plugins/Novae/src/ui_novaeDialog.h
 plugins/Quasars/src/Quasars.cpp
 plugins/Quasars/src/Quasar.cpp
 plugins/Quasars/src/gui/QuasarsDialog.cpp

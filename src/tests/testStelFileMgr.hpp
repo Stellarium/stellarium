@@ -23,7 +23,8 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#include <QtTest>
+#include <QTest>
+#include <QTemporaryDir>
 
 class StelFileMgr;
 
@@ -32,7 +33,6 @@ class TestStelFileMgr : public QObject
 Q_OBJECT
 private slots:
 	void initTestCase();
-	void cleanupTestCase();
 
 	void testFindFileVanilla();
 	void testFindFileVanillaAbs();
@@ -50,6 +50,7 @@ private slots:
 	void testListContentsDirAbs();
 
 private:
+	QTemporaryDir tempDir;
 	QString workingDir;
 	QString partialPath1;
 	QString partialPath2;

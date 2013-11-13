@@ -19,17 +19,14 @@
 
 #include <QDialog>
 #include <QStandardItemModel>
+#include <QDebug>
 
 #include "StelApp.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelTranslator.hpp"
-#include "StelShortcutGroup.hpp"
-
+#include "StelActionMgr.hpp"
 #include "ShortcutLineEdit.hpp"
 #include "ShortcutsDialog.hpp"
 #include "ui_shortcutsDialog.h"
-
-
 
 
 ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
@@ -62,12 +59,13 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 }
 
 
-ShortcutsDialog::ShortcutsDialog() :
+ShortcutsDialog::ShortcutsDialog(QObject* parent) :
+	StelDialog(parent),
 	ui(new Ui_shortcutsDialogForm),
 	filterModel(new ShortcutsFilterModel(this)),
 	mainModel(new QStandardItemModel(this))
 {
-	shortcutMgr = StelApp::getInstance().getStelShortcutManager();
+	actionMgr = StelApp::getInstance().getStelActionManager();
 }
 
 ShortcutsDialog::~ShortcutsDialog()
@@ -246,7 +244,7 @@ void ShortcutsDialog::handleChanges()
 	polish();
 }
 
-void ShortcutsDialog::applyChanges() const
+void ShortcutsDialog::applyChanges()
 {
 	// get ids stored in tree
 	QModelIndex index =
@@ -256,14 +254,14 @@ void ShortcutsDialog::applyChanges() const
 	index = index.sibling(index.row(), 0);
 	QStandardItem* currentItem = mainModel->itemFromIndex(index);
 	QString actionId = currentItem->data(Qt::UserRole).toString();
-	QString groupId = currentItem->parent()->data(Qt::UserRole).toString();
-	// changing keys in shortcuts
-	shortcutMgr->changeActionPrimaryKey(actionId, groupId, ui->primaryShortcutEdit->getKeySequence());
-	shortcutMgr->changeActionAltKey(actionId, groupId, ui->altShortcutEdit->getKeySequence());
-	// no need to change displaying information, as it changed in mgr, and will be updated in connected slot
+
+	StelAction* action = actionMgr->findAction(actionId);
+	action->setShortcut(ui->primaryShortcutEdit->getKeySequence().toString());
+	action->setAltShortcut(ui->altShortcutEdit->getKeySequence().toString());
+	updateShortcutsItem(action);
 
 	// save shortcuts to file
-	shortcutMgr->saveShortcuts();
+	actionMgr->saveShortcuts();
 
 	// nothing to apply until edits' content changes
 	ui->applyButton->setEnabled(false);
@@ -310,14 +308,12 @@ void ShortcutsDialog::createDialogContent()
 	// restore defaults button logic
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaultShortcuts()));
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
-	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), shortcutMgr, SLOT(setAllActionsEnabled(bool)));
-	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), shortcutMgr, SLOT(setAllActionsEnabled(bool)));
+	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), actionMgr, SLOT(setAllActionsEnabled(bool)));
+	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), actionMgr, SLOT(setAllActionsEnabled(bool)));
 	// handling changes in editors
 	connect(ui->primaryShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
 	connect(ui->altShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
-	// handle outer shortcuts changes
-	connect(shortcutMgr, SIGNAL(shortcutChanged(StelShortcut*)), this, SLOT(updateShortcutsItem(StelShortcut*)));
-	
+
 	QString backspaceChar;
 	backspaceChar.append(QChar(0x232B)); // Erase left
 	//test.append(QChar(0x2672));
@@ -343,10 +339,9 @@ void ShortcutsDialog::polish()
 	ui->altShortcutEdit->style()->polish(ui->altShortcutEdit);
 }
 
-QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
+QStandardItem* ShortcutsDialog::updateGroup(const QString& group)
 {
-	QString groupId = group->getId();
-	QStandardItem* groupItem = findItemByData(QVariant(groupId),
+	QStandardItem* groupItem = findItemByData(QVariant(group),
 	                                          Qt::UserRole);
 	bool isNew = false;
 	if (!groupItem)
@@ -359,11 +354,9 @@ QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
 	groupItem->setFlags(Qt::ItemIsEnabled);
 	
 	// setup displayed text
-	QString groupText = group->getText();
-	QString text(q_(groupText.isEmpty() ? groupId : groupText));
-	groupItem->setText(text);
+	groupItem->setText(q_(group));
 	// store id
-	groupItem->setData(groupId, Qt::UserRole);
+	groupItem->setData(group, Qt::UserRole);
 	groupItem->setColumnCount(3);
 	// setup bold font for group lines
 	QFont rootFont = groupItem->font();
@@ -373,17 +366,13 @@ QStandardItem* ShortcutsDialog::updateGroup(StelShortcutGroup* group)
 	if (isNew)
 		mainModel->appendRow(groupItem);
 	
-	// expand only enabled group
-	bool enabled = group->isEnabled();
+
 	QModelIndex index = filterModel->mapFromSource(groupItem->index());
-	if (enabled)
-		ui->shortcutsTreeView->expand(index);
-	else
-		ui->shortcutsTreeView->collapse(index);
+	ui->shortcutsTreeView->expand(index);
 	ui->shortcutsTreeView->setFirstColumnSpanned(index.row(),
 	                                             QModelIndex(),
 	                                             true);
-	ui->shortcutsTreeView->setRowHidden(index.row(), QModelIndex(), !enabled);
+	ui->shortcutsTreeView->setRowHidden(index.row(), QModelIndex(), false);
 	
 	return groupItem;
 }
@@ -411,10 +400,10 @@ QStandardItem* ShortcutsDialog::findItemByData(QVariant value, int role, int col
 	return 0;
 }
 
-void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut,
+void ShortcutsDialog::updateShortcutsItem(StelAction *action,
                                           QStandardItem *shortcutItem)
 {
-	QVariant shortcutId(shortcut->getId());
+	QVariant shortcutId(action->getId());
 	if (shortcutItem == NULL)
 	{
 		// search for item
@@ -425,12 +414,12 @@ void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut,
 	if (shortcutItem == NULL)
 	{
 		// firstly search for group
-		QVariant groupId(shortcut->getGroup()->getId());
+		QVariant groupId(action->getGroup());
 		groupItem = findItemByData(groupId, Qt::UserRole, 0);
 		if (groupItem == NULL)
 		{
 			// create and add new group to treeWidget
-			groupItem = updateGroup(shortcut->getGroup());
+			groupItem = updateGroup(action->getGroup());
 		}
 		// create shortcut item
 		shortcutItem = new QStandardItem();
@@ -446,18 +435,18 @@ void ShortcutsDialog::updateShortcutsItem(StelShortcut *shortcut,
 		groupItem->setChild(shortcutItem->row(), 2, secondaryItem);
 	}
 	// setup properties of item
-	shortcutItem->setText(q_(shortcut->getText()));
+	shortcutItem->setText(action->getText());
 	QModelIndex index = shortcutItem->index();
 	mainModel->setData(index.sibling(index.row(), 1),
-	                   shortcut->getPrimaryKey(), Qt::DisplayRole);
+	                   action->getShortcut(), Qt::DisplayRole);
 	mainModel->setData(index.sibling(index.row(), 2),
-	                   shortcut->getAltKey(), Qt::DisplayRole);
+	                   action->getAltShortcut(), Qt::DisplayRole);
 }
 
 void ShortcutsDialog::restoreDefaultShortcuts()
 {
 	resetModel();
-	shortcutMgr->restoreDefaultShortcuts();
+	actionMgr->restoreDefaultShortcuts();
 	updateTreeData();
 	initEditors();
 }
@@ -465,15 +454,15 @@ void ShortcutsDialog::restoreDefaultShortcuts()
 void ShortcutsDialog::updateTreeData()
 {
 	// Create shortcuts tree
-	QList<StelShortcutGroup*> groups = shortcutMgr->getGroupList();
-	foreach (StelShortcutGroup* group, groups)
+	QStringList groups = actionMgr->getGroupList();
+	foreach (const QString& group, groups)
 	{
 		updateGroup(group);
 		// display group's shortcuts
-		QList<StelShortcut*> shortcuts = group->getActionList();
-		foreach (StelShortcut* shortcut, shortcuts)
+		QList<StelAction*> actions = actionMgr->getActionList(group);
+		foreach (StelAction* action, actions)
 		{
-			updateShortcutsItem(shortcut);
+			updateShortcutsItem(action);
 		}
 	}
 	updateText();

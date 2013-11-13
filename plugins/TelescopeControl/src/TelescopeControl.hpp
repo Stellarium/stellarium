@@ -41,6 +41,7 @@
 #include <QFont>
 #include <QHash>
 #include <QMap>
+#include <QOpenGLFunctions_1_2>
 #include <QProcess>
 #include <QSettings>
 #include <QString>
@@ -66,7 +67,7 @@ typedef QSharedPointer<TelescopeClient> TelescopeClientP;
 //! No esoteric features like motor focus, electric heating and such.
 //! The actual controlling of a telescope is left to the implementation
 //! of the abstract base class TelescopeClient.
-class TelescopeControl : public StelObjectModule
+class TelescopeControl : public StelObjectModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
 
@@ -196,13 +197,13 @@ public slots:
 	
 	//! slews a telescope to the selected object.
 	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the QAction which triggered the slot.
+	//! deduced from the name of the StelAction which triggered the slot.
 	void slewTelescopeToSelectedObject();
 
 	//! slews a telescope to the point of the celestial sphere currently
 	//! in the center of the screen.
 	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the QAction which triggered the slot.
+	//! deduced from the name of the StelAction which triggered the slot.
 	void slewTelescopeToViewDirection();
 	
 	//! Used in the GUI

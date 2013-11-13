@@ -27,7 +27,6 @@
 #include <QGraphicsWidget>
 
 class QGraphicsSceneMouseEvent;
-class QAction;
 class QGraphicsTextItem;
 class QTimeLine;
 class StelButton;

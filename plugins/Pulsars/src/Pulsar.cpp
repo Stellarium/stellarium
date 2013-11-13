@@ -123,7 +123,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << designation << "</h2>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
 	}
@@ -131,7 +131,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (period>0)
 		{
@@ -228,11 +228,12 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 Vec3f Pulsar::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Pulsar::getVMagnitude(const StelCore* core) const
 {
+	Q_UNUSED(core);
 	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6
 	float vmag = distance + 6.f;
 
@@ -329,10 +330,7 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
-	Vec3f color = Vec3f(0.4f,0.5f,1.2f);
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
-
+	Vec3f color = Vec3f(0.4f,0.5f,1.0f);
 	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
@@ -350,8 +348,7 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 		{
 			if (GETSTELMODULE(Pulsars)->getDisplayMode())
 			{
-				painter.drawSprite2dMode(XYZ, 4);
-				painter.drawText(XYZ, " ", 0, shift, shift, false);
+				painter.drawSprite2dMode(XYZ, 4);				
 			}
 			else
 			{

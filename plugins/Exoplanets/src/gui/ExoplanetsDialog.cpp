@@ -61,6 +61,7 @@ void ExoplanetsDialog::retranslate()
 		refreshUpdateValues();
 		setAboutHtml();
 		setInfoHtml();
+		setWebsitesHtml();
 	}
 }
 
@@ -102,10 +103,12 @@ void ExoplanetsDialog::createDialogContent()
 	// About & Info tabs
 	setAboutHtml();
 	setInfoHtml();
+	setWebsitesHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
 
@@ -118,7 +121,8 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr></table>";
 
-	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + ".</p>";
+	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + ". ";
+	html += QString(q_("List of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
@@ -141,6 +145,23 @@ void ExoplanetsDialog::setAboutHtml(void)
 }
 
 void ExoplanetsDialog::setInfoHtml(void)
+{
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + q_("Potential habitable exoplanets") + "</h2>";
+	html += QString("<p>%1</p>").arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets - habitable class, mean surface temperature and Earth Similarity Index."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Habitable Class")).arg(q_("Classifies habitable planets based on temperature: hypopsychroplanets (O or hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex life, whereas class O or E would only support extremophilic life. Non-habitable planets are simply given the class X (or NH)."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Mean Surface Temperature")).arg(q_("Temperature in (°C) based on a similar terrestrial atmosphere to planet mass ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of 0.3 in all cases)."));
+	html += QString("<p><b><a href='http://en.wikipedia.org/wiki/Earth_Similarity_Index'>%1</a></b> &mdash; %2</p>").arg(q_("Earth Similarity Index (ESI)")).arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
+	html += "</body></html>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+	ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	ui->infoTextBrowser->setHtml(html);
+}
+
+void ExoplanetsDialog::setWebsitesHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("General professional Web sites relevant to extrasolar planets") + "</h2><ul>";
@@ -167,9 +188,10 @@ void ExoplanetsDialog::setInfoHtml(void)
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
-	ui->infoTextBrowser->setHtml(html);
+	ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	ui->websitesTextBrowser->setHtml(html);
 }
+
 
 void ExoplanetsDialog::refreshUpdateValues(void)
 {

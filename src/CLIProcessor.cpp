@@ -29,6 +29,8 @@
 #include <QGuiApplication>
 #include <QDir>
 
+#include <stdio.h>
+
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
 	if (argsGetOption(argList, "-v", "--version"))
@@ -84,14 +86,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		const QSet<QString>& landscapeIds = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
 		foreach (const QString& i, landscapeIds)
 		{
-			try
-			{
-				// finding the file will throw an exception if it is not found
-				// in that case we won't output the landscape ID as it cannot work
-				StelFileMgr::findFile("landscapes/" + i + "/landscape.ini");
+			// finding the file will throw an exception if it is not found
+			// in that case we won't output the landscape ID as it cannot work
+			if (!StelFileMgr::findFile("landscapes/" + i + "/landscape.ini").isEmpty())
 				std::cout << qPrintable(i) << std::endl;
-			}
-			catch (std::runtime_error& e){}
 		}
 		exit(0);
 	}

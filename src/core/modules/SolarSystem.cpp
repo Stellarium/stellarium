@@ -58,7 +58,11 @@
 #include <QDebug>
 #include <QDir>
 
-SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
+SolarSystem::SolarSystem()
+	: moonScale(1.),
+	  flagOrbits(false),
+	  flagLightTravelTime(false),
+	  allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
@@ -125,6 +129,7 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
+	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
 
 	recreateTrails();
 
@@ -135,12 +140,17 @@ void SolarSystem::init()
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
-	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("textures/planet-indicator.png");
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
+	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "P");
+	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
+	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
 }
 
 void SolarSystem::recreateTrails()
@@ -172,10 +182,8 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(1.0f,0.0f,0.0f);
-		else
-			sPainter.setColor(1.0f,0.3f,0.3f);
+		Vec3f color = getPointersColor();
+		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
@@ -212,14 +220,10 @@ void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
 void SolarSystem::loadPlanets()
 {
 	qDebug() << "Loading Solar System data ...";
-	QStringList solarSystemFiles;
-	try
+	QStringList solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem.ini");
+	if (solarSystemFiles.isEmpty())
 	{
-		solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem.ini");
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading ssysyem.ini (unable to find data/ssystem.ini): " << e.what() << endl;
+		qWarning() << "ERROR while loading ssysyem.ini (unable to find data/ssystem.ini): " << endl;
 		return;
 	}
 
@@ -523,7 +527,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
-						meanMotion = (eccentricity == 1.0)
+						meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
 									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
 									: (semi_major_axis > 0.0)
 									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
@@ -706,17 +710,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
-			               pd.value(secname+"/lighting").toBool(),
-			               pd.value(secname+"/radius").toDouble()/AU,
-			               pd.value(secname+"/oblateness", 0.0).toDouble(),
-			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-			               pd.value(secname+"/albedo").toFloat(),
-			               pd.value(secname+"/tex_map").toString(),
-			               posfunc,
-			               userDataPtr,
-			               osculatingFunc,
-			               closeOrbit,
-				       pd.value(secname+"/hidden", 0).toBool()));
+						    pd.value(secname+"/lighting").toBool(),
+						    pd.value(secname+"/radius").toDouble()/AU,
+						    pd.value(secname+"/oblateness", 0.0).toDouble(),
+						    StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+						    pd.value(secname+"/albedo").toFloat(),
+						    pd.value(secname+"/tex_map").toString(),
+						    posfunc,
+						    userDataPtr,
+						    osculatingFunc,
+						    closeOrbit,
+						    pd.value(secname+"/hidden", 0).toBool(),
+						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
 
@@ -792,18 +797,19 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else
 		{
 			p = PlanetP(new Planet(englishName,
-			               pd.value(secname+"/lighting").toBool(),
-			               pd.value(secname+"/radius").toDouble()/AU,
-			               pd.value(secname+"/oblateness", 0.0).toDouble(),
-			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-				       pd.value(secname+"/albedo").toFloat(),
-			               pd.value(secname+"/tex_map").toString(),
-				       posfunc,
-			               userDataPtr,
-			               osculatingFunc,
-			               closeOrbit,
-			               pd.value(secname+"/hidden", 0).toBool(),
-				       pd.value(secname+"/atmosphere", false).toBool()));
+					       pd.value(secname+"/lighting").toBool(),
+					       pd.value(secname+"/radius").toDouble()/AU,
+					       pd.value(secname+"/oblateness", 0.0).toDouble(),
+					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+					       pd.value(secname+"/albedo").toFloat(),
+					       pd.value(secname+"/tex_map").toString(),
+					       posfunc,
+					       userDataPtr,
+					       osculatingFunc,
+					       closeOrbit,
+					       pd.value(secname+"/hidden", 0).toBool(),
+					       pd.value(secname+"/atmosphere", false).toBool(),
+					       type));
 		}
 
 
@@ -870,7 +876,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	}
 
 	// special case: load earth shadow texture
-	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture("textures/earth-shadow.png");
+	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
 
 	return true;
 }
@@ -967,7 +973,7 @@ void SolarSystem::draw(StelCore* core)
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagMarkers())
 		drawPointer(core);
 }
 
@@ -979,6 +985,7 @@ void SolarSystem::setStelStyle(const QString& section)
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
+	setPointersColor(StelUtils::strToVec3f(conf->value(section+"/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
 	// Recreate the trails to apply new colors
 	recreateTrails();

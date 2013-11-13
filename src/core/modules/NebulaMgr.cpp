@@ -46,6 +46,7 @@
 #include "StelSkyImageTile.hpp"
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelActionMgr.hpp"
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -97,14 +98,14 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
-	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");		// Load circle texture
-	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture("textures/neb_gal.png");	// Load ellipse texture
-	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture("textures/neb_ocl.png");	// Load open cluster marker texture
-	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_gcl.png");	// Load globular cluster marker texture
-	Nebula::texPlanetaryNebula		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_pnb.png");	// Load planetary nebula marker texture
-	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture("textures/neb_dif.png");	// Load diffuse nebula marker texture
-	Nebula::texOpenClusterWithNebulosity	= StelApp::getInstance().getTextureManager().createTexture("textures/neb_ocln.png");	// Load Ocl/Nebula marker texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
+	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");		// Load circle texture
+	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");	// Load ellipse texture
+	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");	// Load open cluster marker texture
+	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");	// Load globular cluster marker texture
+	Nebula::texPlanetaryNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");	// Load planetary nebula marker texture
+	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif.png");	// Load diffuse nebula marker texture
+	Nebula::texOpenClusterWithNebulosity	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");	// Load Ocl/Nebula marker texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
@@ -118,6 +119,8 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+
+	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 }
 
 struct DrawNebulaFuncObject
@@ -126,9 +129,9 @@ struct DrawNebulaFuncObject
 	{
 		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
-	void operator()(StelRegionObjectP obj)
+	void operator()(StelRegionObject* obj)
 	{
-		Nebula* n = obj.staticCast<Nebula>().data();
+		Nebula* n = static_cast<Nebula*>(obj);
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->mag > drawer->getCustomNebulaMagnitudeLimit())) return;
@@ -172,7 +175,7 @@ void NebulaMgr::draw(StelCore* core)
 	float maxMagLabels = skyDrawer->getLimitMagnitude()     -2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
-	nebGrid.processIntersectingRegions(p, func);
+	nebGrid.processIntersectingPointInRegions(p.data(), func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
@@ -189,11 +192,8 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		// Compute 2D pos and return if outside screen
-		if (!prj->projectInPlace(pos)) return;		
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(0.8f,0.0f,0.0f);
-		else
-			sPainter.setColor(0.4f,0.5f,0.8f);
+		if (!prj->projectInPlace(pos)) return;
+		sPainter.setColor(0.4f,0.5f,0.8f);
 
 		texPointer->bind();
 
@@ -250,15 +250,15 @@ NebulaP NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
-	try
+	QString ngcPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat");
+	QString ngcNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat");
+	if (ngcPath.isEmpty() || ngcNamesPath.isEmpty())
 	{
-		loadNGC(StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat"));
-		loadNGCNames(StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat"));
+		qWarning() << "ERROR while loading nebula data set " << setName;
+		return;
 	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading nebula data set " << setName << ": " << e.what();
-	}
+	loadNGC(ngcPath);
+	loadNGCNames(ngcNamesPath);
 }
 
 // Look for a nebulae by XYZ coords

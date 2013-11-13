@@ -33,6 +33,7 @@ class ObservabilityDialog;
 class Observability : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool enabled READ getEnableObservability WRITE enableObservability)
 public:
 	Observability();
 	virtual ~Observability();
@@ -90,7 +91,7 @@ public:
 	//! get current Horizon altitude:
 	int getHorizAltitude(void);
 
-
+	bool getEnableObservability() const {return flagShowObservability;}
 public slots:
 //! Set whether observability will execute or not:
 	void enableObservability(bool b);
