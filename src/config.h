@@ -20,7 +20,7 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#ifndef HAVE_POW10
+#ifndef HAS_POW10
 #include <cmath>
 static inline double pow10(const double x)
 {
