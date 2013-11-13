@@ -218,11 +218,6 @@ FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
-IF(WIN32)
-    # This modules need for Windows (WTF???)
-    FIND_PACKAGE(Qt5Sql REQUIRED)
-    FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
-ENDIF()
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
