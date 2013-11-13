@@ -152,28 +152,33 @@ ENDIF()
 
 ########### Plugin setup #############
 
-#### demo plugins ####
-SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be created.")
-SET(USE_PLUGIN_SIMPLEDRAWLINE 0 CACHE BOOL "Define whether the Simple Draw Line plugin should be created.")
+SET(STELLARIUM_PLUGINS) # Global list of all the plugins.
+MACRO(ADD_PLUGIN NAME DEFAULT)
+  STRING(TOUPPER ${NAME} NAME_UP)
+  SET(USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define wheter the ${NAME} plugin should be created.")
+  SET(STELLARIUM_PLUGINS ${STELLARIUM_PLUGINS} ${NAME})
+ENDMACRO()
 
+#### demo plugins ####
+ADD_PLUGIN(HelloStelModule 0)
+ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
-SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin should be created.")
-SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
-SET(USE_PLUGIN_EXOPLANETS 1 CACHE BOOL "Define whether the Exoplanets plugin should be created.")
-SET(USE_PLUGIN_LOGBOOK 0 CACHE BOOL "Define whether the LogBook plugin should be created.")
-SET(USE_PLUGIN_NOVAE 1 CACHE BOOL "Define whether the Novae plugin should be created.")
-SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plugin should be created.")
-SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
-SET(USE_PLUGIN_PULSARS 1 CACHE BOOL "Define whether the Pulsars plugin should be created.")
-SET(USE_PLUGIN_QUASARS 1 CACHE BOOL "Define whether the Quasars plugin should be created.")
-SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
-SET(USE_PLUGIN_SOLARSYSTEMEDITOR 1 CACHE BOOL "Define whether the Solar System Editor should be built.")
-SET(USE_PLUGIN_SUPERNOVAE 1 CACHE BOOL "Define whether the Historical Supernova plugin should be created.")
-SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
-SET(USE_PLUGIN_TELESCOPECONTROL 1 CACHE BOOL "Define whether the TelescopeControl plug-in should be created.")
-SET(USE_PLUGIN_TEXTUSERINTERFACE 1 CACHE BOOL "Define whether the TextUserInterface plugin should be created.")
-SET(USE_PLUGIN_TIMEZONECONFIGURATION 1 CACHE BOOL "Define whether the TimeZoneConfiguration plugin should be created.")
-SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be created.")
+ADD_PLUGIN(AngleMeasure 1)
+ADD_PLUGIN(CompassMarks 1)
+ADD_PLUGIN(Exoplanets 1)
+ADD_PLUGIN(LogBook 0)
+ADD_PLUGIN(Novae 1)
+ADD_PLUGIN(Observability 1)
+ADD_PLUGIN(Oculars 1)
+ADD_PLUGIN(Pulsars 1)
+ADD_PLUGIN(Quasars 1)
+ADD_PLUGIN(Satellites 1)
+ADD_PLUGIN(SolarSystemEditor 1)
+ADD_PLUGIN(Supernovae 1)
+ADD_PLUGIN(SVMT 0)
+ADD_PLUGIN(TextUserInterface 1)
+ADD_PLUGIN(TimeZoneConfiguration 1)
+ADD_PLUGIN(VirGO 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
