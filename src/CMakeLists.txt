@@ -222,6 +222,39 @@ SET(stellarium_lib_SRCS
 	translations.h
 	config.h
 )
+
+IF(NOT USE_SYSTEM_ZLIB)
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+	core/external/zlib/adler32.c
+	core/external/zlib/compress.c
+	core/external/zlib/crc32.c
+	core/external/zlib/crc32.h
+	core/external/zlib/deflate.c
+	core/external/zlib/deflate.h
+	core/external/zlib/gzclose.c
+	core/external/zlib/gzguts.h
+	core/external/zlib/gzlib.c
+	core/external/zlib/gzread.c
+	core/external/zlib/gzwrite.c
+	core/external/zlib/infback.c
+	core/external/zlib/inffast.c
+	core/external/zlib/inffast.h
+	core/external/zlib/inffixed.h
+	core/external/zlib/inflate.c
+	core/external/zlib/inflate.h
+	core/external/zlib/inftrees.c
+	core/external/zlib/inftrees.h
+	core/external/zlib/trees.c
+	core/external/zlib/trees.h
+	core/external/zlib/uncompr.c
+	core/external/zlib/zconf.h
+	core/external/zlib/zlib.h
+	core/external/zlib/zutil.c
+	core/external/zlib/zutil.h
+	)
+ENDIF()
+
+
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		scripting/StelScriptMgr.cpp
@@ -484,7 +517,7 @@ ENDIF()
 #############################################################################################
 
 SET(extLinkerOption ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
-IF(WIN32)
+IF(WIN32 AND NOT MSVC)
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
 ENDIF()
 
