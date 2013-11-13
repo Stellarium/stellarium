@@ -95,6 +95,10 @@ IF(APPLE)
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
+# Needed so that M_PI get defined,
+# and so that windows.h does not redefine min and max.
+ADD_DEFINITIONS(-D_USE_MATH_DEFINES -DNOMINMAX)
+
 ########### Check functions ###########
 INCLUDE(CheckFunctionExists)
 SET(CMAKE_REQUIRED_LIBRARIES "-lm")
@@ -102,6 +106,10 @@ CHECK_FUNCTION_EXISTS(pow10 HAVE_POW10)
 SET(CMAKE_REQUIRED_LIBRARIES)
 IF(HAVE_POW10)
  ADD_DEFINITIONS(-DHAVE_POW10)
+ENDIF()
+CHECK_FUNCTION_EXISTS(trunc HAVE_TRUNC)
+IF(HAVE_TRUNC)
+ ADD_DEFINITIONS(-DHAVE_TRUNC)
 ENDIF()
 
 ########### Others ###########

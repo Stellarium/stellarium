@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
 #include "StelViewportEffect.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -217,12 +218,6 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 											(vertex_point.h<=0.0) ? 0.0 : exp(gamma*log(vertex_point.h/max_h));
 				vertex_point.color[3] = 1.0f;
 			}
-#ifdef _MSC_BUILD // MSVC does not have a trunc function
-	maxGridX = (int)floor(0.5 + screenWidth / triangleBaseLength);
-	maxGridY = (int)floor(screenHeight / (triangleBaseLength * 0.5 * sqrt(3.0)));
-#else
-#endif
-//	stepX = screenWidth / (double)(maxGridX - 0.5);
 		}
 	}
 	else
