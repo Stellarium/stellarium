@@ -143,7 +143,8 @@ SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have m
 
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link dynamic plug-ins afterward
-IF(WIN32)
+# It does not seem to work with MSVC, so I disable it for the moment.
+IF(WIN32 AND NOT MSVC)
   SET(GENERATE_STELMAINLIB 1)
 ELSE()
   SET(GENERATE_STELMAINLIB 0)
@@ -236,7 +237,18 @@ IF(ENABLE_SOUND)
 ENDIF()
 
 FIND_PACKAGE(OpenGL REQUIRED)
-FIND_PACKAGE(ZLIB)
+
+# On msvc it is easier to just compile zlib along with the code.
+IF(MSVC) 
+    SET(USE_SYSTEM_ZLIB 0) 
+ELSE()
+    SET(USE_SYSTEM_ZLIB 1 CACHE BOOL "Define whether we use the system zlib.")
+ENDIF()
+IF(USE_SYSTEM_ZLIB)
+    FIND_PACKAGE(ZLIB)
+ELSE()
+    SET(ZLIB_INCLUDE_DIR "src/core/external/zlib")
+ENDIF()
 
 FIND_PACKAGE(Qt5Test)
 INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
@@ -421,6 +433,7 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/scripting
 	${INTL_INCLUDE_DIR}
 	${CMAKE_BINARY_DIR}/src
+	${ZLIB_INCLUDE_DIR}
 )
 
 ########### Subdirectories ###############
